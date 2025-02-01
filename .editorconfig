@@ -325,6 +325,7 @@ ij_java_wrap_semicolon_after_call_chain = false
 
 [{*.json,*.jsonc,*.png.mcmeta,mcmod.info,pack.mcmeta}]
 indent_size = 2
+indent_style = space
 ij_json_array_wrapping = split_into_lines
 ij_json_keep_blank_lines_in_code = 1
 ij_json_keep_indents_on_empty_lines = false
