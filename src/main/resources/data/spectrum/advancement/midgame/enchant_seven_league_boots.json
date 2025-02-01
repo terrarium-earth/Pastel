@@ -23,7 +23,9 @@
       "trigger": "minecraft:enchanted_item",
       "conditions": {
         "item": {
-          "spectrum:seven_league_boots",
+          "items": [
+            "spectrum:seven_league_boots"
+          ],
           "enchantments": [
             {
               "enchantment": "minecraft:power"

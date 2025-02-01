@@ -3,8 +3,8 @@
   "config": {
     "iterations": {
       "type": "minecraft:uniform",
-        "min_inclusive": 1800,
-        "max_inclusive": 2400
+      "min_inclusive": 1800,
+      "max_inclusive": 2400
     },
     "state_provider": {
       "type": "minecraft:weighted_state_provider",

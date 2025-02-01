@@ -1,7 +1,6 @@
 {
   "type": "spectrum:entry_link",
   "entry_to_open": "spectrum:ink/color_picker",
-
   "name": "block.spectrum.color_picker",
   "condition": {
     "type": "modonomicon:advancement",

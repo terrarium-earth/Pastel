@@ -5,17 +5,14 @@
   "creative_tab": "spectrum:main",
   "model": "spectrum:guidebook",
   "font": "minecraft:uniform",
-
   "generate_book_item": false,
   "auto_add_read_conditions": false,
   "allow_open_book_with_invalid_links": true,
-
   "frame_texture": "spectrum:textures/gui/modonomicon/guidebook_frame.png",
   "book_content_texture": "spectrum:textures/gui/modonomicon/guidebook_entry.png",
   "book_overview_texture": "spectrum:textures/gui/modonomicon/guidebook_icons.png",
   "crafting_texture": "modonomicon:textures/gui/crafting_textures.png",
   "turn_page_sound": "spectrum:item.guidebook.pages",
-
   "default_title_color": 1705998,
   "search_button_x_offset": 0,
   "search_button_y_offset": 0,
@@ -26,7 +23,6 @@
   "category_button_icon_scale": 0.875,
   "category_button_x_offset": 0,
   "category_button_y_offset": 0,
-
   "left_frame_overlay": {
     "frame_height": 124,
     "frame_width": 9,

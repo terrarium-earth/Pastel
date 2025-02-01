@@ -10,9 +10,9 @@
   "ingredient3": "#c:milk",
   "result": {
     "id": "spectrum:demon_tea",
-		"components": {
-			"spectrum:with_milk": {}
-		}
+    "components": {
+      "spectrum:with_milk": {}
+    }
   },
   "required_advancement": "spectrum:unlocks/food/demon_tea"
 }

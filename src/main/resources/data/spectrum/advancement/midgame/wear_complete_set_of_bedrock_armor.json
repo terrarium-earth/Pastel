@@ -22,16 +22,24 @@
             "predicate": {
               "equipment": {
                 "head": {
-                  "spectrum:bedrock_helmet"
+                  "items": [
+                    "spectrum:bedrock_helmet"
+                  ]
                 },
                 "chest": {
-                  "spectrum:bedrock_chestplate"
+                  "items": [
+                    "spectrum:bedrock_chestplate"
+                  ]
                 },
                 "legs": {
-                  "spectrum:bedrock_leggings"
+                  "items": [
+                    "spectrum:bedrock_leggings"
+                  ]
                 },
                 "feet": {
-                  "spectrum:bedrock_boots"
+                  "items": [
+                    "spectrum:bedrock_boots"
+                  ]
                 }
               }
             }

@@ -1,27 +1,27 @@
 {
-	"type": "spectrum:pedestal",
-	"time": 240,
-	"tier": "basic",
-	"magenta": 0,
-	"yellow": 0,
-	"cyan": 2,
-	"black": 0,
-	"white": 0,
-	"experience": 1.0,
-	"pattern": [
-		"DMD",
-		"CBC",
-		"DCD"
-	],
-	"key": {
-      "D": "minecraft:dirt",
-      "C": "minecraft:mud",
-      "B": "minecraft:bucket",
-      "M": "spectrum:mermaids_gem"
-	},
-	"result": {
-		"item": "spectrum:goo_bucket",
-		"count": 1
-	},
-	"required_advancement": "spectrum:unlocks/blocks/goo"
+  "type": "spectrum:pedestal",
+  "time": 240,
+  "tier": "basic",
+  "magenta": 0,
+  "yellow": 0,
+  "cyan": 2,
+  "black": 0,
+  "white": 0,
+  "experience": 1.0,
+  "pattern": [
+    "DMD",
+    "CBC",
+    "DCD"
+  ],
+  "key": {
+    "D": "minecraft:dirt",
+    "C": "minecraft:mud",
+    "B": "minecraft:bucket",
+    "M": "spectrum:mermaids_gem"
+  },
+  "result": {
+    "item": "spectrum:goo_bucket",
+    "count": 1
+  },
+  "required_advancement": "spectrum:unlocks/blocks/goo"
 }

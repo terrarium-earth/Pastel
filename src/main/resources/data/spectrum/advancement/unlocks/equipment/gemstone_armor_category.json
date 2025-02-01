@@ -2,7 +2,9 @@
   "criteria": {
     "built_basic_structure": {
       "trigger": "revelationary:advancement_gotten",
-      "conditions": { "advancement_identifier": "spectrum:build_basic_pedestal_structure" }
+      "conditions": {
+        "advancement_identifier": "spectrum:build_basic_pedestal_structure"
+      }
     },
     "collected_ender_eye": {
       "trigger": "revelationary:advancement_gotten",

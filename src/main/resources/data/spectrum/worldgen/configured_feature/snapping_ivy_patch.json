@@ -9,8 +9,8 @@
     "vegetation_chance": 0.7,
     "xz_radius": {
       "type": "minecraft:uniform",
-        "min_inclusive": 3,
-        "max_inclusive": 5
+      "min_inclusive": 3,
+      "max_inclusive": 5
     },
     "replaceable": "#minecraft:moss_replaceable",
     "ground_state": {

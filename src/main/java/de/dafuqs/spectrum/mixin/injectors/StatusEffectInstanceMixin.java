@@ -1,7 +1,10 @@
 package de.dafuqs.spectrum.mixin.injectors;
 
+import com.llamalad7.mixinextras.injector.*;
 import com.llamalad7.mixinextras.sugar.*;
 import com.llamalad7.mixinextras.sugar.ref.*;
+import com.mojang.datafixers.util.*;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.injectors.*;
 import net.minecraft.entity.effect.*;
 import org.spongepowered.asm.mixin.*;
@@ -18,12 +21,9 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 	@Unique
 	private boolean incurable;
 	
-	// TODO: crashes with
-	// java.lang.IllegalAccessError: Update to static final field net.minecraft.entity.effect.StatusEffectInstance.CODEC attempted from a different method (mixinextras$bridge$CODEC$52) than the initializer method <clinit>
-	// Maybe making it mutable using an Access Widener?
-	/*@WrapOperation(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/effect/StatusEffectInstance;CODEC:Lcom/mojang/serialization/Codec;"))
-	private static void wrapCodec(Codec<StatusEffectInstance> codec, Operation<Void> original) {
-		original.call(codec.mapResult(new Codec.ResultFunction<>() {
+	@ModifyExpressionValue(method = "<clinit>", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/codecs/RecordCodecBuilder;create(Ljava/util/function/Function;)Lcom/mojang/serialization/Codec;", remap = false))
+	private static Codec<StatusEffectInstance> wrapCodec(Codec<StatusEffectInstance> original) {
+		return original.mapResult(new Codec.ResultFunction<>() {
 			@Override
 			public <T> DataResult<Pair<StatusEffectInstance, T>> apply(DynamicOps<T> ops, T input, DataResult<Pair<StatusEffectInstance, T>> result) {
 				return result.map(pair -> {
@@ -36,8 +36,8 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 			public <T> DataResult<T> coApply(DynamicOps<T> ops, StatusEffectInstance inst, DataResult<T> result) {
 				return result.map(output -> ops.set(output, "incurable", ops.createBoolean(inst.spectrum$isIncurable())));
 			}
-		}));
-	}*/
+		});
+	}
 	
 	@Inject(method = "upgrade", at = @At("RETURN"))
 	private void readIncurable(StatusEffectInstance that, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 0) LocalBooleanRef changed) {

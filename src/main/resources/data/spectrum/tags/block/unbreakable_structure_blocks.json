@@ -18,7 +18,6 @@
     "spectrum:preservation_roundel",
     "spectrum:preservation_block_detector",
     "spectrum:item_bowl_enlightenment",
-
     "spectrum:black_chiseled_preservation_stone",
     "spectrum:blue_chiseled_preservation_stone",
     "spectrum:brown_chiseled_preservation_stone",
@@ -35,7 +34,6 @@
     "spectrum:red_chiseled_preservation_stone",
     "spectrum:white_chiseled_preservation_stone",
     "spectrum:yellow_chiseled_preservation_stone",
-
     "spectrum:manxi"
   ]
 }

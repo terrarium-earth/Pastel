@@ -18,6 +18,7 @@
         "tags": [
           "spectrum:wither_head"
         ]
+      }
     },
     "gotten_previous": {
       "trigger": "revelationary:advancement_gotten",

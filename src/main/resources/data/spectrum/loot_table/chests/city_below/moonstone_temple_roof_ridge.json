@@ -9,7 +9,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:chests/sub_tables/bedrock_tier_resources"
+          "value": "spectrum:chests/sub_tables/bedrock_tier_resources"
         }
       ]
     },

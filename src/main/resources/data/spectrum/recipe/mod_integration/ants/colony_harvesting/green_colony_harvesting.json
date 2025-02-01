@@ -3,9 +3,9 @@
   "group": "spectrum_leaves_harvesting",
   "hive_ingredient": "spectrum:green_leaves",
   "hand_ingredient": "spectrum:vegetal",
-  "result" : {
+  "result": {
     "item": "spectrum:green_pigment",
-	"count": 6
+    "count": 6
   },
   "fabric:load_conditions": [
     {

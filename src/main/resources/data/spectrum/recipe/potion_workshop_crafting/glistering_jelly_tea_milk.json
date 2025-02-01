@@ -10,9 +10,9 @@
   "ingredient3": "#c:milk",
   "result": {
     "id": "spectrum:glistering_jelly_tea",
-		"components": {
-			"spectrum:with_milk": {}
-		},
+    "components": {
+      "spectrum:with_milk": {}
+    },
     "count": 1
   },
   "required_advancement": "spectrum:unlocks/food/glistering_jelly_tea"

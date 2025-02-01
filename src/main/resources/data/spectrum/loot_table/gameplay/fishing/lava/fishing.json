@@ -6,13 +6,13 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/lava/junk",
+          "value": "spectrum:gameplay/fishing/lava/junk",
           "weight": 10,
           "quality": -2
         },
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/lava/treasure",
+          "value": "spectrum:gameplay/fishing/lava/treasure",
           "weight": 5,
           "quality": 2,
           "conditions": [

@@ -28,7 +28,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:chests/sub_tables/cmy_tier_gems_and_buds"
+          "value": "spectrum:chests/sub_tables/cmy_tier_gems_and_buds"
         }
       ]
     },

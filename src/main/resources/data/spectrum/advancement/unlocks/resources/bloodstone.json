@@ -1,9 +1,9 @@
 {
   "criteria": {
-		"plucked_resplendent_feather": {
+    "plucked_resplendent_feather": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-				"advancement_identifier": "spectrum:pluck_resplendent_feather"
+        "advancement_identifier": "spectrum:pluck_resplendent_feather"
       }
     },
     "unlocked_crystallarieum": {

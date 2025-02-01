@@ -2,9 +2,9 @@
   "type": "ants:colony_shoveling",
   "group": "spectrum_leaves_shoveling",
   "hive_ingredient": "spectrum:light_gray_leaves",
-  "result" : {
+  "result": {
     "item": "minecraft:light_gray_dye",
-	"count": 6
+    "count": 6
   },
   "fabric:load_conditions": [
     {

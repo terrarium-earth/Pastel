@@ -8,7 +8,7 @@
           "type": "minecraft:loot_table",
           "weight": 10,
           "quality": -2,
-          "name": "spectrum:gameplay/fishing/midnight_solution/junk"
+          "value": "spectrum:gameplay/fishing/midnight_solution/junk"
         },
         {
           "type": "minecraft:loot_table",
@@ -25,7 +25,7 @@
           ],
           "weight": 5,
           "quality": 2,
-          "name": "spectrum:gameplay/fishing/midnight_solution/treasure"
+          "value": "spectrum:gameplay/fishing/midnight_solution/treasure"
         }
       ]
     }

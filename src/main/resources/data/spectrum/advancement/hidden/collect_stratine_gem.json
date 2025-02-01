@@ -1,8 +1,10 @@
 {
   "criteria": {
     "collected_stratine": {
-      "trigger":"revelationary:advancement_gotten",
-      "conditions": { "advancement_identifier": "spectrum:midgame/collect_stratine" }
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "spectrum:midgame/collect_stratine"
+      }
     },
     "has_stratine_gem": {
       "trigger": "minecraft:inventory_changed",

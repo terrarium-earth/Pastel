@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/lava/fishing",
+          "value": "spectrum:gameplay/fishing/lava/fishing",
           "conditions": [
             {
               "condition": "minecraft:entity_properties",
@@ -22,7 +22,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/goo/fishing",
+          "value": "spectrum:gameplay/fishing/goo/fishing",
           "conditions": [
             {
               "condition": "minecraft:entity_properties",
@@ -37,7 +37,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/liquid_crystal/fishing",
+          "value": "spectrum:gameplay/fishing/liquid_crystal/fishing",
           "conditions": [
             {
               "condition": "minecraft:entity_properties",
@@ -52,7 +52,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/midnight_solution/fishing",
+          "value": "spectrum:gameplay/fishing/midnight_solution/fishing",
           "conditions": [
             {
               "condition": "minecraft:entity_properties",
@@ -67,7 +67,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/dragonrot/fishing",
+          "value": "spectrum:gameplay/fishing/dragonrot/fishing",
           "conditions": [
             {
               "condition": "minecraft:entity_properties",

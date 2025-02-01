@@ -2,24 +2,24 @@
   "type": "spectrum:crystallarieum_growing",
   "ingredient": "minecraft:lapis_lazuli",
   "growth_stage_states": [
-		{
-			"Name": "spectrum:small_lapis_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:large_lapis_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:lapis_cluster",
-			"Properties": {
-				"facing": "up"
-			}
-		}
+    {
+      "Name": "spectrum:small_lapis_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:large_lapis_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:lapis_cluster",
+      "Properties": {
+        "facing": "up"
+      }
+    }
   ],
   "seconds_per_growth_stage": 60,
   "ink_color": "spectrum:purple",

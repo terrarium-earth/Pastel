@@ -4,7 +4,6 @@
     "spectrum:bismuth_cluster",
     "spectrum:azurite_cluster",
     "spectrum:bloodstone_cluster",
-
     "spectrum:coal_cluster",
     "spectrum:copper_cluster",
     "spectrum:diamond_cluster",
@@ -18,7 +17,6 @@
     "spectrum:prismarine_cluster",
     "spectrum:quartz_cluster",
     "spectrum:redstone_cluster",
-
     {
       "id": "spectrum:certus_quartz_cluster",
       "required": false

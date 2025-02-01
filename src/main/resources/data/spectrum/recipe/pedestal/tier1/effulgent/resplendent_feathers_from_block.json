@@ -1,21 +1,21 @@
 {
-	"type": "spectrum:pedestal_shapeless",
-	"group": "resplendent_decorations",
-	"time": 40,
-	"tier": "basic",
-	"cyan": 0,
-	"magenta": 0,
-	"yellow": 0,
-	"white": 0,
-	"black": 0,
-	"experience": 0.0,
-	"ingredients": [
-      "spectrum:resplendent_block"
-	],
-	"result": {
-		"item": "spectrum:resplendent_feather",
-		"count": 4
-	},
-	"required_advancement": "spectrum:pluck_resplendent_feather",
-	"disable_yield_upgrades": true
+  "type": "spectrum:pedestal_shapeless",
+  "group": "resplendent_decorations",
+  "time": 40,
+  "tier": "basic",
+  "cyan": 0,
+  "magenta": 0,
+  "yellow": 0,
+  "white": 0,
+  "black": 0,
+  "experience": 0.0,
+  "ingredients": [
+    "spectrum:resplendent_block"
+  ],
+  "result": {
+    "item": "spectrum:resplendent_feather",
+    "count": 4
+  },
+  "required_advancement": "spectrum:pluck_resplendent_feather",
+  "disable_yield_upgrades": true
 }

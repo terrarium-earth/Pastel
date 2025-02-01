@@ -16,7 +16,9 @@
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
         "item": {
-          "minecraft:glass_bottle"
+          "items": [
+            "minecraft:glass_bottle"
+          ]
         },
         "location": [
           {

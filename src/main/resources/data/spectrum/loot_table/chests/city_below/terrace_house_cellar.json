@@ -8,7 +8,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:chests/sub_tables/ancient_infused_beverages"
+          "value": "spectrum:chests/sub_tables/ancient_infused_beverages"
         }
       ],
       "conditions": [

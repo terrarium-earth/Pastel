@@ -12,10 +12,10 @@
       }
     },
     "title": {
-    "translate": "advancements.spectrum.craft_resonant_pickaxe.title"
+      "translate": "advancements.spectrum.craft_resonant_pickaxe.title"
     },
     "description": {
-    "translate": "advancements.spectrum.craft_resonant_pickaxe.description"
+      "translate": "advancements.spectrum.craft_resonant_pickaxe.description"
     }
   },
   "criteria": {
@@ -30,8 +30,10 @@
       }
     },
     "gotten_previous": {
-      "trigger":"revelationary:advancement_gotten",
-      "conditions": { "advancement_identifier": "spectrum:lategame/build_complex_pedestal_structure" }
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "spectrum:lategame/build_complex_pedestal_structure"
+      }
     }
   }
 }

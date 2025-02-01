@@ -1,7 +1,7 @@
 {
   "criteria": {
     "collected_lime_pigment": {
-      "trigger":"revelationary:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "spectrum:hidden/collect_pigment/lime"
       }

@@ -13,9 +13,9 @@
   "result": "spectrum:onyx_shard",
   "required_advancement": "spectrum:unlocks/blocks/fusion_shrine",
   "world_conditions": {
-		"time_of_day": "midnight",
-		"moon_phase": "new_moon"
-	},
+    "time_of_day": "midnight",
+    "moon_phase": "new_moon"
+  },
   "start_crafting_effect": "weather_thunder_short",
   "during_crafting_effects": [
     "visual_explosions_on_shrine",

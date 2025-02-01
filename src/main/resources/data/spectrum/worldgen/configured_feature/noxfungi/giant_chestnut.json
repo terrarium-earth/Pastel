@@ -7,8 +7,8 @@
     "stem_block": "spectrum:chestnut_noxcap_stem",
     "base_stem_height": {
       "type": "minecraft:uniform",
-        "min_inclusive": 36,
-        "max_inclusive": 140
+      "min_inclusive": 36,
+      "max_inclusive": 140
     }
   }
 }

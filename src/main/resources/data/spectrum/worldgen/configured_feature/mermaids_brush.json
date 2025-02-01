@@ -6,8 +6,8 @@
       "property": "age",
       "values": {
         "type": "minecraft:uniform",
-          "min_inclusive": 5,
-          "max_inclusive": 6
+        "min_inclusive": 5,
+        "max_inclusive": 6
       },
       "source": {
         "type": "minecraft:simple_state_provider",

@@ -4,7 +4,7 @@
   "max_health": 2,
   "output": [
     {
-			"resource": "spectrum:resplendent_feather",
+      "resource": "spectrum:resplendent_feather",
       "amount": 4
     },
     {

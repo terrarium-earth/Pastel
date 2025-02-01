@@ -21,7 +21,6 @@
       "item": "spectrum:infused_beverage",
       "recipeViewNbt": "{Variant: \"sawblade_holly_liquor\", Color: 13723654 }",
       "matchbook": {
-
         "mode": "AND",
         "matches": [
           {
@@ -30,7 +29,6 @@
             "target": "sawblade_holly_liquor"
           }
         ]
-
       }
     }
   },

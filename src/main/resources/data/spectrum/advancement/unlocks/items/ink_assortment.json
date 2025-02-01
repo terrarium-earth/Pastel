@@ -7,8 +7,10 @@
       }
     },
     "collected_four_leaf_clover": {
-      "trigger":"revelationary:advancement_gotten",
-      "conditions": { "advancement_identifier": "spectrum:collect_four_leaf_clover" }
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "spectrum:collect_four_leaf_clover"
+      }
     }
   }
 }

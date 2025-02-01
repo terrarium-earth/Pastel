@@ -1,9 +1,9 @@
 {
   "type": "ants:colony_shoveling",
   "hive_ingredient": "spectrum:jade_vine_petal_block",
-  "result" : {
+  "result": {
     "item": "minecraft:cobweb",
-	"count": 2
+    "count": 2
   },
   "fabric:load_conditions": [
     {

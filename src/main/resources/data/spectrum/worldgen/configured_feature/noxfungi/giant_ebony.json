@@ -7,8 +7,8 @@
     "stem_block": "spectrum:ebony_noxcap_stem",
     "base_stem_height": {
       "type": "minecraft:uniform",
-        "min_inclusive": 24,
-        "max_inclusive": 90
+      "min_inclusive": 24,
+      "max_inclusive": 90
     }
   }
 }

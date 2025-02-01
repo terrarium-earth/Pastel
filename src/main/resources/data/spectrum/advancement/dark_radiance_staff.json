@@ -16,7 +16,9 @@
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
         "item": {
-          "spectrum:radiance_staff"
+          "items": [
+            "spectrum:radiance_staff"
+          ]
         },
         "location": [
           {

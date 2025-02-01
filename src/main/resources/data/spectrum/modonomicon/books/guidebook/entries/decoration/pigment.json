@@ -1,7 +1,6 @@
 {
   "type": "spectrum:entry_link",
   "entry_to_open": "spectrum:general/pigment",
-
   "name": "book.spectrum.guidebook.pigment.name",
   "icon": {
     "item": "spectrum:magenta_pigment"

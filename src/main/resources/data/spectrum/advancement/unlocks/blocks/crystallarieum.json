@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_bismuth_crystal": {
-      "trigger":"revelationary:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "spectrum:lategame/collect_bismuth_crystal"
       }
     },
     "collected_pigment": {
-      "trigger":"revelationary:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "spectrum:collect_pigment"
       }
