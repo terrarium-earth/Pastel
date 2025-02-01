@@ -23,7 +23,7 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 				IngredientStack.ofItems(1, Items.SPAWNER), ingredient, ingredient2,
 				Items.SPAWNER.getDefaultStack(), 200, 0, true);
 	}
-
+	
 	public SpawnerChangeRecipe(IngredientStack ingredient) {
 		super("spawner_manipulation", false, SpectrumAdvancements.SPAWNER_MANIPULATION,
 				IngredientStack.ofItems(1, Items.SPAWNER), ingredient, IngredientStack.ofItems(4, SpectrumItems.VEGETAL),
@@ -31,42 +31,39 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 	}
 	
 	@Override
-	public ItemStack craft(RecipeInput inv, RegistryWrapper.WrapperLookup drm) {
+	public ItemStack craft(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, RegistryWrapper.WrapperLookup drm) {
+		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
 		ItemStack resultStack = ItemStack.EMPTY;
-		
-		if (inv instanceof SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
-			var world = spiritInstillerBlockEntity.getWorld();
-			if (world == null) return ItemStack.EMPTY;
-			BlockEntity leftBowlBlockEntity = world.getBlockEntity(SpiritInstillerBlockEntity.getItemBowlPos(spiritInstillerBlockEntity, false));
-			BlockEntity rightBowlBlockEntity = world.getBlockEntity(SpiritInstillerBlockEntity.getItemBowlPos(spiritInstillerBlockEntity, true));
-			if (leftBowlBlockEntity instanceof ItemBowlBlockEntity leftBowl && rightBowlBlockEntity instanceof ItemBowlBlockEntity rightBowl) {
-				BlockPos pos = spiritInstillerBlockEntity.getPos();
-				
-				ItemStack firstBowlStack = leftBowl.getStack(0);
-				ItemStack secondBowlStack = rightBowl.getStack(0);
-				ItemStack spawnerStack = spiritInstillerBlockEntity.getStack(0);
-				
-				// TODO - Review
-				NbtComponent spawnerNbt = spawnerStack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
-				
-				NbtCompound blockEntityTag;
-				if (spawnerNbt.contains("BlockEntityTag")) {
-					blockEntityTag = spawnerNbt.copyNbt().getCompound("BlockEntityTag");
-				} else {
-					blockEntityTag = new NbtCompound();
-				}
-				
-				blockEntityTag = getSpawnerResultNbt(blockEntityTag, firstBowlStack, secondBowlStack);
-				
-				resultStack = spawnerStack.copy();
-				resultStack.setCount(1);
-				
-				resultStack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(blockEntityTag));
-				
-				spawnXPAndGrantAdvancements(resultStack, spiritInstillerBlockEntity, spiritInstillerBlockEntity.getUpgradeHolder(), world, pos);
+		var world = spiritInstillerBlockEntity.getWorld();
+		if (world == null) return ItemStack.EMPTY;
+		BlockEntity leftBowlBlockEntity = world.getBlockEntity(SpiritInstillerBlockEntity.getItemBowlPos(spiritInstillerBlockEntity, false));
+		BlockEntity rightBowlBlockEntity = world.getBlockEntity(SpiritInstillerBlockEntity.getItemBowlPos(spiritInstillerBlockEntity, true));
+		if (leftBowlBlockEntity instanceof ItemBowlBlockEntity leftBowl && rightBowlBlockEntity instanceof ItemBowlBlockEntity rightBowl) {
+			BlockPos pos = spiritInstillerBlockEntity.getPos();
+			
+			ItemStack firstBowlStack = leftBowl.getStack(0);
+			ItemStack secondBowlStack = rightBowl.getStack(0);
+			ItemStack spawnerStack = spiritInstillerBlockEntity.getStack(0);
+			
+			// TODO - Review
+			NbtComponent spawnerNbt = spawnerStack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
+			
+			NbtCompound blockEntityTag;
+			if (spawnerNbt.contains("BlockEntityTag")) {
+				blockEntityTag = spawnerNbt.copyNbt().getCompound("BlockEntityTag");
+			} else {
+				blockEntityTag = new NbtCompound();
 			}
+			
+			blockEntityTag = getSpawnerResultNbt(blockEntityTag, firstBowlStack, secondBowlStack);
+			
+			resultStack = spawnerStack.copy();
+			resultStack.setCount(1);
+			
+			resultStack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(blockEntityTag));
+			
+			spawnXPAndGrantAdvancements(resultStack, spiritInstillerBlockEntity, spiritInstillerBlockEntity.getUpgradeHolder(), world, pos);
 		}
-		
 		return resultStack;
 	}
 	

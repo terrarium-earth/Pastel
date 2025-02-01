@@ -34,48 +34,46 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 	}
 	
 	@Override
-	public ItemStack craft(RecipeInput inv, RegistryWrapper.WrapperLookup drm) {
+	public ItemStack craft(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, RegistryWrapper.WrapperLookup drm) {
+		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
 		ItemStack resultStack = ItemStack.EMPTY;
-		if (inv instanceof SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
-			ServerWorld world = (ServerWorld) spiritInstillerBlockEntity.getWorld();
-			BlockPos pos = spiritInstillerBlockEntity.getPos();
-			
-			/*
-			 * This is moderately cursed
-			 * we spawn the entity from the memory, process its loot table with a custom damage type that guarantees a head drop,
-			 * search for a head drop in that loot and then discard that entity.
-			 * WHY might you ask?
-			 * Good question!
-			 * A single entity type can have multiple head items associated with it (like fox or shulker variants)
-			 * and finding out which exact mob variant is in that memory would be even more cursed
-			 */
-			Optional<Entity> optionalEntity = MemoryBlockEntity.hatchEntity(world, pos, spiritInstillerBlockEntity.getStack(0));
-			if (optionalEntity.isPresent()) {
-				if (optionalEntity.get() instanceof LivingEntity livingEntity && world != null) {
-					LootTable lootTable = world.getServer().getReloadableRegistries().getLootTable(livingEntity.getLootTable());
-					
-					LootContextParameterSet.Builder builder = new LootContextParameterSet.Builder(world)
-							.add(LootContextParameters.THIS_ENTITY, livingEntity)
-							.add(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
-							.add(LootContextParameters.DAMAGE_SOURCE, SpectrumDamageTypes.mobHeadDrop(world)
-							);
-					
-					LootContextParameterSet lootContextParameterSet = builder.build(LootContextTypes.ENTITY);
-					List<ItemStack> loot = lootTable.generateLoot(lootContextParameterSet, livingEntity.getLootTableSeed());
-					
-					for (ItemStack stack : loot) {
-						if (stack.isIn(SpectrumItemTags.SKULLS)) {
-							resultStack = stack;
-							break;
-						}
+		ServerWorld world = (ServerWorld) spiritInstillerBlockEntity.getWorld();
+		BlockPos pos = spiritInstillerBlockEntity.getPos();
+		
+		/*
+		 * This is moderately cursed
+		 * we spawn the entity from the memory, process its loot table with a custom damage type that guarantees a head drop,
+		 * search for a head drop in that loot and then discard that entity.
+		 * WHY might you ask?
+		 * Good question!
+		 * A single entity type can have multiple head items associated with it (like fox or shulker variants)
+		 * and finding out which exact mob variant is in that memory would be even more cursed
+		 */
+		Optional<Entity> optionalEntity = MemoryBlockEntity.hatchEntity(world, pos, spiritInstillerBlockEntity.getStack(0));
+		if (optionalEntity.isPresent()) {
+			if (optionalEntity.get() instanceof LivingEntity livingEntity && world != null) {
+				LootTable lootTable = world.getServer().getReloadableRegistries().getLootTable(livingEntity.getLootTable());
+				
+				LootContextParameterSet.Builder builder = new LootContextParameterSet.Builder(world)
+						.add(LootContextParameters.THIS_ENTITY, livingEntity)
+						.add(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
+						.add(LootContextParameters.DAMAGE_SOURCE, SpectrumDamageTypes.mobHeadDrop(world)
+						);
+				
+				LootContextParameterSet lootContextParameterSet = builder.build(LootContextTypes.ENTITY);
+				List<ItemStack> loot = lootTable.generateLoot(lootContextParameterSet, livingEntity.getLootTableSeed());
+				
+				for (ItemStack stack : loot) {
+					if (stack.isIn(SpectrumItemTags.SKULLS)) {
+						resultStack = stack;
+						break;
 					}
 				}
-				optionalEntity.get().discard();
 			}
-			
-			spawnXPAndGrantAdvancements(resultStack, spiritInstillerBlockEntity, spiritInstillerBlockEntity.getUpgradeHolder(), world, pos);
+			optionalEntity.get().discard();
 		}
 		
+		spawnXPAndGrantAdvancements(resultStack, spiritInstillerBlockEntity, spiritInstillerBlockEntity.getUpgradeHolder(), world, pos);
 		return resultStack;
 	}
 	

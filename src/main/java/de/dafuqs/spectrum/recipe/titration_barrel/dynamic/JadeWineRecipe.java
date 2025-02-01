@@ -2,11 +2,12 @@ package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.titration_barrel.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.titration_barrel.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.fluid.*;
 import net.minecraft.inventory.*;
@@ -46,7 +47,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 	@Override
 	protected @NotNull List<StatusEffectInstance> getEffects(boolean nectar, double bloominess, double alcPercent) {
 		List<StatusEffectInstance> effects = new ArrayList<>();
-
+		
 		int effectDuration = 1200;
 		if (alcPercent >= 80) {
 			effects.add(new StatusEffectInstance(SpectrumStatusEffects.PROJECTILE_REBOUND, effectDuration));
@@ -71,7 +72,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 		if (nectar) {
 			effects.add(new StatusEffectInstance(SpectrumStatusEffects.IMMUNITY, effectDuration));
 		}
-
+		
 		int nectarMod = nectar ? 3 : 1;
 		effectDuration = 1200;
 		int alcAfterBloominess = (int) (alcPercent / (nectarMod + bloominess));
@@ -94,11 +95,11 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 	}
 	
 	@Override
-	public boolean matches(TitrationBarrelBlockEntity inventory, World world) {
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, World world) {
 		boolean bulbsFound = false;
 		
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack stack = inventory.getStack(i);
+		for (int i = 0; i < recipeInput.getSize(); i++) {
+			ItemStack stack = recipeInput.getStackInSlot(i);
 			if (stack.isEmpty()) {
 				continue;
 			}

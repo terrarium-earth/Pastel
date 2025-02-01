@@ -28,7 +28,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlockEntity> {
+public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeInput<SingleVariantStorage<FluidVariant>>> {
 	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("build_fusion_shrine");
 	
@@ -58,22 +58,22 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 	protected final boolean copyComponents;
 	
 	public FusionShrineRecipe(
-		String group,
-		boolean secret,
-		Identifier requiredAdvancementIdentifier,
-		List<IngredientStack> craftingInputs,
-		FluidIngredient fluid,
-		ItemStack output,
-		float experience,
-		int craftingTime,
-		boolean yieldUpgradesDisabled,
-		boolean playCraftingFinishedEffects,
-		boolean copyComponents,
-		List<WorldConditionsPredicate> worldConditionsPredicates,
-		@NotNull FusionShrineRecipeWorldEffect startWorldEffect,
-		@NotNull List<FusionShrineRecipeWorldEffect> duringWorldEffects,
-		@NotNull FusionShrineRecipeWorldEffect finishWorldEffect,
-		@Nullable Text description
+			String group,
+			boolean secret,
+			Identifier requiredAdvancementIdentifier,
+			List<IngredientStack> craftingInputs,
+			FluidIngredient fluid,
+			ItemStack output,
+			float experience,
+			int craftingTime,
+			boolean yieldUpgradesDisabled,
+			boolean playCraftingFinishedEffects,
+			boolean copyComponents,
+			List<WorldConditionsPredicate> worldConditionsPredicates,
+			@NotNull FusionShrineRecipeWorldEffect startWorldEffect,
+			@NotNull List<FusionShrineRecipeWorldEffect> duringWorldEffects,
+			@NotNull FusionShrineRecipeWorldEffect finishWorldEffect,
+			@Nullable Text description
 	) {
 		super(group, secret, requiredAdvancementIdentifier);
 		
@@ -91,7 +91,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 		this.finishWorldEffect = finishWorldEffect;
 		this.description = description;
 		this.copyComponents = copyComponents;
-
+		
 		registerInToastManager(getType(), this);
 	}
 	
@@ -100,8 +100,8 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 	 * The required fluid has to be tested manually by the crafting block.
 	 */
 	@Override
-	public boolean matches(FusionShrineBlockEntity inv, World world) {
-		SingleVariantStorage<FluidVariant> fluidStorage = inv.getFluidStorage();
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, World world) {
+		SingleVariantStorage<FluidVariant> fluidStorage = recipeInput.getFluidStorage();
 		if (!this.fluid.test(fluidStorage.variant)) {
 			return false;
 		}
@@ -110,11 +110,11 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 				return false;
 			}
 		}
-		return matchIngredientStacksExclusively(inv, getIngredientStacks());
+		return matchIngredientStacksExclusively(recipeInput, getIngredientStacks());
 	}
 	
 	@Override
-	public ItemStack craft(FusionShrineBlockEntity inv, RegistryWrapper.WrapperLookup drm) {
+	public ItemStack craft(StorageRecipeInput<SingleVariantStorage<FluidVariant>> inv, RegistryWrapper.WrapperLookup drm) {
 		return output.copy();
 	}
 	
@@ -203,7 +203,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 		}
 		return Optional.of(this.description);
 	}
-
+	
 	@Override
 	public Identifier getRecipeTypeUnlockIdentifier() {
 		return UNLOCK_IDENTIFIER;
@@ -222,7 +222,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 		ItemStack firstStack = ItemStack.EMPTY;
 		
 		int maxAmount = 1;
-		ItemStack output = craft(fusionShrineBlockEntity, world.getRegistryManager());
+		ItemStack output = craft(new StorageRecipeInput<>(fusionShrineBlockEntity.getItems(), fusionShrineBlockEntity.fluidStorage), world.getRegistryManager());
 		if (!output.isEmpty()) {
 			maxAmount = output.getMaxCount();
 			for (IngredientStack ingredientStack : getIngredientStacks()) {
@@ -238,7 +238,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 					}
 				}
 			}
-
+			
 			if (maxAmount > 0) {
 				double efficiencyModifier = fusionShrineBlockEntity.getUpgradeHolder().getEffectiveValue(Upgradeable.UpgradeType.EFFICIENCY);
 				decrementIngredients(world, fusionShrineBlockEntity, maxAmount, efficiencyModifier);
@@ -246,7 +246,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 		} else {
 			for (IngredientStack ingredientStack : getIngredientStacks()) {
 				double efficiencyModifier = fusionShrineBlockEntity.getUpgradeHolder().getEffectiveValue(Upgradeable.UpgradeType.EFFICIENCY);
-
+				
 				for (int i = 0; i < fusionShrineBlockEntity.size(); i++) {
 					ItemStack currentStack = fusionShrineBlockEntity.getStack(i);
 					if (ingredientStack.test(currentStack)) {
@@ -257,7 +257,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FusionShrineBlo
 				}
 			}
 		}
-
+		
 		if (this.copyComponents) {
 			output = firstStack.copyComponentsToNewStack(output.getItem(), output.getCount());
 		}

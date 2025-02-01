@@ -2,12 +2,13 @@ package de.dafuqs.spectrum.recipe.titration_barrel;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.titration_barrel.*;
 import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.helpers.TimeHelper;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
 import net.minecraft.entity.effect.*;
@@ -26,7 +27,7 @@ import java.util.*;
  * Making it a non-ticking block entity and also "fermenting" when the game is not running
  * This also means TitrationBarrelRecipes have to calculate their time using real life seconds, instead of game ticks
  */
-public interface ITitrationBarrelRecipe extends GatedRecipe<TitrationBarrelBlockEntity> {
+public interface ITitrationBarrelRecipe extends GatedRecipe<StorageRecipeInput<SingleVariantStorage<FluidVariant>>> {
 	
 	Identifier UNLOCK_ADVANCEMENT_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/titration_barrel");
 	
@@ -58,7 +59,7 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<TitrationBarrelBlock
 	// the amount of bottles able to get out of a single barrel
 	default int getOutputCountAfterAngelsShare(World world, float temperature, long secondsFermented) {
 		int originalOutputCount = getResult(world.getRegistryManager()).getCount();
-
+		
 		if (getFermentationData() == null) {
 			return originalOutputCount;
 		}
@@ -103,5 +104,5 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<TitrationBarrelBlock
 	}
 	
 	FermentationData getFermentationData();
-
+	
 }

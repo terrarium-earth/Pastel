@@ -166,17 +166,17 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 		
 		RecipeEntry<? extends PotionWorkshopRecipe> newRecipe = null;
 		var current = potionWorkshopBlockEntity.currentRecipe == null ? null : potionWorkshopBlockEntity.currentRecipe.value();
-		if (current instanceof PotionWorkshopBrewingRecipe potionWorkshopBrewingRecipe && current.matches(potionWorkshopBlockEntity, world)) {
+		if (current instanceof PotionWorkshopBrewingRecipe potionWorkshopBrewingRecipe && current.matches(potionWorkshopBlockEntity.getRecipeInput(), world)) {
 			// we check for reagents here instead of the recipe itself because of performance
 			if (isBrewingRecipeApplicable(potionWorkshopBrewingRecipe, potionWorkshopBlockEntity.getStack(BASE_INPUT_SLOT_ID), potionWorkshopBlockEntity)) {
 				return potionWorkshopBlockEntity.currentRecipe;
 			}
-		} else if (current instanceof PotionWorkshopCraftingRecipe && current.matches(potionWorkshopBlockEntity, world)) {
+		} else if (current instanceof PotionWorkshopCraftingRecipe && current.matches(potionWorkshopBlockEntity.getRecipeInput(), world)) {
 			newRecipe = potionWorkshopBlockEntity.currentRecipe;
 		} else {
 			// current recipe does not match last recipe
 			// => search valid recipe
-			var newPotionWorkshopBrewingRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.POTION_WORKSHOP_BREWING, potionWorkshopBlockEntity, world).orElse(null);
+			var newPotionWorkshopBrewingRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.POTION_WORKSHOP_BREWING, potionWorkshopBlockEntity.getRecipeInput(), world).orElse(null);
 			if (newPotionWorkshopBrewingRecipe != null) {
 				if (newPotionWorkshopBrewingRecipe.value().canPlayerCraft(potionWorkshopBlockEntity.getOwnerIfOnline())) {
 					// we check for reagents here instead of the recipe itself for performance reasons
@@ -185,7 +185,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 					}
 				}
 			} else {
-				var newPotionWorkshopCraftingRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.POTION_WORKSHOP_CRAFTING, potionWorkshopBlockEntity, world).orElse(null);
+				var newPotionWorkshopCraftingRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.POTION_WORKSHOP_CRAFTING, potionWorkshopBlockEntity.getRecipeInput(), world).orElse(null);
 				if (newPotionWorkshopCraftingRecipe != null) {
 					if (newPotionWorkshopCraftingRecipe.value().canPlayerCraft(potionWorkshopBlockEntity.getOwnerIfOnline())) {
 						newRecipe = newPotionWorkshopCraftingRecipe;
@@ -273,7 +273,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 		
 		// process reagents
 		PotionMod potionMod = getPotionModFromReagents(potionWorkshopBlockEntity);
-
+		
 		// the multiplication happening after the decimal chance rounding is not a mistake it is me being evil ~ Azzyy
 		// we are nice to our players this one time ~Dafuqs
 		int maxTippedArrowsAmount = Support.getIntFromDecimalWithChance(brewingRecipe.value().getModifiedYield(potionMod) * PotionWorkshopBrewingRecipe.ARROW_COUNT_MULTIPLIER, world.random);
@@ -434,6 +434,10 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 	@Override
 	public boolean canExtract(int slot, ItemStack stack, Direction dir) {
 		return slot >= FIRST_INVENTORY_SLOT;
+	}
+	
+	public SimpleRecipeInput getRecipeInput() {
+		return new SimpleRecipeInput(inventory);
 	}
 	
 	@Override

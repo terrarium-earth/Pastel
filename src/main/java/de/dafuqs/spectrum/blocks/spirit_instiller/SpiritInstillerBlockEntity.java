@@ -124,7 +124,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	private static void calculateCurrentRecipe(@NotNull World world, @NotNull SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
 		// test the cached recipe => faster
 		if (spiritInstillerBlockEntity.currentRecipe != null && !spiritInstillerBlockEntity.isEmpty()) {
-			if (spiritInstillerBlockEntity.currentRecipe.value().matches(spiritInstillerBlockEntity, world)) {
+			if (spiritInstillerBlockEntity.currentRecipe.value().matches(spiritInstillerBlockEntity.getRecipeInput(), world)) {
 				return;
 			}
 		}
@@ -150,7 +150,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 				spiritInstillerBlockEntity.setStack(SpiritInstillerRecipe.SECOND_INGREDIENT, ItemStack.EMPTY);
 			}
 			
-			RecipeEntry<SpiritInstillerRecipe> spiritInstillerRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.SPIRIT_INSTILLING, spiritInstillerBlockEntity, world).orElse(null);
+			RecipeEntry<SpiritInstillerRecipe> spiritInstillerRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.SPIRIT_INSTILLING, spiritInstillerBlockEntity.getRecipeInput(), world).orElse(null);
 			if (spiritInstillerRecipe != null) {
 				spiritInstillerBlockEntity.currentRecipe = spiritInstillerRecipe;
 				spiritInstillerBlockEntity.craftingTimeTotal = (int) Math.ceil(spiritInstillerRecipe.value().getCraftingTime() / spiritInstillerBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
@@ -205,7 +205,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 			testAndUnlockUnlockBossMemoryAdvancement(serverPlayerEntity, spiritInstillerBlockEntity.currentRecipe, canCraft);
 		}
 		
-		return canCraft & spiritInstillerBlockEntity.currentRecipe.value().canPlayerCraft(lastInteractedPlayer) && spiritInstillerBlockEntity.currentRecipe.value().canCraftWithStacks(spiritInstillerBlockEntity);
+		return canCraft & spiritInstillerBlockEntity.currentRecipe.value().canPlayerCraft(lastInteractedPlayer) && spiritInstillerBlockEntity.currentRecipe.value().canCraftWithStacks(spiritInstillerBlockEntity.getRecipeInput());
 	}
 	
 	public static void testAndUnlockUnlockBossMemoryAdvancement(ServerPlayerEntity player, RecipeEntry<SpiritInstillerRecipe> spiritInstillerRecipe, boolean canActuallyCraft) {
@@ -220,7 +220,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	}
 	
 	public static void craftSpiritInstillerRecipe(World world, @NotNull SpiritInstillerBlockEntity spiritInstillerBlockEntity, @NotNull RecipeEntry<SpiritInstillerRecipe> spiritInstillerRecipe) {
-		ItemStack resultStack = spiritInstillerRecipe.value().craft(spiritInstillerBlockEntity, world.getRegistryManager());
+		ItemStack resultStack = spiritInstillerRecipe.value().craft(spiritInstillerBlockEntity.getRecipeInput(), world.getRegistryManager());
 		decrementItemsInInstillerAndBowls(spiritInstillerBlockEntity);
 		if (!resultStack.isEmpty()) {
 			if (spiritInstillerBlockEntity.getStack(0).isEmpty()) {
@@ -403,6 +403,10 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		} else {
 			return itemBowlOffsetsHorizontal.get(right ? 1 : 0);
 		}
+	}
+	
+	public InstanceRecipeInput<SpiritInstillerBlockEntity> getRecipeInput() {
+		return new InstanceRecipeInput<>(items, this);
 	}
 	
 	// UPGRADEABLE

@@ -28,7 +28,7 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 public class TitrationBarrelBlock extends HorizontalFacingBlock implements BlockEntityProvider {
-
+	
 	public static final MapCodec<TitrationBarrelBlock> CODEC = createCodec(TitrationBarrelBlock::new);
 	
 	public enum BarrelState implements StringIdentifiable {
@@ -49,11 +49,11 @@ public class TitrationBarrelBlock extends HorizontalFacingBlock implements Block
 		super(settings);
 		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(BARREL_STATE, BarrelState.EMPTY));
 	}
-
-    @Override
-    public MapCodec<? extends TitrationBarrelBlock> getCodec() {
-        return CODEC;
-    }
+	
+	@Override
+	public MapCodec<? extends TitrationBarrelBlock> getCodec() {
+		return CODEC;
+	}
 	
 	@Nullable
 	@Override
@@ -114,7 +114,7 @@ public class TitrationBarrelBlock extends HorizontalFacingBlock implements Block
 									return ItemActionResult.CONSUME;
 								}
 								
-								if (ContainerItemContext.forPlayerInteraction(player, hand).find(FluidStorage.ITEM) != null ) {
+								if (ContainerItemContext.forPlayerInteraction(player, hand).find(FluidStorage.ITEM) != null) {
 									if (FluidStorageUtil.interactWithFluidStorage(barrelEntity.fluidStorage, player, hand)) {
 										if (barrelEntity.getFluidVariant().isBlank()) {
 											if (state.get(BARREL_STATE) == TitrationBarrelBlock.BarrelState.FILLED && barrelEntity.isEmpty()) {
@@ -173,9 +173,9 @@ public class TitrationBarrelBlock extends HorizontalFacingBlock implements Block
 						// player is able to extract content until it is empty
 						// reverting it to the empty state again
 						if (player.isSneaking()) {
-							Optional<RecipeEntry<ITitrationBarrelRecipe>> recipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.TITRATION_BARREL, barrelEntity, world);
+							Optional<RecipeEntry<ITitrationBarrelRecipe>> recipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.TITRATION_BARREL, barrelEntity.getRecipeInput(), world);
 							if (recipe.isPresent()) {
-								player.sendMessage(Text.translatable("block.spectrum.titration_barrel.days_of_sealing_after_opened_with_extractable_amount", recipe.get().value().craft(barrelEntity, world.getRegistryManager()).getName().getString(), barrelEntity.getSealMinecraftDays(), barrelEntity.getSealRealDays()), true);
+								player.sendMessage(Text.translatable("block.spectrum.titration_barrel.days_of_sealing_after_opened_with_extractable_amount", recipe.get().value().craft(barrelEntity.getRecipeInput(), world.getRegistryManager()).getName().getString(), barrelEntity.getSealMinecraftDays(), barrelEntity.getSealRealDays()), true);
 							} else {
 								player.sendMessage(Text.translatable("block.spectrum.titration_barrel.invalid_recipe_when_tapping"), true);
 							}
@@ -231,13 +231,13 @@ public class TitrationBarrelBlock extends HorizontalFacingBlock implements Block
 		BlockState state = this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
 		
 		var comp = ctx.getStack().get(DataComponentTypes.BLOCK_ENTITY_DATA);
-		if(comp != null) {
+		if (comp != null) {
 			var nbt = comp.copyNbt();
 			boolean inventoryEmpty = nbt.getList("Inventory", NbtElement.COMPOUND_TYPE).isEmpty();
 			long fluidAmount = nbt.getLong("FluidAmount");
 			long sealTime = nbt.contains("SealTime", NbtElement.LONG_TYPE) ? nbt.getLong("SealTime") : -1;
 			long tapTime = nbt.contains("TapTime", NbtElement.LONG_TYPE) ? nbt.getLong("TapTime") : -1;
-
+			
 			BarrelState barrelState = tapTime > -1
 					? BarrelState.TAPPED : sealTime > -1
 					? BarrelState.SEALED : inventoryEmpty && fluidAmount == 0

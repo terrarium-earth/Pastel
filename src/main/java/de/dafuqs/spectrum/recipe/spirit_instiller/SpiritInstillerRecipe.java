@@ -27,7 +27,7 @@ import net.minecraft.world.*;
 
 import java.util.*;
 
-public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<RecipeInput> {
+public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceRecipeInput<SpiritInstillerBlockEntity>> {
 	
 	public static final int CENTER_INGREDIENT = 0;
 	public static final int FIRST_INGREDIENT = 1;
@@ -60,14 +60,14 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<RecipeInput>
 	}
 	
 	@Override
-	public boolean matches(RecipeInput inv, World world) {
+	public boolean matches(InstanceRecipeInput recipeInput, World world) {
 		List<IngredientStack> ingredientStacks = getIngredientStacks();
-		if (inv.getSize() > 2) {
-			if (ingredientStacks.get(CENTER_INGREDIENT).test(inv.getStackInSlot(CENTER_INGREDIENT))) {
-				if (ingredientStacks.get(FIRST_INGREDIENT).test(inv.getStackInSlot(FIRST_INGREDIENT))) {
-					return ingredientStacks.get(SECOND_INGREDIENT).test(inv.getStackInSlot(SECOND_INGREDIENT));
-				} else if (ingredientStacks.get(FIRST_INGREDIENT).test(inv.getStackInSlot(SECOND_INGREDIENT))) {
-					return ingredientStacks.get(SECOND_INGREDIENT).test(inv.getStackInSlot(FIRST_INGREDIENT));
+		if (recipeInput.getSize() > 2) {
+			if (ingredientStacks.get(CENTER_INGREDIENT).test(recipeInput.getStackInSlot(CENTER_INGREDIENT))) {
+				if (ingredientStacks.get(FIRST_INGREDIENT).test(recipeInput.getStackInSlot(FIRST_INGREDIENT))) {
+					return ingredientStacks.get(SECOND_INGREDIENT).test(recipeInput.getStackInSlot(SECOND_INGREDIENT));
+				} else if (ingredientStacks.get(FIRST_INGREDIENT).test(recipeInput.getStackInSlot(SECOND_INGREDIENT))) {
+					return ingredientStacks.get(SECOND_INGREDIENT).test(recipeInput.getStackInSlot(FIRST_INGREDIENT));
 				}
 			}
 		}
@@ -94,31 +94,30 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<RecipeInput>
 	}
 	
 	@Override
-	public ItemStack craft(RecipeInput inv, RegistryWrapper.WrapperLookup drm) {
+	public ItemStack craft(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, RegistryWrapper.WrapperLookup drm) {
 		ItemStack resultStack = ItemStack.EMPTY;
-		if (inv instanceof SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
-			Upgradeable.UpgradeHolder upgradeHolder = spiritInstillerBlockEntity.getUpgradeHolder();
-			World world = spiritInstillerBlockEntity.getWorld();
-			if (world == null) return ItemStack.EMPTY;
-			BlockPos pos = spiritInstillerBlockEntity.getPos();
-			
-			resultStack = getResult(drm).copy();
-			
-			// Yield upgrade
-			if (!areYieldAndEfficiencyUpgradesDisabled() && upgradeHolder.getEffectiveValue(Upgradeable.UpgradeType.YIELD) != 1.0) {
-				int resultCountMod = Support.getIntFromDecimalWithChance(resultStack.getCount() * upgradeHolder.getEffectiveValue(Upgradeable.UpgradeType.YIELD), world.random);
-				resultStack.setCount(resultCountMod);
-			}
-
-			if (resultStack.isOf(SpectrumBlocks.MEMORY.asItem())) {
-				boolean makeUnrecognizable = spiritInstillerBlockEntity.getStackInSlot(0).isIn(SpectrumItemTags.MEMORY_BONDING_AGENTS_CONCEALABLE);
-				if (makeUnrecognizable) {
-					MemoryItem.makeUnrecognizable(resultStack);
-				}
-			}
-			
-			spawnXPAndGrantAdvancements(resultStack, spiritInstillerBlockEntity, upgradeHolder, world, pos);
+		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
+		Upgradeable.UpgradeHolder upgradeHolder = spiritInstillerBlockEntity.getUpgradeHolder();
+		World world = spiritInstillerBlockEntity.getWorld();
+		if (world == null) return ItemStack.EMPTY;
+		BlockPos pos = spiritInstillerBlockEntity.getPos();
+		
+		resultStack = getResult(drm).copy();
+		
+		// Yield upgrade
+		if (!areYieldAndEfficiencyUpgradesDisabled() && upgradeHolder.getEffectiveValue(Upgradeable.UpgradeType.YIELD) != 1.0) {
+			int resultCountMod = Support.getIntFromDecimalWithChance(resultStack.getCount() * upgradeHolder.getEffectiveValue(Upgradeable.UpgradeType.YIELD), world.random);
+			resultStack.setCount(resultCountMod);
 		}
+		
+		if (resultStack.isOf(SpectrumBlocks.MEMORY.asItem())) {
+			boolean makeUnrecognizable = spiritInstillerBlockEntity.getStack(0).isIn(SpectrumItemTags.MEMORY_BONDING_AGENTS_CONCEALABLE);
+			if (makeUnrecognizable) {
+				MemoryItem.makeUnrecognizable(resultStack);
+			}
+		}
+		
+		spawnXPAndGrantAdvancements(resultStack, spiritInstillerBlockEntity, upgradeHolder, world, pos);
 		
 		return resultStack;
 	}
@@ -201,7 +200,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<RecipeInput>
 				IngredientStack.Serializer.CODEC.fieldOf("ingredient2").forGetter(recipe -> recipe.bowlIngredient2),
 				ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(recipe -> recipe.craftingTime),
-				Codec.FLOAT.optionalFieldOf("experience",1.0f).forGetter(recipe -> recipe.experience),
+				Codec.FLOAT.optionalFieldOf("experience", 1.0f).forGetter(recipe -> recipe.experience),
 				Codec.BOOL.optionalFieldOf("disable_yield_and_efficiency_upgrades", false).forGetter(recipe -> recipe.noBenefitsFromYieldAndEfficiencyUpgrades)
 		).apply(i, SpiritInstillerRecipe::new));
 		

@@ -2,11 +2,12 @@ package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.titration_barrel.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.titration_barrel.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.fluid.*;
 import net.minecraft.inventory.*;
@@ -19,7 +20,7 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
-
+	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("hidden/collect_cookbooks/imbrifer_cookbook");
 	public static final int MIN_FERMENTATION_TIME_HOURS = 24;
 	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.AQUA_REGIA, 4);
@@ -28,7 +29,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 		add(IngredientStack.ofItems(1, SpectrumBlocks.JADEITE_LOTUS_BULB.asItem()));
 		add(IngredientStack.ofItems(3, SpectrumItems.JADEITE_PETALS));
 	}};
-
+	
 	public AquaRegiaRecipe() {
 		super("", false, UNLOCK_IDENTIFIER, INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER), OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, new FermentationData(0.2F, 0.01F, List.of()));
 	}
@@ -46,7 +47,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 	@Override
 	protected @NotNull List<StatusEffectInstance> getEffects(boolean nectar, double bloominess, double alcPercent) {
 		List<StatusEffectInstance> effects = new ArrayList<>();
-
+		
 		//TODO should this be a float, and only casted to int at the end?
 		int effectDuration = 1800;
 		if (alcPercent >= 40) {
@@ -73,7 +74,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 		if (nectar) {
 			effects.add(new StatusEffectInstance(SpectrumStatusEffects.IMMUNITY, effectDuration / 2));
 		}
-
+		
 		int nectarMod = nectar ? 3 : 1;
 		effectDuration = 1200;
 		int alcAfterBloominess = (int) (alcPercent / (nectarMod + bloominess));
@@ -96,11 +97,11 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 	}
 	
 	@Override
-	public boolean matches(TitrationBarrelBlockEntity inventory, World world) {
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, World world) {
 		boolean bulbsFound = false;
 		
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack stack = inventory.getStack(i);
+		for (int i = 0; i < recipeInput.getSize(); i++) {
+			ItemStack stack = recipeInput.getStackInSlot(i);
 			if (stack.isEmpty()) {
 				continue;
 			}

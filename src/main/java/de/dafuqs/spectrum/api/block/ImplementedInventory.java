@@ -3,7 +3,6 @@ package de.dafuqs.spectrum.api.block;
 import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
-import net.minecraft.recipe.input.*;
 import net.minecraft.util.collection.*;
 
 /**
@@ -11,7 +10,7 @@ import net.minecraft.util.collection.*;
  * <p>
  * Originally by Juuz
  */
-public interface ImplementedInventory extends Inventory, RecipeInput {
+public interface ImplementedInventory extends Inventory {
 	
 	/**
 	 * Retrieves the item list of this inventory.
@@ -26,7 +25,7 @@ public interface ImplementedInventory extends Inventory, RecipeInput {
 		// FIXME
 		return () -> items;
 	}
-
+	
 	static ImplementedInventory of(ItemStack... items) {
 		return of(DefaultedList.copyOf(ItemStack.EMPTY, items));
 	}
@@ -37,17 +36,13 @@ public interface ImplementedInventory extends Inventory, RecipeInput {
 	static ImplementedInventory ofSize(int size) {
 		return of(DefaultedList.ofSize(size, ItemStack.EMPTY));
 	}
-
+	
 	/**
 	 * Returns the inventory size.
 	 */
 	@Override
 	default int size() {
 		return getItems().size();
-	}
-	@Override
-	default int getSize() {
-		return size();
 	}
 	
 	/**
@@ -72,10 +67,6 @@ public interface ImplementedInventory extends Inventory, RecipeInput {
 	@Override
 	default ItemStack getStack(int slot) {
 		return getItems().get(slot);
-	}
-	@Override
-	default ItemStack getStackInSlot(int slot) {
-		return getStack(slot);
 	}
 	
 	/**

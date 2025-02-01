@@ -21,16 +21,6 @@ public interface FluidStackInventory extends ImplementedInventory {
 	static FluidStackInventory of(DefaultedList<ItemStack> items, SingleVariantStorage<FluidVariant> fluid) {
 		return new FluidStackInventory() {
 			@Override
-			public ItemStack getStackInSlot(int slot) {
-				return items.get(slot);
-			}
-			
-			@Override
-			public int getSize() {
-				return size();
-			}
-			
-			@Override
 			public DefaultedList<ItemStack> getItems() {
 				return items;
 			}

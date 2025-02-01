@@ -4,6 +4,7 @@ import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.mixin.accessors.*;
 import de.dafuqs.spectrum.progression.*;
+import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.titration_barrel.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.transfer.v1.fluid.*;
@@ -194,7 +195,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 					}
 					if (canTap) {
 						long secondsFermented = (this.tapTime - this.sealTime) / 1000;
-						float downfall = ((BiomeAccessor)(Object) biome).getWeather().downfall();
+						float downfall = ((BiomeAccessor) (Object) biome).getWeather().downfall();
 						harvestedStack = recipe.getResult(this, secondsFermented, downfall);
 						
 						this.extractedBottles += 1;
@@ -231,7 +232,11 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	}
 	
 	public Optional<RecipeEntry<ITitrationBarrelRecipe>> getRecipeForInventory(World world) {
-		return world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.TITRATION_BARREL, this, world);
+		return world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.TITRATION_BARREL, getRecipeInput(), world);
+	}
+	
+	public StorageRecipeInput<SingleVariantStorage<FluidVariant>> getRecipeInput() {
+		return new StorageRecipeInput<>(items, fluidStorage);
 	}
 	
 	public void giveRecipeRemainders(PlayerEntity player) {
@@ -257,24 +262,15 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 		if (itemCount == 0 && fluid == Fluids.EMPTY) {
 			return true; // tap empty barrel advancement
 		}
-
+		
 		if (world != null) {
 			Optional<RecipeEntry<ITitrationBarrelRecipe>> optionalRecipe = getRecipeForInventory(world);
 			return optionalRecipe.isPresent()
 					&& optionalRecipe.get().value().canPlayerCraft(player)
 					&& optionalRecipe.get().value().getFluidInput().test(this.getFluidVariant().getFluid());
 		}
-
+		
 		return false;
 	}
 	
-	@Override
-	public ItemStack getStackInSlot(int slot) {
-		return this.items.get(slot);
-	}
-	
-	@Override
-	public int getSize() {
-		return INVENTORY_SIZE;
-	}
 }

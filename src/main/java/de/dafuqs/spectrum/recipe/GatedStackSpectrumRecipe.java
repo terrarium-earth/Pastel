@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.recipe;
 
 import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.input.*;
 import net.minecraft.util.*;
@@ -16,16 +15,16 @@ public abstract class GatedStackSpectrumRecipe<C extends RecipeInput> extends Ga
 	
 	public abstract List<IngredientStack> getIngredientStacks();
 	
-	protected boolean matchIngredientStacksExclusively(Inventory inv, List<IngredientStack> ingredientStacks) {
+	protected boolean matchIngredientStacksExclusively(RecipeInput recipeInput, List<IngredientStack> ingredientStacks) {
 		// does the recipe fit into that inventory in the first place?
-		if (inv.size() < ingredientStacks.size()) {
+		if (recipeInput.getSize() < ingredientStacks.size()) {
 			return false;
 		}
 		
 		// collect all non-empty stacks
 		List<ItemStack> nonEmptyStacks = new ArrayList<>();
-		for (int i = 0; i < inv.size(); i++) {
-			ItemStack stack = inv.getStack(i);
+		for (int i = 0; i < recipeInput.getSize(); i++) {
+			ItemStack stack = recipeInput.getStackInSlot(i);
 			if (!stack.isEmpty()) {
 				nonEmptyStacks.add(stack);
 			}

@@ -47,7 +47,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public boolean matches(RecipeInput inv, World world) {
-		if (inv.getSize() > 9) {
+		if (inv.getSize() >= 10) {
 			// the item on the enchanter
 			if (!inputs.getFirst().test(inv.getStackInSlot(0))) {
 				return false;

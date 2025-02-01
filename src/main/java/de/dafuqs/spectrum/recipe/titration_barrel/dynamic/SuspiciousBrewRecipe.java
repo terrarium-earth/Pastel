@@ -2,13 +2,14 @@ package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.titration_barrel.*;
 import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.helpers.TimeHelper;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.titration_barrel.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
 import net.minecraft.block.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
@@ -41,7 +42,7 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 	public SuspiciousBrewRecipe() {
 		super("", false, UNLOCK_IDENTIFIER, INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER), OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, new FermentationData(1.25F, 0.01F, List.of()));
 	}
-
+	
 	@Override
 	public ItemStack getPreviewTap(int timeMultiplier) {
 		ItemStack flowerStack = Items.POPPY.getDefaultStack();
@@ -63,7 +64,7 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 		float thickness = getThickness(itemCount);
 		return tapWith(stacks, thickness, secondsFermented, downfall);
 	}
-
+	
 	public ItemStack tapWith(List<ItemStack> stacks, float thickness, long secondsFermented, float downfall) {
 		float ageIngameDays = TimeHelper.minecraftDaysFromSeconds(secondsFermented);
 		double alcPercent = getAlcPercent(this.fermentationData.fermentationSpeedMod(), thickness, downfall, ageIngameDays);
@@ -97,10 +98,10 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 	}
 	
 	@Override
-	public boolean matches(TitrationBarrelBlockEntity inventory, World world) {
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, World world) {
 		boolean flowerFound = false;
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack stack = inventory.getStack(i);
+		for (int i = 0; i < recipeInput.getSize(); i++) {
+			ItemStack stack = recipeInput.getStackInSlot(i);
 			if (!stack.isEmpty()) {
 				if (stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof FlowerBlock) {
 					flowerFound = true;

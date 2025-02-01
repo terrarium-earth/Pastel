@@ -34,8 +34,8 @@ dependencies {
 	implementation("org.jetbrains:annotations:24.0.1")
 
 	// graph api and its dependencies
-	implementation include("org.jgrapht:jgrapht-core:1.5.1")
-	implementation include("org.jheaps:jheaps:0.13")
+	implementation include("org.jgrapht:jgrapht-core:1.5.2")
+	implementation include("org.jheaps:jheaps:0.14")
 
 	// Some other dependency is adding annotations, and it throws an error without this
 	compileOnly("com.demonwav.mcdev:annotations:1.0")
@@ -89,8 +89,8 @@ dependencies {
 	modCompileOnly("com.unascribed:ears-api:${project.ears_version}")
 	modCompileOnly("maven.modrinth:create-fabric:${project.create_version}") { transitive = false }
 	modCompileOnly("maven.modrinth:neepmeat:${project.neepmeat_version}") { transitive = false }
-	modCompileOnly("maven.modrinth:lodestonelib:${project.lodestone_version}") { transitive = false}
-	modCompileOnly("maven.modrinth:malum:${project.malum_version}") { transitive = false}
+	modCompileOnly("maven.modrinth:lodestonelib:${project.lodestone_version}") { transitive = false }
+	modCompileOnly("maven.modrinth:malum:${project.malum_version}") { transitive = false }
 	modCompileOnly("maven.modrinth:travelersbackpack:${project.travelers_backpack_version}")
 	modCompileOnly("maven.modrinth:botania:${project.botania_version}")
 	modImplementation("maven.modrinth:idwtialsimmoedm:${project.idwtialsimmoedm_version}")

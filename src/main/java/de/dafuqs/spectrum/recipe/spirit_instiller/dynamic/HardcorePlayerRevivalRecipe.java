@@ -35,27 +35,26 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	}
 	
 	@Override
-	public ItemStack craft(RecipeInput inv, RegistryWrapper.WrapperLookup drm) {
-		if (inv instanceof SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
-			GameProfile gameProfile = getSkullOwner(inv.getStackInSlot(SpiritInstillerRecipe.CENTER_INGREDIENT));
-			if (gameProfile != null && SpectrumCommon.minecraftServer != null) {
-				ServerPlayerEntity revivedPlayer = SpectrumCommon.minecraftServer.getPlayerManager().getPlayer(gameProfile.getName());
-				if (revivedPlayer != null) {
-					HardcoreDeathComponent.removeHardcoreDeath(gameProfile);
-					revivedPlayer.changeGameMode(SpectrumCommon.minecraftServer.getDefaultGameMode());
-					
-					BlockRotation blockRotation = spiritInstillerBlockEntity.getMultiblockRotation();
-					float yaw = 0.0F;
-					switch (blockRotation) {
-						case NONE -> yaw = -90.0F;
-						case CLOCKWISE_90 -> yaw = 0.0F;
-						case CLOCKWISE_180 -> yaw = 900.0F;
-						case COUNTERCLOCKWISE_90 -> yaw = 180.0F;
-					}
-					
-					BlockPos pos = spiritInstillerBlockEntity.getPos();
-					revivedPlayer.teleport((ServerWorld) spiritInstillerBlockEntity.getWorld(), pos.getX(), pos.getY(), pos.getZ(), revivedPlayer.getYaw(), revivedPlayer.getPitch());
+	public ItemStack craft(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, RegistryWrapper.WrapperLookup drm) {
+		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
+		GameProfile gameProfile = getSkullOwner(recipeInput.getStackInSlot(SpiritInstillerRecipe.CENTER_INGREDIENT));
+		if (gameProfile != null && SpectrumCommon.minecraftServer != null) {
+			ServerPlayerEntity revivedPlayer = SpectrumCommon.minecraftServer.getPlayerManager().getPlayer(gameProfile.getName());
+			if (revivedPlayer != null) {
+				HardcoreDeathComponent.removeHardcoreDeath(gameProfile);
+				revivedPlayer.changeGameMode(SpectrumCommon.minecraftServer.getDefaultGameMode());
+				
+				BlockRotation blockRotation = spiritInstillerBlockEntity.getMultiblockRotation();
+				float yaw = 0.0F;
+				switch (blockRotation) {
+					case NONE -> yaw = -90.0F;
+					case CLOCKWISE_90 -> yaw = 0.0F;
+					case CLOCKWISE_180 -> yaw = 900.0F;
+					case COUNTERCLOCKWISE_90 -> yaw = 180.0F;
 				}
+				
+				BlockPos pos = spiritInstillerBlockEntity.getPos();
+				revivedPlayer.teleport((ServerWorld) spiritInstillerBlockEntity.getWorld(), pos.getX(), pos.getY(), pos.getZ(), revivedPlayer.getYaw(), revivedPlayer.getPitch());
 			}
 		}
 		return ItemStack.EMPTY;

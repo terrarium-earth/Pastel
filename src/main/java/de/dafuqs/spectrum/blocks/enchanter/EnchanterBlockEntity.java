@@ -8,6 +8,7 @@ import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.item_bowl.*;
 import de.dafuqs.spectrum.blocks.upgrade.*;
 import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.items.magic_items.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
@@ -26,6 +27,7 @@ import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.recipe.*;
+import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.registry.tag.*;
@@ -63,7 +65,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	// since the item bowls around the enchanter hold some items themselves
 	// they get cached here for faster recipe lookup
 	// virtualInventoryRecipeOrientation is the order the items are ordered for the recipe to match (rotations from 0-3)
-	protected ImplementedInventory virtualInventoryIncludingBowlStacks;
+	protected EnchanterInventory virtualInventory;
 	protected int virtualInventoryRecipeOrientation;
 	protected boolean virtualInventoryRecipeMirrored;
 	
@@ -80,12 +82,12 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public EnchanterBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.ENCHANTER, pos, state, INVENTORY_SIZE);
-		this.virtualInventoryIncludingBowlStacks = ImplementedInventory.ofSize(INVENTORY_SIZE + 8);
+		this.virtualInventory = new EnchanterInventory();
 		this.currentItemProcessingTime = -1;
 	}
 	
 	@SuppressWarnings("unused")
-    public static void clientTick(World world, BlockPos blockPos, BlockState blockState, @NotNull EnchanterBlockEntity enchanterBlockEntity) {
+	public static void clientTick(World world, BlockPos blockPos, BlockState blockState, @NotNull EnchanterBlockEntity enchanterBlockEntity) {
 		if (enchanterBlockEntity.currentRecipe != null) {
 			ItemStack experienceStack = enchanterBlockEntity.getStack(1);
 			if (!experienceStack.isEmpty() && experienceStack.getItem() instanceof ExperienceStorageItem) {
@@ -113,7 +115,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	}
 	
 	@SuppressWarnings("unused")
-    public static void serverTick(World world, BlockPos blockPos, BlockState blockState, @NotNull EnchanterBlockEntity enchanterBlockEntity) {
+	public static void serverTick(World world, BlockPos blockPos, BlockState blockState, @NotNull EnchanterBlockEntity enchanterBlockEntity) {
 		if (enchanterBlockEntity.upgrades == null) {
 			enchanterBlockEntity.calculateUpgrades();
 		}
@@ -135,7 +137,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				}
 				enchanterBlockEntity.updateInClientWorld();
 			}
-
+			
 			enchanterBlockEntity.inventoryChanged = false;
 		}
 		
@@ -180,7 +182,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 							playCraftingFinishedEffects(enchanterBlockEntity);
 							craftEnchantmentUpgradeRecipe(enchanterBlockEntity, enchantmentUpgradeRecipe);
 							PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerWorld) enchanterBlockEntity.getWorld(), enchanterBlockEntity.pos);
-
+							
 							craftingSuccess = true;
 						}
 					}
@@ -196,7 +198,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 						enchanterBlockEntity.currentItemProcessingTime = -1;
 						enchanterBlockEntity.updateInClientWorld();
 						PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerWorld) enchanterBlockEntity.getWorld(), enchanterBlockEntity.pos);
-
+						
 					}
 				}
 				if (enchanterBlockEntity.currentItemProcessingTime > 0 && enchanterBlockEntity.craftingTime >= enchanterBlockEntity.currentItemProcessingTime) {
@@ -207,7 +209,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 					enchanterBlockEntity.craftingTime = 0;
 					enchanterBlockEntity.updateInClientWorld();
 					PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerWorld) enchanterBlockEntity.getWorld(), enchanterBlockEntity.pos);
-
+					
 					craftingSuccess = true;
 				}
 				enchanterBlockEntity.markDirty();
@@ -229,21 +231,21 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	 * @return True if the enchanters inventory matches an enchanting setup
 	 */
 	public static boolean isValidCenterEnchantingSetup(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
-		ItemStack centerStack = enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack(0);
+		ItemStack centerStack = enchanterBlockEntity.virtualInventory.getStack(0);
 		boolean isEnchantableBookInCenter = SpectrumEnchantmentHelper.isEnchantableBook(centerStack);
-
+		
 		var centerIsEnchantable = (isEnchantableBookInCenter || centerStack.getItem().isEnchantable(centerStack));
-		var hasExpStorage = enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack(1).getItem() instanceof ExperienceStorageItem;
-
+		var hasExpStorage = enchanterBlockEntity.virtualInventory.getStack(1).getItem() instanceof ExperienceStorageItem;
+		
 		if (!centerStack.isEmpty() && centerIsEnchantable && hasExpStorage) {
 			// gilded books can copy enchantments from any source item
 			boolean centerStackIsGildedBook = centerStack.isOf(SpectrumItems.GILDED_BOOK);
 			boolean enchantedBookWithAdditionalEnchantmentsFound = false;
-
+			
 			var existingEnchantments = EnchantmentHelper.getEnchantments(centerStack).getEnchantmentEntries();
 			for (int i = 0; i < 8; i++) {
-				ItemStack virtualSlotStack = enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack(2 + i);
-
+				ItemStack virtualSlotStack = enchanterBlockEntity.virtualInventory.getStack(2 + i);
+				
 				// empty slots do not count
 				if (!virtualSlotStack.isEmpty()) {
 					if (centerStackIsGildedBook || virtualSlotStack.getItem() instanceof EnchantedBookItem) {
@@ -266,10 +268,10 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 					}
 				}
 			}
-
+			
 			return enchantedBookWithAdditionalEnchantmentsFound;
 		}
-
+		
 		return false;
 	}
 	
@@ -339,7 +341,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public static ItemEnchantmentsComponent getHighestEnchantmentsInItemBowls(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
 		return SpectrumEnchantmentHelper.collectHighestEnchantments(
-				enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getItems().subList(2, 10));
+				enchanterBlockEntity.virtualInventory.heldStacks.subList(2, 10));
 	}
 	
 	public static int getRequiredExperienceToEnchantCenterItem(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
@@ -412,12 +414,12 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	public static int getRequiredExperienceForEnchantment(int enchantability, RegistryEntry<Enchantment> entry, int level) {
 		if (enchantability > 0) {
 			var enchantment = entry.value();
-
+			
 			// Interpolated version of COMMON -> 10, UNCOMMON -> 25, RARE -> 50, VERY_RARE -> 80
-			var rarityMults = new float[] { 0, 10, 12.5F, 12.67F, 12.5F, 12, 11.33F, 10.71F, 10 };
+			var rarityMults = new float[]{0, 10, 12.5F, 12.67F, 12.5F, 12, 11.33F, 10.71F, 10};
 			var anvilCost = enchantment.getAnvilCost();
 			var rarityCost = rarityMults[Math.min(anvilCost, rarityMults.length - 1)] * anvilCost;
-
+			
 			float levelCost = level + ((float) level / enchantment.getMaxLevel()); // the higher the level, the pricier. But not as bad for enchantments with high max levels
 			float specialMulti = entry.isIn(EnchantmentTags.TREASURE) ? 2.0F : entry.isIn(EnchantmentTags.CURSE) ? 1.5F : 1.0F;
 			float selectionAvailabilityMod = (entry.isIn(EnchantmentTags.IN_ENCHANTING_TABLE) ? 0.5F : 0.75F) + (entry.isIn(EnchantmentTags.TRADEABLE) ? 0.5F : 0.75F);
@@ -434,10 +436,10 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public static void craftEnchanterRecipe(World world, @NotNull EnchanterBlockEntity enchanterBlockEntity, @NotNull EnchanterRecipe enchanterRecipe) {
 		enchanterBlockEntity.drainExperience(enchanterRecipe.getRequiredExperience());
-
+		
 		// if there is room: place the output on the table
 		// otherwise: pop it off
-		ItemStack resultStack = enchanterRecipe.craft(enchanterBlockEntity.virtualInventoryIncludingBowlStacks, world.getRegistryManager());
+		ItemStack resultStack = enchanterRecipe.craft(enchanterBlockEntity.virtualInventory.createInput(), world.getRegistryManager());
 		ItemStack existingCenterStack = enchanterBlockEntity.getStack(0);
 		
 		// decrement stacks in item bowls
@@ -458,12 +460,12 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				}
 			}
 		}
-
+		
 		if (!enchanterRecipe.areYieldAndEfficiencyUpgradesDisabled() && enchanterBlockEntity.upgrades.getEffectiveValue(UpgradeType.YIELD) != 1.0) {
 			int resultCountMod = Support.getIntFromDecimalWithChance(resultStack.getCount() * enchanterBlockEntity.upgrades.getEffectiveValue(UpgradeType.YIELD), world.random);
 			resultStack.setCount(resultCountMod);
 		}
-
+		
 		if (existingCenterStack.getCount() > 1) {
 			existingCenterStack.decrement(1);
 			MultiblockCrafter.spawnItemStackAsEntitySplitViaMaxCount(world, enchanterBlockEntity.pos, resultStack, resultStack.getCount(), MultiblockCrafter.RECIPE_STACK_VELOCITY);
@@ -483,20 +485,20 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public static int tickEnchantmentUpgradeRecipe(World world, @NotNull EnchanterBlockEntity enchanterBlockEntity, int itemsToConsumeLeft) {
 		int itemCountToConsume = Math.min(itemsToConsumeLeft, Support.getIntFromDecimalWithChance(enchanterBlockEntity.upgrades.getEffectiveValue(UpgradeType.SPEED), world.random));
-
+		
 		int consumedAmount = 0;
 		int bowlsChecked = 0;
 		int randomBowlPosition = world.random.nextInt(8);
-
+		
 		int itemCountToConsumeAfterMod = itemCountToConsume;
 		if (enchanterBlockEntity.upgrades.getEffectiveValue(UpgradeType.EFFICIENCY) != 1.0) {
 			itemCountToConsumeAfterMod = Support.getIntFromDecimalWithChance(itemCountToConsume / enchanterBlockEntity.upgrades.getEffectiveValue(UpgradeType.EFFICIENCY), world.random);
 		}
-
+		
 		// cycle at least once for fancy particles
 		while ((consumedAmount < itemCountToConsumeAfterMod && bowlsChecked < 8) || (itemCountToConsumeAfterMod == 0 & consumedAmount == 0)) {
 			Vec3i bowlOffset = getItemBowlPositionOffset(randomBowlPosition + bowlsChecked, enchanterBlockEntity.virtualInventoryRecipeOrientation, enchanterBlockEntity.virtualInventoryRecipeMirrored);
-
+			
 			BlockEntity blockEntity = world.getBlockEntity(enchanterBlockEntity.pos.add(bowlOffset));
 			if (blockEntity instanceof ItemBowlBlockEntity itemBowlBlockEntity) {
 				if (itemCountToConsumeAfterMod == 0) {
@@ -537,12 +539,12 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		int offset = (orientation * 2 + index + diff) % 8;
 		return ITEM_BOWL_OFFSETS.get(offset);
 	}
-
+	
 	private static boolean recipeMatches(EnchanterBlockEntity blockEntity, World world) {
 		if (blockEntity.currentRecipe.value() instanceof EnchanterRecipe recipe) {
-            return recipe.matches(blockEntity.virtualInventoryIncludingBowlStacks, world);
+			return recipe.matches(blockEntity.virtualInventory.createInput(), world);
 		} else if (blockEntity.currentRecipe.value() instanceof EnchantmentUpgradeRecipe recipe) {
-            return recipe.matches(blockEntity.virtualInventoryIncludingBowlStacks, world);
+			return recipe.matches(blockEntity.virtualInventory.createInput(), world);
 		}
 		return false;
 	}
@@ -557,90 +559,54 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		if (recipeMatches(enchanterBlockEntity, world)) {
 			return;
 		}
-
+		
 		enchanterBlockEntity.craftingTime = 0;
 		var previousRecipe = enchanterBlockEntity.currentRecipe;
 		enchanterBlockEntity.currentRecipe = null;
-		int previousOrientation = enchanterBlockEntity.virtualInventoryRecipeOrientation;
-		boolean previousMirrored = enchanterBlockEntity.virtualInventoryRecipeMirrored;
-
-		var invSize = enchanterBlockEntity.virtualInventoryIncludingBowlStacks.size();
-		var recipeTestInventory = ImplementedInventory.ofSize(invSize);
-		recipeTestInventory.setStack(0, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack(0));
-		recipeTestInventory.setStack(1, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack(1));
-
+		
 		var recipeManager = world.getRecipeManager();
 		var enchantmentUpgradeRecipe = recipeManager
-				.getFirstMatch(SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, enchanterBlockEntity.virtualInventoryIncludingBowlStacks, world)
+				.getFirstMatch(SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, enchanterBlockEntity.virtualInventory.createInput(), world)
 				.orElse(null);
-		if (enchantmentUpgradeRecipe == null) {
-			RecipeEntry<EnchanterRecipe> enchanterRecipe = null;
-			boolean mirrored = false;
-			int orientation;
-			
-			// try it non-mirrored
-			for (orientation = 0; orientation < 4; orientation++) {
-				int offset = orientation * 2;
-				recipeTestInventory.setStack(2, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 8) % 8 + 2));
-				recipeTestInventory.setStack(3, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 1 + 8) % 8 + 2));
-				recipeTestInventory.setStack(4, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 2 + 8) % 8 + 2));
-				recipeTestInventory.setStack(5, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 3 + 8) % 8 + 2));
-				recipeTestInventory.setStack(6, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 4 + 8) % 8 + 2));
-				recipeTestInventory.setStack(7, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 5 + 8) % 8 + 2));
-				recipeTestInventory.setStack(8, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 6 + 8) % 8 + 2));
-				recipeTestInventory.setStack(9, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 7 + 8) % 8 + 2));
-				
-				enchanterRecipe = recipeManager
-						.getFirstMatch(SpectrumRecipeTypes.ENCHANTER, recipeTestInventory, world)
-						.orElse(null);
-				if (enchanterRecipe != null) {
-					break;
-				}
-			}
-			
-			// try it mirrored
-			if (enchanterRecipe == null) {
-				for (orientation = 0; orientation < 4; orientation++) {
-					int offset = orientation * 2;
-					recipeTestInventory.setStack(2, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 8 + 1) % 8 + 2));
-					recipeTestInventory.setStack(3, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 1 - 1 + 8) % 8 + 2));
-					recipeTestInventory.setStack(4, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 2 + 1 + 8) % 8 + 2));
-					recipeTestInventory.setStack(5, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 3 - 1 + 8) % 8 + 2));
-					recipeTestInventory.setStack(6, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 4 + 1 + 8) % 8 + 2));
-					recipeTestInventory.setStack(7, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 5 - 1 + 8) % 8 + 2));
-					recipeTestInventory.setStack(8, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 6 + 1 + 8) % 8 + 2));
-					recipeTestInventory.setStack(9, enchanterBlockEntity.virtualInventoryIncludingBowlStacks.getStack((offset + 7 - 1 + 8) % 8 + 2));
-					
-					enchanterRecipe = recipeManager.getFirstMatch(SpectrumRecipeTypes.ENCHANTER, recipeTestInventory, world).orElse(null);
-					if (enchanterRecipe != null) {
-						mirrored = true;
-						break;
-					}
-				}
-			}
-			
-			if (enchanterRecipe != null) {
-				enchanterBlockEntity.currentRecipe = enchanterRecipe;
-				enchanterBlockEntity.virtualInventoryRecipeOrientation = orientation;
-				enchanterBlockEntity.virtualInventoryRecipeMirrored = mirrored;
-				enchanterBlockEntity.virtualInventoryIncludingBowlStacks = recipeTestInventory;
-				enchanterBlockEntity.craftingTimeTotal = (int) Math.ceil(enchanterRecipe.value().getCraftingTime() / enchanterBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
-			}
-		} else {
+		
+		if (enchantmentUpgradeRecipe != null) {
 			if (enchanterBlockEntity.canOwnerOverenchant || !enchantmentUpgradeRecipe.value().requiresUnlockedOverEnchanting()) {
 				enchanterBlockEntity.currentRecipe = enchantmentUpgradeRecipe;
 				enchanterBlockEntity.currentItemProcessingTime = 0;
-				enchanterBlockEntity.virtualInventoryRecipeOrientation = previousOrientation;
-				enchanterBlockEntity.virtualInventoryRecipeMirrored = previousMirrored;
-				enchanterBlockEntity.virtualInventoryIncludingBowlStacks = recipeTestInventory;
 				enchanterBlockEntity.craftingTimeTotal = enchantmentUpgradeRecipe.value().getRequiredItemCount();
+				
+				//TODO why are we doing this?
+				EnchanterInventory testInventory = new EnchanterInventory();
+				testInventory.setStack(0, enchanterBlockEntity.virtualInventory.getStack(0));
+				testInventory.setStack(1, enchanterBlockEntity.virtualInventory.getStack(1));
+				enchanterBlockEntity.virtualInventory = testInventory;
 			}
+			if (enchanterBlockEntity.currentRecipe != previousRecipe) {
+				enchanterBlockEntity.updateInClientWorld();
+			}
+			return;
 		}
 		
-		if (enchanterBlockEntity.currentRecipe != previousRecipe) {
-			enchanterBlockEntity.updateInClientWorld();
+		for (int m = 0; m < 2; m++) {
+			for (int o = 0; o < 8; o++) {
+				RecipeInput recipeInput = enchanterBlockEntity.virtualInventory.createInput();
+				RecipeEntry<EnchanterRecipe> enchanterRecipe = recipeManager
+						.getFirstMatch(SpectrumRecipeTypes.ENCHANTER, recipeInput, world)
+						.orElse(null);
+				
+				if (enchanterRecipe != null) {
+					enchanterBlockEntity.currentRecipe = enchanterRecipe;
+					enchanterBlockEntity.virtualInventoryRecipeOrientation = o;
+					enchanterBlockEntity.virtualInventoryRecipeMirrored = m > 0;
+					enchanterBlockEntity.craftingTimeTotal = (int) Math.ceil(enchanterRecipe.value().getCraftingTime() / enchanterBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
+					enchanterBlockEntity.updateInClientWorld();
+					return;
+				}
+				
+				enchanterBlockEntity.virtualInventory.rotate();
+			}
+			enchanterBlockEntity.virtualInventory.mirror();
 		}
-		
 	}
 	
 	private static void grantPlayerEnchantingAdvancementCriterion(UUID playerUUID, ItemStack resultStack, int experience) {
@@ -664,8 +630,8 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		this.canOwnerOverenchant = nbt.getBoolean("owner_can_overenchant");
 		this.virtualInventoryRecipeOrientation = nbt.getInt("virtual_recipe_orientation");
 		this.virtualInventoryRecipeMirrored = nbt.getBoolean("virtual_recipe_mirrored");
-		this.virtualInventoryIncludingBowlStacks = ImplementedInventory.ofSize(INVENTORY_SIZE + 8);
-		Inventories.readNbt(nbt, this.virtualInventoryIncludingBowlStacks.getItems(), registryLookup);
+		this.virtualInventory = new EnchanterInventory();
+		Inventories.readNbt(nbt, this.virtualInventory.heldStacks, registryLookup);
 		if (nbt.contains("item_facing", NbtElement.STRING_TYPE)) {
 			this.itemFacing = Direction.valueOf(nbt.getString("item_facing").toUpperCase(Locale.ROOT));
 		}
@@ -676,7 +642,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		if (this.currentRecipe == null && this.world != null && this.world.isClient) {
 			stopCraftingMusic();
 		}
-
+		
 		if (nbt.contains("Upgrades", NbtElement.LIST_TYPE)) {
 			this.upgrades = UpgradeHolder.fromNbt(nbt.getList("Upgrades", NbtElement.COMPOUND_TYPE));
 		} else {
@@ -688,7 +654,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	protected void stopCraftingMusic() {
 		CraftingBlockSoundInstance.stopPlayingOnPos(this.pos);
 	}
-
+	
 	@Override
 	public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		super.writeNbt(nbt, registryLookup);
@@ -700,7 +666,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		nbt.putBoolean("inventory_changed", this.inventoryChanged);
 		nbt.putBoolean("owner_can_apply_conflicting_enchantments", this.canOwnerApplyConflictingEnchantments);
 		nbt.putBoolean("owner_can_overenchant", this.canOwnerOverenchant);
-		Inventories.writeNbt(nbt, this.virtualInventoryIncludingBowlStacks.getItems(), registryLookup);
+		Inventories.writeNbt(nbt, this.virtualInventory.heldStacks, registryLookup);
 		if (this.itemFacing != null) {
 			nbt.putString("item_facing", this.itemFacing.toString().toUpperCase(Locale.ROOT));
 		}
@@ -766,7 +732,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	@Override
 	public void inventoryChanged() {
 		if (world == null) return;
-		virtualInventoryIncludingBowlStacks = ImplementedInventory.of(
+		virtualInventory = new EnchanterInventory(
 				this.getStack(0), // center item
 				this.getStack(1), // knowledge gem
 				getItemBowlStack(world, pos.add(5, 0, -3)),
@@ -778,8 +744,8 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				getItemBowlStack(world, pos.add(-3, 0, -5)),
 				getItemBowlStack(world, pos.add(3, 0, -5))
 		);
-
-		virtualInventoryIncludingBowlStacks.markDirty();
+		
+		virtualInventory.markDirty();
 		inventoryChanged = true;
 		currentItemProcessingTime = -1;
 		
@@ -828,10 +794,10 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		this.upgrades = Upgradeable.calculateUpgradeMods4(world, pos, 3, 0, this.ownerUUID);
 		this.markDirty();
 	}
-
+	
 	@Override
 	public UpgradeHolder getUpgradeHolder() {
 		return this.upgrades;
 	}
-
+	
 }

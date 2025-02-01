@@ -2,11 +2,12 @@ package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.titration_barrel.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.titration_barrel.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.fluid.*;
 import net.minecraft.inventory.*;
@@ -19,9 +20,9 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
-
+	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("hidden/collect_cookbooks/imperial_cookbook");
-
+	
 	public static final int MIN_FERMENTATION_TIME_HOURS = 24;
 	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.NECTERED_VIOGNIER, 4);
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
@@ -29,7 +30,7 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 		add(IngredientStack.ofItems(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.asItem()));
 		add(IngredientStack.ofItems(4, SpectrumItems.GLASS_PEACH));
 	}};
-
+	
 	public NecteredViognierRecipe() {
 		super("", false, UNLOCK_IDENTIFIER, INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER), OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, new FermentationData(0.15F, 0.01F, List.of()));
 	}
@@ -72,7 +73,7 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 		if (nectar) {
 			effects.add(new StatusEffectInstance(SpectrumStatusEffects.IMMUNITY, effectDuration / 2));
 		}
-
+		
 		int nectarMod = nectar ? 3 : 1;
 		effectDuration = 1200;
 		int alcAfterBloominess = (int) (alcPercent / (nectarMod + bloominess));
@@ -95,11 +96,11 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 	}
 	
 	@Override
-	public boolean matches(TitrationBarrelBlockEntity inventory, World world) {
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, World world) {
 		boolean bulbsFound = false;
 		
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack stack = inventory.getStack(i);
+		for (int i = 0; i < recipeInput.getSize(); i++) {
+			ItemStack stack = recipeInput.getStackInSlot(i);
 			if (stack.isEmpty()) {
 				continue;
 			}

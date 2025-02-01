@@ -4,7 +4,6 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.titration_barrel.*;
 import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.helpers.TimeHelper;
 import de.dafuqs.spectrum.helpers.*;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<TitrationBarrelBlockEntity> implements ITitrationBarrelRecipe {
+public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecipeInput<SingleVariantStorage<FluidVariant>>> implements ITitrationBarrelRecipe {
 	
 	public static final List<Integer> FERMENTATION_DURATION_DISPLAY_TIME_MULTIPLIERS = new ArrayList<>() {{
 		add(1);
@@ -68,8 +67,8 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<TitrationBar
 	}
 	
 	@Override
-	public boolean matches(TitrationBarrelBlockEntity inventory, World world) {
-		SingleVariantStorage<FluidVariant> fluidStorage = inventory.getFluidStorage();
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, World world) {
+		SingleVariantStorage<FluidVariant> fluidStorage = recipeInput.getFluidStorage();
 		if (!this.fluid.test(fluidStorage.variant)) {
 			return false;
 		}
@@ -78,7 +77,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<TitrationBar
 				return false;
 			}
 		}
-		return matchIngredientStacksExclusively(inventory, getIngredientStacks());
+		return matchIngredientStacksExclusively(recipeInput, getIngredientStacks());
 	}
 	
 	@Override
@@ -103,7 +102,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<TitrationBar
 	
 	@Override
 	@Deprecated
-	public ItemStack craft(TitrationBarrelBlockEntity inventory, RegistryWrapper.WrapperLookup drm) {
+	public ItemStack craft(StorageRecipeInput<SingleVariantStorage<FluidVariant>> inventory, RegistryWrapper.WrapperLookup drm) {
 		return getDefaultTap(1).copy();
 	}
 	
