@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.entity.entity;
 
-import com.google.common.util.concurrent.*;
 import de.dafuqs.spectrum.api.entity.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.entity.*;
@@ -29,6 +28,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
+import org.apache.commons.lang3.mutable.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
@@ -346,7 +346,8 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 	}
 	
 	private float getDamage(ItemStack stack) {
-		var damage = new AtomicDouble(0);
+		//TODO can we use a built in function for this?
+		var damage = new MutableDouble(0);
 		var key = EntityAttributes.GENERIC_ATTACK_DAMAGE.getKey().orElse(null);
 		var base = EntityAttributes.GENERIC_ATTACK_DAMAGE.value().getDefaultValue();
 		var modifiers = stack.getOrDefault(DataComponentTypes.ATTRIBUTE_MODIFIERS, AttributeModifiersComponent.DEFAULT);
@@ -356,11 +357,11 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 				damage.addAndGet(switch (modifier.operation()) {
 					case ADD_VALUE -> value;
 					case ADD_MULTIPLIED_BASE -> value * base;
-					case ADD_MULTIPLIED_TOTAL -> value * damage.get();
+					case ADD_MULTIPLIED_TOTAL -> value * damage.getValue();
 				});
 			}
 		});
-		return (float) damage.get();
+		return damage.getValue().floatValue();
 	}
 	
 	@Override
