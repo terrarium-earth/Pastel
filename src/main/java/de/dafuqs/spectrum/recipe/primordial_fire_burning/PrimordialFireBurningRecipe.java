@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.entity.entity.*;
 import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -23,12 +22,9 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
-import java.util.*;
-
 public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("lategame/collect_doombloom_seed");
-	private static final AutoCraftingInventory AUTO_INVENTORY = new AutoCraftingInventory(1, 1);
 	
 	protected final Ingredient input;
 	protected final ItemStack output;
@@ -95,8 +91,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 	}
 	
 	public static PrimordialFireBurningRecipe getRecipeFor(@NotNull World world, ItemStack stack) {
-		AUTO_INVENTORY.setInputInventory(Collections.singletonList(stack));
-		return world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.PRIMORDIAL_FIRE_BURNING, AUTO_INVENTORY, world).map(RecipeEntry::value).orElse(null);
+		return world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.PRIMORDIAL_FIRE_BURNING, new SingleStackRecipeInput(stack), world).map(RecipeEntry::value).orElse(null);
 	}
 	
 	public static boolean processBlock(World world, BlockPos pos, BlockState state) {
@@ -110,8 +105,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 			return false;
 		}
 		
-		AUTO_INVENTORY.setInputInventory(Collections.singletonList(state.getBlock().asItem().getDefaultStack()));
-		ItemStack output = recipe.craft(AUTO_INVENTORY, world.getRegistryManager());
+		ItemStack output = recipe.craft(new SingleStackRecipeInput(state.getBlock().asItem().getDefaultStack()), world.getRegistryManager());
 		
 		world.playSound(null, pos, SpectrumSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundCategory.BLOCKS, 0.7F, 1.0F);
 		if(output.getItem() instanceof BlockItem blockItem) {
@@ -134,8 +128,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 		}
 		
 		int inputCount = inputStack.getCount();
-		AUTO_INVENTORY.setInputInventory(Collections.singletonList(inputStack));
-		ItemStack outputStack = recipe.craft(AUTO_INVENTORY, world.getRegistryManager()).copy();
+		ItemStack outputStack = recipe.craft(new SingleStackRecipeInput(inputStack), world.getRegistryManager()).copy();
 		outputStack.setCount(outputStack.getCount() * inputCount);
 		
 		inputStack.setCount(0);

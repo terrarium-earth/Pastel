@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.blocks.fluid;
 
 import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.fluid_converting.*;
 import net.minecraft.block.*;
@@ -11,6 +10,7 @@ import net.minecraft.fluid.*;
 import net.minecraft.item.*;
 import net.minecraft.particle.*;
 import net.minecraft.recipe.*;
+import net.minecraft.recipe.input.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
@@ -119,18 +119,13 @@ public abstract class SpectrumFluid extends FlowableFluid {
 	
 	public abstract RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType();
 	
-	private static final AutoCraftingInventory AUTO_INVENTORY = new AutoCraftingInventory(1, 1);
-	
-	
 	public @Nullable <R extends FluidConvertingRecipe> R getConversionRecipeFor(RecipeType<R> recipeType, @NotNull World world, ItemStack itemStack) {
-		AUTO_INVENTORY.setInputInventory(Collections.singletonList(itemStack));
-		RecipeEntry<R> entry = world.getRecipeManager().getFirstMatch(recipeType, AUTO_INVENTORY, world).orElse(null);
+		RecipeEntry<R> entry = world.getRecipeManager().getFirstMatch(recipeType, new SingleStackRecipeInput(itemStack), world).orElse(null);
 		return entry == null ? null : entry.value();
 	}
 	
 	public ItemStack craft(FluidConvertingRecipe recipe, ItemStack itemStack, World world) {
-		AUTO_INVENTORY.setInputInventory(Collections.singletonList(itemStack));
-		return recipe.craft(AUTO_INVENTORY, world.getRegistryManager());
+		return recipe.craft(new SingleStackRecipeInput(itemStack), world.getRegistryManager());
 	}
-
+	
 }
