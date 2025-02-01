@@ -26,7 +26,6 @@
   "pages": [
     {
       "type": "modonomicon:text",
-
       "text": "book.spectrum.guidebook.mod_integration.supplementaries.page0.text",
       "title": "book.spectrum.guidebook.mod_integration.supplementaries.name"
     },
@@ -59,6 +58,5 @@
       "item": "spectrum:ash_flakes",
       "text": "book.spectrum.guidebook.mod_integration.supplementaries.page3.text"
     }
-
   ]
 }

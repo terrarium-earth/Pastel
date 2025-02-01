@@ -21,6 +21,7 @@
             "items": "#spectrum:hummingstones"
           }
         ]
+      }
     },
     "struck_up_hummingstone_hymn": {
       "trigger": "spectrum:hummingstone_hymn",

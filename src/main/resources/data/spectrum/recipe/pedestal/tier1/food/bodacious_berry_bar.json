@@ -18,7 +18,6 @@
       "item": "spectrum:infused_beverage",
       "recipeViewNbt": "{Variant: \"berry_liquor\", Color: 16729462 }",
       "matchbook": {
-
         "mode": "AND",
         "matches": [
           {
@@ -27,7 +26,6 @@
             "target": "berry_liquor"
           }
         ]
-
       }
     },
     "H": "minecraft:honey_bottle",

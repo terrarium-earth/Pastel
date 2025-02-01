@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:entities/egg_laying_wooly_pig_wool"
+          "value": "spectrum:entities/egg_laying_wooly_pig_wool"
         }
       ]
     },

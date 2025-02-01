@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-					"name": "spectrum:resplendent_feather"
+          "name": "spectrum:resplendent_feather"
         }
       ],
       "functions": [

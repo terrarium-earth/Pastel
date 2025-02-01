@@ -4,24 +4,24 @@
     "item": "ae2:certus_quartz_crystal"
   },
   "growth_stage_states": [
-		{
-			"Name": "spectrum:small_certus_quarz_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:large_certus_quarz_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:certus_quarz_cluster",
-			"Properties": {
-				"facing": "up"
-			}
-		}
+    {
+      "Name": "spectrum:small_certus_quarz_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:large_certus_quarz_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:certus_quarz_cluster",
+      "Properties": {
+        "facing": "up"
+      }
+    }
   ],
   "seconds_per_growth_stage": 60,
   "ink_color": "spectrum:yellow",
@@ -41,7 +41,6 @@
       "consume_chance_per_second": 0.05
     },
     {
-
       "ingredient": "#minecraft:sand",
       "growth_acceleration_mod": 2.0,
       "ink_consumption_mod": 1.0,

@@ -27,7 +27,9 @@
           }
         ],
         "item": {
-          "spectrum:wet_lava_sponge"
+          "items": [
+            "spectrum:wet_lava_sponge"
+          ]
         }
       }
     },

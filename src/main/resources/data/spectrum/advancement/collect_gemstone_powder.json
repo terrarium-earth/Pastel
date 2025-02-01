@@ -20,6 +20,7 @@
             "items": "#spectrum:gemstone_powders"
           }
         ]
+      }
     },
     "gotten_previous": {
       "trigger": "revelationary:advancement_gotten",

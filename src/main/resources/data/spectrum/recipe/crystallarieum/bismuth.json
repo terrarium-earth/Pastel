@@ -2,24 +2,24 @@
   "type": "spectrum:crystallarieum_growing",
   "ingredient": "spectrum:bismuth_flake",
   "growth_stage_states": [
-		{
-			"Name": "spectrum:small_bismuth_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:large_bismuth_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:bismuth_cluster",
-			"Properties": {
-				"facing": "up"
-			}
-		}
+    {
+      "Name": "spectrum:small_bismuth_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:large_bismuth_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:bismuth_cluster",
+      "Properties": {
+        "facing": "up"
+      }
+    }
   ],
   "seconds_per_growth_stage": 120,
   "ink_color": "spectrum:cyan",

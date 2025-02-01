@@ -6,7 +6,7 @@
       "predicate": {
         "type": "minecraft:would_survive",
         "state": {
-					"Name": "spectrum:small_red_dragonjag"
+          "Name": "spectrum:small_red_dragonjag"
         }
       }
     }

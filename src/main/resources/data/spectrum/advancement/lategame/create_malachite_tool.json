@@ -21,11 +21,11 @@
   "criteria": {
     "created_malachite_tool": {
       "trigger": "spectrum:crafted_with_fusion_shrine",
-        "items": [
-          {
-            "items": "#spectrum:malachite_equipment"
-          }
-        ]
+      "items": [
+        {
+          "items": "#spectrum:malachite_equipment"
+        }
+      ]
     },
     "gotten_previous": {
       "trigger": "revelationary:advancement_gotten",

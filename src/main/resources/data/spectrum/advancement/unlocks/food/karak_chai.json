@@ -7,8 +7,10 @@
       }
     },
     "collect_milky_resin": {
-      "trigger":"revelationary:advancement_gotten",
-      "conditions": { "advancement_identifier": "spectrum:hidden/collect_milky_resin" }
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "spectrum:hidden/collect_milky_resin"
+      }
     },
     "unlocked_potion_workshop": {
       "trigger": "revelationary:advancement_gotten",

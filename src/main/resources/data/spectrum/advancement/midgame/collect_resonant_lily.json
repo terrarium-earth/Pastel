@@ -33,7 +33,9 @@
       "trigger": "spectrum:fluid_dipping",
       "conditions": {
         "target_stack": {
-          "spectrum:resonant_lily"
+          "items": [
+            "spectrum:resonant_lily"
+          ]
         }
       }
     },

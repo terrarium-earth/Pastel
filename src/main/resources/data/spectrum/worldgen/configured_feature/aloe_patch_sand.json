@@ -9,8 +9,8 @@
     "vegetation_chance": 0.2,
     "xz_radius": {
       "type": "minecraft:uniform",
-        "min_inclusive": 0,
-        "max_inclusive": 1
+      "min_inclusive": 0,
+      "max_inclusive": 1
     },
     "replaceable": "#spectrum:aloe_converted",
     "ground_state": {

@@ -10,9 +10,9 @@
   "ingredient3": "#c:milk",
   "result": {
     "id": "spectrum:golden_bristle_tea",
-		"components": {
-			"spectrum:with_milk": {}
-		},
+    "components": {
+      "spectrum:with_milk": {}
+    },
     "count": 1
   },
   "required_advancement": "spectrum:hidden/collect_cookbooks/brewers_handbook"

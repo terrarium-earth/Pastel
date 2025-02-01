@@ -4,15 +4,12 @@
     "#minecraft:walls",
     "#minecraft:slabs",
     "#minecraft:fences",
-
     "#spectrum:calcites",
     "#spectrum:basalts",
     "#spectrum:blackslags",
     "#spectrum:shale_clays",
     "#spectrum:dragonbone_blocks",
-
     "minecraft:wet_sponge",
-
     {
       "id": "c:dusts",
       "required": false

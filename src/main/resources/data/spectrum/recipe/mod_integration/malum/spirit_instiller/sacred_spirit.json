@@ -1,6 +1,6 @@
 {
   "type": "spectrum:spirit_instiller",
-  "time":150,
+  "time": 150,
   "experience": 0.75,
   "ingredient1": "spectrum:moonstone_powder",
   "ingredient2": {

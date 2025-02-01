@@ -1,7 +1,7 @@
 {
   "type": "ants:colony_harvesting",
   "hive_ingredient": "spectrum:jade_vine_petal_block",
-  "result" : {
+  "result": {
     "item": "minecraft:string",
     "count": 12
   },

@@ -2,24 +2,24 @@
   "type": "spectrum:crystallarieum_growing",
   "ingredient": "spectrum:raw_azurite",
   "growth_stage_states": [
-		{
-			"Name": "spectrum:small_azurite_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:large_azurite_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:azurite_cluster",
-			"Properties": {
-				"facing": "up"
-			}
-		}
+    {
+      "Name": "spectrum:small_azurite_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:large_azurite_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:azurite_cluster",
+      "Properties": {
+        "facing": "up"
+      }
+    }
   ],
   "seconds_per_growth_stage": 300,
   "ink_color": "spectrum:blue",

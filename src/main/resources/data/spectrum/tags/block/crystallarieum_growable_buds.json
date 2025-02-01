@@ -8,7 +8,6 @@
     "spectrum:large_azurite_bud",
     "spectrum:small_bloodstone_bud",
     "spectrum:large_bloodstone_bud",
-
     "spectrum:small_coal_bud",
     "spectrum:large_coal_bud",
     "spectrum:small_copper_bud",
@@ -35,7 +34,6 @@
     "spectrum:large_quartz_bud",
     "spectrum:small_redstone_bud",
     "spectrum:large_redstone_bud",
-
     {
       "id": "spectrum:small_certus_quartz_bud",
       "required": false
@@ -52,7 +50,6 @@
       "id": "spectrum:large_fluix_bud",
       "required": false
     },
-
     {
       "id": "spectrum:small_globette_bud",
       "required": false

@@ -1,8 +1,8 @@
 {
-	"type": "spectrum:goo_converting",
-	"ingredient": "minecraft:rotten_flesh",
-	"result": {
-		"item": "minecraft:rabbit_hide",
-		"count": 1
-	}
+  "type": "spectrum:goo_converting",
+  "ingredient": "minecraft:rotten_flesh",
+  "result": {
+    "item": "minecraft:rabbit_hide",
+    "count": 1
+  }
 }

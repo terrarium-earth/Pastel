@@ -1,7 +1,6 @@
 {
   "type": "spectrum:entry_link",
   "entry_to_open": "spectrum:general/shimmerstone",
-
   "name": "book.spectrum.guidebook.shimmerstone.name",
   "icon": {
     "item": "spectrum:shimmerstone_gem"

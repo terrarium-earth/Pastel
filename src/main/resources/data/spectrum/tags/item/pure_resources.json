@@ -12,7 +12,6 @@
     "spectrum:pure_netherite_scrap",
     "spectrum:pure_glowstone",
     "spectrum:pure_prismarine",
-
     {
       "id": "spectrum:pure_certus_quartz",
       "required": false
@@ -21,7 +20,6 @@
       "id": "spectrum:pure_fluix",
       "required": false
     },
-
     {
       "id": "spectrum:pure_globette",
       "required": false
@@ -34,7 +32,6 @@
       "id": "spectrum:pure_globette_end",
       "required": false
     },
-
     {
       "id": "spectrum:pure_zinc",
       "required": false

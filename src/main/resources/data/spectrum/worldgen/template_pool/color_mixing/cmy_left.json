@@ -28,7 +28,6 @@
         "processors": "minecraft:empty"
       }
     },
-
     {
       "weight": 1,
       "element": {

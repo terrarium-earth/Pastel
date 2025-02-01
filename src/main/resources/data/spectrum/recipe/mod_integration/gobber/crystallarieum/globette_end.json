@@ -4,24 +4,24 @@
     "item": "gobber2:gobber2_globette_end"
   },
   "growth_stage_states": [
-		{
-			"Name": "spectrum:small_globette_end_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:large_globette_end_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:globette_end_cluster",
-			"Properties": {
-				"facing": "up"
-			}
-		}
+    {
+      "Name": "spectrum:small_globette_end_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:large_globette_end_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:globette_end_cluster",
+      "Properties": {
+        "facing": "up"
+      }
+    }
   ],
   "seconds_per_growth_stage": 180,
   "ink_color": "spectrum:green",

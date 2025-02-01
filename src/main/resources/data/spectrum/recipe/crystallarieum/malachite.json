@@ -2,24 +2,24 @@
   "type": "spectrum:crystallarieum_growing",
   "ingredient": "spectrum:raw_malachite",
   "growth_stage_states": [
-		{
-			"Name": "spectrum:small_malachite_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:large_malachite_bud",
-			"Properties": {
-				"facing": "up"
-			}
-		},
-		{
-			"Name": "spectrum:malachite_cluster",
-			"Properties": {
-				"facing": "up"
-			}
-		}
+    {
+      "Name": "spectrum:small_malachite_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:large_malachite_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "spectrum:malachite_cluster",
+      "Properties": {
+        "facing": "up"
+      }
+    }
   ],
   "seconds_per_growth_stage": 300,
   "ink_color": "spectrum:white",

@@ -6,7 +6,7 @@
   },
   "icon": {
     "item": "spectrum:bitter_oils"
-  }
+  },
   "category": "spectrum:brewing",
   "hide_while_locked": true,
   "parents": [],
@@ -28,4 +28,3 @@
     }
   ]
 }
-  

@@ -15,9 +15,9 @@
   "result": "spectrum:midnight_aberration",
   "required_advancement": "spectrum:unlocks/blocks/midnight_aberration",
   "world_conditions": {
-		"time_of_day": "day",
-		"weather": "clear_sky"
-	},
+    "time_of_day": "day",
+    "weather": "clear_sky"
+  },
   "start_crafting_effect": "single_visual_explosion_on_shrine",
   "during_crafting_effects": [
     "nothing",

@@ -10,9 +10,9 @@
   "ingredient3": "#c:milk",
   "result": {
     "id": "spectrum:restoration_tea",
-		"components": {
-			"spectrum:with_milk": {}
-		},
+    "components": {
+      "spectrum:with_milk": {}
+    },
     "count": 1
   },
   "required_advancement": "spectrum:unlocks/food/restoration_tea"

@@ -157,7 +157,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "spectrum:enchanted_star_candy"
+          "items": [
+            "spectrum:enchanted_star_candy"
+          ]
         }
       }
     },

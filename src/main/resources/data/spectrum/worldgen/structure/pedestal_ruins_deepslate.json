@@ -17,8 +17,8 @@
   },
   "bury_depth": {
     "type": "minecraft:uniform",
-      "min_inclusive": 0,
-      "max_inclusive": 16
+    "min_inclusive": 0,
+    "max_inclusive": 16
   },
   "placement_check_width": 10,
   "placement_check_height": 16,

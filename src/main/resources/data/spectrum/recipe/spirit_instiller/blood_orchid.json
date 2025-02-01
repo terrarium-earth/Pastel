@@ -6,7 +6,7 @@
   "ingredient2": "spectrum:blood_orchid_petal",
   "center_ingredient": {
     "item": "spectrum:vegetal",
-	"count": 8
+    "count": 8
   },
   "result": "spectrum:blood_orchid",
   "required_advancement": "spectrum:unlocks/blocks/blood_orchid"

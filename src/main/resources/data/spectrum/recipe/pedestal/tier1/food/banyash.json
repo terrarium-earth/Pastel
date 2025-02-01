@@ -21,7 +21,6 @@
       "item": "spectrum:infused_beverage",
       "recipeViewNbt": "{Variant: \"rum\", Color: 10505507 }",
       "matchbook": {
-
         "mode": "AND",
         "matches": [
           {
@@ -30,7 +29,6 @@
             "target": "rum"
           }
         ]
-
       }
     },
     "B": "spectrum:prickly_bayleaf"

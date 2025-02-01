@@ -12,7 +12,7 @@
   ],
   "result": {
     "id": "hexcasting:charged_amethyst",
-	"count": 8
+    "count": 8
   },
   "required_advancement": "spectrum:midgame/collect_storm_stone",
   "start_crafting_effect": "single_visual_explosion_on_shrine",

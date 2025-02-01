@@ -31,8 +31,8 @@
   "result": "spectrum:soothing_bouquet",
   "required_advancement": "spectrum:unlocks/equipment/soothing_bouquet",
   "world_conditions": {
-		"time_of_day": "midnight"
-	},
+    "time_of_day": "midnight"
+  },
   "start_crafting_effect": "single_visual_explosion_on_shrine",
   "during_crafting_effects": [
     "nothing",

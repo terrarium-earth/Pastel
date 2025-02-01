@@ -19,7 +19,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:chests/sub_tables/onyx_tier_gems_and_buds"
+          "value": "spectrum:chests/sub_tables/onyx_tier_gems_and_buds"
         }
       ]
     },
@@ -29,7 +29,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:chests/sub_tables/onyx_tier_resources"
+          "value": "spectrum:chests/sub_tables/onyx_tier_resources"
         }
       ]
     }

@@ -21,7 +21,6 @@
       "item": "spectrum:infused_beverage",
       "recipeViewNbt": "{Variant: \"malt_beer\", Color: 8272724 }",
       "matchbook": {
-
         "mode": "AND",
         "matches": [
           {
@@ -30,7 +29,6 @@
             "target": "malt_beer"
           }
         ]
-
       }
     },
     "H": "minecraft:cooked_rabbit"

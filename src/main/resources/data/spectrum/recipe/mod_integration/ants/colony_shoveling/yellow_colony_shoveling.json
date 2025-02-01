@@ -2,9 +2,9 @@
   "type": "ants:colony_shoveling",
   "group": "spectrum_leaves_shoveling",
   "hive_ingredient": "spectrum:yellow_leaves",
-  "result" : {
+  "result": {
     "item": "minecraft:yellow_dye",
-	"count": 6
+    "count": 6
   },
   "fabric:load_conditions": [
     {

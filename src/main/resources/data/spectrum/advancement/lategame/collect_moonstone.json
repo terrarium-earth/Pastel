@@ -21,6 +21,7 @@
             "items": "#spectrum:moonstone_crystals"
           }
         ]
+      }
     },
     "gotten_previous": {
       "trigger": "revelationary:advancement_gotten",

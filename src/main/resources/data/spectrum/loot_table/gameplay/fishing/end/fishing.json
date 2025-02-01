@@ -6,13 +6,13 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/end/junk",
+          "value": "spectrum:gameplay/fishing/end/junk",
           "weight": 10,
           "quality": -2
         },
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:gameplay/fishing/end/treasure",
+          "value": "spectrum:gameplay/fishing/end/treasure",
           "weight": 5,
           "quality": 2,
           "conditions": [

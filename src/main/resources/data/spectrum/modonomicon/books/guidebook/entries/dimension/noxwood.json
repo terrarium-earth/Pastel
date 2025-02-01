@@ -134,13 +134,11 @@
       "text": "book.spectrum.guidebook.noxwood.page4.text"
     },
     {
-
       "type": "modonomicon:crafting_recipe",
       "recipe_id_1": "spectrum:crafting_table/noxwood/stripped_slate_noxcap_hyphae",
       "recipe_id_2": "spectrum:crafting_table/noxwood/stripped_ebony_noxcap_hyphae"
     },
     {
-
       "type": "modonomicon:crafting_recipe",
       "recipe_id_1": "spectrum:crafting_table/noxwood/stripped_ivory_noxcap_hyphae",
       "recipe_id_2": "spectrum:crafting_table/noxwood/stripped_chestnut_noxcap_hyphae"
