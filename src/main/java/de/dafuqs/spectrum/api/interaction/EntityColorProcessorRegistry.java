@@ -11,6 +11,7 @@ public class EntityColorProcessorRegistry {
 	
 	private static final Map<EntityType<?>, BiFunction<Entity, DyeColor, Boolean>> PROCESSOR = new HashMap<>();
 	
+	@SuppressWarnings("unchecked")
 	public static <E extends Entity> void register(EntityType<E> entityType, EntityColorProcessor<E> processor) {
 		BiFunction<Entity, DyeColor, Boolean> ttt = (entity, dyeColor) -> processor.colorEntity((E) entity, dyeColor);
 		PROCESSOR.put(entityType, ttt);

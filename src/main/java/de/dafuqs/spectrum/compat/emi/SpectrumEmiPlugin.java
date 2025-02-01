@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.function.*;
 
 public class SpectrumEmiPlugin implements EmiPlugin {
-
+	
 	@Override
 	public void register(EmiRegistry registry) {
 		registerCategories(registry);
@@ -31,25 +31,26 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 		registerRecipeHandlers(registry);
 		registerDragDropHandlers(registry);
 	}
-
+	
 	@SuppressWarnings("UnstableApiUsage")
-    public void registerDragDropHandlers(EmiRegistry registry) {
+	public void registerDragDropHandlers(EmiRegistry registry) {
 		// Registering here since this is a trivial solution.
 		var handlerOne = new EmiDragDropHandler.SlotBased<>((_ignored, slot) -> slot instanceof ShadowSlot && slot.inventory instanceof FilterConfigurable.FilterInventory,
 				(screen, slot, ingredient) -> {
 					if (ingredient instanceof ItemEmiStack stack)
-						((FilterConfigurable.FilterInventory)slot.inventory).getClicker().clickShadowSlot(screen.getScreenHandler().syncId, slot, stack.getItemStack());
+						((FilterConfigurable.FilterInventory) slot.inventory).getClicker().clickShadowSlot(screen.getScreenHandler().syncId, slot, stack.getItemStack());
 				});
-
+		
 		registerDragDropHandler(registry, BlackHoleChestScreen.class, handlerOne);
 		registerDragDropHandler(registry, FilteringScreen.class, handlerOne);
 	}
-
+	
 	// Type erasure BS
+	@SuppressWarnings("unchecked")
 	private void registerDragDropHandler(EmiRegistry registry, Class<? extends HandledScreen<?>> clazz, EmiDragDropHandler<HandledScreen<?>> handler) {
-		registry.addDragDropHandler((Class<HandledScreen<?>>)clazz, handler);
+		registry.addDragDropHandler((Class<HandledScreen<?>>) clazz, handler);
 	}
-
+	
 	public void registerCategories(EmiRegistry registry) {
 		registry.addCategory(SpectrumEmiRecipeCategories.PEDESTAL_CRAFTING);
 		registry.addCategory(SpectrumEmiRecipeCategories.ANVIL_CRUSHING);
@@ -115,14 +116,14 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 		registry.addWorkstation(SpectrumEmiRecipeCategories.TITRATION_BARREL, EmiStack.of(SpectrumBlocks.TITRATION_BARREL));
 		registry.addWorkstation(SpectrumEmiRecipeCategories.PRIMORDIAL_FIRE_BURNING, EmiIngredient.of(List.of(EmiStack.of(SpectrumItems.DOOMBLOOM_SEED), EmiStack.of(SpectrumItems.PRIMORDIAL_LIGHTER), EmiStack.of(SpectrumBlocks.INCANDESCENT_AMALGAM), EmiStack.of(SpectrumItems.PIPE_BOMB))));
 	}
-
+	
 	public void registerRecipes(EmiRegistry registry) {
 		// TODO: Register our recipes ourselves
 		// right now dev.emi.emi.VanillaPlugin handles them
 		// which does not process the unlock check
 		//addAll(registry, RecipeType.CRAFTING, ShapedGatedCraftingEMIRecipe::new);
 		//addAll(registry, RecipeType.CRAFTING, ShapelessGatedCraftingEMIRecipe::new);
-
+		
 		addAll(registry, SpectrumRecipeTypes.ANVIL_CRUSHING, AnvilCrushingEmiRecipeGated::new);
 		addAll(registry, SpectrumRecipeTypes.PEDESTAL, PedestalCraftingEmiRecipeGated::new);
 		addAll(registry, SpectrumRecipeTypes.FUSION_SHRINE, FusionShrineEmiRecipeGated::new);
@@ -179,20 +180,20 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 			registry.addRecipe(new BlockToBlockWithChanceEmiRecipe(SpectrumEmiRecipeCategories.NATURES_STAFF, id, in, out, SpectrumAdvancements.UNLOCK_NATURES_STAFF));
 		});
 	}
-
+	
 	public void registerRecipeHandlers(EmiRegistry registry) {
 		registry.addRecipeHandler(SpectrumScreenHandlerTypes.PEDESTAL, new PedestalRecipeHandler());
 		registry.addRecipeHandler(SpectrumScreenHandlerTypes.CRAFTING_TABLET, new CraftingTabletRecipeHandler());
 		registry.addRecipeHandler(SpectrumScreenHandlerTypes.CINDERHEARTH, new CinderhearthRecipeHandler());
 		registry.addRecipeHandler(SpectrumScreenHandlerTypes.POTION_WORKSHOP, new PotionWorkshopRecipeHandler());
 	}
-
+	
 	public static Identifier syntheticId(String type, Block block) {
 		Identifier blockId = Registries.BLOCK.getId(block);
 		// Note that all recipe ids here start with "spectrum:/" which is legal, but impossible to represent with real files
 		return Identifier.of("spectrum:/" + type + "/" + blockId.getNamespace() + "/" + blockId.getPath());
 	}
-
+	
 	public <C extends RecipeInput, T extends Recipe<C>> void addAll(EmiRegistry registry, RecipeType<T> type, Function<T, EmiRecipe> constructor) {
 		for (RecipeEntry<T> entry : registry.getRecipeManager().listAllOfType(type)) {
 			T recipe = entry.value();

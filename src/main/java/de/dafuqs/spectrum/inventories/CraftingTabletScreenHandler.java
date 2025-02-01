@@ -210,10 +210,11 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 	
 	@Override
 	public boolean matches(RecipeEntry recipe) {
-		if (recipe.value() instanceof PedestalRecipe pedestalRecipe) {
+		if (recipe.value() instanceof PedestalRecipe pedestalRecipe)
 			return pedestalRecipe.matches(this.craftingInventory.createPedestalRecipeInput(), this.world);
-		}
-		return recipe.value().matches(this.craftingInventory.createRecipeInput(), this.world);
+		if (recipe.value() instanceof CraftingRecipe craftingRecipe)
+			return craftingRecipe.matches(this.craftingInventory.createRecipeInput(), this.world);
+		return false;
 	}
 	
 	@Override
@@ -231,7 +232,7 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 					if (itemEntity != null) {
 						itemEntity.setDespawnImmediately();
 					}
-
+					
 					playerEntity.getWorld().playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((playerEntity.getRandom().nextFloat() - playerEntity.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);
 					playerEntity.currentScreenHandler.sendContentUpdates();
 				} else {

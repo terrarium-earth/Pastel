@@ -121,7 +121,7 @@ processResources {
 	inputs.property "version", project.version
 	inputs.property "minecraft_version", project.minecraft_version
 	inputs.property "loader_version", project.loader_version
-	filteringCharset "UTF-8"
+	filteringCharset = "UTF-8"
 
 	filesMatching("fabric.mod.json") {
 		expand "version": project.version,
@@ -161,7 +161,7 @@ publishing {
 	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
 		maven {
-			name "sapphoCompany"
+			name = "sapphoCompany"
 			url = "https://maven.is-immensely.gay/releases"
 			credentials {
 				username = "dafuqs"
