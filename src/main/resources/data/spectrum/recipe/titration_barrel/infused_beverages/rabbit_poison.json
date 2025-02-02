@@ -24,7 +24,7 @@
     "fluid": "spectrum:midnight_solution"
   },
   "tapping_item": "minecraft:glass_bottle",
-  "fermentation_data": {
+  "fermentation": {
     "fermentation_speed_mod": 1.0,
     "effects": [
       {

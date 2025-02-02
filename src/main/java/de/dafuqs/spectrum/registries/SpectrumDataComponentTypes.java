@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
 import com.mojang.serialization.*;
+import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.bottomless_bundle.*;
 import de.dafuqs.spectrum.components.*;
@@ -60,7 +61,7 @@ public class SpectrumDataComponentTypes {
 	
 	public static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
 		return DEFERRER.defer(builderOperator.apply(ComponentType.builder()).build(),
-				type -> Registry.register(Registries.DATA_COMPONENT_TYPE, id, type));
+				type -> Registry.register(Registries.DATA_COMPONENT_TYPE, SpectrumCommon.locate(id), type));
 	}
 	
 	public static void register() {

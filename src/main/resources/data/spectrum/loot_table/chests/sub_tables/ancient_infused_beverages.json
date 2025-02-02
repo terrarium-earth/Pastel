@@ -163,7 +163,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_data": {
+              "fermentation": {
                 "fermentation_speed_mod": 0.25,
                 "effects": [
                   {
@@ -213,7 +213,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_data": {
+              "fermentation": {
                 "fermentation_speed_mod": 0.5,
                 "effects": [
                   {
@@ -278,7 +278,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_data": {
+              "fermentation": {
                 "fermentation_speed_mod": 0.25,
                 "effects": [
                   {

@@ -25,7 +25,7 @@ public class FermentRandomlyLootFunction extends ConditionalLootFunction {
 	public static final MapCodec<FermentRandomlyLootFunction> CODEC = RecordCodecBuilder.mapCodec(i -> addConditionsField(i).and(i.group(
 			Codec.either(Identifier.CODEC, FermentationData.CODEC).fieldOf("fermentation").forGetter(c -> c.fermentation),
 			LootNumberProviderTypes.CODEC.fieldOf("days_fermented").forGetter(c -> c.daysFermented),
-			LootNumberProviderTypes.CODEC.fieldOf("days_fermented").forGetter(c -> c.thickness)
+			LootNumberProviderTypes.CODEC.fieldOf("thickness").forGetter(c -> c.thickness)
 	)).apply(i, FermentRandomlyLootFunction::new));
 	
 	private final Either<Identifier, FermentationData> fermentation;
@@ -71,7 +71,7 @@ public class FermentRandomlyLootFunction extends ConditionalLootFunction {
 			if (origin != null) {
 				BlockPos pos = BlockPos.ofFloored(origin);
 				Biome biome = context.getWorld().getBiome(pos).value();
-				float downfall = ((BiomeAccessor)(Object) biome).getWeather().downfall();
+				float downfall = ((BiomeAccessor) (Object) biome).getWeather().downfall();
 				return TitrationBarrelRecipe.getFermentedStack(fermentationData, this.thickness.nextInt(context), TimeHelper.secondsFromMinecraftDays(this.daysFermented.nextInt(context)), downfall, stack);
 			} else {
 				SpectrumCommon.logError("A 'spectrum:ferment_randomly' loot function does not have access to 'origin'.");
