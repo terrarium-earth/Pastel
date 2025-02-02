@@ -117,7 +117,8 @@
   "required_advancement": "spectrum:triggers/confirmed_drinking_age",
   "fabric:load_conditions": [
     {
-      "condition": "fabric:item_tags_populated",
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:item",
       "values": [
         "c:rice"
       ]

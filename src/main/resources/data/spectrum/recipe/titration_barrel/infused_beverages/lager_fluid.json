@@ -105,7 +105,8 @@
   "required_advancement": "spectrum:triggers/confirmed_drinking_age",
   "fabric:load_conditions": [
     {
-      "condition": "fabric:fluid_tags_populated",
+      "condition": "fabric:tags_populated",
+      "registry": "minecraft:fluid",
       "values": [
         "c:honey"
       ]
