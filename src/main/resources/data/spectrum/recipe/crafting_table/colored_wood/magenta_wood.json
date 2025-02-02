@@ -2,7 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "group": "bark",
   "key": {
-    "#": "spectrum:magenta_log"
+    "#": [
+      {
+        "item": "spectrum:magenta_log"
+      }
+    ]
   },
   "pattern": [
     "##",

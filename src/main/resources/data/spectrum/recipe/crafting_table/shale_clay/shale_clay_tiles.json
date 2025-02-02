@@ -5,7 +5,11 @@
     "WW"
   ],
   "key": {
-    "W": "spectrum:shale_clay_bricks"
+    "W": [
+      {
+        "item": "spectrum:shale_clay_bricks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:shale_clay_tiles",

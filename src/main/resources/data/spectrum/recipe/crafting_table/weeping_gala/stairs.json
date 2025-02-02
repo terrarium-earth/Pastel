@@ -7,7 +7,11 @@
     "###"
   ],
   "key": {
-    "#": "spectrum:weeping_gala_planks"
+    "#": [
+      {
+        "item": "spectrum:weeping_gala_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:weeping_gala_stairs",

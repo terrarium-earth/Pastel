@@ -7,7 +7,11 @@
     "##"
   ],
   "key": {
-    "#": "spectrum:chestnut_noxwood_planks"
+    "#": [
+      {
+        "item": "spectrum:chestnut_noxwood_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:chestnut_noxwood_door",

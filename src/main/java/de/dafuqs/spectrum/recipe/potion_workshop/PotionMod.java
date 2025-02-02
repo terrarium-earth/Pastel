@@ -12,22 +12,22 @@ import java.util.*;
 import java.util.stream.*;
 
 public record PotionMod(
-	int flatDurationBonusTicks,
-	float flatPotencyBonus,
-	float durationMultiplier,
-	float potencyMultiplier,
-	float flatPotencyBonusPositiveEffects,
-	float flatPotencyBonusNegativeEffects,
-	int flatDurationBonusPositiveEffects,
-	int flatDurationBonusNegativeEffects,
-	float additionalRandomPositiveEffectCount,
-	float additionalRandomNegativeEffectCount,
-	float chanceToAddLastEffect,
-	float lastEffectDurationMultiplier,
-	float lastEffectPotencyMultiplier,
-	float yield,
-	int additionalDrinkDurationTicks,
-	PotionFlags flags
+		int flatDurationBonusTicks,
+		float flatPotencyBonus,
+		float durationMultiplier,
+		float potencyMultiplier,
+		float flatPotencyBonusPositiveEffects,
+		float flatPotencyBonusNegativeEffects,
+		int flatDurationBonusPositiveEffects,
+		int flatDurationBonusNegativeEffects,
+		float additionalRandomPositiveEffectCount,
+		float additionalRandomNegativeEffectCount,
+		float chanceToAddLastEffect,
+		float lastEffectDurationMultiplier,
+		float lastEffectPotencyMultiplier,
+		float yield,
+		int additionalDrinkDurationTicks,
+		PotionFlags flags
 ) {
 	
 	public static final Codec<PotionMod> CODEC = RecordCodecBuilder.create(i -> i.group(
@@ -70,16 +70,16 @@ public record PotionMod(
 	);
 	
 	public record PotionFlags(
-		boolean makeSplashing,
-		boolean makeLingering,
-		boolean noParticles,
-		boolean unidentifiable,
-		boolean makeEffectsPositive,
-		boolean potentDecreasingEffect,
-		boolean negateDecreasingDuration,
-		boolean randomColor,
-		boolean incurable,
-		List<Pair<PotionRecipeEffect, Float>> additionalEffects
+			boolean makeSplashing,
+			boolean makeLingering,
+			boolean noParticles,
+			boolean unidentifiable,
+			boolean makeEffectsPositive,
+			boolean potentDecreasingEffect,
+			boolean negateDecreasingDuration,
+			boolean randomColor,
+			boolean incurable,
+			List<Pair<PotionRecipeEffect, Float>> additionalEffects
 	) {
 		private static final Codec<Pair<PotionRecipeEffect, Float>> ENTRY_CODEC = RecordCodecBuilder.create(i -> i.group(
 				PotionRecipeEffect.CODEC.forGetter(Pair::getLeft),
@@ -101,7 +101,7 @@ public record PotionMod(
 				Codec.BOOL.optionalFieldOf("negate_decreasing_duration", false).forGetter(PotionFlags::negateDecreasingDuration),
 				Codec.BOOL.optionalFieldOf("random_color", false).forGetter(PotionFlags::randomColor),
 				Codec.BOOL.optionalFieldOf("incurable", false).forGetter(PotionFlags::incurable),
-				ENTRY_CODEC.listOf().fieldOf("additional_effects").forGetter(PotionFlags::additionalEffects)
+				ENTRY_CODEC.listOf().optionalFieldOf("additional_effects", List.of()).forGetter(PotionFlags::additionalEffects)
 		).apply(i, PotionFlags::new));
 		
 		public static final PacketCodec<RegistryByteBuf, PotionFlags> PACKET_CODEC = PacketCodecHelper.tuple(
@@ -142,7 +142,8 @@ public record PotionMod(
 		public PotionFlags flags = new PotionFlags(
 				false, false, false, false, false,
 				false, false, false, false, List.of()
-		);;
+		);
+		;
 		
 		public Builder() {
 		}
@@ -194,22 +195,22 @@ public record PotionMod(
 		
 		public PotionMod build() {
 			return new PotionMod(
-				this.flatDurationBonusTicks,
-				this.flatPotencyBonus,
-				this.durationMultiplier,
-				this.potencyMultiplier,
-				this.flatPotencyBonusPositiveEffects,
-				this.flatPotencyBonusNegativeEffects,
-				this.flatDurationBonusPositiveEffects,
-				this.flatDurationBonusNegativeEffects,
-				this.additionalRandomPositiveEffectCount,
-				this.additionalRandomNegativeEffectCount,
-				this.chanceToAddLastEffect,
-				this.lastEffectDurationMultiplier,
-				this.lastEffectPotencyMultiplier,
-				this.yield,
-				this.additionalDrinkDurationTicks,
-				this.flags
+					this.flatDurationBonusTicks,
+					this.flatPotencyBonus,
+					this.durationMultiplier,
+					this.potencyMultiplier,
+					this.flatPotencyBonusPositiveEffects,
+					this.flatPotencyBonusNegativeEffects,
+					this.flatDurationBonusPositiveEffects,
+					this.flatDurationBonusNegativeEffects,
+					this.additionalRandomPositiveEffectCount,
+					this.additionalRandomNegativeEffectCount,
+					this.chanceToAddLastEffect,
+					this.lastEffectDurationMultiplier,
+					this.lastEffectPotencyMultiplier,
+					this.yield,
+					this.additionalDrinkDurationTicks,
+					this.flags
 			);
 		}
 		

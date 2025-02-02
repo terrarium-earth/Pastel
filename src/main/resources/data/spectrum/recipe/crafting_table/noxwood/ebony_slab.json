@@ -5,7 +5,11 @@
     "###"
   ],
   "key": {
-    "#": "spectrum:ebony_noxwood_planks"
+    "#": [
+      {
+        "item": "spectrum:ebony_noxwood_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:ebony_noxwood_slab",

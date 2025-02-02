@@ -2,7 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "group": "bark",
   "key": {
-    "#": "spectrum:light_gray_log"
+    "#": [
+      {
+        "item": "spectrum:light_gray_log"
+      }
+    ]
   },
   "pattern": [
     "##",

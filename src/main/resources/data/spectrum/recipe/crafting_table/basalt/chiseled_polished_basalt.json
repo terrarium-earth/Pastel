@@ -6,7 +6,11 @@
     " # "
   ],
   "key": {
-    "#": "spectrum:polished_basalt"
+    "#": [
+      {
+        "item": "spectrum:polished_basalt"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:chiseled_polished_basalt",

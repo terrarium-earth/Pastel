@@ -4,7 +4,11 @@
     "XXX"
   ],
   "key": {
-    "X": "spectrum:planed_basalt"
+    "X": [
+      {
+        "item": "spectrum:planed_basalt"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:planed_basalt_slab",

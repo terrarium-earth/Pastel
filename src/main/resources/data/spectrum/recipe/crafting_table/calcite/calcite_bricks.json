@@ -5,7 +5,11 @@
     "WW"
   ],
   "key": {
-    "W": "spectrum:polished_calcite"
+    "W": [
+      {
+        "item": "spectrum:polished_calcite"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:calcite_bricks",

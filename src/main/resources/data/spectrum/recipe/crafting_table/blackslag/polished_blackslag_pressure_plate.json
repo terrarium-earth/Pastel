@@ -4,7 +4,11 @@
     "##"
   ],
   "key": {
-    "#": "spectrum:polished_blackslag"
+    "#": [
+      {
+        "item": "spectrum:polished_blackslag"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:polished_blackslag_pressure_plate"

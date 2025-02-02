@@ -6,7 +6,11 @@
     "###"
   ],
   "key": {
-    "#": "spectrum:ivory_noxwood_planks"
+    "#": [
+      {
+        "item": "spectrum:ivory_noxwood_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:ivory_noxwood_trapdoor",

@@ -6,7 +6,11 @@
     "XXX"
   ],
   "key": {
-    "X": "spectrum:polished_basalt"
+    "X": [
+      {
+        "item": "spectrum:polished_basalt"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:planed_basalt",

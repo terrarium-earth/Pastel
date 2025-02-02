@@ -5,7 +5,11 @@
     "WW"
   ],
   "key": {
-    "W": "spectrum:blackslag_bricks"
+    "W": [
+      {
+        "item": "spectrum:blackslag_bricks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:blackslag_tiles",

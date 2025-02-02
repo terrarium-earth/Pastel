@@ -6,7 +6,11 @@
     "WWW"
   ],
   "key": {
-    "W": "spectrum:blackslag_tiles"
+    "W": [
+      {
+        "item": "spectrum:blackslag_tiles"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:blackslag_tile_stairs",

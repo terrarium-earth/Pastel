@@ -5,7 +5,11 @@
     "###"
   ],
   "key": {
-    "#": "spectrum:yellow_planks"
+    "#": [
+      {
+        "item": "spectrum:yellow_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:yellow_slab",

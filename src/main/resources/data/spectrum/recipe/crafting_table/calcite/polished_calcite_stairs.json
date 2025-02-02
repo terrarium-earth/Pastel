@@ -6,7 +6,11 @@
     "WWW"
   ],
   "key": {
-    "W": "spectrum:polished_calcite"
+    "W": [
+      {
+        "item": "spectrum:polished_calcite"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:polished_calcite_stairs",

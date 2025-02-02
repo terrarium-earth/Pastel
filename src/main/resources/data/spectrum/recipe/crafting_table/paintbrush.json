@@ -6,9 +6,21 @@
     "E  "
   ],
   "key": {
-    "E": "minecraft:stick",
-    "F": "minecraft:copper_ingot",
-    "R": "#minecraft:wool"
+    "E": [
+      {
+        "item": "minecraft:stick"
+      }
+    ],
+    "F": [
+      {
+        "item": "minecraft:copper_ingot"
+      }
+    ],
+    "R": [
+      {
+        "tag": "minecraft:wool"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:paintbrush",

@@ -5,7 +5,11 @@
     "WW"
   ],
   "key": {
-    "W": "spectrum:ash_flakes"
+    "W": [
+      {
+        "item": "spectrum:ash_flakes"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:ash"

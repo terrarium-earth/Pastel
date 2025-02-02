@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "group": "redstone",
-  "ingredient": "spectrum:blackslag_redstone_ore",
+  "ingredient": [{"item": "spectrum:blackslag_redstone_ore"}],
   "result": {
     "id": "minecraft:redstone"
   },

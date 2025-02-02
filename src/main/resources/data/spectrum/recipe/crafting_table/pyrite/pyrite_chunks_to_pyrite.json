@@ -5,7 +5,11 @@
     "XX"
   ],
   "key": {
-    "X": "spectrum:pyrite_chunk"
+    "X": [
+      {
+        "item": "spectrum:pyrite_chunk"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:pyrite"

@@ -5,7 +5,11 @@
     "#"
   ],
   "key": {
-    "#": "spectrum:polished_basalt"
+    "#": [
+      {
+        "item": "spectrum:polished_basalt"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:polished_basalt_pillar",

@@ -6,7 +6,11 @@
     "WWW"
   ],
   "key": {
-    "W": "spectrum:basalt_bricks"
+    "W": [
+      {
+        "item": "spectrum:basalt_bricks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:basalt_brick_stairs",

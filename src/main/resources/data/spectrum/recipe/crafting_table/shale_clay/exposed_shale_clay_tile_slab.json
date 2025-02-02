@@ -4,7 +4,11 @@
     "WWW"
   ],
   "key": {
-    "W": "spectrum:exposed_shale_clay_tiles"
+    "W": [
+      {
+        "item": "spectrum:exposed_shale_clay_tiles"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:exposed_shale_clay_tile_slab",

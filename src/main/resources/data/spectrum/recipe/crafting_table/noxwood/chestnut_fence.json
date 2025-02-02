@@ -6,8 +6,16 @@
     "W#W"
   ],
   "key": {
-    "#": "minecraft:stick",
-    "W": "spectrum:chestnut_noxwood_planks"
+    "#": [
+      {
+        "item": "minecraft:stick"
+      }
+    ],
+    "W": [
+      {
+        "item": "spectrum:chestnut_noxwood_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:chestnut_noxwood_fence",

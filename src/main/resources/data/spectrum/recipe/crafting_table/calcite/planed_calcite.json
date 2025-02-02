@@ -6,7 +6,11 @@
     "XXX"
   ],
   "key": {
-    "X": "spectrum:polished_calcite"
+    "X": [
+      {
+        "item": "spectrum:polished_calcite"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:planed_calcite",

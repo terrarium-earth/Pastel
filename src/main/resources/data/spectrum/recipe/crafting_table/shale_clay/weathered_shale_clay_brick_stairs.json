@@ -6,7 +6,11 @@
     "WWW"
   ],
   "key": {
-    "W": "spectrum:weathered_shale_clay_bricks"
+    "W": [
+      {
+        "item": "spectrum:weathered_shale_clay_bricks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:weathered_shale_clay_brick_stairs",

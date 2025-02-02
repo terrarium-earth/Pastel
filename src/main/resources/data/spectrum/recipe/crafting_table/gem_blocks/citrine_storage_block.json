@@ -6,7 +6,11 @@
     "GGG"
   ],
   "key": {
-    "G": "spectrum:citrine_shard"
+    "G": [
+      {
+        "item": "spectrum:citrine_shard"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:citrine_storage_block",

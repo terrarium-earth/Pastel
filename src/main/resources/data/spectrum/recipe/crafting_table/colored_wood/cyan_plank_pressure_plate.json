@@ -5,7 +5,11 @@
     "##"
   ],
   "key": {
-    "#": "spectrum:cyan_planks"
+    "#": [
+      {
+        "item": "spectrum:cyan_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:cyan_pressure_plate"

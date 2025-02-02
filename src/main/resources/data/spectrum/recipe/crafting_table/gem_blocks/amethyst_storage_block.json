@@ -6,7 +6,11 @@
     "GGG"
   ],
   "key": {
-    "G": "minecraft:amethyst_shard"
+    "G": [
+      {
+        "item": "minecraft:amethyst_shard"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:amethyst_storage_block",

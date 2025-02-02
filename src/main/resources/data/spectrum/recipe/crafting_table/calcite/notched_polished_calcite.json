@@ -6,7 +6,11 @@
     " # "
   ],
   "key": {
-    "#": "spectrum:polished_calcite"
+    "#": [
+      {
+        "item": "spectrum:polished_calcite"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:notched_polished_calcite",

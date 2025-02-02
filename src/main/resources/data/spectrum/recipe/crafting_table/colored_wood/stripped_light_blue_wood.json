@@ -2,7 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "group": "bark",
   "key": {
-    "#": "spectrum:stripped_light_blue_log"
+    "#": [
+      {
+        "item": "spectrum:stripped_light_blue_log"
+      }
+    ]
   },
   "pattern": [
     "##",

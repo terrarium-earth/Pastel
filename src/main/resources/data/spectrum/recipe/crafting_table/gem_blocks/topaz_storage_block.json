@@ -6,7 +6,11 @@
     "GGG"
   ],
   "key": {
-    "G": "spectrum:topaz_shard"
+    "G": [
+      {
+        "item": "spectrum:topaz_shard"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:topaz_storage_block",

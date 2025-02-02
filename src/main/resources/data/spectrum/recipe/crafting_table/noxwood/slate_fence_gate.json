@@ -6,8 +6,16 @@
     "#W#"
   ],
   "key": {
-    "#": "minecraft:stick",
-    "W": "spectrum:slate_noxwood_planks"
+    "#": [
+      {
+        "item": "minecraft:stick"
+      }
+    ],
+    "W": [
+      {
+        "item": "spectrum:slate_noxwood_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:slate_noxwood_fence_gate"

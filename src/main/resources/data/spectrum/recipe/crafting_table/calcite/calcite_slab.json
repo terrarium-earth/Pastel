@@ -4,7 +4,11 @@
     "WWW"
   ],
   "key": {
-    "W": "minecraft:calcite"
+    "W": [
+      {
+        "item": "minecraft:calcite"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:calcite_slab",

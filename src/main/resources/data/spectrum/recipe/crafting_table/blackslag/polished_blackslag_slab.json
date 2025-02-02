@@ -4,7 +4,11 @@
     "WWW"
   ],
   "key": {
-    "W": "spectrum:polished_blackslag"
+    "W": [
+      {
+        "item": "spectrum:polished_blackslag"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:polished_blackslag_slab",

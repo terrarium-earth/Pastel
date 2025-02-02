@@ -6,7 +6,11 @@
     "GGG"
   ],
   "key": {
-    "G": "spectrum:moonstone_shard"
+    "G": [
+      {
+        "item": "spectrum:moonstone_shard"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:moonstone_storage_block",

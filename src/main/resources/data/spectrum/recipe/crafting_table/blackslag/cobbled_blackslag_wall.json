@@ -5,7 +5,11 @@
     "WWW"
   ],
   "key": {
-    "W": "spectrum:cobbled_blackslag"
+    "W": [
+      {
+        "item": "spectrum:cobbled_blackslag"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:cobbled_blackslag_wall",

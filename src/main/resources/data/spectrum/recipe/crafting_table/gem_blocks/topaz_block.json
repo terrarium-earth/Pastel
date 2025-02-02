@@ -5,7 +5,11 @@
     "WW"
   ],
   "key": {
-    "W": "spectrum:topaz_shard"
+    "W": [
+      {
+        "item": "spectrum:topaz_shard"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:topaz_block",

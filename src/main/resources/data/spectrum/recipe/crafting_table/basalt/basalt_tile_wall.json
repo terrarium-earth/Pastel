@@ -5,7 +5,11 @@
     "WWW"
   ],
   "key": {
-    "W": "spectrum:basalt_tiles"
+    "W": [
+      {
+        "item": "spectrum:basalt_tiles"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:basalt_tile_wall",

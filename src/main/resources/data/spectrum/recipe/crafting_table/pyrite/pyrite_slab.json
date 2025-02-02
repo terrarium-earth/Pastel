@@ -4,7 +4,11 @@
     "XXX"
   ],
   "key": {
-    "X": "spectrum:pyrite"
+    "X": [
+      {
+        "item": "spectrum:pyrite"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:pyrite_slab",

@@ -5,7 +5,11 @@
     "WWW"
   ],
   "key": {
-    "W": "minecraft:smooth_basalt"
+    "W": [
+      {
+        "item": "minecraft:smooth_basalt"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:smooth_basalt_wall",

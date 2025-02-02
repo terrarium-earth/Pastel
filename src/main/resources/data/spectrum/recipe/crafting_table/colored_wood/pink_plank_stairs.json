@@ -7,7 +7,11 @@
     "###"
   ],
   "key": {
-    "#": "spectrum:pink_planks"
+    "#": [
+      {
+        "item": "spectrum:pink_planks"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:pink_stairs",

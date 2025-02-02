@@ -5,7 +5,11 @@
     "WW"
   ],
   "key": {
-    "W": "spectrum:citrine_shard"
+    "W": [
+      {
+        "item": "spectrum:citrine_shard"
+      }
+    ]
   },
   "result": {
     "id": "spectrum:citrine_block",
