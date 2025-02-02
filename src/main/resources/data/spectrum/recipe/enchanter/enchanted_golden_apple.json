@@ -3,15 +3,33 @@
   "time": 600,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:apple",
-    "spectrum:shimmerstone_block",
-    "spectrum:shimmerstone_block",
-    "spectrum:pure_gold_block",
-    "spectrum:pure_gold_block",
-    "spectrum:shimmerstone_block",
-    "spectrum:shimmerstone_block",
-    "spectrum:pure_gold_block",
-    "spectrum:pure_gold_block"
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "spectrum:shimmerstone_block"
+    },
+    {
+      "item": "spectrum:shimmerstone_block"
+    },
+    {
+      "item": "spectrum:pure_gold_block"
+    },
+    {
+      "item": "spectrum:pure_gold_block"
+    },
+    {
+      "item": "spectrum:shimmerstone_block"
+    },
+    {
+      "item": "spectrum:shimmerstone_block"
+    },
+    {
+      "item": "spectrum:pure_gold_block"
+    },
+    {
+      "item": "spectrum:pure_gold_block"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_golden_apple"

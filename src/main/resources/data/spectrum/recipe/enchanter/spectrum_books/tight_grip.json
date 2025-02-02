@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:yellow_pigment",
-    "spectrum:yellow_pigment",
-    "minecraft:string",
-    "spectrum:neolith",
-    "spectrum:yellow_pigment",
-    "spectrum:yellow_pigment",
-    "minecraft:string",
-    "spectrum:neolith"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:yellow_pigment"
+    },
+    {
+      "item": "spectrum:yellow_pigment"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "spectrum:neolith"
+    },
+    {
+      "item": "spectrum:yellow_pigment"
+    },
+    {
+      "item": "spectrum:yellow_pigment"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "spectrum:neolith"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

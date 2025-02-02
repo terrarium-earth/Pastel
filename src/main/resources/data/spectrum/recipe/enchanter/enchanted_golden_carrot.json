@@ -3,15 +3,33 @@
   "time": 600,
   "required_experience": 50,
   "ingredients": [
-    "minecraft:carrot",
-    "spectrum:shimmerstone_gem",
-    "spectrum:shimmerstone_gem",
-    "spectrum:pure_gold",
-    "spectrum:pure_gold",
-    "spectrum:shimmerstone_gem",
-    "spectrum:shimmerstone_gem",
-    "spectrum:pure_gold",
-    "spectrum:pure_gold"
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "spectrum:shimmerstone_gem"
+    },
+    {
+      "item": "spectrum:shimmerstone_gem"
+    },
+    {
+      "item": "spectrum:pure_gold"
+    },
+    {
+      "item": "spectrum:pure_gold"
+    },
+    {
+      "item": "spectrum:shimmerstone_gem"
+    },
+    {
+      "item": "spectrum:shimmerstone_gem"
+    },
+    {
+      "item": "spectrum:pure_gold"
+    },
+    {
+      "item": "spectrum:pure_gold"
+    }
   ],
   "result": {
     "id": "spectrum:enchanted_golden_carrot"

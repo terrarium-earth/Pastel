@@ -3,15 +3,33 @@
   "time": 1000,
   "required_experience": 1000,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:blue_pigment",
-    "spectrum:blue_pigment",
-    "spectrum:downstone_fragments",
-    "spectrum:pure_netherite_scrap",
-    "spectrum:blue_pigment",
-    "spectrum:blue_pigment",
-    "spectrum:downstone_fragments",
-    "spectrum:pure_netherite_scrap"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:downstone_fragments"
+    },
+    {
+      "item": "spectrum:pure_netherite_scrap"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:downstone_fragments"
+    },
+    {
+      "item": "spectrum:pure_netherite_scrap"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

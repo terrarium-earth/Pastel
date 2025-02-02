@@ -3,15 +3,33 @@
   "time": 500,
   "required_experience": 200,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:black_pigment",
-    "spectrum:black_pigment",
-    "malum:mnemonic_fragment",
-    "spectrum:neolith",
-    "spectrum:black_pigment",
-    "spectrum:black_pigment",
-    "malum:mnemonic_fragment",
-    "spectrum:neolith"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "malum:mnemonic_fragment"
+    },
+    {
+      "item": "spectrum:neolith"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "malum:mnemonic_fragment"
+    },
+    {
+      "item": "spectrum:neolith"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

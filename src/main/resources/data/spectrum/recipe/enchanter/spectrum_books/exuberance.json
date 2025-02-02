@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:purple_pigment",
-    "spectrum:purple_pigment",
-    "minecraft:experience_bottle",
-    "spectrum:refined_azurite",
-    "spectrum:purple_pigment",
-    "spectrum:purple_pigment",
-    "minecraft:experience_bottle",
-    "spectrum:refined_azurite"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:purple_pigment"
+    },
+    {
+      "item": "spectrum:purple_pigment"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "spectrum:refined_azurite"
+    },
+    {
+      "item": "spectrum:purple_pigment"
+    },
+    {
+      "item": "spectrum:purple_pigment"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "spectrum:refined_azurite"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:brown_pigment",
-    "spectrum:brown_pigment",
-    "minecraft:sugar",
-    "spectrum:neolith",
-    "spectrum:brown_pigment",
-    "spectrum:brown_pigment",
-    "minecraft:sugar",
-    "spectrum:neolith"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:brown_pigment"
+    },
+    {
+      "item": "spectrum:brown_pigment"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "spectrum:neolith"
+    },
+    {
+      "item": "spectrum:brown_pigment"
+    },
+    {
+      "item": "spectrum:brown_pigment"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "spectrum:neolith"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

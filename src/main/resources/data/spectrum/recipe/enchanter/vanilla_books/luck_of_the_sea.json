@@ -4,15 +4,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:light_blue_pigment",
-    "spectrum:light_blue_pigment",
-    "spectrum:four_leaf_clover",
-    "spectrum:mermaids_gem",
-    "spectrum:light_blue_pigment",
-    "spectrum:light_blue_pigment",
-    "spectrum:four_leaf_clover",
-    "spectrum:mermaids_gem"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:four_leaf_clover"
+    },
+    {
+      "item": "spectrum:mermaids_gem"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:four_leaf_clover"
+    },
+    {
+      "item": "spectrum:mermaids_gem"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

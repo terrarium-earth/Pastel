@@ -3,15 +3,33 @@
   "time": 500,
   "required_experience": 200,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:purple_pigment",
-    "spectrum:purple_pigment",
-    "malum:malignant_lead",
-    "spectrum:storm_stone",
-    "spectrum:purple_pigment",
-    "spectrum:purple_pigment",
-    "malum:malignant_lead",
-    "spectrum:storm_stone"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:purple_pigment"
+    },
+    {
+      "item": "spectrum:purple_pigment"
+    },
+    {
+      "item": "malum:malignant_lead"
+    },
+    {
+      "item": "spectrum:storm_stone"
+    },
+    {
+      "item": "spectrum:purple_pigment"
+    },
+    {
+      "item": "spectrum:purple_pigment"
+    },
+    {
+      "item": "malum:malignant_lead"
+    },
+    {
+      "item": "spectrum:storm_stone"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

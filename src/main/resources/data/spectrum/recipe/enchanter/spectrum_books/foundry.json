@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:orange_pigment",
-    "spectrum:orange_pigment",
-    "minecraft:lava_bucket",
-    "spectrum:stratine_gem",
-    "spectrum:orange_pigment",
-    "spectrum:orange_pigment",
-    "minecraft:lava_bucket",
-    "spectrum:stratine_gem"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:orange_pigment"
+    },
+    {
+      "item": "spectrum:orange_pigment"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "spectrum:stratine_gem"
+    },
+    {
+      "item": "spectrum:orange_pigment"
+    },
+    {
+      "item": "spectrum:orange_pigment"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "spectrum:stratine_gem"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

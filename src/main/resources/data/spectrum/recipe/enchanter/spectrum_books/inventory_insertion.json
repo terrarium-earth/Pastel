@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:blue_pigment",
-    "spectrum:blue_pigment",
-    "minecraft:ender_pearl",
-    "minecraft:glowstone_dust",
-    "spectrum:blue_pigment",
-    "spectrum:blue_pigment",
-    "minecraft:ender_pearl",
-    "minecraft:glowstone_dust"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

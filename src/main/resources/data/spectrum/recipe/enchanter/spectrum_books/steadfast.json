@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:blue_pigment",
-    "spectrum:blue_pigment",
-    "spectrum:moonstruck_nectar",
-    "spectrum:shimmerstone_gem",
-    "spectrum:blue_pigment",
-    "spectrum:blue_pigment",
-    "spectrum:moonstruck_nectar",
-    "spectrum:shimmerstone_gem"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:moonstruck_nectar"
+    },
+    {
+      "item": "spectrum:shimmerstone_gem"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "spectrum:moonstruck_nectar"
+    },
+    {
+      "item": "spectrum:shimmerstone_gem"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

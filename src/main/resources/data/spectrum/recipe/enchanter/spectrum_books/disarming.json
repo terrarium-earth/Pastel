@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:red_pigment",
-    "spectrum:red_pigment",
-    "spectrum:storm_stone",
-    "spectrum:stratine_fragments",
-    "spectrum:red_pigment",
-    "spectrum:red_pigment",
-    "spectrum:storm_stone",
-    "spectrum:stratine_fragments"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:storm_stone"
+    },
+    {
+      "item": "spectrum:stratine_fragments"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:storm_stone"
+    },
+    {
+      "item": "spectrum:stratine_fragments"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

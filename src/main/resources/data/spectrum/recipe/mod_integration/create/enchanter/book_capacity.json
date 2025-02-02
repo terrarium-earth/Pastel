@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:cyan_pigment",
-    "spectrum:cyan_pigment",
-    "create:precision_mechanism",
-    "minecraft:rabbit_hide",
-    "spectrum:cyan_pigment",
-    "spectrum:cyan_pigment",
-    "create:precision_mechanism",
-    "minecraft:rabbit_hide"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:cyan_pigment"
+    },
+    {
+      "item": "spectrum:cyan_pigment"
+    },
+    {
+      "item": "create:precision_mechanism"
+    },
+    {
+      "item": "minecraft:rabbit_hide"
+    },
+    {
+      "item": "spectrum:cyan_pigment"
+    },
+    {
+      "item": "spectrum:cyan_pigment"
+    },
+    {
+      "item": "create:precision_mechanism"
+    },
+    {
+      "item": "minecraft:rabbit_hide"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

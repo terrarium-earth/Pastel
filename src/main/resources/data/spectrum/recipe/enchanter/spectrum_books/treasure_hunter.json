@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:light_blue_pigment",
-    "spectrum:light_blue_pigment",
-    "spectrum:storm_stone",
-    "minecraft:flint",
-    "spectrum:light_blue_pigment",
-    "spectrum:light_blue_pigment",
-    "spectrum:storm_stone",
-    "minecraft:flint"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:storm_stone"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:storm_stone"
+    },
+    {
+      "item": "minecraft:flint"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

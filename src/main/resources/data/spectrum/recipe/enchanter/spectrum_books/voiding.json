@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:black_pigment",
-    "spectrum:black_pigment",
-    "minecraft:chorus_flower",
-    "minecraft:ender_pearl",
-    "spectrum:black_pigment",
-    "spectrum:black_pigment",
-    "minecraft:chorus_flower",
-    "minecraft:ender_pearl"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:red_pigment",
-    "spectrum:blue_pigment",
-    "minecraft:chain",
-    "spectrum:stratine_gem",
-    "spectrum:red_pigment",
-    "spectrum:blue_pigment",
-    "minecraft:chain",
-    "spectrum:stratine_gem"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "spectrum:stratine_gem"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:blue_pigment"
+    },
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "spectrum:stratine_gem"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

@@ -4,15 +4,33 @@
   "time": 600,
   "required_experience": 250,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:gray_pigment",
-    "spectrum:gray_pigment",
-    "minecraft:coal",
-    "spectrum:stratine_fragments",
-    "spectrum:gray_pigment",
-    "spectrum:gray_pigment",
-    "minecraft:coal",
-    "spectrum:stratine_fragments"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:gray_pigment"
+    },
+    {
+      "item": "spectrum:gray_pigment"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "spectrum:stratine_fragments"
+    },
+    {
+      "item": "spectrum:gray_pigment"
+    },
+    {
+      "item": "spectrum:gray_pigment"
+    },
+    {
+      "item": "minecraft:coal"
+    },
+    {
+      "item": "spectrum:stratine_fragments"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

@@ -4,15 +4,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:pink_pigment",
-    "spectrum:pink_pigment",
-    "minecraft:gunpowder",
-    "spectrum:bedrock_dust",
-    "spectrum:pink_pigment",
-    "spectrum:pink_pigment",
-    "minecraft:gunpowder",
-    "spectrum:bedrock_dust"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:pink_pigment"
+    },
+    {
+      "item": "spectrum:pink_pigment"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "spectrum:bedrock_dust"
+    },
+    {
+      "item": "spectrum:pink_pigment"
+    },
+    {
+      "item": "spectrum:pink_pigment"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "spectrum:bedrock_dust"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

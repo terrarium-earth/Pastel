@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:red_pigment",
-    "spectrum:red_pigment",
-    "spectrum:stardust",
-    "minecraft:flint",
-    "spectrum:red_pigment",
-    "spectrum:red_pigment",
-    "spectrum:stardust",
-    "minecraft:flint"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:stardust"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:stardust"
+    },
+    {
+      "item": "minecraft:flint"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

@@ -4,15 +4,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:light_blue_pigment",
-    "spectrum:light_blue_pigment",
-    "minecraft:sculk",
-    "spectrum:neolith",
-    "spectrum:light_blue_pigment",
-    "spectrum:light_blue_pigment",
-    "minecraft:sculk",
-    "spectrum:neolith"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "spectrum:neolith"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "spectrum:light_blue_pigment"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "spectrum:neolith"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

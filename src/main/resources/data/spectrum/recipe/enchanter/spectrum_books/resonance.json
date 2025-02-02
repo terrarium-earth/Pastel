@@ -3,15 +3,33 @@
   "time": 400,
   "required_experience": 800,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:white_pigment",
-    "spectrum:white_pigment",
-    "spectrum:paltaeria_gem",
-    "spectrum:resonance_shard",
-    "spectrum:white_pigment",
-    "spectrum:white_pigment",
-    "spectrum:paltaeria_gem",
-    "spectrum:resonance_shard"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:white_pigment"
+    },
+    {
+      "item": "spectrum:white_pigment"
+    },
+    {
+      "item": "spectrum:paltaeria_gem"
+    },
+    {
+      "item": "spectrum:resonance_shard"
+    },
+    {
+      "item": "spectrum:white_pigment"
+    },
+    {
+      "item": "spectrum:white_pigment"
+    },
+    {
+      "item": "spectrum:paltaeria_gem"
+    },
+    {
+      "item": "spectrum:resonance_shard"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

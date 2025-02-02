@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:black_pigment",
-    "spectrum:black_pigment",
-    "minecraft:iron_ingot",
-    "minecraft:flint",
-    "spectrum:black_pigment",
-    "spectrum:black_pigment",
-    "minecraft:iron_ingot",
-    "minecraft:flint"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "spectrum:black_pigment"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:flint"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

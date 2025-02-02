@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:white_pigment",
-    "spectrum:white_pigment",
-    "spectrum:refined_bloodstone",
-    "spectrum:pure_copper",
-    "spectrum:white_pigment",
-    "spectrum:white_pigment",
-    "spectrum:refined_bloodstone",
-    "spectrum:pure_copper"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:white_pigment"
+    },
+    {
+      "item": "spectrum:white_pigment"
+    },
+    {
+      "item": "spectrum:refined_bloodstone"
+    },
+    {
+      "item": "spectrum:pure_copper"
+    },
+    {
+      "item": "spectrum:white_pigment"
+    },
+    {
+      "item": "spectrum:white_pigment"
+    },
+    {
+      "item": "spectrum:refined_bloodstone"
+    },
+    {
+      "item": "spectrum:pure_copper"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

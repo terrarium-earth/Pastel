@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:green_pigment",
-    "spectrum:green_pigment",
-    "malum:cursed_sapball",
-    "minecraft:iron_ingot",
-    "spectrum:green_pigment",
-    "spectrum:green_pigment",
-    "malum:cursed_sapball",
-    "minecraft:iron_ingot"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:green_pigment"
+    },
+    {
+      "item": "spectrum:green_pigment"
+    },
+    {
+      "item": "malum:cursed_sapball"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "spectrum:green_pigment"
+    },
+    {
+      "item": "spectrum:green_pigment"
+    },
+    {
+      "item": "malum:cursed_sapball"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

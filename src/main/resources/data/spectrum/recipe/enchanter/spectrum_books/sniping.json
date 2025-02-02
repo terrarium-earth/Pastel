@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:green_pigment",
-    "spectrum:green_pigment",
-    "minecraft:redstone",
-    "minecraft:diamond",
-    "spectrum:green_pigment",
-    "spectrum:green_pigment",
-    "minecraft:redstone",
-    "minecraft:diamond"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:green_pigment"
+    },
+    {
+      "item": "spectrum:green_pigment"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "spectrum:green_pigment"
+    },
+    {
+      "item": "spectrum:green_pigment"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

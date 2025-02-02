@@ -3,15 +3,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:gray_pigment",
-    "spectrum:gray_pigment",
-    "spectrum:bottle_of_ruin",
-    "spectrum:dragonbone_chunk",
-    "spectrum:gray_pigment",
-    "spectrum:gray_pigment",
-    "spectrum:bottle_of_ruin",
-    "spectrum:dragonbone_chunk"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:gray_pigment"
+    },
+    {
+      "item": "spectrum:gray_pigment"
+    },
+    {
+      "item": "spectrum:bottle_of_ruin"
+    },
+    {
+      "item": "spectrum:dragonbone_chunk"
+    },
+    {
+      "item": "spectrum:gray_pigment"
+    },
+    {
+      "item": "spectrum:gray_pigment"
+    },
+    {
+      "item": "spectrum:bottle_of_ruin"
+    },
+    {
+      "item": "spectrum:dragonbone_chunk"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

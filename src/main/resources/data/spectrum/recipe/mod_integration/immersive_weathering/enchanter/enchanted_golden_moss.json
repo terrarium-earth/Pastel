@@ -6,14 +6,30 @@
     {
       "item": "immersive_weathering:moss_clump"
     },
-    "spectrum:shimmerstone_block",
-    "spectrum:shimmerstone_block",
-    "spectrum:pure_gold_block",
-    "spectrum:pure_gold_block",
-    "spectrum:shimmerstone_block",
-    "spectrum:shimmerstone_block",
-    "spectrum:pure_gold_block",
-    "spectrum:pure_gold_block"
+    {
+      "item": "spectrum:shimmerstone_block"
+    },
+    {
+      "item": "spectrum:shimmerstone_block"
+    },
+    {
+      "item": "spectrum:pure_gold_block"
+    },
+    {
+      "item": "spectrum:pure_gold_block"
+    },
+    {
+      "item": "spectrum:shimmerstone_block"
+    },
+    {
+      "item": "spectrum:shimmerstone_block"
+    },
+    {
+      "item": "spectrum:pure_gold_block"
+    },
+    {
+      "item": "spectrum:pure_gold_block"
+    }
   ],
   "result": {
     "id": "immersive_weathering:enchanted_golden_moss_clump"

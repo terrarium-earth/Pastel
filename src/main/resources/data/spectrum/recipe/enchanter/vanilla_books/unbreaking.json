@@ -4,15 +4,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:cyan_pigment",
-    "spectrum:cyan_pigment",
-    "minecraft:iron_ingot",
-    "spectrum:bedrock_dust",
-    "spectrum:cyan_pigment",
-    "spectrum:cyan_pigment",
-    "minecraft:iron_ingot",
-    "spectrum:bedrock_dust"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:cyan_pigment"
+    },
+    {
+      "item": "spectrum:cyan_pigment"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "spectrum:bedrock_dust"
+    },
+    {
+      "item": "spectrum:cyan_pigment"
+    },
+    {
+      "item": "spectrum:cyan_pigment"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "spectrum:bedrock_dust"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",

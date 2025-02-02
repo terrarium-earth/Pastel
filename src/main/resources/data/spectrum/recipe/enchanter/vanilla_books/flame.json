@@ -4,15 +4,33 @@
   "time": 300,
   "required_experience": 100,
   "ingredients": [
-    "minecraft:book",
-    "spectrum:red_pigment",
-    "spectrum:red_pigment",
-    "minecraft:fire_charge",
-    "spectrum:neolith",
-    "spectrum:red_pigment",
-    "spectrum:red_pigment",
-    "minecraft:fire_charge",
-    "spectrum:neolith"
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "item": "spectrum:neolith"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "spectrum:red_pigment"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "item": "spectrum:neolith"
+    }
   ],
   "result": {
     "id": "minecraft:enchanted_book",
