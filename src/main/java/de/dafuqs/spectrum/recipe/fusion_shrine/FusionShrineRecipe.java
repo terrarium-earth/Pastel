@@ -314,7 +314,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-				IngredientStack.Serializer.CODEC.codec().listOf(0, 7).fieldOf("ingredients").forGetter(recipe -> recipe.craftingInputs),
+				IngredientStack.Serializer.CODEC.listOf(0, 7).fieldOf("ingredients").forGetter(recipe -> recipe.craftingInputs),
 				FluidIngredient.CODEC.optionalFieldOf("fluid", FluidIngredient.EMPTY).forGetter(recipe -> recipe.fluid),
 				ItemStack.CODEC.optionalFieldOf("output", ItemStack.EMPTY).forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),

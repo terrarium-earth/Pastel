@@ -263,7 +263,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-				IngredientStack.Serializer.CODEC.codec().listOf().fieldOf("ingredient").forGetter(recipe -> recipe.inputStacks),
+				IngredientStack.Serializer.CODEC.listOf().fieldOf("ingredient").forGetter(recipe -> recipe.inputStacks),
 				FluidIngredient.CODEC.fieldOf("fluid").forGetter(recipe -> recipe.fluid),
 				ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(recipe -> recipe.outputItemStack),
 				Registries.ITEM.getCodec().fieldOf("tapping_item").forGetter(recipe -> recipe.tappingItem),

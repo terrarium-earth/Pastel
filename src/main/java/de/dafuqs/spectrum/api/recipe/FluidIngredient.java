@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.recipe;
 
 import com.google.gson.*;
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
-import de.dafuqs.spectrum.helpers.*;
 import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.minecraft.fluid.*;
 import net.minecraft.item.*;
@@ -20,18 +20,17 @@ import java.util.stream.*;
 
 public class FluidIngredient {
 	
-	public static final Codec<FluidIngredient> CODEC = CodecHelper.mapPair(
-			Registries.FLUID.getCodec().optionalFieldOf("fluid"),
-			Identifier.CODEC.optionalFieldOf("tag")
-	).codec().comapFlatMap(
-			pair -> {
-				Fluid fluid = pair.getLeft().orElse(null);
-				Identifier tag = pair.getRight().orElse(null);
-				if (fluid == null ^ tag == null)
-					return DataResult.success(new FluidIngredient(fluid, tag));
-				return DataResult.error(() -> "FluidIngredients may only specify a fluid or a tag");
-			},
-			fluidIngredient -> new Pair<>(Optional.ofNullable(fluidIngredient.fluid), Optional.ofNullable(fluidIngredient.tag))
+	public static final Codec<FluidIngredient> CODEC = Codec.mapEither(
+			Registries.FLUID.getCodec().fieldOf("fluid"),
+			Identifier.CODEC.fieldOf("tag")
+	).codec().xmap(
+			either -> either.map(
+					fluid -> new FluidIngredient(fluid, null),
+					tag -> new FluidIngredient(null, tag)
+			),
+			fluidIngredient -> fluidIngredient.fluid != null
+					? Either.left(fluidIngredient.fluid)
+					: Either.right(fluidIngredient.tag)
 	);
 	
 	public static final PacketCodec<RegistryByteBuf, FluidIngredient> PACKET_CODEC = PacketCodec.tuple(

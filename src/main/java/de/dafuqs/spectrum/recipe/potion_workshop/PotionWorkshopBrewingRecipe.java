@@ -390,9 +390,9 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(c -> c.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(c -> c.requiredAdvancementIdentifier),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(c -> c.craftingTime),
-				IngredientStack.Serializer.CODEC.codec().fieldOf("ingredient1").forGetter(c -> c.ingredient1),
-				IngredientStack.Serializer.CODEC.codec().optionalFieldOf("ingredient2", IngredientStack.EMPTY).forGetter(c -> c.ingredient2),
-				IngredientStack.Serializer.CODEC.codec().optionalFieldOf("ingredient3", IngredientStack.EMPTY).forGetter(c -> c.ingredient3),
+				IngredientStack.Serializer.CODEC.fieldOf("ingredient1").forGetter(c -> c.ingredient1),
+				IngredientStack.Serializer.CODEC.optionalFieldOf("ingredient2", IngredientStack.EMPTY).forGetter(c -> c.ingredient2),
+				IngredientStack.Serializer.CODEC.optionalFieldOf("ingredient3", IngredientStack.EMPTY).forGetter(c -> c.ingredient3),
 				PotionRecipeEffect.CODEC.forGetter(c -> c.recipeData)
 		).apply(i, PotionWorkshopBrewingRecipe::new));
 		

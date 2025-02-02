@@ -60,7 +60,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
-				IngredientStack.Serializer.CODEC.codec().listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
+				IngredientStack.Serializer.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
 				Codec.simpleMap(SpectrumRegistries.GEMSTONE_COLORS.getCodec(), Codec.INT, SpectrumRegistries.GEMSTONE_COLORS).forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
