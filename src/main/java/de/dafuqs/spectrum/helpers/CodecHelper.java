@@ -46,6 +46,46 @@ public class CodecHelper {
 		).apply(i, Pair::new));
 	}
 	
+	public static <K, V> MapCodec<Map<K, V>> registryMap(Registry<K> registry, Codec<V> valueCodec) {
+		Codec<K> keyCodec = registry.getCodec();
+		
+		return new MapCodec<>() {
+			@Override
+			public <T> Stream<T> keys(DynamicOps<T> dynamicOps) {
+				return registry.keys(dynamicOps);
+			}
+			
+			@Override
+			public <T> DataResult<Map<K, V>> decode(DynamicOps<T> dynamicOps, MapLike<T> mapLike) {
+				return DataResult.success(keys(dynamicOps)
+						.map(key -> {
+							T valueData = mapLike.get(key);
+							if (valueData == null)
+								return null;
+							
+							K keyResult = keyCodec.decode(dynamicOps, key).result().map(com.mojang.datafixers.util.Pair::getFirst).orElse(null);
+							V valueResult = valueCodec.decode(dynamicOps, valueData).result().map(com.mojang.datafixers.util.Pair::getFirst).orElse(null);
+							if (keyResult == null || valueResult == null)
+								return null;
+							
+							return new Pair<>(keyResult, valueResult);
+						})
+						.filter(Objects::nonNull)
+						.collect(HashMap::new, (map, pair) -> map.put(pair.getLeft(), pair.getRight()), HashMap::putAll));
+			}
+			
+			@Override
+			public <T> RecordBuilder<T> encode(Map<K, V> kvMap, DynamicOps<T> dynamicOps, RecordBuilder<T> recordBuilder) {
+				for (Map.Entry<K, V> entry : kvMap.entrySet()) {
+					DataResult<T> keyData = keyCodec.encodeStart(dynamicOps, entry.getKey());
+					DataResult<T> valueData = valueCodec.encodeStart(dynamicOps, entry.getValue());
+					recordBuilder.add(keyData, valueData);
+				}
+				return recordBuilder;
+			}
+		};
+	}
+	
 	public static <T> Codec<List<T>> singleOrList(Codec<T> codec) {
 		return Codec.withAlternative(codec.listOf(), codec, List::of);
 	}

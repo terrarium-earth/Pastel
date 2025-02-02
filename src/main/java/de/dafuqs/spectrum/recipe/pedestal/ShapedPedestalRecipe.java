@@ -146,7 +146,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				Codec.INT.fieldOf("width").forGetter(recipe -> recipe.width),
 				Codec.INT.fieldOf("height").forGetter(recipe -> recipe.height),
 				IngredientStack.Serializer.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
-				Codec.simpleMap(SpectrumRegistries.GEMSTONE_COLORS.getCodec(), Codec.INT, SpectrumRegistries.GEMSTONE_COLORS).forGetter(recipe -> recipe.powderInputs),
+				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLORS, Codec.INT).forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(recipe -> recipe.craftingTime),
