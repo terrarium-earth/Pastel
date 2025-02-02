@@ -1,6 +1,10 @@
 {
   "type": "spectrum:dragonrot_converting",
-  "ingredient": "spectrum:bone_ash",
+  "ingredient": [
+    {
+      "item": "spectrum:bone_ash"
+    }
+  ],
   "result": {
     "id": "spectrum:ash_flakes",
     "count": 1

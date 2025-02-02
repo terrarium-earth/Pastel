@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:polished_basalt",
+  "ingredient": [
+    {
+      "item": "spectrum:polished_basalt"
+    }
+  ],
   "result": {
     "id": "spectrum:chiseled_polished_basalt"
   },

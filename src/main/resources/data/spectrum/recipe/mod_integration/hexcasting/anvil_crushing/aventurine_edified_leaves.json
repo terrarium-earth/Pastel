@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "hexcasting:aventurine_edified_leaves",
+  "ingredient": [
+    {
+      "item": "hexcasting:aventurine_edified_leaves"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2.0,
   "experience": 0.1,
   "result": {

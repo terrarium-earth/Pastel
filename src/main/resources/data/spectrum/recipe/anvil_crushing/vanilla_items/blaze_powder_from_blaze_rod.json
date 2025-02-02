@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:blaze_rod",
+  "ingredient": [
+    {
+      "item": "minecraft:blaze_rod"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.0,
   "result": {

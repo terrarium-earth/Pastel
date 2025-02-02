@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:beetroot",
+  "ingredient": [
+    {
+      "item": "minecraft:beetroot"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.0,
   "result": {

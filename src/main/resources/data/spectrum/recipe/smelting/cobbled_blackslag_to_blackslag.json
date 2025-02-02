@@ -1,6 +1,10 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "spectrum:cobbled_blackslag",
+  "ingredient": [
+    {
+      "item": "spectrum:cobbled_blackslag"
+    }
+  ],
   "result": {
     "id": "spectrum:blackslag"
   },

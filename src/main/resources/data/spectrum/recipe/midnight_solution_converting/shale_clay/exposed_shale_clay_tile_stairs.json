@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "spectrum:shale_clay_tile_stairs",
+  "ingredient": [
+    {
+      "item": "spectrum:shale_clay_tile_stairs"
+    }
+  ],
   "result": {
     "id": "spectrum:exposed_shale_clay_tile_stairs",
     "count": 1

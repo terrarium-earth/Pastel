@@ -140,7 +140,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				Ingredient.DISALLOW_EMPTY_CODEC.listOf().optionalFieldOf("ingredients", List.of()).forGetter(recipe -> recipe.inputs),
-				ItemStack.CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
+				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.INT.optionalFieldOf("required_experience", 0).forGetter(recipe -> recipe.requiredExperience),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(recipe -> recipe.craftingTime),
 				Codec.BOOL.optionalFieldOf("disable_yield_and_efficiency_upgrades", false).forGetter(recipe -> recipe.noBenefitsFromYieldAndEfficiencyUpgrades),

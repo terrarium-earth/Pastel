@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "#spectrum:onyx_ores",
+  "ingredient": [
+    {
+      "tag": "spectrum:onyx_ores"
+    }
+  ],
   "result": {
     "id": "spectrum:onyx_shard"
   },

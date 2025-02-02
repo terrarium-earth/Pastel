@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:cobblestone",
+  "ingredient": [
+    {
+      "item": "minecraft:cobblestone"
+    }
+  ],
   "result": {
     "id": "minecraft:netherrack",
     "count": 1

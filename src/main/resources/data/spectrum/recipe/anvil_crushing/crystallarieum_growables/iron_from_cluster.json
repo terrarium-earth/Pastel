@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:iron_cluster",
+  "ingredient": [
+    {
+      "item": "spectrum:iron_cluster"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1.0,
   "experience": 3.0,
   "result": {

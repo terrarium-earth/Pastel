@@ -1,6 +1,10 @@
 {
   "type": "spectrum:ink_converting",
-  "ingredient": "botania:lime_petal",
+  "ingredient": [
+    {
+      "item": "botania:lime_petal"
+    }
+  ],
   "ink_color": "spectrum:lime",
   "amount": 25,
   "required_advancement": "spectrum:hidden/collect_pigment/lime",

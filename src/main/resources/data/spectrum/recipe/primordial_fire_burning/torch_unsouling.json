@@ -1,6 +1,10 @@
 {
   "type": "spectrum:primordial_fire_burning",
-  "ingredient": "minecraft:soul_torch",
+  "ingredient": [
+    {
+      "item": "minecraft:soul_torch"
+    }
+  ],
   "result": {
     "id": "minecraft:torch"
   }

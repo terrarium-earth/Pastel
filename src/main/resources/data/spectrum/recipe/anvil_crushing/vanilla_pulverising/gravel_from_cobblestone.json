@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:cobblestone",
+  "ingredient": [
+    {
+      "item": "minecraft:cobblestone"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.05,
   "result": {

@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:topaz_block",
+  "ingredient": [
+    {
+      "item": "spectrum:topaz_block"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.4,
   "experience": 0.2,
   "result": {

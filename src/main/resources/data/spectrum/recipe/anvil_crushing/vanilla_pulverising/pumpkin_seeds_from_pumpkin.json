@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:pumpkin",
+  "ingredient": [
+    {
+      "item": "minecraft:pumpkin"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 3,
   "experience": 0,
   "result": {

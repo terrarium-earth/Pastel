@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "#c:raw_meat",
+  "ingredient": [
+    {
+      "tag": "c:raw_meat"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1.5,
   "experience": 0.1,
   "result": {

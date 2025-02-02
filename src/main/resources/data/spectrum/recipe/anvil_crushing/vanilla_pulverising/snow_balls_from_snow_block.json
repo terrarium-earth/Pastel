@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:snow_block",
+  "ingredient": [
+    {
+      "item": "minecraft:snow_block"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 4,
   "experience": 0.0,
   "result": {

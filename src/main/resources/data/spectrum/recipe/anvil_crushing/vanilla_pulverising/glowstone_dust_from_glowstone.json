@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:glowstone",
+  "ingredient": [
+    {
+      "item": "minecraft:glowstone"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.0,
   "result": {

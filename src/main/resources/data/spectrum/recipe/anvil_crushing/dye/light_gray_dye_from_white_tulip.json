@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:white_tulip",
+  "ingredient": [
+    {
+      "item": "minecraft:white_tulip"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.0,
   "result": {

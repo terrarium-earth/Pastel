@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:diamond",
+  "ingredient": [
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_diamond_bud",

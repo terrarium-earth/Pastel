@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:exposed_polished_shale_clay",
+  "ingredient": [
+    {
+      "item": "spectrum:exposed_polished_shale_clay"
+    }
+  ],
   "result": {
     "id": "spectrum:exposed_shale_clay_tiles"
   },

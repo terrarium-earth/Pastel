@@ -1,6 +1,10 @@
 {
   "type": "spectrum:ink_converting",
-  "ingredient": "minecraft:purple_dye",
+  "ingredient": [
+    {
+      "item": "minecraft:purple_dye"
+    }
+  ],
   "ink_color": "spectrum:purple",
   "amount": 5,
   "required_advancement": "spectrum:hidden/collect_pigment/purple"

@@ -142,7 +142,7 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 				IngredientStack.Serializer.CODEC.fieldOf("base_ingredient").forGetter(c -> c.baseIngredient),
 				Codec.BOOL.optionalFieldOf("use_up_base_ingredient", true).forGetter(c -> c.consumeBaseIngredient),
 				Codec.INT.optionalFieldOf("required_experience", 0).forGetter(c -> c.requiredExperience),
-				ItemStack.CODEC.fieldOf("output").forGetter(c -> c.output)
+				ItemStack.CODEC.fieldOf("result").forGetter(c -> c.output)
 		).apply(i, PotionWorkshopCraftingRecipe::new));
 		
 		public static final PacketCodec<RegistryByteBuf, PotionWorkshopCraftingRecipe> PACKET_CODEC = PacketCodecHelper.tuple(

@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:smooth_basalt",
+  "ingredient": [
+    {
+      "item": "minecraft:smooth_basalt"
+    }
+  ],
   "result": {
     "id": "spectrum:smooth_basalt_stairs"
   },

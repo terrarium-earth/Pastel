@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:enchanted_golden_apple",
+  "ingredient": [
+    {
+      "item": "minecraft:enchanted_golden_apple"
+    }
+  ],
   "result": {
     "id": "minecraft:golden_apple",
     "count": 1

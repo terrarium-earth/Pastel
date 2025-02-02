@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:rose_bush",
+  "ingredient": [
+    {
+      "item": "minecraft:rose_bush"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.0,
   "result": {

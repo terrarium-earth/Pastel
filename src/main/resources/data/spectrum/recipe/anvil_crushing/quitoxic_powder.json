@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:quitoxic_reeds",
+  "ingredient": [
+    {
+      "item": "spectrum:quitoxic_reeds"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1.5,
   "experience": 0.4,
   "result": {

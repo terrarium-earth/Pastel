@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:end_stone_brick_stairs",
+  "ingredient": [
+    {
+      "item": "minecraft:end_stone_brick_stairs"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.5,
   "experience": 0,
   "result": {

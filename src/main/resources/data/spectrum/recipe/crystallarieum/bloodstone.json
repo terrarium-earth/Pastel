@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "spectrum:raw_bloodstone",
+  "ingredient": [
+    {
+      "item": "spectrum:raw_bloodstone"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_bloodstone_bud",

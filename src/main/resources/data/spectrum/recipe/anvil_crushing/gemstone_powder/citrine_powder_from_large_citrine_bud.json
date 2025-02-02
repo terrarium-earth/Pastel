@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:large_citrine_bud",
+  "ingredient": [
+    {
+      "item": "spectrum:large_citrine_bud"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.6,
   "experience": 0.4,
   "result": {

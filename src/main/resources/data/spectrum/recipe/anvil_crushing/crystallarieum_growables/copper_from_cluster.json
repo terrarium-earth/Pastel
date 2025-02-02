@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:copper_cluster",
+  "ingredient": [
+    {
+      "item": "spectrum:copper_cluster"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1.0,
   "experience": 3.0,
   "result": {

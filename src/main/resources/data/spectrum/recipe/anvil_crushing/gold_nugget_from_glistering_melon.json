@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:glistering_melon",
+  "ingredient": [
+    {
+      "item": "spectrum:glistering_melon"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 3,
   "experience": 0,
   "result": {

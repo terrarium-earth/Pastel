@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "malum:deepslate_soulstone_ore",
+  "ingredient": [
+    {
+      "item": "malum:deepslate_soulstone_ore"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 0.5,
   "result": {

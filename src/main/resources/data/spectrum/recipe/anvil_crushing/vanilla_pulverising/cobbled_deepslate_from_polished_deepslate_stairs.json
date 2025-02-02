@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:polished_deepslate_stairs",
+  "ingredient": [
+    {
+      "item": "minecraft:polished_deepslate_stairs"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.8,
   "experience": 0,
   "result": {

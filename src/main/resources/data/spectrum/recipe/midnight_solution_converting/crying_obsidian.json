@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:obsidian",
+  "ingredient": [
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
   "result": {
     "id": "minecraft:crying_obsidian",
     "count": 1

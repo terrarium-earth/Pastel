@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:sea_lantern",
+  "ingredient": [
+    {
+      "item": "minecraft:sea_lantern"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0,
   "result": {

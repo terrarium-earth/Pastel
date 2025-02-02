@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:leather_horse_armor",
+  "ingredient": [
+    {
+      "item": "minecraft:leather_horse_armor"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.3,
   "experience": 0.0,
   "result": {

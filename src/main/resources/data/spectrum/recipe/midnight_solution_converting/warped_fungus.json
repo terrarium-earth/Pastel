@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:brown_mushroom",
+  "ingredient": [
+    {
+      "item": "minecraft:brown_mushroom"
+    }
+  ],
   "result": {
     "id": "minecraft:warped_fungus",
     "count": 1

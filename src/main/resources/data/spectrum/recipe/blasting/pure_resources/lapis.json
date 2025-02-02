@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:pure_lapis",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_lapis"
+    }
+  ],
   "result": {
     "id": "minecraft:lapis_lazuli"
   },

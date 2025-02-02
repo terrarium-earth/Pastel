@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:prismarine_wall",
+  "ingredient": [
+    {
+      "item": "minecraft:prismarine_wall"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0,
   "result": {

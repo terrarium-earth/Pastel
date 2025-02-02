@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:red_sandstone_slab",
+  "ingredient": [
+    {
+      "item": "minecraft:red_sandstone_slab"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0,
   "result": {

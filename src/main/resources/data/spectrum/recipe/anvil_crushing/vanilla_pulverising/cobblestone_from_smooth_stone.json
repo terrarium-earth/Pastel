@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:smooth_stone",
+  "ingredient": [
+    {
+      "item": "minecraft:smooth_stone"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0,
   "result": {

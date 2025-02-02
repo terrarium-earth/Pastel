@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:large_amethyst_bud",
+  "ingredient": [
+    {
+      "item": "minecraft:large_amethyst_bud"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.6,
   "experience": 0.4,
   "result": {

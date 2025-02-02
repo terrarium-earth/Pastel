@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:clay_ball",
+  "ingredient": [
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
   "result": {
     "id": "minecraft:slime_ball",
     "count": 1

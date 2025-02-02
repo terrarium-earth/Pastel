@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:pure_prismarine",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_prismarine"
+    }
+  ],
   "result": {
     "id": "minecraft:prismarine_crystals"
   },

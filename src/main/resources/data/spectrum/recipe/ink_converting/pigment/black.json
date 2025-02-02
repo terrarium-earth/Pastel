@@ -1,6 +1,10 @@
 {
   "type": "spectrum:ink_converting",
-  "ingredient": "spectrum:black_pigment",
+  "ingredient": [
+    {
+      "item": "spectrum:black_pigment"
+    }
+  ],
   "ink_color": "spectrum:black",
   "amount": 100,
   "required_advancement": "spectrum:hidden/collect_pigment/black"

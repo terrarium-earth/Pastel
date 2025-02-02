@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:raw_iron",
+  "ingredient": [
+    {
+      "item": "minecraft:raw_iron"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_iron_bud",

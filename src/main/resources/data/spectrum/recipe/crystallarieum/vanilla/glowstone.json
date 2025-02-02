@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:glowstone_dust",
+  "ingredient": [
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_glowstone_bud",

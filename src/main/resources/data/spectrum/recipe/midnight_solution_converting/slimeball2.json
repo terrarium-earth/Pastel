@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:dried_kelp_block",
+  "ingredient": [
+    {
+      "item": "minecraft:dried_kelp_block"
+    }
+  ],
   "result": {
     "id": "minecraft:slime_ball",
     "count": 1

@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:purple_concrete",
+  "ingredient": [
+    {
+      "item": "minecraft:purple_concrete"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0,
   "result": {

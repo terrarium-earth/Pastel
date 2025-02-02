@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:pure_redstone",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_redstone"
+    }
+  ],
   "result": {
     "id": "minecraft:redstone"
   },

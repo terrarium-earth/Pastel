@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:paltaeria_gem",
+  "ingredient": [
+    {
+      "item": "spectrum:paltaeria_gem"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.5,
   "result": {

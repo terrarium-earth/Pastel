@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:blackslag_bricks",
+  "ingredient": [
+    {
+      "item": "spectrum:blackslag_bricks"
+    }
+  ],
   "result": {
     "id": "spectrum:blackslag_brick_stairs"
   },

@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:pure_netherite_scrap",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_netherite_scrap"
+    }
+  ],
   "result": {
     "id": "minecraft:netherite_scrap"
   },

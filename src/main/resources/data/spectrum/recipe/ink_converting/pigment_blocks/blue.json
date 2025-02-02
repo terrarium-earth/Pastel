@@ -1,6 +1,10 @@
 {
   "type": "spectrum:ink_converting",
-  "ingredient": "spectrum:blue_block",
+  "ingredient": [
+    {
+      "item": "spectrum:blue_block"
+    }
+  ],
   "ink_color": "spectrum:blue",
   "amount": 900,
   "required_advancement": "spectrum:hidden/collect_pigment/blue"

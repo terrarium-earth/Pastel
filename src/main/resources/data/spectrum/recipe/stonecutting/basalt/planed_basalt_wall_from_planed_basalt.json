@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:planed_basalt",
+  "ingredient": [
+    {
+      "item": "spectrum:planed_basalt"
+    }
+  ],
   "result": {
     "id": "spectrum:planed_basalt_wall"
   },

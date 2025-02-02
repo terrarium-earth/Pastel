@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:lily_of_the_valley",
+  "ingredient": [
+    {
+      "item": "minecraft:lily_of_the_valley"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.0,
   "result": {

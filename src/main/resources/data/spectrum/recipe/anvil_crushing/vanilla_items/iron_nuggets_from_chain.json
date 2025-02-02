@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:chain",
+  "ingredient": [
+    {
+      "item": "minecraft:chain"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.2,
   "experience": 0.0,
   "result": {

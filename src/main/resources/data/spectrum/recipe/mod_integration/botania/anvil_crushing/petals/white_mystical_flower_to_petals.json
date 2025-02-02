@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "botania:white_mystical_flower",
+  "ingredient": [
+    {
+      "item": "botania:white_mystical_flower"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.2,
   "result": {

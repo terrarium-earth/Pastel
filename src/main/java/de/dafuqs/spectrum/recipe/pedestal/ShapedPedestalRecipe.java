@@ -24,15 +24,14 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 	
 	protected final int width;
 	protected final int height;
+	protected final RawShapedPedestalRecipe rawShapedRecipe;
 	
 	public ShapedPedestalRecipe(
 			String group,
 			boolean secret,
 			Optional<Identifier> requiredAdvancementIdentifier,
 			PedestalRecipeTier tier,
-			int width,
-			int height,
-			List<IngredientStack> inputs,
+			RawShapedPedestalRecipe rawShapedRecipe,
 			Map<GemstoneColor, Integer> gemstonePowderInputs,
 			ItemStack output,
 			float experience,
@@ -40,10 +39,11 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 			boolean skipRecipeRemainders,
 			boolean noBenefitsFromYieldUpgrades
 	) {
-		super(group, secret, requiredAdvancementIdentifier, tier, inputs, gemstonePowderInputs, output, experience, craftingTime, skipRecipeRemainders, noBenefitsFromYieldUpgrades);
+		super(group, secret, requiredAdvancementIdentifier, tier, rawShapedRecipe.getIngredients(), gemstonePowderInputs, output, experience, craftingTime, skipRecipeRemainders, noBenefitsFromYieldUpgrades);
 		
-		this.width = width;
-		this.height = height;
+		this.rawShapedRecipe = rawShapedRecipe;
+		this.width = rawShapedRecipe.getWidth();
+		this.height = rawShapedRecipe.getHeight();
 	}
 	
 	@Override
@@ -143,9 +143,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
-				Codec.INT.fieldOf("width").forGetter(recipe -> recipe.width),
-				Codec.INT.fieldOf("height").forGetter(recipe -> recipe.height),
-				IngredientStack.Serializer.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
+				RawShapedPedestalRecipe.CODEC.forGetter(recipe -> recipe.rawShapedRecipe),
 				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLORS, Codec.INT).forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
@@ -159,9 +157,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				PacketCodecs.BOOL, recipe -> recipe.secret,
 				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				PedestalRecipeTier.PACKET_CODEC, recipe -> recipe.tier,
-				PacketCodecs.VAR_INT, recipe -> recipe.width,
-				PacketCodecs.VAR_INT, recipe -> recipe.height,
-				IngredientStack.Serializer.PACKET_CODEC.collect(PacketCodecs.toList()), recipe -> recipe.inputs,
+				RawShapedPedestalRecipe.PACKET_CODEC, recipe -> recipe.rawShapedRecipe,
 				PacketCodecs.map(HashMap::new, PacketCodecs.registryValue(SpectrumRegistries.GEMSTONE_COLORS_KEY), PacketCodecs.VAR_INT), recipe -> recipe.powderInputs,
 				ItemStack.PACKET_CODEC, recipe -> recipe.output,
 				PacketCodecs.FLOAT, recipe -> recipe.experience,

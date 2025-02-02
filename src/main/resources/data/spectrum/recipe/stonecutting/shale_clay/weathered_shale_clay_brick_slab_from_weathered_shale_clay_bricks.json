@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:weathered_shale_clay_bricks",
+  "ingredient": [
+    {
+      "item": "spectrum:weathered_shale_clay_bricks"
+    }
+  ],
   "result": {
     "id": "spectrum:weathered_shale_clay_brick_slab"
   },

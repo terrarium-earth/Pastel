@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:red_leaves",
+  "ingredient": [
+    {
+      "item": "spectrum:red_leaves"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.01,
   "result": {

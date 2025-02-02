@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:amaranth_bushel",
+  "ingredient": [
+    {
+      "item": "spectrum:amaranth_bushel"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.25,
   "result": {

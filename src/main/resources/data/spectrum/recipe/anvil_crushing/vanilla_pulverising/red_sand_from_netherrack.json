@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:netherrack",
+  "ingredient": [
+    {
+      "item": "minecraft:netherrack"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 4,
   "experience": 0,
   "result": {

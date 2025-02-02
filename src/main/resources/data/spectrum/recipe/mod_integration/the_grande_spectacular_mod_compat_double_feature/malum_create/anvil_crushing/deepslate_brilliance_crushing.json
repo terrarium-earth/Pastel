@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "malum:brilliant_deepslate",
+  "ingredient": [
+    {
+      "item": "malum:brilliant_deepslate"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 0.75,
   "result": {

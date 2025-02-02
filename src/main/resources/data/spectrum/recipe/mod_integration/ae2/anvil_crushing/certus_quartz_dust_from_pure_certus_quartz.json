@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:pure_certus_quartz",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_certus_quartz"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.1,
   "result": {

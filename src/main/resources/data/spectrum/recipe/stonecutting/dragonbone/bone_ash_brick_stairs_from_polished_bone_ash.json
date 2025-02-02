@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:polished_bone_ash",
+  "ingredient": [
+    {
+      "item": "spectrum:polished_bone_ash"
+    }
+  ],
   "result": {
     "id": "spectrum:bone_ash_brick_stairs"
   },

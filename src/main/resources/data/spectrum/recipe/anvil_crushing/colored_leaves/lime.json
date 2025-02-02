@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:lime_leaves",
+  "ingredient": [
+    {
+      "item": "spectrum:lime_leaves"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.01,
   "result": {

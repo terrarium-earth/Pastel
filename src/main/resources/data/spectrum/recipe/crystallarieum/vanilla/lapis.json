@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:lapis_lazuli",
+  "ingredient": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_lapis_bud",

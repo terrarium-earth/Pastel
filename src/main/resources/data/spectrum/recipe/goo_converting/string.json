@@ -1,6 +1,10 @@
 {
   "type": "spectrum:goo_converting",
-  "ingredient": "minecraft:wheat",
+  "ingredient": [
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
   "result": {
     "item": "minecraft:string",
     "count": 2

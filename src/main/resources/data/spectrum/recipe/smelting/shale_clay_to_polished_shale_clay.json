@@ -1,6 +1,10 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "spectrum:shale_clay",
+  "ingredient": [
+    {
+      "item": "spectrum:shale_clay"
+    }
+  ],
   "result": {
     "id": "spectrum:polished_shale_clay"
   },

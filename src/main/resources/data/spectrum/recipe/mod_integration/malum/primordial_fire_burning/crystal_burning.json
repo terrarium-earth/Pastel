@@ -1,6 +1,10 @@
 {
   "type": "spectrum:primordial_fire_burning",
-  "ingredient": "#malum:spirit_crystals",
+  "ingredient": [
+    {
+      "tag": "malum:spirit_crystals"
+    }
+  ],
   "result": {
     "id": "malum:infernal_spirit"
   },

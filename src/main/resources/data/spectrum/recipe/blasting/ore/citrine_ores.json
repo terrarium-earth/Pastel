@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "#spectrum:citrine_ores",
+  "ingredient": [
+    {
+      "tag": "spectrum:citrine_ores"
+    }
+  ],
   "result": {
     "id": "spectrum:citrine_shard"
   },

@@ -1,6 +1,10 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "#spectrum:shimmerstone_ores",
+  "ingredient": [
+    {
+      "tag": "spectrum:shimmerstone_ores"
+    }
+  ],
   "result": {
     "id": "spectrum:shimmerstone_gem"
   },

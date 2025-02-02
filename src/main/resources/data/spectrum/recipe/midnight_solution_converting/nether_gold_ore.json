@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:gold_ore",
+  "ingredient": [
+    {
+      "item": "minecraft:gold_ore"
+    }
+  ],
   "result": {
     "id": "minecraft:nether_gold_ore",
     "count": 1

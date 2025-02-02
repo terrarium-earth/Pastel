@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:cut_copper_stairs",
+  "ingredient": [
+    {
+      "item": "minecraft:cut_copper_stairs"
+    }
+  ],
   "result": {
     "id": "minecraft:exposed_cut_copper_stairs",
     "count": 1

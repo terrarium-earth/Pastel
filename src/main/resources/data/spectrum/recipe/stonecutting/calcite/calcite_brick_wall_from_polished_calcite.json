@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:polished_calcite",
+  "ingredient": [
+    {
+      "item": "spectrum:polished_calcite"
+    }
+  ],
   "result": {
     "id": "spectrum:calcite_brick_wall"
   },

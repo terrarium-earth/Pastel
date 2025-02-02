@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:diamond_horse_armor",
+  "ingredient": [
+    {
+      "item": "minecraft:diamond_horse_armor"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.05,
   "experience": 0.0,
   "result": {

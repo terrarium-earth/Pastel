@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:ender_pearl",
+  "ingredient": [
+    {
+      "item": "minecraft:ender_pearl"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.1,
   "result": {

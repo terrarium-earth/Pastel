@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:emerald",
+  "ingredient": [
+    {
+      "item": "minecraft:emerald"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_emerald_bud",

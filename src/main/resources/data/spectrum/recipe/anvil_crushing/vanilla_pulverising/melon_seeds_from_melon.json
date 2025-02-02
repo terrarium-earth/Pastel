@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:melon",
+  "ingredient": [
+    {
+      "item": "minecraft:melon"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 3,
   "experience": 0,
   "result": {

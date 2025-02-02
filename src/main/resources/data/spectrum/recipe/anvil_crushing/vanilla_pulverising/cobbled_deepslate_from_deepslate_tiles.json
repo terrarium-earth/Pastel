@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:deepslate_tiles",
+  "ingredient": [
+    {
+      "item": "minecraft:deepslate_tiles"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.8,
   "experience": 0,
   "result": {

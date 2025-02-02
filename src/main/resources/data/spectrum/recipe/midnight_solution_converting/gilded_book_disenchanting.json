@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "spectrum:gilded_book",
+  "ingredient": [
+    {
+      "item": "spectrum:gilded_book"
+    }
+  ],
   "result": {
     "id": "minecraft:book",
     "count": 1

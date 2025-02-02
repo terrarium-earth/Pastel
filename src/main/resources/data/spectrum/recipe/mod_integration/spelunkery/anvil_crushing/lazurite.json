@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spelunkery:rough_lazurite",
+  "ingredient": [
+    {
+      "item": "spelunkery:rough_lazurite"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 0.5,
   "result": {

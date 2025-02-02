@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:cracked_nether_bricks",
+  "ingredient": [
+    {
+      "item": "minecraft:cracked_nether_bricks"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.4,
   "experience": 0.0,
   "result": {

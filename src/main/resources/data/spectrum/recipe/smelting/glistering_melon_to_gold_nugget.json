@@ -1,6 +1,10 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "minecraft:glistering_melon_slice",
+  "ingredient": [
+    {
+      "item": "minecraft:glistering_melon_slice"
+    }
+  ],
   "result": {
     "id": "minecraft:gold_nugget"
   },

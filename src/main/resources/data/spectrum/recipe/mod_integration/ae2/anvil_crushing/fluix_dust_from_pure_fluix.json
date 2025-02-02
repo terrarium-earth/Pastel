@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:pure_fluix",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_fluix"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.1,
   "result": {

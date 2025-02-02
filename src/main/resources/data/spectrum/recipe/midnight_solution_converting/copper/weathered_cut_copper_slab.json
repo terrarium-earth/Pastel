@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:exposed_cut_copper_slab",
+  "ingredient": [
+    {
+      "item": "minecraft:exposed_cut_copper_slab"
+    }
+  ],
   "result": {
     "id": "minecraft:weathered_cut_copper_slab",
     "count": 1

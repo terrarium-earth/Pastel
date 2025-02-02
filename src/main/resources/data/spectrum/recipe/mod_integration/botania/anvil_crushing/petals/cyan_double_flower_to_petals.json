@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "botania:cyan_double_flower",
+  "ingredient": [
+    {
+      "item": "botania:cyan_double_flower"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.2,
   "result": {

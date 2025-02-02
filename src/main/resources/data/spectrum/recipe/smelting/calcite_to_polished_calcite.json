@@ -1,6 +1,10 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "minecraft:calcite",
+  "ingredient": [
+    {
+      "item": "minecraft:calcite"
+    }
+  ],
   "result": {
     "id": "spectrum:polished_calcite"
   },

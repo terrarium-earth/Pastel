@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:nether_brick_stairs",
+  "ingredient": [
+    {
+      "item": "minecraft:nether_brick_stairs"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.4,
   "experience": 0,
   "result": {

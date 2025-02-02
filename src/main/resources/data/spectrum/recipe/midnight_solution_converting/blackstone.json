@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:stone",
+  "ingredient": [
+    {
+      "item": "minecraft:stone"
+    }
+  ],
   "result": {
     "id": "minecraft:blackstone",
     "count": 1

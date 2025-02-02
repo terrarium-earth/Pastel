@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:pure_echo",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_echo"
+    }
+  ],
   "result": {
     "id": "minecraft:echo_shard"
   },

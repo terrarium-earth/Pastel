@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:mossy_cobblestone_wall",
+  "ingredient": [
+    {
+      "item": "minecraft:mossy_cobblestone_wall"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0,
   "result": {

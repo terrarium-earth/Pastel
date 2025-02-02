@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "#c:zinc_ores",
+  "ingredient": [
+    {
+      "tag": "c:zinc_ores"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 0.5,
   "result": {

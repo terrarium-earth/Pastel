@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:pure_emerald",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_emerald"
+    }
+  ],
   "result": {
     "id": "minecraft:emerald"
   },

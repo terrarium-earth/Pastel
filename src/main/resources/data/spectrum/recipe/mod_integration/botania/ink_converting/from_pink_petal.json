@@ -1,6 +1,10 @@
 {
   "type": "spectrum:ink_converting",
-  "ingredient": "botania:pink_petal",
+  "ingredient": [
+    {
+      "item": "botania:pink_petal"
+    }
+  ],
   "ink_color": "spectrum:pink",
   "amount": 25,
   "required_advancement": "spectrum:hidden/collect_pigment/pink",

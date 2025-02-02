@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:gilded_blackstone",
+  "ingredient": [
+    {
+      "item": "minecraft:gilded_blackstone"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.9,
   "experience": 0,
   "result": {

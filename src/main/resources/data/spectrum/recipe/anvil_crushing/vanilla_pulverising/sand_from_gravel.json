@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:gravel",
+  "ingredient": [
+    {
+      "item": "minecraft:gravel"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0,
   "result": {

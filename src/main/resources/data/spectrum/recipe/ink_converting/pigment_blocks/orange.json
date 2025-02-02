@@ -1,6 +1,10 @@
 {
   "type": "spectrum:ink_converting",
-  "ingredient": "spectrum:orange_block",
+  "ingredient": [
+    {
+      "item": "spectrum:orange_block"
+    }
+  ],
   "ink_color": "spectrum:orange",
   "amount": 900,
   "required_advancement": "spectrum:hidden/collect_pigment/orange"

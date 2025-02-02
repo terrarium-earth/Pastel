@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:dragonbone_chunk",
+  "ingredient": [
+    {
+      "item": "spectrum:dragonbone_chunk"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.3,
   "experience": 0.1,
   "result": {

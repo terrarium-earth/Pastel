@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:pure_gold",
+  "ingredient": [
+    {
+      "item": "spectrum:pure_gold"
+    }
+  ],
   "result": {
     "id": "minecraft:gold_ingot"
   },

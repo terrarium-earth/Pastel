@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "neepmeat:whisper_wheat",
+  "ingredient": [
+    {
+      "item": "neepmeat:whisper_wheat"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.25,
   "result": {

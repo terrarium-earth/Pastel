@@ -1,6 +1,10 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "spectrum:ash_flakes",
+  "ingredient": [
+    {
+      "item": "spectrum:ash_flakes"
+    }
+  ],
   "conditions": [
     {
       "type": "supplementaries:flag",

@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:polished_basal_marble",
+  "ingredient": [
+    {
+      "item": "spectrum:polished_basal_marble"
+    }
+  ],
   "result": {
     "id": "spectrum:basal_marble_brick_slab"
   },

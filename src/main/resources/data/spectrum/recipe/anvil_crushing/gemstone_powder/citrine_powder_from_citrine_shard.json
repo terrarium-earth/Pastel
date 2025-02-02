@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:citrine_shard",
+  "ingredient": [
+    {
+      "item": "spectrum:citrine_shard"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.6,
   "experience": 0.4,
   "result": {

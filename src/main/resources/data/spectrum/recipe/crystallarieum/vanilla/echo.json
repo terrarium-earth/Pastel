@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:echo_shard",
+  "ingredient": [
+    {
+      "item": "minecraft:echo_shard"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_echo_bud",

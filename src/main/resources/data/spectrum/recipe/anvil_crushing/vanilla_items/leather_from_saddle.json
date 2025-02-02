@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:saddle",
+  "ingredient": [
+    {
+      "item": "minecraft:saddle"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.3,
   "experience": 0.0,
   "result": {

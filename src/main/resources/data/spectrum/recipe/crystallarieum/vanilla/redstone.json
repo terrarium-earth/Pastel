@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:redstone",
+  "ingredient": [
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_redstone_bud",

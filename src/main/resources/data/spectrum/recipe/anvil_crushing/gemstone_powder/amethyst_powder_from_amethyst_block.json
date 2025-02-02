@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:amethyst_block",
+  "ingredient": [
+    {
+      "item": "minecraft:amethyst_block"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.4,
   "experience": 0.2,
   "result": {

@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:sugar_cane",
+  "ingredient": [
+    {
+      "item": "minecraft:sugar_cane"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 4,
   "experience": 0.0,
   "result": {

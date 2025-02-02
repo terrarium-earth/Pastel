@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "malum:soulstone_ore",
+  "ingredient": [
+    {
+      "item": "malum:soulstone_ore"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 0.5,
   "result": {

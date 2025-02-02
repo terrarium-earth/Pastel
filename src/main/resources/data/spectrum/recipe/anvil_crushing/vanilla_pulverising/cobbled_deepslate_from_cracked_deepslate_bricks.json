@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:cracked_deepslate_bricks",
+  "ingredient": [
+    {
+      "item": "minecraft:cracked_deepslate_bricks"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.8,
   "experience": 0,
   "result": {

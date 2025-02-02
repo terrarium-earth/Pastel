@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "minecraft:calcite",
+  "ingredient": [
+    {
+      "item": "minecraft:calcite"
+    }
+  ],
   "result": {
     "id": "spectrum:calcite_slab"
   },

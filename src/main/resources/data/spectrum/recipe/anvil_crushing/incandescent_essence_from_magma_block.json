@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:magma_block",
+  "ingredient": [
+    {
+      "item": "minecraft:magma_block"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1.5,
   "experience": 0.25,
   "result": {

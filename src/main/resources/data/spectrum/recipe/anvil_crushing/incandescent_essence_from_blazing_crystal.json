@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:blazing_crystal",
+  "ingredient": [
+    {
+      "item": "spectrum:blazing_crystal"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1.5,
   "experience": 4.0,
   "result": {

@@ -22,11 +22,11 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/place_color_picker");
 	protected static final List<Item> INPUT_ITEMS = new ArrayList<>();
 	
-	protected final IngredientStack inputIngredient;
+	protected final Ingredient inputIngredient;
 	protected final InkColor color;
 	protected final long amount;
 	
-	public InkConvertingRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, IngredientStack inputIngredient, InkColor color, long amount) {
+	public InkConvertingRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, Ingredient inputIngredient, InkColor color, long amount) {
 		super(group, secret, requiredAdvancementIdentifier);
 		
 		this.inputIngredient = inputIngredient;
@@ -89,7 +89,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public DefaultedList<Ingredient> getIngredients() {
-		return DefaultedList.copyOf(Ingredient.empty(), this.inputIngredient.getIngredient());
+		return DefaultedList.copyOf(Ingredient.empty(), this.inputIngredient);
 	}
 	
 	@Override
@@ -111,7 +111,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-				IngredientStack.Serializer.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.inputIngredient),
+				Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.inputIngredient),
 				InkColor.CODEC.fieldOf("ink_color").forGetter(recipe -> recipe.color),
 				Codec.LONG.fieldOf("amount").forGetter(recipe -> recipe.amount)
 		).apply(i, InkConvertingRecipe::new));
@@ -120,7 +120,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				PacketCodecs.STRING, recipe -> recipe.group,
 				PacketCodecs.BOOL, recipe -> recipe.secret,
 				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-				IngredientStack.Serializer.PACKET_CODEC, recipe -> recipe.inputIngredient,
+				Ingredient.PACKET_CODEC, recipe -> recipe.inputIngredient,
 				InkColor.PACKET_CODEC, recipe -> recipe.color,
 				PacketCodecs.VAR_LONG, recipe -> recipe.amount,
 				InkConvertingRecipe::new

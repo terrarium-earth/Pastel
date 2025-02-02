@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "farmersdelight:rice_panicle",
+  "ingredient": [
+    {
+      "item": "farmersdelight:rice_panicle"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.25,
   "result": {

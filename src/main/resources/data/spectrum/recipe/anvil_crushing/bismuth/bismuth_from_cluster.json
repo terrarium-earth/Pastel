@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:bismuth_cluster",
+  "ingredient": [
+    {
+      "item": "spectrum:bismuth_cluster"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 1.0,
   "result": {

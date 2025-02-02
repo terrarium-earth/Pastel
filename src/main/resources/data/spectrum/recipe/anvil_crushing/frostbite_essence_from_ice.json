@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "#c:ice",
+  "ingredient": [
+    {
+      "tag": "c:ice"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1.5,
   "experience": 0.25,
   "result": {

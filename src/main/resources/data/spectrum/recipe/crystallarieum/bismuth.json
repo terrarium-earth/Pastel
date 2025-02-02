@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "spectrum:bismuth_flake",
+  "ingredient": [
+    {
+      "item": "spectrum:bismuth_flake"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_bismuth_bud",

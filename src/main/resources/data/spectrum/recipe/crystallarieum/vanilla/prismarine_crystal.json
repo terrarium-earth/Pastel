@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:prismarine_crystals",
+  "ingredient": [
+    {
+      "item": "minecraft:prismarine_crystals"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_prismarine_bud",

@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:iron_bars",
+  "ingredient": [
+    {
+      "item": "minecraft:iron_bars"
+    }
+  ],
   "result": {
     "id": "neepmeat:rusted_bars",
     "count": 1

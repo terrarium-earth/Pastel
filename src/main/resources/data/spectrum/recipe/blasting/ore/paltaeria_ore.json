@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:paltaeria_ore",
+  "ingredient": [
+    {
+      "item": "spectrum:paltaeria_ore"
+    }
+  ],
   "result": {
     "id": "spectrum:paltaeria_fragments"
   },

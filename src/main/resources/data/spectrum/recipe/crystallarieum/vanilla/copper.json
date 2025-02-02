@@ -1,6 +1,10 @@
 {
   "type": "spectrum:crystallarieum_growing",
-  "ingredient": "minecraft:raw_copper",
+  "ingredient": [
+    {
+      "item": "minecraft:raw_copper"
+    }
+  ],
   "growth_stage_states": [
     {
       "Name": "spectrum:small_copper_bud",

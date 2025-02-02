@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:mossy_cobblestone_stairs",
+  "ingredient": [
+    {
+      "item": "minecraft:mossy_cobblestone_stairs"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0,
   "result": {

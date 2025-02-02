@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "spectrum:exposed_shale_clay_tiles",
+  "ingredient": [
+    {
+      "item": "spectrum:exposed_shale_clay_tiles"
+    }
+  ],
   "result": {
     "id": "spectrum:weathered_shale_clay_tiles",
     "count": 1

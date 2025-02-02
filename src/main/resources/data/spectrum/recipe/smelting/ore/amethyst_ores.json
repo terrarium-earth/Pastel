@@ -1,6 +1,10 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "#spectrum:amethyst_ores",
+  "ingredient": [
+    {
+      "tag": "spectrum:amethyst_ores"
+    }
+  ],
   "result": {
     "id": "minecraft:amethyst_shard"
   },

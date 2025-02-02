@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "#spectrum:shooting_stars",
+  "ingredient": [
+    {
+      "tag": "spectrum:shooting_stars"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.3,
   "experience": 5.0,
   "result": {

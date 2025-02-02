@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:obsidian",
+  "ingredient": [
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.05,
   "experience": 0.0,
   "result": {

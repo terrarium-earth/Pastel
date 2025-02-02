@@ -1,6 +1,10 @@
 {
   "type": "minecraft:blasting",
-  "ingredient": "spectrum:basal_marble",
+  "ingredient": [
+    {
+      "item": "spectrum:basal_marble"
+    }
+  ],
   "result": {
     "id": "spectrum:polished_basal_marble"
   },

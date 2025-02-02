@@ -1,6 +1,10 @@
 {
   "type": "spectrum:primordial_fire_burning",
-  "ingredient": "#c:black_lotuses",
+  "ingredient": [
+    {
+      "tag": "c:black_lotuses"
+    }
+  ],
   "result": {
     "id": "spectrum:least_black_lotus"
   },

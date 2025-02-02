@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "spectrum:enchanted_golden_carrot",
+  "ingredient": [
+    {
+      "item": "spectrum:enchanted_golden_carrot"
+    }
+  ],
   "result": {
     "id": "minecraft:golden_carrot",
     "count": 1

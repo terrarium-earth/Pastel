@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:moonstone_block",
+  "ingredient": [
+    {
+      "item": "spectrum:moonstone_block"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.4,
   "experience": 0.2,
   "result": {

@@ -1,6 +1,10 @@
 {
   "type": "minecraft:smelting",
-  "ingredient": "spectrum:stratine_ore",
+  "ingredient": [
+    {
+      "item": "spectrum:stratine_ore"
+    }
+  ],
   "result": {
     "id": "spectrum:stratine_fragments"
   },

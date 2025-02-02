@@ -9,6 +9,7 @@ import net.minecraft.recipe.*;
 import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
+import net.minecraft.util.collection.*;
 
 import java.util.*;
 
@@ -18,7 +19,7 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
 	public static final float ENCHANTED_STAR_CANDY_CHANCE = 0.02F;
 	
 	public StarCandyRecipe() {
-		super("", false, Optional.of(UNLOCK_IDENTIFIER), PedestalRecipeTier.BASIC, 3, 3, generateInputs(), Map.of(BuiltinGemstoneColor.YELLOW, 1), SpectrumItems.STAR_CANDY.getDefaultStack(), 1.0F, 20, false, false);
+		super("", false, Optional.of(UNLOCK_IDENTIFIER), PedestalRecipeTier.BASIC, new RawShapedPedestalRecipe(3, 3, generateInputs(), Optional.empty()), Map.of(BuiltinGemstoneColor.YELLOW, 1), SpectrumItems.STAR_CANDY.getDefaultStack(), 1.0F, 20, false, false);
 	}
 	
 	@Override
@@ -29,8 +30,8 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
 		return this.output.copy();
 	}
 	
-	private static List<IngredientStack> generateInputs() {
-		return List.of(
+	private static DefaultedList<IngredientStack> generateInputs() {
+		return DefaultedList.copyOf(IngredientStack.EMPTY,
 				IngredientStack.ofItems(1, Items.SUGAR),
 				IngredientStack.ofItems(1, Items.SUGAR),
 				IngredientStack.ofItems(1, Items.SUGAR),

@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "spectrum:frostbite_crystal",
+  "ingredient": [
+    {
+      "item": "spectrum:frostbite_crystal"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1.5,
   "experience": 4.0,
   "result": {

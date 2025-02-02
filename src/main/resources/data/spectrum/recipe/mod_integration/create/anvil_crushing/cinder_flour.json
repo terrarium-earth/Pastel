@@ -1,6 +1,10 @@
 {
   "type": "spectrum:anvil_crushing",
-  "ingredient": "minecraft:ancient_debris",
+  "ingredient": [
+    {
+      "item": "minecraft:ancient_debris"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 0.01,
   "experience": 2.0,
   "result": {

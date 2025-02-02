@@ -1,6 +1,10 @@
 {
   "type": "spectrum:midnight_solution_converting",
-  "ingredient": "minecraft:campfire",
+  "ingredient": [
+    {
+      "item": "minecraft:campfire"
+    }
+  ],
   "result": {
     "id": "minecraft:soul_campfire",
     "count": 1

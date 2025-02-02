@@ -1,6 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "ingredient": "spectrum:bone_ash_tiles",
+  "ingredient": [
+    {
+      "item": "spectrum:bone_ash_tiles"
+    }
+  ],
   "result": {
     "id": "spectrum:bone_ash_tile_wall"
   },
