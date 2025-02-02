@@ -1,8 +1,12 @@
 {
   "type": "spectrum:anvil_crushing",
   "ingredient": [
-    "spectrum:small_coal_bud",
-    "spectrum:large_coal_bud"
+    {
+      "item": "spectrum:small_coal_bud"
+    },
+    {
+      "item": "spectrum:large_coal_bud"
+    }
   ],
   "crushedItemsPerPointOfDamage": 1.0,
   "experience": 2.0,

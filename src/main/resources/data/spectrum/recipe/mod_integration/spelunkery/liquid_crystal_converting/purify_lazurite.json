@@ -1,7 +1,11 @@
 {
   "type": "spectrum:liquid_crystal_converting",
   "required_advancement": "spectrum:unlocks/blocks/liquid_crystal",
-  "ingredient": "spelunkery:rough_lazurite",
+  "ingredient": [
+    {
+      "item": "spelunkery:rough_lazurite"
+    }
+  ],
   "result": {
     "id": "minecraft:lapis_lazuli",
     "count": 1

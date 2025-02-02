@@ -1,20 +1,48 @@
 {
   "type": "minecraft:smelting",
   "ingredient": [
-    "spectrum:blackslag_brick_stairs",
-    "spectrum:blackslag_brick_wall",
-    "spectrum:blackslag_bricks",
-    "spectrum:blackslag_tile_stairs",
-    "spectrum:blackslag_tile_wall",
-    "spectrum:blackslag_tiles",
-    "spectrum:chiseled_polished_blackslag",
-    "spectrum:cobbled_blackslag_stairs",
-    "spectrum:cobbled_blackslag_wall",
-    "spectrum:cracked_blackslag_tiles",
-    "spectrum:polished_blackslag_button",
-    "spectrum:polished_blackslag_pressure_plate",
-    "spectrum:polished_blackslag_stairs",
-    "spectrum:polished_blackslag_wall"
+    {
+      "item": "spectrum:blackslag_brick_stairs"
+    },
+    {
+      "item": "spectrum:blackslag_brick_wall"
+    },
+    {
+      "item": "spectrum:blackslag_bricks"
+    },
+    {
+      "item": "spectrum:blackslag_tile_stairs"
+    },
+    {
+      "item": "spectrum:blackslag_tile_wall"
+    },
+    {
+      "item": "spectrum:blackslag_tiles"
+    },
+    {
+      "item": "spectrum:chiseled_polished_blackslag"
+    },
+    {
+      "item": "spectrum:cobbled_blackslag_stairs"
+    },
+    {
+      "item": "spectrum:cobbled_blackslag_wall"
+    },
+    {
+      "item": "spectrum:cracked_blackslag_tiles"
+    },
+    {
+      "item": "spectrum:polished_blackslag_button"
+    },
+    {
+      "item": "spectrum:polished_blackslag_pressure_plate"
+    },
+    {
+      "item": "spectrum:polished_blackslag_stairs"
+    },
+    {
+      "item": "spectrum:polished_blackslag_wall"
+    }
   ],
   "result": {
     "id": "spectrum:polished_blackslag"

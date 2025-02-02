@@ -1,7 +1,11 @@
 {
   "type": "spectrum:liquid_crystal_converting",
   "required_advancement": "spectrum:unlocks/blocks/liquid_crystal",
-  "ingredient": "create:rose_quartz",
+  "ingredient": [
+    {
+      "item": "create:rose_quartz"
+    }
+  ],
   "result": {
     "id": "create:polished_rose_quartz",
     "count": 1

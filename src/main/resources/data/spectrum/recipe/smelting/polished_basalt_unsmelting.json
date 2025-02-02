@@ -1,22 +1,54 @@
 {
   "type": "minecraft:smelting",
   "ingredient": [
-    "spectrum:basalt_brick_stairs",
-    "spectrum:basalt_brick_wall",
-    "spectrum:basalt_bricks",
-    "spectrum:basalt_tile_stairs",
-    "spectrum:basalt_tile_wall",
-    "spectrum:basalt_tiles",
-    "spectrum:chiseled_polished_basalt",
-    "spectrum:cracked_basalt_tiles",
-    "spectrum:notched_polished_basalt",
-    "spectrum:polished_basalt_button",
-    "spectrum:polished_basalt_crest",
-    "spectrum:polished_basalt_pillar",
-    "spectrum:polished_basalt_pressure_plate",
-    "spectrum:polished_basalt_stairs",
-    "spectrum:polished_basalt_wall",
-    "spectrum:planed_basalt"
+    {
+      "item": "spectrum:basalt_brick_stairs"
+    },
+    {
+      "item": "spectrum:basalt_brick_wall"
+    },
+    {
+      "item": "spectrum:basalt_bricks"
+    },
+    {
+      "item": "spectrum:basalt_tile_stairs"
+    },
+    {
+      "item": "spectrum:basalt_tile_wall"
+    },
+    {
+      "item": "spectrum:basalt_tiles"
+    },
+    {
+      "item": "spectrum:chiseled_polished_basalt"
+    },
+    {
+      "item": "spectrum:cracked_basalt_tiles"
+    },
+    {
+      "item": "spectrum:notched_polished_basalt"
+    },
+    {
+      "item": "spectrum:polished_basalt_button"
+    },
+    {
+      "item": "spectrum:polished_basalt_crest"
+    },
+    {
+      "item": "spectrum:polished_basalt_pillar"
+    },
+    {
+      "item": "spectrum:polished_basalt_pressure_plate"
+    },
+    {
+      "item": "spectrum:polished_basalt_stairs"
+    },
+    {
+      "item": "spectrum:polished_basalt_wall"
+    },
+    {
+      "item": "spectrum:planed_basalt"
+    }
   ],
   "result": {
     "id": "spectrum:polished_basalt"

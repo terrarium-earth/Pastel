@@ -1,7 +1,11 @@
 {
   "type": "spectrum:liquid_crystal_converting",
   "required_advancement": "spectrum:unlocks/blocks/liquid_crystal",
-  "ingredient": "spelunkery:rough_emerald",
+  "ingredient": [
+    {
+      "item": "spelunkery:rough_emerald"
+    }
+  ],
   "result": {
     "id": "minecraft:emerald",
     "count": 1

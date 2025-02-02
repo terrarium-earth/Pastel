@@ -20,17 +20,20 @@ import java.util.stream.*;
 
 public class FluidIngredient {
 	
-	public static final Codec<FluidIngredient> CODEC = Codec.mapEither(
+	public static final MapCodec<FluidIngredient> MAP_CODEC = Codec.mapEither(
 			Registries.FLUID.getCodec().fieldOf("fluid"),
 			Identifier.CODEC.fieldOf("tag")
-	).codec().xmap(
-			either -> either.map(
-					fluid -> new FluidIngredient(fluid, null),
-					tag -> new FluidIngredient(null, tag)
+	).xmap(
+			either -> either.map(fluid -> new FluidIngredient(fluid, null), tag -> new FluidIngredient(null, tag)),
+			fluidIngredient -> fluidIngredient.fluid != null ? Either.left(fluidIngredient.fluid) : Either.right(fluidIngredient.tag)
+	);
+	
+	public static final Codec<FluidIngredient> CODEC = Codec.withAlternative(
+			Codec.xor(Registries.FLUID.getCodec(), TagKey.codec(RegistryKeys.FLUID)).xmap(
+					either -> either.map(FluidIngredient::of, FluidIngredient::of),
+					ingredient -> ingredient.fluid != null ? Either.left(ingredient.fluid) : Either.right(TagKey.of(RegistryKeys.FLUID, ingredient.tag))
 			),
-			fluidIngredient -> fluidIngredient.fluid != null
-					? Either.left(fluidIngredient.fluid)
-					: Either.right(fluidIngredient.tag)
+			MAP_CODEC.codec()
 	);
 	
 	public static final PacketCodec<RegistryByteBuf, FluidIngredient> PACKET_CODEC = PacketCodec.tuple(
@@ -72,6 +75,10 @@ public class FluidIngredient {
 	public static FluidIngredient of(@NotNull Fluid fluid) {
 		Objects.requireNonNull(fluid);
 		return new FluidIngredient(fluid, null);
+	}
+	
+	public static FluidIngredient of(TagKey<Fluid> tag) {
+		return new FluidIngredient(null, tag.id());
 	}
 	
 	public static FluidIngredient of(@NotNull Identifier tag) {

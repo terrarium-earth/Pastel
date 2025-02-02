@@ -1,7 +1,11 @@
 {
   "type": "spectrum:liquid_crystal_converting",
   "required_advancement": "spectrum:unlocks/blocks/liquid_crystal",
-  "ingredient": "spelunkery:salt",
+  "ingredient": [
+    {
+      "item": "spelunkery:salt"
+    }
+  ],
   "result": {
     "id": "spelunkery:rock_salt",
     "count": 1

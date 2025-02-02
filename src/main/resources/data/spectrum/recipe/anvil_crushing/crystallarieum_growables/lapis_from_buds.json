@@ -1,8 +1,12 @@
 {
   "type": "spectrum:anvil_crushing",
   "ingredient": [
-    "spectrum:small_lapis_bud",
-    "spectrum:large_lapis_bud"
+    {
+      "item": "spectrum:small_lapis_bud"
+    },
+    {
+      "item": "spectrum:large_lapis_bud"
+    }
   ],
   "crushedItemsPerPointOfDamage": 1.0,
   "experience": 2.0,

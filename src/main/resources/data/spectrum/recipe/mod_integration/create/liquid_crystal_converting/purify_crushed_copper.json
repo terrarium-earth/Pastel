@@ -1,7 +1,11 @@
 {
   "type": "spectrum:liquid_crystal_converting",
   "required_advancement": "spectrum:unlocks/blocks/liquid_crystal",
-  "ingredient": "create:crushed_raw_copper",
+  "ingredient": [
+    {
+      "item": "create:crushed_raw_copper"
+    }
+  ],
   "result": {
     "id": "minecraft:clay_ball",
     "count": 1

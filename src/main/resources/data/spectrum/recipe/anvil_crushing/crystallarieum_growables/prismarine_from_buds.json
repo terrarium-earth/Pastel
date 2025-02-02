@@ -1,8 +1,12 @@
 {
   "type": "spectrum:anvil_crushing",
   "ingredient": [
-    "spectrum:small_prismarine_bud",
-    "spectrum:large_prismarine_bud"
+    {
+      "item": "spectrum:small_prismarine_bud"
+    },
+    {
+      "item": "spectrum:large_prismarine_bud"
+    }
   ],
   "crushedItemsPerPointOfDamage": 1.0,
   "experience": 2.0,

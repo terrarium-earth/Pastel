@@ -1,7 +1,11 @@
 {
   "type": "spectrum:liquid_crystal_converting",
   "required_advancement": "spectrum:unlocks/blocks/liquid_crystal",
-  "ingredient": "malum:crushed_soulstone",
+  "ingredient": [
+    {
+      "item": "malum:crushed_soulstone"
+    }
+  ],
   "result": {
     "id": "malum:hex_ash",
     "count": 1

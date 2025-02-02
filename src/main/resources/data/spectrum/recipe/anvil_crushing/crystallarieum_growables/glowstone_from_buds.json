@@ -1,8 +1,12 @@
 {
   "type": "spectrum:anvil_crushing",
   "ingredient": [
-    "spectrum:small_glowstone_bud",
-    "spectrum:large_glowstone_bud"
+    {
+      "item": "spectrum:small_glowstone_bud"
+    },
+    {
+      "item": "spectrum:large_glowstone_bud"
+    }
   ],
   "crushedItemsPerPointOfDamage": 1.0,
   "experience": 2.0,

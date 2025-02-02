@@ -39,7 +39,7 @@ public record PotionRecipeEffect(
 			Codec.FLOAT.optionalFieldOf("base_yield", (float) PotionWorkshopBrewingRecipe.BASE_POTION_COUNT_ON_BREWING).forGetter(PotionRecipeEffect::baseYield),
 			Codec.INT.optionalFieldOf("potency_hard_cap", -1).forGetter(PotionRecipeEffect::potencyHardCap),
 			Codec.FLOAT.optionalFieldOf("potency_modifier", 1f).forGetter(PotionRecipeEffect::potencyModifier),
-			Registries.STATUS_EFFECT.getEntryCodec().fieldOf("status_effect").forGetter(PotionRecipeEffect::statusEffect),
+			Registries.STATUS_EFFECT.getEntryCodec().fieldOf("effect").forGetter(PotionRecipeEffect::statusEffect),
 			InkColor.CODEC.fieldOf("ink_color").forGetter(PotionRecipeEffect::inkColor),
 			Codec.INT.fieldOf("ink_cost").forGetter(PotionRecipeEffect::inkCost)
 	).apply(i, PotionRecipeEffect::new));

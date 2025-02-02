@@ -1,15 +1,33 @@
 {
   "type": "minecraft:smelting",
   "ingredient": [
-    "spectrum:basal_marble_brick_stairs",
-    "spectrum:basal_marble_brick_wall",
-    "spectrum:basal_marble_bricks",
-    "spectrum:basal_marble_tile_stairs",
-    "spectrum:basal_marble_tile_wall",
-    "spectrum:basal_marble_tiles",
-    "spectrum:basal_marble_pillar",
-    "spectrum:polished_basal_marble_stairs",
-    "spectrum:polished_basal_marble_wall"
+    {
+      "item": "spectrum:basal_marble_brick_stairs"
+    },
+    {
+      "item": "spectrum:basal_marble_brick_wall"
+    },
+    {
+      "item": "spectrum:basal_marble_bricks"
+    },
+    {
+      "item": "spectrum:basal_marble_tile_stairs"
+    },
+    {
+      "item": "spectrum:basal_marble_tile_wall"
+    },
+    {
+      "item": "spectrum:basal_marble_tiles"
+    },
+    {
+      "item": "spectrum:basal_marble_pillar"
+    },
+    {
+      "item": "spectrum:polished_basal_marble_stairs"
+    },
+    {
+      "item": "spectrum:polished_basal_marble_wall"
+    }
   ],
   "result": {
     "id": "spectrum:polished_basal_marble"

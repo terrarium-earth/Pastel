@@ -1,8 +1,12 @@
 {
   "type": "spectrum:goo_converting",
   "required_advancement": "spectrum:collect_four_leaf_clover",
-  "ingredient": "spectrum:four_leaf_clover",
+  "ingredient": [
+    {
+      "item": "spectrum:four_leaf_clover"
+    }
+  ],
   "result": {
-    "id": "minecraft:scute"
+    "id": "minecraft:turtle_scute"
   }
 }

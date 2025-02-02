@@ -1,7 +1,11 @@
 {
   "type": "spectrum:liquid_crystal_converting",
   "required_advancement": "spectrum:unlocks/blocks/liquid_crystal",
-  "ingredient": "spelunkery:rough_cinnabar",
+  "ingredient": [
+    {
+      "item": "spelunkery:rough_cinnabar"
+    }
+  ],
   "result": {
     "id": "spelunkery:cinnabar",
     "count": 1

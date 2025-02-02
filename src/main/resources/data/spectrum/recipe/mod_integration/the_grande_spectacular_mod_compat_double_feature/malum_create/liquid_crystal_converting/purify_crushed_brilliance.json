@@ -1,7 +1,11 @@
 {
   "type": "spectrum:liquid_crystal_converting",
   "required_advancement": "spectrum:unlocks/blocks/liquid_crystal",
-  "ingredient": "malum:crushed_brilliance",
+  "ingredient": [
+    {
+      "item": "malum:crushed_brilliance"
+    }
+  ],
   "result": {
     "id": "create:experience_nugget",
     "count": 2

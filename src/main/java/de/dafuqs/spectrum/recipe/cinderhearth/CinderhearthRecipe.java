@@ -141,10 +141,13 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleStackReci
 				IngredientStack.Serializer.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
 				Codec.INT.fieldOf("time").forGetter(recipe -> recipe.time),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
-				CodecHelper.mapPair(
-						ItemStack.CODEC.fieldOf("result"),
-						Codec.FLOAT.optionalFieldOf("chance", 1.0f)
-				).codec().listOf().fieldOf("results").forGetter(recipe -> recipe.resultsWithChance)
+				Codec.withAlternative(
+						ItemStack.CODEC.xmap(stack -> new Pair<>(stack, 1.0f), Pair::getLeft),
+						CodecHelper.mapPair(
+								ItemStack.CODEC.fieldOf("result"),
+								Codec.FLOAT.optionalFieldOf("chance", 1.0f)
+						).codec()
+				).listOf().fieldOf("results").forGetter(recipe -> recipe.resultsWithChance)
 		).apply(i, CinderhearthRecipe::new));
 		
 		public static final PacketCodec<RegistryByteBuf, CinderhearthRecipe> PACKET_CODEC = PacketCodecHelper.tuple(

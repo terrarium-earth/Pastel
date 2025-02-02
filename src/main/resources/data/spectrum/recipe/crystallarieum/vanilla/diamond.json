@@ -31,19 +31,31 @@
   "grows_without_catalyst": false,
   "catalysts": [
     {
-      "ingredient": "minecraft:coal",
+      "ingredient": [
+        {
+          "item": "minecraft:coal"
+        }
+      ],
       "growth_acceleration_mod": 8.0,
       "ink_consumption_mod": 0.25,
       "consume_chance_per_second": 0.2
     },
     {
-      "ingredient": "minecraft:coal_block",
+      "ingredient": [
+        {
+          "item": "minecraft:coal_block"
+        }
+      ],
       "growth_acceleration_mod": 10.0,
       "ink_consumption_mod": 0.25,
       "consume_chance_per_second": 0.02
     },
     {
-      "ingredient": "minecraft:charcoal",
+      "ingredient": [
+        {
+          "item": "minecraft:charcoal"
+        }
+      ],
       "growth_acceleration_mod": 16.0,
       "ink_consumption_mod": 0.25,
       "consume_chance_per_second": 1.0

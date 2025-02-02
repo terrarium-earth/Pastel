@@ -1,8 +1,12 @@
 {
   "type": "spectrum:anvil_crushing",
   "ingredient": [
-    "spectrum:small_echo_bud",
-    "spectrum:large_echo_bud"
+    {
+      "item": "spectrum:small_echo_bud"
+    },
+    {
+      "item": "spectrum:large_echo_bud"
+    }
   ],
   "crushedItemsPerPointOfDamage": 1.0,
   "experience": 2.0,
