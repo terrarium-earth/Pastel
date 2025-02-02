@@ -50,7 +50,9 @@
                   "conditions": [
                     {
                       "condition": "minecraft:match_tool",
-                      "predicate": "#minecraft:cluster_max_harvestables"
+                      "predicate": {
+                        "items": "#minecraft:cluster_max_harvestables"
+                      }
                     }
                   ]
                 },

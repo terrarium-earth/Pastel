@@ -52,7 +52,7 @@ public class SpectrumDataComponentTypes {
 	public static final ComponentType<Unit> SOCKETED = register("socketed", builder -> builder.codec(Codec.unit(Unit.INSTANCE)).packetCodec(PacketCodec.unit(Unit.INSTANCE)));
 	public static final ComponentType<Unit> STABLE = register("stable", builder -> builder.codec(Codec.unit(Unit.INSTANCE)).packetCodec(PacketCodec.unit(Unit.INSTANCE)));
 	public static final ComponentType<Identifier> STORED_BLOCK = register("stored_block", builder -> builder.codec(Identifier.CODEC).packetCodec(Identifier.PACKET_CODEC));
-	public static final ComponentType<Integer> STORED_EXPERIENCE = register("stored_experiene", builder -> builder.codec(Codec.INT).packetCodec(PacketCodecs.VAR_INT));
+	public static final ComponentType<Integer> STORED_EXPERIENCE = register("stored_experience", builder -> builder.codec(Codec.INT).packetCodec(PacketCodecs.VAR_INT));
 	public static final ComponentType<Identifier> STORED_RECIPE = register("stored_recipe", builder -> builder.codec(Identifier.CODEC).packetCodec(Identifier.PACKET_CODEC));
 	public static final ComponentType<GlobalPos> TARGETED_STRUCTURE = register("targeted_structure", builder -> builder.codec(GlobalPos.CODEC).packetCodec(GlobalPos.PACKET_CODEC));
 	public static final ComponentType<WrappedPresentComponent> WRAPPED_PRESENT = register("wrapped_present", builder -> builder.codec(WrappedPresentComponent.CODEC).packetCodec(WrappedPresentComponent.PACKET_CODEC).cache());

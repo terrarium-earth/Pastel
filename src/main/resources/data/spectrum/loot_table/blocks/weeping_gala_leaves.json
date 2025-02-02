@@ -18,9 +18,7 @@
                     {
                       "condition": "minecraft:match_tool",
                       "predicate": {
-                        "items": [
-                          "#c:tools/shear"
-                        ]
+                        "items": "#c:tools/shear"
                       }
                     },
                     {

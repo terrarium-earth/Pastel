@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 
 @Mixin(RandomChanceWithEnchantedBonusLootCondition.class)
-public abstract class RandomChanceWithLootingLootConditionMixin {
+public abstract class RandomChanceWithEnchantedBonusLootConditionMixin {
 	
 	@Shadow
 	@Final
