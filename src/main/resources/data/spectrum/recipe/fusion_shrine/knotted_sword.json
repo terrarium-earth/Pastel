@@ -26,7 +26,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:knotted_sword",
+  "result": {
+    "id": "spectrum:knotted_sword"
+  },
   "required_advancement": "spectrum:unlocks/equipment/knotted_sword",
   "start_crafting_effect": "single_visual_explosion_on_shrine",
   "during_crafting_effects": [

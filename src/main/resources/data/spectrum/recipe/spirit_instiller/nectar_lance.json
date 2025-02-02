@@ -5,6 +5,8 @@
   "ingredient1": "spectrum:evernectar",
   "ingredient2": "spectrum:aether_vestiges",
   "center_ingredient": "spectrum:knotted_sword",
-  "result": "spectrum:nectar_lance",
+  "result": {
+    "id": "spectrum:nectar_lance"
+  },
   "required_advancement": "spectrum:unlocks/equipment/nectar_lance"
 }

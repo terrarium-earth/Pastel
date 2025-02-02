@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:lime_pigment"
   ],
-  "result": "minecraft:lime_dye"
+  "result": {
+    "id": "minecraft:lime_dye"
+  }
 }

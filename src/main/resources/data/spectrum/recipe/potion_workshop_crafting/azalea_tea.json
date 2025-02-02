@@ -6,6 +6,8 @@
   "color": 9997393,
   "ingredient1": "minecraft:flowering_azalea",
   "ingredient2": "spectrum:nightdew_sprout",
-  "result": "spectrum:azalea_tea",
+  "result": {
+    "id": "spectrum:azalea_tea"
+  },
   "required_advancement": "spectrum:unlocks/food/azalea_tea"
 }

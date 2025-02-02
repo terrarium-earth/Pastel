@@ -20,7 +20,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:gleaming_pin",
+  "result": {
+    "id": "spectrum:gleaming_pin"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/gleaming_pin",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

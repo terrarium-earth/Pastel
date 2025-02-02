@@ -18,6 +18,8 @@
     "F": "spectrum:bismuth_flake",
     "N": "spectrum:nightdew_sprout"
   },
-  "result": "spectrum:concealing_oils",
+  "result": {
+    "id": "spectrum:concealing_oils"
+  },
   "required_advancement": "spectrum:hidden/collect_cookbooks/poisoners_handbook"
 }

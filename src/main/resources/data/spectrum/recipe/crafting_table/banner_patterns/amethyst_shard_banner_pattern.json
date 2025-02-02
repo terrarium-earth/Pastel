@@ -4,5 +4,7 @@
     "minecraft:paper",
     "minecraft:amethyst_shard"
   ],
-  "result": "spectrum:amethyst_shard_banner_pattern"
+  "result": {
+    "id": "spectrum:amethyst_shard_banner_pattern"
+  }
 }

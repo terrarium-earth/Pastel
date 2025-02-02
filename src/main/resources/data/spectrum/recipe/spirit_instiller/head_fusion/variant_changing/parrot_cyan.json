@@ -14,6 +14,8 @@
     "item": "spectrum:vegetal",
     "count": 1
   },
-  "result": "spectrum:parrot_cyan_head",
+  "result": {
+    "id": "spectrum:parrot_cyan_head"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/basic_recipes"
 }

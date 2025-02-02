@@ -18,7 +18,9 @@
     "C": "farmersdelight:canvas",
     "P": "spectrum:purple_pigment"
   },
-  "result": "spectrum:enchantment_canvas",
+  "result": {
+    "id": "spectrum:enchantment_canvas"
+  },
   "required_advancement": "spectrum:unlocks/items/enchantment_canvas",
   "fabric:load_conditions": [
     {

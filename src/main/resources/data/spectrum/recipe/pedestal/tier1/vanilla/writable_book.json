@@ -13,6 +13,8 @@
     "#spectrum:pigments",
     "minecraft:feather"
   ],
-  "result": "minecraft:writable_book",
+  "result": {
+    "id": "minecraft:writable_book"
+  },
   "required_advancement": "spectrum:collect_pigment"
 }

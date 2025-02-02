@@ -5,5 +5,7 @@
   "color": 4268288,
   "ingredient1": "minecraft:dirt",
   "ingredient2": "minecraft:mud",
-  "result": "spectrum:goo_bucket"
+  "result": {
+    "id": "spectrum:goo_bucket"
+  }
 }

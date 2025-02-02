@@ -14,7 +14,9 @@
     "spectrum:weathered_shale_clay_tile_stairs",
     "spectrum:weathered_shale_clay_tiles"
   ],
-  "result": "spectrum:polished_shale_clay",
+  "result": {
+    "id": "spectrum:polished_shale_clay"
+  },
   "experience": 0.1,
   "cookingtime": 100
 }

@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:polished_basalt",
-  "result": "spectrum:basalt_brick_slab",
+  "result": {
+    "id": "spectrum:basalt_brick_slab"
+  },
   "count": 2
 }

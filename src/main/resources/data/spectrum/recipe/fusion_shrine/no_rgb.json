@@ -11,7 +11,9 @@
     "spectrum:refined_azurite",
     "spectrum:refined_bloodstone"
   ],
-  "result": "minecraft:raw_copper",
+  "result": {
+    "id": "minecraft:raw_copper"
+  },
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [
     "nothing"

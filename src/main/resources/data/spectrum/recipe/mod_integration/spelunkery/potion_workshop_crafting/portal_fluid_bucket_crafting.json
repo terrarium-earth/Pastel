@@ -6,7 +6,9 @@
   "ingredient1": "spectrum:radiating_ender",
   "ingredient2": "spectrum:neolith",
   "ingredient3": "minecraft:popped_chorus_fruit",
-  "result": "spelunkery:portal_fluid_bucket",
+  "result": {
+    "id": "spelunkery:portal_fluid_bucket"
+  },
   "required_advancement": "spectrum:unlocks/items/ender_splice",
   "fabric:load_conditions": [
     {

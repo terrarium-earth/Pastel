@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:light_blue_pigment"
   ],
-  "result": "minecraft:light_blue_dye"
+  "result": {
+    "id": "minecraft:light_blue_dye"
+  }
 }

@@ -3,7 +3,9 @@
   "ingredient": "farmersdelight:rice_panicle",
   "crushedItemsPerPointOfDamage": 2,
   "experience": 0.25,
-  "result": "farmersdelight:rice",
+  "result": {
+    "id": "farmersdelight:rice"
+  },
   "particleEffectIdentifier": "enchanted_hit",
   "particleCount": 10,
   "soundEventIdentifier": "block.moss.break",

@@ -8,6 +8,8 @@
     "item": "spectrum:vegetal",
     "count": 8
   },
-  "result": "spectrum:blood_orchid",
+  "result": {
+    "id": "spectrum:blood_orchid"
+  },
   "required_advancement": "spectrum:unlocks/blocks/blood_orchid"
 }

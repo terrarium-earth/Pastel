@@ -10,6 +10,8 @@
     "count": 2
   },
   "ingredient3": "spectrum:nightdew_sprout",
-  "result": "spectrum:sedatives",
+  "result": {
+    "id": "spectrum:sedatives"
+  },
   "required_advancement": "spectrum:hidden/collect_cookbooks/brewers_handbook"
 }

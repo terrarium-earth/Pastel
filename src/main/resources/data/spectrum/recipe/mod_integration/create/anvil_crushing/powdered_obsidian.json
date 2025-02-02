@@ -3,7 +3,9 @@
   "ingredient": "minecraft:obsidian",
   "crushedItemsPerPointOfDamage": 0.05,
   "experience": 0.0,
-  "result": "create:powdered_obsidian",
+  "result": {
+    "id": "create:powdered_obsidian"
+  },
   "particleEffectIdentifier": "enchanted_hit",
   "soundEventIdentifier": "block.metal.break",
   "fabric:load_conditions": [

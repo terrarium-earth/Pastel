@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:polished_bone_ash",
-  "result": "spectrum:polished_bone_ash_slab",
+  "result": {
+    "id": "spectrum:polished_bone_ash_slab"
+  },
   "count": 2
 }

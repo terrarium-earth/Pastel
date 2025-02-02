@@ -13,7 +13,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:shieldgrasp_amulet",
+  "result": {
+    "id": "spectrum:shieldgrasp_amulet"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/shieldgrasp_amulet",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

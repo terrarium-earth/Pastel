@@ -13,6 +13,8 @@
     "spectrum:pure_gold",
     "spectrum:pure_gold"
   ],
-  "result": "spectrum:enchanted_golden_carrot",
+  "result": {
+    "id": "spectrum:enchanted_golden_carrot"
+  },
   "required_advancement": "spectrum:lategame/collect_pure_resource"
 }

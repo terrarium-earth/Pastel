@@ -12,6 +12,8 @@
     "item": "spectrum:vegetal",
     "count": 4
   },
-  "result": "spectrum:ghast_head",
+  "result": {
+    "id": "spectrum:ghast_head"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/nightdew_recipes"
 }

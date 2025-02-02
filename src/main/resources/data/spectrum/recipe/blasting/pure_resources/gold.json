@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "spectrum:pure_gold",
-  "result": "minecraft:gold_ingot",
+  "result": {
+    "id": "minecraft:gold_ingot"
+  },
   "experience": 0.5,
   "cookingtime": 100
 }

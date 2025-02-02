@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:calcite_tiles",
-  "result": "spectrum:cracked_calcite_tiles",
+  "result": {
+    "id": "spectrum:cracked_calcite_tiles"
+  },
   "count": 1
 }

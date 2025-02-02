@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:pyrite_tiles",
-  "result": "spectrum:pyrite_tiles_slab",
+  "result": {
+    "id": "spectrum:pyrite_tiles_slab"
+  },
   "count": 2
 }

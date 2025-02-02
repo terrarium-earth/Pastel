@@ -12,6 +12,8 @@
     "item": "spectrum:vegetal",
     "count": 4
   },
-  "result": "spectrum:skeleton_horse_head",
+  "result": {
+    "id": "spectrum:skeleton_horse_head"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/storm_stone_recipes"
 }

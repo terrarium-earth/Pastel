@@ -7,5 +7,7 @@
   "key": {
     "#": "spectrum:weeping_gala_planks"
   },
-  "result": "spectrum:weeping_gala_pressure_plate"
+  "result": {
+    "id": "spectrum:weeping_gala_pressure_plate"
+  }
 }

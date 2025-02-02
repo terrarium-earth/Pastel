@@ -7,5 +7,7 @@
   "key": {
     "X": "spectrum:pyrite_chunk"
   },
-  "result": "spectrum:pyrite"
+  "result": {
+    "id": "spectrum:pyrite"
+  }
 }

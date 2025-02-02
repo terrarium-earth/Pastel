@@ -21,7 +21,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:azuresque_dike_core",
+  "result": {
+    "id": "spectrum:azuresque_dike_core"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/azuresque_dike_core",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:purple_planks"
   ],
-  "result": "spectrum:purple_button"
+  "result": {
+    "id": "spectrum:purple_button"
+  }
 }

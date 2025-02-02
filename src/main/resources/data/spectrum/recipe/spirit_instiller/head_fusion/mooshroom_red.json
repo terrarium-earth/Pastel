@@ -12,6 +12,8 @@
     "item": "spectrum:vegetal",
     "count": 4
   },
-  "result": "spectrum:mooshroom_red_head",
+  "result": {
+    "id": "spectrum:mooshroom_red_head"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/basic_recipes"
 }

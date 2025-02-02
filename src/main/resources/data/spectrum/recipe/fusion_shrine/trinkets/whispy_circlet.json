@@ -20,7 +20,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:whispy_circlet",
+  "result": {
+    "id": "spectrum:whispy_circlet"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/whispy_circlet",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

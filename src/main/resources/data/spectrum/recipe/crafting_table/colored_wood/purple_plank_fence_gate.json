@@ -9,5 +9,7 @@
     "#": "minecraft:stick",
     "W": "spectrum:purple_planks"
   },
-  "result": "spectrum:purple_fence_gate"
+  "result": {
+    "id": "spectrum:purple_fence_gate"
+  }
 }

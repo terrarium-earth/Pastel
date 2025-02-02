@@ -2,7 +2,9 @@
   "type": "minecraft:blasting",
   "group": "redstone",
   "ingredient": "spectrum:blackslag_redstone_ore",
-  "result": "minecraft:redstone",
+  "result": {
+    "id": "minecraft:redstone"
+  },
   "experience": 0.7,
   "cookingtime": 100
 }

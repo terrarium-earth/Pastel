@@ -9,6 +9,8 @@
     "item": "spectrum:vegetal",
     "count": 4
   },
-  "result": "spectrum:zoglin_head",
+  "result": {
+    "id": "spectrum:zoglin_head"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/basic_recipes"
 }

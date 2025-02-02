@@ -12,6 +12,8 @@
     "minecraft:mud",
     "#spectrum:amaranth_bushel"
   ],
-  "result": "minecraft:packed_mud",
+  "result": {
+    "id": "minecraft:packed_mud"
+  },
   "required_advancement": "spectrum:collect_amaranth_bushel"
 }

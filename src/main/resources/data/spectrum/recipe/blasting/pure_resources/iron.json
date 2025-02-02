@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "spectrum:pure_iron",
-  "result": "minecraft:iron_ingot",
+  "result": {
+    "id": "minecraft:iron_ingot"
+  },
   "experience": 0.5,
   "cookingtime": 100
 }

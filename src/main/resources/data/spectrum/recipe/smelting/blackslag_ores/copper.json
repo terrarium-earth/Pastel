@@ -2,7 +2,9 @@
   "type": "minecraft:smelting",
   "group": "copper",
   "ingredient": "spectrum:blackslag_copper_ore",
-  "result": "minecraft:raw_copper",
+  "result": {
+    "id": "minecraft:raw_copper"
+  },
   "experience": 1.0,
   "cookingtime": 200
 }

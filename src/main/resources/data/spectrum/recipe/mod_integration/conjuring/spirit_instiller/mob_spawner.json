@@ -11,7 +11,9 @@
     "count": 8
   },
   "center_ingredient": "conjuring:conjuration_essence",
-  "result": "minecraft:spawner",
+  "result": {
+    "id": "minecraft:spawner"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

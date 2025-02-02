@@ -6,5 +6,7 @@
   "ingredient1": "minecraft:bucket",
   "ingredient2": "minecraft:magma_block",
   "ingredient3": "spectrum:orange_pigment",
-  "result": "minecraft:lava_bucket"
+  "result": {
+    "id": "minecraft:lava_bucket"
+  }
 }

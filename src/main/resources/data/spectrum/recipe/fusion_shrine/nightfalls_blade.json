@@ -28,7 +28,9 @@
       "count": 4
     }
   ],
-  "result": "spectrum:nightfalls_blade",
+  "result": {
+    "id": "spectrum:nightfalls_blade"
+  },
   "required_advancement": "spectrum:unlocks/equipment/nightfalls_blade",
   "start_crafting_effect": "single_visual_explosion_on_shrine",
   "during_crafting_effects": [

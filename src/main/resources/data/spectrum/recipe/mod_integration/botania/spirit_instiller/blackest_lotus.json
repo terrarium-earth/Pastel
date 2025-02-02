@@ -11,7 +11,9 @@
     "count": 16
   },
   "center_ingredient": "botania:blacker_lotus",
-  "result": "spectrum:blackest_lotus",
+  "result": {
+    "id": "spectrum:blackest_lotus"
+  },
   "required_advancement": "spectrum:lategame/strike_up_hummingstone_hymn",
   "fabric:load_conditions": [
     {

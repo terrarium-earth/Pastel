@@ -2,5 +2,7 @@
   "type": "spectrum:goo_converting",
   "required_advancement": "spectrum:hidden/collect_ash_and_slush",
   "ingredient": "spectrum:ash",
-  "result": "spectrum:slush"
+  "result": {
+    "id": "spectrum:slush"
+  }
 }

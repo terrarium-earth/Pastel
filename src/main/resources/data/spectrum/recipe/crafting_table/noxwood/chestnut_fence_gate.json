@@ -9,5 +9,7 @@
     "#": "minecraft:stick",
     "W": "spectrum:chestnut_noxwood_planks"
   },
-  "result": "spectrum:chestnut_noxwood_fence_gate"
+  "result": {
+    "id": "spectrum:chestnut_noxwood_fence_gate"
+  }
 }

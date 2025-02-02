@@ -17,7 +17,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:lesser_potion_pendant",
+  "result": {
+    "id": "spectrum:lesser_potion_pendant"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/lesser_potion_pendant",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

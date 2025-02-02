@@ -7,5 +7,7 @@
     "item": "spectrum:light_blue_pigment",
     "count": 4
   },
-  "result": "minecraft:water_bucket"
+  "result": {
+    "id": "minecraft:water_bucket"
+  }
 }

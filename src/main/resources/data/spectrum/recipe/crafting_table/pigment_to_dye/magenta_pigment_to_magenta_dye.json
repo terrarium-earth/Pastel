@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:magenta_pigment"
   ],
-  "result": "minecraft:magenta_dye"
+  "result": {
+    "id": "minecraft:magenta_dye"
+  }
 }

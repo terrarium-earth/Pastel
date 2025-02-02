@@ -5,5 +5,7 @@
   "ingredient1": "spectrum:moonstruck_nectar",
   "ingredient2": "spectrum:mermaids_gem",
   "center_ingredient": "minecraft:nautilus_shell",
-  "result": "minecraft:heart_of_the_sea"
+  "result": {
+    "id": "minecraft:heart_of_the_sea"
+  }
 }

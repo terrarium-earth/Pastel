@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:gray_pigment"
   ],
-  "result": "minecraft:gray_dye"
+  "result": {
+    "id": "minecraft:gray_dye"
+  }
 }

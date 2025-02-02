@@ -3,5 +3,7 @@
   "ingredients": [
     "spectrum:polished_blackslag"
   ],
-  "result": "spectrum:polished_blackslag_button"
+  "result": {
+    "id": "spectrum:polished_blackslag_button"
+  }
 }

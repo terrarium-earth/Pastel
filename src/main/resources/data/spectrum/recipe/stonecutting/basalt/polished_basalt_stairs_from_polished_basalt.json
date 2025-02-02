@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:polished_basalt",
-  "result": "spectrum:polished_basalt_stairs",
+  "result": {
+    "id": "spectrum:polished_basalt_stairs"
+  },
   "count": 1
 }

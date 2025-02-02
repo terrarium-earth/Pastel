@@ -12,6 +12,8 @@
     "item": "spectrum:vegetal",
     "count": 4
   },
-  "result": "minecraft:wither_skeleton_skull",
+  "result": {
+    "id": "minecraft:wither_skeleton_skull"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/basic_recipes"
 }

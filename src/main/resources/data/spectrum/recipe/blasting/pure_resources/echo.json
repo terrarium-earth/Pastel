@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "spectrum:pure_echo",
-  "result": "minecraft:echo_shard",
+  "result": {
+    "id": "minecraft:echo_shard"
+  },
   "experience": 0.5,
   "cookingtime": 100
 }

@@ -1,7 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": "#spectrum:topaz_ores",
-  "result": "spectrum:topaz_shard",
+  "result": {
+    "id": "spectrum:topaz_shard"
+  },
   "experience": 0.25,
   "cookingtime": 200
 }

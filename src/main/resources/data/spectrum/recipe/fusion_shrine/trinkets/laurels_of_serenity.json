@@ -21,7 +21,9 @@
       "count": 2
     }
   ],
-  "result": "spectrum:laurels_of_serenity",
+  "result": {
+    "id": "spectrum:laurels_of_serenity"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/laurels_of_serenity",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

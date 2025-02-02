@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:chestnut_noxwood_planks"
   ],
-  "result": "spectrum:chestnut_noxwood_button"
+  "result": {
+    "id": "spectrum:chestnut_noxwood_button"
+  }
 }

@@ -4,5 +4,7 @@
     "minecraft:paper",
     "minecraft:amethyst_cluster"
   ],
-  "result": "spectrum:amethyst_cluster_banner_pattern"
+  "result": {
+    "id": "spectrum:amethyst_cluster_banner_pattern"
+  }
 }

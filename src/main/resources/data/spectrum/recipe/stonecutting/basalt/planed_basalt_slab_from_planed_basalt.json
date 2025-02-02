@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:planed_basalt",
-  "result": "spectrum:planed_basalt_slab",
+  "result": {
+    "id": "spectrum:planed_basalt_slab"
+  },
   "count": 2
 }

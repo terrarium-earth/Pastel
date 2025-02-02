@@ -6,5 +6,7 @@
   "key": {
     "#": "spectrum:polished_basalt"
   },
-  "result": "spectrum:polished_basalt_pressure_plate"
+  "result": {
+    "id": "spectrum:polished_basalt_pressure_plate"
+  }
 }

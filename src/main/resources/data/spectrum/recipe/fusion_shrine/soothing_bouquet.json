@@ -28,7 +28,9 @@
       "count": 3
     }
   ],
-  "result": "spectrum:soothing_bouquet",
+  "result": {
+    "id": "spectrum:soothing_bouquet"
+  },
   "required_advancement": "spectrum:unlocks/equipment/soothing_bouquet",
   "world_conditions": {
     "time_of_day": "midnight"

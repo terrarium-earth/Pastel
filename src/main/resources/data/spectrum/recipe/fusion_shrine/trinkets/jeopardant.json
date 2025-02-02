@@ -17,7 +17,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:jeopardant",
+  "result": {
+    "id": "spectrum:jeopardant"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/jeopardant",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

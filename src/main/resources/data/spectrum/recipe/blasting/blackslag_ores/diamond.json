@@ -2,7 +2,9 @@
   "type": "minecraft:blasting",
   "group": "diamond",
   "ingredient": "spectrum:blackslag_diamond_ore",
-  "result": "minecraft:diamond",
+  "result": {
+    "id": "minecraft:diamond"
+  },
   "experience": 1.0,
   "cookingtime": 100
 }

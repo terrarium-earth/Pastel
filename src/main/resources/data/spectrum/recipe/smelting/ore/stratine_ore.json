@@ -1,7 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": "spectrum:stratine_ore",
-  "result": "spectrum:stratine_fragments",
+  "result": {
+    "id": "spectrum:stratine_fragments"
+  },
   "experience": 0.2,
   "cookingtime": 200
 }

@@ -6,5 +6,7 @@
   "key": {
     "#": "spectrum:polished_calcite"
   },
-  "result": "spectrum:polished_calcite_pressure_plate"
+  "result": {
+    "id": "spectrum:polished_calcite_pressure_plate"
+  }
 }

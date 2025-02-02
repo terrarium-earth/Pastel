@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:black_pigment"
   ],
-  "result": "minecraft:black_dye"
+  "result": {
+    "id": "minecraft:black_dye"
+  }
 }

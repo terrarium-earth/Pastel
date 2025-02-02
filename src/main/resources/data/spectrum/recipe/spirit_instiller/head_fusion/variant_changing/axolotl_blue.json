@@ -14,6 +14,8 @@
     "item": "spectrum:vegetal",
     "count": 1
   },
-  "result": "spectrum:axolotl_blue_head",
+  "result": {
+    "id": "spectrum:axolotl_blue_head"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/basic_recipes"
 }

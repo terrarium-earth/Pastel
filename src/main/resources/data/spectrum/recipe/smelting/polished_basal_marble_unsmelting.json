@@ -11,7 +11,9 @@
     "spectrum:polished_basal_marble_stairs",
     "spectrum:polished_basal_marble_wall"
   ],
-  "result": "spectrum:polished_basal_marble",
+  "result": {
+    "id": "spectrum:polished_basal_marble"
+  },
   "experience": 0.1,
   "cookingtime": 200
 }

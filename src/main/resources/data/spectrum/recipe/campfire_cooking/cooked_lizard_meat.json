@@ -4,5 +4,7 @@
   "cookingtime": 600,
   "experience": 0.35,
   "ingredient": "spectrum:lizard_meat",
-  "result": "spectrum:cooked_lizard_meat"
+  "result": {
+    "id": "spectrum:cooked_lizard_meat"
+  }
 }

@@ -5,5 +5,7 @@
     "#spectrum:noxshrooms",
     "minecraft:bowl"
   ],
-  "result": "minecraft:mushroom_stew"
+  "result": {
+    "id": "minecraft:mushroom_stew"
+  }
 }

@@ -9,7 +9,9 @@
   },
   "ingredient2": "spectrum:pink_pigment",
   "ingredient3": "spelunkery:sulfur",
-  "result": "spelunkery:spring_water_bucket",
+  "result": {
+    "id": "spelunkery:spring_water_bucket"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

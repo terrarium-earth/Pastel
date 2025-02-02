@@ -7,5 +7,7 @@
   "key": {
     "#": "spectrum:magenta_planks"
   },
-  "result": "spectrum:magenta_pressure_plate"
+  "result": {
+    "id": "spectrum:magenta_pressure_plate"
+  }
 }

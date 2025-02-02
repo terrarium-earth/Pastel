@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:orange_pigment"
   ],
-  "result": "minecraft:orange_dye"
+  "result": {
+    "id": "minecraft:orange_dye"
+  }
 }

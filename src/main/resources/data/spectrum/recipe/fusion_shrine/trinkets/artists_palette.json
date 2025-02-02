@@ -16,7 +16,9 @@
     },
     "spectrum:spectral_shard"
   ],
-  "result": "spectrum:artists_palette",
+  "result": {
+    "id": "spectrum:artists_palette"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/artists_palette",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

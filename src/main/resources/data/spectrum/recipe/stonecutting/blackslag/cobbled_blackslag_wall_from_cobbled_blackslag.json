@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:cobbled_blackslag",
-  "result": "spectrum:cobbled_blackslag_wall",
+  "result": {
+    "id": "spectrum:cobbled_blackslag_wall"
+  },
   "count": 1
 }

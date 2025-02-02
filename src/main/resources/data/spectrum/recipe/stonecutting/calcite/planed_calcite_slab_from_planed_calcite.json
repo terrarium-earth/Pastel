@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:planed_calcite",
-  "result": "spectrum:planed_calcite_slab",
+  "result": {
+    "id": "spectrum:planed_calcite_slab"
+  },
   "count": 2
 }

@@ -15,7 +15,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:puff_circlet",
+  "result": {
+    "id": "spectrum:puff_circlet"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/puff_circlet",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

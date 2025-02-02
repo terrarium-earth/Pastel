@@ -8,7 +8,9 @@
     "item": "spectrum:quitoxic_powder",
     "count": 4
   },
-  "result": "conjuring:lesser_conjuration_essence",
+  "result": {
+    "id": "conjuring:lesser_conjuration_essence"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

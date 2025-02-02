@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "spectrum:pure_glowstone",
-  "result": "minecraft:glowstone_dust",
+  "result": {
+    "id": "minecraft:glowstone_dust"
+  },
   "experience": 0.5,
   "cookingtime": 100
 }

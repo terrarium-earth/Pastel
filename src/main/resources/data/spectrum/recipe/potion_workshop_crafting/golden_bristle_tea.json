@@ -6,6 +6,8 @@
   "color": 15853164,
   "ingredient1": "spectrum:sawblade_holly_berry",
   "ingredient2": "minecraft:honey_bottle",
-  "result": "spectrum:golden_bristle_tea",
+  "result": {
+    "id": "spectrum:golden_bristle_tea"
+  },
   "required_advancement": "spectrum:hidden/collect_cookbooks/brewers_handbook"
 }

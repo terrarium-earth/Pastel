@@ -2,7 +2,9 @@
   "type": "minecraft:smelting",
   "group": "lapis_lazuli",
   "ingredient": "spectrum:blackslag_lapis_ore",
-  "result": "minecraft:lapis_lazuli",
+  "result": {
+    "id": "minecraft:lapis_lazuli"
+  },
   "experience": 0.2,
   "cookingtime": 200
 }

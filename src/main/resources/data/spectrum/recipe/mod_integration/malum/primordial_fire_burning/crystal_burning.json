@@ -1,7 +1,9 @@
 {
   "type": "spectrum:primordial_fire_burning",
   "ingredient": "#malum:spirit_crystals",
-  "result": "malum:infernal_spirit",
+  "result": {
+    "id": "malum:infernal_spirit"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

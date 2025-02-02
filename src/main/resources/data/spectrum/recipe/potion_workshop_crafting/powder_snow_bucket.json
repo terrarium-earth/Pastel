@@ -5,5 +5,7 @@
   "color": 14217456,
   "ingredient1": "minecraft:snow_block",
   "ingredient2": "spectrum:cyan_pigment",
-  "result": "minecraft:powder_snow_bucket"
+  "result": {
+    "id": "minecraft:powder_snow_bucket"
+  }
 }

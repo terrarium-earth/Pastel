@@ -12,7 +12,9 @@
     "spectrum:onyx_shard",
     "spectrum:neolith"
   ],
-  "result": "spectrum:midnight_aberration",
+  "result": {
+    "id": "spectrum:midnight_aberration"
+  },
   "required_advancement": "spectrum:unlocks/blocks/midnight_aberration",
   "world_conditions": {
     "time_of_day": "day",

@@ -3,7 +3,9 @@
   "ingredient": "#c:gold_ores",
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 0.5,
-  "result": "create:crushed_raw_gold",
+  "result": {
+    "id": "create:crushed_raw_gold"
+  },
   "particleEffectIdentifier": "enchanted_hit",
   "soundEventIdentifier": "block.metal.break",
   "fabric:load_conditions": [

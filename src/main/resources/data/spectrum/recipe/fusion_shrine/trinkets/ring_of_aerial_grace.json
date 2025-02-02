@@ -17,7 +17,9 @@
     },
     "spectrum:paltaeria_gem"
   ],
-  "result": "spectrum:ring_of_aerial_grace",
+  "result": {
+    "id": "spectrum:ring_of_aerial_grace"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/ring_of_aerial_grace",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

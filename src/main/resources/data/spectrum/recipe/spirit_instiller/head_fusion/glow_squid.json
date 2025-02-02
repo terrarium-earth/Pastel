@@ -12,6 +12,8 @@
     "item": "spectrum:vegetal",
     "count": 4
   },
-  "result": "spectrum:glow_squid_head",
+  "result": {
+    "id": "spectrum:glow_squid_head"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/basic_recipes"
 }

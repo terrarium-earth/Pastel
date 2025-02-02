@@ -7,6 +7,8 @@
   "ingredient1": "spectrum:clotted_cream",
   "ingredient2": "spectrum:jade_vine_petals",
   "ingredient3": "spectrum:jadeite_petals",
-  "result": "spectrum:junket",
+  "result": {
+    "id": "spectrum:junket"
+  },
   "required_advancement": "spectrum:hidden/collect_cookbooks/imperial_cookbook"
 }

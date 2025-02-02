@@ -6,5 +6,7 @@
   "ingredient1": "minecraft:honeycomb",
   "ingredient2": "spectrum:orange_pigment",
   "ingredient3": "spectrum:green_pigment",
-  "result": "minecraft:honey_bottle"
+  "result": {
+    "id": "minecraft:honey_bottle"
+  }
 }

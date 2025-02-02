@@ -3,7 +3,9 @@
   "ingredient": "#c:zinc_ores",
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 0.5,
-  "result": "create:crushed_raw_zinc",
+  "result": {
+    "id": "create:crushed_raw_zinc"
+  },
   "particleEffectIdentifier": "enchanted_hit",
   "soundEventIdentifier": "block.metal.break",
   "fabric:load_conditions": [

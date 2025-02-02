@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "#spectrum:amethyst_ores",
-  "result": "minecraft:amethyst_shard",
+  "result": {
+    "id": "minecraft:amethyst_shard"
+  },
   "experience": 0.25,
   "cookingtime": 100
 }

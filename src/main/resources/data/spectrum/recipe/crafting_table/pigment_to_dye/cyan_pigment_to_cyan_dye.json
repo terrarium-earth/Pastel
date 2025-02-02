@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:cyan_pigment"
   ],
-  "result": "minecraft:cyan_dye"
+  "result": {
+    "id": "minecraft:cyan_dye"
+  }
 }

@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:basalt_bricks",
-  "result": "spectrum:cracked_basalt_bricks",
+  "result": {
+    "id": "spectrum:cracked_basalt_bricks"
+  },
   "count": 1
 }

@@ -21,7 +21,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:weeping_circlet",
+  "result": {
+    "id": "spectrum:weeping_circlet"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/weeping_circlet",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

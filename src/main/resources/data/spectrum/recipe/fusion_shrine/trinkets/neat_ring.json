@@ -17,7 +17,9 @@
     },
     "spectrum:resonant_lily"
   ],
-  "result": "spectrum:neat_ring",
+  "result": {
+    "id": "spectrum:neat_ring"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/neat_ring",
   "start_crafting_effect": "play_glass_breaking_sound",
   "during_crafting_effects": [

@@ -3,5 +3,7 @@
   "ingredients": [
     "spectrum:polished_calcite"
   ],
-  "result": "spectrum:polished_calcite_button"
+  "result": {
+    "id": "spectrum:polished_calcite_button"
+  }
 }

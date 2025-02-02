@@ -17,7 +17,9 @@
     },
     "spectrum:stratine_gem"
   ],
-  "result": "spectrum:ring_of_denser_steps",
+  "result": {
+    "id": "spectrum:ring_of_denser_steps"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/ring_of_denser_steps",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

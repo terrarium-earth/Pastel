@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:purple_pigment"
   ],
-  "result": "minecraft:purple_dye"
+  "result": {
+    "id": "minecraft:purple_dye"
+  }
 }

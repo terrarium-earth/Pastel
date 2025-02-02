@@ -2,7 +2,9 @@
   "type": "minecraft:smelting",
   "group": "gold_ingot",
   "ingredient": "spectrum:blackslag_gold_ore",
-  "result": "minecraft:gold_ingot",
+  "result": {
+    "id": "minecraft:gold_ingot"
+  },
   "experience": 1.0,
   "cookingtime": 200
 }

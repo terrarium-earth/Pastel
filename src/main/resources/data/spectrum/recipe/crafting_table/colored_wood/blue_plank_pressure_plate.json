@@ -7,5 +7,7 @@
   "key": {
     "#": "spectrum:blue_planks"
   },
-  "result": "spectrum:blue_pressure_plate"
+  "result": {
+    "id": "spectrum:blue_pressure_plate"
+  }
 }

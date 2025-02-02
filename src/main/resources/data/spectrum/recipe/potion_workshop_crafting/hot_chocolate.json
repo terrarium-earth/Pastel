@@ -5,5 +5,7 @@
   "color": 9128969,
   "ingredient1": "#c:milk",
   "ingredient2": "spectrum:fresh_chocolate",
-  "result": "spectrum:hot_chocolate"
+  "result": {
+    "id": "spectrum:hot_chocolate"
+  }
 }

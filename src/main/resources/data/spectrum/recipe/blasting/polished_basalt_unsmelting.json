@@ -18,7 +18,9 @@
     "spectrum:polished_basalt_wall",
     "spectrum:planed_basalt"
   ],
-  "result": "spectrum:polished_basalt",
+  "result": {
+    "id": "spectrum:polished_basalt"
+  },
   "experience": 0.1,
   "cookingtime": 100
 }

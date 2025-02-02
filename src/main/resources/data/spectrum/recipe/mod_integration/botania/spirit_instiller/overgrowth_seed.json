@@ -5,7 +5,9 @@
   "ingredient1": "spectrum:moonstruck_nectar",
   "ingredient2": "botania:terrasteel_ingot",
   "center_ingredient": "minecraft:wheat_seeds",
-  "result": "botania:overgrowth_seed",
+  "result": {
+    "id": "botania:overgrowth_seed"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

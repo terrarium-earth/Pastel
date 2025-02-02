@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "#spectrum:onyx_ores",
-  "result": "spectrum:onyx_shard",
+  "result": {
+    "id": "spectrum:onyx_shard"
+  },
   "experience": 0.25,
   "cookingtime": 100
 }

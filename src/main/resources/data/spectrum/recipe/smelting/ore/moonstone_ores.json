@@ -1,7 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": "#spectrum:moonstone_ores",
-  "result": "spectrum:moonstone_shard",
+  "result": {
+    "id": "spectrum:moonstone_shard"
+  },
   "experience": 0.25,
   "cookingtime": 200
 }

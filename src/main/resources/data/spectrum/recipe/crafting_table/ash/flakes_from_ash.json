@@ -7,5 +7,7 @@
   "key": {
     "W": "spectrum:ash_flakes"
   },
-  "result": "spectrum:ash"
+  "result": {
+    "id": "spectrum:ash"
+  }
 }

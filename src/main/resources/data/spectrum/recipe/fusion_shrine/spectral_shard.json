@@ -13,7 +13,9 @@
     "spectrum:moonstone_shard",
     "spectrum:moonstone_core"
   ],
-  "result": "spectrum:spectral_shard",
+  "result": {
+    "id": "spectrum:spectral_shard"
+  },
   "required_advancement": "spectrum:unlocks/resources/spectral_shard",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [

@@ -8,5 +8,7 @@
   "key": {
     "M": "minecraft:glistering_melon_slice"
   },
-  "result": "spectrum:glistering_melon"
+  "result": {
+    "id": "spectrum:glistering_melon"
+  }
 }

@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:polished_calcite",
-  "result": "spectrum:polished_calcite_pillar",
+  "result": {
+    "id": "spectrum:polished_calcite_pillar"
+  },
   "count": 1
 }

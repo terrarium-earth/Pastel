@@ -8,7 +8,9 @@
     "item": "spectrum:vegetal",
     "count": 1
   },
-  "result": "hexcasting:amethyst_edified_leaves",
+  "result": {
+    "id": "hexcasting:amethyst_edified_leaves"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

@@ -3,7 +3,9 @@
   "ingredient": "malum:brilliant_deepslate",
   "crushedItemsPerPointOfDamage": 0.75,
   "experience": 0.75,
-  "result": "malum:crushed_brilliance",
+  "result": {
+    "id": "malum:crushed_brilliance"
+  },
   "particleEffectIdentifier": "enchanted_hit",
   "soundEventIdentifier": "block.metal.break",
   "fabric:load_conditions": [

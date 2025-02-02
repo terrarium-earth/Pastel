@@ -1,7 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": "spectrum:blackslag",
-  "result": "spectrum:polished_blackslag",
+  "result": {
+    "id": "spectrum:polished_blackslag"
+  },
   "experience": 0.1,
   "cookingtime": 200
 }

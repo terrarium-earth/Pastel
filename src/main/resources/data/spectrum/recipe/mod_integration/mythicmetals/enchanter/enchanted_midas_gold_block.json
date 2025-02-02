@@ -13,7 +13,9 @@
     "spectrum:pure_gold_block",
     "spectrum:pure_gold_block"
   ],
-  "result": "mythicmetals:enchanted_midas_gold_block",
+  "result": {
+    "id": "mythicmetals:enchanted_midas_gold_block"
+  },
   "required_advancement": "spectrum:lategame/collect_pure_resource",
   "fabric:load_conditions": [
     {

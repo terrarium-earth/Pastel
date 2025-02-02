@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:ivory_noxwood_planks"
   ],
-  "result": "spectrum:ivory_noxwood_button"
+  "result": {
+    "id": "spectrum:ivory_noxwood_button"
+  }
 }

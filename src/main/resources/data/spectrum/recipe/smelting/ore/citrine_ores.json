@@ -1,7 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": "#spectrum:citrine_ores",
-  "result": "spectrum:citrine_shard",
+  "result": {
+    "id": "spectrum:citrine_shard"
+  },
   "experience": 0.25,
   "cookingtime": 200
 }

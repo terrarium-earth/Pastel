@@ -9,5 +9,7 @@
     "#": "minecraft:stick",
     "W": "spectrum:cyan_planks"
   },
-  "result": "spectrum:cyan_fence_gate"
+  "result": {
+    "id": "spectrum:cyan_fence_gate"
+  }
 }

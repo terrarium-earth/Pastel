@@ -6,5 +6,7 @@
   "key": {
     "#": "spectrum:polished_blackslag"
   },
-  "result": "spectrum:polished_blackslag_pressure_plate"
+  "result": {
+    "id": "spectrum:polished_blackslag_pressure_plate"
+  }
 }

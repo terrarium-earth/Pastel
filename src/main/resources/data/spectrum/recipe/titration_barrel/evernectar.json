@@ -26,6 +26,8 @@
     "fluid": "spectrum:liquid_crystal"
   },
   "min_fermentation_time_hours": 24,
-  "result": "spectrum:evernectar",
+  "result": {
+    "id": "spectrum:evernectar"
+  },
   "required_advancement": "spectrum:hidden/collect_cookbooks/poisoners_handbook"
 }

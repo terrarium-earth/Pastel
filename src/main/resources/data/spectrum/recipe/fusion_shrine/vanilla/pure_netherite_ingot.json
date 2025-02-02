@@ -9,7 +9,9 @@
     "spectrum:pure_netherite_scrap",
     "spectrum:pure_gold"
   ],
-  "result": "minecraft:netherite_ingot",
+  "result": {
+    "id": "minecraft:netherite_ingot"
+  },
   "required_advancement": "spectrum:lategame/collect_pure_resource",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [

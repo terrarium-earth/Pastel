@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:polished_basal_marble",
-  "result": "spectrum:polished_basal_marble_wall",
+  "result": {
+    "id": "spectrum:polished_basal_marble_wall"
+  },
   "count": 1
 }

@@ -11,7 +11,9 @@
     "count": 4
   },
   "center_ingredient": "botania:black_lotus",
-  "result": "botania:blacker_lotus",
+  "result": {
+    "id": "botania:blacker_lotus"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

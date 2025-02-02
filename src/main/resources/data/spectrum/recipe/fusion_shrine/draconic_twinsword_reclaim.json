@@ -26,7 +26,9 @@
       "count": 2
     }
   ],
-  "result": "spectrum:draconic_twinsword",
+  "result": {
+    "id": "spectrum:draconic_twinsword"
+  },
   "required_advancement": "spectrum:unlocks/equipment/draconic_twinsword",
   "start_crafting_effect": "single_visual_explosion_on_shrine",
   "during_crafting_effects": [

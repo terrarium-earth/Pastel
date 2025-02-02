@@ -9,7 +9,9 @@
     "minecraft:blackstone",
     "minecraft:gold_ingot"
   ],
-  "result": "minecraft:gilded_blackstone",
+  "result": {
+    "id": "minecraft:gilded_blackstone"
+  },
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [
     "nothing",

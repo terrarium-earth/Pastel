@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "spectrum:pure_redstone",
-  "result": "minecraft:redstone",
+  "result": {
+    "id": "minecraft:redstone"
+  },
   "experience": 0.5,
   "cookingtime": 100
 }

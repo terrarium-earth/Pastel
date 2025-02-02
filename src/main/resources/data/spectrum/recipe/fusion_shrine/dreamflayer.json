@@ -30,7 +30,9 @@
       "count": 4
     }
   ],
-  "result": "spectrum:dreamflayer",
+  "result": {
+    "id": "spectrum:dreamflayer"
+  },
   "required_advancement": "spectrum:unlocks/equipment/dreamflayer",
   "world_conditions": {
     "time_of_day": "night",

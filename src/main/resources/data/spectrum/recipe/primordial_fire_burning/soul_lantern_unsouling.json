@@ -1,5 +1,7 @@
 {
   "type": "spectrum:primordial_fire_burning",
   "ingredient": "minecraft:soul_lantern",
-  "result": "minecraft:lantern"
+  "result": {
+    "id": "minecraft:lantern"
+  }
 }

@@ -13,7 +13,9 @@
     "spectrum:neolith",
     "minecraft:diamond"
   ],
-  "result": "spectrum:refined_azurite",
+  "result": {
+    "id": "spectrum:refined_azurite"
+  },
   "required_advancement": "spectrum:unlocks/resources/refined_azurite",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

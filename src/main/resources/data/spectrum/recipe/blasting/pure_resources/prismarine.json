@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "spectrum:pure_prismarine",
-  "result": "minecraft:prismarine_crystals",
+  "result": {
+    "id": "minecraft:prismarine_crystals"
+  },
   "experience": 0.5,
   "cookingtime": 100
 }

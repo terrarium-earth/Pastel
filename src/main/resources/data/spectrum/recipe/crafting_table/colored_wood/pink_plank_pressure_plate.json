@@ -7,5 +7,7 @@
   "key": {
     "#": "spectrum:pink_planks"
   },
-  "result": "spectrum:pink_pressure_plate"
+  "result": {
+    "id": "spectrum:pink_pressure_plate"
+  }
 }

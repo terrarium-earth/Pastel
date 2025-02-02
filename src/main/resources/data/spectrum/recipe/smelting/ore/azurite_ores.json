@@ -1,7 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": "#spectrum:azurite_ores",
-  "result": "spectrum:raw_azurite",
+  "result": {
+    "id": "spectrum:raw_azurite"
+  },
   "experience": 2,
   "cookingtime": 200
 }

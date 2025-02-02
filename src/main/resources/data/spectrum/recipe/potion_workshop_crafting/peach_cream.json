@@ -7,6 +7,8 @@
   "ingredient1": "spectrum:clotted_cream",
   "ingredient2": "spectrum:glass_peach",
   "ingredient3": "spectrum:myceylon",
-  "result": "spectrum:peach_cream",
+  "result": {
+    "id": "spectrum:peach_cream"
+  },
   "required_advancement": "spectrum:hidden/collect_cookbooks/brewers_handbook"
 }

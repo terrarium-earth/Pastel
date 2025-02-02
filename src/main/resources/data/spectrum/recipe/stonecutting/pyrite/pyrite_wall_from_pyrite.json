@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:pyrite",
-  "result": "spectrum:pyrite_wall",
+  "result": {
+    "id": "spectrum:pyrite_wall"
+  },
   "count": 1
 }

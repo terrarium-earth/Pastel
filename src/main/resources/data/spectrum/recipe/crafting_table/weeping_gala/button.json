@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:weeping_gala_planks"
   ],
-  "result": "spectrum:weeping_gala_button"
+  "result": {
+    "id": "spectrum:weeping_gala_button"
+  }
 }

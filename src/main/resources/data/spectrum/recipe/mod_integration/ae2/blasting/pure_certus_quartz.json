@@ -1,7 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": "spectrum:pure_certus_quartz",
-  "result": "ae2:certus_quartz_crystal",
+  "result": {
+    "id": "ae2:certus_quartz_crystal"
+  },
   "experience": 0.5,
   "cookingtime": 100,
   "fabric:load_conditions": [

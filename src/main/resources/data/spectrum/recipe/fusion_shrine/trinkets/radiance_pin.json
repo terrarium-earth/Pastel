@@ -20,7 +20,9 @@
       "count": 8
     }
   ],
-  "result": "spectrum:radiance_pin",
+  "result": {
+    "id": "spectrum:radiance_pin"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/radiance_pin",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

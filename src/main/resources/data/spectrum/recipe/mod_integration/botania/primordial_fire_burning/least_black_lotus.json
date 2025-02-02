@@ -1,7 +1,9 @@
 {
   "type": "spectrum:primordial_fire_burning",
   "ingredient": "#c:black_lotuses",
-  "result": "spectrum:least_black_lotus",
+  "result": {
+    "id": "spectrum:least_black_lotus"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

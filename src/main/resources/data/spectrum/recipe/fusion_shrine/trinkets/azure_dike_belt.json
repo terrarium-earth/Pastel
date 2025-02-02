@@ -13,7 +13,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:azure_dike_belt",
+  "result": {
+    "id": "spectrum:azure_dike_belt"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/azure_dike_belt",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

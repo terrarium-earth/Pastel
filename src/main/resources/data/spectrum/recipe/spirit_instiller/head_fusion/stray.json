@@ -12,6 +12,8 @@
     "item": "spectrum:vegetal",
     "count": 4
   },
-  "result": "spectrum:stray_head",
+  "result": {
+    "id": "spectrum:stray_head"
+  },
   "required_advancement": "spectrum:unlocks/head_fusion/frostbite_recipes"
 }

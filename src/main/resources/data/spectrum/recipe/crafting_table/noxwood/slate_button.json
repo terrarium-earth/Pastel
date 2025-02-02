@@ -4,5 +4,7 @@
   "ingredients": [
     "spectrum:slate_noxwood_planks"
   ],
-  "result": "spectrum:slate_noxwood_button"
+  "result": {
+    "id": "spectrum:slate_noxwood_button"
+  }
 }

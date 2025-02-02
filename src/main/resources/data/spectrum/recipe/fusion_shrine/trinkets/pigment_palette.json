@@ -16,7 +16,9 @@
     },
     "spectrum:refined_azurite"
   ],
-  "result": "spectrum:pigment_palette",
+  "result": {
+    "id": "spectrum:pigment_palette"
+  },
   "required_advancement": "spectrum:unlocks/trinkets/pigment_palette",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [],

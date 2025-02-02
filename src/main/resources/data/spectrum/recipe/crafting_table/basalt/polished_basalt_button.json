@@ -3,5 +3,7 @@
   "ingredients": [
     "spectrum:polished_basalt"
   ],
-  "result": "spectrum:polished_basalt_button"
+  "result": {
+    "id": "spectrum:polished_basalt_button"
+  }
 }

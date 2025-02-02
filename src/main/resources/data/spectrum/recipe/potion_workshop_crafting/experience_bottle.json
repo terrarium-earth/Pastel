@@ -7,6 +7,8 @@
   "ingredient1": "spectrum:knowledge_gem",
   "ingredient2": "spectrum:purple_pigment",
   "ingredient3": "spectrum:lime_pigment",
-  "result": "minecraft:experience_bottle",
+  "result": {
+    "id": "minecraft:experience_bottle"
+  },
   "required_advancement": "spectrum:unlocks/items/experience_bottle"
 }

@@ -15,7 +15,9 @@
       "count": 16
     }
   ],
-  "result": "spectrum:egg_laying_wooly_pig_head",
+  "result": {
+    "id": "spectrum:egg_laying_wooly_pig_head"
+  },
   "required_advancement": "spectrum:unlocks/blocks/egg_laying_wooly_pig_head",
   "start_crafting_effect": "single_visual_explosion_on_shrine",
   "during_crafting_effects": [

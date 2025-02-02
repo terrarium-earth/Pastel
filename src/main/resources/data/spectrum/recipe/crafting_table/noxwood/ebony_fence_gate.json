@@ -9,5 +9,7 @@
     "#": "minecraft:stick",
     "W": "spectrum:ebony_noxwood_planks"
   },
-  "result": "spectrum:ebony_noxwood_fence_gate"
+  "result": {
+    "id": "spectrum:ebony_noxwood_fence_gate"
+  }
 }

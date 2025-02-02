@@ -18,6 +18,8 @@
     "S": "minecraft:glow_ink_sac",
     "G": "spectrum:gather_node"
   },
-  "result": "spectrum:buffer_node",
+  "result": {
+    "id": "spectrum:buffer_node"
+  },
   "required_advancement": "spectrum:unlocks/blocks/pastel_network"
 }

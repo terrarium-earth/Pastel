@@ -10,7 +10,9 @@
     "minecraft:gold_ingot",
     "spectrum:midnight_aberration"
   ],
-  "result": "minecraft:netherite_ingot",
+  "result": {
+    "id": "minecraft:netherite_ingot"
+  },
   "required_advancement": "spectrum:unlocks/resources/netherite_ingot",
   "start_crafting_effect": "nothing",
   "during_crafting_effects": [

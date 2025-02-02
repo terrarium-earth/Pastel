@@ -1,6 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": "spectrum:pyrite",
-  "result": "spectrum:pyrite_paneling",
+  "result": {
+    "id": "spectrum:pyrite_paneling"
+  },
   "count": 1
 }
