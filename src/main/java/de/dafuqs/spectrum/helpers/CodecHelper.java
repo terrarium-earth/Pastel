@@ -50,6 +50,20 @@ public class CodecHelper {
 		return Codec.withAlternative(codec.listOf(), codec, List::of);
 	}
 	
+	public interface ThrowableFunction<I, O, E extends Throwable> {
+		O apply(I input) throws E;
+	}
+	
+	public static <I, O, E extends Throwable> Function<I, DataResult<O>> throwable(ThrowableFunction<I, O, E> throwable) {
+		return input -> {
+			try {
+				return DataResult.success(throwable.apply(input));
+			} catch (Throwable e) {
+				return DataResult.error(e::getMessage);
+			}
+		};
+	}
+	
 	public static <T, D> Optional<T> from(DynamicOps<D> ops, Codec<T> codec, D elem) {
 		if (elem == null) return Optional.empty();
 		return codec.decode(ops, elem).result().map(com.mojang.datafixers.util.Pair::getFirst);

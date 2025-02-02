@@ -17,9 +17,8 @@ import java.util.*;
 
 public class DyeRandomlyLootFunction extends ConditionalLootFunction {
 	
-	// TODO: The "colors" field should also be able to be specified using a has prefixed hex string like "#000000"
 	public static final MapCodec<DyeRandomlyLootFunction> CODEC = RecordCodecBuilder.mapCodec((instance) -> addConditionsField(instance).and(instance.group(
-			Codec.INT.listOf().fieldOf("colors").forGetter((function) -> function.colors),
+			ColorHelper.CODEC.listOf().fieldOf("colors").forGetter((function) -> function.colors),
 			Codec.BOOL.optionalFieldOf("show_in_tooltip", false).forGetter((function) -> function.showInTooltip))
 	).apply(instance, DyeRandomlyLootFunction::new));
 	

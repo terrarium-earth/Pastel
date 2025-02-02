@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.helpers;
 
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.items.*;
 import net.minecraft.item.*;
@@ -12,8 +13,11 @@ import java.awt.*;
 import java.lang.Math;
 import java.util.List;
 import java.util.*;
+import java.util.regex.*;
 
 public class ColorHelper {
+	
+	public static final Codec<Integer> CODEC = Codec.withAlternative(Codec.INT, Codec.STRING.comapFlatMap(CodecHelper.throwable(ColorHelper::fromString), ColorHelper::toString));
 	
 	/**
 	 * A list of the first 16 dye colors
@@ -28,6 +32,46 @@ public class ColorHelper {
 	public static int getInt(DyeColor dyeColor) {
 		Vector3f vec = getRGBVec(dyeColor);
 		return new Color(vec.x(), vec.y(), vec.z()).getRGB() & 0x00FFFFFF;
+	}
+	
+	private static final Pattern PARSE_PATTERN = Pattern.compile("#([0-9a-fA-F]{2})(?:([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})?)?");
+	
+	private int parseHex(String str) {
+		return Integer.valueOf(str, 16);
+	}
+	
+	/**
+	 * Parses a hex color code into an ARGB int. The following patterns are accepted:
+	 * <ul>
+	 * <li>With opactiy: <code>#RRGGBBAA</code> -> <code>Argb(AA, RR, GG, BB)</code></li>
+	 * <li>Full opacity: <code>#RRGGBB</code> -> <code>Argb(-1, RR, GG, BB)</code></li>
+	 * <li>Grayscale: <code>#XX</code> -> <code>Argb(-1, XX, XX, XX)</code></li>
+	 * </ul>
+	 *
+	 * @param color The string to parse
+	 * @return The parsed ARGB color code
+	 * @throws NumberFormatException If the pattern does not match
+	 */
+	public static int fromString(String color) throws NumberFormatException {
+		Matcher m = PARSE_PATTERN.matcher(color);
+		if (!m.matches())
+			throw new NumberFormatException("Failed to parse the hex code '" + color + "'");
+		
+		int c1 = Integer.parseInt(m.group(1), 16);
+		int c2 = m.group(2) == null ? c1 : Integer.parseInt(m.group(2), 16);
+		int c3 = m.group(3) == null ? c1 : Integer.parseInt(m.group(3), 16);
+		int c4 = m.group(4) == null ? -1 : Integer.parseInt(m.group(4), 16);
+		
+		return net.minecraft.util.math.ColorHelper.Argb.getArgb(c4, c1, c2, c3);
+	}
+	
+	public static String toString(int color) {
+		return String.format("#%X%X%X%X",
+				net.minecraft.util.math.ColorHelper.Argb.getAlpha(color),
+				net.minecraft.util.math.ColorHelper.Argb.getRed(color),
+				net.minecraft.util.math.ColorHelper.Argb.getGreen(color),
+				net.minecraft.util.math.ColorHelper.Argb.getBlue(color)
+		);
 	}
 	
 	/**
@@ -52,7 +96,7 @@ public class ColorHelper {
 		Color colorObj = new Color(color.x, color.y, color.z);
 		return colorObj.getRGB();
 	}
-
+	
 	public static Optional<DyeColor> getDyeColorOfItemStack(@NotNull ItemStack itemStack) {
 		if (!itemStack.isEmpty()) {
 			Item item = itemStack.getItem();
