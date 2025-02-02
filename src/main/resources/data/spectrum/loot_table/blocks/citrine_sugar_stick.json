@@ -26,7 +26,7 @@
                   "block": "spectrum:citrine_sugar_stick",
                   "properties": {
                     "age": {
-                      "min": 1
+                      "min": "1"
                     }
                   }
                 },
@@ -55,7 +55,7 @@
                   "condition": "minecraft:block_state_property",
                   "block": "spectrum:citrine_sugar_stick",
                   "properties": {
-                    "age": 2
+                    "age": "2"
                   }
                 }
               ]
