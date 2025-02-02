@@ -38,7 +38,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_recipe_id": "spectrum:titration_barrel/infused_beverages/camomillesque",
+              "fermentation": "spectrum:titration_barrel/infused_beverages/camomillesque",
               "days_fermented": {
                 "min": 180000,
                 "max": 216000
@@ -67,7 +67,7 @@
           "functions": [
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_recipe_id": "spectrum:titration_barrel/morchella",
+              "fermentation": "spectrum:titration_barrel/morchella",
               "days_fermented": {
                 "min": 180000,
                 "max": 216000
@@ -91,7 +91,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_recipe_id": "spectrum:titration_barrel/infused_beverages/plum_liquor",
+              "fermentation": "spectrum:titration_barrel/infused_beverages/plum_liquor",
               "days_fermented": {
                 "min": 180000,
                 "max": 216000
@@ -129,7 +129,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_recipe_id": "spectrum:titration_barrel/infused_beverages/myceylon_liquor",
+              "fermentation": "spectrum:titration_barrel/infused_beverages/myceylon_liquor",
               "days_fermented": {
                 "min": 180000,
                 "max": 216000
@@ -167,7 +167,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_recipe_id": "spectrum:titration_barrel/infused_beverages/moonshine",
+              "fermentation": "spectrum:titration_barrel/infused_beverages/moonshine",
               "days_fermented": {
                 "min": 180000,
                 "max": 216000

@@ -20,7 +20,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_recipe_id": "spectrum:titration_barrel/infused_beverages/camomillesque",
+              "fermentation": "spectrum:titration_barrel/infused_beverages/camomillesque",
               "days_fermented": {
                 "min": 180000,
                 "max": 216000
@@ -45,7 +45,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_recipe_id": "spectrum:titration_barrel/infused_beverages/verdigris_wine",
+              "fermentation": "spectrum:titration_barrel/infused_beverages/verdigris_wine",
               "days_fermented": {
                 "min": 180000,
                 "max": 216000
@@ -70,7 +70,7 @@
             },
             {
               "function": "spectrum:ferment_randomly",
-              "fermentation_recipe_id": "spectrum:titration_barrel/infused_beverages/velvet_brandy",
+              "fermentation": "spectrum:titration_barrel/infused_beverages/velvet_brandy",
               "days_fermented": {
                 "min": 180000,
                 "max": 216000

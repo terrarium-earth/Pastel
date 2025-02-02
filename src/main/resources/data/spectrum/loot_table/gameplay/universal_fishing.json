@@ -14,7 +14,9 @@
               "entity": "this",
               "predicate": {
                 "location": {
-                  "fluid": "#minecraft:lava"
+                  "fluid": {
+                    "fluids": "#minecraft:lava"
+                  }
                 }
               }
             }
@@ -29,7 +31,9 @@
               "entity": "this",
               "predicate": {
                 "location": {
-                  "fluid": "#spectrum:goo"
+                  "fluid": {
+                    "fluids": "#spectrum:goo"
+                  }
                 }
               }
             }
@@ -44,7 +48,9 @@
               "entity": "this",
               "predicate": {
                 "location": {
-                  "fluid": "#spectrum:liquid_crystal"
+                  "fluid": {
+                    "fluids": "#spectrum:liquid_crystal"
+                  }
                 }
               }
             }
@@ -59,7 +65,9 @@
               "entity": "this",
               "predicate": {
                 "location": {
-                  "fluid": "#spectrum:midnight_solution"
+                  "fluid": {
+                    "fluids": "#spectrum:midnight_solution"
+                  }
                 }
               }
             }
@@ -74,7 +82,9 @@
               "entity": "this",
               "predicate": {
                 "location": {
-                  "fluid": "#spectrum:dragonrot"
+                  "fluid": {
+                    "fluids": "#spectrum:dragonrot"
+                  }
                 }
               }
             }
@@ -85,7 +95,7 @@
           "children": [
             {
               "type": "minecraft:loot_table",
-              "name": "spectrum:gameplay/fishing/deeper_down/fishing",
+              "value": "spectrum:gameplay/fishing/deeper_down/fishing",
               "conditions": [
                 {
                   "condition": "minecraft:location_check",
@@ -97,7 +107,7 @@
             },
             {
               "type": "minecraft:loot_table",
-              "name": "spectrum:gameplay/fishing/end/fishing",
+              "value": "spectrum:gameplay/fishing/end/fishing",
               "conditions": [
                 {
                   "condition": "minecraft:location_check",
@@ -109,7 +119,7 @@
             },
             {
               "type": "minecraft:loot_table",
-              "name": "minecraft:gameplay/fishing"
+              "value": "minecraft:gameplay/fishing"
             }
           ],
           "conditions": [
@@ -118,7 +128,9 @@
               "entity": "this",
               "predicate": {
                 "location": {
-                  "fluid": "#minecraft:water"
+                  "fluid": {
+                    "fluids": "#minecraft:water"
+                  }
                 }
               }
             }
