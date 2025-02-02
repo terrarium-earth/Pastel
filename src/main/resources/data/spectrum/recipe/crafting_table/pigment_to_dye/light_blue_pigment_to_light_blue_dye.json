@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "pigment_to_dye",
   "ingredients": [
-    "spectrum:light_blue_pigment"
+    {
+      "item": "spectrum:light_blue_pigment"
+    }
   ],
   "result": {
     "id": "minecraft:light_blue_dye"

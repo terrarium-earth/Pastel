@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "wooden_button",
   "ingredients": [
-    "spectrum:light_gray_planks"
+    {
+      "item": "spectrum:light_gray_planks"
+    }
   ],
   "result": {
     "id": "spectrum:light_gray_button"

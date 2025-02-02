@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "compacting",
   "ingredients": [
-    "spectrum:amethyst_storage_block"
+    {
+      "item": "spectrum:amethyst_storage_block"
+    }
   ],
   "result": {
     "id": "minecraft:amethyst_shard",

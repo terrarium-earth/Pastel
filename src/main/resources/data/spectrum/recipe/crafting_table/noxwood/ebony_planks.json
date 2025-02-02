@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "planks",
   "ingredients": [
-    "#spectrum:ebony_noxcap_stems"
+    {
+      "tag": "spectrum:ebony_noxcap_stems"
+    }
   ],
   "result": {
     "id": "spectrum:ebony_noxwood_planks",

@@ -1,8 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    "minecraft:paper",
-    "minecraft:amethyst_shard"
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:amethyst_shard"
+    }
   ],
   "result": {
     "id": "spectrum:amethyst_shard_banner_pattern"

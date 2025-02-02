@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "pigment_to_dye",
   "ingredients": [
-    "spectrum:pink_pigment"
+    {
+      "item": "spectrum:pink_pigment"
+    }
   ],
   "result": {
     "id": "minecraft:pink_dye"

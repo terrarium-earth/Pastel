@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "planks",
   "ingredients": [
-    "#spectrum:weeping_gala_logs"
+    {
+      "tag": "spectrum:weeping_gala_logs"
+    }
   ],
   "result": {
     "id": "spectrum:weeping_gala_planks",

@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "wooden_button",
   "ingredients": [
-    "spectrum:pink_planks"
+    {
+      "item": "spectrum:pink_planks"
+    }
   ],
   "result": {
     "id": "spectrum:pink_button"

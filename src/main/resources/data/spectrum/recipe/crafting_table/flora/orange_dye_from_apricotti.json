@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "pigment_to_dye",
   "ingredients": [
-    "spectrum:apricotti"
+    {
+      "item": "spectrum:apricotti"
+    }
   ],
   "result": {
     "id": "minecraft:orange_dye",

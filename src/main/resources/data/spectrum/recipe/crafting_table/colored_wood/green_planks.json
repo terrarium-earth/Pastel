@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "planks",
   "ingredients": [
-    "#spectrum:green_logs"
+    {
+      "tag": "spectrum:green_logs"
+    }
   ],
   "result": {
     "id": "spectrum:green_planks",

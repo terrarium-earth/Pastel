@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shapeless",
   "group": "pigment_to_dye",
   "ingredients": [
-    "spectrum:red_pigment"
+    {
+      "item": "spectrum:red_pigment"
+    }
   ],
   "result": {
     "id": "minecraft:red_dye"
