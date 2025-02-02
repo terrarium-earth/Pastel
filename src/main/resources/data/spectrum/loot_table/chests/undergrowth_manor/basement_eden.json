@@ -28,8 +28,13 @@
           "name": "spectrum:infused_beverage",
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"camomillesque\", Color: 15517767 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "camomillesque",
+                  "color": 15517767
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",
@@ -76,8 +81,13 @@
           "name": "spectrum:infused_beverage",
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"plum_liquor\", Color: 13255032 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "plum_liquor",
+                  "color": 13255032
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",
@@ -109,8 +119,13 @@
           "name": "spectrum:infused_beverage",
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"myceylon_liquor\", Color: 16040760 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "myceylon_liquor",
+                  "color": 16040760
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",
@@ -142,8 +157,13 @@
           "name": "spectrum:infused_beverage",
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"moonshine\", Color: 14151663 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "moonshine",
+                  "color": 14151663
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",
@@ -175,8 +195,13 @@
           "name": "spectrum:infused_beverage",
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"gilded_bloom_liquor\", Color: 14858306 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "gilded_bloom_liquor",
+                  "color": 14858306
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",

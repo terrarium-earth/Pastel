@@ -16,6 +16,7 @@ import net.minecraft.util.math.*;
 import java.util.*;
 import java.util.function.*;
 
+@SuppressWarnings("unused")
 public class SpectrumDataComponentTypes {
 	
 	private static final Deferrer DEFERRER = new Deferrer();

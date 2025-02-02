@@ -10,8 +10,13 @@
           "weight": 3,
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"camomillesque\", Color: 15517767 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "camomillesque",
+                  "color": 15517767
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",
@@ -30,8 +35,13 @@
           "weight": 3,
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"verdigris_wine\", Color: 4237444 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "verdigris_wine",
+                  "color": 4237444
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",
@@ -50,8 +60,13 @@
           "quality": 1.5,
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"velvet_brandy\", Color: 15383295 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "velvet_brandy",
+                  "color": 15383295
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",
@@ -70,8 +85,13 @@
           "quality": 1.2,
           "functions": [
             {
-              "function": "minecraft:set_nbt",
-              "tag": "{Variant: \"night_cream\", Color: 12982783 }"
+              "function": "minecraft:set_components",
+              "components": {
+                "spectrum:infused_beverage": {
+                  "variant": "night_cream",
+                  "color": 12982783
+                }
+              }
             },
             {
               "function": "spectrum:ferment_randomly",

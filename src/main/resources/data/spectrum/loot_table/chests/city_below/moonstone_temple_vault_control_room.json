@@ -54,8 +54,10 @@
       ],
       "functions": [
         {
-          "function": "minecraft:set_nbt",
-          "tag": "{display:{Name:'{\"translate\":\"named_item.spectrum.dirt_of_shame\"}'}}"
+          "function": "minecraft:set_components",
+          "components": {
+            "custom_name": "{\"translate\":\"named_item.spectrum.dirt_of_shame\"}"
+          }
         },
         {
           "function": "minecraft:set_count",

@@ -11,8 +11,10 @@
       ],
       "functions": [
         {
-          "function": "minecraft:set_nbt",
-          "tag": "{recipe: \"spectrum:pedestal/tier1/vanilla/writable_book\"}"
+          "function": "minecraft:set_components",
+          "components": {
+            "spectrum:stored_recipe": "spectrum:pedestal/tier1/vanilla/writable_book"
+          }
         }
       ]
     },
