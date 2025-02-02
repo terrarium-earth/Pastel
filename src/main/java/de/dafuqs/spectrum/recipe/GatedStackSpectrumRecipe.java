@@ -9,7 +9,7 @@ import java.util.*;
 
 public abstract class GatedStackSpectrumRecipe<C extends RecipeInput> extends GatedSpectrumRecipe<C> {
 	
-	protected GatedStackSpectrumRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier) {
+	protected GatedStackSpectrumRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier) {
 		super(group, secret, requiredAdvancementIdentifier);
 	}
 	

@@ -28,7 +28,7 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 	protected final ItemStack output;
 	
 	public PotionWorkshopCraftingRecipe(
-			String group, boolean secret, Identifier requiredAdvancementIdentifier, int craftingTime, int color,
+			String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, int craftingTime, int color,
 			IngredientStack ingredient1, IngredientStack ingredient2, IngredientStack ingredient3,
 			IngredientStack baseIngredient, boolean consumeBaseIngredient, int requiredExperience, ItemStack output
 	) {
@@ -133,7 +133,7 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 		public static final MapCodec<PotionWorkshopCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(c -> c.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(c -> c.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(c -> c.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(c -> c.requiredAdvancementIdentifier),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(c -> c.craftingTime),
 				Codec.INT.optionalFieldOf("color", 0xc03058).forGetter(c -> c.color),
 				IngredientStack.Serializer.CODEC.codec().fieldOf("ingredient1").forGetter(c -> c.ingredient1),
@@ -148,7 +148,7 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 		public static final PacketCodec<RegistryByteBuf, PotionWorkshopCraftingRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, c -> c.group,
 				PacketCodecs.BOOL, c -> c.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
 				PacketCodecs.VAR_INT, c -> c.craftingTime,
 				PacketCodecs.VAR_INT, c -> c.color,
 				IngredientStack.Serializer.PACKET_CODEC, c -> c.ingredient1,

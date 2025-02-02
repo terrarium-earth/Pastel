@@ -24,7 +24,7 @@ public class ExplosionModificationRecipe extends ShapelessPedestalRecipe {
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/modular_explosives");
 	
 	public ExplosionModificationRecipe() {
-		super("", false, UNLOCK_IDENTIFIER, PedestalRecipeTier.BASIC, collectIngredients(), Map.of(), ItemStack.EMPTY, 0.0F, 40, false, true);
+		super("", false, Optional.of(UNLOCK_IDENTIFIER), PedestalRecipeTier.BASIC, collectIngredients(), Map.of(), ItemStack.EMPTY, 0.0F, 40, false, true);
 	}
 	
 	private static List<IngredientStack> collectIngredients() {
@@ -49,7 +49,7 @@ public class ExplosionModificationRecipe extends ShapelessPedestalRecipe {
 		ModularExplosionDefinition currentSet = ModularExplosionDefinition.getFromStack(nonModStack);
 		List<ExplosionArchetype> archetypes = pair.getLeft();
 		List<ExplosionModifier> mods = pair.getRight();
-
+		
 		// if there are no new modifiers to add present, treat it
 		// as a recipe to clear existing archetype and / or modifiers
 		if (archetypes.isEmpty() && mods.isEmpty()) {
@@ -144,7 +144,7 @@ public class ExplosionModificationRecipe extends ShapelessPedestalRecipe {
 					&& ExplosionModifierProviders.getModifier(stack) == null
 					&& ExplosionModifierProviders.getArchetype(stack) == null) {
 				
-				if(foundStack == ItemStack.EMPTY) {
+				if (foundStack == ItemStack.EMPTY) {
 					foundStack = stack;
 				} else {
 					return ItemStack.EMPTY; // multiple non-mod stacks found

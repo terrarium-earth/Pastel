@@ -15,7 +15,7 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 public abstract class GatedSpectrumDisplay extends BasicDisplay implements GatedRecipeDisplay {
-
+	
 	private final Identifier requiredAdvancementIdentifier;
 	private final boolean secret;
 	private final @Nullable Text secretHintText;
@@ -24,28 +24,28 @@ public abstract class GatedSpectrumDisplay extends BasicDisplay implements Gated
 	public GatedSpectrumDisplay(RecipeEntry<? extends GatedRecipe<?>> recipe, Ingredient input, ItemStack output) {
 		this(recipe, Collections.singletonList(EntryIngredients.ofIngredient(input)), Collections.singletonList(EntryIngredients.of(output)));
 	}
-
+	
 	// n inputs => 1 output
 	public GatedSpectrumDisplay(RecipeEntry<? extends GatedRecipe<?>> recipe, List<EntryIngredient> inputs, ItemStack output) {
 		this(recipe, inputs, Collections.singletonList(EntryIngredients.of(output)));
 	}
-
+	
 	// n inputs => m outputs
 	public GatedSpectrumDisplay(RecipeEntry<? extends GatedRecipe<?>> recipe, List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
 		super(inputs, outputs);
 		this.secret = recipe.value().isSecret();
-		this.requiredAdvancementIdentifier = recipe.value().getRequiredAdvancementIdentifier();
+		this.requiredAdvancementIdentifier = recipe.value().getRequiredAdvancementIdentifier().orElse(null);
 		// FIXME
 		//this.secretHintText = recipe.getSecretHintText(id);
 		this.secretHintText = null;
 	}
-
+	
 	@Override
 	public boolean isUnlocked() {
 		MinecraftClient client = MinecraftClient.getInstance();
 		return AdvancementHelper.hasAdvancement(client.player, this.requiredAdvancementIdentifier);
 	}
-
+	
 	@Override
 	public boolean isSecret() {
 		return this.secret;
@@ -54,5 +54,5 @@ public abstract class GatedSpectrumDisplay extends BasicDisplay implements Gated
 	public @Nullable Text getSecretHintText() {
 		return this.secretHintText;
 	}
-
+	
 }

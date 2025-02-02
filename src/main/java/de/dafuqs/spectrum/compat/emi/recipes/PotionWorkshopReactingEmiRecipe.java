@@ -23,14 +23,14 @@ public class PotionWorkshopReactingEmiRecipe extends EmiInfoRecipe {
 	
 	public boolean isUnlocked() {
 		MinecraftClient client = MinecraftClient.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, PotionWorkshopRecipe.UNLOCK_IDENTIFIER) && AdvancementHelper.hasAdvancement(client.player, recipe.getRequiredAdvancementIdentifier());
+		return AdvancementHelper.hasAdvancement(client.player, PotionWorkshopRecipe.UNLOCK_IDENTIFIER) && AdvancementHelper.hasAdvancement(client.player, recipe.getRequiredAdvancementIdentifier().orElse(null));
 	}
 	
 	@Override
 	public EmiRecipeCategory getCategory() {
 		return SpectrumEmiRecipeCategories.POTION_WORKSHOP_REACTING;
 	}
-
+	
 	@Override
 	public int getDisplayHeight() {
 		if (isUnlocked()) {

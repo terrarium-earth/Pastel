@@ -46,7 +46,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 	public TitrationBarrelRecipe(
 			String group,
 			boolean secret,
-			Identifier requiredAdvancementIdentifier,
+			Optional<Identifier> requiredAdvancementIdentifier,
 			List<IngredientStack> inputStacks,
 			FluidIngredient fluid,
 			ItemStack outputItemStack,
@@ -262,7 +262,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 		public static final MapCodec<TitrationBarrelRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				IngredientStack.Serializer.CODEC.codec().listOf().fieldOf("ingredient").forGetter(recipe -> recipe.inputStacks),
 				FluidIngredient.CODEC.fieldOf("fluid").forGetter(recipe -> recipe.fluid),
 				ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(recipe -> recipe.outputItemStack),
@@ -274,7 +274,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 		private static final PacketCodec<RegistryByteBuf, TitrationBarrelRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, c -> c.group,
 				PacketCodecs.BOOL, c -> c.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
 				IngredientStack.Serializer.PACKET_CODEC.collect(PacketCodecs.toList()), c -> c.inputStacks,
 				FluidIngredient.PACKET_CODEC, c -> c.fluid,
 				ItemStack.PACKET_CODEC, c -> c.outputItemStack,

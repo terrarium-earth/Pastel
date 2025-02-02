@@ -23,7 +23,7 @@ import java.util.*;
 public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 	
 	public MemoryToHeadRecipe() {
-		super("", false, SpectrumCommon.locate("unlocks/memory_to_head"),
+		super("", false, Optional.of(SpectrumCommon.locate("unlocks/memory_to_head")),
 				IngredientStack.ofItems(1, SpectrumBlocks.MEMORY.asItem()), IngredientStack.ofItems(4, SpectrumItems.VEGETAL), IngredientStack.ofItems(4, SpectrumItems.QUITOXIC_POWDER),
 				new ItemStack(Blocks.ZOMBIE_HEAD), 200, 1, true);
 	}

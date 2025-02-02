@@ -43,7 +43,7 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<RecipeInpu
 	// - Yield upgrades disabled (item multiplication)
 	protected final boolean noBenefitsFromYieldUpgrades;
 	
-	public PedestalRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier,
+	public PedestalRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier,
 						  PedestalRecipeTier tier, List<IngredientStack> inputs, Map<GemstoneColor, Integer> powderInputs, ItemStack output,
 						  float experience, int craftingTime, boolean skipRecipeRemainders, boolean noBenefitsFromYieldUpgrades) {
 		super(group, secret, requiredAdvancementIdentifier);
@@ -224,7 +224,7 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<RecipeInpu
 	
 	@Override
 	public boolean canPlayerCraft(PlayerEntity playerEntity) {
-		return this.tier.hasUnlocked(playerEntity) && AdvancementHelper.hasAdvancement(playerEntity, this.requiredAdvancementIdentifier);
+		return this.tier.hasUnlocked(playerEntity) && AdvancementHelper.hasAdvancement(playerEntity, this.requiredAdvancementIdentifier.orElse(null));
 	}
 	
 	@Override

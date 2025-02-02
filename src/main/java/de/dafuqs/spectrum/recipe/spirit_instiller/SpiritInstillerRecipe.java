@@ -2,7 +2,6 @@ package de.dafuqs.spectrum.recipe.spirit_instiller;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import de.dafuqs.revelationary.api.advancements.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.blocks.memory.*;
@@ -12,7 +11,6 @@ import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
-import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
@@ -43,7 +41,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 	protected final float experience;
 	protected final boolean noBenefitsFromYieldAndEfficiencyUpgrades;
 	
-	public SpiritInstillerRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier,
+	public SpiritInstillerRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier,
 								 IngredientStack centerIngredient, IngredientStack bowlIngredient1, IngredientStack bowlIngredient2, ItemStack output, int craftingTime, float experience, boolean noBenefitsFromYieldAndEfficiencyUpgrades) {
 		
 		super(group, secret, requiredAdvancementIdentifier);
@@ -161,11 +159,6 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 	}
 	
 	@Override
-	public boolean canPlayerCraft(PlayerEntity playerEntity) {
-		return AdvancementHelper.hasAdvancement(playerEntity, UNLOCK_IDENTIFIER) && AdvancementHelper.hasAdvancement(playerEntity, this.requiredAdvancementIdentifier);
-	}
-	
-	@Override
 	public String getRecipeTypeShortID() {
 		return "spirit_instiller";
 	}
@@ -194,7 +187,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 		public static final MapCodec<SpiritInstillerRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				IngredientStack.Serializer.CODEC.fieldOf("center_ingredient").forGetter(recipe -> recipe.centerIngredient),
 				IngredientStack.Serializer.CODEC.fieldOf("ingredient1").forGetter(recipe -> recipe.bowlIngredient1),
 				IngredientStack.Serializer.CODEC.fieldOf("ingredient2").forGetter(recipe -> recipe.bowlIngredient2),
@@ -207,7 +200,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 		private static final PacketCodec<RegistryByteBuf, SpiritInstillerRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, c -> c.group,
 				PacketCodecs.BOOL, c -> c.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
 				IngredientStack.Serializer.PACKET_CODEC, c -> c.centerIngredient,
 				IngredientStack.Serializer.PACKET_CODEC, c -> c.bowlIngredient1,
 				IngredientStack.Serializer.PACKET_CODEC, c -> c.bowlIngredient2,

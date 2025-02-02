@@ -35,7 +35,7 @@ public class UnlockToastManager {
 	}};
 	
 	public static void registerGatedRecipe(RecipeType<?> recipeType, GatedRecipe<?> gatedRecipe) {
-		Identifier requiredAdvancementIdentifier = gatedRecipe.getRequiredAdvancementIdentifier();
+		Identifier requiredAdvancementIdentifier = gatedRecipe.getRequiredAdvancementIdentifier().orElse(null);
 		
 		// secret recipes should not have a popup
 		if (gatedRecipe.isSecret()) {
@@ -133,7 +133,7 @@ public class UnlockToastManager {
 					allStacks.add(recipe.getResult(client.world.getRegistryManager()));
 				}
 			}
-            UnlockedRecipeToast.showLotsOfRecipesToast(MinecraftClient.getInstance(), allStacks);
+			UnlockedRecipeToast.showLotsOfRecipesToast(MinecraftClient.getInstance(), allStacks);
 		} else {
 			for (List<GatedRecipe<?>> unlockedRecipeList : unlockedRecipesByType.values()) {
 				showGroupedRecipeUnlockToasts(registryManager, unlockedRecipeList);
@@ -177,7 +177,7 @@ public class UnlockToastManager {
 				}
 			}
 		}
-
+		
 		// show grouped recipes
 		if (!groupedRecipes.isEmpty()) {
 			for (Map.Entry<String, List<ItemStack>> group : groupedRecipes.entrySet()) {
@@ -189,7 +189,7 @@ public class UnlockToastManager {
 				}
 			}
 		}
-
+		
 		// show singular recipes
 		for (ItemStack singleStack : singleRecipes) {
 			UnlockedRecipeToast.showRecipeToast(MinecraftClient.getInstance(), singleStack, singleText);

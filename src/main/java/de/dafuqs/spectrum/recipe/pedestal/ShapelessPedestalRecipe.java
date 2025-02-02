@@ -21,7 +21,7 @@ import java.util.*;
 public class ShapelessPedestalRecipe extends PedestalRecipe {
 	
 	public ShapelessPedestalRecipe(
-			String group, boolean secret, Identifier requiredAdvancementIdentifier,
+			String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier,
 			PedestalRecipeTier tier, List<IngredientStack> craftingInputs, Map<GemstoneColor, Integer> gemstonePowderInputs, ItemStack output,
 			float experience, int craftingTime, boolean skipRecipeRemainders, boolean noBenefitsFromYieldUpgrades
 	) {
@@ -58,7 +58,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 		public static final MapCodec<ShapelessPedestalRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
 				IngredientStack.Serializer.CODEC.codec().listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
 				Codec.simpleMap(SpectrumRegistries.GEMSTONE_COLORS.getCodec(), Codec.INT, SpectrumRegistries.GEMSTONE_COLORS).forGetter(recipe -> recipe.powderInputs),
@@ -72,7 +72,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 		public static final PacketCodec<RegistryByteBuf, ShapelessPedestalRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, recipe -> recipe.group,
 				PacketCodecs.BOOL, recipe -> recipe.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				PedestalRecipeTier.PACKET_CODEC, recipe -> recipe.tier,
 				IngredientStack.Serializer.PACKET_CODEC.collect(PacketCodecs.toList()), recipe -> recipe.inputs,
 				PacketCodecs.map(HashMap::new, PacketCodecs.registryValue(SpectrumRegistries.GEMSTONE_COLORS_KEY), PacketCodecs.VAR_INT), recipe -> recipe.powderInputs,

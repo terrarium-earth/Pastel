@@ -14,7 +14,7 @@ public class LiquidCrystalConvertingRecipe extends FluidConvertingRecipe {
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/enter_liquid_crystal");
 	private static final Set<Item> outputItems = new HashSet<>();
 	
-	public LiquidCrystalConvertingRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier, @NotNull Ingredient inputIngredient, ItemStack outputItemStack) {
+	public LiquidCrystalConvertingRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, @NotNull Ingredient inputIngredient, ItemStack outputItemStack) {
 		super(group, secret, requiredAdvancementIdentifier, inputIngredient, outputItemStack);
 		outputItems.add(outputItemStack.getItem());
 	}

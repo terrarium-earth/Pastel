@@ -78,7 +78,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 	protected ItemStack cachedOutput;
 	
 	public PotionWorkshopBrewingRecipe(
-			String group, boolean secret, Identifier requiredAdvancementIdentifier, int craftingTime,
+			String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, int craftingTime,
 			IngredientStack ingredient1, IngredientStack ingredient2, IngredientStack ingredient3,
 			PotionRecipeEffect recipeData
 	) {
@@ -388,7 +388,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		public static final MapCodec<PotionWorkshopBrewingRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(c -> c.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(c -> c.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(c -> c.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(c -> c.requiredAdvancementIdentifier),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(c -> c.craftingTime),
 				IngredientStack.Serializer.CODEC.codec().fieldOf("ingredient1").forGetter(c -> c.ingredient1),
 				IngredientStack.Serializer.CODEC.codec().optionalFieldOf("ingredient2", IngredientStack.EMPTY).forGetter(c -> c.ingredient2),
@@ -399,7 +399,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		public static final PacketCodec<RegistryByteBuf, PotionWorkshopBrewingRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, c -> c.group,
 				PacketCodecs.BOOL, c -> c.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
 				PacketCodecs.VAR_INT, c -> c.craftingTime,
 				IngredientStack.Serializer.PACKET_CODEC, c -> c.ingredient1,
 				IngredientStack.Serializer.PACKET_CODEC, c -> c.ingredient2,

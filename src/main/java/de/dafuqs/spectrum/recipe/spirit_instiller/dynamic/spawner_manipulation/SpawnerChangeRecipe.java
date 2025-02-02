@@ -16,16 +16,18 @@ import net.minecraft.text.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 
+import java.util.*;
+
 public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 	
-	public SpawnerChangeRecipe(IngredientStack ingredient, IngredientStack ingredient2, Identifier requiredAdvancementIdentifier) {
+	public SpawnerChangeRecipe(IngredientStack ingredient, IngredientStack ingredient2, Optional<Identifier> requiredAdvancementIdentifier) {
 		super("spawner_manipulation", false, requiredAdvancementIdentifier,
 				IngredientStack.ofItems(1, Items.SPAWNER), ingredient, ingredient2,
 				Items.SPAWNER.getDefaultStack(), 200, 0, true);
 	}
 	
 	public SpawnerChangeRecipe(IngredientStack ingredient) {
-		super("spawner_manipulation", false, SpectrumAdvancements.SPAWNER_MANIPULATION,
+		super("spawner_manipulation", false, Optional.of(SpectrumAdvancements.SPAWNER_MANIPULATION),
 				IngredientStack.ofItems(1, Items.SPAWNER), ingredient, IngredientStack.ofItems(4, SpectrumItems.VEGETAL),
 				Items.SPAWNER.getDefaultStack(), 200, 0, true);
 	}

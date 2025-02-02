@@ -17,7 +17,7 @@ import java.util.*;
 public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 	
 	public SpawnerCreatureChangeRecipe() {
-		super(IngredientStack.ofTag(SpectrumItemTags.SKULLS, 1), IngredientStack.ofItems(4, SpectrumItems.DOWNSTONE_FRAGMENTS), SpectrumAdvancements.SPAWNER_CREATURE_CHANGE);
+		super(IngredientStack.ofTag(SpectrumItemTags.SKULLS, 1), IngredientStack.ofItems(4, SpectrumItems.DOWNSTONE_FRAGMENTS), Optional.of(SpectrumAdvancements.SPAWNER_CREATURE_CHANGE));
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 	public boolean canCraftWithBlockEntityTag(NbtComponent spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
 		Optional<EntityType<?>> entityType = SpectrumSkullBlock.getEntityTypeOfSkullStack(firstBowlStack);
 		entityType = entityType.isEmpty() ? SpectrumSkullBlock.getEntityTypeOfSkullStack(secondBowlStack) : entityType;
-
+		
 		if (entityType.isEmpty()) {
 			return false;
 		}
@@ -59,7 +59,7 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 	public NbtCompound getSpawnerResultNbt(NbtCompound spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
 		Optional<EntityType<?>> entityType = SpectrumSkullBlock.getEntityTypeOfSkullStack(firstBowlStack);
 		entityType = entityType.isEmpty() ? SpectrumSkullBlock.getEntityTypeOfSkullStack(secondBowlStack) : entityType;
-
+		
 		if (entityType.isEmpty()) {
 			return spawnerBlockEntityNbt;
 		}

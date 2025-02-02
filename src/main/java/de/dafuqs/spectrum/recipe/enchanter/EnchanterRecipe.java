@@ -32,7 +32,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	// copy all modified components from the first stack in the ingredients to the output stack
 	protected final boolean copyComponents;
 	
-	public EnchanterRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier, List<Ingredient> inputs, ItemStack output, int craftingTime, int requiredExperience, boolean noBenefitsFromYieldAndEfficiencyUpgrades, boolean copyComponents) {
+	public EnchanterRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, List<Ingredient> inputs, ItemStack output, int craftingTime, int requiredExperience, boolean noBenefitsFromYieldAndEfficiencyUpgrades, boolean copyComponents) {
 		super(group, secret, requiredAdvancementIdentifier);
 		
 		this.inputs = inputs;
@@ -138,7 +138,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		public static final MapCodec<EnchanterRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				Ingredient.DISALLOW_EMPTY_CODEC.listOf().optionalFieldOf("ingredients", List.of()).forGetter(recipe -> recipe.inputs),
 				ItemStack.CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
 				Codec.INT.optionalFieldOf("required_experience", 0).forGetter(recipe -> recipe.requiredExperience),
@@ -150,7 +150,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		public static final PacketCodec<RegistryByteBuf, EnchanterRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, recipe -> recipe.group,
 				PacketCodecs.BOOL, recipe -> recipe.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				Ingredient.PACKET_CODEC.collect(PacketCodecs.toList()), recipe -> recipe.inputs,
 				ItemStack.PACKET_CODEC, recipe -> recipe.output,
 				PacketCodecs.VAR_INT, recipe -> recipe.requiredExperience,

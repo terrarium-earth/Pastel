@@ -12,22 +12,22 @@ import net.minecraft.recipe.*;
 import java.util.*;
 
 public class CheongRecipe extends TitrationBarrelRecipe {
-
+	
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final int MIN_FERMENTATION_TIME_HOURS = 4;
 	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.CHEONG, 4);
 	public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(SpectrumItems.MERMAIDS_JAM, 4);
-
+	
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
 		add(new IngredientStack(Ingredient.fromTag(SpectrumItemTags.FRUITS), null, 8));
 		add(new IngredientStack(Ingredient.ofItems(Items.SUGAR), null, 16));
 	}};
-
+	
 	public CheongRecipe() {
-		super("", false, null, INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER),
+		super("", false, Optional.empty(), INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER),
 				OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, null);
 	}
-
+	
 	@Override
 	public ItemStack tap(Inventory inventory, long secondsFermented, float downfall) {
 		ItemStack result = inventory.containsAny(Collections.singleton(SpectrumItems.MERMAIDS_GEM))

@@ -4,15 +4,16 @@ import de.dafuqs.spectrum.api.recipe.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.input.*;
 import net.minecraft.util.*;
-import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public abstract class GatedSpectrumRecipe<C extends RecipeInput> implements GatedRecipe<C> {
 	
 	public final String group;
 	public final boolean secret;
-	public final Identifier requiredAdvancementIdentifier;
+	public final Optional<Identifier> requiredAdvancementIdentifier;
 	
-	protected GatedSpectrumRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier) {
+	protected GatedSpectrumRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier) {
 		this.group = group;
 		this.secret = secret;
 		this.requiredAdvancementIdentifier = requiredAdvancementIdentifier;
@@ -33,9 +34,8 @@ public abstract class GatedSpectrumRecipe<C extends RecipeInput> implements Gate
 	 *
 	 * @return The advancement identifier. A null value means the player is always able to craft this recipe
 	 */
-	@Nullable
 	@Override
-	public Identifier getRequiredAdvancementIdentifier() {
+	public Optional<Identifier> getRequiredAdvancementIdentifier() {
 		return this.requiredAdvancementIdentifier;
 	}
 	

@@ -21,13 +21,13 @@ import java.util.*;
 public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleStackRecipeInput> {
 	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/cinderhearth");
-
+	
 	protected final IngredientStack ingredient;
 	protected final int time;
 	protected final float experience;
 	protected final List<Pair<ItemStack, Float>> resultsWithChance;
-
-	public CinderhearthRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier, IngredientStack ingredient, int time, float experience, List<Pair<ItemStack, Float>> resultsWithChance) {
+	
+	public CinderhearthRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, IngredientStack ingredient, int time, float experience, List<Pair<ItemStack, Float>> resultsWithChance) {
 		super(group, secret, requiredAdvancementIdentifier);
 		
 		this.ingredient = ingredient;
@@ -83,12 +83,12 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleStackReci
 	public String getRecipeTypeShortID() {
 		return "cinderhearth";
 	}
-
+	
 	@Override
 	public List<IngredientStack> getIngredientStacks() {
 		return List.of(this.ingredient);
 	}
-
+	
 	public float getExperience() {
 		return experience;
 	}
@@ -137,7 +137,7 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleStackReci
 		public static final MapCodec<CinderhearthRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				IngredientStack.Serializer.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
 				Codec.INT.fieldOf("time").forGetter(recipe -> recipe.time),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
@@ -150,7 +150,7 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleStackReci
 		public static final PacketCodec<RegistryByteBuf, CinderhearthRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, recipe -> recipe.group,
 				PacketCodecs.BOOL, recipe -> recipe.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				IngredientStack.Serializer.PACKET_CODEC, recipe -> recipe.ingredient,
 				PacketCodecs.VAR_INT, recipe -> recipe.time,
 				PacketCodecs.FLOAT, recipe -> recipe.experience,
@@ -168,5 +168,5 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleStackReci
 			return PACKET_CODEC;
 		}
 	}
-
+	
 }

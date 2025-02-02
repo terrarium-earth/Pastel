@@ -3,7 +3,6 @@ package de.dafuqs.spectrum.recipe.fluid_converting;
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import net.minecraft.item.*;
 import net.minecraft.network.*;
@@ -16,12 +15,14 @@ import net.minecraft.util.collection.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
+import java.util.*;
+
 public abstract class FluidConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	protected final Ingredient input;
 	protected final ItemStack output;
 	
-	public FluidConvertingRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier, @NotNull Ingredient input, ItemStack output) {
+	public FluidConvertingRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, @NotNull Ingredient input, ItemStack output) {
 		super(group, secret, requiredAdvancementIdentifier);
 		this.input = input;
 		this.output = output;
@@ -59,11 +60,11 @@ public abstract class FluidConvertingRecipe extends GatedSpectrumRecipe<RecipeIn
 		private final MapCodec<T> codec;
 		private final PacketCodec<RegistryByteBuf, T> packetCodec;
 		
-		public Serializer(Function5<String, Boolean, Identifier, Ingredient, ItemStack, T> factory) {
+		public Serializer(Function5<String, Boolean, Optional<Identifier>, Ingredient, ItemStack, T> factory) {
 			codec = RecordCodecBuilder.mapCodec(i -> i.group(
 					Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 					Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-					Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+					Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 					Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.input),
 					ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output)
 			).apply(i, factory));
@@ -71,7 +72,7 @@ public abstract class FluidConvertingRecipe extends GatedSpectrumRecipe<RecipeIn
 			packetCodec = PacketCodec.tuple(
 					PacketCodecs.STRING, recipe -> recipe.group,
 					PacketCodecs.BOOL, recipe -> recipe.secret,
-					PacketCodecHelper.nullable(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
+					PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 					Ingredient.PACKET_CODEC, recipe -> recipe.input,
 					ItemStack.PACKET_CODEC, recipe -> recipe.output,
 					factory

@@ -21,10 +21,12 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import org.jetbrains.annotations.*;
 
+import java.util.*;
+
 public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	
 	public HardcorePlayerRevivalRecipe() {
-		super("", false, null,
+		super("", false, Optional.empty(),
 				IngredientStack.ofItems(1, Blocks.PLAYER_HEAD.asItem()), IngredientStack.ofItems(1, Items.TOTEM_OF_UNDYING), IngredientStack.ofItems(1, Items.ENCHANTED_GOLDEN_APPLE),
 				ItemStack.EMPTY, 1200, 100, true);
 	}

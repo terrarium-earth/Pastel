@@ -29,8 +29,8 @@ public interface GatedGuidebookPage {
 						SpectrumCommon.logWarning("Guidebook page " + entryId + " page " + pageNr + " is missing its recipe");
 						continue;
 					}
-					Identifier recipeAdvId = recipe.getRequiredAdvancementIdentifier();
-					Identifier combinedAdvId = recipeAdvId == null ? recipe.getRecipeTypeUnlockIdentifier() : recipeAdvId;
+					Optional<Identifier> recipeAdvId = recipe.getRequiredAdvancementIdentifier();
+					Identifier combinedAdvId = recipeAdvId.orElse(recipe.getRecipeTypeUnlockIdentifier());
 					if (combinedAdvId == null) {
 						SpectrumCommon.logWarning("Guidebook page " + entryId + "[" + pageNr + "] references advancement " + pageAdvancement + " for a recipe that does not have an unlock: " + recipeAdvId);
 						continue;

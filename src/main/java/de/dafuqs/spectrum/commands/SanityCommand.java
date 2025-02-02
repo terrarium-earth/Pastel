@@ -439,8 +439,8 @@ public class SanityCommand {
 	
 	private static <R extends GatedRecipe<C>, C extends RecipeInput> void testRecipeUnlocks(RecipeType<R> recipeType, String name, RecipeManager recipeManager, ServerAdvancementLoader advancementLoader) {
 		for (RecipeEntry<R> recipe : recipeManager.listAllOfType(recipeType)) {
-			Identifier advancementIdentifier = recipe.value().getRequiredAdvancementIdentifier();
-			if (advancementIdentifier != null && advancementLoader.get(advancementIdentifier) == null) {
+			Optional<Identifier> advancementIdentifier = recipe.value().getRequiredAdvancementIdentifier();
+			if (advancementIdentifier.isPresent() && advancementLoader.get(advancementIdentifier.get()) == null) {
 				SpectrumCommon.logWarning("[SANITY: " + name + " Recipe Unlocks] Advancement '" + advancementIdentifier + "' in recipe '" + recipe.id() + "' does not exist");
 			}
 		}

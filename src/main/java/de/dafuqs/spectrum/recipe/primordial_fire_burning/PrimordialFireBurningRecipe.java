@@ -4,7 +4,6 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -22,6 +21,8 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
+import java.util.*;
+
 public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("lategame/collect_doombloom_seed");
@@ -29,7 +30,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 	protected final Ingredient input;
 	protected final ItemStack output;
 	
-	public PrimordialFireBurningRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier, Ingredient input, ItemStack output) {
+	public PrimordialFireBurningRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, Ingredient input, ItemStack output) {
 		super(group, secret, requiredAdvancementIdentifier);
 		
 		this.input = input;
@@ -96,7 +97,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 	
 	public static boolean processBlock(World world, BlockPos pos, BlockState state) {
 		Item item = state.getBlock().asItem();
-		if(item == Items.AIR) {
+		if (item == Items.AIR) {
 			return false;
 		}
 		
@@ -108,7 +109,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 		ItemStack output = recipe.craft(new SingleStackRecipeInput(state.getBlock().asItem().getDefaultStack()), world.getRegistryManager());
 		
 		world.playSound(null, pos, SpectrumSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundCategory.BLOCKS, 0.7F, 1.0F);
-		if(output.getItem() instanceof BlockItem blockItem) {
+		if (output.getItem() instanceof BlockItem blockItem) {
 			world.setBlockState(pos, blockItem.getBlock().getDefaultState());
 		} else {
 			world.removeBlock(pos, false);
@@ -145,7 +146,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 		public static final MapCodec<PrimordialFireBurningRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.input),
 				ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(recipe -> recipe.output)
 		).apply(i, PrimordialFireBurningRecipe::new));
@@ -153,7 +154,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 		private static final PacketCodec<RegistryByteBuf, PrimordialFireBurningRecipe> PACKET_CODEC = PacketCodec.tuple(
 				PacketCodecs.STRING, c -> c.group,
 				PacketCodecs.BOOL, c -> c.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
 				Ingredient.PACKET_CODEC, c -> c.input,
 				ItemStack.PACKET_CODEC, c -> c.output,
 				PrimordialFireBurningRecipe::new

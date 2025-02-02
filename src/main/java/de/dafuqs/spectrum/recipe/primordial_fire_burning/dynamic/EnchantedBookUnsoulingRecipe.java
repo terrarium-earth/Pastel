@@ -15,11 +15,13 @@ import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.world.*;
 
+import java.util.*;
+
 public class EnchantedBookUnsoulingRecipe extends PrimordialFireBurningRecipe {
 	
 	public EnchantedBookUnsoulingRecipe(RegistryWrapper.WrapperLookup lookup) {
 		super(
-				"", false, UNLOCK_IDENTIFIER,
+				"", false, Optional.of(UNLOCK_IDENTIFIER),
 				Ingredient.ofStacks(SpectrumEnchantmentHelper.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultStack(), Enchantments.SOUL_SPEED, 1, false, false).getRight()),
 				SpectrumEnchantmentHelper.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultStack(), Enchantments.SWIFT_SNEAK, 1, false, false).getRight()
 		);
@@ -38,7 +40,7 @@ public class EnchantedBookUnsoulingRecipe extends PrimordialFireBurningRecipe {
 		
 		RegistryEntry.Reference<Enchantment> soulSpeed = drm.createRegistryLookup().getOptionalEntry(RegistryKeys.ENCHANTMENT, Enchantments.SOUL_SPEED).orElseThrow();
 		int level = stack.getEnchantments().getLevel(soulSpeed);
-		if(level > 0) {
+		if (level > 0) {
 			stack = SpectrumEnchantmentHelper.removeEnchantments(drm, stack, Enchantments.SOUL_SPEED).getLeft();
 			stack = SpectrumEnchantmentHelper.addOrUpgradeEnchantment(drm, stack, Enchantments.SWIFT_SNEAK, level, false, false).getRight();
 		}

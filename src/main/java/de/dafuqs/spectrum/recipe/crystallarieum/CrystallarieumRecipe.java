@@ -23,11 +23,11 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 
 public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeInput> {
-
+	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/crystallarieum");
-
+	
 	protected final static Map<BlockState, RecipeEntry<CrystallarieumRecipe>> STATE_CACHE = new HashMap<>();
-
+	
 	protected final Ingredient ingredient;
 	protected final List<BlockState> growthStages;
 	protected final int secondsPerGrowthStage;
@@ -36,10 +36,10 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 	protected final boolean growsWithoutCatalyst;
 	protected final List<CrystallarieumCatalyst> catalysts;
 	protected final List<ItemStack> additionalResults; // these aren't actual results, but recipe managers will treat it as such, showing this recipe as a way to get them. Use for drops of the growth blocks, for example
-
-	public CrystallarieumRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier, Ingredient ingredient, List<BlockState> growthStages, int secondsPerGrowthStage, InkColor inkColor, int inkPerSecond, boolean growsWithoutCatalyst, List<CrystallarieumCatalyst> catalysts, List<ItemStack> additionalResults) {
+	
+	public CrystallarieumRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, Ingredient ingredient, List<BlockState> growthStages, int secondsPerGrowthStage, InkColor inkColor, int inkPerSecond, boolean growsWithoutCatalyst, List<CrystallarieumCatalyst> catalysts, List<ItemStack> additionalResults) {
 		super(group, secret, requiredAdvancementIdentifier);
-
+		
 		this.ingredient = ingredient;
 		this.growthStages = growthStages;
 		this.secondsPerGrowthStage = secondsPerGrowthStage;
@@ -68,13 +68,13 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 	public boolean matches(SingleStackRecipeInput input, World world) {
 		return ingredient.test(input.getStackInSlot(0));
 	}
-
+	
 	@Override
 	@Deprecated
 	public ItemStack craft(SingleStackRecipeInput inv, RegistryWrapper.WrapperLookup registryLookup) {
 		return ItemStack.EMPTY;
 	}
-
+	
 	@Override
 	public boolean fits(int width, int height) {
 		return true;
@@ -146,11 +146,11 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 	public int getInkPerSecond() {
 		return inkPerSecond;
 	}
-
+	
 	public boolean growsWithoutCatalyst() {
 		return growsWithoutCatalyst;
 	}
-
+	
 	public List<CrystallarieumCatalyst> getCatalysts() {
 		return this.catalysts;
 	}
@@ -176,13 +176,13 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 		private static final MapCodec<CrystallarieumRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
 				BlockState.CODEC.listOf().fieldOf("growth_stage_states").forGetter(recipe -> recipe.growthStages),
 				Codec.INT.fieldOf("seconds_per_growth_stage").forGetter(recipe -> recipe.secondsPerGrowthStage),
 				InkColor.CODEC.fieldOf("ink_color").forGetter(recipe -> recipe.inkColor),
 				Codec.INT.xmap(
-						d -> d == 0 ? 0 : (int) Math.pow(2, d- 1),
+						d -> d == 0 ? 0 : (int) Math.pow(2, d - 1),
 						e -> e
 				).fieldOf("ink_cost_tier").forGetter(recipe -> recipe.inkPerSecond),
 				Codec.BOOL.optionalFieldOf("grows_without_catalyst", false).forGetter(recipe -> recipe.growsWithoutCatalyst),
@@ -193,7 +193,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 		private static final PacketCodec<RegistryByteBuf, CrystallarieumRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, recipe -> recipe.group,
 				PacketCodecs.BOOL, recipe -> recipe.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				Ingredient.PACKET_CODEC, recipe -> recipe.ingredient,
 				PacketCodecHelper.BLOCK_STATE.collect(PacketCodecs.toList()), recipe -> recipe.growthStages,
 				PacketCodecs.VAR_INT, recipe -> recipe.secondsPerGrowthStage,

@@ -11,17 +11,21 @@ import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 
+import java.util.*;
+
 public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	
 	boolean isSecret();
-	Identifier getRequiredAdvancementIdentifier();
+	
+	Optional<Identifier> getRequiredAdvancementIdentifier();
+	
 	Identifier getRecipeTypeUnlockIdentifier();
 	
 	String getRecipeTypeShortID();
 	
 	default boolean canPlayerCraft(PlayerEntity playerEntity) {
 		return AdvancementHelper.hasAdvancement(playerEntity, getRecipeTypeUnlockIdentifier())
-				&& AdvancementHelper.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier());
+				&& AdvancementHelper.hasAdvancement(playerEntity, getRequiredAdvancementIdentifier().orElse(null));
 	}
 	
 	default Text getSingleUnlockToastString() {

@@ -18,7 +18,7 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
 	public static final float ENCHANTED_STAR_CANDY_CHANCE = 0.02F;
 	
 	public StarCandyRecipe() {
-		super("", false, UNLOCK_IDENTIFIER, PedestalRecipeTier.BASIC, 3, 3, generateInputs(), Map.of(BuiltinGemstoneColor.YELLOW, 1), SpectrumItems.STAR_CANDY.getDefaultStack(), 1.0F, 20, false, false);
+		super("", false, Optional.of(UNLOCK_IDENTIFIER), PedestalRecipeTier.BASIC, 3, 3, generateInputs(), Map.of(BuiltinGemstoneColor.YELLOW, 1), SpectrumItems.STAR_CANDY.getDefaultStack(), 1.0F, 20, false, false);
 	}
 	
 	@Override

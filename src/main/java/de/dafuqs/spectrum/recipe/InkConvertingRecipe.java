@@ -26,7 +26,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	protected final InkColor color;
 	protected final long amount;
 	
-	public InkConvertingRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier, Ingredient inputIngredient, InkColor color, long amount) {
+	public InkConvertingRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, Ingredient inputIngredient, InkColor color, long amount) {
 		super(group, secret, requiredAdvancementIdentifier);
 		
 		this.inputIngredient = inputIngredient;
@@ -112,7 +112,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		public static final MapCodec<InkConvertingRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.fieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.inputIngredient),
 				InkColor.CODEC.fieldOf("ink_color").forGetter(recipe -> recipe.color),
 				Codec.LONG.fieldOf("amount").forGetter(recipe -> recipe.amount)
@@ -121,7 +121,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		public static final PacketCodec<RegistryByteBuf, InkConvertingRecipe> PACKET_CODEC = PacketCodec.tuple(
 				PacketCodecs.STRING, recipe -> recipe.group,
 				PacketCodecs.BOOL, recipe -> recipe.secret,
-				Identifier.PACKET_CODEC, recipe -> recipe.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				Ingredient.PACKET_CODEC, recipe -> recipe.inputIngredient,
 				InkColor.PACKET_CODEC, recipe -> recipe.color,
 				PacketCodecs.VAR_LONG, recipe -> recipe.amount,

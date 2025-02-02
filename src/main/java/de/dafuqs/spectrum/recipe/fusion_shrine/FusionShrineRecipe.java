@@ -60,7 +60,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 	public FusionShrineRecipe(
 			String group,
 			boolean secret,
-			Identifier requiredAdvancementIdentifier,
+			Optional<Identifier> requiredAdvancementIdentifier,
 			List<IngredientStack> craftingInputs,
 			FluidIngredient fluid,
 			ItemStack output,
@@ -313,7 +313,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 		public static final MapCodec<FusionShrineRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				IngredientStack.Serializer.CODEC.codec().listOf(0, 7).fieldOf("ingredients").forGetter(recipe -> recipe.craftingInputs),
 				FluidIngredient.CODEC.optionalFieldOf("fluid", FluidIngredient.EMPTY).forGetter(recipe -> recipe.fluid),
 				ItemStack.CODEC.optionalFieldOf("output", ItemStack.EMPTY).forGetter(recipe -> recipe.output),
@@ -332,7 +332,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 		public static final PacketCodec<RegistryByteBuf, FusionShrineRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, recipe -> recipe.group,
 				PacketCodecs.BOOL, recipe -> recipe.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				IngredientStack.Serializer.PACKET_CODEC.collect(PacketCodecs.toList(7)), recipe -> recipe.craftingInputs,
 				FluidIngredient.PACKET_CODEC, recipe -> recipe.fluid,
 				ItemStack.PACKET_CODEC, recipe -> recipe.output,

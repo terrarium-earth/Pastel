@@ -18,6 +18,8 @@ import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
 import net.minecraft.world.*;
 
+import java.util.*;
+
 public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleStackRecipeInput> {
 	
 	protected final Ingredient ingredient;
@@ -28,7 +30,7 @@ public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleStackRecipeIn
 	protected final int particleCount;
 	protected final Identifier soundEvent;
 	
-	public AnvilCrushingRecipe(String group, boolean secret, Identifier requiredAdvancementIdentifier,
+	public AnvilCrushingRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier,
 							   Ingredient ingredient, ItemStack result, float crushedItemsPerPointOfDamage,
 							   float experience, Identifier particleEffectIdentifier, int particleCount, Identifier soundEventIdentifier) {
 		
@@ -93,23 +95,23 @@ public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleStackRecipeIn
 		defaultedList.add(this.ingredient);
 		return defaultedList;
 	}
-
+	
 	public float getCrushedItemsPerPointOfDamage() {
 		return crushedItemsPerPointOfDamage;
 	}
-
+	
 	public SoundEvent getSoundEvent() {
 		return Registries.SOUND_EVENT.get(soundEvent);
 	}
-
+	
 	public ParticleEffect getParticleEffect() {
 		return (ParticleEffect) Registries.PARTICLE_TYPE.get(particleEffectIdentifier);
 	}
-
+	
 	public int getParticleCount() {
 		return particleCount;
 	}
-
+	
 	public float getExperience() {
 		return experience;
 	}
@@ -119,7 +121,7 @@ public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleStackRecipeIn
 		private static final MapCodec<AnvilCrushingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
-				Identifier.CODEC.optionalFieldOf("required_advancement", null).forGetter(recipe -> recipe.requiredAdvancementIdentifier),
+				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
 				ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
 				Codec.FLOAT.fieldOf("crushedItemsPerPointOfDamage").forGetter(recipe -> recipe.crushedItemsPerPointOfDamage),
@@ -132,12 +134,12 @@ public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleStackRecipeIn
 		private static final PacketCodec<RegistryByteBuf, AnvilCrushingRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
 				PacketCodecs.STRING, c -> c.group,
 				PacketCodecs.BOOL, c -> c.secret,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
+				PacketCodecs.optional(Identifier.PACKET_CODEC), c -> c.requiredAdvancementIdentifier,
 				Ingredient.PACKET_CODEC, c -> c.ingredient,
 				ItemStack.PACKET_CODEC, c -> c.result,
 				PacketCodecs.FLOAT, c -> c.crushedItemsPerPointOfDamage,
 				PacketCodecs.FLOAT, c -> c.experience,
-				PacketCodecHelper.nullable(Identifier.PACKET_CODEC), c -> c.particleEffectIdentifier,
+				Identifier.PACKET_CODEC, c -> c.particleEffectIdentifier,
 				PacketCodecs.VAR_INT, c -> c.particleCount,
 				Identifier.PACKET_CODEC, c -> c.soundEvent,
 				AnvilCrushingRecipe::new
