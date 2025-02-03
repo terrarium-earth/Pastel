@@ -33,13 +33,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "malum:haunted",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "malum:haunted": 1
+      }
     }
   },
   "required_advancement": "spectrum:mod_integration/malum/haunted",

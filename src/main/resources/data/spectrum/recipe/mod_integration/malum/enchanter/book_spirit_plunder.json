@@ -33,13 +33,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "malum:spirit_plunder",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "malum:spirit_plunder": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/clovers_favor",

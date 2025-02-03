@@ -21,8 +21,8 @@
   "result": {
     "id": "spectrum:parametric_mining_device",
     "count": 8,
-    "nbt": {
-      "explosion_data": {
+    "components": {
+      "spectrum:modular_explosion": {
         "archetype": "destroy_blocks"
       }
     }

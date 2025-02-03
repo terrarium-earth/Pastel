@@ -34,13 +34,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "minecraft:blast_protection",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "minecraft:blast_protection": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_protection",

@@ -28,13 +28,10 @@
   ],
   "result": {
     "id": "spectrum:bedrock_helmet",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:projectile_protection",
-          "lvl": "5s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:projectile_protection": 5
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/equipment/bedrock_tools",

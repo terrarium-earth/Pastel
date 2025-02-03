@@ -10,8 +10,10 @@
       "chance": 1.0
     },
     {
-      "item": "spectrum:quitoxic_powder",
-      "count": 1,
+      "result": {
+        "id": "spectrum:quitoxic_powder",
+        "count": 1
+      },
       "chance": 0.5
     }
   ],

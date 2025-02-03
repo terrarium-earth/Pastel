@@ -21,8 +21,8 @@
   },
   "result": {
     "id": "chalk:lime_glow_chalk",
-    "nbt": {
-      "Unbreakable": 1
+    "components": {
+      "unbreakable": {}
     }
   },
   "required_advancement": "spectrum:hidden/collect_pigment/lime",

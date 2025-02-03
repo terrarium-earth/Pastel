@@ -21,8 +21,8 @@
   "result": {
     "id": "spectrum:threat_conflux",
     "count": 2,
-    "nbt": {
-      "explosion_data": {
+    "components": {
+      "spectrum:modular_explosion": {
         "archetype": "damage_entities",
         "modifiers": [
           "spectrum:kill_zone",

@@ -33,13 +33,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "spectrum:cloaked/clovers_favor",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "spectrum:cloaked/clovers_favor": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/clovers_favor",

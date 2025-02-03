@@ -7,8 +7,10 @@
       "count": 4
     },
     {
-      "item": "minecraft:redstone",
-      "count": 2,
+      "result": {
+        "id": "minecraft:redstone",
+        "count": 2
+      },
       "chance": 0.5
     }
   ],

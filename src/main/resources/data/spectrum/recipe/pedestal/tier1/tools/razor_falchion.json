@@ -19,13 +19,10 @@
   },
   "result": {
     "id": "spectrum:razor_falchion",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:looting",
-          "lvl": "3s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:looting": 3
+      }
     },
     "count": 1
   },

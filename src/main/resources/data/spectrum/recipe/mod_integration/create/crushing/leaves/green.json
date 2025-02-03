@@ -10,8 +10,10 @@
       "chance": 1.0
     },
     {
-      "item": "spectrum:green_sapling",
-      "count": 1,
+      "result": {
+        "id": "spectrum:green_sapling",
+        "count": 1
+      },
       "chance": 0.02
     }
   ],

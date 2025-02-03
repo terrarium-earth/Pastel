@@ -34,13 +34,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "minecraft:vanishing_curse",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "minecraft:vanishing_curse": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_curses",

@@ -28,13 +28,10 @@
   ],
   "result": {
     "id": "spectrum:bedrock_boots",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:fire_protection",
-          "lvl": "5s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:fire_protection": 5
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/equipment/bedrock_tools",

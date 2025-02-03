@@ -10,13 +10,17 @@
       "chance": 1.0
     },
     {
-      "item": "spectrum:incandescent_essence",
-      "count": 2,
+      "result": {
+        "id": "spectrum:incandescent_essence",
+        "count": 2
+      },
       "chance": 0.5
     },
     {
-      "item": "spectrum:incandescent_essence",
-      "count": 2,
+      "result": {
+        "id": "spectrum:incandescent_essence",
+        "count": 2
+      },
       "chance": 0.5
     }
   ],

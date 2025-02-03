@@ -28,13 +28,10 @@
   ],
   "result": {
     "id": "spectrum:fractal_glass_crest_bident",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:impaling",
-          "lvl": "6s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:impaling": 6
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/malachite/fractal_glass_crest_bident",

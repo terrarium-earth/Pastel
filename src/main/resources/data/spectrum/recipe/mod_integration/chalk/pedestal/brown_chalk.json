@@ -20,8 +20,8 @@
   },
   "result": {
     "id": "chalk:brown_chalk",
-    "nbt": {
-      "Unbreakable": 1
+    "components": {
+      "unbreakable": {}
     }
   },
   "required_advancement": "spectrum:hidden/collect_pigment/brown",

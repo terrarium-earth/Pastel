@@ -16,8 +16,7 @@ import java.util.*;
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
 	
-	//TODO this isn't quite working
-	@WrapOperation(method = "apply(Ljava/util/Map;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/util/profiler/Profiler;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;parse(Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;"))
+	@WrapOperation(method = "apply(Ljava/util/Map;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/util/profiler/Profiler;)V", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;parse(Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;"), remap = false)
 	private DataResult<?> injectAdditionalRecipes(Codec<?> instance, DynamicOps<?> dynamicOps, Object data, Operation<DataResult<?>> original, @Local LocalRef<Identifier> identifier, @Local ImmutableMultimap.Builder<RecipeType<?>, RecipeEntry<?>> builder, @Local ImmutableMap.Builder<Identifier, RecipeEntry<?>> builder2) {
 		DataResult<?> result = original.call(instance, dynamicOps, data);
 		if (result.result().isPresent() && result.result().get() instanceof IRecipeGenerator recipeGenerator) {

@@ -11,11 +11,13 @@
   },
   "result": {
     "id": "spectrum:memory",
-    "nbt": {
-      "EntityTag": {
+    "components": {
+      "entity_data": {
         "id": "minecraft:camel"
       },
-      "TicksToManifest": 8
+      "spectrum:memory": {
+        "ticks_to_manifest": 8
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/blocks/memories"

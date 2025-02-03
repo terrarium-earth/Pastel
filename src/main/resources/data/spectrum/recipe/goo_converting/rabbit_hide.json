@@ -6,7 +6,7 @@
     }
   ],
   "result": {
-    "item": "minecraft:rabbit_hide",
+    "id": "minecraft:rabbit_hide",
     "count": 1
   }
 }

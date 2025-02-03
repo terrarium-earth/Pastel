@@ -20,13 +20,10 @@
   },
   "result": {
     "id": "spectrum:lagoon_rod",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:lure",
-          "lvl": "3s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:lure": 3
+      }
     },
     "count": 1
   },

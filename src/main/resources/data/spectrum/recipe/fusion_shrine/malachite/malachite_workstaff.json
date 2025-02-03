@@ -29,13 +29,10 @@
   ],
   "result": {
     "id": "spectrum:malachite_workstaff",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:fortune",
-          "lvl": "4s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:fortune": 4
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/malachite/malachite_tools",

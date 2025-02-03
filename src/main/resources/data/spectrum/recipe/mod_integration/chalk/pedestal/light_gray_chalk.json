@@ -20,8 +20,8 @@
   },
   "result": {
     "id": "chalk:light_gray_chalk",
-    "nbt": {
-      "Unbreakable": 1
+    "components": {
+      "unbreakable": {}
     }
   },
   "required_advancement": "spectrum:hidden/collect_pigment/light_gray",

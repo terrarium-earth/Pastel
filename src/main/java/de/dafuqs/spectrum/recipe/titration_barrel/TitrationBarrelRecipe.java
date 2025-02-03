@@ -138,9 +138,6 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 	
 	@Override
 	public float getAngelsSharePerMcDay() {
-		if (this.fermentationData == null) {
-			return 0;
-		}
 		return this.fermentationData.angelsSharePercentPerMcDay();
 	}
 	
@@ -154,12 +151,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 	private ItemStack tapWith(float thickness, long secondsFermented, float downfall) {
 		ItemStack stack = this.outputItemStack.copy();
 		stack.setCount(1);
-		
-		if (this.fermentationData == null) {
-			return stack;
-		} else {
-			return getFermentedStack(this.fermentationData, thickness, secondsFermented, downfall, stack);
-		}
+		return getFermentedStack(this.fermentationData, thickness, secondsFermented, downfall, stack);
 	}
 	
 	public static ItemStack getFermentedStack(@NotNull FermentationData fermentationData, float thickness, long secondsFermented, float downfall, ItemStack inputStack) {
@@ -223,7 +215,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 	// but this way it might be easier for translations either way
 	public static MutableText getDurationText(int minFermentationTimeHours, FermentationData fermentationData) {
 		MutableText text;
-		if (fermentationData == null) {
+		if (fermentationData.equals(FermentationData.DEFAULT)) {
 			if (minFermentationTimeHours == 1) {
 				text = Text.translatable("container.spectrum.rei.titration_barrel.time_hour");
 			} else if (minFermentationTimeHours == 24) {
@@ -264,11 +256,11 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				IngredientStack.Serializer.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputStacks),
-				FluidIngredient.CODEC.fieldOf("fluid").forGetter(recipe -> recipe.fluid),
+				FluidIngredient.CODEC.optionalFieldOf("fluid", FluidIngredient.EMPTY).forGetter(recipe -> recipe.fluid),
 				ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(recipe -> recipe.outputItemStack),
-				Registries.ITEM.getCodec().fieldOf("tapping_item").forGetter(recipe -> recipe.tappingItem),
-				Codec.INT.fieldOf("min_fermentation_time_hours").forGetter(recipe -> recipe.minFermentationTimeHours),
-				FermentationData.CODEC.fieldOf("fermentation").forGetter(recipe -> recipe.fermentationData)
+				Registries.ITEM.getCodec().optionalFieldOf("tapping_item", Items.AIR).forGetter(recipe -> recipe.tappingItem),
+				Codec.INT.optionalFieldOf("min_fermentation_time_hours", 24).forGetter(recipe -> recipe.minFermentationTimeHours),
+				FermentationData.CODEC.optionalFieldOf("fermentation", FermentationData.DEFAULT).forGetter(recipe -> recipe.fermentationData)
 		).apply(i, TitrationBarrelRecipe::new));
 		
 		private static final PacketCodec<RegistryByteBuf, TitrationBarrelRecipe> PACKET_CODEC = PacketCodecHelper.tuple(

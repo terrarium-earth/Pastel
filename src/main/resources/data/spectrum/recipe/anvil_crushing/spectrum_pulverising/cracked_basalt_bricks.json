@@ -1,7 +1,11 @@
 {
   "type": "spectrum:anvil_crushing",
   "group": "block_cracking",
-  "ingredient": "spectrum:basalt_bricks",
+  "ingredient": [
+    {
+      "item": "spectrum:basalt_bricks"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.0,
   "result": {

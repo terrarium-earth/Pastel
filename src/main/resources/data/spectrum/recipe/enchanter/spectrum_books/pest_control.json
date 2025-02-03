@@ -33,13 +33,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "spectrum:cloaked/pest_control",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "spectrum:cloaked/pest_control": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/pest_control",

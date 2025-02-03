@@ -7,8 +7,10 @@
       "count": 4
     },
     {
-      "item": "minecraft:lapis_lazuli",
-      "count": 1,
+      "result": {
+        "id": "minecraft:lapis_lazuli",
+        "count": 1
+      },
       "chance": 0.5
     }
   ],

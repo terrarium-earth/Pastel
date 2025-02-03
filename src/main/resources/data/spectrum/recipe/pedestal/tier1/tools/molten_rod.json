@@ -20,13 +20,10 @@
   },
   "result": {
     "id": "spectrum:molten_rod",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "spectrum:cloaked/foundry",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "spectrum:cloaked/foundry": 1
+      }
     },
     "count": 1
   },

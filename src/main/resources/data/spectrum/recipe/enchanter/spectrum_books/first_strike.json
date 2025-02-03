@@ -33,13 +33,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "spectrum:cloaked/first_strike",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "spectrum:cloaked/first_strike": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/first_strike",

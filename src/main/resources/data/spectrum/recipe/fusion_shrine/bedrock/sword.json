@@ -32,13 +32,10 @@
   ],
   "result": {
     "id": "spectrum:bedrock_sword",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:sharpness",
-          "lvl": "6s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:sharpness": 6
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/equipment/bedrock_tools",

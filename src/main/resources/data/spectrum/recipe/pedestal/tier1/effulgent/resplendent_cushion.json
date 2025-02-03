@@ -17,7 +17,7 @@
     "F": "spectrum:resplendent_feather"
   },
   "result": {
-    "item": "spectrum:resplendent_cushion",
+    "id": "spectrum:resplendent_cushion",
     "count": 1
   },
   "required_advancement": "spectrum:pluck_resplendent_feather"

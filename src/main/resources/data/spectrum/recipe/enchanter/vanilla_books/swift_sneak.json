@@ -34,13 +34,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "minecraft:swift_sneak",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "minecraft:swift_sneak": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_swift_sneak",

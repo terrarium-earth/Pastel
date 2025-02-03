@@ -1,7 +1,11 @@
 {
   "type": "spectrum:anvil_crushing",
   "group": "block_cracking",
-  "ingredient": "spectrum:calcite_tiles",
+  "ingredient": [
+    {
+      "item": "spectrum:calcite_tiles"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.0,
   "result": {

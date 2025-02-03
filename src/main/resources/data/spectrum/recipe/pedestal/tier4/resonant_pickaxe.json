@@ -20,13 +20,10 @@
   },
   "result": {
     "id": "spectrum:resonant_pickaxe",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "spectrum:cloaked/resonance",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "spectrum:cloaked/resonance": 1
+      }
     },
     "count": 1
   },

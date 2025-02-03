@@ -8,11 +8,7 @@
     }
   ],
   "min_fermentation_time_hours": 4,
-  "fluid": [
-    {
-      "tag": "c:honey"
-    }
-  ],
+  "fluid": "#c:honey",
   "tapping_item": "minecraft:glass_bottle",
   "fermentation": {
     "fermentation_speed_mod": 1.25,

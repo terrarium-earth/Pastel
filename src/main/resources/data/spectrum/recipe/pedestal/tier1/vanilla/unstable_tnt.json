@@ -19,15 +19,11 @@
   },
   "result": {
     "id": "minecraft:tnt",
-    "nbt": {
-      "BlockStateTag": {
+    "components": {
+      "block_state": {
         "unstable": "true"
       },
-      "display": {
-        "Lore": [
-          "{\"text\":\"unstable\"}"
-        ]
-      }
+      "lore": "{\"text\":\"unstable\"}"
     },
     "count": 2
   },

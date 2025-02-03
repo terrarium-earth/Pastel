@@ -16,7 +16,7 @@
     "B": "spectrum:resplendent_block"
   },
   "result": {
-    "item": "spectrum:resplendent_carpet",
+    "id": "spectrum:resplendent_carpet",
     "count": 4
   },
   "required_advancement": "spectrum:pluck_resplendent_feather"

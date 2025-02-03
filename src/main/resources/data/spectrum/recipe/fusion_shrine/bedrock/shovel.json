@@ -32,13 +32,10 @@
   ],
   "result": {
     "id": "spectrum:bedrock_shovel",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:efficiency",
-          "lvl": "6s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:efficiency": 6
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/equipment/bedrock_tools",

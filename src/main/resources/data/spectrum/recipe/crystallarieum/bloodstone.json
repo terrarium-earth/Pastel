@@ -31,19 +31,31 @@
   "grows_without_catalyst": false,
   "catalysts": [
     {
-      "ingredient": "minecraft:raw_copper",
+      "ingredient": [
+        {
+          "item": "minecraft:raw_copper"
+        }
+      ],
       "growth_acceleration_mod": 7.5,
       "ink_consumption_mod": 10.0,
       "consume_chance_per_second": 0.05
     },
     {
-      "ingredient": "minecraft:copper_ingot",
+      "ingredient": [
+        {
+          "item": "minecraft:copper_ingot"
+        }
+      ],
       "growth_acceleration_mod": 1.0,
       "ink_consumption_mod": 0.5,
       "consume_chance_per_second": 0.15
     },
     {
-      "ingredient": "spectrum:pure_copper",
+      "ingredient": [
+        {
+          "item": "spectrum:pure_copper"
+        }
+      ],
       "growth_acceleration_mod": 1.708,
       "ink_consumption_mod": 0.707,
       "consume_chance_per_second": 0.01

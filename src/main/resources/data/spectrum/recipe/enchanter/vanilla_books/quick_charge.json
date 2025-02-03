@@ -34,13 +34,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "minecraft:quick_charge",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "minecraft:quick_charge": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_projectile",

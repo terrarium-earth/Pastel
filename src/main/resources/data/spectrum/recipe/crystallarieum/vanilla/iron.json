@@ -31,19 +31,31 @@
   "grows_without_catalyst": false,
   "catalysts": [
     {
-      "ingredient": "minecraft:iron_nugget",
+      "ingredient": [
+        {
+          "item": "minecraft:iron_nugget"
+        }
+      ],
       "growth_acceleration_mod": 4.0,
       "ink_consumption_mod": 0.5,
       "consume_chance_per_second": 0.2
     },
     {
-      "ingredient": "spectrum:bedrock_dust",
+      "ingredient": [
+        {
+          "item": "spectrum:bedrock_dust"
+        }
+      ],
       "growth_acceleration_mod": 8.0,
       "ink_consumption_mod": 2.0,
       "consume_chance_per_second": 0.05
     },
     {
-      "ingredient": "spectrum:neolith",
+      "ingredient": [
+        {
+          "item": "spectrum:neolith"
+        }
+      ],
       "growth_acceleration_mod": 1.5,
       "ink_consumption_mod": 0.25,
       "consume_chance_per_second": 0.02

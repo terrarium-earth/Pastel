@@ -7,7 +7,7 @@
       "count": 4
     },
     {
-      "item": "minecraft:quartz",
+      "id": "minecraft:quartz",
       "count": 2,
       "chance": 0.5
     }

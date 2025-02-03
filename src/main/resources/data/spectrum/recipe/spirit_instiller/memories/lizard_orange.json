@@ -11,12 +11,14 @@
   },
   "result": {
     "id": "spectrum:memory",
-    "nbt": {
-      "EntityTag": {
+    "components": {
+      "entity_data": {
         "id": "spectrum:lizard",
         "color": "spectrum:orange"
       },
-      "TicksToManifest": 16
+      "spectrum:memory": {
+        "ticks_to_manifest": 16
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/blocks/memories"

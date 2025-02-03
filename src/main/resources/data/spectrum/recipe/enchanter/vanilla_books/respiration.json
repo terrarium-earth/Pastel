@@ -34,13 +34,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "minecraft:respiration",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "minecraft:respiration": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_water",

@@ -33,13 +33,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "spectrum:cloaked/tight_grip",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "spectrum:cloaked/tight_grip": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/tight_grip",

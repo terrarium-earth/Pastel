@@ -6,8 +6,12 @@
     "fluid": "spectrum:liquid_crystal"
   },
   "ingredients": [
-    "spectrum:mysterious_locket",
-    "spectrum:moonstone_core",
+    {
+      "item": "spectrum:mysterious_locket"
+    },
+    {
+      "item": "spectrum:moonstone_core"
+    },
     {
       "item": "spectrum:white_pigment",
       "count": 16
@@ -16,7 +20,7 @@
   "result": {
     "id": "spectrum:mysterious_locket",
     "components": {
-      "socketed": {}
+      "spectrum:socketed": {}
     }
   },
   "required_advancement": "spectrum:unlocks/mysterious_locket_socketing",

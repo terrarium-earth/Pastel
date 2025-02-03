@@ -7,7 +7,7 @@
       "count": 4
     },
     {
-      "item": "minecraft:diamond",
+      "id": "minecraft:diamond",
       "chance": 0.02
     }
   ],

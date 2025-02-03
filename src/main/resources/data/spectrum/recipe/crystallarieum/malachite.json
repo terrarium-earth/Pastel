@@ -31,7 +31,11 @@
   "grows_without_catalyst": false,
   "catalysts": [
     {
-      "ingredient": "spectrum:moonstone_powder",
+      "ingredient": [
+        {
+          "item": "spectrum:moonstone_powder"
+        }
+      ],
       "growth_acceleration_mod": 1.0,
       "ink_consumption_mod": 1.0,
       "consume_chance_per_second": 0.04

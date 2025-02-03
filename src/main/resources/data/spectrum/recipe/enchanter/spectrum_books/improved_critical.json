@@ -33,13 +33,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "spectrum:cloaked/improved_critical",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "spectrum:cloaked/improved_critical": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/improved_critical",

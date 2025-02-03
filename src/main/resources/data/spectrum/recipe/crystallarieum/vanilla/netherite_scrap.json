@@ -31,25 +31,41 @@
   "grows_without_catalyst": false,
   "catalysts": [
     {
-      "ingredient": "spectrum:incandescent_essence",
+      "ingredient": [
+        {
+          "item": "spectrum:incandescent_essence"
+        }
+      ],
       "growth_acceleration_mod": 1.5,
       "ink_consumption_mod": 2.0,
       "consume_chance_per_second": 0.02
     },
     {
-      "ingredient": "minecraft:fire_charge",
+      "ingredient": [
+        {
+          "item": "minecraft:fire_charge"
+        }
+      ],
       "growth_acceleration_mod": 1.0,
       "ink_consumption_mod": 0.25,
       "consume_chance_per_second": 0.02
     },
     {
-      "ingredient": "minecraft:gold_ingot",
+      "ingredient": [
+        {
+          "item": "minecraft:gold_ingot"
+        }
+      ],
       "growth_acceleration_mod": 16.0,
       "ink_consumption_mod": 2.5,
       "consume_chance_per_second": 0.02
     },
     {
-      "ingredient": "spectrum:stratine_fragments",
+      "ingredient": [
+        {
+          "item": "spectrum:stratine_fragments"
+        }
+      ],
       "growth_acceleration_mod": 2.0,
       "ink_consumption_mod": 0.125,
       "consume_chance_per_second": 0.02

@@ -20,14 +20,11 @@
   },
   "result": {
     "id": "spectrum:lucky_pickaxe",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:fortune",
-          "lvl": "3s"
-        }
-      ]
-    },
+    "components": {
+      "enchantments": {
+        "minecraft:fortune": 3
+      }
+    }
     "count": 1
   },
   "required_advancement": "spectrum:unlocks/equipment/lucky_pickaxe"

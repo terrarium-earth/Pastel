@@ -13,7 +13,7 @@
     "spectrum:resplendent_block"
   ],
   "result": {
-    "item": "spectrum:resplendent_feather",
+    "id": "spectrum:resplendent_feather",
     "count": 4
   },
   "required_advancement": "spectrum:pluck_resplendent_feather",

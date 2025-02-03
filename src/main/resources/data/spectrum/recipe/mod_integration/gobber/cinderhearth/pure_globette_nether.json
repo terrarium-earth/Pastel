@@ -7,8 +7,10 @@
       "count": 4
     },
     {
-      "item": "gobber2:gobber2_globette_nether",
-      "count": 2,
+      "result": {
+        "id": "gobber2:gobber2_globette_nether",
+        "count": 2
+      },
       "chance": 0.5
     }
   ],

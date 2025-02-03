@@ -34,13 +34,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "minecraft:soul_speed",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "minecraft:soul_speed": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_treasure",

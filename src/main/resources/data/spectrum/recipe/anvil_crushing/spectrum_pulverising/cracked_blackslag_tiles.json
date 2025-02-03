@@ -1,7 +1,11 @@
 {
   "type": "spectrum:anvil_crushing",
   "group": "block_cracking",
-  "ingredient": "spectrum:blackslag_tiles",
+  "ingredient": [
+    {
+      "item": "spectrum:blackslag_tiles"
+    }
+  ],
   "crushedItemsPerPointOfDamage": 1,
   "experience": 0.0,
   "result": {

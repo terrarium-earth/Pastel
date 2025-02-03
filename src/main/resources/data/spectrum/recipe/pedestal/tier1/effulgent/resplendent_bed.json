@@ -18,7 +18,7 @@
     "#": "#minecraft:planks"
   },
   "result": {
-    "item": "spectrum:resplendent_bed",
+    "id": "spectrum:resplendent_bed",
     "count": 1
   },
   "required_advancement": "spectrum:pluck_resplendent_feather"

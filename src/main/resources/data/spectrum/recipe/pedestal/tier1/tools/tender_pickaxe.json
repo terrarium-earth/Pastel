@@ -20,13 +20,10 @@
   },
   "result": {
     "id": "spectrum:tender_pickaxe",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:silk_touch",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:silk_touch": 1
+      }
     },
     "count": 1
   },

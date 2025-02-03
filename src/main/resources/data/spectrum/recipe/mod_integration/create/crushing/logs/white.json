@@ -10,8 +10,10 @@
       "chance": 1.0
     },
     {
-      "item": "spectrum:white_pigment",
-      "count": 1,
+      "result": {
+        "id": "spectrum:white_pigment",
+        "count": 1
+      },
       "chance": 0.5
     }
   ],

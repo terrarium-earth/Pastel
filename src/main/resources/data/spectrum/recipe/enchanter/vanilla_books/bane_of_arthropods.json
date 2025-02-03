@@ -34,13 +34,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "minecraft:bane_of_arthropods",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "minecraft:bane_of_arthropods": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_damage",

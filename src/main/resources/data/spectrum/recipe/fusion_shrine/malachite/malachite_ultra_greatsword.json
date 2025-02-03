@@ -27,13 +27,10 @@
   ],
   "result": {
     "id": "spectrum:malachite_ultra_greatsword",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:sweeping_edge",
-          "lvl": "4s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:sweeping_edge": 4
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/malachite/malachite_tools",

@@ -20,13 +20,10 @@
   },
   "result": {
     "id": "spectrum:oblivion_pickaxe",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "spectrum:cloaked/voiding",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "spectrum:cloaked/voiding": 1
+      }
     },
     "count": 1
   },

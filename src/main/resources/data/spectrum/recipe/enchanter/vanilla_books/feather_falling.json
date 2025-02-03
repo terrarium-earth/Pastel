@@ -34,13 +34,10 @@
   ],
   "result": {
     "id": "minecraft:enchanted_book",
-    "nbt": {
-      "StoredEnchantments": [
-        {
-          "id": "minecraft:feather_falling",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "stored_enchantments": {
+        "minecraft:feather_falling": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_quitoxic",

@@ -20,13 +20,10 @@
   },
   "result": {
     "id": "spectrum:dragonrending_pickaxe",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "spectrum:cloaked/razing",
-          "lvl": "3s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "spectrum:cloaked/razing": 3
+      }
     },
     "count": 1
   },

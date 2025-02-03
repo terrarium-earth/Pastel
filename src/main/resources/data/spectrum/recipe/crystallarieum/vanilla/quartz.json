@@ -19,7 +19,7 @@
       }
     },
     {
-      "Name": "spectrum:quarz_cluster",
+      "Name": "spectrum:quartz_cluster",
       "Properties": {
         "facing": "up"
       }
@@ -31,19 +31,31 @@
   "grows_without_catalyst": false,
   "catalysts": [
     {
-      "ingredient": "minecraft:sand",
+      "ingredient": [
+        {
+          "item": "minecraft:sand"
+        }
+      ],
       "growth_acceleration_mod": 3.0,
       "ink_consumption_mod": 2.0,
       "consume_chance_per_second": 0.25
     },
     {
-      "ingredient": "spectrum:midnight_chip",
+      "ingredient": [
+        {
+          "item": "spectrum:midnight_chip"
+        }
+      ],
       "growth_acceleration_mod": 1.0,
       "ink_consumption_mod": 0.25,
       "consume_chance_per_second": 0.01
     },
     {
-      "ingredient": "spectrum:rock_crystal",
+      "ingredient": [
+        {
+          "item": "spectrum:rock_crystal"
+        }
+      ],
       "growth_acceleration_mod": 12.0,
       "ink_consumption_mod": 0.5,
       "consume_chance_per_second": 0.1

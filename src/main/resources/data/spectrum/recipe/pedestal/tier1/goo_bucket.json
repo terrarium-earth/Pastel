@@ -20,7 +20,7 @@
     "M": "spectrum:mermaids_gem"
   },
   "result": {
-    "item": "spectrum:goo_bucket",
+    "id": "spectrum:goo_bucket",
     "count": 1
   },
   "required_advancement": "spectrum:unlocks/blocks/goo"

@@ -7,11 +7,11 @@
       "count": 4
     },
     {
-      "item": "minecraft:redstone",
+      "id": "minecraft:redstone",
       "chance": 0.5
     },
     {
-      "item": "minecraft:glowstone_dust",
+      "id": "minecraft:glowstone_dust",
       "chance": 0.1
     }
   ],

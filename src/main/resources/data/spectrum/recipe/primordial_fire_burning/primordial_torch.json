@@ -1,7 +1,11 @@
 {
   "type": "spectrum:primordial_fire_burning",
   "secret": true,
-  "ingredient": "minecraft:torch",
+  "ingredient": [
+    {
+      "item": "minecraft:torch"
+    }
+  ],
   "result": {
     "id": "spectrum:primordial_torch"
   }

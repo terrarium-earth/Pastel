@@ -32,13 +32,10 @@
   ],
   "result": {
     "id": "spectrum:bedrock_pickaxe",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:silk_touch",
-          "lvl": "1s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:silk_touch": 1
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/equipment/bedrock_tools",

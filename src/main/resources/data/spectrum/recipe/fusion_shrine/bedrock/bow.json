@@ -32,13 +32,10 @@
   ],
   "result": {
     "id": "spectrum:bedrock_bow",
-    "nbt": {
-      "Enchantments": [
-        {
-          "id": "minecraft:power",
-          "lvl": "6s"
-        }
-      ]
+    "components": {
+      "enchantments": {
+        "minecraft:power": 6
+      }
     }
   },
   "required_advancement": "spectrum:unlocks/equipment/bedrock_tools",

@@ -7,8 +7,10 @@
       "count": 2
     },
     {
-      "item": "minecraft:echo_shard",
-      "count": 1,
+      "result": {
+        "id": "minecraft:echo_shard",
+        "count": 1
+      },
       "chance": 0.25
     }
   ],
