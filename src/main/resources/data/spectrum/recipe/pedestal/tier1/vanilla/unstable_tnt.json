@@ -23,7 +23,9 @@
       "block_state": {
         "unstable": "true"
       },
-      "lore": "{\"text\":\"unstable\"}"
+      "lore": [
+        "{\"text\":\"unstable\"}"
+      ]
     },
     "count": 2
   },

@@ -26,7 +26,7 @@ public class ModularExplosionDefinition {
 	
 	public static final Codec<ModularExplosionDefinition> CODEC = RecordCodecBuilder.create(i -> i.group(
 			StringIdentifiable.createCodec(ExplosionArchetype::values).fieldOf("archetype").forGetter(c -> c.archetype),
-			SpectrumRegistries.EXPLOSION_MODIFIERS.getCodec().listOf().fieldOf("modifiers").forGetter(c -> c.modifiers)
+			SpectrumRegistries.EXPLOSION_MODIFIERS.getCodec().listOf().optionalFieldOf("modifiers", List.of()).forGetter(c -> c.modifiers)
 	).apply(i, ModularExplosionDefinition::new));
 	
 	public static final PacketCodec<RegistryByteBuf, ModularExplosionDefinition> PACKET_CODEC = PacketCodec.tuple(

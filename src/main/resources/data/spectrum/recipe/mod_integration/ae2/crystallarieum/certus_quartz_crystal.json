@@ -5,19 +5,19 @@
   },
   "growth_stage_states": [
     {
-      "Name": "spectrum:small_certus_quarz_bud",
+      "Name": "spectrum:small_certus_quartz_bud",
       "Properties": {
         "facing": "up"
       }
     },
     {
-      "Name": "spectrum:large_certus_quarz_bud",
+      "Name": "spectrum:large_certus_quartz_bud",
       "Properties": {
         "facing": "up"
       }
     },
     {
-      "Name": "spectrum:certus_quarz_cluster",
+      "Name": "spectrum:certus_quartz_cluster",
       "Properties": {
         "facing": "up"
       }

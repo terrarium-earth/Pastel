@@ -7,13 +7,13 @@
   ],
   "growth_stage_states": [
     {
-      "Name": "spectrum:small_quarz_bud",
+      "Name": "spectrum:small_quartz_bud",
       "Properties": {
         "facing": "up"
       }
     },
     {
-      "Name": "spectrum:large_quarz_bud",
+      "Name": "spectrum:large_quartz_bud",
       "Properties": {
         "facing": "up"
       }

@@ -12,10 +12,10 @@ public record MemoryComponent(int ticksToManifest, boolean spawnAsAdult, boolean
 	public static final MemoryComponent DEFAULT = new MemoryComponent(-1, false, false, false);
 	
 	public static final Codec<MemoryComponent> CODEC = RecordCodecBuilder.create(i -> i.group(
-		Codec.INT.fieldOf("ticks_to_manifest").forGetter(MemoryComponent::ticksToManifest),
-		Codec.BOOL.fieldOf("spawn_as_adult").forGetter(MemoryComponent::spawnAsAdult),
-		Codec.BOOL.fieldOf("broken_promise").forGetter(MemoryComponent::brokenPromise),
-		Codec.BOOL.fieldOf("unrecognizable").forGetter(MemoryComponent::unrecognizable)
+			Codec.INT.optionalFieldOf("ticks_to_manifest", -1).forGetter(MemoryComponent::ticksToManifest),
+			Codec.BOOL.optionalFieldOf("spawn_as_adult", false).forGetter(MemoryComponent::spawnAsAdult),
+			Codec.BOOL.optionalFieldOf("broken_promise", false).forGetter(MemoryComponent::brokenPromise),
+			Codec.BOOL.optionalFieldOf("unrecognizable", false).forGetter(MemoryComponent::unrecognizable)
 	).apply(i, MemoryComponent::new));
 	
 	public static final PacketCodec<ByteBuf, MemoryComponent> PACKET_CODEC = PacketCodec.tuple(

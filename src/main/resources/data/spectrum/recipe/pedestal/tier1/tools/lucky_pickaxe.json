@@ -24,7 +24,7 @@
       "enchantments": {
         "minecraft:fortune": 3
       }
-    }
+    },
     "count": 1
   },
   "required_advancement": "spectrum:unlocks/equipment/lucky_pickaxe"
