@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:radiant_glass",
+      "item": {
+        "id": "spectrum:radiant_glass"
+      },
       "title": "block.spectrum.radiant_glass",
       "text": "book.spectrum.guidebook.radiant_glass.page0.text"
     },

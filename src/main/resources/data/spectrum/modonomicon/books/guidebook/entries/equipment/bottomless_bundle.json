@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:bottomless_bundle",
+      "item": {
+        "id": "spectrum:bottomless_bundle"
+      },
       "text": "book.spectrum.guidebook.bottomless_bundle.page0.text",
       "title": "item.spectrum.bottomless_bundle"
     },

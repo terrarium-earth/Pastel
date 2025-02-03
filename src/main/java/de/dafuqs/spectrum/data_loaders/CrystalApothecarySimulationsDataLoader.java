@@ -27,7 +27,7 @@ public class CrystalApothecarySimulationsDataLoader extends JsonDataLoader imple
 		public static final Codec<SimulatedBlockGrowthEntry> CODEC = RecordCodecBuilder.create(i -> i.group(
 				Registries.BLOCK.getCodec().listOf().xmap(list -> (Collection<Block>) list, set -> set.stream().toList()).fieldOf("valid_neighbor_blocks").forGetter(c -> c.validNeighbors),
 				Codec.INT.optionalFieldOf("ticks_for_compensation_loot_per_valid_neighbor", 10000).forGetter(c -> c.ticksForCompensationLootPerValidNeighbor),
-				ItemStack.CODEC.fieldOf("compensated_stack").forGetter(c -> c.compensatedStack)
+				ItemStack.CODEC.fieldOf("compensated_loot").forGetter(c -> c.compensatedStack)
 		).apply(i, SimulatedBlockGrowthEntry::new));
 		
 	}
@@ -44,13 +44,13 @@ public class CrystalApothecarySimulationsDataLoader extends JsonDataLoader imple
 			
 			DataResult<Block> buddingBlock = Registries.BLOCK.getCodec().decode(JsonOps.INSTANCE, object.get("budding_block")).map(Pair::getFirst);
 			if (buddingBlock.error().isPresent() || buddingBlock.result().isEmpty()) {
-				SpectrumCommon.logError("Crystal Apothecary Simulation error: " + buddingBlock.error().get() + ". Ignoring that one.");
+				SpectrumCommon.logError("Crystal apothecary simulation error for " + identifier + ": " + buddingBlock.error().get() + ". Ignoring that one.");
 				return;
 			}
 			
 			DataResult<SimulatedBlockGrowthEntry> entry = SimulatedBlockGrowthEntry.CODEC.decode(JsonOps.INSTANCE, jsonElement).map(Pair::getFirst);
 			if (entry.error().isPresent() || entry.result().isEmpty()) {
-				SpectrumCommon.logError("Crystal Apothecary Simulation error: " + entry.error().get() + ". Ignoring that one.");
+				SpectrumCommon.logError("Crystal Apothecary Simulation error for " + identifier + ": " + entry.error().get() + ". Ignoring that one.");
 				return;
 			}
 			

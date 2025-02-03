@@ -22,7 +22,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_redstone",
+      "item": {
+        "id": "spectrum:pure_redstone"
+      },
       "text": "book.spectrum.guidebook.pastel_upgrades.redstone.pure_redstone.text",
       "condition": {
         "type": "modonomicon:advancement",
@@ -31,7 +33,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_coal",
+      "item": {
+        "id": "spectrum:pure_coal"
+      },
       "text": "book.spectrum.guidebook.pastel_upgrades.redstone.pure_coal.text",
       "condition": {
         "type": "modonomicon:advancement",
@@ -40,7 +44,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_echo",
+      "item": {
+        "id": "spectrum:pure_echo"
+      },
       "text": "book.spectrum.guidebook.pastel_upgrades.redstone.pure_echo.text",
       "condition": {
         "type": "modonomicon:advancement",
@@ -49,7 +55,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_lapis",
+      "item": {
+        "id": "spectrum:pure_lapis"
+      },
       "text": "book.spectrum.guidebook.pastel_upgrades.redstone.pure_lapis.text",
       "condition": {
         "type": "modonomicon:advancement",
@@ -58,7 +66,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_quartz",
+      "item": {
+        "id": "spectrum:pure_quartz"
+      },
       "text": "book.spectrum.guidebook.pastel_upgrades.redstone.pure_quartz.text",
       "condition": {
         "type": "modonomicon:advancement",
@@ -67,7 +77,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_glowstone",
+      "item": {
+        "id": "spectrum:pure_glowstone"
+      },
       "text": "book.spectrum.guidebook.pastel_upgrades.redstone.pure_glowstone.text",
       "condition": {
         "type": "modonomicon:advancement",

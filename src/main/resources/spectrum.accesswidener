@@ -31,4 +31,6 @@ accessible method net/minecraft/advancement/criterion/AbstractCriterion trigger 
 accessible method net/minecraft/screen/ForgingScreenHandler addPlayerInventorySlots (Lnet/minecraft/entity/player/PlayerInventory;)V
 extendable method net/minecraft/item/map/MapState <init> (IIBZZZLnet/minecraft/registry/RegistryKey;)V
 extendable method net/minecraft/item/map/MapState addDecoration (Lnet/minecraft/registry/entry/RegistryEntry;Lnet/minecraft/world/WorldAccess;Ljava/lang/String;DDDLnet/minecraft/text/Text;)V
+
 mutable field net/minecraft/item/map/MapState dimension Lnet/minecraft/registry/RegistryKey;
+mutable field net/minecraft/registry/RegistryLoader DYNAMIC_REGISTRIES Ljava/util/List;

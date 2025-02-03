@@ -1,61 +1,91 @@
 {
   "type": "spectrum:modify_drops",
-  "block": "#c:ores",
+  "block": {
+    "blocks": "#c:ores"
+  },
   "modify_drops": [
     {
-      "input": "minecraft:coal",
+      "input": {
+        "item": "minecraft:coal"
+      },
       "output": "spectrum:pure_coal"
     },
     {
-      "input": "minecraft:raw_copper",
+      "input": {
+        "item": "minecraft:raw_copper"
+      },
       "output": "spectrum:pure_copper"
     },
     {
-      "input": "minecraft:diamond",
+      "input": {
+        "item": "minecraft:diamond"
+      },
       "output": "spectrum:pure_diamond"
     },
     {
-      "input": "minecraft:echo_shard",
+      "input": {
+        "item": "minecraft:echo_shard"
+      },
       "output": "spectrum:pure_echo"
     },
     {
-      "input": "minecraft:emerald",
+      "input": {
+        "item": "minecraft:emerald"
+      },
       "output": "spectrum:pure_emerald"
     },
     {
-      "input": "minecraft:glowstone_dust",
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      },
       "output": "spectrum:pure_glowstone"
     },
     {
-      "input": "minecraft:raw_gold",
+      "input": {
+        "item": "minecraft:raw_gold"
+      },
       "output": "spectrum:pure_gold"
     },
     {
-      "input": "minecraft:raw_iron",
+      "input": {
+        "item": "minecraft:raw_iron"
+      },
       "output": "spectrum:pure_iron"
     },
     {
-      "input": "minecraft:lapis_lazuli",
+      "input": {
+        "item": "minecraft:lapis_lazuli"
+      },
       "output": "spectrum:pure_lapis"
     },
     {
-      "input": "minecraft:prismarine_crystals",
+      "input": {
+        "item": "minecraft:prismarine_crystals"
+      },
       "output": "spectrum:pure_prismarine"
     },
     {
-      "input": "minecraft:quartz",
+      "input": {
+        "item": "minecraft:quartz"
+      },
       "output": "spectrum:pure_quartz"
     },
     {
-      "input": "minecraft:redstone",
+      "input": {
+        "item": "minecraft:redstone"
+      },
       "output": "spectrum:pure_redstone"
     },
     {
-      "input": "minecraft:ancient_debris",
+      "input": {
+        "item": "minecraft:ancient_debris"
+      },
       "output": "spectrum:pure_netherite_scrap"
     },
     {
-      "input": "minecraft:netherite_scrap",
+      "input": {
+        "item": "minecraft:netherite_scrap"
+      },
       "output": "spectrum:pure_netherite_scrap"
     }
   ]

@@ -1,10 +1,9 @@
 package de.dafuqs.spectrum.data_loaders.resonance_processors;
 
-import com.google.gson.*;
 import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.api.predicate.block.*;
-import de.dafuqs.spectrum.data_loaders.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.component.*;
@@ -12,43 +11,25 @@ import net.minecraft.component.type.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.state.property.*;
-import net.minecraft.util.*;
 
 import java.util.*;
 
 public class DropSelfResonanceProcessor extends ResonanceDropProcessor {
 	
-	public static class Serializer implements ResonanceDropProcessor.Serializer {
-		
-		@Override
-		public ResonanceDropProcessor fromJson(JsonObject json) throws Exception {
-			BrokenBlockPredicate blockTarget = BrokenBlockPredicate.CODEC.parse(JsonOps.INSTANCE, json.get("block")).getOrThrow();
-			
-			List<String> statePropertiesToCopy = new ArrayList<>();
-			if (json.has("state_properties_to_copy")) {
-				for (JsonElement e : JsonHelper.getArray(json, "state_properties_to_copy")) {
-					statePropertiesToCopy.add(e.getAsString());
-				}
-			}
-			
-			List<String> nbtToCopy = new ArrayList<>();
-			if (json.has("nbt_to_copy")) {
-				for (JsonElement e : JsonHelper.getArray(json, "nbt_to_copy")) {
-					nbtToCopy.add(e.getAsString());
-				}
-			}
-			boolean includeDefaultStateProperties = JsonHelper.getBoolean(json, "include_default_state_properties", false);
-			
-			return new DropSelfResonanceProcessor(blockTarget, nbtToCopy, statePropertiesToCopy, includeDefaultStateProperties);
-		}
-		
-	}
+	public static final MapCodec<DropSelfResonanceProcessor> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+			BrokenBlockPredicate.CODEC.fieldOf("block")
+					.validate(block -> block.test(Blocks.AIR.getDefaultState()) ? DataResult.error(() -> "Registering a Resonance Drop that matches on everything!") : DataResult.success(block))
+					.forGetter(c -> c.blockPredicate),
+			Codec.STRING.listOf().optionalFieldOf("state_properties_to_copy", List.of()).forGetter(c -> c.statePropertiesToCopy),
+			Codec.STRING.listOf().optionalFieldOf("nbt_to_copy", List.of()).forGetter(c -> c.nbtToCopy),
+			Codec.BOOL.optionalFieldOf("include_default_state_properties", false).forGetter(c -> c.includeDefaultStateProperties)
+	).apply(i, DropSelfResonanceProcessor::new));
 	
 	public List<String> nbtToCopy;
 	public List<String> statePropertiesToCopy;
 	public boolean includeDefaultStateProperties;
 	
-	public DropSelfResonanceProcessor(BrokenBlockPredicate blockTarget, List<String> nbtToCopy, List<String> statePropertiesToCopy, boolean includeDefaultStateProperties) throws Exception {
+	public DropSelfResonanceProcessor(BrokenBlockPredicate blockTarget, List<String> nbtToCopy, List<String> statePropertiesToCopy, boolean includeDefaultStateProperties) {
 		super(blockTarget);
 		this.nbtToCopy = nbtToCopy;
 		this.statePropertiesToCopy = statePropertiesToCopy;
@@ -59,7 +40,7 @@ public class DropSelfResonanceProcessor extends ResonanceDropProcessor {
 	public boolean process(BlockState state, BlockEntity blockEntity, List<ItemStack> droppedStacks) {
 		if (blockPredicate.test(state)) {
 			dropSelf(state, blockEntity, droppedStacks);
-			ResonanceDropsDataLoader.preventNextXPDrop = true;
+			ResonanceDropProcessor.preventNextXPDrop = true;
 			return true;
 		}
 		return false;
@@ -102,6 +83,7 @@ public class DropSelfResonanceProcessor extends ResonanceDropProcessor {
 	
 	private void dropSelf(BlockState minedState, BlockEntity blockEntity, List<ItemStack> droppedStacks) {
 		ItemStack selfStack = minedState.getBlock().asItem().getDefaultStack();
+		
 		if (!statePropertiesToCopy.isEmpty()) {
 			copyBlockStateTags(minedState, selfStack);
 		}
@@ -111,6 +93,10 @@ public class DropSelfResonanceProcessor extends ResonanceDropProcessor {
 		
 		droppedStacks.clear();
 		droppedStacks.add(selfStack);
+	}
+	
+	public MapCodec<? extends ResonanceDropProcessor> getCodec() {
+		return CODEC;
 	}
 	
 }

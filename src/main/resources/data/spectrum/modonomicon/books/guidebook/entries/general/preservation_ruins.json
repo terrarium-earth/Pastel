@@ -19,7 +19,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.preservation_ruins.name",
-      "item": "spectrum:preservation_controller",
+      "item": {
+        "id": "spectrum:preservation_controller"
+      },
       "text": "book.spectrum.guidebook.preservation_ruins.page0.text"
     },
     {

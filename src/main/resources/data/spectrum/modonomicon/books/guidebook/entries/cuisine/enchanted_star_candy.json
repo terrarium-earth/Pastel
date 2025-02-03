@@ -22,7 +22,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.enchanted_star_candy",
-      "item": "spectrum:enchanted_star_candy",
+      "item": {
+        "id": "spectrum:enchanted_star_candy"
+      },
       "text": "book.spectrum.guidebook.star_candy.page2.text"
     }
   ]

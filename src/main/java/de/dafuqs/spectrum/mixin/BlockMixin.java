@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.mixin;
 
 import com.llamalad7.mixinextras.injector.*;
-import de.dafuqs.spectrum.data_loaders.*;
+import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.helpers.enchantments.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -43,7 +43,7 @@ public abstract class BlockMixin {
 		
 		// Resonance: drop self or modify drops for some items
 		if (EnchantmentHelper.hasAnyEnchantmentsIn(stack, SpectrumEnchantmentTags.RESONANT_BLOCK_DROPS)) {
-			ResonanceDropsDataLoader.applyResonance(state, blockEntity, droppedStacks);
+			ResonanceDropProcessor.applyResonance(world.getRegistryManager(), state, blockEntity, droppedStacks);
 		}
 		
 		if (!droppedStacks.isEmpty()) {

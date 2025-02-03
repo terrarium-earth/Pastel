@@ -9,11 +9,11 @@ import net.minecraft.registry.tag.*;
 import net.minecraft.util.*;
 
 public enum KindlingVariant implements StringIdentifiable {
-
+	
 	DEFAULT("default", "textures/entity/kindling/kindling.png", "textures/entity/kindling/kindling_blink.png", "textures/entity/kindling/kindling_angry.png", "textures/entity/kindling/kindling_clipped.png", "textures/entity/kindling/kindling_blink_clipped.png", "textures/entity/kindling/kindling_angry_clipped.png", SpectrumLootTables.KINDLING_CLIPPING);
-
+	
 	public static Codec<KindlingVariant> CODEC = StringIdentifiable.createCodec(KindlingVariant::values);
-
+	
 	private final String name;
 	private final Identifier id;
 	private final Identifier defaultTexture;
@@ -36,31 +36,31 @@ public enum KindlingVariant implements StringIdentifiable {
 		this.clippingLootTable = clippingLootTable;
 		Registry.register(SpectrumRegistries.KINDLING_VARIANT, id, this);
 	}
-
+	
 	public TagKey<KindlingVariant> getReference() {
-		return TagKey.of(SpectrumRegistries.KINDLING_VARIANT_KEY, id);
+		return TagKey.of(SpectrumRegistries.KINDLING_VARIANT.getKey(), id);
 	}
-
+	
 	public Identifier getDefaultTexture() {
 		return defaultTexture;
 	}
-
+	
 	public Identifier getBlinkingTexture() {
 		return blinkingTexture;
 	}
-
+	
 	public Identifier getAngryTexture() {
 		return angryTexture;
 	}
-
+	
 	public Identifier getClippedTexture() {
 		return clippedTexture;
 	}
-
+	
 	public Identifier getBlinkingClippedTexture() {
 		return blinkingClippedTexture;
 	}
-
+	
 	public Identifier getAngryClippedTexture() {
 		return angryClippedTexture;
 	}
@@ -68,7 +68,7 @@ public enum KindlingVariant implements StringIdentifiable {
 	public RegistryKey<LootTable> getClippingLootTable() {
 		return clippingLootTable;
 	}
-
+	
 	@Override
 	public String asString() {
 		return name;

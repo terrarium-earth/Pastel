@@ -24,7 +24,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.treasure_hunter.page1.title",
-      "item": "spectrum:cow_head",
+      "item": {
+        "id": "spectrum:cow_head"
+      },
       "text": "book.spectrum.guidebook.treasure_hunter.page1.text"
     },
     {

@@ -38,7 +38,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.botania.page2.title",
-      "item": "botania:magenta_petal",
+      "item": {
+        "id": "botania:magenta_petal"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.page2.text"
     },
     {
@@ -60,7 +62,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "botania:black_hole_talisman",
+      "item": {
+        "id": "botania:black_hole_talisman"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.page20.text",
       "title": "book.spectrum.guidebook.mod_integration.botania.page20.title"
     },

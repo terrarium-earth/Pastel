@@ -22,7 +22,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.jade_vines",
-      "item": "spectrum:hibernating_jade_vine_bulb",
+      "item": {
+        "id": "spectrum:hibernating_jade_vine_bulb"
+      },
       "text": "book.spectrum.guidebook.jade_vines.page0.text"
     },
     {
@@ -38,7 +40,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.jade_vines.page2.title",
-      "item": "spectrum:germinated_jade_vine_bulb",
+      "item": {
+        "id": "spectrum:germinated_jade_vine_bulb"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/instilled_germinated_jade_vine_bulb"

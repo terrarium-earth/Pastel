@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:concealing_oils",
+      "item": {
+        "id": "spectrum:concealing_oils"
+      },
       "text": "book.spectrum.guidebook.concealing_oils.page0.text"
     },
     {

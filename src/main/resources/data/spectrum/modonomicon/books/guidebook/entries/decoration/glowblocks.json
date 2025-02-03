@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:orange_glowblock",
+      "item": {
+        "id": "spectrum:orange_glowblock"
+      },
       "title": "book.spectrum.guidebook.glowblocks.name",
       "text": "book.spectrum.guidebook.glowblocks.page0.text"
     },

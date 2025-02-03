@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:milky_resin",
+      "item": {
+        "id": "spectrum:milky_resin"
+      },
       "text": "book.spectrum.guidebook.milky_resin.page0.text"
     },
     {

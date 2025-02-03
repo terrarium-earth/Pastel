@@ -25,7 +25,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.blood_orchid",
-      "item": "spectrum:blood_orchid",
+      "item": {
+        "id": "spectrum:blood_orchid"
+      },
       "text": "book.spectrum.guidebook.blood_orchids.page0.text"
     },
     {

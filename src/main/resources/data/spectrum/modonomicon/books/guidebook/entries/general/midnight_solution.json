@@ -38,7 +38,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:black_materia",
+      "item": {
+        "id": "spectrum:black_materia"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/break_black_materia"

@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:ender_splice",
+      "item": {
+        "id": "spectrum:ender_splice"
+      },
       "text": "book.spectrum.guidebook.ender_splice.page0.text",
       "title": "item.spectrum.ender_splice"
     },

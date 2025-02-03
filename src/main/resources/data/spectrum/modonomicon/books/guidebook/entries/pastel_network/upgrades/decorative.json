@@ -22,7 +22,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:shimmerstone_gem",
+      "item": {
+        "id": "spectrum:shimmerstone_gem"
+      },
       "text": "book.spectrum.guidebook.pastel_upgrades.decorative.shimmerstone_gem.text",
       "condition": {
         "type": "modonomicon:advancement",

@@ -18,7 +18,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.stratine.name",
-      "item": "spectrum:stratine_fragments",
+      "item": {
+        "id": "spectrum:stratine_fragments"
+      },
       "text": "book.spectrum.guidebook.stratine.page0.text"
     },
     {

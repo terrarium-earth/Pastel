@@ -22,7 +22,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:resonant_lily",
+      "item": {
+        "id": "spectrum:resonant_lily"
+      },
       "text": "book.spectrum.guidebook.resonant_lily.page0.text"
     },
     {

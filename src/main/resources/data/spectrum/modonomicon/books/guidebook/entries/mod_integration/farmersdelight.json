@@ -32,7 +32,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.farmersdelight.page1.title",
-      "item": "spectrum:multitool",
+      "item": {
+        "id": "spectrum:multitool"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:build_basic_pedestal_structure"

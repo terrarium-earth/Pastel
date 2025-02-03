@@ -158,7 +158,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				PedestalRecipeTier.PACKET_CODEC, recipe -> recipe.tier,
 				RawShapedPedestalRecipe.PACKET_CODEC, recipe -> recipe.rawShapedRecipe,
-				PacketCodecs.map(HashMap::new, PacketCodecs.registryValue(SpectrumRegistries.GEMSTONE_COLORS_KEY), PacketCodecs.VAR_INT), recipe -> recipe.powderInputs,
+				PacketCodecs.map(HashMap::new, PacketCodecs.registryValue(SpectrumRegistries.GEMSTONE_COLORS.getKey()), PacketCodecs.VAR_INT), recipe -> recipe.powderInputs,
 				ItemStack.PACKET_CODEC, recipe -> recipe.output,
 				PacketCodecs.FLOAT, recipe -> recipe.experience,
 				PacketCodecs.VAR_INT, recipe -> recipe.craftingTime,

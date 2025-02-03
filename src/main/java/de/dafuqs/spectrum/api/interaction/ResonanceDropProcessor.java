@@ -1,29 +1,34 @@
 package de.dafuqs.spectrum.api.interaction;
 
-import com.google.gson.*;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.api.predicate.block.*;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.item.*;
+import net.minecraft.registry.*;
 
 import java.util.*;
 
 public abstract class ResonanceDropProcessor {
 	
+	public static boolean preventNextXPDrop;
+	
+	public static final Codec<ResonanceDropProcessor> CODEC = SpectrumRegistries.RESONANCE_DROP_PROCESSOR_TYPES.getCodec()
+			.dispatch(ResonanceDropProcessor::getCodec, codec -> codec);
+	
 	public BrokenBlockPredicate blockPredicate;
 	
-	public ResonanceDropProcessor(BrokenBlockPredicate blockPredicate) throws Exception {
+	public ResonanceDropProcessor(BrokenBlockPredicate blockPredicate) {
 		this.blockPredicate = blockPredicate;
-
-		if(blockPredicate.test(Blocks.AIR.getDefaultState())) {
-			throw new Exception("Registering a Resonance Drop that matches on everything!");
-		}
 	}
 	
 	public abstract boolean process(BlockState state, BlockEntity blockEntity, List<ItemStack> droppedStacks);
 	
-	public interface Serializer {
-		ResonanceDropProcessor fromJson(JsonObject json) throws Exception;
+	public static void applyResonance(DynamicRegistryManager drm, BlockState minedState, BlockEntity blockEntity, List<ItemStack> droppedStacks) {
+		drm.get(SpectrumRegistries.RESONANCE_DROPS_KEY).forEach(entry -> entry.process(minedState, blockEntity, droppedStacks));
 	}
+	
+	public abstract MapCodec<? extends ResonanceDropProcessor> getCodec();
 	
 }

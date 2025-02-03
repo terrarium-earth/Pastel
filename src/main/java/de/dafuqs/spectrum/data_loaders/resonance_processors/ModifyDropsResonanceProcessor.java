@@ -1,7 +1,8 @@
 package de.dafuqs.spectrum.data_loaders.resonance_processors;
 
-import com.google.gson.*;
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.api.predicate.block.*;
 import net.minecraft.block.*;
@@ -9,39 +10,25 @@ import net.minecraft.block.entity.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.*;
-import net.minecraft.util.*;
 
 import java.util.*;
 
 public class ModifyDropsResonanceProcessor extends ResonanceDropProcessor {
 	
-	public static class Serializer implements ResonanceDropProcessor.Serializer {
-		
-		@Override
-		public ResonanceDropProcessor fromJson(JsonObject json) throws Exception {
-			BrokenBlockPredicate blockTarget = BrokenBlockPredicate.CODEC.parse(JsonOps.INSTANCE, json.get("block")).getOrThrow();
-			
-			Map<Ingredient, Item> modifiedDrops = new HashMap<>();
-			JsonArray modifyDropsArray = JsonHelper.getArray(json, "modify_drops");
-			for (JsonElement entry : modifyDropsArray) {
-				if (!(entry instanceof JsonObject entryObject)) {
-					throw new JsonSyntaxException("modify_drops is not an json object");
-				}
-				// TODO - Review
-				JsonObject input = JsonHelper.getObject(entryObject, "input");
-				Ingredient ingredient = Ingredient.DISALLOW_EMPTY_CODEC.parse(JsonOps.INSTANCE, input).getOrThrow();
-				Item output = Registries.ITEM.get(Identifier.tryParse(JsonHelper.getString(entryObject, "output")));
-				modifiedDrops.put(ingredient, output);
-			}
-			
-			return new ModifyDropsResonanceProcessor(blockTarget, modifiedDrops);
-		}
-		
-	}
+	public static final MapCodec<ModifyDropsResonanceProcessor> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
+			BrokenBlockPredicate.CODEC.fieldOf("block")
+					.validate(block -> block.test(Blocks.AIR.getDefaultState()) ? DataResult.error(() -> "Registering a Resonance Drop that matches on everything!") : DataResult.success(block))
+					.forGetter(c -> c.blockPredicate),
+			// TODO - Review
+			Codec.mapPair(Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("input"), Registries.ITEM.getCodec().fieldOf("output")).codec().listOf().xmap(
+					pairs -> pairs.stream().collect(() -> (Map<Ingredient, Item>) new HashMap<Ingredient, Item>(), (map, pair) -> map.put(pair.getFirst(), pair.getSecond()), (map1, map2) -> map1.putAll(map2)),
+					map -> map.entrySet().stream().map(entry -> new Pair<>(entry.getKey(), entry.getValue())).toList()
+			).optionalFieldOf("modify_drops", Map.of()).forGetter(c -> c.modifiedDrops)
+	).apply(i, ModifyDropsResonanceProcessor::new));
 	
 	public Map<Ingredient, Item> modifiedDrops;
 	
-	public ModifyDropsResonanceProcessor(BrokenBlockPredicate blockTarget, Map<Ingredient, Item> modifiedDrops) throws Exception {
+	public ModifyDropsResonanceProcessor(BrokenBlockPredicate blockTarget, Map<Ingredient, Item> modifiedDrops) {
 		super(blockTarget);
 		this.modifiedDrops = modifiedDrops;
 	}
@@ -70,4 +57,9 @@ public class ModifyDropsResonanceProcessor extends ResonanceDropProcessor {
 			}
 		}
 	}
+	
+	public MapCodec<? extends ResonanceDropProcessor> getCodec() {
+		return CODEC;
+	}
+	
 }

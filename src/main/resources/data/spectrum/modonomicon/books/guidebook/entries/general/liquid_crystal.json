@@ -26,7 +26,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.liquid_crystal",
-      "item": "spectrum:liquid_crystal_bucket",
+      "item": {
+        "id": "spectrum:liquid_crystal_bucket"
+      },
       "text": "book.spectrum.guidebook.liquid_crystal.page0.text"
     },
     {
@@ -37,7 +39,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:clay",
+      "item": {
+        "id": "minecraft:clay"
+      },
       "text": "book.spectrum.guidebook.liquid_crystal.page2.text"
     }
   ]

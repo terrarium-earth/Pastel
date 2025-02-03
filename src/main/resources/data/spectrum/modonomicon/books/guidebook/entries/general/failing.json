@@ -25,7 +25,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:bottle_of_failing",
+      "item": {
+        "id": "spectrum:bottle_of_failing"
+      },
       "text": "book.spectrum.guidebook.failing.page0.text",
       "title": "book.spectrum.guidebook.failing.name"
     },

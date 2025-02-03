@@ -67,6 +67,8 @@
     "RandomChanceLootConditionMixin",
     "RandomChanceWithEnchantedBonusLootConditionMixin",
     "RecipeManagerMixin",
+    "RegistryLoaderMixin",
+    "RegistryLoaderMixin$Entry",
     "ServerPlayerEntityMixin",
     "ServerPlayerGameModeFabricMixin",
     "ServerPlayerInteractionManagerMixin",

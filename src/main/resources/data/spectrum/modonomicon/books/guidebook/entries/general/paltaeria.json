@@ -22,7 +22,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.paltaeria.name",
-      "item": "spectrum:paltaeria_fragments",
+      "item": {
+        "id": "spectrum:paltaeria_fragments"
+      },
       "text": "book.spectrum.guidebook.paltaeria.page0.text"
     },
     {

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.data_loaders.*;
+import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.enchantment.*;
@@ -15,8 +15,8 @@ public abstract class AbstractBlockStateMixin {
 	
 	@ModifyVariable(method = "onStacksDropped", at = @At("HEAD"), ordinal = 0, argsOnly = true)
 	public boolean spectrum$preventXPDropsWhenUsingResonance(boolean dropExperience, ServerWorld world, BlockPos pos, ItemStack stack) {
-		if (ResonanceDropsDataLoader.preventNextXPDrop && EnchantmentHelper.hasAnyEnchantmentsIn(stack, SpectrumEnchantmentTags.RESONANT_BLOCK_DROPS)) {
-			ResonanceDropsDataLoader.preventNextXPDrop = false;
+		if (ResonanceDropProcessor.preventNextXPDrop && EnchantmentHelper.hasAnyEnchantmentsIn(stack, SpectrumEnchantmentTags.RESONANT_BLOCK_DROPS)) {
+			ResonanceDropProcessor.preventNextXPDrop = false;
 			return false;
 		}
 		return dropExperience;

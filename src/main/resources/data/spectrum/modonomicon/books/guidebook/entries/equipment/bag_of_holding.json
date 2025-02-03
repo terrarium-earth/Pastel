@@ -18,7 +18,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.bag_of_holding",
-      "item": "spectrum:bag_of_holding",
+      "item": {
+        "id": "spectrum:bag_of_holding"
+      },
       "text": "book.spectrum.guidebook.bag_of_holding.page0.text"
     },
     {

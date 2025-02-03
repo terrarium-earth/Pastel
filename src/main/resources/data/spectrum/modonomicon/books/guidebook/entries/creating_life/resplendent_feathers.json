@@ -23,7 +23,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.resplendent_feather",
-      "item": "spectrum:resplendent_feather",
+      "item": {
+        "id": "spectrum:resplendent_feather"
+      },
       "text": "book.spectrum.guidebook.resplendent_feathers.page0.text"
     },
     {

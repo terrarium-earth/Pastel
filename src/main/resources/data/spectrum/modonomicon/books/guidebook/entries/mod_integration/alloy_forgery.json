@@ -137,7 +137,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_iron",
+      "item": {
+        "id": "spectrum:pure_iron"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_pure_resource"
@@ -155,7 +157,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:paltaeria_ore",
+      "item": {
+        "id": "spectrum:paltaeria_ore"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_paltaeria"

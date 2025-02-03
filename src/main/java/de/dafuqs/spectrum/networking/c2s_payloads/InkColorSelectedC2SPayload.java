@@ -18,7 +18,7 @@ public record InkColorSelectedC2SPayload(RegistryEntry<InkColor> color) implemen
 	
 	public static final Id<InkColorSelectedC2SPayload> ID = SpectrumC2SPackets.makeId("ink_color_select");
 	public static final PacketCodec<RegistryByteBuf, InkColorSelectedC2SPayload> CODEC = PacketCodec.tuple(
-			PacketCodecHelper.nullable(PacketCodecs.registryEntry(SpectrumRegistries.INK_COLORS_KEY)), InkColorSelectedC2SPayload::color,
+			PacketCodecHelper.nullable(PacketCodecs.registryEntry(SpectrumRegistries.INK_COLORS.getKey())), InkColorSelectedC2SPayload::color,
 			InkColorSelectedC2SPayload::new
 	);
 	

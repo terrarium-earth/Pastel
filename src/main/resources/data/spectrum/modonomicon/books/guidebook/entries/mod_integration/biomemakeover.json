@@ -50,7 +50,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.biomemakeover.page3.title",
-      "item": "biomemakeover:illunite_shard",
+      "item": {
+        "id": "biomemakeover:illunite_shard"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/blocks/crystal_apothecary"
