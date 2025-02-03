@@ -21,7 +21,7 @@ import java.util.*;
 public class InkPoweredStatusEffectInstance {
 	
 	public static final Codec<InkPoweredStatusEffectInstance> CODEC = RecordCodecBuilder.create(i -> i.group(
-			StatusEffectInstance.CODEC.fieldOf("status_effect").forGetter(c -> c.statusEffectInstance),
+			StatusEffectInstance.CODEC.fieldOf("effect").forGetter(c -> c.statusEffectInstance),
 			InkCost.CODEC.fieldOf("ink_cost").forGetter(c -> c.cost),
 			Codec.INT.optionalFieldOf("custom_color", -1).forGetter(c -> c.customColor),
 			Codec.BOOL.optionalFieldOf("unidentifiable", false).forGetter(c -> c.unidentifiable),
@@ -38,7 +38,7 @@ public class InkPoweredStatusEffectInstance {
 	);
 	
 	public static final String NBT_KEY = "InkPoweredStatusEffects";
-
+	
 	private final StatusEffectInstance statusEffectInstance;
 	private final InkCost cost;
 	private final int customColor; // -1: use effect default
@@ -79,7 +79,7 @@ public class InkPoweredStatusEffectInstance {
 					tooltip.add(Text.translatable("item.spectrum.potion.tooltip.unidentifiable"));
 					continue;
 				}
-
+				
 				StatusEffectInstance effect = entry.getStatusEffectInstance();
 				InkCost cost = entry.getInkCost();
 				
@@ -98,7 +98,7 @@ public class InkPoweredStatusEffectInstance {
 				tooltip.add(mutableText);
 				
 				effect.getEffectType().value().forEachAttributeModifier(effect.getAmplifier(), (attribute, modifier) ->
-					attributeModifiers.add(new Pair<>(attribute, modifier))
+						attributeModifiers.add(new Pair<>(attribute, modifier))
 				);
 			}
 			
@@ -109,7 +109,7 @@ public class InkPoweredStatusEffectInstance {
 				for (var pair : attributeModifiers) {
 					var translatedAttribute = Text.translatable(pair.getLeft().value().getTranslationKey());
 					var mutableText = pair.getRight();
-
+					
 					double statusEffect = mutableText.value();
 					double d;
 					if (mutableText.operation() != EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE && mutableText.operation() != EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL) {
@@ -139,7 +139,7 @@ public class InkPoweredStatusEffectInstance {
 	public boolean isUnidentifiable() {
 		return this.unidentifiable;
 	}
-
+	
 	public boolean isIncurable() {
 		return this.incurable;
 	}

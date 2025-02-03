@@ -16,10 +16,11 @@ import net.minecraft.world.*;
 
 public record PairedFoodComponent(Item item, boolean consumeAndApplyRequiredStack, FoodComponent bonusFoodComponent) {
 	
+	//TODO what is bonusFoodComponent used for?
 	public static final Codec<PairedFoodComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			Registries.ITEM.getCodec().fieldOf("item").forGetter(PairedFoodComponent::item),
-			Codec.BOOL.fieldOf("consume_and_apply_required_stack").forGetter(PairedFoodComponent::consumeAndApplyRequiredStack),
-			FoodComponent.CODEC.fieldOf("bonus_food_component").forGetter(PairedFoodComponent::bonusFoodComponent)
+			Codec.BOOL.optionalFieldOf("consume_and_apply_required_stack", true).forGetter(PairedFoodComponent::consumeAndApplyRequiredStack),
+			FoodComponent.CODEC.optionalFieldOf("bonus_food_component", new FoodComponent.Builder().build()).forGetter(PairedFoodComponent::bonusFoodComponent)
 	).apply(instance, PairedFoodComponent::new));
 	
 	public static final PacketCodec<RegistryByteBuf, PairedFoodComponent> PACKET_CODEC = PacketCodec.tuple(

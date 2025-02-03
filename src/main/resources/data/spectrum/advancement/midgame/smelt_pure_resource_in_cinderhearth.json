@@ -16,7 +16,9 @@
     "smelted_pure_resource_in_cinderhearth": {
       "trigger": "spectrum:cinderhearth_smelting",
       "conditions": {
-        "input": "#spectrum:pure_resources"
+        "input": {
+          "items": "#spectrum:pure_resources"
+        }
       }
     },
     "gotten_previous": {

@@ -15,7 +15,9 @@
     "collected_using_crystal_apothecary": {
       "trigger": "spectrum:collect_using_crystal_apothecary",
       "conditions": {
-        "item": "#spectrum:gemstone_shards"
+        "item": {
+          "items": "#spectrum:gemstone_shards"
+        }
       }
     },
     "gotten_previous": {

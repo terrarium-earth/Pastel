@@ -15,7 +15,9 @@
     "drank_any_tea_with_scone": {
       "trigger": "spectrum:consumed_paired_food",
       "conditions": {
-        "paired_item": "spectrum:scone"
+        "paired_item": {
+          "item": "spectrum:scone"
+        }
       }
     },
     "gotten_previous": {

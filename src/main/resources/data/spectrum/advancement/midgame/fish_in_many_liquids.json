@@ -16,31 +16,41 @@
     "fished_in_water": {
       "trigger": "spectrum:fishing_rod_hooked",
       "conditions": {
-        "fluid": "#minecraft:water"
+        "fluid": {
+          "fluids": "#minecraft:water"
+        }
       }
     },
     "fished_in_lava": {
       "trigger": "spectrum:fishing_rod_hooked",
       "conditions": {
-        "fluid": "#minecraft:lava"
+        "fluid": {
+          "fluids": "#minecraft:lava"
+        }
       }
     },
     "fished_in_goo": {
       "trigger": "spectrum:fishing_rod_hooked",
       "conditions": {
-        "fluid": "#spectrum:goo"
+        "fluid": {
+          "fluids": "#spectrum:goo"
+        }
       }
     },
     "fished_in_liquid_crystal": {
       "trigger": "spectrum:fishing_rod_hooked",
       "conditions": {
-        "fluid": "#spectrum:liquid_crystal"
+        "fluid": {
+          "fluids": "#spectrum:liquid_crystal"
+        }
       }
     },
     "fished_in_midnight_solution": {
       "trigger": "spectrum:fishing_rod_hooked",
       "conditions": {
-        "fluid": "#spectrum:midnight_solution"
+        "fluid": {
+          "fluids": "#spectrum:midnight_solution"
+        }
       }
     },
     "gotten_previous": {

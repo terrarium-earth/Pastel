@@ -16,7 +16,9 @@
       "trigger": "spectrum:upgrade_place",
       "conditions": {
         "count": 4,
-        "block": "#spectrum:pedestals"
+        "block": {
+          "blocks": "#spectrum:pedestals"
+        }
       }
     },
     "gotten_previous": {

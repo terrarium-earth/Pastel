@@ -18,10 +18,7 @@
       "conditions": {
         "fished_entity": {
           "type": "minecraft:creeper",
-          "type_specific": {
-            "type": "spectrum:creeper",
-            "primed": true
-          }
+          "nbt": "{\"powered\":true}"
         }
       }
     },

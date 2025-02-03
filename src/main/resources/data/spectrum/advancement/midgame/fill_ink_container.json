@@ -4,10 +4,12 @@
     "icon": {
       "id": "spectrum:ink_flask",
       "components": {
-        "spectrum:single_ink_energy_storage": {
+        "spectrum:ink_storage": {
           "max_energy_total": 409600,
-          "color": "spectrum:purple",
-          "amount": 409600
+          "max_per_color": 409600,
+          "stored_energy": {
+            "spectrum:purple": 409600
+          }
         }
       }
     },

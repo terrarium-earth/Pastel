@@ -60,7 +60,7 @@ public class SpectrumFishingRodHookedCriterion extends AbstractCriterion<Spectru
 				ItemPredicate.CODEC.optionalFieldOf("rod").forGetter(Conditions::rod),
 				LootContextPredicate.CODEC.optionalFieldOf("bobber").forGetter(Conditions::bobber),
 				LootContextPredicate.CODEC.optionalFieldOf("fishing").forGetter(Conditions::hookedEntity),
-				LootContextPredicate.CODEC.optionalFieldOf("fished_entity").forGetter(Conditions::fishedEntity),
+				EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("fished_entity").forGetter(Conditions::fishedEntity),
 				ItemPredicate.CODEC.optionalFieldOf("item").forGetter(Conditions::caughtItem),
 				FluidPredicate.CODEC.optionalFieldOf("fluid").forGetter(Conditions::fluidPredicate)
 		).apply(instance, Conditions::new));

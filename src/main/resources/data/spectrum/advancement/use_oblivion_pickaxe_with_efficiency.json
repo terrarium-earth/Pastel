@@ -23,14 +23,14 @@
       "trigger": "minecraft:item_durability_changed",
       "conditions": {
         "item": {
-          "items": [
-            "spectrum:oblivion_pickaxe"
-          ],
-          "enchantments": [
-            {
-              "enchantment": "minecraft:efficiency"
-            }
-          ]
+          "items": "spectrum:oblivion_pickaxe",
+          "predicates": {
+            "enchantments": [
+              {
+                "enchantments": "minecraft:efficiency"
+              }
+            ]
+          }
         }
       }
     },

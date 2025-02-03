@@ -16,7 +16,9 @@
     "dipped_something_into_liquid_crystal": {
       "trigger": "spectrum:fluid_dipping",
       "conditions": {
-        "fluid": "#spectrum:liquid_crystal"
+        "fluid": {
+          "fluids": "#spectrum:liquid_crystal"
+        }
       }
     },
     "gotten_previous": {

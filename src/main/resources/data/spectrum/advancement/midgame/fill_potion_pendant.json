@@ -4,17 +4,13 @@
     "icon": {
       "id": "spectrum:lesser_potion_pendant",
       "components": {
-        "spectrum:ink_powered_potion_data": {
-          "color": 14981690,
-          "effects": [
+        "minecraft:potion_contents": {
+          "custom_color": 14981690,
+          "custom_effects": [
             {
-              "ink_color": "spectrum:red",
-              "ink_cost": 4,
-              "effect": {
-                "id": "minecraft:absorption",
-                "amplifier": 0,
-                "duration": 3600
-              }
+              "id": "minecraft:absorption",
+              "amplifier": 0,
+              "duration": 3600
             }
           ]
         }
@@ -31,7 +27,9 @@
     "filled_potion_pendant": {
       "trigger": "spectrum:potion_workshop_brewing",
       "conditions": {
-        "item": "#spectrum:potion_pendants",
+        "item": {
+          "items": "#spectrum:potion_pendants"
+        },
         "effect_count": {
           "min": 1
         }

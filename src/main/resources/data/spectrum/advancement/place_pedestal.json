@@ -33,7 +33,9 @@
           {
             "condition": "minecraft:location_check",
             "predicate": {
-              "block": "#spectrum:pedestals"
+              "block": {
+                "blocks": "#spectrum:pedestals"
+              }
             }
           }
         ]
