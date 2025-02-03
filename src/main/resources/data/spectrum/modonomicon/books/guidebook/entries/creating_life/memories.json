@@ -1,15 +1,13 @@
 {
   "name": "book.spectrum.guidebook.memories.name",
   "icon": {
-    "item": {
-      "item": "spectrum:memory",
-      "components": {
-        "entity_data": {
-          "id": "minecraft:fox"
-        },
-        "spectrum:memory": {
-          "ticks_to_manifest": 20
-        }
+    "id": "spectrum:memory",
+    "components": {
+      "entity_data": {
+        "id": "minecraft:fox"
+      },
+      "spectrum:memory": {
+        "ticks_to_manifest": 20
       }
     }
   },

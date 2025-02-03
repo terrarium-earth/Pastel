@@ -1,11 +1,11 @@
 {
   "name": "book.spectrum.guidebook.potion_workshop_brewing.name",
   "icon": {
-    "item": {
-      "item": "minecraft:potion"
-    },
-    "nbt": {
-      "CustomPotionColor": 16776960
+    "id": "minecraft:potion",
+    "components": {
+      "potion_contents": {
+        "custon_color": 16776960
+      }
     }
   },
   "condition": {

@@ -5,11 +5,9 @@
     "advancement_id": "spectrum:unlocks/items/knowledge_gem"
   },
   "icon": {
-    "item": {
-      "item": "spectrum:knowledge_gem"
-    },
-    "nbt": {
-      "stored_experience": 500
+    "id": "spectrum:knowledge_gem",
+    "components": {
+      "spectrum:stored_experience": 500
     }
   },
   "category": "spectrum:enchanting",
