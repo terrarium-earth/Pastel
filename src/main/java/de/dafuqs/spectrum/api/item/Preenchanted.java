@@ -21,9 +21,9 @@ public interface Preenchanted {
 		}
 		return builder.build();
 	}
-
+	
 	default @NotNull ItemStack getDefaultEnchantedStack(Item item) {
-		ItemStack stack = item.getDefaultStack();
+		ItemStack stack = new ItemStack(item);
 		SpectrumCommon.getRegistryLookup().ifPresent(r -> stack.set(DataComponentTypes.ENCHANTMENTS, buildDefaultEnchantments(r)));
 		return stack;
 	}
