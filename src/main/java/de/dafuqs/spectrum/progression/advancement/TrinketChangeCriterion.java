@@ -17,9 +17,9 @@ import net.minecraft.util.*;
 import java.util.*;
 
 public class TrinketChangeCriterion extends AbstractCriterion<TrinketChangeCriterion.Conditions> {
-
+	
 	public static final Identifier ID = SpectrumCommon.locate("trinket_change");
-
+	
 	public void trigger(ServerPlayerEntity player) {
 		this.trigger(player, (conditions) -> {
 			Optional<TrinketComponent> trinketComponent = TrinketsApi.getTrinketComponent(player);
@@ -37,29 +37,29 @@ public class TrinketChangeCriterion extends AbstractCriterion<TrinketChangeCrite
 			return false;
 		});
 	}
-
+	
 	@Override
 	public Codec<Conditions> getConditionsCodec() {
 		return Conditions.CODEC;
 	}
-
+	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		Optional<List<ItemPredicate>> itemPredicates,
-		Optional<NumberRange.IntRange> totalCountRange,
-		Optional<NumberRange.IntRange> spectrumCountRange
+			Optional<LootContextPredicate> player,
+			Optional<List<ItemPredicate>> itemPredicates,
+			Optional<NumberRange.IntRange> totalCountRange,
+			Optional<NumberRange.IntRange> spectrumCountRange
 	) implements AbstractCriterion.Conditions {
-
+		
 		public static final Codec<TrinketChangeCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(TrinketChangeCriterion.Conditions::player),
-			ItemPredicate.CODEC.listOf().optionalFieldOf("items").forGetter(TrinketChangeCriterion.Conditions::itemPredicates),
-			NumberRange.IntRange.CODEC.optionalFieldOf("total_count").forGetter(TrinketChangeCriterion.Conditions::totalCountRange),
-			NumberRange.IntRange.CODEC.optionalFieldOf("spectrum_count").forGetter(TrinketChangeCriterion.Conditions::spectrumCountRange)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(TrinketChangeCriterion.Conditions::player),
+				ItemPredicate.CODEC.listOf().optionalFieldOf("items").forGetter(TrinketChangeCriterion.Conditions::itemPredicates),
+				NumberRange.IntRange.CODEC.optionalFieldOf("total_count").forGetter(TrinketChangeCriterion.Conditions::totalCountRange),
+				NumberRange.IntRange.CODEC.optionalFieldOf("spectrum_count").forGetter(TrinketChangeCriterion.Conditions::spectrumCountRange)
 		).apply(instance, TrinketChangeCriterion.Conditions::new));
-
+		
 		public boolean matches(List<ItemStack> trinketStacks, int totalCount, int spectrumCount) {
 			if (this.totalCountRange.isPresent() && this.totalCountRange.get().test(totalCount)
-				&& this.spectrumCountRange.isPresent() && this.spectrumCountRange.get().test(spectrumCount)) {
+					&& this.spectrumCountRange.isPresent() && this.spectrumCountRange.get().test(spectrumCount)) {
 				int i = this.itemPredicates.orElse(List.of()).size();
 				if (i == 0) {
 					return true;
@@ -73,12 +73,12 @@ public class TrinketChangeCriterion extends AbstractCriterion<TrinketChangeCrite
 							requiredTrinkets.removeIf((item) -> item.test(trinketStack));
 						}
 					}
-
+					
 					return requiredTrinkets.isEmpty();
 				}
 			}
 			return false;
 		}
 	}
-
+	
 }

@@ -13,30 +13,28 @@ import net.minecraft.util.*;
 import java.util.*;
 
 public class BlockBrokenCriterion extends AbstractCriterion<BlockBrokenCriterion.Conditions> {
-
+	
 	public static final Identifier ID = SpectrumCommon.locate("block_broken");
-
+	
 	public void trigger(ServerPlayerEntity player, BlockState minedBlock) {
 		this.trigger(player, (conditions) -> conditions.matches(minedBlock));
 	}
-
+	
 	@Override
 	public Codec<Conditions> getConditionsCodec() {
 		return Conditions.CODEC;
 	}
-
+	
 	public record Conditions(Optional<LootContextPredicate> player, BrokenBlockPredicate blockPredicate) implements AbstractCriterion.Conditions {
-
+		
 		public static final Codec<BlockBrokenCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-
-			EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(BlockBrokenCriterion.Conditions::player),
-			BrokenBlockPredicate.CODEC.fieldOf("block_broken").forGetter(BlockBrokenCriterion.Conditions::blockPredicate)
+				EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(BlockBrokenCriterion.Conditions::player),
+				BrokenBlockPredicate.CODEC.optionalFieldOf("block_broken", BrokenBlockPredicate.ANY).forGetter(BlockBrokenCriterion.Conditions::blockPredicate)
 		).apply(instance, Conditions::new));
-
-
+		
 		public boolean matches(BlockState blockState) {
 			return this.blockPredicate.test(blockState);
 		}
 	}
-
+	
 }

@@ -61,35 +61,34 @@ public class PotionWorkshopBrewingCriterion extends AbstractCriterion<PotionWork
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		ItemPredicate itemPredicate,
-		EntityEffectPredicate statusEffectsPredicate,
-		NumberRange.IntRange brewedCountRange,
-		NumberRange.IntRange maxAmplifierRange,
-		NumberRange.IntRange maxDurationRange,
-		NumberRange.IntRange effectCountRange,
-		NumberRange.IntRange uniqueEffectCountRange
+			Optional<LootContextPredicate> player,
+			ItemPredicate itemPredicate,
+			EntityEffectPredicate statusEffectsPredicate,
+			NumberRange.IntRange brewedCountRange,
+			NumberRange.IntRange maxAmplifierRange,
+			NumberRange.IntRange maxDurationRange,
+			NumberRange.IntRange effectCountRange,
+			NumberRange.IntRange uniqueEffectCountRange
 	) implements AbstractCriterion.Conditions {
 		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-			ItemPredicate.CODEC.fieldOf("item").forGetter(Conditions::itemPredicate),
-			EntityEffectPredicate.CODEC.fieldOf("effects").forGetter(Conditions::statusEffectsPredicate),
-			NumberRange.IntRange.CODEC.fieldOf("brewed_count").forGetter(Conditions::brewedCountRange),
-			NumberRange.IntRange.CODEC.fieldOf("highest_amplifier").forGetter(Conditions::maxAmplifierRange),
-			NumberRange.IntRange.CODEC.fieldOf("longest_duration").forGetter(Conditions::maxDurationRange),
-			NumberRange.IntRange.CODEC.fieldOf("effect_count").forGetter(Conditions::effectCountRange),
-			NumberRange.IntRange.CODEC.fieldOf("unique_effect_count").forGetter(Conditions::uniqueEffectCountRange)
-			).apply(instance, Conditions::new));
-		
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+				ItemPredicate.CODEC.optionalFieldOf("item", ItemPredicate.Builder.create().build()).forGetter(Conditions::itemPredicate),
+				EntityEffectPredicate.CODEC.optionalFieldOf("effects", new EntityEffectPredicate(Map.of())).forGetter(Conditions::statusEffectsPredicate),
+				NumberRange.IntRange.CODEC.optionalFieldOf("brewed_count", NumberRange.IntRange.ANY).forGetter(Conditions::brewedCountRange),
+				NumberRange.IntRange.CODEC.optionalFieldOf("highest_amplifier", NumberRange.IntRange.ANY).forGetter(Conditions::maxAmplifierRange),
+				NumberRange.IntRange.CODEC.optionalFieldOf("longest_duration", NumberRange.IntRange.ANY).forGetter(Conditions::maxDurationRange),
+				NumberRange.IntRange.CODEC.optionalFieldOf("effect_count", NumberRange.IntRange.ANY).forGetter(Conditions::effectCountRange),
+				NumberRange.IntRange.CODEC.optionalFieldOf("unique_effect_count", NumberRange.IntRange.ANY).forGetter(Conditions::uniqueEffectCountRange)
+		).apply(instance, Conditions::new));
 		
 		public boolean matches(ItemStack stack, List<StatusEffectInstance> effects, int brewedCount, int maxAmplifier, int maxDuration, int effectCount, int uniqueEffectCount) {
 			if (this.brewedCountRange.test(brewedCount) &&
-				this.maxAmplifierRange.test(maxAmplifier) &&
-				this.maxDurationRange.test(maxDuration) &&
-				this.effectCountRange.test(effectCount) &&
-				this.uniqueEffectCountRange.test(uniqueEffectCount) &&
-				this.itemPredicate.test(stack)) {
+					this.maxAmplifierRange.test(maxAmplifier) &&
+					this.maxDurationRange.test(maxDuration) &&
+					this.effectCountRange.test(effectCount) &&
+					this.uniqueEffectCountRange.test(uniqueEffectCount) &&
+					this.itemPredicate.test(stack)) {
 				Map<RegistryEntry<StatusEffect>, StatusEffectInstance> effectMap = new HashMap<>();
 				for (StatusEffectInstance instance : effects) {
 					if (!effectMap.containsKey(instance.getEffectType())) {

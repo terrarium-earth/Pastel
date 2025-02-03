@@ -36,15 +36,15 @@ public class InkProjectileKillingCriterion extends AbstractCriterion<InkProjecti
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		List<LootContextPredicate> victims,
-		IntRange uniqueEntities
+			Optional<LootContextPredicate> player,
+			List<LootContextPredicate> victims,
+			IntRange uniqueEntities
 	) implements AbstractCriterion.Conditions {
 		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-			LootContextPredicate.CODEC.listOf().fieldOf("victims").forGetter(Conditions::victims),
-			IntRange.CODEC.fieldOf("unique_entity_types").forGetter(Conditions::uniqueEntities)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+				LootContextPredicate.CODEC.listOf().optionalFieldOf("victims", List.of()).forGetter(Conditions::victims),
+				IntRange.CODEC.optionalFieldOf("unique_entity_types", IntRange.ANY).forGetter(Conditions::uniqueEntities)
 		).apply(instance, Conditions::new));
 		
 		public boolean matches(Collection<LootContext> victimContexts, int uniqueEntityTypeCount) {

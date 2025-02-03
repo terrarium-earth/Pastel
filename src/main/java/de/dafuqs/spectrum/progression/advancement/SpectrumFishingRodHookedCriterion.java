@@ -24,47 +24,47 @@ import java.util.*;
  * - fished entities
  */
 public class SpectrumFishingRodHookedCriterion extends AbstractCriterion<SpectrumFishingRodHookedCriterion.Conditions> {
-
+	
 	public static final Identifier ID = SpectrumCommon.locate("fishing_rod_hooked");
-
+	
 	public void trigger(ServerPlayerEntity player, ItemStack rod, SpectrumFishingBobberEntity bobber, Entity fishedEntity, Collection<ItemStack> fishingLoots) {
 		LootContext bobberContext = EntityPredicate.createAdvancementEntityLootContext(player, bobber);
 		LootContext hookedEntityContext = bobber.getHookedEntity() == null ? null : EntityPredicate.createAdvancementEntityLootContext(player, bobber.getHookedEntity());
 		LootContext fishedEntityContext = fishedEntity == null ? null : EntityPredicate.createAdvancementEntityLootContext(player, fishedEntity);
 		this.trigger(player, (conditions) -> conditions.matches(rod, bobberContext, hookedEntityContext, fishedEntityContext, fishingLoots, (ServerWorld) bobber.getWorld(), bobber.getBlockPos()));
-
+		
 		// also trigger vanilla fishing criterion
 		// since that one requires a FishingBobberEntity and SpectrumFishingBobberEntity
 		// does not extend that we have to do some hacky shenanigans running trigger() directly
 		LootContext hookedEntityOrBobberContext = EntityPredicate.createAdvancementEntityLootContext(player, (bobber.getHookedEntity() != null ? bobber.getHookedEntity() : bobber));
 		Criteria.FISHING_ROD_HOOKED.trigger(player, (conditions) -> conditions.matches(rod, hookedEntityOrBobberContext, fishingLoots));
 	}
-
+	
 	@Override
 	public Codec<Conditions> getConditionsCodec() {
 		return Conditions.CODEC;
 	}
-
+	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		Optional<ItemPredicate> rod,
-		Optional<LootContextPredicate> bobber,
-		Optional<LootContextPredicate> hookedEntity,
-		Optional<LootContextPredicate> fishedEntity,
-		Optional<ItemPredicate> caughtItem,
-		Optional<FluidPredicate> fluidPredicate
+			Optional<LootContextPredicate> player,
+			Optional<ItemPredicate> rod,
+			Optional<LootContextPredicate> bobber,
+			Optional<LootContextPredicate> hookedEntity,
+			Optional<LootContextPredicate> fishedEntity,
+			Optional<ItemPredicate> caughtItem,
+			Optional<FluidPredicate> fluidPredicate
 	) implements AbstractCriterion.Conditions {
-
+		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-			ItemPredicate.CODEC.optionalFieldOf("rod").forGetter(Conditions::rod),
-			LootContextPredicate.CODEC.optionalFieldOf("bobber").forGetter(Conditions::bobber),
-			LootContextPredicate.CODEC.optionalFieldOf("fishing").forGetter(Conditions::hookedEntity),
-			LootContextPredicate.CODEC.optionalFieldOf("fished_entity").forGetter(Conditions::fishedEntity),
-			ItemPredicate.CODEC.optionalFieldOf("item").forGetter(Conditions::caughtItem),
-			FluidPredicate.CODEC.optionalFieldOf("fluid").forGetter(Conditions::fluidPredicate)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+				ItemPredicate.CODEC.optionalFieldOf("rod").forGetter(Conditions::rod),
+				LootContextPredicate.CODEC.optionalFieldOf("bobber").forGetter(Conditions::bobber),
+				LootContextPredicate.CODEC.optionalFieldOf("fishing").forGetter(Conditions::hookedEntity),
+				LootContextPredicate.CODEC.optionalFieldOf("fished_entity").forGetter(Conditions::fishedEntity),
+				ItemPredicate.CODEC.optionalFieldOf("item").forGetter(Conditions::caughtItem),
+				FluidPredicate.CODEC.optionalFieldOf("fluid").forGetter(Conditions::fluidPredicate)
 		).apply(instance, Conditions::new));
-
+		
 		public boolean matches(ItemStack rod, LootContext bobberContext, LootContext hookedEntityContext, LootContext fishedEntityContext, Collection<ItemStack> fishingLoots, ServerWorld world, BlockPos blockPos) {
 			if (this.rod.isPresent() && !this.rod.get().test(rod)) return false;
 			if (this.bobber.isPresent() && !this.bobber.get().test(bobberContext)) return false;
@@ -80,22 +80,22 @@ public class SpectrumFishingRodHookedCriterion extends AbstractCriterion<Spectru
 				return false;
 			if (this.hookedEntity.isPresent() && this.hookedEntity.get().test(hookedEntityContext) && hookedEntityContext == null)
 				return false;
-
+			
 			if (this.caughtItem.isPresent()) {
 				if (hookedEntityContext != null) {
 					Entity entity = hookedEntityContext.get(LootContextParameters.THIS_ENTITY);
 					if (entity instanceof ItemEntity itemEntity &&
-						this.caughtItem.get().test(itemEntity.getStack())) return true;
+							this.caughtItem.get().test(itemEntity.getStack())) return true;
 				}
 				for (ItemStack itemStack : fishingLoots) {
 					if (this.caughtItem.get().test(itemStack)) return true;
 				}
-
+				
 				return false;
 			}
-
+			
 			return true;
 		}
 	}
-
+	
 }

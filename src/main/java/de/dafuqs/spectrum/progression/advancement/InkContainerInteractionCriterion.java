@@ -29,19 +29,19 @@ public class InkContainerInteractionCriterion extends AbstractCriterion<InkConta
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		ItemPredicate itemPredicate,
-		Map<InkColor, LongRange> colorRanges,
-		ColorPredicate changeColorPredicate,
-		LongRange changeRange
+			Optional<LootContextPredicate> player,
+			ItemPredicate itemPredicate,
+			Map<InkColor, LongRange> colorRanges,
+			ColorPredicate changeColorPredicate,
+			LongRange changeRange
 	) implements AbstractCriterion.Conditions {
 		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-			ItemPredicate.CODEC.fieldOf("item").forGetter(Conditions::itemPredicate),
-			Codec.simpleMap(SpectrumRegistries.INK_COLORS.getCodec(), LongRange.CODEC, SpectrumRegistries.INK_COLORS).forGetter(Conditions::colorRanges),
-			ColorPredicate.CODEC.fieldOf("change_color").forGetter(Conditions::changeColorPredicate),
-			LongRange.CODEC.fieldOf("change_range").forGetter(Conditions::changeRange)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+				ItemPredicate.CODEC.optionalFieldOf("item", ItemPredicate.Builder.create().build()).forGetter(Conditions::itemPredicate),
+				Codec.simpleMap(SpectrumRegistries.INK_COLORS.getCodec(), LongRange.CODEC, SpectrumRegistries.INK_COLORS).forGetter(Conditions::colorRanges),
+				ColorPredicate.CODEC.optionalFieldOf("change_color", ColorPredicate.ANY).forGetter(Conditions::changeColorPredicate),
+				LongRange.CODEC.optionalFieldOf("change_range", LongRange.ANY).forGetter(Conditions::changeRange)
 		).apply(instance, Conditions::new));
 		
 		public boolean matches(ItemStack stack, Map<InkColor, Long> colors, InkColor changeColor, long change) {

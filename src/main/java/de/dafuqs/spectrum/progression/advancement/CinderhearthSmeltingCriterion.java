@@ -28,28 +28,27 @@ public class CinderhearthSmeltingCriterion extends AbstractCriterion<Cinderheart
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		ItemPredicate input,
-		ItemPredicate output,
-		NumberRange.IntRange gainedExperience,
-		NumberRange.IntRange speedMultiplier,
-		NumberRange.IntRange yieldMultiplier,
-		NumberRange.IntRange efficiencyMultiplier,
-		NumberRange.IntRange experienceMultiplier
+			Optional<LootContextPredicate> player,
+			ItemPredicate input,
+			ItemPredicate output,
+			NumberRange.IntRange gainedExperience,
+			NumberRange.IntRange speedMultiplier,
+			NumberRange.IntRange yieldMultiplier,
+			NumberRange.IntRange efficiencyMultiplier,
+			NumberRange.IntRange experienceMultiplier
 	) implements AbstractCriterion.Conditions {
 		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(CinderhearthSmeltingCriterion.Conditions::player),
-			ItemPredicate.CODEC.fieldOf("input").forGetter(Conditions::input),
-			ItemPredicate.CODEC.fieldOf("output").forGetter(Conditions::output),
-			NumberRange.IntRange.CODEC.fieldOf("gained_experience").forGetter(Conditions::gainedExperience),
-			NumberRange.IntRange.CODEC.fieldOf("speed_multiplier").forGetter(Conditions::speedMultiplier),
-			NumberRange.IntRange.CODEC.fieldOf("yield_multiplier").forGetter(Conditions::yieldMultiplier),
-			NumberRange.IntRange.CODEC.fieldOf("efficiency_multiplier").forGetter(Conditions::efficiencyMultiplier),
-			NumberRange.IntRange.CODEC.fieldOf("experience_multiplier").forGetter(Conditions::experienceMultiplier)
-			
+				EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(CinderhearthSmeltingCriterion.Conditions::player),
+				ItemPredicate.CODEC.optionalFieldOf("input", ItemPredicate.Builder.create().build()).forGetter(Conditions::input),
+				ItemPredicate.CODEC.optionalFieldOf("output", ItemPredicate.Builder.create().build()).forGetter(Conditions::output),
+				NumberRange.IntRange.CODEC.optionalFieldOf("gained_experience", NumberRange.IntRange.ANY).forGetter(Conditions::gainedExperience),
+				NumberRange.IntRange.CODEC.optionalFieldOf("speed_multiplier", NumberRange.IntRange.ANY).forGetter(Conditions::speedMultiplier),
+				NumberRange.IntRange.CODEC.optionalFieldOf("yield_multiplier", NumberRange.IntRange.ANY).forGetter(Conditions::yieldMultiplier),
+				NumberRange.IntRange.CODEC.optionalFieldOf("efficiency_multiplier", NumberRange.IntRange.ANY).forGetter(Conditions::efficiencyMultiplier),
+				NumberRange.IntRange.CODEC.optionalFieldOf("experience_multiplier", NumberRange.IntRange.ANY).forGetter(Conditions::experienceMultiplier)
 		).apply(instance, CinderhearthSmeltingCriterion.Conditions::new));
-	
+		
 		public boolean matches(ItemStack input, List<ItemStack> outputs, int experience, Upgradeable.UpgradeHolder upgrades) {
 			if (!this.input.test(input)) {
 				return false;

@@ -13,7 +13,7 @@ import net.minecraft.util.*;
 import java.util.*;
 
 public class CrystalApothecaryCollectingCriterion extends AbstractCriterion<CrystalApothecaryCollectingCriterion.Conditions> {
-
+	
 	public static final Identifier ID = SpectrumCommon.locate("collect_using_crystal_apothecary");
 	
 	public void trigger(ServerPlayerEntity player, ItemStack itemStack) {
@@ -26,19 +26,19 @@ public class CrystalApothecaryCollectingCriterion extends AbstractCriterion<Crys
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		ItemPredicate item
+			Optional<LootContextPredicate> player,
+			ItemPredicate item
 	) implements AbstractCriterion.Conditions {
 		
 		public static final Codec<CrystalApothecaryCollectingCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(CrystalApothecaryCollectingCriterion.Conditions::player),
-			ItemPredicate.CODEC.fieldOf("item").forGetter(CrystalApothecaryCollectingCriterion.Conditions::item)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(CrystalApothecaryCollectingCriterion.Conditions::player),
+				ItemPredicate.CODEC.optionalFieldOf("item", ItemPredicate.Builder.create().build()).forGetter(CrystalApothecaryCollectingCriterion.Conditions::item)
 		).apply(instance, CrystalApothecaryCollectingCriterion.Conditions::new));
 		
 		public boolean matches(ItemStack stack) {
 			return this.item.test(stack);
 		}
-
+		
 	}
-
+	
 }

@@ -12,9 +12,9 @@ import net.minecraft.util.*;
 import java.util.*;
 
 public class CompletedMultiblockCriterion extends AbstractCriterion<CompletedMultiblockCriterion.Conditions> {
-
+	
 	public static final Identifier ID = SpectrumCommon.locate("completed_multiblock");
-
+	
 	public void trigger(ServerPlayerEntity player, Multiblock iMultiblock) {
 		this.trigger(player, (conditions) -> conditions.matches(iMultiblock));
 	}
@@ -24,16 +24,16 @@ public class CompletedMultiblockCriterion extends AbstractCriterion<CompletedMul
 		return Conditions.CODEC;
 	}
 	
-	public record Conditions(Optional<LootContextPredicate> player, Identifier identifier) implements AbstractCriterion.Conditions {
-
+	public record Conditions(Optional<LootContextPredicate> player, Optional<Identifier> identifier) implements AbstractCriterion.Conditions {
+		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-			Identifier.CODEC.fieldOf("multiblock_identifier").forGetter(Conditions::identifier)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+				Identifier.CODEC.optionalFieldOf("multiblock_identifier").forGetter(Conditions::identifier)
 		).apply(instance, Conditions::new));
-
+		
 		public boolean matches(Multiblock multiblock) {
-			return multiblock.getId().equals(identifier);
+			return identifier.isEmpty() || multiblock.getId().equals(identifier.get());
 		}
 	}
-
+	
 }

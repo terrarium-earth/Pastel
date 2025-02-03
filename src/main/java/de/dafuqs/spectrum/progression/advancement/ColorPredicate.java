@@ -11,7 +11,7 @@ import java.util.*;
 public record ColorPredicate(Optional<InkColor> color) {
 	
 	public static final Codec<ColorPredicate> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-		InkColor.CODEC.optionalFieldOf("color").forGetter(ColorPredicate::color)
+			InkColor.CODEC.optionalFieldOf("color").forGetter(ColorPredicate::color)
 	).apply(instance, ColorPredicate::new));
 	
 	public static final ColorPredicate ANY;

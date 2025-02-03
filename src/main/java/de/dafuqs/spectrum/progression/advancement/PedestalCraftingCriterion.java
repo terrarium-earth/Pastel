@@ -28,21 +28,21 @@ public class PedestalCraftingCriterion extends AbstractCriterion<PedestalCraftin
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		Optional<LootContextPredicate> location,
-		List<ItemPredicate> itemPredicates,
-		NumberRange.IntRange experienceRange,
-		NumberRange.IntRange craftingDurationTicksRange
+			Optional<LootContextPredicate> player,
+			Optional<LootContextPredicate> location,
+			List<ItemPredicate> itemPredicates,
+			NumberRange.IntRange experienceRange,
+			NumberRange.IntRange craftingDurationTicksRange
 	) implements AbstractCriterion.Conditions {
 		
 		public static final Codec<PedestalCraftingCriterion.Conditions> CODEC = RecordCodecBuilder.create(
-			instance -> instance.group(
-				EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(PedestalCraftingCriterion.Conditions::player),
-				LootContextPredicate.CODEC.optionalFieldOf("location").forGetter(PedestalCraftingCriterion.Conditions::location),
-				ItemPredicate.CODEC.listOf().fieldOf("items").forGetter(PedestalCraftingCriterion.Conditions::itemPredicates),
-				NumberRange.IntRange.CODEC.fieldOf("gained_experience").forGetter(PedestalCraftingCriterion.Conditions::experienceRange),
-				NumberRange.IntRange.CODEC.fieldOf("crafting_duration_ticks").forGetter(PedestalCraftingCriterion.Conditions::craftingDurationTicksRange)
-			).apply(instance, PedestalCraftingCriterion.Conditions::new)
+				instance -> instance.group(
+						EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(PedestalCraftingCriterion.Conditions::player),
+						LootContextPredicate.CODEC.optionalFieldOf("location").forGetter(PedestalCraftingCriterion.Conditions::location),
+						ItemPredicate.CODEC.listOf().optionalFieldOf("items", List.of()).forGetter(PedestalCraftingCriterion.Conditions::itemPredicates),
+						NumberRange.IntRange.CODEC.optionalFieldOf("gained_experience", NumberRange.IntRange.ANY).forGetter(PedestalCraftingCriterion.Conditions::experienceRange),
+						NumberRange.IntRange.CODEC.optionalFieldOf("crafting_duration_ticks", NumberRange.IntRange.ANY).forGetter(PedestalCraftingCriterion.Conditions::craftingDurationTicksRange)
+				).apply(instance, PedestalCraftingCriterion.Conditions::new)
 		);
 		
 		@Override

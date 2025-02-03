@@ -29,15 +29,15 @@ public class CrystallarieumGrownCriterion extends AbstractCriterion<Crystallarie
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		BlockPredicate blockPredicate,
-		ItemPredicate catalystPredicate
+			Optional<LootContextPredicate> player,
+			BlockPredicate blockPredicate,
+			ItemPredicate catalystPredicate
 	) implements AbstractCriterion.Conditions {
-
+		
 		public static final Codec<CrystallarieumGrownCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(CrystallarieumGrownCriterion.Conditions::player),
-			BlockPredicate.CODEC.fieldOf("grown_block").forGetter(CrystallarieumGrownCriterion.Conditions::blockPredicate),
-			ItemPredicate.CODEC.fieldOf("used_catalyst").forGetter(CrystallarieumGrownCriterion.Conditions::catalystPredicate)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(CrystallarieumGrownCriterion.Conditions::player),
+				BlockPredicate.CODEC.optionalFieldOf("grown_block", BlockPredicate.Builder.create().build()).forGetter(CrystallarieumGrownCriterion.Conditions::blockPredicate),
+				ItemPredicate.CODEC.optionalFieldOf("used_catalyst", ItemPredicate.Builder.create().build()).forGetter(CrystallarieumGrownCriterion.Conditions::catalystPredicate)
 		).apply(instance, CrystallarieumGrownCriterion.Conditions::new));
 		
 		public boolean matches(ServerWorld world, BlockPos blockPos, ItemStack catalystStack) {

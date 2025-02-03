@@ -17,13 +17,13 @@ import net.minecraft.util.*;
 import java.util.*;
 
 public class TakeOffBeltJumpCriterion extends AbstractCriterion<TakeOffBeltJumpCriterion.Conditions> {
-
+	
 	public static final Identifier ID = SpectrumCommon.locate("take_off_belt_jump");
-
+	
 	public static TakeOffBeltJumpCriterion.Conditions create(ItemPredicate itemPredicate, NumberRange.IntRange chargesRange) {
 		return new TakeOffBeltJumpCriterion.Conditions(Optional.empty(), itemPredicate, chargesRange);
 	}
-
+	
 	public void trigger(ServerPlayerEntity player) {
 		this.trigger(player, (conditions) -> {
 			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
@@ -42,27 +42,27 @@ public class TakeOffBeltJumpCriterion extends AbstractCriterion<TakeOffBeltJumpC
 			return false;
 		});
 	}
-
+	
 	@Override
 	public Codec<Conditions> getConditionsCodec() {
 		return Conditions.CODEC;
 	}
-
+	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		ItemPredicate itemPredicate,
-		NumberRange.IntRange chargesRange
+			Optional<LootContextPredicate> player,
+			ItemPredicate itemPredicate,
+			NumberRange.IntRange chargesRange
 	) implements AbstractCriterion.Conditions {
-
+		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-			ItemPredicate.CODEC.fieldOf("item").forGetter(Conditions::itemPredicate),
-			NumberRange.IntRange.CODEC.fieldOf("charges").forGetter(Conditions::chargesRange)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+				ItemPredicate.CODEC.optionalFieldOf("item", ItemPredicate.Builder.create().build()).forGetter(Conditions::itemPredicate),
+				NumberRange.IntRange.CODEC.optionalFieldOf("charges", NumberRange.IntRange.ANY).forGetter(Conditions::chargesRange)
 		).apply(instance, Conditions::new));
-
+		
 		public boolean matches(ItemStack beltStack, int charge) {
 			return itemPredicate.test(beltStack) && this.chargesRange.test(charge);
 		}
 	}
-
+	
 }

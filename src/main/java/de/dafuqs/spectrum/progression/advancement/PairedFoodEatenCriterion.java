@@ -26,15 +26,15 @@ public class PairedFoodEatenCriterion extends AbstractCriterion<PairedFoodEatenC
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		ItemPredicate teaItem,
-		ItemPredicate sconeItem
+			Optional<LootContextPredicate> player,
+			ItemPredicate teaItem,
+			ItemPredicate sconeItem
 	) implements AbstractCriterion.Conditions {
 		
 		public static final Codec<PairedFoodEatenCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(PairedFoodEatenCriterion.Conditions::player),
-				ItemPredicate.CODEC.fieldOf("eaten_item").forGetter(PairedFoodEatenCriterion.Conditions::teaItem),
-				ItemPredicate.CODEC.fieldOf("paired_item").forGetter(PairedFoodEatenCriterion.Conditions::sconeItem)
+				ItemPredicate.CODEC.optionalFieldOf("eaten_item", ItemPredicate.Builder.create().build()).forGetter(PairedFoodEatenCriterion.Conditions::teaItem),
+				ItemPredicate.CODEC.optionalFieldOf("paired_item", ItemPredicate.Builder.create().build()).forGetter(PairedFoodEatenCriterion.Conditions::sconeItem)
 		).apply(instance, PairedFoodEatenCriterion.Conditions::new));
 		
 		public boolean matches(ItemStack teaStack, ItemStack sconeStack) {

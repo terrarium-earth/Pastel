@@ -4,9 +4,7 @@
     "icon": {
       "id": "spectrum:knowledge_gem",
       "components": {
-        "spectrum:experience_store": {
-          "experience": 1000000000
-        }
+        "spectrum:stored_experience": 1000000000
       }
     },
     "frame": "challenge",

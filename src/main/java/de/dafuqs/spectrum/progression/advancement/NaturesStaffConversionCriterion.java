@@ -14,7 +14,7 @@ import net.minecraft.util.*;
 import java.util.*;
 
 public class NaturesStaffConversionCriterion extends AbstractCriterion<NaturesStaffConversionCriterion.Conditions> {
-
+	
 	public static final Identifier ID = SpectrumCommon.locate("natures_staff_conversion");
 	
 	public void trigger(ServerPlayerEntity player, BlockState sourceBlockState, BlockState targetBlockState) {
@@ -27,36 +27,35 @@ public class NaturesStaffConversionCriterion extends AbstractCriterion<NaturesSt
 	}
 	
 	public record Conditions(
-		Optional<LootContextPredicate> player,
-		Block sourceBlock,
-		StatePredicate sourceBlockState,
-		Block targetBlock,
-		StatePredicate targetBlockState
+			Optional<LootContextPredicate> player,
+			Optional<Block> sourceBlock,
+			StatePredicate sourceBlockState,
+			Optional<Block> targetBlock,
+			StatePredicate targetBlockState
 	) implements AbstractCriterion.Conditions {
 		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-			Registries.BLOCK.getCodec().fieldOf("source_block").forGetter(Conditions::sourceBlock),
-			StatePredicate.CODEC.fieldOf("source_state").forGetter(Conditions::sourceBlockState),
-			Registries.BLOCK.getCodec().fieldOf("target_block").forGetter(Conditions::targetBlock),
-			StatePredicate.CODEC.fieldOf("target_state").forGetter(Conditions::targetBlockState)
-			).apply(instance, Conditions::new));
-
-
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+				Registries.BLOCK.getCodec().optionalFieldOf("source_block").forGetter(Conditions::sourceBlock),
+				StatePredicate.CODEC.optionalFieldOf("source_state", new StatePredicate(List.of())).forGetter(Conditions::sourceBlockState),
+				Registries.BLOCK.getCodec().optionalFieldOf("target_block").forGetter(Conditions::targetBlock),
+				StatePredicate.CODEC.optionalFieldOf("target_state", new StatePredicate(List.of())).forGetter(Conditions::targetBlockState)
+		).apply(instance, Conditions::new));
+		
 		public boolean matches(BlockState sourceBlockState, BlockState targetBlockState) {
-			if (this.sourceBlock != null && !sourceBlockState.isOf(this.sourceBlock)) {
+			if (this.sourceBlock.isPresent() && !sourceBlockState.isOf(this.sourceBlock.get())) {
 				return false;
 			}
 			if (!this.sourceBlockState.test(sourceBlockState)) {
 				return false;
 			}
-			if (this.targetBlock != null && !targetBlockState.isOf(this.targetBlock)) {
+			if (this.targetBlock.isPresent() && !targetBlockState.isOf(this.targetBlock.get())) {
 				return false;
 			} else {
 				return this.targetBlockState.test(targetBlockState);
 			}
 		}
-
+		
 	}
-
+	
 }

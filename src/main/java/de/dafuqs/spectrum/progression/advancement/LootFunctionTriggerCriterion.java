@@ -17,7 +17,7 @@ public class LootFunctionTriggerCriterion extends AbstractCriterion<LootFunction
 	public void trigger(ServerPlayerEntity player, Identifier id) {
 		this.trigger(player, (conditions) -> conditions.matches(id));
 	}
-
+	
 	@Override
 	public Codec<Conditions> getConditionsCodec() {
 		return Conditions.CODEC;
@@ -25,15 +25,15 @@ public class LootFunctionTriggerCriterion extends AbstractCriterion<LootFunction
 	
 	public record Conditions(Optional<LootContextPredicate> player,
 							 List<Identifier> ids) implements AbstractCriterion.Conditions {
-
+		
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
-				Identifier.CODEC.listOf().fieldOf("tags").forGetter(Conditions::ids)
+				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
+				Identifier.CODEC.listOf().optionalFieldOf("tags", List.of()).forGetter(Conditions::ids)
 		).apply(instance, Conditions::new));
 		
 		public boolean matches(Identifier id) {
 			return this.ids.isEmpty() || this.ids.contains(id);
 		}
 	}
-
+	
 }

@@ -46,7 +46,7 @@ public class SpectrumCommon implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Spectrum");
 	public static final Map<Identifier, TagKey<Item>> CACHED_ITEM_TAG_MAP = new HashMap<>();
 	public static SpectrumConfig CONFIG;
-
+	
 	public static void logInfo(String message) {
 		LOGGER.info("[Spectrum] {}", message);
 	}
@@ -66,6 +66,7 @@ public class SpectrumCommon implements ModInitializer {
 	/**
 	 * This is the Spectrum analogue of Identifier.ofVanilla. It's best used in a codec where
 	 * the default namespace will be spectrum.
+	 *
 	 * @param id The stringified identifier to parse
 	 * @return The parsed identifier
 	 */
@@ -96,13 +97,13 @@ public class SpectrumCommon implements ModInitializer {
 		InkColors.register();
 		InkColorMixes.register();
 		SpectrumEntityAttributes.register();
-
+		
 		logInfo("Registering Component Types...");
 		SpectrumDataComponentTypes.register();
-
+		
 		logInfo("Registering Block / Item Color Registries...");
 		ColorRegistry.registerColorRegistries();
-
+		
 		// Register ALL the stuff
 		logInfo("Registering Status Effects...");
 		SpectrumStatusEffectTags.register();
@@ -128,7 +129,7 @@ public class SpectrumCommon implements ModInitializer {
 		SpectrumBlockEntities.register();
 		logInfo("Registering Enchantment Effect Component Types...");
 		SpectrumEnchantmentEffectComponentTypes.register();
-
+		
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");
 		SpectrumPastelUpgrades.register();
@@ -171,6 +172,7 @@ public class SpectrumCommon implements ModInitializer {
 		logInfo("Registering Enchantment Drops...");
 		SpectrumLootPoolModifiers.setup();
 		logInfo("Registering Type Specific Predicates...");
+		SpectrumItemSubPredicateTypes.register();
 		SpectrumEntitySubPredicateTypes.register();
 		
 		logInfo("Registering Items to Fuel Registry...");
@@ -259,7 +261,7 @@ public class SpectrumCommon implements ModInitializer {
 		
 		logInfo("Common startup completed!");
 	}
-
+	
 	/**
 	 * When initializing a block entity, world can still be null
 	 * Therefore we use the RecipeManager reference from MinecraftServer
