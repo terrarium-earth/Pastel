@@ -11,7 +11,7 @@
   ],
   "ticks_for_compensation_loot_per_valid_neighbor": 160000,
   "compensated_loot": {
-    "item": "ae2:certus_quartz_crystal",
+    "id": "ae2:certus_quartz_crystal",
     "count": 2
   },
   "fabric:load_conditions": [

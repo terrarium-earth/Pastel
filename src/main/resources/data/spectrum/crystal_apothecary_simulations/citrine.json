@@ -11,7 +11,7 @@
   ],
   "ticks_for_compensation_loot_per_valid_neighbor": 10000,
   "compensated_loot": {
-    "item": "spectrum:citrine_shard",
+    "id": "spectrum:citrine_shard",
     "count": 2
   }
 }

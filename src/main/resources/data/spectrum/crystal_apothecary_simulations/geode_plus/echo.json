@@ -11,7 +11,7 @@
   ],
   "ticks_for_compensation_loot_per_valid_neighbor": 20000,
   "compensated_loot": {
-    "item": "minecraft:echo_shard",
+    "id": "minecraft:echo_shard",
     "count": 2
   },
   "fabric:load_conditions": [

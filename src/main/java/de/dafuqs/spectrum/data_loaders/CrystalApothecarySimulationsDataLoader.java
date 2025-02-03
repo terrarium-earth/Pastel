@@ -1,8 +1,10 @@
 package de.dafuqs.spectrum.data_loaders;
 
 import com.google.gson.*;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.recipe.*;
 import net.fabricmc.fabric.api.resource.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
@@ -20,8 +22,14 @@ public class CrystalApothecarySimulationsDataLoader extends JsonDataLoader imple
 	
 	public static final HashMap<Block, SimulatedBlockGrowthEntry> COMPENSATIONS = new HashMap<>();
 	
-	public record SimulatedBlockGrowthEntry(Collection<Block> validNeighbors,
-											int ticksForCompensationLootPerValidNeighbor, ItemStack compensatedStack) {
+	public record SimulatedBlockGrowthEntry(Collection<Block> validNeighbors, int ticksForCompensationLootPerValidNeighbor, ItemStack compensatedStack) {
+		
+		public static final Codec<SimulatedBlockGrowthEntry> CODEC = RecordCodecBuilder.create(i -> i.group(
+				Registries.BLOCK.getCodec().listOf().xmap(list -> (Collection<Block>) list, set -> set.stream().toList()).fieldOf("valid_neighbor_blocks").forGetter(c -> c.validNeighbors),
+				Codec.INT.optionalFieldOf("ticks_for_compensation_loot_per_valid_neighbor", 10000).forGetter(c -> c.ticksForCompensationLootPerValidNeighbor),
+				ItemStack.CODEC.fieldOf("compensated_stack").forGetter(c -> c.compensatedStack)
+		).apply(i, SimulatedBlockGrowthEntry::new));
+		
 	}
 	
 	private CrystalApothecarySimulationsDataLoader() {
@@ -34,34 +42,19 @@ public class CrystalApothecarySimulationsDataLoader extends JsonDataLoader imple
 		prepared.forEach((identifier, jsonElement) -> {
 			JsonObject object = jsonElement.getAsJsonObject();
 			
-			String buddingBlockString = JsonHelper.getString(object, "budding_block");
-			Block buddingBlock = Registries.BLOCK.get(Identifier.tryParse(buddingBlockString));
-			if (buddingBlock == Blocks.AIR) {
-				SpectrumCommon.logError("Crystal Apothecary Simulation '" + identifier + "' has a non-existant 'budding_block' entry: '" + buddingBlockString + "'. Ignoring that one.");
+			DataResult<Block> buddingBlock = Registries.BLOCK.getCodec().decode(JsonOps.INSTANCE, object.get("budding_block")).map(Pair::getFirst);
+			if (buddingBlock.error().isPresent() || buddingBlock.result().isEmpty()) {
+				SpectrumCommon.logError("Crystal Apothecary Simulation error: " + buddingBlock.error().get() + ". Ignoring that one.");
 				return;
 			}
 			
-			Set<Block> validNeighbors = new HashSet<>();
-			for (JsonElement entry : object.get("valid_neighbor_blocks").getAsJsonArray()) {
-				Identifier validNeighborBlockId = Identifier.tryParse(entry.getAsString());
-				Block validNeighborBlock = Registries.BLOCK.get(validNeighborBlockId);
-				if (validNeighborBlock == Blocks.AIR && !validNeighborBlockId.equals(Identifier.of("air"))) {
-					SpectrumCommon.logError("Crystal Apothecary Simulation '" + identifier + "' has a non-existant 'valid_neighbor_block' entry: '" + validNeighborBlockId + "'. Ignoring that one.");
-				} else {
-					validNeighbors.add(validNeighborBlock);
-				}
-			}
-			int ticksForCompensationLootPerValidNeighbor = JsonHelper.getInt(object, "ticks_for_compensation_loot_per_valid_neighbor", 10000);
-			
-			ItemStack compensatedStack;
-			try {
-				compensatedStack = RecipeUtils.itemStackWithNbtFromJson(object.get("compensated_loot").getAsJsonObject());
-			} catch (JsonSyntaxException e) {
-				SpectrumCommon.logError("Crystal Apothecary Simulation '" + identifier + "' has an invalid 'compensated_loot' tag, perhaps with a non-existing item. Ignoring that one.");
+			DataResult<SimulatedBlockGrowthEntry> entry = SimulatedBlockGrowthEntry.CODEC.decode(JsonOps.INSTANCE, jsonElement).map(Pair::getFirst);
+			if (entry.error().isPresent() || entry.result().isEmpty()) {
+				SpectrumCommon.logError("Crystal Apothecary Simulation error: " + entry.error().get() + ". Ignoring that one.");
 				return;
 			}
 			
-			COMPENSATIONS.put(buddingBlock, new SimulatedBlockGrowthEntry(validNeighbors, ticksForCompensationLootPerValidNeighbor, compensatedStack));
+			COMPENSATIONS.put(buddingBlock.result().get(), entry.result().get());
 		});
 	}
 	

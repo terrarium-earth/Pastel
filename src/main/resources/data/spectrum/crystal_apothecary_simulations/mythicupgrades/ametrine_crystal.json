@@ -11,7 +11,7 @@
   ],
   "ticks_for_compensation_loot_per_valid_neighbor": 20000,
   "compensated_loot": {
-    "item": "mythicupgrades:ametrine_crystal_shard",
+    "id": "mythicupgrades:ametrine_crystal_shard",
     "count": 1
   },
   "fabric:load_conditions": [

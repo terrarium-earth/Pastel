@@ -11,7 +11,7 @@
   ],
   "ticks_for_compensation_loot_per_valid_neighbor": 20000,
   "compensated_loot": {
-    "item": "geode_plus:pink_topaz",
+    "id": "geode_plus:pink_topaz",
     "count": 2
   },
   "fabric:load_conditions": [
