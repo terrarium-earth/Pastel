@@ -21,7 +21,9 @@
       "title": "book.spectrum.guidebook.ideas.where_to_find",
       "completion_advancement": "spectrum:triggers/hints/radiating_ender_page0",
       "cost": {
-        "item": "minecraft:ender_pearl",
+        "item": {
+          "item": "minecraft:ender_pearl"
+        },
         "count": 4
       },
       "text": "book.spectrum.guidebook.ideas.radiating_ender.page0.text"
@@ -30,7 +32,9 @@
       "type": "spectrum:hint",
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": "minecraft:ender_pearl",
+        "item": {
+          "item": "minecraft:ender_pearl"
+        },
         "count": 12
       },
       "text": "book.spectrum.guidebook.ideas.radiating_ender.page1.text",

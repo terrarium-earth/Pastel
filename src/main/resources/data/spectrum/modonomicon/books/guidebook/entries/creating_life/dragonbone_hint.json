@@ -21,7 +21,9 @@
       "title": "book.spectrum.guidebook.ideas.small_clue",
       "completion_advancement": "spectrum:triggers/hints/dragonbone_page0",
       "cost": {
-        "item": "spectrum:doombloom_seed",
+        "item": {
+          "item": "spectrum:doombloom_seed"
+        },
         "count": 4
       },
       "text": "book.spectrum.guidebook.ideas.dragonbone.page0.text"
@@ -30,7 +32,9 @@
       "type": "spectrum:hint",
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": "spectrum:doombloom_seed",
+        "item": {
+          "item": "spectrum:doombloom_seed"
+        },
         "count": 12
       },
       "text": "book.spectrum.guidebook.ideas.dragonbone.page1.text",

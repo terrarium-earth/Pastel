@@ -25,7 +25,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "minecraft:iron_pickaxe",
+        "item": "minecraft:iron_pickaxe"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -33,7 +34,6 @@
               "lvl": "1s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.resonance.page1.text"
     },
@@ -50,13 +50,17 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.resonance.page3.title",
-      "item": "minecraft:medium_amethyst_bud",
+      "item": {
+        "item": "minecraft:medium_amethyst_bud"
+      },
       "text": "book.spectrum.guidebook.resonance.page3.text"
     },
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.pure_resources.name",
-      "item": "spectrum:pure_iron",
+      "item": {
+        "item": "spectrum:pure_iron"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_pure_resource"
@@ -66,23 +70,31 @@
     {
       "type": "modonomicon:spotlight",
       "title": "",
-      "item": "spectrum:orange_leaves",
+      "item": {
+        "item": "spectrum:orange_leaves"
+      },
       "text": "book.spectrum.guidebook.resonance.page5.text"
     },
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.harvesting_spawners",
-      "item": "minecraft:spawner",
+      "item": {
+        "item": "minecraft:spawner"
+      },
       "text": "book.spectrum.guidebook.resonance.page6.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:reinforced_deepslate",
+      "item": {
+        "item": "minecraft:reinforced_deepslate"
+      },
       "text": "book.spectrum.guidebook.resonance.page7.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:sculk_shrieker",
+      "item": {
+        "item": "minecraft:sculk_shrieker"
+      },
       "text": "book.spectrum.guidebook.resonance.page8.text"
     },
     {
@@ -96,19 +108,25 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:respawn_anchor",
+      "item": {
+        "item": "minecraft:respawn_anchor"
+      },
       "text": "book.spectrum.guidebook.resonance.page10.text"
     },
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.resonance.page11.title",
-      "item": "minecraft:oak_sign",
+      "item": {
+        "item": "minecraft:oak_sign"
+      },
       "text": "book.spectrum.guidebook.resonance.page11.text"
     },
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.resonance.page12.title",
-      "item": "minecraft:infested_stone_bricks",
+      "item": {
+        "item": "minecraft:infested_stone_bricks"
+      },
       "text": "book.spectrum.guidebook.resonance.page12.text"
     }
   ]

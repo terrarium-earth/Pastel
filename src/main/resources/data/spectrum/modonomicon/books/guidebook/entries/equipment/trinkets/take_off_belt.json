@@ -39,7 +39,8 @@
       },
       "title": "enchantment.minecraft.power",
       "item": {
-        "item": "spectrum:take_off_belt",
+        "item": "spectrum:take_off_belt"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -47,7 +48,6 @@
               "lvl": "5s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.take_off_belt.page2.text"
     },
@@ -59,7 +59,8 @@
       },
       "title": "enchantment.minecraft.feather_falling",
       "item": {
-        "item": "spectrum:take_off_belt",
+        "item": "spectrum:take_off_belt"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -67,7 +68,6 @@
               "lvl": "4s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.take_off_belt.page3.text"
     }

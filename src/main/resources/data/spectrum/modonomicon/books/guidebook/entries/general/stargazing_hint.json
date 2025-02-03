@@ -21,7 +21,9 @@
       "title": "book.spectrum.guidebook.ideas.stargazing.page0.title",
       "completion_advancement": "spectrum:triggers/hints/stargazing_page0",
       "cost": {
-        "item": "spectrum:shimmerstone_gem",
+        "item": {
+          "item": "spectrum:shimmerstone_gem"
+        },
         "count": 8
       },
       "text": "book.spectrum.guidebook.ideas.stargazing.page0.text"
@@ -30,7 +32,9 @@
       "type": "spectrum:hint",
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": "spectrum:shimmerstone_gem",
+        "item": {
+          "item": "spectrum:shimmerstone_gem"
+        },
         "count": 24
       },
       "text": "book.spectrum.guidebook.ideas.stargazing.page1.text",

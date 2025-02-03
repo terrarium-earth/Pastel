@@ -39,7 +39,8 @@
       },
       "title": "enchantment.spectrum.sniping",
       "item": {
-        "item": "spectrum:gleaming_pin",
+        "item": "spectrum:gleaming_pin"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -47,7 +48,6 @@
               "lvl": "2s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.gleaming_pin.page2.text"
     }

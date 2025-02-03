@@ -34,7 +34,8 @@
       },
       "title": "enchantment.minecraft.efficiency",
       "item": {
-        "item": "spectrum:natures_staff",
+        "item": "spectrum:natures_staff"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -42,7 +43,6 @@
               "lvl": "5s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.natures_staff.page2.text"
     }

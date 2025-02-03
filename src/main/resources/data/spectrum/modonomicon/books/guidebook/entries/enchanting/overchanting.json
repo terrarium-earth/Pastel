@@ -24,7 +24,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.overchanting.name",
       "item": {
-        "item": "minecraft:enchanted_book",
+        "item": "minecraft:enchanted_book"
+      },
         "nbt": {
           "StoredEnchantments": [
             {
@@ -32,7 +33,6 @@
               "lvl": "5s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.overchanting.page0.text"
     },

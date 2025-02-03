@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:redstone_calculator",
+      "item": {
+        "item": "spectrum:redstone_calculator"
+      },
       "text": "book.spectrum.guidebook.redstone_calculator.page0.text",
       "title": "block.spectrum.redstone_calculator"
     },

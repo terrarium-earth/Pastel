@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:heartbound_chest",
+      "item": {
+        "item": "spectrum:heartbound_chest"
+      },
       "text": "book.spectrum.guidebook.heartbound_chest.page0.text",
       "title": "block.spectrum.heartbound_chest"
     },

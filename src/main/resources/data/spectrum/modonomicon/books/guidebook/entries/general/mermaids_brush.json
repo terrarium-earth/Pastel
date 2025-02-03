@@ -23,7 +23,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mermaids_brush.page1.title",
-      "item": "spectrum:mermaids_gem",
+      "item": {
+        "item": "spectrum:mermaids_gem"
+      },
       "text": "book.spectrum.guidebook.mermaids_brush.page1.text"
     }
   ]

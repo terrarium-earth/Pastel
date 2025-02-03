@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:text",
-      "item": "spectrum:item_roundel",
+      "item": {
+        "item": "spectrum:item_roundel"
+      },
       "text": "book.spectrum.guidebook.item_roundel.page0.text",
       "title": "block.spectrum.item_roundel"
     },

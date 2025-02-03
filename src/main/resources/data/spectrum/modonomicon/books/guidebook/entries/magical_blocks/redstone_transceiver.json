@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:redstone_transceiver",
+      "item": {
+        "item": "spectrum:redstone_transceiver"
+      },
       "text": "book.spectrum.guidebook.redstone_transceiver.page0.text",
       "title": "block.spectrum.redstone_transceiver"
     },

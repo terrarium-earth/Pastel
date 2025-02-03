@@ -19,7 +19,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.azurite.name",
-      "item": "spectrum:raw_azurite",
+      "item": {
+        "item": "spectrum:raw_azurite"
+      },
       "text": "book.spectrum.guidebook.azurite.page0.text"
     },
     {

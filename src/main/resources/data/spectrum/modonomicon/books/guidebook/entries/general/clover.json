@@ -18,12 +18,16 @@
     {
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.clover",
-      "item": "spectrum:clover",
+      "item": {
+        "item": "spectrum:clover"
+      },
       "text": "book.spectrum.guidebook.clover.clover.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:four_leaf_clover",
+      "item": {
+        "item": "spectrum:four_leaf_clover"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_four_leaf_clover"

@@ -1,5 +1,5 @@
 {
-  "type": "spectrum:entry_link",
+  "type": "modonomicon:entry_link",
   "entry_to_open": "spectrum:general/stargazing",
   "name": "book.spectrum.guidebook.stargazing.page1.title",
   "condition": {

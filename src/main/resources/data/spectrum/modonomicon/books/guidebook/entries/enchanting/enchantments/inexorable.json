@@ -25,7 +25,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "minecraft:iron_pickaxe",
+        "item": "minecraft:iron_pickaxe"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -33,7 +34,6 @@
               "lvl": "1s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.inexorable.page1.text"
     },

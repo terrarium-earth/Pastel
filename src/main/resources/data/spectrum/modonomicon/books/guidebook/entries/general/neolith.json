@@ -22,7 +22,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.neolith",
-      "item": "spectrum:neolith",
+      "item": {
+        "item": "spectrum:neolith"
+      },
       "text": "book.spectrum.guidebook.neolith.page0.text"
     },
     {

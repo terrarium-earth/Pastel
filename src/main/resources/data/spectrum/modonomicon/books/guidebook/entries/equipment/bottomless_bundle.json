@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:bottomless_bundle",
+      "item": {
+        "item": "spectrum:bottomless_bundle"
+      },
       "text": "book.spectrum.guidebook.bottomless_bundle.page0.text",
       "title": "item.spectrum.bottomless_bundle"
     },
@@ -47,7 +49,8 @@
       },
       "title": "enchantment.minecraft.power",
       "item": {
-        "item": "spectrum:bottomless_bundle",
+        "item": "spectrum:bottomless_bundle"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -55,7 +58,6 @@
               "lvl": "5s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.bottomless_bundle.page4.text"
     },
@@ -67,7 +69,8 @@
       },
       "title": "enchantment.spectrum.voiding",
       "item": {
-        "item": "spectrum:bottomless_bundle",
+        "item": "spectrum:bottomless_bundle"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -75,7 +78,6 @@
               "lvl": "1s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.bottomless_bundle.page5.text"
     }

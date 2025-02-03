@@ -61,7 +61,9 @@
         "advancement_id": "spectrum:hidden/collect_shards/topaz"
       },
       "title": "book.spectrum.guidebook.geodes.page4.title",
-      "item": "spectrum:topaz_block",
+      "item": {
+        "item": "spectrum:topaz_block"
+      },
       "text": "book.spectrum.guidebook.geodes.page4.text"
     },
     {
@@ -71,7 +73,9 @@
         "advancement_id": "spectrum:hidden/collect_shards/amethyst"
       },
       "title": "book.spectrum.guidebook.geodes.page5.title",
-      "item": "minecraft:amethyst_block",
+      "item": {
+        "item": "minecraft:amethyst_block"
+      },
       "text": "book.spectrum.guidebook.geodes.page5.text"
     },
     {
@@ -81,7 +85,9 @@
         "advancement_id": "spectrum:hidden/collect_shards/citrine"
       },
       "title": "book.spectrum.guidebook.geodes.page6.title",
-      "item": "spectrum:citrine_block",
+      "item": {
+        "item": "spectrum:citrine_block"
+      },
       "text": "book.spectrum.guidebook.geodes.page6.text"
     },
     {
@@ -91,7 +97,9 @@
         "advancement_id": "spectrum:lategame/collect_moonstone"
       },
       "title": "book.spectrum.guidebook.geodes.page7.title",
-      "item": "spectrum:moonstone_block",
+      "item": {
+        "item": "spectrum:moonstone_block"
+      },
       "text": "book.spectrum.guidebook.geodes.page7.text"
     }
   ]

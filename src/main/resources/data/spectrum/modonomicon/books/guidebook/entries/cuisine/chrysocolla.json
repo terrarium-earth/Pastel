@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:chrysocolla",
+      "item": {
+        "item": "spectrum:chrysocolla"
+      },
       "text": "book.spectrum.guidebook.chrysocolla.page0.text"
     },
     {

@@ -36,7 +36,9 @@
         "advancement_id": "spectrum:hidden/collect_shards/topaz"
       },
       "title": "book.spectrum.guidebook.shards.page1.title",
-      "item": "spectrum:topaz_shard",
+      "item": {
+        "item": "spectrum:topaz_shard"
+      },
       "text": "book.spectrum.guidebook.shards.page1.text"
     },
     {
@@ -63,7 +65,9 @@
         "advancement_id": "spectrum:hidden/collect_shards/amethyst"
       },
       "title": "book.spectrum.guidebook.shards.page2.title",
-      "item": "minecraft:amethyst_shard",
+      "item": {
+        "item": "minecraft:amethyst_shard"
+      },
       "text": "book.spectrum.guidebook.shards.page2.text"
     },
     {
@@ -90,7 +94,9 @@
         "advancement_id": "spectrum:hidden/collect_shards/citrine"
       },
       "title": "book.spectrum.guidebook.shards.page3.title",
-      "item": "spectrum:citrine_shard",
+      "item": {
+        "item": "spectrum:citrine_shard"
+      },
       "text": "book.spectrum.guidebook.shards.page3.text"
     },
     {
@@ -117,7 +123,9 @@
         "advancement_id": "spectrum:create_onyx_shard"
       },
       "title": "book.spectrum.guidebook.shards.page4.title",
-      "item": "spectrum:onyx_shard",
+      "item": {
+        "item": "spectrum:onyx_shard"
+      },
       "text": "book.spectrum.guidebook.shards.page4.text"
     },
     {
@@ -144,7 +152,9 @@
         "advancement_id": "spectrum:lategame/collect_moonstone"
       },
       "title": "book.spectrum.guidebook.moonstone_shards.name",
-      "item": "spectrum:moonstone_shard",
+      "item": {
+        "item": "spectrum:moonstone_shard"
+      },
       "text": "book.spectrum.guidebook.shards.page5.text"
     },
     {

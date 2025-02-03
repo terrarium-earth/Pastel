@@ -32,12 +32,16 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:redstone",
+      "item": {
+        "item": "minecraft:redstone"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.page2.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_redstone",
+      "item": {
+        "item": "spectrum:pure_redstone"
+      },
       "anchor": "pure_redstone",
       "condition": {
         "type": "modonomicon:advancement",
@@ -47,12 +51,16 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:glowstone_dust",
+      "item": {
+        "item": "minecraft:glowstone_dust"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.page3.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_glowstone",
+      "item": {
+        "item": "spectrum:pure_glowstone"
+      },
       "anchor": "pure_glowstone",
       "condition": {
         "type": "modonomicon:advancement",
@@ -62,12 +70,16 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:lapis_lazuli",
+      "item": {
+        "item": "minecraft:lapis_lazuli"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.lapis_lazuli.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_lapis",
+      "item": {
+        "item": "spectrum:pure_lapis"
+      },
       "anchor": "pure_lapis",
       "condition": {
         "type": "modonomicon:advancement",
@@ -77,12 +89,16 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:gunpowder",
+      "item": {
+        "item": "minecraft:gunpowder"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.page4.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:dragon_breath",
+      "item": {
+        "item": "minecraft:dragon_breath"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_vanilla/dragon_breath"
@@ -91,7 +107,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "minecraft:echo_shard",
+      "item": {
+        "item": "minecraft:echo_shard"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_vanilla/echo_shard"
@@ -100,7 +118,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pure_echo",
+      "item": {
+        "item": "spectrum:pure_echo"
+      },
       "anchor": "pure_echo",
       "condition": {
         "type": "modonomicon:advancement",
@@ -110,27 +130,37 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:topaz_powder",
+      "item": {
+        "item": "spectrum:topaz_powder"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.page6.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:amethyst_powder",
+      "item": {
+        "item": "spectrum:amethyst_powder"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.page7.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:citrine_powder",
+      "item": {
+        "item": "spectrum:citrine_powder"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.page8.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:onyx_powder",
+      "item": {
+        "item": "spectrum:onyx_powder"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.onyx_powder.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:moonstone_powder",
+      "item": {
+        "item": "spectrum:moonstone_powder"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_moonstone"
@@ -139,12 +169,16 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:shimmerstone_gem",
+      "item": {
+        "item": "spectrum:shimmerstone_gem"
+      },
       "text": "book.spectrum.guidebook.potion_workshop_reagents.page11.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:quitoxic_powder",
+      "item": {
+        "item": "spectrum:quitoxic_powder"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_quitoxic_reeds"
@@ -153,7 +187,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:stratine_fragments",
+      "item": {
+        "item": "spectrum:stratine_fragments"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_stratine"
@@ -162,7 +198,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:paltaeria_fragments",
+      "item": {
+        "item": "spectrum:paltaeria_fragments"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_paltaeria"
@@ -171,7 +209,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:stardust",
+      "item": {
+        "item": "spectrum:stardust"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_stardust"
@@ -180,7 +220,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:star_fragment",
+      "item": {
+        "item": "spectrum:star_fragment"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_star_fragment"
@@ -189,7 +231,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:storm_stone",
+      "item": {
+        "item": "spectrum:storm_stone"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_storm_stone"
@@ -198,7 +242,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:raw_azurite",
+      "item": {
+        "item": "spectrum:raw_azurite"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_azurite"
@@ -207,7 +253,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:four_leaf_clover",
+      "item": {
+        "item": "spectrum:four_leaf_clover"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_four_leaf_clover"
@@ -216,7 +264,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:vegetal",
+      "item": {
+        "item": "spectrum:vegetal"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_vegetal"
@@ -225,7 +275,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:neolith",
+      "item": {
+        "item": "spectrum:neolith"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_neolith"
@@ -234,7 +286,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:midnight_chip",
+      "item": {
+        "item": "spectrum:midnight_chip"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_midnight_chip"
@@ -243,7 +297,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:moonstruck_nectar",
+      "item": {
+        "item": "spectrum:moonstruck_nectar"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/harvest_moonstruck_nectar"
@@ -252,7 +308,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:bedrock_dust",
+      "item": {
+        "item": "spectrum:bedrock_dust"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/break_decayed_bedrock"
@@ -261,7 +319,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:bismuth_flake",
+      "item": {
+        "item": "spectrum:bismuth_flake"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_bismuth"
@@ -270,7 +330,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:raw_malachite",
+      "item": {
+        "item": "spectrum:raw_malachite"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_malachite"
@@ -279,7 +341,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:raw_bloodstone",
+      "item": {
+        "item": "spectrum:raw_bloodstone"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:pluck_resplendent_feather"
@@ -288,7 +352,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:prickly_bayleaf",
+      "item": {
+        "item": "spectrum:prickly_bayleaf"
+      },
       "anchor": "prickly_bayleaf",
       "condition": {
         "type": "modonomicon:advancement",
@@ -298,7 +364,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:jadeite_petals",
+      "item": {
+        "item": "spectrum:jadeite_petals"
+      },
       "anchor": "jadeite_petals",
       "condition": {
         "type": "modonomicon:advancement",
@@ -308,7 +376,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:fissure_plum",
+      "item": {
+        "item": "spectrum:fissure_plum"
+      },
       "anchor": "fissure_plum",
       "condition": {
         "type": "modonomicon:advancement",
@@ -318,7 +388,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:bone_ash",
+      "item": {
+        "item": "spectrum:bone_ash"
+      },
       "anchor": "bone_ash",
       "condition": {
         "type": "modonomicon:advancement",
@@ -328,7 +400,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:ash_flakes",
+      "item": {
+        "item": "spectrum:ash_flakes"
+      },
       "anchor": "ash_flakes",
       "condition": {
         "type": "modonomicon:advancement",
@@ -338,7 +412,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:bitter_oils",
+      "item": {
+        "item": "spectrum:bitter_oils"
+      },
       "anchor": "bitter_oils",
       "condition": {
         "type": "modonomicon:advancement",
@@ -348,7 +424,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:nightdew_sprout",
+      "item": {
+        "item": "spectrum:nightdew_sprout"
+      },
       "anchor": "nightdew_sprout",
       "condition": {
         "type": "modonomicon:advancement",
@@ -358,7 +436,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:nectardew_burgeon",
+      "item": {
+        "item": "spectrum:nectardew_burgeon"
+      },
       "anchor": "nectardew_burgeon",
       "condition": {
         "type": "modonomicon:advancement",

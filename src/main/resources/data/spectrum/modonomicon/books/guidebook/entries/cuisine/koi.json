@@ -22,7 +22,9 @@
         "advancement_id": "spectrum:hidden/collect_koi"
       },
       "anchor": "koi",
-      "item": "spectrum:koi",
+      "item": {
+        "item": "spectrum:koi"
+      },
       "title": "item.spectrum.koi",
       "text": "book.spectrum.guidebook.koi.page0.text"
     }

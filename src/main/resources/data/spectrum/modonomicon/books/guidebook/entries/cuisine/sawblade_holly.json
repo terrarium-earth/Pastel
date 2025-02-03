@@ -17,13 +17,17 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:sawblade_holly_berry",
+      "item": {
+        "item": "spectrum:sawblade_holly_berry"
+      },
       "text": "book.spectrum.guidebook.sawblade_holly.page0.text",
       "title": "book.spectrum.guidebook.sawblade_holly.name"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:prickly_bayleaf",
+      "item": {
+        "item": "spectrum:prickly_bayleaf"
+      },
       "text": "book.spectrum.guidebook.sawblade_holly.page1.text"
     },
     {

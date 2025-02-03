@@ -78,7 +78,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/items/crafting_tablet"
       },
-      "item": "spectrum:crafting_tablet",
+      "item": {
+        "item": "spectrum:crafting_tablet"
+      },
       "title": "book.spectrum.guidebook.pedestal.automation.title",
       "text": "book.spectrum.guidebook.pedestal.automation.text"
     }

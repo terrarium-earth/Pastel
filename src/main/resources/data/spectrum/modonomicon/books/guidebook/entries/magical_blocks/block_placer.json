@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:block_placer",
+      "item": {
+        "item": "spectrum:block_placer"
+      },
       "text": "book.spectrum.guidebook.block_placer.page0.text",
       "title": "block.spectrum.block_placer"
     },

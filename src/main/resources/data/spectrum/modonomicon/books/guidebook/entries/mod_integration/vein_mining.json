@@ -28,7 +28,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.vein_mining.name",
       "item": {
-        "item": "spectrum:multitool",
+        "item": "spectrum:multitool"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -36,7 +37,6 @@
               "lvl": "1s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.mod_integration.vein_mining.page0.text"
     },

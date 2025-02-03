@@ -53,7 +53,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.malum.scythe_enchants.title",
       "item": {
-        "item": "malum:crude_scythe",
+        "item": "malum:crude_scythe"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -97,7 +98,6 @@
               "lvl": "1s"
             }
           ]
-        }
       },
       "condition": {
         "type": "modonomicon:advancement",
@@ -151,7 +151,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:mod_integration/malum/visited_well"
       },
-      "item": "malum:void_salts",
+      "item": {
+        "item": "malum:void_salts"
+      },
       "text": "book.spectrum.guidebook.mod_integration.malum.void_salts_reagent.text"
     },
     {

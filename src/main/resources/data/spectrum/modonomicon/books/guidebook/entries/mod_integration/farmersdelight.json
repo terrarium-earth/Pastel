@@ -32,7 +32,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.farmersdelight.page1.title",
-      "item": "spectrum:multitool",
+      "item": {
+        "item": "spectrum:multitool"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:build_basic_pedestal_structure"
@@ -46,7 +48,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_amaranth"
       },
-      "item": "spectrum:amaranth_bushel",
+      "item": {
+        "item": "spectrum:amaranth_bushel"
+      },
       "text": "book.spectrum.guidebook.mod_integration.farmersdelight.amaranth_cutting.text"
     },
     {
@@ -61,7 +65,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_any_basic_shard"
       },
-      "item": "spectrum:citrine_block",
+      "item": {
+        "item": "spectrum:citrine_block"
+      },
       "text": "book.spectrum.guidebook.mod_integration.farmersdelight.gemstone_cutting.text"
     },
     {

@@ -25,7 +25,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "minecraft:iron_sword",
+        "item": "minecraft:iron_sword"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -33,7 +34,6 @@
               "lvl": "2s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.disarming.page1.text"
     },

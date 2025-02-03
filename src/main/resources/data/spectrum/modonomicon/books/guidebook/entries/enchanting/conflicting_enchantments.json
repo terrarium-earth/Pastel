@@ -24,7 +24,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.conflicting_enchantments.name",
       "item": {
-        "item": "minecraft:diamond_chestplate",
+        "item": "minecraft:diamond_chestplate"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -44,7 +45,6 @@
               "lvl": "3s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.conflicting_enchantments.page0.text"
     },

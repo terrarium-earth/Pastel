@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:ender_splice",
+      "item": {
+        "item": "spectrum:ender_splice"
+      },
       "text": "book.spectrum.guidebook.ender_splice.page0.text",
       "title": "item.spectrum.ender_splice"
     },
@@ -35,7 +37,8 @@
       },
       "title": "enchantment.minecraft.unbreaking",
       "item": {
-        "item": "spectrum:ender_splice",
+        "item": "spectrum:ender_splice"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -43,7 +46,6 @@
               "lvl": "3s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.ender_splice.page2.text"
     },
@@ -55,7 +57,8 @@
       },
       "title": "enchantment.spectrum.resonance",
       "item": {
-        "item": "spectrum:ender_splice",
+        "item": "spectrum:ender_splice"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -63,7 +66,6 @@
               "lvl": "1s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.ender_splice.page3.text"
     }

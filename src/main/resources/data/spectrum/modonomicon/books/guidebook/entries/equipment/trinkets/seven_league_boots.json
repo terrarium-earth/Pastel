@@ -39,7 +39,8 @@
       },
       "title": "enchantment.minecraft.power",
       "item": {
-        "item": "spectrum:seven_league_boots",
+        "item": "spectrum:seven_league_boots"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -47,7 +48,6 @@
               "lvl": "5s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.seven_league_boots.page2.text"
     }

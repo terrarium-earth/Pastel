@@ -23,7 +23,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.midnight_aberration",
-      "item": "spectrum:midnight_aberration",
+      "item": {
+        "item": "spectrum:midnight_aberration"
+      },
       "text": "book.spectrum.guidebook.midnight_aberration.page0.text"
     },
     {

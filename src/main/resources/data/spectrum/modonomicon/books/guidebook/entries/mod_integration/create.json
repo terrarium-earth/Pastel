@@ -74,7 +74,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_any_basic_shard"
       },
-      "item": "minecraft:amethyst_shard",
+      "item": {
+        "item": "minecraft:amethyst_shard"
+      },
       "text": "book.spectrum.guidebook.mod_integration.create.page1.text"
     },
     {
@@ -84,7 +86,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_pigment"
       },
-      "item": "spectrum:magenta_leaves",
+      "item": {
+        "item": "spectrum:magenta_leaves"
+      },
       "text": "book.spectrum.guidebook.mod_integration.create.page2.text"
     },
     {
@@ -94,7 +98,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_pigment"
       },
-      "item": "spectrum:magenta_log",
+      "item": {
+        "item": "spectrum:magenta_log"
+      },
       "text": "book.spectrum.guidebook.mod_integration.create.page3.text"
     },
     {
@@ -104,7 +110,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_quitoxic_reeds"
       },
-      "item": "spectrum:quitoxic_reeds",
+      "item": {
+        "item": "spectrum:quitoxic_reeds"
+      },
       "text": "book.spectrum.guidebook.mod_integration.create.page4.text"
     },
     {
@@ -114,7 +122,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_amaranth_bushel"
       },
-      "item": "spectrum:amaranth_bushel",
+      "item": {
+        "item": "spectrum:amaranth_bushel"
+      },
       "text": "book.spectrum.guidebook.mod_integration.create.page5.text"
     },
     {
@@ -124,7 +134,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_frostbite_crystal"
       },
-      "item": "spectrum:frostbite_crystal",
+      "item": {
+        "item": "spectrum:frostbite_crystal"
+      },
       "text": "book.spectrum.guidebook.mod_integration.create.page6.text"
     },
     {
@@ -134,7 +146,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_blazing_crystal"
       },
-      "item": "spectrum:blazing_crystal",
+      "item": {
+        "item": "spectrum:blazing_crystal"
+      },
       "text": "book.spectrum.guidebook.mod_integration.create.page7.text"
     },
     {

@@ -22,7 +22,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.jade_vines",
-      "item": "spectrum:hibernating_jade_vine_bulb",
+      "item": {
+        "item": "spectrum:hibernating_jade_vine_bulb"
+      },
       "text": "book.spectrum.guidebook.jade_vines.page0.text"
     },
     {
@@ -38,7 +40,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.jade_vines.page2.title",
-      "item": "spectrum:germinated_jade_vine_bulb",
+      "item": {
+        "item": "spectrum:germinated_jade_vine_bulb"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/instilled_germinated_jade_vine_bulb"
@@ -49,7 +53,9 @@
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.jade_jelly",
       "anchor": "jade_jelly",
-      "item": "spectrum:jade_jelly",
+      "item": {
+        "item": "spectrum:jade_jelly"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_jade_jelly"
@@ -71,7 +77,9 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.jade_vines.page5.title",
       "anchor": "petals",
-      "item": "spectrum:jade_vine_petals",
+      "item": {
+        "item": "spectrum:jade_vine_petals"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/instilled_germinated_jade_vine_bulb"
@@ -82,7 +90,9 @@
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.moonstruck_nectar",
       "anchor": "nectar",
-      "item": "spectrum:moonstruck_nectar",
+      "item": {
+        "item": "spectrum:moonstruck_nectar"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/instilled_germinated_jade_vine_bulb"

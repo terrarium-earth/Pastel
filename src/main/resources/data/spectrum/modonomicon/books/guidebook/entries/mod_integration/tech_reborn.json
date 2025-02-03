@@ -44,7 +44,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.tech_reborn.page2.title",
-      "item": "spectrum:amethyst_ore",
+      "item": {
+        "item": "spectrum:amethyst_ore"
+      },
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:break_gemstone_ore"
@@ -54,7 +56,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.tech_reborn.page3.title",
-      "item": "minecraft:amethyst_shard",
+      "item": {
+        "item": "minecraft:amethyst_shard"
+      },
       "text": "book.spectrum.guidebook.mod_integration.tech_reborn.page3.text"
     }
   ]

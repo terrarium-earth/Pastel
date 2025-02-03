@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:gilded_book",
+      "item": {
+        "item": "spectrum:gilded_book"
+      },
       "title": "item.spectrum.gilded_book",
       "text": "book.spectrum.guidebook.gilded_book.page0.text"
     },

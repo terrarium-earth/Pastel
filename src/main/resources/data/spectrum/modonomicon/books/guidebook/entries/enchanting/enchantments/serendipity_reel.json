@@ -34,7 +34,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "spectrum:lagoon_rod",
+        "item": "spectrum:lagoon_rod"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -42,7 +43,6 @@
               "lvl": "2s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.serendipity_reel.page1.text"
     },

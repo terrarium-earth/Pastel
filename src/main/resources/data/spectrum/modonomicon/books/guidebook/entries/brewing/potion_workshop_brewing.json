@@ -1,7 +1,9 @@
 {
   "name": "book.spectrum.guidebook.potion_workshop_brewing.name",
   "icon": {
-    "item": "minecraft:potion",
+    "item": {
+      "item": "minecraft:potion"
+    },
     "nbt": {
       "CustomPotionColor": 16776960
     }

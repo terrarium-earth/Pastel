@@ -27,7 +27,9 @@
         "advancement_id": "spectrum:break_cracked_dragonbone"
       },
       "anchor": "dragonbone_chunks",
-      "item": "spectrum:dragonbone_chunk",
+      "item": {
+        "item": "spectrum:dragonbone_chunk"
+      },
       "text": "book.spectrum.guidebook.dragonbone.page1.text"
     },
     {

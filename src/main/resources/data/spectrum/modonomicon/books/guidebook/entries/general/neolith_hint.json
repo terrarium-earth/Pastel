@@ -21,7 +21,9 @@
       "title": "book.spectrum.guidebook.ideas.small_clue",
       "completion_advancement": "spectrum:triggers/hints/failing_page0",
       "cost": {
-        "item": "spectrum:stratine_fragments",
+        "item": {
+          "item": "spectrum:stratine_fragments"
+        },
         "count": 8
       },
       "text": "book.spectrum.guidebook.ideas.failing.page0.text"
@@ -30,7 +32,9 @@
       "type": "spectrum:hint",
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": "spectrum:stratine_fragments",
+        "item": {
+          "item": "spectrum:stratine_fragments"
+        },
         "count": 24
       },
       "text": "book.spectrum.guidebook.ideas.failing.page1.text",

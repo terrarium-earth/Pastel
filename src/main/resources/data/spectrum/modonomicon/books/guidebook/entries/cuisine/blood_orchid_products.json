@@ -18,7 +18,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.blood_orchid_products.name",
-      "item": "spectrum:bloodboil_syrup",
+      "item": {
+        "item": "spectrum:bloodboil_syrup"
+      },
       "text": "book.spectrum.guidebook.blood_orchid_products.page0.text"
     },
     {

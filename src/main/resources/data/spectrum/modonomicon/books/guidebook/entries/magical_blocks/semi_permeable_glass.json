@@ -18,7 +18,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.semi_permeable_glass",
-      "item": "spectrum:amethyst_semi_permeable_glass",
+      "item": {
+        "item": "spectrum:amethyst_semi_permeable_glass"
+      },
       "text": "book.spectrum.guidebook.semi_permeable_glass.page0.text"
     },
     {

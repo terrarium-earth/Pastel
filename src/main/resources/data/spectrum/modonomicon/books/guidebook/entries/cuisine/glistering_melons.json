@@ -18,7 +18,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.glistering_melons.page0.title",
-      "item": "minecraft:glistering_melon_slice",
+      "item": {
+        "item": "minecraft:glistering_melon_slice"
+      },
       "text": "book.spectrum.guidebook.glistering_melons.page0.text"
     },
     {

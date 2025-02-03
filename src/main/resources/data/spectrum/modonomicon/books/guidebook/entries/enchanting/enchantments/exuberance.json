@@ -25,7 +25,8 @@
       "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "spectrum:multitool",
+        "item": "spectrum:multitool"
+      },
         "nbt": {
           "Enchantments": [
             {
@@ -33,7 +34,6 @@
               "lvl": "5s"
             }
           ]
-        }
       },
       "text": "book.spectrum.guidebook.exuberance.page1.text"
     },

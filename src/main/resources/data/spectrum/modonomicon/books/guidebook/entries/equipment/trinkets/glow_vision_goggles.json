@@ -22,7 +22,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:glow_vision_goggles",
+      "item": {
+        "item": "spectrum:glow_vision_goggles"
+      },
       "text": "book.spectrum.guidebook.glow_vision_goggles.page0.text",
       "title": "item.spectrum.glow_vision_goggles"
     },

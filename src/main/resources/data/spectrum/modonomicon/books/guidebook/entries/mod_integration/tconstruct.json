@@ -36,7 +36,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/blocks/crystal_apothecary"
       },
-      "item": "spectrum:crystal_apothecary",
+      "item": {
+        "item": "spectrum:crystal_apothecary"
+      },
       "text": "book.spectrum.guidebook.crystal_apothecary_harvesting"
     },
     {
@@ -46,7 +48,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/enchantments/resonance_usage"
       },
-      "item": "spectrum:resonant_pickaxe",
+      "item": {
+        "item": "spectrum:resonant_pickaxe"
+      },
       "text": "book.spectrum.guidebook.resonance_harvesting"
     }
   ]

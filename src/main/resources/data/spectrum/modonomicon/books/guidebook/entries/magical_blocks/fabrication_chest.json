@@ -17,7 +17,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:fabrication_chest",
+      "item": {
+        "item": "spectrum:fabrication_chest"
+      },
       "text": "book.spectrum.guidebook.fabrication_chest.page0.text",
       "title": "block.spectrum.fabrication_chest"
     },
