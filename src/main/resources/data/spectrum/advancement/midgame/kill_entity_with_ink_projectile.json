@@ -4,7 +4,7 @@
     "icon": {
       "id": "spectrum:paintbrush",
       "components": {
-        "spectrum:ink_color": "red"
+        "spectrum:ink_color": "spectrum:red"
       }
     },
     "title": {

@@ -42,7 +42,7 @@ public class InkContainerInteractionCriterion extends AbstractCriterion<InkConta
 				ItemPredicate.CODEC.optionalFieldOf("item", ItemPredicate.Builder.create().build()).forGetter(Conditions::itemPredicate),
 				CodecHelper.registryMap(SpectrumRegistries.INK_COLORS, LongRange.CODEC).forGetter(Conditions::colorRanges),
 				ColorPredicate.CODEC.optionalFieldOf("change_color", ColorPredicate.ANY).forGetter(Conditions::changeColorPredicate),
-				LongRange.CODEC.optionalFieldOf("change_range", LongRange.ANY).forGetter(Conditions::changeRange)
+				LongRange.CODEC.optionalFieldOf("change_amount", LongRange.ANY).forGetter(Conditions::changeRange)
 		).apply(instance, Conditions::new));
 		
 		public boolean matches(ItemStack stack, Map<InkColor, Long> colors, InkColor changeColor, long change) {
