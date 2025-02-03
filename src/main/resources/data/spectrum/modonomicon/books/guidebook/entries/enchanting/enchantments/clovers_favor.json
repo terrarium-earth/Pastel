@@ -22,15 +22,18 @@
       "title": "enchantment.spectrum.clovers_favor"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "minecraft:iron_sword",
-        "components": {
-          "enchantments": {
-            "spectrum:cloaked/clovers_favor": 3
-          }
-        }
+        "item": "minecraft:iron_sword"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "spectrum:cloaked/clovers_favor",
+              "lvl": "3s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.clovers_favor.page1.text"
     },

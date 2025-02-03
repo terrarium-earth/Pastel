@@ -36,7 +36,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_pigment"
       },
-      "item": "spectrum:magenta_leaves",
+      "item": {
+        "item": "spectrum:magenta_leaves"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.leaf_crushing.text"
     },
     {
@@ -46,7 +48,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_amaranth"
       },
-      "item": "spectrum:amaranth_bushel",
+      "item": {
+        "item": "spectrum:amaranth_bushel"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.amaranth_crushing.text"
     },
     {
@@ -56,7 +60,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_any_basic_shard"
       },
-      "item": "spectrum:frostbite_crystal",
+      "item": {
+        "item": "spectrum:frostbite_crystal"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.frostbite_crystal_grinding.text"
     },
     {
@@ -66,7 +72,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_any_basic_shard"
       },
-      "item": "spectrum:blazing_crystal",
+      "item": {
+        "item": "spectrum:blazing_crystal"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.blazing_crystal_grinding.text"
     },
     {
@@ -76,7 +84,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_any_basic_shard"
       },
-      "item": "minecraft:amethyst_shard",
+      "item": {
+        "item": "minecraft:amethyst_shard"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.gemstone_grinding.text"
     },
     {
@@ -86,7 +96,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_any_basic_shard"
       },
-      "item": "spectrum:quitoxic_reeds",
+      "item": {
+        "item": "spectrum:quitoxic_reeds"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.quitoxic_reeds_grinding.text"
     },
     {
@@ -96,7 +108,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_mob_head_using_treasure_hunter"
       },
-      "item": "spectrum:elder_guardian_head",
+      "item": {
+        "item": "spectrum:elder_guardian_head"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.elder_guardian_memory.text"
     },
     {
@@ -106,7 +120,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_mob_head_using_treasure_hunter"
       },
-      "item": "spectrum:endermite_head",
+      "item": {
+        "item": "spectrum:endermite_head"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.endermite_memory.text"
     },
     {
@@ -154,7 +170,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_cookbooks/brewers_handbook"
       },
-      "item": "spectrum:sedatives",
+      "item": {
+        "item": "spectrum:sedatives"
+      },
       "text": "book.spectrum.guidebook.mod_integration.neepmeat.sedatives.text"
     }
   ]

@@ -24,7 +24,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.bloodstone.name",
       "item": {
-        "id": "spectrum:raw_bloodstone"
+        "item": "spectrum:raw_bloodstone"
       },
       "text": "book.spectrum.guidebook.bloodstone.page0.text"
     },

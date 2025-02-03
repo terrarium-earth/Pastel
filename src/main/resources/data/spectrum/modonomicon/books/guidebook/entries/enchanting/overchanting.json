@@ -21,15 +21,18 @@
   "y": -2,
   "pages": [
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.overchanting.name",
       "item": {
-        "item": "minecraft:enchanted_book",
-        "components": {
-          "stored_enchantments": {
-            "minecraft:fortune": 5
-          }
-        }
+        "item": "minecraft:enchanted_book"
+      },
+        "nbt": {
+          "StoredEnchantments": [
+            {
+              "id": "minecraft:fortune",
+              "lvl": "5s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.overchanting.page0.text"
     },

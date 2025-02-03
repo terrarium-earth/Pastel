@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:block_breaker"
+        "item": "spectrum:block_breaker"
       },
       "text": "book.spectrum.guidebook.block_breaker.page0.text",
       "title": "block.spectrum.block_breaker"

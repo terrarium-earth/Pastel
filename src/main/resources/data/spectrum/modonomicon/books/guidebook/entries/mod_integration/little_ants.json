@@ -32,7 +32,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:jade_vine_petal_block"
+        "item": "spectrum:jade_vine_petal_block"
       },
       "condition": {
         "type": "modonomicon:advancement",
@@ -43,7 +43,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "minecraft:orange_dye"
+        "item": "minecraft:orange_dye"
       },
       "condition": {
         "type": "modonomicon:advancement",
@@ -54,7 +54,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:orange_pigment"
+        "item": "spectrum:orange_pigment"
       },
       "condition": {
         "type": "modonomicon:advancement",

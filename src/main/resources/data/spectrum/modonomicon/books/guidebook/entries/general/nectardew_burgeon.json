@@ -23,7 +23,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.nectardew_burgeon.name",
       "item": {
-        "id": "spectrum:nectardew_burgeon"
+        "item": "spectrum:nectardew_burgeon"
       },
       "text": "book.spectrum.guidebook.nectardew_burgeon.page0.text"
     },

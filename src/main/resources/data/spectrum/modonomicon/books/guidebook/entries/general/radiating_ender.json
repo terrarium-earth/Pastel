@@ -24,7 +24,7 @@
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.radiating_ender",
       "item": {
-        "id": "spectrum:radiating_ender"
+        "item": "spectrum:radiating_ender"
       },
       "text": "book.spectrum.guidebook.radiating_ender.page1.text"
     }

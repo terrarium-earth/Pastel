@@ -20,7 +20,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.azurite.name",
       "item": {
-        "id": "spectrum:raw_azurite"
+        "item": "spectrum:raw_azurite"
       },
       "text": "book.spectrum.guidebook.azurite.page0.text"
     },

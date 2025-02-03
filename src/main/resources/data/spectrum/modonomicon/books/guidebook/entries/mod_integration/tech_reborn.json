@@ -45,7 +45,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.tech_reborn.page2.title",
       "item": {
-        "id": "spectrum:amethyst_ore"
+        "item": "spectrum:amethyst_ore"
       },
       "condition": {
         "type": "modonomicon:advancement",
@@ -57,7 +57,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.tech_reborn.page3.title",
       "item": {
-        "id": "minecraft:amethyst_shard"
+        "item": "minecraft:amethyst_shard"
       },
       "text": "book.spectrum.guidebook.mod_integration.tech_reborn.page3.text"
     }

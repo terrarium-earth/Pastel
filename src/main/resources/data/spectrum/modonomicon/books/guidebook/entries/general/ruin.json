@@ -23,7 +23,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:bottle_of_ruin"
+        "item": "spectrum:bottle_of_ruin"
       },
       "text": "book.spectrum.guidebook.ruin.page0.text",
       "title": "book.spectrum.guidebook.ruin.name"

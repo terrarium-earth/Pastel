@@ -19,7 +19,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.moonstone_shards.name",
       "item": {
-        "id": "spectrum:moonstone_shard"
+        "item": "spectrum:moonstone_shard"
       },
       "text": "book.spectrum.guidebook.moonstone_shards.page0.text"
     },

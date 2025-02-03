@@ -19,7 +19,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.stratine.name",
       "item": {
-        "id": "spectrum:stratine_fragments"
+        "item": "spectrum:stratine_fragments"
       },
       "text": "book.spectrum.guidebook.stratine.page0.text"
     },
@@ -40,7 +40,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/carry_too_many_heavy_gravity_blocks"
       },
-      "item": "spectrum:stratine_floatblock",
+      "item": {
+        "item": "spectrum:stratine_floatblock"
+      },
       "text": "book.spectrum.guidebook.stratine.page2.text"
     },
     {

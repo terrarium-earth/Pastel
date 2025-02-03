@@ -22,15 +22,18 @@
       "title": "enchantment.spectrum.steadfast"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "spectrum:multitool",
-        "components": {
-          "enchantments": {
-            "spectrum:cloaked/steadfast": 1
-          }
-        }
+        "item": "spectrum:multitool"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "spectrum:cloaked/steadfast",
+              "lvl": "1s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.steadfast.page1.text"
     },

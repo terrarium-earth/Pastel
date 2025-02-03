@@ -108,7 +108,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/break_black_materia"
       },
-      "item": "spectrum:midnight_solution_bucket",
+      "item": {
+        "item": "spectrum:midnight_solution_bucket"
+      },
       "text": "book.spectrum.guidebook.mod_integration.spelunkery.black_materia_sluice.text"
     }
   ]

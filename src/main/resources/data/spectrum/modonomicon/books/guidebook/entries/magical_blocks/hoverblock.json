@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:hover_block"
+        "item": "spectrum:hover_block"
       },
       "text": "book.spectrum.guidebook.hoverblock.page0.text",
       "title": "block.spectrum.hover_block"

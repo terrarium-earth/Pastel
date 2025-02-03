@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:ender_glass"
+        "item": "spectrum:ender_glass"
       },
       "text": "book.spectrum.guidebook.ender_glass.page0.text",
       "title": "block.spectrum.ender_glass"

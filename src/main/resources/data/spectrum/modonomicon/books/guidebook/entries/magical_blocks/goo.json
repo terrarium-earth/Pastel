@@ -19,7 +19,7 @@
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.goo",
       "item": {
-        "id": "spectrum:goo_bucket"
+        "item": "spectrum:goo_bucket"
       },
       "text": "book.spectrum.guidebook.goo.page0.text"
     },

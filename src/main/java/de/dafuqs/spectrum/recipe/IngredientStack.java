@@ -21,7 +21,7 @@ public class IngredientStack implements CustomIngredient {
 	private final ComponentPredicate componentPredicate;
 	private final int count;
 	
-	// Thse are from the codec, to handle encoding
+	// These are from the codec, to handle encoding
 	private Item item = null;
 	private TagKey<Item> tag = null;
 	

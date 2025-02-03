@@ -25,7 +25,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:midnight_chip"
+        "item": "spectrum:midnight_chip"
       },
       "text": "book.spectrum.guidebook.midnight_chip.page0.text"
     },

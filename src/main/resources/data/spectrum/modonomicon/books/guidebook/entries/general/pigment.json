@@ -55,7 +55,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/black"
       },
-      "item": "spectrum:black_pigment",
+      "item": {
+        "item": "spectrum:black_pigment"
+      },
       "title": "item.spectrum.black_pigment",
       "text": "book.spectrum.guidebook.pigment.page2.text"
     },
@@ -66,7 +68,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/blue"
       },
-      "item": "spectrum:blue_pigment",
+      "item": {
+        "item": "spectrum:blue_pigment"
+      },
       "title": "item.spectrum.blue_pigment",
       "text": "book.spectrum.guidebook.pigment.page3.text"
     },
@@ -77,7 +81,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/brown"
       },
-      "item": "spectrum:brown_pigment",
+      "item": {
+        "item": "spectrum:brown_pigment"
+      },
       "title": "item.spectrum.brown_pigment",
       "text": "book.spectrum.guidebook.pigment.page4.text"
     },
@@ -88,7 +94,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/cyan"
       },
-      "item": "spectrum:cyan_pigment",
+      "item": {
+        "item": "spectrum:cyan_pigment"
+      },
       "title": "item.spectrum.cyan_pigment",
       "text": "book.spectrum.guidebook.pigment.page5.text"
     },
@@ -99,7 +107,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/gray"
       },
-      "item": "spectrum:gray_pigment",
+      "item": {
+        "item": "spectrum:gray_pigment"
+      },
       "title": "item.spectrum.gray_pigment",
       "text": "book.spectrum.guidebook.pigment.page6.text"
     },
@@ -110,7 +120,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/green"
       },
-      "item": "spectrum:green_pigment",
+      "item": {
+        "item": "spectrum:green_pigment"
+      },
       "title": "item.spectrum.green_pigment",
       "text": "book.spectrum.guidebook.pigment.page7.text"
     },
@@ -121,7 +133,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/light_blue"
       },
-      "item": "spectrum:light_blue_pigment",
+      "item": {
+        "item": "spectrum:light_blue_pigment"
+      },
       "title": "item.spectrum.light_blue_pigment",
       "text": "book.spectrum.guidebook.pigment.page8.text"
     },
@@ -132,7 +146,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/light_gray"
       },
-      "item": "spectrum:light_gray_pigment",
+      "item": {
+        "item": "spectrum:light_gray_pigment"
+      },
       "title": "item.spectrum.light_gray_pigment",
       "text": "book.spectrum.guidebook.pigment.page9.text"
     },
@@ -143,7 +159,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/lime"
       },
-      "item": "spectrum:lime_pigment",
+      "item": {
+        "item": "spectrum:lime_pigment"
+      },
       "title": "item.spectrum.lime_pigment",
       "text": "book.spectrum.guidebook.pigment.page10.text"
     },
@@ -154,7 +172,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/magenta"
       },
-      "item": "spectrum:magenta_pigment",
+      "item": {
+        "item": "spectrum:magenta_pigment"
+      },
       "title": "item.spectrum.magenta_pigment",
       "text": "book.spectrum.guidebook.pigment.page11.text"
     },
@@ -165,7 +185,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/orange"
       },
-      "item": "spectrum:orange_pigment",
+      "item": {
+        "item": "spectrum:orange_pigment"
+      },
       "title": "item.spectrum.orange_pigment",
       "text": "book.spectrum.guidebook.pigment.page12.text"
     },
@@ -176,7 +198,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/pink"
       },
-      "item": "spectrum:pink_pigment",
+      "item": {
+        "item": "spectrum:pink_pigment"
+      },
       "title": "item.spectrum.pink_pigment",
       "text": "book.spectrum.guidebook.pigment.page13.text"
     },
@@ -187,7 +211,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/purple"
       },
-      "item": "spectrum:purple_pigment",
+      "item": {
+        "item": "spectrum:purple_pigment"
+      },
       "title": "item.spectrum.purple_pigment",
       "text": "book.spectrum.guidebook.pigment.page14.text"
     },
@@ -198,7 +224,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/red"
       },
-      "item": "spectrum:red_pigment",
+      "item": {
+        "item": "spectrum:red_pigment"
+      },
       "title": "item.spectrum.red_pigment",
       "text": "book.spectrum.guidebook.pigment.page15.text"
     },
@@ -209,7 +237,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/white"
       },
-      "item": "spectrum:white_pigment",
+      "item": {
+        "item": "spectrum:white_pigment"
+      },
       "title": "item.spectrum.white_pigment",
       "text": "book.spectrum.guidebook.pigment.page16.text"
     },
@@ -220,7 +250,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_pigment/yellow"
       },
-      "item": "spectrum:yellow_pigment",
+      "item": {
+        "item": "spectrum:yellow_pigment"
+      },
       "title": "item.spectrum.yellow_pigment",
       "text": "book.spectrum.guidebook.pigment.page17.text"
     },

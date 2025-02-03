@@ -22,7 +22,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:blood_orchid_petal"
+        "item": "spectrum:blood_orchid_petal"
       },
       "title": "item.spectrum.blood_orchid_petal",
       "text": "book.spectrum.guidebook.blood_orchid_petal.page0.text"

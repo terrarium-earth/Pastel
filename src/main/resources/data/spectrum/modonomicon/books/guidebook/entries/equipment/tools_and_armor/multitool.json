@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:multitool"
+        "item": "spectrum:multitool"
       },
       "text": "book.spectrum.guidebook.multitool.page0.text",
       "title": "item.spectrum.multitool"

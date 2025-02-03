@@ -51,7 +51,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.biomemakeover.page3.title",
       "item": {
-        "id": "biomemakeover:illunite_shard"
+        "item": "biomemakeover:illunite_shard"
       },
       "condition": {
         "type": "modonomicon:advancement",

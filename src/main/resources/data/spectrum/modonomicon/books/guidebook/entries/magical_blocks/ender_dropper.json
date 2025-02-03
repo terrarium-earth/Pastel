@@ -19,7 +19,7 @@
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.ender_dropper",
       "item": {
-        "id": "spectrum:ender_dropper"
+        "item": "spectrum:ender_dropper"
       },
       "text": "book.spectrum.guidebook.ender_dropper.page0.text"
     },

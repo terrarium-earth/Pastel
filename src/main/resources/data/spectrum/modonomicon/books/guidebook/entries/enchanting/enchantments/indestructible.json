@@ -22,15 +22,18 @@
       "title": "enchantment.spectrum.indestructible"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "spectrum:multitool",
-        "components": {
-          "enchantments": {
-            "spectrum:cloaked/indestructible": 1
-          }
-        }
+        "item": "spectrum:multitool"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "spectrum:cloaked/indestructible",
+              "lvl": "1s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.indestructible.page1.text"
     },

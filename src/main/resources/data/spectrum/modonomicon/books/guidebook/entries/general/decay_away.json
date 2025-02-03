@@ -26,7 +26,7 @@
       "title": "block.spectrum.decay_away",
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:bottle_of_decay_away"
+        "item": "spectrum:bottle_of_decay_away"
       },
       "text": "book.spectrum.guidebook.decay_away.page0.text"
     },

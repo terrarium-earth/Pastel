@@ -39,7 +39,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:black_materia"
+        "item": "spectrum:black_materia"
       },
       "condition": {
         "type": "modonomicon:advancement",

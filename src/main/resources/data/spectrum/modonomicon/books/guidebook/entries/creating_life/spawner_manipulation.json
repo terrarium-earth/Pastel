@@ -26,7 +26,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.harvesting_spawners",
       "item": {
-        "id": "spectrum:resonant_pickaxe"
+        "item": "spectrum:resonant_pickaxe"
       },
       "text": "book.spectrum.guidebook.spawner_manipulation.page0.text"
     },

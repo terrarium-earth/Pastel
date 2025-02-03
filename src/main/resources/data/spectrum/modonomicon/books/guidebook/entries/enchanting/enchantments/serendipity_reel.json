@@ -31,15 +31,18 @@
       "title": "book.spectrum.guidebook.serendipity_reel.name"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "spectrum:lagoon_rod",
-        "components": {
-          "enchantments": {
-            "spectrum:cloaked/serendipity_reel": 2
-          }
-        }
+        "item": "spectrum:lagoon_rod"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "spectrum:cloaked/serendipity_reel",
+              "lvl": "2s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.serendipity_reel.page1.text"
     },

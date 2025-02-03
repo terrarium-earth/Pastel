@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:ender_splice"
+        "item": "spectrum:ender_splice"
       },
       "text": "book.spectrum.guidebook.ender_splice.page0.text",
       "title": "item.spectrum.ender_splice"
@@ -30,36 +30,42 @@
       "recipe_id": "spectrum:pedestal/tier3/ender_splice"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/build_enchanting_structure"
       },
       "title": "enchantment.minecraft.unbreaking",
       "item": {
-        "item": "spectrum:ender_splice",
-        "components": {
-          "enchantments": {
-            "minecraft:unbreaking": 3
-          }
-        }
+        "item": "spectrum:ender_splice"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "minecraft:unbreaking",
+              "lvl": "3s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.ender_splice.page2.text"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/create_resonance_enchanted_book"
       },
       "title": "enchantment.spectrum.resonance",
       "item": {
-        "item": "spectrum:ender_splice",
-        "components": {
-          "enchantments": {
-            "spectrum:cloaked/resonance": 1
-          }
-        }
+        "item": "spectrum:ender_splice"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "spectrum:cloaked/resonance",
+              "lvl": "1s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.ender_splice.page3.text"
     }

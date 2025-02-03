@@ -23,7 +23,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:connection_node"
+        "item": "spectrum:connection_node"
       },
       "title": "book.spectrum.guidebook.pastel_upgrades.enhancing.title",
       "text": "book.spectrum.guidebook.pastel_upgrades.enhancing.text"

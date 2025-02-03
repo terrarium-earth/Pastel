@@ -36,7 +36,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/enchantments/resonance_usage"
       },
-      "item": "dimdoors:black_fabric",
+      "item": {
+        "item": "dimdoors:black_fabric"
+      },
       "text": "book.spectrum.guidebook.mod_integration.dimdoors.altered_fabric_resonance.text"
     }
   ]

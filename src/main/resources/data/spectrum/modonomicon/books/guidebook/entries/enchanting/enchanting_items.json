@@ -36,7 +36,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "minecraft:enchanted_book"
+        "item": "minecraft:enchanted_book"
       },
       "title": "book.spectrum.guidebook.enchanting_items.page2.title",
       "text": "book.spectrum.guidebook.enchanting_items.page2.text"

@@ -29,7 +29,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:ethereal_platform"
+        "item": "spectrum:ethereal_platform"
       },
       "title": "block.spectrum.ethereal_platform",
       "text": "book.spectrum.guidebook.ethereal_platform.page0.text"

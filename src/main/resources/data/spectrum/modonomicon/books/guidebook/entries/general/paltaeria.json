@@ -23,7 +23,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.paltaeria.name",
       "item": {
-        "id": "spectrum:paltaeria_fragments"
+        "item": "spectrum:paltaeria_fragments"
       },
       "text": "book.spectrum.guidebook.paltaeria.page0.text"
     },
@@ -44,7 +44,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/carry_too_many_low_gravity_blocks"
       },
-      "item": "spectrum:paltaeria_floatblock",
+      "item": {
+        "item": "spectrum:paltaeria_floatblock"
+      },
       "text": "book.spectrum.guidebook.paltaeria.page2.text"
     },
     {

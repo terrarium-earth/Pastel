@@ -39,7 +39,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.botania.page2.title",
       "item": {
-        "id": "botania:magenta_petal"
+        "item": "botania:magenta_petal"
       },
       "text": "book.spectrum.guidebook.mod_integration.botania.page2.text"
     },
@@ -63,7 +63,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "botania:black_hole_talisman"
+        "item": "botania:black_hole_talisman"
       },
       "text": "book.spectrum.guidebook.mod_integration.botania.page20.text",
       "title": "book.spectrum.guidebook.mod_integration.botania.page20.title"
@@ -95,7 +95,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/equipment/resonant_pickaxe"
       },
-      "item": "botania:enchanted_soil",
+      "item": {
+        "item": "botania:enchanted_soil"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.page8.text"
     },
     {
@@ -105,7 +107,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/brew_potion_in_potion_workshop"
       },
-      "item": "botania:black_lotus",
+      "item": {
+        "item": "botania:black_lotus"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.black_lotus_reagent.text"
     },
     {
@@ -115,7 +119,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/brew_potion_in_potion_workshop"
       },
-      "item": "botania:blacker_lotus",
+      "item": {
+        "item": "botania:blacker_lotus"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.blacker_lotus_reagent.text"
     },
     {
@@ -125,7 +131,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/brew_potion_in_potion_workshop"
       },
-      "item": "spectrum:blackest_lotus",
+      "item": {
+        "item": "spectrum:blackest_lotus"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.blackest_lotus_reagent.text"
     },
     {
@@ -135,7 +143,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/brew_potion_in_potion_workshop"
       },
-      "item": "spectrum:least_black_lotus",
+      "item": {
+        "item": "spectrum:least_black_lotus"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.least_black_lotus_reagent.text"
     },
     {
@@ -145,7 +155,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/brew_potion_in_potion_workshop"
       },
-      "item": "botania:life_essence",
+      "item": {
+        "item": "botania:life_essence"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.life_essence_reagent.text"
     },
     {
@@ -155,7 +167,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/brew_potion_in_potion_workshop"
       },
-      "item": "botania:mana_powder",
+      "item": {
+        "item": "botania:mana_powder"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.mana_powder_reagent.text"
     },
     {
@@ -165,7 +179,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/brew_potion_in_potion_workshop"
       },
-      "item": "botania:pixie_dust",
+      "item": {
+        "item": "botania:pixie_dust"
+      },
       "text": "book.spectrum.guidebook.mod_integration.botania.pixie_dust_reagent.text"
     }
   ]

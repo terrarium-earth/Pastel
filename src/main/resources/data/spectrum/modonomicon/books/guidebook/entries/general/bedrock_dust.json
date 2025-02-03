@@ -23,7 +23,7 @@
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.bedrock_dust",
       "item": {
-        "id": "spectrum:bedrock_dust"
+        "item": "spectrum:bedrock_dust"
       },
       "text": "book.spectrum.guidebook.bedrock_dust.page0.text"
     },

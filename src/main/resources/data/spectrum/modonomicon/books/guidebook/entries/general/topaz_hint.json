@@ -21,7 +21,9 @@
       "title": "book.spectrum.guidebook.ideas.where_to_find",
       "completion_advancement": "spectrum:triggers/hints/topaz_page0",
       "cost": {
-        "item": "minecraft:amethyst_shard",
+        "item": {
+          "item": "minecraft:amethyst_shard"
+        },
         "count": 16
       },
       "text": "book.spectrum.guidebook.ideas.topaz.page0.text"

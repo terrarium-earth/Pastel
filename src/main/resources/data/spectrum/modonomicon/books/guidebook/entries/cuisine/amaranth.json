@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:amaranth_grains"
+        "item": "spectrum:amaranth_grains"
       },
       "title": "block.spectrum.amaranth",
       "text": "book.spectrum.guidebook.amaranth.page0.text"

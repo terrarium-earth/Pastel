@@ -36,19 +36,24 @@
         "advancement_id": "spectrum:unlocks/equipment/molten_rod"
       },
       "title": "book.spectrum.guidebook.mod_integration.gofish.page1.title",
-      "item": "spectrum:molten_rod",
+      "item": {
+        "item": "spectrum:molten_rod"
+      },
       "text": "book.spectrum.guidebook.mod_integration.gofish.page1.text"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.gofish.page2.title",
       "item": {
-        "item": "minecraft:enchanted_book",
-        "components": {
-          "stored_enchantments": {
-            "gofish:deepfry": 1
-          }
-        }
+        "item": "minecraft:enchanted_book"
+      },
+        "nbt": {
+          "StoredEnchantments": [
+            {
+              "id": "gofish:deepfry",
+              "lvl": "1s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.mod_integration.gofish.page2.text"
     },

@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:redstone_timer"
+        "item": "spectrum:redstone_timer"
       },
       "text": "book.spectrum.guidebook.redstone_timer.page0.text",
       "title": "block.spectrum.redstone_timer"

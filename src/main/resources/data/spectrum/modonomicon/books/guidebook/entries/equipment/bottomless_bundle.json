@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:bottomless_bundle"
+        "item": "spectrum:bottomless_bundle"
       },
       "text": "book.spectrum.guidebook.bottomless_bundle.page0.text",
       "title": "item.spectrum.bottomless_bundle"
@@ -42,36 +42,42 @@
       "text": "book.spectrum.guidebook.bottomless_bundle.page3.text"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/build_enchanting_structure"
       },
       "title": "enchantment.minecraft.power",
       "item": {
-        "item": "spectrum:bottomless_bundle",
-        "components": {
-          "enchantments": {
-            "minecraft:power": 5
-          }
-        }
+        "item": "spectrum:bottomless_bundle"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "minecraft:power",
+              "lvl": "5s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.bottomless_bundle.page4.text"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/build_enchanting_structure"
       },
       "title": "enchantment.spectrum.voiding",
       "item": {
-        "item": "spectrum:bottomless_bundle",
-        "components": {
-          "enchantments": {
-            "spectrum:cloaked/voiding": 1
-          }
-        }
+        "item": "spectrum:bottomless_bundle"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "spectrum:cloaked/voiding",
+              "lvl": "1s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.bottomless_bundle.page5.text"
     }

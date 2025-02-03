@@ -22,15 +22,18 @@
       "title": "enchantment.spectrum.disarming"
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "minecraft:iron_sword",
-        "components": {
-          "enchantments": {
-            "spectrum:cloaked/disarming": 2
-          }
-        }
+        "item": "minecraft:iron_sword"
+      },
+        "nbt": {
+          "Enchantments": [
+            {
+              "id": "spectrum:cloaked/disarming",
+              "lvl": "2s"
+            }
+          ]
       },
       "text": "book.spectrum.guidebook.disarming.page1.text"
     },

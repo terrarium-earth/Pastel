@@ -62,7 +62,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/blocks/potion_workshop"
       },
-      "item": "hexcasting:charged_amethyst",
+      "item": {
+        "item": "hexcasting:charged_amethyst"
+      },
       "text": "book.spectrum.guidebook.mod_integration.hexcasting.page4.text"
     }
   ]

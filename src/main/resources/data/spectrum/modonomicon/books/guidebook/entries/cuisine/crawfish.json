@@ -22,7 +22,9 @@
         "advancement_id": "spectrum:hidden/collect_crawfish"
       },
       "anchor": "crawfish",
-      "item": "spectrum:crawfish",
+      "item": {
+        "item": "spectrum:crawfish"
+      },
       "text": "book.spectrum.guidebook.crawfish.page0.text",
       "title": "item.spectrum.crawfish"
     }

@@ -23,7 +23,7 @@
       "type": "modonomicon:spotlight",
       "title": "item.spectrum.vegetal",
       "item": {
-        "id": "spectrum:vegetal"
+        "item": "spectrum:vegetal"
       },
       "text": "book.spectrum.guidebook.vegetal.page0.text"
     },

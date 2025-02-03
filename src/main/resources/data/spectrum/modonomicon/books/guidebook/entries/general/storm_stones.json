@@ -24,7 +24,7 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.storm_stones.name",
       "item": {
-        "id": "spectrum:storm_stone"
+        "item": "spectrum:storm_stone"
       },
       "text": "book.spectrum.guidebook.storm_stones.page1.text"
     }

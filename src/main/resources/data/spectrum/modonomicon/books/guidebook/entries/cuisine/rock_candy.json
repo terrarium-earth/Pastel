@@ -37,7 +37,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:topaz_rock_candy"
+        "item": "spectrum:topaz_rock_candy"
       },
       "title": "book.spectrum.guidebook.rock_candy.page3.title",
       "condition": {

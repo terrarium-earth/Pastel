@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:bitter_oils"
+        "item": "spectrum:bitter_oils"
       },
       "text": "book.spectrum.guidebook.bitter_oils.page0.text"
     },

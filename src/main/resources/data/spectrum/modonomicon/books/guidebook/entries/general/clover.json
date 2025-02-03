@@ -19,14 +19,14 @@
       "type": "modonomicon:spotlight",
       "title": "block.spectrum.clover",
       "item": {
-        "id": "spectrum:clover"
+        "item": "spectrum:clover"
       },
       "text": "book.spectrum.guidebook.clover.clover.text"
     },
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:four_leaf_clover"
+        "item": "spectrum:four_leaf_clover"
       },
       "condition": {
         "type": "modonomicon:advancement",

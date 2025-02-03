@@ -39,7 +39,9 @@
         "advancement_id": "spectrum:midgame/tap_sweetened_jade_wine"
       },
       "anchor": "sweetened_jade_wine",
-      "item": "spectrum:moonstruck_nectar",
+      "item": {
+        "item": "spectrum:moonstruck_nectar"
+      },
       "text": "book.spectrum.guidebook.jade_wine.page2.text"
     }
   ]

@@ -32,14 +32,14 @@
       "border": false
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicom:spotlight",
       "item": {
-        "item": "minecraft:name_tag",
-        "components": {
-          "lore": [
-            "{\"text\":\"c:ores\"}"
-          ]
-        }
+        "item": "minecraft:name_tag"
+      },
+        "nbt": {
+          "display": {
+            "Name": "{\"text\":\"c:ores\"}"
+          }
       },
       "title": "book.spectrum.guidebook.pastel_network.page2.title",
       "text": "book.spectrum.guidebook.pastel_network.page2.text"

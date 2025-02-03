@@ -18,7 +18,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:redstone_sand"
+        "item": "spectrum:redstone_sand"
       },
       "text": "book.spectrum.guidebook.redstone_sand.page0.text",
       "title": "block.spectrum.redstone_sand"

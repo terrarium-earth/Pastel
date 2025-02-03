@@ -32,7 +32,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:draconic_twinsword"
+        "item": "spectrum:draconic_twinsword"
       },
       "text": "book.spectrum.guidebook.draconic_twinsword.page3.text"
     },
