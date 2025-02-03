@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.mixin.injectors;
+package de.dafuqs.spectrum.mixin;
 
 import com.llamalad7.mixinextras.injector.*;
 import com.llamalad7.mixinextras.sugar.*;

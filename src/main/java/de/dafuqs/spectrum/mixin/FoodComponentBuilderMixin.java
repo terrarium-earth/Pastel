@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.mixin.injectors;
+package de.dafuqs.spectrum.mixin;
 
 import de.dafuqs.spectrum.injectors.*;
 import net.minecraft.component.type.*;

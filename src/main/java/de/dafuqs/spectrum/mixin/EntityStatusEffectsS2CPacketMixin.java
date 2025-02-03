@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.mixin.injectors;
+package de.dafuqs.spectrum.mixin;
 
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.injectors.*;
