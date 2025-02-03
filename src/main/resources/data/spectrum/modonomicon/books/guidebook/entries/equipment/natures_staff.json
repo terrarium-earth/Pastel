@@ -27,7 +27,7 @@
       "recipe_id": "spectrum:pedestal/tier2/natures_staff"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/build_enchanting_structure"
@@ -35,13 +35,10 @@
       "title": "enchantment.minecraft.efficiency",
       "item": {
         "item": "spectrum:natures_staff",
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "minecraft:efficiency",
-              "lvl": "5s"
-            }
-          ]
+        "components": {
+          "enchantments": {
+            "minecraft:efficiency": 5
+          }
         }
       },
       "text": "book.spectrum.guidebook.natures_staff.page2.text"

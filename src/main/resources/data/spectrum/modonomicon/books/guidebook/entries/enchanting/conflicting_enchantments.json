@@ -21,29 +21,17 @@
   "y": 2,
   "pages": [
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.conflicting_enchantments.name",
       "item": {
         "item": "minecraft:diamond_chestplate",
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "minecraft:protection",
-              "lvl": "3s"
-            },
-            {
-              "id": "minecraft:blast_protection",
-              "lvl": "3s"
-            },
-            {
-              "id": "minecraft:projectile_protection",
-              "lvl": "3s"
-            },
-            {
-              "id": "minecraft:fire_protection",
-              "lvl": "3s"
-            }
-          ]
+        "components": {
+          "enchantments": {
+            "minecraft:protection": 3,
+            "minecraft:blast_protection": 3,
+            "minecraft:projectile_protection": 3,
+            "minecraft:fire_protection": 3
+          }
         }
       },
       "text": "book.spectrum.guidebook.conflicting_enchantments.page0.text"

@@ -22,17 +22,14 @@
       "title": "enchantment.spectrum.pest_control"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
         "item": "minecraft:iron_pickaxe",
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/pest_control",
-              "lvl": "1s"
-            }
-          ]
+        "components": {
+          "enchantments": {
+            "spectrum:cloaked/pest_control": 1
+          }
         }
       },
       "text": "book.spectrum.guidebook.pest_control.page1.text"

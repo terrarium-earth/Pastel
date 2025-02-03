@@ -20,9 +20,9 @@
         "items": [
           {
             "items": "spectrum:bottomless_bundle",
-            "nbt": {
-              "StoredStack": {
-                "Count": 2000000000
+            "predicates": {
+              "spectrum:bottomless_stack": {
+                "count": 2000000000
               }
             }
           }

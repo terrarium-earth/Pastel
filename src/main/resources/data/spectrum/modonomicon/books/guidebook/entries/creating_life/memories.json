@@ -2,11 +2,13 @@
   "name": "book.spectrum.guidebook.memories.name",
   "icon": {
     "item": "spectrum:memory",
-    "nbt": {
-      "EntityTag": {
+    "components": {
+      "entity_data": {
         "id": "minecraft:fox"
       },
-      "TicksToManifest": 20
+      "spectrum:memory": {
+        "ticks_to_manifest": 20
+      }
     }
   },
   "condition": {
@@ -32,15 +34,17 @@
   "y": 2,
   "pages": [
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.memories.name",
       "item": {
         "item": "spectrum:memory",
-        "nbt": {
-          "EntityTag": {
+        "components": {
+          "entity_data": {
             "id": "minecraft:fox"
           },
-          "TicksToManifest": 20
+          "spectrum:memory": {
+            "ticks_to_manifest": 20
+          }
         }
       },
       "text": "book.spectrum.guidebook.memories.page0.text"

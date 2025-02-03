@@ -40,17 +40,14 @@
       "text": "book.spectrum.guidebook.mod_integration.gofish.page1.text"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.gofish.page2.title",
       "item": {
         "item": "minecraft:enchanted_book",
-        "nbt": {
-          "StoredEnchantments": [
-            {
-              "id": "gofish:deepfry",
-              "lvl": "1s"
-            }
-          ]
+        "components": {
+          "stored_enchantments": {
+            "gofish:deepfry": 1
+          }
         }
       },
       "text": "book.spectrum.guidebook.mod_integration.gofish.page2.text"

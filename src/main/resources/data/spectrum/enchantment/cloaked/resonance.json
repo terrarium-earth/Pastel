@@ -47,7 +47,7 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#minecraft:enchantable/resonance",
+  "supported_items": "#spectrum:enchantable/resonance",
   "primary_items": "#minecraft:enchantable/mining_loot",
   "weight": 1
 }

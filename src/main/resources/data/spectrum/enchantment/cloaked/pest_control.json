@@ -34,7 +34,7 @@
     ]
   },
   "anvil_cost": 8,
-  "exclusive_set": "#spectrum:exclusion_set/pest_control",
+  "exclusive_set": "#spectrum:exclusive_set/pest_control",
   "max_cost": {
     "base": 30,
     "per_level_above_first": 0

@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.predicate.item;
+package de.dafuqs.spectrum.api.predicate.item;
 
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.components.*;

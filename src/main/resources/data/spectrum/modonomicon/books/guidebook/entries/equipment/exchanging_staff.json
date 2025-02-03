@@ -27,7 +27,7 @@
       "recipe_id": "spectrum:pedestal/tier4/exchanging_staff"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/build_enchanting_structure"
@@ -35,19 +35,16 @@
       "title": "enchantment.minecraft.fortune",
       "item": {
         "item": "spectrum:exchanging_staff",
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "minecraft:fortune",
-              "lvl": "3s"
-            }
-          ]
+        "components": {
+          "enchantments": {
+            "minecraft:fortune": 3
+          }
         }
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page2.text"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/build_enchanting_structure"
@@ -55,19 +52,16 @@
       "title": "enchantment.minecraft.silk_touch",
       "item": {
         "item": "spectrum:exchanging_staff",
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:silk_touch",
-              "lvl": "1s"
-            }
-          ]
+        "components": {
+          "enchantments": {
+            "spectrum:silk_touch": 1
+          }
         }
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page3.text"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/enchantments/resonance_usage"
@@ -75,13 +69,10 @@
       "title": "enchantment.spectrum.resonance",
       "item": {
         "item": "spectrum:exchanging_staff",
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/resonance",
-              "lvl": "1s"
-            }
-          ]
+        "components": {
+          "enchantments": {
+            "spectrum:cloaked/resonance": 1
+          }
         }
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page4.text"

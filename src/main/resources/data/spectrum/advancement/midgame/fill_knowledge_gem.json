@@ -22,8 +22,8 @@
         "items": [
           {
             "items": "spectrum:knowledge_gem",
-            "nbt": {
-              "stored_experience": 10000
+            "components": {
+              "spectrum:stored_experience": 10000
             }
           }
         ],

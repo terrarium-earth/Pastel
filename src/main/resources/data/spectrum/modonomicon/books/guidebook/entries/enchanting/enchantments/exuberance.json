@@ -22,17 +22,14 @@
       "title": "enchantment.spectrum.exuberance"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
         "item": "spectrum:multitool",
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/exuberance",
-              "lvl": "5s"
-            }
-          ]
+        "components": {
+          "enchantments": {
+            "spectrum:cloaked/exuberance": 5
+          }
         }
       },
       "text": "book.spectrum.guidebook.exuberance.page1.text"

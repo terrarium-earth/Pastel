@@ -6,8 +6,8 @@
   },
   "icon": {
     "item": "spectrum:knowledge_gem",
-    "nbt": {
-      "stored_experience": 500
+    "components": {
+      "spectrum:stored_experience": 500
     }
   },
   "category": "spectrum:enchanting",

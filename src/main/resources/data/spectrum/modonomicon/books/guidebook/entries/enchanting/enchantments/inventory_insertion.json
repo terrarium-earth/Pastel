@@ -22,17 +22,14 @@
       "title": "enchantment.spectrum.inventory_insertion"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
-        "item": "spectrum:multitool",
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/inventory_insertion",
-              "lvl": "1s"
-            }
-          ]
+        "id": "spectrum:multitool",
+        "components": {
+          "enchantments": {
+            "spectrum:cloaked/inventory_insertion": 1
+          }
         }
       },
       "text": "book.spectrum.guidebook.inventory_insertion.page1.text"

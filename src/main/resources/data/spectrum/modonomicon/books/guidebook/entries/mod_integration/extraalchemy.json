@@ -2,8 +2,8 @@
   "name": "book.spectrum.guidebook.mod_integration.extraalchemy.name",
   "icon": {
     "item": "minecraft:potion",
-    "nbt": {
-      "Potion": "minecraft:night_vision"
+    "components": {
+      "potion_contents": "minecraft:night_vision"
     }
   },
   "condition": {
