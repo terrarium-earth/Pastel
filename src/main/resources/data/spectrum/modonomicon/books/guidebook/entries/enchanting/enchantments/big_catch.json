@@ -31,18 +31,18 @@
       "title": "enchantment.spectrum.big_catch"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
         "item": "spectrum:lagoon_rod"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/big_catch",
-              "lvl": "3s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "spectrum:cloaked/big_catch",
+            "lvl": "3s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.big_catch.page1.text"
     },

@@ -25,18 +25,18 @@
   "y": 6,
   "pages": [
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.vein_mining.name",
       "item": {
         "item": "spectrum:multitool"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "veinmining:vein_mining",
-              "lvl": "1s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "veinmining:vein_mining",
+            "lvl": "1s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.mod_integration.vein_mining.page0.text"
     },

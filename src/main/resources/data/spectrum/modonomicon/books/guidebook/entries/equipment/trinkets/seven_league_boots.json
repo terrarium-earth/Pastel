@@ -32,7 +32,7 @@
       "text": "book.spectrum.guidebook.seven_league_boots.page1.text"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/enchantments/vanilla_projectile"
@@ -41,13 +41,13 @@
       "item": {
         "item": "spectrum:seven_league_boots"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "minecraft:power",
-              "lvl": "5s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "minecraft:power",
+            "lvl": "5s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.seven_league_boots.page2.text"
     }

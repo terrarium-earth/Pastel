@@ -32,7 +32,7 @@
       "recipe_id": "spectrum:fusion_shrine/trinkets/gleaming_pin"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/enchantments/sniping"
@@ -41,13 +41,13 @@
       "item": {
         "item": "spectrum:gleaming_pin"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/sniping",
-              "lvl": "2s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "spectrum:cloaked/sniping",
+            "lvl": "2s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.gleaming_pin.page2.text"
     }

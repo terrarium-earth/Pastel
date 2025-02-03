@@ -22,18 +22,18 @@
       "title": "enchantment.spectrum.foundry"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
         "item": "minecraft:iron_pickaxe"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/foundry",
-              "lvl": "1s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "spectrum:cloaked/foundry",
+            "lvl": "1s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.foundry.page1.text"
     },

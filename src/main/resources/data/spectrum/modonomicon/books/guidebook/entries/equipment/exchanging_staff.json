@@ -27,7 +27,7 @@
       "recipe_id": "spectrum:pedestal/tier4/exchanging_staff"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/build_enchanting_structure"
@@ -36,18 +36,18 @@
       "item": {
         "item": "spectrum:exchanging_staff"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "minecraft:fortune",
-              "lvl": "3s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "minecraft:fortune",
+            "lvl": "3s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page2.text"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/build_enchanting_structure"
@@ -56,18 +56,18 @@
       "item": {
         "item": "spectrum:exchanging_staff"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:silk_touch",
-              "lvl": "1s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "spectrum:silk_touch",
+            "lvl": "1s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page3.text"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/enchantments/resonance_usage"
@@ -76,13 +76,13 @@
       "item": {
         "item": "spectrum:exchanging_staff"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/resonance",
-              "lvl": "1s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "spectrum:cloaked/resonance",
+            "lvl": "1s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page4.text"
     }

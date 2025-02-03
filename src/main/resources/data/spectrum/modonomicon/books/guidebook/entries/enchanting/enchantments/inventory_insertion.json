@@ -22,7 +22,7 @@
       "title": "enchantment.spectrum.inventory_insertion"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
         "item": "spectrum:multitool"

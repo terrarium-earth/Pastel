@@ -22,18 +22,18 @@
       "title": "enchantment.spectrum.resonance"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.enchantment_characteristics",
       "item": {
         "item": "minecraft:iron_pickaxe"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/resonance",
-              "lvl": "1s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "spectrum:cloaked/resonance",
+            "lvl": "1s"
+          }
+        ]
       },
       "text": "book.spectrum.guidebook.resonance.page1.text"
     },

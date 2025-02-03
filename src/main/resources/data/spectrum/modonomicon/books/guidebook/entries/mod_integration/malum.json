@@ -50,54 +50,54 @@
       "recipe_id": "spectrum:mod_integration/malum/pedestal/chorusless_ender_splice"
     },
     {
-      "type": "modonomicom:spotlight",
+      "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.malum.scythe_enchants.title",
       "item": {
         "item": "malum:crude_scythe"
       },
-        "nbt": {
-          "Enchantments": [
-            {
-              "id": "spectrum:cloaked/clovers_favor",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/exuberance",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/first_strike",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/improved_critical",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/inventory_insertion",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/treasure_hunter",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/tight_grip",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/steadfast",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/indestructible",
-              "lvl": "1s"
-            },
-            {
-              "id": "spectrum:cloaked/inexorable",
-              "lvl": "1s"
-            }
-          ]
+      "nbt": {
+        "Enchantments": [
+          {
+            "id": "spectrum:cloaked/clovers_favor",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/exuberance",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/first_strike",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/improved_critical",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/inventory_insertion",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/treasure_hunter",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/tight_grip",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/steadfast",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/indestructible",
+            "lvl": "1s"
+          },
+          {
+            "id": "spectrum:cloaked/inexorable",
+            "lvl": "1s"
+          }
+        ]
       },
       "condition": {
         "type": "modonomicon:advancement",
