@@ -25,7 +25,13 @@ public class FluidIngredient {
 			Identifier.CODEC.fieldOf("tag")
 	).xmap(FluidIngredient::new, c -> c.ingredient);
 	
-	public static final Codec<FluidIngredient> CODEC = MAP_CODEC.codec();
+	public static final Codec<FluidIngredient> CODEC = Codec.withAlternative(
+			Codec.withAlternative(
+					Registries.FLUID.getCodec().xmap(FluidIngredient::of, ingredient -> ingredient.fluid().get()),
+					TagKey.codec(RegistryKeys.FLUID).xmap(FluidIngredient::of, ingredient -> ingredient.tag().get())
+			),
+			MAP_CODEC.codec()
+	);
 	
 	public static final PacketCodec<RegistryByteBuf, FluidIngredient> PACKET_CODEC = PacketCodec.tuple(
 			PacketCodecs.either(PacketCodecs.registryValue(RegistryKeys.FLUID), Identifier.PACKET_CODEC), o -> o.ingredient,

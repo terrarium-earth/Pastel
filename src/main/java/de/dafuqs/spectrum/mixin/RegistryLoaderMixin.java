@@ -14,6 +14,8 @@ import java.util.stream.*;
 @Mixin(RegistryLoader.class)
 public class RegistryLoaderMixin {
 	
+	//TODO Switch to fabric's version https://github.com/FabricMC/fabric/blob/1.21.4/fabric-registry-sync-v0/src/main/java/net/fabricmc/fabric/api/event/registry/DynamicRegistries.java
+	
 	@WrapOperation(method = "<clinit>", at = @At(value = "FIELD", target = "Lnet/minecraft/registry/RegistryLoader;DYNAMIC_REGISTRIES:Ljava/util/List;"))
 	private static void injectDynamicRegistries(List<RegistryLoader.Entry<?>> value, Operation<Void> original) {
 		Stream<RegistryLoader.Entry<?>> originalStream = value.stream();

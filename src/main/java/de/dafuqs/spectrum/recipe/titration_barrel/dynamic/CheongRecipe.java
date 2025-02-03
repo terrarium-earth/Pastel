@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.registries.*;
 import net.minecraft.fluid.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
+import net.minecraft.predicate.*;
 import net.minecraft.recipe.*;
 
 import java.util.*;
@@ -19,13 +20,13 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 	public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(SpectrumItems.MERMAIDS_JAM, 4);
 	
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-		add(new IngredientStack(Ingredient.fromTag(SpectrumItemTags.FRUITS), null, 8));
-		add(new IngredientStack(Ingredient.ofItems(Items.SUGAR), null, 16));
+		add(new IngredientStack(Ingredient.fromTag(SpectrumItemTags.FRUITS), ComponentPredicate.EMPTY, 8));
+		add(new IngredientStack(Ingredient.ofItems(Items.SUGAR), ComponentPredicate.EMPTY, 16));
 	}};
 	
 	public CheongRecipe() {
 		super("", false, Optional.empty(), INGREDIENT_STACKS, FluidIngredient.of(Fluids.WATER),
-				OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, null);
+				OUTPUT_STACK, TAPPING_ITEM, MIN_FERMENTATION_TIME_HOURS, FermentationData.DEFAULT);
 	}
 	
 	@Override

@@ -44,7 +44,7 @@
     {
       "type": "spectrum:goo_converting",
       "title": "book.spectrum.guidebook.item_conversion",
-      "recipe_id": "spectrum:goo_converting/scute",
+      "recipe_id": "spectrum:goo_converting/turtle_scute",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_four_leaf_clover"
