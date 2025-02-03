@@ -335,7 +335,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				IngredientStack.Serializer.PACKET_CODEC.collect(PacketCodecs.toList(7)), recipe -> recipe.craftingInputs,
 				FluidIngredient.PACKET_CODEC, recipe -> recipe.fluid,
-				ItemStack.PACKET_CODEC, recipe -> recipe.output,
+				ItemStack.OPTIONAL_PACKET_CODEC, recipe -> recipe.output,
 				PacketCodecs.FLOAT, recipe -> recipe.experience,
 				PacketCodecs.VAR_INT, recipe -> recipe.craftingTime,
 				PacketCodecs.BOOL, recipe -> recipe.yieldUpgradesDisabled,

@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.api.recipe;
 
-import com.google.gson.*;
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import net.fabricmc.fabric.api.transfer.v1.fluid.*;
@@ -18,35 +17,25 @@ import org.jetbrains.annotations.*;
 import java.util.*;
 import java.util.stream.*;
 
+//TODO Refactor this to use registryEntryList or something, or at least an Either
 public class FluidIngredient {
 	
 	public static final MapCodec<FluidIngredient> MAP_CODEC = Codec.mapEither(
 			Registries.FLUID.getCodec().fieldOf("fluid"),
 			Identifier.CODEC.fieldOf("tag")
-	).xmap(
-			either -> either.map(fluid -> new FluidIngredient(fluid, null), tag -> new FluidIngredient(null, tag)),
-			fluidIngredient -> fluidIngredient.fluid != null ? Either.left(fluidIngredient.fluid) : Either.right(fluidIngredient.tag)
-	);
+	).xmap(FluidIngredient::new, c -> c.ingredient);
 	
-	public static final Codec<FluidIngredient> CODEC = Codec.withAlternative(
-			Codec.xor(Registries.FLUID.getCodec(), TagKey.codec(RegistryKeys.FLUID)).xmap(
-					either -> either.map(FluidIngredient::of, FluidIngredient::of),
-					ingredient -> ingredient.fluid != null ? Either.left(ingredient.fluid) : Either.right(TagKey.of(RegistryKeys.FLUID, ingredient.tag))
-			),
-			MAP_CODEC.codec()
-	);
+	public static final Codec<FluidIngredient> CODEC = MAP_CODEC.codec();
 	
 	public static final PacketCodec<RegistryByteBuf, FluidIngredient> PACKET_CODEC = PacketCodec.tuple(
-			PacketCodecs.registryValue(RegistryKeys.FLUID), o -> o.fluid,
-			Identifier.PACKET_CODEC, o -> o.tag,
+			PacketCodecs.either(PacketCodecs.registryValue(RegistryKeys.FLUID), Identifier.PACKET_CODEC), o -> o.ingredient,
 			FluidIngredient::new
 	);
 	
-	private final @Nullable Fluid fluid;
-	private final @Nullable Identifier tag;
+	private final Either<Fluid, Identifier> ingredient;
 	// Compare against EMPTY to check if empty.
 	// In order to represent an empty value, specifically use this field.
-	public static FluidIngredient EMPTY = new FluidIngredient(null, null);
+	public static FluidIngredient EMPTY = new FluidIngredient(Either.left(Fluids.EMPTY));
 	
 	// Can't be both fluid and tag, so ONLY use the provided of() methods
 	// NOTE: ALL FluidIngredient-related code assumes that either:
@@ -55,9 +44,8 @@ public class FluidIngredient {
 	// Violation of either of those results in either an AssertionError or
 	// undefined behavior. As such, don't even allow creation of invalid obj.
 	// FluidIngredient objects with unknown/invalid tags are considered valid.
-	private FluidIngredient(@Nullable Fluid fluid, @Nullable Identifier tag) {
-		this.fluid = fluid;
-		this.tag = tag;
+	private FluidIngredient(Either<Fluid, Identifier> ingredient) {
+		this.ingredient = ingredient;
 	}
 	
 	// NOTE: This is for testing. Doesn't explicitly handle invalid FluidInput.
@@ -65,110 +53,65 @@ public class FluidIngredient {
 	public String toString() {
 		if (this == EMPTY)
 			return "FluidIngredient.EMPTY";
-		if (this.fluid != null)
-			return String.format("FluidIngredient[fluid=%s]", this.fluid);
-		// must contain either or be FluidInput.EMPTY(as per FluidInput doc)
-		assert this.tag != null;
-		return String.format("FluidIngredient[tag=%s]", this.tag);
+		if (this.ingredient.left().isPresent())
+			return String.format("FluidIngredient[fluid=%s]", this.ingredient.left().get());
+		assert this.ingredient.right().isPresent();
+		return String.format("FluidIngredient[tag=%s]", this.ingredient.right().get());
 	}
 	
 	public static FluidIngredient of(@NotNull Fluid fluid) {
-		Objects.requireNonNull(fluid);
-		return new FluidIngredient(fluid, null);
+		return new FluidIngredient(Either.left(fluid));
 	}
 	
-	public static FluidIngredient of(TagKey<Fluid> tag) {
-		return new FluidIngredient(null, tag.id());
+	public static FluidIngredient of(@NotNull TagKey<Fluid> tag) {
+		return new FluidIngredient(Either.right(tag.id()));
 	}
 	
 	public static FluidIngredient of(@NotNull Identifier tag) {
-		Objects.requireNonNull(tag);
-		return new FluidIngredient(null, tag);
+		return new FluidIngredient(Either.right(tag));
 	}
 	
 	public Optional<Fluid> fluid() {
-		return Optional.ofNullable(this.fluid);
+		return this.ingredient.left();
 	}
 	
 	public Optional<TagKey<Fluid>> tag() {
-		return Registries.FLUID.streamTags().filter(tagKey -> tagKey.id().equals(this.tag)).findFirst();
+		return this.ingredient.right().flatMap(tag ->
+				Registries.FLUID.streamTags().filter(tagKey -> tagKey.id().equals(tag)).findFirst());
 	}
 	
 	public boolean isTag() {
-		return this.tag != null;
+		return this.ingredient.right().isPresent();
 	}
 	
 	public Identifier id() {
-		return fluid != null ? Registries.FLUID.getId(fluid) : tag;
+		return ingredient.map(Registries.FLUID::getId, tag -> tag);
 	}
 	
 	// Vanilla-friendly compatibility method.
 	// Represents this FluidIngredient as bucket stack(s).
 	public @NotNull Ingredient into() {
-		if (this == EMPTY) return Ingredient.empty();
-		if (this.fluid != null)
-			return Ingredient.ofStacks(this.fluid.getBucketItem().getDefaultStack());
-		if (this.tag != null && tag().isPresent()) {
-			// Handle custom fluid registries
-			// in the case of FluidIngredient objects created by other mods.
-			Registry<Fluid> registry = Registries.FLUID;
-			if (registry == null) return Ingredient.empty();
-			Optional<RegistryEntryList.Named<Fluid>> optional = registry.getEntryList(tag().get());
-			if (optional.isEmpty()) return Ingredient.empty();
-			RegistryEntryList.Named<Fluid> list = optional.get();
-			Stream<ItemStack> stacks = list.stream().map((entry) -> entry.value().getBucketItem().getDefaultStack());
-			return Ingredient.ofStacks(stacks);
-		}
-		
-		// UNREACHABLE under normal circumstances!
-		throw new AssertionError("Invalid FluidIngredient object");
+		return this.ingredient.map(
+				fluid -> fluid == Fluids.EMPTY ? Ingredient.EMPTY : Ingredient.ofStacks(fluid.getBucketItem().getDefaultStack()),
+				tag -> {
+					// Handle custom fluid registries
+					// in the case of FluidIngredient objects created by other mods.
+					Registry<Fluid> registry = Registries.FLUID;
+					if (registry == null) return Ingredient.empty();
+					Optional<RegistryEntryList.Named<Fluid>> optional = registry.getEntryList(tag().get());
+					if (optional.isEmpty()) return Ingredient.empty();
+					RegistryEntryList.Named<Fluid> list = optional.get();
+					Stream<ItemStack> stacks = list.stream().map((entry) -> entry.value().getBucketItem().getDefaultStack());
+					return Ingredient.ofStacks(stacks);
+				});
 	}
 	
 	public boolean test(@NotNull Fluid fluid) {
-		Objects.requireNonNull(fluid);
-		if (this == EMPTY) return fluid == Fluids.EMPTY;
-		if (this.fluid != null) return this.fluid == fluid;
-		if (this.tag != null && tag().isPresent()) return fluid.getDefaultState().isIn(tag().get());
-		
-		// UNREACHABLE under normal circumstances!
-		throw new AssertionError("Invalid FluidIngredient object");
+		return this.ingredient.map(fl -> fl == fluid, tag -> fluid.getDefaultState().isIn(tag().get()));
 	}
 	
 	public boolean test(@NotNull FluidVariant variant) {
-		Objects.requireNonNull(variant);
 		return test(variant.getFluid());
 	}
 	
-	public static @NotNull FluidIngredient fromIdentifier(@Nullable Identifier id, boolean isTag) {
-		if (id == null) {
-			return EMPTY;
-		} else if (isTag) {
-			return FluidIngredient.of(id);
-		} else {
-			Fluid fluid = Registries.FLUID.get(id);
-			if (fluid.getDefaultState().isEmpty()) return FluidIngredient.EMPTY;
-			else return FluidIngredient.of(fluid);
-		}
-	}
-	
-	// Interpret FluidIngredient.EMPTY as an unknown ID error.
-	public record JsonParseResult(
-			@NotNull FluidIngredient result,
-			boolean malformed,
-			boolean isTag,
-			@Nullable Identifier id
-	) {
-	}
-	
-	public static @NotNull JsonParseResult fromJson(JsonObject fluidObject) {
-		boolean hasFluid = JsonHelper.hasString(fluidObject, "fluid");
-		boolean isTag = JsonHelper.hasString(fluidObject, "tag");
-		
-		if ((hasFluid && isTag) || !(hasFluid || isTag)) {
-			return new JsonParseResult(FluidIngredient.EMPTY, true, isTag, null);
-		} else {
-			Identifier id = Identifier.tryParse(JsonHelper.getString(fluidObject, isTag ? "tag" : "fluid"));
-			return new JsonParseResult(fromIdentifier(id, isTag), false, isTag, id);
-		}
-	}
 }

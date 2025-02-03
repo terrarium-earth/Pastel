@@ -25,7 +25,7 @@ public class IngredientStack implements CustomIngredient {
 	private Item item = null;
 	private TagKey<Item> tag = null;
 	
-	public static final IngredientStack EMPTY = new IngredientStack(Ingredient.EMPTY, null, 0);
+	public static final IngredientStack EMPTY = new IngredientStack(Ingredient.EMPTY, ComponentPredicate.EMPTY, 0);
 	
 	public IngredientStack(Ingredient ingredient, ComponentPredicate componentPredicate, int count) {
 		this.ingredient = ingredient;
@@ -34,7 +34,7 @@ public class IngredientStack implements CustomIngredient {
 	}
 	
 	public IngredientStack(Ingredient ingredient) {
-		this(ingredient, null, 1);
+		this(ingredient, ComponentPredicate.EMPTY, 1);
 	}
 	
 	public int getCount() {
@@ -54,7 +54,7 @@ public class IngredientStack implements CustomIngredient {
 	}
 	
 	public static IngredientStack ofItems(int count, Item item) {
-		IngredientStack ingredientStack = new IngredientStack(Ingredient.ofItems(item), null, count);
+		IngredientStack ingredientStack = new IngredientStack(Ingredient.ofItems(item), ComponentPredicate.EMPTY, count);
 		ingredientStack.item = item;
 		return ingredientStack;
 	}
@@ -64,7 +64,7 @@ public class IngredientStack implements CustomIngredient {
 	}
 	
 	public static IngredientStack ofTag(TagKey<Item> tag, int count) {
-		IngredientStack ingredientStack = new IngredientStack(Ingredient.fromTag(tag), null, count);
+		IngredientStack ingredientStack = new IngredientStack(Ingredient.fromTag(tag), ComponentPredicate.EMPTY, count);
 		ingredientStack.tag = tag;
 		return ingredientStack;
 	}
