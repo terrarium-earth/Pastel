@@ -71,7 +71,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:tilled_shale_clay",
+      "item": {
+        "id": "spectrum:tilled_shale_clay"
+      },
       "text": "book.spectrum.guidebook.shale_clay.page4.text"
     }
   ]

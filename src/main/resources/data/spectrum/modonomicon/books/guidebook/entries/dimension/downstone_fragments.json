@@ -25,7 +25,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:downstone_fragments",
+      "item": {
+        "id": "spectrum:downstone_fragments"
+      },
       "text": "book.spectrum.guidebook.downstone_fragments.page0.text"
     }
   ]

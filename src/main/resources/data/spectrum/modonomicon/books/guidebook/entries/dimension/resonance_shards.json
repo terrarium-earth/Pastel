@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:resonance_shard",
+      "item": {
+        "id": "spectrum:resonance_shard"
+      },
       "text": "book.spectrum.guidebook.resonance_shards.page0.text"
     }
   ]

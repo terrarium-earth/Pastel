@@ -22,7 +22,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:weeping_gala_sprig",
+      "item": {
+        "id": "spectrum:weeping_gala_sprig"
+      },
       "text": "book.spectrum.guidebook.weeping_gala.page0.text"
     },
     {

@@ -21,13 +21,17 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:slush",
+      "item": {
+        "id": "spectrum:slush"
+      },
       "text": "book.spectrum.guidebook.slush.page0.text",
       "title": "block.spectrum.slush"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:tilled_slush",
+      "item": {
+        "id": "spectrum:tilled_slush"
+      },
       "text": "book.spectrum.guidebook.slush.page1.text"
     }
   ]

@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:rock_crystal",
+      "item": {
+        "id": "spectrum:rock_crystal"
+      },
       "title": "block.spectrum.rock_crystal",
       "text": "book.spectrum.guidebook.rock_crystal.page0.text"
     },

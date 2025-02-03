@@ -72,7 +72,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:nectardew_burgeon",
+      "item": {
+        "id": "spectrum:nectardew_burgeon"
+      },
       "title": "book.spectrum.guidebook.poisoners_handbook.page11.title",
       "text": "book.spectrum.guidebook.poisoners_handbook.page11.text"
     },

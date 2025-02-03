@@ -31,7 +31,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:shimmel",
+      "item": {
+        "id": "spectrum:shimmel"
+      },
       "text": "book.spectrum.guidebook.noxshroom_forest.page1.text"
     }
   ]

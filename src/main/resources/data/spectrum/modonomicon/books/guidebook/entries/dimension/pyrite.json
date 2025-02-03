@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:pyrite",
+      "item": {
+        "id": "spectrum:pyrite"
+      },
       "text": "book.spectrum.guidebook.pyrite.page0.text",
       "title": "block.spectrum.pyrite"
     },
@@ -55,7 +57,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.pyrite.page3.title",
-      "item": "spectrum:pyrite_ripper",
+      "item": {
+        "id": "spectrum:pyrite_ripper"
+      },
       "text": "book.spectrum.guidebook.pyrite.page3.text"
     }
   ]

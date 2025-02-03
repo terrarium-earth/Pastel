@@ -26,7 +26,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:aloe_leaf",
+      "item": {
+        "id": "spectrum:aloe_leaf"
+      },
       "text": "book.spectrum.guidebook.aloe.page1.text"
     }
   ]

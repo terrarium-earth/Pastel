@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:downstone",
+      "item": {
+        "id": "spectrum:downstone"
+      },
       "text": "book.spectrum.guidebook.downstone.page0.text",
       "title": "block.spectrum.downstone"
     }

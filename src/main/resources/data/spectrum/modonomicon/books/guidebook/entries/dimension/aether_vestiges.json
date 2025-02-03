@@ -23,7 +23,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.aether_vestiges.page1.title",
-      "item": "spectrum:aether_vestiges",
+      "item": {
+        "id": "spectrum:aether_vestiges"
+      },
       "text": "book.spectrum.guidebook.aether_vestiges.page1.text"
     }
   ]

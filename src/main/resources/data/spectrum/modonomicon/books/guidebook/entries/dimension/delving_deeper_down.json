@@ -18,7 +18,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.delving_deeper_down.name",
-      "item": "minecraft:bedrock",
+      "item": {
+        "id": "minecraft:bedrock"
+      },
       "text": "book.spectrum.guidebook.delving_deeper_down.page0.text"
     },
     {

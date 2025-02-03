@@ -36,7 +36,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:fissure_plum",
+      "item": {
+        "id": "spectrum:fissure_plum"
+      },
       "title": "book.spectrum.guidebook.abyssal_vines.page3.title",
       "text": "book.spectrum.guidebook.abyssal_vines.page3.text"
     },

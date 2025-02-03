@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:basal_marble",
+      "item": {
+        "id": "spectrum:basal_marble"
+      },
       "title": "block.spectrum.basal_marble",
       "text": "book.spectrum.guidebook.basal_marble.page0.text"
     },

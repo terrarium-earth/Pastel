@@ -21,7 +21,9 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:moonstone_core",
+      "item": {
+        "id": "spectrum:moonstone_core"
+      },
       "text": "book.spectrum.guidebook.moonstone_cores.page0.text"
     }
   ]

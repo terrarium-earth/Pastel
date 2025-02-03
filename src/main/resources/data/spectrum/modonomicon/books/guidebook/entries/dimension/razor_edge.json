@@ -31,12 +31,16 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:sawblade_grass",
+      "item": {
+        "id": "spectrum:sawblade_grass"
+      },
       "text": "book.spectrum.guidebook.razor_edge.page1.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:bristle_sprouts",
+      "item": {
+        "id": "spectrum:bristle_sprouts"
+      },
       "text": "book.spectrum.guidebook.razor_edge.page2.text"
     }
   ]

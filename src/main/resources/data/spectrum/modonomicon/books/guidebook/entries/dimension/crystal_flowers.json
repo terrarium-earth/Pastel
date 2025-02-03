@@ -26,17 +26,23 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:sweet_pea",
+      "item": {
+        "id": "spectrum:sweet_pea"
+      },
       "text": "book.spectrum.guidebook.crystal_flowers.page1.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:apricotti",
+      "item": {
+        "id": "spectrum:apricotti"
+      },
       "text": "book.spectrum.guidebook.crystal_flowers.page2.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:humming_bell",
+      "item": {
+        "id": "spectrum:humming_bell"
+      },
       "text": "book.spectrum.guidebook.crystal_flowers.page3.text"
     }
   ]

@@ -31,7 +31,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:overgrown_blackslag",
+      "item": {
+        "id": "spectrum:overgrown_blackslag"
+      },
       "text": "book.spectrum.guidebook.crystal_gardens.page1.text"
     },
     {

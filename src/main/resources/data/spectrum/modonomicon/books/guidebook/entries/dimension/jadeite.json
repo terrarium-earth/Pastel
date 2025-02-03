@@ -23,7 +23,9 @@
     {
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.jadeite.name",
-      "item": "spectrum:jadeite_petals",
+      "item": {
+        "id": "spectrum:jadeite_petals"
+      },
       "text": "book.spectrum.guidebook.jadeite.page0.text"
     },
     {

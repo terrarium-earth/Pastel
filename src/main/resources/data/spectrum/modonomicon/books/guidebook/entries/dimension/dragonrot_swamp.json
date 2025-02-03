@@ -31,12 +31,16 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:snapping_ivy",
+      "item": {
+        "id": "spectrum:snapping_ivy"
+      },
       "text": "book.spectrum.guidebook.dragonrot_swamp.page2.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:rotten_ground",
+      "item": {
+        "id": "spectrum:rotten_ground"
+      },
       "text": "book.spectrum.guidebook.dragonrot_swamp.page3.text"
     }
   ]

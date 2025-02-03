@@ -26,7 +26,9 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:aether_graced_nectar_gloves",
+      "item": {
+        "id": "spectrum:aether_graced_nectar_gloves"
+      },
       "text": "book.spectrum.guidebook.nectar_gloves.page1.text"
     }
   ]

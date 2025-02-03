@@ -31,12 +31,16 @@
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:ashen_blackslag",
+      "item": {
+        "id": "spectrum:ashen_blackslag"
+      },
       "text": "book.spectrum.guidebook.howling_spires.ashen_blackslag.text"
     },
     {
       "type": "modonomicon:spotlight",
-      "item": "spectrum:varia_sprout",
+      "item": {
+        "id": "spectrum:varia_sprout"
+      },
       "text": "book.spectrum.guidebook.howling_spires.varia_sprout.text"
     }
   ]
