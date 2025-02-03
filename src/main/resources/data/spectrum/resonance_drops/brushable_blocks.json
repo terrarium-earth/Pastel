@@ -1,6 +1,8 @@
 {
   "type": "spectrum:drop_self",
-  "block": "#c:brushable_blocks",
+  "block": {
+    "blocks": "#c:brushable_blocks"
+  },
   "nbt_to_copy": [
     "LootTable",
     "LootTableSeed",

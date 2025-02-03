@@ -1,6 +1,8 @@
 {
   "type": "spectrum:drop_self",
-  "block": "#dimdoors:fabric",
+  "block": {
+    "blocks": "#dimdoors:fabric"
+  },
   "fabric:load_conditions": [
     {
       "condition": "fabric:all_mods_loaded",

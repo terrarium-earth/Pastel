@@ -1,6 +1,8 @@
 {
   "type": "spectrum:drop_self",
-  "block": "#botania:floating_flowers",
+  "block": {
+    "blocks": "#botania:floating_flowers"
+  },
   "nbt_to_copy": [
     "floating"
   ],

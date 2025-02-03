@@ -5,6 +5,7 @@ import de.dafuqs.spectrum.api.predicate.block.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.item.*;
+import net.minecraft.registry.*;
 
 import java.util.*;
 
@@ -23,7 +24,7 @@ public abstract class ResonanceDropProcessor {
 	public abstract boolean process(BlockState state, BlockEntity blockEntity, List<ItemStack> droppedStacks);
 	
 	public interface Serializer {
-		ResonanceDropProcessor fromJson(JsonObject json) throws Exception;
+		ResonanceDropProcessor fromJson(RegistryOps<JsonElement> ops, JsonObject json) throws Exception;
 	}
 	
 }

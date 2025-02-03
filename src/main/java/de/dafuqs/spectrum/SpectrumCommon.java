@@ -38,6 +38,7 @@ import org.jetbrains.annotations.*;
 import org.slf4j.*;
 
 import java.util.*;
+import java.util.function.*;
 
 public class SpectrumCommon implements ModInitializer {
 	
@@ -200,7 +201,12 @@ public class SpectrumCommon implements ModInitializer {
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(NaturesStaffConversionDataLoader.INSTANCE);
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(EntityFishingDataLoader.INSTANCE);
 		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(CrystalApothecarySimulationsDataLoader.INSTANCE);
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(ResonanceDropsDataLoader.INSTANCE);
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(ResonanceDropsDataLoader.ID, new Function<RegistryWrapper.WrapperLookup, IdentifiableResourceReloadListener>() {
+			@Override
+			public IdentifiableResourceReloadListener apply(RegistryWrapper.WrapperLookup lookup) {
+				return new ResonanceDropsDataLoader(lookup);
+			}
+		});
 		
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
 			SpectrumCommon.logInfo("Fetching server instance...");

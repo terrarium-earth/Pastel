@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.data_loaders.resonance_processors;
 
 import com.google.gson.*;
-import com.mojang.serialization.*;
 import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.api.predicate.block.*;
 import de.dafuqs.spectrum.data_loaders.*;
@@ -11,6 +10,7 @@ import net.minecraft.component.*;
 import net.minecraft.component.type.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
+import net.minecraft.registry.*;
 import net.minecraft.state.property.*;
 import net.minecraft.util.*;
 
@@ -21,8 +21,8 @@ public class DropSelfResonanceProcessor extends ResonanceDropProcessor {
 	public static class Serializer implements ResonanceDropProcessor.Serializer {
 		
 		@Override
-		public ResonanceDropProcessor fromJson(JsonObject json) throws Exception {
-			BrokenBlockPredicate blockTarget = BrokenBlockPredicate.CODEC.parse(JsonOps.INSTANCE, json.get("block")).getOrThrow();
+		public ResonanceDropProcessor fromJson(RegistryOps<JsonElement> ops, JsonObject json) throws Exception {
+			BrokenBlockPredicate blockTarget = BrokenBlockPredicate.CODEC.parse(ops, json.get("block")).getOrThrow();
 			
 			List<String> statePropertiesToCopy = new ArrayList<>();
 			if (json.has("state_properties_to_copy")) {

@@ -18,8 +18,8 @@ public class ModifyDropsResonanceProcessor extends ResonanceDropProcessor {
 	public static class Serializer implements ResonanceDropProcessor.Serializer {
 		
 		@Override
-		public ResonanceDropProcessor fromJson(JsonObject json) throws Exception {
-			BrokenBlockPredicate blockTarget = BrokenBlockPredicate.CODEC.parse(JsonOps.INSTANCE, json.get("block")).getOrThrow();
+		public ResonanceDropProcessor fromJson(RegistryOps<JsonElement> ops, JsonObject json) throws Exception {
+			BrokenBlockPredicate blockTarget = BrokenBlockPredicate.CODEC.parse(ops, json.get("block")).getOrThrow();
 			
 			Map<Ingredient, Item> modifiedDrops = new HashMap<>();
 			JsonArray modifyDropsArray = JsonHelper.getArray(json, "modify_drops");
@@ -27,7 +27,6 @@ public class ModifyDropsResonanceProcessor extends ResonanceDropProcessor {
 				if (!(entry instanceof JsonObject entryObject)) {
 					throw new JsonSyntaxException("modify_drops is not an json object");
 				}
-				// TODO - Review
 				JsonObject input = JsonHelper.getObject(entryObject, "input");
 				Ingredient ingredient = Ingredient.DISALLOW_EMPTY_CODEC.parse(JsonOps.INSTANCE, input).getOrThrow();
 				Item output = Registries.ITEM.get(Identifier.tryParse(JsonHelper.getString(entryObject, "output")));

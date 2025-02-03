@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.data_loaders;
 
 import com.google.gson.*;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.interaction.*;
 import net.fabricmc.fabric.api.resource.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.item.*;
+import net.minecraft.registry.*;
 import net.minecraft.resource.*;
 import net.minecraft.util.*;
 import net.minecraft.util.profiler.*;
@@ -15,20 +17,23 @@ import java.util.*;
 
 public class ResonanceDropsDataLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
 	
-	public static final String ID = "resonance_drops";
-	public static final ResonanceDropsDataLoader INSTANCE = new ResonanceDropsDataLoader();
+	public static final Identifier ID = SpectrumCommon.locate("resonance_drops");
 	
 	protected static final List<ResonanceDropProcessor> RESONANCE_DROPS = new ArrayList<>();
 	
+	private final RegistryWrapper.WrapperLookup registryLookup;
 	public static boolean preventNextXPDrop;
 	
-	private ResonanceDropsDataLoader() {
-		super(new Gson(), ID);
+	public ResonanceDropsDataLoader(RegistryWrapper.WrapperLookup registryLookup) {
+		super(new Gson(), ID.getPath());
+		this.registryLookup = registryLookup;
 	}
 	
 	@Override
 	protected void apply(Map<Identifier, JsonElement> prepared, ResourceManager manager, Profiler profiler) {
 		RESONANCE_DROPS.clear();
+		
+		RegistryOps<JsonElement> ops = registryLookup.getOps(JsonOps.INSTANCE);
 		prepared.forEach((identifier, jsonElement) -> {
 			JsonObject json = jsonElement.getAsJsonObject();
 			
@@ -39,7 +44,7 @@ public class ResonanceDropsDataLoader extends JsonDataLoader implements Identifi
 				return;
 			}
 			try {
-				RESONANCE_DROPS.add(serializer.fromJson(json));
+				RESONANCE_DROPS.add(serializer.fromJson(ops, json));
 			} catch (Exception e) {
 				SpectrumCommon.logError("Error parsing ResonanceDropProcessor " + identifier + ": " + e.getLocalizedMessage());
 			}
@@ -48,7 +53,7 @@ public class ResonanceDropsDataLoader extends JsonDataLoader implements Identifi
 	
 	@Override
 	public Identifier getFabricId() {
-		return SpectrumCommon.locate(ID);
+		return ID;
 	}
 	
 	public static void applyResonance(BlockState minedState, BlockEntity blockEntity, List<ItemStack> droppedStacks) {
