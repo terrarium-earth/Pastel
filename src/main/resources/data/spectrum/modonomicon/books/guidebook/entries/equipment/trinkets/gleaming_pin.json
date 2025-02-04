@@ -41,13 +41,10 @@
       "item": {
         "item": "spectrum:gleaming_pin"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/sniping",
-            "lvl": "2s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/sniping": 2
+        }
       },
       "text": "book.spectrum.guidebook.gleaming_pin.page2.text"
     }

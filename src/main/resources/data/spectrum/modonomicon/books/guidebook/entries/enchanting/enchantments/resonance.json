@@ -27,13 +27,10 @@
       "item": {
         "item": "minecraft:iron_pickaxe"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/resonance",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/resonance": 1
+        }
       },
       "text": "book.spectrum.guidebook.resonance.page1.text"
     },

@@ -35,13 +35,10 @@
       "item": {
         "item": "minecraft:iron_axe"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/treasure_hunter",
-            "lvl": "3s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/treasure_hunter": 3
+        }
       },
       "text": "book.spectrum.guidebook.treasure_hunter.page2.text"
     },

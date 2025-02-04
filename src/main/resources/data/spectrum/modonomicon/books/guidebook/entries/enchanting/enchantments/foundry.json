@@ -27,13 +27,10 @@
       "item": {
         "item": "minecraft:iron_pickaxe"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/foundry",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/foundry": 1
+        }
       },
       "text": "book.spectrum.guidebook.foundry.page1.text"
     },

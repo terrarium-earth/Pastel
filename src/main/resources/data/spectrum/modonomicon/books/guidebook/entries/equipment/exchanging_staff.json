@@ -36,13 +36,10 @@
       "item": {
         "item": "spectrum:exchanging_staff"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "minecraft:fortune",
-            "lvl": "3s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "minecraft:fortune": 3
+        }
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page2.text"
     },
@@ -56,13 +53,10 @@
       "item": {
         "item": "spectrum:exchanging_staff"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:silk_touch",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:silk_touch": 1
+        }
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page3.text"
     },
@@ -76,13 +70,10 @@
       "item": {
         "item": "spectrum:exchanging_staff"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/resonance",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/resonance": 1
+        }
       },
       "text": "book.spectrum.guidebook.exchanging_staff.page4.text"
     }

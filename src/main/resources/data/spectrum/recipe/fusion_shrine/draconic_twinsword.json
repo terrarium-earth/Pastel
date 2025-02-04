@@ -5,7 +5,7 @@
   "fluid": {
     "fluid": "spectrum:liquid_crystal"
   },
-  "copy_nbt": true,
+  "copy_components": true,
   "ingredients": [
     "minecraft:netherite_sword",
     "minecraft:netherite_sword",
@@ -23,18 +23,14 @@
     },
     {
       "item": "minecraft:enchanted_book",
-      "recipeViewNbt": "{StoredEnchantments: [{id: \"spectrum:sniping\", lvl:2s}]}",
-      "matchbook": {
-        "mode": "AND",
-        "matches": [
-          {
-            "type": "enchantment",
-            "key": "StoredEnchantments",
-            "minLevel": 2,
-            "maxLevel": 255,
-            "enchantmentId": "spectrum:cloaked/sniping"
+      "predicates": {
+        "stored_enchantments": {
+          "enchantments": "spectrum:cloaked/sniping",
+          "levels": {
+            "min": 2,
+            "max": 255
           }
-        ]
+        }
       }
     },
     {

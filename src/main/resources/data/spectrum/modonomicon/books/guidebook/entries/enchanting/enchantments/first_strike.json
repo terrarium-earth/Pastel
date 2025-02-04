@@ -27,13 +27,10 @@
       "item": {
         "item": "minecraft:iron_sword"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/first_strike",
-            "lvl": "2s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/first_strike": 2
+        }
       },
       "text": "book.spectrum.guidebook.first_strike.page1.text"
     },

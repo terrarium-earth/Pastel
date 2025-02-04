@@ -27,13 +27,10 @@
       "item": {
         "item": "minecraft:iron_pickaxe"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/voiding",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/voiding": 1
+        }
       },
       "text": "book.spectrum.guidebook.curse_of_the_void.page1.text"
     },

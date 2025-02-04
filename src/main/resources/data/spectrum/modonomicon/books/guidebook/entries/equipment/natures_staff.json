@@ -36,13 +36,10 @@
       "item": {
         "item": "spectrum:natures_staff"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "minecraft:efficiency",
-            "lvl": "5s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "minecraft:efficiency": 5
+        }
       },
       "text": "book.spectrum.guidebook.natures_staff.page2.text"
     }

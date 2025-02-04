@@ -20,8 +20,8 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 	public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(SpectrumItems.MERMAIDS_JAM, 4);
 	
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-		add(new IngredientStack(Ingredient.fromTag(SpectrumItemTags.FRUITS), ComponentPredicate.EMPTY, 8));
-		add(new IngredientStack(Ingredient.ofItems(Items.SUGAR), ComponentPredicate.EMPTY, 16));
+		add(new IngredientStack(Ingredient.fromTag(SpectrumItemTags.FRUITS), ComponentPredicate.EMPTY, Map.of(), 8));
+		add(new IngredientStack(Ingredient.ofItems(Items.SUGAR), ComponentPredicate.EMPTY, Map.of(), 16));
 	}};
 	
 	public CheongRecipe() {

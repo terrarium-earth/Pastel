@@ -27,13 +27,10 @@
       "item": {
         "item": "spectrum:multitool"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/steadfast",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/steadfast": 1
+        }
       },
       "text": "book.spectrum.guidebook.steadfast.page1.text"
     },

@@ -30,13 +30,10 @@
       "item": {
         "item": "spectrum:multitool"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "veinmining:vein_mining",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "veinmining:vein_mining": 1
+        }
       },
       "text": "book.spectrum.guidebook.mod_integration.vein_mining.page0.text"
     },

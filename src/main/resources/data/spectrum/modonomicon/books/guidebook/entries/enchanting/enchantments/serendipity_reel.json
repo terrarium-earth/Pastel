@@ -36,13 +36,10 @@
       "item": {
         "item": "spectrum:lagoon_rod"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/serendipity_reel",
-            "lvl": "2s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/serendipity_reel": 2
+        }
       },
       "text": "book.spectrum.guidebook.serendipity_reel.page1.text"
     },

@@ -39,13 +39,10 @@
       "item": {
         "item": "spectrum:ender_splice"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "minecraft:unbreaking",
-            "lvl": "3s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "minecraft:unbreaking": 3
+        }
       },
       "text": "book.spectrum.guidebook.ender_splice.page2.text"
     },
@@ -59,13 +56,10 @@
       "item": {
         "item": "spectrum:ender_splice"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/resonance",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/resonance": 1
+        }
       },
       "text": "book.spectrum.guidebook.ender_splice.page3.text"
     }

@@ -36,13 +36,10 @@
       "item": {
         "item": "spectrum:lagoon_rod"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/big_catch",
-            "lvl": "3s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/big_catch": 3
+        }
       },
       "text": "book.spectrum.guidebook.big_catch.page1.text"
     },

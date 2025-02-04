@@ -27,13 +27,10 @@
       "item": {
         "item": "minecraft:crossbow"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/sniping",
-            "lvl": "2s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/sniping": 2
+        }
       },
       "text": "book.spectrum.guidebook.sniping.page1.text"
     },

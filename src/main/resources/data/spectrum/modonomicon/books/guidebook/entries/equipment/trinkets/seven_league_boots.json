@@ -41,13 +41,10 @@
       "item": {
         "item": "spectrum:seven_league_boots"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "minecraft:power",
-            "lvl": "5s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "minecraft:power": 5
+        }
       },
       "text": "book.spectrum.guidebook.seven_league_boots.page2.text"
     }

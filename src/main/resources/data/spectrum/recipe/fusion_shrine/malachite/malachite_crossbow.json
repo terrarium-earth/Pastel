@@ -5,7 +5,7 @@
   "fluid": {
     "fluid": "spectrum:liquid_crystal"
   },
-  "copy_nbt": true,
+  "copy_components": true,
   "ingredients": [
     "minecraft:crossbow",
     {

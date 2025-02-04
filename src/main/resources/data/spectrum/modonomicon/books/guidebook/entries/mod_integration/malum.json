@@ -53,51 +53,21 @@
       "type": "modonomicon:spotlight",
       "title": "book.spectrum.guidebook.mod_integration.malum.scythe_enchants.title",
       "item": {
-        "item": "malum:crude_scythe"
-      },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/clovers_favor",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/exuberance",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/first_strike",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/improved_critical",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/inventory_insertion",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/treasure_hunter",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/tight_grip",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/steadfast",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/indestructible",
-            "lvl": "1s"
-          },
-          {
-            "id": "spectrum:cloaked/inexorable",
-            "lvl": "1s"
+        "item": "malum:crude_scythe",
+        "components": {
+          "enchantments": {
+            "spectrum:cloaked/clovers_favor": 1,
+            "spectrum:cloaked/exuberance": 1,
+            "spectrum:cloaked/first_strike": 1,
+            "spectrum:cloaked/improved_critical": 1,
+            "spectrum:cloaked/inventory_insertion": 1,
+            "spectrum:cloaked/treasure_hunter": 1,
+            "spectrum:cloaked/tight_grip": 1,
+            "spectrum:cloaked/steadfast": 1,
+            "spectrum:cloaked/indestructible": 1,
+            "spectrum:cloaked/inexorable": 1
           }
-        ]
+        }
       },
       "condition": {
         "type": "modonomicon:advancement",

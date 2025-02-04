@@ -27,13 +27,10 @@
       "item": {
         "item": "minecraft:iron_pickaxe"
       },
-      "nbt": {
-        "Enchantments": [
-          {
-            "id": "spectrum:cloaked/pest_control",
-            "lvl": "1s"
-          }
-        ]
+      "components": {
+        "enchantments": {
+          "spectrum:cloaked/pest_control": 1
+        }
       },
       "text": "book.spectrum.guidebook.pest_control.page1.text"
     },

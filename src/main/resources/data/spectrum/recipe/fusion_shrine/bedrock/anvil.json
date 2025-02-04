@@ -6,7 +6,7 @@
   "fluid": {
     "fluid": "spectrum:midnight_solution"
   },
-  "copy_nbt": true,
+  "copy_components": true,
   "ingredients": [
     "minecraft:anvil",
     {
