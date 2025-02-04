@@ -32,14 +32,14 @@ import oshi.util.tuples.*;
 import java.util.*;
 
 public class ExchangeStaffItem extends BuildingStaffItem {
-
+	
 	public static final int INK_COST_PER_BLOCK = 5;
 	public static final int CREATIVE_RANGE = 5;
-
+	
 	public ExchangeStaffItem(Settings settings) {
 		super(settings);
 	}
-
+	
 	// The range grows with the players' progression
 	// this way the item is not overpowered at the start
 	// but not useless at the end
@@ -67,7 +67,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 			}
 		}
 	}
-
+	
 	@Override
 	public boolean canInteractWith(BlockState state, BlockView world, BlockPos pos, PlayerEntity player) {
 		return super.canInteractWith(state, world, pos, player) && state.getHardness(world, pos) < 20;
@@ -80,30 +80,30 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	public static boolean exchange(World world, BlockPos pos, @NotNull PlayerEntity player, @NotNull Block targetBlock, ItemStack exchangeStaffItemStack, boolean single, Direction side) {
 		Triplet<Block, Item, Integer> replaceData = countSuitableReplacementItems(player, targetBlock, single,
 				INK_COST_PER_BLOCK);
-
+		
 		long blocksToReplaceCount = replaceData.getC();
 		if (blocksToReplaceCount == 0) {
 			return false;
 		}
 		targetBlock = replaceData.getA();
 		Item consumedItem = replaceData.getB();
-
+		
 		int range = getRange(player);
 		List<BlockPos> targetPositions = BuildingHelper.getConnectedBlocks(world, pos, blocksToReplaceCount, range);
 		if (targetPositions.isEmpty()) {
 			return false;
 		}
-
+		
 		int blocksReplaced = 0;
 		if (!world.isClient) {
 			List<ItemStack> stacks = new ArrayList<>();
 			BlockState stateToPlace;
 			for (BlockPos targetPosition : targetPositions) {
-
+				
 				// Require both place and break permissions in order to swap blocks
 				if (!GenericClaimModsCompat.canModify(world, pos, player))
 					continue;
-
+				
 				if (!player.isCreative()) {
 					BlockState droppedStacks = world.getBlockState(targetPosition);
 					stacks.addAll(Block.getDroppedStacks(droppedStacks, (ServerWorld) world, targetPosition,
@@ -119,7 +119,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 								SoundCategory.PLAYERS, stateToPlace.getSoundGroup().getVolume(),
 								stateToPlace.getSoundGroup().getPitch());
 					}
-
+					
 					if (!world.setBlockState(targetPosition, stateToPlace)) {
 						ItemEntity itemEntity = new ItemEntity(world, targetPosition.getX(), targetPosition.getY(),
 								targetPosition.getZ(), new ItemStack(consumedItem));
@@ -128,10 +128,10 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 						world.spawnEntity(itemEntity);
 					}
 				}
-
+				
 				blocksReplaced++;
 			}
-
+			
 			if (!player.isCreative()) {
 				InventoryHelper.removeFromInventoryWithRemainders(player,
 						new ItemStack(consumedItem, targetPositions.size()));
@@ -140,9 +140,9 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 				}
 				InkPowered.tryDrainEnergy(player, USED_COLOR, (long) targetPositions.size() * INK_COST_PER_BLOCK);
 			}
-
+			
 		}
-
+		
 		return true;
 	}
 	
@@ -173,29 +173,29 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	@Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		PlayerEntity player = context.getPlayer();
-
+		
 		if (player == null) {
 			return ActionResult.FAIL;
 		}
-
+		
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		BlockState targetBlockState = world.getBlockState(pos);
 		Block targetBlock = targetBlockState.getBlock();
-
+		
 		if (!canInteractWith(targetBlockState, context.getWorld(), context.getBlockPos(), context.getPlayer())) {
 			world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_DISPENSER_FAIL, SoundCategory.PLAYERS, 1.0F,
 					1.0F);
 			return ActionResult.FAIL;
 		}
-
+		
 		ItemStack staffStack = context.getStack();
-
+		
 		if (player.isSneaking()) {
 			// storing that block as target
 			if (world instanceof ServerWorld serverWorld) {
 				storeBlockAsTarget(staffStack, targetBlock);
-
+				
 				Direction side = context.getSide();
 				Vec3d sourcePos = new Vec3d(context.getHitPos().getX() + side.getOffsetX() * 0.1,
 						context.getHitPos().getY() + side.getOffsetY() * 0.1,
@@ -213,7 +213,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 					&& storedBlock.get() != targetBlock
 					&& storedBlock.get().asItem() != Items.AIR
 					&& exchange(world, pos, player, storedBlock.get(), staffStack, context.getSide())) {
-
+				
 				return ActionResult.success(world.isClient);
 			}
 		}
@@ -232,7 +232,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	public int getEnchantability() {
 		return 3;
 	}
-
+	
 	@Override
 	public List<InkColor> getUsedColors() {
 		return List.of(USED_COLOR);
@@ -240,7 +240,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	
 	@Override
 	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
-		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.FORTUNE) || enchantment.matchesKey(Enchantments.SILK_TOUCH) || enchantment.matchesKey(SpectrumEnchantments.RESONANCE);
+		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.FORTUNE) || enchantment.matchesKey(Enchantments.SILK_TOUCH) || enchantment.matchesKey(SpectrumEnchantments.CLOAKED_RESONANCE);
 	}
 	
 }

@@ -151,7 +151,7 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumEnchantmentHelper.getEnchantedStack(displayContext.lookup(), SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), Map.of(Enchantments.POWER, 5, SpectrumEnchantments.VOIDING, 1)));
 				
 				entries.add(SpectrumItems.KNOWLEDGE_GEM);
-				ItemStack enchantedKnowledgeGemStack = SpectrumEnchantmentHelper.getEnchantedStack(displayContext.lookup(), SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), Map.of(Enchantments.POWER, 5, SpectrumEnchantments.VOIDING, 1));
+				ItemStack enchantedKnowledgeGemStack = SpectrumEnchantmentHelper.getEnchantedStack(displayContext.lookup(), SpectrumItems.KNOWLEDGE_GEM.asItem(), Map.of(Enchantments.EFFICIENCY, 5, Enchantments.QUICK_CHARGE, 3));
 				entries.add(enchantedKnowledgeGemStack.copy());
 				
 				ItemStack knowledgeGemStack = SpectrumItems.KNOWLEDGE_GEM.getDefaultStack();
@@ -176,11 +176,9 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumItems.STAFF_OF_REMEMBRANCE);
 				entries.add(SpectrumItems.CONSTRUCTORS_STAFF);
 				entries.add(SpectrumItems.EXCHANGING_STAFF);
-				displayContext.lookup().getOptionalWrapper(RegistryKeys.ENCHANTMENT).ifPresent(impl -> {
-					impl.getOptional(Enchantments.FORTUNE).ifPresent(enchantment -> entries.add(SpectrumEnchantmentHelper.addOrUpgradeEnchantment(SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), enchantment, 3, false, false).getRight()));
-					impl.getOptional(Enchantments.SILK_TOUCH).ifPresent(enchantment -> entries.add(SpectrumEnchantmentHelper.addOrUpgradeEnchantment(SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), enchantment, 1, false, false).getRight()));
-					impl.getOptional(SpectrumEnchantments.CLOAKED_RESONANCE).ifPresent(enchantment -> entries.add(SpectrumEnchantmentHelper.addOrUpgradeEnchantment(SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), enchantment, 1, false, false).getRight()));
-				});
+				SpectrumEnchantmentHelper.addOrUpgradeEnchantmentOpt(displayContext.lookup(), SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), Enchantments.FORTUNE, 3, false, false).ifPresent(entries::add);
+				SpectrumEnchantmentHelper.addOrUpgradeEnchantmentOpt(displayContext.lookup(), SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), Enchantments.SILK_TOUCH, 1, false, false).ifPresent(entries::add);
+				SpectrumEnchantmentHelper.addOrUpgradeEnchantmentOpt(displayContext.lookup(), SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), SpectrumEnchantments.CLOAKED_RESONANCE, 1, false, false).ifPresent(entries::add);
 				entries.add(SpectrumItems.BLOCK_FLOODER);
 				entries.add(SpectrumItems.ENDER_SPLICE);
 				entries.add(SpectrumEnchantmentHelper.getEnchantedStack(displayContext.lookup(), SpectrumItems.ENDER_SPLICE, Map.of(SpectrumEnchantments.RESONANCE, 1, SpectrumEnchantments.INDESTRUCTIBLE, 1)));

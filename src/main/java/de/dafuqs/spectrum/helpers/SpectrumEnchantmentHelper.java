@@ -45,6 +45,11 @@ public class SpectrumEnchantmentHelper {
 				.orElse(new Pair<>(false, stack));
 	}
 	
+	public static Optional<ItemStack> addOrUpgradeEnchantmentOpt(RegistryWrapper.WrapperLookup registryLookup, ItemStack stack, RegistryKey<Enchantment> enchantmentKey, int level, boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts) {
+		Pair<Boolean, ItemStack> result = addOrUpgradeEnchantment(registryLookup, stack, enchantmentKey, level, forceEvenIfNotApplicable, allowEnchantmentConflicts);
+		return result.getLeft() ? Optional.empty() : Optional.of(result.getRight());
+	}
+	
 	public static ItemStack getMaxEnchantedStack(RegistryWrapper.WrapperLookup drm, Item item) {
 		var stack = item.getDefaultStack();
 		var builder = new ItemEnchantmentsComponent.Builder(EnchantmentHelper.getEnchantments(stack));
