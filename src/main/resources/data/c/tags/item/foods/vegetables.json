@@ -1,8 +1,5 @@
 {
   "values": [
-    "minecraft:carrot",
-    "minecraft:golden_carrot",
-    "minecraft:potato",
-    "minecraft:beetroot"
+    "spectrum:enchanted_golden_carrot"
   ]
 }

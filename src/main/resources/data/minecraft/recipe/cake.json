@@ -10,7 +10,7 @@
   "key": {
     "A": [
       {
-        "tag": "c:milk"
+        "tag": "c:foods/milks"
       }
     ],
     "B": [
@@ -25,7 +25,7 @@
     ],
     "E": [
       {
-        "tag": "c:eggs"
+        "tag": "c:foods/eggs"
       }
     ]
   },

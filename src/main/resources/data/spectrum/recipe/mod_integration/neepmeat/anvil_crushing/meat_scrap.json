@@ -2,7 +2,7 @@
   "type": "spectrum:anvil_crushing",
   "ingredient": [
     {
-      "tag": "c:raw_meat"
+      "tag": "c:foods/raw_meats"
     }
   ],
   "crushedItemsPerPointOfDamage": 1.5,

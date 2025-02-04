@@ -2,7 +2,7 @@
   "type": "spectrum:titration_barrel",
   "ingredients": [
     {
-      "tag": "c:raw_fish",
+      "tag": "c:foods/raw_fishes",
       "count": 8
     },
     {

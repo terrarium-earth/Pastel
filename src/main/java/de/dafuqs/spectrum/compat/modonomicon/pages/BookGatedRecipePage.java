@@ -5,13 +5,13 @@ import com.klikli_dev.modonomicon.book.*;
 import com.klikli_dev.modonomicon.book.conditions.*;
 import com.klikli_dev.modonomicon.book.page.*;
 import com.klikli_dev.modonomicon.util.*;
-import de.dafuqs.spectrum.api.block.GatedGuidebookPage;
+import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.compat.modonomicon.unlock_conditions.*;
 import net.minecraft.item.*;
 import net.minecraft.network.*;
 import net.minecraft.recipe.*;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 

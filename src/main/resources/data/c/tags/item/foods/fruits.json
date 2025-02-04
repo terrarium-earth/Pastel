@@ -1,8 +1,10 @@
 {
   "values": [
-    "minecraft:apple",
-    "minecraft:golden_apple",
-    "minecraft:enchanted_golden_apple",
-    "minecraft:melon_slice"
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "spectrum:glass_peach",
+    "spectrum:fissure_plum",
+    "spectrum:glass_peach",
+    "spectrum:mermaids_gem"
   ]
 }

@@ -65,7 +65,10 @@ dependencies {
 	// https://github.com/shedaniel/RoughlyEnoughItems
 	modCompileOnly("dev.emi:emi-fabric:${emi_version}") // https://github.com/emilyploszaj/emi
 	// https://github.com/klikli-dev/modonomicon
-	modImplementation("com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}") { exclude(group: "com.klikli_dev") }
+	modImplementation("com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}") {
+		exclude(group: "com.klikli_dev")
+		exclude(group: "mezz.jei")
+	}
 
 	switch (recipe_viewer.toLowerCase(Locale.ROOT)) {
 		case "rei": modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"); break
