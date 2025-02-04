@@ -4,7 +4,6 @@ import com.google.common.collect.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.helpers.*;
 import dev.emi.trinkets.api.*;
-import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
@@ -41,11 +40,6 @@ public class SevenLeagueBootsItem extends SpectrumTrinketItem {
 	@Override
 	public int getEnchantability() {
 		return 8;
-	}
-	
-	@Override
-	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
-		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.POWER);
 	}
 	
 }

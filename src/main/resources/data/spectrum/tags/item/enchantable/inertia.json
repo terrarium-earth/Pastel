@@ -1,5 +1,7 @@
 {
   "values": [
-    "#minecraft:enchantable/mining_loot"
+    "#minecraft:enchantable/mining_loot",
+    "spectrum:dragon_talon",
+    "spectrum:draconic_twinsword"
   ]
 }

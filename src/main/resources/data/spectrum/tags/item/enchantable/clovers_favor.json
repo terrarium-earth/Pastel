@@ -1,6 +1,7 @@
 {
   "values": [
     "#minecraft:enchantable/sword",
+    "spectrum:malachite_bident",
     "#spectrum:enchantable/malum_scythe_todo_replace"
   ]
 }
