@@ -8,12 +8,21 @@ import de.dafuqs.spectrum.mixin.accessors.*;
 import net.minecraft.nbt.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
+import org.apache.commons.lang3.math.*;
 
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 
 public class CodecHelper {
+	
+	public static Codec<Fraction> FRACTION = Codec.mapPair(
+			Codec.INT.fieldOf("numerator"),
+			Codec.INT.fieldOf("denominator")
+	).codec().xmap(
+			pair -> Fraction.getFraction(pair.getFirst(), pair.getSecond()),
+			frac -> new com.mojang.datafixers.util.Pair<>(frac.getNumerator(), frac.getDenominator())
+	);
 	
 	public static Codec<Identifier> SPECTRUM_IDENTIFIER = Codec.STRING.xmap(SpectrumCommon::ofSpectrum, Identifier::toString);
 	

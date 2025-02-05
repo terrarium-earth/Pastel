@@ -26,44 +26,44 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 	public static final int MAX_STORAGE_STACKS = 5;
 	
 	public PresentBlockItem(Block block, Settings settings) {
-		super(MAX_STORAGE_STACKS, block, settings);
+		super(new ExtendedBundleComponent(MAX_STORAGE_STACKS), block, settings);
 	}
-
+	
 	@Override
 	protected boolean canPlace(ItemPlacementContext context, BlockState state) {
 		return isWrapped(context.getStack()) && super.canPlace(context, state);
 	}
-
+	
 	public static void setOwner(ItemStack itemStack, PlayerEntity giver) {
 		var profile = new GameProfile(giver.getUuid(), giver.getName().getString());
 		itemStack.set(DataComponentTypes.PROFILE, new ProfileComponent(profile));
 	}
-
+	
 	public static Optional<ProfileComponent> getOwner(ItemStack itemStack) {
 		return Optional.ofNullable(itemStack.get(DataComponentTypes.PROFILE));
 	}
-
+	
 	public static boolean isEmpty(ItemStack itemStack) {
 		return itemStack.getOrDefault(DataComponentTypes.BUNDLE_CONTENTS, BundleContentsComponent.DEFAULT).isEmpty();
 	}
-
+	
 	public static boolean isWrapped(ItemStack itemStack) {
 		return getWrapData(itemStack).wrapped();
 	}
-
+	
 	public static WrappedPresentComponent getWrapData(ItemStack itemStack) {
 		return itemStack.getOrDefault(SpectrumDataComponentTypes.WRAPPED_PRESENT, WrappedPresentComponent.DEFAULT);
 	}
-
+	
 	public static void wrap(ItemStack itemStack, PresentBlock.WrappingPaper wrappingPaper, Map<DyeColor, Integer> colors) {
 		itemStack.set(SpectrumDataComponentTypes.WRAPPED_PRESENT, new WrappedPresentComponent(true, wrappingPaper, colors));
 	}
-
+	
 	@Override
 	public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
 		return !isCraftingInventory(slot) && super.onClicked(stack, otherStack, slot, clickType, player, cursorStackReference);
 	}
-
+	
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 		ItemStack itemStack = user.getStackInHand(hand);
@@ -87,7 +87,7 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 			setOwner(stack, player);
 		}
 	}
-
+	
 	@Override
 	public boolean isItemBarVisible(ItemStack stack) {
 		return !isWrapped(stack) && super.isItemBarVisible(stack);
@@ -96,13 +96,13 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 	public static Stream<ItemStack> getBundledStacks(ItemStack stack) {
 		return stack.getOrDefault(DataComponentTypes.BUNDLE_CONTENTS, BundleContentsComponent.DEFAULT).stream();
 	}
-
+	
 	@Override
 	public Optional<TooltipData> getTooltipData(ItemStack stack) {
 		if (isWrapped(stack)) {
 			return Optional.empty();
 		}
-
+		
 		// TODO: Use BundleTooltipComponent and such instead
 		var list = DefaultedList.ofSize(MAX_STORAGE_STACKS, ItemStack.EMPTY);
 		var stacks = getBundledStacks(stack).toList();
@@ -110,7 +110,7 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 			list.set(i, stacks.get(i));
 		return Optional.of(new PresentTooltipData(list));
 	}
-
+	
 	@Override
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 		boolean wrapped = isWrapped(stack);

@@ -18,4 +18,17 @@ public class Deferrer {
 		return value;
 	}
 	
+	public static <T> Chain<T> chain(T value) {
+		return new Chain<>(value);
+	}
+	
+	public record Chain<T>(T value) {
+		
+		public Chain<T> defer(Deferrer deferrer, Consumer<T> callback) {
+			deferrer.defer(value, callback);
+			return this;
+		}
+		
+	}
+	
 }

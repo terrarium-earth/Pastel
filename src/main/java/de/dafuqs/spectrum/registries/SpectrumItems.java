@@ -537,6 +537,7 @@ public class SpectrumItems {
 	public static final Item STORAGE_NODE_CRYSTAL = new Item(IS.of());
 	public static final Item BUFFER_NODE_CRYSTAL = new Item(IS.of());
 	public static final Item GATHER_NODE_CRYSTAL = new Item(IS.of());
+	public static final Item EXTENDED_BUNDLE_ITEM = registerDeferred("extended_bundle", new Item(IS.of()), DyeColor.BROWN);
 	
 	public static RegistryKey<Item> keyOf(String name) {
 		return RegistryKey.of(RegistryKeys.ITEM, locate(name));
@@ -550,6 +551,10 @@ public class SpectrumItems {
 	public static void register(RegistryKey<Item> key, Item item, DyeColor dyeColor) {
 		Registry.register(Registries.ITEM, key, item);
 		ItemColors.ITEM_COLORS.registerColorMapping(item, dyeColor);
+	}
+	
+	public static Item registerDeferred(String id, Item item, DyeColor dyeColor) {
+		return DEFERRER.defer(item, i -> register(id, i, dyeColor));
 	}
 	
 	public static void register() {

@@ -12,12 +12,14 @@ import net.minecraft.registry.*;
 import net.minecraft.util.Pair;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
+import org.apache.commons.lang3.math.*;
 
 import java.lang.reflect.*;
 import java.util.function.*;
 
 public class PacketCodecHelper {
 	
+	public static PacketCodec<ByteBuf, Fraction> FRACTION = PacketCodecHelper.pair(PacketCodecs.VAR_INT, PacketCodecs.VAR_INT).xmap(pair -> Fraction.getFraction(pair.getLeft(), pair.getRight()), frac -> new Pair<>(frac.getNumerator(), frac.getDenominator()));
 	public static final PacketCodec<ByteBuf, Vec3i> VEC3I = PacketCodec.tuple(PacketCodecs.VAR_INT, Vec3i::getX, PacketCodecs.VAR_INT, Vec3i::getY, PacketCodecs.VAR_INT, Vec3i::getZ, Vec3i::new);
 	public static final PacketCodec<ByteBuf, Vec3d> VEC3D = PacketCodec.tuple(PacketCodecs.DOUBLE, Vec3d::getX, PacketCodecs.DOUBLE, Vec3d::getY, PacketCodecs.DOUBLE, Vec3d::getZ, Vec3d::new);
 	public static final PacketCodec<ByteBuf, NumberRange.IntRange> INT_RANGE = PacketCodec.tuple(
@@ -35,7 +37,8 @@ public class PacketCodecHelper {
 	
 	public static final PacketCodec<ByteBuf, BlockState> BLOCK_STATE = PacketCodecs.STRING.xmap(string -> RecipeUtils.blockStateDataFromString(string).result().orElse(Blocks.AIR.getDefaultState()), RecipeUtils::blockStateToString);
 	
-	public static final PacketCodec<RegistryByteBuf, RegistryWrapper.WrapperLookup> LOOKUP = PacketCodec.ofStatic((buf, value) -> {}, RegistryByteBuf::getRegistryManager);
+	public static final PacketCodec<RegistryByteBuf, RegistryWrapper.WrapperLookup> LOOKUP = PacketCodec.ofStatic((buf, value) -> {
+	}, RegistryByteBuf::getRegistryManager);
 	
 	public static <O extends ByteBuf, L, R> PacketCodec<O, Pair<L, R>> pair(PacketCodec<? super O, L> left, PacketCodec<? super O, R> right) {
 		return PacketCodec.tuple(left, Pair::getLeft, right, Pair::getRight, Pair::new);
