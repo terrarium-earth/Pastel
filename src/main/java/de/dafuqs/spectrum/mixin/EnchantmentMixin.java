@@ -25,7 +25,12 @@ public abstract class EnchantmentMixin {
 	 */
 	@ModifyVariable(method = "<init>(Lnet/minecraft/text/Text;Lnet/minecraft/enchantment/Enchantment$Definition;Lnet/minecraft/registry/entry/RegistryEntryList;Lnet/minecraft/component/ComponentMap;)V", at = @At(value = "INVOKE", target = "Ljava/lang/Record;<init>()V", shift = At.Shift.AFTER), argsOnly = true)
 	private Enchantment.Definition injectExtendedEnchantables(Enchantment.Definition definition, @Local(argsOnly = true) Text description) {
-		List<RegistryEntry<Item>> items = new ArrayList<>(definition.supportedItems().stream().toList());
+		List<RegistryEntry<Item>> items;
+		try {
+			items = new ArrayList<>(definition.supportedItems().stream().toList());
+		} catch (UnsupportedOperationException e) {
+			return definition;
+		}
 		
 		if (description.getContent() instanceof TranslatableTextContent translation) {
 			String[] sections = translation.getKey().split("\\.", 2);

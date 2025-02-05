@@ -7,15 +7,15 @@ import net.minecraft.registry.*;
 
 import java.util.concurrent.*;
 
-public class SpectrumEnchantmentTagProvider extends FabricTagProvider.EnchantmentTagProvider {
+public class SpectrumItemTagProvider extends FabricTagProvider.ItemTagProvider {
 	
-	public SpectrumEnchantmentTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> lookupFuture) {
+	public SpectrumItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> lookupFuture) {
 		super(output, lookupFuture);
 	}
 	
 	@Override
 	protected void configure(RegistryWrapper.WrapperLookup lookup) {
-		this.getOrCreateTagBuilder(SpectrumEnchantmentTags.AUTO_KILLS_SILVERFISH).add(SpectrumEnchantments.PEST_CONTROL);
+		SpectrumEnchantments.provideTags(this::getOrCreateTagBuilder);
 	}
 	
 }

@@ -1,11 +1,21 @@
 package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.spectrum.*;
+import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
+import net.minecraft.item.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.tag.*;
+
+import java.util.*;
+
+import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
 
 @SuppressWarnings("unused")
 public class SpectrumEnchantments {
+	
+	private static final Deferrer.Contextual<ProvidedTagBuilderBuilder<Item>> TAG_DEFERRER = new Deferrer.Contextual<>();
+	private static final Deferrer.Contextual<BootstrapContext<Enchantment>> BOOTSTRAP_DEFERRER = new Deferrer.Contextual<>();
 	
 	public static final RegistryKey<Enchantment> CLOAKED_BIG_CATCH = of("cloaked/big_catch");
 	public static final RegistryKey<Enchantment> CLOAKED_CLOVERS_FAVOR = of("cloaked/clovers_favor");
@@ -39,7 +49,20 @@ public class SpectrumEnchantments {
 	public static final RegistryKey<Enchantment> INERTIA = of("inertia"); // Decreases mining speed, but increases with each mined block of the same type
 	public static final RegistryKey<Enchantment> INEXORABLE = of("inexorable"); // prevents mining & movement slowdowns
 	public static final RegistryKey<Enchantment> INVENTORY_INSERTION = of("inventory_insertion"); // don't drop items into the world, add to inv instead
-	public static final RegistryKey<Enchantment> PEST_CONTROL = of("pest_control"); // Kills silverfish when mining infested blocks
+	
+	// Kills silverfish when mining infested blocks
+	public static final RegistryKey<Enchantment> PEST_CONTROL = registerUncloaked("pest_control", (key, ctx) -> new Enchantment.Builder(new Enchantment.Definition(
+			ctx.items().getOrThrow(getEnchantableKey(key)),
+			Optional.empty(),
+			1,
+			1,
+			new Enchantment.Cost(0, 0),
+			new Enchantment.Cost(0, 0),
+			0,
+			List.of(AttributeModifierSlot.MAINHAND)
+	)), provider -> provider
+			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE));
+	
 	public static final RegistryKey<Enchantment> RAZING = of("razing"); // increased mining speed for very hard blocks
 	public static final RegistryKey<Enchantment> RESONANCE = of("resonance"); // Silk Touch, just for different blocks
 	public static final RegistryKey<Enchantment> SERENDIPITY_REEL = of("serendipity_reel"); // Increase luck when fishing
@@ -51,6 +74,25 @@ public class SpectrumEnchantments {
 	
 	private static RegistryKey<Enchantment> of(String id) {
 		return RegistryKey.of(RegistryKeys.ENCHANTMENT, SpectrumCommon.locate(id));
+	}
+	
+	private static TagKey<Item> getEnchantableKey(RegistryKey<Enchantment> key) {
+		return TagKey.of(RegistryKeys.ITEM, SpectrumCommon.locate("enchantable/" + key.getValue().getPath()));
+	}
+	
+	private static RegistryKey<Enchantment> registerUncloaked(String id, BootstrapCallback<Enchantment, Enchantment.Builder> callback, ProvidedTagBuilderCallback<Item> tagCallback) {
+		return Deferrer.chain(of(id))
+				.defer(TAG_DEFERRER, (key, ctx) -> tagCallback.build(ctx.build(getEnchantableKey(key))))
+				.defer(BOOTSTRAP_DEFERRER, (key, ctx) -> ctx.registerable().register(key, callback.call(key, ctx).build(key.getValue())))
+				.value();
+	}
+	
+	public static void provideTags(ProvidedTagBuilderBuilder<Item> builder) {
+		TAG_DEFERRER.flush(builder);
+	}
+	
+	public static void bootstrap(Registerable<Enchantment> registerable) {
+		BOOTSTRAP_DEFERRER.flush(new BootstrapContext<>(registerable));
 	}
 	
 }
