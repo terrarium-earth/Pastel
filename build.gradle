@@ -104,6 +104,12 @@ dependencies {
 	}
 }
 
+fabricApi {
+	configureDataGeneration {
+		client = true
+	}
+}
+
 loom {
 	accessWidenerPath = file("src/main/resources/spectrum.accesswidener")
 
