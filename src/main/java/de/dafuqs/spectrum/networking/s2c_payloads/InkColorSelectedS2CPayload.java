@@ -28,13 +28,11 @@ public record InkColorSelectedS2CPayload(RegistryEntry<InkColor> color) implemen
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.PlayPayloadHandler<InkColorSelectedS2CPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			ScreenHandler screenHandler = context.player().currentScreenHandler;
-			if (screenHandler instanceof InkColorSelectedPacketReceiver inkColorSelectedPacketReceiver) {
-				inkColorSelectedPacketReceiver.onInkColorSelectedPacket(payload.color);
-			}
-		};
+	public static void execute(InkColorSelectedS2CPayload payload, ClientPlayNetworking.Context context) {
+		ScreenHandler screenHandler = context.player().currentScreenHandler;
+		if (screenHandler instanceof InkColorSelectedPacketReceiver inkColorSelectedPacketReceiver) {
+			inkColorSelectedPacketReceiver.onInkColorSelectedPacket(payload.color);
+		}
 	}
 	
 	@Override

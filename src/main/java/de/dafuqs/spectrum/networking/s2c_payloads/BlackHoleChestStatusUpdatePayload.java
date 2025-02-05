@@ -13,7 +13,6 @@ import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.util.math.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -47,20 +46,16 @@ public record BlackHoleChestStatusUpdatePayload(BlockPos pos, boolean isFull, bo
 	
 	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<BlackHoleChestStatusUpdatePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				if (client.world != null) {
-					Optional<BlackHoleChestBlockEntity> entity = client.world.getBlockEntity(payload.pos, SpectrumBlockEntities.BLACK_HOLE_CHEST);
-					entity.ifPresent(chest -> {
-						chest.setFull(payload.isFull);
-						chest.setHasXPStorage(payload.canStoreExperience);
-						chest.setXPData(payload.storedExperience, payload.maxStoredExperience);
-					});
-				}
+	public static void execute(BlackHoleChestStatusUpdatePayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		if (client.world != null) {
+			Optional<BlackHoleChestBlockEntity> entity = client.world.getBlockEntity(payload.pos, SpectrumBlockEntities.BLACK_HOLE_CHEST);
+			entity.ifPresent(chest -> {
+				chest.setFull(payload.isFull);
+				chest.setHasXPStorage(payload.canStoreExperience);
+				chest.setXPData(payload.storedExperience, payload.maxStoredExperience);
 			});
-		};
+		}
 	}
 	
 	@Override

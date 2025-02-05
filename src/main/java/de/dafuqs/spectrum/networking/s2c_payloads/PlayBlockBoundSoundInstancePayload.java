@@ -42,14 +42,12 @@ public record PlayBlockBoundSoundInstancePayload(SoundEvent soundEvent, BlockPos
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayBlockBoundSoundInstancePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			if (payload.maxDurationTicks < 0) {
-				CraftingBlockSoundInstance.stopPlayingOnPos(payload.pos);
-			} else {
-				CraftingBlockSoundInstance.startSoundInstance(payload.soundEvent, payload.pos, payload.block.value(), payload.maxDurationTicks);
-			}
-		};
+	public static void execute(PlayBlockBoundSoundInstancePayload payload, ClientPlayNetworking.Context context) {
+		if (payload.maxDurationTicks < 0) {
+			CraftingBlockSoundInstance.stopPlayingOnPos(payload.pos);
+		} else {
+			CraftingBlockSoundInstance.startSoundInstance(payload.soundEvent, payload.pos, payload.block.value(), payload.maxDurationTicks);
+		}
 	}
 	
 	@Override

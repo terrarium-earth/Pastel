@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.items.map;
 import com.google.common.collect.*;
 import com.mojang.datafixers.util.Pair;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.api.*;
 import net.minecraft.block.*;
 import net.minecraft.client.*;
 import net.minecraft.component.*;
@@ -295,6 +296,7 @@ public class ArtisansAtlasItem extends FilledMapItem {
 	}
 	
 	@Override
+	@Environment(EnvType.CLIENT)
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 		super.appendTooltip(stack, context, tooltip, type);
 		

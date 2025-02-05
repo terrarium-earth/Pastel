@@ -9,7 +9,6 @@ import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
-import org.jetbrains.annotations.*;
 
 public record PlayTakeOffBeltSoundInstancePayload() implements CustomPayload {
 	
@@ -22,8 +21,8 @@ public record PlayTakeOffBeltSoundInstancePayload() implements CustomPayload {
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayTakeOffBeltSoundInstancePayload> getPayloadHandler() {
-		return (payload, context) -> context.client().execute(TakeOffBeltSoundInstance::startSoundInstance);
+	public static void execute(PlayTakeOffBeltSoundInstancePayload payload, ClientPlayNetworking.Context context) {
+		TakeOffBeltSoundInstance.startSoundInstance();
 	}
 	
 	@Override

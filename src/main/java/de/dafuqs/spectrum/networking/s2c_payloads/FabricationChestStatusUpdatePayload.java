@@ -13,7 +13,6 @@ import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.util.math.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -39,22 +38,18 @@ public record FabricationChestStatusUpdatePayload(BlockPos pos, boolean isFull, 
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<FabricationChestStatusUpdatePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			var pos = payload.pos;
-			var isFull = payload.isFull;
-			var hasValidRecipes = payload.hasValidRecipes;
-			List<ItemStack> outputs = payload.stacks;
-			
-			client.execute(() -> {
-				Optional<FabricationChestBlockEntity> entity = client.world.getBlockEntity(pos, SpectrumBlockEntities.FABRICATION_CHEST);
-				if (entity.isPresent()) {
-					entity.get().updateState(isFull, hasValidRecipes, outputs);
-				}
-			});
-		};
+	public static void execute(FabricationChestStatusUpdatePayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		var pos = payload.pos;
+		var isFull = payload.isFull;
+		var hasValidRecipes = payload.hasValidRecipes;
+		List<ItemStack> outputs = payload.stacks;
+		Optional<FabricationChestBlockEntity> entity = client.world.getBlockEntity(pos, SpectrumBlockEntities.FABRICATION_CHEST);
+		if (entity.isPresent()) {
+			entity.get().updateState(isFull, hasValidRecipes, outputs);
+		}
 	}
 	
 	@Override

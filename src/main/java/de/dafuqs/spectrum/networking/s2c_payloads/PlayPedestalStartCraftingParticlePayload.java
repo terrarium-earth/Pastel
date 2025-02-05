@@ -12,7 +12,6 @@ import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.math.*;
-import org.jetbrains.annotations.*;
 
 public record PlayPedestalStartCraftingParticlePayload(BlockPos pedestalPos) implements CustomPayload {
 	
@@ -28,14 +27,11 @@ public record PlayPedestalStartCraftingParticlePayload(BlockPos pedestalPos) imp
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayPedestalStartCraftingParticlePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				PedestalBlockEntity.spawnCraftingStartParticles(client.world, payload.pedestalPos);
-			});
-		};
+	public static void execute(PlayPedestalStartCraftingParticlePayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		PedestalBlockEntity.spawnCraftingStartParticles(client.world, payload.pedestalPos);
 	}
 	
 	@Override

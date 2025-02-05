@@ -13,7 +13,6 @@ import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.util.math.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -32,18 +31,14 @@ public record UpdateBlockEntityInkPayload(BlockPos pos, Map<InkColor, Long> stor
 		ServerPlayNetworking.send(player, new UpdateBlockEntityInkPayload(pos, inkStorage.getEnergy(), inkStorage.getCurrentTotal()));
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	@SuppressWarnings({"resource", "deprecation", "DataFlowIssue"})
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<UpdateBlockEntityInkPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			context.client().execute(() -> {
-				BlockEntity blockEntity = client.world.getBlockEntity(payload.pos);
-				if (blockEntity instanceof InkStorageBlockEntity<?> inkStorageBlockEntity) {
-					inkStorageBlockEntity.getEnergyStorage().setEnergy(payload.storage, payload.currentTotal);
-				}
-			});
-		};
+	public static void execute(UpdateBlockEntityInkPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		BlockEntity blockEntity = client.world.getBlockEntity(payload.pos);
+		if (blockEntity instanceof InkStorageBlockEntity<?> inkStorageBlockEntity) {
+			inkStorageBlockEntity.getEnergyStorage().setEnergy(payload.storage, payload.currentTotal);
+		}
 	}
 	
 	@Override

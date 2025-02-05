@@ -39,36 +39,33 @@ public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1,
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayMemoryManifestingParticlesPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				Random random = client.world.random;
-				
-				Vector3f colorVec1 = de.dafuqs.spectrum.helpers.ColorHelper.colorIntToVec(payload.eggColor1);
-				Vector3f colorVec2 = ColorHelper.colorIntToVec(payload.eggColor1);
-				
-				BlockPos pos = payload.pos;
-				for (int i = 0; i < payload.amount; i++) {
-					int randomLifetime = 30 + random.nextInt(20);
-					
-					// color1
-					client.world.addParticle(
-							new DynamicParticleEffect(SpectrumParticleTypes.WHITE_CRAFTING, 0.5F, colorVec1, 1.0F, randomLifetime, false, true),
-							pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ(),
-							0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3
-					);
-					
-					// color2
-					client.world.addParticle(
-							new DynamicParticleEffect(SpectrumParticleTypes.WHITE_CRAFTING, 0.5F, colorVec2, 1.0F, randomLifetime, false, true),
-							pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
-							0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3
-					);
-				}
-			});
-		};
+	public static void execute(PlayMemoryManifestingParticlesPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		Random random = client.world.random;
+		
+		Vector3f colorVec1 = de.dafuqs.spectrum.helpers.ColorHelper.colorIntToVec(payload.eggColor1);
+		Vector3f colorVec2 = ColorHelper.colorIntToVec(payload.eggColor1);
+		
+		BlockPos pos = payload.pos;
+		for (int i = 0; i < payload.amount; i++) {
+			int randomLifetime = 30 + random.nextInt(20);
+			
+			// color1
+			client.world.addParticle(
+					new DynamicParticleEffect(SpectrumParticleTypes.WHITE_CRAFTING, 0.5F, colorVec1, 1.0F, randomLifetime, false, true),
+					pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ(),
+					0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3
+			);
+			
+			// color2
+			client.world.addParticle(
+					new DynamicParticleEffect(SpectrumParticleTypes.WHITE_CRAFTING, 0.5F, colorVec2, 1.0F, randomLifetime, false, true),
+					pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
+					0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3
+			);
+		}
 	}
 	
 	@Override

@@ -14,7 +14,6 @@ import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.sound.*;
-import org.jetbrains.annotations.*;
 
 public record PlayDivinityAppliedEffectsPayload() implements CustomPayload {
 	
@@ -26,18 +25,16 @@ public record PlayDivinityAppliedEffectsPayload() implements CustomPayload {
 		ServerPlayNetworking.send(player, new PlayDivinityAppliedEffectsPayload());
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayDivinityAppliedEffectsPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			PlayerEntity player = client.player;
-			client.particleManager.addEmitter(player, SpectrumParticleTypes.DIVINITY, 30);
-			client.gameRenderer.showFloatingItem(SpectrumItems.DIVINATION_HEART.getDefaultStack());
-			client.world.playSound(null, player.getBlockPos(), SpectrumSoundEvents.FAILING_PLACED, SoundCategory.PLAYERS, 1.0F, 1.0F);
-			
-			ParticleHelper.playParticleWithPatternAndVelocityClient(player.getWorld(), player.getPos(), SpectrumParticleTypes.WHITE_CRAFTING, VectorPattern.SIXTEEN, 0.4);
-			ParticleHelper.playParticleWithPatternAndVelocityClient(player.getWorld(), player.getPos(), SpectrumParticleTypes.RED_CRAFTING, VectorPattern.SIXTEEN, 0.4);
-		};
+	public static void execute(PlayDivinityAppliedEffectsPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		PlayerEntity player = client.player;
+		client.particleManager.addEmitter(player, SpectrumParticleTypes.DIVINITY, 30);
+		client.gameRenderer.showFloatingItem(SpectrumItems.DIVINATION_HEART.getDefaultStack());
+		client.world.playSound(null, player.getBlockPos(), SpectrumSoundEvents.FAILING_PLACED, SoundCategory.PLAYERS, 1.0F, 1.0F);
+		ParticleHelper.playParticleWithPatternAndVelocityClient(player.getWorld(), player.getPos(), SpectrumParticleTypes.WHITE_CRAFTING, VectorPattern.SIXTEEN, 0.4);
+		ParticleHelper.playParticleWithPatternAndVelocityClient(player.getWorld(), player.getPos(), SpectrumParticleTypes.RED_CRAFTING, VectorPattern.SIXTEEN, 0.4);
 	}
 	
 	@Override

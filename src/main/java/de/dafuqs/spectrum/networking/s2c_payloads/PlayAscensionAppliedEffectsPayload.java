@@ -12,7 +12,6 @@ import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.sound.*;
-import org.jetbrains.annotations.*;
 
 public record PlayAscensionAppliedEffectsPayload() implements CustomPayload {
 	
@@ -24,14 +23,12 @@ public record PlayAscensionAppliedEffectsPayload() implements CustomPayload {
 		ServerPlayNetworking.send(player, new PlayAscensionAppliedEffectsPayload());
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayAscensionAppliedEffectsPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			
-			client.world.playSound(null, client.player.getBlockPos(), SpectrumSoundEvents.FADING_PLACED, SoundCategory.PLAYERS, 1.0F, 1.0F);
-			client.getSoundManager().play(new DivinitySoundInstance());
-		};
+	public static void execute(PlayAscensionAppliedEffectsPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		client.world.playSound(null, client.player.getBlockPos(), SpectrumSoundEvents.FADING_PLACED, SoundCategory.PLAYERS, 1.0F, 1.0F);
+		client.getSoundManager().play(new DivinitySoundInstance());
 	}
 	
 	@Override

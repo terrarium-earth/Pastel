@@ -38,26 +38,22 @@ public record PlayFusionCraftingFinishedParticlePayload(BlockPos pos, DyeColor c
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayFusionCraftingFinishedParticlePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				BlockPos pos = payload.pos;
-				Vec3d sourcePos = new Vec3d(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-				
-				Vector3f color = ColorHelper.getRGBVec(payload.color);
-				float velocityModifier = 0.25F;
-				for (Vec3d velocity : VectorPattern.SIXTEEN.getVectors()) {
-					client.world.addParticle(
-							new DynamicParticleEffect(SpectrumParticleTypes.WHITE_CRAFTING, 0.0F, color, 1.5F, 40, false, true),
-							sourcePos.x, sourcePos.y, sourcePos.z,
-							velocity.x * velocityModifier, 0.0F, velocity.z * velocityModifier
-					);
-				}
-				
-			});
-		};
+	public static void execute(PlayFusionCraftingFinishedParticlePayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		BlockPos pos = payload.pos;
+		Vec3d sourcePos = new Vec3d(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
+		
+		Vector3f color = ColorHelper.getRGBVec(payload.color);
+		float velocityModifier = 0.25F;
+		for (Vec3d velocity : VectorPattern.SIXTEEN.getVectors()) {
+			client.world.addParticle(
+					new DynamicParticleEffect(SpectrumParticleTypes.WHITE_CRAFTING, 0.0F, color, 1.5F, 40, false, true),
+					sourcePos.x, sourcePos.y, sourcePos.z,
+					velocity.x * velocityModifier, 0.0F, velocity.z * velocityModifier
+			);
+		}
 	}
 	
 	@Override

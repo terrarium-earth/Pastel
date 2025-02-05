@@ -42,32 +42,29 @@ public record PlayParticleWithRandomOffsetAndVelocityPayload(Vec3d pos, Particle
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayParticleWithRandomOffsetAndVelocityPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				ClientWorld world = client.world;
-				Random random = world.getRandom();
-				
-				Vec3d pos = payload.pos;
-				Vec3d randomOffset = payload.randomOffset;
-				Vec3d randomVelocity = payload.randomVelocity;
-				
-				for (int i = 0; i < payload.amount; i++) {
-					double randomOffsetX = randomOffset.x - random.nextDouble() * randomOffset.x * 2;
-					double randomOffsetY = randomOffset.y - random.nextDouble() * randomOffset.y * 2;
-					double randomOffsetZ = randomOffset.z - random.nextDouble() * randomOffset.z * 2;
-					double randomVelocityX = randomVelocity.x - random.nextDouble() * randomVelocity.x * 2;
-					double randomVelocityY = randomVelocity.y - random.nextDouble() * randomVelocity.y * 2;
-					double randomVelocityZ = randomVelocity.z - random.nextDouble() * randomVelocity.z * 2;
-					
-					world.addParticle(payload.effect,
-							pos.getX() + randomOffsetX, pos.getY() + randomOffsetY, pos.getZ() + randomOffsetZ,
-							randomVelocityX, randomVelocityY, randomVelocityZ);
-				}
-			});
-		};
+	public static void execute(PlayParticleWithRandomOffsetAndVelocityPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		ClientWorld world = client.world;
+		Random random = world.getRandom();
+		
+		Vec3d pos = payload.pos;
+		Vec3d randomOffset = payload.randomOffset;
+		Vec3d randomVelocity = payload.randomVelocity;
+		
+		for (int i = 0; i < payload.amount; i++) {
+			double randomOffsetX = randomOffset.x - random.nextDouble() * randomOffset.x * 2;
+			double randomOffsetY = randomOffset.y - random.nextDouble() * randomOffset.y * 2;
+			double randomOffsetZ = randomOffset.z - random.nextDouble() * randomOffset.z * 2;
+			double randomVelocityX = randomVelocity.x - random.nextDouble() * randomVelocity.x * 2;
+			double randomVelocityY = randomVelocity.y - random.nextDouble() * randomVelocity.y * 2;
+			double randomVelocityZ = randomVelocity.z - random.nextDouble() * randomVelocity.z * 2;
+			
+			world.addParticle(payload.effect,
+					pos.getX() + randomOffsetX, pos.getY() + randomOffsetY, pos.getZ() + randomOffsetZ,
+					randomVelocityX, randomVelocityY, randomVelocityZ);
+		}
 	}
 	
 	@Override

@@ -51,18 +51,15 @@ public record PlayParticleWithExactVelocityPayload(Vec3d pos, ParticleEffect par
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayParticleWithExactVelocityPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				ClientWorld world = client.world;
-				
-				for (int i = 0; i < payload.amount; i++) {
-					world.addParticle(payload.particle, payload.pos.getX(), payload.pos.getY(), payload.pos.getZ(), payload.velocity.getX(), payload.velocity.getY(), payload.velocity.getZ());
-				}
-			});
-		};
+	public static void execute(PlayParticleWithExactVelocityPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		ClientWorld world = client.world;
+		
+		for (int i = 0; i < payload.amount; i++) {
+			world.addParticle(payload.particle, payload.pos.getX(), payload.pos.getY(), payload.pos.getZ(), payload.velocity.getX(), payload.velocity.getY(), payload.velocity.getZ());
+		}
 	}
 	
 	@Override

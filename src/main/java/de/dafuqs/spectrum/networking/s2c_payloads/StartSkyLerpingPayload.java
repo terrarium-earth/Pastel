@@ -32,20 +32,16 @@ public record StartSkyLerpingPayload(long startTime, long endTime) implements Cu
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<StartSkyLerpingPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			DimensionType dimensionType = client.world.getDimension();
-
-			client.execute(() -> {
-				SpectrumClient.skyLerper.trigger(dimensionType, payload.startTime, client.getRenderTickCounter().getTickDelta(false), payload.endTime);
-				if (client.world.isSkyVisible(client.player.getBlockPos())) {
-					client.world.playSound(null, client.player.getBlockPos(), SpectrumSoundEvents.CELESTIAL_POCKET_WATCH_FLY_BY, SoundCategory.NEUTRAL, 0.15F, 1.0F);
-				}
-			});
-			
-		};
+	public static void execute(StartSkyLerpingPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		DimensionType dimensionType = client.world.getDimension();
+		
+		SpectrumClient.skyLerper.trigger(dimensionType, payload.startTime, client.getRenderTickCounter().getTickDelta(false), payload.endTime);
+		if (client.world.isSkyVisible(client.player.getBlockPos())) {
+			client.world.playSound(null, client.player.getBlockPos(), SpectrumSoundEvents.CELESTIAL_POCKET_WATCH_FLY_BY, SoundCategory.NEUTRAL, 0.15F, 1.0F);
+		}
 	}
 	
 	@Override

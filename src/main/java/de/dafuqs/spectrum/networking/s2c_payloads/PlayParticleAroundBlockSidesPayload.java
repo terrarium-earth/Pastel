@@ -5,7 +5,6 @@ import de.dafuqs.spectrum.networking.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.*;
 import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.client.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
@@ -37,13 +36,8 @@ public record PlayParticleAroundBlockSidesPayload(BlockPos pos, int quantity, Ve
 	}
 	
 	@Environment(EnvType.CLIENT)
-	@SuppressWarnings({"resource", "DataFlowIssue"})
-	public static ClientPlayNetworking.PlayPayloadHandler<PlayParticleAroundBlockSidesPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() ->
-				ParticleHelper.playParticleAroundBlockSides(client.world, payload.particle, payload.pos, payload.sides, payload.quantity, payload.velocity));
-		};
+	public static void execute(PlayParticleAroundBlockSidesPayload payload, ClientPlayNetworking.Context context) {
+		ParticleHelper.playParticleAroundBlockSides(context.client().world, payload.particle, payload.pos, payload.sides, payload.quantity, payload.velocity);
 	}
 	
 	@Override

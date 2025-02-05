@@ -11,7 +11,6 @@ import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
-import org.jetbrains.annotations.*;
 
 // TODO: Why tf is that a packet and not handled in the synced component instead?
 public record SyncMentalPresencePayload(double value) implements CustomPayload {
@@ -29,14 +28,10 @@ public record SyncMentalPresencePayload(double value) implements CustomPayload {
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<SyncMentalPresencePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			context.client().execute(() -> {
-				ClientPlayerEntity player = context.player();
-				MiscPlayerDataComponent.get(player).setLastSyncedSleepPotency(payload.value);
-				DarknessEffects.markForEffectUpdate();
-			});
-		};
+	public static void execute(SyncMentalPresencePayload payload, ClientPlayNetworking.Context context) {
+		ClientPlayerEntity player = context.player();
+		MiscPlayerDataComponent.get(player).setLastSyncedSleepPotency(payload.value);
+		DarknessEffects.markForEffectUpdate();
 	}
 	
 	@Override

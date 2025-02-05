@@ -12,7 +12,6 @@ import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.util.math.*;
-import org.jetbrains.annotations.*;
 
 public record CompactingChestStatusUpdatePayload(BlockPos pos, boolean hasToCraft) implements CustomPayload {
 	
@@ -29,15 +28,12 @@ public record CompactingChestStatusUpdatePayload(BlockPos pos, boolean hasToCraf
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<CompactingChestStatusUpdatePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				var entity = client.world.getBlockEntity(payload.pos, SpectrumBlockEntities.COMPACTING_CHEST);
-				entity.ifPresent(compactingChestBlockEntity -> compactingChestBlockEntity.shouldCraft(payload.hasToCraft));
-			});
-		};
+	public static void execute(CompactingChestStatusUpdatePayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		var entity = client.world.getBlockEntity(payload.pos, SpectrumBlockEntities.COMPACTING_CHEST);
+		entity.ifPresent(compactingChestBlockEntity -> compactingChestBlockEntity.shouldCraft(payload.hasToCraft));
 	}
 	
 	@Override

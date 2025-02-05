@@ -15,7 +15,6 @@ import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.*;
-import org.jetbrains.annotations.*;
 
 public record PlayPedestalCraftingFinishedParticlePayload(BlockPos pedestalPos, ItemStack craftedStack) implements CustomPayload {
 	
@@ -32,19 +31,16 @@ public record PlayPedestalCraftingFinishedParticlePayload(BlockPos pedestalPos, 
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayPedestalCraftingFinishedParticlePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				ClientWorld world = client.world;
-				Random random = world.random;
-				
-				for (int i = 0; i < 10; i++) {
-					world.addParticle(new ItemStackParticleEffect(ParticleTypes.ITEM, payload.craftedStack), payload.pedestalPos.getX() + 0.5, payload.pedestalPos.getY() + 1, payload.pedestalPos.getZ() + 0.5, 0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3);
-				}
-			});
-		};
+	public static void execute(PlayPedestalCraftingFinishedParticlePayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		ClientWorld world = client.world;
+		Random random = world.random;
+		
+		for (int i = 0; i < 10; i++) {
+			world.addParticle(new ItemStackParticleEffect(ParticleTypes.ITEM, payload.craftedStack), payload.pedestalPos.getX() + 0.5, payload.pedestalPos.getY() + 1, payload.pedestalPos.getZ() + 0.5, 0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3);
+		}
 	}
 	
 	@Override

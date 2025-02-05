@@ -21,27 +21,22 @@ public record SyncArtisansAtlasPayload(Optional<Identifier> targetId, MapUpdateS
 			SyncArtisansAtlasPayload::new
 	);
 	
-	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.PlayPayloadHandler<SyncArtisansAtlasPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			var client = context.client();
-			if (client.world == null) return;
-			client.execute(() -> {
-				NetworkThreadUtils.forceMainThread(payload.packet, client.getNetworkHandler(), client);
-				var mapRenderer = client.gameRenderer.getMapRenderer();
-				var mapIdComponent = payload.packet.mapId();
-				var mapState = client.world.getMapState(mapIdComponent);
-				if (mapState == null) {
-					mapState = new ArtisansAtlasState(payload.packet.scale(), payload.packet.locked(), client.world.getRegistryKey());
-					client.world.putClientsideMapState(mapIdComponent, mapState);
-				}
-				if (mapState instanceof ArtisansAtlasState artisansAtlasState) {
-					artisansAtlasState.setTargetId(payload.targetId.orElse(null));
-					mapRenderer.updateTexture(mapIdComponent, mapState);
-				}
-			});
-		};
+	public static void execute(SyncArtisansAtlasPayload payload, ClientPlayNetworking.Context context) {
+		var client = context.client();
+		if (client.world == null) return;
+		NetworkThreadUtils.forceMainThread(payload.packet, client.getNetworkHandler(), client);
+		var mapRenderer = client.gameRenderer.getMapRenderer();
+		var mapIdComponent = payload.packet.mapId();
+		var mapState = client.world.getMapState(mapIdComponent);
+		if (mapState == null) {
+			mapState = new ArtisansAtlasState(payload.packet.scale(), payload.packet.locked(), client.world.getRegistryKey());
+			client.world.putClientsideMapState(mapIdComponent, mapState);
+		}
+		if (mapState instanceof ArtisansAtlasState artisansAtlasState) {
+			artisansAtlasState.setTargetId(payload.targetId.orElse(null));
+			mapRenderer.updateTexture(mapIdComponent, mapState);
+		}
 	}
 	
 	@Override

@@ -6,6 +6,7 @@ import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.cca.*;
 import de.dafuqs.spectrum.registries.*;
 import dev.emi.trinkets.api.*;
+import net.fabricmc.api.*;
 import net.minecraft.client.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
@@ -61,8 +62,9 @@ public class AshenCircletItem extends SpectrumTrinketItem {
 			setCooldown(stack, entity.getWorld());
 		}
 	}
-
+	
 	@Override
+	@Environment(EnvType.CLIENT)
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 		super.appendTooltip(stack, context, tooltip, type);
 		tooltip.add(Text.translatable("item.spectrum.ashen_circlet.tooltip").formatted(Formatting.GRAY));

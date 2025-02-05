@@ -6,7 +6,6 @@ import de.dafuqs.spectrum.particle.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.*;
 import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.client.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
@@ -43,18 +42,14 @@ public record PlayParticleWithPatternAndVelocityPayload(Vec3d pos, ParticleEffec
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayParticleWithPatternAndVelocityPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				ParticleHelper.playParticleWithPatternAndVelocityClient(client.world, payload.pos, payload.effect, payload.pattern, payload.velocity);
-			});
-		};
-	}
-	
 	@Override
 	public Id<? extends CustomPayload> getId() {
 		return ID;
+	}
+	
+	@SuppressWarnings("resource")
+	@Environment(EnvType.CLIENT)
+	public static void execute(PlayParticleWithPatternAndVelocityPayload payload, ClientPlayNetworking.Context context) {
+		ParticleHelper.playParticleWithPatternAndVelocityClient(context.client().world, payload.pos, payload.effect, payload.pattern, payload.velocity);
 	}
 }

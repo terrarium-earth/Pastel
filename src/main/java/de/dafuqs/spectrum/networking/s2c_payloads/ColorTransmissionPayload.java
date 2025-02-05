@@ -37,15 +37,11 @@ public record ColorTransmissionPayload(BlockPos pos, ColoredTransmission transmi
 	
 	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<ColorTransmissionPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			if (client.world == null) return;
-			client.execute(() -> {
-				ColoredTransmission transmission = payload.transmission;
-				client.world.addImportantParticle(new ColoredTransmissionParticleEffect(transmission.getDestination(), transmission.getArrivalInTicks(), transmission.getDyeColor()), true, transmission.getOrigin().getX(), transmission.getOrigin().getY(), transmission.getOrigin().getZ(), 0.0D, 0.0D, 0.0D);
-			});
-		};
+	public static void execute(ColorTransmissionPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		if (client.world == null) return;
+		ColoredTransmission transmission = payload.transmission;
+		client.world.addImportantParticle(new ColoredTransmissionParticleEffect(transmission.getDestination(), transmission.getArrivalInTicks(), transmission.getDyeColor()), true, transmission.getOrigin().getX(), transmission.getOrigin().getY(), transmission.getOrigin().getZ(), 0.0D, 0.0D, 0.0D);
 	}
 	
 	@Override

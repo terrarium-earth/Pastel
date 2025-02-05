@@ -13,7 +13,6 @@ import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -43,23 +42,19 @@ public record PastelNodeStatusUpdatePayload(boolean longSpin, Map<BlockPos, Inte
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PastelNodeStatusUpdatePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				for (Map.Entry<BlockPos, Integer> e : payload.spinTimes.entrySet()) {
-					var entity = client.world.getBlockEntity(e.getKey());
-					if (!(entity instanceof PastelNodeBlockEntity node))
-						continue;
-					
-					node.setSpinTicks(e.getValue());
-					
-					if (payload.longSpin && node.isTriggerTransfer()) {
-						node.markTriggered();
-					}
-				}
-			});
-		};
+	public static void execute(PastelNodeStatusUpdatePayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		for (Map.Entry<BlockPos, Integer> e : payload.spinTimes.entrySet()) {
+			var entity = client.world.getBlockEntity(e.getKey());
+			if (!(entity instanceof PastelNodeBlockEntity node))
+				continue;
+			
+			node.setSpinTicks(e.getValue());
+			
+			if (payload.longSpin && node.isTriggerTransfer()) {
+				node.markTriggered();
+			}
+		}
 	}
 	
 	@Override

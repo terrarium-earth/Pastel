@@ -13,7 +13,6 @@ import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.math.*;
-import org.jetbrains.annotations.*;
 
 public record PlayFusionCraftingInProgressParticlePayload(BlockPos pos) implements CustomPayload {
 	
@@ -29,17 +28,14 @@ public record PlayFusionCraftingInProgressParticlePayload(BlockPos pos) implemen
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayFusionCraftingInProgressParticlePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				BlockEntity blockEntity = client.world.getBlockEntity(payload.pos);
-				if (blockEntity instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
-					fusionShrineBlockEntity.spawnCraftingParticles();
-				}
-			});
-		};
+	public static void execute(PlayFusionCraftingInProgressParticlePayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		BlockEntity blockEntity = client.world.getBlockEntity(payload.pos);
+		if (blockEntity instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
+			fusionShrineBlockEntity.spawnCraftingParticles();
+		}
 	}
 	
 	@Override

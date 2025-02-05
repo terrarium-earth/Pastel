@@ -32,20 +32,16 @@ public record PastelTransmissionPayload(int networkColor, int travelTime, Pastel
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PastelTransmissionPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			
-			int color = payload.networkColor();
-			int travelTime = payload.travelTime();
-			PastelTransmission transmission = payload.transmission;
-			BlockPos spawnPos = transmission.getStartPos();
-			
-			client.execute(() -> {
-				client.world.addParticle(new PastelTransmissionParticleEffect(transmission.getNodePositions(), transmission.getVariant().toStack(), travelTime, color), spawnPos.getX() + 0.5, spawnPos.getY() + 0.5, spawnPos.getZ() + 0.5, 0, 0, 0);
-			});
-		};
+	public static void execute(PastelTransmissionPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		
+		int color = payload.networkColor();
+		int travelTime = payload.travelTime();
+		PastelTransmission transmission = payload.transmission;
+		BlockPos spawnPos = transmission.getStartPos();
+		client.world.addParticle(new PastelTransmissionParticleEffect(transmission.getNodePositions(), transmission.getVariant().toStack(), travelTime, color), spawnPos.getX() + 0.5, spawnPos.getY() + 0.5, spawnPos.getZ() + 0.5, 0, 0, 0);
 	}
 	
 	@Override

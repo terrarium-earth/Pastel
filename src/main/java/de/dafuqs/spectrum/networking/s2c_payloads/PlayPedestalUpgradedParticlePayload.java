@@ -7,7 +7,6 @@ import de.dafuqs.spectrum.recipe.pedestal.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.*;
 import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.client.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
@@ -33,13 +32,8 @@ public record PlayPedestalUpgradedParticlePayload(BlockPos pedestalPos, Pedestal
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayPedestalUpgradedParticlePayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				PedestalBlock.spawnUpgradeParticleEffectsForTier(payload.pedestalPos, payload.newTier);
-			});
-		};
+	public static void execute(PlayPedestalUpgradedParticlePayload payload, ClientPlayNetworking.Context context) {
+		PedestalBlock.spawnUpgradeParticleEffectsForTier(payload.pedestalPos, payload.newTier);
 	}
 	
 	@Override

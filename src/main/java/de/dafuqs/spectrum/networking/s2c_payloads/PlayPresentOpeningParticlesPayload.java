@@ -14,7 +14,6 @@ import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -33,14 +32,11 @@ public record PlayPresentOpeningParticlesPayload(BlockPos presentPos, Map<DyeCol
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayPresentOpeningParticlesPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			client.execute(() -> {
-				PresentBlock.spawnParticles(client.world, payload.presentPos, payload.colors);
-			});
-		};
+	public static void execute(PlayPresentOpeningParticlesPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		PresentBlock.spawnParticles(client.world, payload.presentPos, payload.colors);
 	}
 	
 	@Override

@@ -15,7 +15,6 @@ import net.minecraft.network.packet.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.math.*;
-import org.jetbrains.annotations.*;
 
 public record MoonstoneBlastPayload(double x, double y, double z, float power, float knockbackMod, Vec3d playerVelocity) implements CustomPayload {
 	
@@ -37,19 +36,15 @@ public record MoonstoneBlastPayload(double x, double y, double z, float power, f
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<MoonstoneBlastPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			ClientWorld world = client.world;
-			PlayerEntity player = context.player();
-			Vec3d playerVelocity = payload.playerVelocity();
-			
-			client.execute(() -> {
-				MoonstoneStrike.create(world, null, null, payload.x, payload.y, payload.z, payload.power, payload.knockbackMod);
-				player.setVelocity(player.getVelocity().add(playerVelocity.x, playerVelocity.y, playerVelocity.z));
-			});
-		};
+	public static void execute(MoonstoneBlastPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		ClientWorld world = client.world;
+		PlayerEntity player = context.player();
+		Vec3d playerVelocity = payload.playerVelocity();
+		MoonstoneStrike.create(world, null, null, payload.x, payload.y, payload.z, payload.power, payload.knockbackMod);
+		player.setVelocity(player.getVelocity().add(playerVelocity.x, playerVelocity.y, playerVelocity.z));
 	}
 	
 	@Override

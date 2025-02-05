@@ -31,15 +31,12 @@ public record PlayShootingStarParticlesPayload(Vec3d shootingStarPos, ShootingSt
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	@Environment(EnvType.CLIENT)
-	public static ClientPlayNetworking.@NotNull PlayPayloadHandler<PlayShootingStarParticlesPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			MinecraftClient client = context.client();
-			
-			client.execute(() -> {
-				ShootingStarEntity.playHitParticles(client.world, payload.shootingStarPos.x, payload.shootingStarPos.y, payload.shootingStarPos.z, payload.type, 25);
-			});
-		};
+	public static void execute(PlayShootingStarParticlesPayload payload, ClientPlayNetworking.Context context) {
+		MinecraftClient client = context.client();
+		
+		ShootingStarEntity.playHitParticles(client.world, payload.shootingStarPos.x, payload.shootingStarPos.y, payload.shootingStarPos.z, payload.type, 25);
 	}
 	
 	@Override
