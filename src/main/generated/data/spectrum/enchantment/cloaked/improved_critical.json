@@ -1,0 +1,55 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.spectrum.improved_critical"
+  },
+  "effects": {
+    "spectrum:cloaked": [
+      {
+        "effect": "spectrum:improved_critical",
+        "requirements": {
+          "condition": "minecraft:any_of",
+          "terms": [
+            {
+              "condition": "minecraft:inverted",
+              "term": {
+                "condition": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "type": "minecraft:player"
+                }
+              }
+            },
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "minecraft:player",
+                  "advancements": {
+                    "spectrum:unlocks/enchantments/improved_critical": true
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "exclusive_set": "#spectrum:exclusive_set/improved_critical",
+  "max_cost": {
+    "base": 40,
+    "per_level_above_first": 0
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#spectrum:enchantable/improved_critical",
+  "weight": 2
+}

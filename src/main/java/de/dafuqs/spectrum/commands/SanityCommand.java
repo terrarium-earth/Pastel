@@ -381,7 +381,7 @@ public class SanityCommand {
 		for (Enchantment enchantment : registryManager.get(RegistryKeys.ENCHANTMENT)) {
 			RegistryEntry<Enchantment> entry = registryManager.get(RegistryKeys.ENCHANTMENT).getEntry(enchantment);
 			Identifier id = entry.getKey().get().getValue();
-			if (id.getNamespace().equals(modId) && !entry.isIn(SpectrumEnchantmentTags.SPECTRUM_ENCHANTMENT)) {
+			if (id.getNamespace().equals(modId) && !entry.isIn(SpectrumEnchantmentTags.ENCHANTMENTS)) {
 				SpectrumCommon.logWarning("[SANITY: Enchantment Tags] Enchantment '" + id + "' is missing in the spectrum:enchantments tag");
 			}
 		}

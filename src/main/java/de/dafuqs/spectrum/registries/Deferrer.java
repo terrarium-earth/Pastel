@@ -18,36 +18,23 @@ public class Deferrer {
 		return value;
 	}
 	
-	public static <T> Chain<T> chain(T value) {
-		return new Chain<>(value);
-	}
-	
-	public record Chain<T>(T value) {
+	public static class Contextual<T, D> {
 		
-		public Chain<T> defer(Deferrer deferrer, Consumer<T> callback) {
-			deferrer.defer(value, callback);
-			return this;
-		}
-		
-		public <D> Chain<T> defer(Contextual<D> deferrer, BiConsumer<T, D> callback) {
-			deferrer.defer(value, callback);
-			return this;
-		}
-		
-	}
-	
-	public static class Contextual<D> {
-		
-		private final ArrayList<Consumer<D>> deferred = new ArrayList<>();
+		private HashMap<T, BiConsumer<T, D>> deferred = null;
 		
 		public void flush(D data) {
-			deferred.forEach(c -> c.accept(data));
-			deferred.clear();
-			deferred.trimToSize();
+			deferred.forEach((value, consumer) -> consumer.accept(value, data));
+			deferred = null;
 		}
 		
-		public <T> T defer(T value, BiConsumer<T, D> callback) {
-			deferred.add(data -> callback.accept(value, data));
+		public void forEachKey(Consumer<T> callback) {
+			deferred.keySet().forEach(callback);
+		}
+		
+		public T defer(T value, BiConsumer<T, D> callback) {
+			if (deferred == null)
+				deferred = new HashMap<>();
+			deferred.put(value, callback);
 			return value;
 		}
 		

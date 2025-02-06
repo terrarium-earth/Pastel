@@ -1,0 +1,23 @@
+{
+  "anvil_cost": 0,
+  "description": {
+    "translate": "enchantment.spectrum.inexorable"
+  },
+  "exclusive_set": "#spectrum:exclusive_set/inexorable",
+  "max_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand",
+    "offhand",
+    "chest"
+  ],
+  "supported_items": "#spectrum:enchantable/inexorable",
+  "weight": 1
+}

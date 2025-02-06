@@ -1,0 +1,55 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.spectrum.foundry"
+  },
+  "effects": {
+    "spectrum:cloaked": [
+      {
+        "effect": "spectrum:foundry",
+        "requirements": {
+          "condition": "minecraft:any_of",
+          "terms": [
+            {
+              "condition": "minecraft:inverted",
+              "term": {
+                "condition": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "type": "minecraft:player"
+                }
+              }
+            },
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "minecraft:player",
+                  "advancements": {
+                    "spectrum:unlocks/enchantments/foundry": true
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "exclusive_set": "#spectrum:exclusive_set/foundry",
+  "max_cost": {
+    "base": 65,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 15,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#spectrum:enchantable/foundry",
+  "weight": 2
+}

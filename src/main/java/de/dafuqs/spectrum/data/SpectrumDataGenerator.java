@@ -27,7 +27,7 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 		registryBuilder.addRegistry(RegistryKeys.ENCHANTMENT, SpectrumEnchantments::provideEnchantments);
 	}
 	
-	public interface ProvidedTagBuilderCallback<T> {
+	public interface TagBuilderCallback<T> {
 		FabricTagProvider<T>.FabricTagBuilder build(FabricTagProvider<T>.FabricTagBuilder provider);
 	}
 	

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#minecraft:enchantable/sword",
+    "spectrum:malachite_bident",
+    {
+      "id": "#malum:scythe",
+      "required": false
+    }
+  ]
+}

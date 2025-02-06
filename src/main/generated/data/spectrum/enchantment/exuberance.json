@@ -1,0 +1,21 @@
+{
+  "anvil_cost": 0,
+  "description": {
+    "translate": "enchantment.spectrum.exuberance"
+  },
+  "exclusive_set": "#spectrum:exclusive_set/exuberance",
+  "max_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "max_level": 5,
+  "min_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#spectrum:enchantable/exuberance",
+  "weight": 5
+}

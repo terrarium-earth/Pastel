@@ -1,0 +1,21 @@
+{
+  "anvil_cost": 0,
+  "description": {
+    "translate": "enchantment.spectrum.indestructible"
+  },
+  "exclusive_set": "#spectrum:exclusive_set/indestructible",
+  "max_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 0,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#spectrum:enchantable/indestructible",
+  "weight": 2
+}

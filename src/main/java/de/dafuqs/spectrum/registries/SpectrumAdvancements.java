@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.util.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.util.Identifier;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumCommon.locate;
 
 @SuppressWarnings("unused")
 public class SpectrumAdvancements {
@@ -54,7 +54,7 @@ public class SpectrumAdvancements {
 	public static final Identifier ENCHANTMENTS_INVENTORY_INSERTION = SpectrumCommon.locate("unlocks/enchantments/inventory_insertion");
 	public static final Identifier ENCHANTMENTS_PEST_CONTROL = SpectrumCommon.locate("unlocks/enchantments/pest_control");
 	public static final Identifier ENCHANTMENTS_RAZING = SpectrumCommon.locate("unlocks/enchantments/razing_usage");
-	public static final Identifier ENCHANTMENTS_RESONANCE_USAGE = SpectrumCommon.locate("unlocks/enchantments/resonance_usage");
+	public static final Identifier ENCHANTMENTS_RESONANCE = SpectrumCommon.locate("unlocks/enchantments/resonance_usage");
 	public static final Identifier ENCHANTMENTS_SERENDIPITY_REEL = SpectrumCommon.locate("unlocks/enchantments/serendipity_reel");
 	public static final Identifier ENCHANTMENTS_SNIPING = SpectrumCommon.locate("unlocks/enchantments/sniping");
 	public static final Identifier ENCHANTMENTS_STEADFAST = SpectrumCommon.locate("unlocks/enchantments/steadfast");
