@@ -1,11 +1,9 @@
 {
   "type": "spectrum:drop_self",
   "block": {
-    "blocks": [
-      "minecraft:composter"
-    ]
+    "blocks": "minecraft:sculk_shrieker"
   },
   "state_properties_to_copy": [
-    "level"
+    "can_summon"
   ]
 }

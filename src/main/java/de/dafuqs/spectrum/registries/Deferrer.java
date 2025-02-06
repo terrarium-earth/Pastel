@@ -19,7 +19,28 @@ public class Deferrer {
 		return value;
 	}
 	
-	public static class Contextual<T, D> {
+	public void defer(Runnable callback) {
+		deferred.add(callback);
+	}
+	
+	public static class Contextual<D> {
+		
+		private ArrayList<Consumer<D>> deferred = null;
+		
+		public void flush(D data) {
+			deferred.forEach(c -> c.accept(data));
+			deferred = null;
+		}
+		
+		public void defer(Consumer<D> callback) {
+			if (deferred == null)
+				deferred = new ArrayList<>();
+			deferred.add(callback);
+		}
+		
+	}
+	
+	public static class KeyedContextual<T, D> {
 		
 		private HashMap<T, BiConsumer<T, D>> deferred = null;
 		

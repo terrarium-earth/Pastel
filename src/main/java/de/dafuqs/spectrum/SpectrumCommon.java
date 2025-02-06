@@ -233,7 +233,7 @@ public class SpectrumCommon implements ModInitializer {
 		logInfo("Registering Dispenser, Resonance & Present Unwrap Behaviors...");
 		SpectrumDispenserBehaviors.register();
 		SpectrumPresentUnpackBehaviors.register();
-		SpectrumResonanceProcessors.register();
+		SpectrumResonanceProcessorTypes.register();
 		
 		logInfo("Registering Resource Conditions...");
 		SpectrumResourceConditions.register();

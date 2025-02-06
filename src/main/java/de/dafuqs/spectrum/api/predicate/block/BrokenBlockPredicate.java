@@ -6,7 +6,6 @@ import net.minecraft.block.*;
 import net.minecraft.predicate.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
-import net.minecraft.registry.tag.*;
 
 import java.util.*;
 
@@ -19,12 +18,12 @@ import java.util.*;
  * <br>
  * TODO - Review as of 1.21 port
  */
-public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, StatePredicate state) {
+public record BrokenBlockPredicate(RegistryEntryList<Block> blocks, StatePredicate state) {
 	
-	public static final BrokenBlockPredicate ANY = new BrokenBlockPredicate(Optional.empty(), new StatePredicate(List.of()));
+	public static final BrokenBlockPredicate ANY = new BrokenBlockPredicate(RegistryEntryList.empty(), new StatePredicate(List.of()));
 	
 	public static final Codec<BrokenBlockPredicate> CODEC = RecordCodecBuilder.create(i -> i.group(
-			RegistryCodecs.entryList(RegistryKeys.BLOCK).optionalFieldOf("blocks").forGetter(BrokenBlockPredicate::blocks),
+			RegistryCodecs.entryList(RegistryKeys.BLOCK).optionalFieldOf("blocks", RegistryEntryList.empty()).forGetter(BrokenBlockPredicate::blocks),
 			StatePredicate.CODEC.optionalFieldOf("state", new StatePredicate(List.of())).forGetter(BrokenBlockPredicate::state)
 	).apply(i, BrokenBlockPredicate::new));
 	
@@ -32,7 +31,7 @@ public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, St
 		if (this == ANY) {
 			return true;
 		} else {
-			if (this.blocks.isPresent() && !this.blocks.get().contains(Registries.BLOCK.getEntry(blockState.getBlock()))) {
+			if (this.blocks != RegistryEntryList.<Block>empty() && !this.blocks.contains(Registries.BLOCK.getEntry(blockState.getBlock()))) {
 				return false;
 			} else {
 				return this.state.test(blockState);
@@ -41,7 +40,7 @@ public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, St
 	}
 	
 	public static class Builder {
-		private Optional<RegistryEntryList<Block>> blocks = Optional.empty();
+		private RegistryEntryList<Block> blocks = RegistryEntryList.empty();
 		private StatePredicate state;
 		
 		private Builder() {
@@ -53,7 +52,7 @@ public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, St
 		}
 		
 		public BrokenBlockPredicate.Builder blocks(Block... blocks) {
-			this.blocks = Optional.of(RegistryEntryList.of(Registries.BLOCK::getEntry, blocks));
+			this.blocks = RegistryEntryList.of(Registries.BLOCK::getEntry, blocks);
 			return this;
 		}
 		
@@ -61,12 +60,12 @@ public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, St
 			List<RegistryEntry<Block>> blockEntries = new ArrayList<>();
 			for (Block block : blocks)
 				blockEntries.add(Registries.BLOCK.getEntry(block));
-			this.blocks = Optional.of(RegistryEntryList.of(blockEntries));
+			this.blocks = RegistryEntryList.of(blockEntries);
 			return this;
 		}
 		
-		public BrokenBlockPredicate.Builder tag(TagKey<Block> tag) {
-			this.blocks = Registries.BLOCK.getEntryList(tag).map(l -> l);
+		public BrokenBlockPredicate.Builder tag(RegistryEntryList<Block> tag) {
+			this.blocks = tag;
 			return this;
 		}
 		

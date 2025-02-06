@@ -12,45 +12,9 @@
     },
     {
       "input": {
-        "item": "minecraft:raw_copper"
-      },
-      "output": "spectrum:pure_copper"
-    },
-    {
-      "input": {
-        "item": "minecraft:diamond"
-      },
-      "output": "spectrum:pure_diamond"
-    },
-    {
-      "input": {
-        "item": "minecraft:echo_shard"
-      },
-      "output": "spectrum:pure_echo"
-    },
-    {
-      "input": {
-        "item": "minecraft:emerald"
-      },
-      "output": "spectrum:pure_emerald"
-    },
-    {
-      "input": {
         "item": "minecraft:glowstone_dust"
       },
       "output": "spectrum:pure_glowstone"
-    },
-    {
-      "input": {
-        "item": "minecraft:raw_gold"
-      },
-      "output": "spectrum:pure_gold"
-    },
-    {
-      "input": {
-        "item": "minecraft:raw_iron"
-      },
-      "output": "spectrum:pure_iron"
     },
     {
       "input": {
@@ -60,9 +24,51 @@
     },
     {
       "input": {
+        "item": "minecraft:emerald"
+      },
+      "output": "spectrum:pure_emerald"
+    },
+    {
+      "input": {
+        "item": "minecraft:ancient_debris"
+      },
+      "output": "spectrum:pure_netherite_scrap"
+    },
+    {
+      "input": {
+        "item": "minecraft:raw_copper"
+      },
+      "output": "spectrum:pure_copper"
+    },
+    {
+      "input": {
+        "item": "minecraft:raw_gold"
+      },
+      "output": "spectrum:pure_gold"
+    },
+    {
+      "input": {
         "item": "minecraft:prismarine_crystals"
       },
       "output": "spectrum:pure_prismarine"
+    },
+    {
+      "input": {
+        "item": "minecraft:echo_shard"
+      },
+      "output": "spectrum:pure_echo"
+    },
+    {
+      "input": {
+        "item": "minecraft:diamond"
+      },
+      "output": "spectrum:pure_diamond"
+    },
+    {
+      "input": {
+        "item": "minecraft:raw_iron"
+      },
+      "output": "spectrum:pure_iron"
     },
     {
       "input": {
@@ -75,12 +81,6 @@
         "item": "minecraft:redstone"
       },
       "output": "spectrum:pure_redstone"
-    },
-    {
-      "input": {
-        "item": "minecraft:ancient_debris"
-      },
-      "output": "spectrum:pure_netherite_scrap"
     },
     {
       "input": {

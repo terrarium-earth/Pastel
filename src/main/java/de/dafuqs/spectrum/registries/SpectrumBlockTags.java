@@ -6,8 +6,12 @@ import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.util.*;
 
+import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
+
 @SuppressWarnings("unused")
 public class SpectrumBlockTags {
+	
+	private static final Deferrer.Contextual<ProvidedTagBuilderBuilder<Block>> DEFERRER = new Deferrer.Contextual<>();
 	
 	// PLANTS
 	public static final TagKey<Block> MERMAIDS_BRUSH_PLANTABLE = of("mermaids_brush_plantable");
@@ -19,7 +23,7 @@ public class SpectrumBlockTags {
 	public static final TagKey<Block> ALOE_CONVERTED = of("aloe_converted");
 	public static final TagKey<Block> GROWTH_ACCELERATORS = of("growth_accelerators");
 	public static final TagKey<Block> NIGHTDEW_SOILS = of("nightdew_soils");
-
+	
 	// DECAY
 	public static final TagKey<Block> DECAY = of("decay/decay");
 	public static final TagKey<Block> DECAY_AWAY_CURABLES = of("decay/decay_away_curables");
@@ -40,15 +44,15 @@ public class SpectrumBlockTags {
 	public static final TagKey<Block> FORFEITURE_SAFE = of("decay/forfeiture_safe");
 	public static final TagKey<Block> FORFEITURE_CONVERSIONS = of("decay/forfeiture_conversions");
 	public static final TagKey<Block> FORFEITURE_SPECIAL_CONVERSIONS = of("decay/forfeiture_special_conversions");
-
+	
 	// TECHNICAL
 	public static final TagKey<Block> UNBREAKABLE_MOVABLE = of("technical/unbreakable_movable");
-
+	
 	// WORLDGEN
 	public static final TagKey<Block> BASE_STONE_DEEPER_DOWN = of("base_stone_deeper_down");
 	public static final TagKey<Block> BLACKSLAG_ORE_REPLACEABLES = of("blackslag_ore_replaceables");
 	public static final TagKey<Block> DEEPER_DOWN_FEATURE_REPLACEABLES = of("deeper_down_feature_replaceables");
-
+	
 	// MISC
 	public static final TagKey<Block> MULTITOOL_MINEABLE = of("multitool_mineable");
 	public static final TagKey<Block> BLACK_SLUDGE_BLOCKS = of("black_sludge_blocks");
@@ -64,10 +68,10 @@ public class SpectrumBlockTags {
 	public static final TagKey<Block> ASH = of("ash");
 	public static final TagKey<Block> PRECIPITATION_SOURCES = of("precipitation_source");
 	public static final TagKey<Block> ANIMALS_SPAWNABLE_ON_ADDITIONS = of("animals_spawnable_on_additions");
-
+	
 	// ORES
 	public static final TagKey<Block> AZURITE_ORES = of("azurite_ores");
-
+	
 	// DEBUG
 	public static final TagKey<Block> EXEMPT_FROM_MINEABLE_DEBUG_CHECK = of("exempt_from_mineable_debug_check");
 	public static final TagKey<Block> EXEMPT_FROM_LOOT_TABLE_DEBUG_CHECK = of("exempt_from_loot_table_debug_check");
@@ -77,16 +81,43 @@ public class SpectrumBlockTags {
 	public static final TagKey<Block> MEMORY_FAST_MANIFESTERS = of("memory_fast_manifesters");
 	public static final TagKey<Block> MEMORY_VERY_FAST_MANIFESTERS = of("memory_very_fast_manifesters");
 	
-	// COMMON TAGS ("c" namespace)
-	public static final TagKey<Block> LIGHTNING_RODS = common("lightning_rods");
+	// CONVENTIONAL TAGS ("c" namespace)
 	
+	public static final TagKey<Block> C_LIGHTNING_RODS = conventional("lightning_rods", provider -> provider
+			.add(Blocks.LIGHTNING_ROD)
+			.addOptionalTag(Identifier.of("friendsandfoes:lightning_rods")));
+	
+	public static final TagKey<Block> C_BRUSHABLE_BLOCKS = conventional("brushable_blocks", provider -> provider
+			.add(Blocks.SUSPICIOUS_SAND)
+			.add(Blocks.SUSPICIOUS_GRAVEL)
+			.addOptional(Identifier.of("the_bumblezone:pile_of_pollen_suspicious")));
+	
+	public static final TagKey<Block> C_INFESTED_BLOCKS = conventional("infested_blocks", provider -> provider
+			.add(Blocks.INFESTED_COBBLESTONE)
+			.add(Blocks.INFESTED_CHISELED_STONE_BRICKS)
+			.add(Blocks.INFESTED_CRACKED_STONE_BRICKS)
+			.add(Blocks.INFESTED_DEEPSLATE)
+			.add(Blocks.INFESTED_STONE)
+			.add(Blocks.INFESTED_MOSSY_STONE_BRICKS)
+			.add(Blocks.INFESTED_STONE_BRICKS)
+			.add(SpectrumBlocks.INFESTED_BLACKSLAG));
 	
 	private static TagKey<Block> of(String id) {
 		return TagKey.of(RegistryKeys.BLOCK, SpectrumCommon.locate(id));
 	}
 	
-	private static TagKey<Block> common(String id) {
+	private static TagKey<Block> conventional(String id) {
 		return TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", id));
 	}
-
+	
+	private static TagKey<Block> conventional(String id, TagBuilderCallback<Block> builder) {
+		TagKey<Block> tag = TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", id));
+		if (IS_DATAGEN) DEFERRER.defer(ctx -> builder.build(ctx.build(tag)));
+		return tag;
+	}
+	
+	public static void provideTags(ProvidedTagBuilderBuilder<Block> provider) {
+		DEFERRER.flush(provider);
+	}
+	
 }

@@ -10,16 +10,16 @@ import net.minecraft.registry.*;
 
 import java.util.*;
 
-public abstract class ResonanceDropProcessor {
+public abstract class ResonanceProcessor {
 	
 	public static boolean preventNextXPDrop;
 	
-	public static final Codec<ResonanceDropProcessor> CODEC = SpectrumRegistries.RESONANCE_DROP_PROCESSOR_TYPES.getCodec()
-			.dispatch(ResonanceDropProcessor::getCodec, codec -> codec);
+	public static final Codec<ResonanceProcessor> CODEC = SpectrumRegistries.RESONANCE_DROP_PROCESSOR_TYPES.getCodec()
+			.dispatch(ResonanceProcessor::getCodec, codec -> codec);
 	
 	public BrokenBlockPredicate blockPredicate;
 	
-	public ResonanceDropProcessor(BrokenBlockPredicate blockPredicate) {
+	public ResonanceProcessor(BrokenBlockPredicate blockPredicate) {
 		this.blockPredicate = blockPredicate;
 	}
 	
@@ -29,6 +29,6 @@ public abstract class ResonanceDropProcessor {
 		drm.get(SpectrumRegistries.RESONANCE_DROPS_KEY).forEach(entry -> entry.process(minedState, blockEntity, droppedStacks));
 	}
 	
-	public abstract MapCodec<? extends ResonanceDropProcessor> getCodec();
+	public abstract MapCodec<? extends ResonanceProcessor> getCodec();
 	
 }

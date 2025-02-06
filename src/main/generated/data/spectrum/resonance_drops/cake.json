@@ -1,11 +1,9 @@
 {
   "type": "spectrum:drop_self",
   "block": {
-    "blocks": [
-      "minecraft:sculk_shrieker"
-    ]
+    "blocks": "minecraft:cake"
   },
   "state_properties_to_copy": [
-    "can_summon"
+    "bites"
   ]
 }

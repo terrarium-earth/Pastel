@@ -1,11 +1,9 @@
 {
   "type": "spectrum:drop_self",
   "block": {
-    "blocks": [
-      "minecraft:cake"
-    ]
+    "blocks": "minecraft:respawn_anchor"
   },
   "state_properties_to_copy": [
-    "bites"
+    "charges"
   ]
 }
