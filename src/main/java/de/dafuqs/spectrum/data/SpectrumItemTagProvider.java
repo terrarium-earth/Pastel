@@ -4,6 +4,7 @@ import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.datagen.v1.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.tag.*;
 
 import java.util.concurrent.*;
 
@@ -15,7 +16,19 @@ public class SpectrumItemTagProvider extends FabricTagProvider.ItemTagProvider {
 	
 	@Override
 	protected void configure(RegistryWrapper.WrapperLookup lookup) {
-		SpectrumEnchantments.provideTags(this::getOrCreateTagBuilder);
+		SpectrumEnchantments.provideItemTags(this::getOrCreateTagBuilder);
+		
+		getOrCreateTagBuilder(SpectrumItemTags.COOKBOOKS).add(
+				SpectrumItems.BREWERS_HANDBOOK,
+				SpectrumItems.IMBRIFER_COOKBOOK,
+				SpectrumItems.IMPERIAL_COOKBOOK,
+				SpectrumItems.MELOCHITES_COOKBOOK_VOL_1,
+				SpectrumItems.MELOCHITES_COOKBOOK_VOL_2,
+				SpectrumItems.POISONERS_HANDBOOK);
+		
+		getOrCreateTagBuilder(ItemTags.BOOKSHELF_BOOKS)
+				.addTag(SpectrumItemTags.COOKBOOKS)
+				.add(SpectrumItems.GILDED_BOOK, SpectrumItems.GUIDEBOOK);
 	}
 	
 }

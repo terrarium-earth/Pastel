@@ -3,9 +3,14 @@ package de.dafuqs.spectrum.registries;
 import de.dafuqs.spectrum.*;
 import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
+import net.minecraft.entity.*;
 import net.minecraft.item.*;
+import net.minecraft.loot.condition.*;
+import net.minecraft.loot.context.*;
+import net.minecraft.predicate.entity.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
+import net.minecraft.util.*;
 
 import java.util.*;
 
@@ -14,7 +19,8 @@ import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
 @SuppressWarnings("unused")
 public class SpectrumEnchantments {
 	
-	private static final Deferrer.Contextual<ProvidedTagBuilderBuilder<Item>> TAG_DEFERRER = new Deferrer.Contextual<>();
+	private static final Deferrer.Contextual<ProvidedTagBuilderBuilder<Item>> ITEM_TAG_DEFERRER = new Deferrer.Contextual<>();
+	private static final Deferrer.Contextual<ProvidedTagBuilderBuilder<Enchantment>> ENCHANTMENT_TAG_DEFERRER = new Deferrer.Contextual<>();
 	private static final Deferrer.Contextual<BootstrapContext<Enchantment>> BOOTSTRAP_DEFERRER = new Deferrer.Contextual<>();
 	
 	public static final RegistryKey<Enchantment> CLOAKED_BIG_CATCH = of("cloaked/big_catch");
@@ -28,7 +34,6 @@ public class SpectrumEnchantments {
 	public static final RegistryKey<Enchantment> CLOAKED_INERTIA = of("cloaked/inertia");
 	public static final RegistryKey<Enchantment> CLOAKED_INEXORABLE = of("cloaked/inexorable");
 	public static final RegistryKey<Enchantment> CLOAKED_INVENTORY_INSERTION = of("cloaked/inventory_insertion");
-	public static final RegistryKey<Enchantment> CLOAKED_PEST_CONTROL = of("cloaked/pest_control");
 	public static final RegistryKey<Enchantment> CLOAKED_RAZING = of("cloaked/razing");
 	public static final RegistryKey<Enchantment> CLOAKED_RESONANCE = of("cloaked/resonance");
 	public static final RegistryKey<Enchantment> CLOAKED_SERENDIPITY_REEL = of("cloaked/serendipity_reel");
@@ -50,19 +55,6 @@ public class SpectrumEnchantments {
 	public static final RegistryKey<Enchantment> INEXORABLE = of("inexorable"); // prevents mining & movement slowdowns
 	public static final RegistryKey<Enchantment> INVENTORY_INSERTION = of("inventory_insertion"); // don't drop items into the world, add to inv instead
 	
-	// Kills silverfish when mining infested blocks
-	public static final RegistryKey<Enchantment> PEST_CONTROL = registerUncloaked("pest_control", (key, ctx) -> new Enchantment.Builder(new Enchantment.Definition(
-			ctx.items().getOrThrow(getEnchantableKey(key)),
-			Optional.empty(),
-			1,
-			1,
-			new Enchantment.Cost(0, 0),
-			new Enchantment.Cost(0, 0),
-			0,
-			List.of(AttributeModifierSlot.MAINHAND)
-	)), provider -> provider
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE));
-	
 	public static final RegistryKey<Enchantment> RAZING = of("razing"); // increased mining speed for very hard blocks
 	public static final RegistryKey<Enchantment> RESONANCE = of("resonance"); // Silk Touch, just for different blocks
 	public static final RegistryKey<Enchantment> SERENDIPITY_REEL = of("serendipity_reel"); // Increase luck when fishing
@@ -72,6 +64,12 @@ public class SpectrumEnchantments {
 	public static final RegistryKey<Enchantment> TREASURE_HUNTER = of("treasure_hunter"); // Drops mob heads
 	public static final RegistryKey<Enchantment> VOIDING = of("voiding"); // Voids all items mined
 	
+	// Kills silverfish when mining infested blocks
+	public static final RegistryKey<Enchantment> PEST_CONTROL = of("pest_control");
+	public static final RegistryKey<Enchantment> CLOAKED_PEST_CONTROL = register(PEST_CONTROL, 1, 1, new Enchantment.Cost(10, 0), new Enchantment.Cost(30, 0), 8, List.of(AttributeModifierSlot.MAINHAND), SpectrumAdvancements.ENCHANTMENTS_PEST_CONTROL,
+			provider -> provider.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE),
+			(key, provider) -> provider.forceAddTag(getPairKey(RESONANCE)));
+	
 	private static RegistryKey<Enchantment> of(String id) {
 		return RegistryKey.of(RegistryKeys.ENCHANTMENT, SpectrumCommon.locate(id));
 	}
@@ -80,18 +78,75 @@ public class SpectrumEnchantments {
 		return TagKey.of(RegistryKeys.ITEM, SpectrumCommon.locate("enchantable/" + key.getValue().getPath()));
 	}
 	
-	private static RegistryKey<Enchantment> registerUncloaked(String id, BootstrapCallback<Enchantment, Enchantment.Builder> callback, ProvidedTagBuilderCallback<Item> tagCallback) {
-		return Deferrer.chain(of(id))
-				.defer(TAG_DEFERRER, (key, ctx) -> tagCallback.build(ctx.build(getEnchantableKey(key))))
-				.defer(BOOTSTRAP_DEFERRER, (key, ctx) -> ctx.registerable().register(key, callback.call(key, ctx).build(key.getValue())))
-				.value();
+	private static TagKey<Enchantment> getExclusiveSetKey(RegistryKey<Enchantment> key) {
+		return TagKey.of(RegistryKeys.ENCHANTMENT, SpectrumCommon.locate("exclusive_set/" + key.getValue().getPath()));
 	}
 	
-	public static void provideTags(ProvidedTagBuilderBuilder<Item> builder) {
-		TAG_DEFERRER.flush(builder);
+	private static TagKey<Enchantment> getPairKey(RegistryKey<Enchantment> key) {
+		return TagKey.of(RegistryKeys.ENCHANTMENT, key.getValue());
 	}
 	
-	public static void bootstrap(Registerable<Enchantment> registerable) {
+	private static RegistryKey<Enchantment> register(
+			RegistryKey<Enchantment> enchantmentKey,
+			int weight,
+			int maxLevel,
+			Enchantment.Cost minCost,
+			Enchantment.Cost maxCost,
+			int anvilCost,
+			List<AttributeModifierSlot> slots,
+			Identifier advancementId,
+			ProvidedTagBuilderCallback<Item> enchantableBuilder,
+			KeyedTagBuilderCallback<Enchantment> exclusiveSetBuilder
+	) {
+		RegistryKey<Enchantment> cloakKey = RegistryKey.of(RegistryKeys.ENCHANTMENT, SpectrumCommon.locate("cloaked/" + enchantmentKey.getValue().getPath()));
+		if (IS_DATAGEN) {
+			// Build the base enchantment
+			BOOTSTRAP_DEFERRER.defer(enchantmentKey, (key, ctx) -> {
+				Enchantment.Definition definition = new Enchantment.Definition(ctx.items().getOrThrow(getEnchantableKey(key)), Optional.empty(), weight, maxLevel, new Enchantment.Cost(0, 0), new Enchantment.Cost(0, 0), 0, slots);
+				Enchantment.Builder enchantment = new Enchantment.Builder(definition)
+						.exclusiveSet(ctx.enchantments().getOrThrow(getExclusiveSetKey(key)));
+				ctx.registerable().register(key, enchantment.build(key.getValue()));
+			});
+			
+			// Build the cloak enchantment
+			BOOTSTRAP_DEFERRER.defer(enchantmentKey, (key, ctx) -> {
+				LootCondition.Builder isPlayerCondition = EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().type(EntityType.PLAYER));
+				LootCondition.Builder hasAdvancementCondition = EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(PlayerPredicate.Builder.create().advancement(advancementId, true).build()));
+				LootCondition.Builder condition = isPlayerCondition.invert().or(hasAdvancementCondition);
+				Enchantment.Definition definition = new Enchantment.Definition(ctx.items().getOrThrow(getEnchantableKey(key)), Optional.empty(), weight, maxLevel, minCost, maxCost, anvilCost, slots);
+				Enchantment.Builder enchantment = new Enchantment.Builder(definition)
+						.exclusiveSet(ctx.enchantments().getOrThrow(getExclusiveSetKey(key)))
+						.addEffect(SpectrumEnchantmentEffectComponentTypes.CLOAKED, ctx.enchantments().getOrThrow(key), condition);
+				ctx.registerable().register(cloakKey, enchantment.build(key.getValue()));
+			});
+			
+			// Build the cloaking pair enchantment tag (e.g., resonance + cloaked/resonance)
+			ENCHANTMENT_TAG_DEFERRER.defer(enchantmentKey, (key, ctx) -> {
+				ctx.build(getPairKey(key)).add(key).add(cloakKey);
+			});
+			
+			// Build the exclusive set enchantment tag
+			ENCHANTMENT_TAG_DEFERRER.defer(enchantmentKey, (key, ctx) -> {
+				exclusiveSetBuilder.build(key, ctx.build(getExclusiveSetKey(key)).forceAddTag(getPairKey(key)));
+			});
+			
+			// Build the enchantable items tag
+			ITEM_TAG_DEFERRER.defer(enchantmentKey, (key, ctx) -> {
+				enchantableBuilder.build(ctx.build(getEnchantableKey(key)));
+			});
+		}
+		return cloakKey;
+	}
+	
+	public static void provideItemTags(ProvidedTagBuilderBuilder<Item> builder) {
+		ITEM_TAG_DEFERRER.flush(builder);
+	}
+	
+	public static void provideEnchantmentTags(ProvidedTagBuilderBuilder<Enchantment> builder) {
+		ENCHANTMENT_TAG_DEFERRER.flush(builder);
+	}
+	
+	public static void provideEnchantments(Registerable<Enchantment> registerable) {
 		BOOTSTRAP_DEFERRER.flush(new BootstrapContext<>(registerable));
 	}
 	

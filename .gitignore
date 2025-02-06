@@ -26,3 +26,4 @@ run/
 backup/
 /deps/
 /remappedSrc/
+/src/main/generated/

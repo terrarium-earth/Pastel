@@ -13,6 +13,7 @@ public class SpectrumItemTags {
 	public static final TagKey<Item> FRUITS = common("foods/fruits");
 	
 	// "spectrum" namespace
+	public static final TagKey<Item> COOKBOOKS = of("cookbooks");
 	public static final TagKey<Item> COLORED_PLANKS = of("colored_planks");
 	public static final TagKey<Item> GEMSTONE_SHARDS = of("gemstone_shards");
 	public static final TagKey<Item> COMING_SOON_TOOLTIP = of("coming_soon_tooltip");
