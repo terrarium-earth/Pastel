@@ -84,7 +84,7 @@ public class SpectrumResonanceProcessors {
 	}
 	
 	public static RegistryKey<ResonanceProcessor> register(String id, Function<BootstrapContext<ResonanceProcessor>, ResonanceProcessor> processor) {
-		RegistryKey<ResonanceProcessor> key = RegistryKey.of(SpectrumRegistries.RESONANCE_DROPS_KEY, SpectrumCommon.locate(id));
+		RegistryKey<ResonanceProcessor> key = RegistryKey.of(SpectrumRegistries.RESONANCE_PROCESSORS_KEY, SpectrumCommon.locate(id));
 		if (IS_DATAGEN) {
 			DEFERRER.defer(ctx -> ctx.registerable().register(key, processor.apply(ctx)));
 		}

@@ -14,7 +14,7 @@ public abstract class ResonanceProcessor {
 	
 	public static boolean preventNextXPDrop;
 	
-	public static final Codec<ResonanceProcessor> CODEC = SpectrumRegistries.RESONANCE_DROP_PROCESSOR_TYPES.getCodec()
+	public static final Codec<ResonanceProcessor> CODEC = SpectrumRegistries.RESONANCE_PROCESSOR_TYPES.getCodec()
 			.dispatch(ResonanceProcessor::getCodec, codec -> codec);
 	
 	public BrokenBlockPredicate blockPredicate;
@@ -26,7 +26,7 @@ public abstract class ResonanceProcessor {
 	public abstract boolean process(BlockState state, BlockEntity blockEntity, List<ItemStack> droppedStacks);
 	
 	public static void applyResonance(DynamicRegistryManager drm, BlockState minedState, BlockEntity blockEntity, List<ItemStack> droppedStacks) {
-		drm.get(SpectrumRegistries.RESONANCE_DROPS_KEY).forEach(entry -> entry.process(minedState, blockEntity, droppedStacks));
+		drm.get(SpectrumRegistries.RESONANCE_PROCESSORS_KEY).forEach(entry -> entry.process(minedState, blockEntity, droppedStacks));
 	}
 	
 	public abstract MapCodec<? extends ResonanceProcessor> getCodec();

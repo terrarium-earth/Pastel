@@ -34,9 +34,8 @@ public class SpectrumRegistries {
 	public static final SpectrumRegistry<ExplosionModifierType> EXPLOSION_MODIFIER_TYPES = register("explosion_effect_family");
 	public static final SpectrumRegistry<ExplosionModifier> EXPLOSION_MODIFIERS = register("explosion_effect_modifier");
 	public static final SpectrumRegistry<PastelUpgradeSignature> PASTEL_UPGRADE = register("pastel_upgrade");
-	public static final SpectrumRegistry<MapCodec<? extends ResonanceProcessor>> RESONANCE_DROP_PROCESSOR_TYPES = register("resonance_drops_processor_types");
-	
-	public static final RegistryKey<Registry<ResonanceProcessor>> RESONANCE_DROPS_KEY = registerDynamicUnsynced("resonance_drops", ResonanceProcessor.CODEC);
+	public static final SpectrumRegistry<MapCodec<? extends ResonanceProcessor>> RESONANCE_PROCESSOR_TYPES = register("resonance_processor_types");
+	public static final RegistryKey<Registry<ResonanceProcessor>> RESONANCE_PROCESSORS_KEY = registerDynamicUnsynced("resonance_processors", ResonanceProcessor.CODEC);
 	
 	private static <T> RegistryKey<Registry<T>> registerDynamicSynced(String id, Codec<T> codec) {
 		RegistryKey<Registry<T>> key = RegistryKey.ofRegistry(SpectrumCommon.locate(id));

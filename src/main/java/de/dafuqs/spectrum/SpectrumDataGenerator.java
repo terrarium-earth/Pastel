@@ -27,7 +27,7 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void buildRegistry(RegistryBuilder registryBuilder) {
 		registryBuilder.addRegistry(RegistryKeys.ENCHANTMENT, registerable -> SpectrumEnchantments.provideEnchantments(new BootstrapContext<>(registerable)));
-		registryBuilder.addRegistry(SpectrumRegistries.RESONANCE_DROPS_KEY, registerable -> SpectrumResonanceProcessors.provideResonanceProcessors(new BootstrapContext<>(registerable)));
+		registryBuilder.addRegistry(SpectrumRegistries.RESONANCE_PROCESSORS_KEY, registerable -> SpectrumResonanceProcessors.provideResonanceProcessors(new BootstrapContext<>(registerable)));
 	}
 	
 	public static class SpectrumItemTagProvider extends FabricTagProvider.ItemTagProvider {
@@ -83,7 +83,7 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 		@Override
 		protected void configure(RegistryWrapper.WrapperLookup wrapperLookup, Entries entries) {
 			entries.addAll(wrapperLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT));
-			entries.addAll(wrapperLookup.getWrapperOrThrow(SpectrumRegistries.RESONANCE_DROPS_KEY));
+			entries.addAll(wrapperLookup.getWrapperOrThrow(SpectrumRegistries.RESONANCE_PROCESSORS_KEY));
 		}
 		
 		@Override
