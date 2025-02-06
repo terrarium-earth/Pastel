@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.registries;
 
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 public class Deferrer {
 	
@@ -27,8 +28,8 @@ public class Deferrer {
 			deferred = null;
 		}
 		
-		public void forEachKey(Consumer<T> callback) {
-			deferred.keySet().forEach(callback);
+		public Stream<T> streamKeys() {
+			return deferred.keySet().stream();
 		}
 		
 		public T defer(T value, BiConsumer<T, D> callback) {

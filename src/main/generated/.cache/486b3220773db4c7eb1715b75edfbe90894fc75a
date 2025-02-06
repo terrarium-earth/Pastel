@@ -1,6 +1,6 @@
-// 1.21.1	2025-02-06T00:48:15.9014689	Spectrum/Tags for minecraft:item
-51c68482d4cd75eb93bffa27bd953392a1351247 data\spectrum\tags\item\enchantable\exuberance.json
+// 1.21.1	2025-02-06T01:03:30.4112024	Spectrum/Tags for minecraft:item
 9dcb55bdfe12f9d7127dd2141b3a0bbf39d726b6 data\spectrum\tags\item\cookbooks.json
+51c68482d4cd75eb93bffa27bd953392a1351247 data\spectrum\tags\item\enchantable\exuberance.json
 33a6119f910497252cae4009d997fa8d9285de91 data\spectrum\tags\item\enchantable\tight_grip.json
 305a1921b73f03abb1d5e99e62d3e13423681d64 data\spectrum\tags\item\enchantable\inexorable.json
 0f7c49aeaf4b0e9b28ec1d1be08f762ada804ded data\spectrum\tags\item\enchantable\voiding.json
@@ -10,14 +10,14 @@ ef33fe47867ddf73ea085a4d492efc6fa340a225 data\spectrum\tags\item\enchantable\ste
 901c5821c5d224c41bfed4b9eaa0fbfdf4f6aa44 data\spectrum\tags\item\enchantable\treasure_hunter.json
 963f1a5a01b80cb929f43c420f527e614b9a9bf1 data\spectrum\tags\item\enchantable\foundry.json
 ced698312782d6580de2550e70c6ae9a992ab83f data\minecraft\tags\item\bookshelf_books.json
-c383d00d8405a8e634e48903416f915d4c282535 data\spectrum\tags\item\enchantable\clovers_favor.json
-b0c2e3a90eb6457eecea52b12c6b269d1467fa74 data\spectrum\tags\item\enchantable\indestructible.json
 3115f04615e8d0b36bf7a7924fa6543d785f722f data\spectrum\tags\item\enchantable\inertia.json
+b0c2e3a90eb6457eecea52b12c6b269d1467fa74 data\spectrum\tags\item\enchantable\indestructible.json
+c383d00d8405a8e634e48903416f915d4c282535 data\spectrum\tags\item\enchantable\clovers_favor.json
 901c5821c5d224c41bfed4b9eaa0fbfdf4f6aa44 data\spectrum\tags\item\enchantable\improved_critical.json
 ed88d920184bf6ae96c019a36cf9901c1b31eecd data\spectrum\tags\item\enchantable\serendipity_reel.json
 901c5821c5d224c41bfed4b9eaa0fbfdf4f6aa44 data\spectrum\tags\item\enchantable\first_strike.json
 0b6d93fe846c744c9ff49317261080120d7d48a9 data\spectrum\tags\item\enchantable\inventory_insertion.json
-b4d1656414950919daf7bccc1d83382b30c4e88c data\spectrum\tags\item\enchantable\sniping.json
 f76f7161ac7de6ed2920b9604de154727e0aaddb data\spectrum\tags\item\enchantable\big_catch.json
+b4d1656414950919daf7bccc1d83382b30c4e88c data\spectrum\tags\item\enchantable\sniping.json
 528161b06a78bbeb3467ea30b8cfd9196b8c9cdf data\spectrum\tags\item\enchantable\pest_control.json
 528161b06a78bbeb3467ea30b8cfd9196b8c9cdf data\spectrum\tags\item\enchantable\razing.json

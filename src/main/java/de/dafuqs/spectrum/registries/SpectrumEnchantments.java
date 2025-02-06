@@ -388,6 +388,10 @@ public class SpectrumEnchantments {
 		return TagKey.of(RegistryKeys.ENCHANTMENT, key.getValue());
 	}
 	
+	public static RegistryKey<Enchantment> getCloakKey(RegistryKey<Enchantment> key) {
+		return RegistryKey.of(RegistryKeys.ENCHANTMENT, locate("cloaked/" + key.getValue().getPath()));
+	}
+	
 	private static class Builder {
 		private final RegistryKey<Enchantment> enchantmentKey;
 		private final RegistryKey<Enchantment> cloakKey;
@@ -405,7 +409,7 @@ public class SpectrumEnchantments {
 		
 		public Builder(RegistryKey<Enchantment> enchantmentKey, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost, List<AttributeModifierSlot> slots, Identifier advancementId) {
 			this.enchantmentKey = enchantmentKey;
-			this.cloakKey = RegistryKey.of(RegistryKeys.ENCHANTMENT, locate("cloaked/" + enchantmentKey.getValue().getPath()));
+			this.cloakKey = getCloakKey(enchantmentKey);
 			this.weight = weight;
 			this.maxLevel = maxLevel;
 			this.minCost = minCost;
@@ -475,8 +479,12 @@ public class SpectrumEnchantments {
 	}
 	
 	public static void provideEnchantmentTags(ProvidedTagBuilderBuilder<Enchantment> builder) {
-		FabricTagProvider<Enchantment>.FabricTagBuilder enchantmentsBuilder = builder.build(SpectrumEnchantmentTags.ENCHANTMENTS);
-		ENCHANTMENT_TAG_DEFERRER.forEachKey(key -> enchantmentsBuilder.forceAddTag(getPairTag(key)));
+		FabricTagProvider<Enchantment>.FabricTagBuilder enchantments = builder.build(SpectrumEnchantmentTags.ENCHANTMENTS);
+		FabricTagProvider<Enchantment>.FabricTagBuilder cloaked = builder.build(SpectrumEnchantmentTags.CLOAKED);
+		ENCHANTMENT_TAG_DEFERRER.streamKeys().sorted(Comparator.comparing(RegistryKey::getValue)).forEach(key -> {
+			enchantments.forceAddTag(getPairTag(key));
+			cloaked.add(getCloakKey(key));
+		});
 		
 		ENCHANTMENT_TAG_DEFERRER.flush(builder);
 	}
