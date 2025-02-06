@@ -11,15 +11,15 @@ import net.minecraft.item.*;
 import net.minecraft.util.*;
 import vazkii.botania.common.item.*;
 
+@SuppressWarnings("unused")
 public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
-	public static Item LEAST_BLACK_LOTUS = new LeastBlackLotusItem(new Item.Settings());
-	public static Item BLACKEST_LOTUS = new BlackestLotusItem(new Item.Settings());
+	public static Item LEAST_BLACK_LOTUS = SpectrumItems.registerDeferred("least_black_lotus", new LeastBlackLotusItem(new Item.Settings()), DyeColor.BLACK);
+	public static Item BLACKEST_LOTUS = SpectrumItems.registerDeferred("blackest_lotus", new BlackestLotusItem(new Item.Settings()), DyeColor.BLACK);
 	
 	@Override
 	public void register() {
-		SpectrumItems.register("least_black_lotus", LEAST_BLACK_LOTUS, DyeColor.BLACK);
-		SpectrumItems.register("blackest_lotus", BLACKEST_LOTUS, DyeColor.BLACK);
+		SpectrumItems.DEFERRER.flush();
 		
 		// registering it late, since Botania might not have been initialized yet
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> ItemProviderRegistry.register(BotaniaItems.blackHoleTalisman, new ItemProvider() {

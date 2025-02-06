@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.SpectrumCommon;
-import net.minecraft.util.Identifier;
+import de.dafuqs.spectrum.*;
+import net.minecraft.util.*;
 
-import static de.dafuqs.spectrum.SpectrumCommon.locate;
+import static de.dafuqs.spectrum.SpectrumCommon.*;
 
 @SuppressWarnings("unused")
 public class SpectrumAdvancements {
@@ -94,9 +94,20 @@ public class SpectrumAdvancements {
 	public static final Identifier FIND_EXCAVATION_SITE = SpectrumCommon.locate("lategame/find_excavation_site");
 	public static final Identifier LATEGAME = SpectrumCommon.locate("lategame/spectrum_lategame");
 	public static final Identifier MIDGAME = SpectrumCommon.locate("midgame/spectrum_midgame");
+	public static final Identifier BREAK_DECAYED_BEDROCK = locate("midgame/break_decayed_bedrock");
 	public static final Identifier MYSTERIOUS_LOCKET_SOCKETING = SpectrumCommon.locate("unlocks/mysterious_locket_socketing");
 	public static final Identifier PLUCK_RESPLENDENT_FEATHER = SpectrumCommon.locate("pluck_resplendent_feather");
 	public static final Identifier SOLVE_WIRELESS_REDSTONE_PRESERVATION_RUIN = SpectrumCommon.locate("solve_wireless_redstone_preservation_ruin");
 	public static final Identifier STRIKE_UP_HUMMINGSTONE_HYMN = SpectrumCommon.locate("lategame/strike_up_hummingstone_hymn");
 	public static final Identifier VIVISECT_KINDLING = SpectrumCommon.locate("mod_integration/neepmeat/vivisect_kindling");
+	
+	public static final Identifier COLLECT_ALL_BASIC_PIGMENTS_BESIDES_BROWN = SpectrumCommon.locate("collect_all_basic_pigments_besides_brown");
+	public static final Identifier COLLECT_TOPAZ = SpectrumCommon.locate("hidden/collect_shards/citrine");
+	public static final Identifier COLLECT_AMETHYST = SpectrumCommon.locate("hidden/collect_shards/amethyst");
+	public static final Identifier COLLECT_CITRINE = SpectrumCommon.locate("hidden/collect_shards/citrine");
+	public static final Identifier CREATE_ONYX = SpectrumCommon.locate("create_onyx_shard");
+	public static final Identifier COLLECT_MOONSTONE = SpectrumCommon.locate("lategame/collect_moonstone");
+	public static final Identifier FIND_FORGOTTEN_CITY = SpectrumCommon.locate("lategame/find_forgotten_city");
+	public static final Identifier COLLECT_MYCEYLON = SpectrumCommon.locate("lategame/collect_myceylon");
+	public static final Identifier BUILD_SPIRIT_INSTILLER_STRUCTURE = SpectrumCommon.locate("midgame/build_spirit_instiller_structure");
 }

@@ -4,6 +4,7 @@ import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.datagen.v1.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.*;
+import net.minecraft.data.client.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.*;
@@ -22,6 +23,7 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(SpectrumBlockTagProvider::new);
 		pack.addProvider(SpectrumEnchantmentTagProvider::new);
 		pack.addProvider(SpectrumDynamicRegistryProvider::new);
+		pack.addProvider(SpectrumModelProvider::new);
 	}
 	
 	@Override
@@ -90,6 +92,24 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 		public String getName() {
 			return "Spectrum Registries";
 		}
+	}
+	
+	public static class SpectrumModelProvider extends FabricModelProvider {
+		
+		public SpectrumModelProvider(FabricDataOutput output) {
+			super(output);
+		}
+		
+		@Override
+		public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+		
+		}
+		
+		@Override
+		public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+		
+		}
+		
 	}
 	
 	public interface TagBuilderCallback<T> {
