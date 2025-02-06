@@ -1,8 +1,8 @@
 {
+  "anvil_cost": 0,
   "description": {
     "translate": "enchantment.spectrum.treasure_hunter"
   },
-  "anvil_cost": 0,
   "exclusive_set": "#spectrum:exclusive_set/treasure_hunter",
   "max_cost": {
     "base": 0,
@@ -17,5 +17,5 @@
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/treasure_hunter",
-  "weight": 1
+  "weight": 2
 }

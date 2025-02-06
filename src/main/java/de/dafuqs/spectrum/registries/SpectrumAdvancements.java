@@ -60,7 +60,7 @@ public class SpectrumAdvancements {
 	public static final Identifier ENCHANTMENTS_STEADFAST = SpectrumCommon.locate("unlocks/enchantments/steadfast");
 	public static final Identifier ENCHANTMENTS_TIGHT_GRIP = SpectrumCommon.locate("unlocks/enchantments/tight_grip");
 	public static final Identifier ENCHANTMENTS_TREASURE_HUNTER = SpectrumCommon.locate("unlocks/enchantments/treasure_hunter");
-	public static final Identifier ENCHANTMENTS_VOIDING_USAGE = SpectrumCommon.locate("unlocks/enchantments/voiding_usage");
+	public static final Identifier ENCHANTMENTS_VOIDING = SpectrumCommon.locate("unlocks/enchantments/voiding_usage");
 	
 	// Pedestal
 	public static final Identifier PLACED_PEDESTAL = SpectrumCommon.locate("place_pedestal");

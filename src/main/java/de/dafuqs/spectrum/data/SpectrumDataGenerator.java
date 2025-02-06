@@ -28,11 +28,11 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 	}
 	
 	public interface ProvidedTagBuilderCallback<T> {
-		void build(FabricTagProvider<T>.FabricTagBuilder provider);
+		FabricTagProvider<T>.FabricTagBuilder build(FabricTagProvider<T>.FabricTagBuilder provider);
 	}
 	
 	public interface KeyedTagBuilderCallback<T> {
-		void build(RegistryKey<T> key, FabricTagProvider<T>.FabricTagBuilder provider);
+		FabricTagProvider<T>.FabricTagBuilder build(RegistryKey<T> key, FabricTagProvider<T>.FabricTagBuilder provider);
 	}
 	
 	public interface ProvidedTagBuilderBuilder<T> {
