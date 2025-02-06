@@ -28,14 +28,14 @@
   "icon": "assets/spectrum/icon.png",
   "environment": "*",
   "entrypoints": {
-    "fabric-datagen": [
-      "de.dafuqs.spectrum.data.SpectrumDataGenerator"
-    ],
     "main": [
       "de.dafuqs.spectrum.SpectrumCommon"
     ],
     "client": [
       "de.dafuqs.spectrum.SpectrumClient"
+    ],
+    "fabric-datagen": [
+      "de.dafuqs.spectrum.data.SpectrumDataGenerator"
     ],
     "preLaunch": [],
     "modmenu": [
@@ -86,7 +86,7 @@
     }
   },
   "depends": {
-    "minecraft": "=${minecraft_version}",
+    "minecraft": "=1.21.1",
     "fabricloader": "*",
     "fabric-api": "*",
     "revelationary": "*",

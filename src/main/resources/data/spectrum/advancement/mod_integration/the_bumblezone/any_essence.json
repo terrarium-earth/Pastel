@@ -55,5 +55,13 @@
     [
       "unlock_ink"
     ]
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "the_bumblezone"
+      ]
+    }
   ]
 }
