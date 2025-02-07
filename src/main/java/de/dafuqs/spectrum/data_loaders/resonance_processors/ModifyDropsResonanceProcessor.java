@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.data_loaders.resonance_processors;
 
+import com.google.common.collect.*;
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
@@ -67,19 +68,19 @@ public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
 	
 	public static class Builder {
 		private final BrokenBlockPredicate blockTarget;
-		private final Map<Ingredient, Item> modifiedDrops = new HashMap<>();
+		private final List<Map.Entry<Ingredient, Item>> modifiedDrops = new ArrayList<>();
 		
 		private Builder(BrokenBlockPredicate blockTarget) {
 			this.blockTarget = blockTarget;
 		}
 		
 		public Builder addModifiedDrop(Ingredient ingredient, Item item) {
-			this.modifiedDrops.put(ingredient, item);
+			this.modifiedDrops.add(Map.entry(ingredient, item));
 			return this;
 		}
 		
 		public ModifyDropsResonanceProcessor build() {
-			return new ModifyDropsResonanceProcessor(blockTarget, modifiedDrops);
+			return new ModifyDropsResonanceProcessor(blockTarget, ImmutableMap.copyOf(modifiedDrops));
 		}
 		
 	}

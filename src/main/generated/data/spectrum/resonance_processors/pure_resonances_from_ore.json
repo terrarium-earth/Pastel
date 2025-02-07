@@ -6,15 +6,9 @@
   "modify_drops": [
     {
       "input": {
-        "item": "minecraft:emerald"
+        "item": "minecraft:coal"
       },
-      "output": "spectrum:pure_emerald"
-    },
-    {
-      "input": {
-        "item": "minecraft:netherite_scrap"
-      },
-      "output": "spectrum:pure_netherite_scrap"
+      "output": "spectrum:pure_coal"
     },
     {
       "input": {
@@ -24,15 +18,27 @@
     },
     {
       "input": {
-        "item": "minecraft:prismarine_crystals"
+        "item": "minecraft:diamond"
       },
-      "output": "spectrum:pure_prismarine"
+      "output": "spectrum:pure_diamond"
     },
     {
       "input": {
-        "item": "minecraft:ancient_debris"
+        "item": "minecraft:echo_shard"
       },
-      "output": "spectrum:pure_netherite_scrap"
+      "output": "spectrum:pure_echo"
+    },
+    {
+      "input": {
+        "item": "minecraft:emerald"
+      },
+      "output": "spectrum:pure_emerald"
+    },
+    {
+      "input": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "output": "spectrum:pure_glowstone"
     },
     {
       "input": {
@@ -42,9 +48,9 @@
     },
     {
       "input": {
-        "item": "minecraft:coal"
+        "item": "minecraft:raw_iron"
       },
-      "output": "spectrum:pure_coal"
+      "output": "spectrum:pure_iron"
     },
     {
       "input": {
@@ -54,9 +60,9 @@
     },
     {
       "input": {
-        "item": "minecraft:diamond"
+        "item": "minecraft:prismarine_crystals"
       },
-      "output": "spectrum:pure_diamond"
+      "output": "spectrum:pure_prismarine"
     },
     {
       "input": {
@@ -72,21 +78,15 @@
     },
     {
       "input": {
-        "item": "minecraft:raw_iron"
+        "item": "minecraft:ancient_debris"
       },
-      "output": "spectrum:pure_iron"
+      "output": "spectrum:pure_netherite_scrap"
     },
     {
       "input": {
-        "item": "minecraft:echo_shard"
+        "item": "minecraft:netherite_scrap"
       },
-      "output": "spectrum:pure_echo"
-    },
-    {
-      "input": {
-        "item": "minecraft:glowstone_dust"
-      },
-      "output": "spectrum:pure_glowstone"
+      "output": "spectrum:pure_netherite_scrap"
     }
   ]
 }
