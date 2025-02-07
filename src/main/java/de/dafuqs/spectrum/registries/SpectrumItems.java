@@ -49,7 +49,7 @@ import static de.dafuqs.spectrum.registries.SpectrumFluids.*;
 public class SpectrumItems {
 	
 	public static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
-	public static final DeferredRegistrar.Contextual<ItemModelGenerator> MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>();
+	public static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>();
 	
 	// Main items
 	public static final Item GUIDEBOOK = registerDeferred("guidebook", new GuidebookItem(IS.of(1)), DyeColor.WHITE);
@@ -536,7 +536,7 @@ public class SpectrumItems {
 			ItemColors.ITEM_COLORS.registerColorMapping(item, dyeColor);
 		});
 		if (IS_DATAGEN) {
-			MODEL_REGISTRAR.defer(ctx -> ctx.register(item, Models.GENERATED));
+			ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(item, Models.GENERATED));
 		}
 		return item;
 	}
@@ -557,7 +557,7 @@ public class SpectrumItems {
 	}
 	
 	public static void provideItemModels(ItemModelGenerator generator) {
-		MODEL_REGISTRAR.flush(generator);
+		ITEM_MODEL_REGISTRAR.flush(generator);
 	}
 	
 	public static void registerFuelRegistry() {
@@ -585,6 +585,8 @@ public class SpectrumItems {
 	}
 	
 	public static class IS {
+		
+		public static final Item.Settings DEFAULT = new Item.Settings();
 		
 		public static Item.Settings of() {
 			return new Item.Settings();

@@ -95,21 +95,19 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 	}
 	
 	public static class SpectrumModelProvider extends FabricModelProvider {
-		
 		public SpectrumModelProvider(FabricDataOutput output) {
 			super(output);
 		}
 		
 		@Override
 		public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-		
+			SpectrumBlocks.provideBlockStateModels(blockStateModelGenerator);
 		}
 		
 		@Override
 		public void generateItemModels(ItemModelGenerator itemModelGenerator) {
 			SpectrumItems.provideItemModels(itemModelGenerator);
 		}
-		
 	}
 	
 	public interface TagBuilderCallback<T> {

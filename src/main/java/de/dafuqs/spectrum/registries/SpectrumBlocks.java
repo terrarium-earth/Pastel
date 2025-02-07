@@ -63,6 +63,8 @@ import net.minecraft.block.AbstractBlock.*;
 import net.minecraft.block.enums.*;
 import net.minecraft.block.piston.*;
 import net.minecraft.client.render.*;
+import net.minecraft.data.client.*;
+import net.minecraft.data.family.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.entity.mob.*;
@@ -86,9 +88,11 @@ import java.util.*;
 import java.util.function.*;
 
 import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
 import static de.dafuqs.spectrum.registries.SpectrumItems.*;
 import static net.minecraft.block.Blocks.*;
 
+@SuppressWarnings("unused")
 public class SpectrumBlocks {
 	
 	private static Settings settings(MapColor mapColor, BlockSoundGroup blockSoundGroup, float strength) {
@@ -103,8 +107,9 @@ public class SpectrumBlocks {
 		return settings(mapColor, blockSoundGroup, 5.0F, 8.0F).solidBlock(SpectrumBlocks::never).blockVision(SpectrumBlocks::never).nonOpaque().requiresTool();
 	}
 	
-	private static final DeferredRegistrar COMMON_REGISTAR = new DeferredRegistrar();
-	private static final DeferredRegistrar CLIENT_REGISTAR = new DeferredRegistrar();
+	private static final DeferredRegistrar COMMON_REGISTRAR = new DeferredRegistrar();
+	private static final DeferredRegistrar CLIENT_REGISTRAR = new DeferredRegistrar();
+	private static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>();
 	
 	public static final Block PEDESTAL_BASIC_TOPAZ = new PedestalBlock(craftingBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.TOPAZ_BLOCK), BuiltinPedestalVariant.BASIC_TOPAZ);
 	public static final Block PEDESTAL_BASIC_AMETHYST = new PedestalBlock(craftingBlock(MapColor.PURPLE, BlockSoundGroup.AMETHYST_BLOCK), BuiltinPedestalVariant.BASIC_AMETHYST);
@@ -494,119 +499,199 @@ public class SpectrumBlocks {
 	public static final Block SENDER_NODE = new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.CITRINE_CLUSTER), PastelNodeType.SENDER);
 	public static final Block GATHER_NODE = new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.ONYX_CLUSTER), PastelNodeType.GATHER);
 	
-	public static final Block BLACK_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLACK_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLACK_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLACK_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLACK_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLACK_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLACK_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLUE_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BLUE_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BLUE_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BLUE_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BLUE_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BLUE_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BLUE_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BROWN_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block BROWN_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block BROWN_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block BROWN_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block BROWN_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block BROWN_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block BROWN_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block CYAN_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block CYAN_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block CYAN_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block CYAN_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block CYAN_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block CYAN_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block CYAN_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block GRAY_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GRAY_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GRAY_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GRAY_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GRAY_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GRAY_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GRAY_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GREEN_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block GREEN_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block GREEN_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block GREEN_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block GREEN_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block GREEN_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block GREEN_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block LIGHT_BLUE_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_BLUE_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_BLUE_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_BLUE_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_BLUE_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_BLUE_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_BLUE_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_GRAY_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIGHT_GRAY_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIGHT_GRAY_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIGHT_GRAY_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIGHT_GRAY_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIGHT_GRAY_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIGHT_GRAY_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIME_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.LIME), DyeColor.LIME);
-	public static final Block LIME_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.LIME), DyeColor.LIME);
-	public static final Block LIME_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.LIME), DyeColor.LIME);
-	public static final Block LIME_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.LIME), DyeColor.LIME);
-	public static final Block LIME_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.LIME), DyeColor.LIME);
-	public static final Block LIME_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.LIME), DyeColor.LIME);
-	public static final Block LIME_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.LIME), DyeColor.LIME);
-	public static final Block MAGENTA_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block MAGENTA_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block MAGENTA_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block MAGENTA_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block MAGENTA_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block MAGENTA_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block MAGENTA_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block ORANGE_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block ORANGE_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block ORANGE_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block ORANGE_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block ORANGE_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block ORANGE_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block ORANGE_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block PINK_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.PINK), DyeColor.PINK);
-	public static final Block PINK_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.PINK), DyeColor.PINK);
-	public static final Block PINK_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.PINK), DyeColor.PINK);
-	public static final Block PINK_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.PINK), DyeColor.PINK);
-	public static final Block PINK_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.PINK), DyeColor.PINK);
-	public static final Block PINK_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.PINK), DyeColor.PINK);
-	public static final Block PINK_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.PINK), DyeColor.PINK);
-	public static final Block PURPLE_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block PURPLE_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block PURPLE_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block PURPLE_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block PURPLE_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block PURPLE_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block PURPLE_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block RED_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.RED), DyeColor.RED);
-	public static final Block RED_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.RED), DyeColor.RED);
-	public static final Block RED_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.RED), DyeColor.RED);
-	public static final Block RED_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.RED), DyeColor.RED);
-	public static final Block RED_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.RED), DyeColor.RED);
-	public static final Block RED_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.RED), DyeColor.RED);
-	public static final Block RED_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.RED), DyeColor.RED);
-	public static final Block WHITE_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block WHITE_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block WHITE_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block WHITE_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block WHITE_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block WHITE_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block WHITE_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block YELLOW_PLANKS = new ColoredPlankBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.YELLOW), DyeColor.YELLOW);
-	public static final Block YELLOW_STAIRS = new ColoredStairsBlock(BLACK_PLANKS.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(MapColor.YELLOW), DyeColor.YELLOW);
-	public static final Block YELLOW_PRESSURE_PLATE = new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(MapColor.YELLOW), DyeColor.YELLOW);
-	public static final Block YELLOW_FENCE = new ColoredFenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(MapColor.YELLOW), DyeColor.YELLOW);
-	public static final Block YELLOW_FENCE_GATE = new ColoredFenceGateBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(MapColor.YELLOW), DyeColor.YELLOW);
-	public static final Block YELLOW_BUTTON = new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(MapColor.YELLOW), DyeColor.YELLOW);
-	public static final Block YELLOW_SLAB = new ColoredSlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(MapColor.YELLOW), DyeColor.YELLOW);
+	// BLOCK FAMILIES
+	public static final ColoredPlankBlock BLACK_PLANKS = registerColoredPlanks("black_planks", MapColor.BLACK, DyeColor.BLACK);
+	public static final ColoredStairsBlock BLACK_STAIRS = registerColoredStairs("black_stairs", BLACK_PLANKS);
+	public static final ColoredPressurePlateBlock BLACK_PRESSURE_PLATE = registerColoredPressurePlate("black_pressure_plate", BLACK_PLANKS);
+	public static final ColoredFenceBlock BLACK_FENCE = registerColoredFence("black_fence", BLACK_PLANKS);
+	public static final ColoredFenceGateBlock BLACK_FENCE_GATE = registerColoredFenceGate("black_fence_gate", BLACK_PLANKS);
+	public static final ColoredWoodenButtonBlock BLACK_BUTTON = registerColoredButton("black_button", BLACK_PLANKS);
+	public static final ColoredSlabBlock BLACK_SLAB = registerColoredSlab("black_slab", BLACK_PLANKS);
+	public static final BlockFamily BLACK_COLORED_PLANKS_FAMILY = registerBlockFamily(BLACK_PLANKS, builder -> builder.stairs(BLACK_STAIRS).pressurePlate(BLACK_PRESSURE_PLATE).fence(BLACK_FENCE).fenceGate(BLACK_FENCE_GATE).button(BLACK_BUTTON).slab(BLACK_SLAB));
 	
+	public static final ColoredPlankBlock BLUE_PLANKS = registerColoredPlanks("blue_planks", MapColor.BLUE, DyeColor.BLUE);
+	public static final ColoredStairsBlock BLUE_STAIRS = registerColoredStairs("blue_stairs", BLUE_PLANKS);
+	public static final ColoredPressurePlateBlock BLUE_PRESSURE_PLATE = registerColoredPressurePlate("blue_pressure_plate", BLUE_PLANKS);
+	public static final ColoredFenceBlock BLUE_FENCE = registerColoredFence("blue_fence", BLUE_PLANKS);
+	public static final ColoredFenceGateBlock BLUE_FENCE_GATE = registerColoredFenceGate("blue_fence_gate", BLUE_PLANKS);
+	public static final ColoredWoodenButtonBlock BLUE_BUTTON = registerColoredButton("blue_button", BLUE_PLANKS);
+	public static final ColoredSlabBlock BLUE_SLAB = registerColoredSlab("blue_slab", BLUE_PLANKS);
+	public static final BlockFamily BLUE_COLORED_PLANKS_FAMILY = registerBlockFamily(BLUE_PLANKS, builder -> builder.stairs(BLUE_STAIRS).pressurePlate(BLUE_PRESSURE_PLATE).fence(BLUE_FENCE).fenceGate(BLUE_FENCE_GATE).button(BLUE_BUTTON).slab(BLUE_SLAB));
+	
+	public static final ColoredPlankBlock BROWN_PLANKS = registerColoredPlanks("brown_planks", MapColor.BROWN, DyeColor.BROWN);
+	public static final ColoredStairsBlock BROWN_STAIRS = registerColoredStairs("brown_stairs", BROWN_PLANKS);
+	public static final ColoredPressurePlateBlock BROWN_PRESSURE_PLATE = registerColoredPressurePlate("brown_pressure_plate", BROWN_PLANKS);
+	public static final ColoredFenceBlock BROWN_FENCE = registerColoredFence("brown_fence", BROWN_PLANKS);
+	public static final ColoredFenceGateBlock BROWN_FENCE_GATE = registerColoredFenceGate("brown_fence_gate", BROWN_PLANKS);
+	public static final ColoredWoodenButtonBlock BROWN_BUTTON = registerColoredButton("brown_button", BROWN_PLANKS);
+	public static final ColoredSlabBlock BROWN_SLAB = registerColoredSlab("brown_slab", BROWN_PLANKS);
+	public static final BlockFamily BROWN_COLORED_PLANKS_FAMILY = registerBlockFamily(BROWN_PLANKS, builder -> builder.stairs(BROWN_STAIRS).pressurePlate(BROWN_PRESSURE_PLATE).fence(BROWN_FENCE).fenceGate(BROWN_FENCE_GATE).button(BROWN_BUTTON).slab(BROWN_SLAB));
+	
+	public static final ColoredPlankBlock CYAN_PLANKS = registerColoredPlanks("cyan_planks", MapColor.CYAN, DyeColor.CYAN);
+	public static final ColoredStairsBlock CYAN_STAIRS = registerColoredStairs("cyan_stairs", CYAN_PLANKS);
+	public static final ColoredPressurePlateBlock CYAN_PRESSURE_PLATE = registerColoredPressurePlate("cyan_pressure_plate", CYAN_PLANKS);
+	public static final ColoredFenceBlock CYAN_FENCE = registerColoredFence("cyan_fence", CYAN_PLANKS);
+	public static final ColoredFenceGateBlock CYAN_FENCE_GATE = registerColoredFenceGate("cyan_fence_gate", CYAN_PLANKS);
+	public static final ColoredWoodenButtonBlock CYAN_BUTTON = registerColoredButton("cyan_button", CYAN_PLANKS);
+	public static final ColoredSlabBlock CYAN_SLAB = registerColoredSlab("cyan_slab", CYAN_PLANKS);
+	public static final BlockFamily CYAN_COLORED_PLANKS_FAMILY = registerBlockFamily(CYAN_PLANKS, builder -> builder.stairs(CYAN_STAIRS).pressurePlate(CYAN_PRESSURE_PLATE).fence(CYAN_FENCE).fenceGate(CYAN_FENCE_GATE).button(CYAN_BUTTON).slab(CYAN_SLAB));
+	
+	public static final ColoredPlankBlock GRAY_PLANKS = registerColoredPlanks("gray_planks", MapColor.GRAY, DyeColor.GRAY);
+	public static final ColoredStairsBlock GRAY_STAIRS = registerColoredStairs("gray_stairs", GRAY_PLANKS);
+	public static final ColoredPressurePlateBlock GRAY_PRESSURE_PLATE = registerColoredPressurePlate("gray_pressure_plate", GRAY_PLANKS);
+	public static final ColoredFenceBlock GRAY_FENCE = registerColoredFence("gray_fence", GRAY_PLANKS);
+	public static final ColoredFenceGateBlock GRAY_FENCE_GATE = registerColoredFenceGate("gray_fence_gate", GRAY_PLANKS);
+	public static final ColoredWoodenButtonBlock GRAY_BUTTON = registerColoredButton("gray_button", GRAY_PLANKS);
+	public static final ColoredSlabBlock GRAY_SLAB = registerColoredSlab("gray_slab", GRAY_PLANKS);
+	public static final BlockFamily GRAY_COLORED_PLANKS_FAMILY = registerBlockFamily(GRAY_PLANKS, builder -> builder.stairs(GRAY_STAIRS).pressurePlate(GRAY_PRESSURE_PLATE).fence(GRAY_FENCE).fenceGate(GRAY_FENCE_GATE).button(GRAY_BUTTON).slab(GRAY_SLAB));
+	
+	public static final ColoredPlankBlock GREEN_PLANKS = registerColoredPlanks("green_planks", MapColor.GREEN, DyeColor.GREEN);
+	public static final ColoredStairsBlock GREEN_STAIRS = registerColoredStairs("green_stairs", GREEN_PLANKS);
+	public static final ColoredPressurePlateBlock GREEN_PRESSURE_PLATE = registerColoredPressurePlate("green_pressure_plate", GREEN_PLANKS);
+	public static final ColoredFenceBlock GREEN_FENCE = registerColoredFence("green_fence", GREEN_PLANKS);
+	public static final ColoredFenceGateBlock GREEN_FENCE_GATE = registerColoredFenceGate("green_fence_gate", GREEN_PLANKS);
+	public static final ColoredWoodenButtonBlock GREEN_BUTTON = registerColoredButton("green_button", GREEN_PLANKS);
+	public static final ColoredSlabBlock GREEN_SLAB = registerColoredSlab("green_slab", GREEN_PLANKS);
+	public static final BlockFamily GREEN_COLORED_PLANKS_FAMILY = registerBlockFamily(GREEN_PLANKS, builder -> builder.stairs(GREEN_STAIRS).pressurePlate(GREEN_PRESSURE_PLATE).fence(GREEN_FENCE).fenceGate(GREEN_FENCE_GATE).button(GREEN_BUTTON).slab(GREEN_SLAB));
+	
+	public static final ColoredPlankBlock LIGHT_BLUE_PLANKS = registerColoredPlanks("light_blue_planks", MapColor.LIGHT_BLUE, DyeColor.LIGHT_BLUE);
+	public static final ColoredStairsBlock LIGHT_BLUE_STAIRS = registerColoredStairs("light_blue_stairs", LIGHT_BLUE_PLANKS);
+	public static final ColoredPressurePlateBlock LIGHT_BLUE_PRESSURE_PLATE = registerColoredPressurePlate("light_blue_pressure_plate", LIGHT_BLUE_PLANKS);
+	public static final ColoredFenceBlock LIGHT_BLUE_FENCE = registerColoredFence("light_blue_fence", LIGHT_BLUE_PLANKS);
+	public static final ColoredFenceGateBlock LIGHT_BLUE_FENCE_GATE = registerColoredFenceGate("light_blue_fence_gate", LIGHT_BLUE_PLANKS);
+	public static final ColoredWoodenButtonBlock LIGHT_BLUE_BUTTON = registerColoredButton("light_blue_button", LIGHT_BLUE_PLANKS);
+	public static final ColoredSlabBlock LIGHT_BLUE_SLAB = registerColoredSlab("light_blue_slab", LIGHT_BLUE_PLANKS);
+	public static final BlockFamily LIGHT_BLUE_COLORED_PLANKS_FAMILY = registerBlockFamily(LIGHT_BLUE_PLANKS, builder -> builder.stairs(LIGHT_BLUE_STAIRS).pressurePlate(LIGHT_BLUE_PRESSURE_PLATE).fence(LIGHT_BLUE_FENCE).fenceGate(LIGHT_BLUE_FENCE_GATE).button(LIGHT_BLUE_BUTTON).slab(LIGHT_BLUE_SLAB));
+	
+	public static final ColoredPlankBlock LIGHT_GRAY_PLANKS = registerColoredPlanks("light_gray_planks", MapColor.LIGHT_GRAY, DyeColor.LIGHT_GRAY);
+	public static final ColoredStairsBlock LIGHT_GRAY_STAIRS = registerColoredStairs("light_gray_stairs", LIGHT_GRAY_PLANKS);
+	public static final ColoredPressurePlateBlock LIGHT_GRAY_PRESSURE_PLATE = registerColoredPressurePlate("light_gray_pressure_plate", LIGHT_GRAY_PLANKS);
+	public static final ColoredFenceBlock LIGHT_GRAY_FENCE = registerColoredFence("light_gray_fence", LIGHT_GRAY_PLANKS);
+	public static final ColoredFenceGateBlock LIGHT_GRAY_FENCE_GATE = registerColoredFenceGate("light_gray_fence_gate", LIGHT_GRAY_PLANKS);
+	public static final ColoredWoodenButtonBlock LIGHT_GRAY_BUTTON = registerColoredButton("light_gray_button", LIGHT_GRAY_PLANKS);
+	public static final ColoredSlabBlock LIGHT_GRAY_SLAB = registerColoredSlab("light_gray_slab", LIGHT_GRAY_PLANKS);
+	public static final BlockFamily LIGHT_GRAY_COLORED_PLANKS_FAMILY = registerBlockFamily(LIGHT_GRAY_PLANKS, builder -> builder.stairs(LIGHT_GRAY_STAIRS).pressurePlate(LIGHT_GRAY_PRESSURE_PLATE).fence(LIGHT_GRAY_FENCE).fenceGate(LIGHT_GRAY_FENCE_GATE).button(LIGHT_GRAY_BUTTON).slab(LIGHT_GRAY_SLAB));
+	
+	public static final ColoredPlankBlock LIME_PLANKS = registerColoredPlanks("lime_planks", MapColor.LIME, DyeColor.LIME);
+	public static final ColoredStairsBlock LIME_STAIRS = registerColoredStairs("lime_stairs", LIME_PLANKS);
+	public static final ColoredPressurePlateBlock LIME_PRESSURE_PLATE = registerColoredPressurePlate("lime_pressure_plate", LIME_PLANKS);
+	public static final ColoredFenceBlock LIME_FENCE = registerColoredFence("lime_fence", LIME_PLANKS);
+	public static final ColoredFenceGateBlock LIME_FENCE_GATE = registerColoredFenceGate("lime_fence_gate", LIME_PLANKS);
+	public static final ColoredWoodenButtonBlock LIME_BUTTON = registerColoredButton("lime_button", LIME_PLANKS);
+	public static final ColoredSlabBlock LIME_SLAB = registerColoredSlab("lime_slab", LIME_PLANKS);
+	public static final BlockFamily LIME_COLORED_PLANKS_FAMILY = registerBlockFamily(LIME_PLANKS, builder -> builder.stairs(LIME_STAIRS).pressurePlate(LIME_PRESSURE_PLATE).fence(LIME_FENCE).fenceGate(LIME_FENCE_GATE).button(LIME_BUTTON).slab(LIME_SLAB));
+	
+	public static final ColoredPlankBlock MAGENTA_PLANKS = registerColoredPlanks("magenta_planks", MapColor.MAGENTA, DyeColor.MAGENTA);
+	public static final ColoredStairsBlock MAGENTA_STAIRS = registerColoredStairs("magenta_stairs", MAGENTA_PLANKS);
+	public static final ColoredPressurePlateBlock MAGENTA_PRESSURE_PLATE = registerColoredPressurePlate("magenta_pressure_plate", MAGENTA_PLANKS);
+	public static final ColoredFenceBlock MAGENTA_FENCE = registerColoredFence("magenta_fence", MAGENTA_PLANKS);
+	public static final ColoredFenceGateBlock MAGENTA_FENCE_GATE = registerColoredFenceGate("magenta_fence_gate", MAGENTA_PLANKS);
+	public static final ColoredWoodenButtonBlock MAGENTA_BUTTON = registerColoredButton("magenta_button", MAGENTA_PLANKS);
+	public static final ColoredSlabBlock MAGENTA_SLAB = registerColoredSlab("magenta_slab", MAGENTA_PLANKS);
+	public static final BlockFamily MAGENTA_COLORED_PLANKS_FAMILY = registerBlockFamily(MAGENTA_PLANKS, builder -> builder.stairs(MAGENTA_STAIRS).pressurePlate(MAGENTA_PRESSURE_PLATE).fence(MAGENTA_FENCE).fenceGate(MAGENTA_FENCE_GATE).button(MAGENTA_BUTTON).slab(MAGENTA_SLAB));
+	
+	public static final ColoredPlankBlock ORANGE_PLANKS = registerColoredPlanks("orange_planks", MapColor.ORANGE, DyeColor.ORANGE);
+	public static final ColoredStairsBlock ORANGE_STAIRS = registerColoredStairs("orange_stairs", ORANGE_PLANKS);
+	public static final ColoredPressurePlateBlock ORANGE_PRESSURE_PLATE = registerColoredPressurePlate("orange_pressure_plate", ORANGE_PLANKS);
+	public static final ColoredFenceBlock ORANGE_FENCE = registerColoredFence("orange_fence", ORANGE_PLANKS);
+	public static final ColoredFenceGateBlock ORANGE_FENCE_GATE = registerColoredFenceGate("orange_fence_gate", ORANGE_PLANKS);
+	public static final ColoredWoodenButtonBlock ORANGE_BUTTON = registerColoredButton("orange_button", ORANGE_PLANKS);
+	public static final ColoredSlabBlock ORANGE_SLAB = registerColoredSlab("orange_slab", ORANGE_PLANKS);
+	public static final BlockFamily ORANGE_COLORED_PLANKS_FAMILY = registerBlockFamily(ORANGE_PLANKS, builder -> builder.stairs(ORANGE_STAIRS).pressurePlate(ORANGE_PRESSURE_PLATE).fence(ORANGE_FENCE).fenceGate(ORANGE_FENCE_GATE).button(ORANGE_BUTTON).slab(ORANGE_SLAB));
+	
+	public static final ColoredPlankBlock PINK_PLANKS = registerColoredPlanks("pink_planks", MapColor.PINK, DyeColor.PINK);
+	public static final ColoredStairsBlock PINK_STAIRS = registerColoredStairs("pink_stairs", PINK_PLANKS);
+	public static final ColoredPressurePlateBlock PINK_PRESSURE_PLATE = registerColoredPressurePlate("pink_pressure_plate", PINK_PLANKS);
+	public static final ColoredFenceBlock PINK_FENCE = registerColoredFence("pink_fence", PINK_PLANKS);
+	public static final ColoredFenceGateBlock PINK_FENCE_GATE = registerColoredFenceGate("pink_fence_gate", PINK_PLANKS);
+	public static final ColoredWoodenButtonBlock PINK_BUTTON = registerColoredButton("pink_button", PINK_PLANKS);
+	public static final ColoredSlabBlock PINK_SLAB = registerColoredSlab("pink_slab", PINK_PLANKS);
+	public static final BlockFamily PINK_COLORED_PLANKS_FAMILY = registerBlockFamily(PINK_PLANKS, builder -> builder.stairs(PINK_STAIRS).pressurePlate(PINK_PRESSURE_PLATE).fence(PINK_FENCE).fenceGate(PINK_FENCE_GATE).button(PINK_BUTTON).slab(PINK_SLAB));
+	
+	public static final ColoredPlankBlock PURPLE_PLANKS = registerColoredPlanks("purple_planks", MapColor.PURPLE, DyeColor.PURPLE);
+	public static final ColoredStairsBlock PURPLE_STAIRS = registerColoredStairs("purple_stairs", PURPLE_PLANKS);
+	public static final ColoredPressurePlateBlock PURPLE_PRESSURE_PLATE = registerColoredPressurePlate("purple_pressure_plate", PURPLE_PLANKS);
+	public static final ColoredFenceBlock PURPLE_FENCE = registerColoredFence("purple_fence", PURPLE_PLANKS);
+	public static final ColoredFenceGateBlock PURPLE_FENCE_GATE = registerColoredFenceGate("purple_fence_gate", PURPLE_PLANKS);
+	public static final ColoredWoodenButtonBlock PURPLE_BUTTON = registerColoredButton("purple_button", PURPLE_PLANKS);
+	public static final ColoredSlabBlock PURPLE_SLAB = registerColoredSlab("purple_slab", PURPLE_PLANKS);
+	public static final BlockFamily PURPLE_COLORED_PLANKS_FAMILY = registerBlockFamily(PURPLE_PLANKS, builder -> builder.stairs(PURPLE_STAIRS).pressurePlate(PURPLE_PRESSURE_PLATE).fence(PURPLE_FENCE).fenceGate(PURPLE_FENCE_GATE).button(PURPLE_BUTTON).slab(PURPLE_SLAB));
+	
+	public static final ColoredPlankBlock RED_PLANKS = registerColoredPlanks("red_planks", MapColor.RED, DyeColor.RED);
+	public static final ColoredStairsBlock RED_STAIRS = registerColoredStairs("red_stairs", RED_PLANKS);
+	public static final ColoredPressurePlateBlock RED_PRESSURE_PLATE = registerColoredPressurePlate("red_pressure_plate", RED_PLANKS);
+	public static final ColoredFenceBlock RED_FENCE = registerColoredFence("red_fence", RED_PLANKS);
+	public static final ColoredFenceGateBlock RED_FENCE_GATE = registerColoredFenceGate("red_fence_gate", RED_PLANKS);
+	public static final ColoredWoodenButtonBlock RED_BUTTON = registerColoredButton("red_button", RED_PLANKS);
+	public static final ColoredSlabBlock RED_SLAB = registerColoredSlab("red_slab", RED_PLANKS);
+	public static final BlockFamily RED_COLORED_PLANKS_FAMILY = registerBlockFamily(RED_PLANKS, builder -> builder.stairs(RED_STAIRS).pressurePlate(RED_PRESSURE_PLATE).fence(RED_FENCE).fenceGate(RED_FENCE_GATE).button(RED_BUTTON).slab(RED_SLAB));
+	
+	public static final ColoredPlankBlock WHITE_PLANKS = registerColoredPlanks("white_planks", MapColor.WHITE, DyeColor.WHITE);
+	public static final ColoredStairsBlock WHITE_STAIRS = registerColoredStairs("white_stairs", WHITE_PLANKS);
+	public static final ColoredPressurePlateBlock WHITE_PRESSURE_PLATE = registerColoredPressurePlate("white_pressure_plate", WHITE_PLANKS);
+	public static final ColoredFenceBlock WHITE_FENCE = registerColoredFence("white_fence", WHITE_PLANKS);
+	public static final ColoredFenceGateBlock WHITE_FENCE_GATE = registerColoredFenceGate("white_fence_gate", WHITE_PLANKS);
+	public static final ColoredWoodenButtonBlock WHITE_BUTTON = registerColoredButton("white_button", WHITE_PLANKS);
+	public static final ColoredSlabBlock WHITE_SLAB = registerColoredSlab("white_slab", WHITE_PLANKS);
+	public static final BlockFamily WHITE_COLORED_PLANKS_FAMILY = registerBlockFamily(WHITE_PLANKS, builder -> builder.stairs(WHITE_STAIRS).pressurePlate(WHITE_PRESSURE_PLATE).fence(WHITE_FENCE).fenceGate(WHITE_FENCE_GATE).button(WHITE_BUTTON).slab(WHITE_SLAB));
+	
+	public static final ColoredPlankBlock YELLOW_PLANKS = registerColoredPlanks("yellow_planks", MapColor.YELLOW, DyeColor.YELLOW);
+	public static final ColoredStairsBlock YELLOW_STAIRS = registerColoredStairs("yellow_stairs", YELLOW_PLANKS);
+	public static final ColoredPressurePlateBlock YELLOW_PRESSURE_PLATE = registerColoredPressurePlate("yellow_pressure_plate", YELLOW_PLANKS);
+	public static final ColoredFenceBlock YELLOW_FENCE = registerColoredFence("yellow_fence", YELLOW_PLANKS);
+	public static final ColoredFenceGateBlock YELLOW_FENCE_GATE = registerColoredFenceGate("yellow_fence_gate", YELLOW_PLANKS);
+	public static final ColoredWoodenButtonBlock YELLOW_BUTTON = registerColoredButton("yellow_button", YELLOW_PLANKS);
+	public static final ColoredSlabBlock YELLOW_SLAB = registerColoredSlab("yellow_slab", YELLOW_PLANKS);
+	public static final BlockFamily YELLOW_COLORED_PLANKS_FAMILY = registerBlockFamily(YELLOW_PLANKS, builder -> builder.stairs(YELLOW_STAIRS).pressurePlate(YELLOW_PRESSURE_PLATE).fence(YELLOW_FENCE).fenceGate(YELLOW_FENCE_GATE).button(YELLOW_BUTTON).slab(YELLOW_SLAB));
+	
+	public static ColoredPlankBlock registerColoredPlanks(String name, MapColor mapColor, DyeColor dyeColor) {
+		return registerBlockWithItem(name, new ColoredPlankBlock(AbstractBlock.Settings.copy(OAK_PLANKS).mapColor(mapColor), dyeColor), dyeColor);
+	}
+	
+	public static ColoredStairsBlock registerColoredStairs(String name, ColoredPlankBlock baseBlock) {
+		return registerBlockWithItem(name, new ColoredStairsBlock(baseBlock.getDefaultState(), AbstractBlock.Settings.copy(OAK_STAIRS).mapColor(baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+	}
+	
+	public static ColoredPressurePlateBlock registerColoredPressurePlate(String name, ColoredPlankBlock baseBlock) {
+		return registerBlockWithItem(name, new ColoredPressurePlateBlock(AbstractBlock.Settings.copy(OAK_PRESSURE_PLATE).mapColor(baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+	}
+	
+	public static ColoredFenceBlock registerColoredFence(String name, ColoredPlankBlock baseBlock) {
+		return registerBlockWithItem(name, new ColoredFenceBlock(AbstractBlock.Settings.copy(OAK_FENCE).mapColor(baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+	}
+	
+	public static ColoredFenceGateBlock registerColoredFenceGate(String name, ColoredPlankBlock baseBlock) {
+		return registerBlockWithItem(name, new ColoredFenceGateBlock(AbstractBlock.Settings.copy(OAK_FENCE_GATE).mapColor(baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+	}
+	
+	public static ColoredWoodenButtonBlock registerColoredButton(String name, ColoredPlankBlock baseBlock) {
+		return registerBlockWithItem(name, new ColoredWoodenButtonBlock(AbstractBlock.Settings.copy(OAK_BUTTON).mapColor(baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+	}
+	
+	public static ColoredSlabBlock registerColoredSlab(String name, ColoredPlankBlock baseBlock) {
+		return registerBlockWithItem(name, new ColoredSlabBlock(AbstractBlock.Settings.copy(OAK_SLAB).mapColor(baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+	}
+	
+	public static BlockFamily registerBlockFamily(Block baseBlock, UnaryOperator<BlockFamily.Builder> callback) {
+		BlockFamily family = callback.apply(new BlockFamily.Builder(baseBlock)).build();
+		if (IS_DATAGEN) {
+			BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+				ctx.registerCubeAllModelTexturePool(baseBlock).family(family);
+			});
+		}
+		return family;
+	}
+	
+	public static <T extends Block> T registerBlockWithItem(String name, T block, DyeColor dyeColor) {
+		Identifier id = SpectrumCommon.locate(name);
+		BlockItem blockItem = new BlockItem(block, IS.DEFAULT);
+		COMMON_REGISTRAR.defer(() -> {
+			Registry.register(Registries.BLOCK, id, block);
+			Registry.register(Registries.ITEM, id, blockItem);
+			ItemColors.ITEM_COLORS.registerColorMapping(blockItem, dyeColor);
+		});
+		return block;
+	}
 	
 	//DD FLORA
 	public static Settings overgrownBlackslag(MapColor color, BlockSoundGroup soundGroup) {
@@ -1543,8 +1628,8 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T> T defer(T value, @Nullable Consumer<T> common, @Nullable Consumer<T> client) {
-		if (common != null) COMMON_REGISTAR.defer(value, common);
-		if (client != null) CLIENT_REGISTAR.defer(value, client);
+		if (common != null) COMMON_REGISTRAR.defer(value, common);
+		if (client != null) CLIENT_REGISTRAR.defer(value, client);
 		return value;
 	}
 	
@@ -1674,7 +1759,7 @@ public class SpectrumBlocks {
 		
 		registerMobHeads(IS.of());
 		
-		COMMON_REGISTAR.flush();
+		COMMON_REGISTRAR.flush();
 	}
 	
 	private static void registerDDFlora(Item.Settings settings) {
@@ -2474,125 +2559,6 @@ public class SpectrumBlocks {
 		registerBlock("potted_green_sapling", POTTED_GREEN_SAPLING);
 		registerBlock("potted_red_sapling", POTTED_RED_SAPLING);
 		registerBlock("potted_black_sapling", POTTED_BLACK_SAPLING);
-		
-		registerBlockWithItem("white_planks", WHITE_PLANKS, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_planks", ORANGE_PLANKS, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_planks", MAGENTA_PLANKS, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_planks", LIGHT_BLUE_PLANKS, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_planks", YELLOW_PLANKS, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_planks", LIME_PLANKS, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_planks", PINK_PLANKS, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_planks", GRAY_PLANKS, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_planks", LIGHT_GRAY_PLANKS, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_planks", CYAN_PLANKS, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_planks", PURPLE_PLANKS, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_planks", BLUE_PLANKS, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_planks", BROWN_PLANKS, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_planks", GREEN_PLANKS, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_planks", RED_PLANKS, settings, DyeColor.RED);
-		registerBlockWithItem("black_planks", BLACK_PLANKS, settings, DyeColor.BLACK);
-		
-		registerBlockWithItem("white_stairs", WHITE_STAIRS, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_stairs", ORANGE_STAIRS, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_stairs", MAGENTA_STAIRS, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_stairs", LIGHT_BLUE_STAIRS, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_stairs", YELLOW_STAIRS, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_stairs", LIME_STAIRS, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_stairs", PINK_STAIRS, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_stairs", GRAY_STAIRS, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_stairs", LIGHT_GRAY_STAIRS, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_stairs", CYAN_STAIRS, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_stairs", PURPLE_STAIRS, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_stairs", BLUE_STAIRS, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_stairs", BROWN_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_stairs", GREEN_STAIRS, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_stairs", RED_STAIRS, settings, DyeColor.RED);
-		registerBlockWithItem("black_stairs", BLACK_STAIRS, settings, DyeColor.BLACK);
-		
-		registerBlockWithItem("white_pressure_plate", WHITE_PRESSURE_PLATE, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_pressure_plate", ORANGE_PRESSURE_PLATE, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_pressure_plate", MAGENTA_PRESSURE_PLATE, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_pressure_plate", LIGHT_BLUE_PRESSURE_PLATE, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_pressure_plate", YELLOW_PRESSURE_PLATE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_pressure_plate", LIME_PRESSURE_PLATE, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_pressure_plate", PINK_PRESSURE_PLATE, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_pressure_plate", GRAY_PRESSURE_PLATE, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_pressure_plate", LIGHT_GRAY_PRESSURE_PLATE, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_pressure_plate", CYAN_PRESSURE_PLATE, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_pressure_plate", PURPLE_PRESSURE_PLATE, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_pressure_plate", BLUE_PRESSURE_PLATE, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_pressure_plate", BROWN_PRESSURE_PLATE, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_pressure_plate", GREEN_PRESSURE_PLATE, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_pressure_plate", RED_PRESSURE_PLATE, settings, DyeColor.RED);
-		registerBlockWithItem("black_pressure_plate", BLACK_PRESSURE_PLATE, settings, DyeColor.BLACK);
-		
-		registerBlockWithItem("white_fence", WHITE_FENCE, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_fence", ORANGE_FENCE, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_fence", MAGENTA_FENCE, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_fence", LIGHT_BLUE_FENCE, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_fence", YELLOW_FENCE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_fence", LIME_FENCE, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_fence", PINK_FENCE, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_fence", GRAY_FENCE, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_fence", LIGHT_GRAY_FENCE, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_fence", CYAN_FENCE, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_fence", PURPLE_FENCE, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_fence", BLUE_FENCE, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_fence", BROWN_FENCE, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_fence", GREEN_FENCE, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_fence", RED_FENCE, settings, DyeColor.RED);
-		registerBlockWithItem("black_fence", BLACK_FENCE, settings, DyeColor.BLACK);
-		
-		registerBlockWithItem("white_fence_gate", WHITE_FENCE_GATE, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_fence_gate", ORANGE_FENCE_GATE, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_fence_gate", MAGENTA_FENCE_GATE, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_fence_gate", LIGHT_BLUE_FENCE_GATE, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_fence_gate", YELLOW_FENCE_GATE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_fence_gate", LIME_FENCE_GATE, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_fence_gate", PINK_FENCE_GATE, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_fence_gate", GRAY_FENCE_GATE, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_fence_gate", LIGHT_GRAY_FENCE_GATE, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_fence_gate", CYAN_FENCE_GATE, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_fence_gate", PURPLE_FENCE_GATE, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_fence_gate", BLUE_FENCE_GATE, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_fence_gate", BROWN_FENCE_GATE, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_fence_gate", GREEN_FENCE_GATE, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_fence_gate", RED_FENCE_GATE, settings, DyeColor.RED);
-		registerBlockWithItem("black_fence_gate", BLACK_FENCE_GATE, settings, DyeColor.BLACK);
-		
-		registerBlockWithItem("white_button", WHITE_BUTTON, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_button", ORANGE_BUTTON, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_button", MAGENTA_BUTTON, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_button", LIGHT_BLUE_BUTTON, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_button", YELLOW_BUTTON, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_button", LIME_BUTTON, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_button", PINK_BUTTON, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_button", GRAY_BUTTON, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_button", LIGHT_GRAY_BUTTON, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_button", CYAN_BUTTON, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_button", PURPLE_BUTTON, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_button", BLUE_BUTTON, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_button", BROWN_BUTTON, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_button", GREEN_BUTTON, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_button", RED_BUTTON, settings, DyeColor.RED);
-		registerBlockWithItem("black_button", BLACK_BUTTON, settings, DyeColor.BLACK);
-		
-		registerBlockWithItem("white_slab", WHITE_SLAB, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_slab", ORANGE_SLAB, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_slab", MAGENTA_SLAB, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_slab", LIGHT_BLUE_SLAB, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_slab", YELLOW_SLAB, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_slab", LIME_SLAB, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_slab", PINK_SLAB, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_slab", GRAY_SLAB, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_slab", LIGHT_GRAY_SLAB, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_slab", CYAN_SLAB, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_slab", PURPLE_SLAB, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_slab", BLUE_SLAB, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_slab", BROWN_SLAB, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_slab", GREEN_SLAB, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_slab", RED_SLAB, settings, DyeColor.RED);
-		registerBlockWithItem("black_slab", BLACK_SLAB, settings, DyeColor.BLACK);
 	}
 	
 	private static void registerGlowBlocks(Item.Settings settings) {
@@ -3259,7 +3225,11 @@ public class SpectrumBlocks {
 				SpectrumBlocks.HUMMINGSTONE_GLASS,
 				SpectrumBlocks.HUMMINGSTONE_GLASS_PANE);
 		
-		CLIENT_REGISTAR.flush();
+		CLIENT_REGISTRAR.flush();
+	}
+	
+	public static void provideBlockStateModels(BlockStateModelGenerator generator) {
+		BLOCK_STATE_MODEL_REGISTRAR.flush(generator);
 	}
 	
 }
