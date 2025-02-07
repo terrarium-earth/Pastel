@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.blocks.boom;
 
-import com.mojang.serialization.MapCodec;
-import de.dafuqs.spectrum.api.block.*;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -23,7 +22,9 @@ import net.minecraft.world.*;
 import net.minecraft.world.explosion.*;
 import org.jetbrains.annotations.*;
 
-public class IncandescentAmalgamBlock extends PlacedItemBlock implements Waterloggable, ExplosionAware {
+import java.util.function.*;
+
+public class IncandescentAmalgamBlock extends PlacedItemBlock implements Waterloggable {
 
 	public static final MapCodec<IncandescentAmalgamBlock> CODEC = createCodec(IncandescentAmalgamBlock::new);
 	
@@ -158,9 +159,9 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements Waterlo
 		}
 		world.createExplosion(owner, SpectrumDamageTypes.incandescence(world, owner), new ExplosionBehavior(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power, true, World.ExplosionSourceType.BLOCK);
 	}
-
+	
 	@Override
-	public void beforeDestroyedByExplosion(World world, BlockPos pos, BlockState state, Explosion explosion) {
+	protected void onExploded(BlockState state, World world, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> stackMerger) {
 		explode(world, pos);
 	}
 

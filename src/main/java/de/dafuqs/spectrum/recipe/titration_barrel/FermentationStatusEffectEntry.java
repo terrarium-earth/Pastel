@@ -33,17 +33,17 @@ public record FermentationStatusEffectEntry(
 			FermentationStatusEffectEntry::new
 	);
 	
-	public record StatusEffectPotencyEntry(int minAlcPercent, int minThickness, int potency) {
+	public record StatusEffectPotencyEntry(float minAlcPercent, float minThickness, int potency) {
 		
 		public static final Codec<StatusEffectPotencyEntry> CODEC = RecordCodecBuilder.create(i -> i.group(
-				Codec.INT.optionalFieldOf("min_alc", 0).forGetter(StatusEffectPotencyEntry::minAlcPercent),
-				Codec.INT.optionalFieldOf("min_thickness", 0).forGetter(StatusEffectPotencyEntry::minThickness),
+				Codec.FLOAT.optionalFieldOf("min_alc", 0.0F).forGetter(StatusEffectPotencyEntry::minAlcPercent),
+				Codec.FLOAT.optionalFieldOf("min_thickness", 0.0F).forGetter(StatusEffectPotencyEntry::minThickness),
 				Codec.INT.optionalFieldOf("potency", 0).forGetter(StatusEffectPotencyEntry::potency)
 		).apply(i, StatusEffectPotencyEntry::new));
 		
 		public static final PacketCodec<ByteBuf, StatusEffectPotencyEntry> PACKET_CODEC = PacketCodec.tuple(
-				PacketCodecs.VAR_INT, StatusEffectPotencyEntry::minAlcPercent,
-				PacketCodecs.VAR_INT, StatusEffectPotencyEntry::minThickness,
+				PacketCodecs.FLOAT, StatusEffectPotencyEntry::minAlcPercent,
+				PacketCodecs.FLOAT, StatusEffectPotencyEntry::minThickness,
 				PacketCodecs.VAR_INT, StatusEffectPotencyEntry::potency,
 				StatusEffectPotencyEntry::new
 		);
