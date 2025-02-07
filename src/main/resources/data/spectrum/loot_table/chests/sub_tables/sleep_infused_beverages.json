@@ -57,7 +57,7 @@
         {
           "type": "minecraft:item",
           "name": "spectrum:infused_beverage",
-          "quality": 1.5,
+          "quality": 1,
           "functions": [
             {
               "function": "minecraft:set_components",
@@ -82,7 +82,7 @@
         {
           "type": "minecraft:item",
           "name": "spectrum:infused_beverage",
-          "quality": 1.2,
+          "quality": 1,
           "functions": [
             {
               "function": "minecraft:set_components",
