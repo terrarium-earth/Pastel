@@ -23,9 +23,9 @@ import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
 @SuppressWarnings("unused")
 public class SpectrumEnchantments {
 	
-	private static final DeferredRegistrar.Contextual<ProvidedTagBuilderBuilder<Item>> ITEM_TAG_REGISTRAR = new DeferredRegistrar.Contextual<>();
-	private static final DeferredRegistrar.Contextual<BootstrapContext<Enchantment>> BOOTSTRAP_REGISTAR = new DeferredRegistrar.Contextual<>();
-	private static final DeferredRegistrar.KeyedContextual<RegistryKey<Enchantment>, ProvidedTagBuilderBuilder<Enchantment>> ENCHANTMENT_TAG_REGISTRAR = new DeferredRegistrar.KeyedContextual<>();
+	private static final DeferredRegistrar.Contextual<ProvidedTagBuilderBuilder<Item>> ITEM_TAG_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
+	private static final DeferredRegistrar.Contextual<BootstrapContext<Enchantment>> BOOTSTRAP_REGISTAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
+	private static final DeferredRegistrar.KeyedContextual<RegistryKey<Enchantment>, ProvidedTagBuilderBuilder<Enchantment>> ENCHANTMENT_TAG_REGISTRAR = new DeferredRegistrar.KeyedContextual<>(IS_DATAGEN);
 	
 	public static final RegistryKey<Enchantment> BIG_CATCH = of("big_catch"); // Increase the chance to reel in entities instead of fishing loot
 	public static final RegistryKey<Enchantment> CLOVERS_FAVOR = of("clovers_favor"); // Increases drop chance of <1 loot drops
@@ -435,9 +435,6 @@ public class SpectrumEnchantments {
 		}
 		
 		public RegistryKey<Enchantment> register() {
-			if (!IS_DATAGEN)
-				return cloakKey;
-			
 			BOOTSTRAP_REGISTAR.defer(ctx -> {
 				// Build the base enchantment
 				Enchantment.Definition baseDefinition = new Enchantment.Definition(ctx.items().getOrThrow(getEnchantableTag(baseKey)), Optional.empty(), weight, maxLevel, new Enchantment.Cost(0, 0), new Enchantment.Cost(0, 0), 0, slots);

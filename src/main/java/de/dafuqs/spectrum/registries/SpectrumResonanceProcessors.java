@@ -18,7 +18,7 @@ import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
 @SuppressWarnings("unused")
 public class SpectrumResonanceProcessors {
 	
-	private static final DeferredRegistrar.Contextual<BootstrapContext<ResonanceProcessor>> REGISTRAR = new DeferredRegistrar.Contextual<>();
+	private static final DeferredRegistrar.Contextual<BootstrapContext<ResonanceProcessor>> REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
 	
 	public static final RegistryKey<ResonanceProcessor> PURE_RESONANCES_FROM_ORE = register("pure_resonances_from_ore", ctx -> ModifyDropsResonanceProcessor
 			.builder(BrokenBlockPredicate.Builder.create().tag(ctx.blocks().getOrThrow(ConventionalBlockTags.ORES)).build())
@@ -85,9 +85,7 @@ public class SpectrumResonanceProcessors {
 	
 	public static RegistryKey<ResonanceProcessor> register(String id, Function<BootstrapContext<ResonanceProcessor>, ResonanceProcessor> processor) {
 		RegistryKey<ResonanceProcessor> key = RegistryKey.of(SpectrumRegistries.RESONANCE_PROCESSORS_KEY, SpectrumCommon.locate(id));
-		if (IS_DATAGEN) {
-			REGISTRAR.defer(ctx -> ctx.registerable().register(key, processor.apply(ctx)));
-		}
+		REGISTRAR.defer(ctx -> ctx.registerable().register(key, processor.apply(ctx)));
 		return key;
 	}
 	

@@ -11,7 +11,7 @@ import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
 @SuppressWarnings("unused")
 public class SpectrumBlockTags {
 	
-	private static final DeferredRegistrar.Contextual<ProvidedTagBuilderBuilder<Block>> REGISTRAR = new DeferredRegistrar.Contextual<>();
+	private static final DeferredRegistrar.Contextual<ProvidedTagBuilderBuilder<Block>> REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
 	
 	// PLANTS
 	public static final TagKey<Block> MERMAIDS_BRUSH_PLANTABLE = of("mermaids_brush_plantable");
@@ -112,7 +112,7 @@ public class SpectrumBlockTags {
 	
 	private static TagKey<Block> conventional(String id, TagBuilderCallback<Block> builder) {
 		TagKey<Block> tag = TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", id));
-		if (IS_DATAGEN) REGISTRAR.defer(ctx -> builder.build(ctx.build(tag)));
+		REGISTRAR.defer(ctx -> builder.build(ctx.build(tag)));
 		return tag;
 	}
 	

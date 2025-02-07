@@ -25,38 +25,58 @@ public class DeferredRegistrar {
 	
 	public static class Contextual<D> {
 		
-		private ArrayList<Consumer<D>> deferred = null;
+		private ArrayList<Consumer<D>> deferred;
+		
+		public Contextual() {
+			this(true);
+		}
+		
+		public Contextual(boolean active) {
+			this.deferred = active ? new ArrayList<>() : null;
+		}
 		
 		public void flush(D data) {
-			deferred.forEach(c -> c.accept(data));
-			deferred = null;
+			if (this.deferred != null) {
+				deferred.forEach(c -> c.accept(data));
+				deferred = new ArrayList<>();
+			}
 		}
 		
 		public void defer(Consumer<D> callback) {
-			if (deferred == null)
-				deferred = new ArrayList<>();
-			deferred.add(callback);
+			if (deferred != null) {
+				deferred.add(callback);
+			}
 		}
 		
 	}
 	
 	public static class KeyedContextual<T, D> {
 		
-		private HashMap<T, BiConsumer<T, D>> deferred = null;
+		private HashMap<T, BiConsumer<T, D>> deferred;
+		
+		public KeyedContextual() {
+			this(true);
+		}
+		
+		public KeyedContextual(boolean active) {
+			this.deferred = active ? new HashMap<>() : null;
+		}
 		
 		public void flush(D data) {
-			deferred.forEach((value, consumer) -> consumer.accept(value, data));
-			deferred = null;
+			if (this.deferred != null) {
+				deferred.forEach((value, consumer) -> consumer.accept(value, data));
+				deferred = new HashMap<>();
+			}
 		}
 		
 		public Stream<T> streamKeys() {
-			return deferred.keySet().stream();
+			return deferred == null ? Stream.empty() : deferred.keySet().stream();
 		}
 		
 		public T defer(T value, BiConsumer<T, D> callback) {
-			if (deferred == null)
-				deferred = new HashMap<>();
-			deferred.put(value, callback);
+			if (deferred != null) {
+				deferred.put(value, callback);
+			}
 			return value;
 		}
 		
