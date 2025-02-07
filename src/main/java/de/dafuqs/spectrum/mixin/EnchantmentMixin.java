@@ -42,6 +42,7 @@ public abstract class EnchantmentMixin {
 			}
 		}
 		
+		// TODO: since this creates a new Enchantment.Definition that does not exist in the vanilla registry (entryToRawId), things crash
 		return new Enchantment.Definition(
 				RegistryEntryList.of(items), definition.primaryItems(), definition.weight(), definition.maxLevel(),
 				definition.minCost(), definition.maxCost(), definition.anvilCost(), definition.slots()
