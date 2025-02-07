@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.deeper_down;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.revelationary.api.revelations.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.registries.*;
@@ -12,11 +12,13 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
+import net.minecraft.world.explosion.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
+import java.util.function.*;
 
-public class DragonboneBlock extends PillarBlock implements RevelationAware, ExplosionAware, MoonstoneStrikeableBlock {
+public class DragonboneBlock extends PillarBlock implements RevelationAware, MoonstoneStrikeableBlock {
 
 	public static final MapCodec<DragonboneBlock> CODEC = createCodec(DragonboneBlock::new);
 
@@ -46,11 +48,15 @@ public class DragonboneBlock extends PillarBlock implements RevelationAware, Exp
 	}
 	
 	@Override
-	public BlockState getStateForExplosion(World world, BlockPos blockPos, BlockState stateAtPos) {
-		if (stateAtPos.getBlock() instanceof PillarBlock) {
-			return SpectrumBlocks.CRACKED_DRAGONBONE.getDefaultState().with(PillarBlock.AXIS, stateAtPos.get(PillarBlock.AXIS));
+	public boolean shouldDropItemsOnExplosion(Explosion explosion) {
+		return false;
+	}
+	
+	@Override
+	protected void onExploded(BlockState state, World world, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> stackMerger) {
+		if (state.getBlock() instanceof PillarBlock) {
+			world.setBlockState(pos, SpectrumBlocks.CRACKED_DRAGONBONE.getDefaultState().with(PillarBlock.AXIS, state.get(PillarBlock.AXIS)));
 		}
-		return Blocks.AIR.getDefaultState();
 	}
 	
 	@Override

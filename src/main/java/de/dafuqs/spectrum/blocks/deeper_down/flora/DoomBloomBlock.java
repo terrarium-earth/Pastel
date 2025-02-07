@@ -2,7 +2,6 @@ package de.dafuqs.spectrum.blocks.deeper_down.flora;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.tag.convention.v2.*;
@@ -30,7 +29,9 @@ import net.minecraft.world.*;
 import net.minecraft.world.explosion.*;
 import org.jetbrains.annotations.*;
 
-public class DoomBloomBlock extends FlowerBlock implements Fertilizable, ExplosionAware {
+import java.util.function.*;
+
+public class DoomBloomBlock extends FlowerBlock implements Fertilizable {
 	
 	public static final MapCodec<DoomBloomBlock> CODEC = RecordCodecBuilder.mapCodec((i) -> i.group(
 			STEW_EFFECT_CODEC.forGetter(FlowerBlock::getStewEffects),
@@ -123,9 +124,9 @@ public class DoomBloomBlock extends FlowerBlock implements Fertilizable, Explosi
 	public boolean shouldDropItemsOnExplosion(Explosion explosion) {
 		return false;
 	}
-
+	
 	@Override
-	public void beforeDestroyedByExplosion(World world, BlockPos pos, BlockState state, Explosion explosion) {
+	protected void onExploded(BlockState state, World world, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> stackMerger) {
 		explode(world, pos, state);
 	}
 
