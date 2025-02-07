@@ -53,7 +53,7 @@ public class AE2Compat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		registerBlockWithItem("pure_certus_quartz_block", PURE_CERTUS_QUARTZ_BLOCK, IS.of(), DyeColor.YELLOW);
 		registerBlockWithItem("pure_fluix_block", PURE_FLUIX_BLOCK, IS.of(), DyeColor.YELLOW);
 		
-		SpectrumItems.DEFERRER.flush();
+		SpectrumItems.REGISTRAR.flush();
 	}
 	
 	@Environment(EnvType.CLIENT)

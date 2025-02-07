@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 
-public class Deferrer {
+public class DeferredRegistrar {
 	
 	private final ArrayList<Runnable> deferred = new ArrayList<>();
 	

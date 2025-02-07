@@ -37,7 +37,7 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		registerBlockWithItem("large_zinc_bud", LARGE_ZINC_BUD, IS.of(), DyeColor.BROWN);
 		registerBlockWithItem("zinc_cluster", ZINC_CLUSTER, IS.of(), DyeColor.BROWN);
 		registerBlockWithItem("pure_zinc_block", PURE_ZINC_BLOCK, IS.of(), DyeColor.BROWN);
-		SpectrumItems.DEFERRER.flush();
+		SpectrumItems.REGISTRAR.flush();
 		
 		PipeCollisionEvent.FLOW.register(event -> {
 			final BlockState result = handleBidirectionalCollision(event.getLevel(), event.getFirstFluid(), event.getSecondFluid());

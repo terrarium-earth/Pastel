@@ -67,7 +67,7 @@ public class GobberCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		registerBlockWithItem("pure_globette_nether_block", PURE_GLOBETTE_NETHER_BLOCK, IS.of(), DyeColor.RED);
 		registerBlockWithItem("pure_globette_end_block", PURE_GLOBETTE_END_BLOCK, IS.of(), DyeColor.GREEN);
 		
-		SpectrumItems.DEFERRER.flush();
+		SpectrumItems.REGISTRAR.flush();
 	}
 	
 	@Environment(EnvType.CLIENT)

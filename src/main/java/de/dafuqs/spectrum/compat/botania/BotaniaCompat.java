@@ -19,7 +19,7 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
 	@Override
 	public void register() {
-		SpectrumItems.DEFERRER.flush();
+		SpectrumItems.REGISTRAR.flush();
 		
 		// registering it late, since Botania might not have been initialized yet
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> ItemProviderRegistry.register(BotaniaItems.blackHoleTalisman, new ItemProvider() {

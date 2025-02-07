@@ -48,12 +48,12 @@ import static de.dafuqs.spectrum.registries.SpectrumFluids.*;
 
 public class SpectrumItems {
 	
-	public static final Deferrer DEFERRER = new Deferrer();
-	public static final Deferrer.Contextual<ItemModelGenerator> MODEL_DEFERRER = new Deferrer.Contextual<>();
+	public static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
+	public static final DeferredRegistrar.Contextual<ItemModelGenerator> MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>();
 	
 	// Main items
 	public static final Item GUIDEBOOK = registerDeferred("guidebook", new GuidebookItem(IS.of(1)), DyeColor.WHITE);
-	public static final Item PAINTBRUSH = registerDeferredSimple("paintbrush", new PaintbrushItem(IS.of(1)), DyeColor.WHITE);
+	public static final Item PAINTBRUSH = registerDeferredWithUniqueModel("paintbrush", new PaintbrushItem(IS.of(1)), DyeColor.WHITE);
 	public static final Item CRAFTING_TABLET = registerDeferred("crafting_tablet", new CraftingTabletItem(IS.of(1)), DyeColor.LIGHT_GRAY);
 	
 	// Structure placers
@@ -97,63 +97,63 @@ public class SpectrumItems {
 	public static final Item BLACK_PIGMENT = registerDeferred("black_pigment", new PigmentItem(IS.of(), DyeColor.BLACK), DyeColor.BLACK);
 	
 	// Preenchanted tools
-	public static final Item MULTITOOL = registerDeferredSimple("multitool", new PreenchantedMultiToolItem(ToolMaterials.IRON, 2, -2.4F, IS.of(Rarity.UNCOMMON).maxDamage(ToolMaterials.IRON.getDurability())), DyeColor.BROWN);
-	public static final Item TENDER_PICKAXE = registerDeferredSimple("tender_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
+	public static final Item MULTITOOL = registerDeferredWithUniqueModel("multitool", new PreenchantedMultiToolItem(ToolMaterials.IRON, 2, -2.4F, IS.of(Rarity.UNCOMMON).maxDamage(ToolMaterials.IRON.getDurability())), DyeColor.BROWN);
+	public static final Item TENDER_PICKAXE = registerDeferredWithUniqueModel("tender_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.SILK_TOUCH, 1);
 		}
 	}, DyeColor.BLUE);
-	public static final Item LUCKY_PICKAXE = registerDeferredSimple("lucky_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
+	public static final Item LUCKY_PICKAXE = registerDeferredWithUniqueModel("lucky_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.FORTUNE, 3);
 		}
 	}, DyeColor.LIGHT_BLUE);
-	public static final Item RAZOR_FALCHION = registerDeferredSimple("razor_falchion", new RazorFalchionItem(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 4, -2.2F))), DyeColor.RED);
-	public static final Item OBLIVION_PICKAXE = registerDeferredSimple("oblivion_pickaxe", new OblivionPickaxeItem(SpectrumToolMaterial.VOIDING, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VOIDING.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.VOIDING, 1, -2.8F))), DyeColor.GRAY);
-	public static final Item RESONANT_PICKAXE = registerDeferredSimple("resonant_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, 1, -2.8F))) {
+	public static final Item RAZOR_FALCHION = registerDeferredWithUniqueModel("razor_falchion", new RazorFalchionItem(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 4, -2.2F))), DyeColor.RED);
+	public static final Item OBLIVION_PICKAXE = registerDeferredWithUniqueModel("oblivion_pickaxe", new OblivionPickaxeItem(SpectrumToolMaterial.VOIDING, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VOIDING.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.VOIDING, 1, -2.8F))), DyeColor.GRAY);
+	public static final Item RESONANT_PICKAXE = registerDeferredWithUniqueModel("resonant_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(SpectrumEnchantments.CLOAKED_RESONANCE, 1);
 		}
 	}, DyeColor.WHITE);
-	public static final Item DRAGONRENDING_PICKAXE = registerDeferredSimple("dragonrending_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.DRACONIC, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.DRACONIC, 1, -2.8F))) {
+	public static final Item DRAGONRENDING_PICKAXE = registerDeferredWithUniqueModel("dragonrending_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.DRACONIC, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.DRACONIC, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(SpectrumEnchantments.CLOAKED_RAZING, 3);
 		}
 	}, DyeColor.WHITE);
-	public static final SpectrumFishingRodItem LAGOON_ROD = registerDeferredSimple("lagoon_rod", new LagoonRodItem(IS.of().maxDamage(256)), DyeColor.LIGHT_BLUE);
-	public static final SpectrumFishingRodItem MOLTEN_ROD = registerDeferredSimple("molten_rod", new MoltenRodItem(IS.of().maxDamage(256)), DyeColor.ORANGE);
+	public static final SpectrumFishingRodItem LAGOON_ROD = registerDeferredWithUniqueModel("lagoon_rod", new LagoonRodItem(IS.of().maxDamage(256)), DyeColor.LIGHT_BLUE);
+	public static final SpectrumFishingRodItem MOLTEN_ROD = registerDeferredWithUniqueModel("molten_rod", new MoltenRodItem(IS.of().maxDamage(256)), DyeColor.ORANGE);
 	
 	// Bedrock Tools
-	public static final Item BEDROCK_PICKAXE = registerDeferredSimple("bedrock_pickaxe", new SpectrumPickaxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -2.8F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
+	public static final Item BEDROCK_PICKAXE = registerDeferredWithUniqueModel("bedrock_pickaxe", new SpectrumPickaxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -2.8F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.SILK_TOUCH, 1);
 		}
 	}, DyeColor.BLACK);
-	public static final Item BEDROCK_AXE = registerDeferredSimple("bedrock_axe", new BedrockAxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(AxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 5, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
-	public static final Item BEDROCK_SHOVEL = registerDeferredSimple("bedrock_shovel", new BedrockShovelItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(ShovelItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
-	public static final Item BEDROCK_SWORD = registerDeferredSimple("bedrock_sword", new BedrockSwordItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 4, -2.4F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
-	public static final Item BEDROCK_HOE = registerDeferredSimple("bedrock_hoe", new BedrockHoeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(HoeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 2, -0.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
-	public static final Item BEDROCK_BOW = registerDeferredSimple("bedrock_bow", new BedrockBowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
-	public static final Item BEDROCK_CROSSBOW = registerDeferredSimple("bedrock_crossbow", new BedrockCrossbowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
+	public static final Item BEDROCK_AXE = registerDeferredWithUniqueModel("bedrock_axe", new BedrockAxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(AxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 5, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
+	public static final Item BEDROCK_SHOVEL = registerDeferredWithUniqueModel("bedrock_shovel", new BedrockShovelItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(ShovelItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
+	public static final Item BEDROCK_SWORD = registerDeferredWithUniqueModel("bedrock_sword", new BedrockSwordItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 4, -2.4F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
+	public static final Item BEDROCK_HOE = registerDeferredWithUniqueModel("bedrock_hoe", new BedrockHoeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(HoeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 2, -0.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
+	public static final Item BEDROCK_BOW = registerDeferredWithUniqueModel("bedrock_bow", new BedrockBowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
+	public static final Item BEDROCK_CROSSBOW = registerDeferredWithUniqueModel("bedrock_crossbow", new BedrockCrossbowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
 	public static final Item BEDROCK_SHEARS = registerDeferred("bedrock_shears", new BedrockShearsItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
-	public static final Item BEDROCK_FISHING_ROD = registerDeferredSimple("bedrock_fishing_rod", new BedrockFishingRodItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
+	public static final Item BEDROCK_FISHING_ROD = registerDeferredWithUniqueModel("bedrock_fishing_rod", new BedrockFishingRodItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), DyeColor.BLACK);
 	
-	public static final Item MALACHITE_WORKSTAFF = registerDeferredSimple("malachite_workstaff", new WorkstaffItem(SpectrumToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), DyeColor.GREEN);
-	public static final Item MALACHITE_ULTRA_GREATSWORD = registerDeferredSimple("malachite_ultra_greatsword", new GreatswordItem(SpectrumToolMaterial.MALACHITE, 7, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), DyeColor.GREEN);
-	public static final Item MALACHITE_CROSSBOW = registerDeferredSimple("malachite_crossbow", new MalachiteCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.MALACHITE.getDurability())), DyeColor.GREEN);
-	public static final Item MALACHITE_BIDENT = registerDeferredSimple("malachite_bident", new MalachiteBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.MALACHITE.getDurability()), -2.4, 9, 0.25F, 0F), DyeColor.GREEN);
+	public static final Item MALACHITE_WORKSTAFF = registerDeferredWithUniqueModel("malachite_workstaff", new WorkstaffItem(SpectrumToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), DyeColor.GREEN);
+	public static final Item MALACHITE_ULTRA_GREATSWORD = registerDeferredWithUniqueModel("malachite_ultra_greatsword", new GreatswordItem(SpectrumToolMaterial.MALACHITE, 7, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), DyeColor.GREEN);
+	public static final Item MALACHITE_CROSSBOW = registerDeferredWithUniqueModel("malachite_crossbow", new MalachiteCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.MALACHITE.getDurability())), DyeColor.GREEN);
+	public static final Item MALACHITE_BIDENT = registerDeferredWithUniqueModel("malachite_bident", new MalachiteBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.MALACHITE.getDurability()), -2.4, 9, 0.25F, 0F), DyeColor.GREEN);
 	
 	// variants by socketing a moonstone core
-	public static final Item GLASS_CREST_WORKSTAFF = registerDeferredSimple("glass_crest_workstaff", new GlassCrestWorkstaffItem(SpectrumToolMaterial.GLASS_CREST, 1, -2.8F, IS.of(1, Rarity.UNCOMMON)), DyeColor.WHITE);
-	public static final Item GLASS_CREST_ULTRA_GREATSWORD = registerDeferredSimple("glass_crest_ultra_greatsword", new GlassCrestGreatswordItem(SpectrumToolMaterial.GLASS_CREST, 5, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), DyeColor.WHITE);
-	public static final Item GLASS_CREST_CROSSBOW = registerDeferredSimple("glass_crest_crossbow", new GlassCrestCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability())), DyeColor.WHITE);
-	public static final Item FEROCIOUS_GLASS_CREST_BIDENT = registerDeferredSimple("ferocious_glass_crest_bident", new FerociousBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.2, 13, 0.33F, 0.33F), DyeColor.WHITE);
-	public static final Item FRACTAL_GLASS_CREST_BIDENT = registerDeferredSimple("fractal_glass_crest_bident", new FractalBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.4, 6.5, 0.25F, 0.25F), DyeColor.WHITE);
+	public static final Item GLASS_CREST_WORKSTAFF = registerDeferredWithUniqueModel("glass_crest_workstaff", new GlassCrestWorkstaffItem(SpectrumToolMaterial.GLASS_CREST, 1, -2.8F, IS.of(1, Rarity.UNCOMMON)), DyeColor.WHITE);
+	public static final Item GLASS_CREST_ULTRA_GREATSWORD = registerDeferredWithUniqueModel("glass_crest_ultra_greatsword", new GlassCrestGreatswordItem(SpectrumToolMaterial.GLASS_CREST, 5, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), DyeColor.WHITE);
+	public static final Item GLASS_CREST_CROSSBOW = registerDeferredWithUniqueModel("glass_crest_crossbow", new GlassCrestCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability())), DyeColor.WHITE);
+	public static final Item FEROCIOUS_GLASS_CREST_BIDENT = registerDeferredWithUniqueModel("ferocious_glass_crest_bident", new FerociousBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.2, 13, 0.33F, 0.33F), DyeColor.WHITE);
+	public static final Item FRACTAL_GLASS_CREST_BIDENT = registerDeferredWithUniqueModel("fractal_glass_crest_bident", new FractalBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.4, 6.5, 0.25F, 0.25F), DyeColor.WHITE);
 	
 	public static final Item MALACHITE_GLASS_ARROW = registerDeferred("malachite_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.MALACHITE, SpectrumParticleTypes.LIME_CRAFTING), DyeColor.GREEN);
 	public static final Item TOPAZ_GLASS_ARROW = registerDeferred("topaz_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.TOPAZ, SpectrumParticleTypes.CYAN_CRAFTING), DyeColor.CYAN);
@@ -162,20 +162,20 @@ public class SpectrumItems {
 	public static final Item ONYX_GLASS_ARROW = registerDeferred("onyx_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.ONYX, SpectrumParticleTypes.BLACK_CRAFTING), DyeColor.BLACK);
 	public static final Item MOONSTONE_GLASS_ARROW = registerDeferred("moonstone_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.MOONSTONE, SpectrumParticleTypes.WHITE_CRAFTING), DyeColor.WHITE);
 	
-	public static final Item OMNI_ACCELERATOR = registerDeferredSimple("omni_accelerator", new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.YELLOW);
+	public static final Item OMNI_ACCELERATOR = registerDeferredWithUniqueModel("omni_accelerator", new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.YELLOW);
 	
 	public static final Item AZURITE_GLASS_AMPOULE = registerDeferred("azurite_glass_ampoule", new GlassAmpouleItem(IS.of(Rarity.UNCOMMON)), DyeColor.BLUE);
 	public static final Item BLOODSTONE_GLASS_AMPOULE = registerDeferred("bloodstone_glass_ampoule", new BloodstoneGlassAmpouleItem(IS.of(Rarity.UNCOMMON).attributeModifiers(BloodstoneGlassAmpouleItem.createAttributeModifiers())), DyeColor.RED);
-	public static final Item MALACHITE_GLASS_AMPOULE = registerDeferredSimple("malachite_glass_ampoule", new MalachiteGlassAmpouleItem(IS.of(Rarity.UNCOMMON)), DyeColor.GREEN);
+	public static final Item MALACHITE_GLASS_AMPOULE = registerDeferredWithUniqueModel("malachite_glass_ampoule", new MalachiteGlassAmpouleItem(IS.of(Rarity.UNCOMMON)), DyeColor.GREEN);
 	
 	// Special tools
 	// TODO: set attribute modifiers similarly to how vanilla swords do it
-	public static final Item DREAMFLAYER = registerDeferredSimple("dreamflayer", new DreamflayerItem(SpectrumToolMaterial.DREAMFLAYER, 3, -1.8F, IS.of(1, Rarity.UNCOMMON)), DyeColor.RED);
-	public static final Item NIGHTFALLS_BLADE = registerDeferredSimple("nightfalls_blade", new NightfallsBladeItem(ToolMaterials.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)), DyeColor.GRAY);
-	public static final DraconicTwinswordItem DRACONIC_TWINSWORD = registerDeferredSimple("draconic_twinsword", new DraconicTwinswordItem(SpectrumToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)), DyeColor.YELLOW);
-	public static final DragonTalonItem DRAGON_TALON = registerDeferredSimple("dragon_talon", new DragonTalonItem(SpectrumToolMaterial.DRACONIC, -3.0, -1.0, IS.of(1, Rarity.RARE).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability())), DyeColor.YELLOW);
-	public static final LightGreatswordItem KNOTTED_SWORD = registerDeferredSimple("knotted_sword", new LightGreatswordItem(SpectrumToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff, IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VERDIGRIS.getDurability())), DyeColor.GREEN);
-	public static final LightGreatswordItem NECTAR_LANCE = registerDeferredSimple("nectar_lance", new NectarLanceItem(SpectrumToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff, IS.of(1, Rarity.EPIC).maxDamage(SpectrumToolMaterial.NECTAR.getDurability())), DyeColor.PURPLE);
+	public static final Item DREAMFLAYER = registerDeferredWithUniqueModel("dreamflayer", new DreamflayerItem(SpectrumToolMaterial.DREAMFLAYER, 3, -1.8F, IS.of(1, Rarity.UNCOMMON)), DyeColor.RED);
+	public static final Item NIGHTFALLS_BLADE = registerDeferredWithUniqueModel("nightfalls_blade", new NightfallsBladeItem(ToolMaterials.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)), DyeColor.GRAY);
+	public static final DraconicTwinswordItem DRACONIC_TWINSWORD = registerDeferredWithUniqueModel("draconic_twinsword", new DraconicTwinswordItem(SpectrumToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)), DyeColor.YELLOW);
+	public static final DragonTalonItem DRAGON_TALON = registerDeferredWithUniqueModel("dragon_talon", new DragonTalonItem(SpectrumToolMaterial.DRACONIC, -3.0, -1.0, IS.of(1, Rarity.RARE).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability())), DyeColor.YELLOW);
+	public static final LightGreatswordItem KNOTTED_SWORD = registerDeferredWithUniqueModel("knotted_sword", new LightGreatswordItem(SpectrumToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff, IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VERDIGRIS.getDurability())), DyeColor.GREEN);
+	public static final LightGreatswordItem NECTAR_LANCE = registerDeferredWithUniqueModel("nectar_lance", new NectarLanceItem(SpectrumToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff, IS.of(1, Rarity.EPIC).maxDamage(SpectrumToolMaterial.NECTAR.getDurability())), DyeColor.PURPLE);
 	
 	// Bedrock Armor
 	public static final Item BEDROCK_HELMET = registerDeferred("bedrock_helmet", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 13).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
@@ -246,7 +246,7 @@ public class SpectrumItems {
 	public static final Item PYRITE_CHUNK = registerDeferred("pyrite_chunk", new Item(IS.of()), DyeColor.PURPLE);
 	public static final Item DRAGONBONE_CHUNK = registerDeferred("dragonbone_chunk", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_CRACKED_DRAGONBONE, Items.GRAY_DYE), DyeColor.GRAY);
 	public static final Item BONE_ASH = registerDeferred("bone_ash", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_CRACKED_DRAGONBONE, Items.GRAY_DYE), DyeColor.GRAY);
-	public static final Item RESPLENDENT_FEATHER = registerDeferredSimple("resplendent_feather", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE), DyeColor.YELLOW);
+	public static final Item RESPLENDENT_FEATHER = registerDeferredWithUniqueModel("resplendent_feather", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE), DyeColor.YELLOW);
 	public static final Item RAW_BLOODSTONE = registerDeferred("raw_bloodstone", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE), DyeColor.RED);
 	public static final Item REFINED_BLOODSTONE = registerDeferred("refined_bloodstone", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE), DyeColor.RED);
 	public static final Item DOWNSTONE_FRAGMENTS = registerDeferred("downstone_fragments", new CloakedItem(IS.of(16, Rarity.UNCOMMON), SpectrumAdvancements.FIND_EXCAVATION_SITE, Items.LIGHT_GRAY_DYE), DyeColor.LIGHT_GRAY);
@@ -296,7 +296,7 @@ public class SpectrumItems {
 	public static final Item DEMON_TEA = registerDeferred("demon_tea", new DrinkItem(IS.of(16).food(SpectrumFoodComponents.DEMON_TEA).component(SpectrumDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(SpectrumFoodComponents.DEMON_TEA_SCONE_BONUS))), DyeColor.RED);
 	public static final Item SCONE = registerDeferred("scone", new Item(IS.of().food(SpectrumFoodComponents.SCONE)), DyeColor.PINK);
 	
-	public static final Item CHEONG = registerDeferredSimple("cheong", new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.CHEONG), "item.spectrum.cheong.tooltip"), DyeColor.PINK);
+	public static final Item CHEONG = registerDeferredWithUniqueModel("cheong", new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.CHEONG), "item.spectrum.cheong.tooltip"), DyeColor.PINK);
 	public static final Item MERMAIDS_JAM = registerDeferred("mermaids_jam", new Item(IS.of().food(SpectrumFoodComponents.MERMAIDS_JAM)), DyeColor.PINK);
 	public static final Item MERMAIDS_POPCORN = registerDeferred("mermaids_popcorn", new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.MERMAIDS_POPCORN), "item.spectrum.mermaids_popcorn.tooltip"), DyeColor.PINK);
 	public static final Item LE_FISHE_AU_CHOCOLAT = registerDeferred("le_fishe_au_chocolat", new Item(IS.of().food(SpectrumFoodComponents.LE_FISHE_AU_CHOCOLAT)), DyeColor.PINK);
@@ -304,7 +304,7 @@ public class SpectrumItems {
 	//public static final Item PASTICHE = registerDeferred("pastiche", new Item(IS.of().food(SpectrumFoodComponents.PASTICHE)), DyeColor.PINK);
 	//public static final Item VITTORIAS_ROAST = registerDeferred("vittorias_roast", new Item(IS.of().food(SpectrumFoodComponents.VITTORIAS_ROAST)), DyeColor.PINK);
 	
-	public static final Item INFUSED_BEVERAGE = registerDeferredSimple("infused_beverage", new BeverageItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(Items.GLASS_BOTTLE).component(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT).component(SpectrumDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT)), DyeColor.PINK);
+	public static final Item INFUSED_BEVERAGE = registerDeferredWithUniqueModel("infused_beverage", new BeverageItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(Items.GLASS_BOTTLE).component(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT).component(SpectrumDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT)), DyeColor.PINK);
 	public static final Item SUSPICIOUS_BREW = registerDeferred("suspicious_brew", new SuspiciousBrewItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(Items.GLASS_BOTTLE)), DyeColor.LIME);
 	public static final Item REPRISE = registerDeferred("reprise", new RepriseItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(Items.GLASS_BOTTLE)), DyeColor.PINK);
 	public static final Item PURE_ALCOHOL = registerDeferred("pure_alcohol", new DrinkItem(IS.of(16, Rarity.UNCOMMON).food(SpectrumFoodComponents.PURE_ALCOHOL).recipeRemainder(Items.GLASS_BOTTLE)), DyeColor.WHITE);
@@ -321,7 +321,7 @@ public class SpectrumItems {
 	public static final Item STAR_CANDY = registerDeferred("star_candy", new StarCandyItem(IS.of(Rarity.UNCOMMON).food(SpectrumFoodComponents.STAR_CANDY)), DyeColor.PINK);
 	public static final Item ENCHANTED_STAR_CANDY = registerDeferred("enchanted_star_candy", new EnchantedStarCandyItem(IS.of(Rarity.UNCOMMON).food(SpectrumFoodComponents.ENCHANTED_STAR_CANDY)), DyeColor.PINK);
 	
-	public static final Item ENCHANTED_GOLDEN_CARROT = registerDeferredSimple("enchanted_golden_carrot", new ItemWithGlint(IS.of(Rarity.EPIC).food(SpectrumFoodComponents.ENCHANTED_GOLDEN_CARROT)), DyeColor.PINK);
+	public static final Item ENCHANTED_GOLDEN_CARROT = registerDeferredWithUniqueModel("enchanted_golden_carrot", new ItemWithGlint(IS.of(Rarity.EPIC).food(SpectrumFoodComponents.ENCHANTED_GOLDEN_CARROT)), DyeColor.PINK);
 	public static final Item JARAMEL = registerDeferred("jaramel", new Item(IS.of().food(SpectrumFoodComponents.JARAMEL)), DyeColor.PINK);
 	
 	public static final Item JARAMEL_TART = registerDeferred("jaramel_tart", new Item(IS.of().food(SpectrumFoodComponents.JARAMEL_TART)), DyeColor.PINK);
@@ -391,39 +391,39 @@ public class SpectrumItems {
 	public static final Item EVERNECTAR = registerDeferred("evernectar", new EvernectarItem(IS.of(1, Rarity.EPIC).food(SpectrumFoodComponents.EVERNECTAR).recipeRemainder(Items.GLASS_BOTTLE), "item.spectrum.evernectar.tooltip"), DyeColor.LIME);
 	
 	// Banner Patterns
-	public static final Item LOGO_BANNER_PATTERN = registerDeferredSimple("logo_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.SPECTRUM_LOGO_TAG, IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_BLUE);
-	public static final Item AMETHYST_SHARD_BANNER_PATTERN = registerDeferredSimple("amethyst_shard_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.AMETHYST_SHARD_TAG, IS.of(1)), DyeColor.LIGHT_BLUE);
-	public static final Item AMETHYST_CLUSTER_BANNER_PATTERN = registerDeferredSimple("amethyst_cluster_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.AMETHYST_CLUSTER_TAG, IS.of(1)), DyeColor.LIGHT_BLUE);
-	public static final Item ASTROLOGER_BANNER_PATTERN = registerDeferredSimple("astrologer_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.ASTROLOGER_TAG, IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_BLUE);
-	public static final Item VELVET_ASTROLOGER_BANNER_PATTERN = registerDeferredSimple("velvet_astrologer_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.VELVET_ASTROLOGER_TAG, IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_BLUE);
-	public static final Item POISONBLOOM_BANNER_PATTERN = registerDeferredSimple("poisonbloom_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.POISONBLOOM_TAG, IS.of(1, Rarity.RARE)), DyeColor.LIGHT_BLUE);
-	public static final Item DEEP_LIGHT_BANNER_PATTERN = registerDeferredSimple("deep_light_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.DEEP_LIGHT_TAG, IS.of(1, Rarity.RARE)), DyeColor.LIGHT_BLUE);
+	public static final Item LOGO_BANNER_PATTERN = registerDeferredWithUniqueModel("logo_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.SPECTRUM_LOGO_TAG, IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_BLUE);
+	public static final Item AMETHYST_SHARD_BANNER_PATTERN = registerDeferredWithUniqueModel("amethyst_shard_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.AMETHYST_SHARD_TAG, IS.of(1)), DyeColor.LIGHT_BLUE);
+	public static final Item AMETHYST_CLUSTER_BANNER_PATTERN = registerDeferredWithUniqueModel("amethyst_cluster_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.AMETHYST_CLUSTER_TAG, IS.of(1)), DyeColor.LIGHT_BLUE);
+	public static final Item ASTROLOGER_BANNER_PATTERN = registerDeferredWithUniqueModel("astrologer_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.ASTROLOGER_TAG, IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_BLUE);
+	public static final Item VELVET_ASTROLOGER_BANNER_PATTERN = registerDeferredWithUniqueModel("velvet_astrologer_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.VELVET_ASTROLOGER_TAG, IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_BLUE);
+	public static final Item POISONBLOOM_BANNER_PATTERN = registerDeferredWithUniqueModel("poisonbloom_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.POISONBLOOM_TAG, IS.of(1, Rarity.RARE)), DyeColor.LIGHT_BLUE);
+	public static final Item DEEP_LIGHT_BANNER_PATTERN = registerDeferredWithUniqueModel("deep_light_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.DEEP_LIGHT_TAG, IS.of(1, Rarity.RARE)), DyeColor.LIGHT_BLUE);
 	
 	// Spawning items
 	public static final Item BUCKET_OF_ERASER = registerDeferred("bucket_of_eraser", new EmptyFluidEntityBucketItem(SpectrumEntityTypes.ERASER, Fluids.EMPTY, SoundEvents.ITEM_BUCKET_EMPTY, IS.of()), DyeColor.PINK);
-	public static final Item EGG_LAYING_WOOLY_PIG_SPAWN_EGG = registerDeferredSimple("egg_laying_wooly_pig_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, 0x3a2c38, 0xfff2e0, IS.of()), DyeColor.WHITE);
-	public static final Item PRESERVATION_TURRET_SPAWN_EGG = registerDeferredSimple("preservation_turret_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.PRESERVATION_TURRET, 0xf3f6f8, 0xc8c5be, IS.of()), DyeColor.WHITE);
-	public static final Item KINDLING_SPAWN_EGG = registerDeferredSimple("kindling_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.KINDLING, 0xda4261, 0xffd452, IS.of()), DyeColor.WHITE);
-	public static final Item LIZARD_SPAWN_EGG = registerDeferredSimple("lizard_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.LIZARD, 0x896459, 0x503a40, IS.of()), DyeColor.WHITE);
-	public static final Item ERASER_SPAWN_EGG = registerDeferredSimple("eraser_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.ERASER, 0x200d29, 0xc83e93, IS.of()), DyeColor.WHITE);
+	public static final Item EGG_LAYING_WOOLY_PIG_SPAWN_EGG = registerDeferredWithUniqueModel("egg_laying_wooly_pig_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, 0x3a2c38, 0xfff2e0, IS.of()), DyeColor.WHITE);
+	public static final Item PRESERVATION_TURRET_SPAWN_EGG = registerDeferredWithUniqueModel("preservation_turret_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.PRESERVATION_TURRET, 0xf3f6f8, 0xc8c5be, IS.of()), DyeColor.WHITE);
+	public static final Item KINDLING_SPAWN_EGG = registerDeferredWithUniqueModel("kindling_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.KINDLING, 0xda4261, 0xffd452, IS.of()), DyeColor.WHITE);
+	public static final Item LIZARD_SPAWN_EGG = registerDeferredWithUniqueModel("lizard_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.LIZARD, 0x896459, 0x503a40, IS.of()), DyeColor.WHITE);
+	public static final Item ERASER_SPAWN_EGG = registerDeferredWithUniqueModel("eraser_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.ERASER, 0x200d29, 0xc83e93, IS.of()), DyeColor.WHITE);
 	
 	// Magical Tools
 	public static final Item BAG_OF_HOLDING = registerDeferred("bag_of_holding", new BagOfHoldingItem(IS.of(1)), DyeColor.PURPLE);
-	public static final Item RADIANCE_STAFF = registerDeferredSimple("radiance_staff", new RadianceStaffItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.YELLOW);
-	public static final NaturesStaffItem NATURES_STAFF = registerDeferredSimple("natures_staff", new NaturesStaffItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIME);
-	public static final Item STAFF_OF_REMEMBRANCE = registerDeferredSimple("staff_of_remembrance", new StaffOfRemembranceItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIME);
-	public static final Item CONSTRUCTORS_STAFF = registerDeferredSimple("constructors_staff", new ConstructorsStaffItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_GRAY);
-	public static final Item EXCHANGING_STAFF = registerDeferredSimple("exchanging_staff", new ExchangeStaffItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_GRAY);
+	public static final Item RADIANCE_STAFF = registerDeferredWithUniqueModel("radiance_staff", new RadianceStaffItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.YELLOW);
+	public static final NaturesStaffItem NATURES_STAFF = registerDeferredWithUniqueModel("natures_staff", new NaturesStaffItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIME);
+	public static final Item STAFF_OF_REMEMBRANCE = registerDeferredWithUniqueModel("staff_of_remembrance", new StaffOfRemembranceItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIME);
+	public static final Item CONSTRUCTORS_STAFF = registerDeferredWithUniqueModel("constructors_staff", new ConstructorsStaffItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_GRAY);
+	public static final Item EXCHANGING_STAFF = registerDeferredWithUniqueModel("exchanging_staff", new ExchangeStaffItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_GRAY);
 	public static final Item BLOCK_FLOODER = registerDeferred("block_flooder", new BlockFlooderItem(IS.of(Rarity.UNCOMMON)), DyeColor.LIGHT_GRAY);
-	public static final Item PIPE_BOMB = registerDeferredSimple("pipe_bomb", new PipeBombItem(IS.of(1)), DyeColor.ORANGE);
-	public static final EnderSpliceItem ENDER_SPLICE = registerDeferredSimple("ender_splice", new EnderSpliceItem(IS.of(16, Rarity.UNCOMMON)), DyeColor.PURPLE);
+	public static final Item PIPE_BOMB = registerDeferredWithUniqueModel("pipe_bomb", new PipeBombItem(IS.of(1)), DyeColor.ORANGE);
+	public static final EnderSpliceItem ENDER_SPLICE = registerDeferredWithUniqueModel("ender_splice", new EnderSpliceItem(IS.of(16, Rarity.UNCOMMON)), DyeColor.PURPLE);
 	public static final Item PERTURBED_EYE = registerDeferred("perturbed_eye", new PerturbedEyeItem(IS.of(Rarity.UNCOMMON)), DyeColor.RED);
-	public static final Item CRESCENT_CLOCK = registerDeferredSimple("crescent_clock", new ItemWithTooltip(IS.of(1), "item.spectrum.crescent_clock.tooltip"), DyeColor.MAGENTA);
+	public static final Item CRESCENT_CLOCK = registerDeferredWithUniqueModel("crescent_clock", new ItemWithTooltip(IS.of(1), "item.spectrum.crescent_clock.tooltip"), DyeColor.MAGENTA);
 	public static final Item PRIMORDIAL_LIGHTER = registerDeferred("primordial_lighter", new PrimordialLighterItem(IS.of(1)), DyeColor.ORANGE);
 	
 	public static final Item NIGHT_SALTS = registerDeferred("night_salts", new NightSaltsItem(IS.of(16)), DyeColor.PURPLE);
 	public static final Item SOOTHING_BOUQUET = registerDeferred("soothing_bouquet", new SoothingBouquetItem(IS.of(1, Rarity.RARE)), DyeColor.PURPLE);
-	public static final Item CONCEALING_OILS = registerDeferredSimple("concealing_oils", new ConcealingOilsItem(IS.of(1)), DyeColor.BLACK);
+	public static final Item CONCEALING_OILS = registerDeferredWithUniqueModel("concealing_oils", new ConcealingOilsItem(IS.of(1)), DyeColor.BLACK);
 	public static final Item BITTER_OILS = registerDeferred("bitter_oils", new DrinkItem(IS.of(16).food(SpectrumFoodComponents.BITTER_OILS)), DyeColor.BLUE);
 	
 	public static final Item INCANDESCENT_ESSENCE = registerDeferred("incandescent_essence", new CloakedItem(IS.of().fireproof(), SpectrumAdvancements.MIDGAME, Items.ORANGE_DYE), DyeColor.ORANGE);
@@ -440,16 +440,16 @@ public class SpectrumItems {
 	public static final Item GLOW_PHANTOM_FRAME = registerDeferred("glow_phantom_frame", new PhantomGlowFrameItem(SpectrumEntityTypes.GLOW_PHANTOM_FRAME, IS.of()), DyeColor.YELLOW);
 	
 	// Specialty Magical Tools
-	public static final KnowledgeGemItem KNOWLEDGE_GEM = registerDeferredSimple("knowledge_gem", new KnowledgeGemItem(IS.of(1, Rarity.UNCOMMON), 10000), DyeColor.PURPLE);
+	public static final KnowledgeGemItem KNOWLEDGE_GEM = registerDeferredWithUniqueModel("knowledge_gem", new KnowledgeGemItem(IS.of(1, Rarity.UNCOMMON), 10000), DyeColor.PURPLE);
 	public static final Item CELESTIAL_POCKETWATCH = registerDeferred("celestial_pocketwatch", new CelestialPocketWatchItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.MAGENTA);
 	public static final Item ARTISANS_ATLAS = registerDeferred("artisans_atlas", new ArtisansAtlasItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.YELLOW);
 	public static final Item GILDED_BOOK = registerDeferred("gilded_book", new GildedBookItem(IS.of(Rarity.UNCOMMON)), DyeColor.PURPLE);
-	public static final Item ENCHANTMENT_CANVAS = registerDeferredSimple("enchantment_canvas", new EnchantmentCanvasItem(IS.of(16, Rarity.UNCOMMON)), DyeColor.PURPLE);
+	public static final Item ENCHANTMENT_CANVAS = registerDeferredWithUniqueModel("enchantment_canvas", new EnchantmentCanvasItem(IS.of(16, Rarity.UNCOMMON)), DyeColor.PURPLE);
 	public static final Item EVERPROMISE_RIBBON = registerDeferred("everpromise_ribbon", new EverpromiseRibbonItem(IS.of()), DyeColor.PINK);
 	
 	// Lore
-	public static final Item MYSTERIOUS_LOCKET = registerDeferredSimple("mysterious_locket", new MysteriousLocketItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.GRAY);
-	public static final Item MYSTERIOUS_COMPASS = registerDeferredSimple("mysterious_compass", new MysteriousCompassItem(IS.of(1, Rarity.RARE)), DyeColor.GRAY);
+	public static final Item MYSTERIOUS_LOCKET = registerDeferredWithUniqueModel("mysterious_locket", new MysteriousLocketItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.GRAY);
+	public static final Item MYSTERIOUS_COMPASS = registerDeferredWithUniqueModel("mysterious_compass", new MysteriousCompassItem(IS.of(1, Rarity.RARE)), DyeColor.GRAY);
 	
 	// Trinkets
 	public static final Item FANCIFUL_TUFF_RING = registerDeferred("fanciful_tuff_ring", new Item(IS.of(16, Rarity.UNCOMMON)), DyeColor.GREEN);
@@ -478,16 +478,16 @@ public class SpectrumItems {
 	public static final InkDrainTrinketItem LAURELS_OF_SERENITY = registerDeferred("laurels_of_serenity", new LaurelsOfSerenityItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.PURPLE);
 	
 	// Ink storage
-	public static final InkFlaskItem INK_FLASK = registerDeferredSimple("ink_flask", new InkFlaskItem(IS.of(1), 64 * 64 * 100), DyeColor.WHITE); // 64 stacks of pigments (1 pigment => 100 energy)
+	public static final InkFlaskItem INK_FLASK = registerDeferredWithUniqueModel("ink_flask", new InkFlaskItem(IS.of(1), 64 * 64 * 100), DyeColor.WHITE); // 64 stacks of pigments (1 pigment => 100 energy)
 	public static final InkAssortmentItem INK_ASSORTMENT = registerDeferred("ink_assortment", new InkAssortmentItem(IS.of(1), 64 * 100), DyeColor.WHITE);
 	public static final PigmentPaletteItem PIGMENT_PALETTE = registerDeferred("pigment_palette", new PigmentPaletteItem(IS.of(1, Rarity.UNCOMMON), 64 * 64 * 100), DyeColor.WHITE);
 	public static final ArtistsPaletteItem ARTISTS_PALETTE = registerDeferred("artists_palette", new ArtistsPaletteItem(IS.of(1, Rarity.UNCOMMON), 64 * 64 * 64 * 64 * 100), DyeColor.WHITE);
-	public static final CreativeInkAssortmentItem CREATIVE_INK_ASSORTMENT = registerDeferredSimple("creative_ink_assortment", new CreativeInkAssortmentItem(IS.of(1, Rarity.EPIC)), DyeColor.WHITE);
+	public static final CreativeInkAssortmentItem CREATIVE_INK_ASSORTMENT = registerDeferredWithUniqueModel("creative_ink_assortment", new CreativeInkAssortmentItem(IS.of(1, Rarity.EPIC)), DyeColor.WHITE);
 	
 	public static final GleamingPinItem GLEAMING_PIN = registerDeferred("gleaming_pin", new GleamingPinItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.YELLOW);
-	public static final Item LESSER_POTION_PENDANT = registerDeferredSimple("lesser_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 1, SpectrumCommon.CONFIG.MaxLevelForEffectsInLesserPotionPendant - 1, SpectrumAdvancements.UNLOCK_LESSER_POTION_PENDANT), DyeColor.PINK);
-	public static final Item GREATER_POTION_PENDANT = registerDeferredSimple("greater_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 3, SpectrumCommon.CONFIG.MaxLevelForEffectsInGreaterPotionPendant - 1, SpectrumAdvancements.UNLOCK_GREATER_POTION_PENDANT), DyeColor.PINK);
-	public static final Item ASHEN_CIRCLET = registerDeferredSimple("ashen_circlet", new AshenCircletItem(IS.of(1, Rarity.UNCOMMON).fireproof()), DyeColor.ORANGE);
+	public static final Item LESSER_POTION_PENDANT = registerDeferredWithUniqueModel("lesser_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 1, SpectrumCommon.CONFIG.MaxLevelForEffectsInLesserPotionPendant - 1, SpectrumAdvancements.UNLOCK_LESSER_POTION_PENDANT), DyeColor.PINK);
+	public static final Item GREATER_POTION_PENDANT = registerDeferredWithUniqueModel("greater_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 3, SpectrumCommon.CONFIG.MaxLevelForEffectsInGreaterPotionPendant - 1, SpectrumAdvancements.UNLOCK_GREATER_POTION_PENDANT), DyeColor.PINK);
+	public static final Item ASHEN_CIRCLET = registerDeferredWithUniqueModel("ashen_circlet", new AshenCircletItem(IS.of(1, Rarity.UNCOMMON).fireproof()), DyeColor.ORANGE);
 	public static final Item WEEPING_CIRCLET = registerDeferred("weeping_circlet", new WeepingCircletItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.LIGHT_BLUE);
 	public static final Item PUFF_CIRCLET = registerDeferred("puff_circlet", new PuffCircletItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.WHITE);
 	public static final Item WHISPY_CIRCLET = registerDeferred("whispy_circlet", new WhispyCircletItem(IS.of(1, Rarity.UNCOMMON)), DyeColor.BROWN);
@@ -512,17 +512,17 @@ public class SpectrumItems {
 	public static final Item PURE_ECHO = registerDeferred("pure_echo", new Item(IS.of()), DyeColor.BROWN);
 	
 	//Technical Items
-	public static final Item CONNECTION_NODE_CRYSTAL = registerDeferredSimple("connection_node_crystal", new Item(IS.of()), DyeColor.LIGHT_GRAY);
-	public static final Item PROVIDER_NODE_CRYSTAL = registerDeferredSimple("provider_node_crystal", new Item(IS.of()), DyeColor.MAGENTA);
-	public static final Item SENDER_NODE_CRYSTAL = registerDeferredSimple("sender_node_crystal", new Item(IS.of()), DyeColor.YELLOW);
-	public static final Item STORAGE_NODE_CRYSTAL = registerDeferredSimple("storage_node_crystal", new Item(IS.of()), DyeColor.CYAN);
-	public static final Item BUFFER_NODE_CRYSTAL = registerDeferredSimple("buffer_node_crystal", new Item(IS.of()), DyeColor.GREEN);
-	public static final Item GATHER_NODE_CRYSTAL = registerDeferredSimple("gather_node_crystal", new Item(IS.of()), DyeColor.BLACK);
-	public static final Item EXTENDED_BUNDLE_ITEM = registerDeferredSimple("extended_bundle", new Item(IS.of()), DyeColor.BROWN);
+	public static final Item CONNECTION_NODE_CRYSTAL = registerDeferredWithUniqueModel("connection_node_crystal", new Item(IS.of()), DyeColor.LIGHT_GRAY);
+	public static final Item PROVIDER_NODE_CRYSTAL = registerDeferredWithUniqueModel("provider_node_crystal", new Item(IS.of()), DyeColor.MAGENTA);
+	public static final Item SENDER_NODE_CRYSTAL = registerDeferredWithUniqueModel("sender_node_crystal", new Item(IS.of()), DyeColor.YELLOW);
+	public static final Item STORAGE_NODE_CRYSTAL = registerDeferredWithUniqueModel("storage_node_crystal", new Item(IS.of()), DyeColor.CYAN);
+	public static final Item BUFFER_NODE_CRYSTAL = registerDeferredWithUniqueModel("buffer_node_crystal", new Item(IS.of()), DyeColor.GREEN);
+	public static final Item GATHER_NODE_CRYSTAL = registerDeferredWithUniqueModel("gather_node_crystal", new Item(IS.of()), DyeColor.BLACK);
+	public static final Item EXTENDED_BUNDLE_ITEM = registerDeferredWithUniqueModel("extended_bundle", new Item(IS.of()), DyeColor.BROWN);
 	
 	public static <T extends Item> RegistryKey<Item> registerDeferredSupplier(String id, Supplier<T> supplier, DyeColor dyeColor) {
 		RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, SpectrumCommon.locate(id));
-		DEFERRER.defer(() -> {
+		REGISTRAR.defer(() -> {
 			T item = supplier.get();
 			Registry.register(Registries.ITEM, key, item);
 			ItemColors.ITEM_COLORS.registerColorMapping(item, dyeColor);
@@ -531,18 +531,18 @@ public class SpectrumItems {
 	}
 	
 	public static <T extends Item> T registerDeferred(String id, T item, DyeColor dyeColor) {
-		DEFERRER.defer(() -> {
+		REGISTRAR.defer(() -> {
 			Registry.register(Registries.ITEM, SpectrumCommon.locate(id), item);
 			ItemColors.ITEM_COLORS.registerColorMapping(item, dyeColor);
 		});
 		if (IS_DATAGEN) {
-			MODEL_DEFERRER.defer(ctx -> ctx.register(item, Models.GENERATED));
+			MODEL_REGISTRAR.defer(ctx -> ctx.register(item, Models.GENERATED));
 		}
 		return item;
 	}
 	
-	public static <T extends Item> T registerDeferredSimple(String id, T item, DyeColor dyeColor) {
-		DEFERRER.defer(() -> {
+	public static <T extends Item> T registerDeferredWithUniqueModel(String id, T item, DyeColor dyeColor) {
+		REGISTRAR.defer(() -> {
 			Registry.register(Registries.ITEM, SpectrumCommon.locate(id), item);
 			ItemColors.ITEM_COLORS.registerColorMapping(item, dyeColor);
 		});
@@ -550,14 +550,14 @@ public class SpectrumItems {
 	}
 	
 	public static void register() {
-		DEFERRER.flush();
+		REGISTRAR.flush();
 		
 		FluidStorage.combinedItemApiProvider(SpectrumItems.MERMAIDS_GEM).register(context ->
 				new RemainderlessItemFluidStorage(context, FluidVariant.of(Fluids.WATER), FluidConstants.BUCKET));
 	}
 	
 	public static void provideItemModels(ItemModelGenerator generator) {
-		MODEL_DEFERRER.flush(generator);
+		MODEL_REGISTRAR.flush(generator);
 	}
 	
 	public static void registerFuelRegistry() {

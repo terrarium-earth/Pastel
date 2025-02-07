@@ -23,9 +23,9 @@ import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
 @SuppressWarnings("unused")
 public class SpectrumEnchantments {
 	
-	private static final Deferrer.Contextual<ProvidedTagBuilderBuilder<Item>> ITEM_TAG_DEFERRER = new Deferrer.Contextual<>();
-	private static final Deferrer.Contextual<BootstrapContext<Enchantment>> BOOTSTRAP_DEFERRER = new Deferrer.Contextual<>();
-	private static final Deferrer.KeyedContextual<RegistryKey<Enchantment>, ProvidedTagBuilderBuilder<Enchantment>> ENCHANTMENT_TAG_DEFERRER = new Deferrer.KeyedContextual<>();
+	private static final DeferredRegistrar.Contextual<ProvidedTagBuilderBuilder<Item>> ITEM_TAG_REGISTRAR = new DeferredRegistrar.Contextual<>();
+	private static final DeferredRegistrar.Contextual<BootstrapContext<Enchantment>> BOOTSTRAP_REGISTAR = new DeferredRegistrar.Contextual<>();
+	private static final DeferredRegistrar.KeyedContextual<RegistryKey<Enchantment>, ProvidedTagBuilderBuilder<Enchantment>> ENCHANTMENT_TAG_REGISTRAR = new DeferredRegistrar.KeyedContextual<>();
 	
 	public static final RegistryKey<Enchantment> BIG_CATCH = of("big_catch"); // Increase the chance to reel in entities instead of fishing loot
 	public static final RegistryKey<Enchantment> CLOVERS_FAVOR = of("clovers_favor"); // Increases drop chance of <1 loot drops
@@ -438,7 +438,7 @@ public class SpectrumEnchantments {
 			if (!IS_DATAGEN)
 				return cloakKey;
 			
-			BOOTSTRAP_DEFERRER.defer(ctx -> {
+			BOOTSTRAP_REGISTAR.defer(ctx -> {
 				// Build the base enchantment
 				Enchantment.Definition baseDefinition = new Enchantment.Definition(ctx.items().getOrThrow(getEnchantableTag(baseKey)), Optional.empty(), weight, maxLevel, new Enchantment.Cost(0, 0), new Enchantment.Cost(0, 0), 0, slots);
 				Enchantment.Builder baseEnchantment = new Enchantment.Builder(baseDefinition)
@@ -456,7 +456,7 @@ public class SpectrumEnchantments {
 				ctx.registerable().register(cloakKey, cloakEnchantment.build(baseKey.getValue()));
 			});
 			
-			ENCHANTMENT_TAG_DEFERRER.defer(baseKey, (key, ctx) -> {
+			ENCHANTMENT_TAG_REGISTRAR.defer(baseKey, (key, ctx) -> {
 				// Build the cloaking pair enchantment tag (e.g., resonance + cloaked/resonance)
 				ctx.build(getPairTag(key)).add(key).add(cloakKey);
 				
@@ -464,7 +464,7 @@ public class SpectrumEnchantments {
 				exclusiveSetBuilder.build(key, ctx.build(getExclusiveSetTag(key)).forceAddTag(getPairTag(key)));
 			});
 			
-			ITEM_TAG_DEFERRER.defer(ctx -> {
+			ITEM_TAG_REGISTRAR.defer(ctx -> {
 				// Build the enchantable items tag
 				enchantableBuilder.build(ctx.build(getEnchantableTag(baseKey)));
 			});
@@ -475,22 +475,22 @@ public class SpectrumEnchantments {
 	}
 	
 	public static void provideItemTags(ProvidedTagBuilderBuilder<Item> builder) {
-		ITEM_TAG_DEFERRER.flush(builder);
+		ITEM_TAG_REGISTRAR.flush(builder);
 	}
 	
 	public static void provideEnchantmentTags(ProvidedTagBuilderBuilder<Enchantment> builder) {
 		FabricTagProvider<Enchantment>.FabricTagBuilder enchantments = builder.build(SpectrumEnchantmentTags.ENCHANTMENTS);
 		FabricTagProvider<Enchantment>.FabricTagBuilder cloaked = builder.build(SpectrumEnchantmentTags.CLOAKED);
-		ENCHANTMENT_TAG_DEFERRER.streamKeys().sorted(Comparator.comparing(RegistryKey::getValue)).forEach(key -> {
+		ENCHANTMENT_TAG_REGISTRAR.streamKeys().sorted(Comparator.comparing(RegistryKey::getValue)).forEach(key -> {
 			enchantments.forceAddTag(getPairTag(key));
 			cloaked.add(getCloakKey(key));
 		});
 		
-		ENCHANTMENT_TAG_DEFERRER.flush(builder);
+		ENCHANTMENT_TAG_REGISTRAR.flush(builder);
 	}
 	
 	public static void provideEnchantments(BootstrapContext<Enchantment> ctx) {
-		BOOTSTRAP_DEFERRER.flush(ctx);
+		BOOTSTRAP_REGISTAR.flush(ctx);
 	}
 	
 	private interface EnchantmentBuilderCallback {
