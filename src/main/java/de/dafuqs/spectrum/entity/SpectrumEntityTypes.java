@@ -39,9 +39,14 @@ public class SpectrumEntityTypes {
 	public static final EntityType<ItemProjectileEntity> ITEM_PROJECTILE = register("item_projectile", EntityType.Builder.<ItemProjectileEntity>create(ItemProjectileEntity::new, SpawnGroup.MISC).dimensions(0.25F, 0.25F).maxTrackingRange(6).trackingTickInterval(20));
 	public static final EntityType<DragonTalonEntity> DRAGON_TALON = register("dragon_talon", 4, 10, true, EntityDimensions.changing(0.5F, 0.5F), true, DragonTalonEntity::new);
 	public static final EntityType<DraconicTwinswordEntity> DRACONIC_TWINSWORD = register("draconic_twinsword", 6, 2, true, EntityDimensions.changing(0.5F, 0.5F), true, DraconicTwinswordEntity::new);
-
-	public static void register() {
 	
+	public static void register() {
+		FabricDefaultAttributeRegistry.register(EGG_LAYING_WOOLY_PIG, EggLayingWoolyPigEntity.createEggLayingWoolyPigAttributes());
+		FabricDefaultAttributeRegistry.register(MONSTROSITY, MonstrosityEntity.createMonstrosityAttributes());
+		FabricDefaultAttributeRegistry.register(PRESERVATION_TURRET, PreservationTurretEntity.createGuardianTurretAttributes());
+		FabricDefaultAttributeRegistry.register(LIZARD, LizardEntity.createLizardAttributes());
+		FabricDefaultAttributeRegistry.register(KINDLING, KindlingEntity.createKindlingAttributes());
+		FabricDefaultAttributeRegistry.register(ERASER, EraserEntity.createEraserAttributes());
 	}
 	
 	// TODO: migrate to FabricEntityTypeBuilder, so the "No data fixer registered for xxxx" errors go away
@@ -58,12 +63,6 @@ public class SpectrumEntityTypes {
 	}
 	
 	static {
-		FabricDefaultAttributeRegistry.register(EGG_LAYING_WOOLY_PIG, EggLayingWoolyPigEntity.createEggLayingWoolyPigAttributes());
-		FabricDefaultAttributeRegistry.register(MONSTROSITY, MonstrosityEntity.createMonstrosityAttributes());
-		FabricDefaultAttributeRegistry.register(PRESERVATION_TURRET, PreservationTurretEntity.createGuardianTurretAttributes());
-		FabricDefaultAttributeRegistry.register(LIZARD, LizardEntity.createLizardAttributes());
-		FabricDefaultAttributeRegistry.register(KINDLING, KindlingEntity.createKindlingAttributes());
-		FabricDefaultAttributeRegistry.register(ERASER, EraserEntity.createEraserAttributes());
 	}
 	
 }

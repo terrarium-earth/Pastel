@@ -82,6 +82,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.util.math.intprovider.*;
 import net.minecraft.world.*;
 import net.minecraft.world.explosion.*;
+import net.minecraft.world.gen.feature.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
@@ -109,6 +110,7 @@ public class SpectrumBlocks {
 	
 	private static final DeferredRegistrar COMMON_REGISTRAR = new DeferredRegistrar();
 	private static final DeferredRegistrar CLIENT_REGISTRAR = new DeferredRegistrar();
+	private static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
 	private static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
 	
 	public static final Block PEDESTAL_BASIC_TOPAZ = new PedestalBlock(craftingBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.TOPAZ_BLOCK), BuiltinPedestalVariant.BASIC_TOPAZ);
@@ -452,7 +454,6 @@ public class SpectrumBlocks {
 			key -> registerBlock(key, new StemBlock(GLISTERING_MELON, ATTACHED_GLISTERING_MELON_STEM, SpectrumItems.GLISTERING_MELON_SEEDS, AbstractBlock.Settings.copy(Blocks.MELON_STEM))),
 			SpectrumBlocks::registerRenderLayerEntry);
 	
-	public static final Block OMINOUS_SAPLING = new OminousSaplingBlock(AbstractBlock.Settings.copy(Blocks.OAK_SAPLING));
 	public static final Block PRESENT = new PresentBlock(AbstractBlock.Settings.copy(Blocks.WHITE_WOOL));
 	public static final Block TITRATION_BARREL = new TitrationBarrelBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(MapColor.RED));
 	
@@ -703,24 +704,6 @@ public class SpectrumBlocks {
 	
 	public static final Block VARIA_SPROUT = new AshFloraBlock(settings(MapColor.WHITE, BlockSoundGroup.NETHER_STEM, 0F).breakInstantly().luminance(state -> 11).offset(OffsetType.XZ).dynamicBounds().noCollision().postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
 	
-	public static Settings noxshroom(MapColor color) {
-		return settings(color, BlockSoundGroup.FUNGUS, 0.0F).noCollision();
-	}
-	
-	public static final Block SLATE_NOXSHROOM = new FungusBlock(SpectrumConfiguredFeatures.SLATE_NOXFUNGUS, SHIMMEL, noxshroom(MapColor.GRAY));
-	public static final Block EBONY_NOXSHROOM = new FungusBlock(SpectrumConfiguredFeatures.EBONY_NOXFUNGUS, SHIMMEL, noxshroom(MapColor.TERRACOTTA_BLACK));
-	public static final Block IVORY_NOXSHROOM = new FungusBlock(SpectrumConfiguredFeatures.IVORY_NOXFUNGUS, SHIMMEL, noxshroom(MapColor.OFF_WHITE));
-	public static final Block CHESTNUT_NOXSHROOM = new FungusBlock(SpectrumConfiguredFeatures.CHESTNUT_NOXFUNGUS, SHIMMEL, noxshroom(MapColor.DULL_RED));
-	
-	public static Settings pottedPlant() {
-		return Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY);
-	}
-	
-	public static final Block POTTED_SLATE_NOXSHROOM = new FlowerPotBlock(SLATE_NOXSHROOM, pottedPlant());
-	public static final Block POTTED_EBONY_NOXSHROOM = new FlowerPotBlock(EBONY_NOXSHROOM, pottedPlant());
-	public static final Block POTTED_IVORY_NOXSHROOM = new FlowerPotBlock(IVORY_NOXSHROOM, pottedPlant());
-	public static final Block POTTED_CHESTNUT_NOXSHROOM = new FlowerPotBlock(CHESTNUT_NOXSHROOM, pottedPlant());
-	
 	public static final ToIntFunction<BlockState> LANTERN_LIGHT_PROVIDER = (state -> state.get(RedstoneLampBlock.LIT) ? 15 : 0);
 	
 	public static Settings noxcap(MapColor color) {
@@ -817,13 +800,11 @@ public class SpectrumBlocks {
 		return settings(color, BlockSoundGroup.CHERRY_WOOD, 30.0F).instrument(NoteBlockInstrument.BASS).burnable();
 	}
 	
-	public static final Block WEEPING_GALA_SPRIG = new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.BRIGHT_TEAL));
 	public static final Block WEEPING_GALA_LEAVES = new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.BRIGHT_TEAL));
 	public static final Block WEEPING_GALA_LOG = new PillarBlock(galaWood(MapColor.BROWN));
 	public static final Block STRIPPED_WEEPING_GALA_LOG = new PillarBlock(galaWood(MapColor.BROWN));
 	public static final Block WEEPING_GALA_WOOD = new PillarBlock(galaWood(MapColor.BROWN));
 	public static final Block STRIPPED_WEEPING_GALA_WOOD = new PillarBlock(galaWood(MapColor.BROWN));
-	public static final Block POTTED_WEEPING_GALA_SPRIG = new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant());
 	
 	public static final Block WEEPING_GALA_FRONDS = new WeepingGalaFrondsBlock(AbstractBlock.Settings.copy(WEEPING_GALA_LEAVES).noCollision());
 	public static final Block WEEPING_GALA_FRONDS_PLANT = new WeepingGalaFrondsTipBlock(AbstractBlock.Settings.copy(WEEPING_GALA_LEAVES).noCollision().luminance(s -> s.get(WeepingGalaFrondsTipBlock.FORM) == WeepingGalaFrondsTipBlock.Form.RESIN ? 12 : s.get(WeepingGalaFrondsTipBlock.FORM) == WeepingGalaFrondsTipBlock.Form.SPRIG ? 11 : 0));
@@ -1017,12 +998,10 @@ public class SpectrumBlocks {
 	public static final Block FROSTBITE_CRYSTAL = new Block(AbstractBlock.Settings.copy(Blocks.GLOWSTONE).mapColor(MapColor.LIGHT_BLUE_GRAY));
 	public static final Block BLAZING_CRYSTAL = new Block(AbstractBlock.Settings.copy(Blocks.GLOWSTONE).mapColor(MapColor.ORANGE));
 	
-	public static final Block RESONANT_LILY = new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE));
 	public static final Block QUITOXIC_REEDS = new QuitoxicReedsBlock(settings(MapColor.CLEAR, BlockSoundGroup.GRASS, 0.0F).noCollision().offset(AbstractBlock.OffsetType.XYZ).ticksRandomly().luminance(state -> state.get(QuitoxicReedsBlock.LOGGED).getLuminance()));
 	public static final Block MERMAIDS_BRUSH = new MermaidsBrushBlock(settings(MapColor.CLEAR, BlockSoundGroup.WET_GRASS, 0.0F).noCollision().ticksRandomly().luminance(state -> state.get(MermaidsBrushBlock.LOGGED).getLuminance()));
 	public static final Block RADIATING_ENDER = new RadiatingEnderBlock(AbstractBlock.Settings.copy(Blocks.EMERALD_BLOCK).mapColor(MapColor.PURPLE));
 	public static final Block AMARANTH = new AmaranthCropBlock(settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision().ticksRandomly());
-	public static final Block AMARANTH_BUSHEL = new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision());
 	
 	public static final Block MEMORY = new MemoryBlock(settings(MapColor.CLEAR, BlockSoundGroup.AMETHYST_BLOCK, 0.0F).blockVision(SpectrumBlocks::never).nonOpaque().ticksRandomly());
 	public static final Block CRACKED_END_PORTAL_FRAME = new CrackedEndPortalFrameBlock(settings(MapColor.PALE_PURPLE, BlockSoundGroup.GLASS, -1.0F, 3600000.0F).instrument(NoteBlockInstrument.BASEDRUM).luminance((state) -> 1));
@@ -1088,7 +1067,6 @@ public class SpectrumBlocks {
 			.blockVision((state, world, pos) -> state.get(EnderGlassBlock.TRANSPARENCY_STATE) == EnderGlassBlock.TransparencyState.SOLID));
 	public static final Block CLOVER = new CloverBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ));
 	public static final Block FOUR_LEAF_CLOVER = new FourLeafCloverBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ));
-	public static final Block BLOOD_ORCHID = new BloodOrchidBlock(SpectrumStatusEffects.FRENZY, 10, AbstractBlock.Settings.copy(Blocks.POPPY).offset(AbstractBlock.OffsetType.NONE).ticksRandomly());
 	
 	private static final UniformIntProvider gemOreExperienceProvider = UniformIntProvider.create(1, 4);
 	public static final Block TOPAZ_ORE = new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.CYAN, locate("hidden/collect_shards/topaz"), Blocks.STONE.getDefaultState());
@@ -1125,20 +1103,111 @@ public class SpectrumBlocks {
 		return AbstractBlock.Settings.copy(baseBlock).mapColor(color);
 	}
 	
-	// POTTED PLANTS
+	// SAPLINGS & POTTED PLANTS
 	
-	// NOTE: This must be paired with a corresponding potted plant for model generation
-	public static ColoredSaplingBlock registerColoredSapling(String name, DyeColor dyeColor) {
-		ColoredSaplingBlock block = registerBlockWithItem(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor);
+	public static Settings pottedPlant() {
+		return Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY);
+	}
+	
+	public static <T extends Block> T registerPottablePlantBlock(String name, T plantBlock, DyeColor color, boolean tinted) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
+			ctx.registerTintableCross(plantBlock, tintType);
+		});
+		registerRenderLayerCutoutEntry(plantBlock);
+		return registerBlockWithItem(name, plantBlock, color);
+	}
+	
+	public static <T extends FlowerPotBlock> T registerPottedPlantBlock(String name, T pottedBlock, boolean tinted) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
+			TextureMap textureMap = TextureMap.plant(pottedBlock.getContent());
+			Identifier identifier = tintType.getFlowerPotCrossModel().upload(pottedBlock, textureMap, ctx.modelCollector);
+			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(pottedBlock, identifier));
+		});
+		registerRenderLayerCutoutEntry(pottedBlock);
+		return registerBlockDeferred(name, pottedBlock);
+	}
+	
+	//TODO does it end up the same if we don't do the custom item model
+	public static final AmaranthBushelBlock AMARANTH_BUSHEL = registerCustom(new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision()), block -> {
+		registerBlockWithItem("amaranth_bushel", block, DyeColor.RED);
 		registerRenderLayerCutoutEntry(block);
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			ctx.excludeFromSimpleItemModelGeneration(block);
+			ctx.registerTintableCrossBlockState(block, BlockStateModelGenerator.TintType.NOT_TINTED, TextureMap.cross(block));
+		});
+		ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(block.asItem(), Models.GENERATED));
+	});
+	public static final PottedAmaranthBushelBlock POTTED_AMARANTH_BUSHEL = registerPottedPlantBlock("potted_amaranth_bushel", new PottedAmaranthBushelBlock(AMARANTH_BUSHEL, pottedPlant()), false);
+	
+	public static final ResonantLilyBlock RESONANT_LILY = registerPottablePlantBlock("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN, false);
+	public static final PottedResonantLilyBlock POTTED_RESONANT_LILY = registerPottedPlantBlock("potted_resonant_lily", new PottedResonantLilyBlock(RESONANT_LILY, pottedPlant()), false);
+	
+	public static final WeepingGalaSprigBlock WEEPING_GALA_SPRIG = registerCustom(new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.BRIGHT_TEAL)), block -> {
+		registerBlockWithItem("weeping_gala_sprig", block, DyeColor.LIME);
+		registerRenderLayerCutoutEntry(block);
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			ctx.excludeFromSimpleItemModelGeneration(block);
+			ctx.registerTintableCrossBlockState(block, BlockStateModelGenerator.TintType.NOT_TINTED, TextureMap.cross(block));
+		});
+		ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(block.asItem(), Models.GENERATED));
+	});
+	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = registerPottedPlantBlock("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant()), false);
+	
+	public static final BloodOrchidBlock BLOOD_ORCHID = registerCustom(new BloodOrchidBlock(SpectrumStatusEffects.FRENZY, 10, AbstractBlock.Settings.copy(Blocks.POPPY).offset(AbstractBlock.OffsetType.NONE).ticksRandomly()), block -> {
+		registerBlockWithItem("blood_orchid", block, DyeColor.RED);
+		registerRenderLayerCutoutEntry(block);
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			ctx.registerItemModel(block, "5");
+			ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(BloodOrchidBlock.AGE).register(stage -> {
+				String string = stage.toString();
+				TextureMap textureMap = TextureMap.cross(TextureMap.getSubId(block, string));
+				Identifier identifier = BlockStateModelGenerator.TintType.NOT_TINTED.getCrossModel().upload(block, string, textureMap, ctx.modelCollector);
+				return BlockStateVariant.create().put(VariantSettings.MODEL, identifier);
+			})));
+		});
+	});
+	public static final PottedBloodOrchidBlock POTTED_BLOOD_ORCHID = registerCustom(new PottedBloodOrchidBlock(BLOOD_ORCHID, pottedPlant()), block -> {
+		registerBlockDeferred("potted_blood_orchid", block);
+		registerRenderLayerCutoutEntry(block);
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			TextureMap textureMap = TextureMap.plant(TextureMap.getSubId(BLOOD_ORCHID, "5"));
+			Identifier identifier = BlockStateModelGenerator.TintType.NOT_TINTED.getFlowerPotCrossModel().upload(block, textureMap, ctx.modelCollector);
+			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier));
+		});
+	});
+	
+	public static FungusBlock registerNoxshroom(String name, RegistryKey<ConfiguredFeature<?, ?>> feature, MapColor mapColor) {
+		FungusBlock block = registerBlockWithItem(name, new FungusBlock(feature, SHIMMEL, settings(mapColor, BlockSoundGroup.FUNGUS, 0.0F).noCollision()), DyeColor.LIME);
+		registerRenderLayerCutoutEntry(block);
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			ctx.registerItemModel(block);
+			ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block,
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_1", TextureMap.cross(TextureMap.getSubId(block, "_type_1")), ctx.modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_2", TextureMap.cross(TextureMap.getSubId(block, "_type_2")), ctx.modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_3", TextureMap.cross(TextureMap.getSubId(block, "_type_3")), ctx.modelCollector))
+			));
+		});
 		return block;
 	}
 	
+	public static final FungusBlock SLATE_NOXSHROOM = registerNoxshroom("slate_noxshroom", SpectrumConfiguredFeatures.SLATE_NOXFUNGUS, MapColor.GRAY);
+	public static final FungusBlock EBONY_NOXSHROOM = registerNoxshroom("ebony_noxshroom", SpectrumConfiguredFeatures.EBONY_NOXFUNGUS, MapColor.TERRACOTTA_BLACK);
+	public static final FungusBlock IVORY_NOXSHROOM = registerNoxshroom("ivory_noxshroom", SpectrumConfiguredFeatures.IVORY_NOXFUNGUS, MapColor.OFF_WHITE);
+	public static final FungusBlock CHESTNUT_NOXSHROOM = registerNoxshroom("chestnut_noxshroom", SpectrumConfiguredFeatures.CHESTNUT_NOXFUNGUS, MapColor.DULL_RED);
+	
+	public static final FlowerPotBlock POTTED_SLATE_NOXSHROOM = registerPottedPlantBlock("potted_slate_noxshroom", new FlowerPotBlock(SLATE_NOXSHROOM, pottedPlant()), false);
+	public static final FlowerPotBlock POTTED_EBONY_NOXSHROOM = registerPottedPlantBlock("potted_ebony_noxshroom", new FlowerPotBlock(EBONY_NOXSHROOM, pottedPlant()), false);
+	public static final FlowerPotBlock POTTED_IVORY_NOXSHROOM = registerPottedPlantBlock("potted_ivory_noxshroom", new FlowerPotBlock(IVORY_NOXSHROOM, pottedPlant()), false);
+	public static final FlowerPotBlock POTTED_CHESTNUT_NOXSHROOM = registerPottedPlantBlock("potted_chestnut_noxshroom", new FlowerPotBlock(CHESTNUT_NOXSHROOM, pottedPlant()), false);
+	
+	public static ColoredSaplingBlock registerColoredSapling(String name, DyeColor dyeColor) {
+		return registerPottablePlantBlock(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor, false);
+	}
+	
 	public static PottedColoredSaplingBlock registerPottedColoredSapling(String name, ColoredSaplingBlock saplingBlock) {
-		PottedColoredSaplingBlock block = registerBlockDeferred(name, new PottedColoredSaplingBlock(saplingBlock, pottedPlant(), saplingBlock.getColor()));
-		registerRenderLayerCutoutEntry(block);
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerFlowerPotPlant(saplingBlock, block, BlockStateModelGenerator.TintType.NOT_TINTED));
-		return block;
+		return registerPottedPlantBlock(name, new PottedColoredSaplingBlock(saplingBlock, pottedPlant(), saplingBlock.getColor()), false);
 	}
 	
 	public static final ColoredSaplingBlock BLACK_SAPLING = registerColoredSapling("black_sapling", DyeColor.BLACK);
@@ -1177,26 +1246,30 @@ public class SpectrumBlocks {
 	
 	// LOGS
 	
-	// NOTE: This must be paired with a corresponding wood for model generation
+	public static <T extends Block> T registerLog(String name, T logBlock, DyeColor color) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).log(logBlock));
+		return registerBlockWithItem(name, logBlock, color);
+	}
+	
+	public static <T extends Block> T registerWood(String name, Block logBlock, T woodBlock, DyeColor color) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).wood(woodBlock));
+		return registerBlockWithItem(name, woodBlock, color);
+	}
+	
 	public static ColoredLogBlock registerColoredLog(String name, DyeColor color) {
-		return registerBlockWithItem(name, new ColoredLogBlock(copyWithMapColor(OAK_LOG, color.getMapColor()), color), color);
+		return registerLog(name, new ColoredLogBlock(copyWithMapColor(OAK_LOG, color.getMapColor()), color), color);
 	}
 	
-	public static ColoredWoodBlock registerColoredWood(String name, ColoredLogBlock logBlock, DyeColor color) {
-		ColoredWoodBlock block = registerBlockWithItem(name, new ColoredWoodBlock(copyWithMapColor(OAK_WOOD, color.getMapColor()), color), color);
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).log(logBlock).wood(block));
-		return block;
+	public static ColoredWoodBlock registerColoredWood(String name, ColoredLogBlock logBlock) {
+		return registerWood(name, logBlock, new ColoredWoodBlock(copyWithMapColor(OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor());
 	}
 	
-	// NOTE: This must be paired with a corresponding wood for model generation
 	public static ColoredStrippedLogBlock registerColoredStrippedLog(String name, DyeColor color) {
-		return registerBlockWithItem(name, new ColoredStrippedLogBlock(copyWithMapColor(STRIPPED_OAK_LOG, color.getMapColor()), color), color);
+		return registerLog(name, new ColoredStrippedLogBlock(copyWithMapColor(STRIPPED_OAK_LOG, color.getMapColor()), color), color);
 	}
 	
-	public static ColoredStrippedWoodBlock registerColoredStrippedWood(String name, ColoredStrippedLogBlock logBlock, DyeColor color) {
-		ColoredStrippedWoodBlock block = registerBlockWithItem(name, new ColoredStrippedWoodBlock(copyWithMapColor(STRIPPED_OAK_WOOD, color.getMapColor()), color), color);
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).log(logBlock).wood(block));
-		return block;
+	public static ColoredStrippedWoodBlock registerColoredStrippedWood(String name, ColoredStrippedLogBlock logBlock) {
+		return registerWood(name, logBlock, new ColoredStrippedWoodBlock(copyWithMapColor(STRIPPED_OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor());
 	}
 	
 	public static final ColoredLogBlock BLACK_LOG = registerColoredLog("black_log", DyeColor.BLACK);
@@ -1216,22 +1289,22 @@ public class SpectrumBlocks {
 	public static final ColoredLogBlock WHITE_LOG = registerColoredLog("white_log", DyeColor.WHITE);
 	public static final ColoredLogBlock YELLOW_LOG = registerColoredLog("yellow_log", DyeColor.YELLOW);
 	
-	public static final ColoredWoodBlock BLACK_WOOD = registerColoredWood("black_wood", BLACK_LOG, DyeColor.BLACK);
-	public static final ColoredWoodBlock BLUE_WOOD = registerColoredWood("blue_wood", BLUE_LOG, DyeColor.BLUE);
-	public static final ColoredWoodBlock BROWN_WOOD = registerColoredWood("brown_wood", BROWN_LOG, DyeColor.BROWN);
-	public static final ColoredWoodBlock CYAN_WOOD = registerColoredWood("cyan_wood", CYAN_LOG, DyeColor.CYAN);
-	public static final ColoredWoodBlock GRAY_WOOD = registerColoredWood("gray_wood", GRAY_LOG, DyeColor.GRAY);
-	public static final ColoredWoodBlock GREEN_WOOD = registerColoredWood("green_wood", GREEN_LOG, DyeColor.GREEN);
-	public static final ColoredWoodBlock LIGHT_BLUE_WOOD = registerColoredWood("light_blue_wood", LIGHT_BLUE_LOG, DyeColor.LIGHT_BLUE);
-	public static final ColoredWoodBlock LIGHT_GRAY_WOOD = registerColoredWood("light_gray_wood", LIGHT_GRAY_LOG, DyeColor.LIGHT_GRAY);
-	public static final ColoredWoodBlock LIME_WOOD = registerColoredWood("lime_wood", LIME_LOG, DyeColor.LIME);
-	public static final ColoredWoodBlock MAGENTA_WOOD = registerColoredWood("magenta_wood", MAGENTA_LOG, DyeColor.MAGENTA);
-	public static final ColoredWoodBlock ORANGE_WOOD = registerColoredWood("orange_wood", ORANGE_LOG, DyeColor.ORANGE);
-	public static final ColoredWoodBlock PINK_WOOD = registerColoredWood("pink_wood", PINK_LOG, DyeColor.PINK);
-	public static final ColoredWoodBlock PURPLE_WOOD = registerColoredWood("purple_wood", PURPLE_LOG, DyeColor.PURPLE);
-	public static final ColoredWoodBlock RED_WOOD = registerColoredWood("red_wood", RED_LOG, DyeColor.RED);
-	public static final ColoredWoodBlock WHITE_WOOD = registerColoredWood("white_wood", WHITE_LOG, DyeColor.WHITE);
-	public static final ColoredWoodBlock YELLOW_WOOD = registerColoredWood("yellow_wood", YELLOW_LOG, DyeColor.YELLOW);
+	public static final ColoredWoodBlock BLACK_WOOD = registerColoredWood("black_wood", BLACK_LOG);
+	public static final ColoredWoodBlock BLUE_WOOD = registerColoredWood("blue_wood", BLUE_LOG);
+	public static final ColoredWoodBlock BROWN_WOOD = registerColoredWood("brown_wood", BROWN_LOG);
+	public static final ColoredWoodBlock CYAN_WOOD = registerColoredWood("cyan_wood", CYAN_LOG);
+	public static final ColoredWoodBlock GRAY_WOOD = registerColoredWood("gray_wood", GRAY_LOG);
+	public static final ColoredWoodBlock GREEN_WOOD = registerColoredWood("green_wood", GREEN_LOG);
+	public static final ColoredWoodBlock LIGHT_BLUE_WOOD = registerColoredWood("light_blue_wood", LIGHT_BLUE_LOG);
+	public static final ColoredWoodBlock LIGHT_GRAY_WOOD = registerColoredWood("light_gray_wood", LIGHT_GRAY_LOG);
+	public static final ColoredWoodBlock LIME_WOOD = registerColoredWood("lime_wood", LIME_LOG);
+	public static final ColoredWoodBlock MAGENTA_WOOD = registerColoredWood("magenta_wood", MAGENTA_LOG);
+	public static final ColoredWoodBlock ORANGE_WOOD = registerColoredWood("orange_wood", ORANGE_LOG);
+	public static final ColoredWoodBlock PINK_WOOD = registerColoredWood("pink_wood", PINK_LOG);
+	public static final ColoredWoodBlock PURPLE_WOOD = registerColoredWood("purple_wood", PURPLE_LOG);
+	public static final ColoredWoodBlock RED_WOOD = registerColoredWood("red_wood", RED_LOG);
+	public static final ColoredWoodBlock WHITE_WOOD = registerColoredWood("white_wood", WHITE_LOG);
+	public static final ColoredWoodBlock YELLOW_WOOD = registerColoredWood("yellow_wood", YELLOW_LOG);
 	
 	public static final ColoredStrippedLogBlock STRIPPED_BLACK_LOG = registerColoredStrippedLog("stripped_black_log", DyeColor.BLACK);
 	public static final ColoredStrippedLogBlock STRIPPED_BLUE_LOG = registerColoredStrippedLog("stripped_blue_log", DyeColor.BLUE);
@@ -1250,24 +1323,26 @@ public class SpectrumBlocks {
 	public static final ColoredStrippedLogBlock STRIPPED_WHITE_LOG = registerColoredStrippedLog("stripped_white_log", DyeColor.WHITE);
 	public static final ColoredStrippedLogBlock STRIPPED_YELLOW_LOG = registerColoredStrippedLog("stripped_yellow_log", DyeColor.YELLOW);
 	
-	public static final ColoredStrippedWoodBlock STRIPPED_BLACK_WOOD = registerColoredStrippedWood("stripped_black_wood", STRIPPED_BLACK_LOG, DyeColor.BLACK);
-	public static final ColoredStrippedWoodBlock STRIPPED_BLUE_WOOD = registerColoredStrippedWood("stripped_blue_wood", STRIPPED_BLUE_LOG, DyeColor.BLUE);
-	public static final ColoredStrippedWoodBlock STRIPPED_BROWN_WOOD = registerColoredStrippedWood("stripped_brown_wood", STRIPPED_BROWN_LOG, DyeColor.BROWN);
-	public static final ColoredStrippedWoodBlock STRIPPED_CYAN_WOOD = registerColoredStrippedWood("stripped_cyan_wood", STRIPPED_CYAN_LOG, DyeColor.CYAN);
-	public static final ColoredStrippedWoodBlock STRIPPED_GRAY_WOOD = registerColoredStrippedWood("stripped_gray_wood", STRIPPED_GRAY_LOG, DyeColor.GRAY);
-	public static final ColoredStrippedWoodBlock STRIPPED_GREEN_WOOD = registerColoredStrippedWood("stripped_green_wood", STRIPPED_GREEN_LOG, DyeColor.GREEN);
-	public static final ColoredStrippedWoodBlock STRIPPED_LIGHT_BLUE_WOOD = registerColoredStrippedWood("stripped_light_blue_wood", STRIPPED_LIGHT_BLUE_LOG, DyeColor.LIGHT_BLUE);
-	public static final ColoredStrippedWoodBlock STRIPPED_LIGHT_GRAY_WOOD = registerColoredStrippedWood("stripped_light_gray_wood", STRIPPED_LIGHT_GRAY_LOG, DyeColor.LIGHT_GRAY);
-	public static final ColoredStrippedWoodBlock STRIPPED_LIME_WOOD = registerColoredStrippedWood("stripped_lime_wood", STRIPPED_LIME_LOG, DyeColor.LIME);
-	public static final ColoredStrippedWoodBlock STRIPPED_MAGENTA_WOOD = registerColoredStrippedWood("stripped_magenta_wood", STRIPPED_MAGENTA_LOG, DyeColor.MAGENTA);
-	public static final ColoredStrippedWoodBlock STRIPPED_ORANGE_WOOD = registerColoredStrippedWood("stripped_orange_wood", STRIPPED_ORANGE_LOG, DyeColor.ORANGE);
-	public static final ColoredStrippedWoodBlock STRIPPED_PINK_WOOD = registerColoredStrippedWood("stripped_pink_wood", STRIPPED_PINK_LOG, DyeColor.PINK);
-	public static final ColoredStrippedWoodBlock STRIPPED_PURPLE_WOOD = registerColoredStrippedWood("stripped_purple_wood", STRIPPED_PURPLE_LOG, DyeColor.PURPLE);
-	public static final ColoredStrippedWoodBlock STRIPPED_RED_WOOD = registerColoredStrippedWood("stripped_red_wood", STRIPPED_RED_LOG, DyeColor.RED);
-	public static final ColoredStrippedWoodBlock STRIPPED_WHITE_WOOD = registerColoredStrippedWood("stripped_white_wood", STRIPPED_WHITE_LOG, DyeColor.WHITE);
-	public static final ColoredStrippedWoodBlock STRIPPED_YELLOW_WOOD = registerColoredStrippedWood("stripped_yellow_wood", STRIPPED_YELLOW_LOG, DyeColor.YELLOW);
+	public static final ColoredStrippedWoodBlock STRIPPED_BLACK_WOOD = registerColoredStrippedWood("stripped_black_wood", STRIPPED_BLACK_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_BLUE_WOOD = registerColoredStrippedWood("stripped_blue_wood", STRIPPED_BLUE_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_BROWN_WOOD = registerColoredStrippedWood("stripped_brown_wood", STRIPPED_BROWN_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_CYAN_WOOD = registerColoredStrippedWood("stripped_cyan_wood", STRIPPED_CYAN_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_GRAY_WOOD = registerColoredStrippedWood("stripped_gray_wood", STRIPPED_GRAY_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_GREEN_WOOD = registerColoredStrippedWood("stripped_green_wood", STRIPPED_GREEN_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_LIGHT_BLUE_WOOD = registerColoredStrippedWood("stripped_light_blue_wood", STRIPPED_LIGHT_BLUE_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_LIGHT_GRAY_WOOD = registerColoredStrippedWood("stripped_light_gray_wood", STRIPPED_LIGHT_GRAY_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_LIME_WOOD = registerColoredStrippedWood("stripped_lime_wood", STRIPPED_LIME_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_MAGENTA_WOOD = registerColoredStrippedWood("stripped_magenta_wood", STRIPPED_MAGENTA_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_ORANGE_WOOD = registerColoredStrippedWood("stripped_orange_wood", STRIPPED_ORANGE_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_PINK_WOOD = registerColoredStrippedWood("stripped_pink_wood", STRIPPED_PINK_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_PURPLE_WOOD = registerColoredStrippedWood("stripped_purple_wood", STRIPPED_PURPLE_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_RED_WOOD = registerColoredStrippedWood("stripped_red_wood", STRIPPED_RED_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_WHITE_WOOD = registerColoredStrippedWood("stripped_white_wood", STRIPPED_WHITE_LOG);
+	public static final ColoredStrippedWoodBlock STRIPPED_YELLOW_WOOD = registerColoredStrippedWood("stripped_yellow_wood", STRIPPED_YELLOW_LOG);
 	
-	// COLORED TREES
+	// OTHER TREE AND PLANT BITS
+	
+	public static final Block OMINOUS_SAPLING = new OminousSaplingBlock(AbstractBlock.Settings.copy(Blocks.OAK_SAPLING));
 	
 	public static ColoredLeavesBlock registerColoredLeaves(String name, DyeColor color) {
 		ColoredLeavesBlock block = registerBlockWithItem(name, new ColoredLeavesBlock(copyWithMapColor(OAK_LEAVES, color.getMapColor()), color), color);
@@ -1291,10 +1366,6 @@ public class SpectrumBlocks {
 	public static final ColoredLeavesBlock RED_LEAVES = registerColoredLeaves("red_leaves", DyeColor.RED);
 	public static final ColoredLeavesBlock WHITE_LEAVES = registerColoredLeaves("white_leaves", DyeColor.WHITE);
 	public static final ColoredLeavesBlock YELLOW_LEAVES = registerColoredLeaves("yellow_leaves", DyeColor.YELLOW);
-	
-	public static final Block POTTED_AMARANTH_BUSHEL = new PottedAmaranthBushelBlock(AMARANTH_BUSHEL, pottedPlant());
-	public static final Block POTTED_BLOOD_ORCHID = new PottedBloodOrchidBlock(BLOOD_ORCHID, pottedPlant());
-	public static final Block POTTED_RESONANT_LILY = new PottedResonantLilyBlock(RESONANT_LILY, pottedPlant());
 	
 	private static Settings glowBlock(MapColor color) {
 		return settings(color, BlockSoundGroup.BASALT, 2.5F).requiresTool().luminance(state -> 1).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always);
@@ -1697,6 +1768,11 @@ public class SpectrumBlocks {
 		return block;
 	}
 	
+	public static <T extends Block> T registerCustom(T block, Consumer<T> callback) {
+		callback.accept(block);
+		return block;
+	}
+	
 	public static void register() {
 		registerBlockWithItem("pedestal_basic_topaz", PEDESTAL_BASIC_TOPAZ, new PedestalBlockItem(PEDESTAL_BASIC_TOPAZ, IS.of(1), BuiltinPedestalVariant.BASIC_TOPAZ, "item.spectrum.pedestal.tooltip.basic_topaz"), DyeColor.WHITE);
 		registerBlockWithItem("pedestal_basic_amethyst", PEDESTAL_BASIC_AMETHYST, new PedestalBlockItem(PEDESTAL_BASIC_AMETHYST, IS.of(1), BuiltinPedestalVariant.BASIC_AMETHYST, "item.spectrum.pedestal.tooltip.basic_amethyst"), DyeColor.WHITE);
@@ -1774,22 +1850,15 @@ public class SpectrumBlocks {
 		registerBlockWithItem("black_materia", BLACK_MATERIA, IS.of(), DyeColor.GRAY);
 		registerBlockWithItem("frostbite_crystal", FROSTBITE_CRYSTAL, IS.of(), DyeColor.LIGHT_BLUE);
 		registerBlockWithItem("blazing_crystal", BLAZING_CRYSTAL, IS.of().fireproof(), DyeColor.ORANGE);
-		registerBlockWithItem("resonant_lily", RESONANT_LILY, IS.of(), DyeColor.GREEN);
 		registerBlockWithItem("clover", CLOVER, IS.of(), DyeColor.LIME);
 		registerBlockWithItem("four_leaf_clover", FOUR_LEAF_CLOVER, new FourLeafCloverItem(FOUR_LEAF_CLOVER, IS.of(), SpectrumAdvancements.REVEAL_FOUR_LEAF_CLOVER, CLOVER.asItem()), DyeColor.LIME);
 		registerBlockWithItem("incandescent_amalgam", INCANDESCENT_AMALGAM, new IncandescentAmalgamItem(INCANDESCENT_AMALGAM, IS.of(16).food(SpectrumFoodComponents.INCANDESCENT_AMALGAM)), DyeColor.RED);
-		
-		registerBlockWithItem("blood_orchid", BLOOD_ORCHID, IS.of(), DyeColor.RED);
-		registerBlock("potted_blood_orchid", POTTED_BLOOD_ORCHID);
-		registerBlock("potted_resonant_lily", POTTED_RESONANT_LILY);
 		
 		// Worldgen
 		registerBlockWithItem("quitoxic_reeds", QUITOXIC_REEDS, IS.of(), DyeColor.PURPLE);
 		registerBlockWithItem("radiating_ender", RADIATING_ENDER, IS.of(), DyeColor.PURPLE);
 		
 		registerBlock("amaranth", AMARANTH);
-		registerBlockWithItem("amaranth_bushel", AMARANTH_BUSHEL, IS.of(), DyeColor.RED);
-		registerBlock("potted_amaranth_bushel", POTTED_AMARANTH_BUSHEL);
 		
 		registerBlockWithItem("bedrock_anvil", BEDROCK_ANVIL, IS.of(), DyeColor.BLACK);
 		registerBlockWithItem("cracked_end_portal_frame", CRACKED_END_PORTAL_FRAME, IS.of().fireproof(), DyeColor.PURPLE);
@@ -1812,9 +1881,9 @@ public class SpectrumBlocks {
 		registerBlock("block_flooder", BLOCK_FLOODER);
 		registerBlockWithItem("bottomless_bundle", BOTTOMLESS_BUNDLE, new BottomlessBundleItem(BOTTOMLESS_BUNDLE, IS.of(1)), DyeColor.LIGHT_GRAY);
 		
-		registerMobHeads(IS.of());
-		
 		COMMON_REGISTRAR.flush();
+		
+		registerMobHeads(IS.of());
 	}
 	
 	private static void registerDDFlora(Item.Settings settings) {
@@ -1826,7 +1895,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("ash", ASH, settings, DyeColor.LIGHT_GRAY);
 		registerBlockWithItem("ash_pile", ASH_PILE, settings, DyeColor.LIGHT_GRAY);
 		
-		registerBlockWithItem("slate_noxshroom", SLATE_NOXSHROOM, settings, DyeColor.LIME);
 		registerBlockWithItem("slate_noxcap_block", SLATE_NOXCAP_BLOCK, settings, DyeColor.LIME);
 		registerBlockWithItem("slate_noxcap_stem", SLATE_NOXCAP_STEM, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_slate_noxcap_stem", STRIPPED_SLATE_NOXCAP_STEM, settings, DyeColor.LIME);
@@ -1848,7 +1916,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("slate_noxwood_light", SLATE_NOXWOOD_LIGHT, settings, DyeColor.LIME);
 		registerBlockWithItem("slate_noxwood_lantern", SLATE_NOXWOOD_LANTERN, settings, DyeColor.LIME);
 		
-		registerBlockWithItem("ebony_noxshroom", EBONY_NOXSHROOM, settings, DyeColor.LIME);
 		registerBlockWithItem("ebony_noxcap_block", EBONY_NOXCAP_BLOCK, settings, DyeColor.LIME);
 		registerBlockWithItem("ebony_noxcap_stem", EBONY_NOXCAP_STEM, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_ebony_noxcap_stem", STRIPPED_EBONY_NOXCAP_STEM, settings, DyeColor.LIME);
@@ -1870,7 +1937,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("ebony_noxwood_light", EBONY_NOXWOOD_LIGHT, settings, DyeColor.LIME);
 		registerBlockWithItem("ebony_noxwood_lantern", EBONY_NOXWOOD_LANTERN, settings, DyeColor.LIME);
 		
-		registerBlockWithItem("ivory_noxshroom", IVORY_NOXSHROOM, settings, DyeColor.LIME);
 		registerBlockWithItem("ivory_noxcap_block", IVORY_NOXCAP_BLOCK, settings, DyeColor.LIME);
 		registerBlockWithItem("ivory_noxcap_stem", IVORY_NOXCAP_STEM, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_ivory_noxcap_stem", STRIPPED_IVORY_NOXCAP_STEM, settings, DyeColor.LIME);
@@ -1892,7 +1958,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("ivory_noxwood_light", IVORY_NOXWOOD_LIGHT, settings, DyeColor.LIME);
 		registerBlockWithItem("ivory_noxwood_lantern", IVORY_NOXWOOD_LANTERN, settings, DyeColor.LIME);
 		
-		registerBlockWithItem("chestnut_noxshroom", CHESTNUT_NOXSHROOM, settings, DyeColor.LIME);
 		registerBlockWithItem("chestnut_noxcap_block", CHESTNUT_NOXCAP_BLOCK, settings, DyeColor.LIME);
 		registerBlockWithItem("chestnut_noxcap_stem", CHESTNUT_NOXCAP_STEM, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_chestnut_noxcap_stem", STRIPPED_CHESTNUT_NOXCAP_STEM, settings, DyeColor.LIME);
@@ -1914,12 +1979,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("chestnut_noxwood_light", CHESTNUT_NOXWOOD_LIGHT, settings, DyeColor.LIME);
 		registerBlockWithItem("chestnut_noxwood_lantern", CHESTNUT_NOXWOOD_LANTERN, settings, DyeColor.LIME);
 		
-		registerBlock("potted_slate_noxshroom", POTTED_SLATE_NOXSHROOM);
-		registerBlock("potted_ebony_noxshroom", POTTED_EBONY_NOXSHROOM);
-		registerBlock("potted_ivory_noxshroom", POTTED_IVORY_NOXSHROOM);
-		registerBlock("potted_chestnut_noxshroom", POTTED_CHESTNUT_NOXSHROOM);
-		
-		registerBlockWithItem("weeping_gala_sprig", WEEPING_GALA_SPRIG, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_leaves", WEEPING_GALA_LEAVES, settings, DyeColor.LIME);
 		registerBlock("weeping_gala_fronds", WEEPING_GALA_FRONDS);
 		registerBlock("weeping_gala_fronds_plant", WEEPING_GALA_FRONDS_PLANT);
@@ -1927,7 +1986,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("stripped_weeping_gala_log", STRIPPED_WEEPING_GALA_LOG, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_wood", WEEPING_GALA_WOOD, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_weeping_gala_wood", STRIPPED_WEEPING_GALA_WOOD, settings, DyeColor.LIME);
-		registerBlock("potted_weeping_gala_sprig", POTTED_WEEPING_GALA_SPRIG);
 		registerBlockWithItem("weeping_gala_planks", WEEPING_GALA_PLANKS, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_stairs", WEEPING_GALA_STAIRS, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_door", WEEPING_GALA_DOOR, settings, DyeColor.LIME);
@@ -2853,15 +2911,8 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.IVORY_NOXWOOD_LIGHT, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CHESTNUT_NOXWOOD_LIGHT, RenderLayer.getTranslucent());
 		
-		// POTTED NOXSHROOMS
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.POTTED_EBONY_NOXSHROOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.POTTED_SLATE_NOXSHROOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.POTTED_IVORY_NOXSHROOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.POTTED_CHESTNUT_NOXSHROOM, RenderLayer.getCutout());
-		
 		// Weeping Gala
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), SpectrumBlocks.WEEPING_GALA_LANTERN, SpectrumBlocks.WEEPING_GALA_LIGHT);
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SpectrumBlocks.WEEPING_GALA_SPRIG, SpectrumBlocks.POTTED_WEEPING_GALA_SPRIG);
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SpectrumBlocks.WEEPING_GALA_FRONDS, SpectrumBlocks.WEEPING_GALA_FRONDS_PLANT);
 		
 		// Spore Blossoms
@@ -2933,15 +2984,9 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), JADEITE_LOTUS_FLOWER, JADEITE_LOTUS_BULB, JADEITE_LOTUS_STEM, JADEITE_PETAL_BLOCK, JADEITE_PETAL_CARPET);
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.AMARANTH, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.AMARANTH_BUSHEL, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.POTTED_AMARANTH_BUSHEL, RenderLayer.getCutout());
 		
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SpectrumBlocks.ABYSSAL_VINES, SpectrumBlocks.NIGHTDEW);
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SpectrumBlocks.SWEET_PEA, SpectrumBlocks.APRICOTTI, HUMMING_BELL, MOSS_BALL);
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BLOOD_ORCHID, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.POTTED_BLOOD_ORCHID, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.POTTED_RESONANT_LILY, RenderLayer.getCutout());
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(VARIA_SPROUT, RenderLayer.getCutout());
 		
@@ -2964,7 +3009,6 @@ public class SpectrumBlocks {
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.QUITOXIC_REEDS, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MERMAIDS_BRUSH, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.RESONANT_LILY, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.STUCK_STORM_STONE, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CLOVER, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.FOUR_LEAF_CLOVER, RenderLayer.getCutout());
@@ -3099,11 +3143,6 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.DOOMBLOOM, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SNAPPING_IVY, RenderLayer.getCutout());
 		
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SLATE_NOXSHROOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.IVORY_NOXSHROOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.EBONY_NOXSHROOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CHESTNUT_NOXSHROOM, RenderLayer.getCutout());
-		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES_PLANT, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MAGENTA_SPIRIT_SALLOW_VINES, RenderLayer.getCutout());
@@ -3124,6 +3163,10 @@ public class SpectrumBlocks {
 				SpectrumBlocks.HUMMINGSTONE_GLASS_PANE);
 		
 		CLIENT_REGISTRAR.flush();
+	}
+	
+	public static void provideItemModels(ItemModelGenerator generator) {
+		ITEM_MODEL_REGISTRAR.flush(generator);
 	}
 	
 	public static void provideBlockStateModels(BlockStateModelGenerator generator) {

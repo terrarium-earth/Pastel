@@ -106,6 +106,7 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 		
 		@Override
 		public void generateItemModels(ItemModelGenerator itemModelGenerator) {
+			SpectrumBlocks.provideItemModels(itemModelGenerator);
 			SpectrumItems.provideItemModels(itemModelGenerator);
 		}
 	}
