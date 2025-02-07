@@ -706,6 +706,30 @@ public class SpectrumBlocks {
 	
 	public static final ToIntFunction<BlockState> LANTERN_LIGHT_PROVIDER = (state -> state.get(RedstoneLampBlock.LIT) ? 15 : 0);
 	
+	public static FungusBlock registerNoxshroom(String name, RegistryKey<ConfiguredFeature<?, ?>> feature, MapColor mapColor) {
+		FungusBlock block = registerBlockWithItem(name, new FungusBlock(feature, SHIMMEL, settings(mapColor, BlockSoundGroup.FUNGUS, 0.0F).noCollision()), DyeColor.LIME);
+		registerRenderLayerCutoutEntry(block);
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			ctx.registerItemModel(block);
+			ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block,
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_1", TextureMap.cross(TextureMap.getSubId(block, "_type_1")), ctx.modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_2", TextureMap.cross(TextureMap.getSubId(block, "_type_2")), ctx.modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_3", TextureMap.cross(TextureMap.getSubId(block, "_type_3")), ctx.modelCollector))
+			));
+		});
+		return block;
+	}
+	
+	public static final FungusBlock SLATE_NOXSHROOM = registerNoxshroom("slate_noxshroom", SpectrumConfiguredFeatures.SLATE_NOXFUNGUS, MapColor.GRAY);
+	public static final FungusBlock EBONY_NOXSHROOM = registerNoxshroom("ebony_noxshroom", SpectrumConfiguredFeatures.EBONY_NOXFUNGUS, MapColor.TERRACOTTA_BLACK);
+	public static final FungusBlock IVORY_NOXSHROOM = registerNoxshroom("ivory_noxshroom", SpectrumConfiguredFeatures.IVORY_NOXFUNGUS, MapColor.OFF_WHITE);
+	public static final FungusBlock CHESTNUT_NOXSHROOM = registerNoxshroom("chestnut_noxshroom", SpectrumConfiguredFeatures.CHESTNUT_NOXFUNGUS, MapColor.DULL_RED);
+	
+	public static final FlowerPotBlock POTTED_SLATE_NOXSHROOM = registerPottedPlantBlock("potted_slate_noxshroom", new FlowerPotBlock(SLATE_NOXSHROOM, pottedPlant()), false);
+	public static final FlowerPotBlock POTTED_EBONY_NOXSHROOM = registerPottedPlantBlock("potted_ebony_noxshroom", new FlowerPotBlock(EBONY_NOXSHROOM, pottedPlant()), false);
+	public static final FlowerPotBlock POTTED_IVORY_NOXSHROOM = registerPottedPlantBlock("potted_ivory_noxshroom", new FlowerPotBlock(IVORY_NOXSHROOM, pottedPlant()), false);
+	public static final FlowerPotBlock POTTED_CHESTNUT_NOXSHROOM = registerPottedPlantBlock("potted_chestnut_noxshroom", new FlowerPotBlock(CHESTNUT_NOXSHROOM, pottedPlant()), false);
+	
 	public static Settings noxcap(MapColor color) {
 		return settings(color, BlockSoundGroup.NETHER_STEM, 4.0F).instrument(NoteBlockInstrument.BASS);
 	}
@@ -800,11 +824,19 @@ public class SpectrumBlocks {
 		return settings(color, BlockSoundGroup.CHERRY_WOOD, 30.0F).instrument(NoteBlockInstrument.BASS).burnable();
 	}
 	
-	public static final Block WEEPING_GALA_LEAVES = new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.BRIGHT_TEAL));
-	public static final Block WEEPING_GALA_LOG = new PillarBlock(galaWood(MapColor.BROWN));
-	public static final Block STRIPPED_WEEPING_GALA_LOG = new PillarBlock(galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_WOOD = new PillarBlock(galaWood(MapColor.BROWN));
-	public static final Block STRIPPED_WEEPING_GALA_WOOD = new PillarBlock(galaWood(MapColor.BROWN));
+	public static final WeepingGalaSprigBlock WEEPING_GALA_SPRIG = registerCustom(new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.BRIGHT_TEAL)), block -> {
+		registerBlockWithItem("weeping_gala_sprig", block, DyeColor.LIME);
+		registerRenderLayerCutoutEntry(block);
+		registerCustomItemModel(block, Models.GENERATED);
+		registerCrossBlockStateModel(block, false);
+	});
+	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = registerPottedPlantBlock("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant()), false);
+	
+	public static final Block WEEPING_GALA_LEAVES = registerLeaves("weeping_gala_leaves", new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.BRIGHT_TEAL)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_LOG = registerLog("weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block STRIPPED_WEEPING_GALA_LOG = registerLog("stripped_weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_WOOD = registerWood("weeping_gala_wood", WEEPING_GALA_LOG, new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block STRIPPED_WEEPING_GALA_WOOD = registerWood("stripped_weeping_gala_wood", STRIPPED_WEEPING_GALA_LOG, new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
 	
 	public static final Block WEEPING_GALA_FRONDS = new WeepingGalaFrondsBlock(AbstractBlock.Settings.copy(WEEPING_GALA_LEAVES).noCollision());
 	public static final Block WEEPING_GALA_FRONDS_PLANT = new WeepingGalaFrondsTipBlock(AbstractBlock.Settings.copy(WEEPING_GALA_LEAVES).noCollision().luminance(s -> s.get(WeepingGalaFrondsTipBlock.FORM) == WeepingGalaFrondsTipBlock.Form.RESIN ? 12 : s.get(WeepingGalaFrondsTipBlock.FORM) == WeepingGalaFrondsTipBlock.Form.SPRIG ? 11 : 0));
@@ -1022,10 +1054,27 @@ public class SpectrumBlocks {
 	public static final EnderDropperBlock ENDER_DROPPER = new EnderDropperBlock(AbstractBlock.Settings.copy(Blocks.DROPPER).mapColor(MapColor.GRAY).requiresTool().strength(15F, 60.0F));
 	public static final Block ENDER_HOPPER = new EnderHopperBlock(AbstractBlock.Settings.copy(Blocks.HOPPER).mapColor(MapColor.GRAY).requiresTool().strength(15F, 60.0F));
 	
-	public static final Block SPIRIT_SALLOW_LEAVES = new SpiritSallowLeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.OFF_WHITE).luminance((state) -> 8));
-	public static final Block SPIRIT_SALLOW_LOG = new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY));
-	public static final Block SPIRIT_SALLOW_ROOTS = new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY));
-	public static final Block SPIRIT_SALLOW_HEART = new Block(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY).luminance(s -> 11));
+	public static final Block OMINOUS_SAPLING = new OminousSaplingBlock(AbstractBlock.Settings.copy(Blocks.OAK_SAPLING));
+	
+	public static final Block SPIRIT_SALLOW_LEAVES = registerLeaves("spirit_sallow_leaves", new SpiritSallowLeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.OFF_WHITE).luminance((state) -> 8)), DyeColor.GREEN);
+	public static final Block SPIRIT_SALLOW_LOG = registerLog("spirit_sallow_log", new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY)), DyeColor.GREEN);
+	public static final Block SPIRIT_SALLOW_ROOTS = registerCustom(new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY)), block -> {
+		registerBlockWithItem("spirit_sallow_roots", block, DyeColor.GREEN);
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, TextureMap.getId(block)).put(TextureKey.END, TextureMap.getId(block));
+			Identifier vertical = Models.CUBE_COLUMN.upload(block, textureMap, ctx.modelCollector);
+			Identifier horizontal = Models.CUBE_COLUMN_HORIZONTAL.upload(block, textureMap, ctx.modelCollector);
+			ctx.blockStateCollector.accept(BlockStateModelGenerator.createAxisRotatedBlockState(block, vertical, horizontal));
+		});
+	});
+	public static final Block SPIRIT_SALLOW_HEART = registerCustom(new Block(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY).luminance(s -> 11)), block -> {
+		registerBlockWithItem("spirit_sallow_heart", block, DyeColor.GREEN);
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, TextureMap.getId(block)).put(TextureKey.END, TextureMap.getSubId(SPIRIT_SALLOW_LOG, "_top"));
+			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, Models.CUBE_COLUMN.upload(block, textureMap, ctx.modelCollector)));
+		});
+	});
+	
 	public static final Block SACRED_SOIL = new ExtraTickFarmlandBlock(AbstractBlock.Settings.copy(Blocks.FARMLAND).mapColor(MapColor.LIGHT_BLUE_GRAY), Blocks.DIRT.getDefaultState());
 	
 	private static Settings spiritVines(MapColor mapColor) {
@@ -1103,57 +1152,21 @@ public class SpectrumBlocks {
 		return AbstractBlock.Settings.copy(baseBlock).mapColor(color);
 	}
 	
-	// SAPLINGS & POTTED PLANTS
-	
 	public static Settings pottedPlant() {
 		return Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY);
-	}
-	
-	public static <T extends Block> T registerPottablePlantBlock(String name, T plantBlock, DyeColor color, boolean tinted) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
-			ctx.registerTintableCross(plantBlock, tintType);
-		});
-		registerRenderLayerCutoutEntry(plantBlock);
-		return registerBlockWithItem(name, plantBlock, color);
-	}
-	
-	public static <T extends FlowerPotBlock> T registerPottedPlantBlock(String name, T pottedBlock, boolean tinted) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
-			TextureMap textureMap = TextureMap.plant(pottedBlock.getContent());
-			Identifier identifier = tintType.getFlowerPotCrossModel().upload(pottedBlock, textureMap, ctx.modelCollector);
-			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(pottedBlock, identifier));
-		});
-		registerRenderLayerCutoutEntry(pottedBlock);
-		return registerBlockDeferred(name, pottedBlock);
 	}
 	
 	//TODO does it end up the same if we don't do the custom item model
 	public static final AmaranthBushelBlock AMARANTH_BUSHEL = registerCustom(new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision()), block -> {
 		registerBlockWithItem("amaranth_bushel", block, DyeColor.RED);
 		registerRenderLayerCutoutEntry(block);
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			ctx.excludeFromSimpleItemModelGeneration(block);
-			ctx.registerTintableCrossBlockState(block, BlockStateModelGenerator.TintType.NOT_TINTED, TextureMap.cross(block));
-		});
-		ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(block.asItem(), Models.GENERATED));
+		registerCustomItemModel(block, Models.GENERATED);
+		registerCrossBlockStateModel(block, false);
 	});
 	public static final PottedAmaranthBushelBlock POTTED_AMARANTH_BUSHEL = registerPottedPlantBlock("potted_amaranth_bushel", new PottedAmaranthBushelBlock(AMARANTH_BUSHEL, pottedPlant()), false);
 	
 	public static final ResonantLilyBlock RESONANT_LILY = registerPottablePlantBlock("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN, false);
 	public static final PottedResonantLilyBlock POTTED_RESONANT_LILY = registerPottedPlantBlock("potted_resonant_lily", new PottedResonantLilyBlock(RESONANT_LILY, pottedPlant()), false);
-	
-	public static final WeepingGalaSprigBlock WEEPING_GALA_SPRIG = registerCustom(new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.BRIGHT_TEAL)), block -> {
-		registerBlockWithItem("weeping_gala_sprig", block, DyeColor.LIME);
-		registerRenderLayerCutoutEntry(block);
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			ctx.excludeFromSimpleItemModelGeneration(block);
-			ctx.registerTintableCrossBlockState(block, BlockStateModelGenerator.TintType.NOT_TINTED, TextureMap.cross(block));
-		});
-		ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(block.asItem(), Models.GENERATED));
-	});
-	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = registerPottedPlantBlock("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant()), false);
 	
 	public static final BloodOrchidBlock BLOOD_ORCHID = registerCustom(new BloodOrchidBlock(SpectrumStatusEffects.FRENZY, 10, AbstractBlock.Settings.copy(Blocks.POPPY).offset(AbstractBlock.OffsetType.NONE).ticksRandomly()), block -> {
 		registerBlockWithItem("blood_orchid", block, DyeColor.RED);
@@ -1178,36 +1191,8 @@ public class SpectrumBlocks {
 		});
 	});
 	
-	public static FungusBlock registerNoxshroom(String name, RegistryKey<ConfiguredFeature<?, ?>> feature, MapColor mapColor) {
-		FungusBlock block = registerBlockWithItem(name, new FungusBlock(feature, SHIMMEL, settings(mapColor, BlockSoundGroup.FUNGUS, 0.0F).noCollision()), DyeColor.LIME);
-		registerRenderLayerCutoutEntry(block);
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			ctx.registerItemModel(block);
-			ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block,
-					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_1", TextureMap.cross(TextureMap.getSubId(block, "_type_1")), ctx.modelCollector)),
-					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_2", TextureMap.cross(TextureMap.getSubId(block, "_type_2")), ctx.modelCollector)),
-					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CROSS.upload(block, "_type_3", TextureMap.cross(TextureMap.getSubId(block, "_type_3")), ctx.modelCollector))
-			));
-		});
-		return block;
-	}
-	
-	public static final FungusBlock SLATE_NOXSHROOM = registerNoxshroom("slate_noxshroom", SpectrumConfiguredFeatures.SLATE_NOXFUNGUS, MapColor.GRAY);
-	public static final FungusBlock EBONY_NOXSHROOM = registerNoxshroom("ebony_noxshroom", SpectrumConfiguredFeatures.EBONY_NOXFUNGUS, MapColor.TERRACOTTA_BLACK);
-	public static final FungusBlock IVORY_NOXSHROOM = registerNoxshroom("ivory_noxshroom", SpectrumConfiguredFeatures.IVORY_NOXFUNGUS, MapColor.OFF_WHITE);
-	public static final FungusBlock CHESTNUT_NOXSHROOM = registerNoxshroom("chestnut_noxshroom", SpectrumConfiguredFeatures.CHESTNUT_NOXFUNGUS, MapColor.DULL_RED);
-	
-	public static final FlowerPotBlock POTTED_SLATE_NOXSHROOM = registerPottedPlantBlock("potted_slate_noxshroom", new FlowerPotBlock(SLATE_NOXSHROOM, pottedPlant()), false);
-	public static final FlowerPotBlock POTTED_EBONY_NOXSHROOM = registerPottedPlantBlock("potted_ebony_noxshroom", new FlowerPotBlock(EBONY_NOXSHROOM, pottedPlant()), false);
-	public static final FlowerPotBlock POTTED_IVORY_NOXSHROOM = registerPottedPlantBlock("potted_ivory_noxshroom", new FlowerPotBlock(IVORY_NOXSHROOM, pottedPlant()), false);
-	public static final FlowerPotBlock POTTED_CHESTNUT_NOXSHROOM = registerPottedPlantBlock("potted_chestnut_noxshroom", new FlowerPotBlock(CHESTNUT_NOXSHROOM, pottedPlant()), false);
-	
 	public static ColoredSaplingBlock registerColoredSapling(String name, DyeColor dyeColor) {
 		return registerPottablePlantBlock(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor, false);
-	}
-	
-	public static PottedColoredSaplingBlock registerPottedColoredSapling(String name, ColoredSaplingBlock saplingBlock) {
-		return registerPottedPlantBlock(name, new PottedColoredSaplingBlock(saplingBlock, pottedPlant(), saplingBlock.getColor()), false);
 	}
 	
 	public static final ColoredSaplingBlock BLACK_SAPLING = registerColoredSapling("black_sapling", DyeColor.BLACK);
@@ -1227,6 +1212,10 @@ public class SpectrumBlocks {
 	public static final ColoredSaplingBlock WHITE_SAPLING = registerColoredSapling("white_sapling", DyeColor.WHITE);
 	public static final ColoredSaplingBlock YELLOW_SAPLING = registerColoredSapling("yellow_sapling", DyeColor.YELLOW);
 	
+	public static PottedColoredSaplingBlock registerPottedColoredSapling(String name, ColoredSaplingBlock saplingBlock) {
+		return registerPottedPlantBlock(name, new PottedColoredSaplingBlock(saplingBlock, pottedPlant(), saplingBlock.getColor()), false);
+	}
+	
 	public static final PottedColoredSaplingBlock POTTED_BLACK_SAPLING = registerPottedColoredSapling("potted_black_sapling", BLACK_SAPLING);
 	public static final PottedColoredSaplingBlock POTTED_BLUE_SAPLING = registerPottedColoredSapling("potted_blue_sapling", BLUE_SAPLING);
 	public static final PottedColoredSaplingBlock POTTED_BROWN_SAPLING = registerPottedColoredSapling("potted_brown_sapling", BROWN_SAPLING);
@@ -1244,32 +1233,8 @@ public class SpectrumBlocks {
 	public static final PottedColoredSaplingBlock POTTED_WHITE_SAPLING = registerPottedColoredSapling("potted_white_sapling", WHITE_SAPLING);
 	public static final PottedColoredSaplingBlock POTTED_YELLOW_SAPLING = registerPottedColoredSapling("potted_yellow_sapling", YELLOW_SAPLING);
 	
-	// LOGS
-	
-	public static <T extends Block> T registerLog(String name, T logBlock, DyeColor color) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).log(logBlock));
-		return registerBlockWithItem(name, logBlock, color);
-	}
-	
-	public static <T extends Block> T registerWood(String name, Block logBlock, T woodBlock, DyeColor color) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).wood(woodBlock));
-		return registerBlockWithItem(name, woodBlock, color);
-	}
-	
 	public static ColoredLogBlock registerColoredLog(String name, DyeColor color) {
 		return registerLog(name, new ColoredLogBlock(copyWithMapColor(OAK_LOG, color.getMapColor()), color), color);
-	}
-	
-	public static ColoredWoodBlock registerColoredWood(String name, ColoredLogBlock logBlock) {
-		return registerWood(name, logBlock, new ColoredWoodBlock(copyWithMapColor(OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor());
-	}
-	
-	public static ColoredStrippedLogBlock registerColoredStrippedLog(String name, DyeColor color) {
-		return registerLog(name, new ColoredStrippedLogBlock(copyWithMapColor(STRIPPED_OAK_LOG, color.getMapColor()), color), color);
-	}
-	
-	public static ColoredStrippedWoodBlock registerColoredStrippedWood(String name, ColoredStrippedLogBlock logBlock) {
-		return registerWood(name, logBlock, new ColoredStrippedWoodBlock(copyWithMapColor(STRIPPED_OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor());
 	}
 	
 	public static final ColoredLogBlock BLACK_LOG = registerColoredLog("black_log", DyeColor.BLACK);
@@ -1289,6 +1254,10 @@ public class SpectrumBlocks {
 	public static final ColoredLogBlock WHITE_LOG = registerColoredLog("white_log", DyeColor.WHITE);
 	public static final ColoredLogBlock YELLOW_LOG = registerColoredLog("yellow_log", DyeColor.YELLOW);
 	
+	public static ColoredWoodBlock registerColoredWood(String name, ColoredLogBlock logBlock) {
+		return registerWood(name, logBlock, new ColoredWoodBlock(copyWithMapColor(OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor());
+	}
+	
 	public static final ColoredWoodBlock BLACK_WOOD = registerColoredWood("black_wood", BLACK_LOG);
 	public static final ColoredWoodBlock BLUE_WOOD = registerColoredWood("blue_wood", BLUE_LOG);
 	public static final ColoredWoodBlock BROWN_WOOD = registerColoredWood("brown_wood", BROWN_LOG);
@@ -1305,6 +1274,10 @@ public class SpectrumBlocks {
 	public static final ColoredWoodBlock RED_WOOD = registerColoredWood("red_wood", RED_LOG);
 	public static final ColoredWoodBlock WHITE_WOOD = registerColoredWood("white_wood", WHITE_LOG);
 	public static final ColoredWoodBlock YELLOW_WOOD = registerColoredWood("yellow_wood", YELLOW_LOG);
+	
+	public static ColoredStrippedLogBlock registerColoredStrippedLog(String name, DyeColor color) {
+		return registerLog(name, new ColoredStrippedLogBlock(copyWithMapColor(STRIPPED_OAK_LOG, color.getMapColor()), color), color);
+	}
 	
 	public static final ColoredStrippedLogBlock STRIPPED_BLACK_LOG = registerColoredStrippedLog("stripped_black_log", DyeColor.BLACK);
 	public static final ColoredStrippedLogBlock STRIPPED_BLUE_LOG = registerColoredStrippedLog("stripped_blue_log", DyeColor.BLUE);
@@ -1323,6 +1296,10 @@ public class SpectrumBlocks {
 	public static final ColoredStrippedLogBlock STRIPPED_WHITE_LOG = registerColoredStrippedLog("stripped_white_log", DyeColor.WHITE);
 	public static final ColoredStrippedLogBlock STRIPPED_YELLOW_LOG = registerColoredStrippedLog("stripped_yellow_log", DyeColor.YELLOW);
 	
+	public static ColoredStrippedWoodBlock registerColoredStrippedWood(String name, ColoredStrippedLogBlock logBlock) {
+		return registerWood(name, logBlock, new ColoredStrippedWoodBlock(copyWithMapColor(STRIPPED_OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor());
+	}
+	
 	public static final ColoredStrippedWoodBlock STRIPPED_BLACK_WOOD = registerColoredStrippedWood("stripped_black_wood", STRIPPED_BLACK_LOG);
 	public static final ColoredStrippedWoodBlock STRIPPED_BLUE_WOOD = registerColoredStrippedWood("stripped_blue_wood", STRIPPED_BLUE_LOG);
 	public static final ColoredStrippedWoodBlock STRIPPED_BROWN_WOOD = registerColoredStrippedWood("stripped_brown_wood", STRIPPED_BROWN_LOG);
@@ -1340,14 +1317,8 @@ public class SpectrumBlocks {
 	public static final ColoredStrippedWoodBlock STRIPPED_WHITE_WOOD = registerColoredStrippedWood("stripped_white_wood", STRIPPED_WHITE_LOG);
 	public static final ColoredStrippedWoodBlock STRIPPED_YELLOW_WOOD = registerColoredStrippedWood("stripped_yellow_wood", STRIPPED_YELLOW_LOG);
 	
-	// OTHER TREE AND PLANT BITS
-	
-	public static final Block OMINOUS_SAPLING = new OminousSaplingBlock(AbstractBlock.Settings.copy(Blocks.OAK_SAPLING));
-	
 	public static ColoredLeavesBlock registerColoredLeaves(String name, DyeColor color) {
-		ColoredLeavesBlock block = registerBlockWithItem(name, new ColoredLeavesBlock(copyWithMapColor(OAK_LEAVES, color.getMapColor()), color), color);
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(block, TexturedModel.LEAVES));
-		return block;
+		return registerLeaves(name, new ColoredLeavesBlock(copyWithMapColor(OAK_LEAVES, color.getMapColor()), color), color);
 	}
 	
 	public static final ColoredLeavesBlock BLACK_LEAVES = registerColoredLeaves("black_leaves", DyeColor.BLACK);
@@ -1743,6 +1714,18 @@ public class SpectrumBlocks {
 		return RegistryKey.of(RegistryKeys.BLOCK, locate(name));
 	}
 	
+	public static void registerCustomItemModel(Block block, Model model) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.excludeFromSimpleItemModelGeneration(block));
+		ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(block.asItem(), model));
+	}
+	
+	public static void registerCrossBlockStateModel(Block block, boolean tinted) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerTintableCrossBlockState(block, tinted
+						? BlockStateModelGenerator.TintType.TINTED
+						: BlockStateModelGenerator.TintType.NOT_TINTED,
+				TextureMap.cross(block)));
+	}
+	
 	public static void registerRenderLayerEntry(RegistryKey<Block> key) {
 		BlockRenderLayerMap.INSTANCE.putBlock(Registries.BLOCK.get(key), RenderLayer.getCutout());
 	}
@@ -1755,6 +1738,41 @@ public class SpectrumBlocks {
 		Identifier id = SpectrumCommon.locate(name);
 		COMMON_REGISTRAR.defer(() -> Registry.register(Registries.BLOCK, id, block));
 		return block;
+	}
+	
+	public static <T extends Block> T registerPottablePlantBlock(String name, T plantBlock, DyeColor color, boolean tinted) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
+			ctx.registerTintableCross(plantBlock, tintType);
+		});
+		registerRenderLayerCutoutEntry(plantBlock);
+		return registerBlockWithItem(name, plantBlock, color);
+	}
+	
+	public static <T extends FlowerPotBlock> T registerPottedPlantBlock(String name, T pottedBlock, boolean tinted) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
+			TextureMap textureMap = TextureMap.plant(pottedBlock.getContent());
+			Identifier identifier = tintType.getFlowerPotCrossModel().upload(pottedBlock, textureMap, ctx.modelCollector);
+			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(pottedBlock, identifier));
+		});
+		registerRenderLayerCutoutEntry(pottedBlock);
+		return registerBlockDeferred(name, pottedBlock);
+	}
+	
+	public static <T extends Block> T registerLeaves(String name, T leavesBlock, DyeColor color) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(leavesBlock, TexturedModel.LEAVES));
+		return registerBlockWithItem(name, leavesBlock, color);
+	}
+	
+	public static <T extends Block> T registerLog(String name, T logBlock, DyeColor color) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).log(logBlock));
+		return registerBlockWithItem(name, logBlock, color);
+	}
+	
+	public static <T extends Block> T registerWood(String name, Block logBlock, T woodBlock, DyeColor color) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).wood(woodBlock));
+		return registerBlockWithItem(name, woodBlock, color);
 	}
 	
 	public static <T extends Block> T registerBlockWithItem(String name, T block, DyeColor dyeColor) {
@@ -1979,13 +1997,8 @@ public class SpectrumBlocks {
 		registerBlockWithItem("chestnut_noxwood_light", CHESTNUT_NOXWOOD_LIGHT, settings, DyeColor.LIME);
 		registerBlockWithItem("chestnut_noxwood_lantern", CHESTNUT_NOXWOOD_LANTERN, settings, DyeColor.LIME);
 		
-		registerBlockWithItem("weeping_gala_leaves", WEEPING_GALA_LEAVES, settings, DyeColor.LIME);
 		registerBlock("weeping_gala_fronds", WEEPING_GALA_FRONDS);
 		registerBlock("weeping_gala_fronds_plant", WEEPING_GALA_FRONDS_PLANT);
-		registerBlockWithItem("weeping_gala_log", WEEPING_GALA_LOG, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_weeping_gala_log", STRIPPED_WEEPING_GALA_LOG, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_wood", WEEPING_GALA_WOOD, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_weeping_gala_wood", STRIPPED_WEEPING_GALA_WOOD, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_planks", WEEPING_GALA_PLANKS, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_stairs", WEEPING_GALA_STAIRS, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_door", WEEPING_GALA_DOOR, settings, DyeColor.LIME);
@@ -2154,11 +2167,6 @@ public class SpectrumBlocks {
 	
 	private static void registerSpiritTree(Item.Settings settings) {
 		registerBlockWithItem("ominous_sapling", OMINOUS_SAPLING, new OminousSaplingBlockItem(OMINOUS_SAPLING, settings), DyeColor.GREEN);
-		
-		registerBlockWithItem("spirit_sallow_roots", SPIRIT_SALLOW_ROOTS, settings, DyeColor.GREEN);
-		registerBlockWithItem("spirit_sallow_log", SPIRIT_SALLOW_LOG, settings, DyeColor.GREEN);
-		registerBlockWithItem("spirit_sallow_leaves", SPIRIT_SALLOW_LEAVES, settings, DyeColor.GREEN);
-		registerBlockWithItem("spirit_sallow_heart", SPIRIT_SALLOW_HEART, settings, DyeColor.GREEN);
 		
 		registerBlock("cyan_spirit_sallow_vines_head", CYAN_SPIRIT_SALLOW_VINES);
 		registerBlock("magenta_spirit_sallow_vines_head", MAGENTA_SPIRIT_SALLOW_VINES);
