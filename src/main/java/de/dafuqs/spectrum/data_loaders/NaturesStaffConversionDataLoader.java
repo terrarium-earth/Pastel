@@ -16,7 +16,7 @@ import java.util.*;
 
 public class NaturesStaffConversionDataLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
 	
-	public static final String ID = "natures_staff_conversions";
+	public static final String ID = "natures_staff_conversion";
 	public static final NaturesStaffConversionDataLoader INSTANCE = new NaturesStaffConversionDataLoader();
 	
 	public static final HashMap<Block, BlockState> CONVERSIONS = new HashMap<>();
