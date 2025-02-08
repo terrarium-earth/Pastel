@@ -54,11 +54,11 @@ public class InkColor {
 	}
 	
 	public static Optional<InkColor> ofId(Identifier id) {
-		return SpectrumRegistries.INK_COLORS.getOrEmpty(id);
+		return SpectrumRegistries.INK_COLOR.getOrEmpty(id);
 	}
 	
 	public static Optional<InkColor> ofIdString(String idString) {
-		return SpectrumRegistries.INK_COLORS.getOrEmpty(Identifier.of(idString));
+		return SpectrumRegistries.INK_COLOR.getOrEmpty(Identifier.of(idString));
 	}
 	
 	public DyeColor getDyeColor() {
@@ -117,11 +117,11 @@ public class InkColor {
 	}
 	
 	public Identifier getID() {
-		return SpectrumRegistries.INK_COLORS.getId(this);
+		return SpectrumRegistries.INK_COLOR.getId(this);
 	}
 	
 	public boolean isIn(TagKey<InkColor> tag) {
-		return SpectrumRegistries.INK_COLORS.getEntry(this).isIn(tag);
+		return SpectrumRegistries.INK_COLOR.getEntry(this).isIn(tag);
 	}
 	
 }

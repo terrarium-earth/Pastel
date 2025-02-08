@@ -26,7 +26,7 @@ public class ExplosionModifierType {
 	}
 	
 	public Identifier getId() {
-		return SpectrumRegistries.EXPLOSION_MODIFIER_TYPES.getId(this);
+		return SpectrumRegistries.EXPLOSION_MODIFIER_TYPE.getId(this);
 	}
 	
 }

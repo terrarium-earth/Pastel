@@ -17,7 +17,7 @@ public enum BuiltinGemstoneColor implements GemstoneColor, StringIdentifiable {
 	private final DyeColor dyeColor;
 	
 	BuiltinGemstoneColor(String name, DyeColor dyeColor) {
-		Registry.register(SpectrumRegistries.GEMSTONE_COLORS, SpectrumCommon.locate(name), this);
+		Registry.register(SpectrumRegistries.GEMSTONE_COLOR, SpectrumCommon.locate(name), this);
 		this.dyeColor = dyeColor;
 	}
 

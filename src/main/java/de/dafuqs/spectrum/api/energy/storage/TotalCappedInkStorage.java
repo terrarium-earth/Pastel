@@ -114,7 +114,7 @@ public class TotalCappedInkStorage implements InkStorage {
 	public void fillCompletely() {
 		this.storedEnergy.clear();
 		
-		int inkColorCount = SpectrumRegistries.INK_COLORS.size();
+		int inkColorCount = SpectrumRegistries.INK_COLOR.size();
 		long energyPerColor = this.maxEnergyTotal / inkColorCount;
 		for (InkColor color : InkColors.all()) {
 			this.storedEnergy.put(color, energyPerColor);
@@ -137,7 +137,7 @@ public class TotalCappedInkStorage implements InkStorage {
 	
 	protected void addInkContentTooltip(List<Text> tooltip) {
 		// we are iterating them this way to preserve the ordering in which they were registered
-		for (InkColor color : SpectrumRegistries.INK_COLORS) {
+		for (InkColor color : SpectrumRegistries.INK_COLOR) {
 			long amount = this.storedEnergy.getOrDefault(color, 0L);
 			if (amount > 0) {
 				InkStorage.addInkStoreBulletTooltip(tooltip, color, amount);

@@ -14,7 +14,7 @@ public abstract class ResonanceDropProcessor {
 	
 	public static boolean preventNextXPDrop;
 	
-	public static final Codec<ResonanceDropProcessor> CODEC = SpectrumRegistries.RESONANCE_DROP_PROCESSOR_TYPES.getCodec()
+	public static final Codec<ResonanceDropProcessor> CODEC = SpectrumRegistries.RESONANCE_DROP_PROCESSOR_TYPE.getCodec()
 			.dispatch(ResonanceDropProcessor::getCodec, codec -> codec);
 	
 	public BrokenBlockPredicate blockPredicate;

@@ -81,12 +81,12 @@ public abstract class ExplosionModifier {
 	}
 	
 	public Identifier getId() {
-		return SpectrumRegistries.EXPLOSION_MODIFIERS.getId(this);
+		return SpectrumRegistries.EXPLOSION_MODIFIER.getId(this);
 	}
 	
 	protected String loadTranslationKey() {
 		if (this.translationKey == null) {
-			this.translationKey = Util.createTranslationKey("explosion_modifier", SpectrumRegistries.EXPLOSION_MODIFIERS.getId(this));
+			this.translationKey = Util.createTranslationKey("explosion_modifier", SpectrumRegistries.EXPLOSION_MODIFIER.getId(this));
 		}
 		return this.translationKey;
 	}

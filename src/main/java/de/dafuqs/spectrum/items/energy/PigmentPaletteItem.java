@@ -79,7 +79,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 		
 		var time = player.getWorld().getTime() % 864000;
 		
-		for (InkColor inkColor : SpectrumRegistries.INK_COLORS) {
+		for (InkColor inkColor : SpectrumRegistries.INK_COLOR) {
 			if (storage.getEnergy(inkColor) > 0)
 				colors.add(inkColor);
 		}

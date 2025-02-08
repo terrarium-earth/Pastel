@@ -40,7 +40,7 @@ public class InkContainerInteractionCriterion extends AbstractCriterion<InkConta
 		public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 				LootContextPredicate.CODEC.optionalFieldOf("player").forGetter(Conditions::player),
 				ItemPredicate.CODEC.optionalFieldOf("item", ItemPredicate.Builder.create().build()).forGetter(Conditions::itemPredicate),
-				CodecHelper.registryMap(SpectrumRegistries.INK_COLORS, LongRange.CODEC).forGetter(Conditions::colorRanges),
+				CodecHelper.registryMap(SpectrumRegistries.INK_COLOR, LongRange.CODEC).forGetter(Conditions::colorRanges),
 				ColorPredicate.CODEC.optionalFieldOf("change_color", ColorPredicate.ANY).forGetter(Conditions::changeColorPredicate),
 				LongRange.CODEC.optionalFieldOf("change_amount", LongRange.ANY).forGetter(Conditions::changeRange)
 		).apply(instance, Conditions::new));

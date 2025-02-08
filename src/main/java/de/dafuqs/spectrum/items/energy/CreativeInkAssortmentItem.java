@@ -81,7 +81,7 @@ public class CreativeInkAssortmentItem extends Item implements InkStorageItem<Cr
 		
 		var time = player.getWorld().getTime() % 864000;
 		
-		for (InkColor inkColor : SpectrumRegistries.INK_COLORS) {
+		for (InkColor inkColor : SpectrumRegistries.INK_COLOR) {
 			colors.add(inkColor);
 		}
 		

@@ -10,7 +10,7 @@ public class InkColorTags {
 	public static final TagKey<InkColor> COMPOUND_COLORS = getReference("compounds");
 	
 	private static TagKey<InkColor> getReference(String name) {
-		return TagKey.of(SpectrumRegistries.INK_COLORS.getKey(), SpectrumCommon.locate(name));
+		return TagKey.of(SpectrumRegistries.INK_COLOR.getKey(), SpectrumCommon.locate(name));
 	}
 	
 }
