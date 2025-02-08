@@ -28,13 +28,13 @@ public class BookTitrationBarrelFermentingPageRenderer extends BookGatedRecipePa
 
     public BookTitrationBarrelFermentingPageRenderer(BookGatedRecipePage<TitrationBarrelRecipe> page) {
         super(page);
-
-        var recipe1 = page.getRecipe1().value();
-        var recipe2 = page.getRecipe2().value();
+		
+		RecipeEntry<TitrationBarrelRecipe> recipe1 = page.getRecipe1();
+		RecipeEntry<TitrationBarrelRecipe> recipe2 = page.getRecipe2();
         
         Identifier font = BookDataManager.Client.get().safeFont(this.page.getBook().getFont());
-        durationText1 = recipe1 == null ? null : new BookTextHolder(TitrationBarrelRecipe.getDurationText(recipe1.getMinFermentationTimeHours(), recipe1.getFermentationData()).styled(s -> s.withFont(font)));
-        durationText2 = recipe2 == null ? null : new BookTextHolder(TitrationBarrelRecipe.getDurationText(recipe2.getMinFermentationTimeHours(), recipe2.getFermentationData()).styled(s -> s.withFont(font)));
+		durationText1 = recipe1 == null ? null : new BookTextHolder(TitrationBarrelRecipe.getDurationText(recipe1.value().getMinFermentationTimeHours(), recipe1.value().getFermentationData()).styled(s -> s.withFont(font)));
+		durationText2 = recipe2 == null ? null : new BookTextHolder(TitrationBarrelRecipe.getDurationText(recipe2.value().getMinFermentationTimeHours(), recipe2.value().getFermentationData()).styled(s -> s.withFont(font)));
     }
 
     @Override

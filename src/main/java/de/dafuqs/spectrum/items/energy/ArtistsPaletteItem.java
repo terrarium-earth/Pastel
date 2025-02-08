@@ -14,8 +14,8 @@ import net.minecraft.block.entity.*;
 import net.minecraft.client.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.item.tooltip.*;
+import net.minecraft.registry.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
@@ -99,7 +99,7 @@ public class ArtistsPaletteItem extends SpectrumTrinketItem implements InkStorag
 		
 		
 		var blendFactor = (((float) time + delta) % 30) / 30F;
-		var blendedColor = ColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
+		var blendedColor = SpectrumColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
 		
 		return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
 	}

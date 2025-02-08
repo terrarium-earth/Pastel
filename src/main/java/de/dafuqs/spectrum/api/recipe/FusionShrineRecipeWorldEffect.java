@@ -22,13 +22,13 @@ public interface FusionShrineRecipeWorldEffect {
 			FusionShrineRecipeWorldEffect::fromString,
 			effect -> effect instanceof CommandRecipeWorldEffect command
 					? command.command
-					: String.valueOf(SpectrumRegistries.WORLD_EFFECTS.getId(effect)));
+					: String.valueOf(SpectrumRegistries.WORLD_EFFECT.getId(effect)));
 
 	PacketCodec<ByteBuf, FusionShrineRecipeWorldEffect> PACKET_CODEC = PacketCodecs.STRING.xmap(
 			FusionShrineRecipeWorldEffect::fromString,
 			effect -> effect instanceof CommandRecipeWorldEffect command
 					? command.command
-					: String.valueOf(SpectrumRegistries.WORLD_EFFECTS.getId(effect)));
+					: String.valueOf(SpectrumRegistries.WORLD_EFFECT.getId(effect)));
 	
 	FusionShrineRecipeWorldEffect NOTHING = register("nothing", new FusionShrineRecipeWorldEffect.SingleTimeRecipeWorldEffect() {
 		@Override
@@ -36,7 +36,7 @@ public interface FusionShrineRecipeWorldEffect {
 	});
 	
 	static FusionShrineRecipeWorldEffect register(String id, FusionShrineRecipeWorldEffect effect) {
-		Registry.register(SpectrumRegistries.WORLD_EFFECTS, SpectrumCommon.locate(id), effect);
+		Registry.register(SpectrumRegistries.WORLD_EFFECT, SpectrumCommon.locate(id), effect);
 		return effect;
 	}
 	
@@ -48,7 +48,7 @@ public interface FusionShrineRecipeWorldEffect {
 			return new CommandRecipeWorldEffect(string);
 		}
 		
-		FusionShrineRecipeWorldEffect effect = SpectrumRegistries.WORLD_EFFECTS.get(SpectrumCommon.ofSpectrum(string));
+		FusionShrineRecipeWorldEffect effect = SpectrumRegistries.WORLD_EFFECT.get(SpectrumCommon.ofSpectrum(string));
 		if (effect == null) {
 			SpectrumCommon.logError("Unknown fusion shrine world effect '" + string + "'. Will be ignored.");
 			return NOTHING;

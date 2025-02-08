@@ -98,6 +98,7 @@ public class SpectrumCommon implements ModInitializer {
 		logInfo("Starting Common Startup");
 		
 		// Register internals
+		SpectrumRegistries.register();
 		InkColors.register();
 		InkColorMixes.register();
 		SpectrumEntityAttributes.register();

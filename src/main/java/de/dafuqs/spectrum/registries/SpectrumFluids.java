@@ -24,7 +24,7 @@ public class SpectrumFluids {
 	public static final SpectrumFluid LIQUID_CRYSTAL = new LiquidCrystalFluid.Still();
 	public static final SpectrumFluid FLOWING_LIQUID_CRYSTAL = new LiquidCrystalFluid.Flowing();
 	public static final int LIQUID_CRYSTAL_TINT = 0xcbbbcb;
-	public static final Vector3f LIQUID_CRYSTAL_COLOR_VEC = ColorHelper.colorIntToVec(LIQUID_CRYSTAL_TINT);
+	public static final Vector3f LIQUID_CRYSTAL_COLOR_VEC = SpectrumColorHelper.colorIntToVec(LIQUID_CRYSTAL_TINT);
 	public static final Identifier LIQUID_CRYSTAL_OVERLAY_TEXTURE = SpectrumCommon.locate("textures/misc/liquid_crystal_overlay.png");
 	public static final float LIQUID_CRYSTAL_OVERLAY_ALPHA = 0.6F;
 	
@@ -32,7 +32,7 @@ public class SpectrumFluids {
 	public static final SpectrumFluid GOO = new GooFluid.StillGoo();
 	public static final SpectrumFluid FLOWING_GOO = new GooFluid.FlowingGoo();
 	public static final int GOO_TINT = 0x4e2e0a;
-	public static final Vector3f GOO_COLOR_VEC = ColorHelper.colorIntToVec(GOO_TINT);
+	public static final Vector3f GOO_COLOR_VEC = SpectrumColorHelper.colorIntToVec(GOO_TINT);
 	public static final Identifier GOO_OVERLAY_TEXTURE = SpectrumCommon.locate("textures/misc/goo_overlay.png");
 	public static final float GOO_OVERLAY_ALPHA = 0.995F;
 	
@@ -40,7 +40,7 @@ public class SpectrumFluids {
 	public static final SpectrumFluid MIDNIGHT_SOLUTION = new MidnightSolutionFluid.Still();
 	public static final SpectrumFluid FLOWING_MIDNIGHT_SOLUTION = new MidnightSolutionFluid.Flowing();
 	public static final int MIDNIGHT_SOLUTION_TINT = 0x11183b;
-	public static final Vector3f MIDNIGHT_SOLUTION_COLOR_VEC = ColorHelper.colorIntToVec(MIDNIGHT_SOLUTION_TINT);
+	public static final Vector3f MIDNIGHT_SOLUTION_COLOR_VEC = SpectrumColorHelper.colorIntToVec(MIDNIGHT_SOLUTION_TINT);
 	public static final Identifier MIDNIGHT_SOLUTION_OVERLAY_TEXTURE = SpectrumCommon.locate("textures/misc/midnight_solution_overlay.png");
 	public static final float MIDNIGHT_SOLUTION_OVERLAY_ALPHA = 0.995F;
 	
@@ -48,7 +48,7 @@ public class SpectrumFluids {
 	public static final SpectrumFluid DRAGONROT = new DragonrotFluid.Still();
 	public static final SpectrumFluid FLOWING_DRAGONROT = new DragonrotFluid.Flowing();
 	public static final int DRAGONROT_TINT = 0xe3772f;
-	public static final Vector3f DRAGONROT_COLOR_VEC = ColorHelper.colorIntToVec(DRAGONROT_TINT);
+	public static final Vector3f DRAGONROT_COLOR_VEC = SpectrumColorHelper.colorIntToVec(DRAGONROT_TINT);
 	public static final Identifier DRAGONROT_OVERLAY_TEXTURE = SpectrumCommon.locate("textures/misc/dragonrot_overlay.png");
 	public static final float DRAGONROT_OVERLAY_ALPHA = 0.98F;
 	

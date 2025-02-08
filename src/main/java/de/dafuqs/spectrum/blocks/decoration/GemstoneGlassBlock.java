@@ -22,7 +22,7 @@ public class GemstoneGlassBlock extends TransparentBlock {
 		this.gemstoneColor = gemstoneColor;
 		this.codec = RecordCodecBuilder.mapCodec(i -> i.group(
 				createSettingsCodec(),
-				SpectrumRegistries.GEMSTONE_COLORS.getCodec().fieldOf("color").forGetter(b -> b.gemstoneColor)
+				SpectrumRegistries.GEMSTONE_COLOR.getCodec().fieldOf("color").forGetter(b -> b.gemstoneColor)
 		).apply(i, GemstoneGlassBlock::new));
 	}
 

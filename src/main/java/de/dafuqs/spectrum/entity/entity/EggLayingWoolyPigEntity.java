@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.entity.entity;
 
 import de.dafuqs.spectrum.entity.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.tag.convention.v2.*;
 import net.minecraft.block.*;
@@ -40,7 +40,7 @@ public class EggLayingWoolyPigEntity extends AnimalEntity implements Shearable {
 	private static final int MAX_GRASS_TIMER = 40;
 	private static final TrackedData<Byte> COLOR_AND_SHEARED = DataTracker.registerData(EggLayingWoolyPigEntity.class, TrackedDataHandlerRegistry.BYTE);
 	private static final TrackedData<Boolean> HATLESS = DataTracker.registerData(EggLayingWoolyPigEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-	private static final Map<DyeColor, Integer> COLORS = new EnumMap<>(ColorHelper.VANILLA_DYE_COLORS.stream().collect(Collectors.toMap(Function.identity(), EggLayingWoolyPigEntity::getDyedColor)));
+	private static final Map<DyeColor, Integer> COLORS = new EnumMap<>(SpectrumColorHelper.VANILLA_DYE_COLORS.stream().collect(Collectors.toMap(Function.identity(), EggLayingWoolyPigEntity::getDyedColor)));
 	
 	private int eatGrassTimer;
 	private EatGrassGoal eatGrassGoal;

@@ -73,15 +73,15 @@ public class LightMineEntity extends LightShardBaseEntity {
             nbt.putInt("Color", this.getColor());
         }
         if (!this.effects.isEmpty()) {
-			CodecHelper.writeNbt(nbt, "CustomPotionEffects", StatusEffectInstance.CODEC.listOf(), this.effects.stream().toList());
+			CodecHelper.writeNbt(nbt, "custom_potion_effects", StatusEffectInstance.CODEC.listOf(), this.effects.stream().toList());
         }
     }
     
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-    
-        this.setEffects(CodecHelper.fromNbt(StatusEffectInstance.CODEC.listOf(), nbt.get("CustomPotionEffects"), List.of()));
+		
+		this.setEffects(CodecHelper.fromNbt(StatusEffectInstance.CODEC.listOf(), nbt.get("custom_potion_effects"), List.of()));
     
         if (nbt.contains("Color", NbtElement.NUMBER_TYPE)) {
             this.setColor(nbt.getInt("Color"));

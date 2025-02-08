@@ -13,7 +13,7 @@ public class ColoredTransmissionParticle extends TransmissionParticle {
 	public ColoredTransmissionParticle(ClientWorld world, double x, double y, double z, PositionSource positionSource, int maxAge, DyeColor dyeColor) {
 		super(world, x, y, z, positionSource, maxAge);
 		
-		Vector3f color = ColorHelper.getRGBVec(dyeColor);
+		Vector3f color = SpectrumColorHelper.getRGBVec(dyeColor);
 		this.setColor(color.x(), color.y(), color.z());
 	}
 	

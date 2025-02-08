@@ -35,4 +35,3 @@ accessible field net/minecraft/block/FluidBlock fluid Lnet/minecraft/fluid/Flowa
 accessible field net/minecraft/data/client/BlockStateModelGenerator$BlockTexturePool baseModelId Lnet/minecraft/util/Identifier;
 
 mutable field net/minecraft/item/map/MapState dimension Lnet/minecraft/registry/RegistryKey;
-mutable field net/minecraft/registry/RegistryLoader DYNAMIC_REGISTRIES Ljava/util/List;

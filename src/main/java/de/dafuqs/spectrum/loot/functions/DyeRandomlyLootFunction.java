@@ -18,7 +18,7 @@ import java.util.*;
 public class DyeRandomlyLootFunction extends ConditionalLootFunction {
 	
 	public static final MapCodec<DyeRandomlyLootFunction> CODEC = RecordCodecBuilder.mapCodec((instance) -> addConditionsField(instance).and(instance.group(
-			ColorHelper.CODEC.listOf().fieldOf("colors").forGetter((function) -> function.colors),
+			SpectrumColorHelper.CODEC.listOf().fieldOf("colors").forGetter((function) -> function.colors),
 			Codec.BOOL.optionalFieldOf("show_in_tooltip", false).forGetter((function) -> function.showInTooltip))
 	).apply(instance, DyeRandomlyLootFunction::new));
 	
@@ -41,7 +41,7 @@ public class DyeRandomlyLootFunction extends ConditionalLootFunction {
 		stack.get(DataComponentTypes.DYED_COLOR);
 		if (stack.isIn(ItemTags.DYEABLE)) {
 			Random random = context.getRandom();
-			int color = this.colors.isEmpty() ? ColorHelper.getRandomColor(random.nextInt()) : this.colors.get(random.nextInt(this.colors.size()));
+			int color = this.colors.isEmpty() ? SpectrumColorHelper.getRandomColor(random.nextInt()) : this.colors.get(random.nextInt(this.colors.size()));
 			
 			DyedColorComponent component = new DyedColorComponent(color, showInTooltip);
 			stack.set(DataComponentTypes.DYED_COLOR, component);

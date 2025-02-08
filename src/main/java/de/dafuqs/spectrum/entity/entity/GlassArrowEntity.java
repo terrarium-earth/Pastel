@@ -16,6 +16,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.particle.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
@@ -202,7 +203,7 @@ public class GlassArrowEntity extends PersistentProjectileEntity {
 	@Override
 	public void readCustomDataFromNbt(NbtCompound nbt) {
 		super.readCustomDataFromNbt(nbt);
-		GlassArrowVariant variant = SpectrumRegistries.GLASS_ARROW_VARIANT.get(nbt.getString(VARIANT_STRING));
+		GlassArrowVariant variant = SpectrumRegistries.GLASS_ARROW_VARIANT.get(Identifier.tryParse(nbt.getString(VARIANT_STRING)));
 		if (variant != null) {
 			this.setVariant(variant);
 		}

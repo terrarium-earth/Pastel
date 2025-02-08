@@ -19,7 +19,7 @@ public class IndividualCappedInkStorage implements InkStorage {
 	
 	// support all ink colors
 	public IndividualCappedInkStorage(long maxEnergyPerColor) {
-		this(maxEnergyPerColor, SpectrumRegistries.INK_COLORS);
+		this(maxEnergyPerColor, SpectrumRegistries.INK_COLOR);
 	}
 	
 	// support selected ink colors
@@ -132,7 +132,7 @@ public class IndividualCappedInkStorage implements InkStorage {
 		tooltip.add(Text.translatable("item.spectrum.ink_storage.stores_ink_per_type", getShortenedNumberString(maxEnergyPerColor)));
 		
 		// we are iterating them this way to preserve the ordering
-		for (InkColor color : SpectrumRegistries.INK_COLORS) {
+		for (InkColor color : SpectrumRegistries.INK_COLOR) {
 			long amount = this.storedEnergy.getOrDefault(color, 0L);
 			if (amount > 0) {
 				InkStorage.addInkStoreBulletTooltip(tooltip, color, amount);

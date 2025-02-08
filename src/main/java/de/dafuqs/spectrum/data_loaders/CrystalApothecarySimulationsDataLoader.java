@@ -17,7 +17,7 @@ import java.util.*;
 
 public class CrystalApothecarySimulationsDataLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
 	
-	public static final String ID = "crystal_apothecary_simulations";
+	public static final String ID = "crystal_apothecary_simulation";
 	public static final CrystalApothecarySimulationsDataLoader INSTANCE = new CrystalApothecarySimulationsDataLoader();
 	
 	public static final HashMap<Block, SimulatedBlockGrowthEntry> COMPENSATIONS = new HashMap<>();

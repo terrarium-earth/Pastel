@@ -9,7 +9,7 @@ import net.minecraft.network.codec.*;
 
 public class SpectrumTrackedDataHandlerRegistry {
 	
-	public static final TrackedDataHandler<InkColor> INK_COLOR = TrackedDataHandler.create(PacketCodecs.registryValue(SpectrumRegistries.INK_COLORS.getKey()));
+	public static final TrackedDataHandler<InkColor> INK_COLOR = TrackedDataHandler.create(PacketCodecs.registryValue(SpectrumRegistries.INK_COLOR.getKey()));
 	public static final TrackedDataHandler<GlassArrowVariant> GLASS_ARROW_VARIANT = TrackedDataHandler.create(PacketCodecs.registryValue(SpectrumRegistries.GLASS_ARROW_VARIANT.getKey()));
 	
 	public static final TrackedDataHandler<LizardFrillVariant> LIZARD_FRILL_VARIANT = TrackedDataHandler.create(PacketCodecs.registryValue(SpectrumRegistries.LIZARD_FRILL_VARIANT.getKey()));

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
@@ -28,7 +28,7 @@ public class RaindropParticle extends SpriteBillboardParticle {
 		//this.simOffset = random.nextInt(simInterval);
 		maxAge = 25;
 		pos.set(x, y, z);
-		var waterColor = ColorHelper.colorIntToVec(BiomeColors.getWaterColor(world, pos));
+		var waterColor = SpectrumColorHelper.colorIntToVec(BiomeColors.getWaterColor(world, pos));
 		red = waterColor.x;
 		green = waterColor.y;
 		blue = waterColor.z;
@@ -37,7 +37,7 @@ public class RaindropParticle extends SpriteBillboardParticle {
 	@Override
 	public void tick() {
 		pos.set(x, y, z);
-		var waterColor = ColorHelper.colorIntToVec(BiomeColors.getWaterColor(world, pos));
+		var waterColor = SpectrumColorHelper.colorIntToVec(BiomeColors.getWaterColor(world, pos));
 		red = waterColor.x;
 		green = waterColor.y;
 		blue = waterColor.z;

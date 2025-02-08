@@ -85,11 +85,11 @@ public class ExplosionModifiers {
 	public static final ExplosionModifier LIGHT = registerModifier("light", new LightPlacingModifier(GENERIC, SpectrumParticleTypes.SHIMMERSTONE_SPARKLE, 0xfaf87a));
 	
 	private static <T extends ExplosionModifier> T registerModifier(String name, T modifier) {
-		return Registry.register(SpectrumRegistries.EXPLOSION_MODIFIERS, SpectrumCommon.locate(name), modifier);
+		return Registry.register(SpectrumRegistries.EXPLOSION_MODIFIER, SpectrumCommon.locate(name), modifier);
 	}
 	
 	private static ExplosionModifierType registerModifierType(String name, ExplosionModifierType type) {
-		return Registry.register(SpectrumRegistries.EXPLOSION_MODIFIER_TYPES, SpectrumCommon.locate(name), type);
+		return Registry.register(SpectrumRegistries.EXPLOSION_MODIFIER_TYPE, SpectrumCommon.locate(name), type);
 	}
 	
 	public static void register() {

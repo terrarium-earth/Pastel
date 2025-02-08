@@ -14,8 +14,8 @@ import net.minecraft.block.entity.*;
 import net.minecraft.client.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.item.tooltip.*;
+import net.minecraft.registry.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
@@ -79,7 +79,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 		
 		var time = player.getWorld().getTime() % 864000;
 		
-		for (InkColor inkColor : SpectrumRegistries.INK_COLORS) {
+		for (InkColor inkColor : SpectrumRegistries.INK_COLOR) {
 			if (storage.getEnergy(inkColor) > 0)
 				colors.add(inkColor);
 		}
@@ -95,7 +95,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 		var nextColor = colors.get((int) ((time % (30L * colors.size()) / 30 + 1) % colors.size()));
 		
 		var blendFactor = (((float) time + delta) % 30) / 30F;
-		var blendedColor = ColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
+		var blendedColor = SpectrumColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
 		
 		return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
 	}

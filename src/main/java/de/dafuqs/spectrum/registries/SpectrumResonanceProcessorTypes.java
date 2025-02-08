@@ -9,7 +9,7 @@ import net.minecraft.registry.*;
 public class SpectrumResonanceProcessorTypes {
 	
 	public static void register(String id, MapCodec<? extends ResonanceProcessor> target) {
-		Registry.register(SpectrumRegistries.RESONANCE_PROCESSOR_TYPES, SpectrumCommon.locate(id), target);
+		Registry.register(SpectrumRegistries.RESONANCE_PROCESSOR_TYPE, SpectrumCommon.locate(id), target);
 	}
 	
 	public static void register() {

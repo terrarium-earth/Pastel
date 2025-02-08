@@ -106,7 +106,7 @@ public class ColorSelectionWidget extends ClickableWidget {
 			var clickedColor = usableColors.get(newColorIndex);
 			if (clickedColor.getRight()) {
 				client.player.playSound(SpectrumSoundEvents.BUTTON_CLICK, 1.0F, 1.0F);
-				onChanged(SpectrumRegistries.INK_COLORS.getEntry(clickedColor.getLeft()));
+				onChanged(SpectrumRegistries.INK_COLOR.getEntry(clickedColor.getLeft()));
 			} else {
 				client.player.playSound(SpectrumSoundEvents.USE_FAIL, 1.0F, 1.0F);
 				onChanged(null);

@@ -16,7 +16,7 @@ import java.util.*;
 
 public class ParticleSpawnerParticlesDataLoader extends JsonDataLoader implements IdentifiableResourceReloadListener {
 	
-	public static final String ID = "particle_spawner_particles";
+	public static final String ID = "particle_spawner_particle";
 	public static final ParticleSpawnerParticlesDataLoader INSTANCE = new ParticleSpawnerParticlesDataLoader();
 	
 	/**
@@ -29,8 +29,7 @@ public class ParticleSpawnerParticlesDataLoader extends JsonDataLoader implement
 	 * @param supportsColoring  Weather the Particle Spawner enables CMY coloring for this particle (should be true, if grayscale)
 	 * @param unlockIdentifier  The advancement identifier required to being able to select this entry
 	 */
-	public record ParticleSpawnerEntry(ParticleType<?> particleType, Identifier textureIdentifier,
-									   boolean supportsColoring, @Nullable Identifier unlockIdentifier) {
+	public record ParticleSpawnerEntry(ParticleType<?> particleType, Identifier textureIdentifier, boolean supportsColoring, @Nullable Identifier unlockIdentifier) {
 	}
 	
 	protected static final List<ParticleSpawnerEntry> PARTICLES = new ArrayList<>();

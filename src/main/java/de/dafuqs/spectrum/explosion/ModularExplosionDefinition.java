@@ -26,12 +26,12 @@ public class ModularExplosionDefinition {
 	
 	public static final Codec<ModularExplosionDefinition> CODEC = RecordCodecBuilder.create(i -> i.group(
 			StringIdentifiable.createCodec(ExplosionArchetype::values).fieldOf("archetype").forGetter(c -> c.archetype),
-			SpectrumRegistries.EXPLOSION_MODIFIERS.getCodec().listOf().optionalFieldOf("modifiers", List.of()).forGetter(c -> c.modifiers)
+			SpectrumRegistries.EXPLOSION_MODIFIER.getCodec().listOf().optionalFieldOf("modifiers", List.of()).forGetter(c -> c.modifiers)
 	).apply(i, ModularExplosionDefinition::new));
 	
 	public static final PacketCodec<RegistryByteBuf, ModularExplosionDefinition> PACKET_CODEC = PacketCodec.tuple(
 			PacketCodecHelper.enumOf(ExplosionArchetype::values), c -> c.archetype,
-			PacketCodecs.registryValue(SpectrumRegistries.EXPLOSION_MODIFIERS.getKey()).collect(PacketCodecs.toList()), c -> c.modifiers,
+			PacketCodecs.registryValue(SpectrumRegistries.EXPLOSION_MODIFIER.getKey()).collect(PacketCodecs.toList()), c -> c.modifiers,
 			ModularExplosionDefinition::new
 	);
 	

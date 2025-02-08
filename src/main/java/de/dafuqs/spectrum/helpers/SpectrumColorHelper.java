@@ -15,9 +15,9 @@ import java.util.List;
 import java.util.*;
 import java.util.regex.*;
 
-public class ColorHelper {
+public class SpectrumColorHelper {
 	
-	public static final Codec<Integer> CODEC = Codec.withAlternative(Codec.INT, Codec.STRING.comapFlatMap(CodecHelper.throwable(ColorHelper::fromString), ColorHelper::toString));
+	public static final Codec<Integer> CODEC = Codec.withAlternative(Codec.INT, Codec.STRING.comapFlatMap(CodecHelper.throwable(SpectrumColorHelper::fromString), SpectrumColorHelper::toString));
 	
 	/**
 	 * A list of the first 16 dye colors

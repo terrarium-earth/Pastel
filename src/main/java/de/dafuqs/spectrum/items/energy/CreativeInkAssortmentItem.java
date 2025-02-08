@@ -11,7 +11,7 @@ import net.fabricmc.api.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.tooltip.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -81,19 +81,19 @@ public class CreativeInkAssortmentItem extends Item implements InkStorageItem<Cr
 		
 		var time = player.getWorld().getTime() % 864000;
 		
-		for (InkColor inkColor : SpectrumRegistries.INK_COLORS) {
+		for (InkColor inkColor : SpectrumRegistries.INK_COLOR) {
 			colors.add(inkColor);
 		}
 		
 		if (colors.size() == 1) {
 			var color = colors.getFirst();
-			return ColorHelper.colorVecToRGB(color.getColorVec());
+			return SpectrumColorHelper.colorVecToRGB(color.getColorVec());
 		}
 		
 		var curColor = colors.get((int) (time % (30L * colors.size()) / 30));
 		var nextColor = colors.get((int) ((time % (30L * colors.size()) / 30 + 1) % colors.size()));
 		var blendFactor = (((float) time + delta) % 30) / 30F;
 		
-		return ColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
+		return SpectrumColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
 	}
 }

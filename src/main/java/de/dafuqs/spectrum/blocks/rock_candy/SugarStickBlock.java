@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.blocks.rock_candy;
 
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.blocks.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -92,7 +92,7 @@ public class SugarStickBlock extends Block implements RockCandy {
 			int age = state.get(AGE);
 			
 			if (age == 2 || (age == 1 ? random.nextBoolean() : random.nextFloat() < 0.25)) {
-				world.addParticle(new DynamicParticleEffect(0.1F, ColorHelper.getRGBVec(rockCandyVariant.getDyeColor()), 0.5F, 120, true, true),
+				world.addParticle(new DynamicParticleEffect(0.1F, SpectrumColorHelper.getRGBVec(rockCandyVariant.getDyeColor()), 0.5F, 120, true, true),
 						pos.getX() + 0.25 + random.nextFloat() * 0.5,
 						pos.getY() + 0.25 + random.nextFloat() * 0.5,
 						pos.getZ() + 0.25 + random.nextFloat() * 0.5,

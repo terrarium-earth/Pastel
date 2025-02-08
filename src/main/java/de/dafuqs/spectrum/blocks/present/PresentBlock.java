@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.blocks.present;
 
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.effect.*;
 import it.unimi.dsi.fastutil.objects.*;
@@ -202,7 +202,7 @@ public class PresentBlock extends BlockWithEntity {
 		double posY = pos.getY() + 0.25;
 		double posZ = pos.getZ() + 0.5;
 		Random random = world.random;
-		Vector3f colorVec = ColorHelper.getRGBVec(color);
+		Vector3f colorVec = SpectrumColorHelper.getRGBVec(color);
 		for (int i = 0; i < amount; i++) {
 			double randX = 0.35 - random.nextFloat() * 0.7;
 			double randY = random.nextFloat() * 0.7;

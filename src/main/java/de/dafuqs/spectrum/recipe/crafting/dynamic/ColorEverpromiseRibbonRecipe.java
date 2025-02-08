@@ -76,7 +76,7 @@ public class ColorEverpromiseRibbonRecipe extends SpecialCraftingRecipe {
 		
 		Text text = ribbon.getName();
 		if (text instanceof MutableText mutableText) {
-			TextColor newColor = TextColor.fromRgb(ColorHelper.getInt(pigment.getColor()));
+			TextColor newColor = TextColor.fromRgb(SpectrumColorHelper.getInt(pigment.getColor()));
 			Text newName = mutableText.setStyle(mutableText.getStyle().withColor(newColor));
 			ribbon.set(DataComponentTypes.CUSTOM_NAME, newName);
 		}

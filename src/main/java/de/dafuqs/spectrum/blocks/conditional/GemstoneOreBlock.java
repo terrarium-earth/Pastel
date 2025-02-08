@@ -20,7 +20,7 @@ public class GemstoneOreBlock extends CloakedOreBlock {
 		this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				IntProvider.createValidatingCodec(0, 10).fieldOf("experience").forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getExperienceDropped()),
 				createSettingsCodec(),
-				SpectrumRegistries.GEMSTONE_COLORS.getCodec().fieldOf("color").forGetter(b -> b.gemstoneColor),
+				SpectrumRegistries.GEMSTONE_COLOR.getCodec().fieldOf("color").forGetter(b -> b.gemstoneColor),
 				Identifier.CODEC.fieldOf("advancement").forGetter(CloakedOreBlock::getCloakAdvancementIdentifier),
 				BlockState.CODEC.fieldOf("cloak").forGetter(b -> b.getBlockStateCloaks().get(b.getDefaultState()))
 		).apply(instance, GemstoneOreBlock::new));

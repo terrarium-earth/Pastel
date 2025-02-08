@@ -16,6 +16,7 @@ import net.minecraft.client.color.block.*;
 import net.minecraft.client.color.item.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 
 import java.util.*;
 
@@ -58,7 +59,7 @@ public class SpectrumColorProviders {
 			coloredLeavesBlockColorProvider = new ToggleableBlockColorProvider(leavesBlockColorProvider);
 			coloredLeavesItemColorProvider = new ToggleableItemColorProvider(leavesItemColorProvider);
 			
-			for (DyeColor dyeColor : ColorHelper.VANILLA_DYE_COLORS) {
+			for (DyeColor dyeColor : SpectrumColorHelper.VANILLA_DYE_COLORS) {
 				Block block = ColoredLeavesBlock.byColor(dyeColor);
 				ColorProviderRegistry.BLOCK.register(coloredLeavesBlockColorProvider, block);
 				ColorProviderRegistry.ITEM.register(coloredLeavesItemColorProvider, block);
@@ -101,7 +102,7 @@ public class SpectrumColorProviders {
 			if (tintIndex == 1) {
 				InkFlaskItem i = (InkFlaskItem) stack.getItem();
 				SingleInkStorage storage = i.getEnergyStorage(stack);
-				return ColorHelper.getInt(storage.getStoredColor().getDyeColor());
+				return ColorHelper.Argb.fullAlpha(SpectrumColorHelper.getInt(storage.getStoredColor().getDyeColor()));
 			}
 			return -1;
 		}, items);
@@ -112,7 +113,7 @@ public class SpectrumColorProviders {
 			if (tintIndex == 1) {
 				List<InkPoweredStatusEffectInstance> effects = InkPoweredStatusEffectInstance.getEffects(stack);
 				if (!effects.isEmpty()) {
-					return effects.getFirst().getColor();
+					return ColorHelper.Argb.fullAlpha(effects.getFirst().getColor());
 				}
 			}
 			return -1;
@@ -124,7 +125,7 @@ public class SpectrumColorProviders {
 			if (tintIndex > 0) {
 				List<InkPoweredStatusEffectInstance> effects = InkPoweredStatusEffectInstance.getEffects(stack);
 				if (effects.size() > tintIndex - 1) {
-					return effects.get(tintIndex - 1).getColor();
+					return ColorHelper.Argb.fullAlpha(effects.get(tintIndex - 1).getColor());
 				}
 			}
 			return -1;
@@ -143,24 +144,24 @@ public class SpectrumColorProviders {
 		}, memory);
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
 			if (tintIndex == 2)
-				return 0xFFFFFF;
+				return 0xFFFFFFFF;
 			
-			return MemoryItem.getEggColor(stack, tintIndex);
+			return ColorHelper.Argb.fullAlpha(MemoryItem.getEggColor(stack, tintIndex));
 		}, memory.asItem());
 	}
 	
 	public static void registerBrewColors(Item brew) {
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-			if (tintIndex != 0) return -1;
-			return stack.getOrDefault(SpectrumDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT).color();
+			if (tintIndex != 0) return ColorHelper.Argb.fullAlpha(-1);
+			return ColorHelper.Argb.fullAlpha(stack.getOrDefault(SpectrumDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT).color());
 		}, brew);
 	}
 	
 	public static void registerOptionalInkColor(Item item) {
 		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-			if (tintIndex == 0) {
+			if (tintIndex == 1) {
 				var color = stack.get(SpectrumDataComponentTypes.INK_COLOR);
-				return color == null ? -1 : color.getColorInt();
+				return ColorHelper.Argb.fullAlpha(color == null ? -1 : color.getColorInt());
 			}
 			return -1;
 		}, item);

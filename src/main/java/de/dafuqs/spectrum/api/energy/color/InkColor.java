@@ -14,8 +14,7 @@ import java.util.*;
 
 public class InkColor {
 	
-	// TODO: what if other mods register new ink colors?
-	public static final Codec<InkColor> CODEC = CodecHelper.SPECTRUM_IDENTIFIER.comapFlatMap(
+	public static final Codec<InkColor> CODEC = CodecHelper.SPECTRUM_DEFAULTED_IDENTIFIER.comapFlatMap(
 			id -> ofId(id).map(DataResult::success).orElse(DataResult.error(() -> "Not a valid ink color: " + id)),
 			InkColor::getID
 	);
@@ -42,9 +41,9 @@ public class InkColor {
 	protected InkColor(DyeColor dyeColor, int color, int textColor, Identifier requiredAdvancement) {
 		this.dyeColor = dyeColor;
 		this.colorInt = color;
-		this.colorVec = ColorHelper.colorIntToVec(color);
+		this.colorVec = SpectrumColorHelper.colorIntToVec(color);
 		this.textColor = textColor;
-		this.textColorVec = ColorHelper.colorIntToVec(textColor);
+		this.textColorVec = SpectrumColorHelper.colorIntToVec(textColor);
 		this.requiredAdvancement = requiredAdvancement;
 		
 		DYE_TO_COLOR.put(dyeColor, this);
@@ -55,11 +54,11 @@ public class InkColor {
 	}
 	
 	public static Optional<InkColor> ofId(Identifier id) {
-		return SpectrumRegistries.INK_COLORS.getOrEmpty(id);
+		return SpectrumRegistries.INK_COLOR.getOrEmpty(id);
 	}
 	
 	public static Optional<InkColor> ofIdString(String idString) {
-		return SpectrumRegistries.INK_COLORS.getOrEmpty(Identifier.of(idString));
+		return SpectrumRegistries.INK_COLOR.getOrEmpty(Identifier.of(idString));
 	}
 	
 	public DyeColor getDyeColor() {
@@ -118,11 +117,11 @@ public class InkColor {
 	}
 	
 	public Identifier getID() {
-		return SpectrumRegistries.INK_COLORS.getId(this);
+		return SpectrumRegistries.INK_COLOR.getId(this);
 	}
 	
 	public boolean isIn(TagKey<InkColor> tag) {
-		return SpectrumRegistries.INK_COLORS.getEntry(this).isIn(tag);
+		return SpectrumRegistries.INK_COLOR.getEntry(this).isIn(tag);
 	}
 	
 }

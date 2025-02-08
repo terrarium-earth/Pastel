@@ -65,7 +65,7 @@ public class InkColors {
 	);
 	
 	protected static InkColor register(String name, InkColor inkColor) {
-		return Registry.register(SpectrumRegistries.INK_COLORS, SpectrumCommon.locate(name), inkColor);
+		return Registry.register(SpectrumRegistries.INK_COLOR, SpectrumCommon.locate(name), inkColor);
 	}
 	
 	public static void register() {
@@ -73,15 +73,15 @@ public class InkColors {
 	}
 	
 	public static Iterable<InkColor> all() {
-		return SpectrumRegistries.INK_COLORS;
+		return SpectrumRegistries.INK_COLOR;
 	}
 	
 	public static List<InkColor> elementals() {
-        return SpectrumRegistries.INK_COLORS.getEntryList(InkColorTags.ELEMENTAL_COLORS).map(entries -> entries.stream().map(RegistryEntry::value).toList()).orElseGet(() -> List.of(CYAN, MAGENTA, YELLOW, WHITE, BLACK));
+		return SpectrumRegistries.INK_COLOR.getEntryList(InkColorTags.ELEMENTAL_COLORS).map(entries -> entries.stream().map(RegistryEntry::value).toList()).orElseGet(() -> List.of(CYAN, MAGENTA, YELLOW, WHITE, BLACK));
 	}
 	
 	public static List<InkColor> compounds() {
-		return SpectrumRegistries.INK_COLORS.getEntryList(InkColorTags.COMPOUND_COLORS).map(entries -> entries.stream().map(RegistryEntry::value).toList()).orElseGet(() -> List.of(LIGHT_BLUE, BLUE, PURPLE, PINK, RED, ORANGE, LIME, GREEN, BROWN, GRAY, LIGHT_GRAY));
+		return SpectrumRegistries.INK_COLOR.getEntryList(InkColorTags.COMPOUND_COLORS).map(entries -> entries.stream().map(RegistryEntry::value).toList()).orElseGet(() -> List.of(LIGHT_BLUE, BLUE, PURPLE, PINK, RED, ORANGE, LIME, GREEN, BROWN, GRAY, LIGHT_GRAY));
 	}
 	
 }

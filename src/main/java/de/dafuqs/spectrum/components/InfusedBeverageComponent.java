@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.components;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
+import de.dafuqs.spectrum.helpers.*;
 import io.netty.buffer.*;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.*;
@@ -13,11 +14,11 @@ import java.util.function.*;
 
 public record InfusedBeverageComponent(String variant, int color) implements TooltipAppender {
 	
-	public static final InfusedBeverageComponent DEFAULT = new InfusedBeverageComponent("unknown", 0xf4c6cb);
+	public static final InfusedBeverageComponent DEFAULT = new InfusedBeverageComponent("unknown", 0xfff4c6cb);
 	
 	public static final Codec<InfusedBeverageComponent> CODEC = RecordCodecBuilder.create(i -> i.group(
 			Codec.STRING.optionalFieldOf("variant", "unknown").forGetter(InfusedBeverageComponent::variant),
-			Codec.INT.optionalFieldOf("color", 0xf4c6cb).forGetter(InfusedBeverageComponent::color)
+			SpectrumColorHelper.CODEC.optionalFieldOf("color", 0xfff4c6cb).forGetter(InfusedBeverageComponent::color)
 	).apply(i, InfusedBeverageComponent::new));
 	
 	public static final PacketCodec<ByteBuf, InfusedBeverageComponent> PACKET_CODEC = PacketCodec.tuple(

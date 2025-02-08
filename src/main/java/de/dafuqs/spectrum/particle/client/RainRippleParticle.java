@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.color.world.*;
 import net.minecraft.client.particle.*;
@@ -23,7 +23,7 @@ public class RainRippleParticle extends SpriteBillboardParticle {
 		scale = 0.2F + random.nextFloat() * 0.1F;
 		alphaMult = 0.75F + random.nextFloat() * 0.25F;
 		alpha = alphaMult;
-		var waterColor = ColorHelper.colorIntToVec(BiomeColors.getWaterColor(world, BlockPos.ofFloored(x, y, z)));
+		var waterColor = SpectrumColorHelper.colorIntToVec(BiomeColors.getWaterColor(world, BlockPos.ofFloored(x, y, z)));
 		red = waterColor.x;
 		green = waterColor.y;
 		blue = waterColor.z;
