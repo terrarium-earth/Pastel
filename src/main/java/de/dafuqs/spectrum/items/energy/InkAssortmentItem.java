@@ -34,7 +34,7 @@ public class InkAssortmentItem extends Item implements InkStorageItem<Individual
 	public IndividualCappedInkStorage getEnergyStorage(ItemStack itemStack) {
 		var storage = itemStack.get(SpectrumDataComponentTypes.INK_STORAGE);
 		if (storage != null)
-			return new IndividualCappedInkStorage(storage.maxEnergyTotal(), storage.storedEnergy());
+			return new IndividualCappedInkStorage(storage.maxPerColor(), storage.storedEnergy());
 		return new IndividualCappedInkStorage(this.maxEnergy);
 	}
 	
