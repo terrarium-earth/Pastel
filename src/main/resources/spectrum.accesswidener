@@ -11,7 +11,6 @@ accessible class net/minecraft/registry/RegistryOps$CachedRegistryInfoGetter
 accessible class net/minecraft/world/biome/Biome$Weather
 accessible class net/minecraft/world/SpawnDensityCapper$DensityCap
 accessible field net/minecraft/loot/LootTable pools Ljava/util/List;
-accessible field net/minecraft/block/FluidBlock fluid Lnet/minecraft/fluid/FlowableFluid;
 
 extendable method net/minecraft/component/type/BundleContentsComponent$Builder addInternal (Lnet/minecraft/item/ItemStack;)I
 extendable method net/minecraft/component/type/BundleContentsComponent$Builder getMaxAllowed (Lnet/minecraft/item/ItemStack;)I
@@ -31,6 +30,9 @@ accessible method net/minecraft/advancement/criterion/AbstractCriterion trigger 
 accessible method net/minecraft/screen/ForgingScreenHandler addPlayerInventorySlots (Lnet/minecraft/entity/player/PlayerInventory;)V
 extendable method net/minecraft/item/map/MapState <init> (IIBZZZLnet/minecraft/registry/RegistryKey;)V
 extendable method net/minecraft/item/map/MapState addDecoration (Lnet/minecraft/registry/entry/RegistryEntry;Lnet/minecraft/world/WorldAccess;Ljava/lang/String;DDDLnet/minecraft/text/Text;)V
+
+accessible field net/minecraft/block/FluidBlock fluid Lnet/minecraft/fluid/FlowableFluid;
+accessible field net/minecraft/data/client/BlockStateModelGenerator$BlockTexturePool baseModelId Lnet/minecraft/util/Identifier;
 
 mutable field net/minecraft/item/map/MapState dimension Lnet/minecraft/registry/RegistryKey;
 mutable field net/minecraft/registry/RegistryLoader DYNAMIC_REGISTRIES Ljava/util/List;
