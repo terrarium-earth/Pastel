@@ -14,8 +14,7 @@ import java.util.*;
 
 public class InkColor {
 	
-	// TODO: what if other mods register new ink colors?
-	public static final Codec<InkColor> CODEC = CodecHelper.SPECTRUM_IDENTIFIER.comapFlatMap(
+	public static final Codec<InkColor> CODEC = CodecHelper.SPECTRUM_DEFAULTED_IDENTIFIER.comapFlatMap(
 			id -> ofId(id).map(DataResult::success).orElse(DataResult.error(() -> "Not a valid ink color: " + id)),
 			InkColor::getID
 	);
@@ -42,9 +41,9 @@ public class InkColor {
 	protected InkColor(DyeColor dyeColor, int color, int textColor, Identifier requiredAdvancement) {
 		this.dyeColor = dyeColor;
 		this.colorInt = color;
-		this.colorVec = ColorHelper.colorIntToVec(color);
+		this.colorVec = SpectrumColorHelper.colorIntToVec(color);
 		this.textColor = textColor;
-		this.textColorVec = ColorHelper.colorIntToVec(textColor);
+		this.textColorVec = SpectrumColorHelper.colorIntToVec(textColor);
 		this.requiredAdvancement = requiredAdvancement;
 		
 		DYE_TO_COLOR.put(dyeColor, this);

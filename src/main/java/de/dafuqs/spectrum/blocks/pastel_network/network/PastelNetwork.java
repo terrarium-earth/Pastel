@@ -2,7 +2,6 @@ package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
 import de.dafuqs.spectrum.helpers.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.util.math.*;
@@ -308,7 +307,7 @@ public class PastelNetwork {
     }
 	
 	private static int getColor(UUID uuid) {
-        return ColorHelper.getRandomColor(uuid.hashCode());
+        return SpectrumColorHelper.getRandomColor(uuid.hashCode());
     }
 
     @Override

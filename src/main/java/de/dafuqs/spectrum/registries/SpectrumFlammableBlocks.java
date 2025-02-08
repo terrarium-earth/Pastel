@@ -13,7 +13,7 @@ public class SpectrumFlammableBlocks {
 		// ignite odds, burn odds
 		FlammableBlockRegistry.getDefaultInstance().add(SpectrumBlocks.CLOVER, 60, 100);
 		
-		for (DyeColor dyeColor : ColorHelper.VANILLA_DYE_COLORS) {
+		for (DyeColor dyeColor : SpectrumColorHelper.VANILLA_DYE_COLORS) {
 			FlammableBlockRegistry.getDefaultInstance().add(ColoredLogBlock.byColor(dyeColor), 5, 5);
 			FlammableBlockRegistry.getDefaultInstance().add(ColoredWoodBlock.byColor(dyeColor), 5, 5);
 			FlammableBlockRegistry.getDefaultInstance().add(ColoredLeavesBlock.byColor(dyeColor), 30, 60);

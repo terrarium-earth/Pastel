@@ -107,48 +107,48 @@ public interface ShootingStar {
 				case GLISTERING -> {
 					int r = random.nextInt(5);
 					if (r == 0) {
-						return ColorHelper.getRGBVec(DyeColor.YELLOW);
+						return SpectrumColorHelper.getRGBVec(DyeColor.YELLOW);
 					} else if (r == 1) {
-						return ColorHelper.getRGBVec(DyeColor.WHITE);
+						return SpectrumColorHelper.getRGBVec(DyeColor.WHITE);
 					} else if (r == 2) {
-						return ColorHelper.getRGBVec(DyeColor.ORANGE);
+						return SpectrumColorHelper.getRGBVec(DyeColor.ORANGE);
 					} else if (r == 3) {
-						return ColorHelper.getRGBVec(DyeColor.LIME);
+						return SpectrumColorHelper.getRGBVec(DyeColor.LIME);
 					} else {
-						return ColorHelper.getRGBVec(DyeColor.BLUE);
+						return SpectrumColorHelper.getRGBVec(DyeColor.BLUE);
 					}
 				}
 				case COLORFUL -> {
-					return ColorHelper.getRGBVec(ColorHelper.VANILLA_DYE_COLORS.get(random.nextInt(ColorHelper.VANILLA_DYE_COLORS.size())));
+					return SpectrumColorHelper.getRGBVec(SpectrumColorHelper.VANILLA_DYE_COLORS.get(random.nextInt(SpectrumColorHelper.VANILLA_DYE_COLORS.size())));
 				}
 				case FIERY -> {
 					int r = random.nextInt(2);
 					if (r == 0) {
-						return ColorHelper.getRGBVec(DyeColor.ORANGE);
+						return SpectrumColorHelper.getRGBVec(DyeColor.ORANGE);
 					} else {
-						return ColorHelper.getRGBVec(DyeColor.RED);
+						return SpectrumColorHelper.getRGBVec(DyeColor.RED);
 					}
 				}
 				case PRISTINE -> {
 					int r = random.nextInt(3);
 					if (r == 0) {
-						return ColorHelper.getRGBVec(DyeColor.BLUE);
+						return SpectrumColorHelper.getRGBVec(DyeColor.BLUE);
 					} else if (r == 1) {
-						return ColorHelper.getRGBVec(DyeColor.LIGHT_BLUE);
+						return SpectrumColorHelper.getRGBVec(DyeColor.LIGHT_BLUE);
 					} else {
-						return ColorHelper.getRGBVec(DyeColor.CYAN);
+						return SpectrumColorHelper.getRGBVec(DyeColor.CYAN);
 					}
 				}
 				default -> {
 					int r = random.nextInt(4);
 					if (r == 0) {
-						return ColorHelper.getRGBVec(DyeColor.CYAN);
+						return SpectrumColorHelper.getRGBVec(DyeColor.CYAN);
 					} else if (r == 1) {
-						return ColorHelper.getRGBVec(DyeColor.MAGENTA);
+						return SpectrumColorHelper.getRGBVec(DyeColor.MAGENTA);
 					} else if (r == 2) {
-						return ColorHelper.getRGBVec(DyeColor.WHITE);
+						return SpectrumColorHelper.getRGBVec(DyeColor.WHITE);
 					} else {
-						return ColorHelper.getRGBVec(DyeColor.YELLOW);
+						return SpectrumColorHelper.getRGBVec(DyeColor.YELLOW);
 					}
 				}
 			}

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.entity.render;
 
 import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.*;
@@ -33,8 +33,8 @@ public class LightMineEntityRenderer extends EntityRenderer<LightMineEntity> {
 		var consumer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucentCull(getTexture(mine)));
 		var matrix = matrices.peek();
 		var positions = matrix.getPositionMatrix();
-	
-		Vector3f color = ColorHelper.colorIntToVec(mine.getColor());
+		
+		Vector3f color = SpectrumColorHelper.colorIntToVec(mine.getColor());
 		consumer.vertex(positions, 0, 0, 0).color(color.x(), color.y(), color.z(), alpha).texture(0, 1).overlay(OverlayTexture.DEFAULT_UV).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(matrix, 0, 1, 0);
 		consumer.vertex(positions, 1, 0, 0).color(color.x(), color.y(), color.z(), alpha).texture(1, 1).overlay(OverlayTexture.DEFAULT_UV).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(matrix, 0, 1, 0);
 		consumer.vertex(positions, 1, 1, 0).color(color.x(), color.y(), color.z(), alpha).texture(1, 0).overlay(OverlayTexture.DEFAULT_UV).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(matrix, 0, 1, 0);

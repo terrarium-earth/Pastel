@@ -20,7 +20,7 @@ public class SpectrumStrippableBlocks {
 		StrippableBlockRegistry.register(SpectrumBlocks.WEEPING_GALA_LOG, SpectrumBlocks.STRIPPED_WEEPING_GALA_LOG);
 		StrippableBlockRegistry.register(SpectrumBlocks.WEEPING_GALA_WOOD, SpectrumBlocks.STRIPPED_WEEPING_GALA_WOOD);
 		
-		for (DyeColor dyeColor : ColorHelper.VANILLA_DYE_COLORS) {
+		for (DyeColor dyeColor : SpectrumColorHelper.VANILLA_DYE_COLORS) {
 			StrippableBlockRegistry.register(ColoredLogBlock.byColor(dyeColor), ColoredStrippedLogBlock.byColor(dyeColor));
 			StrippableBlockRegistry.register(ColoredWoodBlock.byColor(dyeColor), ColoredStrippedWoodBlock.byColor(dyeColor));
 		}

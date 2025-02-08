@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.blocks.memory.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.particle.effect.*;
@@ -45,8 +45,8 @@ public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1,
 		MinecraftClient client = context.client();
 		Random random = client.world.random;
 		
-		Vector3f colorVec1 = de.dafuqs.spectrum.helpers.ColorHelper.colorIntToVec(payload.eggColor1);
-		Vector3f colorVec2 = ColorHelper.colorIntToVec(payload.eggColor1);
+		Vector3f colorVec1 = SpectrumColorHelper.colorIntToVec(payload.eggColor1);
+		Vector3f colorVec2 = SpectrumColorHelper.colorIntToVec(payload.eggColor1);
 		
 		BlockPos pos = payload.pos;
 		for (int i = 0; i < payload.amount; i++) {

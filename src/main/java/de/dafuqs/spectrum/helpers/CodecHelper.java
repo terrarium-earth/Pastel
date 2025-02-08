@@ -24,7 +24,7 @@ public class CodecHelper {
 			frac -> new com.mojang.datafixers.util.Pair<>(frac.getNumerator(), frac.getDenominator())
 	);
 	
-	public static Codec<Identifier> SPECTRUM_IDENTIFIER = Codec.STRING.xmap(SpectrumCommon::ofSpectrum, Identifier::toString);
+	public static Codec<Identifier> SPECTRUM_DEFAULTED_IDENTIFIER = Codec.STRING.xmap(SpectrumCommon::ofSpectrum, Identifier::toString);
 	
 	public static MapCodec<RegistryWrapper.WrapperLookup> LOOKUP = new MapCodec<>() {
 		@Override

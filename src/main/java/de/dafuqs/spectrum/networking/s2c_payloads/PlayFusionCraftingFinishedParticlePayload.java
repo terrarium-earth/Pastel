@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.api.color.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.particle.effect.*;
@@ -45,7 +45,7 @@ public record PlayFusionCraftingFinishedParticlePayload(BlockPos pos, DyeColor c
 		BlockPos pos = payload.pos;
 		Vec3d sourcePos = new Vec3d(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
 		
-		Vector3f color = ColorHelper.getRGBVec(payload.color);
+		Vector3f color = SpectrumColorHelper.getRGBVec(payload.color);
 		float velocityModifier = 0.25F;
 		for (Vec3d velocity : VectorPattern.SIXTEEN.getVectors()) {
 			client.world.addParticle(

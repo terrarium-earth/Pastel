@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
@@ -29,7 +29,7 @@ public interface ColorableBlock {
     }
 
     default boolean tryColorUsingStackInHand(ItemStack handStack, World world, BlockPos pos, PlayerEntity player, Hand hand) {
-        Optional<DyeColor> itemInHandColor = ColorHelper.getDyeColorOfItemStack(handStack);
+		Optional<DyeColor> itemInHandColor = SpectrumColorHelper.getDyeColorOfItemStack(handStack);
         if (itemInHandColor.isPresent()) {
             if (color(world, pos, itemInHandColor.get())) {
                 if(!player.isCreative()) {

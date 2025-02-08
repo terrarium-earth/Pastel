@@ -57,7 +57,7 @@ public class SpectrumCompostableBlocks {
 		CompostingChanceRegistry.INSTANCE.add(SpectrumBlocks.CHESTNUT_NOXCAP_BLOCK, HIGHER);
 		CompostingChanceRegistry.INSTANCE.add(SpectrumBlocks.CHESTNUT_NOXCAP_GILLS, HIGHER);
 		
-		for (DyeColor dyeColor : ColorHelper.VANILLA_DYE_COLORS) {
+		for (DyeColor dyeColor : SpectrumColorHelper.VANILLA_DYE_COLORS) {
 			CompostingChanceRegistry.INSTANCE.add(ColoredSaplingBlock.byColor(dyeColor), LOW);
 			CompostingChanceRegistry.INSTANCE.add(ColoredLeavesBlock.byColor(dyeColor), LOW);
 		}

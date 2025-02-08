@@ -65,7 +65,7 @@ public class NightfallsBladeItem extends ToolItem implements InkPoweredPotionFil
 					if(InkPowered.tryDrainEnergy(player, instance.getInkCost().color(), instance.getInkCost().cost())) {
 						World world = attacker.getWorld();
 						if (world.isClient) {
-							world.addParticle(new DynamicParticleEffect(ParticleTypes.EFFECT, 0.1F, ColorHelper.colorIntToVec(instance.getStatusEffectInstance().getEffectType().value().getColor()), 0.5F, 120, true, true),
+							world.addParticle(new DynamicParticleEffect(ParticleTypes.EFFECT, 0.1F, SpectrumColorHelper.colorIntToVec(instance.getStatusEffectInstance().getEffectType().value().getColor()), 0.5F, 120, true, true),
 									target.getParticleX(0.5D), target.getBodyY(0.5D), target.getParticleZ(0.5D),
 									world.random.nextFloat() - 0.5, world.random.nextFloat() - 0.5, world.random.nextFloat() - 0.5
 							);
