@@ -26,6 +26,7 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
 	public static final BookAddress GUIDEBOOK_ADDRESS = BookAddress.defaultFor(GUIDEBOOK_ID);
 	
 	public static final Identifier CUISINE_CATEGORY_ID = SpectrumCommon.locate("cuisine");
+	public static final Identifier DIMENSION_CATEGORY_ID = SpectrumCommon.locate("dimension");
 	
 	
 	public static BookAddress addressOf(Identifier category, Identifier entryId) {

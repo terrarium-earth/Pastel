@@ -11,7 +11,7 @@
   "hide_while_locked": true,
   "parents": [
     {
-      "entry": "spectrum:dimension/lore/poisoners_handbook"
+      "entry": "spectrum:dimension/poisoners_handbook"
     }
   ],
   "background_u_index": 0,
