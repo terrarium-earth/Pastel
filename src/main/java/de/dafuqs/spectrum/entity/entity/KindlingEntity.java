@@ -168,7 +168,7 @@ public class KindlingEntity extends AbstractHorseEntity implements RangedAttackM
 		super.readCustomDataFromNbt(nbt);
 		this.readAngerFromNbt(this.getWorld(), nbt);
 		
-		KindlingVariant variant = SpectrumRegistries.KINDLING_VARIANT.get(nbt.getString("variant"));
+		KindlingVariant variant = SpectrumRegistries.KINDLING_VARIANT.get(Identifier.tryParse(nbt.getString("variant")));
 		this.setKindlingVariant(variant == null ? KindlingVariant.DEFAULT : variant);
 
 		setChillTime(nbt.getInt("chillTime"));

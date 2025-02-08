@@ -379,13 +379,13 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 			this.itemCountUnderway = nbt.getLong("ItemCountUnderway");
 		}
 		if (nbt.contains("OuterRing")) {
-			outerRing = Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(nbt.getString("OuterRing")));
+			outerRing = Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(Identifier.tryParse(nbt.getString("OuterRing"))));
 		}
 		if (nbt.contains("InnerRing")) {
-			innerRing = Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(nbt.getString("InnerRing")));
+			innerRing = Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(Identifier.tryParse(nbt.getString("InnerRing"))));
 		}
 		if (nbt.contains("RedstoneRing")) {
-			redstoneRing = Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(nbt.getString("RedstoneRing")));
+			redstoneRing = Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(Identifier.tryParse(nbt.getString("RedstoneRing"))));
 		}
 		if (nbt.contains("ConnectionMemory")) {
 			connectionMemory = Arrays.stream(nbt.getLongArray("ConnectionMemory")).mapToObj(BlockPos::fromLong).collect(Collectors.toSet());

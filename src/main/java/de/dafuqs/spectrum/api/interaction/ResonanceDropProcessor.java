@@ -26,7 +26,7 @@ public abstract class ResonanceDropProcessor {
 	public abstract boolean process(BlockState state, BlockEntity blockEntity, List<ItemStack> droppedStacks);
 	
 	public static void applyResonance(DynamicRegistryManager drm, BlockState minedState, BlockEntity blockEntity, List<ItemStack> droppedStacks) {
-		drm.get(SpectrumRegistries.RESONANCE_DROPS_KEY).forEach(entry -> entry.process(minedState, blockEntity, droppedStacks));
+		drm.get(SpectrumRegistryKeys.RESONANCE_DROPS).forEach(entry -> entry.process(minedState, blockEntity, droppedStacks));
 	}
 	
 	public abstract MapCodec<? extends ResonanceDropProcessor> getCodec();
