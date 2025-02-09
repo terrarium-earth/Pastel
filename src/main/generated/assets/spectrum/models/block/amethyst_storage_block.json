@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "bottom": "spectrum:block/amethyst_storage_block_bottom",
-    "side": "spectrum:block/amethyst_storage_block",
+    "side": "spectrum:block/amethyst_storage_block_side",
     "top": "spectrum:block/amethyst_storage_block_top"
   }
 }

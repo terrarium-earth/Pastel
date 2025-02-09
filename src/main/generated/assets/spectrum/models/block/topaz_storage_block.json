@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "bottom": "spectrum:block/topaz_storage_block_bottom",
-    "side": "spectrum:block/topaz_storage_block",
+    "side": "spectrum:block/topaz_storage_block_side",
     "top": "spectrum:block/topaz_storage_block_top"
   }
 }

@@ -169,11 +169,11 @@ public class SpectrumBlocks {
 	public static final Block BUDDING_MOONSTONE = new SpectrumBuddingBlock(gemstoneBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_MOONSTONE_BUD, MEDIUM_MOONSTONE_BUD, LARGE_MOONSTONE_BUD, MOONSTONE_CLUSTER, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME);
 	public static final Block MOONSTONE_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK), SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME);
 	
-	public static final Block TOPAZ_POWDER_BLOCK = new ColoredFallingBlock(new ColorCode(DyeColor.CYAN.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.CYAN));
-	public static final Block AMETHYST_POWDER_BLOCK = new ColoredFallingBlock(new ColorCode(DyeColor.MAGENTA.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.MAGENTA));
-	public static final Block CITRINE_POWDER_BLOCK = new ColoredFallingBlock(new ColorCode(DyeColor.YELLOW.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.YELLOW));
-	public static final Block ONYX_POWDER_BLOCK = new ColoredFallingBlock(new ColorCode(DyeColor.BLACK.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.BLACK));
-	public static final Block MOONSTONE_POWDER_BLOCK = new ColoredFallingBlock(new ColorCode(DyeColor.WHITE.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.WHITE));
+	public static final Block TOPAZ_POWDER_BLOCK = registerSimple("topaz_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.CYAN.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.CYAN)), DyeColor.CYAN);
+	public static final Block AMETHYST_POWDER_BLOCK = registerSimple("amethyst_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.MAGENTA.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.MAGENTA)), DyeColor.MAGENTA);
+	public static final Block CITRINE_POWDER_BLOCK = registerSimple("citrine_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.YELLOW.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.YELLOW)), DyeColor.YELLOW);
+	public static final Block ONYX_POWDER_BLOCK = registerSimple("onyx_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.BLACK.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.BLACK)), DyeColor.BLACK);
+	public static final Block MOONSTONE_POWDER_BLOCK = registerSimple("moonstone_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.WHITE.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.WHITE)), DyeColor.WHITE);
 	
 	public static final Block VEGETAL_BLOCK = new Block(settings(MapColor.PALE_GREEN, BlockSoundGroup.FUNGUS, 2.0F).nonOpaque());
 	public static final Block NEOLITH_BLOCK = new SpectrumFacingBlock(settings(MapColor.PURPLE, BlockSoundGroup.COPPER, 6.0F).requiresTool().instrument(NoteBlockInstrument.BASEDRUM).luminance(state -> 13).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
@@ -346,10 +346,10 @@ public class SpectrumBlocks {
 	public static final Block PLANED_BASALT_WALL = registerBlockWithItemWithoutModel("planed_basalt_wall", new WallBlock(AbstractBlock.Settings.copy(PLANED_BASALT)), DyeColor.BROWN);
 	public static final BlockFamily PLANED_BASALT_FAMILY = registerBlockFamily(PLANED_BASALT, builder -> builder.stairs(PLANED_BASALT_STAIRS).slab(PLANED_BASALT_SLAB).wall(PLANED_BASALT_WALL));
 	
-	public static final Block TOPAZ_CHISELED_BASALT = registerSingleton("topaz_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 6)), TexturedModel.CUBE_ALL, DyeColor.CYAN);
-	public static final Block AMETHYST_CHISELED_BASALT = registerSingleton("amethyst_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 5)), TexturedModel.CUBE_ALL, DyeColor.MAGENTA);
-	public static final Block CITRINE_CHISELED_BASALT = registerSingleton("citrine_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 7)), TexturedModel.CUBE_ALL, DyeColor.YELLOW);
-	public static final Block ONYX_CHISELED_BASALT = registerSingleton("onyx_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 3)), TexturedModel.CUBE_ALL, DyeColor.BLACK);
+	public static final Block TOPAZ_CHISELED_BASALT = registerSimple("topaz_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 6)), DyeColor.CYAN);
+	public static final Block AMETHYST_CHISELED_BASALT = registerSimple("amethyst_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 5)), DyeColor.MAGENTA);
+	public static final Block CITRINE_CHISELED_BASALT = registerSimple("citrine_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 7)), DyeColor.YELLOW);
+	public static final Block ONYX_CHISELED_BASALT = registerSimple("onyx_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 3)), DyeColor.BLACK);
 	public static final Block MOONSTONE_CHISELED_BASALT = registerMoonstoneChiseled("moonstone_chiseled_basalt", SpectrumTextures.BASALT_CAP, new SpectrumLineFacingBlock(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 12)), DyeColor.WHITE);
 	
 	public static final Block CALCITE_STAIRS = registerBlockWithItemWithoutModel("calcite_stairs", new StairsBlock(Blocks.CALCITE.getDefaultState(), AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
@@ -390,10 +390,10 @@ public class SpectrumBlocks {
 	public static final Block PLANED_CALCITE_WALL = registerBlockWithItemWithoutModel("planed_calcite_wall", new WallBlock(AbstractBlock.Settings.copy(PLANED_CALCITE)), DyeColor.BROWN);
 	public static final BlockFamily PLANED_CALCITE_FAMILY = registerBlockFamily(PLANED_CALCITE, builder -> builder.stairs(PLANED_CALCITE_STAIRS).slab(PLANED_CALCITE_SLAB).wall(PLANED_CALCITE_WALL));
 	
-	public static final Block TOPAZ_CHISELED_CALCITE = registerSingleton("topaz_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 6)), TexturedModel.CUBE_ALL, DyeColor.CYAN);
-	public static final Block AMETHYST_CHISELED_CALCITE = registerSingleton("amethyst_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 5)), TexturedModel.CUBE_ALL, DyeColor.MAGENTA);
-	public static final Block CITRINE_CHISELED_CALCITE = registerSingleton("citrine_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 7)), TexturedModel.CUBE_ALL, DyeColor.YELLOW);
-	public static final Block ONYX_CHISELED_CALCITE = registerSingleton("onyx_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 3)), TexturedModel.CUBE_ALL, DyeColor.BLACK);
+	public static final Block TOPAZ_CHISELED_CALCITE = registerSimple("topaz_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 6)), DyeColor.CYAN);
+	public static final Block AMETHYST_CHISELED_CALCITE = registerSimple("amethyst_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 5)), DyeColor.MAGENTA);
+	public static final Block CITRINE_CHISELED_CALCITE = registerSimple("citrine_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 7)), DyeColor.YELLOW);
+	public static final Block ONYX_CHISELED_CALCITE = registerSimple("onyx_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 3)), DyeColor.BLACK);
 	public static final Block MOONSTONE_CHISELED_CALCITE = registerMoonstoneChiseled("moonstone_chiseled_calcite", SpectrumTextures.CALCITE_CAP, new SpectrumLineFacingBlock(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 12)), DyeColor.WHITE);
 	
 	private static Settings gemstoneLight(AbstractBlock block) {
@@ -1139,33 +1139,33 @@ public class SpectrumBlocks {
 	public static final Block FOUR_LEAF_CLOVER = new FourLeafCloverBlock(AbstractBlock.Settings.copy(Blocks.SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ));
 	
 	private static final UniformIntProvider gemOreExperienceProvider = UniformIntProvider.create(1, 4);
-	public static final Block TOPAZ_ORE = new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.CYAN, locate("hidden/collect_shards/topaz"), Blocks.STONE.getDefaultState());
-	public static final Block AMETHYST_ORE = new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.MAGENTA, locate("hidden/collect_shards/amethyst"), Blocks.STONE.getDefaultState());
-	public static final Block CITRINE_ORE = new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.YELLOW, locate("hidden/collect_shards/citrine"), Blocks.STONE.getDefaultState());
-	public static final Block ONYX_ORE = new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.BLACK, locate("create_onyx_shard"), Blocks.STONE.getDefaultState());
-	public static final Block MOONSTONE_ORE = new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.WHITE, locate("lategame/collect_moonstone"), Blocks.STONE.getDefaultState());
+	public static final Block TOPAZ_ORE = registerSimple("topaz_ore", new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.CYAN, SpectrumAdvancements.COLLECT_TOPAZ, Blocks.STONE.getDefaultState()), DyeColor.CYAN);
+	public static final Block AMETHYST_ORE = registerSimple("amethyst_ore", new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.MAGENTA, SpectrumAdvancements.COLLECT_AMETHYST, Blocks.STONE.getDefaultState()), DyeColor.MAGENTA);
+	public static final Block CITRINE_ORE = registerSimple("citrine_ore", new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.YELLOW, SpectrumAdvancements.COLLECT_CITRINE, Blocks.STONE.getDefaultState()), DyeColor.YELLOW);
+	public static final Block ONYX_ORE = registerSimple("onyx_ore", new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.BLACK, SpectrumAdvancements.CREATE_ONYX, Blocks.STONE.getDefaultState()), DyeColor.BLACK);
+	public static final Block MOONSTONE_ORE = registerSimple("moonstone_ore", new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.WHITE, SpectrumAdvancements.COLLECT_MOONSTONE, Blocks.STONE.getDefaultState()), DyeColor.WHITE);
 	
-	public static final Block DEEPSLATE_TOPAZ_ORE = new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.CYAN, locate("hidden/collect_shards/topaz"), Blocks.DEEPSLATE.getDefaultState());
-	public static final Block DEEPSLATE_AMETHYST_ORE = new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.MAGENTA, locate("hidden/collect_shards/amethyst"), Blocks.DEEPSLATE.getDefaultState());
-	public static final Block DEEPSLATE_CITRINE_ORE = new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.YELLOW, locate("hidden/collect_shards/citrine"), Blocks.DEEPSLATE.getDefaultState());
-	public static final Block DEEPSLATE_ONYX_ORE = new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.BLACK, locate("create_onyx_shard"), Blocks.DEEPSLATE.getDefaultState());
-	public static final Block DEEPSLATE_MOONSTONE_ORE = new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.WHITE, locate("lategame/collect_moonstone"), Blocks.DEEPSLATE.getDefaultState());
+	public static final Block DEEPSLATE_TOPAZ_ORE = registerSimple("deepslate_topaz_ore", new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.CYAN, SpectrumAdvancements.COLLECT_TOPAZ, Blocks.DEEPSLATE.getDefaultState()), DyeColor.CYAN);
+	public static final Block DEEPSLATE_AMETHYST_ORE = registerSimple("deepslate_amethyst_ore", new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.MAGENTA, SpectrumAdvancements.COLLECT_AMETHYST, Blocks.DEEPSLATE.getDefaultState()), DyeColor.MAGENTA);
+	public static final Block DEEPSLATE_CITRINE_ORE = registerSimple("deepslate_citrine_ore", new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.YELLOW, SpectrumAdvancements.COLLECT_CITRINE, Blocks.DEEPSLATE.getDefaultState()), DyeColor.YELLOW);
+	public static final Block DEEPSLATE_ONYX_ORE = registerSimple("deepslate_onyx_ore", new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.BLACK, SpectrumAdvancements.CREATE_ONYX, Blocks.DEEPSLATE.getDefaultState()), DyeColor.BLACK);
+	public static final Block DEEPSLATE_MOONSTONE_ORE = registerSimple("deepslate_moonstone_ore", new GemstoneOreBlock(gemOreExperienceProvider, deepslateOre(), BuiltinGemstoneColor.WHITE, SpectrumAdvancements.COLLECT_MOONSTONE, Blocks.DEEPSLATE.getDefaultState()), DyeColor.WHITE);
 	
-	public static final Block BLACKSLAG_TOPAZ_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.CYAN, locate("hidden/collect_shards/topaz"), SpectrumBlocks.BLACKSLAG.getDefaultState());
-	public static final Block BLACKSLAG_AMETHYST_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.MAGENTA, locate("hidden/collect_shards/amethyst"), SpectrumBlocks.BLACKSLAG.getDefaultState());
-	public static final Block BLACKSLAG_CITRINE_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.YELLOW, locate("hidden/collect_shards/citrine"), SpectrumBlocks.BLACKSLAG.getDefaultState());
-	public static final Block BLACKSLAG_ONYX_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.BLACK, locate("create_onyx_shard"), SpectrumBlocks.BLACKSLAG.getDefaultState());
-	public static final Block BLACKSLAG_MOONSTONE_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.WHITE, locate("lategame/collect_moonstone"), SpectrumBlocks.BLACKSLAG.getDefaultState());
+	public static final Block BLACKSLAG_TOPAZ_ORE = registerSingleton("blackslag_topaz_ore", new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.CYAN, SpectrumAdvancements.COLLECT_TOPAZ, SpectrumBlocks.BLACKSLAG.getDefaultState()), TexturedModel.END_FOR_TOP_CUBE_COLUMN, DyeColor.CYAN);
+	public static final Block BLACKSLAG_AMETHYST_ORE = registerSingleton("blackslag_amethyst_ore", new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.MAGENTA, SpectrumAdvancements.COLLECT_AMETHYST, SpectrumBlocks.BLACKSLAG.getDefaultState()), TexturedModel.END_FOR_TOP_CUBE_COLUMN, DyeColor.MAGENTA);
+	public static final Block BLACKSLAG_CITRINE_ORE = registerSingleton("blackslag_citrine_ore", new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.YELLOW, SpectrumAdvancements.COLLECT_CITRINE, SpectrumBlocks.BLACKSLAG.getDefaultState()), TexturedModel.END_FOR_TOP_CUBE_COLUMN, DyeColor.YELLOW);
+	public static final Block BLACKSLAG_ONYX_ORE = registerSingleton("blackslag_onyx_ore", new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.BLACK, SpectrumAdvancements.CREATE_ONYX, SpectrumBlocks.BLACKSLAG.getDefaultState()), TexturedModel.END_FOR_TOP_CUBE_COLUMN, DyeColor.BLACK);
+	public static final Block BLACKSLAG_MOONSTONE_ORE = registerSingleton("blackslag_moonstone_ore", new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.WHITE, SpectrumAdvancements.COLLECT_MOONSTONE, SpectrumBlocks.BLACKSLAG.getDefaultState()), TexturedModel.END_FOR_TOP_CUBE_COLUMN, DyeColor.WHITE);
 	
 	private static Settings gemStorageBlock(MapColor mapColor, BlockSoundGroup soundGroup) {
 		return settings(mapColor, soundGroup, 5.0F, 6.0F);
 	}
 	
-	public static final Block TOPAZ_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK));
-	public static final Block AMETHYST_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK));
-	public static final Block CITRINE_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK));
-	public static final Block ONYX_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK));
-	public static final Block MOONSTONE_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK));
+	public static final Block TOPAZ_STORAGE_BLOCK = registerSingleton("topaz_storage_block", new Block(gemStorageBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.CYAN);
+	public static final Block AMETHYST_STORAGE_BLOCK = registerSingleton("amethyst_storage_block", new Block(gemStorageBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.MAGENTA);
+	public static final Block CITRINE_STORAGE_BLOCK = registerSingleton("citrine_storage_block", new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.YELLOW);
+	public static final Block ONYX_STORAGE_BLOCK = registerSingleton("onyx_storage_block", new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.BLACK);
+	public static final Block MOONSTONE_STORAGE_BLOCK = registerSingleton("moonstone_storage_block", new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.WHITE);
 	//public static final Block SPECTRAL_SHARD_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME);
 	//public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK));
 	
@@ -1876,6 +1876,10 @@ public class SpectrumBlocks {
 		return block;
 	}
 	
+	public static <T extends Block> T registerSimple(String name, T block, DyeColor dyeColor) {
+		return registerSingleton(name, block, TexturedModel.CUBE_ALL, dyeColor);
+	}
+	
 	public static <T extends Block> T registerSingleton(String name, T block, TexturedModel.Factory factory, DyeColor dyeColor) {
 		registerBlockWithItemWithoutModel(name, block, dyeColor);
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(block, factory));
@@ -1929,7 +1933,6 @@ public class SpectrumBlocks {
 		
 		registerShootingStarBlocks(IS.of(1, Rarity.UNCOMMON));
 		
-		registerGemOreBlocks(IS.of());
 		registerOreBlocks(IS.of(), IS.of().fireproof());
 		registerOreStorageBlocks(IS.of(), IS.of().fireproof());
 		registerShimmerstoneLights(IS.of());
@@ -2333,18 +2336,7 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerOreStorageBlocks(Item.Settings settings, Item.Settings settingsFireproof) {
-		registerBlockWithItem("topaz_storage_block", TOPAZ_STORAGE_BLOCK, settings, DyeColor.CYAN);
-		registerBlockWithItem("amethyst_storage_block", AMETHYST_STORAGE_BLOCK, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("citrine_storage_block", CITRINE_STORAGE_BLOCK, settings, DyeColor.YELLOW);
-		registerBlockWithItem("onyx_storage_block", ONYX_STORAGE_BLOCK, settings, DyeColor.BLACK);
-		registerBlockWithItem("moonstone_storage_block", MOONSTONE_STORAGE_BLOCK, settings, DyeColor.WHITE);
 		//registerBlockWithItem("spectral_shard_storage_block", SPECTRAL_SHARD_STORAGE_BLOCK, IS.of(Rarity.RARE), DyeColor.WHITE);
-		
-		registerBlockWithItem("topaz_powder_block", TOPAZ_POWDER_BLOCK, settings, DyeColor.CYAN);
-		registerBlockWithItem("amethyst_powder_block", AMETHYST_POWDER_BLOCK, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("citrine_powder_block", CITRINE_POWDER_BLOCK, settings, DyeColor.YELLOW);
-		registerBlockWithItem("onyx_powder_block", ONYX_POWDER_BLOCK, settings, DyeColor.BLACK);
-		registerBlockWithItem("moonstone_powder_block", MOONSTONE_POWDER_BLOCK, settings, DyeColor.WHITE);
 		
 		registerBlockWithItem("vegetal_block", VEGETAL_BLOCK, IS.of(), DyeColor.GREEN);
 		registerBlockWithItem("neolith_block", NEOLITH_BLOCK, IS.of(), DyeColor.PINK);
@@ -2648,29 +2640,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("medium_moonstone_bud", MEDIUM_MOONSTONE_BUD, settings, DyeColor.WHITE);
 		registerBlockWithItem("large_moonstone_bud", LARGE_MOONSTONE_BUD, settings, DyeColor.WHITE);
 		registerBlockWithItem("moonstone_cluster", MOONSTONE_CLUSTER, settings, DyeColor.WHITE);
-	}
-	
-	private static void registerGemOreBlocks(Item.Settings settings) {
-		// stone ores
-		registerBlockWithItem("topaz_ore", TOPAZ_ORE, settings, DyeColor.CYAN);
-		registerBlockWithItem("amethyst_ore", AMETHYST_ORE, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("citrine_ore", CITRINE_ORE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("onyx_ore", ONYX_ORE, settings, DyeColor.BLACK);
-		registerBlockWithItem("moonstone_ore", MOONSTONE_ORE, settings, DyeColor.WHITE);
-		
-		// deepslate ores
-		registerBlockWithItem("deepslate_topaz_ore", DEEPSLATE_TOPAZ_ORE, settings, DyeColor.CYAN);
-		registerBlockWithItem("deepslate_amethyst_ore", DEEPSLATE_AMETHYST_ORE, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("deepslate_citrine_ore", DEEPSLATE_CITRINE_ORE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("deepslate_onyx_ore", DEEPSLATE_ONYX_ORE, settings, DyeColor.BLACK);
-		registerBlockWithItem("deepslate_moonstone_ore", DEEPSLATE_MOONSTONE_ORE, settings, DyeColor.WHITE);
-		
-		// blackslag ores
-		registerBlockWithItem("blackslag_topaz_ore", BLACKSLAG_TOPAZ_ORE, settings, DyeColor.CYAN);
-		registerBlockWithItem("blackslag_amethyst_ore", BLACKSLAG_AMETHYST_ORE, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("blackslag_citrine_ore", BLACKSLAG_CITRINE_ORE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("blackslag_onyx_ore", BLACKSLAG_ONYX_ORE, settings, DyeColor.BLACK);
-		registerBlockWithItem("blackslag_moonstone_ore", BLACKSLAG_MOONSTONE_ORE, settings, DyeColor.WHITE);
 	}
 	
 	private static void registerStructureBlocks(Item.Settings settings) {
