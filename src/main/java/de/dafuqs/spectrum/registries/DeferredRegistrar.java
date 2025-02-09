@@ -23,6 +23,26 @@ public class DeferredRegistrar {
 		deferred.add(callback);
 	}
 	
+	public static <T> Chain<T> chain(T value) {
+		return new Chain<T>(value);
+	}
+	
+	public record Chain<T>(T value) {
+		
+		public void defer(DeferredRegistrar registrar, Consumer<T> callback) {
+			registrar.defer(() -> callback.accept(value));
+		}
+		
+		public <D> void defer(DeferredRegistrar.Contextual<D> registrar, BiConsumer<D, T> callback) {
+			registrar.defer(ctx -> callback.accept(ctx, value));
+		}
+		
+		public <D> void defer(DeferredRegistrar.KeyedContextual<T, D> registrar, BiConsumer<T, D> callback) {
+			registrar.defer(value, callback);
+		}
+		
+	}
+	
 	public static class Contextual<D> {
 		
 		private ArrayList<Consumer<D>> deferred;
