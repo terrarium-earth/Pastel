@@ -56,6 +56,7 @@ import de.dafuqs.spectrum.entity.entity.*;
 import de.dafuqs.spectrum.items.conditional.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
+import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.*;
 import net.minecraft.block.*;
@@ -399,16 +400,16 @@ public class SpectrumBlocks {
 		return AbstractBlock.Settings.copy(block).luminance(s -> 15).nonOpaque().solid();
 	}
 	
-	public static final Block TOPAZ_BASALT_LIGHT = registerGemLight("topaz_basalt_light", new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.CYAN);
-	public static final Block AMETHYST_BASALT_LIGHT = registerGemLight("amethyst_basalt_light", new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.MAGENTA);
-	public static final Block CITRINE_BASALT_LIGHT = registerGemLight("citrine_basalt_light", new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.YELLOW);
-	public static final Block ONYX_BASALT_LIGHT = registerGemLight("onyx_basalt_light", new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.BLACK);
-	public static final Block MOONSTONE_BASALT_LIGHT = registerGemLight("moonstone_basalt_light", new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.WHITE);
-	public static final Block TOPAZ_CALCITE_LIGHT = registerGemLight("topaz_calcite_light", new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.CYAN);
-	public static final Block AMETHYST_CALCITE_LIGHT = registerGemLight("amethyst_calcite_light", new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.MAGENTA);
-	public static final Block CITRINE_CALCITE_LIGHT = registerGemLight("citrine_calcite_light", new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.YELLOW);
-	public static final Block ONYX_CALCITE_LIGHT = registerGemLight("onyx_calcite_light", new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.BLACK);
-	public static final Block MOONSTONE_CALCITE_LIGHT = registerGemLight("moonstone_calcite_light", new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.WHITE);
+	public static final Block TOPAZ_BASALT_LIGHT = registerGemLight("topaz_basalt_light", TOPAZ_BLOCK, SpectrumTextures.BASALT_CAP, new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.CYAN);
+	public static final Block AMETHYST_BASALT_LIGHT = registerGemLight("amethyst_basalt_light", AMETHYST_BLOCK, SpectrumTextures.BASALT_CAP, new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.MAGENTA);
+	public static final Block CITRINE_BASALT_LIGHT = registerGemLight("citrine_basalt_light", CITRINE_BLOCK, SpectrumTextures.BASALT_CAP, new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.YELLOW);
+	public static final Block ONYX_BASALT_LIGHT = registerGemLight("onyx_basalt_light", ONYX_BLOCK, SpectrumTextures.BASALT_CAP, new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.BLACK);
+	public static final Block MOONSTONE_BASALT_LIGHT = registerGemLight("moonstone_basalt_light", MOONSTONE_BLOCK, SpectrumTextures.BASALT_CAP, new PillarBlock(gemstoneLight(POLISHED_BASALT)), DyeColor.WHITE);
+	public static final Block TOPAZ_CALCITE_LIGHT = registerGemLight("topaz_calcite_light", TOPAZ_BLOCK, SpectrumTextures.CALCITE_CAP, new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.CYAN);
+	public static final Block AMETHYST_CALCITE_LIGHT = registerGemLight("amethyst_calcite_light", AMETHYST_BLOCK, SpectrumTextures.CALCITE_CAP, new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.MAGENTA);
+	public static final Block CITRINE_CALCITE_LIGHT = registerGemLight("citrine_calcite_light", CITRINE_BLOCK, SpectrumTextures.CALCITE_CAP, new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.YELLOW);
+	public static final Block ONYX_CALCITE_LIGHT = registerGemLight("onyx_calcite_light", ONYX_BLOCK, SpectrumTextures.CALCITE_CAP, new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.BLACK);
+	public static final Block MOONSTONE_CALCITE_LIGHT = registerGemLight("moonstone_calcite_light", MOONSTONE_BLOCK, SpectrumTextures.CALCITE_CAP, new PillarBlock(gemstoneLight(POLISHED_CALCITE)), DyeColor.WHITE);
 	
 	// GLASS
 	private static Settings gemstoneGlass(BlockSoundGroup soundGroup, MapColor mapColor) {
@@ -1787,10 +1788,18 @@ public class SpectrumBlocks {
 		return registerBlockWithItemWithoutModel(name, woodBlock, color);
 	}
 	
-	public static <T extends Block> T registerGemLight(String name, T block, DyeColor color) {
-//		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerAxisRotated(block, SpectrumModels.MULTILAYER_LIGHT));
-		registerTranslucentRenderLayerEntry(block);
-		return registerBlockWithItemWithoutModel(name, block, color);
+	public static <T extends Block> T registerGemLight(String name, Block gemBlock, Identifier topTexture, T gemLightBlock, DyeColor color) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			ctx.registerAxisRotated(gemLightBlock, TexturedModel.makeFactory(
+					block -> new TextureMap()
+							.put(TextureKey.TOP, topTexture)
+							.put(TextureKey.SIDE, TextureMap.getId(gemLightBlock))
+							.put(TextureKey.INSIDE, TextureMap.getId(gemBlock)),
+					new Model(Optional.of(SpectrumModels.MULTILAYER_LIGHT), Optional.empty(),
+							TextureKey.TOP, TextureKey.SIDE, TextureKey.INSIDE)));
+		});
+		registerTranslucentRenderLayerEntry(gemLightBlock);
+		return registerBlockWithItemWithoutModel(name, gemLightBlock, color);
 	}
 	
 	public static <T extends Block> T registerAxisRotated(String name, T block, TexturedModel.Factory factory, DyeColor color) {

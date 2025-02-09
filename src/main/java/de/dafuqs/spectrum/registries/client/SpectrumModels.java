@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.registries;
+package de.dafuqs.spectrum.registries.client;
 
 import de.dafuqs.spectrum.*;
 import net.minecraft.util.*;
