@@ -350,7 +350,7 @@ public class SpectrumBlocks {
 	public static final Block AMETHYST_CHISELED_BASALT = registerSingleton("amethyst_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 5)), TexturedModel.CUBE_ALL, DyeColor.MAGENTA);
 	public static final Block CITRINE_CHISELED_BASALT = registerSingleton("citrine_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 7)), TexturedModel.CUBE_ALL, DyeColor.YELLOW);
 	public static final Block ONYX_CHISELED_BASALT = registerSingleton("onyx_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 3)), TexturedModel.CUBE_ALL, DyeColor.BLACK);
-	public static final Block MOONSTONE_CHISELED_BASALT = new SpectrumLineFacingBlock(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 12));
+	public static final Block MOONSTONE_CHISELED_BASALT = registerMoonstoneChiseled("moonstone_chiseled_basalt", SpectrumTextures.BASALT_CAP, new SpectrumLineFacingBlock(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 12)), DyeColor.WHITE);
 	
 	public static final Block CALCITE_STAIRS = registerBlockWithItemWithoutModel("calcite_stairs", new StairsBlock(Blocks.CALCITE.getDefaultState(), AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
 	public static final Block CALCITE_SLAB = registerBlockWithItemWithoutModel("calcite_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
@@ -394,7 +394,7 @@ public class SpectrumBlocks {
 	public static final Block AMETHYST_CHISELED_CALCITE = registerSingleton("amethyst_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 5)), TexturedModel.CUBE_ALL, DyeColor.MAGENTA);
 	public static final Block CITRINE_CHISELED_CALCITE = registerSingleton("citrine_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 7)), TexturedModel.CUBE_ALL, DyeColor.YELLOW);
 	public static final Block ONYX_CHISELED_CALCITE = registerSingleton("onyx_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 3)), TexturedModel.CUBE_ALL, DyeColor.BLACK);
-	public static final Block MOONSTONE_CHISELED_CALCITE = new SpectrumLineFacingBlock(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 12));
+	public static final Block MOONSTONE_CHISELED_CALCITE = registerMoonstoneChiseled("moonstone_chiseled_calcite", SpectrumTextures.CALCITE_CAP, new SpectrumLineFacingBlock(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 12)), DyeColor.WHITE);
 	
 	private static Settings gemstoneLight(AbstractBlock block) {
 		return AbstractBlock.Settings.copy(block).luminance(s -> 15).nonOpaque().solid();
@@ -1788,18 +1788,35 @@ public class SpectrumBlocks {
 		return registerBlockWithItemWithoutModel(name, woodBlock, color);
 	}
 	
-	public static <T extends Block> T registerGemLight(String name, Block gemBlock, Identifier topTexture, T gemLightBlock, DyeColor color) {
+	public static <T extends Block> T registerGemLight(String name, Block gemBlock, Identifier capTexture, T gemLightBlock, DyeColor color) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			ctx.registerAxisRotated(gemLightBlock, TexturedModel.makeFactory(
 					block -> new TextureMap()
-							.put(TextureKey.TOP, topTexture)
+							.put(TextureKey.TOP, capTexture)
 							.put(TextureKey.SIDE, TextureMap.getId(gemLightBlock))
 							.put(TextureKey.INSIDE, TextureMap.getId(gemBlock)),
-					new Model(Optional.of(SpectrumModels.MULTILAYER_LIGHT), Optional.empty(),
-							TextureKey.TOP, TextureKey.SIDE, TextureKey.INSIDE)));
+					SpectrumModels.MULTILAYER_LIGHT));
 		});
 		registerTranslucentRenderLayerEntry(gemLightBlock);
 		return registerBlockWithItemWithoutModel(name, gemLightBlock, color);
+	}
+	
+	public static <T extends Block> T registerMoonstoneChiseled(String name, Identifier capTexture, T block, DyeColor color) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, capTexture).put(SpectrumTextureKeys.LINE, TextureMap.getId(block));
+			Identifier base = SpectrumModels.MOONSTONE_CHISELED.upload(block, textureMap, ctx.modelCollector);
+			Identifier down = SpectrumModels.MOONSTONE_CHISELED_DOWN.upload(block, "_down", textureMap, ctx.modelCollector);
+			ctx.registerParentedItemModel(block, down);
+			ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap
+					.create(FacingBlock.FACING)
+					.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(block, "_down")))
+					.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(block)))
+					.register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(block)).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+					.register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(block)).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+					.register(Direction.UP, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(block, "_down")).put(VariantSettings.X, VariantSettings.Rotation.R180))
+					.register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(block)).put(VariantSettings.Y, VariantSettings.Rotation.R180))));
+		});
+		return registerBlockWithItemWithoutModel(name, block, color);
 	}
 	
 	public static <T extends Block> T registerAxisRotated(String name, T block, TexturedModel.Factory factory, DyeColor color) {
@@ -1916,7 +1933,6 @@ public class SpectrumBlocks {
 		registerOreBlocks(IS.of(), IS.of().fireproof());
 		registerOreStorageBlocks(IS.of(), IS.of().fireproof());
 		registerShimmerstoneLights(IS.of());
-		registerRunes(IS.of());
 		registerGemstoneGlass(IS.of());
 		registerPlayerOnlyGlass(IS.of());
 		registerGemstoneChimes(IS.of());
@@ -2534,11 +2550,6 @@ public class SpectrumBlocks {
 		
 		registerBlockWithItem("dragonbone", DRAGONBONE, settings, DyeColor.GREEN);
 		registerBlockWithItem("cracked_dragonbone", CRACKED_DRAGONBONE, settings, DyeColor.GREEN);
-	}
-	
-	private static void registerRunes(Item.Settings settings) {
-		registerBlockWithItem("moonstone_chiseled_basalt", MOONSTONE_CHISELED_BASALT, settings, DyeColor.WHITE);
-		registerBlockWithItem("moonstone_chiseled_calcite", MOONSTONE_CHISELED_CALCITE, settings, DyeColor.WHITE);
 	}
 	
 	private static void registerGlowBlocks(Item.Settings settings) {
