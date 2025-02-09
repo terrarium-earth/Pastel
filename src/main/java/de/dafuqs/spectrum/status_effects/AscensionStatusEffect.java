@@ -41,6 +41,7 @@ public class AscensionStatusEffect extends SpectrumStatusEffect {
 		}
 	}
 	
+	// TODO: `onEntityRemoval()` triggers on entity removal, not status effect removal, making this divinity never kick in
 	@Override
 	public void onEntityRemoval(LivingEntity entity, int amplifier, Entity.RemovalReason reason) {
 		super.onEntityRemoval(entity, amplifier, reason);
