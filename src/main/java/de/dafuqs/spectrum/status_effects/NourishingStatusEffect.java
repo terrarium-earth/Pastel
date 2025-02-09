@@ -3,9 +3,9 @@ package de.dafuqs.spectrum.status_effects;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.entity.player.*;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 
-public class NourishingStatusEffect extends SpectrumStatusEffect {
+public class NourishingStatusEffect extends StatusEffect {
 	
 	public NourishingStatusEffect(StatusEffectCategory statusEffectCategory, int color) {
 		super(statusEffectCategory, color);

@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
 import net.minecraft.block.*;
+import net.minecraft.block.entity.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
@@ -27,6 +28,11 @@ public class SpectrumBedBlock extends BedBlock {
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
+	}
+	
+	@Override
+	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+		return null;
 	}
 
 	@Override

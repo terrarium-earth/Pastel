@@ -4,7 +4,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.entity.player.*;
 
-public class GravityStatusEffect extends SpectrumStatusEffect {
+public class GravityStatusEffect extends StatusEffect {
 	
 	protected final float gravityPerLevel;
 	

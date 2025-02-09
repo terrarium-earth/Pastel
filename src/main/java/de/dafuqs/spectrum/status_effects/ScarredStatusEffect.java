@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.status_effects;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 
-public class ScarredStatusEffect extends SpectrumStatusEffect {
+public class ScarredStatusEffect extends StatusEffect {
 	
 	public ScarredStatusEffect(StatusEffectCategory category, int color) {
 		super(category, color);

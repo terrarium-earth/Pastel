@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.effect.*;
-import net.minecraft.util.Identifier;
+import net.minecraft.util.*;
 
-public class LifeDrainStatusEffect extends SpectrumStatusEffect {
+public class LifeDrainStatusEffect extends StatusEffect {
 	
 	public static final Identifier ATTRIBUTE_ID = SpectrumCommon.locate("effect.life_drain");
 	
