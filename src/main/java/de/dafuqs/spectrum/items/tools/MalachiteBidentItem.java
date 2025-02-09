@@ -6,6 +6,7 @@ import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.client.gui.screen.*;
 import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
@@ -16,6 +17,7 @@ import net.minecraft.entity.projectile.*;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.screen.slot.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
@@ -226,4 +228,10 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, Ex
 			tooltip.add(Text.translatable("spectrum.tooltip.press_shift_for_more").formatted(Formatting.DARK_GRAY, Formatting.ITALIC));
 		}
 	}
+	
+	@Override
+	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.SHARPNESS) || enchantment.matchesKey(Enchantments.SMITE) || enchantment.matchesKey(Enchantments.BANE_OF_ARTHROPODS) || enchantment.matchesKey(Enchantments.LOOTING) || enchantment.matchesKey(SpectrumEnchantments.CLOVERS_FAVOR);
+	}
+	
 }

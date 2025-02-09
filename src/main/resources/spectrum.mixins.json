@@ -23,7 +23,6 @@
     "DamageSourceMixin",
     "EatBerriesGoalMixin",
     "EffectCommandMixin",
-    "EnchantmentMixin",
     "EnderEyeItemMixin",
     "EndermanEntityMixin",
     "EntityApplyFluidsMixin",

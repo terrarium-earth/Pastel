@@ -9,6 +9,7 @@ import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.items.tooltip.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.fabricmc.fabric.api.transfer.v1.item.*;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
 import net.fabricmc.fabric.api.transfer.v1.transaction.*;
@@ -30,6 +31,7 @@ import net.minecraft.item.tooltip.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.screen.slot.*;
 import net.minecraft.sound.*;
 import net.minecraft.stat.*;
@@ -480,6 +482,11 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 
 		}
 
+	}
+	
+	@Override
+	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.POWER) || enchantment.matchesKey(SpectrumEnchantments.VOIDING);
 	}
 
 }
