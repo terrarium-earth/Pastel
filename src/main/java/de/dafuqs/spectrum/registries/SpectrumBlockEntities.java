@@ -151,6 +151,8 @@ public class SpectrumBlockEntities {
 		Block[] skullBlocksArray = new Block[skullBlocksList.size()];
 		skullBlocksArray = skullBlocksList.toArray(skullBlocksArray);
 		SKULL = register("skull", SpectrumSkullBlockEntity::new, skullBlocksArray);
+		
+		BlockEntityType.BARREL.addSupportedBlock(SpectrumBlocks.WEEPING_GALA_BARREL);
 	}
 	
 	public static void registerClient() {
