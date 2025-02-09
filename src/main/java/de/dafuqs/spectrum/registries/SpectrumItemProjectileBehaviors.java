@@ -8,7 +8,7 @@ import de.dafuqs.spectrum.blocks.memory.*;
 import de.dafuqs.spectrum.entity.entity.*;
 import de.dafuqs.spectrum.items.magic_items.*;
 import de.dafuqs.spectrum.items.tools.*;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.fabricmc.fabric.api.tag.convention.v2.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
@@ -192,13 +192,13 @@ public class SpectrumItemProjectileBehaviors {
 		
 		ItemProjectileBehavior.register(new ItemProjectileBehavior.Default() {
 			public ItemStack onEntityHit(ItemProjectileEntity projectile, ItemStack stack, @Nullable Entity owner, EntityHitResult hitResult) {
-				PipeBombItem.arm(stack, projectile.getWorld(), projectile.getPos(), owner);
+				PipeBombItem.prime(stack, projectile.getWorld(), projectile.getPos(), owner);
 				return stack;
 			}
 			
 			@Override
 			public ItemStack onBlockHit(ItemProjectileEntity projectile, ItemStack stack, @Nullable Entity owner, BlockHitResult hitResult) {
-				PipeBombItem.arm(stack, projectile.getWorld(), projectile.getPos(), owner);
+				PipeBombItem.prime(stack, projectile.getWorld(), projectile.getPos(), owner);
 				return stack;
 			}
 			

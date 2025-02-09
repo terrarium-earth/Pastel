@@ -226,7 +226,7 @@ public class SpectrumModelPredicateProviders {
 	
 	private static void registerPipeBombPredicates(Item item) {
 		ModelPredicateProviderRegistry.register(item, Identifier.of("armed"), (stack, world, entity, seed) ->
-				PipeBombItem.isArmed(stack) ? 1.0F : 0.0F);
+				PipeBombItem.isPrimed(stack) ? 1.0F : 0.0F);
 	}
 	
 	private static void registerSpectrumFishingRodItemPredicates(Item fishingRodItem) {
