@@ -230,7 +230,7 @@ public class SpectrumParticleTypes {
 			public PacketCodec<? super RegistryByteBuf, T> getPacketCodec() {
 				return packetCodecGetter.apply(this);
 			}
-		}, type -> Registry.register(Registries.PARTICLE_TYPE, name, type));
+		}, type -> Registry.register(Registries.PARTICLE_TYPE, SpectrumCommon.locate(name), type));
 	}
 	
 	public static void register() {
