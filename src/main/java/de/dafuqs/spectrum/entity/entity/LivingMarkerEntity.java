@@ -2,11 +2,12 @@ package de.dafuqs.spectrum.entity.entity;
 
 import net.minecraft.block.piston.*;
 import net.minecraft.entity.*;
-import net.minecraft.entity.data.*;
+import net.minecraft.entity.attribute.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.network.listener.*;
 import net.minecraft.network.packet.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.server.network.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -25,11 +26,6 @@ public class LivingMarkerEntity extends LivingEntity {
 	}
 	
 	@Override
-	protected void initDataTracker(DataTracker.Builder builder) {
-	
-	}
-	
-	@Override
 	public void readCustomDataFromNbt(NbtCompound nbt) {
 	
 	}
@@ -37,6 +33,16 @@ public class LivingMarkerEntity extends LivingEntity {
 	@Override
 	public void writeCustomDataToNbt(NbtCompound nbt) {
 	
+	}
+	
+	@Override
+	public double getAttributeValue(RegistryEntry<EntityAttribute> attribute) {
+		return 0D;
+	}
+	
+	@Override
+	public double getAttributeBaseValue(RegistryEntry<EntityAttribute> attribute) {
+		return 0D;
 	}
 	
 	@Override
@@ -71,6 +77,14 @@ public class LivingMarkerEntity extends LivingEntity {
 	@Override
 	public void equipStack(EquipmentSlot slot, ItemStack stack) {
 	
+	}
+	
+	public void setPose(EntityPose pose) {
+	
+	}
+	
+	public EntityPose getPose() {
+		return EntityPose.STANDING;
 	}
 	
 	@Override
