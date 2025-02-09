@@ -12,7 +12,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.server.network.*;
 import net.minecraft.world.*;
 
-public class DivinityStatusEffect extends SpectrumStatusEffect {
+public class DivinityStatusEffect extends StatusEffect {
 	
 	public static final int CIRCLET_AMPLIFIER = 0;
 	public static final int ASCENSION_AMPLIFIER = 1;

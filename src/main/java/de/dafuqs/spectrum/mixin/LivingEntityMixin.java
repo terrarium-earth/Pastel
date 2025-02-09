@@ -488,6 +488,7 @@ public abstract class LivingEntityMixin {
 		return false;
 	}
 	
+	// WHAT THE FUCK
 	@Inject(method = "addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z", at = @At("HEAD"), cancellable = true)
 	private void spectrum$modifyOrCancelEffects(StatusEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
 		var entity = (LivingEntity) (Object) this;
@@ -675,14 +676,6 @@ public abstract class LivingEntityMixin {
 	private boolean shouldTiltScreen(LivingEntity entity, double deltaX, double deltaZ, DamageSource source, float amount) {
 		return !source.isIn(SpectrumDamageTypeTags.USES_SET_HEALTH);
 	}
-	
-	/*@Inject(method = "getEquipmentChanges()Ljava/util/Map;", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;applyAttributeModifiers(Lnet/minecraft/entity/EquipmentSlot;Ljava/util/function/BiConsumer;)V", ordinal = 0))
-	private void spectrum$getEquipmentChanges$removeConditionalEffects(CallbackInfoReturnable<Map<EquipmentSlot, ItemStack>> cir, @Local Map<EquipmentSlot, ItemStack> map, @Local EquipmentSlot equipmentSlot, @Local ItemStack itemStack) {
-		var livingEntity = (LivingEntity) (Object) this;
-		var builder = new ItemEnchantmentsComponent.Builder(ItemEnchantmentsComponent.DEFAULT);
-		EnchantmentHelperAccessor.invokeForEachEnchantment(itemStack, equipmentSlot, livingEntity, (enchantment, level, context) -> builder.set(enchantment, 0));
-		itemStack.set(DataComponentTypes.ENCHANTMENTS, builder.build());
-	}*/
 	
 	@Inject(method = "getEquipmentChanges()Ljava/util/Map;", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;applyAttributeModifiers(Lnet/minecraft/entity/EquipmentSlot;Ljava/util/function/BiConsumer;)V", ordinal = 1))
 	private void spectrum$getEquipmentChanges$applyConditionalEffects(CallbackInfoReturnable<Map<EquipmentSlot, ItemStack>> cir, @Local Map<EquipmentSlot, ItemStack> map, @Local Map.Entry<EquipmentSlot, ItemStack> entry, @Local EquipmentSlot equipmentSlot, @Local ItemStack itemStack) {

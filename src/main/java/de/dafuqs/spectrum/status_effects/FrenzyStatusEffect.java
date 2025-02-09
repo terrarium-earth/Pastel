@@ -8,7 +8,7 @@ import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.effect.*;
 import org.jetbrains.annotations.*;
 
-public class FrenzyStatusEffect extends SpectrumStatusEffect implements StackableStatusEffect {
+public class FrenzyStatusEffect extends StatusEffect implements StackableStatusEffect {
 	
 	public static final long REQUIRE_KILL_EVERY_X_TICKS = 200;
 	
