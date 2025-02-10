@@ -107,7 +107,7 @@ public class SpectrumCommon implements ModInitializer {
 		
 		// Register ALL the stuff
 		logInfo("Registering Status Effects...");
-		SpectrumStatusEffectTags.register();
+		SpectrumStatusEffects.register();
 		logInfo("Registering Advancement Criteria...");
 		SpectrumAdvancementCriteria.register();
 		logInfo("Registering Particle Types...");

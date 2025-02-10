@@ -8,7 +8,6 @@ import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.damage_type.*;
 import de.dafuqs.spectrum.api.entity.*;
 import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.api.status_effect.*;
 import de.dafuqs.spectrum.blocks.memory.*;
 import de.dafuqs.spectrum.cca.*;
 import de.dafuqs.spectrum.cca.azure_dike.*;
@@ -612,27 +611,7 @@ public abstract class LivingEntityMixin {
 	
 	@Inject(method = "addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
 	private void spectrum$addStatusEffect(StatusEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
-		RegistryEntry<StatusEffect> effectType = effect.getEffectType();
-		if (effectType instanceof StackableStatusEffect) {
-			if (!SpectrumStatusEffects.effectsAreGettingStacked) {
-				if (this.canHaveStatusEffect(effect)) {
-					StatusEffectInstance existingInstance = getStatusEffect(effect.getEffectType());
-					if (existingInstance != null) {
-						SpectrumStatusEffects.effectsAreGettingStacked = true;
-						
-						int newAmplifier = 1 + existingInstance.getAmplifier() + effect.getAmplifier();
-						StatusEffectInstance newInstance = new StatusEffectInstance(existingInstance.getEffectType(), existingInstance.getDuration(), newAmplifier, existingInstance.isAmbient(), existingInstance.shouldShowParticles(), existingInstance.shouldShowIcon());
-						removeStatusEffect(existingInstance.getEffectType());
-						addStatusEffect(newInstance);
-						cir.cancel();
-					}
-				} else {
-					SpectrumStatusEffects.effectsAreGettingStacked = false;
-				}
-			} else {
-				SpectrumStatusEffects.effectsAreGettingStacked = false;
-			}
-		} else if (EffectProlongingStatusEffect.canBeExtended(effect.getEffectType())) {
+		if (EffectProlongingStatusEffect.canBeExtended(effect.getEffectType())) {
 			StatusEffectInstance effectProlongingInstance = this.getStatusEffect(SpectrumStatusEffects.EFFECT_PROLONGING);
 			if (effectProlongingInstance != null) {
 				effect.spectrum$setDuration(EffectProlongingStatusEffect.getExtendedDuration(effect.getDuration(), effectProlongingInstance.getAmplifier()));

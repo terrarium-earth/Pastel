@@ -166,6 +166,10 @@ public class SpectrumStatusEffects {
 		return Registry.registerReference(Registries.STATUS_EFFECT, locate(id), entry);
 	}
 	
+	public static void register() {
+	
+	}
+	
 	public static boolean isStrongSleepEffect(StatusEffectInstance instance) {
 		return instance.getEffectType() == ETERNAL_SLUMBER || instance.getEffectType() == FATAL_SLUMBER;
 	}

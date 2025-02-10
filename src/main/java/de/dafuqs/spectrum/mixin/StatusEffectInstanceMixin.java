@@ -6,7 +6,9 @@ import com.llamalad7.mixinextras.sugar.ref.*;
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.injectors.*;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.effect.*;
+import net.minecraft.registry.entry.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
@@ -37,6 +39,21 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 				return result.map(output -> ops.set(output, "incurable", ops.createBoolean(inst.spectrum$isIncurable())));
 			}
 		});
+	}
+	
+	@Inject(method = "upgrade", at = @At("HEAD"), cancellable = true)
+	private void spectrum$stackableEffects(StatusEffectInstance newEffect, CallbackInfoReturnable<Boolean> cir) {
+		RegistryEntry<StatusEffect> effectType = newEffect.getEffectType();
+		if (effectType.isIn(SpectrumStatusEffectTags.STACKING)) {
+			SpectrumStatusEffects.effectsAreGettingStacked = true;
+			StatusEffectInstance existingInstance = (StatusEffectInstance) (Object) this;
+			
+			int newAmplifier = 1 + existingInstance.getAmplifier() + newEffect.getAmplifier();
+			existingInstance.spectrum$setAmplifier(newAmplifier);
+			
+			cir.setReturnValue(true);
+		}
+		SpectrumStatusEffects.effectsAreGettingStacked = false;
 	}
 	
 	@Inject(method = "upgrade", at = @At("RETURN"))

@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.api.status_effect.*;
 import de.dafuqs.spectrum.cca.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
@@ -8,7 +7,7 @@ import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.effect.*;
 import org.jetbrains.annotations.*;
 
-public class FrenzyStatusEffect extends StatusEffect implements StackableStatusEffect {
+public class FrenzyStatusEffect extends StatusEffect {
 	
 	public static final long REQUIRE_KILL_EVERY_X_TICKS = 200;
 	
@@ -16,6 +15,7 @@ public class FrenzyStatusEffect extends StatusEffect implements StackableStatusE
 		super(category, color);
 	}
 	
+	// prevent the resetting of frenzy-granted attributes
 	@Override
 	public void onApplied(LivingEntity entity, int amplifier) {
 		if (!SpectrumStatusEffects.effectsAreGettingStacked && !entity.hasStatusEffect(SpectrumStatusEffects.FRENZY)) {

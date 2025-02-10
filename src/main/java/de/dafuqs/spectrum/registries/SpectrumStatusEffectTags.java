@@ -9,17 +9,11 @@ import net.minecraft.registry.tag.*;
 
 public class SpectrumStatusEffectTags {
 	
-	public static TagKey<StatusEffect> INCURABLE;
-	public static TagKey<StatusEffect> NO_DURATION_EXTENSION;
-	public static TagKey<StatusEffect> SOPORIFIC;
-	public static TagKey<StatusEffect> NIGHT_ALCHEMY;
-
-	public static void register() {
-		INCURABLE = of("uncurable");
-		NO_DURATION_EXTENSION = of("no_duration_extension");
-		SOPORIFIC = of("soporific");
-		NIGHT_ALCHEMY = of("night_alchemy");
-	}
+	public static TagKey<StatusEffect> INCURABLE = of("uncurable");
+	public static TagKey<StatusEffect> NO_DURATION_EXTENSION = of("no_duration_extension");
+	public static TagKey<StatusEffect> SOPORIFIC = of("soporific");
+	public static TagKey<StatusEffect> NIGHT_ALCHEMY = of("night_alchemy");
+	public static TagKey<StatusEffect> STACKING = of("stacking");
 	
 	private static TagKey<StatusEffect> of(String id) {
 		return TagKey.of(RegistryKeys.STATUS_EFFECT, SpectrumCommon.locate(id));
