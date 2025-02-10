@@ -17,6 +17,7 @@ import de.dafuqs.spectrum.recipe.enchanter.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.sound.*;
 import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.advancement.criterion.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
@@ -251,7 +252,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 					if (centerStackIsGildedBook || virtualSlotStack.getItem() instanceof EnchantedBookItem) {
 						for (var entry : EnchantmentHelper.getEnchantments(virtualSlotStack).getEnchantmentEntries()) {
 							var enchantment = entry.getKey();
-							var isAcceptable = isEnchantableBookInCenter || enchantment.value().isAcceptableItem(centerStack);
+							var isAcceptable = isEnchantableBookInCenter || centerStack.canBeEnchantedWith(enchantment, EnchantingContext.ACCEPTABLE);
 							var isRedundant = existingEnchantments.stream().anyMatch(existing -> existing.getKey() == enchantment && existing.getIntValue() >= entry.getIntValue());
 							if (isAcceptable && !isRedundant) {
 								if (enchanterBlockEntity.canOwnerApplyConflictingEnchantments) {
@@ -382,7 +383,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	 * @return The required experience to enchant. -1 if the enchantment is not applicable
 	 */
 	public static int getRequiredExperienceToEnchantWithEnchantment(ItemStack stack, RegistryEntry<Enchantment> enchantment, int level, boolean allowEnchantmentConflicts) {
-		if (!enchantment.value().isAcceptableItem(stack) && !SpectrumEnchantmentHelper.isEnchantableBook(stack)) {
+		if (!stack.canBeEnchantedWith(enchantment, EnchantingContext.ACCEPTABLE) && !SpectrumEnchantmentHelper.isEnchantableBook(stack)) {
 			return -1;
 		}
 		
@@ -405,7 +406,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public static Integer getEnchantingPrice(ItemStack stack, RegistryEntry<Enchantment> enchantment, int level) {
 		int enchantability = Math.max(1, stack.getItem().getEnchantability()); // items like Elytras have an enchantability of 0, but can get unbreaking
-		if (enchantment.value().isAcceptableItem(stack) || SpectrumEnchantmentHelper.isEnchantableBook(stack)) {
+		if (stack.canBeEnchantedWith(enchantment, EnchantingContext.ACCEPTABLE) || SpectrumEnchantmentHelper.isEnchantableBook(stack)) {
 			return getRequiredExperienceForEnchantment(enchantability, enchantment, level);
 		}
 		return -1;

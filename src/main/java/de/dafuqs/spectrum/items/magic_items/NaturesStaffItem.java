@@ -10,6 +10,7 @@ import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.sound.*;
 import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.client.*;
 import net.minecraft.enchantment.*;
@@ -18,6 +19,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
@@ -318,6 +320,11 @@ public class NaturesStaffItem extends Item implements InkPowered {
 	@Override
 	public int getEnchantability() {
 		return 10;
+	}
+	
+	@Override
+	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.EFFICIENCY);
 	}
 	
 }

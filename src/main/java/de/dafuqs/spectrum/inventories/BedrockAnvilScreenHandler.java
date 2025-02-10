@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.inventories;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.helpers.*;
 import it.unimi.dsi.fastutil.objects.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
@@ -172,7 +173,7 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 						int newEnchantmentLevel = entry.getIntValue();
 						newEnchantmentLevel = t == newEnchantmentLevel ? newEnchantmentLevel + 1 : Math.max(newEnchantmentLevel, t);
 						Enchantment enchantment = registryEntry.value();
-						boolean itemStackIsAcceptableForStack = enchantment.isAcceptableItem(inputStack);
+						boolean itemStackIsAcceptableForStack = inputStack.canBeEnchantedWith(registryEntry, EnchantingContext.ACCEPTABLE);
 						if (this.player.getAbilities().creativeMode || inputStack.isOf(Items.ENCHANTED_BOOK)) {
 							itemStackIsAcceptableForStack = true;
 						}
@@ -248,7 +249,7 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 //			if (renameCost == enchantmentLevelCost && renameCost > 0 && this.levelCost.get() >= 40) {
 //				this.levelCost.set(39);
 //			}
-
+			
 			// We removed this - We allow costs greater than 40 levels
 //			if (this.levelCost.get() >= 40 && !this.player.getAbilities().creativeMode) {
 //				itemStack2 = ItemStack.EMPTY;
