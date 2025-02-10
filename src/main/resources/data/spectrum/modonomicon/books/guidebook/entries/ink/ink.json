@@ -27,6 +27,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.ink.page2.title",
       "anchor": "transfer",
       "images": [

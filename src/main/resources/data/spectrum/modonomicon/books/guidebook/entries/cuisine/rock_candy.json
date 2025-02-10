@@ -28,6 +28,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.rock_candy.page2.title",
       "images": [
         "spectrum:textures/gui/guidebook/rock_candy_growing.png"

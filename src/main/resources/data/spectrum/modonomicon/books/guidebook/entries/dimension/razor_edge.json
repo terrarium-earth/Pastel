@@ -22,6 +22,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "biome.spectrum.razor_edge",
       "images": [
         "spectrum:textures/gui/guidebook/dd_razor_edge.png"

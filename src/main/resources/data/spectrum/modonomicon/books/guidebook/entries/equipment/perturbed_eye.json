@@ -22,6 +22,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "images": [
         "spectrum:textures/gui/guidebook/end_portal.png"
       ],

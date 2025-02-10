@@ -21,6 +21,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "structure.spectrum.undergrowth_manor",
       "images": [
         "spectrum:textures/gui/guidebook/undergrowth_manor.png"
@@ -34,6 +35,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.undergrowth_manor.page4.title",
       "images": [
         "spectrum:textures/gui/guidebook/stargazer_manxi.png"

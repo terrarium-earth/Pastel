@@ -49,6 +49,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.pedestal_customisation.title",
       "images": [
         "spectrum:textures/gui/guidebook/spectrum_focus_customisation.png"

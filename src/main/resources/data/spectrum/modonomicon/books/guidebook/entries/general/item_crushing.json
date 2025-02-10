@@ -18,6 +18,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "container.spectrum.rei.anvil_crushing.title",
       "images": [
         "spectrum:textures/gui/guidebook/anvil_crushing.png"
