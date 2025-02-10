@@ -10,12 +10,11 @@ import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
 
-public record ChangeCompactingChestSettingsPayload(
-		AutoCompactingInventory.AutoCraftingMode mode) implements CustomPayload {
+public record ChangeCompactingChestSettingsPayload(AutoCraftingMode mode) implements CustomPayload {
 	
 	public static final CustomPayload.Id<ChangeCompactingChestSettingsPayload> ID = SpectrumC2SPackets.makeId("change_compacting_chest_settings");
 	public static final PacketCodec<PacketByteBuf, ChangeCompactingChestSettingsPayload> CODEC = PacketCodec.tuple(
-			PacketCodecHelper.enumOf(AutoCompactingInventory.AutoCraftingMode::values),
+			PacketCodecHelper.enumOf(AutoCraftingMode::values),
 			ChangeCompactingChestSettingsPayload::mode,
 			ChangeCompactingChestSettingsPayload::new
 	);

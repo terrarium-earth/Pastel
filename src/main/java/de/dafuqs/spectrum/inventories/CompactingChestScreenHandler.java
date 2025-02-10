@@ -99,8 +99,7 @@ public class CompactingChestScreenHandler extends ScreenHandler {
 	}
 	
 	public void toggleMode() {
-		var newOrdinal = (getCraftingMode().ordinal() + 1) % AutoCompactingInventory.AutoCraftingMode.values().length;
-		this.propertyDelegate.set(3, newOrdinal);
+		this.propertyDelegate.set(3, getCraftingMode().next().ordinal());
 		sendContentUpdates();
 	}
 	
@@ -128,8 +127,8 @@ public class CompactingChestScreenHandler extends ScreenHandler {
 		return this.compactingChestBlockEntity;
 	}
 	
-	public AutoCompactingInventory.AutoCraftingMode getCraftingMode() {
-		return AutoCompactingInventory.AutoCraftingMode.values()[propertyDelegate.get(3)];
+	public AutoCraftingMode getCraftingMode() {
+		return AutoCraftingMode.values()[propertyDelegate.get(3)];
 	}
 	
 }
