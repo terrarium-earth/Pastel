@@ -1,11 +1,10 @@
 package de.dafuqs.spectrum.blocks.chests;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.*;
-import net.minecraft.screen.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
@@ -43,9 +42,9 @@ public class BlackHoleChestBlock extends SpectrumChestBlock {
 	@Override
 	public void openScreen(World world, BlockPos pos, PlayerEntity player) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof BlackHoleChestBlockEntity) {
+		if (blockEntity instanceof BlackHoleChestBlockEntity blackHoleChestBlockEntity) {
 			if (!isChestBlocked(world, pos)) {
-				player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
+				player.openHandledScreen(blackHoleChestBlockEntity);
 			}
 		}
 	}
