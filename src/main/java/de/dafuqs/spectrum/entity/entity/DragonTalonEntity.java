@@ -12,7 +12,6 @@ import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
-import net.minecraft.entity.damage.*;
 import net.minecraft.entity.data.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.entity.projectile.*;
@@ -67,38 +66,35 @@ public class DragonTalonEntity extends BidentBaseEntity {
 	protected void onEntityHit(EntityHitResult entityHitResult) {
 		ItemStack stack = getTrackedStack();
 		Entity attacked = entityHitResult.getEntity();
-		Entity owner = this.getOwner();
-		
-		float damage = 2.0F;
-		
-		DamageSource damageSource = SpectrumDamageTypes.impaling(getWorld(), this, owner);
-		
-		if (getWorld() instanceof ServerWorld serverWorld) {
-			damage *= EnchantmentHelper.getDamage(serverWorld, stack, attacked, damageSource, getDamage(stack));
+		if (attacked.getType() == EntityType.ENDERMAN) {
+			return;
 		}
 		
-		((TridentEntityAccessor) this).spectrum$setDealtDamage(true);
-		SoundEvent soundEvent = SpectrumSoundEvents.IMPALING_HIT;
-		if (attacked.damage(damageSource, damage)) {
-			if (attacked.getType() == EntityType.ENDERMAN) {
-				return;
-			}
-			
-			if (getWorld() instanceof ServerWorld serverWorld) {
-				EnchantmentHelper.onTargetDamaged(serverWorld, attacked, damageSource, stack);
-			}
-			
+		float f = 2.0F;
+		if (attacked instanceof LivingEntity livingAttacked) {
+			f *= (getDamage(getTrackedStack()) + EnchantmentHelper.getAttackDamage(getTrackedStack(), livingAttacked.getGroup()));
+		}
+		
+		Entity owner = this.getOwner();
+		if (attacked.damage(SpectrumDamageTypes.impaling(getWorld(), this, owner), f)) {
 			if (attacked instanceof LivingEntity livingAttacked) {
-				this.knockback(livingAttacked, damageSource);
+				if (owner instanceof LivingEntity) {
+					EnchantmentHelper.onUserDamaged(livingAttacked, owner);
+					if (getWorld() instanceof ServerWorld serverWorld) {
+						EnchantmentHelper.onTargetDamaged(serverWorld, attacked, damageSource, stack);
+					}
+				}
+				
 				this.onHit(livingAttacked);
 			}
 		}
 		
+		((TridentEntityAccessor) this).spectrum$setDealtDamage(true);
 		recall();
 		this.setVelocity(this.getVelocity().multiply(-0.01, -0.1, -0.01));
 		float g = 1.0F;
 		
-		this.playSound(soundEvent, g, 1.0F);
+		this.playSound(SpectrumSoundEvents.IMPALING_HIT, g, 1.0F);
 	}
 	
 	private float getDamage(ItemStack stack) {

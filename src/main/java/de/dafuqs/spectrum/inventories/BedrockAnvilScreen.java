@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.items.*;
 import de.dafuqs.spectrum.networking.c2s_payloads.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.*;
@@ -171,10 +172,24 @@ public class BedrockAnvilScreen extends ForgingScreen<BedrockAnvilScreenHandler>
 	
 	@Override
 	public void onSlotUpdate(ScreenHandler handler, int slotId, ItemStack stack) {
+		// TODO: test & cleanup pigment code
 		if (slotId == 0) {
 			boolean stackEmpty = stack.isEmpty();
-			this.nameField.setText(stackEmpty ? "" : stack.getName().getString());
-			this.nameField.setEditable(!stackEmpty);
+			
+			this.nameField.setText(stack.isEmpty() ? "" : stack.getName().getString());
+			if (!(this.handler.getSlot(1).getStack().getItem() instanceof PigmentItem)) {
+				if (stack.getName() instanceof MutableText mutableText) {
+					if (mutableText.getStyle().getColor() == null) {
+						this.nameField.setEditableColor(-1);
+					} else {
+						this.nameField.setEditableColor(mutableText.getStyle().getColor().getRgb());
+					}
+				} else {
+					this.nameField.setEditableColor(-1);
+				}
+			}
+			
+			this.nameField.setEditable(!stack.isEmpty());
 			this.nameField.setFocusUnlocked(!stackEmpty);
 			
 			this.loreField.setText(stackEmpty ? "" : LoreHelper.getStringFromLoreTextArray(LoreHelper.getLoreList(stack)));
@@ -182,6 +197,21 @@ public class BedrockAnvilScreen extends ForgingScreen<BedrockAnvilScreenHandler>
 			this.nameField.setFocusUnlocked(!stackEmpty);
 			
 			this.setFocused(this.nameField);
+		}
+		if (slotId == 1) {
+			if (stack.getItem() instanceof PigmentItem) {
+				this.nameField.setEditableColor(ColorHelper.getInt(((PigmentItem) stack.getItem()).getColor()));
+			} else {
+				if (this.handler.getSlot(0).getStack().getName() instanceof MutableText mutableText) {
+					if (mutableText.getStyle().getColor() == null) {
+						this.nameField.setEditableColor(-1);
+					} else {
+						this.nameField.setEditableColor(mutableText.getStyle().getColor().getRgb());
+					}
+				} else {
+					this.nameField.setEditableColor(-1);
+				}
+			}
 		}
 	}
 	

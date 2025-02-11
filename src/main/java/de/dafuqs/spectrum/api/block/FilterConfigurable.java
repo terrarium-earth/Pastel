@@ -37,8 +37,11 @@ public interface FilterConfigurable {
     }
 
     static void writeFilterNbt(NbtCompound tag, List<ItemVariant> filterItems) {
-        for (int i = 0; i < filterItems.size(); i++)
-			CodecHelper.writeNbt(tag, "FilterStack" + i, ItemVariant.CODEC, filterItems.get(i));
+		for (int i = 0; i < filterItems.size(); i++) {
+			if (!filterItems.get(i).isBlank()) {
+				CodecHelper.writeNbt(tag, "FilterStack" + i, ItemVariant.CODEC, filterItems.get(i));
+			}
+		}
     }
 
     static void readFilterNbt(NbtCompound tag, List<ItemVariant> filterItems) {

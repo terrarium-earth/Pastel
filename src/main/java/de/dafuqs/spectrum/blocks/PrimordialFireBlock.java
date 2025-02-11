@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.blocks;
 
 import com.google.common.collect.*;
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.cca.*;
 import de.dafuqs.spectrum.compat.claims.*;
 import de.dafuqs.spectrum.particle.*;
@@ -290,7 +290,7 @@ public class PrimordialFireBlock extends AbstractFireBlock {
 	
 	public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
 		if (random.nextInt(24) == 0) {
-			world.playSound((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, SpectrumSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundCategory.BLOCKS, 0.4F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+			world.playSound((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, SpectrumSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundCategory.BLOCKS, 0.175F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
 		}
 		
 		BlockPos blockPos = pos.down();

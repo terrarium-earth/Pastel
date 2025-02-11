@@ -16,7 +16,7 @@
   "key": {
     "S": "minecraft:stick",
     "G": "spectrum:shimmerstone_gem",
-    "B": "spectrum:blue_pigment"
+    "B": "spectrum:yellow_pigment"
   },
   "result": {
     "id": "spectrum:radiance_staff",

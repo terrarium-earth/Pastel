@@ -79,12 +79,14 @@ public class DoomBloomBlock extends FlowerBlock implements Fertilizable {
 	
 	@Override
 	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-		return random.nextFloat() > GROW_CHANCE;
+		return true;
 	}
 	
 	@Override
 	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		grow(world, random, pos, state);
+		if (random.nextFloat() > GROW_CHANCE) {
+			grow(world, random, pos, state);
+		}
 	}
 	
 	@Override
@@ -129,19 +131,15 @@ public class DoomBloomBlock extends FlowerBlock implements Fertilizable {
 	protected void onExploded(BlockState state, World world, BlockPos pos, Explosion explosion, BiConsumer<ItemStack, BlockPos> stackMerger) {
 		explode(world, pos, state);
 	}
-
-	@Override
-	public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-		super.onSteppedOn(world, pos, state, entity);
-		if (entity.isSprinting() && world.random.nextBoolean()) {
-			explode(world, pos, state);
-		}
-	}
 	
 	@Override
-	public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-		super.onLandedUpon(world, state, pos, entity, fallDistance);
-		explode(world, pos, state);
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+		if (!world.isClient()) {
+			var velocity = entity.getVelocity().length();
+			if (velocity > 0.235 && world.random.nextInt(20) <= velocity * 20 || entity.isOnFire()) {
+				explode(world, pos, state);
+			}
+		}
 	}
 	
 	@Override

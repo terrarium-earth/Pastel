@@ -41,6 +41,8 @@ public class SpectrumS2CPackets {
 		register(FabricationChestStatusUpdatePayload.ID, FabricationChestStatusUpdatePayload.CODEC);
 		register(BlackHoleChestStatusUpdatePayload.ID, BlackHoleChestStatusUpdatePayload.CODEC);
 		register(PastelNodeStatusUpdatePayload.ID, PastelNodeStatusUpdatePayload.CODEC);
+		register(PastelNetworkEdgeSync.ID, PastelNetworkEdgeSync.CODEC);
+		register(PastelNetworkRemoved.ID, PastelNetworkRemoved.CODEC);
 	}
 	
 	@Environment(EnvType.CLIENT)
@@ -75,6 +77,8 @@ public class SpectrumS2CPackets {
 		register(FabricationChestStatusUpdatePayload.ID, FabricationChestStatusUpdatePayload::execute);
 		register(BlackHoleChestStatusUpdatePayload.ID, BlackHoleChestStatusUpdatePayload::execute);
 		register(PastelNodeStatusUpdatePayload.ID, PastelNodeStatusUpdatePayload::execute);
+		register(PastelNetworkEdgeSync.ID, PastelNetworkEdgeSync::execute);
+		register(PastelNetworkRemoved.ID, PastelNetworkRemoved::execute);
 	}
 	
 	private static <T extends CustomPayload> void register(CustomPayload.Id<T> id, PacketCodec<? super RegistryByteBuf, T> codec) {

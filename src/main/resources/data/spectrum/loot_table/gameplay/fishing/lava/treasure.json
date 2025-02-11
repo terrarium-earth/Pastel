@@ -14,7 +14,41 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:obsidian"
+          "name": "minecraft:netherite_upgrade_smithing_template",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "dimension": "minecraft:the_nether"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_nugget",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 9
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:obsidian",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3,
+                "max": 5
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -22,7 +56,64 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:lodestone"
+          "name": "minecraft:ghast_tear",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "dimension": "minecraft:the_nether"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_wart"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_scrap",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "dimension": "minecraft:the_nether"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spectrum:stratine_fragments",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "player",
+                  "advancements": {
+                    "spectrum:midgame/collect_stratine": true
+                  }
+                }
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "dimension": "minecraft:the_nether"
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -30,7 +121,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
+              "levels": 40,
               "treasure": true
             }
           ]
@@ -43,12 +134,12 @@
               "function": "minecraft:set_damage",
               "damage": {
                 "min": 0.0,
-                "max": 0.5
+                "max": 0.2
               }
             },
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
+              "levels": 40,
               "treasure": true
             }
           ]
@@ -61,12 +152,12 @@
               "function": "minecraft:set_damage",
               "damage": {
                 "min": 0.0,
-                "max": 0.5
+                "max": 0.2
               }
             },
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
+              "levels": 45,
               "treasure": true
             }
           ]

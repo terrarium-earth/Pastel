@@ -11,7 +11,47 @@
         {
           "type": "minecraft:item",
           "weight": 1,
+          "name": "minecraft:sea_pickle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:brain_coral"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:tube_coral"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:bubble_coral"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:fire_coral"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:horn_coral"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
           "name": "minecraft:bowl"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:torchflower_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:glow_lichen"
         },
         {
           "type": "minecraft:item",
@@ -25,27 +65,18 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "name": "minecraft:redstone"
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "name": "minecraft:glowstone"
         },
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "minecraft:glow_ink_sac",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              }
-            }
-          ]
+          "name": "spectrum:mermaids_gem"
         }
       ]
     }

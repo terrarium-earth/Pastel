@@ -35,6 +35,7 @@ public class SpectrumIntegrationPacks {
 		}
 	}
 	
+	public static final String CONNECTOR_ID = "connectormod";
 	public static final String AE2_ID = "ae2";
 	public static final String GOBBER_ID = "gobber2";
 	public static final String ALLOY_FORGERY_ID = "alloy_forgery";
@@ -49,20 +50,23 @@ public class SpectrumIntegrationPacks {
 
 	@SuppressWarnings("Convert2MethodRef")
 	public static void register() {
+		registerIntegrationPack(MODONOMICON_ID, () -> new ModonomiconCompat());
+		
 		if (!FabricLoader.getInstance().isModLoaded(EXCLUSIONS_LIB_ID)) {
 			ExclusionsLibCompat.registerNotPresent();
 		}
 		
-		registerIntegrationPack(AE2_ID, () -> new AE2Compat());
-		registerIntegrationPack(GOBBER_ID, () -> new GobberCompat());
-		registerIntegrationPack(ALLOY_FORGERY_ID, () -> new AlloyForgeryCompat());
-		registerIntegrationPack(TRAVELERS_BACKPACK_ID, () -> new TravelersBackpackCompat());
-		registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
-		registerIntegrationPack(MODONOMICON_ID, () -> new ModonomiconCompat());
-		registerIntegrationPack(NEEPMEAT_ID, () -> new NEEPMeatCompat());
-		registerIntegrationPack(FARMERSDELIGHT_ID, () -> new FDCompat());
+		if (!FabricLoader.getInstance().isModLoaded(CONNECTOR_ID)) {
+			// Connector on neoforge causes a lot of issues since most code bases
+			// of neoforge mods differ quite a lot from their fabric counterparts
+			registerIntegrationPack(AE2_ID, () -> new AE2Compat());
+			registerIntegrationPack(GOBBER_ID, () -> new GobberCompat());
+			registerIntegrationPack(ALLOY_FORGERY_ID, () -> new AlloyForgeryCompat());
+			registerIntegrationPack(TRAVELERS_BACKPACK_ID, () -> new TravelersBackpackCompat());
+			registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
+			registerIntegrationPack(NEEPMEAT_ID, () -> new NEEPMeatCompat());
+			registerIntegrationPack(FARMERSDELIGHT_ID, () -> new FDCompat());
 		registerIntegrationPack(MALUM_ID, () -> new MalumCompat());
-		if (!FabricLoader.getInstance().isModLoaded("connectormod")) {
 			registerIntegrationPack(CREATE_ID, () -> new CreateCompat());
 		}
 		

@@ -1,9 +1,8 @@
 package de.dafuqs.spectrum.blocks.jade_vines;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
-import net.minecraft.item.*;
 import net.minecraft.registry.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.math.*;
@@ -38,11 +37,6 @@ public class JadeiteLotusBulbBlock extends PlantBlock implements Fertilizable {
 		if (random.nextFloat() < 0.025) {
 			grow(world, random, pos, state);
 		}
-	}
-	
-	@Override
-	public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
-		return SpectrumBlocks.JADEITE_LOTUS_BULB.asItem().getDefaultStack();
 	}
 	
 	@Override

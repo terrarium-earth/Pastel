@@ -19,7 +19,11 @@
         "items": [
           {
             "items": [
-              "spectrum:ring_of_aerial_grace",
+              "spectrum:ring_of_aerial_grace"
+            ]
+          },
+          {
+            "items": [
               "spectrum:ring_of_denser_steps"
             ]
           }

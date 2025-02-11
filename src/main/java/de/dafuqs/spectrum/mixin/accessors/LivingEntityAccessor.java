@@ -12,4 +12,7 @@ public interface LivingEntityAccessor {
 	
 	@Accessor
 	void setLastDamageSource(DamageSource damageSource);
+	
+	@Accessor()
+	Map<StatusEffect, StatusEffectInstance> getActiveStatusEffects();
 }

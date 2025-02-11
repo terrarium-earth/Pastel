@@ -88,12 +88,11 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 						if (couldCraft) {
 							chest.setCooldown(chest, 20);
 							chest.markDirty();
-							chest.updateFullState();
+							chest.updateFullState(false);
 							return;
 						}
 					}
 				}
-				chest.updateFullState();
 			}
 		}
 	}
@@ -294,9 +293,13 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 
 	public void updateFullState() {
 		if (world != null && !world.isClient()) {
+			var wasFull = isFull;
 			isFull = isFull();
+			var hadValidRecipes = hasValidRecipes;
 			hasValidRecipes = hasValidRecipes();
-			FabricationChestStatusUpdatePayload.sendFabricationChestStatusUpdate(this);
+			if (force || wasFull != isFull || hadValidRecipes != hasValidRecipes) {
+				FabricationChestStatusUpdatePayload.sendFabricationChestStatusUpdate(this);
+			}
 		}
 	}
 	
@@ -335,6 +338,34 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
         return slot.isEmpty() || slot.getCount() + recipe.getResult(world.getRegistryManager()).getCount() < slot.getMaxCount();
     }
 	
+	@Override
+	protected void onInvOpenOrClose(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+		super.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
+		updateFullState(true);
+	}
+	
+	@Override
+	public void setStack(int slot, ItemStack stack) {
+		super.setStack(slot, stack);
+		updateFullState(false);
+	}
+	
+	@Override
+	public ItemStack removeStack(int slot, int amount) {
+		var stack = super.removeStack(slot, amount);
+		if (!stack.isEmpty())
+			updateFullState(false);
+		return stack;
+	}
+	
+	@Override
+	public ItemStack removeStack(int slot) {
+		var stack = super.removeStack(slot);
+		if (!stack.isEmpty())
+			updateFullState(false);
+		return stack;
+	}
+
 	public void updateState(boolean full, boolean hasValidRecipes, List<ItemStack> cachedOutputs) {
 		this.isFull = full;
 		this.hasValidRecipes = hasValidRecipes;

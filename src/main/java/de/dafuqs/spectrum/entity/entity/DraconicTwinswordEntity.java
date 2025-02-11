@@ -169,6 +169,11 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 	
 	@Override
 	protected void onEntityHit(EntityHitResult entityHitResult) {
+		Entity attacked = entityHitResult.getEntity();
+		if (attacked.getType() == EntityType.ENDERMAN) {
+			return;
+		}
+		
 		var propelled = isPropelled();
 		ItemStack stack = getTrackedStack();
 		var channeling = SpectrumEnchantmentHelper.getLevel(getWorld().getRegistryManager(), Enchantments.CHANNELING, stack);
@@ -182,8 +187,6 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 		damage = adjustDamage(damage, channeling);
 		boolean crit = false;
 		
-		DamageSource damageSource = SpectrumDamageTypes.impaling(getWorld(), this, owner);
-		
 		if (getWorld() instanceof ServerWorld serverWorld) {
 			damage *= EnchantmentHelper.getDamage(serverWorld, stack, attacked, damageSource, getDamage(stack));
 		}
@@ -194,6 +197,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 		}
 		
 		SoundEvent soundEvent = SpectrumSoundEvents.IMPALING_HIT;
+		DamageSource damageSource = SpectrumDamageTypes.impaling(getWorld(), this, owner);
 		if (attacked.damage(damageSource, damage)) {
 			if (attacked.getType() == EntityType.ENDERMAN) {
 				return;
@@ -209,14 +213,12 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 			}
 		}
 		
-		this.playSound(soundEvent, 1F, 1.0F);
 		if (crit) {
 			this.playSound(SpectrumSoundEvents.CRITICAL_CRUNCH, 1F, 1.0F);
 			this.playSound(SpectrumSoundEvents.IMPACT_BASE, 1.8F, 0.5F);
 		} else {
 			this.playSound(SpectrumSoundEvents.IMPALING_HIT, 1F, 0.9F + random.nextFloat() * 0.2F);
 		}
-		
 		
 		// We do a lil piercing
 		if (getMaxPierce() > 0) {

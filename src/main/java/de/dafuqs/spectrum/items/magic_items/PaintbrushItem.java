@@ -44,6 +44,13 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 		super.appendTooltip(stack, context, tooltip, type);
 		
+		if (world != null && world.isClient) {
+			appendClientTooltips(stack, tooltip);
+		}
+	}
+	
+	@Environment(EnvType.CLIENT)
+	private static void appendClientTooltips(ItemStack stack, List<Text> tooltip) {
 		boolean unlockedColoring = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_COLORING);
 		boolean unlockedSlinging = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING);
 		if (unlockedColoring || unlockedSlinging) {
@@ -82,16 +89,10 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 	public Text getName(ItemStack stack) {
 		Text name = Text.translatable(this.getTranslationKey(stack));
 		
-		boolean unlockedColoring = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_COLORING);
-		boolean unlockedSlinging = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING);
-		if (unlockedColoring || unlockedSlinging) {
-			Optional<InkColor> color = getColor(stack);
-			if (color.isPresent()) {
-				InkColor inkColor = color.get();
-				name = inkColor.getColoredName().append(" ").append(name);
-			}
-		} else {
-			return super.getName();
+		Optional<InkColor> color = getColor(stack);
+		if (color.isPresent()) {
+			InkColor inkColor = color.get();
+			name = inkColor.getColoredName().append(" ").append(name);
 		}
 		
 		return name;

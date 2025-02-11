@@ -1,34 +1,29 @@
 {
   "criteria": {
-    "built_complex_pedestal_structure": {
+    "unlock_azurite_ampoule": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:lategame/build_complex_pedestal_structure"
+        "advancement_identifier": "spectrum:unlocks/ampoules/raw_azurite_ampoule"
       }
     },
-    "created_refined_azurite": {
+    "unlock_malachite_ampoule": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:midgame/create_refined_azurite"
+        "advancement_identifier": "spectrum:unlocks/ampoules/raw_malachite_ampoule"
       }
     },
-    "grown_bloodstone_in_crystallarieum": {
+    "unlock_bloodstone_ampoule": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:grow_bloodstone_in_crystallarieum"
-      }
-    },
-    "grown_malachite_in_crystallarieum": {
-      "trigger": "revelationary:advancement_gotten",
-      "conditions": {
-        "advancement_identifier": "spectrum:lategame/grow_malachite_in_crystallarieum"
-      }
-    },
-    "struck_up_hummingstone_hymn": {
-      "trigger": "revelationary:advancement_gotten",
-      "conditions": {
-        "advancement_identifier": "spectrum:lategame/strike_up_hummingstone_hymn"
+        "advancement_identifier": "spectrum:unlocks/ampoules/raw_bloodstone_ampoule"
       }
     }
-  }
+  },
+  "requirements": [
+    [
+      "unlock_azurite_ampoule",
+      "unlock_malachite_ampoule",
+      "unlock_bloodstone_ampoule"
+    ]
+  ]
 }

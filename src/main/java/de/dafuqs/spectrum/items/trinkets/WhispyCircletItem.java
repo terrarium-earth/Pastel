@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.items.trinkets;
 
 import com.google.common.collect.*;
 import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.api.status_effect.*;
 import de.dafuqs.spectrum.registries.*;
 import dev.emi.trinkets.api.*;
 import net.minecraft.entity.*;
@@ -36,8 +37,8 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 
 		List<StatusEffectInstance> negativeEffects = new ArrayList<>();
 		for (StatusEffectInstance statusEffectInstance : currentEffects) {
-			var effect = statusEffectInstance.getEffectType();
-			if (effect.value().getCategory() == category && !effect.isIn(SpectrumStatusEffectTags.SOPORIFIC) && !SpectrumStatusEffectTags.isIncurable(effect)) {
+			RegistryEntry<StatusEffect> effect = statusEffectInstance.getEffectType();
+			if (effect.value().getCategory() == category && !effect.isIn(SpectrumStatusEffectTags.SOPORIFIC, effect) && !SpectrumStatusEffectTags.bypassesWhispyCirclet(effect)) {
 				negativeEffects.add(statusEffectInstance);
 			}
 		}
@@ -48,7 +49,7 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 		
 		World world = entity.getWorld();
 		int randomIndex = world.random.nextInt(negativeEffects.size());
-		entity.removeStatusEffect(negativeEffects.get(randomIndex).getEffectType());
+		removeOrReduceNegativeStatusEffect(entity, negativeEffects.get(randomIndex).getEffectType());
 	}
 	
 	public static void removeNegativeStatusEffects(@NotNull LivingEntity entity) {
@@ -59,7 +60,17 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 			}
 		}
 		
-		for (var effect : effectsToRemove) {
+		for (StatusEffect effect : effectsToRemove) {
+			removeOrReduceNegativeStatusEffect(entity, effect);
+		}
+	}
+	
+	private static void removeOrReduceNegativeStatusEffect(@NotNull LivingEntity entity, StatusEffect effect) {
+		var instance = entity.getStatusEffect(effect);
+		assert instance != null;
+		if (Incurable.isIncurable(instance)) {
+			Incurable.cutDuration(entity, instance);
+		} else {
 			entity.removeStatusEffect(effect);
 		}
 	}
@@ -90,7 +101,7 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 	}
 	
 	public static boolean affects(RegistryEntry<StatusEffect> effect) {
-		return effect.value().getCategory() == StatusEffectCategory.HARMFUL && !effect.isIn(SpectrumStatusEffectTags.SOPORIFIC) && !SpectrumStatusEffectTags.isIncurable(effect);
+		return effect.value().getCategory() == StatusEffectCategory.HARMFUL && !SpectrumStatusEffectTags.bypassesWhispyCirclet(statusEffect);
 	}
 	
 	public static void preventPhantomSpawns(@NotNull ServerPlayerEntity serverPlayerEntity) {

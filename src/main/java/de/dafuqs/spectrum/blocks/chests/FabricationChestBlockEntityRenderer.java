@@ -63,7 +63,7 @@ public class FabricationChestBlockEntityRenderer implements BlockEntityRenderer<
 		BlockState blockState = bl ? chest.getCachedState() : SpectrumBlocks.FABRICATION_CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
 
 		matrices.push();
-		float f = (blockState.get(ChestBlock.FACING)).asRotation();
+		float f = blockState.contains(ChestBlock.FACING) ? blockState.get(ChestBlock.FACING).asRotation() : 0;
 		matrices.translate(0.5D, 1.5D, 0.5D);
 		matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-f));
 		matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));

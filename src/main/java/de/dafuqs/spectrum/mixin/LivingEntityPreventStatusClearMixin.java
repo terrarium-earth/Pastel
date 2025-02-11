@@ -13,6 +13,7 @@ import net.minecraft.registry.entry.*;
 import net.minecraft.server.world.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.*;
 
 import java.util.*;
 
@@ -22,21 +23,34 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	@Shadow
 	public abstract void remove(Entity.RemovalReason reason);
 	
+	@Shadow
+	public abstract boolean addStatusEffect(StatusEffectInstance effect);
+	
+	@Shadow
+	public abstract Map<StatusEffect, StatusEffectInstance> getActiveStatusEffects();
+	
+	@Inject(method = "clearStatusEffects", at = @At("HEAD"))
+	private void spectrum$detectFatalSlumber(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
+		hasFatalSlumber.set(getActiveStatusEffects().containsKey(SpectrumStatusEffects.FATAL_SLUMBER));
+	}
+	
+	@Inject(method = "clearStatusEffects", at = @At("TAIL"))
+	private void spectrum$applyEternalSlumberIfFatalSlumberRemoved(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
+		if (hasFatalSlumber.get()) {
+			addStatusEffect(new StatusEffectInstance(SpectrumStatusEffects.ETERNAL_SLUMBER, 6000));
+		}
+	}
+
 	@WrapWithCondition(method = "clearStatusEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;onStatusEffectRemoved(Lnet/minecraft/entity/effect/StatusEffectInstance;)V"))
 	private boolean spectrum$preventStatusClear(LivingEntity instance, StatusEffectInstance effect, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
 		if (StatusEffectHelper.isIncurable(effect)) {
 			if (affectedByImmunity(instance, effect.getAmplifier()))
 				return true;
 			
-			if (effect.getDuration() > 1200) {
-				effect.spectrum$setDuration(effect.getDuration() - 1200);
-				if (!instance.getWorld().isClient()) {
-					((ServerWorld) instance.getWorld()).getChunkManager().sendToNearbyPlayers(instance, new EntityStatusEffectS2CPacket(instance.getId(), effect, false));
-				}
-				
-				blockRemoval.set(true);
-				return false;
-			}
+			Incurable.cutDuration(instance, effect);
+			
+			blockRemoval.set(true);
+			return false;
 		}
 		return true;
 	}

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.upgrade;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.particle.effect.*;
@@ -127,7 +127,7 @@ public class UpgradeBlock extends BlockWithEntity {
 
 	private void playConnectedParticles(@NotNull ServerWorld world, @NotNull BlockPos pos, BlockPos currentPos) {
 		DyeColor particleColor = getEffectColor();
-		world.playSound(null, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, SpectrumSoundEvents.ENCHANTER_DING, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		world.playSound(null, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, SpectrumSoundEvents.CRAFTING_DING, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
 				world, Vec3d.ofCenter(pos),
 				SpectrumParticleTypes.getSparkleRisingParticle(particleColor),

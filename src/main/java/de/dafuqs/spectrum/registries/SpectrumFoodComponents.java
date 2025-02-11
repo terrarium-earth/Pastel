@@ -95,7 +95,7 @@ public class SpectrumFoodComponents {
 			.build();
 	
 	public static final FoodComponent RESTORATION_TEA = new FoodComponent.Builder()
-			.nutrition(2).saturationModifier(SAT_POOR)
+			.nutrition(2).saturationModifier(SAT_POOR).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.IMMUNITY, 1200), 1.0F)
 			.build();
 	
@@ -110,7 +110,7 @@ public class SpectrumFoodComponents {
 			.build();
 	
 	public static final FoodComponent DEMON_TEA = new FoodComponent.Builder()
-			.nutrition(2).saturationModifier(SAT_POOR).snack()
+			.nutrition(2).saturationModifier(SAT_POOR).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.FRENZY, 800, 1), 2.0F / 3.0F)
 			.build();
 	
@@ -148,7 +148,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent HOT_CHOCOLATE = new FoodComponent.Builder()
-			.nutrition(6).saturationModifier(SAT_POOR)
+			.hunger(6).saturationModifier(SAT_POOR).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.NOURISHING, 1200), 1.0F)
 			.build();
 	
@@ -157,7 +157,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent KARAK_CHAI = new FoodComponent.Builder()
-			.nutrition(5).saturationModifier(SAT_POOR)
+			.hunger(5).saturationModifier(SAT_POOR).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.CALMING, 2400, 1), 1.0F)
 			.build();
 
@@ -167,7 +167,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent AZALEA_TEA = new FoodComponent.Builder()
-			.nutrition(2).saturationModifier(SAT_POOR)
+			.nutrition(2).saturationModifier(SAT_POOR).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.SOMNOLENCE, 1200), 1.0F)
 			.build();
 
@@ -382,7 +382,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent GOLDEN_BRISTLE_TEA = new FoodComponent.Builder()
-			.nutrition(6).saturationModifier(SAT_LOW)
+			.hunger(6).saturationModifier(SAT_LOW).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH), 0.5F)
 			.statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 600, 3), 1)
 			.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 600, 0), 0.5F)
@@ -441,7 +441,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent PEACH_CREAM = new FoodComponent.Builder()
-			.nutrition(8).saturationModifier(SAT_LOW)
+			.nutrition(8).saturationModifier(SAT_LOW).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.TOUGHNESS, 3000, 1), 1.0F)
 			.build();
 
@@ -468,7 +468,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent SLUSHSLIDE = new FoodComponent.Builder()
-			.nutrition(9).saturationModifier(SAT_LOW)
+			.nutrition(9).saturationModifier(SAT_LOW).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.SWIFTNESS, 2400, 1), 1.0F)
 			.statusEffect(new StatusEffectInstance(StatusEffects.HASTE, 2400, 1), 1.0F)
 			.build();

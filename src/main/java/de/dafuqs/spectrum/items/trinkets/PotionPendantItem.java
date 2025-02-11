@@ -3,13 +3,13 @@ package de.dafuqs.spectrum.items.trinkets;
 import de.dafuqs.spectrum.api.energy.*;
 import de.dafuqs.spectrum.api.item.*;
 import dev.emi.trinkets.api.*;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
+import net.minecraft.component.*;
+import net.minecraft.component.type.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.tooltip.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -70,7 +70,7 @@ public class PotionPendantItem extends SpectrumTrinketItem implements InkPowered
 	}
 	
 	private void grantEffects(ItemStack stack, PlayerEntity player) {
-		for (InkPoweredStatusEffectInstance inkPoweredEffect : getEffects(stack)) {
+		for (InkPoweredStatusEffectInstance inkPoweredEffect : InkPoweredPotionFillable.getEffects(stack)) {
 			if (InkPowered.tryDrainEnergy(player, inkPoweredEffect.getInkCost())) {
 				StatusEffectInstance effect = inkPoweredEffect.getStatusEffectInstance();
 				player.addStatusEffect(new StatusEffectInstance(effect.getEffectType(), EFFECT_DURATION, effect.getAmplifier(), effect.isAmbient(), effect.shouldShowParticles(), true));

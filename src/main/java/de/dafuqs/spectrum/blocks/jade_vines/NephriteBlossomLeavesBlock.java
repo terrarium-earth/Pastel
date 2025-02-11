@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.blocks.jade_vines;
 
-import com.mojang.serialization.MapCodec;
-import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import com.mojang.serialization.*;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.enchantment.*;
@@ -49,11 +49,6 @@ public class NephriteBlossomLeavesBlock extends LeavesBlock implements Fertiliza
 		}
 	
 		return super.onUseWithItem(handStack, state, world, pos, player, hand, hit);
-	}
-	
-	@Override
-	public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
-		return SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.asItem().getDefaultStack();
 	}
 	
 	@Override

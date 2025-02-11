@@ -6,10 +6,10 @@
         "advancement_identifier": "spectrum:midgame/brew_potion_in_potion_workshop"
       }
     },
-    "collected_dragonbone": {
+    "collected_downstone_fragments": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:break_cracked_dragonbone"
+        "advancement_identifier": "spectrum:lategame/collect_downstone_fragments"
       }
     }
   }

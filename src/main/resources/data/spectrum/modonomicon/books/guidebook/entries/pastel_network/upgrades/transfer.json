@@ -17,6 +17,7 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.raw_azurite",
       "item": {
         "item": "spectrum:raw_azurite"
       },
@@ -24,6 +25,7 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.refined_azurite",
       "item": {
         "item": "spectrum:refined_azurite"
       },
@@ -35,6 +37,7 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.raw_malachite",
       "item": {
         "item": "spectrum:raw_malachite"
       },
@@ -46,6 +49,7 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.refined_malachite",
       "item": {
         "item": "spectrum:refined_malachite"
       },
@@ -57,6 +61,7 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.raw_bloodstone",
       "item": {
         "item": "spectrum:raw_bloodstone"
       },
@@ -68,6 +73,7 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.refined_bloodstone",
       "item": {
         "item": "spectrum:refined_bloodstone"
       },
@@ -79,6 +85,7 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.resonance_shard",
       "item": {
         "item": "spectrum:resonance_shard"
       },

@@ -288,8 +288,8 @@ public class SpectrumItems {
 	
 	public static final Item JADEITE_PETALS = new Item(IS.of(Rarity.UNCOMMON));
 	
-	public static final Item BLOOD_ORCHID_PETAL = new CloakedItem(IS.of(), SpectrumAdvancements.SOLVE_WIRELESS_REDSTONE_PRESERVATION_RUIN, Items.RED_DYE);
-	
+	public static final Item BLOOD_ORCHID_PETAL = new CloakedItem(IS.of(), SpectrumAdvancements.REVEAL_BLOOD_ORCHID_PETALS, Items.RED_DYE);
+
 	public static final Item ROCK_CANDY = new RockCandyItem(IS.of().food(SpectrumFoodComponents.ROCK_CANDY), RockCandy.RockCandyVariant.SUGAR);
 	public static final Item TOPAZ_ROCK_CANDY = new RockCandyItem(IS.of().food(SpectrumFoodComponents.TOPAZ_ROCK_CANDY), RockCandy.RockCandyVariant.TOPAZ);
 	public static final Item AMETHYST_ROCK_CANDY = new RockCandyItem(IS.of().food(SpectrumFoodComponents.AMETHYST_ROCK_CANDY), RockCandy.RockCandyVariant.AMETHYST);
@@ -407,7 +407,7 @@ public class SpectrumItems {
 	public static final Item PEACH_JAM = new Item(IS.of().food(SpectrumFoodComponents.PEACH_JAM));
 	public static final Item RABBIT_CREAM_PIE = new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.RABBIT_CREAM_PIE), "item.spectrum.rabbit_cream_pie.tooltip");
 	public static final Item SEDATIVES = new SedativesItem(IS.of().food(SpectrumFoodComponents.SEDATIVES), "item.spectrum.sedatives.tooltip");
-	public static final Item SLUSHSLIDE = new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.SLUSHSLIDE), "item.spectrum.slushslide.tooltip");
+	public static final Item SLUSHSLIDE = new SlushslideItem(IS.of(16).food(SpectrumFoodComponents.SLUSHSLIDE), "item.spectrum.slushslide.tooltip");
 	public static final Item SURSTROMMING = new Item(IS.of().food(SpectrumFoodComponents.SURSTROMMING));
 	public static final Item EVERNECTAR = new EvernectarItem(IS.of(1, Rarity.EPIC).food(SpectrumFoodComponents.EVERNECTAR).recipeRemainder(Items.GLASS_BOTTLE), "item.spectrum.evernectar.tooltip");
 	
@@ -1025,6 +1025,18 @@ public class SpectrumItems {
 		
 		FuelRegistry.INSTANCE.add(SpectrumItemTags.COLORED_FENCES, 300);
 		FuelRegistry.INSTANCE.add(SpectrumItemTags.COLORED_FENCE_GATES, 300);
+		
+		// gala wood burns twice as long as normal
+		FuelRegistry.INSTANCE.add(SpectrumItemTags.WEEPING_GALA_LOGS, 600);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_PLANKS, 600);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_STAIRS, 600);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_DOOR, 400);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_FENCE, 600);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_PRESSURE_PLATE, 600);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_TRAPDOOR, 600);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_FENCE_GATE, 600);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_BUTTON, 200);
+		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_SLAB, 300);
 	}
 	
 }

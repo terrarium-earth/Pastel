@@ -103,35 +103,37 @@ public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity {
 	public void spawnOrbParticles(Vec3d orbTargetPos) {
 		ItemStack storedStack = this.getStack(0);
 		if (!storedStack.isEmpty() && world != null) {
-			DyeColor itemColor = ColorRegistry.ITEM_COLORS.getMapping(storedStack.getItem(), DyeColor.PURPLE);
-			ParticleEffect sparkleRisingParticleEffect = SpectrumParticleTypes.getSparkleRisingParticle(itemColor);
-			
-			if (this.getWorld() instanceof ServerWorld serverWorld) {
-				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world,
-						new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5),
-						sparkleRisingParticleEffect, 50,
-						new Vec3d(0.4, 0.2, 0.4), new Vec3d(0.06, 0.16, 0.06));
+			Optional<DyeColor> optionalItemColor = ColorRegistry.ITEM_COLORS.getMapping(storedStack.getItem(), DyeColor.PURPLE);
+			if (optionalItemColor.isPresent()) {
+				ParticleEffect sparkleRisingParticleEffect = SpectrumParticleTypes.getSparkleRisingParticle(optionalItemColor.get());
 				
-				ColorTransmissionPayload.playColorTransmissionParticle(serverWorld, new ColoredTransmission(new Vec3d(this.pos.getX() + 0.5D, this.pos.getY() + 1.0D, this.pos.getZ() + 0.5D), new ExactPositionSource(orbTargetPos), 20, itemColor));
-			} else if (this.getWorld() instanceof ClientWorld clientWorld) {
-				for (int i = 0; i < 50; i++) {
-					float randomOffsetX = pos.getX() + 0.3F + world.random.nextFloat() * 0.6F;
-					float randomOffsetY = pos.getY() + 0.3F + world.random.nextFloat() * 0.6F;
-					float randomOffsetZ = pos.getZ() + 0.3F + world.random.nextFloat() * 0.6F;
-					float randomVelocityX = 0.03F - world.random.nextFloat() * 0.06F;
-					float randomVelocityY = world.random.nextFloat() * 0.16F;
-					float randomVelocityZ = 0.03F - world.random.nextFloat() * 0.06F;
+				if (this.getWorld() instanceof ServerWorld serverWorld) {
+					PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world,
+							new Vec3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5),
+							sparkleRisingParticleEffect, 50,
+							new Vec3d(0.4, 0.2, 0.4), new Vec3d(0.06, 0.16, 0.06));
 					
-					clientWorld.addParticle(sparkleRisingParticleEffect,
-							randomOffsetX, randomOffsetY, randomOffsetZ,
-							randomVelocityX, randomVelocityY, randomVelocityZ);
+					ColorTransmissionPayload.playColorTransmissionParticle(serverWorld, new ColoredTransmission(new Vec3d(this.pos.getX() + 0.5D, this.pos.getY() + 1.0D, this.pos.getZ() + 0.5D), new ExactPositionSource(orbTargetPos), 20, optionalItemColor.get()));
+				} else if (this.getWorld() instanceof ClientWorld clientWorld) {
+					for (int i = 0; i < 50; i++) {
+						float randomOffsetX = pos.getX() + 0.3F + world.random.nextFloat() * 0.6F;
+						float randomOffsetY = pos.getY() + 0.3F + world.random.nextFloat() * 0.6F;
+						float randomOffsetZ = pos.getZ() + 0.3F + world.random.nextFloat() * 0.6F;
+						float randomVelocityX = 0.03F - world.random.nextFloat() * 0.06F;
+						float randomVelocityY = world.random.nextFloat() * 0.16F;
+						float randomVelocityZ = 0.03F - world.random.nextFloat() * 0.06F;
+						
+						clientWorld.addParticle(sparkleRisingParticleEffect,
+								randomOffsetX, randomOffsetY, randomOffsetZ,
+								randomVelocityX, randomVelocityY, randomVelocityZ);
+					}
+					
+					ParticleEffect sphereParticleEffect = new ColoredTransmissionParticleEffect(new ExactPositionSource(orbTargetPos), 20, optionalItemColor.get());
+					clientWorld.addParticle(sphereParticleEffect, this.pos.getX() + 0.5D, this.pos.getY() + 1.0D, this.pos.getZ() + 0.5D, (orbTargetPos.getX() - this.pos.getX()) * 0.045, 0, (orbTargetPos.getZ() - this.pos.getZ()) * 0.045);
 				}
 				
-				ParticleEffect sphereParticleEffect = new ColoredTransmissionParticleEffect(new ExactPositionSource(orbTargetPos), 20, itemColor);
-				clientWorld.addParticle(sphereParticleEffect, this.pos.getX() + 0.5D, this.pos.getY() + 1.0D, this.pos.getZ() + 0.5D, (orbTargetPos.getX() - this.pos.getX()) * 0.045, 0, (orbTargetPos.getZ() - this.pos.getZ()) * 0.045);
+				world.playSound(null, this.pos, SpectrumSoundEvents.CRAFTING_DING, SoundCategory.BLOCKS, SpectrumCommon.CONFIG.BlockSoundVolume, 0.7F + world.random.nextFloat() * 0.6F);
 			}
-			
-			world.playSound(null, this.pos, SpectrumSoundEvents.ENCHANTER_DING, SoundCategory.BLOCKS, SpectrumCommon.CONFIG.BlockSoundVolume, 0.7F + world.random.nextFloat() * 0.6F);
 		}
 	}
 	

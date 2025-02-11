@@ -5,7 +5,7 @@ import net.fabricmc.api.*;
 import net.minecraft.client.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
-import terrails.colorfulhearts.api.heart.drawing.*;
+import terrails.colorfulhearts.heart.*;
 
 @Environment(EnvType.CLIENT)
 @Mixin(Heart.class)

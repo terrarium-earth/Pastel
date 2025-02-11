@@ -20,6 +20,9 @@ public class SpawnerSpawnDelayChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public boolean canCraftWithBlockEntityTag(NbtComponent spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
+		if (spawnerBlockEntityNbt == null) {
+			return true;
+		}
 		if (spawnerBlockEntityNbt.contains("MinSpawnDelay") && spawnerBlockEntityNbt.contains("MaxSpawnDelay")) {
 			return spawnerBlockEntityNbt.copyNbt().getShort("MinSpawnDelay") > MIN_DELAY
 					&& spawnerBlockEntityNbt.copyNbt().getShort("MaxSpawnDelay") > MIN_DELAY;

@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.items.trinkets.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 
@@ -16,15 +15,30 @@ public class ImmunityStatusEffect extends StatusEffect {
 	}
 
 	@Override
-	public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-		WhispyCircletItem.removeNegativeStatusEffects(entity);
-		return super.applyUpdateEffect(entity, amplifier);
+	public void applyUpdateEffect(LivingEntity entity, int amplifier) {
+		super.applyUpdateEffect(entity, amplifier);
+		removeNegativeStatusEffects(entity);
 	}
 
 	@Override
-	public void onApplied(LivingEntity entity, int amplifier) {
-		super.onApplied(entity, amplifier);
-		WhispyCircletItem.removeNegativeStatusEffects(entity);
+	public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
+		super.onApplied(entity, attributes, amplifier);
+		removeNegativeStatusEffects(entity);
+	}
+	
+	public static void removeNegativeStatusEffects(@NotNull LivingEntity entity) {
+		Set<StatusEffect> effectsToRemove = new HashSet<>();
+		Collection<StatusEffectInstance> currentEffects = entity.getStatusEffects();
+		for (StatusEffectInstance instance : currentEffects) {
+			StatusEffect effectType = instance.getEffectType();
+			if (effectType.getCategory() == StatusEffectCategory.HARMFUL && !SpectrumStatusEffectTags.bypassesImmunity(effectType)) {
+				effectsToRemove.add(effectType);
+			}
+		}
+		
+		for (StatusEffect effect : effectsToRemove) {
+			entity.removeStatusEffect(effect);
+		}
 	}
 	
 }
