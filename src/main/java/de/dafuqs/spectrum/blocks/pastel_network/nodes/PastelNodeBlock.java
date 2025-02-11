@@ -131,10 +131,8 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 	public ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		@Nullable PastelNodeBlockEntity blockEntity = getBlockEntity(world, pos);
 		if (blockEntity == null) {
-			return super.onUse(state, world, pos, player, hand, hit);
+			return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
 		}
-		
-		var stack = player.getStackInHand(hand);
 		
 		if (player.isSneaking() && stack.isEmpty()) {
 			if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_UPGRADING)) {
@@ -153,7 +151,8 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 			}
 			return ItemActionResult.FAIL;
 		} else if (stack.isOf(SpectrumItems.PAINTBRUSH)) {
-			return sendDebugMessage(world, player, blockEntity);
+			sendDebugMessage(world, player, blockEntity);
+			return ItemActionResult.success(world.isClient());
 		} else if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_UPGRADING) && stack.isIn(SpectrumItemTags.PASTEL_NODE_UPGRADES)) {
 			if (!world.isClient() && blockEntity.tryInteractRings(stack, pastelNodeType)) {
 				SpectrumAdvancementCriteria.PASTEL_NODE_UPGRADING.trigger((ServerPlayerEntity) player, stack);
@@ -193,8 +192,7 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 		world.setBlockState(pos, state.with(REDSTONE_EMITTING, false));
 	}
 	
-	@NotNull
-	private static ActionResult sendDebugMessage(World world, PlayerEntity player, PastelNodeBlockEntity blockEntity) {
+	private static void sendDebugMessage(World world, PlayerEntity player, PastelNodeBlockEntity blockEntity) {
 		if (blockEntity != null) {
 			Optional<? extends PastelNetwork<?>> network = blockEntity.networkUUID.isPresent() ? Pastel.getInstance(world.isClient).getNetwork(blockEntity.networkUUID.get()) : Optional.empty();
 			String prefix = world.isClient ? "C" : "S";
@@ -204,8 +202,6 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 				player.sendMessage(Text.literal(prefix + ": " + network.get().getNodeDebugText()));
 			}
 		}
-		
-		return ActionResult.success(world.isClient());
 	}
 	
 	@Override

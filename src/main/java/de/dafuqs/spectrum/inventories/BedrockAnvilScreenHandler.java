@@ -3,6 +3,8 @@ package de.dafuqs.spectrum.inventories;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.items.*;
+import it.unimi.dsi.fastutil.objects.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
@@ -243,7 +245,7 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 			}
 			Text text = outputStack.getName();
 			if (pigmentInRepairSlot && text instanceof MutableText mutableText) {
-				TextColor newColor = TextColor.fromRgb(ColorHelper.getInt(((PigmentItem) repairSlotStack.getItem()).getColor()));
+				TextColor newColor = TextColor.fromRgb(SpectrumColorHelper.getInt(((PigmentItem) repairSlotStack.getItem()).getColor()));
 				Text newName = mutableText.setStyle(mutableText.getStyle().withColor(newColor));
 				if (!newName.equals(inputStack.getName())) {
 					outputStack.setCustomName(newName);

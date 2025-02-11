@@ -231,7 +231,7 @@ public abstract class LivingEntityMixin {
 	private boolean spectrum$canHaveStatusEffect(boolean original, @Local(argsOnly = true) StatusEffectInstance statusEffectInstance) {
 		var instance = (LivingEntity) (Object) this;
 		
-		if (original && this.hasStatusEffect(SpectrumStatusEffects.IMMUNITY) && statusEffectInstance.getEffectType().value().getCategory() == StatusEffectCategory.HARMFUL && !SpectrumStatusEffectTags.isIncurable(statusEffectInstance.getEffectType())) {
+		if (original && this.hasStatusEffect(SpectrumStatusEffects.IMMUNITY) && statusEffectInstance.getEffectType().value().getCategory() == StatusEffectCategory.HARMFUL) {
 			if (StatusEffectHelper.isIncurable(statusEffectInstance)) {
 				var immunity = getStatusEffect(SpectrumStatusEffects.IMMUNITY);
 				var cost = 600 * (statusEffectInstance.getAmplifier() + 1);

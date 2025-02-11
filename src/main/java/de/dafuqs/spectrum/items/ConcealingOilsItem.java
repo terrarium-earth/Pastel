@@ -26,7 +26,7 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
 	
 	@Override
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-		if (!getEffects(stack).isEmpty())
+		if (!InkPoweredPotionFillable.getEffects(stack).isEmpty())
 			tooltip.add(Text.translatable("item.spectrum.concealing_oils.tooltip").styled(s -> s.withFormatting(Formatting.GRAY).withItalic(true)));
 		appendPotionFillableTooltip(stack, tooltip, Text.translatable("item.spectrum.concealing_oils.when_poisoned"), true, context.getUpdateTickRate());
 	}
@@ -60,7 +60,7 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
 		if (food.contains(SpectrumDataComponentTypes.OIL_EFFECT))
 			return false;
 		
-		var effect = getEffects(oil).getFirst();
+		var effect = InkPoweredPotionFillable.getEffects(oil).getFirst();
 		if (!InkPowered.tryDrainEnergy(user, effect.getInkCost().color(), effect.getInkCost().cost()))
 			return false;
 		

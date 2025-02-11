@@ -85,7 +85,7 @@ public abstract class EntityMixin {
 	public EntityPose spectrum$forceSleepPose(EntityPose original) {
 		var entity = (Entity) (Object) this;
 		
-		if (!(entity instanceof LivingEntity living) || ((LivingEntityAccessor) living).getActiveStatusEffects() == null)
+		if (!(entity instanceof LivingEntity living))
 			return original;
 		
 		if (!(entity instanceof PlayerEntity) && (living.hasStatusEffect(SpectrumStatusEffects.ETERNAL_SLUMBER) || living.hasStatusEffect(SpectrumStatusEffects.FATAL_SLUMBER)))

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.particle.render.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.render.*;
@@ -31,7 +31,7 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         this.itemRenderer = itemRenderer;
         this.itemStack = stack;
         this.scale = 0.25F;
-		this.particleEffect = new DustParticleEffect(ColorHelper.colorIntToVec(networkColor), 1.0F);
+		this.particleEffect = new DustParticleEffect(SpectrumColorHelper.colorIntToVec(networkColor), 1.0F);
 
         this.travelPositions = new ArrayList<>();
         for (BlockPos p : travelPositions) {

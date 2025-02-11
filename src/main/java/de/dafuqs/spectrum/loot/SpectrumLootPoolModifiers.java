@@ -127,10 +127,8 @@ public class SpectrumLootPoolModifiers {
 			} else if (key.equals(LootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY) || key.equals(LootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY)
 					|| key.equals(LootTables.DESERT_PYRAMID_ARCHAEOLOGY) || key.equals(LootTables.DESERT_WELL_ARCHAEOLOGY)) {
 				builder.modifyPools(modifier -> modifier.with(ItemEntry.builder(SpectrumItems.NIGHTDEW_SPROUT).weight(2).quality(-1)));
-			} else if (id.equals(new Identifier(LootTables.TRAIL_RUINS_RARE_ARCHAEOLOGY))) {
-				tableBuilder.modifyPools(builder -> {
-					builder.modifyPools(modifier -> modifier.with(ItemEntry.builder(SpectrumItems.NIGHTDEW_SPROUT).weight(2).quality(-1)));
-				});
+			} else if (key.equals(LootTables.TRAIL_RUINS_RARE_ARCHAEOLOGY)) {
+				builder.modifyPools(modifier -> modifier.with(ItemEntry.builder(SpectrumItems.NIGHTDEW_SPROUT).weight(3).quality(-1)));
 			} else if (key.equals(LootTables.SNIFFER_DIGGING_GAMEPLAY)) {
 				builder.modifyPools(modifier -> {
 					modifier.with(ItemEntry.builder(SpectrumBlocks.WEEPING_GALA_SPRIG).weight(1));

@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.blocks.spirit_instiller;
 
+import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.color.*;
 import de.dafuqs.spectrum.blocks.*;
@@ -47,7 +48,6 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	
 	private static final Identifier JADE_VINE_CROSSBREEDING = SpectrumCommon.locate("spirit_instiller/secret/germinated_jade_vine_crossbreeding"); // TODO: Move to advancements class
 	
-	private final Inventory autoCraftingInventory; // 0: instiller stack; 1-2: item bowl stacks
 	private boolean inventoryChanged;
 	private UUID ownerUUID;
 	private UpgradeHolder upgrades;
@@ -213,9 +213,9 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		return canCraft & spiritInstillerBlockEntity.currentRecipe.value().canPlayerCraft(lastInteractedPlayer) && spiritInstillerBlockEntity.currentRecipe.value().canCraftWithStacks(spiritInstillerBlockEntity.getRecipeInput());
 	}
 	
-	public static void testAndUnlockRecipeAdvancements(ServerPlayerEntity player, SpiritInstillerRecipe spiritInstillerRecipe, boolean canActuallyCraft) {
+	public static void testAndUnlockRecipeAdvancements(ServerPlayerEntity player, RecipeEntry<SpiritInstillerRecipe> spiritInstillerRecipe, boolean canActuallyCraft) {
 		// boss memory advancements
-		boolean isBossMenory = spiritInstillerRecipe.value().getGroup() != null && spiritInstillerRecipe.getGroup().equals("boss_memories");
+		boolean isBossMenory = spiritInstillerRecipe.value().getGroup() != null && spiritInstillerRecipe.value().getGroup().equals("boss_memories");
 		if (isBossMenory) {
 			if (canActuallyCraft) {
 				Support.grantAdvancementCriterion(player, "midgame/craft_blacklisted_memory_success", "succeed_crafting_boss_memory");
@@ -224,7 +224,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 			}
 		}
 		// jade vine crossbreeding advancement
-		if (spiritInstillerRecipe.getId().equals(JADE_VINE_CROSSBREEDING)) {
+		if (spiritInstillerRecipe.id().equals(JADE_VINE_CROSSBREEDING)) {
 			Support.grantAdvancementCriterion(player, "lategame/create_jade_vine", "crossbred_jade_vine_bulb");
 		}
 	}

@@ -200,17 +200,6 @@ public class SanityCommand {
 				SpectrumCommon.logWarning("[SANITY: EntityType Lang] Missing translation string " + entityType.getValue().getTranslationKey());
 			}
 		}
-		for (Map.Entry<RegistryKey<Enchantment>, Enchantment> entityType : Registries.ENCHANTMENT.getEntrySet()) {
-			if (!entityType.getKey().getValue().getNamespace().equals(modId)) {
-				continue;
-			}
-			if (!Language.getInstance().hasTranslation(entityType.getValue().getTranslationKey())) {
-				SpectrumCommon.logWarning("[SANITY: Enchantment Lang] Missing translation string " + entityType.getValue().getTranslationKey());
-			}
-			if (!Language.getInstance().hasTranslation(entityType.getValue().getTranslationKey() + ".desc")) {
-				SpectrumCommon.logWarning("[SANITY: Enchantment Lang] Missing description string " + entityType.getValue().getTranslationKey() + ".desc");
-			}
-		}
 		for (Map.Entry<RegistryKey<StatusEffect>, StatusEffect> entityType : Registries.STATUS_EFFECT.getEntrySet()) {
 			if (!entityType.getKey().getValue().getNamespace().equals(modId)) {
 				continue;
@@ -261,18 +250,17 @@ public class SanityCommand {
 		}
 		
 		// Impossible to unlock recipes
-		for (Recipe<?> recipe : recipeManager.values()) {
-			if (recipe instanceof GatedRecipe<?> gatedRecipe) {
-				Identifier advancementIdentifier = gatedRecipe.getRequiredAdvancementIdentifier();
-				if (advancementIdentifier != null && advancementLoader.get(advancementIdentifier) == null) {
-					SpectrumCommon.logWarning("[SANITY: " + gatedRecipe.getRecipeTypeShortID() + " Recipe Unlocks] Advancement '" + gatedRecipe.getRequiredAdvancementIdentifier() + "' in recipe '" + recipe.getId() + "' does not exist");
+		for (RecipeEntry<?> recipeEntry : recipeManager.values()) {
+			if (recipeEntry.value() instanceof GatedRecipe<?> gatedRecipe) {
+				Optional<Identifier> advancementIdentifier = gatedRecipe.getRequiredAdvancementIdentifier();
+				if (advancementIdentifier.isPresent() && advancementLoader.get(advancementIdentifier.get()) == null) {
+					SpectrumCommon.logWarning("[SANITY: " + gatedRecipe.getRecipeTypeShortID() + " Recipe Unlocks] Advancement '" + gatedRecipe.getRequiredAdvancementIdentifier() + "' in recipe '" + recipeEntry.id() + "' does not exist");
 				}
 			}
 		}
 		
 		// Recipes that spawn effects based on item color,
 		// but input / output items do not have a color registered
-		DynamicRegistryManager registryManager = source.getRegistryManager();
 		testIngredientsAndOutputInColorRegistry(SpectrumRecipeTypes.FUSION_SHRINE, "Fusion Shrine", recipeManager, registryManager);
 		testIngredientsAndOutputInColorRegistry(SpectrumRecipeTypes.ENCHANTER, "Enchanting", recipeManager, registryManager);
 		testIngredientsAndOutputInColorRegistry(SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, "Enchantment Upgrade", recipeManager, registryManager);

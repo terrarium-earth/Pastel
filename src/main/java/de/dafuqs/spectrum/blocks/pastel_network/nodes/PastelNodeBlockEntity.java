@@ -332,8 +332,8 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	}
 	
 	@Override
-	public void readNbt(NbtCompound nbt) {
-		super.readNbt(nbt);
+	protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+		super.readNbt(nbt, registryLookup);
 		
 		this.nodeId = nbt.contains("NodeID") ? nbt.getUuid("NodeID") : UUID.randomUUID();
 		this.networkUUID = nbt.contains("NetworkUUID") ? Optional.of(nbt.getUuid("NetworkUUID")) : Optional.empty();

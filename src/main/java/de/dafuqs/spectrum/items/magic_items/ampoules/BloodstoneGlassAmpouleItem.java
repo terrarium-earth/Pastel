@@ -3,13 +3,16 @@ package de.dafuqs.spectrum.items.magic_items.ampoules;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.entity.entity.*;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.component.type.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.*;
+import net.minecraft.sound.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 

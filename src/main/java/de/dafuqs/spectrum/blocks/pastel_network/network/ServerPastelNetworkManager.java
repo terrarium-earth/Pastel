@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.blocks.pastel_network.network;
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
 import de.dafuqs.spectrum.networking.*;
 import net.minecraft.nbt.*;
+import net.minecraft.registry.*;
 import net.minecraft.server.world.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
@@ -41,9 +42,10 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 	public Optional<ServerPastelNetwork> getNetwork(UUID uuid) {
 		return networks.stream().filter(n -> n.uuid.equals(uuid)).findFirst();
 	}
-
+	
+	
 	@Override
-	public NbtCompound writeNbt(NbtCompound nbt) {
+	public NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		NbtList networkList = new NbtList();
 		for (ServerPastelNetwork network : this.networks) {
 			networkList.add(network.toNbt());

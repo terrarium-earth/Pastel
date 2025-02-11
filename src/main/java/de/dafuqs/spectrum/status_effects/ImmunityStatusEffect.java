@@ -1,7 +1,12 @@
 package de.dafuqs.spectrum.status_effects;
 
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
+import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.effect.*;
+import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public class ImmunityStatusEffect extends StatusEffect {
 	
@@ -30,7 +35,7 @@ public class ImmunityStatusEffect extends StatusEffect {
 		Set<StatusEffect> effectsToRemove = new HashSet<>();
 		Collection<StatusEffectInstance> currentEffects = entity.getStatusEffects();
 		for (StatusEffectInstance instance : currentEffects) {
-			StatusEffect effectType = instance.getEffectType();
+			StatusEffect effectType = instance.getEffectType().value();
 			if (effectType.getCategory() == StatusEffectCategory.HARMFUL && !SpectrumStatusEffectTags.bypassesImmunity(effectType)) {
 				effectsToRemove.add(effectType);
 			}

@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.blocks.cinderhearth;
 
+import com.klikli_dev.modonomicon.api.multiblock.*;
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.compat.modonomicon.*;
 import de.dafuqs.spectrum.helpers.*;

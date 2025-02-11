@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.blocks.jade_vines;
 
-import com.mojang.serialization.*;
 import de.dafuqs.spectrum.blocks.decoration.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -24,11 +23,6 @@ public class JadeiteLotusFlowerBlock extends SpectrumFacingBlock {
 	public JadeiteLotusFlowerBlock(Settings settings) {
 		super(settings);
 		setDefaultState(getDefaultState());
-	}
-
-	@Override
-	public MapCodec<? extends JadeiteFlowerBlock> getCodec() {
-		return CODEC;
 	}
 	
 	@Override

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import net.minecraft.nbt.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
@@ -67,7 +67,7 @@ public class PastelNetwork<W extends World> {
     }
 
     public int getColor() {
-		return ColorHelper.getRandomColor(this.uuid.hashCode());
+		return SpectrumColorHelper.getRandomColor(this.uuid.hashCode());
     }
 	
 	public void setGraph(Graph<BlockPos, DefaultEdge> graph) {

@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.*;

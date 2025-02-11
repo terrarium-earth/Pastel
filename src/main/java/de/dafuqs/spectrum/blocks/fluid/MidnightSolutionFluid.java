@@ -3,7 +3,6 @@ package de.dafuqs.spectrum.blocks.fluid;
 import de.dafuqs.spectrum.blocks.decay.*;
 import de.dafuqs.spectrum.blocks.enchanter.*;
 import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.items.magic_items.*;
 import de.dafuqs.spectrum.networking.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
@@ -22,11 +21,13 @@ import net.minecraft.registry.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
 import net.minecraft.state.*;
-import net.minecraft.state.property.*;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
+
+import java.util.*;
 
 public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	
@@ -181,7 +182,7 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 				}
 				world.playSound(null, itemEntity.getBlockPos(), SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.NEUTRAL, 1.0F, 0.9F + world.getRandom().nextFloat() * 0.2F);
 				SpectrumS2CPacketSender.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, itemEntity.getPos(), SpectrumParticleTypes.GRAY_SPARKLE_RISING, 10, Vec3d.ZERO, new Vec3d(0.2, 0.4, 0.2));
-				EnchantmentCanvasItem.unbind(itemStack);
+				itemStack.remove(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS);
 			}
 		}
 	}

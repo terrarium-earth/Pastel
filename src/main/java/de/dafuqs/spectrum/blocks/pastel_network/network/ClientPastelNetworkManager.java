@@ -12,7 +12,6 @@ import net.minecraft.util.math.*;
 import org.jgrapht.*;
 import org.jgrapht.graph.*;
 import org.joml.Math;
-import org.joml.*;
 
 import java.util.*;
 
@@ -69,12 +68,6 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientWo
 				colors[0] = (float) alpha;
 				PastelRenderHelper.renderLineTo(context.matrixStack(), context.consumers(), colors, source, target);
 				
-				if (client.options.debugEnabled) {
-					Vec3d offset = Vec3d.ofCenter(target).subtract(Vec3d.of(source));
-					Vec3d normalized = offset.normalize();
-					Matrix4f positionMatrix = context.matrixStack().peek().getPositionMatrix();
-					PastelRenderHelper.renderDebugLine(context.consumers(), color, offset, normalized, positionMatrix);
-				}
 				matrices.pop();
 			}
 		}

@@ -6,6 +6,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.entity.player.*;
+import net.minecraft.util.*;
 
 public class LifeDrainStatusEffect extends StatusEffect {
 	

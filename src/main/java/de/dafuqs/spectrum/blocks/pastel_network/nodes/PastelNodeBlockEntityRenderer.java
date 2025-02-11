@@ -4,7 +4,6 @@ import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.pastel.*;
 import de.dafuqs.spectrum.blocks.pastel_network.*;
 import de.dafuqs.spectrum.blocks.pastel_network.network.*;
-import de.dafuqs.spectrum.helpers.ColorHelper;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.client.*;
@@ -138,8 +137,8 @@ public class PastelNodeBlockEntityRenderer implements BlockEntityRenderer<Pastel
 			matrices.multiply(RotationAxis.POSITIVE_Y.rotation(node.crystalRotation));
 		}
 		
-		var color = ColorHelper.colorIntToVec(node.networkUUID.flatMap(id -> Pastel.getClientInstance().getNetwork(id)).map(PastelNetwork::getColor).orElse(0xFFFFFF));
-		color = ColorHelper.colorIntToVec(ColorHelper.interpolate(color, ColorHelper.WASH, 0.2125F));
+		var color = SpectrumColorHelper.colorIntToVec(node.networkUUID.flatMap(id -> Pastel.getClientInstance().getNetwork(id)).map(PastelNetwork::getColor).orElse(0xFFFFFF));
+		color = SpectrumColorHelper.colorIntToVec(SpectrumColorHelper.interpolate(color, SpectrumColorHelper.WASH, 0.2125F));
 
 		var ringHeight = node.crystalHeight - 0.3F;
 		var innerRing = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(node.getInnerRing().map(PastelUpgradeSignature::innerRing).orElse(INNER_RING)));

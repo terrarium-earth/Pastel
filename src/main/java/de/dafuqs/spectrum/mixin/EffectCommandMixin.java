@@ -1,8 +1,10 @@
 package de.dafuqs.spectrum.mixin;
 
 import com.llamalad7.mixinextras.sugar.*;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
+import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.server.command.*;
 import org.spongepowered.asm.mixin.*;

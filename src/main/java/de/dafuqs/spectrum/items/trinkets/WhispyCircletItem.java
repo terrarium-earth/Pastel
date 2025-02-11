@@ -2,7 +2,6 @@ package de.dafuqs.spectrum.items.trinkets;
 
 import com.google.common.collect.*;
 import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.status_effect.*;
 import de.dafuqs.spectrum.registries.*;
 import dev.emi.trinkets.api.*;
 import net.minecraft.entity.*;
@@ -60,12 +59,12 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 			}
 		}
 		
-		for (StatusEffect effect : effectsToRemove) {
+		for (RegistryEntry<StatusEffect> effect : effectsToRemove) {
 			removeOrReduceNegativeStatusEffect(entity, effect);
 		}
 	}
 	
-	private static void removeOrReduceNegativeStatusEffect(@NotNull LivingEntity entity, StatusEffect effect) {
+	private static void removeOrReduceNegativeStatusEffect(@NotNull LivingEntity entity, RegistryEntry<StatusEffect> effect) {
 		var instance = entity.getStatusEffect(effect);
 		assert instance != null;
 		if (Incurable.isIncurable(instance)) {
@@ -101,7 +100,7 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 	}
 	
 	public static boolean affects(RegistryEntry<StatusEffect> effect) {
-		return effect.value().getCategory() == StatusEffectCategory.HARMFUL && !SpectrumStatusEffectTags.bypassesWhispyCirclet(statusEffect);
+		return effect.value().getCategory() == StatusEffectCategory.HARMFUL && !SpectrumStatusEffectTags.bypassesWhispyCirclet(effect.value());
 	}
 	
 	public static void preventPhantomSpawns(@NotNull ServerPlayerEntity serverPlayerEntity) {

@@ -190,7 +190,7 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 		EmiStack dragonrot = EmiStack.of(SpectrumFluids.DRAGONROT, FluidUnit.BUCKET);
 		EmiStack liquidCrystal = EmiStack.of(SpectrumFluids.LIQUID_CRYSTAL, FluidUnit.BUCKET);
 		EmiStack midnightSolution = EmiStack.of(SpectrumFluids.MIDNIGHT_SOLUTION, FluidUnit.BUCKET);
-		EmiStack mud = EmiStack.of(SpectrumFluids.MUD, FluidUnit.BUCKET);
+		EmiStack mud = EmiStack.of(SpectrumFluids.GOO, FluidUnit.BUCKET);
 		EmiStack waterCatalyst = water.copy().setRemainder(water);
 		EmiStack lavaCatalyst = lava.copy().setRemainder(lava);
 		EmiStack dragonrotCatalyst = dragonrot.copy().setRemainder(dragonrot);
@@ -217,7 +217,7 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 				.rightInput(mudCatalyst, false)
 				.output(EmiStack.of(Blocks.COARSE_DIRT))
 				.requiredAdvancement(DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
-				.requiredAdvancement(MudConvertingRecipe.UNLOCK_IDENTIFIER)
+				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 		addRecipeSafe(registry, () -> SpectrumWorldInteractionRecipe.customBuilder()
 				.id(syntheticId("world/fluid_interaction", SpectrumBlocks.ROTTEN_GROUND))
@@ -269,7 +269,7 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 				.rightInput(mudCatalyst, false)
 				.output(EmiStack.of(Blocks.CLAY))
 				.requiredAdvancement(LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
-				.requiredAdvancement(MudConvertingRecipe.UNLOCK_IDENTIFIER)
+				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 		addRecipeSafe(registry, () -> SpectrumWorldInteractionRecipe.customBuilder()
 				.id(syntheticId("world/fluid_interaction", Blocks.TERRACOTTA))
@@ -283,14 +283,14 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 				.leftInput(mudCatalyst)
 				.rightInput(waterCatalyst, false)
 				.output(EmiStack.of(Blocks.DIRT))
-				.requiredAdvancement(MudConvertingRecipe.UNLOCK_IDENTIFIER)
+				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 		addRecipeSafe(registry, () -> SpectrumWorldInteractionRecipe.customBuilder()
 				.id(syntheticId("world/fluid_interaction", Blocks.MUD))
 				.leftInput(mudCatalyst)
 				.rightInput(lavaCatalyst, false)
 				.output(EmiStack.of(Blocks.MUD))
-				.requiredAdvancement(MudConvertingRecipe.UNLOCK_IDENTIFIER)
+				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 	}
 	

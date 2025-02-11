@@ -108,7 +108,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 		}
 		
 		if (!world.isClient) {
-			HitResult hitResult = Support.playerInteractionRaycast(world, user, player);
+			HitResult hitResult = Support.playerBlockInteractionRaycast(world, user, player);
 			if (hitResult.getType() == HitResult.Type.BLOCK) {
 				useOnBlock(new ItemUsageContext(world, player, player.getActiveHand(), player.getStackInHand(player.getActiveHand()), (BlockHitResult) hitResult));
 			}

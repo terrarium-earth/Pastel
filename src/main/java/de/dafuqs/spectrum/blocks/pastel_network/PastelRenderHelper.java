@@ -109,17 +109,6 @@ public class PastelRenderHelper {
         return x * 4 + y;
     }
 
-    public static void renderDebugLine(VertexConsumerProvider vertexConsumerProvider, int color, Vec3d offset, Vec3d normalized, Matrix4f positionMatrix) {
-        vertexConsumerProvider.getBuffer(RenderLayer.getLines())
-                .vertex(positionMatrix, 0.5F, 0.5F, 0.5F)
-                .color(color)
-                .normal((float) normalized.x, (float) normalized.y, (float) normalized.z);
-        vertexConsumerProvider.getBuffer(RenderLayer.getLines())
-                .vertex(positionMatrix, (float) offset.x, (float) offset.y, (float) offset.z)
-                .color(color)
-                .normal((float) normalized.x, (float) normalized.y, (float) normalized.z);
-    }
-
     public static float[] unpackNormalizedColor(int color) {
         final float[] colors = new float[4];
         colors[0] = (color >> 24 & 0xff) / 255F; // alpha

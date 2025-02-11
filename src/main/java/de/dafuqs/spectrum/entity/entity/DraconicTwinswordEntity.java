@@ -177,7 +177,6 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 		var propelled = isPropelled();
 		ItemStack stack = getTrackedStack();
 		var channeling = SpectrumEnchantmentHelper.getLevel(getWorld().getRegistryManager(), Enchantments.CHANNELING, stack);
-		Entity attacked = entityHitResult.getEntity();
 		Entity owner = this.getOwner();
 		
 		if (piercedEntities.contains(attacked))
@@ -196,7 +195,6 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 			crit = true;
 		}
 		
-		SoundEvent soundEvent = SpectrumSoundEvents.IMPALING_HIT;
 		DamageSource damageSource = SpectrumDamageTypes.impaling(getWorld(), this, owner);
 		if (attacked.damage(damageSource, damage)) {
 			if (attacked.getType() == EntityType.ENDERMAN) {

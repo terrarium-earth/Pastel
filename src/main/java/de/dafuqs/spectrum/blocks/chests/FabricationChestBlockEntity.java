@@ -290,8 +290,8 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 	public boolean canFunction() {
 		return !isFull && hasValidRecipes();
 	}
-
-	public void updateFullState() {
+	
+	public void updateFullState(boolean force) {
 		if (world != null && !world.isClient()) {
 			var wasFull = isFull;
 			isFull = isFull();

@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.recipe.pedestal.dynamic;
 
 import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.blocks.pedestal.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.*;
@@ -11,6 +12,7 @@ import net.minecraft.recipe.*;
 import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
+import net.minecraft.util.collection.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
@@ -30,7 +32,7 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
 			@Nullable PlayerEntity owner = pedestal.getOwnerIfOnline();
 			double luckBonus = owner == null ? 0.0 : owner.getAttributeValue(EntityAttributes.GENERIC_LUCK);
 			if (new Random().nextFloat() < PURPLE_STAR_CANDY_CHANCE + luckBonus) {
-				return SpectrumItems.PURPLE_STAR_CANDY.getDefaultStack();
+				return SpectrumItems.ENCHANTED_STAR_CANDY.getDefaultStack();
 			}
 		}
 		return this.output.copy();
