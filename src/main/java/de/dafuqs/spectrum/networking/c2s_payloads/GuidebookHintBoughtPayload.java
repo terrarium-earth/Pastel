@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.networking.c2s_payloads;
 
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.*;
+import de.dafuqs.spectrum.recipe.*;
 import net.fabricmc.fabric.api.networking.v1.*;
 import net.minecraft.item.*;
 import net.minecraft.network.*;
@@ -14,13 +15,12 @@ import net.minecraft.util.*;
 
 import java.util.*;
 
-public record GuidebookHintBoughtPayload(Identifier completionAdvancement,
-										 Ingredient payment) implements CustomPayload {
+public record GuidebookHintBoughtPayload(Identifier completionAdvancement, IngredientStack payment) implements CustomPayload {
 	
 	public static final Id<GuidebookHintBoughtPayload> ID = SpectrumC2SPackets.makeId("guidebook_hint_bought");
 	public static final PacketCodec<RegistryByteBuf, GuidebookHintBoughtPayload> CODEC = PacketCodec.tuple(
 			Identifier.PACKET_CODEC, GuidebookHintBoughtPayload::completionAdvancement,
-			Ingredient.PACKET_CODEC, GuidebookHintBoughtPayload::payment,
+			IngredientStack.Serializer.PACKET_CODEC, GuidebookHintBoughtPayload::payment,
 			GuidebookHintBoughtPayload::new);
 	
 	@Override
@@ -31,7 +31,7 @@ public record GuidebookHintBoughtPayload(Identifier completionAdvancement,
 	public static ServerPlayNetworking.PlayPayloadHandler<GuidebookHintBoughtPayload> getPayloadHandler() {
 		return (payload, context) -> {
 			ServerPlayerEntity player = context.player();
-			for (ItemStack remainder : InventoryHelper.removeFromInventoryWithRemainders(List.of(payload.payment()), player.getInventory())) {
+			for (ItemStack remainder : InventoryHelper.removeIngredientStacksFromInventoryWithRemainders(List.of(payload.payment()), player.getInventory())) {
 				InventoryHelper.smartAddToInventory(remainder, player.getInventory(), null);
 			}
 			

@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.helpers;
 
 import de.dafuqs.spectrum.api.interaction.*;
+import de.dafuqs.spectrum.recipe.*;
 import net.fabricmc.fabric.api.transfer.v1.item.*;
 import net.fabricmc.fabric.api.transfer.v1.storage.*;
 import net.minecraft.block.*;
@@ -247,6 +248,49 @@ public class InventoryHelper {
 		}
 	}
 	
+	// TODO: lots of code overlap with hasInInventory()
+	public static boolean hasIngredientStacksInInventory(List<IngredientStack> ingredients, Inventory inventory) {
+		List<Ingredient> ingredientsToFind = new ArrayList<>();
+		List<Integer> requiredIngredientAmounts = new ArrayList<>();
+		for (IngredientStack ingredient : ingredients) {
+			if (ingredient.isEmpty()) {
+				continue;
+			}
+			
+			ingredientsToFind.add(ingredient.getIngredient());
+			requiredIngredientAmounts.add(ingredient.getCount());
+		}
+		
+		for (int i = 0; i < inventory.size(); i++) {
+			if (ingredientsToFind.isEmpty()) {
+				break;
+			}
+			ItemStack currentStack = inventory.getStack(i);
+			if (!currentStack.isEmpty()) {
+				int amount = currentStack.getCount();
+				for (int j = 0; j < ingredientsToFind.size(); j++) {
+					if (ingredientsToFind.get(j).test(currentStack)) {
+						int ingredientCount = requiredIngredientAmounts.get(j);
+						if (amount >= ingredientCount) {
+							ingredientsToFind.remove(j);
+							requiredIngredientAmounts.remove(j);
+							j--;
+						} else {
+							requiredIngredientAmounts.set(j, requiredIngredientAmounts.get(j) - amount);
+						}
+						
+						amount -= ingredientCount;
+						if (amount < 1) {
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		return ingredientsToFind.isEmpty();
+	}
+	
 	public static boolean hasInInventory(List<Ingredient> ingredients, Inventory inventory) {
 		List<Ingredient> ingredientsToFind = new ArrayList<>();
 		List<Integer> requiredIngredientAmounts = new ArrayList<>();
@@ -310,6 +354,60 @@ public class InventoryHelper {
 			} else {
 				requiredIngredientAmounts.add(1);
 			}
+		}
+		
+		for (int i = 0; i < inventory.size(); i++) {
+			if (requiredIngredients.isEmpty()) {
+				break;
+			}
+			
+			ItemStack currentStack = inventory.getStack(i);
+			if (!currentStack.isEmpty()) {
+				for (int j = 0; j < requiredIngredients.size(); j++) {
+					int currentStackCount = currentStack.getCount();
+					if (requiredIngredients.get(j).test(currentStack)) {
+						int ingredientCount = requiredIngredientAmounts.get(j);
+						ItemStack remainder = currentStack.getRecipeRemainder();
+						if (currentStackCount >= ingredientCount) {
+							if (!remainder.isEmpty()) {
+								remainder.setCount(requiredIngredientAmounts.get(j));
+								remainders.add(remainder);
+							}
+							requiredIngredients.remove(j);
+							requiredIngredientAmounts.remove(j);
+							j--;
+						} else {
+							if (!remainder.isEmpty()) {
+								remainder.setCount(currentStackCount);
+								remainders.add(remainder);
+							}
+							
+							requiredIngredientAmounts.set(j, requiredIngredientAmounts.get(j) - currentStackCount);
+						}
+						
+						currentStack.setCount(currentStackCount - ingredientCount);
+					}
+				}
+			}
+		}
+		
+		return remainders;
+	}
+	
+	// return are the recipe remainders
+	// TODO lots of code overlap with removeFromInventoryWithRemainders()
+	public static List<ItemStack> removeIngredientStacksFromInventoryWithRemainders(List<IngredientStack> ingredients, Inventory inventory) {
+		List<ItemStack> remainders = new ArrayList<>();
+		
+		List<Ingredient> requiredIngredients = new ArrayList<>();
+		List<Integer> requiredIngredientAmounts = new ArrayList<>();
+		for (IngredientStack ingredient : ingredients) {
+			if (ingredient.isEmpty()) {
+				continue;
+			}
+			
+			requiredIngredients.add(ingredient.getIngredient());
+			requiredIngredientAmounts.add(ingredient.getCount());
 		}
 		
 		for (int i = 0; i < inventory.size(); i++) {

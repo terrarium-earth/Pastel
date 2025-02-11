@@ -21,9 +21,7 @@
       "title": "book.spectrum.guidebook.ideas.where_to_look",
       "completion_advancement": "spectrum:triggers/hints/nightdew_sprout_page0",
       "cost": {
-        "item": {
-          "item": "spectrum:mermaids_gem"
-        },
+        "item": "spectrum:mermaids_gem",
         "count": 8
       },
       "text": "book.spectrum.guidebook.ideas.nightdew_sprout.page0.text"
@@ -32,9 +30,7 @@
       "type": "spectrum:hint",
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": {
-          "item": "spectrum:mermaids_gem"
-        },
+        "item": "spectrum:mermaids_gem",
         "count": 32
       },
       "text": "book.spectrum.guidebook.ideas.nightdew_sprout.page1.text",

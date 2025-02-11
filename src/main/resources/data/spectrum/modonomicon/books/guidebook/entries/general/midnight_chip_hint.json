@@ -21,9 +21,7 @@
       "title": "book.spectrum.guidebook.ideas.midnight_chip.page0.title",
       "completion_advancement": "spectrum:triggers/hints/midnight_chip_page0",
       "cost": {
-        "item": {
-          "item": "spectrum:neolith"
-        },
+        "item": "spectrum:neolith",
         "count": 8
       },
       "text": "book.spectrum.guidebook.ideas.midnight_chip.page0.text"
@@ -33,9 +31,7 @@
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "completion_advancement": "spectrum:triggers/hints/midnight_chip_page1",
       "cost": {
-        "item": {
-          "item": "spectrum:neolith"
-        },
+        "item": "spectrum:neolith",
         "count": 24
       },
       "text": "book.spectrum.guidebook.ideas.midnight_chip.page1.text"

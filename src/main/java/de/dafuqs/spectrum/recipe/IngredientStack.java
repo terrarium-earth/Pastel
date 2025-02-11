@@ -13,8 +13,10 @@ import net.minecraft.recipe.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
 
 import java.util.*;
+import java.util.function.*;
 
 public class IngredientStack implements CustomIngredient {
 	
@@ -80,9 +82,22 @@ public class IngredientStack implements CustomIngredient {
 				&& this.count == itemStack.getCount();
 	}
 	
+	@Nullable
+	private List<ItemStack> matchingStacks;
+	
 	@Override
 	public List<ItemStack> getMatchingStacks() {
-		return Arrays.stream(this.ingredient.getMatchingStacks()).toList();
+		if (this.matchingStacks == null) {
+			ItemStack[] matchingStacks = this.ingredient.getMatchingStacks();
+			List<ItemStack> stacks = new ArrayList<>(matchingStacks.length);
+			for (ItemStack is : matchingStacks) {
+				stacks.add(new ItemStack(is.getItem(), count));
+			}
+			this.matchingStacks = stacks;
+		}
+		
+		
+		return this.matchingStacks;
 	}
 	
 	@Override
