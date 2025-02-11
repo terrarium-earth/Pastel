@@ -25,7 +25,7 @@ public class SpectrumPresentUnpackBehaviors {
 	
 	public static void register() {
 		PresentBlock.registerBehavior(SpectrumItems.PIPE_BOMB, (stack, presentBlockEntity, world, pos, random) -> {
-			stack.set(SpectrumDataComponentTypes.PIPE_BOMB, world.getTime() - 70);
+			stack.set(SpectrumDataComponentTypes.TIMESTAMP, world.getTime() - 70);
 			stack.set(DataComponentTypes.PROFILE, presentBlockEntity.getOwner());
 			world.playSound(null, pos, SpectrumSoundEvents.INCANDESCENT_ARM, SoundCategory.BLOCKS, 2.0F, 0.9F);
 			return stack;
