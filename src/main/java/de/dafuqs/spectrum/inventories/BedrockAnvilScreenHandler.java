@@ -234,8 +234,6 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 					} else {
 						outputStack.set(DataComponentTypes.CUSTOM_NAME, Text.literal(this.newItemName));
 					}
-					
-					
 				}
 			} else if (inputStack.contains(DataComponentTypes.CUSTOM_NAME)) {
 				// We removed these - Renames are free
@@ -243,12 +241,13 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 //				 enchantmentLevelCost += renameCost;
 				outputStack.remove(DataComponentTypes.CUSTOM_NAME);
 			}
+			// TODO: we are setting DataComponentTypes.CUSTOM_NAME above, already.
 			Text text = outputStack.getName();
 			if (pigmentInRepairSlot && text instanceof MutableText mutableText) {
 				TextColor newColor = TextColor.fromRgb(SpectrumColorHelper.getInt(((PigmentItem) repairSlotStack.getItem()).getColor()));
 				Text newName = mutableText.setStyle(mutableText.getStyle().withColor(newColor));
 				if (!newName.equals(inputStack.getName())) {
-					outputStack.setCustomName(newName);
+					outputStack.set(DataComponentTypes.CUSTOM_NAME, Text.literal(this.newItemName));
 				}
 			}
 			

@@ -19,7 +19,7 @@ public class LifeDrainStatusEffect extends StatusEffect {
 	@Override
 	public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
 		if (entity instanceof PlayerEntity player && (player.isCreative() || player.isSpectator())) {
-			return;
+			return true;
 		}
 		
 		EntityAttributeInstance instance = entity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
@@ -36,7 +36,7 @@ public class LifeDrainStatusEffect extends StatusEffect {
 				}
 			}
 		}
-
+		
 		return true;
 	}
 	

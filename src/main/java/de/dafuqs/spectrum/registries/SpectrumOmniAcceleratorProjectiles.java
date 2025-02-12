@@ -219,7 +219,7 @@ public class SpectrumOmniAcceleratorProjectiles {
 			
 			@Override
 			public SoundEvent getSoundEffect() {
-				return SoundEvents.ENTITY_SPLASH_POTION_THROW;
+				return SoundEvents.BLOCK_ANVIL_PLACE;
 			}
 		}, ItemTags.ANVIL);
 	}

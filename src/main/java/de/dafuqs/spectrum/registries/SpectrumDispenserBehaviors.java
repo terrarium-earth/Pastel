@@ -61,7 +61,7 @@ public class SpectrumDispenserBehaviors {
 		
 		// Glass Ampoules
 		DispenserBehavior ampouleBehavior = (pointer, stack) -> {
-			if (((BaseGlassAmpouleItem) stack.getItem()).trigger(pointer.getWorld(), stack, null, null, pointer.getPos().toCenterPos())) {
+			if (((BaseGlassAmpouleItem) stack.getItem()).trigger(pointer.world(), stack, null, null, pointer.pos().toCenterPos())) {
 				stack.decrement(1);
 			}
 			return stack;

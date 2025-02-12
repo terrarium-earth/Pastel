@@ -47,7 +47,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 			if (affectedByImmunity(instance, effect.getAmplifier()))
 				return true;
 			
-			Incurable.cutDuration(instance, effect);
+			SpectrumStatusEffects.cutDuration(instance, effect);
 			
 			blockRemoval.set(true);
 			return false;

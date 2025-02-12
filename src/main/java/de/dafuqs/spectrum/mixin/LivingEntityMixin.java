@@ -16,6 +16,7 @@ import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.helpers.enchantments.*;
 import de.dafuqs.spectrum.items.tools.*;
 import de.dafuqs.spectrum.items.trinkets.*;
+import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.status_effects.*;
@@ -412,8 +413,8 @@ public abstract class LivingEntityMixin {
 			ParticleHelper.playParticleWithPatternAndVelocityClient(thisEntity.getWorld(), thisEntity.getPos(), SpectrumParticleTypes.WHITE_CRAFTING, VectorPattern.EIGHT, 0.4);
 			ParticleHelper.playParticleWithPatternAndVelocityClient(thisEntity.getWorld(), thisEntity.getPos(), SpectrumParticleTypes.BLUE_CRAFTING, VectorPattern.EIGHT_OFFSET, 0.5);
 		} else if (thisEntity instanceof ServerPlayerEntity serverPlayerEntity) {
-			SpectrumS2CPacketSender.playParticleWithPatternAndVelocity(serverPlayerEntity, (ServerWorld) thisEntity.getWorld(), thisEntity.getPos(), SpectrumParticleTypes.WHITE_CRAFTING, VectorPattern.EIGHT, 0.4);
-			SpectrumS2CPacketSender.playParticleWithPatternAndVelocity(serverPlayerEntity, (ServerWorld) thisEntity.getWorld(), thisEntity.getPos(), SpectrumParticleTypes.BLUE_CRAFTING, VectorPattern.EIGHT_OFFSET, 0.5);
+			PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(serverPlayerEntity, (ServerWorld) thisEntity.getWorld(), thisEntity.getPos(), SpectrumParticleTypes.WHITE_CRAFTING, VectorPattern.EIGHT, 0.4);
+			PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(serverPlayerEntity, (ServerWorld) thisEntity.getWorld(), thisEntity.getPos(), SpectrumParticleTypes.BLUE_CRAFTING, VectorPattern.EIGHT_OFFSET, 0.5);
 		}
 		thisEntity.getWorld().playSound(null, thisEntity.getBlockPos(), SpectrumSoundEvents.PUFF_CIRCLET_PFFT, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		
@@ -496,14 +497,13 @@ public abstract class LivingEntityMixin {
 		return false;
 	}
 	
-	// WHAT THE FUCK
+	// TODO: WHAT THE FUCK
 	@Inject(method = "addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z", at = @At("HEAD"), cancellable = true)
 	private void spectrum$modifyOrCancelEffects(StatusEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
 		var entity = (LivingEntity) (Object) this;
 		var effectType = effect.getEffectType();
 		
-		// trigger gloves only if you don't have immunity, or if you do have immunity but the incoming effect bypasses it
-		if ((!entity.hasStatusEffect(SpectrumStatusEffects.IMMUNITY) || SpectrumStatusEffectTags.bypassesImmunity(effectType)) && AetherGracedNectarGlovesItem.testEffectFor(entity, effectType)) {
+		if ((!entity.hasStatusEffect(SpectrumStatusEffects.IMMUNITY)) && AetherGracedNectarGlovesItem.testEffectFor(entity, effectType)) {
 			var cost = (effect.getAmplifier() + 1) * AetherGracedNectarGlovesItem.HARMFUL_EFFECT_COST;
 			
 			if (StatusEffectHelper.isIncurable(effect))

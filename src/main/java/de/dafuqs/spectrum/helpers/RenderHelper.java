@@ -91,15 +91,15 @@ public class RenderHelper {
 		float u2 = u1 + u / 16F, v2 = v1 + v / 16F;
 		
 		if (altAxis) {
-			vertices.vertex(model, x1, 0, y2).color(r, g, b, alpha).texture(u1, v1).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0).next();
-			vertices.vertex(model, x2, 0, y2).color(r, g, b, alpha).texture(u2, v1).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0).next();
-			vertices.vertex(model, x2, 0, y1).color(r, g, b, alpha).texture(u2, v2).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0).next();
-			vertices.vertex(model, x1, 0, y1).color(r, g, b, alpha).texture(u1, v2).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0).next();
+			vertices.vertex(model, x1, 0, y2).color(r, g, b, alpha).texture(u1, v1).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0);
+			vertices.vertex(model, x2, 0, y2).color(r, g, b, alpha).texture(u2, v1).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0);
+			vertices.vertex(model, x2, 0, y1).color(r, g, b, alpha).texture(u2, v2).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0);
+			vertices.vertex(model, x1, 0, y1).color(r, g, b, alpha).texture(u1, v2).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0);
 		} else {
-			vertices.vertex(model, x1, y2, 0).color(r, g, b, alpha).texture(u1, v1).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0).next();
-			vertices.vertex(model, x2, y2, 0).color(r, g, b, alpha).texture(u2, v1).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0).next();
-			vertices.vertex(model, x2, y1, 0).color(r, g, b, alpha).texture(u2, v2).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0).next();
-			vertices.vertex(model, x1, y1, 0).color(r, g, b, alpha).texture(u1, v2).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0).next();
+			vertices.vertex(model, x1, y2, 0).color(r, g, b, alpha).texture(u1, v1).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0);
+			vertices.vertex(model, x2, y2, 0).color(r, g, b, alpha).texture(u2, v1).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0);
+			vertices.vertex(model, x2, y1, 0).color(r, g, b, alpha).texture(u2, v2).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0);
+			vertices.vertex(model, x1, y1, 0).color(r, g, b, alpha).texture(u1, v2).overlay(overlay).light(LightmapTextureManager.MAX_LIGHT_COORDINATE).normal(0, 1, 0);
 		}
 	}
 	

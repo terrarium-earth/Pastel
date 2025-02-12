@@ -148,7 +148,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent HOT_CHOCOLATE = new FoodComponent.Builder()
-			.hunger(6).saturationModifier(SAT_POOR).alwaysEdible()
+			.nutrition(6).saturationModifier(SAT_POOR).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.NOURISHING, 1200), 1.0F)
 			.build();
 	
@@ -157,7 +157,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent KARAK_CHAI = new FoodComponent.Builder()
-			.hunger(5).saturationModifier(SAT_POOR).alwaysEdible()
+			.nutrition(5).saturationModifier(SAT_POOR).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(SpectrumStatusEffects.CALMING, 2400, 1), 1.0F)
 			.build();
 
@@ -382,7 +382,7 @@ public class SpectrumFoodComponents {
 			.build();
 
 	public static final FoodComponent GOLDEN_BRISTLE_TEA = new FoodComponent.Builder()
-			.hunger(6).saturationModifier(SAT_LOW).alwaysEdible()
+			.nutrition(6).saturationModifier(SAT_LOW).alwaysEdible()
 			.statusEffect(new StatusEffectInstance(StatusEffects.INSTANT_HEALTH), 0.5F)
 			.statusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 600, 3), 1)
 			.statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 600, 0), 0.5F)

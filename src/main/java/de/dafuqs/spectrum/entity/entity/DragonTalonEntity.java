@@ -12,6 +12,7 @@ import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
+import net.minecraft.entity.damage.*;
 import net.minecraft.entity.data.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.entity.projectile.*;
@@ -64,27 +65,25 @@ public class DragonTalonEntity extends BidentBaseEntity {
 	
 	@Override
 	protected void onEntityHit(EntityHitResult entityHitResult) {
+		// TODO: this is in big parts identical to DraconicTwinswordEntity.onEntityHit(). Dedup needed
 		ItemStack stack = getTrackedStack();
 		Entity attacked = entityHitResult.getEntity();
 		if (attacked.getType() == EntityType.ENDERMAN) {
 			return;
 		}
+		Entity owner = this.getOwner();
 		
-		float f = 2.0F;
-		if (attacked instanceof LivingEntity livingAttacked) {
-			f *= (getDamage(getTrackedStack()) + EnchantmentHelper.getAttackDamage(getTrackedStack(), livingAttacked.getGroup()));
+		float damage = 2.0F;
+		DamageSource damageSource = SpectrumDamageTypes.impaling(getWorld(), this, owner);
+		if (getWorld() instanceof ServerWorld serverWorld) {
+			damage *= EnchantmentHelper.getDamage(serverWorld, stack, attacked, damageSource, getDamage(stack));
 		}
 		
-		Entity owner = this.getOwner();
-		if (attacked.damage(SpectrumDamageTypes.impaling(getWorld(), this, owner), f)) {
+		if (attacked.damage(damageSource, damage)) {
+			if (getWorld() instanceof ServerWorld serverWorld) {
+				EnchantmentHelper.onTargetDamaged(serverWorld, attacked, damageSource, stack);
+			}
 			if (attacked instanceof LivingEntity livingAttacked) {
-				if (owner instanceof LivingEntity) {
-					EnchantmentHelper.onUserDamaged(livingAttacked, owner);
-					if (getWorld() instanceof ServerWorld serverWorld) {
-						EnchantmentHelper.onTargetDamaged(serverWorld, attacked, damageSource, stack);
-					}
-				}
-				
 				this.onHit(livingAttacked);
 			}
 		}

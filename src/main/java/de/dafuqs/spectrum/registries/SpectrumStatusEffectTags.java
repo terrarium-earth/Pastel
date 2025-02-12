@@ -21,22 +21,6 @@ public class SpectrumStatusEffectTags {
 		return TagKey.of(RegistryKeys.STATUS_EFFECT, SpectrumCommon.locate(id));
 	}
 	
-	public static boolean bypassesImmunity(StatusEffect statusEffect) {
-		return isIn(SpectrumStatusEffectTags.BYPASSES_IMMUNITY, statusEffect);
-	}
-	
-	public static boolean bypassesNectarGloves(StatusEffect statusEffect) {
-		return isIn(SpectrumStatusEffectTags.BYPASSES_NECTAR_GLOVES, statusEffect);
-	}
-	
-	public static boolean bypassesWhispyCirclet(StatusEffect statusEffect) {
-		return isIn(SpectrumStatusEffectTags.BYPASSES_WHISPY_CIRCLET, statusEffect);
-	}
-	
-	public static boolean cannotBeIncurable(StatusEffect statusEffect) {
-		return isIn(SpectrumStatusEffectTags.CANNOT_BE_INCURABLE, statusEffect);
-	}
-	
 	public static boolean hasEffectWithTag(LivingEntity livingEntity, TagKey<StatusEffect> tag) {
 		for (var statusEffect : livingEntity.getActiveStatusEffects().keySet()) {
 			if (statusEffect.isIn(tag)) {

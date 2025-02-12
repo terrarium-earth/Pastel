@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
+import net.minecraft.component.type.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.recipe.*;
@@ -17,7 +18,7 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
 	}
 	
 	@Override
-	public boolean canCraftWithBlockEntityTag(NbtCompound spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
+	public boolean canCraftWithBlockEntityTag(NbtComponent spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
 		if (spawnerBlockEntityNbt == null) {
 			return true;
 		}
@@ -36,6 +37,7 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
 	public Text getOutputLoreText() {
 		return Text.translatable("recipe.spectrum.spawner.lore.increased_max_nearby_entities");
 	}
+	
 	
 	@Override
 	public NbtCompound getSpawnerResultNbt(NbtCompound spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {

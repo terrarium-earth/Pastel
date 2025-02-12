@@ -103,6 +103,7 @@
     "accessors.ProjectileAttackGoalAccessor",
     "accessors.RegistryOpsAccessor",
     "accessors.SlimeEntityAccessor",
+    "accessors.StatusEffectInstanceAccessor",
     "accessors.TridentEntityAccessor",
     "compat.connectormod.absent.EntityApplyFluidsMixinNoSinytra",
     "compat.connectormod.absent.PlayerEntityMixin",

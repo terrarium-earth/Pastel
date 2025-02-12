@@ -12,6 +12,7 @@ import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.items.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
+import net.fabricmc.loader.api.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.*;
@@ -40,11 +41,10 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 		super.appendTooltip(stack, context, tooltip, type);
 		
-		if (world != null && world.isClient) {
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			appendClientTooltips(stack, tooltip);
 		}
 	}

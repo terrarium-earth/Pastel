@@ -2,11 +2,15 @@ package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.additionalentityattributes.*;
 import de.dafuqs.spectrum.api.energy.*;
+import de.dafuqs.spectrum.mixin.accessors.*;
 import de.dafuqs.spectrum.status_effects.*;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.effect.*;
+import net.minecraft.network.packet.s2c.play.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
+import net.minecraft.server.world.*;
 
 import static de.dafuqs.spectrum.SpectrumCommon.*;
 
@@ -177,5 +181,14 @@ public class SpectrumStatusEffects {
 	public static boolean isStrongSleepEffect(InkPoweredStatusEffectInstance instance) {
 		return isStrongSleepEffect(instance.getStatusEffectInstance());
 	}
-
+	
+	public static void cutDuration(LivingEntity instance, StatusEffectInstance effect) {
+		// new duration = duration - 1min OR duration * 0.4, whichever is the smaller reduction
+		int duration = effect.getDuration();
+		((StatusEffectInstanceAccessor) effect).setDuration(Math.max(duration - 1200, (int) (duration * 0.4)));
+		if (instance.getWorld() instanceof ServerWorld serverWorld) {
+			serverWorld.getChunkManager().sendToNearbyPlayers(instance, new EntityStatusEffectS2CPacket(instance.getId(), effect, false));
+		}
+	}
+	
 }

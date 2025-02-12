@@ -98,7 +98,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 			if (!checkRecipeRequirements(world, blockPos, spiritInstillerBlockEntity)) {
 				spiritInstillerBlockEntity.craftingTime = 0;
 				spiritInstillerBlockEntity.markDirty();
-				SpectrumS2CPacketSender.sendCancelBlockBoundSoundInstance((ServerWorld) world, spiritInstillerBlockEntity.pos);
+				PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerWorld) world, spiritInstillerBlockEntity.pos);
 				return;
 			}
 		}

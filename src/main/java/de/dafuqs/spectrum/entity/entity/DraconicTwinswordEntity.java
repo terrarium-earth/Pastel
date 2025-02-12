@@ -186,6 +186,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 		damage = adjustDamage(damage, channeling);
 		boolean crit = false;
 		
+		DamageSource damageSource = SpectrumDamageTypes.impaling(getWorld(), this, owner);
 		if (getWorld() instanceof ServerWorld serverWorld) {
 			damage *= EnchantmentHelper.getDamage(serverWorld, stack, attacked, damageSource, getDamage(stack));
 		}
@@ -195,7 +196,6 @@ public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivi
 			crit = true;
 		}
 		
-		DamageSource damageSource = SpectrumDamageTypes.impaling(getWorld(), this, owner);
 		if (attacked.damage(damageSource, damage)) {
 			if (attacked.getType() == EntityType.ENDERMAN) {
 				return;

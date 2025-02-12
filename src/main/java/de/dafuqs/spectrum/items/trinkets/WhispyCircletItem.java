@@ -37,7 +37,7 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 		List<StatusEffectInstance> negativeEffects = new ArrayList<>();
 		for (StatusEffectInstance statusEffectInstance : currentEffects) {
 			RegistryEntry<StatusEffect> effect = statusEffectInstance.getEffectType();
-			if (effect.value().getCategory() == category && !effect.isIn(SpectrumStatusEffectTags.SOPORIFIC, effect) && !SpectrumStatusEffectTags.bypassesWhispyCirclet(effect)) {
+			if (effect.value().getCategory() == category && !effect.isIn(SpectrumStatusEffectTags.SOPORIFIC) && !effect.isIn(SpectrumStatusEffectTags.BYPASSES_WHISPY_CIRCLET)) {
 				negativeEffects.add(statusEffectInstance);
 			}
 		}
@@ -48,7 +48,7 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 		
 		World world = entity.getWorld();
 		int randomIndex = world.random.nextInt(negativeEffects.size());
-		removeOrReduceNegativeStatusEffect(entity, negativeEffects.get(randomIndex).getEffectType());
+		entity.removeStatusEffect(negativeEffects.get(randomIndex).getEffectType());
 	}
 	
 	public static void removeNegativeStatusEffects(@NotNull LivingEntity entity) {
@@ -60,16 +60,6 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 		}
 		
 		for (RegistryEntry<StatusEffect> effect : effectsToRemove) {
-			removeOrReduceNegativeStatusEffect(entity, effect);
-		}
-	}
-	
-	private static void removeOrReduceNegativeStatusEffect(@NotNull LivingEntity entity, RegistryEntry<StatusEffect> effect) {
-		var instance = entity.getStatusEffect(effect);
-		assert instance != null;
-		if (Incurable.isIncurable(instance)) {
-			Incurable.cutDuration(entity, instance);
-		} else {
 			entity.removeStatusEffect(effect);
 		}
 	}
@@ -100,7 +90,7 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 	}
 	
 	public static boolean affects(RegistryEntry<StatusEffect> effect) {
-		return effect.value().getCategory() == StatusEffectCategory.HARMFUL && !SpectrumStatusEffectTags.bypassesWhispyCirclet(effect.value());
+		return effect.value().getCategory() == StatusEffectCategory.HARMFUL && !effect.isIn(SpectrumStatusEffectTags.BYPASSES_WHISPY_CIRCLET);
 	}
 	
 	public static void preventPhantomSpawns(@NotNull ServerPlayerEntity serverPlayerEntity) {

@@ -214,8 +214,9 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 	
 	private static boolean isBrewingRecipeApplicable(PotionWorkshopBrewingRecipe recipe, ItemStack baseIngredient, PotionWorkshopBlockEntity potionWorkshopBlockEntity) {
 		PotionMod potionMod = getPotionModFromReagents(potionWorkshopBlockEntity);
-		return hasUniqueReagents(potionWorkshopBlockEntity) && recipe.recipeData.isApplicableTo(baseIngredient, potionMod)
-				&& !(potionMod.flags().incurable() && SpectrumStatusEffectTags.cannotBeIncurable(recipe.recipeData.statusEffect().value()));
+		return hasUniqueReagents(potionWorkshopBlockEntity)
+				&& recipe.recipeData.isApplicableTo(baseIngredient, potionMod)
+				&& !(potionMod.flags().incurable() && recipe.recipeData.statusEffect().isIn(SpectrumStatusEffectTags.CANNOT_BE_INCURABLE));
 	}
 	
 	private static void craftRecipe(PotionWorkshopBlockEntity potionWorkshopBlockEntity, RecipeEntry<PotionWorkshopCraftingRecipe> recipe) {
@@ -229,7 +230,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 		}
 		
 		// output
-		addToInventoryOrSpawn(potionWorkshopBlockEntity, recipe.value().craft(potionWorkshopBlockEntity, potionWorkshopBlockEntity.world.getRegistryManager()));
+		addToInventoryOrSpawn(potionWorkshopBlockEntity, recipe.value().craft(potionWorkshopBlockEntity.getRecipeInput(), potionWorkshopBlockEntity.world.getRegistryManager()));
 	}
 	
 	private static void brewRecipe(PotionWorkshopBlockEntity potionWorkshopBlockEntity, RecipeEntry<PotionWorkshopBrewingRecipe> brewingRecipe) {
