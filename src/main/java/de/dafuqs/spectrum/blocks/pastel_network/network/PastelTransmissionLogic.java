@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import de.dafuqs.spectrum.networking.*;
+import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import net.fabricmc.fabric.api.transfer.v1.item.*;
 import net.fabricmc.fabric.api.transfer.v1.storage.*;
 import net.fabricmc.fabric.api.transfer.v1.transaction.*;
@@ -151,7 +151,7 @@ public class PastelTransmissionLogic {
 					PastelTransmission transmission = optionalTransmission.get();
 					int travelTime = transmission.getTransmissionDuration();
 					this.network.addTransmission(transmission, travelTime);
-					SpectrumS2CPacketSender.sendPastelTransmissionParticle(this.network, travelTime, transmission);
+					PastelTransmissionPayload.sendPastelTransmissionParticle(this.network, travelTime, transmission);
 					
 					if (transferMode == TransferMode.PULL) {
 						destinationNode.markTransferred();
@@ -175,10 +175,8 @@ public class PastelTransmissionLogic {
 	public Optional<PastelTransmission> createTransmissionOnValidPath(PastelNodeBlockEntity source, PastelNodeBlockEntity destination, ItemVariant variant, long amount, int vertexTime) {
 		GraphPath<BlockPos, DefaultEdge> graphPath = getPath(this.network.getGraph(), source, destination);
 		if (graphPath != null) {
-			List<BlockPos> vertexPositions = new ArrayList<>(graphPath.getVertexList());
-			
-			SpectrumS2CPacketSender.sendPastelNodeStatusUpdate(List.of(source), true);
-			return Optional.of(new PastelTransmission(vertexPositions, variant, amount, vertexTime));
+			PastelNodeStatusUpdatePayload.sendPastelNodeStatusUpdate(List.of(source), true);
+			return Optional.of(new PastelTransmission(graphPath.getVertexList(), variant, amount, vertexTime));
 		}
 		return Optional.empty();
 	}

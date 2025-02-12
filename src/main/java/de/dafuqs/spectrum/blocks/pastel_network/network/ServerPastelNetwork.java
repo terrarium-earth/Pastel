@@ -1,18 +1,19 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.blocks.pastel_network.*;
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
 import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.*;
+import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.registries.*;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.entity.*;
-import net.minecraft.nbt.*;
-import net.minecraft.registry.*;
 import net.minecraft.server.world.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
+import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 import org.jgrapht.alg.connectivity.*;
 import org.jgrapht.graph.*;
@@ -23,22 +24,35 @@ import java.util.stream.*;
 
 public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 	
+	public static final Codec<ServerPastelNetwork> CODEC = RecordCodecBuilder.create(i -> i.group(
+			Uuids.CODEC.fieldOf("uuid").forGetter(ServerPastelNetwork::getUUID),
+			World.CODEC.xmap(k -> SpectrumCommon.minecraftServer.getWorld(k), World::getRegistryKey).fieldOf("world").forGetter(b -> b.world),
+			TickLooper.CODEC.fieldOf("looper").forGetter(b -> b.transferLooper),
+			SchedulerMap.getCodec(PastelTransmission.CODEC).fieldOf("transmissions").forGetter(b -> b.transmissions)
+	).apply(i, ServerPastelNetwork::new));
+	
 	protected final Map<PastelNodeType, Set<PastelNodeBlockEntity>> loadedNodes = new ConcurrentHashMap<>();
 	protected final Set<PastelNodeBlockEntity> priorityNodes = new HashSet<>();
 	protected final Set<PastelNodeBlockEntity> highPriorityNodes = new HashSet<>();
 
 	// new transfers are checked for every 10 ticks
-	private final TickLooper transferLooper = new TickLooper(10);
-	
-	protected final SchedulerMap<PastelTransmission> transmissions = new SchedulerMap<>();
+	private final TickLooper transferLooper;
+	protected final SchedulerMap<PastelTransmission> transmissions;
 	protected final PastelTransmissionLogic transmissionLogic;
 	
 	public ServerPastelNetwork(ServerWorld world, @Nullable UUID uuid) {
+		this(uuid, world, new TickLooper(10), new SchedulerMap<>());
+	}
+	
+	public ServerPastelNetwork(UUID uuid, ServerWorld world, TickLooper transferLoop, SchedulerMap<PastelTransmission> transmissions) {
 		super(world, uuid);
-		for (PastelNodeType type : PastelNodeType.values()) {
-			this.loadedNodes.put(type, new HashSet<>());
-		}
+		this.transferLooper = transferLoop;
+		this.transmissions = transmissions;
 		this.transmissionLogic = new PastelTransmissionLogic(this);
+		
+		for (var entry : transmissions) {
+			entry.getKey().setNetwork(this);
+		}
 	}
 	
 	private boolean addNodeOrReturn(PastelNodeBlockEntity node) {
@@ -151,7 +165,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		addPriorityNode(newNode);
 		
 		newNode.setNetworkUUID(this.getUUID());
-		SpectrumS2CPacketSender.syncPastelNetworkEdges(this, newNode.getPos());
+		PastelNetworkEdgeSyncPayload.send(this, newNode.getPos());
 	}
 	
 	// check if a recently removed node split the network into subnetworks
@@ -206,7 +220,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 				blockEntity.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.setNetworkUUID(null));
 			}
 			
-			SpectrumS2CPacketSender.syncPastelNetworkRemoved(this);
+			PastelNetworkRemovedPayload.send(this);
 			return;
 		}
 		
@@ -263,7 +277,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 			this.removeNode(p, NodeRemovalReason.REMOVED);
 		}
 		
-		SpectrumS2CPacketSender.syncPastelNetworkEdges(this, sourcePos);
+		PastelNetworkEdgeSyncPayload.send(this, sourcePos);
 		this.transmissionLogic.invalidateCache();
 	}
 	
@@ -285,7 +299,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		
 		Pastel.getServerInstance().removeNetwork(networkToIncorporate.getUUID());
 		this.transmissionLogic.invalidateCache();
-		SpectrumS2CPacketSender.syncPastelNetworkEdges(this, trackingPos);
+		PastelNetworkEdgeSyncPayload.send(this, trackingPos);
 	}
 	
 	protected void removeNode(PastelNodeBlockEntity node, NodeRemovalReason reason) {
@@ -302,7 +316,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		
 		if (reason.checksForNetworkSplit) {
 			checkForNetworkSplit(node.getPos());
-			SpectrumS2CPacketSender.syncPastelNetworkEdges(this, node.getPos());
+			PastelNetworkEdgeSyncPayload.send(this, node.getPos());
 		}
 		
 	}
@@ -323,7 +337,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		if (success) {
 			checkForNetworkSplit(node.getPos());
 			this.transmissionLogic.invalidateCache();
-			SpectrumS2CPacketSender.syncPastelNetworkEdges(this, node.getPos());
+			PastelNetworkEdgeSyncPayload.send(this, node.getPos());
 		}
 		
 		return success;
@@ -348,7 +362,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		boolean success = super.addEdge(node, otherNode);
 		if (success) {
 			this.transmissionLogic.invalidateCache();
-			SpectrumS2CPacketSender.syncPastelNetworkEdges(this, node.getPos());
+			PastelNetworkEdgeSyncPayload.send(this, node.getPos());
 		}
 		return success;
 	}
@@ -405,9 +419,10 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 					pastelNode.notifySensor();
 			}
 		}
-
-		if (!nodeSync.isEmpty())
-			SpectrumS2CPacketSender.sendPastelNodeStatusUpdate(nodeSync, false);
+		
+		if (!nodeSync.isEmpty()) {
+			PastelNodeStatusUpdatePayload.sendPastelNodeStatusUpdate(nodeSync, false);
+		}
 	}
 	
 	public void addTransmission(PastelTransmission transmission, int travelTime) {
@@ -415,50 +430,4 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		this.transmissions.put(transmission, travelTime);
 	}
 	
-	public NbtCompound toNbt() {
-		NbtCompound nbt = new NbtCompound();
-		nbt.putUuid("UUID", this.uuid);
-		nbt.putString("World", this.getWorld().getRegistryKey().getValue().toString());
-		nbt.put("Graph", graphToNbt());
-		nbt.put("Looper", this.transferLooper.toNbt());
-		
-		NbtList transmissionList = new NbtList();
-		for (Map.Entry<PastelTransmission, Integer> transmission : this.transmissions) {
-			NbtCompound transmissionCompound = new NbtCompound();
-			transmissionCompound.putInt("Delay", transmission.getValue());
-			transmissionCompound.put("Transmission", transmission.getKey().toNbt());
-			transmissionList.add(transmissionCompound);
-		}
-		nbt.put("Transmissions", transmissionList);
-		return nbt;
-	}
-	
-	public static Optional<ServerPastelNetwork> fromNbt(NbtCompound nbt) {
-		UUID uuid = nbt.getUuid("UUID");
-		ServerWorld world = SpectrumCommon.minecraftServer.getWorld(RegistryKey.of(RegistryKeys.WORLD, Identifier.tryParse(nbt.getString("World"))));
-		ServerPastelNetwork network = new ServerPastelNetwork(world, uuid);
-		network.graph = graphFromNbt(nbt.getCompound("Graph"));
-		
-		if (network.graph.edgeSet().isEmpty()) {
-			SpectrumCommon.logError("Tried to load a Pastel Network without any edges");
-			return Optional.empty();
-		}
-		if (network.graph.vertexSet().isEmpty()) {
-			SpectrumCommon.logError("Tried to load a Pastel Network without any vertices");
-			return Optional.empty();
-		}
-		
-		if (nbt.contains("Looper", NbtElement.COMPOUND_TYPE)) {
-			network.transferLooper.readNbt(nbt.getCompound("Looper"));
-		}
-		
-		for (NbtElement e : nbt.getList("Transmissions", NbtElement.COMPOUND_TYPE)) {
-			NbtCompound t = (NbtCompound) e;
-			int delay = t.getInt("Delay");
-			PastelTransmission transmission = PastelTransmission.fromNbt(t.getCompound("Transmission"));
-			network.addTransmission(transmission, delay);
-		}
-		
-		return Optional.of(network);
-	}
 }

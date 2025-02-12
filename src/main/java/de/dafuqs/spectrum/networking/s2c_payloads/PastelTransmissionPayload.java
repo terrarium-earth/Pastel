@@ -20,7 +20,7 @@ public record PastelTransmissionPayload(int networkColor, int travelTime, Pastel
 	public static final PacketCodec<RegistryByteBuf, PastelTransmissionPayload> CODEC = PacketCodec.tuple(
 			PacketCodecs.INTEGER, PastelTransmissionPayload::networkColor,
 			PacketCodecs.INTEGER, PastelTransmissionPayload::travelTime,
-			PastelTransmission.CODEC, PastelTransmissionPayload::transmission,
+			PastelTransmission.PACKET_CODEC, PastelTransmissionPayload::transmission,
 			PastelTransmissionPayload::new
 	);
 	

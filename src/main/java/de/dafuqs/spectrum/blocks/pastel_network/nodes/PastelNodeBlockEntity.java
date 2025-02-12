@@ -8,7 +8,7 @@ import de.dafuqs.spectrum.blocks.pastel_network.*;
 import de.dafuqs.spectrum.blocks.pastel_network.network.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.networking.*;
+import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.lookup.v1.block.*;
@@ -382,9 +382,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	@Override
 	public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
 		Optional<ServerPastelNetwork> network = getServerNetwork();
-		if (network.isPresent()) {
-			SpectrumS2CPacketSender.syncPastelNetworkEdges(network.get(), pos);
-		}
+		network.ifPresent(serverPastelNetwork -> PastelNetworkEdgeSyncPayload.send(serverPastelNetwork, pos));
 		
 		NbtCompound nbtCompound = new NbtCompound();
 		this.writeNbt(nbtCompound, registryLookup);

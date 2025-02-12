@@ -1,7 +1,8 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import de.dafuqs.spectrum.networking.*;
+import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import net.minecraft.nbt.*;
 import net.minecraft.registry.*;
 import net.minecraft.server.world.*;
@@ -10,8 +11,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-// Persisted together with the overworld
-// resetting the overworld will also reset all networks
+// Persisted together with the overworld. Resetting the overworld will also reset all networks
 public class ServerPastelNetworkManager extends PersistentState implements PastelNetworkManager<ServerWorld, ServerPastelNetwork> {
 	
 	private static final String PERSISTENT_STATE_ID = "spectrum_pastel_network_manager";
@@ -28,7 +28,9 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 	}
 	
 	public static ServerPastelNetworkManager get(ServerWorld world) {
-		return world.getPersistentStateManager().getOrCreate(ServerPastelNetworkManager::fromNbt, ServerPastelNetworkManager::new, PERSISTENT_STATE_ID);
+		// TODO: We need to spoof a datafixer type, null will prevent data from being read
+		PersistentState.Type<ServerPastelNetworkManager> type = new PersistentState.Type<>(ServerPastelNetworkManager::new, (nbtCompound, lookup) -> ServerPastelNetworkManager.fromNbt(nbtCompound), null);
+		return world.getPersistentStateManager().getOrCreate(type, PERSISTENT_STATE_ID);
 	}
 	
 	@Override
@@ -48,7 +50,7 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 	public NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		NbtList networkList = new NbtList();
 		for (ServerPastelNetwork network : this.networks) {
-			networkList.add(network.toNbt());
+			CodecHelper.toNbt(ServerPastelNetwork.CODEC, network, networkList::add);
 		}
 		nbt.put("Networks", networkList);
 		return nbt;
@@ -57,8 +59,10 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 	public static ServerPastelNetworkManager fromNbt(NbtCompound nbt) {
 		ServerPastelNetworkManager manager = new ServerPastelNetworkManager();
 		for (NbtElement element : nbt.getList("Networks", NbtElement.COMPOUND_TYPE)) {
-			Optional<ServerPastelNetwork> network = ServerPastelNetwork.fromNbt((NbtCompound) element);
-			network.ifPresent(manager.networks::add);
+			Optional<ServerPastelNetwork> network = CodecHelper.fromNbt(ServerPastelNetwork.CODEC, element);
+			if (network.isPresent()) {
+				manager.networks.add(network.get());
+			}
 		}
 		return manager;
 	}
@@ -71,7 +75,7 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 			this.networks.get(i).tick();
 		}
 	}
-
+	
 	@Contract("_, null -> new")
 	public PastelNetwork<ServerWorld> joinOrCreateNetwork(PastelNodeBlockEntity node, @Nullable UUID uuid) {
 		if (uuid != null) {
@@ -130,7 +134,7 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 			biggerNetwork.incorporate(smallerNetwork, firstIsBigger ? firstNode.getPos() : secondNode.getPos());
 			biggerNetwork.addEdge(firstNode, secondNode);
 			this.networks.remove(smallerNetwork);
-			SpectrumS2CPacketSender.syncPastelNetworkEdges(biggerNetwork, firstNode.getPos());
+			PastelNetworkEdgeSyncPayload.send(biggerNetwork, firstNode.getPos());
 			return true;
 		}
 		
@@ -158,10 +162,10 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 		}
 		if (foundNetwork != null) {
 			this.networks.remove(foundNetwork);
-			SpectrumS2CPacketSender.syncPastelNetworkRemoved(foundNetwork);
+			PastelNetworkRemovedPayload.send(foundNetwork);
 		}
 	}
-
+	
 	public void removeNode(PastelNodeBlockEntity node, NodeRemovalReason reason) {
 		Optional<ServerPastelNetwork> optional = node.getServerNetwork();
 		if (optional.isPresent()) {
