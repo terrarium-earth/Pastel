@@ -3,212 +3,170 @@ package de.dafuqs.spectrum.items.map;
 import de.dafuqs.spectrum.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
-import net.minecraft.server.*;
 import net.minecraft.server.world.*;
 import net.minecraft.structure.*;
 import net.minecraft.util.*;
-import net.minecraft.util.logging.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
+import net.minecraft.world.chunk.*;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.chunk.placement.*;
 import net.minecraft.world.gen.structure.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
 
 public class StructureLocatorAsync {
 	
-	private final MinecraftServer server;
 	private final ServerWorld world;
 	private final StructureLocatorAsync.Acceptor acceptor;
-	private final Identifier targetId;
+	private final RegistryEntry<Structure> registryEntry;
 	private final int maxRadius;
-	private ChunkPos center;
-	private RegistryEntry<Structure> registryEntry;
+	private final ThreadPoolExecutor threadPool;
 	
-	@Nullable
-	private LocatorThread thread;
-	private int radius;
+	private ChunkPos center;
 	
 	public StructureLocatorAsync(ServerWorld world, StructureLocatorAsync.Acceptor acceptor, Identifier targetId, ChunkPos center, int maxRadius) {
-		this.server = world.getServer();
 		this.world = world;
 		this.acceptor = acceptor;
-		this.targetId = targetId;
 		this.center = center;
+		this.registryEntry = getRegistryEntry(world, targetId);
 		this.maxRadius = maxRadius;
 		
-		thread = null;
-		radius = 1;
-
-//		start();
-	}
-	
-	private void start() {
-		thread = new LocatorThread();
-		thread.start();
+		BlockingQueue<Runnable> queuedChunks = new ArrayBlockingQueue<>(maxRadius * maxRadius * 2, true);
+		this.threadPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 15, TimeUnit.SECONDS, queuedChunks);
+		
+		submit(null); // Concentric rings
+		populateAll();
 	}
 	
 	public void move(int deltaX, int deltaZ) {
-		if (deltaX == 0 && deltaZ == 0) return;
-		
-		cancel();
-		
-		// If we move two chunks in a direction, continuing at the same radius would skip a strip of chunks.
-		// So, we reduce the radius to make sure nothing is skipped. Of course, outer chunks would get
-		// skipped regardless.
-		radius -= Math.max(Math.abs(deltaX), Math.abs(deltaZ));
-		if (radius < 1) radius = 1;
-		
-		center = new ChunkPos(center.x + deltaX, center.z + deltaZ);
-		
-		start();
+		if (deltaX != 0 || deltaZ != 0) {
+			center = new ChunkPos(center.x + deltaX, center.z + deltaZ);
+			populateDelta(deltaX, deltaZ);
+		}
 	}
 	
 	public void cancel() {
-		if (thread == null) return;
-		
-		thread.stopRunning();
-		thread.interrupt();
-		
-		while (true) {
-			try {
-				thread.join();
-			} catch (InterruptedException ignored) {
-				continue;
-			}
-			break;
-		}
-		
-		thread = null;
+		threadPool.shutdownNow();
 	}
 	
-	private class LocatorThread extends Thread {
-		
-		private static final int MAX_RUNNING_TASKS = 32;
-		private static final AtomicInteger currentRunningThreads = new AtomicInteger(0);
-		
-		private final Semaphore semaphore;
-		private boolean running;
-		private boolean ringHadTargets;
-		
-		public LocatorThread() {
-			super("Structure Locator #" + currentRunningThreads.getAndIncrement());
-			setUncaughtExceptionHandler(new UncaughtExceptionLogger(SpectrumCommon.LOGGER));
-			semaphore = new Semaphore(MAX_RUNNING_TASKS);
-		}
-		
-		public void stopRunning() {
-			running = false;
-		}
-		
-		@Override
-		public void run() {
-			running = true;
-			ringHadTargets = false;
-			
-			registryEntry = getRegistryEntry();
-			if (registryEntry == null) return;
-			
-			checkConcentricRingsStructures();
-			
-			while (running && !ringHadTargets && radius <= maxRadius) {
-				for (int i = 0; running && i < radius * 2; i++) {
-					searchChunk(center.x - radius + i, center.z + radius);     // Top-left     -> Top-right
-					searchChunk(center.x + radius, center.z + radius - i); // Top-right    -> Bottom-right
-					searchChunk(center.x + radius - i, center.z - radius);     // Bottom-right -> Bottom-left
-					searchChunk(center.x - radius, center.z - radius + i); // Bottom-left  -> Top-left
-				}
-				
-				radius++;
+	private void populateAll() {
+		for (int radius = 1; radius <= maxRadius; radius++) {
+			int minX = center.x - radius;
+			int maxX = center.x + radius;
+			int minZ = center.z - radius;
+			int maxZ = center.z + radius;
+			for (int i = 0; i < radius * 2; i++) {
+				// This iterates kind of like a spiral, starting with each corner and moving inward.
+				submit(new ChunkPos(minX + i, maxZ)); // Top-left     -> Top-right
+				submit(new ChunkPos(maxX, maxZ - i)); // Top-right    -> Bottom-right
+				submit(new ChunkPos(maxX - i, minZ)); // Bottom-right -> Bottom-left
+				submit(new ChunkPos(minX, minZ + i)); // Bottom-left  -> Top-left
 			}
 		}
-		
-		private RegistryEntry<Structure> getRegistryEntry() {
-			Registry<Structure> registry = world.getRegistryManager().getOptional(RegistryKeys.STRUCTURE).orElse(null);
-			if (registry == null) return null;
-			
-			Structure structure = registry.get(targetId);
-			if (structure == null) return null;
-			
-			return registry.getEntry(structure);
+	}
+	
+	private void populateDelta(int deltaX, int deltaZ) {
+		if (deltaX > maxRadius || deltaZ > maxRadius) {
+			populateAll();
+			return;
 		}
 		
-		private void checkConcentricRingsStructures() {
-			StructurePlacementCalculator calculator = world.getChunkManager().getStructurePlacementCalculator();
-			
-			double minDistance = Double.MAX_VALUE;
-			ChunkPos concentricStart = null;
-			
-			for (StructurePlacement placement : calculator.getPlacements(registryEntry)) {
-				if (placement instanceof ConcentricRingsStructurePlacement concentricRingsStructurePlacement) {
-					List<ChunkPos> positions = calculator.getPlacementPositions(concentricRingsStructurePlacement);
-					if (positions != null) {
-						for (ChunkPos pos : positions) {
-							double dx = (double) pos.x - (double) center.x;
-							double dz = (double) pos.z - (double) center.z;
-							double distance = dx * dx + dz * dz;
-							if (distance < minDistance) {
-								minDistance = distance;
-								concentricStart = pos;
-							}
+		int signX = deltaX < 0 ? -1 : 1;
+		int endX = center.x + (maxRadius * signX);
+		int startX = endX - deltaX;
+		int minZ = center.z - maxRadius;
+		int maxZ = center.z + maxRadius;
+		for (int x = startX; x <= endX; x += signX)
+			for (int z = minZ; z <= maxZ; z++)
+				submit(new ChunkPos(x, z));
+		
+		int signZ = deltaZ < 0 ? -1 : 1;
+		int endZ = center.z + (maxRadius * signZ);
+		int startZ = endZ - deltaZ;
+		int minX = center.x - maxRadius - Math.min(deltaX, 0);
+		int maxX = center.x + maxRadius - Math.max(deltaX, 0);
+		for (int z = startZ; z <= endZ; z += signZ)
+			for (int x = minX; x <= maxX; x++)
+				submit(new ChunkPos(x, z));
+	}
+	
+	private void submit(ChunkPos pos) {
+		threadPool.submit(() -> locateStructures(pos));
+	}
+	
+	private RegistryEntry<Structure> getRegistryEntry(World world, Identifier id) {
+		Registry<Structure> registry = world.getRegistryManager().getOptional(RegistryKeys.STRUCTURE).orElse(null);
+		if (registry == null) return null;
+		
+		Structure structure = registry.get(id);
+		if (structure == null) return null;
+		
+		return registry.getEntry(structure);
+	}
+	
+	private void locateStructures(ChunkPos pos) {
+		SpectrumCommon.logInfo(String.format("Checking chunk %s", pos));
+		if (pos == null) {
+			checkConcentricRingsStructures();
+		} else {
+			checkRandomSpreadStructures(pos);
+		}
+	}
+	
+	private void checkConcentricRingsStructures() {
+		// TODO this currently only finds one concentric structure. Do we want to find more? I doubt 128 stronghold pointers is useful,
+		// so maybe we could cap it at a certain amount.
+		
+		StructurePlacementCalculator calculator = world.getChunkManager().getStructurePlacementCalculator();
+		
+		double minDistance = Double.MAX_VALUE;
+		ChunkPos concentricStart = null;
+		
+		for (StructurePlacement placement : calculator.getPlacements(registryEntry)) {
+			if (placement instanceof ConcentricRingsStructurePlacement concentricRingsStructurePlacement) {
+				List<ChunkPos> positions = calculator.getPlacementPositions(concentricRingsStructurePlacement);
+				if (positions != null) {
+					for (ChunkPos pos : positions) {
+						double dx = (double) pos.x - (double) center.x;
+						double dz = (double) pos.z - (double) center.z;
+						double distance = dx * dx + dz * dz;
+						if (distance < minDistance) {
+							minDistance = distance;
+							concentricStart = pos;
 						}
 					}
 				}
 			}
-			
-			if (concentricStart != null) {
-				acceptTarget(concentricStart);
-			}
 		}
 		
-		private void searchChunk(int x, int z) {
-			while (running) {
-				try {
-					semaphore.acquire();
-				} catch (InterruptedException ignored) {
+		if (concentricStart != null) {
+			acceptTarget(concentricStart);
+		}
+	}
+	
+	private void checkRandomSpreadStructures(ChunkPos pos) {
+		StructureAccessor accessor = world.getStructureAccessor();
+		Structure structure = registryEntry.value();
+		
+		for (StructureSet set : world.getRegistryManager().get(RegistryKeys.STRUCTURE_SET)) {
+			if (set.placement().getType() instanceof RandomSpreadStructurePlacement) {
+				StructurePresence presence = accessor.getStructurePresence(pos, structure, set.placement(), false);
+				if (presence == StructurePresence.START_NOT_PRESENT)
 					continue;
-				}
 				
-				server.send(new ServerTask(server.getTicks(), () -> {
-					ChunkPos chunkPos = new ChunkPos(x, z);
-					StructureStart target = locateStructureAtChunk(chunkPos);
-					if (target != null) {
-						acceptTarget(chunkPos);
-					}
-					semaphore.release();
-				}));
-				
-				break;
+				Chunk chunk = world.getChunk(pos.x, pos.z, ChunkStatus.STRUCTURE_STARTS);
+				StructureStart start = accessor.getStructureStart(ChunkSectionPos.from(chunk), structure, chunk);
+				if (start != null)
+					acceptTarget(pos);
 			}
 		}
-		
-		@Nullable
-		private StructureStart locateStructureAtChunk(ChunkPos pos) {
-			StructureAccessor accessor = world.getStructureAccessor();
-			Structure structure = registryEntry.value();
-			
-			// TODO Fix this once we get it building
-			return null;
-//          StructurePresence presence = accessor.getStructurePresence(pos, structure, false);
-//			if (presence == StructurePresence.START_NOT_PRESENT) return null;
-
-//			Chunk chunk = world.getChunk(pos.x, pos.z, ChunkStatus.STRUCTURE_STARTS);
-//			return accessor.getStructureStart(ChunkSectionPos.from(chunk), structure, chunk);
-		}
-		
-		private void acceptTarget(ChunkPos target) {
-			synchronized (this) {
-				if (running) {
-					ringHadTargets = true;
-					acceptor.accept(world, target);
-				}
-			}
-		}
-		
+	}
+	
+	private synchronized void acceptTarget(ChunkPos target) {
+		SpectrumCommon.logInfo(String.format("Accepting chunk %s", target));
+		acceptor.accept(world, target);
 	}
 	
 	public interface Acceptor {

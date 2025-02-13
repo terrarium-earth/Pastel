@@ -97,9 +97,8 @@ public class ArtisansAtlasState extends MapState {
 	@Override
 	public void update(PlayerEntity player, ItemStack stack) {
 		if (this.displayDelta != null) {
-			if (this.locator == null && this.targetId != null && player.getWorld() instanceof ServerWorld world) {
+			if (this.locator == null && this.targetId != null && player.getWorld() instanceof ServerWorld world)
 				startLocator(world);
-			}
 			
 			this.displayDelta = player.getBlockPos().subtract(this.displayedCenter);
 		} else {
@@ -110,9 +109,8 @@ public class ArtisansAtlasState extends MapState {
 		
 		super.update(player, stack);
 		
-		for (ChunkPos target : this.targets) {
+		for (ChunkPos target : this.targets)
 			addTargetIcon(player.getWorld(), target);
-		}
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -231,13 +229,14 @@ public class ArtisansAtlasState extends MapState {
 	
 	public void startLocator(ServerWorld world) {
 		if (targetId == null) return;
+		cancelLocator();
 		this.locator = new StructureLocatorAsync(world, this::addTarget, this.targetId, new ChunkPos(this.displayedCenter), 32);
 	}
 	
 	public void cancelLocator() {
-		if (this.locator != null) {
+		if (this.locator != null)
 			this.locator.cancel();
-		}
+		this.locator = null;
 	}
 	
 	public BlockPos getDisplayedCenter() {
