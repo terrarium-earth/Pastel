@@ -127,7 +127,7 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 		BlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof ColorableBlock colorableBlock) {
 			if (!colorableBlock.isColor(world, pos, dyeColor)) {
-				if (payBlockColorCost(context.getPlayer(), inkColor.get()) && colorableBlock.color(world, pos, dyeColor)) {
+				if (payBlockColorCost(context.getPlayer(), inkColor.get()) && colorableBlock.color(world, pos, dyeColor, context.getPlayer())) {
 					context.getWorld().playSound(null, context.getBlockPos(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				} else {
 					context.getWorld().playSound(null, context.getBlockPos(), SpectrumSoundEvents.USE_FAIL, SoundCategory.BLOCKS, 1.0F, 1.0F);

@@ -29,6 +29,10 @@ public class PastelNetwork<W extends World> {
 		this.uuid = uuid == null ? UUID.randomUUID() : uuid;
 	}
 	
+	public int size() {
+		return graph.vertexSet().size();
+	}
+	
 	public W getWorld() {
         return this.world;
     }

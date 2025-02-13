@@ -191,7 +191,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 					if (!GenericClaimModsCompat.canModify(this.getWorld(), blockPos, this.getOwner())) {
 						continue;
 					}
-					colorableBlock.color(this.getWorld(), blockPos, dyeColor);
+					colorableBlock.color(this.getWorld(), blockPos, dyeColor, getOwner());
 					continue;
 				}
 				BlockState coloredBlockState = BlockVariantHelper.getCursedBlockColorVariant(this.getWorld(), blockPos, dyeColor);

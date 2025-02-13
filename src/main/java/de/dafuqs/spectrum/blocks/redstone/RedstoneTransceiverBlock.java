@@ -142,7 +142,7 @@ public class RedstoneTransceiverBlock extends AbstractRedstoneGateBlock implemen
 	}
 
 	@Override
-	public boolean color(World world, BlockPos pos, DyeColor color) {
+	public boolean color(World world, BlockPos pos, DyeColor color, @Nullable Entity user) {
 		if (getColor(world, pos) == color) {
 			return false;
 		}

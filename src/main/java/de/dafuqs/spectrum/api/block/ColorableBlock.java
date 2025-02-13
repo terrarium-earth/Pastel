@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.api.block;
 
 import de.dafuqs.spectrum.helpers.*;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
+import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -20,7 +22,7 @@ public interface ColorableBlock {
      * @param color the color the block should be colored in
      * @return True if coloring was successful, false if failed (like the block was this color already)
      */
-    boolean color(World world, BlockPos pos, DyeColor color);
+	boolean color(World world, BlockPos pos, DyeColor color, @Nullable Entity user);
 	
 	DyeColor getColor(World world, BlockPos pos);
 	
@@ -31,7 +33,7 @@ public interface ColorableBlock {
     default boolean tryColorUsingStackInHand(ItemStack handStack, World world, BlockPos pos, PlayerEntity player, Hand hand) {
 		Optional<DyeColor> itemInHandColor = SpectrumColorHelper.getDyeColorOfItemStack(handStack);
         if (itemInHandColor.isPresent()) {
-            if (color(world, pos, itemInHandColor.get())) {
+			if (color(world, pos, itemInHandColor.get(), player)) {
                 if(!player.isCreative()) {
                     handStack.decrement(1);
                 }
