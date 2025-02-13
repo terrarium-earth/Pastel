@@ -35,9 +35,8 @@ public class ArtisansAtlasItem extends FilledMapItem {
 	}
 	
 	private static void createAndSetState(ItemStack stack, ServerWorld world, int centerX, int centerZ, @Nullable StructureStart target, @Nullable Identifier targetId) {
-		MapIdComponent id = stack.apply(DataComponentTypes.MAP_ID, world.increaseAndGetMapId(), comp -> comp);
-		
 		ArtisansAtlasState state = new ArtisansAtlasState(centerX, centerZ, (byte) 1, true, true, false, world.getRegistryKey());
+		MapIdComponent id = world.increaseAndGetMapId();
 		
 		state.setTargetId(targetId);
 		if (targetId != null) {
@@ -50,6 +49,7 @@ public class ArtisansAtlasItem extends FilledMapItem {
 		}
 		
 		world.putMapState(id, state);
+		stack.set(DataComponentTypes.MAP_ID, id);
 	}
 	
 	@Override

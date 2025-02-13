@@ -115,6 +115,7 @@ public class ArtisansAtlasState extends MapState {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void addDecoration(RegistryEntry<MapDecorationType> type, @Nullable WorldAccess world, String key, double x, double z, double rotation, @Nullable Text text) {
 		int scale = 1 << this.scale;

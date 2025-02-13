@@ -43,8 +43,8 @@ public class StructureLocatorAsync {
 		
 		thread = null;
 		radius = 1;
-		
-		start();
+
+//		start();
 	}
 	
 	private void start() {
