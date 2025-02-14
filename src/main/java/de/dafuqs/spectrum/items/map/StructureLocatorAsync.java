@@ -31,7 +31,7 @@ public class StructureLocatorAsync {
 		this.delayMillis = delayMillis;
 	}
 	
-	public void ping(BlockPos pos, BiConsumer<WorldAccess, ChunkPos> acceptor) {
+	public void ping(BlockPos pos, BiConsumer<WorldAccess, BlockPos> acceptor) {
 		if (structures.isEmpty() || pinging.get())
 			return;
 		
@@ -43,8 +43,9 @@ public class StructureLocatorAsync {
 			pinging.set(true);
 			ChunkGenerator generator = world.getChunkManager().getChunkGenerator();
 			Pair<BlockPos, RegistryEntry<Structure>> pair = generator.locateStructure(world, structures.get(), pos, 100, false);
+			// TODO Get the centerpoint of the structure region
 			if (pair != null) {
-				acceptor.accept(world, new ChunkPos(pair.getFirst()));
+				acceptor.accept(world, pair.getFirst());
 			}
 			pinging.set(false);
 		}, Util.getMainWorkerExecutor());

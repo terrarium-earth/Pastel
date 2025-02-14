@@ -57,7 +57,10 @@
 	],
 	"custom": {
 		"loom:injected_interfaces": {
-			"net/minecraft/class_1293": [
+			"net/minecraft/class_20": [
+				"de/dafuqs/spectrum/injectors/MapDecorationInjector"
+			],
+      "net/minecraft/class_1293": [
 				"de/dafuqs/spectrum/injectors/StatusEffectInstanceInjector"
 			],
 			"net/minecraft/class_2783": [
