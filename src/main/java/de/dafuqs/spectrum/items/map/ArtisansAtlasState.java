@@ -113,8 +113,8 @@ public class ArtisansAtlasState extends MapState {
 			addTargetIcon(player.getWorld(), target);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
+	@SuppressWarnings("deprecation")
 	public void addDecoration(RegistryEntry<MapDecorationType> type, @Nullable WorldAccess world, String key, double x, double z, double rotation, @Nullable Text text) {
 		int scale = 1 << this.scale;
 		
@@ -229,13 +229,10 @@ public class ArtisansAtlasState extends MapState {
 	
 	public void startLocator(ServerWorld world) {
 		if (targetId == null) return;
-		cancelLocator();
-		this.locator = new StructureLocatorAsync(world, this::addTarget, this.targetId, new ChunkPos(this.displayedCenter), 32);
+		this.locator = new StructureLocatorAsync(world, this.targetId, 5 * 1000);
 	}
 	
 	public void cancelLocator() {
-		if (this.locator != null)
-			this.locator.cancel();
 		this.locator = null;
 	}
 	
@@ -270,16 +267,12 @@ public class ArtisansAtlasState extends MapState {
 			
 			Vec3i remainder = new Vec3i(this.displayDelta.getX() % sampleSize, 0, this.displayDelta.getZ() % sampleSize);
 			Vec3i delta = this.displayDelta.subtract(remainder);
-			BlockPos newDisplayedCenter = this.displayedCenter.add(delta);
+			this.displayedCenter = this.displayedCenter.add(delta);
+			this.displayDelta = remainder;
 			
 			if (this.locator != null) {
-				ChunkSectionPos startChunk = ChunkSectionPos.from(this.displayedCenter);
-				ChunkSectionPos endChunk = ChunkSectionPos.from(newDisplayedCenter);
-				this.locator.move(endChunk.getX() - startChunk.getX(), endChunk.getZ() - startChunk.getZ());
+				this.locator.ping(displayedCenter, this::addTarget);
 			}
-			
-			this.displayDelta = remainder;
-			this.displayedCenter = newDisplayedCenter;
 		} else {
 			this.displayDelta = Vec3i.ZERO;
 		}
