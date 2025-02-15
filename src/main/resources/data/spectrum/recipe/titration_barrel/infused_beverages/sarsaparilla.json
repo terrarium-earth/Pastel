@@ -20,7 +20,7 @@
     "fluid": "minecraft:water"
   },
   "tapping_item": "minecraft:glass_bottle",
-  "fermentation_data": {
+  "fermentation": {
     "fermentation_speed_mod": 0.0,
     "effects": [
       {
@@ -48,11 +48,13 @@
     ]
   },
   "result": {
-    "item": "spectrum:infused_beverage",
+    "id": "spectrum:infused_beverage",
     "count": 4,
-    "nbt": {
-      "Variant": "sarsaparilla",
-      "Color": 45289259
+    "components": {
+      "spectrum:infused_beverage": {
+        "color": 45289259,
+        "variant": "sarsaparilla"
+      }
     }
   }
 }
