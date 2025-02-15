@@ -1513,11 +1513,11 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumItems.PRIMORDIAL_LIGHTER);
 				
 				entries.add(SpectrumItems.CONNECTION_NODE_CRYSTAL);
+				entries.add(SpectrumItems.STORAGE_NODE_CRYSTAL);
 				entries.add(SpectrumItems.PROVIDER_NODE_CRYSTAL);
 				entries.add(SpectrumItems.SENDER_NODE_CRYSTAL);
-				entries.add(SpectrumItems.STORAGE_NODE_CRYSTAL);
-				entries.add(SpectrumItems.BUFFER_NODE_CRYSTAL);
 				entries.add(SpectrumItems.GATHER_NODE_CRYSTAL);
+				entries.add(SpectrumItems.BUFFER_NODE_CRYSTAL);
 				
 				entries.add(SpectrumBlocks.DOWNSTONE);
 				entries.add(SpectrumBlocks.PRESERVATION_STONE);

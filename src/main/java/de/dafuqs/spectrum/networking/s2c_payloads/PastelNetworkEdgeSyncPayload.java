@@ -34,15 +34,11 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, Graph<BlockPos, Def
 			}
 			
 			// Edges (as index in vertices)
-			for (int i = 0; i < vertices.size(); i++) {
-				var vertex = vertices.get(i);
-				
-				Set<DefaultEdge> edges = graph.edgesOf(vertex);
-				buf.writeInt(edges.size());
-				for (DefaultEdge edge : edges) {
-					BlockPos target = graph.getEdgeTarget(edge);
-					buf.writeInt(vertices.indexOf(target));
-				}
+			Set<DefaultEdge> edges = graph.edgeSet();
+			buf.writeInt(edges.size());
+			for (DefaultEdge edge : edges) {
+				buf.writeInt(vertices.indexOf(graph.getEdgeSource(edge)));
+				buf.writeInt(vertices.indexOf(graph.getEdgeTarget(edge)));
 			}
 		}
 		
@@ -50,19 +46,19 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, Graph<BlockPos, Def
 		public Graph<BlockPos, DefaultEdge> decode(RegistryByteBuf buf) {
 			Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 			
-			int verticeCount = buf.readInt();
-			ArrayList<BlockPos> vertices = new ArrayList<>(verticeCount);
-			for (int i = 0; i < verticeCount; i++) {
-				vertices.add(buf.readBlockPos());
-				graph.addVertex(buf.readBlockPos());
+			int vertexCount = buf.readInt();
+			BlockPos[] vertices = new BlockPos[vertexCount];
+			for (int i = 0; i < vertexCount; i++) {
+				BlockPos vertex = buf.readBlockPos();
+				vertices[i] = vertex;
+				graph.addVertex(vertex);
 			}
 			
-			for (BlockPos source : vertices) {
-				int edgeCount = buf.readInt();
-				for (int j = 0; j < edgeCount; j++) {
-					BlockPos target = vertices.get(buf.readInt());
-					graph.addEdge(source, target);
-				}
+			int edgeCount = buf.readInt();
+			for (int i = 0; i < edgeCount; i++) {
+				BlockPos source = vertices[buf.readInt()];
+				BlockPos target = vertices[buf.readInt()];
+				graph.addEdge(source, target);
 			}
 			
 			return graph;

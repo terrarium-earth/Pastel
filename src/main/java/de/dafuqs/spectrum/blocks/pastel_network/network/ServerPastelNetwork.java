@@ -25,8 +25,8 @@ import java.util.stream.*;
 public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 	
 	public static final Codec<ServerPastelNetwork> CODEC = RecordCodecBuilder.create(i -> i.group(
-			Uuids.CODEC.fieldOf("uuid").forGetter(ServerPastelNetwork::getUUID),
 			World.CODEC.xmap(k -> SpectrumCommon.minecraftServer.getWorld(k), World::getRegistryKey).fieldOf("world").forGetter(b -> b.world),
+			Uuids.CODEC.fieldOf("uuid").forGetter(ServerPastelNetwork::getUUID),
 			TickLooper.CODEC.fieldOf("looper").forGetter(b -> b.transferLooper),
 			SchedulerMap.getCodec(PastelTransmission.CODEC).fieldOf("transmissions").forGetter(b -> b.transmissions)
 	).apply(i, ServerPastelNetwork::new));
@@ -40,16 +40,24 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 	protected final SchedulerMap<PastelTransmission> transmissions;
 	protected final PastelTransmissionLogic transmissionLogic;
 	
-	public ServerPastelNetwork(ServerWorld world, @Nullable UUID uuid) {
-		this(uuid, world, new TickLooper(10), new SchedulerMap<>());
+	public ServerPastelNetwork(ServerWorld world, UUID uuid) {
+		this(world, uuid, new TickLooper(10), new SchedulerMap<>());
 	}
 	
-	public ServerPastelNetwork(UUID uuid, ServerWorld world, TickLooper transferLoop, SchedulerMap<PastelTransmission> transmissions) {
+	public ServerPastelNetwork(ServerWorld world, PastelNodeBlockEntity initialNode) {
+		this(world, initialNode.getNodeId(), new TickLooper(10), new SchedulerMap<>());
+		addNode(initialNode);
+	}
+	
+	public ServerPastelNetwork(ServerWorld world, UUID uuid, TickLooper transferLoop, SchedulerMap<PastelTransmission> transmissions) {
 		super(world, uuid);
 		this.transferLooper = transferLoop;
 		this.transmissions = transmissions;
 		this.transmissionLogic = new PastelTransmissionLogic(this);
 		
+		for (PastelNodeType type : PastelNodeType.values()) {
+			this.loadedNodes.put(type, new HashSet<>());
+		}
 		for (var entry : transmissions) {
 			entry.getKey().setNetwork(this);
 		}
@@ -241,21 +249,21 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 			
 			// this part of the network has at least 2 nodes
 			// => collect all nodes and pick a network UUID
-			UUID newNetworkUUID = null;
+			PastelNodeBlockEntity initialNode = null;
 			Set<PastelNodeBlockEntity> blockEntities = new ObjectArraySet<>();
 			for (BlockPos pos : smallerSet) {
 				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE);
 				if (blockEntity.isPresent()) {
 					disconnectedBEs.add(blockEntity.get());
 					blockEntities.add(blockEntity.get());
-					if (newNetworkUUID == null) {
-						newNetworkUUID = blockEntity.get().getNodeId();
+					if (initialNode == null) {
+						initialNode = blockEntity.get();
 					}
 				}
 			}
 			
 			// and create a network for that group
-			ServerPastelNetwork newNetwork = Pastel.getServerInstance().createNetwork(world, newNetworkUUID);
+			ServerPastelNetwork newNetwork = Pastel.getServerInstance().createNetwork(world, initialNode);
 			Map<BlockPos, BlockPos> edges = new Object2ObjectArrayMap<>();
 			for (BlockPos disconnectedNode : smallerSet) {
 				for (DefaultEdge edge : this.graph.edgesOf(disconnectedNode)) {

@@ -107,6 +107,11 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
 		super.onPlaced(world, pos, state, placer, itemStack);
+		
+		if (!world.isClient) {
+			Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE);
+			blockEntity.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.connectToNearbyNodes(placer));
+		}
 	}
 	
 	@Override

@@ -553,7 +553,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		return true;
 	}
 	
-	protected void connectToNearbyNodes(@Nullable Entity user) {
+	public void connectToNearbyNodes(@Nullable Entity user) {
 		PastelNodeBlockEntity biggestNetworkNode = null;
 		int biggestNetwork = 0;
 		List<PastelNodeBlockEntity> otherNearbyNodes = new ArrayList<>();
@@ -562,11 +562,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 			Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE);
 			if (blockEntity.isPresent() && canConnect(this, blockEntity.get())) {
 				Optional<ServerPastelNetwork> network = blockEntity.get().getServerNetwork();
-				if (network.isEmpty()) {
-					continue;
-				}
-				
-				int size = network.get().size();
+				int size = network.isPresent() ? network.get().size() : 0;
 				if (size > biggestNetwork) {
 					biggestNetwork = size;
 					if (biggestNetworkNode != null) {
@@ -579,15 +575,20 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 			}
 		}
 		
+		ServerPastelNetworkManager manager = Pastel.getServerInstance();
+		ServerPastelNetwork network;
 		if (biggestNetworkNode != null) {
-			biggestNetworkNode.getServerNetwork().get().addEdge(biggestNetworkNode, this);
+			manager.toggleNodeConnection(this, biggestNetworkNode);
+			network = this.getServerNetwork().get();
+		} else if (otherNearbyNodes.isEmpty()) {
+			// no nodes to connect to? Well, we don't then
+			return;
 		} else {
-			Pastel.getServerInstance().createNetwork((ServerWorld) world, this.getNodeId());
+			network = Pastel.getServerInstance().createNetwork((ServerWorld) world, this);
 		}
 		
-		ServerPastelNetwork network = getServerNetwork().get();
 		for (PastelNodeBlockEntity nearbyNode : otherNearbyNodes) {
-			network.addEdge(nearbyNode, this);
+			manager.toggleNodeConnection(nearbyNode, this);
 		}
 		if (user instanceof ServerPlayerEntity serverPlayer) {
 			Optional<ServerPastelNetwork> thisNetwork = getServerNetwork();
@@ -596,7 +597,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	}
 	
 	public boolean canConnect(PastelNodeBlockEntity first, PastelNodeBlockEntity second) {
-		return first.getColor().equals(second.getColor()) && first.getPos().isWithinDistance(second.getPos(), RANGE);
+		return first != second && first.getColor().equals(second.getColor()) && first.getPos().isWithinDistance(second.getPos(), RANGE);
 	}
 	
 	public Optional<ServerPastelNetwork> getServerNetwork() {
