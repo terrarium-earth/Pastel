@@ -1079,8 +1079,7 @@ public class SpectrumBlocks {
 	
 	public static final Block SPIRIT_SALLOW_LEAVES = registerLeaves("spirit_sallow_leaves", new SpiritSallowLeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.OFF_WHITE).luminance((state) -> 8)), DyeColor.GREEN);
 	public static final Block SPIRIT_SALLOW_LOG = registerLog("spirit_sallow_log", new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY)), DyeColor.GREEN);
-	public static final Block SPIRIT_SALLOW_ROOTS = registerCustom(new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY)), block -> {
-		registerBlockWithItemWithoutModel("spirit_sallow_roots", block, DyeColor.GREEN);
+	public static final Block SPIRIT_SALLOW_ROOTS = registerCustom("spirit_sallow_roots", new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY)), DyeColor.GREEN, block -> {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, TextureMap.getId(block)).put(TextureKey.END, TextureMap.getId(block));
 			Identifier vertical = Models.CUBE_COLUMN.upload(block, textureMap, ctx.modelCollector);
@@ -1088,8 +1087,7 @@ public class SpectrumBlocks {
 			ctx.blockStateCollector.accept(BlockStateModelGenerator.createAxisRotatedBlockState(block, vertical, horizontal));
 		});
 	});
-	public static final Block SPIRIT_SALLOW_HEART = registerCustom(new Block(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY).luminance(s -> 11)), block -> {
-		registerBlockWithItemWithoutModel("spirit_sallow_heart", block, DyeColor.GREEN);
+	public static final Block SPIRIT_SALLOW_HEART = registerCustom("spirit_sallow_heart", new Block(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY).luminance(s -> 11)), DyeColor.GREEN, block -> {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, TextureMap.getId(block)).put(TextureKey.END, TextureMap.getSubId(SPIRIT_SALLOW_LOG, "_top"));
 			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, Models.CUBE_COLUMN.upload(block, textureMap, ctx.modelCollector)));
@@ -1161,11 +1159,11 @@ public class SpectrumBlocks {
 		return settings(mapColor, soundGroup, 5.0F, 6.0F);
 	}
 	
-	public static final Block TOPAZ_STORAGE_BLOCK = registerSingleton("topaz_storage_block", new Block(gemStorageBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.CYAN);
-	public static final Block AMETHYST_STORAGE_BLOCK = registerSingleton("amethyst_storage_block", new Block(gemStorageBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.MAGENTA);
-	public static final Block CITRINE_STORAGE_BLOCK = registerSingleton("citrine_storage_block", new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.YELLOW);
-	public static final Block ONYX_STORAGE_BLOCK = registerSingleton("onyx_storage_block", new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.BLACK);
-	public static final Block MOONSTONE_STORAGE_BLOCK = registerSingleton("moonstone_storage_block", new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK)), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.WHITE);
+	public static final Block TOPAZ_STORAGE_BLOCK = registerSingleton("topaz_storage_block", new Block(gemStorageBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK)), TexturedModel.SIDE_TOP_BOTTOM_WALL, DyeColor.CYAN);
+	public static final Block AMETHYST_STORAGE_BLOCK = registerSingleton("amethyst_storage_block", new Block(gemStorageBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK)), TexturedModel.SIDE_TOP_BOTTOM_WALL, DyeColor.MAGENTA);
+	public static final Block CITRINE_STORAGE_BLOCK = registerSingleton("citrine_storage_block", new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK)), TexturedModel.SIDE_TOP_BOTTOM_WALL, DyeColor.YELLOW);
+	public static final Block ONYX_STORAGE_BLOCK = registerSingleton("onyx_storage_block", new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK)), TexturedModel.SIDE_TOP_BOTTOM_WALL, DyeColor.BLACK);
+	public static final Block MOONSTONE_STORAGE_BLOCK = registerSingleton("moonstone_storage_block", new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK)), TexturedModel.SIDE_TOP_BOTTOM_WALL, DyeColor.WHITE);
 	//public static final Block SPECTRAL_SHARD_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME);
 	//public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK));
 	
@@ -1187,8 +1185,7 @@ public class SpectrumBlocks {
 	public static final ResonantLilyBlock RESONANT_LILY = registerPottablePlant("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN, false);
 	public static final PottedResonantLilyBlock POTTED_RESONANT_LILY = registerPottedPlant("potted_resonant_lily", new PottedResonantLilyBlock(RESONANT_LILY, pottedPlant()), false);
 	
-	public static final BloodOrchidBlock BLOOD_ORCHID = registerCustom(new BloodOrchidBlock(SpectrumStatusEffects.FRENZY, 10, AbstractBlock.Settings.copy(Blocks.POPPY).offset(AbstractBlock.OffsetType.NONE).ticksRandomly()), block -> {
-		registerBlockWithItemWithoutModel("blood_orchid", block, DyeColor.RED);
+	public static final BloodOrchidBlock BLOOD_ORCHID = registerCustom("blood_orchid", new BloodOrchidBlock(SpectrumStatusEffects.FRENZY, 10, AbstractBlock.Settings.copy(Blocks.POPPY).offset(AbstractBlock.OffsetType.NONE).ticksRandomly()), DyeColor.RED, block -> {
 		registerCutoutRenderLayerEntry(block);
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			ctx.registerItemModel(block, "5");
@@ -1200,8 +1197,7 @@ public class SpectrumBlocks {
 			})));
 		});
 	});
-	public static final PottedBloodOrchidBlock POTTED_BLOOD_ORCHID = registerCustom(new PottedBloodOrchidBlock(BLOOD_ORCHID, pottedPlant()), block -> {
-		registerBlockDeferred("potted_blood_orchid", block);
+	public static final PottedBloodOrchidBlock POTTED_BLOOD_ORCHID = registerCustom("potted_blood_orchid", new PottedBloodOrchidBlock(BLOOD_ORCHID, pottedPlant()), block -> {
 		registerCutoutRenderLayerEntry(block);
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			TextureMap textureMap = TextureMap.plant(TextureMap.getSubId(BLOOD_ORCHID, "5"));
@@ -1747,7 +1743,7 @@ public class SpectrumBlocks {
 		CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent()));
 	}
 	
-	public static <T extends Block> T registerBlockDeferred(String name, T block) {
+	public static <T extends Block> T registerBlockWithoutModel(String name, T block) {
 		Identifier id = SpectrumCommon.locate(name);
 		COMMON_REGISTRAR.defer(() -> Registry.register(Registries.BLOCK, id, block));
 		return block;
@@ -1770,7 +1766,7 @@ public class SpectrumBlocks {
 			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(pottedBlock, identifier));
 		});
 		registerCutoutRenderLayerEntry(pottedBlock);
-		return registerBlockDeferred(name, pottedBlock);
+		return registerBlockWithoutModel(name, pottedBlock);
 	}
 	
 	public static <T extends Block> T registerLeaves(String name, T leavesBlock, DyeColor color) {
@@ -1888,6 +1884,12 @@ public class SpectrumBlocks {
 	
 	public static <T extends Block> T registerCustom(String name, T block, DyeColor color, Consumer<T> callback) {
 		registerBlockWithItemWithoutModel(name, block, color);
+		callback.accept(block);
+		return block;
+	}
+	
+	public static <T extends Block> T registerCustom(String name, T block, Consumer<T> callback) {
+		registerBlockWithoutModel(name, block);
 		callback.accept(block);
 		return block;
 	}
