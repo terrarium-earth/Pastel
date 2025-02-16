@@ -70,7 +70,7 @@ public class SpectrumItems {
 		return new PairedFoodComponent(SpectrumItems.SCONE, true, foodComponent);
 	}
 	
-	private static final Deferrer DEFERRER = new Deferrer();
+	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
 	
 	// Main items
 	public static final Item GUIDEBOOK = new GuidebookItem(IS.of(1));
@@ -369,7 +369,7 @@ public class SpectrumItems {
 	public static final Item DRAGONBONE_BROTH = new StackableStewItem(IS.of(8).food(SpectrumFoodComponents.DRAGONBONE_BROTH));
 	public static final Item DOOMBLOOM_SEED = new AliasedBlockItem(SpectrumBlocks.DOOMBLOOM, IS.of().fireproof());
 	
-	public static final RegistryKey<Item> GLISTERING_MELON_SEEDS = DEFERRER.defer(keyOf("glistering_melon_seeds"), key -> register(key, new AliasedBlockItem(Registries.BLOCK.get(SpectrumBlocks.GLISTERING_MELON_STEM), IS.of()), DyeColor.LIME));
+	public static final RegistryKey<Item> GLISTERING_MELON_SEEDS = REGISTRAR.defer(keyOf("glistering_melon_seeds"), key -> register(key, new AliasedBlockItem(Registries.BLOCK.get(SpectrumBlocks.GLISTERING_MELON_STEM), IS.of()), DyeColor.LIME));
 	public static final Item AMARANTH_GRAINS = new AliasedBlockItem(SpectrumBlocks.AMARANTH, IS.of());
 	
 	public static final Item MELOCHITES_COOKBOOK_VOL_1 = new CookbookItem(IS.of().maxCount(1).rarity(Rarity.UNCOMMON), GuidebookItem.addressOf(GuidebookItem.CUISINE_CATEGORY_ID, SpectrumCommon.locate("cuisine/cookbooks/melochites_cookbook_vol_1")));
@@ -554,7 +554,7 @@ public class SpectrumItems {
 	}
 	
 	public static Item registerDeferred(String id, Item item, DyeColor dyeColor) {
-		return DEFERRER.defer(item, i -> register(id, i, dyeColor));
+		return REGISTRAR.defer(item, i -> register(id, i, dyeColor));
 	}
 	
 	public static void register() {
@@ -578,7 +578,7 @@ public class SpectrumItems {
 		registerMusicDisks();
 		registerTechnicalItems();
 		
-		DEFERRER.flush();
+		REGISTRAR.flush();
 	}
 	
 	public static void registerMusicDisks() {

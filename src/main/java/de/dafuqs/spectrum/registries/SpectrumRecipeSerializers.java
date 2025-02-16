@@ -26,7 +26,7 @@ import net.minecraft.registry.*;
 
 public class SpectrumRecipeSerializers {
 	
-	private static final Deferrer DEFERRER = new Deferrer();
+	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
 	
 	// VANILLA
 	public static final RecipeSerializer<RepairAnythingRecipe> REPAIR_ANYTHING_SERIALIZER = register("repair_anything", new EmptyRecipeSerializer<>(RepairAnythingRecipe::new));
@@ -100,11 +100,11 @@ public class SpectrumRecipeSerializers {
 	
 	
 	static <S extends RecipeSerializer<T>, T extends Recipe<?>> S register(String id, S serializer) {
-		return DEFERRER.defer(serializer, v -> Registry.register(Registries.RECIPE_SERIALIZER, SpectrumCommon.locate(id), v));
+		return REGISTRAR.defer(serializer, v -> Registry.register(Registries.RECIPE_SERIALIZER, SpectrumCommon.locate(id), v));
 	}
 	
 	public static void register() {
-		DEFERRER.flush();
+		REGISTRAR.flush();
 	}
 	
 }

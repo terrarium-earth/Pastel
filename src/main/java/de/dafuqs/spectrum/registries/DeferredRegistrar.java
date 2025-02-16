@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.registries;
 import java.util.*;
 import java.util.function.*;
 
-public class Deferrer {
+public class DeferredRegistrar {
 	
 	private final ArrayList<Runnable> deferred = new ArrayList<>();
 	
@@ -24,8 +24,8 @@ public class Deferrer {
 	
 	public record Chain<T>(T value) {
 		
-		public Chain<T> defer(Deferrer deferrer, Consumer<T> callback) {
-			deferrer.defer(value, callback);
+		public Chain<T> defer(DeferredRegistrar deferredRegistrar, Consumer<T> callback) {
+			deferredRegistrar.defer(value, callback);
 			return this;
 		}
 		

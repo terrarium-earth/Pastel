@@ -16,7 +16,7 @@ import java.util.function.*;
 
 public class SpectrumParticleTypes {
 	
-	private static final Deferrer DEFERRER = new Deferrer();
+	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
 	
 	public static final ParticleType<TransmissionParticleEffect> ITEM_TRANSMISSION = register("item_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.PACKET_CODEC);
 	public static final ParticleType<TransmissionParticleEffect> EXPERIENCE_TRANSMISSION = register("experience_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.PACKET_CODEC);
@@ -210,7 +210,7 @@ public class SpectrumParticleTypes {
 	
 	// Simple particles
 	private static SimpleParticleType register(String name, boolean alwaysShow) {
-		return DEFERRER.defer(FabricParticleTypes.simple(alwaysShow), type -> Registry.register(Registries.PARTICLE_TYPE, SpectrumCommon.locate(name), type));
+		return REGISTRAR.defer(FabricParticleTypes.simple(alwaysShow), type -> Registry.register(Registries.PARTICLE_TYPE, SpectrumCommon.locate(name), type));
 	}
 	
 	// complex particles
@@ -220,7 +220,7 @@ public class SpectrumParticleTypes {
 			Function<ParticleType<T>, MapCodec<T>> codecGetter,
 			Function<ParticleType<T>, PacketCodec<? super RegistryByteBuf, T>> packetCodecGetter
 	) {
-		return DEFERRER.defer(new ParticleType<T>(alwaysShow) {
+		return REGISTRAR.defer(new ParticleType<T>(alwaysShow) {
 			@Override
 			public MapCodec<T> getCodec() {
 				return codecGetter.apply(this);
@@ -234,7 +234,7 @@ public class SpectrumParticleTypes {
 	}
 	
 	public static void register() {
-		DEFERRER.flush();
+		REGISTRAR.flush();
 	}
 	
 	@NotNull

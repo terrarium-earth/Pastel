@@ -9,7 +9,7 @@ import net.minecraft.registry.*;
 
 public class SpectrumLootFunctionTypes {
 	
-	private static final Deferrer DEFERRER = new Deferrer();
+	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
 	
 	public static final LootFunctionType<DyeRandomlyLootFunction> DYE_RANDOMLY = register("dye_randomly", DyeRandomlyLootFunction.CODEC);
 	public static final LootFunctionType<FermentRandomlyLootFunction> FERMENT_RANDOMLY = register("ferment_randomly", FermentRandomlyLootFunction.CODEC);
@@ -18,11 +18,11 @@ public class SpectrumLootFunctionTypes {
 	public static final LootFunctionType<GrantAdvancementLootFunction> GRANT_ADVANCEMENT = register("grant_advancement", GrantAdvancementLootFunction.CODEC);
 	
 	private static <T extends LootFunction> LootFunctionType<T> register(String id, MapCodec<T> codec) {
-		return DEFERRER.defer(new LootFunctionType<>(codec), type -> Registry.register(Registries.LOOT_FUNCTION_TYPE, SpectrumCommon.locate(id), type));
+		return REGISTRAR.defer(new LootFunctionType<>(codec), type -> Registry.register(Registries.LOOT_FUNCTION_TYPE, SpectrumCommon.locate(id), type));
 	}
 	
 	public static void register() {
-		DEFERRER.flush();
+		REGISTRAR.flush();
 	}
 	
 }

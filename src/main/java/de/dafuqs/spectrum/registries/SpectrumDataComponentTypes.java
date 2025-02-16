@@ -20,7 +20,7 @@ import java.util.function.*;
 @SuppressWarnings("unused")
 public class SpectrumDataComponentTypes {
 	
-	private static final Deferrer DEFERRER = new Deferrer();
+	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
 	
 	// It seems like vanilla caches all components with collections (lists, maps, etc.), so we will too
 	public static final ComponentType<Unit> ACTIVATED = register("activated", builder -> builder.codec(Codec.unit(Unit.INSTANCE)).packetCodec(PacketCodec.unit(Unit.INSTANCE)));
@@ -61,12 +61,12 @@ public class SpectrumDataComponentTypes {
 	public static final ComponentType<WorkstaffComponent> WORKSTAFF = register("workstaff", builder -> builder.codec(WorkstaffComponent.CODEC).packetCodec(WorkstaffComponent.PACKET_CODEC));
 	
 	public static <T> ComponentType<T> register(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-		return DEFERRER.defer(builderOperator.apply(ComponentType.builder()).build(),
+		return REGISTRAR.defer(builderOperator.apply(ComponentType.builder()).build(),
 				type -> Registry.register(Registries.DATA_COMPONENT_TYPE, SpectrumCommon.locate(id), type));
 	}
 	
 	public static void register() {
-		DEFERRER.flush();
+		REGISTRAR.flush();
 	}
 	
 }

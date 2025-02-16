@@ -103,8 +103,8 @@ public class SpectrumBlocks {
 		return settings(mapColor, blockSoundGroup, 5.0F, 8.0F).solidBlock(SpectrumBlocks::never).blockVision(SpectrumBlocks::never).nonOpaque().requiresTool();
 	}
 	
-	private static final Deferrer COMMON_DEFERRER = new Deferrer();
-	private static final Deferrer CLIENT_DEFERRER = new Deferrer();
+	private static final DeferredRegistrar COMMON_REGISTRAR = new DeferredRegistrar();
+	private static final DeferredRegistrar CLIENT_REGISTRAR = new DeferredRegistrar();
 	
 	public static final Block PEDESTAL_BASIC_TOPAZ = new PedestalBlock(craftingBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.TOPAZ_BLOCK), BuiltinPedestalVariant.BASIC_TOPAZ);
 	public static final Block PEDESTAL_BASIC_AMETHYST = new PedestalBlock(craftingBlock(MapColor.PURPLE, BlockSoundGroup.AMETHYST_BLOCK), BuiltinPedestalVariant.BASIC_AMETHYST);
@@ -1543,8 +1543,8 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T> T defer(T value, @Nullable Consumer<T> common, @Nullable Consumer<T> client) {
-		if (common != null) COMMON_DEFERRER.defer(value, common);
-		if (client != null) CLIENT_DEFERRER.defer(value, client);
+		if (common != null) COMMON_REGISTRAR.defer(value, common);
+		if (client != null) CLIENT_REGISTRAR.defer(value, client);
 		return value;
 	}
 	
@@ -1674,7 +1674,7 @@ public class SpectrumBlocks {
 		
 		registerMobHeads(IS.of());
 		
-		COMMON_DEFERRER.flush();
+		COMMON_REGISTRAR.flush();
 	}
 	
 	private static void registerDDFlora(Item.Settings settings) {
@@ -3254,7 +3254,7 @@ public class SpectrumBlocks {
 				SpectrumBlocks.HUMMINGSTONE_GLASS,
 				SpectrumBlocks.HUMMINGSTONE_GLASS_PANE);
 		
-		CLIENT_DEFERRER.flush();
+		CLIENT_REGISTRAR.flush();
 	}
 	
 }
