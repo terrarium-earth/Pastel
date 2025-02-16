@@ -21,9 +21,7 @@
       "title": "book.spectrum.guidebook.ideas.where_to_find",
       "completion_advancement": "spectrum:triggers/hints/preservation_ruins_page0",
       "cost": {
-        "item": {
-          "item": "spectrum:refined_azurite"
-        },
+        "item": "spectrum:refined_azurite",
         "count": 4
       },
       "text": "book.spectrum.guidebook.ideas.preservation_ruins.page0.text"
@@ -37,9 +35,7 @@
       },
       "completion_advancement": "spectrum:triggers/hints/preservation_ruins_page1",
       "cost": {
-        "item": {
-          "item": "spectrum:refined_azurite"
-        },
+        "item": "spectrum:refined_azurite",
         "count": 12
       },
       "text": "book.spectrum.guidebook.ideas.preservation_ruins.page1.text"
@@ -53,9 +49,7 @@
       },
       "completion_advancement": "spectrum:triggers/hints/preservation_ruins_page2",
       "cost": {
-        "item": {
-          "item": "spectrum:refined_azurite"
-        },
+        "item": "spectrum:refined_azurite",
         "count": 12
       },
       "text": "book.spectrum.guidebook.ideas.preservation_ruins.page2.text"
@@ -69,9 +63,7 @@
       },
       "completion_advancement": "spectrum:triggers/hints/preservation_ruins_page3",
       "cost": {
-        "item": {
-          "item": "spectrum:refined_azurite"
-        },
+        "item": "spectrum:refined_azurite",
         "count": 12
       },
       "text": "book.spectrum.guidebook.ideas.preservation_ruins.page3.text"

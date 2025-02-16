@@ -20,9 +20,7 @@
       "title": "book.spectrum.guidebook.ideas.where_to_find",
       "completion_advancement": "spectrum:triggers/hints/stratine_page0",
       "cost": {
-        "item": {
-          "item": "minecraft:quartz"
-        },
+        "item": "minecraft:quartz",
         "count": 16
       },
       "text": "book.spectrum.guidebook.ideas.stratine.page0.text"
@@ -31,9 +29,7 @@
       "type": "spectrum:hint",
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": {
-          "item": "minecraft:quartz"
-        },
+        "item": "minecraft:quartz",
         "count": 48
       },
       "text": "book.spectrum.guidebook.ideas.stratine.page1.text",

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.chests;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
@@ -48,7 +48,7 @@ public class HeartboundChestBlock extends SpectrumChestBlock {
 			
 			if (!isChestBlocked(world, pos)) {
 				// Permissions are handled with vanilla lock()
-				// => TileEntities "checkUnlocked" function
+				// => BlockEntities "checkUnlocked" method
 				player.openHandledScreen(heartboundChestBlockEntity);
 			}
 		}

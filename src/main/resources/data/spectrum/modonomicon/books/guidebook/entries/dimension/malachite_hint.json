@@ -21,9 +21,7 @@
       "title": "book.spectrum.guidebook.ideas.where_to_find",
       "completion_advancement": "spectrum:triggers/hints/malachite_page0",
       "cost": {
-        "item": {
-          "item": "spectrum:bismuth_crystal"
-        },
+        "item": "spectrum:bismuth_crystal",
         "count": 8
       },
       "text": "book.spectrum.guidebook.ideas.malachite.page0.text"
@@ -32,9 +30,7 @@
       "type": "spectrum:hint",
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": {
-          "item": "spectrum:bismuth_crystal"
-        },
+        "item": "spectrum:bismuth_crystal",
         "count": 24
       },
       "text": "book.spectrum.guidebook.ideas.malachite.page1.text",

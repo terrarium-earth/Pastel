@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.particle.client;
 
+import de.dafuqs.spectrum.particle.effect.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.render.*;
@@ -44,6 +45,21 @@ public class TransmissionParticle extends VibrationParticle {
 		vertexConsumer.vertex(vec3fs[1].x(), vec3fs[1].y(), vec3fs[1].z()).texture(maxU, minV).color(red, green, blue, alpha).light(light);
 		vertexConsumer.vertex(vec3fs[2].x(), vec3fs[2].y(), vec3fs[2].z()).texture(minU, minV).color(red, green, blue, alpha).light(light);
 		vertexConsumer.vertex(vec3fs[3].x(), vec3fs[3].y(), vec3fs[3].z()).texture(minU, maxV).color(red, green, blue, alpha).light(light);
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public static class Factory implements ParticleFactory<TransmissionParticleEffect> {
+		private final SpriteProvider spriteProvider;
+		
+		public Factory(SpriteProvider spriteProvider) {
+			this.spriteProvider = spriteProvider;
+		}
+		
+		public Particle createParticle(TransmissionParticleEffect vibrationParticleEffect, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
+			VibrationParticle vibrationParticle = new TransmissionParticle(clientWorld, d, e, f, vibrationParticleEffect.getDestination(), vibrationParticleEffect.getArrivalInTicks());
+			vibrationParticle.setSprite(this.spriteProvider);
+			return vibrationParticle;
+		}
 	}
 	
 }

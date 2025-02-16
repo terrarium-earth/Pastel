@@ -20,12 +20,12 @@ public class AbstractInventoryScreenMixin {
 	
 	@ModifyArg(method = "drawStatusEffectBackgrounds(Lnet/minecraft/client/gui/DrawContext;IILjava/lang/Iterable;Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 0))
 	private Identifier spectrum$modifyWideBackground(Identifier texture, @Local StatusEffectInstance effect) {
-		return StatusEffectHelper.getTexture(texture, effect);
+		return StatusEffectHelper.getTexture(texture, effect, StatusEffectHelper.RenderType.GUI_LARGE);
 	}
 	
 	@ModifyArg(method = "drawStatusEffectBackgrounds(Lnet/minecraft/client/gui/DrawContext;IILjava/lang/Iterable;Z)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 1))
 	private Identifier spectrum$modifyBackground(Identifier texture, @Share("effect") LocalRef<StatusEffectInstance> effect) {
-		return StatusEffectHelper.getTexture(texture, effect.get());
+		return StatusEffectHelper.getTexture(texture, effect.get(), StatusEffectHelper.RenderType.GUI_SMALL);
 	}
 	
 }

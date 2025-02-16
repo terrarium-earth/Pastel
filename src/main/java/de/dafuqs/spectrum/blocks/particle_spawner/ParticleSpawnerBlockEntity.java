@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.blocks.particle_spawner;
 
-import de.dafuqs.spectrum.blocks.BlockPosDelegate;
+import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.screenhandler.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.*;
@@ -11,14 +12,15 @@ import net.minecraft.nbt.*;
 import net.minecraft.network.listener.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.network.packet.s2c.play.*;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.*;
 import net.minecraft.screen.*;
+import net.minecraft.server.network.*;
 import net.minecraft.text.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
-public class ParticleSpawnerBlockEntity extends BlockEntity implements NamedScreenHandlerFactory {
+public class ParticleSpawnerBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {
 	
 	protected ParticleSpawnerConfiguration configuration;
 	protected boolean initialized = false;
@@ -96,7 +98,7 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements NamedScre
 	@Nullable
 	@Override
 	public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-		return new ParticleSpawnerScreenHandler(syncId, inv, propertyDelegate);
+		return new ParticleSpawnerScreenHandler(syncId, inv, this);
 	}
 	
 	@Override
@@ -115,5 +117,9 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements NamedScre
 	public ParticleSpawnerConfiguration getConfiguration() {
 		return configuration;
 	}
-
+	
+	@Override
+	public BlockPos getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
+		return this.pos;
+	}
 }

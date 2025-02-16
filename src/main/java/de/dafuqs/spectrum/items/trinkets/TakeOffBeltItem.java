@@ -7,12 +7,14 @@ import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.registries.*;
 import dev.emi.trinkets.api.*;
 import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
@@ -105,6 +107,11 @@ public class TakeOffBeltItem extends SpectrumTrinketItem {
 	@Override
 	public int getEnchantability() {
 		return 8;
+	}
+	
+	@Override
+	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.POWER) || enchantment.matchesKey(Enchantments.FEATHER_FALLING);
 	}
 	
 }

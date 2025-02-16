@@ -14,6 +14,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "",
       "images": [
         "spectrum:textures/gui/guidebook/composite_colors.png"

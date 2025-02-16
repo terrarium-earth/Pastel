@@ -7,27 +7,54 @@ import net.minecraft.util.*;
 
 public class StatusEffectHelper {
 	
-	private static final Identifier INCURABLE_EFFECT_BACKGROUNDS = SpectrumCommon.locate("textures/gui/incurable_effect_backgrounds.png");
-	private static final Identifier NIGHT_EFFECT_BACKGROUNDS = SpectrumCommon.locate("textures/gui/night_alchemy_effect_backgrounds.png");
-	private static final Identifier DIVINITY_EFFECT_BACKGROUNDS = SpectrumCommon.locate("textures/gui/divinity_effect_backgrounds.png");
+	public enum RenderType {
+		GUI_LARGE,
+		GUI_SMALL,
+		HUD_DEFAULT,
+		HUD_AMBIENT
+	}
 	
-	public static Identifier getTexture(Identifier texture, StatusEffectInstance effect) {
+	public record StatusEffectBackground(Identifier guiLarge, Identifier guiSmall, Identifier hudDefault, Identifier hudAmbient) {
+		
+		public StatusEffectBackground(String name) {
+			this(SpectrumCommon.locate("container/inventory/" + name + "_effect_background_gui_large"),
+					SpectrumCommon.locate("container/inventory/" + name + "_effect_background_gui_small"),
+					SpectrumCommon.locate("hud/" + name + "_effect_background_hud_default"),
+					SpectrumCommon.locate("hud/" + name + "_effect_background_hud_ambient"));
+		}
+		
+		public Identifier get(RenderType type) {
+			return switch (type) {
+				case GUI_LARGE -> guiLarge;
+				case GUI_SMALL -> guiSmall;
+				case HUD_DEFAULT -> hudDefault;
+				case HUD_AMBIENT -> hudAmbient;
+			};
+		}
+	}
+	
+	private static final StatusEffectBackground DIVINITY = new StatusEffectBackground("divinity");
+	private static final StatusEffectBackground INCURABLE = new StatusEffectBackground("incurable");
+	private static final StatusEffectBackground NIGHT_ALCHEMY = new StatusEffectBackground("night_alchemy");
+	
+	public static Identifier getTexture(Identifier original, StatusEffectInstance effect, RenderType renderType) {
 		var type = effect.getEffectType();
 		
 		if (type == SpectrumStatusEffects.DIVINITY)
-			return DIVINITY_EFFECT_BACKGROUNDS;
+			return DIVINITY.get(renderType);
 		
 		if (isIncurable(effect) && type != SpectrumStatusEffects.ETERNAL_SLUMBER && type != SpectrumStatusEffects.FATAL_SLUMBER) {
-			return INCURABLE_EFFECT_BACKGROUNDS;
+			return INCURABLE.get(renderType);
 		}
 		
 		if (type.isIn(SpectrumStatusEffectTags.NIGHT_ALCHEMY))
-			return NIGHT_EFFECT_BACKGROUNDS;
+			return NIGHT_ALCHEMY.get(renderType);
 		
-		return texture;
+		return original;
 	}
 	
 	//TODO this needs a better name. What even is this.
+	//Also why is that not a tag?
 	public static boolean isIncurable(StatusEffectInstance instance) {
 		var type = instance.getEffectType();
 		if (type == SpectrumStatusEffects.ETERNAL_SLUMBER || type == SpectrumStatusEffects.FATAL_SLUMBER)

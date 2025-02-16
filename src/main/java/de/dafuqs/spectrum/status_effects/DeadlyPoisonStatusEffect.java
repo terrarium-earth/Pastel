@@ -4,7 +4,7 @@ import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 
-public class DeadlyPoisonStatusEffect extends SpectrumStatusEffect {
+public class DeadlyPoisonStatusEffect extends StatusEffect {
 	
 	public DeadlyPoisonStatusEffect(StatusEffectCategory category, int color) {
 		super(category, color);

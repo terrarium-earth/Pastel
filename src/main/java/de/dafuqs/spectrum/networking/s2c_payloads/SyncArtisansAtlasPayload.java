@@ -33,10 +33,13 @@ public record SyncArtisansAtlasPayload(Optional<Identifier> targetId, MapUpdateS
 			mapState = new ArtisansAtlasState(payload.packet.scale(), payload.packet.locked(), client.world.getRegistryKey());
 			client.world.putClientsideMapState(mapIdComponent, mapState);
 		}
-		if (mapState instanceof ArtisansAtlasState artisansAtlasState) {
+		if (payload.packet.decorations().isPresent())
+			mapState.replaceDecorations(payload.packet.decorations().get());
+		if (payload.packet.updateData().isPresent())
+			payload.packet.updateData().get().setColorsTo(mapState);
+		if (mapState instanceof ArtisansAtlasState artisansAtlasState)
 			artisansAtlasState.setTargetId(payload.targetId.orElse(null));
-			mapRenderer.updateTexture(mapIdComponent, mapState);
-		}
+		mapRenderer.updateTexture(mapIdComponent, mapState);
 	}
 	
 	@Override

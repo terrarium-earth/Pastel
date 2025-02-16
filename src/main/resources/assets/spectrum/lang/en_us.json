@@ -4464,6 +4464,7 @@
   "item.spectrum.exchanging_staff": "Exchanging Staff",
   "item.spectrum.exchanging_staff.tooltip.range": "Exchanges blocks up to %s blocks around it",
   "item.spectrum.exchanging_staff.tooltip.target": "Target: %s",
+  "item.spectrum.extended_bundle": "Extended Bundle",
   "item.spectrum.faded_koi": "Faded Koi",
   "item.spectrum.fanciful_belt": "Fanciful Belt",
   "item.spectrum.fanciful_bismuth_ring": "Fanciful Bismuth Ring",
@@ -5625,6 +5626,7 @@
   "tag.spectrum.white_logs": "White Logs",
   "tag.spectrum.workstaffs": "Workstaffs",
   "tag.spectrum.yellow_logs": "Yellow Logs",
+  "tag.spectrum.crossbows": "Spectrum Crossbows",
 
   "tag.trinkets.chest.pin": "Pins",
   "tag.trinkets.head.crown": "Crowns",

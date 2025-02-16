@@ -17,6 +17,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "block.spectrum.quitoxic_reeds",
       "images": [
         "spectrum:textures/gui/guidebook/quitoxic_reed.png"

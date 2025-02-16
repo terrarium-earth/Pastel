@@ -42,7 +42,6 @@ public class BedrockAnvilScreen extends ForgingScreen<BedrockAnvilScreenHandler>
 		int j = (this.height - this.backgroundHeight) / 2;
 		
 		this.nameField = new TextFieldWidget(this.textRenderer, i + 62, j + 24, 98, 12, Text.translatable("container.spectrum.bedrock_anvil"));
-		this.nameField.setFocusUnlocked(false);
 		this.nameField.setEditableColor(-1);
 		this.nameField.setUneditableColor(-1);
 		this.nameField.setDrawsBackground(false);
@@ -53,7 +52,6 @@ public class BedrockAnvilScreen extends ForgingScreen<BedrockAnvilScreenHandler>
 		this.nameField.setEditable((this.handler).getSlot(0).hasStack());
 		
 		this.loreField = new TextFieldWidget(this.textRenderer, i + 45, j + 76, 116, 12, Text.translatable("container.spectrum.bedrock_anvil.lore"));
-		this.loreField.setFocusUnlocked(false);
 		this.loreField.setEditableColor(-1);
 		this.loreField.setUneditableColor(-1);
 		this.loreField.setDrawsBackground(false);
@@ -83,20 +81,10 @@ public class BedrockAnvilScreen extends ForgingScreen<BedrockAnvilScreenHandler>
 	
 	@Override
 	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-		if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
-			this.close();
+		if (keyCode == GLFW.GLFW_KEY_ESCAPE || keyCode == GLFW.GLFW_KEY_TAB) {
+			super.keyPressed(keyCode, scanCode, modifiers);
 			return true;
 		}
-		
-		if (keyCode == GLFW.GLFW_KEY_TAB) {
-			Element focusedElement = this.getFocused();
-			if (focusedElement == this.nameField)
-				this.setFocused(this.loreField);
-			else if (focusedElement == this.loreField)
-				this.setFocused(this.nameField);
-			return true;
-		}
-		
 		
 		Element focused = this.getFocused();
 		return (focused == null || !focused.keyPressed(keyCode, scanCode, modifiers)) || focused instanceof TextFieldWidget textFieldWidget && textFieldWidget.isActive() || super.keyPressed(keyCode, scanCode, modifiers);
@@ -184,12 +172,14 @@ public class BedrockAnvilScreen extends ForgingScreen<BedrockAnvilScreenHandler>
 	@Override
 	public void onSlotUpdate(ScreenHandler handler, int slotId, ItemStack stack) {
 		if (slotId == 0) {
-			this.nameField.setText(stack.isEmpty() ? "" : stack.getName().getString());
-			this.nameField.setEditable(!stack.isEmpty());
+			boolean stackEmpty = stack.isEmpty();
+			this.nameField.setText(stackEmpty ? "" : stack.getName().getString());
+			this.nameField.setEditable(!stackEmpty);
+			this.nameField.setFocusUnlocked(!stackEmpty);
 			
-			String loreString = LoreHelper.getStringFromLoreTextArray(LoreHelper.getLoreList(stack));
-			this.loreField.setText(loreString);
-			this.loreField.setEditable(!stack.isEmpty());
+			this.loreField.setText(stackEmpty ? "" : LoreHelper.getStringFromLoreTextArray(LoreHelper.getLoreList(stack)));
+			this.loreField.setEditable(!stackEmpty);
+			this.nameField.setFocusUnlocked(!stackEmpty);
 			
 			this.setFocused(this.nameField);
 		}

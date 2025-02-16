@@ -1,11 +1,10 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.api.status_effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.registry.entry.*;
 
-public class EffectProlongingStatusEffect extends SpectrumStatusEffect implements StackableStatusEffect {
+public class EffectProlongingStatusEffect extends StatusEffect {
 	
 	public static final float ADDITIONAL_EFFECT_DURATION_MODIFIER_PER_LEVEL = 0.25F;
 	

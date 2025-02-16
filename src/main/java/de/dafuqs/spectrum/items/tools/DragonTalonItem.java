@@ -5,6 +5,7 @@ import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.api.render.*;
 import de.dafuqs.spectrum.entity.entity.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
@@ -15,6 +16,7 @@ import net.minecraft.entity.projectile.*;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
@@ -181,5 +183,10 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 	
 	@Override
 	public void expandTooltip(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
+	}
+	
+	@Override
+	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.CHANNELING) || enchantment.matchesKey(Enchantments.PIERCING) || enchantment.matchesKey(SpectrumEnchantments.INERTIA);
 	}
 }

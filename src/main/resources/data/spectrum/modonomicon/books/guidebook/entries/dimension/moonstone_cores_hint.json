@@ -21,9 +21,7 @@
       "title": "book.spectrum.guidebook.ideas.where_to_find",
       "completion_advancement": "spectrum:triggers/hints/moonstone_cores_page0",
       "cost": {
-        "item": {
-          "item": "spectrum:moonstone_shard"
-        },
+        "item": "spectrum:moonstone_shard",
         "count": 8
       },
       "text": "book.spectrum.guidebook.ideas.moonstone_cores.page0.text"
@@ -32,9 +30,7 @@
       "type": "spectrum:hint",
       "title": "book.spectrum.guidebook.ideas.concise_instructions",
       "cost": {
-        "item": {
-          "item": "spectrum:moonstone_shard"
-        },
+        "item": "spectrum:moonstone_shard",
         "count": 24
       },
       "text": "book.spectrum.guidebook.ideas.moonstone_cores.page1.text",

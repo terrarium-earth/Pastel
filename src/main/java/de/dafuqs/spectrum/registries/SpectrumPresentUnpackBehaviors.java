@@ -4,7 +4,6 @@ import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.blocks.boom.*;
 import de.dafuqs.spectrum.blocks.memory.*;
 import de.dafuqs.spectrum.blocks.present.*;
-import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.mixin.accessors.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
@@ -26,7 +25,7 @@ public class SpectrumPresentUnpackBehaviors {
 	
 	public static void register() {
 		PresentBlock.registerBehavior(SpectrumItems.PIPE_BOMB, (stack, presentBlockEntity, world, pos, random) -> {
-			stack.set(SpectrumDataComponentTypes.PIPE_BOMB, new PipeBombComponent(world.getTime() - 70, true));
+			stack.set(SpectrumDataComponentTypes.PIPE_BOMB, world.getTime() - 70);
 			stack.set(DataComponentTypes.PROFILE, presentBlockEntity.getOwner());
 			world.playSound(null, pos, SpectrumSoundEvents.INCANDESCENT_ARM, SoundCategory.BLOCKS, 2.0F, 0.9F);
 			return stack;

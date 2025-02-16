@@ -49,6 +49,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.preservation_ruins.page3.title",
       "condition": {
         "type": "modonomicon:advancement",
@@ -62,6 +63,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.preservation_ruins.page4.title",
       "condition": {
         "type": "modonomicon:advancement",
@@ -75,6 +77,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "advancements.spectrum.enter_wireless_redstone_preservation_ruin.title",
       "condition": {
         "type": "modonomicon:advancement",

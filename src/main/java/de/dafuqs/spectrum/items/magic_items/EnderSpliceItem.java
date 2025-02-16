@@ -8,6 +8,7 @@ import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.sound.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.advancement.criterion.*;
 import net.minecraft.client.*;
 import net.minecraft.enchantment.*;
@@ -16,6 +17,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
@@ -223,6 +225,11 @@ public class EnderSpliceItem extends Item {
 	@Override
 	public int getEnchantability() {
 		return 50;
+	}
+	
+	@Override
+	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
+		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(SpectrumEnchantments.RESONANCE) || enchantment.matchesKey(SpectrumEnchantments.INDESTRUCTIBLE) || enchantment.matchesKey(Enchantments.UNBREAKING);
 	}
 	
 }

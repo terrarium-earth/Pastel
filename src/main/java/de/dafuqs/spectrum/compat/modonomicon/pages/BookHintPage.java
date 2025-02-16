@@ -7,6 +7,7 @@ import com.klikli_dev.modonomicon.book.page.*;
 import com.klikli_dev.modonomicon.util.*;
 import com.mojang.serialization.JsonOps;
 import de.dafuqs.spectrum.compat.modonomicon.*;
+import de.dafuqs.spectrum.recipe.*;
 import net.minecraft.network.*;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.RegistryWrapper;
@@ -17,9 +18,9 @@ import java.util.*;
 public class BookHintPage extends BookTextPage {
 
     private final Identifier completionAdvancement;
-    private final Ingredient cost;
-
-    public BookHintPage(BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator, String anchor, BookCondition condition, Identifier completionAdvancement,Ingredient cost) {
+	private final IngredientStack cost;
+	
+	public BookHintPage(BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator, String anchor, BookCondition condition, Identifier completionAdvancement, IngredientStack cost) {
         super(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition);
         this.completionAdvancement = completionAdvancement;
         this.cost = cost;
@@ -35,12 +36,10 @@ public class BookHintPage extends BookTextPage {
                 ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
                 : new BookNoneCondition();
         var completionAdvancement = Identifier.tryParse(JsonHelper.getString(json, "completion_advancement"));
-        var cost = Ingredient.EMPTY;
+		IngredientStack cost = IngredientStack.EMPTY;
         if (json.has("cost")) {
             var ingredient = JsonHelper.getObject(json, "cost");
-            var count = JsonHelper.getInt(ingredient, "count", 1);
-            cost = Ingredient.ALLOW_EMPTY_CODEC.parse(provider.getOps(JsonOps.INSTANCE), ingredient).result().orElse(cost);
-            Arrays.stream(cost.getMatchingStacks()).forEach(itemStack -> itemStack.setCount(count));
+			cost = IngredientStack.Serializer.CODEC.parse(provider.getOps(JsonOps.INSTANCE), ingredient).result().orElse(cost);
         }
         return new BookHintPage(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, completionAdvancement, cost);
     }
@@ -53,15 +52,15 @@ public class BookHintPage extends BookTextPage {
         var anchor = buffer.readString();
         var condition = BookCondition.fromNetwork(buffer);
         var completionAdvancement = buffer.readIdentifier();
-        var cost = Ingredient.PACKET_CODEC.decode(buffer);
+		var cost = IngredientStack.Serializer.PACKET_CODEC.decode(buffer);
         return new BookHintPage(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, completionAdvancement, cost);
     }
 
     public Identifier getCompletionAdvancement() {
         return completionAdvancement;
     }
-
-    public Ingredient getCost() {
+	
+	public IngredientStack getCost() {
         return cost;
     }
 
@@ -74,7 +73,7 @@ public class BookHintPage extends BookTextPage {
     public void toNetwork(RegistryByteBuf buffer) {
         super.toNetwork(buffer);
         buffer.writeIdentifier(completionAdvancement);
-        Ingredient.PACKET_CODEC.encode(buffer, cost);
+		IngredientStack.Serializer.PACKET_CODEC.encode(buffer, cost);
     }
 
 }

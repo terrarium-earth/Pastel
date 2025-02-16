@@ -22,6 +22,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "biome.spectrum.deep_dripstone_caves",
       "images": [
         "spectrum:textures/gui/guidebook/dd_deep_dripstone_caves.png"

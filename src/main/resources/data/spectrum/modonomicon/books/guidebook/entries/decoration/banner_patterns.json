@@ -17,6 +17,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.banner_patterns.name",
       "border": true,
       "images": [

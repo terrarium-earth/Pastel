@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.items.map;
 
-import com.google.common.collect.*;
 import com.mojang.datafixers.util.Pair;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
@@ -35,21 +34,21 @@ public class ArtisansAtlasItem extends FilledMapItem {
 	}
 	
 	private static void createAndSetState(ItemStack stack, ServerWorld world, int centerX, int centerZ, @Nullable StructureStart target, @Nullable Identifier targetId) {
-		MapIdComponent id = stack.apply(DataComponentTypes.MAP_ID, world.increaseAndGetMapId(), comp -> comp);
-		
 		ArtisansAtlasState state = new ArtisansAtlasState(centerX, centerZ, (byte) 1, true, true, false, world.getRegistryKey());
+		MapIdComponent id = world.increaseAndGetMapId();
 		
 		state.setTargetId(targetId);
 		if (targetId != null) {
 			state.startLocator(world);
 			if (target != null) {
-				state.addTarget(world, target.getPos());
+				state.addTarget(world, target.getBoundingBox().getCenter());
 			}
 		} else {
 			state.cancelLocator();
 		}
 		
 		world.putMapState(id, state);
+		stack.set(DataComponentTypes.MAP_ID, id);
 	}
 	
 	@Override
@@ -129,121 +128,175 @@ public class ArtisansAtlasItem extends FilledMapItem {
 	}
 	
 	private void updateVerticalStrip(World world, ArtisansAtlasState state, int deltaX, int deltaZ, int x, int startZ, int endZ) {
-		double previousHeight = updateColor(world, state, deltaX, deltaZ, x, startZ - 1, 0, false);
+		double previousHeight = getHeight(world, state, deltaX, deltaZ, x, startZ - 1);
 		for (int z = startZ; z <= endZ; z++) {
-			previousHeight = updateColor(world, state, deltaX, deltaZ, x, z, previousHeight, true);
+			previousHeight = updateColor(world, state, deltaX, deltaZ, x, z, previousHeight);
 		}
 	}
 	
-	private double updateColor(World world, ArtisansAtlasState state, int deltaX, int deltaZ, int x, int z, double previousHeight, boolean setColor) {
+	private double updateColor(World world, ArtisansAtlasState state, int deltaX, int deltaZ, int x, int z, double previousHeight) {
 		int sampleSize = 1 << state.scale;
 		int sampleArea = sampleSize * sampleSize;
+		int sampleMask = sampleSize - 1;
 		
 		boolean hasCeiling = world.getDimension().hasCeiling();
 		
 		int blockX = ((state.getDisplayedCenter().getX() >> state.scale) + deltaX + x - 64) * sampleSize;
 		int blockZ = ((state.getDisplayedCenter().getZ() >> state.scale) + deltaZ + z - 64) * sampleSize;
 		
-		Multiset<MapColor> multiset = LinkedHashMultiset.create();
 		WorldChunk chunk = world.getChunk(ChunkSectionPos.getSectionCoord(blockX), ChunkSectionPos.getSectionCoord(blockZ));
 		if (chunk.isEmpty()) {
 			return previousHeight;
 		}
 		
+		
+		int[] multiset = new int[64];
+		
 		int fluidDepth = 0;
-		double height = 0.0;
+		double height;
 		if (hasCeiling) {
 			int hash = blockX + blockZ * 231871;
 			hash = hash * hash * 31287121 + hash * 11;
 			if ((hash >> 20 & 1) == 0) {
-				multiset.add(Blocks.DIRT.getDefaultState().getMapColor(world, BlockPos.ORIGIN), 10);
+				multiset[Blocks.DIRT.getDefaultState().getMapColor(world, BlockPos.ORIGIN).id] += 10;
 			} else {
-				multiset.add(Blocks.STONE.getDefaultState().getMapColor(world, BlockPos.ORIGIN), 100);
+				multiset[Blocks.STONE.getDefaultState().getMapColor(world, BlockPos.ORIGIN).id] += 100;
 			}
 			
 			height = 100.0;
 		} else {
-			for (int sampleX = 0; sampleX < sampleSize; sampleX++) {
-				for (int sampleZ = 0; sampleZ < sampleSize; sampleZ++) {
-					BlockPos.Mutable samplePos = new BlockPos.Mutable(blockX + sampleX, 0, blockZ + sampleZ);
-					int sampleY = chunk.sampleHeightmap(Heightmap.Type.WORLD_SURFACE, samplePos.getX(), samplePos.getZ()) + 1;
+			height = 0.0;
+			int bottomY = world.getBottomY();
+			BlockPos.Mutable samplePos = new BlockPos.Mutable(0, 0, 0);
+			
+			for (int sample = 0; sample < sampleArea; sample++) {
+				
+				int posX = blockX + (sample >> state.scale);
+				int posZ = blockZ + (sample & sampleMask);
+				samplePos.setX(posX);
+				samplePos.setZ(posZ);
+				
+				int sampleY = chunk.sampleHeightmap(Heightmap.Type.WORLD_SURFACE, posX, posZ) + 1;
+				
+				BlockState blockState;
+				MapColor mapColor;
+				if (sampleY <= bottomY + 1) {
+					blockState = Blocks.BEDROCK.getDefaultState();
+					mapColor = blockState.getMapColor(world, samplePos);
+				} else {
+					do {
+						samplePos.setY(--sampleY);
+						blockState = chunk.getBlockState(samplePos);
+						mapColor = blockState.getMapColor(world, samplePos);
+					} while (mapColor == MapColor.CLEAR && sampleY > bottomY);
 					
-					BlockState blockState;
-					if (sampleY <= world.getBottomY() + 1) {
-						blockState = Blocks.BEDROCK.getDefaultState();
-					} else {
-						do {
-							sampleY--;
-							samplePos.setY(sampleY);
-							blockState = chunk.getBlockState(samplePos);
-						} while (blockState.getMapColor(world, samplePos) == MapColor.CLEAR && sampleY > world.getBottomY());
+					if (sampleY > bottomY && !blockState.getFluidState().isEmpty()) {
+						int fluidY = sampleY - 1;
+						BlockPos.Mutable fluidPos = samplePos.mutableCopy();
 						
-						if (sampleY > world.getBottomY() && !blockState.getFluidState().isEmpty()) {
-							int fluidY = sampleY - 1;
-							BlockPos.Mutable fluidPos = samplePos.mutableCopy();
-							
-							BlockState fluidBlockState;
-							do {
-								fluidPos.setY(fluidY--);
-								fluidBlockState = chunk.getBlockState(fluidPos);
-								fluidDepth++;
-							} while (fluidY > world.getBottomY() && !fluidBlockState.getFluidState().isEmpty());
-							
-							blockState = this.getFluidStateIfVisible(world, blockState, samplePos);
-						}
+						BlockState fluidBlockState;
+						do {
+							fluidPos.setY(fluidY--);
+							fluidBlockState = chunk.getBlockState(fluidPos);
+						} while (fluidY > bottomY && !fluidBlockState.getFluidState().isEmpty());
+						
+						fluidDepth += sampleY - 1 - fluidY;
+						
+						FluidState fluidState = blockState.getFluidState();
+						blockState = !fluidState.isEmpty() && !blockState.isSideSolidFullSquare(world, samplePos, Direction.UP)
+								? fluidState.getBlockState() : blockState;
+						
+						mapColor = blockState.getMapColor(world, samplePos);
 					}
-					
-					state.removeBanner(world, samplePos.getX(), samplePos.getZ());
-					height += (double) sampleY / (double) sampleArea;
-					multiset.add(blockState.getMapColor(world, samplePos));
 				}
+				
+				state.removeBanner(world, posX, posZ);
+				
+				height += sampleY;
+				multiset[mapColor.id]++;
+			}
+			
+			height /= sampleArea;
+			fluidDepth /= sampleArea;
+		}
+		
+		int maxCount = 0;
+		MapColor color = MapColor.CLEAR;
+		for (int i = 0; i < multiset.length; i++) {
+			if (multiset[i] > maxCount) {
+				maxCount = multiset[i];
+				color = MapColor.get(i);
 			}
 		}
 		
-		if (setColor) {
-			fluidDepth /= sampleArea;
-			
-			int maxCount = 0;
-			MapColor color = MapColor.CLEAR;
-			for (Multiset.Entry<MapColor> entry : multiset.entrySet()) {
-				if (entry.getCount() > maxCount) {
-					maxCount = entry.getCount();
-					color = entry.getElement();
-				}
-			}
-			
-			MapColor.Brightness brightness;
-			
-			int odd = ((blockX ^ blockZ) / sampleSize) & 1;
-			if (color == MapColor.WATER_BLUE) {
-				double depth = (double) fluidDepth * 0.1 + (double) odd * 0.2;
-				if (depth < 0.5) {
-					brightness = MapColor.Brightness.HIGH;
-				} else if (depth > 0.9) {
-					brightness = MapColor.Brightness.LOW;
-				} else {
-					brightness = MapColor.Brightness.NORMAL;
-				}
+		MapColor.Brightness brightness;
+		int odd = ((blockX ^ blockZ) / sampleSize) & 1;
+		if (color == MapColor.WATER_BLUE) {
+			double depth = (double) fluidDepth * 0.1 + (double) odd * 0.2;
+			if (depth < 0.5) {
+				brightness = MapColor.Brightness.HIGH;
+			} else if (depth > 0.9) {
+				brightness = MapColor.Brightness.LOW;
 			} else {
-				double f = (height - previousHeight) * 4.0 / (double) (sampleSize + 4) + ((double) odd - 0.5) * 0.4;
-				if (f > 0.6) {
-					brightness = MapColor.Brightness.HIGH;
-				} else if (f < -0.6) {
-					brightness = MapColor.Brightness.LOW;
-				} else {
-					brightness = MapColor.Brightness.NORMAL;
-				}
+				brightness = MapColor.Brightness.NORMAL;
 			}
-			
-			state.setColor(x, z, color.getRenderColorByte(brightness));
+		} else {
+			double f = (height - previousHeight) * 4.0 / (double) (sampleSize + 4) + ((double) odd - 0.5) * 0.4;
+			if (f > 0.6) {
+				brightness = MapColor.Brightness.HIGH;
+			} else if (f < -0.6) {
+				brightness = MapColor.Brightness.LOW;
+			} else {
+				brightness = MapColor.Brightness.NORMAL;
+			}
 		}
+		
+		state.setColor(x, z, color.getRenderColorByte(brightness));
 		
 		return height;
 	}
 	
-	private BlockState getFluidStateIfVisible(World world, BlockState state, BlockPos pos) {
-		FluidState fluidState = state.getFluidState();
-		return !fluidState.isEmpty() && !state.isSideSolidFullSquare(world, pos, Direction.UP) ? fluidState.getBlockState() : state;
+	private double getHeight(World world, ArtisansAtlasState state, int deltaX, int deltaZ, int x, int z) {
+		int sampleSize = 1 << state.scale;
+		int sampleArea = sampleSize * sampleSize;
+		int sampleMask = sampleSize - 1;
+		
+		int blockX = ((state.getDisplayedCenter().getX() >> state.scale) + deltaX + x - 64) * sampleSize;
+		int blockZ = ((state.getDisplayedCenter().getZ() >> state.scale) + deltaZ + z - 64) * sampleSize;
+		
+		WorldChunk chunk = world.getChunk(ChunkSectionPos.getSectionCoord(blockX), ChunkSectionPos.getSectionCoord(blockZ));
+		if (chunk.isEmpty())
+			return 0;
+		
+		double height;
+		if (world.getDimension().hasCeiling()) {
+			height = 100.0;
+		} else {
+			height = 0.0;
+			int bottomY = world.getBottomY();
+			
+			for (int sample = 0; sample < sampleArea; sample++) {
+				int posX = blockX + (sample >> state.scale);
+				int posZ = blockZ + (sample & sampleMask);
+				
+				BlockPos.Mutable samplePos = new BlockPos.Mutable(posX, 0, posZ);
+				int sampleY = chunk.sampleHeightmap(Heightmap.Type.WORLD_SURFACE, posX, posZ) + 1;
+				
+				if (sampleY > bottomY + 1) {
+					BlockState blockState;
+					do {
+						samplePos.setY(--sampleY);
+						blockState = chunk.getBlockState(samplePos);
+					} while (blockState.getMapColor(world, samplePos) == MapColor.CLEAR && sampleY > bottomY);
+				}
+				
+				height += sampleY;
+			}
+			
+			height /= sampleArea;
+		}
+		
+		return height;
 	}
 	
 	@Override

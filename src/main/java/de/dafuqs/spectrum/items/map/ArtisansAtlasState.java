@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.items.map;
 
 import com.mojang.datafixers.util.Pair;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.mixin.accessors.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
@@ -22,7 +23,7 @@ import java.util.*;
 public class ArtisansAtlasState extends MapState {
 	
 	private final MapStateAccessor accessor;
-	private final Set<ChunkPos> targets;
+	private Set<BlockPos> targets;
 	private BlockPos displayedCenter;
 	private Identifier targetId;
 	@Nullable
@@ -58,6 +59,8 @@ public class ArtisansAtlasState extends MapState {
 		int xDisplay = nbt.contains("displayX", NbtElement.NUMBER_TYPE) ? nbt.getInt("displayX") : this.displayedCenter.getX();
 		int zDisplay = nbt.contains("displayZ", NbtElement.NUMBER_TYPE) ? nbt.getInt("displayZ") : this.displayedCenter.getZ();
 		this.displayedCenter = new BlockPos(xDisplay, 0, zDisplay);
+		
+		this.targets = new HashSet<>(CodecHelper.fromNbt(BlockPos.CODEC.listOf(), nbt.get("targets"), List.of()));
 	}
 	
 	public static @Nullable Pair<Identifier, StructureStart> locateAnyStructureAtBlock(ServerWorld world, BlockPos pos) {
@@ -86,6 +89,8 @@ public class ArtisansAtlasState extends MapState {
 		if (this.targetId != null)
 			nbt.putString("targetId", targetId.toString());
 		
+		CodecHelper.writeNbt(nbt, "targets", BlockPos.CODEC.listOf(), targets.stream().toList());
+		
 		return nbt;
 	}
 	
@@ -97,9 +102,8 @@ public class ArtisansAtlasState extends MapState {
 	@Override
 	public void update(PlayerEntity player, ItemStack stack) {
 		if (this.displayDelta != null) {
-			if (this.locator == null && this.targetId != null && player.getWorld() instanceof ServerWorld world) {
+			if (this.locator == null && this.targetId != null && player.getWorld() instanceof ServerWorld world)
 				startLocator(world);
-			}
 			
 			this.displayDelta = player.getBlockPos().subtract(this.displayedCenter);
 		} else {
@@ -110,17 +114,20 @@ public class ArtisansAtlasState extends MapState {
 		
 		super.update(player, stack);
 		
-		for (ChunkPos target : this.targets) {
+		for (BlockPos target : this.targets)
 			addTargetIcon(player.getWorld(), target);
-		}
 	}
 	
 	@Override
+	@SuppressWarnings("deprecation")
 	public void addDecoration(RegistryEntry<MapDecorationType> type, @Nullable WorldAccess world, String key, double x, double z, double rotation, @Nullable Text text) {
 		int scale = 1 << this.scale;
 		
 		float scaledX = (float) (x - this.displayedCenter.getX()) / scale;
 		float scaledZ = (float) (z - this.displayedCenter.getZ()) / scale;
+		
+		float squaredDistance = scaledX * scaledX + scaledZ * scaledZ;
+		byte scaleByte = (byte) Math.clamp(-16f * ((0.5f * Math.log(squaredDistance) / Math.log(2)) - 7), -100, 0);
 		
 		byte pixelX = (byte) (scaledX * 2.0F + 0.5F);
 		byte pixelZ = (byte) (scaledZ * 2.0F + 0.5F);
@@ -174,6 +181,8 @@ public class ArtisansAtlasState extends MapState {
 		}
 		
 		MapDecoration icon = new MapDecoration(type, pixelX, pixelZ, rotationByte, Optional.ofNullable(text));
+		icon.spectrum$setScale(scaleByte);
+		
 		MapDecoration previousIcon = accessor.getDecorations().put(key, icon);
 		if (!icon.equals(previousIcon)) {
 			if (previousIcon != null && previousIcon.type().value().trackCount())
@@ -218,34 +227,32 @@ public class ArtisansAtlasState extends MapState {
 		return false;
 	}
 	
-	private void addTargetIcon(WorldAccess world, ChunkPos target) {
+	private void addTargetIcon(WorldAccess world, BlockPos target) {
 		if (target != null) {
-			addDecoration(MapDecorationTypes.TARGET_POINT, world, getTargetKey(target), target.getCenterX(), target.getCenterZ(), 180, null);
+			addDecoration(MapDecorationTypes.TARGET_POINT, world, getTargetKey(target), target.getX(), target.getZ(), 180, null);
 		}
 	}
 	
-	private String getTargetKey(ChunkPos start) {
-		return String.format("target-%d-%d", start.x, start.z);
+	private String getTargetKey(BlockPos start) {
+		return String.format("target-%d-%d-%d", start.getX(), start.getY(), start.getZ());
 	}
 	
 	public void startLocator(ServerWorld world) {
 		if (targetId == null) return;
-		this.locator = new StructureLocatorAsync(world, this::addTarget, this.targetId, new ChunkPos(this.displayedCenter), 32);
+		this.locator = new StructureLocatorAsync(world, this.targetId, 5 * 1000);
 	}
 	
 	public void cancelLocator() {
-		if (this.locator != null) {
-			this.locator.cancel();
-		}
+		this.locator = null;
 	}
 	
 	public BlockPos getDisplayedCenter() {
 		return this.displayedCenter;
 	}
 	
-	public void addTarget(WorldAccess world, ChunkPos chunkPos) {
-		this.targets.add(chunkPos);
-		addTargetIcon(world, chunkPos);
+	public void addTarget(WorldAccess world, BlockPos pos) {
+		this.targets.add(pos);
+		addTargetIcon(world, pos);
 	}
 	
 	public void setTargetId(@Nullable Identifier targetId) {
@@ -270,16 +277,12 @@ public class ArtisansAtlasState extends MapState {
 			
 			Vec3i remainder = new Vec3i(this.displayDelta.getX() % sampleSize, 0, this.displayDelta.getZ() % sampleSize);
 			Vec3i delta = this.displayDelta.subtract(remainder);
-			BlockPos newDisplayedCenter = this.displayedCenter.add(delta);
+			this.displayedCenter = this.displayedCenter.add(delta);
+			this.displayDelta = remainder;
 			
 			if (this.locator != null) {
-				ChunkSectionPos startChunk = ChunkSectionPos.from(this.displayedCenter);
-				ChunkSectionPos endChunk = ChunkSectionPos.from(newDisplayedCenter);
-				this.locator.move(endChunk.getX() - startChunk.getX(), endChunk.getZ() - startChunk.getZ());
+				this.locator.ping(displayedCenter, this::addTarget);
 			}
-			
-			this.displayDelta = remainder;
-			this.displayedCenter = newDisplayedCenter;
 		} else {
 			this.displayDelta = Vec3i.ZERO;
 		}

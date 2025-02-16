@@ -62,11 +62,11 @@ public abstract class InGameHudMixin {
 
     @ModifyArg(method = "renderStatusEffectOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 0))
     private Identifier modifyAmbientEffectBackgrounds(Identifier texture, @Local StatusEffectInstance effect) {
-        return StatusEffectHelper.getTexture(texture, effect);
+		return StatusEffectHelper.getTexture(texture, effect, StatusEffectHelper.RenderType.HUD_AMBIENT);
     }
     
     @ModifyArg(method = "renderStatusEffectOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V", ordinal = 1))
     private Identifier modifyEffectBackgrounds(Identifier texture, @Local StatusEffectInstance effect) {
-        return StatusEffectHelper.getTexture(texture, effect);
+		return StatusEffectHelper.getTexture(texture, effect, StatusEffectHelper.RenderType.HUD_DEFAULT);
     }
 }

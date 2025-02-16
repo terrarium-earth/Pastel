@@ -6,9 +6,9 @@ import de.dafuqs.spectrum.status_effects.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.*;
 
-import static de.dafuqs.spectrum.SpectrumCommon.locate;
+import static de.dafuqs.spectrum.SpectrumCommon.*;
 
 public class SpectrumStatusEffects {
 
@@ -30,7 +30,7 @@ public class SpectrumStatusEffects {
 	/**
 	 * Rerolls loot table entry counts based on chance (like with fortune/looting) and takes the best one
 	 */
-	public static final RegistryEntry<StatusEffect> ANOTHER_ROLL = registerStatusEffect("another_roll", new SpectrumStatusEffect(StatusEffectCategory.BENEFICIAL, 0xa1ce00));
+	public static final RegistryEntry<StatusEffect> ANOTHER_ROLL = registerStatusEffect("another_roll", new NoopStatusEffect(StatusEffectCategory.BENEFICIAL, 0xa1ce00));
 	
 	/**
 	 * Stops natural regeneration
@@ -42,36 +42,36 @@ public class SpectrumStatusEffects {
 	 * Increases all incoming damage by potency %
 	 */
 	public static final float VULNERABILITY_ADDITIONAL_DAMAGE_PERCENT_PER_LEVEL = 0.25F;
-	public static final RegistryEntry<StatusEffect> VULNERABILITY = registerStatusEffect("vulnerability", new SpectrumStatusEffect(StatusEffectCategory.HARMFUL, 0x353535));
+	public static final RegistryEntry<StatusEffect> VULNERABILITY = registerStatusEffect("vulnerability", new NoopStatusEffect(StatusEffectCategory.HARMFUL, 0x353535));
 	
 	/**
 	 * Removes gravity to the entity
-	 * entities will fall slower and with high potencies start levitating
+	 * entities will fall slower or start levitating with high potency
 	 */
 	public static final RegistryEntry<StatusEffect> LIGHTWEIGHT = registerStatusEffect("lightweight", new GravityStatusEffect(StatusEffectCategory.NEUTRAL, 0x00dde4, 0.02F));
 	
 	/**
 	 * Adds gravity to the entity
-	 * flying mobs will fall and be nearly unable to fall (phantom, ghast)
+	 * flying mobs will fall and be nearly unable to fall (phantoms, ghasts)
 	 */
 	public static final RegistryEntry<StatusEffect> DENSITY = registerStatusEffect("density", new GravityStatusEffect(StatusEffectCategory.HARMFUL, 0x671a25, -0.02F));
 	
 	/**
 	 * Increases attack speed
 	 */
-	public static final RegistryEntry<StatusEffect> SWIFTNESS = registerStatusEffect("swiftness", new SpectrumStatusEffect(StatusEffectCategory.BENEFICIAL, 0xffe566)
-			.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, locate("effect.swiftness"), 2 * 0.10000000149011612D, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+	public static final RegistryEntry<StatusEffect> SWIFTNESS = registerStatusEffect("swiftness", new NoopStatusEffect(StatusEffectCategory.BENEFICIAL, 0xffe566)
+			.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, locate("effect.swiftness"), 0.2D, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 	
 	/**
 	 * Decreases attack speed
 	 */
-	public static final RegistryEntry<StatusEffect> STIFFNESS = registerStatusEffect("stiffness", new SpectrumStatusEffect(StatusEffectCategory.HARMFUL, 0x7e7549)
-			.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, locate("effect.stiffness"), 2 * -0.10000000149011612D, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+	public static final RegistryEntry<StatusEffect> STIFFNESS = registerStatusEffect("stiffness", new NoopStatusEffect(StatusEffectCategory.HARMFUL, 0x7e7549)
+			.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, locate("effect.stiffness"), -0.2D, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 	
 	/**
 	 * Reduces incoming magic damage by 1 point / level
 	 */
-	public static final RegistryEntry<StatusEffect> MAGIC_ANNULATION = registerStatusEffect("magic_annulation", new SpectrumStatusEffect(StatusEffectCategory.BENEFICIAL, 0x7a1082)
+	public static final RegistryEntry<StatusEffect> MAGIC_ANNULATION = registerStatusEffect("magic_annulation", new NoopStatusEffect(StatusEffectCategory.BENEFICIAL, 0x7a1082)
 			.addAttributeModifier(AdditionalEntityAttributes.MAGIC_PROTECTION, locate("effect.magic_annulation"), 1, EntityAttributeModifier.Operation.ADD_VALUE));
 	
 	/**
@@ -82,7 +82,7 @@ public class SpectrumStatusEffects {
 	/**
 	 * Increased toughness. Simple, effective
 	 */
-	public static final RegistryEntry<StatusEffect> TOUGHNESS = registerStatusEffect("toughness", new SpectrumStatusEffect(StatusEffectCategory.BENEFICIAL, 0x28bbe0)
+	public static final RegistryEntry<StatusEffect> TOUGHNESS = registerStatusEffect("toughness", new NoopStatusEffect(StatusEffectCategory.BENEFICIAL, 0x28bbe0)
 			.addAttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, locate("effect.toughness"), 1.0, EntityAttributeModifier.Operation.ADD_VALUE));
 	
 	/**
@@ -112,8 +112,8 @@ public class SpectrumStatusEffects {
 	
 	/**
 	 * Damage, attack speed, speed & knockback resistance are buffed the more the player kills.
-	 * But if they do not score a kill in 20 seconds they get negative effects.
-	 * Stacking $(thing)Frenzy$() (applying the effect while they already have it) increases these effects amplitude
+	 * But if they do not score a kill in 20 seconds, they get negative effects.
+	 * Stacking $(thing)Frenzy$() (applying the effect while they already have it) increases this effects amplitude
 	 */
 	public static final RegistryEntry<StatusEffect> FRENZY = registerStatusEffect("frenzy", new FrenzyStatusEffect(StatusEffectCategory.NEUTRAL, 0x990000)
 			.addAttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, locate("effect.frenzy.attack_speed"), 0.1D, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
@@ -125,7 +125,7 @@ public class SpectrumStatusEffects {
 	/**
 	 * Increases speed and visibility in lava
 	 */
-	public static final RegistryEntry<StatusEffect> LAVA_GLIDING = registerStatusEffect("lava_gliding", new SpectrumStatusEffect(StatusEffectCategory.BENEFICIAL, 0xc42e0e)
+	public static final RegistryEntry<StatusEffect> LAVA_GLIDING = registerStatusEffect("lava_gliding", new NoopStatusEffect(StatusEffectCategory.BENEFICIAL, 0xc42e0e)
 			.addAttributeModifier(AdditionalEntityAttributes.LAVA_SPEED, locate("effect.lava_gliding.lava_speed"), 0.1D, EntityAttributeModifier.Operation.ADD_VALUE)
 			.addAttributeModifier(AdditionalEntityAttributes.LAVA_VISIBILITY, locate("effect.lava_gliding.lava_visibility"), 8.0D, EntityAttributeModifier.Operation.ADD_VALUE));
 
@@ -159,11 +159,15 @@ public class SpectrumStatusEffects {
 	 * % Chance to protect from projectiles per level
 	 */
 	public static final float PROJECTILE_REBOUND_CHANCE_PER_LEVEL = 0.2F;
-	public static final RegistryEntry<StatusEffect> PROJECTILE_REBOUND = registerStatusEffect("projectile_rebound", new SpectrumStatusEffect(StatusEffectCategory.BENEFICIAL, 0x77e6df));
+	public static final RegistryEntry<StatusEffect> PROJECTILE_REBOUND = registerStatusEffect("projectile_rebound", new NoopStatusEffect(StatusEffectCategory.BENEFICIAL, 0x77e6df));
 	
 	
 	private static RegistryEntry<StatusEffect> registerStatusEffect(String id, StatusEffect entry) {
 		return Registry.registerReference(Registries.STATUS_EFFECT, locate(id), entry);
+	}
+	
+	public static void register() {
+	
 	}
 	
 	public static boolean isStrongSleepEffect(StatusEffectInstance instance) {

@@ -63,10 +63,6 @@ public class SpectrumCommon implements ModInitializer {
 		return Identifier.of(MOD_ID, name);
 	}
 	
-	public static Optional<Identifier> tryLocate(String name) {
-		return Optional.ofNullable(Identifier.tryParse(MOD_ID, name));
-	}
-	
 	/**
 	 * This is the Spectrum analogue of Identifier.ofVanilla. It's best used in a codec where
 	 * the default namespace will be spectrum.
@@ -111,7 +107,7 @@ public class SpectrumCommon implements ModInitializer {
 		
 		// Register ALL the stuff
 		logInfo("Registering Status Effects...");
-		SpectrumStatusEffectTags.register();
+		SpectrumStatusEffects.register();
 		logInfo("Registering Advancement Criteria...");
 		SpectrumAdvancementCriteria.register();
 		logInfo("Registering Particle Types...");

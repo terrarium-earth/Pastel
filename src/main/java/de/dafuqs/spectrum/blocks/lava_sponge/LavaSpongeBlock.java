@@ -1,16 +1,13 @@
 package de.dafuqs.spectrum.blocks.lava_sponge;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.fluid.*;
 import net.minecraft.registry.tag.*;
-import net.minecraft.util.*;
+import net.minecraft.sound.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
-
-import java.util.*;
 
 public class LavaSpongeBlock extends SpongeBlock {
 
@@ -30,46 +27,37 @@ public class LavaSpongeBlock extends SpongeBlock {
 	protected void update(World world, BlockPos pos) {
 		if (this.absorbLava(world, pos)) {
 			world.setBlockState(pos, SpectrumBlocks.WET_LAVA_SPONGE.getDefaultState(), 2);
-			world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, pos, Block.getRawIdFromState(Blocks.LAVA.getDefaultState()));
+			world.playSound(null, pos, SoundEvents.BLOCK_SPONGE_ABSORB, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 	
 	private boolean absorbLava(World world, BlockPos pos) {
-		Queue<Pair<BlockPos, Integer>> queue = Lists.newLinkedList();
-		queue.add(new Pair<>(pos, 0));
-		int i = 0;
-		
-		while (!queue.isEmpty()) {
-			Pair<BlockPos, Integer> pair = queue.poll();
-			BlockPos blockPos = pair.getLeft();
-			int j = pair.getRight();
-			
+		return BlockPos.iterateRecursively(pos, 6, 65, (currentPos, queuer) -> {
 			for (Direction direction : Direction.values()) {
-				BlockPos blockPos2 = blockPos.offset(direction);
-				BlockState blockState = world.getBlockState(blockPos2);
-				FluidState fluidState = world.getFluidState(blockPos2);
-				if (fluidState.isIn(FluidTags.LAVA)) {
-					if (blockState.getBlock() instanceof FluidDrainable && !((FluidDrainable) blockState.getBlock()).tryDrainFluid(null, world, blockPos2, blockState).isEmpty()) {
-						++i;
-						if (j < 6) {
-							queue.add(new Pair<>(blockPos2, j + 1));
-						}
-					} else if (blockState.getBlock() instanceof FluidBlock) {
-						world.setBlockState(blockPos2, Blocks.AIR.getDefaultState(), 3);
-						++i;
-						if (j < 6) {
-							queue.add(new Pair<>(blockPos2, j + 1));
+				queuer.accept(currentPos.offset(direction));
+			}
+		}, (currentPos) -> {
+			if (currentPos.equals(pos)) {
+				return true;
+			} else {
+				BlockState blockState = world.getBlockState(currentPos);
+				FluidState fluidState = world.getFluidState(currentPos);
+				if (!fluidState.isIn(FluidTags.LAVA)) {
+					return false;
+				} else {
+					Block block = blockState.getBlock();
+					if (block instanceof FluidDrainable fluidDrainable) {
+						if (!fluidDrainable.tryDrainFluid(null, world, currentPos, blockState).isEmpty()) {
+							return true;
 						}
 					}
+					if (blockState.getBlock() instanceof FluidBlock) {
+						world.setBlockState(currentPos, Blocks.AIR.getDefaultState(), 3);
+					}
+					return true;
 				}
 			}
-			
-			if (i > 64) {
-				break;
-			}
-		}
-		
-		return i > 0;
+		}) > 1;
 	}
 	
 }

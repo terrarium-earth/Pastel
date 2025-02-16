@@ -14,6 +14,7 @@
   "pages": [
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.geodes.page0.title",
       "images": [
         "spectrum:textures/gui/guidebook/geode.png"

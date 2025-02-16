@@ -8,7 +8,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.registry.entry.*;
 import org.jetbrains.annotations.*;
 
-public class SleepStatusEffect extends SpectrumStatusEffect {
+public class SleepStatusEffect extends StatusEffect {
 
     private final boolean scales;
 

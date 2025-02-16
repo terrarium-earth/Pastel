@@ -1,11 +1,8 @@
 package de.dafuqs.spectrum.items.magic_items;
 
-import com.mojang.authlib.*;
 import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.sound.*;
-import net.fabricmc.api.Environment;
 import net.fabricmc.api.*;
 import net.minecraft.client.*;
 import net.minecraft.component.*;
@@ -35,7 +32,7 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 	
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-		if (isArmed(user.getStackInHand(hand))) {
+		if (isPrimed(user.getStackInHand(hand))) {
 			return super.use(world, user, hand);
 		}
         
@@ -51,23 +48,22 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 	}
 	
 	@Override
-	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-		arm(stack, world, user.getPos(), user);
-		return stack;
+	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+		return 55;
 	}
 	
-	public static void arm(ItemStack stack, World world, Vec3d pos, @Nullable Entity user) {
-		stack.set(SpectrumDataComponentTypes.PIPE_BOMB, new PipeBombComponent(world.getTime(), true));
-		if (user != null)
-			stack.set(DataComponentTypes.PROFILE, new ProfileComponent(new GameProfile(user.getUuid(), user.getName().toString())));
-		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SpectrumSoundEvents.INCANDESCENT_ARM, SoundCategory.PLAYERS, 2F, 0.9F);
+	@Override
+	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+		prime(stack, world, user.getPos(), user);
+		return stack;
 	}
 	
 	@Override
 	public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
 		if (world instanceof ServerWorld serverWorld) {
-			if (tryGetOwner(stack, serverWorld) != entity || timeIsUp(world, stack))
+			if (isPrimeTimeElapsed(world, stack)) {
 				explode(stack, serverWorld, entity.getPos(), entity);
+			}
 		}
 	}
 	
@@ -75,7 +71,7 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 	public void onItemEntityTicked(ItemEntity itemEntity) {
 		var stack = itemEntity.getStack();
 		if (itemEntity.getWorld() instanceof ServerWorld world) {
-			if (timeIsUp(world, stack))
+			if (isPrimeTimeElapsed(world, stack))
 				explode(stack, world, itemEntity.getEyePos(), null);
 		}
 	}
@@ -104,21 +100,31 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 		return world.getEntity(profile.id().get());
 	}
 	
-	@Override
-	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
-		return 55;
+	public static void prime(ItemStack stack, World world, Vec3d pos, @Nullable Entity user) {
+		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SpectrumSoundEvents.INCANDESCENT_ARM, SoundCategory.PLAYERS, 2F, 0.9F);
+		stack.set(SpectrumDataComponentTypes.PIPE_BOMB, world.getTime());
+		if (user instanceof PlayerEntity player) {
+			stack.set(DataComponentTypes.PROFILE, new ProfileComponent(player.getGameProfile()));
+		}
 	}
 	
-	public static boolean isArmed(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.PIPE_BOMB, PipeBombComponent.DEFAULT).isArmed();
+	public static boolean isPrimed(ItemStack stack) {
+		return stack.get(SpectrumDataComponentTypes.PIPE_BOMB) != null;
 	}
 	
-	public static boolean timeIsUp(World world, ItemStack stack) {
-		return world.getTime() - getTimestamp(stack) >= 100;
+	public static boolean isPrimeTimeElapsed(World world, ItemStack stack) {
+		Optional<Long> timestamp = getPrimeTime(stack);
+		if (timestamp.isEmpty()) {
+			return false;
+		}
+		return world.getTime() - timestamp.get() >= 100;
 	}
 	
-	private static long getTimestamp(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.PIPE_BOMB, PipeBombComponent.DEFAULT).timestamp();
+	private static Optional<Long> getPrimeTime(ItemStack stack) {
+		if (stack.contains(SpectrumDataComponentTypes.PIPE_BOMB)) {
+			return Optional.of(stack.get(SpectrumDataComponentTypes.PIPE_BOMB));
+		}
+		return Optional.empty();
 	}
 	
 	@Override

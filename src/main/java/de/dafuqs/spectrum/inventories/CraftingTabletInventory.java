@@ -4,10 +4,8 @@ import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.*;
 import net.minecraft.screen.*;
 import net.minecraft.util.collection.*;
-import org.apache.commons.lang3.*;
 
 public class CraftingTabletInventory extends CraftingInventory {
 	
@@ -84,23 +82,6 @@ public class CraftingTabletInventory extends CraftingInventory {
 	@Override
 	public void provideRecipeInputs(RecipeMatcher recipeMatcher) {
 		super.provideRecipeInputs(recipeMatcher);
-	}
-	
-	@Override
-	public CraftingRecipeInput createRecipeInput() {
-		// TODO
-		throw new NotImplementedException("");
-	}
-	
-	@Override
-	public CraftingRecipeInput.Positioned createPositionedRecipeInput() {
-		// TODO
-		throw new NotImplementedException("");
-	}
-	
-	public RecipeInput createPedestalRecipeInput() {
-		// TODO
-		throw new NotImplementedException("");
 	}
 	
 }

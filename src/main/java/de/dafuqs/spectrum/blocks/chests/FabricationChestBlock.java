@@ -5,7 +5,6 @@ import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.*;
-import net.minecraft.screen.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
@@ -41,9 +40,9 @@ public class FabricationChestBlock extends SpectrumChestBlock {
 	@Override
 	public void openScreen(World world, BlockPos pos, PlayerEntity player) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof FabricationChestBlockEntity) {
+		if (blockEntity instanceof FabricationChestBlockEntity fabricationChestBlockEntity) {
 			if (!isChestBlocked(world, pos)) {
-				player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
+				player.openHandledScreen(fabricationChestBlockEntity);
 			}
 		}
 	}

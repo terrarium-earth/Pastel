@@ -31,6 +31,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.bottomless_bundle.page2.title",
       "images": [
         "spectrum:textures/gui/guidebook/bottomless_bundle_automation.png"

@@ -4,6 +4,7 @@ import com.klikli_dev.modonomicon.book.*;
 import com.klikli_dev.modonomicon.client.gui.book.entry.*;
 import com.klikli_dev.modonomicon.client.render.page.*;
 import de.dafuqs.revelationary.api.advancements.*;
+import de.dafuqs.spectrum.compat.modonomicon.*;
 import de.dafuqs.spectrum.compat.modonomicon.pages.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.c2s_payloads.*;
@@ -75,12 +76,11 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
         boolean isDone = AdvancementHelper.hasAdvancement(MinecraftClient.getInstance().player, page.getCompletionAdvancement());
         if (!isDone) {
             revealProgress = -1;
-
-            PaymentButtonWidget paymentButtonWidget = new PaymentButtonWidget(
-                    2, BookEntryScreen.PAGE_HEIGHT - 3,
-                    BookEntryScreen.PAGE_WIDTH - 12, ButtonWidget.DEFAULT_HEIGHT,
-                    Text.empty(), this::paymentButtonClicked, this);
-            addButton(paymentButtonWidget);
+			
+			addButton(new PaymentButtonWidget(
+					2, BookEntryScreen.PAGE_HEIGHT - ButtonWidget.DEFAULT_HEIGHT - 3,
+					BookEntryScreen.PAGE_WIDTH - 12, ButtonWidget.DEFAULT_HEIGHT,
+					Text.empty(), this::paymentButtonClicked, this));
         } else {
             revealProgress = 0;
         }
@@ -187,7 +187,8 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
             // has already been paid
             return;
         }
-        if (mc.player.isCreative() || InventoryHelper.hasInInventory(List.of(page.getCost()), mc.player.getInventory())) {
+		
+		if (mc.player.isCreative() || InventoryHelper.hasIngredientStacksInInventory(List.of(page.getCost()), mc.player.getInventory())) {
             soundInstance = new HintRevelationSoundInstance(mc.player);
             MinecraftClient.getInstance().getSoundManager().play(soundInstance);
             
@@ -222,7 +223,7 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
             this.parentScreen.renderComponentHoverEffect(drawContext, style, mouseX, mouseY);
 
         if (revealProgress == -1) {
-            parentScreen.renderIngredient(drawContext, BookEntryScreen.PAGE_WIDTH / 2 + 29, BookEntryScreen.PAGE_HEIGHT - 3, mouseX, mouseY, page.getCost());
+			ModonomiconHelper.renderIngredientStack(drawContext, parentScreen, BookEntryScreen.PAGE_WIDTH / 2 + 29, BookEntryScreen.PAGE_HEIGHT - ButtonWidget.DEFAULT_HEIGHT - 1, mouseX, mouseY, page.getCost());
         }
 
         if (revealProgress > 0) {

@@ -103,6 +103,7 @@
     },
     {
       "type": "modonomicon:image",
+      "use_legacy_rendering": true,
       "title": "book.spectrum.guidebook.colored_trees.natural_generation.title",
       "condition": {
         "type": "modonomicon:advancement",

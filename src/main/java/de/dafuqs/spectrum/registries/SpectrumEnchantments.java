@@ -73,7 +73,6 @@ public class SpectrumEnchantments {
 			SpectrumAdvancements.ENCHANTMENTS_CLOVERS_FAVOR
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.SWORD_ENCHANTABLE)
-			.add(SpectrumItems.MALACHITE_BIDENT)
 			.addOptionalTag(Identifier.of("malum:scythe"))
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.LOOTING)
@@ -190,8 +189,6 @@ public class SpectrumEnchantments {
 			SpectrumAdvancements.ENCHANTMENTS_INERTIA
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
-			.add(SpectrumItems.DRAGON_TALON)
-			.add(SpectrumItems.DRACONIC_TWINSWORD)
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.EFFICIENCY)
 	).register();
