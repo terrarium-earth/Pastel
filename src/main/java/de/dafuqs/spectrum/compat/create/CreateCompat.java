@@ -6,38 +6,32 @@ import de.dafuqs.spectrum.blocks.fluid.*;
 import de.dafuqs.spectrum.compat.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.registries.SpectrumItems.*;
+import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.*;
-import net.minecraft.client.render.*;
 import net.minecraft.fluid.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
-import static de.dafuqs.spectrum.registries.SpectrumBlocks.*;
-
 public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
-	public static Block SMALL_ZINC_BUD;
-	public static Block LARGE_ZINC_BUD;
-	public static Block ZINC_CLUSTER;
+	public static Block SMALL_ZINC_BUD = SpectrumBlocks.registerClusterBlock("small_zinc_bud", new SpectrumClusterBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).hardness(1.0f).mapColor(Blocks.LIGHT_GRAY_CONCRETE.getDefaultMapColor()).requiresTool().nonOpaque(), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static Block LARGE_ZINC_BUD = SpectrumBlocks.registerClusterBlock("large_zinc_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static Block ZINC_CLUSTER = SpectrumBlocks.registerClusterBlock("zinc_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
 	public static Block PURE_ZINC_BLOCK;
+	
 	public static Item PURE_ZINC = SpectrumItems.registerDeferred("pure_zinc", new Item(IS.of()), DyeColor.BROWN);
 	
 	@Override
 	public void register() {
-		SMALL_ZINC_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).hardness(1.0f).mapColor(Blocks.LIGHT_GRAY_CONCRETE.getDefaultMapColor()).requiresTool().nonOpaque(), SpectrumClusterBlock.GrowthStage.SMALL);
-		LARGE_ZINC_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-		ZINC_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
 		PURE_ZINC_BLOCK = new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
-		registerBlockWithItem("small_zinc_bud", SMALL_ZINC_BUD, IS.of(), DyeColor.BROWN);
-		registerBlockWithItem("large_zinc_bud", LARGE_ZINC_BUD, IS.of(), DyeColor.BROWN);
-		registerBlockWithItem("zinc_cluster", ZINC_CLUSTER, IS.of(), DyeColor.BROWN);
-		registerBlockWithItem("pure_zinc_block", PURE_ZINC_BLOCK, IS.of(), DyeColor.BROWN);
+		SpectrumBlocks.registerBlockWithItem("pure_zinc_block", PURE_ZINC_BLOCK, IS.of(), DyeColor.BROWN);
+		
 		SpectrumItems.REGISTRAR.flush();
+		SpectrumBlocks.COMMON_REGISTRAR.flush();
 		
 		PipeCollisionEvent.FLOW.register(event -> {
 			final BlockState result = handleBidirectionalCollision(event.getLevel(), event.getFirstFluid(), event.getSecondFluid());
@@ -70,12 +64,10 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		return null;
 	}
 	
-	@Environment(EnvType.CLIENT)
 	@Override
+	@Environment(EnvType.CLIENT)
 	public void registerClient() {
-		BlockRenderLayerMap.INSTANCE.putBlock(SMALL_ZINC_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(LARGE_ZINC_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(ZINC_CLUSTER, RenderLayer.getCutout());
+		SpectrumBlocks.CLIENT_REGISTRAR.flush();
 	}
 	
 }

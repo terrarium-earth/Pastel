@@ -108,10 +108,10 @@ public class SpectrumBlocks {
 		return settings(mapColor, blockSoundGroup, 5.0F, 8.0F).solidBlock(SpectrumBlocks::never).blockVision(SpectrumBlocks::never).nonOpaque().requiresTool();
 	}
 	
-	private static final DeferredRegistrar COMMON_REGISTRAR = new DeferredRegistrar();
-	private static final DeferredRegistrar CLIENT_REGISTRAR = new DeferredRegistrar();
-	private static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
-	private static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
+	public static final DeferredRegistrar COMMON_REGISTRAR = new DeferredRegistrar();
+	public static final DeferredRegistrar CLIENT_REGISTRAR = new DeferredRegistrar();
+	public static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
+	public static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
 	
 	public static final Block PEDESTAL_BASIC_TOPAZ = new PedestalBlock(craftingBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.TOPAZ_BLOCK), BuiltinPedestalVariant.BASIC_TOPAZ);
 	public static final Block PEDESTAL_BASIC_AMETHYST = new PedestalBlock(craftingBlock(MapColor.PURPLE, BlockSoundGroup.AMETHYST_BLOCK), BuiltinPedestalVariant.BASIC_AMETHYST);
@@ -143,29 +143,31 @@ public class SpectrumBlocks {
 		return settings(mapColor, blockSoundGroup, 1.5F).requiresTool();
 	}
 	
-	public static final Block TOPAZ_CLUSTER = new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_CLUSTER, 8), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block LARGE_TOPAZ_BUD = new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.LARGE_TOPAZ_BUD, 6), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block MEDIUM_TOPAZ_BUD = new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.MEDIUM_TOPAZ_BUD, 4), SpectrumClusterBlock.GrowthStage.MEDIUM);
-	public static final Block SMALL_TOPAZ_BUD = new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.SMALL_TOPAZ_BUD, 2), SpectrumClusterBlock.GrowthStage.SMALL);
+	public static final Block TOPAZ_CLUSTER = registerClusterBlock("topaz_cluster", new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_CLUSTER, 8), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, Models.CROSS, DyeColor.CYAN);
+	public static final Block LARGE_TOPAZ_BUD = registerClusterBlock("large_topaz_bud", new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.LARGE_TOPAZ_BUD, 6), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, Models.CROSS, DyeColor.CYAN);
+	public static final Block MEDIUM_TOPAZ_BUD = registerClusterBlock("medium_topaz_bud", new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.MEDIUM_TOPAZ_BUD, 4), SpectrumClusterBlock.GrowthStage.MEDIUM), IS.DEFAULT, Models.CROSS, DyeColor.CYAN);
+	public static final Block SMALL_TOPAZ_BUD = registerClusterBlock("small_topaz_bud", new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.SMALL_TOPAZ_BUD, 2), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.CYAN);
 	public static final Block BUDDING_TOPAZ = new SpectrumBuddingBlock(gemstoneBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_TOPAZ_BUD, MEDIUM_TOPAZ_BUD, LARGE_TOPAZ_BUD, TOPAZ_CLUSTER, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_CHIME);
 	public static final Block TOPAZ_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK), SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_CHIME);
 	
-	public static final Block CITRINE_CLUSTER = new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_CLUSTER, 9), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block LARGE_CITRINE_BUD = new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.LARGE_CITRINE_BUD, 7), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block MEDIUM_CITRINE_BUD = new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.MEDIUM_CITRINE_BUD, 5), SpectrumClusterBlock.GrowthStage.MEDIUM);
-	public static final Block SMALL_CITRINE_BUD = new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.SMALL_CITRINE_BUD, 3), SpectrumClusterBlock.GrowthStage.SMALL);
+	public static final Block CITRINE_CLUSTER = registerClusterBlock("citrine_cluster", new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_CLUSTER, 9), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, Models.CROSS, DyeColor.YELLOW);
+	public static final Block LARGE_CITRINE_BUD = registerClusterBlock("large_citrine_bud", new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.LARGE_CITRINE_BUD, 7), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, Models.CROSS, DyeColor.YELLOW);
+	public static final Block MEDIUM_CITRINE_BUD = registerClusterBlock("medium_citrine_bud", new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.MEDIUM_CITRINE_BUD, 5), SpectrumClusterBlock.GrowthStage.MEDIUM), IS.DEFAULT, Models.CROSS, DyeColor.YELLOW);
+	public static final Block SMALL_CITRINE_BUD = registerClusterBlock("small_citrine_bud", new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.SMALL_CITRINE_BUD, 3), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.YELLOW);
 	public static final Block BUDDING_CITRINE = new SpectrumBuddingBlock(gemstoneBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_CITRINE_BUD, MEDIUM_CITRINE_BUD, LARGE_CITRINE_BUD, CITRINE_CLUSTER, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME);
 	public static final Block CITRINE_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK), SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME);
-	public static final Block ONYX_CLUSTER = new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_CLUSTER, 6), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block LARGE_ONYX_BUD = new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.LARGE_ONYX_BUD, 5), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block MEDIUM_ONYX_BUD = new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.MEDIUM_ONYX_BUD, 3), SpectrumClusterBlock.GrowthStage.MEDIUM);
-	public static final Block SMALL_ONYX_BUD = new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 1), SpectrumClusterBlock.GrowthStage.SMALL);
+	
+	public static final Block ONYX_CLUSTER = registerClusterBlock("onyx_cluster", new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_CLUSTER, 6), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, Models.CROSS, DyeColor.BLACK);
+	public static final Block LARGE_ONYX_BUD = registerClusterBlock("large_onyx_bud", new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.LARGE_ONYX_BUD, 5), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, Models.CROSS, DyeColor.BLACK);
+	public static final Block MEDIUM_ONYX_BUD = registerClusterBlock("medium_onyx_bud", new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.MEDIUM_ONYX_BUD, 3), SpectrumClusterBlock.GrowthStage.MEDIUM), IS.DEFAULT, Models.CROSS, DyeColor.BLACK);
+	public static final Block SMALL_ONYX_BUD = registerClusterBlock("small_onyx_bud", new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 1), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.BLACK);
 	public static final Block BUDDING_ONYX = new SpectrumBuddingBlock(gemstoneBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_ONYX_BUD, MEDIUM_ONYX_BUD, LARGE_ONYX_BUD, ONYX_CLUSTER, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_HIT, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME);
 	public static final Block ONYX_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK), SpectrumSoundEvents.BLOCK_ONYX_BLOCK_HIT, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME);
-	public static final Block MOONSTONE_CLUSTER = new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_CLUSTER, 15), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block LARGE_MOONSTONE_BUD = new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.LARGE_MOONSTONE_BUD, 12), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block MEDIUM_MOONSTONE_BUD = new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.MEDIUM_MOONSTONE_BUD, 9), SpectrumClusterBlock.GrowthStage.MEDIUM);
-	public static final Block SMALL_MOONSTONE_BUD = new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.SMALL_MOONSTONE_BUD, 6), SpectrumClusterBlock.GrowthStage.SMALL);
+	
+	public static final Block MOONSTONE_CLUSTER = registerClusterBlock("moonstone_cluster", new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_CLUSTER, 15), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, Models.CROSS, DyeColor.WHITE);
+	public static final Block LARGE_MOONSTONE_BUD = registerClusterBlock("large_moonstone_bud", new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.LARGE_MOONSTONE_BUD, 12), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, Models.CROSS, DyeColor.WHITE);
+	public static final Block MEDIUM_MOONSTONE_BUD = registerClusterBlock("medium_moonstone_bud", new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.MEDIUM_MOONSTONE_BUD, 9), SpectrumClusterBlock.GrowthStage.MEDIUM), IS.DEFAULT, Models.CROSS, DyeColor.WHITE);
+	public static final Block SMALL_MOONSTONE_BUD = registerClusterBlock("small_moonstone_bud", new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.SMALL_MOONSTONE_BUD, 6), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.WHITE);
 	public static final Block BUDDING_MOONSTONE = new SpectrumBuddingBlock(gemstoneBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_MOONSTONE_BUD, MEDIUM_MOONSTONE_BUD, LARGE_MOONSTONE_BUD, MOONSTONE_CLUSTER, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME);
 	public static final Block MOONSTONE_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK), SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME);
 	
@@ -179,9 +181,9 @@ public class SpectrumBlocks {
 	public static final Block NEOLITH_BLOCK = new SpectrumFacingBlock(settings(MapColor.PURPLE, BlockSoundGroup.COPPER, 6.0F).requiresTool().instrument(NoteBlockInstrument.BASEDRUM).luminance(state -> 13).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
 	public static final Block BEDROCK_STORAGE_BLOCK = new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune"));
 	
-	public static final SpectrumClusterBlock BISMUTH_CLUSTER = new SpectrumClusterBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 8), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final SpectrumClusterBlock LARGE_BISMUTH_BUD = new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 6).ticksRandomly(), SpectrumClusterBlock.GrowthStage.LARGE, BISMUTH_CLUSTER);
-	public static final SpectrumClusterBlock SMALL_BISMUTH_BUD = new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 4).ticksRandomly(), SpectrumClusterBlock.GrowthStage.SMALL, LARGE_BISMUTH_BUD);
+	public static final SpectrumClusterBlock BISMUTH_CLUSTER = registerClusterBlock("bismuth_cluster", new SpectrumClusterBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 8), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final SpectrumClusterBlock LARGE_BISMUTH_BUD = registerClusterBlock("large_bismuth_bud", new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 6).ticksRandomly(), SpectrumClusterBlock.GrowthStage.LARGE, BISMUTH_CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final SpectrumClusterBlock SMALL_BISMUTH_BUD = registerClusterBlock("small_bismuth_bud", new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 4).ticksRandomly(), SpectrumClusterBlock.GrowthStage.SMALL, LARGE_BISMUTH_BUD), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
 	public static final Block BISMUTH_BLOCK = new Block(gemstoneBlock(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN));
 	
 	// DD BLOCKS
@@ -839,7 +841,7 @@ public class SpectrumBlocks {
 	public static final WeepingGalaSprigBlock WEEPING_GALA_SPRIG = registerCustom("weeping_gala_sprig", new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.BRIGHT_TEAL)), DyeColor.LIME, block -> {
 		registerCutoutRenderLayerEntry(block);
 		registerCustomItemModel(block, Models.GENERATED);
-		registerCrossBlockStateModel(block, false);
+		registerCrossModel(block, false);
 	});
 	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = registerPottedPlant("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant()), false);
 	
@@ -884,7 +886,9 @@ public class SpectrumBlocks {
 	
 	public static final Block BASAL_MARBLE_PILLAR = registerAxisRotated("basal_marble_pillar", new PillarBlock(basalMarble()), TexturedModel.CUBE_COLUMN, DyeColor.BROWN);
 	
-	public static final Block POLISHED_BASAL_MARBLE = registerDefaultFacingUp("polished_basal_marble", new SpectrumFacingBlock(basalMarble()), TexturedModel.CUBE_BOTTOM_TOP, DyeColor.BROWN);
+	public static final Block POLISHED_BASAL_MARBLE = registerCustom("polished_basal_marble", new SpectrumFacingBlock(basalMarble()), DyeColor.BROWN, block -> {
+		registerDefaultFacingUpModel(block, TexturedModel.CUBE_BOTTOM_TOP);
+	});
 	public static final Block POLISHED_BASAL_MARBLE_STAIRS = registerBlockWithItemWithoutModel("polished_basal_marble_stairs", new StairsBlock(POLISHED_BASAL_MARBLE.getDefaultState(), basalMarble()), DyeColor.BROWN);
 	public static final Block POLISHED_BASAL_MARBLE_SLAB = registerBlockWithItemWithoutModel("polished_basal_marble_slab", new SlabBlock(basalMarble()), DyeColor.BROWN);
 	public static final Block POLISHED_BASAL_MARBLE_WALL = registerBlockWithItemWithoutModel("polished_basal_marble_wall", new WallBlock(basalMarble()), DyeColor.BROWN);
@@ -1001,22 +1005,22 @@ public class SpectrumBlocks {
 	public static final Block DEEPSLATE_AZURITE_ORE = new AzuriteOreBlock(UniformIntProvider.create(4, 7), deepslateOre().ticksRandomly(), SpectrumAdvancements.REVEAL_AZURITE, Blocks.DEEPSLATE.getDefaultState());
 	public static final Block BLACKSLAG_AZURITE_ORE = new AzuriteOreBlock(UniformIntProvider.create(4, 7), blackslagOre().ticksRandomly(), SpectrumAdvancements.REVEAL_AZURITE, SpectrumBlocks.BLACKSLAG.getDefaultState());
 	public static final Block AZURITE_BLOCK = new SpectrumFacingBlock(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK).mapColor(MapColor.BLUE));
-	public static final Block AZURITE_CLUSTER = new AmethystClusterBlock(7, 3, gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 2));
-	public static final Block LARGE_AZURITE_BUD = new AmethystClusterBlock(5, 3, gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.LARGE_ONYX_BUD, 3));
-	public static final Block SMALL_AZURITE_BUD = new AmethystClusterBlock(3, 4, gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.ONYX_CLUSTER, 5));
+	public static final Block AZURITE_CLUSTER = registerClusterBlock("azurite_cluster", new SpectrumClusterBlock(gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 2), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BLUE);
+	public static final Block LARGE_AZURITE_BUD = registerClusterBlock("large_azurite_bud", new SpectrumClusterBlock(gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.LARGE_ONYX_BUD, 3), SpectrumClusterBlock.GrowthStage.LARGE), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BLUE);
+	public static final Block SMALL_AZURITE_BUD = registerClusterBlock("small_azurite_bud", new SpectrumClusterBlock(gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.ONYX_CLUSTER, 5), SpectrumClusterBlock.GrowthStage.SMALL), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BLUE);
 	
 	public static final Block MALACHITE_ORE = new CloakedOreBlock(UniformIntProvider.create(7, 11), ore(), SpectrumAdvancements.REVEAL_MALACHITE, Blocks.STONE.getDefaultState());
 	public static final Block DEEPSLATE_MALACHITE_ORE = new CloakedOreBlock(UniformIntProvider.create(7, 11), deepslateOre(), SpectrumAdvancements.REVEAL_MALACHITE, Blocks.DEEPSLATE.getDefaultState());
 	public static final Block BLACKSLAG_MALACHITE_ORE = new CloakedOreBlock(UniformIntProvider.create(7, 11), blackslagOre(), SpectrumAdvancements.REVEAL_MALACHITE, BLACKSLAG.getDefaultState());
 	public static final Block MALACHITE_BLOCK = new SpectrumFacingBlock(gemstoneBlock(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN));
-	public static final Block MALACHITE_CLUSTER = new AmethystClusterBlock(7, 3, gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 9));
-	public static final Block LARGE_MALACHITE_BUD = new AmethystClusterBlock(5, 3, gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 7));
-	public static final Block SMALL_MALACHITE_BUD = new AmethystClusterBlock(3, 4, gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 5));
+	public static final Block MALACHITE_CLUSTER = registerClusterBlock("malachite_cluster", new SpectrumClusterBlock(gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 9), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.GREEN);
+	public static final Block LARGE_MALACHITE_BUD = registerClusterBlock("large_malachite_bud", new SpectrumClusterBlock(gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 7), SpectrumClusterBlock.GrowthStage.LARGE), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.GREEN);
+	public static final Block SMALL_MALACHITE_BUD = registerClusterBlock("small_malachite_bud", new SpectrumClusterBlock(gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 5), SpectrumClusterBlock.GrowthStage.SMALL), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.GREEN);
 	
 	public static final Block BLOODSTONE_BLOCK = new SpectrumFacingBlock(gemstoneBlock(MapColor.RED, SpectrumBlockSoundGroups.ONYX_CLUSTER));
-	public static final Block BLOODSTONE_CLUSTER = new AmethystClusterBlock(7, 3, gemstone(MapColor.RED, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 6));
-	public static final Block LARGE_BLOODSTONE_BUD = new AmethystClusterBlock(5, 3, gemstone(MapColor.RED, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 4));
-	public static final Block SMALL_BLOODSTONE_BUD = new AmethystClusterBlock(3, 4, gemstone(MapColor.RED, SpectrumBlockSoundGroups.ONYX_CLUSTER, 3));
+	public static final Block BLOODSTONE_CLUSTER = registerClusterBlock("bloodstone_cluster", new SpectrumClusterBlock(gemstone(MapColor.RED, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 6), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
+	public static final Block LARGE_BLOODSTONE_BUD = registerClusterBlock("large_bloodstone_bud", new SpectrumClusterBlock(gemstone(MapColor.RED, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 4), SpectrumClusterBlock.GrowthStage.LARGE), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
+	public static final Block SMALL_BLOODSTONE_BUD = registerClusterBlock("small_bloodstone_bud", new SpectrumClusterBlock(gemstone(MapColor.RED, SpectrumBlockSoundGroups.ONYX_CLUSTER, 3), SpectrumClusterBlock.GrowthStage.SMALL), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
 	
 	public static final Block STRATINE_ORE = new CloakedOreBlock(UniformIntProvider.create(3, 5), netherrackOre(), SpectrumAdvancements.REVEAL_STRATINE, Blocks.NETHERRACK.getDefaultState());
 	public static final Block PALTAERIA_ORE = new CloakedOreBlock(UniformIntProvider.create(2, 4), endstoneOre(), SpectrumAdvancements.REVEAL_PALTAERIA, Blocks.END_STONE.getDefaultState());
@@ -1178,7 +1182,7 @@ public class SpectrumBlocks {
 	public static final AmaranthBushelBlock AMARANTH_BUSHEL = registerCustom("amaranth_bushel", new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision()), DyeColor.RED, block -> {
 		registerCutoutRenderLayerEntry(block);
 		registerCustomItemModel(block, Models.GENERATED);
-		registerCrossBlockStateModel(block, false);
+		registerCrossModel(block, false);
 	});
 	public static final PottedAmaranthBushelBlock POTTED_AMARANTH_BUSHEL = registerPottedPlant("potted_amaranth_bushel", new PottedAmaranthBushelBlock(AMARANTH_BUSHEL, pottedPlant()), false);
 	
@@ -1455,45 +1459,45 @@ public class SpectrumBlocks {
 		return AbstractBlock.Settings.copy(baseBlock).strength(1.5F).nonOpaque().solid().requiresTool().pistonBehavior(PistonBehavior.DESTROY);
 	}
 	
-	public static final Block SMALL_COAL_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.COAL_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_COAL_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_COAL_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block COAL_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_COAL_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_COPPER_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.COPPER_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_COPPER_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_COPPER_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block COPPER_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_COPPER_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_DIAMOND_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.DIAMOND_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_DIAMOND_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_DIAMOND_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block DIAMOND_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_DIAMOND_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_EMERALD_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.EMERALD_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_EMERALD_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_EMERALD_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block EMERALD_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_EMERALD_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_GLOWSTONE_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.GLOWSTONE).luminance(state -> 4), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_GLOWSTONE_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_GLOWSTONE_BUD).luminance(state -> 8), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block GLOWSTONE_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_GLOWSTONE_BUD).luminance(state -> 14), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_GOLD_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.GOLD_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_GOLD_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_GOLD_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block GOLD_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_GOLD_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_IRON_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.IRON_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_IRON_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_IRON_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block IRON_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_IRON_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_LAPIS_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.LAPIS_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_LAPIS_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_LAPIS_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block LAPIS_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_LAPIS_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_NETHERITE_SCRAP_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.ANCIENT_DEBRIS), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_NETHERITE_SCRAP_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_NETHERITE_SCRAP_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block NETHERITE_SCRAP_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_NETHERITE_SCRAP_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_ECHO_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.SCULK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_ECHO_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ECHO_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block ECHO_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ECHO_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_PRISMARINE_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.SCULK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_PRISMARINE_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_PRISMARINE_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block PRISMARINE_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_PRISMARINE_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_QUARTZ_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.QUARTZ_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_QUARTZ_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_QUARTZ_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block QUARTZ_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_QUARTZ_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
-	public static final Block SMALL_REDSTONE_BUD = new SpectrumClusterBlock(crystallarieumGrowable(Blocks.REDSTONE_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL);
-	public static final Block LARGE_REDSTONE_BUD = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_REDSTONE_BUD), SpectrumClusterBlock.GrowthStage.LARGE);
-	public static final Block REDSTONE_CLUSTER = new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_REDSTONE_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER);
+	public static final Block SMALL_COAL_BUD = registerClusterBlock("small_coal_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.COAL_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block LARGE_COAL_BUD = registerClusterBlock("large_coal_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_COAL_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block COAL_CLUSTER = registerClusterBlock("coal_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_COAL_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block SMALL_IRON_BUD = registerClusterBlock("small_iron_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.IRON_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block LARGE_IRON_BUD = registerClusterBlock("large_iron_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_IRON_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block IRON_CLUSTER = registerClusterBlock("iron_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_IRON_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block SMALL_GOLD_BUD = registerClusterBlock("small_gold_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.GOLD_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block LARGE_GOLD_BUD = registerClusterBlock("large_gold_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_GOLD_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block GOLD_CLUSTER = registerClusterBlock("gold_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_GOLD_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block SMALL_DIAMOND_BUD = registerClusterBlock("small_diamond_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.DIAMOND_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final Block LARGE_DIAMOND_BUD = registerClusterBlock("large_diamond_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_DIAMOND_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final Block DIAMOND_CLUSTER = registerClusterBlock("diamond_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_DIAMOND_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final Block SMALL_EMERALD_BUD = registerClusterBlock("small_emerald_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.EMERALD_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final Block LARGE_EMERALD_BUD = registerClusterBlock("large_emerald_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_EMERALD_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final Block EMERALD_CLUSTER = registerClusterBlock("emerald_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_EMERALD_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final Block SMALL_REDSTONE_BUD = registerClusterBlock("small_redstone_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.REDSTONE_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
+	public static final Block LARGE_REDSTONE_BUD = registerClusterBlock("large_redstone_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_REDSTONE_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
+	public static final Block REDSTONE_CLUSTER = registerClusterBlock("redstone_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_REDSTONE_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
+	public static final Block SMALL_LAPIS_BUD = registerClusterBlock("small_lapis_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.LAPIS_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.PURPLE);
+	public static final Block LARGE_LAPIS_BUD = registerClusterBlock("large_lapis_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_LAPIS_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.PURPLE);
+	public static final Block LAPIS_CLUSTER = registerClusterBlock("lapis_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_LAPIS_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.PURPLE);
+	public static final Block SMALL_COPPER_BUD = registerClusterBlock("small_copper_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.COPPER_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block LARGE_COPPER_BUD = registerClusterBlock("large_copper_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_COPPER_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block COPPER_CLUSTER = registerClusterBlock("copper_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_COPPER_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block SMALL_QUARTZ_BUD = registerClusterBlock("small_quartz_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.QUARTZ_BLOCK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block LARGE_QUARTZ_BUD = registerClusterBlock("large_quartz_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_QUARTZ_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block QUARTZ_CLUSTER = registerClusterBlock("quartz_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_QUARTZ_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block SMALL_NETHERITE_SCRAP_BUD = registerClusterBlock("small_netherite_scrap_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.ANCIENT_DEBRIS), SpectrumClusterBlock.GrowthStage.SMALL), IS.of().fireproof(), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block LARGE_NETHERITE_SCRAP_BUD = registerClusterBlock("large_netherite_scrap_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_NETHERITE_SCRAP_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.of().fireproof(), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block NETHERITE_SCRAP_CLUSTER = registerClusterBlock("netherite_scrap_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_NETHERITE_SCRAP_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of().fireproof(), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block SMALL_ECHO_BUD = registerClusterBlock("small_echo_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.SCULK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block LARGE_ECHO_BUD = registerClusterBlock("large_echo_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ECHO_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block ECHO_CLUSTER = registerClusterBlock("echo_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ECHO_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
+	public static final Block SMALL_GLOWSTONE_BUD = registerClusterBlock("small_glowstone_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.GLOWSTONE).luminance(state -> 4), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.YELLOW);
+	public static final Block LARGE_GLOWSTONE_BUD = registerClusterBlock("large_glowstone_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_GLOWSTONE_BUD).luminance(state -> 8), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.YELLOW);
+	public static final Block GLOWSTONE_CLUSTER = registerClusterBlock("glowstone_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_GLOWSTONE_BUD).luminance(state -> 14), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.YELLOW);
+	public static final Block SMALL_PRISMARINE_BUD = registerClusterBlock("small_prismarine_bud", new SpectrumClusterBlock(crystallarieumGrowable(Blocks.SCULK), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final Block LARGE_PRISMARINE_BUD = registerClusterBlock("large_prismarine_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_PRISMARINE_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
+	public static final Block PRISMARINE_CLUSTER = registerClusterBlock("prismarine_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_PRISMARINE_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
 	
 	public static final Block PURE_COAL_BLOCK = new Block(AbstractBlock.Settings.copy(Blocks.COAL_BLOCK));
 	public static final Block PURE_IRON_BLOCK = new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
@@ -1728,7 +1732,7 @@ public class SpectrumBlocks {
 		ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(block.asItem(), model));
 	}
 	
-	public static void registerCrossBlockStateModel(Block block, boolean tinted) {
+	public static void registerCrossModel(Block block, boolean tinted) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerTintableCrossBlockState(block, tinted
 						? BlockStateModelGenerator.TintType.TINTED
 						: BlockStateModelGenerator.TintType.NOT_TINTED,
@@ -1784,6 +1788,18 @@ public class SpectrumBlocks {
 		return registerBlockWithItemWithoutModel(name, woodBlock, color);
 	}
 	
+	public static <T extends SpectrumClusterBlock> T registerClusterBlock(String name, T block, Item.Settings itemSettings, Model blockModel, DyeColor color) {
+		registerCutoutRenderLayerEntry(block);
+		switch (block.getGrowthStage()) {
+			case SpectrumClusterBlock.GrowthStage.SMALL -> registerCustomItemModel(block, SpectrumModels.SMALL_BUD_ITEM);
+			case SpectrumClusterBlock.GrowthStage.MEDIUM -> registerCustomItemModel(block, SpectrumModels.MEDIUM_BUD_ITEM);
+			case SpectrumClusterBlock.GrowthStage.LARGE -> registerCustomItemModel(block, SpectrumModels.LARGE_BUD_ITEM);
+			case SpectrumClusterBlock.GrowthStage.CLUSTER -> registerCustomItemModel(block, SpectrumModels.CLUSTER_ITEM);
+		}
+		registerDefaultFacingUpModel(block, TexturedModel.makeFactory(TextureMap::cross, blockModel));
+		return registerBlockWithItemWithoutModel(name, block, itemSettings, color);
+	}
+	
 	public static <T extends Block> T registerGemLight(String name, Block gemBlock, Identifier capTexture, T gemLightBlock, DyeColor color) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			ctx.registerAxisRotated(gemLightBlock, TexturedModel.makeFactory(
@@ -1829,7 +1845,7 @@ public class SpectrumBlocks {
 		return registerBlockWithItemWithoutModel(name, block, color);
 	}
 	
-	public static <T extends Block> T registerDefaultFacingUp(String name, T block, TexturedModel.Factory factory, DyeColor color) {
+	public static void registerDefaultFacingUpModel(Block block, TexturedModel.Factory factory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			BlockStateVariantMap variants = BlockStateVariantMap.create(FacingBlock.FACING)
 					.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R180))
@@ -1841,7 +1857,6 @@ public class SpectrumBlocks {
 			ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, factory.upload(block, ctx.modelCollector)))
 					.coordinate(variants));
 		});
-		return registerBlockWithItemWithoutModel(name, block, color);
 	}
 	
 	public static BlockFamily registerBlockFamily(Block baseBlock, UnaryOperator<BlockFamily.Builder> callback) {
@@ -1861,15 +1876,19 @@ public class SpectrumBlocks {
 		return family;
 	}
 	
-	public static <T extends Block> T registerBlockWithItemWithoutModel(String name, T block, DyeColor dyeColor) {
+	public static <T extends Block> T registerBlockWithItemWithoutModel(String name, T block, Item.Settings itemSettings, DyeColor dyeColor) {
 		Identifier id = SpectrumCommon.locate(name);
-		BlockItem blockItem = new BlockItem(block, IS.DEFAULT);
+		BlockItem blockItem = new BlockItem(block, itemSettings);
 		COMMON_REGISTRAR.defer(() -> {
 			Registry.register(Registries.BLOCK, id, block);
 			Registry.register(Registries.ITEM, id, blockItem);
 			ItemColors.ITEM_COLORS.registerColorMapping(blockItem, dyeColor);
 		});
 		return block;
+	}
+	
+	public static <T extends Block> T registerBlockWithItemWithoutModel(String name, T block, DyeColor dyeColor) {
+		return registerBlockWithItemWithoutModel(name, block, IS.DEFAULT, dyeColor);
 	}
 	
 	public static <T extends Block> T registerSimple(String name, T block, DyeColor dyeColor) {
@@ -1950,7 +1969,6 @@ public class SpectrumBlocks {
 		registerRedstone(IS.of());
 		registerMagicalBlocks(IS.of());
 		registerMobBlocks(IS.of());
-		registerCrystallarieumGrowingBlocks(IS.of());
 		registerPureOreBlocks(IS.of());
 		registerJadeVineBlocks(IS.of());
 		registerSugarSticks(IS.of());
@@ -2155,60 +2173,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("waxed_hummingstone", WAXED_HUMMINGSTONE, settings, DyeColor.LIGHT_BLUE);
 	}
 	
-	private static void registerCrystallarieumGrowingBlocks(Item.Settings settings) {
-		registerBlockWithItem("small_coal_bud", SMALL_COAL_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("large_coal_bud", LARGE_COAL_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("coal_cluster", COAL_CLUSTER, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("small_iron_bud", SMALL_IRON_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("large_iron_bud", LARGE_IRON_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("iron_cluster", IRON_CLUSTER, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("small_gold_bud", SMALL_GOLD_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("large_gold_bud", LARGE_GOLD_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("gold_cluster", GOLD_CLUSTER, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("small_diamond_bud", SMALL_DIAMOND_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("large_diamond_bud", LARGE_DIAMOND_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("diamond_cluster", DIAMOND_CLUSTER, settings, DyeColor.CYAN);
-		
-		registerBlockWithItem("small_emerald_bud", SMALL_EMERALD_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("large_emerald_bud", LARGE_EMERALD_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("emerald_cluster", EMERALD_CLUSTER, settings, DyeColor.CYAN);
-		
-		registerBlockWithItem("small_redstone_bud", SMALL_REDSTONE_BUD, settings, DyeColor.RED);
-		registerBlockWithItem("large_redstone_bud", LARGE_REDSTONE_BUD, settings, DyeColor.RED);
-		registerBlockWithItem("redstone_cluster", REDSTONE_CLUSTER, settings, DyeColor.RED);
-		
-		registerBlockWithItem("small_lapis_bud", SMALL_LAPIS_BUD, settings, DyeColor.PURPLE);
-		registerBlockWithItem("large_lapis_bud", LARGE_LAPIS_BUD, settings, DyeColor.PURPLE);
-		registerBlockWithItem("lapis_cluster", LAPIS_CLUSTER, settings, DyeColor.PURPLE);
-		
-		registerBlockWithItem("small_copper_bud", SMALL_COPPER_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("large_copper_bud", LARGE_COPPER_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("copper_cluster", COPPER_CLUSTER, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("small_quartz_bud", SMALL_QUARTZ_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("large_quartz_bud", LARGE_QUARTZ_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("quartz_cluster", QUARTZ_CLUSTER, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("small_netherite_scrap_bud", SMALL_NETHERITE_SCRAP_BUD, IS.of().fireproof(), DyeColor.BROWN);
-		registerBlockWithItem("large_netherite_scrap_bud", LARGE_NETHERITE_SCRAP_BUD, IS.of().fireproof(), DyeColor.BROWN);
-		registerBlockWithItem("netherite_scrap_cluster", NETHERITE_SCRAP_CLUSTER, IS.of().fireproof(), DyeColor.BROWN);
-		
-		registerBlockWithItem("small_echo_bud", SMALL_ECHO_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("large_echo_bud", LARGE_ECHO_BUD, settings, DyeColor.BROWN);
-		registerBlockWithItem("echo_cluster", ECHO_CLUSTER, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("small_glowstone_bud", SMALL_GLOWSTONE_BUD, settings, DyeColor.YELLOW);
-		registerBlockWithItem("large_glowstone_bud", LARGE_GLOWSTONE_BUD, settings, DyeColor.YELLOW);
-		registerBlockWithItem("glowstone_cluster", GLOWSTONE_CLUSTER, settings, DyeColor.YELLOW);
-		
-		registerBlockWithItem("small_prismarine_bud", SMALL_PRISMARINE_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("large_prismarine_bud", LARGE_PRISMARINE_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("prismarine_cluster", PRISMARINE_CLUSTER, settings, DyeColor.CYAN);
-	}
-	
 	private static void registerRedstone(Item.Settings settings) {
 		registerBlockWithItem("light_level_detector", LIGHT_LEVEL_DETECTOR, settings, DyeColor.RED);
 		registerBlockWithItem("weather_detector", WEATHER_DETECTOR, settings, DyeColor.RED);
@@ -2300,19 +2264,12 @@ public class SpectrumBlocks {
 		registerBlockWithItem("stratine_ore", STRATINE_ORE, new FloatBlockItem(STRATINE_ORE, settingsFireproof, -0.01F), DyeColor.RED);
 		registerBlockWithItem("paltaeria_ore", PALTAERIA_ORE, new FloatBlockItem(PALTAERIA_ORE, settings, 0.01F), DyeColor.CYAN);
 		
-		registerBlockWithItem("small_bismuth_bud", SMALL_BISMUTH_BUD, IS.of(Rarity.UNCOMMON), DyeColor.CYAN);
-		registerBlockWithItem("large_bismuth_bud", LARGE_BISMUTH_BUD, IS.of(Rarity.UNCOMMON), DyeColor.CYAN);
-		registerBlockWithItem("bismuth_cluster", BISMUTH_CLUSTER, IS.of(Rarity.UNCOMMON), DyeColor.CYAN);
 		registerBlockWithItem("bismuth_block", BISMUTH_BLOCK, IS.of(Rarity.UNCOMMON), DyeColor.CYAN);
 		
 		registerBlockWithItem("malachite_ore", MALACHITE_ORE, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
 		registerBlockWithItem("deepslate_malachite_ore", DEEPSLATE_MALACHITE_ORE, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
 		registerBlockWithItem("blackslag_malachite_ore", BLACKSLAG_MALACHITE_ORE, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
-		registerBlockWithItem("small_malachite_bud", SMALL_MALACHITE_BUD, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
-		registerBlockWithItem("large_malachite_bud", LARGE_MALACHITE_BUD, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
-		registerBlockWithItem("malachite_cluster", MALACHITE_CLUSTER, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
 		registerBlockWithItem("malachite_block", MALACHITE_BLOCK, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
-		
 		
 		registerBlockWithItem("blackslag_coal_ore", BLACKSLAG_COAL_ORE, settings, DyeColor.BLACK);
 		registerBlockWithItem("blackslag_copper_ore", BLACKSLAG_COPPER_ORE, settings, DyeColor.BLACK);
@@ -2323,13 +2280,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("blackslag_lapis_ore", BLACKSLAG_LAPIS_ORE, settings, DyeColor.BLUE);
 		registerBlockWithItem("blackslag_emerald_ore", BLACKSLAG_EMERALD_ORE, settings, DyeColor.LIME);
 		
-		registerBlockWithItem("azurite_cluster", AZURITE_CLUSTER, IS.of(Rarity.UNCOMMON), DyeColor.BLUE);
-		registerBlockWithItem("large_azurite_bud", LARGE_AZURITE_BUD, IS.of(Rarity.UNCOMMON), DyeColor.BLUE);
-		registerBlockWithItem("small_azurite_bud", SMALL_AZURITE_BUD, IS.of(Rarity.UNCOMMON), DyeColor.BLUE);
-		
-		registerBlockWithItem("small_bloodstone_bud", SMALL_BLOODSTONE_BUD, settings.rarity(Rarity.UNCOMMON), DyeColor.RED);
-		registerBlockWithItem("large_bloodstone_bud", LARGE_BLOODSTONE_BUD, settings.rarity(Rarity.UNCOMMON), DyeColor.RED);
-		registerBlockWithItem("bloodstone_cluster", BLOODSTONE_CLUSTER, settings.rarity(Rarity.UNCOMMON), DyeColor.RED);
 		registerBlockWithItem("bloodstone_block", BLOODSTONE_BLOCK, settings.rarity(Rarity.UNCOMMON), DyeColor.RED);
 		registerBlockWithItem("resplendent_block", RESPLENDENT_BLOCK, settings.rarity(Rarity.UNCOMMON), DyeColor.YELLOW);
 		registerBlockWithItem("resplendent_cushion", RESPLENDENT_CUSHION, settings.rarity(Rarity.UNCOMMON), DyeColor.YELLOW);
@@ -2617,31 +2567,15 @@ public class SpectrumBlocks {
 	private static void registerGemBlocks(Item.Settings settings) {
 		registerBlockWithItem("topaz_block", TOPAZ_BLOCK, settings, DyeColor.CYAN);
 		registerBlockWithItem("budding_topaz", BUDDING_TOPAZ, settings, DyeColor.CYAN);
-		registerBlockWithItem("small_topaz_bud", SMALL_TOPAZ_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("medium_topaz_bud", MEDIUM_TOPAZ_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("large_topaz_bud", LARGE_TOPAZ_BUD, settings, DyeColor.CYAN);
-		registerBlockWithItem("topaz_cluster", TOPAZ_CLUSTER, settings, DyeColor.CYAN);
 		
 		registerBlockWithItem("citrine_block", CITRINE_BLOCK, settings, DyeColor.YELLOW);
 		registerBlockWithItem("budding_citrine", BUDDING_CITRINE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("small_citrine_bud", SMALL_CITRINE_BUD, settings, DyeColor.YELLOW);
-		registerBlockWithItem("medium_citrine_bud", MEDIUM_CITRINE_BUD, settings, DyeColor.YELLOW);
-		registerBlockWithItem("large_citrine_bud", LARGE_CITRINE_BUD, settings, DyeColor.YELLOW);
-		registerBlockWithItem("citrine_cluster", CITRINE_CLUSTER, settings, DyeColor.YELLOW);
 		
 		registerBlockWithItem("onyx_block", ONYX_BLOCK, settings, DyeColor.BLACK);
 		registerBlockWithItem("budding_onyx", BUDDING_ONYX, settings, DyeColor.BLACK);
-		registerBlockWithItem("small_onyx_bud", SMALL_ONYX_BUD, settings, DyeColor.BLACK);
-		registerBlockWithItem("medium_onyx_bud", MEDIUM_ONYX_BUD, settings, DyeColor.BLACK);
-		registerBlockWithItem("large_onyx_bud", LARGE_ONYX_BUD, settings, DyeColor.BLACK);
-		registerBlockWithItem("onyx_cluster", ONYX_CLUSTER, settings, DyeColor.BLACK);
 		
 		registerBlockWithItem("moonstone_block", MOONSTONE_BLOCK, settings, DyeColor.WHITE);
 		registerBlockWithItem("budding_moonstone", BUDDING_MOONSTONE, settings, DyeColor.WHITE);
-		registerBlockWithItem("small_moonstone_bud", SMALL_MOONSTONE_BUD, settings, DyeColor.WHITE);
-		registerBlockWithItem("medium_moonstone_bud", MEDIUM_MOONSTONE_BUD, settings, DyeColor.WHITE);
-		registerBlockWithItem("large_moonstone_bud", LARGE_MOONSTONE_BUD, settings, DyeColor.WHITE);
-		registerBlockWithItem("moonstone_cluster", MOONSTONE_CLUSTER, settings, DyeColor.WHITE);
 	}
 	
 	private static void registerStructureBlocks(Item.Settings settings) {
@@ -2801,31 +2735,6 @@ public class SpectrumBlocks {
 		
 		// Pastel
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), CONNECTION_NODE, PROVIDER_NODE, SENDER_NODE, STORAGE_NODE, BUFFER_NODE, GATHER_NODE);
-		
-		// Gemstones
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.TOPAZ_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_TOPAZ_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MEDIUM_TOPAZ_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_TOPAZ_BUD, RenderLayer.getCutout());
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CITRINE_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_CITRINE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MEDIUM_CITRINE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_CITRINE_BUD, RenderLayer.getCutout());
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.ONYX_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_ONYX_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MEDIUM_ONYX_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_ONYX_BUD, RenderLayer.getCutout());
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MOONSTONE_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_MOONSTONE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MEDIUM_MOONSTONE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_MOONSTONE_BUD, RenderLayer.getCutout());
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BISMUTH_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_BISMUTH_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_BISMUTH_BUD, RenderLayer.getCutout());
 		
 		// Glass
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), SpectrumBlocks.TOPAZ_GLASS, SpectrumBlocks.AMETHYST_GLASS, SpectrumBlocks.CITRINE_GLASS, SpectrumBlocks.ONYX_GLASS, SpectrumBlocks.MOONSTONE_GLASS);
@@ -3029,57 +2938,6 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PRISTINE_SHOOTING_STAR, RenderLayer.getCutout());
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.INCANDESCENT_AMALGAM, RenderLayer.getCutout());
-		
-		// CRYSTALLARIEUM GROWABLES
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_COAL_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_COAL_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.COAL_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_COPPER_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_COPPER_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.COPPER_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_DIAMOND_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_DIAMOND_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.DIAMOND_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_EMERALD_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_EMERALD_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.EMERALD_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_GLOWSTONE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_GLOWSTONE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.GLOWSTONE_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_GOLD_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_GOLD_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.GOLD_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_IRON_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_IRON_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.IRON_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_LAPIS_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_LAPIS_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LAPIS_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_NETHERITE_SCRAP_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_NETHERITE_SCRAP_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.NETHERITE_SCRAP_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_PRISMARINE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_PRISMARINE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PRISMARINE_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_QUARTZ_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_QUARTZ_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.QUARTZ_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_REDSTONE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_REDSTONE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.REDSTONE_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_ECHO_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_ECHO_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.ECHO_CLUSTER, RenderLayer.getCutout());
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_AZURITE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_AZURITE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.AZURITE_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_MALACHITE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_MALACHITE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MALACHITE_CLUSTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_BLOODSTONE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LARGE_BLOODSTONE_BUD, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BLOODSTONE_CLUSTER, RenderLayer.getCutout());
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_YELLOW_DRAGONJAG, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_RED_DRAGONJAG, RenderLayer.getCutout());
