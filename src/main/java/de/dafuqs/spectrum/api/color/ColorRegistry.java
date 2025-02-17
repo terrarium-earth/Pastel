@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.api.color;
 
-import net.minecraft.util.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 
 import java.util.*;
 
@@ -14,10 +14,10 @@ public abstract class ColorRegistry<T> {
 		FLUID_COLORS = new FluidColors();
 	}
 	
-	public abstract void registerColorMapping(T element, DyeColor dyeColor);
+	public abstract void registerColorMapping(T element, InkColor dyeColor);
 	
-	public abstract Optional<DyeColor> getMapping(T element);
+	public abstract Optional<InkColor> getMapping(T element);
 	
-	public abstract DyeColor getMapping(T element, DyeColor defaultColor);
+	public abstract InkColor getMapping(T element, InkColor fallback);
 	
 }

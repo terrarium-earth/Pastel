@@ -7,7 +7,7 @@ import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.compat.modonomicon.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
@@ -82,7 +82,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 		
 		switch (newPedestalRecipeTier) {
 			case COMPLEX -> {
-				ParticleEffect particleEffect = SpectrumParticleTypes.getCraftingParticle(DyeColor.WHITE);
+				ParticleEffect particleEffect = ColoredCraftingParticleEffect.WHITE;
 				for (int i = 0; i < 25; i++) {
 					float randomZ = random.nextFloat() * 1.2F;
 					world.addParticle(particleEffect, blockPos.getX() + 1.1, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D, 0.03D, 0.0D);
@@ -101,7 +101,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 				}
 			}
 			case ADVANCED -> {
-				ParticleEffect particleEffect = SpectrumParticleTypes.getCraftingParticle(DyeColor.BLACK);
+				ParticleEffect particleEffect = ColoredCraftingParticleEffect.BLACK;
 				for (int i = 0; i < 25; i++) {
 					float randomZ = random.nextFloat() * 1.2F;
 					world.addParticle(particleEffect, blockPos.getX() + 1.1, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D, 0.03D, 0.0D);
@@ -120,9 +120,9 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 				}
 			}
 			case SIMPLE -> {
-				ParticleEffect particleEffectC = SpectrumParticleTypes.getCraftingParticle(DyeColor.CYAN);
-				ParticleEffect particleEffectM = SpectrumParticleTypes.getCraftingParticle(DyeColor.MAGENTA);
-				ParticleEffect particleEffectY = SpectrumParticleTypes.getCraftingParticle(DyeColor.YELLOW);
+				ParticleEffect particleEffectC = ColoredCraftingParticleEffect.CYAN;
+				ParticleEffect particleEffectM = ColoredCraftingParticleEffect.MAGENTA;
+				ParticleEffect particleEffectY = ColoredCraftingParticleEffect.YELLOW;
 				for (int i = 0; i < 25; i++) {
 					float randomZ = random.nextFloat() * 1.2F;
 					world.addParticle(particleEffectY, blockPos.getX() + 1.1, blockPos.getY() + 0.1, blockPos.getZ() + randomZ, 0.0D, 0.05D, 0.0D);

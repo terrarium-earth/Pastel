@@ -6,6 +6,7 @@ import de.dafuqs.revelationary.*;
 import de.dafuqs.revelationary.advancement_criteria.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.color.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.*;
@@ -393,8 +394,8 @@ public class SanityCommand {
 //		}
 		
 		// Enchantments without recipe
-		Map<RegistryEntry<Enchantment>, DyeColor> craftingColors = new HashMap<>();
-		Map<RegistryEntry<Enchantment>, DyeColor> upgradeColors = new HashMap<>();
+		Map<RegistryEntry<Enchantment>, InkColor> craftingColors = new HashMap<>();
+		Map<RegistryEntry<Enchantment>, InkColor> upgradeColors = new HashMap<>();
 		for (RecipeEntry<EnchanterRecipe> recipeEntry : recipeManager.listAllOfType(SpectrumRecipeTypes.ENCHANTER)) {
 			EnchanterRecipe recipe = recipeEntry.value();
 			ItemStack output = recipe.getResult(source.getRegistryManager());
@@ -404,7 +405,7 @@ public class SanityCommand {
 					for (Ingredient ingredient : recipe.getIngredients()) {
 						for (ItemStack matchingStack : ingredient.getMatchingStacks()) {
 							if (matchingStack.getItem() instanceof PigmentItem pigmentItem) {
-								craftingColors.put(enchantments.getEnchantments().stream().toList().getFirst(), pigmentItem.getColor());
+								craftingColors.put(enchantments.getEnchantments().stream().toList().getFirst(), pigmentItem.getInkColor());
 							}
 						}
 					}
@@ -417,7 +418,7 @@ public class SanityCommand {
 			if (output.getItem() == Items.ENCHANTED_BOOK) {
 				ItemEnchantmentsComponent enchantments = EnchantmentHelper.getEnchantments(output);
 				if (!enchantments.isEmpty() && recipe.getRequiredItem() instanceof PigmentItem pigmentItem) {
-					upgradeColors.put(enchantments.getEnchantments().stream().toList().getFirst(), pigmentItem.getColor());
+					upgradeColors.put(enchantments.getEnchantments().stream().toList().getFirst(), pigmentItem.getInkColor());
 				}
 			}
 		}

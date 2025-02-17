@@ -2,7 +2,6 @@ package de.dafuqs.spectrum.blocks.upgrade;
 
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -10,7 +9,6 @@ import net.minecraft.block.entity.*;
 import net.minecraft.entity.ai.pathing.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
@@ -63,9 +61,9 @@ public class UpgradeBlock extends BlockWithEntity {
 	// the higher are the chances for good mods?
 	private final Upgradeable.UpgradeType upgradeType;
 	private final int upgradeMod;
-	private final DyeColor effectColor;
-
-	public UpgradeBlock(Settings settings, Upgradeable.UpgradeType upgradeType, int upgradeMod, DyeColor effectColor) {
+	private final int effectColor;
+	
+	public UpgradeBlock(Settings settings, Upgradeable.UpgradeType upgradeType, int upgradeMod, int effectColor) {
 		super(settings);
 		this.upgradeType = upgradeType;
 		this.upgradeMod = upgradeMod;
@@ -126,11 +124,11 @@ public class UpgradeBlock extends BlockWithEntity {
 	}
 
 	private void playConnectedParticles(@NotNull ServerWorld world, @NotNull BlockPos pos, BlockPos currentPos) {
-		DyeColor particleColor = getEffectColor();
+		int particleColor = getEffectColor();
 		world.playSound(null, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, SpectrumSoundEvents.CRAFTING_DING, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
 				world, Vec3d.ofCenter(pos),
-				SpectrumParticleTypes.getSparkleRisingParticle(particleColor),
+				ColoredSparkleRisingParticleEffect.of(particleColor),
 				10, new Vec3d(0.5, 0.5, 0.5),
 				new Vec3d(0.1, 0.1, 0.1));
 		ColorTransmissionPayload.playColorTransmissionParticle(
@@ -141,8 +139,8 @@ public class UpgradeBlock extends BlockWithEntity {
 						particleColor)
 		);
 	}
-
-	private DyeColor getEffectColor() {
+	
+	private int getEffectColor() {
 		return this.effectColor;
 	}
 

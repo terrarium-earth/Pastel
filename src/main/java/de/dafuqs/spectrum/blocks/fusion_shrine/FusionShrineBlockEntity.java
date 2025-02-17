@@ -3,11 +3,12 @@ package de.dafuqs.spectrum.blocks.fusion_shrine;
 import com.mojang.datafixers.util.Pair;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.color.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.upgrade.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.fusion_shrine.*;
@@ -75,9 +76,9 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 			int randomSlot = world.getRandom().nextInt(fusionShrineBlockEntity.size());
 			ItemStack randomStack = fusionShrineBlockEntity.getStack(randomSlot);
 			if (!randomStack.isEmpty()) {
-				Optional<DyeColor> optionalItemColor = ColorRegistry.ITEM_COLORS.getMapping(randomStack.getItem());
+				Optional<InkColor> optionalItemColor = ColorRegistry.ITEM_COLORS.getMapping(randomStack.getItem());
 				if (optionalItemColor.isPresent()) {
-					ParticleEffect particleEffect = SpectrumParticleTypes.getCraftingParticle(optionalItemColor.get());
+					ParticleEffect particleEffect = ColoredCraftingParticleEffect.of(optionalItemColor.get().getColorInt());
 					
 					int particleAmount = (int) StrictMath.ceil(randomStack.getCount() / 8.0F);
 					for (int i = 0; i < particleAmount; i++) {
@@ -95,9 +96,9 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		var recipe = this.currentRecipe;
 		if (recipe != null && world != null) {
 			Fluid fluid = this.getFluidVariant().getFluid();
-			Optional<DyeColor> optionalFluidColor = ColorRegistry.FLUID_COLORS.getMapping(fluid);
+			Optional<InkColor> optionalFluidColor = ColorRegistry.FLUID_COLORS.getMapping(fluid);
 			if (optionalFluidColor.isPresent()) {
-				ParticleEffect particleEffect = SpectrumParticleTypes.getFluidRisingParticle(optionalFluidColor.get());
+				ParticleEffect particleEffect = ColoredFluidRisingParticleEffect.of(optionalFluidColor.get().getColorInt());
 				
 				float randomX = 0.1F + world.getRandom().nextFloat() * 0.8F;
 				float randomZ = 0.1F + world.getRandom().nextFloat() * 0.8F;
@@ -107,7 +108,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	}
 	
 	public void scatterContents(@NotNull World world) {
-		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerWorld) world, Vec3d.ofCenter(this.getPos()), SpectrumParticleTypes.RED_CRAFTING, 1, new Vec3d(0, -0.5, 0));
+		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerWorld) world, Vec3d.ofCenter(this.getPos()), ColoredCraftingParticleEffect.RED, 1, new Vec3d(0, -0.5, 0));
 		world.playSound(null, this.getPos(), SpectrumSoundEvents.CRAFTING_ABORTED, SoundCategory.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
 		world.playSound(null, this.getPos(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F);
 		FusionShrineBlock.scatterContents(world, this.getPos());

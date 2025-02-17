@@ -36,3 +36,9 @@ accessible method net/minecraft/entity/passive/WolfEntity setCollarColor (Lnet/m
 accessible method net/minecraft/entity/passive/CatEntity setCollarColor (Lnet/minecraft/util/DyeColor;)V
 
 mutable field net/minecraft/item/map/MapState dimension Lnet/minecraft/registry/RegistryKey;
+
+# particle shenanigans
+accessible method net/minecraft/client/particle/BlockLeakParticle$Falling <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;I)V
+accessible method net/minecraft/client/particle/BlockLeakParticle <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;)V
+accessible field net/minecraft/client/particle/Particle gravityStrength F
+accessible method net/minecraft/client/particle/WaterSuspendParticle <init> (Lnet/minecraft/client/world/ClientWorld;Lnet/minecraft/client/particle/SpriteProvider;DDDDDD)V

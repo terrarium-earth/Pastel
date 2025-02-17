@@ -199,8 +199,8 @@ public class BedrockAnvilScreen extends ForgingScreen<BedrockAnvilScreenHandler>
 			this.setFocused(this.nameField);
 		}
 		if (slotId == 1) {
-			if (stack.getItem() instanceof PigmentItem) {
-				this.nameField.setEditableColor(SpectrumColorHelper.getInt(((PigmentItem) stack.getItem()).getColor()));
+			if (stack.getItem() instanceof PigmentItem pigmentItem) {
+				this.nameField.setEditableColor(pigmentItem.getInkColor().getColorInt());
 			} else {
 				if (this.handler.getSlot(0).getStack().getName() instanceof MutableText mutableText) {
 					if (mutableText.getStyle().getColor() == null) {

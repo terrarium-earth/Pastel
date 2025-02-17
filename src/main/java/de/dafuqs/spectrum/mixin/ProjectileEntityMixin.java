@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.mixin;
 import de.dafuqs.spectrum.cca.azure_dike.*;
 import de.dafuqs.spectrum.items.trinkets.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import dev.emi.trinkets.api.*;
 import net.minecraft.entity.*;
@@ -61,11 +61,11 @@ public abstract class ProjectileEntityMixin {
 						this.setVelocity(0, 0, 0, 0, 0);
 						
 						PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, thisEntity.getPos(),
-								SpectrumParticleTypes.WHITE_CRAFTING, 6,
+								ColoredCraftingParticleEffect.WHITE, 6,
 								new Vec3d(0, 0, 0),
 								new Vec3d(thisEntity.getX() - livingEntity.getPos().x, thisEntity.getY() - livingEntity.getPos().y, thisEntity.getZ() - livingEntity.getPos().z));
 						PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, thisEntity.getPos(),
-								SpectrumParticleTypes.BLUE_CRAFTING, 6,
+								ColoredCraftingParticleEffect.BLUE, 6,
 								new Vec3d(0, 0, 0),
 								new Vec3d(thisEntity.getX() - livingEntity.getPos().x, thisEntity.getY() - livingEntity.getPos().y, thisEntity.getZ() - livingEntity.getPos().z));
 						

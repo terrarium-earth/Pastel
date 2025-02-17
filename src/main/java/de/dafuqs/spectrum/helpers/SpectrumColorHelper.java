@@ -104,7 +104,7 @@ public class SpectrumColorHelper {
 			if (item instanceof DyeItem dyeItem) {
 				return Optional.of(dyeItem.getColor());
 			} else if (item instanceof PigmentItem pigmentItem) {
-				return Optional.of(pigmentItem.getColor());
+				return pigmentItem.getInkColor().getDyeColor();
 			}
 		}
 		return Optional.empty();

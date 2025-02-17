@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.sound;
 
 import de.dafuqs.spectrum.items.trinkets.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.*;
@@ -10,7 +10,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.sound.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.*;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 
 @Environment(EnvType.CLIENT)
 public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
@@ -73,7 +73,7 @@ public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements T
 		Random random = world.random;
 		
 		Vec3d pos = player.getPos();
-		player.getEntityWorld().addParticle(SpectrumParticleTypes.LIGHT_BLUE_CRAFTING,
+		player.getEntityWorld().addParticle(ColoredCraftingParticleEffect.LIGHT_BLUE,
 				pos.x + random.nextDouble() * 0.8 - 0.4,
 				pos.y,
 				pos.z + random.nextDouble() * 0.8 - 0.4,

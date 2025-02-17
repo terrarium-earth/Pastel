@@ -3,7 +3,6 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.blocks.memory.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.*;
-import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.particle.effect.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.*;
@@ -54,14 +53,14 @@ public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1,
 			
 			// color1
 			client.world.addParticle(
-					new DynamicParticleEffect(SpectrumParticleTypes.WHITE_CRAFTING, 0.5F, colorVec1, 1.0F, randomLifetime, false, true),
+					new DynamicParticleEffect(ColoredCraftingParticleEffect.WHITE, 0.5F, colorVec1, 1.0F, randomLifetime, false, true),
 					pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ(),
 					0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3
 			);
 			
 			// color2
 			client.world.addParticle(
-					new DynamicParticleEffect(SpectrumParticleTypes.WHITE_CRAFTING, 0.5F, colorVec2, 1.0F, randomLifetime, false, true),
+					new DynamicParticleEffect(ColoredCraftingParticleEffect.WHITE, 0.5F, colorVec2, 1.0F, randomLifetime, false, true),
 					pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
 					0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3
 			);

@@ -5,8 +5,8 @@ import net.minecraft.util.*;
 
 public interface GemstoneColor extends StringIdentifiable {
 	
-	DyeColor getDyeColor();
-
+	int getColor();
+	
 	Item getGemstonePowderItem();
 
 }

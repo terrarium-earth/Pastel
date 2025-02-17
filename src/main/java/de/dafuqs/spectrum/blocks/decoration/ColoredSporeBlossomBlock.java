@@ -1,14 +1,13 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
 import com.google.common.collect.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.helpers.*;
 import net.minecraft.block.*;
 import net.minecraft.particle.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
-import org.jetbrains.annotations.*;
 
 import java.util.*;
 
@@ -24,8 +23,8 @@ public class ColoredSporeBlossomBlock extends SporeBlossomBlock {
 		super(settings);
 		this.color = color;
 		BLOSSOMS.put(color, this);
-		this.fallingParticleType = getFallingParticleType(color);
-		this.airParticleType = getAirParticleType(color);
+		this.fallingParticleType = new DustParticleEffect(SpectrumColorHelper.getRGBVec(color), 1.0F);
+		this.airParticleType = new DustParticleEffect(SpectrumColorHelper.getRGBVec(color), 1.0F);
 	}
 
 //	@Override
@@ -40,112 +39,6 @@ public class ColoredSporeBlossomBlock extends SporeBlossomBlock {
 	
 	public static ColoredSporeBlossomBlock byColor(DyeColor color) {
 		return BLOSSOMS.get(color);
-	}
-	
-	public static ParticleEffect getFallingParticleType(@NotNull DyeColor dyeColor) {
-		switch (dyeColor) {
-			case BLACK -> {
-				return SpectrumParticleTypes.BLACK_FALLING_SPORE_BLOSSOM;
-			}
-			case BLUE -> {
-				return SpectrumParticleTypes.BLUE_FALLING_SPORE_BLOSSOM;
-			}
-			case BROWN -> {
-				return SpectrumParticleTypes.BROWN_FALLING_SPORE_BLOSSOM;
-			}
-			case CYAN -> {
-				return SpectrumParticleTypes.CYAN_FALLING_SPORE_BLOSSOM;
-			}
-			case GRAY -> {
-				return SpectrumParticleTypes.GRAY_FALLING_SPORE_BLOSSOM;
-			}
-			case GREEN -> {
-				return SpectrumParticleTypes.GREEN_FALLING_SPORE_BLOSSOM;
-			}
-			case LIGHT_BLUE -> {
-				return SpectrumParticleTypes.LIGHT_BLUE_FALLING_SPORE_BLOSSOM;
-			}
-			case LIGHT_GRAY -> {
-				return SpectrumParticleTypes.LIGHT_GRAY_FALLING_SPORE_BLOSSOM;
-			}
-			case LIME -> {
-				return SpectrumParticleTypes.LIME_FALLING_SPORE_BLOSSOM;
-			}
-			case MAGENTA -> {
-				return SpectrumParticleTypes.MAGENTA_FALLING_SPORE_BLOSSOM;
-			}
-			case ORANGE -> {
-				return SpectrumParticleTypes.ORANGE_FALLING_SPORE_BLOSSOM;
-			}
-			case PINK -> {
-				return SpectrumParticleTypes.PINK_FALLING_SPORE_BLOSSOM;
-			}
-			case PURPLE -> {
-				return SpectrumParticleTypes.PURPLE_FALLING_SPORE_BLOSSOM;
-			}
-			case RED -> {
-				return SpectrumParticleTypes.RED_FALLING_SPORE_BLOSSOM;
-			}
-			case WHITE -> {
-				return SpectrumParticleTypes.WHITE_FALLING_SPORE_BLOSSOM;
-			}
-			default -> {
-				return SpectrumParticleTypes.YELLOW_FALLING_SPORE_BLOSSOM;
-			}
-		}
-	}
-	
-	public static ParticleEffect getAirParticleType(@NotNull DyeColor dyeColor) {
-		switch (dyeColor) {
-			case BLACK -> {
-				return SpectrumParticleTypes.BLACK_SPORE_BLOSSOM_AIR;
-			}
-			case BLUE -> {
-				return SpectrumParticleTypes.BLUE_SPORE_BLOSSOM_AIR;
-			}
-			case BROWN -> {
-				return SpectrumParticleTypes.BROWN_SPORE_BLOSSOM_AIR;
-			}
-			case CYAN -> {
-				return SpectrumParticleTypes.CYAN_SPORE_BLOSSOM_AIR;
-			}
-			case GRAY -> {
-				return SpectrumParticleTypes.GRAY_SPORE_BLOSSOM_AIR;
-			}
-			case GREEN -> {
-				return SpectrumParticleTypes.GREEN_SPORE_BLOSSOM_AIR;
-			}
-			case LIGHT_BLUE -> {
-				return SpectrumParticleTypes.LIGHT_BLUE_SPORE_BLOSSOM_AIR;
-			}
-			case LIGHT_GRAY -> {
-				return SpectrumParticleTypes.LIGHT_GRAY_SPORE_BLOSSOM_AIR;
-			}
-			case LIME -> {
-				return SpectrumParticleTypes.LIME_SPORE_BLOSSOM_AIR;
-			}
-			case MAGENTA -> {
-				return SpectrumParticleTypes.MAGENTA_SPORE_BLOSSOM_AIR;
-			}
-			case ORANGE -> {
-				return SpectrumParticleTypes.ORANGE_SPORE_BLOSSOM_AIR;
-			}
-			case PINK -> {
-				return SpectrumParticleTypes.PINK_SPORE_BLOSSOM_AIR;
-			}
-			case PURPLE -> {
-				return SpectrumParticleTypes.PURPLE_SPORE_BLOSSOM_AIR;
-			}
-			case RED -> {
-				return SpectrumParticleTypes.RED_SPORE_BLOSSOM_AIR;
-			}
-			case WHITE -> {
-				return SpectrumParticleTypes.WHITE_SPORE_BLOSSOM_AIR;
-			}
-			default -> {
-				return SpectrumParticleTypes.YELLOW_SPORE_BLOSSOM_AIR;
-			}
-		}
 	}
 	
 	@Override

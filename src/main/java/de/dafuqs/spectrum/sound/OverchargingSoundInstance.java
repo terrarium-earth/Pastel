@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.sound;
 
 import de.dafuqs.spectrum.items.tools.*;
 import de.dafuqs.spectrum.items.trinkets.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.sound.*;
@@ -10,7 +10,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.sound.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.*;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 
 @Environment(EnvType.CLIENT)
 public class OverchargingSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
@@ -63,7 +63,7 @@ public class OverchargingSoundInstance extends AbstractSoundInstance implements 
 		Random random = world.random;
 		
 		Vec3d pos = player.getPos();
-		player.getEntityWorld().addParticle(SpectrumParticleTypes.WHITE_CRAFTING,
+		player.getEntityWorld().addParticle(ColoredCraftingParticleEffect.WHITE,
 				pos.x + random.nextDouble() * 0.8 - 0.4, pos.y, pos.z + random.nextDouble() * 0.8 - 0.4,
 				0, random.nextDouble() * 0.5, 0);
 	}

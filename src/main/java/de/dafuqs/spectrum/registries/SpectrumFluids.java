@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.color.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.fluid.*;
 import de.dafuqs.spectrum.helpers.*;
 import it.unimi.dsi.fastutil.objects.*;
@@ -53,17 +54,17 @@ public class SpectrumFluids {
 	public static final float DRAGONROT_OVERLAY_ALPHA = 0.98F;
 	
 	public static void register() {
-		registerFluid("liquid_crystal", LIQUID_CRYSTAL, FLOWING_LIQUID_CRYSTAL, DyeColor.LIGHT_GRAY);
-		registerFluid("goo", GOO, FLOWING_GOO, DyeColor.BROWN);
-		registerFluid("midnight_solution", MIDNIGHT_SOLUTION, FLOWING_MIDNIGHT_SOLUTION, DyeColor.GRAY);
-		registerFluid("dragonrot", DRAGONROT, FLOWING_DRAGONROT, DyeColor.GRAY);
+		registerFluid("liquid_crystal", LIQUID_CRYSTAL, FLOWING_LIQUID_CRYSTAL, InkColors.LIGHT_GRAY);
+		registerFluid("goo", GOO, FLOWING_GOO, InkColors.BROWN);
+		registerFluid("midnight_solution", MIDNIGHT_SOLUTION, FLOWING_MIDNIGHT_SOLUTION, InkColors.GRAY);
+		registerFluid("dragonrot", DRAGONROT, FLOWING_DRAGONROT, InkColors.GRAY);
 	}
-
-	private static void registerFluid(String name, Fluid stillFluid, Fluid flowingFluid, DyeColor dyeColor) {
+	
+	private static void registerFluid(String name, Fluid stillFluid, Fluid flowingFluid, InkColor color) {
 		Registry.register(Registries.FLUID, SpectrumCommon.locate(name), stillFluid);
 		Registry.register(Registries.FLUID, SpectrumCommon.locate("flowing_" + name), flowingFluid);
-		ItemColors.FLUID_COLORS.registerColorMapping(stillFluid, dyeColor);
-		ItemColors.FLUID_COLORS.registerColorMapping(flowingFluid, dyeColor);
+		ItemColors.FLUID_COLORS.registerColorMapping(stillFluid, color);
+		ItemColors.FLUID_COLORS.registerColorMapping(flowingFluid, color);
 	}
 	
 	@Environment(EnvType.CLIENT)

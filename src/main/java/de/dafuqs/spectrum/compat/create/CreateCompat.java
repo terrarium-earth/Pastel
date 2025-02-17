@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.compat.create;
 
 import com.simibubi.create.api.event.*;
 import de.dafuqs.fractal.api.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.item_group.*;
 import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.blocks.fluid.*;
@@ -14,7 +15,6 @@ import net.minecraft.block.piston.*;
 import net.minecraft.client.render.*;
 import net.minecraft.fluid.*;
 import net.minecraft.item.*;
-import net.minecraft.util.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
@@ -36,11 +36,11 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
         PURE_ZINC_BLOCK = new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
         PURE_ZINC = new Item(SpectrumItems.IS.of());
         Item.Settings settings = SpectrumItems.IS.of();
-        registerBlockWithItem("small_zinc_bud", SMALL_ZINC_BUD, settings, DyeColor.BROWN);
-        registerBlockWithItem("large_zinc_bud", LARGE_ZINC_BUD, settings, DyeColor.BROWN);
-        registerBlockWithItem("zinc_cluster", ZINC_CLUSTER, settings, DyeColor.BROWN);
-        registerBlockWithItem("pure_zinc_block", PURE_ZINC_BLOCK, settings, DyeColor.BROWN);
-        SpectrumItems.register("pure_zinc", PURE_ZINC, DyeColor.BROWN);
+		registerBlockWithItem("small_zinc_bud", SMALL_ZINC_BUD, settings, InkColors.BROWN);
+		registerBlockWithItem("large_zinc_bud", LARGE_ZINC_BUD, settings, InkColors.BROWN);
+		registerBlockWithItem("zinc_cluster", ZINC_CLUSTER, settings, InkColors.BROWN);
+		registerBlockWithItem("pure_zinc_block", PURE_ZINC_BLOCK, settings, InkColors.BROWN);
+		SpectrumItems.register("pure_zinc", PURE_ZINC, InkColors.BROWN);
 		
 		ItemSubGroupEvents.modifyEntriesEvent(ItemGroupIDs.SUBTAB_PURE_RESOURCES).register(entries -> {
 			entries.add(PURE_ZINC);

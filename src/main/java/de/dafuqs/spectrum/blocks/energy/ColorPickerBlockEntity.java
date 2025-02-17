@@ -10,7 +10,7 @@ import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
@@ -214,18 +214,18 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	protected boolean tryConvertPigmentToEnergy(ServerWorld world) {
 		InkConvertingRecipe recipe = getInkConvertingRecipe(world);
 		if (recipe != null) {
-			InkColor color = recipe.getInkColor();
+			InkColor inkColor = recipe.getInkColor();
 			long amount = recipe.getInkAmount();
-			if (amount <= this.inkStorage.getRoom(color)) {
+			if (amount <= this.inkStorage.getRoom(inkColor)) {
 				inventory.get(INPUT_SLOT_ID).decrement(1);
-				this.inkStorage.addEnergy(color, amount);
+				this.inkStorage.addEnergy(inkColor, amount);
 				
 				if (SpectrumCommon.CONFIG.BlockSoundVolume > 0) {
 					world.playSound(null, pos, SpectrumSoundEvents.COLOR_PICKER_PROCESSING, SoundCategory.BLOCKS, SpectrumCommon.CONFIG.BlockSoundVolume / 3, 1.0F);
 				}
 				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world,
 						new Vec3d(pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5),
-						SpectrumParticleTypes.getFluidRisingParticle(color.getDyeColor()),
+						ColoredFluidRisingParticleEffect.of(inkColor.getColorInt()),
 						5,
 						new Vec3d(0.22, 0.0, 0.22),
 						new Vec3d(0.0, 0.1, 0.0)

@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.compat.botania;
 
 import de.dafuqs.fractal.api.*;
 import de.dafuqs.spectrum.api.color.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.api.item_group.*;
 import de.dafuqs.spectrum.compat.*;
@@ -11,7 +12,6 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
-import net.minecraft.util.*;
 import vazkii.botania.common.item.*;
 
 public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
@@ -21,15 +21,15 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
 	@Override
 	public void register() {
-		SpectrumItems.register("least_black_lotus", LEAST_BLACK_LOTUS, DyeColor.BLACK);
-		SpectrumItems.register("blackest_lotus", BLACKEST_LOTUS, DyeColor.BLACK);
+		SpectrumItems.register("least_black_lotus", LEAST_BLACK_LOTUS, InkColors.BLACK);
+		SpectrumItems.register("blackest_lotus", BLACKEST_LOTUS, InkColors.BLACK);
 		
 		// registering it late, since Botania might not have been initialized yet
 		ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {
-			ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.overgrowthSeed, DyeColor.LIME);
-			ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.blackLotus, DyeColor.BLACK);
-			ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.blackerLotus, DyeColor.BLACK);
-			ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.terrasteel, DyeColor.LIME);
+			ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.overgrowthSeed, InkColors.LIME);
+			ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.blackLotus, InkColors.BLACK);
+			ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.blackerLotus, InkColors.BLACK);
+			ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.terrasteel, InkColors.LIME);
 			
 			ItemProviderRegistry.register(BotaniaItems.blackHoleTalisman, new ItemProvider() {
 				@Override

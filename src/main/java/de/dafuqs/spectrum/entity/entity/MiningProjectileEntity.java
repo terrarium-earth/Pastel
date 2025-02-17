@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.entity.entity;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.spells.*;
 import net.minecraft.block.*;
 import net.minecraft.enchantment.*;
@@ -57,7 +57,7 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
 
 	private void spawnParticles(int amount) {
 		for (int j = 0; j < amount; ++j) {
-			this.getWorld().addParticle(SpectrumParticleTypes.WHITE_CRAFTING, this.getParticleX(0.5D), this.getRandomBodyY(), this.getParticleZ(0.5D), 0, 0, 0);
+			this.getWorld().addParticle(ColoredCraftingParticleEffect.WHITE, this.getParticleX(0.5D), this.getRandomBodyY(), this.getParticleZ(0.5D), 0, 0, 0);
 		}
 	}
 

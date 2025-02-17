@@ -190,7 +190,7 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 		if (dyeColor.isEmpty()) {
 			return false;
 		}
-		return InventoryHelper.removeFromInventoryWithRemainders(player, PigmentItem.byColor(dyeColor.get()).getDefaultStack());
+		return InventoryHelper.removeFromInventoryWithRemainders(player, PigmentItem.byColor(inkColor).getDefaultStack());
 	}
 	
 	@Override

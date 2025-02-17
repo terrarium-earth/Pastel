@@ -31,23 +31,26 @@ public class SpectrumEntityColorProcessors {
 				return false;
 			}
 			DyeColor color = dyeColor.get();
-			
 			if (entity.getCollarColor() == color) {
 				return false;
 			}
 			
-			entity.setColarColor(color);
+			entity.setCollarColor(color);
 			return true;
 		});
 		EntityColorProcessorRegistry.register(EntityType.CAT, (entity, dyeColor) -> {
-			if (entity.getCollarColor() == dyeColor) {
+			if (dyeColor.isEmpty()) {
 				return false;
 			}
 			if (!entity.isTamed() || !entity.isOwner(player)) {
 				return false;
 			}
+			DyeColor color = dyeColor.get();
+			if (entity.getCollarColor() == color) {
+				return false;
+			}
 			
-			entity.setColarColor(color);
+			entity.setCollarColor(color);
 			return true;
 		});
 		EntityColorProcessorRegistry.register(EntityType.SHULKER, (entity, dyeColor) -> {

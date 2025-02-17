@@ -3,13 +3,14 @@ package de.dafuqs.spectrum.blocks.spirit_instiller;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.color.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.decoration.*;
 import de.dafuqs.spectrum.blocks.item_bowl.*;
 import de.dafuqs.spectrum.blocks.upgrade.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.spirit_instiller.*;
 import de.dafuqs.spectrum.registries.*;
@@ -297,7 +298,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		world.playSound(null, spiritInstillerBlockEntity.pos, SpectrumSoundEvents.SPIRIT_INSTILLER_CRAFTING_FINISHED, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world,
 				new Vec3d(spiritInstillerBlockEntity.pos.getX() + 0.5D, spiritInstillerBlockEntity.pos.getY() + 0.5, spiritInstillerBlockEntity.pos.getZ() + 0.5D),
-				SpectrumParticleTypes.LIGHT_BLUE_CRAFTING, 75, new Vec3d(0.5D, 0.5D, 0.5D),
+				ColoredCraftingParticleEffect.LIGHT_BLUE, 75, new Vec3d(0.5D, 0.5D, 0.5D),
 				new Vec3d(0.1D, -0.1D, 0.1D));
 	}
 	
@@ -356,11 +357,11 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	}
 	
 	private void doInstillerParticles(@NotNull World world) {
-		Optional<DyeColor> stackColor = ItemColors.ITEM_COLORS.getMapping(this.getStack(0).getItem());
+		Optional<InkColor> stackColor = ItemColors.ITEM_COLORS.getMapping(this.getStack(0).getItem());
 		
 		if (stackColor.isPresent()) {
 			Random random = world.random;
-			ParticleEffect particleEffect = SpectrumParticleTypes.getSparkleRisingParticle(stackColor.get());
+			ParticleEffect particleEffect = ColoredSparkleRisingParticleEffect.of(stackColor.get().getColorInt());
 			world.addParticle(particleEffect,
 					pos.getX() + 0.25 + random.nextDouble() * 0.5,
 					pos.getY() + 0.75,

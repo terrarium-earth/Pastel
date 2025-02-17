@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.entity.entity;
 
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.data.*;
@@ -217,7 +218,7 @@ public abstract class LightShardBaseEntity extends ProjectileEntity {
 		if(reason.shouldDestroy()) {
 			for (int i = 0; i < bound + 5; i++) {
 				if (random.nextFloat() < 0.665) {
-					this.getWorld().addImportantParticle(SpectrumParticleTypes.WHITE_SPARKLE_RISING, true, getX(), getY(), getZ(),
+					this.getWorld().addImportantParticle(ColoredSparkleRisingParticleEffect.WHITE, true, getX(), getY(), getZ(),
 							random.nextFloat() * 0.25F - 0.125F,
 							random.nextFloat() * 0.25F - 0.125F,
 							random.nextFloat() * 0.25F - 0.125F

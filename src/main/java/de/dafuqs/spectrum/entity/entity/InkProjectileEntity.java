@@ -6,7 +6,7 @@ import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.compat.claims.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -104,10 +104,10 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 	}
 
 	private void spawnParticles(int amount) {
-		InkColor colorOrdinal = this.getInkColor();
+		InkColor inkColor = this.getInkColor();
 		if (amount > 0) {
 			for (int j = 0; j < amount; ++j) {
-				this.getWorld().addParticle(SpectrumParticleTypes.getCraftingParticle(colorOrdinal), this.getParticleX(0.5D), this.getRandomBodyY(), this.getParticleZ(0.5D), 0, 0, 0);
+				this.getWorld().addParticle(ColoredCraftingParticleEffect.of(inkColor.getColorInt()), this.getParticleX(0.5D), this.getRandomBodyY(), this.getParticleZ(0.5D), 0, 0, 0);
 			}
 		}
 	}
@@ -288,14 +288,14 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 	
 	@Override
 	public void spawnImpactParticles() {
-		int color = getInkColor().getColorInt();
+		InkColor inkColor = getInkColor();
 		World world = getWorld();
 		Vec3d targetPos = getPos();
 		Vec3d velocity = getVelocity();
 		
-		world.addParticle(SpectrumParticleTypes.getExplosionParticle(color), targetPos.x, targetPos.y, targetPos.z, 0, 0, 0);
+		world.addParticle(ColoredExplosionParticleEffect.of(inkColor.getColorInt()), targetPos.x, targetPos.y, targetPos.z, 0, 0, 0);
 		for (int i = 0; i < 10; i++) {
-			world.addParticle(SpectrumParticleTypes.getCraftingParticle(color), targetPos.x, targetPos.y, targetPos.z, -velocity.x * 3, -velocity.y * 3, -velocity.z * 3);
+			world.addParticle(ColoredCraftingParticleEffect.of(inkColor.getColorInt()), targetPos.x, targetPos.y, targetPos.z, -velocity.x * 3, -velocity.y * 3, -velocity.z * 3);
 		}
 	}
 	

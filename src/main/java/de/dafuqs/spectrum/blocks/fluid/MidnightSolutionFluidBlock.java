@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.blocks.fluid;
 
 import de.dafuqs.spectrum.blocks.decay.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.ai.pathing.*;
@@ -36,7 +37,7 @@ public class MidnightSolutionFluidBlock extends SpectrumFluidBlock {
 
 	@Override
 	public Pair<SimpleParticleType, SimpleParticleType> getFishingParticles() {
-		return new Pair<>(SpectrumParticleTypes.GRAY_SPARKLE_RISING, SpectrumParticleTypes.MIDNIGHT_SOLUTION_FISHING);
+		return new Pair<>(ColoredSparkleRisingParticleEffect.GRAY, SpectrumParticleTypes.MIDNIGHT_SOLUTION_FISHING);
 	}
 
 	public static boolean tryConvertNeighbor(@NotNull World world, BlockPos fromPos) {

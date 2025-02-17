@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.recipe.crafting.dynamic;
 
-import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.items.*;
 import de.dafuqs.spectrum.items.magic_items.*;
 import de.dafuqs.spectrum.registries.*;
@@ -76,7 +75,7 @@ public class ColorEverpromiseRibbonRecipe extends SpecialCraftingRecipe {
 		
 		Text text = ribbon.getName();
 		if (text instanceof MutableText mutableText) {
-			TextColor newColor = TextColor.fromRgb(SpectrumColorHelper.getInt(pigment.getColor()));
+			TextColor newColor = TextColor.fromRgb(pigment.getInkColor().getColorInt());
 			Text newName = mutableText.setStyle(mutableText.getStyle().withColor(newColor));
 			ribbon.set(DataComponentTypes.CUSTOM_NAME, newName);
 		}
