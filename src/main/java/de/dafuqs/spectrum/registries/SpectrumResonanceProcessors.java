@@ -13,7 +13,7 @@ import net.minecraft.registry.tag.*;
 
 import java.util.function.*;
 
-import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
+import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
 
 @SuppressWarnings("unused")
 public class SpectrumResonanceProcessors {

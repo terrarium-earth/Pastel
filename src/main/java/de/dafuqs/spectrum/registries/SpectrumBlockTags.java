@@ -6,7 +6,7 @@ import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.util.*;
 
-import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
+import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
 
 @SuppressWarnings("unused")
 public class SpectrumBlockTags {

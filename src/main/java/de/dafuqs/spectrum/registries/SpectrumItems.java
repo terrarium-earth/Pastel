@@ -43,7 +43,7 @@ import net.minecraft.util.*;
 import java.util.*;
 import java.util.function.*;
 
-import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
+import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
 import static de.dafuqs.spectrum.registries.SpectrumFluids.*;
 
 public class SpectrumItems {

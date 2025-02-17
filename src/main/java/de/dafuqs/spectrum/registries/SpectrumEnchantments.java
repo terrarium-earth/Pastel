@@ -18,7 +18,7 @@ import net.minecraft.util.*;
 import java.util.*;
 
 import static de.dafuqs.spectrum.SpectrumCommon.*;
-import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
+import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
 
 @SuppressWarnings("unused")
 public class SpectrumEnchantments {

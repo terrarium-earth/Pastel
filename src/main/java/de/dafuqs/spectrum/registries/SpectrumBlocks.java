@@ -51,6 +51,7 @@ import de.dafuqs.spectrum.blocks.structure.*;
 import de.dafuqs.spectrum.blocks.titration_barrel.*;
 import de.dafuqs.spectrum.blocks.upgrade.*;
 import de.dafuqs.spectrum.blocks.weathering.*;
+import de.dafuqs.spectrum.data.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.entity.entity.*;
 import de.dafuqs.spectrum.items.conditional.*;
@@ -89,11 +90,12 @@ import java.util.*;
 import java.util.function.*;
 
 import static de.dafuqs.spectrum.SpectrumCommon.*;
-import static de.dafuqs.spectrum.SpectrumDataGenerator.*;
+import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
+import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
 import static de.dafuqs.spectrum.registries.SpectrumItems.*;
 import static net.minecraft.block.Blocks.*;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "Convert2MethodRef"})
 public class SpectrumBlocks {
 	
 	private static Settings settings(MapColor mapColor, BlockSoundGroup blockSoundGroup, float strength) {
@@ -111,7 +113,6 @@ public class SpectrumBlocks {
 	public static final DeferredRegistrar COMMON_REGISTRAR = new DeferredRegistrar();
 	public static final DeferredRegistrar CLIENT_REGISTRAR = new DeferredRegistrar();
 	public static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
-	public static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
 	
 	public static final Block PEDESTAL_BASIC_TOPAZ = new PedestalBlock(craftingBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.TOPAZ_BLOCK), BuiltinPedestalVariant.BASIC_TOPAZ);
 	public static final Block PEDESTAL_BASIC_AMETHYST = new PedestalBlock(craftingBlock(MapColor.PURPLE, BlockSoundGroup.AMETHYST_BLOCK), BuiltinPedestalVariant.BASIC_AMETHYST);
@@ -147,29 +148,29 @@ public class SpectrumBlocks {
 	public static final Block LARGE_TOPAZ_BUD = registerClusterBlock("large_topaz_bud", new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.LARGE_TOPAZ_BUD, 6), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, Models.CROSS, DyeColor.CYAN);
 	public static final Block MEDIUM_TOPAZ_BUD = registerClusterBlock("medium_topaz_bud", new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.MEDIUM_TOPAZ_BUD, 4), SpectrumClusterBlock.GrowthStage.MEDIUM), IS.DEFAULT, Models.CROSS, DyeColor.CYAN);
 	public static final Block SMALL_TOPAZ_BUD = registerClusterBlock("small_topaz_bud", new SpectrumClusterBlock(gemstone(MapColor.CYAN, SpectrumBlockSoundGroups.SMALL_TOPAZ_BUD, 2), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.CYAN);
-	public static final Block BUDDING_TOPAZ = new SpectrumBuddingBlock(gemstoneBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_TOPAZ_BUD, MEDIUM_TOPAZ_BUD, LARGE_TOPAZ_BUD, TOPAZ_CLUSTER, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_CHIME);
-	public static final Block TOPAZ_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK), SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_CHIME);
+	public static final Block BUDDING_TOPAZ = registerSimple("budding_topaz", new SpectrumBuddingBlock(gemstoneBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_TOPAZ_BUD, MEDIUM_TOPAZ_BUD, LARGE_TOPAZ_BUD, TOPAZ_CLUSTER, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_CHIME), DyeColor.CYAN);
+	public static final Block TOPAZ_BLOCK = registerCustom("topaz_block", new SpectrumGemstoneBlock(gemstoneBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK), SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_CHIME), DyeColor.CYAN, SpectrumModelProvider::registerSimpleMirroredBlockModel);
 	
 	public static final Block CITRINE_CLUSTER = registerClusterBlock("citrine_cluster", new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_CLUSTER, 9), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, Models.CROSS, DyeColor.YELLOW);
 	public static final Block LARGE_CITRINE_BUD = registerClusterBlock("large_citrine_bud", new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.LARGE_CITRINE_BUD, 7), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, Models.CROSS, DyeColor.YELLOW);
 	public static final Block MEDIUM_CITRINE_BUD = registerClusterBlock("medium_citrine_bud", new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.MEDIUM_CITRINE_BUD, 5), SpectrumClusterBlock.GrowthStage.MEDIUM), IS.DEFAULT, Models.CROSS, DyeColor.YELLOW);
 	public static final Block SMALL_CITRINE_BUD = registerClusterBlock("small_citrine_bud", new SpectrumClusterBlock(gemstone(MapColor.YELLOW, SpectrumBlockSoundGroups.SMALL_CITRINE_BUD, 3), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.YELLOW);
-	public static final Block BUDDING_CITRINE = new SpectrumBuddingBlock(gemstoneBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_CITRINE_BUD, MEDIUM_CITRINE_BUD, LARGE_CITRINE_BUD, CITRINE_CLUSTER, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME);
-	public static final Block CITRINE_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK), SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME);
+	public static final Block BUDDING_CITRINE = registerSimple("budding_citrine", new SpectrumBuddingBlock(gemstoneBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_CITRINE_BUD, MEDIUM_CITRINE_BUD, LARGE_CITRINE_BUD, CITRINE_CLUSTER, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME), DyeColor.YELLOW);
+	public static final Block CITRINE_BLOCK = registerCustom("citrine_block", new SpectrumGemstoneBlock(gemstoneBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK), SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME), DyeColor.YELLOW, SpectrumModelProvider::registerSimpleMirroredBlockModel);
 	
 	public static final Block ONYX_CLUSTER = registerClusterBlock("onyx_cluster", new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_CLUSTER, 6), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, Models.CROSS, DyeColor.BLACK);
 	public static final Block LARGE_ONYX_BUD = registerClusterBlock("large_onyx_bud", new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.LARGE_ONYX_BUD, 5), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, Models.CROSS, DyeColor.BLACK);
 	public static final Block MEDIUM_ONYX_BUD = registerClusterBlock("medium_onyx_bud", new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.MEDIUM_ONYX_BUD, 3), SpectrumClusterBlock.GrowthStage.MEDIUM), IS.DEFAULT, Models.CROSS, DyeColor.BLACK);
 	public static final Block SMALL_ONYX_BUD = registerClusterBlock("small_onyx_bud", new SpectrumClusterBlock(gemstone(MapColor.BLACK, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 1), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.BLACK);
-	public static final Block BUDDING_ONYX = new SpectrumBuddingBlock(gemstoneBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_ONYX_BUD, MEDIUM_ONYX_BUD, LARGE_ONYX_BUD, ONYX_CLUSTER, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_HIT, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME);
-	public static final Block ONYX_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK), SpectrumSoundEvents.BLOCK_ONYX_BLOCK_HIT, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME);
+	public static final Block BUDDING_ONYX = registerSimple("budding_onyx", new SpectrumBuddingBlock(gemstoneBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_ONYX_BUD, MEDIUM_ONYX_BUD, LARGE_ONYX_BUD, ONYX_CLUSTER, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_HIT, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME), DyeColor.BLACK);
+	public static final Block ONYX_BLOCK = registerCustom("onyx_block", new SpectrumGemstoneBlock(gemstoneBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK), SpectrumSoundEvents.BLOCK_ONYX_BLOCK_HIT, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME), DyeColor.BLACK, SpectrumModelProvider::registerSimpleMirroredBlockModel);
 	
 	public static final Block MOONSTONE_CLUSTER = registerClusterBlock("moonstone_cluster", new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_CLUSTER, 15), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, Models.CROSS, DyeColor.WHITE);
 	public static final Block LARGE_MOONSTONE_BUD = registerClusterBlock("large_moonstone_bud", new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.LARGE_MOONSTONE_BUD, 12), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, Models.CROSS, DyeColor.WHITE);
 	public static final Block MEDIUM_MOONSTONE_BUD = registerClusterBlock("medium_moonstone_bud", new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.MEDIUM_MOONSTONE_BUD, 9), SpectrumClusterBlock.GrowthStage.MEDIUM), IS.DEFAULT, Models.CROSS, DyeColor.WHITE);
 	public static final Block SMALL_MOONSTONE_BUD = registerClusterBlock("small_moonstone_bud", new SpectrumClusterBlock(gemstone(MapColor.WHITE, SpectrumBlockSoundGroups.SMALL_MOONSTONE_BUD, 6), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.WHITE);
-	public static final Block BUDDING_MOONSTONE = new SpectrumBuddingBlock(gemstoneBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_MOONSTONE_BUD, MEDIUM_MOONSTONE_BUD, LARGE_MOONSTONE_BUD, MOONSTONE_CLUSTER, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME);
-	public static final Block MOONSTONE_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK), SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME);
+	public static final Block BUDDING_MOONSTONE = registerSimple("budding_moonstone", new SpectrumBuddingBlock(gemstoneBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK).pistonBehavior(PistonBehavior.DESTROY).ticksRandomly(), SMALL_MOONSTONE_BUD, MEDIUM_MOONSTONE_BUD, LARGE_MOONSTONE_BUD, MOONSTONE_CLUSTER, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME), DyeColor.WHITE);
+	public static final Block MOONSTONE_BLOCK = registerCustom("moonstone_block", new SpectrumGemstoneBlock(gemstoneBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK), SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_HIT, SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME), DyeColor.WHITE, SpectrumModelProvider::registerSimpleMirroredBlockModel);
 	
 	public static final Block TOPAZ_POWDER_BLOCK = registerSimple("topaz_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.CYAN.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.CYAN)), DyeColor.CYAN);
 	public static final Block AMETHYST_POWDER_BLOCK = registerSimple("amethyst_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.MAGENTA.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.MAGENTA)), DyeColor.MAGENTA);
@@ -310,42 +311,43 @@ public class SpectrumBlocks {
 	public static final Block PRIMORDIAL_TORCH = new TorchBlock(SpectrumParticleTypes.PRIMORDIAL_FLAME, Settings.copy(Blocks.SOUL_TORCH).luminance(s -> 13));
 	public static final Block PRIMORDIAL_WALL_TORCH = new WallTorchBlock(SpectrumParticleTypes.PRIMORDIAL_FLAME, Settings.copy(SOUL_WALL_TORCH).luminance(s -> 13));
 	
-	public static final Block SMOOTH_BASALT_STAIRS = registerBlockWithItemWithoutModel("smooth_basalt_stairs", new StairsBlock(Blocks.BASALT.getDefaultState(), AbstractBlock.Settings.copy(Blocks.BASALT)), DyeColor.BROWN);
-	public static final Block SMOOTH_BASALT_SLAB = registerBlockWithItemWithoutModel("smooth_basalt_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.BASALT)), DyeColor.BROWN);
-	public static final Block SMOOTH_BASALT_WALL = registerBlockWithItemWithoutModel("smooth_basalt_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.BASALT)), DyeColor.BROWN);
+	public static final Block SMOOTH_BASALT_STAIRS = registerWithoutModel("smooth_basalt_stairs", new StairsBlock(Blocks.BASALT.getDefaultState(), AbstractBlock.Settings.copy(Blocks.BASALT)), DyeColor.BROWN);
+	public static final Block SMOOTH_BASALT_SLAB = registerWithoutModel("smooth_basalt_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.BASALT)), DyeColor.BROWN);
+	public static final Block SMOOTH_BASALT_WALL = registerWithoutModel("smooth_basalt_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.BASALT)), DyeColor.BROWN);
 	public static final BlockFamily SMOOTH_BASALT_FAMILY = registerBlockFamilyExceptBase(SMOOTH_BASALT, TexturedModel.CUBE_ALL, builder -> builder.stairs(SMOOTH_BASALT_STAIRS).slab(SMOOTH_BASALT_SLAB).wall(SMOOTH_BASALT_WALL));
 	
-	public static final Block POLISHED_BASALT = registerBlockWithItemWithoutModel("polished_basalt", new Block(settings(MapColor.BLACK, BlockSoundGroup.BASALT, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresTool()), DyeColor.BROWN);
-	public static final Block POLISHED_BASALT_STAIRS = registerBlockWithItemWithoutModel("polished_basalt_stairs", new StairsBlock(POLISHED_BASALT.getDefaultState(), AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
-	public static final Block POLISHED_BASALT_SLAB = registerBlockWithItemWithoutModel("polished_basalt_slab", new SlabBlock(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
-	public static final Block POLISHED_BASALT_WALL = registerBlockWithItemWithoutModel("polished_basalt_wall", new WallBlock(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
-	public static final Block POLISHED_BASALT_BUTTON = registerBlockWithItemWithoutModel("polished_basalt_button", new ButtonBlock(SpectrumBlockSetTypes.POLISHED_BASALT, 5, Settings.create().noCollision().strength(0.5F)), DyeColor.BROWN);
-	public static final Block POLISHED_BASALT_PRESSURE_PLATE = registerBlockWithItemWithoutModel("polished_basalt_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.POLISHED_BASALT, Settings.create().mapColor(MapColor.BLACK).solid().instrument(NoteBlockInstrument.BASEDRUM).requiresTool().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.BROWN);
-	public static final Block CHISELED_POLISHED_BASALT = registerBlockWithItemWithoutModel("chiseled_polished_basalt", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
+	public static final Block POLISHED_BASALT = registerWithoutModel("polished_basalt", new Block(settings(MapColor.BLACK, BlockSoundGroup.BASALT, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresTool()), DyeColor.BROWN);
+	public static final Block POLISHED_BASALT_STAIRS = registerWithoutModel("polished_basalt_stairs", new StairsBlock(POLISHED_BASALT.getDefaultState(), AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
+	public static final Block POLISHED_BASALT_SLAB = registerWithoutModel("polished_basalt_slab", new SlabBlock(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
+	public static final Block POLISHED_BASALT_WALL = registerWithoutModel("polished_basalt_wall", new WallBlock(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
+	public static final Block POLISHED_BASALT_BUTTON = registerWithoutModel("polished_basalt_button", new ButtonBlock(SpectrumBlockSetTypes.POLISHED_BASALT, 5, Settings.create().noCollision().strength(0.5F)), DyeColor.BROWN);
+	public static final Block POLISHED_BASALT_PRESSURE_PLATE = registerWithoutModel("polished_basalt_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.POLISHED_BASALT, Settings.create().mapColor(MapColor.BLACK).solid().instrument(NoteBlockInstrument.BASEDRUM).requiresTool().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.BROWN);
+	public static final Block CHISELED_POLISHED_BASALT = registerWithoutModel("chiseled_polished_basalt", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
 	public static final BlockFamily POLISHED_BASALT_FAMILY = registerBlockFamily(POLISHED_BASALT, builder -> builder.stairs(POLISHED_BASALT_STAIRS).slab(POLISHED_BASALT_SLAB).wall(POLISHED_BASALT_WALL).button(POLISHED_BASALT_BUTTON).pressurePlate(POLISHED_BASALT_PRESSURE_PLATE).chiseled(CHISELED_POLISHED_BASALT));
 	
-	public static final Block POLISHED_BASALT_PILLAR = registerAxisRotated("polished_basalt_pillar", new PillarBlock(AbstractBlock.Settings.copy(POLISHED_BASALT)), TexturedModel.CUBE_COLUMN, DyeColor.BROWN);
+	public static final Block POLISHED_BASALT_PILLAR = registerCustom("polished_basalt_pillar", new PillarBlock(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN, block ->
+			registerAxisRotatedBlockModel(block, TexturedModel.CUBE_COLUMN));
 	public static final Block POLISHED_BASALT_CREST = registerCardinalFacing("polished_basalt_crest", new CardinalFacingBlock(AbstractBlock.Settings.copy(POLISHED_BASALT)), TexturedModel.CUBE_COLUMN, DyeColor.BROWN);
 	public static final Block NOTCHED_POLISHED_BASALT = registerSingleton("notched_polished_basalt", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), TexturedModel.CUBE_COLUMN, DyeColor.BROWN);
 	
-	public static final Block BASALT_BRICKS = registerBlockWithItemWithoutModel("basalt_bricks", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
-	public static final Block BASALT_BRICK_STAIRS = registerBlockWithItemWithoutModel("basalt_brick_stairs", new StairsBlock(BASALT_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(BASALT_BRICKS)), DyeColor.BROWN);
-	public static final Block BASALT_BRICK_SLAB = registerBlockWithItemWithoutModel("basalt_brick_slab", new SlabBlock(AbstractBlock.Settings.copy(BASALT_BRICKS)), DyeColor.BROWN);
-	public static final Block BASALT_BRICK_WALL = registerBlockWithItemWithoutModel("basalt_brick_wall", new WallBlock(AbstractBlock.Settings.copy(BASALT_BRICKS)), DyeColor.BROWN);
-	public static final Block CRACKED_BASALT_BRICKS = registerBlockWithItemWithoutModel("cracked_basalt_bricks", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS)), DyeColor.BROWN);
+	public static final Block BASALT_BRICKS = registerWithoutModel("basalt_bricks", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
+	public static final Block BASALT_BRICK_STAIRS = registerWithoutModel("basalt_brick_stairs", new StairsBlock(BASALT_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(BASALT_BRICKS)), DyeColor.BROWN);
+	public static final Block BASALT_BRICK_SLAB = registerWithoutModel("basalt_brick_slab", new SlabBlock(AbstractBlock.Settings.copy(BASALT_BRICKS)), DyeColor.BROWN);
+	public static final Block BASALT_BRICK_WALL = registerWithoutModel("basalt_brick_wall", new WallBlock(AbstractBlock.Settings.copy(BASALT_BRICKS)), DyeColor.BROWN);
+	public static final Block CRACKED_BASALT_BRICKS = registerWithoutModel("cracked_basalt_bricks", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS)), DyeColor.BROWN);
 	public static final BlockFamily BASALT_BRICK_FAMILY = registerBlockFamily(BASALT_BRICKS, builder -> builder.stairs(BASALT_BRICK_STAIRS).slab(BASALT_BRICK_SLAB).wall(BASALT_BRICK_WALL).cracked(CRACKED_BASALT_BRICKS));
 	
-	public static final Block BASALT_TILES = registerBlockWithItemWithoutModel("basalt_tiles", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
-	public static final Block BASALT_TILE_STAIRS = registerBlockWithItemWithoutModel("basalt_tile_stairs", new StairsBlock(BASALT_TILES.getDefaultState(), AbstractBlock.Settings.copy(BASALT_TILES)), DyeColor.BROWN);
-	public static final Block BASALT_TILE_SLAB = registerBlockWithItemWithoutModel("basalt_tile_slab", new SlabBlock(AbstractBlock.Settings.copy(BASALT_TILES)), DyeColor.BROWN);
-	public static final Block BASALT_TILE_WALL = registerBlockWithItemWithoutModel("basalt_tile_wall", new WallBlock(AbstractBlock.Settings.copy(BASALT_TILES)), DyeColor.BROWN);
-	public static final Block CRACKED_BASALT_TILES = registerBlockWithItemWithoutModel("cracked_basalt_tiles", new Block(AbstractBlock.Settings.copy(BASALT_TILES)), DyeColor.BROWN);
+	public static final Block BASALT_TILES = registerWithoutModel("basalt_tiles", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
+	public static final Block BASALT_TILE_STAIRS = registerWithoutModel("basalt_tile_stairs", new StairsBlock(BASALT_TILES.getDefaultState(), AbstractBlock.Settings.copy(BASALT_TILES)), DyeColor.BROWN);
+	public static final Block BASALT_TILE_SLAB = registerWithoutModel("basalt_tile_slab", new SlabBlock(AbstractBlock.Settings.copy(BASALT_TILES)), DyeColor.BROWN);
+	public static final Block BASALT_TILE_WALL = registerWithoutModel("basalt_tile_wall", new WallBlock(AbstractBlock.Settings.copy(BASALT_TILES)), DyeColor.BROWN);
+	public static final Block CRACKED_BASALT_TILES = registerWithoutModel("cracked_basalt_tiles", new Block(AbstractBlock.Settings.copy(BASALT_TILES)), DyeColor.BROWN);
 	public static final BlockFamily BASALT_TILE_FAMILY = registerBlockFamily(BASALT_TILES, builder -> builder.stairs(BASALT_TILE_STAIRS).slab(BASALT_TILE_SLAB).wall(BASALT_TILE_WALL).cracked(CRACKED_BASALT_TILES));
 	
-	public static final Block PLANED_BASALT = registerBlockWithItemWithoutModel("planed_basalt", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
-	public static final Block PLANED_BASALT_STAIRS = registerBlockWithItemWithoutModel("planed_basalt_stairs", new StairsBlock(PLANED_BASALT.getDefaultState(), AbstractBlock.Settings.copy(PLANED_BASALT)), DyeColor.BROWN);
-	public static final Block PLANED_BASALT_SLAB = registerBlockWithItemWithoutModel("planed_basalt_slab", new SlabBlock(AbstractBlock.Settings.copy(PLANED_BASALT)), DyeColor.BROWN);
-	public static final Block PLANED_BASALT_WALL = registerBlockWithItemWithoutModel("planed_basalt_wall", new WallBlock(AbstractBlock.Settings.copy(PLANED_BASALT)), DyeColor.BROWN);
+	public static final Block PLANED_BASALT = registerWithoutModel("planed_basalt", new Block(AbstractBlock.Settings.copy(POLISHED_BASALT)), DyeColor.BROWN);
+	public static final Block PLANED_BASALT_STAIRS = registerWithoutModel("planed_basalt_stairs", new StairsBlock(PLANED_BASALT.getDefaultState(), AbstractBlock.Settings.copy(PLANED_BASALT)), DyeColor.BROWN);
+	public static final Block PLANED_BASALT_SLAB = registerWithoutModel("planed_basalt_slab", new SlabBlock(AbstractBlock.Settings.copy(PLANED_BASALT)), DyeColor.BROWN);
+	public static final Block PLANED_BASALT_WALL = registerWithoutModel("planed_basalt_wall", new WallBlock(AbstractBlock.Settings.copy(PLANED_BASALT)), DyeColor.BROWN);
 	public static final BlockFamily PLANED_BASALT_FAMILY = registerBlockFamily(PLANED_BASALT, builder -> builder.stairs(PLANED_BASALT_STAIRS).slab(PLANED_BASALT_SLAB).wall(PLANED_BASALT_WALL));
 	
 	public static final Block TOPAZ_CHISELED_BASALT = registerSimple("topaz_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 6)), DyeColor.CYAN);
@@ -354,42 +356,43 @@ public class SpectrumBlocks {
 	public static final Block ONYX_CHISELED_BASALT = registerSimple("onyx_chiseled_basalt", new Block(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 3)), DyeColor.BLACK);
 	public static final Block MOONSTONE_CHISELED_BASALT = registerMoonstoneChiseled("moonstone_chiseled_basalt", SpectrumTextures.BASALT_CAP, new SpectrumLineFacingBlock(AbstractBlock.Settings.copy(BASALT_BRICKS).luminance(s -> 12)), DyeColor.WHITE);
 	
-	public static final Block CALCITE_STAIRS = registerBlockWithItemWithoutModel("calcite_stairs", new StairsBlock(Blocks.CALCITE.getDefaultState(), AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
-	public static final Block CALCITE_SLAB = registerBlockWithItemWithoutModel("calcite_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
-	public static final Block CALCITE_WALL = registerBlockWithItemWithoutModel("calcite_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
+	public static final Block CALCITE_STAIRS = registerWithoutModel("calcite_stairs", new StairsBlock(Blocks.CALCITE.getDefaultState(), AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
+	public static final Block CALCITE_SLAB = registerWithoutModel("calcite_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
+	public static final Block CALCITE_WALL = registerWithoutModel("calcite_wall", new WallBlock(AbstractBlock.Settings.copy(Blocks.CALCITE)), DyeColor.BROWN);
 	public static final BlockFamily CALCITE_FAMILY = registerBlockFamilyExceptBase(Blocks.CALCITE, TexturedModel.CUBE_ALL, builder -> builder.stairs(CALCITE_STAIRS).slab(CALCITE_SLAB).wall(CALCITE_WALL));
 	
-	public static final Block POLISHED_CALCITE = registerBlockWithItemWithoutModel("polished_calcite", new Block(settings(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresTool()), DyeColor.BROWN);
-	public static final Block POLISHED_CALCITE_STAIRS = registerBlockWithItemWithoutModel("polished_calcite_stairs", new StairsBlock(POLISHED_CALCITE.getDefaultState(), AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
-	public static final Block POLISHED_CALCITE_SLAB = registerBlockWithItemWithoutModel("polished_calcite_slab", new SlabBlock(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
-	public static final Block POLISHED_CALCITE_WALL = registerBlockWithItemWithoutModel("polished_calcite_wall", new WallBlock(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
-	public static final Block POLISHED_CALCITE_BUTTON = registerBlockWithItemWithoutModel("polished_calcite_button", new ButtonBlock(SpectrumBlockSetTypes.POLISHED_CALCITE, 5, Settings.create().noCollision().strength(0.5F)), DyeColor.BROWN);
-	public static final Block POLISHED_CALCITE_PRESSURE_PLATE = registerBlockWithItemWithoutModel("polished_calcite_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.POLISHED_CALCITE, Settings.create().mapColor(MapColor.TERRACOTTA_WHITE).solid().instrument(NoteBlockInstrument.BASEDRUM).requiresTool().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.BROWN);
-	public static final Block CHISELED_POLISHED_CALCITE = registerBlockWithItemWithoutModel("chiseled_polished_calcite", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
+	public static final Block POLISHED_CALCITE = registerWithoutModel("polished_calcite", new Block(settings(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresTool()), DyeColor.BROWN);
+	public static final Block POLISHED_CALCITE_STAIRS = registerWithoutModel("polished_calcite_stairs", new StairsBlock(POLISHED_CALCITE.getDefaultState(), AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
+	public static final Block POLISHED_CALCITE_SLAB = registerWithoutModel("polished_calcite_slab", new SlabBlock(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
+	public static final Block POLISHED_CALCITE_WALL = registerWithoutModel("polished_calcite_wall", new WallBlock(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
+	public static final Block POLISHED_CALCITE_BUTTON = registerWithoutModel("polished_calcite_button", new ButtonBlock(SpectrumBlockSetTypes.POLISHED_CALCITE, 5, Settings.create().noCollision().strength(0.5F)), DyeColor.BROWN);
+	public static final Block POLISHED_CALCITE_PRESSURE_PLATE = registerWithoutModel("polished_calcite_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.POLISHED_CALCITE, Settings.create().mapColor(MapColor.TERRACOTTA_WHITE).solid().instrument(NoteBlockInstrument.BASEDRUM).requiresTool().noCollision().strength(0.5F).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.BROWN);
+	public static final Block CHISELED_POLISHED_CALCITE = registerWithoutModel("chiseled_polished_calcite", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
 	public static final BlockFamily POLISHED_CALCITE_FAMILY = registerBlockFamily(POLISHED_CALCITE, builder -> builder.stairs(POLISHED_CALCITE_STAIRS).slab(POLISHED_CALCITE_SLAB).wall(POLISHED_CALCITE_WALL).button(POLISHED_CALCITE_BUTTON).pressurePlate(POLISHED_CALCITE_PRESSURE_PLATE).chiseled(CHISELED_POLISHED_CALCITE));
 	
-	public static final Block POLISHED_CALCITE_PILLAR = registerAxisRotated("polished_calcite_pillar", new PillarBlock(AbstractBlock.Settings.copy(POLISHED_CALCITE)), TexturedModel.CUBE_COLUMN, DyeColor.BROWN);
+	public static final Block POLISHED_CALCITE_PILLAR = registerCustom("polished_calcite_pillar", new PillarBlock(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN, block ->
+			registerAxisRotatedBlockModel(block, TexturedModel.CUBE_COLUMN));
 	public static final Block POLISHED_CALCITE_CREST = registerCardinalFacing("polished_calcite_crest", new CardinalFacingBlock(AbstractBlock.Settings.copy(POLISHED_CALCITE)), TexturedModel.CUBE_COLUMN, DyeColor.BROWN);
 	public static final Block NOTCHED_POLISHED_CALCITE = registerSingleton("notched_polished_calcite", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), TexturedModel.CUBE_COLUMN, DyeColor.BROWN);
 	
-	public static final Block CALCITE_BRICKS = registerBlockWithItemWithoutModel("calcite_bricks", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
-	public static final Block CALCITE_BRICK_STAIRS = registerBlockWithItemWithoutModel("calcite_brick_stairs", new StairsBlock(CALCITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(CALCITE_BRICKS)), DyeColor.BROWN);
-	public static final Block CALCITE_BRICK_SLAB = registerBlockWithItemWithoutModel("calcite_brick_slab", new SlabBlock(AbstractBlock.Settings.copy(CALCITE_BRICKS)), DyeColor.BROWN);
-	public static final Block CALCITE_BRICK_WALL = registerBlockWithItemWithoutModel("calcite_brick_wall", new WallBlock(AbstractBlock.Settings.copy(CALCITE_BRICKS)), DyeColor.BROWN);
-	public static final Block CRACKED_CALCITE_BRICKS = registerBlockWithItemWithoutModel("cracked_calcite_bricks", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS)), DyeColor.BROWN);
+	public static final Block CALCITE_BRICKS = registerWithoutModel("calcite_bricks", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
+	public static final Block CALCITE_BRICK_STAIRS = registerWithoutModel("calcite_brick_stairs", new StairsBlock(CALCITE_BRICKS.getDefaultState(), AbstractBlock.Settings.copy(CALCITE_BRICKS)), DyeColor.BROWN);
+	public static final Block CALCITE_BRICK_SLAB = registerWithoutModel("calcite_brick_slab", new SlabBlock(AbstractBlock.Settings.copy(CALCITE_BRICKS)), DyeColor.BROWN);
+	public static final Block CALCITE_BRICK_WALL = registerWithoutModel("calcite_brick_wall", new WallBlock(AbstractBlock.Settings.copy(CALCITE_BRICKS)), DyeColor.BROWN);
+	public static final Block CRACKED_CALCITE_BRICKS = registerWithoutModel("cracked_calcite_bricks", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS)), DyeColor.BROWN);
 	public static final BlockFamily CALCITE_BRICK_FAMILY = registerBlockFamily(CALCITE_BRICKS, builder -> builder.stairs(CALCITE_BRICK_STAIRS).slab(CALCITE_BRICK_SLAB).wall(CALCITE_BRICK_WALL).cracked(CRACKED_CALCITE_BRICKS));
 	
-	public static final Block CALCITE_TILES = registerBlockWithItemWithoutModel("calcite_tiles", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
-	public static final Block CALCITE_TILE_STAIRS = registerBlockWithItemWithoutModel("calcite_tile_stairs", new StairsBlock(CALCITE_TILES.getDefaultState(), AbstractBlock.Settings.copy(CALCITE_TILES)), DyeColor.BROWN);
-	public static final Block CALCITE_TILE_SLAB = registerBlockWithItemWithoutModel("calcite_tile_slab", new SlabBlock(AbstractBlock.Settings.copy(CALCITE_TILES)), DyeColor.BROWN);
-	public static final Block CALCITE_TILE_WALL = registerBlockWithItemWithoutModel("calcite_tile_wall", new WallBlock(AbstractBlock.Settings.copy(CALCITE_TILES)), DyeColor.BROWN);
-	public static final Block CRACKED_CALCITE_TILES = registerBlockWithItemWithoutModel("cracked_calcite_tiles", new Block(AbstractBlock.Settings.copy(CALCITE_TILES)), DyeColor.BROWN);
+	public static final Block CALCITE_TILES = registerWithoutModel("calcite_tiles", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
+	public static final Block CALCITE_TILE_STAIRS = registerWithoutModel("calcite_tile_stairs", new StairsBlock(CALCITE_TILES.getDefaultState(), AbstractBlock.Settings.copy(CALCITE_TILES)), DyeColor.BROWN);
+	public static final Block CALCITE_TILE_SLAB = registerWithoutModel("calcite_tile_slab", new SlabBlock(AbstractBlock.Settings.copy(CALCITE_TILES)), DyeColor.BROWN);
+	public static final Block CALCITE_TILE_WALL = registerWithoutModel("calcite_tile_wall", new WallBlock(AbstractBlock.Settings.copy(CALCITE_TILES)), DyeColor.BROWN);
+	public static final Block CRACKED_CALCITE_TILES = registerWithoutModel("cracked_calcite_tiles", new Block(AbstractBlock.Settings.copy(CALCITE_TILES)), DyeColor.BROWN);
 	public static final BlockFamily CALCITE_TILE_FAMILY = registerBlockFamily(CALCITE_TILES, builder -> builder.stairs(CALCITE_TILE_STAIRS).slab(CALCITE_TILE_SLAB).wall(CALCITE_TILE_WALL).cracked(CRACKED_CALCITE_TILES));
 	
-	public static final Block PLANED_CALCITE = registerBlockWithItemWithoutModel("planed_calcite", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
-	public static final Block PLANED_CALCITE_STAIRS = registerBlockWithItemWithoutModel("planed_calcite_stairs", new StairsBlock(PLANED_CALCITE.getDefaultState(), AbstractBlock.Settings.copy(PLANED_CALCITE)), DyeColor.BROWN);
-	public static final Block PLANED_CALCITE_SLAB = registerBlockWithItemWithoutModel("planed_calcite_slab", new SlabBlock(AbstractBlock.Settings.copy(PLANED_CALCITE)), DyeColor.BROWN);
-	public static final Block PLANED_CALCITE_WALL = registerBlockWithItemWithoutModel("planed_calcite_wall", new WallBlock(AbstractBlock.Settings.copy(PLANED_CALCITE)), DyeColor.BROWN);
+	public static final Block PLANED_CALCITE = registerWithoutModel("planed_calcite", new Block(AbstractBlock.Settings.copy(POLISHED_CALCITE)), DyeColor.BROWN);
+	public static final Block PLANED_CALCITE_STAIRS = registerWithoutModel("planed_calcite_stairs", new StairsBlock(PLANED_CALCITE.getDefaultState(), AbstractBlock.Settings.copy(PLANED_CALCITE)), DyeColor.BROWN);
+	public static final Block PLANED_CALCITE_SLAB = registerWithoutModel("planed_calcite_slab", new SlabBlock(AbstractBlock.Settings.copy(PLANED_CALCITE)), DyeColor.BROWN);
+	public static final Block PLANED_CALCITE_WALL = registerWithoutModel("planed_calcite_wall", new WallBlock(AbstractBlock.Settings.copy(PLANED_CALCITE)), DyeColor.BROWN);
 	public static final BlockFamily PLANED_CALCITE_FAMILY = registerBlockFamily(PLANED_CALCITE, builder -> builder.stairs(PLANED_CALCITE_STAIRS).slab(PLANED_CALCITE_SLAB).wall(PLANED_CALCITE_WALL));
 	
 	public static final Block TOPAZ_CHISELED_CALCITE = registerSimple("topaz_chiseled_calcite", new Block(AbstractBlock.Settings.copy(CALCITE_BRICKS).luminance(s -> 6)), DyeColor.CYAN);
@@ -525,31 +528,31 @@ public class SpectrumBlocks {
 	// COLORED BLOCK FAMILIES
 	
 	public static ColoredPlankBlock registerColoredPlanks(String name, DyeColor dyeColor) {
-		return registerBlockWithItemWithoutModel(name, new ColoredPlankBlock(copyWithMapColor(OAK_PLANKS, dyeColor.getMapColor()), dyeColor), dyeColor);
+		return registerWithoutModel(name, new ColoredPlankBlock(copyWithMapColor(OAK_PLANKS, dyeColor.getMapColor()), dyeColor), dyeColor);
 	}
 	
 	public static ColoredStairsBlock registerColoredStairs(String name, ColoredPlankBlock baseBlock) {
-		return registerBlockWithItemWithoutModel(name, new ColoredStairsBlock(baseBlock.getDefaultState(), copyWithMapColor(OAK_STAIRS, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+		return registerWithoutModel(name, new ColoredStairsBlock(baseBlock.getDefaultState(), copyWithMapColor(OAK_STAIRS, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
 	}
 	
 	public static ColoredPressurePlateBlock registerColoredPressurePlate(String name, ColoredPlankBlock baseBlock) {
-		return registerBlockWithItemWithoutModel(name, new ColoredPressurePlateBlock(copyWithMapColor(OAK_PRESSURE_PLATE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+		return registerWithoutModel(name, new ColoredPressurePlateBlock(copyWithMapColor(OAK_PRESSURE_PLATE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
 	}
 	
 	public static ColoredFenceBlock registerColoredFence(String name, ColoredPlankBlock baseBlock) {
-		return registerBlockWithItemWithoutModel(name, new ColoredFenceBlock(copyWithMapColor(OAK_FENCE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+		return registerWithoutModel(name, new ColoredFenceBlock(copyWithMapColor(OAK_FENCE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
 	}
 	
 	public static ColoredFenceGateBlock registerColoredFenceGate(String name, ColoredPlankBlock baseBlock) {
-		return registerBlockWithItemWithoutModel(name, new ColoredFenceGateBlock(copyWithMapColor(OAK_FENCE_GATE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+		return registerWithoutModel(name, new ColoredFenceGateBlock(copyWithMapColor(OAK_FENCE_GATE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
 	}
 	
 	public static ColoredWoodenButtonBlock registerColoredButton(String name, ColoredPlankBlock baseBlock) {
-		return registerBlockWithItemWithoutModel(name, new ColoredWoodenButtonBlock(copyWithMapColor(OAK_BUTTON, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+		return registerWithoutModel(name, new ColoredWoodenButtonBlock(copyWithMapColor(OAK_BUTTON, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
 	}
 	
 	public static ColoredSlabBlock registerColoredSlab(String name, ColoredPlankBlock baseBlock) {
-		return registerBlockWithItemWithoutModel(name, new ColoredSlabBlock(copyWithMapColor(OAK_SLAB, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
+		return registerWithoutModel(name, new ColoredSlabBlock(copyWithMapColor(OAK_SLAB, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor());
 	}
 	
 	public static final ColoredPlankBlock BLACK_PLANKS = registerColoredPlanks("black_planks", DyeColor.BLACK);
@@ -721,7 +724,7 @@ public class SpectrumBlocks {
 	public static final ToIntFunction<BlockState> LANTERN_LIGHT_PROVIDER = (state -> state.get(RedstoneLampBlock.LIT) ? 15 : 0);
 	
 	public static FungusBlock registerNoxshroom(String name, RegistryKey<ConfiguredFeature<?, ?>> feature, MapColor mapColor) {
-		FungusBlock block = registerBlockWithItemWithoutModel(name, new FungusBlock(feature, SHIMMEL, settings(mapColor, BlockSoundGroup.FUNGUS, 0.0F).noCollision()), DyeColor.LIME);
+		FungusBlock block = registerWithoutModel(name, new FungusBlock(feature, SHIMMEL, settings(mapColor, BlockSoundGroup.FUNGUS, 0.0F).noCollision()), DyeColor.LIME);
 		registerCutoutRenderLayerEntry(block);
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			ctx.registerItemModel(block);
@@ -841,15 +844,20 @@ public class SpectrumBlocks {
 	public static final WeepingGalaSprigBlock WEEPING_GALA_SPRIG = registerCustom("weeping_gala_sprig", new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.BRIGHT_TEAL)), DyeColor.LIME, block -> {
 		registerCutoutRenderLayerEntry(block);
 		registerCustomItemModel(block, Models.GENERATED);
-		registerCrossModel(block, false);
+		registerTintableCrossBlockModel(block, false);
 	});
 	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = registerPottedPlant("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant()), false);
 	
-	public static final Block WEEPING_GALA_LEAVES = registerLeaves("weeping_gala_leaves", new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.BRIGHT_TEAL)), DyeColor.LIME);
-	public static final Block WEEPING_GALA_LOG = registerLog("weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
-	public static final Block STRIPPED_WEEPING_GALA_LOG = registerLog("stripped_weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
-	public static final Block WEEPING_GALA_WOOD = registerWood("weeping_gala_wood", WEEPING_GALA_LOG, new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
-	public static final Block STRIPPED_WEEPING_GALA_WOOD = registerWood("stripped_weeping_gala_wood", STRIPPED_WEEPING_GALA_LOG, new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_LEAVES = registerCustom("weeping_gala_leaves", new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.BRIGHT_TEAL)), DyeColor.LIME, block ->
+			registerSingletonBlockModel(block, TexturedModel.LEAVES));
+	public static final Block WEEPING_GALA_LOG = registerCustom("weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME, block ->
+			registerLogBlockModel(block));
+	public static final Block STRIPPED_WEEPING_GALA_LOG = registerCustom("stripped_weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME, block ->
+			registerLogBlockModel(block));
+	public static final Block WEEPING_GALA_WOOD = registerCustom("weeping_gala_wood", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME, block ->
+			registerWoodBlockModel(block, WEEPING_GALA_LOG));
+	public static final Block STRIPPED_WEEPING_GALA_WOOD = registerCustom("stripped_weeping_gala_wood", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME, block ->
+			registerWoodBlockModel(block, STRIPPED_WEEPING_GALA_LOG));
 	
 	public static final Block WEEPING_GALA_FRONDS = new WeepingGalaFrondsBlock(AbstractBlock.Settings.copy(WEEPING_GALA_LEAVES).noCollision());
 	public static final Block WEEPING_GALA_FRONDS_PLANT = new WeepingGalaFrondsTipBlock(AbstractBlock.Settings.copy(WEEPING_GALA_LEAVES).noCollision().luminance(s -> s.get(WeepingGalaFrondsTipBlock.FORM) == WeepingGalaFrondsTipBlock.Form.RESIN ? 12 : s.get(WeepingGalaFrondsTipBlock.FORM) == WeepingGalaFrondsTipBlock.Form.SPRIG ? 11 : 0));
@@ -878,33 +886,34 @@ public class SpectrumBlocks {
 		return settings(MapColor.GRAY, BlockSoundGroup.DRIPSTONE_BLOCK, 8.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresTool();
 	}
 	
-	public static final Block BASAL_MARBLE = registerAxisRotated("basal_marble", new PillarBlock(basalMarble()), TexturedModel.END_FOR_TOP_CUBE_COLUMN, DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_STAIRS = registerBlockWithItemWithoutModel("basal_marble_stairs", new StairsBlock(BASAL_MARBLE.getDefaultState(), basalMarble()), DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_SLAB = registerBlockWithItemWithoutModel("basal_marble_slab", new SlabBlock(basalMarble()), DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_WALL = registerBlockWithItemWithoutModel("basal_marble_wall", new WallBlock(basalMarble()), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE = registerCustom("basal_marble", new PillarBlock(basalMarble()), DyeColor.BROWN, block ->
+			registerAxisRotatedBlockModel(block, TexturedModel.END_FOR_TOP_CUBE_COLUMN));
+	public static final Block BASAL_MARBLE_STAIRS = registerWithoutModel("basal_marble_stairs", new StairsBlock(BASAL_MARBLE.getDefaultState(), basalMarble()), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_SLAB = registerWithoutModel("basal_marble_slab", new SlabBlock(basalMarble()), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_WALL = registerWithoutModel("basal_marble_wall", new WallBlock(basalMarble()), DyeColor.BROWN);
 	public static final BlockFamily BASAL_MARBLE_FAMILY = registerBlockFamilyExceptBase(BASAL_MARBLE, TexturedModel.CUBE_ALL, builder -> builder.stairs(BASAL_MARBLE_STAIRS).slab(BASAL_MARBLE_SLAB).wall(BASAL_MARBLE_WALL));
 	
-	public static final Block BASAL_MARBLE_PILLAR = registerAxisRotated("basal_marble_pillar", new PillarBlock(basalMarble()), TexturedModel.CUBE_COLUMN, DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_PILLAR = registerCustom("basal_marble_pillar", new PillarBlock(basalMarble()), DyeColor.BROWN, block ->
+			registerAxisRotatedBlockModel(block, TexturedModel.CUBE_COLUMN));
 	
-	public static final Block POLISHED_BASAL_MARBLE = registerCustom("polished_basal_marble", new SpectrumFacingBlock(basalMarble()), DyeColor.BROWN, block -> {
-		registerDefaultFacingUpModel(block, TexturedModel.CUBE_BOTTOM_TOP);
-	});
-	public static final Block POLISHED_BASAL_MARBLE_STAIRS = registerBlockWithItemWithoutModel("polished_basal_marble_stairs", new StairsBlock(POLISHED_BASAL_MARBLE.getDefaultState(), basalMarble()), DyeColor.BROWN);
-	public static final Block POLISHED_BASAL_MARBLE_SLAB = registerBlockWithItemWithoutModel("polished_basal_marble_slab", new SlabBlock(basalMarble()), DyeColor.BROWN);
-	public static final Block POLISHED_BASAL_MARBLE_WALL = registerBlockWithItemWithoutModel("polished_basal_marble_wall", new WallBlock(basalMarble()), DyeColor.BROWN);
+	public static final Block POLISHED_BASAL_MARBLE = registerCustom("polished_basal_marble", new SpectrumFacingBlock(basalMarble()), DyeColor.BROWN, block ->
+			registerDefaultFacingUpBlockModel(block, TexturedModel.CUBE_BOTTOM_TOP));
+	public static final Block POLISHED_BASAL_MARBLE_STAIRS = registerWithoutModel("polished_basal_marble_stairs", new StairsBlock(POLISHED_BASAL_MARBLE.getDefaultState(), basalMarble()), DyeColor.BROWN);
+	public static final Block POLISHED_BASAL_MARBLE_SLAB = registerWithoutModel("polished_basal_marble_slab", new SlabBlock(basalMarble()), DyeColor.BROWN);
+	public static final Block POLISHED_BASAL_MARBLE_WALL = registerWithoutModel("polished_basal_marble_wall", new WallBlock(basalMarble()), DyeColor.BROWN);
 	public static final TexturedModel.Factory CUBE_BOTTOM_TOP_WITH_SIDE_WALL_MODEL = TexturedModel.makeFactory(block -> new TextureMap().put(TextureKey.SIDE, TextureMap.getSubId(block, "_side")).put(TextureKey.TOP, TextureMap.getSubId(block, "_top")).put(TextureKey.BOTTOM, TextureMap.getSubId(block, "_bottom")).put(TextureKey.WALL, TextureMap.getSubId(block, "_side")), Models.CUBE_BOTTOM_TOP);
 	public static final BlockFamily POLISHED_BASAL_MARBLE_FAMILY = registerBlockFamilyExceptBase(POLISHED_BASAL_MARBLE, CUBE_BOTTOM_TOP_WITH_SIDE_WALL_MODEL, builder -> builder.stairs(POLISHED_BASAL_MARBLE_STAIRS).slab(POLISHED_BASAL_MARBLE_SLAB).wall(POLISHED_BASAL_MARBLE_WALL));
 	
-	public static final Block BASAL_MARBLE_TILES = registerBlockWithItemWithoutModel("basal_marble_tiles", new Block(basalMarble()), DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_TILE_STAIRS = registerBlockWithItemWithoutModel("basal_marble_tile_stairs", new StairsBlock(BASAL_MARBLE_TILES.getDefaultState(), Settings.copy(BASAL_MARBLE_TILES)), DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_TILE_SLAB = registerBlockWithItemWithoutModel("basal_marble_tile_slab", new SlabBlock(Settings.copy(BASAL_MARBLE_TILES)), DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_TILE_WALL = registerBlockWithItemWithoutModel("basal_marble_tile_wall", new WallBlock(Settings.copy(BASAL_MARBLE_TILES)), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_TILES = registerWithoutModel("basal_marble_tiles", new Block(basalMarble()), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_TILE_STAIRS = registerWithoutModel("basal_marble_tile_stairs", new StairsBlock(BASAL_MARBLE_TILES.getDefaultState(), Settings.copy(BASAL_MARBLE_TILES)), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_TILE_SLAB = registerWithoutModel("basal_marble_tile_slab", new SlabBlock(Settings.copy(BASAL_MARBLE_TILES)), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_TILE_WALL = registerWithoutModel("basal_marble_tile_wall", new WallBlock(Settings.copy(BASAL_MARBLE_TILES)), DyeColor.BROWN);
 	public static final BlockFamily BASAL_MARBLE_TILE_FAMILY = registerBlockFamily(BASAL_MARBLE_TILES, builder -> builder.stairs(BASAL_MARBLE_TILE_STAIRS).slab(BASAL_MARBLE_TILE_SLAB).wall(BASAL_MARBLE_TILE_WALL));
 	
-	public static final Block BASAL_MARBLE_BRICKS = registerBlockWithItemWithoutModel("basal_marble_bricks", new Block(basalMarble()), DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_BRICK_STAIRS = registerBlockWithItemWithoutModel("basal_marble_brick_stairs", new StairsBlock(BASAL_MARBLE_BRICKS.getDefaultState(), Settings.copy(BASAL_MARBLE_BRICKS)), DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_BRICK_SLAB = registerBlockWithItemWithoutModel("basal_marble_brick_slab", new SlabBlock(Settings.copy(BASAL_MARBLE_BRICKS)), DyeColor.BROWN);
-	public static final Block BASAL_MARBLE_BRICK_WALL = registerBlockWithItemWithoutModel("basal_marble_brick_wall", new WallBlock(Settings.copy(BASAL_MARBLE_BRICKS)), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_BRICKS = registerWithoutModel("basal_marble_bricks", new Block(basalMarble()), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_BRICK_STAIRS = registerWithoutModel("basal_marble_brick_stairs", new StairsBlock(BASAL_MARBLE_BRICKS.getDefaultState(), Settings.copy(BASAL_MARBLE_BRICKS)), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_BRICK_SLAB = registerWithoutModel("basal_marble_brick_slab", new SlabBlock(Settings.copy(BASAL_MARBLE_BRICKS)), DyeColor.BROWN);
+	public static final Block BASAL_MARBLE_BRICK_WALL = registerWithoutModel("basal_marble_brick_wall", new WallBlock(Settings.copy(BASAL_MARBLE_BRICKS)), DyeColor.BROWN);
 	public static final BlockFamily BASAL_MARBLE_BRICK_FAMILY = registerBlockFamily(BASAL_MARBLE_BRICKS, builder -> builder.stairs(BASAL_MARBLE_BRICK_STAIRS).slab(BASAL_MARBLE_BRICK_SLAB).wall(BASAL_MARBLE_BRICK_WALL));
 	
 	public static final Block LONGING_CHIMERA = new GrotesqueBlock(basalMarble().nonOpaque(), 12, 15, "block.spectrum.longing_chimera.tooltip");
@@ -1081,8 +1090,10 @@ public class SpectrumBlocks {
 	
 	public static final Block OMINOUS_SAPLING = new OminousSaplingBlock(AbstractBlock.Settings.copy(Blocks.OAK_SAPLING));
 	
-	public static final Block SPIRIT_SALLOW_LEAVES = registerLeaves("spirit_sallow_leaves", new SpiritSallowLeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.OFF_WHITE).luminance((state) -> 8)), DyeColor.GREEN);
-	public static final Block SPIRIT_SALLOW_LOG = registerLog("spirit_sallow_log", new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY)), DyeColor.GREEN);
+	public static final Block SPIRIT_SALLOW_LEAVES = registerCustom("spirit_sallow_leaves", new SpiritSallowLeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.OFF_WHITE).luminance((state) -> 8)), DyeColor.GREEN, block ->
+			registerSingletonBlockModel(block, TexturedModel.LEAVES));
+	public static final Block SPIRIT_SALLOW_LOG = registerCustom("spirit_sallow_log", new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY)), DyeColor.GREEN, block ->
+			registerLogBlockModel(block));
 	public static final Block SPIRIT_SALLOW_ROOTS = registerCustom("spirit_sallow_roots", new PillarBlock(AbstractBlock.Settings.copy(Blocks.OAK_WOOD).mapColor(MapColor.GRAY)), DyeColor.GREEN, block -> {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			TextureMap textureMap = new TextureMap().put(TextureKey.SIDE, TextureMap.getId(block)).put(TextureKey.END, TextureMap.getId(block));
@@ -1179,14 +1190,14 @@ public class SpectrumBlocks {
 		return Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY);
 	}
 	
-	public static final AmaranthBushelBlock AMARANTH_BUSHEL = registerCustom("amaranth_bushel", new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision()), DyeColor.RED, block -> {
-		registerCutoutRenderLayerEntry(block);
-		registerCustomItemModel(block, Models.GENERATED);
-		registerCrossModel(block, false);
-	});
+	public static final AmaranthBushelBlock AMARANTH_BUSHEL = registerCustom("amaranth_bushel", new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision()), DyeColor.RED, block ->
+			registerTintableCrossModel(block, Models.GENERATED, false));
+	
 	public static final PottedAmaranthBushelBlock POTTED_AMARANTH_BUSHEL = registerPottedPlant("potted_amaranth_bushel", new PottedAmaranthBushelBlock(AMARANTH_BUSHEL, pottedPlant()), false);
 	
-	public static final ResonantLilyBlock RESONANT_LILY = registerPottablePlant("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN, false);
+	public static final ResonantLilyBlock RESONANT_LILY = registerCustom("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN, block ->
+			registerTintableCrossModel(block, Models.GENERATED, false));
+	
 	public static final PottedResonantLilyBlock POTTED_RESONANT_LILY = registerPottedPlant("potted_resonant_lily", new PottedResonantLilyBlock(RESONANT_LILY, pottedPlant()), false);
 	
 	public static final BloodOrchidBlock BLOOD_ORCHID = registerCustom("blood_orchid", new BloodOrchidBlock(SpectrumStatusEffects.FRENZY, 10, AbstractBlock.Settings.copy(Blocks.POPPY).offset(AbstractBlock.OffsetType.NONE).ticksRandomly()), DyeColor.RED, block -> {
@@ -1211,7 +1222,8 @@ public class SpectrumBlocks {
 	});
 	
 	public static ColoredSaplingBlock registerColoredSapling(String name, DyeColor dyeColor) {
-		return registerPottablePlant(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor, false);
+		return registerCustom(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor, block ->
+				registerTintableCrossModel(block, Models.GENERATED, false));
 	}
 	
 	public static final ColoredSaplingBlock BLACK_SAPLING = registerColoredSapling("black_sapling", DyeColor.BLACK);
@@ -1253,7 +1265,8 @@ public class SpectrumBlocks {
 	public static final PottedColoredSaplingBlock POTTED_YELLOW_SAPLING = registerPottedColoredSapling("potted_yellow_sapling", YELLOW_SAPLING);
 	
 	public static ColoredLogBlock registerColoredLog(String name, DyeColor color) {
-		return registerLog(name, new ColoredLogBlock(copyWithMapColor(OAK_LOG, color.getMapColor()), color), color);
+		return registerCustom(name, new ColoredLogBlock(copyWithMapColor(OAK_LOG, color.getMapColor()), color), color, block ->
+				registerLogBlockModel(block));
 	}
 	
 	public static final ColoredLogBlock BLACK_LOG = registerColoredLog("black_log", DyeColor.BLACK);
@@ -1274,7 +1287,8 @@ public class SpectrumBlocks {
 	public static final ColoredLogBlock YELLOW_LOG = registerColoredLog("yellow_log", DyeColor.YELLOW);
 	
 	public static ColoredWoodBlock registerColoredWood(String name, ColoredLogBlock logBlock) {
-		return registerWood(name, logBlock, new ColoredWoodBlock(copyWithMapColor(OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor());
+		return registerCustom(name, new ColoredWoodBlock(copyWithMapColor(OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor(), block ->
+				registerWoodBlockModel(block, logBlock));
 	}
 	
 	public static final ColoredWoodBlock BLACK_WOOD = registerColoredWood("black_wood", BLACK_LOG);
@@ -1295,7 +1309,8 @@ public class SpectrumBlocks {
 	public static final ColoredWoodBlock YELLOW_WOOD = registerColoredWood("yellow_wood", YELLOW_LOG);
 	
 	public static ColoredStrippedLogBlock registerColoredStrippedLog(String name, DyeColor color) {
-		return registerLog(name, new ColoredStrippedLogBlock(copyWithMapColor(STRIPPED_OAK_LOG, color.getMapColor()), color), color);
+		return registerCustom(name, new ColoredStrippedLogBlock(copyWithMapColor(STRIPPED_OAK_LOG, color.getMapColor()), color), color, block ->
+				registerLogBlockModel(block));
 	}
 	
 	public static final ColoredStrippedLogBlock STRIPPED_BLACK_LOG = registerColoredStrippedLog("stripped_black_log", DyeColor.BLACK);
@@ -1316,7 +1331,8 @@ public class SpectrumBlocks {
 	public static final ColoredStrippedLogBlock STRIPPED_YELLOW_LOG = registerColoredStrippedLog("stripped_yellow_log", DyeColor.YELLOW);
 	
 	public static ColoredStrippedWoodBlock registerColoredStrippedWood(String name, ColoredStrippedLogBlock logBlock) {
-		return registerWood(name, logBlock, new ColoredStrippedWoodBlock(copyWithMapColor(STRIPPED_OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor());
+		return registerCustom(name, new ColoredStrippedWoodBlock(copyWithMapColor(STRIPPED_OAK_WOOD, logBlock.getDefaultMapColor()), logBlock.getColor()), logBlock.getColor(), block ->
+				registerWoodBlockModel(block, logBlock));
 	}
 	
 	public static final ColoredStrippedWoodBlock STRIPPED_BLACK_WOOD = registerColoredStrippedWood("stripped_black_wood", STRIPPED_BLACK_LOG);
@@ -1337,7 +1353,8 @@ public class SpectrumBlocks {
 	public static final ColoredStrippedWoodBlock STRIPPED_YELLOW_WOOD = registerColoredStrippedWood("stripped_yellow_wood", STRIPPED_YELLOW_LOG);
 	
 	public static ColoredLeavesBlock registerColoredLeaves(String name, DyeColor color) {
-		return registerLeaves(name, new ColoredLeavesBlock(copyWithMapColor(OAK_LEAVES, color.getMapColor()), color), color);
+		return registerCustom(name, new ColoredLeavesBlock(copyWithMapColor(OAK_LEAVES, color.getMapColor()), color), color, block ->
+				registerSingletonBlockModel(block, TexturedModel.LEAVES));
 	}
 	
 	public static final ColoredLeavesBlock BLACK_LEAVES = registerColoredLeaves("black_leaves", DyeColor.BLACK);
@@ -1732,13 +1749,6 @@ public class SpectrumBlocks {
 		ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(block.asItem(), model));
 	}
 	
-	public static void registerCrossModel(Block block, boolean tinted) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerTintableCrossBlockState(block, tinted
-						? BlockStateModelGenerator.TintType.TINTED
-						: BlockStateModelGenerator.TintType.NOT_TINTED,
-				TextureMap.cross(block)));
-	}
-	
 	public static void registerCutoutRenderLayerEntry(Block block) {
 		CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout()));
 	}
@@ -1747,45 +1757,20 @@ public class SpectrumBlocks {
 		CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent()));
 	}
 	
-	public static <T extends Block> T registerBlockWithoutModel(String name, T block) {
-		Identifier id = SpectrumCommon.locate(name);
-		COMMON_REGISTRAR.defer(() -> Registry.register(Registries.BLOCK, id, block));
-		return block;
+	public static <T extends Block> T registerWithoutModel(String name, T block) {
+		return COMMON_REGISTRAR.defer(block, b -> Registry.register(Registries.BLOCK, SpectrumCommon.locate(name), block));
 	}
 	
-	public static <T extends Block> T registerPottablePlant(String name, T plantBlock, DyeColor color, boolean tinted) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
-			ctx.registerTintableCross(plantBlock, tintType);
-		});
-		registerCutoutRenderLayerEntry(plantBlock);
-		return registerBlockWithItemWithoutModel(name, plantBlock, color);
+	public static void registerTintableCrossModel(Block block, Model itemModel, boolean tinted) {
+		registerCutoutRenderLayerEntry(block);
+		registerCustomItemModel(block, itemModel);
+		registerTintableCrossBlockModel(block, tinted);
 	}
 	
-	public static <T extends FlowerPotBlock> T registerPottedPlant(String name, T pottedBlock, boolean tinted) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
-			TextureMap textureMap = TextureMap.plant(pottedBlock.getContent());
-			Identifier identifier = tintType.getFlowerPotCrossModel().upload(pottedBlock, textureMap, ctx.modelCollector);
-			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(pottedBlock, identifier));
-		});
-		registerCutoutRenderLayerEntry(pottedBlock);
-		return registerBlockWithoutModel(name, pottedBlock);
-	}
-	
-	public static <T extends Block> T registerLeaves(String name, T leavesBlock, DyeColor color) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(leavesBlock, TexturedModel.LEAVES));
-		return registerBlockWithItemWithoutModel(name, leavesBlock, color);
-	}
-	
-	public static <T extends Block> T registerLog(String name, T logBlock, DyeColor color) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).log(logBlock));
-		return registerBlockWithItemWithoutModel(name, logBlock, color);
-	}
-	
-	public static <T extends Block> T registerWood(String name, Block logBlock, T woodBlock, DyeColor color) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerLog(logBlock).wood(woodBlock));
-		return registerBlockWithItemWithoutModel(name, woodBlock, color);
+	public static <T extends FlowerPotBlock> T registerPottedPlant(String name, T block, boolean tinted) {
+		registerPottedPlantBlockModel(block, tinted);
+		registerCutoutRenderLayerEntry(block);
+		return registerWithoutModel(name, block);
 	}
 	
 	public static <T extends SpectrumClusterBlock> T registerClusterBlock(String name, T block, Item.Settings itemSettings, Model blockModel, DyeColor color) {
@@ -1796,8 +1781,8 @@ public class SpectrumBlocks {
 			case SpectrumClusterBlock.GrowthStage.LARGE -> registerCustomItemModel(block, SpectrumModels.LARGE_BUD_ITEM);
 			case SpectrumClusterBlock.GrowthStage.CLUSTER -> registerCustomItemModel(block, SpectrumModels.CLUSTER_ITEM);
 		}
-		registerDefaultFacingUpModel(block, TexturedModel.makeFactory(TextureMap::cross, blockModel));
-		return registerBlockWithItemWithoutModel(name, block, itemSettings, color);
+		registerDefaultFacingUpBlockModel(block, TexturedModel.makeFactory(TextureMap::cross, blockModel));
+		return registerWithoutModel(name, block, itemSettings, color);
 	}
 	
 	public static <T extends Block> T registerGemLight(String name, Block gemBlock, Identifier capTexture, T gemLightBlock, DyeColor color) {
@@ -1810,7 +1795,7 @@ public class SpectrumBlocks {
 					SpectrumModels.MULTILAYER_LIGHT));
 		});
 		registerTranslucentRenderLayerEntry(gemLightBlock);
-		return registerBlockWithItemWithoutModel(name, gemLightBlock, color);
+		return registerWithoutModel(name, gemLightBlock, color);
 	}
 	
 	public static <T extends Block> T registerMoonstoneChiseled(String name, Identifier capTexture, T block, DyeColor color) {
@@ -1828,12 +1813,7 @@ public class SpectrumBlocks {
 					.register(Direction.UP, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockSubModelId(block, "_down")).put(VariantSettings.X, VariantSettings.Rotation.R180))
 					.register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.MODEL, ModelIds.getBlockModelId(block)).put(VariantSettings.Y, VariantSettings.Rotation.R180))));
 		});
-		return registerBlockWithItemWithoutModel(name, block, color);
-	}
-	
-	public static <T extends Block> T registerAxisRotated(String name, T block, TexturedModel.Factory factory, DyeColor color) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerAxisRotated(block, factory));
-		return registerBlockWithItemWithoutModel(name, block, color);
+		return registerWithoutModel(name, block, color);
 	}
 	
 	public static <T extends Block> T registerCardinalFacing(String name, T block, TexturedModel.Factory factory, DyeColor color) {
@@ -1842,21 +1822,7 @@ public class SpectrumBlocks {
 						.coordinate(BlockStateVariantMap.create(CardinalFacingBlock.CARDINAL_FACING)
 								.register(false, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
 								.register(true, BlockStateVariant.create()))));
-		return registerBlockWithItemWithoutModel(name, block, color);
-	}
-	
-	public static void registerDefaultFacingUpModel(Block block, TexturedModel.Factory factory) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			BlockStateVariantMap variants = BlockStateVariantMap.create(FacingBlock.FACING)
-					.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R180))
-					.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-					.register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90))
-					.register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-					.register(Direction.UP, BlockStateVariant.create())
-					.register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270));
-			ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, factory.upload(block, ctx.modelCollector)))
-					.coordinate(variants));
-		});
+		return registerWithoutModel(name, block, color);
 	}
 	
 	public static BlockFamily registerBlockFamily(Block baseBlock, UnaryOperator<BlockFamily.Builder> callback) {
@@ -1876,7 +1842,7 @@ public class SpectrumBlocks {
 		return family;
 	}
 	
-	public static <T extends Block> T registerBlockWithItemWithoutModel(String name, T block, Item.Settings itemSettings, DyeColor dyeColor) {
+	public static <T extends Block> T registerWithoutModel(String name, T block, Item.Settings itemSettings, DyeColor dyeColor) {
 		Identifier id = SpectrumCommon.locate(name);
 		BlockItem blockItem = new BlockItem(block, itemSettings);
 		COMMON_REGISTRAR.defer(() -> {
@@ -1887,8 +1853,8 @@ public class SpectrumBlocks {
 		return block;
 	}
 	
-	public static <T extends Block> T registerBlockWithItemWithoutModel(String name, T block, DyeColor dyeColor) {
-		return registerBlockWithItemWithoutModel(name, block, IS.DEFAULT, dyeColor);
+	public static <T extends Block> T registerWithoutModel(String name, T block, DyeColor dyeColor) {
+		return registerWithoutModel(name, block, IS.DEFAULT, dyeColor);
 	}
 	
 	public static <T extends Block> T registerSimple(String name, T block, DyeColor dyeColor) {
@@ -1896,19 +1862,18 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> T registerSingleton(String name, T block, TexturedModel.Factory factory, DyeColor dyeColor) {
-		registerBlockWithItemWithoutModel(name, block, dyeColor);
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(block, factory));
-		return block;
+		registerSingletonBlockModel(block, factory);
+		return registerWithoutModel(name, block, dyeColor);
 	}
 	
 	public static <T extends Block> T registerCustom(String name, T block, DyeColor color, Consumer<T> callback) {
-		registerBlockWithItemWithoutModel(name, block, color);
+		registerWithoutModel(name, block, color);
 		callback.accept(block);
 		return block;
 	}
 	
 	public static <T extends Block> T registerCustom(String name, T block, Consumer<T> callback) {
-		registerBlockWithoutModel(name, block);
+		registerWithoutModel(name, block);
 		callback.accept(block);
 		return block;
 	}
@@ -1950,7 +1915,6 @@ public class SpectrumBlocks {
 		
 		registerPastelNetworkNodes(IS.of(16));
 		registerStoneBlocks(IS.of());
-		registerGemBlocks(IS.of());
 		
 		registerShootingStarBlocks(IS.of(1, Rarity.UNCOMMON));
 		
@@ -2564,20 +2528,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("black_spore_blossom", BLACK_SPORE_BLOSSOM, settings, DyeColor.BLACK);
 	}
 	
-	private static void registerGemBlocks(Item.Settings settings) {
-		registerBlockWithItem("topaz_block", TOPAZ_BLOCK, settings, DyeColor.CYAN);
-		registerBlockWithItem("budding_topaz", BUDDING_TOPAZ, settings, DyeColor.CYAN);
-		
-		registerBlockWithItem("citrine_block", CITRINE_BLOCK, settings, DyeColor.YELLOW);
-		registerBlockWithItem("budding_citrine", BUDDING_CITRINE, settings, DyeColor.YELLOW);
-		
-		registerBlockWithItem("onyx_block", ONYX_BLOCK, settings, DyeColor.BLACK);
-		registerBlockWithItem("budding_onyx", BUDDING_ONYX, settings, DyeColor.BLACK);
-		
-		registerBlockWithItem("moonstone_block", MOONSTONE_BLOCK, settings, DyeColor.WHITE);
-		registerBlockWithItem("budding_moonstone", BUDDING_MOONSTONE, settings, DyeColor.WHITE);
-	}
-	
 	private static void registerStructureBlocks(Item.Settings settings) {
 		registerBlockWithItem("downstone", DOWNSTONE, settings, DyeColor.BLUE);
 		
@@ -2981,10 +2931,6 @@ public class SpectrumBlocks {
 	
 	public static void provideItemModels(ItemModelGenerator generator) {
 		ITEM_MODEL_REGISTRAR.flush(generator);
-	}
-	
-	public static void provideBlockStateModels(BlockStateModelGenerator generator) {
-		BLOCK_STATE_MODEL_REGISTRAR.flush(generator);
 	}
 	
 }
