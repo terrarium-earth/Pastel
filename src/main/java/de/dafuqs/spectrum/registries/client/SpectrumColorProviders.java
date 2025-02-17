@@ -102,7 +102,7 @@ public class SpectrumColorProviders {
 			if (tintIndex == 1) {
 				InkFlaskItem i = (InkFlaskItem) stack.getItem();
 				SingleInkStorage storage = i.getEnergyStorage(stack);
-				return ColorHelper.Argb.fullAlpha(SpectrumColorHelper.getInt(storage.getStoredColor().getDyeColor()));
+				return ColorHelper.Argb.fullAlpha(storage.getStoredColor().getColorInt());
 			}
 			return -1;
 		}, items);

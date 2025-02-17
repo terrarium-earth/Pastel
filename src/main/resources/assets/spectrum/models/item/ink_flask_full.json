@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "spectrum:item/ink_flask_full"
+    "layer1": "spectrum:item/ink_flask_full_overlay"
+  }
+}
