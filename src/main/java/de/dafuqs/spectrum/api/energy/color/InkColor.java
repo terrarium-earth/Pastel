@@ -8,6 +8,7 @@ import net.minecraft.network.codec.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
+import org.jetbrains.annotations.*;
 import org.joml.*;
 
 import java.util.*;
@@ -26,7 +27,7 @@ public class InkColor {
 	
 	protected static final Map<DyeColor, InkColor> DYE_TO_COLOR = new HashMap<>();
 	
-	protected final DyeColor dyeColor;
+	protected final Optional<DyeColor> dyeColor;
 	protected final int colorInt;
 	protected final Vector3f colorVec;
 	protected final int textColor;
@@ -34,11 +35,15 @@ public class InkColor {
 	
 	protected final Identifier requiredAdvancement;
 	
-	protected InkColor(DyeColor dyeColor, int color, Identifier requiredAdvancement) {
-		this(dyeColor, color, color, requiredAdvancement);
+	public InkColor(DyeColor dyeColor, int color, Identifier requiredAdvancement) {
+		this(Optional.of(dyeColor), color, color, requiredAdvancement);
 	}
 	
-	protected InkColor(DyeColor dyeColor, int color, int textColor, Identifier requiredAdvancement) {
+	public InkColor(DyeColor dyeColor, int color, int textColor, Identifier requiredAdvancement) {
+		this(Optional.of(dyeColor), color, textColor, requiredAdvancement);
+	}
+	
+	public InkColor(Optional<DyeColor> dyeColor, int color, int textColor, Identifier requiredAdvancement) {
 		this.dyeColor = dyeColor;
 		this.colorInt = color;
 		this.colorVec = SpectrumColorHelper.colorIntToVec(color);
@@ -46,10 +51,10 @@ public class InkColor {
 		this.textColorVec = SpectrumColorHelper.colorIntToVec(textColor);
 		this.requiredAdvancement = requiredAdvancement;
 		
-		DYE_TO_COLOR.put(dyeColor, this);
+		dyeColor.ifPresent(value -> DYE_TO_COLOR.put(value, this));
 	}
 	
-	public static InkColor ofDyeColor(DyeColor dyeColor) {
+	public static @Nullable InkColor ofDyeColor(DyeColor dyeColor) {
 		return DYE_TO_COLOR.get(dyeColor);
 	}
 	
@@ -61,7 +66,7 @@ public class InkColor {
 		return SpectrumRegistries.INK_COLOR.getOrEmpty(Identifier.of(idString));
 	}
 	
-	public DyeColor getDyeColor() {
+	public Optional<DyeColor> getDyeColor() {
 		return this.dyeColor;
 	}
 	
@@ -81,7 +86,7 @@ public class InkColor {
 	// hash lookup go wheeeeee!
 	@Override
 	public int hashCode() {
-		return dyeColor.getId();
+		return colorInt;
 	}
 	
 	public MutableText getName() {
