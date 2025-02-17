@@ -117,15 +117,15 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 		super.onEntityHit(entityHitResult);
 		
 		Entity target = entityHitResult.getEntity();
+		Entity owner = this.getOwner();
 		
-		if (EntityColorProcessorRegistry.colorEntity(target, getInkColor().getDyeColor())) {
+		if (EntityColorProcessorRegistry.colorEntity(target, getInkColor().getDyeColor(), owner instanceof PlayerEntity player ? player : null)) {
 			target.getWorld().playSoundFromEntity(null, target, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		}
 		
 		float velocity = (float) this.getVelocity().length();
 		int damage = MathHelper.ceil(MathHelper.clamp((double) velocity * DAMAGE_PER_POTENCY * SPELL_POTENCY, 0.0D, 2.147483647E9D));
 		
-		Entity owner = this.getOwner();
 		DamageSource damageSource;
 		if (owner == null) {
 			damageSource = SpectrumDamageTypes.inkProjectile(this, this);
@@ -245,12 +245,13 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 		List<Entity> list = this.getWorld().getOtherEntities(this, new Box(k, r, t, l, s, u));
 		Vec3d vec3d = new Vec3d(posX, posY, posZ);
 		
+		Entity owner = this.getOwner();
 		for (Entity entity : list) {
 			if (!GenericClaimModsCompat.canInteract(this.getWorld(), entity, attacker)) {
 				continue;
 			}
 			
-			if (EntityColorProcessorRegistry.colorEntity(entity, getInkColor().getDyeColor())) {
+			if (EntityColorProcessorRegistry.colorEntity(entity, getInkColor().getDyeColor(), owner instanceof PlayerEntity player ? player : null)) {
 				entity.getWorld().playSoundFromEntity(null, entity, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1.0F, 1.0F);
 			}
 			

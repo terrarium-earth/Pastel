@@ -48,7 +48,7 @@ public record PlayFusionCraftingFinishedParticlePayload(BlockPos pos, InkColor c
 		float velocityModifier = 0.25F;
 		for (Vec3d velocity : VectorPattern.SIXTEEN.getVectors()) {
 			client.world.addParticle(
-					new DynamicParticleEffect(ColoredCraftingParticleEffect.of(payload.color.getColorInt()), 0.0F, color, 1.5F, 40, false, true),
+					new DynamicParticleEffect(ColoredCraftingParticleEffect.of(payload.color.getColorInt()).getType(), 0.0F, color, 1.5F, 40, false, true),
 					sourcePos.x, sourcePos.y, sourcePos.z,
 					velocity.x * velocityModifier, 0.0F, velocity.z * velocityModifier
 			);

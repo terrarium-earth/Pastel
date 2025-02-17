@@ -11,16 +11,8 @@ import net.minecraft.registry.*;
 import net.minecraft.util.dynamic.*;
 import org.joml.*;
 
-public record DynamicParticleEffect(
-		ParticleType<?> particleType,
-		float gravity,
-		Vector3f color,
-		float scale,
-		int lifetimeTicks,
-		boolean collisions,
-		boolean glowing,
-		boolean alwaysShow
-) implements ParticleEffect {
+public record DynamicParticleEffect(ParticleType<?> particleType, float gravity, Vector3f color, float scale,
+									int lifetimeTicks, boolean collisions, boolean glowing, boolean alwaysShow) implements ParticleEffect {
 	
 	public static final MapCodec<DynamicParticleEffect> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 			Registries.PARTICLE_TYPE.getCodec().fieldOf("particle_type").forGetter(c -> c.particleType),

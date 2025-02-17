@@ -101,22 +101,22 @@ public class SpectrumItems {
 	public static final Item MOONSTONE_POWDER = new GemstonePowderItem(IS.of(), locate("lategame/collect_moonstone"), BuiltinGemstoneColor.WHITE, Items.WHITE_DYE);
 	
 	// Pigment
-	public static final Item BLACK_PIGMENT = new PigmentItem(IS.of(), InkColors.BLACK);
-	public static final Item BLUE_PIGMENT = new PigmentItem(IS.of(), InkColors.BLUE);
-	public static final Item BROWN_PIGMENT = new PigmentItem(IS.of(), InkColors.BROWN);
-	public static final Item CYAN_PIGMENT = new PigmentItem(IS.of(), InkColors.CYAN);
-	public static final Item GRAY_PIGMENT = new PigmentItem(IS.of(), InkColors.GRAY);
-	public static final Item GREEN_PIGMENT = new PigmentItem(IS.of(), InkColors.GREEN);
-	public static final Item LIGHT_BLUE_PIGMENT = new PigmentItem(IS.of(), InkColors.LIGHT_BLUE);
-	public static final Item LIGHT_GRAY_PIGMENT = new PigmentItem(IS.of(), InkColors.LIGHT_GRAY);
-	public static final Item LIME_PIGMENT = new PigmentItem(IS.of(), InkColors.LIME);
-	public static final Item MAGENTA_PIGMENT = new PigmentItem(IS.of(), InkColors.MAGENTA);
-	public static final Item ORANGE_PIGMENT = new PigmentItem(IS.of(), InkColors.ORANGE);
-	public static final Item PINK_PIGMENT = new PigmentItem(IS.of(), InkColors.PINK);
-	public static final Item PURPLE_PIGMENT = new PigmentItem(IS.of(), InkColors.PURPLE);
-	public static final Item RED_PIGMENT = new PigmentItem(IS.of(), InkColors.RED);
-	public static final Item WHITE_PIGMENT = new PigmentItem(IS.of(), InkColors.WHITE);
-	public static final Item YELLOW_PIGMENT = new PigmentItem(IS.of(), InkColors.YELLOW);
+	public static final Item BLACK_PIGMENT = new PigmentItem(IS.of(), InkColors.BLACK, Items.BLACK_DYE);
+	public static final Item BLUE_PIGMENT = new PigmentItem(IS.of(), InkColors.BLUE, Items.BLUE_DYE);
+	public static final Item BROWN_PIGMENT = new PigmentItem(IS.of(), InkColors.BROWN, Items.BROWN_DYE);
+	public static final Item CYAN_PIGMENT = new PigmentItem(IS.of(), InkColors.CYAN, Items.CYAN_DYE);
+	public static final Item GRAY_PIGMENT = new PigmentItem(IS.of(), InkColors.GRAY, Items.GRAY_DYE);
+	public static final Item GREEN_PIGMENT = new PigmentItem(IS.of(), InkColors.GREEN, Items.GREEN_DYE);
+	public static final Item LIGHT_BLUE_PIGMENT = new PigmentItem(IS.of(), InkColors.LIGHT_BLUE, Items.LIGHT_BLUE_DYE);
+	public static final Item LIGHT_GRAY_PIGMENT = new PigmentItem(IS.of(), InkColors.LIGHT_GRAY, Items.LIGHT_GRAY_DYE);
+	public static final Item LIME_PIGMENT = new PigmentItem(IS.of(), InkColors.LIME, Items.LIME_DYE);
+	public static final Item MAGENTA_PIGMENT = new PigmentItem(IS.of(), InkColors.MAGENTA, Items.MAGENTA_DYE);
+	public static final Item ORANGE_PIGMENT = new PigmentItem(IS.of(), InkColors.ORANGE, Items.ORANGE_DYE);
+	public static final Item PINK_PIGMENT = new PigmentItem(IS.of(), InkColors.PINK, Items.PINK_DYE);
+	public static final Item PURPLE_PIGMENT = new PigmentItem(IS.of(), InkColors.PURPLE, Items.PURPLE_DYE);
+	public static final Item RED_PIGMENT = new PigmentItem(IS.of(), InkColors.RED, Items.RED_DYE);
+	public static final Item WHITE_PIGMENT = new PigmentItem(IS.of(), InkColors.WHITE, Items.WHITE_DYE);
+	public static final Item YELLOW_PIGMENT = new PigmentItem(IS.of(), InkColors.YELLOW, Items.YELLOW_DYE);
 	
 	// Preenchanted tools
 	public static final Item MULTITOOL = new PreenchantedMultiToolItem(ToolMaterials.IRON, 2, -2.4F, IS.of(Rarity.UNCOMMON).maxDamage(ToolMaterials.IRON.getDurability()));

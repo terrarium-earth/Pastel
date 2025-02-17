@@ -7,11 +7,13 @@ import net.minecraft.entity.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 
+import java.util.*;
+
 public class SpectrumEntityColorProcessors {
 	
 	public static void register() {
 		// VANILLA
-		EntityColorProcessorRegistry.register(EntityType.SHEEP, (entity, dyeColor) -> {
+		EntityColorProcessorRegistry.register(EntityType.SHEEP, (entity, dyeColor, player) -> {
 			if (dyeColor.isEmpty()) {
 				return false;
 			}
@@ -23,7 +25,7 @@ public class SpectrumEntityColorProcessors {
 			entity.setColor(color);
 			return true;
 		});
-		EntityColorProcessorRegistry.register(EntityType.WOLF, (entity, dyeColor) -> {
+		EntityColorProcessorRegistry.register(EntityType.WOLF, (entity, dyeColor, player) -> {
 			if (dyeColor.isEmpty()) {
 				return false;
 			}
@@ -38,7 +40,7 @@ public class SpectrumEntityColorProcessors {
 			entity.setCollarColor(color);
 			return true;
 		});
-		EntityColorProcessorRegistry.register(EntityType.CAT, (entity, dyeColor) -> {
+		EntityColorProcessorRegistry.register(EntityType.CAT, (entity, dyeColor, player) -> {
 			if (dyeColor.isEmpty()) {
 				return false;
 			}
@@ -53,9 +55,12 @@ public class SpectrumEntityColorProcessors {
 			entity.setCollarColor(color);
 			return true;
 		});
-		EntityColorProcessorRegistry.register(EntityType.SHULKER, (entity, dyeColor) -> {
+		EntityColorProcessorRegistry.register(EntityType.SHULKER, (entity, dyeColor, player) -> {
 			@Nullable DyeColor shulkerColor = entity.getColor();
-			if (shulkerColor == null && dyeColor.isEmpty() || shulkerColor == dyeColor.get()) {
+			if (shulkerColor == null && dyeColor.isEmpty()) {
+				return false;
+			}
+			if (Optional.ofNullable(shulkerColor) == dyeColor) {
 				return false;
 			}
 			entity.setVariant(dyeColor);
@@ -63,18 +68,26 @@ public class SpectrumEntityColorProcessors {
 		});
 		
 		// SPECTRUM
-		EntityColorProcessorRegistry.register(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, (entity, dyeColor) -> {
-			if (entity.getColor() == dyeColor) {
+		EntityColorProcessorRegistry.register(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, (entity, dyeColor, player) -> {
+			if (dyeColor.isEmpty()) {
 				return false;
 			}
-			entity.setColor(dyeColor);
+			DyeColor color = dyeColor.get();
+			if (entity.getColor() == color) {
+				return false;
+			}
+			entity.setColor(color);
 			return true;
 		});
-		EntityColorProcessorRegistry.register(SpectrumEntityTypes.INK_PROJECTILE, (entity, dyeColor) -> {
-			if (entity.getInkColor().getDyeColor() == dyeColor) {
+		EntityColorProcessorRegistry.register(SpectrumEntityTypes.INK_PROJECTILE, (entity, dyeColor, player) -> {
+			if (dyeColor.isEmpty()) {
 				return false;
 			}
-			entity.setColor(InkColor.ofDyeColor(dyeColor));
+			@Nullable InkColor inkColor = entity.getInkColor();
+			if (inkColor == null || entity.getInkColor() == inkColor) {
+				return false;
+			}
+			entity.setColor(inkColor);
 			return true;
 		});
 	}
