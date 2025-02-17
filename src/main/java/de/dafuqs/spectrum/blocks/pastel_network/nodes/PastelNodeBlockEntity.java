@@ -61,7 +61,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	protected PastelNetwork.NodePriority priority = PastelNetwork.NodePriority.GENERIC;
 	protected long itemCountUnderway = 0;
 	@Nullable
-	protected DyeColor color = null;
+	protected Optional<DyeColor> color = Optional.empty();
 	
 	// upgrade impl stuff
 	protected boolean lit, triggerTransfer, triggered, waiting, lamp, sensor, updated;
@@ -75,7 +75,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	private final List<ItemVariant> filterItems;
 	float rotationTarget, crystalRotation, lastRotationTarget, heightTarget, crystalHeight, lastHeightTarget, alphaTarget, ringAlpha, lastAlphaTarget;
 	long creationStamp = -1, interpTicks, interpLength = -1, spinTicks;
-	private State state;
+	private ConnectionState connectionState;
 	
 	public PastelNodeBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(SpectrumBlockEntities.PASTEL_NODE, blockPos, blockState);
@@ -117,16 +117,16 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		
 		if (world.isClient()) {
 			if (node.networkUUID.isEmpty()) {
-				node.changeState(State.DISCONNECTED);
+				node.changeConnectionState(ConnectionState.DISCONNECTED);
 				node.interpLength = 17;
 			} else if (!node.canTransfer()) {
-				node.changeState(State.INACTIVE);
+				node.changeConnectionState(ConnectionState.INACTIVE);
 				node.interpLength = 21;
 			} else if (node.spinTicks > 0) {
-				node.changeState(State.ACTIVE);
+				node.changeConnectionState(ConnectionState.ACTIVE);
 				node.interpLength = 17;
 			} else {
-				node.changeState(State.CONNECTED);
+				node.changeConnectionState(ConnectionState.CONNECTED);
 				node.interpLength = 13;
 			}
 			
@@ -141,9 +141,9 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		}
 	}
 	
-	public void changeState(State state) {
-		if (this.state != state) {
-			this.state = state;
+	public void changeConnectionState(ConnectionState connectionState) {
+		if (this.connectionState != connectionState) {
+			this.connectionState = connectionState;
 			lastRotationTarget = crystalRotation;
 			lastHeightTarget = crystalHeight;
 			lastAlphaTarget = ringAlpha;
@@ -532,15 +532,15 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		return this.pos.hashCode();
 	}
 	
-	public State getState() {
-		return state;
+	public ConnectionState getState() {
+		return connectionState;
 	}
 	
 	public Optional<DyeColor> getColor() {
-		return Optional.ofNullable(this.color);
+		return this.color;
 	}
 	
-	public boolean setColor(DyeColor color, @Nullable Entity user) {
+	public boolean setColor(Optional<DyeColor> color, @Nullable Entity user) {
 		if (this.color == color)
 			return false;
 		
@@ -607,7 +607,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		return Optional.empty();
 	}
 	
-	enum State {
+	enum ConnectionState {
 		DISCONNECTED,
 		CONNECTED,
 		ACTIVE,

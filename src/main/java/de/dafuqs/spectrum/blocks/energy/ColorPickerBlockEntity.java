@@ -31,7 +31,6 @@ import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
 import net.minecraft.text.*;
-import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
@@ -54,18 +53,18 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	protected @Nullable InkConvertingRecipe cachedRecipe;
 	protected Optional<InkColor> selectedColor = Optional.empty();
 	private UUID ownerUUID;
-	private final PropertyDelegate propertyDelegate = new BlockPosDelegate(pos) { // TODO: sync using the ink sync packet instead? Currently it's hardcoded to InkColors that have a dyecolor representation
+	private final PropertyDelegate propertyDelegate = new BlockPosDelegate(pos) {
 		@Override
 		public int get(int index) {
 			if (index == 3)
-				return selectedColor.isEmpty() ? -1 : selectedColor.get().getDyeColor().getId();
+				return selectedColor.isEmpty() ? -1 : SpectrumRegistries.INK_COLOR.getRawId(selectedColor.get());
 			return super.get(index);
 		}
 
 		@Override
 		public void set(int index, int value) {
 			if (index == 3)
-				selectedColor = value == -1 ? Optional.empty() : Optional.of(InkColor.ofDyeColor(DyeColor.byId(value)));
+				selectedColor = value == -1 ? Optional.empty() : Optional.of(SpectrumRegistries.INK_COLOR.get(value));
 			else
 				super.set(index, value);
 		}

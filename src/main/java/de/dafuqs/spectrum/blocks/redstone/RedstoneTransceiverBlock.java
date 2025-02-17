@@ -17,10 +17,12 @@ import net.minecraft.state.property.*;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import net.minecraft.world.event.listener.*;
 import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public class RedstoneTransceiverBlock extends AbstractRedstoneGateBlock implements BlockEntityProvider, ColorableBlock {
 
@@ -142,17 +144,20 @@ public class RedstoneTransceiverBlock extends AbstractRedstoneGateBlock implemen
 	}
 
 	@Override
-	public boolean color(World world, BlockPos pos, DyeColor color, @Nullable Entity user) {
+	public boolean color(World world, BlockPos pos, Optional<DyeColor> color, @Nullable Entity user) {
+		if (color.isEmpty()) {
+			return false;
+		}
 		if (getColor(world, pos) == color) {
 			return false;
 		}
-		world.setBlockState(pos, world.getBlockState(pos).with(CHANNEL, color));
+		world.setBlockState(pos, world.getBlockState(pos).with(CHANNEL, color.get()));
 		return true;
 	}
 
 	@Override
-	public DyeColor getColor(World world, BlockPos pos) {
-		return world.getBlockState(pos).get(CHANNEL);
+	public Optional<DyeColor> getColor(World world, BlockPos pos) {
+		return Optional.of(world.getBlockState(pos).get(CHANNEL));
 	}
 
 }

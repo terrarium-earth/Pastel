@@ -32,5 +32,7 @@ accessible method net/minecraft/screen/ForgingScreenHandler addPlayerInventorySl
 extendable method net/minecraft/item/map/MapState <init> (IIBZZZLnet/minecraft/registry/RegistryKey;)V
 extendable method net/minecraft/item/map/MapState addDecoration (Lnet/minecraft/registry/entry/RegistryEntry;Lnet/minecraft/world/WorldAccess;Ljava/lang/String;DDDLnet/minecraft/text/Text;)V
 accessible method net/minecraft/entity/FallingBlockEntity <init> (Lnet/minecraft/world/World;DDDLnet/minecraft/block/BlockState;)V
+accessible method net/minecraft/entity/passive/WolfEntity setCollarColor (Lnet/minecraft/util/DyeColor;)V
+accessible method net/minecraft/entity/passive/CatEntity setCollarColor (Lnet/minecraft/util/DyeColor;)V
 
 mutable field net/minecraft/item/map/MapState dimension Lnet/minecraft/registry/RegistryKey;

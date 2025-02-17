@@ -3,6 +3,8 @@ package de.dafuqs.spectrum.api.interaction;
 import net.minecraft.entity.*;
 import net.minecraft.util.*;
 
+import java.util.*;
+
 public interface EntityColorProcessor<E extends Entity> {
 	
 	/**
@@ -12,6 +14,6 @@ public interface EntityColorProcessor<E extends Entity> {
 	 * @param dyeColor The dyeColor to color the entity in
 	 * @return if the coloring was successful (true if colored, false when failed, like the entity already being that color)
 	 */
-	boolean colorEntity(E entity, DyeColor dyeColor);
+	boolean colorEntity(E entity, Optional<DyeColor> dyeColor);
 	
 }
