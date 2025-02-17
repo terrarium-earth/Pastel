@@ -1,10 +1,10 @@
-package de.dafuqs.spectrum.blocks.decoration;
+package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
+import de.dafuqs.spectrum.api.energy.color.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
-import net.minecraft.util.*;
 
 import java.util.*;
 
@@ -13,13 +13,13 @@ public class ColoredStairsBlock extends StairsBlock {
 	public static final MapCodec<ColoredStairsBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			BlockState.CODEC.fieldOf("base_state").forGetter(b -> b.baseBlockState),
 			createSettingsCodec(),
-			DyeColor.CODEC.fieldOf("color").forGetter(ColoredStairsBlock::getColor)
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredStairsBlock::getColor)
 	).apply(instance, ColoredStairsBlock::new));
-
-	private static final Map<DyeColor, ColoredStairsBlock> BLOCKS = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
 	
-	public ColoredStairsBlock(BlockState baseBlockState, Settings settings, DyeColor color) {
+	private static final Map<InkColor, ColoredStairsBlock> BLOCKS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredStairsBlock(BlockState baseBlockState, Settings settings, InkColor color) {
 		super(baseBlockState, settings);
 		this.color = color;
 		BLOCKS.put(color, this);
@@ -30,11 +30,11 @@ public class ColoredStairsBlock extends StairsBlock {
 		return CODEC;
 	}
 	
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredStairsBlock byColor(DyeColor color) {
+	public static ColoredStairsBlock byColor(InkColor color) {
 		return BLOCKS.get(color);
 	}
 	

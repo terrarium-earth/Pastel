@@ -1,8 +1,8 @@
-package de.dafuqs.spectrum.blocks.decoration;
+package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
+import de.dafuqs.spectrum.api.energy.color.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
@@ -11,10 +11,10 @@ import java.util.*;
 
 public class ColoredLightBlock extends RedstoneLampBlock {
 	
-	private static final Map<DyeColor, ColoredLightBlock> LIGHTS = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
+	private static final Map<InkColor, ColoredLightBlock> LIGHTS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
 	
-	public ColoredLightBlock(Settings settings, DyeColor color) {
+	public ColoredLightBlock(Settings settings, InkColor color) {
 		super(settings);
 		this.color = color;
 		LIGHTS.put(color, this);
@@ -26,11 +26,11 @@ public class ColoredLightBlock extends RedstoneLampBlock {
 //		return null;
 //	}
 	
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredLightBlock byColor(DyeColor color) {
+	public static ColoredLightBlock byColor(InkColor color) {
 		return LIGHTS.get(color);
 	}
 	

@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.revelationary.api.revelations.*;
+import de.dafuqs.spectrum.api.energy.color.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
@@ -15,13 +16,13 @@ public class ColoredStrippedLogBlock extends PillarBlock implements RevelationAw
 
 	public static final MapCodec<ColoredStrippedLogBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			createSettingsCodec(),
-			DyeColor.CODEC.fieldOf("color").forGetter(ColoredStrippedLogBlock::getColor)
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredStrippedLogBlock::getColor)
 	).apply(instance, ColoredStrippedLogBlock::new));
-
-	private static final Map<DyeColor, ColoredStrippedLogBlock> LOGS = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
 	
-	public ColoredStrippedLogBlock(Settings settings, DyeColor color) {
+	private static final Map<InkColor, ColoredStrippedLogBlock> LOGS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredStrippedLogBlock(Settings settings, InkColor color) {
 		super(settings);
 		this.color = color;
 		LOGS.put(color, this);
@@ -53,11 +54,11 @@ public class ColoredStrippedLogBlock extends PillarBlock implements RevelationAw
 	}
 	
 	@Override
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredStrippedLogBlock byColor(DyeColor color) {
+	public static ColoredStrippedLogBlock byColor(InkColor color) {
 		return LOGS.get(color);
 	}
 	

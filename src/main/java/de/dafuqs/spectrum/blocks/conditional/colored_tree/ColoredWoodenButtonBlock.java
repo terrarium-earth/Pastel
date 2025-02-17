@@ -1,18 +1,18 @@
-package de.dafuqs.spectrum.blocks.decoration;
+package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.registries.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
-import net.minecraft.util.*;
 
 import java.util.*;
 
 public class ColoredWoodenButtonBlock extends ButtonBlock {
 	
-	private static final Map<DyeColor, ColoredWoodenButtonBlock> BLOCKS = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
+	private static final Map<InkColor, ColoredWoodenButtonBlock> BLOCKS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
 	
-	public ColoredWoodenButtonBlock(Settings settings, DyeColor color) {
+	public ColoredWoodenButtonBlock(Settings settings, InkColor color) {
 		super(SpectrumBlockSetTypes.COLORED_WOOD, 30, settings);
 		this.color = color;
 		BLOCKS.put(color, this);
@@ -24,11 +24,11 @@ public class ColoredWoodenButtonBlock extends ButtonBlock {
 //		return null;
 //	}
 	
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredWoodenButtonBlock byColor(DyeColor color) {
+	public static ColoredWoodenButtonBlock byColor(InkColor color) {
 		return BLOCKS.get(color);
 	}
 	

@@ -1,9 +1,8 @@
 package de.dafuqs.spectrum.registries;
 
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.conditional.colored_tree.*;
-import de.dafuqs.spectrum.helpers.*;
 import net.fabricmc.fabric.api.registry.*;
-import net.minecraft.util.*;
 
 public class SpectrumStrippableBlocks {
 	
@@ -20,9 +19,9 @@ public class SpectrumStrippableBlocks {
 		StrippableBlockRegistry.register(SpectrumBlocks.WEEPING_GALA_LOG, SpectrumBlocks.STRIPPED_WEEPING_GALA_LOG);
 		StrippableBlockRegistry.register(SpectrumBlocks.WEEPING_GALA_WOOD, SpectrumBlocks.STRIPPED_WEEPING_GALA_WOOD);
 		
-		for (DyeColor dyeColor : SpectrumColorHelper.VANILLA_DYE_COLORS) {
-			StrippableBlockRegistry.register(ColoredLogBlock.byColor(dyeColor), ColoredStrippedLogBlock.byColor(dyeColor));
-			StrippableBlockRegistry.register(ColoredWoodBlock.byColor(dyeColor), ColoredStrippedWoodBlock.byColor(dyeColor));
+		for (InkColor color : InkColors.all()) {
+			StrippableBlockRegistry.register(ColoredLogBlock.byColor(color), ColoredStrippedLogBlock.byColor(color));
+			StrippableBlockRegistry.register(ColoredWoodBlock.byColor(color), ColoredStrippedWoodBlock.byColor(color));
 		}
 	}
 	

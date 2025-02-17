@@ -1,18 +1,18 @@
-package de.dafuqs.spectrum.blocks.decoration;
+package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.registries.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
-import net.minecraft.util.*;
 
 import java.util.*;
 
 public class ColoredFenceGateBlock extends FenceGateBlock {
 	
-	private static final Map<DyeColor, ColoredFenceGateBlock> BLOCKS = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
+	private static final Map<InkColor, ColoredFenceGateBlock> BLOCKS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
 	
-	public ColoredFenceGateBlock(Settings settings, DyeColor color) {
+	public ColoredFenceGateBlock(Settings settings, InkColor color) {
 		super(SpectrumWoodTypes.COLORED_WOOD, settings);
 		this.color = color;
 		BLOCKS.put(color, this);
@@ -24,11 +24,11 @@ public class ColoredFenceGateBlock extends FenceGateBlock {
 //		return null;
 //	}
 	
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredFenceGateBlock byColor(DyeColor color) {
+	public static ColoredFenceGateBlock byColor(InkColor color) {
 		return BLOCKS.get(color);
 	}
 	

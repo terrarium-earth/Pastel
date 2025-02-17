@@ -1,10 +1,9 @@
-package de.dafuqs.spectrum.blocks.decoration;
+package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.api.energy.color.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
 import net.minecraft.particle.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
@@ -13,18 +12,18 @@ import java.util.*;
 
 public class ColoredSporeBlossomBlock extends SporeBlossomBlock {
 	
-	private static final Map<DyeColor, ColoredSporeBlossomBlock> BLOSSOMS = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
+	private static final Map<InkColor, ColoredSporeBlossomBlock> BLOSSOMS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
 	
 	protected final ParticleEffect fallingParticleType;
 	protected final ParticleEffect airParticleType;
 	
-	public ColoredSporeBlossomBlock(Settings settings, DyeColor color) {
+	public ColoredSporeBlossomBlock(Settings settings, InkColor color, ParticleEffect fallingParticleType, ParticleEffect airParticleType) {
 		super(settings);
 		this.color = color;
+		this.fallingParticleType = fallingParticleType;
+		this.airParticleType = airParticleType;
 		BLOSSOMS.put(color, this);
-		this.fallingParticleType = new DustParticleEffect(SpectrumColorHelper.getRGBVec(color), 1.0F);
-		this.airParticleType = new DustParticleEffect(SpectrumColorHelper.getRGBVec(color), 1.0F);
 	}
 
 //	@Override
@@ -33,11 +32,11 @@ public class ColoredSporeBlossomBlock extends SporeBlossomBlock {
 //		return null;
 //	}
 	
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredSporeBlossomBlock byColor(DyeColor color) {
+	public static ColoredSporeBlossomBlock byColor(InkColor color) {
 		return BLOSSOMS.get(color);
 	}
 	

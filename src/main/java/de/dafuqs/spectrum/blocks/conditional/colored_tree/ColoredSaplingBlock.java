@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.revelationary.api.revelations.*;
-import de.dafuqs.spectrum.registries.SpectrumSaplingGenerators;
+import de.dafuqs.spectrum.api.energy.color.*;
+import de.dafuqs.spectrum.registries.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
@@ -15,13 +16,13 @@ public class ColoredSaplingBlock extends SaplingBlock implements RevelationAware
 
 	public static final MapCodec<ColoredSaplingBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			createSettingsCodec(),
-			DyeColor.CODEC.fieldOf("color").forGetter(ColoredSaplingBlock::getColor)
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredSaplingBlock::getColor)
 	).apply(instance, ColoredSaplingBlock::new));
-
-	private static final Map<DyeColor, ColoredSaplingBlock> SAPLINGS = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
 	
-	public ColoredSaplingBlock(Settings settings, DyeColor color) {
+	private static final Map<InkColor, ColoredSaplingBlock> SAPLINGS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredSaplingBlock(Settings settings, InkColor color) {
 		super(SpectrumSaplingGenerators.get("colored_trees/" + color.toString()), settings);
 		this.color = color;
 		SAPLINGS.put(color, this);
@@ -54,11 +55,11 @@ public class ColoredSaplingBlock extends SaplingBlock implements RevelationAware
 	}
 	
 	@Override
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredSaplingBlock byColor(DyeColor color) {
+	public static ColoredSaplingBlock byColor(InkColor color) {
 		return SAPLINGS.get(color);
 	}
 	
