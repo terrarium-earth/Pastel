@@ -19,8 +19,8 @@ public class PigmentItem extends CloakedItem implements LoomPatternProvider {
 	private static final Object2ObjectArrayMap<InkColor, PigmentItem> PIGMENTS = new Object2ObjectArrayMap<>();
 	protected final InkColor color;
 	
-	public PigmentItem(Settings settings, InkColor color) {
-		super(settings, SpectrumCommon.locate("craft_colored_sapling"), DyeItem.byColor(color));
+	public PigmentItem(Settings settings, InkColor color, Item cloakItem) {
+		super(settings, SpectrumCommon.locate("craft_colored_sapling"), cloakItem);
 		this.color = color;
 		PIGMENTS.put(color, this);
 	}

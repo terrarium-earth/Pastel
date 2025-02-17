@@ -250,7 +250,7 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 			
 			if (color.isPresent()
 					&& payBlockColorCost(user, color.get())
-					&& EntityColorProcessorRegistry.colorEntity(entity, color.get().getDyeColor())) {
+					&& EntityColorProcessorRegistry.colorEntity(entity, color.get().getDyeColor(), entity instanceof PlayerEntity player ? player : null)) {
 				
 				entity.getWorld().playSoundFromEntity(null, entity, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1.0F, 1.0F);
 				return ActionResult.success(world.isClient);

@@ -1,26 +1,27 @@
 package de.dafuqs.spectrum.api.interaction;
 
 import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
 import net.minecraft.util.*;
+import org.apache.commons.lang3.function.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
-import java.util.function.*;
 
 public class EntityColorProcessorRegistry {
 	
-	private static final Map<EntityType<?>, BiFunction<Entity, Optional<DyeColor>, Boolean>> PROCESSOR = new HashMap<>();
+	private static final Map<EntityType<?>, TriFunction<Entity, Optional<DyeColor>, PlayerEntity, Boolean>> PROCESSOR = new HashMap<>();
 	
 	@SuppressWarnings("unchecked")
 	public static <E extends Entity> void register(EntityType<E> entityType, EntityColorProcessor<E> processor) {
-		BiFunction<Entity, Optional<DyeColor>, Boolean> ttt = (entity, dyeColor) -> processor.colorEntity((E) entity, dyeColor);
+		TriFunction<Entity, Optional<DyeColor>, PlayerEntity, Boolean> ttt = (entity, dyeColor, player) -> processor.colorEntity((E) entity, dyeColor, player);
 		PROCESSOR.put(entityType, ttt);
 	}
 	
-	public static boolean colorEntity(Entity entity, Optional<DyeColor> dyeColor) {
-		@Nullable BiFunction<Entity, Optional<DyeColor>, Boolean> colorProcessor = PROCESSOR.getOrDefault(entity.getType(), null);
+	public static boolean colorEntity(Entity entity, Optional<DyeColor> dyeColor, @Nullable PlayerEntity player) {
+		@Nullable TriFunction<Entity, Optional<DyeColor>, PlayerEntity, Boolean> colorProcessor = PROCESSOR.getOrDefault(entity.getType(), null);
 		if (colorProcessor != null) {
-			return colorProcessor.apply(entity, dyeColor);
+			return colorProcessor.apply(entity, dyeColor, player);
 		}
 		return false;
 	}
