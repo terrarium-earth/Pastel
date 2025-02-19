@@ -36,12 +36,13 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 	public ServerPastelNetwork createNetwork(ServerWorld world, PastelNodeBlockEntity initialNode) {
 		ServerPastelNetwork network = new ServerPastelNetwork(world, initialNode);
 		this.networks.add(network);
+		initialNode.setNetworkUUID(network.getUUID());
 		return network;
 	}
 	
 	@Override
-	public ServerPastelNetwork createNetwork(ServerWorld world, UUID uuid) {
-		ServerPastelNetwork network = new ServerPastelNetwork(world, uuid);
+	public ServerPastelNetwork createNetwork(ServerWorld world, UUID uuid, int color) {
+		ServerPastelNetwork network = new ServerPastelNetwork(world, uuid, color);
 		this.networks.add(network);
 		return network;
 	}
@@ -95,66 +96,9 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 			}
 		}
 		
-		ServerPastelNetwork network = createNetwork((ServerWorld) node.getWorld(), uuid);
+		ServerPastelNetwork network = createNetwork((ServerWorld) node.getWorld(), uuid, node.getPastelNetworkColor());
 		network.addNode(node);
 		return network;
-	}
-	
-	/**
-	 * Connect a set of Pastel Nodes - or disconnect them, if they already were connected
-	 *
-	 * @return true if they successfully connected / disconnected
-	 */
-	public boolean toggleNodeConnection(PastelNodeBlockEntity newNode, PastelNodeBlockEntity secondNode) {
-		Optional<ServerPastelNetwork> firstNetwork = newNode.getServerNetwork();
-		Optional<ServerPastelNetwork> secondNetwork = secondNode.getServerNetwork();
-		
-		if (secondNetwork.isPresent() && secondNetwork.equals(firstNetwork)) {
-			return firstNetwork.get().removeEdge(newNode, secondNode) || firstNetwork.get().addEdge(newNode, secondNode);
-		}
-		
-		ServerPastelNetwork biggerNetwork, smallerNetwork;
-		
-		// we have no network yet
-		// => Create one
-		/*if (firstNetwork.isEmpty() && secondNetwork.isEmpty()) {
-			ServerPastelNetwork newNetwork = createNetwork((ServerWorld) newNode.getWorld(), newNode.getNodeId());
-			newNetwork.addNode(secondNode);
-			secondNode.setNetworkUUID(newNetwork.getUUID());
-			newNetwork.addNodeAndConnect(newNode, secondNode);
-			return true;
-		}*/
-		
-		// Both nodes have an existing network
-		// => merge the smaller into the bigger one
-		if (firstNetwork.isPresent() && secondNetwork.isPresent()) {
-			boolean firstIsBigger = firstNetwork.get().graph.vertexSet().size() > secondNetwork.get().graph.vertexSet().size();
-			if (firstIsBigger) {
-				biggerNetwork = newNode.getServerNetwork().get();
-				smallerNetwork = secondNode.getServerNetwork().get();
-			} else {
-				smallerNetwork = newNode.getServerNetwork().get();
-				biggerNetwork = secondNode.getServerNetwork().get();
-			}
-			
-			biggerNetwork.incorporate(smallerNetwork, firstIsBigger ? newNode.getPos() : secondNode.getPos());
-			biggerNetwork.addEdge(newNode, secondNode);
-			this.networks.remove(smallerNetwork);
-			PastelNetworkEdgeSyncPayload.send(biggerNetwork, newNode.getPos());
-			return true;
-		}
-		
-		// Only one of the nodes has an existing network
-		// => add the single node to that one
-		if (firstNetwork.isPresent()) {
-			ServerPastelNetwork n = firstNetwork.get();
-			n.addNodeAndConnect(secondNode, newNode);
-		} else {
-			ServerPastelNetwork n = secondNetwork.get();
-			n.addNodeAndConnect(newNode, secondNode);
-		}
-		
-		return true;
 	}
 	
 	@Override
@@ -176,7 +120,12 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 		Optional<ServerPastelNetwork> optional = node.getServerNetwork();
 		if (optional.isPresent()) {
 			ServerPastelNetwork network = optional.get();
-			network.removeNode(node, reason);
+			
+			if (network.size() == 1) {
+				this.removeNetwork(network.getUUID());
+			} else {
+				network.removeNode(node, reason);
+			}
 		}
 	}
 	

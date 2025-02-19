@@ -28,8 +28,8 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientWo
 	}
 	
 	@Override
-	public PastelNetwork<ClientWorld> createNetwork(ClientWorld world, UUID uuid) {
-		PastelNetwork<ClientWorld> network = new PastelNetwork<>(world, uuid);
+	public PastelNetwork<ClientWorld> createNetwork(ClientWorld world, UUID uuid, int color) {
+		PastelNetwork<ClientWorld> network = new PastelNetwork<>(world, uuid, color);
 		this.networks.add(network);
 		return network;
 	}

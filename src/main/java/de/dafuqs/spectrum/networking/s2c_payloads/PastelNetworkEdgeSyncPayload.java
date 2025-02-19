@@ -19,7 +19,7 @@ import org.jgrapht.graph.*;
 
 import java.util.*;
 
-public record PastelNetworkEdgeSyncPayload(UUID networkUUID, Graph<BlockPos, DefaultEdge> graph) implements CustomPayload {
+public record PastelNetworkEdgeSyncPayload(UUID networkUUID, int color, Graph<BlockPos, DefaultEdge> graph) implements CustomPayload {
 	
 	public static final PacketCodec<RegistryByteBuf, Graph<BlockPos, DefaultEdge>> GRAPH_PACKET_CODEC = new PacketCodec<>() {
 		
@@ -68,13 +68,14 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, Graph<BlockPos, Def
 	public static final Id<PastelNetworkEdgeSyncPayload> ID = SpectrumC2SPackets.makeId("pastel_network_edge_sync");
 	public static final PacketCodec<RegistryByteBuf, PastelNetworkEdgeSyncPayload> CODEC = PacketCodec.tuple(
 			Uuids.PACKET_CODEC, PastelNetworkEdgeSyncPayload::networkUUID,
+			PacketCodecs.INTEGER, PastelNetworkEdgeSyncPayload::color,
 			GRAPH_PACKET_CODEC, PastelNetworkEdgeSyncPayload::graph,
 			PastelNetworkEdgeSyncPayload::new
 	);
 	
 	public static void send(ServerPastelNetwork network, BlockPos pos) {
 		for (ServerPlayerEntity player : PlayerLookup.tracking(network.getWorld(), pos)) {
-			ServerPlayNetworking.send(player, new PastelNetworkEdgeSyncPayload(network.getUUID(), network.getGraph()));
+			ServerPlayNetworking.send(player, new PastelNetworkEdgeSyncPayload(network.getUUID(), network.getColor(), network.getGraph()));
 		}
 	}
 	
@@ -84,11 +85,9 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, Graph<BlockPos, Def
 		client.execute(() -> {
 			Optional<? extends PastelNetwork<ClientWorld>> network = Pastel.getClientInstance().getNetwork(payload.networkUUID);
 			if (network.isPresent()) {
-				
-				
 				network.get().setGraph(payload.graph);
 			} else {
-				PastelNetwork<ClientWorld> newNetwork = Pastel.getClientInstance().createNetwork(client.world, payload.networkUUID);
+				PastelNetwork<ClientWorld> newNetwork = Pastel.getClientInstance().createNetwork(client.world, payload.networkUUID, payload.color);
 				newNetwork.setGraph(payload.graph);
 			}
 		});

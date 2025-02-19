@@ -27,6 +27,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 	public static final Codec<ServerPastelNetwork> CODEC = RecordCodecBuilder.create(i -> i.group(
 			World.CODEC.xmap(k -> SpectrumCommon.minecraftServer.getWorld(k), World::getRegistryKey).fieldOf("world").forGetter(b -> b.world),
 			Uuids.CODEC.fieldOf("uuid").forGetter(ServerPastelNetwork::getUUID),
+			Codec.INT.fieldOf("color").forGetter(ServerPastelNetwork::getColor),
 			TickLooper.CODEC.fieldOf("looper").forGetter(b -> b.transferLooper),
 			SchedulerMap.getCodec(PastelTransmission.CODEC).fieldOf("transmissions").forGetter(b -> b.transmissions)
 	).apply(i, ServerPastelNetwork::new));
@@ -40,17 +41,17 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 	protected final SchedulerMap<PastelTransmission> transmissions;
 	protected final PastelTransmissionLogic transmissionLogic;
 	
-	public ServerPastelNetwork(ServerWorld world, UUID uuid) {
-		this(world, uuid, new TickLooper(10), new SchedulerMap<>());
+	public ServerPastelNetwork(ServerWorld world, UUID uuid, int color) {
+		this(world, uuid, color, new TickLooper(10), new SchedulerMap<>());
 	}
 	
 	public ServerPastelNetwork(ServerWorld world, PastelNodeBlockEntity initialNode) {
-		this(world, initialNode.getNodeId(), new TickLooper(10), new SchedulerMap<>());
+		this(world, initialNode.getNodeId(), initialNode.getPastelNetworkColor(), new TickLooper(10), new SchedulerMap<>());
 		addNode(initialNode);
 	}
 	
-	public ServerPastelNetwork(ServerWorld world, UUID uuid, TickLooper transferLoop, SchedulerMap<PastelTransmission> transmissions) {
-		super(world, uuid);
+	public ServerPastelNetwork(ServerWorld world, UUID uuid, int color, TickLooper transferLoop, SchedulerMap<PastelTransmission> transmissions) {
+		super(world, uuid, color);
 		this.transferLooper = transferLoop;
 		this.transmissions = transmissions;
 		this.transmissionLogic = new PastelTransmissionLogic(this);
@@ -63,7 +64,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		}
 	}
 	
-	private boolean addNodeOrReturn(PastelNodeBlockEntity node) {
+	private boolean addLoadedNode(PastelNodeBlockEntity node) {
 		return !this.loadedNodes.get(node.getNodeType()).add(node);
 	}
 	
@@ -151,19 +152,20 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 			loadedNodes.get(node.getNodeType()).add(node);
 			
 		} else {
-			if (addNodeOrReturn(node))
+			if (addLoadedNode(node))
 				return;
 			
 			this.graph.addVertex(node.getPos());
 		}
 		addPriorityNode(node);
+		node.setNetworkUUID(this.getUUID());
 	}
 	
 	/**
 	 * Note: this does not check if the nodes can connect, that should be done before calling this method.
 	 */
 	protected void addNodeAndConnect(PastelNodeBlockEntity newNode, PastelNodeBlockEntity existing) {
-		if (addNodeOrReturn(newNode))
+		if (addLoadedNode(newNode))
 			return;
 		
 		this.graph.addVertex(newNode.getPos());
@@ -289,7 +291,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		this.transmissionLogic.invalidateCache();
 	}
 	
-	protected void incorporate(ServerPastelNetwork networkToIncorporate, BlockPos trackingPos) {
+	public void incorporate(ServerPastelNetwork networkToIncorporate, BlockPos trackingPos) {
 		for (Map.Entry<PastelNodeType, Set<PastelNodeBlockEntity>> nodesToIncorporate : networkToIncorporate.loadedNodes.entrySet()) {
 			for (PastelNodeBlockEntity nodeToIncorporate : nodesToIncorporate.getValue()) {
 				addNode(nodeToIncorporate);
@@ -307,7 +309,6 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		
 		Pastel.getServerInstance().removeNetwork(networkToIncorporate.getUUID());
 		this.transmissionLogic.invalidateCache();
-		PastelNetworkEdgeSyncPayload.send(this, trackingPos);
 	}
 	
 	protected void removeNode(PastelNodeBlockEntity node, NodeRemovalReason reason) {
@@ -326,53 +327,39 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 			checkForNetworkSplit(node.getPos());
 			PastelNetworkEdgeSyncPayload.send(this, node.getPos());
 		}
-		
-	}
-
-	@Override
-	public boolean removeEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity otherNode) {
-		Optional<ServerPastelNetwork> network = node.getServerNetwork();
-		if (network.isEmpty()) {
-			throw new IllegalStateException("Attempted to remove an edge from a null network");
-		}
-		
-		Optional<ServerPastelNetwork> otherNetwork = otherNode.getServerNetwork();
-		if (otherNetwork.isEmpty() || !network.get().equals(otherNetwork.get())) {
-			throw new IllegalArgumentException("Can't remove an edge between nodes in different networks - how did you even do this");
-		}
-		
-		boolean success = super.removeEdge(node, otherNode);
-		if (success) {
-			checkForNetworkSplit(node.getPos());
-			this.transmissionLogic.invalidateCache();
-			PastelNetworkEdgeSyncPayload.send(this, node.getPos());
-		}
-		
-		return success;
 	}
 	
 	@Override
-	public boolean addEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity otherNode) {
-		Optional<ServerPastelNetwork> network = node.getServerNetwork();
+	public boolean addEdge(PastelNodeBlockEntity existingNode, PastelNodeBlockEntity newNode) {
+		Optional<ServerPastelNetwork> network = existingNode.getServerNetwork();
 		
 		if (network.isEmpty()) {
 			throw new IllegalStateException("Attempted to add an edge to a null network");
 		}
+		if (network.get() != this) {
+			throw new IllegalStateException("Attempted to add an edge to a foreign network");
+		}
 		
-		Optional<ServerPastelNetwork> otherNetwork = otherNode.getServerNetwork();
-		if (otherNetwork.isEmpty() || !network.get().equals(otherNetwork.get())) {
+		Optional<ServerPastelNetwork> otherNetwork = newNode.getServerNetwork();
+		if (otherNetwork.isPresent() && !otherNetwork.equals(network)) {
 			throw new IllegalArgumentException("Can't add an edge between nodes in different networks");
 		}
-		
-		if (node == otherNode || network.get().hasEdge(node.getPos(), otherNode.getPos()))
-			return false;
-		
-		boolean success = super.addEdge(node, otherNode);
-		if (success) {
-			this.transmissionLogic.invalidateCache();
-			PastelNetworkEdgeSyncPayload.send(this, node.getPos());
+		if (existingNode == newNode) {
+			throw new IllegalStateException("Attempted to connect a node to itself");
 		}
-		return success;
+		
+		if (network.get().hasEdge(existingNode.getPos(), newNode.getPos())) {
+			throw new IllegalStateException("Attempted to add an edge that already exists");
+		}
+		
+		addNode(newNode);
+		
+		return super.addEdge(existingNode, newNode);
+	}
+	
+	public void markDirty(BlockPos syncPos) {
+		this.transmissionLogic.invalidateCache();
+		PastelNetworkEdgeSyncPayload.send(this, syncPos);
 	}
 	
 	protected void tick() {

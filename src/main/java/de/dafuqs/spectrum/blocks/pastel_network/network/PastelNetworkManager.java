@@ -6,7 +6,7 @@ import java.util.*;
 
 public interface PastelNetworkManager<W extends World, N extends PastelNetwork<W>> {
 	
-	N createNetwork(W world, UUID uuid);
+	N createNetwork(W world, UUID uuid, int color);
 	
 	Optional<? extends N> getNetwork(UUID uuid);
 	

@@ -144,9 +144,9 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 				if (!world.isClient) {
 					var removed = blockEntity.tryRemoveUpgrade();
 					if (!removed.isEmpty()) {
-						if (!player.getAbilities().creativeMode)
+						if (!player.getAbilities().creativeMode) {
 							player.getInventory().offerOrDrop(removed);
-						
+						}
 						blockEntity.updateUpgrades();
 						blockEntity.markDirty();
 						blockEntity.updateInClientWorld();
@@ -154,9 +154,9 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 				}
 				return ItemActionResult.success(world.isClient());
 			}
-			return ItemActionResult.FAIL;
-		} else if (stack.isOf(SpectrumItems.PAINTBRUSH)) {
-			sendDebugMessage(world, player, blockEntity);
+			return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		} else if (player.isSneaking() && player.isCreative() && stack.isOf(SpectrumItems.PAINTBRUSH)) {
+			sendDebugMessage(world, pos, player, blockEntity);
 			return ItemActionResult.success(world.isClient());
 		} else if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_UPGRADING) && stack.isIn(SpectrumItemTags.PASTEL_NODE_UPGRADES)) {
 			if (!world.isClient() && blockEntity.tryInteractRings(stack, pastelNodeType)) {
@@ -171,12 +171,10 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 			world.playSoundAtBlockCenter(pos, SpectrumSoundEvents.MEDIUM_CRYSTAL_RING, SoundCategory.BLOCKS, 0.25F, 0.9F + world.getRandom().nextFloat() * 0.2F, true);
 			return ItemActionResult.success(world.isClient());
 		} else if (this.pastelNodeType.usesFilters()) {
-			if (world.isClient) {
-				return ItemActionResult.SUCCESS;
-			} else {
+			if (!world.isClient) {
 				player.openHandledScreen(blockEntity);
-				return ItemActionResult.CONSUME;
 			}
+			return ItemActionResult.success(world.isClient());
 		}
 		
 		return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
@@ -197,14 +195,16 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 		world.setBlockState(pos, state.with(REDSTONE_EMITTING, false));
 	}
 	
-	private static void sendDebugMessage(World world, PlayerEntity player, PastelNodeBlockEntity blockEntity) {
+	private static void sendDebugMessage(World world, BlockPos pos, PlayerEntity player, PastelNodeBlockEntity blockEntity) {
 		if (blockEntity != null) {
 			Optional<? extends PastelNetwork<?>> network = blockEntity.networkUUID.isPresent() ? Pastel.getInstance(world.isClient).getNetwork(blockEntity.networkUUID.get()) : Optional.empty();
-			String prefix = world.isClient ? "C" : "S";
+			String prefix = world.isClient ? "C (" : "S (";
+			Optional<DyeColor> color = blockEntity.getColor();
+			String colorString = color.isEmpty() ? "<uncolored>" : color.get().toString();
 			if (network.isEmpty()) {
-				player.sendMessage(Text.literal(prefix + ": No connected network :("));
+				player.sendMessage(Text.literal(prefix + colorString + "): No connected network :("));
 			} else {
-				player.sendMessage(Text.literal(prefix + ": " + network.get().getNodeDebugText()));
+				player.sendMessage(Text.literal(prefix + colorString + "): " + network.get().getNodeDebugText()));
 			}
 		}
 	}

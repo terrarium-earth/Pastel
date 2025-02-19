@@ -1,11 +1,9 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import de.dafuqs.spectrum.helpers.*;
 import net.minecraft.nbt.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
-import org.jetbrains.annotations.*;
 import org.jgrapht.*;
 import org.jgrapht.graph.*;
 
@@ -17,6 +15,7 @@ public class PastelNetwork<W extends World> {
 	protected Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 	protected final W world;
 	protected final UUID uuid;
+	protected final int color;
 	
 	public enum NodePriority {
         GENERIC,
@@ -24,9 +23,10 @@ public class PastelNetwork<W extends World> {
         HIGH
     }
 	
-	public PastelNetwork(W world, @Nullable UUID uuid) {
+	public PastelNetwork(W world, UUID uuid, int color) {
 		this.world = world;
-		this.uuid = uuid == null ? UUID.randomUUID() : uuid;
+		this.uuid = uuid;
+		this.color = color;
 	}
 	
 	public int size() {
@@ -54,10 +54,6 @@ public class PastelNetwork<W extends World> {
 		return false;
 	}
 	
-	public boolean removeEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
-		return graph.removeEdge(node.getPos(), parent.getPos()) != null;
-	}
-	
 	public boolean hasEdge(BlockPos pos1, BlockPos pos2) {
 		if (!graph.containsVertex(pos1) || !graph.containsVertex(pos2))
 			return false;
@@ -71,7 +67,7 @@ public class PastelNetwork<W extends World> {
     }
 
     public int getColor() {
-		return SpectrumColorHelper.getRandomColor(this.uuid.hashCode());
+		return this.color;
     }
 	
 	public void setGraph(Graph<BlockPos, DefaultEdge> graph) {
@@ -83,7 +79,7 @@ public class PastelNetwork<W extends World> {
 		if (other == this) {
 			return true;
 		}
-        if (other instanceof PastelNetwork p) {
+		if (other instanceof PastelNetwork<?> p) {
             return this.uuid.equals(p.uuid);
         }
         return false;

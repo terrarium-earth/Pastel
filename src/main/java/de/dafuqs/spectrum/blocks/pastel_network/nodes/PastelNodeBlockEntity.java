@@ -6,10 +6,12 @@ import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.pastel.*;
 import de.dafuqs.spectrum.blocks.pastel_network.*;
 import de.dafuqs.spectrum.blocks.pastel_network.network.*;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.fabricmc.fabric.api.lookup.v1.block.*;
 import net.fabricmc.fabric.api.screenhandler.v1.*;
 import net.fabricmc.fabric.api.transfer.v1.item.*;
@@ -53,6 +55,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	protected UUID nodeId = UUID.randomUUID();
 	protected Optional<UUID> networkUUID = Optional.empty();
 	protected Optional<PastelUpgradeSignature> outerRing, innerRing, redstoneRing;
+	protected Optional<DyeColor> color = Optional.empty();
 	
 	// TODO: move these to ServerPastelNetwork?
 	protected long lastTransferTick = 0;
@@ -60,8 +63,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	protected boolean cachedUnpowered = true;
 	protected PastelNetwork.NodePriority priority = PastelNetwork.NodePriority.GENERIC;
 	protected long itemCountUnderway = 0;
-	@Nullable
-	protected Optional<DyeColor> color = Optional.empty();
+	
 	
 	// upgrade impl stuff
 	protected boolean lit, triggerTransfer, triggered, waiting, lamp, sensor, updated;
@@ -274,6 +276,8 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	@Override
 	public void setWorld(World world) {
 		super.setWorld(world);
+		
+		/* TODO: this freezes the world on join
 		if (creationStamp == -1) {
 			creationStamp = (world.getTime() + world.getRandom().nextInt(7)) % 20;
 		}
@@ -281,6 +285,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		if (!world.isClient && this.networkUUID.isPresent()) {
 			this.networkUUID = Optional.of(Pastel.getServerInstance().joinOrCreateNetwork(this, this.networkUUID.get()).getUUID());
 		}
+		*/
 	}
 	
 	public float getRedstoneAlphaMult() {
@@ -545,54 +550,104 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 			return false;
 		
 		this.color = color;
+		if (!world.isClient()) {
+			connectToNearbyNodes(user);
+		}
 		
-		// remove from existing network, if it had one and join new networks
-		Pastel.getServerInstance().removeNode(this, NodeRemovalReason.DISCONNECT);
-		connectToNearbyNodes(user);
-
 		return true;
 	}
 	
 	public void connectToNearbyNodes(@Nullable Entity user) {
-		PastelNodeBlockEntity biggestNetworkNode = null;
-		int biggestNetwork = 0;
-		List<PastelNodeBlockEntity> otherNearbyNodes = new ArrayList<>();
+		// remove from existing network, if it had one and join new networks
+		Pastel.getServerInstance().removeNode(this, NodeRemovalReason.DISCONNECT);
 		
+		// scan for all connectable nearby nodes
+		Map<Optional<ServerPastelNetwork>, List<PastelNodeBlockEntity>> connectableNodes = new Object2ObjectArrayMap<>();
+		ServerPastelNetwork biggestNetwork = null;
 		for (BlockPos pos : BlockPos.iterateOutwards(this.pos, RANGE, RANGE, RANGE)) {
 			Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE);
 			if (blockEntity.isPresent() && canConnect(this, blockEntity.get())) {
-				Optional<ServerPastelNetwork> network = blockEntity.get().getServerNetwork();
-				int size = network.isPresent() ? network.get().size() : 0;
-				if (size > biggestNetwork) {
-					biggestNetwork = size;
-					if (biggestNetworkNode != null) {
-						otherNearbyNodes.add(biggestNetworkNode);
-					}
-					biggestNetworkNode = blockEntity.get();
+				PastelNodeBlockEntity connectableNode = blockEntity.get();
+				Optional<ServerPastelNetwork> connectableNetwork = connectableNode.getServerNetwork();
+				if (connectableNodes.containsKey(connectableNetwork)) {
+					connectableNodes.get(connectableNetwork).add(connectableNode);
 				} else {
-					otherNearbyNodes.add(blockEntity.get());
+					List<PastelNodeBlockEntity> newList = new ArrayList<>();
+					newList.add(connectableNode);
+					connectableNodes.put(connectableNetwork, newList);
+				}
+				if (connectableNetwork.isPresent()) {
+					if (biggestNetwork == null) {
+						biggestNetwork = connectableNetwork.get();
+					} else if (connectableNetwork.get().size() > biggestNetwork.size()) {
+						biggestNetwork = connectableNetwork.get();
+					}
 				}
 			}
 		}
 		
-		ServerPastelNetworkManager manager = Pastel.getServerInstance();
-		ServerPastelNetwork network;
-		if (biggestNetworkNode != null) {
-			manager.toggleNodeConnection(this, biggestNetworkNode);
-			network = this.getServerNetwork().get();
-		} else if (otherNearbyNodes.isEmpty()) {
-			// no nodes to connect to? Well, we don't then
-			return;
-		} else {
+		ServerPastelNetwork network = null;
+		int foundNetworkCount = connectableNodes.size() - (connectableNodes.containsKey(Optional.empty()) ? 1 : 0);
+		
+		// no other nodes in sight
+		if (connectableNodes.isEmpty()) {
+			// no nodes to connect to.
+		} else if (foundNetworkCount == 0) {
+			// there are other nodes, but none of those have a network yet
+			// => create one!
+			
 			network = Pastel.getServerInstance().createNetwork((ServerWorld) world, this);
+			for (PastelNodeBlockEntity entry : connectableNodes.get(Optional.empty())) {
+				network.addEdge(this, entry);
+			}
+		} else if (foundNetworkCount == 1) {
+			// there is exactly one other network
+			// => add this node to it
+			
+			List<PastelNodeBlockEntity> nodesWithoutNetwork = null;
+			for (Map.Entry<Optional<ServerPastelNetwork>, List<PastelNodeBlockEntity>> entry : connectableNodes.entrySet()) {
+				Optional<ServerPastelNetwork> currentNetwork = entry.getKey();
+				if (currentNetwork.equals(Optional.empty())) {
+					nodesWithoutNetwork = entry.getValue();
+				} else {
+					network = currentNetwork.get();
+					for (PastelNodeBlockEntity currentNode : entry.getValue()) {
+						currentNetwork.get().addEdge(currentNode, this);
+					}
+				}
+			}
+			
+			if (nodesWithoutNetwork != null) {
+				for (PastelNodeBlockEntity nodeWithoutNetwork : nodesWithoutNetwork) {
+					network.addEdge(this, nodeWithoutNetwork);
+				}
+			}
+		} else {
+			// there are multiple networks and potentially even nodes without a network yet around!
+			// => connect to the biggest one, merge the others into it and then connect nodes without a pre-existing network
+			List<PastelNodeBlockEntity> biggestNetworkNodes = connectableNodes.get(Optional.of(biggestNetwork));
+			for (PastelNodeBlockEntity currentNode : biggestNetworkNodes) {
+				biggestNetwork.addEdge(currentNode, this);
+			}
+			
+			for (Map.Entry<Optional<ServerPastelNetwork>, List<PastelNodeBlockEntity>> entry : connectableNodes.entrySet()) {
+				Optional<ServerPastelNetwork> currentNetwork = entry.getKey();
+				if (!currentNetwork.equals(Optional.of(biggestNetwork))) {
+					if (currentNetwork.isPresent()) {
+						biggestNetwork.incorporate(currentNetwork.get(), this.getPos());
+					}
+					for (PastelNodeBlockEntity currentNode : entry.getValue()) {
+						biggestNetwork.addEdge(this, currentNode);
+					}
+				}
+			}
 		}
 		
-		for (PastelNodeBlockEntity nearbyNode : otherNearbyNodes) {
-			manager.toggleNodeConnection(nearbyNode, this);
-		}
-		if (user instanceof ServerPlayerEntity serverPlayer) {
-			Optional<ServerPastelNetwork> thisNetwork = getServerNetwork();
-			thisNetwork.ifPresent(serverPastelNetwork -> SpectrumAdvancementCriteria.PASTEL_NETWORK_CREATING.trigger(serverPlayer, network));
+		if (network != null) {
+			network.markDirty(this.getPos());
+			if (user instanceof ServerPlayerEntity serverPlayer) {
+				SpectrumAdvancementCriteria.PASTEL_NETWORK_CREATING.trigger(serverPlayer, network);
+			}
 		}
 	}
 	
@@ -605,6 +660,11 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 			return Pastel.getServerInstance().getNetwork(this.networkUUID.get());
 		}
 		return Optional.empty();
+	}
+	
+	public int getPastelNetworkColor() {
+		Optional<DyeColor> color = getColor();
+		return color.isPresent() ? color.get().getEntityColor() : SpectrumColorHelper.getRandomColor(getNodeId().hashCode());
 	}
 	
 	enum ConnectionState {
