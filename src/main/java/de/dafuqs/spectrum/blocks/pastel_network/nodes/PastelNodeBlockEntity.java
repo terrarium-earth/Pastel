@@ -739,4 +739,13 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 			priority = PastelNetwork.NodePriority.HIGH;
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return this.getNodeType().toString() + "-" +
+				this.getColor().toString() + "-" +
+				this.getPos().toString() + "-" +
+				this.getNodeId();
+	}
+	
 }
