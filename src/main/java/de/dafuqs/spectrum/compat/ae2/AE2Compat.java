@@ -2,7 +2,6 @@ package de.dafuqs.spectrum.compat.ae2;
 
 import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.compat.*;
-import de.dafuqs.spectrum.data.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.registries.SpectrumItems.*;
 import de.dafuqs.spectrum.registries.client.*;
@@ -22,8 +21,8 @@ public class AE2Compat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public static Block LARGE_FLUIX_BUD = SpectrumBlocks.registerClusterBlock("large_fluix_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_FLUIX_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.YELLOW);
 	public static Block FLUIX_CLUSTER = SpectrumBlocks.registerClusterBlock("fluix_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_FLUIX_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.YELLOW);
 	
-	public static Block PURE_CERTUS_QUARTZ_BLOCK = SpectrumBlocks.registerCustom("pure_certus_quartz_block", new Block(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.3F).sounds(BlockSoundGroup.GLASS)), DyeColor.YELLOW, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static Block PURE_FLUIX_BLOCK = SpectrumBlocks.registerCustom("pure_fluix_block", new Block(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.3F).sounds(BlockSoundGroup.GLASS)), DyeColor.YELLOW, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
+	public static Block PURE_CERTUS_QUARTZ_BLOCK = SpectrumBlocks.registerSimple("pure_certus_quartz_block", new Block(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.3F).sounds(BlockSoundGroup.GLASS)), DyeColor.YELLOW);
+	public static Block PURE_FLUIX_BLOCK = SpectrumBlocks.registerSimple("pure_fluix_block", new Block(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.3F).sounds(BlockSoundGroup.GLASS)), DyeColor.YELLOW);
 	
 	public static Item PURE_CERTUS_QUARTZ = SpectrumItems.registerDeferred("pure_certus_quartz", new Item(IS.of()), DyeColor.YELLOW);
 	public static Item PURE_FLUIX = SpectrumItems.registerDeferred("pure_fluix", new Item(IS.of()), DyeColor.YELLOW);

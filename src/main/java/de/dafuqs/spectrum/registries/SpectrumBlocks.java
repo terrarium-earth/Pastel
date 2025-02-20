@@ -715,9 +715,47 @@ public class SpectrumBlocks {
 		return settings(MapColor.OFF_WHITE, soundGroup, ASH_STRENGTH, ASH_STRENGTH).requiresTool();
 	}
 	
-	public static final Block ASHEN_BLACKSLAG = new BlackslagBlock(blackslag(BlockSoundGroup.DEEPSLATE).mapColor(MapColor.OFF_WHITE));
-	public static final Block ASH = new AshBlock(ash(BlockSoundGroup.POWDER_SNOW));
-	public static final Block ASH_PILE = new AshPileBlock(ash(BlockSoundGroup.POWDER_SNOW).replaceable().blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8).pistonBehavior(PistonBehavior.DESTROY));
+	public static final Block ASHEN_BLACKSLAG = registerCustom("ashen_blackslag", new BlackslagBlock(blackslag(BlockSoundGroup.DEEPSLATE).mapColor(MapColor.OFF_WHITE)), DyeColor.LIGHT_GRAY, block ->
+			registerSingletonBlockModel(block, TexturedModel.makeFactory(b -> TextureMap.sideAndTop(b).put(TextureKey.PARTICLE, TextureMap.getSubId(block, "_top")).put(TextureKey.BOTTOM, TextureMap.getSubId(BLACKSLAG, "_top")), SpectrumModels.CUBE_BOTTOM_TOP_PARTICLE)));
+	public static final Block ASH = registerCustom("ash", new AshBlock(ash(BlockSoundGroup.POWDER_SNOW)), DyeColor.GRAY, block ->
+			registerVariantsBlockModel(modelCollector -> VariantsBlockStateSupplier.create(block,
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, TextureMap.all(block), modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "2", TextureMap.all(TextureMap.getSubId(block, "2")), modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "3", TextureMap.all(TextureMap.getSubId(block, "3")), modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "4", TextureMap.all(TextureMap.getSubId(block, "4")), modelCollector))
+			)));
+	public static final Block ASH_PILE = registerCustom("ash_pile", new AshPileBlock(ash(BlockSoundGroup.POWDER_SNOW).replaceable().blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIGHT_GRAY, block -> {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			BlockStateVariantMap variantMap = BlockStateVariantMap.create(Properties.LAYERS).registerVariants(height -> {
+				Identifier ash = TextureMap.getId(ASH);
+				Identifier ash2 = TextureMap.getSubId(ASH, "2");
+				Identifier ash3 = TextureMap.getSubId(ASH, "3");
+				Identifier ash4 = TextureMap.getSubId(ASH, "4");
+				if (height == 8) {
+					return List.of(
+							BlockStateVariant.create().put(VariantSettings.MODEL, ash),
+							BlockStateVariant.create().put(VariantSettings.MODEL, ash2),
+							BlockStateVariant.create().put(VariantSettings.MODEL, ash3),
+							BlockStateVariant.create().put(VariantSettings.MODEL, ash4)
+					);
+				}
+				Model layerModel = new Model(Optional.of(ModelIds.getBlockSubModelId(Blocks.SNOW, "_height" + height * 2)), Optional.empty(), TextureKey.PARTICLE, TextureKey.TEXTURE);
+				Identifier ash_pile = SpectrumCommon.locate("block/ash_pile_height" + height * 2);
+				Identifier ash2_pile = SpectrumCommon.locate("block/ash2_pile_height" + height * 2);
+				Identifier ash3_pile = SpectrumCommon.locate("block/ash3_pile_height" + height * 2);
+				Identifier ash4_pile = SpectrumCommon.locate("block/ash4_pile_height" + height * 2);
+				return List.of(
+						BlockStateVariant.create().put(VariantSettings.MODEL, layerModel.upload(ash_pile, TextureMap.all(ash), ctx.modelCollector)),
+						BlockStateVariant.create().put(VariantSettings.MODEL, layerModel.upload(ash2_pile, TextureMap.all(ash2), ctx.modelCollector)),
+						BlockStateVariant.create().put(VariantSettings.MODEL, layerModel.upload(ash3_pile, TextureMap.all(ash3), ctx.modelCollector)),
+						BlockStateVariant.create().put(VariantSettings.MODEL, layerModel.upload(ash4_pile, TextureMap.all(ash4), ctx.modelCollector))
+				);
+			});
+			BlockStateSupplier supplier = VariantsBlockStateSupplier.create(block).coordinate(variantMap);
+			ctx.blockStateCollector.accept(supplier);
+			ctx.registerParentedItemModel(block, ModelIds.getBlockSubModelId(block, "_height2"));
+		});
+	});
 	
 	public static final Block VARIA_SPROUT = new AshFloraBlock(settings(MapColor.WHITE, BlockSoundGroup.NETHER_STEM, 0F).breakInstantly().luminance(state -> 11).offset(OffsetType.XZ).dynamicBounds().noCollision().postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
 	
@@ -1509,19 +1547,19 @@ public class SpectrumBlocks {
 	public static final Block LARGE_PRISMARINE_BUD = registerClusterBlock("large_prismarine_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_PRISMARINE_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
 	public static final Block PRISMARINE_CLUSTER = registerClusterBlock("prismarine_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_PRISMARINE_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
 	
-	public static final Block PURE_COAL_BLOCK = registerCustom("pure_coal_block", new Block(AbstractBlock.Settings.copy(Blocks.COAL_BLOCK)), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_IRON_BLOCK = registerCustom("pure_iron_block", new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_GOLD_BLOCK = registerCustom("pure_gold_block", new Block(AbstractBlock.Settings.copy(Blocks.GOLD_BLOCK)), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_DIAMOND_BLOCK = registerCustom("pure_diamond_block", new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK)), DyeColor.CYAN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_EMERALD_BLOCK = registerCustom("pure_emerald_block", new Block(AbstractBlock.Settings.copy(Blocks.EMERALD_BLOCK)), DyeColor.CYAN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_REDSTONE_BLOCK = registerCustom("pure_redstone_block", new PureRedstoneBlock(AbstractBlock.Settings.copy(Blocks.REDSTONE_BLOCK)), DyeColor.RED, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_LAPIS_BLOCK = registerCustom("pure_lapis_block", new Block(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK)), DyeColor.PURPLE, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_COPPER_BLOCK = registerCustom("pure_copper_block", new Block(AbstractBlock.Settings.copy(Blocks.COPPER_BLOCK)), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_QUARTZ_BLOCK = registerCustom("pure_quartz_block", new Block(AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK)), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_GLOWSTONE_BLOCK = registerCustom("pure_glowstone_block", new Block(AbstractBlock.Settings.copy(Blocks.GLOWSTONE)), DyeColor.YELLOW, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_PRISMARINE_BLOCK = registerCustom("pure_prismarine_block", new Block(AbstractBlock.Settings.copy(Blocks.PRISMARINE)), DyeColor.CYAN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
+	public static final Block PURE_COAL_BLOCK = registerSimple("pure_coal_block", new Block(AbstractBlock.Settings.copy(Blocks.COAL_BLOCK)), DyeColor.BROWN);
+	public static final Block PURE_IRON_BLOCK = registerSimple("pure_iron_block", new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)), DyeColor.BROWN);
+	public static final Block PURE_GOLD_BLOCK = registerSimple("pure_gold_block", new Block(AbstractBlock.Settings.copy(Blocks.GOLD_BLOCK)), DyeColor.BROWN);
+	public static final Block PURE_DIAMOND_BLOCK = registerSimple("pure_diamond_block", new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK)), DyeColor.CYAN);
+	public static final Block PURE_EMERALD_BLOCK = registerSimple("pure_emerald_block", new Block(AbstractBlock.Settings.copy(Blocks.EMERALD_BLOCK)), DyeColor.CYAN);
+	public static final Block PURE_REDSTONE_BLOCK = registerSimple("pure_redstone_block", new PureRedstoneBlock(AbstractBlock.Settings.copy(Blocks.REDSTONE_BLOCK)), DyeColor.RED);
+	public static final Block PURE_LAPIS_BLOCK = registerSimple("pure_lapis_block", new Block(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK)), DyeColor.PURPLE);
+	public static final Block PURE_COPPER_BLOCK = registerSimple("pure_copper_block", new Block(AbstractBlock.Settings.copy(Blocks.COPPER_BLOCK)), DyeColor.BROWN);
+	public static final Block PURE_QUARTZ_BLOCK = registerSimple("pure_quartz_block", new Block(AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK)), DyeColor.BROWN);
+	public static final Block PURE_GLOWSTONE_BLOCK = registerSimple("pure_glowstone_block", new Block(AbstractBlock.Settings.copy(Blocks.GLOWSTONE)), DyeColor.YELLOW);
+	public static final Block PURE_PRISMARINE_BLOCK = registerSimple("pure_prismarine_block", new Block(AbstractBlock.Settings.copy(Blocks.PRISMARINE)), DyeColor.CYAN);
 	public static final Block PURE_NETHERITE_SCRAP_BLOCK = registerCustom("pure_netherite_scrap_block", new Block(AbstractBlock.Settings.copy(Blocks.ANCIENT_DEBRIS)), IS.of().fireproof(), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
-	public static final Block PURE_ECHO_BLOCK = registerCustom("pure_echo_block", new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK)), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
+	public static final Block PURE_ECHO_BLOCK = registerSimple("pure_echo_block", new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK)), DyeColor.BROWN);
 	
 	private static Settings preservationBlock() {
 		return settings(MapColor.LIGHT_BLUE_GRAY, BlockSoundGroup.STONE, -1.0F, 3600000.0F).instrument(NoteBlockInstrument.BASEDRUM).dropsNothing().allowsSpawning(SpectrumBlocks::never);
@@ -1911,7 +1949,6 @@ public class SpectrumBlocks {
 		registerRedstone(IS.of());
 		registerMagicalBlocks(IS.of());
 		registerMobBlocks(IS.of());
-		registerPureOreBlocks(IS.of());
 		registerJadeVineBlocks(IS.of());
 		registerSugarSticks(IS.of());
 		registerStructureBlocks(IS.of());
@@ -1974,9 +2011,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("overgrown_blackslag", OVERGROWN_BLACKSLAG, settings, DyeColor.LIME);
 		registerBlockWithItem("shimmel", SHIMMEL, settings, DyeColor.LIME);
 		registerBlockWithItem("rotten_ground", ROTTEN_GROUND, settings, DyeColor.LIME);
-		registerBlockWithItem("ashen_blackslag", ASHEN_BLACKSLAG, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("ash", ASH, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("ash_pile", ASH_PILE, settings, DyeColor.LIGHT_GRAY);
 		
 		registerBlockWithItem("slate_noxcap_block", SLATE_NOXCAP_BLOCK, settings, DyeColor.LIME);
 		registerBlockWithItem("slate_noxcap_stem", SLATE_NOXCAP_STEM, settings, DyeColor.LIME);
@@ -2577,22 +2611,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("citrine_sugar_stick", CITRINE_SUGAR_STICK, settings, DyeColor.PINK);
 		registerBlockWithItem("onyx_sugar_stick", ONYX_SUGAR_STICK, settings, DyeColor.PINK);
 		registerBlockWithItem("moonstone_sugar_stick", MOONSTONE_SUGAR_STICK, settings, DyeColor.PINK);
-	}
-	
-	private static void registerPureOreBlocks(Item.Settings settings) {
-		registerBlockWithItem("pure_coal_block", PURE_COAL_BLOCK, settings, DyeColor.BROWN);
-		registerBlockWithItem("pure_iron_block", PURE_IRON_BLOCK, settings, DyeColor.BROWN);
-		registerBlockWithItem("pure_gold_block", PURE_GOLD_BLOCK, settings, DyeColor.BROWN);
-		registerBlockWithItem("pure_diamond_block", PURE_DIAMOND_BLOCK, settings, DyeColor.CYAN);
-		registerBlockWithItem("pure_emerald_block", PURE_EMERALD_BLOCK, settings, DyeColor.CYAN);
-		registerBlockWithItem("pure_redstone_block", PURE_REDSTONE_BLOCK, settings, DyeColor.RED);
-		registerBlockWithItem("pure_lapis_block", PURE_LAPIS_BLOCK, settings, DyeColor.PURPLE);
-		registerBlockWithItem("pure_copper_block", PURE_COPPER_BLOCK, settings, DyeColor.BROWN);
-		registerBlockWithItem("pure_quartz_block", PURE_QUARTZ_BLOCK, settings, DyeColor.BROWN);
-		registerBlockWithItem("pure_glowstone_block", PURE_GLOWSTONE_BLOCK, settings, DyeColor.YELLOW);
-		registerBlockWithItem("pure_prismarine_block", PURE_PRISMARINE_BLOCK, settings, DyeColor.CYAN);
-		registerBlockWithItem("pure_netherite_scrap_block", PURE_NETHERITE_SCRAP_BLOCK, IS.of().fireproof(), DyeColor.BROWN);
-		registerBlockWithItem("pure_echo_block", PURE_ECHO_BLOCK, settings, DyeColor.BROWN);
 	}
 	
 	private static void registerMobBlocks(Item.Settings settings) {

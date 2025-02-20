@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.data;
 
+import com.google.gson.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.datagen.v1.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
@@ -8,6 +9,8 @@ import net.minecraft.data.client.*;
 import net.minecraft.data.family.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
+
+import java.util.function.*;
 
 import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
 
@@ -36,6 +39,10 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	
 	public static void registerSingletonBlockModel(Block block, TexturedModel.Factory factory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(block, factory));
+	}
+	
+	public static void registerVariantsBlockModel(Function<BiConsumer<Identifier, Supplier<JsonElement>>, VariantsBlockStateSupplier> factory) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(factory.apply(ctx.modelCollector)));
 	}
 	
 	public static void registerSimpleCubeAllBlockModel(Block block) {

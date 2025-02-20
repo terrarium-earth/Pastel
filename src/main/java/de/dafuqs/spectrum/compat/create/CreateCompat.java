@@ -4,7 +4,6 @@ import com.simibubi.create.api.event.*;
 import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.blocks.fluid.*;
 import de.dafuqs.spectrum.compat.*;
-import de.dafuqs.spectrum.data.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.registries.SpectrumItems.*;
 import de.dafuqs.spectrum.registries.client.*;
@@ -23,7 +22,7 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public static Block SMALL_ZINC_BUD = SpectrumBlocks.registerClusterBlock("small_zinc_bud", new SpectrumClusterBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).hardness(1.0f).mapColor(Blocks.LIGHT_GRAY_CONCRETE.getDefaultMapColor()).requiresTool().nonOpaque(), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, Models.CROSS, DyeColor.BROWN);
 	public static Block LARGE_ZINC_BUD = SpectrumBlocks.registerClusterBlock("large_zinc_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
 	public static Block ZINC_CLUSTER = SpectrumBlocks.registerClusterBlock("zinc_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BROWN);
-	public static Block PURE_ZINC_BLOCK = SpectrumBlocks.registerCustom("pure_zinc_block", new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
+	public static Block PURE_ZINC_BLOCK = SpectrumBlocks.registerSimple("pure_zinc_block", new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)), DyeColor.BROWN);
 	
 	public static Item PURE_ZINC = SpectrumItems.registerDeferred("pure_zinc", new Item(IS.of()), DyeColor.BROWN);
 	
