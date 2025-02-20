@@ -27,7 +27,7 @@ public record PastelTransmissionPayload(int networkColor, int travelTime, Pastel
 	// TODO: we should probably also send the transmission to players that track the destination pos
 	public static void sendPastelTransmissionParticle(ServerPastelNetwork network, int travelTime, @NotNull PastelTransmission transmission) {
 		for (ServerPlayerEntity player : PlayerLookup.tracking(network.getWorld(), transmission.getStartPos())) {
-			ServerPlayNetworking.send(player, new PastelTransmissionPayload(travelTime, network.getColor(), transmission));
+			ServerPlayNetworking.send(player, new PastelTransmissionPayload(network.getColor(), travelTime, transmission));
 		}
 	}
 	

@@ -7,7 +7,6 @@ import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.*;
 import net.fabricmc.fabric.api.networking.v1.*;
 import net.minecraft.client.*;
-import net.minecraft.client.world.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
@@ -83,11 +82,11 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, int color, Graph<Bl
 	public static void execute(PastelNetworkEdgeSyncPayload payload, ClientPlayNetworking.Context context) {
 		MinecraftClient client = context.client();
 		client.execute(() -> {
-			Optional<? extends PastelNetwork<ClientWorld>> network = Pastel.getClientInstance().getNetwork(payload.networkUUID);
+			Optional<? extends ClientPastelNetwork> network = Pastel.getClientInstance().getNetwork(payload.networkUUID);
 			if (network.isPresent()) {
 				network.get().setGraph(payload.graph);
 			} else {
-				PastelNetwork<ClientWorld> newNetwork = Pastel.getClientInstance().createNetwork(client.world, payload.networkUUID, payload.color);
+				ClientPastelNetwork newNetwork = Pastel.getClientInstance().createNetwork(client.world, payload.networkUUID, payload.color);
 				newNetwork.setGraph(payload.graph);
 			}
 		});

@@ -68,7 +68,14 @@ public class SpectrumClientEventListeners {
 		
 		WorldRenderEvents.START.register(context -> HudRenderers.clearItemStackOverlay());
 		WorldRenderEvents.AFTER_ENTITIES.register(context -> ((ExtendedParticleManager) MinecraftClient.getInstance().particleManager).render(context.matrixStack(), context.consumers(), context.camera(), context.tickCounter().getTickDelta(true)));
-		WorldRenderEvents.AFTER_TRANSLUCENT.register(context -> Pastel.getClientInstance().renderLines(context));
+		WorldRenderEvents.AFTER_TRANSLUCENT.register(context -> {
+			Entity focusedEntity = context.camera().getFocusedEntity();
+			
+			if (focusedEntity instanceof LivingEntity livingEntity) {
+				boolean paintbrushInHand = livingEntity.getMainHandStack().isOf(SpectrumItems.PAINTBRUSH) || livingEntity.getOffHandStack().isOf(SpectrumItems.PAINTBRUSH);
+				Pastel.getClientInstance().renderLines(context, livingEntity, paintbrushInHand);
+			}
+		});
 		WorldRenderEvents.BLOCK_OUTLINE.register(SpectrumClientEventListeners::renderExtendedBlockOutline);
 		BiomeAttenuatingSoundInstance.clear();
 
