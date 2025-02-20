@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.*;
 import net.minecraft.data.client.*;
+import net.minecraft.data.family.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 
@@ -29,8 +30,16 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		SpectrumItems.provideItemModels(itemModelGenerator);
 	}
 	
+	public static void excludeFromSimpleItemModelGeneration(Block block) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.excludeFromSimpleItemModelGeneration(block));
+	}
+	
 	public static void registerSingletonBlockModel(Block block, TexturedModel.Factory factory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(block, factory));
+	}
+	
+	public static void registerSimpleCubeAllBlockModel(Block block) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSimpleCubeAll(block));
 	}
 	
 	public static void registerAxisRotatedBlockModel(Block block, TexturedModel.Factory factory) {
@@ -81,6 +90,21 @@ public class SpectrumModelProvider extends FabricModelProvider {
 			Identifier identifier = tintType.getFlowerPotCrossModel().upload(block, textureMap, ctx.modelCollector);
 			ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, identifier));
 		});
+	}
+	
+	public static BlockFamily registerBlockFamilyBlockModels(BlockFamily family) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerCubeAllModelTexturePool(family.getBaseBlock()).family(family));
+		return family;
+	}
+	
+	public static BlockFamily registerBlockFamilyBlockModelsExceptBase(BlockFamily family, TexturedModel.Factory variantFactory) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			TexturedModel texturedModel = variantFactory.get(family.getBaseBlock());
+			BlockStateModelGenerator.BlockTexturePool texturePool = ctx.new BlockTexturePool(texturedModel.getTextures());
+			texturePool.baseModelId = ModelIds.getBlockModelId(family.getBaseBlock());
+			texturePool.family(family);
+		});
+		return family;
 	}
 	
 }
