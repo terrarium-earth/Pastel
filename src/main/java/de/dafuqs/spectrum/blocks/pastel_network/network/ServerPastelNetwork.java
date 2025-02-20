@@ -327,6 +327,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 			checkForNetworkSplit(node.getPos());
 			PastelNetworkEdgeSyncPayload.send(this, node.getPos());
 		}
+		node.setNetworkUUID(null);
 	}
 	
 	@Override

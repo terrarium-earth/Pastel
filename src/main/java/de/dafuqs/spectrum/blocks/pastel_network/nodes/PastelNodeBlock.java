@@ -155,7 +155,7 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 				return ItemActionResult.success(world.isClient());
 			}
 			return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		} else if (player.isSneaking() && player.isCreative() && stack.isOf(SpectrumItems.PAINTBRUSH)) {
+		} else if (player.isCreative() && stack.isOf(SpectrumItems.PAINTBRUSH)) {
 			sendDebugMessage(world, pos, player, blockEntity);
 			return ItemActionResult.success(world.isClient());
 		} else if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_UPGRADING) && stack.isIn(SpectrumItemTags.PASTEL_NODE_UPGRADES)) {
