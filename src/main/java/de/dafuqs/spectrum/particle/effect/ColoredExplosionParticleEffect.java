@@ -57,7 +57,7 @@ public class ColoredExplosionParticleEffect implements ParticleEffect {
 	}
 	
 	public static ParticleEffect of(int color) {
-		return new ColoredCraftingParticleEffect(color);
+		return new ColoredExplosionParticleEffect(color);
 	}
 	
 }

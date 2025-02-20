@@ -89,7 +89,7 @@ public class SpectrumParticleTypes {
 	
 	public static final ParticleType<ColoredFallingSporeBlossomParticleEffect> COLORED_FALLING_SPORE_BLOSSOM = register("colored_falling_spore_blossom", false, (type) -> ColoredFallingSporeBlossomParticleEffect.CODEC, (type) -> ColoredFallingSporeBlossomParticleEffect.PACKET_CODEC);
 	public static final ParticleType<ColoredSporeBlossomAirParticleEffect> COLORED_SPORE_BLOSSOM_AIR = register("colored_spore_blossom_air", false, (type) -> ColoredSporeBlossomAirParticleEffect.CODEC, (type) -> ColoredSporeBlossomAirParticleEffect.PACKET_CODEC);
-	public static final ParticleType<ColoredCraftingParticleEffect> COLORED_CRAFTING = register("colored_spore_blossom_air", false, (type) -> ColoredCraftingParticleEffect.CODEC, (type) -> ColoredCraftingParticleEffect.PACKET_CODEC);
+	public static final ParticleType<ColoredCraftingParticleEffect> COLORED_CRAFTING = register("colored_crafting", false, (type) -> ColoredCraftingParticleEffect.CODEC, (type) -> ColoredCraftingParticleEffect.PACKET_CODEC);
 	public static final ParticleType<ColoredFluidRisingParticleEffect> COLORED_FLUID_RISING = register("colored_fluid_rising", false, (type) -> ColoredFluidRisingParticleEffect.CODEC, (type) -> ColoredFluidRisingParticleEffect.PACKET_CODEC);
 	public static final ParticleType<ColoredSparkleRisingParticleEffect> COLORED_SPARKLE_RISING = register("colored_sparkle_rising", false, (type) -> ColoredSparkleRisingParticleEffect.CODEC, (type) -> ColoredSparkleRisingParticleEffect.PACKET_CODEC);
 	public static final ParticleType<ColoredExplosionParticleEffect> COLORED_EXPLOSION = register("colored_explosion", true, (type) -> ColoredExplosionParticleEffect.CODEC, (type) -> ColoredExplosionParticleEffect.PACKET_CODEC);
