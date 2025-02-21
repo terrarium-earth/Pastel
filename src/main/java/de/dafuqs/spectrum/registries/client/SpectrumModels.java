@@ -24,4 +24,8 @@ public class SpectrumModels {
 	
 	public static final Model CRYSTALLARIEUM_FARMABLE = new Model(Optional.of(SpectrumCommon.locate("block/crystallarieum_farmable")), Optional.empty(), TextureKey.CROSS);
 	
+	public static Model noxwoodLantern(String suffix) {
+		return new Model(Optional.of(SpectrumCommon.locate("templates/noxwood_lamp" + suffix)), Optional.empty(), TextureKey.ALL);
+	}
+	
 }

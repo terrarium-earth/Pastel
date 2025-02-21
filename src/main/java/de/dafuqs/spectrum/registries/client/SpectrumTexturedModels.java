@@ -22,4 +22,8 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.dirtTop(dirtBlock.apply(b), dirtSuffix, topBlock.apply(b), topSuffix), Models.TEMPLATE_FARMLAND);
 	}
 	
+	public static TexturedModel.Factory noxwoodLight(Block gillsBlock) {
+		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopInside(b, "", b, "_top", gillsBlock, ""), SpectrumModels.MULTILAYER_LIGHT);
+	}
+	
 }
