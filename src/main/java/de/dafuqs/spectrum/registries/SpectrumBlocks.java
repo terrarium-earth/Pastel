@@ -176,9 +176,9 @@ public class SpectrumBlocks {
 	public static final Block ONYX_POWDER_BLOCK = registerSimple("onyx_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.BLACK.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.BLACK)), DyeColor.BLACK);
 	public static final Block MOONSTONE_POWDER_BLOCK = registerSimple("moonstone_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.WHITE.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.WHITE)), DyeColor.WHITE);
 	
-	public static final Block VEGETAL_BLOCK = new Block(settings(MapColor.PALE_GREEN, BlockSoundGroup.FUNGUS, 2.0F).nonOpaque());
-	public static final Block NEOLITH_BLOCK = new SpectrumFacingBlock(settings(MapColor.PURPLE, BlockSoundGroup.COPPER, 6.0F).requiresTool().instrument(NoteBlockInstrument.BASEDRUM).luminance(state -> 13).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
-	public static final Block BEDROCK_STORAGE_BLOCK = new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune"));
+	public static final Block VEGETAL_BLOCK = registerWithoutModel("vegetal_block", new Block(settings(MapColor.PALE_GREEN, BlockSoundGroup.FUNGUS, 2.0F).nonOpaque()), DyeColor.GREEN);
+	public static final Block NEOLITH_BLOCK = registerWithoutModel("neolith_block", new SpectrumFacingBlock(settings(MapColor.PURPLE, BlockSoundGroup.COPPER, 6.0F).requiresTool().instrument(NoteBlockInstrument.BASEDRUM).luminance(state -> 13).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), DyeColor.PINK);
+	public static final Block BEDROCK_STORAGE_BLOCK = registerWithoutModel("bedrock_storage_block", new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune")), IS.of(Rarity.UNCOMMON), DyeColor.BLACK);
 	
 	public static final SpectrumClusterBlock BISMUTH_CLUSTER = registerClusterBlock("bismuth_cluster", new SpectrumClusterBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 8), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
 	public static final SpectrumClusterBlock LARGE_BISMUTH_BUD = registerClusterBlock("large_bismuth_bud", new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 6).ticksRandomly(), SpectrumClusterBlock.GrowthStage.LARGE, BISMUTH_CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
@@ -1244,8 +1244,8 @@ public class SpectrumBlocks {
 	public static final Block CITRINE_STORAGE_BLOCK = registerSingleton("citrine_storage_block", new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK)), DyeColor.YELLOW, TexturedModel.SIDE_TOP_BOTTOM_WALL);
 	public static final Block ONYX_STORAGE_BLOCK = registerSingleton("onyx_storage_block", new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK)), DyeColor.BLACK, TexturedModel.SIDE_TOP_BOTTOM_WALL);
 	public static final Block MOONSTONE_STORAGE_BLOCK = registerSingleton("moonstone_storage_block", new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK)), DyeColor.WHITE, TexturedModel.SIDE_TOP_BOTTOM_WALL);
-	//public static final Block SPECTRAL_SHARD_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME);
-	//public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK));
+//	public static final Block SPECTRAL_SHARD_BLOCK = registerCustom("spectral_shard_block", new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME), IS.of(Rarity.RARE), DyeColor.WHITE, SpectrumModelProvider::registerSimpleBlockModel);
+//	public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = registerCustom("spectral_shard_storage_block", new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK)), IS.of(Rarity.RARE), DyeColor.WHITE, SpectrumModelProvider::registerSimpleBlockModel);
 	
 	private static AbstractBlock.Settings copyWithMapColor(Block baseBlock, MapColor color) {
 		return AbstractBlock.Settings.copy(baseBlock).mapColor(color);
@@ -1598,7 +1598,7 @@ public class SpectrumBlocks {
 	public static final Block PURE_QUARTZ_BLOCK = registerSimple("pure_quartz_block", new Block(AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK)), DyeColor.BROWN);
 	public static final Block PURE_GLOWSTONE_BLOCK = registerSimple("pure_glowstone_block", new Block(AbstractBlock.Settings.copy(Blocks.GLOWSTONE)), DyeColor.YELLOW);
 	public static final Block PURE_PRISMARINE_BLOCK = registerSimple("pure_prismarine_block", new Block(AbstractBlock.Settings.copy(Blocks.PRISMARINE)), DyeColor.CYAN);
-	public static final Block PURE_NETHERITE_SCRAP_BLOCK = registerCustom("pure_netherite_scrap_block", new Block(AbstractBlock.Settings.copy(Blocks.ANCIENT_DEBRIS)), IS.of().fireproof(), DyeColor.BROWN, SpectrumModelProvider::registerSimpleCubeAllBlockModel);
+	public static final Block PURE_NETHERITE_SCRAP_BLOCK = registerCustom("pure_netherite_scrap_block", new Block(AbstractBlock.Settings.copy(Blocks.ANCIENT_DEBRIS)), IS.of().fireproof(), DyeColor.BROWN, SpectrumModelProvider::registerSimpleBlockModel);
 	public static final Block PURE_ECHO_BLOCK = registerSimple("pure_echo_block", new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK)), DyeColor.BROWN);
 	
 	private static Settings preservationBlock() {
@@ -1630,22 +1630,22 @@ public class SpectrumBlocks {
 	public static final Block COURIER_STATUE = new StatueBlock(preservationBlock());
 	public static final Block MANXI = new ManxiBlock(preservationBlock().nonOpaque().noCollision().dropsNothing());
 	
-	public static final Block BLACK_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block BLUE_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block BROWN_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block CYAN_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block GRAY_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block GREEN_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block LIGHT_BLUE_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block LIGHT_GRAY_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block LIME_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block MAGENTA_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block ORANGE_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block PINK_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block PURPLE_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block RED_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block WHITE_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block YELLOW_CHISELED_PRESERVATION_STONE = new Block(preservationBlock());
+	public static final Block BLACK_CHISELED_PRESERVATION_STONE = registerSingleton("black_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.BLACK, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BLUE_CHISELED_PRESERVATION_STONE = registerSingleton("blue_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.BLUE, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BROWN_CHISELED_PRESERVATION_STONE = registerSingleton("brown_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.BROWN, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block CYAN_CHISELED_PRESERVATION_STONE = registerSingleton("cyan_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.CYAN, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block GRAY_CHISELED_PRESERVATION_STONE = registerSingleton("gray_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.GRAY, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block GREEN_CHISELED_PRESERVATION_STONE = registerSingleton("green_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.GREEN, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block LIGHT_BLUE_CHISELED_PRESERVATION_STONE = registerSingleton("light_blue_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.LIGHT_BLUE, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block LIGHT_GRAY_CHISELED_PRESERVATION_STONE = registerSingleton("light_gray_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.LIGHT_GRAY, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block LIME_CHISELED_PRESERVATION_STONE = registerSingleton("lime_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block MAGENTA_CHISELED_PRESERVATION_STONE = registerSingleton("magenta_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.MAGENTA, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block ORANGE_CHISELED_PRESERVATION_STONE = registerSingleton("orange_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.ORANGE, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block PINK_CHISELED_PRESERVATION_STONE = registerSingleton("pink_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.PINK, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block PURPLE_CHISELED_PRESERVATION_STONE = registerSingleton("purple_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.PURPLE, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block RED_CHISELED_PRESERVATION_STONE = registerSingleton("red_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.RED, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block WHITE_CHISELED_PRESERVATION_STONE = registerSingleton("white_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.WHITE, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block YELLOW_CHISELED_PRESERVATION_STONE = registerSingleton("yellow_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.YELLOW, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	
 	public static final Block PRESERVATION_GLASS = new TransparentBlock(preservationBlock().sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(SpectrumBlocks::never).suffocates(SpectrumBlocks::never).blockVision(SpectrumBlocks::never));
 	public static final Block TINTED_PRESERVATION_GLASS = new TintedGlassBlock(AbstractBlock.Settings.copy(PRESERVATION_GLASS));
@@ -2256,12 +2256,6 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerOreStorageBlocks(Item.Settings settings, Item.Settings settingsFireproof) {
-		//registerBlockWithItem("spectral_shard_storage_block", SPECTRAL_SHARD_STORAGE_BLOCK, IS.of(Rarity.RARE), DyeColor.WHITE);
-		
-		registerBlockWithItem("vegetal_block", VEGETAL_BLOCK, IS.of(), DyeColor.GREEN);
-		registerBlockWithItem("neolith_block", NEOLITH_BLOCK, IS.of(), DyeColor.PINK);
-		registerBlockWithItem("bedrock_storage_block", BEDROCK_STORAGE_BLOCK, IS.of(Rarity.UNCOMMON), DyeColor.BLACK);
-		//registerBlockWithItem("spectral_shard_block", SPECTRAL_SHARD_BLOCK, IS.of(Rarity.RARE), DyeColor.WHITE);
 		
 		registerBlockWithItem("azurite_block", AZURITE_BLOCK, IS.of(), DyeColor.BLUE);
 		registerBlockWithItem("shimmerstone_block", SHIMMERSTONE_BLOCK, IS.of(), DyeColor.YELLOW);
@@ -2458,23 +2452,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("dike_gate", DIKE_GATE, settings, DyeColor.BLUE);
 		registerBlockWithItem("dream_gate", DREAM_GATE, settings, DyeColor.BLUE);
 		registerBlockWithItem("preservation_controller", PRESERVATION_CONTROLLER, settings, DyeColor.BLUE);
-		
-		registerBlockWithItem("black_chiseled_preservation_stone", BLACK_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("blue_chiseled_preservation_stone", BLUE_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_chiseled_preservation_stone", BROWN_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("cyan_chiseled_preservation_stone", CYAN_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("gray_chiseled_preservation_stone", GRAY_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("green_chiseled_preservation_stone", GREEN_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("light_blue_chiseled_preservation_stone", LIGHT_BLUE_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("light_gray_chiseled_preservation_stone", LIGHT_GRAY_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("lime_chiseled_preservation_stone", LIME_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("magenta_chiseled_preservation_stone", MAGENTA_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("orange_chiseled_preservation_stone", ORANGE_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("pink_chiseled_preservation_stone", PINK_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("purple_chiseled_preservation_stone", PURPLE_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("red_chiseled_preservation_stone", RED_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("white_chiseled_preservation_stone", WHITE_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("yellow_chiseled_preservation_stone", YELLOW_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
 		
 		registerBlockWithItem("invisible_wall", INVISIBLE_WALL, settings, DyeColor.BLUE);
 		registerBlockWithItem("courier_statue", COURIER_STATUE, settings, DyeColor.BLUE);

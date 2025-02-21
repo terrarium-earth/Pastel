@@ -59,7 +59,7 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(factory.apply(ctx)));
 	}
 	
-	public static void registerSimpleCubeAllBlockModel(Block block) {
+	public static void registerSimpleBlockModel(Block block) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSimpleCubeAll(block));
 	}
 	
