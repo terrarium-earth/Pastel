@@ -937,15 +937,16 @@ public class SpectrumBlocks {
 	public static final BlockSetType GALA_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.CHERRY).build(SpectrumCommon.locate("gala"));
 	public static final WoodType GALA_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.CHERRY).build(SpectrumCommon.locate("gala"), GALA_BLOCK_SET_TYPE);
 	
-	public static final Block WEEPING_GALA_PLANKS = new Block(galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_STAIRS = new StairsBlock(WEEPING_GALA_PLANKS.getDefaultState(), galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_DOOR = new DoorBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_PRESSURE_PLATE = new PressurePlateBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_FENCE = new FenceBlock(galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_TRAPDOOR = new TrapdoorBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_FENCE_GATE = new FenceGateBlock(GALA_WOOD_TYPE, galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_BUTTON = Blocks.createWoodenButtonBlock(GALA_BLOCK_SET_TYPE);
-	public static final Block WEEPING_GALA_SLAB = new SlabBlock(galaWood(MapColor.BROWN));
+	public static final Block WEEPING_GALA_PLANKS = registerWithoutModel("weeping_gala_planks", new Block(galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_STAIRS = registerWithoutModel("weeping_gala_stairs", new StairsBlock(WEEPING_GALA_PLANKS.getDefaultState(), galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_SLAB = registerWithoutModel("weeping_gala_slab", new SlabBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_FENCE = registerWithoutModel("weeping_gala_fence", new FenceBlock(galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_FENCE_GATE = registerWithoutModel("weeping_gala_fence_gate", new FenceGateBlock(GALA_WOOD_TYPE, galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_DOOR = registerWithoutModel("weeping_gala_door", new DoorBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_TRAPDOOR = registerWithoutModel("weeping_gala_trapdoor", new TrapdoorBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final Block WEEPING_GALA_BUTTON = registerWithoutModel("weeping_gala_button", Blocks.createWoodenButtonBlock(GALA_BLOCK_SET_TYPE), DyeColor.LIME);
+	public static final Block WEEPING_GALA_PRESSURE_PLATE = registerWithoutModel("weeping_gala_pressure_plate", new PressurePlateBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), DyeColor.LIME);
+	public static final BlockFamily WEEPING_GALA_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(WEEPING_GALA_PLANKS).stairs(WEEPING_GALA_STAIRS).slab(WEEPING_GALA_SLAB).fence(WEEPING_GALA_FENCE).fenceGate(WEEPING_GALA_FENCE_GATE).door(WEEPING_GALA_DOOR).trapdoor(WEEPING_GALA_TRAPDOOR).button(WEEPING_GALA_BUTTON).pressurePlate(WEEPING_GALA_PRESSURE_PLATE).build());
 	
 	public static final Block WEEPING_GALA_PILLAR = new PillarBlock(galaWood(MapColor.BROWN));
 	public static final Block WEEPING_GALA_BARREL = new BarrelBlock(galaWood(MapColor.BROWN));
@@ -1611,10 +1612,13 @@ public class SpectrumBlocks {
 	public static final Block PRESERVATION_CHEST = new TreasureChestBlock(preservationBlock());
 	
 	public static final Block DOWNSTONE = new Block(preservationBlock()); // "raw" preservation stone, used in the Deeper Down bottom in place of bedrock
-	public static final Block PRESERVATION_STONE = new Block(preservationBlock());
-	public static final Block PRESERVATION_STAIRS = new StairsBlock(PRESERVATION_STONE.getDefaultState(), preservationBlock());
-	public static final Block PRESERVATION_SLAB = new SlabBlock(preservationBlock());
-	public static final Block PRESERVATION_WALL = new WallBlock(preservationBlock());
+	
+	public static final Block PRESERVATION_STONE = registerWithoutModel("preservation_stone", new Block(preservationBlock()), DyeColor.BLUE);
+	public static final Block PRESERVATION_STAIRS = registerWithoutModel("preservation_stairs", new StairsBlock(PRESERVATION_STONE.getDefaultState(), preservationBlock()), DyeColor.BLUE);
+	public static final Block PRESERVATION_SLAB = registerWithoutModel("preservation_slab", new SlabBlock(preservationBlock()), DyeColor.BLUE);
+	public static final Block PRESERVATION_WALL = registerWithoutModel("preservation_wall", new WallBlock(preservationBlock()), DyeColor.BLUE);
+	public static final BlockFamily PRESERVATION_STONE_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(PRESERVATION_STONE).stairs(PRESERVATION_STAIRS).slab(PRESERVATION_SLAB).wall(PRESERVATION_WALL).build(), TexturedModel.CUBE_ALL);
+	
 	public static final Block POWDER_CHISELED_PRESERVATION_STONE = new Block(preservationBlock().luminance(state -> 2));
 	public static final Block DIKE_CHISELED_PRESERVATION_STONE = new Block(preservationBlock().luminance(state -> 6));
 	public static final Block DREAM_CHISELED_PRESERVATION_STONE = new Block(preservationBlock().luminance(state -> 6));
@@ -2095,15 +2099,6 @@ public class SpectrumBlocks {
 		
 		registerBlock("weeping_gala_fronds", WEEPING_GALA_FRONDS);
 		registerBlock("weeping_gala_fronds_plant", WEEPING_GALA_FRONDS_PLANT);
-		registerBlockWithItem("weeping_gala_planks", WEEPING_GALA_PLANKS, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_stairs", WEEPING_GALA_STAIRS, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_door", WEEPING_GALA_DOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_pressure_plate", WEEPING_GALA_PRESSURE_PLATE, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_fence", WEEPING_GALA_FENCE, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_trapdoor", WEEPING_GALA_TRAPDOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_fence_gate", WEEPING_GALA_FENCE_GATE, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_button", WEEPING_GALA_BUTTON, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_slab", WEEPING_GALA_SLAB, settings, DyeColor.LIME);
 		
 		registerBlockWithItem("weeping_gala_pillar", WEEPING_GALA_PILLAR, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_barrel", WEEPING_GALA_BARREL, settings, DyeColor.LIME);
@@ -2448,10 +2443,6 @@ public class SpectrumBlocks {
 	private static void registerStructureBlocks(Item.Settings settings) {
 		registerBlockWithItem("downstone", DOWNSTONE, settings, DyeColor.BLUE);
 		
-		registerBlockWithItem("preservation_stone", PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("preservation_stairs", PRESERVATION_STAIRS, settings, DyeColor.BLUE);
-		registerBlockWithItem("preservation_slab", PRESERVATION_SLAB, settings, DyeColor.BLUE);
-		registerBlockWithItem("preservation_wall", PRESERVATION_WALL, settings, DyeColor.BLUE);
 		registerBlockWithItem("preservation_bricks", PRESERVATION_BRICKS, settings, DyeColor.BLUE);
 		registerBlockWithItem("shimmering_preservation_bricks", SHIMMERING_PRESERVATION_BRICKS, settings, DyeColor.BLUE);
 		registerBlockWithItem("powder_chiseled_preservation_stone", POWDER_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
