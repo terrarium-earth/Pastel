@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import net.fabricmc.api.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
@@ -11,7 +11,7 @@ import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
 
 public class AlternatePlayerOnlyGlassBlock extends TransparentBlock {
-
+	
 	private final Block alternateBlock;
 	
 	// used for tinted glass to make light not shine through
@@ -22,7 +22,7 @@ public class AlternatePlayerOnlyGlassBlock extends TransparentBlock {
 		this.alternateBlock = block;
 		this.tinted = tinted;
 	}
-
+	
 	@Override
 	public MapCodec<? extends AlternatePlayerOnlyGlassBlock> getCodec() {
 		//TODO: Make the codec
@@ -68,6 +68,10 @@ public class AlternatePlayerOnlyGlassBlock extends TransparentBlock {
 		}
 		
 		return super.isSideInvisible(state, stateFrom, direction);
+	}
+	
+	public Block getAlternateBlock() {
+		return this.alternateBlock;
 	}
 	
 }

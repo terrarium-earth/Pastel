@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.*;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.*;
+import net.minecraft.state.property.*;
 import net.minecraft.util.*;
 
 import java.util.function.*;
@@ -42,6 +43,13 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	public static void registerCustomItemModel(Block block, Function<Block, TextureMap> textureSupplier, Model model) {
 		excludeFromSimpleItemModelGeneration(block);
 		ITEM_MODEL_REGISTRAR.defer(ctx -> model.upload(ModelIds.getItemModelId(block.asItem()), textureSupplier.apply(block), ctx.writer));
+	}
+	
+	public static void registerParentedItemModel(Block block, Block parent) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			ctx.excludeFromSimpleItemModelGeneration(block);
+			ctx.registerParentedItemModel(block, ModelIds.getBlockModelId(parent));
+		});
 	}
 	
 	// Block Models
@@ -96,17 +104,30 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		});
 	}
 	
-	public static BlockFamily registerBlockFamilyBlockModels(BlockFamily family) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerCubeAllModelTexturePool(family.getBaseBlock()).family(family));
-		return family;
+	public static void registerGlassPaneBlockModel(Block glassPaneBlock, Block glassBlock) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			TextureMap textureMap = TextureMap.paneAndTopForEdge(glassBlock, glassPaneBlock);
+			Identifier post = Models.TEMPLATE_GLASS_PANE_POST.upload(glassPaneBlock, textureMap, ctx.modelCollector);
+			Identifier side = Models.TEMPLATE_GLASS_PANE_SIDE.upload(glassPaneBlock, textureMap, ctx.modelCollector);
+			Identifier sideAlt = Models.TEMPLATE_GLASS_PANE_SIDE_ALT.upload(glassPaneBlock, textureMap, ctx.modelCollector);
+			Identifier noside = Models.TEMPLATE_GLASS_PANE_NOSIDE.upload(glassPaneBlock, textureMap, ctx.modelCollector);
+			Identifier nosideAlt = Models.TEMPLATE_GLASS_PANE_NOSIDE_ALT.upload(glassPaneBlock, textureMap, ctx.modelCollector);
+			Models.GENERATED.upload(ModelIds.getItemModelId(glassPaneBlock.asItem()), TextureMap.layer0(glassBlock), ctx.modelCollector);
+			ctx.blockStateCollector.accept(MultipartBlockStateSupplier.create(glassPaneBlock)
+					.with(BlockStateVariant.create().put(VariantSettings.MODEL, post))
+					.with(When.create().set(Properties.NORTH, true), BlockStateVariant.create().put(VariantSettings.MODEL, side))
+					.with(When.create().set(Properties.EAST, true), BlockStateVariant.create().put(VariantSettings.MODEL, side).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+					.with(When.create().set(Properties.SOUTH, true), BlockStateVariant.create().put(VariantSettings.MODEL, sideAlt))
+					.with(When.create().set(Properties.WEST, true), BlockStateVariant.create().put(VariantSettings.MODEL, sideAlt).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+					.with(When.create().set(Properties.NORTH, false), BlockStateVariant.create().put(VariantSettings.MODEL, noside))
+					.with(When.create().set(Properties.EAST, false), BlockStateVariant.create().put(VariantSettings.MODEL, nosideAlt))
+					.with(When.create().set(Properties.SOUTH, false), BlockStateVariant.create().put(VariantSettings.MODEL, nosideAlt).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+					.with(When.create().set(Properties.WEST, false), BlockStateVariant.create().put(VariantSettings.MODEL, noside).put(VariantSettings.Y, VariantSettings.Rotation.R270)));
+		});
 	}
 	
-	public static BlockFamily registerBlockFamilyBlockModels(BlockFamily family, TexturedModel.Factory variantFactory) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			TexturedModel texturedModel = variantFactory.get(family.getBaseBlock());
-			BlockStateModelGenerator.BlockTexturePool texturePool = ctx.new BlockTexturePool(texturedModel.getTextures());
-			texturePool.base(family.getBaseBlock(), texturedModel.getModel()).family(family);
-		});
+	public static BlockFamily registerBlockFamilyBlockModels(BlockFamily family) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerCubeAllModelTexturePool(family.getBaseBlock()).family(family));
 		return family;
 	}
 	
