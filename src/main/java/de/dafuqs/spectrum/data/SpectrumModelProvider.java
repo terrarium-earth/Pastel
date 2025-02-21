@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.data;
 
 import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.fabric.api.datagen.v1.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.*;
@@ -14,6 +13,7 @@ import java.util.function.*;
 
 public class SpectrumModelProvider extends FabricModelProvider {
 	
+	public static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	public static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	
 	public SpectrumModelProvider(FabricDataOutput output) {
@@ -27,12 +27,22 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	
 	@Override
 	public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-		SpectrumBlocks.provideItemModels(itemModelGenerator);
-		SpectrumItems.provideItemModels(itemModelGenerator);
+		ITEM_MODEL_REGISTRAR.flush(itemModelGenerator);
 	}
 	
 	public static void excludeFromSimpleItemModelGeneration(Block block) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.excludeFromSimpleItemModelGeneration(block));
+	}
+	
+	// Item Models
+	
+	public static void registerCustomItemModel(Block block, Model model) {
+		registerCustomItemModel(block, TextureMap::layer0, model);
+	}
+	
+	public static void registerCustomItemModel(Block block, Function<Block, TextureMap> textureSupplier, Model model) {
+		excludeFromSimpleItemModelGeneration(block);
+		ITEM_MODEL_REGISTRAR.defer(ctx -> model.upload(ModelIds.getItemModelId(block.asItem()), textureSupplier.apply(block), ctx.writer));
 	}
 	
 	// Block Models

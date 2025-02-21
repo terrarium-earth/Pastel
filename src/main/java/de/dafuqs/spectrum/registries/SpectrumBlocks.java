@@ -111,7 +111,6 @@ public class SpectrumBlocks {
 	
 	public static final DeferredRegistrar COMMON_REGISTRAR = new DeferredRegistrar();
 	public static final DeferredRegistrar CLIENT_REGISTRAR = new DeferredRegistrar();
-	public static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	
 	public static final Block PEDESTAL_BASIC_TOPAZ = new PedestalBlock(craftingBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.TOPAZ_BLOCK), BuiltinPedestalVariant.BASIC_TOPAZ);
 	public static final Block PEDESTAL_BASIC_AMETHYST = new PedestalBlock(craftingBlock(MapColor.PURPLE, BlockSoundGroup.AMETHYST_BLOCK), BuiltinPedestalVariant.BASIC_AMETHYST);
@@ -820,20 +819,22 @@ public class SpectrumBlocks {
 	public static final Block SLATE_NOXCAP_HYPHAE = new StrippingLootPillarBlock(noxcap(MapColor.GRAY), STRIPPED_SLATE_NOXCAP_HYPHAE, SpectrumLootTables.SLATE_NOXCAP_STRIPPING);
 	public static final Block SLATE_NOXCAP_BLOCK = new Block(noxcap(MapColor.GRAY));
 	public static final PillarBlock SLATE_NOXCAP_GILLS = new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
-	public static final Block SLATE_NOXWOOD_PLANKS = new Block(noxcap(MapColor.GRAY));
-	public static final StairsBlock SLATE_NOXWOOD_STAIRS = new StairsBlock(SLATE_NOXWOOD_PLANKS.getDefaultState(), noxcap(MapColor.GRAY));
-	public static final SlabBlock SLATE_NOXWOOD_SLAB = new SlabBlock(noxcap(MapColor.GRAY));
-	public static final FenceBlock SLATE_NOXWOOD_FENCE = new FenceBlock(noxcap(MapColor.GRAY));
-	public static final FenceGateBlock SLATE_NOXWOOD_FENCE_GATE = new FenceGateBlock(SpectrumWoodTypes.SLATE_NOXWOOD, noxcap(MapColor.GRAY));
-	public static final Block SLATE_NOXWOOD_DOOR = new DoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.GRAY));
-	public static final Block SLATE_NOXWOOD_TRAPDOOR = new TrapdoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.GRAY));
-	public static final Block SLATE_NOXWOOD_BUTTON = new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.GRAY));
-	public static final Block SLATE_NOXWOOD_PRESSURE_PLATE = new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.GRAY));
 	public static final Block SLATE_NOXWOOD_PILLAR = new PillarBlock(noxcap(MapColor.GRAY));
 	public static final Block SLATE_NOXWOOD_AMPHORA = new AmphoraBlock(noxcap(MapColor.GRAY));
 	public static final Block SLATE_NOXWOOD_LAMP = new RedstoneLampBlock(noxcap(MapColor.GRAY).luminance(LANTERN_LIGHT_PROVIDER));
 	public static final Block SLATE_NOXWOOD_LIGHT = new PillarBlock(noxcap(MapColor.GRAY).luminance(state -> 15));
 	public static final Block SLATE_NOXWOOD_LANTERN = new FlexLanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).luminance(s -> 13).pistonBehavior(PistonBehavior.DESTROY));
+	
+	public static final Block SLATE_NOXWOOD_PLANKS = registerWithoutModel("slate_noxwood_planks", new Block(noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final StairsBlock SLATE_NOXWOOD_STAIRS = registerWithoutModel("slate_noxwood_stairs", new StairsBlock(SLATE_NOXWOOD_PLANKS.getDefaultState(), noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final SlabBlock SLATE_NOXWOOD_SLAB = registerWithoutModel("slate_noxwood_slab", new SlabBlock(noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final FenceBlock SLATE_NOXWOOD_FENCE = registerWithoutModel("slate_noxwood_fence", new FenceBlock(noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final FenceGateBlock SLATE_NOXWOOD_FENCE_GATE = registerWithoutModel("slate_noxwood_fence_gate", new FenceGateBlock(SpectrumWoodTypes.SLATE_NOXWOOD, noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final Block SLATE_NOXWOOD_DOOR = registerWithoutModel("slate_noxwood_door", new DoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final Block SLATE_NOXWOOD_TRAPDOOR = registerWithoutModel("slate_noxwood_trapdoor", new TrapdoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final Block SLATE_NOXWOOD_BUTTON = registerWithoutModel("slate_noxwood_button", new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final Block SLATE_NOXWOOD_PRESSURE_PLATE = registerWithoutModel("slate_noxwood_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.GRAY)), DyeColor.LIME);
+	public static final BlockFamily SLATE_NOXWOOD_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(SLATE_NOXWOOD_PLANKS).stairs(SLATE_NOXWOOD_STAIRS).slab(SLATE_NOXWOOD_SLAB).fence(SLATE_NOXWOOD_FENCE).fenceGate(SLATE_NOXWOOD_FENCE_GATE).door(SLATE_NOXWOOD_DOOR).trapdoor(SLATE_NOXWOOD_TRAPDOOR).button(SLATE_NOXWOOD_BUTTON).pressurePlate(SLATE_NOXWOOD_PRESSURE_PLATE).build());
 	
 	public static final PillarBlock STRIPPED_EBONY_NOXCAP_STEM = new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK));
 	public static final PillarBlock EBONY_NOXCAP_STEM = new StrippingLootPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK), STRIPPED_EBONY_NOXCAP_STEM, SpectrumLootTables.EBONY_NOXCAP_STRIPPING);
@@ -841,20 +842,22 @@ public class SpectrumBlocks {
 	public static final Block EBONY_NOXCAP_HYPHAE = new StrippingLootPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK), STRIPPED_EBONY_NOXCAP_HYPHAE, SpectrumLootTables.EBONY_NOXCAP_STRIPPING);
 	public static final Block EBONY_NOXCAP_BLOCK = new Block(noxcap(MapColor.TERRACOTTA_BLACK));
 	public static final PillarBlock EBONY_NOXCAP_GILLS = new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
-	public static final Block EBONY_NOXWOOD_PLANKS = new Block(noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final StairsBlock EBONY_NOXWOOD_STAIRS = new StairsBlock(EBONY_NOXWOOD_PLANKS.getDefaultState(), noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final SlabBlock EBONY_NOXWOOD_SLAB = new SlabBlock(noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final FenceBlock EBONY_NOXWOOD_FENCE = new FenceBlock(noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final FenceGateBlock EBONY_NOXWOOD_FENCE_GATE = new FenceGateBlock(SpectrumWoodTypes.EBONY_NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final Block EBONY_NOXWOOD_DOOR = new DoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final Block EBONY_NOXWOOD_TRAPDOOR = new TrapdoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final Block EBONY_NOXWOOD_BUTTON = new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final Block EBONY_NOXWOOD_PRESSURE_PLATE = new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK));
 	public static final Block EBONY_NOXWOOD_PILLAR = new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK));
 	public static final Block EBONY_NOXWOOD_AMPHORA = new AmphoraBlock(noxcap(MapColor.TERRACOTTA_BLACK));
 	public static final Block EBONY_NOXWOOD_LAMP = new RedstoneLampBlock(noxcap(MapColor.TERRACOTTA_BLACK).luminance(LANTERN_LIGHT_PROVIDER));
 	public static final Block EBONY_NOXWOOD_LIGHT = new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK).luminance(state -> 15));
 	public static final Block EBONY_NOXWOOD_LANTERN = new FlexLanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).luminance(s -> 13).pistonBehavior(PistonBehavior.DESTROY));
+	
+	public static final Block EBONY_NOXWOOD_PLANKS = registerWithoutModel("ebony_noxwood_planks", new Block(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final StairsBlock EBONY_NOXWOOD_STAIRS = registerWithoutModel("ebony_noxwood_stairs", new StairsBlock(EBONY_NOXWOOD_PLANKS.getDefaultState(), noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final SlabBlock EBONY_NOXWOOD_SLAB = registerWithoutModel("ebony_noxwood_slab", new SlabBlock(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final FenceBlock EBONY_NOXWOOD_FENCE = registerWithoutModel("ebony_noxwood_fence", new FenceBlock(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final FenceGateBlock EBONY_NOXWOOD_FENCE_GATE = registerWithoutModel("ebony_noxwood_fence_gate", new FenceGateBlock(SpectrumWoodTypes.EBONY_NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final Block EBONY_NOXWOOD_DOOR = registerWithoutModel("ebony_noxwood_door", new DoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final Block EBONY_NOXWOOD_TRAPDOOR = registerWithoutModel("ebony_noxwood_trapdoor", new TrapdoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final Block EBONY_NOXWOOD_BUTTON = registerWithoutModel("ebony_noxwood_button", new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final Block EBONY_NOXWOOD_PRESSURE_PLATE = registerWithoutModel("ebony_noxwood_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
+	public static final BlockFamily EBONY_NOXWOOD_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(EBONY_NOXWOOD_PLANKS).stairs(EBONY_NOXWOOD_STAIRS).slab(EBONY_NOXWOOD_SLAB).fence(EBONY_NOXWOOD_FENCE).fenceGate(EBONY_NOXWOOD_FENCE_GATE).door(EBONY_NOXWOOD_DOOR).trapdoor(EBONY_NOXWOOD_TRAPDOOR).button(EBONY_NOXWOOD_BUTTON).pressurePlate(EBONY_NOXWOOD_PRESSURE_PLATE).build());
 	
 	public static final PillarBlock STRIPPED_IVORY_NOXCAP_STEM = new PillarBlock(noxcap(MapColor.OFF_WHITE));
 	public static final PillarBlock IVORY_NOXCAP_STEM = new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_IVORY_NOXCAP_STEM, SpectrumLootTables.IVORY_NOXCAP_STRIPPING);
@@ -862,20 +865,22 @@ public class SpectrumBlocks {
 	public static final Block IVORY_NOXCAP_HYPHAE = new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_IVORY_NOXCAP_HYPHAE, SpectrumLootTables.IVORY_NOXCAP_STRIPPING);
 	public static final Block IVORY_NOXCAP_BLOCK = new Block(noxcap(MapColor.OFF_WHITE));
 	public static final PillarBlock IVORY_NOXCAP_GILLS = new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
-	public static final Block IVORY_NOXWOOD_PLANKS = new Block(noxcap(MapColor.OFF_WHITE));
-	public static final StairsBlock IVORY_NOXWOOD_STAIRS = new StairsBlock(IVORY_NOXWOOD_PLANKS.getDefaultState(), noxcap(MapColor.OFF_WHITE));
-	public static final SlabBlock IVORY_NOXWOOD_SLAB = new SlabBlock(noxcap(MapColor.OFF_WHITE));
-	public static final FenceBlock IVORY_NOXWOOD_FENCE = new FenceBlock(noxcap(MapColor.OFF_WHITE));
-	public static final FenceGateBlock IVORY_NOXWOOD_FENCE_GATE = new FenceGateBlock(SpectrumWoodTypes.CHESTNUT_NOXWOOD, noxcap(MapColor.OFF_WHITE));
-	public static final Block IVORY_NOXWOOD_DOOR = new DoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.OFF_WHITE));
-	public static final Block IVORY_NOXWOOD_TRAPDOOR = new TrapdoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.OFF_WHITE));
-	public static final Block IVORY_NOXWOOD_BUTTON = new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.OFF_WHITE));
-	public static final Block IVORY_NOXWOOD_PRESSURE_PLATE = new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.OFF_WHITE));
 	public static final Block IVORY_NOXWOOD_PILLAR = new PillarBlock(noxcap(MapColor.OFF_WHITE));
 	public static final Block IVORY_NOXWOOD_AMPHORA = new AmphoraBlock(noxcap(MapColor.OFF_WHITE));
 	public static final Block IVORY_NOXWOOD_LAMP = new RedstoneLampBlock(noxcap(MapColor.OFF_WHITE).luminance(LANTERN_LIGHT_PROVIDER));
 	public static final Block IVORY_NOXWOOD_LIGHT = new PillarBlock(noxcap(MapColor.OFF_WHITE).luminance(state -> 15));
 	public static final Block IVORY_NOXWOOD_LANTERN = new FlexLanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).luminance(s -> 13).pistonBehavior(PistonBehavior.DESTROY));
+	
+	public static final Block IVORY_NOXWOOD_PLANKS = registerWithoutModel("ivory_noxwood_planks", new Block(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final StairsBlock IVORY_NOXWOOD_STAIRS = registerWithoutModel("ivory_noxwood_stairs", new StairsBlock(IVORY_NOXWOOD_PLANKS.getDefaultState(), noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final SlabBlock IVORY_NOXWOOD_SLAB = registerWithoutModel("ivory_noxwood_slab", new SlabBlock(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final FenceBlock IVORY_NOXWOOD_FENCE = registerWithoutModel("ivory_noxwood_fence", new FenceBlock(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final FenceGateBlock IVORY_NOXWOOD_FENCE_GATE = registerWithoutModel("ivory_noxwood_fence_gate", new FenceGateBlock(SpectrumWoodTypes.CHESTNUT_NOXWOOD, noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final Block IVORY_NOXWOOD_DOOR = registerWithoutModel("ivory_noxwood_door", new DoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final Block IVORY_NOXWOOD_TRAPDOOR = registerWithoutModel("ivory_noxwood_trapdoor", new TrapdoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final Block IVORY_NOXWOOD_BUTTON = registerWithoutModel("ivory_noxwood_button", new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final Block IVORY_NOXWOOD_PRESSURE_PLATE = registerWithoutModel("ivory_noxwood_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
+	public static final BlockFamily IVORY_NOXWOOD_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(IVORY_NOXWOOD_PLANKS).stairs(IVORY_NOXWOOD_STAIRS).slab(IVORY_NOXWOOD_SLAB).fence(IVORY_NOXWOOD_FENCE).fenceGate(IVORY_NOXWOOD_FENCE_GATE).door(IVORY_NOXWOOD_DOOR).trapdoor(IVORY_NOXWOOD_TRAPDOOR).button(IVORY_NOXWOOD_BUTTON).pressurePlate(IVORY_NOXWOOD_PRESSURE_PLATE).build());
 	
 	public static final PillarBlock STRIPPED_CHESTNUT_NOXCAP_STEM = new PillarBlock(noxcap(MapColor.DULL_RED));
 	public static final PillarBlock CHESTNUT_NOXCAP_STEM = new StrippingLootPillarBlock(noxcap(MapColor.DULL_RED), STRIPPED_CHESTNUT_NOXCAP_STEM, SpectrumLootTables.CHESTNUT_NOXCAP_STRIPPING);
@@ -883,20 +888,22 @@ public class SpectrumBlocks {
 	public static final Block CHESTNUT_NOXCAP_HYPHAE = new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_CHESTNUT_NOXCAP_HYPHAE, SpectrumLootTables.CHESTNUT_NOXCAP_STRIPPING);
 	public static final Block CHESTNUT_NOXCAP_BLOCK = new Block(noxcap(MapColor.DULL_RED));
 	public static final PillarBlock CHESTNUT_NOXCAP_GILLS = new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
-	public static final Block CHESTNUT_NOXWOOD_PLANKS = new Block(noxcap(MapColor.DULL_RED));
-	public static final StairsBlock CHESTNUT_NOXWOOD_STAIRS = new StairsBlock(CHESTNUT_NOXWOOD_PLANKS.getDefaultState(), noxcap(MapColor.DULL_RED));
-	public static final SlabBlock CHESTNUT_NOXWOOD_SLAB = new SlabBlock(noxcap(MapColor.DULL_RED));
-	public static final FenceBlock CHESTNUT_NOXWOOD_FENCE = new FenceBlock(noxcap(MapColor.DULL_RED));
-	public static final FenceGateBlock CHESTNUT_NOXWOOD_FENCE_GATE = new FenceGateBlock(SpectrumWoodTypes.IVORY_NOXWOOD, noxcap(MapColor.DULL_RED));
-	public static final Block CHESTNUT_NOXWOOD_DOOR = new DoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.DULL_RED));
-	public static final Block CHESTNUT_NOXWOOD_TRAPDOOR = new TrapdoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.DULL_RED));
-	public static final Block CHESTNUT_NOXWOOD_BUTTON = new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.DULL_RED));
-	public static final Block CHESTNUT_NOXWOOD_PRESSURE_PLATE = new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.DULL_RED));
 	public static final Block CHESTNUT_NOXWOOD_PILLAR = new PillarBlock(noxcap(MapColor.DULL_RED));
 	public static final Block CHESTNUT_NOXWOOD_AMPHORA = new AmphoraBlock(noxcap(MapColor.DULL_RED));
 	public static final Block CHESTNUT_NOXWOOD_LAMP = new RedstoneLampBlock(noxcap(MapColor.DULL_RED).luminance(LANTERN_LIGHT_PROVIDER));
 	public static final Block CHESTNUT_NOXWOOD_LIGHT = new PillarBlock(noxcap(MapColor.DULL_RED).luminance(state -> 15));
 	public static final Block CHESTNUT_NOXWOOD_LANTERN = new FlexLanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).luminance(s -> 13).pistonBehavior(PistonBehavior.DESTROY));
+	
+	public static final Block CHESTNUT_NOXWOOD_PLANKS = registerWithoutModel("chestnut_noxwood_planks", new Block(noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final StairsBlock CHESTNUT_NOXWOOD_STAIRS = registerWithoutModel("chestnut_noxwood_stairs", new StairsBlock(CHESTNUT_NOXWOOD_PLANKS.getDefaultState(), noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final SlabBlock CHESTNUT_NOXWOOD_SLAB = registerWithoutModel("chestnut_noxwood_slab", new SlabBlock(noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final FenceBlock CHESTNUT_NOXWOOD_FENCE = registerWithoutModel("chestnut_noxwood_fence", new FenceBlock(noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final FenceGateBlock CHESTNUT_NOXWOOD_FENCE_GATE = registerWithoutModel("chestnut_noxwood_fence_gate", new FenceGateBlock(SpectrumWoodTypes.IVORY_NOXWOOD, noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final Block CHESTNUT_NOXWOOD_DOOR = registerWithoutModel("chestnut_noxwood_door", new DoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final Block CHESTNUT_NOXWOOD_TRAPDOOR = registerWithoutModel("chestnut_noxwood_trapdoor", new TrapdoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final Block CHESTNUT_NOXWOOD_BUTTON = registerWithoutModel("chestnut_noxwood_button", new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final Block CHESTNUT_NOXWOOD_PRESSURE_PLATE = registerWithoutModel("chestnut_noxwood_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.DULL_RED)), DyeColor.LIME);
+	public static final BlockFamily CHESTNUT_NOXWOOD_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(CHESTNUT_NOXWOOD_PLANKS).stairs(CHESTNUT_NOXWOOD_STAIRS).slab(CHESTNUT_NOXWOOD_SLAB).fence(CHESTNUT_NOXWOOD_FENCE).fenceGate(CHESTNUT_NOXWOOD_FENCE_GATE).door(CHESTNUT_NOXWOOD_DOOR).trapdoor(CHESTNUT_NOXWOOD_TRAPDOOR).button(CHESTNUT_NOXWOOD_BUTTON).pressurePlate(CHESTNUT_NOXWOOD_PRESSURE_PLATE).build());
 	
 	public static Settings galaWood(MapColor color) {
 		return settings(color, BlockSoundGroup.CHERRY_WOOD, 30.0F).instrument(NoteBlockInstrument.BASS).burnable();
@@ -904,7 +911,7 @@ public class SpectrumBlocks {
 	
 	public static final WeepingGalaSprigBlock WEEPING_GALA_SPRIG = registerCustom("weeping_gala_sprig", new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.BRIGHT_TEAL)), DyeColor.LIME, block -> {
 		registerCutoutRenderLayerEntry(block);
-		registerCustomItemModel(block, Models.GENERATED);
+		registerCustomItemModel(block, b -> TextureMap.layer0(b.asItem()), Models.GENERATED);
 		registerTintableCrossBlockModel(block, false);
 	});
 	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = registerPottedPlant("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant()), false);
@@ -1242,13 +1249,19 @@ public class SpectrumBlocks {
 		return Settings.create().breakInstantly().nonOpaque().pistonBehavior(PistonBehavior.DESTROY);
 	}
 	
-	public static final AmaranthBushelBlock AMARANTH_BUSHEL = registerCustom("amaranth_bushel", new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision()), DyeColor.RED, block ->
-			registerTintableCrossModel(block, Models.GENERATED, false));
+	public static final AmaranthBushelBlock AMARANTH_BUSHEL = registerCustom("amaranth_bushel", new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision()), DyeColor.RED, block -> {
+		registerCutoutRenderLayerEntry(block);
+		registerCustomItemModel(block, b -> TextureMap.layer0(b.asItem()), Models.GENERATED);
+		registerTintableCrossBlockModel(block, false);
+	});
 	
 	public static final PottedAmaranthBushelBlock POTTED_AMARANTH_BUSHEL = registerPottedPlant("potted_amaranth_bushel", new PottedAmaranthBushelBlock(AMARANTH_BUSHEL, pottedPlant()), false);
 	
-	public static final ResonantLilyBlock RESONANT_LILY = registerCustom("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN, block ->
-			registerTintableCrossModel(block, Models.GENERATED, false));
+	public static final ResonantLilyBlock RESONANT_LILY = registerCustom("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN, block -> {
+		registerCutoutRenderLayerEntry(block);
+		registerCustomItemModel(block, b -> TextureMap.layer0(b.asItem()), Models.GENERATED);
+		registerTintableCrossBlockModel(block, false);
+	});
 	
 	public static final PottedResonantLilyBlock POTTED_RESONANT_LILY = registerPottedPlant("potted_resonant_lily", new PottedResonantLilyBlock(RESONANT_LILY, pottedPlant()), false);
 	
@@ -1274,8 +1287,11 @@ public class SpectrumBlocks {
 	});
 	
 	public static ColoredSaplingBlock registerColoredSapling(String name, DyeColor dyeColor) {
-		return registerCustom(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor, block ->
-				registerTintableCrossModel(block, Models.GENERATED, false));
+		return registerCustom(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor, block -> {
+			registerCutoutRenderLayerEntry(block);
+			registerCustomItemModel(block, Models.GENERATED);
+			registerTintableCrossBlockModel(block, false);
+		});
 	}
 	
 	public static final ColoredSaplingBlock BLACK_SAPLING = registerColoredSapling("black_sapling", DyeColor.BLACK);
@@ -1793,11 +1809,6 @@ public class SpectrumBlocks {
 		return RegistryKey.of(RegistryKeys.BLOCK, locate(name));
 	}
 	
-	public static void registerCustomItemModel(Block block, Model model) {
-		excludeFromSimpleItemModelGeneration(block);
-		ITEM_MODEL_REGISTRAR.defer(ctx -> ctx.register(block.asItem(), model));
-	}
-	
 	public static void registerCutoutRenderLayerEntry(Block block) {
 		CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout()));
 	}
@@ -1808,12 +1819,6 @@ public class SpectrumBlocks {
 	
 	public static <T extends Block> T registerWithoutModel(String name, T block) {
 		return COMMON_REGISTRAR.defer(block, b -> Registry.register(Registries.BLOCK, SpectrumCommon.locate(name), block));
-	}
-	
-	public static void registerTintableCrossModel(Block block, Model itemModel, boolean tinted) {
-		registerCutoutRenderLayerEntry(block);
-		registerCustomItemModel(block, itemModel);
-		registerTintableCrossBlockModel(block, tinted);
 	}
 	
 	public static <T extends FlowerPotBlock> T registerPottedPlant(String name, T block, boolean tinted) {
@@ -2041,15 +2046,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("slate_noxcap_hyphae", SLATE_NOXCAP_HYPHAE, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_slate_noxcap_hyphae", STRIPPED_SLATE_NOXCAP_HYPHAE, settings, DyeColor.LIME);
 		registerBlockWithItem("slate_noxcap_gills", SLATE_NOXCAP_GILLS, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_planks", SLATE_NOXWOOD_PLANKS, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_stairs", SLATE_NOXWOOD_STAIRS, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_slab", SLATE_NOXWOOD_SLAB, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_fence", SLATE_NOXWOOD_FENCE, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_fence_gate", SLATE_NOXWOOD_FENCE_GATE, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_door", SLATE_NOXWOOD_DOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_trapdoor", SLATE_NOXWOOD_TRAPDOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_pressure_plate", SLATE_NOXWOOD_PRESSURE_PLATE, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxwood_button", SLATE_NOXWOOD_BUTTON, settings, DyeColor.LIME);
 		registerBlockWithItem("slate_noxwood_pillar", SLATE_NOXWOOD_PILLAR, settings, DyeColor.LIME);
 		registerBlockWithItem("slate_noxwood_amphora", SLATE_NOXWOOD_AMPHORA, settings, DyeColor.LIME);
 		registerBlockWithItem("slate_noxwood_lamp", SLATE_NOXWOOD_LAMP, settings, DyeColor.LIME);
@@ -2062,15 +2058,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("ebony_noxcap_hyphae", EBONY_NOXCAP_HYPHAE, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_ebony_noxcap_hyphae", STRIPPED_EBONY_NOXCAP_HYPHAE, settings, DyeColor.LIME);
 		registerBlockWithItem("ebony_noxcap_gills", EBONY_NOXCAP_GILLS, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_planks", EBONY_NOXWOOD_PLANKS, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_stairs", EBONY_NOXWOOD_STAIRS, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_slab", EBONY_NOXWOOD_SLAB, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_fence", EBONY_NOXWOOD_FENCE, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_fence_gate", EBONY_NOXWOOD_FENCE_GATE, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_door", EBONY_NOXWOOD_DOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_trapdoor", EBONY_NOXWOOD_TRAPDOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_pressure_plate", EBONY_NOXWOOD_PRESSURE_PLATE, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxwood_button", EBONY_NOXWOOD_BUTTON, settings, DyeColor.LIME);
 		registerBlockWithItem("ebony_noxwood_pillar", EBONY_NOXWOOD_PILLAR, settings, DyeColor.LIME);
 		registerBlockWithItem("ebony_noxwood_amphora", EBONY_NOXWOOD_AMPHORA, settings, DyeColor.LIME);
 		registerBlockWithItem("ebony_noxwood_lamp", EBONY_NOXWOOD_LAMP, settings, DyeColor.LIME);
@@ -2083,15 +2070,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("ivory_noxcap_hyphae", IVORY_NOXCAP_HYPHAE, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_ivory_noxcap_hyphae", STRIPPED_IVORY_NOXCAP_HYPHAE, settings, DyeColor.LIME);
 		registerBlockWithItem("ivory_noxcap_gills", IVORY_NOXCAP_GILLS, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_planks", IVORY_NOXWOOD_PLANKS, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_stairs", IVORY_NOXWOOD_STAIRS, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_slab", IVORY_NOXWOOD_SLAB, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_fence", IVORY_NOXWOOD_FENCE, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_fence_gate", IVORY_NOXWOOD_FENCE_GATE, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_door", IVORY_NOXWOOD_DOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_trapdoor", IVORY_NOXWOOD_TRAPDOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_pressure_plate", IVORY_NOXWOOD_PRESSURE_PLATE, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxwood_button", IVORY_NOXWOOD_BUTTON, settings, DyeColor.LIME);
 		registerBlockWithItem("ivory_noxwood_pillar", IVORY_NOXWOOD_PILLAR, settings, DyeColor.LIME);
 		registerBlockWithItem("ivory_noxwood_amphora", IVORY_NOXWOOD_AMPHORA, settings, DyeColor.LIME);
 		registerBlockWithItem("ivory_noxwood_lamp", IVORY_NOXWOOD_LAMP, settings, DyeColor.LIME);
@@ -2104,15 +2082,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("chestnut_noxcap_hyphae", CHESTNUT_NOXCAP_HYPHAE, settings, DyeColor.LIME);
 		registerBlockWithItem("stripped_chestnut_noxcap_hyphae", STRIPPED_CHESTNUT_NOXCAP_HYPHAE, settings, DyeColor.LIME);
 		registerBlockWithItem("chestnut_noxcap_gills", CHESTNUT_NOXCAP_GILLS, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_planks", CHESTNUT_NOXWOOD_PLANKS, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_stairs", CHESTNUT_NOXWOOD_STAIRS, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_slab", CHESTNUT_NOXWOOD_SLAB, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_fence", CHESTNUT_NOXWOOD_FENCE, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_fence_gate", CHESTNUT_NOXWOOD_FENCE_GATE, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_door", CHESTNUT_NOXWOOD_DOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_trapdoor", CHESTNUT_NOXWOOD_TRAPDOOR, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_pressure_plate", CHESTNUT_NOXWOOD_PRESSURE_PLATE, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxwood_button", CHESTNUT_NOXWOOD_BUTTON, settings, DyeColor.LIME);
 		registerBlockWithItem("chestnut_noxwood_pillar", CHESTNUT_NOXWOOD_PILLAR, settings, DyeColor.LIME);
 		registerBlockWithItem("chestnut_noxwood_amphora", CHESTNUT_NOXWOOD_AMPHORA, settings, DyeColor.LIME);
 		registerBlockWithItem("chestnut_noxwood_lamp", CHESTNUT_NOXWOOD_LAMP, settings, DyeColor.LIME);
@@ -2877,10 +2846,6 @@ public class SpectrumBlocks {
 				SpectrumBlocks.HUMMINGSTONE_GLASS_PANE);
 		
 		CLIENT_REGISTRAR.flush();
-	}
-	
-	public static void provideItemModels(ItemModelGenerator generator) {
-		ITEM_MODEL_REGISTRAR.flush(generator);
 	}
 	
 }

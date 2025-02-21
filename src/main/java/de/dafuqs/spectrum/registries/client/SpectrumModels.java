@@ -11,10 +11,10 @@ public class SpectrumModels {
 	public static final Model CUBE_BOTTOM_TOP_PARTICLE = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TextureKey.TOP, TextureKey.BOTTOM, TextureKey.SIDE, TextureKey.PARTICLE);
 	public static final Model CUBE_BOTTOM_TOP_WALL = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TextureKey.TOP, TextureKey.BOTTOM, TextureKey.SIDE, TextureKey.WALL);
 	
-	public static final Model SMALL_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("tempaltes_item/small_bud")), Optional.empty(), TextureKey.LAYER0);
-	public static final Model MEDIUM_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("tempaltes_item/medium_bud")), Optional.empty(), TextureKey.LAYER0);
-	public static final Model LARGE_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("tempaltes_item/large_bud")), Optional.empty(), TextureKey.LAYER0);
-	public static final Model CLUSTER_ITEM = new Model(Optional.of(SpectrumCommon.locate("tempaltes_item/cluster")), Optional.empty(), TextureKey.LAYER0);
+	public static final Model SMALL_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/small_bud")), Optional.empty(), TextureKey.LAYER0);
+	public static final Model MEDIUM_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/medium_bud")), Optional.empty(), TextureKey.LAYER0);
+	public static final Model LARGE_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/large_bud")), Optional.empty(), TextureKey.LAYER0);
+	public static final Model CLUSTER_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/cluster")), Optional.empty(), TextureKey.LAYER0);
 	
 	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), TextureKey.TOP, TextureKey.SIDE, TextureKey.INSIDE);
 	public static final Model MOONSTONE_CHISELED = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled")), Optional.empty(), TextureKey.SIDE, SpectrumTextureKeys.LINE);

@@ -10,7 +10,6 @@ import de.dafuqs.spectrum.blocks.gravity.*;
 import de.dafuqs.spectrum.blocks.jade_vines.*;
 import de.dafuqs.spectrum.blocks.rock_candy.*;
 import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.data.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.items.*;
 import de.dafuqs.spectrum.items.armor.*;
@@ -44,12 +43,11 @@ import net.minecraft.util.*;
 import java.util.*;
 import java.util.function.*;
 
-import static de.dafuqs.spectrum.registries.SpectrumFluids.*;
+import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
 
 public class SpectrumItems {
 	
 	public static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
-	public static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	
 	// Main items
 	public static final Item GUIDEBOOK = registerDeferred("guidebook", new GuidebookItem(IS.of(1)), DyeColor.WHITE);
@@ -223,10 +221,10 @@ public class SpectrumItems {
 	public static final Item REFINED_MALACHITE = registerDeferred("refined_malachite", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, Items.GREEN_DYE), DyeColor.GREEN);
 	
 	// Fluid Buckets
-	public static final Item LIQUID_CRYSTAL_BUCKET = registerDeferred("liquid_crystal_bucket", new BucketItem(LIQUID_CRYSTAL, IS.of(1).recipeRemainder(Items.BUCKET)), DyeColor.LIGHT_GRAY);
-	public static final Item GOO_BUCKET = registerDeferred("goo_bucket", new BucketItem(GOO, IS.of(1).recipeRemainder(Items.BUCKET)), DyeColor.BROWN);
-	public static final Item MIDNIGHT_SOLUTION_BUCKET = registerDeferred("midnight_solution_bucket", new BucketItem(MIDNIGHT_SOLUTION, IS.of(1).recipeRemainder(Items.BUCKET)), DyeColor.GRAY);
-	public static final Item DRAGONROT_BUCKET = registerDeferred("dragonrot_bucket", new BucketItem(DRAGONROT, IS.of(1).recipeRemainder(Items.BUCKET)), DyeColor.LIGHT_GRAY);
+	public static final Item LIQUID_CRYSTAL_BUCKET = registerDeferred("liquid_crystal_bucket", new BucketItem(SpectrumFluids.LIQUID_CRYSTAL, IS.of(1).recipeRemainder(Items.BUCKET)), DyeColor.LIGHT_GRAY);
+	public static final Item GOO_BUCKET = registerDeferred("goo_bucket", new BucketItem(SpectrumFluids.GOO, IS.of(1).recipeRemainder(Items.BUCKET)), DyeColor.BROWN);
+	public static final Item MIDNIGHT_SOLUTION_BUCKET = registerDeferred("midnight_solution_bucket", new BucketItem(SpectrumFluids.MIDNIGHT_SOLUTION, IS.of(1).recipeRemainder(Items.BUCKET)), DyeColor.GRAY);
+	public static final Item DRAGONROT_BUCKET = registerDeferred("dragonrot_bucket", new BucketItem(SpectrumFluids.DRAGONROT, IS.of(1).recipeRemainder(Items.BUCKET)), DyeColor.LIGHT_GRAY);
 	
 	// Decay bottles
 	public static final Item BOTTLE_OF_FADING = registerDeferred("bottle_of_fading", new DecayPlacerItem(SpectrumBlocks.FADING, IS.of(16), List.of(Text.translatable("item.spectrum.bottle_of_fading.tooltip"))), DyeColor.GRAY);
@@ -552,10 +550,6 @@ public class SpectrumItems {
 		
 		FluidStorage.combinedItemApiProvider(SpectrumItems.MERMAIDS_GEM).register(context ->
 				new RemainderlessItemFluidStorage(context, FluidVariant.of(Fluids.WATER), FluidConstants.BUCKET));
-	}
-	
-	public static void provideItemModels(ItemModelGenerator generator) {
-		ITEM_MODEL_REGISTRAR.flush(generator);
 	}
 	
 	public static void registerFuelRegistry() {
