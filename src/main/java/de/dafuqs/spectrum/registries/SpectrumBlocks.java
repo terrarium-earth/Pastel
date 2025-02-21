@@ -178,12 +178,12 @@ public class SpectrumBlocks {
 	
 	public static final Block VEGETAL_BLOCK = registerSingleton("vegetal_block", new Block(settings(MapColor.PALE_GREEN, BlockSoundGroup.FUNGUS, 2.0F).nonOpaque()), DyeColor.GREEN, TexturedModel.makeFactory(TextureMap::texture, SpectrumModels.TRANSLUCENT_OUTER1));
 	public static final Block NEOLITH_BLOCK = registerCustom("neolith_block", new SpectrumFacingBlock(settings(MapColor.PURPLE, BlockSoundGroup.COPPER, 6.0F).requiresTool().instrument(NoteBlockInstrument.BASEDRUM).luminance(state -> 13).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), DyeColor.PINK, block -> registerDefaultFacingUpBlockModel(block, TexturedModel.CUBE_BOTTOM_TOP));
-	public static final Block BEDROCK_STORAGE_BLOCK = registerCustom("bedrock_storage_block", new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune")), IS.of(Rarity.UNCOMMON), DyeColor.BLACK, SpectrumModelProvider::registerSimpleBlockModel);
+	public static final Block BEDROCK_STORAGE_BLOCK = registerSimple("bedrock_storage_block", new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune")), IS.of(Rarity.UNCOMMON), DyeColor.BLACK);
 	
 	public static final SpectrumClusterBlock BISMUTH_CLUSTER = registerClusterBlock("bismuth_cluster", new SpectrumClusterBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 8), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
 	public static final SpectrumClusterBlock LARGE_BISMUTH_BUD = registerClusterBlock("large_bismuth_bud", new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 6).ticksRandomly(), SpectrumClusterBlock.GrowthStage.LARGE, BISMUTH_CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
 	public static final SpectrumClusterBlock SMALL_BISMUTH_BUD = registerClusterBlock("small_bismuth_bud", new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 4).ticksRandomly(), SpectrumClusterBlock.GrowthStage.SMALL, LARGE_BISMUTH_BUD), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.CYAN);
-	public static final Block BISMUTH_BLOCK = new Block(gemstoneBlock(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN));
+	public static final Block BISMUTH_BLOCK = registerSimple("bismuth_block", new Block(gemstoneBlock(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN)), DyeColor.CYAN);
 	
 	// DD BLOCKS
 	private static final float BLACKSLAG_HARDNESS = 5.0F;
@@ -1074,28 +1074,28 @@ public class SpectrumBlocks {
 		return AbstractBlock.Settings.copy(Blocks.END_STONE).strength(3.0F, 3.0F).requiresTool();
 	}
 	
-	public static final Block SHIMMERSTONE_ORE = new ShimmerstoneOreBlock(UniformIntProvider.create(2, 4), ore().ticksRandomly(), SpectrumAdvancements.REVEAL_SHIMMERSTONE, Blocks.STONE.getDefaultState());
-	public static final Block DEEPSLATE_SHIMMERSTONE_ORE = new ShimmerstoneOreBlock(UniformIntProvider.create(2, 4), deepslateOre().ticksRandomly(), SpectrumAdvancements.REVEAL_SHIMMERSTONE, Blocks.DEEPSLATE.getDefaultState());
-	public static final Block BLACKSLAG_SHIMMERSTONE_ORE = new ShimmerstoneOreBlock(UniformIntProvider.create(2, 4), blackslagOre().ticksRandomly(), SpectrumAdvancements.REVEAL_SHIMMERSTONE, BLACKSLAG.getDefaultState());
-	public static final Block SHIMMERSTONE_BLOCK = new ShimmerstoneBlock(settings(MapColor.YELLOW, BlockSoundGroup.GLASS, 2.0F).luminance((state) -> 15));
+	public static final Block SHIMMERSTONE_ORE = registerSimple("shimmerstone_ore", new ShimmerstoneOreBlock(UniformIntProvider.create(2, 4), ore().ticksRandomly(), SpectrumAdvancements.REVEAL_SHIMMERSTONE, Blocks.STONE.getDefaultState()), DyeColor.YELLOW);
+	public static final Block DEEPSLATE_SHIMMERSTONE_ORE = registerSimple("deepslate_shimmerstone_ore", new ShimmerstoneOreBlock(UniformIntProvider.create(2, 4), deepslateOre().ticksRandomly(), SpectrumAdvancements.REVEAL_SHIMMERSTONE, Blocks.DEEPSLATE.getDefaultState()), DyeColor.YELLOW);
+	public static final Block BLACKSLAG_SHIMMERSTONE_ORE = registerSingleton("blackslag_shimmerstone_ore", new ShimmerstoneOreBlock(UniformIntProvider.create(2, 4), blackslagOre().ticksRandomly(), SpectrumAdvancements.REVEAL_SHIMMERSTONE, BLACKSLAG.getDefaultState()), DyeColor.YELLOW, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block SHIMMERSTONE_BLOCK = registerSimple("shimmerstone_block", new ShimmerstoneBlock(settings(MapColor.YELLOW, BlockSoundGroup.GLASS, 2.0F).luminance((state) -> 15)), DyeColor.YELLOW);
 	
-	public static final AzuriteOreBlock AZURITE_ORE = new AzuriteOreBlock(UniformIntProvider.create(4, 7), ore().ticksRandomly(), SpectrumAdvancements.REVEAL_AZURITE, Blocks.STONE.getDefaultState());
-	public static final Block DEEPSLATE_AZURITE_ORE = new AzuriteOreBlock(UniformIntProvider.create(4, 7), deepslateOre().ticksRandomly(), SpectrumAdvancements.REVEAL_AZURITE, Blocks.DEEPSLATE.getDefaultState());
-	public static final Block BLACKSLAG_AZURITE_ORE = new AzuriteOreBlock(UniformIntProvider.create(4, 7), blackslagOre().ticksRandomly(), SpectrumAdvancements.REVEAL_AZURITE, SpectrumBlocks.BLACKSLAG.getDefaultState());
-	public static final Block AZURITE_BLOCK = new SpectrumFacingBlock(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK).mapColor(MapColor.BLUE));
+	public static final AzuriteOreBlock AZURITE_ORE = registerCustom("azurite_ore", new AzuriteOreBlock(UniformIntProvider.create(4, 7), ore().ticksRandomly(), SpectrumAdvancements.REVEAL_AZURITE, Blocks.STONE.getDefaultState()), DyeColor.BLUE, SpectrumModelProvider::registerSimpleMirroredBlockModel);
+	public static final Block DEEPSLATE_AZURITE_ORE = registerCustom("deepslate_azurite_ore", new AzuriteOreBlock(UniformIntProvider.create(4, 7), deepslateOre().ticksRandomly(), SpectrumAdvancements.REVEAL_AZURITE, Blocks.DEEPSLATE.getDefaultState()), DyeColor.BLUE, SpectrumModelProvider::registerSimpleMirroredBlockModel);
+	public static final Block BLACKSLAG_AZURITE_ORE = registerCustom("blackslag_azurite_ore", new AzuriteOreBlock(UniformIntProvider.create(4, 7), blackslagOre().ticksRandomly(), SpectrumAdvancements.REVEAL_AZURITE, SpectrumBlocks.BLACKSLAG.getDefaultState()), DyeColor.BLUE, SpectrumModelProvider::registerSimpleMirroredBlockModel);
+	public static final Block AZURITE_BLOCK = registerCustom("azurite_block", new SpectrumFacingBlock(AbstractBlock.Settings.copy(Blocks.LAPIS_BLOCK).mapColor(MapColor.BLUE)), DyeColor.BLUE, block -> registerDefaultFacingUpBlockModel(block, TexturedModel.CUBE_BOTTOM_TOP));
 	public static final Block AZURITE_CLUSTER = registerClusterBlock("azurite_cluster", new SpectrumClusterBlock(gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 2), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BLUE);
 	public static final Block LARGE_AZURITE_BUD = registerClusterBlock("large_azurite_bud", new SpectrumClusterBlock(gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.LARGE_ONYX_BUD, 3), SpectrumClusterBlock.GrowthStage.LARGE), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BLUE);
 	public static final Block SMALL_AZURITE_BUD = registerClusterBlock("small_azurite_bud", new SpectrumClusterBlock(gemstone(MapColor.BLUE, SpectrumBlockSoundGroups.ONYX_CLUSTER, 5), SpectrumClusterBlock.GrowthStage.SMALL), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.BLUE);
 	
-	public static final Block MALACHITE_ORE = new CloakedOreBlock(UniformIntProvider.create(7, 11), ore(), SpectrumAdvancements.REVEAL_MALACHITE, Blocks.STONE.getDefaultState());
-	public static final Block DEEPSLATE_MALACHITE_ORE = new CloakedOreBlock(UniformIntProvider.create(7, 11), deepslateOre(), SpectrumAdvancements.REVEAL_MALACHITE, Blocks.DEEPSLATE.getDefaultState());
-	public static final Block BLACKSLAG_MALACHITE_ORE = new CloakedOreBlock(UniformIntProvider.create(7, 11), blackslagOre(), SpectrumAdvancements.REVEAL_MALACHITE, BLACKSLAG.getDefaultState());
-	public static final Block MALACHITE_BLOCK = new SpectrumFacingBlock(gemstoneBlock(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN));
+	public static final Block MALACHITE_ORE = registerSimple("malachite_ore", new CloakedOreBlock(UniformIntProvider.create(7, 11), ore(), SpectrumAdvancements.REVEAL_MALACHITE, Blocks.STONE.getDefaultState()), IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
+	public static final Block DEEPSLATE_MALACHITE_ORE = registerSimple("deepslate_malachite_ore", new CloakedOreBlock(UniformIntProvider.create(7, 11), deepslateOre(), SpectrumAdvancements.REVEAL_MALACHITE, Blocks.DEEPSLATE.getDefaultState()), IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
+	public static final Block BLACKSLAG_MALACHITE_ORE = registerSingleton("blackslag_malachite_ore", new CloakedOreBlock(UniformIntProvider.create(7, 11), blackslagOre(), SpectrumAdvancements.REVEAL_MALACHITE, BLACKSLAG.getDefaultState()), IS.of(Rarity.UNCOMMON), DyeColor.GREEN, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block MALACHITE_BLOCK = registerCustom("malachite_block", new SpectrumFacingBlock(gemstoneBlock(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN)), IS.of(Rarity.UNCOMMON), DyeColor.GREEN, block -> registerDefaultFacingUpBlockModel(block, TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	public static final Block MALACHITE_CLUSTER = registerClusterBlock("malachite_cluster", new SpectrumClusterBlock(gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 9), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.GREEN);
 	public static final Block LARGE_MALACHITE_BUD = registerClusterBlock("large_malachite_bud", new SpectrumClusterBlock(gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 7), SpectrumClusterBlock.GrowthStage.LARGE), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.GREEN);
 	public static final Block SMALL_MALACHITE_BUD = registerClusterBlock("small_malachite_bud", new SpectrumClusterBlock(gemstone(MapColor.EMERALD_GREEN, BlockSoundGroup.CHAIN, 5), SpectrumClusterBlock.GrowthStage.SMALL), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.GREEN);
 	
-	public static final Block BLOODSTONE_BLOCK = new SpectrumFacingBlock(gemstoneBlock(MapColor.RED, SpectrumBlockSoundGroups.ONYX_CLUSTER));
+	public static final Block BLOODSTONE_BLOCK = registerCustom("bloodstone_block", new SpectrumFacingBlock(gemstoneBlock(MapColor.RED, SpectrumBlockSoundGroups.ONYX_CLUSTER)), IS.of(Rarity.UNCOMMON), DyeColor.RED, block -> registerDefaultFacingUpBlockModel(block, TexturedModel.CUBE_COLUMN));
 	public static final Block BLOODSTONE_CLUSTER = registerClusterBlock("bloodstone_cluster", new SpectrumClusterBlock(gemstone(MapColor.RED, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 6), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
 	public static final Block LARGE_BLOODSTONE_BUD = registerClusterBlock("large_bloodstone_bud", new SpectrumClusterBlock(gemstone(MapColor.RED, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 4), SpectrumClusterBlock.GrowthStage.LARGE), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
 	public static final Block SMALL_BLOODSTONE_BUD = registerClusterBlock("small_bloodstone_bud", new SpectrumClusterBlock(gemstone(MapColor.RED, SpectrumBlockSoundGroups.ONYX_CLUSTER, 3), SpectrumClusterBlock.GrowthStage.SMALL), IS.of(Rarity.UNCOMMON), SpectrumModels.CRYSTALLARIEUM_FARMABLE, DyeColor.RED);
@@ -1111,14 +1111,14 @@ public class SpectrumBlocks {
 	public static final FloatBlock STRATINE_FLOATBLOCK = new FloatBlock(gravityBlock(MapColor.DARK_RED), -0.2F);
 	public static final FloatBlock HOVER_BLOCK = new FloatBlock(gravityBlock(MapColor.DIAMOND_BLUE), 0.0F);
 	
-	public static final Block BLACKSLAG_COAL_ORE = new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), blackslagOre());
-	public static final Block BLACKSLAG_COPPER_ORE = new ExperienceDroppingBlock(ConstantIntProvider.create(0), blackslagOre());
-	public static final Block BLACKSLAG_IRON_ORE = new ExperienceDroppingBlock(ConstantIntProvider.create(0), blackslagOre());
-	public static final Block BLACKSLAG_GOLD_ORE = new ExperienceDroppingBlock(ConstantIntProvider.create(0), blackslagOre());
-	public static final Block BLACKSLAG_LAPIS_ORE = new ExperienceDroppingBlock(UniformIntProvider.create(2, 5), blackslagOre());
-	public static final Block BLACKSLAG_DIAMOND_ORE = new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), blackslagOre());
-	public static final Block BLACKSLAG_REDSTONE_ORE = new RedstoneOreBlock(blackslagOre().ticksRandomly().luminance(createLightLevelFromLitBlockState(9)));
-	public static final Block BLACKSLAG_EMERALD_ORE = new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), blackslagOre());
+	public static final Block BLACKSLAG_COAL_ORE = registerSingleton("blackslag_coal_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), blackslagOre()), DyeColor.BLACK, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BLACKSLAG_COPPER_ORE = registerSingleton("blackslag_copper_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), blackslagOre()), DyeColor.BLACK, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BLACKSLAG_IRON_ORE = registerSingleton("blackslag_iron_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), blackslagOre()), DyeColor.BROWN, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BLACKSLAG_GOLD_ORE = registerSingleton("blackslag_gold_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), blackslagOre()), DyeColor.YELLOW, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BLACKSLAG_LAPIS_ORE = registerSingleton("blackslag_lapis_ore", new ExperienceDroppingBlock(UniformIntProvider.create(2, 5), blackslagOre()), DyeColor.BLUE, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BLACKSLAG_DIAMOND_ORE = registerSingleton("blackslag_diamond_ore", new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), blackslagOre()), DyeColor.LIGHT_BLUE, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BLACKSLAG_REDSTONE_ORE = registerSingleton("blackslag_redstone_ore", new RedstoneOreBlock(blackslagOre().ticksRandomly().luminance(createLightLevelFromLitBlockState(9))), DyeColor.RED, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block BLACKSLAG_EMERALD_ORE = registerSingleton("blackslag_emerald_ore", new ExperienceDroppingBlock(UniformIntProvider.create(3, 7), blackslagOre()), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	
 	// FUNCTIONAL BLOCKS
 	public static final Block HEARTBOUND_CHEST = new HeartboundChestBlock(settings(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.STONE, -1.0F, 3600000.0F).requiresTool().nonOpaque());
@@ -1244,8 +1244,8 @@ public class SpectrumBlocks {
 	public static final Block CITRINE_STORAGE_BLOCK = registerSingleton("citrine_storage_block", new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK)), DyeColor.YELLOW, TexturedModel.SIDE_TOP_BOTTOM_WALL);
 	public static final Block ONYX_STORAGE_BLOCK = registerSingleton("onyx_storage_block", new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK)), DyeColor.BLACK, TexturedModel.SIDE_TOP_BOTTOM_WALL);
 	public static final Block MOONSTONE_STORAGE_BLOCK = registerSingleton("moonstone_storage_block", new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK)), DyeColor.WHITE, TexturedModel.SIDE_TOP_BOTTOM_WALL);
-//	public static final Block SPECTRAL_SHARD_BLOCK = registerCustom("spectral_shard_block", new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME), IS.of(Rarity.RARE), DyeColor.WHITE, SpectrumModelProvider::registerSimpleBlockModel);
-//	public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = registerCustom("spectral_shard_storage_block", new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK)), IS.of(Rarity.RARE), DyeColor.WHITE, SpectrumModelProvider::registerSimpleBlockModel);
+//	public static final Block SPECTRAL_SHARD_BLOCK = registerSimple("spectral_shard_block", new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME), IS.of(Rarity.RARE), DyeColor.WHITE);
+//	public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = registerSimple("spectral_shard_storage_block", new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK)), IS.of(Rarity.RARE), DyeColor.WHITE);
 	
 	private static AbstractBlock.Settings copyWithMapColor(Block baseBlock, MapColor color) {
 		return AbstractBlock.Settings.copy(baseBlock).mapColor(color);
@@ -1598,7 +1598,7 @@ public class SpectrumBlocks {
 	public static final Block PURE_QUARTZ_BLOCK = registerSimple("pure_quartz_block", new Block(AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK)), DyeColor.BROWN);
 	public static final Block PURE_GLOWSTONE_BLOCK = registerSimple("pure_glowstone_block", new Block(AbstractBlock.Settings.copy(Blocks.GLOWSTONE)), DyeColor.YELLOW);
 	public static final Block PURE_PRISMARINE_BLOCK = registerSimple("pure_prismarine_block", new Block(AbstractBlock.Settings.copy(Blocks.PRISMARINE)), DyeColor.CYAN);
-	public static final Block PURE_NETHERITE_SCRAP_BLOCK = registerCustom("pure_netherite_scrap_block", new Block(AbstractBlock.Settings.copy(Blocks.ANCIENT_DEBRIS)), IS.of().fireproof(), DyeColor.BROWN, SpectrumModelProvider::registerSimpleBlockModel);
+	public static final Block PURE_NETHERITE_SCRAP_BLOCK = registerSimple("pure_netherite_scrap_block", new Block(AbstractBlock.Settings.copy(Blocks.ANCIENT_DEBRIS)), IS.of().fireproof(), DyeColor.BROWN);
 	public static final Block PURE_ECHO_BLOCK = registerSimple("pure_echo_block", new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK)), DyeColor.BROWN);
 	
 	private static Settings preservationBlock() {
@@ -1902,12 +1902,20 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> T registerSimple(String name, T block, DyeColor dyeColor) {
-		return registerSingleton(name, block, dyeColor, TexturedModel.CUBE_ALL);
+		return registerSimple(name, block, IS.DEFAULT, dyeColor);
+	}
+	
+	public static <T extends Block> T registerSimple(String name, T block, Item.Settings settings, DyeColor dyeColor) {
+		return registerSingleton(name, block, settings, dyeColor, TexturedModel.CUBE_ALL);
 	}
 	
 	public static <T extends Block> T registerSingleton(String name, T block, DyeColor dyeColor, TexturedModel.Factory factory) {
+		return registerSingleton(name, block, IS.DEFAULT, dyeColor, factory);
+	}
+	
+	public static <T extends Block> T registerSingleton(String name, T block, Item.Settings settings, DyeColor dyeColor, TexturedModel.Factory factory) {
 		registerSingletonBlockModel(block, factory);
-		return registerWithoutModel(name, block, dyeColor);
+		return registerWithoutModel(name, block, settings, dyeColor);
 	}
 	
 	public static <T extends Block> T registerParented(String name, T block, DyeColor dyeColor, Block parentBlock) {
@@ -2221,34 +2229,9 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerOreBlocks(Item.Settings settings, Item.Settings settingsFireproof) {
-		registerBlockWithItem("shimmerstone_ore", SHIMMERSTONE_ORE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("deepslate_shimmerstone_ore", DEEPSLATE_SHIMMERSTONE_ORE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("blackslag_shimmerstone_ore", BLACKSLAG_SHIMMERSTONE_ORE, settings, DyeColor.YELLOW);
-		
-		registerBlockWithItem("azurite_ore", AZURITE_ORE, settings, DyeColor.BLUE);
-		registerBlockWithItem("deepslate_azurite_ore", DEEPSLATE_AZURITE_ORE, settings, DyeColor.BLUE);
-		registerBlockWithItem("blackslag_azurite_ore", BLACKSLAG_AZURITE_ORE, settings, DyeColor.BLUE);
-		
 		registerBlockWithItem("stratine_ore", STRATINE_ORE, new FloatBlockItem(STRATINE_ORE, settingsFireproof, -0.01F), DyeColor.RED);
 		registerBlockWithItem("paltaeria_ore", PALTAERIA_ORE, new FloatBlockItem(PALTAERIA_ORE, settings, 0.01F), DyeColor.CYAN);
 		
-		registerBlockWithItem("bismuth_block", BISMUTH_BLOCK, IS.of(Rarity.UNCOMMON), DyeColor.CYAN);
-		
-		registerBlockWithItem("malachite_ore", MALACHITE_ORE, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
-		registerBlockWithItem("deepslate_malachite_ore", DEEPSLATE_MALACHITE_ORE, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
-		registerBlockWithItem("blackslag_malachite_ore", BLACKSLAG_MALACHITE_ORE, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
-		registerBlockWithItem("malachite_block", MALACHITE_BLOCK, IS.of(Rarity.UNCOMMON), DyeColor.GREEN);
-		
-		registerBlockWithItem("blackslag_coal_ore", BLACKSLAG_COAL_ORE, settings, DyeColor.BLACK);
-		registerBlockWithItem("blackslag_copper_ore", BLACKSLAG_COPPER_ORE, settings, DyeColor.BLACK);
-		registerBlockWithItem("blackslag_iron_ore", BLACKSLAG_IRON_ORE, settings, DyeColor.BROWN);
-		registerBlockWithItem("blackslag_gold_ore", BLACKSLAG_GOLD_ORE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("blackslag_diamond_ore", BLACKSLAG_DIAMOND_ORE, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("blackslag_redstone_ore", BLACKSLAG_REDSTONE_ORE, settings, DyeColor.RED);
-		registerBlockWithItem("blackslag_lapis_ore", BLACKSLAG_LAPIS_ORE, settings, DyeColor.BLUE);
-		registerBlockWithItem("blackslag_emerald_ore", BLACKSLAG_EMERALD_ORE, settings, DyeColor.LIME);
-		
-		registerBlockWithItem("bloodstone_block", BLOODSTONE_BLOCK, settings.rarity(Rarity.UNCOMMON), DyeColor.RED);
 		registerBlockWithItem("resplendent_block", RESPLENDENT_BLOCK, settings.rarity(Rarity.UNCOMMON), DyeColor.YELLOW);
 		registerBlockWithItem("resplendent_cushion", RESPLENDENT_CUSHION, settings.rarity(Rarity.UNCOMMON), DyeColor.YELLOW);
 		registerBlockWithItem("resplendent_carpet", RESPLENDENT_CARPET, settings.rarity(Rarity.UNCOMMON), DyeColor.YELLOW);
@@ -2256,9 +2239,6 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerOreStorageBlocks(Item.Settings settings, Item.Settings settingsFireproof) {
-		
-		registerBlockWithItem("azurite_block", AZURITE_BLOCK, IS.of(), DyeColor.BLUE);
-		registerBlockWithItem("shimmerstone_block", SHIMMERSTONE_BLOCK, IS.of(), DyeColor.YELLOW);
 		registerBlockWithItem("stratine_floatblock", STRATINE_FLOATBLOCK, new FloatBlockItem(STRATINE_FLOATBLOCK, settingsFireproof, -0.02F), DyeColor.RED);
 		registerBlockWithItem("paltaeria_floatblock", PALTAERIA_FLOATBLOCK, new FloatBlockItem(PALTAERIA_FLOATBLOCK, settings, 0.02F), DyeColor.CYAN);
 		registerBlockWithItem("hover_block", HOVER_BLOCK, new FloatBlockItem(HOVER_BLOCK, settings, 0F) {
