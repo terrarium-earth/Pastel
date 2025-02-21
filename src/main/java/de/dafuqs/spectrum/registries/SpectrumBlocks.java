@@ -478,11 +478,11 @@ public class SpectrumBlocks {
 		return AbstractBlock.Settings.copy(block).pistonBehavior(PistonBehavior.DESTROY).hardness(1.0F).nonOpaque();
 	}
 	
-	public static final Block TOPAZ_CHIME = new GemstoneChimeBlock(chime(TOPAZ_CLUSTER), SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_CHIME, SpectrumParticleTypes.CYAN_SPARKLE_RISING);
-	public static final Block AMETHYST_CHIME = new GemstoneChimeBlock(chime(Blocks.AMETHYST_CLUSTER), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SpectrumParticleTypes.MAGENTA_SPARKLE_RISING);
-	public static final Block CITRINE_CHIME = new GemstoneChimeBlock(chime(CITRINE_CLUSTER), SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME, SpectrumParticleTypes.YELLOW_SPARKLE_RISING);
-	public static final Block ONYX_CHIME = new GemstoneChimeBlock(chime(ONYX_CLUSTER), SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME, SpectrumParticleTypes.BLACK_SPARKLE_RISING);
-	public static final Block MOONSTONE_CHIME = new GemstoneChimeBlock(chime(MOONSTONE_CLUSTER), SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME, SpectrumParticleTypes.WHITE_SPARKLE_RISING);
+	public static final Block TOPAZ_CHIME = registerSingleton("topaz_chime", new GemstoneChimeBlock(chime(TOPAZ_CLUSTER), SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_CHIME, SpectrumParticleTypes.CYAN_SPARKLE_RISING), DyeColor.CYAN, SpectrumTexturedModels.CHIME);
+	public static final Block AMETHYST_CHIME = registerSingleton("amethyst_chime", new GemstoneChimeBlock(chime(Blocks.AMETHYST_CLUSTER), SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, SpectrumParticleTypes.MAGENTA_SPARKLE_RISING), DyeColor.MAGENTA, SpectrumTexturedModels.CHIME);
+	public static final Block CITRINE_CHIME = registerSingleton("citrine_chime", new GemstoneChimeBlock(chime(CITRINE_CLUSTER), SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME, SpectrumParticleTypes.YELLOW_SPARKLE_RISING), DyeColor.YELLOW, SpectrumTexturedModels.CHIME);
+	public static final Block ONYX_CHIME = registerSingleton("onyx_chime", new GemstoneChimeBlock(chime(ONYX_CLUSTER), SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME, SpectrumParticleTypes.BLACK_SPARKLE_RISING), DyeColor.BLACK, SpectrumTexturedModels.CHIME);
+	public static final Block MOONSTONE_CHIME = registerSingleton("moonstone_chime", new GemstoneChimeBlock(chime(MOONSTONE_CLUSTER), SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME, SpectrumParticleTypes.WHITE_SPARKLE_RISING), DyeColor.WHITE, SpectrumTexturedModels.CHIME);
 	
 	private static Settings decostone(AbstractBlock block) {
 		return AbstractBlock.Settings.copy(block).nonOpaque();
@@ -1994,7 +1994,6 @@ public class SpectrumBlocks {
 		registerShimmerstoneLights(IS.of());
 		registerGemstoneGlass(IS.of());
 		registerPlayerOnlyGlass(IS.of());
-		registerGemstoneChimes(IS.of());
 		registerDecoStones(IS.of());
 		registerPigmentStorageBlocks(IS.of());
 		registerColoredLamps(IS.of());
@@ -2311,14 +2310,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("citrine_semi_permeable_glass", CITRINE_SEMI_PERMEABLE_GLASS, settings, DyeColor.YELLOW);
 		registerBlockWithItem("onyx_semi_permeable_glass", ONYX_SEMI_PERMEABLE_GLASS, settings, DyeColor.BLACK);
 		registerBlockWithItem("moonstone_semi_permeable_glass", MOONSTONE_SEMI_PERMEABLE_GLASS, settings, DyeColor.WHITE);
-	}
-	
-	private static void registerGemstoneChimes(Item.Settings settings) {
-		registerBlockWithItem("topaz_chime", TOPAZ_CHIME, settings, DyeColor.CYAN);
-		registerBlockWithItem("amethyst_chime", AMETHYST_CHIME, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("citrine_chime", CITRINE_CHIME, settings, DyeColor.YELLOW);
-		registerBlockWithItem("onyx_chime", ONYX_CHIME, settings, DyeColor.BLACK);
-		registerBlockWithItem("moonstone_chime", MOONSTONE_CHIME, settings, DyeColor.WHITE);
 	}
 	
 	private static void registerDecoStones(Item.Settings settings) {
