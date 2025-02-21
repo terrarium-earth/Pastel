@@ -7,7 +7,6 @@ import net.minecraft.block.*;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.*;
 
 import java.util.function.*;
 
@@ -55,12 +54,8 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerParented(parentBlock, block));
 	}
 	
-	public static void registerVariantsBlockModel(Function<BlockStateModelGenerator, BlockStateSupplier> factory) {
+	public static void registerBlockModel(Function<BlockStateModelGenerator, BlockStateSupplier> factory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(factory.apply(ctx)));
-	}
-	
-	public static void registerSimpleBlockModel(Block block) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSimpleCubeAll(block));
 	}
 	
 	public static void registerAxisRotatedBlockModel(Block block, TexturedModel.Factory factory) {
@@ -68,25 +63,15 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	}
 	
 	public static void registerMirroredAxisRotatedBlockModel(Block block, TexturedModel.Factory factory, TexturedModel.Factory mirroredFactory) {
-		registerVariantsBlockModel(ctx -> createMirroredVariantsSupplier(ctx, block, factory, mirroredFactory).coordinate(BlockStateModelGenerator.createAxisRotatedVariantMap()));
+		registerBlockModel(ctx -> createMirroredVariantsSupplier(ctx, block, factory, mirroredFactory).coordinate(BlockStateModelGenerator.createAxisRotatedVariantMap()));
 	}
 	
 	public static void registerDefaultFacingUpBlockModel(Block block, TexturedModel.Factory factory) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			BlockStateVariantMap variants = BlockStateVariantMap.create(FacingBlock.FACING)
-					.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R180))
-					.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-					.register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90))
-					.register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R180))
-					.register(Direction.UP, BlockStateVariant.create())
-					.register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270));
-			ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, factory.upload(block, ctx.modelCollector)))
-					.coordinate(variants));
-		});
+		registerBlockModel(ctx -> VariantsBlockStateSupplier.create(block, BlockStateVariant.create().put(VariantSettings.MODEL, factory.upload(block, ctx.modelCollector))).coordinate(ctx.createUpDefaultFacingVariantMap()));
 	}
 	
 	public static void registerSimpleMirroredBlockModel(Block block) {
-		registerVariantsBlockModel(ctx -> createMirroredVariantsSupplier(ctx, block, TexturedModel.CUBE_ALL, TexturedModel.CUBE_MIRRORED_ALL));
+		registerBlockModel(ctx -> createMirroredVariantsSupplier(ctx, block, TexturedModel.CUBE_ALL, TexturedModel.CUBE_MIRRORED_ALL));
 	}
 	
 	public static void registerLogBlockModel(Block block) {

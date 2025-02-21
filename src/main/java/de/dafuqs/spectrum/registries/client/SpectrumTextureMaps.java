@@ -2,13 +2,20 @@ package de.dafuqs.spectrum.registries.client;
 
 import net.minecraft.block.*;
 import net.minecraft.data.client.*;
+import net.minecraft.util.*;
 
 public class SpectrumTextureMaps {
 	
-	public static TextureMap sideEnd(Block sideBlock, String sideSuffix, Block endBlock, String endSuffix) {
-		return new TextureMap()
-				.put(TextureKey.SIDE, TextureMap.getSubId(sideBlock, sideSuffix))
-				.put(TextureKey.END, TextureMap.getSubId(endBlock, endSuffix));
+	public static TextureMap all(Block allBlock, String allSuffix) {
+		return new TextureMap().put(TextureKey.ALL, TextureMap.getSubId(allBlock, allSuffix));
+	}
+	
+	public static TextureMap cross(Block crossBlock, String crossSuffix) {
+		return new TextureMap().put(TextureKey.CROSS, TextureMap.getSubId(crossBlock, crossSuffix));
+	}
+	
+	public static TextureMap plant(Block plantBlock, String plantSuffix) {
+		return new TextureMap().put(TextureKey.PLANT, TextureMap.getSubId(plantBlock, plantSuffix));
 	}
 	
 	public static TextureMap sideTopBottomWall(Block sideBlock, String sideSuffix, Block topBlock, String topSuffix, Block bottomBlock, String bottomSuffix, Block wallBlock, String wallSuffix) {
@@ -27,11 +34,25 @@ public class SpectrumTextureMaps {
 				.put(TextureKey.PARTICLE, TextureMap.getSubId(particleBlock, particleSuffix));
 	}
 	
+	public static TextureMap sideTopInside(Identifier side, Identifier top, Identifier inside) {
+		return new TextureMap().put(TextureKey.SIDE, side).put(TextureKey.TOP, top).put(TextureKey.INSIDE, inside);
+	}
+	
+	public static TextureMap sideEnd(Block sideBlock, String sideSuffix, Block endBlock, String endSuffix) {
+		return new TextureMap()
+				.put(TextureKey.SIDE, TextureMap.getSubId(sideBlock, sideSuffix))
+				.put(TextureKey.END, TextureMap.getSubId(endBlock, endSuffix));
+	}
+	
 	public static TextureMap sideEndWall(Block sideBlock, String sideSuffix, Block endBlock, String endSuffix, Block wallBlock, String wallSuffix) {
 		return new TextureMap()
 				.put(TextureKey.SIDE, TextureMap.getSubId(sideBlock, sideSuffix))
 				.put(TextureKey.TOP, TextureMap.getSubId(endBlock, endSuffix))
 				.put(TextureKey.WALL, TextureMap.getSubId(wallBlock, wallSuffix));
+	}
+	
+	public static TextureMap sideLine(Identifier side, Identifier line) {
+		return new TextureMap().put(TextureKey.SIDE, side).put(SpectrumTextureKeys.LINE, line);
 	}
 	
 	public static TextureMap dirtTop(Block dirtBlock, String dirtSuffix, Block topBlock, String topSuffix) {
