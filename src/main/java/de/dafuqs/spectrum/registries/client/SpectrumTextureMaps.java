@@ -5,10 +5,12 @@ import net.minecraft.data.client.*;
 
 public class SpectrumTextureMaps {
 	
-	public static TextureMap sideTopAndBottomAsTop(Block block) {
-		return TextureMap.of(TextureKey.SIDE, TextureMap.getId(block))
-				.put(TextureKey.TOP, TextureMap.getSubId(block, "_top"))
-				.put(TextureKey.BOTTOM, TextureMap.getSubId(block, "_top"));
+	public static TextureMap sideTopBottomWall(Block block, String sideSuffix, String topSuffix, String bottomSuffix, String wallSuffix) {
+		return new TextureMap()
+				.put(TextureKey.SIDE, TextureMap.getSubId(block, sideSuffix))
+				.put(TextureKey.TOP, TextureMap.getSubId(block, topSuffix))
+				.put(TextureKey.BOTTOM, TextureMap.getSubId(block, bottomSuffix))
+				.put(TextureKey.WALL, TextureMap.getSubId(block, wallSuffix));
 	}
 	
 }

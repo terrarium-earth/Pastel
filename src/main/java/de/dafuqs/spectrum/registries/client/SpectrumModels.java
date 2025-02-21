@@ -9,6 +9,7 @@ import java.util.*;
 public class SpectrumModels {
 	
 	public static final Model CUBE_BOTTOM_TOP_PARTICLE = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TextureKey.TOP, TextureKey.BOTTOM, TextureKey.SIDE, TextureKey.PARTICLE);
+	public static final Model CUBE_BOTTOM_TOP_WALL = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TextureKey.TOP, TextureKey.BOTTOM, TextureKey.SIDE, TextureKey.WALL);
 	
 	public static final Model SMALL_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("tempaltes_item/small_bud")), Optional.empty(), TextureKey.LAYER0);
 	public static final Model MEDIUM_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("tempaltes_item/medium_bud")), Optional.empty(), TextureKey.LAYER0);

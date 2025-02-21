@@ -194,11 +194,11 @@ public class SpectrumBlocks {
 		return settings(MapColor.GRAY, blockSoundGroup, BLACKSLAG_HARDNESS, BLACKSLAG_RESISTANCE).instrument(NoteBlockInstrument.BASEDRUM).requiresTool();
 	}
 	
-	public static final Block BLACKSLAG = registerWithoutModel("blackslag", new BlackslagBlock(blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK);
+	public static final Block BLACKSLAG = registerCustom("blackslag", new BlackslagBlock(blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK, block -> registerMirroredAxisRotatedBlockModel(block, TexturedModel.END_FOR_TOP_CUBE_COLUMN, SpectrumTexturedModels.CUBE_COLUMN_MIRRORED));
 	public static final Block BLACKSLAG_STAIRS = registerWithoutModel("blackslag_stairs", new StairsBlock(BLACKSLAG.getDefaultState(), blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK);
 	public static final Block BLACKSLAG_SLAB = registerWithoutModel("blackslag_slab", new SlabBlock(blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK);
 	public static final Block BLACKSLAG_WALL = registerWithoutModel("blackslag_wall", new WallBlock(blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK);
-	public static final BlockFamily BLACKSLAG_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(BLACKSLAG).stairs(BLACKSLAG_STAIRS).slab(BLACKSLAG_SLAB).wall(BLACKSLAG_WALL).build(), TexturedModel.makeFactory(SpectrumTextureMaps::sideTopAndBottomAsTop, Models.CUBE_BOTTOM_TOP));
+	public static final BlockFamily BLACKSLAG_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(BLACKSLAG).stairs(BLACKSLAG_STAIRS).slab(BLACKSLAG_SLAB).wall(BLACKSLAG_WALL).build(), TexturedModel.makeFactory(block -> SpectrumTextureMaps.sideTopBottomWall(block, "", "_top", "_top", ""), SpectrumModels.CUBE_BOTTOM_TOP_WALL));
 	
 	public static final Block INFESTED_BLACKSLAG = new InfestedBlock(BLACKSLAG, blackslag(BlockSoundGroup.DEEPSLATE));
 	
@@ -726,11 +726,11 @@ public class SpectrumBlocks {
 	public static final Block ASHEN_BLACKSLAG = registerCustom("ashen_blackslag", new BlackslagBlock(blackslag(BlockSoundGroup.DEEPSLATE).mapColor(MapColor.OFF_WHITE)), DyeColor.LIGHT_GRAY, block ->
 			registerSingletonBlockModel(block, TexturedModel.makeFactory(b -> TextureMap.sideAndTop(b).put(TextureKey.PARTICLE, TextureMap.getSubId(block, "_top")).put(TextureKey.BOTTOM, TextureMap.getSubId(BLACKSLAG, "_top")), SpectrumModels.CUBE_BOTTOM_TOP_PARTICLE)));
 	public static final Block ASH = registerCustom("ash", new AshBlock(ash(BlockSoundGroup.POWDER_SNOW)), DyeColor.GRAY, block ->
-			registerVariantsBlockModel(modelCollector -> VariantsBlockStateSupplier.create(block,
-					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, TextureMap.all(block), modelCollector)),
-					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "2", TextureMap.all(TextureMap.getSubId(block, "2")), modelCollector)),
-					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "3", TextureMap.all(TextureMap.getSubId(block, "3")), modelCollector)),
-					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "4", TextureMap.all(TextureMap.getSubId(block, "4")), modelCollector))
+			registerVariantsBlockModel(ctx -> VariantsBlockStateSupplier.create(block,
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, TextureMap.all(block), ctx.modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "2", TextureMap.all(TextureMap.getSubId(block, "2")), ctx.modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "3", TextureMap.all(TextureMap.getSubId(block, "3")), ctx.modelCollector)),
+					BlockStateVariant.create().put(VariantSettings.MODEL, Models.CUBE_ALL.upload(block, "4", TextureMap.all(TextureMap.getSubId(block, "4")), ctx.modelCollector))
 			)));
 	public static final Block ASH_PILE = registerCustom("ash_pile", new AshPileBlock(ash(BlockSoundGroup.POWDER_SNOW).replaceable().blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIGHT_GRAY, block -> {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.data;
 
-import com.google.gson.*;
 import de.dafuqs.spectrum.registries.*;
+import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.fabric.api.datagen.v1.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.*;
@@ -35,12 +35,14 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.excludeFromSimpleItemModelGeneration(block));
 	}
 	
+	// Block Models
+	
 	public static void registerSingletonBlockModel(Block block, TexturedModel.Factory factory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(block, factory));
 	}
 	
-	public static void registerVariantsBlockModel(Function<BiConsumer<Identifier, Supplier<JsonElement>>, VariantsBlockStateSupplier> factory) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(factory.apply(ctx.modelCollector)));
+	public static void registerVariantsBlockModel(Function<BlockStateModelGenerator, BlockStateSupplier> factory) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(factory.apply(ctx)));
 	}
 	
 	public static void registerSimpleCubeAllBlockModel(Block block) {
@@ -49,6 +51,10 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	
 	public static void registerAxisRotatedBlockModel(Block block, TexturedModel.Factory factory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerAxisRotated(block, factory));
+	}
+	
+	public static void registerMirroredAxisRotatedBlockModel(Block block, TexturedModel.Factory factory, TexturedModel.Factory mirroredFactory) {
+		registerVariantsBlockModel(ctx -> createMirroredVariantsSupplier(ctx, block, factory, mirroredFactory).coordinate(BlockStateModelGenerator.createAxisRotatedVariantMap()));
 	}
 	
 	public static void registerDefaultFacingUpBlockModel(Block block, TexturedModel.Factory factory) {
@@ -66,13 +72,7 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	}
 	
 	public static void registerSimpleMirroredBlockModel(Block block) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
-			VariantsBlockStateSupplier variants = VariantsBlockStateSupplier.create(block,
-					BlockStateVariant.create().put(VariantSettings.MODEL, TexturedModel.CUBE_ALL.upload(block, ctx.modelCollector)),
-					BlockStateVariant.create().put(VariantSettings.MODEL, TexturedModel.CUBE_MIRRORED_ALL.upload(block, ctx.modelCollector))
-			);
-			ctx.blockStateCollector.accept(variants);
-		});
+		registerVariantsBlockModel(ctx -> createMirroredVariantsSupplier(ctx, block, TexturedModel.CUBE_ALL, TexturedModel.CUBE_MIRRORED_ALL));
 	}
 	
 	public static void registerLogBlockModel(Block block) {
@@ -110,6 +110,15 @@ public class SpectrumModelProvider extends FabricModelProvider {
 			texturePool.family(family);
 		});
 		return family;
+	}
+	
+	// Variant Suppliers
+	
+	public static VariantsBlockStateSupplier createMirroredVariantsSupplier(BlockStateModelGenerator ctx, Block block, TexturedModel.Factory factory, TexturedModel.Factory mirroredFactory) {
+		return VariantsBlockStateSupplier.create(block,
+				BlockStateVariant.create().put(VariantSettings.MODEL, factory.upload(block, ctx.modelCollector)),
+				BlockStateVariant.create().put(VariantSettings.MODEL, mirroredFactory.upload(block, ctx.modelCollector))
+		);
 	}
 	
 }
