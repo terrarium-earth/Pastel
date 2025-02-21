@@ -41,6 +41,10 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(block, factory));
 	}
 	
+	public static void registerParentedBlockModel(Block block, Block parentBlock) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerParented(parentBlock, block));
+	}
+	
 	public static void registerVariantsBlockModel(Function<BlockStateModelGenerator, BlockStateSupplier> factory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(factory.apply(ctx)));
 	}

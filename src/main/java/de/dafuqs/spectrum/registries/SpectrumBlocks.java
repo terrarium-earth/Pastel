@@ -200,7 +200,7 @@ public class SpectrumBlocks {
 	public static final Block BLACKSLAG_WALL = registerWithoutModel("blackslag_wall", new WallBlock(blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK);
 	public static final BlockFamily BLACKSLAG_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(BLACKSLAG).stairs(BLACKSLAG_STAIRS).slab(BLACKSLAG_SLAB).wall(BLACKSLAG_WALL).build(), TexturedModel.makeFactory(block -> SpectrumTextureMaps.sideTopBottomWall(block, "", "_top", "_top", ""), SpectrumModels.CUBE_BOTTOM_TOP_WALL));
 	
-	public static final Block INFESTED_BLACKSLAG = new InfestedBlock(BLACKSLAG, blackslag(BlockSoundGroup.DEEPSLATE));
+	public static final Block INFESTED_BLACKSLAG = registerParented("infested_blackslag", new InfestedBlock(BLACKSLAG, blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK, BLACKSLAG);
 	
 	public static final Block COBBLED_BLACKSLAG = registerWithoutModel("cobbled_blackslag", new Block(blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK);
 	public static final Block COBBLED_BLACKSLAG_STAIRS = registerWithoutModel("cobbled_blackslag_stairs", new StairsBlock(COBBLED_BLACKSLAG.getDefaultState(), blackslag(BlockSoundGroup.DEEPSLATE)), DyeColor.BLACK);
@@ -231,30 +231,41 @@ public class SpectrumBlocks {
 	public static final Block CHISELED_POLISHED_BLACKSLAG = registerWithoutModel("chiseled_polished_blackslag", new Block(blackslag(BlockSoundGroup.DEEPSLATE_BRICKS)), DyeColor.BLACK);
 	public static final BlockFamily POLISHED_BLACKSLAG_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(POLISHED_BLACKSLAG).stairs(POLISHED_BLACKSLAG_STAIRS).slab(POLISHED_BLACKSLAG_SLAB).wall(POLISHED_BLACKSLAG_WALL).button(POLISHED_BLACKSLAG_BUTTON).pressurePlate(POLISHED_BLACKSLAG_PRESSURE_PLATE).chiseled(CHISELED_POLISHED_BLACKSLAG).build());
 	
-	public static final Block POLISHED_BLACKSLAG_PILLAR = new PillarBlock(Settings.copy(BLACKSLAG_BRICKS));
-	public static final Block ANCIENT_CHISELED_POLISHED_BLACKSLAG = new Block(blackslag(BlockSoundGroup.DEEPSLATE_BRICKS));
+	public static final Block POLISHED_BLACKSLAG_PILLAR = registerCustom("polished_blackslag_pillar", new PillarBlock(Settings.copy(BLACKSLAG_BRICKS)), DyeColor.BLACK, block -> registerAxisRotatedBlockModel(block, TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideEnd(b, "", CHISELED_POLISHED_BLACKSLAG, ""), Models.CUBE_COLUMN)));
+	public static final Block ANCIENT_CHISELED_POLISHED_BLACKSLAG = registerSimple("ancient_chiseled_polished_blackslag", new Block(blackslag(BlockSoundGroup.DEEPSLATE_BRICKS)), DyeColor.BLACK);
 	
 	public static final Block SHALE_CLAY = new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, blackslag(BlockSoundGroup.MUD_BRICKS));
 	public static final Block TILLED_SHALE_CLAY = new TilledShaleClayBlock(Settings.copy(SHALE_CLAY), SHALE_CLAY.getDefaultState());
-	public static final Block POLISHED_SHALE_CLAY = new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY));
-	public static final Block EXPOSED_POLISHED_SHALE_CLAY = new WeatheringBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY));
-	public static final Block WEATHERED_POLISHED_SHALE_CLAY = new WeatheringBlock(Weathering.WeatheringLevel.WEATHERED, Settings.copy(SHALE_CLAY));
-	public static final Block POLISHED_SHALE_CLAY_STAIRS = new WeatheringStairsBlock(Weathering.WeatheringLevel.UNAFFECTED, POLISHED_SHALE_CLAY.getDefaultState(), Settings.copy(SHALE_CLAY));
-	public static final Block POLISHED_SHALE_CLAY_SLAB = new WeatheringSlabBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY));
-	public static final Block EXPOSED_POLISHED_SHALE_CLAY_STAIRS = new WeatheringStairsBlock(Weathering.WeatheringLevel.EXPOSED, EXPOSED_POLISHED_SHALE_CLAY.getDefaultState(), Settings.copy(SHALE_CLAY));
-	public static final Block EXPOSED_POLISHED_SHALE_CLAY_SLAB = new WeatheringSlabBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY));
-	public static final Block WEATHERED_POLISHED_SHALE_CLAY_STAIRS = new WeatheringStairsBlock(Weathering.WeatheringLevel.WEATHERED, WEATHERED_POLISHED_SHALE_CLAY.getDefaultState(), Settings.copy(SHALE_CLAY));
-	public static final Block WEATHERED_POLISHED_SHALE_CLAY_SLAB = new WeatheringSlabBlock(Weathering.WeatheringLevel.WEATHERED, Settings.copy(SHALE_CLAY));
 	
-	public static final Block SHALE_CLAY_BRICKS = new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY));
-	public static final Block EXPOSED_SHALE_CLAY_BRICKS = new WeatheringBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY));
-	public static final Block WEATHERED_SHALE_CLAY_BRICKS = new WeatheringBlock(Weathering.WeatheringLevel.WEATHERED, Settings.copy(SHALE_CLAY));
-	public static final Block SHALE_CLAY_BRICK_STAIRS = new WeatheringStairsBlock(Weathering.WeatheringLevel.UNAFFECTED, SHALE_CLAY_BRICKS.getDefaultState(), Settings.copy(SHALE_CLAY));
-	public static final Block SHALE_CLAY_BRICK_SLAB = new WeatheringSlabBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY));
-	public static final Block EXPOSED_SHALE_CLAY_BRICK_STAIRS = new WeatheringStairsBlock(Weathering.WeatheringLevel.EXPOSED, EXPOSED_SHALE_CLAY_BRICKS.getDefaultState(), Settings.copy(SHALE_CLAY));
-	public static final Block EXPOSED_SHALE_CLAY_BRICK_SLAB = new WeatheringSlabBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY));
-	public static final Block WEATHERED_SHALE_CLAY_BRICK_STAIRS = new WeatheringStairsBlock(Weathering.WeatheringLevel.WEATHERED, WEATHERED_SHALE_CLAY_BRICKS.getDefaultState(), Settings.copy(SHALE_CLAY));
-	public static final Block WEATHERED_SHALE_CLAY_BRICK_SLAB = new WeatheringSlabBlock(Weathering.WeatheringLevel.WEATHERED, Settings.copy(SHALE_CLAY));
+	public static final Block POLISHED_SHALE_CLAY = registerWithoutModel("polished_shale_clay", new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block POLISHED_SHALE_CLAY_STAIRS = registerWithoutModel("polished_shale_clay_stairs", new WeatheringStairsBlock(Weathering.WeatheringLevel.UNAFFECTED, POLISHED_SHALE_CLAY.getDefaultState(), Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block POLISHED_SHALE_CLAY_SLAB = registerWithoutModel("polished_shale_clay_slab", new WeatheringSlabBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final BlockFamily POLISHED_SHALE_CLAY_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(POLISHED_SHALE_CLAY).stairs(POLISHED_SHALE_CLAY_STAIRS).slab(POLISHED_SHALE_CLAY_SLAB).build());
+	
+	public static final Block EXPOSED_POLISHED_SHALE_CLAY = registerWithoutModel("exposed_polished_shale_clay", new WeatheringBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block EXPOSED_POLISHED_SHALE_CLAY_STAIRS = registerWithoutModel("exposed_polished_shale_clay_stairs", new WeatheringStairsBlock(Weathering.WeatheringLevel.EXPOSED, EXPOSED_POLISHED_SHALE_CLAY.getDefaultState(), Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block EXPOSED_POLISHED_SHALE_CLAY_SLAB = registerWithoutModel("exposed_polished_shale_clay_slab", new WeatheringSlabBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final BlockFamily EXPOSED_POLISHED_SHALE_CLAY_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(EXPOSED_POLISHED_SHALE_CLAY).stairs(EXPOSED_POLISHED_SHALE_CLAY_STAIRS).slab(EXPOSED_POLISHED_SHALE_CLAY_SLAB).build());
+	
+	public static final Block WEATHERED_POLISHED_SHALE_CLAY = registerWithoutModel("weathered_polished_shale_clay", new WeatheringBlock(Weathering.WeatheringLevel.WEATHERED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block WEATHERED_POLISHED_SHALE_CLAY_STAIRS = registerWithoutModel("weathered_polished_shale_clay_stairs", new WeatheringStairsBlock(Weathering.WeatheringLevel.WEATHERED, WEATHERED_POLISHED_SHALE_CLAY.getDefaultState(), Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block WEATHERED_POLISHED_SHALE_CLAY_SLAB = registerWithoutModel("weathered_polished_shale_clay_slab", new WeatheringSlabBlock(Weathering.WeatheringLevel.WEATHERED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final BlockFamily WEATHERED_POLISHED_SHALE_CLAY_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(WEATHERED_POLISHED_SHALE_CLAY).stairs(WEATHERED_POLISHED_SHALE_CLAY_STAIRS).slab(WEATHERED_POLISHED_SHALE_CLAY_SLAB).build());
+	
+	public static final Block SHALE_CLAY_BRICKS = registerWithoutModel("shale_clay_bricks", new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block SHALE_CLAY_BRICK_STAIRS = registerWithoutModel("shale_clay_brick_stairs", new WeatheringStairsBlock(Weathering.WeatheringLevel.UNAFFECTED, SHALE_CLAY_BRICKS.getDefaultState(), Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block SHALE_CLAY_BRICK_SLAB = registerWithoutModel("shale_clay_brick_slab", new WeatheringSlabBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final BlockFamily SHALE_CLAY_BRICK_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(SHALE_CLAY_BRICKS).stairs(SHALE_CLAY_BRICK_STAIRS).slab(SHALE_CLAY_BRICK_SLAB).build());
+	
+	public static final Block EXPOSED_SHALE_CLAY_BRICKS = registerWithoutModel("exposed_shale_clay_bricks", new WeatheringBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block EXPOSED_SHALE_CLAY_BRICK_STAIRS = registerWithoutModel("exposed_shale_clay_brick_stairs", new WeatheringStairsBlock(Weathering.WeatheringLevel.EXPOSED, EXPOSED_SHALE_CLAY_BRICKS.getDefaultState(), Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block EXPOSED_SHALE_CLAY_BRICK_SLAB = registerWithoutModel("exposed_shale_clay_brick_slab", new WeatheringSlabBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final BlockFamily EXPOSED_SHALE_CLAY_BRICK_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(EXPOSED_SHALE_CLAY_BRICKS).stairs(EXPOSED_SHALE_CLAY_BRICK_STAIRS).slab(EXPOSED_SHALE_CLAY_BRICK_SLAB).build());
+	
+	public static final Block WEATHERED_SHALE_CLAY_BRICKS = registerWithoutModel("weathered_shale_clay_bricks", new WeatheringBlock(Weathering.WeatheringLevel.WEATHERED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block WEATHERED_SHALE_CLAY_BRICK_STAIRS = registerWithoutModel("weathered_shale_clay_brick_stairs", new WeatheringStairsBlock(Weathering.WeatheringLevel.WEATHERED, WEATHERED_SHALE_CLAY_BRICKS.getDefaultState(), Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final Block WEATHERED_SHALE_CLAY_BRICK_SLAB = registerWithoutModel("weathered_shale_clay_brick_slab", new WeatheringSlabBlock(Weathering.WeatheringLevel.WEATHERED, Settings.copy(SHALE_CLAY)), DyeColor.BROWN);
+	public static final BlockFamily WEATHERED_SHALE_CLAY_BRICK_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(WEATHERED_SHALE_CLAY_BRICKS).stairs(WEATHERED_SHALE_CLAY_BRICK_STAIRS).slab(WEATHERED_SHALE_CLAY_BRICK_SLAB).build());
 	
 	public static final Block SHALE_CLAY_TILES = new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, Settings.copy(SHALE_CLAY));
 	public static final Block EXPOSED_SHALE_CLAY_TILES = new WeatheringBlock(Weathering.WeatheringLevel.EXPOSED, Settings.copy(SHALE_CLAY));
@@ -1886,6 +1897,11 @@ public class SpectrumBlocks {
 		return registerWithoutModel(name, block, dyeColor);
 	}
 	
+	public static <T extends Block> T registerParented(String name, T block, DyeColor dyeColor, Block parentBlock) {
+		registerParentedBlockModel(block, parentBlock);
+		return registerWithoutModel(name, block, dyeColor);
+	}
+	
 	public static <T extends Block> T registerCustom(String name, T block, Item.Settings settings, DyeColor color, Consumer<T> callback) {
 		registerWithoutModel(name, block, settings, color);
 		callback.accept(block);
@@ -2362,35 +2378,8 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerStoneBlocks(Item.Settings settings) {
-		registerBlockWithItem("infested_blackslag", INFESTED_BLACKSLAG, settings, DyeColor.BLACK);
-		
-		registerBlockWithItem("polished_blackslag_pillar", POLISHED_BLACKSLAG_PILLAR, settings, DyeColor.BLACK);
-		registerBlockWithItem("ancient_chiseled_polished_blackslag", ANCIENT_CHISELED_POLISHED_BLACKSLAG, settings, DyeColor.BLACK);
-		
 		registerBlockWithItem("shale_clay", SHALE_CLAY, settings, DyeColor.BROWN);
 		registerBlockWithItem("tilled_shale_clay", TILLED_SHALE_CLAY, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("polished_shale_clay", POLISHED_SHALE_CLAY, settings, DyeColor.BROWN);
-		registerBlockWithItem("exposed_polished_shale_clay", EXPOSED_POLISHED_SHALE_CLAY, settings, DyeColor.BROWN);
-		registerBlockWithItem("weathered_polished_shale_clay", WEATHERED_POLISHED_SHALE_CLAY, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("polished_shale_clay_stairs", POLISHED_SHALE_CLAY_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("polished_shale_clay_slab", POLISHED_SHALE_CLAY_SLAB, settings, DyeColor.BROWN);
-		registerBlockWithItem("exposed_polished_shale_clay_stairs", EXPOSED_POLISHED_SHALE_CLAY_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("exposed_polished_shale_clay_slab", EXPOSED_POLISHED_SHALE_CLAY_SLAB, settings, DyeColor.BROWN);
-		registerBlockWithItem("weathered_polished_shale_clay_stairs", WEATHERED_POLISHED_SHALE_CLAY_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("weathered_polished_shale_clay_slab", WEATHERED_POLISHED_SHALE_CLAY_SLAB, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("shale_clay_bricks", SHALE_CLAY_BRICKS, settings, DyeColor.BROWN);
-		registerBlockWithItem("exposed_shale_clay_bricks", EXPOSED_SHALE_CLAY_BRICKS, settings, DyeColor.BROWN);
-		registerBlockWithItem("weathered_shale_clay_bricks", WEATHERED_SHALE_CLAY_BRICKS, settings, DyeColor.BROWN);
-		
-		registerBlockWithItem("shale_clay_brick_stairs", SHALE_CLAY_BRICK_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("shale_clay_brick_slab", SHALE_CLAY_BRICK_SLAB, settings, DyeColor.BROWN);
-		registerBlockWithItem("exposed_shale_clay_brick_stairs", EXPOSED_SHALE_CLAY_BRICK_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("exposed_shale_clay_brick_slab", EXPOSED_SHALE_CLAY_BRICK_SLAB, settings, DyeColor.BROWN);
-		registerBlockWithItem("weathered_shale_clay_brick_stairs", WEATHERED_SHALE_CLAY_BRICK_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("weathered_shale_clay_brick_slab", WEATHERED_SHALE_CLAY_BRICK_SLAB, settings, DyeColor.BROWN);
 		
 		registerBlockWithItem("shale_clay_tiles", SHALE_CLAY_TILES, settings, DyeColor.BROWN);
 		registerBlockWithItem("exposed_shale_clay_tiles", EXPOSED_SHALE_CLAY_TILES, settings, DyeColor.BROWN);
