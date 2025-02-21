@@ -27,6 +27,13 @@ public class SpectrumTextureMaps {
 				.put(TextureKey.PARTICLE, TextureMap.getSubId(particleBlock, particleSuffix));
 	}
 	
+	public static TextureMap sideEndWall(Block sideBlock, String sideSuffix, Block endBlock, String endSuffix, Block wallBlock, String wallSuffix) {
+		return new TextureMap()
+				.put(TextureKey.SIDE, TextureMap.getSubId(sideBlock, sideSuffix))
+				.put(TextureKey.TOP, TextureMap.getSubId(endBlock, endSuffix))
+				.put(TextureKey.WALL, TextureMap.getSubId(wallBlock, wallSuffix));
+	}
+	
 	public static TextureMap dirtTop(Block dirtBlock, String dirtSuffix, Block topBlock, String topSuffix) {
 		return new TextureMap()
 				.put(TextureKey.DIRT, TextureMap.getSubId(dirtBlock, dirtSuffix))

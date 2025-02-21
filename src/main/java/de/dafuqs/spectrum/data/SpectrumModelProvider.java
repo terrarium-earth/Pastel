@@ -116,6 +116,15 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		return family;
 	}
 	
+	public static BlockFamily registerBlockFamilyBlockModels(BlockFamily family, TexturedModel.Factory variantFactory) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+			TexturedModel texturedModel = variantFactory.get(family.getBaseBlock());
+			BlockStateModelGenerator.BlockTexturePool texturePool = ctx.new BlockTexturePool(texturedModel.getTextures());
+			texturePool.base(family.getBaseBlock(), texturedModel.getModel()).family(family);
+		});
+		return family;
+	}
+	
 	public static BlockFamily registerBlockFamilyBlockModelsExceptBase(BlockFamily family, TexturedModel.Factory variantFactory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			TexturedModel texturedModel = variantFactory.get(family.getBaseBlock());

@@ -283,15 +283,13 @@ public class SpectrumBlocks {
 	
 	public static final Block ROCK_CRYSTAL = new Block(settings(MapColor.OFF_WHITE, BlockSoundGroup.NETHER_BRICKS, 200F).requiresTool());
 	
-	public static final Block PYRITE = new PillarBlock(settings(MapColor.TERRACOTTA_YELLOW, BlockSoundGroup.CHAIN, 50.0F).requiresTool());
-	public static final Block PYRITE_SLAB = new SlabBlock(Settings.copy(PYRITE));
-	public static final Block PYRITE_STAIRS = new StairsBlock(PYRITE.getDefaultState(), Settings.copy(PYRITE));
-	public static final Block PYRITE_WALL = new WallBlock(Settings.copy(PYRITE));
+	public static final Block PYRITE = registerCustom("pyrite", new PillarBlock(settings(MapColor.TERRACOTTA_YELLOW, BlockSoundGroup.CHAIN, 50.0F).requiresTool()), DyeColor.BROWN, block -> registerAxisRotatedBlockModel(block, TexturedModel.CUBE_COLUMN));
+	public static final Block PYRITE_SLAB = registerWithoutModel("pyrite_slab", new SlabBlock(Settings.copy(PYRITE)), DyeColor.BROWN);
+	public static final Block PYRITE_STAIRS = registerWithoutModel("pyrite_stairs", new StairsBlock(PYRITE.getDefaultState(), Settings.copy(PYRITE)), DyeColor.BROWN);
+	public static final Block PYRITE_WALL = registerWithoutModel("pyrite_wall", new WallBlock(Settings.copy(PYRITE)), DyeColor.BROWN);
+	public static final BlockFamily PYRITE_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(PYRITE).stairs(PYRITE_STAIRS).slab(PYRITE_SLAB).wall(PYRITE_WALL).build(), TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottomWall(b, "_side", b, "_top", b, "_top", b, "_side"), Models.CUBE_ALL));
+	
 	public static final Block PYRITE_PILE = new PillarBlock(Settings.copy(PYRITE));
-	public static final Block PYRITE_TILES = new Block(Settings.copy(PYRITE));
-	public static final Block PYRITE_TILES_SLAB = new SlabBlock(Settings.copy(PYRITE_TILES));
-	public static final Block PYRITE_TILES_STAIRS = new StairsBlock(PYRITE_TILES.getDefaultState(), Settings.copy(PYRITE_TILES));
-	public static final Block PYRITE_TILES_WALL = new WallBlock(Settings.copy(PYRITE_TILES));
 	public static final Block PYRITE_PLATING = new Block(Settings.copy(PYRITE));
 	public static final Block PYRITE_TUBING = new PillarBlock(Settings.copy(PYRITE));
 	public static final Block PYRITE_RELIEF = new PillarBlock(Settings.copy(PYRITE));
@@ -301,24 +299,35 @@ public class SpectrumBlocks {
 	public static final Block PYRITE_RIPPER = new PyriteRipperBlock(Settings.copy(PYRITE).nonOpaque().allowsSpawning(SpectrumBlocks::never).blockVision(SpectrumBlocks::never));
 	public static final Block PYRITE_PROJECTOR = new ProjectorBlock(Settings.copy(PYRITE), "pyrite_projector_projection", 16, 14, 1.375F, 1F, 16F);
 	
+	public static final Block PYRITE_TILES = registerSimple("pyrite_tiles", new Block(Settings.copy(PYRITE)), DyeColor.BROWN);
+	public static final Block PYRITE_TILES_SLAB = registerWithoutModel("pyrite_tiles_slab", new SlabBlock(Settings.copy(PYRITE_TILES)), DyeColor.BROWN);
+	public static final Block PYRITE_TILES_STAIRS = registerWithoutModel("pyrite_tiles_stairs", new StairsBlock(PYRITE_TILES.getDefaultState(), Settings.copy(PYRITE_TILES)), DyeColor.BROWN);
+	public static final Block PYRITE_TILES_WALL = registerWithoutModel("pyrite_tiles_wall", new WallBlock(Settings.copy(PYRITE_TILES)), DyeColor.BROWN);
+	public static final BlockFamily PYRITE_TILE_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(PYRITE_TILES).stairs(PYRITE_TILES_STAIRS).slab(PYRITE_TILES_SLAB).wall(PYRITE_TILES_WALL).build(), TexturedModel.makeFactory(b -> TextureMap.all(PYRITE_PLATING), Models.CUBE_ALL));
+	
 	public static final Block DRAGONBONE = new DragonboneBlock(Settings.copy(Blocks.BONE_BLOCK).strength(-1.0F, 22.0F).pistonBehavior(PistonBehavior.BLOCK));
 	public static final Block CRACKED_DRAGONBONE = new PillarBlock(Settings.copy(Blocks.BONE_BLOCK).strength(100.0F, 1200.0F).pistonBehavior(PistonBehavior.BLOCK));
-	public static final Block POLISHED_BONE_ASH = new Block(AbstractBlock.Settings.copy(CRACKED_DRAGONBONE).hardness(1500.0F).mapColor(DyeColor.WHITE));
-	public static final Block POLISHED_BONE_ASH_STAIRS = new StairsBlock(POLISHED_BONE_ASH.getDefaultState(), Settings.copy(POLISHED_BONE_ASH));
-	public static final Block POLISHED_BONE_ASH_SLAB = new SlabBlock(Settings.copy(POLISHED_BONE_ASH));
-	public static final Block POLISHED_BONE_ASH_WALL = new WallBlock(Settings.copy(POLISHED_BONE_ASH));
+	
+	public static final Block POLISHED_BONE_ASH = registerWithoutModel("polished_bone_ash", new Block(AbstractBlock.Settings.copy(CRACKED_DRAGONBONE).hardness(1500.0F).mapColor(DyeColor.WHITE)), DyeColor.CYAN);
+	public static final Block POLISHED_BONE_ASH_STAIRS = registerWithoutModel("polished_bone_ash_stairs", new StairsBlock(POLISHED_BONE_ASH.getDefaultState(), Settings.copy(POLISHED_BONE_ASH)), DyeColor.CYAN);
+	public static final Block POLISHED_BONE_ASH_SLAB = registerWithoutModel("polished_bone_ash_slab", new SlabBlock(Settings.copy(POLISHED_BONE_ASH)), DyeColor.CYAN);
+	public static final Block POLISHED_BONE_ASH_WALL = registerWithoutModel("polished_bone_ash_wall", new WallBlock(Settings.copy(POLISHED_BONE_ASH)), DyeColor.CYAN);
+	public static final BlockFamily POLISHED_BONE_ASH_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(POLISHED_BONE_ASH).stairs(POLISHED_BONE_ASH_STAIRS).slab(POLISHED_BONE_ASH_SLAB).wall(POLISHED_BONE_ASH_WALL).build());
+	
 	public static final Block POLISHED_BONE_ASH_PILLAR = new PillarBlock(AbstractBlock.Settings.copy(POLISHED_BONE_ASH));
 	public static final Block BONE_ASH_SHINGLES = new ShinglesBlock(AbstractBlock.Settings.copy(POLISHED_BONE_ASH).nonOpaque());
 	
-	public static final Block BONE_ASH_BRICKS = new Block(AbstractBlock.Settings.copy(POLISHED_BONE_ASH));
-	public static final Block BONE_ASH_BRICK_STAIRS = new StairsBlock(BONE_ASH_BRICKS.getDefaultState(), Settings.copy(BONE_ASH_BRICKS));
-	public static final Block BONE_ASH_BRICK_SLAB = new SlabBlock(Settings.copy(BONE_ASH_BRICKS));
-	public static final Block BONE_ASH_BRICK_WALL = new WallBlock(Settings.copy(BONE_ASH_BRICKS));
+	public static final Block BONE_ASH_BRICKS = registerWithoutModel("bone_ash_bricks", new Block(AbstractBlock.Settings.copy(POLISHED_BONE_ASH)), DyeColor.CYAN);
+	public static final Block BONE_ASH_BRICK_STAIRS = registerWithoutModel("bone_ash_brick_stairs", new StairsBlock(BONE_ASH_BRICKS.getDefaultState(), Settings.copy(BONE_ASH_BRICKS)), DyeColor.CYAN);
+	public static final Block BONE_ASH_BRICK_SLAB = registerWithoutModel("bone_ash_brick_slab", new SlabBlock(Settings.copy(BONE_ASH_BRICKS)), DyeColor.CYAN);
+	public static final Block BONE_ASH_BRICK_WALL = registerWithoutModel("bone_ash_brick_wall", new WallBlock(Settings.copy(BONE_ASH_BRICKS)), DyeColor.CYAN);
+	public static final BlockFamily BONE_ASH_BRICK_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(BONE_ASH_BRICKS).stairs(BONE_ASH_BRICK_STAIRS).slab(BONE_ASH_BRICK_SLAB).wall(BONE_ASH_BRICK_WALL).build());
 	
-	public static final Block BONE_ASH_TILES = new Block(AbstractBlock.Settings.copy(POLISHED_BONE_ASH));
-	public static final Block BONE_ASH_TILE_STAIRS = new StairsBlock(BONE_ASH_TILES.getDefaultState(), Settings.copy(BONE_ASH_TILES));
-	public static final Block BONE_ASH_TILE_SLAB = new SlabBlock(Settings.copy(BONE_ASH_TILES));
-	public static final Block BONE_ASH_TILE_WALL = new WallBlock(Settings.copy(BONE_ASH_TILES));
+	public static final Block BONE_ASH_TILES = registerWithoutModel("bone_ash_tiles", new Block(AbstractBlock.Settings.copy(POLISHED_BONE_ASH)), DyeColor.CYAN);
+	public static final Block BONE_ASH_TILE_STAIRS = registerWithoutModel("bone_ash_tile_stairs", new StairsBlock(BONE_ASH_TILES.getDefaultState(), Settings.copy(BONE_ASH_TILES)), DyeColor.CYAN);
+	public static final Block BONE_ASH_TILE_SLAB = registerWithoutModel("bone_ash_tile_slab", new SlabBlock(Settings.copy(BONE_ASH_TILES)), DyeColor.CYAN);
+	public static final Block BONE_ASH_TILE_WALL = registerWithoutModel("bone_ash_tile_wall", new WallBlock(Settings.copy(BONE_ASH_TILES)), DyeColor.CYAN);
+	public static final BlockFamily BONE_ASH_TILE_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(BONE_ASH_TILES).stairs(BONE_ASH_TILE_STAIRS).slab(BONE_ASH_TILE_SLAB).wall(BONE_ASH_TILE_WALL).build());
 	
 	public static final Block SLUSH = new PillarBlock(blackslag(BlockSoundGroup.MUDDY_MANGROVE_ROOTS));
 	public static final Block OVERGROWN_SLUSH = new SlushVegetationBlock(blackslag(BlockSoundGroup.MUDDY_MANGROVE_ROOTS));
@@ -949,23 +958,19 @@ public class SpectrumBlocks {
 		return settings(MapColor.GRAY, BlockSoundGroup.DRIPSTONE_BLOCK, 8.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresTool();
 	}
 	
-	public static final Block BASAL_MARBLE = registerCustom("basal_marble", new PillarBlock(basalMarble()), DyeColor.BROWN, block ->
-			registerAxisRotatedBlockModel(block, TexturedModel.END_FOR_TOP_CUBE_COLUMN));
+	public static final Block BASAL_MARBLE = registerCustom("basal_marble", new PillarBlock(basalMarble()), DyeColor.BROWN, block -> registerAxisRotatedBlockModel(block, TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	public static final Block BASAL_MARBLE_STAIRS = registerWithoutModel("basal_marble_stairs", new StairsBlock(BASAL_MARBLE.getDefaultState(), basalMarble()), DyeColor.BROWN);
 	public static final Block BASAL_MARBLE_SLAB = registerWithoutModel("basal_marble_slab", new SlabBlock(basalMarble()), DyeColor.BROWN);
 	public static final Block BASAL_MARBLE_WALL = registerWithoutModel("basal_marble_wall", new WallBlock(basalMarble()), DyeColor.BROWN);
 	public static final BlockFamily BASAL_MARBLE_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(BASAL_MARBLE).stairs(BASAL_MARBLE_STAIRS).slab(BASAL_MARBLE_SLAB).wall(BASAL_MARBLE_WALL).build(), TexturedModel.CUBE_ALL);
 	
-	public static final Block BASAL_MARBLE_PILLAR = registerCustom("basal_marble_pillar", new PillarBlock(basalMarble()), DyeColor.BROWN, block ->
-			registerAxisRotatedBlockModel(block, TexturedModel.CUBE_COLUMN));
+	public static final Block BASAL_MARBLE_PILLAR = registerCustom("basal_marble_pillar", new PillarBlock(basalMarble()), DyeColor.BROWN, block -> registerAxisRotatedBlockModel(block, TexturedModel.CUBE_COLUMN));
 	
-	public static final Block POLISHED_BASAL_MARBLE = registerCustom("polished_basal_marble", new SpectrumFacingBlock(basalMarble()), DyeColor.BROWN, block ->
-			registerDefaultFacingUpBlockModel(block, TexturedModel.CUBE_BOTTOM_TOP));
+	public static final Block POLISHED_BASAL_MARBLE = registerCustom("polished_basal_marble", new SpectrumFacingBlock(basalMarble()), DyeColor.BROWN, block -> registerDefaultFacingUpBlockModel(block, TexturedModel.CUBE_BOTTOM_TOP));
 	public static final Block POLISHED_BASAL_MARBLE_STAIRS = registerWithoutModel("polished_basal_marble_stairs", new StairsBlock(POLISHED_BASAL_MARBLE.getDefaultState(), basalMarble()), DyeColor.BROWN);
 	public static final Block POLISHED_BASAL_MARBLE_SLAB = registerWithoutModel("polished_basal_marble_slab", new SlabBlock(basalMarble()), DyeColor.BROWN);
 	public static final Block POLISHED_BASAL_MARBLE_WALL = registerWithoutModel("polished_basal_marble_wall", new WallBlock(basalMarble()), DyeColor.BROWN);
-	public static final TexturedModel.Factory CUBE_BOTTOM_TOP_WITH_SIDE_WALL_MODEL = TexturedModel.makeFactory(block -> new TextureMap().put(TextureKey.SIDE, TextureMap.getSubId(block, "_side")).put(TextureKey.TOP, TextureMap.getSubId(block, "_top")).put(TextureKey.BOTTOM, TextureMap.getSubId(block, "_bottom")).put(TextureKey.WALL, TextureMap.getSubId(block, "_side")), Models.CUBE_BOTTOM_TOP);
-	public static final BlockFamily POLISHED_BASAL_MARBLE_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(POLISHED_BASAL_MARBLE).stairs(POLISHED_BASAL_MARBLE_STAIRS).slab(POLISHED_BASAL_MARBLE_SLAB).wall(POLISHED_BASAL_MARBLE_WALL).build(), CUBE_BOTTOM_TOP_WITH_SIDE_WALL_MODEL);
+	public static final BlockFamily POLISHED_BASAL_MARBLE_FAMILY = registerBlockFamilyBlockModelsExceptBase(new BlockFamily.Builder(POLISHED_BASAL_MARBLE).stairs(POLISHED_BASAL_MARBLE_STAIRS).slab(POLISHED_BASAL_MARBLE_SLAB).wall(POLISHED_BASAL_MARBLE_WALL).build(), TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottomWall(b, "_side", b, "_top", b, "_bottom", b, "_side"), Models.CUBE_BOTTOM_TOP));
 	
 	public static final Block BASAL_MARBLE_TILES = registerWithoutModel("basal_marble_tiles", new Block(basalMarble()), DyeColor.BROWN);
 	public static final Block BASAL_MARBLE_TILE_STAIRS = registerWithoutModel("basal_marble_tile_stairs", new StairsBlock(BASAL_MARBLE_TILES.getDefaultState(), Settings.copy(BASAL_MARBLE_TILES)), DyeColor.BROWN);
@@ -2346,21 +2351,6 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerStoneBlocks(Item.Settings settings) {
-		registerBlockWithItem("polished_bone_ash", POLISHED_BONE_ASH, settings, DyeColor.CYAN);
-		registerBlockWithItem("polished_bone_ash_slab", POLISHED_BONE_ASH_SLAB, settings, DyeColor.CYAN);
-		registerBlockWithItem("polished_bone_ash_stairs", POLISHED_BONE_ASH_STAIRS, settings, DyeColor.CYAN);
-		registerBlockWithItem("polished_bone_ash_wall", POLISHED_BONE_ASH_WALL, settings, DyeColor.CYAN);
-		
-		registerBlockWithItem("bone_ash_bricks", BONE_ASH_BRICKS, settings, DyeColor.CYAN);
-		registerBlockWithItem("bone_ash_brick_slab", BONE_ASH_BRICK_SLAB, settings, DyeColor.CYAN);
-		registerBlockWithItem("bone_ash_brick_stairs", BONE_ASH_BRICK_STAIRS, settings, DyeColor.CYAN);
-		registerBlockWithItem("bone_ash_brick_wall", BONE_ASH_BRICK_WALL, settings, DyeColor.CYAN);
-		
-		registerBlockWithItem("bone_ash_tiles", BONE_ASH_TILES, settings, DyeColor.CYAN);
-		registerBlockWithItem("bone_ash_tile_slab", BONE_ASH_TILE_SLAB, settings, DyeColor.CYAN);
-		registerBlockWithItem("bone_ash_tile_stairs", BONE_ASH_TILE_STAIRS, settings, DyeColor.CYAN);
-		registerBlockWithItem("bone_ash_tile_wall", BONE_ASH_TILE_WALL, settings, DyeColor.CYAN);
-		
 		registerBlockWithItem("polished_bone_ash_pillar", POLISHED_BONE_ASH_PILLAR, settings, DyeColor.CYAN);
 		registerBlockWithItem("bone_ash_shingles", BONE_ASH_SHINGLES, settings, DyeColor.CYAN);
 		
@@ -2373,15 +2363,7 @@ public class SpectrumBlocks {
 		
 		registerBlockWithItem("longing_chimera", LONGING_CHIMERA, settings, DyeColor.BROWN);
 		
-		registerBlockWithItem("pyrite", PYRITE, settings, DyeColor.BROWN);
-		registerBlockWithItem("pyrite_slab", PYRITE_SLAB, settings, DyeColor.BROWN);
-		registerBlockWithItem("pyrite_stairs", PYRITE_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("pyrite_wall", PYRITE_WALL, settings, DyeColor.BROWN);
 		registerBlockWithItem("pyrite_pile", PYRITE_PILE, settings, DyeColor.BROWN);
-		registerBlockWithItem("pyrite_tiles", PYRITE_TILES, settings, DyeColor.BROWN);
-		registerBlockWithItem("pyrite_tiles_slab", PYRITE_TILES_SLAB, settings, DyeColor.BROWN);
-		registerBlockWithItem("pyrite_tiles_stairs", PYRITE_TILES_STAIRS, settings, DyeColor.BROWN);
-		registerBlockWithItem("pyrite_tiles_wall", PYRITE_TILES_WALL, settings, DyeColor.BROWN);
 		registerBlockWithItem("pyrite_plating", PYRITE_PLATING, settings, DyeColor.BROWN);
 		registerBlockWithItem("pyrite_tubing", PYRITE_TUBING, settings, DyeColor.BROWN);
 		registerBlockWithItem("pyrite_relief", PYRITE_RELIEF, settings, DyeColor.BROWN);
