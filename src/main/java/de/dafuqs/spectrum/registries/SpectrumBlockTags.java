@@ -1,17 +1,16 @@
 package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.data.*;
 import net.minecraft.block.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.util.*;
 
-import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
-
 @SuppressWarnings("unused")
 public class SpectrumBlockTags {
 	
-	private static final DeferredRegistrar.Contextual<ProvidedTagBuilderBuilder<Block>> REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
+	private static final DeferredRegistrar.Contextual<DatagenProxy.ProvidedTagBuilderBuilder<Block>> REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	
 	// PLANTS
 	public static final TagKey<Block> MERMAIDS_BRUSH_PLANTABLE = of("mermaids_brush_plantable");
@@ -110,13 +109,13 @@ public class SpectrumBlockTags {
 		return TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", id));
 	}
 	
-	private static TagKey<Block> conventional(String id, TagBuilderCallback<Block> builder) {
+	private static TagKey<Block> conventional(String id, DatagenProxy.TagBuilderCallback<Block> builder) {
 		TagKey<Block> tag = TagKey.of(RegistryKeys.BLOCK, Identifier.of("c", id));
 		REGISTRAR.defer(ctx -> builder.build(ctx.build(tag)));
 		return tag;
 	}
 	
-	public static void provideTags(ProvidedTagBuilderBuilder<Block> provider) {
+	public static void provideTags(DatagenProxy.ProvidedTagBuilderBuilder<Block> provider) {
 		REGISTRAR.flush(provider);
 	}
 	

@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.registries;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.api.predicate.block.*;
+import de.dafuqs.spectrum.data.*;
 import de.dafuqs.spectrum.data_loaders.resonance_processors.*;
 import net.fabricmc.fabric.api.tag.convention.v2.*;
 import net.minecraft.block.*;
@@ -13,12 +14,10 @@ import net.minecraft.registry.tag.*;
 
 import java.util.function.*;
 
-import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
-
 @SuppressWarnings("unused")
 public class SpectrumResonanceProcessors {
 	
-	private static final DeferredRegistrar.Contextual<BootstrapContext<ResonanceProcessor>> REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
+	private static final DeferredRegistrar.Contextual<DatagenProxy.BootstrapContext<ResonanceProcessor>> REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	
 	public static final RegistryKey<ResonanceProcessor> PURE_RESONANCES_FROM_ORE = register("pure_resonances_from_ore", ctx -> ModifyDropsResonanceProcessor
 			.builder(BrokenBlockPredicate.Builder.create().tag(ctx.blocks().getOrThrow(ConventionalBlockTags.ORES)).build())
@@ -83,13 +82,13 @@ public class SpectrumResonanceProcessors {
 		return register(id, ctx -> builder.apply(DropSelfResonanceProcessor.builder(BrokenBlockPredicate.Builder.create().tag(ctx.blocks().getOrThrow(tag)).build())).build());
 	}
 	
-	public static RegistryKey<ResonanceProcessor> register(String id, Function<BootstrapContext<ResonanceProcessor>, ResonanceProcessor> processor) {
+	public static RegistryKey<ResonanceProcessor> register(String id, Function<DatagenProxy.BootstrapContext<ResonanceProcessor>, ResonanceProcessor> processor) {
 		RegistryKey<ResonanceProcessor> key = RegistryKey.of(SpectrumRegistryKeys.RESONANCE_PROCESSOR, SpectrumCommon.locate(id));
 		REGISTRAR.defer(ctx -> ctx.registerable().register(key, processor.apply(ctx)));
 		return key;
 	}
 	
-	public static void provideResonanceProcessors(BootstrapContext<ResonanceProcessor> ctx) {
+	public static void provideResonanceProcessors(DatagenProxy.BootstrapContext<ResonanceProcessor> ctx) {
 		REGISTRAR.flush(ctx);
 	}
 	

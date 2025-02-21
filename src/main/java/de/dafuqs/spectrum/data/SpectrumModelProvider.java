@@ -12,11 +12,9 @@ import net.minecraft.util.math.*;
 
 import java.util.function.*;
 
-import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
-
 public class SpectrumModelProvider extends FabricModelProvider {
 	
-	public static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
+	public static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	
 	public SpectrumModelProvider(FabricDataOutput output) {
 		super(output);

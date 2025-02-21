@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.registries;
 
+import de.dafuqs.spectrum.data.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
@@ -18,14 +19,13 @@ import net.minecraft.util.*;
 import java.util.*;
 
 import static de.dafuqs.spectrum.SpectrumCommon.*;
-import static de.dafuqs.spectrum.data.SpectrumDataGenerator.*;
 
 @SuppressWarnings("unused")
 public class SpectrumEnchantments {
 	
-	private static final DeferredRegistrar.Contextual<ProvidedTagBuilderBuilder<Item>> ITEM_TAG_REGISTRAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
-	private static final DeferredRegistrar.Contextual<BootstrapContext<Enchantment>> BOOTSTRAP_REGISTAR = new DeferredRegistrar.Contextual<>(IS_DATAGEN);
-	private static final DeferredRegistrar.KeyedContextual<RegistryKey<Enchantment>, ProvidedTagBuilderBuilder<Enchantment>> ENCHANTMENT_TAG_REGISTRAR = new DeferredRegistrar.KeyedContextual<>(IS_DATAGEN);
+	private static final DeferredRegistrar.Contextual<DatagenProxy.ProvidedTagBuilderBuilder<Item>> ITEM_TAG_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
+	private static final DeferredRegistrar.Contextual<DatagenProxy.BootstrapContext<Enchantment>> BOOTSTRAP_REGISTAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
+	private static final DeferredRegistrar.KeyedContextual<RegistryKey<Enchantment>, DatagenProxy.ProvidedTagBuilderBuilder<Enchantment>> ENCHANTMENT_TAG_REGISTRAR = new DeferredRegistrar.KeyedContextual<>(DatagenProxy.IS_DATAGEN);
 	
 	public static final RegistryKey<Enchantment> BIG_CATCH = of("big_catch"); // Increase the chance to reel in entities instead of fishing loot
 	public static final RegistryKey<Enchantment> CLOVERS_FAVOR = of("clovers_favor"); // Increases drop chance of <1 loot drops
@@ -401,8 +401,8 @@ public class SpectrumEnchantments {
 		private final Identifier advancementId;
 		
 		private EnchantmentBuilderCallback effectsBuilder = (key, ctx, builder) -> builder;
-		private TagBuilderCallback<Item> enchantableBuilder = provider -> provider;
-		private KeyedTagBuilderCallback<Enchantment> exclusiveSetBuilder = (key, provider) -> provider;
+		private DatagenProxy.TagBuilderCallback<Item> enchantableBuilder = provider -> provider;
+		private DatagenProxy.KeyedTagBuilderCallback<Enchantment> exclusiveSetBuilder = (key, provider) -> provider;
 		
 		public Builder(RegistryKey<Enchantment> baseKey, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost, List<AttributeModifierSlot> slots, Identifier advancementId) {
 			this.baseKey = baseKey;
@@ -421,12 +421,12 @@ public class SpectrumEnchantments {
 			return this;
 		}
 		
-		public Builder withEnchantable(TagBuilderCallback<Item> enchantableBuilder) {
+		public Builder withEnchantable(DatagenProxy.TagBuilderCallback<Item> enchantableBuilder) {
 			this.enchantableBuilder = enchantableBuilder;
 			return this;
 		}
 		
-		public Builder withExclusiveSet(KeyedTagBuilderCallback<Enchantment> exclusiveSetBuilder) {
+		public Builder withExclusiveSet(DatagenProxy.KeyedTagBuilderCallback<Enchantment> exclusiveSetBuilder) {
 			this.exclusiveSetBuilder = exclusiveSetBuilder;
 			return this;
 		}
@@ -468,11 +468,11 @@ public class SpectrumEnchantments {
 		
 	}
 	
-	public static void provideItemTags(ProvidedTagBuilderBuilder<Item> builder) {
+	public static void provideItemTags(DatagenProxy.ProvidedTagBuilderBuilder<Item> builder) {
 		ITEM_TAG_REGISTRAR.flush(builder);
 	}
 	
-	public static void provideEnchantmentTags(ProvidedTagBuilderBuilder<Enchantment> builder) {
+	public static void provideEnchantmentTags(DatagenProxy.ProvidedTagBuilderBuilder<Enchantment> builder) {
 		FabricTagProvider<Enchantment>.FabricTagBuilder enchantments = builder.build(SpectrumEnchantmentTags.ENCHANTMENTS);
 		FabricTagProvider<Enchantment>.FabricTagBuilder cloaked = builder.build(SpectrumEnchantmentTags.CLOAKED);
 		ENCHANTMENT_TAG_REGISTRAR.streamKeys().sorted(Comparator.comparing(RegistryKey::getValue)).forEach(key -> {
@@ -483,12 +483,12 @@ public class SpectrumEnchantments {
 		ENCHANTMENT_TAG_REGISTRAR.flush(builder);
 	}
 	
-	public static void provideEnchantments(BootstrapContext<Enchantment> ctx) {
+	public static void provideEnchantments(DatagenProxy.BootstrapContext<Enchantment> ctx) {
 		BOOTSTRAP_REGISTAR.flush(ctx);
 	}
 	
 	private interface EnchantmentBuilderCallback {
-		Enchantment.Builder build(RegistryKey<Enchantment> key, BootstrapContext<Enchantment> ctx, Enchantment.Builder builder);
+		Enchantment.Builder build(RegistryKey<Enchantment> key, DatagenProxy.BootstrapContext<Enchantment> ctx, Enchantment.Builder builder);
 	}
 	
 }

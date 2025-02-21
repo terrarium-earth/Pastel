@@ -102,12 +102,18 @@ dependencies {
 	for (String module in port_lib_modules.split(",")) {
 		modCompileOnly("io.github.fabricators_of_create.Porting-Lib:$module:${project.port_lib_version}") { transitive = false }
 	}
+
+	// Datagen dependencies
+//	modDatagenRuntimeOnly("curse.maven:gobber-427177:${project.gobber_version}")
+//	modDatagenRuntimeOnly("org.appliedenergistics:appliedenergistics2:${project.ae2_version}")
+//	modDatagenRuntimeOnly("maven.modrinth:create-fabric:${project.create_version}")
 }
 
 fabricApi {
 	configureDataGeneration {
 		client = true
 		modId = project.archives_base_name
+		createSourceSet = true
 	}
 }
 
