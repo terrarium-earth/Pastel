@@ -16,6 +16,7 @@ public class SpectrumModels {
 	public static final Model LARGE_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/large_bud")), Optional.empty(), TextureKey.LAYER0);
 	public static final Model CLUSTER_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/cluster")), Optional.empty(), TextureKey.LAYER0);
 	
+	public static final Model TRANSLUCENT_OUTER1 = new Model(Optional.of(SpectrumCommon.locate("templates/translucent_outer1")), Optional.empty(), TextureKey.TEXTURE);
 	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), TextureKey.TOP, TextureKey.SIDE, TextureKey.INSIDE);
 	public static final Model MOONSTONE_CHISELED = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled")), Optional.empty(), TextureKey.SIDE, SpectrumTextureKeys.LINE);
 	public static final Model MOONSTONE_CHISELED_DOWN = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled_down")), Optional.empty(), TextureKey.SIDE, SpectrumTextureKeys.LINE);
