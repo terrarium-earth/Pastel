@@ -31,4 +31,8 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> TextureMap.cross(TextureMap.getSubId(crossBlock.apply(b), crossSuffix)), Models.CROSS);
 	}
 	
+	public static TexturedModel.Factory doubleCross(UnaryOperator<Block> crossBlock, String crossSuffix) {
+		return TexturedModel.makeFactory(b -> TextureMap.cross(TextureMap.getSubId(crossBlock.apply(b), crossSuffix)), SpectrumModels.DOUBLE_CROSS);
+	}
+	
 }

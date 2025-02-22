@@ -1,15 +1,15 @@
 {
   "variants": {
-    "half=lower,dead=false": {
+    "dead=false,half=lower": {
       "model": "spectrum:block/tall_yellow_dragonjag_bottom"
     },
-    "half=upper,dead=false": {
+    "dead=false,half=upper": {
       "model": "spectrum:block/tall_yellow_dragonjag_top"
     },
-    "half=lower,dead=true": {
+    "dead=true,half=lower": {
       "model": "spectrum:block/tall_yellow_dragonjag_bottom_dead"
     },
-    "half=upper,dead=true": {
+    "dead=true,half=upper": {
       "model": "spectrum:block/tall_yellow_dragonjag_top_dead"
     }
   }

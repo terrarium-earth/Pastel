@@ -20,6 +20,7 @@ public class SpectrumModels {
 	public static final Model CUSHION = new Model(Optional.of(SpectrumCommon.locate("templates/cushion")), Optional.empty(), TextureKey.SIDE, TextureKey.TOP, TextureKey.BOTTOM);
 	public static final Model COLORED_LAMP_ON = new Model(Optional.of(SpectrumCommon.locate("templates/colored_lamp_on")), Optional.empty(), SpectrumTextureKeys.INNER, SpectrumTextureKeys.OUTER);
 	public static final Model CRYSTALLARIEUM_FARMABLE = new Model(Optional.of(SpectrumCommon.locate("templates/crystallarieum_farmable")), Optional.empty(), TextureKey.CROSS);
+	public static final Model DOUBLE_CROSS = new Model(Optional.of(SpectrumCommon.locate("templates/double_cross")), Optional.empty(), TextureKey.CROSS);
 	public static final Model MOONSTONE_CHISELED = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled")), Optional.empty(), TextureKey.SIDE, SpectrumTextureKeys.LINE);
 	public static final Model MOONSTONE_CHISELED_DOWN = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled_down")), Optional.empty(), TextureKey.SIDE, SpectrumTextureKeys.LINE);
 	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), TextureKey.TOP, TextureKey.SIDE, TextureKey.INSIDE);

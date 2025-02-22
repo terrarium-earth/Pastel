@@ -151,4 +151,8 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		);
 	}
 	
+	public static BlockStateVariant createModelVariant(Identifier modelId) {
+		return BlockStateVariant.create().put(VariantSettings.MODEL, modelId);
+	}
+	
 }
