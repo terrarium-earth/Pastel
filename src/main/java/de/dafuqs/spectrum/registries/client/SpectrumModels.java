@@ -17,6 +17,7 @@ public class SpectrumModels {
 	public static final Model BASE_FLAT_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light")), Optional.empty(), SpectrumTextureKeys.INNER, SpectrumTextureKeys.OUTER, TextureKey.PARTICLE);
 	public static final Model BASE_FLAT_LIGHT_MIRRORED = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light_mirrored")), Optional.empty(), SpectrumTextureKeys.INNER, SpectrumTextureKeys.OUTER, TextureKey.PARTICLE);
 	public static final Model CHIME = new Model(Optional.of(SpectrumCommon.locate("templates/chime")), Optional.empty(), SpectrumTextureKeys.BASE, SpectrumTextureKeys.GEMSTONE);
+	public static final Model CUSHION = new Model(Optional.of(SpectrumCommon.locate("templates/cushion")), Optional.empty(), TextureKey.SIDE, TextureKey.TOP, TextureKey.BOTTOM);
 	public static final Model COLORED_LAMP_ON = new Model(Optional.of(SpectrumCommon.locate("templates/colored_lamp_on")), Optional.empty(), SpectrumTextureKeys.INNER, SpectrumTextureKeys.OUTER);
 	public static final Model CRYSTALLARIEUM_FARMABLE = new Model(Optional.of(SpectrumCommon.locate("templates/crystallarieum_farmable")), Optional.empty(), TextureKey.CROSS);
 	public static final Model MOONSTONE_CHISELED = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled")), Optional.empty(), TextureKey.SIDE, SpectrumTextureKeys.LINE);
