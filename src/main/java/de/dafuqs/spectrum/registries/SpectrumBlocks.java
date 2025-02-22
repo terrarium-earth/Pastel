@@ -826,12 +826,12 @@ public class SpectrumBlocks {
 	
 	private static final int NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS = 30;
 	
-	public static final PillarBlock STRIPPED_SLATE_NOXCAP_STEM = new PillarBlock(noxcap(MapColor.GRAY));
-	public static final PillarBlock SLATE_NOXCAP_STEM = new StrippingLootPillarBlock(noxcap(MapColor.GRAY), STRIPPED_SLATE_NOXCAP_STEM, SpectrumLootTables.SLATE_NOXCAP_STRIPPING);
-	public static final Block STRIPPED_SLATE_NOXCAP_HYPHAE = new PillarBlock(noxcap(MapColor.GRAY));
-	public static final Block SLATE_NOXCAP_HYPHAE = new StrippingLootPillarBlock(noxcap(MapColor.GRAY), STRIPPED_SLATE_NOXCAP_HYPHAE, SpectrumLootTables.SLATE_NOXCAP_STRIPPING);
-	public static final Block SLATE_NOXCAP_BLOCK = new Block(noxcap(MapColor.GRAY));
-	public static final PillarBlock SLATE_NOXCAP_GILLS = new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
+	public static final PillarBlock STRIPPED_SLATE_NOXCAP_STEM = registerAxisRotated("stripped_slate_noxcap_stem", new PillarBlock(noxcap(MapColor.GRAY)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block STRIPPED_SLATE_NOXCAP_HYPHAE = registerAxisRotated("stripped_slate_noxcap_hyphae", new PillarBlock(noxcap(MapColor.GRAY)), DyeColor.LIME, SpectrumTexturedModels.cubeColumn(b -> STRIPPED_SLATE_NOXCAP_STEM, "", b -> STRIPPED_SLATE_NOXCAP_STEM, ""));
+	public static final PillarBlock SLATE_NOXCAP_STEM = registerAxisRotated("slate_noxcap_stem", new StrippingLootPillarBlock(noxcap(MapColor.GRAY), STRIPPED_SLATE_NOXCAP_STEM, SpectrumLootTables.SLATE_NOXCAP_STRIPPING), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block SLATE_NOXCAP_HYPHAE = registerAxisRotated("slate_noxcap_hyphae", new StrippingLootPillarBlock(noxcap(MapColor.GRAY), STRIPPED_SLATE_NOXCAP_HYPHAE, SpectrumLootTables.SLATE_NOXCAP_STRIPPING), DyeColor.LIME, SpectrumTexturedModels.cubeColumn(b -> SLATE_NOXCAP_STEM, "", b -> SLATE_NOXCAP_STEM, ""));
+	public static final Block SLATE_NOXCAP_BLOCK = registerSingleton("slate_noxcap_block", new Block(noxcap(MapColor.GRAY)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final PillarBlock SLATE_NOXCAP_GILLS = registerAxisRotated("slate_noxcap_gills", new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	
 	public static final Block SLATE_NOXWOOD_PILLAR = registerAxisRotated("slate_noxwood_pillar", new PillarBlock(noxcap(MapColor.GRAY)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	public static final Block SLATE_NOXWOOD_LAMP = registerRedstoneLamp("slate_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.GRAY).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME);
@@ -850,12 +850,12 @@ public class SpectrumBlocks {
 	public static final Block SLATE_NOXWOOD_PRESSURE_PLATE = registerWithoutModel("slate_noxwood_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.GRAY)), DyeColor.LIME);
 	public static final BlockFamily SLATE_NOXWOOD_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(SLATE_NOXWOOD_PLANKS).stairs(SLATE_NOXWOOD_STAIRS).slab(SLATE_NOXWOOD_SLAB).fence(SLATE_NOXWOOD_FENCE).fenceGate(SLATE_NOXWOOD_FENCE_GATE).door(SLATE_NOXWOOD_DOOR).trapdoor(SLATE_NOXWOOD_TRAPDOOR).button(SLATE_NOXWOOD_BUTTON).pressurePlate(SLATE_NOXWOOD_PRESSURE_PLATE).build());
 	
-	public static final PillarBlock STRIPPED_EBONY_NOXCAP_STEM = new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final PillarBlock EBONY_NOXCAP_STEM = new StrippingLootPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK), STRIPPED_EBONY_NOXCAP_STEM, SpectrumLootTables.EBONY_NOXCAP_STRIPPING);
-	public static final Block STRIPPED_EBONY_NOXCAP_HYPHAE = new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final Block EBONY_NOXCAP_HYPHAE = new StrippingLootPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK), STRIPPED_EBONY_NOXCAP_HYPHAE, SpectrumLootTables.EBONY_NOXCAP_STRIPPING);
-	public static final Block EBONY_NOXCAP_BLOCK = new Block(noxcap(MapColor.TERRACOTTA_BLACK));
-	public static final PillarBlock EBONY_NOXCAP_GILLS = new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
+	public static final PillarBlock STRIPPED_EBONY_NOXCAP_STEM = registerAxisRotated("stripped_ebony_noxcap_stem", new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block STRIPPED_EBONY_NOXCAP_HYPHAE = registerAxisRotated("stripped_ebony_noxcap_hyphae", new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME, SpectrumTexturedModels.cubeColumn(b -> STRIPPED_EBONY_NOXCAP_STEM, "", b -> STRIPPED_EBONY_NOXCAP_STEM, ""));
+	public static final PillarBlock EBONY_NOXCAP_STEM = registerAxisRotated("ebony_noxcap_stem", new StrippingLootPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK), STRIPPED_EBONY_NOXCAP_STEM, SpectrumLootTables.EBONY_NOXCAP_STRIPPING), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block EBONY_NOXCAP_HYPHAE = registerAxisRotated("ebony_noxcap_hyphae", new StrippingLootPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK), STRIPPED_EBONY_NOXCAP_HYPHAE, SpectrumLootTables.EBONY_NOXCAP_STRIPPING), DyeColor.LIME, SpectrumTexturedModels.cubeColumn(b -> EBONY_NOXCAP_STEM, "", b -> EBONY_NOXCAP_STEM, ""));
+	public static final Block EBONY_NOXCAP_BLOCK = registerSingleton("ebony_noxcap_block", new Block(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final PillarBlock EBONY_NOXCAP_GILLS = registerAxisRotated("ebony_noxcap_gills", new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	
 	public static final Block EBONY_NOXWOOD_PILLAR = registerAxisRotated("ebony_noxwood_pillar", new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	public static final Block EBONY_NOXWOOD_LAMP = registerRedstoneLamp("ebony_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.TERRACOTTA_BLACK).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME);
@@ -874,12 +874,12 @@ public class SpectrumBlocks {
 	public static final Block EBONY_NOXWOOD_PRESSURE_PLATE = registerWithoutModel("ebony_noxwood_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME);
 	public static final BlockFamily EBONY_NOXWOOD_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(EBONY_NOXWOOD_PLANKS).stairs(EBONY_NOXWOOD_STAIRS).slab(EBONY_NOXWOOD_SLAB).fence(EBONY_NOXWOOD_FENCE).fenceGate(EBONY_NOXWOOD_FENCE_GATE).door(EBONY_NOXWOOD_DOOR).trapdoor(EBONY_NOXWOOD_TRAPDOOR).button(EBONY_NOXWOOD_BUTTON).pressurePlate(EBONY_NOXWOOD_PRESSURE_PLATE).build());
 	
-	public static final PillarBlock STRIPPED_IVORY_NOXCAP_STEM = new PillarBlock(noxcap(MapColor.OFF_WHITE));
-	public static final PillarBlock IVORY_NOXCAP_STEM = new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_IVORY_NOXCAP_STEM, SpectrumLootTables.IVORY_NOXCAP_STRIPPING);
-	public static final Block STRIPPED_IVORY_NOXCAP_HYPHAE = new PillarBlock(noxcap(MapColor.OFF_WHITE));
-	public static final Block IVORY_NOXCAP_HYPHAE = new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_IVORY_NOXCAP_HYPHAE, SpectrumLootTables.IVORY_NOXCAP_STRIPPING);
-	public static final Block IVORY_NOXCAP_BLOCK = new Block(noxcap(MapColor.OFF_WHITE));
-	public static final PillarBlock IVORY_NOXCAP_GILLS = new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
+	public static final PillarBlock STRIPPED_IVORY_NOXCAP_STEM = registerAxisRotated("stripped_ivory_noxcap_stem", new PillarBlock(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block STRIPPED_IVORY_NOXCAP_HYPHAE = registerAxisRotated("stripped_ivory_noxcap_hyphae", new PillarBlock(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME, SpectrumTexturedModels.cubeColumn(b -> STRIPPED_IVORY_NOXCAP_STEM, "", b -> STRIPPED_IVORY_NOXCAP_STEM, ""));
+	public static final PillarBlock IVORY_NOXCAP_STEM = registerAxisRotated("ivory_noxcap_stem", new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_IVORY_NOXCAP_STEM, SpectrumLootTables.IVORY_NOXCAP_STRIPPING), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block IVORY_NOXCAP_HYPHAE = registerAxisRotated("ivory_noxcap_hyphae", new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_IVORY_NOXCAP_HYPHAE, SpectrumLootTables.IVORY_NOXCAP_STRIPPING), DyeColor.LIME, SpectrumTexturedModels.cubeColumn(b -> IVORY_NOXCAP_STEM, "", b -> IVORY_NOXCAP_STEM, ""));
+	public static final Block IVORY_NOXCAP_BLOCK = registerSingleton("ivory_noxcap_block", new Block(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final PillarBlock IVORY_NOXCAP_GILLS = registerAxisRotated("ivory_noxcap_gills", new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	
 	public static final Block IVORY_NOXWOOD_PILLAR = registerAxisRotated("ivory_noxwood_pillar", new PillarBlock(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	public static final Block IVORY_NOXWOOD_LAMP = registerRedstoneLamp("ivory_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.OFF_WHITE).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME);
@@ -898,12 +898,12 @@ public class SpectrumBlocks {
 	public static final Block IVORY_NOXWOOD_PRESSURE_PLATE = registerWithoutModel("ivory_noxwood_pressure_plate", new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.OFF_WHITE)), DyeColor.LIME);
 	public static final BlockFamily IVORY_NOXWOOD_FAMILY = registerBlockFamilyBlockModels(new BlockFamily.Builder(IVORY_NOXWOOD_PLANKS).stairs(IVORY_NOXWOOD_STAIRS).slab(IVORY_NOXWOOD_SLAB).fence(IVORY_NOXWOOD_FENCE).fenceGate(IVORY_NOXWOOD_FENCE_GATE).door(IVORY_NOXWOOD_DOOR).trapdoor(IVORY_NOXWOOD_TRAPDOOR).button(IVORY_NOXWOOD_BUTTON).pressurePlate(IVORY_NOXWOOD_PRESSURE_PLATE).build());
 	
-	public static final PillarBlock STRIPPED_CHESTNUT_NOXCAP_STEM = new PillarBlock(noxcap(MapColor.DULL_RED));
-	public static final PillarBlock CHESTNUT_NOXCAP_STEM = new StrippingLootPillarBlock(noxcap(MapColor.DULL_RED), STRIPPED_CHESTNUT_NOXCAP_STEM, SpectrumLootTables.CHESTNUT_NOXCAP_STRIPPING);
-	public static final Block STRIPPED_CHESTNUT_NOXCAP_HYPHAE = new PillarBlock(noxcap(MapColor.OFF_WHITE));
-	public static final Block CHESTNUT_NOXCAP_HYPHAE = new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_CHESTNUT_NOXCAP_HYPHAE, SpectrumLootTables.CHESTNUT_NOXCAP_STRIPPING);
-	public static final Block CHESTNUT_NOXCAP_BLOCK = new Block(noxcap(MapColor.DULL_RED));
-	public static final PillarBlock CHESTNUT_NOXCAP_GILLS = new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
+	public static final PillarBlock STRIPPED_CHESTNUT_NOXCAP_STEM = registerAxisRotated("stripped_chestnut_noxcap_stem", new PillarBlock(noxcap(MapColor.DULL_RED)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block STRIPPED_CHESTNUT_NOXCAP_HYPHAE = registerAxisRotated("stripped_chestnut_noxcap_hyphae", new PillarBlock(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME, SpectrumTexturedModels.cubeColumn(b -> STRIPPED_CHESTNUT_NOXCAP_STEM, "", b -> STRIPPED_CHESTNUT_NOXCAP_STEM, ""));
+	public static final PillarBlock CHESTNUT_NOXCAP_STEM = registerAxisRotated("chestnut_noxcap_stem", new StrippingLootPillarBlock(noxcap(MapColor.DULL_RED), STRIPPED_CHESTNUT_NOXCAP_STEM, SpectrumLootTables.CHESTNUT_NOXCAP_STRIPPING), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final Block CHESTNUT_NOXCAP_HYPHAE = registerAxisRotated("chestnut_noxcap_hyphae", new StrippingLootPillarBlock(noxcap(MapColor.OFF_WHITE), STRIPPED_CHESTNUT_NOXCAP_HYPHAE, SpectrumLootTables.CHESTNUT_NOXCAP_STRIPPING), DyeColor.LIME, SpectrumTexturedModels.cubeColumn(b -> CHESTNUT_NOXCAP_STEM, "", b -> CHESTNUT_NOXCAP_STEM, ""));
+	public static final Block CHESTNUT_NOXCAP_BLOCK = registerSingleton("chestnut_noxcap_block", new Block(noxcap(MapColor.DULL_RED)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
+	public static final PillarBlock CHESTNUT_NOXCAP_GILLS = registerAxisRotated("chestnut_noxcap_gills", new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	
 	public static final Block CHESTNUT_NOXWOOD_PILLAR = registerAxisRotated("chestnut_noxwood_pillar", new PillarBlock(noxcap(MapColor.DULL_RED)), DyeColor.LIME, TexturedModel.END_FOR_TOP_CUBE_COLUMN);
 	public static final Block CHESTNUT_NOXWOOD_LAMP = registerRedstoneLamp("chestnut_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.DULL_RED).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME);
@@ -2146,34 +2146,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("overgrown_blackslag", OVERGROWN_BLACKSLAG, settings, DyeColor.LIME);
 		registerBlockWithItem("shimmel", SHIMMEL, settings, DyeColor.LIME);
 		registerBlockWithItem("rotten_ground", ROTTEN_GROUND, settings, DyeColor.LIME);
-		
-		registerBlockWithItem("slate_noxcap_block", SLATE_NOXCAP_BLOCK, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxcap_stem", SLATE_NOXCAP_STEM, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_slate_noxcap_stem", STRIPPED_SLATE_NOXCAP_STEM, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxcap_hyphae", SLATE_NOXCAP_HYPHAE, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_slate_noxcap_hyphae", STRIPPED_SLATE_NOXCAP_HYPHAE, settings, DyeColor.LIME);
-		registerBlockWithItem("slate_noxcap_gills", SLATE_NOXCAP_GILLS, settings, DyeColor.LIME);
-		
-		registerBlockWithItem("ebony_noxcap_block", EBONY_NOXCAP_BLOCK, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxcap_stem", EBONY_NOXCAP_STEM, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_ebony_noxcap_stem", STRIPPED_EBONY_NOXCAP_STEM, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxcap_hyphae", EBONY_NOXCAP_HYPHAE, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_ebony_noxcap_hyphae", STRIPPED_EBONY_NOXCAP_HYPHAE, settings, DyeColor.LIME);
-		registerBlockWithItem("ebony_noxcap_gills", EBONY_NOXCAP_GILLS, settings, DyeColor.LIME);
-		
-		registerBlockWithItem("ivory_noxcap_block", IVORY_NOXCAP_BLOCK, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxcap_stem", IVORY_NOXCAP_STEM, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_ivory_noxcap_stem", STRIPPED_IVORY_NOXCAP_STEM, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxcap_hyphae", IVORY_NOXCAP_HYPHAE, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_ivory_noxcap_hyphae", STRIPPED_IVORY_NOXCAP_HYPHAE, settings, DyeColor.LIME);
-		registerBlockWithItem("ivory_noxcap_gills", IVORY_NOXCAP_GILLS, settings, DyeColor.LIME);
-		
-		registerBlockWithItem("chestnut_noxcap_block", CHESTNUT_NOXCAP_BLOCK, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxcap_stem", CHESTNUT_NOXCAP_STEM, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_chestnut_noxcap_stem", STRIPPED_CHESTNUT_NOXCAP_STEM, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxcap_hyphae", CHESTNUT_NOXCAP_HYPHAE, settings, DyeColor.LIME);
-		registerBlockWithItem("stripped_chestnut_noxcap_hyphae", STRIPPED_CHESTNUT_NOXCAP_HYPHAE, settings, DyeColor.LIME);
-		registerBlockWithItem("chestnut_noxcap_gills", CHESTNUT_NOXCAP_GILLS, settings, DyeColor.LIME);
 		
 		registerBlock("weeping_gala_fronds", WEEPING_GALA_FRONDS);
 		registerBlock("weeping_gala_fronds_plant", WEEPING_GALA_FRONDS_PLANT);

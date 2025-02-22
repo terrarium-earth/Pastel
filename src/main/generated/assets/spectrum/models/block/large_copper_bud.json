@@ -1,5 +1,5 @@
 {
-  "parent": "spectrum:block/crystallarieum_farmable",
+  "parent": "spectrum:templates/crystallarieum_farmable",
   "textures": {
     "cross": "spectrum:block/large_copper_bud"
   }
