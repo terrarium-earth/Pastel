@@ -64,6 +64,14 @@ public class SpectrumTextureMaps {
 		return new TextureMap().put(TextureKey.SIDE, side).put(SpectrumTextureKeys.LINE, line);
 	}
 	
+	public static TextureMap innerOuterParticle(Block innerBlock, String innerSuffix, Block outerBlock, String outerSuffix, Block particleBlock, String particleSuffix) {
+		return innerOuterParticle(TextureMap.getSubId(innerBlock, innerSuffix), TextureMap.getSubId(outerBlock, outerSuffix), TextureMap.getSubId(particleBlock, particleSuffix));
+	}
+	
+	public static TextureMap innerOuterParticle(Identifier inner, Identifier outer, Identifier particle) {
+		return new TextureMap().put(SpectrumTextureKeys.INNER, inner).put(SpectrumTextureKeys.OUTER, outer).put(TextureKey.PARTICLE, particle);
+	}
+	
 	public static TextureMap dirtTop(Block dirtBlock, String dirtSuffix, Block topBlock, String topSuffix) {
 		return new TextureMap()
 				.put(TextureKey.DIRT, TextureMap.getSubId(dirtBlock, dirtSuffix))

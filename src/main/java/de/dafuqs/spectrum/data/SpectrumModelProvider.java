@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.data;
 
+import com.google.gson.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.datagen.v1.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
@@ -71,7 +72,7 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	}
 	
 	public static void registerMirroredAxisRotatedBlockModel(Block block, TexturedModel.Factory factory, TexturedModel.Factory mirroredFactory) {
-		registerBlockModel(ctx -> createMirroredVariantsSupplier(ctx, block, factory, mirroredFactory).coordinate(BlockStateModelGenerator.createAxisRotatedVariantMap()));
+		registerBlockModel(ctx -> createMirroredVariantsSupplier(block, factory, mirroredFactory, ctx.modelCollector).coordinate(BlockStateModelGenerator.createAxisRotatedVariantMap()));
 	}
 	
 	public static void registerDefaultFacingUpBlockModel(Block block, TexturedModel.Factory factory) {
@@ -79,7 +80,7 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	}
 	
 	public static void registerSimpleMirroredBlockModel(Block block) {
-		registerBlockModel(ctx -> createMirroredVariantsSupplier(ctx, block, TexturedModel.CUBE_ALL, TexturedModel.CUBE_MIRRORED_ALL));
+		registerBlockModel(ctx -> createMirroredVariantsSupplier(block, TexturedModel.CUBE_ALL, TexturedModel.CUBE_MIRRORED_ALL, ctx.modelCollector));
 	}
 	
 	public static void registerLogBlockModel(Block block) {
@@ -143,10 +144,10 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	
 	// Variant Suppliers
 	
-	public static VariantsBlockStateSupplier createMirroredVariantsSupplier(BlockStateModelGenerator ctx, Block block, TexturedModel.Factory factory, TexturedModel.Factory mirroredFactory) {
+	public static VariantsBlockStateSupplier createMirroredVariantsSupplier(Block block, TexturedModel.Factory factory, TexturedModel.Factory mirroredFactory, BiConsumer<Identifier, Supplier<JsonElement>> modelCollector) {
 		return VariantsBlockStateSupplier.create(block,
-				BlockStateVariant.create().put(VariantSettings.MODEL, factory.upload(block, ctx.modelCollector)),
-				BlockStateVariant.create().put(VariantSettings.MODEL, mirroredFactory.upload(block, ctx.modelCollector))
+				BlockStateVariant.create().put(VariantSettings.MODEL, factory.upload(block, modelCollector)),
+				BlockStateVariant.create().put(VariantSettings.MODEL, mirroredFactory.upload(block, modelCollector))
 		);
 	}
 	

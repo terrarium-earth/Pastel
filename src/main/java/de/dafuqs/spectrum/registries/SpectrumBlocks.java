@@ -530,11 +530,11 @@ public class SpectrumBlocks {
 		return settings(mapColor, soundGroup, strength, resistance).pistonBehavior(pistonBehavior).ticksRandomly().allowsSpawning((state, world, pos, type) -> false);
 	}
 	
-	public static final Block FADING = new FadingBlock(decay(MapColor.DARK_GREEN, BlockSoundGroup.GRASS, 0.5F, 0.5F, PistonBehavior.DESTROY));
-	public static final Block FAILING = new FailingBlock(decay(MapColor.BLACK, BlockSoundGroup.STONE, 20.0F, 50.0F, PistonBehavior.BLOCK));
-	public static final Block RUIN = new RuinBlock(decay(MapColor.BLACK, BlockSoundGroup.STONE, 100.0F, 3600000.0F, PistonBehavior.BLOCK));
-	public static final Block FORFEITURE = new ForfeitureBlock(decay(MapColor.BLACK, BlockSoundGroup.STONE, 100.0F, 3600000.0F, PistonBehavior.BLOCK));
-	public static final Block DECAY_AWAY = new DecayAwayBlock(AbstractBlock.Settings.copy(Blocks.DIRT).pistonBehavior(PistonBehavior.DESTROY));
+	public static final Block FADING = registerDecay("fading", new FadingBlock(decay(MapColor.DARK_GREEN, BlockSoundGroup.GRASS, 0.5F, 0.5F, PistonBehavior.DESTROY)));
+	public static final Block FAILING = registerDecay("failing", new FailingBlock(decay(MapColor.BLACK, BlockSoundGroup.STONE, 20.0F, 50.0F, PistonBehavior.BLOCK)));
+	public static final Block RUIN = registerDecay("ruin", new RuinBlock(decay(MapColor.BLACK, BlockSoundGroup.STONE, 100.0F, 3600000.0F, PistonBehavior.BLOCK)));
+	public static final Block FORFEITURE = registerDecay("forfeiture", new ForfeitureBlock(decay(MapColor.BLACK, BlockSoundGroup.STONE, 100.0F, 3600000.0F, PistonBehavior.BLOCK)));
+	public static final Block DECAY_AWAY = registerSimple("decay_away", new DecayAwayBlock(AbstractBlock.Settings.copy(Blocks.DIRT).pistonBehavior(PistonBehavior.DESTROY)));
 	
 	// ROCK CANDY
 	private static Settings rockCandy(AbstractBlock block) {
@@ -1544,14 +1544,14 @@ public class SpectrumBlocks {
 		return settings(MapColor.CLEAR, soundGroup, 1.0F).nonOpaque().requiresTool().luminance(state -> 15);
 	}
 	
-	public static final Block BASALT_SHIMMERSTONE_LIGHT = new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.BASALT));
-	public static final Block CALCITE_SHIMMERSTONE_LIGHT = new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.CALCITE));
-	public static final Block STONE_SHIMMERSTONE_LIGHT = new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.STONE));
-	public static final Block GRANITE_SHIMMERSTONE_LIGHT = new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.STONE));
-	public static final Block DIORITE_SHIMMERSTONE_LIGHT = new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.STONE));
-	public static final Block ANDESITE_SHIMMERSTONE_LIGHT = new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.STONE));
-	public static final Block DEEPSLATE_SHIMMERSTONE_LIGHT = new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.DEEPSLATE));
-	public static final Block BLACKSLAG_SHIMMERSTONE_LIGHT = new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.DEEPSLATE));
+	public static final Block STONE_SHIMMERSTONE_LIGHT = registerShimmerstoneLight("stone_shimmerstone_light", new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.STONE)), () -> SpectrumTextures.STONE_FLAT_LIGHT, DyeColor.YELLOW);
+	public static final Block BASALT_SHIMMERSTONE_LIGHT = registerShimmerstoneLight("basalt_shimmerstone_light", new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.BASALT)), () -> SpectrumTextures.BASALT_FLAT_LIGHT, DyeColor.YELLOW);
+	public static final Block CALCITE_SHIMMERSTONE_LIGHT = registerShimmerstoneLight("calcite_shimmerstone_light", new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.CALCITE)), () -> SpectrumTextures.CALCITE_FLAT_LIGHT, DyeColor.YELLOW);
+	public static final Block DEEPSLATE_SHIMMERSTONE_LIGHT = registerShimmerstoneLight("deepslate_shimmerstone_light", new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.DEEPSLATE)), () -> SpectrumTextures.DEEPSLATE_FLAT_LIGHT, DyeColor.YELLOW);
+	public static final Block BLACKSLAG_SHIMMERSTONE_LIGHT = registerShimmerstoneLight("blackslag_shimmerstone_light", new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.DEEPSLATE)), () -> SpectrumTextures.BLACKSLAG_FLAT_LIGHT, DyeColor.YELLOW);
+	public static final Block GRANITE_SHIMMERSTONE_LIGHT = registerShimmerstoneLight("granite_shimmerstone_light", new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.STONE)), () -> ModelIds.getBlockModelId(POLISHED_GRANITE), DyeColor.YELLOW);
+	public static final Block DIORITE_SHIMMERSTONE_LIGHT = registerShimmerstoneLight("diorite_shimmerstone_light", new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.STONE)), () -> ModelIds.getBlockModelId(POLISHED_DIORITE), DyeColor.YELLOW);
+	public static final Block ANDESITE_SHIMMERSTONE_LIGHT = registerShimmerstoneLight("andesite_shimmerstone_light", new ShimmerstoneLightBlock(shimmerstoneLight(BlockSoundGroup.STONE)), () -> ModelIds.getBlockModelId(POLISHED_ANDESITE), DyeColor.YELLOW);
 	
 	// CRYSTALLARIEUM
 	private static Settings crystallarieumGrowable(Block baseBlock) {
@@ -1869,6 +1869,18 @@ public class SpectrumBlocks {
 		return registerWithoutModel(name, glassPaneBlock, dyeColor);
 	}
 	
+	public static <T extends DecayBlock> T registerDecay(String name, T block) {
+		registerBlockModel(ctx -> {
+			Identifier none = Models.CUBE_ALL.upload(block, "_none", SpectrumTextureMaps.all(block, "_none"), ctx.modelCollector);
+			Identifier def = Models.CUBE_ALL.upload(block, "_default", SpectrumTextureMaps.all(block, "_default"), ctx.modelCollector);
+			return VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(DecayBlock.CONVERSION)
+					.register(DecayBlock.Conversion.NONE, BlockStateVariant.create().put(VariantSettings.MODEL, none))
+					.register(DecayBlock.Conversion.DEFAULT, BlockStateVariant.create().put(VariantSettings.MODEL, def))
+					.register(DecayBlock.Conversion.SPECIAL, BlockStateVariant.create().put(VariantSettings.MODEL, def)));
+		});
+		return registerWithoutModel(name, block);
+	}
+	
 	public static <T extends SpectrumClusterBlock> T registerClusterBlock(String name, T block, Item.Settings itemSettings, Model blockModel, DyeColor color) {
 		registerCutoutRenderLayerEntry(block);
 		switch (block.getGrowthStage()) {
@@ -1919,6 +1931,16 @@ public class SpectrumBlocks {
 		return registerWithoutModel(name, block, color);
 	}
 	
+	public static <T extends ShimmerstoneLightBlock> T registerShimmerstoneLight(String name, T block, Supplier<Identifier> outerSupplier, DyeColor color) {
+		registerBlockModel(ctx -> {
+			Identifier outer = outerSupplier.get();
+			Identifier base = SpectrumModels.BASE_FLAT_LIGHT.upload(block, SpectrumTextureMaps.innerOuterParticle(SpectrumTextures.SHIMMERSTONE_LIGHT, outer, outer), ctx.modelCollector);
+			Identifier mirrored = SpectrumModels.BASE_FLAT_LIGHT_MIRRORED.upload(block, "_mirrored", SpectrumTextureMaps.innerOuterParticle(SpectrumTextures.SHIMMERSTONE_LIGHT, outer, outer), ctx.modelCollector);
+			return VariantsBlockStateSupplier.create(block).coordinate(BlockStateModelGenerator.createNorthDefaultRotationStates()).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.INVERTED, mirrored, base));
+		});
+		return registerWithoutModel(name, block, color);
+	}
+	
 	public static <T extends Block> T registerMoonstoneChiseled(String name, Identifier capTexture, T block, DyeColor color) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
 			TextureMap textureMap = SpectrumTextureMaps.sideLine(capTexture, TextureMap.getId(block));
@@ -1959,6 +1981,11 @@ public class SpectrumBlocks {
 	
 	public static <T extends Block> T registerWithoutModel(String name, T block, DyeColor dyeColor) {
 		return registerWithoutModel(name, block, IS.DEFAULT, dyeColor);
+	}
+	
+	public static <T extends Block> T registerSimple(String name, T block) {
+		registerSingletonBlockModel(block, TexturedModel.CUBE_ALL);
+		return registerWithoutModel(name, block);
 	}
 	
 	public static <T extends Block> T registerSimple(String name, T block, DyeColor dyeColor) {
@@ -2050,7 +2077,6 @@ public class SpectrumBlocks {
 		
 		registerOreBlocks(IS.of(), IS.of().fireproof());
 		registerOreStorageBlocks(IS.of(), IS.of().fireproof());
-		registerShimmerstoneLights(IS.of());
 		registerDecoStones(IS.of());
 		registerPigmentStorageBlocks(IS.of());
 		registerColoredLamps(IS.of());
@@ -2064,13 +2090,6 @@ public class SpectrumBlocks {
 		registerSugarSticks(IS.of());
 		registerStructureBlocks(IS.of());
 		registerSpiritTree(IS.of());
-		
-		// Decay
-		registerBlock("fading", FADING);
-		registerBlock("failing", FAILING);
-		registerBlock("ruin", RUIN);
-		registerBlock("forfeiture", FORFEITURE);
-		registerBlock("decay_away", DECAY_AWAY);
 		
 		// Fluids + Products
 		registerBlock("goo", GOO);
@@ -2354,17 +2373,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("green_glowblock", GREEN_GLOWBLOCK, settings, DyeColor.GREEN);
 		registerBlockWithItem("red_glowblock", RED_GLOWBLOCK, settings, DyeColor.RED);
 		registerBlockWithItem("black_glowblock", BLACK_GLOWBLOCK, settings, DyeColor.BLACK);
-	}
-	
-	public static void registerShimmerstoneLights(Item.Settings settings) {
-		registerBlockWithItem("basalt_shimmerstone_light", BASALT_SHIMMERSTONE_LIGHT, settings, DyeColor.YELLOW);
-		registerBlockWithItem("calcite_shimmerstone_light", CALCITE_SHIMMERSTONE_LIGHT, settings, DyeColor.YELLOW);
-		registerBlockWithItem("stone_shimmerstone_light", STONE_SHIMMERSTONE_LIGHT, settings, DyeColor.YELLOW);
-		registerBlockWithItem("granite_shimmerstone_light", GRANITE_SHIMMERSTONE_LIGHT, settings, DyeColor.YELLOW);
-		registerBlockWithItem("diorite_shimmerstone_light", DIORITE_SHIMMERSTONE_LIGHT, settings, DyeColor.YELLOW);
-		registerBlockWithItem("andesite_shimmerstone_light", ANDESITE_SHIMMERSTONE_LIGHT, settings, DyeColor.YELLOW);
-		registerBlockWithItem("deepslate_shimmerstone_light", DEEPSLATE_SHIMMERSTONE_LIGHT, settings, DyeColor.YELLOW);
-		registerBlockWithItem("blackslag_shimmerstone_light", BLACKSLAG_SHIMMERSTONE_LIGHT, settings, DyeColor.YELLOW);
 	}
 	
 	public static void registerShootingStarBlocks(Item.Settings settings) {
