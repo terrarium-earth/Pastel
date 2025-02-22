@@ -11,4 +11,9 @@ public class SpectrumTextureKeys {
 	public static final TextureKey BASE = TextureKey.of("base");
 	public static final TextureKey GEMSTONE = TextureKey.of("gemstone");
 	
+	public static final TextureKey ENDS = TextureKey.of("ends");
+	public static final TextureKey CASE = TextureKey.of("case");
+	public static final TextureKey SHELL = TextureKey.of("shell");
+	public static final TextureKey GLASS = TextureKey.of("glass");
+	public static final TextureKey FILAMENT = TextureKey.of("filament");
 }

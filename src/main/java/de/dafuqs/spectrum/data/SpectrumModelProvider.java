@@ -55,16 +55,24 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	
 	// Block Models
 	
+	public static void registerBlockModel(Function<BlockStateModelGenerator, BlockStateSupplier> factory) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(factory.apply(ctx)));
+	}
+	
+	public static void registerCoordinatedBlockModel(Block block, Function<BlockStateModelGenerator, BlockStateVariantMap> factory) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(VariantsBlockStateSupplier.create(block).coordinate(factory.apply(ctx))));
+	}
+	
+	public static void registerSingletonBlockModel(Block block, Identifier modelId) {
+		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(BlockStateModelGenerator.createSingletonBlockState(block, modelId)));
+	}
+	
 	public static void registerSingletonBlockModel(Block block, TexturedModel.Factory factory) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerSingleton(block, factory));
 	}
 	
 	public static void registerParentedBlockModel(Block block, Block parentBlock) {
 		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.registerParented(parentBlock, block));
-	}
-	
-	public static void registerBlockModel(Function<BlockStateModelGenerator, BlockStateSupplier> factory) {
-		BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(factory.apply(ctx)));
 	}
 	
 	public static void registerAxisRotatedBlockModel(Block block, TexturedModel.Factory factory) {
