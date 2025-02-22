@@ -23,6 +23,12 @@ public class SpectrumTextureMaps {
 		return new TextureMap().put(TextureKey.PLANT, TextureMap.getSubId(plantBlock, plantSuffix));
 	}
 	
+	public static TextureMap flowerParticle(Block flowerBlock, String flowerSuffix, Block particleBlock, String particleSuffix) {
+		return new TextureMap()
+				.put(SpectrumTextureKeys.FLOWER, TextureMap.getSubId(flowerBlock, flowerSuffix))
+				.put(TextureKey.PARTICLE, TextureMap.getSubId(particleBlock, particleSuffix));
+	}
+	
 	public static TextureMap sideTopBottom(Block sideBlock, String sideSuffix, Block topBlock, String topSuffix, Block bottomBlock, String bottomSuffix) {
 		return new TextureMap()
 				.put(TextureKey.SIDE, TextureMap.getSubId(sideBlock, sideSuffix))
@@ -62,6 +68,14 @@ public class SpectrumTextureMaps {
 	
 	public static TextureMap sideLine(Identifier side, Identifier line) {
 		return new TextureMap().put(TextureKey.SIDE, side).put(SpectrumTextureKeys.LINE, line);
+	}
+	
+	public static TextureMap innerOuter(Block innerBlock, String innerSuffix, Block outerBlock, String outerSuffix) {
+		return innerOuter(TextureMap.getSubId(innerBlock, innerSuffix), TextureMap.getSubId(outerBlock, outerSuffix));
+	}
+	
+	public static TextureMap innerOuter(Identifier inner, Identifier outer) {
+		return new TextureMap().put(SpectrumTextureKeys.INNER, inner).put(SpectrumTextureKeys.OUTER, outer);
 	}
 	
 	public static TextureMap innerOuterParticle(Block innerBlock, String innerSuffix, Block outerBlock, String outerSuffix, Block particleBlock, String particleSuffix) {

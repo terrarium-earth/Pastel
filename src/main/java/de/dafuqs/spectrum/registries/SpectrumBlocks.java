@@ -1276,7 +1276,7 @@ public class SpectrumBlocks {
 	
 	public static final ResonantLilyBlock RESONANT_LILY = registerCustom("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN, block -> {
 		registerCutoutRenderLayerEntry(block);
-		registerCustomItemModel(block, b -> TextureMap.layer0(b.asItem()), Models.GENERATED);
+		registerCustomItemModel(block, b -> TextureMap.layer0(b), Models.GENERATED);
 		registerTintableCrossBlockModel(block, false);
 	});
 	
@@ -1456,89 +1456,98 @@ public class SpectrumBlocks {
 	public static final ColoredLeavesBlock WHITE_LEAVES = registerColoredLeaves("white_leaves", DyeColor.WHITE);
 	public static final ColoredLeavesBlock YELLOW_LEAVES = registerColoredLeaves("yellow_leaves", DyeColor.YELLOW);
 	
-	private static Settings glowBlock(MapColor color) {
-		return settings(color, BlockSoundGroup.BASALT, 2.5F).requiresTool().luminance(state -> 1).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always);
+	public static GlowBlock registerGlowBlock(String name, DyeColor color) {
+		return registerSimple(name, new GlowBlock(settings(color.getMapColor(), BlockSoundGroup.BASALT, 2.5F).requiresTool().luminance(state -> 1).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always), color), color);
 	}
 	
-	public static final Block BLACK_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLUE_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BROWN_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block CYAN_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block GRAY_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GREEN_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block LIGHT_BLUE_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_GRAY_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIME_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.LIME), DyeColor.LIME);
-	public static final Block MAGENTA_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block ORANGE_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block PINK_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.PINK), DyeColor.PINK);
-	public static final Block PURPLE_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block RED_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.RED), DyeColor.RED);
-	public static final Block WHITE_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block YELLOW_GLOWBLOCK = new GlowBlock(glowBlock(MapColor.YELLOW), DyeColor.YELLOW);
+	public static final Block BLACK_GLOWBLOCK = registerGlowBlock("black_glowblock", DyeColor.BLACK);
+	public static final Block BLUE_GLOWBLOCK = registerGlowBlock("blue_glowblock", DyeColor.BLUE);
+	public static final Block BROWN_GLOWBLOCK = registerGlowBlock("brown_glowblock", DyeColor.BROWN);
+	public static final Block CYAN_GLOWBLOCK = registerGlowBlock("cyan_glowblock", DyeColor.CYAN);
+	public static final Block GRAY_GLOWBLOCK = registerGlowBlock("gray_glowblock", DyeColor.GRAY);
+	public static final Block GREEN_GLOWBLOCK = registerGlowBlock("green_glowblock", DyeColor.GREEN);
+	public static final Block LIGHT_BLUE_GLOWBLOCK = registerGlowBlock("light_blue_glowblock", DyeColor.LIGHT_BLUE);
+	public static final Block LIGHT_GRAY_GLOWBLOCK = registerGlowBlock("light_gray_glowblock", DyeColor.LIGHT_GRAY);
+	public static final Block LIME_GLOWBLOCK = registerGlowBlock("lime_glowblock", DyeColor.LIME);
+	public static final Block MAGENTA_GLOWBLOCK = registerGlowBlock("magenta_glowblock", DyeColor.MAGENTA);
+	public static final Block ORANGE_GLOWBLOCK = registerGlowBlock("orange_glowblock", DyeColor.ORANGE);
+	public static final Block PINK_GLOWBLOCK = registerGlowBlock("pink_glowblock", DyeColor.PINK);
+	public static final Block PURPLE_GLOWBLOCK = registerGlowBlock("purple_glowblock", DyeColor.PURPLE);
+	public static final Block RED_GLOWBLOCK = registerGlowBlock("red_glowblock", DyeColor.RED);
+	public static final Block WHITE_GLOWBLOCK = registerGlowBlock("white_glowblock", DyeColor.WHITE);
+	public static final Block YELLOW_GLOWBLOCK = registerGlowBlock("yellow_glowblock", DyeColor.YELLOW);
 	
-	private static Settings coloredLamp(MapColor color) {
-		return AbstractBlock.Settings.copy(Blocks.REDSTONE_LAMP).mapColor(color);
+	public static ColoredLightBlock registerColoredLightBlock(String name, DyeColor color) {
+		ColoredLightBlock block = new ColoredLightBlock(AbstractBlock.Settings.copy(Blocks.REDSTONE_LAMP).mapColor(color.getMapColor()), color);
+		registerTranslucentRenderLayerEntry(block);
+		registerBlockModel(ctx -> {
+			Identifier off = TexturedModel.CUBE_ALL.upload(block, ctx.modelCollector);
+			Identifier on = SpectrumModels.COLORED_LAMP_ON.upload(block, "_on", SpectrumTextureMaps.innerOuter(block, "_on", block, "_outer"), ctx.modelCollector);
+			return VariantsBlockStateSupplier.create(block).coordinate(BlockStateModelGenerator.createBooleanModelMap(Properties.LIT, on, off));
+		});
+		return registerWithoutModel(name, block, color);
 	}
 	
-	public static final Block BLACK_LAMP = new ColoredLightBlock(coloredLamp(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLUE_LAMP = new ColoredLightBlock(coloredLamp(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BROWN_LAMP = new ColoredLightBlock(coloredLamp(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block CYAN_LAMP = new ColoredLightBlock(coloredLamp(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block GRAY_LAMP = new ColoredLightBlock(coloredLamp(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GREEN_LAMP = new ColoredLightBlock(coloredLamp(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block LIGHT_BLUE_LAMP = new ColoredLightBlock(coloredLamp(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_GRAY_LAMP = new ColoredLightBlock(coloredLamp(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIME_LAMP = new ColoredLightBlock(coloredLamp(MapColor.LIME), DyeColor.LIME);
-	public static final Block MAGENTA_LAMP = new ColoredLightBlock(coloredLamp(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block ORANGE_LAMP = new ColoredLightBlock(coloredLamp(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block PINK_LAMP = new ColoredLightBlock(coloredLamp(MapColor.PINK), DyeColor.PINK);
-	public static final Block PURPLE_LAMP = new ColoredLightBlock(coloredLamp(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block RED_LAMP = new ColoredLightBlock(coloredLamp(MapColor.RED), DyeColor.RED);
-	public static final Block WHITE_LAMP = new ColoredLightBlock(coloredLamp(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block YELLOW_LAMP = new ColoredLightBlock(coloredLamp(MapColor.YELLOW), DyeColor.YELLOW);
+	public static final Block BLACK_LAMP = registerColoredLightBlock("black_lamp", DyeColor.BLACK);
+	public static final Block BLUE_LAMP = registerColoredLightBlock("blue_lamp", DyeColor.BLUE);
+	public static final Block BROWN_LAMP = registerColoredLightBlock("brown_lamp", DyeColor.BROWN);
+	public static final Block CYAN_LAMP = registerColoredLightBlock("cyan_lamp", DyeColor.CYAN);
+	public static final Block GRAY_LAMP = registerColoredLightBlock("gray_lamp", DyeColor.GRAY);
+	public static final Block GREEN_LAMP = registerColoredLightBlock("green_lamp", DyeColor.GREEN);
+	public static final Block LIGHT_BLUE_LAMP = registerColoredLightBlock("light_blue_lamp", DyeColor.LIGHT_BLUE);
+	public static final Block LIGHT_GRAY_LAMP = registerColoredLightBlock("light_gray_lamp", DyeColor.LIGHT_GRAY);
+	public static final Block LIME_LAMP = registerColoredLightBlock("lime_lamp", DyeColor.LIME);
+	public static final Block MAGENTA_LAMP = registerColoredLightBlock("magenta_lamp", DyeColor.MAGENTA);
+	public static final Block ORANGE_LAMP = registerColoredLightBlock("orange_lamp", DyeColor.ORANGE);
+	public static final Block PINK_LAMP = registerColoredLightBlock("pink_lamp", DyeColor.PINK);
+	public static final Block PURPLE_LAMP = registerColoredLightBlock("purple_lamp", DyeColor.PURPLE);
+	public static final Block RED_LAMP = registerColoredLightBlock("red_lamp", DyeColor.RED);
+	public static final Block WHITE_LAMP = registerColoredLightBlock("white_lamp", DyeColor.WHITE);
+	public static final Block YELLOW_LAMP = registerColoredLightBlock("yellow_lamp", DyeColor.YELLOW);
 	
-	private static Settings pigmentBlock(MapColor color) {
-		return settings(color, BlockSoundGroup.WOOL, 1.0F);
+	public static PigmentBlock registerPigmentBlock(String name, DyeColor color) {
+		return registerSimple(name, new PigmentBlock(settings(color.getMapColor(), BlockSoundGroup.WOOL, 1.0F), color), color);
 	}
 	
-	public static final Block BLACK_BLOCK = new PigmentBlock(pigmentBlock(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLUE_BLOCK = new PigmentBlock(pigmentBlock(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BROWN_BLOCK = new PigmentBlock(pigmentBlock(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block CYAN_BLOCK = new PigmentBlock(pigmentBlock(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block GRAY_BLOCK = new PigmentBlock(pigmentBlock(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GREEN_BLOCK = new PigmentBlock(pigmentBlock(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block LIGHT_BLUE_BLOCK = new PigmentBlock(pigmentBlock(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_GRAY_BLOCK = new PigmentBlock(pigmentBlock(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIME_BLOCK = new PigmentBlock(pigmentBlock(MapColor.LIME), DyeColor.LIME);
-	public static final Block MAGENTA_BLOCK = new PigmentBlock(pigmentBlock(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block ORANGE_BLOCK = new PigmentBlock(pigmentBlock(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block PINK_BLOCK = new PigmentBlock(pigmentBlock(MapColor.PINK), DyeColor.PINK);
-	public static final Block PURPLE_BLOCK = new PigmentBlock(pigmentBlock(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block RED_BLOCK = new PigmentBlock(pigmentBlock(MapColor.RED), DyeColor.RED);
-	public static final Block WHITE_BLOCK = new PigmentBlock(pigmentBlock(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block YELLOW_BLOCK = new PigmentBlock(pigmentBlock(MapColor.YELLOW), DyeColor.YELLOW);
+	public static final Block BLACK_BLOCK = registerPigmentBlock("black_block", DyeColor.BLACK);
+	public static final Block BLUE_BLOCK = registerPigmentBlock("blue_block", DyeColor.BLUE);
+	public static final Block BROWN_BLOCK = registerPigmentBlock("brown_block", DyeColor.BROWN);
+	public static final Block CYAN_BLOCK = registerPigmentBlock("cyan_block", DyeColor.CYAN);
+	public static final Block GRAY_BLOCK = registerPigmentBlock("gray_block", DyeColor.GRAY);
+	public static final Block GREEN_BLOCK = registerPigmentBlock("green_block", DyeColor.GREEN);
+	public static final Block LIGHT_BLUE_BLOCK = registerPigmentBlock("light_blue_block", DyeColor.LIGHT_BLUE);
+	public static final Block LIGHT_GRAY_BLOCK = registerPigmentBlock("light_gray_block", DyeColor.LIGHT_GRAY);
+	public static final Block LIME_BLOCK = registerPigmentBlock("lime_block", DyeColor.LIME);
+	public static final Block MAGENTA_BLOCK = registerPigmentBlock("magenta_block", DyeColor.MAGENTA);
+	public static final Block ORANGE_BLOCK = registerPigmentBlock("orange_block", DyeColor.ORANGE);
+	public static final Block PINK_BLOCK = registerPigmentBlock("pink_block", DyeColor.PINK);
+	public static final Block PURPLE_BLOCK = registerPigmentBlock("purple_block", DyeColor.PURPLE);
+	public static final Block RED_BLOCK = registerPigmentBlock("red_block", DyeColor.RED);
+	public static final Block WHITE_BLOCK = registerPigmentBlock("white_block", DyeColor.WHITE);
+	public static final Block YELLOW_BLOCK = registerPigmentBlock("yellow_block", DyeColor.YELLOW);
 	
-	private static Settings sporeBlossom(MapColor color) {
-		return AbstractBlock.Settings.copy(Blocks.SPORE_BLOSSOM).mapColor(color);
+	public static ColoredSporeBlossomBlock registerColoredSporeBlossomBlock(String name, DyeColor color) {
+		ColoredSporeBlossomBlock block = new ColoredSporeBlossomBlock(AbstractBlock.Settings.copy(Blocks.SPORE_BLOSSOM).mapColor(color.getMapColor()), color);
+		registerCutoutRenderLayerEntry(block);
+		return registerSingleton(name, block, color, TexturedModel.makeFactory(b -> SpectrumTextureMaps.flowerParticle(b, "", b, ""), SpectrumModels.SPORE_BLOSSOM));
 	}
 	
-	public static final Block BLACK_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.BLACK), DyeColor.BLACK);
-	public static final Block BLUE_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.BLUE), DyeColor.BLUE);
-	public static final Block BROWN_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.BROWN), DyeColor.BROWN);
-	public static final Block CYAN_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.CYAN), DyeColor.CYAN);
-	public static final Block GRAY_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.GRAY), DyeColor.GRAY);
-	public static final Block GREEN_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.GREEN), DyeColor.GREEN);
-	public static final Block LIGHT_BLUE_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.LIGHT_BLUE), DyeColor.LIGHT_BLUE);
-	public static final Block LIGHT_GRAY_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.LIGHT_GRAY), DyeColor.LIGHT_GRAY);
-	public static final Block LIME_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.LIME), DyeColor.LIME);
-	public static final Block MAGENTA_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.MAGENTA), DyeColor.MAGENTA);
-	public static final Block ORANGE_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.ORANGE), DyeColor.ORANGE);
-	public static final Block PINK_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.PINK), DyeColor.PINK);
-	public static final Block PURPLE_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.PURPLE), DyeColor.PURPLE);
-	public static final Block RED_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.RED), DyeColor.RED);
-	public static final Block WHITE_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.WHITE), DyeColor.WHITE);
-	public static final Block YELLOW_SPORE_BLOSSOM = new ColoredSporeBlossomBlock(sporeBlossom(MapColor.YELLOW), DyeColor.YELLOW);
+	public static final Block BLACK_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("black_spore_blossom", DyeColor.BLACK);
+	public static final Block BLUE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("blue_spore_blossom", DyeColor.BLUE);
+	public static final Block BROWN_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("brown_spore_blossom", DyeColor.BROWN);
+	public static final Block CYAN_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("cyan_spore_blossom", DyeColor.CYAN);
+	public static final Block GRAY_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("gray_spore_blossom", DyeColor.GRAY);
+	public static final Block GREEN_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("green_spore_blossom", DyeColor.GREEN);
+	public static final Block LIGHT_BLUE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("light_blue_spore_blossom", DyeColor.LIGHT_BLUE);
+	public static final Block LIGHT_GRAY_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("light_gray_spore_blossom", DyeColor.LIGHT_GRAY);
+	public static final Block LIME_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("lime_spore_blossom", DyeColor.LIME);
+	public static final Block MAGENTA_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("magenta_spore_blossom", DyeColor.MAGENTA);
+	public static final Block ORANGE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("orange_spore_blossom", DyeColor.ORANGE);
+	public static final Block PINK_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("pink_spore_blossom", DyeColor.PINK);
+	public static final Block PURPLE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("purple_spore_blossom", DyeColor.PURPLE);
+	public static final Block RED_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("red_spore_blossom", DyeColor.RED);
+	public static final Block WHITE_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("white_spore_blossom", DyeColor.WHITE);
+	public static final Block YELLOW_SPORE_BLOSSOM = registerColoredSporeBlossomBlock("yellow_spore_blossom", DyeColor.YELLOW);
 	
 	private static Settings shimmerstoneLight(BlockSoundGroup soundGroup) {
 		return settings(MapColor.CLEAR, soundGroup, 1.0F).nonOpaque().requiresTool().luminance(state -> 15);
@@ -2078,10 +2087,6 @@ public class SpectrumBlocks {
 		registerOreBlocks(IS.of(), IS.of().fireproof());
 		registerOreStorageBlocks(IS.of(), IS.of().fireproof());
 		registerDecoStones(IS.of());
-		registerPigmentStorageBlocks(IS.of());
-		registerColoredLamps(IS.of());
-		registerGlowBlocks(IS.of());
-		registerSporeBlossoms(IS.of());
 		registerDDFlora(IS.of());
 		registerRedstone(IS.of());
 		registerMagicalBlocks(IS.of());
@@ -2254,25 +2259,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("threat_conflux", THREAT_CONFLUX, new ThreatConfluxItem(THREAT_CONFLUX, IS.of(8)), DyeColor.RED);
 	}
 	
-	private static void registerPigmentStorageBlocks(Item.Settings settings) {
-		registerBlockWithItem("white_block", WHITE_BLOCK, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_block", ORANGE_BLOCK, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_block", MAGENTA_BLOCK, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_block", LIGHT_BLUE_BLOCK, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_block", YELLOW_BLOCK, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_block", LIME_BLOCK, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_block", PINK_BLOCK, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_block", GRAY_BLOCK, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_block", LIGHT_GRAY_BLOCK, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_block", CYAN_BLOCK, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_block", PURPLE_BLOCK, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_block", BLUE_BLOCK, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_block", BROWN_BLOCK, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_block", GREEN_BLOCK, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_block", RED_BLOCK, settings, DyeColor.RED);
-		registerBlockWithItem("black_block", BLACK_BLOCK, settings, DyeColor.BLACK);
-	}
-	
 	private static void registerSpiritTree(Item.Settings settings) {
 		registerBlockWithItem("ominous_sapling", OMINOUS_SAPLING, new OminousSaplingBlockItem(OMINOUS_SAPLING, settings), DyeColor.GREEN);
 		
@@ -2317,25 +2303,6 @@ public class SpectrumBlocks {
 		}, DyeColor.GREEN);
 	}
 	
-	private static void registerColoredLamps(Item.Settings settings) {
-		registerBlockWithItem("white_lamp", WHITE_LAMP, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_lamp", ORANGE_LAMP, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_lamp", MAGENTA_LAMP, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_lamp", LIGHT_BLUE_LAMP, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_lamp", YELLOW_LAMP, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_lamp", LIME_LAMP, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_lamp", PINK_LAMP, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_lamp", GRAY_LAMP, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_lamp", LIGHT_GRAY_LAMP, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_lamp", CYAN_LAMP, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_lamp", PURPLE_LAMP, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_lamp", BLUE_LAMP, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_lamp", BROWN_LAMP, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_lamp", GREEN_LAMP, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_lamp", RED_LAMP, settings, DyeColor.RED);
-		registerBlockWithItem("black_lamp", BLACK_LAMP, settings, DyeColor.BLACK);
-	}
-	
 	private static void registerDecoStones(Item.Settings settings) {
 		registerBlockWithItem("amethyst_decostone", AMETHYST_DECOSTONE, settings, DyeColor.MAGENTA);
 		registerBlockWithItem("topaz_decostone", TOPAZ_DECOSTONE, settings, DyeColor.CYAN);
@@ -2356,25 +2323,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("pyrite_projector", PYRITE_PROJECTOR, settings, DyeColor.YELLOW);
 	}
 	
-	private static void registerGlowBlocks(Item.Settings settings) {
-		registerBlockWithItem("white_glowblock", WHITE_GLOWBLOCK, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_glowblock", ORANGE_GLOWBLOCK, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_glowblock", MAGENTA_GLOWBLOCK, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_glowblock", LIGHT_BLUE_GLOWBLOCK, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_glowblock", YELLOW_GLOWBLOCK, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_glowblock", LIME_GLOWBLOCK, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_glowblock", PINK_GLOWBLOCK, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_glowblock", GRAY_GLOWBLOCK, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_glowblock", LIGHT_GRAY_GLOWBLOCK, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_glowblock", CYAN_GLOWBLOCK, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_glowblock", PURPLE_GLOWBLOCK, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_glowblock", BLUE_GLOWBLOCK, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_glowblock", BROWN_GLOWBLOCK, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_glowblock", GREEN_GLOWBLOCK, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_glowblock", RED_GLOWBLOCK, settings, DyeColor.RED);
-		registerBlockWithItem("black_glowblock", BLACK_GLOWBLOCK, settings, DyeColor.BLACK);
-	}
-	
 	public static void registerShootingStarBlocks(Item.Settings settings) {
 		registerBlockWithItem("glistering_shooting_star", GLISTERING_SHOOTING_STAR, new ShootingStarItem(GLISTERING_SHOOTING_STAR, settings), DyeColor.PURPLE);
 		registerBlockWithItem("fiery_shooting_star", FIERY_SHOOTING_STAR, new ShootingStarItem(FIERY_SHOOTING_STAR, settings), DyeColor.PURPLE);
@@ -2392,25 +2340,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("buffer_node", BUFFER_NODE, settings, DyeColor.GREEN);
 		registerBlockWithItem("sender_node", SENDER_NODE, settings, DyeColor.YELLOW);
 		registerBlockWithItem("gather_node", GATHER_NODE, settings, DyeColor.BLACK);
-	}
-	
-	public static void registerSporeBlossoms(Item.Settings settings) {
-		registerBlockWithItem("white_spore_blossom", WHITE_SPORE_BLOSSOM, settings, DyeColor.WHITE);
-		registerBlockWithItem("orange_spore_blossom", ORANGE_SPORE_BLOSSOM, settings, DyeColor.ORANGE);
-		registerBlockWithItem("magenta_spore_blossom", MAGENTA_SPORE_BLOSSOM, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("light_blue_spore_blossom", LIGHT_BLUE_SPORE_BLOSSOM, settings, DyeColor.LIGHT_BLUE);
-		registerBlockWithItem("yellow_spore_blossom", YELLOW_SPORE_BLOSSOM, settings, DyeColor.YELLOW);
-		registerBlockWithItem("lime_spore_blossom", LIME_SPORE_BLOSSOM, settings, DyeColor.LIME);
-		registerBlockWithItem("pink_spore_blossom", PINK_SPORE_BLOSSOM, settings, DyeColor.PINK);
-		registerBlockWithItem("gray_spore_blossom", GRAY_SPORE_BLOSSOM, settings, DyeColor.GRAY);
-		registerBlockWithItem("light_gray_spore_blossom", LIGHT_GRAY_SPORE_BLOSSOM, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("cyan_spore_blossom", CYAN_SPORE_BLOSSOM, settings, DyeColor.CYAN);
-		registerBlockWithItem("purple_spore_blossom", PURPLE_SPORE_BLOSSOM, settings, DyeColor.PURPLE);
-		registerBlockWithItem("blue_spore_blossom", BLUE_SPORE_BLOSSOM, settings, DyeColor.BLUE);
-		registerBlockWithItem("brown_spore_blossom", BROWN_SPORE_BLOSSOM, settings, DyeColor.BROWN);
-		registerBlockWithItem("green_spore_blossom", GREEN_SPORE_BLOSSOM, settings, DyeColor.GREEN);
-		registerBlockWithItem("red_spore_blossom", RED_SPORE_BLOSSOM, settings, DyeColor.RED);
-		registerBlockWithItem("black_spore_blossom", BLACK_SPORE_BLOSSOM, settings, DyeColor.BLACK);
 	}
 	
 	private static void registerStructureBlocks(Item.Settings settings) {
@@ -2560,42 +2489,6 @@ public class SpectrumBlocks {
 		// Weeping Gala
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), SpectrumBlocks.WEEPING_GALA_LANTERN, SpectrumBlocks.WEEPING_GALA_LIGHT);
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SpectrumBlocks.WEEPING_GALA_FRONDS, SpectrumBlocks.WEEPING_GALA_FRONDS_PLANT);
-		
-		// Spore Blossoms
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BLACK_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BLUE_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BROWN_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CYAN_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.GRAY_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.GREEN_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LIGHT_BLUE_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LIGHT_GRAY_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LIME_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MAGENTA_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.ORANGE_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PINK_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PURPLE_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.RED_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.WHITE_SPORE_BLOSSOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.YELLOW_SPORE_BLOSSOM, RenderLayer.getCutout());
-		
-		// Colored lamps
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BLACK_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BLUE_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BROWN_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CYAN_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.GRAY_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.GREEN_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LIGHT_BLUE_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LIGHT_GRAY_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.LIME_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MAGENTA_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.ORANGE_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PINK_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PURPLE_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.RED_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.WHITE_LAMP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.YELLOW_LAMP, RenderLayer.getTranslucent());
 		
 		// Chimes
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.TOPAZ_CHIME, RenderLayer.getTranslucent());

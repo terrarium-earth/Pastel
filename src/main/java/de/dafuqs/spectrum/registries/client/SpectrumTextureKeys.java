@@ -4,6 +4,7 @@ import net.minecraft.data.client.*;
 
 public class SpectrumTextureKeys {
 	
+	public static final TextureKey FLOWER = TextureKey.of("flower");
 	public static final TextureKey LINE = TextureKey.of("line");
 	public static final TextureKey INNER = TextureKey.of("inner");
 	public static final TextureKey OUTER = TextureKey.of("outer");
