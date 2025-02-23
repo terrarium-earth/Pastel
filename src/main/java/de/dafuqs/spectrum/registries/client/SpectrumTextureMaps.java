@@ -66,6 +66,13 @@ public class SpectrumTextureMaps {
 				.put(TextureKey.END, TextureMap.getSubId(endBlock, endSuffix));
 	}
 	
+	public static TextureMap sideEndParticle(Block sideBlock, String sideSuffix, Block endBlock, String endSuffix, Block particleBlock, String particleSuffix) {
+		return new TextureMap()
+				.put(TextureKey.SIDE, TextureMap.getSubId(sideBlock, sideSuffix))
+				.put(TextureKey.END, TextureMap.getSubId(endBlock, endSuffix))
+				.put(TextureKey.PARTICLE, TextureMap.getSubId(particleBlock, particleSuffix));
+	}
+	
 	public static TextureMap sideLine(Identifier side, Identifier line) {
 		return new TextureMap().put(TextureKey.SIDE, side).put(SpectrumTextureKeys.LINE, line);
 	}

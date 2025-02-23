@@ -22,6 +22,10 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideEnd(sideBlock.apply(b), sideSuffix, endBlock.apply(b), endSuffix), Models.CUBE_COLUMN);
 	}
 	
+	public static TexturedModel.Factory cubeBottomTop(UnaryOperator<Block> sideBlock, String sideSuffix, UnaryOperator<Block> topBlock, String topSuffix, UnaryOperator<Block> bottomBlock, String bottomSuffix) {
+		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottom(sideBlock.apply(b), sideSuffix, topBlock.apply(b), topSuffix, bottomBlock.apply(b), bottomSuffix), Models.CUBE_BOTTOM_TOP);
+	}
+	
 	public static TexturedModel.Factory cubeBottomTopWall(UnaryOperator<Block> sideBlock, String sideSuffix, UnaryOperator<Block> topBlock, String topSuffix, UnaryOperator<Block> bottomBlock, String bottomSuffix, UnaryOperator<Block> wallBlock, String wallSuffix) {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottomWall(sideBlock.apply(b), sideSuffix, topBlock.apply(b), topSuffix, bottomBlock.apply(b), bottomSuffix, wallBlock.apply(b), wallSuffix), SpectrumModels.CUBE_BOTTOM_TOP_WALL);
 	}
@@ -40,6 +44,11 @@ public class SpectrumTexturedModels {
 	
 	public static TexturedModel.Factory doubleCross(UnaryOperator<Block> crossBlock, String crossSuffix) {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.cross(crossBlock.apply(b), crossSuffix), SpectrumModels.DOUBLE_CROSS);
+	}
+	
+	public static TexturedModel.Factory tintableCross(UnaryOperator<Block> crossBlock, String crossSuffix, boolean tinted) {
+		BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
+		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.cross(crossBlock.apply(b), crossSuffix), tintType.getCrossModel());
 	}
 	
 	public static TexturedModel.Factory flowerPotCross(UnaryOperator<Block> plantBlock, String plantSuffix, boolean tinted) {
