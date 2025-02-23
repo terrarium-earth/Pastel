@@ -350,14 +350,7 @@ public class SpectrumBlocks {
 	public static final BlockFamily BONE_ASH_TILE_FAMILY = registerBlockFamily(new BlockFamily.Builder(BONE_ASH_TILES).stairs(BONE_ASH_TILE_STAIRS).slab(BONE_ASH_TILE_SLAB).wall(BONE_ASH_TILE_WALL).build());
 	
 	public static final Block SLUSH = register(simple(blockWithItem("slush", new PillarBlock(blackslag(BlockSoundGroup.MUDDY_MANGROVE_ROOTS)), DyeColor.BROWN)));
-	public static final Block OVERGROWN_SLUSH = register(blockWithItem("overgrown_slush", new SlushVegetationBlock(blackslag(BlockSoundGroup.MUDDY_MANGROVE_ROOTS)), DyeColor.BROWN)
-			.withBlockModel((ctx, block) -> {
-				TextureMap base = SpectrumTextureMaps.sideTopBottomParticle(block, "_side", block, "_top", SLUSH, "", block, "_top");
-				TextureMap snow = SpectrumTextureMaps.sideTopBottomParticle(block, "_snow_side", block, "_snow_top", SLUSH, "", block, "_snow_top");
-				return VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.SNOWY)
-						.register(false, createHorizontalRotationVariantList(SpectrumModels.CUBE_BOTTOM_TOP_PARTICLE.upload(block, base, ctx.modelCollector)))
-						.register(true, createHorizontalRotationVariantList(SpectrumModels.CUBE_BOTTOM_TOP_PARTICLE.upload(block, "_snow", snow, ctx.modelCollector))));
-			}));
+	public static final Block OVERGROWN_SLUSH = register(snowy(blockWithItem("overgrown_slush", new SlushVegetationBlock(blackslag(BlockSoundGroup.MUDDY_MANGROVE_ROOTS)), DyeColor.BROWN), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_side", b -> b, "_top", b -> SLUSH, "", b -> b, "_top"), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_snow_side", b -> b, "_snow_top", b -> SLUSH, "", b -> b, "_snow_top")));
 	public static final Block TILLED_SLUSH = register(singleton(blockWithItem("tilled_slush", new TilledSlushBlock(Settings.copy(SLUSH), SLUSH.getDefaultState()), DyeColor.BROWN), SpectrumTexturedModels.farmland(b -> SLUSH, "", b -> b, "")));
 	
 	public static final Block BLACK_MATERIA = new BlackMateriaBlock(settings(MapColor.TERRACOTTA_BLACK, BlockSoundGroup.SAND, 0.0F).instrument(NoteBlockInstrument.SNARE).ticksRandomly());
@@ -788,10 +781,14 @@ public class SpectrumBlocks {
 		return settings(color, soundGroup, BLACKSLAG_HARDNESS, BLACKSLAG_RESISTANCE).ticksRandomly();
 	}
 	
-	public static final Block SAWBLADE_GRASS = new BlackslagVegetationBlock(overgrownBlackslag(MapColor.PALE_YELLOW, BlockSoundGroup.AZALEA_LEAVES));
-	public static final Block SHIMMEL = new BlackslagVegetationBlock(overgrownBlackslag(MapColor.TERRACOTTA_GRAY, BlockSoundGroup.WART_BLOCK));
-	public static final Block OVERGROWN_BLACKSLAG = new BlackslagVegetationBlock(overgrownBlackslag(MapColor.DARK_GREEN, BlockSoundGroup.VINE).velocityMultiplier(0.925F));
-	public static final Block ROTTEN_GROUND = new RottenGroundBlock(Settings.copy(Blocks.MUD).mapColor(MapColor.PALE_PURPLE).sounds(BlockSoundGroup.HONEY).velocityMultiplier(0.775F).jumpVelocityMultiplier(0.9F));
+	public static final Block SAWBLADE_GRASS = register(snowy(blockWithItem("sawblade_grass", new BlackslagVegetationBlock(overgrownBlackslag(MapColor.PALE_YELLOW, BlockSoundGroup.AZALEA_LEAVES)), DyeColor.LIME), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_side", b -> b, "_top", b -> BLACKSLAG, "_top", b -> b, "_top"), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_snow_side", b -> b, "_snow_top", b -> BLACKSLAG, "_top", b -> b, "_snow_top")));
+	public static final Block SHIMMEL = register(snowy(blockWithItem("shimmel", new BlackslagVegetationBlock(overgrownBlackslag(MapColor.TERRACOTTA_GRAY, BlockSoundGroup.WART_BLOCK)), DyeColor.LIME), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_side", b -> b, "_top", b -> BLACKSLAG, "_top", b -> BLACKSLAG, "_top"), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_snow_side", b -> b, "_snow_top", b -> BLACKSLAG, "_top", b -> BLACKSLAG, "_top")));
+	public static final Block OVERGROWN_BLACKSLAG = register(snowy(blockWithItem("overgrown_blackslag", new BlackslagVegetationBlock(overgrownBlackslag(MapColor.DARK_GREEN, BlockSoundGroup.VINE).velocityMultiplier(0.925F)), DyeColor.LIME), SpectrumTexturedModels.overgrown(b -> b, "_side", b -> b, "_top", b -> BLACKSLAG, "_top", b -> b, "_fronds"), SpectrumTexturedModels.overgrown(b -> b, "_snow_side", b -> b, "_snow_top", b -> BLACKSLAG, "_top", b -> b, "_snow_fronds")));
+	public static final Block ROTTEN_GROUND = register(blockWithItem("rotten_ground", new RottenGroundBlock(Settings.copy(Blocks.MUD).mapColor(MapColor.PALE_PURPLE).sounds(BlockSoundGroup.HONEY).velocityMultiplier(0.775F).jumpVelocityMultiplier(0.9F)), DyeColor.LIME)
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block,
+					createModelVariant(TexturedModel.CUBE_ALL.upload(block, ctx.modelCollector)).put(VariantSettings.WEIGHT, 4),
+					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "_bony").upload(block, "_bony", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "_boil").upload(block, "_boil", ctx.modelCollector)))));
 	
 	public static final float ASH_STRENGTH = 2F;
 	
@@ -805,8 +802,7 @@ public class SpectrumBlocks {
 					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "").upload(block, "", ctx.modelCollector)),
 					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "2").upload(block, "2", ctx.modelCollector)),
 					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "3").upload(block, "3", ctx.modelCollector)),
-					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "4").upload(block, "4", ctx.modelCollector))
-			)));
+					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "4").upload(block, "4", ctx.modelCollector)))));
 	public static final Block ASH_PILE = register(blockWithItem("ash_pile", new AshPileBlock(ash(BlockSoundGroup.POWDER_SNOW).replaceable().blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIGHT_GRAY)
 			.withBlockModel((ctx, block) -> {
 				ctx.registerParentedItemModel(block, ModelIds.getBlockSubModelId(block, "_height2"));
@@ -2048,11 +2044,6 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerDDFlora(Item.Settings settings) {
-		registerBlockWithItem("sawblade_grass", SAWBLADE_GRASS, settings, DyeColor.LIME);
-		registerBlockWithItem("overgrown_blackslag", OVERGROWN_BLACKSLAG, settings, DyeColor.LIME);
-		registerBlockWithItem("shimmel", SHIMMEL, settings, DyeColor.LIME);
-		registerBlockWithItem("rotten_ground", ROTTEN_GROUND, settings, DyeColor.LIME);
-		
 		registerBlockWithItem("weeping_gala_pillar", WEEPING_GALA_PILLAR, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_barrel", WEEPING_GALA_BARREL, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_amphora", WEEPING_GALA_AMPHORA, settings, DyeColor.LIME);
@@ -2519,6 +2510,14 @@ public class SpectrumBlocks {
 	
 	public static <T extends Block> BlockRegistrar<T> wood(BlockRegistrar<T> registrar, Block logBlock) {
 		return registrar.withBlockModel((ctx, block) -> woodBlockModel(ctx, block, logBlock));
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> snowy(BlockRegistrar<T> registrar, TexturedModel.Factory base, TexturedModel.Factory snowy) {
+		return registrar.withBlockModel((ctx, block) -> {
+			return VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.SNOWY)
+					.register(false, createHorizontalRotationVariantList(base.upload(block, ctx.modelCollector)))
+					.register(true, createHorizontalRotationVariantList(snowy.upload(block, "_snow", ctx.modelCollector))));
+		});
 	}
 	
 	public record BlockRegistrar<T extends Block>(@NotNull T block, @Nullable Item item) {

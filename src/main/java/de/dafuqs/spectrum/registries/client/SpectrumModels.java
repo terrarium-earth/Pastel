@@ -27,7 +27,8 @@ public class SpectrumModels {
 	public static final Model DOUBLE_CROSS = new Model(Optional.of(SpectrumCommon.locate("templates/double_cross")), Optional.empty(), CROSS);
 	public static final Model MOONSTONE_CHISELED = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled")), Optional.empty(), SIDE, LINE);
 	public static final Model MOONSTONE_CHISELED_DOWN = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled_down")), Optional.empty(), SIDE, LINE);
-	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), TOP, SIDE, INSIDE);
+	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), SIDE, TOP, INSIDE);
+	public static final Model OVERGROWN = new Model(Optional.of(SpectrumCommon.locate("templates/overgrown")), Optional.empty(), SIDE, TOP, BOTTOM, FRONDS);
 	public static final Model TRANSLUCENT_OUTER1 = new Model(Optional.of(SpectrumCommon.locate("templates/translucent_outer1")), Optional.empty(), TEXTURE);
 	
 	public static final Identifier GIANT_MOSS_BALL = SpectrumCommon.locate("block/giant_moss_ball");

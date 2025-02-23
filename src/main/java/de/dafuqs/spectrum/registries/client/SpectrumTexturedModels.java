@@ -56,4 +56,8 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.plant(plantBlock.apply(b), plantSuffix), tintType.getFlowerPotCrossModel());
 	}
 	
+	public static TexturedModel.Factory overgrown(UnaryOperator<Block> sideBlock, String sideSuffix, UnaryOperator<Block> topBlock, String topSuffix, UnaryOperator<Block> bottomBlock, String bottomSuffix, UnaryOperator<Block> frondsBlock, String frondsSuffix) {
+		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottomFronds(sideBlock.apply(b), sideSuffix, topBlock.apply(b), topSuffix, bottomBlock.apply(b), bottomSuffix, frondsBlock.apply(b), frondsSuffix), SpectrumModels.OVERGROWN);
+	}
+	
 }
