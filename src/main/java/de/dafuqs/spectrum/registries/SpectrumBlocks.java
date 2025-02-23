@@ -1101,17 +1101,53 @@ public class SpectrumBlocks {
 	public static final Block TALL_BLACK_DRAGONJAG = registerTallDragonjagBlock("tall_black_dragonjag", Dragonjag.Variant.BLACK);
 	
 	//Flora
-	public static final Block ALOE = new AloeBlock(settings(MapColor.DARK_GREEN, BlockSoundGroup.GRASS, 1.0F).noCollision().ticksRandomly().nonOpaque());
-	public static final Block SAWBLADE_HOLLY_BUSH = new SawbladeHollyBushBlock(settings(MapColor.TERRACOTTA_GREEN, BlockSoundGroup.GRASS, 0.0F).noCollision().ticksRandomly().nonOpaque().luminance(s -> s.get(SawbladeHollyBushBlock.AGE) == SawbladeHollyBushBlock.MAX_AGE ? 10 : 0));
-	public static final Block BRISTLE_SPROUTS = new BristleSproutsBlock(settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 0.0F).noCollision().nonOpaque().offset(OffsetType.XZ).replaceable());
-	public static final Block DOOMBLOOM = new DoomBloomBlock(SpectrumStatusEffects.STIFFNESS, 8, settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 0.0F).ticksRandomly().noCollision().luminance((state) -> state.get(DoomBloomBlock.AGE) * 2).nonOpaque());
-	public static final Block SNAPPING_IVY = new SnappingIvyBlock(settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 3.0F).noCollision().nonOpaque());
+	public static final Block ALOE = register(cutout(block("aloe", new AloeBlock(settings(MapColor.DARK_GREEN, BlockSoundGroup.GRASS, 1.0F).noCollision().ticksRandomly().nonOpaque())))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_4)
+					.register(age -> createModelVariant(SpectrumTexturedModels.cross(b -> b, age.toString()).upload(block, age.toString(), ctx.modelCollector))))));
+	public static final Block SAWBLADE_HOLLY_BUSH = register(cutout(block("sawblade_holly_bush", new SawbladeHollyBushBlock(settings(MapColor.TERRACOTTA_GREEN, BlockSoundGroup.GRASS, 0.0F).noCollision().ticksRandomly().nonOpaque().luminance(s -> s.get(SawbladeHollyBushBlock.AGE) == SawbladeHollyBushBlock.MAX_AGE ? 10 : 0))))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_7)
+					.register(0, createModelVariant(SpectrumTexturedModels.cross(b -> b, "0").upload(block, "_stage0", ctx.modelCollector)))
+					.register(1, createModelVariant(SpectrumTexturedModels.cross(b -> b, "1").upload(block, "_stage1", ctx.modelCollector)))
+					.register(2, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage1")))
+					.register(3, createModelVariant(SpectrumTexturedModels.cross(b -> b, "2").upload(block, "_stage2", ctx.modelCollector)))
+					.register(4, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage2")))
+					.register(5, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage2")))
+					.register(6, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage2")))
+					.register(7, createModelVariant(SpectrumTexturedModels.cross(b -> b, "3").upload(block, "_stage3", ctx.modelCollector))))));
+	public static final Block BRISTLE_SPROUTS = register(cutout(blockWithItem("bristle_sprouts", new BristleSproutsBlock(settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 0.0F).noCollision().nonOpaque().offset(OffsetType.XZ).replaceable()), DyeColor.LIME))
+			.withBlockModel((ctx, block) -> {
+				ctx.registerItemModel(block, "_1");
+				return VariantsBlockStateSupplier.create(block,
+						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_1").upload(block, "_1", ctx.modelCollector)),
+						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_2").upload(block, "_2", ctx.modelCollector)),
+						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_3").upload(block, "_3", ctx.modelCollector)),
+						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_4").upload(block, "_4", ctx.modelCollector)));
+			}));
+	public static final Block DOOMBLOOM = register(cutout(block("doombloom", new DoomBloomBlock(SpectrumStatusEffects.STIFFNESS, 8, settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 0.0F).ticksRandomly().noCollision().luminance((state) -> state.get(DoomBloomBlock.AGE) * 2).nonOpaque())))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_4)
+					.register(age -> createModelVariant(SpectrumTexturedModels.cross(b -> b, age.toString()).upload(block, age.toString(), ctx.modelCollector))))));
+	public static final Block SNAPPING_IVY = register(cutout(blockWithItem("snapping_ivy", new SnappingIvyBlock(settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 3.0F).noCollision().nonOpaque()), DyeColor.RED))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block)
+					.coordinate(createBooleanModelMap(SnappingIvyBlock.SNAPPED, SpectrumModels.SNAPPING_IVY_SNAPPED, SpectrumModels.SNAPPING_IVY))
+					.coordinate(BlockStateVariantMap.create(Properties.HORIZONTAL_AXIS)
+							.register(Direction.Axis.X, BlockStateVariant.create())
+							.register(Direction.Axis.Z, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90)))));
 	
-	public static final Block ABYSSAL_VINES = new AbyssalVineBlock(settings(MapColor.DARK_GREEN, BlockSoundGroup.CAVE_VINES, 2.0F).noCollision().offset(OffsetType.XYZ).ticksRandomly().nonOpaque().luminance(state -> state.get(Properties.BERRIES) ? 13 : 0));
-	public static final Block NIGHTDEW = new NightdewBlock(settings(MapColor.TEAL, BlockSoundGroup.CAVE_VINES, 0.0F).noCollision().offset(OffsetType.XYZ).ticksRandomly().nonOpaque().breakInstantly());
-	public static final Block SWEET_PEA = new FlowerBlock(StatusEffects.NIGHT_VISION, 5, settings(MapColor.MAGENTA, BlockSoundGroup.GRASS, 0.0F).offset(OffsetType.XZ).noCollision().nonOpaque().luminance(s -> 11).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
-	public static final Block APRICOTTI = new FlowerBlock(StatusEffects.GLOWING, 5, settings(MapColor.ORANGE, BlockSoundGroup.GRASS, 0.0F).offset(OffsetType.XZ).noCollision().nonOpaque().luminance(s -> 11).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
-	public static final Block HUMMING_BELL = new FlowerBlock(SpectrumStatusEffects.LIGHTWEIGHT, 5, settings(MapColor.LIGHT_BLUE, BlockSoundGroup.GRASS, 0.0F).offset(OffsetType.XZ).noCollision().nonOpaque().luminance(s -> 9).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
+	public static final Block ABYSSAL_VINES = register(cutout(block("abyssal_vines", new AbyssalVineBlock(settings(MapColor.DARK_GREEN, BlockSoundGroup.CAVE_VINES, 2.0F).noCollision().offset(OffsetType.XYZ).ticksRandomly().nonOpaque().luminance(state -> state.get(Properties.BERRIES) ? 13 : 0))))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(TriStateVineBlock.LIFE_STAGE, AbyssalVineBlock.BERRIES).register((stage, berries) -> {
+				String suffix = (stage == TriStateVineBlock.LifeStage.STALK ? "" : "_tip") + (berries ? "_fruiting" : "");
+				if (stage == TriStateVineBlock.LifeStage.MATURE) return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
+				return createModelVariant(SpectrumTexturedModels.cross(b -> b, suffix).upload(block, suffix, ctx.modelCollector));
+			}))));
+	public static final Block NIGHTDEW = register(cutout(block("nightdew", new NightdewBlock(settings(MapColor.TEAL, BlockSoundGroup.CAVE_VINES, 0.0F).noCollision().offset(OffsetType.XYZ).ticksRandomly().nonOpaque().breakInstantly())))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(TriStateVineBlock.LIFE_STAGE).register(stage -> {
+				String suffix = (stage == TriStateVineBlock.LifeStage.STALK ? "" : "_tip");
+				if (stage == TriStateVineBlock.LifeStage.MATURE) return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
+				return createModelVariant(SpectrumTexturedModels.cross(b -> b, suffix).upload(block, suffix, ctx.modelCollector));
+			}))));
+	public static final Block SWEET_PEA = register(simplePlant(blockWithItem("sweet_pea", new FlowerBlock(StatusEffects.NIGHT_VISION, 5, settings(MapColor.MAGENTA, BlockSoundGroup.GRASS, 0.0F).offset(OffsetType.XZ).noCollision().nonOpaque().luminance(s -> 11).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), DyeColor.YELLOW)));
+	public static final Block APRICOTTI = register(simplePlant(blockWithItem("apricotti", new FlowerBlock(StatusEffects.GLOWING, 5, settings(MapColor.ORANGE, BlockSoundGroup.GRASS, 0.0F).offset(OffsetType.XZ).noCollision().nonOpaque().luminance(s -> 11).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), DyeColor.YELLOW)));
+	public static final Block HUMMING_BELL = register(simplePlant(blockWithItem("humming_bell", new FlowerBlock(SpectrumStatusEffects.LIGHTWEIGHT, 5, settings(MapColor.LIGHT_BLUE, BlockSoundGroup.GRASS, 0.0F).offset(OffsetType.XZ).noCollision().nonOpaque().luminance(s -> 9).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), DyeColor.LIME)));
 	
 	public static final Block HUMMINGSTONE_GLASS = register(translucent(simple(blockWithItem("hummingstone_glass", new TransparentBlock(settings(MapColor.PALE_YELLOW, BlockSoundGroup.GLASS, 5.0F, 100.0F).nonOpaque().requiresTool()), DyeColor.LIGHT_BLUE))));
 	public static final Block HUMMINGSTONE_GLASS_PANE = register(glassPane(blockWithItem("hummingstone_glass_pane", new PaneBlock(Settings.copy(HUMMINGSTONE_GLASS)), DyeColor.LIGHT_BLUE), HUMMINGSTONE_GLASS));
@@ -1371,8 +1407,7 @@ public class SpectrumBlocks {
 	
 	public static final PottedAmaranthBushelBlock POTTED_AMARANTH_BUSHEL = register(pottedPlant(block("potted_amaranth_bushel", new PottedAmaranthBushelBlock(AMARANTH_BUSHEL, pottedPlant())), false));
 	
-	public static final ResonantLilyBlock RESONANT_LILY = register(tintableCross(blockWithItem("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN), false)
-			.withItemModel((ctx, block) -> Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), TextureMap.layer0(block), ctx.writer)));
+	public static final ResonantLilyBlock RESONANT_LILY = register(simplePlant(blockWithItem("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN)));
 	
 	public static final PottedResonantLilyBlock POTTED_RESONANT_LILY = register(pottedPlant(block("potted_resonant_lily", new PottedResonantLilyBlock(RESONANT_LILY, pottedPlant())), false));
 	
@@ -1385,8 +1420,7 @@ public class SpectrumBlocks {
 	public static final PottedBloodOrchidBlock POTTED_BLOOD_ORCHID = register(cutout(singleton(block("potted_blood_orchid", new PottedBloodOrchidBlock(BLOOD_ORCHID, pottedPlant())), SpectrumTexturedModels.flowerPotCross(b -> BLOOD_ORCHID, "5", false))));
 	
 	public static ColoredSaplingBlock registerColoredSapling(String name, DyeColor dyeColor) {
-		return register(tintableCross(blockWithItem(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor), false)
-				.withItemModel((ctx, block) -> Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), TextureMap.layer0(block), ctx.writer)));
+		return register(simplePlant(blockWithItem(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, dyeColor.getMapColor()), dyeColor), dyeColor)));
 	}
 	
 	public static final ColoredSaplingBlock BLACK_SAPLING = registerColoredSapling("black_sapling", DyeColor.BLACK);
@@ -2025,18 +2059,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("weeping_gala_lantern", WEEPING_GALA_LANTERN, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_lamp", WEEPING_GALA_LAMP, settings, DyeColor.LIME);
 		registerBlockWithItem("weeping_gala_light", WEEPING_GALA_LIGHT, settings, DyeColor.LIME);
-		
-		registerBlock("aloe", ALOE);
-		registerBlock("sawblade_holly_bush", SAWBLADE_HOLLY_BUSH);
-		registerBlockWithItem("bristle_sprouts", BRISTLE_SPROUTS, settings, DyeColor.LIME);
-		registerBlock("doombloom", DOOMBLOOM);
-		registerBlockWithItem("snapping_ivy", SNAPPING_IVY, settings, DyeColor.RED);
-		
-		registerBlock("abyssal_vines", ABYSSAL_VINES);
-		registerBlock("nightdew", NIGHTDEW);
-		registerBlockWithItem("sweet_pea", SWEET_PEA, settings, DyeColor.YELLOW);
-		registerBlockWithItem("apricotti", APRICOTTI, settings, DyeColor.YELLOW);
-		registerBlockWithItem("humming_bell", HUMMING_BELL, settings, DyeColor.LIME);
 	}
 	
 	private static void registerRedstone(Item.Settings settings) {
@@ -2319,9 +2341,6 @@ public class SpectrumBlocks {
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.AMARANTH, RenderLayer.getCutout());
 		
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SpectrumBlocks.ABYSSAL_VINES, SpectrumBlocks.NIGHTDEW);
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), SpectrumBlocks.SWEET_PEA, SpectrumBlocks.APRICOTTI, HUMMING_BELL);
-		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.DIKE_GATE, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.DREAM_GATE, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PRESERVATION_CONTROLLER, RenderLayer.getCutout());
@@ -2404,12 +2423,6 @@ public class SpectrumBlocks {
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.INCANDESCENT_AMALGAM, RenderLayer.getCutout());
 		
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.ALOE, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SAWBLADE_HOLLY_BUSH, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.BRISTLE_SPROUTS, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.DOOMBLOOM, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SNAPPING_IVY, RenderLayer.getCutout());
-		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES_PLANT, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.MAGENTA_SPIRIT_SALLOW_VINES, RenderLayer.getCutout());
@@ -2487,6 +2500,13 @@ public class SpectrumBlocks {
 	
 	public static <T extends Block> BlockRegistrar<T> tintableCross(BlockRegistrar<T> registrar, boolean tinted) {
 		return cutout(registrar).withBlockModel((ctx, block) -> tintableCrossBlockModel(ctx, block, tinted));
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> simplePlant(BlockRegistrar<T> registrar) {
+		return cutout(registrar).withBlockModel((ctx, block) -> {
+			Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), TextureMap.layer0(block), ctx.modelCollector);
+			return tintableCrossBlockModel(ctx, block, false);
+		});
 	}
 	
 	public static <T extends FlowerPotBlock> BlockRegistrar<T> pottedPlant(BlockRegistrar<T> registrar, boolean tinted) {

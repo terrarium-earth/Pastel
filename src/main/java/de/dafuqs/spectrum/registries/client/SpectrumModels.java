@@ -33,6 +33,8 @@ public class SpectrumModels {
 	public static final Identifier GIANT_MOSS_BALL = SpectrumCommon.locate("block/giant_moss_ball");
 	public static final Identifier MOSS_BALL = SpectrumCommon.locate("block/moss_ball");
 	public static final Identifier MOSS_BALL_TUFT = SpectrumCommon.locate("block/moss_ball_tuft");
+	public static final Identifier SNAPPING_IVY = SpectrumCommon.locate("block/snapping_ivy");
+	public static final Identifier SNAPPING_IVY_SNAPPED = SpectrumCommon.locate("block/snapping_ivy_snapped");
 	
 	public static Model noxwoodLantern(String suffix) {
 		return new Model(Optional.of(SpectrumCommon.locate("templates/noxwood_lamp" + suffix)), Optional.empty(), ALL);

@@ -163,7 +163,6 @@ public class SpectrumModelProvider extends FabricModelProvider {
 				.register(Direction.Axis.Z, createModelVariant(horizontalModelId).put(VariantSettings.X, VariantSettings.Rotation.R90));
 	}
 	
-	
 	public static BlockStateVariantMap createUpDefaultFacingVariantMap() {
 		return BlockStateVariantMap.create(Properties.FACING)
 				.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R180))
