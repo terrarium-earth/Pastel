@@ -114,4 +114,10 @@ public class SpectrumTextureMaps {
 		return new TextureMap().put(BASE, base).put(GEMSTONE, gemstone);
 	}
 	
+	public static TextureMap glassCase(Block glassBlock, String glassSuffix, Block caseBlock, String caseSuffix) {
+		return new TextureMap()
+				.put(GLASS, TextureMap.getSubId(glassBlock, glassSuffix))
+				.put(CASE, TextureMap.getSubId(caseBlock, caseSuffix));
+	}
+	
 }

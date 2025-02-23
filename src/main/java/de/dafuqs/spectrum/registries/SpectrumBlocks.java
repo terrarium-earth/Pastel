@@ -864,26 +864,7 @@ public class SpectrumBlocks {
 	}
 	
 	public static PillarBlock registerNoxwoodLightBlock(String name, Block gillsBlock, MapColor color) {
-		return register(translucent(axisRotated(blockWithItem(name, new PillarBlock(noxcap(color).luminance(state -> 15)), DyeColor.LIME), TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopInside(b, "", b, "_top", gillsBlock, ""), SpectrumModels.MULTILAYER_LIGHT))));
-	}
-	
-	public static <T extends AmphoraBlock> T registerNoxwoodAmphora(String name, T amphoraBlock, Block lightBlock, DyeColor color) {
-		return register(blockWithItem(name, amphoraBlock, color)
-				.withBlockModel((ctx, block) -> {
-					Identifier base = SpectrumTexturedModels.cubeBottomTop(b -> b, "", b -> b, "_top", b -> lightBlock, "_top").upload(block, ctx.modelCollector);
-					Identifier open = SpectrumTexturedModels.cubeBottomTop(b -> b, "", b -> b, "_top_open", b -> lightBlock, "_top").upload(block, "_open", ctx.modelCollector);
-					return VariantsBlockStateSupplier.create(block).coordinate(createUpDefaultFacingVariantMap()).coordinate(createBooleanModelMap(Properties.OPEN, open, base));
-				}));
-	}
-	
-	public static <T extends Block> T registerNoxwoodLamp(String name, T redstoneLampBlock, DyeColor color) {
-		return register(blockWithItem(name, redstoneLampBlock, color)
-				.withBlockModel((ctx, block) -> {
-					Identifier off = SpectrumTexturedModels.cubeAll(b -> b, "_off").upload(block, "_off", ctx.modelCollector);
-					Identifier on = SpectrumTexturedModels.cubeAll(b -> b, "_on").upload(block, "_on", ctx.modelCollector);
-					ctx.registerParentedItemModel(block, ModelIds.getBlockSubModelId(block, "_off"));
-					return VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(Properties.LIT, on, off));
-				}));
+		return register(axisRotated(blockWithItem(name, new PillarBlock(noxcap(color).luminance(state -> 15)), DyeColor.LIME), TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopInside(b, "", b, "_top", gillsBlock, ""), SpectrumModels.MULTILAYER_LIGHT)));
 	}
 	
 	public static <T extends FlexLanternBlock> T registerNoxwoodLantern(String name, T flexLanternBlock, DyeColor color) {
@@ -907,9 +888,9 @@ public class SpectrumBlocks {
 	public static final PillarBlock SLATE_NOXCAP_GILLS = register(axisRotated(blockWithItem("slate_noxcap_gills", new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.LIME), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	
 	public static final Block SLATE_NOXWOOD_PILLAR = register(axisRotated(blockWithItem("slate_noxwood_pillar", new PillarBlock(noxcap(MapColor.GRAY)), DyeColor.LIME), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
-	public static final Block SLATE_NOXWOOD_LAMP = registerNoxwoodLamp("slate_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.GRAY).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME);
+	public static final Block SLATE_NOXWOOD_LAMP = register(redstoneLamp(blockWithItem("slate_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.GRAY).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME)));
 	public static final Block SLATE_NOXWOOD_LIGHT = registerNoxwoodLightBlock("slate_noxwood_light", SLATE_NOXCAP_GILLS, MapColor.GRAY);
-	public static final Block SLATE_NOXWOOD_AMPHORA = registerNoxwoodAmphora("slate_noxwood_amphora", new AmphoraBlock(noxcap(MapColor.GRAY)), SLATE_NOXWOOD_LIGHT, DyeColor.LIME);
+	public static final Block SLATE_NOXWOOD_AMPHORA = register(barrellike(blockWithItem("slate_noxwood_amphora", new AmphoraBlock(noxcap(MapColor.GRAY)), DyeColor.LIME), b -> SLATE_NOXWOOD_LIGHT, "_top"));
 	public static final Block SLATE_NOXWOOD_LANTERN = registerNoxwoodLantern("slate_noxwood_lantern", new FlexLanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).luminance(s -> 13).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIME);
 	
 	public static final Block SLATE_NOXWOOD_PLANKS = register(blockWithItem("slate_noxwood_planks", new Block(noxcap(MapColor.GRAY)), DyeColor.LIME));
@@ -931,9 +912,9 @@ public class SpectrumBlocks {
 	public static final PillarBlock EBONY_NOXCAP_GILLS = register(axisRotated(blockWithItem("ebony_noxcap_gills", new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.LIME), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	
 	public static final Block EBONY_NOXWOOD_PILLAR = register(axisRotated(blockWithItem("ebony_noxwood_pillar", new PillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
-	public static final Block EBONY_NOXWOOD_LAMP = registerNoxwoodLamp("ebony_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.TERRACOTTA_BLACK).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME);
+	public static final Block EBONY_NOXWOOD_LAMP = register(redstoneLamp(blockWithItem("ebony_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.TERRACOTTA_BLACK).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME)));
 	public static final Block EBONY_NOXWOOD_LIGHT = registerNoxwoodLightBlock("ebony_noxwood_light", EBONY_NOXCAP_GILLS, MapColor.TERRACOTTA_BLACK);
-	public static final Block EBONY_NOXWOOD_AMPHORA = registerNoxwoodAmphora("ebony_noxwood_amphora", new AmphoraBlock(noxcap(MapColor.TERRACOTTA_BLACK)), EBONY_NOXWOOD_LIGHT, DyeColor.LIME);
+	public static final Block EBONY_NOXWOOD_AMPHORA = register(barrellike(blockWithItem("ebony_noxwood_amphora", new AmphoraBlock(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME), b -> EBONY_NOXWOOD_LIGHT, "_top"));
 	public static final Block EBONY_NOXWOOD_LANTERN = registerNoxwoodLantern("ebony_noxwood_lantern", new FlexLanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).luminance(s -> 13).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIME);
 	
 	public static final Block EBONY_NOXWOOD_PLANKS = register(blockWithItem("ebony_noxwood_planks", new Block(noxcap(MapColor.TERRACOTTA_BLACK)), DyeColor.LIME));
@@ -955,9 +936,9 @@ public class SpectrumBlocks {
 	public static final PillarBlock IVORY_NOXCAP_GILLS = register(axisRotated(blockWithItem("ivory_noxcap_gills", new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.LIME), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	
 	public static final Block IVORY_NOXWOOD_PILLAR = register(axisRotated(blockWithItem("ivory_noxwood_pillar", new PillarBlock(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
-	public static final Block IVORY_NOXWOOD_LAMP = registerNoxwoodLamp("ivory_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.OFF_WHITE).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME);
+	public static final Block IVORY_NOXWOOD_LAMP = register(redstoneLamp(blockWithItem("ivory_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.OFF_WHITE).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME)));
 	public static final Block IVORY_NOXWOOD_LIGHT = registerNoxwoodLightBlock("ivory_noxwood_light", IVORY_NOXCAP_GILLS, MapColor.OFF_WHITE);
-	public static final Block IVORY_NOXWOOD_AMPHORA = registerNoxwoodAmphora("ivory_noxwood_amphora", new AmphoraBlock(noxcap(MapColor.OFF_WHITE)), IVORY_NOXWOOD_LIGHT, DyeColor.LIME);
+	public static final Block IVORY_NOXWOOD_AMPHORA = register(barrellike(blockWithItem("ivory_noxwood_amphora", new AmphoraBlock(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME), b -> IVORY_NOXWOOD_LIGHT, "_top"));
 	public static final Block IVORY_NOXWOOD_LANTERN = registerNoxwoodLantern("ivory_noxwood_lantern", new FlexLanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).luminance(s -> 13).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIME);
 	
 	public static final Block IVORY_NOXWOOD_PLANKS = register(blockWithItem("ivory_noxwood_planks", new Block(noxcap(MapColor.OFF_WHITE)), DyeColor.LIME));
@@ -979,9 +960,9 @@ public class SpectrumBlocks {
 	public static final PillarBlock CHESTNUT_NOXCAP_GILLS = register(axisRotated(blockWithItem("chestnut_noxcap_gills", new PillarBlock(noxcap(MapColor.DIAMOND_BLUE).luminance(state -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.LIME), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	
 	public static final Block CHESTNUT_NOXWOOD_PILLAR = register(axisRotated(blockWithItem("chestnut_noxwood_pillar", new PillarBlock(noxcap(MapColor.DULL_RED)), DyeColor.LIME), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
-	public static final Block CHESTNUT_NOXWOOD_LAMP = registerNoxwoodLamp("chestnut_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.DULL_RED).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME);
+	public static final Block CHESTNUT_NOXWOOD_LAMP = register(redstoneLamp(blockWithItem("chestnut_noxwood_lamp", new RedstoneLampBlock(noxcap(MapColor.DULL_RED).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME)));
 	public static final Block CHESTNUT_NOXWOOD_LIGHT = registerNoxwoodLightBlock("chestnut_noxwood_light", CHESTNUT_NOXCAP_GILLS, MapColor.DULL_RED);
-	public static final Block CHESTNUT_NOXWOOD_AMPHORA = registerNoxwoodAmphora("chestnut_noxwood_amphora", new AmphoraBlock(noxcap(MapColor.DULL_RED)), CHESTNUT_NOXWOOD_LIGHT, DyeColor.LIME);
+	public static final Block CHESTNUT_NOXWOOD_AMPHORA = register(barrellike(blockWithItem("chestnut_noxwood_amphora", new AmphoraBlock(noxcap(MapColor.DULL_RED)), DyeColor.LIME), b -> CHESTNUT_NOXWOOD_LIGHT, "_top"));
 	public static final Block CHESTNUT_NOXWOOD_LANTERN = registerNoxwoodLantern("chestnut_noxwood_lantern", new FlexLanternBlock(AbstractBlock.Settings.copy(Blocks.LANTERN).luminance(s -> 13).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIME);
 	
 	public static final Block CHESTNUT_NOXWOOD_PLANKS = register(blockWithItem("chestnut_noxwood_planks", new Block(noxcap(MapColor.DULL_RED)), DyeColor.LIME));
@@ -1030,12 +1011,19 @@ public class SpectrumBlocks {
 	public static final Block WEEPING_GALA_PRESSURE_PLATE = register(blockWithItem("weeping_gala_pressure_plate", new PressurePlateBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), DyeColor.LIME));
 	public static final BlockFamily WEEPING_GALA_FAMILY = registerBlockFamily(new BlockFamily.Builder(WEEPING_GALA_PLANKS).stairs(WEEPING_GALA_STAIRS).slab(WEEPING_GALA_SLAB).fence(WEEPING_GALA_FENCE).fenceGate(WEEPING_GALA_FENCE_GATE).door(WEEPING_GALA_DOOR).trapdoor(WEEPING_GALA_TRAPDOOR).button(WEEPING_GALA_BUTTON).pressurePlate(WEEPING_GALA_PRESSURE_PLATE).build());
 	
-	public static final Block WEEPING_GALA_PILLAR = new PillarBlock(galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_BARREL = new BarrelBlock(galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_AMPHORA = new AmphoraBlock(galaWood(MapColor.BROWN));
-	public static final Block WEEPING_GALA_LANTERN = new FlexLanternBlock(galaWood(MapColor.BROWN).luminance(state -> 13).pistonBehavior(PistonBehavior.DESTROY));
-	public static final Block WEEPING_GALA_LAMP = new RedstoneLampBlock(galaWood(MapColor.BROWN).luminance(LANTERN_LIGHT_PROVIDER));
-	public static final Block WEEPING_GALA_LIGHT = new PillarBlock(galaWood(MapColor.BROWN).luminance(state -> 15));
+	public static final Block WEEPING_GALA_PILLAR = register(axisRotated(blockWithItem("weeping_gala_pillar", new PillarBlock(galaWood(MapColor.BROWN)), DyeColor.LIME), TexturedModel.CUBE_COLUMN));
+	public static final Block WEEPING_GALA_BARREL = register(barrellike(blockWithItem("weeping_gala_barrel", new BarrelBlock(galaWood(MapColor.BROWN)), DyeColor.LIME), b -> b, "_bottom"));
+	public static final Block WEEPING_GALA_AMPHORA = register(barrellike(blockWithItem("weeping_gala_amphora", new AmphoraBlock(galaWood(MapColor.BROWN)), DyeColor.LIME), b -> b, "_bottom"));
+	public static final Block WEEPING_GALA_LANTERN = register(translucent(blockWithItem("weeping_gala_lantern", new FlexLanternBlock(galaWood(MapColor.BROWN).luminance(state -> 13).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIME))
+			.withBlockModel((ctx, block) -> {
+				Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), SpectrumTextureMaps.layer0(block.asItem(), "_item"), ctx.modelCollector);
+				return VariantsBlockStateSupplier.create(block)
+						.coordinate(BlockStateVariantMap.create(Properties.HANGING).register(false, BlockStateVariant.create()).register(true, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R180)))
+						.coordinate(BlockStateVariantMap.create(DiagonalBlock.DIAGONAL, FlexLanternBlock.TALL).register((diagonal, tall) ->
+								createModelVariant(SpectrumTexturedModels.baseTransLantern(diagonal, tall).upload(block, (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small"), ctx.modelCollector))));
+			}));
+	public static final Block WEEPING_GALA_LAMP = register(redstoneLamp(blockWithItem("weeping_gala_lamp", new RedstoneLampBlock(galaWood(MapColor.BROWN).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME)));
+	public static final Block WEEPING_GALA_LIGHT = register(translucent(axisRotated(blockWithItem("weeping_gala_light", new PillarBlock(galaWood(MapColor.BROWN).luminance(state -> 15)), DyeColor.LIME), SpectrumTexturedModels.BASE_TRANS_LIGHT_CORE)));
 	
 	public static Settings basalMarble() {
 		return settings(MapColor.GRAY, BlockSoundGroup.DRIPSTONE_BLOCK, 8.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresTool();
@@ -1989,7 +1977,6 @@ public class SpectrumBlocks {
 		registerOreBlocks(IS.of(), IS.of().fireproof());
 		registerOreStorageBlocks(IS.of(), IS.of().fireproof());
 		registerDecoStones(IS.of());
-		registerDDFlora(IS.of());
 		registerRedstone(IS.of());
 		registerMagicalBlocks(IS.of());
 		registerMobBlocks(IS.of());
@@ -2041,15 +2028,6 @@ public class SpectrumBlocks {
 		COMMON_REGISTRAR.flush();
 		
 		registerMobHeads(IS.of());
-	}
-	
-	private static void registerDDFlora(Item.Settings settings) {
-		registerBlockWithItem("weeping_gala_pillar", WEEPING_GALA_PILLAR, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_barrel", WEEPING_GALA_BARREL, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_amphora", WEEPING_GALA_AMPHORA, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_lantern", WEEPING_GALA_LANTERN, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_lamp", WEEPING_GALA_LAMP, settings, DyeColor.LIME);
-		registerBlockWithItem("weeping_gala_light", WEEPING_GALA_LIGHT, settings, DyeColor.LIME);
 	}
 	
 	private static void registerRedstone(Item.Settings settings) {
@@ -2296,9 +2274,6 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CREATIVE_PARTICLE_SPAWNER, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CRYSTALLARIEUM, RenderLayer.getTranslucent());
 		
-		// Weeping Gala
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), SpectrumBlocks.WEEPING_GALA_LANTERN, SpectrumBlocks.WEEPING_GALA_LIGHT);
-		
 		// Chimes
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.TOPAZ_CHIME, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.AMETHYST_CHIME, RenderLayer.getTranslucent());
@@ -2513,11 +2488,26 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> snowy(BlockRegistrar<T> registrar, TexturedModel.Factory base, TexturedModel.Factory snowy) {
+		return registrar.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.SNOWY)
+				.register(false, createHorizontalRotationVariantList(base.upload(block, ctx.modelCollector)))
+				.register(true, createHorizontalRotationVariantList(snowy.upload(block, "_snow", ctx.modelCollector)))));
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> redstoneLamp(BlockRegistrar<T> registrar) {
 		return registrar.withBlockModel((ctx, block) -> {
-			return VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.SNOWY)
-					.register(false, createHorizontalRotationVariantList(base.upload(block, ctx.modelCollector)))
-					.register(true, createHorizontalRotationVariantList(snowy.upload(block, "_snow", ctx.modelCollector))));
+			Identifier off = SpectrumTexturedModels.cubeAll(b -> b, "_off").upload(block, "_off", ctx.modelCollector);
+			Identifier on = SpectrumTexturedModels.cubeAll(b -> b, "_on").upload(block, "_on", ctx.modelCollector);
+			ctx.registerParentedItemModel(block, ModelIds.getBlockSubModelId(block, "_off"));
+			return VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(Properties.LIT, on, off));
 		});
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> barrellike(BlockRegistrar<T> registrar, UnaryOperator<Block> bottomBlock, String bottomSuffix) {
+		return registrar.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block)
+				.coordinate(createUpDefaultFacingVariantMap())
+				.coordinate(createBooleanModelMap(Properties.OPEN,
+						SpectrumTexturedModels.cubeBottomTop(b -> b, "_side", b -> b, "_top_open", bottomBlock, bottomSuffix).upload(block, "_open", ctx.modelCollector),
+						SpectrumTexturedModels.cubeBottomTop(b -> b, "_side", b -> b, "_top", bottomBlock, bottomSuffix).upload(block, ctx.modelCollector))));
 	}
 	
 	public record BlockRegistrar<T extends Block>(@NotNull T block, @Nullable Item item) {

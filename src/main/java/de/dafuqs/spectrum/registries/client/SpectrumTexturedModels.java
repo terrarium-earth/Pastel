@@ -60,4 +60,8 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottomFronds(sideBlock.apply(b), sideSuffix, topBlock.apply(b), topSuffix, bottomBlock.apply(b), bottomSuffix, frondsBlock.apply(b), frondsSuffix), SpectrumModels.OVERGROWN);
 	}
 	
+	public static TexturedModel.Factory baseTransLantern(boolean diagonal, boolean tall) {
+		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.glassCase(b, "_glass_on", b, "_case_on"), SpectrumModels.baseTransLantern(diagonal, tall));
+	}
+	
 }

@@ -41,6 +41,10 @@ public class SpectrumModels {
 		return new Model(Optional.of(SpectrumCommon.locate("templates/noxwood_lamp" + suffix)), Optional.empty(), ALL);
 	}
 	
+	public static Model baseTransLantern(boolean diagonal, boolean tall) {
+		return new Model(Optional.of(SpectrumCommon.locate("templates/base_trans_lantern" + (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small"))), Optional.empty(), GLASS, CASE);
+	}
+	
 	// Block Builtins w/ Extra Keys
 	public static final Model CUBE_BOTTOM_TOP_PARTICLE = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TOP, BOTTOM, SIDE, PARTICLE);
 	public static final Model CUBE_BOTTOM_TOP_WALL = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TOP, BOTTOM, SIDE, WALL);

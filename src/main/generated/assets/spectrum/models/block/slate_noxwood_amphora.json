@@ -2,7 +2,7 @@
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
     "bottom": "spectrum:block/slate_noxwood_light_top",
-    "side": "spectrum:block/slate_noxwood_amphora",
+    "side": "spectrum:block/slate_noxwood_amphora_side",
     "top": "spectrum:block/slate_noxwood_amphora_top"
   }
 }
