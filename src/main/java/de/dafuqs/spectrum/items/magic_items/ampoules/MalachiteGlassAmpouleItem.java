@@ -18,7 +18,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class MalachiteGlassAmpouleItem extends BaseGlassAmpouleItem implements InkPoweredPotionFillable {
+public class MalachiteGlassAmpouleItem extends GlassAmpouleItem implements InkPoweredPotionFillable {
 	
 	public MalachiteGlassAmpouleItem(Settings settings) {
 		super(settings);

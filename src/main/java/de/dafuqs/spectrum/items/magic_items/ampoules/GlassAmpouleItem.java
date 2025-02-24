@@ -1,36 +1,47 @@
 package de.dafuqs.spectrum.items.magic_items.ampoules;
 
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.*;
-import net.minecraft.sound.*;
-import net.minecraft.text.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
-import java.util.*;
-
-public class GlassAmpouleItem extends BaseGlassAmpouleItem {
+public abstract class GlassAmpouleItem extends Item {
     
     public GlassAmpouleItem(Settings settings) {
         super(settings);
     }
     
     @Override
-	public boolean trigger(World world, ItemStack stack, LivingEntity attacker, @Nullable LivingEntity target, Vec3d position) {
-		world.playSoundAtBlockCenter(BlockPos.ofFloored(position), SpectrumSoundEvents.LIGHT_CRYSTAL_RING, SoundCategory.PLAYERS, 0.35F, 0.9F + world.getRandom().nextFloat() * 0.334F, true);
-		LightShardEntity.summonBarrage(world, attacker, target, LightShardBaseEntity.MONSTER_TARGET, position, LightShardBaseEntity.DEFAULT_COUNT_PROVIDER);
-        return true;
+	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+		ItemStack stack = user.getStackInHand(hand);
+		if (trigger(user.getWorld(), stack, user, null, user.getEyePos())) {
+			if (!user.isCreative()) {
+				stack.decrement(1);
+			}
+			return TypedActionResult.success(stack);
+		}
+		
+		return world.isClient() ? TypedActionResult.fail(stack) : TypedActionResult.pass(stack);
     }
-
-    @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
-		tooltip.add(Text.translatable("item.spectrum.azurite_glass_ampoule.tooltip").formatted(Formatting.GRAY));
-    }
+	
+	@Override
+	public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+		World world = user.getWorld();
+		if (trigger(user.getWorld(), stack, user, entity, user.getEyePos())) {
+			if (!user.getWorld().isClient) {
+				if (!(user.isCreative())) {
+					stack.decrement(1);
+				}
+			}
+			return ActionResult.success(world.isClient);
+		}
+		
+		return world.isClient() ? ActionResult.FAIL : ActionResult.PASS;
+	}
+	
+	public abstract boolean trigger(World world, ItemStack stack, LivingEntity attacker, @Nullable LivingEntity target, Vec3d position);
     
 }

@@ -207,7 +207,7 @@ public class SpectrumItemProjectileBehaviors {
 		
 		ItemProjectileBehavior.register(new ItemProjectileBehavior.Default() {
 			public ItemStack onEntityHit(ItemProjectileEntity projectile, ItemStack stack, @Nullable Entity owner, EntityHitResult hitResult) {
-				if (projectile.getOwner() instanceof LivingEntity livingOwner && hitResult.getEntity() instanceof LivingEntity livingTarget && ((BaseGlassAmpouleItem) stack.getItem()).trigger(projectile.getWorld(), stack, livingOwner, livingTarget, hitResult.getPos())) {
+				if (projectile.getOwner() instanceof LivingEntity livingOwner && hitResult.getEntity() instanceof LivingEntity livingTarget && ((GlassAmpouleItem) stack.getItem()).trigger(projectile.getWorld(), stack, livingOwner, livingTarget, hitResult.getPos())) {
 					stack.decrement(1);
 				}
 				return stack;
@@ -215,7 +215,7 @@ public class SpectrumItemProjectileBehaviors {
 			
 			@Override
 			public ItemStack onBlockHit(ItemProjectileEntity projectile, ItemStack stack, @Nullable Entity owner, BlockHitResult hitResult) {
-				if (projectile.getOwner() instanceof LivingEntity livingOwner && ((BaseGlassAmpouleItem) stack.getItem()).trigger(projectile.getWorld(), stack, livingOwner, null, hitResult.getPos())) {
+				if (projectile.getOwner() instanceof LivingEntity livingOwner && ((GlassAmpouleItem) stack.getItem()).trigger(projectile.getWorld(), stack, livingOwner, null, hitResult.getPos())) {
 					stack.decrement(1);
 				}
 				return stack;

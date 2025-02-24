@@ -18,7 +18,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class BloodstoneGlassAmpouleItem extends BaseGlassAmpouleItem implements PrioritizedEntityInteraction {
+public class BloodstoneGlassAmpouleItem extends GlassAmpouleItem implements PrioritizedEntityInteraction {
 	
 	protected static final float EXTRA_REACH = 12.0F;
 	protected static final Identifier REACH_ENTITY_INTERACTION_MODIFIER_ID = SpectrumCommon.locate("bloodstone_glass_ampoule_reach");
