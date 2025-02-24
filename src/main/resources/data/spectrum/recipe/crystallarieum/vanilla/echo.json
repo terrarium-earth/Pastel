@@ -71,7 +71,9 @@
       "consume_chance_per_second": 0.02
     }
   ],
-  "additional_recipe_manager_outputs": [
-    "spectrum:pure_echo"
+  "additional_recipe_manager_results": [
+    {
+      "id": "spectrum:pure_echo"
+    }
   ]
 }

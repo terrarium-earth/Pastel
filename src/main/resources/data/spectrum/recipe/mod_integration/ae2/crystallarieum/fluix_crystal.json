@@ -59,8 +59,10 @@
       "consume_chance_per_second": 0.2
     }
   ],
-  "additional_recipe_manager_outputs": [
-    "spectrum:pure_fluix"
+  "additional_recipe_manager_results": [
+    {
+      "id": "spectrum:pure_fluix"
+    }
   ],
   "fabric:load_conditions": [
     {

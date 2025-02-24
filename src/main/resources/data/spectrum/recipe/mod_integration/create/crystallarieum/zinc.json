@@ -61,7 +61,7 @@
       "consume_chance_per_second": 0.02
     }
   ],
-  "additional_recipe_manager_outputs": [
+  "additional_recipe_manager_results": [
     "spectrum:pure_zinc"
   ],
   "fabric:load_conditions": [
