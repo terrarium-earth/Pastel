@@ -57,10 +57,6 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	
 	// Block Models
 	
-	public static BlockStateSupplier singletonBlockModel(BlockStateModelGenerator ctx, Block block, TexturedModel.Factory factory) {
-		return VariantsBlockStateSupplier.create(block, createModelVariant(factory.upload(block, ctx.modelCollector)));
-	}
-	
 	public static BlockStateSupplier simpleMirroredBlockModel(BlockStateModelGenerator ctx, Block block) {
 		return createMirroredVariantsSupplier(block, TexturedModel.CUBE_ALL, TexturedModel.CUBE_MIRRORED_ALL, ctx.modelCollector);
 	}

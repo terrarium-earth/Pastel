@@ -578,8 +578,6 @@ public class SpectrumItems {
 	
 	public static class IS {
 		
-		public static final Item.Settings DEFAULT = new Item.Settings();
-		
 		public static Item.Settings of() {
 			return new Item.Settings();
 		}

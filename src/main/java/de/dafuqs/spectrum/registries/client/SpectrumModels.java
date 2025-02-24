@@ -39,13 +39,9 @@ public class SpectrumModels {
 	public static final Identifier PASTEL_STORE_NODE = SpectrumCommon.locate("pastel/store_node");
 	
 	public static final Identifier BALCITE_PYLON_PEDESTAL = SpectrumCommon.locate("block/balcite_pylon_pedestal");
-	public static final Identifier GIANT_MOSS_BALL = SpectrumCommon.locate("block/giant_moss_ball");
 	public static final Identifier MOB_BLOCK = SpectrumCommon.locate("block/mob_block");
 	public static final Identifier MOB_BLOCK_COOLDOWN = SpectrumCommon.locate("block/mob_block_cooldown");
-	public static final Identifier MOSS_BALL = SpectrumCommon.locate("block/moss_ball");
-	public static final Identifier MOSS_BALL_TUFT = SpectrumCommon.locate("block/moss_ball_tuft");
-	public static final Identifier SNAPPING_IVY = SpectrumCommon.locate("block/snapping_ivy");
-	public static final Identifier SNAPPING_IVY_SNAPPED = SpectrumCommon.locate("block/snapping_ivy_snapped");
+	public static final Identifier PYRITE_PROJECTOR = SpectrumCommon.locate("block/pyrite_projector");
 	public static final Identifier UPGRADE_SPEED = SpectrumCommon.locate("block/upgrade_speed");
 	public static final Identifier UPGRADE_EFFICIENCY = SpectrumCommon.locate("block/upgrade_efficiency");
 	public static final Identifier UPGRADE_YIELD = SpectrumCommon.locate("block/upgrade_yield");

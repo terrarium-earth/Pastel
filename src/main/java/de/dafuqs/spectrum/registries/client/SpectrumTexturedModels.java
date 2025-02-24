@@ -47,6 +47,10 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.cross(crossBlock.apply(b), crossSuffix), Models.CROSS);
 	}
 	
+	public static TexturedModel.Factory leaves(UnaryOperator<Block> allBlock, String allSuffix) {
+		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.all(allBlock.apply(b), allSuffix), Models.LEAVES);
+	}
+	
 	public static TexturedModel.Factory doubleCross(UnaryOperator<Block> crossBlock, String crossSuffix) {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.cross(crossBlock.apply(b), crossSuffix), SpectrumModels.DOUBLE_CROSS);
 	}

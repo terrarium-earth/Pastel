@@ -10,24 +10,21 @@
     },
     {
       "apply": {
-        "model": "spectrum:block/nephrite_blossom_stem_top"
+        "model": "spectrum:block/nephrite_blossom_stem_base"
       },
       "when": {
         "part": "stemalt"
       }
     },
     {
-      "apply": {
-        "model": "spectrum:block/nephrite_blossom_base"
-      },
-      "when": {
-        "part": "base"
-      }
-    },
-    {
-      "apply": {
-        "model": "spectrum:block/nephrite_blossom_stem_bottom"
-      },
+      "apply": [
+        {
+          "model": "spectrum:block/nephrite_blossom_stem_top"
+        },
+        {
+          "model": "spectrum:block/nephrite_blossom_stem_bottom"
+        }
+      ],
       "when": {
         "part": "base"
       }
