@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.fabric.api.datagen.v1.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.*;
+import net.minecraft.block.enums.*;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.*;
 import net.minecraft.item.*;
@@ -230,10 +231,50 @@ public class SpectrumModelProvider extends FabricModelProvider {
 				.register(Direction.EAST, BlockStateVariant.create());
 	}
 	
+	public static BlockStateVariantMap createUpNorthDefaultOrientationVariantMap() {
+		return BlockStateVariantMap.create(Properties.ORIENTATION)
+				.register(Orientation.DOWN_NORTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90))
+				.register(Orientation.DOWN_SOUTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+				.register(Orientation.DOWN_WEST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+				.register(Orientation.DOWN_EAST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+				.register(Orientation.UP_NORTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R270).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+				.register(Orientation.UP_SOUTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R270))
+				.register(Orientation.UP_WEST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R270).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+				.register(Orientation.UP_EAST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R270).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+				.register(Orientation.NORTH_UP, BlockStateVariant.create())
+				.register(Orientation.SOUTH_UP, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
+				.register(Orientation.WEST_UP, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270))
+				.register(Orientation.EAST_UP, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90));
+	}
+	
 	// Variants
 	
 	public static BlockStateVariant createModelVariant(Identifier modelId) {
 		return BlockStateVariant.create().put(VariantSettings.MODEL, modelId);
+	}
+	
+	public static BlockStateVariant createModelVariant(Block block, String suffix) {
+		return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
+	}
+	
+	public static BlockStateVariant applyUpDefaultRotation(BlockStateVariant variant, Direction direction) {
+		return switch (direction) {
+			case Direction.DOWN -> variant.put(VariantSettings.X, VariantSettings.Rotation.R180);
+			case Direction.NORTH -> variant.put(VariantSettings.X, VariantSettings.Rotation.R90);
+			case Direction.SOUTH -> variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R180);
+			case Direction.WEST -> variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270);
+			case Direction.EAST -> variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90);
+			default -> variant;
+		};
+	}
+	
+	public static VariantSettings.Rotation getSouthDefaultRotation(Direction direction) {
+		return switch (direction) {
+			case Direction.WEST -> VariantSettings.Rotation.R90;
+			case Direction.NORTH -> VariantSettings.Rotation.R180;
+			case Direction.EAST -> VariantSettings.Rotation.R270;
+			default -> VariantSettings.Rotation.R0;
+		};
 	}
 	
 }

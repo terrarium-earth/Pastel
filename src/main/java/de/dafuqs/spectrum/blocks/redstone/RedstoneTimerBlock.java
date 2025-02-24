@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.particle.*;
@@ -19,17 +19,17 @@ import net.minecraft.world.tick.*;
 import org.jetbrains.annotations.*;
 
 public class RedstoneTimerBlock extends AbstractRedstoneGateBlock {
-
+	
 	public static final MapCodec<RedstoneTimerBlock> CODEC = createCodec(RedstoneTimerBlock::new);
-
+	
 	public static final EnumProperty<TimingStep> ACTIVE_TIME = EnumProperty.of("active_time", TimingStep.class);
 	public static final EnumProperty<TimingStep> INACTIVE_TIME = EnumProperty.of("inactive_time", TimingStep.class);
-
+	
 	public RedstoneTimerBlock(AbstractBlock.Settings settings) {
 		super(settings);
-		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(POWERED, false).with(ACTIVE_TIME, TimingStep.OneSecond).with(INACTIVE_TIME, TimingStep.OneSecond));
+		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH).with(POWERED, false).with(ACTIVE_TIME, TimingStep.ONE_SECOND).with(INACTIVE_TIME, TimingStep.ONE_SECOND));
 	}
-
+	
 	@Override
 	public MapCodec<? extends RedstoneTimerBlock> getCodec() {
 		return CODEC;
@@ -141,11 +141,11 @@ public class RedstoneTimerBlock extends AbstractRedstoneGateBlock {
 	}
 	
 	public enum TimingStep implements StringIdentifiable {
-		FourTicks("four_ticks", 4, "block.spectrum.redstone_timer.setting.four_ticks"),
-		OneSecond("one_second", 20, "block.spectrum.redstone_timer.setting.one_second"),
-		TenSeconds("ten_seconds", 10 * 20, "block.spectrum.redstone_timer.setting.ten_seconds"),
-		OneMinute("one_minute", 60 * 20, "block.spectrum.redstone_timer.setting.one_minute"),
-		TenMinutes("ten_minutes", 60 * 20 * 10, "block.spectrum.redstone_timer.setting.ten_minutes");
+		FOUR_TICKS("four_ticks", 4, "block.spectrum.redstone_timer.setting.four_ticks"),
+		ONE_SECOND("one_second", 20, "block.spectrum.redstone_timer.setting.one_second"),
+		TEN_SECONDS("ten_seconds", 10 * 20, "block.spectrum.redstone_timer.setting.ten_seconds"),
+		ONE_MINUTE("one_minute", 60 * 20, "block.spectrum.redstone_timer.setting.one_minute"),
+		TEN_MINUTES("ten_minutes", 60 * 20 * 10, "block.spectrum.redstone_timer.setting.ten_minutes");
 		
 		public final int ticks;
 		public final String localizationString;

@@ -1081,11 +1081,11 @@ public class SpectrumBlocks {
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_7)
 					.register(0, createModelVariant(SpectrumTexturedModels.cross(b -> b, "0").upload(block, "_stage0", ctx.modelCollector)))
 					.register(1, createModelVariant(SpectrumTexturedModels.cross(b -> b, "1").upload(block, "_stage1", ctx.modelCollector)))
-					.register(2, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage1")))
+					.register(2, createModelVariant(block, "_stage1"))
 					.register(3, createModelVariant(SpectrumTexturedModels.cross(b -> b, "2").upload(block, "_stage2", ctx.modelCollector)))
-					.register(4, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage2")))
-					.register(5, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage2")))
-					.register(6, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage2")))
+					.register(4, createModelVariant(block, "_stage2"))
+					.register(5, createModelVariant(block, "_stage2"))
+					.register(6, createModelVariant(block, "_stage2"))
 					.register(7, createModelVariant(SpectrumTexturedModels.cross(b -> b, "3").upload(block, "_stage3", ctx.modelCollector))))));
 	public static final Block BRISTLE_SPROUTS = register(cutout(blockWithItem("bristle_sprouts", new BristleSproutsBlock(settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 0.0F).noCollision().nonOpaque().offset(OffsetType.XZ).replaceable()), DyeColor.LIME))
 			.withBlockItemModel((ctx, block) -> registerBlockTexturedItemModel(ctx, block, "_1"))
@@ -1107,13 +1107,13 @@ public class SpectrumBlocks {
 	public static final Block ABYSSAL_VINES = register(cutout(block("abyssal_vines", new AbyssalVineBlock(settings(MapColor.DARK_GREEN, BlockSoundGroup.CAVE_VINES, 2.0F).noCollision().offset(OffsetType.XYZ).ticksRandomly().nonOpaque().luminance(state -> state.get(Properties.BERRIES) ? 13 : 0))))
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(TriStateVineBlock.LIFE_STAGE, AbyssalVineBlock.BERRIES).register((stage, berries) -> {
 				String suffix = (stage == TriStateVineBlock.LifeStage.STALK ? "" : "_tip") + (berries ? "_fruiting" : "");
-				if (stage == TriStateVineBlock.LifeStage.MATURE) return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
+				if (stage == TriStateVineBlock.LifeStage.MATURE) return createModelVariant(block, suffix);
 				return createModelVariant(SpectrumTexturedModels.cross(b -> b, suffix).upload(block, suffix, ctx.modelCollector));
 			}))));
 	public static final Block NIGHTDEW = register(cutout(block("nightdew", new NightdewBlock(settings(MapColor.TEAL, BlockSoundGroup.CAVE_VINES, 0.0F).noCollision().offset(OffsetType.XYZ).ticksRandomly().nonOpaque().breakInstantly())))
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(TriStateVineBlock.LIFE_STAGE).register(stage -> {
 				String suffix = (stage == TriStateVineBlock.LifeStage.STALK ? "" : "_tip");
-				if (stage == TriStateVineBlock.LifeStage.MATURE) return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
+				if (stage == TriStateVineBlock.LifeStage.MATURE) return createModelVariant(block, suffix);
 				return createModelVariant(SpectrumTexturedModels.cross(b -> b, suffix).upload(block, suffix, ctx.modelCollector));
 			}))));
 	public static final Block SWEET_PEA = register(simplePlant(blockWithItem("sweet_pea", new FlowerBlock(StatusEffects.NIGHT_VISION, 5, settings(MapColor.MAGENTA, BlockSoundGroup.GRASS, 0.0F).offset(OffsetType.XZ).noCollision().nonOpaque().luminance(s -> 11).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), DyeColor.YELLOW)));
@@ -1132,7 +1132,7 @@ public class SpectrumBlocks {
 	public static final Block MOSS_BALL = register(cutout(blockWithItem("moss_ball", new MossBallBlock(settings(MapColor.DARK_GREEN, BlockSoundGroup.WET_GRASS, 1F).noCollision().nonOpaque().offset(OffsetType.XYZ)), DyeColor.GREEN))
 			.withBlockModel((ctx, block) -> {
 				List<BlockStateVariant> variants = new ArrayList<>(createHorizontalRotationVariantList(ModelIds.getBlockSubModelId(block, "_tuft")));
-				variants.add(createModelVariant(ModelIds.getBlockModelId(block)).put(VariantSettings.WEIGHT, 4));
+				variants.add(createModelVariant(block, "").put(VariantSettings.WEIGHT, 4));
 				return VariantsBlockStateSupplier.create(block, variants.toArray(BlockStateVariant[]::new));
 			}));
 	public static final Block GIANT_MOSS_BALL = register(blockWithItem("giant_moss_ball", new GiantMossBallBlock(settings(MapColor.DARK_GREEN, BlockSoundGroup.WET_GRASS, 10F).noCollision().nonOpaque().offset(OffsetType.XYZ)), DyeColor.GREEN)
@@ -1146,8 +1146,8 @@ public class SpectrumBlocks {
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block)
 					.coordinate(createSouthDefaultHorizontalRotationStates())
 					.coordinate(BlockStateVariantMap.create(BedBlock.PART)
-							.register(BedPart.HEAD, createModelVariant(ModelIds.getBlockSubModelId(block, "_head")))
-							.register(BedPart.FOOT, createModelVariant(ModelIds.getBlockSubModelId(block, "_foot"))))));
+							.register(BedPart.HEAD, createModelVariant(block, "_head"))
+							.register(BedPart.FOOT, createModelVariant(block, "_foot")))));
 	
 	// JADE VINES
 	public static Settings jadeVine() {
@@ -1170,7 +1170,7 @@ public class SpectrumBlocks {
 				if (age == 1) return createModelVariant(model.upload(block, suffix, SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT, SpectrumTextures.JADE_VINE_PLANT_BREAKING), ctx.modelCollector));
 				if (age == 3) return createModelVariant(model.upload(block, suffix, SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT_PETALS, SpectrumTextures.JADE_VINE_PLANT_BREAKING), ctx.modelCollector));
 				if (age == 7) return createModelVariant(model.upload(block, suffix, SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT_BLOOMING, SpectrumTextures.JADE_VINE_PLANT_BREAKING), ctx.modelCollector));
-				return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
+				return createModelVariant(block, suffix);
 			}))));
 	public static final Block JADE_VINE_PETAL_BLOCK = register(cutout(simple(blockWithItem("jade_vine_petal_block", new JadeVinePetalBlock(jadeVine().luminance(state -> 3)), DyeColor.LIME))));
 	public static final Block JADE_VINE_PETAL_CARPET = register(cutout(singleton(blockWithItem("jade_vine_petal_carpet", new CarpetBlock(jadeVine().luminance(state -> 3)), DyeColor.LIME), SpectrumTexturedModels.carpet(b -> JADE_VINE_PETAL_BLOCK, ""))));
@@ -1321,10 +1321,10 @@ public class SpectrumBlocks {
 				String suffix;
 				if (half == DoubleBlockHalf.LOWER) {
 					suffix = "_stage" + ((age + 1) / 2) + "_lower";
-					if (age > 0 && age % 2 == 0) return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
+					if (age > 0 && age % 2 == 0) return createModelVariant(block, suffix);
 				} else {
 					suffix = "_stage" + Math.max(2, ((age + 1) / 2)) + "_upper";
-					if (age < 4 || age == 6) return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
+					if (age < 4 || age == 6) return createModelVariant(block, suffix);
 				}
 				return createModelVariant(SpectrumTexturedModels.cross(b -> b, suffix).upload(block, suffix, ctx.modelCollector));
 			}))));
@@ -1334,17 +1334,75 @@ public class SpectrumBlocks {
 	public static final Block LAVA_SPONGE = register(simple(blockWithItem("lava_sponge", new LavaSpongeBlock(AbstractBlock.Settings.copy(SPONGE).mapColor(MapColor.ORANGE)), IS.of().fireproof(), DyeColor.ORANGE)));
 	public static final Block WET_LAVA_SPONGE = register(simple(blockWithItem("wet_lava_sponge", new WetLavaSpongeBlock(AbstractBlock.Settings.copy(WET_SPONGE).mapColor(MapColor.ORANGE).luminance(s -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), block -> new WetLavaSpongeItem(block, IS.of(1).fireproof().recipeRemainder(LAVA_SPONGE.asItem())), DyeColor.ORANGE)));
 	
-	public static final Block LIGHT_LEVEL_DETECTOR = new BlockLightDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR));
-	public static final Block WEATHER_DETECTOR = new WeatherDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR));
-	public static final Block ITEM_DETECTOR = new ItemDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR));
-	public static final Block PLAYER_DETECTOR = new PlayerDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR));
-	public static final Block CREATURE_DETECTOR = new EntityDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR));
-	public static final Block REDSTONE_CALCULATOR = new RedstoneCalculatorBlock(AbstractBlock.Settings.copy(REPEATER));
-	public static final Block REDSTONE_TIMER = new RedstoneTimerBlock(AbstractBlock.Settings.copy(REPEATER));
-	public static final Block REDSTONE_TRANSCEIVER = new RedstoneTransceiverBlock(AbstractBlock.Settings.copy(REPEATER));
-	public static final Block BLOCK_PLACER = new BlockPlacerBlock(AbstractBlock.Settings.copy(DISPENSER));
-	public static final Block BLOCK_DETECTOR = new BlockDetectorBlock(AbstractBlock.Settings.copy(DISPENSER));
-	public static final Block BLOCK_BREAKER = new BlockBreakerBlock(AbstractBlock.Settings.copy(DISPENSER));
+	public static final Block LIGHT_LEVEL_DETECTOR = register(detector(blockWithItem("light_level_detector", new BlockLightDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR)), DyeColor.RED)));
+	public static final Block WEATHER_DETECTOR = register(detector(blockWithItem("weather_detector", new WeatherDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR)), DyeColor.RED)));
+	public static final Block ITEM_DETECTOR = register(detector(blockWithItem("item_detector", new ItemDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR)), DyeColor.RED)));
+	public static final Block PLAYER_DETECTOR = register(detector(blockWithItem("player_detector", new PlayerDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR)), DyeColor.RED)));
+	public static final Block CREATURE_DETECTOR = register(detector(blockWithItem("creature_detector", new EntityDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR)), DyeColor.RED)));
+	public static final Block REDSTONE_TIMER = register(cutout(blockWithItem("redstone_timer", new RedstoneTimerBlock(AbstractBlock.Settings.copy(REPEATER)), DyeColor.RED))
+			.withPredefinedItemModel()
+			.withBlockModel((ctx, block) -> {
+				MultipartBlockStateSupplier multipart = MultipartBlockStateSupplier.create(block);
+				Identifier on = SpectrumModels.REDSTONE_TIMER.upload(block, new TextureMap().put(SpectrumTextureKeys.LIGHT, TextureMap.getId(REDSTONE_TORCH)), ctx.modelCollector);
+				Identifier off = SpectrumModels.REDSTONE_TIMER.upload(block, "_off", new TextureMap().put(SpectrumTextureKeys.LIGHT, TextureMap.getSubId(REDSTONE_TORCH, "_off")), ctx.modelCollector);
+				for (Direction direction : Direction.Type.HORIZONTAL) {
+					VariantSettings.Rotation rotation = getSouthDefaultRotation(direction);
+					multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(Properties.POWERED, true), createModelVariant(on).put(VariantSettings.Y, rotation));
+					multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(Properties.POWERED, false), createModelVariant(off).put(VariantSettings.Y, rotation));
+					for (RedstoneTimerBlock.TimingStep step : RedstoneTimerBlock.TimingStep.values()) {
+						multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(RedstoneTimerBlock.ACTIVE_TIME, step), createModelVariant(block, "_left_" + step.ordinal()).put(VariantSettings.UVLOCK, true).put(VariantSettings.Y, rotation));
+						multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(RedstoneTimerBlock.INACTIVE_TIME, step), createModelVariant(block, "_right_" + step.ordinal()).put(VariantSettings.UVLOCK, true).put(VariantSettings.Y, rotation));
+					}
+				}
+				return multipart;
+			}));
+	public static final Block REDSTONE_CALCULATOR = register(cutout(blockWithItem("redstone_calculator", new RedstoneCalculatorBlock(AbstractBlock.Settings.copy(REPEATER)), DyeColor.RED))
+			.withPredefinedItemModel()
+			.withBlockModel((ctx, block) -> {
+				MultipartBlockStateSupplier multipart = MultipartBlockStateSupplier.create(block);
+				for (Direction direction : Direction.Type.HORIZONTAL) {
+					VariantSettings.Rotation rotation = getSouthDefaultRotation(direction);
+					multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(Properties.POWERED, true), createModelVariant(block, "_base").put(VariantSettings.Y, rotation));
+					multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(Properties.POWERED, false), createModelVariant(block, "_base_off").put(VariantSettings.Y, rotation));
+					for (RedstoneCalculatorBlock.CalculationMode mode : RedstoneCalculatorBlock.CalculationMode.values()) {
+						multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(RedstoneCalculatorBlock.CALCULATION_MODE, mode), createModelVariant(block, "_" + mode.asString()).put(VariantSettings.UVLOCK, true).put(VariantSettings.Y, rotation));
+					}
+				}
+				return multipart;
+			}));
+	public static final Block REDSTONE_TRANSCEIVER = register(cutout(blockWithItem("redstone_transceiver", new RedstoneTransceiverBlock(AbstractBlock.Settings.copy(REPEATER)), DyeColor.RED))
+			.withPredefinedItemModel()
+			.withBlockModel((ctx, block) -> {
+				MultipartBlockStateSupplier multipart = MultipartBlockStateSupplier.create(block);
+				Identifier senderOn = SpectrumModels.REDSTONE_TRANSCEIVER_SENDER.upload(block, "_sender", new TextureMap().put(SpectrumTextureKeys.LIGHT, TextureMap.getId(REDSTONE_TORCH)), ctx.modelCollector);
+				Identifier senderOff = SpectrumModels.REDSTONE_TRANSCEIVER_SENDER.upload(block, "_sender_off", new TextureMap().put(SpectrumTextureKeys.LIGHT, TextureMap.getSubId(REDSTONE_TORCH, "_off")), ctx.modelCollector);
+				Identifier receiverOn = SpectrumModels.REDSTONE_TRANSCEIVER_RECEIVER.upload(block, "_receiver", new TextureMap().put(SpectrumTextureKeys.LIGHT, TextureMap.getId(REDSTONE_TORCH)), ctx.modelCollector);
+				Identifier receiverOff = SpectrumModels.REDSTONE_TRANSCEIVER_RECEIVER.upload(block, "_receiver_off", new TextureMap().put(SpectrumTextureKeys.LIGHT, TextureMap.getSubId(REDSTONE_TORCH, "_off")), ctx.modelCollector);
+				for (Direction direction : Direction.Type.HORIZONTAL) {
+					VariantSettings.Rotation rotation = getSouthDefaultRotation(direction);
+					multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(RedstoneTransceiverBlock.SENDER, true).set(Properties.POWERED, true), createModelVariant(senderOn).put(VariantSettings.Y, rotation));
+					multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(RedstoneTransceiverBlock.SENDER, true).set(Properties.POWERED, false), createModelVariant(senderOff).put(VariantSettings.Y, rotation));
+					multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(RedstoneTransceiverBlock.SENDER, false).set(Properties.POWERED, true), createModelVariant(receiverOn).put(VariantSettings.Y, rotation));
+					multipart.with(When.create().set(Properties.HORIZONTAL_FACING, direction).set(RedstoneTransceiverBlock.SENDER, false).set(Properties.POWERED, false), createModelVariant(receiverOff).put(VariantSettings.Y, rotation));
+				}
+				for (DyeColor color : DyeColor.values()) {
+					Identifier channel = SpectrumModels.REDSTONE_TRANSCEIVER_CHANNEL.upload(block, "_channel_" + color.asString(), SpectrumTextureMaps.all(SpectrumCommon.locate("block/" + color.asString() + "_block")), ctx.modelCollector);
+					multipart.with(When.create().set(RedstoneTransceiverBlock.CHANNEL, color), createModelVariant(channel));
+				}
+				return multipart;
+			}));
+	public static final Block BLOCK_PLACER = register(blockWithItem("block_placer", new BlockPlacerBlock(AbstractBlock.Settings.copy(DISPENSER)), DyeColor.CYAN)
+			.withBlockModel((ctx, block) -> createVariantsSupplier(ctx, block, SpectrumTexturedModels.complexOrientable(b -> b, "_side", b -> b, "_top", b -> NOTCHED_POLISHED_CALCITE, "_top", b -> b, "_front", b -> b, "_back", b -> b, "_side"))
+					.coordinate(createUpNorthDefaultOrientationVariantMap())));
+	public static final Block BLOCK_DETECTOR = register(blockWithItem("block_detector", new BlockDetectorBlock(AbstractBlock.Settings.copy(DISPENSER)), DyeColor.CYAN)
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block)
+					.coordinate(createUpNorthDefaultOrientationVariantMap())
+					.coordinate(createBooleanModelMap(Properties.TRIGGERED,
+							SpectrumTexturedModels.complexOrientable(b -> b, "_side", b -> b, "_top", b -> NOTCHED_POLISHED_BASALT, "_top", b -> b, "_front", b -> b, "_back_active", b -> b, "_side").upload(block, "_active", ctx.modelCollector),
+							SpectrumTexturedModels.complexOrientable(b -> b, "_side", b -> b, "_top", b -> NOTCHED_POLISHED_BASALT, "_top", b -> b, "_front", b -> b, "_back", b -> b, "_side").upload(block, ctx.modelCollector)))));
+	public static final Block BLOCK_BREAKER = register(blockWithItem("block_breaker", new BlockBreakerBlock(AbstractBlock.Settings.copy(DISPENSER)), DyeColor.CYAN)
+			.withBlockModel((ctx, block) -> createVariantsSupplier(ctx, block, SpectrumTexturedModels.complexOrientable(b -> b, "_side", b -> b, "_top", b -> POLISHED_BONE_ASH_PILLAR, "_top", b -> b, "_front", b -> b, "_back", b -> b, "_side"))
+					.coordinate(createUpNorthDefaultOrientationVariantMap())));
 	public static final EnderDropperBlock ENDER_DROPPER = new EnderDropperBlock(AbstractBlock.Settings.copy(DROPPER).mapColor(MapColor.GRAY).requiresTool().strength(15F, 60.0F));
 	public static final Block ENDER_HOPPER = new EnderHopperBlock(AbstractBlock.Settings.copy(HOPPER).mapColor(MapColor.GRAY).requiresTool().strength(15F, 60.0F));
 	
@@ -1363,7 +1421,7 @@ public class SpectrumBlocks {
 	
 	public static final Block SACRED_SOIL = register(blockWithItem("sacred_soil", new ExtraTickFarmlandBlock(AbstractBlock.Settings.copy(FARMLAND).mapColor(MapColor.LIGHT_BLUE_GRAY), DIRT.getDefaultState()), DyeColor.LIME)
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.MOISTURE).register(moisture ->
-					createModelVariant(ModelIds.getBlockSubModelId(block, moisture == 7 ? "_moist" : ""))))));
+					createModelVariant(block, moisture == 7 ? "_moist" : "")))));
 	
 	private static Settings spiritVines(MapColor mapColor) {
 		return settings(mapColor, BlockSoundGroup.CAVE_VINES, 0.0F).noCollision();
@@ -2019,7 +2077,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("crystal_apothecary", CRYSTAL_APOTHECARY, IS.of(8), DyeColor.GREEN);
 		registerBlockWithItem("color_picker", COLOR_PICKER, IS.of(8), DyeColor.GREEN);
 		
-		registerRedstone(IS.of());
 		registerMagicalBlocks(IS.of());
 		registerStructureBlocks(IS.of());
 		
@@ -2052,22 +2109,6 @@ public class SpectrumBlocks {
 		COMMON_REGISTRAR.flush();
 		
 		registerMobHeads(IS.of());
-	}
-	
-	private static void registerRedstone(Item.Settings settings) {
-		registerBlockWithItem("light_level_detector", LIGHT_LEVEL_DETECTOR, settings, DyeColor.RED);
-		registerBlockWithItem("weather_detector", WEATHER_DETECTOR, settings, DyeColor.RED);
-		registerBlockWithItem("item_detector", ITEM_DETECTOR, settings, DyeColor.RED);
-		registerBlockWithItem("player_detector", PLAYER_DETECTOR, settings, DyeColor.RED);
-		registerBlockWithItem("creature_detector", CREATURE_DETECTOR, settings, DyeColor.RED);
-		
-		registerBlockWithItem("redstone_timer", REDSTONE_TIMER, settings, DyeColor.RED);
-		registerBlockWithItem("redstone_calculator", REDSTONE_CALCULATOR, settings, DyeColor.RED);
-		registerBlockWithItem("redstone_transceiver", REDSTONE_TRANSCEIVER, settings, DyeColor.RED);
-		
-		registerBlockWithItem("block_placer", BLOCK_PLACER, settings, DyeColor.CYAN);
-		registerBlockWithItem("block_detector", BLOCK_DETECTOR, settings, DyeColor.CYAN);
-		registerBlockWithItem("block_breaker", BLOCK_BREAKER, settings, DyeColor.CYAN);
 	}
 	
 	private static void registerMagicalBlocks(Item.Settings settings) {
@@ -2149,10 +2190,6 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlock(COURIER_STATUE, RenderLayer.getCutout());
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(COLOR_PICKER, RenderLayer.getCutout());
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(REDSTONE_TIMER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(REDSTONE_TRANSCEIVER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(REDSTONE_CALCULATOR, RenderLayer.getCutout());
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(BLACK_HOLE_CHEST, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(FABRICATION_CHEST, RenderLayer.getCutout());
@@ -2310,6 +2347,12 @@ public class SpectrumBlocks {
 				.withItemModel(SpectrumModelProvider::registerItemModel)
 				.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_2).register(age ->
 						createModelVariant(SpectrumTexturedModels.sugarStick(age, sugarBlock).upload(block, age.toString(), ctx.modelCollector)))));
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> detector(BlockRegistrar<T> registrar) {
+		return registrar.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(Properties.INVERTED,
+				SpectrumModels.DAYLIGHT_DETECTOR.upload(block, "_inverted", SpectrumTextureMaps.sideTop(DAYLIGHT_DETECTOR, "_side", block, "_inverted_top"), ctx.modelCollector),
+				SpectrumModels.DAYLIGHT_DETECTOR.upload(block, SpectrumTextureMaps.sideTop(DAYLIGHT_DETECTOR, "_side", block, "_top"), ctx.modelCollector))));
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> pylon(BlockRegistrar<T> registrar) {

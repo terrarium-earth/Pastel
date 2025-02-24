@@ -39,6 +39,10 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottomParticle(sideBlock.apply(b), sideSuffix, topBlock.apply(b), topSuffix, bottomBlock.apply(b), bottomSuffix, particleBlock.apply(b), particleSuffix), SpectrumModels.CUBE_BOTTOM_TOP_PARTICLE);
 	}
 	
+	public static TexturedModel.Factory complexOrientable(UnaryOperator<Block> sideBlock, String sideSuffix, UnaryOperator<Block> topBlock, String topSuffix, UnaryOperator<Block> bottomBlock, String bottomSuffix, UnaryOperator<Block> frontBlock, String frontSuffix, UnaryOperator<Block> backBlock, String backSuffix, UnaryOperator<Block> particleBlock, String particleSuffix) {
+		return TexturedModel.makeFactory(b -> new TextureMap().put(SIDE, getSubId(sideBlock.apply(b), sideSuffix)).put(TOP, getSubId(topBlock.apply(b), topSuffix)).put(BOTTOM, getSubId(bottomBlock.apply(b), bottomSuffix)).put(FRONT, getSubId(frontBlock.apply(b), frontSuffix)).put(BACK, getSubId(backBlock.apply(b), backSuffix)).put(PARTICLE, getSubId(particleBlock.apply(b), particleSuffix)), SpectrumModels.COMPLEX_ORIENTABLE);
+	}
+	
 	public static TexturedModel.Factory farmland(UnaryOperator<Block> dirtBlock, String dirtSuffix, UnaryOperator<Block> topBlock, String topSuffix) {
 		return TexturedModel.makeFactory(b -> new TextureMap().put(DIRT, getSubId(dirtBlock.apply(b), dirtSuffix)).put(TOP, getSubId(topBlock.apply(b), topSuffix)), Models.TEMPLATE_FARMLAND);
 	}

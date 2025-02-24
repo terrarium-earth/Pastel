@@ -25,6 +25,7 @@ public class SpectrumModels {
 	public static final Model CHIME = new Model(Optional.of(SpectrumCommon.locate("templates/chime")), Optional.empty(), BASE, GEMSTONE);
 	public static final Model CUSHION = new Model(Optional.of(SpectrumCommon.locate("templates/cushion")), Optional.empty(), SIDE, TOP, BOTTOM);
 	public static final Model COLORED_LAMP_ON = new Model(Optional.of(SpectrumCommon.locate("templates/colored_lamp_on")), Optional.empty(), INNER, OUTER);
+	public static final Model COMPLEX_ORIENTABLE = new Model(Optional.of(SpectrumCommon.locate("templates/complex_orientable")), Optional.empty(), SIDE, TOP, BOTTOM, FRONT, BACK, PARTICLE);
 	public static final Model CRYSTALLARIEUM_FARMABLE = new Model(Optional.of(SpectrumCommon.locate("templates/crystallarieum_farmable")), Optional.empty(), CROSS);
 	public static final Model DOUBLE_CROSS = new Model(Optional.of(SpectrumCommon.locate("templates/double_cross")), Optional.empty(), CROSS);
 	public static final Model JADE_VINE_BULB = new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_bulb")), Optional.empty(), FLOWER, PARTICLE);
@@ -33,6 +34,10 @@ public class SpectrumModels {
 	public static final Model MOONSTONE_CHISELED_DOWN = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled_down")), Optional.empty(), SIDE, LINE);
 	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), SIDE, TOP, INSIDE);
 	public static final Model OVERGROWN = new Model(Optional.of(SpectrumCommon.locate("templates/overgrown")), Optional.empty(), SIDE, TOP, BOTTOM, FRONDS);
+	public static final Model REDSTONE_TIMER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_timer_base")), Optional.empty(), LIGHT);
+	public static final Model REDSTONE_TRANSCEIVER_CHANNEL = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_channel_base")), Optional.empty(), ALL);
+	public static final Model REDSTONE_TRANSCEIVER_SENDER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_sender_base")), Optional.empty(), LIGHT);
+	public static final Model REDSTONE_TRANSCEIVER_RECEIVER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_receiver_base")), Optional.empty(), LIGHT);
 	public static final Model SHOOTING_STAR = new Model(Optional.of(SpectrumCommon.locate("templates/shooting_star")), Optional.empty(), SIDE, CORE);
 	public static final Model TRANSLUCENT_OUTER1 = new Model(Optional.of(SpectrumCommon.locate("templates/translucent_outer1")), Optional.empty(), TEXTURE);
 	
@@ -66,6 +71,7 @@ public class SpectrumModels {
 	public static final Model CUBE_BOTTOM_TOP_WALL = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TOP, BOTTOM, SIDE, WALL);
 	
 	// Vanilla
+	public static final Model DAYLIGHT_DETECTOR = new Model(Optional.of(Identifier.ofVanilla("block/template_daylight_detector")), Optional.empty(), SIDE, TOP);
 	public static final Model SPORE_BLOSSOM = new Model(Optional.of(Identifier.ofVanilla("block/spore_blossom")), Optional.empty(), FLOWER, PARTICLE);
 	
 }
