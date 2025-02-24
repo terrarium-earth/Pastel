@@ -34,6 +34,8 @@ public class SpectrumModels {
 	
 	public static final Identifier BALCITE_PYLON_PEDESTAL = SpectrumCommon.locate("block/balcite_pylon_pedestal");
 	public static final Identifier GIANT_MOSS_BALL = SpectrumCommon.locate("block/giant_moss_ball");
+	public static final Identifier MOB_BLOCK = SpectrumCommon.locate("block/mob_block");
+	public static final Identifier MOB_BLOCK_COOLDOWN = SpectrumCommon.locate("block/mob_block_cooldown");
 	public static final Identifier MOSS_BALL = SpectrumCommon.locate("block/moss_ball");
 	public static final Identifier MOSS_BALL_TUFT = SpectrumCommon.locate("block/moss_ball_tuft");
 	public static final Identifier SNAPPING_IVY = SpectrumCommon.locate("block/snapping_ivy");
