@@ -36,6 +36,7 @@ public class SpectrumAdvancements {
 	public static final Identifier SPAWNER_MANIPULATION = SpectrumCommon.locate("milestones/unlock_spawner_manipulation");
 	public static final Identifier UNLOCK_SHOOTING_STARS = SpectrumCommon.locate("milestones/unlock_shooting_stars");
 	public static final Identifier PASTEL_NODE_UPGRADING = SpectrumCommon.locate("milestones/unlock_pastel_node_upgrading");
+	public static final Identifier PASTEL_NODE_COLORING = SpectrumCommon.locate("milestones/unlock_pastel_node_coloring");
 	
 	// Paintbrush Abilities
 	public static final Identifier PAINTBRUSH_COLORING = SpectrumCommon.locate("collect_pigment");

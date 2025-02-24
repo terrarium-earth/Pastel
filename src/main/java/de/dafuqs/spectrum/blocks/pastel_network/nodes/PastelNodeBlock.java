@@ -230,6 +230,12 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 	
 	@Override
 	public boolean color(World world, BlockPos pos, Optional<DyeColor> color, @Nullable Entity user) {
+		if (!(user instanceof PlayerEntity player)) {
+			return false;
+		}
+		if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_COLORING)) {
+			return false;
+		}
 		@Nullable PastelNodeBlockEntity blockEntity = getBlockEntity(world, pos);
 		if (blockEntity == null) {
 			return false;
