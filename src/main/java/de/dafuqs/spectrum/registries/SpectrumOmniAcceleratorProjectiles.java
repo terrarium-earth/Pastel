@@ -4,6 +4,7 @@ import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.blocks.shooting_star.*;
 import de.dafuqs.spectrum.entity.entity.*;
 import net.minecraft.entity.*;
+import net.minecraft.entity.player.*;
 import net.minecraft.entity.projectile.*;
 import net.minecraft.entity.projectile.thrown.*;
 import net.minecraft.item.*;
@@ -199,7 +200,7 @@ public class SpectrumOmniAcceleratorProjectiles {
 			public SoundEvent getSoundEffect() {
 				return SpectrumSoundEvents.SHOOTING_STAR_CRACKER;
 			}
-		}, SpectrumBlocks.GLISTERING_SHOOTING_STAR, SpectrumBlocks.FIERY_SHOOTING_STAR, SpectrumBlocks.COLORFUL_SHOOTING_STAR, SpectrumBlocks.PRISTINE_SHOOTING_STAR, SpectrumBlocks.GEMSTONE_SHOOTING_STAR);
+		}, SpectrumItemTags.SHOOTING_STARS);
 		
 		OmniAcceleratorProjectile.register(new OmniAcceleratorProjectile() {
 			@Override
@@ -222,6 +223,23 @@ public class SpectrumOmniAcceleratorProjectiles {
 				return SoundEvents.BLOCK_ANVIL_PLACE;
 			}
 		}, ItemTags.ANVIL);
+		
+		OmniAcceleratorProjectile.register(new OmniAcceleratorProjectile() {
+			@Override
+			public Entity createProjectile(ItemStack stack, LivingEntity shooter, World world, ItemStack shotFrom) {
+				if (shooter instanceof PlayerEntity player) {
+					WindChargeEntity windChargeEntity = new WindChargeEntity(player, world, shooter.getPos().getX(), shooter.getEyePos().getY(), shooter.getPos().getZ());
+					windChargeEntity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0, 2.5F, 0F);
+					world.spawnEntity(windChargeEntity);
+				}
+				return null;
+			}
+			
+			@Override
+			public SoundEvent getSoundEffect() {
+				return SoundEvents.ENTITY_WIND_CHARGE_THROW;
+			}
+		}, Items.WIND_CHARGE);
 	}
 	
 }
