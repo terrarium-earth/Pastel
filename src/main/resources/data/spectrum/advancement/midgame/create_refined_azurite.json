@@ -13,13 +13,11 @@
   },
   "criteria": {
     "created_refined_azurite": {
-      "trigger": "spectrum:crafted_with_fusion_shrine",
+      "trigger": "spectrum:crystallarieum_growing",
       "conditions": {
-        "items": [
-          {
-            "items": "spectrum:refined_azurite"
-          }
-        ]
+        "grown_block": {
+          "blocks": "spectrum:azurite_cluster"
+        }
       }
     },
     "gotten_previous": {

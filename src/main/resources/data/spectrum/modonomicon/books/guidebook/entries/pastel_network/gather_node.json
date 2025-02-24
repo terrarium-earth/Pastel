@@ -30,6 +30,11 @@
       "text": "book.spectrum.guidebook.gather_node.page1.text",
       "title": "container.spectrum.rei.pedestal_recipe",
       "recipe_id": "spectrum:pedestal/tier3/pastel_network/gather_node"
+    },
+    {
+      "type": "spectrum:pedestal_crafting",
+      "title": "container.spectrum.rei.refined_recipe",
+      "recipe_id": "spectrum:pedestal/tier3/pastel_network/gather_node_refined"
     }
   ]
 }
