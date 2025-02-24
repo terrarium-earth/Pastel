@@ -19,6 +19,7 @@ public class SpectrumModels {
 	// Block Templates
 	public static final Model BASE_FLAT_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light")), Optional.empty(), INNER, OUTER, PARTICLE);
 	public static final Model BASE_FLAT_LIGHT_MIRRORED = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light_mirrored")), Optional.empty(), INNER, OUTER, PARTICLE);
+	public static final Model BASE_PYLON_BODY = new Model(Optional.of(SpectrumCommon.locate("templates/base_pylon_body")), Optional.empty(), SIDE, END);
 	public static final Model BASE_TRANS_LIGHT_CORE = new Model(Optional.of(SpectrumCommon.locate("templates/base_trans_light_core")), Optional.empty(), GLASS, CASE, BASE, ENDS, SHELL, FILAMENT);
 	public static final Model CHIME = new Model(Optional.of(SpectrumCommon.locate("templates/chime")), Optional.empty(), BASE, GEMSTONE);
 	public static final Model CUSHION = new Model(Optional.of(SpectrumCommon.locate("templates/cushion")), Optional.empty(), SIDE, TOP, BOTTOM);
@@ -31,11 +32,16 @@ public class SpectrumModels {
 	public static final Model OVERGROWN = new Model(Optional.of(SpectrumCommon.locate("templates/overgrown")), Optional.empty(), SIDE, TOP, BOTTOM, FRONDS);
 	public static final Model TRANSLUCENT_OUTER1 = new Model(Optional.of(SpectrumCommon.locate("templates/translucent_outer1")), Optional.empty(), TEXTURE);
 	
+	public static final Identifier BALCITE_PYLON_PEDESTAL = SpectrumCommon.locate("block/balcite_pylon_pedestal");
 	public static final Identifier GIANT_MOSS_BALL = SpectrumCommon.locate("block/giant_moss_ball");
 	public static final Identifier MOSS_BALL = SpectrumCommon.locate("block/moss_ball");
 	public static final Identifier MOSS_BALL_TUFT = SpectrumCommon.locate("block/moss_ball_tuft");
 	public static final Identifier SNAPPING_IVY = SpectrumCommon.locate("block/snapping_ivy");
 	public static final Identifier SNAPPING_IVY_SNAPPED = SpectrumCommon.locate("block/snapping_ivy_snapped");
+	public static final Identifier UPGRADE_SPEED = SpectrumCommon.locate("block/upgrade_speed");
+	public static final Identifier UPGRADE_EFFICIENCY = SpectrumCommon.locate("block/upgrade_efficiency");
+	public static final Identifier UPGRADE_YIELD = SpectrumCommon.locate("block/upgrade_yield");
+	public static final Identifier UPGRADE_EXPERIENCE = SpectrumCommon.locate("block/upgrade_experience");
 	
 	public static Model noxwoodLantern(String suffix) {
 		return new Model(Optional.of(SpectrumCommon.locate("templates/noxwood_lamp" + suffix)), Optional.empty(), ALL);
