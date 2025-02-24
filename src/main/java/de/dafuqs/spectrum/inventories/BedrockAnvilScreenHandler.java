@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.items.*;
 import it.unimi.dsi.fastutil.objects.*;
 import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.block.*;
@@ -119,10 +120,19 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 			repairLevelCost += (long) inputStack.getOrDefault(DataComponentTypes.REPAIR_COST, 0)
 					+ (long) repairSlotStack.getOrDefault(DataComponentTypes.REPAIR_COST, 0);
 			this.repairItemCount = 0;
+			boolean pigmentInRepairSlot = repairSlotStack.getItem() instanceof PigmentItem;
+			if (pigmentInRepairSlot) {
+				repairItemCount = 1;
+			}
 			if (!repairSlotStack.isEmpty()) {
 				combined = true; // We added this line
 				
+				boolean enchantedBookInInputSlot = inputStack.isOf(Items.ENCHANTED_BOOK) && !inputStack.contains(DataComponentTypes.STORED_ENCHANTMENTS);
 				boolean enchantedBookInRepairSlot = repairSlotStack.isOf(Items.ENCHANTED_BOOK) && !inputStack.contains(DataComponentTypes.STORED_ENCHANTMENTS);
+				
+				int o;
+				int repairItemCount;
+				int newOutputStackDamage;
 				if (outputStack.isDamageable() && outputStack.getItem().canRepair(inputStack, repairSlotStack)) {
 					int toRepair = Math.min(outputStack.getDamage(), outputStack.getMaxDamage() / 4);
 					if (toRepair <= 0) {
@@ -131,9 +141,8 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 						return;
 					}
 					
-					int repairItemCount;
 					for (repairItemCount = 0; toRepair > 0 && repairItemCount < repairSlotStack.getCount(); ++repairItemCount) {
-						int newOutputStackDamage = outputStack.getDamage() - toRepair;
+						newOutputStackDamage = outputStack.getDamage() - toRepair;
 						outputStack.setDamage(newOutputStackDamage);
 						++enchantmentLevelCost;
 						toRepair = Math.min(outputStack.getDamage(), outputStack.getMaxDamage() / 4);
@@ -141,13 +150,13 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 					
 					this.repairItemCount = repairItemCount;
 				} else {
-					if (!enchantedBookInRepairSlot && (!outputStack.isOf(repairSlotStack.getItem()) || !outputStack.isDamageable())) {
+					if (!pigmentInRepairSlot && !enchantedBookInRepairSlot && (!outputStack.isOf(repairSlotStack.getItem()) || !outputStack.isDamageable())) {
 						this.output.setStack(0, ItemStack.EMPTY);
 						this.levelCost.set(0);
 						return;
 					}
 					
-					if (outputStack.isDamageable() && !enchantedBookInRepairSlot) {
+					if (outputStack.isDamageable() && !enchantedBookInRepairSlot && !pigmentInRepairSlot) {
 						int inputItemDurability = inputStack.getMaxDamage() - inputStack.getDamage();
 						int repairItemDurability = repairSlotStack.getMaxDamage() - repairSlotStack.getDamage();
 						int toRepair = repairItemDurability + outputStack.getMaxDamage() * 12 / 100;
@@ -220,13 +229,26 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 					// We removed these - Renames are free
 //					 renameCost = 1;
 //					 enchantmentLevelCost += renameCost;
-					outputStack.set(DataComponentTypes.CUSTOM_NAME, Text.literal(this.newItemName));
+					if (inputStack.getName() instanceof MutableText inputText && inputText.getStyle().getColor() != null) {
+						outputStack.set(DataComponentTypes.CUSTOM_NAME, Text.literal(this.newItemName).setStyle(Style.EMPTY.withColor(inputText.getStyle().getColor())));
+					} else {
+						outputStack.set(DataComponentTypes.CUSTOM_NAME, Text.literal(this.newItemName));
+					}
 				}
 			} else if (inputStack.contains(DataComponentTypes.CUSTOM_NAME)) {
 				// We removed these - Renames are free
 // 				 renameCost = 1;
 //				 enchantmentLevelCost += renameCost;
 				outputStack.remove(DataComponentTypes.CUSTOM_NAME);
+			}
+			// TODO: we are setting DataComponentTypes.CUSTOM_NAME above, already.
+			Text text = outputStack.getName();
+			if (pigmentInRepairSlot && text instanceof MutableText mutableText) {
+				TextColor newColor = TextColor.fromRgb(((PigmentItem) repairSlotStack.getItem()).getInkColor().getColorInt());
+				Text newName = mutableText.setStyle(mutableText.getStyle().withColor(newColor));
+				if (!newName.equals(inputStack.getName())) {
+					outputStack.set(DataComponentTypes.CUSTOM_NAME, Text.literal(this.newItemName));
+				}
 			}
 			
 			// We added this if/elseif block
@@ -255,7 +277,7 @@ public class BedrockAnvilScreenHandler extends ForgingScreenHandler {
 //				itemStack2 = ItemStack.EMPTY;
 //			}
 			
-			if (!combined) { // We added this if - Renames are free
+			if (!combined || pigmentInRepairSlot) { // We added this if - Renames are free
 				this.levelCost.set(0);
 			} else if (!outputStack.isEmpty()) {
 				int repairCost = outputStack.getOrDefault(DataComponentTypes.REPAIR_COST, 0);

@@ -5,10 +5,13 @@ import de.dafuqs.spectrum.blocks.enchanter.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.recipe.fluid_converting.*;
 import de.dafuqs.spectrum.registries.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.fabricmc.api.*;
 import net.minecraft.block.*;
+import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
@@ -16,13 +19,15 @@ import net.minecraft.fluid.*;
 import net.minecraft.item.*;
 import net.minecraft.particle.*;
 import net.minecraft.recipe.*;
+import net.minecraft.registry.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
 import net.minecraft.state.*;
-import net.minecraft.state.property.Properties;
+import net.minecraft.state.property.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.util.math.random.*;
 import net.minecraft.world.*;
 
 public abstract class MidnightSolutionFluid extends SpectrumFluid {
@@ -137,29 +142,48 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 		ItemStack itemStack = itemEntity.getStack();
 		// if the item is enchanted: remove enchantments and spawn XP
 		// basically disenchanting the item
-		var enchantments = EnchantmentHelper.getEnchantments(itemStack);
+		ItemEnchantmentsComponent enchantments = EnchantmentHelper.getEnchantments(itemStack);
 		if (!enchantments.isEmpty()) {
 			int randomEnchantmentIndex = world.random.nextInt(enchantments.getSize());
-			var entry = enchantments.getEnchantmentEntries().stream().toList().get(randomEnchantmentIndex);
-			var enchantmentToRemove = entry.getKey();
-			var level = entry.getIntValue();
-			Pair<ItemStack, Integer> result = SpectrumEnchantmentHelper.removeEnchantments(itemStack, enchantmentToRemove);
+			Object2IntMap.Entry<RegistryEntry<Enchantment>> entryToRemove = enchantments.getEnchantmentEntries().stream().toList().get(randomEnchantmentIndex);
+			Pair<ItemStack, Integer> result = SpectrumEnchantmentHelper.removeEnchantments(itemStack, entryToRemove.getKey());
 			
 			if (result.getRight() > 0) {
-				int experience = EnchanterBlockEntity.getEnchantingPrice(itemStack, enchantmentToRemove, level);
-				experience /= EXPERIENCE_DISENCHANT_RETURN_DIV;
-				if (experience > 0) {
-					ExperienceOrbEntity experienceOrbEntity = new ExperienceOrbEntity(world, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), experience);
-					world.spawnEntity(experienceOrbEntity);
-				}
-				
-				world.playSound(null, itemEntity.getBlockPos(), SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.NEUTRAL, 1.0F, 0.9F + world.getRandom().nextFloat() * 0.2F);
-				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, itemEntity.getPos(), SpectrumParticleTypes.GRAY_SPARKLE_RISING, 10, Vec3d.ZERO, new Vec3d(0.2, 0.4, 0.2));
-				
+				spawnXP(world, itemEntity, EnchanterBlockEntity.getEnchantingPrice(itemStack, entryToRemove.getKey(), entryToRemove.getIntValue()));
 				itemEntity.setStack(result.getLeft());
 				itemEntity.setToDefaultPickupDelay();
 			}
+		} else if (itemStack.isOf(SpectrumItems.ENCHANTMENT_CANVAS) && itemStack.contains(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS)) {
+			ItemEnchantmentsComponent canvasEnchantments = itemStack.get(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS);
+			Item boundItem = Registries.ITEM.get(itemStack.get(SpectrumDataComponentTypes.BOUND_ITEM));
+			if (!canvasEnchantments.isEmpty()) {
+				int randomEnchantmentIndex = world.random.nextInt(enchantments.getSize());
+				Object2IntMap.Entry<RegistryEntry<Enchantment>> entryToRemove = enchantments.getEnchantmentEntries().stream().toList().get(randomEnchantmentIndex);
+				
+				var builder = new ItemEnchantmentsComponent.Builder(canvasEnchantments);
+				builder.set(entryToRemove.getKey(), 0);
+				
+				spawnXP(world, itemEntity, EnchanterBlockEntity.getEnchantingPrice(boundItem.getDefaultStack(), entryToRemove.getKey(), entryToRemove.getIntValue()));
+				
+				ItemEnchantmentsComponent targetEnchants = builder.build();
+				if (targetEnchants.isEmpty()) {
+					itemStack.remove(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS);
+				} else {
+					itemStack.set(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS, targetEnchants);
+				}
+				itemEntity.setToDefaultPickupDelay();
+			}
 		}
+	}
+	
+	private static void spawnXP(World world, ItemEntity itemEntity, int exp) {
+		exp /= EXPERIENCE_DISENCHANT_RETURN_DIV;
+		if (exp > 0) {
+			ExperienceOrbEntity experienceOrbEntity = new ExperienceOrbEntity(world, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), exp);
+			world.spawnEntity(experienceOrbEntity);
+		}
+		world.playSound(null, itemEntity.getBlockPos(), SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.NEUTRAL, 1.0F, 0.9F + world.getRandom().nextFloat() * 0.2F);
+		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, itemEntity.getPos(), ColoredSparkleRisingParticleEffect.GRAY, 10, Vec3d.ZERO, new Vec3d(0.2, 0.4, 0.2));
 	}
 	
 	public static class Flowing extends MidnightSolutionFluid {

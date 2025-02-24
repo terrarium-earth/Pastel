@@ -61,7 +61,9 @@
       "consume_chance_per_second": 0.1
     }
   ],
-  "additional_recipe_manager_outputs": [
-    "spectrum:pure_prismarine"
+  "additional_recipe_manager_results": [
+    {
+      "id": "spectrum:pure_prismarine"
+    }
   ]
 }

@@ -10,7 +10,8 @@ public class SpectrumAdvancements {
 	
 	// Revelations
 	public static final Identifier REVEAL_AMARANTH = SpectrumCommon.locate("milestones/reveal_amaranth");
-	public static final Identifier REVEAL_AZURITE = locate("milestones/reveal_azurite");
+	public static final Identifier REVEAL_AZURITE = SpectrumCommon.locate("milestones/reveal_azurite");
+	public static final Identifier REVEAL_BLOOD_ORCHID_PETALS = SpectrumCommon.locate("milestones/reveal_blood_orchid_petals");
 	public static final Identifier REVEAL_COLORED_SAPLINGS_CMY = SpectrumCommon.locate("milestones/reveal_colored_saplings_cmy");
 	public static final Identifier REVEAL_COLORED_TREES_BLACK = SpectrumCommon.locate("milestones/reveal_colored_trees_k");
 	public static final Identifier REVEAL_COLORED_TREES_CMY = SpectrumCommon.locate("milestones/reveal_colored_trees_cmy");
@@ -35,6 +36,7 @@ public class SpectrumAdvancements {
 	public static final Identifier SPAWNER_MANIPULATION = SpectrumCommon.locate("milestones/unlock_spawner_manipulation");
 	public static final Identifier UNLOCK_SHOOTING_STARS = SpectrumCommon.locate("milestones/unlock_shooting_stars");
 	public static final Identifier PASTEL_NODE_UPGRADING = SpectrumCommon.locate("milestones/unlock_pastel_node_upgrading");
+	public static final Identifier PASTEL_NODE_COLORING = SpectrumCommon.locate("milestones/unlock_pastel_node_coloring");
 	
 	// Paintbrush Abilities
 	public static final Identifier PAINTBRUSH_COLORING = SpectrumCommon.locate("collect_pigment");

@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.status_effects;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
@@ -25,7 +26,7 @@ public class DivinityStatusEffect extends StatusEffect {
 	public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
 		World world = entity.getWorld();
 		if (amplifier > CIRCLET_AMPLIFIER && world.isClient) { // the circlet gives divinity 0, not showing effects; the ascension one does
-			ParticleHelper.playParticleWithPatternAndVelocityClient(entity.getWorld(), entity.getPos(), SpectrumParticleTypes.RED_CRAFTING, VectorPattern.EIGHT, 0.2);
+			ParticleHelper.playParticleWithPatternAndVelocityClient(entity.getWorld(), entity.getPos(), ColoredCraftingParticleEffect.RED, VectorPattern.EIGHT, 0.2);
 		}
 		boolean doEffects = 40 >> amplifier == 0;
 		if (entity instanceof PlayerEntity player) {

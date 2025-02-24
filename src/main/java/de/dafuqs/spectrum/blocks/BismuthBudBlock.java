@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.blocks;
 
 import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import net.minecraft.block.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.server.world.*;
@@ -43,10 +43,10 @@ public class BismuthBudBlock extends SpectrumClusterBlock {
 			Vec3d sourcePos = new Vec3d(pos.getX() + 0.5D, pos.getY() + growthStage.height / 16.0, pos.getZ() + 0.5D);
 			Vec3d randomOffset = new Vec3d(0.25, growthStage.height / 32.0, 0.25);
 			Vec3d randomVelocity = new Vec3d(0.1, 0.1, 0.1);
-			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, sourcePos, SpectrumParticleTypes.YELLOW_CRAFTING, 2, randomOffset, randomVelocity);
-			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, sourcePos, SpectrumParticleTypes.LIME_CRAFTING, 2, randomOffset, randomVelocity);
-			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, sourcePos, SpectrumParticleTypes.PURPLE_CRAFTING, 2, randomOffset, randomVelocity);
-			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, sourcePos, SpectrumParticleTypes.ORANGE_CRAFTING, 2, randomOffset, randomVelocity);
+			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, sourcePos, ColoredCraftingParticleEffect.WHITE, 2, randomOffset, randomVelocity);
+			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, sourcePos, ColoredCraftingParticleEffect.LIME, 2, randomOffset, randomVelocity);
+			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, sourcePos, ColoredCraftingParticleEffect.PURPLE, 2, randomOffset, randomVelocity);
+			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, sourcePos, ColoredCraftingParticleEffect.ORANGE, 2, randomOffset, randomVelocity);
 		}
 	}
 	

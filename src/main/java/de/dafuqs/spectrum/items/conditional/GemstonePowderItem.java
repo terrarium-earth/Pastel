@@ -8,8 +8,8 @@ public class GemstonePowderItem extends CloakedItem {
 	
 	protected final GemstoneColor gemstoneColor;
 	
-	public GemstonePowderItem(Settings settings, Identifier cloakAdvancementIdentifier, GemstoneColor gemstoneColor) {
-		super(settings, cloakAdvancementIdentifier, DyeItem.byColor(gemstoneColor.getDyeColor()));
+	public GemstonePowderItem(Settings settings, Identifier cloakAdvancementIdentifier, GemstoneColor gemstoneColor, Item cloak) {
+		super(settings, cloakAdvancementIdentifier, cloak);
 		this.gemstoneColor = gemstoneColor;
 	}
 	

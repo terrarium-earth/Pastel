@@ -99,7 +99,6 @@ public class NaturesStaffItem extends Item implements InkPowered {
 		if (remainingUseTicks % 10 != 0) {
 			return;
 		}
-
 		if (!(user instanceof PlayerEntity player)) {
 			user.stopUsingItem();
 			return;
@@ -108,26 +107,11 @@ public class NaturesStaffItem extends Item implements InkPowered {
 			user.stopUsingItem();
 		}
 		
-		if (world.isClient) {
-			usageTickClient(user);
-		}
-	}
-	
-	@Environment(EnvType.CLIENT)
-	@SuppressWarnings("DataFlowIssue")
-	public void usageTickClient(LivingEntity user) {
-		// Simple equality check to make sure this method doesn't execute on other clients.
-		// Always true if the current player is the one wielding the staff under normal circumstances.
-		MinecraftClient client = MinecraftClient.getInstance();
-		if (client.player != user) {
-			return;
-		}
-		if (client.crosshairTarget.getType() == HitResult.Type.BLOCK) {
-			client.interactionManager.interactBlock(
-					client.player,
-					client.player.getActiveHand(),
-					(BlockHitResult) client.crosshairTarget
-			);
+		if (!world.isClient) {
+			HitResult hitResult = Support.playerBlockInteractionRaycast(world, user, player);
+			if (hitResult.getType() == HitResult.Type.BLOCK) {
+				useOnBlock(new ItemUsageContext(world, player, player.getActiveHand(), player.getStackInHand(player.getActiveHand()), (BlockHitResult) hitResult));
+			}
 		}
 	}
 	
@@ -252,7 +236,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
 			world.syncWorldEvent(null, WorldEvents.BLOCK_BROKEN, pos, Block.getRawIdFromState(targetState));
 			world.playSound(null, pos, targetState.getSoundGroup().getPlaceSound(), SoundCategory.PLAYERS, 1.0F, 0.9F + world.getRandom().nextFloat() * 0.2F);
-			world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, pos, 0);
+			world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, pos, 15);
 			return true;
 		}
 		return false;
@@ -270,16 +254,16 @@ public class NaturesStaffItem extends Item implements InkPowered {
 		if (blockState.isIn(SpectrumBlockTags.NATURES_STAFF_STACKABLE)) {
 			int i = 0;
 			while (world.getBlockState(blockPos.up(i)).isOf(blockState.getBlock())) {
-				world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos.up(i), 0);
+				world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos.up(i), 15);
 				i++;
 			}
-			world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos, 0);
+			world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos, 15);
 			BoneMealItem.createParticles(world, blockPos.up(i + 1), 5);
 			for (int j = 1; world.getBlockState(blockPos.down(j)).isOf(blockState.getBlock()); j++) {
-				world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos.down(j), 0);
+				world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos.down(j), 15);
 			}
 		} else {
-			world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos, 0);
+			world.syncWorldEvent(WorldEvents.BONE_MEAL_USED, blockPos, 15);
 		}
 	}
 	

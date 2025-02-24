@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.blocks.jade_vines;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import net.minecraft.block.*;
 import net.minecraft.particle.*;
 import net.minecraft.server.world.*;
@@ -27,7 +28,7 @@ public interface JadeVine {
 		double x = blockPos.getX() + 0.2 + (random.nextFloat() * 0.6);
 		double y = blockPos.getY() + 0.2 + (random.nextFloat() * 0.6);
 		double z = blockPos.getZ() + 0.2 + (random.nextFloat() * 0.6);
-		world.addParticle(SpectrumParticleTypes.PINK_FALLING_SPORE_BLOSSOM, x, y, z, 0.0D, 0.0D, 0.0D);
+		world.addParticle(ColoredFallingSporeBlossomParticleEffect.PINK, x, y, z, 0.0D, 0.0D, 0.0D);
 	}
 	
 	static void spawnParticlesClient(World world, BlockPos blockPos) {

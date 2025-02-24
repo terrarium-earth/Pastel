@@ -10,7 +10,7 @@
   "experience": 0.1,
   "ingredients": [
     "minecraft:mud",
-    "#spectrum:amaranth_bushel"
+    "spectrum:amaranth_bushel"
   ],
   "result": {
     "id": "minecraft:packed_mud"

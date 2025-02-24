@@ -9,14 +9,14 @@
   "black": 1,
   "experience": 1.0,
   "pattern": [
-    " M ",
-    "MGM",
-    "GSG"
+    " S ",
+    "SGS",
+    "GMG"
   ],
   "key": {
     "M": "spectrum:midnight_chip",
     "G": "minecraft:gunpowder",
-    "S": "spectrum:stratine_gem"
+    "S": "spectrum:stratine_fragments"
   },
   "result": {
     "id": "spectrum:threat_conflux",

@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.networking.v1.*;
@@ -33,8 +34,8 @@ public record PlayDivinityAppliedEffectsPayload() implements CustomPayload {
 		client.particleManager.addEmitter(player, SpectrumParticleTypes.DIVINITY, 30);
 		client.gameRenderer.showFloatingItem(SpectrumItems.DIVINATION_HEART.getDefaultStack());
 		client.world.playSound(null, player.getBlockPos(), SpectrumSoundEvents.FAILING_PLACED, SoundCategory.PLAYERS, 1.0F, 1.0F);
-		ParticleHelper.playParticleWithPatternAndVelocityClient(player.getWorld(), player.getPos(), SpectrumParticleTypes.WHITE_CRAFTING, VectorPattern.SIXTEEN, 0.4);
-		ParticleHelper.playParticleWithPatternAndVelocityClient(player.getWorld(), player.getPos(), SpectrumParticleTypes.RED_CRAFTING, VectorPattern.SIXTEEN, 0.4);
+		ParticleHelper.playParticleWithPatternAndVelocityClient(player.getWorld(), player.getPos(), ColoredCraftingParticleEffect.WHITE, VectorPattern.SIXTEEN, 0.4);
+		ParticleHelper.playParticleWithPatternAndVelocityClient(player.getWorld(), player.getPos(), ColoredCraftingParticleEffect.RED, VectorPattern.SIXTEEN, 0.4);
 	}
 	
 	@Override

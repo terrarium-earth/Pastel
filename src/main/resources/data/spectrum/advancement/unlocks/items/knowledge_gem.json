@@ -5,12 +5,6 @@
       "conditions": {
         "advancement_identifier": "spectrum:midgame/build_advanced_pedestal_structure"
       }
-    },
-    "entered_liquid_crystal": {
-      "trigger": "revelationary:advancement_gotten",
-      "conditions": {
-        "advancement_identifier": "spectrum:midgame/enter_liquid_crystal"
-      }
     }
   }
 }

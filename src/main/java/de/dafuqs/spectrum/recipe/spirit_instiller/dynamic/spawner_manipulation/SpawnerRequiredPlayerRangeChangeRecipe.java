@@ -19,6 +19,9 @@ public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe 
 	
 	@Override
 	public boolean canCraftWithBlockEntityTag(NbtComponent spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
+		if (spawnerBlockEntityNbt == null) {
+			return true;
+		}
 		if (spawnerBlockEntityNbt.contains("RequiredPlayerRange")) {
 			return spawnerBlockEntityNbt.copyNbt().getShort("RequiredPlayerRange") < MAX_DETECTION_RANGE;
 		}

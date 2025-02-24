@@ -61,7 +61,9 @@
       "consume_chance_per_second": 0.4
     }
   ],
-  "additional_recipe_manager_outputs": [
-    "spectrum:pure_coal"
+  "additional_recipe_manager_results": [
+    {
+      "id": "spectrum:pure_coal"
+    }
   ]
 }

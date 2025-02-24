@@ -12,6 +12,7 @@ import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.items.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
+import net.fabricmc.loader.api.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.*;
@@ -40,10 +41,16 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 		super.appendTooltip(stack, context, tooltip, type);
 		
+		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+			appendClientTooltips(stack, tooltip);
+		}
+	}
+	
+	@Environment(EnvType.CLIENT)
+	private static void appendClientTooltips(ItemStack stack, List<Text> tooltip) {
 		boolean unlockedColoring = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_COLORING);
 		boolean unlockedSlinging = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING);
 		if (unlockedColoring || unlockedSlinging) {
@@ -82,16 +89,10 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 	public Text getName(ItemStack stack) {
 		Text name = Text.translatable(this.getTranslationKey(stack));
 		
-		boolean unlockedColoring = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_COLORING);
-		boolean unlockedSlinging = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING);
-		if (unlockedColoring || unlockedSlinging) {
-			Optional<InkColor> color = getColor(stack);
-			if (color.isPresent()) {
-				InkColor inkColor = color.get();
-				name = inkColor.getColoredName().append(" ").append(name);
-			}
-		} else {
-			return super.getName();
+		Optional<InkColor> color = getColor(stack);
+		if (color.isPresent()) {
+			InkColor inkColor = color.get();
+			name = inkColor.getColoredName().append(" ").append(name);
 		}
 		
 		return name;
@@ -119,14 +120,14 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 		if (inkColor.isEmpty()) {
 			return false;
 		}
-		DyeColor dyeColor = inkColor.get().getDyeColor();
+		Optional<DyeColor> dyeColor = inkColor.get().getDyeColor();
 		
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		BlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof ColorableBlock colorableBlock) {
 			if (!colorableBlock.isColor(world, pos, dyeColor)) {
-				if (payBlockColorCost(context.getPlayer(), inkColor.get()) && colorableBlock.color(world, pos, dyeColor)) {
+				if (payBlockColorCost(context.getPlayer(), inkColor.get()) && colorableBlock.color(world, pos, dyeColor, context.getPlayer())) {
 					context.getWorld().playSound(null, context.getBlockPos(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				} else {
 					context.getWorld().playSound(null, context.getBlockPos(), SpectrumSoundEvents.USE_FAIL, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -150,7 +151,11 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 		}
 		
 		InkColor inkColor = optionalInkColor.get();
-		DyeColor dyeColor = inkColor.getDyeColor();
+		Optional<DyeColor> optionalDyeColor = inkColor.getDyeColor();
+		if (optionalDyeColor.isEmpty()) {
+			return false;
+		}
+		DyeColor dyeColor = optionalDyeColor.get();
 		
 		BlockState newBlockState = BlockVariantHelper.getCursedBlockColorVariant(context.getWorld(), context.getBlockPos(), dyeColor);
 		if (newBlockState.isAir()) {
@@ -175,9 +180,17 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 		if (player == null) {
 			return false;
 		}
-		return player.isCreative()
-				|| InkPowered.tryDrainEnergy(player, inkColor, BLOCK_COLOR_COST)
-				|| InventoryHelper.removeFromInventoryWithRemainders(player, PigmentItem.byColor(inkColor.getDyeColor()).getDefaultStack());
+		if (player.isCreative()) {
+			return true;
+		}
+		if (InkPowered.tryDrainEnergy(player, inkColor, BLOCK_COLOR_COST)) {
+			return true;
+		}
+		Optional<DyeColor> dyeColor = inkColor.getDyeColor();
+		if (dyeColor.isEmpty()) {
+			return false;
+		}
+		return InventoryHelper.removeFromInventoryWithRemainders(player, PigmentItem.byColor(inkColor).getDefaultStack());
 	}
 	
 	@Override
@@ -237,7 +250,7 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 			
 			if (color.isPresent()
 					&& payBlockColorCost(user, color.get())
-					&& EntityColorProcessorRegistry.colorEntity(entity, color.get().getDyeColor())) {
+					&& EntityColorProcessorRegistry.colorEntity(entity, color.get().getDyeColor(), entity instanceof PlayerEntity player ? player : null)) {
 				
 				entity.getWorld().playSoundFromEntity(null, entity, SoundEvents.ITEM_DYE_USE, SoundCategory.PLAYERS, 1.0F, 1.0F);
 				return ActionResult.success(world.isClient);
@@ -255,16 +268,22 @@ public class PaintbrushItem extends Item implements SignChangingItem {
 		player.playSound(SpectrumSoundEvents.USE_FAIL, 1.0F, 1.0F);
 		return false;
 	}
-
+	
+	// TODO: can this be moved to ColorableBlock / as a block color processor?
 	private boolean tryUseOnSign(World world, SignBlockEntity signBlockEntity, boolean front, PlayerEntity player, ItemStack stack) {
 		if (stack.isOf(SpectrumItems.PAINTBRUSH)) {
 			Optional<InkColor> color = getColor(stack);
 			if (color.isPresent()) {
 				InkColor inkColor = color.get();
-				DyeColor dyeColor = inkColor.getDyeColor();
+				Optional<DyeColor> dyeColor = inkColor.getDyeColor();
 
 				if (canColor(player) && payBlockColorCost(player, inkColor)) {
-					if (signBlockEntity.changeText((text) -> text.withColor(dyeColor), front)) {
+					if (signBlockEntity.changeText(signText -> {
+						if (dyeColor.isPresent()) {
+							return signText.withColor(dyeColor.get());
+						}
+						return signText;
+					}, front)) {
 						world.playSound(null, signBlockEntity.getPos(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						return true;
 					}

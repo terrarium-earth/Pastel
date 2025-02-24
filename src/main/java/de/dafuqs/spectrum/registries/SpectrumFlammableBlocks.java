@@ -1,10 +1,8 @@
 package de.dafuqs.spectrum.registries;
 
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.conditional.colored_tree.*;
-import de.dafuqs.spectrum.blocks.decoration.*;
-import de.dafuqs.spectrum.helpers.*;
 import net.fabricmc.fabric.api.registry.*;
-import net.minecraft.util.*;
 
 public class SpectrumFlammableBlocks {
 	
@@ -13,18 +11,18 @@ public class SpectrumFlammableBlocks {
 		// ignite odds, burn odds
 		FlammableBlockRegistry.getDefaultInstance().add(SpectrumBlocks.CLOVER, 60, 100);
 		
-		for (DyeColor dyeColor : SpectrumColorHelper.VANILLA_DYE_COLORS) {
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredLogBlock.byColor(dyeColor), 5, 5);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredWoodBlock.byColor(dyeColor), 5, 5);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredLeavesBlock.byColor(dyeColor), 30, 60);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredPlankBlock.byColor(dyeColor), 5, 20);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredSlabBlock.byColor(dyeColor), 5, 20);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredFenceBlock.byColor(dyeColor), 5, 20);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredFenceGateBlock.byColor(dyeColor), 5, 20);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredStairsBlock.byColor(dyeColor), 5, 20);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredSporeBlossomBlock.byColor(dyeColor), 60, 100);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredStrippedLogBlock.byColor(dyeColor), 5, 20);
-			FlammableBlockRegistry.getDefaultInstance().add(ColoredStrippedWoodBlock.byColor(dyeColor), 5, 20);
+		for (InkColor color : InkColors.all()) {
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredLogBlock.byColor(color), 5, 5);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredWoodBlock.byColor(color), 5, 5);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredLeavesBlock.byColor(color), 30, 60);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredPlankBlock.byColor(color), 5, 20);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredSlabBlock.byColor(color), 5, 20);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredFenceBlock.byColor(color), 5, 20);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredFenceGateBlock.byColor(color), 5, 20);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredStairsBlock.byColor(color), 5, 20);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredSporeBlossomBlock.byColor(color), 60, 100);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredStrippedLogBlock.byColor(color), 5, 20);
+			FlammableBlockRegistry.getDefaultInstance().add(ColoredStrippedWoodBlock.byColor(color), 5, 20);
 		}
 		
 		FlammableBlockRegistry.getDefaultInstance().add(SpectrumBlocks.VEGETAL_BLOCK, 30, 60);

@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.status_effects;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
@@ -22,7 +23,7 @@ public class AscensionStatusEffect extends StatusEffect {
 	@Override
 	public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
 		if (entity.getWorld().isClient) {
-			ParticleHelper.playParticleWithPatternAndVelocityClient(entity.getWorld(), entity.getPos(), SpectrumParticleTypes.WHITE_SPARKLE_RISING, VectorPattern.EIGHT, 0.2);
+			ParticleHelper.playParticleWithPatternAndVelocityClient(entity.getWorld(), entity.getPos(), ColoredSparkleRisingParticleEffect.WHITE, VectorPattern.EIGHT, 0.2);
 		} else if (applyDivinity) {
 			entity.addStatusEffect(new StatusEffectInstance(SpectrumStatusEffects.DIVINITY, MUSIC_DURATION_TICKS - MUSIC_INTRO_TICKS, DivinityStatusEffect.ASCENSION_AMPLIFIER));
 			return false;

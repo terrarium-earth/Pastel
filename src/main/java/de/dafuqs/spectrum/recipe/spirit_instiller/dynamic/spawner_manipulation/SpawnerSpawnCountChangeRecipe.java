@@ -18,6 +18,9 @@ public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public boolean canCraftWithBlockEntityTag(NbtComponent spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
+		if (spawnerBlockEntityNbt == null) {
+			return true;
+		}
 		if (spawnerBlockEntityNbt.contains("SpawnCount")) {
 			return spawnerBlockEntityNbt.copyNbt().getShort("SpawnCount") < MAX_SPAWN_COUNT;
 		}

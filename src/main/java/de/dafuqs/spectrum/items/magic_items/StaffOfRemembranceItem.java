@@ -7,14 +7,14 @@ import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.blocks.memory.*;
 import de.dafuqs.spectrum.compat.claims.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.tooltip.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
 import net.minecraft.text.*;
@@ -54,8 +54,8 @@ public class StaffOfRemembranceItem extends Item implements InkPowered, Prioriti
 		
 		if (!world.isClient && entity instanceof MobEntity mobEntity) {
 			if (turnEntityToMemory(user, mobEntity)) {
-				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, entity.getPos(), SpectrumParticleTypes.LIGHT_GRAY_SPARKLE_RISING, 10, Vec3d.ZERO, new Vec3d(0.2, 0.2, 0.2));
-				PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerWorld) world, entity.getPos(), SpectrumParticleTypes.LIGHT_GRAY_EXPLOSION, 1, Vec3d.ZERO);
+				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, entity.getPos(), ColoredSparkleRisingParticleEffect.LIGHT_GRAY, 10, Vec3d.ZERO, new Vec3d(0.2, 0.2, 0.2));
+				PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerWorld) world, entity.getPos(), ColoredExplosionParticleEffect.LIGHT_GRAY, 1, Vec3d.ZERO);
 				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SpectrumSoundEvents.RADIANCE_STAFF_PLACE, SoundCategory.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 			} else {
 				world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SpectrumSoundEvents.USE_FAIL, SoundCategory.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);

@@ -102,14 +102,14 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 	
 	public static void prime(ItemStack stack, World world, Vec3d pos, @Nullable Entity user) {
 		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SpectrumSoundEvents.INCANDESCENT_ARM, SoundCategory.PLAYERS, 2F, 0.9F);
-		stack.set(SpectrumDataComponentTypes.PIPE_BOMB, world.getTime());
+		stack.set(SpectrumDataComponentTypes.TIMESTAMP, world.getTime());
 		if (user instanceof PlayerEntity player) {
 			stack.set(DataComponentTypes.PROFILE, new ProfileComponent(player.getGameProfile()));
 		}
 	}
 	
 	public static boolean isPrimed(ItemStack stack) {
-		return stack.get(SpectrumDataComponentTypes.PIPE_BOMB) != null;
+		return stack.get(SpectrumDataComponentTypes.TIMESTAMP) != null;
 	}
 	
 	public static boolean isPrimeTimeElapsed(World world, ItemStack stack) {
@@ -121,8 +121,8 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 	}
 	
 	private static Optional<Long> getPrimeTime(ItemStack stack) {
-		if (stack.contains(SpectrumDataComponentTypes.PIPE_BOMB)) {
-			return Optional.of(stack.get(SpectrumDataComponentTypes.PIPE_BOMB));
+		if (stack.contains(SpectrumDataComponentTypes.TIMESTAMP)) {
+			return Optional.of(stack.get(SpectrumDataComponentTypes.TIMESTAMP));
 		}
 		return Optional.empty();
 	}

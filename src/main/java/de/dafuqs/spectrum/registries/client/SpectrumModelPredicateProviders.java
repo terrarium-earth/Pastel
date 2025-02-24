@@ -18,8 +18,6 @@ import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
 
-import java.util.*;
-
 // Vanilla models see: ModelPredicateProviderRegistry
 public class SpectrumModelPredicateProviders {
 	
@@ -35,7 +33,7 @@ public class SpectrumModelPredicateProviders {
 		registerAnimatedWandPredicates(SpectrumItems.STAFF_OF_REMEMBRANCE);
 		registerKnowledgeDropPredicates(SpectrumItems.KNOWLEDGE_GEM);
 		registerAshenCircletPredicates(SpectrumItems.ASHEN_CIRCLET);
-		registerInkColorPredicate(SpectrumItems.INK_FLASK);
+		registerNullableInkColorPredicate(SpectrumItems.INK_FLASK);
 		registerInkFillStateItemPredicate(SpectrumItems.INK_FLASK);
 		registerMoonPhasePredicates(SpectrumItems.CRESCENT_CLOCK);
 		registerActivatableItemPredicate(SpectrumItems.DREAMFLAYER);
@@ -74,12 +72,12 @@ public class SpectrumModelPredicateProviders {
 		registerPresentPredicates(SpectrumBlocks.PRESENT.asItem());
 		registerMysteriousLocketPredicates(SpectrumItems.MYSTERIOUS_LOCKET);
 		registerStructureCompassPredicates(SpectrumItems.MYSTERIOUS_COMPASS);
-		registerNullableDyeColorPredicate(SpectrumBlocks.CRYSTALLARIEUM.asItem());
+		registerNullableInkColorPredicate(SpectrumBlocks.CRYSTALLARIEUM.asItem());
 		
 		registerPipeBombPredicates(SpectrumItems.PIPE_BOMB);
 	}
 	
-	private static void registerNullableDyeColorPredicate(Item item) {
+	private static void registerNullableInkColorPredicate(Item item) {
 		ModelPredicateProviderRegistry.register(item, Identifier.of("color"), (stack, clientWorld, entity, i) -> {
 			var color = stack.get(SpectrumDataComponentTypes.INK_COLOR);
 			return color == null ? -1 : color.getColorInt();
@@ -257,13 +255,6 @@ public class SpectrumModelPredicateProviders {
 	private static void registerKnowledgeDropPredicates(Item item) {
 		ModelPredicateProviderRegistry.register(item, Identifier.of("stored_experience_10000"), (stack, world, entity, i) ->
 				ExperienceStorageItem.getStoredExperience(stack) / 10000F);
-	}
-	
-	private static void registerInkColorPredicate(Item item) {
-		ModelPredicateProviderRegistry.register(item, Identifier.of("color"), (stack, world, entity, i) ->
-				Optional.ofNullable(SpectrumItems.INK_FLASK.getEnergyStorage(stack).getStoredColor())
-						.map(c -> (1F + c.getDyeColor().getId()) / 100F)
-						.orElse(0F));
 	}
 	
 	private static void registerInkFillStateItemPredicate(Item item) {

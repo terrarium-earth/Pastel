@@ -22,24 +22,24 @@
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/effulgent/resplendent_block",
+      "recipe_id": "spectrum:pedestal/tier1/resplendent/resplendent_block",
       "text": "book.spectrum.guidebook.resplendent_deco.page1.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/effulgent/resplendent_bed"
+      "recipe_id": "spectrum:pedestal/tier1/resplendent/resplendent_bed"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/effulgent/resplendent_cushion"
+      "recipe_id": "spectrum:pedestal/tier1/resplendent/resplendent_cushion"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/effulgent/resplendent_carpet_from_feathers"
+      "recipe_id": "spectrum:pedestal/tier1/resplendent/resplendent_carpet_from_feathers"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/effulgent/resplendent_carpet_from_blocks"
+      "recipe_id": "spectrum:pedestal/tier1/resplendent/resplendent_carpet_from_blocks"
     }
   ]
 }

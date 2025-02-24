@@ -181,28 +181,28 @@ public class PresentBlock extends BlockWithEntity {
 			}
 		}
 	}
-
-	public static void spawnParticles(ServerWorld world, BlockPos pos, Map<DyeColor, Integer> colors) {
+	
+	public static void spawnParticles(ServerWorld world, BlockPos pos, Map<Integer, Integer> colors) {
 		PlayPresentOpeningParticlesPayload.playPresentOpeningParticles(world, pos, colors);
 	}
 	
-	public static void spawnParticles(ClientWorld world, BlockPos pos, Map<DyeColor, Integer> colors) {
+	public static void spawnParticles(ClientWorld world, BlockPos pos, Map<Integer, Integer> colors) {
 		if (colors.isEmpty()) {
-			DyeColor randomColor = DyeColor.byId(world.random.nextInt(DyeColor.values().length));
+			int randomColor = DyeColor.byId(world.random.nextInt(DyeColor.values().length)).getEntityColor();
 			spawnParticles(world, pos, randomColor, 15);
 		} else {
-			for (Map.Entry<DyeColor, Integer> color : colors.entrySet()) {
+			for (Map.Entry<Integer, Integer> color : colors.entrySet()) {
 				spawnParticles(world, pos, color.getKey(), color.getValue() * 10);
 			}
 		}
 	}
 	
-	private static void spawnParticles(ClientWorld world, BlockPos pos, DyeColor color, int amount) {
+	private static void spawnParticles(ClientWorld world, BlockPos pos, int color, int amount) {
 		double posX = pos.getX() + 0.5;
 		double posY = pos.getY() + 0.25;
 		double posZ = pos.getZ() + 0.5;
 		Random random = world.random;
-		Vector3f colorVec = SpectrumColorHelper.getRGBVec(color);
+		Vector3f colorVec = SpectrumColorHelper.colorIntToVec(color);
 		for (int i = 0; i < amount; i++) {
 			double randX = 0.35 - random.nextFloat() * 0.7;
 			double randY = random.nextFloat() * 0.7;

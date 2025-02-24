@@ -12,6 +12,7 @@ import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.items.magic_items.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.enchanter.*;
 import de.dafuqs.spectrum.registries.*;
@@ -99,14 +100,14 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 					float randomX = 0.2F + world.getRandom().nextFloat() * 0.6F;
 					float randomZ = 0.2F + world.getRandom().nextFloat() * 0.6F;
 					float randomY = -0.1F + world.getRandom().nextFloat() * 0.4F;
-					world.addParticle(SpectrumParticleTypes.LIME_SPARKLE_RISING, blockPos.getX() + randomX, blockPos.getY() + 2.5 + randomY, blockPos.getZ() + randomZ, 0.0D, -0.1D, 0.0D);
+					world.addParticle(ColoredCraftingParticleEffect.LIME, blockPos.getX() + randomX, blockPos.getY() + 2.5 + randomY, blockPos.getZ() + randomZ, 0.0D, -0.1D, 0.0D);
 				}
 			}
 		} else if (enchanterBlockEntity.currentItemProcessingTime > -1) {
 			float randomX = 0.2F + world.getRandom().nextFloat() * 0.6F;
 			float randomZ = 0.2F + world.getRandom().nextFloat() * 0.6F;
 			float randomY = -0.2F + world.getRandom().nextFloat() * 0.4F;
-			world.addParticle(SpectrumParticleTypes.LIME_SPARKLE_RISING, blockPos.getX() + randomX, blockPos.getY() + 2.5 + randomY, blockPos.getZ() + randomZ, 0.0D, -0.1D, 0.0D);
+			world.addParticle(ColoredCraftingParticleEffect.LIME, blockPos.getX() + randomX, blockPos.getY() + 2.5 + randomY, blockPos.getZ() + randomZ, 0.0D, -0.1D, 0.0D);
 			
 			if (world.getTime() % 12 == 0) {
 				world.playSound(null, enchanterBlockEntity.pos, SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 0.8F * SpectrumCommon.CONFIG.BlockSoundVolume, 0.8F + world.random.nextFloat() * 0.4F);
@@ -277,12 +278,14 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	}
 	
 	public static void playCraftingFinishedEffects(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
-		if (enchanterBlockEntity.world == null) return;
-		enchanterBlockEntity.world.playSound(null, enchanterBlockEntity.pos, SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		if (enchanterBlockEntity.world == null) {
+			return;
+		}
+		enchanterBlockEntity.world.playSound(null, enchanterBlockEntity.pos, SpectrumSoundEvents.ENCHANTER_FINISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) enchanterBlockEntity.getWorld(),
 				new Vec3d(enchanterBlockEntity.pos.getX() + 0.5D, enchanterBlockEntity.pos.getY() + 0.5, enchanterBlockEntity.pos.getZ() + 0.5D),
-				SpectrumParticleTypes.LIME_SPARKLE_RISING, 75, new Vec3d(0.5D, 0.5D, 0.5D),
+				ColoredSparkleRisingParticleEffect.LIME, 75, new Vec3d(0.5D, 0.5D, 0.5D),
 				new Vec3d(0.1D, -0.1D, 0.1D));
 	}
 	
@@ -421,7 +424,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			var anvilCost = enchantment.getAnvilCost();
 			var rarityCost = rarityMults[Math.min(anvilCost, rarityMults.length - 1)] * anvilCost;
 			
-			float levelCost = level + ((float) level / enchantment.getMaxLevel()); // the higher the level, the pricier. But not as bad for enchantments with high max levels
+			float levelCost = level * Math.min(1, (float) level / enchantment.getMaxLevel()); // the higher the level, the pricier. But not as bad for enchantments with high max levels
 			float specialMulti = entry.isIn(EnchantmentTags.TREASURE) ? 2.0F : entry.isIn(EnchantmentTags.CURSE) ? 1.5F : 1.0F;
 			float selectionAvailabilityMod = (entry.isIn(EnchantmentTags.IN_ENCHANTING_TABLE) ? 0.5F : 0.75F) + (entry.isIn(EnchantmentTags.TRADEABLE) ? 0.5F : 0.75F);
 			float enchantabilityMod = (4.0F / (2 + enchantability)) * 4.0F;
@@ -718,7 +721,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 						// There was enough experience drained from the knowledge gem that the visual changed
 						// To display the updated knowledge gem size clientside the inventory has to be synched
 						// to the clients for rendering purposes
-						PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(null, (ServerWorld) world, new Vec3d(this.pos.getX() + 0.5, this.pos.getY() + 2.5, this.pos.getZ() + 0.5), SpectrumParticleTypes.LIME_CRAFTING, VectorPattern.SIXTEEN, 0.05F);
+						PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(null, (ServerWorld) world, new Vec3d(this.pos.getX() + 0.5, this.pos.getY() + 2.5, this.pos.getZ() + 0.5), ColoredCraftingParticleEffect.LIME, VectorPattern.SIXTEEN, 0.05F);
 						this.updateInClientWorld();
 					}
 				}

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.compat.claims.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -74,7 +74,7 @@ public class BlockBreakerBlock extends RedstoneInteractionBlock implements Block
 		
 		float hardness = blockState.getHardness(world, breakingPos);
 		if (hardness < 0 || hardness > 50) {
-			world.playSound(null, breakerPos, SoundEvents.BLOCK_IRON_TRAPDOOR_OPEN, SoundCategory.BLOCKS, 0.15f, (2.0f + world.random.nextFloat()));
+			world.playSound(null, breakerPos, SpectrumSoundEvents.REDSTONE_MECHANISM_BREAK_BLOCK, SoundCategory.BLOCKS, 0.15f, (2.0f + world.random.nextFloat()));
 			return;
 		}
 		

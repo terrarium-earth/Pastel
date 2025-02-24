@@ -35,7 +35,7 @@
       "item": {
         "item": "minecraft:redstone"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page2.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.redstone.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -54,7 +54,7 @@
       "item": {
         "item": "minecraft:glowstone_dust"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page3.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.glowstone_dust.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -92,7 +92,7 @@
       "item": {
         "item": "minecraft:gunpowder"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page4.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.gunpowder.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -103,7 +103,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_vanilla/dragon_breath"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page5.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.dragon_breath.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -133,21 +133,21 @@
       "item": {
         "item": "spectrum:topaz_powder"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page6.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.topaz_powder.text"
     },
     {
       "type": "modonomicon:spotlight",
       "item": {
         "item": "spectrum:amethyst_powder"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page7.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.amethyst_powder.text"
     },
     {
       "type": "modonomicon:spotlight",
       "item": {
         "item": "spectrum:citrine_powder"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page8.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.citrine_powder.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -165,14 +165,14 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_moonstone"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page10.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.moonstone_powder.text"
     },
     {
       "type": "modonomicon:spotlight",
       "item": {
         "item": "spectrum:shimmerstone_gem"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page11.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.shimmerstone_gem.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -183,7 +183,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_quitoxic_reeds"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page12.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.quitoxic_powder.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -194,7 +194,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_stratine"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page13.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.stratine_fragments.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -205,7 +205,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_paltaeria"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page14.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.paltaeria_fragments.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -216,7 +216,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_stardust"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page15.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.stardust.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -227,7 +227,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_star_fragment"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page16.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.star_fragment.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -238,7 +238,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_storm_stone"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page17.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.storm_stone.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -249,7 +249,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_azurite"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page18.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.raw_azurite.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -260,7 +260,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_four_leaf_clover"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page19.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.four_leaf_clover.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -271,7 +271,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:collect_vegetal"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page20.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.vegetal.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -293,7 +293,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/collect_midnight_chip"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page22.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.midnight_chip.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -304,7 +304,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/harvest_moonstruck_nectar"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page23.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.moonstruck_nectar.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -315,7 +315,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:midgame/break_decayed_bedrock"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page24.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.bedrock_dust.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -326,7 +326,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_bismuth"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page25.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.bismuth_flake.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -337,7 +337,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_malachite"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page26.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.raw_malachite.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -346,9 +346,9 @@
       },
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "spectrum:pluck_resplendent_feather"
+        "advancement_id": "spectrum:hidden/collect_raw_bloodstone"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page27.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.raw_bloodstone.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -360,7 +360,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_prickly_bayleaf"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page28.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.prickly_bayleaf.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -372,7 +372,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_jadeite"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page29.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.jadeite_petals.text"
     },
     {
       "type": "modonomicon:spotlight",
@@ -396,7 +396,7 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:break_cracked_dragonbone"
       },
-      "text": "book.spectrum.guidebook.potion_workshop_reagents.page30.text"
+      "text": "book.spectrum.guidebook.potion_workshop_reagents.bone_ash.text"
     },
     {
       "type": "modonomicon:spotlight",

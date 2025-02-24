@@ -47,7 +47,7 @@ public class SpectrumDataComponentTypes {
 	public static final ComponentType<StatusEffectInstance> OIL_EFFECT = register("oil_effect", builder -> builder.codec(StatusEffectInstance.CODEC).packetCodec(StatusEffectInstance.PACKET_CODEC));
 	public static final ComponentType<Float> OVERCHARGED = register("overcharged", builder -> builder.codec(Codec.FLOAT).packetCodec(PacketCodecs.FLOAT));
 	public static final ComponentType<PairedItemComponent> PAIRED_ITEM = register("paired_item", builder -> builder.codec(PairedItemComponent.CODEC).packetCodec(PairedItemComponent.PACKET_CODEC));
-	public static final ComponentType<Long> PIPE_BOMB = register("pipe_bomb", builder -> builder.codec(Codec.LONG).packetCodec(PacketCodecs.VAR_LONG));
+	public static final ComponentType<Long> TIMESTAMP = register("timestamp", builder -> builder.codec(Codec.LONG).packetCodec(PacketCodecs.VAR_LONG));
 	public static final ComponentType<ShootingStarComponent> SHOOTING_STAR = register("shooting_star", builder -> builder.codec(ShootingStarComponent.CODEC).packetCodec(ShootingStarComponent.PACKET_CODEC));
 	public static final ComponentType<UUID> SLOT_RESERVER = register("slot_eserver", builder -> builder.codec(Uuids.CODEC).packetCodec(Uuids.PACKET_CODEC));
 	public static final ComponentType<Unit> SOCKETED = register("socketed", builder -> builder.codec(Codec.unit(Unit.INSTANCE)).packetCodec(PacketCodec.unit(Unit.INSTANCE)));

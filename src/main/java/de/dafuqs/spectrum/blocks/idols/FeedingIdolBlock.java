@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.blocks.idols;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.helpers.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.tooltip.*;
 import net.minecraft.particle.*;
 import net.minecraft.server.world.*;
 import net.minecraft.text.*;
@@ -56,7 +56,7 @@ public class FeedingIdolBlock extends IdolBlock {
 						InWorldInteractionHelper.decrementAndSpawnRemainder(itemEntity, 1);
 						
 						animalEntity.setLoveTicks(LOVE_TICKS);
-						world.sendEntityStatus(animalEntity, (byte) 18);
+						world.sendEntityStatus(animalEntity, EntityStatuses.ADD_BREEDING_PARTICLES);
 					}
 				}
 			}

@@ -13,6 +13,11 @@
     "spectrum:pure_echo_block",
     "spectrum:pure_glowstone_block",
     "spectrum:pure_prismarine_block",
+
+    {
+      "id": "spectrum:pure_zinc_block",
+      "required": false
+    },
     {
       "id": "spectrum:pure_certus_quartz_block",
       "required": false
@@ -21,6 +26,7 @@
       "id": "spectrum:pure_fluix_block",
       "required": false
     },
+
     {
       "id": "spectrum:pure_globette_block",
       "required": false

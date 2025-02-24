@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.explosion;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.explosion.modifier.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.*;
@@ -33,7 +34,7 @@ public class ExplosionModifiers {
 	// Damage source changers
 	public static final ExplosionModifier FIRE = registerModifier("fire", new FireModifier(DAMAGE_TYPE, ParticleTypes.FLAME, 0xaff3eb));
 	public static final ExplosionModifier PRIMORDIAL_FIRE = registerModifier("primordial_fire", new PrimordialFireModifier(DAMAGE_TYPE, SpectrumParticleTypes.PRIMORDIAL_FLAME_SMALL, 0x76254d));
-	public static final ExplosionModifier LIGHTNING = registerModifier("lightning_damage", new DamageChangingModifier(DAMAGE_TYPE, SpectrumParticleTypes.WHITE_EXPLOSION, 0xf0f24d) {
+	public static final ExplosionModifier LIGHTNING = registerModifier("lightning_damage", new DamageChangingModifier(DAMAGE_TYPE, ColoredExplosionParticleEffect.YELLOW, 0xf0f24d) {
 		@Override
 		public Optional<DamageSource> getDamageSource(@Nullable LivingEntity owner) {
 			if (owner == null) {
@@ -44,7 +45,7 @@ public class ExplosionModifiers {
 	});
 	public static final ExplosionModifier MAGIC = registerModifier(
 			"magic_damage",
-			new DamageChangingModifier(DAMAGE_TYPE, SpectrumParticleTypes.PURPLE_CRAFTING, 0x5433a5) {
+			new DamageChangingModifier(DAMAGE_TYPE, ColoredCraftingParticleEffect.PURPLE, 0x5433a5) {
 		@Override
 		public Optional<DamageSource> getDamageSource(@Nullable LivingEntity owner) {
 			if (owner == null) {

@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.revelationary.api.revelations.*;
+import de.dafuqs.spectrum.api.energy.color.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
@@ -14,13 +15,13 @@ public class ColoredWoodBlock extends PillarBlock implements RevelationAware, Co
 
 	public static final MapCodec<ColoredWoodBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			createSettingsCodec(),
-			DyeColor.CODEC.fieldOf("color").forGetter(ColoredWoodBlock::getColor)
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredWoodBlock::getColor)
 	).apply(instance, ColoredWoodBlock::new));
-
-	private static final Map<DyeColor, ColoredWoodBlock> WOOD = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
 	
-	public ColoredWoodBlock(Settings settings, DyeColor color) {
+	private static final Map<InkColor, ColoredWoodBlock> WOOD = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredWoodBlock(Settings settings, InkColor color) {
 		super(settings);
 		this.color = color;
 		WOOD.put(color, this);
@@ -48,11 +49,11 @@ public class ColoredWoodBlock extends PillarBlock implements RevelationAware, Co
 	}
 	
 	@Override
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredWoodBlock byColor(DyeColor color) {
+	public static ColoredWoodBlock byColor(InkColor color) {
 		return WOOD.get(color);
 	}
 	

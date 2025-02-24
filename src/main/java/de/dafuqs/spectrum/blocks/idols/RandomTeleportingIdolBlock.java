@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.blocks.idols;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.tooltip.*;
 import net.minecraft.particle.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
@@ -53,7 +53,7 @@ public class RandomTeleportingIdolBlock extends IdolBlock {
 			double boundingBoxY = entity.getBoundingBox().getLengthY(); // bouncy
 			if (entity instanceof ServerPlayerEntity serverPlayerEntity) {
 				serverPlayerEntity.teleport((ServerWorld) serverPlayerEntity.getWorld(), mutable.getX() + 0.5, mutable.getY() + boundingBoxY, mutable.getZ() + 0.5, serverPlayerEntity.getYaw(), serverPlayerEntity.getPitch());
-				world.sendEntityStatus(serverPlayerEntity, (byte) 46); // particles
+				world.sendEntityStatus(serverPlayerEntity, EntityStatuses.ADD_BREEDING_PARTICLES);
 				return true;
 			} else if (entity instanceof LivingEntity livingEntity) {
 				boolean success = livingEntity.teleport(mutable.getX() + 0.5, mutable.getY() + boundingBoxY, mutable.getZ() + 0.5, true);

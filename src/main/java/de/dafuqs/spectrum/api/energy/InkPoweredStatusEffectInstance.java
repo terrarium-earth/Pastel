@@ -81,8 +81,16 @@ public class InkPoweredStatusEffectInstance {
 				}
 				
 				StatusEffectInstance effect = entry.getStatusEffectInstance();
+				if (effect == null) { // serialization error or removed effect
+					continue;
+				}
+				
 				InkCost cost = entry.getInkCost();
 				
+				if (effect == null) {
+					tooltip.add(Text.translatable("item.spectrum.potion.tooltip.invalid"));
+					continue;
+				}
 				MutableText mutableText = Text.translatable(effect.getTranslationKey());
 				if (effect.getAmplifier() > 0) {
 					mutableText = Text.translatable("potion.withAmplifier", mutableText, Text.translatable("potion.potency." + effect.getAmplifier()));

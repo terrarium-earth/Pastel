@@ -41,8 +41,10 @@
       "consume_chance_per_second": 0.04
     }
   ],
-  "additional_recipe_manager_outputs": [
-    "spectrum:refined_malachite"
+  "additional_recipe_manager_results": [
+    {
+      "id": "spectrum:pure_malachite"
+    }
   ],
   "required_advancement": "spectrum:lategame/collect_malachite"
 }

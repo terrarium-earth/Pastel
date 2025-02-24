@@ -16,12 +16,12 @@
   ],
   "key": {
     "P": "spectrum:paltaeria_gem",
-    "S": "spectrum:refined_bloodstone",
+    "S": "spectrum:pure_bloodstone",
     "R": "spectrum:resonance_shard"
   },
   "result": {
     "id": "spectrum:bloodstone_glass_ampoule",
     "count": 32
   },
-  "required_advancement": "spectrum:unlocks/items/glass_ampoules"
+  "required_advancement": "spectrum:unlocks/ampoules/pure_bloodstone_ampoule"
 }

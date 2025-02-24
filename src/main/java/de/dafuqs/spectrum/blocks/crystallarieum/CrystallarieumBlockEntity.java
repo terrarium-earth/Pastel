@@ -6,7 +6,7 @@ import de.dafuqs.spectrum.api.energy.storage.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.crystallarieum.*;
 import de.dafuqs.spectrum.registries.*;
@@ -62,7 +62,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	@SuppressWarnings("unused")
     public static void clientTick(@NotNull World world, BlockPos blockPos, BlockState blockState, CrystallarieumBlockEntity crystallarieum) {
 		if (crystallarieum.canWork && crystallarieum.currentRecipe != null) {
-			ParticleEffect particleEffect = SpectrumParticleTypes.getSparkleRisingParticle(crystallarieum.currentRecipe.value().getInkColor().getDyeColor());
+			ParticleEffect particleEffect = ColoredSparkleRisingParticleEffect.of(crystallarieum.currentRecipe.value().getInkColor().getColorInt());
 			
 			int amount = 1 + crystallarieum.currentRecipe.value().getInkPerSecond();
 			if (Support.getIntFromDecimalWithChance(amount / 80.0, world.random) > 0) {

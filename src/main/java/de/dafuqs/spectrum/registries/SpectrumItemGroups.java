@@ -552,19 +552,19 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.SMALL_MALACHITE_BUD);
 				entries.add(SpectrumBlocks.LARGE_MALACHITE_BUD);
 				entries.add(SpectrumBlocks.MALACHITE_CLUSTER);
-				entries.add(SpectrumItems.REFINED_MALACHITE);
+				entries.add(SpectrumItems.PURE_MALACHITE);
 				
 				entries.add(SpectrumItems.RAW_AZURITE);
 				entries.add(SpectrumBlocks.SMALL_AZURITE_BUD);
 				entries.add(SpectrumBlocks.LARGE_AZURITE_BUD);
 				entries.add(SpectrumBlocks.AZURITE_CLUSTER);
-				entries.add(SpectrumItems.REFINED_AZURITE);
+				entries.add(SpectrumItems.PURE_AZURITE);
 				
 				entries.add(SpectrumItems.RAW_BLOODSTONE);
 				entries.add(SpectrumBlocks.SMALL_BLOODSTONE_BUD);
 				entries.add(SpectrumBlocks.LARGE_BLOODSTONE_BUD);
 				entries.add(SpectrumBlocks.BLOODSTONE_CLUSTER);
-				entries.add(SpectrumItems.REFINED_BLOODSTONE);
+				entries.add(SpectrumItems.PURE_BLOODSTONE);
 				
 				entries.add(SpectrumItems.FROSTBITE_ESSENCE);
 				entries.add(SpectrumBlocks.FROSTBITE_CRYSTAL);
@@ -967,9 +967,9 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.SLATE_NOXWOOD_BUTTON);
 				entries.add(SpectrumBlocks.SLATE_NOXWOOD_PILLAR);
 				entries.add(SpectrumBlocks.SLATE_NOXWOOD_AMPHORA);
-				entries.add(SpectrumBlocks.SLATE_NOXWOOD_LAMP);
-				entries.add(SpectrumBlocks.SLATE_NOXWOOD_LIGHT);
 				entries.add(SpectrumBlocks.SLATE_NOXWOOD_LANTERN);
+				entries.add(SpectrumBlocks.SLATE_NOXWOOD_LIGHT);
+				entries.add(SpectrumBlocks.SLATE_NOXWOOD_LAMP);
 				entries.add(SpectrumBlocks.EBONY_NOXSHROOM);
 				entries.add(SpectrumBlocks.EBONY_NOXCAP_BLOCK);
 				entries.add(SpectrumBlocks.EBONY_NOXCAP_STEM);
@@ -988,9 +988,9 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.EBONY_NOXWOOD_BUTTON);
 				entries.add(SpectrumBlocks.EBONY_NOXWOOD_PILLAR);
 				entries.add(SpectrumBlocks.EBONY_NOXWOOD_AMPHORA);
-				entries.add(SpectrumBlocks.EBONY_NOXWOOD_LAMP);
-				entries.add(SpectrumBlocks.EBONY_NOXWOOD_LIGHT);
 				entries.add(SpectrumBlocks.EBONY_NOXWOOD_LANTERN);
+				entries.add(SpectrumBlocks.EBONY_NOXWOOD_LIGHT);
+				entries.add(SpectrumBlocks.EBONY_NOXWOOD_LAMP);
 				entries.add(SpectrumBlocks.IVORY_NOXSHROOM);
 				entries.add(SpectrumBlocks.IVORY_NOXCAP_BLOCK);
 				entries.add(SpectrumBlocks.IVORY_NOXCAP_STEM);
@@ -1009,9 +1009,9 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.IVORY_NOXWOOD_BUTTON);
 				entries.add(SpectrumBlocks.IVORY_NOXWOOD_PILLAR);
 				entries.add(SpectrumBlocks.IVORY_NOXWOOD_AMPHORA);
-				entries.add(SpectrumBlocks.IVORY_NOXWOOD_LAMP);
-				entries.add(SpectrumBlocks.IVORY_NOXWOOD_LIGHT);
 				entries.add(SpectrumBlocks.IVORY_NOXWOOD_LANTERN);
+				entries.add(SpectrumBlocks.IVORY_NOXWOOD_LIGHT);
+				entries.add(SpectrumBlocks.IVORY_NOXWOOD_LAMP);
 				entries.add(SpectrumBlocks.CHESTNUT_NOXSHROOM);
 				entries.add(SpectrumBlocks.CHESTNUT_NOXCAP_BLOCK);
 				entries.add(SpectrumBlocks.CHESTNUT_NOXCAP_STEM);
@@ -1030,9 +1030,9 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.CHESTNUT_NOXWOOD_BUTTON);
 				entries.add(SpectrumBlocks.CHESTNUT_NOXWOOD_PILLAR);
 				entries.add(SpectrumBlocks.CHESTNUT_NOXWOOD_AMPHORA);
-				entries.add(SpectrumBlocks.CHESTNUT_NOXWOOD_LAMP);
-				entries.add(SpectrumBlocks.CHESTNUT_NOXWOOD_LIGHT);
 				entries.add(SpectrumBlocks.CHESTNUT_NOXWOOD_LANTERN);
+				entries.add(SpectrumBlocks.CHESTNUT_NOXWOOD_LIGHT);
+				entries.add(SpectrumBlocks.CHESTNUT_NOXWOOD_LAMP);
 				
 				entries.add(SpectrumBlocks.WEEPING_GALA_SPRIG);
 				entries.add(SpectrumBlocks.WEEPING_GALA_LEAVES);
@@ -1062,7 +1062,6 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.SMALL_PURPLE_DRAGONJAG);
 				entries.add(SpectrumBlocks.SMALL_BLACK_DRAGONJAG);
 				entries.add(SpectrumBlocks.BRISTLE_SPROUTS);
-				entries.add(SpectrumBlocks.DOOMBLOOM);
 				entries.add(SpectrumBlocks.SNAPPING_IVY);
 				entries.add(SpectrumBlocks.SWEET_PEA);
 				entries.add(SpectrumBlocks.APRICOTTI);
@@ -1514,11 +1513,11 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumItems.PRIMORDIAL_LIGHTER);
 				
 				entries.add(SpectrumItems.CONNECTION_NODE_CRYSTAL);
+				entries.add(SpectrumItems.STORAGE_NODE_CRYSTAL);
 				entries.add(SpectrumItems.PROVIDER_NODE_CRYSTAL);
 				entries.add(SpectrumItems.SENDER_NODE_CRYSTAL);
-				entries.add(SpectrumItems.STORAGE_NODE_CRYSTAL);
-				entries.add(SpectrumItems.BUFFER_NODE_CRYSTAL);
 				entries.add(SpectrumItems.GATHER_NODE_CRYSTAL);
+				entries.add(SpectrumItems.BUFFER_NODE_CRYSTAL);
 				
 				entries.add(SpectrumBlocks.DOWNSTONE);
 				entries.add(SpectrumBlocks.PRESERVATION_STONE);

@@ -53,10 +53,9 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		this.itemAndExperienceEventQueue = new ItemAndExperienceEventQueue(new BlockPositionSource(this.pos), RANGE, this);
 		this.filterItems = DefaultedList.ofSize(ITEM_FILTER_SLOT_COUNT, ItemVariant.blank());
 	}
-
+	
 	@SuppressWarnings("unused")
-    public static void tick(@NotNull World world, BlockPos pos, BlockState state, BlackHoleChestBlockEntity chest) {
-		chest.updateFullState();
+	public static void tick(@NotNull World world, BlockPos pos, BlockState state, BlackHoleChestBlockEntity chest) {
 		chest.age++;
 
 		if (chest.isOpen) {
@@ -112,11 +111,14 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 			interpTicks = 0;
 		}
 	}
-
-	public void updateFullState() {
-		if (world != null && !world.isClient) {
+	
+	public void updateFullState(boolean force) {
+		if (world != null && !world.isClient()) {
+			var wasFull = isFull;
 			isFull = isFull();
-			BlackHoleChestStatusUpdatePayload.sendBlackHoleChestUpdate(this);
+			if (force || wasFull != isFull) {
+				BlackHoleChestStatusUpdatePayload.sendBlackHoleChestUpdate(this);
+			}
 		}
 	}
 
@@ -211,6 +213,12 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
 		return new BlackHoleChestScreenHandler(syncId, playerInventory, this, propertyDelegate, makeExtendedData());
+	}
+	
+	@Override
+	protected void onInvOpenOrClose(World world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+		super.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
+		updateFullState(true);
 	}
 	
 	@Override
@@ -360,7 +368,29 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	public boolean canExtract(int slot, ItemStack stack, Direction dir) {
 		return true;
 	}
-
+	
+	@Override
+	public void setStack(int slot, ItemStack stack) {
+		super.setStack(slot, stack);
+		updateFullState(false);
+	}
+	
+	@Override
+	public ItemStack removeStack(int slot, int amount) {
+		var stack = super.removeStack(slot, amount);
+		if (!stack.isEmpty())
+			updateFullState(false);
+		return stack;
+	}
+	
+	@Override
+	public ItemStack removeStack(int slot) {
+		var stack = super.removeStack(slot);
+		if (!stack.isEmpty())
+			updateFullState(false);
+		return stack;
+	}
+	
 	public enum State {
 		OPEN_INACTIVE,
 		OPEN_ACTIVE,

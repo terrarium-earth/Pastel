@@ -23,6 +23,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.*;
 import net.fabricmc.fabric.api.resource.*;
 import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.fabricmc.fabric.api.transfer.v1.item.*;
+import net.fabricmc.fabric.api.transfer.v1.storage.*;
 import net.fabricmc.loader.api.*;
 import net.minecraft.client.*;
 import net.minecraft.item.*;
@@ -243,6 +244,8 @@ public class SpectrumCommon implements ModInitializer {
 		logInfo("Registering Tree Decorator Types...");
 		SpectrumTreeDecoratorTypes.register();
 		
+		//noinspection
+		ItemStorage.SIDED.registerForBlockEntity((be, d) -> Storage.empty(), SpectrumBlockEntities.HEARTBOUND_CHEST);
 		//noinspection
 		ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.storage, SpectrumBlockEntities.BOTTOMLESS_BUNDLE);
 		//noinspection

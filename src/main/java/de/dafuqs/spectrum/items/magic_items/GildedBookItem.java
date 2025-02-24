@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.items.magic_items;
 
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.tooltip.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 
@@ -11,6 +11,11 @@ public class GildedBookItem extends BookItem {
 	
 	public GildedBookItem(Settings settings) {
 		super(settings);
+	}
+	
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.*;
@@ -58,7 +58,7 @@ public class PlayerDetectorBlock extends DetectorBlock implements BlockEntityPro
 	
 	@Override
 	protected void updateState(BlockState state, World world, BlockPos pos) {
-		List<PlayerEntity> players = world.getEntitiesByType(EntityType.PLAYER, getBoxWithRadius(pos, 10), player -> player.isAlive() && !player.isSpectator());
+		List<PlayerEntity> players = world.getEntitiesByType(EntityType.PLAYER, getDetectionBox(pos), player -> player.isAlive() && !player.isSpectator());
 		
 		int power = 0;
 		

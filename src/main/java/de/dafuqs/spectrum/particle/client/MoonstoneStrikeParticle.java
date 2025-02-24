@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.*;
@@ -20,10 +21,10 @@ public class MoonstoneStrikeParticle extends NoRenderParticle {
 	@Override
 	public void tick() {
 		if (this.age == 0) {
-			world.addParticle(SpectrumParticleTypes.WHITE_EXPLOSION, this.x, this.y, this.z, 0, 0, 0);
+			world.addParticle(ColoredExplosionParticleEffect.WHITE, this.x, this.y, this.z, 0, 0, 0);
 		}
 		var alt = random.nextBoolean();
-		var particle = alt ? SpectrumParticleTypes.SHOOTING_STAR : SpectrumParticleTypes.WHITE_SPARKLE_RISING;
+		var particle = alt ? SpectrumParticleTypes.SHOOTING_STAR : ColoredSparkleRisingParticleEffect.WHITE;
 		var velocity = alt ? 0.5F : 0.375F;
 		var rotation = Math.PI / 20F * age;
 		var nextRotation = Math.PI / 20F * (age + 1);

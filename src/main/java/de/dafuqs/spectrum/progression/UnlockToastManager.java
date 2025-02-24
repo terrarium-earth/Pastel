@@ -21,7 +21,7 @@ public class UnlockToastManager {
 	// Advancement Identifier + Recipe Type => Recipe
 	public static final Map<Identifier, Map<RecipeType<?>, List<GatedRecipe<?>>>> gatedRecipes = new HashMap<>();
 	
-	public static final Map<Identifier, Pair<ItemStack, String>> messageToasts = new HashMap<>() {{
+	public static final Map<Identifier, Pair<ItemStack, String>> MESSAGE_TOASTS = new HashMap<>() {{
 		put(SpectrumAdvancements.UNLOCK_SHOOTING_STARS, new Pair<>(Items.SPYGLASS.getDefaultStack(), "shooting_stars_unlocked"));
 		put(SpectrumAdvancements.OVERENCHANTING, new Pair<>(SpectrumBlocks.ENCHANTER.asItem().getDefaultStack(), "overchanting_unlocked"));
 		put(SpectrumAdvancements.APPLY_CONFLICTING_ENCHANTMENTS, new Pair<>(SpectrumBlocks.ENCHANTER.asItem().getDefaultStack(), "enchant_conflicting_enchantments_unlocked"));
@@ -32,6 +32,7 @@ public class UnlockToastManager {
 		put(SpectrumAdvancements.VIVISECT_KINDLING, new Pair<>(SpectrumItems.DIVINATION_HEART.getDefaultStack(), "vivisect_kindling"));
 		put(SpectrumAdvancements.PAINTBRUSH_COLORING, new Pair<>(SpectrumItems.PAINTBRUSH.getDefaultStack(), "block_coloring_unlocked"));
 		put(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING, new Pair<>(SpectrumItems.PAINTBRUSH.getDefaultStack(), "ink_slinging_unlocked"));
+		put(SpectrumAdvancements.PASTEL_NODE_COLORING, new Pair<>(SpectrumBlocks.SENDER_NODE.asItem().getDefaultStack(), "pastel_node_coloring"));
 	}};
 	
 	public static void registerGatedRecipe(RecipeType<?> recipeType, GatedRecipe<?> gatedRecipe) {
@@ -118,8 +119,8 @@ public class UnlockToastManager {
 				}
 			}
 			
-			if (UnlockToastManager.messageToasts.containsKey(doneAdvancement)) {
-				specialToasts.add(UnlockToastManager.messageToasts.get(doneAdvancement));
+			if (UnlockToastManager.MESSAGE_TOASTS.containsKey(doneAdvancement)) {
+				specialToasts.add(UnlockToastManager.MESSAGE_TOASTS.get(doneAdvancement));
 			}
 		}
 		

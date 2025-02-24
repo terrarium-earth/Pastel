@@ -11,7 +11,6 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.registry.*;
 import net.minecraft.server.network.*;
-import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
 import net.minecraft.util.math.*;
 
@@ -109,8 +108,8 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
 	public ItemStack retrievePresent() {
 		return this.presentStack.copy();
 	}
-
-	public Map<DyeColor, Integer> getColors() {
+	
+	public Map<Integer, Integer> getColors() {
 		return PresentBlockItem.getWrapData(this.presentStack).colors();
 	}
 

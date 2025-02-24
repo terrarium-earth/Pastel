@@ -55,7 +55,7 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 		return itemStack.getOrDefault(SpectrumDataComponentTypes.WRAPPED_PRESENT, WrappedPresentComponent.DEFAULT);
 	}
 	
-	public static void wrap(ItemStack itemStack, PresentBlock.WrappingPaper wrappingPaper, Map<DyeColor, Integer> colors) {
+	public static void wrap(ItemStack itemStack, PresentBlock.WrappingPaper wrappingPaper, Map<Integer, Integer> colors) {
 		itemStack.set(SpectrumDataComponentTypes.WRAPPED_PRESENT, new WrappedPresentComponent(true, wrappingPaper, colors));
 	}
 	

@@ -8,7 +8,7 @@
   "ingredients": [
     "spectrum:fanciful_bismuth_ring",
     {
-      "item": "minecraft:gold_block",
+      "item": "spectrum:pure_gold_block",
       "count": 64
     },
     {

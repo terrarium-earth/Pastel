@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.server.world.*;
@@ -18,7 +17,9 @@ public abstract class DetectorBlock extends Block {
 	public static final IntProperty POWER = Properties.POWER;
 	public static final BooleanProperty INVERTED = Properties.INVERTED;
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
-
+	
+	protected static final double DETECTION_DIAMETER = 20.0D;
+	
 	public DetectorBlock(Settings settings) {
 		super(settings);
 		this.setDefaultState(((this.stateManager.getDefaultState()).with(POWER, 0)).with(INVERTED, false));
@@ -87,8 +88,8 @@ public abstract class DetectorBlock extends Block {
 	
 	abstract int getUpdateFrequencyTicks();
 	
-	protected Box getBoxWithRadius(BlockPos blockPos, int radius) {
-		return Box.of(Vec3d.ofCenter(blockPos), radius, radius, radius);
+	protected Box getDetectionBox(BlockPos pos) {
+		return Box.of(Vec3d.ofCenter(pos), DETECTION_DIAMETER, DETECTION_DIAMETER, DETECTION_DIAMETER);
 	}
 	
 }

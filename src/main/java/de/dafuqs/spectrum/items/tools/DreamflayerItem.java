@@ -4,7 +4,7 @@ import de.dafuqs.spectrum.api.energy.*;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.api.render.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
 import net.minecraft.component.*;
@@ -91,7 +91,7 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 		if (world.isClient) {
 			if (ActivatableItem.isActivated(stack)) {
 				Vec3d pos = entity.getPos();
-				world.addParticle(SpectrumParticleTypes.RED_CRAFTING,
+				world.addParticle(ColoredCraftingParticleEffect.RED,
 						entity.getParticleX(1.0), pos.getY() + 1.05D, entity.getParticleZ(1.0),
 						0.0D, 0.1D, 0.0D);
 			}
@@ -113,7 +113,7 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 		if (ActivatableItem.isActivated(stack)) {
 			tooltip.add(Text.translatable("item.spectrum.dreamflayer.tooltip.activated").formatted(Formatting.GRAY));
 		} else {
-			tooltip.add(Text.translatable("item.spectrum.dreamflayer.tooltip.deactivated").formatted(Formatting.GRAY));
+			tooltip.add(Text.translatable("item.spectrum.dreamflayer.tooltip.deactivated", USED_COLOR.getColoredInkName()).formatted(Formatting.GRAY));
 		}
 	}
 	

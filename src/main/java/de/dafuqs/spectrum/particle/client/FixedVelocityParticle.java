@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.particle.client;
 
+import de.dafuqs.spectrum.particle.effect.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.world.*;
 import net.minecraft.particle.*;
 import net.minecraft.util.math.*;
+import org.joml.*;
 
 @Environment(EnvType.CLIENT)
 public class FixedVelocityParticle extends SpriteBillboardParticle {
-
+	
 	protected FixedVelocityParticle(ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 		super(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
 		this.gravityStrength = 0.0F;
@@ -56,6 +58,50 @@ public class FixedVelocityParticle extends SpriteBillboardParticle {
 			FixedVelocityParticle craftingParticle = new FixedVelocityParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
 			craftingParticle.setMaxAge((int) (8.0D / (clientWorld.random.nextDouble() * 0.8D + 0.2D)));
 			craftingParticle.setSprite(this.spriteProvider);
+			return craftingParticle;
+		}
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public static class ColoredFluidRisingFactory implements ParticleFactory<ColoredFluidRisingParticleEffect> {
+		
+		private final SpriteProvider spriteProvider;
+		
+		public ColoredFluidRisingFactory(SpriteProvider spriteProvider) {
+			this.spriteProvider = spriteProvider;
+		}
+		
+		@Override
+		public Particle createParticle(ColoredFluidRisingParticleEffect defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+			FixedVelocityParticle craftingParticle = new FixedVelocityParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
+			craftingParticle.setMaxAge((int) (8.0D / (clientWorld.random.nextDouble() * 0.8D + 0.2D)));
+			craftingParticle.setSprite(this.spriteProvider);
+			
+			Vector3f color = defaultParticleType.getColor();
+			craftingParticle.setColor(color.x, color.y, color.z);
+			
+			return craftingParticle;
+		}
+	}
+	
+	@Environment(EnvType.CLIENT)
+	public static class ColoredSparkleRisingFactory implements ParticleFactory<ColoredSparkleRisingParticleEffect> {
+		
+		private final SpriteProvider spriteProvider;
+		
+		public ColoredSparkleRisingFactory(SpriteProvider spriteProvider) {
+			this.spriteProvider = spriteProvider;
+		}
+		
+		@Override
+		public Particle createParticle(ColoredSparkleRisingParticleEffect defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+			FixedVelocityParticle craftingParticle = new FixedVelocityParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
+			craftingParticle.setMaxAge((int) (8.0D / (clientWorld.random.nextDouble() * 0.8D + 0.2D)));
+			craftingParticle.setSprite(this.spriteProvider);
+			
+			Vector3f color = defaultParticleType.getColor();
+			craftingParticle.setColor(color.x, color.y, color.z);
+			
 			return craftingParticle;
 		}
 	}

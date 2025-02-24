@@ -61,8 +61,10 @@
       "consume_chance_per_second": 0.01
     }
   ],
-  "additional_recipe_manager_outputs": [
-    "spectrum:refined_bloodstone"
+  "additional_recipe_manager_results": [
+    {
+      "id": "spectrum:pure_bloodstone"
+    }
   ],
   "required_advancement": "spectrum:unlocks/resources/bloodstone"
 }

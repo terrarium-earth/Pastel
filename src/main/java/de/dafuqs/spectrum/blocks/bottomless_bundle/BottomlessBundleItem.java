@@ -175,7 +175,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	 */
 	@Override
 	public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player) {
-		if (clickType == ClickType.RIGHT) {
+		if (stack.getCount() != 1 || clickType == ClickType.RIGHT) {
 			ItemStack itemStack = slot.getStack();
 			var builder = BottomlessStack.Builder.of(player.getWorld(), stack);
 			if (itemStack.isEmpty()) {
@@ -203,7 +203,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	 */
 	@Override
 	public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
-		if (clickType == ClickType.RIGHT && slot.canTakePartial(player)) {
+		if (stack.getCount() != 1 || clickType == ClickType.RIGHT && slot.canTakePartial(player)) {
 			var builder = BottomlessStack.Builder.of(player.getWorld(), stack);
 			if (otherStack.isEmpty()) {
 				var removed = builder.removeFirstStack();
