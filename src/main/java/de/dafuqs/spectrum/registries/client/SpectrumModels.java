@@ -27,6 +27,8 @@ public class SpectrumModels {
 	public static final Model COLORED_LAMP_ON = new Model(Optional.of(SpectrumCommon.locate("templates/colored_lamp_on")), Optional.empty(), INNER, OUTER);
 	public static final Model CRYSTALLARIEUM_FARMABLE = new Model(Optional.of(SpectrumCommon.locate("templates/crystallarieum_farmable")), Optional.empty(), CROSS);
 	public static final Model DOUBLE_CROSS = new Model(Optional.of(SpectrumCommon.locate("templates/double_cross")), Optional.empty(), CROSS);
+	public static final Model JADE_VINE_BULB = new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_bulb")), Optional.empty(), FLOWER, PARTICLE);
+	public static final Model JADE_VINE_ROOTS = new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_roots")), Optional.empty(), FLOWER, PARTICLE);
 	public static final Model MOONSTONE_CHISELED = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled")), Optional.empty(), SIDE, LINE);
 	public static final Model MOONSTONE_CHISELED_DOWN = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled_down")), Optional.empty(), SIDE, LINE);
 	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), SIDE, TOP, INSIDE);
@@ -57,14 +59,6 @@ public class SpectrumModels {
 	
 	public static Model jadeVines(JadeVinePlantBlock.JadeVinesPlantPart part) {
 		return new Model(Optional.of(SpectrumCommon.locate("templates/jade_vines_" + part.asString())), Optional.empty(), FLOWER, PARTICLE);
-	}
-	
-	public static Model jadeVineBulb(boolean dead) {
-		return new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_bulb" + (dead ? "_dead" : ""))), Optional.empty(), FLOWER, PARTICLE);
-	}
-	
-	public static Model jadeVineRoots(boolean dead) {
-		return new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_roots" + (dead ? "_dead" : ""))), Optional.empty(), FLOWER, PARTICLE);
 	}
 	
 	// Block Builtins w/ Extra Keys

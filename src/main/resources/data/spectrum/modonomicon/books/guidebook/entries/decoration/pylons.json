@@ -1,11 +1,11 @@
 {
-  "name": "book.spectrum.guidebook.decostones.name",
+  "name": "book.spectrum.guidebook.pylons.name",
   "icon": {
-    "item": "spectrum:amethyst_decostone"
+    "item": "spectrum:amethyst_pylon"
   },
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "spectrum:unlocks/decostones/any_decostone"
+    "advancement_id": "spectrum:unlocks/pylons/any_pylon"
   },
   "category": "spectrum:decoration",
   "hide_while_locked": true,
@@ -21,28 +21,28 @@
   "pages": [
     {
       "type": "modonomicon:text",
-      "title": "book.spectrum.guidebook.decostones.name",
-      "text": "book.spectrum.guidebook.decostones.page0.text"
+      "title": "book.spectrum.guidebook.pylons.name",
+      "text": "book.spectrum.guidebook.pylons.page0.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/decostones/topaz"
+      "recipe_id": "spectrum:pedestal/tier1/pylons/topaz"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/decostones/amethyst"
+      "recipe_id": "spectrum:pedestal/tier1/pylons/amethyst"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/decostones/citrine"
+      "recipe_id": "spectrum:pedestal/tier1/pylons/citrine"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/decostones/onyx"
+      "recipe_id": "spectrum:pedestal/tier1/pylons/onyx"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/decostones/moonstone"
+      "recipe_id": "spectrum:pedestal/tier1/pylons/moonstone"
     }
   ]
 }

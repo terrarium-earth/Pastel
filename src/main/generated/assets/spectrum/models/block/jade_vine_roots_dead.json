@@ -1,5 +1,5 @@
 {
-  "parent": "spectrum:templates/jade_vine_roots_dead",
+  "parent": "spectrum:templates/jade_vine_roots",
   "textures": {
     "flower": "spectrum:block/jade_vine_plant_ripe",
     "particle": "spectrum:block/jade_vine_plant_ripe_breaking"

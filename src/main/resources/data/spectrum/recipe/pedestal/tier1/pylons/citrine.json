@@ -1,12 +1,12 @@
 {
   "type": "spectrum:pedestal",
-  "group": "decostones",
+  "group": "pylons",
   "time": 40,
-  "tier": "advanced",
+  "tier": "basic",
   "magenta": 0,
-  "yellow": 0,
+  "yellow": 2,
   "cyan": 0,
-  "black": 2,
+  "black": 0,
   "white": 0,
   "experience": 1.0,
   "pattern": [
@@ -15,13 +15,13 @@
     "XYX"
   ],
   "key": {
-    "S": "spectrum:onyx_shard",
+    "S": "spectrum:citrine_shard",
     "X": "spectrum:polished_basalt",
     "Y": "spectrum:polished_calcite"
   },
   "result": {
-    "id": "spectrum:onyx_decostone",
+    "id": "spectrum:citrine_pylon",
     "count": 1
   },
-  "required_advancement": "spectrum:unlocks/decostones/onyx_decostone"
+  "required_advancement": "spectrum:unlocks/pylons/citrine_pylon"
 }

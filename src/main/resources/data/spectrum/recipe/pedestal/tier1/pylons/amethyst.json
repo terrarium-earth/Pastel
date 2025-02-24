@@ -1,6 +1,6 @@
 {
   "type": "spectrum:pedestal",
-  "group": "decostones",
+  "group": "pylons",
   "time": 40,
   "tier": "basic",
   "magenta": 2,
@@ -20,8 +20,8 @@
     "Y": "spectrum:polished_calcite"
   },
   "result": {
-    "id": "spectrum:amethyst_decostone",
+    "id": "spectrum:amethyst_pylon",
     "count": 1
   },
-  "required_advancement": "spectrum:unlocks/decostones/amethyst_decostone"
+  "required_advancement": "spectrum:unlocks/pylons/amethyst_pylon"
 }

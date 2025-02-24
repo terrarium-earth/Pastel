@@ -2,7 +2,7 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-    "2": "spectrum:block/topaz_decostone",
+    "2": "spectrum:block/topaz_pylon",
     "particle": "spectrum:block/polished_basalt"
   },
   "elements": [

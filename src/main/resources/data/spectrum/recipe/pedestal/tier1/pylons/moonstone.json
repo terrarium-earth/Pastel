@@ -1,13 +1,13 @@
 {
   "type": "spectrum:pedestal",
-  "group": "decostones",
+  "group": "pylons",
   "time": 40,
-  "tier": "basic",
+  "tier": "complex",
   "magenta": 0,
   "yellow": 0,
-  "cyan": 2,
+  "cyan": 0,
   "black": 0,
-  "white": 0,
+  "white": 2,
   "experience": 1.0,
   "pattern": [
     " S ",
@@ -15,13 +15,13 @@
     "XYX"
   ],
   "key": {
-    "S": "spectrum:topaz_shard",
+    "S": "spectrum:moonstone_shard",
     "X": "spectrum:polished_basalt",
     "Y": "spectrum:polished_calcite"
   },
   "result": {
-    "id": "spectrum:topaz_decostone",
+    "id": "spectrum:moonstone_pylon",
     "count": 1
   },
-  "required_advancement": "spectrum:unlocks/decostones/topaz_decostone"
+  "required_advancement": "spectrum:unlocks/pylons/moonstone_pylon"
 }

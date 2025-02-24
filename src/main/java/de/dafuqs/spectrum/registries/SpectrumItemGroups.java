@@ -1154,11 +1154,11 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.ONYX_CHIME);
 				entries.add(SpectrumBlocks.MOONSTONE_CHIME);
 				
-				entries.add(SpectrumBlocks.AMETHYST_DECOSTONE);
-				entries.add(SpectrumBlocks.TOPAZ_DECOSTONE);
-				entries.add(SpectrumBlocks.CITRINE_DECOSTONE);
-				entries.add(SpectrumBlocks.ONYX_DECOSTONE);
-				entries.add(SpectrumBlocks.MOONSTONE_DECOSTONE);
+				entries.add(SpectrumBlocks.AMETHYST_PYLON);
+				entries.add(SpectrumBlocks.TOPAZ_PYLON);
+				entries.add(SpectrumBlocks.CITRINE_PYLON);
+				entries.add(SpectrumBlocks.ONYX_PYLON);
+				entries.add(SpectrumBlocks.MOONSTONE_PYLON);
 				
 				entries.add(SpectrumBlocks.JADE_VINE_PETAL_BLOCK);
 				entries.add(SpectrumBlocks.JADE_VINE_PETAL_CARPET);

@@ -513,15 +513,15 @@ public class SpectrumBlocks {
 	public static final Block ONYX_CHIME = register(singleton(blockWithItem("onyx_chime", new GemstoneChimeBlock(chime(ONYX_CLUSTER), SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME, SpectrumParticleTypes.BLACK_SPARKLE_RISING), DyeColor.BLACK), SpectrumTexturedModels.CHIME));
 	public static final Block MOONSTONE_CHIME = register(singleton(blockWithItem("moonstone_chime", new GemstoneChimeBlock(chime(MOONSTONE_CLUSTER), SpectrumSoundEvents.BLOCK_MOONSTONE_BLOCK_CHIME, SpectrumParticleTypes.WHITE_SPARKLE_RISING), DyeColor.WHITE), SpectrumTexturedModels.CHIME));
 	
-	private static Settings decostone(AbstractBlock block) {
+	private static Settings pylon(AbstractBlock block) {
 		return AbstractBlock.Settings.copy(block).nonOpaque();
 	}
 	
-	public static final Block TOPAZ_DECOSTONE = register(pylon(blockWithItem("topaz_decostone", new PylonBlock(decostone(TOPAZ_BLOCK)), DyeColor.CYAN), "topaz"));
-	public static final Block AMETHYST_DECOSTONE = register(pylon(blockWithItem("amethyst_decostone", new PylonBlock(decostone(AMETHYST_BLOCK)), DyeColor.MAGENTA), "amethyst"));
-	public static final Block CITRINE_DECOSTONE = register(pylon(blockWithItem("citrine_decostone", new PylonBlock(decostone(CITRINE_BLOCK)), DyeColor.YELLOW), "citrine"));
-	public static final Block ONYX_DECOSTONE = register(pylon(blockWithItem("onyx_decostone", new PylonBlock(decostone(ONYX_BLOCK)), DyeColor.BLACK), "onyx"));
-	public static final Block MOONSTONE_DECOSTONE = register(pylon(blockWithItem("moonstone_decostone", new PylonBlock(decostone(MOONSTONE_BLOCK)), DyeColor.WHITE), "moonstone"));
+	public static final Block TOPAZ_PYLON = register(pylon(blockWithItem("topaz_pylon", new PylonBlock(pylon(TOPAZ_BLOCK)), DyeColor.CYAN)));
+	public static final Block AMETHYST_PYLON = register(pylon(blockWithItem("amethyst_pylon", new PylonBlock(pylon(AMETHYST_BLOCK)), DyeColor.MAGENTA)));
+	public static final Block CITRINE_PYLON = register(pylon(blockWithItem("citrine_pylon", new PylonBlock(pylon(CITRINE_BLOCK)), DyeColor.YELLOW)));
+	public static final Block ONYX_PYLON = register(pylon(blockWithItem("onyx_pylon", new PylonBlock(pylon(ONYX_BLOCK)), DyeColor.BLACK)));
+	public static final Block MOONSTONE_PYLON = register(pylon(blockWithItem("moonstone_pylon", new PylonBlock(pylon(MOONSTONE_BLOCK)), DyeColor.WHITE)));
 	
 	public static final Block SEMI_PERMEABLE_GLASS = register(translucent(parented(blockWithItem("semi_permeable_glass", new AlternatePlayerOnlyGlassBlock(AbstractBlock.Settings.copy(GLASS), GLASS, false), DyeColor.WHITE), b -> GLASS)));
 	public static final Block TINTED_SEMI_PERMEABLE_GLASS = register(translucent(parented(blockWithItem("tinted_semi_permeable_glass", new AlternatePlayerOnlyGlassBlock(AbstractBlock.Settings.copy(TINTED_GLASS), TINTED_GLASS, true), DyeColor.BLACK), b -> TINTED_GLASS)));
@@ -1156,12 +1156,12 @@ public class SpectrumBlocks {
 	
 	public static final Block JADE_VINE_ROOTS = register(cutout(block("jade_vine_roots", new JadeVineRootsBlock(jadeVine().ticksRandomly().luminance((state) -> state.get(JadeVineRootsBlock.DEAD) ? 0 : 4))))
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(JadeVineBulbBlock.DEAD,
-					SpectrumModels.jadeVineRoots(true).upload(block, "_dead", SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT_RIPE, SpectrumTextures.JADE_VINE_PLANT_RIPE_BREAKING), ctx.modelCollector),
-					SpectrumModels.jadeVineRoots(false).upload(block, SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT, SpectrumTextures.JADE_VINE_PLANT_BREAKING), ctx.modelCollector)))));
+					SpectrumModels.JADE_VINE_ROOTS.upload(block, "_dead", SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT_RIPE, SpectrumTextures.JADE_VINE_PLANT_RIPE_BREAKING), ctx.modelCollector),
+					SpectrumModels.JADE_VINE_ROOTS.upload(block, SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT, SpectrumTextures.JADE_VINE_PLANT_BREAKING), ctx.modelCollector)))));
 	public static final Block JADE_VINE_BULB = register(cutout(block("jade_vine_bulb", new JadeVineBulbBlock(jadeVine().luminance((state) -> state.get(JadeVineBulbBlock.DEAD) ? 0 : 5))))
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(JadeVineBulbBlock.DEAD,
-					SpectrumModels.jadeVineBulb(true).upload(block, "_dead", SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT_RIPE_BULB, SpectrumTextures.JADE_VINE_PLANT_RIPE_BREAKING), ctx.modelCollector),
-					SpectrumModels.jadeVineBulb(false).upload(block, SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT_BULB, SpectrumTextures.JADE_VINE_PLANT_BREAKING), ctx.modelCollector)))));
+					SpectrumModels.JADE_VINE_BULB.upload(block, "_dead", SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT_RIPE_BULB, SpectrumTextures.JADE_VINE_PLANT_RIPE_BREAKING), ctx.modelCollector),
+					SpectrumModels.JADE_VINE_BULB.upload(block, SpectrumTextureMaps.flowerParticle(SpectrumTextures.JADE_VINE_PLANT_BULB, SpectrumTextures.JADE_VINE_PLANT_BREAKING), ctx.modelCollector)))));
 	public static final Block JADE_VINES = register(cutout(block("jade_vines", new JadeVinePlantBlock(jadeVine().luminance((state) -> state.get(JadeVinePlantBlock.AGE) == 0 ? 0 : 5))))
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_7, JadeVinePlantBlock.PART).register((age, part) -> {
 				Model model = SpectrumModels.jadeVines(part);
@@ -2312,13 +2312,13 @@ public class SpectrumBlocks {
 						createModelVariant(SpectrumTexturedModels.sugarStick(age, sugarBlock).upload(block, age.toString(), ctx.modelCollector)))));
 	}
 	
-	public static <T extends Block> BlockRegistrar<T> pylon(BlockRegistrar<T> registrar, String gemName) {
+	public static <T extends Block> BlockRegistrar<T> pylon(BlockRegistrar<T> registrar) {
 		return registrar.withBlockModel((ctx, block) -> {
-			Identifier head = SpectrumCommon.locate("block/" + gemName + "_pylon_head");
-			Identifier body = SpectrumCommon.locate("block/" + gemName + "_pylon_body");
-			Identifier waist = SpectrumCommon.locate("block/" + gemName + "_pylon_waist");
-			Identifier foot = SpectrumCommon.locate("block/" + gemName + "_pylon_foot");
-			Identifier end = SpectrumCommon.locate("block/" + gemName + "_pylon_end");
+			Identifier head = ModelIds.getBlockSubModelId(block, "_head");
+			Identifier body = ModelIds.getBlockSubModelId(block, "_body");
+			Identifier waist = ModelIds.getBlockSubModelId(block, "_waist");
+			Identifier foot = ModelIds.getBlockSubModelId(block, "_foot");
+			Identifier end = ModelIds.getBlockSubModelId(block, "_end");
 			Identifier pedestal = SpectrumModels.BALCITE_PYLON_PEDESTAL;
 			SpectrumModels.BASE_PYLON_BODY.upload(head, SpectrumTextureMaps.sideEnd(head, end), ctx.modelCollector);
 			SpectrumModels.BASE_PYLON_BODY.upload(body, SpectrumTextureMaps.sideEnd(body, end), ctx.modelCollector);
