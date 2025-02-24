@@ -582,12 +582,12 @@ public class SpectrumBlocks {
 	}
 	
 	private static final ToIntFunction<BlockState> ROCK_CANDY_LUMINANCE = state -> Math.max(15, state.get(Properties.AGE_2) * 3 + (state.get(SugarStickBlock.LOGGED) == FluidLogging.State.LIQUID_CRYSTAL ? LiquidCrystalFluidBlock.LUMINANCE : 8));
-	public static final Block SUGAR_STICK = new SugarStickBlock(rockCandy(SMALL_AMETHYST_BUD), RockCandy.RockCandyVariant.SUGAR);
-	public static final Block TOPAZ_SUGAR_STICK = new SugarStickBlock(rockCandy(SpectrumBlocks.SMALL_TOPAZ_BUD), RockCandy.RockCandyVariant.TOPAZ);
-	public static final Block AMETHYST_SUGAR_STICK = new SugarStickBlock(rockCandy(Blocks.SMALL_AMETHYST_BUD), RockCandy.RockCandyVariant.AMETHYST);
-	public static final Block CITRINE_SUGAR_STICK = new SugarStickBlock(rockCandy(SpectrumBlocks.SMALL_CITRINE_BUD), RockCandy.RockCandyVariant.CITRINE);
-	public static final Block ONYX_SUGAR_STICK = new SugarStickBlock(rockCandy(SpectrumBlocks.SMALL_ONYX_BUD), RockCandy.RockCandyVariant.ONYX);
-	public static final Block MOONSTONE_SUGAR_STICK = new SugarStickBlock(rockCandy(SpectrumBlocks.SMALL_MOONSTONE_BUD), RockCandy.RockCandyVariant.MOONSTONE);
+	public static final Block SUGAR_STICK = register(sugarStick(blockWithItem("sugar_stick", new SugarStickBlock(rockCandy(SMALL_AMETHYST_BUD), RockCandy.RockCandyVariant.SUGAR), DyeColor.PINK), b -> b));
+	public static final Block TOPAZ_SUGAR_STICK = register(sugarStick(blockWithItem("topaz_sugar_stick", new SugarStickBlock(rockCandy(SpectrumBlocks.SMALL_TOPAZ_BUD), RockCandy.RockCandyVariant.TOPAZ), DyeColor.PINK), b -> TOPAZ_GLASS));
+	public static final Block AMETHYST_SUGAR_STICK = register(sugarStick(blockWithItem("amethyst_sugar_stick", new SugarStickBlock(rockCandy(Blocks.SMALL_AMETHYST_BUD), RockCandy.RockCandyVariant.AMETHYST), DyeColor.PINK), b -> AMETHYST_GLASS));
+	public static final Block CITRINE_SUGAR_STICK = register(sugarStick(blockWithItem("citrine_sugar_stick", new SugarStickBlock(rockCandy(SpectrumBlocks.SMALL_CITRINE_BUD), RockCandy.RockCandyVariant.CITRINE), DyeColor.PINK), b -> CITRINE_GLASS));
+	public static final Block ONYX_SUGAR_STICK = register(sugarStick(blockWithItem("onyx_sugar_stick", new SugarStickBlock(rockCandy(SpectrumBlocks.SMALL_ONYX_BUD), RockCandy.RockCandyVariant.ONYX), DyeColor.PINK), b -> ONYX_GLASS));
+	public static final Block MOONSTONE_SUGAR_STICK = register(sugarStick(blockWithItem("moonstone_sugar_stick", new SugarStickBlock(rockCandy(SpectrumBlocks.SMALL_MOONSTONE_BUD), RockCandy.RockCandyVariant.MOONSTONE), DyeColor.PINK), b -> MOONSTONE_GLASS));
 	
 	// PASTEL NETWORK
 	private static Settings pastelNode(BlockSoundGroup soundGroup) {
@@ -822,30 +822,24 @@ public class SpectrumBlocks {
 			}));
 	
 	public static final Block VARIA_SPROUT = register(cutout(blockWithItem("varia_sprout", new AshFloraBlock(settings(MapColor.WHITE, BlockSoundGroup.NETHER_STEM, 0F).breakInstantly().luminance(state -> 11).offset(OffsetType.XZ).dynamicBounds().noCollision().postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), DyeColor.WHITE))
-			.withBlockModel((ctx, block) -> {
-				ctx.registerItemModel(block);
-				return VariantsBlockStateSupplier.create(block,
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "").upload(block, "", ctx.modelCollector)),
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_2").upload(block, "_2", ctx.modelCollector)),
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_3").upload(block, "_3", ctx.modelCollector)),
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_4").upload(block, "_4", ctx.modelCollector)),
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_5").upload(block, "_5", ctx.modelCollector)),
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_6").upload(block, "_6", ctx.modelCollector))
-				);
-			}));
+			.withBlockItemModel(SpectrumModelProvider::registerBlockTexturedItemModel)
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block,
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "").upload(block, "", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_2").upload(block, "_2", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_3").upload(block, "_3", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_4").upload(block, "_4", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_5").upload(block, "_5", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_6").upload(block, "_6", ctx.modelCollector)))));
 	
 	public static final ToIntFunction<BlockState> LANTERN_LIGHT_PROVIDER = (state -> state.get(RedstoneLampBlock.LIT) ? 15 : 0);
 	
 	public static FungusBlock registerNoxshroom(String name, RegistryKey<ConfiguredFeature<?, ?>> feature, MapColor mapColor) {
 		return register(cutout(blockWithItem(name, new FungusBlock(feature, SHIMMEL, settings(mapColor, BlockSoundGroup.FUNGUS, 0.0F).noCollision()), DyeColor.LIME))
-				.withBlockModel((ctx, block) -> {
-					ctx.registerItemModel(block);
-					return VariantsBlockStateSupplier.create(block,
-							createModelVariant(SpectrumTexturedModels.cross(b -> b, "_type_1").upload(block, "_type_1", ctx.modelCollector)),
-							createModelVariant(SpectrumTexturedModels.cross(b -> b, "_type_2").upload(block, "_type_2", ctx.modelCollector)),
-							createModelVariant(SpectrumTexturedModels.cross(b -> b, "_type_3").upload(block, "_type_3", ctx.modelCollector))
-					);
-				}));
+				.withBlockItemModel(SpectrumModelProvider::registerBlockTexturedItemModel)
+				.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block,
+						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_type_1").upload(block, "_type_1", ctx.modelCollector)),
+						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_type_2").upload(block, "_type_2", ctx.modelCollector)),
+						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_type_3").upload(block, "_type_3", ctx.modelCollector)))));
 	}
 	
 	public static final FungusBlock SLATE_NOXSHROOM = registerNoxshroom("slate_noxshroom", SpectrumConfiguredFeatures.SLATE_NOXFUNGUS, MapColor.GRAY);
@@ -868,13 +862,11 @@ public class SpectrumBlocks {
 	
 	public static <T extends FlexLanternBlock> T registerNoxwoodLantern(String name, T flexLanternBlock, DyeColor color) {
 		return register(cutout(blockWithItem(name, flexLanternBlock, color))
-				.withBlockModel((ctx, block) -> {
-					Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), SpectrumTextureMaps.layer0(block.asItem(), "_item"), ctx.modelCollector);
-					return VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.HANGING, DiagonalBlock.DIAGONAL, FlexLanternBlock.TALL).register((hanging, diagonal, tall) -> {
-						String suffix = (hanging ? "_hanging" : "") + (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small");
-						return createModelVariant(SpectrumModels.noxwoodLantern(suffix).upload(block, suffix, TextureMap.all(block), ctx.modelCollector));
-					}));
-				}));
+				.withItemModel((ctx, item) -> registerItemModel(ctx, item, "_item"))
+				.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.HANGING, DiagonalBlock.DIAGONAL, FlexLanternBlock.TALL).register((hanging, diagonal, tall) -> {
+					String suffix = (hanging ? "_hanging" : "") + (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small");
+					return createModelVariant(SpectrumModels.noxwoodLantern(suffix).upload(block, suffix, TextureMap.all(block), ctx.modelCollector));
+				}))));
 	}
 	
 	private static final int NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS = 30;
@@ -980,7 +972,7 @@ public class SpectrumBlocks {
 	}
 	
 	public static final WeepingGalaSprigBlock WEEPING_GALA_SPRIG = register(tintableCross(blockWithItem("weeping_gala_sprig", new WeepingGalaSprigBlock(copyWithMapColor(OAK_SAPLING, MapColor.BRIGHT_TEAL)), DyeColor.LIME), false)
-			.withItemModel((ctx, block) -> Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), TextureMap.layer0(block.asItem()), ctx.writer)));
+			.withItemModel(SpectrumModelProvider::registerItemModel));
 	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = register(pottedPlant(block("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant())), false));
 	
 	public static final Block WEEPING_GALA_LEAVES = register(singleton(blockWithItem("weeping_gala_leaves", new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.BRIGHT_TEAL)), DyeColor.LIME), TexturedModel.LEAVES));
@@ -1014,13 +1006,11 @@ public class SpectrumBlocks {
 	public static final Block WEEPING_GALA_BARREL = register(barrellike(blockWithItem("weeping_gala_barrel", new BarrelBlock(galaWood(MapColor.BROWN)), DyeColor.LIME), b -> b, "_bottom"));
 	public static final Block WEEPING_GALA_AMPHORA = register(barrellike(blockWithItem("weeping_gala_amphora", new AmphoraBlock(galaWood(MapColor.BROWN)), DyeColor.LIME), b -> b, "_bottom"));
 	public static final Block WEEPING_GALA_LANTERN = register(translucent(blockWithItem("weeping_gala_lantern", new FlexLanternBlock(galaWood(MapColor.BROWN).luminance(state -> 13).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIME))
-			.withBlockModel((ctx, block) -> {
-				Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), SpectrumTextureMaps.layer0(block.asItem(), "_item"), ctx.modelCollector);
-				return VariantsBlockStateSupplier.create(block)
-						.coordinate(BlockStateVariantMap.create(Properties.HANGING).register(false, BlockStateVariant.create()).register(true, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R180)))
-						.coordinate(BlockStateVariantMap.create(DiagonalBlock.DIAGONAL, FlexLanternBlock.TALL).register((diagonal, tall) ->
-								createModelVariant(SpectrumTexturedModels.baseTransLantern(diagonal, tall).upload(block, (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small"), ctx.modelCollector))));
-			}));
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block)
+					.coordinate(BlockStateVariantMap.create(Properties.HANGING).register(false, BlockStateVariant.create()).register(true, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R180)))
+					.coordinate(BlockStateVariantMap.create(DiagonalBlock.DIAGONAL, FlexLanternBlock.TALL).register((diagonal, tall) ->
+							createModelVariant(SpectrumTexturedModels.baseTransLantern(diagonal, tall).upload(block, (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small"), ctx.modelCollector)))))
+			.withItemModel((ctx, item) -> registerItemModel(ctx, item, "_item")));
 	public static final Block WEEPING_GALA_LAMP = register(redstoneLamp(blockWithItem("weeping_gala_lamp", new RedstoneLampBlock(galaWood(MapColor.BROWN).luminance(LANTERN_LIGHT_PROVIDER)), DyeColor.LIME)));
 	public static final Block WEEPING_GALA_LIGHT = register(translucent(axisRotated(blockWithItem("weeping_gala_light", new PillarBlock(galaWood(MapColor.BROWN).luminance(state -> 15)), DyeColor.LIME), SpectrumTexturedModels.BASE_TRANS_LIGHT_CORE)));
 	
@@ -1059,7 +1049,7 @@ public class SpectrumBlocks {
 	
 	public static SmallDragonjagBlock registerSmallDragonjagBlock(String name, Dragonjag.Variant variant) {
 		return register(cutout(singleton(blockWithItem(name, new SmallDragonjagBlock(settings(variant.getMapColor(), BlockSoundGroup.GRASS, 1.0F), variant), DyeColor.LIME), SpectrumTexturedModels.doubleCross(b -> b, "")))
-				.withItemModel((ctx, block) -> Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), TextureMap.layer0(block), ctx.writer)));
+				.withBlockItemModel(SpectrumModelProvider::registerBlockTexturedItemModel));
 	}
 	
 	public static final Block SMALL_RED_DRAGONJAG = registerSmallDragonjagBlock("small_red_dragonjag", Dragonjag.Variant.RED);
@@ -1098,14 +1088,12 @@ public class SpectrumBlocks {
 					.register(6, createModelVariant(ModelIds.getBlockSubModelId(block, "_stage2")))
 					.register(7, createModelVariant(SpectrumTexturedModels.cross(b -> b, "3").upload(block, "_stage3", ctx.modelCollector))))));
 	public static final Block BRISTLE_SPROUTS = register(cutout(blockWithItem("bristle_sprouts", new BristleSproutsBlock(settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 0.0F).noCollision().nonOpaque().offset(OffsetType.XZ).replaceable()), DyeColor.LIME))
-			.withBlockModel((ctx, block) -> {
-				ctx.registerItemModel(block, "_1");
-				return VariantsBlockStateSupplier.create(block,
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_1").upload(block, "_1", ctx.modelCollector)),
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_2").upload(block, "_2", ctx.modelCollector)),
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_3").upload(block, "_3", ctx.modelCollector)),
-						createModelVariant(SpectrumTexturedModels.cross(b -> b, "_4").upload(block, "_4", ctx.modelCollector)));
-			}));
+			.withBlockItemModel((ctx, block) -> registerBlockTexturedItemModel(ctx, block, "_1"))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block,
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_1").upload(block, "_1", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_2").upload(block, "_2", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_3").upload(block, "_3", ctx.modelCollector)),
+					createModelVariant(SpectrumTexturedModels.cross(b -> b, "_4").upload(block, "_4", ctx.modelCollector)))));
 	public static final Block DOOMBLOOM = register(cutout(block("doombloom", new DoomBloomBlock(SpectrumStatusEffects.STIFFNESS, 8, settings(MapColor.PALE_GREEN, BlockSoundGroup.GRASS, 0.0F).ticksRandomly().noCollision().luminance((state) -> state.get(DoomBloomBlock.AGE) * 2).nonOpaque())))
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_4)
 					.register(age -> createModelVariant(SpectrumTexturedModels.cross(b -> b, age.toString()).upload(block, age.toString(), ctx.modelCollector))))));
@@ -1413,20 +1401,16 @@ public class SpectrumBlocks {
 	}
 	
 	public static final AmaranthBushelBlock AMARANTH_BUSHEL = register(tintableCross(blockWithItem("amaranth_bushel", new AmaranthBushelBlock(SpectrumStatusEffects.NOURISHING, 8, settings(MapColor.CLEAR, BlockSoundGroup.CROP, 0.0F).noCollision()), DyeColor.RED), false)
-			.withItemModel((ctx, block) -> Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), TextureMap.layer0(block.asItem()), ctx.writer)));
-	
+			.withItemModel(SpectrumModelProvider::registerItemModel));
 	public static final PottedAmaranthBushelBlock POTTED_AMARANTH_BUSHEL = register(pottedPlant(block("potted_amaranth_bushel", new PottedAmaranthBushelBlock(AMARANTH_BUSHEL, pottedPlant())), false));
 	
 	public static final ResonantLilyBlock RESONANT_LILY = register(simplePlant(blockWithItem("resonant_lily", new ResonantLilyBlock(StatusEffects.REGENERATION, 5, AbstractBlock.Settings.copy(Blocks.POPPY).mapColor(MapColor.WHITE)), DyeColor.GREEN)));
-	
 	public static final PottedResonantLilyBlock POTTED_RESONANT_LILY = register(pottedPlant(block("potted_resonant_lily", new PottedResonantLilyBlock(RESONANT_LILY, pottedPlant())), false));
 	
 	public static final BloodOrchidBlock BLOOD_ORCHID = register(cutout(blockWithItem("blood_orchid", new BloodOrchidBlock(SpectrumStatusEffects.FRENZY, 10, AbstractBlock.Settings.copy(Blocks.POPPY).offset(AbstractBlock.OffsetType.NONE).ticksRandomly()), DyeColor.RED))
-			.withBlockModel((ctx, block) -> {
-				ctx.registerItemModel(block, "5");
-				return VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(BloodOrchidBlock.AGE)
-						.register(stage -> createModelVariant(SpectrumTexturedModels.tintableCross(b -> b, stage.toString(), false).upload(block, stage.toString(), ctx.modelCollector))));
-			}));
+			.withBlockItemModel((ctx, block) -> registerBlockTexturedItemModel(ctx, block, "5"))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(BloodOrchidBlock.AGE)
+					.register(stage -> createModelVariant(SpectrumTexturedModels.tintableCross(b -> b, stage.toString(), false).upload(block, stage.toString(), ctx.modelCollector))))));
 	public static final PottedBloodOrchidBlock POTTED_BLOOD_ORCHID = register(cutout(singleton(block("potted_blood_orchid", new PottedBloodOrchidBlock(BLOOD_ORCHID, pottedPlant())), SpectrumTexturedModels.flowerPotCross(b -> BLOOD_ORCHID, "5", false))));
 	
 	public static ColoredSaplingBlock registerColoredSapling(String name, DyeColor dyeColor) {
@@ -1993,7 +1977,6 @@ public class SpectrumBlocks {
 		registerRedstone(IS.of());
 		registerMagicalBlocks(IS.of());
 		registerJadeVineBlocks(IS.of());
-		registerSugarSticks(IS.of());
 		registerStructureBlocks(IS.of());
 		registerSpiritTree(IS.of());
 		
@@ -2129,15 +2112,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("jadeite_lotus_flower", JADEITE_LOTUS_FLOWER, IS.of(16), DyeColor.LIME);
 		registerBlockWithItem("jadeite_lotus_bulb", JADEITE_LOTUS_BULB, IS.of(16), DyeColor.LIME);
 		registerBlockWithItem("jadeite_petal_carpet", JADEITE_PETAL_CARPET, settings, DyeColor.LIME);
-	}
-	
-	private static void registerSugarSticks(Item.Settings settings) {
-		registerBlockWithItem("sugar_stick", SUGAR_STICK, settings, DyeColor.PINK);
-		registerBlockWithItem("topaz_sugar_stick", TOPAZ_SUGAR_STICK, settings, DyeColor.PINK);
-		registerBlockWithItem("amethyst_sugar_stick", AMETHYST_SUGAR_STICK, settings, DyeColor.PINK);
-		registerBlockWithItem("citrine_sugar_stick", CITRINE_SUGAR_STICK, settings, DyeColor.PINK);
-		registerBlockWithItem("onyx_sugar_stick", ONYX_SUGAR_STICK, settings, DyeColor.PINK);
-		registerBlockWithItem("moonstone_sugar_stick", MOONSTONE_SUGAR_STICK, settings, DyeColor.PINK);
 	}
 	
 	// All the mob heads vanilla is missing
@@ -2317,10 +2291,9 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> simplePlant(BlockRegistrar<T> registrar) {
-		return cutout(registrar).withBlockModel((ctx, block) -> {
-			Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), TextureMap.layer0(block), ctx.modelCollector);
-			return tintableCrossBlockModel(ctx, block, false);
-		});
+		return cutout(registrar)
+				.withBlockItemModel(SpectrumModelProvider::registerBlockTexturedItemModel)
+				.withBlockModel((ctx, block) -> tintableCrossBlockModel(ctx, block, false));
 	}
 	
 	public static <T extends FlowerPotBlock> BlockRegistrar<T> pottedPlant(BlockRegistrar<T> registrar, boolean tinted) {
@@ -2369,6 +2342,13 @@ public class SpectrumBlocks {
 			ctx.registerParentedItemModel(block, SpectrumModels.MOB_BLOCK);
 			return VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(IdolBlock.COOLDOWN, SpectrumModels.MOB_BLOCK, SpectrumModels.MOB_BLOCK_COOLDOWN));
 		});
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> sugarStick(BlockRegistrar<T> registrar, UnaryOperator<Block> sugarBlock) {
+		return registrar
+				.withItemModel(SpectrumModelProvider::registerItemModel)
+				.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_2).register(age ->
+						createModelVariant(SpectrumTexturedModels.sugarStick(age, sugarBlock).upload(block, age.toString(), ctx.modelCollector)))));
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> pylon(BlockRegistrar<T> registrar, String gemName) {
@@ -2440,8 +2420,13 @@ public class SpectrumBlocks {
 			return this;
 		}
 		
-		public BlockRegistrar<T> withItemModel(BiConsumer<ItemModelGenerator, ? super T> callback) {
+		public BlockRegistrar<T> withBlockItemModel(BiConsumer<ItemModelGenerator, ? super T> callback) {
 			if (this.hasItem) ITEM_MODEL_REGISTRAR.defer(ctx -> callback.accept(ctx, block));
+			return this;
+		}
+		
+		public BlockRegistrar<T> withItemModel(BiConsumer<ItemModelGenerator, Item> callback) {
+			if (this.hasItem) ITEM_MODEL_REGISTRAR.defer(ctx -> callback.accept(ctx, block.asItem()));
 			return this;
 		}
 		

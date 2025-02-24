@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.*;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.*;
+import net.minecraft.item.*;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.*;
 import net.minecraft.util.*;
@@ -37,6 +38,22 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	}
 	
 	// Item Models
+	
+	public static void registerItemModel(ItemModelGenerator ctx, Item item) {
+		registerItemModel(ctx, item, "");
+	}
+	
+	public static void registerItemModel(ItemModelGenerator ctx, Item item, String suffix) {
+		Models.GENERATED.upload(ModelIds.getItemModelId(item), SpectrumTextureMaps.layer0(item, suffix), ctx.writer);
+	}
+	
+	public static void registerBlockTexturedItemModel(ItemModelGenerator ctx, Block block) {
+		registerBlockTexturedItemModel(ctx, block, "");
+	}
+	
+	public static void registerBlockTexturedItemModel(ItemModelGenerator ctx, Block block, String suffix) {
+		Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), SpectrumTextureMaps.layer0(block, suffix), ctx.writer);
+	}
 	
 	// Block Models
 	

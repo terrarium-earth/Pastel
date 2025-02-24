@@ -45,12 +45,16 @@ public class SpectrumModels {
 	public static final Identifier UPGRADE_YIELD = SpectrumCommon.locate("block/upgrade_yield");
 	public static final Identifier UPGRADE_EXPERIENCE = SpectrumCommon.locate("block/upgrade_experience");
 	
+	public static Model baseTransLantern(boolean diagonal, boolean tall) {
+		return new Model(Optional.of(SpectrumCommon.locate("templates/base_trans_lantern" + (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small"))), Optional.empty(), GLASS, CASE);
+	}
+	
 	public static Model noxwoodLantern(String suffix) {
 		return new Model(Optional.of(SpectrumCommon.locate("templates/noxwood_lamp" + suffix)), Optional.empty(), ALL);
 	}
 	
-	public static Model baseTransLantern(boolean diagonal, boolean tall) {
-		return new Model(Optional.of(SpectrumCommon.locate("templates/base_trans_lantern" + (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small"))), Optional.empty(), GLASS, CASE);
+	public static Model sugarStick(int age) {
+		return new Model(Optional.of(SpectrumCommon.locate("templates/sugar_stick" + age)), Optional.empty(), KEY0, KEY1, PARTICLE);
 	}
 	
 	// Block Builtins w/ Extra Keys

@@ -64,4 +64,8 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.glassCase(b, "_glass_on", b, "_case_on"), SpectrumModels.baseTransLantern(diagonal, tall));
 	}
 	
+	public static TexturedModel.Factory sugarStick(int age, UnaryOperator<Block> sugarBlock) {
+		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.key0Key1Particle(sugarBlock.apply(b), "", Blocks.OAK_PLANKS, "", sugarBlock.apply(b), ""), SpectrumModels.sugarStick(age));
+	}
+	
 }

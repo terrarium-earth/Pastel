@@ -18,6 +18,10 @@ public class SpectrumTextureMaps {
 		return new TextureMap().put(LAYER0, TextureMap.getSubId(layer0Item, layer0Suffix));
 	}
 	
+	public static TextureMap layer0(Block layer0Block, String layer0Suffix) {
+		return new TextureMap().put(LAYER0, TextureMap.getSubId(layer0Block, layer0Suffix));
+	}
+	
 	public static TextureMap cross(Block crossBlock, String crossSuffix) {
 		return new TextureMap().put(CROSS, TextureMap.getSubId(crossBlock, crossSuffix));
 	}
@@ -110,5 +114,13 @@ public class SpectrumTextureMaps {
 				.put(GLASS, TextureMap.getSubId(glassBlock, glassSuffix))
 				.put(CASE, TextureMap.getSubId(caseBlock, caseSuffix));
 	}
+	
+	public static TextureMap key0Key1Particle(Block key0Block, String key0Suffix, Block key1Block, String key1Suffix, Block particleBlock, String particleSuffix) {
+		return new TextureMap()
+				.put(KEY0, TextureMap.getSubId(key0Block, key0Suffix))
+				.put(KEY1, TextureMap.getSubId(key1Block, key1Suffix))
+				.put(PARTICLE, TextureMap.getSubId(particleBlock, particleSuffix));
+	}
+	
 	
 }

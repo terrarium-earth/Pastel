@@ -4,6 +4,9 @@ import net.minecraft.data.client.*;
 
 public class SpectrumTextureKeys {
 	
+	public static final TextureKey KEY0 = TextureKey.of("0");
+	public static final TextureKey KEY1 = TextureKey.of("1");
+	
 	public static final TextureKey BASE = TextureKey.of("base");
 	public static final TextureKey CASE = TextureKey.of("case");
 	public static final TextureKey ENDS = TextureKey.of("ends");
