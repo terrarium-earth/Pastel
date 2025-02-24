@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "created_refined_azurite": {
+    "created_pure_azurite": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "spectrum:midgame/grow_azurite_in_crystallarieum"

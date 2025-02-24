@@ -243,7 +243,7 @@ public class SpectrumItems {
 	public static final Item BISMUTH_FLAKE = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.ENTER_DIMENSION, Items.CYAN_DYE);
 	public static final Item BISMUTH_CRYSTAL = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.ENTER_DIMENSION, Items.CYAN_DYE);
 	public static final Item RAW_MALACHITE = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, Items.GREEN_DYE);
-	public static final Item REFINED_MALACHITE = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, Items.GREEN_DYE);
+	public static final Item PURE_MALACHITE = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, Items.GREEN_DYE);
 	
 	// Fluid Buckets
 	public static final Item LIQUID_CRYSTAL_BUCKET = new BucketItem(LIQUID_CRYSTAL, IS.of(1).recipeRemainder(Items.BUCKET));
@@ -261,7 +261,7 @@ public class SpectrumItems {
 	// Resources
 	public static final Item SHIMMERSTONE_GEM = new CloakedItemWithLoomPattern(IS.of(), ((RevelationAware) SpectrumBlocks.SHIMMERSTONE_ORE).getCloakAdvancementIdentifier(), Items.YELLOW_DYE, SpectrumBannerPatterns.SHIMMERSTONE);
 	public static final Item RAW_AZURITE = new CloakedItemWithLoomPattern(IS.of(), SpectrumBlocks.AZURITE_ORE.getCloakAdvancementIdentifier(), Items.BLUE_DYE, SpectrumBannerPatterns.RAW_AZURITE);
-	public static final Item REFINED_AZURITE = new CloakedItem(IS.of(), SpectrumBlocks.AZURITE_ORE.getCloakAdvancementIdentifier(), Items.BLUE_DYE);
+	public static final Item PURE_AZURITE = new CloakedItem(IS.of(), SpectrumBlocks.AZURITE_ORE.getCloakAdvancementIdentifier(), Items.BLUE_DYE);
 	public static final CloakedFloatItem STRATINE_FRAGMENTS = new CloakedFloatItem(IS.of().fireproof(), -0.00125F, ((RevelationAware) SpectrumBlocks.STRATINE_ORE).getCloakAdvancementIdentifier(), Items.RED_DYE);
 	public static final CloakedFloatItem STRATINE_GEM = new CloakedFloatItem(IS.of(16).fireproof(), -0.01F, ((RevelationAware) SpectrumBlocks.STRATINE_ORE).getCloakAdvancementIdentifier(), Items.RED_DYE);
 	public static final CloakedFloatItem PALTAERIA_FRAGMENTS = new CloakedFloatItem(IS.of(), 0.00125F, ((RevelationAware) SpectrumBlocks.PALTAERIA_ORE).getCloakAdvancementIdentifier(), Items.CYAN_DYE);
@@ -271,7 +271,7 @@ public class SpectrumItems {
 	public static final Item BONE_ASH = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_CRACKED_DRAGONBONE, Items.GRAY_DYE);
 	public static final Item RESPLENDENT_FEATHER = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE);
 	public static final Item RAW_BLOODSTONE = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE);
-	public static final Item REFINED_BLOODSTONE = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE);
+	public static final Item PURE_BLOODSTONE = new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE);
 	public static final Item DOWNSTONE_FRAGMENTS = new CloakedItem(IS.of(16, Rarity.UNCOMMON), SpectrumAdvancements.FIND_EXCAVATION_SITE, Items.LIGHT_GRAY_DYE);
 	public static final Item RESONANCE_SHARD = new CloakedItem(IS.of(16, Rarity.UNCOMMON), SpectrumAdvancements.STRIKE_UP_HUMMINGSTONE_HYMN, Items.LIGHT_BLUE_DYE);
 	public static final Item AETHER_VESTIGES = new AetherVestigesItem(IS.of(1, Rarity.EPIC).fireproof(), "item.spectrum.aether_vestiges.tooltip");
@@ -670,7 +670,7 @@ public class SpectrumItems {
 	public static void registerResources() {
 		register("shimmerstone_gem", SHIMMERSTONE_GEM, InkColors.YELLOW);
 		register("raw_azurite", RAW_AZURITE, InkColors.BLUE);
-		register("refined_azurite", REFINED_AZURITE, InkColors.BLUE);
+		register("pure_azurite", PURE_AZURITE, InkColors.BLUE);
 		register("paltaeria_fragments", PALTAERIA_FRAGMENTS, InkColors.LIGHT_BLUE);
 		register("paltaeria_gem", PALTAERIA_GEM, InkColors.LIGHT_BLUE);
 		register("stratine_fragments", STRATINE_FRAGMENTS, InkColors.RED);
@@ -680,7 +680,7 @@ public class SpectrumItems {
 		register("bone_ash", BONE_ASH, InkColors.GRAY);
 		register("resplendent_feather", RESPLENDENT_FEATHER, InkColors.YELLOW);
 		register("raw_bloodstone", RAW_BLOODSTONE, InkColors.RED);
-		register("refined_bloodstone", REFINED_BLOODSTONE, InkColors.RED);
+		register("pure_bloodstone", PURE_BLOODSTONE, InkColors.RED);
 		register("downstone_fragments", DOWNSTONE_FRAGMENTS, InkColors.LIGHT_GRAY);
 		register("resonance_shard", RESONANCE_SHARD, InkColors.WHITE);
 		register("aether_vestiges", AETHER_VESTIGES, InkColors.WHITE);
@@ -711,7 +711,7 @@ public class SpectrumItems {
 		register("bismuth_crystal", BISMUTH_CRYSTAL, InkColors.CYAN);
 		
 		register("raw_malachite", RAW_MALACHITE, InkColors.GREEN);
-		register("refined_malachite", REFINED_MALACHITE, InkColors.GREEN);
+		register("pure_malachite", PURE_MALACHITE, InkColors.GREEN);
 		
 		register("incandescent_essence", INCANDESCENT_ESSENCE, InkColors.ORANGE);
 		register("frostbite_essence", FROSTBITE_ESSENCE, InkColors.LIGHT_BLUE);

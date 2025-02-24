@@ -1,6 +1,6 @@
 {
   "type": "spectrum:pedestal",
-  "group": "refined_pastel_network",
+  "group": "pure_pastel_network",
   "time": 80,
   "tier": "advanced",
   "magenta": 0,
@@ -18,7 +18,7 @@
     "S": "spectrum:topaz_shard",
     "X": "spectrum:polished_basalt",
     "Y": "spectrum:polished_calcite",
-    "A": "spectrum:refined_azurite"
+    "A": "spectrum:pure_azurite"
   },
   "result": {
     "id": "spectrum:storage_node",

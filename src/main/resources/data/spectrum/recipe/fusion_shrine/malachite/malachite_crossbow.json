@@ -9,7 +9,7 @@
   "ingredients": [
     "minecraft:crossbow",
     {
-      "item": "spectrum:refined_malachite",
+      "item": "spectrum:pure_malachite",
       "count": 8
     },
     {

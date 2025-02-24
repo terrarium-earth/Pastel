@@ -31,7 +31,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "spectrum:refined_malachite",
+              "name": "spectrum:pure_malachite",
               "functions": [
                 {
                   "function": "minecraft:set_count",

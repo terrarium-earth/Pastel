@@ -16,12 +16,12 @@
   ],
   "key": {
     "P": "spectrum:paltaeria_gem",
-    "S": "spectrum:refined_malachite",
+    "S": "spectrum:pure_malachite",
     "R": "spectrum:resonance_shard"
   },
   "result": {
     "id": "spectrum:malachite_glass_ampoule",
     "count": 32
   },
-  "required_advancement": "spectrum:unlocks/ampoules/refined_malachite_ampoule"
+  "required_advancement": "spectrum:unlocks/ampoules/pure_malachite_ampoule"
 }

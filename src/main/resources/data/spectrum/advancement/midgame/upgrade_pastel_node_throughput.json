@@ -23,22 +23,22 @@
         }
       }
     },
-    "applied_refined_malachite": {
+    "applied_pure_malachite": {
       "trigger": "spectrum:pastel_node_upgrade",
       "conditions": {
         "input": {
           "items": [
-            "spectrum:refined_malachite"
+            "spectrum:pure_malachite"
           ]
         }
       }
     },
-    "applied_refined_bloodstone": {
+    "applied_pure_bloodstone": {
       "trigger": "spectrum:pastel_node_upgrade",
       "conditions": {
         "input": {
           "items": [
-            "spectrum:refined_bloodstone"
+            "spectrum:pure_bloodstone"
           ]
         }
       }

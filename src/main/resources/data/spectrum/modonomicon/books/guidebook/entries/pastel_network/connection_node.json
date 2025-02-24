@@ -33,7 +33,7 @@
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "title": "container.spectrum.rei.refined_recipe",
+      "title": "container.spectrum.rei.pure_recipe",
       "recipe_id": "spectrum:pedestal/tier3/pastel_network/connection_node_refined"
     }
   ]

@@ -2,7 +2,7 @@
   "parent": "spectrum:midgame/collect_azurite",
   "display": {
     "icon": {
-      "id": "spectrum:refined_azurite"
+      "id": "spectrum:pure_azurite"
     },
     "title": {
       "translate": "advancements.spectrum.grow_azurite_in_crystallarieum.title"

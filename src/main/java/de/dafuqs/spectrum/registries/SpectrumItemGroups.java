@@ -552,19 +552,19 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.SMALL_MALACHITE_BUD);
 				entries.add(SpectrumBlocks.LARGE_MALACHITE_BUD);
 				entries.add(SpectrumBlocks.MALACHITE_CLUSTER);
-				entries.add(SpectrumItems.REFINED_MALACHITE);
+				entries.add(SpectrumItems.PURE_MALACHITE);
 				
 				entries.add(SpectrumItems.RAW_AZURITE);
 				entries.add(SpectrumBlocks.SMALL_AZURITE_BUD);
 				entries.add(SpectrumBlocks.LARGE_AZURITE_BUD);
 				entries.add(SpectrumBlocks.AZURITE_CLUSTER);
-				entries.add(SpectrumItems.REFINED_AZURITE);
+				entries.add(SpectrumItems.PURE_AZURITE);
 				
 				entries.add(SpectrumItems.RAW_BLOODSTONE);
 				entries.add(SpectrumBlocks.SMALL_BLOODSTONE_BUD);
 				entries.add(SpectrumBlocks.LARGE_BLOODSTONE_BUD);
 				entries.add(SpectrumBlocks.BLOODSTONE_CLUSTER);
-				entries.add(SpectrumItems.REFINED_BLOODSTONE);
+				entries.add(SpectrumItems.PURE_BLOODSTONE);
 				
 				entries.add(SpectrumItems.FROSTBITE_ESSENCE);
 				entries.add(SpectrumBlocks.FROSTBITE_CRYSTAL);

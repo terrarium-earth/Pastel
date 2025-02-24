@@ -63,7 +63,7 @@
   ],
   "additional_recipe_manager_results": [
     {
-      "id": "spectrum:refined_azurite"
+      "id": "spectrum:pure_azurite"
     }
   ],
   "required_advancement": "spectrum:midgame/collect_azurite"
