@@ -26,7 +26,7 @@ import de.dafuqs.spectrum.items.map.*;
 import de.dafuqs.spectrum.items.misc.*;
 import de.dafuqs.spectrum.items.tools.*;
 import de.dafuqs.spectrum.items.trinkets.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import net.fabricmc.fabric.api.registry.*;
 import net.fabricmc.fabric.api.transfer.v1.fluid.*;
@@ -579,7 +579,7 @@ public class SpectrumItems {
 		registerMusicDisks();
 		registerTechnicalItems();
 		
-		DEFERRER.flush();
+		REGISTRAR.flush();
 	}
 	
 	public static void registerMusicDisks() {
