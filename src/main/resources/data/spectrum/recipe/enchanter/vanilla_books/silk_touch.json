@@ -17,7 +17,7 @@
       "item": "minecraft:diamond"
     },
     {
-      "item": "spectrum:refined_azurite"
+      "item": "spectrum:raw_azurite"
     },
     {
       "item": "spectrum:cyan_pigment"
@@ -29,7 +29,7 @@
       "item": "minecraft:diamond"
     },
     {
-      "item": "spectrum:refined_azurite"
+      "item": "spectrum:raw_azurite"
     }
   ],
   "result": {

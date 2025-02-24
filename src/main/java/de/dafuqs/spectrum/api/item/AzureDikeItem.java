@@ -12,7 +12,7 @@ import java.util.*;
 
 public interface AzureDikeItem {
 	
-	Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/create_refined_azurite");
+	Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/grow_azurite_in_crystallarieum");
 	
 	int maxAzureDike(ItemStack stack);
 	

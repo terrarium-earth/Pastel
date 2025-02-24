@@ -32,7 +32,7 @@
       "text": "book.spectrum.guidebook.pastel_upgrades.transfer.refined_azurite.text",
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "spectrum:midgame/create_refined_azurite"
+        "advancement_id": "spectrum:midgame/grow_azurite_in_crystallarieum"
       }
     },
     {

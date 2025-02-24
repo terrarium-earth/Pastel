@@ -7,9 +7,15 @@
   },
   "ingredients": [
     "spectrum:fanciful_circlet",
-    "spectrum:refined_azurite",
     "spectrum:paltaeria_gem",
-    "spectrum:moonstone_shard",
+    {
+      "item": "spectrum:refined_azurite",
+      "count": 8
+    },
+    {
+      "item": "spectrum:moonstone_shard",
+      "count": 16
+    },
     {
       "item": "spectrum:white_pigment",
       "count": 16

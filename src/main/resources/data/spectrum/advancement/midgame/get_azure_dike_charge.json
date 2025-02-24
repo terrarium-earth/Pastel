@@ -1,5 +1,5 @@
 {
-  "parent": "spectrum:midgame/create_refined_azurite",
+  "parent": "spectrum:midgame/collect_azurite",
   "display": {
     "icon": {
       "id": "spectrum:azure_dike_ring"
@@ -21,7 +21,7 @@
     "gotten_previous": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:midgame/create_refined_azurite"
+        "advancement_identifier": "spectrum:midgame/collect_azurite"
       }
     }
   }

@@ -1,33 +1,21 @@
 {
   "criteria": {
-    "built_complex_pedestal_structure": {
+    "unlocked_raw_malachite_ampoule": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:lategame/build_complex_pedestal_structure"
-      }
-    },
-    "collected_malachite": {
-      "trigger": "revelationary:advancement_gotten",
-      "conditions": {
-        "advancement_identifier": "spectrum:lategame/collect_malachite"
-      }
-    },
-    "unlocked_crystallarieum": {
-      "trigger": "revelationary:advancement_gotten",
-      "conditions": {
-        "advancement_identifier": "spectrum:unlocks/blocks/crystallarieum"
+        "advancement_identifier": "spectrum:unlocks/ampoules/raw_malachite_ampoule"
       }
     },
     "collected_paltaeria_gem": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:hidden/collect_paltaeria_gem"
+        "advancement_identifier": "spectrum:lategame/collect_malachite"
       }
     },
-    "struck_up_hummingstone_hymn": {
+    "grew_malachite_in_crystallarieum": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:lategame/strike_up_hummingstone_hymn"
+        "advancement_identifier": "spectrum:lategame/grow_malachite_in_crystallarieum"
       }
     }
   }

@@ -1,15 +1,9 @@
 {
   "criteria": {
-    "built_complex_pedestal_structure": {
+    "unlocked_raw_bloodstone_ampoule": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:lategame/build_complex_pedestal_structure"
-      }
-    },
-    "created_refined_bloodstone": {
-      "trigger": "revelationary:advancement_gotten",
-      "conditions": {
-        "advancement_identifier": "spectrum:grow_bloodstone_in_crystallarieum"
+        "advancement_identifier": "spectrum:unlocks/ampoules/raw_bloodstone_ampoule"
       }
     },
     "collected_paltaeria_gem": {
@@ -18,10 +12,10 @@
         "advancement_identifier": "spectrum:hidden/collect_paltaeria_gem"
       }
     },
-    "struck_up_hummingstone_hymn": {
+    "grew_bloodstone_in_crystallarieum": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:lategame/strike_up_hummingstone_hymn"
+        "advancement_identifier": "spectrum:grow_bloodstone_in_crystallarieum"
       }
     }
   }

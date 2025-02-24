@@ -66,5 +66,5 @@
       "id": "spectrum:refined_azurite"
     }
   ],
-  "required_advancement": "spectrum:unlocks/resources/azurite_growing"
+  "required_advancement": "spectrum:midgame/collect_azurite"
 }

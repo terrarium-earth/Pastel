@@ -5,14 +5,14 @@
       "id": "spectrum:refined_azurite"
     },
     "title": {
-      "translate": "advancements.spectrum.create_refined_azurite.title"
+      "translate": "advancements.spectrum.grow_azurite_in_crystallarieum.title"
     },
     "description": {
-      "translate": "advancements.spectrum.create_refined_azurite.description"
+      "translate": "advancements.spectrum.grow_azurite_in_crystallarieum.description"
     }
   },
   "criteria": {
-    "created_refined_azurite": {
+    "grew_azurite_in_crystallarieum": {
       "trigger": "spectrum:crystallarieum_growing",
       "conditions": {
         "grown_block": {
