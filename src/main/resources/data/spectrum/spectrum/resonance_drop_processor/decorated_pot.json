@@ -1,0 +1,15 @@
+{
+  "type": "spectrum:drop_self",
+  "block": {
+    "blocks": [
+      "minecraft:decorated_pot"
+    ]
+  },
+  "state_properties_to_copy": [
+    "cracked"
+  ],
+  "nbt_to_copy": [
+    "sherds",
+    "item"
+  ]
+}
