@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "spectrum:block/paltaeria_floatblock_top",
+    "side": "spectrum:block/paltaeria_floatblock_side"
+  }
+}

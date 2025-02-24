@@ -1235,16 +1235,26 @@ public class SpectrumBlocks {
 	public static final Block LARGE_BLOODSTONE_BUD = register(cluster(blockWithItem("large_bloodstone_bud", new SpectrumClusterBlock(gemstone(MapColor.RED, SpectrumBlockSoundGroups.SMALL_ONYX_BUD, 4), SpectrumClusterBlock.GrowthStage.LARGE), IS.of(Rarity.UNCOMMON), DyeColor.RED), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
 	public static final Block SMALL_BLOODSTONE_BUD = register(cluster(blockWithItem("small_bloodstone_bud", new SpectrumClusterBlock(gemstone(MapColor.RED, SpectrumBlockSoundGroups.ONYX_CLUSTER, 3), SpectrumClusterBlock.GrowthStage.SMALL), IS.of(Rarity.UNCOMMON), DyeColor.RED), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
 	
-	public static final Block STRATINE_ORE = new CloakedOreBlock(UniformIntProvider.create(3, 5), netherrackOre(), SpectrumAdvancements.REVEAL_STRATINE, Blocks.NETHERRACK.getDefaultState());
-	public static final Block PALTAERIA_ORE = new CloakedOreBlock(UniformIntProvider.create(2, 4), endstoneOre(), SpectrumAdvancements.REVEAL_PALTAERIA, Blocks.END_STONE.getDefaultState());
+	public static final Block STRATINE_ORE = register(simple(blockWithItem("stratine_ore", new CloakedOreBlock(UniformIntProvider.create(3, 5), netherrackOre(), SpectrumAdvancements.REVEAL_STRATINE, Blocks.NETHERRACK.getDefaultState()), block -> new FloatBlockItem(block, IS.of().fireproof(), -0.01F), DyeColor.RED)));
+	public static final Block PALTAERIA_ORE = register(simple(blockWithItem("paltaeria_ore", new CloakedOreBlock(UniformIntProvider.create(2, 4), endstoneOre(), SpectrumAdvancements.REVEAL_PALTAERIA, Blocks.END_STONE.getDefaultState()), block -> new FloatBlockItem(block, IS.DEFAULT, 0.01F), DyeColor.CYAN)));
 	
 	private static Settings gravityBlock(MapColor mapColor) {
 		return settings(mapColor, BlockSoundGroup.METAL, 4.0F, 6.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresTool();
 	}
 	
-	public static final FloatBlock PALTAERIA_FLOATBLOCK = new FloatBlock(gravityBlock(MapColor.LIGHT_BLUE), 0.2F);
-	public static final FloatBlock STRATINE_FLOATBLOCK = new FloatBlock(gravityBlock(MapColor.DARK_RED), -0.2F);
-	public static final FloatBlock HOVER_BLOCK = new FloatBlock(gravityBlock(MapColor.DIAMOND_BLUE), 0.0F);
+	public static final FloatBlock PALTAERIA_FLOATBLOCK = register(singleton(blockWithItem("paltaeria_floatblock", new FloatBlock(gravityBlock(MapColor.LIGHT_BLUE), 0.2F), block -> new FloatBlockItem(block, IS.of().fireproof(), -0.02F), DyeColor.RED), TexturedModel.CUBE_COLUMN));
+	public static final FloatBlock STRATINE_FLOATBLOCK = register(singleton(blockWithItem("stratine_floatblock", new FloatBlock(gravityBlock(MapColor.DARK_RED), -0.2F), block -> new FloatBlockItem(block, IS.DEFAULT, 0.02F), DyeColor.CYAN), TexturedModel.CUBE_COLUMN));
+	public static final FloatBlock HOVER_BLOCK = register(singleton(blockWithItem("hover_block", new FloatBlock(gravityBlock(MapColor.DIAMOND_BLUE), 0.0F), block -> new FloatBlockItem(block, IS.DEFAULT, 0F) {
+		@Override
+		public double applyGravity(ItemStack stack, World world, Entity entity) {
+			return 0;
+		}
+		
+		@Override
+		public void applyGravity(ItemStack stack, World world, ItemEntity itemEntity) {
+			itemEntity.setNoGravity(true);
+		}
+	}, DyeColor.GREEN), TexturedModel.CUBE_COLUMN));
 	
 	public static final Block BLACKSLAG_COAL_ORE = register(singleton(blockWithItem("blackslag_coal_ore", new ExperienceDroppingBlock(UniformIntProvider.create(0, 2), blackslagOre()), DyeColor.BLACK), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	public static final Block BLACKSLAG_COPPER_ORE = register(singleton(blockWithItem("blackslag_copper_ore", new ExperienceDroppingBlock(ConstantIntProvider.create(0), blackslagOre()), DyeColor.BLACK), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
@@ -1986,8 +1996,6 @@ public class SpectrumBlocks {
 		
 		registerShootingStarBlocks(IS.of(1, Rarity.UNCOMMON));
 		
-		registerOreBlocks(IS.of(), IS.of().fireproof());
-		registerOreStorageBlocks(IS.of(), IS.of().fireproof());
 		registerDecoStones(IS.of());
 		registerRedstone(IS.of());
 		registerMagicalBlocks(IS.of());
@@ -2085,27 +2093,6 @@ public class SpectrumBlocks {
 	private static void registerSpiritTree(Item.Settings settings) {
 		registerBlockWithItem("ominous_sapling", OMINOUS_SAPLING, new OminousSaplingBlockItem(OMINOUS_SAPLING, settings), DyeColor.GREEN);
 		registerBlockWithItem("sacred_soil", SACRED_SOIL, settings, DyeColor.LIME);
-	}
-	
-	private static void registerOreBlocks(Item.Settings settings, Item.Settings settingsFireproof) {
-		registerBlockWithItem("stratine_ore", STRATINE_ORE, new FloatBlockItem(STRATINE_ORE, settingsFireproof, -0.01F), DyeColor.RED);
-		registerBlockWithItem("paltaeria_ore", PALTAERIA_ORE, new FloatBlockItem(PALTAERIA_ORE, settings, 0.01F), DyeColor.CYAN);
-	}
-	
-	private static void registerOreStorageBlocks(Item.Settings settings, Item.Settings settingsFireproof) {
-		registerBlockWithItem("stratine_floatblock", STRATINE_FLOATBLOCK, new FloatBlockItem(STRATINE_FLOATBLOCK, settingsFireproof, -0.02F), DyeColor.RED);
-		registerBlockWithItem("paltaeria_floatblock", PALTAERIA_FLOATBLOCK, new FloatBlockItem(PALTAERIA_FLOATBLOCK, settings, 0.02F), DyeColor.CYAN);
-		registerBlockWithItem("hover_block", HOVER_BLOCK, new FloatBlockItem(HOVER_BLOCK, settings, 0F) {
-			@Override
-			public double applyGravity(ItemStack stack, World world, Entity entity) {
-				return 0;
-			}
-			
-			@Override
-			public void applyGravity(ItemStack stack, World world, ItemEntity itemEntity) {
-				itemEntity.setNoGravity(true);
-			}
-		}, DyeColor.GREEN);
 	}
 	
 	private static void registerDecoStones(Item.Settings settings) {
@@ -2401,6 +2388,17 @@ public class SpectrumBlocks {
 	public static <T extends Block> BlockRegistrar<T> blockWithItem(String name, T block, Item.Settings settings, DyeColor color) {
 		Identifier id = SpectrumCommon.locate(name);
 		BlockItem item = new BlockItem(block, settings);
+		COMMON_REGISTRAR.defer(() -> {
+			Registry.register(Registries.BLOCK, id, block);
+			Registry.register(Registries.ITEM, id, item);
+			ItemColors.ITEM_COLORS.registerColorMapping(item, color);
+		});
+		return new BlockRegistrar<>(block, item);
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> blockWithItem(String name, T block, Function<T, BlockItem> itemFactory, DyeColor color) {
+		Identifier id = SpectrumCommon.locate(name);
+		BlockItem item = itemFactory.apply(block);
 		COMMON_REGISTRAR.defer(() -> {
 			Registry.register(Registries.BLOCK, id, block);
 			Registry.register(Registries.ITEM, id, item);
