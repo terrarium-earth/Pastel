@@ -1,7 +1,0 @@
-{
-  "type": "starry_skies:single_block",
-  "type_data": {
-    "block": "spectrum:clover",
-    "chance": 0.02
-  }
-}
