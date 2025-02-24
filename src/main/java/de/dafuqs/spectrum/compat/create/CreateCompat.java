@@ -21,9 +21,9 @@ import static de.dafuqs.spectrum.registries.SpectrumBlocks.*;
 
 public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
-	public static Block SMALL_ZINC_BUD = SpectrumBlocks.register(cluster(blockWithItem("small_zinc_bud", new SpectrumClusterBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).hardness(1.0f).mapColor(Blocks.LIGHT_GRAY_CONCRETE.getDefaultMapColor()).requiresTool().nonOpaque(), SpectrumClusterBlock.GrowthStage.SMALL), IS.DEFAULT, DyeColor.BROWN), Models.CROSS));
-	public static Block LARGE_ZINC_BUD = SpectrumBlocks.register(cluster(blockWithItem("large_zinc_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.LARGE), IS.DEFAULT, DyeColor.BROWN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
-	public static Block ZINC_CLUSTER = SpectrumBlocks.register(cluster(blockWithItem("zinc_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.DEFAULT, DyeColor.BROWN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
+	public static Block SMALL_ZINC_BUD = SpectrumBlocks.register(cluster(blockWithItem("small_zinc_bud", new SpectrumClusterBlock(AbstractBlock.Settings.create().pistonBehavior(PistonBehavior.DESTROY).hardness(1.0f).mapColor(Blocks.LIGHT_GRAY_CONCRETE.getDefaultMapColor()).requiresTool().nonOpaque(), SpectrumClusterBlock.GrowthStage.SMALL), DyeColor.BROWN), Models.CROSS));
+	public static Block LARGE_ZINC_BUD = SpectrumBlocks.register(cluster(blockWithItem("large_zinc_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.LARGE), DyeColor.BROWN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
+	public static Block ZINC_CLUSTER = SpectrumBlocks.register(cluster(blockWithItem("zinc_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), DyeColor.BROWN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
 	public static Block PURE_ZINC_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_zinc_block", new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)), DyeColor.BROWN)));
 	
 	public static Item PURE_ZINC = SpectrumItems.registerDeferred("pure_zinc", new Item(IS.of()), DyeColor.BROWN);
