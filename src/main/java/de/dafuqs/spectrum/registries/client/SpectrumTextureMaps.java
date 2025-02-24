@@ -32,9 +32,11 @@ public class SpectrumTextureMaps {
 	}
 	
 	public static TextureMap flowerParticle(Block flowerBlock, String flowerSuffix, Block particleBlock, String particleSuffix) {
-		return new TextureMap()
-				.put(FLOWER, getSubId(flowerBlock, flowerSuffix))
-				.put(PARTICLE, getSubId(particleBlock, particleSuffix));
+		return flowerParticle(getSubId(flowerBlock, flowerSuffix), getSubId(particleBlock, particleSuffix));
+	}
+	
+	public static TextureMap flowerParticle(Identifier flower, Identifier particle) {
+		return new TextureMap().put(FLOWER, flower).put(PARTICLE, particle);
 	}
 	
 	public static TextureMap sideTopBottom(Block sideBlock, String sideSuffix, Block topBlock, String topSuffix, Block bottomBlock, String bottomSuffix) {

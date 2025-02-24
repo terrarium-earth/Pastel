@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.registries.client;
 
 import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.blocks.jade_vines.*;
 import net.minecraft.data.client.*;
 import net.minecraft.util.*;
 
@@ -41,11 +42,6 @@ public class SpectrumModels {
 	public static final Identifier BALCITE_PYLON_PEDESTAL = SpectrumCommon.locate("block/balcite_pylon_pedestal");
 	public static final Identifier MOB_BLOCK = SpectrumCommon.locate("block/mob_block");
 	public static final Identifier MOB_BLOCK_COOLDOWN = SpectrumCommon.locate("block/mob_block_cooldown");
-	public static final Identifier PYRITE_PROJECTOR = SpectrumCommon.locate("block/pyrite_projector");
-	public static final Identifier UPGRADE_SPEED = SpectrumCommon.locate("block/upgrade_speed");
-	public static final Identifier UPGRADE_EFFICIENCY = SpectrumCommon.locate("block/upgrade_efficiency");
-	public static final Identifier UPGRADE_YIELD = SpectrumCommon.locate("block/upgrade_yield");
-	public static final Identifier UPGRADE_EXPERIENCE = SpectrumCommon.locate("block/upgrade_experience");
 	
 	public static Model baseTransLantern(boolean diagonal, boolean tall) {
 		return new Model(Optional.of(SpectrumCommon.locate("templates/base_trans_lantern" + (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small"))), Optional.empty(), GLASS, CASE);
@@ -57,6 +53,18 @@ public class SpectrumModels {
 	
 	public static Model sugarStick(int age) {
 		return new Model(Optional.of(SpectrumCommon.locate("templates/sugar_stick" + age)), Optional.empty(), KEY0, KEY1, PARTICLE);
+	}
+	
+	public static Model jadeVines(JadeVinePlantBlock.JadeVinesPlantPart part) {
+		return new Model(Optional.of(SpectrumCommon.locate("templates/jade_vines_" + part.asString())), Optional.empty(), FLOWER, PARTICLE);
+	}
+	
+	public static Model jadeVineBulb(boolean dead) {
+		return new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_bulb" + (dead ? "_dead" : ""))), Optional.empty(), FLOWER, PARTICLE);
+	}
+	
+	public static Model jadeVineRoots(boolean dead) {
+		return new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_roots" + (dead ? "_dead" : ""))), Optional.empty(), FLOWER, PARTICLE);
 	}
 	
 	// Block Builtins w/ Extra Keys

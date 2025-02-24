@@ -6,8 +6,8 @@
     64
   ],
   "textures": {
-    "0": "spectrum:block/jade_vine_plant_petals",
-    "particle": "spectrum:block/jade_vine_plant_breaking"
+    "0": "#flower",
+    "particle": "#particle"
   },
   "elements": [
     {
@@ -1014,12 +1014,12 @@
       "name": "base",
       "from": [
         0,
-        16,
+        15.99,
         0
       ],
       "to": [
         16,
-        16,
+        15.99,
         16
       ],
       "rotation": {
@@ -1243,6 +1243,78 @@
           "texture": "#0"
         }
       }
+    }
+  ],
+  "groups": [
+    {
+      "name": "root",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "color": 0,
+      "children": [
+        {
+          "name": "outer frills",
+          "origin": [
+            8,
+            32,
+            15
+          ],
+          "color": 0,
+          "children": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        {
+          "name": "middle frills",
+          "origin": [
+            8,
+            32,
+            15
+          ],
+          "color": 0,
+          "children": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        {
+          "name": "inner frills",
+          "origin": [
+            8,
+            32,
+            15
+          ],
+          "color": 0,
+          "children": [
+            8,
+            9,
+            10,
+            11
+          ]
+        },
+        12
+      ]
+    },
+    {
+      "name": "body",
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "color": 0,
+      "children": [
+        13,
+        14
+      ]
     }
   ]
 }

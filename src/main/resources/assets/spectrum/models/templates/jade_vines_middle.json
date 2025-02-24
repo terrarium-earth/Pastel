@@ -6,8 +6,8 @@
     64
   ],
   "textures": {
-    "0": "spectrum:block/jade_vine_plant_blooming",
-    "particle": "spectrum:block/jade_vine_plant_breaking"
+    "0": "#flower",
+    "particle": "#particle"
   },
   "elements": [
     {
@@ -35,54 +35,54 @@
         "north": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "east": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "south": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "west": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "up": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "down": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         }
@@ -113,54 +113,54 @@
         "north": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "east": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "south": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "west": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "up": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         },
         "down": {
           "uv": [
             0,
-            12,
+            8,
             4,
-            16
+            12
           ],
           "texture": "#0"
         }

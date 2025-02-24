@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "spectrum:block/jadeite_lotus_sprout"
+    "cross": "spectrum:block/jadeite_lotus_bulb"
   }
 }

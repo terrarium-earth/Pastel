@@ -26,21 +26,21 @@
     },
     {
       "apply": {
-        "model": "spectrum:block/jadeite_lotus_base"
+        "model": "spectrum:block/jadeite_lotus_stem_base"
       },
       "when": {
-        "part": "base",
-        "inverted": "false"
+        "inverted": "false",
+        "part": "base"
       }
     },
     {
       "apply": {
-        "model": "spectrum:block/jadeite_lotus_base",
+        "model": "spectrum:block/jadeite_lotus_stem_base",
         "x": 180
       },
       "when": {
-        "part": "base",
-        "inverted": "true"
+        "inverted": "true",
+        "part": "base"
       }
     }
   ]

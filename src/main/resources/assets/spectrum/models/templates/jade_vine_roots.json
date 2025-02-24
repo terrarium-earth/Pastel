@@ -6,8 +6,8 @@
     64
   ],
   "textures": {
-    "0": "spectrum:block/jade_vine_plant_ripe",
-    "particle": "spectrum:block/jade_vine_plant_ripe_breaking"
+    "0": "#flower",
+    "particle": "#particle"
   },
   "elements": [
     {

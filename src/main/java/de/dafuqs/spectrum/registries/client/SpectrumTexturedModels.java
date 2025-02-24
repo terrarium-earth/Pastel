@@ -81,4 +81,8 @@ public class SpectrumTexturedModels {
 		return TexturedModel.makeFactory(b -> new TextureMap(), new Model(Optional.of(parentModelId), Optional.empty()));
 	}
 	
+	public static TexturedModel.Factory carpet(UnaryOperator<Block> woolBlock, String woolSuffix) {
+		return TexturedModel.makeFactory(b -> TextureMap.wool(ModelIds.getBlockSubModelId(woolBlock.apply(b), woolSuffix)), Models.CARPET);
+	}
+	
 }
