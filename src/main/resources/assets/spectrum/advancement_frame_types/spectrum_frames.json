@@ -1,5 +1,4 @@
 {
-  "texture_sheet": "textures/gui/advancement_frames.png",
   "frames": [
     {
       "name": "amethyst_shard",
