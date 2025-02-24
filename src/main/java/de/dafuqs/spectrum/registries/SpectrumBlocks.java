@@ -594,12 +594,12 @@ public class SpectrumBlocks {
 		return settings(MapColor.CLEAR, soundGroup, 1.5F).nonOpaque().requiresTool();
 	}
 	
-	public static final Block CONNECTION_NODE = new PastelNodeBlock(pastelNode(BlockSoundGroup.AMETHYST_CLUSTER), PastelNodeType.CONNECTION);
-	public static final Block PROVIDER_NODE = new PastelNodeBlock(pastelNode(BlockSoundGroup.AMETHYST_CLUSTER), PastelNodeType.PROVIDER);
-	public static final Block STORAGE_NODE = new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.STORAGE);
-	public static final Block BUFFER_NODE = new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.BUFFER);
-	public static final Block SENDER_NODE = new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.CITRINE_CLUSTER), PastelNodeType.SENDER);
-	public static final Block GATHER_NODE = new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.ONYX_CLUSTER), PastelNodeType.GATHER);
+	public static final Block CONNECTION_NODE = register(cutout(defaultFacingUp(blockWithItem("connection_node", new PastelNodeBlock(pastelNode(BlockSoundGroup.AMETHYST_CLUSTER), PastelNodeType.CONNECTION), IS.of(16), DyeColor.LIGHT_GRAY), SpectrumTexturedModels.parented(SpectrumModels.PASTEL_GENERIC_NODE))).withPredefinedItemModel());
+	public static final Block PROVIDER_NODE = register(cutout(defaultFacingUp(blockWithItem("provider_node", new PastelNodeBlock(pastelNode(BlockSoundGroup.AMETHYST_CLUSTER), PastelNodeType.PROVIDER), IS.of(16), DyeColor.MAGENTA), SpectrumTexturedModels.parented(SpectrumModels.PASTEL_PUSH_NODE))).withPredefinedItemModel());
+	public static final Block STORAGE_NODE = register(cutout(defaultFacingUp(blockWithItem("storage_node", new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.STORAGE), IS.of(16), DyeColor.CYAN), SpectrumTexturedModels.parented(SpectrumModels.PASTEL_STORE_NODE))).withPredefinedItemModel());
+	public static final Block BUFFER_NODE = register(cutout(defaultFacingUp(blockWithItem("buffer_node", new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.TOPAZ_CLUSTER), PastelNodeType.BUFFER), IS.of(16), DyeColor.GREEN), SpectrumTexturedModels.parented(SpectrumModels.PASTEL_STORE_NODE))).withPredefinedItemModel());
+	public static final Block SENDER_NODE = register(cutout(defaultFacingUp(blockWithItem("sender_node", new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.CITRINE_CLUSTER), PastelNodeType.SENDER), IS.of(16), DyeColor.YELLOW), SpectrumTexturedModels.parented(SpectrumModels.PASTEL_PUSH_NODE))).withPredefinedItemModel());
+	public static final Block GATHER_NODE = register(cutout(defaultFacingUp(blockWithItem("gather_node", new PastelNodeBlock(pastelNode(SpectrumBlockSoundGroups.ONYX_CLUSTER), PastelNodeType.GATHER), IS.of(16), DyeColor.BLACK), SpectrumTexturedModels.parented(SpectrumModels.PASTEL_PULL_NODE))).withPredefinedItemModel());
 	
 	// COLORED BLOCK FAMILIES
 	
@@ -1142,14 +1142,12 @@ public class SpectrumBlocks {
 	public static final Block RESPLENDENT_CUSHION = register(singleton(blockWithItem("resplendent_cushion", new CushionBlock(Settings.copy(RESPLENDENT_BLOCK).nonOpaque().allowsSpawning(SpectrumBlocks::never)), IS.of(Rarity.UNCOMMON), DyeColor.YELLOW), SpectrumTexturedModels.CUSHION));
 	public static final Block RESPLENDENT_CARPET = register(singleton(blockWithItem("resplendent_carpet", new CushionedCarpetBlock(Settings.copy(Blocks.RED_CARPET)), IS.of(Rarity.UNCOMMON), DyeColor.YELLOW), TexturedModel.CARPET));
 	public static final Block RESPLENDENT_BED = register(cutout(blockWithItem("resplendent_bed", new SpectrumBedBlock(DyeColor.RED, Settings.copy(Blocks.RED_BED)), IS.of(1, Rarity.UNCOMMON), DyeColor.YELLOW))
-			.withBlockModel((ctx, block) -> {
-				ctx.excludeFromSimpleItemModelGeneration(block);
-				return VariantsBlockStateSupplier.create(block)
-						.coordinate(createSouthDefaultHorizontalRotationStates())
-						.coordinate(BlockStateVariantMap.create(BedBlock.PART)
-								.register(BedPart.HEAD, createModelVariant(ModelIds.getBlockSubModelId(block, "_head")))
-								.register(BedPart.FOOT, createModelVariant(ModelIds.getBlockSubModelId(block, "_foot"))));
-			}));
+			.withPredefinedItemModel()
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block)
+					.coordinate(createSouthDefaultHorizontalRotationStates())
+					.coordinate(BlockStateVariantMap.create(BedBlock.PART)
+							.register(BedPart.HEAD, createModelVariant(ModelIds.getBlockSubModelId(block, "_head")))
+							.register(BedPart.FOOT, createModelVariant(ModelIds.getBlockSubModelId(block, "_foot"))))));
 	
 	// JADE VINES
 	public static Settings jadeVine() {
@@ -1782,11 +1780,11 @@ public class SpectrumBlocks {
 		return AbstractBlock.Settings.copy(Blocks.STONE).nonOpaque();
 	}
 	
-	public static final ShootingStarBlock GLISTERING_SHOOTING_STAR = new ShootingStarBlock(shootingStar(), ShootingStar.Type.GLISTERING);
-	public static final ShootingStarBlock FIERY_SHOOTING_STAR = new ShootingStarBlock(shootingStar(), ShootingStar.Type.FIERY);
-	public static final ShootingStarBlock COLORFUL_SHOOTING_STAR = new ShootingStarBlock(shootingStar(), ShootingStar.Type.COLORFUL);
-	public static final ShootingStarBlock PRISTINE_SHOOTING_STAR = new ShootingStarBlock(shootingStar(), ShootingStar.Type.PRISTINE);
-	public static final ShootingStarBlock GEMSTONE_SHOOTING_STAR = new ShootingStarBlock(shootingStar(), ShootingStar.Type.GEMSTONE);
+	public static final ShootingStarBlock GLISTERING_SHOOTING_STAR = register(cutout(singleton(blockWithItem("glistering_shooting_star", new ShootingStarBlock(shootingStar(), ShootingStar.Type.GLISTERING), block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), DyeColor.PURPLE), SpectrumTexturedModels.SHOOTING_STAR)));
+	public static final ShootingStarBlock FIERY_SHOOTING_STAR = register(cutout(singleton(blockWithItem("fiery_shooting_star", new ShootingStarBlock(shootingStar(), ShootingStar.Type.FIERY), block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), DyeColor.PURPLE), SpectrumTexturedModels.SHOOTING_STAR)));
+	public static final ShootingStarBlock COLORFUL_SHOOTING_STAR = register(cutout(singleton(blockWithItem("colorful_shooting_star", new ShootingStarBlock(shootingStar(), ShootingStar.Type.COLORFUL), block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), DyeColor.PURPLE), SpectrumTexturedModels.SHOOTING_STAR)));
+	public static final ShootingStarBlock PRISTINE_SHOOTING_STAR = register(cutout(singleton(blockWithItem("pristine_shooting_star", new ShootingStarBlock(shootingStar(), ShootingStar.Type.PRISTINE), block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), DyeColor.PURPLE), SpectrumTexturedModels.SHOOTING_STAR)));
+	public static final ShootingStarBlock GEMSTONE_SHOOTING_STAR = register(cutout(singleton(blockWithItem("gemstone_shooting_star", new ShootingStarBlock(shootingStar(), ShootingStar.Type.GEMSTONE), block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), DyeColor.PURPLE), SpectrumTexturedModels.SHOOTING_STAR)));
 	public static final Block STARDUST_BLOCK = register(simple(blockWithItem("stardust_block", new ColoredFallingBlock(new ColorCode(DyeColor.PURPLE.getFireworkColor()), AbstractBlock.Settings.copy(Blocks.SAND).mapColor(MapColor.PURPLE)), IS.of(1, Rarity.UNCOMMON), DyeColor.BLACK)));
 	
 	public static final Block INCANDESCENT_AMALGAM = new IncandescentAmalgamBlock(AbstractBlock.Settings.create().breakInstantly().nonOpaque());
@@ -1969,10 +1967,7 @@ public class SpectrumBlocks {
 		registerBlockWithItem("crystal_apothecary", CRYSTAL_APOTHECARY, IS.of(8), DyeColor.GREEN);
 		registerBlockWithItem("color_picker", COLOR_PICKER, IS.of(8), DyeColor.GREEN);
 		
-		registerPastelNetworkNodes(IS.of(16));
 		registerStoneBlocks(IS.of());
-		
-		registerShootingStarBlocks(IS.of(1, Rarity.UNCOMMON));
 		
 		registerRedstone(IS.of());
 		registerMagicalBlocks(IS.of());
@@ -2067,23 +2062,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("pyrite_projector", PYRITE_PROJECTOR, settings, DyeColor.YELLOW);
 	}
 	
-	public static void registerShootingStarBlocks(Item.Settings settings) {
-		registerBlockWithItem("glistering_shooting_star", GLISTERING_SHOOTING_STAR, new ShootingStarItem(GLISTERING_SHOOTING_STAR, settings), DyeColor.PURPLE);
-		registerBlockWithItem("fiery_shooting_star", FIERY_SHOOTING_STAR, new ShootingStarItem(FIERY_SHOOTING_STAR, settings), DyeColor.PURPLE);
-		registerBlockWithItem("colorful_shooting_star", COLORFUL_SHOOTING_STAR, new ShootingStarItem(COLORFUL_SHOOTING_STAR, settings), DyeColor.PURPLE);
-		registerBlockWithItem("pristine_shooting_star", PRISTINE_SHOOTING_STAR, new ShootingStarItem(PRISTINE_SHOOTING_STAR, settings), DyeColor.PURPLE);
-		registerBlockWithItem("gemstone_shooting_star", GEMSTONE_SHOOTING_STAR, new ShootingStarItem(GEMSTONE_SHOOTING_STAR, settings), DyeColor.PURPLE);
-	}
-	
-	public static void registerPastelNetworkNodes(Item.Settings settings) {
-		registerBlockWithItem("connection_node", CONNECTION_NODE, settings, DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("provider_node", PROVIDER_NODE, settings, DyeColor.MAGENTA);
-		registerBlockWithItem("storage_node", STORAGE_NODE, settings, DyeColor.CYAN);
-		registerBlockWithItem("buffer_node", BUFFER_NODE, settings, DyeColor.GREEN);
-		registerBlockWithItem("sender_node", SENDER_NODE, settings, DyeColor.YELLOW);
-		registerBlockWithItem("gather_node", GATHER_NODE, settings, DyeColor.BLACK);
-	}
-	
 	private static void registerStructureBlocks(Item.Settings settings) {
 		registerBlockWithItem("powder_chiseled_preservation_stone", POWDER_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
 		registerBlockWithItem("deep_light_chiseled_preservation_stone", DEEP_LIGHT_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
@@ -2133,9 +2111,6 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), FUSION_SHRINE_BASALT, FUSION_SHRINE_CALCITE);
 		BlockRenderLayerMap.INSTANCE.putBlock(ENCHANTER, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(POTION_WORKSHOP, RenderLayer.getTranslucent());
-		
-		// Pastel
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), CONNECTION_NODE, PROVIDER_NODE, SENDER_NODE, STORAGE_NODE, BUFFER_NODE, GATHER_NODE);
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PARTICLE_SPAWNER, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.CREATIVE_PARTICLE_SPAWNER, RenderLayer.getCutout());
@@ -2194,13 +2169,6 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SAG_LEAF, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SAG_BUBBLE, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.SMALL_SAG_BUBBLE, RenderLayer.getCutout());
-		
-		// Shooting stars
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.COLORFUL_SHOOTING_STAR, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.FIERY_SHOOTING_STAR, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.GEMSTONE_SHOOTING_STAR, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.GLISTERING_SHOOTING_STAR, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.PRISTINE_SHOOTING_STAR, RenderLayer.getCutout());
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(SpectrumBlocks.INCANDESCENT_AMALGAM, RenderLayer.getCutout());
 		
@@ -2427,6 +2395,11 @@ public class SpectrumBlocks {
 		
 		public BlockRegistrar<T> withItemModel(BiConsumer<ItemModelGenerator, Item> callback) {
 			if (this.hasItem) ITEM_MODEL_REGISTRAR.defer(ctx -> callback.accept(ctx, block.asItem()));
+			return this;
+		}
+		
+		public BlockRegistrar<T> withPredefinedItemModel() {
+			if (this.hasItem) BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.excludeFromSimpleItemModelGeneration(block));
 			return this;
 		}
 		

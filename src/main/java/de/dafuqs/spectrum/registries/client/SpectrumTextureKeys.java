@@ -9,6 +9,7 @@ public class SpectrumTextureKeys {
 	
 	public static final TextureKey BASE = TextureKey.of("base");
 	public static final TextureKey CASE = TextureKey.of("case");
+	public static final TextureKey CORE = TextureKey.of("core");
 	public static final TextureKey ENDS = TextureKey.of("ends");
 	public static final TextureKey FILAMENT = TextureKey.of("filament");
 	public static final TextureKey FLOWER = TextureKey.of("flower");

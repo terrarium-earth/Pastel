@@ -30,7 +30,13 @@ public class SpectrumModels {
 	public static final Model MOONSTONE_CHISELED_DOWN = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled_down")), Optional.empty(), SIDE, LINE);
 	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), SIDE, TOP, INSIDE);
 	public static final Model OVERGROWN = new Model(Optional.of(SpectrumCommon.locate("templates/overgrown")), Optional.empty(), SIDE, TOP, BOTTOM, FRONDS);
+	public static final Model SHOOTING_STAR = new Model(Optional.of(SpectrumCommon.locate("templates/shooting_star")), Optional.empty(), SIDE, CORE);
 	public static final Model TRANSLUCENT_OUTER1 = new Model(Optional.of(SpectrumCommon.locate("templates/translucent_outer1")), Optional.empty(), TEXTURE);
+	
+	public static final Identifier PASTEL_GENERIC_NODE = SpectrumCommon.locate("pastel/generic_node");
+	public static final Identifier PASTEL_PUSH_NODE = SpectrumCommon.locate("pastel/push_node");
+	public static final Identifier PASTEL_PULL_NODE = SpectrumCommon.locate("pastel/pull_node");
+	public static final Identifier PASTEL_STORE_NODE = SpectrumCommon.locate("pastel/store_node");
 	
 	public static final Identifier BALCITE_PYLON_PEDESTAL = SpectrumCommon.locate("block/balcite_pylon_pedestal");
 	public static final Identifier GIANT_MOSS_BALL = SpectrumCommon.locate("block/giant_moss_ball");

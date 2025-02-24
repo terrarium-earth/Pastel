@@ -1,5 +1,9 @@
 {
   "variants": {
+    "facing=down": {
+      "model": "spectrum:block/gather_node",
+      "x": 180
+    },
     "facing=east": {
       "model": "spectrum:block/gather_node",
       "x": 90,
@@ -11,19 +15,16 @@
     },
     "facing=south": {
       "model": "spectrum:block/gather_node",
-      "x": 270
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "spectrum:block/gather_node"
     },
     "facing=west": {
       "model": "spectrum:block/gather_node",
       "x": 90,
       "y": 270
-    },
-    "facing=up": {
-      "model": "spectrum:block/gather_node"
-    },
-    "facing=down": {
-      "model": "spectrum:block/gather_node",
-      "x": 180
     }
   }
 }

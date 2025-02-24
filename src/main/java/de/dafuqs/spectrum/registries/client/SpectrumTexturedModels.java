@@ -2,17 +2,22 @@ package de.dafuqs.spectrum.registries.client;
 
 import net.minecraft.block.*;
 import net.minecraft.data.client.*;
+import net.minecraft.util.*;
 
+import java.util.*;
 import java.util.function.*;
 
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.*;
+import static net.minecraft.data.client.TextureKey.*;
 import static net.minecraft.data.client.TextureMap.*;
 
 public class SpectrumTexturedModels {
 	
+	public static final TexturedModel.Factory BASE_TRANS_LIGHT_CORE = TexturedModel.makeFactory(b -> new TextureMap().put(CASE, getId(b)).put(BASE, getSubId(b, "_base")).put(GLASS, getSubId(b, "_glass")).put(SHELL, getSubId(b, "_shell")).put(FILAMENT, getSubId(b, "_filament")).put(ENDS, getSubId(b, "_ends")), SpectrumModels.BASE_TRANS_LIGHT_CORE);
+	public static final TexturedModel.Factory CHIME = TexturedModel.makeFactory(b -> new TextureMap().put(BASE, SpectrumTextures.BALCITE_CHIME_BASE).put(GEMSTONE, getId(b)), SpectrumModels.CHIME);
 	public static final TexturedModel.Factory CUBE_COLUMN_MIRRORED = TexturedModel.makeFactory(TextureMap::sideAndEndForTop, Models.CUBE_COLUMN_MIRRORED);
-	public static final TexturedModel.Factory CHIME = TexturedModel.makeFactory(b -> SpectrumTextureMaps.baseGemstone(SpectrumTextures.BALCITE_CHIME_BASE, getId(b)), SpectrumModels.CHIME);
 	public static final TexturedModel.Factory CUSHION = TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottom(b, "_side", b, "_top", b, "_bottom"), SpectrumModels.CUSHION);
-	public static final TexturedModel.Factory BASE_TRANS_LIGHT_CORE = TexturedModel.makeFactory(b -> new TextureMap().put(SpectrumTextureKeys.CASE, getId(b)).put(SpectrumTextureKeys.BASE, getSubId(b, "_base")).put(SpectrumTextureKeys.GLASS, getSubId(b, "_glass")).put(SpectrumTextureKeys.SHELL, getSubId(b, "_shell")).put(SpectrumTextureKeys.FILAMENT, getSubId(b, "_filament")).put(SpectrumTextureKeys.ENDS, getSubId(b, "_ends")), SpectrumModels.BASE_TRANS_LIGHT_CORE);
+	public static final TexturedModel.Factory SHOOTING_STAR = TexturedModel.makeFactory(b -> new TextureMap().put(CORE, getId(b)).put(SIDE, getSubId(b, "_side")), SpectrumModels.SHOOTING_STAR);
 	
 	public static TexturedModel.Factory cubeAll(UnaryOperator<Block> allBlock, String allSuffix) {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.all(allBlock.apply(b), allSuffix), Models.CUBE_ALL);
@@ -35,7 +40,7 @@ public class SpectrumTexturedModels {
 	}
 	
 	public static TexturedModel.Factory farmland(UnaryOperator<Block> dirtBlock, String dirtSuffix, UnaryOperator<Block> topBlock, String topSuffix) {
-		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.dirtTop(dirtBlock.apply(b), dirtSuffix, topBlock.apply(b), topSuffix), Models.TEMPLATE_FARMLAND);
+		return TexturedModel.makeFactory(b -> new TextureMap().put(DIRT, getSubId(dirtBlock.apply(b), dirtSuffix)).put(TOP, getSubId(topBlock.apply(b), topSuffix)), Models.TEMPLATE_FARMLAND);
 	}
 	
 	public static TexturedModel.Factory cross(UnaryOperator<Block> crossBlock, String crossSuffix) {
@@ -61,11 +66,15 @@ public class SpectrumTexturedModels {
 	}
 	
 	public static TexturedModel.Factory baseTransLantern(boolean diagonal, boolean tall) {
-		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.glassCase(b, "_glass_on", b, "_case_on"), SpectrumModels.baseTransLantern(diagonal, tall));
+		return TexturedModel.makeFactory(b -> new TextureMap().put(GLASS, getSubId(b, "_glass_on")).put(CASE, getSubId(b, "_case_on")), SpectrumModels.baseTransLantern(diagonal, tall));
 	}
 	
 	public static TexturedModel.Factory sugarStick(int age, UnaryOperator<Block> sugarBlock) {
-		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.key0Key1Particle(sugarBlock.apply(b), "", Blocks.OAK_PLANKS, "", sugarBlock.apply(b), ""), SpectrumModels.sugarStick(age));
+		return TexturedModel.makeFactory(b -> new TextureMap().put(KEY0, getId(sugarBlock.apply(b))).put(KEY1, getId(Blocks.OAK_PLANKS)).put(PARTICLE, getId(sugarBlock.apply(b))), SpectrumModels.sugarStick(age));
+	}
+	
+	public static TexturedModel.Factory parented(Identifier parentModelId) {
+		return TexturedModel.makeFactory(b -> new TextureMap(), new Model(Optional.of(parentModelId), Optional.empty()));
 	}
 	
 }
