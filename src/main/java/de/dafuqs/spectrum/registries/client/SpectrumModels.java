@@ -26,6 +26,7 @@ public class SpectrumModels {
 	public static final Model BASE_FLAT_LIGHT_MIRRORED = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light_mirrored")), Optional.empty(), INNER, OUTER, PARTICLE);
 	public static final Model BASE_PYLON_BODY = new Model(Optional.of(SpectrumCommon.locate("templates/base_pylon_body")), Optional.empty(), SIDE, END);
 	public static final Model BASE_TRANS_LIGHT_CORE = new Model(Optional.of(SpectrumCommon.locate("templates/base_trans_light_core")), Optional.empty(), GLASS, CASE, BASE, ENDS, SHELL, FILAMENT);
+	public static final Model BOWL = new Model(Optional.of(SpectrumCommon.locate("templates/base_bowl")), Optional.empty(), SIDE, TOP, BOTTOM, INNER);
 	public static final Model CHIME = new Model(Optional.of(SpectrumCommon.locate("templates/chime")), Optional.empty(), BASE, GEMSTONE);
 	public static final Model CUSHION = new Model(Optional.of(SpectrumCommon.locate("templates/cushion")), Optional.empty(), SIDE, TOP, BOTTOM);
 	public static final Model COLORED_LAMP_ON = new Model(Optional.of(SpectrumCommon.locate("templates/colored_lamp_on")), Optional.empty(), INNER, OUTER);
@@ -42,6 +43,7 @@ public class SpectrumModels {
 	public static final Model REDSTONE_TRANSCEIVER_CHANNEL = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_channel_base")), Optional.empty(), ALL);
 	public static final Model REDSTONE_TRANSCEIVER_SENDER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_sender_base")), Optional.empty(), LIGHT);
 	public static final Model REDSTONE_TRANSCEIVER_RECEIVER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_receiver_base")), Optional.empty(), LIGHT);
+	public static final Model ROUNDEL = new Model(Optional.of(SpectrumCommon.locate("templates/base_roundel")), Optional.empty(), ALL);
 	public static final Model SHOOTING_STAR = new Model(Optional.of(SpectrumCommon.locate("templates/shooting_star")), Optional.empty(), SIDE, CORE);
 	public static final Model TRANSLUCENT_OUTER1 = new Model(Optional.of(SpectrumCommon.locate("templates/translucent_outer1")), Optional.empty(), TEXTURE);
 	

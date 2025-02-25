@@ -124,9 +124,9 @@ public class SpectrumBlocks {
 	public static final Block FUSION_SHRINE_CALCITE = new FusionShrineBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE).luminance(value -> value.get(FusionShrineBlock.LIGHT_LEVEL)));
 	
 	public static final Block ENCHANTER = new EnchanterBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
-	public static final Block ITEM_BOWL_BASALT = new ItemBowlBlock(craftingBlock(MapColor.BLACK, BlockSoundGroup.BASALT));
-	public static final Block ITEM_BOWL_CALCITE = new ItemBowlBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
-	public static final Block ITEM_ROUNDEL = new ItemRoundelBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
+	public static final Block ITEM_BOWL_BASALT = register(cutout(singleton(blockWithItem("item_bowl_basalt", new ItemBowlBlock(craftingBlock(MapColor.BLACK, BlockSoundGroup.BASALT)), IS.of(16), DyeColor.PINK), SpectrumTexturedModels.BOWL)));
+	public static final Block ITEM_BOWL_CALCITE = register(cutout(singleton(blockWithItem("item_bowl_calcite", new ItemBowlBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(16), DyeColor.PINK), SpectrumTexturedModels.BOWL)));
+	public static final Block ITEM_ROUNDEL = register(singleton(blockWithItem("item_roundel", new ItemRoundelBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(16), DyeColor.PINK), SpectrumTexturedModels.ROUNDEL));
 	public static final Block POTION_WORKSHOP = new PotionWorkshopBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
 	public static final Block SPIRIT_INSTILLER = new SpiritInstillerBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
 	public static final CrystallarieumBlock CRYSTALLARIEUM = new CrystallarieumBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
@@ -318,6 +318,7 @@ public class SpectrumBlocks {
 	public static final Block PYRITE_RIPPER = register(mippedCutout(blockWithItem("pyrite_ripper", new PyriteRipperBlock(Settings.copy(PYRITE).nonOpaque().allowsSpawning(SpectrumBlocks::never).blockVision(SpectrumBlocks::never)), DyeColor.BROWN)));
 	public static final Block PYRITE_PROJECTOR = register(singleton(blockWithItem("pyrite_projector", new ProjectorBlock(Settings.copy(PYRITE), "pyrite_projector_projection", 16, 14, 1.375F, 1F, 16F), DyeColor.BROWN), ModelIds::getBlockModelId));
 	
+	//TODO naming convention suggests that it should be 'pyrite_tile_slab', etc.
 	public static final Block PYRITE_TILES = register(simple(blockWithItem("pyrite_tiles", new Block(Settings.copy(PYRITE)), DyeColor.BROWN)));
 	public static final Block PYRITE_TILES_SLAB = register(blockWithItem("pyrite_tiles_slab", new SlabBlock(Settings.copy(PYRITE_TILES)), DyeColor.BROWN));
 	public static final Block PYRITE_TILES_STAIRS = register(blockWithItem("pyrite_tiles_stairs", new StairsBlock(PYRITE_TILES.getDefaultState(), Settings.copy(PYRITE_TILES)), DyeColor.BROWN));
@@ -364,13 +365,14 @@ public class SpectrumBlocks {
 	public static final Block PRIMORDIAL_WALL_TORCH = new WallTorchBlock(SpectrumParticleTypes.PRIMORDIAL_FLAME, Settings.copy(SOUL_WALL_TORCH).luminance(s -> 13));
 	
 	public static <T extends Block> BlockRegistrar<T> moonstoneChiseled(BlockRegistrar<T> registrar, Identifier capTexture) {
-		return registrar.withBlockModel((ctx, block) -> {
-			TextureMap textureMap = SpectrumTextureMaps.sideLine(capTexture, TextureMap.getId(block));
-			Identifier base = SpectrumModels.MOONSTONE_CHISELED.upload(block, textureMap, ctx.modelCollector);
-			Identifier down = SpectrumModels.MOONSTONE_CHISELED_DOWN.upload(block, "_down", textureMap, ctx.modelCollector);
-			ctx.registerParentedItemModel(block, down);
-			return VariantsBlockStateSupplier.create(block).coordinate(createDownDefaultFacingVariantMap(ModelIds.getBlockModelId(block), ModelIds.getBlockSubModelId(block, "_down")));
-		});
+		return registrar
+				.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, block, "_down"))
+				.withBlockModel((ctx, block) -> {
+					TextureMap textureMap = SpectrumTextureMaps.sideLine(capTexture, TextureMap.getId(block));
+					Identifier base = SpectrumModels.MOONSTONE_CHISELED.upload(block, textureMap, ctx.modelCollector);
+					Identifier down = SpectrumModels.MOONSTONE_CHISELED_DOWN.upload(block, "_down", textureMap, ctx.modelCollector);
+					return VariantsBlockStateSupplier.create(block).coordinate(createDownDefaultFacingVariantMap(ModelIds.getBlockModelId(block), ModelIds.getBlockSubModelId(block, "_down")));
+				});
 	}
 	
 	public static final Block SMOOTH_BASALT_STAIRS = register(blockWithItem("smooth_basalt_stairs", new StairsBlock(BASALT.getDefaultState(), AbstractBlock.Settings.copy(BASALT)), DyeColor.BROWN));
@@ -534,7 +536,7 @@ public class SpectrumBlocks {
 	public static final Block MOONSTONE_SEMI_PERMEABLE_GLASS = register(translucent(parented(blockWithItem("moonstone_semi_permeable_glass", new GemstonePlayerOnlyGlassBlock(AbstractBlock.Settings.copy(MOONSTONE_GLASS), BuiltinGemstoneColor.WHITE), DyeColor.WHITE), b -> MOONSTONE_GLASS)));
 	
 	public static final RegistryKey<Block> GLISTERING_MELON = singleton(new BlockRegistrar<>("glistering_melon").withBlock(() -> new Block(AbstractBlock.Settings.copy(MELON))).withItem(block -> new BlockItem(block, IS.of()), DyeColor.LIME), TexturedModel.CUBE_COLUMN).blockKey();
-	public static final RegistryKey<Block> ATTACHED_GLISTERING_MELON_STEM = cutout(new BlockRegistrar<>("attached_glistering_melon_stem").withBlock(() -> new AttachedStemBlock(keyOf("glistering_melon_stem"), GLISTERING_MELON, SpectrumItems.GLISTERING_MELON_SEEDS, AbstractBlock.Settings.copy(ATTACHED_MELON_STEM)))).blockKey();
+	public static final RegistryKey<Block> ATTACHED_GLISTERING_MELON_STEM = cutout(new BlockRegistrar<>("attached_glistering_melon_stem").withBlock(() -> new AttachedStemBlock(RegistryKey.of(RegistryKeys.BLOCK, locate("glistering_melon_stem")), GLISTERING_MELON, SpectrumItems.GLISTERING_MELON_SEEDS, AbstractBlock.Settings.copy(ATTACHED_MELON_STEM)))).blockKey();
 	public static final RegistryKey<Block> GLISTERING_MELON_STEM = cutout(new BlockRegistrar<>("glistering_melon_stem").withBlock(() -> new StemBlock(GLISTERING_MELON, ATTACHED_GLISTERING_MELON_STEM, SpectrumItems.GLISTERING_MELON_SEEDS, AbstractBlock.Settings.copy(MELON_STEM)))
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_7).register(age -> createModelVariant(Models.STEM_GROWTH_STAGES[age].upload(block, TextureMap.stem(block), ctx.modelCollector)))))
 			.withBlockModel((ctx, block) -> {
@@ -802,23 +804,21 @@ public class SpectrumBlocks {
 					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "3").upload(block, "3", ctx.modelCollector)),
 					createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "4").upload(block, "4", ctx.modelCollector)))));
 	public static final Block ASH_PILE = register(blockWithItem("ash_pile", new AshPileBlock(ash(BlockSoundGroup.POWDER_SNOW).replaceable().blockVision((state, world, pos) -> state.get(SnowBlock.LAYERS) >= 8).pistonBehavior(PistonBehavior.DESTROY)), DyeColor.LIGHT_GRAY)
-			.withBlockModel((ctx, block) -> {
-				ctx.registerParentedItemModel(block, ModelIds.getBlockSubModelId(block, "_height2"));
-				return VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.LAYERS).registerVariants(height -> {
-					Identifier ash = TextureMap.getId(ASH);
-					Identifier ash2 = TextureMap.getSubId(ASH, "2");
-					Identifier ash3 = TextureMap.getSubId(ASH, "3");
-					Identifier ash4 = TextureMap.getSubId(ASH, "4");
-					if (height == 8) return List.of(createModelVariant(ash), createModelVariant(ash2), createModelVariant(ash3), createModelVariant(ash4));
-					Model layerModel = new Model(Optional.of(ModelIds.getBlockSubModelId(SNOW, "_height" + height * 2)), Optional.empty(), TextureKey.PARTICLE, TextureKey.TEXTURE);
-					return List.of(
-							createModelVariant(layerModel.upload(SpectrumCommon.locate("block/ash_pile_height" + height * 2), TextureMap.all(ash), ctx.modelCollector)),
-							createModelVariant(layerModel.upload(SpectrumCommon.locate("block/ash2_pile_height" + height * 2), TextureMap.all(ash2), ctx.modelCollector)),
-							createModelVariant(layerModel.upload(SpectrumCommon.locate("block/ash3_pile_height" + height * 2), TextureMap.all(ash3), ctx.modelCollector)),
-							createModelVariant(layerModel.upload(SpectrumCommon.locate("block/ash4_pile_height" + height * 2), TextureMap.all(ash4), ctx.modelCollector))
-					);
-				}));
-			}));
+			.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, block, "_height2"))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.LAYERS).registerVariants(height -> {
+				Identifier ash = TextureMap.getId(ASH);
+				Identifier ash2 = TextureMap.getSubId(ASH, "2");
+				Identifier ash3 = TextureMap.getSubId(ASH, "3");
+				Identifier ash4 = TextureMap.getSubId(ASH, "4");
+				if (height == 8) return List.of(createModelVariant(ash), createModelVariant(ash2), createModelVariant(ash3), createModelVariant(ash4));
+				Model layerModel = new Model(Optional.of(ModelIds.getBlockSubModelId(SNOW, "_height" + height * 2)), Optional.empty(), TextureKey.PARTICLE, TextureKey.TEXTURE);
+				return List.of(
+						createModelVariant(layerModel.upload(SpectrumCommon.locate("block/ash_pile_height" + height * 2), TextureMap.all(ash), ctx.modelCollector)),
+						createModelVariant(layerModel.upload(SpectrumCommon.locate("block/ash2_pile_height" + height * 2), TextureMap.all(ash2), ctx.modelCollector)),
+						createModelVariant(layerModel.upload(SpectrumCommon.locate("block/ash3_pile_height" + height * 2), TextureMap.all(ash3), ctx.modelCollector)),
+						createModelVariant(layerModel.upload(SpectrumCommon.locate("block/ash4_pile_height" + height * 2), TextureMap.all(ash4), ctx.modelCollector))
+				);
+			}))));
 	
 	public static final Block VARIA_SPROUT = register(cutout(blockWithItem("varia_sprout", new AshFloraBlock(settings(MapColor.WHITE, BlockSoundGroup.NETHER_STEM, 0F).breakInstantly().luminance(state -> 11).offset(OffsetType.XZ).dynamicBounds().noCollision().postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), DyeColor.WHITE))
 			.withBlockItemModel(SpectrumModelProvider::registerBlockTexturedItemModel)
@@ -1044,7 +1044,7 @@ public class SpectrumBlocks {
 	public static final BlockFamily BASAL_MARBLE_BRICK_FAMILY = registerBlockFamily(new BlockFamily.Builder(BASAL_MARBLE_BRICKS).stairs(BASAL_MARBLE_BRICK_STAIRS).slab(BASAL_MARBLE_BRICK_SLAB).wall(BASAL_MARBLE_BRICK_WALL).build());
 	
 	public static final Block LONGING_CHIMERA = register(cutout(blockWithItem("longing_chimera", new GrotesqueBlock(basalMarble().nonOpaque(), 12, 15, "block.spectrum.longing_chimera.tooltip"), DyeColor.BROWN))
-			.withBlockModel((ctx, block) -> createVariantsSupplier(block, ModelIds.getBlockModelId(block)).coordinate(createNorthDefaultHorizontalRotationStates())));
+			.withBlockModel((ctx, block) -> createVariantsSupplier(block, ModelIds.getBlockModelId(block)).coordinate(createNorthDefaultHorizontalFacingVariantMap())));
 	
 	public static SmallDragonjagBlock registerSmallDragonjagBlock(String name, Dragonjag.Variant variant) {
 		return register(cutout(singleton(blockWithItem(name, new SmallDragonjagBlock(settings(variant.getMapColor(), BlockSoundGroup.GRASS, 1.0F), variant), DyeColor.LIME), SpectrumTexturedModels.doubleCross(b -> b, "")))
@@ -1143,7 +1143,7 @@ public class SpectrumBlocks {
 	public static final Block RESPLENDENT_BED = register(cutout(blockWithItem("resplendent_bed", new SpectrumBedBlock(DyeColor.RED, Settings.copy(RED_BED)), IS.of(1, Rarity.UNCOMMON), DyeColor.YELLOW))
 			.withPredefinedItemModel()
 			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block)
-					.coordinate(createSouthDefaultHorizontalRotationStates())
+					.coordinate(createSouthDefaultHorizontalFacingVariantMap())
 					.coordinate(BlockStateVariantMap.create(BedBlock.PART)
 							.register(BedPart.HEAD, createModelVariant(block, "_head"))
 							.register(BedPart.FOOT, createModelVariant(block, "_foot")))));
@@ -1460,11 +1460,9 @@ public class SpectrumBlocks {
 			.allowsSpawning((state, world, pos, entityType) -> state.get(EnderGlassBlock.TRANSPARENCY_STATE) == EnderGlassBlock.TransparencyState.SOLID)
 			.suffocates((state, world, pos) -> state.get(EnderGlassBlock.TRANSPARENCY_STATE) == EnderGlassBlock.TransparencyState.SOLID)
 			.blockVision((state, world, pos) -> state.get(EnderGlassBlock.TRANSPARENCY_STATE) == EnderGlassBlock.TransparencyState.SOLID)), DyeColor.PURPLE))
-			.withBlockModel((ctx, block) -> {
-				ctx.registerParentedItemModel(block, ModelIds.getBlockSubModelId(block, "_solid"));
-				return VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(EnderGlassBlock.TRANSPARENCY_STATE)
-						.register(transparency -> createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "_" + transparency.asString()).upload(block, "_" + transparency.asString(), ctx.modelCollector))));
-			}));
+			.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, block, "_solid"))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(EnderGlassBlock.TRANSPARENCY_STATE)
+					.register(transparency -> createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "_" + transparency.asString()).upload(block, "_" + transparency.asString(), ctx.modelCollector))))));
 	public static final Block CLOVER = new CloverBlock(AbstractBlock.Settings.copy(SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ));
 	public static final Block FOUR_LEAF_CLOVER = new FourLeafCloverBlock(AbstractBlock.Settings.copy(SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ));
 	
@@ -1762,7 +1760,7 @@ public class SpectrumBlocks {
 					Identifier outer = outerSupplier.get();
 					Identifier base = SpectrumModels.BASE_FLAT_LIGHT.upload(block, SpectrumTextureMaps.innerOuterParticle(SpectrumTextures.SHIMMERSTONE_LIGHT, outer, outer), ctx.modelCollector);
 					Identifier mirrored = SpectrumModels.BASE_FLAT_LIGHT_MIRRORED.upload(block, "_mirrored", SpectrumTextureMaps.innerOuterParticle(SpectrumTextures.SHIMMERSTONE_LIGHT, outer, outer), ctx.modelCollector);
-					return VariantsBlockStateSupplier.create(block).coordinate(createNorthDefaultRotationStates()).coordinate(createBooleanModelMap(Properties.INVERTED, mirrored, base));
+					return VariantsBlockStateSupplier.create(block).coordinate(createNorthDefaultFacingVariantMap()).coordinate(createBooleanModelMap(Properties.INVERTED, mirrored, base));
 				}));
 	}
 	
@@ -1838,30 +1836,58 @@ public class SpectrumBlocks {
 		return settings(MapColor.LIGHT_BLUE_GRAY, BlockSoundGroup.STONE, -1.0F, 3600000.0F).instrument(NoteBlockInstrument.BASEDRUM).dropsNothing().allowsSpawning(SpectrumBlocks::never);
 	}
 	
-	public static final Block PRESERVATION_CONTROLLER = new PreservationControllerBlock(preservationBlock().luminance(state -> 1).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always));
+	public static final Block PRESERVATION_CONTROLLER = register(cutout(singleton(blockWithItem("preservation_controller", new PreservationControllerBlock(preservationBlock().luminance(state -> 1).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), DyeColor.BLUE), ModelIds::getBlockModelId))
+			.withPredefinedItemModel());
 	public static final Block DIKE_GATE = register(translucent(simple(blockWithItem("dike_gate", new DikeGateBlock(preservationBlock().luminance(state -> 3).sounds(BlockSoundGroup.GLASS).nonOpaque().emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always).solidBlock(SpectrumBlocks::never).suffocates(SpectrumBlocks::never).blockVision(SpectrumBlocks::never)), DyeColor.BLUE))));
 	public static final Block DREAM_GATE = register(translucent(simple(blockWithItem("dream_gate", new DreamGateBlock(preservationBlock().luminance(state -> 3).sounds(BlockSoundGroup.GLASS).nonOpaque().emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always).solidBlock(SpectrumBlocks::never).suffocates(SpectrumBlocks::never).blockVision(SpectrumBlocks::never)), DyeColor.BLUE))));
-	public static final Block INVISIBLE_WALL = new InvisibleWallBlock(preservationBlock().luminance(state -> 3).sounds(BlockSoundGroup.GLASS).nonOpaque().blockVision(SpectrumBlocks::never));
-	public static final Block PRESERVATION_CHEST = new TreasureChestBlock(preservationBlock());
+	public static final Block INVISIBLE_WALL = register(translucent(singleton(blockWithItem("invisible_wall", new InvisibleWallBlock(preservationBlock().luminance(state -> 3).sounds(BlockSoundGroup.GLASS).nonOpaque().blockVision(SpectrumBlocks::never)), DyeColor.BLUE), SpectrumTexturedModels.particle(b -> GLASS, "")))
+			.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, ETHEREAL_PLATFORM)));
+	public static final Block PRESERVATION_CHEST = register(singleton(blockWithItem("preservation_chest", new TreasureChestBlock(preservationBlock()), DyeColor.BLUE), ModelIds::getBlockModelId));
 	
 	public static final Block DOWNSTONE = register(simple(blockWithItem("downstone", new Block(preservationBlock()), DyeColor.BLUE))); // "raw" preservation stone, used in the Deeper Down bottom in place of bedrock
 	
-	public static final Block PRESERVATION_STONE = register(blockWithItem("preservation_stone", new Block(preservationBlock()), DyeColor.BLUE));
+	public static final Block PRESERVATION_STONE = register(blockWithItem("preservation_stone", new Block(preservationBlock()), DyeColor.BLUE)
+			.withBlockModel((ctx, block) -> {
+				List<Identifier> modelIds = new ArrayList<>();
+				int[] tops = new int[]{0, 3, 1, 1, 2, 2, 0, 3, 1, 2, 3};
+				modelIds.add(SpectrumTexturedModels.cubeBottomTop(b -> b, "", b -> b, "_top_" + tops[0], b -> b, "_bottom").upload(block, ctx.modelCollector));
+				for (int i = 1; i <= 10; i++) modelIds.add(SpectrumTexturedModels.cubeBottomTop(b -> b, "_" + i, b -> b, "_top_" + tops[i], b -> b, "_bottom").upload(block, "_" + i, ctx.modelCollector));
+				List<BlockStateVariant> variants = new ArrayList<>();
+				for (VariantSettings.Rotation rotation : VariantSettings.Rotation.values()) {
+					variants.add(createModelVariant(modelIds.getFirst()).put(VariantSettings.WEIGHT, 10));
+					if (rotation != VariantSettings.Rotation.R0) variants.getLast().put(VariantSettings.Y, rotation);
+					for (int i = 1; i <= 10; i++) {
+						variants.add(createModelVariant(modelIds.get(i)));
+						if (rotation != VariantSettings.Rotation.R0) variants.getLast().put(VariantSettings.Y, rotation);
+					}
+				}
+				return VariantsBlockStateSupplier.create(block, variants.toArray(BlockStateVariant[]::new));
+			}));
 	public static final Block PRESERVATION_STAIRS = register(blockWithItem("preservation_stairs", new StairsBlock(PRESERVATION_STONE.getDefaultState(), preservationBlock()), DyeColor.BLUE));
 	public static final Block PRESERVATION_SLAB = register(blockWithItem("preservation_slab", new SlabBlock(preservationBlock()), DyeColor.BLUE));
 	public static final Block PRESERVATION_WALL = register(blockWithItem("preservation_wall", new WallBlock(preservationBlock()), DyeColor.BLUE));
 	public static final BlockFamily PRESERVATION_STONE_FAMILY = registerBlockFamilyExceptBase(new BlockFamily.Builder(PRESERVATION_STONE).stairs(PRESERVATION_STAIRS).slab(PRESERVATION_SLAB).wall(PRESERVATION_WALL).build(), TexturedModel.CUBE_ALL);
 	
-	public static final Block POWDER_CHISELED_PRESERVATION_STONE = new Block(preservationBlock().luminance(state -> 2));
+	public static final Block POWDER_CHISELED_PRESERVATION_STONE = register(singleton(blockWithItem("powder_chiseled_preservation_stone", new Block(preservationBlock().luminance(state -> 2)), DyeColor.BLUE), SpectrumTexturedModels.cubeColumn(b -> b, "", b -> PRESERVATION_STONE, "_top_generic")));
 	public static final Block DIKE_CHISELED_PRESERVATION_STONE = register(simple(blockWithItem("dike_chiseled_preservation_stone", new Block(preservationBlock().luminance(state -> 6)), DyeColor.BLUE)));
 	public static final Block DREAM_CHISELED_PRESERVATION_STONE = register(simple(blockWithItem("dream_chiseled_preservation_stone", new Block(preservationBlock().luminance(state -> 6)), DyeColor.BLUE)));
-	public static final Block DEEP_LIGHT_CHISELED_PRESERVATION_STONE = new DeepLightBlock(preservationBlock().luminance(state -> 2));
-	public static final Block TREASURE_ITEM_BOWL = new TreasureItemBowlBlock(preservationBlock().nonOpaque().solidBlock(SpectrumBlocks::never).suffocates(SpectrumBlocks::never).blockVision(SpectrumBlocks::never));
+	public static final Block DEEP_LIGHT_CHISELED_PRESERVATION_STONE = register(singleton(blockWithItem("deep_light_chiseled_preservation_stone", new DeepLightBlock(preservationBlock().luminance(state -> 2)), DyeColor.BLUE), SpectrumTexturedModels.cubeColumn(b -> b, "", b -> PRESERVATION_STONE, "_top_generic")));
+	
+	//TODO not sure which is correct, but these names are different
+	public static final Block TREASURE_ITEM_BOWL = register(cutout(singleton(blockWithItem("item_bowl_enlightenment", new TreasureItemBowlBlock(preservationBlock().nonOpaque().solidBlock(SpectrumBlocks::never).suffocates(SpectrumBlocks::never).blockVision(SpectrumBlocks::never)), DyeColor.BLUE),
+			TexturedModel.makeFactory(b -> new TextureMap().put(TextureKey.SIDE, TextureMap.getSubId(b, "_side")).put(TextureKey.TOP, TextureMap.getSubId(b, "_top")).put(TextureKey.BOTTOM, locate("block/item_bowl_preservation_bottom")).put(SpectrumTextureKeys.INNER, locate("block/item_bowl_preservation_bottom")), SpectrumModels.BOWL))));
+	
 	public static final Block DIKE_GATE_FOUNTAIN = register(defaultFacingUp(blockWithItem("dike_gate_fountain", new SpectrumFacingBlock(preservationBlock()), DyeColor.BLUE), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_side", b -> b, "_top", b -> PRESERVATION_STONE, "", b -> PRESERVATION_STONE, "")));
 	public static final Block PRESERVATION_BRICKS = register(simple(blockWithItem("preservation_bricks", new Block(preservationBlock()), DyeColor.BLUE)));
 	public static final Block SHIMMERING_PRESERVATION_BRICKS = register(simple(blockWithItem("shimmering_preservation_bricks", new Block(preservationBlock().luminance(s -> 5)), DyeColor.BLUE)));
-	public static final Block COURIER_STATUE = new StatueBlock(preservationBlock());
-	public static final Block MANXI = new ManxiBlock(preservationBlock().nonOpaque().noCollision().dropsNothing());
+	public static final Block COURIER_STATUE = register(cutout(blockWithItem("courier_statue", new StatueBlock(preservationBlock()), DyeColor.BLUE))
+			.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, block, "_top"))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block)
+					.coordinate(createNorthDefaultHorizontalFacingVariantMap())
+					.coordinate(BlockStateVariantMap.create(StatueBlock.HALF)
+							.register(DoubleBlockHalf.LOWER, createModelVariant(block, "_bottom"))
+							.register(DoubleBlockHalf.UPPER, createModelVariant(block, "_top")))));
+	public static final Block MANXI = register(singleton(block("manxi", new ManxiBlock(preservationBlock().nonOpaque().noCollision().dropsNothing())), (Function<Block, Identifier>) b -> SpectrumModels.MOB_HEAD));
 	
 	public static final Block BLACK_CHISELED_PRESERVATION_STONE = register(singleton(blockWithItem("black_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.BLACK), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	public static final Block BLUE_CHISELED_PRESERVATION_STONE = register(singleton(blockWithItem("blue_chiseled_preservation_stone", new Block(preservationBlock()), DyeColor.BLUE), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
@@ -1882,8 +1908,10 @@ public class SpectrumBlocks {
 	
 	public static final Block PRESERVATION_GLASS = register(translucent(simple(blockWithItem("preservation_glass", new TransparentBlock(preservationBlock().sounds(BlockSoundGroup.GLASS).nonOpaque().solidBlock(SpectrumBlocks::never).suffocates(SpectrumBlocks::never).blockVision(SpectrumBlocks::never)), DyeColor.BLUE))));
 	public static final Block TINTED_PRESERVATION_GLASS = register(translucent(simple(blockWithItem("tinted_preservation_glass", new TintedGlassBlock(AbstractBlock.Settings.copy(PRESERVATION_GLASS)), DyeColor.BLUE))));
-	public static final Block PRESERVATION_ROUNDEL = new PreservationRoundelBlock(preservationBlock().nonOpaque());
-	public static final Block PRESERVATION_BLOCK_DETECTOR = new PreservationBlockDetectorBlock(preservationBlock());
+	public static final Block PRESERVATION_ROUNDEL = register(singleton(blockWithItem("preservation_roundel", new PreservationRoundelBlock(preservationBlock().nonOpaque()), DyeColor.BLUE), SpectrumTexturedModels.ROUNDEL));
+	public static final Block PRESERVATION_BLOCK_DETECTOR = register(blockWithItem("preservation_block_detector", new PreservationBlockDetectorBlock(preservationBlock()), DyeColor.BLUE)
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block, createModelVariant(SpectrumTexturedModels.complexOrientable(b -> b, "_side", b -> b, "_top", b -> PRESERVATION_STONE, "_top_generic", b -> b, "_front", b -> b, "_back", b -> b, "_side").upload(block, ctx.modelCollector)))
+					.coordinate(createNorthDefaultFacingVariantMap())));
 	
 	private static Settings shootingStar() {
 		return AbstractBlock.Settings.copy(STONE).nonOpaque();
@@ -2035,10 +2063,6 @@ public class SpectrumBlocks {
 		ItemColors.ITEM_COLORS.registerColorMapping(blockItem, dyeColor);
 	}
 	
-	public static RegistryKey<Block> keyOf(String name) {
-		return RegistryKey.of(RegistryKeys.BLOCK, locate(name));
-	}
-	
 	public static void register() {
 		registerBlockWithItem("pedestal_basic_topaz", PEDESTAL_BASIC_TOPAZ, new PedestalBlockItem(PEDESTAL_BASIC_TOPAZ, IS.of(1), BuiltinPedestalVariant.BASIC_TOPAZ, "item.spectrum.pedestal.tooltip.basic_topaz"), DyeColor.WHITE);
 		registerBlockWithItem("pedestal_basic_amethyst", PEDESTAL_BASIC_AMETHYST, new PedestalBlockItem(PEDESTAL_BASIC_AMETHYST, IS.of(1), BuiltinPedestalVariant.BASIC_AMETHYST, "item.spectrum.pedestal.tooltip.basic_amethyst"), DyeColor.WHITE);
@@ -2049,9 +2073,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("fusion_shrine_basalt", FUSION_SHRINE_BASALT, IS.of(1), DyeColor.GRAY);
 		registerBlockWithItem("fusion_shrine_calcite", FUSION_SHRINE_CALCITE, IS.of(1), DyeColor.GRAY);
 		registerBlockWithItem("enchanter", ENCHANTER, IS.of(1), DyeColor.PURPLE);
-		registerBlockWithItem("item_bowl_basalt", ITEM_BOWL_BASALT, IS.of(16), DyeColor.PINK);
-		registerBlockWithItem("item_bowl_calcite", ITEM_BOWL_CALCITE, IS.of(16), DyeColor.PINK);
-		registerBlockWithItem("item_roundel", ITEM_ROUNDEL, IS.of(16), DyeColor.PINK);
 		registerBlockWithItem("potion_workshop", POTION_WORKSHOP, IS.of(1), DyeColor.PURPLE);
 		registerBlockWithItem("spirit_instiller", SPIRIT_INSTILLER, IS.of(1), DyeColor.WHITE);
 		registerBlockWithItem("crystallarieum", CRYSTALLARIEUM, IS.of(1), DyeColor.BROWN);
@@ -2059,8 +2080,21 @@ public class SpectrumBlocks {
 		registerBlockWithItem("crystal_apothecary", CRYSTAL_APOTHECARY, IS.of(8), DyeColor.GREEN);
 		registerBlockWithItem("color_picker", COLOR_PICKER, IS.of(8), DyeColor.GREEN);
 		
-		registerMagicalBlocks(IS.of());
-		registerStructureBlocks(IS.of());
+		registerBlockWithItem("heartbound_chest", HEARTBOUND_CHEST, IS.of(), DyeColor.BLUE);
+		registerBlockWithItem("compacting_chest", COMPACTING_CHEST, IS.of(), DyeColor.YELLOW);
+		registerBlockWithItem("fabrication_chest", FABRICATION_CHEST, IS.of(), DyeColor.YELLOW);
+		registerBlockWithItem("black_hole_chest", BLACK_HOLE_CHEST, IS.of(), DyeColor.LIGHT_GRAY);
+		
+		registerBlockWithItem("ender_hopper", ENDER_HOPPER, IS.of(), DyeColor.PURPLE);
+		registerBlockWithItem("ender_dropper", ENDER_DROPPER, IS.of(), DyeColor.PURPLE);
+		registerBlockWithItem("particle_spawner", PARTICLE_SPAWNER, IS.of(), DyeColor.PINK);
+		registerBlockWithItem("creative_particle_spawner", CREATIVE_PARTICLE_SPAWNER, new BlockItem(CREATIVE_PARTICLE_SPAWNER, IS.of(Rarity.EPIC)), DyeColor.PINK);
+		
+		registerBlockWithItem("present", PRESENT, new PresentBlockItem(PRESENT, IS.of(1)), DyeColor.LIGHT_GRAY);
+		registerBlockWithItem("titration_barrel", TITRATION_BARREL, IS.of(), DyeColor.MAGENTA);
+		
+		registerBlockWithItem("parametric_mining_device", PARAMETRIC_MINING_DEVICE, new ParametricMiningDeviceItem(PARAMETRIC_MINING_DEVICE, IS.of(8)), DyeColor.RED);
+		registerBlockWithItem("threat_conflux", THREAT_CONFLUX, new ThreatConfluxItem(THREAT_CONFLUX, IS.of(8)), DyeColor.RED);
 		
 		// Fluids + Products
 		registerBlock("goo", GOO);
@@ -2091,10 +2125,8 @@ public class SpectrumBlocks {
 		// All the mob heads vanilla is missing
 		for (SpectrumSkullType type : SpectrumSkullType.values()) {
 			BlockRegistrar<SpectrumSkullBlock> registrar = block(type.asString() + "_head", new SpectrumSkullBlock(type, AbstractBlock.Settings.copy(SKELETON_SKULL).instrument(NoteBlockInstrument.CUSTOM_HEAD)))
-					.withBlockModel((ctx, block) -> {
-						ctx.registerParentedItemModel(block, SpectrumModels.SKULL_ITEM);
-						return createVariantsSupplier(block, SpectrumModels.MOB_HEAD);
-					});
+					.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, SpectrumModels.SKULL_ITEM))
+					.withBlockModel((ctx, block) -> createVariantsSupplier(block, SpectrumModels.MOB_HEAD));
 			
 			Block wallHead = register(block(type.asString() + "_wall_head", new SpectrumWallSkullBlock(type, AbstractBlock.Settings.copy(SKELETON_SKULL).dropsLike(registrar.block())))
 					.withBlockModel((ctx, block) -> createVariantsSupplier(block, SpectrumModels.MOB_BLOCK)));
@@ -2103,38 +2135,6 @@ public class SpectrumBlocks {
 		}
 		
 		COMMON_REGISTRAR.flush();
-	}
-	
-	private static void registerMagicalBlocks(Item.Settings settings) {
-		registerBlockWithItem("heartbound_chest", HEARTBOUND_CHEST, settings, DyeColor.BLUE);
-		registerBlockWithItem("compacting_chest", COMPACTING_CHEST, settings, DyeColor.YELLOW);
-		registerBlockWithItem("fabrication_chest", FABRICATION_CHEST, settings, DyeColor.YELLOW);
-		registerBlockWithItem("black_hole_chest", BLACK_HOLE_CHEST, settings, DyeColor.LIGHT_GRAY);
-		
-		registerBlockWithItem("ender_hopper", ENDER_HOPPER, settings, DyeColor.PURPLE);
-		registerBlockWithItem("ender_dropper", ENDER_DROPPER, settings, DyeColor.PURPLE);
-		registerBlockWithItem("particle_spawner", PARTICLE_SPAWNER, settings, DyeColor.PINK);
-		registerBlockWithItem("creative_particle_spawner", CREATIVE_PARTICLE_SPAWNER, new BlockItem(CREATIVE_PARTICLE_SPAWNER, IS.of(Rarity.EPIC)), DyeColor.PINK);
-		
-		registerBlockWithItem("present", PRESENT, new PresentBlockItem(PRESENT, IS.of(1)), DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("titration_barrel", TITRATION_BARREL, settings, DyeColor.MAGENTA);
-		
-		registerBlockWithItem("parametric_mining_device", PARAMETRIC_MINING_DEVICE, new ParametricMiningDeviceItem(PARAMETRIC_MINING_DEVICE, IS.of(8)), DyeColor.RED);
-		registerBlockWithItem("threat_conflux", THREAT_CONFLUX, new ThreatConfluxItem(THREAT_CONFLUX, IS.of(8)), DyeColor.RED);
-	}
-	
-	private static void registerStructureBlocks(Item.Settings settings) {
-		registerBlockWithItem("powder_chiseled_preservation_stone", POWDER_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("deep_light_chiseled_preservation_stone", DEEP_LIGHT_CHISELED_PRESERVATION_STONE, settings, DyeColor.BLUE);
-		registerBlockWithItem("preservation_roundel", PRESERVATION_ROUNDEL, settings, DyeColor.BLUE);
-		registerBlockWithItem("preservation_block_detector", PRESERVATION_BLOCK_DETECTOR, settings, DyeColor.BLUE);
-		registerBlockWithItem("item_bowl_enlightenment", TREASURE_ITEM_BOWL, settings, DyeColor.BLUE);
-		registerBlockWithItem("preservation_controller", PRESERVATION_CONTROLLER, settings, DyeColor.BLUE);
-		
-		registerBlockWithItem("invisible_wall", INVISIBLE_WALL, settings, DyeColor.BLUE);
-		registerBlockWithItem("courier_statue", COURIER_STATUE, settings, DyeColor.BLUE);
-		registerBlock("manxi", MANXI);
-		registerBlockWithItem("preservation_chest", PRESERVATION_CHEST, settings, DyeColor.BLUE);
 	}
 	
 	public static void registerClient() {
@@ -2160,16 +2160,7 @@ public class SpectrumBlocks {
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), PRIMORDIAL_FIRE, PRIMORDIAL_TORCH, PRIMORDIAL_WALL_TORCH);
 		BlockRenderLayerMap.INSTANCE.putBlock(PRESENT, RenderLayer.getCutout());
 		
-		BlockRenderLayerMap.INSTANCE.putBlock(ITEM_BOWL_BASALT, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(ITEM_BOWL_CALCITE, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(TREASURE_ITEM_BOWL, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(ITEM_ROUNDEL, RenderLayer.getCutout());
-		
 		BlockRenderLayerMap.INSTANCE.putBlock(MEMORY, RenderLayer.getTranslucent());
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(PRESERVATION_CONTROLLER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(INVISIBLE_WALL, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(COURIER_STATUE, RenderLayer.getCutout());
 		
 		BlockRenderLayerMap.INSTANCE.putBlock(COLOR_PICKER, RenderLayer.getCutout());
 		
@@ -2234,15 +2225,14 @@ public class SpectrumBlocks {
 		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(ctx, block, factory));
 	}
 	
-	public static <T extends Block> BlockRegistrar<T> singleton(BlockRegistrar<T> registrar, Function<Block, Identifier> modelIdGetter) {
-		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(block, modelIdGetter.apply(block)));
+	public static <T extends Block> BlockRegistrar<T> singleton(BlockRegistrar<T> registrar, Function<Block, Identifier> modelIdSupplier) {
+		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(block, modelIdSupplier.apply(block)));
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> parented(BlockRegistrar<T> registrar, UnaryOperator<Block> parent) {
-		return registrar.withBlockModel((ctx, block) -> {
-			ctx.registerParentedItemModel(block, ModelIds.getBlockModelId(parent.apply(block)));
-			return createVariantsSupplier(block, ModelIds.getBlockModelId(parent.apply(block)));
-		});
+		return registrar
+				.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, parent.apply(block)))
+				.withBlockModel((ctx, block) -> createVariantsSupplier(block, ModelIds.getBlockModelId(parent.apply(block))));
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> axisRotated(BlockRegistrar<T> registrar, TexturedModel.Factory factory) {
@@ -2250,11 +2240,11 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> defaultFacingUp(BlockRegistrar<T> registrar, TexturedModel.Factory factory) {
-		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(ctx, block, factory).coordinate(ctx.createUpDefaultFacingVariantMap()));
+		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(ctx, block, factory).coordinate(createUpDefaultFacingVariantMap()));
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> defaultFacingUp(BlockRegistrar<T> registrar, Function<Block, Identifier> modelIdGetter) {
-		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(block, modelIdGetter.apply(block)).coordinate(ctx.createUpDefaultFacingVariantMap()));
+		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(block, modelIdGetter.apply(block)).coordinate(createUpDefaultFacingVariantMap()));
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> cross(BlockRegistrar<T> registrar) {
@@ -2284,12 +2274,13 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> redstoneLamp(BlockRegistrar<T> registrar) {
-		return registrar.withBlockModel((ctx, block) -> {
-			Identifier off = SpectrumTexturedModels.cubeAll(b -> b, "_off").upload(block, "_off", ctx.modelCollector);
-			Identifier on = SpectrumTexturedModels.cubeAll(b -> b, "_on").upload(block, "_on", ctx.modelCollector);
-			ctx.registerParentedItemModel(block, ModelIds.getBlockSubModelId(block, "_off"));
-			return VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(Properties.LIT, on, off));
-		});
+		return registrar
+				.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, block, "_off"))
+				.withBlockModel((ctx, block) -> {
+					Identifier off = SpectrumTexturedModels.cubeAll(b -> b, "_off").upload(block, "_off", ctx.modelCollector);
+					Identifier on = SpectrumTexturedModels.cubeAll(b -> b, "_on").upload(block, "_on", ctx.modelCollector);
+					return VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(Properties.LIT, on, off));
+				});
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> barrellike(BlockRegistrar<T> registrar, UnaryOperator<Block> bottomBlock, String bottomSuffix) {
@@ -2307,10 +2298,9 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> idol(BlockRegistrar<T> registrar) {
-		return translucent(registrar).withBlockModel((ctx, block) -> {
-			ctx.registerParentedItemModel(block, SpectrumModels.MOB_BLOCK);
-			return VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(IdolBlock.COOLDOWN, SpectrumModels.MOB_BLOCK, SpectrumModels.MOB_BLOCK_COOLDOWN));
-		});
+		return translucent(registrar)
+				.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, SpectrumModels.MOB_BLOCK))
+				.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(IdolBlock.COOLDOWN, SpectrumModels.MOB_BLOCK, SpectrumModels.MOB_BLOCK_COOLDOWN)));
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> sugarStick(BlockRegistrar<T> registrar, UnaryOperator<Block> sugarBlock) {
@@ -2327,50 +2317,51 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> pylon(BlockRegistrar<T> registrar) {
-		return registrar.withBlockModel((ctx, block) -> {
-			Identifier head = ModelIds.getBlockSubModelId(block, "_head");
-			Identifier body = ModelIds.getBlockSubModelId(block, "_body");
-			Identifier waist = ModelIds.getBlockSubModelId(block, "_waist");
-			Identifier foot = ModelIds.getBlockSubModelId(block, "_foot");
-			Identifier end = ModelIds.getBlockSubModelId(block, "_end");
-			Identifier pedestal = SpectrumModels.BALCITE_PYLON_PEDESTAL;
-			SpectrumModels.BASE_PYLON_BODY.upload(head, SpectrumTextureMaps.sideEnd(head, end), ctx.modelCollector);
-			SpectrumModels.BASE_PYLON_BODY.upload(body, SpectrumTextureMaps.sideEnd(body, end), ctx.modelCollector);
-			SpectrumModels.BASE_PYLON_BODY.upload(waist, SpectrumTextureMaps.sideEnd(waist, end), ctx.modelCollector);
-			SpectrumModels.BASE_PYLON_BODY.upload(foot, SpectrumTextureMaps.sideEnd(foot, end), ctx.modelCollector);
-			ctx.registerParentedItemModel(block, head);
-			return MultipartBlockStateSupplier.create(block)
-					.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R180))
-					.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R180))
-					.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R180))
-					.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R180))
-					.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R180))
-					.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head))
-					.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body))
-					.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist))
-					.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot))
-					.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal))
-					.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
-					.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
-					.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90));
-		});
+		return registrar
+				.withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, block, "_head"))
+				.withBlockModel((ctx, block) -> {
+					Identifier head = ModelIds.getBlockSubModelId(block, "_head");
+					Identifier body = ModelIds.getBlockSubModelId(block, "_body");
+					Identifier waist = ModelIds.getBlockSubModelId(block, "_waist");
+					Identifier foot = ModelIds.getBlockSubModelId(block, "_foot");
+					Identifier end = ModelIds.getBlockSubModelId(block, "_end");
+					Identifier pedestal = SpectrumModels.BALCITE_PYLON_PEDESTAL;
+					SpectrumModels.BASE_PYLON_BODY.upload(head, SpectrumTextureMaps.sideEnd(head, end), ctx.modelCollector);
+					SpectrumModels.BASE_PYLON_BODY.upload(body, SpectrumTextureMaps.sideEnd(body, end), ctx.modelCollector);
+					SpectrumModels.BASE_PYLON_BODY.upload(waist, SpectrumTextureMaps.sideEnd(waist, end), ctx.modelCollector);
+					SpectrumModels.BASE_PYLON_BODY.upload(foot, SpectrumTextureMaps.sideEnd(foot, end), ctx.modelCollector);
+					return MultipartBlockStateSupplier.create(block)
+							.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R180))
+							.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R180))
+							.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R180))
+							.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R180))
+							.with(When.create().set(Properties.FACING, Direction.DOWN).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R180))
+							.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head))
+							.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body))
+							.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist))
+							.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot))
+							.with(When.create().set(Properties.FACING, Direction.UP).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal))
+							.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.NORTH).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.SOUTH).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.WEST).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+							.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.SECTION, PylonBlock.Section.HEAD), createModelVariant(head).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.SECTION, PylonBlock.Section.BODY), createModelVariant(body).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.SECTION, PylonBlock.Section.WAIST), createModelVariant(waist).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.SECTION, PylonBlock.Section.FOOT), createModelVariant(foot).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90))
+							.with(When.create().set(Properties.FACING, Direction.EAST).set(PylonBlock.PEDESTAL, true), createModelVariant(pedestal).put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90));
+				});
 	}
 	
 	public static class BlockRegistrar<T extends Block> {

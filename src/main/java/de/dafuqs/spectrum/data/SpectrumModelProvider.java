@@ -56,6 +56,18 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), SpectrumTextureMaps.layer0(block, suffix), ctx.writer);
 	}
 	
+	public static void registerParentedItemModel(ItemModelGenerator ctx, Block block, Block parent) {
+		registerParentedItemModel(ctx, block, parent, "");
+	}
+	
+	public static void registerParentedItemModel(ItemModelGenerator ctx, Block block, Block parent, String suffix) {
+		registerParentedItemModel(ctx, block, ModelIds.getBlockSubModelId(parent, suffix));
+	}
+	
+	public static void registerParentedItemModel(ItemModelGenerator ctx, Block block, Identifier parentModelId) {
+		ctx.writer.accept(ModelIds.getItemModelId(block.asItem()), new SimpleModelSupplier(parentModelId));
+	}
+	
 	// Block Models
 	
 	public static BlockStateSupplier simpleMirroredBlockModel(BlockStateModelGenerator ctx, Block block) {
@@ -197,7 +209,7 @@ public class SpectrumModelProvider extends FabricModelProvider {
 				.register(Direction.EAST, createModelVariant(horizontalModelId));
 	}
 	
-	public static BlockStateVariantMap createNorthDefaultRotationStates() {
+	public static BlockStateVariantMap createNorthDefaultFacingVariantMap() {
 		return BlockStateVariantMap.create(Properties.FACING)
 				.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90))
 				.register(Direction.UP, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R270))
@@ -207,7 +219,7 @@ public class SpectrumModelProvider extends FabricModelProvider {
 				.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90));
 	}
 	
-	public static BlockStateVariantMap createNorthDefaultHorizontalRotationStates() {
+	public static BlockStateVariantMap createNorthDefaultHorizontalFacingVariantMap() {
 		return BlockStateVariantMap.create(Properties.HORIZONTAL_FACING)
 				.register(Direction.NORTH, BlockStateVariant.create())
 				.register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
@@ -215,7 +227,7 @@ public class SpectrumModelProvider extends FabricModelProvider {
 				.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90));
 	}
 	
-	public static BlockStateVariantMap createSouthDefaultHorizontalRotationStates() {
+	public static BlockStateVariantMap createSouthDefaultHorizontalFacingVariantMap() {
 		return BlockStateVariantMap.create(Properties.HORIZONTAL_FACING)
 				.register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
 				.register(Direction.SOUTH, BlockStateVariant.create())
@@ -263,17 +275,6 @@ public class SpectrumModelProvider extends FabricModelProvider {
 	
 	public static BlockStateVariant createModelVariant(Block block, String suffix) {
 		return createModelVariant(ModelIds.getBlockSubModelId(block, suffix));
-	}
-	
-	public static BlockStateVariant applyUpDefaultRotation(BlockStateVariant variant, Direction direction) {
-		return switch (direction) {
-			case Direction.DOWN -> variant.put(VariantSettings.X, VariantSettings.Rotation.R180);
-			case Direction.NORTH -> variant.put(VariantSettings.X, VariantSettings.Rotation.R90);
-			case Direction.SOUTH -> variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R180);
-			case Direction.WEST -> variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270);
-			case Direction.EAST -> variant.put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90);
-			default -> variant;
-		};
 	}
 	
 	public static VariantSettings.Rotation getSouthDefaultRotation(Direction direction) {
