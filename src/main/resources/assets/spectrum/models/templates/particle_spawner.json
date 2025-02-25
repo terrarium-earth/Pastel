@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "0": "spectrum:block/particle_spawner_top_off",
+    "0": "#top",
     "1": "spectrum:block/polished_basalt_pillar_side",
     "2": "spectrum:block/polished_basalt",
     "3": "spectrum:block/polished_basalt_pillar_top",

@@ -1,11 +1,11 @@
 {
   "variants": {
-    "facing=north": {
-      "model": "spectrum:block/heartbound_chest"
-    },
     "facing=east": {
       "model": "spectrum:block/heartbound_chest",
       "y": 90
+    },
+    "facing=north": {
+      "model": "spectrum:block/heartbound_chest"
     },
     "facing=south": {
       "model": "spectrum:block/heartbound_chest",

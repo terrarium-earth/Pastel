@@ -95,4 +95,9 @@ public class SpectrumTextureMaps {
 		return new TextureMap().put(SIDE, side).put(TOP, top).put(INSIDE, inside);
 	}
 	
+	public static TextureMap top(Block topBlock, String topSuffix) {
+		return new TextureMap().put(TOP, getSubId(topBlock, topSuffix));
+	}
+	
+	
 }

@@ -20,6 +20,7 @@ public class SpectrumTextureKeys {
 	public static final TextureKey LIGHT = TextureKey.of("light");
 	public static final TextureKey LINE = TextureKey.of("line");
 	public static final TextureKey OUTER = TextureKey.of("outer");
+	public static final TextureKey PEDESTAL = TextureKey.of("pedestal");
 	public static final TextureKey SHELL = TextureKey.of("shell");
 	
 }

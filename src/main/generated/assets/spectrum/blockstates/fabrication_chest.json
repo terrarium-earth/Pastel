@@ -1,11 +1,11 @@
 {
   "variants": {
-    "facing=north": {
-      "model": "spectrum:block/fabrication_chest"
-    },
     "facing=east": {
       "model": "spectrum:block/fabrication_chest",
       "y": 90
+    },
+    "facing=north": {
+      "model": "spectrum:block/fabrication_chest"
     },
     "facing=south": {
       "model": "spectrum:block/fabrication_chest",

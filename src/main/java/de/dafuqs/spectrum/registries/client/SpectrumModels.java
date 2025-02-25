@@ -39,6 +39,8 @@ public class SpectrumModels {
 	public static final Model MOONSTONE_CHISELED_DOWN = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled_down")), Optional.empty(), SIDE, LINE);
 	public static final Model MULTILAYER_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/multilayer_light")), Optional.empty(), SIDE, TOP, INSIDE);
 	public static final Model OVERGROWN = new Model(Optional.of(SpectrumCommon.locate("templates/overgrown")), Optional.empty(), SIDE, TOP, BOTTOM, FRONDS);
+	public static final Model PARTICLE_SPAWNER = new Model(Optional.of(SpectrumCommon.locate("templates/particle_spawner")), Optional.empty(), TOP);
+	public static final Model PEDESTAL = new Model(Optional.of(SpectrumCommon.locate("templates/pedestal")), Optional.empty(), SpectrumTextureKeys.PEDESTAL, PARTICLE);
 	public static final Model REDSTONE_TIMER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_timer_base")), Optional.empty(), LIGHT);
 	public static final Model REDSTONE_TRANSCEIVER_CHANNEL = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_channel_base")), Optional.empty(), ALL);
 	public static final Model REDSTONE_TRANSCEIVER_SENDER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_sender_base")), Optional.empty(), LIGHT);
