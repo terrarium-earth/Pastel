@@ -85,6 +85,7 @@ import net.minecraft.util.math.intprovider.*;
 import net.minecraft.world.*;
 import net.minecraft.world.explosion.*;
 import net.minecraft.world.gen.feature.*;
+import org.jetbrains.annotations.*;
 
 import java.util.*;
 import java.util.function.*;
@@ -532,17 +533,15 @@ public class SpectrumBlocks {
 	public static final Block ONYX_SEMI_PERMEABLE_GLASS = register(translucent(parented(blockWithItem("onyx_semi_permeable_glass", new GemstonePlayerOnlyGlassBlock(AbstractBlock.Settings.copy(ONYX_GLASS), BuiltinGemstoneColor.BLACK), DyeColor.BLACK), b -> ONYX_GLASS)));
 	public static final Block MOONSTONE_SEMI_PERMEABLE_GLASS = register(translucent(parented(blockWithItem("moonstone_semi_permeable_glass", new GemstonePlayerOnlyGlassBlock(AbstractBlock.Settings.copy(MOONSTONE_GLASS), BuiltinGemstoneColor.WHITE), DyeColor.WHITE), b -> MOONSTONE_GLASS)));
 	
-	// MELON
-	public static final RegistryKey<Block> GLISTERING_MELON = registerCustom(keyOf("glistering_melon"), key ->
-			COMMON_REGISTRAR.defer(() -> registerBlockWithItem(key, new Block(AbstractBlock.Settings.copy(MELON)), IS.of(), DyeColor.LIME)));
-	public static final RegistryKey<Block> ATTACHED_GLISTERING_MELON_STEM = registerCustom(keyOf("attached_glistering_melon_stem"), key -> {
-		COMMON_REGISTRAR.defer(() -> Registry.register(Registries.BLOCK, key, new AttachedStemBlock(keyOf("glistering_melon_stem"), GLISTERING_MELON, SpectrumItems.GLISTERING_MELON_SEEDS, AbstractBlock.Settings.copy(ATTACHED_MELON_STEM))));
-		CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(Registries.BLOCK.get(key), RenderLayer.getCutout()));
-	});
-	public static final RegistryKey<Block> GLISTERING_MELON_STEM = registerCustom(keyOf("glistering_melon_stem"), key -> {
-		COMMON_REGISTRAR.defer(() -> Registry.register(Registries.BLOCK, key, new StemBlock(GLISTERING_MELON, ATTACHED_GLISTERING_MELON_STEM, SpectrumItems.GLISTERING_MELON_SEEDS, AbstractBlock.Settings.copy(MELON_STEM))));
-		CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(Registries.BLOCK.get(key), RenderLayer.getCutout()));
-	});
+	public static final RegistryKey<Block> GLISTERING_MELON = singleton(new BlockRegistrar<>("glistering_melon").withBlock(() -> new Block(AbstractBlock.Settings.copy(MELON))).withItem(block -> new BlockItem(block, IS.of()), DyeColor.LIME), TexturedModel.CUBE_COLUMN).blockKey();
+	public static final RegistryKey<Block> ATTACHED_GLISTERING_MELON_STEM = cutout(new BlockRegistrar<>("attached_glistering_melon_stem").withBlock(() -> new AttachedStemBlock(keyOf("glistering_melon_stem"), GLISTERING_MELON, SpectrumItems.GLISTERING_MELON_SEEDS, AbstractBlock.Settings.copy(ATTACHED_MELON_STEM)))).blockKey();
+	public static final RegistryKey<Block> GLISTERING_MELON_STEM = cutout(new BlockRegistrar<>("glistering_melon_stem").withBlock(() -> new StemBlock(GLISTERING_MELON, ATTACHED_GLISTERING_MELON_STEM, SpectrumItems.GLISTERING_MELON_SEEDS, AbstractBlock.Settings.copy(MELON_STEM)))
+			.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_7).register(age -> createModelVariant(Models.STEM_GROWTH_STAGES[age].upload(block, TextureMap.stem(block), ctx.modelCollector)))))
+			.withBlockModel((ctx, block) -> {
+				Block attached = Registries.BLOCK.get(ATTACHED_GLISTERING_MELON_STEM);
+				ctx.excludeFromSimpleItemModelGeneration(block); // Needed b/c vanilla auto-generates an incorrect seeds model for some reason
+				return createVariantsSupplier(attached, Models.STEM_FRUIT.upload(attached, TextureMap.stemAndUpper(block, attached), ctx.modelCollector)).coordinate(createWestDefaultHorizontalFacingVariantMap());
+			})).blockKey();
 	
 	public static final Block PRESENT = new PresentBlock(AbstractBlock.Settings.copy(WHITE_WOOL));
 	public static final Block TITRATION_BARREL = new TitrationBarrelBlock(AbstractBlock.Settings.copy(OAK_PLANKS).mapColor(MapColor.RED));
@@ -2023,22 +2022,10 @@ public class SpectrumBlocks {
 		Registry.register(Registries.BLOCK, key, block);
 	}
 	
-	static void registerBlockItem(String name, BlockItem blockItem, DyeColor dyeColor) {
-		Registry.register(Registries.ITEM, locate(name), blockItem);
-		ItemColors.ITEM_COLORS.registerColorMapping(blockItem, dyeColor);
-	}
-	
 	public static void registerBlockWithItem(String name, Block block, Item.Settings itemSettings, DyeColor dyeColor) {
 		Registry.register(Registries.BLOCK, locate(name), block);
 		BlockItem blockItem = new BlockItem(block, itemSettings);
 		Registry.register(Registries.ITEM, locate(name), blockItem);
-		ItemColors.ITEM_COLORS.registerColorMapping(blockItem, dyeColor);
-	}
-	
-	public static void registerBlockWithItem(RegistryKey<Block> key, Block block, Item.Settings itemSettings, DyeColor dyeColor) {
-		Registry.register(Registries.BLOCK, key, block);
-		var blockItem = new BlockItem(block, itemSettings);
-		Registry.register(Registries.ITEM, RegistryKey.of(RegistryKeys.ITEM, key.getValue()), blockItem);
 		ItemColors.ITEM_COLORS.registerColorMapping(blockItem, dyeColor);
 	}
 	
@@ -2050,11 +2037,6 @@ public class SpectrumBlocks {
 	
 	public static RegistryKey<Block> keyOf(String name) {
 		return RegistryKey.of(RegistryKeys.BLOCK, locate(name));
-	}
-	
-	public static <T> T registerCustom(T data, Consumer<T> callback) {
-		callback.accept(data);
-		return data;
 	}
 	
 	public static void register() {
@@ -2106,9 +2088,21 @@ public class SpectrumBlocks {
 		registerBlock("decaying_light", DECAYING_LIGHT_BLOCK);
 		registerBlockWithItem("bottomless_bundle", BOTTOMLESS_BUNDLE, new BottomlessBundleItem(BOTTOMLESS_BUNDLE, IS.of(1)), DyeColor.LIGHT_GRAY);
 		
-		COMMON_REGISTRAR.flush();
+		// All the mob heads vanilla is missing
+		for (SpectrumSkullType type : SpectrumSkullType.values()) {
+			BlockRegistrar<SpectrumSkullBlock> registrar = block(type.asString() + "_head", new SpectrumSkullBlock(type, AbstractBlock.Settings.copy(SKELETON_SKULL).instrument(NoteBlockInstrument.CUSTOM_HEAD)))
+					.withBlockModel((ctx, block) -> {
+						ctx.registerParentedItemModel(block, SpectrumModels.SKULL_ITEM);
+						return createVariantsSupplier(block, SpectrumModels.MOB_HEAD);
+					});
+			
+			Block wallHead = register(block(type.asString() + "_wall_head", new SpectrumWallSkullBlock(type, AbstractBlock.Settings.copy(SKELETON_SKULL).dropsLike(registrar.block())))
+					.withBlockModel((ctx, block) -> createVariantsSupplier(block, SpectrumModels.MOB_BLOCK)));
+			
+			register(registrar.withItem(block -> new SpectrumSkullBlockItem(block, wallHead, IS.of(), type), DyeColor.GRAY));
+		}
 		
-		registerMobHeads(IS.of());
+		COMMON_REGISTRAR.flush();
 	}
 	
 	private static void registerMagicalBlocks(Item.Settings settings) {
@@ -2141,18 +2135,6 @@ public class SpectrumBlocks {
 		registerBlockWithItem("courier_statue", COURIER_STATUE, settings, DyeColor.BLUE);
 		registerBlock("manxi", MANXI);
 		registerBlockWithItem("preservation_chest", PRESERVATION_CHEST, settings, DyeColor.BLUE);
-	}
-	
-	// All the mob heads vanilla is missing
-	private static void registerMobHeads(Item.Settings settings) {
-		for (SpectrumSkullType type : SpectrumSkullType.values()) {
-			Block head = new SpectrumSkullBlock(type, AbstractBlock.Settings.copy(SKELETON_SKULL).instrument(NoteBlockInstrument.CUSTOM_HEAD));
-			registerBlock(type.name().toLowerCase(Locale.ROOT) + "_head", head);
-			Block wallHead = new SpectrumWallSkullBlock(type, AbstractBlock.Settings.copy(SKELETON_SKULL).dropsLike(head));
-			registerBlock(type.name().toLowerCase(Locale.ROOT) + "_wall_head", wallHead);
-			BlockItem headItem = new SpectrumSkullBlockItem(head, wallHead, (settings), type);
-			registerBlockItem(type.name().toLowerCase(Locale.ROOT) + "_head", headItem, DyeColor.GRAY);
-		}
 	}
 	
 	public static void registerClient() {
@@ -2204,9 +2186,16 @@ public class SpectrumBlocks {
 		CLIENT_REGISTRAR.flush();
 	}
 	
+	public static <T extends Block> T register(BlockRegistrar<T> registrar) {
+		return Objects.requireNonNull(registrar.block(), "Attempted to register a null block");
+	}
+	
 	public static <T extends Block> BlockRegistrar<T> block(String name, T block) {
-		COMMON_REGISTRAR.defer(block, b -> Registry.register(Registries.BLOCK, SpectrumCommon.locate(name), block));
-		return new BlockRegistrar<>(block, false);
+		return new BlockRegistrar<T>(name).withBlock(block);
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> block(String name, Supplier<T> blockFactory) {
+		return new BlockRegistrar<T>(name).withBlock(blockFactory);
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> blockWithItem(String name, T block, DyeColor color) {
@@ -2214,29 +2203,11 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> blockWithItem(String name, T block, Item.Settings settings, DyeColor color) {
-		COMMON_REGISTRAR.defer(() -> {
-			Identifier id = SpectrumCommon.locate(name);
-			Registry.register(Registries.BLOCK, id, block);
-			BlockItem item = new BlockItem(block, settings);
-			Registry.register(Registries.ITEM, id, item);
-			ItemColors.ITEM_COLORS.registerColorMapping(item, color);
-		});
-		return new BlockRegistrar<>(block, true);
+		return blockWithItem(name, block, b -> new BlockItem(b, settings), color);
 	}
 	
-	public static <T extends Block> BlockRegistrar<T> blockWithItem(String name, T block, Function<T, BlockItem> itemFactory, DyeColor color) {
-		COMMON_REGISTRAR.defer(() -> {
-			Identifier id = SpectrumCommon.locate(name);
-			Registry.register(Registries.BLOCK, id, block);
-			BlockItem item = itemFactory.apply(block);
-			Registry.register(Registries.ITEM, id, item);
-			ItemColors.ITEM_COLORS.registerColorMapping(item, color);
-		});
-		return new BlockRegistrar<>(block, true);
-	}
-	
-	public static <T extends Block> T register(BlockRegistrar<T> registrar) {
-		return registrar.block();
+	public static <T extends Block> BlockRegistrar<T> blockWithItem(String name, T block, Function<T, Item> itemFactory, DyeColor color) {
+		return block(name, block).withItem(itemFactory, color);
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> cutout(BlockRegistrar<T> registrar) {
@@ -2402,46 +2373,129 @@ public class SpectrumBlocks {
 		});
 	}
 	
-	public record BlockRegistrar<T extends Block>(T block, boolean hasItem) {
+	public static class BlockRegistrar<T extends Block> {
+		
+		private final Identifier id;
+		private boolean hasBlock = false;
+		private boolean hasItem = false;
+		@Nullable
+		private T block = null;
+		@Nullable
+		private Item item = null;
+		
+		public BlockRegistrar(String name) {
+			this.id = locate(name);
+		}
 		
 		public BlockRegistrar<T> with(Consumer<T> callback) {
 			callback.accept(block);
 			return this;
 		}
 		
+		public BlockRegistrar<T> withBlock(T block) {
+			if (hasBlock) throw new UnsupportedOperationException("Attempted to register two blocks with id " + id);
+			hasBlock = true;
+			this.block = block;
+			COMMON_REGISTRAR.defer(() -> Registry.register(Registries.BLOCK, id, this.block));
+			return this;
+		}
+		
+		public BlockRegistrar<T> withBlock(Supplier<T> blockFactory) {
+			if (hasBlock) throw new UnsupportedOperationException("Attempted to register two blocks with id " + id);
+			hasBlock = true;
+			COMMON_REGISTRAR.defer(() -> Registry.register(Registries.BLOCK, id, (block = blockFactory.get())));
+			return this;
+		}
+		
+		public BlockRegistrar<T> withItem(Function<T, Item> callback, DyeColor color) {
+			if (hasItem) throw new UnsupportedOperationException("Attempted to register two items with id " + id);
+			hasItem = true;
+			COMMON_REGISTRAR.defer(() -> {
+				item = callback.apply(block);
+				Registry.register(Registries.ITEM, id, item);
+				ItemColors.ITEM_COLORS.registerColorMapping(item, color);
+			});
+			return this;
+		}
+		
 		public BlockRegistrar<T> withCutoutRenderLayer() {
-			CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout()));
+			CLIENT_REGISTRAR.defer(() -> {
+				Objects.requireNonNull(block);
+				BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout());
+			});
 			return this;
 		}
 		
 		public BlockRegistrar<T> withMippedCutoutRenderLayer() {
-			CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped()));
+			CLIENT_REGISTRAR.defer(() -> {
+				Objects.requireNonNull(block);
+				BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutoutMipped());
+			});
 			return this;
 		}
 		
 		public BlockRegistrar<T> withTranslucentRenderLayer() {
-			CLIENT_REGISTRAR.defer(() -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent()));
+			CLIENT_REGISTRAR.defer(() -> {
+				Objects.requireNonNull(block);
+				BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent());
+			});
 			return this;
 		}
 		
 		public BlockRegistrar<T> withBlockModel(BiFunction<BlockStateModelGenerator, ? super T, BlockStateSupplier> callback) {
-			BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.blockStateCollector.accept(callback.apply(ctx, block)));
+			BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+				Objects.requireNonNull(block);
+				ctx.blockStateCollector.accept(callback.apply(ctx, block));
+			});
 			return this;
 		}
 		
 		public BlockRegistrar<T> withBlockItemModel(BiConsumer<ItemModelGenerator, ? super T> callback) {
-			if (this.hasItem) ITEM_MODEL_REGISTRAR.defer(ctx -> callback.accept(ctx, block));
+			ITEM_MODEL_REGISTRAR.defer(ctx -> {
+				if (hasItem) {
+					Objects.requireNonNull(block);
+					callback.accept(ctx, block);
+				}
+			});
 			return this;
 		}
 		
 		public BlockRegistrar<T> withItemModel(BiConsumer<ItemModelGenerator, Item> callback) {
-			if (this.hasItem) ITEM_MODEL_REGISTRAR.defer(ctx -> callback.accept(ctx, block.asItem()));
+			ITEM_MODEL_REGISTRAR.defer(ctx -> {
+				if (hasItem) {
+					Objects.requireNonNull(block);
+					callback.accept(ctx, block.asItem());
+				}
+			});
 			return this;
 		}
 		
 		public BlockRegistrar<T> withPredefinedItemModel() {
-			if (this.hasItem) BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> ctx.excludeFromSimpleItemModelGeneration(block));
+			BLOCK_STATE_MODEL_REGISTRAR.defer(ctx -> {
+				if (hasItem) {
+					Objects.requireNonNull(block);
+					ctx.excludeFromSimpleItemModelGeneration(block);
+				}
+			});
 			return this;
+		}
+		
+		@Nullable
+		public T block() {
+			return block;
+		}
+		
+		@Nullable
+		public Item item() {
+			return item;
+		}
+		
+		public RegistryKey<Block> blockKey() {
+			return RegistryKey.of(RegistryKeys.BLOCK, id);
+		}
+		
+		public RegistryKey<Item> itemKey() {
+			return RegistryKey.of(RegistryKeys.ITEM, id);
 		}
 		
 	}

@@ -17,6 +17,10 @@ public class SpectrumModels {
 	public static final Model MEDIUM_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/medium_bud")), Optional.empty(), LAYER0);
 	public static final Model SMALL_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/small_bud")), Optional.empty(), LAYER0);
 	
+	// Vanilla Items
+	
+	public static final Identifier SKULL_ITEM = Identifier.ofVanilla("item/template_skull");
+	
 	// Block Templates
 	public static final Model BASE_FLAT_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light")), Optional.empty(), INNER, OUTER, PARTICLE);
 	public static final Model BASE_FLAT_LIGHT_MIRRORED = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light_mirrored")), Optional.empty(), INNER, OUTER, PARTICLE);
@@ -49,6 +53,7 @@ public class SpectrumModels {
 	public static final Identifier BALCITE_PYLON_PEDESTAL = SpectrumCommon.locate("block/balcite_pylon_pedestal");
 	public static final Identifier MOB_BLOCK = SpectrumCommon.locate("block/mob_block");
 	public static final Identifier MOB_BLOCK_COOLDOWN = SpectrumCommon.locate("block/mob_block_cooldown");
+	public static final Identifier MOB_HEAD = SpectrumCommon.locate("block/mob_head");
 	
 	public static Model baseTransLantern(boolean diagonal, boolean tall) {
 		return new Model(Optional.of(SpectrumCommon.locate("templates/base_trans_lantern" + (diagonal ? "_diagonal" : "") + (tall ? "_tall" : "_small"))), Optional.empty(), GLASS, CASE);
@@ -70,7 +75,7 @@ public class SpectrumModels {
 	public static final Model CUBE_BOTTOM_TOP_PARTICLE = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TOP, BOTTOM, SIDE, PARTICLE);
 	public static final Model CUBE_BOTTOM_TOP_WALL = new Model(Optional.of(Identifier.ofVanilla("block/cube_bottom_top")), Optional.empty(), TOP, BOTTOM, SIDE, WALL);
 	
-	// Vanilla
+	// Vanilla Blocks
 	public static final Model DAYLIGHT_DETECTOR = new Model(Optional.of(Identifier.ofVanilla("block/template_daylight_detector")), Optional.empty(), SIDE, TOP);
 	public static final Model SPORE_BLOSSOM = new Model(Optional.of(Identifier.ofVanilla("block/spore_blossom")), Optional.empty(), FLOWER, PARTICLE);
 	

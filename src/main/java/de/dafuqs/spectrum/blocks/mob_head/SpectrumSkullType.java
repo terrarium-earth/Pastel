@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.mob_head;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -8,15 +8,17 @@ import net.minecraft.entity.*;
 import net.minecraft.sound.*;
 import net.minecraft.util.*;
 
-public enum SpectrumSkullType implements SkullBlock.SkullType {
+import java.util.*;
 
+public enum SpectrumSkullType implements SkullBlock.SkullType {
+	
 	// Vanilla
 	ALLAY(EntityType.ALLAY, SoundEvents.ENTITY_ALLAY_AMBIENT_WITHOUT_ITEM.getId()),
 	AXOLOTL_BLUE(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
-	AXOLOTL_WILD(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
 	AXOLOTL_CYAN(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
 	AXOLOTL_GOLD(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
 	AXOLOTL_LEUCISTIC(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
+	AXOLOTL_WILD(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
 	BAT(EntityType.BAT, SoundEvents.ENTITY_BAT_AMBIENT.getId()),
 	BEE(EntityType.BEE, SoundEvents.ENTITY_BEE_POLLINATE.getId()),
 	BLAZE(EntityType.BLAZE, SoundEvents.ENTITY_BLAZE_AMBIENT.getId()),
@@ -108,8 +110,8 @@ public enum SpectrumSkullType implements SkullBlock.SkullType {
 	ZOMBIE_HORSE(EntityType.ZOMBIE_HORSE, SoundEvents.ENTITY_ZOMBIE_HORSE_AMBIENT.getId()),
 	ZOMBIE_VILLAGER(EntityType.ZOMBIE_VILLAGER, SoundEvents.ENTITY_ZOMBIE_VILLAGER_AMBIENT.getId()),
 	ZOMBIFIED_PIGLIN(EntityType.ZOMBIFIED_PIGLIN, SoundEvents.ENTITY_ZOMBIFIED_PIGLIN_AMBIENT.getId()),
-
-    // Spectrum
+	
+	// Spectrum
 	EGG_LAYING_WOOLY_PIG(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, SoundEvents.ENTITY_PIG_AMBIENT.getId()),
 	ERASER(SpectrumEntityTypes.ERASER, SoundEvents.ENTITY_SPIDER_AMBIENT.getId()),
 	KINDLING(SpectrumEntityTypes.KINDLING, SpectrumSoundEvents.ENTITY_KINDLING_AMBIENT.getId()),
@@ -131,27 +133,28 @@ public enum SpectrumSkullType implements SkullBlock.SkullType {
 	LIZARD_YELLOW(SpectrumEntityTypes.LIZARD, SpectrumSoundEvents.ENTITY_LIZARD_AMBIENT.getId()),
 	MONSTROSITY(SpectrumEntityTypes.MONSTROSITY, SpectrumSoundEvents.ENTITY_MONSTROSITY_AMBIENT.getId()),
 	PRESERVATION_TURRET(SpectrumEntityTypes.PRESERVATION_TURRET, SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_AMBIENT.getId());
-
+	
 	public static final Codec<SpectrumSkullType> CODEC = StringIdentifiable.createCodec(SpectrumSkullType::values);
-
+	
 	private final EntityType<?> entityType;
 	private final Identifier noteBlockSound;
 	
 	SpectrumSkullType(EntityType<?> entityType, Identifier noteBlockSound) {
-        this.entityType = entityType;
+		this.entityType = entityType;
 		this.noteBlockSound = noteBlockSound;
-    }
-    
-    public EntityType<?> getEntityType() {
-        return this.entityType;
-    }
+	}
+	
+	public EntityType<?> getEntityType() {
+		return this.entityType;
+	}
 	
 	public Identifier getNoteBlockSound() {
 		return this.noteBlockSound;
 	}
-
+	
 	@Override
 	public String asString() {
-		return name();
+		return name().toLowerCase(Locale.ROOT);
 	}
+	
 }

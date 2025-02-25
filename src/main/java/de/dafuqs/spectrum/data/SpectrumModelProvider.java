@@ -223,6 +223,14 @@ public class SpectrumModelProvider extends FabricModelProvider {
 				.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270));
 	}
 	
+	public static BlockStateVariantMap createWestDefaultHorizontalFacingVariantMap() {
+		return BlockStateVariantMap.create(Properties.HORIZONTAL_FACING)
+				.register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))
+				.register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270))
+				.register(Direction.WEST, BlockStateVariant.create())
+				.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180));
+	}
+	
 	public static BlockStateVariantMap createEastDefaultHorizontalFacingVariantMap() {
 		return BlockStateVariantMap.create(Properties.HORIZONTAL_FACING)
 				.register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270))
