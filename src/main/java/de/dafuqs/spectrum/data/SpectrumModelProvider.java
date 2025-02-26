@@ -87,10 +87,6 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		return VariantsBlockStateSupplier.create(woodBlock, createModelVariant(model)).coordinate(createAxisRotatedVariantMap());
 	}
 	
-	public static BlockStateSupplier tintableCrossBlockModel(BlockStateModelGenerator ctx, Block block, boolean tinted) {
-		return createVariantsSupplier(block, SpectrumTexturedModels.tintableCross(b -> b, "", tinted).upload(block, ctx.modelCollector));
-	}
-	
 	public static BlockStateSupplier pottedPlantBlockModel(BlockStateModelGenerator ctx, FlowerPotBlock block, boolean tinted) {
 		BlockStateModelGenerator.TintType tintType = tinted ? BlockStateModelGenerator.TintType.TINTED : BlockStateModelGenerator.TintType.NOT_TINTED;
 		TextureMap textureMap = TextureMap.plant(block.getContent());
@@ -217,6 +213,14 @@ public class SpectrumModelProvider extends FabricModelProvider {
 				.register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R180))
 				.register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R270))
 				.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90));
+	}
+	
+	public static BlockStateVariantMap createUpDefaultHorizontalFacingVariantMap() {
+		return BlockStateVariantMap.create(Properties.HORIZONTAL_FACING)
+				.register(Direction.NORTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90))
+				.register(Direction.SOUTH, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R180))
+				.register(Direction.WEST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R270))
+				.register(Direction.EAST, BlockStateVariant.create().put(VariantSettings.X, VariantSettings.Rotation.R90).put(VariantSettings.Y, VariantSettings.Rotation.R90));
 	}
 	
 	public static BlockStateVariantMap createNorthDefaultHorizontalFacingVariantMap() {

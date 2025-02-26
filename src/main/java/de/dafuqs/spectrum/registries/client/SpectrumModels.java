@@ -33,6 +33,7 @@ public class SpectrumModels {
 	public static final Model COMPLEX_ORIENTABLE = new Model(Optional.of(SpectrumCommon.locate("templates/complex_orientable")), Optional.empty(), SIDE, TOP, BOTTOM, FRONT, BACK, PARTICLE);
 	public static final Model CRYSTALLARIEUM_FARMABLE = new Model(Optional.of(SpectrumCommon.locate("templates/crystallarieum_farmable")), Optional.empty(), CROSS);
 	public static final Model DOUBLE_CROSS = new Model(Optional.of(SpectrumCommon.locate("templates/double_cross")), Optional.empty(), CROSS);
+	public static final Model FUSION_SHRINE = new Model(Optional.of(SpectrumCommon.locate("templates/base_fusion_shrine")), Optional.empty(), SHRINE, PARTICLE);
 	public static final Model JADE_VINE_BULB = new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_bulb")), Optional.empty(), FLOWER, PARTICLE);
 	public static final Model JADE_VINE_ROOTS = new Model(Optional.of(SpectrumCommon.locate("templates/jade_vine_roots")), Optional.empty(), FLOWER, PARTICLE);
 	public static final Model MOONSTONE_CHISELED = new Model(Optional.of(SpectrumCommon.locate("templates/moonstone_chiseled")), Optional.empty(), SIDE, LINE);
@@ -41,6 +42,7 @@ public class SpectrumModels {
 	public static final Model OVERGROWN = new Model(Optional.of(SpectrumCommon.locate("templates/overgrown")), Optional.empty(), SIDE, TOP, BOTTOM, FRONDS);
 	public static final Model PARTICLE_SPAWNER = new Model(Optional.of(SpectrumCommon.locate("templates/particle_spawner")), Optional.empty(), TOP);
 	public static final Model PEDESTAL = new Model(Optional.of(SpectrumCommon.locate("templates/pedestal")), Optional.empty(), SpectrumTextureKeys.PEDESTAL, PARTICLE);
+	public static final Model PRESENT = new Model(Optional.of(SpectrumCommon.locate("templates/present")), Optional.empty(), TEXTURE, PARTICLE);
 	public static final Model REDSTONE_TIMER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_timer_base")), Optional.empty(), LIGHT);
 	public static final Model REDSTONE_TRANSCEIVER_CHANNEL = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_channel_base")), Optional.empty(), ALL);
 	public static final Model REDSTONE_TRANSCEIVER_SENDER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_sender_base")), Optional.empty(), LIGHT);

@@ -22,5 +22,6 @@ public class SpectrumTextureKeys {
 	public static final TextureKey OUTER = TextureKey.of("outer");
 	public static final TextureKey PEDESTAL = TextureKey.of("pedestal");
 	public static final TextureKey SHELL = TextureKey.of("shell");
+	public static final TextureKey SHRINE = TextureKey.of("shrine");
 	
 }

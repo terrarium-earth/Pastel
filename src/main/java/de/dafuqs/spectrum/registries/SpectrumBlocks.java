@@ -120,17 +120,17 @@ public class SpectrumBlocks {
 	public static final Block PEDESTAL_ONYX = register(pedestal(blockWithItem("pedestal_onyx", new PedestalBlock(craftingBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK), BuiltinPedestalVariant.ONYX), block -> new PedestalBlockItem(block, IS.of(1), BuiltinPedestalVariant.ONYX, "item.spectrum.pedestal.tooltip.onyx"), DyeColor.WHITE)));
 	public static final Block PEDESTAL_MOONSTONE = register(pedestal(blockWithItem("pedestal_moonstone", new PedestalBlock(craftingBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK), BuiltinPedestalVariant.MOONSTONE), block -> new PedestalBlockItem(block, IS.of(1), BuiltinPedestalVariant.MOONSTONE, "item.spectrum.pedestal.tooltip.moonstone"), DyeColor.WHITE)));
 	
-	public static final Block FUSION_SHRINE_BASALT = new FusionShrineBlock(craftingBlock(MapColor.BLACK, BlockSoundGroup.BASALT).luminance(value -> value.get(FusionShrineBlock.LIGHT_LEVEL)));
-	public static final Block FUSION_SHRINE_CALCITE = new FusionShrineBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE).luminance(value -> value.get(FusionShrineBlock.LIGHT_LEVEL)));
+	public static final Block FUSION_SHRINE_BASALT = register(cutout(singleton(blockWithItem("fusion_shrine_basalt", new FusionShrineBlock(craftingBlock(MapColor.BLACK, BlockSoundGroup.BASALT).luminance(value -> value.get(FusionShrineBlock.LIGHT_LEVEL))), IS.of(1), DyeColor.GRAY), SpectrumTexturedModels.FUSION_SHRINE)));
+	public static final Block FUSION_SHRINE_CALCITE = register(cutout(singleton(blockWithItem("fusion_shrine_calcite", new FusionShrineBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE).luminance(value -> value.get(FusionShrineBlock.LIGHT_LEVEL))), IS.of(1), DyeColor.GRAY), SpectrumTexturedModels.FUSION_SHRINE)));
 	
-	public static final Block ENCHANTER = new EnchanterBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
+	public static final Block ENCHANTER = register(cutout(singleton(blockWithItem("enchanter", new EnchanterBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(1), DyeColor.PURPLE), ModelIds::getBlockModelId)));
 	public static final Block ITEM_BOWL_BASALT = register(cutout(singleton(blockWithItem("item_bowl_basalt", new ItemBowlBlock(craftingBlock(MapColor.BLACK, BlockSoundGroup.BASALT)), IS.of(16), DyeColor.PINK), SpectrumTexturedModels.BOWL)));
 	public static final Block ITEM_BOWL_CALCITE = register(cutout(singleton(blockWithItem("item_bowl_calcite", new ItemBowlBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(16), DyeColor.PINK), SpectrumTexturedModels.BOWL)));
 	public static final Block ITEM_ROUNDEL = register(singleton(blockWithItem("item_roundel", new ItemRoundelBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(16), DyeColor.PINK), SpectrumTexturedModels.ROUNDEL));
-	public static final Block POTION_WORKSHOP = new PotionWorkshopBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
-	public static final Block SPIRIT_INSTILLER = new SpiritInstillerBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
-	public static final CrystallarieumBlock CRYSTALLARIEUM = new CrystallarieumBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
-	public static final Block CINDERHEARTH = new CinderhearthBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
+	public static final Block POTION_WORKSHOP = register(translucent(defaultNorthHorizontalFacing(blockWithItem("potion_workshop", new PotionWorkshopBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(1), DyeColor.PURPLE), ModelIds::getBlockModelId)));
+	public static final Block SPIRIT_INSTILLER = register(singleton(blockWithItem("spirit_instiller", new SpiritInstillerBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(1), DyeColor.WHITE), ModelIds::getBlockModelId));
+	public static final CrystallarieumBlock CRYSTALLARIEUM = register(translucent(blockWithItem("crystallarieum", new CrystallarieumBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(1), DyeColor.BROWN)).withPredefinedItemModel());
+	public static final Block CINDERHEARTH = register(defaultNorthHorizontalFacing(blockWithItem("cinderhearth", new CinderhearthBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE)), IS.of(1).fireproof(), DyeColor.ORANGE), ModelIds::getBlockModelId));
 	
 	public static final Block COLOR_PICKER = new ColorPickerBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
 	public static final Block CRYSTAL_APOTHECARY = new CrystalApothecaryBlock(craftingBlock(MapColor.TERRACOTTA_WHITE, BlockSoundGroup.CALCITE));
@@ -531,16 +531,18 @@ public class SpectrumBlocks {
 		return createVariantsSupplier(attached, Models.STEM_FRUIT.upload(attached, TextureMap.stemAndUpper(block, attached), ctx.modelCollector)).coordinate(createWestDefaultHorizontalFacingVariantMap());
 	})).blockKey();
 	
-	public static final Block PRESENT = new PresentBlock(AbstractBlock.Settings.copy(WHITE_WOOL));
-	public static final Block TITRATION_BARREL = new TitrationBarrelBlock(AbstractBlock.Settings.copy(OAK_PLANKS).mapColor(MapColor.RED));
+	public static final Block PRESENT = register(cutout(blockWithItem("present", new PresentBlock(AbstractBlock.Settings.copy(WHITE_WOOL)), block -> new PresentBlockItem(block, IS.of(1)), DyeColor.LIGHT_GRAY)).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(PresentBlock.VARIANT).register(variant -> createModelVariant(SpectrumModels.PRESENT.upload(block, "_" + variant.asString(), new TextureMap().put(TextureKey.TEXTURE, TextureMap.getSubId(block, "_" + variant.asString())).put(TextureKey.PARTICLE, TextureMap.getId(variant.woolBase)), ctx.modelCollector))))).withPredefinedItemModel());
+	public static final Block TITRATION_BARREL = register(blockWithItem("titration_barrel", new TitrationBarrelBlock(AbstractBlock.Settings.copy(OAK_PLANKS).mapColor(MapColor.RED)), DyeColor.MAGENTA).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(createUpDefaultHorizontalFacingVariantMap()).coordinate(BlockStateVariantMap.create(TitrationBarrelBlock.BARREL_STATE).register(state -> createModelVariant(SpectrumTexturedModels.cubeBottomTop(b -> b, "_side", b -> b, "_top_" + state.asString(), b -> b, "_bottom").upload(block, state == TitrationBarrelBlock.BarrelState.EMPTY ? "" : "_" + state.asString(), ctx.modelCollector))))));
 	
 	public static final Block PARAMETRIC_MINING_DEVICE = new ParametricMiningDeviceBlock(AbstractBlock.Settings.copy(BLACKSLAG).nonOpaque().breakInstantly());
 	public static final Block THREAT_CONFLUX = new ThreatConfluxBlock(AbstractBlock.Settings.copy(BLACKSLAG).nonOpaque().breakInstantly());
 	
 	public static final Block BLOCK_FLOODER = register(simple(block("block_flooder", new BlockFlooderBlock(settings(MapColor.LIGHT_BLUE_GRAY, BlockSoundGroup.ROOTED_DIRT, 0.0F)))));
 	public static final Block BOTTOMLESS_BUNDLE = new BottomlessBundleBlock(settings(MapColor.PALE_PURPLE, BlockSoundGroup.WOOL, 1.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY));
-	public static final Block WAND_LIGHT_BLOCK = new WandLightBlock(AbstractBlock.Settings.copy(LIGHT).sounds(SpectrumBlockSoundGroups.WAND_LIGHT).breakInstantly());
-	public static final Block DECAYING_LIGHT_BLOCK = new DecayingLightBlock(AbstractBlock.Settings.copy(WAND_LIGHT_BLOCK).ticksRandomly());
+	
+	//TODO these names don't match
+	public static final Block WAND_LIGHT_BLOCK = register(singleton(block("wand_light", new WandLightBlock(AbstractBlock.Settings.copy(LIGHT).sounds(SpectrumBlockSoundGroups.WAND_LIGHT).breakInstantly())), SpectrumTexturedModels.particle(SpectrumTextures.SHIMMERSTONE_LIGHT)));
+	public static final Block DECAYING_LIGHT_BLOCK = register(parented(block("decaying_light", new DecayingLightBlock(AbstractBlock.Settings.copy(WAND_LIGHT_BLOCK).ticksRandomly())), b -> WAND_LIGHT_BLOCK));
 	
 	private static Settings decay(MapColor mapColor, BlockSoundGroup soundGroup, float strength, float resistance, PistonBehavior pistonBehavior) {
 		return settings(mapColor, soundGroup, strength, resistance).pistonBehavior(pistonBehavior).ticksRandomly().allowsSpawning((state, world, pos, type) -> false);
@@ -1300,8 +1302,8 @@ public class SpectrumBlocks {
 	public static final SpiritVinesPlantStemBlock BLACK_SPIRIT_SALLOW_VINES = register(spiritVines(block("black_spirit_sallow_vines_head", new SpiritVinesPlantStemBlock(spiritVines(MapColor.TERRACOTTA_BLACK), BuiltinGemstoneColor.BLACK))));
 	public static final SpiritVinesPlantStemBlock WHITE_SPIRIT_SALLOW_VINES = register(spiritVines(block("white_spirit_sallow_vines_head", new SpiritVinesPlantStemBlock(spiritVines(MapColor.TERRACOTTA_WHITE), BuiltinGemstoneColor.WHITE))));
 	
-	public static final Block STUCK_STORM_STONE = new StuckStormStoneBlock(settings(MapColor.CLEAR, BlockSoundGroup.SMALL_AMETHYST_BUD, 0.0F).noCollision().nonOpaque().suffocates(SpectrumBlocks::never).noBlockBreakParticles().blockVision(SpectrumBlocks::never).replaceable());
-	public static final Block DEEPER_DOWN_PORTAL = new DeeperDownPortalBlock(settings(MapColor.BLACK, BlockSoundGroup.INTENTIONALLY_EMPTY, -1.0F, 3600000.0F).pistonBehavior(PistonBehavior.BLOCK).luminance(state -> 8).dropsNothing());
+	public static final Block STUCK_STORM_STONE = register(cutout(defaultWestHorizontalFacing(block("stuck_storm_stone", new StuckStormStoneBlock(settings(MapColor.CLEAR, BlockSoundGroup.SMALL_AMETHYST_BUD, 0.0F).noCollision().nonOpaque().suffocates(SpectrumBlocks::never).noBlockBreakParticles().blockVision(SpectrumBlocks::never).replaceable())), ModelIds::getBlockModelId)));
+	public static final Block DEEPER_DOWN_PORTAL = register(block("deeper_down_portal", new DeeperDownPortalBlock(settings(MapColor.BLACK, BlockSoundGroup.INTENTIONALLY_EMPTY, -1.0F, 3600000.0F).pistonBehavior(PistonBehavior.BLOCK).luminance(state -> 8).dropsNothing())).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(DeeperDownPortalBlock.FACING_UP, ModelIds.getBlockSubModelId(block, "_up"), ModelIds.getBlockModelId(block)))));
 	
 	private static Settings upgrade() {
 		return AbstractBlock.Settings.copy(POLISHED_BASALT).solid();
@@ -1319,8 +1321,8 @@ public class SpectrumBlocks {
 	
 	public static final Block REDSTONE_SAND = register(simple(blockWithItem("redstone_sand", new RedstoneGravityBlock(AbstractBlock.Settings.copy(SAND).mapColor(MapColor.BRIGHT_RED)), DyeColor.RED)));
 	public static final Block ENDER_GLASS = register(translucent(blockWithItem("ender_glass", new EnderGlassBlock(AbstractBlock.Settings.copy(GLASS).mapColor(MapColor.PURPLE).nonOpaque().solidBlock(SpectrumBlocks::never).allowsSpawning((state, world, pos, entityType) -> state.get(EnderGlassBlock.TRANSPARENCY_STATE) == EnderGlassBlock.TransparencyState.SOLID).suffocates((state, world, pos) -> state.get(EnderGlassBlock.TRANSPARENCY_STATE) == EnderGlassBlock.TransparencyState.SOLID).blockVision((state, world, pos) -> state.get(EnderGlassBlock.TRANSPARENCY_STATE) == EnderGlassBlock.TransparencyState.SOLID)), DyeColor.PURPLE)).withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, block, "_solid")).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(EnderGlassBlock.TRANSPARENCY_STATE).register(transparency -> createModelVariant(SpectrumTexturedModels.cubeAll(b -> b, "_" + transparency.asString()).upload(block, "_" + transparency.asString(), ctx.modelCollector))))));
-	public static final Block CLOVER = new CloverBlock(AbstractBlock.Settings.copy(SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ));
-	public static final Block FOUR_LEAF_CLOVER = new FourLeafCloverBlock(AbstractBlock.Settings.copy(SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ));
+	public static final Block CLOVER = register(singleton(blockWithItem("clover", new CloverBlock(AbstractBlock.Settings.copy(SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ)), IS.of(), DyeColor.LIME), ModelIds::getBlockModelId).withItemModel(SpectrumModelProvider::registerItemModel));
+	public static final Block FOUR_LEAF_CLOVER = register(singleton(blockWithItem("four_leaf_clover", new FourLeafCloverBlock(AbstractBlock.Settings.copy(SHORT_GRASS).offset(AbstractBlock.OffsetType.XZ)), block -> new FourLeafCloverItem(block, IS.of(), SpectrumAdvancements.REVEAL_FOUR_LEAF_CLOVER, CLOVER.asItem()), DyeColor.LIME), ModelIds::getBlockModelId).withItemModel(SpectrumModelProvider::registerItemModel));
 	
 	private static final UniformIntProvider gemOreExperienceProvider = UniformIntProvider.create(1, 4);
 	public static final Block TOPAZ_ORE = register(simple(blockWithItem("topaz_ore", new GemstoneOreBlock(gemOreExperienceProvider, ore(), BuiltinGemstoneColor.CYAN, SpectrumAdvancements.COLLECT_TOPAZ, STONE.getDefaultState()), DyeColor.CYAN)));
@@ -1762,7 +1764,7 @@ public class SpectrumBlocks {
 	public static final ShootingStarBlock GEMSTONE_SHOOTING_STAR = register(cutout(singleton(blockWithItem("gemstone_shooting_star", new ShootingStarBlock(shootingStar(), ShootingStar.Type.GEMSTONE), block -> new ShootingStarItem(block, IS.of(1, Rarity.UNCOMMON)), DyeColor.PURPLE), SpectrumTexturedModels.SHOOTING_STAR)));
 	public static final Block STARDUST_BLOCK = register(simple(blockWithItem("stardust_block", new ColoredFallingBlock(new ColorCode(DyeColor.PURPLE.getFireworkColor()), AbstractBlock.Settings.copy(SAND).mapColor(MapColor.PURPLE)), IS.of(1, Rarity.UNCOMMON), DyeColor.BLACK)));
 	
-	public static final Block INCANDESCENT_AMALGAM = new IncandescentAmalgamBlock(AbstractBlock.Settings.create().breakInstantly().nonOpaque());
+	public static final Block INCANDESCENT_AMALGAM = register(cutout(singleton(blockWithItem("incandescent_amalgam", new IncandescentAmalgamBlock(AbstractBlock.Settings.create().breakInstantly().nonOpaque()), block -> new IncandescentAmalgamItem(block, IS.of(16).food(SpectrumFoodComponents.INCANDESCENT_AMALGAM)), DyeColor.RED), ModelIds::getBlockModelId)).withBlockItemModel(SpectrumModelProvider::registerBlockTexturedItemModel));
 	
 	private static Settings idol(BlockSoundGroup soundGroup) {
 		return settings(MapColor.TERRACOTTA_WHITE, soundGroup, 3.0F).requiresTool().nonOpaque();
@@ -1902,47 +1904,26 @@ public class SpectrumBlocks {
 	}
 	
 	public static void register() {
-		registerBlockWithItem("fusion_shrine_basalt", FUSION_SHRINE_BASALT, IS.of(1), DyeColor.GRAY);
-		registerBlockWithItem("fusion_shrine_calcite", FUSION_SHRINE_CALCITE, IS.of(1), DyeColor.GRAY);
-		registerBlockWithItem("enchanter", ENCHANTER, IS.of(1), DyeColor.PURPLE);
-		registerBlockWithItem("potion_workshop", POTION_WORKSHOP, IS.of(1), DyeColor.PURPLE);
-		registerBlockWithItem("spirit_instiller", SPIRIT_INSTILLER, IS.of(1), DyeColor.WHITE);
-		registerBlockWithItem("crystallarieum", CRYSTALLARIEUM, IS.of(1), DyeColor.BROWN);
-		registerBlockWithItem("cinderhearth", CINDERHEARTH, IS.of(1).fireproof(), DyeColor.ORANGE);
 		registerBlockWithItem("crystal_apothecary", CRYSTAL_APOTHECARY, IS.of(8), DyeColor.GREEN);
 		registerBlockWithItem("color_picker", COLOR_PICKER, IS.of(8), DyeColor.GREEN);
 		
 		registerBlockWithItem("ender_hopper", ENDER_HOPPER, IS.of(), DyeColor.PURPLE);
 		registerBlockWithItem("ender_dropper", ENDER_DROPPER, IS.of(), DyeColor.PURPLE);
 		
-		registerBlockWithItem("present", PRESENT, new PresentBlockItem(PRESENT, IS.of(1)), DyeColor.LIGHT_GRAY);
-		registerBlockWithItem("titration_barrel", TITRATION_BARREL, IS.of(), DyeColor.MAGENTA);
-		
 		registerBlockWithItem("parametric_mining_device", PARAMETRIC_MINING_DEVICE, new ParametricMiningDeviceItem(PARAMETRIC_MINING_DEVICE, IS.of(8)), DyeColor.RED);
 		registerBlockWithItem("threat_conflux", THREAT_CONFLUX, new ThreatConfluxItem(THREAT_CONFLUX, IS.of(8)), DyeColor.RED);
 		
-		// Fluids + Products
 		registerBlock("goo", GOO);
 		registerBlock("liquid_crystal", LIQUID_CRYSTAL);
 		registerBlock("midnight_solution", MIDNIGHT_SOLUTION);
 		registerBlock("dragonrot", DRAGONROT);
 		
-		registerBlockWithItem("clover", CLOVER, IS.of(), DyeColor.LIME);
-		registerBlockWithItem("four_leaf_clover", FOUR_LEAF_CLOVER, new FourLeafCloverItem(FOUR_LEAF_CLOVER, IS.of(), SpectrumAdvancements.REVEAL_FOUR_LEAF_CLOVER, CLOVER.asItem()), DyeColor.LIME);
-		registerBlockWithItem("incandescent_amalgam", INCANDESCENT_AMALGAM, new IncandescentAmalgamItem(INCANDESCENT_AMALGAM, IS.of(16).food(SpectrumFoodComponents.INCANDESCENT_AMALGAM)), DyeColor.RED);
-		
-		// Technical Blocks without items
-		
 		registerBlock("primordial_fire", PRIMORDIAL_FIRE);
 		registerBlockWithItem("primordial_torch", PRIMORDIAL_TORCH, new VerticallyAttachableBlockItem(PRIMORDIAL_TORCH, PRIMORDIAL_WALL_TORCH, IS.of(), Direction.DOWN), DyeColor.ORANGE);
 		registerBlock("primordial_wall_torch", PRIMORDIAL_WALL_TORCH);
-		registerBlock("deeper_down_portal", DEEPER_DOWN_PORTAL);
-		registerBlock("stuck_storm_stone", STUCK_STORM_STONE);
-		registerBlock("wand_light", WAND_LIGHT_BLOCK);
-		registerBlock("decaying_light", DECAYING_LIGHT_BLOCK);
 		registerBlockWithItem("bottomless_bundle", BOTTOMLESS_BUNDLE, new BottomlessBundleItem(BOTTOMLESS_BUNDLE, IS.of(1)), DyeColor.LIGHT_GRAY);
 		
-		// All the mob heads vanilla is missing
+		// All the mob heads
 		for (SpectrumSkullType type : SpectrumSkullType.values()) {
 			BlockRegistrar<SpectrumSkullBlock> registrar = block(type.asString() + "_head", new SpectrumSkullBlock(type, AbstractBlock.Settings.copy(SKELETON_SKULL).instrument(NoteBlockInstrument.CUSTOM_HEAD))).withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, SpectrumModels.SKULL_ITEM)).withBlockModel((ctx, block) -> createVariantsSupplier(block, SpectrumModels.MOB_HEAD));
 			Block wallHead = register(block(type.asString() + "_wall_head", new SpectrumWallSkullBlock(type, AbstractBlock.Settings.copy(SKELETON_SKULL).dropsLike(registrar.block()))).withBlockModel((ctx, block) -> createVariantsSupplier(block, SpectrumModels.MOB_BLOCK)));
@@ -1953,18 +1934,9 @@ public class SpectrumBlocks {
 	}
 	
 	public static void registerClient() {
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), FUSION_SHRINE_BASALT, FUSION_SHRINE_CALCITE);
-		BlockRenderLayerMap.INSTANCE.putBlock(ENCHANTER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(POTION_WORKSHOP, RenderLayer.getTranslucent());
-		BlockRenderLayerMap.INSTANCE.putBlock(CRYSTALLARIEUM, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), PRIMORDIAL_FIRE, PRIMORDIAL_TORCH, PRIMORDIAL_WALL_TORCH);
-		BlockRenderLayerMap.INSTANCE.putBlock(PRESENT, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(COLOR_PICKER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(STUCK_STORM_STONE, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(CLOVER, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(FOUR_LEAF_CLOVER, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(BOTTOMLESS_BUNDLE, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(INCANDESCENT_AMALGAM, RenderLayer.getCutout());
 		
 		CLIENT_REGISTRAR.flush();
 	}
@@ -2043,6 +2015,10 @@ public class SpectrumBlocks {
 	
 	public static <T extends Block> BlockRegistrar<T> defaultSouthHorizontalFacing(BlockRegistrar<T> registrar, Function<Block, Identifier> modelIdGetter) {
 		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(block, modelIdGetter.apply(block)).coordinate(createSouthDefaultHorizontalFacingVariantMap()));
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> defaultWestHorizontalFacing(BlockRegistrar<T> registrar, Function<Block, Identifier> modelIdGetter) {
+		return registrar.withBlockModel((ctx, block) -> createVariantsSupplier(block, modelIdGetter.apply(block)).coordinate(createWestDefaultHorizontalFacingVariantMap()));
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> cross(BlockRegistrar<T> registrar) {

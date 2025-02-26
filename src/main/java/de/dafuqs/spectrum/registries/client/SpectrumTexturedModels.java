@@ -18,6 +18,7 @@ public class SpectrumTexturedModels {
 	public static final TexturedModel.Factory CHIME = TexturedModel.makeFactory(b -> new TextureMap().put(BASE, SpectrumTextures.BALCITE_CHIME_BASE).put(GEMSTONE, getId(b)), SpectrumModels.CHIME);
 	public static final TexturedModel.Factory CUBE_COLUMN_MIRRORED = TexturedModel.makeFactory(TextureMap::sideAndEndForTop, Models.CUBE_COLUMN_MIRRORED);
 	public static final TexturedModel.Factory CUSHION = TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottom(b, "_side", b, "_top", b, "_bottom"), SpectrumModels.CUSHION);
+	public static final TexturedModel.Factory FUSION_SHRINE = TexturedModel.makeFactory(b -> new TextureMap().put(SHRINE, getId(b)).put(PARTICLE, getSubId(b, "_breaking")), SpectrumModels.FUSION_SHRINE);
 	public static final TexturedModel.Factory ROUNDEL = TexturedModel.makeFactory(b -> new TextureMap().put(ALL, getId(b)), SpectrumModels.ROUNDEL);
 	public static final TexturedModel.Factory SHOOTING_STAR = TexturedModel.makeFactory(b -> new TextureMap().put(CORE, getId(b)).put(SIDE, getSubId(b, "_side")), SpectrumModels.SHOOTING_STAR);
 	
@@ -83,7 +84,11 @@ public class SpectrumTexturedModels {
 	}
 	
 	public static TexturedModel.Factory particle(UnaryOperator<Block> particleBlock, String particleSuffix) {
-		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.all(particleBlock.apply(b), particleSuffix), Models.PARTICLE);
+		return TexturedModel.makeFactory(b -> TextureMap.particle(getSubId(particleBlock.apply(b), particleSuffix)), Models.PARTICLE);
+	}
+	
+	public static TexturedModel.Factory particle(Identifier particle) {
+		return TexturedModel.makeFactory(b -> TextureMap.particle(particle), Models.PARTICLE);
 	}
 	
 	public static TexturedModel.Factory sugarStick(int age, UnaryOperator<Block> sugarBlock) {
