@@ -1,5 +1,9 @@
 {
   "variants": {
+    "facing=down": {
+      "model": "spectrum:block/parametric_mining_device",
+      "x": 180
+    },
     "facing=east": {
       "model": "spectrum:block/parametric_mining_device",
       "x": 90,
@@ -11,19 +15,16 @@
     },
     "facing=south": {
       "model": "spectrum:block/parametric_mining_device",
-      "x": 270
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "spectrum:block/parametric_mining_device"
     },
     "facing=west": {
       "model": "spectrum:block/parametric_mining_device",
       "x": 90,
       "y": 270
-    },
-    "facing=up": {
-      "model": "spectrum:block/parametric_mining_device"
-    },
-    "facing=down": {
-      "model": "spectrum:block/parametric_mining_device",
-      "x": 180
     }
   }
 }

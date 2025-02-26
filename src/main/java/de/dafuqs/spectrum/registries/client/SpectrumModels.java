@@ -83,6 +83,11 @@ public class SpectrumModels {
 	
 	// Vanilla Blocks
 	public static final Model DAYLIGHT_DETECTOR = new Model(Optional.of(Identifier.ofVanilla("block/template_daylight_detector")), Optional.empty(), SIDE, TOP);
+	public static final Model FIRE_FLOOR = new Model(Optional.of(Identifier.ofVanilla("block/template_fire_floor")), Optional.empty(), FIRE);
+	public static final Model FIRE_SIDE = new Model(Optional.of(Identifier.ofVanilla("block/template_fire_side")), Optional.empty(), FIRE);
+	public static final Model FIRE_SIDE_ALT = new Model(Optional.of(Identifier.ofVanilla("block/template_fire_side_alt")), Optional.empty(), FIRE);
+	public static final Model FIRE_UP = new Model(Optional.of(Identifier.ofVanilla("block/template_fire_up")), Optional.empty(), FIRE);
+	public static final Model FIRE_UP_ALT = new Model(Optional.of(Identifier.ofVanilla("block/template_fire_up_alt")), Optional.empty(), FIRE);
 	public static final Model SPORE_BLOSSOM = new Model(Optional.of(Identifier.ofVanilla("block/spore_blossom")), Optional.empty(), FLOWER, PARTICLE);
 	
 }
