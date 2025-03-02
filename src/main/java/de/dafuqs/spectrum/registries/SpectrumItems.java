@@ -48,7 +48,7 @@ import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
 
 public class SpectrumItems {
 	
-	public static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
+	public static final DeferredRegistrar ITEM_REGISTRAR = new DeferredRegistrar();
 	
 	// Main items
 	public static final Item GUIDEBOOK = registerDeferred("guidebook", new GuidebookItem(IS.of(1)), InkColors.WHITE);
@@ -521,7 +521,7 @@ public class SpectrumItems {
 	
 	public static <T extends Item> RegistryKey<Item> registerDeferredSupplier(String id, Supplier<T> supplier, InkColor color) {
 		RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, SpectrumCommon.locate(id));
-		REGISTRAR.defer(() -> {
+		ITEM_REGISTRAR.defer(() -> {
 			T item = supplier.get();
 			Registry.register(Registries.ITEM, key, item);
 			ItemColors.ITEM_COLORS.registerColorMapping(item, color);
@@ -530,7 +530,7 @@ public class SpectrumItems {
 	}
 	
 	public static <T extends Item> T registerDeferred(String id, T item, InkColor color) {
-		REGISTRAR.defer(() -> {
+		ITEM_REGISTRAR.defer(() -> {
 			Registry.register(Registries.ITEM, SpectrumCommon.locate(id), item);
 			ItemColors.ITEM_COLORS.registerColorMapping(item, color);
 		});
@@ -539,54 +539,65 @@ public class SpectrumItems {
 	}
 	
 	public static <T extends Item> T registerDeferredWithUniqueModel(String id, T item, InkColor color) {
-		REGISTRAR.defer(() -> {
+		ITEM_REGISTRAR.defer(() -> {
 			Registry.register(Registries.ITEM, SpectrumCommon.locate(id), item);
 			ItemColors.ITEM_COLORS.registerColorMapping(item, color);
 		});
 		return item;
 	}
+
+//	public static class ItemRegistrar<T extends Item> {
+//
+//		private final Identifier id;
+//		private boolean hasItem = false;
+//		@Nullable
+//		private T item = null;
+//
+//		public ItemRegistrar(String name) {
+//			this.id = locate(name);
+//		}
+//
+//		public ItemRegistrar<T> with(Consumer<T> callback) {
+//			callback.accept(item);
+//			return this;
+//		}
+//
+//		public ItemRegistrar<T> withItem(Supplier<T> callback) {
+//			if (hasItem) throw new UnsupportedOperationException("Attempted to register two items with id " + id);
+//			hasItem = true;
+//			ITEM_REGISTRAR.defer(() -> Registry.register(Registries.ITEM, id, item));
+//			return this;
+//		}
+//
+//		public ItemRegistrar<T> withBurnTime(int burnTicks) {
+//			FUEL_REGISTRAR.defer(() -> FuelRegistry.INSTANCE.add(item, burnTicks));
+//			return this;
+//		}
+//
+//		@Nullable
+//		public Item item() {
+//			return item;
+//		}
+//
+//		public RegistryKey<Item> itemKey() {
+//			return RegistryKey.of(RegistryKeys.ITEM, id);
+//		}
+//
+//	}
 	
 	public static void register() {
-		REGISTRAR.flush();
+		ITEM_REGISTRAR.flush();
 		
 		FluidStorage.combinedItemApiProvider(SpectrumItems.MERMAIDS_GEM).register(context ->
 				new RemainderlessItemFluidStorage(context, FluidVariant.of(Fluids.WATER), FluidConstants.BUCKET));
 	}
 	
 	public static void registerFuelRegistry() {
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WET_LAVA_SPONGE.asItem(), 12800);
-		
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.LIGHT_LEVEL_DETECTOR.asItem(), 300);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEATHER_DETECTOR.asItem(), 300);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.ITEM_DETECTOR.asItem(), 300);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.PLAYER_DETECTOR.asItem(), 300);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.CREATURE_DETECTOR.asItem(), 300);
-		
 		FuelRegistry.INSTANCE.add(SpectrumItems.PURE_COAL, 3200);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.PURE_COAL_BLOCK, 32000);
-		
 		FuelRegistry.INSTANCE.add(SpectrumItems.VEGETAL, 800);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.VEGETAL_BLOCK, 8000);
-		
 		FuelRegistry.INSTANCE.add(SpectrumItems.PURE_ALCOHOL, 16000);
 		FuelRegistry.INSTANCE.add(SpectrumItems.CHRYSOCOLLA, 16000);
-		
 		FuelRegistry.INSTANCE.add(SpectrumItems.INCANDESCENT_ESSENCE, 2400);
-		
-		FuelRegistry.INSTANCE.add(SpectrumItemTags.COLORED_FENCES, 300);
-		FuelRegistry.INSTANCE.add(SpectrumItemTags.COLORED_FENCE_GATES, 300);
-		
-		// gala wood burns twice as long as normal
-		FuelRegistry.INSTANCE.add(SpectrumItemTags.WEEPING_GALA_LOGS, 600);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_PLANKS, 600);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_STAIRS, 600);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_DOOR, 400);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_FENCE, 600);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_PRESSURE_PLATE, 600);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_TRAPDOOR, 600);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_FENCE_GATE, 600);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_BUTTON, 200);
-		FuelRegistry.INSTANCE.add(SpectrumBlocks.WEEPING_GALA_SLAB, 300);
 	}
 	
 	public static class IS {

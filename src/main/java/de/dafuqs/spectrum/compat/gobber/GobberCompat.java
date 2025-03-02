@@ -37,7 +37,7 @@ public class GobberCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
 	@Override
 	public void register() {
-		SpectrumItems.REGISTRAR.flush();
+		SpectrumItems.ITEM_REGISTRAR.flush();
 		SpectrumBlocks.COMMON_REGISTRAR.flush();
 		
 		ItemSubGroupEvents.modifyEntriesEvent(ItemGroupIDs.SUBTAB_PURE_RESOURCES).register(entries -> {

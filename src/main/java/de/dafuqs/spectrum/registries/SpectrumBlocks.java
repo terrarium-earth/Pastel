@@ -62,6 +62,7 @@ import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.*;
+import net.fabricmc.fabric.api.registry.*;
 import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.*;
 import net.minecraft.block.enums.*;
@@ -190,7 +191,7 @@ public class SpectrumBlocks {
 	public static final ColoredFallingBlock ONYX_POWDER_BLOCK = register(simple(blockWithItem("onyx_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.BLACK.getFireworkColor()), AbstractBlock.Settings.copy(SAND).mapColor(MapColor.BLACK)), InkColors.BLACK)));
 	public static final ColoredFallingBlock MOONSTONE_POWDER_BLOCK = register(simple(blockWithItem("moonstone_powder_block", new ColoredFallingBlock(new ColorCode(DyeColor.WHITE.getFireworkColor()), AbstractBlock.Settings.copy(SAND).mapColor(MapColor.WHITE)), InkColors.WHITE)));
 	
-	public static final Block VEGETAL_BLOCK = register(translucent(singleton(blockWithItem("vegetal_block", new Block(settings(MapColor.PALE_GREEN, BlockSoundGroup.FUNGUS, 2.0F).nonOpaque()), InkColors.GREEN), TexturedModel.makeFactory(TextureMap::texture, SpectrumModels.TRANSLUCENT_OUTER1))));
+	public static final Block VEGETAL_BLOCK = register(translucent(singleton(burnable(blockWithItem("vegetal_block", new Block(settings(MapColor.PALE_GREEN, BlockSoundGroup.FUNGUS, 2.0F).nonOpaque()), InkColors.GREEN), 8000), TexturedModel.makeFactory(TextureMap::texture, SpectrumModels.TRANSLUCENT_OUTER1))));
 	public static final Block NEOLITH_BLOCK = register(blockWithItem("neolith_block", new SpectrumFacingBlock(settings(MapColor.PURPLE, BlockSoundGroup.COPPER, 6.0F).requiresTool().instrument(NoteBlockInstrument.BASEDRUM).luminance(state -> 13).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), InkColors.PINK).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block, createModelVariant(TexturedModel.CUBE_BOTTOM_TOP.upload(block, ctx.modelCollector))).coordinate(createUpDefaultFacingVariantMap())));
 	public static final Block BEDROCK_STORAGE_BLOCK = register(simple(blockWithItem("bedrock_storage_block", new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune")), IS.of(Rarity.UNCOMMON), InkColors.BLACK)));
 	
@@ -619,11 +620,11 @@ public class SpectrumBlocks {
 	}
 	
 	public static ColoredFenceBlock registerColoredFence(String name, ColoredPlankBlock baseBlock) {
-		return register(blockWithItem(name, new ColoredFenceBlock(copyWithMapColor(OAK_FENCE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor()));
+		return register(burnable(blockWithItem(name, new ColoredFenceBlock(copyWithMapColor(OAK_FENCE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor()), 300));
 	}
 	
 	public static ColoredFenceGateBlock registerColoredFenceGate(String name, ColoredPlankBlock baseBlock) {
-		return register(blockWithItem(name, new ColoredFenceGateBlock(copyWithMapColor(OAK_FENCE_GATE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor()));
+		return register(burnable(blockWithItem(name, new ColoredFenceGateBlock(copyWithMapColor(OAK_FENCE_GATE, baseBlock.getDefaultMapColor()), baseBlock.getColor()), baseBlock.getColor()), 300));
 	}
 	
 	public static ColoredWoodenButtonBlock registerColoredButton(String name, ColoredPlankBlock baseBlock) {
@@ -950,10 +951,10 @@ public class SpectrumBlocks {
 	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = register(pottedPlant(block("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant())), false));
 	
 	public static final Block WEEPING_GALA_LEAVES = register(singleton(blockWithItem("weeping_gala_leaves", new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.BRIGHT_TEAL)), InkColors.LIME), TexturedModel.LEAVES));
-	public static final Block WEEPING_GALA_LOG = register(log(blockWithItem("weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME)));
-	public static final Block STRIPPED_WEEPING_GALA_LOG = register(log(blockWithItem("stripped_weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME)));
-	public static final Block WEEPING_GALA_WOOD = register(wood(blockWithItem("weeping_gala_wood", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME), WEEPING_GALA_LOG));
-	public static final Block STRIPPED_WEEPING_GALA_WOOD = register(wood(blockWithItem("stripped_weeping_gala_wood", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME), STRIPPED_WEEPING_GALA_LOG));
+	public static final Block WEEPING_GALA_LOG = register(burnable(log(blockWithItem("weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME)), 600));
+	public static final Block STRIPPED_WEEPING_GALA_LOG = register(burnable(log(blockWithItem("stripped_weeping_gala_log", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME)), 600));
+	public static final Block WEEPING_GALA_WOOD = register(burnable(wood(blockWithItem("weeping_gala_wood", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME), WEEPING_GALA_LOG), 600));
+	public static final Block STRIPPED_WEEPING_GALA_WOOD = register(burnable(wood(blockWithItem("stripped_weeping_gala_wood", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME), STRIPPED_WEEPING_GALA_LOG), 600));
 	
 	public static final Block WEEPING_GALA_FRONDS = register(cross(block("weeping_gala_fronds", new WeepingGalaFrondsBlock(AbstractBlock.Settings.copy(WEEPING_GALA_LEAVES).noCollision()))));
 	public static final Block WEEPING_GALA_FRONDS_PLANT = register(cutout(block("weeping_gala_fronds_plant", new WeepingGalaFrondsTipBlock(AbstractBlock.Settings.copy(WEEPING_GALA_LEAVES).noCollision().luminance(s -> s.get(WeepingGalaFrondsTipBlock.FORM).getLuminance())))).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(WeepingGalaFrondsTipBlock.FORM).register(WeepingGalaFrondsTipBlock.Form.TIP, createModelVariant(SpectrumTexturedModels.cross(b -> WEEPING_GALA_FRONDS, "_tip").upload(block, ctx.modelCollector))).register(WeepingGalaFrondsTipBlock.Form.SPRIG, createModelVariant(SpectrumTexturedModels.cross(b -> WEEPING_GALA_FRONDS, "_sprig").upload(block, "_sprig", ctx.modelCollector))).register(WeepingGalaFrondsTipBlock.Form.RESIN, createModelVariant(SpectrumTexturedModels.cross(b -> WEEPING_GALA_FRONDS, "_sprig_resin").upload(block, "_resin", ctx.modelCollector))))));
@@ -961,15 +962,15 @@ public class SpectrumBlocks {
 	public static final BlockSetType GALA_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.CHERRY).build(SpectrumCommon.locate("gala"));
 	public static final WoodType GALA_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.CHERRY).build(SpectrumCommon.locate("gala"), GALA_BLOCK_SET_TYPE);
 	
-	public static final Block WEEPING_GALA_PLANKS = register(blockWithItem("weeping_gala_planks", new Block(galaWood(MapColor.BROWN)), InkColors.LIME));
-	public static final Block WEEPING_GALA_STAIRS = register(blockWithItem("weeping_gala_stairs", new StairsBlock(WEEPING_GALA_PLANKS.getDefaultState(), galaWood(MapColor.BROWN)), InkColors.LIME));
-	public static final Block WEEPING_GALA_SLAB = register(blockWithItem("weeping_gala_slab", new SlabBlock(galaWood(MapColor.BROWN)), InkColors.LIME));
-	public static final Block WEEPING_GALA_FENCE = register(blockWithItem("weeping_gala_fence", new FenceBlock(galaWood(MapColor.BROWN)), InkColors.LIME));
-	public static final Block WEEPING_GALA_FENCE_GATE = register(blockWithItem("weeping_gala_fence_gate", new FenceGateBlock(GALA_WOOD_TYPE, galaWood(MapColor.BROWN)), InkColors.LIME));
-	public static final Block WEEPING_GALA_DOOR = register(blockWithItem("weeping_gala_door", new DoorBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), InkColors.LIME));
-	public static final Block WEEPING_GALA_TRAPDOOR = register(blockWithItem("weeping_gala_trapdoor", new TrapdoorBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), InkColors.LIME));
-	public static final Block WEEPING_GALA_BUTTON = register(blockWithItem("weeping_gala_button", createWoodenButtonBlock(GALA_BLOCK_SET_TYPE), InkColors.LIME));
-	public static final Block WEEPING_GALA_PRESSURE_PLATE = register(blockWithItem("weeping_gala_pressure_plate", new PressurePlateBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), InkColors.LIME));
+	public static final Block WEEPING_GALA_PLANKS = register(burnable(blockWithItem("weeping_gala_planks", new Block(galaWood(MapColor.BROWN)), InkColors.LIME), 600));
+	public static final Block WEEPING_GALA_STAIRS = register(burnable(blockWithItem("weeping_gala_stairs", new StairsBlock(WEEPING_GALA_PLANKS.getDefaultState(), galaWood(MapColor.BROWN)), InkColors.LIME), 600));
+	public static final Block WEEPING_GALA_SLAB = register(burnable(blockWithItem("weeping_gala_slab", new SlabBlock(galaWood(MapColor.BROWN)), InkColors.LIME), 300));
+	public static final Block WEEPING_GALA_FENCE = register(burnable(blockWithItem("weeping_gala_fence", new FenceBlock(galaWood(MapColor.BROWN)), InkColors.LIME), 600));
+	public static final Block WEEPING_GALA_FENCE_GATE = register(burnable(blockWithItem("weeping_gala_fence_gate", new FenceGateBlock(GALA_WOOD_TYPE, galaWood(MapColor.BROWN)), InkColors.LIME), 600));
+	public static final Block WEEPING_GALA_DOOR = register(burnable(blockWithItem("weeping_gala_door", new DoorBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), InkColors.LIME), 400));
+	public static final Block WEEPING_GALA_TRAPDOOR = register(burnable(blockWithItem("weeping_gala_trapdoor", new TrapdoorBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), InkColors.LIME), 600));
+	public static final Block WEEPING_GALA_BUTTON = register(burnable(blockWithItem("weeping_gala_button", createWoodenButtonBlock(GALA_BLOCK_SET_TYPE), InkColors.LIME), 200));
+	public static final Block WEEPING_GALA_PRESSURE_PLATE = register(burnable(blockWithItem("weeping_gala_pressure_plate", new PressurePlateBlock(GALA_BLOCK_SET_TYPE, galaWood(MapColor.BROWN)), InkColors.LIME), 600));
 	public static final BlockFamily WEEPING_GALA_FAMILY = registerBlockFamily(new BlockFamily.Builder(WEEPING_GALA_PLANKS).stairs(WEEPING_GALA_STAIRS).slab(WEEPING_GALA_SLAB).fence(WEEPING_GALA_FENCE).fenceGate(WEEPING_GALA_FENCE_GATE).door(WEEPING_GALA_DOOR).trapdoor(WEEPING_GALA_TRAPDOOR).button(WEEPING_GALA_BUTTON).pressurePlate(WEEPING_GALA_PRESSURE_PLATE).build());
 	
 	public static final Block WEEPING_GALA_PILLAR = register(axisRotated(blockWithItem("weeping_gala_pillar", new PillarBlock(galaWood(MapColor.BROWN)), InkColors.LIME), TexturedModel.CUBE_COLUMN));
@@ -1230,7 +1231,7 @@ public class SpectrumBlocks {
 	public static final Block MEMORY = register(translucent(singleton(blockWithItem("memory", new MemoryBlock(settings(MapColor.CLEAR, BlockSoundGroup.AMETHYST_BLOCK, 0.0F).blockVision(SpectrumBlocks::never).nonOpaque().ticksRandomly()), block -> new MemoryItem(block, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY), ModelIds::getBlockModelId)).withPredefinedItemModel());
 	public static final Block CRACKED_END_PORTAL_FRAME = register(blockWithItem("cracked_end_portal_frame", new CrackedEndPortalFrameBlock(settings(MapColor.PALE_PURPLE, BlockSoundGroup.GLASS, -1.0F, 3600000.0F).instrument(NoteBlockInstrument.BASEDRUM).luminance((state) -> 1)), IS.of().fireproof(), InkColors.PURPLE).withBlockItemModel((ctx, block) -> registerParentedItemModel(ctx, block, block, "_none")).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(CrackedEndPortalFrameBlock.FACING_VERTICAL).register(false, BlockStateVariant.create()).register(true, BlockStateVariant.create().put(VariantSettings.Y, VariantSettings.Rotation.R90))).coordinate(BlockStateVariantMap.create(CrackedEndPortalFrameBlock.EYE_TYPE).register(type -> createModelVariant(ModelIds.getBlockSubModelId(block, "_" + type.asString()))))));
 	public static final Block LAVA_SPONGE = register(simple(blockWithItem("lava_sponge", new LavaSpongeBlock(AbstractBlock.Settings.copy(SPONGE).mapColor(MapColor.ORANGE)), IS.of().fireproof(), InkColors.ORANGE)));
-	public static final Block WET_LAVA_SPONGE = register(simple(blockWithItem("wet_lava_sponge", new WetLavaSpongeBlock(AbstractBlock.Settings.copy(WET_SPONGE).mapColor(MapColor.ORANGE).luminance(s -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), block -> new WetLavaSpongeItem(block, IS.of(1).fireproof().recipeRemainder(LAVA_SPONGE.asItem())), InkColors.ORANGE)));
+	public static final Block WET_LAVA_SPONGE = register(simple(burnable(blockWithItem("wet_lava_sponge", new WetLavaSpongeBlock(AbstractBlock.Settings.copy(WET_SPONGE).mapColor(MapColor.ORANGE).luminance(s -> 9).emissiveLighting(SpectrumBlocks::always).postProcess(SpectrumBlocks::always)), block -> new WetLavaSpongeItem(block, IS.of(1).fireproof().recipeRemainder(LAVA_SPONGE.asItem())), InkColors.ORANGE), 12800)));
 	
 	public static final Block LIGHT_LEVEL_DETECTOR = register(detector(blockWithItem("light_level_detector", new BlockLightDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR)), InkColors.RED)));
 	public static final Block WEATHER_DETECTOR = register(detector(blockWithItem("weather_detector", new WeatherDetectorBlock(AbstractBlock.Settings.copy(DAYLIGHT_DETECTOR)), InkColors.RED)));
@@ -1687,7 +1688,7 @@ public class SpectrumBlocks {
 	public static final Block LARGE_PRISMARINE_BUD = register(cluster(blockWithItem("large_prismarine_bud", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_PRISMARINE_BUD), SpectrumClusterBlock.GrowthStage.LARGE), InkColors.CYAN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
 	public static final Block PRISMARINE_CLUSTER = register(cluster(blockWithItem("prismarine_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_PRISMARINE_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), InkColors.CYAN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
 	
-	public static final Block PURE_COAL_BLOCK = register(simple(blockWithItem("pure_coal_block", new Block(AbstractBlock.Settings.copy(COAL_BLOCK)), InkColors.BROWN)));
+	public static final Block PURE_COAL_BLOCK = register(simple(burnable(blockWithItem("pure_coal_block", new Block(AbstractBlock.Settings.copy(COAL_BLOCK)), InkColors.BROWN), 32000)));
 	public static final Block PURE_IRON_BLOCK = register(simple(blockWithItem("pure_iron_block", new Block(AbstractBlock.Settings.copy(IRON_BLOCK)), InkColors.BROWN)));
 	public static final Block PURE_GOLD_BLOCK = register(simple(blockWithItem("pure_gold_block", new Block(AbstractBlock.Settings.copy(GOLD_BLOCK)), InkColors.BROWN)));
 	public static final Block PURE_DIAMOND_BLOCK = register(simple(blockWithItem("pure_diamond_block", new Block(AbstractBlock.Settings.copy(DIAMOND_BLOCK)), InkColors.CYAN)));
@@ -2036,7 +2037,11 @@ public class SpectrumBlocks {
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> detector(BlockRegistrar<T> registrar) {
-		return registrar.withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(Properties.INVERTED, SpectrumModels.DAYLIGHT_DETECTOR.upload(block, "_inverted", SpectrumTextureMaps.sideTop(DAYLIGHT_DETECTOR, "_side", block, "_inverted_top"), ctx.modelCollector), SpectrumModels.DAYLIGHT_DETECTOR.upload(block, SpectrumTextureMaps.sideTop(DAYLIGHT_DETECTOR, "_side", block, "_top"), ctx.modelCollector))));
+		return burnable(registrar, 300).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(createBooleanModelMap(Properties.INVERTED, SpectrumModels.DAYLIGHT_DETECTOR.upload(block, "_inverted", SpectrumTextureMaps.sideTop(DAYLIGHT_DETECTOR, "_side", block, "_inverted_top"), ctx.modelCollector), SpectrumModels.DAYLIGHT_DETECTOR.upload(block, SpectrumTextureMaps.sideTop(DAYLIGHT_DETECTOR, "_side", block, "_top"), ctx.modelCollector))));
+	}
+	
+	public static <T extends Block> BlockRegistrar<T> burnable(BlockRegistrar<T> registrar, int burnTicks) {
+		return registrar.withBurnTime(burnTicks);
 	}
 	
 	public static <T extends Block> BlockRegistrar<T> orientable(BlockRegistrar<T> registrar) {
@@ -2196,6 +2201,13 @@ public class SpectrumBlocks {
 					Objects.requireNonNull(block);
 					ctx.excludeFromSimpleItemModelGeneration(block);
 				}
+			});
+			return this;
+		}
+		
+		public BlockRegistrar<T> withBurnTime(int burnTicks) {
+			FUEL_REGISTRAR.defer(() -> {
+				if (hasItem) FuelRegistry.INSTANCE.add(block, burnTicks);
 			});
 			return this;
 		}

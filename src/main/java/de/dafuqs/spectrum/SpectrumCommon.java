@@ -82,6 +82,9 @@ public class SpectrumCommon implements ModInitializer {
 	@Nullable
 	public static MinecraftServer minecraftServer;
 	
+	// Miscellaneous registrars
+	public static final DeferredRegistrar FUEL_REGISTRAR = new DeferredRegistrar();
+	
 	static {
 		//Set up config
 		logInfo("Loading config file...");
@@ -177,8 +180,9 @@ public class SpectrumCommon implements ModInitializer {
 		SpectrumItemSubPredicateTypes.register();
 		SpectrumEntitySubPredicateTypes.register();
 		
-		logInfo("Registering Items to Fuel Registry...");
+		logInfo("Registering Blocks and Items to Fuel Registry...");
 		SpectrumItems.registerFuelRegistry();
+		FUEL_REGISTRAR.flush();
 		
 		logInfo("Registering Entities...");
 		SpectrumTrackedDataHandlerRegistry.register();
