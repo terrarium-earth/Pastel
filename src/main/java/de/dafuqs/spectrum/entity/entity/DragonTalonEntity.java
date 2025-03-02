@@ -65,40 +65,35 @@ public class DragonTalonEntity extends BidentBaseEntity {
 	
 	@Override
 	protected void onEntityHit(EntityHitResult entityHitResult) {
+		// TODO: this is in big parts identical to DraconicTwinswordEntity.onEntityHit(). Dedup needed
 		ItemStack stack = getTrackedStack();
 		Entity attacked = entityHitResult.getEntity();
+		if (attacked.getType() == EntityType.ENDERMAN) {
+			return;
+		}
 		Entity owner = this.getOwner();
 		
 		float damage = 2.0F;
-		
 		DamageSource damageSource = SpectrumDamageTypes.impaling(getWorld(), this, owner);
-		
 		if (getWorld() instanceof ServerWorld serverWorld) {
 			damage *= EnchantmentHelper.getDamage(serverWorld, stack, attacked, damageSource, getDamage(stack));
 		}
 		
-		((TridentEntityAccessor) this).spectrum$setDealtDamage(true);
-		SoundEvent soundEvent = SpectrumSoundEvents.IMPALING_HIT;
 		if (attacked.damage(damageSource, damage)) {
-			if (attacked.getType() == EntityType.ENDERMAN) {
-				return;
-			}
-			
 			if (getWorld() instanceof ServerWorld serverWorld) {
 				EnchantmentHelper.onTargetDamaged(serverWorld, attacked, damageSource, stack);
 			}
-			
 			if (attacked instanceof LivingEntity livingAttacked) {
-				this.knockback(livingAttacked, damageSource);
 				this.onHit(livingAttacked);
 			}
 		}
 		
+		((TridentEntityAccessor) this).spectrum$setDealtDamage(true);
 		recall();
 		this.setVelocity(this.getVelocity().multiply(-0.01, -0.1, -0.01));
 		float g = 1.0F;
 		
-		this.playSound(soundEvent, g, 1.0F);
+		this.playSound(SpectrumSoundEvents.IMPALING_HIT, g, 1.0F);
 	}
 	
 	private float getDamage(ItemStack stack) {

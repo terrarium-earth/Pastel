@@ -18,8 +18,8 @@ public class PastelNetworkCreationCriterion extends AbstractCriterion<PastelNetw
 	public static final Identifier ID = SpectrumCommon.locate("pastel_network_creation");
 	
 	public void trigger(ServerPlayerEntity player, ServerPastelNetwork network) {
-		this.trigger(player, (conditions) -> conditions.matches(network.getNodes(PastelNodeType.CONNECTION).size(), network.getNodes(PastelNodeType.PROVIDER).size(),
-				network.getNodes(PastelNodeType.STORAGE).size(), network.getNodes(PastelNodeType.SENDER).size(), network.getNodes(PastelNodeType.GATHER).size(), network.getNodes(PastelNodeType.BUFFER).size()));
+		this.trigger(player, (conditions) -> conditions.matches(network.getLoadedNodes(PastelNodeType.CONNECTION).size(), network.getLoadedNodes(PastelNodeType.PROVIDER).size(),
+				network.getLoadedNodes(PastelNodeType.STORAGE).size(), network.getLoadedNodes(PastelNodeType.SENDER).size(), network.getLoadedNodes(PastelNodeType.GATHER).size(), network.getLoadedNodes(PastelNodeType.BUFFER).size()));
 	}
 	
 	@Override

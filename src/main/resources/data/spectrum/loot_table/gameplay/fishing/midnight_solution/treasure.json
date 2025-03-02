@@ -15,6 +15,52 @@
         },
         {
           "type": "minecraft:item",
+          "name": "minecraft:ender_pearl"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:phantom_membrane"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spectrum:midnight_chip"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spectrum:small_echo_bud",
+          "conditions": [
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "biome": "minecraft:deep_dark"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spectrum:onyx_powder",
+          "conditions": [
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "player",
+                  "advancements": {
+                    "spectrum:create_onyx_shard": true
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:spider_eye"
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:bow",
           "functions": [
             {

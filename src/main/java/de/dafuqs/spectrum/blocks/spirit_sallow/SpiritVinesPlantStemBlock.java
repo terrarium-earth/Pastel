@@ -1,7 +1,8 @@
 package de.dafuqs.spectrum.blocks.spirit_sallow;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.api.item.*;
+import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.api.*;
 import net.minecraft.block.*;
@@ -43,21 +44,21 @@ public class SpiritVinesPlantStemBlock extends AbstractPlantStemBlock implements
 	
 	@Override
 	protected Block getPlant() {
-		switch (gemstoneColor.getDyeColor()) {
-			case MAGENTA -> {
-				return SpectrumBlocks.MAGENTA_SPIRIT_SALLOW_VINES_PLANT;
-			}
-			case BLACK -> {
-				return SpectrumBlocks.BLACK_SPIRIT_SALLOW_VINES_PLANT;
-			}
-			case CYAN -> {
+		switch (gemstoneColor) {
+			case BuiltinGemstoneColor.CYAN -> {
 				return SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES_PLANT;
 			}
-			case WHITE -> {
-				return SpectrumBlocks.WHITE_SPIRIT_SALLOW_VINES_PLANT;
+			case BuiltinGemstoneColor.MAGENTA -> {
+				return SpectrumBlocks.MAGENTA_SPIRIT_SALLOW_VINES_PLANT;
 			}
-			case YELLOW -> {
+			case BuiltinGemstoneColor.YELLOW -> {
 				return SpectrumBlocks.YELLOW_SPIRIT_SALLOW_VINES_PLANT;
+			}
+			case BuiltinGemstoneColor.BLACK -> {
+				return SpectrumBlocks.BLACK_SPIRIT_SALLOW_VINES_PLANT;
+			}
+			case BuiltinGemstoneColor.WHITE -> {
+				return SpectrumBlocks.WHITE_SPIRIT_SALLOW_VINES_PLANT;
 			}
 			default -> {
 				return null;

@@ -6,7 +6,6 @@ import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.*;
 import net.minecraft.entity.data.*;
@@ -40,7 +39,7 @@ public class ShootingStarEntity extends Entity {
 	private static final TrackedData<Boolean> HARDENED = DataTracker.registerData(ShootingStarEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 	
 	protected final float hoverHeight;
-	protected int age;
+	protected long age;
 	protected int availableHits;
 	protected int lastCollisionCount;
 	
@@ -184,11 +183,12 @@ public class ShootingStarEntity extends Entity {
 			this.age++;
 			if (this.age > 6000 && !playerPlaced && !hardened) {
 				this.discard();
+				return;
 			}
 			
 			this.checkBlockCollision();
 			
-			if (spawnLoot) {
+			if (spawnLoot && this.age > 1) {
 				this.lastCollisionCount++;
 				if (this.lastCollisionCount > 8) {
 					// if the block did collide a lot (maybe bugged or jammed?): break it and drop as item
@@ -415,7 +415,7 @@ public class ShootingStarEntity extends Entity {
 	
 	@Override
 	public void writeCustomDataToNbt(@NotNull NbtCompound tag) {
-		tag.putShort("Age", (short) this.age);
+		tag.putLong("Age", (short) this.age);
 		tag.putString("Type", this.getShootingStarType().getName());
 		tag.putInt("LastCollisionCount", this.lastCollisionCount);
 		tag.putBoolean("PlayerPlaced", this.dataTracker.get(PLAYER_PLACED));
@@ -425,7 +425,7 @@ public class ShootingStarEntity extends Entity {
 	
 	@Override
 	public void readCustomDataFromNbt(@NotNull NbtCompound tag) {
-		this.age = tag.getShort("Age");
+		this.age = tag.getLong("Age");
 		if (tag.contains("LastCollisionCount", NbtElement.NUMBER_TYPE)) {
 			this.lastCollisionCount = tag.getInt("LastCollisionCount");
 		}
@@ -453,11 +453,6 @@ public class ShootingStarEntity extends Entity {
 	@Override
 	public ItemStack getPickBlockStack() {
 		return ShootingStarItem.getWithRemainingHits((ShootingStarItem) this.asItem(), this.availableHits, this.dataTracker.get(HARDENED));
-	}
-	
-	@Environment(EnvType.CLIENT)
-	public int getAge() {
-		return this.age;
 	}
 	
 	@Override

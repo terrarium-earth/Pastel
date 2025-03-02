@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
 import de.dafuqs.revelationary.api.revelations.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
@@ -10,9 +11,9 @@ import java.util.*;
 
 public class PottedColoredSaplingBlock extends FlowerPotBlock implements RevelationAware, ColoredTree {
 	
-	protected final DyeColor color;
+	protected final InkColor color;
 	
-	public PottedColoredSaplingBlock(Block content, Settings settings, DyeColor color) {
+	public PottedColoredSaplingBlock(Block content, Settings settings, InkColor color) {
 		super(content, settings);
 		this.color = color;
 		RevelationAware.register(this);
@@ -42,7 +43,7 @@ public class PottedColoredSaplingBlock extends FlowerPotBlock implements Revelat
 	}
 	
 	@Override
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	

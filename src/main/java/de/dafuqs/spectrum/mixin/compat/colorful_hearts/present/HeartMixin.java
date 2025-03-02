@@ -11,7 +11,7 @@ import terrails.colorfulhearts.api.heart.drawing.*;
 @Mixin(Heart.class)
 public abstract class HeartMixin {
 	
-	@ModifyVariable(method = "draw(Lnet/minecraft/client/gui/GuiGraphics;IIZZZ)V", at = @At("STORE"), ordinal = 1, argsOnly = true, remap = false)
+	@ModifyVariable(method = "draw", at = @At("STORE"), ordinal = 0, argsOnly = true, remap = false)
 	private boolean heartRendererRenderPlayerHeartsGetHealthInjector(boolean hardcore) {
 		MinecraftClient client = MinecraftClient.getInstance();
 		if (!hardcore && client.player != null && client.player.hasStatusEffect(SpectrumStatusEffects.DIVINITY)) {

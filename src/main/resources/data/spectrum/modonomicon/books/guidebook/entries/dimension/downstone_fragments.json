@@ -25,6 +25,7 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.downstone_fragments",
       "item": {
         "id": "spectrum:downstone_fragments"
       },

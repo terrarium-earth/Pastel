@@ -25,14 +25,14 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
 			Codec.BOOL.optionalFieldOf("include_default_state_properties", false).forGetter(c -> c.includeDefaultStateProperties)
 	).apply(i, DropSelfResonanceProcessor::new));
 	
-	public List<String> nbtToCopy;
 	public List<String> statePropertiesToCopy;
+	public List<String> nbtToCopy;
 	public boolean includeDefaultStateProperties;
 	
-	public DropSelfResonanceProcessor(BrokenBlockPredicate blockTarget, List<String> nbtToCopy, List<String> statePropertiesToCopy, boolean includeDefaultStateProperties) {
+	public DropSelfResonanceProcessor(BrokenBlockPredicate blockTarget, List<String> statePropertiesToCopy, List<String> nbtToCopy, boolean includeDefaultStateProperties) {
 		super(blockTarget);
-		this.nbtToCopy = nbtToCopy;
 		this.statePropertiesToCopy = statePropertiesToCopy;
+		this.nbtToCopy = nbtToCopy;
 		this.includeDefaultStateProperties = includeDefaultStateProperties;
 	}
 	
@@ -67,17 +67,15 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
 	public void copyNbt(BlockEntity blockEntity, ItemStack convertedStack) {
 		NbtCompound newNbt = new NbtCompound();
 		
-		ComponentMap defaultBlockComponents = blockEntity.createComponentMap();
-		
+		NbtCompound BlockEntityNbt = blockEntity.createComponentlessNbtWithIdentifyingData(blockEntity.getWorld().getRegistryManager());
 		for (String s : nbtToCopy) {
-			if (defaultBlockComponents.contains(DataComponentTypes.BLOCK_ENTITY_DATA)) {
-				newNbt.put(s, defaultBlockComponents.get(DataComponentTypes.BLOCK_ENTITY_DATA).copyNbt());
+			if (BlockEntityNbt.contains(s)) {
+				newNbt.put(s, BlockEntityNbt.get(s));
 			}
 		}
 		
 		if (!newNbt.isEmpty()) {
-			NbtComponent nbt = convertedStack.get(DataComponentTypes.CUSTOM_DATA);
-			convertedStack.apply(DataComponentTypes.CUSTOM_DATA, nbt, comp -> comp.apply(consumer -> consumer.put("BlockEntityTag", newNbt)));
+			BlockItem.setBlockEntityData(convertedStack, blockEntity.getType(), newNbt);
 		}
 	}
 	

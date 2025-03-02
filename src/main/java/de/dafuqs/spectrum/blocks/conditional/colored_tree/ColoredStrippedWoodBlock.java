@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.revelationary.api.revelations.*;
+import de.dafuqs.spectrum.api.energy.color.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
@@ -14,13 +15,13 @@ public class ColoredStrippedWoodBlock extends PillarBlock implements RevelationA
 
 	public static final MapCodec<ColoredStrippedWoodBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			createSettingsCodec(),
-			DyeColor.CODEC.fieldOf("color").forGetter(ColoredStrippedWoodBlock::getColor)
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredStrippedWoodBlock::getColor)
 	).apply(instance, ColoredStrippedWoodBlock::new));
-
-	private static final Map<DyeColor, ColoredStrippedWoodBlock> WOOD = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
 	
-	public ColoredStrippedWoodBlock(Settings settings, DyeColor color) {
+	private static final Map<InkColor, ColoredStrippedWoodBlock> WOOD = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredStrippedWoodBlock(Settings settings, InkColor color) {
 		super(settings);
 		this.color = color;
 		WOOD.put(color, this);
@@ -48,11 +49,11 @@ public class ColoredStrippedWoodBlock extends PillarBlock implements RevelationA
 	}
 	
 	@Override
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static ColoredStrippedWoodBlock byColor(DyeColor color) {
+	public static ColoredStrippedWoodBlock byColor(InkColor color) {
 		return WOOD.get(color);
 	}
 	

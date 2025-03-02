@@ -36,6 +36,9 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 		if (entityType.get().isIn(SpectrumEntityTypeTags.SPAWNER_MANIPULATION_BLACKLISTED)) {
 			return false;
 		}
+		if (spawnerBlockEntityNbt == null) {
+			return true;
+		}
 		
 		if (spawnerBlockEntityNbt.contains("SpawnData")) {
 			NbtCompound spawnData = spawnerBlockEntityNbt.copyNbt().getCompound("SpawnData");

@@ -27,6 +27,7 @@ import java.util.*;
 
 public class SpectrumLootPoolModifiers {
 	
+	// TODO: Make data driven / introduce a constant for the 0.02 drops
 	private static final Map<RegistryKey<LootTable>, TreasureHunterDropDefinition> treasureHunterLootPools = new HashMap<>() {{
 		// Additional vanilla head drops
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/creeper")), new TreasureHunterDropDefinition(Items.CREEPER_HEAD, 0.02F));
@@ -123,9 +124,11 @@ public class SpectrumLootPoolModifiers {
 				builder.pool(getLootPool(enchant, dropDefinition));
 				// Some treasure hunter pools use custom loot conditions
 				// because vanillas are too generic (fox/snow fox both use "fox" loot table)
-			} else if (key.equals(LootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY) || key.equals(LootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY) ||
-					key.equals(LootTables.TRAIL_RUINS_RARE_ARCHAEOLOGY) || key.equals(LootTables.DESERT_PYRAMID_ARCHAEOLOGY) || key.equals(LootTables.DESERT_WELL_ARCHAEOLOGY)) {
+			} else if (key.equals(LootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY) || key.equals(LootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY)
+					|| key.equals(LootTables.DESERT_PYRAMID_ARCHAEOLOGY) || key.equals(LootTables.DESERT_WELL_ARCHAEOLOGY)) {
 				builder.modifyPools(modifier -> modifier.with(ItemEntry.builder(SpectrumItems.NIGHTDEW_SPROUT).weight(2).quality(-1)));
+			} else if (key.equals(LootTables.TRAIL_RUINS_RARE_ARCHAEOLOGY)) {
+				builder.modifyPools(modifier -> modifier.with(ItemEntry.builder(SpectrumItems.NIGHTDEW_SPROUT).weight(3).quality(-1)));
 			} else if (key.equals(LootTables.SNIFFER_DIGGING_GAMEPLAY)) {
 				builder.modifyPools(modifier -> {
 					modifier.with(ItemEntry.builder(SpectrumBlocks.WEEPING_GALA_SPRIG).weight(1));

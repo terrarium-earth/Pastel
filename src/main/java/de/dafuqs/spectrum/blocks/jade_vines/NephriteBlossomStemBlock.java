@@ -40,11 +40,6 @@ public class NephriteBlossomStemBlock extends PlantBlock {
 	}
 	
 	@Override
-	public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
-		return SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.asItem().getDefaultStack();
-	}
-	
-	@Override
 	public ItemActionResult onUseWithItem(ItemStack handStack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		if (handStack.isIn(ConventionalItemTags.SHEAR_TOOLS) && state.get(STEM_PART) == StemComponent.BASE) {
 			BlockState newState = state.with(STEM_PART, StemComponent.STEM);

@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.blocks;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.inventories.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.tooltip.*;
 import net.minecraft.screen.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
@@ -48,6 +48,7 @@ public class BedrockAnvilBlock extends AnvilBlock {
 		super.appendTooltip(stack, context, tooltip, type);
 		tooltip.add(Text.translatable("container.spectrum.bedrock_anvil.tooltip").formatted(Formatting.GRAY));
 		tooltip.add(Text.translatable("container.spectrum.bedrock_anvil.tooltip2").formatted(Formatting.GRAY));
+		tooltip.add(Text.translatable("container.spectrum.bedrock_anvil.tooltip3").formatted(Formatting.GRAY));
 	}
 	
 }

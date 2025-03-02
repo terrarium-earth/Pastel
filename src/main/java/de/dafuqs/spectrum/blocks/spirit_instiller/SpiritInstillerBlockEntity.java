@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.blocks.spirit_instiller;
 
+import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.color.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.decoration.*;
 import de.dafuqs.spectrum.blocks.item_bowl.*;
 import de.dafuqs.spectrum.blocks.upgrade.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.spirit_instiller.*;
 import de.dafuqs.spectrum.registries.*;
@@ -44,6 +46,8 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		add(new Vec3i(2, 0, 0));
 		add(new Vec3i(-2, 0, 0));
 	}};
+	
+	private static final Identifier JADE_VINE_CROSSBREEDING = SpectrumCommon.locate("spirit_instiller/secret/germinated_jade_vine_crossbreeding"); // TODO: Move to advancements class
 	
 	private boolean inventoryChanged;
 	private UUID ownerUUID;
@@ -94,6 +98,8 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		if (spiritInstillerBlockEntity.craftingTime % 60 == 0) {
 			if (!checkRecipeRequirements(world, blockPos, spiritInstillerBlockEntity)) {
 				spiritInstillerBlockEntity.craftingTime = 0;
+				spiritInstillerBlockEntity.markDirty();
+				PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerWorld) world, spiritInstillerBlockEntity.pos);
 				return;
 			}
 		}
@@ -202,20 +208,25 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		}
 		
 		if (lastInteractedPlayer instanceof ServerPlayerEntity serverPlayerEntity) {
-			testAndUnlockUnlockBossMemoryAdvancement(serverPlayerEntity, spiritInstillerBlockEntity.currentRecipe, canCraft);
+			testAndUnlockRecipeAdvancements(serverPlayerEntity, spiritInstillerBlockEntity.currentRecipe, canCraft);
 		}
 		
 		return canCraft & spiritInstillerBlockEntity.currentRecipe.value().canPlayerCraft(lastInteractedPlayer) && spiritInstillerBlockEntity.currentRecipe.value().canCraftWithStacks(spiritInstillerBlockEntity.getRecipeInput());
 	}
 	
-	public static void testAndUnlockUnlockBossMemoryAdvancement(ServerPlayerEntity player, RecipeEntry<SpiritInstillerRecipe> spiritInstillerRecipe, boolean canActuallyCraft) {
-		boolean isBossMemory = spiritInstillerRecipe.value().getGroup() != null && spiritInstillerRecipe.value().getGroup().equals("boss_memories");
-		if (isBossMemory) {
+	public static void testAndUnlockRecipeAdvancements(ServerPlayerEntity player, RecipeEntry<SpiritInstillerRecipe> spiritInstillerRecipe, boolean canActuallyCraft) {
+		// boss memory advancements
+		boolean isBossMenory = spiritInstillerRecipe.value().getGroup() != null && spiritInstillerRecipe.value().getGroup().equals("boss_memories");
+		if (isBossMenory) {
 			if (canActuallyCraft) {
 				Support.grantAdvancementCriterion(player, "midgame/craft_blacklisted_memory_success", "succeed_crafting_boss_memory");
 			} else {
 				Support.grantAdvancementCriterion(player, "midgame/craft_blacklisted_memory_fail", "fail_to_craft_boss_memory");
 			}
+		}
+		// jade vine crossbreeding advancement
+		if (spiritInstillerRecipe.id().equals(JADE_VINE_CROSSBREEDING)) {
+			Support.grantAdvancementCriterion(player, "lategame/create_jade_vine", "crossbred_jade_vine_bulb");
 		}
 	}
 	
@@ -287,7 +298,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		world.playSound(null, spiritInstillerBlockEntity.pos, SpectrumSoundEvents.SPIRIT_INSTILLER_CRAFTING_FINISHED, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world,
 				new Vec3d(spiritInstillerBlockEntity.pos.getX() + 0.5D, spiritInstillerBlockEntity.pos.getY() + 0.5, spiritInstillerBlockEntity.pos.getZ() + 0.5D),
-				SpectrumParticleTypes.LIGHT_BLUE_CRAFTING, 75, new Vec3d(0.5D, 0.5D, 0.5D),
+				ColoredCraftingParticleEffect.LIGHT_BLUE, 75, new Vec3d(0.5D, 0.5D, 0.5D),
 				new Vec3d(0.1D, -0.1D, 0.1D));
 	}
 	
@@ -346,11 +357,11 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	}
 	
 	private void doInstillerParticles(@NotNull World world) {
-		Optional<DyeColor> stackColor = ItemColors.ITEM_COLORS.getMapping(this.getStack(0).getItem());
+		Optional<InkColor> stackColor = ItemColors.ITEM_COLORS.getMapping(this.getStack(0).getItem());
 		
 		if (stackColor.isPresent()) {
 			Random random = world.random;
-			ParticleEffect particleEffect = SpectrumParticleTypes.getSparkleRisingParticle(stackColor.get());
+			ParticleEffect particleEffect = ColoredSparkleRisingParticleEffect.of(stackColor.get().getColorInt());
 			world.addParticle(particleEffect,
 					pos.getX() + 0.25 + random.nextDouble() * 0.5,
 					pos.getY() + 0.75,

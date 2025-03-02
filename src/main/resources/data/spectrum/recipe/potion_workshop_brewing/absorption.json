@@ -4,7 +4,7 @@
   "ingredient2": "spectrum:onyx_shard",
   "effect": "minecraft:absorption",
   "base_duration_ticks": 1800,
-  "potency_modifier": 0.5,
+  "potency_modifier": 1.0,
   "applicable_to_potions": true,
   "applicable_to_tipped_arrows": true,
   "applicable_to_potion_fillables": false,

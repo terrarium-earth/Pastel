@@ -16,12 +16,12 @@
   ],
   "key": {
     "P": "spectrum:paltaeria_gem",
-    "S": "spectrum:refined_azurite",
+    "S": "spectrum:pure_azurite",
     "R": "spectrum:resonance_shard"
   },
   "result": {
     "id": "spectrum:azurite_glass_ampoule",
     "count": 32
   },
-  "required_advancement": "spectrum:unlocks/items/glass_ampoules"
+  "required_advancement": "spectrum:unlocks/ampoules/pure_azurite_ampoule"
 }

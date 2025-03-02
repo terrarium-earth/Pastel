@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.entity.ai.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.sound.*;
 import net.minecraft.block.*;
@@ -217,7 +218,7 @@ public class MonstrosityEntity extends SpectrumBossEntity implements RangedAttac
 
 		playSound(SpectrumSoundEvents.ENTITY_MONSTROSITY_GROWL, 1.0F, 1.0F);
 		for (float i = 0; i <= 1.0; i += 0.2F) {
-			PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(null, (ServerWorld) this.getWorld(), new Vec3d(getX(), getBodyY(i), getZ()), SpectrumParticleTypes.WHITE_SPARKLE_RISING, VectorPattern.SIXTEEN, 0.05F);
+			PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(null, (ServerWorld) this.getWorld(), new Vec3d(getX(), getBodyY(i), getZ()), ColoredSparkleRisingParticleEffect.WHITE, VectorPattern.SIXTEEN, 0.05F);
 		}
 	}
 	
@@ -262,18 +263,13 @@ public class MonstrosityEntity extends SpectrumBossEntity implements RangedAttac
 	public void shootAt(LivingEntity target, float pullProgress) {
 		var world = target.getWorld();
 		if (world.random.nextBoolean()) {
-			LightShardBaseEntity.summonBarrageInternal(world, this, () -> {
-				LightSpearEntity entity = new LightSpearEntity(world, MonstrosityEntity.this, Optional.of(target), 6.0F, 800);
-				entity.setTargetPredicate(ENTITY_TARGETS);
-				return entity;
-			}, this.getEyePos(), UniformIntProvider.create(5, 7));
+			LightShardBaseEntity.summonBarrageInternal(world, this, () -> new LightSpearEntity(world, this, 6.0F, 800), target, ENTITY_TARGETS, this.getEyePos(), UniformIntProvider.create(5, 7));
 		} else {
 			LightShardBaseEntity.summonBarrageInternal(world, this, () -> {
-				LightMineEntity entity = new LightMineEntity(world, MonstrosityEntity.this, Optional.empty(), 4, 8.0F, 800);
+				LightMineEntity entity = new LightMineEntity(world, MonstrosityEntity.this, 4, 8.0F, 800);
 				entity.setEffects(List.of(getRandomMineStatusEffect(random)));
-				entity.setTargetPredicate(ENTITY_TARGETS);
 				return entity;
-			}, this.getEyePos(), UniformIntProvider.create(7, 11));
+			}, target, ENTITY_TARGETS, this.getEyePos(), UniformIntProvider.create(7, 11));
 		}
 
 		this.playSound(SpectrumSoundEvents.ENTITY_MONSTROSITY_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
@@ -534,7 +530,7 @@ public class MonstrosityEntity extends SpectrumBossEntity implements RangedAttac
 		public void stop() {
 			LivingEntity target = MonstrosityEntity.this.getTarget();
 			if (target != null && MonstrosityEntity.this.isTarget(target, TARGET_PREDICATE)) {
-				LightShardEntity.summonBarrage(MonstrosityEntity.this.getWorld(), MonstrosityEntity.this, target);
+				LightShardEntity.summonBarrage(MonstrosityEntity.this.getWorld(), MonstrosityEntity.this, target, ENTITY_TARGETS, getEyePos(), LightShardBaseEntity.DEFAULT_COUNT_PROVIDER);
 			}
 			MonstrosityEntity.this.movementType = MovementType.START_SWOOPING;
 			super.stop();

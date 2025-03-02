@@ -11,7 +11,7 @@
     "minecraft:diamond_axe",
     "minecraft:diamond_shovel",
     {
-      "item": "spectrum:refined_malachite",
+      "item": "spectrum:pure_malachite",
       "count": 8
     },
     {

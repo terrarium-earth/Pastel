@@ -14,13 +14,13 @@ public class ImmunityStatusEffect extends StatusEffect {
 	public boolean canApplyUpdateEffect(int duration, int amplifier) {
 		return duration % 20 == 0;
 	}
-
+	
 	@Override
 	public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
 		WhispyCircletItem.removeNegativeStatusEffects(entity);
 		return super.applyUpdateEffect(entity, amplifier);
 	}
-
+	
 	@Override
 	public void onApplied(LivingEntity entity, int amplifier) {
 		super.onApplied(entity, amplifier);

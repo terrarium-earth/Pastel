@@ -2,7 +2,7 @@
   "parent": "spectrum:pluck_resplendent_feather",
   "display": {
     "icon": {
-      "id": "spectrum:refined_bloodstone"
+      "id": "spectrum:pure_bloodstone"
     },
     "title": {
       "translate": "advancements.spectrum.grow_bloodstone_in_crystallarieum.title"

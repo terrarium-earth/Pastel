@@ -332,7 +332,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "spectrum:refined_azurite",
+          "name": "spectrum:pure_azurite",
           "functions": [
             {
               "function": "minecraft:set_count",

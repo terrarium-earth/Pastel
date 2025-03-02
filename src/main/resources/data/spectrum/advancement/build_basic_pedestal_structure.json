@@ -19,6 +19,18 @@
         "multiblock_identifier": "spectrum:pedestal_simple"
       }
     },
+    "built_advanced_structure": {
+      "trigger": "spectrum:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "spectrum:pedestal_advanced"
+      }
+    },
+    "built_complex_structure": {
+      "trigger": "spectrum:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "spectrum:pedestal_complex"
+      }
+    },
     "gotten_previous": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
@@ -28,5 +40,15 @@
   },
   "rewards": {
     "experience": 100
-  }
+  },
+  "requirements": [
+    [
+      "built_structure",
+      "built_advanced_structure",
+      "built_complex_structure"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
 }

@@ -4,6 +4,7 @@ import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.registries.*;
 import dev.emi.trinkets.api.*;
 import net.fabricmc.api.*;
@@ -66,7 +67,7 @@ public class TakeOffBeltItem extends SpectrumTrinketItem {
 					if (sneakTicks % CHARGE_TIME_TICKS == 0) {
 						if (sneakTicks > CHARGE_TIME_TICKS * MAX_CHARGES) {
 							world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SpectrumSoundEvents.USE_FAIL, SoundCategory.NEUTRAL, 4.0F, 1.05F);
-							PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, entity.getPos(), SpectrumParticleTypes.BLACK_CRAFTING, 20, new Vec3d(0, 0, 0), new Vec3d(0.1, 0.05, 0.1));
+							PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerWorld) world, entity.getPos(), ColoredCraftingParticleEffect.BLACK, 20, new Vec3d(0, 0, 0), new Vec3d(0.1, 0.05, 0.1));
 							entity.removeStatusEffect(StatusEffects.JUMP_BOOST);
 						} else {
 							int sneakTimeMod = (int) sneakTicks / CHARGE_TIME_TICKS;

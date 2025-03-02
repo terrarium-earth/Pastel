@@ -11,10 +11,13 @@
       "count": 4
     },
     {
+      "item": "spectrum:raw_azurite",
+      "count": 4
+    },
+    {
       "tag": "spectrum:pigments",
       "count": 16
-    },
-    "spectrum:refined_azurite"
+    }
   ],
   "result": {
     "id": "spectrum:pigment_palette"

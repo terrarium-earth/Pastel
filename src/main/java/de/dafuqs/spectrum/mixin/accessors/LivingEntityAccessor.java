@@ -12,4 +12,5 @@ public interface LivingEntityAccessor {
 	
 	@Accessor
 	void setLastDamageSource(DamageSource damageSource);
+	
 }

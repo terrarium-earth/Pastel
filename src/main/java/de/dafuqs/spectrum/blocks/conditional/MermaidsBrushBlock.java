@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.blocks.conditional;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.revelationary.api.revelations.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.*;
 import net.minecraft.fluid.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.tag.*;
@@ -164,7 +164,7 @@ public class MermaidsBrushBlock extends PlantBlock implements Fertilizable, Reve
 		float chance = state.get(LOGGED) == FluidLogging.State.LIQUID_CRYSTAL ? 1.0F : 0.5F;
 		int nextAge = age + random.nextBetween(1, (int) Math.ceil(attempts * chance));
 		
-		if (nextAge >= 7) {
+		if (nextAge >= 8) {
 			ItemEntity pearlEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, new ItemStack(SpectrumItems.MERMAIDS_GEM, 1));
 			world.spawnEntity(pearlEntity);
 		}

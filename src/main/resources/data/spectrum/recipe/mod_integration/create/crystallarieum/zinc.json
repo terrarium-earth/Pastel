@@ -61,15 +61,13 @@
       "consume_chance_per_second": 0.02
     }
   ],
-  "additional_recipe_manager_outputs": [
+  "additional_recipe_manager_results": [
     "spectrum:pure_zinc"
   ],
   "fabric:load_conditions": [
     {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "create"
-      ]
+      "condition": "spectrum:integration_pack_active",
+      "integration_pack": "create"
     }
   ]
 }

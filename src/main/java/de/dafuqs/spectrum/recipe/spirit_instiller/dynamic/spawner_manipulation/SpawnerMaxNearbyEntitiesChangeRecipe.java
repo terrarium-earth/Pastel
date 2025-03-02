@@ -19,6 +19,9 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public boolean canCraftWithBlockEntityTag(NbtComponent spawnerBlockEntityNbt, ItemStack leftBowlStack, ItemStack rightBowlStack) {
+		if (spawnerBlockEntityNbt == null) {
+			return true;
+		}
 		if (spawnerBlockEntityNbt.contains("MaxNearbyEntities")) {
 			return spawnerBlockEntityNbt.copyNbt().getShort("MaxNearbyEntities") < MAX_MAX_ENTITIES;
 		}
@@ -34,6 +37,7 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
 	public Text getOutputLoreText() {
 		return Text.translatable("recipe.spectrum.spawner.lore.increased_max_nearby_entities");
 	}
+	
 	
 	@Override
 	public NbtCompound getSpawnerResultNbt(NbtCompound spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {

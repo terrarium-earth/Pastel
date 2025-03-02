@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.blocks.fusion_shrine;
 
 import com.klikli_dev.modonomicon.api.multiblock.*;
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.compat.modonomicon.*;
 import de.dafuqs.spectrum.inventories.storage.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.transfer.v1.fluid.*;
@@ -62,9 +62,9 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 	}
 	
 	public static boolean verifySkyAccess(ServerWorld world, BlockPos shrinePos) {
-		if (!world.getBlockState(shrinePos.up()).isAir()) {
+		if (!world.getBlockState(shrinePos.up()).isSolidBlock(world, shrinePos.up())) {
 			world.playSound(null, shrinePos, SpectrumSoundEvents.USE_FAIL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, shrinePos.up().toCenterPos(), SpectrumParticleTypes.RED_SPARKLE_RISING, 8, Vec3d.ZERO, new Vec3d(0.1, 0.1, 0.1));
+			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, shrinePos.up().toCenterPos(), ColoredSparkleRisingParticleEffect.RED, 8, Vec3d.ZERO, new Vec3d(0.1, 0.1, 0.1));
 			return false;
 		}
 		
@@ -85,8 +85,8 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 			return true;
 		}
 		
-		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, new Vec3d(shrinePos.getX() + 0.5, shrinePos.getY() + 1, shrinePos.getZ() + 0.5), SpectrumParticleTypes.RED_SPARKLE_RISING, 1, new Vec3d(0, 0.5, 0));
-		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, new Vec3d(shrinePos.getX() + 0.5, topY - 0.5, shrinePos.getZ() + 0.5), SpectrumParticleTypes.RED_SPARKLE_RISING, 8, Vec3d.ZERO, new Vec3d(0.1, 0.1, 0.1));
+		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, new Vec3d(shrinePos.getX() + 0.5, shrinePos.getY() + 1, shrinePos.getZ() + 0.5), ColoredSparkleRisingParticleEffect.RED, 1, new Vec3d(0, 0.5, 0));
+		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, new Vec3d(shrinePos.getX() + 0.5, topY - 0.5, shrinePos.getZ() + 0.5), ColoredSparkleRisingParticleEffect.RED, 8, Vec3d.ZERO, new Vec3d(0.1, 0.1, 0.1));
 		world.playSound(null, shrinePos, SpectrumSoundEvents.USE_FAIL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 		return false;
 	}

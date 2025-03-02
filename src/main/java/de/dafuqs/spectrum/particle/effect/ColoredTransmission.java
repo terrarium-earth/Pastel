@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.helpers.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.event.*;
 
@@ -15,26 +14,26 @@ public class ColoredTransmission extends SimpleTransmission {
 			Vec3d.CODEC.fieldOf("origin").forGetter(c -> c.origin),
 			PositionSource.CODEC.fieldOf("destination").forGetter(c -> c.destination),
 			Codec.INT.fieldOf("arrival_in_ticks").forGetter(c -> c.arrivalInTicks),
-			DyeColor.CODEC.fieldOf("dye_color").forGetter(c -> c.dyeColor)
+			Codec.INT.fieldOf("color").forGetter(c -> c.color)
 	).apply(instance, ColoredTransmission::new));
 	
 	public static final PacketCodec<RegistryByteBuf, ColoredTransmission> PACKET_CODEC = PacketCodec.tuple(
 			PacketCodecHelper.VEC3D, c -> c.origin,
 			PositionSource.PACKET_CODEC, c -> c.destination,
 			PacketCodecs.INTEGER, c -> c.arrivalInTicks,
-			DyeColor.PACKET_CODEC, c -> c.dyeColor,
+			PacketCodecs.INTEGER, c -> c.color,
 			ColoredTransmission::new
 	);
 	
-	protected final DyeColor dyeColor;
+	protected final int color;
 	
-	public ColoredTransmission(Vec3d origin, PositionSource destination, int arrivalInTicks, DyeColor dyeColor) {
+	public ColoredTransmission(Vec3d origin, PositionSource destination, int arrivalInTicks, int color) {
 		super(origin, destination, arrivalInTicks);
-		this.dyeColor = dyeColor;
+		this.color = color;
 	}
 	
-	public DyeColor getDyeColor() {
-		return this.dyeColor;
+	public int getDyeColor() {
+		return this.color;
 	}
 	
 }

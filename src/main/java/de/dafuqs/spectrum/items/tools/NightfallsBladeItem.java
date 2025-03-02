@@ -60,7 +60,7 @@ public class NightfallsBladeItem extends ToolItem implements InkPoweredPotionFil
 	public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if(target.isAlive() && attacker instanceof PlayerEntity player) {
 			if (AdvancementHelper.hasAdvancement(player, UNLOCK_IDENTIFIER)) {
-				List<InkPoweredStatusEffectInstance> effects = getEffects(stack);
+				List<InkPoweredStatusEffectInstance> effects = InkPoweredPotionFillable.getEffects(stack);
 				for(InkPoweredStatusEffectInstance instance : effects) {
 					if(InkPowered.tryDrainEnergy(player, instance.getInkCost().color(), instance.getInkCost().cost())) {
 						World world = attacker.getWorld();
@@ -92,29 +92,32 @@ public class NightfallsBladeItem extends ToolItem implements InkPoweredPotionFil
 	
 	@Override
 	public SlotBackgroundEffectProvider.SlotEffect backgroundType(@Nullable PlayerEntity player, ItemStack stack) {
-		if (getEffects(stack).isEmpty()) {
+		List<InkPoweredStatusEffectInstance> effects = InkPoweredPotionFillable.getEffects(stack);
+		if (effects.isEmpty()) {
 			return SlotBackgroundEffectProvider.SlotEffect.NONE;
 		}
 		
-		var effect = getEffects(stack).getFirst();
+		var effect = effects.getFirst();
 		var usable = InkPowered.hasAvailableInk(player, new InkCost(effect.getInkCost().color(), adjustFinalCostFor(effect)));
 		return usable ? SlotBackgroundEffectProvider.SlotEffect.BORDER_FADE : SlotEffect.BORDER;
 	}
 	
 	@Override
 	public int getBackgroundColor(@Nullable PlayerEntity player, ItemStack stack, float tickDelta) {
-		if (getEffects(stack).isEmpty())
+		List<InkPoweredStatusEffectInstance> effects = InkPoweredPotionFillable.getEffects(stack);
+		if (effects.isEmpty())
 			return 0x000000;
 		
-		return getEffects(stack).getFirst().getColor();
+		return effects.getFirst().getColor();
 	}
 	
 	@Override
 	public float getEffectOpacity(@Nullable PlayerEntity player, ItemStack stack, float tickDelta) {
-		if (getEffects(stack).isEmpty())
+		List<InkPoweredStatusEffectInstance> effects = InkPoweredPotionFillable.getEffects(stack);
+		if (effects.isEmpty())
 			return 0F;
 		
-		var effect = getEffects(stack).getFirst();
+		var effect = effects.getFirst();
 		if (InkPowered.hasAvailableInk(player, new InkCost(effect.getInkCost().color(), adjustFinalCostFor(effect))))
 			return 1F;
 		

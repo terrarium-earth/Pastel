@@ -167,6 +167,9 @@ public interface InkStorage extends Clearable {
 		if (compound != null) {
 			for (String key : compound.getKeys()) {
 				InkColor inkColor = SpectrumRegistries.INK_COLOR.get(SpectrumCommon.locate(key));
+				if (inkColor == null) { // TODO: needed? Fallback to a default color?
+					continue;
+				}
 				long amount = compound.getLong(key);
 				energy.put(inkColor, amount);
 			}

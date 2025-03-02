@@ -10,7 +10,7 @@ import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.items.magic_items.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.*;
@@ -122,7 +122,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 			for (Map.Entry<GemstoneColor, Integer> entry : gemstonePowderInputs.entrySet()) {
 				int amount = entry.getValue();
 				if (amount > 0) {
-					ParticleEffect particleEffect = SpectrumParticleTypes.getCraftingParticle(entry.getKey().getDyeColor());
+					ParticleEffect particleEffect = ColoredCraftingParticleEffect.of(entry.getKey().getColor());
 					
 					float particleAmount = Support.getIntFromDecimalWithChance(amount * 0.125, world.random);
 					for (int i = 0; i < particleAmount; i++) {
@@ -145,7 +145,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 				for (Map.Entry<GemstoneColor, Integer> entry : gemstonePowderInputs.entrySet()) {
 					int amount = entry.getValue();
 					if (amount > 0) {
-						ParticleEffect particleEffect = SpectrumParticleTypes.getCraftingParticle(entry.getKey().getDyeColor());
+						ParticleEffect particleEffect = ColoredCraftingParticleEffect.of(entry.getKey().getColor());
 						
 						amount = amount * 4;
 						Random random = world.random;
@@ -446,12 +446,12 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 	}
 	
 	public static int getSlotForGemstonePowder(GemstoneColor gemstoneColor) {
-		return switch (gemstoneColor.getDyeColor()) {
-			case CYAN -> 9;
-			case MAGENTA -> 10;
-			case YELLOW -> 11;
-			case BLACK -> 12;
-			case WHITE -> 13;
+		return switch (gemstoneColor) {
+			case BuiltinGemstoneColor.CYAN -> 9;
+			case BuiltinGemstoneColor.MAGENTA -> 10;
+			case BuiltinGemstoneColor.YELLOW -> 11;
+			case BuiltinGemstoneColor.BLACK -> 12;
+			case BuiltinGemstoneColor.WHITE -> 13;
 			default -> -1;
 		};
 	}

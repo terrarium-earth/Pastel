@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
+import de.dafuqs.spectrum.api.energy.color.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 
@@ -14,13 +14,13 @@ public class GlowBlock extends Block {
 
 	public static final MapCodec<GlowBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 			createSettingsCodec(),
-			DyeColor.CODEC.fieldOf("color").forGetter(GlowBlock::getColor)
+			InkColor.CODEC.fieldOf("color").forGetter(GlowBlock::getColor)
 	).apply(i, GlowBlock::new));
-
-	private static final Map<DyeColor, GlowBlock> GLOWBLOCKS = Maps.newEnumMap(DyeColor.class);
-	protected final DyeColor color;
 	
-	public GlowBlock(Settings settings, DyeColor color) {
+	private static final Map<InkColor, GlowBlock> GLOWBLOCKS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public GlowBlock(Settings settings, InkColor color) {
 		super(settings);
 		this.color = color;
 		GLOWBLOCKS.put(color, this);
@@ -31,11 +31,11 @@ public class GlowBlock extends Block {
 		return CODEC;
 	}
 	
-	public DyeColor getColor() {
+	public InkColor getColor() {
 		return this.color;
 	}
 	
-	public static GlowBlock byColor(DyeColor color) {
+	public static GlowBlock byColor(InkColor color) {
 		return GLOWBLOCKS.get(color);
 	}
 	

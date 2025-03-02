@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.blocks.cinderhearth;
 
+import com.klikli_dev.modonomicon.api.multiblock.*;
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.compat.modonomicon.*;
 import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.*;
+import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -167,7 +168,7 @@ public class CinderhearthBlock extends BlockWithEntity {
 					double h3 = 1.5 - random.nextDouble() * 3.0;
 					double i3 = axis == Direction.Axis.X ? (double) direction.getOffsetX() * g3 : h3;
 					double k3 = axis == Direction.Axis.Z ? (double) direction.getOffsetZ() * g3 : h3;
-					world.addParticle(SpectrumParticleTypes.ORANGE_SPARKLE_RISING, d + i3, pos.getY() - 1.2, f + k3, 0.0D, 0.1D, 0.0D);
+					world.addParticle(ColoredCraftingParticleEffect.ORANGE, d + i3, pos.getY() - 1.2, f + k3, 0.0D, 0.1D, 0.0D);
 				}
 			}
 		}
@@ -176,29 +177,29 @@ public class CinderhearthBlock extends BlockWithEntity {
 	public static CinderhearthBlockEntity.CinderHearthStructureType verifyStructure(World world, @NotNull BlockPos blockPos, @Nullable ServerPlayerEntity serverPlayerEntity) {
 		BlockRotation rotation = Support.rotationFromDirection(world.getBlockState(blockPos).get(FACING).getOpposite());
 		
-		if (world.isClient) {
-			if (SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH).validate(world, blockPos.down(3), rotation)) {
-				return CinderhearthBlockEntity.CinderHearthStructureType.WITH_LAVA;
-			} else {
-				ModonomiconHelper.renderMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH), SpectrumMultiblocks.CINDERHEARTH_TEXT, blockPos.down(4), rotation);
-				return CinderhearthBlockEntity.CinderHearthStructureType.NONE;
-			}
+		Multiblock multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH);
+		CinderhearthBlockEntity.CinderHearthStructureType completedStructure = CinderhearthBlockEntity.CinderHearthStructureType.NONE;
+		
+		if (multiblock.validate(world, blockPos.down(3), rotation)) {
+			completedStructure = CinderhearthBlockEntity.CinderHearthStructureType.WITH_LAVA;
 		} else {
-			if (SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH).validate(world, blockPos.down(3), rotation)) {
-				if (serverPlayerEntity != null) {
-					SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH));
-				}
-				return CinderhearthBlockEntity.CinderHearthStructureType.WITH_LAVA;
-			} else {
-				if (SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH_WITHOUT_LAVA).validate(world, blockPos.down(3), rotation)) {
-					if (serverPlayerEntity != null) {
-						SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH_WITHOUT_LAVA));
-					}
-					return CinderhearthBlockEntity.CinderHearthStructureType.WITHOUT_LAVA;
-				}
-				return CinderhearthBlockEntity.CinderHearthStructureType.NONE;
+			multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH_WITHOUT_LAVA);
+			if (multiblock.validate(world, blockPos.down(3), rotation)) {
+				completedStructure = CinderhearthBlockEntity.CinderHearthStructureType.WITHOUT_LAVA;
 			}
 		}
+		
+		boolean structureValid = completedStructure != CinderhearthBlockEntity.CinderHearthStructureType.NONE;
+		
+		if (world.isClient) {
+			if (!structureValid) {
+				ModonomiconHelper.renderMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH), SpectrumMultiblocks.CINDERHEARTH_TEXT, blockPos.down(4), rotation);
+			}
+		} else if (structureValid && serverPlayerEntity != null) {
+			SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
+		}
+		
+		return completedStructure;
 	}
 	
 	@Override

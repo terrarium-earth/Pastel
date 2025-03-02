@@ -213,7 +213,10 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 	}
 	
 	private static boolean isBrewingRecipeApplicable(PotionWorkshopBrewingRecipe recipe, ItemStack baseIngredient, PotionWorkshopBlockEntity potionWorkshopBlockEntity) {
-		return hasUniqueReagents(potionWorkshopBlockEntity) && recipe.recipeData.isApplicableTo(baseIngredient, getPotionModFromReagents(potionWorkshopBlockEntity));
+		PotionMod potionMod = getPotionModFromReagents(potionWorkshopBlockEntity);
+		return hasUniqueReagents(potionWorkshopBlockEntity)
+				&& recipe.recipeData.isApplicableTo(baseIngredient, potionMod)
+				&& !(potionMod.flags().incurable() && recipe.recipeData.statusEffect().isIn(SpectrumStatusEffectTags.CANNOT_BE_INCURABLE));
 	}
 	
 	private static void craftRecipe(PotionWorkshopBlockEntity potionWorkshopBlockEntity, RecipeEntry<PotionWorkshopCraftingRecipe> recipe) {
@@ -227,7 +230,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 		}
 		
 		// output
-		InventoryHelper.addToInventory(potionWorkshopBlockEntity.inventory, recipe.value().getResult(world.getRegistryManager()).copy(), FIRST_INVENTORY_SLOT, FIRST_INVENTORY_SLOT + INVENTORY_SLOT_COUNT);
+		addToInventoryOrSpawn(potionWorkshopBlockEntity, recipe.value().craft(potionWorkshopBlockEntity.getRecipeInput(), potionWorkshopBlockEntity.world.getRegistryManager()));
 	}
 	
 	private static void brewRecipe(PotionWorkshopBlockEntity potionWorkshopBlockEntity, RecipeEntry<PotionWorkshopBrewingRecipe> brewingRecipe) {
@@ -255,12 +258,13 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 			SpectrumAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, ItemStack.EMPTY, 0);
 		} else {
 			for (ItemStack potion : results) {
-				InventoryHelper.addToInventory(potionWorkshopBlockEntity.inventory, potion, FIRST_INVENTORY_SLOT, FIRST_INVENTORY_SLOT + INVENTORY_SLOT_COUNT);
 				if (serverPlayerEntity != null) {
 					SpectrumAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potion, brewedAmount);
 					potion.getOrDefault(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT).potion().ifPresent(
 							p -> Criteria.BREWED_POTION.trigger(serverPlayerEntity, p));
 				}
+				
+				addToInventoryOrSpawn(potionWorkshopBlockEntity, potion);
 			}
 		}
 		
@@ -347,7 +351,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 	
 	public static void decrementBaseIngredientSlot(@NotNull PotionWorkshopBlockEntity potionWorkshopBlockEntity, int amount) {
 		if (amount > 0) {
-			potionWorkshopBlockEntity.getStack(BASE_INPUT_SLOT_ID).decrement(amount);
+			decrementUsingRemainder(potionWorkshopBlockEntity, potionWorkshopBlockEntity.getStack(BASE_INPUT_SLOT_ID), amount);
 		}
 	}
 	
@@ -365,16 +369,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 					if (slotStack.getItem() instanceof ExperienceStorageItem && ExperienceStorageItem.removeStoredExperience(slotStack, requiredExperience)) {
 						requiredExperience = 0;
 					} else {
-						ItemStack currentRemainder = slotStack.getRecipeRemainder();
-						slotStack.decrement(ingredientStack.getCount());
-						if (!currentRemainder.isEmpty()) {
-							currentRemainder = currentRemainder.copy();
-							currentRemainder.setCount(ingredientStack.getCount());
-							InventoryHelper.addToInventory(potionWorkshopBlockEntity.inventory, currentRemainder, FIRST_INVENTORY_SLOT, FIRST_INVENTORY_SLOT + INVENTORY_SLOT_COUNT);
-							if (!currentRemainder.isEmpty()) {
-								ItemScatterer.spawn(potionWorkshopBlockEntity.world, potionWorkshopBlockEntity.pos.getX(), potionWorkshopBlockEntity.pos.getY(), potionWorkshopBlockEntity.pos.getZ(), currentRemainder);
-							}
-						}
+						decrementUsingRemainder(potionWorkshopBlockEntity, slotStack, 1);
 					}
 					
 					break;
@@ -387,8 +382,23 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 		for (int i : REAGENT_SLOTS) {
 			ItemStack currentStack = potionWorkshopBlockEntity.getStack(i);
 			if (!currentStack.isEmpty()) {
-				currentStack.decrement(1);
+				decrementUsingRemainder(potionWorkshopBlockEntity, currentStack, 1);
 			}
+		}
+	}
+	
+	private static void decrementUsingRemainder(@NotNull PotionWorkshopBlockEntity potionWorkshopBlockEntity, ItemStack currentStack, int amount) {
+		ItemStack currentRemainder = currentStack.getRecipeRemainder();
+		currentStack.decrement(amount);
+		if (!currentRemainder.isEmpty()) {
+			addToInventoryOrSpawn(potionWorkshopBlockEntity, currentRemainder);
+		}
+	}
+	
+	private static void addToInventoryOrSpawn(@NotNull PotionWorkshopBlockEntity potionWorkshopBlockEntity, ItemStack currentRemainder) {
+		currentRemainder = InventoryHelper.addToInventory(potionWorkshopBlockEntity.inventory, currentRemainder, FIRST_INVENTORY_SLOT, FIRST_INVENTORY_SLOT + INVENTORY_SLOT_COUNT);
+		if (!currentRemainder.isEmpty()) {
+			ItemScatterer.spawn(potionWorkshopBlockEntity.world, potionWorkshopBlockEntity.pos.getX(), potionWorkshopBlockEntity.pos.getY(), potionWorkshopBlockEntity.pos.getZ(), currentRemainder);
 		}
 	}
 	

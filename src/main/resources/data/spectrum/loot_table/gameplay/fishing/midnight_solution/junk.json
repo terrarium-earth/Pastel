@@ -15,13 +15,18 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
+          "weight": 2,
           "name": "minecraft:gunpowder"
         },
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "minecraft:spider_eye"
+          "name": "minecraft:sculk_vein"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "spectrum:black_materia"
         },
         {
           "type": "minecraft:item",

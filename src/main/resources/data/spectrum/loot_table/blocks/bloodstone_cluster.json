@@ -31,7 +31,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "spectrum:refined_bloodstone",
+              "name": "spectrum:pure_bloodstone",
               "functions": [
                 {
                   "function": "minecraft:set_count",

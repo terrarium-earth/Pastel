@@ -16,7 +16,7 @@
   "key": {
     "B": "spectrum:polished_basalt",
     "C": "spectrum:polished_calcite",
-    "A": "spectrum:refined_azurite"
+    "A": "spectrum:raw_azurite"
   },
   "result": {
     "id": "spectrum:spirit_instiller",

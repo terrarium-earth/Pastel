@@ -14,7 +14,7 @@
   "background_v_index": 0,
   "x": 12,
   "y": -3,
-  "turnin": "spectrum:midgame/create_refined_azurite",
+  "turnin": "spectrum:midgame/grow_azurite_in_crystallarieum",
   "pages": [
     {
       "type": "modonomicon:spotlight",
@@ -36,22 +36,8 @@
       "border": false
     },
     {
-      "type": "spectrum:fusion_shrine_crafting",
-      "condition": {
-        "type": "modonomicon:advancement",
-        "advancement_id": "spectrum:unlocks/resources/refined_azurite"
-      },
-      "title": "book.spectrum.guidebook.azurite.page1.title",
-      "recipe_id": "spectrum:fusion_shrine/refined_azurite",
-      "text": "book.spectrum.guidebook.azurite.page1.text"
-    },
-    {
       "type": "spectrum:crystallarieum_growing",
-      "condition": {
-        "type": "modonomicon:advancement",
-        "advancement_id": "spectrum:unlocks/resources/azurite_growing"
-      },
-      "title": "book.spectrum.guidebook.azurite.page2.title",
+      "title": "book.spectrum.guidebook.azurite.growing.title",
       "recipe_id": "spectrum:crystallarieum/azurite"
     }
   ]

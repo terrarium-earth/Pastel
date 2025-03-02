@@ -61,7 +61,9 @@
       "consume_chance_per_second": 0.0002
     }
   ],
-  "additional_recipe_manager_outputs": [
-    "spectrum:bismuth_crystal"
+  "additional_recipe_manager_results": [
+    {
+      "id": "spectrum:bismuth_crystal"
+    }
   ]
 }

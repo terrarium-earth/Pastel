@@ -5,6 +5,7 @@ import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.effect.*;
+import net.minecraft.entity.player.*;
 import net.minecraft.util.*;
 
 public class LifeDrainStatusEffect extends StatusEffect {
@@ -17,6 +18,10 @@ public class LifeDrainStatusEffect extends StatusEffect {
 	
 	@Override
 	public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
+		if (entity instanceof PlayerEntity player && (player.isCreative() || player.isSpectator())) {
+			return true;
+		}
+		
 		EntityAttributeInstance instance = entity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
 		if (instance != null) {
 			var dragon = entity.getType().isIn(SpectrumEntityTypeTags.DRACONIC);
@@ -31,7 +36,7 @@ public class LifeDrainStatusEffect extends StatusEffect {
 				}
 			}
 		}
-
+		
 		return true;
 	}
 	

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
@@ -24,7 +24,7 @@ public class ItemDetectorBlock extends DetectorBlock {
 	
 	@Override
 	protected void updateState(BlockState state, World world, BlockPos pos) {
-		List<ItemEntity> items = world.getEntitiesByType(EntityType.ITEM, getBoxWithRadius(pos, 10), Entity::isAlive);
+		List<ItemEntity> items = world.getEntitiesByType(EntityType.ITEM, getDetectionBox(pos), Entity::isAlive);
 		
 		int power;
 		if (items.size() > 0) {

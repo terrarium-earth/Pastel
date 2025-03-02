@@ -17,6 +17,7 @@
   "pages": [
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.raw_azurite",
       "item": {
         "item": "spectrum:raw_azurite"
       },
@@ -24,17 +25,19 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.pure_azurite",
       "item": {
-        "item": "spectrum:refined_azurite"
+        "item": "spectrum:pure_azurite"
       },
-      "text": "book.spectrum.guidebook.pastel_upgrades.transfer.refined_azurite.text",
+      "text": "book.spectrum.guidebook.pastel_upgrades.transfer.pure_azurite.text",
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "spectrum:midgame/create_refined_azurite"
+        "advancement_id": "spectrum:midgame/grow_azurite_in_crystallarieum"
       }
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.raw_malachite",
       "item": {
         "item": "spectrum:raw_malachite"
       },
@@ -46,10 +49,11 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.pure_malachite",
       "item": {
-        "item": "spectrum:refined_malachite"
+        "item": "spectrum:pure_malachite"
       },
-      "text": "book.spectrum.guidebook.pastel_upgrades.transfer.refined_malachite.text",
+      "text": "book.spectrum.guidebook.pastel_upgrades.transfer.pure_malachite.text",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/malachite/malachite_tools"
@@ -57,6 +61,7 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.raw_bloodstone",
       "item": {
         "item": "spectrum:raw_bloodstone"
       },
@@ -68,10 +73,11 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.pure_bloodstone",
       "item": {
-        "item": "spectrum:refined_bloodstone"
+        "item": "spectrum:pure_bloodstone"
       },
-      "text": "book.spectrum.guidebook.pastel_upgrades.transfer.refined_bloodstone.text",
+      "text": "book.spectrum.guidebook.pastel_upgrades.transfer.pure_bloodstone.text",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:unlocks/resources/bloodstone"
@@ -79,6 +85,7 @@
     },
     {
       "type": "modonomicon:spotlight",
+      "title": "item.spectrum.resonance_shard",
       "item": {
         "item": "spectrum:resonance_shard"
       },

@@ -18,7 +18,7 @@
     "A": "spectrum:amethyst_storage_block",
     "T": "spectrum:topaz_storage_block",
     "C": "spectrum:citrine_storage_block",
-    "L": "spectrum:refined_azurite",
+    "L": "spectrum:raw_azurite",
     "G": "spectrum:green_pigment"
   },
   "result": {

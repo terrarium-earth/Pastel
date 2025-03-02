@@ -9,7 +9,6 @@ import net.minecraft.recipe.book.*;
 import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
-import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
@@ -64,14 +63,14 @@ public class WrapPresentRecipe extends SpecialCraftingRecipe {
 	public ItemStack craft(@NotNull CraftingRecipeInput input, RegistryWrapper.WrapperLookup registryLookup) {
 		ItemStack presentStack = ItemStack.EMPTY;
 		PresentBlock.WrappingPaper wrappingPaper = PresentBlock.WrappingPaper.RED;
-		Map<DyeColor, Integer> colors = new HashMap<>();
+		Map<Integer, Integer> colors = new HashMap<>();
 		
 		for (int j = 0; j < input.getSize(); ++j) {
 			ItemStack stack = input.getStackInSlot(j);
 			if (stack.getItem() instanceof PresentBlockItem) {
 				presentStack = stack.copy();
 			} else if (stack.getItem() instanceof PigmentItem pigmentItem) {
-				DyeColor color = pigmentItem.getColor();
+				int color = pigmentItem.getInkColor().getColorInt();
 				if (colors.containsKey(color)) {
 					colors.put(color, colors.get(color) + 1);
 				} else {

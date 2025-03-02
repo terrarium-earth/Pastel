@@ -31,6 +31,7 @@ repositories {
 
 dependencies {
 	// jetbrains annotations
+	implementation("org.jetbrains:annotations:26.0.1")
 	implementation("org.jetbrains:annotations:24.0.1")
 
 	// graph api and its dependencies
@@ -96,6 +97,7 @@ dependencies {
 	modCompileOnly("maven.modrinth:malum:${project.malum_version}") { transitive = false }
 	modCompileOnly("maven.modrinth:travelersbackpack:${project.travelers_backpack_version}")
 	modCompileOnly("maven.modrinth:botania:${project.botania_version}")
+	modCompileOnly("maven.modrinth:vanity:${project.vanityslots_version}")
 	modImplementation("maven.modrinth:idwtialsimmoedm:${project.idwtialsimmoedm_version}")
 
 	//Porting Lib

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.conditional;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.revelationary.api.revelations.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -47,11 +47,6 @@ public class StuckStormStoneBlock extends HorizontalFacingBlock implements Revel
 	}
 	
 	@Override
-	public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return VoxelShapes.empty();
-	}
-	
-	@Override
 	public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
 		return 1.0F;
 	}
@@ -91,24 +86,20 @@ public class StuckStormStoneBlock extends HorizontalFacingBlock implements Revel
 	public Identifier getCloakAdvancementIdentifier() {
 		return SpectrumAdvancements.REVEAL_STORM_STONES;
 	}
-
+	
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		if (this.isVisibleTo(context)) {
-			return SHAPE;
-		}
-		return VoxelShapes.fullCube();
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		if (context instanceof EntityShapeContext entityShapeContext) {
-			Entity var4 = entityShapeContext.getEntity();
-			if (var4 instanceof PlayerEntity player) {
-				return this.isVisibleTo(player) ? SHAPE : VoxelShapes.empty();
+			Entity contextEntity = entityShapeContext.getEntity();
+			if (contextEntity instanceof PlayerEntity player) {
+				if (this.isVisibleTo(player)) {
+					return SHAPE;
+				} else {
+					return VoxelShapes.empty();
+				}
 			}
 		}
-		return VoxelShapes.fullCube();
+		return VoxelShapes.fullCube(); // like breaking particles
 	}
 	
 	@Override

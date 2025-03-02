@@ -23,6 +23,9 @@ accessible method net/minecraft/entity/projectile/FishingBobberEntity <init> (Ln
 accessible method net/minecraft/registry/entry/RegistryEntryList$Direct <init> (Ljava/util/List;)V
 accessible method net/minecraft/advancement/criterion/AbstractCriterion trigger (Lnet/minecraft/server/network/ServerPlayerEntity;Ljava/util/function/Predicate;)V
 accessible method net/minecraft/screen/ForgingScreenHandler addPlayerInventorySlots (Lnet/minecraft/entity/player/PlayerInventory;)V
+accessible method net/minecraft/entity/FallingBlockEntity <init> (Lnet/minecraft/world/World;DDDLnet/minecraft/block/BlockState;)V
+accessible method net/minecraft/entity/passive/WolfEntity setCollarColor (Lnet/minecraft/util/DyeColor;)V
+accessible method net/minecraft/entity/passive/CatEntity setCollarColor (Lnet/minecraft/util/DyeColor;)V
 
 extendable method net/minecraft/component/type/BundleContentsComponent$Builder addInternal (Lnet/minecraft/item/ItemStack;)I
 extendable method net/minecraft/component/type/BundleContentsComponent$Builder getMaxAllowed (Lnet/minecraft/item/ItemStack;)I
@@ -36,3 +39,9 @@ accessible field net/minecraft/block/FluidBlock fluid Lnet/minecraft/fluid/Flowa
 accessible field net/minecraft/data/client/BlockStateModelGenerator$BlockTexturePool baseModelId Lnet/minecraft/util/Identifier;
 
 mutable field net/minecraft/item/map/MapState dimension Lnet/minecraft/registry/RegistryKey;
+
+# particle shenanigans
+accessible method net/minecraft/client/particle/BlockLeakParticle$Falling <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;I)V
+accessible method net/minecraft/client/particle/BlockLeakParticle <init> (Lnet/minecraft/client/world/ClientWorld;DDDLnet/minecraft/fluid/Fluid;)V
+accessible field net/minecraft/client/particle/Particle gravityStrength F
+accessible method net/minecraft/client/particle/WaterSuspendParticle <init> (Lnet/minecraft/client/world/ClientWorld;Lnet/minecraft/client/particle/SpriteProvider;DDDDDD)V

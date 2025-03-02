@@ -36,7 +36,7 @@ public class MidnightSolutionFluidBlock extends SpectrumFluidBlock {
 
 	@Override
 	public Pair<SimpleParticleType, SimpleParticleType> getFishingParticles() {
-		return new Pair<>(SpectrumParticleTypes.GRAY_SPARKLE_RISING, SpectrumParticleTypes.MIDNIGHT_SOLUTION_FISHING);
+		return new Pair<>(SpectrumParticleTypes.MIDNIGHT_SOLUTION_SPLASH, SpectrumParticleTypes.MIDNIGHT_SOLUTION_FISHING);
 	}
 
 	public static boolean tryConvertNeighbor(@NotNull World world, BlockPos fromPos) {

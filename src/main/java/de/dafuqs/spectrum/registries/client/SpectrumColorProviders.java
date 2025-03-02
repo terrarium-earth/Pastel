@@ -2,11 +2,11 @@ package de.dafuqs.spectrum.registries.client;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.energy.*;
+import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.energy.storage.*;
 import de.dafuqs.spectrum.blocks.conditional.colored_tree.*;
 import de.dafuqs.spectrum.blocks.memory.*;
 import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.items.energy.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
@@ -15,7 +15,6 @@ import net.minecraft.block.*;
 import net.minecraft.client.color.block.*;
 import net.minecraft.client.color.item.*;
 import net.minecraft.item.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 
 import java.util.*;
@@ -59,8 +58,8 @@ public class SpectrumColorProviders {
 			coloredLeavesBlockColorProvider = new ToggleableBlockColorProvider(leavesBlockColorProvider);
 			coloredLeavesItemColorProvider = new ToggleableItemColorProvider(leavesItemColorProvider);
 			
-			for (DyeColor dyeColor : SpectrumColorHelper.VANILLA_DYE_COLORS) {
-				Block block = ColoredLeavesBlock.byColor(dyeColor);
+			for (InkColor color : InkColors.all()) {
+				Block block = ColoredLeavesBlock.byColor(color);
 				ColorProviderRegistry.BLOCK.register(coloredLeavesBlockColorProvider, block);
 				ColorProviderRegistry.ITEM.register(coloredLeavesItemColorProvider, block);
 			}
@@ -102,7 +101,7 @@ public class SpectrumColorProviders {
 			if (tintIndex == 1) {
 				InkFlaskItem i = (InkFlaskItem) stack.getItem();
 				SingleInkStorage storage = i.getEnergyStorage(stack);
-				return ColorHelper.Argb.fullAlpha(SpectrumColorHelper.getInt(storage.getStoredColor().getDyeColor()));
+				return ColorHelper.Argb.fullAlpha(storage.getStoredColor().getColorInt());
 			}
 			return -1;
 		}, items);

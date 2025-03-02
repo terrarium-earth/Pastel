@@ -15,6 +15,56 @@
         },
         {
           "type": "minecraft:item",
+          "name": "spectrum:bone_ash",
+          "conditions": [
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "player",
+                  "advancements": {
+                    "spectrum:break_cracked_dragonbone": true
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:poisonous_potato"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:rabbit_foot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spectrum:raw_malachite",
+          "conditions": [
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "player",
+                  "advancements": {
+                    "spectrum:lategame/collect_malachite": true
+                  }
+                }
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "dimension": "spectrum:deeper_down"
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:bow",
           "functions": [
             {
@@ -59,7 +109,7 @@
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
-              "levels": 30,
+              "levels": 45,
               "treasure": true
             }
           ]
