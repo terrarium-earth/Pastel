@@ -11,6 +11,7 @@ import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.*;
 import static net.minecraft.data.client.TextureKey.*;
 
 public class SpectrumModels {
+	
 	// Item Templates
 	public static final Model CLUSTER_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/cluster")), Optional.empty(), LAYER0);
 	public static final Model LARGE_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/large_bud")), Optional.empty(), LAYER0);
@@ -18,12 +19,11 @@ public class SpectrumModels {
 	public static final Model SMALL_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/small_bud")), Optional.empty(), LAYER0);
 	
 	// Vanilla Items
-	
 	public static final Identifier SKULL_ITEM = Identifier.ofVanilla("item/template_skull");
 	
 	// Block Templates
-	public static final Model BASE_FLAT_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light")), Optional.empty(), INNER, OUTER, PARTICLE);
-	public static final Model BASE_FLAT_LIGHT_MIRRORED = new Model(Optional.of(SpectrumCommon.locate("templates/base_flat_light_mirrored")), Optional.empty(), INNER, OUTER, PARTICLE);
+	public static final Model SHIMMERSTONE_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/shimmerstone_light")), Optional.empty(), INNER, OUTER, PARTICLE);
+	public static final Model SHIMMERSTONE_LIGHT_MIRRORED = new Model(Optional.of(SpectrumCommon.locate("templates/shimmerstone_light_mirrored")), Optional.empty(), INNER, OUTER, PARTICLE);
 	public static final Model BASE_PYLON_BODY = new Model(Optional.of(SpectrumCommon.locate("templates/base_pylon_body")), Optional.empty(), SIDE, END);
 	public static final Model BASE_TRANS_LIGHT_CORE = new Model(Optional.of(SpectrumCommon.locate("templates/base_trans_light_core")), Optional.empty(), GLASS, CASE, BASE, ENDS, SHELL, FILAMENT);
 	public static final Model BOWL = new Model(Optional.of(SpectrumCommon.locate("templates/base_bowl")), Optional.empty(), SIDE, TOP, BOTTOM, INNER);

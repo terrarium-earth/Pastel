@@ -127,7 +127,7 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
 		}
 		
 		public DropSelfResonanceProcessor build() {
-			return new DropSelfResonanceProcessor(blockTarget, nbtToCopy, statePropertiesToCopy, includeDefaultStateProperties);
+			return new DropSelfResonanceProcessor(blockTarget, statePropertiesToCopy, nbtToCopy, includeDefaultStateProperties);
 		}
 		
 	}

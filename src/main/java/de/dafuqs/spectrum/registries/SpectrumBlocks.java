@@ -1627,8 +1627,8 @@ public class SpectrumBlocks {
 	public static ShimmerstoneLightBlock registerShimmerstoneLight(String name, BlockSoundGroup soundGroup, Supplier<Identifier> outerSupplier) {
 		return register(blockWithItem(name, new ShimmerstoneLightBlock(settings(MapColor.CLEAR, soundGroup, 1.0F).nonOpaque().requiresTool().luminance(state -> 15).pistonBehavior(PistonBehavior.DESTROY)), InkColors.YELLOW).withBlockModel((ctx, block) -> {
 			Identifier outer = outerSupplier.get();
-			Identifier base = SpectrumModels.BASE_FLAT_LIGHT.upload(block, SpectrumTextureMaps.innerOuterParticle(SpectrumTextures.SHIMMERSTONE_LIGHT, outer, outer), ctx.modelCollector);
-			Identifier mirrored = SpectrumModels.BASE_FLAT_LIGHT_MIRRORED.upload(block, "_mirrored", SpectrumTextureMaps.innerOuterParticle(SpectrumTextures.SHIMMERSTONE_LIGHT, outer, outer), ctx.modelCollector);
+			Identifier base = SpectrumModels.SHIMMERSTONE_LIGHT.upload(block, SpectrumTextureMaps.innerOuterParticle(SpectrumTextures.SHIMMERSTONE_LIGHT, outer, outer), ctx.modelCollector);
+			Identifier mirrored = SpectrumModels.SHIMMERSTONE_LIGHT_MIRRORED.upload(block, "_mirrored", SpectrumTextureMaps.innerOuterParticle(SpectrumTextures.SHIMMERSTONE_LIGHT, outer, outer), ctx.modelCollector);
 			return VariantsBlockStateSupplier.create(block).coordinate(createNorthDefaultFacingVariantMap()).coordinate(createBooleanModelMap(Properties.INVERTED, mirrored, base));
 		}));
 	}
