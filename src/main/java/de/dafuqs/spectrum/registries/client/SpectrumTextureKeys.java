@@ -6,6 +6,8 @@ public class SpectrumTextureKeys {
 	
 	public static final TextureKey KEY0 = TextureKey.of("0");
 	public static final TextureKey KEY1 = TextureKey.of("1");
+
+	public static final TextureKey LAYER3 = TextureKey.of("layer3");
 	
 	public static final TextureKey BASE = TextureKey.of("base");
 	public static final TextureKey CASE = TextureKey.of("case");

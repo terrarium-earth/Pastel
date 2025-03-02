@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.registries.client;
 
 import net.minecraft.block.*;
 import net.minecraft.data.client.*;
+import net.minecraft.item.*;
 import net.minecraft.util.*;
 
 import java.util.*;
@@ -74,7 +75,7 @@ public class SpectrumTexturedModels {
 	public static TexturedModel.Factory leaves(UnaryOperator<Block> allBlock, String allSuffix) {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.all(allBlock.apply(b), allSuffix), Models.LEAVES);
 	}
-	
+
 	public static TexturedModel.Factory overgrown(UnaryOperator<Block> sideBlock, String sideSuffix, UnaryOperator<Block> topBlock, String topSuffix, UnaryOperator<Block> bottomBlock, String bottomSuffix, UnaryOperator<Block> frondsBlock, String frondsSuffix) {
 		return TexturedModel.makeFactory(b -> SpectrumTextureMaps.sideTopBottomFronds(sideBlock.apply(b), sideSuffix, topBlock.apply(b), topSuffix, bottomBlock.apply(b), bottomSuffix, frondsBlock.apply(b), frondsSuffix), SpectrumModels.OVERGROWN);
 	}

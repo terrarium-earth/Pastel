@@ -18,8 +18,13 @@ public class SpectrumModels {
 	public static final Model MEDIUM_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/medium_bud")), Optional.empty(), LAYER0);
 	public static final Model SMALL_BUD_ITEM = new Model(Optional.of(SpectrumCommon.locate("templates_item/small_bud")), Optional.empty(), LAYER0);
 	
+	// Item Builtins w/ Extra Keys
+	public static final Model HANDHELD_THREE_LAYERS = new Model(Optional.of(Identifier.ofVanilla("item/handheld")), Optional.empty(), LAYER0, LAYER1, LAYER2);
+	public static final Model GENERATED_FOUR_LAYERS = new Model(Optional.of(Identifier.ofVanilla("item/generated")), Optional.empty(), LAYER0, LAYER1, LAYER2, LAYER3);
+	
 	// Vanilla Items
 	public static final Identifier SKULL_ITEM = Identifier.ofVanilla("item/template_skull");
+	public static final Identifier SPAWN_EGG = Identifier.ofVanilla("item/template_spawn_egg");
 	
 	// Block Templates
 	public static final Model SHIMMERSTONE_LIGHT = new Model(Optional.of(SpectrumCommon.locate("templates/shimmerstone_light")), Optional.empty(), INNER, OUTER, PARTICLE);

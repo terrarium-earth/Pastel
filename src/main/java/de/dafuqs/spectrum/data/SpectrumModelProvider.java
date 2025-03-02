@@ -48,6 +48,22 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		Models.GENERATED.upload(ModelIds.getItemModelId(item), SpectrumTextureMaps.layer0(item, suffix), ctx.writer);
 	}
 	
+	public static void registerItemModel(ItemModelGenerator ctx, Item item, Model model) {
+		model.upload(ModelIds.getItemModelId(item), SpectrumTextureMaps.layer0(item, ""), ctx.writer);
+	}
+	
+	public static void registerLayeredItemModel(ItemModelGenerator ctx, Item item, Model model, String suffix0, String suffix1) {
+		model.upload(ModelIds.getItemModelId(item), TextureMap.layered(TextureMap.getSubId(item, suffix0), TextureMap.getSubId(item, suffix1)), ctx.writer);
+	}
+	
+	public static void registerLayeredItemModel(ItemModelGenerator ctx, Item item, Model model, String suffix0, String suffix1, String suffix2) {
+		model.upload(ModelIds.getItemModelId(item), TextureMap.layered(TextureMap.getSubId(item, suffix0), TextureMap.getSubId(item, suffix1), TextureMap.getSubId(item, suffix2)), ctx.writer);
+	}
+	
+	public static void registerLayeredItemModel(ItemModelGenerator ctx, Item item, Model model, String suffix0, String suffix1, String suffix2, String suffix3) {
+		model.upload(ModelIds.getItemModelId(item), TextureMap.layered(TextureMap.getSubId(item, suffix0), TextureMap.getSubId(item, suffix1), TextureMap.getSubId(item, suffix2)).put(SpectrumTextureKeys.LAYER3, TextureMap.getSubId(item, suffix3)), ctx.writer);
+	}
+	
 	public static void registerBlockTexturedItemModel(ItemModelGenerator ctx, Block block) {
 		registerBlockTexturedItemModel(ctx, block, "");
 	}
@@ -56,16 +72,24 @@ public class SpectrumModelProvider extends FabricModelProvider {
 		Models.GENERATED.upload(ModelIds.getItemModelId(block.asItem()), SpectrumTextureMaps.layer0(block, suffix), ctx.writer);
 	}
 	
-	public static void registerParentedItemModel(ItemModelGenerator ctx, Block block, Block parent) {
-		registerParentedItemModel(ctx, block, parent, "");
+	public static void registerParentedItemModel(ItemModelGenerator ctx, ItemConvertible item, Item parent) {
+		registerParentedItemModel(ctx, item, parent, "");
 	}
 	
-	public static void registerParentedItemModel(ItemModelGenerator ctx, Block block, Block parent, String suffix) {
-		registerParentedItemModel(ctx, block, ModelIds.getBlockSubModelId(parent, suffix));
+	public static void registerParentedItemModel(ItemModelGenerator ctx, ItemConvertible item, Block parent) {
+		registerParentedItemModel(ctx, item, parent, "");
 	}
 	
-	public static void registerParentedItemModel(ItemModelGenerator ctx, Block block, Identifier parentModelId) {
-		ctx.writer.accept(ModelIds.getItemModelId(block.asItem()), new SimpleModelSupplier(parentModelId));
+	public static void registerParentedItemModel(ItemModelGenerator ctx, ItemConvertible item, Item parent, String suffix) {
+		registerParentedItemModel(ctx, item, ModelIds.getItemSubModelId(parent, suffix));
+	}
+	
+	public static void registerParentedItemModel(ItemModelGenerator ctx, ItemConvertible item, Block parent, String suffix) {
+		registerParentedItemModel(ctx, item, ModelIds.getBlockSubModelId(parent, suffix));
+	}
+	
+	public static void registerParentedItemModel(ItemModelGenerator ctx, ItemConvertible item, Identifier parentModelId) {
+		ctx.writer.accept(ModelIds.getItemModelId(item.asItem()), new SimpleModelSupplier(parentModelId));
 	}
 	
 	// Block Models

@@ -28,6 +28,7 @@ import de.dafuqs.spectrum.items.tools.*;
 import de.dafuqs.spectrum.items.trinkets.*;
 import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
+import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.fabric.api.registry.*;
 import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.minecraft.component.*;
@@ -47,6 +48,7 @@ import java.util.function.*;
 
 import static de.dafuqs.spectrum.SpectrumCommon.*;
 import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
+import static net.minecraft.item.Items.*;
 
 public class SpectrumItems {
 	
@@ -54,7 +56,7 @@ public class SpectrumItems {
 	
 	// Main items
 	public static final Item GUIDEBOOK = register(simple(item("guidebook", new GuidebookItem(IS.of(1)), InkColors.WHITE)));
-	public static final Item PAINTBRUSH = registerDeferredWithUniqueModel("paintbrush", new PaintbrushItem(IS.of(1)), InkColors.WHITE);
+	public static final Item PAINTBRUSH = register(item("paintbrush", new PaintbrushItem(IS.of(1)), InkColors.WHITE));
 	public static final Item CRAFTING_TABLET = register(simple(item("crafting_tablet", new CraftingTabletItem(IS.of(1)), InkColors.LIGHT_GRAY)));
 	
 	// Structure placers
@@ -69,92 +71,92 @@ public class SpectrumItems {
 	// Gem shards and powders
 	public static final Item TOPAZ_SHARD = register(simple(item("topaz_shard", new Item(IS.of()), InkColors.CYAN)));
 	public static final Item CITRINE_SHARD = register(simple(item("citrine_shard", new Item(IS.of()), InkColors.YELLOW)));
-	public static final Item ONYX_SHARD = register(simple(item("onyx_shard", new CloakedItem(IS.of(), SpectrumAdvancements.COLLECT_ALL_BASIC_PIGMENTS_BESIDES_BROWN, Items.BLACK_DYE), InkColors.BLACK)));
-	public static final Item MOONSTONE_SHARD = register(simple(item("moonstone_shard", new CloakedItem(IS.of(), SpectrumAdvancements.BREAK_DECAYED_BEDROCK, Items.WHITE_DYE), InkColors.WHITE)));
+	public static final Item ONYX_SHARD = register(simple(item("onyx_shard", new CloakedItem(IS.of(), SpectrumAdvancements.COLLECT_ALL_BASIC_PIGMENTS_BESIDES_BROWN, BLACK_DYE), InkColors.BLACK)));
+	public static final Item MOONSTONE_SHARD = register(simple(item("moonstone_shard", new CloakedItem(IS.of(), SpectrumAdvancements.BREAK_DECAYED_BEDROCK, WHITE_DYE), InkColors.WHITE)));
 	public static final Item SPECTRAL_SHARD = register(simple(item("spectral_shard", new Item(IS.of(Rarity.RARE)), InkColors.WHITE)));
 	
-	public static final Item TOPAZ_POWDER = register(simple(item("topaz_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_TOPAZ, BuiltinGemstoneColor.CYAN, Items.CYAN_DYE), InkColors.CYAN)));
-	public static final Item AMETHYST_POWDER = register(simple(item("amethyst_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_AMETHYST, BuiltinGemstoneColor.MAGENTA, Items.MAGENTA_DYE), InkColors.MAGENTA)));
-	public static final Item CITRINE_POWDER = register(simple(item("citrine_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_CITRINE, BuiltinGemstoneColor.YELLOW, Items.YELLOW_DYE), InkColors.YELLOW)));
-	public static final Item ONYX_POWDER = register(simple(item("onyx_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.CREATE_ONYX, BuiltinGemstoneColor.BLACK, Items.BLACK_DYE), InkColors.BLACK)));
-	public static final Item MOONSTONE_POWDER = register(simple(item("moonstone_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_MOONSTONE, BuiltinGemstoneColor.WHITE, Items.WHITE_DYE), InkColors.WHITE)));
+	public static final Item TOPAZ_POWDER = register(simple(item("topaz_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_TOPAZ, BuiltinGemstoneColor.CYAN, CYAN_DYE), InkColors.CYAN)));
+	public static final Item AMETHYST_POWDER = register(simple(item("amethyst_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_AMETHYST, BuiltinGemstoneColor.MAGENTA, MAGENTA_DYE), InkColors.MAGENTA)));
+	public static final Item CITRINE_POWDER = register(simple(item("citrine_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_CITRINE, BuiltinGemstoneColor.YELLOW, YELLOW_DYE), InkColors.YELLOW)));
+	public static final Item ONYX_POWDER = register(simple(item("onyx_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.CREATE_ONYX, BuiltinGemstoneColor.BLACK, BLACK_DYE), InkColors.BLACK)));
+	public static final Item MOONSTONE_POWDER = register(simple(item("moonstone_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_MOONSTONE, BuiltinGemstoneColor.WHITE, WHITE_DYE), InkColors.WHITE)));
 	
 	// Pigment
-	public static final Item WHITE_PIGMENT = register(simple(item("white_pigment", new PigmentItem(IS.of(), InkColors.BLACK, Items.BLACK_DYE), InkColors.WHITE)));
-	public static final Item ORANGE_PIGMENT = register(simple(item("orange_pigment", new PigmentItem(IS.of(), InkColors.BLUE, Items.BLUE_DYE), InkColors.ORANGE)));
-	public static final Item MAGENTA_PIGMENT = register(simple(item("magenta_pigment", new PigmentItem(IS.of(), InkColors.BROWN, Items.BROWN_DYE), InkColors.MAGENTA)));
-	public static final Item LIGHT_BLUE_PIGMENT = register(simple(item("light_blue_pigment", new PigmentItem(IS.of(), InkColors.CYAN, Items.CYAN_DYE), InkColors.LIGHT_BLUE)));
-	public static final Item YELLOW_PIGMENT = register(simple(item("yellow_pigment", new PigmentItem(IS.of(), InkColors.GRAY, Items.GRAY_DYE), InkColors.YELLOW)));
-	public static final Item LIME_PIGMENT = register(simple(item("lime_pigment", new PigmentItem(IS.of(), InkColors.GREEN, Items.GREEN_DYE), InkColors.LIME)));
-	public static final Item PINK_PIGMENT = register(simple(item("pink_pigment", new PigmentItem(IS.of(), InkColors.LIGHT_BLUE, Items.LIGHT_BLUE_DYE), InkColors.PINK)));
-	public static final Item GRAY_PIGMENT = register(simple(item("gray_pigment", new PigmentItem(IS.of(), InkColors.LIGHT_GRAY, Items.LIGHT_GRAY_DYE), InkColors.GRAY)));
-	public static final Item LIGHT_GRAY_PIGMENT = register(simple(item("light_gray_pigment", new PigmentItem(IS.of(), InkColors.LIME, Items.LIME_DYE), InkColors.LIGHT_GRAY)));
-	public static final Item CYAN_PIGMENT = register(simple(item("cyan_pigment", new PigmentItem(IS.of(), InkColors.MAGENTA, Items.MAGENTA_DYE), InkColors.CYAN)));
-	public static final Item PURPLE_PIGMENT = register(simple(item("purple_pigment", new PigmentItem(IS.of(), InkColors.ORANGE, Items.ORANGE_DYE), InkColors.PURPLE)));
-	public static final Item BLUE_PIGMENT = register(simple(item("blue_pigment", new PigmentItem(IS.of(), InkColors.PINK, Items.PINK_DYE), InkColors.BLUE)));
-	public static final Item BROWN_PIGMENT = register(simple(item("brown_pigment", new PigmentItem(IS.of(), InkColors.PURPLE, Items.PURPLE_DYE), InkColors.BROWN)));
-	public static final Item GREEN_PIGMENT = register(simple(item("green_pigment", new PigmentItem(IS.of(), InkColors.RED, Items.RED_DYE), InkColors.GREEN)));
-	public static final Item RED_PIGMENT = register(simple(item("red_pigment", new PigmentItem(IS.of(), InkColors.WHITE, Items.WHITE_DYE), InkColors.RED)));
-	public static final Item BLACK_PIGMENT = register(simple(item("black_pigment", new PigmentItem(IS.of(), InkColors.YELLOW, Items.YELLOW_DYE), InkColors.BLACK)));
+	public static final Item WHITE_PIGMENT = register(simple(item("white_pigment", new PigmentItem(IS.of(), InkColors.BLACK, BLACK_DYE), InkColors.WHITE)));
+	public static final Item ORANGE_PIGMENT = register(simple(item("orange_pigment", new PigmentItem(IS.of(), InkColors.BLUE, BLUE_DYE), InkColors.ORANGE)));
+	public static final Item MAGENTA_PIGMENT = register(simple(item("magenta_pigment", new PigmentItem(IS.of(), InkColors.BROWN, BROWN_DYE), InkColors.MAGENTA)));
+	public static final Item LIGHT_BLUE_PIGMENT = register(simple(item("light_blue_pigment", new PigmentItem(IS.of(), InkColors.CYAN, CYAN_DYE), InkColors.LIGHT_BLUE)));
+	public static final Item YELLOW_PIGMENT = register(simple(item("yellow_pigment", new PigmentItem(IS.of(), InkColors.GRAY, GRAY_DYE), InkColors.YELLOW)));
+	public static final Item LIME_PIGMENT = register(simple(item("lime_pigment", new PigmentItem(IS.of(), InkColors.GREEN, GREEN_DYE), InkColors.LIME)));
+	public static final Item PINK_PIGMENT = register(simple(item("pink_pigment", new PigmentItem(IS.of(), InkColors.LIGHT_BLUE, LIGHT_BLUE_DYE), InkColors.PINK)));
+	public static final Item GRAY_PIGMENT = register(simple(item("gray_pigment", new PigmentItem(IS.of(), InkColors.LIGHT_GRAY, LIGHT_GRAY_DYE), InkColors.GRAY)));
+	public static final Item LIGHT_GRAY_PIGMENT = register(simple(item("light_gray_pigment", new PigmentItem(IS.of(), InkColors.LIME, LIME_DYE), InkColors.LIGHT_GRAY)));
+	public static final Item CYAN_PIGMENT = register(simple(item("cyan_pigment", new PigmentItem(IS.of(), InkColors.MAGENTA, MAGENTA_DYE), InkColors.CYAN)));
+	public static final Item PURPLE_PIGMENT = register(simple(item("purple_pigment", new PigmentItem(IS.of(), InkColors.ORANGE, ORANGE_DYE), InkColors.PURPLE)));
+	public static final Item BLUE_PIGMENT = register(simple(item("blue_pigment", new PigmentItem(IS.of(), InkColors.PINK, PINK_DYE), InkColors.BLUE)));
+	public static final Item BROWN_PIGMENT = register(simple(item("brown_pigment", new PigmentItem(IS.of(), InkColors.PURPLE, PURPLE_DYE), InkColors.BROWN)));
+	public static final Item GREEN_PIGMENT = register(simple(item("green_pigment", new PigmentItem(IS.of(), InkColors.RED, RED_DYE), InkColors.GREEN)));
+	public static final Item RED_PIGMENT = register(simple(item("red_pigment", new PigmentItem(IS.of(), InkColors.WHITE, WHITE_DYE), InkColors.RED)));
+	public static final Item BLACK_PIGMENT = register(simple(item("black_pigment", new PigmentItem(IS.of(), InkColors.YELLOW, YELLOW_DYE), InkColors.BLACK)));
 	
 	// Preenchanted tools
-	public static final Item MULTITOOL = registerDeferredWithUniqueModel("multitool", new PreenchantedMultiToolItem(ToolMaterials.IRON, 2, -2.4F, IS.of(Rarity.UNCOMMON).maxDamage(ToolMaterials.IRON.getDurability())), InkColors.BROWN);
-	public static final Item TENDER_PICKAXE = registerDeferredWithUniqueModel("tender_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
+	public static final Item MULTITOOL = register(handheld(item("multitool", new PreenchantedMultiToolItem(ToolMaterials.IRON, 2, -2.4F, IS.of(Rarity.UNCOMMON).maxDamage(ToolMaterials.IRON.getDurability())), InkColors.BROWN)));
+	public static final Item TENDER_PICKAXE = register(handheld(item("tender_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.SILK_TOUCH, 1);
 		}
-	}, InkColors.BLUE);
-	public static final Item LUCKY_PICKAXE = registerDeferredWithUniqueModel("lucky_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
+	}, InkColors.BLUE)));
+	public static final Item LUCKY_PICKAXE = register(handheld(item("lucky_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.FORTUNE, 3);
 		}
-	}, InkColors.LIGHT_BLUE);
-	public static final Item RAZOR_FALCHION = registerDeferredWithUniqueModel("razor_falchion", new RazorFalchionItem(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 4, -2.2F))), InkColors.RED);
-	public static final Item OBLIVION_PICKAXE = registerDeferredWithUniqueModel("oblivion_pickaxe", new OblivionPickaxeItem(SpectrumToolMaterial.VOIDING, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VOIDING.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.VOIDING, 1, -2.8F))), InkColors.GRAY);
-	public static final Item RESONANT_PICKAXE = registerDeferredWithUniqueModel("resonant_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, 1, -2.8F))) {
+	}, InkColors.LIGHT_BLUE)));
+	public static final Item RAZOR_FALCHION = register(handheld(item("razor_falchion", new RazorFalchionItem(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 4, -2.2F))), InkColors.RED)));
+	public static final Item OBLIVION_PICKAXE = register(handheld(item("oblivion_pickaxe", new OblivionPickaxeItem(SpectrumToolMaterial.VOIDING, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VOIDING.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.VOIDING, 1, -2.8F))), InkColors.GRAY)));
+	public static final Item RESONANT_PICKAXE = register(handheld(item("resonant_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(SpectrumEnchantments.CLOAKED_RESONANCE, 1);
 		}
-	}, InkColors.WHITE);
-	public static final Item DRAGONRENDING_PICKAXE = registerDeferredWithUniqueModel("dragonrending_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.DRACONIC, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.DRACONIC, 1, -2.8F))) {
+	}, InkColors.WHITE)));
+	public static final Item DRAGONRENDING_PICKAXE = register(handheld(item("dragonrending_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.DRACONIC, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.DRACONIC, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(SpectrumEnchantments.CLOAKED_RAZING, 3);
 		}
-	}, InkColors.WHITE);
-	public static final SpectrumFishingRodItem LAGOON_ROD = registerDeferredWithUniqueModel("lagoon_rod", new LagoonRodItem(IS.of().maxDamage(256)), InkColors.LIGHT_BLUE);
-	public static final SpectrumFishingRodItem MOLTEN_ROD = registerDeferredWithUniqueModel("molten_rod", new MoltenRodItem(IS.of().maxDamage(256)), InkColors.ORANGE);
+	}, InkColors.WHITE)));
+	public static final SpectrumFishingRodItem LAGOON_ROD = register(item("lagoon_rod", new LagoonRodItem(IS.of().maxDamage(256)), InkColors.LIGHT_BLUE));
+	public static final SpectrumFishingRodItem MOLTEN_ROD = register(item("molten_rod", new MoltenRodItem(IS.of().maxDamage(256)), InkColors.ORANGE));
 	
 	// Bedrock Tools
-	public static final Item BEDROCK_PICKAXE = registerDeferredWithUniqueModel("bedrock_pickaxe", new SpectrumPickaxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -2.8F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
+	public static final Item BEDROCK_PICKAXE = register(handheld(item("bedrock_pickaxe", new SpectrumPickaxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -2.8F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.SILK_TOUCH, 1);
 		}
-	}, InkColors.BLACK);
-	public static final Item BEDROCK_AXE = registerDeferredWithUniqueModel("bedrock_axe", new BedrockAxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(AxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 5, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK);
-	public static final Item BEDROCK_SHOVEL = registerDeferredWithUniqueModel("bedrock_shovel", new BedrockShovelItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(ShovelItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK);
-	public static final Item BEDROCK_SWORD = registerDeferredWithUniqueModel("bedrock_sword", new BedrockSwordItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 4, -2.4F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK);
-	public static final Item BEDROCK_HOE = registerDeferredWithUniqueModel("bedrock_hoe", new BedrockHoeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(HoeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 2, -0.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK);
-	public static final Item BEDROCK_BOW = registerDeferredWithUniqueModel("bedrock_bow", new BedrockBowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK);
-	public static final Item BEDROCK_CROSSBOW = registerDeferredWithUniqueModel("bedrock_crossbow", new BedrockCrossbowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK);
+	}, InkColors.BLACK)));
+	public static final Item BEDROCK_AXE = register(item("bedrock_axe", new BedrockAxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(AxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 5, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
+	public static final Item BEDROCK_SHOVEL = register(handheld(item("bedrock_shovel", new BedrockShovelItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(ShovelItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
+	public static final Item BEDROCK_SWORD = register(item("bedrock_sword", new BedrockSwordItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 4, -2.4F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
+	public static final Item BEDROCK_HOE = register(handheld(item("bedrock_hoe", new BedrockHoeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(HoeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 2, -0.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
+	public static final Item BEDROCK_BOW = register(item("bedrock_bow", new BedrockBowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
+	public static final Item BEDROCK_CROSSBOW = register(item("bedrock_crossbow", new BedrockCrossbowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
 	public static final Item BEDROCK_SHEARS = register(simple(item("bedrock_shears", new BedrockShearsItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
-	public static final Item BEDROCK_FISHING_ROD = registerDeferredWithUniqueModel("bedrock_fishing_rod", new BedrockFishingRodItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK);
+	public static final Item BEDROCK_FISHING_ROD = register(item("bedrock_fishing_rod", new BedrockFishingRodItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
 	
-	public static final Item MALACHITE_WORKSTAFF = registerDeferredWithUniqueModel("malachite_workstaff", new WorkstaffItem(SpectrumToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN);
-	public static final Item MALACHITE_ULTRA_GREATSWORD = registerDeferredWithUniqueModel("malachite_ultra_greatsword", new GreatswordItem(SpectrumToolMaterial.MALACHITE, 7, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN);
-	public static final Item MALACHITE_CROSSBOW = registerDeferredWithUniqueModel("malachite_crossbow", new MalachiteCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.MALACHITE.getDurability())), InkColors.GREEN);
-	public static final Item MALACHITE_BIDENT = registerDeferredWithUniqueModel("malachite_bident", new MalachiteBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.MALACHITE.getDurability()), -2.4, 9, 0.25F, 0F), InkColors.GREEN);
+	public static final Item MALACHITE_WORKSTAFF = register(item("malachite_workstaff", new WorkstaffItem(SpectrumToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN));
+	public static final Item MALACHITE_ULTRA_GREATSWORD = register(item("malachite_ultra_greatsword", new GreatswordItem(SpectrumToolMaterial.MALACHITE, 7, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN));
+	public static final Item MALACHITE_CROSSBOW = register(item("malachite_crossbow", new MalachiteCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.MALACHITE.getDurability())), InkColors.GREEN));
+	public static final Item MALACHITE_BIDENT = register(item("malachite_bident", new MalachiteBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.MALACHITE.getDurability()), -2.4, 9, 0.25F, 0F), InkColors.GREEN));
 	
 	// variants by socketing a moonstone core
-	public static final Item GLASS_CREST_WORKSTAFF = registerDeferredWithUniqueModel("glass_crest_workstaff", new GlassCrestWorkstaffItem(SpectrumToolMaterial.GLASS_CREST, 1, -2.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE);
-	public static final Item GLASS_CREST_ULTRA_GREATSWORD = registerDeferredWithUniqueModel("glass_crest_ultra_greatsword", new GlassCrestGreatswordItem(SpectrumToolMaterial.GLASS_CREST, 5, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE);
-	public static final Item GLASS_CREST_CROSSBOW = registerDeferredWithUniqueModel("glass_crest_crossbow", new GlassCrestCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability())), InkColors.WHITE);
-	public static final Item FEROCIOUS_GLASS_CREST_BIDENT = registerDeferredWithUniqueModel("ferocious_glass_crest_bident", new FerociousBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.2, 13, 0.33F, 0.33F), InkColors.WHITE);
-	public static final Item FRACTAL_GLASS_CREST_BIDENT = registerDeferredWithUniqueModel("fractal_glass_crest_bident", new FractalBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.4, 6.5, 0.25F, 0.25F), InkColors.WHITE);
+	public static final Item GLASS_CREST_WORKSTAFF = register(item("glass_crest_workstaff", new GlassCrestWorkstaffItem(SpectrumToolMaterial.GLASS_CREST, 1, -2.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE));
+	public static final Item GLASS_CREST_ULTRA_GREATSWORD = register(item("glass_crest_ultra_greatsword", new GlassCrestGreatswordItem(SpectrumToolMaterial.GLASS_CREST, 5, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE));
+	public static final Item GLASS_CREST_CROSSBOW = register(item("glass_crest_crossbow", new GlassCrestCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability())), InkColors.WHITE));
+	public static final Item FEROCIOUS_GLASS_CREST_BIDENT = register(item("ferocious_glass_crest_bident", new FerociousBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.2, 13, 0.33F, 0.33F), InkColors.WHITE));
+	public static final Item FRACTAL_GLASS_CREST_BIDENT = register(item("fractal_glass_crest_bident", new FractalBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.4, 6.5, 0.25F, 0.25F), InkColors.WHITE));
 	
 	public static final Item MALACHITE_GLASS_ARROW = register(simple(item("malachite_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.MALACHITE, ColoredCraftingParticleEffect.LIME), InkColors.GREEN)));
 	public static final Item TOPAZ_GLASS_ARROW = register(simple(item("topaz_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.TOPAZ, ColoredCraftingParticleEffect.CYAN), InkColors.CYAN)));
@@ -163,20 +165,20 @@ public class SpectrumItems {
 	public static final Item ONYX_GLASS_ARROW = register(simple(item("onyx_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.ONYX, ColoredCraftingParticleEffect.BLACK), InkColors.BLACK)));
 	public static final Item MOONSTONE_GLASS_ARROW = register(simple(item("moonstone_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.MOONSTONE, ColoredCraftingParticleEffect.WHITE), InkColors.WHITE)));
 	
-	public static final Item OMNI_ACCELERATOR = registerDeferredWithUniqueModel("omni_accelerator", new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW);
+	public static final Item OMNI_ACCELERATOR = register(item("omni_accelerator", new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW));
 	
 	public static final Item AZURITE_GLASS_AMPOULE = register(simple(item("azurite_glass_ampoule", new AzuriteGlassAmpouleItem(IS.of(Rarity.UNCOMMON)), InkColors.BLUE)));
 	public static final Item BLOODSTONE_GLASS_AMPOULE = register(simple(item("bloodstone_glass_ampoule", new BloodstoneGlassAmpouleItem(IS.of(Rarity.UNCOMMON).attributeModifiers(BloodstoneGlassAmpouleItem.createAttributeModifiers())), InkColors.RED)));
-	public static final Item MALACHITE_GLASS_AMPOULE = registerDeferredWithUniqueModel("malachite_glass_ampoule", new MalachiteGlassAmpouleItem(IS.of(Rarity.UNCOMMON)), InkColors.GREEN);
+	public static final Item MALACHITE_GLASS_AMPOULE = register(layered(item("malachite_glass_ampoule", new MalachiteGlassAmpouleItem(IS.of(Rarity.UNCOMMON)), InkColors.GREEN), "_base", "_overlay"));
 	
 	// Special tools
 	// TODO: set attribute modifiers similarly to how vanilla swords do it
-	public static final Item DREAMFLAYER = registerDeferredWithUniqueModel("dreamflayer", new DreamflayerItem(SpectrumToolMaterial.DREAMFLAYER, 3, -1.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.RED);
-	public static final Item NIGHTFALLS_BLADE = registerDeferredWithUniqueModel("nightfalls_blade", new NightfallsBladeItem(ToolMaterials.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)), InkColors.GRAY);
-	public static final DraconicTwinswordItem DRACONIC_TWINSWORD = registerDeferredWithUniqueModel("draconic_twinsword", new DraconicTwinswordItem(SpectrumToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)), InkColors.YELLOW);
-	public static final DragonTalonItem DRAGON_TALON = registerDeferredWithUniqueModel("dragon_talon", new DragonTalonItem(SpectrumToolMaterial.DRACONIC, -3.0, -1.0, IS.of(1, Rarity.RARE).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability())), InkColors.YELLOW);
-	public static final LightGreatswordItem KNOTTED_SWORD = registerDeferredWithUniqueModel("knotted_sword", new LightGreatswordItem(SpectrumToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff, IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VERDIGRIS.getDurability())), InkColors.GREEN);
-	public static final LightGreatswordItem NECTAR_LANCE = registerDeferredWithUniqueModel("nectar_lance", new NectarLanceItem(SpectrumToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff, IS.of(1, Rarity.EPIC).maxDamage(SpectrumToolMaterial.NECTAR.getDurability())), InkColors.PURPLE);
+	public static final Item DREAMFLAYER = register(item("dreamflayer", new DreamflayerItem(SpectrumToolMaterial.DREAMFLAYER, 3, -1.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.RED));
+	public static final Item NIGHTFALLS_BLADE = register(item("nightfalls_blade", new NightfallsBladeItem(ToolMaterials.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)), InkColors.GRAY).withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, SpectrumModels.HANDHELD_THREE_LAYERS, "", "_tint", "_overlay")));
+	public static final DraconicTwinswordItem DRACONIC_TWINSWORD = register(item("draconic_twinsword", new DraconicTwinswordItem(SpectrumToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)), InkColors.YELLOW));
+	public static final DragonTalonItem DRAGON_TALON = register(item("dragon_talon", new DragonTalonItem(SpectrumToolMaterial.DRACONIC, -3.0, -1.0, IS.of(1, Rarity.RARE).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability())), InkColors.YELLOW));
+	public static final LightGreatswordItem KNOTTED_SWORD = register(item("knotted_sword", new LightGreatswordItem(SpectrumToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff, IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VERDIGRIS.getDurability())), InkColors.GREEN));
+	public static final LightGreatswordItem NECTAR_LANCE = register(item("nectar_lance", new NectarLanceItem(SpectrumToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff, IS.of(1, Rarity.EPIC).maxDamage(SpectrumToolMaterial.NECTAR.getDurability())), InkColors.PURPLE));
 	
 	// Bedrock Armor
 	public static final Item BEDROCK_HELMET = register(simple(item("bedrock_helmet", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 13).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
@@ -211,23 +213,23 @@ public class SpectrumItems {
 	public static final Item OREAD_BOOTS = register(simple(item("oread_boots", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.BOOTS, IS.of(Rarity.UNCOMMON).maxDamage(9 * 11)), InkColors.BLUE)));
 	
 	// Decay drops
-	public static final Item VEGETAL = register(simple(burnable(item("vegetal", new CloakedItemWithLoomPattern(IS.of(), SpectrumAdvancements.CRAFT_BOTTLE_OF_FADING, Items.GUNPOWDER, SpectrumBannerPatterns.VEGETAL), InkColors.LIME), 800)));
-	public static final Item NEOLITH = register(simple(item("neolith", new CloakedItemWithLoomPattern(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.CRAFT_BOTTLE_OF_FAILING, Items.GUNPOWDER, SpectrumBannerPatterns.NEOLITH), InkColors.PINK)));
-	public static final Item BEDROCK_DUST = register(simple(item("bedrock_dust", new CloakedItemWithLoomPattern(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_DECAYED_BEDROCK, Items.GUNPOWDER, SpectrumBannerPatterns.BEDROCK_DUST), InkColors.BLACK)));
+	public static final Item VEGETAL = register(simple(burnable(item("vegetal", new CloakedItemWithLoomPattern(IS.of(), SpectrumAdvancements.CRAFT_BOTTLE_OF_FADING, GUNPOWDER, SpectrumBannerPatterns.VEGETAL), InkColors.LIME), 800)));
+	public static final Item NEOLITH = register(simple(item("neolith", new CloakedItemWithLoomPattern(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.CRAFT_BOTTLE_OF_FAILING, GUNPOWDER, SpectrumBannerPatterns.NEOLITH), InkColors.PINK)));
+	public static final Item BEDROCK_DUST = register(simple(item("bedrock_dust", new CloakedItemWithLoomPattern(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_DECAYED_BEDROCK, GUNPOWDER, SpectrumBannerPatterns.BEDROCK_DUST), InkColors.BLACK)));
 	
 	public static final MidnightAberrationItem MIDNIGHT_ABERRATION = register(simple(item("midnight_aberration", new MidnightAberrationItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.CREATE_MIDNIGHT_ABERRATION, SpectrumItems.SPECTRAL_SHARD), InkColors.GRAY)));
-	public static final Item MIDNIGHT_CHIP = register(simple(item("midnight_chip", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.CREATE_MIDNIGHT_ABERRATION, Items.GRAY_DYE), InkColors.GRAY)));
+	public static final Item MIDNIGHT_CHIP = register(simple(item("midnight_chip", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.CREATE_MIDNIGHT_ABERRATION, GRAY_DYE), InkColors.GRAY)));
 	
-	public static final Item BISMUTH_FLAKE = register(simple(item("bismuth_flake", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.ENTER_DIMENSION, Items.CYAN_DYE), InkColors.CYAN)));
-	public static final Item BISMUTH_CRYSTAL = register(simple(item("bismuth_crystal", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.ENTER_DIMENSION, Items.CYAN_DYE), InkColors.CYAN)));
-	public static final Item RAW_MALACHITE = register(simple(item("raw_malachite", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, Items.GREEN_DYE), InkColors.GREEN)));
-	public static final Item PURE_MALACHITE = register(simple(item("pure_malachite", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, Items.GREEN_DYE), InkColors.GREEN)));
+	public static final Item BISMUTH_FLAKE = register(simple(item("bismuth_flake", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.ENTER_DIMENSION, CYAN_DYE), InkColors.CYAN)));
+	public static final Item BISMUTH_CRYSTAL = register(simple(item("bismuth_crystal", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.ENTER_DIMENSION, CYAN_DYE), InkColors.CYAN)));
+	public static final Item RAW_MALACHITE = register(simple(item("raw_malachite", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, GREEN_DYE), InkColors.GREEN)));
+	public static final Item PURE_MALACHITE = register(simple(item("pure_malachite", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, GREEN_DYE), InkColors.GREEN)));
 	
 	// Fluid Buckets
-	public static final Item LIQUID_CRYSTAL_BUCKET = register(simple(item("liquid_crystal_bucket", new BucketItem(SpectrumFluids.LIQUID_CRYSTAL, IS.of(1).recipeRemainder(Items.BUCKET)), InkColors.LIGHT_GRAY)));
-	public static final Item GOO_BUCKET = register(simple(item("goo_bucket", new BucketItem(SpectrumFluids.GOO, IS.of(1).recipeRemainder(Items.BUCKET)), InkColors.BROWN)));
-	public static final Item MIDNIGHT_SOLUTION_BUCKET = register(simple(item("midnight_solution_bucket", new BucketItem(SpectrumFluids.MIDNIGHT_SOLUTION, IS.of(1).recipeRemainder(Items.BUCKET)), InkColors.GRAY)));
-	public static final Item DRAGONROT_BUCKET = register(simple(item("dragonrot_bucket", new BucketItem(SpectrumFluids.DRAGONROT, IS.of(1).recipeRemainder(Items.BUCKET)), InkColors.LIGHT_GRAY)));
+	public static final Item LIQUID_CRYSTAL_BUCKET = register(simple(item("liquid_crystal_bucket", new BucketItem(SpectrumFluids.LIQUID_CRYSTAL, IS.of(1).recipeRemainder(BUCKET)), InkColors.LIGHT_GRAY)));
+	public static final Item GOO_BUCKET = register(simple(item("goo_bucket", new BucketItem(SpectrumFluids.GOO, IS.of(1).recipeRemainder(BUCKET)), InkColors.BROWN)));
+	public static final Item MIDNIGHT_SOLUTION_BUCKET = register(simple(item("midnight_solution_bucket", new BucketItem(SpectrumFluids.MIDNIGHT_SOLUTION, IS.of(1).recipeRemainder(BUCKET)), InkColors.GRAY)));
+	public static final Item DRAGONROT_BUCKET = register(simple(item("dragonrot_bucket", new BucketItem(SpectrumFluids.DRAGONROT, IS.of(1).recipeRemainder(BUCKET)), InkColors.LIGHT_GRAY)));
 	
 	// Decay bottles
 	public static final Item BOTTLE_OF_FADING = register(simple(item("bottle_of_fading", new DecayPlacerItem(SpectrumBlocks.FADING, IS.of(16), List.of(Text.translatable("item.spectrum.bottle_of_fading.tooltip"))), InkColors.GRAY)));
@@ -237,37 +239,37 @@ public class SpectrumItems {
 	public static final Item BOTTLE_OF_DECAY_AWAY = register(simple(item("bottle_of_decay_away", new DecayPlacerItem(SpectrumBlocks.DECAY_AWAY, IS.of(16), List.of(Text.translatable("item.spectrum.bottle_of_decay_away.tooltip"))), InkColors.PINK)));
 	
 	// Resources
-	public static final Item SHIMMERSTONE_GEM = register(simple(item("shimmerstone_gem", new CloakedItemWithLoomPattern(IS.of(), ((RevelationAware) SpectrumBlocks.SHIMMERSTONE_ORE).getCloakAdvancementIdentifier(), Items.YELLOW_DYE, SpectrumBannerPatterns.SHIMMERSTONE), InkColors.YELLOW)));
-	public static final Item RAW_AZURITE = register(simple(item("raw_azurite", new CloakedItemWithLoomPattern(IS.of(), SpectrumBlocks.AZURITE_ORE.getCloakAdvancementIdentifier(), Items.BLUE_DYE, SpectrumBannerPatterns.RAW_AZURITE), InkColors.BLUE)));
-	public static final Item PURE_AZURITE = register(simple(item("pure_azurite", new CloakedItem(IS.of(), SpectrumBlocks.AZURITE_ORE.getCloakAdvancementIdentifier(), Items.BLUE_DYE), InkColors.BLUE)));
-	public static final CloakedFloatItem PALTAERIA_FRAGMENTS = register(simple(item("paltaeria_fragments", new CloakedFloatItem(IS.of(), 0.00125F, ((RevelationAware) SpectrumBlocks.PALTAERIA_ORE).getCloakAdvancementIdentifier(), Items.CYAN_DYE), InkColors.LIGHT_BLUE)));
-	public static final CloakedFloatItem PALTAERIA_GEM = register(simple(item("paltaeria_gem", new CloakedFloatItem(IS.of(16), 0.01F, ((RevelationAware) SpectrumBlocks.PALTAERIA_ORE).getCloakAdvancementIdentifier(), Items.CYAN_DYE), InkColors.LIGHT_BLUE)));
-	public static final CloakedFloatItem STRATINE_FRAGMENTS = register(simple(item("stratine_fragments", new CloakedFloatItem(IS.of().fireproof(), -0.00125F, ((RevelationAware) SpectrumBlocks.STRATINE_ORE).getCloakAdvancementIdentifier(), Items.RED_DYE), InkColors.RED)));
-	public static final CloakedFloatItem STRATINE_GEM = register(simple(item("stratine_gem", new CloakedFloatItem(IS.of(16).fireproof(), -0.01F, ((RevelationAware) SpectrumBlocks.STRATINE_ORE).getCloakAdvancementIdentifier(), Items.RED_DYE), InkColors.RED)));
+	public static final Item SHIMMERSTONE_GEM = register(simple(item("shimmerstone_gem", new CloakedItemWithLoomPattern(IS.of(), ((RevelationAware) SpectrumBlocks.SHIMMERSTONE_ORE).getCloakAdvancementIdentifier(), YELLOW_DYE, SpectrumBannerPatterns.SHIMMERSTONE), InkColors.YELLOW)));
+	public static final Item RAW_AZURITE = register(simple(item("raw_azurite", new CloakedItemWithLoomPattern(IS.of(), SpectrumBlocks.AZURITE_ORE.getCloakAdvancementIdentifier(), BLUE_DYE, SpectrumBannerPatterns.RAW_AZURITE), InkColors.BLUE)));
+	public static final Item PURE_AZURITE = register(simple(item("pure_azurite", new CloakedItem(IS.of(), SpectrumBlocks.AZURITE_ORE.getCloakAdvancementIdentifier(), BLUE_DYE), InkColors.BLUE)));
+	public static final CloakedFloatItem PALTAERIA_FRAGMENTS = register(simple(item("paltaeria_fragments", new CloakedFloatItem(IS.of(), 0.00125F, ((RevelationAware) SpectrumBlocks.PALTAERIA_ORE).getCloakAdvancementIdentifier(), CYAN_DYE), InkColors.LIGHT_BLUE)));
+	public static final CloakedFloatItem PALTAERIA_GEM = register(simple(item("paltaeria_gem", new CloakedFloatItem(IS.of(16), 0.01F, ((RevelationAware) SpectrumBlocks.PALTAERIA_ORE).getCloakAdvancementIdentifier(), CYAN_DYE), InkColors.LIGHT_BLUE)));
+	public static final CloakedFloatItem STRATINE_FRAGMENTS = register(simple(item("stratine_fragments", new CloakedFloatItem(IS.of().fireproof(), -0.00125F, ((RevelationAware) SpectrumBlocks.STRATINE_ORE).getCloakAdvancementIdentifier(), RED_DYE), InkColors.RED)));
+	public static final CloakedFloatItem STRATINE_GEM = register(simple(item("stratine_gem", new CloakedFloatItem(IS.of(16).fireproof(), -0.01F, ((RevelationAware) SpectrumBlocks.STRATINE_ORE).getCloakAdvancementIdentifier(), RED_DYE), InkColors.RED)));
 	public static final Item PYRITE_CHUNK = register(simple(item("pyrite_chunk", new Item(IS.of()), InkColors.PURPLE)));
-	public static final Item DRAGONBONE_CHUNK = register(simple(item("dragonbone_chunk", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_CRACKED_DRAGONBONE, Items.GRAY_DYE), InkColors.GRAY)));
-	public static final Item BONE_ASH = register(simple(item("bone_ash", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_CRACKED_DRAGONBONE, Items.GRAY_DYE), InkColors.GRAY)));
-	public static final Item RESPLENDENT_FEATHER = registerDeferredWithUniqueModel("resplendent_feather", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE), InkColors.YELLOW);
-	public static final Item RAW_BLOODSTONE = register(simple(item("raw_bloodstone", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE), InkColors.RED)));
-	public static final Item PURE_BLOODSTONE = register(simple(item("pure_bloodstone", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, Items.RED_DYE), InkColors.RED)));
-	public static final Item DOWNSTONE_FRAGMENTS = register(simple(item("downstone_fragments", new CloakedItem(IS.of(16, Rarity.UNCOMMON), SpectrumAdvancements.FIND_EXCAVATION_SITE, Items.LIGHT_GRAY_DYE), InkColors.LIGHT_GRAY)));
-	public static final Item RESONANCE_SHARD = register(simple(item("resonance_shard", new CloakedItem(IS.of(16, Rarity.UNCOMMON), SpectrumAdvancements.STRIKE_UP_HUMMINGSTONE_HYMN, Items.LIGHT_BLUE_DYE), InkColors.WHITE)));
+	public static final Item DRAGONBONE_CHUNK = register(simple(item("dragonbone_chunk", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_CRACKED_DRAGONBONE, GRAY_DYE), InkColors.GRAY)));
+	public static final Item BONE_ASH = register(simple(item("bone_ash", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.BREAK_CRACKED_DRAGONBONE, GRAY_DYE), InkColors.GRAY)));
+	public static final Item RESPLENDENT_FEATHER = register(simple(item("resplendent_feather", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, RED_DYE), InkColors.YELLOW)));
+	public static final Item RAW_BLOODSTONE = register(simple(item("raw_bloodstone", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, RED_DYE), InkColors.RED)));
+	public static final Item PURE_BLOODSTONE = register(simple(item("pure_bloodstone", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.PLUCK_RESPLENDENT_FEATHER, RED_DYE), InkColors.RED)));
+	public static final Item DOWNSTONE_FRAGMENTS = register(simple(item("downstone_fragments", new CloakedItem(IS.of(16, Rarity.UNCOMMON), SpectrumAdvancements.FIND_EXCAVATION_SITE, LIGHT_GRAY_DYE), InkColors.LIGHT_GRAY)));
+	public static final Item RESONANCE_SHARD = register(simple(item("resonance_shard", new CloakedItem(IS.of(16, Rarity.UNCOMMON), SpectrumAdvancements.STRIKE_UP_HUMMINGSTONE_HYMN, LIGHT_BLUE_DYE), InkColors.WHITE)));
 	public static final Item AETHER_VESTIGES = register(simple(item("aether_vestiges", new AetherVestigesItem(IS.of(1, Rarity.EPIC).fireproof(), "item.spectrum.aether_vestiges.tooltip"), InkColors.WHITE)));
 	
-	public static final Item QUITOXIC_POWDER = register(simple(item("quitoxic_powder", new CloakedItem(IS.of(), SpectrumAdvancements.REVEAL_QUITOXIC_REEDS, Items.PURPLE_DYE), InkColors.PURPLE)));
-	public static final Item STORM_STONE = register(simple(item("mermaids_gem", new StormStoneItem(IS.of(), SpectrumAdvancements.REVEAL_STORM_STONES, Items.YELLOW_DYE), InkColors.LIGHT_BLUE)));
+	public static final Item QUITOXIC_POWDER = register(simple(item("quitoxic_powder", new CloakedItem(IS.of(), SpectrumAdvancements.REVEAL_QUITOXIC_REEDS, PURPLE_DYE), InkColors.PURPLE)));
+	public static final Item STORM_STONE = register(simple(item("mermaids_gem", new StormStoneItem(IS.of(), SpectrumAdvancements.REVEAL_STORM_STONES, YELLOW_DYE), InkColors.LIGHT_BLUE)));
 	public static final Item MERMAIDS_GEM = register(simple(item("storm_stone", new MermaidsGemItem(SpectrumBlocks.MERMAIDS_BRUSH, IS.of()), InkColors.YELLOW)));
-	public static final CloakedItem STAR_FRAGMENT = register(simple(item("star_fragment", new CloakedItem(IS.of(16), SpectrumAdvancements.UNLOCK_SHOOTING_STARS, Items.PURPLE_DYE), InkColors.PURPLE)));
-	public static final Item STARDUST = register(simple(item("stardust", new CloakedItemWithLoomPattern(IS.of(), SpectrumAdvancements.UNLOCK_SHOOTING_STARS, Items.PURPLE_DYE, SpectrumBannerPatterns.SHIMMER), InkColors.PURPLE)));
+	public static final CloakedItem STAR_FRAGMENT = register(simple(item("star_fragment", new CloakedItem(IS.of(16), SpectrumAdvancements.UNLOCK_SHOOTING_STARS, PURPLE_DYE), InkColors.PURPLE)));
+	public static final Item STARDUST = register(simple(item("stardust", new CloakedItemWithLoomPattern(IS.of(), SpectrumAdvancements.UNLOCK_SHOOTING_STARS, PURPLE_DYE, SpectrumBannerPatterns.SHIMMER), InkColors.PURPLE)));
 	public static final Item ASH_FLAKES = register(simple(item("ash_flakes", new AshItem(IS.of()), InkColors.LIGHT_GRAY)));
 	
 	public static final Item HIBERNATING_JADE_VINE_BULB = register(simple(item("hibernating_jade_vine_bulb", new ItemWithTooltip(IS.of(16), "item.spectrum.hibernating_jade_vine_bulb.tooltip"), InkColors.GRAY)));
-	public static final Item GERMINATED_JADE_VINE_BULB = register(simple(item("germinated_jade_vine_bulb", new GerminatedJadeVineBulbItem(IS.of(16), SpectrumAdvancements.COLLECT_HIBERNATING_JADE_VINE_BULB, Items.LIME_DYE), InkColors.LIME)));
-	public static final Item JADE_VINE_PETALS = register(simple(item("jade_vine_petals", new CloakedItemWithLoomPattern(IS.of(), SpectrumAdvancements.BUILD_SPIRIT_INSTILLER_STRUCTURE, Items.LIME_DYE, SpectrumBannerPatterns.JADE_VINE), InkColors.LIME))); // TODO: Funky unlock?
+	public static final Item GERMINATED_JADE_VINE_BULB = register(simple(item("germinated_jade_vine_bulb", new GerminatedJadeVineBulbItem(IS.of(16), SpectrumAdvancements.COLLECT_HIBERNATING_JADE_VINE_BULB, LIME_DYE), InkColors.LIME)));
+	public static final Item JADE_VINE_PETALS = register(simple(item("jade_vine_petals", new CloakedItemWithLoomPattern(IS.of(), SpectrumAdvancements.BUILD_SPIRIT_INSTILLER_STRUCTURE, LIME_DYE, SpectrumBannerPatterns.JADE_VINE), InkColors.LIME))); // TODO: Funky unlock?
 	
 	public static final Item JADEITE_PETALS = register(simple(item("jadeite_petals", new Item(IS.of(Rarity.UNCOMMON)), InkColors.BROWN)));
 	
-	public static final Item BLOOD_ORCHID_PETAL = register(simple(item("blood_orchid_petal", new CloakedItem(IS.of(), SpectrumAdvancements.REVEAL_BLOOD_ORCHID_PETALS, Items.RED_DYE), InkColors.RED)));
+	public static final Item BLOOD_ORCHID_PETAL = register(simple(item("blood_orchid_petal", new CloakedItem(IS.of(), SpectrumAdvancements.REVEAL_BLOOD_ORCHID_PETALS, RED_DYE), InkColors.RED)));
 	
 	public static final Item ROCK_CANDY = register(simple(item("rock_candy", new RockCandyItem(IS.of().food(SpectrumFoodComponents.ROCK_CANDY), RockCandy.RockCandyVariant.SUGAR), InkColors.PINK)));
 	public static final Item TOPAZ_ROCK_CANDY = register(simple(item("topaz_rock_candy", new RockCandyItem(IS.of().food(SpectrumFoodComponents.TOPAZ_ROCK_CANDY), RockCandy.RockCandyVariant.TOPAZ), InkColors.CYAN)));
@@ -276,17 +278,17 @@ public class SpectrumItems {
 	public static final Item ONYX_ROCK_CANDY = register(simple(item("onyx_rock_candy", new RockCandyItem(IS.of().food(SpectrumFoodComponents.ONYX_ROCK_CANDY), RockCandy.RockCandyVariant.ONYX), InkColors.BLACK)));
 	public static final Item MOONSTONE_ROCK_CANDY = register(simple(item("moonstone_rock_candy", new RockCandyItem(IS.of().food(SpectrumFoodComponents.MOONSTONE_ROCK_CANDY), RockCandy.RockCandyVariant.MOONSTONE), InkColors.WHITE)));
 	
-	public static final Item BLOODBOIL_SYRUP = register(simple(item("bloodboil_syrup", new DrinkItem(IS.of().food(SpectrumFoodComponents.BLOODBOIL_SYRUP).recipeRemainder(Items.GLASS_BOTTLE)), InkColors.RED)));
+	public static final Item BLOODBOIL_SYRUP = register(simple(item("bloodboil_syrup", new DrinkItem(IS.of().food(SpectrumFoodComponents.BLOODBOIL_SYRUP).recipeRemainder(GLASS_BOTTLE)), InkColors.RED)));
 	public static final Item MILKY_RESIN = register(simple(item("milky_resin", new Item(IS.of(Rarity.UNCOMMON)), InkColors.LIGHT_GRAY)));
 	
 	// Food & drinks
-	public static final Item MOONSTRUCK_NECTAR = register(simple(item("moonstruck_nectar", new MoonstruckNectarItem(IS.of(Rarity.UNCOMMON).food(SpectrumFoodComponents.MOONSTRUCK_NECTAR).recipeRemainder(Items.GLASS_BOTTLE)), InkColors.LIME)));
+	public static final Item MOONSTRUCK_NECTAR = register(simple(item("moonstruck_nectar", new MoonstruckNectarItem(IS.of(Rarity.UNCOMMON).food(SpectrumFoodComponents.MOONSTRUCK_NECTAR).recipeRemainder(GLASS_BOTTLE)), InkColors.LIME)));
 	public static final Item JADE_JELLY = register(simple(item("jade_jelly", new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.JADE_JELLY), "item.spectrum.jade_jelly.tooltip"), InkColors.LIME)));
 	public static final Item GLASS_PEACH = register(simple(item("glass_peach", new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.GLASS_PEACH), "item.spectrum.glass_peach.tooltip"), InkColors.PINK)));
 	public static final Item FISSURE_PLUM = register(simple(item("fissure_plum", new AliasedTooltipItem(SpectrumBlocks.ABYSSAL_VINES, IS.of().food(SpectrumFoodComponents.FISSURE_PLUM), "item.spectrum.fissure_plum.tooltip"), InkColors.BROWN)));
 	public static final Item NIGHTDEW_SPROUT = register(simple(item("nightdew_sprout", new AliasedTooltipItem(SpectrumBlocks.NIGHTDEW, IS.of().food(SpectrumFoodComponents.NIGHTDEW_SPROUT), "item.spectrum.nightdew_sprout.tooltip"), InkColors.PURPLE)));
 	public static final Item NECTARDEW_BURGEON = register(simple(item("nectardew_burgeon", new NectardewBurgeonItem(IS.of().food(SpectrumFoodComponents.NECTARDEW_BURGEON), "item.spectrum.nectardew_burgeon.tooltip", SpectrumAdvancements.COLLECT_NECTARDEW, SpectrumItems.NIGHTDEW_SPROUT), InkColors.PURPLE)));
-	public static final Item RESTORATION_TEA = register(simple(item("restoration_tea", new RestorationTeaItem(IS.of(16).food(SpectrumFoodComponents.RESTORATION_TEA).recipeRemainder(Items.GLASS_BOTTLE).component(SpectrumDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(SpectrumFoodComponents.RESTORATION_TEA_SCONE_BONUS))), InkColors.PINK)));
+	public static final Item RESTORATION_TEA = register(simple(item("restoration_tea", new RestorationTeaItem(IS.of(16).food(SpectrumFoodComponents.RESTORATION_TEA).recipeRemainder(GLASS_BOTTLE).component(SpectrumDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(SpectrumFoodComponents.RESTORATION_TEA_SCONE_BONUS))), InkColors.PINK)));
 	public static final Item KIMCHI = register(simple(item("kimchi", new KimchiItem(IS.of().food(SpectrumFoodComponents.KIMCHI)), InkColors.PINK)));
 	public static final Item CLOTTED_CREAM = register(simple(item("clotted_cream", new ClottedCreamItem(IS.of().food(SpectrumFoodComponents.CLOTTED_CREAM), new String[]{"item.spectrum.clotted_cream.tooltip", "item.spectrum.clotted_cream.tooltip2"}), InkColors.PINK)));
 	public static final Item FRESH_CHOCOLATE = register(simple(item("fresh_chocolate", new Item(IS.of().food(SpectrumFoodComponents.FRESH_CHOCOLATE)), InkColors.PINK)));
@@ -297,32 +299,32 @@ public class SpectrumItems {
 	public static final Item DEMON_TEA = register(simple(item("demon_tea", new DrinkItem(IS.of(16).food(SpectrumFoodComponents.DEMON_TEA).component(SpectrumDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(SpectrumFoodComponents.DEMON_TEA_SCONE_BONUS))), InkColors.RED)));
 	public static final Item SCONE = register(simple(item("scone", new Item(IS.of().food(SpectrumFoodComponents.SCONE)), InkColors.PINK)));
 	
-	public static final Item CHEONG = registerDeferredWithUniqueModel("cheong", new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.CHEONG), "item.spectrum.cheong.tooltip"), InkColors.PINK);
+	public static final Item CHEONG = register(layered(item("cheong", new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.CHEONG), "item.spectrum.cheong.tooltip"), InkColors.PINK), "", "_overlay", "_cap"));
 	public static final Item MERMAIDS_JAM = register(simple(item("mermaids_jam", new Item(IS.of().food(SpectrumFoodComponents.MERMAIDS_JAM)), InkColors.PINK)));
 	public static final Item MERMAIDS_POPCORN = register(simple(item("mermaids_popcorn", new ItemWithTooltip(IS.of().food(SpectrumFoodComponents.MERMAIDS_POPCORN), "item.spectrum.mermaids_popcorn.tooltip"), InkColors.PINK)));
 	public static final Item LE_FISHE_AU_CHOCOLAT = register(simple(item("le_fishe_au_chocolat", new Item(IS.of().food(SpectrumFoodComponents.LE_FISHE_AU_CHOCOLAT)), InkColors.PINK)));
-	//public static final Item STUFFED_PETALS = register(simple(item("stuffed_petals", new Item(IS.of().food(SpectrumFoodComponents.STUFFED_PETALS)), InkColors.PINK)));
-	//public static final Item PASTICHE = register(simple(item("pastiche", new Item(IS.of().food(SpectrumFoodComponents.PASTICHE)), InkColors.PINK)));
-	//public static final Item VITTORIAS_ROAST = register(simple(item("vittorias_roast", new Item(IS.of().food(SpectrumFoodComponents.VITTORIAS_ROAST)), InkColors.PINK)));
+//	public static final Item STUFFED_PETALS = register(simple(item("stuffed_petals", new Item(IS.of().food(SpectrumFoodComponents.STUFFED_PETALS)), InkColors.PINK)));
+//	public static final Item PASTICHE = register(simple(item("pastiche", new Item(IS.of().food(SpectrumFoodComponents.PASTICHE)), InkColors.PINK)));
+//	public static final Item VITTORIAS_ROAST = register(simple(item("vittorias_roast", new Item(IS.of().food(SpectrumFoodComponents.VITTORIAS_ROAST)), InkColors.PINK)));
 	
-	public static final Item INFUSED_BEVERAGE = registerDeferredWithUniqueModel("infused_beverage", new BeverageItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(Items.GLASS_BOTTLE).component(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT).component(SpectrumDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT)), InkColors.PINK);
-	public static final Item SUSPICIOUS_BREW = register(simple(item("suspicious_brew", new SuspiciousBrewItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(Items.GLASS_BOTTLE)), InkColors.LIME)));
-	public static final Item REPRISE = register(simple(item("reprise", new RepriseItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(Items.GLASS_BOTTLE)), InkColors.PINK)));
-	public static final Item PURE_ALCOHOL = register(simple(burnable(item("pure_alcohol", new DrinkItem(IS.of(16, Rarity.UNCOMMON).food(SpectrumFoodComponents.PURE_ALCOHOL).recipeRemainder(Items.GLASS_BOTTLE)), InkColors.WHITE), 16000)));
-	public static final Item JADE_WINE = register(simple(item("jade_wine", new JadeWineItem(IS.of(16, Rarity.UNCOMMON).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(Items.GLASS_BOTTLE)), InkColors.LIME)));
-	public static final Item CHRYSOCOLLA = register(simple(burnable(item("chrysocolla", new DrinkItem(IS.of(16, Rarity.UNCOMMON).food(SpectrumFoodComponents.PURE_ALCOHOL).recipeRemainder(Items.GLASS_BOTTLE)), InkColors.LIME), 16000)));
+	public static final Item INFUSED_BEVERAGE = register(layered(item("infused_beverage", new BeverageItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(GLASS_BOTTLE).component(DataComponentTypes.POTION_CONTENTS, PotionContentsComponent.DEFAULT).component(SpectrumDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT)), InkColors.PINK), "", "_highlight"));
+	public static final Item SUSPICIOUS_BREW = register(simple(item("suspicious_brew", new SuspiciousBrewItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(GLASS_BOTTLE)), InkColors.LIME)));
+	public static final Item REPRISE = register(simple(item("reprise", new RepriseItem(IS.of(16).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(GLASS_BOTTLE)), InkColors.PINK)));
+	public static final Item PURE_ALCOHOL = register(simple(burnable(item("pure_alcohol", new DrinkItem(IS.of(16, Rarity.UNCOMMON).food(SpectrumFoodComponents.PURE_ALCOHOL).recipeRemainder(GLASS_BOTTLE)), InkColors.WHITE), 16000)));
+	public static final Item JADE_WINE = register(simple(item("jade_wine", new JadeWineItem(IS.of(16, Rarity.UNCOMMON).food(SpectrumFoodComponents.BEVERAGE).recipeRemainder(GLASS_BOTTLE)), InkColors.LIME)));
+	public static final Item CHRYSOCOLLA = register(simple(burnable(item("chrysocolla", new DrinkItem(IS.of(16, Rarity.UNCOMMON).food(SpectrumFoodComponents.PURE_ALCOHOL).recipeRemainder(GLASS_BOTTLE)), InkColors.LIME), 16000)));
 	
 	public static final Item HONEY_PASTRY = register(simple(item("honey_pastry", new Item(IS.of().food(SpectrumFoodComponents.HONEY_PASTRY)), InkColors.PINK)));
 	public static final Item LUCKY_ROLL = register(simple(item("lucky_roll", new Item(IS.of(16).food(SpectrumFoodComponents.LUCKY_ROLL)), InkColors.PINK)));
 	public static final Item TRIPLE_MEAT_POT_PIE = register(simple(item("triple_meat_pot_pie", new Item(IS.of(8).food(SpectrumFoodComponents.TRIPLE_MEAT_POT_PIE)), InkColors.PINK)));
-	public static final Item GLISTERING_JELLY_TEA = register(simple(item("glistering_jelly_tea", new DrinkItem(IS.of(16).food(SpectrumFoodComponents.GLISTERING_JELLY_TEA).recipeRemainder(Items.GLASS_BOTTLE).component(SpectrumDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(SpectrumFoodComponents.GLISTERING_JELLY_TEA_SCONE_BONUS))), InkColors.PINK)));
-	public static final Item FREIGEIST = register(simple(item("freigeist", new FreigeistItem(IS.of(16).food(SpectrumFoodComponents.FREIGEIST).recipeRemainder(Items.GLASS_BOTTLE)), InkColors.RED)));
+	public static final Item GLISTERING_JELLY_TEA = register(simple(item("glistering_jelly_tea", new DrinkItem(IS.of(16).food(SpectrumFoodComponents.GLISTERING_JELLY_TEA).recipeRemainder(GLASS_BOTTLE).component(SpectrumDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(SpectrumFoodComponents.GLISTERING_JELLY_TEA_SCONE_BONUS))), InkColors.PINK)));
+	public static final Item FREIGEIST = register(simple(item("freigeist", new FreigeistItem(IS.of(16).food(SpectrumFoodComponents.FREIGEIST).recipeRemainder(GLASS_BOTTLE)), InkColors.RED)));
 	public static final Item DIVINATION_HEART = register(simple(item("divination_heart", new Item(IS.of().food(SpectrumFoodComponents.DIVINATION_HEART)), InkColors.RED)));
 	
 	public static final Item STAR_CANDY = register(simple(item("star_candy", new StarCandyItem(IS.of(Rarity.UNCOMMON).food(SpectrumFoodComponents.STAR_CANDY)), InkColors.PINK)));
 	public static final Item ENCHANTED_STAR_CANDY = register(simple(item("enchanted_star_candy", new EnchantedStarCandyItem(IS.of(Rarity.UNCOMMON).food(SpectrumFoodComponents.ENCHANTED_STAR_CANDY)), InkColors.PINK)));
 	
-	public static final Item ENCHANTED_GOLDEN_CARROT = registerDeferredWithUniqueModel("enchanted_golden_carrot", new ItemWithGlint(IS.of(Rarity.EPIC).food(SpectrumFoodComponents.ENCHANTED_GOLDEN_CARROT)), InkColors.PINK);
+	public static final Item ENCHANTED_GOLDEN_CARROT = register(parented(item("enchanted_golden_carrot", new ItemWithGlint(IS.of(Rarity.EPIC).food(SpectrumFoodComponents.ENCHANTED_GOLDEN_CARROT)), InkColors.PINK), GOLDEN_CARROT));
 	public static final Item JARAMEL = register(simple(item("jaramel", new Item(IS.of().food(SpectrumFoodComponents.JARAMEL)), InkColors.PINK)));
 	
 	public static final Item JARAMEL_TART = register(simple(item("jaramel_tart", new Item(IS.of().food(SpectrumFoodComponents.JARAMEL_TART)), InkColors.PINK)));
@@ -337,7 +339,7 @@ public class SpectrumItems {
 	public static final Item MONSTER_TRIFLE = register(simple(item("monster_trifle", new Item(IS.of().food(SpectrumFoodComponents.MONSTER_TRIFLE)), InkColors.PINK)));
 	public static final Item DEMON_TRIFLE = register(simple(item("demon_trifle", new Item(IS.of().food(SpectrumFoodComponents.DEMON_TRIFLE)), InkColors.PINK)));
 	
-	public static final Item MYCEYLON = register(simple(item("myceylon", new CloakedItem(IS.of(), SpectrumAdvancements.COLLECT_MYCEYLON, Items.ORANGE_DYE), InkColors.PINK)));
+	public static final Item MYCEYLON = register(simple(item("myceylon", new CloakedItem(IS.of(), SpectrumAdvancements.COLLECT_MYCEYLON, ORANGE_DYE), InkColors.PINK)));
 	public static final Item MYCEYLON_APPLE_PIE = register(simple(item("myceylon_apple_pie", new Item(IS.of().food(SpectrumFoodComponents.MYCEYLON_APPLE_PIE)), InkColors.PINK)));
 	public static final Item MYCEYLON_PUMPKIN_PIE = register(simple(item("myceylon_pumpkin_pie", new Item(IS.of().food(SpectrumFoodComponents.MYCEYLON_PUMPKIN_PIE)), InkColors.PINK)));
 	public static final Item MYCEYLON_COOKIE = register(simple(item("myceylon_cookie", new Item(IS.of().food(SpectrumFoodComponents.MYCEYLON_COOKIE)), InkColors.PINK)));
@@ -389,47 +391,47 @@ public class SpectrumItems {
 	public static final Item SEDATIVES = register(simple(item("sedatives", new SedativesItem(IS.of().food(SpectrumFoodComponents.SEDATIVES), "item.spectrum.sedatives.tooltip"), InkColors.PINK)));
 	public static final Item SLUSHSLIDE = register(simple(item("slushslide", new DrinkItem(IS.of(16).food(SpectrumFoodComponents.SLUSHSLIDE), "item.spectrum.slushslide.tooltip"), InkColors.PINK)));
 	public static final Item SURSTROMMING = register(simple(item("surstromming", new Item(IS.of().food(SpectrumFoodComponents.SURSTROMMING)), InkColors.PINK)));
-	public static final Item EVERNECTAR = register(simple(item("evernectar", new EvernectarItem(IS.of(1, Rarity.EPIC).food(SpectrumFoodComponents.EVERNECTAR).recipeRemainder(Items.GLASS_BOTTLE), "item.spectrum.evernectar.tooltip"), InkColors.LIME)));
+	public static final Item EVERNECTAR = register(simple(item("evernectar", new EvernectarItem(IS.of(1, Rarity.EPIC).food(SpectrumFoodComponents.EVERNECTAR).recipeRemainder(GLASS_BOTTLE), "item.spectrum.evernectar.tooltip"), InkColors.LIME)));
 	
 	// Banner Patterns
-	public static final Item LOGO_BANNER_PATTERN = registerDeferredWithUniqueModel("logo_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.SPECTRUM_LOGO_TAG, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE);
-	public static final Item AMETHYST_SHARD_BANNER_PATTERN = registerDeferredWithUniqueModel("amethyst_shard_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.AMETHYST_SHARD_TAG, IS.of(1)), InkColors.LIGHT_BLUE);
-	public static final Item AMETHYST_CLUSTER_BANNER_PATTERN = registerDeferredWithUniqueModel("amethyst_cluster_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.AMETHYST_CLUSTER_TAG, IS.of(1)), InkColors.LIGHT_BLUE);
-	public static final Item ASTROLOGER_BANNER_PATTERN = registerDeferredWithUniqueModel("astrologer_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.ASTROLOGER_TAG, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE);
-	public static final Item VELVET_ASTROLOGER_BANNER_PATTERN = registerDeferredWithUniqueModel("velvet_astrologer_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.VELVET_ASTROLOGER_TAG, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE);
-	public static final Item POISONBLOOM_BANNER_PATTERN = registerDeferredWithUniqueModel("poisonbloom_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.POISONBLOOM_TAG, IS.of(1, Rarity.RARE)), InkColors.LIGHT_BLUE);
-	public static final Item DEEP_LIGHT_BANNER_PATTERN = registerDeferredWithUniqueModel("deep_light_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.DEEP_LIGHT_TAG, IS.of(1, Rarity.RARE)), InkColors.LIGHT_BLUE);
+	public static final Item LOGO_BANNER_PATTERN = register(banner(item("logo_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.SPECTRUM_LOGO_TAG, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE)));
+	public static final Item AMETHYST_SHARD_BANNER_PATTERN = register(banner(item("amethyst_shard_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.AMETHYST_SHARD_TAG, IS.of(1)), InkColors.LIGHT_BLUE)));
+	public static final Item AMETHYST_CLUSTER_BANNER_PATTERN = register(banner(item("amethyst_cluster_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.AMETHYST_CLUSTER_TAG, IS.of(1)), InkColors.LIGHT_BLUE)));
+	public static final Item ASTROLOGER_BANNER_PATTERN = register(banner(item("astrologer_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.ASTROLOGER_TAG, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE)));
+	public static final Item VELVET_ASTROLOGER_BANNER_PATTERN = register(banner(item("velvet_astrologer_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.VELVET_ASTROLOGER_TAG, IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE)));
+	public static final Item POISONBLOOM_BANNER_PATTERN = register(banner(item("poisonbloom_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.POISONBLOOM_TAG, IS.of(1, Rarity.RARE)), InkColors.LIGHT_BLUE)));
+	public static final Item DEEP_LIGHT_BANNER_PATTERN = register(banner(item("deep_light_banner_pattern", new BannerPatternItem(SpectrumBannerPatternTags.DEEP_LIGHT_TAG, IS.of(1, Rarity.RARE)), InkColors.LIGHT_BLUE)));
 	
 	// Spawning items
 	public static final Item BUCKET_OF_ERASER = register(simple(item("bucket_of_eraser", new EmptyFluidEntityBucketItem(SpectrumEntityTypes.ERASER, Fluids.EMPTY, SoundEvents.ITEM_BUCKET_EMPTY, IS.of()), InkColors.PINK)));
-	public static final Item EGG_LAYING_WOOLY_PIG_SPAWN_EGG = registerDeferredWithUniqueModel("egg_laying_wooly_pig_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, 0x3a2c38, 0xfff2e0, IS.of()), InkColors.WHITE);
-	public static final Item PRESERVATION_TURRET_SPAWN_EGG = registerDeferredWithUniqueModel("preservation_turret_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.PRESERVATION_TURRET, 0xf3f6f8, 0xc8c5be, IS.of()), InkColors.WHITE);
-	public static final Item KINDLING_SPAWN_EGG = registerDeferredWithUniqueModel("kindling_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.KINDLING, 0xda4261, 0xffd452, IS.of()), InkColors.WHITE);
-	public static final Item LIZARD_SPAWN_EGG = registerDeferredWithUniqueModel("lizard_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.LIZARD, 0x896459, 0x503a40, IS.of()), InkColors.WHITE);
-	public static final Item ERASER_SPAWN_EGG = registerDeferredWithUniqueModel("eraser_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.ERASER, 0x200d29, 0xc83e93, IS.of()), InkColors.WHITE);
+	public static final Item EGG_LAYING_WOOLY_PIG_SPAWN_EGG = register(parented(item("egg_laying_wooly_pig_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, 0x3a2c38, 0xfff2e0, IS.of()), InkColors.WHITE), SpectrumModels.SPAWN_EGG));
+	public static final Item PRESERVATION_TURRET_SPAWN_EGG = register(parented(item("preservation_turret_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.PRESERVATION_TURRET, 0xf3f6f8, 0xc8c5be, IS.of()), InkColors.WHITE), SpectrumModels.SPAWN_EGG));
+	public static final Item KINDLING_SPAWN_EGG = register(parented(item("kindling_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.KINDLING, 0xda4261, 0xffd452, IS.of()), InkColors.WHITE), SpectrumModels.SPAWN_EGG));
+	public static final Item LIZARD_SPAWN_EGG = register(parented(item("lizard_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.LIZARD, 0x896459, 0x503a40, IS.of()), InkColors.WHITE), SpectrumModels.SPAWN_EGG));
+	public static final Item ERASER_SPAWN_EGG = register(parented(item("eraser_spawn_egg", new SpawnEggItem(SpectrumEntityTypes.ERASER, 0x200d29, 0xc83e93, IS.of()), InkColors.WHITE), SpectrumModels.SPAWN_EGG));
 	
 	// Magical Tools
 	public static final Item BAG_OF_HOLDING = register(simple(item("bag_of_holding", new BagOfHoldingItem(IS.of(1)), InkColors.PURPLE)));
-	public static final Item RADIANCE_STAFF = registerDeferredWithUniqueModel("radiance_staff", new RadianceStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW);
-	public static final NaturesStaffItem NATURES_STAFF = registerDeferredWithUniqueModel("natures_staff", new NaturesStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIME);
-	public static final Item STAFF_OF_REMEMBRANCE = registerDeferredWithUniqueModel("staff_of_remembrance", new StaffOfRemembranceItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIME);
-	public static final Item CONSTRUCTORS_STAFF = registerDeferredWithUniqueModel("constructors_staff", new ConstructorsStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY);
-	public static final Item EXCHANGING_STAFF = registerDeferredWithUniqueModel("exchanging_staff", new ExchangeStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY);
+	public static final Item RADIANCE_STAFF = register(item("radiance_staff", new RadianceStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW));
+	public static final NaturesStaffItem NATURES_STAFF = register(item("natures_staff", new NaturesStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIME));
+	public static final Item STAFF_OF_REMEMBRANCE = register(item("staff_of_remembrance", new StaffOfRemembranceItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIME));
+	public static final Item CONSTRUCTORS_STAFF = register(handheld(item("constructors_staff", new ConstructorsStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY)));
+	public static final Item EXCHANGING_STAFF = register(handheld(item("exchanging_staff", new ExchangeStaffItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY)));
 	public static final Item BLOCK_FLOODER = register(simple(item("block_flooder", new BlockFlooderItem(IS.of(Rarity.UNCOMMON)), InkColors.LIGHT_GRAY)));
-	public static final Item PIPE_BOMB = registerDeferredWithUniqueModel("pipe_bomb", new PipeBombItem(IS.of(1)), InkColors.ORANGE);
-	public static final EnderSpliceItem ENDER_SPLICE = registerDeferredWithUniqueModel("ender_splice", new EnderSpliceItem(IS.of(16, Rarity.UNCOMMON)), InkColors.PURPLE);
+	public static final Item PIPE_BOMB = register(item("pipe_bomb", new PipeBombItem(IS.of(1)), InkColors.ORANGE));
+	public static final EnderSpliceItem ENDER_SPLICE = register(item("ender_splice", new EnderSpliceItem(IS.of(16, Rarity.UNCOMMON)), InkColors.PURPLE));
 	public static final Item PERTURBED_EYE = register(simple(item("perturbed_eye", new PerturbedEyeItem(IS.of(Rarity.UNCOMMON)), InkColors.RED)));
-	public static final Item CRESCENT_CLOCK = registerDeferredWithUniqueModel("crescent_clock", new ItemWithTooltip(IS.of(1), "item.spectrum.crescent_clock.tooltip"), InkColors.MAGENTA);
+	public static final Item CRESCENT_CLOCK = register(item("crescent_clock", new ItemWithTooltip(IS.of(1), "item.spectrum.crescent_clock.tooltip"), InkColors.MAGENTA));
 	public static final Item PRIMORDIAL_LIGHTER = register(simple(item("primordial_lighter", new PrimordialLighterItem(IS.of(1)), InkColors.ORANGE)));
 	
 	public static final Item NIGHT_SALTS = register(simple(item("night_salts", new NightSaltsItem(IS.of(16)), InkColors.PURPLE)));
 	public static final Item SOOTHING_BOUQUET = register(simple(item("soothing_bouquet", new SoothingBouquetItem(IS.of(1, Rarity.RARE)), InkColors.PURPLE)));
-	public static final Item CONCEALING_OILS = registerDeferredWithUniqueModel("concealing_oils", new ConcealingOilsItem(IS.of(1)), InkColors.BLACK);
+	public static final Item CONCEALING_OILS = register(layered(item("concealing_oils", new ConcealingOilsItem(IS.of(1)), InkColors.BLACK), "", "_tint", "_overlay"));
 	public static final Item BITTER_OILS = register(simple(item("bitter_oils", new DrinkItem(IS.of(16).food(SpectrumFoodComponents.BITTER_OILS)), InkColors.BLUE)));
 	
-	public static final Item INCANDESCENT_ESSENCE = register(simple(burnable(item("incandescent_essence", new CloakedItem(IS.of().fireproof(), SpectrumAdvancements.MIDGAME, Items.ORANGE_DYE), InkColors.ORANGE), 2400)));
-	public static final Item FROSTBITE_ESSENCE = register(simple(item("frostbite_essence", new CloakedItem(IS.of(), SpectrumAdvancements.MIDGAME, Items.LIGHT_BLUE_DYE), InkColors.LIGHT_BLUE)));
-	public static final Item MOONSTONE_CORE = register(simple(item("moonstone_core", new CloakedItem(IS.of(16, Rarity.RARE), SpectrumAdvancements.FIND_FORGOTTEN_CITY, Items.WHITE_DYE), InkColors.WHITE)));
+	public static final Item INCANDESCENT_ESSENCE = register(simple(burnable(item("incandescent_essence", new CloakedItem(IS.of().fireproof(), SpectrumAdvancements.MIDGAME, ORANGE_DYE), InkColors.ORANGE), 2400)));
+	public static final Item FROSTBITE_ESSENCE = register(simple(item("frostbite_essence", new CloakedItem(IS.of(), SpectrumAdvancements.MIDGAME, LIGHT_BLUE_DYE), InkColors.LIGHT_BLUE)));
+	public static final Item MOONSTONE_CORE = register(simple(item("moonstone_core", new CloakedItem(IS.of(16, Rarity.RARE), SpectrumAdvancements.FIND_FORGOTTEN_CITY, WHITE_DYE), InkColors.WHITE)));
 	
 	// Music discs
 	public static final Item MUSIC_DISC_DISCOVERY = register(simple(item("music_disc_discovery", new Item(IS.of(1, Rarity.RARE).jukeboxPlayable(SpectrumJukeboxSongs.DISCOVERY)), InkColors.GREEN)));
@@ -441,16 +443,16 @@ public class SpectrumItems {
 	public static final Item GLOW_PHANTOM_FRAME = register(simple(item("glow_phantom_frame", new PhantomGlowFrameItem(SpectrumEntityTypes.GLOW_PHANTOM_FRAME, IS.of()), InkColors.YELLOW)));
 	
 	// Specialty Magical Tools
-	public static final KnowledgeGemItem KNOWLEDGE_GEM = registerDeferredWithUniqueModel("knowledge_gem", new KnowledgeGemItem(IS.of(1, Rarity.UNCOMMON), 10000), InkColors.PURPLE);
+	public static final KnowledgeGemItem KNOWLEDGE_GEM = register(item("knowledge_gem", new KnowledgeGemItem(IS.of(1, Rarity.UNCOMMON), 10000), InkColors.PURPLE));
 	public static final Item CELESTIAL_POCKETWATCH = register(simple(item("celestial_pocketwatch", new CelestialPocketWatchItem(IS.of(1, Rarity.UNCOMMON)), InkColors.MAGENTA)));
 	public static final Item ARTISANS_ATLAS = register(simple(item("artisans_atlas", new ArtisansAtlasItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW)));
 	public static final Item GILDED_BOOK = register(simple(item("gilded_book", new GildedBookItem(IS.of(Rarity.UNCOMMON)), InkColors.PURPLE)));
-	public static final Item ENCHANTMENT_CANVAS = registerDeferredWithUniqueModel("enchantment_canvas", new EnchantmentCanvasItem(IS.of(16, Rarity.UNCOMMON)), InkColors.PURPLE);
+	public static final Item ENCHANTMENT_CANVAS = register(item("enchantment_canvas", new EnchantmentCanvasItem(IS.of(16, Rarity.UNCOMMON)), InkColors.PURPLE));
 	public static final Item EVERPROMISE_RIBBON = register(simple(item("everpromise_ribbon", new EverpromiseRibbonItem(IS.of()), InkColors.PINK)));
 	
 	// Lore
-	public static final Item MYSTERIOUS_LOCKET = registerDeferredWithUniqueModel("mysterious_locket", new MysteriousLocketItem(IS.of(1, Rarity.UNCOMMON)), InkColors.GRAY);
-	public static final Item MYSTERIOUS_COMPASS = registerDeferredWithUniqueModel("mysterious_compass", new MysteriousCompassItem(IS.of(1, Rarity.RARE)), InkColors.GRAY);
+	public static final Item MYSTERIOUS_LOCKET = register(item("mysterious_locket", new MysteriousLocketItem(IS.of(1, Rarity.UNCOMMON)), InkColors.GRAY));
+	public static final Item MYSTERIOUS_COMPASS = register(item("mysterious_compass", new MysteriousCompassItem(IS.of(1, Rarity.RARE)), InkColors.GRAY));
 	
 	// Trinkets
 	public static final Item FANCIFUL_TUFF_RING = register(simple(item("fanciful_tuff_ring", new Item(IS.of(16, Rarity.UNCOMMON)), InkColors.GREEN)));
@@ -479,16 +481,16 @@ public class SpectrumItems {
 	public static final InkDrainTrinketItem LAURELS_OF_SERENITY = register(simple(item("laurels_of_serenity", new LaurelsOfSerenityItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE)));
 	
 	// Ink storage
-	public static final InkFlaskItem INK_FLASK = registerDeferredWithUniqueModel("ink_flask", new InkFlaskItem(IS.of(1), 64 * 64 * 100), InkColors.WHITE); // 64 stacks of pigments (1 pigment => 100 energy)
+	public static final InkFlaskItem INK_FLASK = register(item("ink_flask", new InkFlaskItem(IS.of(1), 64 * 64 * 100), InkColors.WHITE)); // 64 stacks of pigments (1 pigment => 100 energy)
 	public static final InkAssortmentItem INK_ASSORTMENT = register(simple(item("ink_assortment", new InkAssortmentItem(IS.of(1), 64 * 100), InkColors.WHITE)));
 	public static final PigmentPaletteItem PIGMENT_PALETTE = register(simple(item("pigment_palette", new PigmentPaletteItem(IS.of(1, Rarity.UNCOMMON), 64 * 64 * 100), InkColors.WHITE)));
 	public static final ArtistsPaletteItem ARTISTS_PALETTE = register(simple(item("artists_palette", new ArtistsPaletteItem(IS.of(1, Rarity.UNCOMMON), 64 * 64 * 64 * 64 * 100), InkColors.WHITE)));
-	public static final CreativeInkAssortmentItem CREATIVE_INK_ASSORTMENT = registerDeferredWithUniqueModel("creative_ink_assortment", new CreativeInkAssortmentItem(IS.of(1, Rarity.EPIC)), InkColors.WHITE);
+	public static final CreativeInkAssortmentItem CREATIVE_INK_ASSORTMENT = register(parented(item("creative_ink_assortment", new CreativeInkAssortmentItem(IS.of(1, Rarity.EPIC)), InkColors.WHITE), INK_ASSORTMENT));
 	
 	public static final GleamingPinItem GLEAMING_PIN = register(simple(item("gleaming_pin", new GleamingPinItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW)));
-	public static final Item LESSER_POTION_PENDANT = registerDeferredWithUniqueModel("lesser_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 1, CONFIG.MaxLevelForEffectsInLesserPotionPendant - 1, SpectrumAdvancements.UNLOCK_LESSER_POTION_PENDANT), InkColors.PINK);
-	public static final Item GREATER_POTION_PENDANT = registerDeferredWithUniqueModel("greater_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 3, CONFIG.MaxLevelForEffectsInGreaterPotionPendant - 1, SpectrumAdvancements.UNLOCK_GREATER_POTION_PENDANT), InkColors.PINK);
-	public static final Item ASHEN_CIRCLET = registerDeferredWithUniqueModel("ashen_circlet", new AshenCircletItem(IS.of(1, Rarity.UNCOMMON).fireproof()), InkColors.ORANGE);
+	public static final Item LESSER_POTION_PENDANT = register(layered(item("lesser_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 1, CONFIG.MaxLevelForEffectsInLesserPotionPendant - 1, SpectrumAdvancements.UNLOCK_LESSER_POTION_PENDANT), InkColors.PINK), "_base", "_overlay"));
+	public static final Item GREATER_POTION_PENDANT = register(layered(item("greater_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 3, CONFIG.MaxLevelForEffectsInGreaterPotionPendant - 1, SpectrumAdvancements.UNLOCK_GREATER_POTION_PENDANT), InkColors.PINK), "_base", "_overlay_1", "_overlay_2", "_overlay_3"));
+	public static final Item ASHEN_CIRCLET = register(item("ashen_circlet", new AshenCircletItem(IS.of(1, Rarity.UNCOMMON).fireproof()), InkColors.ORANGE));
 	public static final Item WEEPING_CIRCLET = register(simple(item("weeping_circlet", new WeepingCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE)));
 	public static final Item PUFF_CIRCLET = register(simple(item("puff_circlet", new PuffCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
 	public static final Item WHISPY_CIRCLET = register(simple(item("whispy_circlet", new WhispyCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BROWN)));
@@ -513,17 +515,13 @@ public class SpectrumItems {
 	public static final Item PURE_ECHO = register(simple(item("pure_echo", new Item(IS.of()), InkColors.BROWN)));
 	
 	//Technical Items
-	public static final Item CONNECTION_NODE_CRYSTAL = registerDeferredWithUniqueModel("connection_node_crystal", new Item(IS.of()), InkColors.LIGHT_GRAY);
-	public static final Item PROVIDER_NODE_CRYSTAL = registerDeferredWithUniqueModel("provider_node_crystal", new Item(IS.of()), InkColors.MAGENTA);
-	public static final Item SENDER_NODE_CRYSTAL = registerDeferredWithUniqueModel("sender_node_crystal", new Item(IS.of()), InkColors.YELLOW);
-	public static final Item STORAGE_NODE_CRYSTAL = registerDeferredWithUniqueModel("storage_node_crystal", new Item(IS.of()), InkColors.CYAN);
-	public static final Item BUFFER_NODE_CRYSTAL = registerDeferredWithUniqueModel("buffer_node_crystal", new Item(IS.of()), InkColors.GREEN);
-	public static final Item GATHER_NODE_CRYSTAL = registerDeferredWithUniqueModel("gather_node_crystal", new Item(IS.of()), InkColors.BLACK);
-	public static final Item EXTENDED_BUNDLE_ITEM = registerDeferredWithUniqueModel("extended_bundle", new Item(IS.of()), InkColors.BROWN);
-	
-	public static <T extends Item> T registerDeferredWithUniqueModel(String id, T item, InkColor color) {
-		return register(item(id, item, color));
-	}
+	public static final Item CONNECTION_NODE_CRYSTAL = register(item("connection_node_crystal", new Item(IS.of()), InkColors.LIGHT_GRAY));
+	public static final Item PROVIDER_NODE_CRYSTAL = register(item("provider_node_crystal", new Item(IS.of()), InkColors.MAGENTA));
+	public static final Item SENDER_NODE_CRYSTAL = register(item("sender_node_crystal", new Item(IS.of()), InkColors.YELLOW));
+	public static final Item STORAGE_NODE_CRYSTAL = register(item("storage_node_crystal", new Item(IS.of()), InkColors.CYAN));
+	public static final Item BUFFER_NODE_CRYSTAL = register(item("buffer_node_crystal", new Item(IS.of()), InkColors.GREEN));
+	public static final Item GATHER_NODE_CRYSTAL = register(item("gather_node_crystal", new Item(IS.of()), InkColors.BLACK));
+	public static final Item EXTENDED_BUNDLE_ITEM = register(parented(item("extended_bundle", new Item(IS.of()), InkColors.BROWN), BUNDLE));
 	
 	public static <T extends Item> T register(ItemRegistrar<T> registrar) {
 		return registrar.item();
@@ -539,6 +537,34 @@ public class SpectrumItems {
 	
 	public static <T extends Item> ItemRegistrar<T> simple(ItemRegistrar<T> registrar) {
 		return registrar.withItemModel(SpectrumModelProvider::registerItemModel);
+	}
+	
+	public static <T extends Item> ItemRegistrar<T> handheld(ItemRegistrar<T> registrar) {
+		return registrar.withItemModel((ctx, item) -> registerItemModel(ctx, item, Models.HANDHELD));
+	}
+	
+	public static <T extends Item> ItemRegistrar<T> layered(ItemRegistrar<T> registrar, String suffix0, String suffix1) {
+		return registrar.withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, Models.GENERATED_TWO_LAYERS, suffix0, suffix1));
+	}
+	
+	public static <T extends Item> ItemRegistrar<T> layered(ItemRegistrar<T> registrar, String suffix0, String suffix1, String suffix2) {
+		return registrar.withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, Models.GENERATED_THREE_LAYERS, suffix0, suffix1, suffix2));
+	}
+	
+	public static <T extends Item> ItemRegistrar<T> layered(ItemRegistrar<T> registrar, String suffix0, String suffix1, String suffix2, String suffix3) {
+		return registrar.withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, SpectrumModels.GENERATED_FOUR_LAYERS, suffix0, suffix1, suffix2, suffix3));
+	}
+	
+	public static <T extends Item> ItemRegistrar<T> parented(ItemRegistrar<T> registrar, Item parent) {
+		return registrar.withItemModel((ctx, item) -> registerParentedItemModel(ctx, item, parent));
+	}
+	
+	public static <T extends Item> ItemRegistrar<T> parented(ItemRegistrar<T> registrar, Identifier parentModelId) {
+		return registrar.withItemModel((ctx, item) -> registerParentedItemModel(ctx, item, parentModelId));
+	}
+	
+	public static <T extends Item> ItemRegistrar<T> banner(ItemRegistrar<T> registrar) {
+		return parented(registrar, CREEPER_BANNER_PATTERN);
 	}
 	
 	public static class ItemRegistrar<T extends Item> {
