@@ -29,6 +29,14 @@ repositories {
 	mavenCentral()
 }
 
+fabricApi {
+	configureDataGeneration {
+		client = true
+		modId = project.archives_base_name
+		createSourceSet = true
+	}
+}
+
 dependencies {
 	// jetbrains annotations
 	implementation("org.jetbrains:annotations:26.0.1")
@@ -106,33 +114,14 @@ dependencies {
 	}
 
 	// Datagen dependencies
-//	modDatagenRuntimeOnly("curse.maven:gobber-427177:${project.gobber_version}")
-//	modDatagenRuntimeOnly("org.appliedenergistics:appliedenergistics2:${project.ae2_version}")
-//	modDatagenRuntimeOnly("maven.modrinth:create-fabric:${project.create_version}")
-}
-
-fabricApi {
-	configureDataGeneration {
-		client = true
-		modId = project.archives_base_name
-		createSourceSet = true
-	}
+//	modDatagenImplementation("curse.maven:gobber-427177:${project.gobber_version}")
+//	modDatagenRuntimeOnly("maven.modrinth:ae2:${project.ae2_version}")
+//	modDatagenRuntimeOnly("maven.modrinth:botania:${project.botania_version}") // TODO 1.21.1
+//	modDatagenRuntimeOnly("maven.modrinth:create-fabric:${project.create_version}") // TODO 1.21.1
 }
 
 loom {
 	accessWidenerPath = file("src/main/resources/spectrum.accesswidener")
-
-	runs {
-		datagen {
-			server()
-
-			name "Minecraft Data"
-			vmArg "-Dfabric-api.datagen"
-			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-
-			runDir "build/datagen"
-		}
-	}
 }
 
 processResources {
