@@ -6,7 +6,6 @@ import de.dafuqs.spectrum.api.item_group.*;
 import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.compat.*;
 import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.SpectrumItems.*;
 import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.api.*;
 import net.minecraft.block.*;
@@ -14,7 +13,10 @@ import net.minecraft.block.piston.*;
 import net.minecraft.item.*;
 import net.minecraft.sound.*;
 
+import static de.dafuqs.spectrum.registries.SpectrumBlocks.simple;
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.*;
+import static de.dafuqs.spectrum.registries.SpectrumItems.simple;
+import static de.dafuqs.spectrum.registries.SpectrumItems.*;
 
 public class AE2Compat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
@@ -28,8 +30,8 @@ public class AE2Compat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public static Block PURE_CERTUS_QUARTZ_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_certus_quartz_block", new Block(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.3F).sounds(BlockSoundGroup.GLASS)), InkColors.YELLOW)));
 	public static Block PURE_FLUIX_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_fluix_block", new Block(AbstractBlock.Settings.create().mapColor(MapColor.PALE_YELLOW).strength(0.3F).sounds(BlockSoundGroup.GLASS)), InkColors.YELLOW)));
 	
-	public static Item PURE_CERTUS_QUARTZ = SpectrumItems.registerDeferred("pure_certus_quartz", new Item(IS.of()), InkColors.YELLOW);
-	public static Item PURE_FLUIX = SpectrumItems.registerDeferred("pure_fluix", new Item(IS.of()), InkColors.YELLOW);
+	public static Item PURE_CERTUS_QUARTZ = SpectrumItems.register(simple(item("pure_certus_quartz", new Item(IS.of()), InkColors.YELLOW)));
+	public static Item PURE_FLUIX = SpectrumItems.register(simple(item("pure_fluix", new Item(IS.of()), InkColors.YELLOW)));
 	
 	@Override
 	public void register() {

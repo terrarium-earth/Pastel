@@ -14,11 +14,13 @@ import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import vazkii.botania.common.item.*;
 
+import static de.dafuqs.spectrum.registries.SpectrumItems.*;
+
 @SuppressWarnings("unused")
 public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
-	public static Item LEAST_BLACK_LOTUS = SpectrumItems.registerDeferred("least_black_lotus", new LeastBlackLotusItem(new Item.Settings()), InkColors.BLACK);
-	public static Item BLACKEST_LOTUS = SpectrumItems.registerDeferred("blackest_lotus", new BlackestLotusItem(new Item.Settings()), InkColors.BLACK);
+	public static Item LEAST_BLACK_LOTUS = SpectrumItems.register(simple(item("least_black_lotus", new LeastBlackLotusItem(new Item.Settings()), InkColors.BLACK)));
+	public static Item BLACKEST_LOTUS = SpectrumItems.register(simple(item("blackest_lotus", new BlackestLotusItem(new Item.Settings()), InkColors.BLACK)));
 	
 	@Override
 	public void register() {

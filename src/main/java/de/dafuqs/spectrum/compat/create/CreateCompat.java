@@ -8,7 +8,6 @@ import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.blocks.fluid.*;
 import de.dafuqs.spectrum.compat.*;
 import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.SpectrumItems.*;
 import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.api.*;
 import net.minecraft.block.*;
@@ -19,7 +18,10 @@ import net.minecraft.item.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
+import static de.dafuqs.spectrum.registries.SpectrumBlocks.simple;
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.*;
+import static de.dafuqs.spectrum.registries.SpectrumItems.simple;
+import static de.dafuqs.spectrum.registries.SpectrumItems.*;
 
 public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
@@ -28,7 +30,7 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public static Block ZINC_CLUSTER = SpectrumBlocks.register(cluster(blockWithItem("zinc_cluster", new SpectrumClusterBlock(AbstractBlock.Settings.copy(SMALL_ZINC_BUD), SpectrumClusterBlock.GrowthStage.CLUSTER), InkColors.BROWN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
 	public static Block PURE_ZINC_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_zinc_block", new Block(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK)), InkColors.BROWN)));
 	
-	public static Item PURE_ZINC = SpectrumItems.registerDeferred("pure_zinc", new Item(IS.of()), InkColors.BROWN);
+	public static Item PURE_ZINC = SpectrumItems.register(simple(item("pure_zinc", new Item(IS.of()), InkColors.BROWN)));
 	
 	@Override
 	public void register() {

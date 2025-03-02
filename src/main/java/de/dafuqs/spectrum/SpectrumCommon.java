@@ -181,7 +181,6 @@ public class SpectrumCommon implements ModInitializer {
 		SpectrumEntitySubPredicateTypes.register();
 		
 		logInfo("Registering Blocks and Items to Fuel Registry...");
-		SpectrumItems.registerFuelRegistry();
 		FUEL_REGISTRAR.flush();
 		
 		logInfo("Registering Entities...");

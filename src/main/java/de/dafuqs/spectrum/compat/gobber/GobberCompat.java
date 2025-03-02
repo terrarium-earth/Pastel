@@ -6,14 +6,16 @@ import de.dafuqs.spectrum.api.item_group.*;
 import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.compat.*;
 import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.SpectrumItems.*;
 import de.dafuqs.spectrum.registries.client.*;
 import net.fabricmc.api.*;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.*;
 import net.minecraft.item.*;
 
+import static de.dafuqs.spectrum.registries.SpectrumBlocks.simple;
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.*;
+import static de.dafuqs.spectrum.registries.SpectrumItems.simple;
+import static de.dafuqs.spectrum.registries.SpectrumItems.*;
 
 public class GobberCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
@@ -31,9 +33,9 @@ public class GobberCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public static Block PURE_GLOBETTE_NETHER_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_globette_nether_block", new Block(AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK)), InkColors.RED)));
 	public static Block PURE_GLOBETTE_END_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_globette_end_block", new Block(AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK)), InkColors.GREEN)));
 	
-	public static Item PURE_GLOBETTE = SpectrumItems.registerDeferred("pure_globette", new Item(IS.of()), InkColors.BLUE);
-	public static Item PURE_GLOBETTE_NETHER = SpectrumItems.registerDeferred("pure_globette_nether", new Item(IS.of()), InkColors.RED);
-	public static Item PURE_GLOBETTE_END = SpectrumItems.registerDeferred("pure_globette_end", new Item(IS.of()), InkColors.GREEN);
+	public static Item PURE_GLOBETTE = SpectrumItems.register(simple(item("pure_globette", new Item(IS.of()), InkColors.BLUE)));
+	public static Item PURE_GLOBETTE_NETHER = SpectrumItems.register(simple(item("pure_globette_nether", new Item(IS.of()), InkColors.RED)));
+	public static Item PURE_GLOBETTE_END = SpectrumItems.register(simple(item("pure_globette_end", new Item(IS.of()), InkColors.GREEN)));
 	
 	@Override
 	public void register() {
