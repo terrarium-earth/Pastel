@@ -1,0 +1,21 @@
+package de.dafuqs.spectrum.data;
+
+import java.util.concurrent.*;
+
+import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.datagen.v1.*;
+import net.fabricmc.fabric.api.datagen.v1.provider.*;
+import net.minecraft.registry.*;
+
+public class SpectrumBlockTagProvider extends FabricTagProvider.BlockTagProvider {
+	
+	public SpectrumBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+		super(output, registriesFuture);
+	}
+	
+	@Override
+	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+		SpectrumBlockTags.provideTags(this::getOrCreateTagBuilder);
+	}
+	
+}
