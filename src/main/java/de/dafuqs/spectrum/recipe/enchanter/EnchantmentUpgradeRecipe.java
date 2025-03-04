@@ -6,6 +6,7 @@ import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
+import net.minecraft.component.*;
 import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.item.*;
@@ -67,10 +68,14 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	@Override
 	public boolean matches(RecipeInput inv, World world) {
 		if (inv.getSize() > 9) {
-			if (!inputs.getFirst().test(inv.getStackInSlot(0))) {
+			ItemStack centerStack = inv.getStackInSlot(0);
+			if (!inputs.getFirst().test(centerStack)) {
 				return false;
 			}
-			ItemEnchantmentsComponent enchantments = inv.getStackInSlot(0).getEnchantments();
+			ItemEnchantmentsComponent enchantments = centerStack.get(DataComponentTypes.STORED_ENCHANTMENTS);
+			if (enchantments == null) {
+				return false;
+			}
 			if (!enchantments.getEnchantments().contains(enchantmentEntry) || enchantments.getLevel(enchantmentEntry) != enchantmentDestinationLevel - 1) {
 				return false;
 			}
