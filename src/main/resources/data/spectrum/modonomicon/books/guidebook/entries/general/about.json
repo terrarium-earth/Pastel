@@ -9,5 +9,6 @@
   "background_v_index": 4,
   "x": -12,
   "y": -4,
-  "category_to_open": "spectrum:about"
+  "category_to_open": "spectrum:about",
+  "read_by_default": true
 }

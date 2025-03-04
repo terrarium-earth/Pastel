@@ -11,6 +11,7 @@
   "background_v_index": 4,
   "x": -1,
   "y": -1,
+  "read_by_default": true,
 
   "url": "https://github.com/mod/spectrum"
 }
