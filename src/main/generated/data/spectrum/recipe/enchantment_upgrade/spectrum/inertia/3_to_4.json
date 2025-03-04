@@ -1,0 +1,17 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "spectrum:enchantments_exist",
+      "values": [
+        "spectrum:cloaked/inertia"
+      ]
+    }
+  ],
+  "type": "spectrum:enchantment_upgrade",
+  "destination_level": 4,
+  "enchantment": "spectrum:cloaked/inertia",
+  "experience": 2000,
+  "item": "spectrum:brown_pigment",
+  "item_count": 128,
+  "required_advancement": "spectrum:unlocks/enchantments/inertia"
+}

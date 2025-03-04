@@ -1,0 +1,17 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "spectrum:enchantments_exist",
+      "values": [
+        "spectrum:cloaked/exuberance"
+      ]
+    }
+  ],
+  "type": "spectrum:enchantment_upgrade",
+  "destination_level": 5,
+  "enchantment": "spectrum:cloaked/exuberance",
+  "experience": 1000,
+  "item": "spectrum:purple_pigment",
+  "item_count": 64,
+  "required_advancement": "spectrum:unlocks/enchantments/exuberance"
+}

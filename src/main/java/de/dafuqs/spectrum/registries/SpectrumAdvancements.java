@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
+import static de.dafuqs.spectrum.SpectrumCommon.*;
+
 import de.dafuqs.spectrum.*;
 import net.minecraft.util.*;
-
-import static de.dafuqs.spectrum.SpectrumCommon.*;
 
 @SuppressWarnings("unused")
 public class SpectrumAdvancements {
@@ -63,6 +63,18 @@ public class SpectrumAdvancements {
 	public static final Identifier ENCHANTMENTS_TIGHT_GRIP = SpectrumCommon.locate("unlocks/enchantments/tight_grip");
 	public static final Identifier ENCHANTMENTS_TREASURE_HUNTER = SpectrumCommon.locate("unlocks/enchantments/treasure_hunter");
 	public static final Identifier ENCHANTMENTS_VOIDING = SpectrumCommon.locate("unlocks/enchantments/voiding_usage");
+	
+	public static final Identifier ENCHANTMENTS_VANILLA_DAMAGE = SpectrumCommon.locate("unlocks/enchantments/vanilla_damage");
+	public static final Identifier ENCHANTMENTS_VANILLA_LUCK = SpectrumCommon.locate("unlocks/enchantments/vanilla_luck");
+	public static final Identifier ENCHANTMENTS_VANILLA_PROJECTILE = SpectrumCommon.locate("unlocks/enchantments/vanilla_projectile");
+	public static final Identifier ENCHANTMENTS_VANILLA_PROTECTION = SpectrumCommon.locate("unlocks/enchantments/vanilla_protection");
+	public static final Identifier ENCHANTMENTS_VANILLA_QUITOXIC = SpectrumCommon.locate("unlocks/enchantments/vanilla_quitoxic");
+	public static final Identifier ENCHANTMENTS_VANILLA_SWIFT_SNEAK = SpectrumCommon.locate("unlocks/enchantments/vanilla_swift_sneak");
+	public static final Identifier ENCHANTMENTS_VANILLA_TREASURE = SpectrumCommon.locate("unlocks/enchantments/vanilla_treasure");
+	public static final Identifier ENCHANTMENTS_VANILLA_TRIDENT = SpectrumCommon.locate("unlocks/enchantments/vanilla_trident");
+	public static final Identifier ENCHANTMENTS_VANILLA_UNBREAKING = SpectrumCommon.locate("unlocks/enchantments/vanilla_unbreaking");
+	public static final Identifier ENCHANTMENTS_VANILLA_WATER = SpectrumCommon.locate("unlocks/enchantments/vanilla_water");
+	public static final Identifier ENCHANTMENTS_VANILLA_WATER_LUCK = SpectrumCommon.locate("unlocks/enchantments/vanilla_water_luck");
 	
 	// Pedestal
 	public static final Identifier PLACED_PEDESTAL = SpectrumCommon.locate("place_pedestal");

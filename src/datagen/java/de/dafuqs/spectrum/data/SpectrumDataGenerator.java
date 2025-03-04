@@ -14,6 +14,7 @@ public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(SpectrumEnchantmentTagProvider::new);
 		pack.addProvider(SpectrumDynamicRegistryProvider::new);
 		pack.addProvider(SpectrumModelProvider::new);
+		pack.addProvider(SpectrumRecipeProvider::new);
 	}
 	
 	@Override

@@ -1,0 +1,17 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "spectrum:enchantments_exist",
+      "values": [
+        "spectrum:cloaked/razing"
+      ]
+    }
+  ],
+  "type": "spectrum:enchantment_upgrade",
+  "destination_level": 2,
+  "enchantment": "spectrum:cloaked/razing",
+  "experience": 400,
+  "item": "spectrum:gray_pigment",
+  "item_count": 32,
+  "required_advancement": "spectrum:unlocks/enchantments/razing_usage"
+}

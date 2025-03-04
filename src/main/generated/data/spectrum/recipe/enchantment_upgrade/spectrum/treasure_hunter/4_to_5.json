@@ -1,0 +1,17 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "spectrum:enchantments_exist",
+      "values": [
+        "spectrum:cloaked/treasure_hunter"
+      ]
+    }
+  ],
+  "type": "spectrum:enchantment_upgrade",
+  "destination_level": 5,
+  "enchantment": "spectrum:cloaked/treasure_hunter",
+  "experience": 10000,
+  "item": "spectrum:light_blue_pigment",
+  "item_count": 512,
+  "required_advancement": "spectrum:unlocks/enchantments/treasure_hunter"
+}

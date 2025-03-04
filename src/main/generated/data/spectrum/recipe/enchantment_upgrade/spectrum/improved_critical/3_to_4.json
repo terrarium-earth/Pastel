@@ -1,0 +1,17 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "spectrum:enchantments_exist",
+      "values": [
+        "spectrum:cloaked/improved_critical"
+      ]
+    }
+  ],
+  "type": "spectrum:enchantment_upgrade",
+  "destination_level": 4,
+  "enchantment": "spectrum:cloaked/improved_critical",
+  "experience": 10000,
+  "item": "spectrum:black_pigment",
+  "item_count": 512,
+  "required_advancement": "spectrum:unlocks/enchantments/improved_critical"
+}

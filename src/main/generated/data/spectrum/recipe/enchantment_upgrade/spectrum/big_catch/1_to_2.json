@@ -1,0 +1,17 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "spectrum:enchantments_exist",
+      "values": [
+        "spectrum:cloaked/big_catch"
+      ]
+    }
+  ],
+  "type": "spectrum:enchantment_upgrade",
+  "destination_level": 2,
+  "enchantment": "spectrum:cloaked/big_catch",
+  "experience": 400,
+  "item": "spectrum:light_blue_pigment",
+  "item_count": 32,
+  "required_advancement": "spectrum:unlocks/enchantments/big_catch"
+}
