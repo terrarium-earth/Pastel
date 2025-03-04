@@ -1,0 +1,15 @@
+{
+  "type": "spectrum:web_link",
+
+  "name": "book.spectrum.guidebook.modrinth.name",
+  "icon": "spectrum:textures/gui/guidebook/icons/modrinth.png",
+  "category": "spectrum:about",
+  "hide_while_locked": false,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 4,
+  "y": -1,
+
+  "url": "https://modrinth.com/mod/spectrum"
+}
