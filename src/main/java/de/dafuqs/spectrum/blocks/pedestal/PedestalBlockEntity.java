@@ -66,7 +66,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 	protected UpgradeHolder upgrades;
 	protected boolean inventoryChanged;
 	
-	public CraftingRecipeInput recipeInput;
+	public PedestalRecipeInput recipeInput;
 	public @Nullable RecipeEntry<?> currentRecipe;
 	
 	protected final PropertyDelegate propertyDelegate = new BlockPosDelegate(pos) {
@@ -106,7 +106,6 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 		}
 		
 		this.inventory = DefaultedList.ofSize(INVENTORY_SIZE, ItemStack.EMPTY);
-		this.recipeInput = CraftingRecipeInput.create(3, 3, this.inventory);
 	}
 	
 	public void updateInClientWorld() {
@@ -206,7 +205,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 		int maxCountPerStack = pedestalBlockEntity.getMaxCountPerStack();
 		// Pedestal crafting
 		boolean craftingFinished = false;
-		if (calculatedRecipe instanceof PedestalRecipe pedestalRecipe && pedestalBlockEntity.canAcceptRecipeOutput(calculatedRecipe, pedestalBlockEntity.recipeInput, maxCountPerStack)) {
+		if (calculatedRecipe instanceof PedestalRecipe pedestalRecipe && pedestalBlockEntity.canAcceptRecipeOutput(calculatedRecipe, maxCountPerStack)) {
 			pedestalBlockEntity.craftingTime++;
 			if (pedestalBlockEntity.craftingTime == pedestalBlockEntity.craftingTimeTotal) {
 				pedestalBlockEntity.craftingTime = 0;
@@ -217,11 +216,11 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 				shouldMarkDirty = true;
 			}
 			// Vanilla crafting
-		} else if (calculatedRecipe instanceof CraftingRecipe vanillaCraftingRecipe && pedestalBlockEntity.canAcceptRecipeOutput(calculatedRecipe, pedestalBlockEntity.recipeInput, maxCountPerStack)) {
+		} else if (calculatedRecipe instanceof CraftingRecipe vanillaCraftingRecipe && pedestalBlockEntity.canAcceptRecipeOutput(calculatedRecipe, maxCountPerStack)) {
 			pedestalBlockEntity.craftingTime++;
 			if (pedestalBlockEntity.craftingTime == pedestalBlockEntity.craftingTimeTotal) {
 				pedestalBlockEntity.craftingTime = 0;
-				craftingFinished = pedestalBlockEntity.craftVanillaRecipe(vanillaCraftingRecipe, pedestalBlockEntity, maxCountPerStack);
+				craftingFinished = pedestalBlockEntity.craftVanillaRecipe(vanillaCraftingRecipe, pedestalBlockEntity, pedestalBlockEntity.recipeInput.getCraftingGridInput(), maxCountPerStack);
 				if (craftingFinished) {
 					playCraftingFinishedSoundEvent(pedestalBlockEntity, calculatedRecipe);
 					pedestalBlockEntity.inventoryChanged = true;
@@ -319,7 +318,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 		
 		// unchanged vanilla recipe?
 		if (SpectrumCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
-			if (currentRecipe instanceof CraftingRecipe craftingRecipe && craftingRecipe.matches(pedestalBlockEntity.recipeInput, world)) {
+			if (currentRecipe instanceof CraftingRecipe craftingRecipe && craftingRecipe.matches(pedestalBlockEntity.recipeInput.getCraftingGridInput(), world)) {
 				return pedestalBlockEntity.currentRecipe;
 			}
 		}
@@ -329,7 +328,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 		var pedestalRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.PEDESTAL, pedestalBlockEntity.recipeInput, world).orElse(null);
 		if (pedestalRecipe == null) {
 			if (SpectrumCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
-				return world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, pedestalBlockEntity.recipeInput, world).orElse(null);
+				return world.getRecipeManager().getFirstMatch(RecipeType.CRAFTING, pedestalBlockEntity.recipeInput.getCraftingGridInput(), world).orElse(null);
 			}
 			return null;
 		}
@@ -340,13 +339,13 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 		return pedestalRecipe;
 	}
 	
-	private boolean canAcceptRecipeOutput(@Nullable Recipe<?> recipe, CraftingRecipeInput input, int maxCountPerStack) {
+	private boolean canAcceptRecipeOutput(@Nullable Recipe<?> recipe, int maxCountPerStack) {
 		if (recipe != null) {
 			ItemStack output;
 			if (recipe instanceof PedestalRecipe pedestalRecipe) {
-				output = pedestalRecipe.craft(input, null);
+				output = pedestalRecipe.craft(recipeInput, null);
 			} else if (recipe instanceof CraftingRecipe craftingRecipe) {
-				output = craftingRecipe.craft(recipeInput, null);
+				output = craftingRecipe.craft(recipeInput.getCraftingGridInput(), null);
 			} else {
 				output = ItemStack.EMPTY;
 			}
@@ -376,7 +375,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 	
 	private static boolean craftPedestalRecipe(PedestalBlockEntity pedestalBlockEntity, @Nullable PedestalRecipe recipe, Inventory inventory, int maxCountPerStack) {
 		var world = pedestalBlockEntity.world;
-		if (world == null || !pedestalBlockEntity.canAcceptRecipeOutput(recipe, pedestalBlockEntity.recipeInput, maxCountPerStack)) {
+		if (world == null || !pedestalBlockEntity.canAcceptRecipeOutput(recipe, maxCountPerStack)) {
 			return false;
 		}
 		
@@ -628,24 +627,26 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), soundEvent, SoundCategory.BLOCKS, 0.9F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F);
 	}
 	
-	private boolean craftVanillaRecipe(@Nullable CraftingRecipe recipe, Inventory inventory, int maxCountPerStack) {
-		if (canAcceptRecipeOutput(recipe, recipeInput, maxCountPerStack)) {
-			ItemStack recipeOutput = recipe.craft(recipeInput, null);
+	private boolean craftVanillaRecipe(@Nullable CraftingRecipe recipe, PedestalBlockEntity pedestal, CraftingRecipeInput craftingInput, int maxCountPerStack) {
+		if (canAcceptRecipeOutput(recipe, maxCountPerStack)) {
+			ItemStack recipeOutput = recipe.craft(craftingInput, null);
 			PlayerEntity player = getOwnerIfOnline();
 			//TODO revise for non-player crafting
-			if (player != null) { // some recipes may assume the player is never null (since this is the case in vanilla)
+			if (player == null) {
+				recipeOutput.onCraftByCrafter(this.getWorld());
+			} else {
 				recipeOutput.onCraftByPlayer(this.getWorld(), player, recipeOutput.getCount());
 			}
 			
 			// -1 for all crafting inputs
-			decrementInputStacks(inventory);
+			decrementInputStacks(pedestal);
 			
-			ItemStack existingOutput = inventory.getStack(OUTPUT_SLOT_ID);
+			ItemStack existingOutput = pedestal.getStack(OUTPUT_SLOT_ID);
 			if (existingOutput.isEmpty()) {
-				inventory.setStack(OUTPUT_SLOT_ID, recipeOutput.copy());
+				pedestal.setStack(OUTPUT_SLOT_ID, recipeOutput.copy());
 			} else {
 				existingOutput.increment(recipeOutput.getCount());
-				inventory.setStack(OUTPUT_SLOT_ID, existingOutput);
+				pedestal.setStack(OUTPUT_SLOT_ID, existingOutput);
 			}
 			
 			return true;
@@ -789,7 +790,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 		}
 		
 		if (currentRecipe instanceof CraftingRecipe craftingRecipe) {
-			return craftingRecipe.craft(recipeInput, null);
+			return craftingRecipe.craft(recipeInput.getCraftingGridInput(), null);
 		}
 		
 		return ItemStack.EMPTY;

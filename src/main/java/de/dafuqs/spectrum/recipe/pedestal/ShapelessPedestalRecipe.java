@@ -12,7 +12,6 @@ import net.minecraft.item.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 
@@ -29,8 +28,8 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 	}
 	
 	@Override
-	public boolean matches(RecipeInput recipeInput, World world) {
-		return matchIngredientStacksExclusively(recipeInput, getIngredientStacks(), CRAFTING_GRID_SLOTS) && super.matches(recipeInput, world);
+	public boolean matches(PedestalRecipeInput recipeInput, World world) {
+		return matchIngredientStacksExclusively(recipeInput, getIngredientStacks(), recipeInput.getCraftingGridSlots()) && super.matches(recipeInput, world);
 	}
 	
 	@Override

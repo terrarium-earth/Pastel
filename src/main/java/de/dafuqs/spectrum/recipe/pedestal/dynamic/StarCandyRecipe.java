@@ -9,7 +9,6 @@ import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
@@ -27,13 +26,10 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
 	}
 	
 	@Override
-	public ItemStack craft(RecipeInput inv, RegistryWrapper.WrapperLookup drm) {
-		if (inv instanceof PedestalBlockEntity pedestal) { // TODO: always false
-			@Nullable PlayerEntity owner = pedestal.getOwnerIfOnline();
-			double luckBonus = owner == null ? 0.0 : owner.getAttributeValue(EntityAttributes.GENERIC_LUCK);
-			if (new Random().nextFloat() < PURPLE_STAR_CANDY_CHANCE + luckBonus) {
-				return SpectrumItems.ENCHANTED_STAR_CANDY.getDefaultStack();
-			}
+	public ItemStack craft(PedestalRecipeInput input, RegistryWrapper.WrapperLookup wrapperLookup) {
+		@Nullable PlayerEntity player = input.getPlayer();
+		if (player != null && player.getRandom().nextFloat() < PURPLE_STAR_CANDY_CHANCE + player.getAttributeValue(EntityAttributes.GENERIC_LUCK)) {
+			return SpectrumItems.ENCHANTED_STAR_CANDY.getDefaultStack();
 		}
 		return this.output.copy();
 	}

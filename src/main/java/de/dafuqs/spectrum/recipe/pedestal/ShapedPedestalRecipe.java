@@ -16,6 +16,7 @@ import net.minecraft.recipe.*;
 import net.minecraft.recipe.input.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
+import org.jetbrains.annotations.*;
 import oshi.util.tuples.*;
 
 import java.util.*;
@@ -47,18 +48,22 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 	}
 	
 	@Override
-	public boolean matches(RecipeInput inv, World world) {
-		return getRecipeOrientation(inv) != null && super.matches(inv, world);
+	public boolean matches(PedestalRecipeInput recipeInput, World world) {
+		return getRecipeOrientation(recipeInput.getCraftingGridInput()) != null && super.matches(recipeInput, world);
 	}
 	
 	// Triplet<XOffset, YOffset, Flipped>
-	public Triplet<Integer, Integer, Boolean> getRecipeOrientation(RecipeInput inv) {
-		for (int i = 0; i <= 3 - this.width; ++i) {
-			for (int j = 0; j <= 3 - this.height; ++j) {
-				if (this.matchesPattern(inv, i, j, true)) {
+	public @Nullable Triplet<Integer, Integer, Boolean> getRecipeOrientation(CraftingRecipeInput input) {
+		if (input.getWidth() != this.width || input.getHeight() != this.height) {
+			return null;
+		}
+		
+		for (int i = 0; i <= input.getWidth(); ++i) {
+			for (int j = 0; j <= input.getHeight(); ++j) {
+				if (this.matchesPattern(input, i, j, true)) {
 					return new Triplet<>(i, j, true);
 				}
-				if (this.matchesPattern(inv, i, j, false)) {
+				if (this.matchesPattern(input, i, j, false)) {
 					return new Triplet<>(i, j, false);
 				}
 			}
@@ -66,7 +71,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 		return null;
 	}
 	
-	public boolean matchesPattern(RecipeInput inv, int offsetX, int offsetY, boolean flipped) {
+	public boolean matchesPattern(CraftingRecipeInput inv, int offsetX, int offsetY, boolean flipped) {
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 3; ++j) {
 				int k = i - offsetX;
@@ -93,7 +98,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 	public void consumeIngredients(PedestalBlockEntity pedestal) {
 		super.consumeIngredients(pedestal);
 		
-		Triplet<Integer, Integer, Boolean> orientation = getRecipeOrientation(pedestal.recipeInput);
+		Triplet<Integer, Integer, Boolean> orientation = getRecipeOrientation(pedestal.recipeInput.getCraftingGridInput());
 		if (orientation == null) {
 			return;
 		}

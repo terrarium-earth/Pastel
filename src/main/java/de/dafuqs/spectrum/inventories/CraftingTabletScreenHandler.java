@@ -92,7 +92,7 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 		}
 		
 		// preview slot
-		lockableCraftingResultSlot = new LockableCraftingResultSlot(craftingResultInventory, 0, 127, 37, playerInventory.player, craftingInventory, 0, 8);
+		lockableCraftingResultSlot = new LockableCraftingResultSlot(craftingResultInventory, 0, 127, 37, playerInventory.player, craftingInventory);
 		this.addSlot(lockableCraftingResultSlot);
 		
 		// player inventory
@@ -114,13 +114,13 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 		if (!world.isClient) {
 			ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
 			
-			PedestalRecipeInput pedestalRecipeInput = PedestalRecipeInput.createWithFullGemstonePowder(inventory.getHeldStacks());
+			PedestalRecipeInput pedestalRecipeInput = PedestalRecipeInput.createWithFullGemstonePowder(inventory.getHeldStacks(), player);
 			
-			Optional<RecipeEntry<PedestalRecipe>> optionalPedestalCraftingRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.PEDESTAL, pedestalRecipeInput, world);
-			if (optionalPedestalCraftingRecipe.isPresent()) {
+			Optional<RecipeEntry<PedestalRecipe>> optionalPedestalRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.PEDESTAL, pedestalRecipeInput, world);
+			if (optionalPedestalRecipe.isPresent()) {
 				lockableCraftingResultSlot.lock();
 				
-				PedestalRecipe pedestalRecipe = optionalPedestalCraftingRecipe.get().value();
+				PedestalRecipe pedestalRecipe = optionalPedestalRecipe.get().value();
 				ItemStack itemStack = pedestalRecipe.getResult(world.getRegistryManager()).copy();
 				craftingResultInventory.setStack(0, itemStack);
 				
@@ -158,7 +158,7 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 				handler.setPreviousTrackedSlot(0, itemStack);
 				serverPlayerEntity.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(handler.syncId, handler.nextRevision(), 14, itemStack));
 				
-				CraftingTabletItem.setStoredRecipe(craftingTabletItemStack, optionalPedestalCraftingRecipe.get());
+				CraftingTabletItem.setStoredRecipe(craftingTabletItemStack, optionalPedestalRecipe.get());
 			} else {
 				inventory.setStack(9, ItemStack.EMPTY);
 				inventory.setStack(10, ItemStack.EMPTY);
@@ -206,7 +206,7 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 	
 	@Override
 	public boolean matches(RecipeEntry recipe) {
-		PedestalRecipeInput pedestalRecipeInput = PedestalRecipeInput.createWithFullGemstonePowder(this.craftingInventory.getHeldStacks());
+		PedestalRecipeInput pedestalRecipeInput = PedestalRecipeInput.createWithFullGemstonePowder(this.craftingInventory.getHeldStacks(), this.player);
 		if (recipe.value() instanceof PedestalRecipe pedestalRecipe)
 			return pedestalRecipe.matches(pedestalRecipeInput, this.world);
 		if (recipe.value() instanceof CraftingRecipe craftingRecipe)
