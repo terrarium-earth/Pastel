@@ -2,8 +2,6 @@ package de.dafuqs.spectrum.recipe.enchanter;
 
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.enchantment.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
@@ -23,9 +21,7 @@ import net.minecraft.world.*;
 
 import java.util.*;
 
-public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> implements IRecipeGenerator {
-	
-	private static final List<EnchantmentUpgradeRecipe> EXTRA_RECIPES = new ArrayList<>();
+public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	protected final RegistryEntry<Enchantment> enchantmentEntry;
 	protected final int enchantmentDestinationLevel;
@@ -174,28 +170,17 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> i
 	}
 	
 	public static EnchantmentUpgradeRecipe createRecipes(String group, boolean secret, Optional<Identifier> requiredAdvancementId, RegistryEntry<Enchantment> enchantEntry, List<EnchantUpgradeLevelEntry> enchantUpgradeLevelEntries) {
+		// TODO: we currently only return the first recipe and not all!
 		for (EnchantUpgradeLevelEntry enchantUpgradeLevelEntry : enchantUpgradeLevelEntries) {
-			EXTRA_RECIPES.add(new EnchantmentUpgradeRecipe(
-					group, secret, requiredAdvancementId, enchantEntry, enchantUpgradeLevelEntries.size(), enchantUpgradeLevelEntry.experience(), enchantUpgradeLevelEntry.requiredItem(), enchantUpgradeLevelEntry.count()
-			));
+			return new EnchantmentUpgradeRecipe(group, secret, requiredAdvancementId, enchantEntry, enchantUpgradeLevelEntries.size(), enchantUpgradeLevelEntry.experience(), enchantUpgradeLevelEntry.requiredItem(), enchantUpgradeLevelEntry.count());
 		}
-		return EXTRA_RECIPES.removeLast();
+		return null;
 	}
 	
 	public List<EnchantUpgradeLevelEntry> getDefaultLevelEntry() {
 		return List.of(new EnchantUpgradeLevelEntry(
 				this.requiredExperience, this.requiredItem, this.requiredItemCount
 		));
-	}
-	
-	@Override
-	public List<EnchantmentUpgradeRecipe> getAdditionalRecipes() {
-		return EXTRA_RECIPES;
-	}
-	
-	@Override
-	public Identifier transformRecipeId(Identifier original, int index) {
-		return SpectrumCommon.locate(original.getPath() + "_level_" + (index + 2));
 	}
 	
 	public static class Serializer implements RecipeSerializer<EnchantmentUpgradeRecipe> {

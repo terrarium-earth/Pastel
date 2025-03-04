@@ -68,7 +68,6 @@
     "ProjectileEntityMixin",
     "RandomChanceLootConditionMixin",
     "RandomChanceWithEnchantedBonusLootConditionMixin",
-    "RecipeManagerMixin",
     "ServerPlayerEntityMixin",
     "ServerPlayerGameModeFabricMixin",
     "ServerPlayerInteractionManagerMixin",
