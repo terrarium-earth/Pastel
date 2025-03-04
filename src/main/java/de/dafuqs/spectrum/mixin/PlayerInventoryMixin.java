@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 public abstract class PlayerInventoryMixin {
 	
 	@Inject(at = @At("HEAD"), method = "addStack(Lnet/minecraft/item/ItemStack;)I", cancellable = true)
-	private void addStack(ItemStack stack, CallbackInfoReturnable<Integer> callbackInfoReturnable) {
+	private void addStack(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
 		PlayerInventory playerInventory = (PlayerInventory) (Object) this;
 		
 		for (int i = 0; i < playerInventory.size(); i++) {
@@ -21,7 +21,7 @@ public abstract class PlayerInventoryMixin {
 					int remainingCount = inventoryInsertionAcceptor.acceptItemStack(inventoryStack, stack, playerInventory.player);
 					stack.setCount(remainingCount);
 					if (remainingCount == 0) {
-						callbackInfoReturnable.cancel();
+						cir.cancel();
 						break;
 					}
 				}

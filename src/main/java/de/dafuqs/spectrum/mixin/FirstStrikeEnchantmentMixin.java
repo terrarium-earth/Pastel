@@ -30,6 +30,7 @@ public abstract class FirstStrikeEnchantmentMixin {
 		return amount;
 	}
 	
+	@Unique
 	private float getAdditionalFirstStrikeEnchantmentDamage(int level) {
 		return SpectrumCommon.CONFIG.FirstStrikeDamagePerLevel * level;
 	}

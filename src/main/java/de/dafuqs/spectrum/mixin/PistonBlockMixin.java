@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
 import com.llamalad7.mixinextras.injector.wrapoperation.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;

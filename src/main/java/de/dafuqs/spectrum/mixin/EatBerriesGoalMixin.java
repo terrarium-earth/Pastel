@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.blocks.deeper_down.flora.SawbladeHollyBushBlock;
+import de.dafuqs.spectrum.blocks.deeper_down.flora.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
@@ -44,6 +44,7 @@ public abstract class EatBerriesGoalMixin extends MoveToTargetPosGoal {
 		}
 	}
 	
+	@Unique
 	private void spectrum$pickSawbladeHollyBerries(BlockState state) {
 		World world = foxEntity.getWorld();
 		int age = state.get(SawbladeHollyBushBlock.AGE);
