@@ -1,6 +1,8 @@
 package de.dafuqs.spectrum.recipe.pedestal;
 
 
+import java.util.*;
+
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.api.item.*;
@@ -12,11 +14,8 @@ import net.minecraft.item.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
-
-import java.util.*;
 
 public class ShapelessPedestalRecipe extends PedestalRecipe {
 	
@@ -29,7 +28,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 	}
 	
 	@Override
-	public boolean matches(RecipeInput recipeInput, World world) {
+	public boolean matches(PedestalRecipeInput recipeInput, World world) {
 		return matchIngredientStacksExclusively(recipeInput, getIngredientStacks(), CRAFTING_GRID_SLOTS) && super.matches(recipeInput, world);
 	}
 	

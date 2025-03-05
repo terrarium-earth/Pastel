@@ -110,7 +110,7 @@ public class PedestalScreenHandler extends AbstractRecipeScreenHandler<RecipeInp
 	
 	@Override
 	public boolean matches(RecipeEntry<Recipe<RecipeInput>> recipe) {
-		return blockEntity != null && recipe.value().matches(blockEntity.recipeInput, world);
+		return blockEntity != null && recipe.value().matches(blockEntity.createRecipeInput(), world);
 	}
 	
 	@Override

@@ -1,6 +1,8 @@
 package de.dafuqs.spectrum.recipe.pedestal.dynamic;
 
 
+import java.util.*;
+
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.blocks.pedestal.*;
@@ -15,8 +17,6 @@ import net.minecraft.registry.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
-
-import java.util.*;
 
 // this hurt to write
 public class ExplosionModificationRecipe extends ShapelessPedestalRecipe {
@@ -39,7 +39,7 @@ public class ExplosionModificationRecipe extends ShapelessPedestalRecipe {
 	}
 	
 	@Override
-	public boolean matches(RecipeInput inventory, World world) {
+	public boolean matches(PedestalRecipeInput inventory, World world) {
 		ItemStack nonModStack = validateGridAndFindModularExplosiveStack(inventory);
 		if (!(nonModStack.getItem() instanceof ModularExplosionProvider modularExplosionProvider)) {
 			return false;
@@ -91,7 +91,7 @@ public class ExplosionModificationRecipe extends ShapelessPedestalRecipe {
 	}
 	
 	@Override
-	public ItemStack craft(RecipeInput inventory, RegistryWrapper.WrapperLookup drm) {
+	public ItemStack craft(PedestalRecipeInput inventory, RegistryWrapper.WrapperLookup drm) {
 		ItemStack output = validateGridAndFindModularExplosiveStack(inventory).copy();
 		
 		Pair<List<ExplosionArchetype>, List<ExplosionModifier>> pair = findArchetypeAndModifiers(inventory);

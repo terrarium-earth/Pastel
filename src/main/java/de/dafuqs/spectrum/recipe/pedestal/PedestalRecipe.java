@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.recipe.pedestal;
 
+import java.util.*;
+
 import de.dafuqs.revelationary.api.advancements.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
@@ -13,17 +15,13 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
 import net.minecraft.sound.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
-import java.util.*;
-
-public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<RecipeInput> {
+public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<PedestalRecipeInput> {
 	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("place_pedestal");
 	
@@ -73,7 +71,7 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<RecipeInpu
 	}
 	
 	@Override
-	public boolean matches(RecipeInput inv, World world) {
+	public boolean matches(PedestalRecipeInput inv, World world) {
 		int topazPowderAmount = this.powderInputs.getOrDefault(BuiltinGemstoneColor.CYAN, 0);
 		int amethystPowderAmount = this.powderInputs.getOrDefault(BuiltinGemstoneColor.MAGENTA, 0);
 		int citrinePowderAmount = this.powderInputs.getOrDefault(BuiltinGemstoneColor.YELLOW, 0);
@@ -97,7 +95,7 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<RecipeInpu
 	}
 	
 	@Override
-	public ItemStack craft(RecipeInput inventory, RegistryWrapper.WrapperLookup registryManager) {
+	public ItemStack craft(PedestalRecipeInput inventory, RegistryWrapper.WrapperLookup registryManager) {
 		return this.output.copy();
 	}
 	
@@ -142,7 +140,7 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<RecipeInpu
 	 *
 	 * @return The sound effect to play when this recipe is finished
 	 */
-	public SoundEvent getSoundEvent(Random random) {
+	public SoundEvent getSoundEvent(net.minecraft.util.math.random.Random random) {
 		List<SoundEvent> choices = new ArrayList<>();
 		
 		for (int i = 0; i < this.powderInputs.getOrDefault(BuiltinGemstoneColor.MAGENTA, 0); i++) {
@@ -182,12 +180,12 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<RecipeInpu
 	
 	protected void decrementGridSlot(PedestalBlockEntity pedestal, int slot, int count, ItemStack invStack) {
 		ItemStack remainder = this.skipRecipeRemainders() ? ItemStack.EMPTY : invStack.getRecipeRemainder();
+		remainder.setCount(count);
 		if (pedestal.getWorld() == null) return;
 		if (remainder.isEmpty()) {
 			invStack.decrement(count);
 		} else {
 			if (pedestal.getStack(slot).getCount() == count) {
-				remainder.setCount(count);
 				pedestal.setStack(slot, remainder);
 			} else {
 				pedestal.getStack(slot).decrement(count);

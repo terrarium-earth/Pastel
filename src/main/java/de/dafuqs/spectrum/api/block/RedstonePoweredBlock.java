@@ -6,8 +6,6 @@ import net.minecraft.world.*;
 
 public interface RedstonePoweredBlock {
 	
-	BooleanProperty POWERED = BooleanProperty.of("powered");
-	
 	default boolean checkGettingPowered(World world, BlockPos pos) {
 		Direction[] var4 = Direction.values();
 		int var5 = var4.length;
@@ -38,11 +36,11 @@ public interface RedstonePoweredBlock {
 	}
 	
 	default void power(World world, BlockPos pos) {
-		world.setBlockState(pos, world.getBlockState(pos).with(POWERED, true));
+		world.setBlockState(pos, world.getBlockState(pos).with(Properties.POWERED, true));
 	}
 	
 	default void unPower(World world, BlockPos pos) {
-		world.setBlockState(pos, world.getBlockState(pos).with(POWERED, false));
+		world.setBlockState(pos, world.getBlockState(pos).with(Properties.POWERED, false));
 	}
 	
 }

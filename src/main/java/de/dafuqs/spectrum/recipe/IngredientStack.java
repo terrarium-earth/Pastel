@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.recipe;
 
+import java.util.*;
+
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
@@ -14,9 +16,6 @@ import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
-
-import java.util.*;
-import java.util.function.*;
 
 public class IngredientStack implements CustomIngredient {
 	
@@ -80,6 +79,13 @@ public class IngredientStack implements CustomIngredient {
 				&& this.componentPredicate.test(itemStack.getComponents())
 				&& this.itemSubPredicates.values().stream().allMatch(pred -> pred.test(itemStack))
 				&& this.count == itemStack.getCount();
+	}
+	
+	public boolean testAtLeast(ItemStack itemStack) {
+		return this.ingredient.test(itemStack)
+				&& this.componentPredicate.test(itemStack.getComponents())
+				&& this.itemSubPredicates.values().stream().allMatch(pred -> pred.test(itemStack))
+				&& this.count <= itemStack.getCount();
 	}
 	
 	@Nullable
