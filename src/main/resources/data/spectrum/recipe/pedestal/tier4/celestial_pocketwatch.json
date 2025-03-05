@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 2400,
   "tier": "complex",
-  "magenta": 16,
-  "yellow": 0,
-  "cyan": 0,
-  "black": 0,
-  "white": 4,
+  "colors": {
+    "spectrum:magenta": 16,
+    "spectrum:yellow": 0,
+    "spectrum:cyan": 0,
+    "spectrum:black": 0,
+    "spectrum:white": 4
+  },
   "experience": 4.0,
   "pattern": [
     "PAP",

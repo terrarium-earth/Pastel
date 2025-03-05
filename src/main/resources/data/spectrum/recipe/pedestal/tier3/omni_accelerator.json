@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 3600,
   "tier": "advanced",
-  "cyan": 4,
-  "magenta": 0,
-  "yellow": 16,
-  "white": 0,
-  "black": 2,
+  "colors": {
+    "spectrum:cyan": 4,
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 16,
+    "spectrum:white": 0,
+    "spectrum:black": 2
+  },
   "experience": 4.0,
   "pattern": [
     "GMG",

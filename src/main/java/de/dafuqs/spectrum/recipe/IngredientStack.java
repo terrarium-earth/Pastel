@@ -16,7 +16,6 @@ import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
-import java.util.function.*;
 
 public class IngredientStack implements CustomIngredient {
 	
@@ -79,7 +78,7 @@ public class IngredientStack implements CustomIngredient {
 		return this.ingredient.test(itemStack)
 				&& this.componentPredicate.test(itemStack.getComponents())
 				&& this.itemSubPredicates.values().stream().allMatch(pred -> pred.test(itemStack))
-				&& this.count == itemStack.getCount();
+				&& this.count <= itemStack.getCount();
 	}
 	
 	@Nullable

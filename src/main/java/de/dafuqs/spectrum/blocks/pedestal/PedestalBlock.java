@@ -25,6 +25,7 @@ import net.minecraft.state.property.*;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.random.*;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
@@ -34,16 +35,15 @@ import org.joml.*;
 public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlock, PaintbrushTriggered {
 	
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("place_pedestal");
-	public static final BooleanProperty POWERED = BooleanProperty.of("powered");
 	private static final VoxelShape SHAPE;
 	private final PedestalVariant variant;
 	
 	public PedestalBlock(Settings settings, PedestalVariant variant) {
 		super(settings);
 		this.variant = variant;
-		setDefaultState(getStateManager().getDefaultState().with(POWERED, false));
+		setDefaultState(getStateManager().getDefaultState().with(Properties.POWERED, false));
 	}
-
+	
 	@Override
 	public MapCodec<? extends PedestalBlock> getCodec() {
 		//TODO: Make the codec
@@ -74,7 +74,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 	 * @param newPedestalRecipeTier The tier the pedestal has been upgraded to
 	 */
 	@Environment(EnvType.CLIENT)
-    public static void spawnUpgradeParticleEffectsForTier(BlockPos blockPos, @NotNull PedestalRecipeTier newPedestalRecipeTier) {
+	public static void spawnUpgradeParticleEffectsForTier(BlockPos blockPos, @NotNull PedestalRecipeTier newPedestalRecipeTier) {
 		MinecraftClient client = MinecraftClient.getInstance();
 		World world = client.world;
 		if (world == null) return;
@@ -158,7 +158,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 	
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
-		stateManager.add(POWERED);
+		stateManager.add(Properties.POWERED);
 	}
 	
 	@Override
@@ -249,7 +249,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void randomDisplayTick(@NotNull BlockState state, World world, BlockPos pos, Random random) {
-		if (state.get(PedestalBlock.POWERED)) {
+		if (state.get(Properties.POWERED)) {
 			Vector3f color = new Vector3f(0.5F, 0.5F, 0.5F);
 			float xOffset = random.nextFloat();
 			float zOffset = random.nextFloat();
@@ -269,7 +269,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 		BlockState placementState = this.getDefaultState();
 		
 		if (ctx.getWorld().getReceivedRedstonePower(ctx.getBlockPos()) > 0) {
-			placementState = placementState.with(POWERED, true);
+			placementState = placementState.with(Properties.POWERED, true);
 		}
 		
 		return placementState;
@@ -291,7 +291,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 	public ItemActionResult onPaintBrushTrigger(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (blockEntity instanceof PedestalBlockEntity pedestalBlockEntity) {
-			if (pedestalBlockEntity.craftingTime > 0) {
+			if (pedestalBlockEntity.propertyDelegate.craftingTime > 0) {
 				return ItemActionResult.FAIL;
 			}
 			if (pedestalBlockEntity.currentRecipe == null) {

@@ -3,11 +3,13 @@
   "group": "gemstone_chiseled_blocks",
   "time": 80,
   "tier": "basic",
-  "magenta": 0,
-  "yellow": 1,
-  "cyan": 0,
-  "black": 0,
-  "white": 0,
+  "colors": {
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 1,
+    "spectrum:cyan": 0,
+    "spectrum:black": 0,
+    "spectrum:white": 0
+  },
   "experience": 1.0,
   "pattern": [
     "WXW",

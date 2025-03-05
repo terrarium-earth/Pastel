@@ -54,15 +54,9 @@ public class InGameOverlayRendererMixin {
         float n = MathHelper.lerp(l, g, h);
         float o = MathHelper.lerp(l, i, k);
         float p = MathHelper.lerp(l, j, k);
-        float q = 1.0F;
         
         for (int r = 0; r < 2; ++r) {
             matrices.push();
-            float s = -0.5F;
-            float t = 0.5F;
-            float u = -0.5F;
-            float v = 0.5F;
-            float w = -0.5F;
             matrices.translate((float) (-(r * 2 - 1)) * 0.24F, -0.3F, 0.0F);
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) (r * 2 - 1) * 10.0F));
             Matrix4f matrix4f = matrices.peek().getPositionMatrix();

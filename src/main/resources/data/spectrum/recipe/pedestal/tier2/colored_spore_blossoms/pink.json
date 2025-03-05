@@ -3,11 +3,13 @@
   "group": "colored_spore_blossoms",
   "time": 80,
   "tier": "simple",
-  "cyan": 0,
-  "magenta": 4,
-  "yellow": 2,
-  "white": 0,
-  "black": 0,
+  "colors": {
+    "spectrum:cyan": 0,
+    "spectrum:magenta": 4,
+    "spectrum:yellow": 2,
+    "spectrum:white": 0,
+    "spectrum:black": 0
+  },
   "experience": 0.5,
   "pattern": [
     "PPP",

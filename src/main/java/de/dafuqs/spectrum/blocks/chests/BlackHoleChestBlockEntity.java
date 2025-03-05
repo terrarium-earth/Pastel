@@ -1,8 +1,10 @@
 package de.dafuqs.spectrum.blocks.chests;
 
+import java.util.*;
+import java.util.stream.*;
+
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.events.*;
 import de.dafuqs.spectrum.events.listeners.*;
 import de.dafuqs.spectrum.helpers.*;
@@ -31,10 +33,7 @@ import net.minecraft.world.event.*;
 import net.minecraft.world.event.listener.*;
 import org.jetbrains.annotations.*;
 
-import java.util.*;
-import java.util.stream.*;
-
-public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implements FilterConfigurable, ExtendedScreenHandlerFactory<FilterConfigurable.ExtendedData>, SidedInventory, EventQueue.Callback<Object> {
+public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implements FilterConfigurable, ExtendedScreenHandlerFactory<FilterConfigurable.ExtendedDataWithPos>, SidedInventory, EventQueue.Callback<Object> {
 	
 	public static final int INVENTORY_SIZE = 28;
 	public static final int ITEM_FILTER_SLOT_COUNT = 5;
@@ -46,7 +45,6 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	private boolean isOpen, isFull, hasXPStorage;
 	float storageTarget, storagePos, lastStorageTarget, capTarget, capPos, lastCapTarget, orbTarget, orbPos, lastOrbTarget, yawTarget, orbYaw, lastYawTarget;
 	long interpTicks, interpLength = 1, age, storedXP, maxStoredXP;
-	private final PropertyDelegate propertyDelegate = new BlockPosDelegate(pos);
 	
 	public BlackHoleChestBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(SpectrumBlockEntities.BLACK_HOLE_CHEST, blockPos, blockState);
@@ -57,36 +55,32 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	@SuppressWarnings("unused")
 	public static void tick(@NotNull World world, BlockPos pos, BlockState state, BlackHoleChestBlockEntity chest) {
 		chest.age++;
-
+		
 		if (chest.isOpen) {
 			if (chest.canFunction()) {
 				chest.changeState(State.OPEN_ACTIVE);
 				chest.interpLength = 7;
-			}
-			else {
+			} else {
 				chest.changeState(State.OPEN_INACTIVE);
 				chest.interpLength = 5;
 			}
-		}
-		else {
+		} else {
 			if (chest.isFull) {
 				chest.changeState(State.FULL);
 				chest.interpLength = 12;
-			}
-			else if (chest.canFunction()) {
+			} else if (chest.canFunction()) {
 				chest.changeState(State.CLOSED_ACTIVE);
 				chest.interpLength = 15;
-			}
-			else {
+			} else {
 				chest.changeState(State.CLOSED_INACTIVE);
 				chest.interpLength = 10;
 			}
 		}
-
+		
 		if (chest.interpTicks < chest.interpLength) {
 			chest.interpTicks++;
 		}
-
+		
 		if (world.isClient) {
 			chest.lidAnimator.step();
 		} else {
@@ -96,11 +90,11 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 			}
 		}
 	}
-
+	
 	public long getRenderTime() {
 		return age % 50000;
 	}
-
+	
 	public void changeState(State state) {
 		if (this.state != state) {
 			this.state = state;
@@ -121,20 +115,20 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 			}
 		}
 	}
-
+	
 	public void setXPData(long xp, long max) {
 		this.storedXP = xp;
 		this.maxStoredXP = max;
 	}
-
+	
 	public State getState() {
 		return state;
 	}
-
+	
 	public boolean canFunction() {
 		return world != null && !SpectrumChestBlock.isChestBlocked(world, this.pos) && !isFull;
 	}
-
+	
 	public boolean isFull() {
 		for (int i = 0; i < inventory.size() - 1; i++) {
 			var stack = inventory.get(i);
@@ -142,48 +136,48 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 				return false;
 			}
 		}
-
+		
 		if (canStoreExperience() && world != null) {
 			var experienceStack = inventory.get(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT);
 			var experienceStorage = (ExperienceStorageItem) experienceStack.getItem();
 			return ExperienceStorageItem.getStoredExperience(experienceStack) >= experienceStorage.getMaxStoredExperience(world.getRegistryManager(), experienceStack);
 		}
-
+		
 		return true;
 	}
-
+	
 	public boolean canStoreExperience() {
 		return inventory.get(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT).getItem() instanceof ExperienceStorageItem;
 	}
-
+	
 	public boolean isFullServer() {
 		return isFull;
 	}
-
+	
 	public void setFull(boolean full) {
 		isFull = full;
 	}
-
+	
 	public void setHasXPStorage(boolean hasXPStorage) {
 		this.hasXPStorage = hasXPStorage;
 	}
-
+	
 	public boolean hasXPStorage() {
 		return hasXPStorage;
 	}
-
+	
 	private static void searchForNearbyEntities(@NotNull BlackHoleChestBlockEntity blockEntity) {
 		var world = blockEntity.getWorld();
 		if (world == null)
 			return;
-
+		
 		List<ItemEntity> itemEntities = world.getEntitiesByType(EntityType.ITEM, getBoxWithRadius(blockEntity.pos, RANGE), Entity::isAlive);
 		for (ItemEntity itemEntity : itemEntities) {
 			if (itemEntity.isAlive() && !itemEntity.getStack().isEmpty()) {
 				itemEntity.emitGameEvent(SpectrumGameEvents.ENTITY_SPAWNED);
 			}
 		}
-
+		
 		List<ExperienceOrbEntity> experienceOrbEntities = world.getEntitiesByType(EntityType.EXPERIENCE_ORB, getBoxWithRadius(blockEntity.pos, RANGE), Entity::isAlive);
 		for (ExperienceOrbEntity experienceOrbEntity : experienceOrbEntities) {
 			if (experienceOrbEntity.isAlive()) {
@@ -196,7 +190,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	protected static @NotNull Box getBoxWithRadius(BlockPos blockPos, int radius) {
 		return Box.of(Vec3d.ofCenter(blockPos), radius, radius, radius);
 	}
-
+	
 	@Override
 	public boolean onSyncedBlockEvent(int type, int data) {
 		if (type == 1) {
@@ -212,7 +206,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new BlackHoleChestScreenHandler(syncId, playerInventory, this, propertyDelegate, makeExtendedData());
+		return new BlackHoleChestScreenHandler(syncId, playerInventory, this, new ExtendedData(this));
 	}
 	
 	@Override
@@ -266,7 +260,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 			ExperienceOrbEntity experienceOrbEntity = experienceEntry.experienceOrbEntity;
 			if (experienceOrbEntity != null && experienceOrbEntity.isAlive() && hasExperienceStorageItem()) {
 				ExperienceStorageItem.addStoredExperience(world.getRegistryManager(), this.inventory.get(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT), experienceOrbEntity.getExperienceAmount()); // overflow experience is void, to not lag the world on large farms
-
+				
 				sendPlayExperienceOrbEntityAbsorbedParticle((ServerWorld) world, experienceOrbEntity);
 				world.playSound(null, experienceOrbEntity.getBlockPos(), SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
 				experienceOrbEntity.remove(Entity.RemovalReason.DISCARDED);
@@ -292,42 +286,49 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 			}
 		}
 	}
-
+	
 	public static void sendPlayItemEntityAbsorbedParticle(ServerWorld world, @NotNull ItemEntity itemEntity) {
 		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, itemEntity.getPos(),
 				SpectrumParticleTypes.BLUE_BUBBLE_POP,
 				1, Vec3d.ZERO);
 	}
-
+	
 	public static void sendPlayExperienceOrbEntityAbsorbedParticle(ServerWorld world, @NotNull ExperienceOrbEntity experienceOrbEntity) {
 		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, experienceOrbEntity.getPos(),
 				SpectrumParticleTypes.GREEN_BUBBLE_POP,
 				1, Vec3d.ZERO);
 	}
-
+	
 	@Override
 	public SoundEvent getOpenSound() {
 		return SpectrumSoundEvents.BLACK_HOLE_CHEST_OPEN;
 	}
-
+	
 	@Override
 	public SoundEvent getCloseSound() {
 		return SpectrumSoundEvents.BLACK_HOLE_CHEST_CLOSE;
 	}
-
+	
 	@Override
-	public FilterConfigurable.ExtendedData getScreenOpeningData(ServerPlayerEntity player) {
-		return makeExtendedData();
+	public FilterConfigurable.ExtendedDataWithPos getScreenOpeningData(ServerPlayerEntity player) {
+		return new ExtendedDataWithPos(pos, this);
 	}
-
-	private FilterConfigurable.ExtendedData makeExtendedData() {
-		return new FilterConfigurable.ExtendedData(filterItems, 1, ITEM_FILTER_SLOT_COUNT, ITEM_FILTER_SLOT_COUNT);
-	}
-
+	
+	@Override
 	public List<ItemVariant> getItemFilters() {
 		return this.filterItems;
 	}
-
+	
+	@Override
+	public int getSlotsPerRow() {
+		return ITEM_FILTER_SLOT_COUNT;
+	}
+	
+	@Override
+	public int getDrawnSlots() {
+		return ITEM_FILTER_SLOT_COUNT;
+	}
+	
 	public void setFilterItem(int slot, ItemVariant item) {
 		this.filterItems.set(slot, item);
 		this.markDirty();
@@ -398,5 +399,5 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		CLOSED_INACTIVE,
 		FULL
 	}
-
+	
 }

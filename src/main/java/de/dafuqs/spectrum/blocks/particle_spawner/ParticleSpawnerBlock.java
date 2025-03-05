@@ -1,31 +1,30 @@
 package de.dafuqs.spectrum.blocks.particle_spawner;
 
+import java.util.*;
+
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.api.block.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.*;
 import net.minecraft.state.*;
-import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.*;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
 
-import java.util.*;
-
 public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implements RedstonePoweredBlock {
 	
 	public static final MapCodec<ParticleSpawnerBlock> CODEC = createCodec(ParticleSpawnerBlock::new);
 	
-	public static final BooleanProperty POWERED = Properties.POWERED;
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 13.0D, 15.0D);
 	
 	public ParticleSpawnerBlock(Settings settings) {
 		super(settings);
-		setDefaultState(getStateManager().getDefaultState().with(POWERED, false));
+		setDefaultState(getStateManager().getDefaultState().with(Properties.POWERED, false));
 	}
 	
 	@Override
@@ -41,7 +40,7 @@ public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implement
 	
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
-		stateManager.add(POWERED);
+		stateManager.add(Properties.POWERED);
 	}
 	
 	@Override
@@ -59,14 +58,14 @@ public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implement
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
 		BlockState placementState = this.getDefaultState();
 		if (ctx.getWorld().getReceivedRedstonePower(ctx.getBlockPos()) > 0) {
-			placementState = placementState.with(POWERED, true);
+			placementState = placementState.with(Properties.POWERED, true);
 		}
 		return placementState;
 	}
 	
 	@Override
 	public boolean shouldSpawnParticles(World world, BlockPos pos) {
-		return world.getBlockState(pos).get(ParticleSpawnerBlock.POWERED).equals(true);
+		return world.getBlockState(pos).get(Properties.POWERED).equals(true);
 	}
 	
 }

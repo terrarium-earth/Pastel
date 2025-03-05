@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.blocks.energy;
 
+import java.util.*;
+
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.energy.*;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.energy.storage.*;
-import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.*;
@@ -14,6 +15,7 @@ import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.screenhandler.v1.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.*;
@@ -36,9 +38,7 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
-import java.util.*;
-
-public class ColorPickerBlockEntity extends LootableContainerBlockEntity implements PlayerOwned, InkStorageBlockEntity<TotalCappedInkStorage> {
+public class ColorPickerBlockEntity extends LootableContainerBlockEntity implements PlayerOwned, InkStorageBlockEntity<TotalCappedInkStorage>, ExtendedScreenHandlerFactory<BlockPos> {
 	
 	public static final int INVENTORY_SIZE = 2; // input & output slots
 	public static final int INPUT_SLOT_ID = 0;
@@ -53,25 +53,21 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	protected @Nullable InkConvertingRecipe cachedRecipe;
 	protected Optional<InkColor> selectedColor = Optional.empty();
 	private UUID ownerUUID;
-	private final PropertyDelegate propertyDelegate = new BlockPosDelegate(pos) {
+	private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
 		@Override
 		public int get(int index) {
-			if (index == 3)
-				return selectedColor.isEmpty() ? -1 : SpectrumRegistries.INK_COLOR.getRawId(selectedColor.get());
-			return super.get(index);
+			if (index == 0) return selectedColor.map(SpectrumRegistries.INK_COLOR::getRawId).orElse(-1);
+			return 0;
 		}
-
+		
 		@Override
 		public void set(int index, int value) {
-			if (index == 3)
-				selectedColor = value == -1 ? Optional.empty() : Optional.of(SpectrumRegistries.INK_COLOR.get(value));
-			else
-				super.set(index, value);
+			if (index == 0) selectedColor = value == -1 ? Optional.empty() : Optional.ofNullable(SpectrumRegistries.INK_COLOR.get(value));
 		}
-
+		
 		@Override
 		public int size() {
-			return super.size() + 1;
+			return 1;
 		}
 	};
 	
@@ -83,7 +79,7 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	}
 	
 	@SuppressWarnings("unused")
-    public static void tick(World world, BlockPos pos, BlockState state, ColorPickerBlockEntity blockEntity) {
+	public static void tick(World world, BlockPos pos, BlockState state, ColorPickerBlockEntity blockEntity) {
 		if (!world.isClient) {
 			blockEntity.inkDirty = false;
 			if (!blockEntity.paused) {
@@ -130,9 +126,7 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 		}
 		CodecHelper.writeNbt(nbt, "InkStorage", InkStorageComponent.CODEC, new InkStorageComponent(this.inkStorage));
 		PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
-		if (this.selectedColor.isPresent()) {
-			nbt.putString("SelectedColor", this.selectedColor.get().getID().toString());
-		}
+		this.selectedColor.ifPresent(color -> nbt.putString("SelectedColor", color.getID().toString()));
 	}
 	
 	@Override
@@ -142,7 +136,12 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new ColorPickerScreenHandler(syncId, playerInventory, this.propertyDelegate);
+		return new ColorPickerScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+	}
+	
+	@Override
+	public BlockPos getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
+		return pos;
 	}
 	
 	@Override
@@ -210,7 +209,7 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	public int size() {
 		return INVENTORY_SIZE;
 	}
-
+	
 	protected boolean tryConvertPigmentToEnergy(ServerWorld world) {
 		InkConvertingRecipe recipe = getInkConvertingRecipe(world);
 		if (recipe != null) {
@@ -269,7 +268,7 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 		ItemStack stack = inventory.get(OUTPUT_SLOT_ID);
 		if (stack.getItem() instanceof InkStorageItem<?> inkStorageItem) {
 			InkStorage itemStorage = inkStorageItem.getEnergyStorage(stack);
-
+			
 			ServerPlayerEntity owner = null;
 			if (getOwnerIfOnline() instanceof ServerPlayerEntity serverPlayerEntity) {
 				owner = serverPlayerEntity;
@@ -290,7 +289,7 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 		
 		return transferredAmount > 0;
 	}
-
+	
 	private long tryTransferInk(ServerPlayerEntity owner, ItemStack stack, InkStorage itemStorage, InkColor color) {
 		long amount = InkStorage.transferInk(this.inkStorage, itemStorage, color);
 		if (amount > 0 && owner != null) {

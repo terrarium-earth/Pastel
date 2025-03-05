@@ -3,11 +3,13 @@
   "group": "colored_lamps",
   "time": 40,
   "tier": "basic",
-  "cyan": 4,
-  "magenta": 2,
-  "yellow": 0,
-  "white": 0,
-  "black": 0,
+  "colors": {
+    "spectrum:cyan": 4,
+    "spectrum:magenta": 2,
+    "spectrum:yellow": 0,
+    "spectrum:white": 0,
+    "spectrum:black": 0
+  },
   "experience": 0.5,
   "pattern": [
     "SPS",

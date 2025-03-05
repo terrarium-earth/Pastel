@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.energy.color.*;
+import de.dafuqs.spectrum.blocks.cinderhearth.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.widgets.*;
 import net.minecraft.client.gui.*;
@@ -50,7 +51,7 @@ public class CinderhearthScreen extends HandledScreen<CinderhearthScreenHandler>
 		// main background
 		drawContext.drawTexture(BACKGROUND, startX, startY, 0, 0, backgroundWidth, backgroundHeight);
 		
-		this.inkMeterWidget.draw(drawContext);
+		this.inkMeterWidget.draw(drawContext, CinderhearthBlockEntity.USED_INK_COLORS);
 		
 		int craftingTime = this.handler.getCraftingTime();
 		int craftingTimeTotal = this.handler.getCraftingTimeTotal();

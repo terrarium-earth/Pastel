@@ -5,8 +5,6 @@ import java.util.*;
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.enchantment.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
@@ -24,9 +22,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
 import net.minecraft.world.*;
 
-public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> implements IRecipeGenerator {
-	
-	private static final List<EnchantmentUpgradeRecipe> EXTRA_RECIPES = new ArrayList<>();
+public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	private final Either<RegistryEntry<Enchantment>, RegistryKey<Enchantment>> enchantment;
 	
@@ -173,20 +169,6 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> i
 		return this.enchantmentDestinationLevel > getEnchantment().value().getMaxLevel();
 	}
 	
-	public EnchantUpgradeLevelEntry getLevelEntry() {
-		return new EnchantUpgradeLevelEntry(this.requiredExperience, this.requiredItem, this.requiredItemCount);
-	}
-	
-	@Override
-	public List<EnchantmentUpgradeRecipe> getAdditionalRecipes() {
-		return EXTRA_RECIPES;
-	}
-	
-	@Override
-	public Identifier transformRecipeId(Identifier original, int index) {
-		return SpectrumCommon.locate(original.getPath() + "_level_" + (index + 2));
-	}
-	
 	public static class Serializer implements RecipeSerializer<EnchantmentUpgradeRecipe> {
 		
 		public static final MapCodec<EnchantmentUpgradeRecipe> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
@@ -221,23 +203,6 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> i
 		public PacketCodec<RegistryByteBuf, EnchantmentUpgradeRecipe> packetCodec() {
 			return PACKET_CODEC;
 		}
-	}
-	
-	public record EnchantUpgradeLevelEntry(int experience, Item requiredItem, int count) {
-		
-		public static final MapCodec<EnchantUpgradeLevelEntry> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-				Codec.INT.fieldOf("experience").forGetter(EnchantUpgradeLevelEntry::experience),
-				Registries.ITEM.getCodec().fieldOf("item").forGetter(EnchantUpgradeLevelEntry::requiredItem),
-				Codec.INT.fieldOf("item_count").forGetter(EnchantUpgradeLevelEntry::count)
-		).apply(i, EnchantUpgradeLevelEntry::new));
-		
-		public static final PacketCodec<RegistryByteBuf, EnchantUpgradeLevelEntry> PACKET_CODEC = PacketCodec.tuple(
-				PacketCodecs.VAR_INT, EnchantUpgradeLevelEntry::experience,
-				PacketCodecs.registryValue(RegistryKeys.ITEM), EnchantUpgradeLevelEntry::requiredItem,
-				PacketCodecs.VAR_INT, EnchantUpgradeLevelEntry::count,
-				EnchantUpgradeLevelEntry::new
-		);
-		
 	}
 	
 }

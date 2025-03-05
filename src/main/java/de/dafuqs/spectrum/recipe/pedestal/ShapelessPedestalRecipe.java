@@ -12,7 +12,6 @@ import net.minecraft.item.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 
@@ -29,8 +28,8 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 	}
 	
 	@Override
-	public boolean matches(RecipeInput recipeInput, World world) {
-		return matchIngredientStacksExclusively(recipeInput, getIngredientStacks(), CRAFTING_GRID_SLOTS) && super.matches(recipeInput, world);
+	public boolean matches(PedestalRecipeInput recipeInput, World world) {
+		return matchIngredientStacksExclusively(recipeInput, getIngredientStacks(), recipeInput.getCraftingGridSlots()) && super.matches(recipeInput, world);
 	}
 	
 	@Override
@@ -61,7 +60,7 @@ public class ShapelessPedestalRecipe extends PedestalRecipe {
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
 				IngredientStack.Serializer.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
-				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLOR, Codec.INT).forGetter(recipe -> recipe.powderInputs),
+				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLOR, Codec.INT).fieldOf("colors").forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(recipe -> recipe.craftingTime),

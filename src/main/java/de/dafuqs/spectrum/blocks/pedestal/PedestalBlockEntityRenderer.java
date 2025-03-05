@@ -57,7 +57,7 @@ public class PedestalBlockEntityRenderer<C extends PedestalBlockEntity> implemen
 			
 			long currentTime = entity.getWorld().getTime();
 			if (this.cachedRecipeTime + RECIPE_RECALCULATION_TICKS < currentTime || this.cachedRecipe != pedestalRecipe) {
-				this.cachedRecipeOutput = pedestalRecipe.craft(entity.recipeInput, entity.getWorld().getRegistryManager());
+				this.cachedRecipeOutput = pedestalRecipe.craft(entity.createRecipeInput(), entity.getWorld().getRegistryManager());
 				this.cachedRecipe = pedestalRecipe;
 				this.cachedRecipeTime = currentTime;
 			}

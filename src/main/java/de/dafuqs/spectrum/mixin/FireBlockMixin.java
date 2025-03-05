@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.*;
 public class FireBlockMixin {
 	
 	@ModifyExpressionValue(method = "scheduledTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;isRaining()Z", ordinal = 0))
-	public boolean spectrum$extinguishInPermanentRain(boolean original, @Local ServerWorld world) {
+	public boolean spectrum$extinguishInPermanentRain(boolean original, @Local(argsOnly = true) ServerWorld world) {
 		if (world.getRegistryKey().equals(SpectrumDimensions.DIMENSION_KEY)) {
 			return true;
 		}
@@ -20,7 +20,7 @@ public class FireBlockMixin {
 	}
 	
 	@ModifyExpressionValue(method = "scheduledTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;isRaining()Z", ordinal = 1))
-	public boolean spectrum$assuageInPermanentRain(boolean original, @Local ServerWorld world) {
+	public boolean spectrum$assuageInPermanentRain(boolean original, @Local(argsOnly = true) ServerWorld world) {
 		if (world.getRegistryKey().equals(SpectrumDimensions.DIMENSION_KEY)) {
 			return true;
 		}

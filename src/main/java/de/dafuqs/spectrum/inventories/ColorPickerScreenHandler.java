@@ -2,11 +2,10 @@ package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.energy.*;
 import de.dafuqs.spectrum.inventories.slots.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import net.minecraft.block.entity.*;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.entry.*;
@@ -37,33 +36,27 @@ public class ColorPickerScreenHandler extends ScreenHandler implements InkColorS
 		}
 	}
 	
-	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new ArrayPropertyDelegate(4));
+	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
+		this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos, SpectrumBlockEntities.COLOR_PICKER).orElseThrow(), new ArrayPropertyDelegate(1));
 	}
 	
-	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, PropertyDelegate propertyDelegate) {
+	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, ColorPickerBlockEntity blockEntity, PropertyDelegate propertyDelegate) {
 		super(SpectrumScreenHandlerTypes.COLOR_PICKER, syncId);
 		
 		this.player = playerInventory.player instanceof ServerPlayerEntity serverPlayerEntity ? serverPlayerEntity : null;
 		this.world = playerInventory.player.getWorld();
 		this.propertyDelegate = propertyDelegate;
+		this.blockEntity = blockEntity;
 		
-		InkColor selectedColor = propertyDelegate.get(3) == -1 ? null : InkColor.ofDyeColor(DyeColor.byId(propertyDelegate.get(3)));
+		InkColor selectedColor = propertyDelegate.get(0) == -1 ? null : InkColor.ofDyeColor(DyeColor.byId(propertyDelegate.get(0)));
+		this.blockEntity.setSelectedColor(selectedColor);
 		
-		BlockEntity blockEntity = playerInventory.player.getWorld().getBlockEntity(getBlockPos());
-		if (blockEntity instanceof ColorPickerBlockEntity colorPickerBlockEntity) {
-			this.blockEntity = colorPickerBlockEntity;
-			this.blockEntity.setSelectedColor(selectedColor);
-		} else {
-			throw new IllegalArgumentException("GUI called with a position where no valid BlockEntity exists");
-		}
-		
-		checkSize(colorPickerBlockEntity, ColorPickerBlockEntity.INVENTORY_SIZE);
-		colorPickerBlockEntity.onOpen(playerInventory.player);
+		checkSize(blockEntity, ColorPickerBlockEntity.INVENTORY_SIZE);
+		blockEntity.onOpen(playerInventory.player);
 		
 		// color picker slots
-		this.addSlot(new ColorPickerInputSlot(colorPickerBlockEntity, 0, 26, 33));
-		this.addSlot(new InkStorageSlot(colorPickerBlockEntity, 1, 133, 33));
+		this.addSlot(new ColorPickerInputSlot(blockEntity, 0, 26, 33));
+		this.addSlot(new InkStorageSlot(blockEntity, 1, 133, 33));
 		
 		// player inventory
 		for (int j = 0; j < 3; ++j) {
@@ -125,12 +118,9 @@ public class ColorPickerScreenHandler extends ScreenHandler implements InkColorS
 		return itemStack;
 	}
 	
-	public BlockPos getBlockPos() {
-		return BlockPosDelegate.getBlockPos(propertyDelegate);
-	}
-	
 	@Override
 	public void onInkColorSelectedPacket(@Nullable RegistryEntry<InkColor> inkColor) {
+		// TODO Can this just use the property delegate?
 		this.blockEntity.setSelectedColor(inkColor == null ? null : inkColor.value());
 	}
 	

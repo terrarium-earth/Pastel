@@ -3,11 +3,13 @@
   "group": "pylons",
   "time": 40,
   "tier": "basic",
-  "magenta": 0,
-  "yellow": 0,
-  "cyan": 2,
-  "black": 0,
-  "white": 0,
+  "colors": {
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 0,
+    "spectrum:cyan": 2,
+    "spectrum:black": 0,
+    "spectrum:white": 0
+  },
   "experience": 1.0,
   "pattern": [
     " S ",

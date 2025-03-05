@@ -62,9 +62,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	@Shadow
 	protected abstract boolean canChangeIntoPose(EntityPose pose);
 	
-	@Shadow
-	@Final
-	private PlayerInventory inventory;
 	@Unique
 	public SpectrumFishingBobberEntity fishingBobber;
 	
