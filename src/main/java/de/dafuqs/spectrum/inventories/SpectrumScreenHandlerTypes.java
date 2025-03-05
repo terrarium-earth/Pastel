@@ -54,12 +54,12 @@ public class SpectrumScreenHandlerTypes {
 		PAINTBRUSH = registerSimple(SpectrumScreenHandlerIDs.PAINTBRUSH, PaintbrushScreenHandler::new);
 		WORKSTAFF = registerSimple(SpectrumScreenHandlerIDs.WORKSTAFF, WorkstaffScreenHandler::new);
 		
-		PEDESTAL = registerSimple(SpectrumScreenHandlerIDs.PEDESTAL, PedestalScreenHandler::new);
+		PEDESTAL = registerExtended(SpectrumScreenHandlerIDs.PEDESTAL, PedestalScreenHandler::new, BlockPos.PACKET_CODEC);
 		PARTICLE_SPAWNER = registerExtended(SpectrumScreenHandlerIDs.PARTICLE_SPAWNER, ParticleSpawnerScreenHandler::new, BlockPos.PACKET_CODEC);
-		COMPACTING_CHEST = registerSimple(SpectrumScreenHandlerIDs.COMPACTING_CHEST, CompactingChestScreenHandler::new);
-		BLACK_HOLE_CHEST = registerExtended(SpectrumScreenHandlerIDs.BLACK_HOLE_CHEST, BlackHoleChestScreenHandler::new, FilterConfigurable.ExtendedData.PACKET_CODEC);
-		COLOR_PICKER = registerSimple(SpectrumScreenHandlerIDs.COLOR_PICKER, ColorPickerScreenHandler::new);
-		CINDERHEARTH = registerSimple(SpectrumScreenHandlerIDs.CINDERHEARTH, CinderhearthScreenHandler::new);
+		COMPACTING_CHEST = registerExtended(SpectrumScreenHandlerIDs.COMPACTING_CHEST, CompactingChestScreenHandler::new, BlockPos.PACKET_CODEC);
+		BLACK_HOLE_CHEST = registerExtended(SpectrumScreenHandlerIDs.BLACK_HOLE_CHEST, BlackHoleChestScreenHandler::new, FilterConfigurable.ExtendedDataWithPos.PACKET_CODEC);
+		COLOR_PICKER = registerExtended(SpectrumScreenHandlerIDs.COLOR_PICKER, ColorPickerScreenHandler::new, BlockPos.PACKET_CODEC);
+		CINDERHEARTH = registerExtended(SpectrumScreenHandlerIDs.CINDERHEARTH, CinderhearthScreenHandler::new, BlockPos.PACKET_CODEC);
 		FILTERING = registerExtended(SpectrumScreenHandlerIDs.FILTERING, FilteringScreenHandler::new, FilterConfigurable.ExtendedData.PACKET_CODEC);
 		BAG_OF_HOLDING = registerSimple(SpectrumScreenHandlerIDs.BAG_OF_HOLDING, BagOfHoldingScreenHandler::new);
 		

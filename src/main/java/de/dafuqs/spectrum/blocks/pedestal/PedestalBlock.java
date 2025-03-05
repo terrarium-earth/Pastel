@@ -25,6 +25,7 @@ import net.minecraft.state.property.*;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.random.*;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
@@ -43,7 +44,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 		this.variant = variant;
 		setDefaultState(getStateManager().getDefaultState().with(POWERED, false));
 	}
-
+	
 	@Override
 	public MapCodec<? extends PedestalBlock> getCodec() {
 		//TODO: Make the codec
@@ -74,7 +75,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 	 * @param newPedestalRecipeTier The tier the pedestal has been upgraded to
 	 */
 	@Environment(EnvType.CLIENT)
-    public static void spawnUpgradeParticleEffectsForTier(BlockPos blockPos, @NotNull PedestalRecipeTier newPedestalRecipeTier) {
+	public static void spawnUpgradeParticleEffectsForTier(BlockPos blockPos, @NotNull PedestalRecipeTier newPedestalRecipeTier) {
 		MinecraftClient client = MinecraftClient.getInstance();
 		World world = client.world;
 		if (world == null) return;
@@ -291,7 +292,7 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 	public ItemActionResult onPaintBrushTrigger(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (blockEntity instanceof PedestalBlockEntity pedestalBlockEntity) {
-			if (pedestalBlockEntity.craftingTime > 0) {
+			if (pedestalBlockEntity.propertyDelegate.craftingTime > 0) {
 				return ItemActionResult.FAIL;
 			}
 			if (pedestalBlockEntity.currentRecipe == null) {

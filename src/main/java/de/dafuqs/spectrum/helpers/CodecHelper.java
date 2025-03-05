@@ -1,5 +1,9 @@
 package de.dafuqs.spectrum.helpers;
 
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
+
 import com.google.gson.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
@@ -9,10 +13,6 @@ import net.minecraft.nbt.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
 import org.apache.commons.lang3.math.*;
-
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
 
 public class CodecHelper {
 	
@@ -66,17 +66,12 @@ public class CodecHelper {
 			
 			@Override
 			public <T> DataResult<Map<K, V>> decode(DynamicOps<T> dynamicOps, MapLike<T> mapLike) {
-				return DataResult.success(keys(dynamicOps)
-						.map(key -> {
-							T valueData = mapLike.get(key);
-							if (valueData == null)
-								return null;
-							
-							K keyResult = keyCodec.decode(dynamicOps, key).result().map(com.mojang.datafixers.util.Pair::getFirst).orElse(null);
-							V valueResult = valueCodec.decode(dynamicOps, valueData).result().map(com.mojang.datafixers.util.Pair::getFirst).orElse(null);
+				return DataResult.success(mapLike.entries()
+						.map(entry -> {
+							K keyResult = keyCodec.decode(dynamicOps, entry.getFirst()).result().map(com.mojang.datafixers.util.Pair::getFirst).orElse(null);
+							V valueResult = valueCodec.decode(dynamicOps, entry.getSecond()).result().map(com.mojang.datafixers.util.Pair::getFirst).orElse(null);
 							if (keyResult == null || valueResult == null)
 								return null;
-							
 							return new Pair<>(keyResult, valueResult);
 						})
 						.filter(Objects::nonNull)
