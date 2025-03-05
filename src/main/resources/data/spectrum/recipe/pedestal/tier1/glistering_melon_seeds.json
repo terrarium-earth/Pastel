@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 200,
   "tier": "basic",
-  "magenta": 0,
-  "yellow": 8,
-  "cyan": 0,
-  "black": 0,
-  "white": 0,
+  "colors": {
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 8,
+    "spectrum:cyan": 0,
+    "spectrum:black": 0,
+    "spectrum:white": 0
+  },
   "experience": 1,
   "pattern": [
     "VGV",

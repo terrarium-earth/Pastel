@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 1600,
   "tier": "simple",
-  "cyan": 4,
-  "magenta": 4,
-  "yellow": 4,
-  "black": 0,
-  "white": 0,
+  "colors": {
+    "spectrum:cyan": 4,
+    "spectrum:magenta": 4,
+    "spectrum:yellow": 4,
+    "spectrum:black": 0,
+    "spectrum:white": 0
+  },
   "experience": 2.0,
   "pattern": [
     "ACA",

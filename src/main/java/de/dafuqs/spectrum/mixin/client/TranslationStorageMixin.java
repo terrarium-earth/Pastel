@@ -34,8 +34,9 @@ public class TranslationStorageMixin {
 
         this.translations = builder;
     }
-    
-    private static String getCrystallarieuaeuieueum() {
+	
+	@Unique
+	private static String getCrystallarieuaeuieueum() {
         List<String> possibilities = new ArrayList<>() {{
             add("Crystallarieum");
             add("Crystallareium");

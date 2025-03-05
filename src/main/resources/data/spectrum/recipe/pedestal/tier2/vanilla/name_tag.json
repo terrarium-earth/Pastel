@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal_shapeless",
   "time": 120,
   "tier": "simple",
-  "magenta": 2,
-  "yellow": 0,
-  "cyan": 2,
-  "black": 0,
-  "white": 0,
+  "colors": {
+    "spectrum:magenta": 2,
+    "spectrum:yellow": 0,
+    "spectrum:cyan": 2,
+    "spectrum:black": 0,
+    "spectrum:white": 0
+  },
   "experience": 1.0,
   "ingredients": [
     "minecraft:string",

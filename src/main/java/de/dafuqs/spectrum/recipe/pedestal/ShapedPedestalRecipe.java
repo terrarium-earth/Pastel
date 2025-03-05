@@ -64,7 +64,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				
 				IngredientStack ingredientStackAtPos = this.inputs.get(ingredientStackId);
 				ItemStack slotStack = pedestal.getStack(slot);
-				if (!ingredientStackAtPos.testAtLeast(slotStack)) {
+				if (!ingredientStackAtPos.test(slotStack)) {
 					SpectrumCommon.logError("Looks like DaFuqs or Electro fucked up Spectrums Pedestal recipe matching. Go open up a report with the recipe that was crafted and an image of the pedestals contents, please! :)");
 				}
 				
@@ -103,7 +103,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
 				RawShapedPedestalRecipe.CODEC.forGetter(recipe -> recipe.rawShapedRecipe),
-				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLOR, Codec.INT).forGetter(recipe -> recipe.powderInputs),
+				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLOR, Codec.INT).fieldOf("colors").forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(recipe -> recipe.craftingTime),

@@ -65,9 +65,6 @@ public abstract class LivingEntityMixin {
 	public abstract StatusEffectInstance getStatusEffect(RegistryEntry<StatusEffect> effect);
 	
 	@Shadow
-	public abstract boolean canHaveStatusEffect(StatusEffectInstance effect);
-	
-	@Shadow
 	public abstract void readCustomDataFromNbt(NbtCompound nbt);
 	
 	@Shadow
@@ -137,7 +134,6 @@ public abstract class LivingEntityMixin {
 	
 	@Inject(method = "travel", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;hasNoDrag()Z"))
 	private void spectrum$travel(CallbackInfo ci, @Local(ordinal = 1) LocalFloatRef f) {
-		var talon = SpectrumItems.DRAGON_TALON;
 		var entity = (LivingEntity) (Object) this;
 		var override = false;
 		var friction = -1F;
@@ -471,7 +467,7 @@ public abstract class LivingEntityMixin {
 			
 			var damage = Float.MAX_VALUE;
 			if (SleepStatusEffect.isImmuneish(entity)) {
-				if (entity instanceof PlayerEntity player)
+				if (entity instanceof PlayerEntity)
 					damage = entity.getHealth() * 0.95F;
 				else
 					damage = entity.getMaxHealth() * 0.3F;

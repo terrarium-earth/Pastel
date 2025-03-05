@@ -23,6 +23,7 @@ public abstract class ServerPlayerEntityMixin {
 	@Shadow
 	public abstract ServerWorld getServerWorld();
 	
+	@Unique
 	private long spectrum$lastGleamingPinTriggerTick = 0;
 	
 	@Inject(at = @At("HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")

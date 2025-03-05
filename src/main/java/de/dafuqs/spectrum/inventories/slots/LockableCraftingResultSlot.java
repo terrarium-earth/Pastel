@@ -6,7 +6,7 @@ import net.minecraft.screen.slot.*;
 
 public class LockableCraftingResultSlot extends CraftingResultSlot {
 	
-	private boolean locked;
+	boolean locked;
 	
 	public LockableCraftingResultSlot(Inventory craftingResultInventory, int index, int x, int y, PlayerEntity player, CraftingInventory input) {
 		super(player, input, craftingResultInventory, index, x, y);

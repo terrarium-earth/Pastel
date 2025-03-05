@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 300,
   "tier": "simple",
-  "cyan": 1,
-  "magenta": 1,
-  "yellow": 1,
-  "black": 0,
-  "white": 0,
+  "colors": {
+    "spectrum:cyan": 1,
+    "spectrum:magenta": 1,
+    "spectrum:yellow": 1,
+    "spectrum:black": 0,
+    "spectrum:white": 0
+  },
   "experience": 1.0,
   "pattern": [
     "SGS",

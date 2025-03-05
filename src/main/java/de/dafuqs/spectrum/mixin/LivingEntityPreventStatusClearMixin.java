@@ -31,7 +31,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	
 	@Inject(method = "clearStatusEffects", at = @At("HEAD"))
 	private void spectrum$detectFatalSlumber(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
-		hasFatalSlumber.set(getActiveStatusEffects().containsKey(SpectrumStatusEffects.FATAL_SLUMBER));
+		hasFatalSlumber.set(getActiveStatusEffects().containsKey(SpectrumStatusEffects.FATAL_SLUMBER.value()));
 	}
 	
 	@Inject(method = "clearStatusEffects", at = @At("TAIL"))

@@ -23,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.callback.*;
 
 import java.util.*;
 
-// the use of mixin extras @ModifyReturnValue ensues mods end up compatible when mods use it
 @Mixin(Block.class)
 public abstract class BlockMixin {
 	

@@ -606,24 +606,26 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), soundEvent, SoundCategory.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.15F);
 	}
 	
-	private boolean craftVanillaRecipe(@Nullable CraftingRecipe recipe, Inventory inventory, int maxCountPerStack) {
+	private boolean craftVanillaRecipe(@Nullable CraftingRecipe recipe, PedestalBlockEntity pedestal, int maxCountPerStack) {
 		if (canAcceptRecipeOutput(recipe, createRecipeInput(), maxCountPerStack)) {
 			ItemStack recipeOutput = recipe.craft(createRecipeInput().getCraftingGridInput(), null);
 			PlayerEntity player = getOwnerIfOnline();
 			//TODO revise for non-player crafting
-			if (player != null) { // some recipes may assume the player is never null (since this is the case in vanilla)
+			if (player == null) {
+				recipeOutput.onCraftByCrafter(this.getWorld());
+			} else {
 				recipeOutput.onCraftByPlayer(this.getWorld(), player, recipeOutput.getCount());
 			}
 			
 			// -1 for all crafting inputs
-			decrementInputStacks(inventory);
+			decrementInputStacks(pedestal);
 			
-			ItemStack existingOutput = inventory.getStack(OUTPUT_SLOT_ID);
+			ItemStack existingOutput = pedestal.getStack(OUTPUT_SLOT_ID);
 			if (existingOutput.isEmpty()) {
-				inventory.setStack(OUTPUT_SLOT_ID, recipeOutput.copy());
+				pedestal.setStack(OUTPUT_SLOT_ID, recipeOutput.copy());
 			} else {
 				existingOutput.increment(recipeOutput.getCount());
-				inventory.setStack(OUTPUT_SLOT_ID, existingOutput);
+				pedestal.setStack(OUTPUT_SLOT_ID, existingOutput);
 			}
 			
 			return true;
@@ -757,7 +759,7 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 	}
 	
 	public PedestalRecipeInput createRecipeInput() {
-		return PedestalRecipeInput.create(this, this.inventory);
+		return PedestalRecipeInput.create(this.inventory, getOwnerIfOnline());
 	}
 	
 	public CraftingRecipeInput.Positioned createPositionedInput() {

@@ -3,11 +3,13 @@
   "group": "idols",
   "time": 200,
   "tier": "advanced",
-  "magenta": 4,
-  "yellow": 2,
-  "cyan": 0,
-  "black": 1,
-  "white": 0,
+  "colors": {
+    "spectrum:magenta": 4,
+    "spectrum:yellow": 2,
+    "spectrum:cyan": 0,
+    "spectrum:black": 1,
+    "spectrum:white": 0
+  },
   "experience": 2.0,
   "pattern": [
     "SVS",

@@ -1,7 +1,5 @@
 package de.dafuqs.spectrum.recipe.pedestal.dynamic;
 
-import java.util.*;
-
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.blocks.pedestal.*;
 import de.dafuqs.spectrum.recipe.*;
@@ -11,10 +9,13 @@ import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.*;
+import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
 import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public class StarCandyRecipe extends ShapedPedestalRecipe {
 	
@@ -26,13 +27,10 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
 	}
 	
 	@Override
-	public ItemStack craft(PedestalRecipeInput inv, RegistryWrapper.WrapperLookup drm) {
-		if (inv.getPedestal() != null) {
-			@Nullable PlayerEntity owner = inv.getPedestal().getOwnerIfOnline();
-			double luckBonus = owner == null ? 0.0 : owner.getAttributeValue(EntityAttributes.GENERIC_LUCK);
-			if (new Random().nextFloat() < PURPLE_STAR_CANDY_CHANCE + luckBonus) {
-				return SpectrumItems.ENCHANTED_STAR_CANDY.getDefaultStack();
-			}
+	public ItemStack craft(PedestalRecipeInput input, RegistryWrapper.WrapperLookup wrapperLookup) {
+		@Nullable PlayerEntity player = input.getPlayer();
+		if (player != null && player.getRandom().nextFloat() < PURPLE_STAR_CANDY_CHANCE + player.getAttributeValue(EntityAttributes.GENERIC_LUCK)) {
+			return SpectrumItems.ENCHANTED_STAR_CANDY.getDefaultStack();
 		}
 		return this.output.copy();
 	}

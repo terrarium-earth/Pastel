@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.blocks.pedestal;
 import java.util.*;
 
 import de.dafuqs.spectrum.registries.*;
+import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.input.*;
 import org.jetbrains.annotations.*;
@@ -18,13 +19,12 @@ public class PedestalRecipeInput implements RecipeInput {
 	);
 	
 	@Nullable
-	private final PedestalBlockEntity blockEntity;
-	
+	private final PlayerEntity player;
 	private final CraftingRecipeInput craftingGridInput;
 	private final List<ItemStack> gemstonePowderStacks;
 	
-	public PedestalRecipeInput(@Nullable PedestalBlockEntity blockEntity, CraftingRecipeInput craftingGridInput, List<ItemStack> gemstonePowderStacks) {
-		this.blockEntity = blockEntity;
+	public PedestalRecipeInput(CraftingRecipeInput craftingGridInput, List<ItemStack> gemstonePowderStacks, @Nullable PlayerEntity player) {
+		this.player = player;
 		this.craftingGridInput = craftingGridInput;
 		this.gemstonePowderStacks = gemstonePowderStacks;
 	}
@@ -33,12 +33,12 @@ public class PedestalRecipeInput implements RecipeInput {
 		return craftingGridInput;
 	}
 	
-	public static PedestalRecipeInput create(PedestalBlockEntity blockEntity, List<ItemStack> stacks) {
-		return new PedestalRecipeInput(blockEntity, CraftingRecipeInput.create(3, 3, stacks.subList(0, 9)), stacks.subList(9, 14));
+	public static PedestalRecipeInput create(List<ItemStack> stacks, @Nullable PlayerEntity player) {
+		return new PedestalRecipeInput(CraftingRecipeInput.create(3, 3, stacks.subList(0, 9)), stacks.subList(9, 14), player);
 	}
 	
-	public static PedestalRecipeInput createWithFullGemstonePowder(PedestalBlockEntity blockEntity, List<ItemStack> stacks) {
-		return new PedestalRecipeInput(blockEntity, CraftingRecipeInput.create(3, 3, stacks), FULL_GEMSTONE_POWDER_STACKS);
+	public static PedestalRecipeInput createWithFullGemstonePowder(List<ItemStack> stacks, @Nullable PlayerEntity player) {
+		return new PedestalRecipeInput(CraftingRecipeInput.create(3, 3, stacks), FULL_GEMSTONE_POWDER_STACKS, player);
 	}
 	
 	@Override
@@ -52,10 +52,20 @@ public class PedestalRecipeInput implements RecipeInput {
 	
 	@Override
 	public int getSize() {
-		return 14;
+		return craftingGridInput.getSize() + gemstonePowderStacks.size();
 	}
 	
-	public PedestalBlockEntity getPedestal() {
-		return blockEntity;
+	public int[] getCraftingGridSlots() {
+		int size = craftingGridInput.getSize();
+		int[] slots = new int[size];
+		for (int i = 0; i < size; i++) {
+			slots[i] = i;
+		}
+		return slots;
 	}
+	
+	public @Nullable PlayerEntity getPlayer() {
+		return this.player;
+	}
+	
 }

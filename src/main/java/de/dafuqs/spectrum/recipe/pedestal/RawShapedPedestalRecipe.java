@@ -157,7 +157,7 @@ public class RawShapedPedestalRecipe {
 				}
 				
 				ItemStack itemStack = input.getStackInSlot(j, i);
-				if (!ingredient.testAtLeast(itemStack)) {
+				if (!ingredient.test(itemStack)) {
 					return false;
 				}
 			}

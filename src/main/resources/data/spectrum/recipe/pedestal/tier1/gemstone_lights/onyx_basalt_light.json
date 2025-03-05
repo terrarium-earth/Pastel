@@ -3,11 +3,13 @@
   "group": "onyx_lights",
   "time": 40,
   "tier": "advanced",
-  "cyan": 0,
-  "magenta": 0,
-  "yellow": 0,
-  "white": 0,
-  "black": 4,
+  "colors": {
+    "spectrum:cyan": 0,
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 0,
+    "spectrum:white": 0,
+    "spectrum:black": 4
+  },
   "experience": 0.3,
   "pattern": [
     "TTT",

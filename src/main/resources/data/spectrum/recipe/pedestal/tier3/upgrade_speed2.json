@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal_shapeless",
   "time": 3600,
   "tier": "advanced",
-  "cyan": 4,
-  "magenta": 8,
-  "yellow": 4,
-  "black": 8,
-  "white": 0,
+  "colors": {
+    "spectrum:cyan": 4,
+    "spectrum:magenta": 8,
+    "spectrum:yellow": 4,
+    "spectrum:black": 8,
+    "spectrum:white": 0
+  },
   "experience": 4.0,
   "pattern": [
     "S",
