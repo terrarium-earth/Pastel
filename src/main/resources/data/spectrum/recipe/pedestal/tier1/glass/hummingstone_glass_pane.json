@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 20,
   "tier": "basic",
-  "magenta": 0,
-  "yellow": 0,
-  "cyan": 0,
-  "black": 0,
-  "white": 0,
+  "colors": {
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 0,
+    "spectrum:cyan": 0,
+    "spectrum:black": 0,
+    "spectrum:white": 0
+  },
   "experience": 0.1,
   "pattern": [
     "GGG",

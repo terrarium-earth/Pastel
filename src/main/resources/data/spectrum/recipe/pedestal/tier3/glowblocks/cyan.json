@@ -3,11 +3,13 @@
   "group": "glowblocks",
   "time": 200,
   "tier": "advanced",
-  "cyan": 6,
-  "magenta": 0,
-  "yellow": 0,
-  "white": 0,
-  "black": 0,
+  "colors": {
+    "spectrum:cyan": 6,
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 0,
+    "spectrum:white": 0,
+    "spectrum:black": 0
+  },
   "experience": 1.0,
   "pattern": [
     "PQP",

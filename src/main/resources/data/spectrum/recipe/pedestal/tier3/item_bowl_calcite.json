@@ -3,11 +3,13 @@
   "group": "item_bowls",
   "time": 120,
   "tier": "advanced",
-  "cyan": 0,
-  "magenta": 0,
-  "yellow": 0,
-  "white": 0,
-  "black": 1,
+  "colors": {
+    "spectrum:cyan": 0,
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 0,
+    "spectrum:white": 0,
+    "spectrum:black": 1
+  },
   "experience": 1.0,
   "pattern": [
     "S S",
