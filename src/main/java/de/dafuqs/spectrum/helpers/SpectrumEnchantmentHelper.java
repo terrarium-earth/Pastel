@@ -157,7 +157,7 @@ public class SpectrumEnchantmentHelper {
 		ItemEnchantmentsComponent.Builder builder = new ItemEnchantmentsComponent.Builder(ItemEnchantmentsComponent.DEFAULT);
 		
 		for (Map.Entry<RegistryKey<Enchantment>, Integer> e : enchantments.entrySet()) {
-			builder.add(wrapper.getOrThrow(e.getKey()), 5);
+			builder.add(wrapper.getOrThrow(e.getKey()), e.getValue());
 		}
 		ItemStack stack = item.getDefaultStack();
 		stack.set(DataComponentTypes.ENCHANTMENTS, builder.build());
