@@ -27,14 +27,14 @@ public class SpectrumItemProviders {
 				var removed = builder.remove(amount);
 				if (!removed.isOf(requestedItem))
 					return 0;
-				stack.set(SpectrumDataComponentTypes.BOTTOMLESS_STACK, builder.build());
+				builder.buildAndSet(stack);
 				return removed.getCount();
 			}
 			
 			@Override
 			public int getItemCount(PlayerEntity player, ItemStack stack, Item requestedItem) {
 				var bottomlessStack = stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessBundleItem.BottomlessStack.DEFAULT);
-				if (!bottomlessStack.template().isOf(requestedItem))
+				if (!bottomlessStack.variant().isOf(requestedItem))
 					return 0;
 				return (int) Math.min(Integer.MAX_VALUE, bottomlessStack.count());
 			}
