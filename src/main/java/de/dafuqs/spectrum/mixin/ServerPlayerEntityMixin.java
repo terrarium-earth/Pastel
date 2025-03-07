@@ -26,11 +26,6 @@ public abstract class ServerPlayerEntityMixin {
 	@Unique
 	private long spectrum$lastGleamingPinTriggerTick = 0;
 	
-	@Inject(at = @At("HEAD"), method = "onDeath(Lnet/minecraft/entity/damage/DamageSource;)V")
-	protected void spectrum$dropPlayerHeadWithTreasureHunt(DamageSource source, CallbackInfo ci) {
-		TreasureHunterHelper.doTreasureHunterForPlayer((ServerPlayerEntity) (Object) this, source);
-	}
-	
 	@Inject(at = @At("RETURN"), method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z")
 	public void spectrum$damageReturn(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		ServerWorld world = this.getServerWorld();
