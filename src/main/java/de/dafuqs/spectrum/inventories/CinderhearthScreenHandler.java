@@ -1,10 +1,9 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.cinderhearth.*;
 import de.dafuqs.spectrum.inventories.slots.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import net.minecraft.block.entity.*;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.screen.*;
@@ -19,7 +18,7 @@ public class CinderhearthScreenHandler extends ScreenHandler {
 	public static final int PLAYER_INVENTORY_START_Y = 84;
 	
 	protected final World world;
-	protected CinderhearthBlockEntity blockEntity;
+	private final CinderhearthBlockEntity blockEntity;
 	private final PropertyDelegate propertyDelegate;
 	
 	public final ServerPlayerEntity player;
@@ -33,36 +32,30 @@ public class CinderhearthScreenHandler extends ScreenHandler {
 		}
 	}
 	
-	public CinderhearthScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new ArrayPropertyDelegate(5));
+	public CinderhearthScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
+		this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos, SpectrumBlockEntities.CINDERHEARTH).orElseThrow(), new ArrayPropertyDelegate(2));
 	}
 	
-	public CinderhearthScreenHandler(int syncId, PlayerInventory playerInventory, PropertyDelegate propertyDelegate) {
+	public CinderhearthScreenHandler(int syncId, PlayerInventory playerInventory, CinderhearthBlockEntity blockEntity, PropertyDelegate propertyDelegate) {
 		super(SpectrumScreenHandlerTypes.CINDERHEARTH, syncId);
 		
 		this.player = playerInventory.player instanceof ServerPlayerEntity serverPlayerEntity ? serverPlayerEntity : null;
 		this.world = playerInventory.player.getWorld();
 		this.propertyDelegate = propertyDelegate;
+		this.blockEntity = blockEntity;
 		
-		BlockEntity blockEntity = playerInventory.player.getWorld().getBlockEntity(getBlockPos());
-		if (blockEntity instanceof CinderhearthBlockEntity cinderhearthBlockEntity) {
-			this.blockEntity = cinderhearthBlockEntity;
-		} else {
-			throw new IllegalArgumentException("GUI called with a position where no valid BlockEntity exists");
-		}
+		checkSize(blockEntity, CinderhearthBlockEntity.INVENTORY_SIZE);
+		blockEntity.onOpen(playerInventory.player);
 		
-		checkSize(cinderhearthBlockEntity, CinderhearthBlockEntity.INVENTORY_SIZE);
-		cinderhearthBlockEntity.onOpen(playerInventory.player);
-		
-		this.addSlot(new InkInputSlot(cinderhearthBlockEntity, CinderhearthBlockEntity.INK_PROVIDER_SLOT_ID, 146, 13));
-		this.addSlot(new ExperienceStorageItemSlot(cinderhearthBlockEntity, CinderhearthBlockEntity.EXPERIENCE_STORAGE_ITEM_SLOT_ID, 38, 52));
-		this.addSlot(new Slot(cinderhearthBlockEntity, CinderhearthBlockEntity.INPUT_SLOT_ID, 14, 28));
+		this.addSlot(new InkInputSlot(blockEntity, CinderhearthBlockEntity.INK_PROVIDER_SLOT_ID, 146, 13));
+		this.addSlot(new ExperienceStorageItemSlot(blockEntity, CinderhearthBlockEntity.EXPERIENCE_STORAGE_ITEM_SLOT_ID, 38, 52));
+		this.addSlot(new Slot(blockEntity, CinderhearthBlockEntity.INPUT_SLOT_ID, 14, 28));
 		
 		for (int i = 0; i < 4; i++) {
-			this.addSlot(new Slot(cinderhearthBlockEntity, CinderhearthBlockEntity.FIRST_OUTPUT_SLOT_ID + i, 62 + i * 18, 28));
+			this.addSlot(new Slot(blockEntity, CinderhearthBlockEntity.FIRST_OUTPUT_SLOT_ID + i, 62 + i * 18, 28));
 		}
 		for (int i = 0; i < 4; i++) {
-			this.addSlot(new Slot(cinderhearthBlockEntity, CinderhearthBlockEntity.FIRST_OUTPUT_SLOT_ID + 4 + i, 62 + i * 18, 28 + 18));
+			this.addSlot(new Slot(blockEntity, CinderhearthBlockEntity.FIRST_OUTPUT_SLOT_ID + 4 + i, 62 + i * 18, 28 + 18));
 		}
 		
 		// player inventory
@@ -124,16 +117,12 @@ public class CinderhearthScreenHandler extends ScreenHandler {
 		return itemStack;
 	}
 	
-	public BlockPos getBlockPos() {
-		return BlockPosDelegate.getBlockPos(propertyDelegate);
-	}
-	
 	public int getCraftingTime() {
-		return this.propertyDelegate.get(3);
+		return this.propertyDelegate.get(0);
 	}
 	
 	public int getCraftingTimeTotal() {
-		return this.propertyDelegate.get(4);
+		return this.propertyDelegate.get(1);
 	}
 	
 }

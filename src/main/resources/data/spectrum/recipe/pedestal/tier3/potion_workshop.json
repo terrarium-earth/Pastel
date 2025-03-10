@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 1200,
   "tier": "advanced",
-  "cyan": 0,
-  "magenta": 4,
-  "yellow": 4,
-  "black": 1,
-  "white": 0,
+  "colors": {
+    "spectrum:cyan": 0,
+    "spectrum:magenta": 4,
+    "spectrum:yellow": 4,
+    "spectrum:black": 1,
+    "spectrum:white": 0
+  },
   "experience": 4.0,
   "pattern": [
     "CQC",

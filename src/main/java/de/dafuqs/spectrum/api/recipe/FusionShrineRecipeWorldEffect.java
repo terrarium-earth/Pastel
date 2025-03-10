@@ -23,7 +23,7 @@ public interface FusionShrineRecipeWorldEffect {
 			effect -> effect instanceof CommandRecipeWorldEffect command
 					? command.command
 					: String.valueOf(SpectrumRegistries.WORLD_EFFECT.getId(effect)));
-
+	
 	PacketCodec<ByteBuf, FusionShrineRecipeWorldEffect> PACKET_CODEC = PacketCodecs.STRING.xmap(
 			FusionShrineRecipeWorldEffect::fromString,
 			effect -> effect instanceof CommandRecipeWorldEffect command
@@ -32,7 +32,8 @@ public interface FusionShrineRecipeWorldEffect {
 	
 	FusionShrineRecipeWorldEffect NOTHING = register("nothing", new FusionShrineRecipeWorldEffect.SingleTimeRecipeWorldEffect() {
 		@Override
-		public void trigger(ServerWorld world, BlockPos pos) { }
+		public void trigger(ServerWorld world, BlockPos pos) {
+		}
 	});
 	
 	static FusionShrineRecipeWorldEffect register(String id, FusionShrineRecipeWorldEffect effect) {
@@ -48,7 +49,7 @@ public interface FusionShrineRecipeWorldEffect {
 			return new CommandRecipeWorldEffect(string);
 		}
 		
-		FusionShrineRecipeWorldEffect effect = SpectrumRegistries.WORLD_EFFECT.get(SpectrumCommon.ofSpectrum(string));
+		FusionShrineRecipeWorldEffect effect = SpectrumRegistries.WORLD_EFFECT.get(SpectrumCommon.ofSpectrumDefaulted(string));
 		if (effect == null) {
 			SpectrumCommon.logError("Unknown fusion shrine world effect '" + string + "'. Will be ignored.");
 			return NOTHING;
@@ -113,7 +114,8 @@ public interface FusionShrineRecipeWorldEffect {
 		}
 		
 		@Override
-		public void sendMessage(Text message) { }
+		public void sendMessage(Text message) {
+		}
 		
 		@Override
 		public boolean shouldReceiveFeedback() {

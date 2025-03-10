@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 2400,
   "tier": "complex",
-  "cyan": 0,
-  "magenta": 0,
-  "yellow": 0,
-  "white": 8,
-  "black": 2,
+  "colors": {
+    "spectrum:cyan": 0,
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 0,
+    "spectrum:white": 8,
+    "spectrum:black": 2
+  },
   "experience": 4.0,
   "pattern": [
     " JM",

@@ -27,7 +27,7 @@ import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
 public class CinderhearthBlock extends BlockWithEntity {
-
+	
 	public static final MapCodec<CinderhearthBlock> CODEC = createCodec(CinderhearthBlock::new);
 	
 	public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
@@ -36,12 +36,12 @@ public class CinderhearthBlock extends BlockWithEntity {
 		super(settings);
 		this.setDefaultState((this.stateManager.getDefaultState()).with(FACING, Direction.EAST));
 	}
-
+	
 	@Override
 	protected MapCodec<? extends BlockWithEntity> getCodec() {
 		return CODEC;
 	}
-
+	
 	@Nullable
 	@Override
 	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
@@ -140,7 +140,7 @@ public class CinderhearthBlock extends BlockWithEntity {
 			double e = pos.getY() + 0.4;
 			double f = (double) pos.getZ() + 0.5D;
 			
-			var recipe = cinderhearthBlockEntity.getCurrentRecipe();
+			var recipe = cinderhearthBlockEntity.getCurrentRecipeEntry();
 			if (recipe != null) {
 				if (random.nextDouble() < 0.1D) {
 					world.playSound(d, e, f, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 0.8F, false);

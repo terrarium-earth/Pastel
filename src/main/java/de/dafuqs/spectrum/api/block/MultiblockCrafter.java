@@ -77,6 +77,7 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
 			if (owner != null) {
 				itemEntity.setOwner(owner.getUuid());
 			}
+			itemEntity.setCovetedItem();
 			world.spawnEntity(itemEntity);
 			
 			amount -= currentAmount;
@@ -86,6 +87,7 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
 	static void spawnOutputAsItemEntity(World world, BlockPos pos, ItemStack outputItemStack) {
 		ItemEntity itemEntity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, outputItemStack);
 		itemEntity.addVelocity(0, 0.1, 0);
+		itemEntity.setCovetedItem();
 		world.spawnEntity(itemEntity);
 	}
 	

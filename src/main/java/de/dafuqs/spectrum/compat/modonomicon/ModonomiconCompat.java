@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.compat.*;
 import de.dafuqs.spectrum.compat.modonomicon.client.pages.*;
+import de.dafuqs.spectrum.compat.modonomicon.page_types.*;
 import de.dafuqs.spectrum.compat.modonomicon.pages.*;
 import de.dafuqs.spectrum.compat.modonomicon.unlock_conditions.*;
 import de.dafuqs.spectrum.recipe.anvil_crushing.*;
@@ -25,7 +26,10 @@ import net.minecraft.recipe.*;
 import net.minecraft.util.*;
 
 public class ModonomiconCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
-    
+	
+	// Entry Types
+	public static final Identifier WEB_LINK_ENTRY_TYPE = SpectrumCommon.locate("web_link");
+	
     // Page Types
     public static final Identifier ANVIL_CRUSHING_PAGE = SpectrumCommon.locate("anvil_crushing");
     public static final Identifier PEDESTAL_CRAFTING_PAGE = SpectrumCommon.locate("pedestal_crafting");
@@ -55,12 +59,17 @@ public class ModonomiconCompat extends SpectrumIntegrationPacks.ModIntegrationPa
     public static final Identifier ENCHANTMENT_REGISTERED = SpectrumCommon.locate("enchantment_registered");
     public static final Identifier RECIPE_LOADED_AND_UNLOCKED = SpectrumCommon.locate("recipe_loaded_and_unlocked");
     public static final Identifier NOT = SpectrumCommon.locate("not");
-    
-    @Override
+	
+	@Override
     public void register() {
+		registerPageTypes();
         registerPages();
         registerUnlockConditions();
     }
+	
+	private void registerPageTypes() {
+		LoaderRegistry.registerEntryType(WEB_LINK_ENTRY_TYPE, WebLinkEntry::fromJson, WebLinkEntry::fromNetwork);
+	}
 	
 	private void registerPages() {
         registerGatedRecipePage(ANVIL_CRUSHING_PAGE, SpectrumRecipeTypes.ANVIL_CRUSHING, false);

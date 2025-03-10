@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
+import java.util.*;
+
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.interaction.*;
@@ -13,30 +15,35 @@ import net.fabricmc.fabric.api.event.registry.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.registry.tag.*;
+import net.minecraft.util.math.random.*;
 import net.minecraft.util.math.random.Random;
-
-import java.util.*;
 
 @SuppressWarnings("unused")
 public class SpectrumRegistries {
 	
 	// TODO: do all these registries need to be synced?
-	public static final Registry<FusionShrineRecipeWorldEffect> WORLD_EFFECT = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.WORLD_EFFECT).buildAndRegister();
-	public static final Registry<GemstoneColor> GEMSTONE_COLOR = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.GEMSTONE_COLOR).buildAndRegister();
-	public static final Registry<GlassArrowVariant> GLASS_ARROW_VARIANT = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.GLASS_ARROW_VARIANT).attribute(RegistryAttribute.SYNCED).buildAndRegister();
-	public static final Registry<InkColor> INK_COLOR = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.INK_COLOR).attribute(RegistryAttribute.SYNCED).buildAndRegister();
-	public static final Registry<KindlingVariant> KINDLING_VARIANT = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.KINDLING_VARIANT).attribute(RegistryAttribute.SYNCED).buildAndRegister();
-	public static final Registry<LizardFrillVariant> LIZARD_FRILL_VARIANT = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.LIZARD_FRILL_VARIANT).attribute(RegistryAttribute.SYNCED).buildAndRegister();
-	public static final Registry<LizardHornVariant> LIZARD_HORN_VARIANT = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.LIZARD_HORN_VARIANT).attribute(RegistryAttribute.SYNCED).buildAndRegister();
-	public static final Registry<PastelUpgradeSignature> PASTEL_UPGRADE = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.PASTEL_UPGRADE).buildAndRegister();
+	public static final SpectrumRegistry<FusionShrineRecipeWorldEffect> WORLD_EFFECT = register(SpectrumRegistryKeys.WORLD_EFFECT, false);
+	public static final SpectrumRegistry<GemstoneColor> GEMSTONE_COLOR = register(SpectrumRegistryKeys.GEMSTONE_COLOR, false);
+	public static final SpectrumRegistry<GlassArrowVariant> GLASS_ARROW_VARIANT = register(SpectrumRegistryKeys.GLASS_ARROW_VARIANT, true);
+	public static final SpectrumRegistry<InkColor> INK_COLOR = register(SpectrumRegistryKeys.INK_COLOR, true);
+	public static final SpectrumRegistry<KindlingVariant> KINDLING_VARIANT = register(SpectrumRegistryKeys.KINDLING_VARIANT, true);
+	public static final SpectrumRegistry<LizardFrillVariant> LIZARD_FRILL_VARIANT = register(SpectrumRegistryKeys.LIZARD_FRILL_VARIANT, true);
+	public static final SpectrumRegistry<LizardHornVariant> LIZARD_HORN_VARIANT = register(SpectrumRegistryKeys.LIZARD_HORN_VARIANT, true);
+	public static final SpectrumRegistry<PastelUpgradeSignature> PASTEL_UPGRADE = register(SpectrumRegistryKeys.PASTEL_UPGRADE, false);
 	
-	public static final Registry<MapCodec<? extends ResonanceDropProcessor>> RESONANCE_DROP_PROCESSOR_TYPE = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.RESONANCE_DROP_PROCESSOR_TYPE).buildAndRegister();
+	public static final SpectrumRegistry<MapCodec<? extends ResonanceDropProcessor>> RESONANCE_DROP_PROCESSOR_TYPE = register(SpectrumRegistryKeys.RESONANCE_DROP_PROCESSOR_TYPE, false);
 	
-	public static final Registry<ExplosionModifierType> EXPLOSION_MODIFIER_TYPE = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.EXPLOSION_MODIFIER_TYPE).attribute(RegistryAttribute.SYNCED).buildAndRegister();
-	public static final Registry<ExplosionModifier> EXPLOSION_MODIFIER = FabricRegistryBuilder.createSimple(SpectrumRegistryKeys.EXPLOSION_MODIFIER).attribute(RegistryAttribute.SYNCED).buildAndRegister();
+	public static final SpectrumRegistry<ExplosionModifierType> EXPLOSION_MODIFIER_TYPE = register(SpectrumRegistryKeys.EXPLOSION_MODIFIER_TYPE, true);
+	public static final SpectrumRegistry<ExplosionModifier> EXPLOSION_MODIFIER = register(SpectrumRegistryKeys.EXPLOSION_MODIFIER, true);
 	
 	public static void register() {
 		DynamicRegistries.registerSynced(SpectrumRegistryKeys.RESONANCE_DROP_PROCESSOR, ResonanceDropProcessor.CODEC);
+	}
+	
+	private static <T> SpectrumRegistry<T> register(RegistryKey<? extends Registry<T>> key, boolean synced) {
+		FabricRegistryBuilder<T, SpectrumRegistry<T>> builder = FabricRegistryBuilder.from(new SpectrumRegistry<>(key, Lifecycle.stable()));
+		if (synced) builder.attribute(RegistryAttribute.SYNCED);
+		return builder.buildAndRegister();
 	}
 	
 	public static <T> T getRandomTagEntry(Registry<T> registry, TagKey<T> tag, Random random, T fallback) {

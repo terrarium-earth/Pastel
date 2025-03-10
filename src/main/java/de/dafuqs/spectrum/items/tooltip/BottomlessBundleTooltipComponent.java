@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.items.tooltip;
 
-import de.dafuqs.spectrum.api.gui.SpectrumTooltipComponent;
+import de.dafuqs.spectrum.api.gui.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.font.*;
 import net.minecraft.client.gui.*;
@@ -21,13 +21,13 @@ public class BottomlessBundleTooltipComponent implements SpectrumTooltipComponen
 	public BottomlessBundleTooltipComponent(BottomlessBundleTooltipData data) {
 		long amount = data.amount();
 		
-		long maxCount = data.itemStack().getMaxCount();
+		long maxCount = data.variant().getItem().getMaxCount();
 		double totalStacks = (float) amount / (float) maxCount;
 		this.displayedSlotCount = Math.max(2, Math.min(MAX_DISPLAYED_SLOTS + 1, (int) Math.ceil(totalStacks) + 1));
 		
 		this.itemStacks = DefaultedList.ofSize(5, ItemStack.EMPTY);
 		for (int i = 0; i < Math.min(5, displayedSlotCount + 1); i++) {
-			ItemStack slotStack = data.itemStack().copy();
+			ItemStack slotStack = data.variant().toStack();
 			var stackAmount = Math.min(Math.min(maxCount, amount - i * maxCount), Integer.MAX_VALUE);
 			slotStack.setCount((int) stackAmount);
 			this.itemStacks.set(i, slotStack);

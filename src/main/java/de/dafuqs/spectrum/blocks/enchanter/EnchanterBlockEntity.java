@@ -74,7 +74,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	protected boolean inventoryChanged;
 	private UpgradeHolder upgrades;
 	
-	private RecipeEntry<?> currentRecipe;
+	private @Nullable RecipeEntry<?> currentRecipe;
 	private int craftingTime;
 	private int craftingTimeTotal;
 	private int currentItemProcessingTime;
@@ -293,6 +293,9 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		PlayerEntity lastInteractedPlayer = enchanterBlockEntity.getOwnerIfOnline();
 		
 		if (lastInteractedPlayer == null) {
+			return false;
+		}
+		if (enchanterBlockEntity.currentRecipe == null) {
 			return false;
 		}
 		
@@ -545,6 +548,9 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	}
 	
 	private static boolean recipeMatches(EnchanterBlockEntity blockEntity, World world) {
+		if (blockEntity.currentRecipe == null) {
+			return false;
+		}
 		if (blockEntity.currentRecipe.value() instanceof EnchanterRecipe recipe) {
 			return recipe.matches(blockEntity.virtualInventory.createInput(), world);
 		} else if (blockEntity.currentRecipe.value() instanceof EnchantmentUpgradeRecipe recipe) {

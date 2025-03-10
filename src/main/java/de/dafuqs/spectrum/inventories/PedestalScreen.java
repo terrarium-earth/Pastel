@@ -21,22 +21,21 @@ public class PedestalScreen extends HandledScreen<PedestalScreenHandler> {
 	public static final Identifier BACKGROUND2 = SpectrumCommon.locate("textures/gui/container/pedestal2.png");
 	public static final Identifier BACKGROUND3 = SpectrumCommon.locate("textures/gui/container/pedestal3.png");
 	public static final Identifier BACKGROUND4 = SpectrumCommon.locate("textures/gui/container/pedestal4.png");
+	private final boolean structureUpdateAvailable;
 	private final Identifier backgroundTexture;
 	private final PedestalRecipeTier maxPedestalRecipeTierForVariant;
-	private final boolean structureUpdateAvailable;
 	final int informationIconX = 95;
 	final int informationIconY = 55;
 	
 	public PedestalScreen(PedestalScreenHandler handler, PlayerInventory playerInventory, Text title) {
 		super(handler, playerInventory, title);
 		this.backgroundHeight = 194;
-		
-		this.maxPedestalRecipeTierForVariant = handler.getPedestalRecipeTier();
+		this.maxPedestalRecipeTierForVariant = this.handler.getPedestalRecipeTier();
 		this.backgroundTexture = getBackgroundTextureForTier(this.maxPedestalRecipeTierForVariant);
-		PedestalRecipeTier maxPedestalRecipeTier = handler.getMaxPedestalRecipeTier();
+		PedestalRecipeTier maxPedestalRecipeTier = this.handler.getMaxPedestalRecipeTier();
 		this.structureUpdateAvailable = this.maxPedestalRecipeTierForVariant != maxPedestalRecipeTier;
 	}
-
+	
 	@Contract(pure = true)
 	public static Identifier getBackgroundTextureForTier(@NotNull PedestalRecipeTier recipeTier) {
 		switch (recipeTier) {
@@ -64,7 +63,7 @@ public class PedestalScreen extends HandledScreen<PedestalScreenHandler> {
 		int inventoryX = 8;
 		int intInventoryY = 100;
 		var tr = this.textRenderer;
-
+		
 		drawContext.drawText(tr, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
 		drawContext.drawText(tr, this.playerInventoryTitle, inventoryX, intInventoryY, RenderHelper.GREEN_COLOR, false);
 		
@@ -96,7 +95,7 @@ public class PedestalScreen extends HandledScreen<PedestalScreenHandler> {
 	}
 	
 	@Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
 		MinecraftClient client = MinecraftClient.getInstance();
 		if (mouseOverInformationIcon((int) mouseX, (int) mouseY)) {
 			Multiblock currentMultiBlock = MultiblockPreviewRenderer.getMultiblock();

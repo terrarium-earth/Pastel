@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.helpers;
 
-import de.dafuqs.spectrum.mixin.accessors.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.component.*;
@@ -10,34 +9,16 @@ import net.minecraft.entity.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
-import net.minecraft.server.world.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
 import java.util.concurrent.atomic.*;
-import java.util.stream.*;
 
 public class SpectrumEnchantmentHelper {
 	
 	public static boolean isCloaking(Enchantment ench) {
 		return !ench.getEffect(SpectrumEnchantmentEffectComponentTypes.CLOAKED).isEmpty();
-	}
-	
-	public static boolean canReveal(Enchantment cloak, ServerWorld world, int level, Entity user) {
-		var canReveal = new AtomicBoolean(false);
-		EnchantmentAccessor.invokeApplyEffects(
-				cloak.getEffect(SpectrumEnchantmentEffectComponentTypes.CLOAKED),
-				EnchantmentAccessor.invokeCreateEnchantedEntityLootContext(world, level, user, user.getPos()),
-				e -> canReveal.set(true));
-		return canReveal.get();
-	}
-	
-	public static void addRevealedEnchantments(Enchantment enchantment, ServerWorld world, int level, Entity user, ItemEnchantmentsComponent.Builder builder) {
-		EnchantmentAccessor.invokeApplyEffects(
-				enchantment.getEffect(SpectrumEnchantmentEffectComponentTypes.CLOAKED),
-				EnchantmentAccessor.invokeCreateEnchantedEntityLootContext(world, level, user, user.getPos()),
-				e -> builder.add(e, level));
 	}
 	
 	public static Pair<Boolean, ItemStack> addOrUpgradeEnchantment(RegistryWrapper.WrapperLookup registryLookup, ItemStack stack, RegistryKey<Enchantment> enchantmentKey, int level, boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts) {
@@ -49,15 +30,6 @@ public class SpectrumEnchantmentHelper {
 	public static Optional<ItemStack> addOrUpgradeEnchantmentOpt(RegistryWrapper.WrapperLookup registryLookup, ItemStack stack, RegistryKey<Enchantment> enchantmentKey, int level, boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts) {
 		Pair<Boolean, ItemStack> result = addOrUpgradeEnchantment(registryLookup, stack, enchantmentKey, level, forceEvenIfNotApplicable, allowEnchantmentConflicts);
 		return result.getLeft() ? Optional.empty() : Optional.of(result.getRight());
-	}
-	
-	public static ItemStack getMaxEnchantedStack(RegistryWrapper.WrapperLookup drm, Item item) {
-		var stack = item.getDefaultStack();
-		var builder = new ItemEnchantmentsComponent.Builder(EnchantmentHelper.getEnchantments(stack));
-		drm.getOptionalWrapper(RegistryKeys.ENCHANTMENT).map(RegistryWrapper::streamEntries).orElse(Stream.empty())
-				.forEach(enchantment -> builder.set(enchantment, enchantment.value().getMaxLevel()));
-		EnchantmentHelper.set(stack, builder.build());
-		return stack;
 	}
 	
 	/**
@@ -105,29 +77,9 @@ public class SpectrumEnchantmentHelper {
 	}
 	
 	/**
-	 * Clears all enchantments of receiverStack and replaces them with the ones present in sourceStacks
-	 * The enchantments are applied in order, so if there are conflicts, the first enchantment in sourceStacks gets chosen
+	 * Checks if a stack can be used as the source to create an enchanted book
 	 *
-	 * @param receiverStack             the stack that receives the enchantments
-	 * @param forceEvenIfNotApplicable  add enchantments to the item, even if the item does usually not support that enchantment
-	 * @param allowEnchantmentConflicts add enchantments to the item, even if there are enchantment conflicts
-	 * @param sourceStacks              sourceStacks the stacks that supply the enchantments
-	 * @return the resulting stack
-	 */
-	public static ItemStack clearAndCombineEnchantments(ItemStack receiverStack, boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts, ItemStack... sourceStacks) {
-		EnchantmentHelper.set(receiverStack, ItemEnchantmentsComponent.DEFAULT); // clear current ones
-		for (ItemStack stack : sourceStacks) {
-			for (var entry : EnchantmentHelper.getEnchantments(stack).getEnchantmentEntries()) {
-				receiverStack = addOrUpgradeEnchantment(receiverStack, entry.getKey(), entry.getIntValue(), forceEvenIfNotApplicable, allowEnchantmentConflicts).getRight();
-			}
-		}
-		return receiverStack;
-	}
-	
-	/**
-	 * Checks if an itemstack can be used as the source to create an enchanted book
-	 *
-	 * @param stack The itemstack to check
+	 * @param stack The stack to check
 	 * @return true if it is a book that can be turned into an enchanted book by enchanting
 	 */
 	public static boolean isEnchantableBook(@NotNull ItemStack stack) {
@@ -205,7 +157,7 @@ public class SpectrumEnchantmentHelper {
 		ItemEnchantmentsComponent.Builder builder = new ItemEnchantmentsComponent.Builder(ItemEnchantmentsComponent.DEFAULT);
 		
 		for (Map.Entry<RegistryKey<Enchantment>, Integer> e : enchantments.entrySet()) {
-			builder.add(wrapper.getOrThrow(e.getKey()), 5);
+			builder.add(wrapper.getOrThrow(e.getKey()), e.getValue());
 		}
 		ItemStack stack = item.getDefaultStack();
 		stack.set(DataComponentTypes.ENCHANTMENTS, builder.build());

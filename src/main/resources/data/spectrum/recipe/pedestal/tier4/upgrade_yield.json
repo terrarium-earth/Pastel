@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 3600,
   "tier": "complex",
-  "cyan": 0,
-  "magenta": 0,
-  "yellow": 0,
-  "black": 16,
-  "white": 0,
+  "colors": {
+    "spectrum:cyan": 0,
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 0,
+    "spectrum:black": 16,
+    "spectrum:white": 0
+  },
   "experience": 4.0,
   "pattern": [
     "LPL",

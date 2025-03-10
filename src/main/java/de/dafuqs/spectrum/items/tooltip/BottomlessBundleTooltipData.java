@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.items.tooltip;
 
-import net.minecraft.item.*;
-import net.minecraft.item.tooltip.TooltipData;
+import net.fabricmc.fabric.api.transfer.v1.item.*;
+import net.minecraft.item.tooltip.*;
 
-public record BottomlessBundleTooltipData(ItemStack itemStack, long amount) implements TooltipData {
+public record BottomlessBundleTooltipData(ItemVariant variant, long amount) implements TooltipData {
 }

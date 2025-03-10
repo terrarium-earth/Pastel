@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.blocks.particle_spawner.*;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.screen.*;
@@ -12,7 +13,7 @@ public class ParticleSpawnerScreenHandler extends ScreenHandler {
 	protected ParticleSpawnerBlockEntity blockEntity;
 	
 	public ParticleSpawnerScreenHandler(int syncId, PlayerInventory inventory, BlockPos pos) {
-		this(syncId, inventory, (ParticleSpawnerBlockEntity) inventory.player.getWorld().getBlockEntity(pos)); // risky cast of the day
+		this(syncId, inventory, inventory.player.getWorld().getBlockEntity(pos, SpectrumBlockEntities.PARTICLE_SPAWNER).orElseThrow());
 	}
 	
 	public ParticleSpawnerScreenHandler(int syncId, PlayerInventory playerInventory, ParticleSpawnerBlockEntity blockEntity) {

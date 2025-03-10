@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.inventories;
 
+import java.util.*;
+
 import de.dafuqs.spectrum.blocks.pedestal.*;
 import de.dafuqs.spectrum.inventories.slots.*;
 import de.dafuqs.spectrum.items.magic_items.*;
@@ -19,8 +21,6 @@ import net.minecraft.server.network.*;
 import net.minecraft.sound.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
-
-import java.util.*;
 
 public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<RecipeInput, Recipe<RecipeInput>> {
 	
@@ -92,7 +92,7 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 		}
 		
 		// preview slot
-		lockableCraftingResultSlot = new LockableCraftingResultSlot(craftingResultInventory, 0, 127, 37, playerInventory.player, craftingInventory, 0, 8);
+		lockableCraftingResultSlot = new LockableCraftingResultSlot(craftingResultInventory, 0, 127, 37, playerInventory.player, craftingInventory);
 		this.addSlot(lockableCraftingResultSlot);
 		
 		// player inventory
@@ -114,7 +114,7 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 		if (!world.isClient) {
 			ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) player;
 			
-			PedestalRecipeInput pedestalRecipeInput = PedestalRecipeInput.createWithFullGemstonePowder(inventory.getHeldStacks());
+			PedestalRecipeInput pedestalRecipeInput = PedestalRecipeInput.createWithFullGemstonePowder(inventory.getHeldStacks(), player);
 			
 			Optional<RecipeEntry<PedestalRecipe>> optionalPedestalCraftingRecipe = world.getRecipeManager().getFirstMatch(SpectrumRecipeTypes.PEDESTAL, pedestalRecipeInput, world);
 			if (optionalPedestalCraftingRecipe.isPresent()) {
@@ -206,7 +206,7 @@ public class CraftingTabletScreenHandler extends AbstractRecipeScreenHandler<Rec
 	
 	@Override
 	public boolean matches(RecipeEntry recipe) {
-		PedestalRecipeInput pedestalRecipeInput = PedestalRecipeInput.createWithFullGemstonePowder(this.craftingInventory.getHeldStacks());
+		PedestalRecipeInput pedestalRecipeInput = PedestalRecipeInput.createWithFullGemstonePowder(this.craftingInventory.getHeldStacks(), player);
 		if (recipe.value() instanceof PedestalRecipe pedestalRecipe)
 			return pedestalRecipe.matches(pedestalRecipeInput, this.world);
 		if (recipe.value() instanceof CraftingRecipe craftingRecipe)

@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum;
 
+import java.util.*;
+
 import de.dafuqs.spectrum.api.color.*;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.pastel_network.*;
@@ -38,8 +40,6 @@ import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 import org.slf4j.*;
 
-import java.util.*;
-
 public class SpectrumCommon implements ModInitializer {
 	
 	public static final String MOD_ID = "spectrum";
@@ -65,13 +65,12 @@ public class SpectrumCommon implements ModInitializer {
 	}
 	
 	/**
-	 * This is the Spectrum analogue of Identifier.ofVanilla. It's best used in a codec where
-	 * the default namespace will be spectrum.
+	 * This is the Spectrum analogue of Identifier.of, but instead of defaulting to the namespace 'minecraft', it defaults to 'spectrum'.
 	 *
 	 * @param id The stringified identifier to parse
 	 * @return The parsed identifier
 	 */
-	public static Identifier ofSpectrum(String id) {
+	public static Identifier ofSpectrumDefaulted(String id) {
 		int i = id.indexOf(':');
 		String path = id.substring(i + 1);
 		String namespace = i > 0 ? id.substring(0, i) : SpectrumCommon.MOD_ID;

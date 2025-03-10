@@ -75,7 +75,7 @@ public abstract class SpectrumChestBlockEntity extends LootableContainerBlockEnt
 	}
 	
 	@SuppressWarnings("unused")
-    public static void clientTick(World world, BlockPos pos, BlockState state, SpectrumChestBlockEntity blockEntity) {
+	public static void clientTick(World world, BlockPos pos, BlockState state, SpectrumChestBlockEntity blockEntity) {
 		blockEntity.lidAnimator.step();
 	}
 	

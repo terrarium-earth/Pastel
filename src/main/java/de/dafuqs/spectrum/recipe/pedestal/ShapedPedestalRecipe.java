@@ -1,6 +1,8 @@
 package de.dafuqs.spectrum.recipe.pedestal;
 
 
+import java.util.*;
+
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.*;
@@ -16,9 +18,6 @@ import net.minecraft.recipe.*;
 import net.minecraft.recipe.input.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
-import oshi.util.tuples.*;
-
-import java.util.*;
 
 public class ShapedPedestalRecipe extends PedestalRecipe {
 	
@@ -47,66 +46,26 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 	}
 	
 	@Override
-	public boolean matches(RecipeInput inv, World world) {
-		return getRecipeOrientation(inv) != null && super.matches(inv, world);
-	}
-	
-	// Triplet<XOffset, YOffset, Flipped>
-	public Triplet<Integer, Integer, Boolean> getRecipeOrientation(RecipeInput inv) {
-		for (int i = 0; i <= 3 - this.width; ++i) {
-			for (int j = 0; j <= 3 - this.height; ++j) {
-				if (this.matchesPattern(inv, i, j, true)) {
-					return new Triplet<>(i, j, true);
-				}
-				if (this.matchesPattern(inv, i, j, false)) {
-					return new Triplet<>(i, j, false);
-				}
-			}
-		}
-		return null;
-	}
-	
-	public boolean matchesPattern(RecipeInput inv, int offsetX, int offsetY, boolean flipped) {
-		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 3; ++j) {
-				int k = i - offsetX;
-				int l = j - offsetY;
-				IngredientStack ingredient = IngredientStack.EMPTY;
-				if (k >= 0 && l >= 0 && k < this.width && l < this.height) {
-					if (flipped) {
-						ingredient = this.inputs.get(this.width - k - 1 + l * this.width);
-					} else {
-						ingredient = this.inputs.get(k + l * this.width);
-					}
-				}
-				
-				if (!ingredient.test(inv.getStackInSlot(i + j * 3))) {
-					return false;
-				}
-			}
-		}
-		
-		return true;
+	public boolean matches(PedestalRecipeInput inv, World world) {
+		return rawShapedRecipe.matches(inv.getCraftingGridInput()) && super.matches(inv, world);
 	}
 	
 	@Override
 	public void consumeIngredients(PedestalBlockEntity pedestal) {
 		super.consumeIngredients(pedestal);
 		
-		Triplet<Integer, Integer, Boolean> orientation = getRecipeOrientation(pedestal.recipeInput);
-		if (orientation == null) {
-			return;
-		}
+		boolean mirrored = rawShapedRecipe.matches(pedestal.createRecipeInput().getCraftingGridInput(), true);
+		CraftingRecipeInput.Positioned positioned = pedestal.createPositionedInput();
 		
 		for (int x = 0; x < this.width; x++) {
 			for (int y = 0; y < this.height; y++) {
-				int ingredientStackId = orientation.getC() ? ((this.width - 1) - x) + this.width * y : x + this.width * y;
-				int slot = (x + orientation.getA()) + 3 * (y + orientation.getB());
+				int ingredientStackId = (mirrored ? ((this.width - 1) - x) : x) + this.width * y;
+				int slot = (x + positioned.left()) + 3 * (y + positioned.top());
 				
 				IngredientStack ingredientStackAtPos = this.inputs.get(ingredientStackId);
 				ItemStack slotStack = pedestal.getStack(slot);
 				if (!ingredientStackAtPos.test(slotStack)) {
-					SpectrumCommon.logError("Looks like DaFuqs fucked up Spectrums Pedestal recipe matching. Go open up a report with the recipe that was crafted and an image of the pedestals contents, please! :)");
+					SpectrumCommon.logError("Looks like DaFuqs or Electro fucked up Spectrums Pedestal recipe matching. Go open up a report with the recipe that was crafted and an image of the pedestals contents, please! :)");
 				}
 				
 				if (!slotStack.isEmpty()) {
@@ -144,7 +103,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
 				RawShapedPedestalRecipe.CODEC.forGetter(recipe -> recipe.rawShapedRecipe),
-				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLOR, Codec.INT).forGetter(recipe -> recipe.powderInputs),
+				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLOR, Codec.INT).fieldOf("colors").forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(recipe -> recipe.craftingTime),

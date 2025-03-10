@@ -2,11 +2,13 @@
   "type": "spectrum:pedestal",
   "time": 1200,
   "tier": "complex",
-  "magenta": 0,
-  "yellow": 0,
-  "cyan": 2,
-  "black": 0,
-  "white": 8,
+  "colors": {
+    "spectrum:magenta": 0,
+    "spectrum:yellow": 0,
+    "spectrum:cyan": 2,
+    "spectrum:black": 0,
+    "spectrum:white": 8
+  },
   "experience": 4.0,
   "pattern": [
     "CGC",

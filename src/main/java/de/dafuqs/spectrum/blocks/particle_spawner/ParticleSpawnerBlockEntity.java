@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.blocks.particle_spawner;
 
-import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.registries.*;
@@ -24,8 +23,7 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements ExtendedS
 	
 	protected ParticleSpawnerConfiguration configuration;
 	protected boolean initialized = false;
-	private final PropertyDelegate propertyDelegate = new BlockPosDelegate(pos);
-
+	
 	public ParticleSpawnerBlockEntity(BlockPos blockPos, BlockState blockState) {
 		this(SpectrumBlockEntities.PARTICLE_SPAWNER, blockPos, blockState);
 	}
@@ -49,15 +47,15 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements ExtendedS
 				0.02F,
 				true);
 	}
-
+	
 	@SuppressWarnings("unused")
-    public static void clientTick(World world, BlockPos pos, BlockState state, ParticleSpawnerBlockEntity blockEntity) {
+	public static void clientTick(World world, BlockPos pos, BlockState state, ParticleSpawnerBlockEntity blockEntity) {
 		BlockState blockState = world.getBlockState(pos);
 		if (blockState.getBlock() instanceof AbstractParticleSpawnerBlock particleSpawnerBlock && particleSpawnerBlock.shouldSpawnParticles(world, pos)) {
 			blockEntity.configuration.spawnParticles(world, pos);
 		}
 	}
-
+	
 	// Called when the chunk is first loaded to initialize this be
 	@Override
 	public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
@@ -113,7 +111,7 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements ExtendedS
 		this.updateInClientWorld();
 		this.markDirty();
 	}
-
+	
 	public ParticleSpawnerConfiguration getConfiguration() {
 		return configuration;
 	}
