@@ -130,6 +130,10 @@ public class SpectrumSkullBlockEntityRenderer implements BlockEntityRenderer<Spe
         builder.put(SpectrumSkullType.ZOMBIE_HORSE, new Pair<>(new HorseHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ZOMBIE_HORSE_HEAD)), Identifier.of("textures/entity/horse/horse_zombie.png")));
         builder.put(SpectrumSkullType.ZOMBIE_VILLAGER, new Pair<>(new VillagerHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ZOMBIE_VILLAGER_HEAD)), Identifier.of("textures/entity/zombie_villager/zombie_villager.png")));
         builder.put(SpectrumSkullType.ZOMBIFIED_PIGLIN, new Pair<>(new PiglinHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ZOMBIFIED_PIGLIN_HEAD)), Identifier.of("textures/entity/piglin/zombified_piglin.png")));
+		
+		builder.put(SpectrumSkullType.ARMADILLO, new Pair<>(new PiglinHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ARMADILLO_HEAD)), Identifier.of("textures/entity/armadillo.png"))); // TODO: add proper model
+		builder.put(SpectrumSkullType.BREEZE, new Pair<>(new BlazeHeadModel(modelLoader.getModelPart(SpectrumModelLayers.BREEZE_HEAD)), Identifier.of("textures/entity/breeze/breeze.png")));
+		builder.put(SpectrumSkullType.BOGGED, new Pair<>(new StrayHeadModel(modelLoader.getModelPart(SpectrumModelLayers.BOGGED_HEAD)), Identifier.of("textures/entity/skeleton/bogged.png")));
 
         // Spectrum
         builder.put(SpectrumSkullType.EGG_LAYING_WOOLY_PIG, new Pair<>(new EggLayingWoolyPigHeadModel(modelLoader.getModelPart(SpectrumModelLayers.EGG_LAYING_WOOLY_PIG_HEAD)), EggLayingWoolyPigEntityRenderer.TEXTURE));

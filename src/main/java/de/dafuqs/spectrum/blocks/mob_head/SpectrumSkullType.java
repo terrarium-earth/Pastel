@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.mob_head;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.block.*;
@@ -108,6 +108,9 @@ public enum SpectrumSkullType implements SkullBlock.SkullType {
 	ZOMBIE_HORSE(EntityType.ZOMBIE_HORSE, SoundEvents.ENTITY_ZOMBIE_HORSE_AMBIENT.getId()),
 	ZOMBIE_VILLAGER(EntityType.ZOMBIE_VILLAGER, SoundEvents.ENTITY_ZOMBIE_VILLAGER_AMBIENT.getId()),
 	ZOMBIFIED_PIGLIN(EntityType.ZOMBIFIED_PIGLIN, SoundEvents.ENTITY_ZOMBIFIED_PIGLIN_AMBIENT.getId()),
+	ARMADILLO(EntityType.ARMADILLO, SoundEvents.ENTITY_ARMADILLO_AMBIENT.getId()),
+	BREEZE(EntityType.BREEZE, SoundEvents.ENTITY_BREEZE_IDLE_GROUND.getId()),
+	BOGGED(EntityType.BOGGED, SoundEvents.ENTITY_BOGGED_AMBIENT.getId()),
 
     // Spectrum
 	EGG_LAYING_WOOLY_PIG(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, SoundEvents.ENTITY_PIG_AMBIENT.getId()),

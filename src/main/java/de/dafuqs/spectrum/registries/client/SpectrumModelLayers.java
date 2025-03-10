@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.registries.client;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.blocks.mob_head.client.models.*;
 import de.dafuqs.spectrum.entity.models.*;
-import de.dafuqs.spectrum.render.armor.BedrockArmorModel;
+import de.dafuqs.spectrum.render.armor.*;
 import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.minecraft.client.model.*;
@@ -133,6 +133,9 @@ public class SpectrumModelLayers {
 	public static final EntityModelLayer ZOMBIE_HORSE_HEAD = new EntityModelLayer(SpectrumCommon.locate("zombie_horse_head"), "main");
 	public static final EntityModelLayer ZOMBIE_VILLAGER_HEAD = new EntityModelLayer(SpectrumCommon.locate("zombie_villager_head"), "main");
 	public static final EntityModelLayer ZOMBIFIED_PIGLIN_HEAD = new EntityModelLayer(SpectrumCommon.locate("zombified_piglin_head"), "main");
+	public static final EntityModelLayer ARMADILLO_HEAD = new EntityModelLayer(SpectrumCommon.locate("armadillo_head"), "main");
+	public static final EntityModelLayer BREEZE_HEAD = new EntityModelLayer(SpectrumCommon.locate("breeze_head"), "main");
+	public static final EntityModelLayer BOGGED_HEAD = new EntityModelLayer(SpectrumCommon.locate("bogged_head"), "main");
 	
 	public static final EntityModelLayer EGG_LAYING_WOOLY_PIG_HEAD = new EntityModelLayer(SpectrumCommon.locate("egg_laying_wooly_pig_head"), "main");
 	public static final EntityModelLayer ERASER_HEAD = new EntityModelLayer(SpectrumCommon.locate("eraser_head"), "body");
@@ -256,6 +259,9 @@ public class SpectrumModelLayers {
 		EntityModelLayerRegistry.registerModelLayer(ZOGLIN_HEAD, HoglinHeadModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ZOMBIE_VILLAGER_HEAD, VillagerHeadModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(ZOMBIFIED_PIGLIN_HEAD, PiglinHeadModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ARMADILLO_HEAD, PiglinHeadModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(BREEZE_HEAD, PiglinHeadModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(BOGGED_HEAD, PiglinHeadModel::getTexturedModelData);
 		
 		EntityModelLayerRegistry.registerModelLayer(CAMEL_HEAD, CamelHeadModel::getTexturedModelData);
 		EntityModelLayerRegistry.registerModelLayer(SNIFFER_HEAD, SnifferHeadModel::getTexturedModelData);

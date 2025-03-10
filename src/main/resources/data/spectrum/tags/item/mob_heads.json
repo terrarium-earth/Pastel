@@ -117,6 +117,9 @@
     "spectrum:skeleton_horse_head",
     "spectrum:zombie_horse_head",
     "spectrum:dolphin_head",
-    "spectrum:pillager_head"
+    "spectrum:pillager_head",
+    "spectrum:armadillo_head",
+    "spectrum:breeze_head",
+    "spectrum:bogged_head"
   ]
 }

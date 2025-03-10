@@ -106,6 +106,9 @@ public class SpectrumLootPoolModifiers {
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/zombie_horse")), new TreasureHunterDropDefinition(SpectrumSkullType.ZOMBIE_HORSE, 0.02F));
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/dolphin")), new TreasureHunterDropDefinition(SpectrumSkullType.DOLPHIN, 0.02F));
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/pillager")), new TreasureHunterDropDefinition(SpectrumSkullType.PILLAGER, 0.02F));
+		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/armadillo")), new TreasureHunterDropDefinition(SpectrumSkullType.ARMADILLO, 0.02F));
+		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/breeze")), new TreasureHunterDropDefinition(SpectrumSkullType.BREEZE, 0.02F));
+		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/bogged")), new TreasureHunterDropDefinition(SpectrumSkullType.BOGGED, 0.02F));
 		
 		// TODO: ...ooooor we could simply put them in the json loot table
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, SpectrumCommon.locate("entities/egg_laying_wooly_pig")), new TreasureHunterDropDefinition(SpectrumSkullType.EGG_LAYING_WOOLY_PIG, 0.1F));

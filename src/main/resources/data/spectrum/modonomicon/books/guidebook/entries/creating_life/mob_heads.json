@@ -129,7 +129,10 @@
     {
       "type": "spectrum:collection",
       "items": [
-        "spectrum:zombified_piglin_head"
+        "spectrum:zombified_piglin_head",
+        "spectrum:armadillo_head",
+        "spectrum:breeze_head",
+        "spectrum:bogged_head"
       ]
     }
   ]
