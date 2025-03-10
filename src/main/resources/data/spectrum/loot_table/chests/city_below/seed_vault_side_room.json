@@ -35,7 +35,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 30,
-              "treasure": true
+              "options": "#minecraft:on_random_loot"
             }
           ]
         },

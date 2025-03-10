@@ -11,7 +11,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 20,
-              "treasure": true,
+              "options": "#minecraft:on_random_loot",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
@@ -29,7 +29,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 15,
-              "treasure": true,
+              "options": "#minecraft:on_random_loot",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
@@ -49,8 +49,8 @@
               "options": [
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -73,8 +73,8 @@
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -97,8 +97,8 @@
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -121,8 +121,8 @@
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -145,8 +145,8 @@
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -169,8 +169,8 @@
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
