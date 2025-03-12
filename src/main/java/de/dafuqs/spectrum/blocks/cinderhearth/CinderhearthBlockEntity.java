@@ -1,7 +1,5 @@
 package de.dafuqs.spectrum.blocks.cinderhearth;
 
-import java.util.*;
-
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.energy.*;
 import de.dafuqs.spectrum.api.energy.color.*;
@@ -40,6 +38,8 @@ import net.minecraft.util.collection.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public class CinderhearthBlockEntity extends LockableContainerBlockEntity implements MultiblockCrafter, SidedInventory, ExtendedScreenHandlerFactory<BlockPos>, InkStorageBlockEntity<IndividualCappedInkStorage>, RecipeInputProvider {
 	
@@ -193,7 +193,7 @@ public class CinderhearthBlockEntity extends LockableContainerBlockEntity implem
 		Inventories.readNbt(nbt, this.inventory, registryLookup);
 		
 		CodecHelper.fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage")).ifPresent(storage ->
-				this.inkStorage = new IndividualCappedInkStorage(storage.maxEnergyTotal(), storage.storedEnergy()));
+				this.inkStorage = new IndividualCappedInkStorage(storage.maxPerColor(), storage.storedEnergy()));
 		this.propertyDelegate.craftingTime = nbt.getShort("CraftingTime");
 		this.propertyDelegate.craftingTimeTotal = nbt.getShort("CraftingTimeTotal");
 		this.usesEfficiency = nbt.getBoolean("UsesEfficiency");
