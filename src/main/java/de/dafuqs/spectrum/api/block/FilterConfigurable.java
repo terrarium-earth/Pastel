@@ -1,7 +1,5 @@
 package de.dafuqs.spectrum.api.block;
 
-import java.util.*;
-
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.slots.*;
 import de.dafuqs.spectrum.networking.c2s_payloads.*;
@@ -18,6 +16,8 @@ import net.minecraft.screen.slot.*;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public interface FilterConfigurable {
 	
@@ -170,10 +170,6 @@ public interface FilterConfigurable {
 		
 		public ExtendedDataWithPos(BlockPos pos, FilterConfigurable configurable) {
 			this(pos, new ExtendedData(configurable.getItemFilters(), configurable.getFilterRows(), configurable.getSlotsPerRow(), configurable.getDrawnSlots()));
-		}
-		
-		public ExtendedDataWithPos(BlockPos pos, List<ItemVariant> filterItems, int rows, int slotsPerRow, int drawnSlots) {
-			this(pos, new ExtendedData(filterItems, rows, slotsPerRow, drawnSlots));
 		}
 		
 		public static final PacketCodec<RegistryByteBuf, ExtendedDataWithPos> PACKET_CODEC = PacketCodec.tuple(

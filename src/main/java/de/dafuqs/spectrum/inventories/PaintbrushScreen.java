@@ -60,7 +60,7 @@ public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreen
 	@SuppressWarnings("DataFlowIssue")
 	protected static void chooseColor(@Nullable InkColor inkColor) {
 		var entry = inkColor == null ? null : SpectrumRegistries.INK_COLOR.getEntry(inkColor);
-		ClientPlayNetworking.send(new InkColorSelectedC2SPayload(entry));
+		ClientPlayNetworking.send(new InkColorSelectedC2SPayload(Optional.ofNullable(entry)));
 		MinecraftClient client = MinecraftClient.getInstance();
 		client.world.playSound(null, client.player.getBlockPos(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundCategory.NEUTRAL, 0.6F, 1.0F);
 		client.player.closeHandledScreen();

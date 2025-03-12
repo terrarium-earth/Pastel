@@ -3,11 +3,12 @@ package de.dafuqs.spectrum.api.block;
 import de.dafuqs.spectrum.api.energy.color.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.registry.entry.*;
-import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public interface InkColorSelectedPacketReceiver {
 	
-	void onInkColorSelectedPacket(@Nullable RegistryEntry<InkColor> inkColor);
+	void onInkColorSelectedPacket(Optional<RegistryEntry<InkColor>> inkColor);
 	
 	BlockEntity getBlockEntity();
 	

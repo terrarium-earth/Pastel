@@ -2,7 +2,6 @@ package de.dafuqs.spectrum.networking.c2s_payloads;
 
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.registries.*;
@@ -14,11 +13,13 @@ import net.minecraft.registry.entry.*;
 import net.minecraft.screen.*;
 import net.minecraft.server.network.*;
 
-public record InkColorSelectedC2SPayload(RegistryEntry<InkColor> color) implements CustomPayload {
+import java.util.*;
+
+public record InkColorSelectedC2SPayload(Optional<RegistryEntry<InkColor>> inkColor) implements CustomPayload {
 	
 	public static final Id<InkColorSelectedC2SPayload> ID = SpectrumC2SPackets.makeId("ink_color_select");
 	public static final PacketCodec<RegistryByteBuf, InkColorSelectedC2SPayload> CODEC = PacketCodec.tuple(
-			PacketCodecHelper.nullable(PacketCodecs.registryEntry(SpectrumRegistries.INK_COLOR.getKey())), InkColorSelectedC2SPayload::color,
+			PacketCodecs.optional(PacketCodecs.registryEntry(SpectrumRegistries.INK_COLOR.getKey())), InkColorSelectedC2SPayload::inkColor,
 			InkColorSelectedC2SPayload::new
 	);
 	
@@ -34,14 +35,14 @@ public record InkColorSelectedC2SPayload(RegistryEntry<InkColor> color) implemen
 			ScreenHandler screenHandler = player.currentScreenHandler;
 			if (screenHandler instanceof InkColorSelectedPacketReceiver inkColorSelectedPacketReceiver) {
 				
-				var color = payload.color();
+				Optional<RegistryEntry<InkColor>> inkColor = payload.inkColor();
 				
 				// send the newly selected color to all players that have the same gui open
 				// this is minus the player that selected that entry (since they have that info already)
-				inkColorSelectedPacketReceiver.onInkColorSelectedPacket(color);
+				inkColorSelectedPacketReceiver.onInkColorSelectedPacket(inkColor);
 				for (ServerPlayerEntity serverPlayer : context.server().getPlayerManager().getPlayerList()) {
 					if (serverPlayer.currentScreenHandler instanceof InkColorSelectedPacketReceiver receiver && receiver.getBlockEntity() != null && receiver.getBlockEntity() == inkColorSelectedPacketReceiver.getBlockEntity()) {
-						InkColorSelectedS2CPayload.sendInkColorSelected(color, serverPlayer);
+						InkColorSelectedS2CPayload.sendInkColorSelected(inkColor, serverPlayer);
 					}
 				}
 			}

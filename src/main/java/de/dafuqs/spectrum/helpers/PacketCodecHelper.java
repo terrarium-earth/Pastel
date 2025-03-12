@@ -52,21 +52,6 @@ public class PacketCodecHelper {
 		return Identifier.PACKET_CODEC.xmap(registry::get, registry::getId);
 	}
 	
-	public static <B extends ByteBuf, C> PacketCodec<B, C> nullable(PacketCodec<B, C> codec) {
-		return new PacketCodec<>() {
-			@Override
-			public C decode(B buf) {
-				return buf.readBoolean() ? codec.decode(buf) : null;
-			}
-			
-			@Override
-			public void encode(B buf, C value) {
-				buf.writeBoolean(value != null);
-				if (value != null) codec.encode(buf, value);
-			}
-		};
-	}
-	
 	public static <E extends Enum<E>> PacketCodec<ByteBuf, E> enumOf(Supplier<E[]> valuesSupplier) {
 		var values = valuesSupplier.get();
 		return new PacketCodec<>() {

@@ -8,7 +8,8 @@ import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.entry.*;
-import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public class PaintbrushScreenHandler extends QuickNavigationGridScreenHandler implements InkColorSelectedPacketReceiver {
 	
@@ -42,8 +43,8 @@ public class PaintbrushScreenHandler extends QuickNavigationGridScreenHandler im
 	}
 	
 	@Override
-	public void onInkColorSelectedPacket(@Nullable RegistryEntry<InkColor> inkColor) {
-		PaintbrushItem.setColor(paintBrushStack, inkColor == null ? null : inkColor.value());
+	public void onInkColorSelectedPacket(Optional<RegistryEntry<InkColor>> inkColor) {
+		PaintbrushItem.setColor(paintBrushStack, inkColor.map(RegistryEntry::value).orElse(null));
 		onClosed(player);
 	}
 	
