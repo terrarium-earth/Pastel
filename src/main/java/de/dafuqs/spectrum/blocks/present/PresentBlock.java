@@ -159,8 +159,16 @@ public class PresentBlock extends BlockWithEntity {
 					} else {
 						world.playSound(null, posVec.x, posVec.y, posVec.z, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 0.5F, 4.0F);
 						PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, posVec, ParticleTypes.EXPLOSION, 1, Vec3d.ZERO);
-						processInteractions(presentBlockEntity.getStacks(), presentBlockEntity, world, pos, random);
-						ItemScatterer.spawn(world, pos, presentBlockEntity.getDefaultedStacks());
+						for (ItemStack stack : presentBlockEntity.getStacks()) {
+							@Nullable PresentUnpackBehavior behavior = getBehaviorFor(stack);
+							if (behavior != null) {
+								stack = behavior.onPresentUnpack(stack, presentBlockEntity, world, pos, random);
+								if (!stack.isEmpty()) {
+									continue;
+								}
+							}
+							ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), stack);
+						}
 					}
 					world.setBlockState(pos, Blocks.AIR.getDefaultState());
 				} else {
@@ -169,16 +177,6 @@ public class PresentBlock extends BlockWithEntity {
 				}
 			}
 			world.scheduleBlockTick(pos, state.getBlock(), TICKS_PER_OPENING_STEP);
-		}
-	}
-
-	public void processInteractions(List<ItemStack> stacks, PresentBlockEntity present, ServerWorld world, BlockPos pos, Random random) {
-		for (int i = 0; i < stacks.size(); i++) {
-			ItemStack stack = stacks.get(i);
-			@Nullable PresentUnpackBehavior behavior = getBehaviorFor(stack);
-			if (behavior != null) {
-				stacks.set(i, behavior.onPresentUnpack(stack, present, world, pos, random));
-			}
 		}
 	}
 	

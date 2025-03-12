@@ -65,6 +65,8 @@ import net.minecraft.block.AbstractBlock.*;
 import net.minecraft.block.enums.*;
 import net.minecraft.block.piston.*;
 import net.minecraft.client.render.*;
+import net.minecraft.component.*;
+import net.minecraft.component.type.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.*;
 import net.minecraft.entity.mob.*;
@@ -1930,7 +1932,7 @@ public class SpectrumBlocks {
 		
 		registerBlockWithItem("ethereal_platform", ETHEREAL_PLATFORM, settings, InkColors.LIGHT_GRAY);
 		registerBlockWithItem("universe_spyhole", UNIVERSE_SPYHOLE, settings, InkColors.LIGHT_GRAY);
-		registerBlockWithItem("present", PRESENT, new PresentBlockItem(PRESENT, IS.of(1)), InkColors.LIGHT_GRAY);
+		registerBlockWithItem("present", PRESENT, new PresentBlockItem(PRESENT, IS.of(1).component(DataComponentTypes.BUNDLE_CONTENTS, BundleContentsComponent.DEFAULT)), InkColors.LIGHT_GRAY);
 		registerBlockWithItem("titration_barrel", TITRATION_BARREL, settings, InkColors.MAGENTA);
 		
 		registerBlockWithItem("parametric_mining_device", PARAMETRIC_MINING_DEVICE, new ParametricMiningDeviceItem(PARAMETRIC_MINING_DEVICE, IS.of(8)), InkColors.RED);

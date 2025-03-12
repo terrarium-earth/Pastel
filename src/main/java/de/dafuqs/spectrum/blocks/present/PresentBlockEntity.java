@@ -11,7 +11,6 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.registry.*;
 import net.minecraft.server.network.*;
-import net.minecraft.util.collection.*;
 import net.minecraft.util.math.*;
 
 import java.util.*;
@@ -47,7 +46,7 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
 	@Override
 	public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		super.readNbt(nbt, registryLookup);
-		this.presentStack = ItemStack.fromNbtOrEmpty(registryLookup, nbt.getCompound("Bundle"));
+		this.presentStack = ItemStack.fromNbtOrEmpty(registryLookup, nbt.getCompound("Present"));
 		if (nbt.contains("OpenerUUID")) {
 			this.openerUUID = nbt.getUuid("OpenerUUID");
 		} else {
@@ -115,12 +114,6 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
 
 	public List<ItemStack> getStacks() {
 		return PresentBlockItem.getBundledStacks(this.presentStack).toList();
-	}
-
-	public DefaultedList<ItemStack> getDefaultedStacks() {
-		var list = DefaultedList.copyOf(ItemStack.EMPTY);
-		list.addAll(PresentBlockItem.getBundledStacks(this.presentStack).toList());
-		return list;
 	}
 
 	public void setPresent(ItemStack present) {

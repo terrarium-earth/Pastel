@@ -14,6 +14,7 @@ import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.items.*;
 import de.dafuqs.spectrum.items.armor.*;
+import de.dafuqs.spectrum.items.bundles.*;
 import de.dafuqs.spectrum.items.conditional.CloakedItem;
 import de.dafuqs.spectrum.items.conditional.*;
 import de.dafuqs.spectrum.items.energy.*;
@@ -185,7 +186,7 @@ public class SpectrumItems {
 	public static final Item ONYX_GLASS_ARROW = new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.ONYX, ColoredCraftingParticleEffect.BLACK);
 	public static final Item MOONSTONE_GLASS_ARROW = new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.MOONSTONE, ColoredCraftingParticleEffect.WHITE);
 	
-	public static final Item OMNI_ACCELERATOR = new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON));
+	public static final Item OMNI_ACCELERATOR = new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON).component(DataComponentTypes.BUNDLE_CONTENTS, BundleContentsComponent.DEFAULT));
 	
 	public static final Item AZURITE_GLASS_AMPOULE = new AzuriteGlassAmpouleItem(IS.of(Rarity.UNCOMMON));
 	public static final Item MALACHITE_GLASS_AMPOULE = new MalachiteGlassAmpouleItem(IS.of(Rarity.UNCOMMON));
@@ -538,7 +539,7 @@ public class SpectrumItems {
 	public static final Item STORAGE_NODE_CRYSTAL = new Item(IS.of());
 	public static final Item BUFFER_NODE_CRYSTAL = new Item(IS.of());
 	public static final Item GATHER_NODE_CRYSTAL = new Item(IS.of());
-	public static final Item EXTENDED_BUNDLE_ITEM = registerDeferred("extended_bundle", new Item(IS.of()), InkColors.BROWN);
+	public static final Item EXTENDED_BUNDLE_ITEM = registerDeferred("extended_bundle", new ExtendedBundleItem(IS.of()), InkColors.BROWN);
 	
 	public static RegistryKey<Item> keyOf(String name) {
 		return RegistryKey.of(RegistryKeys.ITEM, locate(name));
