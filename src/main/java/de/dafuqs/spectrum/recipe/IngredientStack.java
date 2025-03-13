@@ -118,20 +118,17 @@ public class IngredientStack implements CustomIngredient {
 		public static Serializer INSTANCE = new Serializer();
 		
 		public static final MapCodec<IngredientStack> MAP_CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
-				Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("ingredient").forGetter(o -> o.ingredient),
-				ComponentPredicate.CODEC.fieldOf("components").forGetter(o -> o.componentPredicate),
-				ItemSubPredicate.PREDICATES_MAP_CODEC.fieldOf("predicates").forGetter(o -> o.itemSubPredicates),
-				Codec.INT.fieldOf("count").forGetter(o -> o.count)
+				MapCodec.assumeMapUnsafe(Ingredient.DISALLOW_EMPTY_CODEC).forGetter(IngredientStack::getIngredient),
+				ComponentPredicate.CODEC.optionalFieldOf("components", ComponentPredicate.EMPTY).forGetter(o -> o.componentPredicate),
+				ItemSubPredicate.PREDICATES_MAP_CODEC.optionalFieldOf("predicates", Map.of()).forGetter(o -> o.itemSubPredicates),
+				Codec.INT.optionalFieldOf("count", 1).forGetter(o -> o.count)
 		).apply(i, IngredientStack::new));
 		
 		public static final Codec<IngredientStack> CODEC = Codec.withAlternative(
+				MAP_CODEC.codec(),
 				Codec.xor(Registries.ITEM.getCodec(), TagKey.codec(RegistryKeys.ITEM)).xmap(
 						either -> either.map(IngredientStack::ofItems, IngredientStack::ofTag),
 						ingredientStack -> ingredientStack.item != null ? Either.left(ingredientStack.item) : Either.right(ingredientStack.tag)
-				),
-				Codec.withAlternative(
-						Ingredient.DISALLOW_EMPTY_CODEC.xmap(IngredientStack::of, IngredientStack::getIngredient),
-						MAP_CODEC.codec()
 				)
 		);
 		
