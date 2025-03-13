@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.blocks.energy.*;
 import net.fabricmc.fabric.api.screenhandler.v1.*;
 import net.minecraft.client.gui.screen.ingame.*;
 import net.minecraft.network.*;
@@ -55,7 +54,7 @@ public class SpectrumScreenHandlerTypes {
 		PAINTBRUSH = registerSimple(SpectrumScreenHandlerIDs.PAINTBRUSH, PaintbrushScreenHandler::new);
 		WORKSTAFF = registerSimple(SpectrumScreenHandlerIDs.WORKSTAFF, WorkstaffScreenHandler::new);
 		
-		PEDESTAL = registerExtended(SpectrumScreenHandlerIDs.PEDESTAL, PedestalScreenHandler::new, BlockPos.PACKET_CODEC);
+		PEDESTAL = registerExtended(SpectrumScreenHandlerIDs.PEDESTAL, PedestalScreenHandler::new, PedestalScreenHandler.ScreenOpeningData.PACKET_CODEC);
 		PARTICLE_SPAWNER = registerExtended(SpectrumScreenHandlerIDs.PARTICLE_SPAWNER, ParticleSpawnerScreenHandler::new, BlockPos.PACKET_CODEC);
 		COMPACTING_CHEST = registerExtended(SpectrumScreenHandlerIDs.COMPACTING_CHEST, CompactingChestScreenHandler::new, BlockPos.PACKET_CODEC);
 		BLACK_HOLE_CHEST = registerExtended(SpectrumScreenHandlerIDs.BLACK_HOLE_CHEST, BlackHoleChestScreenHandler::new, FilterConfigurable.ExtendedDataWithPos.PACKET_CODEC);

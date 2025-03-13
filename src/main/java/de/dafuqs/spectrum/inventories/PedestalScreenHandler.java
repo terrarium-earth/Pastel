@@ -4,9 +4,11 @@ import de.dafuqs.spectrum.blocks.pedestal.*;
 import de.dafuqs.spectrum.inventories.slots.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.*;
+import io.netty.buffer.*;
 import net.fabricmc.api.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
+import net.minecraft.network.codec.*;
 import net.minecraft.recipe.*;
 import net.minecraft.recipe.book.*;
 import net.minecraft.recipe.input.*;
@@ -14,29 +16,45 @@ import net.minecraft.screen.*;
 import net.minecraft.screen.slot.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
-import org.jetbrains.annotations.*;
 
 public class PedestalScreenHandler extends AbstractRecipeScreenHandler<RecipeInput, Recipe<RecipeInput>> {
+	
+	public record ScreenOpeningData(BlockPos pos, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
+		public static final PacketCodec<ByteBuf, ScreenOpeningData> PACKET_CODEC = PacketCodec.tuple(
+				BlockPos.PACKET_CODEC, ScreenOpeningData::pos,
+				PedestalRecipeTier.PACKET_CODEC, ScreenOpeningData::pedestalRecipeTier,
+				PedestalRecipeTier.PACKET_CODEC, ScreenOpeningData::maxRecipeTier,
+				PedestalScreenHandler.ScreenOpeningData::new
+		);
+	}
 	
 	protected final World world;
 	private final PedestalBlockEntity blockEntity;
 	private final PropertyDelegate propertyDelegate;
 	private final RecipeBookCategory category;
 	
-	public PedestalScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
-		this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos, SpectrumBlockEntities.PEDESTAL).orElseThrow(), new ArrayPropertyDelegate(2));
+	private final PedestalRecipeTier pedestalRecipeTier;
+	private final PedestalRecipeTier maxPedestalRecipeTier;
+	
+	// clientside
+	public PedestalScreenHandler(int syncId, PlayerInventory playerInventory, ScreenOpeningData screenOpeningData) {
+		this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(screenOpeningData.pos, SpectrumBlockEntities.PEDESTAL).orElseThrow(), new ArrayPropertyDelegate(2), screenOpeningData.pedestalRecipeTier, screenOpeningData.maxRecipeTier);
 	}
 	
-	public PedestalScreenHandler(int syncId, PlayerInventory playerInventory, PedestalBlockEntity blockEntity, PropertyDelegate propertyDelegate) {
-		this(SpectrumScreenHandlerTypes.PEDESTAL, RecipeBookCategory.CRAFTING, syncId, playerInventory, blockEntity, propertyDelegate);
+	// serverside
+	public PedestalScreenHandler(int syncId, PlayerInventory playerInventory, PedestalBlockEntity blockEntity, PropertyDelegate propertyDelegate, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
+		this(SpectrumScreenHandlerTypes.PEDESTAL, RecipeBookCategory.CRAFTING, syncId, playerInventory, blockEntity, propertyDelegate, pedestalRecipeTier, maxRecipeTier);
 	}
 	
-	protected PedestalScreenHandler(ScreenHandlerType<?> type, RecipeBookCategory recipeBookCategory, int i, @NotNull PlayerInventory playerInventory, PedestalBlockEntity blockEntity, PropertyDelegate propertyDelegate) {
+	protected PedestalScreenHandler(ScreenHandlerType<?> type, RecipeBookCategory recipeBookCategory, int i, PlayerInventory playerInventory, PedestalBlockEntity blockEntity, PropertyDelegate propertyDelegate, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
 		super(type, i);
 		this.category = recipeBookCategory;
 		this.propertyDelegate = propertyDelegate;
 		this.world = playerInventory.player.getWorld();
+		
 		this.blockEntity = blockEntity;
+		this.pedestalRecipeTier = pedestalRecipeTier;
+		this.maxPedestalRecipeTier = maxRecipeTier;
 		
 		checkSize(blockEntity, PedestalBlockEntity.INVENTORY_SIZE);
 		checkDataCount(propertyDelegate, 2);
@@ -238,11 +256,11 @@ public class PedestalScreenHandler extends AbstractRecipeScreenHandler<RecipeInp
 	}
 	
 	public PedestalRecipeTier getPedestalRecipeTier() {
-		return blockEntity.getVariant().getRecipeTier();
+		return this.pedestalRecipeTier;
 	}
 	
 	public PedestalRecipeTier getMaxPedestalRecipeTier() {
-		return blockEntity.getHighestAvailableRecipeTier();
+		return this.maxPedestalRecipeTier;
 	}
 	
 	public PedestalBlockEntity getBlockEntity() {

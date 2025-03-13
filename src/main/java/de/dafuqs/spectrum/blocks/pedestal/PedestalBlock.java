@@ -21,16 +21,17 @@ import net.minecraft.particle.*;
 import net.minecraft.screen.*;
 import net.minecraft.server.network.*;
 import net.minecraft.state.*;
-import net.minecraft.state.property.*;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.*;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.random.*;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 import org.joml.*;
+
+import java.util.*;
 
 public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlock, PaintbrushTriggered {
 	
@@ -177,10 +178,11 @@ public class PedestalBlock extends BlockWithEntity implements RedstonePoweredBlo
 	}
 	
 	protected void openScreen(World world, BlockPos pos, PlayerEntity player) {
-		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof PedestalBlockEntity pedestalBlockEntity) {
+		Optional<PedestalBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PEDESTAL);
+		if (blockEntity.isPresent()) {
+			PedestalBlockEntity pedestalBlockEntity = blockEntity.get();
 			pedestalBlockEntity.setOwner(player);
-			player.openHandledScreen((NamedScreenHandlerFactory) blockEntity);
+			player.openHandledScreen(pedestalBlockEntity);
 		}
 	}
 	
