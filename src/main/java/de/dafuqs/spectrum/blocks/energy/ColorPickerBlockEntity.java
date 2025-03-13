@@ -20,8 +20,6 @@ import net.minecraft.entity.player.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
 import net.minecraft.network.listener.*;
 import net.minecraft.network.packet.*;
 import net.minecraft.network.packet.s2c.play.*;
@@ -41,15 +39,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class ColorPickerBlockEntity extends LootableContainerBlockEntity implements PlayerOwned, InkStorageBlockEntity<TotalCappedInkStorage>, ExtendedScreenHandlerFactory<ColorPickerBlockEntity.ColorPickerScreenData> {
-	
-	public record ColorPickerScreenData(BlockPos pos, Optional<RegistryEntry<InkColor>> inkColor) {
-		public static final PacketCodec<RegistryByteBuf, ColorPickerScreenData> PACKET_CODEC = PacketCodec.tuple(
-				BlockPos.PACKET_CODEC, ColorPickerScreenData::pos,
-				PacketCodecs.optional(PacketCodecs.registryEntry(SpectrumRegistryKeys.INK_COLOR)), ColorPickerScreenData::inkColor,
-				ColorPickerScreenData::new
-		);
-	}
+public class ColorPickerBlockEntity extends LootableContainerBlockEntity implements PlayerOwned, InkStorageBlockEntity<TotalCappedInkStorage>, ExtendedScreenHandlerFactory<ColorPickerScreenHandler.ScreenOpeningData> {
 	
 	public static final int INVENTORY_SIZE = 2; // input & output slots
 	public static final int INPUT_SLOT_ID = 0;
@@ -131,12 +121,12 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new ColorPickerScreenHandler(syncId, playerInventory, new ColorPickerScreenData(this.pos, this.selectedColor));
+		return new ColorPickerScreenHandler(syncId, playerInventory, new ColorPickerScreenHandler.ScreenOpeningData(this.pos, this.selectedColor));
 	}
 	
 	@Override
-	public ColorPickerScreenData getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
-		return new ColorPickerScreenData(this.pos, this.selectedColor);
+	public ColorPickerScreenHandler.ScreenOpeningData getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
+		return new ColorPickerScreenHandler.ScreenOpeningData(this.pos, this.selectedColor);
 	}
 	
 	@Override

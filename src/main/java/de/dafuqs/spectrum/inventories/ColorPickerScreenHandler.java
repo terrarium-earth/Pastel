@@ -8,15 +8,26 @@ import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
+import net.minecraft.network.*;
+import net.minecraft.network.codec.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.screen.*;
 import net.minecraft.screen.slot.*;
 import net.minecraft.server.network.*;
+import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 
 import java.util.*;
 
 public class ColorPickerScreenHandler extends ScreenHandler implements InkColorSelectedPacketReceiver {
+	
+	public record ScreenOpeningData(BlockPos pos, Optional<RegistryEntry<InkColor>> inkColor) {
+		public static final PacketCodec<RegistryByteBuf, ScreenOpeningData> PACKET_CODEC = PacketCodec.tuple(
+				BlockPos.PACKET_CODEC, ScreenOpeningData::pos,
+				PacketCodecs.optional(PacketCodecs.registryEntry(SpectrumRegistryKeys.INK_COLOR)), ScreenOpeningData::inkColor,
+				ScreenOpeningData::new
+		);
+	}
 	
 	public static final int PLAYER_INVENTORY_START_X = 8;
 	public static final int PLAYER_INVENTORY_START_Y = 84;
@@ -34,7 +45,7 @@ public class ColorPickerScreenHandler extends ScreenHandler implements InkColorS
 		}
 	}
 	
-	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, ColorPickerBlockEntity.ColorPickerScreenData data) {
+	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, ScreenOpeningData data) {
 		this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(data.pos(), SpectrumBlockEntities.COLOR_PICKER).orElseThrow(), data.inkColor());
 	}
 	
