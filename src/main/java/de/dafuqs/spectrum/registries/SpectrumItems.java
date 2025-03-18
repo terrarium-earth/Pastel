@@ -138,13 +138,13 @@ public class SpectrumItems {
 	public static final Item RESONANT_PICKAXE = new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
-			return Map.of(SpectrumEnchantments.CLOAKED_RESONANCE, 1);
+			return Map.of(SpectrumEnchantments.RESONANCE, 1);
 		}
 	};
 	public static final Item DRAGONRENDING_PICKAXE = new GlintlessPickaxe(SpectrumToolMaterial.DRACONIC, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.DRACONIC, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
-			return Map.of(SpectrumEnchantments.CLOAKED_RAZING, 3);
+			return Map.of(SpectrumEnchantments.RAZING, 3);
 		}
 	};
 	public static final SpectrumFishingRodItem LAGOON_ROD = new LagoonRodItem(IS.of().maxDamage(256));

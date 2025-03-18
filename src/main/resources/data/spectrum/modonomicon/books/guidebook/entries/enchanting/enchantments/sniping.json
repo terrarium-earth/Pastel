@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/sniping": 2
+          "spectrum:sniping": 2
         }
       },
       "text": "book.spectrum.guidebook.sniping.page1.text"

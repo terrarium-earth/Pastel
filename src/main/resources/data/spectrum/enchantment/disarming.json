@@ -2,20 +2,22 @@
   "description": {
     "translate": "enchantment.spectrum.disarming"
   },
-  "anvil_cost": 0,
+  "effects": {},
+  "anvil_cost": 8,
   "exclusive_set": "#spectrum:exclusive_set/disarming",
   "max_cost": {
-    "base": 0,
+    "base": 40,
     "per_level_above_first": 0
   },
   "max_level": 2,
   "min_cost": {
-    "base": 0,
+    "base": 10,
     "per_level_above_first": 0
   },
   "slots": [
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/disarming",
+  "primary_items": "#minecraft:enchantable/sword",
   "weight": 1
 }

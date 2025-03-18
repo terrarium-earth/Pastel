@@ -1,6 +1,6 @@
 {
   "values": [
-    "#spectrum:tight_grip",
+    "spectrum:tight_grip",
     {
       "id": "malum:rebound",
       "required": false

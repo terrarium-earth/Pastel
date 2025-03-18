@@ -1,6 +1,6 @@
 {
   "type": "spectrum:enchantment_upgrade",
-  "enchantment": "spectrum:cloaked/exuberance",
+  "enchantment": "spectrum:exuberance",
   "levels": [
     {
       "experience": 400,

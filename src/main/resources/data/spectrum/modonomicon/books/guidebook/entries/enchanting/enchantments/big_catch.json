@@ -12,7 +12,7 @@
       },
       {
         "type": "spectrum:enchantment_registered",
-        "enchantment_id": "spectrum:cloaked/big_catch"
+        "enchantment_id": "spectrum:big_catch"
       }
     ]
   },
@@ -38,7 +38,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/big_catch": 3
+          "spectrum:big_catch": 3
         }
       },
       "text": "book.spectrum.guidebook.big_catch.page1.text"

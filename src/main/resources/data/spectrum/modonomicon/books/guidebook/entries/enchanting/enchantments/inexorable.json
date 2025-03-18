@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/inexorable": 1
+          "spectrum:inexorable": 1
         }
       },
       "text": "book.spectrum.guidebook.inexorable.page1.text"

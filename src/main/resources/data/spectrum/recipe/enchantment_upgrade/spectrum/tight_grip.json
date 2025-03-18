@@ -1,6 +1,6 @@
 {
   "type": "spectrum:enchantment_upgrade",
-  "enchantment": "spectrum:cloaked/tight_grip",
+  "enchantment": "spectrum:tight_grip",
   "levels": [
     {
       "experience": 400,
@@ -23,7 +23,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/tight_grip"
+        "spectrum:tight_grip"
       ]
     }
   ]

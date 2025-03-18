@@ -35,7 +35,7 @@
     "id": "minecraft:enchanted_book",
     "components": {
       "stored_enchantments": {
-        "spectrum:cloaked/clovers_favor": 1
+        "spectrum:clovers_favor": 1
       }
     }
   },
@@ -44,7 +44,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/clovers_favor"
+        "spectrum:clovers_favor"
       ]
     }
   ]

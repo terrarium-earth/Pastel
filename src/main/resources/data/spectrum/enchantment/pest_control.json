@@ -2,15 +2,16 @@
   "description": {
     "translate": "enchantment.spectrum.pest_control"
   },
-  "anvil_cost": 0,
+  "effects": {},
+  "anvil_cost": 8,
   "exclusive_set": "#spectrum:exclusive_set/pest_control",
   "max_cost": {
-    "base": 0,
+    "base": 30,
     "per_level_above_first": 0
   },
   "max_level": 1,
   "min_cost": {
-    "base": 0,
+    "base": 10,
     "per_level_above_first": 0
   },
   "slots": [

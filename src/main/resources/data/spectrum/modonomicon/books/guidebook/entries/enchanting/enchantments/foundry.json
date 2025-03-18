@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/foundry": 1
+          "spectrum:foundry": 1
         }
       },
       "text": "book.spectrum.guidebook.foundry.page1.text"

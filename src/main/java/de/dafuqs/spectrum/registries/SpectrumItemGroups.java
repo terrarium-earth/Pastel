@@ -178,7 +178,7 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumItems.EXCHANGING_STAFF);
 				SpectrumEnchantmentHelper.addOrUpgradeEnchantmentOpt(displayContext.lookup(), SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), Enchantments.FORTUNE, 3, false, false).ifPresent(entries::add);
 				SpectrumEnchantmentHelper.addOrUpgradeEnchantmentOpt(displayContext.lookup(), SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), Enchantments.SILK_TOUCH, 1, false, false).ifPresent(entries::add);
-				SpectrumEnchantmentHelper.addOrUpgradeEnchantmentOpt(displayContext.lookup(), SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), SpectrumEnchantments.CLOAKED_RESONANCE, 1, false, false).ifPresent(entries::add);
+				SpectrumEnchantmentHelper.addOrUpgradeEnchantmentOpt(displayContext.lookup(), SpectrumItems.EXCHANGING_STAFF.getDefaultStack(), SpectrumEnchantments.RESONANCE, 1, false, false).ifPresent(entries::add);
 				entries.add(SpectrumItems.BLOCK_FLOODER);
 				entries.add(SpectrumItems.ENDER_SPLICE);
 				entries.add(SpectrumEnchantmentHelper.getEnchantedStack(displayContext.lookup(), SpectrumItems.ENDER_SPLICE, Map.of(SpectrumEnchantments.RESONANCE, 1, SpectrumEnchantments.INDESTRUCTIBLE, 1)));
