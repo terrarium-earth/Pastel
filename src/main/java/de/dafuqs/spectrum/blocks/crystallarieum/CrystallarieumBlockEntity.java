@@ -10,6 +10,7 @@ import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.crystallarieum.*;
 import de.dafuqs.spectrum.registries.*;
+import de.dafuqs.spectrum.render.animation.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.*;
@@ -30,6 +31,8 @@ import java.util.*;
 
 public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity implements PlayerOwned, InkStorageBlockEntity<IndividualCappedInkStorage> {
 	
+	private final static FlowAnimator.Factory<CrystallarieumBlockEntity> FACTORY;
+	
 	protected final static int CATALYST_SLOT_ID = 0;
 	protected final static int INK_STORAGE_STACK_SLOT_ID = 1;
 	protected final static int INVENTORY_SIZE = 2;
@@ -46,12 +49,17 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	protected RecipeEntry<CrystallarieumRecipe> currentRecipe;
 	protected CrystallarieumCatalyst currentCatalyst = CrystallarieumCatalyst.EMPTY;
 	
-	// for performance reasons, the crystallarieum only processes recipe logic all 20 ticks
+	// for performance reasons, the crystallarieum only processes recipe logic every 20 ticks
 	public static final int SECOND = 20;
 	protected TickLooper tickLooper = new TickLooper(SECOND);
 	
 	protected int currentGrowthStageTicks;
 	protected boolean canWork;
+	float rotation = 0F;
+	
+	FlowAnimator animator;
+	@NotNull
+	FlowData<Float> _alpha = FlowData.NULL(), _speed = FlowData.NULL(), _bounce = FlowData.NULL();
 	
 	public CrystallarieumBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.CRYSTALLARIEUM, pos, state, INVENTORY_SIZE);
@@ -61,6 +69,13 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	
 	@SuppressWarnings("unused")
     public static void clientTick(@NotNull World world, BlockPos blockPos, BlockState blockState, CrystallarieumBlockEntity crystallarieum) {
+		if (crystallarieum.animator == null) {
+			crystallarieum.animator = FACTORY.create(FlowStates.INIT, crystallarieum);
+		}
+		else {
+			crystallarieum.updateAnimator();
+		}
+		
 		if (crystallarieum.canWork && crystallarieum.currentRecipe != null) {
 			ParticleEffect particleEffect = ColoredSparkleRisingParticleEffect.of(crystallarieum.currentRecipe.value().getInkColor().getColorInt());
 			
@@ -71,6 +86,22 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 				world.addImportantParticle(particleEffect, blockPos.getX() + 0.1 + randomX, blockPos.getY() + 1, blockPos.getZ() + 0.1 + randomZ, 0.0D, 0.03D, 0.0D);
 			}
 		}
+	}
+	
+	public void updateAnimator() {
+		if (currentRecipe == null) {
+			animator.swapState(FlowStates.INACTIVE);
+		}
+		else {
+			if (canWork) {
+				animator.swapState(FlowStates.ACTIVE);
+			}
+			else {
+				animator.swapState(FlowStates.IDLE);
+			}
+		}
+		
+		animator.tick();
 	}
 
 	@SuppressWarnings("unused")
@@ -99,6 +130,8 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		}
 		
 		if (crystallarieum.inkStorage.getEnergy(recipe.value().getInkColor()) == 0) {
+			if (crystallarieum.canWork)
+				crystallarieum.canWork = false;
 			return;
 		}
 		
@@ -330,4 +363,34 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		return false;
 	}
 	
+	static {
+		var builder = new FlowAnimator.Builder<>(CrystallarieumBlockEntity.class);
+		
+		builder.stateInfo(FlowStates.INACTIVE, 30);
+		builder.stateInfo(FlowStates.ACTIVE, 15);
+		builder.stateInfo(FlowStates.IDLE, 13);
+		
+		builder.handle("alpha", FlowHandlers.FLOAT)
+				.initial(0.1F)
+				.forStates(0.1F, FlowStates.INACTIVE)
+				.forStates(0.4F, FlowStates.IDLE)
+				.forStates(0.8F, FlowStates.ACTIVE)
+				.push();
+		
+		builder.handle("speed", FlowHandlers.FLOAT)
+				.initial(0F)
+				.forStates(-0.5F, FlowStates.INACTIVE)
+				.forStates(1F, FlowStates.IDLE)
+				.forStates(2.5F, FlowStates.ACTIVE)
+				.push();
+		
+		builder.handle("bounce", FlowHandlers.FLOAT)
+				.initial(0F)
+				.forStates(2F, FlowStates.INACTIVE)
+				.forStates(1F, FlowStates.IDLE)
+				.forStates(4F, FlowStates.ACTIVE)
+				.push();
+		
+		FACTORY = builder.build();
+	}
 }

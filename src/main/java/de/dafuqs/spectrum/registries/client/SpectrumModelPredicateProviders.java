@@ -73,7 +73,6 @@ public class SpectrumModelPredicateProviders {
 		registerPresentPredicates(SpectrumBlocks.PRESENT.asItem());
 		registerMysteriousLocketPredicates(SpectrumItems.MYSTERIOUS_LOCKET);
 		registerStructureCompassPredicates(SpectrumItems.MYSTERIOUS_COMPASS);
-		registerNullableInkColorPredicate(SpectrumBlocks.CRYSTALLARIEUM.asItem());
 		
 		registerPipeBombPredicates(SpectrumItems.PIPE_BOMB);
 	}
