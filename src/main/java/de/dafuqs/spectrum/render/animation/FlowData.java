@@ -4,7 +4,14 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-@ApiStatus.NonExtendable
+/**
+ * FlowData objects contain all the dynamic animation data of a field.
+ * They are in practice disposable instances of {@link DataSignature}, and the two are closely intertwined.
+ * <p><p>
+ * <i>There is no need to keep track of this throughout construction or initialization of {@link FlowAnimator}.
+ * As long as the reference string is correct, the corresponding field will be populated via reflection.</i>
+ * @see de.dafuqs.spectrum.render.animation.FlowAnimator.Builder#handle(String, FlowHandler) 
+ */
 public final class FlowData<N extends Number> {
 	
 	private final DataSignature<N> signature;
@@ -89,6 +96,6 @@ public final class FlowData<N extends Number> {
 	}
 	
 	public static <N extends Number> FlowData<N> NULL() {
-		return new FlowData<N>(DataSignature.DUMMY, true);
+		return new FlowData<N>(DataSignature.dummy(), true);
 	}
 }

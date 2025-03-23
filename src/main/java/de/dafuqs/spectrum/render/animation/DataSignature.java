@@ -5,10 +5,13 @@ import org.jetbrains.annotations.*;
 import java.lang.reflect.*;
 import java.util.*;
 
+/**
+ * A flywheel object containing all the static animation data for a field. This acts as parent and manager for {@link FlowData} objects.
+ * <p><p>
+ * DataSignatures are tied to classes, and are called upon whenever a {@link FlowAnimator} for its respective object is created to instantiate FlowData.
+ * They also take care of populating the fields tied to their child FlowData objects.
+ */
 public final class DataSignature<N extends Number> {
-	
-	@SuppressWarnings("rawtypes")
-	public static final DataSignature DUMMY = new DataSignature(null, null, null, null, null, Collections.EMPTY_MAP);
 	
 	private final Field reference;
 	final FlowHandler<N> handler;
@@ -35,7 +38,6 @@ public final class DataSignature<N extends Number> {
 		return data;
 	}
 	
-	
 	void link(FlowData<?> data, Object target) throws IllegalAccessException {
 		if (reference.canAccess(target)) {
 			reference.set(target, data);
@@ -45,4 +47,13 @@ public final class DataSignature<N extends Number> {
 		reference.set(target, data);
 		reference.setAccessible(false);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <N extends Number> DataSignature<N> dummy() {
+		return DUMMY;
+	}
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	private static final DataSignature DUMMY = new DataSignature(null, null, null, null, null, Collections.EMPTY_MAP);
+	
 }

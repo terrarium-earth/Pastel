@@ -4,6 +4,11 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
+/**
+ * An FSM-based animation engine, for use primarily in procedural animation.
+ * <p>
+ * Especially oriented towards BERs, but generally useful.
+ */
 public class FlowAnimator {
 	
 	final Map<FlowState, StateInfo> trackedStates;
@@ -22,11 +27,21 @@ public class FlowAnimator {
 			interpProgress--;
 	}
 	
+	/**
+	 * Updates the animation data values of the state machine.
+	 * @param time can be zeroed out if unnecessary.
+	 */
 	public void animate(float tickDelta, long time) {
 		var delta = Math.clamp(1 - ((interpProgress - tickDelta) / info.interpTime), 0, 1);
 		liveData.forEach(flowData -> flowData.update(delta, time));
 	}
 	
+	/**
+	 * Swaps to a new animation sate. Does nothing if already in the target state.
+	 * <p>
+	 * Notifies listeners of the change and updates State Info.
+	 * @see FlowData#notifyStateChange(FlowState, boolean)
+	 */
 	public void swapState(@NotNull FlowState newState) {
 		if (newState == info.state || !trackedStates.containsKey(newState))
 			return;
@@ -36,7 +51,7 @@ public class FlowAnimator {
 		interpProgress = info.interpTime;
 	}
 	
-	public static class Builder<T> {
+	public static final class Builder<T> {
 		private final List<DataSignature<?>> holder = new ArrayList<>();
 		private final Map<FlowState, StateInfo> states = new HashMap<>();
 		private final Class<T> clazz;
@@ -55,6 +70,13 @@ public class FlowAnimator {
 			return stateInfo(state, interpolationTime, false);
 		}
 		
+		/**
+		 * Commences creation of a {@link DataSignature} object.
+		 * <p>
+		 * <b>Exert care when inputting the handle reference. This string will be used to populate a matching field with a {@link FlowData} object
+		 * upon animator instantiation.</b> The field in question must be of a FlowData with matching type, and its name must be the same as the reference prepended with an underscore.
+		 * @param reference the matching field name, will be prepended with a "_" for population.
+		 */
 		public <N extends Number> DataBuilder<T, N> handle(String reference, FlowHandler<N> handler) {
 			return new DataBuilder<>(this, reference, handler);
 		}
@@ -108,7 +130,6 @@ public class FlowAnimator {
 				var clazz = builder.clazz;
 				assert handler != null;
 				assert interpolation != null;
-				assert reference != null;
 				assert !stateHolder.isEmpty();
 				
 				if (defaultKeyFrame == null)
@@ -124,7 +145,7 @@ public class FlowAnimator {
 		}
 	}
 	
-	public record StateInfo(FlowState state, int interpTime, boolean clearOnMiss) {}
+	record StateInfo(FlowState state, int interpTime, boolean clearOnMiss) {}
 	
 	public static final class Factory<T> {
 		
