@@ -107,7 +107,6 @@ Every single input and be it just feedback or a bug report is greatly appreciate
 - Go Fish: Full compat for Go Fish enchants & loot tables; enchantment recipes
 - Gobber: Additional recipes
 - Hexcasting: Alternate recipes and usages for edified leaves & charged amethyst
-- Idwtialsimmoedm: Descriptions for all of Spectrum's enchantments; descriptions will be hidden until unlocked
 - Little Ants: Ants will collect rare resources if they get hold of Spectrum's leaves
 - More Geodes: Crystal Apothecary compat
 - Mythis Upgrades: Crystal Apothecary compat
