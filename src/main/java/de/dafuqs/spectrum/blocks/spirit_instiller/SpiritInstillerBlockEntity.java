@@ -2,8 +2,6 @@ package de.dafuqs.spectrum.blocks.spirit_instiller;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.api.color.*;
-import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.decoration.*;
@@ -62,11 +60,11 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	private int craftingTimeTotal;
 	private boolean valid;
 	
-	FlowAnimator animator;
-	FlowData<Float> _platformY = FlowData.NULL(), _haloY = FlowData.NULL(),
+	protected FlowAnimator animator;
+	protected FlowData<Float> _platformY = FlowData.NULL(), _haloY = FlowData.NULL(),
 			_platformSpin = FlowData.NULL(), _haloSpin = FlowData.NULL(),
 			_haloAlpha = FlowData.NULL(), _blossomAlpha = FlowData.NULL();
-	float platform, geode, calcite, innergeode;
+	protected float platform, geode, calcite, innergeode;
 	
 	public SpiritInstillerBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.SPIRIT_INSTILLER, pos, state, INVENTORY_SIZE);

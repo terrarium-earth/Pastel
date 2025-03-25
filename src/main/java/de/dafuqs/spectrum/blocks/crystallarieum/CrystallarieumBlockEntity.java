@@ -57,9 +57,9 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	protected boolean canWork;
 	float rotation = 0F;
 	
-	FlowAnimator animator;
+	protected FlowAnimator animator;
 	@NotNull
-	FlowData<Float> _alpha = FlowData.NULL(), _speed = FlowData.NULL(), _bounce = FlowData.NULL();
+	protected FlowData<Float> _alpha = FlowData.NULL(), _speed = FlowData.NULL(), _bounce = FlowData.NULL();
 	
 	public CrystallarieumBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.CRYSTALLARIEUM, pos, state, INVENTORY_SIZE);
