@@ -14,6 +14,7 @@ import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.spirit_instiller.*;
 import de.dafuqs.spectrum.registries.*;
+import de.dafuqs.spectrum.render.animation.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.player.*;
@@ -36,6 +37,7 @@ import java.util.*;
 
 public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter {
 	
+	private static final FlowAnimator.Factory<SpiritInstillerBlockEntity> FACTORY;
 	protected static final int INVENTORY_SIZE = 3; // 0: instiller stack; 1-2: item bowl stacks
 	public static final List<Vec3i> itemBowlOffsetsHorizontal = new ArrayList<>() {{
 		add(new Vec3i(0, 0, 2));
@@ -56,17 +58,49 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	private RecipeEntry<SpiritInstillerRecipe> currentRecipe;
 	private int craftingTime;
 	private int craftingTimeTotal;
+	boolean valid;
+	
+	FlowAnimator animator;
+	FlowData<Float> _platformY = FlowData.NULL(), _haloY = FlowData.NULL(),
+			_platformSpin = FlowData.NULL(), _haloSpin = FlowData.NULL(),
+			_tilt = FlowData.NULL(), _haloAlpha = FlowData.NULL(), _blossomAlpha = FlowData.NULL();
 	
 	public SpiritInstillerBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.SPIRIT_INSTILLER, pos, state, INVENTORY_SIZE);
 	}
 	
-	public static void clientTick(World world, BlockPos blockPos, BlockState blockState, @NotNull SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
-		if (spiritInstillerBlockEntity.currentRecipe != null) {
-			spiritInstillerBlockEntity.doInstillerParticles(world);
+	public static void clientTick(World world, BlockPos blockPos, BlockState blockState, @NotNull SpiritInstillerBlockEntity instiller) {
+		if (instiller.animator == null) {
+			instiller.animator = FACTORY.create(FlowStates.INIT, instiller);
+		}
+		else {
+			instiller.updateAnimator();
+		}
+		
+		if (instiller.currentRecipe != null) {
+			instiller.doInstillerParticles(world);
 			if (world.getTime() % 40 == 0) {
-				spiritInstillerBlockEntity.doChimeParticles(world);
+				instiller.doChimeParticles(world);
 			}
+		}
+	}
+	
+	private void updateAnimator() {
+		animator.tick();
+		
+		if (!valid) {
+			animator.swapState(FlowStates.MB_INVALID);
+			return;
+		}
+		
+		if (getStack(0).isEmpty()) {
+			animator.swapState(FlowStates.INACTIVE);
+		}
+		else if (currentRecipe != null) {
+			animator.swapState(FlowStates.ACTIVE);
+		}
+		else {
+			animator.swapState(FlowStates.IDLE);
 		}
 	}
 	
@@ -468,4 +502,57 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		super.inventoryChanged();
 	}
 	
+	static {
+		var builder = new FlowAnimator.Builder<>(SpiritInstillerBlockEntity.class);
+		builder.stateInfo(FlowStates.MB_INVALID, 11);
+		builder.stateInfo(FlowStates.INACTIVE, 27);
+		builder.stateInfo(FlowStates.IDLE, 17);
+		builder.stateInfo(FlowStates.ACTIVE, 17);
+		
+		builder.handle("platformY", FlowHandlers.FLOAT)
+				.initial(0F)
+				.interpolate(Interpolation.EASE_OUT)
+				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE)
+				.forStates((tickDelta, time) -> (float) (Math.sin((time + tickDelta + 10) / 23) + 4F), FlowStates.IDLE)
+				.forStates((tickDelta, time) -> (float) (Math.sin((time + tickDelta + 10) / 23) + 6F) * 2F, FlowStates.ACTIVE)
+				.push();
+		builder.handle("haloY", FlowHandlers.FLOAT)
+				.initial(0F)
+				.interpolate(Interpolation.EASE_OUT)
+				.startingKeyFrame(((tickDelta, time) -> (float) (Math.sin((time + tickDelta) / 23) + 1)))
+				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE, FlowStates.IDLE)
+				.forStates((tickDelta, time) -> (float) (Math.sin((time + tickDelta + 10) / 23) + 6F) * 2F - 34.5F, FlowStates.ACTIVE)
+				.push();
+		builder.handle("platformSpin", FlowHandlers.FLOAT)
+				.initial(0F)
+				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE)
+				.forStates(0.25F, FlowStates.IDLE)
+				.forStates(0.825F, FlowStates.ACTIVE)
+				.push();
+		builder.handle("haloSpin", FlowHandlers.FLOAT)
+				.initial(0.15F)
+				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE)
+				.forStates(0.325F, FlowStates.IDLE)
+				.forStates(0.825F, FlowStates.ACTIVE)
+				.push();
+		builder.handle("tilt", FlowHandlers.FLOAT)
+				.initial(0F)
+				.interpolate(Interpolation.EASE_OUT)
+				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE, FlowStates.IDLE)
+				.forStates(90F, FlowStates.ACTIVE)
+				.push();
+		builder.handle("haloAlpha", FlowHandlers.FLOAT)
+				.initial(0F)
+				.forStates(1F, FlowStates.INACTIVE, FlowStates.IDLE, FlowStates.ACTIVE)
+				.push();
+		
+		builder.handle("blossomAlpha", FlowHandlers.FLOAT)
+				.initial(0F)
+				.interpolate(Interpolation.EASE_OUT)
+				.loopback(FlowStates.ACTIVE)
+				.forStates(1F, FlowStates.INACTIVE, FlowStates.IDLE)
+				.push();
+		
+		FACTORY = builder.build();
+	}
 }

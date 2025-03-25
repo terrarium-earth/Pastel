@@ -41,10 +41,10 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 		}
 	}
 	
-	public static boolean verifyStructure(World world, @NotNull BlockPos blockPos, @Nullable ServerPlayerEntity serverPlayerEntity, @NotNull SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
+	public static boolean verifyStructure(World world, @NotNull BlockPos blockPos, @Nullable ServerPlayerEntity serverPlayerEntity, @NotNull SpiritInstillerBlockEntity instiller) {
 		Multiblock multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.SPIRIT_INSTILLER);
 		
-		BlockRotation lastBlockRotation = spiritInstillerBlockEntity.getMultiblockRotation();
+		BlockRotation lastBlockRotation = instiller.getMultiblockRotation();
 		boolean valid = false;
 		
 		// try all 4 rotations
@@ -54,7 +54,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 			valid = multiblock.validate(world, blockPos.down(1).offset(Support.directionFromRotation(checkRotation), offset), checkRotation);
 			if (valid) {
 				if (i != 0) {
-					spiritInstillerBlockEntity.setMultiblockRotation(checkRotation);
+					instiller.setMultiblockRotation(checkRotation);
 				}
 				break;
 			} else {
@@ -63,15 +63,17 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 		}
 		
 		if (valid) {
+			instiller.valid = true;
 			if (serverPlayerEntity != null) {
 				SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
 			}
 		} else {
+			instiller.valid = false;
 			if (world.isClient) {
 				Multiblock currentMultiBlock = MultiblockPreviewRenderer.getMultiblock();
 				if (currentMultiBlock == multiblock) {
 					lastBlockRotation = BlockRotation.values()[(MultiblockPreviewRenderer.getFacingRotation().ordinal() + 1) % BlockRotation.values().length]; // cycle rotation
-					spiritInstillerBlockEntity.setMultiblockRotation(lastBlockRotation);
+					instiller.setMultiblockRotation(lastBlockRotation);
 				}
 				ModonomiconHelper.renderMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.SPIRIT_INSTILLER), SpectrumMultiblocks.SPIRIT_INSTILLER_TEXT, blockPos.down(2).offset(Support.directionFromRotation(lastBlockRotation), offset), lastBlockRotation);
 			} else {
