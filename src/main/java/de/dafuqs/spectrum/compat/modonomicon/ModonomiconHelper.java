@@ -1,10 +1,9 @@
 package de.dafuqs.spectrum.compat.modonomicon;
 
 import com.klikli_dev.modonomicon.api.multiblock.*;
-import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
+import com.klikli_dev.modonomicon.client.gui.book.entry.*;
 import com.klikli_dev.modonomicon.client.render.*;
-
-import de.dafuqs.spectrum.recipe.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.item.*;
 import net.minecraft.text.*;

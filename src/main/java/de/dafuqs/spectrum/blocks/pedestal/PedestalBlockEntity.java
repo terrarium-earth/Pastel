@@ -1,7 +1,5 @@
 package de.dafuqs.spectrum.blocks.pedestal;
 
-import java.util.*;
-
 import com.klikli_dev.modonomicon.api.multiblock.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
@@ -35,7 +33,6 @@ import net.minecraft.screen.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
-import net.minecraft.state.property.*;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
@@ -44,7 +41,9 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
-public class PedestalBlockEntity extends LockableContainerBlockEntity implements MultiblockCrafter, RecipeInputProvider, SidedInventory, ExtendedScreenHandlerFactory<BlockPos> {
+import java.util.*;
+
+public class PedestalBlockEntity extends LockableContainerBlockEntity implements MultiblockCrafter, RecipeInputProvider, SidedInventory, ExtendedScreenHandlerFactory<PedestalScreenHandler.ScreenOpeningData> {
 	
 	public static final int INVENTORY_SIZE = 16; // 9 crafting, 5 gems, 1 craftingTablet, 1 output
 	public static final int CRAFTING_TABLET_SLOT_ID = 14;
@@ -452,12 +451,12 @@ public class PedestalBlockEntity extends LockableContainerBlockEntity implements
 	
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new PedestalScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+		return new PedestalScreenHandler(syncId, playerInventory, this, this.propertyDelegate, this.getPedestalTier(), this.getHighestAvailableRecipeTier());
 	}
 	
 	@Override
-	public BlockPos getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
-		return pos;
+	public PedestalScreenHandler.ScreenOpeningData getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
+		return new PedestalScreenHandler.ScreenOpeningData(this.getPos(), this.getPedestalTier(), this.getHighestAvailableRecipeTier());
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.recipe;
 
+import de.dafuqs.spectrum.api.recipe.*;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.input.*;

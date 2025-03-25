@@ -2,9 +2,9 @@ package de.dafuqs.spectrum.compat.emi.recipes;
 
 
 import de.dafuqs.spectrum.api.item.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.compat.emi.*;
 import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import dev.emi.emi.api.render.*;
 import dev.emi.emi.api.stack.*;

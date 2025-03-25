@@ -2,20 +2,22 @@
   "description": {
     "translate": "enchantment.spectrum.treasure_hunter"
   },
-  "anvil_cost": 0,
+  "effects": {},
+  "anvil_cost": 4,
   "exclusive_set": "#spectrum:exclusive_set/treasure_hunter",
   "max_cost": {
-    "base": 0,
+    "base": 45,
     "per_level_above_first": 0
   },
   "max_level": 3,
   "min_cost": {
-    "base": 0,
+    "base": 15,
     "per_level_above_first": 0
   },
   "slots": [
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/treasure_hunter",
-  "weight": 1
+  "primary_items": "#minecraft:enchantable/sword",
+  "weight": 2
 }

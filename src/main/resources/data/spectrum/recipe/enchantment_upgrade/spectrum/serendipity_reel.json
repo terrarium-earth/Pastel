@@ -1,6 +1,6 @@
 {
   "type": "spectrum:enchantment_upgrade",
-  "enchantment": "spectrum:cloaked/serendipity_reel",
+  "enchantment": "spectrum:serendipity_reel",
   "levels": [
     {
       "experience": 400,
@@ -18,7 +18,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/serendipity_reel"
+        "spectrum:serendipity_reel"
       ]
     }
   ]

@@ -1,11 +1,10 @@
 package de.dafuqs.spectrum.recipe.pedestal;
 
-import java.util.*;
-
 import de.dafuqs.revelationary.api.advancements.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.item.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.pedestal.*;
 import de.dafuqs.spectrum.blocks.upgrade.*;
 import de.dafuqs.spectrum.helpers.*;
@@ -18,10 +17,11 @@ import net.minecraft.recipe.*;
 import net.minecraft.registry.*;
 import net.minecraft.sound.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.random.*;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<PedestalRecipeInput> {
 	

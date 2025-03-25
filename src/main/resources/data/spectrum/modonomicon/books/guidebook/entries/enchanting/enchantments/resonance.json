@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/resonance": 1
+          "spectrum:resonance": 1
         }
       },
       "text": "book.spectrum.guidebook.resonance.page1.text"

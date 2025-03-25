@@ -26,8 +26,8 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.AQUA_REGIA, 4);
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-		add(IngredientStack.ofItems(1, SpectrumBlocks.JADEITE_LOTUS_BULB.asItem()));
-		add(IngredientStack.ofItems(3, SpectrumItems.JADEITE_PETALS));
+		add(IngredientStack.ofItems(SpectrumBlocks.JADEITE_LOTUS_BULB.asItem()));
+		add(IngredientStack.ofItems(SpectrumItems.JADEITE_PETALS, 3));
 	}};
 	
 	public AquaRegiaRecipe() {

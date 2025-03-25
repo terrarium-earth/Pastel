@@ -2,20 +2,22 @@
   "description": {
     "translate": "enchantment.spectrum.steadfast"
   },
-  "anvil_cost": 0,
+  "effects": {},
+  "anvil_cost": 1,
   "exclusive_set": "#spectrum:exclusive_set/steadfast",
   "max_cost": {
-    "base": 0,
+    "base": 60,
     "per_level_above_first": 0
   },
   "max_level": 1,
   "min_cost": {
-    "base": 0,
+    "base": 30,
     "per_level_above_first": 0
   },
   "slots": [
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/steadfast",
-  "weight": 1
+  "primary_items": "#minecraft:enchantable/durability",
+  "weight": 10
 }

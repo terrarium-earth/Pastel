@@ -24,7 +24,7 @@
     "id": "spectrum:oblivion_pickaxe",
     "components": {
       "enchantments": {
-        "spectrum:cloaked/voiding": 1
+        "spectrum:voiding": 1
       }
     },
     "count": 1

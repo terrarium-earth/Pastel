@@ -1,6 +1,6 @@
 {
   "values": [
-    "#spectrum:clovers_favor",
+    "spectrum:clovers_favor",
     "minecraft:looting",
     {
       "id": "malum:spirit_plunder",

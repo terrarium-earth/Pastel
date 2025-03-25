@@ -1,6 +1,6 @@
 {
   "type": "spectrum:enchantment_upgrade",
-  "enchantment": "spectrum:cloaked/inertia",
+  "enchantment": "spectrum:inertia",
   "levels": [
     {
       "experience": 200,
@@ -28,7 +28,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/inertia"
+        "spectrum:inertia"
       ]
     }
   ]

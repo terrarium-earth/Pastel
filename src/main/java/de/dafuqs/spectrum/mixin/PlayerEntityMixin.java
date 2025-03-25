@@ -66,7 +66,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	public SpectrumFishingBobberEntity fishingBobber;
 	
 	@WrapOperation(method = "getBlockBreakingSpeed(Lnet/minecraft/block/BlockState;)F", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;getBlockBreakingSpeed(Lnet/minecraft/block/BlockState;)F"))
-	private float yourHandlerMethod(PlayerInventory inventory, BlockState state, Operation<Float> original) {
+	private float spectrum$modifygetBlockBreakingSpeed(PlayerInventory inventory, BlockState state, Operation<Float> original) {
 		ItemStack stack = inventory.main.get(inventory.selectedSlot);
 		DynamicRegistryManager drm = getRegistryManager();
 		ToolComponent tool = stack.get(DataComponentTypes.TOOL);

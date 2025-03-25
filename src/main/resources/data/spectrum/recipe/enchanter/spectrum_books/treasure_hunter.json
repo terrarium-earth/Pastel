@@ -35,7 +35,7 @@
     "id": "minecraft:enchanted_book",
     "components": {
       "stored_enchantments": {
-        "spectrum:cloaked/treasure_hunter": 1
+        "spectrum:treasure_hunter": 1
       }
     }
   },
@@ -44,7 +44,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/treasure_hunter"
+        "spectrum:treasure_hunter"
       ]
     }
   ]

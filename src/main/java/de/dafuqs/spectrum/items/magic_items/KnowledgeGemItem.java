@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.items.magic_items;
 
-import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.registries.*;
@@ -113,20 +112,18 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
 		super.appendTooltip(stack, context, tooltip, type);
 		
-		SpectrumCommon.getRegistryLookup().ifPresent(lookup -> {
-			int maxExperience = getMaxStoredExperience(lookup, stack);
-			int storedExperience = ExperienceStorageItem.getStoredExperience(stack);
-			if (storedExperience == 0) {
-				tooltip.add(Text.literal("0 ").formatted(Formatting.DARK_GRAY).append(Text.translatable("item.spectrum.knowledge_gem.tooltip.stored_experience", maxExperience).formatted(Formatting.GRAY)));
-			} else {
-				tooltip.add(Text.literal(storedExperience + " ").formatted(Formatting.GREEN).append(Text.translatable("item.spectrum.knowledge_gem.tooltip.stored_experience", maxExperience).formatted(Formatting.GRAY)));
-			}
-			if (shouldDisplayUsageTooltip(stack)) {
-				tooltip.add(Text.translatable("item.spectrum.knowledge_gem.tooltip.use", getTransferableExperiencePerTick(lookup, stack)).formatted(Formatting.GRAY));
-				addBannerPatternProviderTooltip(tooltip);
-			}
-		});
-		
+		RegistryWrapper.WrapperLookup lookup = context.getRegistryLookup();
+		int maxExperience = getMaxStoredExperience(lookup, stack);
+		int storedExperience = ExperienceStorageItem.getStoredExperience(stack);
+		if (storedExperience == 0) {
+			tooltip.add(Text.literal("0 ").formatted(Formatting.DARK_GRAY).append(Text.translatable("item.spectrum.knowledge_gem.tooltip.stored_experience", maxExperience).formatted(Formatting.GRAY)));
+		} else {
+			tooltip.add(Text.literal(storedExperience + " ").formatted(Formatting.GREEN).append(Text.translatable("item.spectrum.knowledge_gem.tooltip.stored_experience", maxExperience).formatted(Formatting.GRAY)));
+		}
+		if (shouldDisplayUsageTooltip(stack)) {
+			tooltip.add(Text.translatable("item.spectrum.knowledge_gem.tooltip.use", getTransferableExperiencePerTick(lookup, stack)).formatted(Formatting.GRAY));
+			addBannerPatternProviderTooltip(tooltip);
+		}
 	}
 	
 	public boolean shouldDisplayUsageTooltip(ItemStack itemStack) {

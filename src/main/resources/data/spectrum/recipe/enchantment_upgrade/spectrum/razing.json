@@ -1,6 +1,6 @@
 {
   "type": "spectrum:enchantment_upgrade",
-  "enchantment": "spectrum:cloaked/razing",
+  "enchantment": "spectrum:razing",
   "levels": [
     {
       "experience": 400,
@@ -28,7 +28,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/razing"
+        "spectrum:razing"
       ]
     }
   ]

@@ -1,24 +1,84 @@
 {
   "values": [
-    "#spectrum:big_catch",
-    "#spectrum:clovers_favor",
-    "#spectrum:disarming",
-    "#spectrum:exuberance",
-    "#spectrum:first_strike",
-    "#spectrum:foundry",
-    "#spectrum:improved_critical",
-    "#spectrum:indestructible",
-    "#spectrum:inertia",
-    "#spectrum:inexorable",
-    "#spectrum:inventory_insertion",
-    "#spectrum:pest_control",
-    "#spectrum:razing",
-    "#spectrum:resonance",
-    "#spectrum:serendipity_reel",
-    "#spectrum:sniping",
-    "#spectrum:steadfast",
-    "#spectrum:tight_grip",
-    "#spectrum:treasure_hunter",
-    "#spectrum:voiding"
+    {
+      "id": "spectrum:resonance",
+      "required": false
+    },
+    {
+      "id": "spectrum:voiding",
+      "required": false
+    },
+    {
+      "id": "spectrum:pest_control",
+      "required": false
+    },
+    {
+      "id": "spectrum:autosmelt",
+      "required": false
+    },
+    {
+      "id": "spectrum:inventory_insertion",
+      "required": false
+    },
+    {
+      "id": "spectrum:exuberance",
+      "required": false
+    },
+    {
+      "id": "spectrum:treasure_hunter",
+      "required": false
+    },
+    {
+      "id": "spectrum:disarming",
+      "required": false
+    },
+    {
+      "id": "spectrum:first_strike",
+      "required": false
+    },
+    {
+      "id": "spectrum:improved_critical",
+      "required": false
+    },
+    {
+      "id": "spectrum:inertia",
+      "required": false
+    },
+    {
+      "id": "spectrum:clovers_favor",
+      "required": false
+    },
+    {
+      "id": "spectrum:sniper",
+      "required": false
+    },
+    {
+      "id": "spectrum:tight_grip",
+      "required": false
+    },
+    {
+      "id": "spectrum:steadfast",
+      "required": false
+    },
+    {
+      "id": "spectrum:indestructible",
+      "required": false
+    },
+    {
+      "id": "spectrum:big_catch",
+      "required": false
+    },
+    {
+      "id": "spectrum:inexorable",
+      "required": false
+    },
+    {
+      "id": "spectrum:razing",
+      "required": false
+    },
+    {
+      "id": "spectrum:serendipity_reel",
+      "required": false
+    }
   ]
 }

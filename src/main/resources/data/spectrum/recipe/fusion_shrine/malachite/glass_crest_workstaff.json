@@ -15,18 +15,22 @@
     },
     {
       "item": "minecraft:enchanted_book",
-      "recipeViewNbt": "{StoredEnchantments: [{id: \"spectrum:resonance\", lvl:1s}]}",
-      "matchbook": {
-        "mode": "AND",
-        "matches": [
+      "predicates": {
+        "minecraft:stored_enchantments": [
           {
-            "type": "enchantment",
-            "key": "StoredEnchantments",
-            "minLevel": 1,
-            "maxLevel": 255,
-            "enchantmentId": "spectrum:cloaked/resonance"
+            "enchantments": "spectrum:resonance",
+            "levels": {
+              "min": 1
+            }
           }
         ]
+      },
+      "preview_components": {
+        "minecraft:stored_enchantments": {
+          "levels": {
+            "spectrum:resonance": 1
+          }
+        }
       }
     },
     {

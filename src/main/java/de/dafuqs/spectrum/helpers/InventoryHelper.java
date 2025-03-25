@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.helpers;
 
 import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.recipe.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import net.fabricmc.fabric.api.transfer.v1.item.*;
 import net.fabricmc.fabric.api.transfer.v1.storage.*;
 import net.minecraft.block.*;

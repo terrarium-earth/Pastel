@@ -127,7 +127,6 @@ public class Support {
 		}
 	}
 	
-	
 	/**
 	 * Returns a relative new BlockPos based on a facing direction and a vector
 	 *

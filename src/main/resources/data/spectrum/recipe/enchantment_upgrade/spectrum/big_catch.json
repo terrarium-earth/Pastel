@@ -1,6 +1,6 @@
 {
   "type": "spectrum:enchantment_upgrade",
-  "enchantment": "spectrum:cloaked/big_catch",
+  "enchantment": "spectrum:big_catch",
   "levels": [
     {
       "experience": 400,
@@ -18,7 +18,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/big_catch"
+        "spectrum:big_catch"
       ]
     }
   ]

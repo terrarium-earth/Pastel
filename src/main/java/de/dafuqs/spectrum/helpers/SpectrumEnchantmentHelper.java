@@ -17,10 +17,6 @@ import java.util.concurrent.atomic.*;
 
 public class SpectrumEnchantmentHelper {
 	
-	public static boolean isCloaking(Enchantment ench) {
-		return !ench.getEffect(SpectrumEnchantmentEffectComponentTypes.CLOAKED).isEmpty();
-	}
-	
 	public static Pair<Boolean, ItemStack> addOrUpgradeEnchantment(RegistryWrapper.WrapperLookup registryLookup, ItemStack stack, RegistryKey<Enchantment> enchantmentKey, int level, boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts) {
 		return getEntry(registryLookup, enchantmentKey)
 				.map(entry -> addOrUpgradeEnchantment(stack, entry, level, forceEvenIfNotApplicable, allowEnchantmentConflicts))

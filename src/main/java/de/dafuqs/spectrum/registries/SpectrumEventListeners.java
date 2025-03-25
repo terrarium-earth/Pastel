@@ -21,7 +21,9 @@ import dev.emi.trinkets.api.*;
 import net.fabricmc.fabric.api.entity.event.v1.*;
 import net.fabricmc.fabric.api.event.lifecycle.v1.*;
 import net.fabricmc.fabric.api.event.player.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.fabricmc.fabric.api.resource.*;
+import net.fabricmc.fabric.api.util.*;
 import net.minecraft.advancement.criterion.*;
 import net.minecraft.block.*;
 import net.minecraft.component.*;
@@ -102,6 +104,13 @@ public class SpectrumEventListeners {
 				
 				SpectrumAdvancementCriteria.BLOCK_BROKEN.trigger(serverPlayerEntity, state);
 			}
+		});
+		
+		EnchantmentEvents.ALLOW_ENCHANTING.register((registryEntry, itemStack, enchantingContext) -> {
+			if (registryEntry.matchesKey(SpectrumEnchantments.INDESTRUCTIBLE) && itemStack.isIn(SpectrumItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
+				return TriState.FALSE;
+			}
+			return TriState.DEFAULT;
 		});
 		
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {

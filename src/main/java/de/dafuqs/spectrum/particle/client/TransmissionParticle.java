@@ -3,48 +3,51 @@ package de.dafuqs.spectrum.particle.client;
 import de.dafuqs.spectrum.particle.effect.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.render.*;
 import net.minecraft.client.world.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.event.*;
-import org.joml.*;
+
+import java.util.*;
 
 @Environment(EnvType.CLIENT)
-public class TransmissionParticle extends VibrationParticle {
-
-	public TransmissionParticle(ClientWorld world, double x, double y, double z, PositionSource positionSource, int maxAge) {
-		super(world, x, y, z, positionSource, maxAge);
-		this.scale = 0.175F;
-		this.alpha = 0.8F;
+public class TransmissionParticle extends SpriteBillboardParticle {
+	
+	private final PositionSource positionSource;
+	
+	public TransmissionParticle(ClientWorld world, double x, double y, double z, PositionSource positionSource, int arrivalInTicks) {
+		super(world, x, y, z);
+		this.scale = 0.3F;
+		this.alpha = 0.7F;
+		
+		this.maxAge = arrivalInTicks;
+		this.positionSource = positionSource;
 	}
-
+	
 	@Override
-	public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta) {
-		final Vec3d cameraPos = camera.getPos();
-		final float x = (float) (MathHelper.lerp(tickDelta, prevPosX, this.x) - cameraPos.getX());
-		final float y = (float) (MathHelper.lerp(tickDelta, prevPosY, this.y) - cameraPos.getY());
-		final float z = (float) (MathHelper.lerp(tickDelta, prevPosZ, this.z) - cameraPos.getZ());
-		final int light = getBrightness(tickDelta);
-
-		final Quaternionf quaternion = camera.getRotation();
-		final Vector3f[] vec3fs = new Vector3f[]{new Vector3f(-1.0F, -1.0F, 0.0F), new Vector3f(-1.0F, 1.0F, 0.0F), new Vector3f(1.0F, 1.0F, 0.0F), new Vector3f(1.0F, -1.0F, 0.0F)};
-		final float size = getSize(tickDelta);
-
-		for (int k = 0; k < 4; ++k) {
-			final Vector3f vec2 = vec3fs[k];
-			vec2.rotate(quaternion);
-			vec2.mul(size);
-			vec2.add(x, y, z);
+	public void tick() {
+		this.prevPosX = this.x;
+		this.prevPosY = this.y;
+		this.prevPosZ = this.z;
+		if (this.age++ >= this.maxAge) {
+			this.markDead();
+		} else {
+			Optional<Vec3d> optional = this.positionSource.getPos(this.world);
+			if (optional.isEmpty()) {
+				this.markDead();
+			} else {
+				int i = this.maxAge - this.age;
+				double d = 1.0 / (double) i;
+				Vec3d vec3d = optional.get();
+				this.x = MathHelper.lerp(d, this.x, vec3d.getX());
+				this.y = MathHelper.lerp(d, this.y, vec3d.getY());
+				this.z = MathHelper.lerp(d, this.z, vec3d.getZ());
+			}
 		}
-
-		final float minU = getMinU();
-		final float maxU = getMaxU();
-		final float minV = getMinV();
-		final float maxV = getMaxV();
-		vertexConsumer.vertex(vec3fs[0].x(), vec3fs[0].y(), vec3fs[0].z()).texture(maxU, maxV).color(red, green, blue, alpha).light(light);
-		vertexConsumer.vertex(vec3fs[1].x(), vec3fs[1].y(), vec3fs[1].z()).texture(maxU, minV).color(red, green, blue, alpha).light(light);
-		vertexConsumer.vertex(vec3fs[2].x(), vec3fs[2].y(), vec3fs[2].z()).texture(minU, minV).color(red, green, blue, alpha).light(light);
-		vertexConsumer.vertex(vec3fs[3].x(), vec3fs[3].y(), vec3fs[3].z()).texture(minU, maxV).color(red, green, blue, alpha).light(light);
+	}
+	
+	@Override
+	public ParticleTextureSheet getType() {
+		return ParticleTextureSheet.PARTICLE_SHEET_TRANSLUCENT;
 	}
 	
 	@Environment(EnvType.CLIENT)
@@ -55,10 +58,10 @@ public class TransmissionParticle extends VibrationParticle {
 			this.spriteProvider = spriteProvider;
 		}
 		
-		public Particle createParticle(TransmissionParticleEffect vibrationParticleEffect, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-			VibrationParticle vibrationParticle = new TransmissionParticle(clientWorld, d, e, f, vibrationParticleEffect.getDestination(), vibrationParticleEffect.getArrivalInTicks());
-			vibrationParticle.setSprite(this.spriteProvider);
-			return vibrationParticle;
+		public Particle createParticle(TransmissionParticleEffect particleEffect, ClientWorld world, double x, double y, double z, double g, double h, double i) {
+			TransmissionParticle particle = new TransmissionParticle(world, x, y, z, particleEffect.getDestination(), particleEffect.getArrivalInTicks());
+			particle.setSprite(this.spriteProvider);
+			return particle;
 		}
 	}
 	

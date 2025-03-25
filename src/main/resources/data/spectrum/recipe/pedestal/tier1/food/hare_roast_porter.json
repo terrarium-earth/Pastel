@@ -22,13 +22,10 @@
     "M": {
       "item": "spectrum:infused_beverage",
       "recipeViewNbt": "{Variant: \"porter\", Color: 4857125 }",
-      "matchbook": {
-        "mode": "AND",
-        "matches": [
+      "predicates": {
+        "spectrum:infused_beverage": [
           {
-            "type": "string",
-            "key": "Variant",
-            "target": "porter"
+            "variants": "porter"
           }
         ]
       }

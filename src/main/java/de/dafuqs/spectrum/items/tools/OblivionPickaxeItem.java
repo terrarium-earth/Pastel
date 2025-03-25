@@ -32,7 +32,7 @@ public class OblivionPickaxeItem extends SpectrumPickaxeItem {
 	
 	@Override
 	public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
-		return Map.of(SpectrumEnchantments.CLOAKED_VOIDING, 1);
+		return Map.of(SpectrumEnchantments.VOIDING, 1);
 	}
 	
 	@Override

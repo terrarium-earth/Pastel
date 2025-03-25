@@ -43,7 +43,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/sniping": 2
+          "spectrum:sniping": 2
         }
       },
       "text": "book.spectrum.guidebook.gleaming_pin.page2.text"

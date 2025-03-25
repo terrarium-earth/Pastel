@@ -35,7 +35,7 @@
     "id": "minecraft:enchanted_book",
     "components": {
       "stored_enchantments": {
-        "spectrum:cloaked/inventory_insertion": 1
+        "spectrum:inventory_insertion": 1
       }
     }
   },
@@ -44,7 +44,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/inventory_insertion"
+        "spectrum:inventory_insertion"
       ]
     }
   ]
