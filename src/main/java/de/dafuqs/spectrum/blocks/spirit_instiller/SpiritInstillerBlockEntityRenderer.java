@@ -77,12 +77,11 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
 			head.render(matrices, vertices, light, overlay);
 			
 			if (instiller._blossomAlpha.get() > 0) {
-				spectralblossom.render(matrices, vertices, LightmapTextureManager.MAX_LIGHT_COORDINATE, overlay, blossomAlpha);
 				spectralblossom.pivotY = -25 - instiller._haloY.get();
+				spectralblossom.render(matrices, vertices, LightmapTextureManager.MAX_LIGHT_COORDINATE, overlay, blossomAlpha);
 			}
 			
 			if (instiller._haloAlpha.get() > 0) {
-				geode.render(matrices, vertices, LightmapTextureManager.MAX_LIGHT_COORDINATE, overlay, haloAlpha);
 				geode.pivotY = -25 - instiller._haloY.get();
 				
 				instiller.geode += (float) Math.toRadians(instiller._haloSpin.get());
@@ -92,6 +91,7 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
 				geode.roll = instiller.geode;
 				calcite.roll = instiller.calcite;
 				innergeode.roll = instiller.innergeode;
+				geode.render(matrices, vertices, LightmapTextureManager.MAX_LIGHT_COORDINATE, overlay, haloAlpha);
 			}
 			
 			matrices.pop();

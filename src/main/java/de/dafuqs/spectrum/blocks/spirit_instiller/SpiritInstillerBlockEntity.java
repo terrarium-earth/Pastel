@@ -39,6 +39,7 @@ import java.util.*;
 public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter {
 	
 	private static final FlowAnimator.Factory<SpiritInstillerBlockEntity> FACTORY;
+	private static final KeyFrame<Float> platformPos = (tickDelta, time) -> (float) (Math.sin((time + tickDelta + 15) / 23) + 6F) * 2F;
 	protected static final int INVENTORY_SIZE = 3; // 0: instiller stack; 1-2: item bowl stacks
 	public static final List<Vec3i> itemBowlOffsetsHorizontal = new ArrayList<>() {{
 		add(new Vec3i(0, 0, 2));
@@ -80,11 +81,8 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 			instiller.updateAnimator();
 		}
 		
-		if (instiller.currentRecipe != null) {
-			instiller.doInstillerParticles(world);
-			if (world.getTime() % 40 == 0) {
-				instiller.doChimeParticles(world);
-			}
+		if (instiller.currentRecipe != null && world.getTime() % 43 == 0) {
+			instiller.doChimeParticles(world);
 		}
 	}
 	
@@ -403,22 +401,6 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		return nbtCompound;
 	}
 	
-	private void doInstillerParticles(@NotNull World world) {
-		Optional<InkColor> stackColor = ItemColors.ITEM_COLORS.getMapping(this.getStack(0).getItem());
-		
-		if (stackColor.isPresent()) {
-			Random random = world.random;
-			ParticleEffect particleEffect = ColoredSparkleRisingParticleEffect.of(stackColor.get().getColorInt());
-			world.addParticle(particleEffect,
-					pos.getX() + 0.25 + random.nextDouble() * 0.5,
-					pos.getY() + 0.75,
-					pos.getZ() + 0.25 + random.nextDouble() * 0.5,
-					0.02 - random.nextDouble() * 0.04,
-					0.01 + random.nextDouble() * 0.05,
-					0.02 - random.nextDouble() * 0.04);
-		}
-	}
-	
 	private void doChimeParticles(@NotNull World world) {
 		doChimeInstillingParticles(world, pos.add(getItemBowlHorizontalPositionOffset(false).up(3)));
 		doChimeInstillingParticles(world, pos.add(getItemBowlHorizontalPositionOffset(true).up(3)));
@@ -429,7 +411,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		if (blockState.getBlock() instanceof GemstoneChimeBlock gemstoneChimeBlock) {
 			Random random = world.random;
 			ParticleEffect particleEffect = gemstoneChimeBlock.getParticleEffect();
-			for (int i = 0; i < 16; i++) {
+			for (int i = 0; i < 12; i++) {
 				world.addParticle(particleEffect,
 						pos.getX() + 0.25 + random.nextDouble() * 0.5,
 						pos.getY() + 0.15 + random.nextDouble() * 0.5,
@@ -451,7 +433,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		itemBowlPos = pos.add(getItemBowlHorizontalPositionOffset(true).up());
 		blockEntity = world.getBlockEntity(itemBowlPos);
 		if (blockEntity instanceof ItemBowlBlockEntity itemBowlBlockEntity) {
-			itemBowlBlockEntity.spawnOrbParticles(new Vec3d(this.pos.getX() + 0.5, this.pos.getY() + 1.0, this.pos.getZ() + 0.5));
+			itemBowlBlockEntity.spawnOrbParticles(new Vec3d(this.pos.getX() + 0.5, this.pos.getY() + 1.0 + platformPos.at(0, world.getTime()), this.pos.getZ() + 0.5));
 		}
 	}
 	
@@ -526,15 +508,15 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 				.initial(0F)
 				.interpolate(Interpolation.EASE_OUT)
 				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE)
-				.forStates((tickDelta, time) -> (float) (Math.sin((time + tickDelta + 10) / 23) + 4F), FlowStates.IDLE)
-				.forStates((tickDelta, time) -> (float) (Math.sin((time + tickDelta + 10) / 23) + 6F) * 2F, FlowStates.ACTIVE)
+				.forStates((tickDelta, time) -> (float) (Math.sin((time + tickDelta + 15) / 23) + 4F), FlowStates.IDLE)
+				.forStates(platformPos, FlowStates.ACTIVE)
 				.push();
 		builder.handle("haloY", FlowHandlers.FLOAT)
 				.initial(0F)
 				.interpolate(Interpolation.EASE_OUT)
 				.startingKeyFrame(((tickDelta, time) -> (float) (Math.sin((time + tickDelta) / 23) + 1)))
 				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE, FlowStates.IDLE)
-				.forStates((tickDelta, time) -> (float) (Math.sin((time + tickDelta + 10) / 23) + 6F) * 2F - 34.5F, FlowStates.ACTIVE)
+				.forStates((tickDelta, time) -> platformPos.at(tickDelta, time) - 34.5F, FlowStates.ACTIVE)
 				.push();
 		builder.handle("platformSpin", FlowHandlers.FLOAT)
 				.initial(0F)
