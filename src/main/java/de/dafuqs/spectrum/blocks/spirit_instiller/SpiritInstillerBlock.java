@@ -24,8 +24,6 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 
 	public static final MapCodec<SpiritInstillerBlock> CODEC = createCodec(SpiritInstillerBlock::new);
 
-	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
-
 	public SpiritInstillerBlock(Settings settings) {
 		super(settings);
 	}
@@ -62,13 +60,13 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 			}
 		}
 		
+		instiller.setValid(valid);
+		
 		if (valid) {
-			instiller.valid = true;
 			if (serverPlayerEntity != null) {
 				SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
 			}
 		} else {
-			instiller.valid = false;
 			if (world.isClient) {
 				Multiblock currentMultiBlock = MultiblockPreviewRenderer.getMultiblock();
 				if (currentMultiBlock == multiblock) {
@@ -98,7 +96,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 	
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return SHAPE;
+		return VoxelShapes.fullCube();
 	}
 	
 	@Override

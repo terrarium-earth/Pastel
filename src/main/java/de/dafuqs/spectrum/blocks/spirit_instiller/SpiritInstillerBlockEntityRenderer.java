@@ -54,8 +54,9 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
 			if (!stack.isEmpty()) {
 				matrices.push();
 				matrices.translate(0.5, 1F + instiller._platformY.get() / 16F, 0.5);
-				matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) (rotation - Math.toDegrees(head.yaw))));
+				matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float) (rotation - Math.toDegrees(instiller.platform))));
 				matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90));
+				matrices.translate(-0.0, -0.1, 0.0);
 				MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformationMode.GROUND, light, overlay, matrices, vertexConsumers, instiller.getWorld(), 0);
 				matrices.pop();
 			}
@@ -69,8 +70,10 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
 			matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
 			var vertices = SPRITE.getVertexConsumer(vertexConsumers, RenderLayer::getEntityTranslucent);
 			
+			instiller.platform += (float) Math.toRadians(instiller._platformSpin.get());
+			
 			head.pivotY = 9.5F - instiller._platformY.get();
-			head.yaw += (float) Math.toRadians(instiller._platformSpin.get());
+			head.yaw = instiller.platform;
 			head.render(matrices, vertices, light, overlay);
 			
 			if (instiller._blossomAlpha.get() > 0) {
@@ -82,12 +85,14 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
 				geode.render(matrices, vertices, LightmapTextureManager.MAX_LIGHT_COORDINATE, overlay, haloAlpha);
 				geode.pivotY = -25 - instiller._haloY.get();
 				
-				geode.roll += (float) Math.toRadians(instiller._haloSpin.get());
-				calcite.roll += (float) Math.toRadians(-instiller._haloSpin.get() * 1.25);
-				innergeode.roll += (float) Math.toRadians(instiller._haloSpin.get() * 1.4);
+				instiller.geode += (float) Math.toRadians(instiller._haloSpin.get());
+				instiller.calcite += (float) Math.toRadians(-instiller._haloSpin.get() * 1.25);
+				instiller.innergeode += (float) Math.toRadians(instiller._haloSpin.get() * 1.4);
+				
+				geode.roll = instiller.geode;
+				calcite.roll = instiller.calcite;
+				innergeode.roll = instiller.innergeode;
 			}
-			
-			
 			
 			matrices.pop();
 		}
@@ -99,15 +104,11 @@ public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<S
 		ModelPartData modelPartData = modelData.getRoot();
 		ModelPartData head = modelPartData.addChild("head", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 9.5F, 0.0F));
 		
-		ModelPartData pedestal_r1 = head.addChild("pedestal_r1", ModelPartBuilder.create().uv(43, 38).cuboid(-7.5F, -1.5F, -7.5F, 15.0F, 3.0F, 15.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -0.025F, 0.0F, 0.0F, -0.7854F, 0.0F));
-		
-		ModelPartData spectralblossom = modelPartData.addChild("spectralblossom", ModelPartBuilder.create().uv(58, 24).cuboid(-6.5F, -6.5F, 0.0F, 13.0F, 13.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -25.0F, 0.0F));
-		
+		head.addChild("pedestal_r1", ModelPartBuilder.create().uv(43, 38).cuboid(-7.5F, -1.5F, -7.5F, 15.0F, 3.0F, 15.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -0.025F, 0.0F, 0.0F, -0.7854F, 0.0F));
+		modelPartData.addChild("spectralblossom", ModelPartBuilder.create().uv(58, 24).cuboid(-6.5F, -6.5F, 0.0F, 13.0F, 13.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -25.0F, 0.0F));
 		ModelPartData geode = modelPartData.addChild("geode", ModelPartBuilder.create().uv(0, 24).cuboid(-14.5F, -14.5F, 0.0F, 29.0F, 29.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -25.0F, 0.0F));
-		
 		ModelPartData calcite = geode.addChild("calcite", ModelPartBuilder.create().uv(0, 56).cuboid(-12.5F, -12.5F, 1.0F, 25.0F, 25.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.25F));
-		
-		ModelPartData innergeode = calcite.addChild("innergeode", ModelPartBuilder.create().uv(50, 56).cuboid(-10.5F, -10.5F, 3.0F, 21.0F, 21.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, -0.75F));
+		calcite.addChild("innergeode", ModelPartBuilder.create().uv(50, 56).cuboid(-10.5F, -10.5F, 3.0F, 21.0F, 21.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, -0.75F));
 		return TexturedModelData.of(modelData, 128, 128);
 	}
 }

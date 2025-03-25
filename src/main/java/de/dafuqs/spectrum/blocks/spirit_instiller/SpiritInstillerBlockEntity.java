@@ -58,12 +58,13 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	private RecipeEntry<SpiritInstillerRecipe> currentRecipe;
 	private int craftingTime;
 	private int craftingTimeTotal;
-	boolean valid;
+	private boolean valid;
 	
 	FlowAnimator animator;
 	FlowData<Float> _platformY = FlowData.NULL(), _haloY = FlowData.NULL(),
 			_platformSpin = FlowData.NULL(), _haloSpin = FlowData.NULL(),
-			_tilt = FlowData.NULL(), _haloAlpha = FlowData.NULL(), _blossomAlpha = FlowData.NULL();
+			_haloAlpha = FlowData.NULL(), _blossomAlpha = FlowData.NULL();
+	float platform, geode, calcite, innergeode;
 	
 	public SpiritInstillerBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.SPIRIT_INSTILLER, pos, state, INVENTORY_SIZE);
@@ -72,6 +73,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	public static void clientTick(World world, BlockPos blockPos, BlockState blockState, @NotNull SpiritInstillerBlockEntity instiller) {
 		if (instiller.animator == null) {
 			instiller.animator = FACTORY.create(FlowStates.INIT, instiller);
+			SpiritInstillerBlock.verifyStructure(world, blockPos, null, instiller);
 		}
 		else {
 			instiller.updateAnimator();
@@ -336,6 +338,10 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 				new Vec3d(0.1D, -0.1D, 0.1D));
 	}
 	
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+	
 	@Override
 	public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		super.readNbt(nbt, registryLookup);
@@ -350,6 +356,9 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 				this.multiblockRotation = BlockRotation.NONE;
 			}
 		}
+		
+		if (nbt.contains("platformSpin"))
+			platform = nbt.getFloat("platformSpin");
 		
 		this.currentRecipe = MultiblockCrafter.getRecipeEntryFromNbt(world, nbt, SpiritInstillerRecipe.class);
 		
@@ -368,6 +377,9 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		nbt.putString("MultiblockRotation", this.multiblockRotation.toString());
 		if (this.upgrades != null) {
 			nbt.put("Upgrades", this.upgrades.toNbt());
+		}
+		if (platform != 0) {
+			nbt.putFloat("platformSpin", platform);
 		}
 		PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
 		if (this.currentRecipe != null) {
@@ -534,12 +546,6 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE)
 				.forStates(0.325F, FlowStates.IDLE)
 				.forStates(0.825F, FlowStates.ACTIVE)
-				.push();
-		builder.handle("tilt", FlowHandlers.FLOAT)
-				.initial(0F)
-				.interpolate(Interpolation.EASE_OUT)
-				.loopback(FlowStates.MB_INVALID, FlowStates.INACTIVE, FlowStates.IDLE)
-				.forStates(90F, FlowStates.ACTIVE)
 				.push();
 		builder.handle("haloAlpha", FlowHandlers.FLOAT)
 				.initial(0F)
