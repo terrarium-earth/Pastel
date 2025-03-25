@@ -23,12 +23,6 @@ public class PreenchantedMultiToolItem extends MultiToolItem implements Preencha
 	}
 	
 	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
-	
-	@Override
 	public RegistryKey<BannerPattern> getPattern() {
 		return SpectrumBannerPatterns.MULTITOOL;
 	}

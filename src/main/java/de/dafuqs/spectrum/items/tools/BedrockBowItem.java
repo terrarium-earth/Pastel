@@ -20,11 +20,6 @@ public class BedrockBowItem extends BowItem implements Preenchanted, ArrowheadBo
 	}
 	
 	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
-	@Override
 	public boolean isEnchantable(ItemStack stack) {
 		return true;
 	}

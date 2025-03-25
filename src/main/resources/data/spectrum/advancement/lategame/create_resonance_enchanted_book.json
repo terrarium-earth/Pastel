@@ -20,7 +20,7 @@
           "predicates": {
             "minecraft:stored_enchantments": [
               {
-                "enchantments": "spectrum:cloaked/resonance",
+                "enchantments": "spectrum:resonance",
                 "levels": {
                   "min": 1
                 }
@@ -38,7 +38,7 @@
           "predicates": {
             "minecraft:stored_enchantments": [
               {
-                "enchantments": "spectrum:cloaked/resonance",
+                "enchantments": "spectrum:resonance",
                 "levels": {
                   "min": 1
                 }

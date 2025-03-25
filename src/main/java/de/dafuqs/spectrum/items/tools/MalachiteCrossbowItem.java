@@ -26,11 +26,6 @@ public class MalachiteCrossbowItem extends CrossbowItem implements Preenchanted,
 		return Map.of(Enchantments.PIERCING, 5);
 	}
 	
-	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
 	public static ItemStack getFirstProjectile(ItemStack crossbow) {
 		var projectiles = crossbow.getOrDefault(DataComponentTypes.CHARGED_PROJECTILES, ChargedProjectilesComponent.DEFAULT).getProjectiles();
 		return projectiles.isEmpty() ? ItemStack.EMPTY : projectiles.getFirst();

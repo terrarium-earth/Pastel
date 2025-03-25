@@ -21,11 +21,6 @@ public class BedrockShearsItem extends ShearsItem implements Preenchanted {
 	}
 	
 	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
-	@Override
 	public boolean isEnchantable(ItemStack stack) {
 		return true;
 	}

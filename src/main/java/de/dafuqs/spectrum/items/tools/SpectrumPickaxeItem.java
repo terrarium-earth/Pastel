@@ -14,11 +14,6 @@ public class SpectrumPickaxeItem extends PickaxeItem implements Preenchanted {
 	}
 	
 	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
-	@Override
 	public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 		return Map.of();
 	}

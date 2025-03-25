@@ -28,9 +28,4 @@ public class GreatswordItem extends SwordItem implements Preenchanted {
 		return Map.of(Enchantments.SWEEPING_EDGE, 4);
 	}
 
-	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-
 }

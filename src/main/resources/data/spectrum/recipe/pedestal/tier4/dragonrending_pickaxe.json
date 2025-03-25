@@ -24,7 +24,7 @@
     "id": "spectrum:dragonrending_pickaxe",
     "components": {
       "enchantments": {
-        "spectrum:cloaked/razing": 3
+        "spectrum:razing": 3
       }
     },
     "count": 1

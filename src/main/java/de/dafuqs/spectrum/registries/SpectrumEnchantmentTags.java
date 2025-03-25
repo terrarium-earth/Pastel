@@ -7,7 +7,9 @@ import net.minecraft.registry.tag.*;
 
 @SuppressWarnings("unused")
 public class SpectrumEnchantmentTags {
-
+	
+	public static final TagKey<Enchantment> SPECTRUM_ENCHANTMENT = of("enchantments");
+	
 	public static final TagKey<Enchantment> AUTO_KILLS_SILVERFISH = of("effect/auto_kills_silverfish");
 	public static final TagKey<Enchantment> DELETES_OVERFLOW = of("effect/deletes_overflow");
 	public static final TagKey<Enchantment> DELETES_OVERFLOW_IN_INVENTORY = of("effect/deletes_overflow_in_inventory");
@@ -19,8 +21,6 @@ public class SpectrumEnchantmentTags {
 	public static final TagKey<Enchantment> PREVENTS_ITEM_DAMAGE = of("effect/prevents_item_damage");
 	public static final TagKey<Enchantment> RESONANT_BLOCK_DROPS = of("effect/resonant_block_drops");
 	public static final TagKey<Enchantment> SMELTS_MORE_LOOT = of("effect/smelts_more_loot");
-	public static final TagKey<Enchantment> CLOAKED = of("cloaked");
-	public static final TagKey<Enchantment> SPECTRUM_ENCHANTMENT = of("enchantments");
 
 	private static TagKey<Enchantment> of(String id) {
 		return TagKey.of(RegistryKeys.ENCHANTMENT, SpectrumCommon.locate(id));

@@ -191,9 +191,4 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 		return Map.of(Enchantments.FORTUNE, 4);
 	}
 
-	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-
 }
