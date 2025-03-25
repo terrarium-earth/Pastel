@@ -109,6 +109,17 @@ public class FlowAnimator {
 				return forStates(KeyFrame.simple(keyFrame), states);
 			}
 			
+			public DataBuilder<T, N> loopback(FlowState... states) {
+				if (defaultKeyFrame == null) {
+					
+					if (initialValue == null)
+						throw new IllegalStateException("What the fuck. Like actually how.");
+					
+					defaultKeyFrame = KeyFrame.simple(initialValue);
+				}
+				return forStates(defaultKeyFrame, states);
+			}
+			
 			public DataBuilder<T, N> forStates(KeyFrame<N> keyFrame, FlowState... states) {
 				for (FlowState state : states) {
 					stateHolder.put(state, keyFrame);
@@ -122,7 +133,7 @@ public class FlowAnimator {
 			}
 			
 			public DataBuilder<T, N> startingKeyFrame(KeyFrame<N> keyFrame) {
-				this.startingKeyFrame(keyFrame);
+				this.defaultKeyFrame = keyFrame;
 				return this;
 			}
 			

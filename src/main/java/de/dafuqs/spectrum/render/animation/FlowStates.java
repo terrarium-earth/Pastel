@@ -11,5 +11,6 @@ public class FlowStates {
 	public static final FlowState FULL = new FlowState("full");
 	public static final FlowState ACTIVE = new FlowState("active");
 	public static final FlowState INACTIVE = new FlowState("inactive");
+	public static final FlowState MB_INVALID = new FlowState("multiblock_invalid");
 	public static final FlowState IDLE = new FlowState("idle");
 }
