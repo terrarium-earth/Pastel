@@ -7,8 +7,8 @@ import net.minecraft.client.world.*;
 import net.minecraft.particle.*;
 import net.minecraft.util.math.*;
 
-public class LightTrailparticle extends AnimatedParticle {
-    protected LightTrailparticle(ClientWorld world, double x, double y, double z,  double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
+public class LightTrailParticle extends AnimatedParticle {
+	protected LightTrailParticle(ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, SpriteProvider spriteProvider) {
         super(world, x, y, z, spriteProvider, 0);
         this.velocityX = velocityX;
         this.velocityY = velocityY;
@@ -38,7 +38,7 @@ public class LightTrailparticle extends AnimatedParticle {
 		
 		@Override
 		public Particle createParticle(SimpleParticleType defaultParticleType, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
-			return new LightTrailparticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
+			return new LightTrailParticle(clientWorld, d, e, f, g, h, i, this.spriteProvider);
 		}
 	}
 }
