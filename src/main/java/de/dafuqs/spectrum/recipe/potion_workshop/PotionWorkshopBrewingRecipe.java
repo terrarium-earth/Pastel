@@ -5,9 +5,9 @@ import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.api.energy.*;
 import de.dafuqs.spectrum.api.item.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.components.*;
 import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
@@ -136,8 +136,8 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 	@Override
 	public List<IngredientStack> getIngredientStacks() {
 		DefaultedList<IngredientStack> defaultedList = DefaultedList.of();
-		defaultedList.add(IngredientStack.ofItems(1, SpectrumItems.MERMAIDS_GEM));
-		defaultedList.add(IngredientStack.ofItems(1, Items.GLASS_BOTTLE));
+		defaultedList.add(IngredientStack.ofItems(SpectrumItems.MERMAIDS_GEM));
+		defaultedList.add(IngredientStack.ofItems(Items.GLASS_BOTTLE));
 		addIngredientStacks(defaultedList);
 		return defaultedList;
 	}

@@ -24,13 +24,14 @@
     {
       "item": "minecraft:enchanted_book",
       "predicates": {
-        "stored_enchantments": {
-          "enchantments": "spectrum:cloaked/sniping",
-          "levels": {
-            "min": 2,
-            "max": 255
+        "minecraft:stored_enchantments": [
+          {
+            "enchantments": "spectrum:sniping",
+            "levels": {
+              "min": 2
+            }
           }
-        }
+        ]
       }
     },
     {

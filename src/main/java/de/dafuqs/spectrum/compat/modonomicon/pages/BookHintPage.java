@@ -5,15 +5,12 @@ import com.klikli_dev.modonomicon.book.*;
 import com.klikli_dev.modonomicon.book.conditions.*;
 import com.klikli_dev.modonomicon.book.page.*;
 import com.klikli_dev.modonomicon.util.*;
-import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.compat.modonomicon.*;
-import de.dafuqs.spectrum.recipe.*;
 import net.minecraft.network.*;
-import net.minecraft.recipe.*;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.*;
 import net.minecraft.util.*;
-
-import java.util.*;
 
 public class BookHintPage extends BookTextPage {
 

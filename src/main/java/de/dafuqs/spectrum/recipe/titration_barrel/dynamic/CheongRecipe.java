@@ -1,13 +1,11 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.titration_barrel.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.fluid.*;
 import net.minecraft.inventory.*;
 import net.minecraft.item.*;
-import net.minecraft.predicate.*;
 import net.minecraft.recipe.*;
 
 import java.util.*;
@@ -20,8 +18,8 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 	public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(SpectrumItems.MERMAIDS_JAM, 4);
 	
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-		add(new IngredientStack(Ingredient.fromTag(SpectrumItemTags.FRUITS), ComponentPredicate.EMPTY, Map.of(), 8));
-		add(new IngredientStack(Ingredient.ofItems(Items.SUGAR), ComponentPredicate.EMPTY, Map.of(), 16));
+		add(IngredientStack.ofTag(SpectrumItemTags.FRUITS, 8));
+		add(IngredientStack.ofItems(Items.SUGAR, 16));
 	}};
 	
 	public CheongRecipe() {

@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic;
 
 import com.mojang.authlib.*;
 import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.spirit_instiller.*;
 import de.dafuqs.spectrum.cca.*;
 import de.dafuqs.spectrum.recipe.*;
@@ -27,7 +28,7 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	
 	public HardcorePlayerRevivalRecipe() {
 		super("", false, Optional.empty(),
-				IngredientStack.ofItems(1, Blocks.PLAYER_HEAD.asItem()), IngredientStack.ofItems(1, Items.TOTEM_OF_UNDYING), IngredientStack.ofItems(1, Items.ENCHANTED_GOLDEN_APPLE),
+				IngredientStack.ofItems(Blocks.PLAYER_HEAD.asItem()), IngredientStack.ofItems(Items.TOTEM_OF_UNDYING), IngredientStack.ofItems(Items.ENCHANTED_GOLDEN_APPLE),
 				ItemStack.EMPTY, 1200, 100, true);
 	}
 	

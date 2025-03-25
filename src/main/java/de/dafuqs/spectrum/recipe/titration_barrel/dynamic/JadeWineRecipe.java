@@ -27,7 +27,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
 		add(IngredientStack.ofItems(SpectrumItems.GERMINATED_JADE_VINE_BULB));
-		add(IngredientStack.ofItems(3, SpectrumItems.JADE_VINE_PETALS));
+		add(IngredientStack.ofItems(SpectrumItems.JADE_VINE_PETALS, 3));
 	}};
 	
 	public JadeWineRecipe() {

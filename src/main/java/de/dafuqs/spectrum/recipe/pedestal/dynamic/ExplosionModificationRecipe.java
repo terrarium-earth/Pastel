@@ -1,13 +1,11 @@
 package de.dafuqs.spectrum.recipe.pedestal.dynamic;
 
 
-import java.util.*;
-
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.item.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.pedestal.*;
 import de.dafuqs.spectrum.explosion.*;
-import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.item.*;
@@ -16,6 +14,8 @@ import net.minecraft.registry.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 // this hurt to write
 public class ExplosionModificationRecipe extends ShapelessPedestalRecipe {

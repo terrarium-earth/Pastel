@@ -22,13 +22,10 @@
     "M": {
       "item": "spectrum:infused_beverage",
       "recipeViewNbt": "{Variant: \"malt_beer\", Color: 8272724 }",
-      "matchbook": {
-        "mode": "AND",
-        "matches": [
+      "predicates": {
+        "spectrum:infused_beverage": [
           {
-            "type": "string",
-            "key": "Variant",
-            "target": "malt_beer"
+            "variants": "malt_beer"
           }
         ]
       }

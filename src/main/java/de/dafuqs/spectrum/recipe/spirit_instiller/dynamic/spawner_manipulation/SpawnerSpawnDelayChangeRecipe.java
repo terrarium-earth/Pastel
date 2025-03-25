@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
-import de.dafuqs.spectrum.recipe.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.component.type.*;
 import net.minecraft.item.*;
@@ -15,7 +15,7 @@ public class SpawnerSpawnDelayChangeRecipe extends SpawnerChangeRecipe {
 	protected static final int MIN_DELAY = 20;
 	
 	public SpawnerSpawnDelayChangeRecipe() {
-		super(IngredientStack.ofItems(4, SpectrumItems.MIDNIGHT_CHIP));
+		super(IngredientStack.ofItems(SpectrumItems.MIDNIGHT_CHIP, 4));
 	}
 	
 	@Override

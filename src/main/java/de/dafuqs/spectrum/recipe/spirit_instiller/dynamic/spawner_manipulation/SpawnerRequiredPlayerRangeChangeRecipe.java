@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
 
-import de.dafuqs.spectrum.recipe.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.component.type.*;
 import net.minecraft.item.*;
@@ -14,7 +14,7 @@ public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe 
 	protected static final int MAX_DETECTION_RANGE = 64;
 	
 	public SpawnerRequiredPlayerRangeChangeRecipe() {
-		super(IngredientStack.ofItems(4, SpectrumItems.STRATINE_GEM));
+		super(IngredientStack.ofItems(SpectrumItems.STRATINE_GEM, 4));
 	}
 	
 	@Override

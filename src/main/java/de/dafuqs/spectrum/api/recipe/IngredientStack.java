@@ -1,14 +1,14 @@
-package de.dafuqs.spectrum.recipe;
+package de.dafuqs.spectrum.api.recipe;
 
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import net.fabricmc.fabric.api.recipe.v1.ingredient.*;
+import net.minecraft.component.*;
 import net.minecraft.item.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.predicate.*;
-import net.minecraft.predicate.item.*;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
@@ -21,24 +21,24 @@ public class IngredientStack implements CustomIngredient {
 	
 	private final Ingredient ingredient;
 	private final ComponentPredicate componentPredicate;
-	private final Map<ItemSubPredicate.Type<?>, ItemSubPredicate> itemSubPredicates;
+	private final ComponentChanges previewComponents;
 	private final int count;
 	
 	// These are from the codec, to handle encoding
 	private Item item = null;
 	private TagKey<Item> tag = null;
 	
-	public static final IngredientStack EMPTY = new IngredientStack(Ingredient.EMPTY, ComponentPredicate.EMPTY, Map.of(), 0);
+	public static final IngredientStack EMPTY = new IngredientStack(Ingredient.EMPTY, ComponentPredicate.EMPTY, ComponentChanges.EMPTY, 0);
 	
-	public IngredientStack(Ingredient ingredient, ComponentPredicate componentPredicate, Map<ItemSubPredicate.Type<?>, ItemSubPredicate> itemSubPredicates, int count) {
+	public IngredientStack(Ingredient ingredient, ComponentPredicate componentPredicate, ComponentChanges previewComponents, int count) {
 		this.ingredient = ingredient;
 		this.componentPredicate = componentPredicate;
-		this.itemSubPredicates = itemSubPredicates;
+		this.previewComponents = previewComponents;
 		this.count = count;
 	}
 	
-	public IngredientStack(Ingredient ingredient) {
-		this(ingredient, ComponentPredicate.EMPTY, Map.of(), 1);
+	private IngredientStack(Ingredient ingredient) {
+		this(ingredient, ComponentPredicate.EMPTY, ComponentChanges.EMPTY, 1);
 	}
 	
 	public int getCount() {
@@ -57,8 +57,8 @@ public class IngredientStack implements CustomIngredient {
 		return new IngredientStack(Ingredient.ofItems(item));
 	}
 	
-	public static IngredientStack ofItems(int count, Item item) {
-		IngredientStack ingredientStack = new IngredientStack(Ingredient.ofItems(item), ComponentPredicate.EMPTY, Map.of(), count);
+	public static IngredientStack ofItems(Item item, int count) {
+		IngredientStack ingredientStack = new IngredientStack(Ingredient.ofItems(item), ComponentPredicate.EMPTY, ComponentChanges.EMPTY, count);
 		ingredientStack.item = item;
 		return ingredientStack;
 	}
@@ -68,7 +68,7 @@ public class IngredientStack implements CustomIngredient {
 	}
 	
 	public static IngredientStack ofTag(TagKey<Item> tag, int count) {
-		IngredientStack ingredientStack = new IngredientStack(Ingredient.fromTag(tag), ComponentPredicate.EMPTY, Map.of(), count);
+		IngredientStack ingredientStack = new IngredientStack(Ingredient.fromTag(tag), ComponentPredicate.EMPTY, ComponentChanges.EMPTY, count);
 		ingredientStack.tag = tag;
 		return ingredientStack;
 	}
@@ -76,9 +76,8 @@ public class IngredientStack implements CustomIngredient {
 	@Override
 	public boolean test(ItemStack itemStack) {
 		return this.ingredient.test(itemStack)
-				&& this.componentPredicate.test(itemStack.getComponents())
-				&& this.itemSubPredicates.values().stream().allMatch(pred -> pred.test(itemStack))
-				&& this.count <= itemStack.getCount();
+				&& this.count <= itemStack.getCount()
+				&& this.componentPredicate.test(itemStack.getComponents());
 	}
 	
 	@Nullable
@@ -90,12 +89,12 @@ public class IngredientStack implements CustomIngredient {
 			ItemStack[] matchingStacks = this.ingredient.getMatchingStacks();
 			List<ItemStack> stacks = new ArrayList<>(matchingStacks.length);
 			for (ItemStack is : matchingStacks) {
-				stacks.add(new ItemStack(is.getItem(), count));
+				ItemStack stack = new ItemStack(is.getItem(), count);
+				stack.applyChanges(previewComponents);
+				stacks.add(stack);
 			}
 			this.matchingStacks = stacks;
 		}
-		
-		
 		return this.matchingStacks;
 	}
 	
@@ -120,7 +119,7 @@ public class IngredientStack implements CustomIngredient {
 		public static final MapCodec<IngredientStack> MAP_CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 				MapCodec.assumeMapUnsafe(Ingredient.DISALLOW_EMPTY_CODEC).forGetter(IngredientStack::getIngredient),
 				ComponentPredicate.CODEC.optionalFieldOf("components", ComponentPredicate.EMPTY).forGetter(o -> o.componentPredicate),
-				ItemSubPredicate.PREDICATES_MAP_CODEC.optionalFieldOf("predicates", Map.of()).forGetter(o -> o.itemSubPredicates),
+				ComponentChanges.CODEC.optionalFieldOf("preview_components", ComponentChanges.EMPTY).forGetter(o -> o.previewComponents),
 				Codec.INT.optionalFieldOf("count", 1).forGetter(o -> o.count)
 		).apply(i, IngredientStack::new));
 		
@@ -135,7 +134,7 @@ public class IngredientStack implements CustomIngredient {
 		public static final PacketCodec<RegistryByteBuf, IngredientStack> PACKET_CODEC = PacketCodec.tuple(
 				Ingredient.PACKET_CODEC, o -> o.ingredient,
 				ComponentPredicate.PACKET_CODEC, o -> o.componentPredicate,
-				PacketCodec.unit(Map.<ItemSubPredicate.Type<?>, ItemSubPredicate>of()), o -> o.itemSubPredicates,
+				ComponentChanges.PACKET_CODEC, o -> o.previewComponents,
 				PacketCodecs.VAR_INT, o -> o.count,
 				IngredientStack::new
 		);
