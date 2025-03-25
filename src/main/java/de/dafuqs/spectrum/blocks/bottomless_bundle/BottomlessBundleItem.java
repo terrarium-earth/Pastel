@@ -333,23 +333,25 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		}
 	}
 	
-	public record BottomlessStack(ItemVariant variant, long count) {
+	public record BottomlessStack(ItemVariant variant, long count, boolean locked) {
 		
-		public static BottomlessStack DEFAULT = new BottomlessStack(ItemStack.EMPTY, 0);
+		public static BottomlessStack DEFAULT = new BottomlessStack(ItemStack.EMPTY, 0, false);
 		
 		public static Codec<BottomlessStack> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 				ItemVariant.CODEC.fieldOf("variant").forGetter(BottomlessStack::variant),
-				Codec.LONG.fieldOf("count").forGetter(BottomlessStack::count)
+				Codec.LONG.fieldOf("count").forGetter(BottomlessStack::count),
+				Codec.BOOL.fieldOf("locked").forGetter(BottomlessStack::locked)
 		).apply(instance, BottomlessStack::new));
 		
 		public static PacketCodec<RegistryByteBuf, BottomlessStack> PACKET_CODEC = PacketCodec.tuple(
 				ItemVariant.PACKET_CODEC, BottomlessStack::variant,
 				PacketCodecs.VAR_LONG, BottomlessStack::count,
+				PacketCodecs.BOOL, BottomlessStack::locked,
 				BottomlessStack::new
 		);
 		
-		public BottomlessStack(ItemStack stack, long count) {
-			this(ItemVariant.of(stack), count);
+		public BottomlessStack(ItemStack stack, long count, boolean locked) {
+			this(ItemVariant.of(stack), count, locked);
 		}
 		
 		public Iterable<ItemStack> iterateCopy() {
@@ -359,7 +361,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 				public @NotNull Iterator<ItemStack> iterator() {
 					return new Iterator<>() {
 						
-						private final Builder builder = new Builder(BottomlessStack.this, Integer.MAX_VALUE, false);
+						private final Builder builder = new Builder(BottomlessStack.this, Integer.MAX_VALUE, false, false);
 						
 						@Override
 						public boolean hasNext() {
@@ -379,7 +381,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		
 		public static class Builder {
 			
-			private final boolean voiding;
+			private final boolean voiding, locked;
 			private final long max;
 			private long count;
 			private ItemVariant variant;
@@ -388,14 +390,16 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 				var prev = stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT);
 				var max = BottomlessBundleItem.getMaxStoredAmount(SpectrumEnchantmentHelper.getLevel(world.getRegistryManager(), Enchantments.POWER, stack));
 				var voiding = EnchantmentHelper.hasAnyEnchantmentsIn(stack, SpectrumEnchantmentTags.DELETES_OVERFLOW_IN_INVENTORY);
-				return new Builder(prev, max, voiding);
+				var locked = stack.contains(DataComponentTypes.LOCK);
+				return new Builder(prev, max, voiding, locked);
 			}
 			
-			public Builder(BottomlessStack prev, long max, boolean voiding) {
+			public Builder(BottomlessStack prev, long max, boolean voiding, boolean locked) {
 				this.variant = prev.variant();
 				this.max = max;
 				this.count = prev.count();
 				this.voiding = voiding;
+				this.locked = locked;
 			}
 			
 			public Builder clear() {
@@ -486,7 +490,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 				if (this.isEmpty()) {
 					bottomlessBundleStack.remove(SpectrumDataComponentTypes.BOTTOMLESS_STACK);
 				} else {
-					bottomlessBundleStack.set(SpectrumDataComponentTypes.BOTTOMLESS_STACK, new BottomlessStack(variant, count));
+					bottomlessBundleStack.set(SpectrumDataComponentTypes.BOTTOMLESS_STACK, new BottomlessStack(variant, count, locked));
 				}
 			}
 		}

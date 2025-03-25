@@ -7,12 +7,16 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
 import net.fabricmc.fabric.api.transfer.v1.transaction.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
+import net.minecraft.component.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.pathing.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.loot.context.*;
 import net.minecraft.sound.*;
+import net.minecraft.state.*;
+import net.minecraft.state.property.*;
+import net.minecraft.state.property.Properties;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import net.minecraft.util.hit.*;
@@ -26,11 +30,15 @@ import java.util.*;
 public class BottomlessBundleBlock extends BlockWithEntity {
 
 	public static final MapCodec<BottomlessBundleBlock> CODEC = createCodec(BottomlessBundleBlock::new);
+	public static final IntProperty ROTATION = Properties.ROTATION;
+	public static final BooleanProperty LOCKED = Properties.LOCKED;
+	public static final int MAX_ROTATIONS = RotationPropertyHelper.getMax() + 1;
 	
-	protected static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+	protected static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	
 	public BottomlessBundleBlock(Settings settings) {
 		super(settings);
+		setDefaultState(getDefaultState().with(LOCKED, false));
 	}
 
 	@Override
@@ -51,7 +59,7 @@ public class BottomlessBundleBlock extends BlockWithEntity {
 	
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.MODEL;
+		return BlockRenderType.INVISIBLE;
 	}
 	
 	@Override
@@ -146,6 +154,20 @@ public class BottomlessBundleBlock extends BlockWithEntity {
 		}
 	}
 	
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
+		return super.getPlacementState(ctx)
+				.with(ROTATION, RotationPropertyHelper.fromYaw(ctx.getPlayerYaw()))
+				.with(LOCKED, ctx.getStack().contains(DataComponentTypes.LOCK));
+	}
+	
+	protected BlockState rotate(BlockState state, BlockRotation rotation) {
+		return (BlockState)state.with(ROTATION, rotation.rotate((Integer)state.get(ROTATION), MAX_ROTATIONS));
+	}
+	
+	protected BlockState mirror(BlockState state, BlockMirror mirror) {
+		return (BlockState)state.with(ROTATION, mirror.mirror((Integer)state.get(ROTATION), MAX_ROTATIONS));
+	}
+	
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack itemStack) {
 		if (!world.isClient) {
@@ -162,4 +184,9 @@ public class BottomlessBundleBlock extends BlockWithEntity {
 		return Text.translatable("item.spectrum.bottomless_bundle");
 	}
 	
+	@Override
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+		super.appendProperties(builder);
+		builder.add(Properties.ROTATION, LOCKED);
+	}
 }
