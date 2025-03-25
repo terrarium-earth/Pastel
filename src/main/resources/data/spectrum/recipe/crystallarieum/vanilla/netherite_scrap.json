@@ -29,6 +29,9 @@
   "ink_color": "spectrum:brown",
   "ink_cost_tier": 3,
   "grows_without_catalyst": false,
+  "fluid_medium": {
+    "fluid": "minecraft:lava"
+  },
   "catalysts": [
     {
       "ingredient": [

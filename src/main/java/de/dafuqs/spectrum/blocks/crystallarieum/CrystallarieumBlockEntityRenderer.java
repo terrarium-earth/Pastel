@@ -2,17 +2,22 @@ package de.dafuqs.spectrum.blocks.crystallarieum;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.energy.color.*;
+import de.dafuqs.spectrum.render.*;
 import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.transfer.v1.client.fluid.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.minecraft.client.*;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.block.entity.*;
 import net.minecraft.client.render.model.json.*;
+import net.minecraft.client.texture.*;
 import net.minecraft.client.util.*;
 import net.minecraft.client.util.math.*;
 import net.minecraft.item.*;
 import net.minecraft.screen.*;
 import net.minecraft.util.math.*;
+import net.minecraft.world.*;
 
 @Environment(EnvType.CLIENT)
 public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEntity> implements BlockEntityRenderer<T> {
@@ -41,6 +46,39 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
 		
 		var vertices = SPRITE.getVertexConsumer(vertexConsumers, RenderLayer::getEntityTranslucent);
 		
+		renderHalo(crystal, tickDelta, matrices, vertexConsumers, light, overlay, vertices);
+		
+		var fluid = crystal.fluidStorage.variant;
+		if (!fluid.isBlank()) {
+		
+			matrices.push();
+			Sprite sprite = FluidVariantRendering.getSprite(fluid);
+			assert sprite != null;
+			
+			var pos = crystal.getPos().up();
+			var luminance = FluidVariantAttributes.getLuminance(fluid);
+			var skylight = crystal.getWorld().getLightLevel(LightType.BLOCK, pos);
+			var glow = LightmapTextureManager.pack(Math.max(luminance, skylight), crystal.getWorld().getLightLevel(LightType.SKY, pos));
+			
+			var full = crystal.fluidStorage.amount == FluidConstants.BUCKET;
+			var y = full ? 0.975F : 0.94F;
+			var rim = full ? 1 : 2;
+			
+			int[] colors = FluidRendering.unpackColorOf(fluid, crystal);
+			FluidRendering.renderFluid(vertexConsumers.getBuffer(RenderLayer.getTranslucent()), matrices.peek().getPositionMatrix(), sprite, glow, overlay, rim, 16 - rim, y, rim, 16 - rim, colors);
+			
+			matrices.pop();
+			
+		}
+		
+		ItemStack catalystStack = crystal.getStack(CrystallarieumBlockEntity.CATALYST_SLOT_ID);
+		if (catalystStack.isEmpty())
+			return;
+		
+		renderCatalysts(crystal, matrices, vertexConsumers, light, overlay, catalystStack);
+	}
+	
+	private void renderHalo(CrystallarieumBlockEntity crystal, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, VertexConsumer vertices) {
 		matrices.push();
 		matrices.translate(0.5D, 1.5D, 0.5D);
 		matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
@@ -78,12 +116,9 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
 		}
 		
 		matrices.pop();
-		
-		ItemStack catalystStack = crystal.getStack(CrystallarieumBlockEntity.CATALYST_SLOT_ID);
-		
-		if (catalystStack.isEmpty())
-			return;
-		
+	}
+	
+	private static void renderCatalysts(CrystallarieumBlockEntity crystal, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, ItemStack catalystStack) {
 		matrices.push();
 		var stack = (int) Math.ceil(catalystStack.getCount() / 17.0);
 		matrices.translate(0.5, 0.4, 0.5);

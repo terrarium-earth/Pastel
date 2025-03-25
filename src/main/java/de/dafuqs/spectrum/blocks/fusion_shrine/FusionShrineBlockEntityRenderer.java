@@ -33,7 +33,7 @@ public class FusionShrineBlockEntityRenderer<T extends FusionShrineBlockEntity> 
 			matrixStack.push();
 			Sprite sprite = FluidVariantRendering.getSprite(fluidVariant);
 			int[] colors = FluidRendering.unpackColorOf(fluidVariant, fusionShrineBlockEntity);
-			FluidRendering.renderFluid(vertexConsumerProvider.getBuffer(RenderLayer.getTranslucent()), matrixStack.peek().getPositionMatrix(), sprite, light, overlay, 0.125F, 0.875F, 0.9F, 0.125F, 0.875F, colors);
+			FluidRendering.renderFluid(vertexConsumerProvider.getBuffer(RenderLayer.getTranslucent()), matrixStack.peek().getPositionMatrix(), sprite, light, overlay, 2, 14, 0.9F, 2, 14, colors);
 			matrixStack.pop();
 		}
 		

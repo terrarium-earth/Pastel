@@ -29,6 +29,9 @@
   "ink_color": "spectrum:cyan",
   "ink_cost_tier": 2,
   "grows_without_catalyst": false,
+  "fluid_medium": {
+    "fluid": "minecraft:water"
+  },
   "catalysts": [
     {
       "ingredient": [

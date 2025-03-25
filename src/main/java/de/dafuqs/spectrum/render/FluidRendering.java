@@ -11,16 +11,15 @@ import org.joml.*;
 public class FluidRendering {
 	
 	public static void renderFluid(VertexConsumer builder, Matrix4f pos, Sprite sprite, int light, int overlay, float x1, float x2, float y, float z1, float z2, int[] color) {
-		// Convert block size to pixel size
-		final float px1 = x1 * 16;
-		final float px2 = x2 * 16;
-		final float pz1 = z1 * 16;
-		final float pz2 = z2 * 16;
+		x1 /= 16;
+		x2 /= 16;
+		z1 /= 16;
+		z2 /= 16;
 		
-		final float u1 = sprite.getFrameU(px1);
-		final float u2 = sprite.getFrameU(px2);
-		final float v1 = sprite.getFrameV(pz1);
-		final float v2 = sprite.getFrameV(pz2);
+		final float u1 = sprite.getMinU();
+		final float u2 = sprite.getMaxU();
+		final float v1 = sprite.getMinV();
+		final float v2 = sprite.getMaxV();
 		builder.vertex(pos, x1, y, z2).color(color[1], color[2], color[3], color[0]).texture(u1, v2).overlay(overlay).light(light).normal(0f, 1f, 0f);
 		builder.vertex(pos, x2, y, z2).color(color[1], color[2], color[3], color[0]).texture(u2, v2).overlay(overlay).light(light).normal(0f, 1f, 0f);
 		builder.vertex(pos, x2, y, z1).color(color[1], color[2], color[3], color[0]).texture(u2, v1).overlay(overlay).light(light).normal(0f, 1f, 0f);
