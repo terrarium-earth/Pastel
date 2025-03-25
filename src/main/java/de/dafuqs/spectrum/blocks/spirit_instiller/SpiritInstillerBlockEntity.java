@@ -72,8 +72,8 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	
 	public static void clientTick(World world, BlockPos blockPos, BlockState blockState, @NotNull SpiritInstillerBlockEntity instiller) {
 		if (instiller.animator == null) {
-			instiller.animator = FACTORY.create(FlowStates.INIT, instiller);
 			SpiritInstillerBlock.verifyStructure(world, blockPos, null, instiller);
+			instiller.animator = FACTORY.create(FlowStates.INIT, instiller);
 		}
 		else {
 			instiller.updateAnimator();
@@ -425,13 +425,13 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		BlockPos itemBowlPos = pos.add(getItemBowlHorizontalPositionOffset(false).up());
 		BlockEntity blockEntity = world.getBlockEntity(itemBowlPos);
 		if (blockEntity instanceof ItemBowlBlockEntity itemBowlBlockEntity) {
-			itemBowlBlockEntity.spawnOrbParticles(new Vec3d(this.pos.getX() + 0.5, this.pos.getY() + 1.0, this.pos.getZ() + 0.5));
+			itemBowlBlockEntity.spawnOrbParticles(new Vec3d(this.pos.getX() + 0.5, this.pos.getY() + 1.0 + platformPos.at(0, world.getTime()) / 16.0, this.pos.getZ() + 0.5));
 		}
 		
 		itemBowlPos = pos.add(getItemBowlHorizontalPositionOffset(true).up());
 		blockEntity = world.getBlockEntity(itemBowlPos);
 		if (blockEntity instanceof ItemBowlBlockEntity itemBowlBlockEntity) {
-			itemBowlBlockEntity.spawnOrbParticles(new Vec3d(this.pos.getX() + 0.5, this.pos.getY() + 1.0 + platformPos.at(0, world.getTime()), this.pos.getZ() + 0.5));
+			itemBowlBlockEntity.spawnOrbParticles(new Vec3d(this.pos.getX() + 0.5, this.pos.getY() + 1.0 + platformPos.at(0, world.getTime()) / 16.0, this.pos.getZ() + 0.5));
 		}
 	}
 	
