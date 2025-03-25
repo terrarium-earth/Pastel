@@ -68,9 +68,6 @@
       ],
       "net/minecraft/class_4174\u0024class_4175": [
         "de/dafuqs/spectrum/injectors/FoodComponentBuilderInjector"
-      ],
-      "net/minecraft/class_9304": [
-        "de/dafuqs/spectrum/injectors/ItemEnchantmentsComponentInjector"
       ]
     },
     "cardinal-components": [
