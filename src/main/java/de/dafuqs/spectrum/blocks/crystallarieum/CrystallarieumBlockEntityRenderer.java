@@ -142,7 +142,7 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
 	
 	@Override
 	public int getRenderDistance() {
-		return 16;
+		return 48;
 	}
 	
 	public static TexturedModelData getTexturedModelData() {
