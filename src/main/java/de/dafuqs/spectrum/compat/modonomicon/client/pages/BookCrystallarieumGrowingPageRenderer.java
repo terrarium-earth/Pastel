@@ -3,11 +3,13 @@ package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 import com.klikli_dev.modonomicon.book.*;
 import com.klikli_dev.modonomicon.client.gui.book.entry.*;
 import com.klikli_dev.modonomicon.data.*;
+import com.klikli_dev.modonomicon.fluid.*;
 import com.mojang.blaze3d.systems.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.compat.modonomicon.pages.*;
 import de.dafuqs.spectrum.recipe.crystallarieum.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.minecraft.block.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
@@ -58,54 +60,90 @@ public class BookCrystallarieumGrowingPageRenderer extends BookGatedRecipePageRe
         CrystallarieumRecipe recipe = recipeEntry.value();
         World world = MinecraftClient.getInstance().world;
         if (world == null) return;
+		recipeY += 2;
 
         RenderSystem.enableBlend();
-        drawContext.drawTexture(BACKGROUND_TEXTURE, recipeX - 3, recipeY, 0, 0, 53, 25, 128, 128);
 
         renderTitle(drawContext, recipeY, second);
 
         // the ingredient
+		int startX = 26;
+		int offsetPerReagent = 18;
         Ingredient ingredient = recipe.getIngredientStack();
-        parentScreen.renderIngredient(drawContext, recipeX, recipeY + 5, mouseX, mouseY, ingredient);
+		parentScreen.renderIngredient(drawContext, recipeX + startX, recipeY + 5, mouseX, mouseY, ingredient);
+		parentScreen.renderFluidStack(drawContext, recipeX + startX - offsetPerReagent - 4, recipeY + 5, mouseX, mouseY, new FabricFluidHolder(recipe.getFluidMedium(), 1000));
+		drawContext.drawTexture(BACKGROUND_TEXTURE, recipeX + startX - offsetPerReagent - 7, recipeY + 1, 0, 0, 53, 25, 128, 128);
+		
 
         // growth stages
         Iterator<BlockState> it = recipe.getGrowthStages().iterator();
         BlockState growthState = it.next();
-        parentScreen.renderItemStack(drawContext, recipeX + 23, recipeY - 1, mouseX, mouseY, growthState.getBlock().asItem().getDefaultStack());
+        parentScreen.renderItemStack(drawContext, recipeX + startX + offsetPerReagent, recipeY - 1, mouseX, mouseY, growthState.getBlock().asItem().getDefaultStack());
         int x = 0;
         while (it.hasNext()) {
-            parentScreen.renderItemStack(drawContext, recipeX + 52 + 16 * x, recipeY + 4, mouseX, mouseY, it.next().getBlock().asItem().getDefaultStack());
+            parentScreen.renderItemStack(drawContext, recipeX + 62 + offsetPerReagent * x, recipeY + 4, mouseX, mouseY, it.next().getBlock().asItem().getDefaultStack());
             x++;
         }
 
         // crystallarieum
-        parentScreen.renderItemStack(drawContext, recipeX + 23, recipeY + 8, mouseX, mouseY, SpectrumBlocks.CRYSTALLARIEUM.asStackWithColor(recipe.getInkColor()));
+        parentScreen.renderItemStack(drawContext, recipeX + startX + offsetPerReagent, recipeY + 8, mouseX, mouseY, SpectrumBlocks.CRYSTALLARIEUM.asStackWithColor(recipe.getInkColor()));
 
         // catalyst text
-        renderBookTextHolder(drawContext, catalystText, 0, 38, BookEntryScreen.PAGE_WIDTH);
-		renderBookTextHolder(drawContext, second ? craftingTimeText2 : craftingTimeText1, 0, 76, BookEntryScreen.PAGE_WIDTH);
+        renderBookTextHolder(drawContext, catalystText, 0, 42, BookEntryScreen.PAGE_WIDTH);
+		renderBookTextHolder(drawContext, second ? craftingTimeText2 : craftingTimeText1, 0, 82, BookEntryScreen.PAGE_WIDTH);
 
         // the catalysts
         x = 0;
-        int startX = 26;
-        int offsetPerReagent = 18;
+		recipeY += 4;
         for (CrystallarieumCatalyst catalyst : recipe.getCatalysts()) {
             int offsetX = recipeX + startX + offsetPerReagent * x;
             parentScreen.renderIngredient(drawContext, recipeX + startX + offsetPerReagent * x, recipeY + 27, mouseX, mouseY, catalyst.ingredient());
 
-            float growthAcceleration = catalyst.growthAccelerationMod();
-            float inkConsumption = catalyst.inkConsumptionMod();
-            float consumeChance = catalyst.consumeChancePerSecond();
-
             RenderSystem.enableBlend();
-            int offsetU = growthAcceleration == 1 ? 97 : growthAcceleration >= 6 ? 85 : growthAcceleration > 1 ? 67 : growthAcceleration <= 0.25 ? 79 : 73;
-            drawContext.drawTexture(BACKGROUND_TEXTURE, offsetX + 5, recipeY + 45, offsetU, 0, 6, 6, 128, 128);
-
-            offsetU = inkConsumption == 1 ? 97 : inkConsumption >= 8 ? 85 : inkConsumption > 1 ? 67 : inkConsumption <= 0.25 ? 79 : 73;
-            drawContext.drawTexture(BACKGROUND_TEXTURE, offsetX + 5, recipeY + 54, offsetU, 6, 6, 6, 128, 128);
-
-            offsetU = consumeChance == 0 ? 97 : consumeChance >= 0.2 ? 85 : consumeChance >= 0.05 ? 67 : 91;
-            drawContext.drawTexture(BACKGROUND_TEXTURE, offsetX + 5, recipeY + 63, offsetU, 6, 6, 6, 128, 128);
+			int offset = 0;
+			float accel = catalyst.growthAccelerationMod();
+			
+			if (accel > 0.2) {
+				if (accel >= 5)
+					offset = 7 * 4;
+				else if (accel > 1)
+					offset = 7 * 3;
+				else if(accel == 1)
+					offset = 7 * 2;
+				else if (accel < 1)
+					offset = 7;
+			}
+			drawContext.drawTexture(BACKGROUND_TEXTURE, offsetX + 5, recipeY + 45, 7, 7, 70 + offset, 0, 7, 7, 128, 128);
+			
+			float drain = catalyst.inkConsumptionMod();
+			
+			if (drain >= 5)
+				offset = 0;
+			else if (drain > 1)
+				offset = 7;
+			else if(drain == 1)
+				offset = 7 * 2;
+			else if (drain < 0.2)
+				offset = 7 * 4;
+			else if (drain < 1)
+				offset = 7 * 3;
+			
+			drawContext.drawTexture(BACKGROUND_TEXTURE, offsetX + 5, recipeY + 54, 7, 7, 70 + offset, 7, 7, 7, 128, 128);
+			
+			float chance = catalyst.consumeChancePerSecond();
+			
+			if (chance >= 0.25)
+				offset = 0;
+			else if (chance < 0.0001)
+				offset = 7 * 4;
+			else if (chance <= 0.02)
+				offset = 7 * 3;
+			else if(chance < 0.05)
+				offset = 7 * 2;
+			else if (chance < 0.25)
+				offset = 7;
+			
+			drawContext.drawTexture(BACKGROUND_TEXTURE, offsetX + 5, recipeY + 63, 7, 7, 70 + offset, 14, 7, 7, 128, 128);
 
             x++;
         }
