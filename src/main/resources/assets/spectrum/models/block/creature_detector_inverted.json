@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/template_daylight_detector",
+  "parent": "spectrum:templates/slab_detector",
   "textures": {
     "top": "spectrum:block/creature_detector_inverted_top",
-    "side": "minecraft:block/daylight_detector_side"
+    "side": "spectrum:block/creature_detector_side"
   }
 }
