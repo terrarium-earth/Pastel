@@ -1092,7 +1092,7 @@ public class SpectrumItemGroups {
 				
 				entries.add(SpectrumBlocks.VEGETAL_BLOCK);
 				entries.add(SpectrumBlocks.NEOLITH_BLOCK);
-				entries.add(SpectrumBlocks.BEDROCK_STORAGE_BLOCK);
+				entries.add(SpectrumBlocks.BEDROCK_DUST_BLOCK);
 				
 				entries.add(SpectrumBlocks.SHIMMERSTONE_BLOCK);
 				entries.add(SpectrumBlocks.AZURITE_BLOCK);

@@ -20,7 +20,7 @@
     "B": "spectrum:bedrock_dust"
   },
   "result": {
-    "id": "spectrum:bedrock_storage_block",
+    "id": "spectrum:bedrock_dust_block",
     "count": 1
   },
   "required_advancement": "spectrum:midgame/break_decayed_bedrock",
