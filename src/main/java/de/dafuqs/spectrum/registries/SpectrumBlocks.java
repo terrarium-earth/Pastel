@@ -1040,17 +1040,15 @@ public class SpectrumBlocks {
 	public static final Block BLACKSLAG_ONYX_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.BLACK, locate("create_onyx_shard"), SpectrumBlocks.BLACKSLAG.getDefaultState());
 	public static final Block BLACKSLAG_MOONSTONE_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.WHITE, locate("lategame/collect_moonstone"), SpectrumBlocks.BLACKSLAG.getDefaultState());
 	
-	private static Settings gemStorageBlock(MapColor mapColor, BlockSoundGroup soundGroup) {
+	private static Settings polishedGemBlock(MapColor mapColor, BlockSoundGroup soundGroup) {
 		return settings(mapColor, soundGroup, 5.0F, 6.0F);
 	}
 	
-	public static final Block TOPAZ_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK));
-	public static final Block AMETHYST_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK));
-	public static final Block CITRINE_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK));
-	public static final Block ONYX_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK));
-	public static final Block MOONSTONE_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK));
-	//public static final Block SPECTRAL_SHARD_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME);
-	//public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK));
+	public static final Block POLISHED_TOPAZ_BLOCK = new Block(polishedGemBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK));
+	public static final Block POLISHED_AMETHYST_BLOCK = new Block(polishedGemBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK));
+	public static final Block POLISHED_CITRINE_BLOCK = new Block(polishedGemBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK));
+	public static final Block POLISHED_ONYX_BLOCK = new Block(polishedGemBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK));
+	public static final Block POLISHED_MOONSTONE_BLOCK = new Block(polishedGemBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK));
 	
 	// COLORED TREES
 	private static AbstractBlock.Settings copyWithMapColor(Block baseBlock, MapColor color) {
@@ -2031,11 +2029,11 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerOreStorageBlocks(Item.Settings settings, Item.Settings settingsFireproof) {
-		registerBlockWithItem("topaz_storage_block", TOPAZ_STORAGE_BLOCK, settings, InkColors.CYAN);
-		registerBlockWithItem("amethyst_storage_block", AMETHYST_STORAGE_BLOCK, settings, InkColors.MAGENTA);
-		registerBlockWithItem("citrine_storage_block", CITRINE_STORAGE_BLOCK, settings, InkColors.YELLOW);
-		registerBlockWithItem("onyx_storage_block", ONYX_STORAGE_BLOCK, settings, InkColors.BLACK);
-		registerBlockWithItem("moonstone_storage_block", MOONSTONE_STORAGE_BLOCK, settings, InkColors.WHITE);
+		registerBlockWithItem("polished_topaz_block", POLISHED_TOPAZ_BLOCK, settings, InkColors.CYAN);
+		registerBlockWithItem("polished_amethyst_block", POLISHED_AMETHYST_BLOCK, settings, InkColors.MAGENTA);
+		registerBlockWithItem("polished_citrine_block", POLISHED_CITRINE_BLOCK, settings, InkColors.YELLOW);
+		registerBlockWithItem("polished_onyx_block", POLISHED_ONYX_BLOCK, settings, InkColors.BLACK);
+		registerBlockWithItem("polished_moonstone_block", POLISHED_MOONSTONE_BLOCK, settings, InkColors.WHITE);
 		//registerBlockWithItem("spectral_shard_storage_block", SPECTRAL_SHARD_STORAGE_BLOCK, IS.of(Rarity.RARE), InkColors.WHITE);
 		
 		registerBlockWithItem("topaz_powder_block", TOPAZ_POWDER_BLOCK, settings, InkColors.CYAN);

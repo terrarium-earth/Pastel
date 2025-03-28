@@ -3,11 +3,11 @@
   "group": "compacting",
   "ingredients": [
     {
-      "item": "spectrum:topaz_storage_block"
+      "item": "spectrum:polished_amethyst_block"
     }
   ],
   "result": {
-    "id": "spectrum:topaz_shard",
+    "id": "minecraft:amethyst_shard",
     "count": 9
   }
 }

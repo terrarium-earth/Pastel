@@ -1214,11 +1214,11 @@
   "block.spectrum.deepslate_shimmerstone_light": "深板岩火花石灯",
   "block.spectrum.blackslag_shimmerstone_light": "黑渣岩火花石灯",
 
-  "block.spectrum.amethyst_storage_block": "磨制紫水晶块",
-  "block.spectrum.citrine_storage_block": "磨制黄水晶块",
-  "block.spectrum.topaz_storage_block": "磨制托帕石晶块",
-  "block.spectrum.onyx_storage_block": "磨制缟玛瑙晶块",
-  "block.spectrum.moonstone_storage_block": "磨制月长石晶块",
+  "block.spectrum.polished_amethyst_block": "磨制紫水晶块",
+  "block.spectrum.polished_citrine_block": "磨制黄水晶块",
+  "block.spectrum.polished_topaz_block": "磨制托帕石晶块",
+  "block.spectrum.polished_onyx_block": "磨制缟玛瑙晶块",
+  "block.spectrum.polished_moonstone_block": "磨制月长石晶块",
   "block.spectrum.spectral_shard_storage_block": "磨制七彩碎片块",
 
   "block.spectrum.black_block": "黑色方块",

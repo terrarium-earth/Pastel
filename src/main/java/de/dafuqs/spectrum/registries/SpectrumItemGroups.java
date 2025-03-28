@@ -1084,11 +1084,11 @@ public class SpectrumItemGroups {
 	public static final ItemSubGroup DECORATION = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_DECORATION, Text.translatable("itemGroup.spectrum.decoration"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
-				entries.add(SpectrumBlocks.TOPAZ_STORAGE_BLOCK);
-				entries.add(SpectrumBlocks.AMETHYST_STORAGE_BLOCK);
-				entries.add(SpectrumBlocks.CITRINE_STORAGE_BLOCK);
-				entries.add(SpectrumBlocks.ONYX_STORAGE_BLOCK);
-				entries.add(SpectrumBlocks.MOONSTONE_STORAGE_BLOCK);
+				entries.add(SpectrumBlocks.POLISHED_TOPAZ_BLOCK);
+				entries.add(SpectrumBlocks.POLISHED_AMETHYST_BLOCK);
+				entries.add(SpectrumBlocks.POLISHED_CITRINE_BLOCK);
+				entries.add(SpectrumBlocks.POLISHED_ONYX_BLOCK);
+				entries.add(SpectrumBlocks.POLISHED_MOONSTONE_BLOCK);
 				
 				entries.add(SpectrumBlocks.VEGETAL_BLOCK);
 				entries.add(SpectrumBlocks.NEOLITH_BLOCK);

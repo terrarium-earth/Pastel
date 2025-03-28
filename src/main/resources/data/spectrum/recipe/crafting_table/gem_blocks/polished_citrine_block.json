@@ -8,12 +8,12 @@
   "key": {
     "G": [
       {
-        "item": "spectrum:moonstone_shard"
+        "item": "spectrum:citrine_shard"
       }
     ]
   },
   "result": {
-    "id": "spectrum:moonstone_storage_block",
+    "id": "spectrum:polished_citrine_block",
     "count": 1
   }
 }

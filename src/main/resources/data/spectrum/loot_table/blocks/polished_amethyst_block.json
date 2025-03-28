@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "spectrum:amethyst_storage_block"
+          "name": "spectrum:polished_amethyst_block"
         }
       ],
       "conditions": [

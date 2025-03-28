@@ -3,11 +3,11 @@
   "group": "compacting",
   "ingredients": [
     {
-      "item": "spectrum:moonstone_storage_block"
+      "item": "spectrum:polished_topaz_block"
     }
   ],
   "result": {
-    "id": "spectrum:moonstone_shard",
+    "id": "spectrum:topaz_shard",
     "count": 9
   }
 }

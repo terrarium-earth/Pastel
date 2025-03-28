@@ -3,11 +3,11 @@
   "group": "compacting",
   "ingredients": [
     {
-      "item": "spectrum:onyx_storage_block"
+      "item": "spectrum:polished_citrine_block"
     }
   ],
   "result": {
-    "id": "spectrum:onyx_shard",
+    "id": "spectrum:citrine_shard",
     "count": 9
   }
 }
