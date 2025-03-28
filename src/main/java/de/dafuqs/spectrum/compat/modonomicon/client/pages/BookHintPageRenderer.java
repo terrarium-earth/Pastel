@@ -78,7 +78,7 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
             revealProgress = -1;
 			
 			addButton(new PaymentButtonWidget(
-					2, BookEntryScreen.PAGE_HEIGHT - ButtonWidget.DEFAULT_HEIGHT - 3,
+					2, BookEntryScreen.PAGE_HEIGHT - ButtonWidget.DEFAULT_HEIGHT - 2,
 					BookEntryScreen.PAGE_WIDTH - 12, ButtonWidget.DEFAULT_HEIGHT,
 					Text.empty(), this::paymentButtonClicked, this));
         } else {
