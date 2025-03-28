@@ -161,7 +161,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		return recipeData.baseYield() + potionMod.yield();
 	}
 	
-	public List<ItemStack> getPotions(ItemStack stack, PotionMod potionMod, PotionWorkshopBrewingRecipe lastRecipe, Random random, int brewedAmount) {
+	public List<ItemStack> getPotions(ItemStack stack, PotionMod potionMod, @Nullable RecipeEntry<PotionWorkshopBrewingRecipe> lastRecipe, Random random, int brewedAmount) {
 		var builder = new PotionMod.Builder(potionMod);
 		// potion type
 		ItemStack itemStack;
@@ -186,7 +186,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		return results;
 	}
 	
-	public ItemStack getPotion(ItemStack originalStack, ItemStack targetStack, PotionMod potionMod, PotionWorkshopBrewingRecipe lastRecipe, Random random) {
+	public ItemStack getPotion(ItemStack originalStack, ItemStack targetStack, PotionMod potionMod, @Nullable RecipeEntry<PotionWorkshopBrewingRecipe> lastRecipe, Random random) {
 		List<InkPoweredStatusEffectInstance> effects = generateEffects(originalStack, potionMod, lastRecipe, random);
 		
 		// apply to potion
@@ -201,7 +201,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		return targetStack;
 	}
 	
-	public ItemStack getTippedArrows(ItemStack stack, PotionMod potionMod, PotionWorkshopBrewingRecipe lastRecipe, int amount, Random random) {
+	public ItemStack getTippedArrows(ItemStack stack, PotionMod potionMod, @Nullable RecipeEntry<PotionWorkshopBrewingRecipe> lastRecipe, int amount, Random random) {
 		if (potionMod.flags().negateDecreasingDuration()) {
 			potionMod = new PotionMod.Builder(potionMod).durationMultiplier(potionMod.durationMultiplier() + 7).build();
 		}
@@ -218,7 +218,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		return itemStack;
 	}
 	
-	public void fillPotionFillable(ItemStack stack, PotionMod potionMod, PotionWorkshopBrewingRecipe lastRecipe, Random random) {
+	public void fillPotionFillable(ItemStack stack, PotionMod potionMod, @Nullable RecipeEntry<PotionWorkshopBrewingRecipe> lastRecipe, Random random) {
 		if (stack.getItem() instanceof InkPoweredPotionFillable inkPoweredPotionFillable) {
 			List<InkPoweredStatusEffectInstance> effects = generateEffects(stack, potionMod, lastRecipe, random);
 			inkPoweredPotionFillable.addOrUpgradeEffects(stack, effects);
@@ -240,11 +240,13 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		}
 	}
 	
-	private List<InkPoweredStatusEffectInstance> generateEffects(ItemStack baseIngredient, PotionMod potionMod, PotionWorkshopBrewingRecipe lastRecipe, Random random) {
+	private List<InkPoweredStatusEffectInstance> generateEffects(ItemStack baseIngredient, PotionMod potionMod, @Nullable RecipeEntry<PotionWorkshopBrewingRecipe> lastRecipe, Random random) {
 		List<InkPoweredStatusEffectInstance> effects = new ArrayList<>();
 		
 		addEffect(potionMod, random, effects); // main effect
-		addLastEffect(baseIngredient, potionMod, lastRecipe, random, effects);
+		if (lastRecipe != null) {
+			addLastEffect(baseIngredient, potionMod, lastRecipe.value(), random, effects);
+		}
 		addAdditionalEffects(baseIngredient, potionMod, random, effects);
 		addRandomEffects(baseIngredient, potionMod, random, effects);
 		
