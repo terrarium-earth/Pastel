@@ -1055,22 +1055,22 @@ public class SpectrumBlocks {
 		return AbstractBlock.Settings.copy(baseBlock).mapColor(color);
 	}
 	
-	public static final Block BLACK_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BLACK), InkColors.BLACK);
-	public static final Block BLUE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BLUE), InkColors.BLUE);
-	public static final Block BROWN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BROWN), InkColors.BROWN);
-	public static final Block CYAN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.CYAN), InkColors.CYAN);
-	public static final Block GRAY_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.GRAY), InkColors.GRAY);
-	public static final Block GREEN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.GREEN), InkColors.GREEN);
-	public static final Block LIGHT_BLUE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIGHT_BLUE), InkColors.LIGHT_BLUE);
-	public static final Block LIGHT_GRAY_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIGHT_GRAY), InkColors.LIGHT_GRAY);
-	public static final Block LIME_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIME), InkColors.LIME);
-	public static final Block MAGENTA_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.MAGENTA), InkColors.MAGENTA);
-	public static final Block ORANGE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.ORANGE), InkColors.ORANGE);
-	public static final Block PINK_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.PINK), InkColors.PINK);
-	public static final Block PURPLE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.PURPLE), InkColors.PURPLE);
-	public static final Block RED_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.RED), InkColors.RED);
-	public static final Block WHITE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.WHITE), InkColors.WHITE);
-	public static final Block YELLOW_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.YELLOW), InkColors.YELLOW);
+	public static final Block BLACK_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BLACK), InkColors.BLACK, SpectrumSaplingGenerators.BLACK_COLORED_SAPLING_GENERATOR);
+	public static final Block BLUE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BLUE), InkColors.BLUE, SpectrumSaplingGenerators.BLUE_COLORED_SAPLING_GENERATOR);
+	public static final Block BROWN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BROWN), InkColors.BROWN, SpectrumSaplingGenerators.BROWN_COLORED_SAPLING_GENERATOR);
+	public static final Block CYAN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.CYAN), InkColors.CYAN, SpectrumSaplingGenerators.CYAN_COLORED_SAPLING_GENERATOR);
+	public static final Block GRAY_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.GRAY), InkColors.GRAY, SpectrumSaplingGenerators.GRAY_COLORED_SAPLING_GENERATOR);
+	public static final Block GREEN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.GREEN), InkColors.GREEN, SpectrumSaplingGenerators.GREEN_COLORED_SAPLING_GENERATOR);
+	public static final Block LIGHT_BLUE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIGHT_BLUE), InkColors.LIGHT_BLUE, SpectrumSaplingGenerators.LIGHT_BLUE_COLORED_SAPLING_GENERATOR);
+	public static final Block LIGHT_GRAY_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIGHT_GRAY), InkColors.LIGHT_GRAY, SpectrumSaplingGenerators.LIGHT_GRAY_COLORED_SAPLING_GENERATOR);
+	public static final Block LIME_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIME), InkColors.LIME, SpectrumSaplingGenerators.LIME_COLORED_SAPLING_GENERATOR);
+	public static final Block MAGENTA_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.MAGENTA), InkColors.MAGENTA, SpectrumSaplingGenerators.MAGENTA_COLORED_SAPLING_GENERATOR);
+	public static final Block ORANGE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.ORANGE), InkColors.ORANGE, SpectrumSaplingGenerators.ORANGE_COLORED_SAPLING_GENERATOR);
+	public static final Block PINK_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.PINK), InkColors.PINK, SpectrumSaplingGenerators.PINK_COLORED_SAPLING_GENERATOR);
+	public static final Block PURPLE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.PURPLE), InkColors.PURPLE, SpectrumSaplingGenerators.PURPLE_COLORED_SAPLING_GENERATOR);
+	public static final Block RED_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.RED), InkColors.RED, SpectrumSaplingGenerators.RED_COLORED_SAPLING_GENERATOR);
+	public static final Block WHITE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.WHITE), InkColors.WHITE, SpectrumSaplingGenerators.WHITE_COLORED_SAPLING_GENERATOR);
+	public static final Block YELLOW_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.YELLOW), InkColors.YELLOW, SpectrumSaplingGenerators.YELLOW_COLORED_SAPLING_GENERATOR);
 	
 	public static final Block BLACK_LEAVES = new ColoredLeavesBlock(copyWithMapColor(Blocks.OAK_LEAVES, MapColor.BLACK), InkColors.BLACK);
 	public static final Block BLUE_LEAVES = new ColoredLeavesBlock(copyWithMapColor(Blocks.OAK_LEAVES, MapColor.BLUE), InkColors.BLUE);
