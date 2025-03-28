@@ -13,5 +13,5 @@
   },
   "particleEffectIdentifier": "explosion",
   "soundEventIdentifier": "block.glass.break",
-  "required_advancement": "spectrum:midgame/collect_stratine"
+  "required_advancement": "spectrum:hidden/collect_stratine_gem"
 }
