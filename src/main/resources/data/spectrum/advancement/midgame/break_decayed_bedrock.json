@@ -15,10 +15,8 @@
     "broken_decayed_bedrock": {
       "trigger": "spectrum:block_broken",
       "conditions": {
-        "broken_block": {
-          "blocks": [
-            "spectrum:ruin"
-          ],
+        "broken": {
+          "blocks": "spectrum:ruin",
           "state": {
             "conversion": "default"
           }

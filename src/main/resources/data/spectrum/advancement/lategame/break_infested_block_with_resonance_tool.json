@@ -37,7 +37,9 @@
             }
           }
         },
-        "broken_block": "#spectrum:infested_blocks"
+        "block": {
+          "blocks": "#spectrum:infested_blocks"
+        }
       }
     },
     "gotten_previous": {

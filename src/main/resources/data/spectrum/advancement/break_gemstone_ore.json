@@ -16,7 +16,7 @@
     "broken_gemstone_ore": {
       "trigger": "spectrum:block_broken",
       "conditions": {
-        "broken_block": {
+        "block": {
           "blocks": [
             "spectrum:topaz_ore",
             "spectrum:amethyst_ore",
