@@ -48,13 +48,12 @@ public class UpgradePlaceCriterion extends AbstractCriterion<UpgradePlaceCriteri
 		).apply(instance, Conditions::new));
 		
 		public boolean matches(ServerWorld world, BlockPos pos, int upgradeCount, Map<Upgradeable.UpgradeType, Integer> upgradeModifiers) {
-			// FIXME - Determine the best logic for this
-			return this.blockPredicate.get().test(world, pos)
-					&& this.countRange.get().test(upgradeCount)
-					&& this.speedRange.get().test(upgradeModifiers.get(Upgradeable.UpgradeType.SPEED))
-					&& this.experienceRange.get().test(upgradeModifiers.get(Upgradeable.UpgradeType.EXPERIENCE))
-					&& this.efficiencyRange.get().test(upgradeModifiers.get(Upgradeable.UpgradeType.EFFICIENCY))
-					&& this.yieldRange.get().test(upgradeModifiers.get(Upgradeable.UpgradeType.YIELD));
+			return (this.blockPredicate.isEmpty() || this.blockPredicate.get().test(world, pos))
+					&& (this.countRange.isEmpty() || this.countRange.get().test(upgradeCount))
+					&& (this.speedRange.isEmpty() || this.speedRange.get().test(upgradeModifiers.get(Upgradeable.UpgradeType.SPEED)))
+					&& (this.experienceRange.isEmpty() || this.experienceRange.get().test(upgradeModifiers.get(Upgradeable.UpgradeType.EXPERIENCE)))
+					&& (this.efficiencyRange.isEmpty() || this.efficiencyRange.get().test(upgradeModifiers.get(Upgradeable.UpgradeType.EFFICIENCY)))
+					&& (this.yieldRange.isEmpty() || this.yieldRange.get().test(upgradeModifiers.get(Upgradeable.UpgradeType.YIELD)));
 		}
 	}
 	

@@ -376,6 +376,7 @@ public class SpectrumEventListeners {
 			
 			@Override
 			public void reload(ResourceManager manager) {
+				UnlockToastManager.clear();
 				CompactingChestBlockEntity.clearCache();
 				SpectrumCommon.CACHED_ITEM_TAG_MAP.clear();
 				

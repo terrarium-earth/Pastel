@@ -174,7 +174,7 @@ public class SpectrumBlocks {
 	
 	public static final Block VEGETAL_BLOCK = new Block(settings(MapColor.PALE_GREEN, BlockSoundGroup.FUNGUS, 2.0F).nonOpaque());
 	public static final Block NEOLITH_BLOCK = new SpectrumFacingBlock(settings(MapColor.PURPLE, BlockSoundGroup.COPPER, 6.0F).requiresTool().instrument(NoteBlockInstrument.BASEDRUM).luminance(state -> 13).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always));
-	public static final Block BEDROCK_STORAGE_BLOCK = new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune"));
+	public static final Block BEDROCK_DUST_BLOCK = new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune"));
 	
 	public static final SpectrumClusterBlock BISMUTH_CLUSTER = new SpectrumClusterBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 8), SpectrumClusterBlock.GrowthStage.CLUSTER);
 	public static final SpectrumClusterBlock LARGE_BISMUTH_BUD = new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 6).ticksRandomly(), SpectrumClusterBlock.GrowthStage.LARGE, BISMUTH_CLUSTER);
@@ -1040,39 +1040,37 @@ public class SpectrumBlocks {
 	public static final Block BLACKSLAG_ONYX_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.BLACK, locate("create_onyx_shard"), SpectrumBlocks.BLACKSLAG.getDefaultState());
 	public static final Block BLACKSLAG_MOONSTONE_ORE = new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.WHITE, locate("lategame/collect_moonstone"), SpectrumBlocks.BLACKSLAG.getDefaultState());
 	
-	private static Settings gemStorageBlock(MapColor mapColor, BlockSoundGroup soundGroup) {
+	private static Settings polishedGemBlock(MapColor mapColor, BlockSoundGroup soundGroup) {
 		return settings(mapColor, soundGroup, 5.0F, 6.0F);
 	}
 	
-	public static final Block TOPAZ_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK));
-	public static final Block AMETHYST_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK));
-	public static final Block CITRINE_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK));
-	public static final Block ONYX_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK));
-	public static final Block MOONSTONE_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK));
-	//public static final Block SPECTRAL_SHARD_BLOCK = new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME);
-	//public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK));
+	public static final Block POLISHED_TOPAZ_BLOCK = new Block(polishedGemBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK));
+	public static final Block POLISHED_AMETHYST_BLOCK = new Block(polishedGemBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK));
+	public static final Block POLISHED_CITRINE_BLOCK = new Block(polishedGemBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK));
+	public static final Block POLISHED_ONYX_BLOCK = new Block(polishedGemBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK));
+	public static final Block POLISHED_MOONSTONE_BLOCK = new Block(polishedGemBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK));
 	
 	// COLORED TREES
 	private static AbstractBlock.Settings copyWithMapColor(Block baseBlock, MapColor color) {
 		return AbstractBlock.Settings.copy(baseBlock).mapColor(color);
 	}
 	
-	public static final Block BLACK_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BLACK), InkColors.BLACK);
-	public static final Block BLUE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BLUE), InkColors.BLUE);
-	public static final Block BROWN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BROWN), InkColors.BROWN);
-	public static final Block CYAN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.CYAN), InkColors.CYAN);
-	public static final Block GRAY_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.GRAY), InkColors.GRAY);
-	public static final Block GREEN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.GREEN), InkColors.GREEN);
-	public static final Block LIGHT_BLUE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIGHT_BLUE), InkColors.LIGHT_BLUE);
-	public static final Block LIGHT_GRAY_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIGHT_GRAY), InkColors.LIGHT_GRAY);
-	public static final Block LIME_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIME), InkColors.LIME);
-	public static final Block MAGENTA_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.MAGENTA), InkColors.MAGENTA);
-	public static final Block ORANGE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.ORANGE), InkColors.ORANGE);
-	public static final Block PINK_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.PINK), InkColors.PINK);
-	public static final Block PURPLE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.PURPLE), InkColors.PURPLE);
-	public static final Block RED_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.RED), InkColors.RED);
-	public static final Block WHITE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.WHITE), InkColors.WHITE);
-	public static final Block YELLOW_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.YELLOW), InkColors.YELLOW);
+	public static final Block BLACK_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BLACK), InkColors.BLACK, SpectrumSaplingGenerators.BLACK_COLORED_SAPLING_GENERATOR);
+	public static final Block BLUE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BLUE), InkColors.BLUE, SpectrumSaplingGenerators.BLUE_COLORED_SAPLING_GENERATOR);
+	public static final Block BROWN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.BROWN), InkColors.BROWN, SpectrumSaplingGenerators.BROWN_COLORED_SAPLING_GENERATOR);
+	public static final Block CYAN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.CYAN), InkColors.CYAN, SpectrumSaplingGenerators.CYAN_COLORED_SAPLING_GENERATOR);
+	public static final Block GRAY_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.GRAY), InkColors.GRAY, SpectrumSaplingGenerators.GRAY_COLORED_SAPLING_GENERATOR);
+	public static final Block GREEN_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.GREEN), InkColors.GREEN, SpectrumSaplingGenerators.GREEN_COLORED_SAPLING_GENERATOR);
+	public static final Block LIGHT_BLUE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIGHT_BLUE), InkColors.LIGHT_BLUE, SpectrumSaplingGenerators.LIGHT_BLUE_COLORED_SAPLING_GENERATOR);
+	public static final Block LIGHT_GRAY_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIGHT_GRAY), InkColors.LIGHT_GRAY, SpectrumSaplingGenerators.LIGHT_GRAY_COLORED_SAPLING_GENERATOR);
+	public static final Block LIME_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.LIME), InkColors.LIME, SpectrumSaplingGenerators.LIME_COLORED_SAPLING_GENERATOR);
+	public static final Block MAGENTA_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.MAGENTA), InkColors.MAGENTA, SpectrumSaplingGenerators.MAGENTA_COLORED_SAPLING_GENERATOR);
+	public static final Block ORANGE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.ORANGE), InkColors.ORANGE, SpectrumSaplingGenerators.ORANGE_COLORED_SAPLING_GENERATOR);
+	public static final Block PINK_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.PINK), InkColors.PINK, SpectrumSaplingGenerators.PINK_COLORED_SAPLING_GENERATOR);
+	public static final Block PURPLE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.PURPLE), InkColors.PURPLE, SpectrumSaplingGenerators.PURPLE_COLORED_SAPLING_GENERATOR);
+	public static final Block RED_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.RED), InkColors.RED, SpectrumSaplingGenerators.RED_COLORED_SAPLING_GENERATOR);
+	public static final Block WHITE_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.WHITE), InkColors.WHITE, SpectrumSaplingGenerators.WHITE_COLORED_SAPLING_GENERATOR);
+	public static final Block YELLOW_SAPLING = new ColoredSaplingBlock(copyWithMapColor(Blocks.OAK_SAPLING, MapColor.YELLOW), InkColors.YELLOW, SpectrumSaplingGenerators.YELLOW_COLORED_SAPLING_GENERATOR);
 	
 	public static final Block BLACK_LEAVES = new ColoredLeavesBlock(copyWithMapColor(Blocks.OAK_LEAVES, MapColor.BLACK), InkColors.BLACK);
 	public static final Block BLUE_LEAVES = new ColoredLeavesBlock(copyWithMapColor(Blocks.OAK_LEAVES, MapColor.BLUE), InkColors.BLUE);
@@ -2031,11 +2029,11 @@ public class SpectrumBlocks {
 	}
 	
 	private static void registerOreStorageBlocks(Item.Settings settings, Item.Settings settingsFireproof) {
-		registerBlockWithItem("topaz_storage_block", TOPAZ_STORAGE_BLOCK, settings, InkColors.CYAN);
-		registerBlockWithItem("amethyst_storage_block", AMETHYST_STORAGE_BLOCK, settings, InkColors.MAGENTA);
-		registerBlockWithItem("citrine_storage_block", CITRINE_STORAGE_BLOCK, settings, InkColors.YELLOW);
-		registerBlockWithItem("onyx_storage_block", ONYX_STORAGE_BLOCK, settings, InkColors.BLACK);
-		registerBlockWithItem("moonstone_storage_block", MOONSTONE_STORAGE_BLOCK, settings, InkColors.WHITE);
+		registerBlockWithItem("polished_topaz_block", POLISHED_TOPAZ_BLOCK, settings, InkColors.CYAN);
+		registerBlockWithItem("polished_amethyst_block", POLISHED_AMETHYST_BLOCK, settings, InkColors.MAGENTA);
+		registerBlockWithItem("polished_citrine_block", POLISHED_CITRINE_BLOCK, settings, InkColors.YELLOW);
+		registerBlockWithItem("polished_onyx_block", POLISHED_ONYX_BLOCK, settings, InkColors.BLACK);
+		registerBlockWithItem("polished_moonstone_block", POLISHED_MOONSTONE_BLOCK, settings, InkColors.WHITE);
 		//registerBlockWithItem("spectral_shard_storage_block", SPECTRAL_SHARD_STORAGE_BLOCK, IS.of(Rarity.RARE), InkColors.WHITE);
 		
 		registerBlockWithItem("topaz_powder_block", TOPAZ_POWDER_BLOCK, settings, InkColors.CYAN);
@@ -2046,7 +2044,7 @@ public class SpectrumBlocks {
 		
 		registerBlockWithItem("vegetal_block", VEGETAL_BLOCK, IS.of(), InkColors.GREEN);
 		registerBlockWithItem("neolith_block", NEOLITH_BLOCK, IS.of(), InkColors.PINK);
-		registerBlockWithItem("bedrock_storage_block", BEDROCK_STORAGE_BLOCK, IS.of(Rarity.UNCOMMON), InkColors.BLACK);
+		registerBlockWithItem("bedrock_dust_block", BEDROCK_DUST_BLOCK, IS.of(Rarity.UNCOMMON), InkColors.BLACK);
 		//registerBlockWithItem("spectral_shard_block", SPECTRAL_SHARD_BLOCK, IS.of(Rarity.RARE), InkColors.WHITE);
 		
 		registerBlockWithItem("azurite_block", AZURITE_BLOCK, IS.of(), InkColors.BLUE);

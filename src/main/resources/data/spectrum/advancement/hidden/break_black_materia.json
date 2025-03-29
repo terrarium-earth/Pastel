@@ -3,7 +3,7 @@
     "broken_black_materia": {
       "trigger": "spectrum:block_broken",
       "conditions": {
-        "broken_block": {
+        "block": {
           "blocks": "spectrum:black_materia"
         }
       }

@@ -16,36 +16,27 @@ import java.util.*;
  * here we require a block state, that can be checked against.
  * Since block entities are already destroyed at this stage the only things that can be checked is
  * block, state and block tag. Should suffice for 99 % of cases
- * <br>
- * TODO - Review as of 1.21 port
  */
-public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, StatePredicate state) {
-	
-	public static final BrokenBlockPredicate ANY = new BrokenBlockPredicate(Optional.empty(), new StatePredicate(List.of()));
-	
+public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, Optional<StatePredicate> state) {
+
 	public static final Codec<BrokenBlockPredicate> CODEC = RecordCodecBuilder.create(i -> i.group(
 			RegistryCodecs.entryList(RegistryKeys.BLOCK).optionalFieldOf("blocks").forGetter(BrokenBlockPredicate::blocks),
-			StatePredicate.CODEC.optionalFieldOf("state", new StatePredicate(List.of())).forGetter(BrokenBlockPredicate::state)
+			StatePredicate.CODEC.optionalFieldOf("state").forGetter(BrokenBlockPredicate::state)
 	).apply(i, BrokenBlockPredicate::new));
 	
-	public boolean test(BlockState blockState) {
-		if (this == ANY) {
-			return true;
+	public boolean test(BlockState state) {
+		if (this.blocks.isPresent() && !state.isIn(this.blocks.get())) {
+			return false;
 		} else {
-			if (this.blocks.isPresent() && !this.blocks.get().contains(Registries.BLOCK.getEntry(blockState.getBlock()))) {
-				return false;
-			} else {
-				return this.state.test(blockState);
-			}
+			return this.state.isEmpty() || (this.state.get()).test(state);
 		}
 	}
 	
 	public static class Builder {
 		private Optional<RegistryEntryList<Block>> blocks = Optional.empty();
-		private StatePredicate state;
+		private Optional<StatePredicate> state = Optional.empty();
 		
 		private Builder() {
-			this.state = new StatePredicate(List.of());
 		}
 		
 		public static BrokenBlockPredicate.Builder create() {
@@ -71,7 +62,7 @@ public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, St
 		}
 		
 		public BrokenBlockPredicate.Builder state(StatePredicate state) {
-			this.state = state;
+			this.state = Optional.of(state);
 			return this;
 		}
 		

@@ -1,29 +1,28 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
 import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
 import de.dafuqs.revelationary.api.revelations.*;
 import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.registries.*;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
+import org.apache.commons.lang3.*;
 
 import java.util.*;
 
 public class ColoredSaplingBlock extends SaplingBlock implements RevelationAware, ColoredTree {
 
-	public static final MapCodec<ColoredSaplingBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+	/*public static final MapCodec<ColoredSaplingBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			createSettingsCodec(),
 			InkColor.CODEC.fieldOf("color").forGetter(ColoredSaplingBlock::getColor)
-	).apply(instance, ColoredSaplingBlock::new));
+	).apply(instance, ColoredSaplingBlock::new));*/
 	
 	private static final Map<InkColor, ColoredSaplingBlock> SAPLINGS = new Object2ObjectArrayMap<>();
 	protected final InkColor color;
 	
-	public ColoredSaplingBlock(Settings settings, InkColor color) {
-		super(SpectrumSaplingGenerators.get("colored_trees/" + color.toString()), settings);
+	public ColoredSaplingBlock(Settings settings, InkColor color, SaplingGenerator saplingGenerator) {
+		super(saplingGenerator, settings);
 		this.color = color;
 		SAPLINGS.put(color, this);
 		RevelationAware.register(this);
@@ -31,7 +30,7 @@ public class ColoredSaplingBlock extends SaplingBlock implements RevelationAware
 
 	@Override
 	public MapCodec<? extends ColoredSaplingBlock> getCodec() {
-		return CODEC;
+		throw new NotImplementedException();
 	}
 	
 	@Override

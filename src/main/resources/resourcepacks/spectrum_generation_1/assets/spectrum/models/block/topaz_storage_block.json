@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "spectrum:block/topaz_storage_block"
+    "all": "spectrum:block/polished_topaz_block"
   }
 }

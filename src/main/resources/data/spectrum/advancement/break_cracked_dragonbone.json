@@ -16,10 +16,8 @@
     "broken_cracked_dragonbone": {
       "trigger": "spectrum:block_broken",
       "conditions": {
-        "broken_block": {
-          "blocks": [
-            "spectrum:cracked_dragonbone"
-          ]
+        "block": {
+          "blocks": "spectrum:cracked_dragonbone"
         }
       }
     },

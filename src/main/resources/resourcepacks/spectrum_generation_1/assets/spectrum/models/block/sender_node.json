@@ -3,7 +3,7 @@
   "parent": "block/block",
   "textures": {
     "0": "spectrum:block/polished_calcite",
-    "1": "spectrum:block/citrine_storage_block",
+    "1": "spectrum:block/polished_citrine_block",
     "particle": "spectrum:block/polished_calcite"
   },
   "elements": [
