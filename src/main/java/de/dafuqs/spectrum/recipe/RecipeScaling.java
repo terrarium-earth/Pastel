@@ -54,7 +54,7 @@ public abstract class RecipeScaling {
 		@Override
 		int getInputCount(double scaling, ScalingData data) {
 			var size = data.indexes.size();
-			return data.indexes.get(Math.clamp((int) Math.round(scaling), 0, size - 1));
+			return data.indexes.get(Math.clamp((int) Math.round(scaling - 1), 0, size - 1));
 		}
 	};
 	
