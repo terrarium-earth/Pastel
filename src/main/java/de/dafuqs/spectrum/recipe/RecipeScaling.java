@@ -39,11 +39,11 @@ public abstract class RecipeScaling {
 	public static final RecipeScaling DOUBLING = new RecipeScaling(SpectrumCommon.locate("doubling")) {
 		@Override
 		int getInputCount(double scaling, ScalingData data) {
-			return data.start + data.scalingValue << Math.round((scaling * data.scalingFactor));
+			return data.start + data.scalingValue << Math.round(((scaling - 1) * data.scalingFactor));
 		}
 	};
 	
-	public static final RecipeScaling SQUARE = new RecipeScaling(SpectrumCommon.locate("square")) {
+	public static final RecipeScaling EXPONENTIAL = new RecipeScaling(SpectrumCommon.locate("exponential")) {
 		@Override
 		int getInputCount(double scaling, ScalingData data) {
 			return (int) (data.start + Math.round(Math.pow(data.scalingValue, scaling * data.scalingFactor)));

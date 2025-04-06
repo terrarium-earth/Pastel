@@ -22,6 +22,7 @@ import net.fabricmc.fabric.api.item.v1.*;
 import net.minecraft.advancement.criterion.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
+import net.minecraft.component.*;
 import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.entity.player.*;
@@ -44,6 +45,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
+// I just want to say. That I hate this class with every bit of my heart ~ Azzyypaaras
 public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter {
 	
 	public static final List<Vec3i> ITEM_BOWL_OFFSETS = new ArrayList<>() {{
@@ -525,8 +527,9 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	public void craftEnchantmentUpgradeRecipe(@NotNull EnchantmentUpgradeRecipe upgrade) {
 		ItemStack resultStack = getStack(0);
 		
-		var targetLevel = Math.min(resultStack.getEnchantments().getLevel(upgrade.getEnchantment()) + 1, upgrade.getLevelCap());
-		var xpCost = upgrade.getXPScaling().apply(targetLevel);
+		var curLevel = resultStack.get(DataComponentTypes.STORED_ENCHANTMENTS).getLevel(upgrade.getEnchantment());
+		var targetLevel = Math.min(curLevel + 1, upgrade.getLevelCap());
+		var xpCost = upgrade.getXPScaling().apply(curLevel);
 		drainExperience(xpCost);
 		
 		
@@ -567,59 +570,61 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	 * Calculates and sets a new recipe for the enchanter based on it's inventory
 	 *
 	 * @param world                The Enchanter World
-	 * @param enchanterBlockEntity The Enchanter Block Entity
+	 * @param enchanter The Enchanter Block Entity
 	 */
-	private static void calculateCurrentRecipe(@NotNull World world, @NotNull EnchanterBlockEntity enchanterBlockEntity) {
-		if (recipeMatches(enchanterBlockEntity, world)) {
+	private static void calculateCurrentRecipe(@NotNull World world, @NotNull EnchanterBlockEntity enchanter) {
+		if (recipeMatches(enchanter, world)) {
 			return;
 		}
 		
-		enchanterBlockEntity.craftingTime = 0;
-		var previousRecipe = enchanterBlockEntity.currentRecipe;
-		enchanterBlockEntity.currentRecipe = null;
+		enchanter.craftingTime = 0;
+		var previousRecipe = enchanter.currentRecipe;
+		enchanter.currentRecipe = null;
 		
 		var recipeManager = world.getRecipeManager();
 		var enchantmentUpgradeRecipe = recipeManager
-				.getFirstMatch(SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, enchanterBlockEntity.virtualInventory.createInput(), world)
+				.getFirstMatch(SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, enchanter.virtualInventory.createInput(), world)
 				.orElse(null);
 		
 		if (enchantmentUpgradeRecipe != null) {
-			if (enchanterBlockEntity.canOwnerOverenchant || !enchantmentUpgradeRecipe.value().requiresUnlockedOverEnchanting()) {
-				enchanterBlockEntity.currentRecipe = enchantmentUpgradeRecipe;
-				enchanterBlockEntity.currentItemProcessingTime = 0;
-				enchanterBlockEntity.craftingTimeTotal = enchantmentUpgradeRecipe.value().getBaseItemCost();
+			if (enchanter.canOwnerOverenchant || !enchantmentUpgradeRecipe.value().requiresUnlockedOverEnchanting()) {
+				enchanter.currentRecipe = enchantmentUpgradeRecipe;
+				enchanter.currentItemProcessingTime = 0;
+				
+				var level = enchanter.items.get(0).get(DataComponentTypes.STORED_ENCHANTMENTS).getLevel(enchantmentUpgradeRecipe.value().getEnchantment());
+				enchanter.craftingTimeTotal = enchantmentUpgradeRecipe.value().getItemScaling().apply(level);
 				
 				//TODO why are we doing this?
 				EnchanterInventory testInventory = new EnchanterInventory();
-				testInventory.setStack(0, enchanterBlockEntity.virtualInventory.getStack(0));
-				testInventory.setStack(1, enchanterBlockEntity.virtualInventory.getStack(1));
-				enchanterBlockEntity.virtualInventory = testInventory;
+				testInventory.setStack(0, enchanter.virtualInventory.getStack(0));
+				testInventory.setStack(1, enchanter.virtualInventory.getStack(1));
+				enchanter.virtualInventory = testInventory;
 			}
-			if (enchanterBlockEntity.currentRecipe != previousRecipe) {
-				enchanterBlockEntity.updateInClientWorld();
+			if (enchanter.currentRecipe != previousRecipe) {
+				enchanter.updateInClientWorld();
 			}
 			return;
 		}
 		
 		for (int m = 0; m < 2; m++) {
 			for (int o = 0; o < 8; o++) {
-				RecipeInput recipeInput = enchanterBlockEntity.virtualInventory.createInput();
+				RecipeInput recipeInput = enchanter.virtualInventory.createInput();
 				RecipeEntry<EnchanterRecipe> enchanterRecipe = recipeManager
 						.getFirstMatch(SpectrumRecipeTypes.ENCHANTER, recipeInput, world)
 						.orElse(null);
 				
 				if (enchanterRecipe != null) {
-					enchanterBlockEntity.currentRecipe = enchanterRecipe;
-					enchanterBlockEntity.virtualInventoryRecipeOrientation = o;
-					enchanterBlockEntity.virtualInventoryRecipeMirrored = m > 0;
-					enchanterBlockEntity.craftingTimeTotal = (int) Math.ceil(enchanterRecipe.value().getCraftingTime() / enchanterBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
-					enchanterBlockEntity.updateInClientWorld();
+					enchanter.currentRecipe = enchanterRecipe;
+					enchanter.virtualInventoryRecipeOrientation = o;
+					enchanter.virtualInventoryRecipeMirrored = m > 0;
+					enchanter.craftingTimeTotal = (int) Math.ceil(enchanterRecipe.value().getCraftingTime() / enchanter.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
+					enchanter.updateInClientWorld();
 					return;
 				}
 				
-				enchanterBlockEntity.virtualInventory.rotate();
+				enchanter.virtualInventory.rotate();
 			}
-			enchanterBlockEntity.virtualInventory.mirror();
+			enchanter.virtualInventory.mirror();
 		}
 	}
 	

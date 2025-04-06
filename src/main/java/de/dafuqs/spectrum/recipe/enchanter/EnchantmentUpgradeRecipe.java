@@ -86,7 +86,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 			
 			// Check XP requirements
 			var availableXp = ExperienceStorageItem.getStoredExperience(inv.getStackInSlot(1));
-			var requiredXp = XPScaling.apply(bookLevel + 1);
+			var requiredXp = XPScaling.apply(bookLevel);
 			
 			if (availableXp < requiredXp)
 				return false;
@@ -106,7 +106,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				}
 			}
 			
-			return bulkInput >= itemScaling.apply(bookLevel + 1);
+			return bulkInput >= itemScaling.apply(bookLevel);
 		}
 		return false;
 	}

@@ -8,7 +8,7 @@ public class SpectrumRecipeScalings {
 	public static void init() {
 		register(RecipeScaling.LINEAR);
 		register(RecipeScaling.DOUBLING);
-		register(RecipeScaling.SQUARE);
+		register(RecipeScaling.EXPONENTIAL);
 		register(RecipeScaling.INDEXED);
 	}
 	
