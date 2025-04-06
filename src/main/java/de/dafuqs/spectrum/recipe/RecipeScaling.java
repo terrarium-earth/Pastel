@@ -8,13 +8,16 @@ import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.util.*;
 
+import java.util.*;
+
 public abstract class RecipeScaling {
 	
-	public static final Codec<ScalingData> CODEC = RecordCodecBuilder.create(i -> i.group(
+	public static final Codec<ScalingData> CODEC = RecordCodecBuilder.<ScalingData>create(i -> i.group(
 			SpectrumRegistries.RECIPE_SCALING.getCodec().fieldOf("type").forGetter(d -> d.type),
 			Codec.INT.optionalFieldOf("start", 0).forGetter(d -> d.start),
-			Codec.INT.fieldOf("scaling_value").forGetter(d -> d.scalingValue),
-			Codec.DOUBLE.optionalFieldOf("scaling_factor", 1.0).forGetter(d -> d.scalingFactor)
+			Codec.INT.optionalFieldOf("scaling_value", 0).forGetter(d -> d.scalingValue),
+			Codec.DOUBLE.optionalFieldOf("scaling_factor", 1.0).forGetter(d -> d.scalingFactor),
+			Codec.INT.listOf(0, 255).optionalFieldOf("indexes", null).forGetter(d -> d.indexes)
 	).apply(i, ScalingData::new));
 	
 	public static final PacketCodec<RegistryByteBuf, ScalingData> PACKET_CODEC = PacketCodec.tuple(
@@ -22,6 +25,7 @@ public abstract class RecipeScaling {
 			PacketCodecs.VAR_INT, d -> d.start,
 			PacketCodecs.VAR_INT, d -> d.scalingValue,
 			PacketCodecs.DOUBLE, d -> d.scalingFactor,
+			PacketCodecs.VAR_INT.collect(PacketCodecs.toList()), d -> d.indexes,
 			ScalingData::new
 	);
 	
@@ -46,6 +50,14 @@ public abstract class RecipeScaling {
 		}
 	};
 	
+	public static final RecipeScaling INDEXED = new RecipeScaling(SpectrumCommon.locate("indexed")) {
+		@Override
+		int getInputCount(double scaling, ScalingData data) {
+			var size = data.indexes.size();
+			return data.indexes.get(Math.clamp((int) Math.round(scaling), 0, size - 1));
+		}
+	};
+	
 	private final Identifier id;
 	
 	public RecipeScaling(Identifier id) {
@@ -58,7 +70,7 @@ public abstract class RecipeScaling {
 		return id;
 	}
 	
-	public record ScalingData(RecipeScaling type, int start, int scalingValue, double scalingFactor) {
+	public record ScalingData(RecipeScaling type, int start, int scalingValue, double scalingFactor, List<Integer> indexes) {
 		public int apply(double scaling) {
 			return type.getInputCount(scaling, this);
 		}

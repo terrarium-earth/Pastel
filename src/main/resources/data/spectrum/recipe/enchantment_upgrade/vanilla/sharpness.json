@@ -2,43 +2,18 @@
   "type": "spectrum:enchantment_upgrade",
   "group": "vanilla",
   "enchantment": "minecraft:sharpness",
-  "levels": [
-    {
-      "experience": 200,
-      "item": "spectrum:black_pigment",
-      "item_count": 8
-    },
-    {
-      "experience": 400,
-      "item": "spectrum:black_pigment",
-      "item_count": 16
-    },
-    {
-      "experience": 600,
-      "item": "spectrum:black_pigment",
-      "item_count": 32
-    },
-    {
-      "experience": 800,
-      "item": "spectrum:black_pigment",
-      "item_count": 64
-    },
-    {
-      "experience": 1600,
-      "item": "spectrum:black_pigment",
-      "item_count": 128
-    },
-    {
-      "experience": 4000,
-      "item": "spectrum:black_pigment",
-      "item_count": 256
-    },
-    {
-      "experience": 8000,
-      "item": "spectrum:black_pigment",
-      "item_count": 512
-    }
-  ],
+  "level_cap": 7,
+  "bulk_item": {
+    "item": "spectrum:black_pigment"
+  },
+  "xp_scaling": {
+    "type": "spectrum:doubling",
+    "scaling_value": 150
+  },
+  "item_scaling": {
+    "type": "spectrum:doubling",
+    "scaling_value": 8
+  },
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_damage",
   "fabric:load_conditions": [
     {

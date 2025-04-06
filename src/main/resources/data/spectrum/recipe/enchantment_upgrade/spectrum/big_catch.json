@@ -1,18 +1,20 @@
 {
   "type": "spectrum:enchantment_upgrade",
   "enchantment": "spectrum:big_catch",
-  "levels": [
-    {
-      "experience": 400,
-      "item": "spectrum:light_blue_pigment",
-      "item_count": 32
-    },
-    {
-      "experience": 800,
-      "item": "spectrum:light_blue_pigment",
-      "item_count": 128
-    }
-  ],
+  "level_cap": 2,
+  "bulk_item": {
+    "item": "spectrum:light_blue_pigment"
+  },
+  "xp_scaling": {
+    "type": "spectrum:doubling",
+    "scaling_value": 400
+  },
+  "item_scaling": {
+    "type": "spectrum:indexed",
+    "indexes": [
+      32, 128
+    ]
+  },
   "required_advancement": "spectrum:unlocks/enchantments/big_catch",
   "fabric:load_conditions": [
     {
