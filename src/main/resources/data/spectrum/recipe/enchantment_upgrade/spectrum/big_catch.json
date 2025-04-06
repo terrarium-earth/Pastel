@@ -1,7 +1,7 @@
 {
   "type": "spectrum:enchantment_upgrade",
   "enchantment": "spectrum:big_catch",
-  "level_cap": 2,
+  "level_cap": 3,
   "bulk_item": {
     "item": "spectrum:light_blue_pigment"
   },
