@@ -17,6 +17,7 @@ import net.minecraft.loot.condition.*;
 import net.minecraft.loot.context.*;
 import net.minecraft.loot.entry.*;
 import net.minecraft.loot.provider.number.*;
+import net.minecraft.predicate.*;
 import net.minecraft.predicate.entity.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
@@ -105,6 +106,9 @@ public class SpectrumLootPoolModifiers {
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/zombie_horse")), new TreasureHunterDropDefinition(SpectrumSkullType.ZOMBIE_HORSE, 0.02F));
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/dolphin")), new TreasureHunterDropDefinition(SpectrumSkullType.DOLPHIN, 0.02F));
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/pillager")), new TreasureHunterDropDefinition(SpectrumSkullType.PILLAGER, 0.02F));
+		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/armadillo")), new TreasureHunterDropDefinition(SpectrumSkullType.ARMADILLO, 0.02F));
+		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/breeze")), new TreasureHunterDropDefinition(SpectrumSkullType.BREEZE, 0.02F));
+		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, Identifier.ofVanilla("entities/bogged")), new TreasureHunterDropDefinition(SpectrumSkullType.BOGGED, 0.02F));
 		
 		// TODO: ...ooooor we could simply put them in the json loot table
 		put(RegistryKey.of(RegistryKeys.LOOT_TABLE, SpectrumCommon.locate("entities/egg_laying_wooly_pig")), new TreasureHunterDropDefinition(SpectrumSkullType.EGG_LAYING_WOOLY_PIG, 0.1F));
@@ -220,20 +224,21 @@ public class SpectrumLootPoolModifiers {
 	}
 	
 	private static RegistryEntry.Reference<Enchantment> getTreasureHunter(RegistryWrapper.WrapperLookup wrapperLookup) {
-		RegistryEntry.Reference<Enchantment> enchant;
-		RegistryWrapper.Impl<Enchantment> registryWrapper = wrapperLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
-		enchant = registryWrapper.getOrThrow(SpectrumEnchantments.TREASURE_HUNTER);
-		return enchant;
+		RegistryWrapper.Impl<Enchantment> wrapper = wrapperLookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT);
+		return wrapper.getOrThrow(SpectrumEnchantments.TREASURE_HUNTER);
 	}
 	
-	public static LootCondition.Builder Lootconditionbuilder(RegistryEntry.Reference<Enchantment> enchantment, float chance) {
-		return () -> new RandomChanceWithEnchantedBonusLootCondition(chance, new EnchantmentLevelBasedValue.Linear(chance, chance), enchantment);
+	public static LootCondition.Builder treasureHunter(RegistryEntry.Reference<Enchantment> enchantment, float chance) {
+		return AnyOfLootCondition.builder(
+				DamageSourcePropertiesLootCondition.builder(DamageSourcePredicate.Builder.create().tag(TagPredicate.expected(SpectrumDamageTypeTags.ALWAYS_DROPS_MOB_HEAD))),
+				() -> new RandomChanceWithEnchantedBonusLootCondition(0.0F, new EnchantmentLevelBasedValue.Linear(chance + chance, chance), enchantment)
+		);
 	}
 	
 	private static LootPool getLootPool(RegistryEntry.Reference<Enchantment> enchantment, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.rolls(ConstantLootNumberProvider.create(1))
-				.conditionally(Lootconditionbuilder(enchantment, dropDefinition.chancePerLevel).build())
+				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
 				.with(ItemEntry.builder(dropDefinition.drop).build())
 				.build();
@@ -242,7 +247,7 @@ public class SpectrumLootPoolModifiers {
 	private static LootPool getFoxLootPool(RegistryEntry.Reference<Enchantment> enchantment, FoxEntity.Type foxType, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.rolls(ConstantLootNumberProvider.create(1))
-				.conditionally(Lootconditionbuilder(enchantment, dropDefinition.chancePerLevel).build())
+				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
 				.conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(EntitySubPredicateTypes.FOX.createPredicate(foxType)).build()).build())
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
 				.with(ItemEntry.builder(dropDefinition.drop).build())
@@ -252,7 +257,7 @@ public class SpectrumLootPoolModifiers {
 	private static LootPool getMooshroomLootPool(RegistryEntry.Reference<Enchantment> enchantment, MooshroomEntity.Type mooshroomType, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.rolls(ConstantLootNumberProvider.create(1))
-				.conditionally(Lootconditionbuilder(enchantment, dropDefinition.chancePerLevel).build())
+				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
 				.conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(EntitySubPredicateTypes.MOOSHROOM.createPredicate(mooshroomType)).build()).build())
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
 				.with(ItemEntry.builder(dropDefinition.drop).build())
@@ -262,7 +267,7 @@ public class SpectrumLootPoolModifiers {
 	private static LootPool getShulkerLootPool(RegistryEntry.Reference<Enchantment> enchantment, @Nullable DyeColor dyeColor, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.rolls(ConstantLootNumberProvider.create(1))
-				.conditionally(Lootconditionbuilder(enchantment, dropDefinition.chancePerLevel).build())
+				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
 				.conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(new ShulkerPredicate(Optional.ofNullable(dyeColor))).build()).build())
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
 				.with(ItemEntry.builder(dropDefinition.drop).build())
@@ -272,7 +277,7 @@ public class SpectrumLootPoolModifiers {
 	private static LootPool getLizardLootPool(RegistryEntry.Reference<Enchantment> enchantment, InkColor linkColor, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.rolls(ConstantLootNumberProvider.create(1))
-				.conditionally(Lootconditionbuilder(enchantment, dropDefinition.chancePerLevel).build())
+				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
 				.conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(new LizardPredicate(Optional.of(linkColor), Optional.empty(), Optional.empty())).build()).build())
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
 				.with(ItemEntry.builder(dropDefinition.drop).build())
@@ -282,7 +287,7 @@ public class SpectrumLootPoolModifiers {
 	private static LootPool getAxolotlLootPool(RegistryEntry.Reference<Enchantment> enchantment, AxolotlEntity.Variant variant, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.rolls(ConstantLootNumberProvider.create(1))
-				.conditionally(Lootconditionbuilder(enchantment, dropDefinition.chancePerLevel).build())
+				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
 				.conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(EntitySubPredicateTypes.AXOLOTL.createPredicate(variant)).build()).build())
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
 				.with(ItemEntry.builder(dropDefinition.drop).build())
@@ -294,7 +299,7 @@ public class SpectrumLootPoolModifiers {
 		
 		return new LootPool.Builder()
 				.rolls(ConstantLootNumberProvider.create(1))
-				.conditionally(Lootconditionbuilder(enchantment, dropDefinition.chancePerLevel).build())
+				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
 				.conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(EntitySubPredicateTypes.FROG.createPredicate(RegistryEntryList.of(entry))).build()).build())
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
 				.with(ItemEntry.builder(dropDefinition.drop).build())
@@ -304,7 +309,7 @@ public class SpectrumLootPoolModifiers {
 	private static LootPool getParrotLootPool(RegistryEntry.Reference<Enchantment> enchantment, ParrotEntity.Variant variant, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.rolls(ConstantLootNumberProvider.create(1))
-				.conditionally(Lootconditionbuilder(enchantment, dropDefinition.chancePerLevel).build())
+				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
 				.conditionally(EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(EntitySubPredicateTypes.PARROT.createPredicate(variant)).build()).build())
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
 				.with(ItemEntry.builder(dropDefinition.drop).build())

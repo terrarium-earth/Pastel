@@ -49,11 +49,6 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, Ex
 	}
 	
 	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
-	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 		ItemStack handStack = user.getStackInHand(hand);
 		if (handStack.getDamage() >= handStack.getMaxDamage() - 1) {

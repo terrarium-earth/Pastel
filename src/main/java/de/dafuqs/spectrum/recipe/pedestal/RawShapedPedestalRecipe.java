@@ -1,11 +1,8 @@
 package de.dafuqs.spectrum.recipe.pedestal;
 
-import java.util.*;
-import java.util.function.*;
-
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.recipe.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import it.unimi.dsi.fastutil.chars.*;
 import net.minecraft.item.*;
 import net.minecraft.network.*;
@@ -14,6 +11,9 @@ import net.minecraft.recipe.input.*;
 import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
 import net.minecraft.util.dynamic.*;
+
+import java.util.*;
+import java.util.function.*;
 
 public class RawShapedPedestalRecipe {
 	public static final MapCodec<RawShapedPedestalRecipe> CODEC = RawShapedPedestalRecipe.Data.CODEC.flatXmap(

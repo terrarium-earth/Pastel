@@ -35,7 +35,7 @@
     "id": "minecraft:enchanted_book",
     "components": {
       "stored_enchantments": {
-        "spectrum:cloaked/improved_critical": 1
+        "spectrum:improved_critical": 1
       }
     }
   },
@@ -44,7 +44,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/improved_critical"
+        "spectrum:improved_critical"
       ]
     }
   ]

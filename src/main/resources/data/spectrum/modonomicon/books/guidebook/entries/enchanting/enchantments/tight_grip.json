@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/tight_grip": 2
+          "spectrum:tight_grip": 2
         }
       },
       "text": "book.spectrum.guidebook.tight_grip.page1.text"

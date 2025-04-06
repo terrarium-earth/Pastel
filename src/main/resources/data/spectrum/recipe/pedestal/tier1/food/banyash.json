@@ -22,13 +22,10 @@
     "M": {
       "item": "spectrum:infused_beverage",
       "recipeViewNbt": "{Variant: \"rum\", Color: 10505507 }",
-      "matchbook": {
-        "mode": "AND",
-        "matches": [
+      "predicates": {
+        "spectrum:infused_beverage": [
           {
-            "type": "string",
-            "key": "Variant",
-            "target": "rum"
+            "variants": "rum"
           }
         ]
       }

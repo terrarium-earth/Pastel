@@ -27,11 +27,6 @@ public class LagoonRodItem extends SpectrumFishingRodItem implements Preenchante
 	}
 	
 	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
-	@Override
 	public boolean canFishIn(FluidState fluidState) {
 		return fluidState.isIn(SpectrumFluidTags.LAGOON_ROD_FISHABLE_IN);
 	}

@@ -11,6 +11,8 @@ import net.minecraft.sound.*;
 import net.minecraft.text.*;
 import org.jetbrains.annotations.*;
 
+import java.util.*;
+
 @Environment(EnvType.CLIENT)
 public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreenHandler> {
 	
@@ -49,7 +51,7 @@ public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreen
 	public PaintbrushScreen(PaintbrushScreenHandler handler, PlayerInventory playerInventory, Text title) {
 		super(handler, playerInventory, title);
 		gridStack.push(new QuickNavigationGridScreen.Grid(
-				GridEntry.CLOSE,
+				new EmptyGridEntry((screen) -> chooseColor(null)),
 				handler.hasAccessToWhites() ? GridEntry.colored(InkColors.BLACK.getColorVec(), Text.translatable("ink.group.spectrum.blacks"), (screen) -> selectGrid(BLACK_GRID)) : GridEntry.colored(InkColors.BLACK.getColorVec(), Text.translatable("ink.spectrum.black.name"), (screen) -> chooseColor(InkColors.BLACK)),
 				GridEntry.colored(InkColors.MAGENTA.getColorVec(), Text.translatable("ink.group.spectrum.magentas"), (screen) -> selectGrid(MAGENTA_GRID)),
 				GridEntry.colored(InkColors.CYAN.getColorVec(), Text.translatable("ink.group.spectrum.cyans"), (screen) -> selectGrid(CYAN_GRID)),
@@ -60,7 +62,7 @@ public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreen
 	@SuppressWarnings("DataFlowIssue")
 	protected static void chooseColor(@Nullable InkColor inkColor) {
 		var entry = inkColor == null ? null : SpectrumRegistries.INK_COLOR.getEntry(inkColor);
-		ClientPlayNetworking.send(new InkColorSelectedC2SPayload(entry));
+		ClientPlayNetworking.send(new InkColorSelectedC2SPayload(Optional.ofNullable(entry)));
 		MinecraftClient client = MinecraftClient.getInstance();
 		client.world.playSound(null, client.player.getBlockPos(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundCategory.NEUTRAL, 0.6F, 1.0F);
 		client.player.closeHandledScreen();

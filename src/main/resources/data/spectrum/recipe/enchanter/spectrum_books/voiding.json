@@ -35,7 +35,7 @@
     "id": "minecraft:enchanted_book",
     "components": {
       "stored_enchantments": {
-        "spectrum:cloaked/voiding": 1
+        "spectrum:voiding": 1
       }
     }
   },
@@ -44,7 +44,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/voiding"
+        "spectrum:voiding"
       ]
     }
   ]

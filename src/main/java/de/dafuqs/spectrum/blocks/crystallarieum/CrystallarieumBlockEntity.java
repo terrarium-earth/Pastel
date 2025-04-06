@@ -10,9 +10,13 @@ import de.dafuqs.spectrum.particle.effect.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.recipe.crystallarieum.*;
 import de.dafuqs.spectrum.registries.*;
+import de.dafuqs.spectrum.render.animation.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
 import net.minecraft.block.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.*;
+import net.minecraft.fluid.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.particle.*;
@@ -30,6 +34,8 @@ import java.util.*;
 
 public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity implements PlayerOwned, InkStorageBlockEntity<IndividualCappedInkStorage> {
 	
+	private final static FlowAnimator.Factory<CrystallarieumBlockEntity> FACTORY;
+	
 	protected final static int CATALYST_SLOT_ID = 0;
 	protected final static int INK_STORAGE_STACK_SLOT_ID = 1;
 	protected final static int INVENTORY_SIZE = 2;
@@ -45,13 +51,36 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	@Nullable
 	protected RecipeEntry<CrystallarieumRecipe> currentRecipe;
 	protected CrystallarieumCatalyst currentCatalyst = CrystallarieumCatalyst.EMPTY;
+	protected SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+		@Override
+		protected FluidVariant getBlankVariant() {
+			return FluidVariant.blank();
+		}
+		
+		@Override
+		protected long getCapacity(FluidVariant variant) {
+			return FluidConstants.BUCKET;
+		}
+		
+		
+		@Override
+		protected void onFinalCommit() {
+			super.onFinalCommit();
+			inventoryChanged();
+		}
+	};
 	
-	// for performance reasons, the crystallarieum only processes recipe logic all 20 ticks
+	// for performance reasons, the crystallarieum only processes recipe logic every 20 ticks
 	public static final int SECOND = 20;
 	protected TickLooper tickLooper = new TickLooper(SECOND);
 	
 	protected int currentGrowthStageTicks;
 	protected boolean canWork;
+	float rotation = 0F;
+	
+	protected FlowAnimator animator;
+	@NotNull
+	protected FlowData<Float> _alpha = FlowData.NULL(), _speed = FlowData.NULL(), _bounce = FlowData.NULL();
 	
 	public CrystallarieumBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.CRYSTALLARIEUM, pos, state, INVENTORY_SIZE);
@@ -61,6 +90,13 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	
 	@SuppressWarnings("unused")
     public static void clientTick(@NotNull World world, BlockPos blockPos, BlockState blockState, CrystallarieumBlockEntity crystallarieum) {
+		if (crystallarieum.animator == null) {
+			crystallarieum.animator = FACTORY.create(FlowStates.INIT, crystallarieum);
+		}
+		else {
+			crystallarieum.updateAnimator();
+		}
+		
 		if (crystallarieum.canWork && crystallarieum.currentRecipe != null) {
 			ParticleEffect particleEffect = ColoredSparkleRisingParticleEffect.of(crystallarieum.currentRecipe.value().getInkColor().getColorInt());
 			
@@ -71,6 +107,23 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 				world.addImportantParticle(particleEffect, blockPos.getX() + 0.1 + randomX, blockPos.getY() + 1, blockPos.getZ() + 0.1 + randomZ, 0.0D, 0.03D, 0.0D);
 			}
 		}
+	}
+	
+	public void updateAnimator() {
+		if (currentRecipe == null) {
+			animator.swapState(FlowStates.INACTIVE);
+		}
+		else {
+			if (fluidStorage.variant.equals(currentRecipe.value().getFluidMedium()) ||
+					inkStorage.getEnergy(currentRecipe.value().getInkColor()) > 0) {
+				animator.swapState(FlowStates.ACTIVE);
+			}
+			else {
+				animator.swapState(FlowStates.IDLE);
+			}
+		}
+		
+		animator.tick();
 	}
 
 	@SuppressWarnings("unused")
@@ -98,7 +151,10 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 			return;
 		}
 		
-		if (crystallarieum.inkStorage.getEnergy(recipe.value().getInkColor()) == 0) {
+		if (!crystallarieum.fluidStorage.variant.equals(recipe.value().getFluidMedium()) ||
+				crystallarieum.inkStorage.getEnergy(recipe.value().getInkColor()) == 0) {
+			if (crystallarieum.canWork)
+				crystallarieum.canWork = false;
 			return;
 		}
 		
@@ -176,11 +232,14 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		super.readNbt(nbt, registryLookup);
 		
 		CodecHelper.fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage")).ifPresent(storage ->
-				this.inkStorage = new IndividualCappedInkStorage(storage.maxEnergyTotal(), storage.storedEnergy()));
+				this.inkStorage = new IndividualCappedInkStorage(storage.maxPerColor(), storage.storedEnergy()));
 		if (nbt.contains("Looper", NbtElement.COMPOUND_TYPE)) {
 			this.tickLooper = TickLooper.readNbt(nbt.getCompound("Looper"));
 		}
-
+		
+		this.fluidStorage.variant = CodecHelper.fromNbt(FluidVariant.CODEC, nbt.get("FluidVariant"), FluidVariant.blank());
+		this.fluidStorage.amount = nbt.getLong("FluidAmount");
+		
 		this.canWork = nbt.getBoolean("CanWork");
 		this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
 		this.currentCatalyst = CrystallarieumCatalyst.EMPTY;
@@ -197,6 +256,9 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		
 		CodecHelper.writeNbt(nbt, "InkStorage", InkStorageComponent.CODEC, new InkStorageComponent(this.inkStorage));
 		nbt.put("Looper", this.tickLooper.toNbt());
+		
+		CodecHelper.writeNbt(nbt, "FluidVariant", FluidVariant.CODEC, this.fluidStorage.variant);
+		nbt.putLong("FluidAmount", this.fluidStorage.amount);
 		
 		nbt.putBoolean("CanWork", this.canWork);
 		nbt.putInt("CurrentGrowthStageDuration", this.currentGrowthStageTicks);
@@ -273,6 +335,10 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		}
 	}
 	
+	public SingleVariantStorage<FluidVariant> getFluidStorage() {
+		return fluidStorage;
+	}
+	
 	/**
 	 * Triggered when the block on top of the crystallarieum has changed
 	 * Sets the new recipe matching that block state
@@ -330,4 +396,34 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		return false;
 	}
 	
+	static {
+		var builder = new FlowAnimator.Builder<>(CrystallarieumBlockEntity.class);
+		
+		builder.stateInfo(FlowStates.INACTIVE, 30);
+		builder.stateInfo(FlowStates.ACTIVE, 15);
+		builder.stateInfo(FlowStates.IDLE, 13);
+		
+		builder.handle("alpha", FlowHandlers.FLOAT)
+				.initial(0.1F)
+				.forStates(0.1F, FlowStates.INACTIVE)
+				.forStates(0.4F, FlowStates.IDLE)
+				.forStates(0.8F, FlowStates.ACTIVE)
+				.push();
+		
+		builder.handle("speed", FlowHandlers.FLOAT)
+				.initial(0F)
+				.forStates(-0.5F, FlowStates.INACTIVE)
+				.forStates(1F, FlowStates.IDLE)
+				.forStates(2.5F, FlowStates.ACTIVE)
+				.push();
+		
+		builder.handle("bounce", FlowHandlers.FLOAT)
+				.initial(0F)
+				.forStates(2F, FlowStates.INACTIVE)
+				.forStates(1F, FlowStates.IDLE)
+				.forStates(4F, FlowStates.ACTIVE)
+				.push();
+		
+		FACTORY = builder.build();
+	}
 }

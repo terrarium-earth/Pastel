@@ -1,5 +1,13 @@
 package de.dafuqs.spectrum.registries;
 
+import java.util.*;
+import java.util.function.*;
+
+import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
+import static de.dafuqs.spectrum.registries.SpectrumItems.*;
+import static net.minecraft.block.Blocks.*;
+
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.color.*;
 import de.dafuqs.spectrum.api.energy.color.*;
@@ -80,6 +88,7 @@ import net.minecraft.particle.*;
 import net.minecraft.registry.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
+import net.minecraft.state.property.*;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
@@ -89,14 +98,6 @@ import net.minecraft.world.*;
 import net.minecraft.world.explosion.*;
 import net.minecraft.world.gen.feature.*;
 import org.jetbrains.annotations.*;
-
-import java.util.*;
-import java.util.function.*;
-
-import static de.dafuqs.spectrum.SpectrumCommon.*;
-import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
-import static de.dafuqs.spectrum.registries.SpectrumItems.*;
-import static net.minecraft.block.Blocks.*;
 
 @SuppressWarnings({"unused"})
 public class SpectrumBlocks {
@@ -193,7 +194,7 @@ public class SpectrumBlocks {
 	
 	public static final Block VEGETAL_BLOCK = register(translucent(singleton(burnable(blockWithItem("vegetal_block", new Block(settings(MapColor.PALE_GREEN, BlockSoundGroup.FUNGUS, 2.0F).nonOpaque()), InkColors.GREEN), 8000), TexturedModel.makeFactory(TextureMap::texture, SpectrumModels.TRANSLUCENT_OUTER1))));
 	public static final Block NEOLITH_BLOCK = register(blockWithItem("neolith_block", new SpectrumFacingBlock(settings(MapColor.PURPLE, BlockSoundGroup.COPPER, 6.0F).requiresTool().instrument(NoteBlockInstrument.BASEDRUM).luminance(state -> 13).postProcess(SpectrumBlocks::always).emissiveLighting(SpectrumBlocks::always)), InkColors.PINK).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block, createModelVariant(TexturedModel.CUBE_BOTTOM_TOP.upload(block, ctx.modelCollector))).coordinate(createUpDefaultFacingVariantMap())));
-	public static final Block BEDROCK_STORAGE_BLOCK = register(simple(blockWithItem("bedrock_storage_block", new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune")), IS.of(Rarity.UNCOMMON), InkColors.BLACK)));
+	public static final Block BEDROCK_DUST_BLOCK = register(simple(blockWithItem("bedrock_dust_block", new BlockWithTooltip(settings(MapColor.STONE_GRAY, BlockSoundGroup.STONE, 100.0F, 3600.0F).pistonBehavior(PistonBehavior.BLOCK).requiresTool().instrument(NoteBlockInstrument.BASEDRUM), Text.translatable("spectrum.tooltip.dragon_and_wither_immune")), IS.of(Rarity.UNCOMMON), InkColors.BLACK)));
 	
 	public static final SpectrumClusterBlock BISMUTH_CLUSTER = register(cluster(blockWithItem("bismuth_cluster", new SpectrumClusterBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 8), SpectrumClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), InkColors.CYAN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
 	public static final SpectrumClusterBlock LARGE_BISMUTH_BUD = register(cluster(blockWithItem("large_bismuth_bud", new BismuthBudBlock(gemstone(MapColor.DARK_AQUA, BlockSoundGroup.CHAIN, 6).ticksRandomly(), SpectrumClusterBlock.GrowthStage.LARGE, BISMUTH_CLUSTER), IS.of(Rarity.UNCOMMON), InkColors.CYAN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
@@ -1391,17 +1392,15 @@ public class SpectrumBlocks {
 	public static final Block BLACKSLAG_ONYX_ORE = register(singleton(blockWithItem("blackslag_onyx_ore", new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.BLACK, SpectrumAdvancements.CREATE_ONYX, BLACKSLAG.getDefaultState()), InkColors.BLACK), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	public static final Block BLACKSLAG_MOONSTONE_ORE = register(singleton(blockWithItem("blackslag_moonstone_ore", new GemstoneOreBlock(gemOreExperienceProvider, blackslagOre(), BuiltinGemstoneColor.WHITE, SpectrumAdvancements.COLLECT_MOONSTONE, BLACKSLAG.getDefaultState()), InkColors.WHITE), TexturedModel.END_FOR_TOP_CUBE_COLUMN));
 	
-	private static Settings gemStorageBlock(MapColor mapColor, BlockSoundGroup soundGroup) {
+	private static Settings polishedGemBlock(MapColor mapColor, BlockSoundGroup soundGroup) {
 		return settings(mapColor, soundGroup, 5.0F, 6.0F);
 	}
 	
-	public static final Block TOPAZ_STORAGE_BLOCK = register(singleton(blockWithItem("topaz_storage_block", new Block(gemStorageBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK)), InkColors.CYAN), TexturedModel.SIDE_TOP_BOTTOM_WALL));
-	public static final Block AMETHYST_STORAGE_BLOCK = register(singleton(blockWithItem("amethyst_storage_block", new Block(gemStorageBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK)), InkColors.MAGENTA), TexturedModel.SIDE_TOP_BOTTOM_WALL));
-	public static final Block CITRINE_STORAGE_BLOCK = register(singleton(blockWithItem("citrine_storage_block", new Block(gemStorageBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK)), InkColors.YELLOW), TexturedModel.SIDE_TOP_BOTTOM_WALL));
-	public static final Block ONYX_STORAGE_BLOCK = register(singleton(blockWithItem("onyx_storage_block", new Block(gemStorageBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK)), InkColors.BLACK), TexturedModel.SIDE_TOP_BOTTOM_WALL));
-	public static final Block MOONSTONE_STORAGE_BLOCK = register(singleton(blockWithItem("moonstone_storage_block", new Block(gemStorageBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK)), InkColors.WHITE), TexturedModel.SIDE_TOP_BOTTOM_WALL));
-//	public static final Block SPECTRAL_SHARD_BLOCK = register(simple(blockWithItem("spectral_shard_block", new SpectrumGemstoneBlock(gemstoneBlock(MapColor.DIAMOND_BLUE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK), SpectrumSoundEvents.SPECTRAL_BLOCK_HIT, SpectrumSoundEvents.SPECTRAL_BLOCK_CHIME), IS.of(Rarity.RARE), InkColors.WHITE)));
-//	public static final Block SPECTRAL_SHARD_STORAGE_BLOCK = register(simple(blockWithItem("spectral_shard_storage_block", new Block(gemStorageBlock(MapColor.OFF_WHITE, SpectrumBlockSoundGroups.SPECTRAL_BLOCK)), IS.of(Rarity.RARE), InkColors.WHITE)));
+	public static final Block POLISHED_TOPAZ_BLOCK = register(singleton(blockWithItem("polished_topaz_block", new Block(polishedGemBlock(MapColor.CYAN, SpectrumBlockSoundGroups.TOPAZ_BLOCK)), InkColors.CYAN), TexturedModel.SIDE_TOP_BOTTOM_WALL));
+	public static final Block POLISHED_AMETHYST_BLOCK = register(singleton(blockWithItem("polished_amethyst_block", new Block(polishedGemBlock(MapColor.MAGENTA, BlockSoundGroup.AMETHYST_BLOCK)), InkColors.MAGENTA), TexturedModel.SIDE_TOP_BOTTOM_WALL));
+	public static final Block POLISHED_CITRINE_BLOCK = register(singleton(blockWithItem("polished_citrine_block", new Block(polishedGemBlock(MapColor.YELLOW, SpectrumBlockSoundGroups.CITRINE_BLOCK)), InkColors.YELLOW), TexturedModel.SIDE_TOP_BOTTOM_WALL));
+	public static final Block POLISHED_ONYX_BLOCK = register(singleton(blockWithItem("polished_onyx_block", new Block(polishedGemBlock(MapColor.BLACK, SpectrumBlockSoundGroups.ONYX_BLOCK)), InkColors.BLACK), TexturedModel.SIDE_TOP_BOTTOM_WALL));
+	public static final Block POLISHED_MOONSTONE_BLOCK = register(singleton(blockWithItem("polished_moonstone_block", new Block(polishedGemBlock(MapColor.WHITE, SpectrumBlockSoundGroups.MOONSTONE_BLOCK)), InkColors.WHITE), TexturedModel.SIDE_TOP_BOTTOM_WALL));
 	
 	private static AbstractBlock.Settings copyWithMapColor(Block baseBlock, MapColor color) {
 		return AbstractBlock.Settings.copy(baseBlock).mapColor(color);
@@ -1420,26 +1419,26 @@ public class SpectrumBlocks {
 	public static final BloodOrchidBlock BLOOD_ORCHID = register(cutout(blockWithItem("blood_orchid", new BloodOrchidBlock(SpectrumStatusEffects.FRENZY, 10, AbstractBlock.Settings.copy(POPPY).offset(AbstractBlock.OffsetType.NONE).ticksRandomly()), InkColors.RED)).withBlockItemModel((ctx, block) -> registerBlockTexturedItemModel(ctx, block, "5")).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(BloodOrchidBlock.AGE).register(stage -> createModelVariant(SpectrumTexturedModels.cross(b -> b, stage.toString()).upload(block, stage.toString(), ctx.modelCollector))))));
 	public static final PottedBloodOrchidBlock POTTED_BLOOD_ORCHID = register(cutout(singleton(block("potted_blood_orchid", new PottedBloodOrchidBlock(BLOOD_ORCHID, pottedPlant())), SpectrumTexturedModels.flowerPotCross(b -> BLOOD_ORCHID, "5", false))));
 	
-	public static ColoredSaplingBlock registerColoredSapling(String name, InkColor color) {
-		return register(simplePlant(blockWithItem(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, color.getDyeColor().orElse(DyeColor.LIME).getMapColor()), color), color)));
+	public static ColoredSaplingBlock registerColoredSapling(String name, InkColor color, SaplingGenerator generator) {
+		return register(simplePlant(blockWithItem(name, new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, color.getDyeColor().orElse(DyeColor.LIME).getMapColor()), color, generator), color)));
 	}
 	
-	public static final ColoredSaplingBlock BLACK_SAPLING = registerColoredSapling("black_sapling", InkColors.BLACK);
-	public static final ColoredSaplingBlock BLUE_SAPLING = registerColoredSapling("blue_sapling", InkColors.BLUE);
-	public static final ColoredSaplingBlock BROWN_SAPLING = registerColoredSapling("brown_sapling", InkColors.BROWN);
-	public static final ColoredSaplingBlock CYAN_SAPLING = registerColoredSapling("cyan_sapling", InkColors.CYAN);
-	public static final ColoredSaplingBlock GRAY_SAPLING = registerColoredSapling("gray_sapling", InkColors.GRAY);
-	public static final ColoredSaplingBlock GREEN_SAPLING = registerColoredSapling("green_sapling", InkColors.GREEN);
-	public static final ColoredSaplingBlock LIGHT_BLUE_SAPLING = registerColoredSapling("light_blue_sapling", InkColors.LIGHT_BLUE);
-	public static final ColoredSaplingBlock LIGHT_GRAY_SAPLING = registerColoredSapling("light_gray_sapling", InkColors.LIGHT_GRAY);
-	public static final ColoredSaplingBlock LIME_SAPLING = registerColoredSapling("lime_sapling", InkColors.LIME);
-	public static final ColoredSaplingBlock MAGENTA_SAPLING = registerColoredSapling("magenta_sapling", InkColors.MAGENTA);
-	public static final ColoredSaplingBlock ORANGE_SAPLING = registerColoredSapling("orange_sapling", InkColors.ORANGE);
-	public static final ColoredSaplingBlock PINK_SAPLING = registerColoredSapling("pink_sapling", InkColors.PINK);
-	public static final ColoredSaplingBlock PURPLE_SAPLING = registerColoredSapling("purple_sapling", InkColors.PURPLE);
-	public static final ColoredSaplingBlock RED_SAPLING = registerColoredSapling("red_sapling", InkColors.RED);
-	public static final ColoredSaplingBlock WHITE_SAPLING = registerColoredSapling("white_sapling", InkColors.WHITE);
-	public static final ColoredSaplingBlock YELLOW_SAPLING = registerColoredSapling("yellow_sapling", InkColors.YELLOW);
+	public static final ColoredSaplingBlock BLACK_SAPLING = registerColoredSapling("black_sapling", InkColors.BLACK, SpectrumSaplingGenerators.BLACK_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock BLUE_SAPLING = registerColoredSapling("blue_sapling", InkColors.BLUE, SpectrumSaplingGenerators.BLUE_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock BROWN_SAPLING = registerColoredSapling("brown_sapling", InkColors.BROWN, SpectrumSaplingGenerators.BROWN_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock CYAN_SAPLING = registerColoredSapling("cyan_sapling", InkColors.CYAN, SpectrumSaplingGenerators.CYAN_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock GRAY_SAPLING = registerColoredSapling("gray_sapling", InkColors.GRAY, SpectrumSaplingGenerators.GRAY_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock GREEN_SAPLING = registerColoredSapling("green_sapling", InkColors.GREEN, SpectrumSaplingGenerators.GREEN_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock LIGHT_BLUE_SAPLING = registerColoredSapling("light_blue_sapling", InkColors.LIGHT_BLUE, SpectrumSaplingGenerators.LIGHT_BLUE_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock LIGHT_GRAY_SAPLING = registerColoredSapling("light_gray_sapling", InkColors.LIGHT_GRAY, SpectrumSaplingGenerators.LIGHT_GRAY_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock LIME_SAPLING = registerColoredSapling("lime_sapling", InkColors.LIME, SpectrumSaplingGenerators.LIME_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock MAGENTA_SAPLING = registerColoredSapling("magenta_sapling", InkColors.MAGENTA, SpectrumSaplingGenerators.MAGENTA_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock ORANGE_SAPLING = registerColoredSapling("orange_sapling", InkColors.ORANGE, SpectrumSaplingGenerators.ORANGE_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock PINK_SAPLING = registerColoredSapling("pink_sapling", InkColors.PINK, SpectrumSaplingGenerators.PINK_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock PURPLE_SAPLING = registerColoredSapling("purple_sapling", InkColors.PURPLE, SpectrumSaplingGenerators.PURPLE_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock RED_SAPLING = registerColoredSapling("red_sapling", InkColors.RED, SpectrumSaplingGenerators.RED_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock WHITE_SAPLING = registerColoredSapling("white_sapling", InkColors.WHITE, SpectrumSaplingGenerators.WHITE_COLORED_SAPLING_GENERATOR);
+	public static final ColoredSaplingBlock YELLOW_SAPLING = registerColoredSapling("yellow_sapling", InkColors.YELLOW, SpectrumSaplingGenerators.YELLOW_COLORED_SAPLING_GENERATOR);
 	
 	public static PottedColoredSaplingBlock registerPottedColoredSapling(String name, ColoredSaplingBlock saplingBlock) {
 		return register(pottedPlant(block(name, new PottedColoredSaplingBlock(saplingBlock, pottedPlant(), saplingBlock.getColor())), false));

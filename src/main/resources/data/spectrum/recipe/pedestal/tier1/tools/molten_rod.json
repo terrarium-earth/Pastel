@@ -24,7 +24,7 @@
     "id": "spectrum:molten_rod",
     "components": {
       "enchantments": {
-        "spectrum:cloaked/foundry": 1
+        "spectrum:foundry": 1
       }
     },
     "count": 1

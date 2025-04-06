@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/razing": 3
+          "spectrum:razing": 3
         }
       },
       "text": "book.spectrum.guidebook.razing.page1.text"

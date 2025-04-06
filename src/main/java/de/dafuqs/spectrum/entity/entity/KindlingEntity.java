@@ -79,7 +79,7 @@ public class KindlingEntity extends AbstractHorseEntity implements RangedAttackM
 				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.6D)
 				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 25F)
 				.add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.5F)
-				.add(EntityAttributes.GENERIC_JUMP_STRENGTH, 12.0D);
+				.add(EntityAttributes.GENERIC_JUMP_STRENGTH, 2.4D);
 	}
 	
 	@Override
@@ -156,8 +156,7 @@ public class KindlingEntity extends AbstractHorseEntity implements RangedAttackM
 	public void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
 		this.writeAngerToNbt(nbt);
-		Optional.ofNullable(SpectrumRegistries.KINDLING_VARIANT.getId(this.getKindlingVariant())).ifPresent(id ->
-				nbt.putString("variant", id.toString()));
+		Optional.ofNullable(SpectrumRegistries.KINDLING_VARIANT.getId(this.getKindlingVariant())).ifPresent(id -> nbt.putString("variant", id.toString()));
 		nbt.putInt("chillTime", getChillTime());
 		nbt.putInt("eepyTime", getEepyTime());
 		nbt.putBoolean("playing", isPlaying());
@@ -174,13 +173,6 @@ public class KindlingEntity extends AbstractHorseEntity implements RangedAttackM
 		setChillTime(nbt.getInt("chillTime"));
 		setEepyTime(nbt.getInt("eepyTime"));
 		setPlaying(nbt.getBoolean("playing"));
-
-		if (nbt.contains("ArmorItem", 10)) {
-			ItemStack itemStack = ItemStack.fromNbt(this.getRegistryManager(), nbt.getCompound("ArmorItem")).orElse(ItemStack.EMPTY);
-			if (!itemStack.isEmpty() && this.isHorseArmor(itemStack)) {
-				this.items.setStack(1, itemStack);
-			}
-		}
 		
 		this.updateSaddledFlag();
 	}

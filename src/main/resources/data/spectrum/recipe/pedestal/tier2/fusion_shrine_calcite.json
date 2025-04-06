@@ -17,9 +17,9 @@
     "XTX"
   ],
   "key": {
-    "T": "spectrum:topaz_storage_block",
-    "A": "spectrum:amethyst_storage_block",
-    "C": "spectrum:citrine_storage_block",
+    "T": "spectrum:polished_topaz_block",
+    "A": "spectrum:polished_amethyst_block",
+    "C": "spectrum:polished_citrine_block",
     "X": "spectrum:polished_calcite"
   },
   "result": {

@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.recipe.potion_workshop;
 
 
 import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.potion_workshop.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;

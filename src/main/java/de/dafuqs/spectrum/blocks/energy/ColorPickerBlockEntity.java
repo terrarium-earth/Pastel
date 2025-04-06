@@ -1,7 +1,5 @@
 package de.dafuqs.spectrum.blocks.energy;
 
-import java.util.*;
-
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.energy.*;
@@ -28,6 +26,7 @@ import net.minecraft.network.packet.s2c.play.*;
 import net.minecraft.recipe.*;
 import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.screen.*;
 import net.minecraft.server.network.*;
 import net.minecraft.server.world.*;
@@ -38,7 +37,9 @@ import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 
-public class ColorPickerBlockEntity extends LootableContainerBlockEntity implements PlayerOwned, InkStorageBlockEntity<TotalCappedInkStorage>, ExtendedScreenHandlerFactory<BlockPos> {
+import java.util.*;
+
+public class ColorPickerBlockEntity extends LootableContainerBlockEntity implements PlayerOwned, InkStorageBlockEntity<TotalCappedInkStorage>, ExtendedScreenHandlerFactory<ColorPickerScreenHandler.ScreenOpeningData> {
 	
 	public static final int INVENTORY_SIZE = 2; // input & output slots
 	public static final int INPUT_SLOT_ID = 0;
@@ -51,25 +52,8 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	protected boolean paused;
 	protected boolean inkDirty;
 	protected @Nullable InkConvertingRecipe cachedRecipe;
-	protected Optional<InkColor> selectedColor = Optional.empty();
+	protected Optional<RegistryEntry<InkColor>> selectedColor = Optional.empty();
 	private UUID ownerUUID;
-	private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
-		@Override
-		public int get(int index) {
-			if (index == 0) return selectedColor.map(SpectrumRegistries.INK_COLOR::getRawId).orElse(-1);
-			return 0;
-		}
-		
-		@Override
-		public void set(int index, int value) {
-			if (index == 0) selectedColor = value == -1 ? Optional.empty() : Optional.ofNullable(SpectrumRegistries.INK_COLOR.get(value));
-		}
-		
-		@Override
-		public int size() {
-			return 1;
-		}
-	};
 	
 	public ColorPickerBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(SpectrumBlockEntities.COLOR_PICKER, blockPos, blockState);
@@ -110,11 +94,12 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 		if (!this.readLootTable(nbt)) {
 			Inventories.readNbt(nbt, this.inventory, registryLookup);
 		}
-		CodecHelper.fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage")).ifPresent(storage ->
-				this.inkStorage = new TotalCappedInkStorage(storage.maxEnergyTotal(), storage.storedEnergy()));
+		CodecHelper.fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage")).ifPresent(storage -> this.inkStorage = new TotalCappedInkStorage(storage.maxEnergyTotal(), storage.storedEnergy()));
 		this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
 		if (nbt.contains("SelectedColor", NbtElement.STRING_TYPE)) {
-			this.selectedColor = InkColor.ofIdString(nbt.getString("SelectedColor"));
+			this.selectedColor = Optional.of(SpectrumRegistries.INK_COLOR.getEntry(InkColor.ofIdString(nbt.getString("SelectedColor")).get()));
+		} else {
+			this.selectedColor = Optional.empty();
 		}
 	}
 	
@@ -126,7 +111,7 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 		}
 		CodecHelper.writeNbt(nbt, "InkStorage", InkStorageComponent.CODEC, new InkStorageComponent(this.inkStorage));
 		PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
-		this.selectedColor.ifPresent(color -> nbt.putString("SelectedColor", color.getID().toString()));
+		this.selectedColor.ifPresent(color -> nbt.putString("SelectedColor", color.getIdAsString()));
 	}
 	
 	@Override
@@ -136,12 +121,12 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 	
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new ColorPickerScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+		return new ColorPickerScreenHandler(syncId, playerInventory, new ColorPickerScreenHandler.ScreenOpeningData(this.pos, this.selectedColor));
 	}
 	
 	@Override
-	public BlockPos getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
-		return pos;
+	public ColorPickerScreenHandler.ScreenOpeningData getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
+		return new ColorPickerScreenHandler.ScreenOpeningData(this.pos, this.selectedColor);
 	}
 	
 	@Override
@@ -279,7 +264,7 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 					transferredAmount += tryTransferInk(owner, stack, itemStorage, color);
 				}
 			} else {
-				transferredAmount = tryTransferInk(owner, stack, itemStorage, this.selectedColor.get());
+				transferredAmount = tryTransferInk(owner, stack, itemStorage, this.selectedColor.get().value());
 			}
 			
 			if (transferredAmount > 0) {
@@ -298,13 +283,13 @@ public class ColorPickerBlockEntity extends LootableContainerBlockEntity impleme
 		return amount;
 	}
 	
-	public void setSelectedColor(@Nullable InkColor inkColor) {
-		this.selectedColor = Optional.ofNullable(inkColor);
+	public void setSelectedColor(Optional<RegistryEntry<InkColor>> inkColor) {
+		this.selectedColor = inkColor;
 		this.paused = false;
 		this.markDirty();
 	}
 	
-	public Optional<InkColor> getSelectedColor() {
+	public Optional<RegistryEntry<InkColor>> getSelectedColor() {
 		return this.selectedColor;
 	}
 	

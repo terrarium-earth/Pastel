@@ -3,8 +3,11 @@ package de.dafuqs.spectrum.blocks.crystallarieum;
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.api.energy.*;
 import de.dafuqs.spectrum.api.energy.color.*;
+import de.dafuqs.spectrum.api.render.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.transfer.v1.context.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.entity.*;
@@ -20,7 +23,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class CrystallarieumBlock extends InWorldInteractionBlock {
+public class CrystallarieumBlock extends InWorldInteractionBlock implements SlotBackgroundEffectProvider {
 
 	public static final MapCodec<CrystallarieumBlock> CODEC = createCodec(CrystallarieumBlock::new);
 
@@ -85,9 +88,13 @@ public class CrystallarieumBlock extends InWorldInteractionBlock {
 					}
 					return ItemActionResult.CONSUME;
 				} else {
+					if (ContainerItemContext.forPlayerInteraction(player, hand).find(FluidStorage.ITEM) != null) {
+						FluidStorageUtil.interactWithFluidStorage(crystallarieumBlockEntity.fluidStorage, player, hand);
+					}
+					
 					// hand is full and inventory is empty: add
 					// hand is full and inventory already contains item: exchange them
-					if (stack.getItem() instanceof InkStorageItem<?> inkStorageItem) {
+					else if (stack.getItem() instanceof InkStorageItem<?> inkStorageItem) {
 						if (inkStorageItem.getDrainability().canDrain(false) && exchangeStack(world, pos, player, hand, stack, crystallarieumBlockEntity, CrystallarieumBlockEntity.INK_STORAGE_STACK_SLOT_ID)) {
 							crystallarieumBlockEntity.inventoryChanged();
 							crystallarieumBlockEntity.setOwner(player);
@@ -119,4 +126,15 @@ public class CrystallarieumBlock extends InWorldInteractionBlock {
 			tooltip.add(color.getColoredInkName());
 	}
 	
+	@Override
+	public SlotEffect backgroundType(@Nullable PlayerEntity player, ItemStack stack) {
+		var color = stack.get(SpectrumDataComponentTypes.INK_COLOR);
+		return color != null ? SlotEffect.BORDER_FADE : SlotEffect.NONE;
+	}
+	
+	@Override
+	public int getBackgroundColor(@Nullable PlayerEntity player, ItemStack stack, float tickDelta) {
+		var color = stack.getOrDefault(SpectrumDataComponentTypes.INK_COLOR, InkColors.WHITE);
+		return color.getColorInt();
+	}
 }

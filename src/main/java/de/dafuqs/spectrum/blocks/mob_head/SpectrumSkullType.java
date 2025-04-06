@@ -110,8 +110,11 @@ public enum SpectrumSkullType implements SkullBlock.SkullType {
 	ZOMBIE_HORSE(EntityType.ZOMBIE_HORSE, SoundEvents.ENTITY_ZOMBIE_HORSE_AMBIENT.getId()),
 	ZOMBIE_VILLAGER(EntityType.ZOMBIE_VILLAGER, SoundEvents.ENTITY_ZOMBIE_VILLAGER_AMBIENT.getId()),
 	ZOMBIFIED_PIGLIN(EntityType.ZOMBIFIED_PIGLIN, SoundEvents.ENTITY_ZOMBIFIED_PIGLIN_AMBIENT.getId()),
-	
-	// Spectrum
+	ARMADILLO(EntityType.ARMADILLO, SoundEvents.ENTITY_ARMADILLO_AMBIENT.getId()),
+	BREEZE(EntityType.BREEZE, SoundEvents.ENTITY_BREEZE_IDLE_GROUND.getId()),
+	BOGGED(EntityType.BOGGED, SoundEvents.ENTITY_BOGGED_AMBIENT.getId()),
+
+    // Spectrum
 	EGG_LAYING_WOOLY_PIG(SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG, SoundEvents.ENTITY_PIG_AMBIENT.getId()),
 	ERASER(SpectrumEntityTypes.ERASER, SoundEvents.ENTITY_SPIDER_AMBIENT.getId()),
 	KINDLING(SpectrumEntityTypes.KINDLING, SpectrumSoundEvents.ENTITY_KINDLING_AMBIENT.getId()),

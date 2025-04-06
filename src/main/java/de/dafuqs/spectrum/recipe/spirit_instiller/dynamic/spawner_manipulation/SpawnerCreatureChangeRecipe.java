@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.mob_head.*;
-import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.component.type.*;
 import net.minecraft.entity.*;
@@ -17,7 +17,7 @@ import java.util.*;
 public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 	
 	public SpawnerCreatureChangeRecipe() {
-		super(IngredientStack.ofTag(SpectrumItemTags.SKULLS, 1), IngredientStack.ofItems(4, SpectrumItems.DOWNSTONE_FRAGMENTS), Optional.of(SpectrumAdvancements.SPAWNER_CREATURE_CHANGE));
+		super(IngredientStack.ofTag(SpectrumItemTags.SKULLS), IngredientStack.ofItems(SpectrumItems.DOWNSTONE_FRAGMENTS, 4), Optional.of(SpectrumAdvancements.SPAWNER_CREATURE_CHANGE));
 	}
 	
 	@Override

@@ -1,0 +1,7 @@
+{
+  "parent": "spectrum:templates/slab_detector",
+  "textures": {
+    "top": "spectrum:block/creature_detector_top",
+    "side": "spectrum:block/creature_detector_side"
+  }
+}

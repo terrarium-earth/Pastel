@@ -5,7 +5,7 @@
     "advancement_id": "spectrum:place_pedestal"
   },
   "icon": {
-    "item": "spectrum:citrine_storage_block"
+    "item": "spectrum:polished_citrine_block"
   },
   "category": "spectrum:decoration",
   "hide_while_locked": true,
@@ -26,13 +26,13 @@
     },
     {
       "type": "modonomicon:crafting_recipe",
-      "title1": "block.spectrum.topaz_storage_block",
+      "title1": "block.spectrum.polished_topaz_block",
       "condition": {
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_shards/topaz"
       },
-      "recipe_id_1": "spectrum:crafting_table/gem_blocks/topaz_storage_block",
-      "recipe_id_2": "spectrum:crafting_table/gem_blocks/topaz_shards_from_topaz_storage_block"
+      "recipe_id_1": "spectrum:crafting_table/gem_blocks/polished_topaz_block",
+      "recipe_id_2": "spectrum:crafting_table/gem_blocks/topaz_shards_from_polished_topaz_block"
     },
     {
       "type": "modonomicon:crafting_recipe",
@@ -40,9 +40,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_shards/amethyst"
       },
-      "title1": "block.spectrum.amethyst_storage_block",
-      "recipe_id_1": "spectrum:crafting_table/gem_blocks/amethyst_storage_block",
-      "recipe_id_2": "spectrum:crafting_table/gem_blocks/amethyst_shards_from_amethyst_storage_block"
+      "title1": "block.spectrum.polished_amethyst_block",
+      "recipe_id_1": "spectrum:crafting_table/gem_blocks/polished_amethyst_block",
+      "recipe_id_2": "spectrum:crafting_table/gem_blocks/amethyst_shards_from_polished_amethyst_block"
     },
     {
       "type": "modonomicon:crafting_recipe",
@@ -50,9 +50,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:hidden/collect_shards/citrine"
       },
-      "title1": "block.spectrum.citrine_storage_block",
-      "recipe_id_1": "spectrum:crafting_table/gem_blocks/citrine_storage_block",
-      "recipe_id_2": "spectrum:crafting_table/gem_blocks/citrine_shards_from_citrine_storage_block"
+      "title1": "block.spectrum.polished_citrine_block",
+      "recipe_id_1": "spectrum:crafting_table/gem_blocks/polished_citrine_block",
+      "recipe_id_2": "spectrum:crafting_table/gem_blocks/citrine_shards_from_polished_citrine_block"
     },
     {
       "type": "modonomicon:crafting_recipe",
@@ -60,9 +60,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:create_onyx_shard"
       },
-      "title1": "block.spectrum.onyx_storage_block",
-      "recipe_id_1": "spectrum:crafting_table/gem_blocks/onyx_storage_block",
-      "recipe_id_2": "spectrum:crafting_table/gem_blocks/onyx_shards_from_onyx_storage_block"
+      "title1": "block.spectrum.polished_onyx_block",
+      "recipe_id_1": "spectrum:crafting_table/gem_blocks/polished_onyx_block",
+      "recipe_id_2": "spectrum:crafting_table/gem_blocks/onyx_shards_from_polished_onyx_block"
     },
     {
       "type": "modonomicon:crafting_recipe",
@@ -70,9 +70,9 @@
         "type": "modonomicon:advancement",
         "advancement_id": "spectrum:lategame/collect_moonstone"
       },
-      "title1": "block.spectrum.moonstone_storage_block",
-      "recipe_id_1": "spectrum:crafting_table/gem_blocks/moonstone_storage_block",
-      "recipe_id_2": "spectrum:crafting_table/gem_blocks/moonstone_shards_from_moonstone_storage_block"
+      "title1": "block.spectrum.polished_moonstone_block",
+      "recipe_id_1": "spectrum:crafting_table/gem_blocks/polished_moonstone_block",
+      "recipe_id_2": "spectrum:crafting_table/gem_blocks/moonstone_shards_from_polished_moonstone_block"
     }
   ]
 }

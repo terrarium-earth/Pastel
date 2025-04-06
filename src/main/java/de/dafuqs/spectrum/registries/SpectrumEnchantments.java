@@ -1,24 +1,20 @@
 package de.dafuqs.spectrum.registries;
 
+import java.util.*;
+
+import static de.dafuqs.spectrum.SpectrumCommon.*;
+
 import de.dafuqs.spectrum.data.*;
 import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
 import net.minecraft.enchantment.effect.*;
-import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.item.*;
-import net.minecraft.loot.condition.*;
-import net.minecraft.loot.context.*;
-import net.minecraft.predicate.entity.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.util.*;
-
-import java.util.*;
-
-import static de.dafuqs.spectrum.SpectrumCommon.*;
 
 @SuppressWarnings("unused")
 public class SpectrumEnchantments {
@@ -27,50 +23,29 @@ public class SpectrumEnchantments {
 	private static final DeferredRegistrar.Contextual<DatagenProxy.BootstrapContext<Enchantment>> BOOTSTRAP_REGISTAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	private static final DeferredRegistrar.KeyedContextual<RegistryKey<Enchantment>, DatagenProxy.ProvidedTagBuilderBuilder<Enchantment>> ENCHANTMENT_TAG_REGISTRAR = new DeferredRegistrar.KeyedContextual<>(DatagenProxy.IS_DATAGEN);
 	
-	public static final RegistryKey<Enchantment> BIG_CATCH = of("big_catch"); // Increase the chance to reel in entities instead of fishing loot
-	public static final RegistryKey<Enchantment> CLOVERS_FAVOR = of("clovers_favor"); // Increases drop chance of <1 loot drops
-	public static final RegistryKey<Enchantment> DISARMING = of("disarming"); // Drops mob equipment on hit (and players, but way less often)
-	public static final RegistryKey<Enchantment> EXUBERANCE = of("exuberance"); // Drops more XP on kill
-	public static final RegistryKey<Enchantment> FIRST_STRIKE = of("first_strike"); // Increased damage if enemy has full health
-	public static final RegistryKey<Enchantment> FOUNDRY = of("foundry"); // applies smelting recipe before dropping items after mining
-	public static final RegistryKey<Enchantment> IMPROVED_CRITICAL = of("improved_critical"); // Increased damage when landing a critical hit
-	public static final RegistryKey<Enchantment> INDESTRUCTIBLE = of("indestructible"); // Make tools not use up durability
-	public static final RegistryKey<Enchantment> INERTIA = of("inertia"); // Decreases mining speed, but increases with each mined block of the same type
-	public static final RegistryKey<Enchantment> INEXORABLE = of("inexorable"); // prevents mining & movement slowdowns
-	public static final RegistryKey<Enchantment> INVENTORY_INSERTION = of("inventory_insertion"); // don't drop items into the world, add to inv instead
-	public static final RegistryKey<Enchantment> PEST_CONTROL = of("pest_control"); // Kills silverfish when mining infested blocks
-	public static final RegistryKey<Enchantment> RAZING = of("razing"); // increased mining speed for very hard blocks
-	public static final RegistryKey<Enchantment> RESONANCE = of("resonance"); // Silk Touch, just for different blocks
-	public static final RegistryKey<Enchantment> SERENDIPITY_REEL = of("serendipity_reel"); // Increase luck when fishing
-	public static final RegistryKey<Enchantment> SNIPING = of("sniping"); // Increases projectile speed => increased damage + range
-	public static final RegistryKey<Enchantment> STEADFAST = of("steadfast"); // ItemStacks with this enchantment are not destroyed by cactus, fire, lava, ...
-	public static final RegistryKey<Enchantment> TIGHT_GRIP = of("tight_grip"); // Increases attack speed
-	public static final RegistryKey<Enchantment> TREASURE_HUNTER = of("treasure_hunter"); // Drops mob heads
-	public static final RegistryKey<Enchantment> VOIDING = of("voiding"); // Voids all items mined
-	
-	public static final RegistryKey<Enchantment> CLOAKED_BIG_CATCH = new Builder(
-			BIG_CATCH,
+	// Increase the chance to reel in entities instead of fishing loot
+	public static final RegistryKey<Enchantment> BIG_CATCH = new Builder(
+			"big_catch",
 			2,
 			3,
 			new Enchantment.Cost(20, 0),
 			new Enchantment.Cost(50, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_BIG_CATCH
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.FISHING_ENCHANTABLE)
 			.forceAddTag(SpectrumItemTags.FISHING_RODS)
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_CLOVERS_FAVOR = new Builder(
-			CLOVERS_FAVOR,
+	// Increases drop chance of <1 loot drops
+	public static final RegistryKey<Enchantment> CLOVERS_FAVOR = new Builder(
+			"clovers_favor",
 			2,
 			3,
 			new Enchantment.Cost(20, 0),
 			new Enchantment.Cost(50, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_CLOVERS_FAVOR
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.SWORD_ENCHANTABLE)
 			.addOptionalTag(Identifier.of("malum:scythe"))
@@ -79,28 +54,28 @@ public class SpectrumEnchantments {
 			.addOptional(Identifier.of("malum:spirit_plunder"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_DISARMING = new Builder(
-			DISARMING,
+	// Drops mob equipment on hit (and players, but way less often)
+	public static final RegistryKey<Enchantment> DISARMING = new Builder(
+			"disarming",
 			1,
 			2,
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(40, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_DISARMING
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_EXUBERANCE = new Builder(
-			EXUBERANCE,
+	// Drops more XP on kill
+	public static final RegistryKey<Enchantment> EXUBERANCE = new Builder(
+			"exuberance",
 			5,
 			5,
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(50, 0),
 			2,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_EXUBERANCE
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
@@ -108,29 +83,29 @@ public class SpectrumEnchantments {
 			.addOptionalTag(Identifier.of("malum:scythe"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_FIRST_STRIKE = new Builder(
-			FIRST_STRIKE,
+	// Increased damage if the enemy has full health
+	public static final RegistryKey<Enchantment> FIRST_STRIKE = new Builder(
+			"first_strike",
 			2,
 			2,
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(40, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_FIRST_STRIKE
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 			.addOptionalTag(Identifier.of("malum:scythe"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_FOUNDRY = new Builder(
-			FOUNDRY,
+	// applies smelting recipe before dropping items after mining
+	public static final RegistryKey<Enchantment> FOUNDRY = new Builder(
+			"foundry",
 			2,
 			1,
 			new Enchantment.Cost(15, 0),
 			new Enchantment.Cost(65, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_FOUNDRY
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 			.forceAddTag(SpectrumItemTags.FISHING_RODS)
@@ -139,15 +114,15 @@ public class SpectrumEnchantments {
 			.addOptional(Identifier.of("gofish:deepfry"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_IMPROVED_CRITICAL = new Builder(
-			IMPROVED_CRITICAL,
+	// Increased damage when landing a critical hit
+	public static final RegistryKey<Enchantment> IMPROVED_CRITICAL = new Builder(
+			"improved_critical",
 			2,
 			2,
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(40, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_IMPROVED_CRITICAL
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 			.addOptionalTag(Identifier.of("malum:scythe"))
@@ -156,15 +131,15 @@ public class SpectrumEnchantments {
 			.addOptional(Identifier.of("malum:haunted"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_INDESTRUCTIBLE = new Builder(
-			INDESTRUCTIBLE,
+	// Make tools not use up durability
+	public static final RegistryKey<Enchantment> INDESTRUCTIBLE = new Builder(
+			"indestructuble",
 			2,
 			1,
 			new Enchantment.Cost(30, 0),
 			new Enchantment.Cost(60, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_INDESTRUCTIBLE
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 					.forceAddTag(ItemTags.DURABILITY_ENCHANTABLE)
 					.add(SpectrumItems.ENDER_SPLICE)
@@ -178,45 +153,45 @@ public class SpectrumEnchantments {
 			.add(Enchantments.BINDING_CURSE)
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_INERTIA = new Builder(
-			INERTIA,
+	// Decreases mining speed, but increases with each mined block of the same type
+	public static final RegistryKey<Enchantment> INERTIA = new Builder(
+			"inertia",
 			1,
 			3,
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(40, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_INERTIA
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.EFFICIENCY)
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_INEXORABLE = new Builder(
-			INEXORABLE,
+	// prevents mining & movement slowdowns
+	public static final RegistryKey<Enchantment> INEXORABLE = new Builder(
+			"inexorable",
 			1,
 			1,
 			new Enchantment.Cost(50, 0),
 			new Enchantment.Cost(100, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND, AttributeModifierSlot.OFFHAND, AttributeModifierSlot.CHEST),
-			SpectrumAdvancements.ENCHANTMENTS_INEXORABLE
+			List.of(AttributeModifierSlot.MAINHAND, AttributeModifierSlot.OFFHAND, AttributeModifierSlot.CHEST)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 			.forceAddTag(ItemTags.TRIDENT_ENCHANTABLE)
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_INVENTORY_INSERTION = new Builder(
-			INVENTORY_INSERTION,
+	// don't drop items into the world, add to inv instead
+	public static final RegistryKey<Enchantment> INVENTORY_INSERTION = new Builder(
+			"inventory_insertion",
 			2,
 			1,
 			new Enchantment.Cost(15, 0),
 			new Enchantment.Cost(45, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_INVENTORY_INSERTION
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
@@ -227,45 +202,15 @@ public class SpectrumEnchantments {
 			.addOptionalTag(Identifier.of("malum:scythe"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_PEST_CONTROL = new Builder(
-			PEST_CONTROL,
-			1,
-			1,
-			new Enchantment.Cost(10, 0),
-			new Enchantment.Cost(30, 0),
-			8,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_PEST_CONTROL
-	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
-	).withExclusiveSet((key, provider) -> provider
-			.forceAddTag(getPairTag(RESONANCE))
-	).register();
-	
-	public static final RegistryKey<Enchantment> CLOAKED_RAZING = new Builder(
-			RAZING,
-			5,
-			3,
-			new Enchantment.Cost(20, 0),
-			new Enchantment.Cost(30, 0),
-			2,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_RAZING
-	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
-	).withExclusiveSet((key, provider) -> provider
-			.add(Enchantments.FORTUNE)
-	).register();
-	
-	public static final RegistryKey<Enchantment> CLOAKED_RESONANCE = new Builder(
-			RESONANCE,
+	// Silk Touch, just for different blocks
+	public static final RegistryKey<Enchantment> RESONANCE = new Builder(
+			"resonance",
 			1,
 			1,
 			new Enchantment.Cost(25, 0),
 			new Enchantment.Cost(100, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_RESONANCE
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
 			.add(SpectrumItems.ENDER_SPLICE)
@@ -275,28 +220,58 @@ public class SpectrumEnchantments {
 			.forceAddTag(SpectrumEnchantmentTags.PEST_CONTROL)
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_SERENDIPITY_REEL = new Builder(
-			SERENDIPITY_REEL,
+	// Kills silverfish when mining infested blocks
+	public static final RegistryKey<Enchantment> PEST_CONTROL = new Builder(
+			"pest_control",
+			1,
+			1,
+			new Enchantment.Cost(10, 0),
+			new Enchantment.Cost(30, 0),
+			8,
+			List.of(AttributeModifierSlot.MAINHAND)
+	).withEnchantable(provider -> provider
+			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+	).withExclusiveSet((key, provider) -> provider
+			.add(RESONANCE)
+	).register();
+	
+	// increased mining speed for very hard blocks
+	public static final RegistryKey<Enchantment> RAZING = new Builder(
+			"razing",
+			5,
+			3,
+			new Enchantment.Cost(20, 0),
+			new Enchantment.Cost(30, 0),
+			2,
+			List.of(AttributeModifierSlot.MAINHAND)
+	).withEnchantable(provider -> provider
+			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+	).withExclusiveSet((key, provider) -> provider
+			.add(Enchantments.FORTUNE)
+	).register();
+	
+	// Increase luck when fishing
+	public static final RegistryKey<Enchantment> SERENDIPITY_REEL = new Builder(
+			"serendipity_reel",
 			2,
 			2,
 			new Enchantment.Cost(40, 0),
 			new Enchantment.Cost(120, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_SERENDIPITY_REEL
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.FISHING_ENCHANTABLE)
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_SNIPING = new Builder(
-			SNIPING,
+	// Increases projectile speed => increased damage + range
+	public static final RegistryKey<Enchantment> SNIPING = new Builder(
+			"sniping",
 			1,
 			2,
 			new Enchantment.Cost(20, 0),
 			new Enchantment.Cost(50, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_SNIPING
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.CROSSBOW_ENCHANTABLE)
 			.add(SpectrumItems.GLEAMING_PIN)
@@ -304,15 +279,15 @@ public class SpectrumEnchantments {
 			.add(Enchantments.MULTISHOT)
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_STEADFAST = new Builder(
-			STEADFAST,
+	// ItemStacks with this enchantment are not destroyed by cactus, fire, lava, ...
+	public static final RegistryKey<Enchantment> STEADFAST = new Builder(
+			"steadfast",
 			10,
 			1,
 			new Enchantment.Cost(30, 0),
 			new Enchantment.Cost(60, 0),
 			1,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_STEADFAST
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.DURABILITY_ENCHANTABLE)
 			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
@@ -320,15 +295,15 @@ public class SpectrumEnchantments {
 			.addOptionalTag(Identifier.of("trinkets:enchantable/enchantable"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_TREASURE_HUNTER = new Builder(
-			TREASURE_HUNTER,
+	// Drops mob heads
+	public static final RegistryKey<Enchantment> TREASURE_HUNTER = new Builder(
+			"treasure_hunter",
 			2,
 			3,
 			new Enchantment.Cost(15, 0),
 			new Enchantment.Cost(45, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_TREASURE_HUNTER
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 			.addOptionalTag(Identifier.of("malum:scythe"))
@@ -337,15 +312,15 @@ public class SpectrumEnchantments {
 			.addOptional(Identifier.of("malum:spirit_plunder"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_TIGHT_GRIP = new Builder(
-			TIGHT_GRIP,
+	// Increases attack speed
+	public static final RegistryKey<Enchantment> TIGHT_GRIP = new Builder(
+			"tight_grip",
 			2,
 			2,
 			new Enchantment.Cost(5, 0),
 			new Enchantment.Cost(35, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_TIGHT_GRIP
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEffects((key, ctx, builder) -> builder
 			.addEffect(EnchantmentEffectComponentTypes.ATTRIBUTES, new AttributeEnchantmentEffect(locate("enchantment.tight_grip"), EntityAttributes.GENERIC_ATTACK_SPEED, EnchantmentLevelBasedValue.linear(0.0625f), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL))
 	).withEnchantable(provider -> provider
@@ -355,15 +330,15 @@ public class SpectrumEnchantments {
 			.addOptional(Identifier.of("malum:rebound"))
 	).register();
 	
-	public static final RegistryKey<Enchantment> CLOAKED_VOIDING = new Builder(
-			VOIDING,
+	// Voids all items mined
+	public static final RegistryKey<Enchantment> VOIDING = new Builder(
+			"voiding",
 			2,
 			1,
 			new Enchantment.Cost(25, 0),
 			new Enchantment.Cost(50, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND),
-			SpectrumAdvancements.ENCHANTMENTS_VOIDING
+			List.of(AttributeModifierSlot.MAINHAND)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 			.add(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem())
@@ -381,39 +356,31 @@ public class SpectrumEnchantments {
 		return TagKey.of(RegistryKeys.ENCHANTMENT, locate("exclusive_set/" + key.getValue().getPath()));
 	}
 	
-	public static TagKey<Enchantment> getPairTag(RegistryKey<Enchantment> key) {
-		return TagKey.of(RegistryKeys.ENCHANTMENT, key.getValue());
-	}
-	
 	public static RegistryKey<Enchantment> getCloakKey(RegistryKey<Enchantment> key) {
 		return RegistryKey.of(RegistryKeys.ENCHANTMENT, locate("cloaked/" + key.getValue().getPath()));
 	}
 	
 	private static class Builder {
-		private final RegistryKey<Enchantment> baseKey;
-		private final RegistryKey<Enchantment> cloakKey;
+		private final RegistryKey<Enchantment> key;
 		private final int weight;
 		private final int maxLevel;
 		private final Enchantment.Cost minCost;
 		private final Enchantment.Cost maxCost;
 		private final int anvilCost;
 		private final List<AttributeModifierSlot> slots;
-		private final Identifier advancementId;
 		
 		private EnchantmentBuilderCallback effectsBuilder = (key, ctx, builder) -> builder;
 		private DatagenProxy.TagBuilderCallback<Item> enchantableBuilder = provider -> provider;
 		private DatagenProxy.KeyedTagBuilderCallback<Enchantment> exclusiveSetBuilder = (key, provider) -> provider;
 		
-		public Builder(RegistryKey<Enchantment> baseKey, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost, List<AttributeModifierSlot> slots, Identifier advancementId) {
-			this.baseKey = baseKey;
-			this.cloakKey = getCloakKey(baseKey);
+		public Builder(String name, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost, List<AttributeModifierSlot> slots) {
+			this.key = of(name);
 			this.weight = weight;
 			this.maxLevel = maxLevel;
 			this.minCost = minCost;
 			this.maxCost = maxCost;
 			this.anvilCost = anvilCost;
 			this.slots = slots;
-			this.advancementId = advancementId;
 		}
 		
 		public Builder withEffects(EnchantmentBuilderCallback enchantmentBuilder) {
@@ -433,37 +400,24 @@ public class SpectrumEnchantments {
 		
 		public RegistryKey<Enchantment> register() {
 			BOOTSTRAP_REGISTAR.defer(ctx -> {
-				// Build the base enchantment
-				Enchantment.Definition baseDefinition = new Enchantment.Definition(ctx.items().getOrThrow(getEnchantableTag(baseKey)), Optional.empty(), weight, maxLevel, new Enchantment.Cost(0, 0), new Enchantment.Cost(0, 0), 0, slots);
-				Enchantment.Builder baseEnchantment = new Enchantment.Builder(baseDefinition)
-						.exclusiveSet(ctx.enchantments().getOrThrow(getExclusiveSetTag(baseKey)));
-				ctx.registerable().register(baseKey, effectsBuilder.build(baseKey, ctx, baseEnchantment).build(baseKey.getValue()));
-				
-				// Build the cloak enchantment
-				LootCondition.Builder isPlayerCondition = EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().type(EntityType.PLAYER));
-				LootCondition.Builder hasAdvancementCondition = EntityPropertiesLootCondition.builder(LootContext.EntityTarget.THIS, EntityPredicate.Builder.create().typeSpecific(PlayerPredicate.Builder.create().advancement(advancementId, true).build()));
-				LootCondition.Builder condition = isPlayerCondition.invert().or(hasAdvancementCondition);
-				Enchantment.Definition cloakDefinition = new Enchantment.Definition(ctx.items().getOrThrow(getEnchantableTag(baseKey)), Optional.empty(), weight, maxLevel, minCost, maxCost, anvilCost, slots);
-				Enchantment.Builder cloakEnchantment = new Enchantment.Builder(cloakDefinition)
-						.exclusiveSet(ctx.enchantments().getOrThrow(getExclusiveSetTag(baseKey)))
-						.addEffect(SpectrumEnchantmentEffectComponentTypes.CLOAKED, ctx.enchantments().getOrThrow(baseKey), condition);
-				ctx.registerable().register(cloakKey, cloakEnchantment.build(baseKey.getValue()));
+				// Build the enchantment
+				Enchantment.Definition definition = new Enchantment.Definition(ctx.items().getOrThrow(getEnchantableTag(key)), Optional.empty(), weight, maxLevel, minCost, maxCost, anvilCost, slots);
+				Enchantment.Builder enchantment = new Enchantment.Builder(definition)
+						.exclusiveSet(ctx.enchantments().getOrThrow(getExclusiveSetTag(key)));
+				ctx.registerable().register(key, effectsBuilder.build(key, ctx, enchantment).build(key.getValue()));
 			});
 			
-			ENCHANTMENT_TAG_REGISTRAR.defer(baseKey, (key, ctx) -> {
-				// Build the cloaking pair enchantment tag (e.g., resonance + cloaked/resonance)
-				ctx.build(getPairTag(key)).add(key).add(cloakKey);
-				
+			ENCHANTMENT_TAG_REGISTRAR.defer(key, (key, ctx) -> {
 				// Build the exclusive set enchantment tag
-				exclusiveSetBuilder.build(key, ctx.build(getExclusiveSetTag(key)).forceAddTag(getPairTag(key)));
+				exclusiveSetBuilder.build(key, ctx.build(getExclusiveSetTag(key)));
 			});
 			
 			ITEM_TAG_REGISTRAR.defer(ctx -> {
 				// Build the enchantable items tag
-				enchantableBuilder.build(ctx.build(getEnchantableTag(baseKey)));
+				enchantableBuilder.build(ctx.build(getEnchantableTag(key)));
 			});
 			
-			return cloakKey;
+			return key;
 		}
 		
 	}
@@ -473,13 +427,8 @@ public class SpectrumEnchantments {
 	}
 	
 	public static void provideEnchantmentTags(DatagenProxy.ProvidedTagBuilderBuilder<Enchantment> builder) {
-		FabricTagProvider<Enchantment>.FabricTagBuilder enchantments = builder.build(SpectrumEnchantmentTags.ENCHANTMENTS);
-		FabricTagProvider<Enchantment>.FabricTagBuilder cloaked = builder.build(SpectrumEnchantmentTags.CLOAKED);
-		ENCHANTMENT_TAG_REGISTRAR.streamKeys().sorted(Comparator.comparing(RegistryKey::getValue)).forEach(key -> {
-			enchantments.forceAddTag(getPairTag(key));
-			cloaked.add(getCloakKey(key));
-		});
-		
+		FabricTagProvider<Enchantment>.FabricTagBuilder enchantments = builder.build(SpectrumEnchantmentTags.SPECTRUM_ENCHANTMENT);
+		ENCHANTMENT_TAG_REGISTRAR.streamKeys().sorted(Comparator.comparing(RegistryKey::getValue)).forEach(enchantments::add);
 		ENCHANTMENT_TAG_REGISTRAR.flush(builder);
 	}
 	

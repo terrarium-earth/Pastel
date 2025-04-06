@@ -4,6 +4,7 @@ import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.progression.toast.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.*;
+import it.unimi.dsi.fastutil.objects.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.*;
 import net.minecraft.entity.player.*;
@@ -19,7 +20,7 @@ import java.util.*;
 @Environment(EnvType.CLIENT)
 public class UnlockToastManager {
 	// Advancement Identifier + Recipe Type => Recipe
-	public static final Map<Identifier, Map<RecipeType<?>, List<GatedRecipe<?>>>> gatedRecipes = new HashMap<>();
+	public static final Map<Identifier, Map<RecipeType<?>, Set<GatedRecipe<?>>>> gatedRecipes = new HashMap<>();
 	
 	public static final Map<Identifier, Pair<ItemStack, String>> MESSAGE_TOASTS = new HashMap<>() {{
 		put(SpectrumAdvancements.UNLOCK_SHOOTING_STARS, new Pair<>(Items.SPYGLASS.getDefaultStack(), "shooting_stars_unlocked"));
@@ -35,6 +36,10 @@ public class UnlockToastManager {
 		put(SpectrumAdvancements.PASTEL_NODE_COLORING, new Pair<>(SpectrumBlocks.SENDER_NODE.asItem().getDefaultStack(), "pastel_node_coloring"));
 	}};
 	
+	public static void clear() {
+		gatedRecipes.clear();
+	}
+	
 	public static void registerGatedRecipe(RecipeType<?> recipeType, GatedRecipe<?> gatedRecipe) {
 		Identifier requiredAdvancementIdentifier = gatedRecipe.getRequiredAdvancementIdentifier().orElse(null);
 		
@@ -44,23 +49,21 @@ public class UnlockToastManager {
 		}
 		
 		if (gatedRecipes.containsKey(requiredAdvancementIdentifier)) {
-			Map<RecipeType<?>, List<GatedRecipe<?>>> recipeTypeListMap = gatedRecipes.get(requiredAdvancementIdentifier);
+			Map<RecipeType<?>, Set<GatedRecipe<?>>> recipeTypeListMap = gatedRecipes.get(requiredAdvancementIdentifier);
 			if (recipeTypeListMap.containsKey(recipeType)) {
-				List<GatedRecipe<?>> existingList = recipeTypeListMap.get(recipeType);
-				if (!existingList.contains(gatedRecipe)) {
-					existingList.add(gatedRecipe);
-				}
+				Set<GatedRecipe<?>> existingSet = recipeTypeListMap.get(recipeType);
+				existingSet.add(gatedRecipe);
 			} else {
-				List<GatedRecipe<?>> newList = new ArrayList<>();
+				Set<GatedRecipe<?>> newList = new ObjectArraySet<>();
 				newList.add(gatedRecipe);
 				recipeTypeListMap.put(recipeType, newList);
 			}
 		} else {
-			Map<RecipeType<?>, List<GatedRecipe<?>>> recipeTypeListMap = new HashMap<>();
-			List<GatedRecipe<?>> newList = new ArrayList<>();
-			newList.add(gatedRecipe);
-			recipeTypeListMap.put(recipeType, newList);
-			gatedRecipes.put(requiredAdvancementIdentifier, recipeTypeListMap);
+			Map<RecipeType<?>, Set<GatedRecipe<?>>> recipeTypeListSet = new HashMap<>();
+			Set<GatedRecipe<?>> newSet = new ObjectArraySet<>();
+			newSet.add(gatedRecipe);
+			recipeTypeListSet.put(recipeType, newSet);
+			gatedRecipes.put(requiredAdvancementIdentifier, recipeTypeListSet);
 		}
 	}
 	
@@ -75,9 +78,9 @@ public class UnlockToastManager {
 		
 		for (Identifier doneAdvancement : doneAdvancements) {
 			if (gatedRecipes.containsKey(doneAdvancement)) {
-				Map<RecipeType<?>, List<GatedRecipe<?>>> recipesGatedByAdvancement = gatedRecipes.get(doneAdvancement);
+				Map<RecipeType<?>, Set<GatedRecipe<?>>> recipesGatedByAdvancement = gatedRecipes.get(doneAdvancement);
 				
-				for (Map.Entry<RecipeType<?>, List<GatedRecipe<?>>> recipesByType : recipesGatedByAdvancement.entrySet()) {
+				for (Map.Entry<RecipeType<?>, Set<GatedRecipe<?>>> recipesByType : recipesGatedByAdvancement.entrySet()) {
 					List<GatedRecipe<?>> newRecipes;
 					if (unlockedRecipesByType.containsKey(recipesByType.getKey())) {
 						newRecipes = unlockedRecipesByType.get(recipesByType.getKey());
@@ -106,7 +109,7 @@ public class UnlockToastManager {
 					unlockedPedestalRecipes = new ArrayList<>();
 				}
 				List<GatedRecipe<?>> pedestalRecipes = new ArrayList<>();
-				for (Map<RecipeType<?>, List<GatedRecipe<?>>> recipesByType : gatedRecipes.values()) {
+				for (Map<RecipeType<?>, Set<GatedRecipe<?>>> recipesByType : gatedRecipes.values()) {
 					if (recipesByType.containsKey(SpectrumRecipeTypes.PEDESTAL)) {
 						pedestalRecipes.addAll(recipesByType.get(SpectrumRecipeTypes.PEDESTAL));
 					}
@@ -160,10 +163,10 @@ public class UnlockToastManager {
 		
 		for (GatedRecipe<?> recipe : unlockedRecipes) {
 			if (!recipe.getResult(registryManager).isEmpty()) { // weather recipes
-				if (recipe.getGroup() == null) {
-					// FIXME - Better place to log this?
+				// FIXME - Better place to log this?
+				//if (recipe.getGroup() == null) {
 					//SpectrumCommon.logWarning("Found a recipe with null group: " + recipe.getId().toString() + " Please report this. If you are DaFuqs and you are reading this: you messed up big time.");
-				}
+				//}
 				
 				if (recipe.getGroup().isEmpty()) {
 					singleRecipes.add(recipe.getResult(registryManager));

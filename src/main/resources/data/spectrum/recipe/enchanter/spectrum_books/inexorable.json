@@ -35,7 +35,7 @@
     "id": "minecraft:enchanted_book",
     "components": {
       "stored_enchantments": {
-        "spectrum:cloaked/inexorable": 1
+        "spectrum:inexorable": 1
       }
     }
   },
@@ -44,7 +44,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/inexorable"
+        "spectrum:inexorable"
       ]
     }
   ]

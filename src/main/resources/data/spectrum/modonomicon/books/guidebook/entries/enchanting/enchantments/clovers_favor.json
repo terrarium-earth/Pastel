@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/clovers_favor": 3
+          "spectrum:clovers_favor": 3
         }
       },
       "text": "book.spectrum.guidebook.clovers_favor.page1.text"

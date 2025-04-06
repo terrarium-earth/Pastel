@@ -51,13 +51,12 @@ public abstract class BidentBaseEntity extends TridentEntity {
 	@Override
 	public void readCustomDataFromNbt(NbtCompound nbt) {
 		super.readCustomDataFromNbt(nbt);
-		this.dataTracker.set(STACK, CodecHelper.fromNbt(ItemStack.CODEC, nbt.get("Trident"), ItemStack.EMPTY));
+		this.dataTracker.set(STACK, CodecHelper.fromNbt(ItemStack.CODEC, nbt.get("item"), ItemStack.EMPTY));
 	}
 	
 	@Override
 	public void writeCustomDataToNbt(NbtCompound nbt) {
 		super.writeCustomDataToNbt(nbt);
-		CodecHelper.writeNbt(nbt, "Trident", ItemStack.CODEC, this.dataTracker.get(STACK));
 	}
 	
 	@Override

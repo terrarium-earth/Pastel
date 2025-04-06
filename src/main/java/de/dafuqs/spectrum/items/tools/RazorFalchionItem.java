@@ -17,11 +17,6 @@ public class RazorFalchionItem extends SwordItem implements Preenchanted {
 	public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 		return Map.of(Enchantments.LOOTING, 3);
 	}
-	
-	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
 
 	@Override
 	public boolean hasGlint(ItemStack stack) {

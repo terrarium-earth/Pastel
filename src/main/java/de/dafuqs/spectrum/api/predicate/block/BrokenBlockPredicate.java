@@ -6,6 +6,7 @@ import net.minecraft.block.*;
 import net.minecraft.predicate.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
+import net.minecraft.registry.tag.*;
 
 import java.util.*;
 
@@ -15,36 +16,27 @@ import java.util.*;
  * here we require a block state, that can be checked against.
  * Since block entities are already destroyed at this stage the only things that can be checked is
  * block, state and block tag. Should suffice for 99 % of cases
- * <br>
- * TODO - Review as of 1.21 port
  */
-public record BrokenBlockPredicate(RegistryEntryList<Block> blocks, StatePredicate state) {
-	
-	public static final BrokenBlockPredicate ANY = new BrokenBlockPredicate(RegistryEntryList.empty(), new StatePredicate(List.of()));
-	
+public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, Optional<StatePredicate> state) {
+
 	public static final Codec<BrokenBlockPredicate> CODEC = RecordCodecBuilder.create(i -> i.group(
-			RegistryCodecs.entryList(RegistryKeys.BLOCK).optionalFieldOf("blocks", RegistryEntryList.empty()).forGetter(BrokenBlockPredicate::blocks),
-			StatePredicate.CODEC.optionalFieldOf("state", new StatePredicate(List.of())).forGetter(BrokenBlockPredicate::state)
+			RegistryCodecs.entryList(RegistryKeys.BLOCK).optionalFieldOf("blocks").forGetter(BrokenBlockPredicate::blocks),
+			StatePredicate.CODEC.optionalFieldOf("state").forGetter(BrokenBlockPredicate::state)
 	).apply(i, BrokenBlockPredicate::new));
 	
-	public boolean test(BlockState blockState) {
-		if (this == ANY) {
-			return true;
+	public boolean test(BlockState state) {
+		if (this.blocks.isPresent() && !state.isIn(this.blocks.get())) {
+			return false;
 		} else {
-			if (this.blocks != RegistryEntryList.<Block>empty() && !this.blocks.contains(Registries.BLOCK.getEntry(blockState.getBlock()))) {
-				return false;
-			} else {
-				return this.state.test(blockState);
-			}
+			return this.state.isEmpty() || (this.state.get()).test(state);
 		}
 	}
 	
 	public static class Builder {
-		private RegistryEntryList<Block> blocks = RegistryEntryList.empty();
-		private StatePredicate state;
+		private Optional<RegistryEntryList<Block>> blocks = Optional.empty();
+		private Optional<StatePredicate> state = Optional.empty();
 		
 		private Builder() {
-			this.state = new StatePredicate(List.of());
 		}
 		
 		public static BrokenBlockPredicate.Builder create() {
@@ -52,7 +44,7 @@ public record BrokenBlockPredicate(RegistryEntryList<Block> blocks, StatePredica
 		}
 		
 		public BrokenBlockPredicate.Builder blocks(Block... blocks) {
-			this.blocks = RegistryEntryList.of(Registries.BLOCK::getEntry, blocks);
+			this.blocks = Optional.of(RegistryEntryList.of(Registries.BLOCK::getEntry, blocks));
 			return this;
 		}
 		
@@ -60,17 +52,17 @@ public record BrokenBlockPredicate(RegistryEntryList<Block> blocks, StatePredica
 			List<RegistryEntry<Block>> blockEntries = new ArrayList<>();
 			for (Block block : blocks)
 				blockEntries.add(Registries.BLOCK.getEntry(block));
-			this.blocks = RegistryEntryList.of(blockEntries);
+			this.blocks = Optional.of(RegistryEntryList.of(blockEntries));
 			return this;
 		}
 		
-		public BrokenBlockPredicate.Builder tag(RegistryEntryList<Block> tag) {
-			this.blocks = tag;
+		public BrokenBlockPredicate.Builder tag(TagKey<Block> tag) {
+			this.blocks = Registries.BLOCK.getEntryList(tag).map(l -> l);
 			return this;
 		}
 		
 		public BrokenBlockPredicate.Builder state(StatePredicate state) {
-			this.state = state;
+			this.state = Optional.of(state);
 			return this;
 		}
 		

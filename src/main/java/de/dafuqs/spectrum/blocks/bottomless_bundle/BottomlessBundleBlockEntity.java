@@ -25,6 +25,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity {
 	protected int powerLevel;
 
     public final SingleVariantStorage<ItemVariant> storage = new SingleVariantStorage<>() {
+		
 		@Override
 		protected boolean canInsert(ItemVariant variant) {
 			return variant.getItem().canBeNested()
@@ -42,9 +43,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity {
 		protected ItemVariant getBlankVariant() {
 			// lock to the item the player set it to when placing it down
 			// variant will only ever be null upon initialization, where it'll be set to the bundle
-			return this.variant == null
-					? ItemVariant.of(BottomlessBundleItem.getTemplateStack(bottomlessBundleStack))
-					: this.variant;
+			return this.variant == null ? ItemVariant.blank() : this.variant;
 		}
 
 		@Override
@@ -79,12 +78,12 @@ public class BottomlessBundleBlockEntity extends BlockEntity {
 	// Trivial sync methods. Call whenever bundle/storage contents need to be synced with each other [(de)serialization, bundle stack set, bundle block break loot]
 	private void syncBundleWithStorage() {
 		var builder = BottomlessBundleItem.BottomlessStack.Builder.of(this.world, this.bottomlessBundleStack);
-		builder.add(this.storage);
-		this.bottomlessBundleStack.set(SpectrumDataComponentTypes.BOTTOMLESS_STACK, builder.build());
+		builder.set(this.storage);
+		builder.buildAndSet(this.bottomlessBundleStack);
 	}
 
 	private void syncStorageWithBundle() {
-		this.storage.variant = ItemVariant.of(BottomlessBundleItem.getTemplateStack(bottomlessBundleStack));
+		this.storage.variant = BottomlessBundleItem.getTemplateVariant(bottomlessBundleStack);
 		this.storage.amount = BottomlessBundleItem.getStoredAmount(bottomlessBundleStack);
 	}
 	

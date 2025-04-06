@@ -6,7 +6,7 @@
       "components": {
         "minecraft:enchantments": {
           "levels": {
-            "spectrum:cloaked/inertia": 4
+            "spectrum:inertia": 4
           }
         }
       }

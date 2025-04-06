@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/pest_control": 1
+          "spectrum:pest_control": 1
         }
       },
       "text": "book.spectrum.guidebook.pest_control.page1.text"

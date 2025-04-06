@@ -1,7 +1,5 @@
 package de.dafuqs.spectrum;
 
-import java.util.*;
-
 import de.dafuqs.spectrum.api.color.*;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.pastel_network.*;
@@ -27,10 +25,8 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.fabricmc.fabric.api.transfer.v1.item.*;
 import net.fabricmc.fabric.api.transfer.v1.storage.*;
 import net.fabricmc.loader.api.*;
-import net.minecraft.client.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.*;
-import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.resource.*;
 import net.minecraft.server.*;
@@ -39,6 +35,8 @@ import net.minecraft.util.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
 import org.slf4j.*;
+
+import java.util.*;
 
 public class SpectrumCommon implements ModInitializer {
 	
@@ -131,8 +129,6 @@ public class SpectrumCommon implements ModInitializer {
 		SpectrumItemGroups.register();
 		logInfo("Registering Block Entities...");
 		SpectrumBlockEntities.register();
-		logInfo("Registering Enchantment Effect Component Types...");
-		SpectrumEnchantmentEffectComponentTypes.register();
 		
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");
@@ -275,15 +271,6 @@ public class SpectrumCommon implements ModInitializer {
 	 */
 	public static Optional<RecipeManager> getRecipeManager(@Nullable World world) {
 		return world == null ? minecraftServer == null ? Optional.empty() : Optional.of(minecraftServer.getRecipeManager()) : Optional.of(world.getRecipeManager());
-	}
-	
-	public static Optional<RegistryWrapper.WrapperLookup> getRegistryLookup() {
-		if (minecraftServer != null)
-			return Optional.of(minecraftServer.getRegistryManager());
-		var client = MinecraftClient.getInstance();
-		if (client.world != null)
-			return Optional.of(client.world.getRegistryManager());
-		return Optional.empty();
 	}
 	
 }

@@ -27,11 +27,6 @@ public class BedrockFishingRodItem extends SpectrumFishingRodItem implements Pre
 	}
 	
 	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
-	@Override
 	public boolean isEnchantable(ItemStack stack) {
 		return true;
 	}

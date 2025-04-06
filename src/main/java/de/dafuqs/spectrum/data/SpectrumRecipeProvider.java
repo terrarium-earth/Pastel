@@ -26,21 +26,19 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 	}
 	
 	private void generateEnchantmentUpgradeRecipes(RecipeExporter ctx) {
-		// TODO These values might need some touch-ups, clover's favor and unbreaking in particular
-		
 		// Spectrum
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_BIG_CATCH, SpectrumAdvancements.ENCHANTMENTS_BIG_CATCH, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{400, 32}, {800, 128}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_CLOVERS_FAVOR, SpectrumAdvancements.ENCHANTMENTS_CLOVERS_FAVOR, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{200, 8}, {400, 32}, {200, 128}, {10000, 512}, {40000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_DISARMING, SpectrumAdvancements.ENCHANTMENTS_DISARMING, SpectrumItems.RED_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_EXUBERANCE, SpectrumAdvancements.ENCHANTMENTS_EXUBERANCE, SpectrumItems.PURPLE_PIGMENT, new int[][]{{400, 8}, {600, 16}, {800, 32}, {1000, 64}, {1200, 128}, {1400, 256}, {1600, 512}, {1800, 512}, {2000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_FIRST_STRIKE, SpectrumAdvancements.ENCHANTMENTS_FIRST_STRIKE, SpectrumItems.PINK_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_IMPROVED_CRITICAL, SpectrumAdvancements.ENCHANTMENTS_IMPROVED_CRITICAL, SpectrumItems.BLACK_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_INERTIA, SpectrumAdvancements.ENCHANTMENTS_INERTIA, SpectrumItems.BROWN_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_RAZING, SpectrumAdvancements.ENCHANTMENTS_RAZING, SpectrumItems.GRAY_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 256}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_SERENDIPITY_REEL, SpectrumAdvancements.ENCHANTMENTS_SERENDIPITY_REEL, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{400, 32}, {800, 128}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_SNIPING, SpectrumAdvancements.ENCHANTMENTS_SNIPING, SpectrumItems.GREEN_PIGMENT, new int[][]{{200, 8}, {1000, 32}, {5000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_TIGHT_GRIP, SpectrumAdvancements.ENCHANTMENTS_TIGHT_GRIP, SpectrumItems.YELLOW_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOAKED_TREASURE_HUNTER, SpectrumAdvancements.ENCHANTMENTS_TREASURE_HUNTER, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.BIG_CATCH, SpectrumAdvancements.ENCHANTMENTS_BIG_CATCH, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{400, 32}, {800, 128}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOVERS_FAVOR, SpectrumAdvancements.ENCHANTMENTS_CLOVERS_FAVOR, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{200, 8}, {400, 32}, {200, 128}, {10000, 512}, {40000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.DISARMING, SpectrumAdvancements.ENCHANTMENTS_DISARMING, SpectrumItems.RED_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.EXUBERANCE, SpectrumAdvancements.ENCHANTMENTS_EXUBERANCE, SpectrumItems.PURPLE_PIGMENT, new int[][]{{400, 8}, {600, 16}, {800, 32}, {1000, 64}, {1200, 128}, {1400, 256}, {1600, 512}, {1800, 512}, {2000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.FIRST_STRIKE, SpectrumAdvancements.ENCHANTMENTS_FIRST_STRIKE, SpectrumItems.PINK_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.IMPROVED_CRITICAL, SpectrumAdvancements.ENCHANTMENTS_IMPROVED_CRITICAL, SpectrumItems.BLACK_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.INERTIA, SpectrumAdvancements.ENCHANTMENTS_INERTIA, SpectrumItems.BROWN_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.RAZING, SpectrumAdvancements.ENCHANTMENTS_RAZING, SpectrumItems.GRAY_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 256}, {10000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.SERENDIPITY_REEL, SpectrumAdvancements.ENCHANTMENTS_SERENDIPITY_REEL, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{400, 32}, {800, 128}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.SNIPING, SpectrumAdvancements.ENCHANTMENTS_SNIPING, SpectrumItems.GREEN_PIGMENT, new int[][]{{200, 8}, {1000, 32}, {5000, 128}, {10000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.TIGHT_GRIP, SpectrumAdvancements.ENCHANTMENTS_TIGHT_GRIP, SpectrumItems.YELLOW_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
+		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.TREASURE_HUNTER, SpectrumAdvancements.ENCHANTMENTS_TREASURE_HUNTER, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
 		
 		// Vanilla
 		generateEnchantmentUpgradeRecipes(ctx, "vanilla", Enchantments.BANE_OF_ARTHROPODS, SpectrumAdvancements.ENCHANTMENTS_VANILLA_DAMAGE, SpectrumItems.BLACK_PIGMENT, new int[][]{{100, 8}, {200, 16}, {300, 32}, {400, 64}, {800, 128}, {1200, 256}, {2000, 512}});

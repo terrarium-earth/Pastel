@@ -11,7 +11,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 20,
-              "treasure": true,
+              "options": "#minecraft:on_random_loot",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
@@ -29,7 +29,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 15,
-              "treasure": true,
+              "options": "#minecraft:on_random_loot",
               "conditions": [
                 {
                   "condition": "minecraft:random_chance",
@@ -49,8 +49,8 @@
               "options": [
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -68,13 +68,14 @@
                         }
                       }
                     },
-                    "count": 185
+                    "count": 185,
+                    "locked": false
                   }
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -92,13 +93,14 @@
                         }
                       }
                     },
-                    "count": 39
+                    "count": 39,
+                    "locked": false
                   }
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -116,13 +118,14 @@
                         }
                       }
                     },
-                    "count": 241
+                    "count": 241,
+                    "locked": false
                   }
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -140,13 +143,14 @@
                         }
                       }
                     },
-                    "count": 72
+                    "count": 72,
+                    "locked": false
                   }
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -164,13 +168,14 @@
                         }
                       }
                     },
-                    "count": 106
+                    "count": 106,
+                    "locked": false
                   }
                 },
                 {
                   "spectrum:bottomless_stack": {
-                    "template": {
-                      "id": "minecraft:tipped_arrow",
+                    "variant": {
+                      "item": "minecraft:tipped_arrow",
                       "components": {
                         "potion_contents": {
                           "potion": "spectrum:pigment_potion",
@@ -188,7 +193,8 @@
                         }
                       }
                     },
-                    "count": 17
+                    "count": 17,
+                    "locked": false
                   }
                 }
               ]

@@ -27,7 +27,7 @@ public class ColorSelectionWidget extends ClickableWidget {
 	protected final ColorPickerBlockEntity colorPicker;
 	
 	@Nullable
-	private Consumer<RegistryEntry<InkColor>> changedListener;
+	private Consumer<Optional<RegistryEntry<InkColor>>> changedListener;
 	protected final Screen screen;
 	
 	final List<Pair<InkColor, Boolean>> usableColors = new ArrayList<>(); // stores if a certain color should be displayed
@@ -51,11 +51,11 @@ public class ColorSelectionWidget extends ClickableWidget {
 		}
 	}
 	
-	public void setChangedListener(@Nullable Consumer<RegistryEntry<InkColor>> changedListener) {
+	public void setChangedListener(@Nullable Consumer<Optional<RegistryEntry<InkColor>>> changedListener) {
 		this.changedListener = changedListener;
 	}
 	
-	private void onChanged(RegistryEntry<InkColor> newColor) {
+	private void onChanged(Optional<RegistryEntry<InkColor>> newColor) {
 		if (this.changedListener != null) {
 			this.changedListener.accept(newColor);
 		}
@@ -80,8 +80,7 @@ public class ColorSelectionWidget extends ClickableWidget {
 		}
 		
 		// draw currently selected icon
-		this.colorPicker.getSelectedColor().ifPresent(inkColor ->
-				fillQuad(context.getMatrices(), selectedDotX, selectedDotY, 4, 4, inkColor.getColorVec()));
+		this.colorPicker.getSelectedColor().ifPresent(inkColor -> fillQuad(context.getMatrices(), selectedDotX, selectedDotY, 4, 4, inkColor.value().getColorVec()));
 	}
 	
 	@Override
@@ -91,7 +90,7 @@ public class ColorSelectionWidget extends ClickableWidget {
 		
 		if (isUnselection(mouseX, mouseY)) {
 			client.player.playSound(SpectrumSoundEvents.BUTTON_CLICK, 1.0F, 1.0F);
-			onChanged(null);
+			onChanged(Optional.empty());
 		}
 		
 		boolean colorSelectionClicked = mouseX >= (double) this.getX() && mouseX < (double) (this.getX() + this.width) && mouseY >= (double) this.getY() && mouseY < (double) (this.getY() + this.height);
@@ -106,10 +105,10 @@ public class ColorSelectionWidget extends ClickableWidget {
 			var clickedColor = usableColors.get(newColorIndex);
 			if (clickedColor.getRight()) {
 				client.player.playSound(SpectrumSoundEvents.BUTTON_CLICK, 1.0F, 1.0F);
-				onChanged(SpectrumRegistries.INK_COLOR.getEntry(clickedColor.getLeft()));
+				onChanged(Optional.of(SpectrumRegistries.INK_COLOR.getEntry(clickedColor.getLeft())));
 			} else {
 				client.player.playSound(SpectrumSoundEvents.USE_FAIL, 1.0F, 1.0F);
-				onChanged(null);
+				onChanged(Optional.empty());
 			}
 			
 			return true;

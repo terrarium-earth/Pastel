@@ -3,7 +3,7 @@
     "broken_nightdew": {
       "trigger": "spectrum:block_broken",
       "conditions": {
-        "broken_block": {
+        "block": {
           "blocks": "spectrum:nightdew"
         }
       }

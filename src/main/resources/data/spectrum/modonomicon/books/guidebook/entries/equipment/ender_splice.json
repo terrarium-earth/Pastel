@@ -58,7 +58,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/resonance": 1
+          "spectrum:resonance": 1
         }
       },
       "text": "book.spectrum.guidebook.ender_splice.page3.text"

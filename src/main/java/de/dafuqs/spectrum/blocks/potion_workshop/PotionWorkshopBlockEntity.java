@@ -4,6 +4,7 @@ package de.dafuqs.spectrum.blocks.potion_workshop;
 import de.dafuqs.revelationary.api.advancements.*;
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.item.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.progression.*;
@@ -245,7 +246,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 		
 		// calculate outputs
 		ItemStack bottles = potionWorkshopBlockEntity.inventory.get(BASE_INPUT_SLOT_ID);
-		List<ItemStack> results = brewingRecipe.value().getPotions(bottles, potionMod, potionWorkshopBlockEntity.lastBrewedRecipe.value(), world.random, brewedAmount);
+		List<ItemStack> results = brewingRecipe.value().getPotions(bottles, potionMod, potionWorkshopBlockEntity.lastBrewedRecipe, world.random, brewedAmount);
 		
 		// consume ingredients
 		decrementIngredientSlots(potionWorkshopBlockEntity);
@@ -285,7 +286,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 		
 		// calculate outputs
 		ItemStack arrows = potionWorkshopBlockEntity.inventory.get(BASE_INPUT_SLOT_ID);
-		ItemStack tippedArrows = brewingRecipe.value().getTippedArrows(arrows, potionMod, potionWorkshopBlockEntity.lastBrewedRecipe.value(), tippedAmount, world.random);
+		ItemStack tippedArrows = brewingRecipe.value().getTippedArrows(arrows, potionMod, potionWorkshopBlockEntity.lastBrewedRecipe, tippedAmount, world.random);
 		
 		// consume ingredients
 		decrementIngredientSlots(potionWorkshopBlockEntity);
@@ -321,7 +322,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements NamedScree
 				return;
 			}
 			
-			brewingRecipe.value().fillPotionFillable(potionFillableStack, potionMod, potionWorkshopBlockEntity.lastBrewedRecipe.value(), potionWorkshopBlockEntity.world.random);
+			brewingRecipe.value().fillPotionFillable(potionFillableStack, potionMod, potionWorkshopBlockEntity.lastBrewedRecipe, potionWorkshopBlockEntity.world.random);
 			potionWorkshopBlockEntity.inventory.set(BASE_INPUT_SLOT_ID, ItemStack.EMPTY);
 			InventoryHelper.addToInventory(potionWorkshopBlockEntity.inventory, potionFillableStack, FIRST_INVENTORY_SLOT, FIRST_INVENTORY_SLOT + INVENTORY_SLOT_COUNT);
 			

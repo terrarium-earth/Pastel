@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/inventory_insertion": 1
+          "spectrum:inventory_insertion": 1
         }
       },
       "text": "book.spectrum.guidebook.inventory_insertion.page1.text"

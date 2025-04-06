@@ -8,6 +8,7 @@ import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.registries.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.minecraft.block.*;
 import net.minecraft.item.*;
 import net.minecraft.network.*;
@@ -27,6 +28,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 	public static final Identifier UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/crystallarieum");
 	
 	protected final static Map<BlockState, RecipeEntry<CrystallarieumRecipe>> STATE_CACHE = new HashMap<>();
+	protected static final FluidVariant LIQUID_CRYSTAL = FluidVariant.of(SpectrumFluids.LIQUID_CRYSTAL);
 	
 	protected final Ingredient ingredient;
 	protected final List<BlockState> growthStages;
@@ -35,9 +37,10 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 	protected final int inkPerSecond;
 	protected final boolean growsWithoutCatalyst;
 	protected final List<CrystallarieumCatalyst> catalysts;
+	protected final FluidVariant medium;
 	protected final List<ItemStack> additionalResults; // these aren't actual results, but recipe managers will treat it as such, showing this recipe as a way to get them. Use for drops of the growth blocks, for example
 	
-	public CrystallarieumRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, Ingredient ingredient, List<BlockState> growthStages, int secondsPerGrowthStage, InkColor inkColor, int inkPerSecond, boolean growsWithoutCatalyst, List<CrystallarieumCatalyst> catalysts, List<ItemStack> additionalResults) {
+	public CrystallarieumRecipe(String group, boolean secret, Optional<Identifier> requiredAdvancementIdentifier, Ingredient ingredient, List<BlockState> growthStages, int secondsPerGrowthStage, InkColor inkColor, int inkPerSecond, boolean growsWithoutCatalyst, List<CrystallarieumCatalyst> catalysts, FluidVariant medium, List<ItemStack> additionalResults) {
 		super(group, secret, requiredAdvancementIdentifier);
 		
 		this.ingredient = ingredient;
@@ -47,6 +50,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 		this.inkPerSecond = inkPerSecond;
 		this.growsWithoutCatalyst = growsWithoutCatalyst;
 		this.catalysts = catalysts;
+		this.medium = medium;
 		this.additionalResults = additionalResults;
 		
 		registerInToastManager(getType(), this);
@@ -118,6 +122,10 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 		return defaultedList;
 	}
 	
+	public FluidVariant getFluidMedium() {
+		return medium;
+	}
+	
 	public Ingredient getIngredientStack() {
 		return ingredient;
 	}
@@ -187,6 +195,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 				).fieldOf("ink_cost_tier").forGetter(recipe -> recipe.inkPerSecond),
 				Codec.BOOL.optionalFieldOf("grows_without_catalyst", false).forGetter(recipe -> recipe.growsWithoutCatalyst),
 				CrystallarieumCatalyst.CODEC.listOf().fieldOf("catalysts").forGetter(recipe -> recipe.catalysts),
+				FluidVariant.CODEC.optionalFieldOf("fluid_medium", LIQUID_CRYSTAL).forGetter(recipe -> recipe.medium),
 				ItemStack.CODEC.listOf().optionalFieldOf("additional_recipe_manager_results", ImmutableList.of()).forGetter(recipe -> recipe.additionalResults)
 		).apply(i, CrystallarieumRecipe::new));
 		
@@ -201,6 +210,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 				PacketCodecs.VAR_INT, recipe -> recipe.inkPerSecond,
 				PacketCodecs.BOOL, recipe -> recipe.growsWithoutCatalyst,
 				CrystallarieumCatalyst.PACKET_CODEC.collect(PacketCodecs.toList()), recipe -> recipe.catalysts,
+				FluidVariant.PACKET_CODEC, recipe -> recipe.medium,
 				ItemStack.PACKET_CODEC.collect(PacketCodecs.toList()), recipe -> recipe.additionalResults,
 				CrystallarieumRecipe::new
 		);

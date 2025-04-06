@@ -235,6 +235,12 @@
     "spectrum:skeleton_horse_wall_head",
     "spectrum:zombie_horse_wall_head",
     "spectrum:dolphin_wall_head",
-    "spectrum:pillager_wall_head"
+    "spectrum:pillager_wall_head",
+    "spectrum:armadillo_head",
+    "spectrum:breeze_head",
+    "spectrum:bogged_head",
+    "spectrum:armadillo_wall_head",
+    "spectrum:breeze_wall_head",
+    "spectrum:bogged_wall_head"
   ]
 }

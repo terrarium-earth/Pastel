@@ -24,7 +24,7 @@
     "id": "spectrum:resonant_pickaxe",
     "components": {
       "enchantments": {
-        "spectrum:cloaked/resonance": 1
+        "spectrum:resonance": 1
       }
     },
     "count": 1

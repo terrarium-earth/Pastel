@@ -6,7 +6,7 @@
       "components": {
         "minecraft:enchantments": {
           "levels": {
-            "spectrum:cloaked/resonance": 1
+            "spectrum:resonance": 1
           }
         }
       }

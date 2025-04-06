@@ -1,16 +1,17 @@
 {
-  "anvil_cost": 0,
   "description": {
     "translate": "enchantment.spectrum.razing"
   },
+  "effects": {},
+  "anvil_cost": 2,
   "exclusive_set": "#spectrum:exclusive_set/razing",
   "max_cost": {
-    "base": 0,
+    "base": 30,
     "per_level_above_first": 0
   },
   "max_level": 3,
   "min_cost": {
-    "base": 0,
+    "base": 20,
     "per_level_above_first": 0
   },
   "slots": [

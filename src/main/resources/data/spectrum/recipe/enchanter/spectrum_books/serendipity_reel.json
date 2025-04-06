@@ -35,7 +35,7 @@
     "id": "minecraft:enchanted_book",
     "components": {
       "stored_enchantments": {
-        "spectrum:cloaked/serendipity_reel": 1
+        "spectrum:serendipity_reel": 1
       }
     }
   },
@@ -44,7 +44,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/serendipity_reel"
+        "spectrum:serendipity_reel"
       ]
     }
   ]

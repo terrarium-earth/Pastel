@@ -157,6 +157,7 @@ public class SpectrumBlockEntities {
 	
 	public static void registerClient() {
 		BlockEntityRendererFactories.register(SpectrumBlockEntities.PEDESTAL, PedestalBlockEntityRenderer::new);
+		BlockEntityRendererFactories.register(SpectrumBlockEntities.BOTTOMLESS_BUNDLE, BottomlessBundleBlockEntityRenderer::new);
 		BlockEntityRendererFactories.register(SpectrumBlockEntities.HEARTBOUND_CHEST, HeartboundChestBlockEntityRenderer::new);
 		BlockEntityRendererFactories.register(SpectrumBlockEntities.COMPACTING_CHEST, CompactingChestBlockEntityRenderer::new);
 		BlockEntityRendererFactories.register(SpectrumBlockEntities.FABRICATION_CHEST, FabricationChestBlockEntityRenderer::new);

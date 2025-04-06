@@ -28,7 +28,7 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
 		add(IngredientStack.ofItems(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.asItem()));
-		add(IngredientStack.ofItems(4, SpectrumItems.GLASS_PEACH));
+		add(IngredientStack.ofItems(SpectrumItems.GLASS_PEACH, 4));
 	}};
 	
 	public NecteredViognierRecipe() {

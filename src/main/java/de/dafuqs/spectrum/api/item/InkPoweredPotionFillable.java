@@ -23,7 +23,8 @@ public interface InkPoweredPotionFillable {
 	// saving
 	default void addOrUpgradeEffects(ItemStack potionFillableStack, List<InkPoweredStatusEffectInstance> newEffects) {
 		if (!isFull(potionFillableStack)) {
-			List<InkPoweredStatusEffectInstance> existingEffects = InkPoweredStatusEffectInstance.getEffects(potionFillableStack);
+			// by default, values are immutable, so we need to copy the values to an arraylist to be able to add stuff to it
+			List<InkPoweredStatusEffectInstance> existingEffects = new ArrayList<>(InkPoweredStatusEffectInstance.getEffects(potionFillableStack));
 			int maxCount = maxEffectCount();
 			int maxAmplifier = maxEffectAmplifier();
 			for (InkPoweredStatusEffectInstance newEffect : newEffects) {

@@ -6,6 +6,7 @@ import de.dafuqs.spectrum.recipe.crystallarieum.*;
 import de.dafuqs.spectrum.registries.*;
 import dev.emi.emi.api.stack.*;
 import dev.emi.emi.api.widget.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 
@@ -32,7 +33,8 @@ public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<Crystal
 	
 	@Override
 	public void addUnlockedWidgets(WidgetHolder widgets) {
-		widgets.addSlot(inputs.getFirst(), 0, 8);
+		widgets.addSlot(inputs.getFirst(), 0, 0);
+		widgets.addSlot(EmiStack.of(recipe.getFluidMedium().getFluid()), 0, 18);
 		
 		widgets.addSlot(EmiStack.of(SpectrumBlocks.CRYSTALLARIEUM.asStackWithColor(recipe.getInkColor())), 20, 18).drawBack(false);
 		
@@ -58,18 +60,50 @@ public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<Crystal
 			CrystallarieumCatalyst catalyst = catalysts.get(i);
 			int xOff = 46 + 18 * i;
 			widgets.addSlot(EmiIngredient.of(catalyst.ingredient()), xOff, 38);
+			int offset = 0;
+			float accel = catalyst.growthAccelerationMod();
 			
-			float growthAcceleration = catalyst.growthAccelerationMod();
-			int uOff = growthAcceleration == 1 ? 97 : growthAcceleration >= 6 ? 85 : growthAcceleration > 1 ? 67 : growthAcceleration <= 0.25 ? 79 : 73;
-			widgets.addTexture(BACKGROUND_TEXTURE, xOff + 5, 59, 6, 6, uOff, 0, 6, 6, 128, 128);
+			if (accel > 0.2) {
+				if (accel >= 5)
+					offset = 7 * 4;
+				else if (accel > 1)
+					offset = 7 * 3;
+				else if(accel == 1)
+					offset = 7 * 2;
+				else if (accel < 1)
+					offset = 7;
+			}
+			widgets.addTexture(BACKGROUND_TEXTURE, xOff + 5, 59, 7, 7, 70 + offset, 0, 7, 7, 128, 128);
 			
-			float inkConsumption = catalyst.inkConsumptionMod();
-			uOff = inkConsumption == 1 ? 97 : inkConsumption >= 8 ? 85 : inkConsumption > 1 ? 67 : inkConsumption <= 0.25 ? 79 : 73;
-			widgets.addTexture(BACKGROUND_TEXTURE, xOff + 5, 69, 6, 6, uOff, 6, 6, 6, 128, 128);
+			float drain = catalyst.inkConsumptionMod();
 			
-			float consumeChance = catalyst.consumeChancePerSecond();
-			uOff = consumeChance == 0 ? 97 : consumeChance >= 0.2 ? 85 : consumeChance >= 0.05 ? 67 : 91;
-			widgets.addTexture(BACKGROUND_TEXTURE, xOff + 5, 79, 6, 6, uOff, 6, 6, 6, 128, 128);
+			if (drain >= 5)
+				offset = 0;
+			else if (drain > 1)
+				offset = 7;
+			else if(drain == 1)
+				offset = 7 * 2;
+			else if (drain < 0.2)
+				offset = 7 * 4;
+			else if (drain < 1)
+				offset = 7 * 3;
+			
+			widgets.addTexture(BACKGROUND_TEXTURE, xOff + 5, 69, 7, 7, 70 + offset, 7, 7, 7, 128, 128);
+			
+			float chance = catalyst.consumeChancePerSecond();
+			
+			if (chance >= 0.25)
+				offset = 0;
+			else if (chance < 0.0001)
+				offset = 7 * 4;
+			else if (chance <= 0.02)
+				offset = 7 * 3;
+			else if(chance < 0.05)
+				offset = 7 * 2;
+			else if (chance < 0.25)
+				offset = 7;
+			
+			widgets.addTexture(BACKGROUND_TEXTURE, xOff + 5, 79, 7, 7, 70 + offset, 14, 7, 7, 128, 128);
 		}
 		
 		if (recipe.growsWithoutCatalyst()) {

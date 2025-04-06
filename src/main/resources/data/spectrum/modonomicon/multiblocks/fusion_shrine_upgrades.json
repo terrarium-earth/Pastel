@@ -75,7 +75,7 @@
     },
     "S": {
       "type": "modonomicon:tag",
-      "display": "spectrum:amethyst_storage_block",
+      "display": "spectrum:polished_amethyst_block",
       "tag": "#spectrum:structure/gemstones"
     },
     "C": {

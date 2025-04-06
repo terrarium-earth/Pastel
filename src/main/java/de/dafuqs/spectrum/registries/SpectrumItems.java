@@ -1,5 +1,12 @@
 package de.dafuqs.spectrum.registries;
 
+import java.util.*;
+import java.util.function.*;
+
+import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
+import static net.minecraft.item.Items.*;
+
 import de.dafuqs.revelationary.api.revelations.*;
 import de.dafuqs.spectrum.api.color.*;
 import de.dafuqs.spectrum.api.energy.color.*;
@@ -14,8 +21,9 @@ import de.dafuqs.spectrum.data.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.items.*;
 import de.dafuqs.spectrum.items.armor.*;
-import de.dafuqs.spectrum.items.conditional.CloakedItem;
+import de.dafuqs.spectrum.items.bundles.*;
 import de.dafuqs.spectrum.items.conditional.*;
+import de.dafuqs.spectrum.items.conditional.CloakedItem;
 import de.dafuqs.spectrum.items.energy.*;
 import de.dafuqs.spectrum.items.food.*;
 import de.dafuqs.spectrum.items.food.beverages.*;
@@ -42,13 +50,6 @@ import net.minecraft.sound.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
-
-import java.util.*;
-import java.util.function.*;
-
-import static de.dafuqs.spectrum.SpectrumCommon.*;
-import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
-import static net.minecraft.item.Items.*;
 
 public class SpectrumItems {
 	
@@ -100,63 +101,63 @@ public class SpectrumItems {
 	public static final Item BLACK_PIGMENT = register(simple(item("black_pigment", new PigmentItem(IS.of(), InkColors.YELLOW, YELLOW_DYE), InkColors.BLACK)));
 	
 	// Preenchanted tools
-	public static final Item MULTITOOL = register(handheld(item("multitool", new PreenchantedMultiToolItem(ToolMaterials.IRON, 2, -2.4F, IS.of(Rarity.UNCOMMON).maxDamage(ToolMaterials.IRON.getDurability())), InkColors.BROWN)));
-	public static final Item TENDER_PICKAXE = register(handheld(item("tender_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
+	public static final PreenchantedMultiToolItem MULTITOOL = register(handheld(item("multitool", new PreenchantedMultiToolItem(ToolMaterials.IRON, 2, -2.4F, IS.of(Rarity.UNCOMMON).maxDamage(ToolMaterials.IRON.getDurability())), InkColors.BROWN)));
+	public static final GlintlessPickaxe TENDER_PICKAXE = register(handheld(item("tender_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.SILK_TOUCH, 1);
 		}
 	}, InkColors.BLUE)));
-	public static final Item LUCKY_PICKAXE = register(handheld(item("lucky_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
+	public static final GlintlessPickaxe LUCKY_PICKAXE = register(handheld(item("lucky_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.FORTUNE, 3);
 		}
 	}, InkColors.LIGHT_BLUE)));
-	public static final Item RAZOR_FALCHION = register(handheld(item("razor_falchion", new RazorFalchionItem(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 4, -2.2F))), InkColors.RED)));
-	public static final Item OBLIVION_PICKAXE = register(handheld(item("oblivion_pickaxe", new OblivionPickaxeItem(SpectrumToolMaterial.VOIDING, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VOIDING.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.VOIDING, 1, -2.8F))), InkColors.GRAY)));
-	public static final Item RESONANT_PICKAXE = register(handheld(item("resonant_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, 1, -2.8F))) {
+	public static final RazorFalchionItem RAZOR_FALCHION = register(handheld(item("razor_falchion", new RazorFalchionItem(SpectrumToolMaterial.LOW_HEALTH, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH, 4, -2.2F))), InkColors.RED)));
+	public static final OblivionPickaxeItem OBLIVION_PICKAXE = register(handheld(item("oblivion_pickaxe", new OblivionPickaxeItem(SpectrumToolMaterial.VOIDING, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VOIDING.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.VOIDING, 1, -2.8F))), InkColors.GRAY)));
+	public static final GlintlessPickaxe RESONANT_PICKAXE = register(handheld(item("resonant_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.LOW_HEALTH.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.LOW_HEALTH_MINING_LEVEL_4, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
-			return Map.of(SpectrumEnchantments.CLOAKED_RESONANCE, 1);
+			return Map.of(SpectrumEnchantments.RESONANCE, 1);
 		}
 	}, InkColors.WHITE)));
-	public static final Item DRAGONRENDING_PICKAXE = register(handheld(item("dragonrending_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.DRACONIC, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.DRACONIC, 1, -2.8F))) {
+	public static final GlintlessPickaxe DRAGONRENDING_PICKAXE = register(handheld(item("dragonrending_pickaxe", new GlintlessPickaxe(SpectrumToolMaterial.DRACONIC, IS.of(Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability()).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.DRACONIC, 1, -2.8F))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
-			return Map.of(SpectrumEnchantments.CLOAKED_RAZING, 3);
+			return Map.of(SpectrumEnchantments.RAZING, 3);
 		}
 	}, InkColors.WHITE)));
-	public static final SpectrumFishingRodItem LAGOON_ROD = register(item("lagoon_rod", new LagoonRodItem(IS.of().maxDamage(256)), InkColors.LIGHT_BLUE));
-	public static final SpectrumFishingRodItem MOLTEN_ROD = register(item("molten_rod", new MoltenRodItem(IS.of().maxDamage(256)), InkColors.ORANGE));
+	public static final LagoonRodItem LAGOON_ROD = register(item("lagoon_rod", new LagoonRodItem(IS.of().maxDamage(256)), InkColors.LIGHT_BLUE));
+	public static final MoltenRodItem MOLTEN_ROD = register(item("molten_rod", new MoltenRodItem(IS.of().maxDamage(256)), InkColors.ORANGE));
 	
 	// Bedrock Tools
-	public static final Item BEDROCK_PICKAXE = register(handheld(item("bedrock_pickaxe", new SpectrumPickaxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -2.8F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
+	public static final SpectrumPickaxeItem BEDROCK_PICKAXE = register(handheld(item("bedrock_pickaxe", new SpectrumPickaxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(PickaxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -2.8F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.SILK_TOUCH, 1);
 		}
 	}, InkColors.BLACK)));
-	public static final Item BEDROCK_AXE = register(item("bedrock_axe", new BedrockAxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(AxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 5, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
-	public static final Item BEDROCK_SHOVEL = register(handheld(item("bedrock_shovel", new BedrockShovelItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(ShovelItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
-	public static final Item BEDROCK_SWORD = register(item("bedrock_sword", new BedrockSwordItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 4, -2.4F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
-	public static final Item BEDROCK_HOE = register(handheld(item("bedrock_hoe", new BedrockHoeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(HoeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 2, -0.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
-	public static final Item BEDROCK_BOW = register(item("bedrock_bow", new BedrockBowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
-	public static final Item BEDROCK_CROSSBOW = register(item("bedrock_crossbow", new BedrockCrossbowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
-	public static final Item BEDROCK_SHEARS = register(simple(item("bedrock_shears", new BedrockShearsItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
-	public static final Item BEDROCK_FISHING_ROD = register(item("bedrock_fishing_rod", new BedrockFishingRodItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
+	public static final BedrockAxeItem BEDROCK_AXE = register(item("bedrock_axe", new BedrockAxeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(AxeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 5, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
+	public static final BedrockShovelItem BEDROCK_SHOVEL = register(handheld(item("bedrock_shovel", new BedrockShovelItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(ShovelItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 1, -3.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
+	public static final BedrockSwordItem BEDROCK_SWORD = register(item("bedrock_sword", new BedrockSwordItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(SwordItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 4, -2.4F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
+	public static final BedrockHoeItem BEDROCK_HOE = register(handheld(item("bedrock_hoe", new BedrockHoeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(HoeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 2, -0.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
+	public static final BedrockBowItem BEDROCK_BOW = register(item("bedrock_bow", new BedrockBowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
+	public static final BedrockCrossbowItem BEDROCK_CROSSBOW = register(item("bedrock_crossbow", new BedrockCrossbowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
+	public static final BedrockShearsItem BEDROCK_SHEARS = register(simple(item("bedrock_shears", new BedrockShearsItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
+	public static final BedrockFishingRodItem BEDROCK_FISHING_ROD = register(item("bedrock_fishing_rod", new BedrockFishingRodItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
 	
-	public static final Item MALACHITE_WORKSTAFF = register(item("malachite_workstaff", new WorkstaffItem(SpectrumToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN));
-	public static final Item MALACHITE_ULTRA_GREATSWORD = register(item("malachite_ultra_greatsword", new GreatswordItem(SpectrumToolMaterial.MALACHITE, 7, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN));
-	public static final Item MALACHITE_CROSSBOW = register(item("malachite_crossbow", new MalachiteCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.MALACHITE.getDurability())), InkColors.GREEN));
-	public static final Item MALACHITE_BIDENT = register(item("malachite_bident", new MalachiteBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.MALACHITE.getDurability()), -2.4, 9, 0.25F, 0F), InkColors.GREEN));
+	public static final WorkstaffItem MALACHITE_WORKSTAFF = register(item("malachite_workstaff", new WorkstaffItem(SpectrumToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN));
+	public static final GreatswordItem MALACHITE_ULTRA_GREATSWORD = register(item("malachite_ultra_greatsword", new GreatswordItem(SpectrumToolMaterial.MALACHITE, 7, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN));
+	public static final MalachiteCrossbowItem MALACHITE_CROSSBOW = register(item("malachite_crossbow", new MalachiteCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.MALACHITE.getDurability())), InkColors.GREEN));
+	public static final MalachiteBidentItem MALACHITE_BIDENT = register(item("malachite_bident", new MalachiteBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.MALACHITE.getDurability()), -2.4, 9, 0.25F, 0F), InkColors.GREEN));
 	
 	// variants by socketing a moonstone core
-	public static final Item GLASS_CREST_WORKSTAFF = register(item("glass_crest_workstaff", new GlassCrestWorkstaffItem(SpectrumToolMaterial.GLASS_CREST, 1, -2.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE));
-	public static final Item GLASS_CREST_ULTRA_GREATSWORD = register(item("glass_crest_ultra_greatsword", new GlassCrestGreatswordItem(SpectrumToolMaterial.GLASS_CREST, 5, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE));
-	public static final Item GLASS_CREST_CROSSBOW = register(item("glass_crest_crossbow", new GlassCrestCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability())), InkColors.WHITE));
-	public static final Item FEROCIOUS_GLASS_CREST_BIDENT = register(item("ferocious_glass_crest_bident", new FerociousBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.2, 13, 0.33F, 0.33F), InkColors.WHITE));
-	public static final Item FRACTAL_GLASS_CREST_BIDENT = register(item("fractal_glass_crest_bident", new FractalBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.4, 6.5, 0.25F, 0.25F), InkColors.WHITE));
+	public static final GlassCrestWorkstaffItem GLASS_CREST_WORKSTAFF = register(item("glass_crest_workstaff", new GlassCrestWorkstaffItem(SpectrumToolMaterial.GLASS_CREST, 1, -2.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE));
+	public static final GlassCrestGreatswordItem GLASS_CREST_ULTRA_GREATSWORD = register(item("glass_crest_ultra_greatsword", new GlassCrestGreatswordItem(SpectrumToolMaterial.GLASS_CREST, 5, -2.8F, 1.0F, IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE));
+	public static final GlassCrestCrossbowItem GLASS_CREST_CROSSBOW = register(item("glass_crest_crossbow", new GlassCrestCrossbowItem(IS.of(1, Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability())), InkColors.WHITE));
+	public static final FerociousBidentItem FEROCIOUS_GLASS_CREST_BIDENT = register(item("ferocious_glass_crest_bident", new FerociousBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.2, 13, 0.33F, 0.33F), InkColors.WHITE));
+	public static final FractalBidentItem FRACTAL_GLASS_CREST_BIDENT = register(item("fractal_glass_crest_bident", new FractalBidentItem(IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.GLASS_CREST.getDurability()), -2.4, 6.5, 0.25F, 0.25F), InkColors.WHITE));
 	
 	public static final Item MALACHITE_GLASS_ARROW = register(simple(item("malachite_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.MALACHITE, ColoredCraftingParticleEffect.LIME), InkColors.GREEN)));
 	public static final Item TOPAZ_GLASS_ARROW = register(simple(item("topaz_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.TOPAZ, ColoredCraftingParticleEffect.CYAN), InkColors.CYAN)));
@@ -165,7 +166,7 @@ public class SpectrumItems {
 	public static final Item ONYX_GLASS_ARROW = register(simple(item("onyx_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.ONYX, ColoredCraftingParticleEffect.BLACK), InkColors.BLACK)));
 	public static final Item MOONSTONE_GLASS_ARROW = register(simple(item("moonstone_glass_arrow", new GlassArrowItem(IS.of(Rarity.UNCOMMON), GlassArrowVariant.MOONSTONE, ColoredCraftingParticleEffect.WHITE), InkColors.WHITE)));
 	
-	public static final Item OMNI_ACCELERATOR = register(item("omni_accelerator", new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW));
+	public static final Item OMNI_ACCELERATOR = register(item("omni_accelerator", new OmniAcceleratorItem(IS.of(1, Rarity.UNCOMMON).component(DataComponentTypes.BUNDLE_CONTENTS, BundleContentsComponent.DEFAULT)), InkColors.YELLOW));
 	
 	public static final Item AZURITE_GLASS_AMPOULE = register(simple(item("azurite_glass_ampoule", new AzuriteGlassAmpouleItem(IS.of(Rarity.UNCOMMON)), InkColors.BLUE)));
 	public static final Item BLOODSTONE_GLASS_AMPOULE = register(simple(item("bloodstone_glass_ampoule", new BloodstoneGlassAmpouleItem(IS.of(Rarity.UNCOMMON).attributeModifiers(BloodstoneGlassAmpouleItem.createAttributeModifiers())), InkColors.RED)));
@@ -173,33 +174,33 @@ public class SpectrumItems {
 	
 	// Special tools
 	// TODO: set attribute modifiers similarly to how vanilla swords do it
-	public static final Item DREAMFLAYER = register(item("dreamflayer", new DreamflayerItem(SpectrumToolMaterial.DREAMFLAYER, 3, -1.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.RED));
-	public static final Item NIGHTFALLS_BLADE = register(item("nightfalls_blade", new NightfallsBladeItem(ToolMaterials.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)), InkColors.GRAY).withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, SpectrumModels.HANDHELD_THREE_LAYERS, "", "_tint", "_overlay")));
+	public static final DreamflayerItem DREAMFLAYER = register(item("dreamflayer", new DreamflayerItem(SpectrumToolMaterial.DREAMFLAYER, 3, -1.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.RED));
+	public static final NightfallsBladeItem NIGHTFALLS_BLADE = register(item("nightfalls_blade", new NightfallsBladeItem(ToolMaterials.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)), InkColors.GRAY).withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, SpectrumModels.HANDHELD_THREE_LAYERS, "", "_tint", "_overlay")));
 	public static final DraconicTwinswordItem DRACONIC_TWINSWORD = register(item("draconic_twinsword", new DraconicTwinswordItem(SpectrumToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)), InkColors.YELLOW));
 	public static final DragonTalonItem DRAGON_TALON = register(item("dragon_talon", new DragonTalonItem(SpectrumToolMaterial.DRACONIC, -3.0, -1.0, IS.of(1, Rarity.RARE).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability())), InkColors.YELLOW));
 	public static final LightGreatswordItem KNOTTED_SWORD = register(item("knotted_sword", new LightGreatswordItem(SpectrumToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff, IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VERDIGRIS.getDurability())), InkColors.GREEN));
-	public static final LightGreatswordItem NECTAR_LANCE = register(item("nectar_lance", new NectarLanceItem(SpectrumToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff, IS.of(1, Rarity.EPIC).maxDamage(SpectrumToolMaterial.NECTAR.getDurability())), InkColors.PURPLE));
+	public static final NectarLanceItem NECTAR_LANCE = register(item("nectar_lance", new NectarLanceItem(SpectrumToolMaterial.NECTAR, 0, -2.4F, 0.5F, 1.5F, 0xFFf8e8ff, IS.of(1, Rarity.EPIC).maxDamage(SpectrumToolMaterial.NECTAR.getDurability())), InkColors.PURPLE));
 	
 	// Bedrock Armor
-	public static final Item BEDROCK_HELMET = register(simple(item("bedrock_helmet", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 13).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
+	public static final BedrockArmorItem BEDROCK_HELMET = register(simple(item("bedrock_helmet", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 13).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.PROJECTILE_PROTECTION, 5);
 		}
 	}, InkColors.BLACK)));
-	public static final Item BEDROCK_CHESTPLATE = register(simple(item("bedrock_chestplate", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.CHESTPLATE, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 15).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
+	public static final BedrockArmorItem BEDROCK_CHESTPLATE = register(simple(item("bedrock_chestplate", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.CHESTPLATE, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 15).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.PROTECTION, 5);
 		}
 	}, InkColors.BLACK)));
-	public static final Item BEDROCK_LEGGINGS = register(simple(item("bedrock_leggings", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.LEGGINGS, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 16).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
+	public static final BedrockArmorItem BEDROCK_LEGGINGS = register(simple(item("bedrock_leggings", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.LEGGINGS, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 16).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.BLAST_PROTECTION, 5);
 		}
 	}, InkColors.BLACK)));
-	public static final Item BEDROCK_BOOTS = register(simple(item("bedrock_boots", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.BOOTS, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 11).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
+	public static final BedrockArmorItem BEDROCK_BOOTS = register(simple(item("bedrock_boots", new BedrockArmorItem(SpectrumArmorMaterials.BEDROCK, ArmorItem.Type.BOOTS, IS.of(Rarity.UNCOMMON).fireproof().maxDamage(70 * 11).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))) {
 		@Override
 		public Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments() {
 			return Map.of(Enchantments.FIRE_PROTECTION, 5);
@@ -207,10 +208,10 @@ public class SpectrumItems {
 	}, InkColors.BLACK)));
 	
 	// Armor
-	public static final Item FETCHLING_HELMET = register(simple(item("fetchling_helmet", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON).maxDamage(9 * 13)), InkColors.BLUE)));
-	public static final Item FEROCIOUS_CHESTPLATE = register(simple(item("ferocious_chestplate", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.CHESTPLATE, IS.of(Rarity.UNCOMMON).maxDamage(9 * 15)), InkColors.BLUE)));
-	public static final Item SYLPH_LEGGINGS = register(simple(item("sylph_leggings", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.LEGGINGS, IS.of(Rarity.UNCOMMON).maxDamage(9 * 16)), InkColors.BLUE)));
-	public static final Item OREAD_BOOTS = register(simple(item("oread_boots", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.BOOTS, IS.of(Rarity.UNCOMMON).maxDamage(9 * 11)), InkColors.BLUE)));
+	public static final GemstoneArmorItem FETCHLING_HELMET = register(simple(item("fetchling_helmet", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.HELMET, IS.of(Rarity.UNCOMMON).maxDamage(9 * 13)), InkColors.BLUE)));
+	public static final GemstoneArmorItem FEROCIOUS_CHESTPLATE = register(simple(item("ferocious_chestplate", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.CHESTPLATE, IS.of(Rarity.UNCOMMON).maxDamage(9 * 15)), InkColors.BLUE)));
+	public static final GemstoneArmorItem SYLPH_LEGGINGS = register(simple(item("sylph_leggings", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.LEGGINGS, IS.of(Rarity.UNCOMMON).maxDamage(9 * 16)), InkColors.BLUE)));
+	public static final GemstoneArmorItem OREAD_BOOTS = register(simple(item("oread_boots", new GemstoneArmorItem(SpectrumArmorMaterials.GEMSTONE, ArmorItem.Type.BOOTS, IS.of(Rarity.UNCOMMON).maxDamage(9 * 11)), InkColors.BLUE)));
 	
 	// Decay drops
 	public static final Item VEGETAL = register(simple(burnable(item("vegetal", new CloakedItemWithLoomPattern(IS.of(), SpectrumAdvancements.CRAFT_BOTTLE_OF_FADING, GUNPOWDER, SpectrumBannerPatterns.VEGETAL), InkColors.LIME), 800)));
@@ -521,7 +522,7 @@ public class SpectrumItems {
 	public static final Item STORAGE_NODE_CRYSTAL = register(item("storage_node_crystal", new Item(IS.of()), InkColors.CYAN));
 	public static final Item BUFFER_NODE_CRYSTAL = register(item("buffer_node_crystal", new Item(IS.of()), InkColors.GREEN));
 	public static final Item GATHER_NODE_CRYSTAL = register(item("gather_node_crystal", new Item(IS.of()), InkColors.BLACK));
-	public static final Item EXTENDED_BUNDLE_ITEM = register(parented(item("extended_bundle", new Item(IS.of()), InkColors.BROWN), BUNDLE));
+	public static final Item EXTENDED_BUNDLE_ITEM = register(parented(item("extended_bundle", new ExtendedBundleItem(IS.of()), InkColors.BROWN), BUNDLE));
 	
 	public static <T extends Item> T register(ItemRegistrar<T> registrar) {
 		return registrar.item();

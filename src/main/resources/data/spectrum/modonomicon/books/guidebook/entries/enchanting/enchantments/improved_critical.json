@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/improved_critical": 2
+          "spectrum:improved_critical": 2
         }
       },
       "text": "book.spectrum.guidebook.improved_critical.page1.text"

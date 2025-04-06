@@ -240,7 +240,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	
 	@Override
 	public boolean canBeEnchantedWith(ItemStack stack, RegistryEntry<Enchantment> enchantment, EnchantingContext context) {
-		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.FORTUNE) || enchantment.matchesKey(Enchantments.SILK_TOUCH) || enchantment.matchesKey(SpectrumEnchantments.CLOAKED_RESONANCE);
+		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.matchesKey(Enchantments.FORTUNE) || enchantment.matchesKey(Enchantments.SILK_TOUCH) || enchantment.matchesKey(SpectrumEnchantments.RESONANCE);
 	}
 	
 }

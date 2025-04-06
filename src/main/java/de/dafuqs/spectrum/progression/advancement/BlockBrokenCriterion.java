@@ -29,7 +29,7 @@ public class BlockBrokenCriterion extends AbstractCriterion<BlockBrokenCriterion
 		
 		public static final Codec<BlockBrokenCriterion.Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 				EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(BlockBrokenCriterion.Conditions::player),
-				BrokenBlockPredicate.CODEC.optionalFieldOf("block_broken").forGetter(BlockBrokenCriterion.Conditions::blockPredicate)
+				BrokenBlockPredicate.CODEC.optionalFieldOf("block").forGetter(BlockBrokenCriterion.Conditions::blockPredicate)
 		).apply(instance, Conditions::new));
 		
 		public boolean matches(BlockState blockState) {

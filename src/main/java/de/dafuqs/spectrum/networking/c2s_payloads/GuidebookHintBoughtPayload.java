@@ -1,14 +1,13 @@
 package de.dafuqs.spectrum.networking.c2s_payloads;
 
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.*;
-import de.dafuqs.spectrum.recipe.*;
 import net.fabricmc.fabric.api.networking.v1.*;
 import net.minecraft.item.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.network.packet.*;
-import net.minecraft.recipe.*;
 import net.minecraft.server.network.*;
 import net.minecraft.sound.*;
 import net.minecraft.util.*;

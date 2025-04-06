@@ -8,23 +8,32 @@ import de.dafuqs.spectrum.networking.s2c_payloads.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
+import net.minecraft.network.*;
+import net.minecraft.network.codec.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.screen.*;
 import net.minecraft.screen.slot.*;
 import net.minecraft.server.network.*;
-import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
-import org.jetbrains.annotations.*;
+
+import java.util.*;
 
 public class ColorPickerScreenHandler extends ScreenHandler implements InkColorSelectedPacketReceiver {
+	
+	public record ScreenOpeningData(BlockPos pos, Optional<RegistryEntry<InkColor>> inkColor) {
+		public static final PacketCodec<RegistryByteBuf, ScreenOpeningData> PACKET_CODEC = PacketCodec.tuple(
+				BlockPos.PACKET_CODEC, ScreenOpeningData::pos,
+				PacketCodecs.optional(PacketCodecs.registryEntry(SpectrumRegistryKeys.INK_COLOR)), ScreenOpeningData::inkColor,
+				ScreenOpeningData::new
+		);
+	}
 	
 	public static final int PLAYER_INVENTORY_START_X = 8;
 	public static final int PLAYER_INVENTORY_START_Y = 84;
 	
 	protected final World world;
 	public final ServerPlayerEntity player;
-	private final PropertyDelegate propertyDelegate;
 	protected ColorPickerBlockEntity blockEntity;
 	
 	@Override
@@ -36,19 +45,17 @@ public class ColorPickerScreenHandler extends ScreenHandler implements InkColorS
 		}
 	}
 	
-	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
-		this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos, SpectrumBlockEntities.COLOR_PICKER).orElseThrow(), new ArrayPropertyDelegate(1));
+	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, ScreenOpeningData data) {
+		this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(data.pos(), SpectrumBlockEntities.COLOR_PICKER).orElseThrow(), data.inkColor());
 	}
 	
-	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, ColorPickerBlockEntity blockEntity, PropertyDelegate propertyDelegate) {
+	public ColorPickerScreenHandler(int syncId, PlayerInventory playerInventory, ColorPickerBlockEntity blockEntity, Optional<RegistryEntry<InkColor>> selectedColor) {
 		super(SpectrumScreenHandlerTypes.COLOR_PICKER, syncId);
 		
 		this.player = playerInventory.player instanceof ServerPlayerEntity serverPlayerEntity ? serverPlayerEntity : null;
 		this.world = playerInventory.player.getWorld();
-		this.propertyDelegate = propertyDelegate;
 		this.blockEntity = blockEntity;
 		
-		InkColor selectedColor = propertyDelegate.get(0) == -1 ? null : InkColor.ofDyeColor(DyeColor.byId(propertyDelegate.get(0)));
 		this.blockEntity.setSelectedColor(selectedColor);
 		
 		checkSize(blockEntity, ColorPickerBlockEntity.INVENTORY_SIZE);
@@ -73,8 +80,6 @@ public class ColorPickerScreenHandler extends ScreenHandler implements InkColorS
 		if (this.player != null) {
 			UpdateBlockEntityInkPayload.updateBlockEntityInk(blockEntity.getPos(), this.blockEntity.getEnergyStorage(), player);
 		}
-		
-		addProperties(propertyDelegate);
 	}
 	
 	@Override
@@ -119,9 +124,8 @@ public class ColorPickerScreenHandler extends ScreenHandler implements InkColorS
 	}
 	
 	@Override
-	public void onInkColorSelectedPacket(@Nullable RegistryEntry<InkColor> inkColor) {
-		// TODO Can this just use the property delegate?
-		this.blockEntity.setSelectedColor(inkColor == null ? null : inkColor.value());
+	public void onInkColorSelectedPacket(Optional<RegistryEntry<InkColor>> inkColor) {
+		this.blockEntity.setSelectedColor(inkColor);
 	}
 	
 }

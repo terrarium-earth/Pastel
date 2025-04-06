@@ -12,7 +12,7 @@
       },
       {
         "type": "spectrum:enchantment_registered",
-        "enchantment_id": "spectrum:cloaked/serendipity_reel"
+        "enchantment_id": "spectrum:serendipity_reel"
       }
     ]
   },
@@ -38,7 +38,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/serendipity_reel": 2
+          "spectrum:serendipity_reel": 2
         }
       },
       "text": "book.spectrum.guidebook.serendipity_reel.page1.text"

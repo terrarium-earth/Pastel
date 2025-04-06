@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/inertia": 3
+          "spectrum:inertia": 3
         }
       },
       "text": "book.spectrum.guidebook.inertia.page1.text"

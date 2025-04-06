@@ -1,15 +1,14 @@
 package de.dafuqs.spectrum.recipe.pedestal.dynamic;
 
 import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.pedestal.*;
-import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.pedestal.*;
 import de.dafuqs.spectrum.registries.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.input.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
@@ -37,15 +36,15 @@ public class StarCandyRecipe extends ShapedPedestalRecipe {
 	
 	private static DefaultedList<IngredientStack> generateInputs() {
 		return DefaultedList.copyOf(IngredientStack.EMPTY,
-				IngredientStack.ofItems(1, Items.SUGAR),
-				IngredientStack.ofItems(1, Items.SUGAR),
-				IngredientStack.ofItems(1, Items.SUGAR),
-				IngredientStack.ofItems(1, SpectrumItems.STARDUST),
-				IngredientStack.ofItems(1, SpectrumItems.STARDUST),
-				IngredientStack.ofItems(1, SpectrumItems.STARDUST),
-				IngredientStack.ofItems(1, SpectrumItems.AMARANTH_GRAINS),
-				IngredientStack.ofItems(1, SpectrumItems.AMARANTH_GRAINS),
-				IngredientStack.ofItems(1, SpectrumItems.AMARANTH_GRAINS)
+				IngredientStack.ofItems(Items.SUGAR),
+				IngredientStack.ofItems(Items.SUGAR),
+				IngredientStack.ofItems(Items.SUGAR),
+				IngredientStack.ofItems(SpectrumItems.STARDUST),
+				IngredientStack.ofItems(SpectrumItems.STARDUST),
+				IngredientStack.ofItems(SpectrumItems.STARDUST),
+				IngredientStack.ofItems(SpectrumItems.AMARANTH_GRAINS),
+				IngredientStack.ofItems(SpectrumItems.AMARANTH_GRAINS),
+				IngredientStack.ofItems(SpectrumItems.AMARANTH_GRAINS)
 		);
 	}
 	

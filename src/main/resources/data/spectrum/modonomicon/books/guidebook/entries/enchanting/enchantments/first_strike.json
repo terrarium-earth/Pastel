@@ -29,7 +29,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/first_strike": 2
+          "spectrum:first_strike": 2
         }
       },
       "text": "book.spectrum.guidebook.first_strike.page1.text"

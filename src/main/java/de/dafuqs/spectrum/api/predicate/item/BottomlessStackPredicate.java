@@ -12,7 +12,7 @@ import net.minecraft.predicate.item.*;
 public record BottomlessStackPredicate(ItemPredicate template, LongRange count) implements ComponentSubPredicate<BottomlessBundleItem.BottomlessStack> {
 	
 	public static Codec<BottomlessStackPredicate> CODEC = RecordCodecBuilder.create(i -> i.group(
-			ItemPredicate.CODEC.optionalFieldOf("template", ItemPredicate.Builder.create().build()).forGetter(c -> c.template),
+			ItemPredicate.CODEC.optionalFieldOf("variant", ItemPredicate.Builder.create().build()).forGetter(c -> c.template),
 			LongRange.CODEC.optionalFieldOf("count", LongRange.ANY).forGetter(c -> c.count)
 	).apply(i, BottomlessStackPredicate::new));
 	
@@ -23,7 +23,7 @@ public record BottomlessStackPredicate(ItemPredicate template, LongRange count) 
 	
 	@Override
 	public boolean test(ItemStack stack, BottomlessBundleItem.BottomlessStack component) {
-		return template.test(component.template()) && count.test(component.count());
+		return template.test(component.variant().toStack()) && count.test(component.count());
 	}
 	
 }

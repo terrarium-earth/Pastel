@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
 import net.minecraft.enchantment.*;
@@ -14,17 +13,17 @@ public interface Preenchanted {
 	
 	Map<RegistryKey<Enchantment>, Integer> getDefaultEnchantments();
 	
-	default ItemEnchantmentsComponent buildDefaultEnchantments(RegistryWrapper.WrapperLookup lookup) {
+	static ItemEnchantmentsComponent buildDefaultEnchantments(RegistryWrapper.WrapperLookup lookup, Preenchanted item) {
 		ItemEnchantmentsComponent.Builder builder = new ItemEnchantmentsComponent.Builder(ItemEnchantmentsComponent.DEFAULT);
-		for (Map.Entry<RegistryKey<Enchantment>, Integer> entry : getDefaultEnchantments().entrySet()) {
+		for (Map.Entry<RegistryKey<Enchantment>, Integer> entry : item.getDefaultEnchantments().entrySet()) {
 			builder.set(lookup.getWrapperOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(entry.getKey()), entry.getValue());
 		}
 		return builder.build();
 	}
 	
-	default @NotNull ItemStack getDefaultEnchantedStack(Item item) {
+	static @NotNull <T extends Item & Preenchanted> ItemStack getDefaultEnchantedStack(RegistryWrapper.WrapperLookup lookup, T item) {
 		ItemStack stack = new ItemStack(item);
-		SpectrumCommon.getRegistryLookup().ifPresent(r -> stack.set(DataComponentTypes.ENCHANTMENTS, buildDefaultEnchantments(r)));
+		stack.set(DataComponentTypes.ENCHANTMENTS, buildDefaultEnchantments(lookup, item));
 		return stack;
 	}
 	

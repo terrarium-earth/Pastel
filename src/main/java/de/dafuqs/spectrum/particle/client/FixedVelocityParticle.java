@@ -72,15 +72,15 @@ public class FixedVelocityParticle extends SpriteBillboardParticle {
 		}
 		
 		@Override
-		public Particle createParticle(ColoredFluidRisingParticleEffect defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-			FixedVelocityParticle craftingParticle = new FixedVelocityParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
-			craftingParticle.setMaxAge((int) (8.0D / (clientWorld.random.nextDouble() * 0.8D + 0.2D)));
-			craftingParticle.setSprite(this.spriteProvider);
+		public Particle createParticle(ColoredFluidRisingParticleEffect particleEffect, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+			FixedVelocityParticle particle = new FixedVelocityParticle(world, x, y, z, velocityX, velocityY, velocityZ);
+			particle.setMaxAge((int) (8.0D / (world.random.nextDouble() * 0.8D + 0.2D)));
+			particle.setSprite(this.spriteProvider);
 			
-			Vector3f color = defaultParticleType.getColor();
-			craftingParticle.setColor(color.x, color.y, color.z);
+			Vector3f color = particleEffect.getColor();
+			particle.setColor(color.x, color.y, color.z);
 			
-			return craftingParticle;
+			return particle;
 		}
 	}
 	
@@ -94,15 +94,15 @@ public class FixedVelocityParticle extends SpriteBillboardParticle {
 		}
 		
 		@Override
-		public Particle createParticle(ColoredSparkleRisingParticleEffect defaultParticleType, ClientWorld clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-			FixedVelocityParticle craftingParticle = new FixedVelocityParticle(clientWorld, x, y, z, velocityX, velocityY, velocityZ);
-			craftingParticle.setMaxAge((int) (8.0D / (clientWorld.random.nextDouble() * 0.8D + 0.2D)));
-			craftingParticle.setSprite(this.spriteProvider);
+		public Particle createParticle(ColoredSparkleRisingParticleEffect particleEffect, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
+			FixedVelocityParticle particle = new FixedVelocityParticle(world, x, y, z, velocityX, velocityY, velocityZ);
+			particle.setMaxAge((int) (8.0D / (world.random.nextDouble() * 0.8D + 0.2D)));
+			particle.setSprite(this.spriteProvider);
 			
-			Vector3f color = defaultParticleType.getColor();
-			craftingParticle.setColor(color.x, color.y, color.z);
+			Vector3f color = particleEffect.getColor();
+			particle.setColor(color.x, color.y, color.z);
 			
-			return craftingParticle;
+			return particle;
 		}
 	}
 

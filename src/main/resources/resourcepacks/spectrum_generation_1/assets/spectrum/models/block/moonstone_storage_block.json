@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "spectrum:block/moonstone_storage_block"
+    "all": "spectrum:block/polished_moonstone_block"
   }
 }

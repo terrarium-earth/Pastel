@@ -26,7 +26,15 @@ public abstract class DrawContextMixin {
 	
 	@Inject(method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getCount()I", ordinal = 0))
 	protected void spectrum$drawSlotBackground(TextRenderer textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
-		if (!(stack.getItem() instanceof SlotBackgroundEffectProvider backgroundEffectProvider))
+		SlotBackgroundEffectProvider backgroundEffectProvider = null;
+		
+		if (stack.getItem() instanceof SlotBackgroundEffectProvider prov)
+			backgroundEffectProvider = prov;
+		
+		else if (stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof SlotBackgroundEffectProvider prov)
+			backgroundEffectProvider = prov;
+		
+		if (backgroundEffectProvider == null)
 			return;
 		
 		var player = MinecraftClient.getInstance().player;

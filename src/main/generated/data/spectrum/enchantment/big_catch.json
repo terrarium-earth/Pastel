@@ -1,21 +1,23 @@
 {
-  "anvil_cost": 0,
   "description": {
     "translate": "enchantment.spectrum.big_catch"
   },
+  "effects": {},
+  "anvil_cost": 4,
   "exclusive_set": "#spectrum:exclusive_set/big_catch",
   "max_cost": {
-    "base": 0,
+    "base": 50,
     "per_level_above_first": 0
   },
   "max_level": 3,
   "min_cost": {
-    "base": 0,
+    "base": 20,
     "per_level_above_first": 0
   },
   "slots": [
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/big_catch",
+  "primary_items": "#minecraft:enchantable/fishing",
   "weight": 2
 }

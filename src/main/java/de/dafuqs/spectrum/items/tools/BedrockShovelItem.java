@@ -19,11 +19,6 @@ public class BedrockShovelItem extends ShovelItem implements Preenchanted {
 	}
 	
 	@Override
-	public ItemStack getDefaultStack() {
-		return getDefaultEnchantedStack(this);
-	}
-	
-	@Override
 	public boolean isEnchantable(ItemStack stack) {
 		return true;
 	}

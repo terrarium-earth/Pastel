@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.items.armor;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.registries.client.*;
-import de.dafuqs.spectrum.render.armor.BedrockArmorModel;
+import de.dafuqs.spectrum.render.armor.*;
 import net.fabricmc.api.*;
 import net.minecraft.client.*;
 import net.minecraft.client.render.*;
@@ -12,7 +12,7 @@ import net.minecraft.enchantment.*;
 import net.minecraft.entity.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 
@@ -24,11 +24,6 @@ public class BedrockArmorItem extends ArmorItem implements Preenchanted {
 
     public BedrockArmorItem(RegistryEntry<ArmorMaterial> material, ArmorItem.Type type, Settings settings) {
         super(material, type, settings);
-    }
-
-    @Override
-    public ItemStack getDefaultStack() {
-        return getDefaultEnchantedStack(this);
     }
 
     @Override

@@ -21,9 +21,13 @@ import dev.emi.trinkets.api.*;
 import net.fabricmc.fabric.api.entity.event.v1.*;
 import net.fabricmc.fabric.api.event.lifecycle.v1.*;
 import net.fabricmc.fabric.api.event.player.*;
+import net.fabricmc.fabric.api.item.v1.*;
 import net.fabricmc.fabric.api.resource.*;
+import net.fabricmc.fabric.api.util.*;
 import net.minecraft.advancement.criterion.*;
 import net.minecraft.block.*;
+import net.minecraft.component.*;
+import net.minecraft.component.type.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.*;
 import net.minecraft.entity.effect.*;
@@ -100,6 +104,13 @@ public class SpectrumEventListeners {
 				
 				SpectrumAdvancementCriteria.BLOCK_BROKEN.trigger(serverPlayerEntity, state);
 			}
+		});
+		
+		EnchantmentEvents.ALLOW_ENCHANTING.register((registryEntry, itemStack, enchantingContext) -> {
+			if (registryEntry.matchesKey(SpectrumEnchantments.INDESTRUCTIBLE) && itemStack.isIn(SpectrumItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
+				return TriState.FALSE;
+			}
+			return TriState.DEFAULT;
 		});
 		
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
@@ -338,6 +349,7 @@ public class SpectrumEventListeners {
 				if (entity.getWorld().getLevelProperties().isHardcore() || HardcoreDeathComponent.isInHardcore(player)) {
 					HardcoreDeathComponent.addHardcoreDeath(player.getServerWorld(), player.getGameProfile());
 				}
+				evaluateAndDropPlayerHead(player, damageSource);
 			}
 		});
 		
@@ -364,6 +376,7 @@ public class SpectrumEventListeners {
 			
 			@Override
 			public void reload(ResourceManager manager) {
+				UnlockToastManager.clear();
 				CompactingChestBlockEntity.clearCache();
 				SpectrumCommon.CACHED_ITEM_TAG_MAP.clear();
 				
@@ -380,27 +393,31 @@ public class SpectrumEventListeners {
 		});
 	}
 	
-	// TODO - Remove this KubeJS specific compat code.
-	// It could have been so much easier and performant, but KubeJS overrides the ENTIRE recipe manager
-	// and cancels all sorts of functions at HEAD unconditionally, so Spectrum cannot mixin into it
-//	public static void injectEnchantmentUpgradeRecipes(MinecraftServer minecraftServer) {
-//		if (!enchantmentUpgradeRecipesToInject.isEmpty()) {
-//			ImmutableMap<Identifier, Recipe<?>> collectedRecipes = enchantmentUpgradeRecipesToInject.stream().collect(ImmutableMap.toImmutableMap(EnchantmentUpgradeRecipe::getId, enchantmentUpgradeRecipe -> enchantmentUpgradeRecipe));
-//			Map<RecipeType<?>, Map<Identifier, Recipe<?>>> recipes = ((RecipeManagerAccessor) minecraftServer.getRecipeManager()).getRecipes();
-//
-//			ArrayList<Recipe<?>> newList = new ArrayList<>();
-//			for (Map<Identifier, Recipe<?>> r : recipes.values()) {
-//				newList.addAll(r.values());
-//			}
-//			for (Recipe<?> recipe : collectedRecipes.values()) {
-//				if (!newList.contains(recipe)) {
-//					newList.add(recipe);
-//				}
-//			}
-//
-//			minecraftServer.getRecipeManager().setRecipes(newList);
-//		}
-//	}
+	private static void evaluateAndDropPlayerHead(ServerPlayerEntity player, DamageSource source) {
+		if (!player.isSpectator()) {
+			// TODO: Can we evaluate a SpectrumLootPoolModifiers.treasureHunter() here instead?
+			// code reuse is always nice
+			ServerWorld serverWorld = player.getServerWorld();
+			
+			boolean shouldDropHead = source.isIn(SpectrumDamageTypeTags.ALWAYS_DROPS_MOB_HEAD);
+			if (!shouldDropHead && source.getAttacker() instanceof LivingEntity livingAttacker) {
+				int damageSourceTreasureHunt = SpectrumEnchantmentHelper.getEquipmentLevel(
+						serverWorld.getRegistryManager(),
+						SpectrumEnchantments.TREASURE_HUNTER,
+						livingAttacker);
+				
+				shouldDropHead = damageSourceTreasureHunt > 0 && serverWorld.getRandom().nextFloat() < 0.2 * damageSourceTreasureHunt;
+			}
+			
+			if (shouldDropHead) {
+				ItemStack headItemStack = new ItemStack(Items.PLAYER_HEAD);
+				headItemStack.set(DataComponentTypes.PROFILE, new ProfileComponent(player.getGameProfile()));
+				
+				ItemEntity headEntity = new ItemEntity(serverWorld, player.getX(), player.getY(), player.getZ(), headItemStack);
+				serverWorld.spawnEntity(headEntity);
+			}
+		}
+	}
 	
 	public static int getFluidLuminance(Fluid fluid) {
 		return fluidLuminance.getOrDefault(fluid, 0);

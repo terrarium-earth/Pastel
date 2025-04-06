@@ -37,7 +37,7 @@
       },
       "components": {
         "enchantments": {
-          "spectrum:cloaked/treasure_hunter": 3
+          "spectrum:treasure_hunter": 3
         }
       },
       "text": "book.spectrum.guidebook.treasure_hunter.page2.text"

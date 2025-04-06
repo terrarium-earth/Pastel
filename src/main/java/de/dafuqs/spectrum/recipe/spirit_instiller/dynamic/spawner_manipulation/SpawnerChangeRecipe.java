@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
+import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.blocks.item_bowl.*;
 import de.dafuqs.spectrum.blocks.spirit_instiller.*;
 import de.dafuqs.spectrum.recipe.*;
@@ -22,13 +23,13 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 	
 	public SpawnerChangeRecipe(IngredientStack ingredient, IngredientStack ingredient2, Optional<Identifier> requiredAdvancementIdentifier) {
 		super("spawner_manipulation", false, requiredAdvancementIdentifier,
-				IngredientStack.ofItems(1, Items.SPAWNER), ingredient, ingredient2,
+				IngredientStack.ofItems(Items.SPAWNER), ingredient, ingredient2,
 				Items.SPAWNER.getDefaultStack(), 200, 0, true);
 	}
 	
 	public SpawnerChangeRecipe(IngredientStack ingredient) {
 		super("spawner_manipulation", false, Optional.of(SpectrumAdvancements.SPAWNER_MANIPULATION),
-				IngredientStack.ofItems(1, Items.SPAWNER), ingredient, IngredientStack.ofItems(4, SpectrumItems.VEGETAL),
+				IngredientStack.ofItems(Items.SPAWNER), ingredient, IngredientStack.ofItems(SpectrumItems.VEGETAL, 4),
 				Items.SPAWNER.getDefaultStack(), 200, 0, true);
 	}
 	
