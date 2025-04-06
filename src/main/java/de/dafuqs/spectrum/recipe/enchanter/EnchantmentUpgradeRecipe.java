@@ -199,7 +199,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				Enchantment.ENTRY_CODEC.fieldOf("enchantment").forGetter(recipe -> recipe.enchantmentEntry),
-				Codec.INT.fieldOf("levelCap").forGetter(recipe -> recipe.levelCap),
+				Codec.INT.fieldOf("level_cap").forGetter(recipe -> recipe.levelCap),
 				Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("bulk_item").forGetter(recipe -> recipe.bulkItem),
 				RecipeScaling.CODEC.fieldOf("XP_scaling").forGetter(recipe -> recipe.XPScaling),
 				RecipeScaling.CODEC.fieldOf("item_scaling").forGetter(recipe -> recipe.itemScaling)
