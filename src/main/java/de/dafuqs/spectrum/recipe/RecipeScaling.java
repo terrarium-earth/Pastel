@@ -17,7 +17,7 @@ public abstract class RecipeScaling {
 			Codec.INT.optionalFieldOf("start", 0).forGetter(d -> d.start),
 			Codec.INT.optionalFieldOf("scaling_value", 0).forGetter(d -> d.scalingValue),
 			Codec.DOUBLE.optionalFieldOf("scaling_factor", 1.0).forGetter(d -> d.scalingFactor),
-			Codec.INT.listOf(0, 255).optionalFieldOf("indexes", null).forGetter(d -> d.indexes)
+			Codec.INT.listOf(0, 255).optionalFieldOf("indexes", Collections.emptyList()).forGetter(d -> d.indexes)
 	).apply(i, ScalingData::new));
 	
 	public static final PacketCodec<RegistryByteBuf, ScalingData> PACKET_CODEC = PacketCodec.tuple(

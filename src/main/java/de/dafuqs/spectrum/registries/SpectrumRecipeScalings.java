@@ -9,6 +9,7 @@ public class SpectrumRecipeScalings {
 		register(RecipeScaling.LINEAR);
 		register(RecipeScaling.DOUBLING);
 		register(RecipeScaling.SQUARE);
+		register(RecipeScaling.INDEXED);
 	}
 	
 	private static void register(RecipeScaling scaling) {
