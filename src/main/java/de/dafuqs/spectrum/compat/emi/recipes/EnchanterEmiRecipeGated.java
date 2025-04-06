@@ -28,16 +28,16 @@ public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectru
 	}
 	
 	public EnchanterEmiRecipeGated(EmiRecipeCategory category, EnchantmentUpgradeRecipe recipe) {
-		this(category, recipe, Text.translatable("container.spectrum.rei.enchantment_upgrade.required_item_count", recipe.getRequiredItemCount()), 0);
+		this(category, recipe, Text.translatable("container.spectrum.rei.enchantment_upgrade.required_item_count", recipe.getBaseItemCost()), 0);
 		inputs = Lists.newArrayList();
 		inputs.add(EmiIngredient.of(recipe.getIngredients().getFirst())); // the center stack
-		int requiredItemCountSplit = recipe.getRequiredItemCount() / 8;
-		int requiredItemCountModulo = recipe.getRequiredItemCount() % 8;
+		int requiredItemCountSplit = recipe.getBaseItemCost() / 8;
+		int requiredItemCountModulo = recipe.getBaseItemCost() % 8;
 		for (int i = 0; i < 8; i++) {
 			int addAmount = i < requiredItemCountModulo ? 1 : 0;
-			inputs.add(EmiStack.of(recipe.getRequiredItem(), requiredItemCountSplit + addAmount));
+			inputs.add(EmiStack.of(recipe.getBulkItem(), requiredItemCountSplit + addAmount));
 		}
-		inputs.add(EmiStack.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getRequiredExperience(), true)));
+		inputs.add(EmiStack.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getBaseXPCost(), true)));
 	}
 	
 	private EnchanterEmiRecipeGated(EmiRecipeCategory category, GatedSpectrumRecipe<?> recipe, Text description, int craftingTime) {

@@ -1,0 +1,17 @@
+package de.dafuqs.spectrum.registries;
+
+import de.dafuqs.spectrum.recipe.*;
+import net.minecraft.registry.*;
+
+public class SpectrumRecipeScalings {
+	
+	public static void init() {
+		register(RecipeScaling.LINEAR);
+		register(RecipeScaling.DOUBLING);
+		register(RecipeScaling.SQUARE);
+	}
+	
+	private static void register(RecipeScaling scaling) {
+		Registry.register(SpectrumRegistries.RECIPE_SCALING, scaling.getId(), scaling);
+	}
+}

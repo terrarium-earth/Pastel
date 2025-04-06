@@ -11,11 +11,11 @@ import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.entity.variants.*;
 import de.dafuqs.spectrum.explosion.*;
 import de.dafuqs.spectrum.items.tools.*;
+import de.dafuqs.spectrum.recipe.*;
 import net.fabricmc.fabric.api.event.registry.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.registry.tag.*;
-import net.minecraft.util.math.random.*;
 import net.minecraft.util.math.random.Random;
 
 @SuppressWarnings("unused")
@@ -30,6 +30,7 @@ public class SpectrumRegistries {
 	public static final SpectrumRegistry<LizardFrillVariant> LIZARD_FRILL_VARIANT = register(SpectrumRegistryKeys.LIZARD_FRILL_VARIANT, true);
 	public static final SpectrumRegistry<LizardHornVariant> LIZARD_HORN_VARIANT = register(SpectrumRegistryKeys.LIZARD_HORN_VARIANT, true);
 	public static final SpectrumRegistry<PastelUpgradeSignature> PASTEL_UPGRADE = register(SpectrumRegistryKeys.PASTEL_UPGRADE, false);
+	public static final SpectrumRegistry<RecipeScaling> RECIPE_SCALING = register(SpectrumRegistryKeys.RECIPE_SCALING, true);
 	
 	public static final SpectrumRegistry<MapCodec<? extends ResonanceDropProcessor>> RESONANCE_DROP_PROCESSOR_TYPE = register(SpectrumRegistryKeys.RESONANCE_DROP_PROCESSOR_TYPE, false);
 	

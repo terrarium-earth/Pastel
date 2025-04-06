@@ -29,22 +29,22 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 		super(recipe, buildIngredients(recipe.value()), recipe.value().getResult(BasicDisplay.registryAccess()));
 		
 		this.enchantment = recipe.value().getEnchantment();
-		this.enchantmentDestinationLevel = recipe.value().getEnchantmentDestinationLevel();
-		this.requiredItemCount = recipe.value().getRequiredItemCount();
-		this.requiredExperience = recipe.value().getRequiredExperience();
+		this.enchantmentDestinationLevel = recipe.value().getLevelCap();
+		this.requiredItemCount = recipe.value().getBaseItemCost();
+		this.requiredExperience = recipe.value().getBaseXPCost();
 	}
 	
 	private static List<EntryIngredient> buildIngredients(EnchantmentUpgradeRecipe recipe) {
 		List<EntryIngredient> inputs = new ArrayList<>();
 		inputs.add(EntryIngredients.ofIngredient(recipe.getIngredients().getFirst())); // the center stack
-		int requiredItemCountSplit = recipe.getRequiredItemCount() / 8;
-		int requiredItemCountModulo = recipe.getRequiredItemCount() % 8;
+		int requiredItemCountSplit = recipe.getBaseItemCost() / 8;
+		int requiredItemCountModulo = recipe.getBaseItemCost() % 8;
 		for (int i = 0; i < 8; i++) {
 			int addAmount = i < requiredItemCountModulo ? 1 : 0;
-			inputs.add(EntryIngredients.of(recipe.getRequiredItem(), requiredItemCountSplit + addAmount));
+			inputs.add(EntryIngredients.of(recipe.getBulkItem(), requiredItemCountSplit + addAmount));
 		}
 		
-		inputs.add(EntryIngredients.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getRequiredExperience(), true)));
+		inputs.add(EntryIngredients.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getBaseXPCost(), true)));
 		return inputs;
 	}
 	

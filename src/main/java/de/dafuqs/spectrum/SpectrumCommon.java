@@ -149,6 +149,7 @@ public class SpectrumCommon implements ModInitializer {
 		
 		// Recipes
 		logInfo("Registering Recipe Types...");
+		SpectrumRecipeScalings.init();
 		SpectrumFusionShrineWorldEffects.register();
 		SpectrumRecipeTypes.register();
 		SpectrumRecipeSerializers.register();

@@ -182,7 +182,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 						enchanterBlockEntity.craftingTime += consumedItems;
 						if (enchanterBlockEntity.craftingTime >= enchanterBlockEntity.craftingTimeTotal) {
 							playCraftingFinishedEffects(enchanterBlockEntity);
-							craftEnchantmentUpgradeRecipe(enchanterBlockEntity, enchantmentUpgradeRecipe);
+							enchanterBlockEntity.craftEnchantmentUpgradeRecipe(enchantmentUpgradeRecipe);
 							PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerWorld) enchanterBlockEntity.getWorld(), enchanterBlockEntity.pos);
 							
 							craftingSuccess = true;
@@ -522,22 +522,26 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		return consumedAmount;
 	}
 	
-	public static void craftEnchantmentUpgradeRecipe(@NotNull EnchanterBlockEntity enchanterBlockEntity, @NotNull EnchantmentUpgradeRecipe enchantmentUpgradeRecipe) {
-		enchanterBlockEntity.drainExperience(enchantmentUpgradeRecipe.getRequiredExperience());
+	public void craftEnchantmentUpgradeRecipe(@NotNull EnchantmentUpgradeRecipe upgrade) {
+		ItemStack resultStack = getStack(0);
 		
-		ItemStack resultStack = enchanterBlockEntity.getStack(0);
-		resultStack = SpectrumEnchantmentHelper.addOrUpgradeEnchantment(resultStack, enchantmentUpgradeRecipe.getEnchantment(), enchantmentUpgradeRecipe.getEnchantmentDestinationLevel(), false, true).getRight();
-		enchanterBlockEntity.setStack(0, resultStack);
+		var targetLevel = Math.min(resultStack.getEnchantments().getLevel(upgrade.getEnchantment()) + 1, upgrade.getLevelCap());
+		var xpCost = upgrade.getXPScaling().apply(targetLevel);
+		drainExperience(xpCost);
+		
+		
+		resultStack = SpectrumEnchantmentHelper.addOrUpgradeEnchantment(resultStack, upgrade.getEnchantment(), targetLevel, false, true).getRight();
+		setStack(0, resultStack);
 		
 		// vanilla
-		grantPlayerEnchantingAdvancementCriterion(enchanterBlockEntity.ownerUUID, resultStack, enchantmentUpgradeRecipe.getRequiredExperience());
+		grantPlayerEnchantingAdvancementCriterion(ownerUUID, resultStack, xpCost);
 		
 		// enchantment upgrading criterion
-		ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) enchanterBlockEntity.getOwnerIfOnline();
+		ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) getOwnerIfOnline();
 		if (serverPlayerEntity != null) {
 			var builder = new ItemEnchantmentsComponent.Builder(ItemEnchantmentsComponent.DEFAULT);
-			builder.add(enchantmentUpgradeRecipe.getEnchantment(), enchantmentUpgradeRecipe.getEnchantmentDestinationLevel());
-			SpectrumAdvancementCriteria.ENCHANTER_UPGRADING.trigger(serverPlayerEntity, builder.build(), enchantmentUpgradeRecipe.getRequiredExperience());
+			builder.add(upgrade.getEnchantment(), targetLevel);
+			SpectrumAdvancementCriteria.ENCHANTER_UPGRADING.trigger(serverPlayerEntity, builder.build(), xpCost);
 		}
 	}
 	
@@ -583,7 +587,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			if (enchanterBlockEntity.canOwnerOverenchant || !enchantmentUpgradeRecipe.value().requiresUnlockedOverEnchanting()) {
 				enchanterBlockEntity.currentRecipe = enchantmentUpgradeRecipe;
 				enchanterBlockEntity.currentItemProcessingTime = 0;
-				enchanterBlockEntity.craftingTimeTotal = enchantmentUpgradeRecipe.value().getRequiredItemCount();
+				enchanterBlockEntity.craftingTimeTotal = enchantmentUpgradeRecipe.value().getBaseItemCost();
 				
 				//TODO why are we doing this?
 				EnchanterInventory testInventory = new EnchanterInventory();
