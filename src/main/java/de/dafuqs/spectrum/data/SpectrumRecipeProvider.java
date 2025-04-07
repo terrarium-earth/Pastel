@@ -26,6 +26,8 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 	}
 	
 	private void generateEnchantmentUpgradeRecipes(RecipeExporter ctx) {
+		//TODO These could benefit from a revisit
+		
 		// Spectrum
 		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.BIG_CATCH, SpectrumAdvancements.ENCHANTMENTS_BIG_CATCH, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{400, 32}, {800, 128}});
 		generateEnchantmentUpgradeRecipes(ctx, "", SpectrumEnchantments.CLOVERS_FAVOR, SpectrumAdvancements.ENCHANTMENTS_CLOVERS_FAVOR, SpectrumItems.LIGHT_BLUE_PIGMENT, new int[][]{{200, 8}, {400, 32}, {200, 128}, {10000, 512}, {40000, 512}});
