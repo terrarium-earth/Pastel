@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.compat.emi.recipes;
 import com.google.common.collect.*;
 import de.dafuqs.revelationary.api.advancements.*;
 import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.blocks.enchanter.*;
 import de.dafuqs.spectrum.compat.emi.*;
 import de.dafuqs.spectrum.compat.emi.widgets.*;
 import de.dafuqs.spectrum.items.magic_items.*;
@@ -30,9 +31,6 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 	private static final int SWITCH_TIME = 30;
 	private static final int XP_INDEX = 8;
 	private static final int BOOK_INDEXES_START = 9;
-	
-	private static final String ITEM_TRANS = "container.spectrum.rei.enchantment_upgrade.required_item_count";
-	private static final String LEVEL_TRANS = "container.spectrum.rei.enchantment_upgrade.level";
 	
 	private final int levelCap;
 	private final int maxNormal;
@@ -125,14 +123,14 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 				color = 0xdb3564;
 			
 			
-			return new Pair<>(Text.translatable(LEVEL_TRANS, cell, cell + 1).asOrderedText(), color);
+			return new Pair<>(Text.translatable(EnchanterBlockEntity.LEVEL_TRANS, cell, cell + 1).asOrderedText(), color);
 		}, 67, 2, false);
 		widgets.add(lv);
 		
 		
 		final var itemUse = new DynamicTextWidget(c -> {
 			var cell = indexer.apply(c) + 1;
-			return new Pair<>(Text.translatable(ITEM_TRANS, itemScaling.apply(cell)).asOrderedText(), 0x3f3f3f);
+			return new Pair<>(Text.translatable(EnchanterBlockEntity.ITEM_TRANS, itemScaling.apply(cell)).asOrderedText(), 0x3f3f3f);
 		}, 67, 70, false);
 		widgets.add(itemUse);
 	}

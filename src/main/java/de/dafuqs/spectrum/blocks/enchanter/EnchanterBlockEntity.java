@@ -48,6 +48,10 @@ import java.util.*;
 // I just want to say. That I hate this class with every bit of my heart ~ Azzyypaaras
 public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter {
 	
+	public static final String ITEM_TRANS = "container.spectrum.rei.enchantment_upgrade.required_item_count";
+	public static final String LEVEL_TRANS = "container.spectrum.rei.enchantment_upgrade.level";
+	public static final String OVERCHANTING_TOOLTIP = "container.spectrum.rei.enchantment_upgrade.tooltip";
+	
 	public static final List<Vec3i> ITEM_BOWL_OFFSETS = new ArrayList<>() {{
 		add(new Vec3i(5, 0, -3));
 		add(new Vec3i(5, 0, 3));

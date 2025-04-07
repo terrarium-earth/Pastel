@@ -4079,6 +4079,7 @@
   "container.spectrum.rei.enchanting.title": "Enchanting Items",
   "container.spectrum.rei.enchantment_upgrade.level": "LV%f⇒%f",
   "container.spectrum.rei.enchantment_upgrade.required_item_count": "(%fx)",
+  "container.spectrum.rei.enchantment_upgrade.tooltip": "supports over-enchanting",
   "container.spectrum.rei.enchantment_upgrading.title": "Enchantment Upgrading",
   "container.spectrum.rei.freezing.title": "Freezing",
   "container.spectrum.rei.fusion_recipe": "Fusion Recipe",
