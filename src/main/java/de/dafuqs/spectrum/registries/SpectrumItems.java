@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.function.*;
 
 import static de.dafuqs.spectrum.SpectrumCommon.*;
-import static de.dafuqs.spectrum.data.SpectrumModelProvider.*;
 import static net.minecraft.item.Items.*;
 
 import de.dafuqs.revelationary.api.revelations.*;
@@ -175,7 +174,7 @@ public class SpectrumItems {
 	// Special tools
 	// TODO: set attribute modifiers similarly to how vanilla swords do it
 	public static final DreamflayerItem DREAMFLAYER = register(item("dreamflayer", new DreamflayerItem(SpectrumToolMaterial.DREAMFLAYER, 3, -1.8F, IS.of(1, Rarity.UNCOMMON)), InkColors.RED));
-	public static final NightfallsBladeItem NIGHTFALLS_BLADE = register(item("nightfalls_blade", new NightfallsBladeItem(ToolMaterials.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)), InkColors.GRAY).withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, SpectrumModels.HANDHELD_THREE_LAYERS, "", "_tint", "_overlay")));
+	public static final NightfallsBladeItem NIGHTFALLS_BLADE = register(item("nightfalls_blade", new NightfallsBladeItem(ToolMaterials.DIAMOND, 3, -2.4F, IS.of(1, Rarity.UNCOMMON)), InkColors.GRAY).withItemModel((ctx, item) -> SpectrumModelHelper.registerLayeredItemModel(ctx, item, SpectrumModels.HANDHELD_THREE_LAYERS, "", "_tint", "_overlay")));
 	public static final DraconicTwinswordItem DRACONIC_TWINSWORD = register(item("draconic_twinsword", new DraconicTwinswordItem(SpectrumToolMaterial.DRACONIC, 6, -3.0F, IS.of(1, Rarity.RARE)), InkColors.YELLOW));
 	public static final DragonTalonItem DRAGON_TALON = register(item("dragon_talon", new DragonTalonItem(SpectrumToolMaterial.DRACONIC, -3.0, -1.0, IS.of(1, Rarity.RARE).maxDamage(SpectrumToolMaterial.DRACONIC.getDurability())), InkColors.YELLOW));
 	public static final LightGreatswordItem KNOTTED_SWORD = register(item("knotted_sword", new LightGreatswordItem(SpectrumToolMaterial.VERDIGRIS, 3, -2.4F, 0.25F, 0.5F, 0xFFd4d6ff, IS.of(1, Rarity.UNCOMMON).maxDamage(SpectrumToolMaterial.VERDIGRIS.getDurability())), InkColors.GREEN));
@@ -537,31 +536,31 @@ public class SpectrumItems {
 	}
 	
 	public static <T extends Item> ItemRegistrar<T> simple(ItemRegistrar<T> registrar) {
-		return registrar.withItemModel(SpectrumModelProvider::registerItemModel);
+		return registrar.withItemModel(SpectrumModelHelper::registerItemModel);
 	}
 	
 	public static <T extends Item> ItemRegistrar<T> handheld(ItemRegistrar<T> registrar) {
-		return registrar.withItemModel((ctx, item) -> registerItemModel(ctx, item, Models.HANDHELD));
+		return registrar.withItemModel((ctx, item) -> SpectrumModelHelper.registerItemModel(ctx, item, Models.HANDHELD));
 	}
 	
 	public static <T extends Item> ItemRegistrar<T> layered(ItemRegistrar<T> registrar, String suffix0, String suffix1) {
-		return registrar.withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, Models.GENERATED_TWO_LAYERS, suffix0, suffix1));
+		return registrar.withItemModel((ctx, item) -> SpectrumModelHelper.registerLayeredItemModel(ctx, item, Models.GENERATED_TWO_LAYERS, suffix0, suffix1));
 	}
 	
 	public static <T extends Item> ItemRegistrar<T> layered(ItemRegistrar<T> registrar, String suffix0, String suffix1, String suffix2) {
-		return registrar.withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, Models.GENERATED_THREE_LAYERS, suffix0, suffix1, suffix2));
+		return registrar.withItemModel((ctx, item) -> SpectrumModelHelper.registerLayeredItemModel(ctx, item, Models.GENERATED_THREE_LAYERS, suffix0, suffix1, suffix2));
 	}
 	
 	public static <T extends Item> ItemRegistrar<T> layered(ItemRegistrar<T> registrar, String suffix0, String suffix1, String suffix2, String suffix3) {
-		return registrar.withItemModel((ctx, item) -> registerLayeredItemModel(ctx, item, SpectrumModels.GENERATED_FOUR_LAYERS, suffix0, suffix1, suffix2, suffix3));
+		return registrar.withItemModel((ctx, item) -> SpectrumModelHelper.registerLayeredItemModel(ctx, item, SpectrumModels.GENERATED_FOUR_LAYERS, suffix0, suffix1, suffix2, suffix3));
 	}
 	
 	public static <T extends Item> ItemRegistrar<T> parented(ItemRegistrar<T> registrar, Item parent) {
-		return registrar.withItemModel((ctx, item) -> registerParentedItemModel(ctx, item, parent));
+		return registrar.withItemModel((ctx, item) -> SpectrumModelHelper.registerParentedItemModel(ctx, item, parent));
 	}
 	
 	public static <T extends Item> ItemRegistrar<T> parented(ItemRegistrar<T> registrar, Identifier parentModelId) {
-		return registrar.withItemModel((ctx, item) -> registerParentedItemModel(ctx, item, parentModelId));
+		return registrar.withItemModel((ctx, item) -> SpectrumModelHelper.registerParentedItemModel(ctx, item, parentModelId));
 	}
 	
 	public static <T extends Item> ItemRegistrar<T> banner(ItemRegistrar<T> registrar) {
@@ -614,7 +613,7 @@ public class SpectrumItems {
 		}
 		
 		public ItemRegistrar<T> withItemModel(BiConsumer<ItemModelGenerator, T> callback) {
-			ITEM_MODEL_REGISTRAR.defer(ctx -> {
+			SpectrumModelHelper.ITEM_MODEL_REGISTRAR.defer(ctx -> {
 				Objects.requireNonNull(item);
 				callback.accept(ctx, item);
 			});

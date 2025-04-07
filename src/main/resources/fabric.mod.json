@@ -34,9 +34,6 @@
     "client": [
       "de.dafuqs.spectrum.SpectrumClient"
     ],
-    "fabric-datagen": [
-      "de.dafuqs.spectrum.data.SpectrumDataGenerator"
-    ],
     "preLaunch": [],
     "modmenu": [
       "de.dafuqs.spectrum.config.ModMenuConfig"
