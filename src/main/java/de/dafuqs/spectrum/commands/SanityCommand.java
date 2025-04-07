@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.commands;
 
+import java.util.*;
+
 import com.mojang.brigadier.arguments.*;
 import com.mojang.brigadier.tree.*;
 import de.dafuqs.revelationary.*;
@@ -42,8 +44,6 @@ import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.apache.commons.lang3.*;
 import org.jetbrains.annotations.*;
-
-import java.util.*;
 
 public class SanityCommand {
 	
@@ -437,7 +437,7 @@ public class SanityCommand {
 		for (Enchantment enchantment : registryManager.get(RegistryKeys.ENCHANTMENT)) {
 			RegistryEntry<Enchantment> entry = registryManager.get(RegistryKeys.ENCHANTMENT).getEntry(enchantment);
 			Identifier id = entry.getKey().get().getValue();
-			if (id.getNamespace().equals(modId) && !entry.isIn(SpectrumEnchantmentTags.ENCHANTMENTS)) {
+			if (id.getNamespace().equals(modId) && !entry.isIn(SpectrumEnchantmentTags.SPECTRUM_ENCHANTMENT)) {
 				SpectrumCommon.logWarning("[SANITY: Enchantment Tags] Enchantment '" + id + "' is missing in the spectrum:enchantments tag");
 			}
 		}

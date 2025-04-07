@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 2,
   "description": {
     "translate": "enchantment.spectrum.exuberance"
   },
-  "effects": {},
-  "anvil_cost": 2,
   "exclusive_set": "#spectrum:exclusive_set/exuberance",
   "max_cost": {
     "base": 40,
@@ -14,10 +13,10 @@
     "base": 10,
     "per_level_above_first": 0
   },
+  "primary_items": "#minecraft:enchantable/sword",
   "slots": [
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/exuberance",
-  "primary_items": "#minecraft:enchantable/sword",
   "weight": 5
 }

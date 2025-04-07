@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 8,
   "description": {
     "translate": "enchantment.spectrum.pest_control"
   },
-  "effects": {},
-  "anvil_cost": 8,
   "exclusive_set": "#spectrum:exclusive_set/pest_control",
   "max_cost": {
     "base": 30,

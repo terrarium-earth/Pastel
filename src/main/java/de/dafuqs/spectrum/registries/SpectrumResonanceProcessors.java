@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
+import java.util.function.*;
+
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.interaction.*;
 import de.dafuqs.spectrum.api.predicate.block.*;
@@ -12,15 +14,13 @@ import net.minecraft.recipe.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.tag.*;
 
-import java.util.function.*;
-
 @SuppressWarnings("unused")
 public class SpectrumResonanceProcessors {
 	
 	private static final DeferredRegistrar.Contextual<DatagenProxy.BootstrapContext<ResonanceProcessor>> REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	
 	public static final RegistryKey<ResonanceProcessor> PURE_RESONANCES_FROM_ORE = register("pure_resonances_from_ore", ctx -> ModifyDropsResonanceProcessor
-			.builder(BrokenBlockPredicate.Builder.create().tag(ctx.blocks().getOrThrow(ConventionalBlockTags.ORES)).build())
+			.builder(BrokenBlockPredicate.Builder.create().registryEntryList(ctx.blocks().getOrThrow(ConventionalBlockTags.ORES)).build())
 			.addModifiedDrop(Ingredient.ofItems(Items.COAL), SpectrumItems.PURE_COAL)
 			.addModifiedDrop(Ingredient.ofItems(Items.RAW_COPPER), SpectrumItems.PURE_COPPER)
 			.addModifiedDrop(Ingredient.ofItems(Items.DIAMOND), SpectrumItems.PURE_DIAMOND)
@@ -79,7 +79,7 @@ public class SpectrumResonanceProcessors {
 	}
 	
 	public static RegistryKey<ResonanceProcessor> registerDropSelf(String id, TagKey<Block> tag, UnaryOperator<DropSelfResonanceProcessor.Builder> builder) {
-		return register(id, ctx -> builder.apply(DropSelfResonanceProcessor.builder(BrokenBlockPredicate.Builder.create().tag(ctx.blocks().getOrThrow(tag)).build())).build());
+		return register(id, ctx -> builder.apply(DropSelfResonanceProcessor.builder(BrokenBlockPredicate.Builder.create().registryEntryList(ctx.blocks().getOrThrow(tag)).build())).build());
 	}
 	
 	public static RegistryKey<ResonanceProcessor> register(String id, Function<DatagenProxy.BootstrapContext<ResonanceProcessor>, ResonanceProcessor> processor) {

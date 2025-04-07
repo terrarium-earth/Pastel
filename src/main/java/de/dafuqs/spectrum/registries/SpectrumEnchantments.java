@@ -13,6 +13,7 @@ import net.minecraft.enchantment.effect.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.item.*;
 import net.minecraft.registry.*;
+import net.minecraft.registry.entry.*;
 import net.minecraft.registry.tag.*;
 import net.minecraft.util.*;
 
@@ -31,7 +32,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(20, 0),
 			new Enchantment.Cost(50, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.FISHING_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.FISHING_ENCHANTABLE)
 			.forceAddTag(SpectrumItemTags.FISHING_RODS)
@@ -45,7 +47,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(20, 0),
 			new Enchantment.Cost(50, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.empty()
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.SWORD_ENCHANTABLE)
 			.addOptionalTag(Identifier.of("malum:scythe"))
@@ -62,7 +65,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(40, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 	).register();
@@ -73,9 +77,10 @@ public class SpectrumEnchantments {
 			5,
 			5,
 			new Enchantment.Cost(10, 0),
-			new Enchantment.Cost(50, 0),
+			new Enchantment.Cost(40, 0),
 			2,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
@@ -91,7 +96,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(40, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 			.addOptionalTag(Identifier.of("malum:scythe"))
@@ -105,7 +111,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(15, 0),
 			new Enchantment.Cost(65, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 			.forceAddTag(SpectrumItemTags.FISHING_RODS)
@@ -122,7 +129,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(40, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
 			.addOptionalTag(Identifier.of("malum:scythe"))
@@ -133,13 +141,14 @@ public class SpectrumEnchantments {
 	
 	// Make tools not use up durability
 	public static final RegistryKey<Enchantment> INDESTRUCTIBLE = new Builder(
-			"indestructuble",
+			"indestructible",
 			2,
 			1,
 			new Enchantment.Cost(30, 0),
 			new Enchantment.Cost(60, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.empty()
 	).withEnchantable(provider -> provider
 					.forceAddTag(ItemTags.DURABILITY_ENCHANTABLE)
 					.add(SpectrumItems.ENDER_SPLICE)
@@ -161,7 +170,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(40, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.empty()
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withExclusiveSet((key, provider) -> provider
@@ -176,7 +186,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(50, 0),
 			new Enchantment.Cost(100, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND, AttributeModifierSlot.OFFHAND, AttributeModifierSlot.CHEST)
+			List.of(AttributeModifierSlot.MAINHAND, AttributeModifierSlot.OFFHAND, AttributeModifierSlot.CHEST),
+			Optional.of(ItemTags.CHEST_ARMOR_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
@@ -191,7 +202,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(15, 0),
 			new Enchantment.Cost(45, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
 			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
@@ -202,24 +214,6 @@ public class SpectrumEnchantments {
 			.addOptionalTag(Identifier.of("malum:scythe"))
 	).register();
 	
-	// Silk Touch, just for different blocks
-	public static final RegistryKey<Enchantment> RESONANCE = new Builder(
-			"resonance",
-			1,
-			1,
-			new Enchantment.Cost(25, 0),
-			new Enchantment.Cost(100, 0),
-			8,
-			List.of(AttributeModifierSlot.MAINHAND)
-	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
-			.add(SpectrumItems.ENDER_SPLICE)
-			.add(SpectrumItems.EXCHANGING_STAFF)
-	).withExclusiveSet((key, provider) -> provider
-			.forceAddTag(EnchantmentTags.MINING_EXCLUSIVE_SET)
-			.forceAddTag(SpectrumEnchantmentTags.PEST_CONTROL)
-	).register();
-	
 	// Kills silverfish when mining infested blocks
 	public static final RegistryKey<Enchantment> PEST_CONTROL = new Builder(
 			"pest_control",
@@ -228,11 +222,12 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(10, 0),
 			new Enchantment.Cost(30, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.empty()
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withExclusiveSet((key, provider) -> provider
-			.add(RESONANCE)
+			.add(of("resonance"))
 	).register();
 	
 	// increased mining speed for very hard blocks
@@ -243,11 +238,31 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(20, 0),
 			new Enchantment.Cost(30, 0),
 			2,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.empty()
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.FORTUNE)
+	).register();
+	
+	// Silk Touch, just for different blocks
+	public static final RegistryKey<Enchantment> RESONANCE = new Builder(
+			"resonance",
+			1,
+			1,
+			new Enchantment.Cost(25, 0),
+			new Enchantment.Cost(100, 0),
+			8,
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.MINING_LOOT_ENCHANTABLE)
+	).withEnchantable(provider -> provider
+			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
+			.add(SpectrumItems.ENDER_SPLICE)
+			.add(SpectrumItems.EXCHANGING_STAFF)
+	).withExclusiveSet((key, provider) -> provider
+			.forceAddTag(EnchantmentTags.MINING_EXCLUSIVE_SET)
+			.add(PEST_CONTROL)
 	).register();
 	
 	// Increase luck when fishing
@@ -258,7 +273,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(40, 0),
 			new Enchantment.Cost(120, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.empty()
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.FISHING_ENCHANTABLE)
 	).register();
@@ -271,7 +287,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(20, 0),
 			new Enchantment.Cost(50, 0),
 			8,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.empty()
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.CROSSBOW_ENCHANTABLE)
 			.add(SpectrumItems.GLEAMING_PIN)
@@ -287,29 +304,13 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(30, 0),
 			new Enchantment.Cost(60, 0),
 			1,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.DURABILITY_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.DURABILITY_ENCHANTABLE)
 			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
 			.forceAddTag(ItemTags.VANISHING_ENCHANTABLE)
 			.addOptionalTag(Identifier.of("trinkets:enchantable/enchantable"))
-	).register();
-	
-	// Drops mob heads
-	public static final RegistryKey<Enchantment> TREASURE_HUNTER = new Builder(
-			"treasure_hunter",
-			2,
-			3,
-			new Enchantment.Cost(15, 0),
-			new Enchantment.Cost(45, 0),
-			4,
-			List.of(AttributeModifierSlot.MAINHAND)
-	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
-			.addOptionalTag(Identifier.of("malum:scythe"))
-	).withExclusiveSet((key, provider) -> provider
-			.add(Enchantments.LOOTING)
-			.addOptional(Identifier.of("malum:spirit_plunder"))
 	).register();
 	
 	// Increases attack speed
@@ -320,7 +321,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(5, 0),
 			new Enchantment.Cost(35, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEffects((key, ctx, builder) -> builder
 			.addEffect(EnchantmentEffectComponentTypes.ATTRIBUTES, new AttributeEnchantmentEffect(locate("enchantment.tight_grip"), EntityAttributes.GENERIC_ATTACK_SPEED, EnchantmentLevelBasedValue.linear(0.0625f), EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL))
 	).withEnchantable(provider -> provider
@@ -328,6 +330,24 @@ public class SpectrumEnchantments {
 			.addOptionalTag(Identifier.of("malum:scythe"))
 	).withExclusiveSet((key, provider) -> provider
 			.addOptional(Identifier.of("malum:rebound"))
+	).register();
+	
+	// Drops mob heads
+	public static final RegistryKey<Enchantment> TREASURE_HUNTER = new Builder(
+			"treasure_hunter",
+			2,
+			3,
+			new Enchantment.Cost(15, 0),
+			new Enchantment.Cost(45, 0),
+			4,
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.of(ItemTags.SWORD_ENCHANTABLE)
+	).withEnchantable(provider -> provider
+			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
+			.addOptionalTag(Identifier.of("malum:scythe"))
+	).withExclusiveSet((key, provider) -> provider
+			.add(Enchantments.LOOTING)
+			.addOptional(Identifier.of("malum:spirit_plunder"))
 	).register();
 	
 	// Voids all items mined
@@ -338,7 +358,8 @@ public class SpectrumEnchantments {
 			new Enchantment.Cost(25, 0),
 			new Enchantment.Cost(50, 0),
 			4,
-			List.of(AttributeModifierSlot.MAINHAND)
+			List.of(AttributeModifierSlot.MAINHAND),
+			Optional.empty()
 	).withEnchantable(provider -> provider
 			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 			.add(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem())
@@ -368,12 +389,13 @@ public class SpectrumEnchantments {
 		private final Enchantment.Cost maxCost;
 		private final int anvilCost;
 		private final List<AttributeModifierSlot> slots;
+		private final Optional<TagKey<Item>> primaryItems;
 		
 		private EnchantmentBuilderCallback effectsBuilder = (key, ctx, builder) -> builder;
 		private DatagenProxy.TagBuilderCallback<Item> enchantableBuilder = provider -> provider;
 		private DatagenProxy.KeyedTagBuilderCallback<Enchantment> exclusiveSetBuilder = (key, provider) -> provider;
 		
-		public Builder(String name, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost, List<AttributeModifierSlot> slots) {
+		public Builder(String name, int weight, int maxLevel, Enchantment.Cost minCost, Enchantment.Cost maxCost, int anvilCost, List<AttributeModifierSlot> slots, Optional<TagKey<Item>> primaryItems) {
 			this.key = of(name);
 			this.weight = weight;
 			this.maxLevel = maxLevel;
@@ -381,6 +403,7 @@ public class SpectrumEnchantments {
 			this.maxCost = maxCost;
 			this.anvilCost = anvilCost;
 			this.slots = slots;
+			this.primaryItems = primaryItems;
 		}
 		
 		public Builder withEffects(EnchantmentBuilderCallback enchantmentBuilder) {
@@ -401,7 +424,9 @@ public class SpectrumEnchantments {
 		public RegistryKey<Enchantment> register() {
 			BOOTSTRAP_REGISTAR.defer(ctx -> {
 				// Build the enchantment
-				Enchantment.Definition definition = new Enchantment.Definition(ctx.items().getOrThrow(getEnchantableTag(key)), Optional.empty(), weight, maxLevel, minCost, maxCost, anvilCost, slots);
+				RegistryEntryList<Item> supportedItemsList = ctx.items().getOrThrow(getEnchantableTag(key));
+				Optional<RegistryEntryList<Item>> primaryItemsList = primaryItems.map(tag -> ctx.items().getOrThrow(tag));
+				Enchantment.Definition definition = new Enchantment.Definition(supportedItemsList, primaryItemsList, weight, maxLevel, minCost, maxCost, anvilCost, slots);
 				Enchantment.Builder enchantment = new Enchantment.Builder(definition)
 						.exclusiveSet(ctx.enchantments().getOrThrow(getExclusiveSetTag(key)));
 				ctx.registerable().register(key, effectsBuilder.build(key, ctx, enchantment).build(key.getValue()));
@@ -428,7 +453,7 @@ public class SpectrumEnchantments {
 	
 	public static void provideEnchantmentTags(DatagenProxy.ProvidedTagBuilderBuilder<Enchantment> builder) {
 		FabricTagProvider<Enchantment>.FabricTagBuilder enchantments = builder.build(SpectrumEnchantmentTags.SPECTRUM_ENCHANTMENT);
-		ENCHANTMENT_TAG_REGISTRAR.streamKeys().sorted(Comparator.comparing(RegistryKey::getValue)).forEach(enchantments::add);
+		ENCHANTMENT_TAG_REGISTRAR.streamKeys().sorted(Comparator.comparing(RegistryKey::getValue)).forEach(enchantments::addOptional);
 		ENCHANTMENT_TAG_REGISTRAR.flush(builder);
 	}
 	

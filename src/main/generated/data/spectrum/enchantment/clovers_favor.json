@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 4,
   "description": {
     "translate": "enchantment.spectrum.clovers_favor"
   },
-  "effects": {},
-  "anvil_cost": 4,
   "exclusive_set": "#spectrum:exclusive_set/clovers_favor",
   "max_cost": {
     "base": 50,
@@ -18,6 +17,5 @@
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/clovers_favor",
-  "primary_items": "#minecraft:enchantable/sword",
   "weight": 2
 }

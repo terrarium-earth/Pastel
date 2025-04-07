@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/disarming"
+        "spectrum:disarming"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 4,
-  "enchantment": "spectrum:cloaked/disarming",
+  "enchantment": "spectrum:disarming",
   "experience": 10000,
   "item": "spectrum:red_pigment",
   "item_count": 512,

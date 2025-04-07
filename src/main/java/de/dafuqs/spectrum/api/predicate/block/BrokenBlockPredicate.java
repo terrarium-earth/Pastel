@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.api.predicate.block;
 
+import java.util.*;
+
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import net.minecraft.block.*;
@@ -7,8 +9,6 @@ import net.minecraft.predicate.*;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.*;
 import net.minecraft.registry.tag.*;
-
-import java.util.*;
 
 /**
  * Since BlockPredicate requires world and pos as input we can not use that in BrokenBlockCriterion
@@ -18,7 +18,7 @@ import java.util.*;
  * block, state and block tag. Should suffice for 99 % of cases
  */
 public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, Optional<StatePredicate> state) {
-
+	
 	public static final Codec<BrokenBlockPredicate> CODEC = RecordCodecBuilder.create(i -> i.group(
 			RegistryCodecs.entryList(RegistryKeys.BLOCK).optionalFieldOf("blocks").forGetter(BrokenBlockPredicate::blocks),
 			StatePredicate.CODEC.optionalFieldOf("state").forGetter(BrokenBlockPredicate::state)
@@ -58,6 +58,11 @@ public record BrokenBlockPredicate(Optional<RegistryEntryList<Block>> blocks, Op
 		
 		public BrokenBlockPredicate.Builder tag(TagKey<Block> tag) {
 			this.blocks = Registries.BLOCK.getEntryList(tag).map(l -> l);
+			return this;
+		}
+		
+		public BrokenBlockPredicate.Builder registryEntryList(RegistryEntryList<Block> list) {
+			this.blocks = Optional.of(list);
 			return this;
 		}
 		

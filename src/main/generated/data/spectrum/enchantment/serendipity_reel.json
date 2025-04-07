@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 4,
   "description": {
     "translate": "enchantment.spectrum.serendipity_reel"
   },
-  "effects": {},
-  "anvil_cost": 4,
   "exclusive_set": "#spectrum:exclusive_set/serendipity_reel",
   "max_cost": {
     "base": 120,

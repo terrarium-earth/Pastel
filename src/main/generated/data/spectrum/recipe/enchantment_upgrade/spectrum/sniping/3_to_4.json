@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/sniping"
+        "spectrum:sniping"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 4,
-  "enchantment": "spectrum:cloaked/sniping",
+  "enchantment": "spectrum:sniping",
   "experience": 5000,
   "item": "spectrum:green_pigment",
   "item_count": 128,

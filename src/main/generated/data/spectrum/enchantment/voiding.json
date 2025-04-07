@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 4,
   "description": {
     "translate": "enchantment.spectrum.voiding"
   },
-  "effects": {},
-  "anvil_cost": 4,
   "exclusive_set": "#spectrum:exclusive_set/voiding",
   "max_cost": {
     "base": 50,

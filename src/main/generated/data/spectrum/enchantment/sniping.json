@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 8,
   "description": {
     "translate": "enchantment.spectrum.sniping"
   },
-  "effects": {},
-  "anvil_cost": 8,
   "exclusive_set": "#spectrum:exclusive_set/sniping",
   "max_cost": {
     "base": 50,

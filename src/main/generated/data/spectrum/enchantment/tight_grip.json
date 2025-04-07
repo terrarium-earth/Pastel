@@ -1,4 +1,5 @@
 {
+  "anvil_cost": 4,
   "description": {
     "translate": "enchantment.spectrum.tight_grip"
   },
@@ -16,7 +17,6 @@
       }
     ]
   },
-  "anvil_cost": 4,
   "exclusive_set": "#spectrum:exclusive_set/tight_grip",
   "max_cost": {
     "base": 35,
@@ -27,10 +27,10 @@
     "base": 5,
     "per_level_above_first": 0
   },
+  "primary_items": "#minecraft:enchantable/sword",
   "slots": [
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/tight_grip",
-  "primary_items": "#minecraft:enchantable/sword",
   "weight": 2
 }

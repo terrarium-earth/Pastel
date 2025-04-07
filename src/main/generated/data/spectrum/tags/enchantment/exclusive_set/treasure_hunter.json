@@ -1,6 +1,5 @@
 {
   "values": [
-    "spectrum:treasure_hunter",
     "minecraft:looting",
     {
       "id": "malum:spirit_plunder",

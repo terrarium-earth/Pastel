@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 8,
   "description": {
     "translate": "enchantment.spectrum.inertia"
   },
-  "effects": {},
-  "anvil_cost": 8,
   "exclusive_set": "#spectrum:exclusive_set/inertia",
   "max_cost": {
     "base": 40,

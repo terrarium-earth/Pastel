@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.data_loaders.resonance_processors;
 
+import java.util.*;
+
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.api.interaction.*;
@@ -11,8 +13,6 @@ import net.minecraft.component.type.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.state.property.*;
-
-import java.util.*;
 
 public class DropSelfResonanceProcessor extends ResonanceProcessor {
 	

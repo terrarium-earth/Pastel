@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/inertia"
+        "spectrum:inertia"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 2,
-  "enchantment": "spectrum:cloaked/inertia",
+  "enchantment": "spectrum:inertia",
   "experience": 200,
   "item": "spectrum:brown_pigment",
   "item_count": 8,

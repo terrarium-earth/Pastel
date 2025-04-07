@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/big_catch"
+        "spectrum:big_catch"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 3,
-  "enchantment": "spectrum:cloaked/big_catch",
+  "enchantment": "spectrum:big_catch",
   "experience": 800,
   "item": "spectrum:light_blue_pigment",
   "item_count": 128,

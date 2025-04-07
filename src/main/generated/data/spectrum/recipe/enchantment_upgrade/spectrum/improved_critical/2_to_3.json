@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/improved_critical"
+        "spectrum:improved_critical"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 3,
-  "enchantment": "spectrum:cloaked/improved_critical",
+  "enchantment": "spectrum:improved_critical",
   "experience": 2000,
   "item": "spectrum:black_pigment",
   "item_count": 128,

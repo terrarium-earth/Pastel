@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/clovers_favor"
+        "spectrum:clovers_favor"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 4,
-  "enchantment": "spectrum:cloaked/clovers_favor",
+  "enchantment": "spectrum:clovers_favor",
   "experience": 200,
   "item": "spectrum:light_blue_pigment",
   "item_count": 128,

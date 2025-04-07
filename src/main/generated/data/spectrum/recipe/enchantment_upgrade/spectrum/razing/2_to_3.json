@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/razing"
+        "spectrum:razing"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 3,
-  "enchantment": "spectrum:cloaked/razing",
+  "enchantment": "spectrum:razing",
   "experience": 2000,
   "item": "spectrum:gray_pigment",
   "item_count": 128,

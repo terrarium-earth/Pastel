@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/exuberance"
+        "spectrum:exuberance"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 3,
-  "enchantment": "spectrum:cloaked/exuberance",
+  "enchantment": "spectrum:exuberance",
   "experience": 600,
   "item": "spectrum:purple_pigment",
   "item_count": 16,

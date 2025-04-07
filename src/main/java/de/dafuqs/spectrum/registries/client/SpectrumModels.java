@@ -1,14 +1,14 @@
 package de.dafuqs.spectrum.registries.client;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.jade_vines.*;
-import net.minecraft.data.client.*;
-import net.minecraft.util.*;
-
 import java.util.*;
 
 import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.*;
 import static net.minecraft.data.client.TextureKey.*;
+
+import de.dafuqs.spectrum.*;
+import de.dafuqs.spectrum.blocks.jade_vines.*;
+import net.minecraft.data.client.*;
+import net.minecraft.util.*;
 
 public class SpectrumModels {
 	
@@ -54,6 +54,7 @@ public class SpectrumModels {
 	public static final Model REDSTONE_TRANSCEIVER_RECEIVER = new Model(Optional.of(SpectrumCommon.locate("templates/redstone_transceiver_receiver_base")), Optional.empty(), LIGHT);
 	public static final Model ROUNDEL = new Model(Optional.of(SpectrumCommon.locate("templates/base_roundel")), Optional.empty(), ALL);
 	public static final Model SHOOTING_STAR = new Model(Optional.of(SpectrumCommon.locate("templates/shooting_star")), Optional.empty(), SIDE, CORE);
+	public static final Model SLAB_DETECTOR = new Model(Optional.of(SpectrumCommon.locate("templates/slab_detector")), Optional.empty(), TOP, SIDE);
 	public static final Model TRANSLUCENT_OUTER1 = new Model(Optional.of(SpectrumCommon.locate("templates/translucent_outer1")), Optional.empty(), TEXTURE);
 	
 	public static final Identifier PASTEL_GENERIC_NODE = SpectrumCommon.locate("pastel/generic_node");

@@ -3,13 +3,13 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "spectrum:cloaked/treasure_hunter"
+        "spectrum:treasure_hunter"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "destination_level": 2,
-  "enchantment": "spectrum:cloaked/treasure_hunter",
+  "enchantment": "spectrum:treasure_hunter",
   "experience": 200,
   "item": "spectrum:light_blue_pigment",
   "item_count": 8,

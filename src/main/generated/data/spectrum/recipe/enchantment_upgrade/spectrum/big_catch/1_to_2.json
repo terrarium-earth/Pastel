@@ -1,19 +1,4 @@
 {
-  "type": "spectrum:enchantment_upgrade",
-  "enchantment": "spectrum:big_catch",
-  "levels": [
-    {
-      "experience": 400,
-      "item": "spectrum:light_blue_pigment",
-      "item_count": 32
-    },
-    {
-      "experience": 800,
-      "item": "spectrum:light_blue_pigment",
-      "item_count": 128
-    }
-  ],
-  "required_advancement": "spectrum:unlocks/enchantments/big_catch",
   "fabric:load_conditions": [
     {
       "condition": "spectrum:enchantments_exist",
@@ -21,5 +6,12 @@
         "spectrum:big_catch"
       ]
     }
-  ]
+  ],
+  "type": "spectrum:enchantment_upgrade",
+  "destination_level": 2,
+  "enchantment": "spectrum:big_catch",
+  "experience": 400,
+  "item": "spectrum:light_blue_pigment",
+  "item_count": 32,
+  "required_advancement": "spectrum:unlocks/enchantments/big_catch"
 }

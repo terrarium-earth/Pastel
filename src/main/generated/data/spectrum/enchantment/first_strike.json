@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 4,
   "description": {
     "translate": "enchantment.spectrum.first_strike"
   },
-  "effects": {},
-  "anvil_cost": 4,
   "exclusive_set": "#spectrum:exclusive_set/first_strike",
   "max_cost": {
     "base": 40,
@@ -14,10 +13,10 @@
     "base": 10,
     "per_level_above_first": 0
   },
+  "primary_items": "#minecraft:enchantable/sword",
   "slots": [
     "mainhand"
   ],
   "supported_items": "#spectrum:enchantable/first_strike",
-  "primary_items": "#minecraft:enchantable/sword",
   "weight": 2
 }

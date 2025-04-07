@@ -1,9 +1,8 @@
 {
+  "anvil_cost": 8,
   "description": {
     "translate": "enchantment.spectrum.inexorable"
   },
-  "effects": {},
-  "anvil_cost": 8,
   "exclusive_set": "#spectrum:exclusive_set/inexorable",
   "max_cost": {
     "base": 100,
@@ -14,12 +13,12 @@
     "base": 50,
     "per_level_above_first": 0
   },
+  "primary_items": "#minecraft:enchantable/chest_armor",
   "slots": [
     "mainhand",
     "offhand",
     "chest"
   ],
   "supported_items": "#spectrum:enchantable/inexorable",
-  "primary_items": "#minecraft:enchantable/chest_armor",
   "weight": 1
 }

@@ -1,6 +1,5 @@
 {
   "values": [
-    "spectrum:foundry",
     "minecraft:silk_touch",
     {
       "id": "gofish:deepfry",
