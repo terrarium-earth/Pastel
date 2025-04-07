@@ -47,6 +47,7 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
 	}
 	
 	public void copyBlockStateTags(BlockState minedState, ItemStack convertedStack) {
+		BlockStateComponent component = BlockStateComponent.DEFAULT;
 		for (Property<?> blockProperty : minedState.getProperties()) {
 			if (statePropertiesToCopy.contains(blockProperty.getName())) {
 				if (!includeDefaultStateProperties && minedState.getBlock().getDefaultState().get(blockProperty) == minedState.get(blockProperty)) {
@@ -54,14 +55,10 @@ public class DropSelfResonanceProcessor extends ResonanceProcessor {
 					continue;
 				}
 				
-				NbtComponent nbt = convertedStack.get(DataComponentTypes.CUSTOM_DATA);
-				convertedStack.apply(DataComponentTypes.CUSTOM_DATA, nbt, nbtComponent -> nbtComponent.apply(nbtCompound -> nbtCompound.putString(blockProperty.getName(), getPropertyName(minedState, blockProperty))));
+				component = component.with(blockProperty, minedState);
 			}
 		}
-	}
-	
-	private static <T extends Comparable<T>> String getPropertyName(BlockState state, Property<T> property) {
-		return property.name(state.get(property));
+		convertedStack.set(DataComponentTypes.BLOCK_STATE, component);
 	}
 	
 	public void copyNbt(BlockEntity blockEntity, ItemStack convertedStack) {
