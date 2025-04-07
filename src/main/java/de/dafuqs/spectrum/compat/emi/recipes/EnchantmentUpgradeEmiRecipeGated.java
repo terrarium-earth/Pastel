@@ -27,6 +27,8 @@ import java.util.function.*;
 public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectrumRecipe<?>> {
 	
 	private static final Identifier BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/enchanter.png");
+	private static final int NORMAL_COLOR = 0xcf32c7;
+	private static final int OVERCHANT_COLOR = 0xdb3564;
 	
 	private static final int SWITCH_TIME = 30;
 	private static final int XP_INDEX = 8;
@@ -78,7 +80,7 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 	public void addUnlockedWidgets(WidgetHolder widgets) {
 		widgets.addTexture(BACKGROUND_TEXTURE, 13, 13, 54, 54, 0, 0);
 		if (AdvancementHelper.hasAdvancement(MinecraftClient.getInstance().player, SpectrumAdvancements.OVERENCHANTING) && levelCap > maxNormal)
-			widgets.addTexture(BACKGROUND_TEXTURE, 0, 0, 16, 16, 64, 0);
+			widgets.addTexture(BACKGROUND_TEXTURE, 0, 0, 16, 16, 64, 0).tooltipText(List.of(Text.translatable(EnchanterBlockEntity.OVERCHANTING_TOOLTIP).styled(s -> s.withColor(OVERCHANT_COLOR))));
 		
 		// Knowledge Gem and Enchanter
 		final var gem = new DynamicStackWidget(c -> {
@@ -118,9 +120,9 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 		// Info
 		final var lv = new DynamicTextWidget(c -> {
 			var cell = indexer.apply(c) + 1;
-			var color = 0xcf32c7;
+			var color = NORMAL_COLOR;
 			if (cell + 1 > maxNormal)
-				color = 0xdb3564;
+				color = OVERCHANT_COLOR;
 			
 			
 			return new Pair<>(Text.translatable(EnchanterBlockEntity.LEVEL_TRANS, cell, cell + 1).asOrderedText(), color);

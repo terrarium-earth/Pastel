@@ -55,7 +55,7 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 		if (overUnlocked && display.levelCap > display.maxNormal)
 			widgets.add(Widgets.withTooltip(
 					Widgets.withBounds(Widgets.createTexturedWidget(BACKGROUND_TEXTURE, startPoint.x - 10, startPoint.y + 2, 64, 0, 16, 16), new Rectangle(startPoint.x - 10, startPoint.y + 2, 16, 16)),
-					Text.translatable(EnchanterBlockEntity.OVERCHANTING_TOOLTIP)));
+					Text.translatable(EnchanterBlockEntity.OVERCHANTING_TOOLTIP).styled(s -> s.withColor(OVERCHANT_COLOR))));
 		
 		
 		// surrounding input slots
