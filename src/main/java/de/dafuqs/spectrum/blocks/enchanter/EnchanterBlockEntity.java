@@ -291,33 +291,42 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				new Vec3d(0.1D, -0.1D, 0.1D));
 	}
 	
-	private static boolean checkRecipeRequirements(World world, BlockPos blockPos, @NotNull EnchanterBlockEntity enchanterBlockEntity) {
-		PlayerEntity lastInteractedPlayer = enchanterBlockEntity.getOwnerIfOnline();
+	private static boolean checkRecipeRequirements(World world, BlockPos blockPos, @NotNull EnchanterBlockEntity enchanter) {
+		PlayerEntity lastInteractedPlayer = enchanter.getOwnerIfOnline();
 		
 		if (lastInteractedPlayer == null) {
 			return false;
 		}
-		if (enchanterBlockEntity.currentRecipe == null) {
+		if (enchanter.currentRecipe == null) {
 			return false;
 		}
 		
+		var recipe = enchanter.currentRecipe.value();
+		
 		boolean playerCanCraft = true;
-		if (enchanterBlockEntity.currentRecipe.value() instanceof EnchanterRecipe enchanterRecipe) {
+		if (recipe instanceof EnchanterRecipe enchanterRecipe) {
 			playerCanCraft = enchanterRecipe.canPlayerCraft(lastInteractedPlayer);
-		} else if (enchanterBlockEntity.currentRecipe.value() instanceof EnchantmentUpgradeRecipe enchantmentUpgradeRecipe) {
-			playerCanCraft = enchantmentUpgradeRecipe.canPlayerCraft(lastInteractedPlayer) && (enchanterBlockEntity.canOwnerOverenchant || !enchantmentUpgradeRecipe.requiresUnlockedOverEnchanting());
+		} else if (recipe instanceof EnchantmentUpgradeRecipe upgrade) {
+			var enchLevel = getLevel(enchanter, upgrade);
+			
+			playerCanCraft = upgrade.canPlayerCraft(lastInteractedPlayer)
+					&& (enchanter.canOwnerOverenchant || upgrade.isInNormalRange(enchLevel));
 		}
 		boolean structureComplete = EnchanterBlock.verifyStructure(world, blockPos, null);
 		
 		if (!playerCanCraft || !structureComplete) {
 			if (!structureComplete) {
-				world.playSound(null, enchanterBlockEntity.getPos(), SpectrumSoundEvents.CRAFTING_ABORTED, SoundCategory.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
-				world.playSound(null, enchanterBlockEntity.getPos(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F);
+				world.playSound(null, enchanter.getPos(), SpectrumSoundEvents.CRAFTING_ABORTED, SoundCategory.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
+				world.playSound(null, enchanter.getPos(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F);
 				EnchanterBlock.scatterContents(world, blockPos);
 			}
 			return false;
 		}
 		return true;
+	}
+	
+	private static int getLevel(@NotNull EnchanterBlockEntity enchanter, EnchantmentUpgradeRecipe upgrade) {
+		return enchanter.getStack(0).get(DataComponentTypes.STORED_ENCHANTMENTS).getLevel(upgrade.getEnchantment());
 	}
 	
 	public static void enchantCenterItem(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
@@ -582,17 +591,17 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		enchanter.currentRecipe = null;
 		
 		var recipeManager = world.getRecipeManager();
-		var enchantmentUpgradeRecipe = recipeManager
+		var upgrade = recipeManager
 				.getFirstMatch(SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, enchanter.virtualInventory.createInput(), world)
 				.orElse(null);
 		
-		if (enchantmentUpgradeRecipe != null) {
-			if (enchanter.canOwnerOverenchant || !enchantmentUpgradeRecipe.value().requiresUnlockedOverEnchanting()) {
-				enchanter.currentRecipe = enchantmentUpgradeRecipe;
+		if (upgrade != null) {
+			if (enchanter.canOwnerOverenchant || upgrade.value().isInNormalRange(getLevel(enchanter, upgrade.value()))) {
+				enchanter.currentRecipe = upgrade;
 				enchanter.currentItemProcessingTime = 0;
 				
-				var level = enchanter.items.get(0).get(DataComponentTypes.STORED_ENCHANTMENTS).getLevel(enchantmentUpgradeRecipe.value().getEnchantment());
-				enchanter.craftingTimeTotal = enchantmentUpgradeRecipe.value().getItemScaling().apply(level);
+				var level = enchanter.items.get(0).get(DataComponentTypes.STORED_ENCHANTMENTS).getLevel(upgrade.value().getEnchantment());
+				enchanter.craftingTimeTotal = upgrade.value().getItemScaling().apply(level);
 				
 				//TODO why are we doing this?
 				EnchanterInventory testInventory = new EnchanterInventory();

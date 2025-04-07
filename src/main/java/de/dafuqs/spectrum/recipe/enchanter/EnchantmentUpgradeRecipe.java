@@ -188,8 +188,8 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		return levelCap;
 	}
 	
-	public boolean requiresUnlockedOverEnchanting() {
-		return this.levelCap > this.enchantmentEntry.value().getMaxLevel();
+	public boolean isInNormalRange(int level) {
+		return level < this.enchantmentEntry.value().getMaxLevel();
 	}
 	
 	public static class Serializer implements RecipeSerializer<EnchantmentUpgradeRecipe> {

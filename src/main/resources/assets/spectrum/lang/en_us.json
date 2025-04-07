@@ -4077,6 +4077,7 @@
   "container.spectrum.rei.dragonrot_converting.title": "Dragonrot Dipping",
   "container.spectrum.rei.enchanter_recipe": "Enchanter Recipe",
   "container.spectrum.rei.enchanting.title": "Enchanting Items",
+  "container.spectrum.rei.enchantment_upgrade.level": "LV%f⇒%f",
   "container.spectrum.rei.enchantment_upgrade.required_item_count": "(%fx)",
   "container.spectrum.rei.enchantment_upgrading.title": "Enchantment Upgrading",
   "container.spectrum.rei.freezing.title": "Freezing",
