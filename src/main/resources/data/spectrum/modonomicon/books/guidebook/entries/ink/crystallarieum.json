@@ -44,67 +44,67 @@
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page4.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/coal"
+      "recipe_id": "spectrum:crystallarieum/minecraft/coal"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page5.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/copper"
+      "recipe_id": "spectrum:crystallarieum/minecraft/copper"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page6.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/diamond"
+      "recipe_id": "spectrum:crystallarieum/minecraft/diamond"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page7.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/echo"
+      "recipe_id": "spectrum:crystallarieum/minecraft/echo"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page8.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/emerald"
+      "recipe_id": "spectrum:crystallarieum/minecraft/emerald"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page9.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/glowstone"
+      "recipe_id": "spectrum:crystallarieum/minecraft/glowstone"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page10.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/gold"
+      "recipe_id": "spectrum:crystallarieum/minecraft/gold"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page11.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/iron"
+      "recipe_id": "spectrum:crystallarieum/minecraft/iron"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page12.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/lapis"
+      "recipe_id": "spectrum:crystallarieum/minecraft/lapis"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page13.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/netherite_scrap"
+      "recipe_id": "spectrum:crystallarieum/minecraft/netherite_scrap"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page14.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/prismarine_crystal"
+      "recipe_id": "spectrum:crystallarieum/minecraft/prismarine_crystal"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page15.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/quartz"
+      "recipe_id": "spectrum:crystallarieum/minecraft/quartz"
     },
     {
       "type": "spectrum:crystallarieum_growing",
       "title": "book.spectrum.guidebook.crystallarieum.page16.title",
-      "recipe_id": "spectrum:crystallarieum/vanilla/redstone"
+      "recipe_id": "spectrum:crystallarieum/minecraft/redstone"
     }
   ]
 }

@@ -32,7 +32,7 @@
         "advancement_id": "spectrum:unlocks/blocks/crystallarieum"
       },
       "title": "book.spectrum.guidebook.bismuth.page1.title",
-      "recipe_id": "spectrum:crystallarieum/bismuth",
+      "recipe_id": "spectrum:crystallarieum/spectrum/bismuth",
       "text": "book.spectrum.guidebook.bismuth.page1.text"
     },
     {

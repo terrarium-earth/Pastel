@@ -35,7 +35,7 @@
         "advancement_id": "spectrum:unlocks/resources/bloodstone"
       },
       "title": "book.spectrum.guidebook.bloodstone.page1.title",
-      "recipe_id": "spectrum:crystallarieum/bloodstone",
+      "recipe_id": "spectrum:crystallarieum/spectrum/bloodstone",
       "text": "book.spectrum.guidebook.bloodstone.page1.text"
     }
   ]

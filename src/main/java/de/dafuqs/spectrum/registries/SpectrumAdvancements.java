@@ -95,6 +95,7 @@ public class SpectrumAdvancements {
 	public static final Identifier UNLOCK_IDOLS = SpectrumCommon.locate("unlocks/items/idols");
 	public static final Identifier UNLOCK_LESSER_POTION_PENDANT = SpectrumCommon.locate("unlocks/trinkets/lesser_potion_pendant");
 	public static final Identifier UNLOCK_NATURES_STAFF = SpectrumCommon.locate("unlocks/items/natures_staff");
+	public static final Identifier UNLOCK_BLOODSTONE = SpectrumCommon.locate("unlocks/resources/bloodstone");
 	
 	// Misc
 	public static final Identifier ASCEND_KINDLING = SpectrumCommon.locate("ascend_kindling");
@@ -121,6 +122,8 @@ public class SpectrumAdvancements {
 	public static final Identifier COLLECT_CITRINE = SpectrumCommon.locate("hidden/collect_shards/citrine");
 	public static final Identifier CREATE_ONYX = SpectrumCommon.locate("create_onyx_shard");
 	public static final Identifier COLLECT_MOONSTONE = SpectrumCommon.locate("lategame/collect_moonstone");
+	public static final Identifier COLLECT_AZURITE = SpectrumCommon.locate("midgame/collect_azurite");
+	public static final Identifier COLLECT_MALACHITE = SpectrumCommon.locate("lategame/collect_malachite");
 	public static final Identifier FIND_FORGOTTEN_CITY = SpectrumCommon.locate("lategame/find_forgotten_city");
 	public static final Identifier COLLECT_MYCEYLON = SpectrumCommon.locate("lategame/collect_myceylon");
 	public static final Identifier BUILD_SPIRIT_INSTILLER_STRUCTURE = SpectrumCommon.locate("midgame/build_spirit_instiller_structure");
