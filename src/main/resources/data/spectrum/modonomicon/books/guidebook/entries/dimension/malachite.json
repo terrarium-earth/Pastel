@@ -32,7 +32,7 @@
         "advancement_id": "spectrum:unlocks/blocks/crystallarieum"
       },
       "title": "book.spectrum.guidebook.malachite.page1.title",
-      "recipe_id": "spectrum:crystallarieum/malachite",
+      "recipe_id": "spectrum:crystallarieum/spectrum/malachite",
       "text": "book.spectrum.guidebook.malachite.page1.text"
     }
   ]

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.deeper_down;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.*;
 import de.dafuqs.spectrum.blocks.deeper_down.flora.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.registries.*;
@@ -9,7 +9,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.loot.*;
 import net.minecraft.loot.context.*;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.*;
 import net.minecraft.server.world.*;
 import net.minecraft.sound.*;
 import net.minecraft.state.*;
@@ -23,94 +23,99 @@ import net.minecraft.world.*;
 import java.util.*;
 
 public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
-
-    public static final MapCodec<WeepingGalaFrondsTipBlock> CODEC = createCodec(WeepingGalaFrondsTipBlock::new);
-    public static final EnumProperty<Form> FORM = EnumProperty.of("form", Form.class);
-
-    public WeepingGalaFrondsTipBlock(Settings settings) {
-        super(settings);
-        setDefaultState(getDefaultState().with(FORM, Form.TIP));
-    }
-
-    @Override
-    public MapCodec<? extends WeepingGalaFrondsTipBlock> getCodec() {
-        return CODEC;
-    }
-
-    @Override
-    public boolean hasRandomTicks(BlockState state) {
-        return state.get(FORM) != Form.TIP;
-    }
-
-    @Override
-    public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        if (random.nextFloat() < 0.1F) {
-            var reference = BlockReference.of(state, pos);
-            var form = reference.getProperty(FORM);
-
-            if (form == Form.SPRIG) {
-                reference.setProperty(FORM, Form.RESIN);
-                reference.update(world);
-            }
-            else {
-                for (ItemStack rareStack : getResinStacks(state, world, pos, ItemStack.EMPTY, SpectrumLootTables.WEEPING_GALA_SPRIG_RESIN)) {
-                    dropStack(world, pos, rareStack);
-                }
-                world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_DRIP, SoundCategory.BLOCKS, 1, 0.9F + random.nextFloat() * 0.2F);
-                reference.setProperty(FORM, Form.SPRIG);
-                reference.update(world);
-            }
-        }
-    }
-
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        var reference = BlockReference.of(state, pos);
-        if (reference.getProperty(FORM) == Form.RESIN) {
-            if (!world.isClient()) {
-                for (ItemStack rareStack : getResinStacks(state, (ServerWorld) world, pos, player.getMainHandStack(), SpectrumLootTables.WEEPING_GALA_SPRIG_RESIN)) {
-                    dropStack(world, pos, rareStack);
-                }
-            }
-            world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_SHEAR, SoundCategory.BLOCKS, 1, 0.9F + world.getRandom().nextFloat() * 0.2F);
-            reference.setProperty(FORM, Form.SPRIG);
-            reference.update(world);
-
-            return ActionResult.success(world.isClient());
-        }
-
-        return ActionResult.PASS;
-    }
-
-    public static List<ItemStack> getResinStacks(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, RegistryKey<LootTable> lootTableKey) {
-        var builder = (new LootContextParameterSet.Builder(world))
-                .add(LootContextParameters.BLOCK_STATE, state)
-                .add(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
-                .add(LootContextParameters.TOOL, stack);
-
-        LootTable lootTable = world.getServer().getReloadableRegistries().getLootTable(lootTableKey);
-        return lootTable.generateLoot(builder.build(LootContextTypes.BLOCK));
-    }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FORM);
-    }
-
-    public enum Form implements StringIdentifiable {
-        TIP("tip"),
-        SPRIG("sprig"),
-        RESIN("resin");
-
-        private final String name;
-
-        Form(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String asString() {
-            return name;
-        }
-    }
+	
+	public static final MapCodec<WeepingGalaFrondsTipBlock> CODEC = createCodec(WeepingGalaFrondsTipBlock::new);
+	public static final EnumProperty<Form> FORM = EnumProperty.of("form", Form.class);
+	
+	public WeepingGalaFrondsTipBlock(Settings settings) {
+		super(settings);
+		setDefaultState(getDefaultState().with(FORM, Form.TIP));
+	}
+	
+	@Override
+	public MapCodec<? extends WeepingGalaFrondsTipBlock> getCodec() {
+		return CODEC;
+	}
+	
+	@Override
+	public boolean hasRandomTicks(BlockState state) {
+		return state.get(FORM) != Form.TIP;
+	}
+	
+	@Override
+	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		if (random.nextFloat() < 0.1F) {
+			var reference = BlockReference.of(state, pos);
+			var form = reference.getProperty(FORM);
+			
+			if (form == Form.SPRIG) {
+				reference.setProperty(FORM, Form.RESIN);
+				reference.update(world);
+			} else {
+				for (ItemStack rareStack : getResinStacks(state, world, pos, ItemStack.EMPTY, SpectrumLootTables.WEEPING_GALA_SPRIG_RESIN)) {
+					dropStack(world, pos, rareStack);
+				}
+				world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_DRIP, SoundCategory.BLOCKS, 1, 0.9F + random.nextFloat() * 0.2F);
+				reference.setProperty(FORM, Form.SPRIG);
+				reference.update(world);
+			}
+		}
+	}
+	
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+		var reference = BlockReference.of(state, pos);
+		if (reference.getProperty(FORM) == Form.RESIN) {
+			if (!world.isClient()) {
+				for (ItemStack rareStack : getResinStacks(state, (ServerWorld) world, pos, player.getMainHandStack(), SpectrumLootTables.WEEPING_GALA_SPRIG_RESIN)) {
+					dropStack(world, pos, rareStack);
+				}
+			}
+			world.playSound(null, pos, SoundEvents.BLOCK_BEEHIVE_SHEAR, SoundCategory.BLOCKS, 1, 0.9F + world.getRandom().nextFloat() * 0.2F);
+			reference.setProperty(FORM, Form.SPRIG);
+			reference.update(world);
+			
+			return ActionResult.success(world.isClient());
+		}
+		
+		return ActionResult.PASS;
+	}
+	
+	public static List<ItemStack> getResinStacks(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack, RegistryKey<LootTable> lootTableKey) {
+		var builder = (new LootContextParameterSet.Builder(world))
+				.add(LootContextParameters.BLOCK_STATE, state)
+				.add(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
+				.add(LootContextParameters.TOOL, stack);
+		
+		LootTable lootTable = world.getServer().getReloadableRegistries().getLootTable(lootTableKey);
+		return lootTable.generateLoot(builder.build(LootContextTypes.BLOCK));
+	}
+	
+	@Override
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+		builder.add(FORM);
+	}
+	
+	public enum Form implements StringIdentifiable {
+		TIP("tip", 0),
+		SPRIG("sprig", 11),
+		RESIN("resin", 12);
+		
+		private final String name;
+		private final int luminance;
+		
+		Form(String name, int luminance) {
+			this.name = name;
+			this.luminance = luminance;
+		}
+		
+		public int getLuminance() {
+			return this.luminance;
+		}
+		
+		@Override
+		public String asString() {
+			return name;
+		}
+	}
 }

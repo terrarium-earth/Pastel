@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.recipe.crystallarieum;
 
+import java.util.*;
+
 import com.google.common.collect.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
@@ -20,8 +22,6 @@ import net.minecraft.util.*;
 import net.minecraft.util.collection.*;
 import net.minecraft.world.*;
 import org.jetbrains.annotations.*;
-
-import java.util.*;
 
 public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeInput> {
 	
@@ -190,8 +190,8 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleStackRecipeI
 				Codec.INT.fieldOf("seconds_per_growth_stage").forGetter(recipe -> recipe.secondsPerGrowthStage),
 				InkColor.CODEC.fieldOf("ink_color").forGetter(recipe -> recipe.inkColor),
 				Codec.INT.xmap(
-						d -> d == 0 ? 0 : (int) Math.pow(2, d - 1),
-						e -> e
+						d -> d == 0 ? 0 : (1 << (d - 1)),
+						e -> e == 0 ? 0 : (31 - Integer.numberOfLeadingZeros(e)) + 1
 				).fieldOf("ink_cost_tier").forGetter(recipe -> recipe.inkPerSecond),
 				Codec.BOOL.optionalFieldOf("grows_without_catalyst", false).forGetter(recipe -> recipe.growsWithoutCatalyst),
 				CrystallarieumCatalyst.CODEC.listOf().fieldOf("catalysts").forGetter(recipe -> recipe.catalysts),

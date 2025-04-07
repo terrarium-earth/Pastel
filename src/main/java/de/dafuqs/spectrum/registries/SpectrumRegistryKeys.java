@@ -28,8 +28,8 @@ public class SpectrumRegistryKeys {
 	public static final RegistryKey<Registry<ExplosionModifierType>> EXPLOSION_MODIFIER_TYPE = of("explosion_modifier_type");
 	public static final RegistryKey<Registry<ExplosionModifier>> EXPLOSION_MODIFIER = of("explosion_effect_modifier");
 	
-	public static final RegistryKey<Registry<MapCodec<? extends ResonanceDropProcessor>>> RESONANCE_DROP_PROCESSOR_TYPE = of("resonance_drop_processor_type");
-	public static final RegistryKey<Registry<ResonanceDropProcessor>> RESONANCE_DROP_PROCESSOR = of("resonance_drop_processor");
+	public static final RegistryKey<Registry<MapCodec<? extends ResonanceProcessor>>> RESONANCE_PROCESSOR_TYPE = of("resonance_processor_type");
+	public static final RegistryKey<Registry<ResonanceProcessor>> RESONANCE_PROCESSOR = of("resonance_processor");
 	
 	private static <T> RegistryKey<Registry<T>> of(String name) {
 		return RegistryKey.ofRegistry(SpectrumCommon.locate(name));

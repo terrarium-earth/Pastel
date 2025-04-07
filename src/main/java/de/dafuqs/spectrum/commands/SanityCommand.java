@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.commands;
 
+import java.util.*;
+
 import com.mojang.brigadier.arguments.*;
 import com.mojang.brigadier.tree.*;
 import de.dafuqs.revelationary.*;
@@ -42,8 +44,6 @@ import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.apache.commons.lang3.*;
 import org.jetbrains.annotations.*;
-
-import java.util.*;
 
 public class SanityCommand {
 	
@@ -355,7 +355,7 @@ public class SanityCommand {
 			PedestalRecipe recipe = recipeEntry.value();
 			
 			Identifier id = recipeEntry.id();
-			if (id.getPath().startsWith("mod_integration/") || id.getPath().contains("/glass/") || id.getPath().contains("/saplings/") || id.getPath().contains("/detectors/") || id.getPath().contains("/gemstone_lights/") || id.getPath().contains("/decostones/")
+			if (id.getPath().startsWith("mod_integration/") || id.getPath().contains("/glass/") || id.getPath().contains("/saplings/") || id.getPath().contains("/detectors/") || id.getPath().contains("/gemstone_lights/") || id.getPath().contains("/pylons/")
 					|| id.getPath().contains("/runes/") || id.getPath().contains("/pastel_network/") || id.getPath().contains("/gemstone_chimes/") || id.getPath().contains("/semi_permeable_glass/")
 					|| id.getPath().contains("/colored_lamps/") || id.getPath().contains("/colored_spore_blossoms/") || id.getPath().contains("/glowblocks/")) {
 				continue;

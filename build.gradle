@@ -29,6 +29,14 @@ repositories {
 	mavenCentral()
 }
 
+fabricApi {
+	configureDataGeneration {
+		client = true
+		modId = "spectrum-datagen"
+		createSourceSet = true
+	}
+}
+
 dependencies {
 	// jetbrains annotations
 	implementation("org.jetbrains:annotations:26.0.1")
@@ -103,22 +111,17 @@ dependencies {
 	for (String module in port_lib_modules.split(",")) {
 		modCompileOnly("io.github.fabricators_of_create.Porting-Lib:$module:${project.port_lib_version}") { transitive = false }
 	}
+
+	// Datagen dependencies
+	// TODO - Noaaan April 7th 2025: None of these are for 1.21.1 yet, lol
+	//modDatagenRuntimeOnly("curse.maven:gobber-427177:${project.gobber_version}")
+	//modDatagenRuntimeOnly("maven.modrinth:ae2:${project.ae2_version}")
+	//modDatagenRuntimeOnly("maven.modrinth:botania:${project.botania_version}")
+	//modDatagenRuntimeOnly("maven.modrinth:create-fabric:${project.create_version}")
 }
 
 loom {
 	accessWidenerPath = file("src/main/resources/spectrum.accesswidener")
-
-	runs {
-		datagen {
-			server()
-
-			name "Minecraft Data"
-			vmArg "-Dfabric-api.datagen"
-			vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
-
-			runDir "build/datagen"
-		}
-	}
 }
 
 processResources {

@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
+import static de.dafuqs.spectrum.SpectrumCommon.*;
+
 import de.dafuqs.spectrum.*;
 import net.minecraft.util.*;
-
-import static de.dafuqs.spectrum.SpectrumCommon.*;
 
 @SuppressWarnings("unused")
 public class SpectrumAdvancements {
@@ -56,13 +56,25 @@ public class SpectrumAdvancements {
 	public static final Identifier ENCHANTMENTS_INVENTORY_INSERTION = SpectrumCommon.locate("unlocks/enchantments/inventory_insertion");
 	public static final Identifier ENCHANTMENTS_PEST_CONTROL = SpectrumCommon.locate("unlocks/enchantments/pest_control");
 	public static final Identifier ENCHANTMENTS_RAZING = SpectrumCommon.locate("unlocks/enchantments/razing_usage");
-	public static final Identifier ENCHANTMENTS_RESONANCE_USAGE = SpectrumCommon.locate("unlocks/enchantments/resonance_usage");
+	public static final Identifier ENCHANTMENTS_RESONANCE = SpectrumCommon.locate("unlocks/enchantments/resonance_usage");
 	public static final Identifier ENCHANTMENTS_SERENDIPITY_REEL = SpectrumCommon.locate("unlocks/enchantments/serendipity_reel");
 	public static final Identifier ENCHANTMENTS_SNIPING = SpectrumCommon.locate("unlocks/enchantments/sniping");
 	public static final Identifier ENCHANTMENTS_STEADFAST = SpectrumCommon.locate("unlocks/enchantments/steadfast");
 	public static final Identifier ENCHANTMENTS_TIGHT_GRIP = SpectrumCommon.locate("unlocks/enchantments/tight_grip");
 	public static final Identifier ENCHANTMENTS_TREASURE_HUNTER = SpectrumCommon.locate("unlocks/enchantments/treasure_hunter");
-	public static final Identifier ENCHANTMENTS_VOIDING_USAGE = SpectrumCommon.locate("unlocks/enchantments/voiding_usage");
+	public static final Identifier ENCHANTMENTS_VOIDING = SpectrumCommon.locate("unlocks/enchantments/voiding_usage");
+	
+	public static final Identifier ENCHANTMENTS_VANILLA_DAMAGE = SpectrumCommon.locate("unlocks/enchantments/vanilla_damage");
+	public static final Identifier ENCHANTMENTS_VANILLA_LUCK = SpectrumCommon.locate("unlocks/enchantments/vanilla_luck");
+	public static final Identifier ENCHANTMENTS_VANILLA_PROJECTILE = SpectrumCommon.locate("unlocks/enchantments/vanilla_projectile");
+	public static final Identifier ENCHANTMENTS_VANILLA_PROTECTION = SpectrumCommon.locate("unlocks/enchantments/vanilla_protection");
+	public static final Identifier ENCHANTMENTS_VANILLA_QUITOXIC = SpectrumCommon.locate("unlocks/enchantments/vanilla_quitoxic");
+	public static final Identifier ENCHANTMENTS_VANILLA_SWIFT_SNEAK = SpectrumCommon.locate("unlocks/enchantments/vanilla_swift_sneak");
+	public static final Identifier ENCHANTMENTS_VANILLA_TREASURE = SpectrumCommon.locate("unlocks/enchantments/vanilla_treasure");
+	public static final Identifier ENCHANTMENTS_VANILLA_TRIDENT = SpectrumCommon.locate("unlocks/enchantments/vanilla_trident");
+	public static final Identifier ENCHANTMENTS_VANILLA_UNBREAKING = SpectrumCommon.locate("unlocks/enchantments/vanilla_unbreaking");
+	public static final Identifier ENCHANTMENTS_VANILLA_WATER = SpectrumCommon.locate("unlocks/enchantments/vanilla_water");
+	public static final Identifier ENCHANTMENTS_VANILLA_WATER_LUCK = SpectrumCommon.locate("unlocks/enchantments/vanilla_water_luck");
 	
 	// Pedestal
 	public static final Identifier PLACED_PEDESTAL = SpectrumCommon.locate("place_pedestal");
@@ -83,6 +95,7 @@ public class SpectrumAdvancements {
 	public static final Identifier UNLOCK_IDOLS = SpectrumCommon.locate("unlocks/items/idols");
 	public static final Identifier UNLOCK_LESSER_POTION_PENDANT = SpectrumCommon.locate("unlocks/trinkets/lesser_potion_pendant");
 	public static final Identifier UNLOCK_NATURES_STAFF = SpectrumCommon.locate("unlocks/items/natures_staff");
+	public static final Identifier UNLOCK_BLOODSTONE = SpectrumCommon.locate("unlocks/resources/bloodstone");
 	
 	// Misc
 	public static final Identifier ASCEND_KINDLING = SpectrumCommon.locate("ascend_kindling");
@@ -96,9 +109,22 @@ public class SpectrumAdvancements {
 	public static final Identifier FIND_EXCAVATION_SITE = SpectrumCommon.locate("lategame/find_excavation_site");
 	public static final Identifier LATEGAME = SpectrumCommon.locate("lategame/spectrum_lategame");
 	public static final Identifier MIDGAME = SpectrumCommon.locate("midgame/spectrum_midgame");
+	public static final Identifier BREAK_DECAYED_BEDROCK = locate("midgame/break_decayed_bedrock");
 	public static final Identifier MYSTERIOUS_LOCKET_SOCKETING = SpectrumCommon.locate("unlocks/mysterious_locket_socketing");
 	public static final Identifier PLUCK_RESPLENDENT_FEATHER = SpectrumCommon.locate("pluck_resplendent_feather");
 	public static final Identifier SOLVE_WIRELESS_REDSTONE_PRESERVATION_RUIN = SpectrumCommon.locate("solve_wireless_redstone_preservation_ruin");
 	public static final Identifier STRIKE_UP_HUMMINGSTONE_HYMN = SpectrumCommon.locate("lategame/strike_up_hummingstone_hymn");
 	public static final Identifier VIVISECT_KINDLING = SpectrumCommon.locate("mod_integration/neepmeat/vivisect_kindling");
+	
+	public static final Identifier COLLECT_ALL_BASIC_PIGMENTS_BESIDES_BROWN = SpectrumCommon.locate("collect_all_basic_pigments_besides_brown");
+	public static final Identifier COLLECT_TOPAZ = SpectrumCommon.locate("hidden/collect_shards/citrine");
+	public static final Identifier COLLECT_AMETHYST = SpectrumCommon.locate("hidden/collect_shards/amethyst");
+	public static final Identifier COLLECT_CITRINE = SpectrumCommon.locate("hidden/collect_shards/citrine");
+	public static final Identifier CREATE_ONYX = SpectrumCommon.locate("create_onyx_shard");
+	public static final Identifier COLLECT_MOONSTONE = SpectrumCommon.locate("lategame/collect_moonstone");
+	public static final Identifier COLLECT_AZURITE = SpectrumCommon.locate("midgame/collect_azurite");
+	public static final Identifier COLLECT_MALACHITE = SpectrumCommon.locate("lategame/collect_malachite");
+	public static final Identifier FIND_FORGOTTEN_CITY = SpectrumCommon.locate("lategame/find_forgotten_city");
+	public static final Identifier COLLECT_MYCEYLON = SpectrumCommon.locate("lategame/collect_myceylon");
+	public static final Identifier BUILD_SPIRIT_INSTILLER_STRUCTURE = SpectrumCommon.locate("midgame/build_spirit_instiller_structure");
 }

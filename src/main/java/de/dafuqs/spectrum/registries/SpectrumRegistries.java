@@ -32,13 +32,13 @@ public class SpectrumRegistries {
 	public static final SpectrumRegistry<PastelUpgradeSignature> PASTEL_UPGRADE = register(SpectrumRegistryKeys.PASTEL_UPGRADE, false);
 	public static final SpectrumRegistry<RecipeScaling> RECIPE_SCALING = register(SpectrumRegistryKeys.RECIPE_SCALING, true);
 	
-	public static final SpectrumRegistry<MapCodec<? extends ResonanceDropProcessor>> RESONANCE_DROP_PROCESSOR_TYPE = register(SpectrumRegistryKeys.RESONANCE_DROP_PROCESSOR_TYPE, false);
+	public static final SpectrumRegistry<MapCodec<? extends ResonanceProcessor>> RESONANCE_PROCESSOR_TYPE = register(SpectrumRegistryKeys.RESONANCE_PROCESSOR_TYPE, false);
 	
 	public static final SpectrumRegistry<ExplosionModifierType> EXPLOSION_MODIFIER_TYPE = register(SpectrumRegistryKeys.EXPLOSION_MODIFIER_TYPE, true);
 	public static final SpectrumRegistry<ExplosionModifier> EXPLOSION_MODIFIER = register(SpectrumRegistryKeys.EXPLOSION_MODIFIER, true);
 	
 	public static void register() {
-		DynamicRegistries.registerSynced(SpectrumRegistryKeys.RESONANCE_DROP_PROCESSOR, ResonanceDropProcessor.CODEC);
+		DynamicRegistries.registerSynced(SpectrumRegistryKeys.RESONANCE_PROCESSOR, ResonanceProcessor.CODEC);
 	}
 	
 	private static <T> SpectrumRegistry<T> register(RegistryKey<? extends Registry<T>> key, boolean synced) {

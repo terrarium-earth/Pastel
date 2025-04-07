@@ -8,15 +8,17 @@ import net.minecraft.entity.*;
 import net.minecraft.sound.*;
 import net.minecraft.util.*;
 
-public enum SpectrumSkullType implements SkullBlock.SkullType {
+import java.util.*;
 
+public enum SpectrumSkullType implements SkullBlock.SkullType {
+	
 	// Vanilla
 	ALLAY(EntityType.ALLAY, SoundEvents.ENTITY_ALLAY_AMBIENT_WITHOUT_ITEM.getId()),
 	AXOLOTL_BLUE(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
-	AXOLOTL_WILD(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
 	AXOLOTL_CYAN(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
 	AXOLOTL_GOLD(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
 	AXOLOTL_LEUCISTIC(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
+	AXOLOTL_WILD(EntityType.AXOLOTL, SoundEvents.ENTITY_AXOLOTL_IDLE_WATER.getId()),
 	BAT(EntityType.BAT, SoundEvents.ENTITY_BAT_AMBIENT.getId()),
 	BEE(EntityType.BEE, SoundEvents.ENTITY_BEE_POLLINATE.getId()),
 	BLAZE(EntityType.BLAZE, SoundEvents.ENTITY_BLAZE_AMBIENT.getId()),
@@ -134,27 +136,28 @@ public enum SpectrumSkullType implements SkullBlock.SkullType {
 	LIZARD_YELLOW(SpectrumEntityTypes.LIZARD, SpectrumSoundEvents.ENTITY_LIZARD_AMBIENT.getId()),
 	MONSTROSITY(SpectrumEntityTypes.MONSTROSITY, SpectrumSoundEvents.ENTITY_MONSTROSITY_AMBIENT.getId()),
 	PRESERVATION_TURRET(SpectrumEntityTypes.PRESERVATION_TURRET, SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_AMBIENT.getId());
-
+	
 	public static final Codec<SpectrumSkullType> CODEC = StringIdentifiable.createCodec(SpectrumSkullType::values);
-
+	
 	private final EntityType<?> entityType;
 	private final Identifier noteBlockSound;
 	
 	SpectrumSkullType(EntityType<?> entityType, Identifier noteBlockSound) {
-        this.entityType = entityType;
+		this.entityType = entityType;
 		this.noteBlockSound = noteBlockSound;
-    }
-    
-    public EntityType<?> getEntityType() {
-        return this.entityType;
-    }
+	}
+	
+	public EntityType<?> getEntityType() {
+		return this.entityType;
+	}
 	
 	public Identifier getNoteBlockSound() {
 		return this.noteBlockSound;
 	}
-
+	
 	@Override
 	public String asString() {
-		return name();
+		return name().toLowerCase(Locale.ROOT);
 	}
+	
 }

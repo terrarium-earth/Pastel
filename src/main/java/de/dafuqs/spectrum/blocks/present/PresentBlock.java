@@ -32,7 +32,7 @@ import org.joml.*;
 import java.util.*;
 
 public class PresentBlock extends BlockWithEntity {
-
+	
 	public static final MapCodec<PresentBlock> CODEC = createCodec(PresentBlock::new);
 	
 	protected static Map<Item, PresentUnpackBehavior> BEHAVIORS = new Object2ObjectOpenHashMap<>();
@@ -46,16 +46,22 @@ public class PresentBlock extends BlockWithEntity {
 	}
 	
 	public enum WrappingPaper implements StringIdentifiable {
-		RED,
-		BLUE,
-		CYAN,
-		GREEN,
-		PURPLE,
-		CAKE,
-		STRIPED,
-		STARRY,
-		WINTER,
-		PRIDE;
+		RED(Blocks.RED_WOOL),
+		BLUE(Blocks.BLUE_WOOL),
+		CYAN(Blocks.CYAN_WOOL),
+		GREEN(Blocks.GREEN_WOOL),
+		PURPLE(Blocks.PURPLE_WOOL),
+		CAKE(Blocks.LIGHT_GRAY_WOOL),
+		STRIPED(Blocks.GREEN_WOOL),
+		STARRY(Blocks.PURPLE_WOOL),
+		WINTER(Blocks.LIGHT_GRAY_WOOL),
+		PRIDE(Blocks.ORANGE_WOOL);
+		
+		public final Block woolBase;
+		
+		WrappingPaper(Block woolBase) {
+			this.woolBase = woolBase;
+		}
 		
 		@Override
 		public String asString() {
@@ -67,14 +73,14 @@ public class PresentBlock extends BlockWithEntity {
 	public static final int OPENING_STEPS = 6;
 	
 	public static final BooleanProperty OPENING = BooleanProperty.of("opening");
-	private static final EnumProperty<WrappingPaper> VARIANT = EnumProperty.of("variant", WrappingPaper.class);
+	public static final EnumProperty<WrappingPaper> VARIANT = EnumProperty.of("variant", WrappingPaper.class);
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 10.0D, 14.0D);
 	
 	public PresentBlock(Settings settings) {
 		super(settings);
 		this.setDefaultState(this.stateManager.getDefaultState().with(OPENING, false).with(VARIANT, WrappingPaper.RED));
 	}
-
+	
 	@Override
 	public MapCodec<? extends PresentBlock> getCodec() {
 		return CODEC;
@@ -218,7 +224,7 @@ public class PresentBlock extends BlockWithEntity {
 	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
 		return new PresentBlockEntity(pos, state);
 	}
-
+	
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
@@ -228,5 +234,5 @@ public class PresentBlock extends BlockWithEntity {
 	public boolean canPathfindThrough(BlockState state, NavigationType type) {
 		return false;
 	}
-
+	
 }

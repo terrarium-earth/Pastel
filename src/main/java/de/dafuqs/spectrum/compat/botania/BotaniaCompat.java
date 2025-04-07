@@ -14,15 +14,17 @@ import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import vazkii.botania.common.item.*;
 
+import static de.dafuqs.spectrum.registries.SpectrumItems.*;
+
+@SuppressWarnings("unused")
 public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
-	public static Item LEAST_BLACK_LOTUS = new LeastBlackLotusItem(new Item.Settings());
-	public static Item BLACKEST_LOTUS = new BlackestLotusItem(new Item.Settings());
+	public static Item LEAST_BLACK_LOTUS = SpectrumItems.register(simple(item("least_black_lotus", new LeastBlackLotusItem(new Item.Settings()), InkColors.BLACK)));
+	public static Item BLACKEST_LOTUS = SpectrumItems.register(simple(item("blackest_lotus", new BlackestLotusItem(new Item.Settings()), InkColors.BLACK)));
 	
 	@Override
 	public void register() {
-		SpectrumItems.register("least_black_lotus", LEAST_BLACK_LOTUS, InkColors.BLACK);
-		SpectrumItems.register("blackest_lotus", BLACKEST_LOTUS, InkColors.BLACK);
+		SpectrumItems.ITEM_REGISTRAR.flush();
 		
 		// registering it late, since Botania might not have been initialized yet
 		ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {

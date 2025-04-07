@@ -9,7 +9,7 @@ public class SpectrumClusterBlock extends AmethystClusterBlock {
 		MEDIUM(4, 3),
 		LARGE(5, 3),
 		CLUSTER(7, 3);
-
+		
 		public final int height;
 		public final int xzOffset;
 		
@@ -17,14 +17,18 @@ public class SpectrumClusterBlock extends AmethystClusterBlock {
 			this.height = height;
 			this.xzOffset = xzOffset;
 		}
-
+		
 	}
-
+	
 	protected final GrowthStage growthStage;
-
+	
 	public SpectrumClusterBlock(AbstractBlock.Settings settings, GrowthStage growthStage) {
 		super(growthStage.height, growthStage.xzOffset, settings);
 		this.growthStage = growthStage;
+	}
+	
+	public GrowthStage getGrowthStage() {
+		return growthStage;
 	}
 
 //	@Override

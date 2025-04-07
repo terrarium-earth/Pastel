@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.data_loaders.resonance_processors;
 
+import com.google.common.collect.*;
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
@@ -13,13 +14,12 @@ import net.minecraft.registry.*;
 
 import java.util.*;
 
-public class ModifyDropsResonanceProcessor extends ResonanceDropProcessor {
+public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
 	
 	public static final MapCodec<ModifyDropsResonanceProcessor> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 			BrokenBlockPredicate.CODEC.fieldOf("block")
 					.validate(block -> block.test(Blocks.AIR.getDefaultState()) ? DataResult.error(() -> "Registering a Resonance Drop that matches on everything!") : DataResult.success(block))
 					.forGetter(c -> c.blockPredicate),
-			// TODO - Review
 			Codec.mapPair(Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("input"), Registries.ITEM.getCodec().fieldOf("output")).codec().listOf().xmap(
 					pairs -> pairs.stream().collect(() -> (Map<Ingredient, Item>) new HashMap<Ingredient, Item>(), (map, pair) -> map.put(pair.getFirst(), pair.getSecond()), (map1, map2) -> map1.putAll(map2)),
 					map -> map.entrySet().stream().map(entry -> new Pair<>(entry.getKey(), entry.getValue())).toList()
@@ -58,8 +58,31 @@ public class ModifyDropsResonanceProcessor extends ResonanceDropProcessor {
 		}
 	}
 	
-	public MapCodec<? extends ResonanceDropProcessor> getCodec() {
+	public MapCodec<? extends ResonanceProcessor> getCodec() {
 		return CODEC;
+	}
+	
+	public static Builder builder(BrokenBlockPredicate blockTarget) {
+		return new Builder(blockTarget);
+	}
+	
+	public static class Builder {
+		private final BrokenBlockPredicate blockTarget;
+		private final List<Map.Entry<Ingredient, Item>> modifiedDrops = new ArrayList<>();
+		
+		private Builder(BrokenBlockPredicate blockTarget) {
+			this.blockTarget = blockTarget;
+		}
+		
+		public Builder addModifiedDrop(Ingredient ingredient, Item item) {
+			this.modifiedDrops.add(Map.entry(ingredient, item));
+			return this;
+		}
+		
+		public ModifyDropsResonanceProcessor build() {
+			return new ModifyDropsResonanceProcessor(blockTarget, ImmutableMap.copyOf(modifiedDrops));
+		}
+		
 	}
 	
 }
