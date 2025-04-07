@@ -4,39 +4,22 @@ import com.google.gson.*;
 import de.dafuqs.spectrum.blocks.decoration.*;
 import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.registries.client.*;
-import net.fabricmc.fabric.api.datagen.v1.*;
-import net.fabricmc.fabric.api.datagen.v1.provider.*;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.*;
 import net.minecraft.data.client.*;
 import net.minecraft.data.family.*;
 import net.minecraft.item.*;
-import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.*;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 
 import java.util.*;
 import java.util.function.*;
 
-public class SpectrumModelProvider extends FabricModelProvider {
-	
+public class SpectrumModelHelper {
 	public static final DeferredRegistrar.Contextual<ItemModelGenerator> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	public static final DeferredRegistrar.Contextual<BlockStateModelGenerator> BLOCK_STATE_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
-	
-	public SpectrumModelProvider(FabricDataOutput output) {
-		super(output);
-	}
-	
-	@Override
-	public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-		BLOCK_STATE_MODEL_REGISTRAR.flush(blockStateModelGenerator);
-	}
-	
-	@Override
-	public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-		ITEM_MODEL_REGISTRAR.flush(itemModelGenerator);
-	}
 	
 	// Item Models
 	
@@ -313,5 +296,4 @@ public class SpectrumModelProvider extends FabricModelProvider {
 			default -> VariantSettings.Rotation.R0;
 		};
 	}
-	
 }
