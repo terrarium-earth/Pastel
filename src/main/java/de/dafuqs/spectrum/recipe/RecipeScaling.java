@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.recipe;
 
+import java.util.*;
+
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.*;
@@ -7,8 +9,6 @@ import de.dafuqs.spectrum.registries.*;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
 import net.minecraft.util.*;
-
-import java.util.*;
 
 public abstract class RecipeScaling {
 	
@@ -74,5 +74,21 @@ public abstract class RecipeScaling {
 		public int apply(double scaling) {
 			return type.getInputCount(scaling, this);
 		}
+	}
+	
+	public static ScalingData linear(int start, int scalingValue, double scalingFactor, Integer... indexes) {
+		return new ScalingData(LINEAR, start, scalingValue, scalingFactor, List.of(indexes));
+	}
+	
+	public static ScalingData doubling(int start, int scalingValue, double scalingFactor, Integer... indexes) {
+		return new ScalingData(DOUBLING, start, scalingValue, scalingFactor, List.of(indexes));
+	}
+	
+	public static ScalingData exponential(int start, int scalingValue, double scalingFactor, Integer... indexes) {
+		return new ScalingData(EXPONENTIAL, start, scalingValue, scalingFactor, List.of(indexes));
+	}
+	
+	public static ScalingData indexed(int start, int scalingValue, double scalingFactor, Integer... indexes) {
+		return new ScalingData(INDEXED, start, scalingValue, scalingFactor, List.of(indexes));
 	}
 }

@@ -6,6 +6,7 @@ import java.util.concurrent.*;
 import com.mojang.datafixers.util.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.energy.color.*;
+import de.dafuqs.spectrum.recipe.*;
 import de.dafuqs.spectrum.recipe.crystallarieum.*;
 import de.dafuqs.spectrum.recipe.enchanter.*;
 import de.dafuqs.spectrum.registries.*;
@@ -233,7 +234,7 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 		generateEnchantmentUpgradeRecipes(ctx, "vanilla", Enchantments.QUICK_CHARGE, SpectrumAdvancements.ENCHANTMENTS_VANILLA_PROJECTILE, SpectrumItems.RED_PIGMENT, new int[][]{{200, 8}, {1600, 32}, {5000, 512}, {10000, 512}});
 		generateEnchantmentUpgradeRecipes(ctx, "vanilla", Enchantments.RESPIRATION, SpectrumAdvancements.ENCHANTMENTS_VANILLA_WATER, SpectrumItems.BLUE_PIGMENT, new int[][]{{100, 8}, {200, 32}, {1600, 128}, {4800, 256}, {10000, 512}});
 		generateEnchantmentUpgradeRecipes(ctx, "vanilla", Enchantments.RIPTIDE, SpectrumAdvancements.ENCHANTMENTS_VANILLA_TRIDENT, SpectrumItems.BROWN_PIGMENT, new int[][]{{200, 8}, {2400, 32}, {10000, 128}});
-		generateEnchantmentUpgradeRecipes(ctx, "vanilla", Enchantments.SHARPNESS, SpectrumAdvancements.ENCHANTMENTS_VANILLA_DAMAGE, SpectrumItems.BLACK_PIGMENT, new int[][]{{200, 8}, {400, 16}, {600, 32}, {800, 64}, {1600, 128}, {4000, 256}, {8000, 512}});
+		generateEnchantmentUpgradeRecipe(ctx, "vanilla", Enchantments.SHARPNESS, SpectrumAdvancements.ENCHANTMENTS_VANILLA_DAMAGE, SpectrumItems.BLACK_PIGMENT, 7, RecipeScaling.doubling(0, 150, 1.0), RecipeScaling.doubling(0, 8, 1.0f));
 		generateEnchantmentUpgradeRecipes(ctx, "vanilla", Enchantments.SMITE, SpectrumAdvancements.ENCHANTMENTS_VANILLA_DAMAGE, SpectrumItems.BLACK_PIGMENT, new int[][]{{100, 8}, {200, 16}, {300, 32}, {400, 64}, {800, 128}, {1300, 256}, {2000, 512}});
 		generateEnchantmentUpgradeRecipes(ctx, "vanilla", Enchantments.SOUL_SPEED, SpectrumAdvancements.ENCHANTMENTS_VANILLA_TREASURE, SpectrumItems.LIGHT_GRAY_PIGMENT, new int[][]{{200, 8}, {2400, 32}, {10000, 128}});
 		generateEnchantmentUpgradeRecipes(ctx, "vanilla", Enchantments.SWEEPING_EDGE, SpectrumAdvancements.ENCHANTMENTS_VANILLA_DAMAGE, SpectrumItems.RED_PIGMENT, new int[][]{{100, 8}, {400, 32}, {1000, 64}, {2000, 128}, {5000, 256}, {10000, 512}});
@@ -251,14 +252,15 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 				additionalResults));
 	}
 	
-	private void generateEnchantmentUpgradeRecipes(RecipeExporter ctx, String group, RegistryKey<Enchantment> enchantment, Identifier advancement, Item requiredItem, int[][] levels) {
+	private void generateEnchantmentUpgradeRecipes(RecipeExporter ctx, String group, RegistryKey<Enchantment> enchantment, Identifier advancement, Item bulkItem, int[][] levelCap) {
+		//TODO remove this stub function once the scaling is done
+	}
+	
+	private void generateEnchantmentUpgradeRecipe(RecipeExporter ctx, String group, RegistryKey<Enchantment> enchantment, Identifier advancement, Item bulkItem, int levelCap, RecipeScaling.ScalingData xpScaling, RecipeScaling.ScalingData itemScaling) {
 		ctx = withConditions(ctx, new SpectrumResourceConditions.EnchantmentsExistResourceCondition(List.of(enchantment)));
 		String namespace = enchantment.getValue().getNamespace();
-		String base = "enchantment_upgrade/" + namespace + "/" + enchantment.getValue().getPath().replace("cloaked/", "").replace("/", ".") + "/";
-		
-		for (int i = 0; i < levels.length; i++) {
-			generateRecipe(ctx, base + (i + 1) + "_to_" + (i + 2), new EnchantmentUpgradeRecipe(group, false, Optional.of(advancement), Either.right(enchantment), i + 2, levels[i][0], requiredItem, levels[i][1]));
-		}
+		String base = "enchantment_upgrade/" + namespace + "/" + enchantment.getValue().getPath().replace("/", ".");
+		generateRecipe(ctx, base, new EnchantmentUpgradeRecipe(group, false, Optional.of(advancement), Either.right(enchantment), levelCap, Ingredient.ofItems(bulkItem), xpScaling, itemScaling));
 	}
 	
 	private void generateRecipe(RecipeExporter ctx, String id, Recipe<?> recipe) {
