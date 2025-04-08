@@ -118,7 +118,7 @@ public class DraconicTwinswordItem extends SwordItem implements SplittableItem, 
 	}
 	
 	@Override
-	public ItemStack getResult(ServerPlayerEntity player, ItemStack parent) {
+	public ItemStack getSplitResult(ServerPlayerEntity player, ItemStack parent) {
 		var result = new ItemStack(SpectrumItems.DRAGON_TALON);
 		var durability = parent.getDamage();
 		
@@ -131,7 +131,7 @@ public class DraconicTwinswordItem extends SwordItem implements SplittableItem, 
 		result.remove(DataComponentTypes.ATTRIBUTE_MODIFIERS);
 		SlotReservingItem.free(result);
 		
-		result.setDamage(durability);
+		result.setDamage(Math.min(durability, parent.getMaxDamage() - 1));
 		sign(player, result);
 		return result;
 	}

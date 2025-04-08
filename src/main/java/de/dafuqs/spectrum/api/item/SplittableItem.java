@@ -8,7 +8,7 @@ import net.minecraft.util.*;
 
 public interface SplittableItem {
 	
-	ItemStack getResult(ServerPlayerEntity player, ItemStack parent);
+	ItemStack getSplitResult(ServerPlayerEntity player, ItemStack parent);
 	
 	boolean canSplit(ServerPlayerEntity player, Hand activeHand, ItemStack stack);
 	

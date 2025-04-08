@@ -57,7 +57,7 @@ public class ServerPlayNetworkHandlerMixin {
 	
 	@Unique
 	private void splitItem(ItemStack stack, SplittableItem splittable) {
-		var split = splittable.getResult(player, stack);
+		var split = splittable.getSplitResult(player, stack);
 		player.setStackInHand(Hand.MAIN_HAND, split);
 		player.setStackInHand(Hand.OFF_HAND, split.copy());
 		player.clearActiveItem();
@@ -68,7 +68,7 @@ public class ServerPlayNetworkHandlerMixin {
 	private void mergeItems(ItemStack firstHalf, ItemStack secondHalf, MergeableItem mergeable) {
 		player.setStackInHand(Hand.MAIN_HAND, ItemStack.EMPTY);
 		player.setStackInHand(Hand.OFF_HAND, ItemStack.EMPTY);
-		player.setStackInHand(Hand.MAIN_HAND, mergeable.getResult(player, firstHalf, secondHalf));
+		player.setStackInHand(Hand.MAIN_HAND, mergeable.getMergeResult(player, firstHalf, secondHalf));
 		player.clearActiveItem();
 		mergeable.playSound(player);
 	}
