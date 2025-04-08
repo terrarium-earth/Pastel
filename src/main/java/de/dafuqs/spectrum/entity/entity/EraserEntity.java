@@ -354,7 +354,7 @@ public class EraserEntity extends SpiderEntity implements PackEntity<EraserEntit
 		}
 		
 		public StatusEffectInstance getEffectInstance() {
-			return new StatusEffectInstance(this.effect, -1, this.amplifier);
+			return new StatusEffectInstance(this.effect, StatusEffectInstance.INFINITE, this.amplifier);
 		}
 	}
 	
