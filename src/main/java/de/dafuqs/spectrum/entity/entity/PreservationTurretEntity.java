@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.damage.*;
 import net.minecraft.entity.data.*;
+import net.minecraft.entity.effect.*;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.*;
@@ -72,6 +73,14 @@ public class PreservationTurretEntity extends GolemEntity implements Monster, Vi
 	protected void initGoals() {
 		this.goalSelector.add(1, new RatatatataGoal());
 		this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 16.0F, 0.04F, true));
+	}
+	
+	@Override
+	public boolean canHaveStatusEffect(StatusEffectInstance effect) {
+		if (effect.getEffectType().isIn(SpectrumStatusEffectTags.SOPORIFIC))
+			return false;
+		
+		return super.canHaveStatusEffect(effect);
 	}
 	
 	@Override
