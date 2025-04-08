@@ -26,7 +26,7 @@ public class FDCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 					.getOptional(FD_AMARANTH_LOOT_KEY);
 				return wrapper.orElseThrow().value();
 			}
-			return lootTable;
+			return null;
 		});
 	}
 	
