@@ -375,6 +375,33 @@
       },
       "title": "enchantment.minecraft.vanishing_curse",
       "recipe_id": "spectrum:enchanter/vanilla_books/vanishing_curse"
+    },
+    {
+      "type": "spectrum:enchanter_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "spectrum:unlocks/enchantments/vanilla_trial"
+      },
+      "title": "enchantment.minecraft.density",
+      "recipe_id": "spectrum:enchanter/vanilla_books/density"
+    },
+    {
+      "type": "spectrum:enchanter_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "spectrum:unlocks/enchantments/vanilla_trial_breaching"
+      },
+      "title": "enchantment.minecraft.breach",
+      "recipe_id": "spectrum:enchanter/vanilla_books/breach"
+    },
+    {
+      "type": "spectrum:enchanter_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "spectrum:unlocks/enchantments/vanilla_trial_treasure"
+      },
+      "title": "enchantment.minecraft.wind_burst",
+      "recipe_id": "spectrum:enchanter/vanilla_books/wind_burst"
     }
   ]
 }
