@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.recipe.enchanter;
 
+import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.api.item.*;
@@ -23,7 +24,7 @@ import java.util.*;
 
 public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
-	protected final RegistryEntry<Enchantment> enchantmentEntry;
+	protected final Either<RegistryEntry<Enchantment>, RegistryKey<Enchantment>> either;
 	protected final int levelCap;
 	protected final Ingredient bulkItem;
 	protected final RecipeScaling.ScalingData itemScaling, XPScaling;
@@ -35,7 +36,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 			String group,
 			boolean secret,
 			Optional<Identifier> requiredAdvancementIdentifier,
-			RegistryEntry<Enchantment> enchantmentEntry,
+			Either<RegistryEntry<Enchantment>, RegistryKey<Enchantment>> enchantmentEntry,
 			int levelCap,
 			Ingredient bulkItem,
 			RecipeScaling.ScalingData XPScaling,
@@ -43,7 +44,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	) {
 		super(group, secret, requiredAdvancementIdentifier);
 		
-		this.enchantmentEntry = enchantmentEntry;
+		this.either = enchantmentEntry;
 		this.levelCap = levelCap;
 		this.bulkItem = bulkItem;
 		this.itemScaling = itemScaling;
@@ -51,15 +52,21 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		
 		DefaultedList<Ingredient> inputs = DefaultedList.ofSize(2, Ingredient.EMPTY);
 		
-		ItemStack ingredientStack = new ItemStack(Items.ENCHANTED_BOOK);
-		ingredientStack.addEnchantment(enchantmentEntry, levelCap - 1);
-		inputs.set(0, Ingredient.ofStacks(ingredientStack));
-		inputs.set(1, bulkItem);
-		this.inputs = inputs;
-		
-		ItemStack outputStack = new ItemStack(Items.ENCHANTED_BOOK);
-		outputStack.addEnchantment(enchantmentEntry, levelCap);
-		this.output = outputStack;
+		if (enchantmentEntry.left().isPresent()) {
+			ItemStack ingredientStack = new ItemStack(Items.ENCHANTED_BOOK);
+			ingredientStack.addEnchantment(enchantmentEntry.left().get(), levelCap - 1);
+			inputs.set(0, Ingredient.ofStacks(ingredientStack));
+			inputs.set(1, bulkItem);
+			this.inputs = inputs;
+			
+			ItemStack outputStack = new ItemStack(Items.ENCHANTED_BOOK);
+			outputStack.addEnchantment(enchantmentEntry.left().get(), levelCap);
+			this.output = outputStack;
+		}
+		else {
+			this.inputs = DefaultedList.of();
+			this.output = ItemStack.EMPTY;
+		}
 	}
 	
 	
@@ -67,6 +74,10 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	public boolean matches(RecipeInput inv, World world) {
 		if (inv.getSize() > 9) {
 			ItemStack centerStack = inv.getStackInSlot(0);
+			if (either.left().isEmpty())
+				throw new UnsupportedOperationException("Attempted to match a datagen enchantment upgrade");
+			
+			var enchantment = either.left().get();
 			
 			//Check if the book matches
 			if (!inputs.getFirst().test(centerStack)) {
@@ -78,9 +89,9 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				return false;
 			}
 			
-			var bookLevel = enchantments.getLevel(enchantmentEntry);
+			var bookLevel = enchantments.getLevel(enchantment);
 			
-			if (!enchantments.getEnchantments().contains(enchantmentEntry) || bookLevel >= levelCap) {
+			if (!enchantments.getEnchantments().contains(enchantment) || bookLevel >= levelCap) {
 				return false;
 			}
 			
@@ -181,7 +192,10 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	}
 	
 	public RegistryEntry<Enchantment> getEnchantment() {
-		return enchantmentEntry;
+		if (either.left().isEmpty()) {
+			throw new UnsupportedOperationException("Attempted to match a datagen enchantment upgrade");
+		}
+		return either.left().get();
 	}
 	
 	public int getLevelCap() {
@@ -189,7 +203,10 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	}
 	
 	public boolean isInNormalRange(int level) {
-		return level < this.enchantmentEntry.value().getMaxLevel();
+		if (either.left().isEmpty()) {
+			throw new UnsupportedOperationException("Attempted to match a datagen enchantment upgrade");
+		}
+		return level < this.either.left().get().value().getMaxLevel();
 	}
 	
 	public static class Serializer implements RecipeSerializer<EnchantmentUpgradeRecipe> {
@@ -198,7 +215,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				Identifier.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-				Enchantment.ENTRY_CODEC.fieldOf("enchantment").forGetter(recipe -> recipe.enchantmentEntry),
+				Codec.either(Enchantment.ENTRY_CODEC, RegistryKey.createCodec(RegistryKeys.ENCHANTMENT)).fieldOf("enchantment").forGetter(c -> c.either),
 				Codec.INT.fieldOf("level_cap").forGetter(recipe -> recipe.levelCap),
 				Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("bulk_item").forGetter(recipe -> recipe.bulkItem),
 				RecipeScaling.CODEC.fieldOf("xp_scaling").forGetter(recipe -> recipe.XPScaling),
@@ -209,7 +226,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				PacketCodecs.STRING, recipe -> recipe.group,
 				PacketCodecs.BOOL, recipe -> recipe.secret,
 				PacketCodecs.optional(Identifier.PACKET_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-				Enchantment.ENTRY_PACKET_CODEC, recipe -> recipe.enchantmentEntry,
+				PacketCodecs.either(Enchantment.ENTRY_PACKET_CODEC, RegistryKey.createPacketCodec(RegistryKeys.ENCHANTMENT)), c -> c.either,
 				PacketCodecs.VAR_INT, recipe -> recipe.levelCap,
 				Ingredient.PACKET_CODEC, recipe -> recipe.bulkItem,
 				RecipeScaling.PACKET_CODEC, recipe -> recipe.XPScaling,
