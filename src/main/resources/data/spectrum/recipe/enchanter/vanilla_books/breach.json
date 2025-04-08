@@ -14,7 +14,7 @@
       "item": "spectrum:red_pigment"
     },
     {
-      "item": "minecraft:neolith"
+      "item": "spectrum:blood_orchid_petal"
     },
     {
       "item": "spectrum:dragonbone_chunk"
@@ -26,7 +26,7 @@
       "item": "spectrum:red_pigment"
     },
     {
-      "item": "minecraft:neolith"
+      "item": "spectrum:blood_orchid_petal"
     },
     {
       "item": "spectrum:dragonbone_chunk"
@@ -36,7 +36,7 @@
     "id": "minecraft:enchanted_book",
     "components": {
       "stored_enchantments": {
-        "minecraft:breaching": 1
+        "minecraft:breach": 1
       }
     }
   },
@@ -45,7 +45,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "minecraft:breaching"
+        "minecraft:breach"
       ]
     }
   ]
