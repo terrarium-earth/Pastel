@@ -430,7 +430,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			float levelCost = level * Math.min(1, (float) level / enchantment.getMaxLevel()); // the higher the level, the pricier. But not as bad for enchantments with high max levels
 			float specialMulti = entry.isIn(EnchantmentTags.TREASURE) ? 2.0F : entry.isIn(EnchantmentTags.CURSE) ? 1.5F : 1.0F;
 			float selectionAvailabilityMod = (entry.isIn(EnchantmentTags.IN_ENCHANTING_TABLE) ? 0.5F : 0.75F) + (entry.isIn(EnchantmentTags.TRADEABLE) ? 0.5F : 0.75F);
-			float enchantabilityMod = (4.0F / (2 + enchantability)) * 4.0F;
+			float enchantabilityMod = 16.0F / (2 + enchantability);
 			return (int) Math.floor(rarityCost * levelCost * specialMulti * selectionAvailabilityMod * enchantabilityMod);
 		}
 		return -1;
