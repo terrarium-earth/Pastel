@@ -201,18 +201,18 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 		//TODO These could benefit from a revisit
 		
 		// Spectrum
-		generateEnchantmentUpgradeRecipes(ctx, "", BIG_CATCH, ENCHANTMENTS_BIG_CATCH, LIGHT_BLUE_PIGMENT, new int[][]{{400, 32}, {800, 128}});
-		generateEnchantmentUpgradeRecipes(ctx, "", CLOVERS_FAVOR, ENCHANTMENTS_CLOVERS_FAVOR, LIGHT_BLUE_PIGMENT, new int[][]{{200, 8}, {400, 32}, {200, 128}, {10000, 512}, {40000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", DISARMING, ENCHANTMENTS_DISARMING, RED_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", EXUBERANCE, ENCHANTMENTS_EXUBERANCE, PURPLE_PIGMENT, new int[][]{{400, 8}, {600, 16}, {800, 32}, {1000, 64}, {1200, 128}, {1400, 256}, {1600, 512}, {1800, 512}, {2000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", FIRST_STRIKE, ENCHANTMENTS_FIRST_STRIKE, PINK_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", IMPROVED_CRITICAL, ENCHANTMENTS_IMPROVED_CRITICAL, BLACK_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", INERTIA, ENCHANTMENTS_INERTIA, BROWN_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", RAZING, ENCHANTMENTS_RAZING, GRAY_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 256}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SERENDIPITY_REEL, ENCHANTMENTS_SERENDIPITY_REEL, LIGHT_BLUE_PIGMENT, new int[][]{{400, 32}, {800, 128}});
-		generateEnchantmentUpgradeRecipes(ctx, "", SNIPING, ENCHANTMENTS_SNIPING, GREEN_PIGMENT, new int[][]{{200, 8}, {1000, 32}, {5000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", TIGHT_GRIP, ENCHANTMENTS_TIGHT_GRIP, YELLOW_PIGMENT, new int[][]{{400, 32}, {2000, 128}, {10000, 512}});
-		generateEnchantmentUpgradeRecipes(ctx, "", TREASURE_HUNTER, ENCHANTMENTS_TREASURE_HUNTER, LIGHT_BLUE_PIGMENT, new int[][]{{200, 8}, {400, 32}, {2000, 128}, {10000, 512}});
+		generateEnchantmentUpgradeRecipe(ctx, "", BIG_CATCH, ENCHANTMENTS_BIG_CATCH, LIGHT_BLUE_PIGMENT, 3, RecipeScaling.doubling(400), RecipeScaling.indices(32, 128));
+		generateEnchantmentUpgradeRecipe(ctx, "", CLOVERS_FAVOR, ENCHANTMENTS_CLOVERS_FAVOR, LIGHT_BLUE_PIGMENT,6, RecipeScaling.indices(200, 400, 2000, 10000, 40000), RecipeScaling.indices(8, 32, 128, 512, 512));
+		generateEnchantmentUpgradeRecipe(ctx, "", DISARMING, ENCHANTMENTS_DISARMING, RED_PIGMENT, 4, RecipeScaling.indices(400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F));
+		generateEnchantmentUpgradeRecipe(ctx, "", EXUBERANCE, ENCHANTMENTS_EXUBERANCE, PURPLE_PIGMENT, 10, RecipeScaling.linear(400, 200, 1.0F), RecipeScaling.indices(8, 16, 32, 64, 128, 256, 512, 512, 512));
+		generateEnchantmentUpgradeRecipe(ctx, "", FIRST_STRIKE, ENCHANTMENTS_FIRST_STRIKE, PINK_PIGMENT, 5, RecipeScaling.indices(200, 400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F));
+		generateEnchantmentUpgradeRecipe(ctx, "", IMPROVED_CRITICAL, ENCHANTMENTS_IMPROVED_CRITICAL, BLACK_PIGMENT, 4, RecipeScaling.indices(400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F));
+		generateEnchantmentUpgradeRecipe(ctx, "", INERTIA, ENCHANTMENTS_INERTIA, BROWN_PIGMENT, 5, RecipeScaling.indices(200, 400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F));
+		generateEnchantmentUpgradeRecipe(ctx, "", RAZING, ENCHANTMENTS_RAZING, GRAY_PIGMENT, 5, RecipeScaling.indices(400, 2000, 10000, 10000), RecipeScaling.indices(32, 128, 256, 512));
+		generateEnchantmentUpgradeRecipe(ctx, "", SERENDIPITY_REEL, ENCHANTMENTS_SERENDIPITY_REEL, LIGHT_BLUE_PIGMENT, 3, RecipeScaling.doubling(400), RecipeScaling.indices(32, 128));
+		generateEnchantmentUpgradeRecipe(ctx, "", SNIPING, ENCHANTMENTS_SNIPING, GREEN_PIGMENT, 5, RecipeScaling.indices(200, 1000, 5000, 10000), RecipeScaling.doubling(0, 8, 2.0F));
+		generateEnchantmentUpgradeRecipe(ctx, "", TIGHT_GRIP, ENCHANTMENTS_TIGHT_GRIP, YELLOW_PIGMENT, 4, RecipeScaling.indices(400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F));
+		generateEnchantmentUpgradeRecipe(ctx, "", TREASURE_HUNTER, ENCHANTMENTS_TREASURE_HUNTER, LIGHT_BLUE_PIGMENT, 5, RecipeScaling.indices(200, 400, 2000, 10000), RecipeScaling.doubling(0, 8, 2.0F));
 		
 		// Vanilla
 		generateEnchantmentUpgradeRecipe(ctx, "minecraft", BANE_OF_ARTHROPODS, ENCHANTMENTS_VANILLA_DAMAGE, BLACK_PIGMENT, 8, RecipeScaling.doubling(100), RecipeScaling.doubling(8));
