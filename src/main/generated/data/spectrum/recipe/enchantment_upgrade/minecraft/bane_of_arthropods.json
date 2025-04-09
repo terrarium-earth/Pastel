@@ -3,7 +3,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "minecraft:sharpness"
+        "minecraft:bane_of_arthropods"
       ]
     }
   ],
@@ -11,7 +11,7 @@
   "bulk_item": {
     "item": "spectrum:black_pigment"
   },
-  "enchantment": "minecraft:sharpness",
+  "enchantment": "minecraft:bane_of_arthropods",
   "group": "minecraft",
   "item_scaling": {
     "type": "spectrum:doubling",
@@ -21,6 +21,6 @@
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_damage",
   "xp_scaling": {
     "type": "spectrum:doubling",
-    "scaling_value": 75
+    "scaling_value": 100
   }
 }

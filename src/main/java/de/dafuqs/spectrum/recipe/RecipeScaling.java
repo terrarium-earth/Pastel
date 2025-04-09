@@ -76,19 +76,27 @@ public abstract class RecipeScaling {
 		}
 	}
 	
-	public static ScalingData linear(int start, int scalingValue, double scalingFactor, Integer... indexes) {
-		return new ScalingData(LINEAR, start, scalingValue, scalingFactor, List.of(indexes));
+	public static ScalingData linear(int start, int scalingValue, double scalingFactor, Integer... indices) {
+		return new ScalingData(LINEAR, start, scalingValue, scalingFactor, List.of(indices));
 	}
 	
-	public static ScalingData doubling(int start, int scalingValue, double scalingFactor, Integer... indexes) {
-		return new ScalingData(DOUBLING, start, scalingValue, scalingFactor, List.of(indexes));
+	public static ScalingData doubling(int scalingValue, Integer... indices) {
+		return new ScalingData(DOUBLING, 0, scalingValue, 1.0F, List.of(indices));
 	}
 	
-	public static ScalingData exponential(int start, int scalingValue, double scalingFactor, Integer... indexes) {
-		return new ScalingData(EXPONENTIAL, start, scalingValue, scalingFactor, List.of(indexes));
+	public static ScalingData doubling(int start, int scalingValue, double scalingFactor, Integer... indices) {
+		return new ScalingData(DOUBLING, start, scalingValue, scalingFactor, List.of(indices));
 	}
 	
-	public static ScalingData indexed(int start, int scalingValue, double scalingFactor, Integer... indexes) {
-		return new ScalingData(INDEXED, start, scalingValue, scalingFactor, List.of(indexes));
+	public static ScalingData exponential(int start, int scalingValue, double scalingFactor, Integer... indices) {
+		return new ScalingData(EXPONENTIAL, start, scalingValue, scalingFactor, List.of(indices));
+	}
+	
+	public static ScalingData indices(Integer... indices) {
+		return indexed(0, 0, 1.0f, indices);
+	}
+	
+	public static ScalingData indexed(int start, int scalingValue, double scalingFactor, Integer... indices) {
+		return new ScalingData(INDEXED, start, scalingValue, scalingFactor, List.of(indices));
 	}
 }

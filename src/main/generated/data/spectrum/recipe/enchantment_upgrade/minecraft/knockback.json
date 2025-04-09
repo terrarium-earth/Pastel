@@ -3,7 +3,7 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "minecraft:sharpness"
+        "minecraft:knockback"
       ]
     }
   ],
@@ -11,16 +11,26 @@
   "bulk_item": {
     "item": "spectrum:black_pigment"
   },
-  "enchantment": "minecraft:sharpness",
+  "enchantment": "minecraft:knockback",
   "group": "minecraft",
   "item_scaling": {
-    "type": "spectrum:doubling",
-    "scaling_value": 8
+    "type": "spectrum:indexed",
+    "indexes": [
+      8,
+      32,
+      128,
+      256
+    ]
   },
-  "level_cap": 8,
+  "level_cap": 5,
   "required_advancement": "spectrum:unlocks/enchantments/vanilla_damage",
   "xp_scaling": {
-    "type": "spectrum:doubling",
-    "scaling_value": 75
+    "type": "spectrum:indexed",
+    "indexes": [
+      200,
+      1600,
+      3200,
+      6400
+    ]
   }
 }

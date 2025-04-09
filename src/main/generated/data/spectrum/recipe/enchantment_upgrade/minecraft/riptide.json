@@ -3,24 +3,29 @@
     {
       "condition": "spectrum:enchantments_exist",
       "values": [
-        "minecraft:sharpness"
+        "minecraft:riptide"
       ]
     }
   ],
   "type": "spectrum:enchantment_upgrade",
   "bulk_item": {
-    "item": "spectrum:black_pigment"
+    "item": "spectrum:brown_pigment"
   },
-  "enchantment": "minecraft:sharpness",
+  "enchantment": "minecraft:riptide",
   "group": "minecraft",
   "item_scaling": {
     "type": "spectrum:doubling",
+    "scaling_factor": 2.0,
     "scaling_value": 8
   },
-  "level_cap": 8,
-  "required_advancement": "spectrum:unlocks/enchantments/vanilla_damage",
+  "level_cap": 3,
+  "required_advancement": "spectrum:unlocks/enchantments/vanilla_trident",
   "xp_scaling": {
-    "type": "spectrum:doubling",
-    "scaling_value": 75
+    "type": "spectrum:indexed",
+    "indexes": [
+      200,
+      2400,
+      10000
+    ]
   }
 }
