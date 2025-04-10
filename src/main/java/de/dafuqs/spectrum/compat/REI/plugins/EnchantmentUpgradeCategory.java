@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.compat.REI.plugins;
 import de.dafuqs.revelationary.api.advancements.*;
 import de.dafuqs.spectrum.blocks.enchanter.*;
 import de.dafuqs.spectrum.compat.REI.*;
+import de.dafuqs.spectrum.compat.REI.widgets.*;
 import de.dafuqs.spectrum.registries.*;
 import me.shedaniel.math.*;
 import me.shedaniel.rei.api.client.gui.widgets.*;
@@ -20,7 +21,7 @@ import java.util.*;
 @Environment(EnvType.CLIENT)
 public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpgradeDisplay> {
 	
-	private static final int NORMAL_COLOR = 0xcf32c7;
+	public static final int NORMAL_COLOR = 0x4d3655;
 	private static final int OVERCHANT_COLOR = 0xdb3564;
 	
 	@Override
@@ -57,6 +58,11 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 					Widgets.withBounds(Widgets.createTexturedWidget(BACKGROUND_TEXTURE, startPoint.x - 10, startPoint.y + 2, 64, 0, 16, 16), new Rectangle(startPoint.x - 10, startPoint.y + 2, 16, 16)),
 					Text.translatable(EnchanterBlockEntity.OVERCHANTING_TOOLTIP).styled(s -> s.withColor(OVERCHANT_COLOR))));
 		
+		var max = overUnlocked ? display.levelCap : display.maxNormal;
+		widgets.add(Widgets.createButton(new Rectangle(startPoint.x - 8 + 84, startPoint.y + 20, 8, 8), Text.literal("-"))
+				.onClick(b -> display.index = Math.clamp(display.index - 1, 1, max - 1))); // decrement
+		widgets.add(Widgets.createButton(new Rectangle(startPoint.x - 8 + 94, startPoint.y + 20, 8, 8), Text.literal("+"))
+				.onClick(b -> display.index = Math.clamp(display.index + 1, 1, max - 1))); // increment
 		
 		// surrounding input slots
 		widgets.add(Widgets.createSlot(new Point(startPoint.x - 8 + 18, startPoint.y - 7 + 9)).markInput().entries(inputs.get(0)));
@@ -69,12 +75,12 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 		widgets.add(Widgets.createSlot(new Point(startPoint.x - 8, startPoint.y - 7 + 27)).markInput().entries(inputs.get(7)));
 		
 		// Knowledge Gem and Enchanter
-		widgets.add(Widgets.createSlot(new Point(startPoint.x - 8 + 111, startPoint.y - 7 + 14)).markInput()
+		widgets.add(new IndexedEntryWidget(new Point(startPoint.x - 8 + 111, startPoint.y - 7 + 14), () -> display.index - 1).markInput()
 				.entries(inputs.get(overUnlocked ? EnchantmentUpgradeDisplay.OVERXP_INDEX : EnchantmentUpgradeDisplay.XP_INDEX)));
 		widgets.add(Widgets.createSlot(new Point(startPoint.x - 8 + 111, startPoint.y - 7 + 60)).entries(ENCHANTER).disableBackground());
 		
 		// center input slot
-		widgets.add(Widgets.createSlot(new Point(startPoint.x - 8 + 31, startPoint.y - 7 + 40)).markInput()
+		widgets.add(new IndexedEntryWidget(new Point(startPoint.x - 8 + 31, startPoint.y - 7 + 40), () -> display.index - 1).markInput()
 				.entries(inputs.get(overUnlocked ? EnchantmentUpgradeDisplay.OVERCHANT_INDEX : EnchantmentUpgradeDisplay.NORMAL_INDEX)));
 		
 		// output arrow
@@ -82,34 +88,38 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 		widgets.add(Widgets.createResultSlotBackground(new Point(startPoint.x - 8 + 111, startPoint.y - 7 + 40)));
 		
 		// output slot
-		var outputSlot = Widgets.createSlot(new Point(startPoint.x - 8 + 111, startPoint.y - 7 + 40)).markOutput().disableBackground()
+		var outputSlot = new IndexedEntryWidget(new Point(startPoint.x - 8 + 111, startPoint.y - 7 + 40), () -> display.index - 1).markOutput().disableBackground()
 				.entries(overUnlocked ? display.overchantOutputs : display.normalOutputs);
 		
 		widgets.add(outputSlot);
 		
 		// labels
-		var levelLabel = Widgets.createLabel(new Point(startPoint.x - 11 + 70, startPoint.y + 2), getDescriptionText(display)).leftAligned().color(0x3f3f3f).noShadow();
+		var levelLabel = Widgets.createLabel(new Point(startPoint.x - 11 + 70, startPoint.y + 2), getDescriptionText(display)).leftAligned().color(NORMAL_COLOR).noShadow();
 		levelLabel.setOnRender((drawContext, label) -> {
-			var entry = outputSlot.getCurrentEntry();
-			var level = entry.<ItemStack>castValue().get(DataComponentTypes.STORED_ENCHANTMENTS).getLevel(display.enchantment);
+			var level = display.index;
 			
 			if (level > display.maxNormal)
 				label.setColor(OVERCHANT_COLOR);
 			else
 				label.setColor(NORMAL_COLOR);
 			
-			label.setMessage(Text.translatable(EnchanterBlockEntity.LEVEL_TRANS, level - 1, level));
+			label.setMessage(Text.translatable(EnchanterBlockEntity.LEVEL_TRANS, level, level + 1));
 		});
 		
-		var costLabel = Widgets.createLabel(new Point(startPoint.x - 11 + 70, startPoint.y - 11 + 85), getDescriptionText(display)).leftAligned().color(0x3f3f3f).noShadow();
+		var costLabel = Widgets.createLabel(new Point(startPoint.x - 11 + 70, startPoint.y - 11 + 85), getDescriptionText(display)).leftAligned().color(NORMAL_COLOR).noShadow();
 		costLabel.setOnRender((drawContext, label) -> {
-			var entry = outputSlot.getCurrentEntry();
-			var level = entry.<ItemStack>castValue().get(DataComponentTypes.STORED_ENCHANTMENTS).getLevel(display.enchantment);
+			var level = display.index;
 			
-			label.setMessage(Text.translatable(EnchanterBlockEntity.ITEM_TRANS, display.itemScaling.apply(level - 1)));
+			label.setMessage(Text.translatable(EnchanterBlockEntity.ITEM_TRANS, display.itemScaling.apply(level)));
 		});
 		
 		widgets.add(levelLabel);
 		widgets.add(costLabel);
+		widgets.add(Widgets.createLabel(new Point(startPoint.x - 7, startPoint.y + 2 + 82), display.transKey).color(NORMAL_COLOR).shadow(false).leftAligned());
+	}
+	
+	@Override
+	public int getDisplayHeight() {
+		return super.getDisplayHeight() + 10;
 	}
 }

@@ -17,6 +17,7 @@ import net.minecraft.enchantment.*;
 import net.minecraft.item.*;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.entry.*;
+import net.minecraft.text.*;
 import org.jetbrains.annotations.*;
 
 import java.util.*;
@@ -33,9 +34,11 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 	
 	final int levelCap;
 	final int maxNormal;
+	final Text transKey;
 	final RecipeScaling.ScalingData itemScaling;
 	final RecipeScaling.ScalingData xpScaling;
 	EntryIngredient normalOutputs, overchantOutputs; // this fucking sucks lmao
+	int index = 1; // THIS IS EVEN WORSE
 	
 	public EnchantmentUpgradeDisplay(@NotNull RecipeEntry<EnchantmentUpgradeRecipe> recipeEntry) {
 		super(recipeEntry, buildIngredients(recipeEntry.value()), recipeEntry.value().getResult(BasicDisplay.registryAccess()));
@@ -47,6 +50,11 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 		
 		itemScaling = recipe.getItemScaling();
 		xpScaling = recipe.getXPScaling();
+		transKey = enchantment.value().description().copy().styled(s -> {
+			s.withItalic(true);
+			s.withColor(EnchantmentUpgradeCategory.NORMAL_COLOR);
+			return s;
+		});
 		
 		buildOutputs(recipe);
 	}

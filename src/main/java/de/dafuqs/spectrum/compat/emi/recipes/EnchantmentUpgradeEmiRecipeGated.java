@@ -27,7 +27,7 @@ import java.util.function.*;
 public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectrumRecipe<?>> {
 	
 	private static final Identifier BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/enchanter.png");
-	private static final int NORMAL_COLOR = 0xcf32c7;
+	private static final int NORMAL_COLOR = 0x4d3655;
 	private static final int OVERCHANT_COLOR = 0xdb3564;
 	
 	private static final int SWITCH_TIME = 30;
@@ -140,10 +140,10 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 		
 		final var itemUse = new DynamicTextWidget(
 				c -> new Pair<>(Text.translatable(EnchanterBlockEntity.ITEM_TRANS, itemScaling.apply(indexer)).asOrderedText()
-						, 0x4d3655), 67, 70, false);
+						, NORMAL_COLOR), 67, 70, false);
 		widgets.add(itemUse);
 		
-		widgets.addText(transKey, 3, 82, 0x4d3655, false);
+		widgets.addText(transKey, 3, 82, NORMAL_COLOR, false);
 	}
 	
 	@Override
