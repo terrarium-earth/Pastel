@@ -34,14 +34,15 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 	private static final int XP_INDEX = 8;
 	private static final int BOOK_INDEXES_START = 9;
 	
+	private final Text transKey;
 	private final int levelCap;
 	private final int maxNormal;
 	private final RecipeScaling.ScalingData itemScaling;
 	private final RecipeScaling.ScalingData xpScaling;
-	private final Function<MinecraftClient, Integer> indexer;
+	private int indexer = 1;
 	
 	public EnchantmentUpgradeEmiRecipeGated(EmiRecipeCategory category, EnchantmentUpgradeRecipe recipe) {
-		super(category, recipe, 132, 80);
+		super(category, recipe, 132, 90);
 		this.itemScaling = recipe.getItemScaling();
 		this.xpScaling = recipe.getXPScaling();
 		
@@ -50,10 +51,8 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 		var enchant = recipe.getEnchantment();
 		levelCap = recipe.getLevelCap();
 		maxNormal = enchant.value().getMaxLevel();
-		indexer = c -> {
-			var cap = AdvancementHelper.hasAdvancement(c.player, SpectrumAdvancements.OVERENCHANTING) ? levelCap : maxNormal;
-			return (int) Math.ceil((double) c.world.getTime() / SWITCH_TIME) % (cap - 1);
-		};
+		transKey = enchant.value().description().copy().styled(s -> s.withItalic(true));
+		
 		
 		// Pigments first due to funny bullshit
 		int requiredItemCountSplit = recipe.getBaseItemCost() / 8;
@@ -78,18 +77,34 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 	
 	@Override
 	public void addUnlockedWidgets(WidgetHolder widgets) {
+		var overEnchant = AdvancementHelper.hasAdvancement(MinecraftClient.getInstance().player, SpectrumAdvancements.OVERENCHANTING);
+		
+		// Reset the indexer
+		indexer = 1;
+		
 		widgets.addTexture(BACKGROUND_TEXTURE, 13, 13, 54, 54, 0, 0);
-		if (AdvancementHelper.hasAdvancement(MinecraftClient.getInstance().player, SpectrumAdvancements.OVERENCHANTING) && levelCap > maxNormal)
+		if (overEnchant && levelCap > maxNormal)
 			widgets.addTexture(BACKGROUND_TEXTURE, 0, 0, 16, 16, 64, 0).tooltipText(List.of(Text.translatable(EnchanterBlockEntity.OVERCHANTING_TOOLTIP).styled(s -> s.withColor(OVERCHANT_COLOR))));
 		
 		// Knowledge Gem and Enchanter
 		final var gem = new DynamicStackWidget(c -> {
-			var cell = indexer.apply(c) + 1;
-			var xp = xpScaling.apply(cell);
+			var xp = xpScaling.apply(indexer);
 			return EmiStack.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(xp, false));
 		}, 0, 111, 5);
 		widgets.add(gem);
 		widgets.addSlot(EmiStack.of(SpectrumBlocks.ENCHANTER), 111, 51).drawBack(false);
+		
+		var cap = overEnchant ? levelCap : maxNormal;
+		// Indexing buttons
+		var minus = new SaneButtonWidget(84, 18, 8, 8, 64, 16, BACKGROUND_TEXTURE,() -> false, (mX, mY, b) -> {
+			indexer = Math.clamp(indexer - 1, 1, cap - 1);
+		}).tooltipText(List.of(Text.translatable(EnchanterBlockEntity.CYCLING)));
+		var plus = new SaneButtonWidget(94, 18, 8, 8, 72, 16, BACKGROUND_TEXTURE,() -> false, (mX, mY, b) -> {
+			indexer = Math.clamp(indexer + 1, 1, cap - 1);
+		}).tooltipText(List.of(Text.translatable(EnchanterBlockEntity.CYCLING)));
+		
+		widgets.add(minus);
+		widgets.add(plus);
 		
 		// surrounding input slots
 		widgets.addSlot(inputs.get(0), 18, 0);
@@ -102,39 +117,33 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 		widgets.addSlot(inputs.get(7), 0, 18);
 		
 		// Center Slot
-		final var in = new DynamicStackWidget(c -> {
-			var cell = indexer.apply(c);
-			return inputs.get(BOOK_INDEXES_START + cell);
-		}, 0, 31, 31);
+		final var in = new DynamicStackWidget(c -> inputs.get(BOOK_INDEXES_START + indexer - 1), 0, 31, 31);
 		widgets.add(in);
 		
 		// Output
-		final var out = new DynamicStackWidget(c -> {
-			var cell = indexer.apply(c);
-			return inputs.get(BOOK_INDEXES_START + 1 + cell);
-		}, 0, 106, 26);
+		final var out = new DynamicStackWidget(c -> inputs.get(BOOK_INDEXES_START + indexer), 0, 106, 26);
 		out.large(true).recipeContext(this);
 		widgets.add(out);
 		widgets.addTexture(EmiTexture.EMPTY_ARROW, 80, 31);
 		
 		// Info
 		final var lv = new DynamicTextWidget(c -> {
-			var cell = indexer.apply(c) + 1;
 			var color = NORMAL_COLOR;
-			if (cell + 1 > maxNormal)
+			if (indexer + 1 > maxNormal)
 				color = OVERCHANT_COLOR;
 			
 			
-			return new Pair<>(Text.translatable(EnchanterBlockEntity.LEVEL_TRANS, cell, cell + 1).asOrderedText(), color);
+			return new Pair<>(Text.translatable(EnchanterBlockEntity.LEVEL_TRANS, indexer, indexer + 1).asOrderedText(), color);
 		}, 67, 2, false);
 		widgets.add(lv);
 		
 		
-		final var itemUse = new DynamicTextWidget(c -> {
-			var cell = indexer.apply(c) + 1;
-			return new Pair<>(Text.translatable(EnchanterBlockEntity.ITEM_TRANS, itemScaling.apply(cell)).asOrderedText(), 0x3f3f3f);
-		}, 67, 70, false);
+		final var itemUse = new DynamicTextWidget(
+				c -> new Pair<>(Text.translatable(EnchanterBlockEntity.ITEM_TRANS, itemScaling.apply(indexer)).asOrderedText()
+						, 0x4d3655), 67, 70, false);
 		widgets.add(itemUse);
+		
+		widgets.addText(transKey, 3, 82, 0x4d3655, false);
 	}
 	
 	@Override
