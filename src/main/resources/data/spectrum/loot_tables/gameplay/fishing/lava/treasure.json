@@ -97,7 +97,7 @@
           "conditions": [
             {
               "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
+              "entity": "killer",
               "predicate": {
                 "type_specific": {
                   "type": "player",
@@ -122,7 +122,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 40,
-              "options": "#minecraft:on_random_loot"
+              "treasure": true
             }
           ]
         },
@@ -140,7 +140,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 40,
-              "options": "#minecraft:on_random_loot"
+              "treasure": true
             }
           ]
         },
@@ -158,7 +158,7 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": 45,
-              "options": "#minecraft:on_random_loot"
+              "treasure": true
             }
           ]
         }

@@ -15,40 +15,16 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:ender_pearl"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:phantom_membrane"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "spectrum:midnight_chip"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "spectrum:small_echo_bud",
-          "conditions": [
-            {
-              "condition": "minecraft:location_check",
-              "predicate": {
-                "biome": "minecraft:deep_dark"
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "spectrum:onyx_powder",
+          "name": "spectrum:bone_ash",
           "conditions": [
             {
               "condition": "minecraft:entity_properties",
-              "entity": "direct_attacker",
+              "entity": "killer",
               "predicate": {
                 "type_specific": {
                   "type": "player",
                   "advancements": {
-                    "spectrum:create_onyx_shard": true
+                    "spectrum:break_cracked_dragonbone": true
                   }
                 }
               }
@@ -57,7 +33,35 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:spider_eye"
+          "name": "minecraft:poisonous_potato"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:rabbit_foot"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "spectrum:raw_malachite",
+          "conditions": [
+            {
+              "condition": "minecraft:entity_properties",
+              "entity": "killer",
+              "predicate": {
+                "type_specific": {
+                  "type": "player",
+                  "advancements": {
+                    "spectrum:lategame/collect_malachite": true
+                  }
+                }
+              }
+            },
+            {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "dimension": "spectrum:deeper_down"
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
@@ -71,21 +75,11 @@
                 "max": 0.25
               },
               "add": false
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:crossbow",
-          "functions": [
+            },
             {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0,
-                "max": 0.25
-              },
-              "add": false
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
             }
           ]
         },
@@ -101,12 +95,24 @@
                 "max": 0.25
               },
               "add": false
+            },
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 30,
+              "treasure": true
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:book"
+          "name": "minecraft:book",
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": 45,
+              "treasure": true
+            }
+          ]
         },
         {
           "type": "minecraft:item",
