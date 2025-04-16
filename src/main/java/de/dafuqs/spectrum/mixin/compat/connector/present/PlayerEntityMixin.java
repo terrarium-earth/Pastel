@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.mixin.compat.connectormod.present;
+package de.dafuqs.spectrum.mixin.compat.connector.present;
 
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.registries.*;

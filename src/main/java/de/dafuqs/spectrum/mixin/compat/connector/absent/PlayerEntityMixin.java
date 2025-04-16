@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.mixin.compat.connectormod.absent;
+package de.dafuqs.spectrum.mixin.compat.connector.absent;
 
 import com.llamalad7.mixinextras.injector.*;
 import de.dafuqs.spectrum.helpers.*;

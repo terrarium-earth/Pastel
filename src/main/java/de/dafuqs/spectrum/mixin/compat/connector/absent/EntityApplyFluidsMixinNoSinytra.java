@@ -1,5 +1,6 @@
-package de.dafuqs.spectrum.mixin.compat.connectormod.absent;
+package de.dafuqs.spectrum.mixin.compat.connector.absent;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.*;
 import de.dafuqs.spectrum.api.entity.*;
 import de.dafuqs.spectrum.blocks.fluid.*;
 import de.dafuqs.spectrum.registries.*;
@@ -11,7 +12,6 @@ import net.minecraft.util.math.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
-import com.llamalad7.mixinextras.injector.wrapoperation.*;
 
 @Mixin(Entity.class)
 public class EntityApplyFluidsMixinNoSinytra {
