@@ -68,7 +68,7 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 		this.volume = (float) (volumeHold * distance * 0.8);
 		
 		double cameraEntityEyeY = MinecraftClient.getInstance().getCameraEntity().getEyeY();
-		var pitchMod = MathHelper.clamp((Math.abs(cameraEntityEyeY - this.absY) - 2F) / 196F, 0, 0.225F);
+		var pitchMod = MathHelper.clamp((Math.abs(cameraEntityEyeY - this.absY) - 4F) / 196F, 0, 0.225F);
 		if (cameraEntityEyeY < this.absY) {
 			pitchMod *= -1;
 		}
