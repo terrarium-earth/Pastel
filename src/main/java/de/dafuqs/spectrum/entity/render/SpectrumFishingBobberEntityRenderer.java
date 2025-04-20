@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.entity.render;
 
 import de.dafuqs.spectrum.entity.entity.*;
+import de.dafuqs.spectrum.items.tools.*;
 import net.minecraft.client.*;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.*;
@@ -55,7 +56,7 @@ public abstract class SpectrumFishingBobberEntityRenderer extends EntityRenderer
 	private Vec3d getHandPos(PlayerEntity player, float f, float tickDelta) {
 		int i = player.getMainArm() == Arm.RIGHT ? 1 : -1;
 		ItemStack itemStack = player.getMainHandStack();
-		if (!itemStack.isOf(Items.FISHING_ROD)) {
+		if (!(itemStack.getItem() instanceof SpectrumFishingRodItem)) {
 			i = -i;
 		}
 		
