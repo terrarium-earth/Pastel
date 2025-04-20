@@ -3,11 +3,9 @@
     "has_primordial_torch": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:basal_marbles"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:basal_marbles"
+        }
       }
     }
   }

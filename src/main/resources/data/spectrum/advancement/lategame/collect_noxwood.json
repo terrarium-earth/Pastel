@@ -16,11 +16,9 @@
     "has_noxwood": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:noxwood"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:noxwood"
+        }
       }
     },
     "gotten_previous": {

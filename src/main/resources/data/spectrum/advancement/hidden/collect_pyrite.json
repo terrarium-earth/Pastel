@@ -3,11 +3,9 @@
     "has_clover": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:pyrite"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:pyrite"
+        }
       }
     }
   }

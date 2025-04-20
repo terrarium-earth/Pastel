@@ -3,11 +3,9 @@
     "collected_shale_clay": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:shale_clays"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:shale_clays"
+        }
       }
     }
   }

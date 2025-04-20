@@ -16,11 +16,9 @@
     "snipped_resplendent_feather": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:resplendent_feathers"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:resplendent_feathers"
+        }
       }
     },
     "gotten_previous": {

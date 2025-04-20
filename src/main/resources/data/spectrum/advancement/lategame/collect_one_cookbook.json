@@ -16,11 +16,9 @@
     "collect_one_cookbook": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:cookbooks"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:cookbooks"
+        }
       }
     },
     "gotten_previous": {

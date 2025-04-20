@@ -16,11 +16,9 @@
     "has_hummingstone": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:hummingstones"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:hummingstones"
+        }
       }
     },
     "struck_up_hummingstone_hymn": {

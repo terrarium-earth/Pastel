@@ -15,11 +15,9 @@
     "craft": {
       "trigger": "spectrum:crafted_with_pedestal",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:player_only_glass"
-          }
-        ]
+        "items": {
+          "items": "#spectrum:semi_permeable_glass"
+        }
       }
     },
     "gotten_previous": {

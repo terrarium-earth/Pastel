@@ -3,11 +3,9 @@
     "collected_blackslag": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:blackslags"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:blackslags"
+        }
       }
     }
   }

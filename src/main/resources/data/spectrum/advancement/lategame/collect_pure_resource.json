@@ -15,11 +15,9 @@
     "has_pure_resource": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
-            "items": "#spectrum:pure_resources"
-          }
-        ]
+        "item": {
+          "items": "#spectrum:pure_resources"
+        }
       }
     },
     "gotten_previous": {
