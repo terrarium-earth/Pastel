@@ -56,7 +56,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		if (enchantmentEntry.left().isPresent()) {
 			var enchantment = enchantmentEntry.left().get();
 			var baseMax = enchantment.value().getMaxLevel();
-			if (baseMax < levelCap)
+			if (levelCap < baseMax)
 				throw new JsonParseException("Level Cap cannot be lower than the Enchantment's base level (levelCap " + levelCap + "< enchantment's" + baseMax + ")");
 			
 			ItemStack ingredientStack = new ItemStack(Items.ENCHANTED_BOOK);
