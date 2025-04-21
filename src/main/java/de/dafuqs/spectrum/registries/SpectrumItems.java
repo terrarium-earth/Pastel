@@ -1,11 +1,5 @@
 package de.dafuqs.spectrum.registries;
 
-import java.util.*;
-import java.util.function.*;
-
-import static de.dafuqs.spectrum.SpectrumCommon.*;
-import static net.minecraft.item.Items.*;
-
 import de.dafuqs.revelationary.api.revelations.*;
 import de.dafuqs.spectrum.api.color.*;
 import de.dafuqs.spectrum.api.energy.color.*;
@@ -21,8 +15,8 @@ import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.items.*;
 import de.dafuqs.spectrum.items.armor.*;
 import de.dafuqs.spectrum.items.bundles.*;
-import de.dafuqs.spectrum.items.conditional.*;
 import de.dafuqs.spectrum.items.conditional.CloakedItem;
+import de.dafuqs.spectrum.items.conditional.*;
 import de.dafuqs.spectrum.items.energy.*;
 import de.dafuqs.spectrum.items.food.*;
 import de.dafuqs.spectrum.items.food.beverages.*;
@@ -49,6 +43,12 @@ import net.minecraft.sound.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
+
+import java.util.*;
+import java.util.function.*;
+
+import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static net.minecraft.item.Items.*;
 
 public class SpectrumItems {
 	
@@ -469,10 +469,10 @@ public class SpectrumItems {
 	public static final Item RADIANCE_PIN = register(simple(item("radiance_pin", new RadiancePinItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BLUE)));
 	public static final Item TOTEM_PENDANT = register(simple(item("totem_pendant", new TotemPendantItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BLUE)));
 	public static final TakeOffBeltItem TAKE_OFF_BELT = register(simple(item("take_off_belt", new TakeOffBeltItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW)));
-	public static final Item AZURE_DIKE_BELT = register(simple(item("azure_dike_belt", new AzureDikeBeltItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BLUE)));
-	public static final Item AZURE_DIKE_RING = register(simple(item("azure_dike_ring", new AzureDikeRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BLUE)));
-	public static final Item AZURESQUE_DIKE_CORE = register(simple(item("azuresque_dike_core", new AzureDikeCoreItem(IS.of(1, Rarity.EPIC)), InkColors.WHITE)));
-	public static final InkDrainTrinketItem SHIELDGRASP_AMULET = register(simple(item("shieldgrasp_amulet", new AzureDikeAmuletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BLUE)));
+	public static final Item AZURE_DIKE_BELT = register(simple(item("azure_dike_belt", new AzureDikeBeltItem(IS.of(1, Rarity.UNCOMMON), SpectrumAdvancements.UNLOCK_AZURE_DIKE_BELT), InkColors.BLUE)));
+	public static final Item AZURE_DIKE_RING = register(simple(item("azure_dike_ring", new AzureDikeRingItem(IS.of(1, Rarity.UNCOMMON), SpectrumAdvancements.UNLOCK_AZURE_DIKE_RING), InkColors.BLUE)));
+	public static final Item AZURESQUE_DIKE_CORE = register(simple(item("azuresque_dike_core", new AzureDikeCoreItem(IS.of(1, Rarity.EPIC), SpectrumAdvancements.UNLOCK_AZURESQUE_DIKE_CORE), InkColors.WHITE)));
+	public static final InkDrainTrinketItem SHIELDGRASP_AMULET = register(simple(item("shieldgrasp_amulet", new AzureDikeAmuletItem(IS.of(1, Rarity.UNCOMMON), SpectrumAdvancements.UNLOCK_SHIELDGRASP_AMULET), InkColors.BLUE)));
 	public static final InkDrainTrinketItem HEARTSINGERS_REWARD = register(simple(item("heartsingers_reward", new ExtraHealthRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PINK)));
 	public static final InkDrainTrinketItem GLOVES_OF_DAWNS_GRASP = register(simple(item("gloves_of_dawns_grasp", new ExtraReachGlovesItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW)));
 	public static final InkDrainTrinketItem RING_OF_PURSUIT = register(simple(item("ring_of_pursuit", new ExtraMiningSpeedRingItem(IS.of(1, Rarity.UNCOMMON)), InkColors.MAGENTA)));
@@ -492,12 +492,12 @@ public class SpectrumItems {
 	public static final Item GREATER_POTION_PENDANT = register(layered(item("greater_potion_pendant", new PotionPendantItem(IS.of(1, Rarity.UNCOMMON), 3, CONFIG.MaxLevelForEffectsInGreaterPotionPendant - 1, SpectrumAdvancements.UNLOCK_GREATER_POTION_PENDANT), InkColors.PINK), "_base", "_overlay_1", "_overlay_2", "_overlay_3"));
 	public static final Item ASHEN_CIRCLET = register(item("ashen_circlet", new AshenCircletItem(IS.of(1, Rarity.UNCOMMON).fireproof()), InkColors.ORANGE));
 	public static final Item WEEPING_CIRCLET = register(simple(item("weeping_circlet", new WeepingCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.LIGHT_BLUE)));
-	public static final Item PUFF_CIRCLET = register(simple(item("puff_circlet", new PuffCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.WHITE)));
+	public static final Item PUFF_CIRCLET = register(simple(item("puff_circlet", new PuffCircletItem(IS.of(1, Rarity.UNCOMMON), SpectrumAdvancements.UNLOCK_PUFF_CIRCLET), InkColors.WHITE)));
 	public static final Item WHISPY_CIRCLET = register(simple(item("whispy_circlet", new WhispyCircletItem(IS.of(1, Rarity.UNCOMMON)), InkColors.BROWN)));
 	public static final Item CIRCLET_OF_ARROGANCE = register(simple(item("circlet_of_arrogance", new CircletOfArroganceItem(IS.of(1, Rarity.UNCOMMON)), InkColors.RED)));
 	public static final Item NEAT_RING = register(simple(item("neat_ring", new NeatRingItem(IS.of(1, Rarity.EPIC)), InkColors.GREEN)));
 	
-	public static final Item AETHER_GRACED_NECTAR_GLOVES = register(simple(item("aether_graced_nectar_gloves", new AetherGracedNectarGlovesItem(IS.of(1, Rarity.EPIC)), InkColors.PURPLE)));
+	public static final Item AETHER_GRACED_NECTAR_GLOVES = register(simple(item("aether_graced_nectar_gloves", new AetherGracedNectarGlovesItem(IS.of(1, Rarity.EPIC), SpectrumAdvancements.UNLOCK_AETHER_GRACED_NECTAR_GLOVES), InkColors.PURPLE)));
 	
 	// Pure Clusters
 	public static final Item PURE_COAL = register(simple(burnable(item("pure_coal", new Item(IS.of()), InkColors.BROWN), 3200)));

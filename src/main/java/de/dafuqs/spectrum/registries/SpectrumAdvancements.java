@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
-
 import de.dafuqs.spectrum.*;
 import net.minecraft.util.*;
+
+import static de.dafuqs.spectrum.SpectrumCommon.*;
 
 @SuppressWarnings("unused")
 public class SpectrumAdvancements {
@@ -96,6 +96,13 @@ public class SpectrumAdvancements {
 	public static final Identifier UNLOCK_LESSER_POTION_PENDANT = SpectrumCommon.locate("unlocks/trinkets/lesser_potion_pendant");
 	public static final Identifier UNLOCK_NATURES_STAFF = SpectrumCommon.locate("unlocks/items/natures_staff");
 	public static final Identifier UNLOCK_BLOODSTONE = SpectrumCommon.locate("unlocks/resources/bloodstone");
+	
+	public static final Identifier UNLOCK_AZURE_DIKE_BELT = SpectrumCommon.locate("unlocks/trinkets/azure_dike_belt");
+	public static final Identifier UNLOCK_AZURE_DIKE_RING = SpectrumCommon.locate("unlocks/trinkets/azure_dike_ring");
+	public static final Identifier UNLOCK_AZURESQUE_DIKE_CORE = SpectrumCommon.locate("unlocks/trinkets/azuresque_dike_core");
+	public static final Identifier UNLOCK_SHIELDGRASP_AMULET = SpectrumCommon.locate("unlocks/trinkets/shieldgrasp_amulet");
+	public static final Identifier UNLOCK_PUFF_CIRCLET = SpectrumCommon.locate("unlocks/trinkets/puff_circlet");
+	public static final Identifier UNLOCK_AETHER_GRACED_NECTAR_GLOVES = SpectrumCommon.locate("lategame/collect_aether_graced_nectar_gloves");
 	
 	// Misc
 	public static final Identifier ASCEND_KINDLING = SpectrumCommon.locate("ascend_kindling");
