@@ -41,7 +41,7 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 	int index = 1; // THIS IS EVEN WORSE
 	
 	public EnchantmentUpgradeDisplay(@NotNull RecipeEntry<EnchantmentUpgradeRecipe> recipeEntry) {
-		super(recipeEntry, buildIngredients(recipeEntry.value()), recipeEntry.value().getResult(BasicDisplay.registryAccess()));
+		super(recipeEntry, buildIngredients(recipeEntry.value()), buildOutputs(recipeEntry.value()));
 		
 		var recipe = recipeEntry.value();
 		enchantment = recipe.getEnchantment();
@@ -56,7 +56,7 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 			return s;
 		});
 		
-		buildOutputs(recipe);
+		fuck(recipe);
 	}
 	
 	private static List<EntryIngredient> buildIngredients(EnchantmentUpgradeRecipe recipe) {
@@ -92,10 +92,22 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 		inputs.add(EntryIngredients.ofItemStacks(xpOver)); // The XP gem
 		inputs.add(EntryIngredients.ofItemStacks(enchNormal)); // The center stack
 		inputs.add(EntryIngredients.ofItemStacks(enchOver));
-		return inputs;
+		return Collections.singletonList(EntryIngredients.ofItemStacks(enchOver));
 	}
 	
-	private void buildOutputs(EnchantmentUpgradeRecipe recipe) {
+	private static List<EntryIngredient> buildOutputs(EnchantmentUpgradeRecipe recipe) {
+		var enchOver = new ArrayList<ItemStack>();
+		
+		var levelCap = recipe.getLevelCap();
+		
+		for (int i = 2; i <= levelCap; i++) {
+			appendBookStack(recipe.getEnchantment(), i, enchOver);
+		}
+		
+		return Collections.singletonList(EntryIngredients.ofItemStacks(enchOver));
+	}
+	
+	private void fuck(EnchantmentUpgradeRecipe recipe) {
 		var enchNormal = new ArrayList<ItemStack>();
 		var enchOver = new ArrayList<ItemStack>();
 		
