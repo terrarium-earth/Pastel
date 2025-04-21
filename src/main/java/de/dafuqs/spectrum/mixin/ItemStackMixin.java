@@ -79,7 +79,7 @@ public abstract class ItemStackMixin {
 	@Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/tooltip/TooltipType;isAdvanced()Z", shift = At.Shift.BEFORE, ordinal = 1))
 	public void spectrum$expandTooltipPostDamage(Item.TooltipContext context, PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir, @Local List<Text> tooltip) {
 		var stack = (ItemStack) (Object) this;
-		var oilEffect = stack.get(SpectrumDataComponentTypes.OIL_EFFECT);
+		var oilEffect = stack.get(SpectrumDataComponentTypes.CONCEALED_EFFECT);
 		var profile = stack.get(DataComponentTypes.PROFILE);
 		if (oilEffect != null && profile != null && player.getUuid().equals(profile.id().orElse(null))) {
 			var subText = new ArrayList<Text>();

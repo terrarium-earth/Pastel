@@ -57,7 +57,7 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
 	private boolean tryApplyOil(ItemStack oil, ItemStack food, PlayerEntity user) {
 		if (food.getItem() instanceof DrinkItem)
 			return false;
-		if (food.contains(SpectrumDataComponentTypes.OIL_EFFECT))
+		if (food.contains(SpectrumDataComponentTypes.CONCEALED_EFFECT))
 			return false;
 		
 		var effect = InkPoweredPotionFillable.getEffects(oil).getFirst();
@@ -74,7 +74,7 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
 			return false;
 		
 		food.set(DataComponentTypes.PROFILE, new ProfileComponent(user.getGameProfile()));
-		food.set(SpectrumDataComponentTypes.OIL_EFFECT, effect.getStatusEffectInstance());
+		food.set(SpectrumDataComponentTypes.CONCEALED_EFFECT, effect.getStatusEffectInstance());
 		return true;
 	}
 	
