@@ -22,19 +22,23 @@
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/vanilla/bundle"
+      "recipe_id": "spectrum:pedestal/tier1/vanilla/bundle",
+      "text": "book.spectrum.guidebook.mundane_items.bundle.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/vanilla/cobweb"
+      "recipe_id": "spectrum:pedestal/tier1/vanilla/cobweb",
+      "text": "book.spectrum.guidebook.mundane_items.cobweb.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/vanilla/writable_book"
+      "recipe_id": "spectrum:pedestal/tier1/vanilla/writable_book",
+      "text": "book.spectrum.guidebook.mundane_items.writeable_book.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier1/vanilla/spectral_arrow"
+      "recipe_id": "spectrum:pedestal/tier1/vanilla/spectral_arrow",
+      "text": "book.spectrum.guidebook.mundane_items.spectral_arrow.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
@@ -44,19 +48,29 @@
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier2/vanilla/bell"
+      "recipe_id": "spectrum:pedestal/tier2/vanilla/bell",
+      "text": "book.spectrum.guidebook.mundane_items.bell.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier2/vanilla/name_tag"
+      "recipe_id": "spectrum:pedestal/tier2/vanilla/name_tag",
+      "text": "book.spectrum.guidebook.mundane_items.name_tag.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier4/vanilla/elytra"
+      "recipe_id": "spectrum:pedestal/tier4/vanilla/elytra",
+      "text": "book.spectrum.guidebook.mundane_items.elytra.text"
     },
     {
       "type": "spectrum:pedestal_crafting",
-      "recipe_id": "spectrum:pedestal/tier4/vanilla/trident"
+      "recipe_id": "spectrum:pedestal/tier4/vanilla/trident",
+      "text": "book.spectrum.guidebook.mundane_items.trident.text"
+
+    },
+    {
+      "type": "spectrum:pedestal_crafting",
+      "recipe_id": "spectrum:pedestal/tier4/vanilla/heavy_core",
+      "text": "book.spectrum.guidebook.mundane_items.heavy_core.text"
     }
   ]
 }

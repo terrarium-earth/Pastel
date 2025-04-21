@@ -71,7 +71,7 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 	}
 	
 	@Override
-	public ItemStack getResult(ServerPlayerEntity player, ItemStack firstHalf, ItemStack secondHalf) {
+	public ItemStack getMergeResult(ServerPlayerEntity player, ItemStack firstHalf, ItemStack secondHalf) {
 		var durability = Math.max(firstHalf.getDamage(), secondHalf.getDamage());
 		var result = new ItemStack(SpectrumItems.DRACONIC_TWINSWORD);
 		result.applyComponentsFrom(firstHalf.getComponents());
@@ -84,7 +84,7 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 			durability += player.getAbilities().creativeMode ? 0 : 500;
 			player.getItemCooldownManager().set(result.getItem(), 400);
 		}
-		result.setDamage(durability);
+		result.setDamage(Math.min(durability, firstHalf.getMaxDamage() - 1));
 		
 		return result;
 	}

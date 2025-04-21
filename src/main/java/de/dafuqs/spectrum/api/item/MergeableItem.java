@@ -6,7 +6,7 @@ import net.minecraft.server.network.*;
 
 public interface MergeableItem {
 	
-	ItemStack getResult(ServerPlayerEntity player, ItemStack firstHalf, ItemStack secondHalf);
+	ItemStack getMergeResult(ServerPlayerEntity player, ItemStack firstHalf, ItemStack secondHalf);
 	
 	boolean canMerge(ServerPlayerEntity player, ItemStack parent, ItemStack other);
 	

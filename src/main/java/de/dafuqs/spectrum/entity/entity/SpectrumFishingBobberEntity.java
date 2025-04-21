@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.data_loaders.*;
 import de.dafuqs.spectrum.data_loaders.EntityFishingDataLoader.*;
 import de.dafuqs.spectrum.helpers.enchantments.*;
 import de.dafuqs.spectrum.items.tools.*;
+import de.dafuqs.spectrum.loot.*;
 import de.dafuqs.spectrum.particle.*;
 import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.*;
@@ -651,8 +652,9 @@ public abstract class SpectrumFishingBobberEntity extends ProjectileEntity {
 				.add(LootContextParameters.ORIGIN, this.getPos())
 				.add(LootContextParameters.TOOL, usedItem)
 				.add(LootContextParameters.THIS_ENTITY, this)
+				.add(LootContextParameters.DIRECT_ATTACKING_ENTITY, playerEntity)
 				.luck((float) this.luckBonus + playerEntity.getLuck())
-				.build(LootContextTypes.FISHING);
+				.build(SpectrumLootContextTypes.FISHING);
 		
 		if (getWorld().getServer() == null) return;
 		LootTable lootTable = this.getWorld().getServer().getReloadableRegistries().getLootTable(SpectrumLootTables.UNIVERSAL_FISHING);

@@ -60,7 +60,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 			}
 		}
 		
-		instiller.setValid(valid);
+		instiller.setValidStructure(valid);
 		
 		if (valid) {
 			if (serverPlayerEntity != null) {

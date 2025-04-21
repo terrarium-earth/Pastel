@@ -54,14 +54,14 @@ public class SleepStatusEffect extends StatusEffect {
         if (type.isIn(SpectrumEntityTypeTags.SLEEP_WEAK))
             return false;
         
-        return type.isIn(SpectrumEntityTypeTags.SLEEP_IMMUNEISH);
+        return type.isIn(SpectrumEntityTypeTags.SLEEP_IMMUNEISH) || isConstruct(type);
     }
-
-    /**
+	
+	/**
      * @return -1 = false
      */
     public static float getGeneralSleepResistanceIfEntityHasSoporificEffect(LivingEntity entity) {
-        if (SpectrumStatusEffectTags.hasEffectWithTag(entity, SpectrumStatusEffectTags.SOPORIFIC)) {
+        if (!isConstruct(entity.getType()) && SpectrumStatusEffectTags.hasEffectWithTag(entity, SpectrumStatusEffectTags.SOPORIFIC)) {
             return getSleepResistance(entity.getStatusEffect(getStrongestSleepEffect(entity)), entity);
         }
         return -1F;
@@ -81,6 +81,10 @@ public class SleepStatusEffect extends StatusEffect {
         // Also accounts for a smaller resist meaning stronger sleep
         return 2 * (float) Math.pow(1 - potency, 2);
     }
+	
+	private static boolean isConstruct(EntityType<?> type) {
+		return type.isIn(SpectrumEntityTypeTags.SOULLESS);
+	}
     
     public static @Nullable RegistryEntry<StatusEffect> getStrongestSleepEffect(LivingEntity entity) {
         if (entity.hasStatusEffect(SpectrumStatusEffects.FATAL_SLUMBER)) {

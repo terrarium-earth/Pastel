@@ -35,7 +35,7 @@ public class SpectrumIntegrationPacks {
 		}
 	}
 	
-	public static final String CONNECTOR_ID = "connectormod";
+	public static final String CONNECTOR_ID = "connector";
 	public static final String AE2_ID = "ae2";
 	public static final String GOBBER_ID = "gobber2";
 	public static final String ALLOY_FORGERY_ID = "alloy_forgery";
