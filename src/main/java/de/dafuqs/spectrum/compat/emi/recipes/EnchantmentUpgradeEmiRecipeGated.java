@@ -55,11 +55,8 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 		
 		
 		// Pigments first due to funny bullshit
-		int requiredItemCountSplit = recipe.getBaseItemCost() / 8;
-		int requiredItemCountModulo = recipe.getBaseItemCost() % 8;
 		for (int i = 0; i < 8; i++) {
-			int addAmount = i < requiredItemCountModulo ? 1 : 0;
-			inputs.add(EmiStack.of(recipe.getBulkItem(), requiredItemCountSplit + addAmount));
+			inputs.add(EmiStack.of(recipe.getBulkItem(), 1));
 		}
 		
 		// Then the xp
@@ -144,6 +141,11 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 		widgets.add(itemUse);
 		
 		widgets.addText(transKey, 3, 82, NORMAL_COLOR, false);
+	}
+	
+	@Override
+	public List<EmiStack> getOutputs() {
+		return super.getOutputs();
 	}
 	
 	@Override

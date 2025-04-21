@@ -67,11 +67,8 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 		var maxNormal = enchant.value().getMaxLevel();
 		
 		// You go first
-		int requiredItemCountSplit = recipe.getBaseItemCost() / 8;
-		int requiredItemCountModulo = recipe.getBaseItemCost() % 8;
 		for (int i = 0; i < 8; i++) {
-			int addAmount = i < requiredItemCountModulo ? 1 : 0;
-			inputs.add(EntryIngredients.of(recipe.getBulkItem(), requiredItemCountSplit + addAmount));
+			inputs.add(EntryIngredients.of(recipe.getBulkItem(), 1));
 		}
 		
 		// XP and Books
