@@ -22,7 +22,6 @@ import net.minecraft.text.*;
 import net.minecraft.util.*;
 
 import java.util.*;
-import java.util.function.*;
 
 public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectrumRecipe<?>> {
 	
@@ -144,9 +143,7 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 		widgets.add(lv);
 		
 		
-		final var itemUse = new DynamicTextWidget(
-				c -> new Pair<>(Text.translatable(EnchanterBlockEntity.ITEM_TRANS, itemScaling.apply(indexer)).asOrderedText()
-						, NORMAL_COLOR), 67, 70, false);
+		final var itemUse = new DynamicTextWidget(c -> new Pair<>(Text.translatable(EnchanterBlockEntity.ITEM_TRANS, itemScaling.apply(indexer)).asOrderedText(), NORMAL_COLOR), 67, 70, false);
 		widgets.add(itemUse);
 		
 		widgets.addText(transKey, 3, 82, NORMAL_COLOR, false);

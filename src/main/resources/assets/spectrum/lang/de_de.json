@@ -24,7 +24,6 @@
   "container.spectrum.rei.crafting_time": "%f Sekunden",
   "container.spectrum.rei.crafting_time_one_second": "%f Sekunden",
   "container.spectrum.rei.enchantment_upgrading.title": "Verzauberungs-Upgrade",
-  "container.spectrum.rei.enchantment_upgrade.required_item_count": "(%fx)",
 
   "container.spectrum.bedrock_anvil": "Repariere & erstelle Beschreibung",
   "container.spectrum.bedrock_anvil.lore": "Beschreibung:",
