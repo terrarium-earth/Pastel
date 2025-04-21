@@ -15,8 +15,8 @@ public abstract class RecipeScaling {
 	public static final Codec<ScalingData> CODEC = RecordCodecBuilder.<ScalingData>create(i -> i.group(
 			SpectrumRegistries.RECIPE_SCALING.getCodec().fieldOf("type").forGetter(d -> d.type),
 			Codec.INT.optionalFieldOf("start", 0).forGetter(d -> d.start),
-			Codec.INT.optionalFieldOf("scaling_value", 0).forGetter(d -> d.scalingValue),
-			Codec.DOUBLE.optionalFieldOf("scaling_factor", 1.0).forGetter(d -> d.scalingFactor),
+			Codec.intRange(0, Integer.MAX_VALUE).optionalFieldOf("scaling_value", 0).forGetter(d -> d.scalingValue),
+			Codec.doubleRange(0.0, Double.MAX_VALUE).optionalFieldOf("scaling_factor", 1.0).forGetter(d -> d.scalingFactor),
 			Codec.INT.listOf(0, 255).optionalFieldOf("indexes", Collections.emptyList()).forGetter(d -> d.indexes)
 	).apply(i, ScalingData::new));
 	
