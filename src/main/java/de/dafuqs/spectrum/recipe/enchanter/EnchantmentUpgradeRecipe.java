@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.recipe.enchanter;
 
+import com.google.gson.*;
 import com.mojang.datafixers.util.*;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.*;
@@ -53,8 +54,13 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		DefaultedList<Ingredient> inputs = DefaultedList.ofSize(2, Ingredient.EMPTY);
 		
 		if (enchantmentEntry.left().isPresent()) {
+			var enchantment = enchantmentEntry.left().get();
+			var baseMax = enchantment.value().getMaxLevel();
+			if (baseMax < levelCap)
+				throw new JsonParseException("Level Cap cannot be lower than the Enchantment's base level (levelCap " + levelCap + "< enchantment's" + baseMax + ")");
+			
 			ItemStack ingredientStack = new ItemStack(Items.ENCHANTED_BOOK);
-			ingredientStack.addEnchantment(enchantmentEntry.left().get(), levelCap - 1);
+			ingredientStack.addEnchantment(enchantment, levelCap - 1);
 			inputs.set(0, Ingredient.ofStacks(ingredientStack));
 			inputs.set(1, bulkItem);
 			this.inputs = inputs;
