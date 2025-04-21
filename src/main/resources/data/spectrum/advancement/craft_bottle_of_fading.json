@@ -15,7 +15,7 @@
     "craft": {
       "trigger": "spectrum:crafted_with_pedestal",
       "conditions": {
-        "items": {
+        "item": {
           "items": "spectrum:bottle_of_fading"
         }
       }

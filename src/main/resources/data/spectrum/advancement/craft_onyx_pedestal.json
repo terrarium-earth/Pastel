@@ -49,7 +49,7 @@
     "craft_pedestal": {
       "trigger": "spectrum:crafted_with_pedestal",
       "conditions": {
-        "items": {
+        "item": {
           "items": "spectrum:pedestal_onyx"
         }
       }

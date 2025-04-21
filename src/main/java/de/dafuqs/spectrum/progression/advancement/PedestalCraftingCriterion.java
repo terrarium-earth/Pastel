@@ -29,7 +29,7 @@ public class PedestalCraftingCriterion extends AbstractCriterion<PedestalCraftin
 	public record Conditions(
 			Optional<LootContextPredicate> player,
 			Optional<LootContextPredicate> location,
-			Optional<ItemPredicate> itemPredicate,
+			Optional<ItemPredicate> craftedItemPredicate,
 			NumberRange.IntRange experienceRange,
 			NumberRange.IntRange craftingDurationTicksRange
 	) implements AbstractCriterion.Conditions {
@@ -38,7 +38,7 @@ public class PedestalCraftingCriterion extends AbstractCriterion<PedestalCraftin
 				instance -> instance.group(
 						EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(PedestalCraftingCriterion.Conditions::player),
 						LootContextPredicate.CODEC.optionalFieldOf("location").forGetter(PedestalCraftingCriterion.Conditions::location),
-						ItemPredicate.CODEC.optionalFieldOf("item").forGetter(PedestalCraftingCriterion.Conditions::itemPredicate),
+						ItemPredicate.CODEC.optionalFieldOf("item").forGetter(PedestalCraftingCriterion.Conditions::craftedItemPredicate),
 						NumberRange.IntRange.CODEC.optionalFieldOf("gained_experience", NumberRange.IntRange.ANY).forGetter(PedestalCraftingCriterion.Conditions::experienceRange),
 						NumberRange.IntRange.CODEC.optionalFieldOf("crafting_duration_ticks", NumberRange.IntRange.ANY).forGetter(PedestalCraftingCriterion.Conditions::craftingDurationTicksRange)
 				).apply(instance, PedestalCraftingCriterion.Conditions::new)
@@ -50,7 +50,7 @@ public class PedestalCraftingCriterion extends AbstractCriterion<PedestalCraftin
 		}
 		
 		public boolean matches(ItemStack craftedStack, int experience, int durationTicks) {
-			if (this.itemPredicate.isPresent() && !this.itemPredicate.get().test(craftedStack)) {
+			if (this.craftedItemPredicate.isPresent() && !this.craftedItemPredicate.get().test(craftedStack)) {
 				return false;
 			}
 			if (!this.experienceRange.test(experience)) {
