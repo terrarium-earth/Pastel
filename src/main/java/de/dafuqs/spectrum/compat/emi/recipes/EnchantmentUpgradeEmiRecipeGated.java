@@ -62,14 +62,23 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 		// Then the xp
 		inputs.add(EmiStack.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getBaseXPCost(), true)));
 		
+		this.outputs = new ArrayList<>();
+		
 		// Last the book
 		for (int i = 1; i <= levelCap; i++) {
 			var enchStack = new ItemStack(Items.ENCHANTED_BOOK);
 			var builder = new ItemEnchantmentsComponent.Builder(ItemEnchantmentsComponent.DEFAULT);
+			
 			builder.set(enchant, i);
 			enchStack.set(DataComponentTypes.STORED_ENCHANTMENTS, builder.build());
-			inputs.add(EmiStack.of(enchStack));
+			inputs.add(EmiStack.of(enchStack.copy()));
+			
+			if (i > 1) {
+				enchStack.set(DataComponentTypes.STORED_ENCHANTMENTS, builder.build());
+				outputs.add(EmiStack.of(enchStack));
+			}
 		}
+		
 	}
 	
 	@Override
