@@ -12,6 +12,7 @@
     "AnimalEntityMixin",
     "AnvilBlockMixin",
     "ApplyBonusLootFunctionMixin",
+    "BannerPatternFormatFixMixin",
     "BlockMixin",
     "BrainMixin",
     "BrewingRecipeRegistryMixin",
