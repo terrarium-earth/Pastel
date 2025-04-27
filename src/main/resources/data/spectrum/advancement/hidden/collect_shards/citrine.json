@@ -3,7 +3,7 @@
     "has_citrine_shard": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
+        "items": {
           "items": "#spectrum:citrine_crystals"
         }
       }
