@@ -3,9 +3,11 @@
     "has_amethyst_shard": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": {
-          "items": "#spectrum:amethyst_crystals"
-        }
+        "items": [
+          {
+            "items": "#spectrum:amethyst_crystals"
+          }
+        ]
       }
     }
   }
