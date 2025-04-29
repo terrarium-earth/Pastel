@@ -31,7 +31,6 @@
     "#spectrum:shale_clays",
     "#spectrum:dragonbone_blocks",
     "#spectrum:pyrite",
-    "#spectrum:rock_crystal",
     "#spectrum:alloy_forges",
     "#spectrum:basal_marbles",
 
@@ -47,6 +46,7 @@
     "spectrum:dragonbone",
     "spectrum:cracked_dragonbone",
     "spectrum:pyrite_ripper",
+    "spectrum:rock_crystal",
 
     "spectrum:citrine_block",
     "spectrum:budding_citrine",
