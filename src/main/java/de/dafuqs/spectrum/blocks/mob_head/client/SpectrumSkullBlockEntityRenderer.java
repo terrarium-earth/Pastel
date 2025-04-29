@@ -49,9 +49,15 @@ public class SpectrumSkullBlockEntityRenderer implements BlockEntityRenderer<Spe
 		builder.put(SpectrumSkullType.COW, List.of(new Pair<>(new CowHeadModel(modelLoader.getModelPart(SpectrumModelLayers.COW_HEAD)), Identifier.of("textures/entity/cow/cow.png"))));
 		builder.put(SpectrumSkullType.DOLPHIN, List.of(new Pair<>(new DolphinHeadModel(modelLoader.getModelPart(SpectrumModelLayers.DOLPHIN_HEAD)), Identifier.of("textures/entity/dolphin.png"))));
 		builder.put(SpectrumSkullType.DONKEY, List.of(new Pair<>(new HorseHeadModel(modelLoader.getModelPart(SpectrumModelLayers.DONKEY_HEAD)), Identifier.of("textures/entity/horse/donkey.png"))));
-		builder.put(SpectrumSkullType.DROWNED, List.of(new Pair<>(new DrownedHeadModel(modelLoader.getModelPart(SpectrumModelLayers.DROWNED_HEAD)), Identifier.of("textures/entity/zombie/drowned.png"))));
+		builder.put(SpectrumSkullType.DROWNED, List.of(
+				new Pair<>(new DrownedHeadModel(modelLoader.getModelPart(SpectrumModelLayers.DROWNED_HEAD)), Identifier.of("textures/entity/zombie/drowned.png")),
+				new Pair<>(new DrownedHeadModel(modelLoader.getModelPart(SpectrumModelLayers.DROWNED_HEAD_OUTER)), Identifier.of("textures/entity/zombie/drowned_outer_layer.png"))
+		));
 		builder.put(SpectrumSkullType.ELDER_GUARDIAN, List.of(new Pair<>(new GuardianHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ELDER_GUARDIAN_HEAD)), Identifier.of("textures/entity/guardian_elder.png"))));
-		builder.put(SpectrumSkullType.ENDERMAN, List.of(new Pair<>(new EndermanHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ENDERMAN_HEAD), modelLoader.getModelPart(SpectrumModelLayers.ENDERMAN_HEAD)), Identifier.of("textures/entity/enderman/enderman.png"))));
+		builder.put(SpectrumSkullType.ENDERMAN, List.of(
+				new Pair<>(new EndermanHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ENDERMAN_HEAD)), Identifier.of("textures/entity/enderman/enderman.png")),
+				new Pair<>(new EndermanHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ENDERMAN_HEAD_OVERLAY)), Identifier.of("textures/entity/enderman/enderman_eyes.png"))
+		));
 		builder.put(SpectrumSkullType.ENDERMITE, List.of(new Pair<>(new EndermiteHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ENDERMITE_HEAD)), Identifier.of("textures/entity/endermite.png"))));
 		builder.put(SpectrumSkullType.EVOKER, List.of(new Pair<>(new IllagerHeadModel(modelLoader.getModelPart(SpectrumModelLayers.EVOKER_HEAD)), Identifier.of("textures/entity/illager/evoker.png"))));
 		builder.put(SpectrumSkullType.FOX, List.of(new Pair<>(new FoxHeadModel(modelLoader.getModelPart(SpectrumModelLayers.FOX_HEAD)), Identifier.of("textures/entity/fox/fox.png"))));
@@ -113,7 +119,10 @@ public class SpectrumSkullBlockEntityRenderer implements BlockEntityRenderer<Spe
 		builder.put(SpectrumSkullType.SNOW_GOLEM, List.of(new Pair<>(new ZombieHeadModel(modelLoader.getModelPart(SpectrumModelLayers.SNOW_GOLEM_HEAD)), Identifier.of("textures/entity/snow_golem.png"))));
 		builder.put(SpectrumSkullType.SPIDER, List.of(new Pair<>(new SpiderHeadModel(modelLoader.getModelPart(SpectrumModelLayers.SPIDER_HEAD)), Identifier.of("textures/entity/spider/spider.png"))));
 		builder.put(SpectrumSkullType.SQUID, List.of(new Pair<>(new SquidHeadModel(modelLoader.getModelPart(SpectrumModelLayers.SQUID_HEAD)), Identifier.of("textures/entity/squid/squid.png"))));
-		builder.put(SpectrumSkullType.STRAY, List.of(new Pair<>(new StrayHeadModel(modelLoader.getModelPart(SpectrumModelLayers.STRAY_HEAD)), Identifier.of("textures/entity/skeleton/stray.png"))));
+		builder.put(SpectrumSkullType.STRAY, List.of(
+				new Pair<>(new StrayHeadModel(modelLoader.getModelPart(SpectrumModelLayers.STRAY_HEAD)), Identifier.of("textures/entity/skeleton/stray.png")),
+				new Pair<>(new StrayHeadModel(modelLoader.getModelPart(SpectrumModelLayers.STRAY_HEAD_OVERLAY)), Identifier.of("textures/entity/skeleton/stray_overlay.png"))
+		));
 		builder.put(SpectrumSkullType.STRIDER, List.of(new Pair<>(new StriderHeadModel(modelLoader.getModelPart(SpectrumModelLayers.STRIDER_HEAD)), Identifier.of("textures/entity/strider/strider.png"))));
 		builder.put(SpectrumSkullType.TADPOLE, List.of(new Pair<>(new TadpoleHeadModel(modelLoader.getModelPart(SpectrumModelLayers.TADPOLE_HEAD)), Identifier.of("textures/entity/tadpole/tadpole.png"))));
 		builder.put(SpectrumSkullType.TROPICAL_FISH, List.of(new Pair<>(new TropicalFishHeadModel(modelLoader.getModelPart(SpectrumModelLayers.TROPICAL_FISH_HEAD), modelLoader.getModelPart(SpectrumModelLayers.TROPICAL_FISH_HEAD_PATTERN)), Identifier.of("textures/entity/fish/tropical_a.png")))); // oof
@@ -122,7 +131,12 @@ public class SpectrumSkullBlockEntityRenderer implements BlockEntityRenderer<Spe
 		builder.put(SpectrumSkullType.VILLAGER, List.of(new Pair<>(new VillagerHeadModel(modelLoader.getModelPart(SpectrumModelLayers.VILLAGER_HEAD)), Identifier.of("textures/entity/villager/villager.png"))));
 		builder.put(SpectrumSkullType.VINDICATOR, List.of(new Pair<>(new IllagerHeadModel(modelLoader.getModelPart(SpectrumModelLayers.VINDICATOR_HEAD)), Identifier.of("textures/entity/illager/vindicator.png"))));
 		builder.put(SpectrumSkullType.WANDERING_TRADER, List.of(new Pair<>(new VillagerHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WANDERING_TRADER_HEAD)), Identifier.of("textures/entity/wandering_trader.png"))));
-		builder.put(SpectrumSkullType.WARDEN, List.of(new Pair<>(new WardenHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WARDEN_HEAD)), Identifier.of("textures/entity/warden/warden.png"))));
+		builder.put(SpectrumSkullType.WARDEN, List.of(
+				new Pair<>(new WardenHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WARDEN_HEAD)), Identifier.of("textures/entity/warden/warden.png")),
+				new Pair<>(new WardenHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WARDEN_HEAD_BIOLUMINESCENT)), Identifier.of("textures/entity/warden/warden_bioluminescent_layer.png")),
+				new Pair<>(new WardenHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WARDEN_HEAD_PULSATING_SPOTS_1)), Identifier.of("textures/entity/warden/warden_pulsating_spots_1.png")),
+				new Pair<>(new WardenHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WARDEN_HEAD_PULSATING_SPOTS_2)), Identifier.of("textures/entity/warden/warden_pulsating_spots_2.png"))
+		));
 		builder.put(SpectrumSkullType.WITCH, List.of(new Pair<>(new WitchHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WITCH_HEAD)), Identifier.of("textures/entity/witch.png"))));
 		builder.put(SpectrumSkullType.WITHER, List.of(new Pair<>(new ZombieHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WITHER_HEAD)), Identifier.of("textures/entity/wither/wither.png"))));
 		builder.put(SpectrumSkullType.WOLF, List.of(new Pair<>(new WolfHeadModel(modelLoader.getModelPart(SpectrumModelLayers.WOLF_HEAD)), Identifier.of("textures/entity/wolf/wolf.png"))));
@@ -130,8 +144,9 @@ public class SpectrumSkullBlockEntityRenderer implements BlockEntityRenderer<Spe
 		builder.put(SpectrumSkullType.ZOMBIE_HORSE, List.of(new Pair<>(new HorseHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ZOMBIE_HORSE_HEAD)), Identifier.of("textures/entity/horse/horse_zombie.png"))));
 		builder.put(SpectrumSkullType.ZOMBIE_VILLAGER, List.of(new Pair<>(new VillagerHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ZOMBIE_VILLAGER_HEAD)), Identifier.of("textures/entity/zombie_villager/zombie_villager.png"))));
 		builder.put(SpectrumSkullType.ZOMBIFIED_PIGLIN, List.of(new Pair<>(new PiglinHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ZOMBIFIED_PIGLIN_HEAD)), Identifier.of("textures/entity/piglin/zombified_piglin.png"))));
+		builder.put(SpectrumSkullType.PIGLIN_BRUTE, List.of(new Pair<>(new PiglinHeadModel(modelLoader.getModelPart(SpectrumModelLayers.PIGLIN_BRUTE_HEAD)), Identifier.of("textures/entity/piglin/piglin_brute.png"))));
 		
-		builder.put(SpectrumSkullType.ARMADILLO, List.of(new Pair<>(new ArmadilloHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ARMADILLO_HEAD)), Identifier.of("textures/entity/armadillo.png")))); // TODO: add proper model
+		builder.put(SpectrumSkullType.ARMADILLO, List.of(new Pair<>(new ArmadilloHeadModel(modelLoader.getModelPart(SpectrumModelLayers.ARMADILLO_HEAD)), Identifier.of("textures/entity/armadillo.png"))));
 		builder.put(SpectrumSkullType.BREEZE, List.of(new Pair<>(new BreezeHeadModel(modelLoader.getModelPart(SpectrumModelLayers.BREEZE_HEAD)), Identifier.of("textures/entity/breeze/breeze.png"))));
 		builder.put(SpectrumSkullType.BOGGED, List.of(
 				new Pair<>(new BoggedHeadModel(modelLoader.getModelPart(SpectrumModelLayers.BOGGED_HEAD)), Identifier.of("textures/entity/skeleton/bogged.png")),
