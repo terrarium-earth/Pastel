@@ -1,8 +1,5 @@
 package de.dafuqs.spectrum.blocks.chests;
 
-import java.util.*;
-import java.util.stream.*;
-
 import de.dafuqs.spectrum.api.block.*;
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.events.*;
@@ -32,6 +29,9 @@ import net.minecraft.world.*;
 import net.minecraft.world.event.*;
 import net.minecraft.world.event.listener.*;
 import org.jetbrains.annotations.*;
+
+import java.util.*;
+import java.util.stream.*;
 
 public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implements FilterConfigurable, ExtendedScreenHandlerFactory<FilterConfigurable.ExtendedDataWithPos>, SidedInventory, EventQueue.Callback<Object> {
 	
@@ -342,9 +342,9 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		boolean allAir = true;
 		for (int i = 0; i < ITEM_FILTER_SLOT_COUNT; i++) {
 			ItemVariant filterItem = this.filterItems.get(i);
-			if (filterItem.getItem().equals(itemStack.getItem())) {
+			if (itemStack.isOf(filterItem.getItem())) {
 				return true;
-			} else if (!filterItem.getItem().equals(Items.AIR)) {
+			} else if (!filterItem.isBlank()) {
 				allAir = false;
 			}
 		}
