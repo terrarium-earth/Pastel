@@ -75,6 +75,9 @@ public class SpectrumAdvancements {
 	public static final Identifier ENCHANTMENTS_VANILLA_UNBREAKING = SpectrumCommon.locate("unlocks/enchantments/vanilla_unbreaking");
 	public static final Identifier ENCHANTMENTS_VANILLA_WATER = SpectrumCommon.locate("unlocks/enchantments/vanilla_water");
 	public static final Identifier ENCHANTMENTS_VANILLA_WATER_LUCK = SpectrumCommon.locate("unlocks/enchantments/vanilla_water_luck");
+	public static final Identifier ENCHANTMENTS_VANILLA_TRIAL_TREASURE = SpectrumCommon.locate("unlocks/enchantments/vanilla_trial_treasure");
+	public static final Identifier ENCHANTMENTS_VANILLA_TRIAL = SpectrumCommon.locate("unlocks/enchantments/vanilla_trial");
+	public static final Identifier ENCHANTMENTS_VANILLA_BREACHING = SpectrumCommon.locate("unlocks/enchantments/vanilla_trial_breaching");
 	
 	// Pedestal
 	public static final Identifier PLACED_PEDESTAL = SpectrumCommon.locate("place_pedestal");

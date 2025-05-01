@@ -245,6 +245,10 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 		generateEnchantmentUpgradeRecipe(ctx, "minecraft", SWIFT_SNEAK, ENCHANTMENTS_VANILLA_SWIFT_SNEAK, LIGHT_BLUE_PIGMENT, 5, RecipeScaling.indices(200, 600, 2000, 5000), RecipeScaling.indices(8, 32, 128, 256));
 		generateEnchantmentUpgradeRecipe(ctx, "minecraft", THORNS, ENCHANTMENTS_VANILLA_PROTECTION, PINK_PIGMENT, 6, RecipeScaling.indices(100, 400, 2000, 4000, 10000), RecipeScaling.indices(8, 32, 128, 256, 512));
 		generateEnchantmentUpgradeRecipe(ctx, "minecraft", UNBREAKING, ENCHANTMENTS_VANILLA_UNBREAKING, CYAN_PIGMENT, 6, RecipeScaling.indices(100, 400, 2000, 4000, 10000), RecipeScaling.indices(8, 32, 256, 512, 512));
+		generateEnchantmentUpgradeRecipe(ctx, "minecraft", WIND_BURST, ENCHANTMENTS_VANILLA_DAMAGE, YELLOW_PIGMENT, 5, RecipeScaling.doubling(200), RecipeScaling.doubling(16));
+		generateEnchantmentUpgradeRecipe(ctx, "minecraft", BREACH, ENCHANTMENTS_VANILLA_BREACHING, RED_PIGMENT, 5, RecipeScaling.doubling(200), RecipeScaling.doubling(8));
+		generateEnchantmentUpgradeRecipe(ctx, "minecraft", BANE_OF_ARTHROPODS, ENCHANTMENTS_VANILLA_TRIAL, CYAN_PIGMENT, 8, RecipeScaling.doubling(400), RecipeScaling.doubling(16));
+		
 	}
 	
 	private void generateCrystallarieumRecipe(RecipeExporter ctx, String id, Item base, @Nullable Fluid medium, @Nullable Identifier advancement, int secondsPerStage, InkColor inkColor, int inkCostTier, boolean growsWithoutCatalyst, List<Block> stages, List<CrystallarieumCatalyst> catalysts, List<ItemStack> additionalResults) {
@@ -254,10 +258,6 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 				catalysts,
 				FluidVariant.of(medium == null ? SpectrumFluids.LIQUID_CRYSTAL : medium),
 				additionalResults));
-	}
-	
-	private void generateEnchantmentUpgradeRecipes(RecipeExporter ctx, String group, RegistryKey<Enchantment> enchantment, Identifier advancement, Item bulkItem, int[][] levelCap) {
-		//TODO remove this stub function once the scaling is done
 	}
 	
 	private void generateEnchantmentUpgradeRecipe(RecipeExporter ctx, String group, RegistryKey<Enchantment> enchantment, Identifier advancement, Item bulkItem, int levelCap, RecipeScaling.ScalingData xpScaling, RecipeScaling.ScalingData itemScaling) {
