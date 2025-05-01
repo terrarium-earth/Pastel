@@ -16,9 +16,11 @@
     "collected_moonstone_shard": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": "#spectrum:moonstone_crystals"
-        }
+        "items": [
+          {
+            "items": "#spectrum:moonstone_crystals"
+          }
+        ]
       }
     },
     "gotten_previous": {
