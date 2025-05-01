@@ -560,6 +560,14 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			builder.add(upgrade.getEnchantment(), targetLevel);
 			SpectrumAdvancementCriteria.ENCHANTER_UPGRADING.trigger(serverPlayerEntity, builder.build(), xpCost);
 		}
+		
+		// update the item cost if chain upgrading
+		if (recipeMatches(this, world)) {
+			craftingTimeTotal = upgrade.getItemScaling().apply(targetLevel);
+		}
+		else {
+			currentRecipe = null;
+		}
 	}
 	
 	public static Vec3i getItemBowlPositionOffset(int index, int orientation, boolean mirrored) {
