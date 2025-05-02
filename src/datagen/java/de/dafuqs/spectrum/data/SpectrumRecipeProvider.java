@@ -247,7 +247,7 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 		generateEnchantmentUpgradeRecipe(ctx, "minecraft", UNBREAKING, ENCHANTMENTS_VANILLA_UNBREAKING, CYAN_PIGMENT, 6, RecipeScaling.indices(100, 400, 2000, 4000, 10000), RecipeScaling.indices(8, 32, 256, 512, 512));
 		generateEnchantmentUpgradeRecipe(ctx, "minecraft", WIND_BURST, ENCHANTMENTS_VANILLA_DAMAGE, YELLOW_PIGMENT, 5, RecipeScaling.doubling(200), RecipeScaling.doubling(16));
 		generateEnchantmentUpgradeRecipe(ctx, "minecraft", BREACH, ENCHANTMENTS_VANILLA_BREACHING, RED_PIGMENT, 5, RecipeScaling.doubling(200), RecipeScaling.doubling(8));
-		generateEnchantmentUpgradeRecipe(ctx, "minecraft", BANE_OF_ARTHROPODS, ENCHANTMENTS_VANILLA_TRIAL, CYAN_PIGMENT, 8, RecipeScaling.doubling(400), RecipeScaling.doubling(16));
+		generateEnchantmentUpgradeRecipe(ctx, "minecraft", DENSITY, ENCHANTMENTS_VANILLA_TRIAL, CYAN_PIGMENT, 8, RecipeScaling.doubling(400), RecipeScaling.doubling(16));
 		
 	}
 	
