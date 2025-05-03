@@ -15,9 +15,11 @@
     "has_gemstone_powder": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": "#spectrum:gemstone_powders"
-        }
+        "items": [
+          {
+            "items": "#spectrum:gemstone_powders"
+          }
+        ]
       }
     },
     "gotten_previous": {

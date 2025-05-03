@@ -5,10 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:amethyst_shard",
-              "minecraft:amethyst_block"
-            ]
+            "items": "#spectrum:amethyst_crystals"
           }
         ]
       }

@@ -3,9 +3,11 @@
     "has_clover": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": "#spectrum:clovers"
-        }
+        "items": [
+          {
+            "items": "#spectrum:clovers"
+          }
+        ]
       }
     }
   }

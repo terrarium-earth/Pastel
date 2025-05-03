@@ -15,9 +15,11 @@
     "has_any_pigment": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": "#spectrum:pigments"
-        }
+        "items": [
+          {
+            "items": "#spectrum:pigments"
+          }
+        ]
       }
     },
     "gotten_previous": {

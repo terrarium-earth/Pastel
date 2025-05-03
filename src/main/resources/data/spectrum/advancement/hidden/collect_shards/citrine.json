@@ -5,10 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "spectrum:citrine_shard",
-              "spectrum:citrine_block"
-            ]
+            "items": "#spectrum:citrine_crystals"
           }
         ]
       }

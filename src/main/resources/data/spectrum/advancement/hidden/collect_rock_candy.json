@@ -3,9 +3,11 @@
     "has_rock_candy": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": "#spectrum:rock_candy"
-        }
+        "items": [
+          {
+            "items": "#spectrum:rock_candy"
+          }
+        ]
       }
     },
     "gotten_previous": {

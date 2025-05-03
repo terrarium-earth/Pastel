@@ -3,9 +3,11 @@
     "collected_dragonjag": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": "#spectrum:dragonjags"
-        }
+        "items": [
+          {
+            "items": "#spectrum:dragonjags"
+          }
+        ]
       }
     }
   }

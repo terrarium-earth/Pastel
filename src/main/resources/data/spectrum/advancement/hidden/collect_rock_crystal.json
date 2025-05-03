@@ -1,11 +1,13 @@
 {
   "criteria": {
-    "has_rock_crystal": {
+    "has_rock_candy": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": "spectrum:rock_crystal"
-        }
+        "items": [
+          {
+            "items": "#spectrum:rock_crystal"
+          }
+        ]
       }
     }
   }

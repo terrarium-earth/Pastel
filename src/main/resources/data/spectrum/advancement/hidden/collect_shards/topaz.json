@@ -5,10 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "spectrum:topaz_shard",
-              "spectrum:topaz_block"
-            ]
+            "items": "#spectrum:topaz_crystals"
           }
         ]
       }
