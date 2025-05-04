@@ -17,11 +17,8 @@ public abstract class ItemPredicateMixin {
 	@Shadow
 	@Final
 	private Optional<RegistryEntryList<Item>> items;
-	
-	// "Kindly thank you Vazkiiiiii and Willywussss for solving this issue your fix is very neat plz let me suc k you off" - FUCK THAT SHIT
+
 	// FUCK THIS MIXIN
-	// THIS FUCKING SUCKS. BOTANIA SUCKS. EXPLARD.
-	// GOD THIS SHOULD NOT HAVE WASTED A FUCKING WEEK.
 	// GO TO HELL - XOXO AZZYYPAARAS
 	@ModifyExpressionValue(method = "test(Lnet/minecraft/item/ItemStack;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isIn(Lnet/minecraft/registry/entry/RegistryEntryList;)Z"))
 	public boolean redirectShearsPredicates(boolean original, @Local(argsOnly = true) ItemStack stack) {
