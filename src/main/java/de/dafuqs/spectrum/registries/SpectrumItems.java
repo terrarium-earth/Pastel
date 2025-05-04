@@ -83,22 +83,22 @@ public class SpectrumItems {
 	public static final Item MOONSTONE_POWDER = register(simple(item("moonstone_powder", new GemstonePowderItem(IS.of(), SpectrumAdvancements.COLLECT_MOONSTONE, BuiltinGemstoneColor.WHITE, WHITE_DYE), InkColors.WHITE)));
 	
 	// Pigment
-	public static final Item WHITE_PIGMENT = register(simple(item("white_pigment", new PigmentItem(IS.of(), InkColors.BLACK, BLACK_DYE), InkColors.WHITE)));
-	public static final Item ORANGE_PIGMENT = register(simple(item("orange_pigment", new PigmentItem(IS.of(), InkColors.BLUE, BLUE_DYE), InkColors.ORANGE)));
-	public static final Item MAGENTA_PIGMENT = register(simple(item("magenta_pigment", new PigmentItem(IS.of(), InkColors.BROWN, BROWN_DYE), InkColors.MAGENTA)));
-	public static final Item LIGHT_BLUE_PIGMENT = register(simple(item("light_blue_pigment", new PigmentItem(IS.of(), InkColors.CYAN, CYAN_DYE), InkColors.LIGHT_BLUE)));
-	public static final Item YELLOW_PIGMENT = register(simple(item("yellow_pigment", new PigmentItem(IS.of(), InkColors.GRAY, GRAY_DYE), InkColors.YELLOW)));
-	public static final Item LIME_PIGMENT = register(simple(item("lime_pigment", new PigmentItem(IS.of(), InkColors.GREEN, GREEN_DYE), InkColors.LIME)));
-	public static final Item PINK_PIGMENT = register(simple(item("pink_pigment", new PigmentItem(IS.of(), InkColors.LIGHT_BLUE, LIGHT_BLUE_DYE), InkColors.PINK)));
-	public static final Item GRAY_PIGMENT = register(simple(item("gray_pigment", new PigmentItem(IS.of(), InkColors.LIGHT_GRAY, LIGHT_GRAY_DYE), InkColors.GRAY)));
-	public static final Item LIGHT_GRAY_PIGMENT = register(simple(item("light_gray_pigment", new PigmentItem(IS.of(), InkColors.LIME, LIME_DYE), InkColors.LIGHT_GRAY)));
-	public static final Item CYAN_PIGMENT = register(simple(item("cyan_pigment", new PigmentItem(IS.of(), InkColors.MAGENTA, MAGENTA_DYE), InkColors.CYAN)));
-	public static final Item PURPLE_PIGMENT = register(simple(item("purple_pigment", new PigmentItem(IS.of(), InkColors.ORANGE, ORANGE_DYE), InkColors.PURPLE)));
-	public static final Item BLUE_PIGMENT = register(simple(item("blue_pigment", new PigmentItem(IS.of(), InkColors.PINK, PINK_DYE), InkColors.BLUE)));
-	public static final Item BROWN_PIGMENT = register(simple(item("brown_pigment", new PigmentItem(IS.of(), InkColors.PURPLE, PURPLE_DYE), InkColors.BROWN)));
-	public static final Item GREEN_PIGMENT = register(simple(item("green_pigment", new PigmentItem(IS.of(), InkColors.RED, RED_DYE), InkColors.GREEN)));
-	public static final Item RED_PIGMENT = register(simple(item("red_pigment", new PigmentItem(IS.of(), InkColors.WHITE, WHITE_DYE), InkColors.RED)));
-	public static final Item BLACK_PIGMENT = register(simple(item("black_pigment", new PigmentItem(IS.of(), InkColors.YELLOW, YELLOW_DYE), InkColors.BLACK)));
+	public static final Item WHITE_PIGMENT = register(simple(item("white_pigment", new PigmentItem(IS.of(), InkColors.WHITE, WHITE_DYE), InkColors.WHITE)));
+	public static final Item ORANGE_PIGMENT = register(simple(item("orange_pigment", new PigmentItem(IS.of(), InkColors.ORANGE, ORANGE_DYE), InkColors.ORANGE)));
+	public static final Item MAGENTA_PIGMENT = register(simple(item("magenta_pigment", new PigmentItem(IS.of(), InkColors.MAGENTA, MAGENTA_DYE), InkColors.MAGENTA)));
+	public static final Item LIGHT_BLUE_PIGMENT = register(simple(item("light_blue_pigment", new PigmentItem(IS.of(), InkColors.LIGHT_BLUE, LIGHT_BLUE_DYE), InkColors.LIGHT_BLUE)));
+	public static final Item YELLOW_PIGMENT = register(simple(item("yellow_pigment", new PigmentItem(IS.of(), InkColors.YELLOW, YELLOW_DYE), InkColors.YELLOW)));
+	public static final Item LIME_PIGMENT = register(simple(item("lime_pigment", new PigmentItem(IS.of(), InkColors.LIME, LIME_DYE), InkColors.LIME)));
+	public static final Item PINK_PIGMENT = register(simple(item("pink_pigment", new PigmentItem(IS.of(), InkColors.PINK, PINK_DYE), InkColors.PINK)));
+	public static final Item GRAY_PIGMENT = register(simple(item("gray_pigment", new PigmentItem(IS.of(), InkColors.GRAY, GRAY_DYE), InkColors.GRAY)));
+	public static final Item LIGHT_GRAY_PIGMENT = register(simple(item("light_gray_pigment", new PigmentItem(IS.of(), InkColors.LIGHT_GRAY, LIGHT_GRAY_DYE), InkColors.LIGHT_GRAY)));
+	public static final Item CYAN_PIGMENT = register(simple(item("cyan_pigment", new PigmentItem(IS.of(), InkColors.CYAN, CYAN_DYE), InkColors.CYAN)));
+	public static final Item PURPLE_PIGMENT = register(simple(item("purple_pigment", new PigmentItem(IS.of(), InkColors.PURPLE, PURPLE_DYE), InkColors.PURPLE)));
+	public static final Item BLUE_PIGMENT = register(simple(item("blue_pigment", new PigmentItem(IS.of(), InkColors.BLUE, BLUE_DYE), InkColors.BLUE)));
+	public static final Item BROWN_PIGMENT = register(simple(item("brown_pigment", new PigmentItem(IS.of(), InkColors.BROWN, BROWN_DYE), InkColors.BROWN)));
+	public static final Item GREEN_PIGMENT = register(simple(item("green_pigment", new PigmentItem(IS.of(), InkColors.GREEN, GREEN_DYE), InkColors.GREEN)));
+	public static final Item RED_PIGMENT = register(simple(item("red_pigment", new PigmentItem(IS.of(), InkColors.RED, RED_DYE), InkColors.RED)));
+	public static final Item BLACK_PIGMENT = register(simple(item("black_pigment", new PigmentItem(IS.of(), InkColors.BLACK, BLACK_DYE), InkColors.BLACK)));
 	
 	// Preenchanted tools
 	public static final PreenchantedMultiToolItem MULTITOOL = register(handheld(item("multitool", new PreenchantedMultiToolItem(ToolMaterials.IRON, 2, -2.4F, IS.of(Rarity.UNCOMMON).maxDamage(ToolMaterials.IRON.getDurability())), InkColors.BROWN)));
