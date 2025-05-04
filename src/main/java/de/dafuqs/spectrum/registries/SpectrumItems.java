@@ -50,6 +50,7 @@ import java.util.function.*;
 import static de.dafuqs.spectrum.SpectrumCommon.*;
 import static net.minecraft.item.Items.*;
 
+//TODO: I am not sure how our tools are implemented rn but they REALLY should be migrated to working off of tool components. ~ Azzyy (whom will not be the one doing this)
 public class SpectrumItems {
 	
 	public static final DeferredRegistrar ITEM_REGISTRAR = new DeferredRegistrar();
@@ -143,7 +144,7 @@ public class SpectrumItems {
 	public static final BedrockHoeItem BEDROCK_HOE = register(handheld(item("bedrock_hoe", new BedrockHoeItem(SpectrumToolMaterial.BEDROCK, IS.of(Rarity.UNCOMMON).attributeModifiers(HoeItem.createAttributeModifiers(SpectrumToolMaterial.BEDROCK, 2, -0.0F)).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
 	public static final BedrockBowItem BEDROCK_BOW = register(item("bedrock_bow", new BedrockBowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
 	public static final BedrockCrossbowItem BEDROCK_CROSSBOW = register(item("bedrock_crossbow", new BedrockCrossbowItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
-	public static final BedrockShearsItem BEDROCK_SHEARS = register(simple(item("bedrock_shears", new BedrockShearsItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK)));
+	public static final BedrockShearsItem BEDROCK_SHEARS = register(simple(item("bedrock_shears", new BedrockShearsItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false)).component(DataComponentTypes.TOOL, ShearsItem.createToolComponent())), InkColors.BLACK)));
 	public static final BedrockFishingRodItem BEDROCK_FISHING_ROD = register(item("bedrock_fishing_rod", new BedrockFishingRodItem(IS.of(Rarity.UNCOMMON).fireproof().maxDamage(SpectrumToolMaterial.BEDROCK.getDurability()).component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false))), InkColors.BLACK));
 	
 	public static final WorkstaffItem MALACHITE_WORKSTAFF = register(item("malachite_workstaff", new WorkstaffItem(SpectrumToolMaterial.MALACHITE, 1, -3.2F, IS.of(1, Rarity.UNCOMMON)), InkColors.GREEN));
