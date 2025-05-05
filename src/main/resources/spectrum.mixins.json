@@ -36,6 +36,7 @@
     "FireBlockMixin",
     "FirstStrikeEnchantmentMixin",
     "FishingHookPredicateMixin",
+    "FixModonomiconMixin",
     "FoodComponentBuilderMixin",
     "FoxEntityMixin",
     "GeodesGenerateWithGemstoneOresMixin",
