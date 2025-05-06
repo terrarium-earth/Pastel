@@ -61,6 +61,9 @@ public class PastelNetwork<W extends World> {
 		return graph.containsEdge(pos1, pos2);
     }
 	
+	public boolean removeEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
+		return graph.removeEdge(node.getPos(), parent.getPos()) != null;
+	}
 	
 	public UUID getUUID() {
         return this.uuid;

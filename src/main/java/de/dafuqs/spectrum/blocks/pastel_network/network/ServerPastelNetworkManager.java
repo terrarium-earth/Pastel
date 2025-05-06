@@ -40,6 +40,45 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 		return network;
 	}
 	
+	// TODO: detach connection logic from pastel node block entities
+	public void connectNodes(PastelNodeBlockEntity child, PastelNodeBlockEntity parent) {
+		var parentNetwork = parent.getServerNetwork();
+		var childNetwork = child.getServerNetwork();
+		
+		if (childNetwork.isEmpty() && parentNetwork.isEmpty()) {
+			parentNetwork = Optional.of(createNetwork((ServerWorld) parent.getWorld(), parent));
+			
+		}
+		
+		if (childNetwork.isEmpty()) {
+			addAndSync(child, parent);
+			return;
+		}
+		else if(parentNetwork.isEmpty()) {
+			addAndSync(parent, child);
+			return;
+		}
+		else if(childNetwork.get() != parentNetwork.get()) {
+			if (parentNetwork.get().size() > childNetwork.get().size()) {
+				parentNetwork.get().incorporate(childNetwork.get(), child, parent);
+			}
+			else {
+				childNetwork.get().incorporate(parentNetwork.get(), child, parent);
+			}
+		}
+		
+		// You uh, should not be getting here if both networks are equal.
+		// Handle that in the impression please and thanks.
+		throw new IllegalStateException("Tried to merge a Pastel Network with itself");
+	}
+	
+	private static void addAndSync(PastelNodeBlockEntity newNode, PastelNodeBlockEntity reference) {
+		assert reference.getServerNetwork().isPresent();
+		var parentNetwork = reference.getServerNetwork().get();
+		parentNetwork.addNode(newNode);
+		parentNetwork.markDirty(reference.getPos());
+	}
+	
 	@Override
 	public ServerPastelNetwork createNetwork(ServerWorld world, UUID uuid, int color) {
 		ServerPastelNetwork network = new ServerPastelNetwork(world, uuid, color);
@@ -128,5 +167,4 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 			}
 		}
 	}
-	
 }

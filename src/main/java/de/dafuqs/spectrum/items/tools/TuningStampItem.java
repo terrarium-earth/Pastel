@@ -123,7 +123,6 @@ public class TuningStampItem extends Item implements ExpandedStatTooltip {
         tryPlaySound(player, SoundEvents.ITEM_BRUSH_BRUSHING_GENERIC, 1F);
     }
 
-
     private void tryPlaySound(Optional<PlayerEntity> player, SoundEvent sound, float volume) {
         player.ifPresent(p -> p.getWorld().playSoundFromEntity(null, p, sound, SoundCategory.PLAYERS, volume, 0.9F + p.getRandom().nextFloat() / 5F));
     }
