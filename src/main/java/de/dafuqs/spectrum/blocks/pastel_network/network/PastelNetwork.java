@@ -41,7 +41,6 @@ public class PastelNetwork<W extends World> {
         return this.graph;
     }
 	
-	
 	public boolean addEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
 		return addEdge(node.getPos(), parent.getPos());
 	}

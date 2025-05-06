@@ -278,6 +278,10 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	public void setWorld(World world) {
 		super.setWorld(world);
 		
+		if (!world.isClient()) {
+			getServerNetwork().ifPresent(network -> network.initializeNode(this));
+		}
+		
 		/* TODO: this freezes the world on join
 		if (creationStamp == -1) {
 			creationStamp = (world.getTime() + world.getRandom().nextInt(7)) % 20;
