@@ -1,0 +1,25 @@
+{
+  "type": "spectrum:pedestal",
+  "group": "pastel_network",
+  "time": 80,
+  "tier": "advanced",
+  "magenta": 1,
+  "yellow": 1,
+  "cyan": 1,
+  "black": 4,
+  "white": 0,
+  "experience": 1.0,
+  "pattern": [
+    " I ",
+    "GAI",
+    "SG "
+  ],
+  "key": {
+    "S": "minecraft:stick",
+    "G": "minecraft:glow_ink_sac",
+    "I": "minecraft:ink_sac",
+    "A": "spectrum:raw_azurite"
+  },
+  "result": "spectrum:tuning_stamp",
+  "required_advancement": "spectrum:unlocks/blocks/pastel_network"
+}
