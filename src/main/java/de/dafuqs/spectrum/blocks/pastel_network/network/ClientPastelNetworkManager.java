@@ -41,9 +41,6 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientWo
 		for (ClientPastelNetwork network : this.networks) {
 			if (network.getWorld().getDimension() != world.getDimension()) continue;
 			
-			float alphaMod = paintbrushInHand ? 1.0F : (network.lastChangeTick - worldTime + 20) * 0.05F;
-			if (alphaMod <= 0.0F) continue;
-			
 			Graph<BlockPos, DefaultEdge> graph = network.getGraph();
 			int color = network.getColor();
 			float[] colors = PastelRenderHelper.unpackNormalizedColor(color);
@@ -63,7 +60,7 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientWo
 				matrices.translate(-pos.x, -pos.y, -pos.z);
 				var cross = source.crossProduct(target);
 				var interval = (cross.getX() + cross.getY() + cross.getZ() + network.world.getTime()) % 1000000F;
-				var alpha = alphaMod * (1.0 - (Math.max(Math.sin((interval / 17F)) * 2.5 - 2, 0)));
+				var alpha = (1.0 - (Math.max(Math.sin((interval / 17F)) * 2.5 - 2, 0)));
 				colors[0] = (float) alpha;
 				PastelRenderHelper.renderLineTo(context.matrixStack(), context.consumers(), colors, source, target);
 				
