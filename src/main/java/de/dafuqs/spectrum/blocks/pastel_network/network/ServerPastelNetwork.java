@@ -165,16 +165,8 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 	 * Note: this does not check if the nodes can connect, that should be done before calling this method.
 	 */
 	protected void addNodeAndConnect(PastelNodeBlockEntity newNode, PastelNodeBlockEntity existing) {
-		if (addLoadedNode(newNode))
-			return;
-		
-		this.graph.addVertex(newNode.getPos());
+		addNode(newNode);
 		getGraph().addEdge(newNode.getPos(), existing.getPos());
-		
-		// check for priority
-		addPriorityNode(newNode);
-		
-		newNode.setNetworkUUID(this.getUUID());
 		PastelNetworkEdgeSyncPayload.send(this, newNode.getPos());
 	}
 	

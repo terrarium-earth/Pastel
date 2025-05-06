@@ -75,7 +75,7 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 	private static void addAndSync(PastelNodeBlockEntity newNode, PastelNodeBlockEntity reference) {
 		assert reference.getServerNetwork().isPresent();
 		var parentNetwork = reference.getServerNetwork().get();
-		parentNetwork.addNode(newNode);
+		parentNetwork.addNodeAndConnect(newNode, reference);
 		parentNetwork.markDirty(reference.getPos());
 	}
 	
@@ -96,7 +96,13 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 	public NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
 		NbtList networkList = new NbtList();
 		for (ServerPastelNetwork network : this.networks) {
-			CodecHelper.toNbt(ServerPastelNetwork.CODEC, network, networkList::add);
+			var opt = ServerPastelNetwork.CODEC.encodeStart(NbtOps.INSTANCE, network).result();
+			if (opt.isPresent()) {
+				var wrapper = new NbtCompound();
+				wrapper.put("network", opt.get());
+				wrapper.put("graph", network.graphToNbt());
+				networkList.add(wrapper);
+			}
 		}
 		nbt.put("Networks", networkList);
 		return nbt;
@@ -105,8 +111,13 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 	public static ServerPastelNetworkManager fromNbt(NbtCompound nbt) {
 		ServerPastelNetworkManager manager = new ServerPastelNetworkManager();
 		for (NbtElement element : nbt.getList("Networks", NbtElement.COMPOUND_TYPE)) {
-			Optional<ServerPastelNetwork> network = CodecHelper.fromNbt(ServerPastelNetwork.CODEC, element);
+			var comp = (NbtCompound) element;
+			var netNbt = comp.get("network");
+			var graphNbt = comp.get("graph");
+			
+			Optional<ServerPastelNetwork> network = CodecHelper.fromNbt(ServerPastelNetwork.CODEC, netNbt);
 			if (network.isPresent()) {
+				network.get().setGraph(PastelNetwork.graphFromNbt((NbtCompound) graphNbt));
 				manager.networks.add(network.get());
 			}
 		}

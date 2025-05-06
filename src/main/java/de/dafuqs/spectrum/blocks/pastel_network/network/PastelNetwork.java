@@ -88,6 +88,7 @@ public class PastelNetwork<W extends World> {
         return false;
     }
 	
+	//TODO: make this into a CODEC after the 1.21.1 port is done.
 	public NbtCompound graphToNbt() {
 		var vertices = new ArrayList<>(graph.vertexSet());
 		var graphStorage = new NbtCompound();
