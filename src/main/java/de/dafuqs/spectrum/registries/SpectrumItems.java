@@ -58,6 +58,7 @@ public class SpectrumItems {
 	// Main items
 	public static final Item GUIDEBOOK = register(simple(item("guidebook", new GuidebookItem(IS.of(1)), InkColors.WHITE)));
 	public static final Item PAINTBRUSH = register(item("paintbrush", new PaintbrushItem(IS.of(1)), InkColors.WHITE));
+	public static final Item TUNING_STAMP = register(item("tuning_stamp", new TuningStampItem(IS.of(1)), InkColors.WHITE));
 	public static final Item CRAFTING_TABLET = register(simple(item("crafting_tablet", new CraftingTabletItem(IS.of(1)), InkColors.LIGHT_GRAY)));
 	
 	// Structure placers

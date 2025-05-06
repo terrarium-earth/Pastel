@@ -24,6 +24,7 @@ public class SpectrumRegistryKeys {
 	public static final RegistryKey<Registry<LizardHornVariant>> LIZARD_HORN_VARIANT = of("lizard_horn_variant");
 	public static final RegistryKey<Registry<PastelUpgradeSignature>> PASTEL_UPGRADE = of("pastel_upgrade");
 	public static final RegistryKey<Registry<RecipeScaling>> RECIPE_SCALING = of("recipe_scaling");
+	public static final RegistryKey<Registry<StampDataCategory>> STAMP_DATA_CATEGORY = of("stamp_data_category");
 	
 	public static final RegistryKey<Registry<ExplosionModifierType>> EXPLOSION_MODIFIER_TYPE = of("explosion_modifier_type");
 	public static final RegistryKey<Registry<ExplosionModifier>> EXPLOSION_MODIFIER = of("explosion_effect_modifier");
