@@ -22,8 +22,10 @@ import java.util.*;
 public class DarknessEffects {
 	
 	public static final float INTERP_TICKS = 160;
-	private static final Map<RegistryKey<Biome>, Float> INTERP_MULTIPLIERS, FOG_MULTIPLIERS;
-	private static final Map<RegistryKey<Biome>, float[]> TRANS_MULTIPLIERS;
+	public static final float[] FOG_DISTANCE_DEFAULT = new float[]{-2.25F, 1.5F};
+	
+	private static final Map<RegistryKey<Biome>, Float> DARKENING_MULTIPLIERS, FOG_DARKENING_MULTIPLIERS;
+	private static final Map<RegistryKey<Biome>, float[]> FOG_DISTANCE_MULTIPLIERS;
 	public static boolean isInDarkenedBiome, sleepAfflicted, forceFogEffects;
 	public static int darkenTicks, darken, lastDarkenTicks, interpInterpTicks;
 	public static float interpTarget, interp, lastInterpTarget, fogTarget = 1F, fogDarkness = 1F,
@@ -104,9 +106,9 @@ public class DarknessEffects {
 			currentBiome = biome;
 			updateTargets();
 			
-			interpTarget = INTERP_MULTIPLIERS.getOrDefault(biomeKey, 0F);
-			fogTarget = FOG_MULTIPLIERS.getOrDefault(biomeKey, 1F);
-			var targets = TRANS_MULTIPLIERS.getOrDefault(biomeKey, new float[]{1F, 1F});
+			interpTarget = DARKENING_MULTIPLIERS.getOrDefault(biomeKey, 0F);
+			fogTarget = FOG_DARKENING_MULTIPLIERS.getOrDefault(biomeKey, 1F);
+			var targets = FOG_DISTANCE_MULTIPLIERS.getOrDefault(biomeKey, FOG_DISTANCE_DEFAULT);
 			nearTarget = targets[0];
 			farTarget = targets[1];
 			interpInterpTicks = 0;
@@ -126,7 +128,7 @@ public class DarknessEffects {
 		blend = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastBlendTarget, blendTarget);
 		
 		
-		isInDarkenedBiome = INTERP_MULTIPLIERS.containsKey(biome.getKey().orElse(null));
+		isInDarkenedBiome = DARKENING_MULTIPLIERS.containsKey(biome.getKey().orElse(null));
 		if (isInDarkenedBiome || sleepAfflicted) {
 			if (darkenTicks < INTERP_TICKS) {
 				darkenTicks++;
@@ -181,8 +183,8 @@ public class DarknessEffects {
 		var y = MathHelper.lerp(client.getRenderTickCounter().getTickDelta(false), client.cameraEntity.lastRenderY, client.cameraEntity.getY());
 		float distance;
 		
-		if (y < -272) {
-			distance = (float) MathHelper.clampedLerp(0F, 1.334F, (y + 272) / -48) * near;
+		if (y < -270) {
+			distance = (float) MathHelper.clampedLerp(1F, 0.667F, (y + 270) / -12) * near;
 		} else {
 			distance = near;
 		}
@@ -208,21 +210,26 @@ public class DarknessEffects {
 		builder.put(SpectrumBiomes.DEEP_BARRENS, 0.325F);
 		builder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, 0.1F);
 		builder.put(SpectrumBiomes.NOXSHROOM_FOREST, 0.05F);
-		INTERP_MULTIPLIERS = builder.build();
+		DARKENING_MULTIPLIERS = builder.build();
 		
+		// Fog darkening,
 		var fogBuilder = ImmutableMap.<RegistryKey<Biome>, Float>builder();
 		fogBuilder.put(SpectrumBiomes.NOXSHROOM_FOREST, 0.125F);
+		fogBuilder.put(SpectrumBiomes.RAZOR_EDGE, 0.65F);
 		fogBuilder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, 0.25F);
 		fogBuilder.put(SpectrumBiomes.DEEP_BARRENS, 0.55F);
 		fogBuilder.put(SpectrumBiomes.BLACK_LANGAST, 0.0125F);
-		FOG_MULTIPLIERS = fogBuilder.build();
+		FOG_DARKENING_MULTIPLIERS = fogBuilder.build();
 		
+		// These are percents of view distance (capped to 192 blocks for far
+		// Format is [near, far]. ...
 		var transMultiplier = ImmutableMap.<RegistryKey<Biome>, float[]>builder();
-		transMultiplier.put(SpectrumBiomes.NOXSHROOM_FOREST, new float[]{1.25F, 1F});
-		transMultiplier.put(SpectrumBiomes.HOWLING_SPIRES, new float[]{-10F, 0.85F});
-		transMultiplier.put(SpectrumBiomes.DEEP_BARRENS, new float[]{-1F, 0.5F});
-		transMultiplier.put(SpectrumBiomes.BLACK_LANGAST, new float[]{0.8F, 0.8F});
-		transMultiplier.put(SpectrumBiomes.DRAGONROT_SWAMP, new float[]{-5F, 0.8F});
-		TRANS_MULTIPLIERS = transMultiplier.build();
+		transMultiplier.put(SpectrumBiomes.NOXSHROOM_FOREST, new float[]{-3F, 1.5F});
+		transMultiplier.put(SpectrumBiomes.HOWLING_SPIRES, new float[]{-5.25F, 1.25F});
+		transMultiplier.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new float[]{-3F, 1.25F});
+		transMultiplier.put(SpectrumBiomes.DEEP_BARRENS, new float[]{-6F, 0.5F});
+		transMultiplier.put(SpectrumBiomes.BLACK_LANGAST, new float[]{-8F, 0.5F});
+		transMultiplier.put(SpectrumBiomes.DRAGONROT_SWAMP, new float[]{-4F, 1F});
+		FOG_DISTANCE_MULTIPLIERS = transMultiplier.build();
 	}
 }
