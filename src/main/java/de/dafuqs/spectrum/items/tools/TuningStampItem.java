@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.item.ExpandedStatTooltip;
+import de.dafuqs.spectrum.api.item.TooltipExtensions;
 import de.dafuqs.spectrum.api.item.Stampable;
 import de.dafuqs.spectrum.helpers.BlockReference;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class TuningStampItem extends Item implements ExpandedStatTooltip {
+public class TuningStampItem extends Item implements TooltipExtensions {
 
     public static final String DATA = Stampable.STAMPING_DATA_TAG;
 
@@ -153,11 +153,10 @@ public class TuningStampItem extends Item implements ExpandedStatTooltip {
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-		
+    public void appendTooltipWithPlayer(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
         var nbtComp = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
-        if (nbtComp.contains(DATA) && false) {
-            var data = Stampable.loadStampingData(null, nbtComp.copyNbt().getCompound(DATA));
+        if (player != null && nbtComp.contains(DATA)) {
+            var data = Stampable.loadStampingData(player.getWorld(), nbtComp.copyNbt().getCompound(DATA));
 
             if (data.isEmpty()) {
                 tooltip.add(Text.translatable("item.spectrum.tuning_stamp.tooltip.missing").styled(style -> style.withColor(0xff757a)));
@@ -176,7 +175,7 @@ public class TuningStampItem extends Item implements ExpandedStatTooltip {
     }
 
     @Override
-    public void expandTooltip(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
+    public void expandTooltipPostStats(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
         if (Screen.hasShiftDown()) {
             tooltip.add(Text.translatable("item.spectrum.tuning_stamp.controls").styled(style -> style.withColor(0x66ff99)));
             tooltip.add(Text.translatable("item.spectrum.tuning_stamp.controls2").styled(style -> style.withColor(0x66ff99)));

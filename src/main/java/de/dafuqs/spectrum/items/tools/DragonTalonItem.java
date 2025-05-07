@@ -182,7 +182,7 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 	}
 	
 	@Override
-	public void expandTooltip(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
+	public void expandTooltipPostStats(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
 	}
 	
 	@Override
