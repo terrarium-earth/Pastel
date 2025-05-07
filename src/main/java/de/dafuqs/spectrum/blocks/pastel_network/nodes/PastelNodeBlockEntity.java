@@ -620,6 +620,12 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		
 		this.color = color;
 		
+		var network = networkUUID.flatMap(id -> Pastel.getInstance(world.isClient()).getNetwork(id));
+		
+		if (network.isPresent()) {
+			network.get().setColor(color);
+		}
+		
 		return true;
 	}
 	
