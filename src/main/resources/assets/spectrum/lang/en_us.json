@@ -3970,9 +3970,9 @@
   "book.spectrum.guidebook.pastel_upgrades.redstone.pure_quartz.text": "Fine control over the flow of transmissions bears some utility. Through the use of Pure Quartz I can make it so the node will only activate when pulsed by redstone, where it will send one packet.\\\n\\\n*One Step at a Time*",
   "book.spectrum.guidebook.pastel_upgrades.redstone.pure_glowstone.text": "Making these things glow is quite nice, but if I ever want to use one as a bedside lamp I need it to be able to turn off. Pure Glowstone achieves that, turning off when powered with redstone.\\\n\\\n*Comparatively Overpriced*",
   "book.spectrum.guidebook.pastel_network_coloring.name": "Network Coloring",
-  "book.spectrum.guidebook.pastel_network_coloring.page0.text": "The more I got to grips with my Pastel Network, the more limitations I realised - especially when I wanted to use lots of nodes in a small space.\\\n\\\nThe fact that each node always connects to all of them was one of my... more interesting design decisions.",
+  "book.spectrum.guidebook.pastel_network_coloring.page0.text": "The more I got to grips with my Pastel Network, the more limitations I realised - especially when I wanted to use lots of nodes in a small space.\\\n\\\nThe fact that each node always has a random color was one of my... more interesting design decisions.",
   "book.spectrum.guidebook.pastel_network_coloring.page1.title": "The Solution?",
-  "book.spectrum.guidebook.pastel_network_coloring.page1.text": "**Color!**\\\n\\\nOnly nodes that I have painted the same colour connect to each other.\\\nNow I can use a lot of small networks in a compact space.",
+  "book.spectrum.guidebook.pastel_network_coloring.page1.text": "**The Paintbrush!**\\\n\\\nWith a clean flick of the wrist, I can recolor a network to any ink color I desire.\\\nNow I can keep my networks well organized.",
 
   "book.spectrum.guidebook.turn_back_to_polished": "By applying heat, all blocks can be returned to their polished state.",
   "book.spectrum.guidebook.two_upgrade_slots": "2 upgrade slots",
