@@ -15,22 +15,32 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
+import static net.minecraft.util.math.MathHelper.lerp;
+
 /**
  * I admit that this class is a mess
  * TODO: yes, this class is a mess. clean it up, pls
+ * TODO: the mess grows
  */
 public class DarknessEffects {
 	
-	public static final float INTERP_TICKS = 160;
+	public static final float INTERP_TICKS = 80;
 	public static final float[] FOG_DISTANCE_DEFAULT = new float[]{-2.25F, 1.5F};
 	
 	private static final Map<RegistryKey<Biome>, Float> DARKENING_MULTIPLIERS, FOG_DARKENING_MULTIPLIERS;
 	private static final Map<RegistryKey<Biome>, float[]> FOG_DISTANCE_MULTIPLIERS;
+	
+	private static final Map<RegistryKey<Biome>, ColorGrading> COLOR_GRADING_DATA;
+	private static final ColorGrading DEFAULT = new ColorGrading(1.0F, 0.0F, 65, 0.85F);
+	private static final InterpolationQueue<ColorGrading> GRADING_QUEUE = new InterpolationQueue<>();
+	
 	public static boolean isInDarkenedBiome, sleepAfflicted, forceFogEffects;
 	public static int darkenTicks, darken, lastDarkenTicks, interpInterpTicks;
+	
 	public static float interpTarget, interp, lastInterpTarget, fogTarget = 1F, fogDarkness = 1F,
 			lastFogTarget = 1F, nearTarget = 1F, near = 1F, lastNearTarget = 1F, farTarget = 1F, far = 1F, lastFarTarget = 1F,
 			redTarget, red, lastRedTarget, greenTarget, green, lastGreenTarget, blueTarget, blue, lastBlueTarget, blendTarget, blend, lastBlendTarget;
+	
 	private static RegistryEntry<Biome> currentBiome;
 	private static final MinecraftClient client = MinecraftClient.getInstance();
 	private static boolean shouldUpdate, forceBiomeUpdate;
@@ -111,22 +121,27 @@ public class DarknessEffects {
 			var targets = FOG_DISTANCE_MULTIPLIERS.getOrDefault(biomeKey, FOG_DISTANCE_DEFAULT);
 			nearTarget = targets[0];
 			farTarget = targets[1];
+			GRADING_QUEUE.accept(COLOR_GRADING_DATA.getOrDefault(biomeKey, DEFAULT));
+			
 			interpInterpTicks = 0;
 		}
 		
-		if (interpInterpTicks < Math.round(INTERP_TICKS / 1.5F)) {
+		if (interpInterpTicks < INTERP_TICKS) {
 			interpInterpTicks++;
 		}
 		
-		interp = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastInterpTarget, interpTarget);
-		fogDarkness = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastFogTarget, fogTarget);
-		near = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastNearTarget, nearTarget);
-		far = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastFarTarget, farTarget);
-		red = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastRedTarget, redTarget);
-		green = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastGreenTarget, greenTarget);
-		blue = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastBlueTarget, blueTarget);
-		blend = MathHelper.lerp((float) interpInterpTicks / Math.round(INTERP_TICKS / 1.5F), lastBlendTarget, blendTarget);
-		
+		var delta = (float) interpInterpTicks / INTERP_TICKS;
+		interp = lerp(delta, lastInterpTarget, interpTarget);
+		fogDarkness = lerp(delta, lastFogTarget, fogTarget);
+		near = lerp(delta, lastNearTarget, nearTarget);
+		far = lerp(delta, lastFarTarget, farTarget);
+		red = lerp(delta, lastRedTarget, redTarget);
+		green = lerp(delta, lastGreenTarget, greenTarget);
+		blue = lerp(delta, lastBlueTarget, blueTarget);
+		blend = lerp(delta, lastBlendTarget, blendTarget);
+		if (GRADING_QUEUE.ready()) {
+			GRADING_QUEUE.current.update(GRADING_QUEUE.last, delta);
+		}
 		
 		isInDarkenedBiome = DARKENING_MULTIPLIERS.containsKey(biome.getKey().orElse(null));
 		if (isInDarkenedBiome || sleepAfflicted) {
@@ -159,7 +174,7 @@ public class DarknessEffects {
 		if (client.cameraEntity == null)
 			return interp;
 		
-		double y = MathHelper.lerp(client.getRenderTickCounter().getTickDelta(false), client.cameraEntity.lastRenderY, client.cameraEntity.getY());
+		double y = lerp(client.getRenderTickCounter().getTickDelta(false), client.cameraEntity.lastRenderY, client.cameraEntity.getY());
 		float adjustedInterp;
 		
 		//entrance darkening
@@ -180,7 +195,7 @@ public class DarknessEffects {
 		if (client.cameraEntity == null)
 			return near;
 		
-		var y = MathHelper.lerp(client.getRenderTickCounter().getTickDelta(false), client.cameraEntity.lastRenderY, client.cameraEntity.getY());
+		var y = lerp(client.getRenderTickCounter().getTickDelta(false), client.cameraEntity.lastRenderY, client.cameraEntity.getY());
 		float distance;
 		
 		if (y < -270) {
@@ -200,7 +215,7 @@ public class DarknessEffects {
 	}
 	
 	public static float getDarknessInterpolation() {
-		return MathHelper.lerp(MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(false), (float) DarknessEffects.darkenTicks, DarknessEffects.lastDarkenTicks) / INTERP_TICKS * getInterp();
+		return lerp(MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(false), (float) DarknessEffects.darkenTicks, DarknessEffects.lastDarkenTicks) / INTERP_TICKS * getInterp();
 	}
 	
 	// this should really be a data loader
@@ -231,5 +246,52 @@ public class DarknessEffects {
 		transMultiplier.put(SpectrumBiomes.BLACK_LANGAST, new float[]{-8F, 0.5F});
 		transMultiplier.put(SpectrumBiomes.DRAGONROT_SWAMP, new float[]{-4F, 1F});
 		FOG_DISTANCE_MULTIPLIERS = transMultiplier.build();
+		
+		var colorGradingBuilder = ImmutableMap.<RegistryKey<Biome>, ColorGrading>builder();
+		colorGradingBuilder.put(SpectrumBiomes.NOXSHROOM_FOREST, new ColorGrading(1.0F, 0.005F, 70, 0.7F));
+		colorGradingBuilder.put(SpectrumBiomes.HOWLING_SPIRES, new ColorGrading(1.0F, 0.0F, 60, 0.9F));
+		colorGradingBuilder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new ColorGrading(1.0F, 0.01F, 60, 0.8F));
+		colorGradingBuilder.put(SpectrumBiomes.DEEP_BARRENS, new ColorGrading(0.2F, 0.0F, 55, 0.7F));
+		colorGradingBuilder.put(SpectrumBiomes.BLACK_LANGAST, new ColorGrading(0.5F, 0.0F, 65, 1.0F));
+		colorGradingBuilder.put(SpectrumBiomes.DRAGONROT_SWAMP, new ColorGrading(0.8F, 0.05F, 100, 0.75F));
+		COLOR_GRADING_DATA = colorGradingBuilder.build();
+	}
+	
+	public record ColorGrading(float saturation, float rubedo, float colorTemperature, float threshold) {
+		public static final float[] GRADING_OUT = new float[4];
+		
+		private void update(ColorGrading old, float delta) {
+			GRADING_OUT[0] = lerp(delta, old.saturation, saturation);
+			GRADING_OUT[1] = lerp(delta, old.rubedo, rubedo);
+			GRADING_OUT[2] = lerp(delta, old.colorTemperature, colorTemperature);
+			GRADING_OUT[3] = lerp(delta, old.threshold, threshold);
+		}
+	}
+	
+	//I will migrate shit to this someday trust me
+	private static class InterpolationQueue<T> {
+		private T current, last;
+		
+		@Nullable
+		public T accept(T newHead) {
+			if (!ready()) {
+				initialize(newHead);
+				return null;
+			}
+			
+			var old = last;
+			last = current;
+			current = newHead;
+			return old;
+		}
+		
+		public void initialize(T value) {
+			last = value;
+			current = value;
+		}
+		
+		public boolean ready() {
+			return current != null && last != null;
+		}
 	}
 }

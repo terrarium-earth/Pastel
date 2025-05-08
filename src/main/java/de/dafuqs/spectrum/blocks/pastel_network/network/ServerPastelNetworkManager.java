@@ -61,7 +61,6 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 			if (opt.isPresent()) {
 				var wrapper = new NbtCompound();
 				wrapper.put("network", opt.get());
-				wrapper.put("graph", network.graphToNbt());
 				wrapper.put("scheduler", transgender(network.getTransmissions()));
 				// Trans missions?... do... do they really?
 				networkList.add(wrapper);
@@ -76,12 +75,10 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 		for (NbtElement element : nbt.getList("Networks", NbtElement.COMPOUND_TYPE)) {
 			var comp = (NbtCompound) element;
 			var netNbt = comp.get("network");
-			var graphNbt = comp.getCompound("graph");
 			var schedulerNbt = comp.getCompound("scheduler");
 			
 			Optional<ServerPastelNetwork> network = CodecHelper.fromNbt(ServerPastelNetwork.CODEC, netNbt);
 			if (network.isPresent()) {
-				network.get().setGraph(PastelNetwork.graphFromNbt(graphNbt));
 				// I truly, really did try to make the transmission codec work. And I failed ~ Azzyypaaras
 				network.get().getTransmissions().putAll(transDecode(schedulerNbt, network.get()));
 				manager.networks.add(network.get());
