@@ -1,13 +1,104 @@
 {
   "targets": [
-    "swap"
+    "swap",
+    "high",
+    "blur",
+    "bloom"
   ],
   "passes": [
+    {
+      "name":"spectrum:highlights",
+      "intarget": "minecraft:main",
+      "outtarget": "high"
+    },
+    {
+      "name": "box_blur",
+      "intarget": "high",
+      "outtarget": "blur",
+      "use_linear_filter": true,
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [ 1.0, 0.0 ],
+          "RadiusMultiplier" : 0.3
+        }
+      ]
+    },
+    {
+      "name": "box_blur",
+      "intarget": "blur",
+      "outtarget": "high",
+      "use_linear_filter": true,
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [ 0.0, 1.0 ],
+          "RadiusMultiplier" : 0.3
+        }
+      ]
+    },
+    {
+      "name": "box_blur",
+      "intarget": "high",
+      "outtarget": "blur",
+      "use_linear_filter": true,
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [ 1.0, 0.0 ],
+          "RadiusMultiplier" : 0.1
+        }
+      ]
+    },
+    {
+      "name": "box_blur",
+      "intarget": "blur",
+      "outtarget": "high",
+      "use_linear_filter": true,
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [ 0.0, 1.0 ],
+          "RadiusMultiplier" : 0.1
+        }
+      ]
+    },
+    {
+      "name": "box_blur",
+      "intarget": "high",
+      "outtarget": "blur",
+      "use_linear_filter": true,
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [ 1.0, 0.0 ],
+          "RadiusMultiplier" : 0.05
+        }
+      ]
+    },
+    {
+      "name": "box_blur",
+      "intarget": "blur",
+      "outtarget": "bloom",
+      "use_linear_filter": true,
+      "uniforms": [
+        {
+          "name": "BlurDir",
+          "values": [ 0.0, 1.0 ],
+          "RadiusMultiplier" : 0.05
+        }
+      ]
+    },
     {
       "name":"spectrum:color_grading",
       "intarget": "minecraft:main",
       "outtarget": "swap",
-      "uniforms": []
+      "auxtargets": [
+        {
+          "name": "BloomSampler",
+          "id": "bloom"
+        }
+      ]
     },
     {
       "name": "blit",

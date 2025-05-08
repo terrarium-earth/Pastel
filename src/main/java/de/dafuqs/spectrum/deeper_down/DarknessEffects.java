@@ -31,8 +31,8 @@ public class DarknessEffects {
 	private static final Map<RegistryKey<Biome>, float[]> FOG_DISTANCE_MULTIPLIERS;
 	
 	private static final Map<RegistryKey<Biome>, ColorGrading> COLOR_GRADING_DATA;
-	private static final ColorGrading DEFAULT = new ColorGrading(1.0F, 0.0F, 65, 0.85F);
-	private static final InterpolationQueue<ColorGrading> GRADING_QUEUE = new InterpolationQueue<>();
+	private static final ColorGrading DEFAULT = new ColorGrading(1.0F, 0.0F, 65, 0.85F, 0.35F);
+	private static final InterpolationQueue<float[]> GRADING_QUEUE = new InterpolationQueue<>();
 	
 	public static boolean isInDarkenedBiome, sleepAfflicted, forceFogEffects;
 	public static int darkenTicks, darken, lastDarkenTicks, interpInterpTicks;
@@ -121,7 +121,12 @@ public class DarknessEffects {
 			var targets = FOG_DISTANCE_MULTIPLIERS.getOrDefault(biomeKey, FOG_DISTANCE_DEFAULT);
 			nearTarget = targets[0];
 			farTarget = targets[1];
-			GRADING_QUEUE.accept(COLOR_GRADING_DATA.getOrDefault(biomeKey, DEFAULT));
+			if (GRADING_QUEUE.ready()) {
+				GRADING_QUEUE.set(COLOR_GRADING_DATA.getOrDefault(biomeKey, DEFAULT).asArray(), ColorGrading.GRADING_OUT.clone());
+			}
+			else {
+				GRADING_QUEUE.accept(COLOR_GRADING_DATA.getOrDefault(biomeKey, DEFAULT).asArray());
+			}
 			
 			interpInterpTicks = 0;
 		}
@@ -140,7 +145,7 @@ public class DarknessEffects {
 		blue = lerp(delta, lastBlueTarget, blueTarget);
 		blend = lerp(delta, lastBlendTarget, blendTarget);
 		if (GRADING_QUEUE.ready()) {
-			GRADING_QUEUE.current.update(GRADING_QUEUE.last, delta);
+			ColorGrading.update(GRADING_QUEUE.last, GRADING_QUEUE.current, delta);
 		}
 		
 		isInDarkenedBiome = DARKENING_MULTIPLIERS.containsKey(biome.getKey().orElse(null));
@@ -236,35 +241,40 @@ public class DarknessEffects {
 		fogBuilder.put(SpectrumBiomes.BLACK_LANGAST, 0.0125F);
 		FOG_DARKENING_MULTIPLIERS = fogBuilder.build();
 		
-		// These are percents of view distance (capped to 192 blocks for far
+		// These are percents of view distance (capped to 192 blocks for far)
 		// Format is [near, far]. ...
 		var transMultiplier = ImmutableMap.<RegistryKey<Biome>, float[]>builder();
 		transMultiplier.put(SpectrumBiomes.NOXSHROOM_FOREST, new float[]{-3F, 1.5F});
 		transMultiplier.put(SpectrumBiomes.HOWLING_SPIRES, new float[]{-5.25F, 1.25F});
-		transMultiplier.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new float[]{-3F, 1.25F});
-		transMultiplier.put(SpectrumBiomes.DEEP_BARRENS, new float[]{-6F, 0.5F});
+		transMultiplier.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new float[]{-4F, 1.5F});
+		transMultiplier.put(SpectrumBiomes.DEEP_BARRENS, new float[]{-5F, 0.5F});
 		transMultiplier.put(SpectrumBiomes.BLACK_LANGAST, new float[]{-8F, 0.5F});
 		transMultiplier.put(SpectrumBiomes.DRAGONROT_SWAMP, new float[]{-4F, 1F});
 		FOG_DISTANCE_MULTIPLIERS = transMultiplier.build();
 		
 		var colorGradingBuilder = ImmutableMap.<RegistryKey<Biome>, ColorGrading>builder();
-		colorGradingBuilder.put(SpectrumBiomes.NOXSHROOM_FOREST, new ColorGrading(1.0F, 0.005F, 70, 0.7F));
-		colorGradingBuilder.put(SpectrumBiomes.HOWLING_SPIRES, new ColorGrading(1.0F, 0.0F, 60, 0.9F));
-		colorGradingBuilder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new ColorGrading(1.0F, 0.01F, 60, 0.8F));
-		colorGradingBuilder.put(SpectrumBiomes.DEEP_BARRENS, new ColorGrading(0.2F, 0.0F, 55, 0.7F));
-		colorGradingBuilder.put(SpectrumBiomes.BLACK_LANGAST, new ColorGrading(0.5F, 0.0F, 65, 1.0F));
-		colorGradingBuilder.put(SpectrumBiomes.DRAGONROT_SWAMP, new ColorGrading(0.8F, 0.05F, 100, 0.75F));
+		colorGradingBuilder.put(SpectrumBiomes.NOXSHROOM_FOREST, new ColorGrading(1.0F, 0.005F, 70, 0.7F, 0.3F));
+		colorGradingBuilder.put(SpectrumBiomes.HOWLING_SPIRES, new ColorGrading(1.0F, 0.0F, 60, 0.9F, 0.45F));
+		colorGradingBuilder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new ColorGrading(1.0F, 0.02F, 60, 0.8F, 0.3F));
+		colorGradingBuilder.put(SpectrumBiomes.DEEP_BARRENS, new ColorGrading(0.5F, 0.0F, 55, 0.7F, 0.2F));
+		colorGradingBuilder.put(SpectrumBiomes.BLACK_LANGAST, new ColorGrading(0.5F, 0.0F, 65, 1.0F, 0.1F));
+		colorGradingBuilder.put(SpectrumBiomes.DRAGONROT_SWAMP, new ColorGrading(0.8F, 0.05F, 100, 0.75F, 0.35F));
 		COLOR_GRADING_DATA = colorGradingBuilder.build();
 	}
 	
-	public record ColorGrading(float saturation, float rubedo, float colorTemperature, float threshold) {
-		public static final float[] GRADING_OUT = new float[4];
+	public record ColorGrading(float saturation, float rubedo, float colorTemperature, float threshold, float bloom) {
+		public static final float[] GRADING_OUT = new float[5];
 		
-		private void update(ColorGrading old, float delta) {
-			GRADING_OUT[0] = lerp(delta, old.saturation, saturation);
-			GRADING_OUT[1] = lerp(delta, old.rubedo, rubedo);
-			GRADING_OUT[2] = lerp(delta, old.colorTemperature, colorTemperature);
-			GRADING_OUT[3] = lerp(delta, old.threshold, threshold);
+		private static void update(float[] old, float[] current, float delta) {
+			for (int i = 0; i < 5; i++) {
+				GRADING_OUT[i] =lerp(delta, old[i], current[i]);
+			}
+		}
+		
+		private float[] asArray() {
+			return new float[]{
+					saturation, rubedo, colorTemperature, threshold, bloom
+			};
 		}
 	}
 	
@@ -272,17 +282,18 @@ public class DarknessEffects {
 	private static class InterpolationQueue<T> {
 		private T current, last;
 		
-		@Nullable
-		public T accept(T newHead) {
+		public void accept(T newHead) {
 			if (!ready()) {
 				initialize(newHead);
-				return null;
+				return;
 			}
 			
-			var old = last;
-			last = current;
 			current = newHead;
-			return old;
+		}
+		
+		public void set(T current, T last) {
+			accept(current);
+			this.last = last;
 		}
 		
 		public void initialize(T value) {

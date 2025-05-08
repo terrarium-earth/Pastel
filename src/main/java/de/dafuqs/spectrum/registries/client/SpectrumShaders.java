@@ -16,7 +16,7 @@ public class SpectrumShaders {
 	public static final Identifier COLOR_GRADING_ID = SpectrumCommon.locate("shaders/post/dd_color_grading.json");
 	public static Optional<PostEffectProcessor> colorGradingPostProcess = Optional.empty();
 	
-	private static final String[] COLOR_GRADING_UNIFORMS = new String[] {"Saturation", "Rubedo", "ColorTemperature", "DesaturateThreshold"};
+	private static final String[] COLOR_GRADING_UNIFORMS = new String[] {"Saturation", "Rubedo", "ColorTemperature", "DesaturateThreshold", "BloomThreshold"};
 	
 	public static Optional<PostEffectProcessor> loadPostProcess(MinecraftClient client, Identifier id) {
 		PostEffectProcessor post = null;
@@ -24,6 +24,7 @@ public class SpectrumShaders {
 			post = new PostEffectProcessor(client.getTextureManager(), client.getResourceManager(), client.getFramebuffer(), id);
 		} catch (IOException e) {
 			SpectrumCommon.LOGGER.error("Failed to load post-process shader [{}]", COLOR_GRADING_ID);
+			SpectrumCommon.LOGGER.error("", e);
 		}
 		
 		if (post != null)
@@ -37,7 +38,7 @@ public class SpectrumShaders {
 			return;
 		
 		colorGradingPostProcess.ifPresent(pps -> {
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 5; i++) {
 				pps.setUniforms(COLOR_GRADING_UNIFORMS[i], DarknessEffects.ColorGrading.GRADING_OUT[i]);
 			}
 		});

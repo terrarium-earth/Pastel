@@ -1,6 +1,7 @@
 #version 440
 
 uniform sampler2D DiffuseSampler;
+uniform sampler2D BloomSampler;
 
 in vec2 texCoord;
 
@@ -88,6 +89,11 @@ void main(){
     colorCorrect = min(colorCorrect + 0.005, colorCorrect * 1.005);
 
     colorCorrect.r += Rubedo;
+
+    vec3 bloomColor = texture(BloomSampler, texCoord).rgb;
+    float intensity = length(colorCorrect) / 0.65;
+
+    colorCorrect += bloomColor * pow(0.3, intensity);
 
 	fragColor = vec4(colorCorrect, 1.0);
 }
