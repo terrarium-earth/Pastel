@@ -51,21 +51,8 @@ float max3(vec3 v) {
 void main(){
 	vec4 diffuseColor = texture(DiffuseSampler, texCoord);
     vec3 colorCorrect = vec3(diffuseColor.rgb);
-    int index = 0;
-
-    if (diffuseColor.r > diffuseColor.g) {
-        if (diffuseColor.b > diffuseColor.r) {
-            index = 2;
-        }
-    }
-    else {
-        if (diffuseColor.g > diffuseColor.b) {
-            index = 1;
-        }
-    }
 
     float luma = Luma(colorCorrect);
-
     float saturationGradient = clamp(pow(luma + DesaturateThreshold, 20) + log(luma + 1) + 0.05, 0.0, 1.0);
 
     colorCorrect = mix(vec3(luma), colorCorrect, Saturation);
@@ -80,13 +67,12 @@ void main(){
 
     colorCorrect = mix(colorBoost, colorCorrect, saturationGradient);
     colorCorrect += luma / 15;
-    colorCorrect[index] += 0.01;
 
     if (luma > 0.4 && luma < 0.95)
             colorCorrect += 0.0125;
 
     if (luma > 0.275 && luma < 0.95)
-    colorCorrect = min(colorCorrect + 0.005, colorCorrect * 1.005);
+        colorCorrect = min(colorCorrect + 0.005, colorCorrect * 1.005);
 
     colorCorrect.r += Rubedo;
 
