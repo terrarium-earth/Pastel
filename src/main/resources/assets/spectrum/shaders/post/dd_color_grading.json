@@ -20,7 +20,7 @@
         {
           "name": "BlurDir",
           "values": [ 1.0, 0.0 ],
-          "RadiusMultiplier" : 0.3
+          "RadiusMultiplier" : 0.225
         }
       ]
     },
@@ -33,7 +33,7 @@
         {
           "name": "BlurDir",
           "values": [ 0.0, 1.0 ],
-          "RadiusMultiplier" : 0.3
+          "RadiusMultiplier" : 0.225
         }
       ]
     },
@@ -46,33 +46,7 @@
         {
           "name": "BlurDir",
           "values": [ 1.0, 0.0 ],
-          "RadiusMultiplier" : 0.1
-        }
-      ]
-    },
-    {
-      "name": "box_blur",
-      "intarget": "blur",
-      "outtarget": "high",
-      "use_linear_filter": true,
-      "uniforms": [
-        {
-          "name": "BlurDir",
-          "values": [ 0.0, 1.0 ],
-          "RadiusMultiplier" : 0.1
-        }
-      ]
-    },
-    {
-      "name": "box_blur",
-      "intarget": "high",
-      "outtarget": "blur",
-      "use_linear_filter": true,
-      "uniforms": [
-        {
-          "name": "BlurDir",
-          "values": [ 1.0, 0.0 ],
-          "RadiusMultiplier" : 0.05
+          "RadiusMultiplier" : 0.0775
         }
       ]
     },
@@ -85,7 +59,7 @@
         {
           "name": "BlurDir",
           "values": [ 0.0, 1.0 ],
-          "RadiusMultiplier" : 0.05
+          "RadiusMultiplier" : 0.0775
         }
       ]
     },
