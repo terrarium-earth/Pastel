@@ -27,10 +27,10 @@ public class BackgroundRendererMixin {
 		var dim = world.getRegistryKey();
 		var inDim = dim == SpectrumDimensions.DIMENSION_KEY;
 		
-		if (inDim || DarknessEffects.forceFogEffects) {
+		if (inDim || DimensionRenderEffects.forceFogEffects) {
 			fogData.fogShape = FogShape.SPHERE;
-			fogData.fogEnd = Math.min(Math.min(viewDistance, 192F), DarknessEffects.getFar(fogData.fogEnd));
-			fogData.fogStart = DarknessEffects.getNear(fogData.fogStart);
+			fogData.fogEnd = Math.min(Math.min(viewDistance, 192F), DimensionRenderEffects.getFar(fogData.fogEnd));
+			fogData.fogStart = DimensionRenderEffects.getNear(fogData.fogStart);
 		}
 	}
 
@@ -42,11 +42,11 @@ public class BackgroundRendererMixin {
 
 	@WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;clearColor(FFFF)V", ordinal = 1))
 	private static void spectrum$darkenBackground(float red, float green, float blue, float alpha, Operation<Void> original) {
-		var darkening = DarknessEffects.fogDarkness;
-		var blend = DarknessEffects.blend;
-		red = MathHelper.lerp(blend, red, DarknessEffects.red);
-		green = MathHelper.lerp(blend, green, DarknessEffects.green);
-		blue = MathHelper.lerp(blend, blue, DarknessEffects.blue);
+		var darkening = DimensionRenderEffects.fogDarkness;
+		var blend = DimensionRenderEffects.blend;
+		red = MathHelper.lerp(blend, red, DimensionRenderEffects.red);
+		green = MathHelper.lerp(blend, green, DimensionRenderEffects.green);
+		blue = MathHelper.lerp(blend, blue, DimensionRenderEffects.blue);
 		if (darkening > 0) {
 			red *= darkening;
 			green *= darkening;

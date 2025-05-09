@@ -22,7 +22,7 @@ import static net.minecraft.util.math.MathHelper.lerp;
  * TODO: yes, this class is a mess. clean it up, pls
  * TODO: the mess grows
  */
-public class DarknessEffects {
+public class DimensionRenderEffects {
 	
 	public static final float INTERP_TICKS = 80;
 	public static final float[] FOG_DISTANCE_DEFAULT = new float[]{-2.25F, 1.5F};
@@ -220,7 +220,7 @@ public class DarknessEffects {
 	}
 	
 	public static float getDarknessInterpolation() {
-		return lerp(MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(false), (float) DarknessEffects.darkenTicks, DarknessEffects.lastDarkenTicks) / INTERP_TICKS * getInterp();
+		return lerp(MinecraftClient.getInstance().getRenderTickCounter().getTickDelta(false), (float) DimensionRenderEffects.darkenTicks, DimensionRenderEffects.lastDarkenTicks) / INTERP_TICKS * getInterp();
 	}
 	
 	// this should really be a data loader
@@ -253,12 +253,12 @@ public class DarknessEffects {
 		FOG_DISTANCE_MULTIPLIERS = transMultiplier.build();
 		
 		var colorGradingBuilder = ImmutableMap.<RegistryKey<Biome>, ColorGrading>builder();
-		colorGradingBuilder.put(SpectrumBiomes.NOXSHROOM_FOREST, new ColorGrading(1.0F, 0.005F, 70, 0.7F, 0.3F));
+		colorGradingBuilder.put(SpectrumBiomes.NOXSHROOM_FOREST, new ColorGrading(1.05F, 0.015F, 80, 0.7F, 0.3125F));
 		colorGradingBuilder.put(SpectrumBiomes.HOWLING_SPIRES, new ColorGrading(1.0F, 0.0F, 60, 0.9F, 0.45F));
 		colorGradingBuilder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new ColorGrading(1.0F, 0.02F, 60, 0.8F, 0.3F));
 		colorGradingBuilder.put(SpectrumBiomes.DEEP_BARRENS, new ColorGrading(0.5F, 0.0F, 55, 0.7F, 0.2F));
 		colorGradingBuilder.put(SpectrumBiomes.BLACK_LANGAST, new ColorGrading(0.5F, 0.0F, 65, 1.0F, 0.1F));
-		colorGradingBuilder.put(SpectrumBiomes.DRAGONROT_SWAMP, new ColorGrading(0.8F, 0.05F, 100, 0.75F, 0.35F));
+		colorGradingBuilder.put(SpectrumBiomes.DRAGONROT_SWAMP, new ColorGrading(0.8F, 0.05F, 105, 0.75F, 0.35F));
 		COLOR_GRADING_DATA = colorGradingBuilder.build();
 	}
 	

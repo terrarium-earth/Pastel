@@ -126,7 +126,7 @@ public class SpectrumClientEventListeners {
 			RegistryEntry<Biome> biome = world.getBiome(client.getCameraEntity().getBlockPos());
 
 			HowlingSpireEffects.clientTick(world, cameraEntity, biome);
-			DarknessEffects.clientTick(world, cameraEntity, biome);
+			DimensionRenderEffects.clientTick(world, cameraEntity, biome);
 			
 			if (SpectrumCommon.CONFIG.PostProcess) {
 				if (!postProcessWasOn) {

@@ -39,7 +39,7 @@ public class SpectrumShaders {
 		
 		colorGradingPostProcess.ifPresent(pps -> {
 			for (int i = 0; i < 5; i++) {
-				pps.setUniforms(COLOR_GRADING_UNIFORMS[i], DarknessEffects.ColorGrading.GRADING_OUT[i]);
+				pps.setUniforms(COLOR_GRADING_UNIFORMS[i], DimensionRenderEffects.ColorGrading.GRADING_OUT[i]);
 			}
 		});
 	}

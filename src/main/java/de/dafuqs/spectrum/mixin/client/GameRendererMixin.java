@@ -20,8 +20,8 @@ public abstract class GameRendererMixin {
 			original /= 6F;
 		}
 
-        if (DarknessEffects.darkenTicks > 0) {
-            original *= 1F - DarknessEffects.getDarknessInterpolation();
+        if (DimensionRenderEffects.darkenTicks > 0) {
+            original *= 1F - DimensionRenderEffects.getDarknessInterpolation();
         }
 
         return original;
