@@ -52,7 +52,8 @@ public abstract class ItemStackMixin {
 	@ModifyReturnValue(method = "isDamageable()Z", at = @At(value = "RETURN"))
 	public boolean spectrum$applyIndestructibleEnchantment(boolean original) {
 		var stack = (ItemStack) (Object) this;
-		return original || EnchantmentHelper.hasAnyEnchantmentsIn(stack, SpectrumEnchantmentTags.INDESTRUCTIBLE_EFFECT);
+		
+		return original && !EnchantmentHelper.hasAnyEnchantmentsIn(stack, SpectrumEnchantmentTags.INDESTRUCTIBLE_EFFECT);
 	}
 	
 	// thank you so, so much @williewillus / @Botania for this snippet of code
