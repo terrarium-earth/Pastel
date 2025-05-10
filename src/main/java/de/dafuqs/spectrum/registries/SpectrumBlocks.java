@@ -1124,8 +1124,12 @@ public class SpectrumBlocks {
 	public static final Block NEPHRITE_BLOSSOM_STEM = register(cutout(blockWithItem("nephrite_blossom_stem", new NephriteBlossomStemBlock(settings(MapColor.PINK, BlockSoundGroup.WOOL, 2.0F).nonOpaque().noCollision()), InkColors.PINK)).withBlockItemModel((ctx, block) -> SpectrumModelHelper.registerBlockTexturedItemModel(ctx, block, "_bottom")).withBlockModel((ctx, block) -> {
 		Identifier bottom = SpectrumTexturedModels.cross(b -> b, "_bottom").upload(block, "_bottom", ctx.modelCollector);
 		Identifier top = SpectrumTexturedModels.cross(b -> b, "_top").upload(block, "_top", ctx.modelCollector);
-		Identifier base = ModelIds.getBlockSubModelId(block, "_base");
-		return MultipartBlockStateSupplier.create(block).with(When.create().set(NephriteBlossomStemBlock.STEM_PART, StemComponent.STEM), SpectrumModelHelper.createModelVariant(bottom)).with(When.create().set(NephriteBlossomStemBlock.STEM_PART, StemComponent.STEMALT), SpectrumModelHelper.createModelVariant(base)).with(When.create().set(NephriteBlossomStemBlock.STEM_PART, StemComponent.BASE), SpectrumModelHelper.createModelVariant(top), SpectrumModelHelper.createModelVariant(bottom));
+		Identifier fronds = ModelIds.getBlockSubModelId(block, "_base");
+		return MultipartBlockStateSupplier.create(block)
+				.with(When.create().set(NephriteBlossomStemBlock.STEM_PART, StemComponent.STEM), SpectrumModelHelper.createModelVariant(bottom))
+				.with(When.create().set(NephriteBlossomStemBlock.STEM_PART, StemComponent.STEMALT), SpectrumModelHelper.createModelVariant(top))
+				.with(When.create().set(NephriteBlossomStemBlock.STEM_PART, StemComponent.BASE), SpectrumModelHelper.createModelVariant(fronds))
+				.with(When.create().set(NephriteBlossomStemBlock.STEM_PART, StemComponent.BASE), SpectrumModelHelper.createModelVariant(bottom));
 	}));
 	public static final Block NEPHRITE_BLOSSOM_LEAVES = register(cutout(blockWithItem("nephrite_blossom_leaves", new NephriteBlossomLeavesBlock(settings(MapColor.PINK, BlockSoundGroup.GRASS, 0.2F).nonOpaque().ticksRandomly().luminance(state -> 13)), InkColors.PINK)).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(Properties.AGE_2).register(age -> {
 		String suffix = age == 0 ? "" : age == 1 ? "_flowering" : "_fruiting";
