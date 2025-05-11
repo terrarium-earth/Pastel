@@ -149,6 +149,8 @@ public abstract class SpectrumFishingBobberEntity extends ProjectileEntity {
 		return distance < d * d;
 	}
 	
+	public abstract int getLineColor();
+	
 	@Override
 	public void updateTrackedPositionAndAngles(double x, double y, double z, float yaw, float pitch, int interpolationSteps) {
 	}
