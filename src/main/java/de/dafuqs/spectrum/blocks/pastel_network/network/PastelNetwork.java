@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
 import net.minecraft.nbt.*;
+import net.minecraft.util.*;
 import net.minecraft.util.math.*;
 import net.minecraft.world.*;
 import org.jgrapht.*;
@@ -15,7 +16,7 @@ public class PastelNetwork<W extends World> {
 	protected Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 	protected final W world;
 	protected final UUID uuid;
-	protected final int color;
+	protected int color;
 	
 	public enum NodePriority {
         GENERIC,
@@ -41,7 +42,6 @@ public class PastelNetwork<W extends World> {
         return this.graph;
     }
 	
-	
 	public boolean addEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
 		return addEdge(node.getPos(), parent.getPos());
 	}
@@ -61,6 +61,9 @@ public class PastelNetwork<W extends World> {
 		return graph.containsEdge(pos1, pos2);
     }
 	
+	public boolean removeEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
+		return graph.removeEdge(node.getPos(), parent.getPos()) != null;
+	}
 	
 	public UUID getUUID() {
         return this.uuid;
@@ -69,6 +72,18 @@ public class PastelNetwork<W extends World> {
     public int getColor() {
 		return this.color;
     }
+	
+	public void setColor(Optional<DyeColor> dyeColor) {
+		if (dyeColor.isEmpty())
+			return;
+		
+		var newColor = dyeColor.get().getEntityColor();
+		
+		if (newColor == this.color)
+			return;
+		
+		this.color = newColor;
+	}
 	
 	public void setGraph(Graph<BlockPos, DefaultEdge> graph) {
 		this.graph = graph;
@@ -85,6 +100,7 @@ public class PastelNetwork<W extends World> {
         return false;
     }
 	
+	//TODO: make this into a CODEC after the 1.21.1 port is done.
 	public NbtCompound graphToNbt() {
 		var vertices = new ArrayList<>(graph.vertexSet());
 		var graphStorage = new NbtCompound();

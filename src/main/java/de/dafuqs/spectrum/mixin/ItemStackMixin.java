@@ -77,6 +77,14 @@ public abstract class ItemStackMixin {
 		}
 	}
 	
+	@Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;appendTooltip(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/Item$TooltipContext;Ljava/util/List;Lnet/minecraft/item/tooltip/TooltipType;)V"))
+	public void spectrum$playerTooltip(Item.TooltipContext context, PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir, @Local List<Text> tooltip) {
+		var stack = (ItemStack) (Object) this;
+		if (stack.getItem() instanceof TooltipExtensions expanded) {
+			expanded.appendTooltipWithPlayer(stack, player, tooltip, context);
+		}
+	}
+	
 	@Inject(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/tooltip/TooltipType;isAdvanced()Z", shift = At.Shift.BEFORE, ordinal = 1))
 	public void spectrum$expandTooltipPostDamage(Item.TooltipContext context, PlayerEntity player, TooltipType type, CallbackInfoReturnable<List<Text>> cir, @Local List<Text> tooltip) {
 		var stack = (ItemStack) (Object) this;
@@ -90,8 +98,8 @@ public abstract class ItemStackMixin {
 			tooltip.add(Text.translatable("info.spectrum.tooltip.adulterated.effect", subText.getFirst()).styled(s -> s.withColor(ConcealingOilsItem.POISONED_COLOUR).withItalic(true)));
 		}
 		
-		if (stack.getItem() instanceof ExpandedStatTooltip expanded) {
-			expanded.expandTooltip(stack, player, tooltip, context);
+		if (stack.getItem() instanceof TooltipExtensions expanded) {
+			expanded.expandTooltipPostStats(stack, player, tooltip, context);
 		}
 	}
 	

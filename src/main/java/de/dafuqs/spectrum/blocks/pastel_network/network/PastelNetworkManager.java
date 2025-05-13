@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
+import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
 import net.minecraft.world.*;
 
 import java.util.*;
@@ -10,6 +11,10 @@ public interface PastelNetworkManager<W extends World, N extends PastelNetwork<W
 	
 	Optional<? extends N> getNetwork(UUID uuid);
 	
-	void removeNetwork(UUID uuid);
+	// Utility method
+	default Optional<? extends N> getNetworkOrEmpty(Optional<UUID> uuid) {
+		return uuid.flatMap(this::getNetwork);
+	}
 	
+	void removeNetwork(UUID uuid);
 }

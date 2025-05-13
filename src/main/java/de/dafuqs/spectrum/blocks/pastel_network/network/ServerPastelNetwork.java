@@ -172,16 +172,8 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 	 * Note: this does not check if the nodes can connect, that should be done before calling this method.
 	 */
 	protected void addNodeAndConnect(PastelNodeBlockEntity newNode, PastelNodeBlockEntity existing) {
-		if (addLoadedNode(newNode))
-			return;
-		
-		this.graph.addVertex(newNode.getPos());
+		addNode(newNode);
 		getGraph().addEdge(newNode.getPos(), existing.getPos());
-		
-		// check for priority
-		addPriorityNode(newNode);
-		
-		newNode.setNetworkUUID(this.getUUID());
 		PastelNetworkEdgeSyncPayload.send(this, newNode.getPos());
 	}
 	
@@ -298,7 +290,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		this.transmissionLogic.invalidateCache();
 	}
 	
-	public void incorporate(ServerPastelNetwork networkToIncorporate, BlockPos trackingPos) {
+	public void incorporate(ServerPastelNetwork networkToIncorporate, PastelNodeBlockEntity node, PastelNodeBlockEntity otherNode) {
 		for (Map.Entry<PastelNodeType, Set<PastelNodeBlockEntity>> nodesToIncorporate : networkToIncorporate.loadedNodes.entrySet()) {
 			for (PastelNodeBlockEntity nodeToIncorporate : nodesToIncorporate.getValue()) {
 				addNode(nodeToIncorporate);
@@ -315,7 +307,32 @@ public class ServerPastelNetwork extends PastelNetwork<ServerWorld> {
 		});
 		
 		Pastel.getServerInstance().removeNetwork(networkToIncorporate.getUUID());
+		addNode(node);
+		addNode(otherNode);
+		addEdge(node, otherNode);
 		this.transmissionLogic.invalidateCache();
+		PastelNetworkEdgeSyncPayload.send(this, node.getPos());
+	}
+	
+	public boolean removeEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity otherNode) {
+		Optional<ServerPastelNetwork> network = node.getServerNetwork();
+		if (network.isEmpty()) {
+			throw new IllegalStateException("Attempted to remove an edge from a null network");
+		}
+		
+		Optional<ServerPastelNetwork> otherNetwork = otherNode.getServerNetwork();
+		if (otherNetwork.isEmpty() || !network.get().equals(otherNetwork.get())) {
+			throw new IllegalArgumentException("Can't remove an edge between nodes in different networks - how did you even do this");
+		}
+		
+		boolean success = graph.removeEdge(node.getPos(), otherNode.getPos()) != null;
+		if (success) {
+			checkForNetworkSplit(node.getPos());
+			this.transmissionLogic.invalidateCache();
+			PastelNetworkEdgeSyncPayload.send(this, node.getPos());
+		}
+		
+		return success;
 	}
 	
 	protected void removeNode(PastelNodeBlockEntity node, NodeRemovalReason reason) {

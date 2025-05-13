@@ -16,6 +16,7 @@ import net.minecraft.component.type.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
+import net.minecraft.nbt.*;
 import net.minecraft.util.*;
 
 // Vanilla models see: ModelPredicateProviderRegistry
@@ -44,6 +45,7 @@ public class SpectrumModelPredicateProviders {
 		registerOversizedItemPredicate(SpectrumItems.BEDROCK_AXE);
 		
 		registerOversizedItemPredicate(SpectrumItems.PAINTBRUSH);
+		registerStampingItemPredicate(SpectrumItems.TUNING_STAMP);
 		
 		registerOversizedItemPredicate(SpectrumItems.DRACONIC_TWINSWORD);
 		registerOversizedItemPredicate(SpectrumItems.DRAGON_TALON);
@@ -75,6 +77,16 @@ public class SpectrumModelPredicateProviders {
 		registerStructureCompassPredicates(SpectrumItems.MYSTERIOUS_COMPASS);
 		
 		registerPipeBombPredicates(SpectrumItems.PIPE_BOMB);
+	}
+	
+	private static void registerStampingItemPredicate(Item item) {
+		ModelPredicateProviderRegistry.register(item, Identifier.of("stamped"), ((stack, world, entity, seed) -> {
+			var nbt = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
+			if (nbt.contains(Stampable.STAMPING_DATA_TAG))
+				return 1F;
+			
+			return 0F;
+		}));
 	}
 	
 	private static void registerNullableInkColorPredicate(Item item) {

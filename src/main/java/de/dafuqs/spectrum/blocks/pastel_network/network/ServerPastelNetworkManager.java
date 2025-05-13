@@ -40,6 +40,45 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 		return network;
 	}
 	
+	// TODO: detach connection logic from pastel node block entities
+	public void connectNodes(PastelNodeBlockEntity child, PastelNodeBlockEntity parent) {
+		var parentNetwork = parent.getServerNetwork();
+		var childNetwork = child.getServerNetwork();
+		
+		if (childNetwork.isEmpty() && parentNetwork.isEmpty()) {
+			parentNetwork = Optional.of(createNetwork((ServerWorld) parent.getWorld(), parent));
+			
+		}
+		
+		if (childNetwork.isEmpty()) {
+			addAndSync(child, parent);
+			return;
+		}
+		else if(parentNetwork.isEmpty()) {
+			addAndSync(parent, child);
+			return;
+		}
+		else if(childNetwork.get() != parentNetwork.get()) {
+			if (parentNetwork.get().size() > childNetwork.get().size()) {
+				parentNetwork.get().incorporate(childNetwork.get(), child, parent);
+			}
+			else {
+				childNetwork.get().incorporate(parentNetwork.get(), child, parent);
+			}
+		}
+		
+		// You uh, should not be getting here if both networks are equal.
+		// Handle that in the impression please and thanks.
+		throw new IllegalStateException("Tried to merge a Pastel Network with itself");
+	}
+	
+	private static void addAndSync(PastelNodeBlockEntity newNode, PastelNodeBlockEntity reference) {
+		assert reference.getServerNetwork().isPresent();
+		var parentNetwork = reference.getServerNetwork().get();
+		parentNetwork.addNodeAndConnect(newNode, reference);
+		parentNetwork.markDirty(reference.getPos());
+	}
+	
 	@Override
 	public ServerPastelNetwork createNetwork(ServerWorld world, UUID uuid, int color) {
 		ServerPastelNetwork network = new ServerPastelNetwork(world, uuid, color);
@@ -61,6 +100,7 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 			if (opt.isPresent()) {
 				var wrapper = new NbtCompound();
 				wrapper.put("network", opt.get());
+				wrapper.put("graph", network.graphToNbt());
 				wrapper.put("scheduler", transgender(network.getTransmissions()));
 				// Trans missions?... do... do they really?
 				networkList.add(wrapper);
@@ -75,10 +115,12 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 		for (NbtElement element : nbt.getList("Networks", NbtElement.COMPOUND_TYPE)) {
 			var comp = (NbtCompound) element;
 			var netNbt = comp.get("network");
+			var graphNbt = comp.getCompound("graph");
 			var schedulerNbt = comp.getCompound("scheduler");
 			
 			Optional<ServerPastelNetwork> network = CodecHelper.fromNbt(ServerPastelNetwork.CODEC, netNbt);
 			if (network.isPresent()) {
+				network.get().setGraph(PastelNetwork.graphFromNbt(graphNbt));
 				// I truly, really did try to make the transmission codec work. And I failed ~ Azzyypaaras
 				network.get().getTransmissions().putAll(transDecode(schedulerNbt, network.get()));
 				manager.networks.add(network.get());
@@ -125,7 +167,7 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 			var result = PastelTransmission.CODEC.encodeStart(NbtOps.INSTANCE, transmissionEntry.getKey()).result();
 			if (result.isPresent()) {
 				transmissions.add(result.get());
-				timers[transmissions.indexOf(result.get())] = transmissionEntry.getValue();
+				timers[transmissions.size() - 1] = transmissionEntry.getValue();
 			}
 		}
 		
@@ -161,5 +203,4 @@ public class ServerPastelNetworkManager extends PersistentState implements Paste
 			}
 		}
 	}
-	
 }

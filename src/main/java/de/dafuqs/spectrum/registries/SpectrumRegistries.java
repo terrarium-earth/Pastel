@@ -31,6 +31,8 @@ public class SpectrumRegistries {
 	public static final SpectrumRegistry<PastelUpgradeSignature> PASTEL_UPGRADE = register(SpectrumRegistryKeys.PASTEL_UPGRADE, false);
 	public static final SpectrumRegistry<RecipeScaling> RECIPE_SCALING = register(SpectrumRegistryKeys.RECIPE_SCALING, true);
 	
+	public static final Registry<StampDataCategory> STAMP_DATA_CATEGORY = register(SpectrumRegistryKeys.STAMP_DATA_CATEGORY, true);
+	
 	public static final SpectrumRegistry<MapCodec<? extends ResonanceProcessor>> RESONANCE_PROCESSOR_TYPE = register(SpectrumRegistryKeys.RESONANCE_PROCESSOR_TYPE, false);
 	
 	public static void register() {

@@ -49,6 +49,7 @@ public class SpectrumItemGroups {
 				
 				entries.add(SpectrumItems.GUIDEBOOK);
 				entries.add(SpectrumItems.PAINTBRUSH);
+				entries.add(SpectrumItems.TUNING_STAMP);
 				entries.add(SpectrumItems.BOTTLE_OF_FADING);
 				entries.add(SpectrumItems.BOTTLE_OF_FAILING);
 				entries.add(SpectrumItems.BOTTLE_OF_RUIN);

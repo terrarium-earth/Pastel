@@ -133,6 +133,8 @@ public class SpectrumCommon implements ModInitializer {
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");
 		SpectrumPastelUpgrades.register();
+		logInfo("Registering Stamp Categories...");
+		SpectrumStampDataCategories.register();
 		
 		// Worldgen
 		logInfo("Registering Features...");

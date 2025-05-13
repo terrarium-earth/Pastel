@@ -107,11 +107,6 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
 		super.onPlaced(world, pos, state, placer, itemStack);
-		
-		if (!world.isClient) {
-			Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE);
-			blockEntity.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.connectToNearbyNodes(placer));
-		}
 	}
 	
 	@Override
@@ -154,6 +149,8 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 				}
 				return ItemActionResult.success(world.isClient());
 			}
+			return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		} else if (stack.isOf(SpectrumItems.TUNING_STAMP)) {
 			return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 		} else if (player.isCreative() && stack.isOf(SpectrumItems.PAINTBRUSH)) {
 			sendDebugMessage(world, pos, player, blockEntity);
@@ -233,7 +230,7 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements BlockEntityP
 		if (!(user instanceof PlayerEntity player)) {
 			return false;
 		}
-		if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_COLORING)) {
+		if (!AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_COLORING)) {
 			return false;
 		}
 		@Nullable PastelNodeBlockEntity blockEntity = getBlockEntity(world, pos);

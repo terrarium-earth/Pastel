@@ -30,7 +30,7 @@ import org.jetbrains.annotations.*;
 
 import java.util.*;
 
-public class MalachiteBidentItem extends TridentItem implements Preenchanted, ExpandedStatTooltip, ArmorPiercingItem {
+public class MalachiteBidentItem extends TridentItem implements Preenchanted, TooltipExtensions, ArmorPiercingItem {
 	
 	private final float armorPierce, protPierce;
 	
@@ -209,7 +209,7 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, Ex
 	}
 	
 	@Override
-	public void expandTooltip(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
+	public void expandTooltipPostStats(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
 		if (Screen.hasShiftDown()) {
 			tooltip.add(Text.translatable("item.spectrum.bident.postToolTip.ap", armorPierce * 100).formatted(Formatting.DARK_GREEN));
 			
