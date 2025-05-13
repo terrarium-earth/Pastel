@@ -898,7 +898,7 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.SLUSH);
 				entries.add(SpectrumBlocks.OVERGROWN_SLUSH);
 				entries.add(SpectrumBlocks.TILLED_SLUSH);
-				entries.add(SpectrumBlocks.BLACK_SLUDGE);
+				entries.add(SpectrumBlocks.HORNSLAKE);
 				
 				entries.add(SpectrumItems.ASH_FLAKES);
 				entries.add(SpectrumBlocks.ASH);
@@ -950,7 +950,7 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumBlocks.OVERGROWN_BLACKSLAG);
 				entries.add(SpectrumBlocks.SHIMMEL);
 				entries.add(SpectrumBlocks.ASHEN_BLACKSLAG);
-				entries.add(SpectrumBlocks.ROTTEN_GROUND);
+				entries.add(SpectrumBlocks.FLAYED_EARTH);
 				entries.add(SpectrumBlocks.SLATE_NOXSHROOM);
 				entries.add(SpectrumBlocks.SLATE_NOXCAP_BLOCK);
 				entries.add(SpectrumBlocks.SLATE_NOXCAP_STEM);

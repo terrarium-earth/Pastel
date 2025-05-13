@@ -29,7 +29,7 @@ public class BlackSludgePlantBlock extends PlantBlock {
 
 	@Override
 	protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-		return floor.isIn(SpectrumBlockTags.BLACK_SLUDGE_BLOCKS) || super.canPlantOnTop(floor, world, pos);
+		return floor.isIn(SpectrumBlockTags.HORNSLAKE_BLOCKS) || super.canPlantOnTop(floor, world, pos);
 	}
 
 	@Override

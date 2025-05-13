@@ -220,18 +220,18 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 		addRecipeSafe(registry, () -> SpectrumWorldInteractionRecipe.customBuilder()
-				.id(syntheticId("world/fluid_interaction", SpectrumBlocks.ROTTEN_GROUND))
+				.id(syntheticId("world/fluid_interaction", SpectrumBlocks.FLAYED_EARTH))
 				.leftInput(dragonrotCatalyst)
 				.rightInput(liquidCrystalCatalyst, false)
-				.output(EmiStack.of(SpectrumBlocks.ROTTEN_GROUND))
+				.output(EmiStack.of(SpectrumBlocks.FLAYED_EARTH))
 				.requiredAdvancement(DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
 				.requiredAdvancement(LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 		addRecipeSafe(registry, () -> SpectrumWorldInteractionRecipe.customBuilder()
-				.id(syntheticId("world/fluid_interaction", SpectrumBlocks.BLACK_SLUDGE))
+				.id(syntheticId("world/fluid_interaction", SpectrumBlocks.HORNSLAKE))
 				.leftInput(dragonrotCatalyst)
 				.rightInput(midnightSolutionCatalyst, false)
-				.output(EmiStack.of(SpectrumBlocks.BLACK_SLUDGE))
+				.output(EmiStack.of(SpectrumBlocks.HORNSLAKE))
 				.requiredAdvancement(DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
 				.requiredAdvancement(MidnightSolutionConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());

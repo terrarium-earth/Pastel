@@ -37,7 +37,7 @@
     {
       "type": "spectrum:checklist",
       "checklist": {
-        "spectrum:lategame/revive_black_sludge_plant": "book.spectrum.guidebook.what_happened.page2.checklist.entry0",
+        "spectrum:lategame/revive_hornslake_plant": "book.spectrum.guidebook.what_happened.page2.checklist.entry0",
         "spectrum:break_cracked_dragonbone": "book.spectrum.guidebook.what_happened.page2.checklist.entry1",
         "spectrum:lategame/strike_up_hummingstone_hymn": "book.spectrum.guidebook.what_happened.page2.checklist.entry2",
         "spectrum:lategame/collect_moonstone": "book.spectrum.guidebook.what_happened.page2.checklist.entry3"
@@ -74,7 +74,7 @@
       "type": "modonomicon:text",
       "condition": {
         "type": "modonomicon:advancement",
-        "advancement_id": "spectrum:lategame/revive_black_sludge_plant"
+        "advancement_id": "spectrum:lategame/revive_hornslake_plant"
       },
       "title": "book.spectrum.guidebook.what_happened.page6.title",
       "text": "book.spectrum.guidebook.what_happened.page6.text"

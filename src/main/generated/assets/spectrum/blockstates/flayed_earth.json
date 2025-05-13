@@ -1,0 +1,15 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "spectrum:block/flayed_earth"
+      },
+      {
+        "model": "spectrum:block/flayed_earth_1"
+      },
+      {
+        "model": "spectrum:block/flayed_earth_2"
+      }
+    ]
+  }
+}

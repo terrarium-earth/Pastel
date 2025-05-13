@@ -5,7 +5,7 @@
     "advancement_id": "spectrum:hidden/visit_dd_biomes/dragonrot_swamp"
   },
   "icon": {
-    "item": "spectrum:rotten_ground"
+    "item": "spectrum:flayed_earth"
   },
   "category": "spectrum:dimension",
   "hide_while_locked": true,
@@ -40,7 +40,7 @@
     {
       "type": "modonomicon:spotlight",
       "item": {
-        "id": "spectrum:rotten_ground"
+        "id": "spectrum:flayed_earth"
       },
       "text": "book.spectrum.guidebook.dragonrot_swamp.page3.text"
     }

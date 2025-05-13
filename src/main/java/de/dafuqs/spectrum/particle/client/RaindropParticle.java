@@ -64,7 +64,7 @@ public class RaindropParticle extends SpriteBillboardParticle {
 		if (water) {
 			spawnY = Math.ceil(y) - 0.05F;
 		}
-		else if(state.isOf(SpectrumBlocks.ROTTEN_GROUND)){
+		else if(state.isOf(SpectrumBlocks.FLAYED_EARTH)){
 			spawnY = pos.getY() + 1.01F;
 		}
 

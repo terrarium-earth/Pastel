@@ -54,7 +54,7 @@ public class SpectrumBlockTags {
 	
 	// MISC
 	public static final TagKey<Block> MULTITOOL_MINEABLE = of("multitool_mineable");
-	public static final TagKey<Block> BLACK_SLUDGE_BLOCKS = of("black_sludge_blocks");
+	public static final TagKey<Block> HORNSLAKE_BLOCKS = of("hornslake_blocks");
 	public static final TagKey<Block> PRIMORDIAL_FIRE_BASE_BLOCKS = of("primordial_fire_base_blocks");
 	public static final TagKey<Block> NATURES_STAFF_TICKABLE = of("natures_staff_tickable");
 	public static final TagKey<Block> NATURES_STAFF_STACKABLE = of("natures_staff_stackable");

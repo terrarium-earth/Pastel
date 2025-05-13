@@ -16,7 +16,7 @@
     "ground_state": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "spectrum:rotten_ground"
+        "Name": "spectrum:flayed_earth"
       }
     },
     "vegetation_feature": {
