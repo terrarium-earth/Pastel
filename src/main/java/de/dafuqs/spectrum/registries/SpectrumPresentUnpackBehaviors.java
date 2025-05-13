@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.blocks.boom.*;
+import de.dafuqs.spectrum.blocks.amalgam.*;
 import de.dafuqs.spectrum.blocks.memory.*;
 import de.dafuqs.spectrum.blocks.present.*;
 import de.dafuqs.spectrum.mixin.accessors.*;

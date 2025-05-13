@@ -24,7 +24,6 @@ public class SpectrumEntityTypes {
 	public static final EntityType<EggLayingWoolyPigEntity> EGG_LAYING_WOOLY_PIG = register("egg_laying_wooly_pig", EntityType.Builder.create(EggLayingWoolyPigEntity::new, SpawnGroup.CREATURE).dimensions(0.9F, 1.3F).maxTrackingRange(10));
 	public static final EntityType<GlassArrowEntity> GLASS_ARROW = register("glass_arrow", EntityType.Builder.<GlassArrowEntity>create(GlassArrowEntity::new, SpawnGroup.MISC).dimensions(0.5F, 0.5F).maxTrackingRange(4).trackingTickInterval(20));
 	public static final EntityType<MiningProjectileEntity> MINING_PROJECTILE = register("mining_projectile", 4, 10, true, EntityDimensions.changing(0.3F, 0.3F), true, MiningProjectileEntity::new);
-	public static final EntityType<ParametricMiningDeviceEntity> PARAMETRIC_MINING_DEVICE_ENTITY = register("parametric_mining_device", 4, 10, true, EntityDimensions.fixed(0.25F, 0.25F), false, ParametricMiningDeviceEntity::new);
 	public static final EntityType<BidentEntity> BIDENT = register("bident", 4, 10, true, EntityDimensions.changing(0.5F, 0.5F), true, BidentEntity::new);
 	public static final EntityType<BidentMirrorImageEntity> BIDENT_MIRROR_IMAGE = register("bident_mirror_image", 4, 10, true, EntityDimensions.changing(0.5F, 0.5F), true, BidentMirrorImageEntity::new);
 	public static final EntityType<LightShardEntity> LIGHT_SHARD = register("light_shard", EntityType.Builder.<LightShardEntity>create(LightShardEntity::new, SpawnGroup.MISC).disableSaving().makeFireImmune().dimensions(0.75F, 0.75F).maxTrackingRange(4).trackingTickInterval(20));

@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.blocks.boom;
+package de.dafuqs.spectrum.blocks.amalgam;
 
 import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.components.*;

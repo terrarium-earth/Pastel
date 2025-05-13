@@ -157,12 +157,6 @@ public class SpectrumSoundEvents {
 	public static final SoundEvent ITEM_PRIMORDIAL_LIGHTER_USE = register("item.primordial_lighter.use");
 
 	// Block Sounds
-	public static final SoundEvent BLOCK_THREAT_CONFLUX_ARM = register("block.threat_conflux.arm");
-	public static final SoundEvent BLOCK_THREAT_CONFLUX_PRIME = register("block.threat_conflux.prime");
-	public static final SoundEvent BLOCK_THREAT_CONFLUX_DISARM = register("block.threat_conflux.disarm");
-	public static final SoundEvent BLOCK_PARAMETRIC_MINING_DEVICE_THROWN = register("block.parametric_mining_device.throw");
-	public static final SoundEvent BLOCK_MODULAR_EXPLOSIVE_EXPLODE = register("block.modular_explosive.explode");
-	
 	public static final SoundEvent BLOCK_CITRINE_BLOCK_BREAK = register("block.citrine_block.break");
 	public static final SoundEvent BLOCK_CITRINE_BLOCK_STEP = register("block.citrine_block.step");
 	public static final SoundEvent BLOCK_CITRINE_BLOCK_PLACE = register("block.citrine_block.place");

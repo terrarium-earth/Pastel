@@ -5,7 +5,6 @@ import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.bottomless_bundle.*;
 import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.explosion.*;
 import net.minecraft.component.*;
 import net.minecraft.component.type.*;
 import net.minecraft.entity.effect.*;
@@ -43,7 +42,6 @@ public class SpectrumDataComponentTypes {
 	public static final ComponentType<JadeWineComponent> JADE_WINE = register("jade_wine", builder -> builder.codec(JadeWineComponent.CODEC).packetCodec(JadeWineComponent.PACKET_CODEC));
 	public static final ComponentType<Long> LAST_COOLDOWN_START = register("last_cooldown_start", builder -> builder.codec(Codec.LONG).packetCodec(PacketCodecs.VAR_LONG));
 	public static final ComponentType<MemoryComponent> MEMORY = register("memory", builder -> builder.codec(MemoryComponent.CODEC).packetCodec(MemoryComponent.PACKET_CODEC).cache());
-	public static final ComponentType<ModularExplosionDefinition> MODULAR_EXPLOSION = register("modular_explosion", builder -> builder.codec(ModularExplosionDefinition.CODEC).packetCodec(ModularExplosionDefinition.PACKET_CODEC));
 	public static final ComponentType<StatusEffectInstance> CONCEALED_EFFECT = register("concealed_effect", builder -> builder.codec(StatusEffectInstance.CODEC).packetCodec(StatusEffectInstance.PACKET_CODEC));
 	public static final ComponentType<Float> OVERCHARGED = register("overcharged", builder -> builder.codec(Codec.FLOAT).packetCodec(PacketCodecs.FLOAT));
 	public static final ComponentType<PairedItemComponent> PAIRED_ITEM = register("paired_item", builder -> builder.codec(PairedItemComponent.CODEC).packetCodec(PairedItemComponent.PACKET_CODEC));

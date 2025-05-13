@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.blocks.boom;
+package de.dafuqs.spectrum.blocks.amalgam;
 
 import com.mojang.serialization.*;
 import de.dafuqs.spectrum.blocks.*;

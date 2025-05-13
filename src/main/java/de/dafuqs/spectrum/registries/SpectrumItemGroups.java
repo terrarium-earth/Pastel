@@ -185,8 +185,6 @@ public class SpectrumItemGroups {
 				entries.add(SpectrumItems.ENDER_SPLICE);
 				entries.add(SpectrumEnchantmentHelper.getEnchantedStack(lookup, SpectrumItems.ENDER_SPLICE, Map.of(SpectrumEnchantments.RESONANCE, 1, SpectrumEnchantments.INDESTRUCTIBLE, 1)));
 				entries.add(SpectrumItems.PERTURBED_EYE);
-				entries.add(SpectrumBlocks.PARAMETRIC_MINING_DEVICE);
-				entries.add(SpectrumBlocks.THREAT_CONFLUX);
 				entries.add(SpectrumItems.PIPE_BOMB);
 				entries.add(SpectrumItems.CRESCENT_CLOCK);
 				entries.add(SpectrumItems.ARTISANS_ATLAS);

@@ -149,36 +149,6 @@
       "spectrum:color_picker_processing"
     ]
   },
-  "block.threat_conflux.arm": {
-    "subtitle": "spectrum.subtitles.block.threat_conflux.arm",
-    "sounds": [
-      "spectrum:crystal_ring_light"
-    ]
-  },
-  "block.threat_conflux.prime": {
-    "subtitle": "spectrum.subtitles.block.threat_conflux.prime",
-    "sounds": [
-      "spectrum:incandescent_charge"
-    ]
-  },
-  "block.threat_conflux.disarm": {
-    "subtitle": "spectrum.subtitles.block.threat_conflux.disarm",
-    "sounds": [
-      "random/fizz"
-    ]
-  },
-  "block.modular_explosive.explode": {
-    "subtitle": "spectrum.subtitles.block.modular_explosive.explode",
-    "sounds": [
-      "spectrum:threat_conflux.explode"
-    ]
-  },
-  "block.parametric_mining_device.throw": {
-    "subtitle": "spectrum.subtitles.block.parametric_mining_device.throw",
-    "sounds": [
-      "minecraft:random/bow"
-    ]
-  },
   "entity.block_flooder.throw": {
     "subtitle": "spectrum.subtitles.entity.block_flooder.throw",
     "sounds": [

@@ -13,7 +13,7 @@ import de.dafuqs.spectrum.api.energy.color.*;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.amphora.*;
 import de.dafuqs.spectrum.blocks.block_flooder.*;
-import de.dafuqs.spectrum.blocks.boom.*;
+import de.dafuqs.spectrum.blocks.amalgam.*;
 import de.dafuqs.spectrum.blocks.bottomless_bundle.*;
 import de.dafuqs.spectrum.blocks.chests.*;
 import de.dafuqs.spectrum.blocks.cinderhearth.*;
@@ -562,9 +562,6 @@ public class SpectrumBlocks {
 	
 	public static final Block PRESENT = register(cutout(blockWithItem("present", new PresentBlock(AbstractBlock.Settings.copy(WHITE_WOOL)), block -> new PresentBlockItem(block, IS.of(1)), InkColors.LIGHT_GRAY)).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(PresentBlock.VARIANT).register(variant -> SpectrumModelHelper.createModelVariant(SpectrumModels.PRESENT.upload(block, "_" + variant.asString(), new TextureMap().put(TextureKey.TEXTURE, TextureMap.getSubId(block, "_" + variant.asString())).put(TextureKey.PARTICLE, TextureMap.getId(variant.woolBase)), ctx.modelCollector))))).withPredefinedItemModel());
 	public static final Block TITRATION_BARREL = register(blockWithItem("titration_barrel", new TitrationBarrelBlock(AbstractBlock.Settings.copy(OAK_PLANKS).mapColor(MapColor.RED)), InkColors.MAGENTA).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(SpectrumModelHelper.createUpDefaultHorizontalFacingVariantMap()).coordinate(BlockStateVariantMap.create(TitrationBarrelBlock.BARREL_STATE).register(state -> SpectrumModelHelper.createModelVariant(SpectrumTexturedModels.cubeBottomTop(b -> b, "_side", b -> b, "_top_" + state.asString(), b -> b, "_bottom").upload(block, state == TitrationBarrelBlock.BarrelState.EMPTY ? "" : "_" + state.asString(), ctx.modelCollector))))));
-	
-	public static final Block PARAMETRIC_MINING_DEVICE = register(defaultUpFacing(blockWithItem("parametric_mining_device", new ParametricMiningDeviceBlock(AbstractBlock.Settings.copy(BLACKSLAG).nonOpaque().breakInstantly()), block -> new ParametricMiningDeviceItem(block, IS.of(8)), InkColors.RED), ModelIds::getBlockModelId).withItemModel(SpectrumModelHelper::registerItemModel));
-	public static final Block THREAT_CONFLUX = register(blockWithItem("threat_conflux", new ThreatConfluxBlock(AbstractBlock.Settings.copy(BLACKSLAG).nonOpaque().breakInstantly()), block -> new ThreatConfluxItem(block, IS.of(8)), InkColors.RED).withBlockModel((ctx, block) -> VariantsBlockStateSupplier.create(block).coordinate(BlockStateVariantMap.create(ThreatConfluxBlock.ARMED).register(armed -> SpectrumModelHelper.createModelVariant(block, armed == ThreatConfluxBlock.ArmedState.NOT_ARMED ? "" : "_armed")))));
 	
 	public static final Block BLOCK_FLOODER = register(simple(block("block_flooder", new BlockFlooderBlock(settings(MapColor.LIGHT_BLUE_GRAY, BlockSoundGroup.ROOTED_DIRT, 0.0F)))));
 	public static final Block BOTTOMLESS_BUNDLE = register(cutout(blockWithItem("bottomless_bundle", new BottomlessBundleBlock(settings(MapColor.PALE_PURPLE, BlockSoundGroup.WOOL, 1.0F).nonOpaque().pistonBehavior(PistonBehavior.DESTROY)), block -> new BottomlessBundleItem(block, IS.of(1)), InkColors.LIGHT_GRAY))

@@ -9,7 +9,6 @@ import de.dafuqs.spectrum.config.*;
 import de.dafuqs.spectrum.data_loaders.*;
 import de.dafuqs.spectrum.entity.*;
 import de.dafuqs.spectrum.events.*;
-import de.dafuqs.spectrum.explosion.*;
 import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.loot.*;
 import de.dafuqs.spectrum.networking.*;
@@ -224,10 +223,6 @@ public class SpectrumCommon implements ModInitializer {
 		logInfo("Registering Game Events...");
 		SpectrumGameEvents.register();
 		SpectrumPositionSources.register();
-		
-		logInfo("Registering Explosion Effects & Providers...");
-		ExplosionModifiers.register();
-		ExplosionModifierProviders.register();
 		
 		logInfo("Registering Dispenser, Resonance & Present Unwrap Behaviors...");
 		SpectrumDispenserBehaviors.register();

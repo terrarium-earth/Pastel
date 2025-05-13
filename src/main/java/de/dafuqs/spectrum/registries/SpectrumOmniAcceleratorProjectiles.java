@@ -153,22 +153,6 @@ public class SpectrumOmniAcceleratorProjectiles {
 		OmniAcceleratorProjectile.register(new OmniAcceleratorProjectile() {
 			@Override
 			public Entity createProjectile(ItemStack stack, LivingEntity shooter, World world, ItemStack shotFrom) {
-				ParametricMiningDeviceEntity entity = new ParametricMiningDeviceEntity(world, shooter);
-				entity.setItem(stack);
-				entity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0, 2.5F, 0F);
-				world.spawnEntity(entity);
-				return entity;
-			}
-			
-			@Override
-			public SoundEvent getSoundEffect() {
-				return SpectrumSoundEvents.BLOCK_PARAMETRIC_MINING_DEVICE_THROWN;
-			}
-		}, SpectrumBlocks.PARAMETRIC_MINING_DEVICE);
-		
-		OmniAcceleratorProjectile.register(new OmniAcceleratorProjectile() {
-			@Override
-			public Entity createProjectile(ItemStack stack, LivingEntity shooter, World world, ItemStack shotFrom) {
 				FireworkRocketEntity fireworkRocketEntity = new FireworkRocketEntity(world, stack, shooter);
 				fireworkRocketEntity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0, 2.5F, 0F);
 				world.spawnEntity(fireworkRocketEntity);

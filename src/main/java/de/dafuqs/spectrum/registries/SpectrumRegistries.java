@@ -9,7 +9,6 @@ import de.dafuqs.spectrum.api.item.*;
 import de.dafuqs.spectrum.api.pastel.*;
 import de.dafuqs.spectrum.api.recipe.*;
 import de.dafuqs.spectrum.entity.variants.*;
-import de.dafuqs.spectrum.explosion.*;
 import de.dafuqs.spectrum.items.tools.*;
 import de.dafuqs.spectrum.recipe.*;
 import net.fabricmc.fabric.api.event.registry.*;
@@ -33,9 +32,6 @@ public class SpectrumRegistries {
 	public static final SpectrumRegistry<RecipeScaling> RECIPE_SCALING = register(SpectrumRegistryKeys.RECIPE_SCALING, true);
 	
 	public static final SpectrumRegistry<MapCodec<? extends ResonanceProcessor>> RESONANCE_PROCESSOR_TYPE = register(SpectrumRegistryKeys.RESONANCE_PROCESSOR_TYPE, false);
-	
-	public static final SpectrumRegistry<ExplosionModifierType> EXPLOSION_MODIFIER_TYPE = register(SpectrumRegistryKeys.EXPLOSION_MODIFIER_TYPE, true);
-	public static final SpectrumRegistry<ExplosionModifier> EXPLOSION_MODIFIER = register(SpectrumRegistryKeys.EXPLOSION_MODIFIER, true);
 	
 	public static void register() {
 		DynamicRegistries.registerSynced(SpectrumRegistryKeys.RESONANCE_PROCESSOR, ResonanceProcessor.CODEC);
