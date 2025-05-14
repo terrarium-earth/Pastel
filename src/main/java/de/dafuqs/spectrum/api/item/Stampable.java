@@ -1,18 +1,16 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.helpers.BlockReference;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
+import de.dafuqs.spectrum.helpers.*;
+import net.minecraft.core.*;
+import net.minecraft.nbt.*;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.entity.*;
+import org.jetbrains.annotations.*;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Marks a block as being interactable with via a Tuning Stamp and defines its behaviour.
@@ -25,13 +23,13 @@ public interface Stampable {
     /**
      * Creates a reference to a Stampable object.
      */
-    StampData recordStampData(Optional<PlayerEntity> user, BlockReference reference, World world);
+    StampData recordStampData(Optional<Player> user, BlockReference reference, Level world);
 
     /**
      * Call this to request a stampable to process the provided data.
      * @return Whether the state of the impresser changed.
      */
-    boolean handleImpression(Optional<UUID> stamper, Optional<PlayerEntity> user, BlockReference reference, World world);
+    boolean handleImpression(Optional<UUID> stamper, Optional<Player> user, BlockReference reference, Level world);
 
     /**
      * Resets the object to a blank state.
@@ -40,12 +38,12 @@ public interface Stampable {
 
     StampDataCategory getStampCategory();
 
-    boolean canUserStamp(Optional<PlayerEntity> stamper);
+    boolean canUserStamp(Optional<Player> stamper);
 
-    static NbtCompound saveStampingData(StampData data) {
-        var compound = new NbtCompound();
+    static CompoundTag saveStampingData(StampData data) {
+        var compound = new CompoundTag();
 
-        data.stamper.ifPresent(uuid -> compound.putUuid("stamper", uuid));
+        data.stamper.ifPresent(uuid -> compound.putUUID("stamper", uuid));
         if (data.reference == null)
             throw new IllegalStateException("Attempted to save stamp data without a BlockReference!");
 
@@ -54,30 +52,30 @@ public interface Stampable {
         return compound;
     }
 
-    static Optional<StampData> loadStampingData(World world, NbtCompound nbt) {
+    static Optional<StampData> loadStampingData(Level world, CompoundTag nbt) {
         var sourcePair = findSource(world, nbt);
-        var source = sourcePair.getLeft();
+        var source = sourcePair.getA();
 
         if (source.isEmpty())
             return Optional.empty();
 
         var stamper = Optional.<UUID>empty();
 
-        if (nbt.containsUuid("stamper"))
-            stamper = Optional.of(nbt.getUuid("stamper"));
+        if (nbt.hasUUID("stamper"))
+            stamper = Optional.of(nbt.getUUID("stamper"));
 
-        return Optional.of(new StampData(stamper, sourcePair.getRight(), source.get()));
+        return Optional.of(new StampData(stamper, sourcePair.getB(), source.get()));
     }
 
-    private static Pair<Optional<Stampable>, BlockReference> findSource(World world, NbtCompound nbt) {
+    private static Tuple<Optional<Stampable>, BlockReference> findSource(Level world, CompoundTag nbt) {
         Stampable stampInteractable = null;
         BlockReference reference;
 
         if (!nbt.contains("source"))
-            return new Pair<>(Optional.empty(), null);
+            return new Tuple<>(Optional.empty(), null);
 
 
-        var pos = BlockPos.fromLong(nbt.getLong("source"));
+        var pos = BlockPos.of(nbt.getLong("source"));
         var state = world.getBlockState(pos);
         reference = BlockReference.of(state, pos);
 
@@ -89,7 +87,7 @@ public interface Stampable {
             reference = reference.appendBE((BlockEntity) interactable);
         }
 
-        return new Pair<>(Optional.ofNullable(stampInteractable), reference);
+        return new Tuple<>(Optional.ofNullable(stampInteractable), reference);
     }
 
     default boolean verifyStampData(StampData data) {
@@ -117,7 +115,7 @@ public interface Stampable {
     record StampData(Optional<UUID> stamper, BlockReference reference, Stampable source) {
 
         public StampData(@Nullable Entity stamper, BlockReference reference, Stampable source) {
-            this(Optional.ofNullable(stamper).map(Entity::getUuid), reference, source);
+            this(Optional.ofNullable(stamper).map(Entity::getUUID), reference, source);
         }
 
         public boolean verifyStampData(StampData data) {
@@ -128,7 +126,7 @@ public interface Stampable {
             source.onImpressedOther(data, success);
         }
 
-        public boolean canUserStamp(Optional<PlayerEntity> player) {
+        public boolean canUserStamp(Optional<Player> player) {
             return source.canUserStamp(player);
         }
     }

@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
-import com.google.common.collect.*;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.compat.emi.*;
 import de.dafuqs.spectrum.items.magic_items.*;
@@ -11,14 +10,14 @@ import dev.emi.emi.api.recipe.*;
 import dev.emi.emi.api.render.*;
 import dev.emi.emi.api.stack.*;
 import dev.emi.emi.api.widget.*;
-import net.minecraft.text.*;
-import net.minecraft.util.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
 
 import java.util.stream.*;
 
 public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectrumRecipe<?>> {
-	private final static Identifier BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/enchanter.png");
-	private final Text description;
+	private final static ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/enchanter.png");
+	private final Component description;
 	private final int craftingTime;
 	
 	public EnchanterEmiRecipeGated(EmiRecipeCategory category, EnchanterRecipe recipe) {

@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.render.capes;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.*;
 
-import static de.dafuqs.spectrum.SpectrumCommon.locate;
+import static de.dafuqs.spectrum.SpectrumCommon.*;
 
 public enum CapeType {
     IMMORTAL(locate("textures/capes/immortal.png"), true),
@@ -15,10 +15,10 @@ public enum CapeType {
     CHROMED(locate("textures/capes/chromed.png"), true),
     NONE(null, false);
 
-    public final Identifier capePath;
+    public final ResourceLocation capePath;
     public final boolean render;
 
-    CapeType(Identifier capePath, boolean render) {
+    CapeType(ResourceLocation capePath, boolean render) {
         this.capePath = capePath;
         this.render = render;
     }

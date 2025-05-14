@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.api.pastel;
 
-import net.minecraft.item.*;
-import net.minecraft.util.*;
-import net.minecraft.util.math.*;
+import net.minecraft.core.*;
+import net.minecraft.resources.*;
 import net.minecraft.world.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
 
 public final class PastelUpgradeSignature {
 
@@ -13,7 +14,7 @@ public final class PastelUpgradeSignature {
 
 	public final Item upgradeItem;
 	public final String name;
-	public final Identifier outerRing, innerRing;
+	public final ResourceLocation outerRing, innerRing;
 	public final int stack, speed, slotRows;
 	public final float stackMult, speedMult;
 	public final boolean light, priority, triggerTransfer, lamp, sensor;
@@ -21,7 +22,7 @@ public final class PastelUpgradeSignature {
 	public final RedstoneStateModifier preProcessor;
 	public final RedstoneStateModifier postProcessor;
 
-	private PastelUpgradeSignature(Item upgradeItem, String name, Identifier outerRing, Identifier innerRing, int stack, int speed, int slotRows, float stackMult, float speedMult, boolean light, boolean priority, boolean triggerTransfer, boolean lamp, boolean sensor, Category category, RedstoneStateModifier preProcessor, RedstoneStateModifier postProcessor) {
+	private PastelUpgradeSignature(Item upgradeItem, String name, ResourceLocation outerRing, ResourceLocation innerRing, int stack, int speed, int slotRows, float stackMult, float speedMult, boolean light, boolean priority, boolean triggerTransfer, boolean lamp, boolean sensor, Category category, RedstoneStateModifier preProcessor, RedstoneStateModifier postProcessor) {
 		this.upgradeItem = upgradeItem;
 		this.name = name;
 		this.outerRing = outerRing;
@@ -41,11 +42,11 @@ public final class PastelUpgradeSignature {
 		this.sensor = sensor;
 	}
 
-	public Identifier outerRing() {
+	public ResourceLocation outerRing() {
 		return outerRing;
 	}
 
-	public Identifier innerRing() {
+	public ResourceLocation innerRing() {
 		return innerRing;
 	}
 
@@ -164,8 +165,8 @@ public final class PastelUpgradeSignature {
 			return new PastelUpgradeSignature(
 					upgradeItem,
 					name,
-					Identifier.of(namespace, outerRing),
-					Identifier.of(namespace, innerRing),
+					ResourceLocation.fromNamespaceAndPath(namespace, outerRing),
+					ResourceLocation.fromNamespaceAndPath(namespace, innerRing),
 					stackMod,
 					speedMod,
 					slotRowMod,
@@ -188,7 +189,7 @@ public final class PastelUpgradeSignature {
 			return new PastelUpgradeSignature(
 					upgradeItem,
 					name,
-					Identifier.of(namespace, outerRing),
+					ResourceLocation.fromNamespaceAndPath(namespace, outerRing),
 					null,
 					0,
 					0,
@@ -222,12 +223,12 @@ public final class PastelUpgradeSignature {
 	 */
 	@FunctionalInterface
 	public interface RedstoneStateModifier {
-		RedstoneStateModifier PASS = (context) -> ActionResult.PASS;
+		RedstoneStateModifier PASS = (context) -> InteractionResult.PASS;
 
-		ActionResult apply(RedstoneContext context);
+		InteractionResult apply(RedstoneContext context);
 	}
 
-	public record RedstoneContext(PastelUpgradeable upgradeable, World world, BlockPos pos, boolean active) {
+	public record RedstoneContext(PastelUpgradeable upgradeable, Level world, BlockPos pos, boolean active) {
 	}
 
 	public abstract static class Category {

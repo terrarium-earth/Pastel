@@ -7,12 +7,12 @@ import dev.emi.emi.api.render.*;
 import dev.emi.emi.api.stack.*;
 import dev.emi.emi.api.widget.TextWidget.*;
 import dev.emi.emi.api.widget.*;
-import net.minecraft.item.*;
-import net.minecraft.text.*;
-import net.minecraft.util.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.resources.*;
+import net.minecraft.world.item.*;
 
 public class AnvilCrushingEmiRecipeGated extends GatedSpectrumEmiRecipe<AnvilCrushingRecipe> {
-	private final static Identifier WALL_TEXTURE = SpectrumCommon.locate("textures/gui/container/anvil_crushing.png");
+	private final static ResourceLocation WALL_TEXTURE = SpectrumCommon.locate("textures/gui/container/anvil_crushing.png");
 	
 	public AnvilCrushingEmiRecipeGated(AnvilCrushingRecipe recipe) {
 		super(SpectrumEmiRecipeCategories.ANVIL_CRUSHING, recipe, 116, 64);
@@ -28,19 +28,19 @@ public class AnvilCrushingEmiRecipeGated extends GatedSpectrumEmiRecipe<AnvilCru
 		widgets.addTexture(EmiTexture.EMPTY_ARROW, 50, 16);
 		widgets.addSlot(outputs.getFirst(), 90, 11).large(true).recipeContext(this);
 		
-		widgets.addText(Text.translatable("container.spectrum.rei.anvil_crushing.plus_xp", recipe.getExperience()),
+		widgets.addText(Component.translatable("container.spectrum.rei.anvil_crushing.plus_xp", recipe.getExperience()),
 				width, 40, 0x3f3f3f, false).horizontalAlign(Alignment.END);
 		
 		widgets.addText(getForceText(), width / 2, 54, 0x3f3f3f, false).horizontalAlign(Alignment.CENTER);
 	}
 
-	public Text getForceText() {
+	public Component getForceText() {
 		if (recipe.getCrushedItemsPerPointOfDamage() >= 1) {
-			return Text.translatable("container.spectrum.rei.anvil_crushing.low_force_required");
+			return Component.translatable("container.spectrum.rei.anvil_crushing.low_force_required");
 		} else if (recipe.getCrushedItemsPerPointOfDamage() >= 0.5) {
-			return Text.translatable("container.spectrum.rei.anvil_crushing.medium_force_required");
+			return Component.translatable("container.spectrum.rei.anvil_crushing.medium_force_required");
 		} else {
-			return Text.translatable("container.spectrum.rei.anvil_crushing.high_force_required");
+			return Component.translatable("container.spectrum.rei.anvil_crushing.high_force_required");
 		}
 	}
 }

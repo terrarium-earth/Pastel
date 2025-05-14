@@ -1,17 +1,17 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
+import net.minecraft.core.*;
 import net.minecraft.nbt.*;
-import net.minecraft.util.*;
-import net.minecraft.util.math.*;
-import net.minecraft.world.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
 import org.jgrapht.*;
 import org.jgrapht.graph.*;
 
 import java.util.*;
 import java.util.stream.*;
 
-public class PastelNetwork<W extends World> {
+public class PastelNetwork<W extends Level> {
 	
 	protected Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 	protected final W world;
@@ -43,7 +43,7 @@ public class PastelNetwork<W extends World> {
     }
 	
 	public boolean addEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
-		return addEdge(node.getPos(), parent.getPos());
+		return addEdge(node.getBlockPos(), parent.getBlockPos());
 	}
 	
 	public boolean addEdge(BlockPos pos1, BlockPos pos2) {
@@ -62,7 +62,7 @@ public class PastelNetwork<W extends World> {
     }
 	
 	public boolean removeEdge(PastelNodeBlockEntity node, PastelNodeBlockEntity parent) {
-		return graph.removeEdge(node.getPos(), parent.getPos()) != null;
+		return graph.removeEdge(node.getBlockPos(), parent.getBlockPos()) != null;
 	}
 	
 	public UUID getUUID() {
@@ -77,7 +77,7 @@ public class PastelNetwork<W extends World> {
 		if (dyeColor.isEmpty())
 			return;
 		
-		var newColor = dyeColor.get().getEntityColor();
+		var newColor = dyeColor.get().getTextureDiffuseColor();
 		
 		if (newColor == this.color)
 			return;
@@ -101,9 +101,9 @@ public class PastelNetwork<W extends World> {
     }
 	
 	//TODO: make this into a CODEC after the 1.21.1 port is done.
-	public NbtCompound graphToNbt() {
+	public CompoundTag graphToNbt() {
 		var vertices = new ArrayList<>(graph.vertexSet());
-		var graphStorage = new NbtCompound();
+		var graphStorage = new CompoundTag();
 		graphStorage.putInt("Size", vertices.size());
 		for (int i = 0; i < vertices.size(); i++) {
 			var vertex = vertices.get(i);
@@ -132,13 +132,13 @@ public class PastelNetwork<W extends World> {
 		return graphStorage;
 	}
 	
-	public static Graph<BlockPos, DefaultEdge> graphFromNbt(NbtCompound nbt) {
+	public static Graph<BlockPos, DefaultEdge> graphFromNbt(CompoundTag nbt) {
 		Graph<BlockPos, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
 		
 		var size = nbt.getInt("Size");
 		var vertices = new ArrayList<BlockPos>();
 		for (int i = 0; i < size; i++) {
-			var vertex = BlockPos.fromLong(nbt.getLong("Vertex" + i));
+			var vertex = BlockPos.of(nbt.getLong("Vertex" + i));
 			vertices.add(vertex);
 			graph.addVertex(vertex);
 		}

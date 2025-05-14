@@ -1,42 +1,36 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.item.TooltipExtensions;
-import de.dafuqs.spectrum.api.item.Stampable;
-import de.dafuqs.spectrum.helpers.BlockReference;
-import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
+import de.dafuqs.spectrum.api.item.*;
+import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.registries.*;
+import net.minecraft.*;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.core.*;
+import net.minecraft.core.component.*;
+import net.minecraft.network.chat.*;
+import net.minecraft.sounds.*;
+import net.minecraft.world.*;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.player.*;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.*;
+import net.minecraft.world.item.context.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.state.*;
+import org.jetbrains.annotations.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class TuningStampItem extends Item implements TooltipExtensions {
 
     public static final String DATA = Stampable.STAMPING_DATA_TAG;
 
-    public TuningStampItem(Settings settings) {
+    public TuningStampItem(Properties settings) {
         super(settings);
     }
 
     @Override
-    public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
+    public boolean canAttackBlock(BlockState state, Level world, BlockPos pos, Player miner) {
         return false;
     }
 
@@ -44,32 +38,32 @@ public class TuningStampItem extends Item implements TooltipExtensions {
      * This is set up such that it can easily be extended for other uses later.
      */
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        var stack = context.getStack();
-        var world = context.getWorld();
-        var pos = context.getBlockPos();
+    public InteractionResult useOn(UseOnContext context) {
+        var stack = context.getItemInHand();
+        var world = context.getLevel();
+        var pos = context.getClickedPos();
         var player = Optional.ofNullable(context.getPlayer());
         var reference = BlockReference.of(world, pos);
 
         var potentialData = Optional.<Stampable.StampData>empty();
 
-        var nbtComp = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
+        var nbtComp = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         if (nbtComp.contains(DATA)) {
-            potentialData = Stampable.loadStampingData(world, nbtComp.copyNbt().getCompound(DATA));
+            potentialData = Stampable.loadStampingData(world, nbtComp.copyTag().getCompound(DATA));
         }
 
         if (potentialData.isPresent()) {
             var potentialTarget = getData(player, reference, world);
 
             if (potentialTarget.isEmpty())
-                return ActionResult.PASS;
+                return InteractionResult.PASS;
 
             var source = potentialData.get();
             var target = potentialTarget.get();
 
             if (!source.verifyStampData(target) || !target.canUserStamp(player)) {
                 tryPlaySound(player, SpectrumSoundEvents.SHATTER_LIGHT, 0.75F);
-                return ActionResult.FAIL;
+                return InteractionResult.FAIL;
             }
             var interactable = target.source();
 
@@ -78,61 +72,61 @@ public class TuningStampItem extends Item implements TooltipExtensions {
 
             if (!targetChanged) {
                 tryPlaySound(player, SpectrumSoundEvents.SHATTER_HEAVY, 0.45F);
-                return ActionResult.FAIL;
+                return InteractionResult.FAIL;
             }
 
             //Allow for 'rolling' linking for flow.
             player.ifPresent(user -> {
-                if (!user.isSneaking()) {
+                if (!user.isShiftKeyDown()) {
                     var newSource = target.source().recordStampData(player, reference, world);
                     saveToNbt(stack, newSource);
-                    tryPlaySound(player, SoundEvents.BLOCK_AMETHYST_BLOCK_CHIME, 0.825F);
+                    tryPlaySound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.825F);
                 }
                 else {
                     tryPlaySound(player, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME, 0.825F);
                 }
             });
 
-            return ActionResult.success(world.isClient());
+            return InteractionResult.sidedSuccess(world.isClientSide());
         }
         else {
             var candidate = getData(player, reference, world);
 
             //Blank an interactable if shift clicking without a saved reference
-            if (player.map(Entity::isSneaking).orElse(false)) {
+            if (player.map(Entity::isShiftKeyDown).orElse(false)) {
                 if (candidate.map(d -> d.canUserStamp(player)).orElse(false)) {
                     candidate.get().source().clearImpression();
-                    tryPlaySound(player, SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK, 0.825F);
+                    tryPlaySound(player, SoundEvents.AMETHYST_BLOCK_BREAK, 0.825F);
                 }
-                return ActionResult.success(world.isClient());
+                return InteractionResult.sidedSuccess(world.isClientSide());
             }
 
             if (candidate.isPresent() && candidate.get().canUserStamp(player)) {
                 saveToNbt(stack, candidate.get());
                 tryPlaySound(player, SpectrumSoundEvents.CRYSTAL_STRIKE, 0.75F);
-                return ActionResult.success(world.isClient());
+                return InteractionResult.sidedSuccess(world.isClientSide());
             }
         }
 
-        return super.useOnBlock(context);
+        return super.useOn(context);
     }
 
-    public void clearData(Optional<PlayerEntity> player, ItemStack stack) {
-        stack.apply(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT,
-                comp -> comp.apply(nbt -> nbt.remove(DATA)));
-        tryPlaySound(player, SoundEvents.ITEM_BRUSH_BRUSHING_GENERIC, 1F);
+    public void clearData(Optional<Player> player, ItemStack stack) {
+        stack.update(DataComponents.CUSTOM_DATA, CustomData.EMPTY,
+                comp -> comp.update(nbt -> nbt.remove(DATA)));
+        tryPlaySound(player, SoundEvents.BRUSH_GENERIC, 1F);
     }
 
-    private void tryPlaySound(Optional<PlayerEntity> player, SoundEvent sound, float volume) {
-        player.ifPresent(p -> p.getWorld().playSoundFromEntity(null, p, sound, SoundCategory.PLAYERS, volume, 0.9F + p.getRandom().nextFloat() / 5F));
+    private void tryPlaySound(Optional<Player> player, SoundEvent sound, float volume) {
+        player.ifPresent(p -> p.level().playSound(null, p, sound, SoundSource.PLAYERS, volume, 0.9F + p.getRandom().nextFloat() / 5F));
     }
 
     private void saveToNbt(ItemStack stack, Stampable.StampData data) {
-        stack.apply(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT,
-                comp -> comp.apply(nbt -> nbt.put(DATA, Stampable.saveStampingData(data))));
+        stack.update(DataComponents.CUSTOM_DATA, CustomData.EMPTY,
+                comp -> comp.update(nbt -> nbt.put(DATA, Stampable.saveStampingData(data))));
     }
 
-    private Optional<Stampable.StampData> getData(Optional<PlayerEntity> player, BlockReference reference, World world) {
+    private Optional<Stampable.StampData> getData(Optional<Player> player, BlockReference reference, Level world) {
         var data = Optional.<Stampable.StampData>empty();
 
         findData: {
@@ -153,35 +147,35 @@ public class TuningStampItem extends Item implements TooltipExtensions {
     }
 
     @Override
-    public void appendTooltipWithPlayer(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
-        var nbtComp = stack.getOrDefault(DataComponentTypes.CUSTOM_DATA, NbtComponent.DEFAULT);
+    public void appendTooltipWithPlayer(ItemStack stack, @Nullable Player player, List<Component> tooltip, TooltipContext context) {
+        var nbtComp = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         if (player != null && nbtComp.contains(DATA)) {
-            var data = Stampable.loadStampingData(player.getWorld(), nbtComp.copyNbt().getCompound(DATA));
+            var data = Stampable.loadStampingData(player.level(), nbtComp.copyTag().getCompound(DATA));
 
             if (data.isEmpty()) {
-                tooltip.add(Text.translatable("item.spectrum.tuning_stamp.tooltip.missing").styled(style -> style.withColor(0xff757a)));
+                tooltip.add(Component.translatable("item.spectrum.tuning_stamp.tooltip.missing").withStyle(style -> style.withColor(0xff757a)));
                 return;
             }
 
             var stampData = data.get();
             var pos = stampData.reference().pos;
 
-            tooltip.add(Text.translatable("item.spectrum.tuning_stamp.tooltip.linked", stampData.reference().getState().getBlock().getName()).styled(style -> style.withColor(0xffc98c)));
-            tooltip.add(Text.translatable("item.spectrum.tuning_stamp.tooltip2", pos.getX(), pos.getY(), pos.getZ()).styled(style -> style.withColor(0xf99b89).withItalic(true)));
+            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.tooltip.linked", stampData.reference().getState().getBlock().getName()).withStyle(style -> style.withColor(0xffc98c)));
+            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.tooltip2", pos.getX(), pos.getY(), pos.getZ()).withStyle(style -> style.withColor(0xf99b89).withItalic(true)));
             return;
         }
 
-        tooltip.add(Text.translatable("item.spectrum.tuning_stamp.tooltip").formatted(Formatting.GRAY));
+        tooltip.add(Component.translatable("item.spectrum.tuning_stamp.tooltip").withStyle(ChatFormatting.GRAY));
     }
 
     @Override
-    public void expandTooltipPostStats(ItemStack stack, @Nullable PlayerEntity player, List<Text> tooltip, TooltipContext context) {
+    public void expandTooltipPostStats(ItemStack stack, @Nullable Player player, List<Component> tooltip, TooltipContext context) {
         if (Screen.hasShiftDown()) {
-            tooltip.add(Text.translatable("item.spectrum.tuning_stamp.controls").styled(style -> style.withColor(0x66ff99)));
-            tooltip.add(Text.translatable("item.spectrum.tuning_stamp.controls2").styled(style -> style.withColor(0x66ff99)));
-            tooltip.add(Text.translatable("item.spectrum.tuning_stamp.controls3").styled(style -> style.withColor(0x66ff99)));
+            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.controls").withStyle(style -> style.withColor(0x66ff99)));
+            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.controls2").withStyle(style -> style.withColor(0x66ff99)));
+            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.controls3").withStyle(style -> style.withColor(0x66ff99)));
         } else {
-            tooltip.add(Text.translatable("spectrum.tooltip.press_shift_for_controls").formatted(Formatting.DARK_GRAY, Formatting.ITALIC));
+            tooltip.add(Component.translatable("spectrum.tooltip.press_shift_for_controls").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
         }
     }
 }

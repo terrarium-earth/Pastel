@@ -7,25 +7,25 @@ import dev.emi.emi.api.stack.*;
 import dev.emi.emi.api.widget.TextWidget.*;
 import dev.emi.emi.api.widget.*;
 import net.minecraft.client.*;
-import net.minecraft.text.*;
+import net.minecraft.util.*;
 
 import java.util.*;
 
 public class FusionShrineEmiRecipeGated extends GatedSpectrumEmiRecipe<FusionShrineRecipe> {
-	private final List<OrderedText> texts;
+	private final List<FormattedCharSequence> texts;
 	
 	public FusionShrineEmiRecipeGated(FusionShrineRecipe recipe) {
 		super(SpectrumEmiRecipeCategories.FUSION_SHRINE, recipe, 138, 60);
-		MinecraftClient client = MinecraftClient.getInstance();
+		Minecraft client = Minecraft.getInstance();
 		if (recipe.getDescription().isPresent()) {
-			texts = client.textRenderer.wrapLines(recipe.getDescription().get(), width);
+			texts = client.font.split(recipe.getDescription().get(), width);
 		} else {
 			texts = List.of();
 		}
 		inputs = new ArrayList<>();
 		inputs.add(FluidIngredientEmi.into(recipe.getFluid()));
 		inputs.addAll(recipe.getIngredientStacks().stream().map(s -> EmiIngredient.of(s.getMatchingStacks().stream().map(EmiStack::of).toList())).toList());
-		outputs = List.of(EmiStack.of(recipe.getResult(getRegistryManager())));
+		outputs = List.of(EmiStack.of(recipe.getResultItem(getRegistryManager())));
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.data;
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.registries.*;
 import net.fabricmc.fabric.api.datagen.v1.*;
-import net.minecraft.registry.*;
+import net.minecraft.core.*;
 import org.jetbrains.annotations.*;
 
 public class SpectrumDataGenerator implements DataGeneratorEntrypoint {

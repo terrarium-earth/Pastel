@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.blocks.mob_head.client.models;
 
 import de.dafuqs.spectrum.blocks.mob_head.client.*;
 import net.fabricmc.api.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.*;
+import net.minecraft.client.model.geom.*;
+import net.minecraft.client.model.geom.builders.*;
 
 @Environment(EnvType.CLIENT)
 public class SquidHeadModel extends SpectrumSkullModel {
@@ -12,17 +12,17 @@ public class SquidHeadModel extends SpectrumSkullModel {
         super(root);
     }
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addChild(
-                EntityModelPartNames.HEAD,
-                ModelPartBuilder.create().uv(0, 0).cuboid(-6.0F, -16.0F, -6.0F, 12.0F, 16.0F, 12.0F),
-                ModelTransform.NONE
+        modelPartData.addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -16.0F, -6.0F, 12.0F, 16.0F, 12.0F),
+                PartPose.ZERO
         );
 
-        return TexturedModelData.of(modelData, 64, 32);
+        return LayerDefinition.create(modelData, 64, 32);
     }
     
     @Override

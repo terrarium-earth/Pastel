@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.registry.*;
-import net.minecraft.util.*;
+import net.minecraft.core.*;
+import net.minecraft.resources.*;
 
 @SuppressWarnings("unused")
 public class SpectrumStampDataCategories {
@@ -18,7 +18,7 @@ public class SpectrumStampDataCategories {
         return register(StampDataCategory.create(id), id);
     }
 
-    private static StampDataCategory register(StampDataCategory category, Identifier id) {
+    private static StampDataCategory register(StampDataCategory category, ResourceLocation id) {
         return Registry.register(SpectrumRegistries.STAMP_DATA_CATEGORY, id, category);
     }
 }

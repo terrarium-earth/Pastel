@@ -5,7 +5,7 @@ import de.dafuqs.spectrum.recipe.*;
 import dev.emi.emi.api.render.*;
 import dev.emi.emi.api.stack.*;
 import dev.emi.emi.api.widget.*;
-import net.minecraft.text.*;
+import net.minecraft.network.chat.*;
 
 public class InkConvertingEmiRecipeGated extends GatedSpectrumEmiRecipe<InkConvertingRecipe> {
 	
@@ -21,8 +21,8 @@ public class InkConvertingEmiRecipeGated extends GatedSpectrumEmiRecipe<InkConve
 		widgets.addTexture(EmiTexture.EMPTY_ARROW, 22, 1);
 
 		// output amount & required time
-		Text colorText = Text.translatable("container.spectrum.rei.ink_converting.color", recipe.getInkColor().getName());
-		Text amountText = Text.translatable("container.spectrum.rei.ink_converting.amount", recipe.getInkAmount());
+		Component colorText = Component.translatable("container.spectrum.rei.ink_converting.color", recipe.getInkColor().getName());
+		Component amountText = Component.translatable("container.spectrum.rei.ink_converting.amount", recipe.getInkAmount());
 		widgets.addText(colorText, 50, 1, 0x3f3f3f, false);
 		widgets.addText(amountText, 50, 11, 0x3f3f3f, false);
 	}

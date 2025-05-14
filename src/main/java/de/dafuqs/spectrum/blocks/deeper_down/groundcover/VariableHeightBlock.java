@@ -1,18 +1,18 @@
 package de.dafuqs.spectrum.blocks.deeper_down.groundcover;
 
-import com.mojang.serialization.*;
-import net.minecraft.block.*;
-import net.minecraft.util.math.*;
-import net.minecraft.util.shape.*;
-import net.minecraft.world.*;
+import net.minecraft.core.*;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.phys.shapes.*;
 
 public class VariableHeightBlock extends MudBlock {
 	
 	private final VoxelShape shape;
 	
-	public VariableHeightBlock(Settings settings, int height) {
+	public VariableHeightBlock(Properties settings, int height) {
 		super(settings);
-		shape = Block.createCuboidShape(0, 0, 0, 16, height, 16);
+		shape = Block.box(0, 0, 0, 16, height, 16);
 	}
 
 //    @Override
@@ -22,7 +22,7 @@ public class VariableHeightBlock extends MudBlock {
 //    }
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
 		return shape;
 	}
     

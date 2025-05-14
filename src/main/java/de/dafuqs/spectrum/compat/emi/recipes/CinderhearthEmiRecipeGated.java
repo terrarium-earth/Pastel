@@ -12,7 +12,7 @@ public class CinderhearthEmiRecipeGated extends GatedSpectrumEmiRecipe<Cinderhea
 	public CinderhearthEmiRecipeGated(CinderhearthRecipe recipe) {
 		super(SpectrumEmiRecipeCategories.CINDERHEARTH, recipe, 136, 48);
 		this.inputs = recipe.getIngredientStacks().stream().map(s -> EmiIngredient.of(s.getMatchingStacks().stream().map(EmiStack::of).toList())).toList();
-		this.outputs = recipe.getResultsWithChance().stream().map(p -> EmiStack.of(p.getLeft()).setChance(p.getRight())).toList();
+		this.outputs = recipe.getResultsWithChance().stream().map(p -> EmiStack.of(p.getA()).setChance(p.getB())).toList();
 	}
 	
 	@Override

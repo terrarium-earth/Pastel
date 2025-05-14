@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.blocks.mob_head.client.models;
 
 import de.dafuqs.spectrum.blocks.mob_head.client.*;
 import net.fabricmc.api.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.*;
+import net.minecraft.client.model.geom.*;
+import net.minecraft.client.model.geom.builders.*;
 
 @Environment(EnvType.CLIENT)
 public class BeeHeadModel extends SpectrumSkullModel {
@@ -12,22 +12,22 @@ public class BeeHeadModel extends SpectrumSkullModel {
         super(root);
     }
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
 
-        modelPartData.addChild(
-                EntityModelPartNames.HEAD,
-                ModelPartBuilder.create()
-                        .uv(0, 0).cuboid(-3.5F, -7.0F, -5.0F, 7.0F, 7.0F, 10.0F)
-                        .uv(2, 0).cuboid(-1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
-                        .uv(3, 3).cuboid(-1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
-                        .uv(3, 3).cuboid(1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
-                        .uv(2, 0).cuboid(1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F),
-                ModelTransform.NONE
+        modelPartData.addOrReplaceChild(
+                PartNames.HEAD,
+                CubeListBuilder.create()
+                        .texOffs(0, 0).addBox(-3.5F, -7.0F, -5.0F, 7.0F, 7.0F, 10.0F)
+                        .texOffs(2, 0).addBox(-1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
+                        .texOffs(3, 3).addBox(-1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
+                        .texOffs(3, 3).addBox(1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F)
+                        .texOffs(2, 0).addBox(1.5F, -7.0F, -8.0F, 0.0F, 2.0F, 3.0F),
+                PartPose.ZERO
         );
 
-        return TexturedModelData.of(modelData, 64, 64);
+        return LayerDefinition.create(modelData, 64, 64);
     }
 
 }

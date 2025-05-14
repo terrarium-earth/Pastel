@@ -7,11 +7,11 @@ import de.dafuqs.spectrum.recipe.primordial_fire_burning.*;
 import dev.emi.emi.api.render.*;
 import dev.emi.emi.api.stack.*;
 import dev.emi.emi.api.widget.*;
-import net.minecraft.util.*;
+import net.minecraft.resources.*;
 
 public class PrimordialFireBurningEmiRecipeGated extends GatedSpectrumEmiRecipe<PrimordialFireBurningRecipe> {
 	
-	private final static Identifier FIRE_TEXTURE = SpectrumCommon.locate("textures/block/primordial_fire_0.png");
+	private final static ResourceLocation FIRE_TEXTURE = SpectrumCommon.locate("textures/block/primordial_fire_0.png");
 	
 	public PrimordialFireBurningEmiRecipeGated(PrimordialFireBurningRecipe recipe) {
 		super(SpectrumEmiRecipeCategories.PRIMORDIAL_FIRE_BURNING, recipe, 80, 35);
