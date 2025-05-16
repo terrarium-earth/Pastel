@@ -2077,41 +2077,6 @@
       "spectrum:enchanter_ding"
     ]
   },
-
-  "entity.monstrosity.shoot": {
-    "subtitle": "spectrum.subtitles.entity.monstrosity.shoot",
-    "sounds": [
-      "mob/ghast/fireball4"
-    ]
-  },
-  "entity.monstrosity.growl": {
-    "subtitle": "spectrum.subtitles.entity.monstrosity.growl",
-    "sounds": [
-      "spectrum:entity.monstrosity.growl"
-    ]
-  },
-  "entity.monstrosity.swoop": {
-    "subtitle": "spectrum.subtitles.entity.monstrosity.swoop",
-    "sounds": [
-      {
-        "name": "spectrum:entity.monstrosity.swoop",
-        "volume": 0.7
-      }
-    ]
-  },
-  "entity.monstrosity.ambient": {
-    "subtitle": "spectrum.subtitles.entity.monstrosity.ambient",
-    "sounds": [
-      "spectrum:entity.monstrosity.ambient"
-    ]
-  },
-  "entity.monstrosity.hurt": {
-    "subtitle": "spectrum.subtitles.entity.monstrosity.hurt",
-    "sounds": [
-      "spectrum:entity.monstrosity.hurt",
-      "spectrum:entity.monstrosity.hurt2"
-    ]
-  },
   "entity.lizard.hurt": {
     "subtitle": "spectrum.subtitles.entity.lizard.hurt",
     "sounds": [

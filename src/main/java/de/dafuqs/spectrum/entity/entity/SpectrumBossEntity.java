@@ -218,16 +218,6 @@ public class SpectrumBossEntity extends PathfinderMob {
 	}
 	
 	@Override
-	protected SoundEvent getAmbientSound() {
-		return SpectrumSoundEvents.ENTITY_MONSTROSITY_AMBIENT;
-	}
-	
-	@Override
-	protected SoundEvent getHurtSound(DamageSource source) {
-		return SpectrumSoundEvents.ENTITY_MONSTROSITY_HURT;
-	}
-	
-	@Override
 	protected SoundEvent getSwimSound() {
 		return SoundEvents.HOSTILE_SWIM;
 	}

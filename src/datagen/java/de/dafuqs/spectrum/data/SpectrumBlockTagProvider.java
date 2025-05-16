@@ -9,12 +9,12 @@ import net.minecraft.core.*;
 
 public class SpectrumBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 	
-	public SpectrumBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+	public SpectrumBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 	
 	@Override
-	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+	protected void addTags(HolderLookup.Provider wrapperLookup) {
 		SpectrumBlockTags.provideTags(this::getOrCreateTagBuilder);
 	}
 	

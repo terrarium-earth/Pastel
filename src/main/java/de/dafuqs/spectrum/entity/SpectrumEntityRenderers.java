@@ -29,7 +29,6 @@ public class SpectrumEntityRenderers {
 		register(SpectrumEntityTypes.LIGHT_SHARD, LightShardEntityRenderer::new);
 		register(SpectrumEntityTypes.LIGHT_SPEAR, LightSpearEntityRenderer::new);
 		register(SpectrumEntityTypes.LIGHT_MINE, LightMineEntityRenderer::new);
-		register(SpectrumEntityTypes.MONSTROSITY, MonstrosityEntityRenderer::new);
 		register(SpectrumEntityTypes.PRESERVATION_TURRET, PreservationTurretEntityRenderer::new);
 		register(SpectrumEntityTypes.LIZARD, LizardEntityRenderer::new);
 		register(SpectrumEntityTypes.KINDLING, KindlingEntityRenderer::new);

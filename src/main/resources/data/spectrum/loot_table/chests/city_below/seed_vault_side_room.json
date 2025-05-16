@@ -41,11 +41,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:rock_candy",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
           "name": "spectrum:peach_cream",
           "quality": 5
         }

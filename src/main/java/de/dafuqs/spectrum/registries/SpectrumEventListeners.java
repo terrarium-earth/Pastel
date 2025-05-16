@@ -175,11 +175,6 @@ public class SpectrumEventListeners {
 						ShootingStarSpawner.INSTANCE.tick(world, true, true);
 					}
 				}
-				
-				/* TODO: Monstrosity
-				if (world.getRegistryKey() == SpectrumDimensions.DIMENSION_KEY) {
-					MonstrositySpawner.INSTANCE.spawn(world, true, true);
-				}*/
 			}
 		});
 		

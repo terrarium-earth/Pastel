@@ -86,9 +86,6 @@ public class SpectrumAdvancements {
 	public static final ResourceLocation BUILD_COMPLEX_PEDESTAL_STRUCTURE = SpectrumCommon.locate("lategame/build_complex_pedestal_structure");
 	public static final ResourceLocation BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE = SpectrumCommon.locate("lategame/build_complex_pedestal_structure_without_moonstone");
 	
-	// Misc
-	public static final ResourceLocation KILLED_MONSTROSITY = SpectrumCommon.locate("lategame/killed_monstrosity");
-	
 	// Unlocks
 	public static final ResourceLocation UNLOCK_BOTTLE_OF_FADING = SpectrumCommon.locate("unlocks/items/bottle_of_fading");
 	public static final ResourceLocation UNLOCK_BOTTLE_OF_FAILING = SpectrumCommon.locate("unlocks/items/bottle_of_failing");

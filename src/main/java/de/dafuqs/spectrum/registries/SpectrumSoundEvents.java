@@ -245,12 +245,6 @@ public class SpectrumSoundEvents {
 	public static final SoundEvent ENTITY_PRESERVATION_TURRET_OPEN = register("entity.preservation_turret.open");
 	public static final SoundEvent ENTITY_PRESERVATION_TURRET_SHOOT = register("entity.preservation_turret.shoot");
 	
-	public static final SoundEvent ENTITY_MONSTROSITY_SHOOT = register("entity.monstrosity.shoot");
-	public static final SoundEvent ENTITY_MONSTROSITY_SWOOP = register("entity.monstrosity.swoop");
-	public static final SoundEvent ENTITY_MONSTROSITY_AMBIENT = register("entity.monstrosity.ambient");
-	public static final SoundEvent ENTITY_MONSTROSITY_HURT = register("entity.monstrosity.hurt");
-	public static final SoundEvent ENTITY_MONSTROSITY_GROWL = register("entity.monstrosity.growl");
-	
 	public static final SoundEvent ENTITY_LIZARD_AMBIENT = register("entity.lizard.ambient");
 	public static final SoundEvent ENTITY_LIZARD_HURT = register("entity.lizard.hurt");
 	public static final SoundEvent ENTITY_LIZARD_DEATH = register("entity.lizard.death");

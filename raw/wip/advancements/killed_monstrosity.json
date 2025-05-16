@@ -21,7 +21,7 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "type": "spectrum:monstrosity",
+              "type":
               "location": {
                 "dimension": "spectrum:deeper_down"
               }

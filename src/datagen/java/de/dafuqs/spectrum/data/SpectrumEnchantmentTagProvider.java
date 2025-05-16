@@ -9,12 +9,12 @@ import net.minecraft.core.*;
 
 public class SpectrumEnchantmentTagProvider extends FabricTagProvider.EnchantmentTagProvider {
 	
-	public SpectrumEnchantmentTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> completableFuture) {
+	public SpectrumEnchantmentTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
 		super(output, completableFuture);
 	}
 	
 	@Override
-	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+	protected void addTags(HolderLookup.Provider wrapperLookup) {
 		SpectrumEnchantments.provideEnchantmentTags(this::getOrCreateTagBuilder);
 	}
 	

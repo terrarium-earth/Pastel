@@ -136,7 +136,6 @@ public enum SpectrumSkullType implements SkullBlock.Type {
 	LIZARD_RED(SpectrumEntityTypes.LIZARD, SpectrumSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
 	LIZARD_WHITE(SpectrumEntityTypes.LIZARD, SpectrumSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
 	LIZARD_YELLOW(SpectrumEntityTypes.LIZARD, SpectrumSoundEvents.ENTITY_LIZARD_AMBIENT.getLocation()),
-	MONSTROSITY(SpectrumEntityTypes.MONSTROSITY, SpectrumSoundEvents.ENTITY_MONSTROSITY_AMBIENT.getLocation()),
 	PRESERVATION_TURRET(SpectrumEntityTypes.PRESERVATION_TURRET, SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_AMBIENT.getLocation());
 	
 	public static final Codec<SpectrumSkullType> CODEC = StringRepresentable.fromEnum(SpectrumSkullType::values);
