@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.helpers;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.effect.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
 
 public class StatusEffectHelper {
 	

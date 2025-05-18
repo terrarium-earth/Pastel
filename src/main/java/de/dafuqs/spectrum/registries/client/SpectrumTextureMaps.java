@@ -1,13 +1,28 @@
 package de.dafuqs.spectrum.registries.client;
 
-import net.minecraft.data.models.model.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
-import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.*;
-import static net.minecraft.data.models.model.TextureMapping.*;
-import static net.minecraft.data.models.model.TextureSlot.*;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.FLOWER;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.FRONDS;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.INNER;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.LINE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.OUTER;
+import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
+import static net.minecraft.data.models.model.TextureMapping.getItemTexture;
+import static net.minecraft.data.models.model.TextureSlot.ALL;
+import static net.minecraft.data.models.model.TextureSlot.BOTTOM;
+import static net.minecraft.data.models.model.TextureSlot.CROSS;
+import static net.minecraft.data.models.model.TextureSlot.END;
+import static net.minecraft.data.models.model.TextureSlot.INSIDE;
+import static net.minecraft.data.models.model.TextureSlot.LAYER0;
+import static net.minecraft.data.models.model.TextureSlot.PARTICLE;
+import static net.minecraft.data.models.model.TextureSlot.PLANT;
+import static net.minecraft.data.models.model.TextureSlot.SIDE;
+import static net.minecraft.data.models.model.TextureSlot.TOP;
+import static net.minecraft.data.models.model.TextureSlot.WALL;
 
 public class SpectrumTextureMaps {
 	

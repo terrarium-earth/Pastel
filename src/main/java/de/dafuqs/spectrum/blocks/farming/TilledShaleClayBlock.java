@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.blocks.farming;
 
-import net.minecraft.core.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class TilledShaleClayBlock extends ImmutableFarmlandBlock {
 	public TilledShaleClayBlock(Properties settings, BlockState bareState) {

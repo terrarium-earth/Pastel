@@ -1,12 +1,15 @@
 package de.dafuqs.spectrum.api.interaction;
 
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import org.apache.commons.lang3.function.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import org.apache.commons.lang3.function.TriFunction;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class EntityColorProcessorRegistry {
 	

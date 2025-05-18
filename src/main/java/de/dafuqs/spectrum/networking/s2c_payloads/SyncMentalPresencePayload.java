@@ -1,16 +1,19 @@
 package de.dafuqs.spectrum.networking.s2c_payloads;
 
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.deeper_down.*;
-import de.dafuqs.spectrum.networking.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.client.player.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
-import net.minecraft.server.level.*;
+import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.deeper_down.DimensionRenderEffects;
+import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerPlayer;
 
 // TODO: Why tf is that a packet and not handled in the synced component instead?
 public record SyncMentalPresencePayload(double value) implements CustomPacketPayload {

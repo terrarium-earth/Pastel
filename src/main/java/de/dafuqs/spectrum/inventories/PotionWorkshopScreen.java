@@ -1,16 +1,15 @@
 package de.dafuqs.spectrum.inventories;
 
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.screens.inventory.*;
-import net.minecraft.network.chat.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.RenderHelper;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.player.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 
 import java.awt.*;
 

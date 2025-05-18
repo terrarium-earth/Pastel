@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.blocks;
 
-import com.mojang.serialization.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.Block;
 
-import java.util.*;
+import java.util.List;
 
 public class BlockWithTooltip extends Block {
 	

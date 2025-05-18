@@ -1,23 +1,32 @@
 package de.dafuqs.spectrum.data_loaders;
 
-import com.google.gson.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.predicate.location.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.fabricmc.fabric.api.resource.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.nbt.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.server.packs.resources.*;
-import net.minecraft.util.profiling.*;
-import net.minecraft.util.random.*;
-import net.minecraft.world.entity.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.predicate.location.WorldConditionsPredicate;
+import de.dafuqs.spectrum.helpers.CodecHelper;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.util.random.Weight;
+import net.minecraft.util.random.WeightedEntry;
+import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.world.entity.EntityType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class EntityFishingDataLoader extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
 	

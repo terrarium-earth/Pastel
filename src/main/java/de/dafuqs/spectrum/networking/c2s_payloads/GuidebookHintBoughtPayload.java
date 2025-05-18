@@ -1,18 +1,20 @@
 package de.dafuqs.spectrum.networking.c2s_payloads;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.*;
-import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.helpers.InventoryHelper;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.List;
 
 public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement, IngredientStack payment) implements CustomPacketPayload {
 	

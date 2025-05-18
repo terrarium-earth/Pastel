@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.api.energy.color;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 
-import java.util.*;
+import java.util.List;
 
 public class InkColors {
 	

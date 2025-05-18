@@ -1,18 +1,24 @@
 package de.dafuqs.spectrum.blocks.jade_vines;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.protocol.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.helpers.TimeHelper;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class JadeVineRootsBlockEntity extends BlockEntity {
 	

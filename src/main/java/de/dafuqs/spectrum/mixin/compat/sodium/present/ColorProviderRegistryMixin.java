@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.mixin.compat.sodium.present;
 
-import net.caffeinemc.mods.sodium.client.model.color.*;
-import net.fabricmc.api.*;
-import org.spongepowered.asm.mixin.*;
+import net.caffeinemc.mods.sodium.client.model.color.ColorProviderRegistry;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import org.spongepowered.asm.mixin.Mixin;
 
 // Since the color distortion bug isn't yet fixed,
 // nor is there an API for adding render overrides,

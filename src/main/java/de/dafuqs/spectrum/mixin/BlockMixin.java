@@ -1,28 +1,35 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.helpers.enchantments.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.stats.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import de.dafuqs.spectrum.api.interaction.ResonanceProcessor;
+import de.dafuqs.spectrum.helpers.enchantments.ExuberanceHelper;
+import de.dafuqs.spectrum.helpers.enchantments.FoundryHelper;
+import de.dafuqs.spectrum.registries.SpectrumEnchantmentTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {

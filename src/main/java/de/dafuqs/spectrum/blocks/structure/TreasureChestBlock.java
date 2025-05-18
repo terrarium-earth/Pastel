@@ -1,18 +1,21 @@
 package de.dafuqs.spectrum.blocks.structure;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.chests.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.resources.model.*;
-import net.minecraft.core.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.chests.SpectrumChestBlock;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class TreasureChestBlock extends SpectrumChestBlock {
 

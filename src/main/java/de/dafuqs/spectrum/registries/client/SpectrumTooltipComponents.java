@@ -1,8 +1,14 @@
 package de.dafuqs.spectrum.registries.client;
 
-import de.dafuqs.spectrum.items.tooltip.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
+import de.dafuqs.spectrum.items.tooltip.BottomlessBundleTooltipComponent;
+import de.dafuqs.spectrum.items.tooltip.BottomlessBundleTooltipData;
+import de.dafuqs.spectrum.items.tooltip.CraftingTabletTooltipComponent;
+import de.dafuqs.spectrum.items.tooltip.CraftingTabletTooltipData;
+import de.dafuqs.spectrum.items.tooltip.PresentTooltipComponent;
+import de.dafuqs.spectrum.items.tooltip.PresentTooltipData;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 
 @Environment(EnvType.CLIENT)
 public class SpectrumTooltipComponents {

@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.render.capes;
 
-import net.minecraft.resources.*;
+import net.minecraft.resources.ResourceLocation;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumCommon.locate;
 
 public enum CapeType {
     IMMORTAL(locate("textures/capes/immortal.png"), true),

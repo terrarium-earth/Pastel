@@ -1,20 +1,22 @@
 package de.dafuqs.spectrum.items;
 
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.items.food.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.food.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
+import de.dafuqs.spectrum.api.energy.InkPowered;
+import de.dafuqs.spectrum.api.item.InkPoweredPotionFillable;
+import de.dafuqs.spectrum.items.food.DrinkItem;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.ResolvableProfile;
 
-import java.util.*;
+import java.util.List;
 
 public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFillable {
 	

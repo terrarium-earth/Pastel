@@ -1,24 +1,38 @@
 package de.dafuqs.spectrum.blocks.mob_head;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.block.state.pattern.*;
-import net.minecraft.world.level.block.state.predicate.*;
-import org.jetbrains.annotations.*;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.EnumHashBiMap;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.helpers.Support;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.level.block.state.pattern.BlockPatternBuilder;
+import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Optional;
 
 public class SpectrumSkullBlock extends SkullBlock {
 

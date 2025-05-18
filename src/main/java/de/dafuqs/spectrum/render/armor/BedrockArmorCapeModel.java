@@ -1,7 +1,10 @@
 package de.dafuqs.spectrum.render.armor;
 
-import net.minecraft.client.model.geom.*;
-import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
 
 public class BedrockArmorCapeModel {
     public static final ModelPart CAPE_MODEL = createCape();

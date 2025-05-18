@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.sound;
 
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.resources.sounds.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
+import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.client.resources.sounds.AbstractSoundInstance;
+import net.minecraft.client.resources.sounds.TickableSoundInstance;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 
 public class OnPrimordialFireSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 	

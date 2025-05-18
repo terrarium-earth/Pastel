@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.render.animation;
 
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.ApiStatus;
 
 @ApiStatus.OverrideOnly
 public interface FlowHandler<N extends Number> {

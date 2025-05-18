@@ -1,24 +1,32 @@
 package de.dafuqs.spectrum.entity.entity;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.syncher.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.item.alchemy.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import com.google.common.collect.Sets;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import de.dafuqs.spectrum.helpers.CodecHelper;
+import net.minecraft.core.particles.ColorParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public class LightMineEntity extends LightShardBaseEntity {
 

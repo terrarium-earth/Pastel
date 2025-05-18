@@ -1,23 +1,29 @@
 package de.dafuqs.spectrum.registries.client;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.energy.storage.*;
-import de.dafuqs.spectrum.blocks.conditional.colored_tree.*;
-import de.dafuqs.spectrum.blocks.memory.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.items.energy.*;
-import de.dafuqs.spectrum.progression.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.minecraft.client.color.block.*;
-import net.minecraft.client.color.item.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.energy.storage.SingleInkStorage;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredLeavesBlock;
+import de.dafuqs.spectrum.blocks.memory.MemoryBlockEntity;
+import de.dafuqs.spectrum.blocks.memory.MemoryItem;
+import de.dafuqs.spectrum.components.InfusedBeverageComponent;
+import de.dafuqs.spectrum.items.energy.InkFlaskItem;
+import de.dafuqs.spectrum.progression.ToggleableBlockColorProvider;
+import de.dafuqs.spectrum.progression.ToggleableItemColorProvider;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.util.FastColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
-import java.util.*;
+import java.util.List;
 
 public class SpectrumColorProviders {
 	

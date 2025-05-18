@@ -1,27 +1,53 @@
 package de.dafuqs.spectrum.recipe.potion_workshop;
 
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
-import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
+import de.dafuqs.spectrum.api.item.InkPoweredPotionFillable;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.components.CustomPotionDataComponent;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumPotions;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 	

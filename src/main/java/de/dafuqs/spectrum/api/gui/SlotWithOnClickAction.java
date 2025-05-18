@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.gui;
 
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.item.ItemStack;
 
 public interface SlotWithOnClickAction {
 	

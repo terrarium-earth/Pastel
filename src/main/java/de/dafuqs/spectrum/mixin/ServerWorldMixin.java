@@ -1,19 +1,24 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.*;
-import com.llamalad7.mixinextras.sugar.*;
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.events.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.gameevent.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
+import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.events.SpectrumGameEvents;
+import de.dafuqs.spectrum.helpers.TimeHelper;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerLevel.class)
 public abstract class ServerWorldMixin {

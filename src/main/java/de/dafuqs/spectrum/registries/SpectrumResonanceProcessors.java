@@ -1,18 +1,22 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.api.predicate.block.*;
-import de.dafuqs.spectrum.data.*;
-import de.dafuqs.spectrum.data_loaders.resonance_processors.*;
-import net.fabricmc.fabric.api.tag.convention.v2.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.interaction.ResonanceProcessor;
+import de.dafuqs.spectrum.api.predicate.block.BrokenBlockPredicate;
+import de.dafuqs.spectrum.data.DatagenProxy;
+import de.dafuqs.spectrum.data_loaders.resonance_processors.DropSelfResonanceProcessor;
+import de.dafuqs.spectrum.data_loaders.resonance_processors.ModifyDropsResonanceProcessor;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
-import java.util.function.*;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
 public class SpectrumResonanceProcessors {

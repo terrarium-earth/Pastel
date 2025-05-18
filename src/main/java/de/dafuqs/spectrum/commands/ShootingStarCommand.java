@@ -1,15 +1,18 @@
 package de.dafuqs.spectrum.commands;
 
-import com.mojang.brigadier.arguments.*;
-import com.mojang.brigadier.tree.*;
-import de.dafuqs.spectrum.entity.spawners.*;
-import net.minecraft.commands.*;
-import net.minecraft.commands.arguments.*;
-import net.minecraft.commands.arguments.selector.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.tree.ArgumentCommandNode;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import de.dafuqs.spectrum.entity.spawners.ShootingStarSpawner;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.selector.EntitySelector;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 
-import java.util.*;
+import java.util.Collection;
 
 public class ShootingStarCommand {
 	

@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.entity.render;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.entity.models.*;
-import de.dafuqs.spectrum.registries.client.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.entity.LizardEntity;
+import de.dafuqs.spectrum.entity.models.LizardEntityModel;
+import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
 public class LizardEntityRenderer extends MobRenderer<LizardEntity, LizardEntityModel<LizardEntity>> {

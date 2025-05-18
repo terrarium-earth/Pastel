@@ -1,22 +1,25 @@
 package de.dafuqs.spectrum.cca;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.entity.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.nbt.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
-import org.ladysnake.cca.api.v3.component.sync.*;
-import org.ladysnake.cca.api.v3.component.tick.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.entity.PlayerEntityAccessor;
+import de.dafuqs.spectrum.api.item.SleepAlteringItem;
+import de.dafuqs.spectrum.networking.s2c_payloads.SyncMentalPresencePayload;
+import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
+import org.ladysnake.cca.api.v3.component.tick.CommonTickingComponent;
 
-import java.util.*;
+import java.util.Optional;
 
 /**
  * Because not every niche thing can have its own component

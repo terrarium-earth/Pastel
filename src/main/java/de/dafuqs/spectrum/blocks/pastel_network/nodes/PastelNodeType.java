@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.blocks.pastel_network.nodes;
 
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.util.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.StringRepresentable;
 
-import java.util.*;
+import java.util.List;
 
 public enum PastelNodeType implements StringRepresentable {
 	CONNECTION(List.of(Component.translatable("block.spectrum.connection_node.tooltip")), false, false),

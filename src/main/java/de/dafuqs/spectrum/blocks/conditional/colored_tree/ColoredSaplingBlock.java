@@ -1,18 +1,21 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import com.mojang.serialization.*;
-import de.dafuqs.revelationary.api.revelations.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.grower.*;
-import net.minecraft.world.level.block.state.*;
-import org.apache.commons.lang3.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.revelationary.api.revelations.RevelationAware;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SaplingBlock;
+import net.minecraft.world.level.block.grower.TreeGrower;
+import net.minecraft.world.level.block.state.BlockState;
+import org.apache.commons.lang3.NotImplementedException;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class ColoredSaplingBlock extends SaplingBlock implements RevelationAware, ColoredTree {
 

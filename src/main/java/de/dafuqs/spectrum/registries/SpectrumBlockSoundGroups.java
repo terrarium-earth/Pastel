@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.registries;
 
 
-import net.minecraft.sounds.*;
-import net.minecraft.world.level.block.*;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.SoundType;
 
 @SuppressWarnings("unused")
 public class SpectrumBlockSoundGroups {

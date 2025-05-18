@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.helpers.AoEHelper;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 
 public interface AoEBreakingTool {
 	

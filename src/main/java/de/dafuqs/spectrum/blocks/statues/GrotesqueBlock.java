@@ -1,18 +1,23 @@
 package de.dafuqs.spectrum.blocks.statues;
 
-import com.mojang.serialization.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.shapes.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class GrotesqueBlock extends HorizontalDirectionalBlock {
 

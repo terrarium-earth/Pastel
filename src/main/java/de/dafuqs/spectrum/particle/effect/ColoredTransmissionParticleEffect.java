@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.particle.effect;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.particle.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.level.gameevent.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.level.gameevent.PositionSource;
 
 public class ColoredTransmissionParticleEffect extends TransmissionParticleEffect {
 	

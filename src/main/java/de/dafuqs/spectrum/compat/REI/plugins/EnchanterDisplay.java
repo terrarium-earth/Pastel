@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.recipe.*;
-import me.shedaniel.rei.api.common.entry.*;
-import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.compat.REI.GatedSpectrumDisplay;
+import de.dafuqs.spectrum.recipe.GatedSpectrumRecipe;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 public abstract class EnchanterDisplay extends GatedSpectrumDisplay {
 	

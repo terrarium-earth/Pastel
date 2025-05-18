@@ -1,17 +1,21 @@
 package de.dafuqs.spectrum.deeper_down;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.particle.client.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.sound.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.biome.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import de.dafuqs.spectrum.particle.client.FallingAshParticle;
+import de.dafuqs.spectrum.registries.SpectrumBiomes;
+import de.dafuqs.spectrum.sound.BiomeAttenuatingSoundInstance;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.biome.Biome;
 
 @Environment(EnvType.CLIENT)
 public class HowlingSpireEffects {

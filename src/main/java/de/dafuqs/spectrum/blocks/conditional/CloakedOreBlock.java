@@ -1,21 +1,23 @@
 package de.dafuqs.spectrum.blocks.conditional;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.revelationary.api.revelations.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.storage.loot.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.revelationary.api.revelations.RevelationAware;
+import de.dafuqs.spectrum.mixin.accessors.ExperienceDroppingBlockAccessor;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Tuple;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class CloakedOreBlock extends DropExperienceBlock implements RevelationAware {
 

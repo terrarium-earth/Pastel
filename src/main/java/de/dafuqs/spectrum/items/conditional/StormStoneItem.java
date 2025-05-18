@@ -1,16 +1,19 @@
 package de.dafuqs.spectrum.items.conditional;
 
-import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.biome.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.api.item.DamageAwareItem;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.phys.Vec3;
 
 public class StormStoneItem extends CloakedItem implements DamageAwareItem {
 	

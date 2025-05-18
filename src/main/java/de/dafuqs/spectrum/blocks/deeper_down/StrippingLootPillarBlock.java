@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.blocks.deeper_down;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.api.block.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.storage.loot.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.api.block.StrippableDrop;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootTable;
 
 public class StrippingLootPillarBlock extends RotatedPillarBlock implements StrippableDrop {
     

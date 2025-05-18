@@ -1,18 +1,22 @@
 package de.dafuqs.spectrum.helpers;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.items.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
-import org.joml.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.items.PigmentItem;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.DyeItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3f;
 
 import java.awt.*;
-import java.lang.Math;
-import java.util.*;
+import java.util.Arrays;
 import java.util.List;
-import java.util.regex.*;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SpectrumColorHelper {
 	

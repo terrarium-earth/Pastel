@@ -1,10 +1,13 @@
 package de.dafuqs.spectrum.api.color;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Optional;
 
 public class ItemColors extends ColorRegistry<Item> {
 	

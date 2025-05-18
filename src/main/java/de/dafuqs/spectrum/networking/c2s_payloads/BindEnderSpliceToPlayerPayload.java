@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.networking.c2s_payloads;
 
-import de.dafuqs.spectrum.items.magic_items.*;
-import de.dafuqs.spectrum.networking.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
+import de.dafuqs.spectrum.items.magic_items.EnderSpliceItem;
+import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 
 public record BindEnderSpliceToPlayerPayload(int entityId) implements CustomPacketPayload {
 	

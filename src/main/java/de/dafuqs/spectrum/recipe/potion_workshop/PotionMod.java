@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.recipe.potion_workshop;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.util.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.Tuple;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.List;
+import java.util.stream.Stream;
 
 public record PotionMod(
 		int flatDurationBonusTicks,

@@ -1,21 +1,27 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.inventories.slots.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.fabricmc.fabric.api.transfer.v1.item.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.helpers.CodecHelper;
+import de.dafuqs.spectrum.inventories.slots.ShadowSlot;
+import de.dafuqs.spectrum.networking.c2s_payloads.SetShadowSlotPayload;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public interface FilterConfigurable {
 	

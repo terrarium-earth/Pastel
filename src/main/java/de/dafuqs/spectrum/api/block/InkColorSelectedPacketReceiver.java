@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import net.minecraft.core.*;
-import net.minecraft.world.level.block.entity.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
-import java.util.*;
+import java.util.Optional;
 
 public interface InkColorSelectedPacketReceiver {
 	

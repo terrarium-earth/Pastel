@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.helpers;
 
-import de.dafuqs.spectrum.mixin.accessors.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.entity.animal.horse.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.entity.projectile.*;
+import de.dafuqs.spectrum.mixin.accessors.FoxEntityAccessor;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.animal.Fox;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 
-import java.util.*;
+import java.util.UUID;
 
 public class EntityHelper {
 	

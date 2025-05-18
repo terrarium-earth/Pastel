@@ -1,20 +1,23 @@
 package de.dafuqs.spectrum.blocks.decay;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.block.state.properties.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
+import de.dafuqs.spectrum.registries.SpectrumBlockTags;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import org.jetbrains.annotations.Nullable;
 
 public class FailingBlock extends DecayBlock {
 

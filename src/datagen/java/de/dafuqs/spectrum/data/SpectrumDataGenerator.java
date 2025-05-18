@@ -1,11 +1,14 @@
 package de.dafuqs.spectrum.data;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.datagen.v1.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumEnchantments;
+import de.dafuqs.spectrum.registries.SpectrumRegistryKeys;
+import de.dafuqs.spectrum.registries.SpectrumResonanceProcessors;
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
+import org.jetbrains.annotations.Nullable;
 
 public class SpectrumDataGenerator implements DataGeneratorEntrypoint {
 	@Override

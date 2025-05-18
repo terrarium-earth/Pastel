@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.UUID;
 
 public interface SlotReservingItem {
 	

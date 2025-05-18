@@ -1,14 +1,18 @@
 package de.dafuqs.spectrum.blocks.lava_sponge;
 
-import com.mojang.serialization.*;
-import net.fabricmc.api.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.serialization.MapCodec;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.WetSpongeBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class WetLavaSpongeBlock extends WetSpongeBlock {
 

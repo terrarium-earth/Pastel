@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.render;
 
-import com.mojang.blaze3d.vertex.*;
-import net.fabricmc.fabric.api.transfer.v1.client.fluid.*;
-import net.fabricmc.fabric.api.transfer.v1.fluid.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.world.level.block.entity.*;
-import org.jetbrains.annotations.*;
-import org.joml.*;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4f;
 
 public class FluidRendering {
 	

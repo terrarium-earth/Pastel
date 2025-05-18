@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.blocks.jade_vines;
 
-import net.minecraft.util.*;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public enum StemComponent implements StringRepresentable {
     BASE("base"),

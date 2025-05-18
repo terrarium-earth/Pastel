@@ -1,19 +1,29 @@
 package de.dafuqs.spectrum.helpers;
 
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.item.v1.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.registries.SpectrumItemTags;
+import net.fabricmc.fabric.api.item.v1.EnchantingContext;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BookItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
-import java.util.concurrent.atomic.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SpectrumEnchantmentHelper {
 	

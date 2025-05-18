@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.*;
-import com.llamalad7.mixinextras.sugar.*;
-import com.mojang.blaze3d.vertex.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.world.level.saveddata.maps.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.MapRenderer;
+import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(MapRenderer.MapInstance.class)
 public class MapRendererMapTextureMixin {

@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.world.level.block.FenceBlock;
 
-import java.util.*;
+import java.util.Map;
 
 public class ColoredFenceBlock extends FenceBlock {
 	

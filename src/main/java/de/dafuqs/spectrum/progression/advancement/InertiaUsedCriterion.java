@@ -1,16 +1,19 @@
 package de.dafuqs.spectrum.progression.advancement;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class InertiaUsedCriterion extends SimpleCriterionTrigger<InertiaUsedCriterion.Conditions> {
 	

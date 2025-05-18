@@ -1,15 +1,20 @@
 package de.dafuqs.spectrum.items.food;
 
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class DrinkItem extends Item {
 	

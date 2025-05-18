@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.api.render;
 
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface ExtendedItemBarProvider {
 	

@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.data;
 
-import java.util.concurrent.*;
+import de.dafuqs.spectrum.registries.SpectrumRegistryKeys;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.datagen.v1.*;
-import net.fabricmc.fabric.api.datagen.v1.provider.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
+import java.util.concurrent.CompletableFuture;
 
 public class SpectrumDynamicRegistryProvider extends FabricDynamicRegistryProvider {
 	

@@ -1,14 +1,18 @@
 package de.dafuqs.spectrum.recipe;
 
-import com.google.gson.*;
-import com.mojang.brigadier.*;
-import com.mojang.brigadier.exceptions.*;
-import com.mojang.serialization.*;
-import net.minecraft.commands.arguments.blocks.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.state.*;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
+import com.mojang.brigadier.StringReader;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
+import net.minecraft.commands.arguments.blocks.BlockStateParser;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class RecipeUtils {
 	

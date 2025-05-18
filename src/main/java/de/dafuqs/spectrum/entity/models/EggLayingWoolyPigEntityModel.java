@@ -1,12 +1,20 @@
 package de.dafuqs.spectrum.entity.models;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.model.geom.*;
-import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import de.dafuqs.spectrum.entity.entity.EggLayingWoolyPigEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
 public class EggLayingWoolyPigEntityModel extends EntityModel<EggLayingWoolyPigEntity> {

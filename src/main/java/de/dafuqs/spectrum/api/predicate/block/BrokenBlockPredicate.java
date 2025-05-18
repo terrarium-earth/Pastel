@@ -1,15 +1,20 @@
 package de.dafuqs.spectrum.api.predicate.block;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Since BlockPredicate requires world and pos as input we can not use that in BrokenBlockCriterion

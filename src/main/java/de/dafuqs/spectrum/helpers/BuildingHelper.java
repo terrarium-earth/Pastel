@@ -1,18 +1,31 @@
 package de.dafuqs.spectrum.helpers;
 
-import de.dafuqs.spectrum.api.interaction.*;
-import net.minecraft.core.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.shapes.*;
-import org.jetbrains.annotations.*;
-import oshi.util.tuples.*;
+import de.dafuqs.spectrum.api.interaction.ItemProvider;
+import de.dafuqs.spectrum.api.interaction.ItemProviderRegistry;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import org.jetbrains.annotations.NotNull;
+import oshi.util.tuples.Triplet;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 public class BuildingHelper {
 	

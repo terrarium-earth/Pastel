@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.registries;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.type.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.properties.*;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumCommon.locate;
 
 public class SpectrumBlockSetTypes {
     

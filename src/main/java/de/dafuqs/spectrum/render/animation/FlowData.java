@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.render.animation;
 
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * FlowData objects contain all the dynamic animation data of a field.

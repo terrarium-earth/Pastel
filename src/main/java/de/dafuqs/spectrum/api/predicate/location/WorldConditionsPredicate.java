@@ -1,20 +1,26 @@
 package de.dafuqs.spectrum.api.predicate.location;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.biome.*;
-import net.minecraft.world.level.levelgen.structure.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import net.minecraft.advancements.critereon.BlockPredicate;
+import net.minecraft.advancements.critereon.FluidPredicate;
+import net.minecraft.advancements.critereon.LightPredicate;
+import net.minecraft.advancements.critereon.LocationPredicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
-import java.util.*;
+import java.util.Optional;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public record WorldConditionsPredicate(

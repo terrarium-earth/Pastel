@@ -1,18 +1,23 @@
 package de.dafuqs.spectrum.blocks.structure;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
-import net.minecraft.world.phys.shapes.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class TreasureItemBowlBlock extends Block implements EntityBlock {
 

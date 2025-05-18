@@ -1,17 +1,21 @@
 package de.dafuqs.spectrum.blocks.bottomless_bundle;
 
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.transfer.v1.item.*;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
-import net.fabricmc.fabric.api.transfer.v1.transaction.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumEnchantmentTags;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class BottomlessBundleBlockEntity extends BlockEntity {
 

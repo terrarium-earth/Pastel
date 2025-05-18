@@ -1,24 +1,32 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.helpers.enchantments.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.status_effects.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.stats.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.phys.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import de.dafuqs.spectrum.cca.LastKillComponent;
+import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import de.dafuqs.spectrum.helpers.enchantments.InexorableHelper;
+import de.dafuqs.spectrum.registries.SpectrumEnchantments;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import de.dafuqs.spectrum.status_effects.FrenzyStatusEffect;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.phys.Vec3;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {

@@ -1,32 +1,39 @@
 package de.dafuqs.spectrum.cca;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.cca.azure_dike.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.sound.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.tag.convention.v2.*;
-import net.fabricmc.loader.api.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.nbt.*;
-import net.minecraft.sounds.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
-import org.ladysnake.cca.api.v3.component.*;
-import org.ladysnake.cca.api.v3.component.sync.*;
-import org.ladysnake.cca.api.v3.component.tick.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
+import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
+import de.dafuqs.spectrum.sound.OnPrimordialFireSoundInstance;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
+import org.ladysnake.cca.api.v3.component.tick.ClientTickingComponent;
+import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
-import java.util.*;
+import java.util.Optional;
 
 public class OnPrimordialFireComponent implements AutoSyncedComponent, ServerTickingComponent, ClientTickingComponent {
 

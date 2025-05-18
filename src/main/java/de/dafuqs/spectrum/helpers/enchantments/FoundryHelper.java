@@ -1,11 +1,14 @@
 package de.dafuqs.spectrum.helpers.enchantments;
 
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FoundryHelper {
 	

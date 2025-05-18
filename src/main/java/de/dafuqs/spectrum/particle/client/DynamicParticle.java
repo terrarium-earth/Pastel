@@ -1,15 +1,20 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.mixin.client.accessors.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.core.registries.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.mixin.client.accessors.ParticleManagerAccessor;
+import de.dafuqs.spectrum.particle.effect.DynamicParticleEffect;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.core.registries.BuiltInRegistries;
+import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
 public class DynamicParticle extends TextureSheetParticle {

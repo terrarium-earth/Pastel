@@ -1,26 +1,31 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.claims.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.dispenser.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.claims.GenericClaimModsCompat;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.DirectionalPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockPlacerBlock extends RedstoneInteractionBlock implements EntityBlock {
 

@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.helpers.enchantments;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.registries.SpectrumEnchantments;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.ItemStack;
 
 public class ImprovedCriticalHelper {
 	

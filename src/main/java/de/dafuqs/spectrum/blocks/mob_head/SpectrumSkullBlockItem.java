@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.blocks.mob_head;
 
-import net.minecraft.core.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.StandingAndWallBlockItem;
+import net.minecraft.world.level.block.Block;
 
 public class SpectrumSkullBlockItem extends StandingAndWallBlockItem {
 	

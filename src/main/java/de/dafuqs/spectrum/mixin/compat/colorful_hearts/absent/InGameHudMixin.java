@@ -1,10 +1,12 @@
 package de.dafuqs.spectrum.mixin.compat.colorful_hearts.absent;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.world.entity.player.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.entity.player.Player;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(Gui.class)
 public abstract class InGameHudMixin {

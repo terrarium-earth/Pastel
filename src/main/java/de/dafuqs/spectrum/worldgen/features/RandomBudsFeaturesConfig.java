@@ -1,15 +1,20 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import com.google.common.collect.Lists;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class RandomBudsFeaturesConfig implements FeatureConfiguration {
 

@@ -1,18 +1,25 @@
 package de.dafuqs.spectrum.blocks.idols;
 
-import com.mojang.serialization.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class AoEStatusEffectIdolBlock extends IdolBlock {
 	

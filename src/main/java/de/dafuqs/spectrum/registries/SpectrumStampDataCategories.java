@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.item.StampDataCategory;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 
 @SuppressWarnings("unused")
 public class SpectrumStampDataCategories {

@@ -1,14 +1,19 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.block.entity.*;
+import de.dafuqs.spectrum.api.item.LoomPatternProvider;
+import de.dafuqs.spectrum.api.item.Preenchanted;
+import de.dafuqs.spectrum.registries.SpectrumBannerPatterns;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.entity.BannerPattern;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class PreenchantedMultiToolItem extends MultiToolItem implements Preenchanted, LoomPatternProvider {
 	

@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.registries;
 
-import com.klikli_dev.modonomicon.api.*;
-import com.klikli_dev.modonomicon.api.multiblock.*;
-import de.dafuqs.spectrum.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
+import com.klikli_dev.modonomicon.api.ModonomiconAPI;
+import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 public class SpectrumMultiblocks {
 	

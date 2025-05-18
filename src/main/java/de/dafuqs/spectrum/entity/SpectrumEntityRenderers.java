@@ -1,10 +1,32 @@
 package de.dafuqs.spectrum.entity;
 
-import de.dafuqs.spectrum.entity.render.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.world.entity.*;
+import de.dafuqs.spectrum.entity.render.BedrockFishingBobberEntityRenderer;
+import de.dafuqs.spectrum.entity.render.BidentEntityRenderer;
+import de.dafuqs.spectrum.entity.render.EggLayingWoolyPigEntityRenderer;
+import de.dafuqs.spectrum.entity.render.EraserEntityRenderer;
+import de.dafuqs.spectrum.entity.render.FloatBlockEntityRenderer;
+import de.dafuqs.spectrum.entity.render.GlassArrowEntityRenderer;
+import de.dafuqs.spectrum.entity.render.KindlingCoughEntityRenderer;
+import de.dafuqs.spectrum.entity.render.KindlingEntityRenderer;
+import de.dafuqs.spectrum.entity.render.LagoonFishingBobberEntityRenderer;
+import de.dafuqs.spectrum.entity.render.LightMineEntityRenderer;
+import de.dafuqs.spectrum.entity.render.LightShardEntityRenderer;
+import de.dafuqs.spectrum.entity.render.LightSpearEntityRenderer;
+import de.dafuqs.spectrum.entity.render.LizardEntityRenderer;
+import de.dafuqs.spectrum.entity.render.MagicProjectileEntityRenderer;
+import de.dafuqs.spectrum.entity.render.MoltenFishingBobberEntityRenderer;
+import de.dafuqs.spectrum.entity.render.PhantomFrameEntityRenderer;
+import de.dafuqs.spectrum.entity.render.PreservationTurretEntityRenderer;
+import de.dafuqs.spectrum.entity.render.SeatEntityRenderer;
+import de.dafuqs.spectrum.entity.render.ShootingStarEntityRenderer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.ItemEntityRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 
 @Environment(EnvType.CLIENT)
 public class SpectrumEntityRenderers {

@@ -1,19 +1,28 @@
 package de.dafuqs.spectrum.progression.advancement;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.item.InkPoweredPotionFillable;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.MobEffectsPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class PotionWorkshopBrewingCriterion extends SimpleCriterionTrigger<PotionWorkshopBrewingCriterion.Conditions> {
 	

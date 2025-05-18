@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.api.item;
 
-import com.google.common.collect.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.block.entity.*;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.entity.BannerPattern;
 
-import java.util.*;
+import java.util.List;
 
 public interface LoomPatternProvider {
 	

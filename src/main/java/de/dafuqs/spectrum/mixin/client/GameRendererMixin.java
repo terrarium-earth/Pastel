@@ -1,16 +1,17 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.llamalad7.mixinextras.injector.*;
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.deeper_down.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.client.*;
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.world.entity.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.deeper_down.DimensionRenderEffects;
+import de.dafuqs.spectrum.registries.SpectrumDimensions;
+import de.dafuqs.spectrum.registries.client.SpectrumShaders;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.world.entity.LivingEntity;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = GameRenderer.class, priority = 9999)
 public abstract class GameRendererMixin {

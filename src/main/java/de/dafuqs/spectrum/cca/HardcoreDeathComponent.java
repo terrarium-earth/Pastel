@@ -1,17 +1,24 @@
 package de.dafuqs.spectrum.cca;
 
-import com.mojang.authlib.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.nbt.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
-import org.ladysnake.cca.api.v3.component.*;
+import com.mojang.authlib.GameProfile;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameType;
+import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.Component;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class HardcoreDeathComponent implements Component {
 	

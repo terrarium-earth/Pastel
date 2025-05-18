@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.networking.c2s_payloads;
 
-import de.dafuqs.spectrum.blocks.particle_spawner.*;
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.networking.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
-import net.minecraft.server.level.*;
+import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerBlockEntity;
+import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerConfiguration;
+import de.dafuqs.spectrum.inventories.ParticleSpawnerScreenHandler;
+import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import de.dafuqs.spectrum.networking.s2c_payloads.ParticleSpawnerConfigurationS2CPayload;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 
 public record ParticleSpawnerConfigurationC2SPayload(
         ParticleSpawnerConfiguration configuration) implements CustomPacketPayload {

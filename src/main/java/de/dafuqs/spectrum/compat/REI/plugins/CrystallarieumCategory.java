@@ -1,22 +1,27 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.recipe.crystallarieum.*;
-import de.dafuqs.spectrum.registries.*;
-import me.shedaniel.math.*;
-import me.shedaniel.rei.api.client.gui.*;
-import me.shedaniel.rei.api.client.gui.widgets.*;
-import me.shedaniel.rei.api.common.category.*;
-import me.shedaniel.rei.api.common.entry.*;
-import me.shedaniel.rei.api.common.util.*;
-import net.fabricmc.api.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
+import de.dafuqs.spectrum.recipe.crystallarieum.CrystallarieumCatalyst;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import me.shedaniel.math.Point;
+import me.shedaniel.math.Rectangle;
+import me.shedaniel.rei.api.client.gui.Renderer;
+import me.shedaniel.rei.api.client.gui.widgets.Widget;
+import me.shedaniel.rei.api.client.gui.widgets.Widgets;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumDisplay> {

@@ -1,11 +1,14 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.items.bundles.*;
-import net.minecraft.core.component.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import de.dafuqs.spectrum.items.bundles.ExtendedBundleItem;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.BundleItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BundleContents;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(BundleItem.class)
 public class BundleItemMixin {

@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
-import com.mojang.serialization.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class SpectrumLineFacingBlock extends SpectrumFacingBlock {
 

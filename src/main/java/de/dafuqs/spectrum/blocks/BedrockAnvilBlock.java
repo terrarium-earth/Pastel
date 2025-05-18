@@ -1,20 +1,23 @@
 package de.dafuqs.spectrum.blocks;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.inventories.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.inventories.BedrockAnvilScreenHandler;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AnvilBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class BedrockAnvilBlock extends AnvilBlock {
 

@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.entity.render;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.entity.models.*;
-import de.dafuqs.spectrum.entity.variants.*;
-import de.dafuqs.spectrum.registries.client.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.entity.layers.*;
-import net.minecraft.resources.*;
-import org.jetbrains.annotations.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.entity.KindlingEntity;
+import de.dafuqs.spectrum.entity.models.KindlingEntityModel;
+import de.dafuqs.spectrum.entity.variants.KindlingVariant;
+import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.SaddleLayer;
+import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
 public class KindlingEntityRenderer extends MobRenderer<KindlingEntity, KindlingEntityModel> {

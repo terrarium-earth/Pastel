@@ -1,7 +1,8 @@
 package de.dafuqs.spectrum.items.food.beverages;
 
-import de.dafuqs.spectrum.items.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.items.ItemWithTooltip;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 
 public class EvernectarItem extends ItemWithTooltip {
 

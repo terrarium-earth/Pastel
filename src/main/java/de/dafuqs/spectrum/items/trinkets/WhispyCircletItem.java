@@ -1,23 +1,32 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.stats.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import com.google.common.collect.Multimap;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
+import dev.emi.trinkets.api.SlotReference;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class WhispyCircletItem extends SpectrumTrinketItem {
 	

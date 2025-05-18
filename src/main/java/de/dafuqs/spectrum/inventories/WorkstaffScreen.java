@@ -1,17 +1,22 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.items.tools.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.minecraft.client.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.items.tools.GlassCrestWorkstaffItem;
+import de.dafuqs.spectrum.items.tools.WorkstaffItem;
+import de.dafuqs.spectrum.networking.c2s_payloads.WorkstaffToggleSelectedPayload;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 @Environment(EnvType.CLIENT)
 public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHandler> {

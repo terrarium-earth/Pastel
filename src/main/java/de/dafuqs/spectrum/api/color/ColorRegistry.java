@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.color;
 
-import de.dafuqs.spectrum.api.energy.color.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
 
-import java.util.*;
+import java.util.Optional;
 
 public abstract class ColorRegistry<T> {
 	

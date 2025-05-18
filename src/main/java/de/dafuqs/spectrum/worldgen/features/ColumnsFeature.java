@@ -1,17 +1,22 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.levelgen.feature.*;
-import org.jetbrains.annotations.*;
+import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.registries.SpectrumBlockTags;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Iterator;
 
 /**
  * a BasaltColumnsFeature with configurable block state

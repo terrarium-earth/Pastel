@@ -1,10 +1,13 @@
 package de.dafuqs.spectrum.api.energy.storage;
 
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import net.minecraft.network.chat.*;
+import de.dafuqs.spectrum.api.energy.InkStorage;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import net.minecraft.network.chat.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CreativeInkStorage implements InkStorage {
 	

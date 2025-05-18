@@ -1,15 +1,17 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.emi.*;
-import de.dafuqs.spectrum.recipe.anvil_crushing.*;
-import dev.emi.emi.api.render.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.TextWidget.*;
-import dev.emi.emi.api.widget.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.emi.GatedSpectrumEmiRecipe;
+import de.dafuqs.spectrum.compat.emi.SpectrumEmiRecipeCategories;
+import de.dafuqs.spectrum.recipe.anvil_crushing.AnvilCrushingRecipe;
+import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget.Alignment;
+import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 
 public class AnvilCrushingEmiRecipeGated extends GatedSpectrumEmiRecipe<AnvilCrushingRecipe> {
 	private final static ResourceLocation WALL_TEXTURE = SpectrumCommon.locate("textures/gui/container/anvil_crushing.png");

@@ -1,19 +1,20 @@
 package de.dafuqs.spectrum.networking.c2s_payloads;
 
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.networking.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.inventory.*;
+import de.dafuqs.spectrum.api.block.InkColorSelectedPacketReceiver;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import de.dafuqs.spectrum.networking.s2c_payloads.InkColorSelectedS2CPayload;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 
-import java.util.*;
+import java.util.Optional;
 
 public record InkColorSelectedC2SPayload(Optional<Holder<InkColor>> inkColor) implements CustomPacketPayload {
 	

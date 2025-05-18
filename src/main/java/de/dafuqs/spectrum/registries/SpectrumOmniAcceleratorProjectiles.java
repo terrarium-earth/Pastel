@@ -1,19 +1,32 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.blocks.shooting_star.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import net.minecraft.sounds.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.entity.projectile.windcharge.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.api.interaction.OmniAcceleratorProjectile;
+import de.dafuqs.spectrum.blocks.shooting_star.ShootingStarItem;
+import de.dafuqs.spectrum.entity.entity.BlockFlooderProjectile;
+import de.dafuqs.spectrum.entity.entity.ShootingStarEntity;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.entity.projectile.ThrownEgg;
+import net.minecraft.world.entity.projectile.ThrownEnderpearl;
+import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.entity.projectile.windcharge.WindCharge;
+import net.minecraft.world.item.ArrowItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.Vec3;
 
 public class SpectrumOmniAcceleratorProjectiles {
 	

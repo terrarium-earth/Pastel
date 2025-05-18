@@ -1,22 +1,34 @@
 package de.dafuqs.spectrum.progression;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.progression.toast.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import de.dafuqs.spectrum.registries.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.recipe.GatedRecipe;
+import de.dafuqs.spectrum.progression.toast.MessageToast;
+import de.dafuqs.spectrum.progression.toast.UnlockedRecipeToast;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipe;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
+import it.unimi.dsi.fastutil.objects.ObjectArraySet;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 @Environment(EnvType.CLIENT)
 public class UnlockToastManager {

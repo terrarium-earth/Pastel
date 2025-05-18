@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.items.food;
 
-import de.dafuqs.spectrum.items.trinkets.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.items.trinkets.WhispyCircletItem;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.List;
 
 public class StarCandyItem extends Item {
 	

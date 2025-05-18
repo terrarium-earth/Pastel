@@ -1,28 +1,35 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
-import com.google.common.collect.*;
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.enchanter.*;
-import de.dafuqs.spectrum.compat.emi.*;
-import de.dafuqs.spectrum.compat.emi.widgets.*;
-import de.dafuqs.spectrum.items.magic_items.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.recipe.enchanter.*;
-import de.dafuqs.spectrum.registries.*;
-import dev.emi.emi.api.recipe.*;
-import dev.emi.emi.api.render.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.*;
-import net.minecraft.client.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
+import com.google.common.collect.Lists;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.enchanter.EnchanterBlockEntity;
+import de.dafuqs.spectrum.compat.emi.GatedSpectrumEmiRecipe;
+import de.dafuqs.spectrum.compat.emi.widgets.DynamicStackWidget;
+import de.dafuqs.spectrum.compat.emi.widgets.DynamicTextWidget;
+import de.dafuqs.spectrum.compat.emi.widgets.SaneButtonWidget;
+import de.dafuqs.spectrum.items.magic_items.KnowledgeGemItem;
+import de.dafuqs.spectrum.recipe.GatedSpectrumRecipe;
+import de.dafuqs.spectrum.recipe.RecipeScaling;
+import de.dafuqs.spectrum.recipe.enchanter.EnchantmentUpgradeRecipe;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectrumRecipe<?>> {
 	

@@ -1,24 +1,27 @@
 package de.dafuqs.spectrum.blocks.geology;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.blocks.conditional.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.blocks.conditional.CloakedOreBlock;
+import de.dafuqs.spectrum.helpers.ParticleHelper;
+import de.dafuqs.spectrum.mixin.accessors.ExperienceDroppingBlockAccessor;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleAroundBlockSidesPayload;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 public class ShimmerstoneOreBlock extends CloakedOreBlock {
 	

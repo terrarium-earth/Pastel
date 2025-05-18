@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.blocks.enchanter;
 
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.*;
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.blockentity.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.core.*;
-import net.minecraft.world.item.*;
-import org.joml.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import org.joml.Math;
 
 public class EnchanterBlockEntityRenderer implements BlockEntityRenderer<EnchanterBlockEntity> {

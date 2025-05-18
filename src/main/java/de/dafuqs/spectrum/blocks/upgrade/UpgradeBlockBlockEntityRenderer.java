@@ -1,17 +1,25 @@
 package de.dafuqs.spectrum.blocks.upgrade;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.model.geom.*;
-import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.blockentity.*;
-import net.minecraft.client.resources.model.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import org.jetbrains.annotations.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.NotNull;
 
 @Environment(EnvType.CLIENT)
 public class UpgradeBlockBlockEntityRenderer<PedestalUpgradeBlockEntity extends BlockEntity> implements BlockEntityRenderer<PedestalUpgradeBlockEntity> {

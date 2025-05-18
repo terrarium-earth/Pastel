@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class TimeHelper {
 	

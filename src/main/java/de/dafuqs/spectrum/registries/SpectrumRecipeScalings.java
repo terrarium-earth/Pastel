@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.recipe.*;
-import net.minecraft.core.*;
+import de.dafuqs.spectrum.recipe.RecipeScaling;
+import net.minecraft.core.Registry;
 
 public class SpectrumRecipeScalings {
 	

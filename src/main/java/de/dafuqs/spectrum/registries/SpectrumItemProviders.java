@@ -1,15 +1,19 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.blocks.bottomless_bundle.*;
-import net.minecraft.core.component.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.interaction.ItemProvider;
+import de.dafuqs.spectrum.api.interaction.ItemProviderRegistry;
+import de.dafuqs.spectrum.blocks.bottomless_bundle.BottomlessBundleItem;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.ItemContainerContents;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.function.BiFunction;
 
 public class SpectrumItemProviders {
 	

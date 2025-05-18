@@ -1,21 +1,26 @@
 package de.dafuqs.spectrum.items.armor;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.registries.client.*;
-import de.dafuqs.spectrum.render.armor.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.item.Preenchanted;
+import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
+import de.dafuqs.spectrum.render.armor.BedrockArmorModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Map;
 
 public class BedrockArmorItem extends ArmorItem implements Preenchanted {
     @Environment(EnvType.CLIENT)

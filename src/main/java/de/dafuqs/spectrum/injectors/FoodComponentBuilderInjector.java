@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.injectors;
 
-import net.minecraft.world.food.*;
-import org.apache.commons.lang3.*;
+import net.minecraft.world.food.FoodProperties;
+import org.apache.commons.lang3.NotImplementedException;
 
 public interface FoodComponentBuilderInjector {
 	

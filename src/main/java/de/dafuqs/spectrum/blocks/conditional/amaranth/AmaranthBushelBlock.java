@@ -1,21 +1,24 @@
 package de.dafuqs.spectrum.blocks.conditional.amaranth;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.revelationary.api.revelations.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.client.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.revelationary.api.revelations.RevelationAware;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import de.dafuqs.spectrum.registries.client.SpectrumColorProviders;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class AmaranthBushelBlock extends FlowerBlock implements RevelationAware {
 

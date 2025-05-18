@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.recipe.fluid_converting.*;
-import me.shedaniel.rei.api.common.category.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
+import de.dafuqs.spectrum.recipe.fluid_converting.LiquidCrystalConvertingRecipe;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 public class LiquidCrystalConvertingDisplay extends FluidConvertingDisplay {
 	

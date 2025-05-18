@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.compat.exclusions_lib;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.compat.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.levelgen.blockpredicates.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
 
 /**
  * Loaded when Exclusions Lib is *not* present

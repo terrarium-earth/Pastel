@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.entity.render;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.items.tools.*;
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.phys.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import de.dafuqs.spectrum.entity.entity.SpectrumFishingBobberEntity;
+import de.dafuqs.spectrum.items.tools.SpectrumFishingRodItem;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class SpectrumFishingBobberEntityRenderer extends EntityRenderer<SpectrumFishingBobberEntity> {
 	

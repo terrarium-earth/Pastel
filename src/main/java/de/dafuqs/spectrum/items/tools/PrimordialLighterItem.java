@@ -1,26 +1,32 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.blocks.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.advancements.*;
-import net.minecraft.core.*;
-import net.minecraft.core.dispenser.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.gameevent.*;
+import de.dafuqs.spectrum.api.item.CreativeOnlyItem;
+import de.dafuqs.spectrum.blocks.PrimordialFireBlock;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.ChatFormatting;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FlintAndSteelItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 
-import java.util.*;
+import java.util.List;
 
 public class PrimordialLighterItem extends FlintAndSteelItem implements CreativeOnlyItem {
 	

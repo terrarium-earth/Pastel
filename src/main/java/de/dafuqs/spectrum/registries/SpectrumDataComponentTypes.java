@@ -1,21 +1,39 @@
 package de.dafuqs.spectrum.registries;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.bottomless_bundle.*;
-import de.dafuqs.spectrum.components.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.enchantment.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.blocks.bottomless_bundle.BottomlessBundleItem;
+import de.dafuqs.spectrum.components.BeverageComponent;
+import de.dafuqs.spectrum.components.CustomPotionDataComponent;
+import de.dafuqs.spectrum.components.EnderSpliceComponent;
+import de.dafuqs.spectrum.components.ExtendedBundleComponent;
+import de.dafuqs.spectrum.components.InertiaComponent;
+import de.dafuqs.spectrum.components.InfusedBeverageComponent;
+import de.dafuqs.spectrum.components.InkPoweredComponent;
+import de.dafuqs.spectrum.components.InkStorageComponent;
+import de.dafuqs.spectrum.components.JadeWineComponent;
+import de.dafuqs.spectrum.components.MemoryComponent;
+import de.dafuqs.spectrum.components.PairedFoodComponent;
+import de.dafuqs.spectrum.components.PairedItemComponent;
+import de.dafuqs.spectrum.components.ShootingStarComponent;
+import de.dafuqs.spectrum.components.WithMilkComponent;
+import de.dafuqs.spectrum.components.WorkstaffComponent;
+import de.dafuqs.spectrum.components.WrappedPresentComponent;
+import net.minecraft.core.GlobalPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Unit;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.UUID;
+import java.util.function.UnaryOperator;
 
 @SuppressWarnings("unused")
 public class SpectrumDataComponentTypes {

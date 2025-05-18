@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.helpers;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import net.minecraft.nbt.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 
 // TODO: migrate to net.minecraft.world.tick ?
 public final class TickLooper {

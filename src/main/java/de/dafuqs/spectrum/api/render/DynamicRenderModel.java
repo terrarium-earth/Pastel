@@ -1,18 +1,25 @@
 package de.dafuqs.spectrum.api.render;
 
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.renderer.v1.model.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.renderer.block.model.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.client.resources.model.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.ModelBaker;
+import net.minecraft.client.resources.model.ModelState;
+import net.minecraft.client.resources.model.UnbakedModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
 
 @Environment(EnvType.CLIENT)
 public class DynamicRenderModel extends ForwardingBakedModel implements UnbakedModel {

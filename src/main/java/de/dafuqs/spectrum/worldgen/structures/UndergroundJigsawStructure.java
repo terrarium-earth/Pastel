@@ -1,24 +1,33 @@
 package de.dafuqs.spectrum.worldgen.structures;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.chunk.*;
-import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.heightproviders.*;
-import net.minecraft.world.level.levelgen.structure.*;
-import net.minecraft.world.level.levelgen.structure.pools.*;
-import net.minecraft.world.level.levelgen.structure.pools.alias.*;
-import net.minecraft.world.level.levelgen.structure.structures.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.registries.SpectrumStructureTypes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.NoiseColumn;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.RandomState;
+import net.minecraft.world.level.levelgen.WorldGenerationContext;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
+import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
+import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * A Jigsaw Structure that has more control over where it can be placed (VerticalPlacement)

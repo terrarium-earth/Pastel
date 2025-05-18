@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
-import net.minecraft.world.level.levelgen.placement.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public record RandomBlockProximityPatchFeatureConfig(Integer tries, Integer xzSpread, Integer ySpread,
 													 HolderSet<Block> blocksToCheckFor, Integer blockScanRange,

@@ -1,16 +1,27 @@
 package de.dafuqs.spectrum.recipe.crafting.dynamic;
 
-import de.dafuqs.spectrum.blocks.present.*;
-import de.dafuqs.spectrum.items.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.blocks.present.PresentBlock;
+import de.dafuqs.spectrum.blocks.present.PresentBlockItem;
+import de.dafuqs.spectrum.items.PigmentItem;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WrapPresentRecipe extends CustomRecipe {
 	

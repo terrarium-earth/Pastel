@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.deeper_down.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.deeper_down.DeeperDownDimensionEffects;
+import de.dafuqs.spectrum.mixin.accessors.DimensionEffectsAccessor;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 
 public class SpectrumDimensions {
 	

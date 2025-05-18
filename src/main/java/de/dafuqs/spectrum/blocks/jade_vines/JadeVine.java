@@ -1,19 +1,20 @@
 package de.dafuqs.spectrum.blocks.jade_vines;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.properties.*;
-import net.minecraft.world.phys.*;
-import net.minecraft.world.phys.shapes.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.helpers.TimeHelper;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import de.dafuqs.spectrum.particle.effect.ColoredFallingSporeBlossomParticleEffect;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 public interface JadeVine {
 	

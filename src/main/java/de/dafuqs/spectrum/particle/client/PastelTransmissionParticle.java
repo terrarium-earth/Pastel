@@ -1,24 +1,30 @@
 package de.dafuqs.spectrum.particle.client;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.render.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import de.dafuqs.spectrum.particle.render.EarlyRenderingParticle;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Camera;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.gameevent.BlockPositionSource;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class PastelTransmissionParticle extends TransmissionParticle implements EarlyRenderingParticle {

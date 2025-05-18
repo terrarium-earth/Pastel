@@ -1,17 +1,23 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.deeper_down.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.util.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.deeper_down.HowlingSpireEffects;
+import de.dafuqs.spectrum.registries.SpectrumBiomes;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 public class FallingAshParticle extends TextureSheetParticle {
 	

@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.helpers;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.*;
-import net.minecraft.util.*;
-import net.minecraft.util.random.*;
+import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Codec;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.random.WeightedEntry;
+import net.minecraft.util.random.WeightedRandom;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Zoink. Fuck you mojang.

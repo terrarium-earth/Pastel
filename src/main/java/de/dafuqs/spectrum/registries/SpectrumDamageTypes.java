@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.api.damage_type.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.spells.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.damage_type.StackTracking;
+import de.dafuqs.spectrum.entity.entity.InkProjectileEntity;
+import de.dafuqs.spectrum.spells.MoonstoneStrike;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumCommon.locate;
 
 // Damage Types handle the logic of how the damage behaves, determined via tag
 // Damage Sources decide how death messages are handled

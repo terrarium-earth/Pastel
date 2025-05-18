@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
-import com.mojang.serialization.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LightBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class DecayingLightBlock extends WandLightBlock {
 

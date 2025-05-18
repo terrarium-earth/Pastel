@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
-import com.mojang.serialization.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.entity.*;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.entity.EntityTypeTest;
 
-import java.util.*;
+import java.util.List;
 
 public class EntityDetectorBlock extends DetectorBlock {
 

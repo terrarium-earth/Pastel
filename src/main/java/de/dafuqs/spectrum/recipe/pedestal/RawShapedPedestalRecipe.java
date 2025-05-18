@@ -1,19 +1,24 @@
 package de.dafuqs.spectrum.recipe.pedestal;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import it.unimi.dsi.fastutil.chars.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import it.unimi.dsi.fastutil.chars.CharArraySet;
+import it.unimi.dsi.fastutil.chars.CharSet;
+import net.minecraft.Util;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 
 public class RawShapedPedestalRecipe {
 	public static final MapCodec<RawShapedPedestalRecipe> CODEC = RawShapedPedestalRecipe.Data.CODEC.flatXmap(

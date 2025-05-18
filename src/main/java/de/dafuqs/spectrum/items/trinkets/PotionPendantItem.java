@@ -1,19 +1,21 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.item.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.api.energy.InkPowered;
+import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
+import de.dafuqs.spectrum.api.item.InkPoweredPotionFillable;
+import dev.emi.trinkets.api.SlotReference;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.List;
 
 public class PotionPendantItem extends SpectrumTrinketItem implements InkPoweredPotionFillable {
 	

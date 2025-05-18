@@ -1,30 +1,42 @@
 package de.dafuqs.spectrum.api.interaction;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.claims.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.claims.GenericClaimModsCompat;
+import de.dafuqs.spectrum.entity.entity.ItemProjectileEntity;
+import de.dafuqs.spectrum.registries.SpectrumItemTags;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.DirectionalPlaceContext;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface ItemProjectileBehavior {
 	

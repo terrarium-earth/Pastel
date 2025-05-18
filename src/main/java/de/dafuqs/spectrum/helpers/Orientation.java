@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.minecraft.util.*;
-import net.minecraft.world.phys.*;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * NOTE: Longitude is on the XZ plane. Latitude is on the radius-Y plane.

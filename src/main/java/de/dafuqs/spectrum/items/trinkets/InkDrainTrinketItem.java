@@ -1,22 +1,27 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.energy.storage.*;
-import de.dafuqs.spectrum.api.render.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.energy.InkStorage;
+import de.dafuqs.spectrum.api.energy.InkStorageItem;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.storage.FixedSingleInkStorage;
+import de.dafuqs.spectrum.api.render.ExtendedItemBarProvider;
+import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
+import de.dafuqs.spectrum.components.InkStorageComponent;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.TooltipFlag;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class InkDrainTrinketItem extends SpectrumTrinketItem implements InkStorageItem<FixedSingleInkStorage>, ExtendedItemBarProvider, SlotBackgroundEffectProvider {
 	

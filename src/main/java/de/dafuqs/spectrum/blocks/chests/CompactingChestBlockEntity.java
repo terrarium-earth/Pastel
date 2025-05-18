@@ -1,27 +1,44 @@
 package de.dafuqs.spectrum.blocks.chests;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.screenhandler.v1.*;
-import net.fabricmc.fabric.api.transfer.v1.item.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
+import de.dafuqs.spectrum.helpers.InventoryHelper;
+import de.dafuqs.spectrum.inventories.AutoCraftingMode;
+import de.dafuqs.spectrum.inventories.CompactingChestScreenHandler;
+import de.dafuqs.spectrum.networking.c2s_payloads.ChangeCompactingChestSettingsPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.CompactingChestStatusUpdatePayload;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class CompactingChestBlockEntity extends SpectrumChestBlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {
 	

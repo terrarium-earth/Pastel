@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.blocks.pedestal;
 
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.api.block.PedestalVariant;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.world.level.block.Block;
 
 public enum BuiltinPedestalVariant implements PedestalVariant {
 	BASIC_TOPAZ(PedestalRecipeTier.BASIC),

@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
-import de.dafuqs.spectrum.compat.emi.*;
-import dev.emi.emi.api.recipe.*;
-import dev.emi.emi.api.render.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.compat.emi.SpectrumEmiRecipe;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.List;
 
 public class BlockToBlockWithChanceEmiRecipe extends SpectrumEmiRecipe {
 	

@@ -1,19 +1,21 @@
 package de.dafuqs.spectrum.compat.botania;
 
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.item.*;
-import vazkii.botania.api.item.*;
-import vazkii.botania.api.mana.*;
-import vazkii.botania.common.handler.*;
-import vazkii.botania.common.helper.*;
-import vazkii.botania.network.*;
-import vazkii.botania.network.clientbound.*;
-import vazkii.botania.xplat.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import vazkii.botania.api.item.ManaDissolvable;
+import vazkii.botania.api.mana.ManaPool;
+import vazkii.botania.common.handler.BotaniaSounds;
+import vazkii.botania.common.helper.EntityHelper;
+import vazkii.botania.network.EffectType;
+import vazkii.botania.network.clientbound.BotaniaEffectPacket;
+import vazkii.botania.xplat.XplatAbstractions;
 
-import java.util.*;
+import java.util.List;
 
 public class BlackestLotusItem extends Item implements ManaDissolvable {
 	

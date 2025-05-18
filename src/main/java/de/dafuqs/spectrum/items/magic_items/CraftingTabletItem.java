@@ -1,28 +1,40 @@
 package de.dafuqs.spectrum.items.magic_items;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.items.tooltip.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.minecraft.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.inventory.tooltip.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.entity.*;
+import de.dafuqs.spectrum.api.item.LoomPatternProvider;
+import de.dafuqs.spectrum.helpers.InventoryHelper;
+import de.dafuqs.spectrum.inventories.CraftingTabletScreenHandler;
+import de.dafuqs.spectrum.items.tooltip.CraftingTabletTooltipData;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipe;
+import de.dafuqs.spectrum.registries.SpectrumBannerPatterns;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Container;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BannerPattern;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class CraftingTabletItem extends Item implements LoomPatternProvider {
 	

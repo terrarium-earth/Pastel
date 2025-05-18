@@ -1,19 +1,23 @@
 package de.dafuqs.spectrum.inventories.widgets;
 
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.energy.storage.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.components.*;
-import net.minecraft.client.gui.components.events.*;
-import net.minecraft.client.gui.narration.*;
-import net.minecraft.client.gui.screens.*;
-import net.minecraft.network.chat.*;
+import de.dafuqs.spectrum.api.energy.InkStorageBlockEntity;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.storage.IndividualCappedInkStorage;
+import de.dafuqs.spectrum.helpers.RenderHelper;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarratableEntry;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class InkMeterWidget implements Renderable, GuiEventListener, NarratableEntry {

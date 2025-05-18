@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.blocks.spirit_sallow;
 
-import net.minecraft.client.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.synth.*;
-import net.minecraft.world.phys.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.synth.SimplexNoise;
+import net.minecraft.world.phys.Vec3;
 
 public class WindStrength {
 	

@@ -1,23 +1,29 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.items.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.components.*;
-import net.minecraft.client.gui.components.events.*;
-import net.minecraft.client.gui.screens.inventory.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import org.lwjgl.glfw.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.LoreHelper;
+import de.dafuqs.spectrum.items.PigmentItem;
+import de.dafuqs.spectrum.networking.c2s_payloads.AddLoreBedrockAnvilPayload;
+import de.dafuqs.spectrum.networking.c2s_payloads.RenameItemInBedrockAnvilPayload;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.inventory.ItemCombinerScreen;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.AnvilMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
 public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHandler> {

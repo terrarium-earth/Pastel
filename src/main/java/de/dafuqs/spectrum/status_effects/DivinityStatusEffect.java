@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import de.dafuqs.spectrum.progression.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.helpers.ParticleHelper;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
+import de.dafuqs.spectrum.particle.VectorPattern;
+import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
+import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 public class DivinityStatusEffect extends MobEffect {
 	

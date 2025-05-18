@@ -1,12 +1,44 @@
 package de.dafuqs.spectrum.networking;
 
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
+import de.dafuqs.spectrum.networking.s2c_payloads.BlackHoleChestStatusUpdatePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.ColorTransmissionPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.CompactingChestStatusUpdatePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.FabricationChestStatusUpdatePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.InkColorSelectedS2CPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.MoonstoneBlastPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.ParticleSpawnerConfigurationS2CPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PastelNetworkRemovedPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PastelTransmissionPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayAscensionAppliedEffectsPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayBlockBoundSoundInstancePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayFusionCraftingFinishedParticlePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayFusionCraftingInProgressParticlePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayMemoryManifestingParticlesPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleAroundBlockSidesPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithPatternAndVelocityPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayPedestalCraftingFinishedParticlePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayPedestalStartCraftingParticlePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayPedestalUpgradedParticlePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayPresentOpeningParticlesPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayShootingStarParticlesPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayTakeOffBeltSoundInstancePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.StartSkyLerpingPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.SyncArtisansAtlasPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.SyncMentalPresencePayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.TypedTransmissionPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.UpdateBlockEntityInkPayload;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 public class SpectrumS2CPackets {
 	

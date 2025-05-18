@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.klikli_dev.modonomicon.book.*;
-import com.klikli_dev.modonomicon.book.page.*;
-import com.klikli_dev.modonomicon.client.gui.book.entry.*;
-import com.klikli_dev.modonomicon.client.render.page.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import net.minecraft.client.gui.*;
+import com.klikli_dev.modonomicon.book.BookTextHolder;
+import com.klikli_dev.modonomicon.book.page.BookRecipePage;
+import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
+import com.klikli_dev.modonomicon.client.render.page.BookRecipePageRenderer;
+import de.dafuqs.spectrum.api.recipe.GatedRecipe;
+import net.minecraft.client.gui.GuiGraphics;
 
 public abstract class BookGatedRecipePageRenderer<R extends GatedRecipe<?>, T extends BookRecipePage<R>> extends BookRecipePageRenderer<R, T> {
 

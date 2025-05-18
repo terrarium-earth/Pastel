@@ -1,14 +1,15 @@
 package de.dafuqs.spectrum.blocks.redstone;
 
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
+import de.dafuqs.spectrum.api.block.PlayerOwned;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.UUID;
 
 public class BlockBreakerBlockEntity extends BlockEntity implements PlayerOwned {
 	

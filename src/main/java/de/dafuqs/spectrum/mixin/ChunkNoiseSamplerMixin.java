@@ -1,14 +1,23 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.deeper_down.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.NoiseChunk.*;
-import net.minecraft.world.level.levelgen.blending.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.google.common.collect.ImmutableList;
+import de.dafuqs.spectrum.deeper_down.DDOreVeinSampler;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.world.level.levelgen.Aquifer;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.DensityFunctions;
+import net.minecraft.world.level.levelgen.NoiseChunk;
+import net.minecraft.world.level.levelgen.NoiseChunk.BlockStateFiller;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.level.levelgen.NoiseRouter;
+import net.minecraft.world.level.levelgen.NoiseSettings;
+import net.minecraft.world.level.levelgen.RandomState;
+import net.minecraft.world.level.levelgen.blending.Blender;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(NoiseChunk.class)
 public abstract class ChunkNoiseSamplerMixin {

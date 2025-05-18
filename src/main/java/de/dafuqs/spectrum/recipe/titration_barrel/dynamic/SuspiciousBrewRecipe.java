@@ -1,30 +1,43 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.recipe.titration_barrel.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.transfer.v1.fluid.*;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.material.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.components.BeverageComponent;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.helpers.TimeHelper;
+import de.dafuqs.spectrum.recipe.StorageRecipeInput;
+import de.dafuqs.spectrum.recipe.titration_barrel.FermentationData;
+import de.dafuqs.spectrum.recipe.titration_barrel.TitrationBarrelRecipe;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.Container;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.component.SuspiciousStewEffects;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.SuspiciousEffectHolder;
+import net.minecraft.world.level.material.Fluids;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 	

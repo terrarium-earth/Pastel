@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.particle;
 
-import de.dafuqs.spectrum.helpers.*;
-import io.netty.buffer.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.List;
 
 public enum VectorPattern {
 	

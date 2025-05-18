@@ -1,19 +1,27 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.additionalentityattributes.*;
-import de.dafuqs.spectrum.api.render.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
+import de.dafuqs.spectrum.api.render.ExtendedItemBarProvider;
+import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class ParryingSwordItem extends SwordItem implements ExtendedItemBarProvider {
 

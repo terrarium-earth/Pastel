@@ -1,13 +1,17 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.cca.azure_dike.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.cca.azure_dike.AzureDikeComponent;
+import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
+import de.dafuqs.spectrum.cca.azure_dike.DefaultAzureDikeComponent;
+import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.TrinketComponent;
+import dev.emi.trinkets.api.TrinketsApi;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.Optional;
 
 public interface AzureDikeItem {
 	

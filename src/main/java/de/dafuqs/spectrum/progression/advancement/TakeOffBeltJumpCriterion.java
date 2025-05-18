@@ -1,18 +1,24 @@
 package de.dafuqs.spectrum.progression.advancement;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.items.trinkets.*;
-import de.dafuqs.spectrum.registries.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.items.trinkets.TakeOffBeltItem;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.TrinketComponent;
+import dev.emi.trinkets.api.TrinketsApi;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBeltJumpCriterion.Conditions> {
 	

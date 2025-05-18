@@ -1,19 +1,23 @@
 package de.dafuqs.spectrum.data_loaders.resonance_processors;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.api.predicate.block.*;
-import net.minecraft.core.component.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.block.state.properties.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.interaction.ResonanceProcessor;
+import de.dafuqs.spectrum.api.predicate.block.BrokenBlockPredicate;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DropSelfResonanceProcessor extends ResonanceProcessor {
 	

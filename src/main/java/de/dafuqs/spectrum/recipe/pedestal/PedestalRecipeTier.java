@@ -1,19 +1,22 @@
 package de.dafuqs.spectrum.recipe.pedestal;
 
-import com.mojang.serialization.*;
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import io.netty.buffer.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.api.item.GemstoneColor;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import de.dafuqs.spectrum.registries.SpectrumMultiblocks;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Optional;
 
 public enum PedestalRecipeTier implements StringRepresentable {
 	BASIC(SpectrumAdvancements.PLACED_PEDESTAL, new GemstoneColor[]{BuiltinGemstoneColor.CYAN, BuiltinGemstoneColor.MAGENTA, BuiltinGemstoneColor.YELLOW}),

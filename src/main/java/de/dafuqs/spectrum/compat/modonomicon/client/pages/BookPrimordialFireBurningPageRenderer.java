@@ -1,15 +1,16 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import de.dafuqs.spectrum.recipe.primordial_fire_burning.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookGatedRecipePage;
+import de.dafuqs.spectrum.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
 
 public class BookPrimordialFireBurningPageRenderer<R extends PrimordialFireBurningRecipe, T extends BookGatedRecipePage<R>> extends BookGatedRecipePageRenderer<R, T> {
 	

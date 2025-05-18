@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.minecraft.client.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.player.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.networking.c2s_payloads.InkColorSelectedC2SPayload;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Inventory;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreenHandler> {

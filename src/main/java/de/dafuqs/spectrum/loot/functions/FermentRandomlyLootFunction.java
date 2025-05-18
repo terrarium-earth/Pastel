@@ -1,25 +1,29 @@
 package de.dafuqs.spectrum.loot.functions;
 
-import com.mojang.datafixers.util.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.loot.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import de.dafuqs.spectrum.recipe.titration_barrel.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.biome.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.functions.*;
-import net.minecraft.world.level.storage.loot.parameters.*;
-import net.minecraft.world.level.storage.loot.predicates.*;
-import net.minecraft.world.level.storage.loot.providers.number.*;
-import org.jetbrains.annotations.*;
+import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.TimeHelper;
+import de.dafuqs.spectrum.loot.SpectrumLootFunctionTypes;
+import de.dafuqs.spectrum.mixin.accessors.BiomeAccessor;
+import de.dafuqs.spectrum.recipe.titration_barrel.FermentationData;
+import de.dafuqs.spectrum.recipe.titration_barrel.TitrationBarrelRecipe;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 public class FermentRandomlyLootFunction extends LootItemConditionalFunction {
 	

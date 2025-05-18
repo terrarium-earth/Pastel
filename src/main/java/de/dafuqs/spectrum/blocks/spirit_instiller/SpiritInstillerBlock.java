@@ -1,25 +1,34 @@
 package de.dafuqs.spectrum.blocks.spirit_instiller;
 
-import com.klikli_dev.modonomicon.api.multiblock.*;
-import com.klikli_dev.modonomicon.client.render.*;
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.blocks.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.progression.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
-import net.minecraft.world.phys.shapes.*;
-import org.jetbrains.annotations.*;
+import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
+import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.blocks.InWorldInteractionBlock;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import de.dafuqs.spectrum.registries.SpectrumMultiblocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SpiritInstillerBlock extends InWorldInteractionBlock {
 

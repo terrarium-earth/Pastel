@@ -1,16 +1,20 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.inventories.slots.*;
-import net.fabricmc.fabric.api.transfer.v1.item.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.api.block.FilterConfigurable;
+import de.dafuqs.spectrum.inventories.slots.ShadowSlot;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-import java.util.function.*;
+import java.util.function.Function;
 
 public class FilteringScreenHandler extends AbstractContainerMenu {
 

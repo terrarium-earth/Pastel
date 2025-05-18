@@ -1,15 +1,18 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
-import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import org.jgrapht.*;
-import org.jgrapht.graph.*;
+import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.Level;
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class PastelNetwork<W extends Level> {
 	

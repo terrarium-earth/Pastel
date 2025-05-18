@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import net.minecraft.resources.ResourceLocation;
 
 public interface ColoredTree {
 	

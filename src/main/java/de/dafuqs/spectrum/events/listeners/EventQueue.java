@@ -1,12 +1,17 @@
 package de.dafuqs.spectrum.events.listeners;
 
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.gameevent.GameEventListener;
+import net.minecraft.world.level.gameevent.PositionSource;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Optional;
 
 public abstract class EventQueue<D> implements GameEventListener {
 	

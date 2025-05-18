@@ -1,12 +1,18 @@
 package de.dafuqs.spectrum.api.energy.storage;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import net.fabricmc.api.*;
-import net.minecraft.network.chat.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColorMixes;
+import de.dafuqs.spectrum.api.energy.color.InkColorTags;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.network.chat.Component;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import static de.dafuqs.spectrum.helpers.Support.*;
+import static de.dafuqs.spectrum.helpers.Support.getShortenedNumberString;
 
 public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage {
 	

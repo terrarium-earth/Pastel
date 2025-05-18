@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.items.food;
 
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
-import java.util.*;
+import java.util.List;
 
 public class MoonstruckNectarItem extends DrinkItem {
 	

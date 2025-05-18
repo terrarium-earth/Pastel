@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.levelgen.feature.*;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderSet;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 public class RandomBlockProximityPatchFeature extends Feature<RandomBlockProximityPatchFeatureConfig> {
 	

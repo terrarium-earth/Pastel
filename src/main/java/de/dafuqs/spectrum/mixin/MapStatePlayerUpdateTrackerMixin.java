@@ -1,19 +1,25 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.sugar.*;
-import de.dafuqs.spectrum.items.map.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import net.minecraft.network.protocol.*;
-import net.minecraft.network.protocol.common.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.saveddata.maps.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.sugar.Local;
+import de.dafuqs.spectrum.items.map.ArtisansAtlasState;
+import de.dafuqs.spectrum.networking.s2c_payloads.SyncArtisansAtlasPayload;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.game.ClientboundMapItemDataPacket;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import net.minecraft.world.level.saveddata.maps.MapId;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Optional;
 
 @Mixin(MapItemSavedData.HoldingPlayer.class)
 public class MapStatePlayerUpdateTrackerMixin {

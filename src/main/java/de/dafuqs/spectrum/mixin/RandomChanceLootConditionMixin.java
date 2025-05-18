@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
-import de.dafuqs.spectrum.helpers.enchantments.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.parameters.*;
-import net.minecraft.world.level.storage.loot.predicates.*;
-import net.minecraft.world.level.storage.loot.providers.number.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import de.dafuqs.spectrum.helpers.enchantments.CloversFavorHelper;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LootItemRandomChanceCondition.class)
 public abstract class RandomChanceLootConditionMixin {

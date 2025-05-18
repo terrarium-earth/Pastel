@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.level.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import de.dafuqs.spectrum.registries.SpectrumBlockTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.level.LevelReader;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin({Animal.class})
 public class AnimalEntityMixin {

@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.components;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
-import io.netty.buffer.*;
-import net.minecraft.network.codec.*;
-import org.apache.commons.lang3.math.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.helpers.CodecHelper;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import org.apache.commons.lang3.math.Fraction;
 
 public record ExtendedBundleComponent(Fraction maxOccupancy, int maxStacks, boolean ignoreStacks) {
 	

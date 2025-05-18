@@ -1,16 +1,20 @@
 package de.dafuqs.spectrum.particle.effect;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.particle.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.item.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
 
 public record PastelTransmissionParticleEffect(List<BlockPos> nodePositions, ItemStack stack, int travelTime, int color) implements ParticleOptions {
 	

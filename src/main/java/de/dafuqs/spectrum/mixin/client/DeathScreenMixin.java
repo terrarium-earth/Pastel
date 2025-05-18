@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import de.dafuqs.spectrum.cca.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.screens.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import de.dafuqs.spectrum.cca.HardcoreDeathComponent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.DeathScreen;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(DeathScreen.class)
 public abstract class DeathScreenMixin {

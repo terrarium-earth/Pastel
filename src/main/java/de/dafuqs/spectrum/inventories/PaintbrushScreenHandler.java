@@ -1,15 +1,17 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.items.magic_items.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.entity.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.api.block.InkColorSelectedPacketReceiver;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.items.magic_items.PaintbrushItem;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
-import java.util.*;
+import java.util.Optional;
 
 public class PaintbrushScreenHandler extends QuickNavigationGridScreenHandler implements InkColorSelectedPacketReceiver {
 	

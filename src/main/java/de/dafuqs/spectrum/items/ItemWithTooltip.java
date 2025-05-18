@@ -1,10 +1,15 @@
 package de.dafuqs.spectrum.items;
 
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ItemWithTooltip extends Item {
 

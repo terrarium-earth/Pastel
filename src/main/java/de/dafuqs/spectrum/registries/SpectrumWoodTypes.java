@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.type.*;
-import net.minecraft.world.level.block.state.properties.*;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
+import net.minecraft.world.level.block.state.properties.WoodType;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumCommon.locate;
 
 public class SpectrumWoodTypes {
 	public static final WoodType SLATE_NOXWOOD = new WoodTypeBuilder().register(locate("slate_noxwood"), SpectrumBlockSetTypes.NOXWOOD);

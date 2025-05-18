@@ -1,15 +1,17 @@
 package de.dafuqs.spectrum.progression.advancement;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.pastel_network.network.*;
-import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetwork;
+import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeType;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 
-import java.util.*;
+import java.util.Optional;
 
 public class PastelNetworkCreationCriterion extends SimpleCriterionTrigger<PastelNetworkCreationCriterion.Conditions> {
 	

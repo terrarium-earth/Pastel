@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.data;
 
-import net.fabricmc.fabric.api.datagen.v1.provider.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.block.*;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.block.Block;
 
 public class DatagenProxy {
 	

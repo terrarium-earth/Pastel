@@ -1,17 +1,24 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.recipe.titration_barrel.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.component.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
+import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.components.BeverageComponent;
+import de.dafuqs.spectrum.components.JadeWineComponent;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.helpers.TimeHelper;
+import de.dafuqs.spectrum.recipe.titration_barrel.FermentationData;
+import de.dafuqs.spectrum.recipe.titration_barrel.TitrationBarrelRecipe;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRecipe {
 	

@@ -1,23 +1,29 @@
 package de.dafuqs.spectrum.blocks.particle_spawner;
 
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.screenhandler.v1.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.network.protocol.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.inventories.ParticleSpawnerScreenHandler;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public class ParticleSpawnerBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {
 	

@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.recipe;
 
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.List;
 
 public class InstanceRecipeInput<T> extends SimpleRecipeInput {
 	

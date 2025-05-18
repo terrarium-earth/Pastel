@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.deeper_down.flora.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.levelgen.feature.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.deeper_down.flora.Dragonjag;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SpectrumConfiguredFeatures {
 	

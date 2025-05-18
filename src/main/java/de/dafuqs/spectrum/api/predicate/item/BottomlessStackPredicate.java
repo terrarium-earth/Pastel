@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.api.predicate.item;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.blocks.bottomless_bundle.*;
-import de.dafuqs.spectrum.progression.advancement.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.component.*;
-import net.minecraft.world.item.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.blocks.bottomless_bundle.BottomlessBundleItem;
+import de.dafuqs.spectrum.progression.advancement.LongRange;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.SingleComponentItemPredicate;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.world.item.ItemStack;
 
 public record BottomlessStackPredicate(ItemPredicate template, LongRange count) implements SingleComponentItemPredicate<BottomlessBundleItem.BottomlessStack> {
 	

@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
+import de.dafuqs.spectrum.helpers.ParticleHelper;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayAscensionAppliedEffectsPayload;
+import de.dafuqs.spectrum.particle.VectorPattern;
+import de.dafuqs.spectrum.particle.effect.ColoredSparkleRisingParticleEffect;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
 
 public class AscensionStatusEffect extends MobEffect {
 	

@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.recipe;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import de.dafuqs.spectrum.registries.SpectrumRegistryKeys;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class RecipeScaling {
 	

@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.render.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.layers.*;
-import net.minecraft.world.entity.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.render.RenderingContext;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.layers.ElytraLayer;
+import net.minecraft.world.entity.LivingEntity;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(ElytraLayer.class)

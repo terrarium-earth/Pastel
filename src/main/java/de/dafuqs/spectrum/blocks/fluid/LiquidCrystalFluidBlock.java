@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.blocks.fluid;
 
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.material.*;
-import net.minecraft.world.level.pathfinder.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumFluidTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class LiquidCrystalFluidBlock extends SpectrumFluidBlock {
 	

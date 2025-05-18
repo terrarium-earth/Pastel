@@ -1,17 +1,17 @@
 package de.dafuqs.spectrum.entity.predicates;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.entity.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.entity.SpectrumEntitySubPredicateTypes;
+import net.minecraft.advancements.critereon.EntitySubPredicate;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.Shulker;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Optional;
 
 public record ShulkerPredicate(Optional<DyeColor> color) implements EntitySubPredicate {
 

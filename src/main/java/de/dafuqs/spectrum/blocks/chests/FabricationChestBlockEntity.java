@@ -1,24 +1,32 @@
 package de.dafuqs.spectrum.blocks.chests;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.items.magic_items.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.helpers.InventoryHelper;
+import de.dafuqs.spectrum.inventories.FabricationChestScreenHandler;
+import de.dafuqs.spectrum.items.magic_items.CraftingTabletItem;
+import de.dafuqs.spectrum.networking.s2c_payloads.FabricationChestStatusUpdatePayload;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implements WorldlyContainer {
 	

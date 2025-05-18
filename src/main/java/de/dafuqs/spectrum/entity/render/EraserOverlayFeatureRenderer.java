@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.entity.render;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.entity.models.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.entity.layers.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.entity.EraserEntity;
+import de.dafuqs.spectrum.entity.models.EraserEntityModel;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.EyesLayer;
 
 public class EraserOverlayFeatureRenderer extends EyesLayer<EraserEntity, EraserEntityModel> {
 

@@ -1,18 +1,20 @@
 package de.dafuqs.spectrum.compat.REI;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import me.shedaniel.rei.api.common.display.basic.*;
-import me.shedaniel.rei.api.common.entry.*;
-import me.shedaniel.rei.api.common.util.*;
-import net.minecraft.client.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.api.recipe.GatedRecipe;
+import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class GatedSpectrumDisplay extends BasicDisplay implements GatedRecipeDisplay {
 	

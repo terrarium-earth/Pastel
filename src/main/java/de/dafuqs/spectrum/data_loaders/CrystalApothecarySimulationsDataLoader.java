@@ -1,19 +1,26 @@
 package de.dafuqs.spectrum.data_loaders;
 
-import com.google.gson.*;
-import com.mojang.datafixers.util.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import net.fabricmc.fabric.api.resource.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.packs.resources.*;
-import net.minecraft.util.profiling.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CrystalApothecarySimulationsDataLoader extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
 	

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.registries.client;
 
-import net.minecraft.data.models.model.*;
+import net.minecraft.data.models.model.TextureSlot;
 
 public class SpectrumTextureKeys {
 	

@@ -1,28 +1,35 @@
 package de.dafuqs.spectrum.compat.create;
 
-import com.simibubi.create.api.event.*;
-import de.dafuqs.fractal.api.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.item_group.*;
-import de.dafuqs.spectrum.blocks.crystallarieum.*;
-import de.dafuqs.spectrum.blocks.fluid.*;
-import de.dafuqs.spectrum.compat.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.SpectrumItems.*;
-import de.dafuqs.spectrum.registries.client.*;
-import net.fabricmc.api.*;
-import net.minecraft.data.models.model.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.material.*;
-import org.jetbrains.annotations.*;
+import com.simibubi.create.api.event.PipeCollisionEvent;
+import de.dafuqs.fractal.api.ItemSubGroupEvents;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.item_group.ItemGroupIDs;
+import de.dafuqs.spectrum.blocks.crystallarieum.SpectrumClusterBlock;
+import de.dafuqs.spectrum.blocks.fluid.SpectrumFluidBlock;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumItems.IS;
+import de.dafuqs.spectrum.registries.client.SpectrumModels;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.PushReaction;
+import org.jetbrains.annotations.NotNull;
 
-import static de.dafuqs.spectrum.registries.SpectrumBlocks.*;
+import static de.dafuqs.spectrum.registries.SpectrumBlocks.blockWithItem;
+import static de.dafuqs.spectrum.registries.SpectrumBlocks.cluster;
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.simple;
-import static de.dafuqs.spectrum.registries.SpectrumItems.simple;
 import static de.dafuqs.spectrum.registries.SpectrumItems.item;
+import static de.dafuqs.spectrum.registries.SpectrumItems.simple;
 
 public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	

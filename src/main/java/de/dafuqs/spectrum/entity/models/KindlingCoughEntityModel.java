@@ -1,10 +1,14 @@
 package de.dafuqs.spectrum.entity.models;
 
-import de.dafuqs.spectrum.entity.entity.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.model.geom.*;
-import net.minecraft.client.model.geom.builders.*;
+import de.dafuqs.spectrum.entity.entity.KindlingCoughEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
 
 @Environment(EnvType.CLIENT)
 public class KindlingCoughEntityModel extends HierarchicalModel<KindlingCoughEntity> {

@@ -1,14 +1,18 @@
 package de.dafuqs.spectrum.entity.render;
 
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import de.dafuqs.spectrum.entity.entity.LightShardBaseEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
 public class LightSpearEntityRenderer extends EntityRenderer<LightShardBaseEntity> {

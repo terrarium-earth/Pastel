@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.entity.entity;
 
-import de.dafuqs.spectrum.entity.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class BidentEntity extends BidentBaseEntity {
 	

@@ -1,14 +1,15 @@
 package de.dafuqs.spectrum.progression.advancement;
 
-import com.klikli_dev.modonomicon.api.multiblock.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
+import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 
-import java.util.*;
+import java.util.Optional;
 
 public class CompletedMultiblockCriterion extends SimpleCriterionTrigger<CompletedMultiblockCriterion.Conditions> {
 	

@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.entity.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.interaction.EntityColorProcessorRegistry;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Optional;
 
 public class SpectrumEntityColorProcessors {
 	

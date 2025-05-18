@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.llamalad7.mixinextras.injector.*;
-import de.dafuqs.spectrum.status_effects.*;
-import net.minecraft.client.*;
-import net.minecraft.util.*;
-import org.objectweb.asm.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import de.dafuqs.spectrum.status_effects.SleepStatusEffect;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.MouseHandler;
+import net.minecraft.util.Mth;
+import org.objectweb.asm.Opcodes;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(MouseHandler.class)
 public class MouseMixin {

@@ -1,16 +1,21 @@
 package de.dafuqs.spectrum.entity.render;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.entity.models.*;
-import de.dafuqs.spectrum.registries.client.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.model.geom.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.entity.layers.*;
-import net.minecraft.resources.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import de.dafuqs.spectrum.entity.entity.EggLayingWoolyPigEntity;
+import de.dafuqs.spectrum.entity.models.EggLayingWoolyPigEntityModel;
+import de.dafuqs.spectrum.entity.models.EggLayingWoolyPigHatEntityModel;
+import de.dafuqs.spectrum.entity.models.EggLayingWoolyPigWoolEntityModel;
+import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
 public class EggLayingWoolyPigWoolFeatureRenderer extends RenderLayer<EggLayingWoolyPigEntity, EggLayingWoolyPigEntityModel> {

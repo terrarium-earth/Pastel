@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.compat.alloy_forgery;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.*;
-import net.fabricmc.api.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.resources.ResourceLocation;
 
 public class AlloyForgeryCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	

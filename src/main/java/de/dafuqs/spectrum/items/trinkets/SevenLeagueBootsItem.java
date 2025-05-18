@@ -1,16 +1,19 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import dev.emi.trinkets.api.*;
-import net.fabricmc.fabric.api.item.v1.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
+import com.google.common.collect.Multimap;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import dev.emi.trinkets.api.SlotReference;
+import net.fabricmc.fabric.api.item.v1.EnchantingContext;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class SevenLeagueBootsItem extends SpectrumTrinketItem {
 	

@@ -1,13 +1,17 @@
 package de.dafuqs.spectrum.sound;
 
 
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.status_effects.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.resources.sounds.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.player.*;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import de.dafuqs.spectrum.status_effects.AscensionStatusEffect;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.AbstractSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.resources.sounds.TickableSoundInstance;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 
 @Environment(EnvType.CLIENT)
 public class DivinitySoundInstance extends AbstractSoundInstance implements TickableSoundInstance {

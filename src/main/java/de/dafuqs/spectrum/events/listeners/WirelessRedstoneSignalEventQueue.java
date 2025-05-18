@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.events.listeners;
 
-import de.dafuqs.spectrum.events.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.events.SpectrumGameEvents;
+import de.dafuqs.spectrum.networking.s2c_payloads.TypedTransmissionPayload;
+import de.dafuqs.spectrum.particle.effect.TypedTransmission;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.gameevent.PositionSource;
+import net.minecraft.world.phys.Vec3;
 
 public class WirelessRedstoneSignalEventQueue extends EventQueue<WirelessRedstoneSignalEventQueue.EventEntry> {
 	

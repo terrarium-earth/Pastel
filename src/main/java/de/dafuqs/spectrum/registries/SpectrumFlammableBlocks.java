@@ -1,8 +1,19 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.conditional.colored_tree.*;
-import net.fabricmc.fabric.api.registry.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredFenceBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredFenceGateBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredLeavesBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredLogBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredPlankBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredSlabBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredSporeBlossomBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredStairsBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredStrippedLogBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredStrippedWoodBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredWoodBlock;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 
 public class SpectrumFlammableBlocks {
 	

@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.items.item_frame;
 
-import de.dafuqs.spectrum.entity.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.decoration.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import de.dafuqs.spectrum.entity.entity.PhantomGlowFrameEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.decoration.HangingEntity;
+import net.minecraft.world.entity.decoration.ItemFrame;
+import net.minecraft.world.level.Level;
 
 public class PhantomGlowFrameItem extends SpectrumItemFrameItem {
 	

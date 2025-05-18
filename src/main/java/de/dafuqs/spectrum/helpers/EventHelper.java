@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.helpers;
 
-import de.dafuqs.spectrum.blocks.redstone.*;
-import net.minecraft.core.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.gameevent.*;
+import de.dafuqs.spectrum.blocks.redstone.RedstoneTransceiverBlock;
+import de.dafuqs.spectrum.blocks.redstone.RedstoneTransceiverBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 public class EventHelper {
 

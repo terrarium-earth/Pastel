@@ -1,16 +1,21 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.sugar.*;
-import de.dafuqs.spectrum.items.map.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.saveddata.maps.*;
-import org.jetbrains.annotations.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.sugar.Local;
+import de.dafuqs.spectrum.items.map.ArtisansAtlasState;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Slice;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MapItemSavedData.class)
 public class MapStateMixin {

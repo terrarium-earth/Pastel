@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.components;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.blocks.present.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.util.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.blocks.present.PresentBlock;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.StringRepresentable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public record WrappedPresentComponent(boolean wrapped, PresentBlock.WrappingPaper variant, Map<Integer, Integer> colors) {
 	

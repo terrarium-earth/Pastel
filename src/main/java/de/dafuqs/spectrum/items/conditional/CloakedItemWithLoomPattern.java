@@ -1,12 +1,15 @@
 package de.dafuqs.spectrum.items.conditional;
 
-import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.entity.*;
+import de.dafuqs.spectrum.api.item.LoomPatternProvider;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.entity.BannerPattern;
 
-import java.util.*;
+import java.util.List;
 
 public class CloakedItemWithLoomPattern extends CloakedItem implements LoomPatternProvider {
 	

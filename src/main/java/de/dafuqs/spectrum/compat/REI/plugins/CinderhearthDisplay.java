@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.recipe.cinderhearth.*;
-import me.shedaniel.rei.api.common.category.*;
-import me.shedaniel.rei.api.common.util.*;
-import net.minecraft.client.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.compat.REI.GatedSpectrumDisplay;
+import de.dafuqs.spectrum.compat.REI.REIHelper;
+import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
+import de.dafuqs.spectrum.recipe.cinderhearth.CinderhearthRecipe;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 public class CinderhearthDisplay extends GatedSpectrumDisplay {
 	

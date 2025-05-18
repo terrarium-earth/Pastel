@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.item_group;
 
-import de.dafuqs.fractal.api.*;
-import de.dafuqs.spectrum.*;
-import net.minecraft.resources.*;
+import de.dafuqs.fractal.api.ItemSubGroupStyle;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.resources.ResourceLocation;
 
 public class ItemGroupIDs {
 	

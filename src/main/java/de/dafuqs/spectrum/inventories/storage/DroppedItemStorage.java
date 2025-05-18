@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.inventories.storage;
 
-import net.fabricmc.fabric.api.transfer.v1.item.*;
-import net.fabricmc.fabric.api.transfer.v1.item.base.*;
-import net.minecraft.core.component.*;
-import net.minecraft.world.item.*;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.fabricmc.fabric.api.transfer.v1.item.base.SingleItemStorage;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class DroppedItemStorage extends SingleItemStorage {
 

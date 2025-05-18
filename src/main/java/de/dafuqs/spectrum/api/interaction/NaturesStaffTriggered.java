@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.api.interaction;
 
-import net.minecraft.core.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 /**
  * Blocks that have an effect when a Nature's Staff is used on them

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.render.animation;
 
-import net.minecraft.util.*;
+import net.minecraft.util.Mth;
 
 @FunctionalInterface
 public interface Interpolation {

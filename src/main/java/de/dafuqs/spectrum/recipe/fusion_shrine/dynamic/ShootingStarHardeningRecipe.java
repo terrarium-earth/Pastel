@@ -1,20 +1,27 @@
 package de.dafuqs.spectrum.recipe.fusion_shrine.dynamic;
 
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.fusion_shrine.*;
-import de.dafuqs.spectrum.blocks.shooting_star.*;
-import de.dafuqs.spectrum.recipe.fusion_shrine.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.material.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.blocks.fusion_shrine.FusionShrineBlockEntity;
+import de.dafuqs.spectrum.blocks.shooting_star.ShootingStarItem;
+import de.dafuqs.spectrum.recipe.fusion_shrine.FusionShrineRecipe;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumItemTags;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluids;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
 	

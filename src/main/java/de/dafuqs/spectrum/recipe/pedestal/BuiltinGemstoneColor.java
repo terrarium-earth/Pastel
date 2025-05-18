@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.recipe.pedestal;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.item.GemstoneColor;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.item.Item;
 
 public enum BuiltinGemstoneColor implements GemstoneColor, StringRepresentable {
 	CYAN("cyan", InkColors.CYAN_COLOR),

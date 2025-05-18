@@ -1,9 +1,16 @@
 package de.dafuqs.spectrum.helpers;
 
-import com.mojang.blaze3d.systems.*;
-import com.mojang.blaze3d.vertex.*;
-import net.minecraft.client.renderer.*;
-import org.joml.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.LightTexture;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 
 public class RenderHelper {
 

@@ -1,20 +1,24 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.compat.emi.*;
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import dev.emi.emi.api.render.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.TextWidget.*;
-import dev.emi.emi.api.widget.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.api.item.GemstoneColor;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.compat.emi.GatedSpectrumEmiRecipe;
+import de.dafuqs.spectrum.compat.emi.SpectrumEmiRecipeCategories;
+import de.dafuqs.spectrum.inventories.PedestalScreen;
+import de.dafuqs.spectrum.recipe.pedestal.BuiltinGemstoneColor;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipe;
+import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget.Alignment;
+import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class PedestalCraftingEmiRecipeGated extends GatedSpectrumEmiRecipe<PedestalRecipe> {
 	

@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.compat.REI.widgets;
 
-import com.mojang.blaze3d.systems.*;
-import me.shedaniel.math.*;
-import me.shedaniel.rei.api.client.gui.widgets.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.components.events.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import me.shedaniel.math.Rectangle;
+import me.shedaniel.rei.api.client.gui.widgets.BurningFire;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 public class AnimatedTexturedWidget extends BurningFire {
     

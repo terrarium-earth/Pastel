@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.energy.color;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.tags.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.minecraft.tags.TagKey;
 
 public class InkColorTags {
 	

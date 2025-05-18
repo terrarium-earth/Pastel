@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.registries;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.worldgen.structures.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.level.levelgen.structure.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.worldgen.structures.UndergroundJigsawStructure;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureType;
 
 public class SpectrumStructureTypes {
 	

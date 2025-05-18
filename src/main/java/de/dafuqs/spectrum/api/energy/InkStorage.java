@@ -1,18 +1,21 @@
 package de.dafuqs.spectrum.api.energy;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.Mth;
+import net.minecraft.world.Clearable;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static de.dafuqs.spectrum.helpers.Support.*;
+import static de.dafuqs.spectrum.helpers.Support.getShortenedNumberString;
 
 /**
  * This interface defines that an object can

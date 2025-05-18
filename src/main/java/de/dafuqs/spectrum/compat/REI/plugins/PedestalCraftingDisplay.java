@@ -1,18 +1,23 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import me.shedaniel.rei.api.common.category.*;
-import me.shedaniel.rei.api.common.display.basic.*;
-import me.shedaniel.rei.api.common.entry.*;
-import me.shedaniel.rei.api.common.util.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.spectrum.api.item.GemstoneColor;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.compat.REI.GatedSpectrumDisplay;
+import de.dafuqs.spectrum.compat.REI.REIHelper;
+import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
+import de.dafuqs.spectrum.recipe.pedestal.BuiltinGemstoneColor;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipe;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 public class PedestalCraftingDisplay extends GatedSpectrumDisplay {
 	

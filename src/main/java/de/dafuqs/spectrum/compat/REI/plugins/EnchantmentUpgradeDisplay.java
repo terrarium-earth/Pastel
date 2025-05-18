@@ -1,23 +1,28 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.items.magic_items.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.recipe.enchanter.*;
-import me.shedaniel.rei.api.common.category.*;
-import me.shedaniel.rei.api.common.entry.*;
-import me.shedaniel.rei.api.common.util.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.item.enchantment.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
+import de.dafuqs.spectrum.items.magic_items.KnowledgeGemItem;
+import de.dafuqs.spectrum.recipe.RecipeScaling;
+import de.dafuqs.spectrum.recipe.enchanter.EnchanterRecipe;
+import de.dafuqs.spectrum.recipe.enchanter.EnchantmentUpgradeRecipe;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 	

@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.items.tooltip;
 
-import net.minecraft.network.chat.*;
-import net.minecraft.world.inventory.tooltip.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
 
 public class CraftingTabletTooltipData implements TooltipComponent {
 	

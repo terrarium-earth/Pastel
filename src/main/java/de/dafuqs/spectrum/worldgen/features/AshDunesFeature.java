@@ -1,16 +1,20 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.blocks.deeper_down.groundcover.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.properties.*;
-import net.minecraft.world.level.levelgen.feature.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.blocks.deeper_down.groundcover.AshPileBlock;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
 	

@@ -1,12 +1,15 @@
 package de.dafuqs.spectrum.api.render;
 
-import com.mojang.blaze3d.vertex.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.resources.model.*;
-import net.minecraft.world.item.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 
 // Similar to FAPIs DynamicItemRenderer, except with a little more information.
 @Environment(EnvType.CLIENT)

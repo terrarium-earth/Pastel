@@ -1,24 +1,32 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.blocks.amalgam.*;
-import de.dafuqs.spectrum.blocks.memory.*;
-import de.dafuqs.spectrum.blocks.present.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.api.item.PresentUnpackBehavior;
+import de.dafuqs.spectrum.blocks.amalgam.IncandescentAmalgamBlock;
+import de.dafuqs.spectrum.blocks.memory.MemoryBlockEntity;
+import de.dafuqs.spectrum.blocks.present.PresentBlock;
+import de.dafuqs.spectrum.mixin.accessors.GoatHornItemAccessor;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.entity.projectile.ThrownPotion;
+import net.minecraft.world.item.Instrument;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.Optional;
 
 public class SpectrumPresentUnpackBehaviors {
 	

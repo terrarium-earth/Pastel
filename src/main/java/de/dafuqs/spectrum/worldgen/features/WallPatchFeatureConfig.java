@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.util.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.Util;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistryCodecs;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
-import java.util.*;
+import java.util.List;
 
 public class WallPatchFeatureConfig implements FeatureConfiguration {
 	

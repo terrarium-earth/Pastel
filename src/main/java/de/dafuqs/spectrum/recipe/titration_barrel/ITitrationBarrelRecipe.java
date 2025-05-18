@@ -1,24 +1,33 @@
 package de.dafuqs.spectrum.recipe.titration_barrel;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.transfer.v1.fluid.*;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import de.dafuqs.spectrum.api.recipe.GatedRecipe;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.components.BeverageComponent;
+import de.dafuqs.spectrum.helpers.LoreHelper;
+import de.dafuqs.spectrum.helpers.TimeHelper;
+import de.dafuqs.spectrum.recipe.StorageRecipeInput;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * In contrast to most other Minecraft things, the titration barrel also counts the fermenting time

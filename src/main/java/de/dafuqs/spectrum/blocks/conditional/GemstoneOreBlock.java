@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.blocks.conditional;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.item.GemstoneColor;
+import de.dafuqs.spectrum.mixin.accessors.ExperienceDroppingBlockAccessor;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class GemstoneOreBlock extends CloakedOreBlock {
 

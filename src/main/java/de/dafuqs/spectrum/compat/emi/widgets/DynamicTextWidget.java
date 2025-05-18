@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.compat.emi.widgets;
 
-import dev.emi.emi.api.widget.*;
-import dev.emi.emi.runtime.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.util.*;
+import dev.emi.emi.api.widget.TextWidget;
+import dev.emi.emi.runtime.EmiDrawContext;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Tuple;
 
-import java.util.function.*;
+import java.util.function.Function;
 
 public class DynamicTextWidget extends TextWidget {
 	

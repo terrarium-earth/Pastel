@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.items.trinkets.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
+import de.dafuqs.spectrum.items.trinkets.WhispyCircletItem;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
 
 public class ImmunityStatusEffect extends MobEffect {
 	

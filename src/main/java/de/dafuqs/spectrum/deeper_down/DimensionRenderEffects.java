@@ -1,21 +1,23 @@
 package de.dafuqs.spectrum.deeper_down;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.status_effects.*;
-import net.minecraft.client.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.biome.*;
-import org.jetbrains.annotations.*;
+import com.google.common.collect.ImmutableMap;
+import de.dafuqs.spectrum.registries.SpectrumBiomes;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import de.dafuqs.spectrum.status_effects.SleepStatusEffect;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.biome.Biome;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Map;
 
-import static net.minecraft.util.Mth.*;
+import static net.minecraft.util.Mth.lerp;
 
 /**
  * I admit that this class is a mess

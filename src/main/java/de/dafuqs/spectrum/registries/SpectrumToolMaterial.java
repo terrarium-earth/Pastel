@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.registries;
 
-import com.google.common.base.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.block.*;
+import com.google.common.base.Suppliers;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 
-import java.util.function.*;
 import java.util.function.Supplier;
 
 public enum SpectrumToolMaterial implements Tier {

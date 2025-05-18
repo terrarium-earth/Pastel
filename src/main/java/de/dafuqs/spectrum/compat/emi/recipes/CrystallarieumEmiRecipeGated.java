@@ -1,16 +1,20 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.emi.*;
-import de.dafuqs.spectrum.recipe.crystallarieum.*;
-import de.dafuqs.spectrum.registries.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.emi.GatedSpectrumEmiRecipe;
+import de.dafuqs.spectrum.compat.emi.SpectrumEmiRecipeCategories;
+import de.dafuqs.spectrum.recipe.crystallarieum.CrystallarieumCatalyst;
+import de.dafuqs.spectrum.recipe.crystallarieum.CrystallarieumRecipe;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<CrystallarieumRecipe> {
 	private final static ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/modonomicon/crystallarieum.png");

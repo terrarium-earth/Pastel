@@ -1,14 +1,19 @@
 package de.dafuqs.spectrum.recipe.crafting.dynamic;
 
-import de.dafuqs.spectrum.items.*;
-import de.dafuqs.spectrum.items.magic_items.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.items.PigmentItem;
+import de.dafuqs.spectrum.items.magic_items.EverpromiseRibbonItem;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 
 public class ColorEverpromiseRibbonRecipe extends CustomRecipe {
 	

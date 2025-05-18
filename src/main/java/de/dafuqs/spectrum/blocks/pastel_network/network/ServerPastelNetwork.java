@@ -1,25 +1,38 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.pastel_network.*;
-import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.entity.*;
-import org.jetbrains.annotations.*;
-import org.jgrapht.alg.connectivity.*;
-import org.jgrapht.graph.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.pastel_network.Pastel;
+import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeBlockEntity;
+import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeType;
+import de.dafuqs.spectrum.helpers.SchedulerMap;
+import de.dafuqs.spectrum.helpers.TickLooper;
+import de.dafuqs.spectrum.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PastelNetworkRemovedPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import it.unimi.dsi.fastutil.objects.ObjectArraySet;
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.Nullable;
+import org.jgrapht.alg.connectivity.ConnectivityInspector;
+import org.jgrapht.graph.DefaultEdge;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 	

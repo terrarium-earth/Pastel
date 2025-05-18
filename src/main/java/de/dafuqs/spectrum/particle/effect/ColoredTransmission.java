@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.particle.effect;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.level.gameevent.PositionSource;
+import net.minecraft.world.phys.Vec3;
 
 public class ColoredTransmission extends SimpleTransmission {
 	

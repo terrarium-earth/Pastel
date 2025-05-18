@@ -1,13 +1,19 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.registries.SpectrumEnchantmentTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.ItemLike;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Making Items immune to certain forms of damage

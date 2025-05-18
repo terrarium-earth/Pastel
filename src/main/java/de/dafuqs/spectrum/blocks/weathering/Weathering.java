@@ -1,17 +1,17 @@
 package de.dafuqs.spectrum.blocks.weathering;
 
-import com.google.common.base.*;
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.biome.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import com.google.common.base.Suppliers;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ChangeOverTimeBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
 import java.util.Optional;
-import java.util.function.*;
 import java.util.function.Supplier;
 
 public interface Weathering extends ChangeOverTimeBlock<Weathering.WeatheringLevel> {

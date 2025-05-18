@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemLore;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoreHelper {
 	

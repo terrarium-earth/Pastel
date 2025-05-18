@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
-import net.fabricmc.fabric.api.registry.*;
-import net.minecraft.world.item.*;
+import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
+import net.minecraft.world.item.HoeItem;
 
 public class SpectrumTillableBlocks {
 	

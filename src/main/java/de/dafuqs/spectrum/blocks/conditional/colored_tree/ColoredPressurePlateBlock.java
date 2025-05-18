@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.registries.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.registries.SpectrumBlockSetTypes;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.world.level.block.PressurePlateBlock;
 
-import java.util.*;
+import java.util.Map;
 
 public class ColoredPressurePlateBlock extends PressurePlateBlock {
 	

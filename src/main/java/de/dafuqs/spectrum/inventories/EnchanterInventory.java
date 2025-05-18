@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.recipe.*;
-import net.minecraft.world.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.spectrum.recipe.SimpleRecipeInput;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
 
 public class EnchanterInventory extends SimpleContainer {
 	

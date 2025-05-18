@@ -1,26 +1,38 @@
 package de.dafuqs.spectrum.blocks.structure;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.blocks.chests.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.advancements.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.parameters.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.blocks.chests.SpectrumChestBlockEntity;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.inventories.GenericSpectrumContainerScreenHandler;
+import de.dafuqs.spectrum.inventories.ScreenBackgroundVariant;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class TreasureChestBlockEntity extends SpectrumChestBlockEntity {
 	

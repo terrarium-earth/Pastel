@@ -1,11 +1,14 @@
 package de.dafuqs.spectrum.cca;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.world.entity.*;
-import org.jetbrains.annotations.*;
-import org.ladysnake.cca.api.v3.component.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.Component;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 
 public class LastKillComponent implements Component {
 	

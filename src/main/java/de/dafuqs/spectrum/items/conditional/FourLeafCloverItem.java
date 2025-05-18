@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.items.conditional;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
+import de.dafuqs.spectrum.api.item.LoomPatternProvider;
+import de.dafuqs.spectrum.registries.SpectrumBannerPatterns;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BannerPattern;
 
-import java.util.*;
+import java.util.List;
 
 public class FourLeafCloverItem extends CloakedBlockItem implements LoomPatternProvider {
 	

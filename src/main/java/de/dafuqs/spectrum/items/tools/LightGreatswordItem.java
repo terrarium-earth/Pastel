@@ -1,18 +1,22 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.api.item.SplitDamageItem;
+import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class LightGreatswordItem extends ParryingSwordItem implements SplitDamageItem {
 

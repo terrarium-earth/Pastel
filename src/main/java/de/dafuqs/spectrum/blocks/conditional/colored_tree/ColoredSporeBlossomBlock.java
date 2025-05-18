@@ -1,15 +1,16 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SporeBlossomBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.Map;
 
 public class ColoredSporeBlossomBlock extends SporeBlossomBlock {
 	

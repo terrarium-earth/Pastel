@@ -1,14 +1,15 @@
 package de.dafuqs.spectrum.networking.c2s_payloads;
 
-import de.dafuqs.spectrum.blocks.chests.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.networking.*;
-import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
-import net.minecraft.world.level.block.entity.*;
+import de.dafuqs.spectrum.blocks.chests.CompactingChestBlockEntity;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import de.dafuqs.spectrum.inventories.AutoCraftingMode;
+import de.dafuqs.spectrum.inventories.CompactingChestScreenHandler;
+import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public record ChangeCompactingChestSettingsPayload(AutoCraftingMode mode) implements CustomPacketPayload {
 	

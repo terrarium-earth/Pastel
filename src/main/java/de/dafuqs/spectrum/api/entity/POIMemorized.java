@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.api.entity;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.server.level.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.entity.ai.village.poi.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.registries.SpectrumPointOfInterestTypeTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.ai.village.poi.PoiManager;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Optional;
 
 public interface POIMemorized {
 	

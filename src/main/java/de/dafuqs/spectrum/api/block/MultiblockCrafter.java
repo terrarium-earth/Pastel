@@ -1,19 +1,22 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.upgrade.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
+import de.dafuqs.spectrum.helpers.Support;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
 	

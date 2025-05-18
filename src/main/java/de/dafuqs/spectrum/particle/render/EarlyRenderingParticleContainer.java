@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.particle.render;
 
-import com.google.common.collect.*;
-import com.mojang.blaze3d.vertex.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.*;
+import com.google.common.collect.EvictingQueue;
+import com.mojang.blaze3d.vertex.PoseStack;
+import it.unimi.dsi.fastutil.objects.Object2ReferenceOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Camera;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.MultiBufferSource;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Queue;
 
 @Environment(EnvType.CLIENT)
 public class EarlyRenderingParticleContainer {

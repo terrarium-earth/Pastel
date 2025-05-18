@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
-import de.dafuqs.spectrum.blocks.farming.*;
-import net.minecraft.core.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import de.dafuqs.spectrum.blocks.farming.SpectrumFarmlandBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.AttachedStemBlock;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.PitcherCropBlock;
+import net.minecraft.world.level.block.StemBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({CropBlock.class, StemBlock.class, AttachedStemBlock.class, PitcherCropBlock.class})
 public abstract class PlantOnCustomFarmlandMixin {

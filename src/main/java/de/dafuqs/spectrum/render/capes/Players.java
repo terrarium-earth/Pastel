@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.render.capes;
 
-import java.util.*;
+import java.util.UUID;
 
 public class Players {
     public static final UUID AZZY = UUID.fromString("f7957087-549e-4ca3-878e-48f36569dd3e");

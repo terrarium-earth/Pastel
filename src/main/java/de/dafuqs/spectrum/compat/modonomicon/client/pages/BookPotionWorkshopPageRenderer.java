@@ -1,18 +1,18 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import de.dafuqs.spectrum.recipe.potion_workshop.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookGatedRecipePage;
+import de.dafuqs.spectrum.recipe.potion_workshop.PotionWorkshopRecipe;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.List;
 
 public class BookPotionWorkshopPageRenderer<T extends PotionWorkshopRecipe> extends BookGatedRecipePageRenderer<T, BookGatedRecipePage<T>> {
 

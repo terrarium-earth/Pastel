@@ -1,19 +1,25 @@
 package de.dafuqs.spectrum.data_loaders.resonance_processors;
 
-import com.google.common.collect.*;
-import com.mojang.datafixers.util.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.api.predicate.block.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
+import com.google.common.collect.ImmutableMap;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.interaction.ResonanceProcessor;
+import de.dafuqs.spectrum.api.predicate.block.BrokenBlockPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ModifyDropsResonanceProcessor extends ResonanceProcessor {
 	

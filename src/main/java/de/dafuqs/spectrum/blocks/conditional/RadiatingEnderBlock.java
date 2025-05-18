@@ -1,19 +1,23 @@
 package de.dafuqs.spectrum.blocks.conditional;
 
-import com.mojang.serialization.*;
-import de.dafuqs.revelationary.api.revelations.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.parameters.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.revelationary.api.revelations.RevelationAware;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class RadiatingEnderBlock extends Block implements RevelationAware {
 

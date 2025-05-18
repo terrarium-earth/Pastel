@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.inventories;
 
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class QuickNavigationGridScreenHandler extends AbstractContainerMenu {
 	

@@ -1,19 +1,25 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.helpers.enchantments.*;
-import de.dafuqs.spectrum.items.trinkets.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.helpers.enchantments.DisarmingHelper;
+import de.dafuqs.spectrum.items.trinkets.GleamingPinItem;
+import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
+import de.dafuqs.spectrum.registries.SpectrumEnchantments;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.Optional;
 
 // TODO: Migrate these mixins to FAPI ServerEntityCombatEvents
 @Mixin(ServerPlayer.class)

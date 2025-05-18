@@ -1,26 +1,35 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.render.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.sound.*;
-import net.fabricmc.api.*;
-import net.minecraft.*;
-import net.minecraft.client.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.energy.InkCost;
+import de.dafuqs.spectrum.api.energy.InkPowered;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.render.ExtendedItemBarProvider;
+import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import de.dafuqs.spectrum.sound.OverchargingSoundInstance;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 // right click ability: able to overload an already loaded arrow
 public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements ExtendedItemBarProvider, SlotBackgroundEffectProvider, InkPowered {

@@ -1,12 +1,15 @@
 package de.dafuqs.spectrum.compat.emi.handlers;
 
-import de.dafuqs.spectrum.compat.emi.*;
-import de.dafuqs.spectrum.inventories.*;
-import dev.emi.emi.api.recipe.*;
-import dev.emi.emi.api.recipe.handler.*;
-import net.minecraft.world.inventory.*;
+import de.dafuqs.spectrum.compat.emi.SpectrumEmiRecipeCategories;
+import de.dafuqs.spectrum.inventories.CraftingTabletScreenHandler;
+import dev.emi.emi.api.recipe.EmiRecipe;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
+import dev.emi.emi.api.recipe.handler.StandardRecipeHandler;
+import net.minecraft.world.inventory.Slot;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CraftingTabletRecipeHandler implements StandardRecipeHandler<CraftingTabletScreenHandler> {
     @Override

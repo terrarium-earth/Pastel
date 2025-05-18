@@ -1,22 +1,41 @@
 package de.dafuqs.spectrum.data;
 
-import com.google.gson.*;
-import de.dafuqs.spectrum.blocks.decoration.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.client.*;
-import net.minecraft.core.*;
-import net.minecraft.data.*;
-import net.minecraft.data.models.*;
-import net.minecraft.data.models.blockstates.*;
-import net.minecraft.data.models.model.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.properties.*;
+import com.google.gson.JsonElement;
+import de.dafuqs.spectrum.blocks.decoration.CardinalFacingBlock;
+import de.dafuqs.spectrum.registries.DeferredRegistrar;
+import de.dafuqs.spectrum.registries.client.SpectrumTextureKeys;
+import de.dafuqs.spectrum.registries.client.SpectrumTextureMaps;
+import net.minecraft.core.Direction;
+import net.minecraft.core.FrontAndTop;
+import net.minecraft.data.BlockFamily;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.blockstates.BlockStateGenerator;
+import net.minecraft.data.models.blockstates.Condition;
+import net.minecraft.data.models.blockstates.MultiPartGenerator;
+import net.minecraft.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.data.models.blockstates.PropertyDispatch;
+import net.minecraft.data.models.blockstates.Variant;
+import net.minecraft.data.models.blockstates.VariantProperties;
+import net.minecraft.data.models.model.DelegatedModel;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplate;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TexturedModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class SpectrumModelHelper {
 	public static final DeferredRegistrar.Contextual<ItemModelGenerators> ITEM_MODEL_REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);

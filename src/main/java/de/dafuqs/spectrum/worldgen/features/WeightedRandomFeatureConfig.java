@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import net.minecraft.util.random.*;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
-import net.minecraft.world.level.levelgen.placement.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public record WeightedRandomFeatureConfig(SimpleWeightedRandomList<PlacedFeature> features) implements FeatureConfiguration {
 

@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.entity.variants;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.storage.loot.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumLootTables;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.storage.loot.LootTable;
 
 public enum KindlingVariant implements StringRepresentable {
 	

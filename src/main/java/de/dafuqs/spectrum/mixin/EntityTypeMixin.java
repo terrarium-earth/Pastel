@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.entity.*;
-import net.minecraft.world.entity.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import net.minecraft.world.entity.EntityType;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EntityType.class)
 public abstract class EntityTypeMixin {

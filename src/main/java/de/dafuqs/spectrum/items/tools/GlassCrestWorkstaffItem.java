@@ -1,24 +1,30 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.render.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.energy.InkCost;
+import de.dafuqs.spectrum.api.energy.InkPowered;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
+import de.dafuqs.spectrum.components.WorkstaffComponent;
+import de.dafuqs.spectrum.entity.entity.MiningProjectileEntity;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumEnchantments;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgroundEffectProvider {
     

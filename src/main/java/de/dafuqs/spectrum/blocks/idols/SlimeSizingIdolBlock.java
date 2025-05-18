@@ -1,21 +1,26 @@
 package de.dafuqs.spectrum.blocks.idols;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.progression.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.mixin.accessors.SlimeEntityAccessor;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
+import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class SlimeSizingIdolBlock extends IdolBlock {
 	

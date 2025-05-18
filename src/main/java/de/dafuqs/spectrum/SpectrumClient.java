@@ -1,30 +1,44 @@
 package de.dafuqs.spectrum;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.revelationary.api.revelations.*;
-import de.dafuqs.spectrum.compat.*;
-import de.dafuqs.spectrum.compat.ears.*;
-import de.dafuqs.spectrum.entity.*;
-import de.dafuqs.spectrum.inventories.*;
-import de.dafuqs.spectrum.networking.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.progression.*;
-import de.dafuqs.spectrum.progression.toast.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.registries.client.*;
-import de.dafuqs.spectrum.render.*;
-import de.dafuqs.spectrum.render.capes.*;
-import net.fabricmc.api.*;
-import net.fabricmc.loader.api.*;
-import net.minecraft.client.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.revelationary.api.advancements.ClientAdvancementPacketCallback;
+import de.dafuqs.revelationary.api.revelations.RevealingCallback;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import de.dafuqs.spectrum.compat.ears.EarsCompat;
+import de.dafuqs.spectrum.entity.SpectrumEntityRenderers;
+import de.dafuqs.spectrum.inventories.SpectrumScreenHandlerTypes;
+import de.dafuqs.spectrum.networking.SpectrumS2CPackets;
+import de.dafuqs.spectrum.particle.SpectrumParticleFactories;
+import de.dafuqs.spectrum.progression.UnlockToastManager;
+import de.dafuqs.spectrum.progression.toast.RevelationToast;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumDimensions;
+import de.dafuqs.spectrum.registries.SpectrumFluids;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import de.dafuqs.spectrum.registries.SpectrumTooltips;
+import de.dafuqs.spectrum.registries.client.SpectrumArmorRenderers;
+import de.dafuqs.spectrum.registries.client.SpectrumClientEventListeners;
+import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
+import de.dafuqs.spectrum.registries.client.SpectrumModelPredicateProviders;
+import de.dafuqs.spectrum.registries.client.SpectrumTooltipComponents;
+import de.dafuqs.spectrum.render.HudRenderers;
+import de.dafuqs.spectrum.render.SkyLerper;
+import de.dafuqs.spectrum.render.capes.WorthinessChecker;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
-import java.util.*;
+import java.util.Set;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumCommon.CONFIG;
+import static de.dafuqs.spectrum.SpectrumCommon.logInfo;
 
 @Environment(EnvType.CLIENT)
 public class SpectrumClient implements ClientModInitializer, RevealingCallback, ClientAdvancementPacketCallback {

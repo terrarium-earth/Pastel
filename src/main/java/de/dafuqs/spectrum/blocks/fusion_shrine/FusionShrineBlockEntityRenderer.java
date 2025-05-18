@@ -1,21 +1,24 @@
 package de.dafuqs.spectrum.blocks.fusion_shrine;
 
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.*;
-import de.dafuqs.spectrum.render.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.transfer.v1.client.fluid.*;
-import net.fabricmc.fabric.api.transfer.v1.fluid.*;
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.blockentity.*;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.world.item.*;
-import org.joml.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import de.dafuqs.spectrum.render.FluidRendering;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
 import org.joml.Math;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class FusionShrineBlockEntityRenderer<T extends FusionShrineBlockEntity> implements BlockEntityRenderer<T> {

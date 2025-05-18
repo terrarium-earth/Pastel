@@ -1,17 +1,28 @@
 package de.dafuqs.spectrum.particle;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.particle.v1.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
+import de.dafuqs.spectrum.particle.effect.ColoredExplosionParticleEffect;
+import de.dafuqs.spectrum.particle.effect.ColoredFallingSporeBlossomParticleEffect;
+import de.dafuqs.spectrum.particle.effect.ColoredFluidRisingParticleEffect;
+import de.dafuqs.spectrum.particle.effect.ColoredSparkleRisingParticleEffect;
+import de.dafuqs.spectrum.particle.effect.ColoredSporeBlossomAirParticleEffect;
+import de.dafuqs.spectrum.particle.effect.ColoredTransmissionParticleEffect;
+import de.dafuqs.spectrum.particle.effect.DynamicParticleEffect;
+import de.dafuqs.spectrum.particle.effect.PastelTransmissionParticleEffect;
+import de.dafuqs.spectrum.particle.effect.TransmissionParticleEffect;
+import de.dafuqs.spectrum.registries.DeferredRegistrar;
+import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 
-import java.util.function.*;
+import java.util.function.Function;
 
 public class SpectrumParticleTypes {
 	

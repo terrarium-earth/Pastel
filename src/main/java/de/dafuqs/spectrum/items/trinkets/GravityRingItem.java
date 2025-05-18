@@ -1,15 +1,17 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.energy.storage.*;
-import de.dafuqs.spectrum.api.item.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.item.*;
+import com.google.common.collect.Multimap;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.storage.FixedSingleInkStorage;
+import de.dafuqs.spectrum.api.item.GravitableItem;
+import dev.emi.trinkets.api.SlotReference;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
 
 public abstract class GravityRingItem extends InkDrainTrinketItem implements GravitableItem {
 	

@@ -1,10 +1,19 @@
 package de.dafuqs.spectrum.api.energy.color;
 
-import net.minecraft.util.*;
+import net.minecraft.util.RandomSource;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import static de.dafuqs.spectrum.api.energy.color.InkColors.*;
+import static de.dafuqs.spectrum.api.energy.color.InkColors.BLACK;
+import static de.dafuqs.spectrum.api.energy.color.InkColors.CYAN;
+import static de.dafuqs.spectrum.api.energy.color.InkColors.MAGENTA;
+import static de.dafuqs.spectrum.api.energy.color.InkColors.WHITE;
+import static de.dafuqs.spectrum.api.energy.color.InkColors.YELLOW;
 
 public class InkColorMixes {
 	

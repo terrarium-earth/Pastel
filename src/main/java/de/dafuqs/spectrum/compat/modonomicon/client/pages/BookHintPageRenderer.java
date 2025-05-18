@@ -1,23 +1,29 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.klikli_dev.modonomicon.book.*;
-import com.klikli_dev.modonomicon.client.gui.book.entry.*;
-import com.klikli_dev.modonomicon.client.render.page.*;
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import de.dafuqs.spectrum.sound.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.components.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.sounds.*;
-import org.jetbrains.annotations.*;
+import com.klikli_dev.modonomicon.book.BookTextHolder;
+import com.klikli_dev.modonomicon.book.RenderedBookTextHolder;
+import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
+import com.klikli_dev.modonomicon.client.render.page.BookPageRenderer;
+import com.klikli_dev.modonomicon.client.render.page.PageWithTextRenderer;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookHintPage;
+import de.dafuqs.spectrum.helpers.InventoryHelper;
+import de.dafuqs.spectrum.networking.c2s_payloads.GuidebookHintBoughtPayload;
+import de.dafuqs.spectrum.sound.HintRevelationSoundInstance;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.sounds.SoundEvents;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> implements PageWithTextRenderer {
     

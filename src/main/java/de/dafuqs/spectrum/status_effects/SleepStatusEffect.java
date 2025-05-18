@@ -1,12 +1,18 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
+import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 
 public class SleepStatusEffect extends MobEffect {
 

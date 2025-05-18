@@ -1,15 +1,16 @@
 package de.dafuqs.spectrum.render.armor;
 
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.*;
-import de.dafuqs.spectrum.items.armor.*;
-import de.dafuqs.spectrum.render.*;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.minecraft.client.player.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
+import de.dafuqs.spectrum.items.armor.BedrockArmorItem;
+import de.dafuqs.spectrum.render.RenderingContext;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRenderEvents;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemStack;
 
 public class BedrockCapeRenderer {
 	

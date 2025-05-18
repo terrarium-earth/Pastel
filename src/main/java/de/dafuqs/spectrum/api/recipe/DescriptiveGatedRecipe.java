@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.recipe;
 
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeInput;
 
 public interface DescriptiveGatedRecipe<C extends RecipeInput> extends GatedRecipe<C> {
 	

@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.blocks.particle_spawner;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.api.item.CreativeOnlyItem;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.List;
 
 public class CreativeParticleSpawnerBlock extends AbstractParticleSpawnerBlock implements CreativeOnlyItem {
 

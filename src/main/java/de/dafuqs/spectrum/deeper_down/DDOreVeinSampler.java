@@ -1,10 +1,13 @@
 package de.dafuqs.spectrum.deeper_down;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.levelgen.*;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.NoiseChunk;
+import net.minecraft.world.level.levelgen.PositionalRandomFactory;
 
 public final class DDOreVeinSampler {
 	

@@ -1,19 +1,27 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.mojang.blaze3d.systems.*;
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.cca.*;
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.util.*;
-import net.minecraft.world.inventory.*;
-import org.joml.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.math.Axis;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.ScreenEffectRenderer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.Mth;
+import net.minecraft.world.inventory.InventoryMenu;
+import org.joml.Matrix4f;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ScreenEffectRenderer.class)
 public class InGameOverlayRendererMixin {

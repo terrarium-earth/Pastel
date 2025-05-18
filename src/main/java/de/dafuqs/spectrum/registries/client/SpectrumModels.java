@@ -1,14 +1,46 @@
 package de.dafuqs.spectrum.registries.client;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.jade_vines.*;
-import net.minecraft.data.models.model.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.jade_vines.JadeVinePlantBlock;
+import net.minecraft.data.models.model.ModelTemplate;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.Optional;
 
-import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.*;
-import static net.minecraft.data.models.model.TextureSlot.*;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.BASE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.CASE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.CORE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.ENDS;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.FILAMENT;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.FLOWER;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.FRONDS;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.GEMSTONE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.GLASS;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.INNER;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.KEY0;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.KEY1;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.LAYER3;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.LIGHT;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.LINE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.OUTER;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.SHELL;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.SHRINE;
+import static net.minecraft.data.models.model.TextureSlot.ALL;
+import static net.minecraft.data.models.model.TextureSlot.BACK;
+import static net.minecraft.data.models.model.TextureSlot.BOTTOM;
+import static net.minecraft.data.models.model.TextureSlot.CROSS;
+import static net.minecraft.data.models.model.TextureSlot.END;
+import static net.minecraft.data.models.model.TextureSlot.FIRE;
+import static net.minecraft.data.models.model.TextureSlot.FRONT;
+import static net.minecraft.data.models.model.TextureSlot.INSIDE;
+import static net.minecraft.data.models.model.TextureSlot.LAYER0;
+import static net.minecraft.data.models.model.TextureSlot.LAYER1;
+import static net.minecraft.data.models.model.TextureSlot.LAYER2;
+import static net.minecraft.data.models.model.TextureSlot.PARTICLE;
+import static net.minecraft.data.models.model.TextureSlot.SIDE;
+import static net.minecraft.data.models.model.TextureSlot.TEXTURE;
+import static net.minecraft.data.models.model.TextureSlot.TOP;
+import static net.minecraft.data.models.model.TextureSlot.WALL;
 
 public class SpectrumModels {
 	

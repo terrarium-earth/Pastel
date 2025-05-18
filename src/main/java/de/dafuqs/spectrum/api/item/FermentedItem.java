@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.util.Unit;
+import net.minecraft.world.item.ItemStack;
 
 public interface FermentedItem {
 	

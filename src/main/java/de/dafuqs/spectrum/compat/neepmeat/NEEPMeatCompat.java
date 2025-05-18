@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.compat.neepmeat;
 
-import de.dafuqs.spectrum.compat.*;
-import net.fabricmc.api.*;
-import net.minecraft.world.entity.*;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.world.entity.LivingEntity;
 
 public class NEEPMeatCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public void register() {

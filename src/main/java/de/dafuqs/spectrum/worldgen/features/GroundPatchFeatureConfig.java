@@ -1,15 +1,16 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
-import net.minecraft.world.level.levelgen.feature.stateproviders.*;
-import net.minecraft.world.level.levelgen.placement.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.placement.CaveSurface;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public record GroundPatchFeatureConfig(TagKey<Block> replaceable, BlockStateProvider groundState,
 									   Holder<PlacedFeature> vegetationFeature, CaveSurface surface,

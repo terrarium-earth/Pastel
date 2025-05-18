@@ -1,20 +1,21 @@
 package de.dafuqs.spectrum.inventories;
 
-import com.klikli_dev.modonomicon.api.multiblock.*;
-import com.klikli_dev.modonomicon.client.render.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.screens.inventory.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.block.*;
-import org.jetbrains.annotations.*;
+import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
+import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
+import de.dafuqs.spectrum.helpers.RenderHelper;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
+import de.dafuqs.spectrum.registries.SpectrumMultiblocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.block.Rotation;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class PedestalScreen extends AbstractContainerScreen<PedestalScreenHandler> {
 	

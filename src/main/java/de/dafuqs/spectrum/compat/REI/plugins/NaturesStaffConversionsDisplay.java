@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.registries.*;
-import me.shedaniel.rei.api.common.category.*;
-import me.shedaniel.rei.api.common.display.basic.*;
-import me.shedaniel.rei.api.common.entry.*;
-import net.minecraft.client.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.compat.REI.GatedRecipeDisplay;
+import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.entry.EntryStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Collections;
 
 public class NaturesStaffConversionsDisplay extends BasicDisplay implements GatedRecipeDisplay {
 	

@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.level.material.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.material.Fluid;
 
 @SuppressWarnings("unused")
 public class SpectrumFluidTags {

@@ -1,15 +1,18 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.entity.entity.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.phys.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import de.dafuqs.spectrum.entity.entity.SpectrumFishingBobberEntity;
+import net.minecraft.advancements.critereon.FishingHookPredicate;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.Optional;
 
 @Mixin(FishingHookPredicate.class)
 public abstract class FishingHookPredicateMixin {

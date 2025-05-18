@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.klikli_dev.modonomicon.client.render.page.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.world.item.*;
+import com.klikli_dev.modonomicon.client.render.page.BookTextPageRenderer;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookCollectionPage;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.List;
 
 public class BookCollectionPageRenderer extends BookTextPageRenderer {
 

@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.progression;
 
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.server.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.helpers.Support;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.NotNull;
 
 public class GravityAdvancementsManager {
 	

@@ -1,15 +1,19 @@
 package de.dafuqs.spectrum.sound;
 
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.resources.sounds.*;
-import net.minecraft.resources.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.entity.entity.MagicProjectileEntity;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.AbstractSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.resources.sounds.TickableSoundInstance;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.Objects;
 
 @Environment(EnvType.CLIENT)
 public class MagicProjectileSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {

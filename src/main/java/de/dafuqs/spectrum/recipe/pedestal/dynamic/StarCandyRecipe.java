@@ -1,19 +1,26 @@
 package de.dafuqs.spectrum.recipe.pedestal.dynamic;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.pedestal.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.blocks.pedestal.PedestalRecipeInput;
+import de.dafuqs.spectrum.recipe.pedestal.BuiltinGemstoneColor;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
+import de.dafuqs.spectrum.recipe.pedestal.RawShapedPedestalRecipe;
+import de.dafuqs.spectrum.recipe.pedestal.ShapedPedestalRecipe;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
 
 public class StarCandyRecipe extends ShapedPedestalRecipe {
 	

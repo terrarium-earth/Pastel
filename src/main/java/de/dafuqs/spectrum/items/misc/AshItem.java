@@ -1,14 +1,15 @@
 package de.dafuqs.spectrum.items.misc;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
+import de.dafuqs.spectrum.helpers.BlockReference;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
 
-import java.util.*;
+import java.util.Optional;
 
 public class AshItem extends Item {
 	

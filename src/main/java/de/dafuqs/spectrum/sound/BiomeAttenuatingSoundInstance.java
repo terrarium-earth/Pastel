@@ -1,16 +1,22 @@
 package de.dafuqs.spectrum.sound;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.*;
-import net.minecraft.client.resources.sounds.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.biome.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.registries.SpectrumBiomes;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.AbstractSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.resources.sounds.TickableSoundInstance;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import org.jetbrains.annotations.Nullable;
 
 public class BiomeAttenuatingSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 

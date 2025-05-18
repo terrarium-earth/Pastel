@@ -1,9 +1,12 @@
 package de.dafuqs.spectrum.entity;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.entity.predicates.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.entity.predicates.EggLayingWoolyPigPredicate;
+import de.dafuqs.spectrum.entity.predicates.KindlingPredicate;
+import de.dafuqs.spectrum.entity.predicates.LizardPredicate;
+import de.dafuqs.spectrum.entity.predicates.ShulkerPredicate;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public class SpectrumEntitySubPredicateTypes {
 	

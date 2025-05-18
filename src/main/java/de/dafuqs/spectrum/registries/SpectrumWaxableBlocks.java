@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.registries;
 
-import net.fabricmc.fabric.api.registry.*;
+import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 
 public class SpectrumWaxableBlocks {
 

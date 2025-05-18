@@ -1,15 +1,18 @@
 package de.dafuqs.spectrum.loot.functions;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.loot.*;
-import net.minecraft.core.component.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.functions.*;
-import net.minecraft.world.level.storage.loot.predicates.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.loot.SpectrumLootFunctionTypes;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SetComponentsRandomlyLootFunction extends LootItemConditionalFunction {
 	

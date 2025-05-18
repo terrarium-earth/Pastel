@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.items;
 
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 public class ItemWithGlint extends Item {
 	

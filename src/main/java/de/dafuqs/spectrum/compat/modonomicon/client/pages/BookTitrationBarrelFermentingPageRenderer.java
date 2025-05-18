@@ -1,22 +1,23 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.klikli_dev.modonomicon.book.*;
-import com.klikli_dev.modonomicon.client.gui.book.entry.*;
-import com.klikli_dev.modonomicon.data.*;
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import de.dafuqs.spectrum.recipe.titration_barrel.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import com.klikli_dev.modonomicon.book.BookTextHolder;
+import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
+import com.klikli_dev.modonomicon.data.BookDataManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookGatedRecipePage;
+import de.dafuqs.spectrum.recipe.titration_barrel.TitrationBarrelRecipe;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.List;
 
 public class BookTitrationBarrelFermentingPageRenderer extends BookGatedRecipePageRenderer<TitrationBarrelRecipe, BookGatedRecipePage<TitrationBarrelRecipe>> {
 

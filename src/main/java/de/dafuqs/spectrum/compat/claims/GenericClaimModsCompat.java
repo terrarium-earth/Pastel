@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.compat.claims;
 
-import net.fabricmc.loader.api.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public class GenericClaimModsCompat {
 	

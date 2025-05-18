@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.api.block;
 
-import net.minecraft.core.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * A simple {@code Inventory} implementation with only default methods + an item list getter.

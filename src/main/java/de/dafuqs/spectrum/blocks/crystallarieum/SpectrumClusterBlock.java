@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.blocks.crystallarieum;
 
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import net.minecraft.world.level.block.AmethystClusterBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class SpectrumClusterBlock extends AmethystClusterBlock {
 	

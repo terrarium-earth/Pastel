@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.helpers.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.world.level.gameevent.*;
-import org.joml.*;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.level.gameevent.PositionSource;
+import org.joml.Vector3f;
 
 @Environment(EnvType.CLIENT)
 public class ColoredTransmissionParticle extends TransmissionParticle {

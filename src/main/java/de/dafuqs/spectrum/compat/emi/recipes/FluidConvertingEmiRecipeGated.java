@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
-import de.dafuqs.spectrum.compat.emi.*;
-import de.dafuqs.spectrum.recipe.fluid_converting.*;
-import dev.emi.emi.api.recipe.*;
-import dev.emi.emi.api.render.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.*;
+import de.dafuqs.spectrum.compat.emi.GatedSpectrumEmiRecipe;
+import de.dafuqs.spectrum.recipe.fluid_converting.FluidConvertingRecipe;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.widget.WidgetHolder;
 
 public class FluidConvertingEmiRecipeGated extends GatedSpectrumEmiRecipe<FluidConvertingRecipe> {
 	

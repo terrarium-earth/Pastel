@@ -1,13 +1,18 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.helpers.ParticleHelper;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import de.dafuqs.spectrum.particle.VectorPattern;
+import de.dafuqs.spectrum.particle.effect.ColoredExplosionParticleEffect;
+import de.dafuqs.spectrum.particle.effect.ColoredSparkleRisingParticleEffect;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.NoRenderParticle;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.phys.Vec3;
 
 @Environment(EnvType.CLIENT)
 public class MoonstoneStrikeParticle extends NoRenderParticle {

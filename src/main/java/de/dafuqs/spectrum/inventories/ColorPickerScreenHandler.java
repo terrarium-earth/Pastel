@@ -1,21 +1,27 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.energy.*;
-import de.dafuqs.spectrum.inventories.slots.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.api.block.InkColorSelectedPacketReceiver;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.blocks.energy.ColorPickerBlockEntity;
+import de.dafuqs.spectrum.inventories.slots.ColorPickerInputSlot;
+import de.dafuqs.spectrum.inventories.slots.InkStorageSlot;
+import de.dafuqs.spectrum.networking.s2c_payloads.UpdateBlockEntityInkPayload;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import de.dafuqs.spectrum.registries.SpectrumRegistryKeys;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.Optional;
 
 public class ColorPickerScreenHandler extends AbstractContainerMenu implements InkColorSelectedPacketReceiver {
 	

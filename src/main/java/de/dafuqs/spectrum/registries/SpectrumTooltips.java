@@ -1,15 +1,17 @@
 package de.dafuqs.spectrum.registries;
 
-import net.fabricmc.fabric.api.client.item.v1.*;
-import net.minecraft.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.level.block.*;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SculkShriekerBlock;
 
-import java.util.*;
+import java.util.List;
 
 public class SpectrumTooltips {
 	

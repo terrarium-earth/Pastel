@@ -1,15 +1,15 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.minecraft.core.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 
-import java.lang.ref.*;
-import java.util.*;
+import java.lang.ref.WeakReference;
+import java.util.Optional;
 
 /**
  * Why yes. I did in fact yoink this from PulseFlux.

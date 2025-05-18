@@ -1,22 +1,27 @@
 package de.dafuqs.spectrum.loot.functions;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.loot.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.functions.*;
-import net.minecraft.world.level.storage.loot.predicates.*;
-import net.minecraft.world.level.storage.loot.providers.number.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.energy.InkCost;
+import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.item.InkPoweredPotionFillable;
+import de.dafuqs.spectrum.helpers.CodecHelper;
+import de.dafuqs.spectrum.loot.SpectrumLootFunctionTypes;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
 
-import java.util.*;
+import java.util.List;
 
 public class FillPotionFillableLootFunction extends LootItemConditionalFunction {
 	

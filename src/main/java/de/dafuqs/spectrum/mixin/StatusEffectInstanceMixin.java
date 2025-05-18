@@ -1,17 +1,24 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
-import com.llamalad7.mixinextras.sugar.*;
-import com.llamalad7.mixinextras.sugar.ref.*;
-import com.mojang.datafixers.util.*;
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.injectors.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.effect.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
+import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.DynamicOps;
+import de.dafuqs.spectrum.injectors.StatusEffectInstanceInjector;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MobEffectInstance.class)
 public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceInjector {

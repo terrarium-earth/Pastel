@@ -1,26 +1,32 @@
 package de.dafuqs.spectrum.compat.modonomicon.pages;
 
-import com.google.gson.*;
-import com.klikli_dev.modonomicon.*;
-import com.klikli_dev.modonomicon.book.*;
-import com.klikli_dev.modonomicon.book.conditions.*;
-import com.klikli_dev.modonomicon.book.entries.*;
-import com.klikli_dev.modonomicon.book.page.*;
-import com.klikli_dev.modonomicon.util.*;
-import com.mojang.brigadier.*;
-import com.mojang.brigadier.exceptions.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import net.minecraft.client.resources.language.*;
-import net.minecraft.commands.*;
-import net.minecraft.commands.arguments.item.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.klikli_dev.modonomicon.Modonomicon;
+import com.klikli_dev.modonomicon.book.BookTextHolder;
+import com.klikli_dev.modonomicon.book.conditions.BookCondition;
+import com.klikli_dev.modonomicon.book.conditions.BookNoneCondition;
+import com.klikli_dev.modonomicon.book.entries.BookContentEntry;
+import com.klikli_dev.modonomicon.book.page.BookTextPage;
+import com.klikli_dev.modonomicon.util.BookGsonHelper;
+import com.mojang.brigadier.StringReader;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconCompat;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.arguments.item.ItemArgument;
+import net.minecraft.commands.arguments.item.ItemInput;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookCollectionPage extends BookTextPage {
 

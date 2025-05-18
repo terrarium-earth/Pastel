@@ -1,17 +1,23 @@
 package de.dafuqs.spectrum.items.bundles;
 
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.inventory.tooltip.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.components.ExtendedBundleComponent;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.Block;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class PlaceableBundleBlockItem extends BlockItem {
 	

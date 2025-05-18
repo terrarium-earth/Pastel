@@ -1,10 +1,12 @@
 package de.dafuqs.spectrum.mixin.compat;
 
-import net.fabricmc.loader.api.*;
-import org.objectweb.asm.tree.*;
-import org.spongepowered.asm.mixin.extensibility.*;
+import net.fabricmc.loader.api.FabricLoader;
+import org.objectweb.asm.tree.ClassNode;
+import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
+import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 public final class Plugin implements IMixinConfigPlugin {
 	

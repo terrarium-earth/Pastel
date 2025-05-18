@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.registries;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.predicate.item.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.predicate.item.BottomlessStackPredicate;
+import de.dafuqs.spectrum.api.predicate.item.InfusedBeveragePredicate;
+import de.dafuqs.spectrum.api.predicate.item.SweetenedPredicate;
+import net.minecraft.advancements.critereon.ItemSubPredicate;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 @SuppressWarnings("unused")
 public class SpectrumItemSubPredicateTypes {

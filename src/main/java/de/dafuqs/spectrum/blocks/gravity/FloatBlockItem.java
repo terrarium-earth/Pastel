@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.blocks.gravity;
 
-import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.api.item.GravitableItem;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 public class FloatBlockItem extends BlockItem implements GravitableItem {
 	

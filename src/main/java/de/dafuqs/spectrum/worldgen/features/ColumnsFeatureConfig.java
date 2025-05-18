@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
 public record ColumnsFeatureConfig(BlockState blockState, IntProvider reach,
                                    IntProvider height) implements FeatureConfiguration {

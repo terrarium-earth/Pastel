@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.registries;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.data_loaders.resonance_processors.*;
-import net.minecraft.core.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.interaction.ResonanceProcessor;
+import de.dafuqs.spectrum.data_loaders.resonance_processors.DropSelfResonanceProcessor;
+import de.dafuqs.spectrum.data_loaders.resonance_processors.ModifyDropsResonanceProcessor;
+import net.minecraft.core.Registry;
 
 public class SpectrumResonanceProcessorTypes {
 	

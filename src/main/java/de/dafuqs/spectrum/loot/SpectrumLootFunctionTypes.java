@@ -1,12 +1,17 @@
 package de.dafuqs.spectrum.loot;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.loot.functions.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.level.storage.loot.functions.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.loot.functions.DyeRandomlyLootFunction;
+import de.dafuqs.spectrum.loot.functions.FermentRandomlyLootFunction;
+import de.dafuqs.spectrum.loot.functions.FillPotionFillableLootFunction;
+import de.dafuqs.spectrum.loot.functions.GrantAdvancementLootFunction;
+import de.dafuqs.spectrum.loot.functions.SetComponentsRandomlyLootFunction;
+import de.dafuqs.spectrum.registries.DeferredRegistrar;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
 public class SpectrumLootFunctionTypes {
 	

@@ -1,11 +1,14 @@
 package de.dafuqs.spectrum.api.entity;
 
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.goal.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.Goal;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 public interface PackEntity<T extends Mob & PackEntity<T>> {
 	boolean hasOthersInGroup();

@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.energy;
 
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.components.InkStorageComponent;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Defines that an object holds a PigmentEnergyStorage

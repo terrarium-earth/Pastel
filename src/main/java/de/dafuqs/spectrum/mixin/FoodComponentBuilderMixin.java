@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.injectors.*;
-import net.minecraft.world.food.*;
-import org.spongepowered.asm.mixin.*;
+import de.dafuqs.spectrum.injectors.FoodComponentBuilderInjector;
+import net.minecraft.world.food.FoodProperties;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(FoodProperties.Builder.class)
 public abstract class FoodComponentBuilderMixin implements FoodComponentBuilderInjector {

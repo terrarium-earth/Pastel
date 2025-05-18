@@ -1,12 +1,17 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.helpers.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.WaterDropParticle;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.SimpleParticleType;
 
 @Environment(EnvType.CLIENT)
 

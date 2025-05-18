@@ -1,16 +1,18 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.api.block.*;
-import net.fabricmc.fabric.api.screenhandler.v1.*;
-import net.minecraft.client.gui.screens.*;
-import net.minecraft.client.gui.screens.inventory.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.flag.*;
-import net.minecraft.world.inventory.*;
+import de.dafuqs.spectrum.api.block.FilterConfigurable;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 
 public class SpectrumScreenHandlerTypes {
 	

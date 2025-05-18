@@ -1,21 +1,23 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.fluid.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.storage.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
+import de.dafuqs.spectrum.blocks.fluid.MidnightSolutionFluidBlock;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.storage.ServerLevelData;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.Optional;
 
 @SuppressWarnings("unused")
 public class SpectrumFusionShrineWorldEffects {

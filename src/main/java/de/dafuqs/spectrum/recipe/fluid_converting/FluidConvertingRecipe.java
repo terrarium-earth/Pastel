@@ -1,19 +1,24 @@
 package de.dafuqs.spectrum.recipe.fluid_converting;
 
-import com.mojang.datafixers.util.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.recipe.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import com.mojang.datafixers.util.Function5;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.recipe.GatedSpectrumRecipe;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Optional;
 
 public abstract class FluidConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	

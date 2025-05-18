@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.worldgen.tree_decorators.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.level.levelgen.feature.treedecorators.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.worldgen.tree_decorators.FrondsDecorator;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class SpectrumTreeDecoratorTypes {
 	

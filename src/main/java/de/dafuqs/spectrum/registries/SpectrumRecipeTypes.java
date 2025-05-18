@@ -1,21 +1,28 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.recipe.anvil_crushing.*;
-import de.dafuqs.spectrum.recipe.cinderhearth.*;
-import de.dafuqs.spectrum.recipe.crystallarieum.*;
-import de.dafuqs.spectrum.recipe.enchanter.*;
-import de.dafuqs.spectrum.recipe.fluid_converting.*;
-import de.dafuqs.spectrum.recipe.fusion_shrine.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import de.dafuqs.spectrum.recipe.potion_workshop.*;
-import de.dafuqs.spectrum.recipe.primordial_fire_burning.*;
-import de.dafuqs.spectrum.recipe.spirit_instiller.*;
-import de.dafuqs.spectrum.recipe.titration_barrel.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.recipe.InkConvertingRecipe;
+import de.dafuqs.spectrum.recipe.anvil_crushing.AnvilCrushingRecipe;
+import de.dafuqs.spectrum.recipe.cinderhearth.CinderhearthRecipe;
+import de.dafuqs.spectrum.recipe.crystallarieum.CrystallarieumRecipe;
+import de.dafuqs.spectrum.recipe.enchanter.EnchanterRecipe;
+import de.dafuqs.spectrum.recipe.enchanter.EnchantmentUpgradeRecipe;
+import de.dafuqs.spectrum.recipe.fluid_converting.DragonrotConvertingRecipe;
+import de.dafuqs.spectrum.recipe.fluid_converting.GooConvertingRecipe;
+import de.dafuqs.spectrum.recipe.fluid_converting.LiquidCrystalConvertingRecipe;
+import de.dafuqs.spectrum.recipe.fluid_converting.MidnightSolutionConvertingRecipe;
+import de.dafuqs.spectrum.recipe.fusion_shrine.FusionShrineRecipe;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipe;
+import de.dafuqs.spectrum.recipe.potion_workshop.PotionWorkshopBrewingRecipe;
+import de.dafuqs.spectrum.recipe.potion_workshop.PotionWorkshopCraftingRecipe;
+import de.dafuqs.spectrum.recipe.potion_workshop.PotionWorkshopReactingRecipe;
+import de.dafuqs.spectrum.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
+import de.dafuqs.spectrum.recipe.spirit_instiller.SpiritInstillerRecipe;
+import de.dafuqs.spectrum.recipe.titration_barrel.ITitrationBarrelRecipe;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 
 public class SpectrumRecipeTypes {
 	

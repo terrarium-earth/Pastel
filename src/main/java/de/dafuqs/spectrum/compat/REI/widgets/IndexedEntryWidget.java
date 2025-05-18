@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.compat.REI.widgets;
 
-import me.shedaniel.math.*;
-import me.shedaniel.rei.api.common.entry.*;
-import me.shedaniel.rei.impl.client.gui.widget.*;
+import me.shedaniel.math.Point;
+import me.shedaniel.rei.api.common.entry.EntryStack;
+import me.shedaniel.rei.impl.client.gui.widget.EntryWidget;
 
-import java.util.function.*;
+import java.util.function.Supplier;
 
 public class IndexedEntryWidget extends EntryWidget {
 	

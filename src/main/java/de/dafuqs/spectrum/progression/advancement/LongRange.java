@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.progression.advancement;
 
-import com.mojang.serialization.*;
-import net.minecraft.advancements.critereon.*;
+import com.mojang.serialization.Codec;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 
-import java.util.*;
+import java.util.Optional;
 
 public record LongRange(Optional<Long> min, Optional<Long> max, Optional<Long> minSquared, Optional<Long> maxSquared) implements MinMaxBounds<Long> {
 	

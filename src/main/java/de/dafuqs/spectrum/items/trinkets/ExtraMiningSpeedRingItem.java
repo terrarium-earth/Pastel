@@ -1,19 +1,22 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.energy.storage.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.item.*;
+import com.google.common.collect.Multimap;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.energy.storage.FixedSingleInkStorage;
+import dev.emi.trinkets.api.SlotReference;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
-import java.util.*;
+import java.util.List;
 
 public class ExtraMiningSpeedRingItem extends InkDrainTrinketItem {
 	

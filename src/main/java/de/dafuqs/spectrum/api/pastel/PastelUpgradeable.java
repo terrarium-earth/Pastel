@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.api.pastel;
 
-import java.util.*;
+import java.util.List;
 
 public interface PastelUpgradeable {
 

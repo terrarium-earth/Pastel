@@ -1,26 +1,31 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import com.google.common.collect.*;
-import de.dafuqs.additionalentityattributes.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.registries.*;
-import dev.emi.trinkets.api.*;
-import net.fabricmc.api.*;
-import net.minecraft.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import com.google.common.collect.Multimap;
+import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import dev.emi.trinkets.api.SlotReference;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 public class AshenCircletItem extends SpectrumTrinketItem {
 	

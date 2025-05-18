@@ -1,15 +1,23 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
-import de.dafuqs.spectrum.blocks.pastel_network.nodes.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.level.saveddata.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeBlockEntity;
+import de.dafuqs.spectrum.helpers.CodecHelper;
+import de.dafuqs.spectrum.networking.s2c_payloads.PastelNetworkRemovedPayload;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.saveddata.SavedData;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 // Persisted together with the overworld. Resetting the overworld will also reset all networks
 public class ServerPastelNetworkManager extends SavedData implements PastelNetworkManager<ServerLevel, ServerPastelNetwork> {

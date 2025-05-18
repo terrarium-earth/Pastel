@@ -1,27 +1,36 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.api.render.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.component.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.InkCost;
+import de.dafuqs.spectrum.api.energy.InkPowered;
+import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
+import de.dafuqs.spectrum.api.item.InkPoweredPotionFillable;
+import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import de.dafuqs.spectrum.particle.effect.DynamicParticleEffect;
+import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionFillable, SlotBackgroundEffectProvider {
 	

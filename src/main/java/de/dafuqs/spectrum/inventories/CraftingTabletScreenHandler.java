@@ -1,23 +1,39 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.blocks.pedestal.*;
-import de.dafuqs.spectrum.inventories.slots.*;
-import de.dafuqs.spectrum.items.magic_items.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.blocks.pedestal.PedestalRecipeInput;
+import de.dafuqs.spectrum.inventories.slots.LockableCraftingResultSlot;
+import de.dafuqs.spectrum.inventories.slots.ReadOnlySlot;
+import de.dafuqs.spectrum.items.magic_items.CraftingTabletItem;
+import de.dafuqs.spectrum.recipe.pedestal.BuiltinGemstoneColor;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipe;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
+import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.RecipeBookMenu;
+import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraft.world.inventory.ResultContainer;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Optional;
 
 public class CraftingTabletScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<RecipeInput>> {
 	

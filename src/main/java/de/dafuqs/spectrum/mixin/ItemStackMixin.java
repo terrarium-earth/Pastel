@@ -1,25 +1,36 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
-import com.llamalad7.mixinextras.sugar.*;
-import de.dafuqs.spectrum.api.gui.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.items.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
-import net.minecraft.world.item.enchantment.*;
-import org.jetbrains.annotations.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import de.dafuqs.spectrum.api.gui.SlotWithOnClickAction;
+import de.dafuqs.spectrum.api.item.Preenchanted;
+import de.dafuqs.spectrum.api.item.TooltipExtensions;
+import de.dafuqs.spectrum.items.ConcealingOilsItem;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumEnchantmentTags;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {

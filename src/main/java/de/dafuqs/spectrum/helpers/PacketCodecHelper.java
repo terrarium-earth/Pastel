@@ -1,22 +1,44 @@
 package de.dafuqs.spectrum.helpers;
 
-import com.mojang.datafixers.util.*;
-import de.dafuqs.spectrum.recipe.*;
-import io.netty.buffer.*;
-import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
-import org.apache.commons.lang3.math.*;
+import com.mojang.datafixers.util.Function10;
+import com.mojang.datafixers.util.Function11;
+import com.mojang.datafixers.util.Function12;
+import com.mojang.datafixers.util.Function13;
+import com.mojang.datafixers.util.Function14;
+import com.mojang.datafixers.util.Function15;
+import com.mojang.datafixers.util.Function16;
+import com.mojang.datafixers.util.Function3;
+import com.mojang.datafixers.util.Function4;
+import com.mojang.datafixers.util.Function5;
+import com.mojang.datafixers.util.Function6;
+import com.mojang.datafixers.util.Function7;
+import com.mojang.datafixers.util.Function8;
+import com.mojang.datafixers.util.Function9;
+import de.dafuqs.spectrum.recipe.RecipeUtils;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.advancements.critereon.FluidPredicate;
+import net.minecraft.advancements.critereon.LightPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
+import net.minecraft.core.Vec3i;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.VarInt;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import org.apache.commons.lang3.math.Fraction;
 
-import java.lang.reflect.*;
-import java.util.function.*;
+import java.lang.reflect.Array;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class PacketCodecHelper {
 	

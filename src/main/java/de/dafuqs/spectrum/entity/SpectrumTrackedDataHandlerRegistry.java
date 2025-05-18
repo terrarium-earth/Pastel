@@ -1,11 +1,14 @@
 package de.dafuqs.spectrum.entity;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.entity.variants.*;
-import de.dafuqs.spectrum.items.tools.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.syncher.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.entity.variants.KindlingVariant;
+import de.dafuqs.spectrum.entity.variants.LizardFrillVariant;
+import de.dafuqs.spectrum.entity.variants.LizardHornVariant;
+import de.dafuqs.spectrum.items.tools.GlassArrowVariant;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.syncher.EntityDataSerializer;
+import net.minecraft.network.syncher.EntityDataSerializers;
 
 public class SpectrumTrackedDataHandlerRegistry {
 	

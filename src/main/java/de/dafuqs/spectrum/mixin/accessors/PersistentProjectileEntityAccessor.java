@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.mixin.accessors;
 
-import net.minecraft.world.entity.projectile.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.gen.*;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(AbstractArrow.class)
 public interface PersistentProjectileEntityAccessor {

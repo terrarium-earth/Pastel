@@ -1,20 +1,23 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.compat.vanityslots.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.render.armor.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.player.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.entity.layers.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.compat.vanityslots.VanitySlotsCompat;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.render.armor.BedrockCapeRenderer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.CapeLayer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(CapeLayer.class)

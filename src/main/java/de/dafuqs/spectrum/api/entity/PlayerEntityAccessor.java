@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.api.entity;
 
-import de.dafuqs.spectrum.entity.entity.*;
+import de.dafuqs.spectrum.entity.entity.SpectrumFishingBobberEntity;
 
 public interface PlayerEntityAccessor {
 	

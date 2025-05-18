@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.api.damage_type.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
-import org.spongepowered.asm.mixin.*;
+import de.dafuqs.spectrum.api.damage_type.StackTracking;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 
-import java.util.*;
+import java.util.Optional;
 
 @Mixin(DamageSource.class)
 public class DamageSourceMixin implements StackTracking {

@@ -1,17 +1,17 @@
 package de.dafuqs.spectrum.compat.modonomicon;
 
-import com.klikli_dev.modonomicon.api.multiblock.*;
-import com.klikli_dev.modonomicon.client.gui.book.entry.*;
-import com.klikli_dev.modonomicon.client.render.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
-import org.jetbrains.annotations.*;
+import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
+import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
+import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Rotation;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class ModonomiconHelper {
 	

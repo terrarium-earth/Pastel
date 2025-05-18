@@ -1,26 +1,36 @@
 package de.dafuqs.spectrum.blocks.idols;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.entity.animal.goat.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.entity.entity.EggLayingWoolyPigEntity;
+import de.dafuqs.spectrum.mixin.accessors.MooshroomEntityAccessor;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.animal.MushroomCow;
+import net.minecraft.world.entity.animal.goat.Goat;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
-import static de.dafuqs.spectrum.helpers.InWorldInteractionHelper.*;
+import static de.dafuqs.spectrum.helpers.InWorldInteractionHelper.findAndDecreaseClosestItemEntityOfItem;
 
 public class MilkingIdolBlock extends IdolBlock {
 	

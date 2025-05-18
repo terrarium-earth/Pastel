@@ -1,16 +1,39 @@
 package de.dafuqs.spectrum.registries.client;
 
-import net.minecraft.data.models.*;
-import net.minecraft.data.models.model.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.block.*;
+import net.minecraft.data.models.BlockModelGenerators;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplate;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.data.models.model.TextureMapping;
+import net.minecraft.data.models.model.TexturedModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Optional;
+import java.util.function.UnaryOperator;
 
-import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.*;
-import static net.minecraft.data.models.model.TextureMapping.*;
-import static net.minecraft.data.models.model.TextureSlot.*;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.BASE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.CASE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.CORE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.ENDS;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.FILAMENT;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.GEMSTONE;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.GLASS;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.INNER;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.KEY0;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.KEY1;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.SHELL;
+import static de.dafuqs.spectrum.registries.client.SpectrumTextureKeys.SHRINE;
+import static net.minecraft.data.models.model.TextureMapping.getBlockTexture;
+import static net.minecraft.data.models.model.TextureSlot.ALL;
+import static net.minecraft.data.models.model.TextureSlot.BACK;
+import static net.minecraft.data.models.model.TextureSlot.BOTTOM;
+import static net.minecraft.data.models.model.TextureSlot.DIRT;
+import static net.minecraft.data.models.model.TextureSlot.FRONT;
+import static net.minecraft.data.models.model.TextureSlot.PARTICLE;
+import static net.minecraft.data.models.model.TextureSlot.SIDE;
+import static net.minecraft.data.models.model.TextureSlot.TOP;
 
 public class SpectrumTexturedModels {
 	

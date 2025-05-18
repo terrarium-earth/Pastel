@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.items.food;
 
-import de.dafuqs.spectrum.items.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.items.ItemWithTooltip;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class ClottedCreamItem extends ItemWithTooltip {
 	

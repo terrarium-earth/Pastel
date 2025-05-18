@@ -1,16 +1,18 @@
 package de.dafuqs.spectrum.components;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
-import io.netty.buffer.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipProvider;
 
-import java.util.function.*;
+import java.util.function.Consumer;
 
 public record InfusedBeverageComponent(String variant, int color) implements TooltipProvider {
 	

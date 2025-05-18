@@ -1,14 +1,19 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.particle.effect.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.particle.effect.TransmissionParticleEffect;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.gameevent.PositionSource;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class TransmissionParticle extends TextureSheetParticle {

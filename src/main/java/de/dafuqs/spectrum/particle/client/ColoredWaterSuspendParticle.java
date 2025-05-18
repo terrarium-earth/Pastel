@@ -1,14 +1,18 @@
 package de.dafuqs.spectrum.particle.client;
 
-import de.dafuqs.spectrum.particle.effect.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.util.*;
-import org.joml.*;
+import de.dafuqs.spectrum.particle.effect.ColoredSporeBlossomAirParticleEffect;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.SuspendedParticle;
+import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.core.particles.ParticleGroup;
+import net.minecraft.util.Mth;
+import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class ColoredWaterSuspendParticle extends SuspendedParticle {

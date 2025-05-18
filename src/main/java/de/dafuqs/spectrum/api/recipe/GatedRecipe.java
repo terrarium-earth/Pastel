@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.api.recipe;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.progression.*;
-import net.fabricmc.api.*;
-import net.fabricmc.loader.api.*;
-import net.minecraft.locale.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.progression.UnlockToastManager;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeType;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Optional;
 
 public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	

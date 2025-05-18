@@ -1,14 +1,15 @@
 package de.dafuqs.spectrum.blocks.conditional.colored_tree;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.core.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.shapes.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.RedstoneLampBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.*;
+import java.util.Map;
 
 public class ColoredLightBlock extends RedstoneLampBlock {
 	

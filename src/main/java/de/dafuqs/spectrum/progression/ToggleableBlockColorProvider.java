@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.progression;
 
-import net.minecraft.client.color.block.*;
-import net.minecraft.core.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class ToggleableBlockColorProvider implements BlockColor {
 	

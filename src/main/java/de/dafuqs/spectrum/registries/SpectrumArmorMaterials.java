@@ -1,19 +1,22 @@
 package de.dafuqs.spectrum.registries;
 
-import com.google.common.base.*;
-import de.dafuqs.spectrum.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import com.google.common.base.Suppliers;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.Util;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.crafting.Ingredient;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.function.Supplier;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumCommon.locate;
 
 public class SpectrumArmorMaterials {
 

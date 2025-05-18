@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.entity.render;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.resources.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.entity.SeatEntity;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
 
 public class SeatEntityRenderer extends EntityRenderer<SeatEntity> {
 

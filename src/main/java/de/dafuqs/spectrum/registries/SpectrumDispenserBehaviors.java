@@ -1,13 +1,17 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.blocks.bottomless_bundle.*;
-import de.dafuqs.spectrum.blocks.mob_head.*;
-import de.dafuqs.spectrum.blocks.shooting_star.*;
-import de.dafuqs.spectrum.items.magic_items.ampoules.*;
-import de.dafuqs.spectrum.items.tools.*;
-import net.minecraft.core.dispenser.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.blocks.bottomless_bundle.BottomlessBundleItem;
+import de.dafuqs.spectrum.blocks.mob_head.SpectrumSkullBlock;
+import de.dafuqs.spectrum.blocks.shooting_star.ShootingStarDispenserBehavior;
+import de.dafuqs.spectrum.items.magic_items.ampoules.GlassAmpouleItem;
+import de.dafuqs.spectrum.items.tools.GlassArrowVariant;
+import de.dafuqs.spectrum.items.tools.PrimordialLighterItem;
+import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;
+import net.minecraft.core.dispenser.ShulkerBoxDispenseBehavior;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DispenserBlock;
 
 public class SpectrumDispenserBehaviors {
 	

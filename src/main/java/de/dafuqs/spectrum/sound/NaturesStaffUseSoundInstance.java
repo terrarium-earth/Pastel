@@ -1,10 +1,14 @@
 package de.dafuqs.spectrum.sound;
 
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.resources.sounds.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.player.*;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.resources.sounds.AbstractSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.resources.sounds.TickableSoundInstance;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 
 @Environment(EnvType.CLIENT)
 public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {

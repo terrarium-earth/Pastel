@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.resources.ResourceLocation;
 
 public class StampDataCategory {
 

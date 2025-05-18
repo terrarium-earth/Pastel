@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.api.predicate.location;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.helpers.*;
-import io.netty.buffer.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.StringRepresentable;
 
 public enum MoonPhasePredicate implements StringRepresentable {
 	FULL_MOON,

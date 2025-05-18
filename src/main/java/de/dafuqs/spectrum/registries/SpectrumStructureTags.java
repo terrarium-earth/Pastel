@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.levelgen.structure.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
-import java.util.*;
+import java.util.Optional;
 
 public class SpectrumStructureTags {
 	

@@ -1,19 +1,21 @@
 package de.dafuqs.spectrum.loot.functions;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.loot.*;
-import net.minecraft.core.component.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.functions.*;
-import net.minecraft.world.level.storage.loot.predicates.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import de.dafuqs.spectrum.loot.SpectrumLootFunctionTypes;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
-import java.util.*;
+import java.util.List;
 
 public class DyeRandomlyLootFunction extends LootItemConditionalFunction {
 	

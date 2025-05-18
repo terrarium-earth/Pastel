@@ -1,16 +1,19 @@
 package de.dafuqs.spectrum.sound;
 
-import de.dafuqs.spectrum.items.trinkets.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.resources.sounds.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.items.trinkets.TakeOffBeltItem;
+import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.AbstractSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.resources.sounds.TickableSoundInstance;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 @Environment(EnvType.CLIENT)
 public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {

@@ -1,19 +1,35 @@
 package de.dafuqs.spectrum.helpers;
 
-import com.google.gson.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import org.apache.commons.lang3.math.*;
+import com.google.gson.JsonElement;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.MapLike;
+import com.mojang.serialization.RecordBuilder;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.mixin.accessors.CachedRegistryInfoGetterAccessor;
+import de.dafuqs.spectrum.mixin.accessors.RegistryOpsAccessor;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import org.apache.commons.lang3.math.Fraction;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class CodecHelper {
 	

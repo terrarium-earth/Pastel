@@ -1,15 +1,18 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.klikli_dev.modonomicon.book.*;
-import com.klikli_dev.modonomicon.client.gui.book.entry.*;
-import com.klikli_dev.modonomicon.client.gui.book.markdown.*;
-import com.klikli_dev.modonomicon.client.render.page.*;
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.util.*;
-import org.jetbrains.annotations.*;
+import com.klikli_dev.modonomicon.book.BookTextHolder;
+import com.klikli_dev.modonomicon.book.RenderedBookTextHolder;
+import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
+import com.klikli_dev.modonomicon.client.gui.book.markdown.MarkdownComponentRenderUtils;
+import com.klikli_dev.modonomicon.client.render.page.BookPageRenderer;
+import com.klikli_dev.modonomicon.client.render.page.PageWithTextRenderer;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookSnippetPage;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.util.FormattedCharSequence;
+import org.jetbrains.annotations.Nullable;
 
 public class BookSnippetPageRenderer extends BookPageRenderer<BookSnippetPage> implements PageWithTextRenderer {
 

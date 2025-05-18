@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.items.tools;
 
-import net.minecraft.core.component.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 
 public class GlintlessPickaxe extends SpectrumPickaxeItem {
 

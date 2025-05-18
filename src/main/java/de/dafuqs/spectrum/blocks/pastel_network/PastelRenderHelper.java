@@ -1,16 +1,17 @@
 package de.dafuqs.spectrum.blocks.pastel_network;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.*;
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.phys.*;
-import org.joml.*;
-
-import java.lang.Math;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix4f;
 
 public class PastelRenderHelper {
 

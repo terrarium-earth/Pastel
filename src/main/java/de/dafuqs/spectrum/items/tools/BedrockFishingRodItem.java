@@ -1,18 +1,21 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.material.*;
+import de.dafuqs.spectrum.api.item.Preenchanted;
+import de.dafuqs.spectrum.entity.entity.BedrockFishingBobberEntity;
+import de.dafuqs.spectrum.registries.SpectrumFluidTags;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.FluidState;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class BedrockFishingRodItem extends SpectrumFishingRodItem implements Preenchanted {
 	

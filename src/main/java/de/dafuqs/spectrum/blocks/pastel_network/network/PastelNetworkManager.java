@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface PastelNetworkManager<W extends Level, N extends PastelNetwork<W>> {
 	

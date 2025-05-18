@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.helpers;
 
-import com.google.common.collect.*;
-import com.mojang.datafixers.util.*;
-import net.minecraft.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.food.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
+import com.google.common.collect.Lists;
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.StringUtil;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 
-import java.util.*;
+import java.util.List;
 
 public class TooltipHelper {
 	

@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.registries;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.worldgen.structure_pool_elements.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.level.levelgen.structure.pools.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.worldgen.structure_pool_elements.SingleBlockPoolElement;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElementType;
 
 public class SpectrumStructurePoolElementTypes {
 	

@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.recipe;
 
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
 
-import java.util.*;
+import java.util.List;
 
 public class SimpleRecipeInput implements RecipeInput {
 	private final List<ItemStack> stacks;

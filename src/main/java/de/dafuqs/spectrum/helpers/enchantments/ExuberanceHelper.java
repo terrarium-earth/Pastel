@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.helpers.enchantments;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.entity.player.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.registries.SpectrumEnchantments;
+import net.minecraft.world.entity.player.Player;
 
 public class ExuberanceHelper {
 	

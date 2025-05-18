@@ -1,8 +1,10 @@
 package de.dafuqs.spectrum.registries;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public class DeferredRegistrar {
 	

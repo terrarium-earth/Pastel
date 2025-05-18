@@ -1,10 +1,13 @@
 package de.dafuqs.spectrum.registries.client;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.mixin.client.accessors.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.resources.*;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import de.dafuqs.spectrum.mixin.client.accessors.RenderLayerAccessor;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
 public class SpectrumRenderLayers {

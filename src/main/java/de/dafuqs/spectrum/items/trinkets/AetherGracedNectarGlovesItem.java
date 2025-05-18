@@ -1,22 +1,29 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import com.google.common.collect.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.render.*;
-import de.dafuqs.spectrum.cca.azure_dike.*;
-import de.dafuqs.spectrum.registries.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import com.google.common.collect.Multimap;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
+import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
+import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import dev.emi.trinkets.api.SlotReference;
+import dev.emi.trinkets.api.TrinketsApi;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implements SlotBackgroundEffectProvider {
 

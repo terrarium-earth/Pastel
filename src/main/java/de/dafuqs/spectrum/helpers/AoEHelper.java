@@ -1,17 +1,21 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.minecraft.core.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
+import net.minecraft.network.protocol.game.ClientboundLevelEventPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.function.*;
+import java.util.function.Predicate;
 
 // reworked and yarn version of Botanias AoE breaking mechanism at
 // https://github.com/VazkiiMods/Botania/blob/7d526461b21cac3d4e2a084a063d469c4065951f/Xplat/src/main/java/vazkii/botania/common/item/equipment/tool/ToolCommons.java

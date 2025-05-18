@@ -1,32 +1,48 @@
 package de.dafuqs.spectrum.recipe.fusion_shrine;
 
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.api.predicate.location.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.fusion_shrine.*;
-import de.dafuqs.spectrum.blocks.upgrade.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.transfer.v1.fluid.*;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.block.MultiblockCrafter;
+import de.dafuqs.spectrum.api.predicate.location.WorldConditionsPredicate;
+import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.blocks.fusion_shrine.FusionShrineBlockEntity;
+import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
+import de.dafuqs.spectrum.helpers.CodecHelper;
+import de.dafuqs.spectrum.helpers.InventoryHelper;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.recipe.GatedStackSpectrumRecipe;
+import de.dafuqs.spectrum.recipe.StorageRecipeInput;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeInput<SingleVariantStorage<FluidVariant>>> {
 	

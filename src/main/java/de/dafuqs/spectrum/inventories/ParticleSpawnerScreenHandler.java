@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.blocks.particle_spawner.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerBlockEntity;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 
 public class ParticleSpawnerScreenHandler extends AbstractContainerMenu {
 	

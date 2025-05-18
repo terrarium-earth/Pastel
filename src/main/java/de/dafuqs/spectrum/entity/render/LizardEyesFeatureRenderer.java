@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.entity.render;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.models.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.renderer.entity.layers.*;
-import net.minecraft.world.entity.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.models.LizardEntityModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.world.entity.LivingEntity;
 
 @Environment(EnvType.CLIENT)
 public class LizardEyesFeatureRenderer<T extends LivingEntity> extends EyesLayer<T, LizardEntityModel<T>> {

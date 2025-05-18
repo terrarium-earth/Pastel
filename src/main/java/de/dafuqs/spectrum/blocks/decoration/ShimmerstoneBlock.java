@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.particle.*;
-import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class ShimmerstoneBlock extends Block {
 

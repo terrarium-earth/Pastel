@@ -1,15 +1,17 @@
 package de.dafuqs.spectrum.compat.emi.widgets;
 
-import com.mojang.blaze3d.systems.*;
-import dev.emi.emi.api.widget.*;
-import dev.emi.emi.runtime.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.screens.inventory.tooltip.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import dev.emi.emi.api.widget.Bounds;
+import dev.emi.emi.api.widget.Widget;
+import dev.emi.emi.api.widget.WidgetTooltipHolder;
+import dev.emi.emi.runtime.EmiDrawContext;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.function.BiFunction;
 
 public class AnimatedTexturedWidget extends Widget implements WidgetTooltipHolder<AnimatedTexturedWidget> {
 	

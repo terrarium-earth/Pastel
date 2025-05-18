@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.compat.REI.*;
-import me.shedaniel.rei.api.common.util.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.spectrum.api.recipe.DescriptiveGatedRecipe;
+import de.dafuqs.spectrum.compat.REI.GatedSpectrumDisplay;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
-import java.util.*;
+import java.util.Collections;
 
 public abstract class GatedItemInformationDisplay extends GatedSpectrumDisplay {
 	

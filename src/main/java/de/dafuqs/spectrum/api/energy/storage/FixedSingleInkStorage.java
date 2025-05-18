@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.api.energy.storage;
 
-import de.dafuqs.spectrum.api.energy.color.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
 
 public class FixedSingleInkStorage extends SingleInkStorage {
 	

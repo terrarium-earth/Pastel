@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.api.pastel;
 
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 
 public final class PastelUpgradeSignature {
 

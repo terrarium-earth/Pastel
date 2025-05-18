@@ -1,15 +1,20 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.api.entity.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.material.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import de.dafuqs.spectrum.api.entity.TouchingWaterAware;
+import de.dafuqs.spectrum.registries.SpectrumFluidTags;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.material.Fluid;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.Set;
 
 @Mixin(Entity.class)
 public abstract class EntityApplyFluidsMixin implements TouchingWaterAware {

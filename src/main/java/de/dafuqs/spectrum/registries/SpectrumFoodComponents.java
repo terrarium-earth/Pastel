@@ -1,8 +1,10 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.status_effects.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.food.*;
+import de.dafuqs.spectrum.status_effects.AscensionStatusEffect;
+import de.dafuqs.spectrum.status_effects.DivinityStatusEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 
 @SuppressWarnings("unused")
 public class SpectrumFoodComponents {

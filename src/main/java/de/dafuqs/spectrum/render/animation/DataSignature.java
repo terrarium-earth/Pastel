@@ -1,9 +1,11 @@
 package de.dafuqs.spectrum.render.animation;
 
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * A flywheel object containing all the static animation data for a field. This acts as parent and manager for {@link FlowData} objects.

@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.blocks.conditional;
 
-import de.dafuqs.revelationary.api.revelations.*;
-import de.dafuqs.spectrum.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import de.dafuqs.revelationary.api.revelations.RevelationAware;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.Map;
 
 public class MermaidsGemItem extends ItemNameBlockItem implements RevelationAware {
 	

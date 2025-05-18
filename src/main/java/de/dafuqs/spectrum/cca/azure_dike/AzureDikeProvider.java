@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.cca.azure_dike;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.world.entity.*;
-import org.ladysnake.cca.api.v3.component.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import dev.emi.trinkets.api.TrinketsApi;
+import net.minecraft.world.entity.LivingEntity;
+import org.ladysnake.cca.api.v3.component.ComponentKey;
+import org.ladysnake.cca.api.v3.component.ComponentRegistry;
 
 public class AzureDikeProvider {
 	

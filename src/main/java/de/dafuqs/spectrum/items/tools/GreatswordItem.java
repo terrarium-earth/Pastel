@@ -1,15 +1,18 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.item.enchantment.*;
+import de.dafuqs.spectrum.api.item.Preenchanted;
+import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
-import java.util.*;
+import java.util.Map;
 
 /**
  * A sword with additional reach

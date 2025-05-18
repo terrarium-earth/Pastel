@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.energy;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.upgrade.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Defines that an object holds a PigmentEnergyStorage

@@ -1,22 +1,27 @@
 package de.dafuqs.spectrum.items.magic_items;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.compat.claims.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.core.component.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.api.item.PrioritizedEntityInteraction;
+import de.dafuqs.spectrum.cca.EverpromiseRibbonComponent;
+import de.dafuqs.spectrum.compat.claims.GenericClaimModsCompat;
+import de.dafuqs.spectrum.helpers.EntityHelper;
+import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.List;
 
 public class EverpromiseRibbonItem extends Item implements PrioritizedEntityInteraction {
 	

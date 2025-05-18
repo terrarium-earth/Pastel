@@ -1,22 +1,25 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.item_bowl.*;
-import de.dafuqs.spectrum.blocks.spirit_instiller.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.recipe.spirit_instiller.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.block.entity.*;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.blocks.item_bowl.ItemBowlBlockEntity;
+import de.dafuqs.spectrum.blocks.spirit_instiller.SpiritInstillerBlockEntity;
+import de.dafuqs.spectrum.recipe.InstanceRecipeInput;
+import de.dafuqs.spectrum.recipe.spirit_instiller.SpiritInstillerRecipe;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
-import java.util.*;
+import java.util.Optional;
 
 public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 	

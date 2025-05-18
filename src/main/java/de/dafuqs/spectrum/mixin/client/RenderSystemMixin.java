@@ -1,11 +1,14 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.deeper_down.*;
-import net.minecraft.util.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.deeper_down.DimensionRenderEffects;
+import net.minecraft.util.Mth;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = RenderSystem.class, priority = 1001, remap = false)
 public class RenderSystemMixin {

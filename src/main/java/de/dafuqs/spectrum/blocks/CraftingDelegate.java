@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks;
 
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.ContainerData;
 
 public class CraftingDelegate implements ContainerData {
 	

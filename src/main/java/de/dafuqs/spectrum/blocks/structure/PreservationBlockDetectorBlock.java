@@ -1,14 +1,17 @@
 package de.dafuqs.spectrum.blocks.structure;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.blocks.decoration.*;
-import net.minecraft.core.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.blocks.decoration.SpectrumFacingBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.GameMasterBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class PreservationBlockDetectorBlock extends SpectrumFacingBlock implements EntityBlock, GameMasterBlock {
 

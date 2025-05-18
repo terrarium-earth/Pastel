@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.compat.gofish;
 
-import net.fabricmc.loader.api.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.storage.loot.*;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.level.storage.loot.LootTable;
 
 public class GoFishCompat {
 	

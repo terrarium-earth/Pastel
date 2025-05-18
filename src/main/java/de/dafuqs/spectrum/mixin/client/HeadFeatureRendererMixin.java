@@ -1,18 +1,23 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.llamalad7.mixinextras.sugar.*;
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.blocks.mob_head.*;
-import de.dafuqs.spectrum.blocks.mob_head.client.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.layers.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.blocks.mob_head.SpectrumSkullBlock;
+import de.dafuqs.spectrum.blocks.mob_head.SpectrumSkullType;
+import de.dafuqs.spectrum.blocks.mob_head.client.SpectrumSkullBlockEntityRenderer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HeadedModel;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.layers.CustomHeadLayer;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(CustomHeadLayer.class)

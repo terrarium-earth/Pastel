@@ -1,9 +1,16 @@
 package de.dafuqs.spectrum.registries;
 
-import com.mojang.brigadier.tree.*;
-import de.dafuqs.spectrum.commands.*;
-import net.fabricmc.fabric.api.command.v2.*;
-import net.minecraft.commands.*;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import de.dafuqs.spectrum.commands.DumpRegistriesCommand;
+import de.dafuqs.spectrum.commands.DumpTagsCommand;
+import de.dafuqs.spectrum.commands.PrimordialFireCommand;
+import de.dafuqs.spectrum.commands.PrintConfigCommand;
+import de.dafuqs.spectrum.commands.ResetShadersCommand;
+import de.dafuqs.spectrum.commands.SanityCommand;
+import de.dafuqs.spectrum.commands.ShootingStarCommand;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 
 public class SpectrumCommands {
 	

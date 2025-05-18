@@ -1,17 +1,18 @@
 package de.dafuqs.spectrum.entity.entity;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.*;
-import net.minecraft.commands.arguments.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.function.*;
+import java.util.function.Predicate;
 
 public class LightSpearEntity extends LightShardBaseEntity {
     

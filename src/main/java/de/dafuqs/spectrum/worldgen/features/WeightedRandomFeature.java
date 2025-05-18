@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.levelgen.feature.*;
-import net.minecraft.world.level.levelgen.placement.*;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
-import java.util.*;
+import java.util.Optional;
 
 public class WeightedRandomFeature extends Feature<WeightedRandomFeatureConfig> {
 	

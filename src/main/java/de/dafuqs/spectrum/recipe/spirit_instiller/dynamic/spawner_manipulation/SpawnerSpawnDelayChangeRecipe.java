@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.nbt.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class SpawnerSpawnDelayChangeRecipe extends SpawnerChangeRecipe {
 	

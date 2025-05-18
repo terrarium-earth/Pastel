@@ -1,14 +1,18 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.blocks.chests.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.minecraft.core.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.blocks.chests.CompactingChestBlockEntity;
+import de.dafuqs.spectrum.networking.c2s_payloads.ChangeCompactingChestSettingsPayload;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class CompactingChestScreenHandler extends AbstractContainerMenu {
 	

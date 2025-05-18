@@ -1,12 +1,15 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import me.shedaniel.math.*;
-import me.shedaniel.rei.api.client.gui.widgets.*;
-import net.fabricmc.api.*;
-import net.minecraft.network.chat.*;
-import org.jetbrains.annotations.*;
+import me.shedaniel.math.Point;
+import me.shedaniel.math.Rectangle;
+import me.shedaniel.rei.api.client.gui.widgets.Widget;
+import me.shedaniel.rei.api.client.gui.widgets.Widgets;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public abstract class BlockToBlockWithChanceCategory extends GatedDisplayCategory<BlockToBlockWithChanceDisplay> {

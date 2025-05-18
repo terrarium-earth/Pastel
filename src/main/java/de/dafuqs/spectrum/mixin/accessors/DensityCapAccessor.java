@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.mixin.accessors;
 
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.gen.*;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.LocalMobCapCalculator;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(LocalMobCapCalculator.MobCounts.class)
 public interface DensityCapAccessor {

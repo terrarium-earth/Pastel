@@ -1,18 +1,31 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.blocks.pedestal.*;
-import de.dafuqs.spectrum.inventories.slots.*;
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import de.dafuqs.spectrum.registries.*;
-import io.netty.buffer.*;
-import net.fabricmc.api.*;
-import net.minecraft.core.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.blocks.pedestal.PedestalBlockEntity;
+import de.dafuqs.spectrum.inventories.slots.DisabledSlot;
+import de.dafuqs.spectrum.inventories.slots.PedestalPreviewSlot;
+import de.dafuqs.spectrum.inventories.slots.StackFilterSlot;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import io.netty.buffer.ByteBuf;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedContents;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.RecipeBookMenu;
+import net.minecraft.world.inventory.RecipeBookType;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.level.Level;
 
 public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<RecipeInput>> {
 	

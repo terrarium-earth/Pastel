@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
-import de.dafuqs.spectrum.compat.emi.*;
-import de.dafuqs.spectrum.recipe.cinderhearth.*;
-import dev.emi.emi.api.render.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.TextWidget.*;
-import dev.emi.emi.api.widget.*;
+import de.dafuqs.spectrum.compat.emi.GatedSpectrumEmiRecipe;
+import de.dafuqs.spectrum.compat.emi.SpectrumEmiRecipeCategories;
+import de.dafuqs.spectrum.recipe.cinderhearth.CinderhearthRecipe;
+import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget.Alignment;
+import dev.emi.emi.api.widget.WidgetHolder;
 
 public class CinderhearthEmiRecipeGated extends GatedSpectrumEmiRecipe<CinderhearthRecipe> {
 	

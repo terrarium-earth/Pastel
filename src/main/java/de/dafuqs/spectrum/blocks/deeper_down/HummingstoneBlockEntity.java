@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.blocks.deeper_down;
 
-import de.dafuqs.spectrum.events.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.events.SpectrumGameEvents;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.BlockPositionSource;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.gameevent.GameEventListener;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class HummingstoneBlockEntity extends BlockEntity implements HummingstoneEventQueue.Callback<HummingstoneEventQueue.EventEntry> {
     

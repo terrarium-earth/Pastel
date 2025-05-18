@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.compat.emi.widgets;
 
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.*;
-import net.minecraft.client.*;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.widget.GeneratedSlotWidget;
+import net.minecraft.client.Minecraft;
 
-import java.util.function.*;
+import java.util.function.Function;
 
 // Generated Slots are locked to 1 second timings so... I guess we're doing this
 public class DynamicStackWidget extends GeneratedSlotWidget {

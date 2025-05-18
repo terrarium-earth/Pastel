@@ -1,14 +1,15 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.api.recipe.GatedRecipe;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookGatedRecipePage;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
 
 public abstract class BookFluidConvertingPageRenderer<R extends GatedRecipe<?>, T extends BookGatedRecipePage<R>> extends BookGatedRecipePageRenderer<R, T> {
 

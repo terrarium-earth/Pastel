@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.recipe.pedestal.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
+import net.minecraft.world.level.block.Block;
 
 public interface PedestalVariant {
 	

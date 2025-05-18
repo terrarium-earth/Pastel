@@ -1,18 +1,19 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import de.dafuqs.spectrum.items.magic_items.*;
-import de.dafuqs.spectrum.recipe.enchanter.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookGatedRecipePage;
+import de.dafuqs.spectrum.items.magic_items.KnowledgeGemItem;
+import de.dafuqs.spectrum.recipe.enchanter.EnchanterRecipe;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
 
 public class BookEnchanterCraftingPageRenderer extends BookGatedRecipePageRenderer<EnchanterRecipe, BookGatedRecipePage<EnchanterRecipe>> {
 

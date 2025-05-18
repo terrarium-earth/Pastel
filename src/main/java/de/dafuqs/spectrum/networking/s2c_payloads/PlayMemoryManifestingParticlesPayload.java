@@ -1,22 +1,28 @@
 package de.dafuqs.spectrum.networking.s2c_payloads;
 
-import de.dafuqs.spectrum.blocks.memory.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.fabricmc.fabric.api.networking.v1.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.network.protocol.common.custom.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import org.jetbrains.annotations.*;
-import org.joml.*;
+import de.dafuqs.spectrum.blocks.memory.MemoryBlockEntity;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
+import de.dafuqs.spectrum.particle.effect.DynamicParticleEffect;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3f;
 
 public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1, int eggColor2, int amount) implements CustomPacketPayload {
 	

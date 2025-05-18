@@ -1,15 +1,19 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.klikli_dev.modonomicon.book.*;
-import com.klikli_dev.modonomicon.client.gui.book.entry.*;
-import com.klikli_dev.modonomicon.client.render.page.*;
-import com.klikli_dev.modonomicon.data.*;
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
+import com.klikli_dev.modonomicon.book.BookTextHolder;
+import com.klikli_dev.modonomicon.book.RenderedBookTextHolder;
+import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
+import com.klikli_dev.modonomicon.client.render.page.BookTextPageRenderer;
+import com.klikli_dev.modonomicon.data.BookDataManager;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookChecklistPage;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 public class BookChecklistPageRenderer extends BookTextPageRenderer {
 

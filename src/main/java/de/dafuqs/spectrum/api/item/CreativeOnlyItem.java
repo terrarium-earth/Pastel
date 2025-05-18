@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.api.item;
 
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 
-import java.util.*;
+import java.util.List;
 
 public interface CreativeOnlyItem {
 	

@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.components;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.energy.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
-import java.util.*;
+import java.util.List;
 
 public record InkPoweredComponent(List<InkPoweredStatusEffectInstance> effects) {
 	

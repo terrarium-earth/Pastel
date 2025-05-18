@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.components;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import io.netty.buffer.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.util.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.energy.InkStorage;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ExtraCodecs;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public record InkStorageComponent(long maxEnergyTotal, long maxPerColor, Map<InkColor, Long> storedEnergy) {
 	

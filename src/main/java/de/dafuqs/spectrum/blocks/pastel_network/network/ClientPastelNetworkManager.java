@@ -1,20 +1,23 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.blocks.pastel_network.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.core.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.phys.*;
-import org.jgrapht.*;
-import org.jgrapht.graph.*;
-import org.joml.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.blocks.pastel_network.PastelRenderHelper;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.Clearable;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
 import org.joml.Math;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Environment(EnvType.CLIENT)
 public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLevel, ClientPastelNetwork>, Clearable {

@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.blocks.pastel_network.network;
 
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.core.*;
-import org.jgrapht.*;
-import org.jgrapht.graph.*;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
 
-import java.util.*;
+import java.util.UUID;
 
 public class ClientPastelNetwork extends PastelNetwork<ClientLevel> {
 	

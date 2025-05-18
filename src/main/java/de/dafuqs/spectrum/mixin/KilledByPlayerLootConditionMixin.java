@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.parameters.*;
-import net.minecraft.world.level.storage.loot.predicates.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LootItemKilledByPlayerCondition.class)
 public abstract class KilledByPlayerLootConditionMixin {

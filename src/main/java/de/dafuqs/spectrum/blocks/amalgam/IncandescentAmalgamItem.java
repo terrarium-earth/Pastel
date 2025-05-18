@@ -1,20 +1,26 @@
 package de.dafuqs.spectrum.blocks.amalgam;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.damagesource.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.api.item.DamageAwareItem;
+import de.dafuqs.spectrum.api.item.FermentedItem;
+import de.dafuqs.spectrum.components.BeverageComponent;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
-import java.util.*;
+import java.util.List;
 
 public class IncandescentAmalgamItem extends BlockItem implements DamageAwareItem, FermentedItem {
 	

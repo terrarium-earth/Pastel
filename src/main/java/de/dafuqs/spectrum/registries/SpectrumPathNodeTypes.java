@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
-import net.fabricmc.fabric.api.registry.*;
-import net.minecraft.world.level.pathfinder.*;
+import net.fabricmc.fabric.api.registry.LandPathNodeTypesRegistry;
+import net.minecraft.world.level.pathfinder.PathType;
 
 public class SpectrumPathNodeTypes {
 

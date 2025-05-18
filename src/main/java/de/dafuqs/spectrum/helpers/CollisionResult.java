@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.minecraft.core.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public record CollisionResult<T>(Level world, T collision, CollisionType type, Vec3 collisionPoint) {
 

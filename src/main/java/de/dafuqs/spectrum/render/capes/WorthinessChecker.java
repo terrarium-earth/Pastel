@@ -1,6 +1,8 @@
 package de.dafuqs.spectrum.render.capes;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Optional;
+import java.util.UUID;
 
 public class WorthinessChecker {
 

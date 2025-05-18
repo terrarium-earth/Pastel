@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.compat.emi;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import dev.emi.emi.api.recipe.*;
-import dev.emi.emi.api.render.*;
-import dev.emi.emi.api.stack.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.recipe.EmiRecipeSorting;
+import dev.emi.emi.api.render.EmiRenderable;
+import dev.emi.emi.api.stack.EmiStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 
 public class SpectrumEmiRecipeCategories {
 	public static final EmiRecipeCategory PEDESTAL_CRAFTING = new SpectrumCategory(SpectrumCommon.locate("pedestal_crafting"), EmiStack.of(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST));

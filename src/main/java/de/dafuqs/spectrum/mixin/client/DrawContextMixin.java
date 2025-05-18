@@ -1,15 +1,20 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.llamalad7.mixinextras.injector.*;
-import com.llamalad7.mixinextras.sugar.*;
-import de.dafuqs.spectrum.api.render.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.world.item.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
+import com.llamalad7.mixinextras.sugar.Local;
+import de.dafuqs.spectrum.api.render.ExtendedItemBarProvider;
+import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GuiGraphics.class)
 public abstract class DrawContextMixin {

@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.api.interaction;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.api.predicate.block.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.api.predicate.block.BrokenBlockPredicate;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import de.dafuqs.spectrum.registries.SpectrumRegistryKeys;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.List;
 
 public abstract class ResonanceProcessor {
 	

@@ -1,16 +1,18 @@
 package de.dafuqs.spectrum.particle.effect;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.util.*;
-import org.jetbrains.annotations.*;
-import org.joml.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.ExtraCodecs;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3f;
 
 public class ColoredFluidRisingParticleEffect implements ParticleOptions {
 	

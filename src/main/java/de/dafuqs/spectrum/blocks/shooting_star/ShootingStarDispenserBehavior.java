@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.blocks.shooting_star;
 
-import de.dafuqs.spectrum.entity.entity.*;
-import net.minecraft.core.*;
-import net.minecraft.core.dispenser.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.entity.entity.ShootingStarEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class ShootingStarDispenserBehavior extends DefaultDispenseItemBehavior {
 

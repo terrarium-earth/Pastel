@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.injectors.*;
-import net.minecraft.network.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.world.effect.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import de.dafuqs.spectrum.helpers.StatusEffectHelper;
+import de.dafuqs.spectrum.injectors.EntityStatusEffectS2CPacketInjector;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.world.effect.MobEffectInstance;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientboundUpdateMobEffectPacket.class)
 public abstract class EntityStatusEffectsS2CPacketMixin implements EntityStatusEffectS2CPacketInjector {

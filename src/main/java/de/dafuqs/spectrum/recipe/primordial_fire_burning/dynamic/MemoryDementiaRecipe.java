@@ -1,15 +1,19 @@
 package de.dafuqs.spectrum.recipe.primordial_fire_burning.dynamic;
 
-import de.dafuqs.spectrum.blocks.memory.*;
-import de.dafuqs.spectrum.recipe.primordial_fire_burning.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.blocks.memory.MemoryItem;
+import de.dafuqs.spectrum.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.Optional;
 
 public class MemoryDementiaRecipe extends PrimordialFireBurningRecipe {
 	

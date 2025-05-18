@@ -1,10 +1,12 @@
 package de.dafuqs.spectrum.blocks.mob_head.client;
 
-import com.mojang.blaze3d.vertex.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.model.geom.*;
-import net.minecraft.client.renderer.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.SkullModelBase;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.MultiBufferSource;
 
 @Environment(EnvType.CLIENT)
 public abstract class SpectrumSkullModel extends SkullModelBase {

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.particle.effect;
 
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import net.minecraft.world.level.gameevent.PositionSource;
+import net.minecraft.world.phys.Vec3;
 
 public abstract class SimpleTransmission {
 	

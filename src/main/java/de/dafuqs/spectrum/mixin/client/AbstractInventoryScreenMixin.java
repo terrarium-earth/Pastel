@@ -1,13 +1,16 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.llamalad7.mixinextras.sugar.*;
-import com.llamalad7.mixinextras.sugar.ref.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.client.gui.screens.inventory.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.effect.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import de.dafuqs.spectrum.helpers.StatusEffectHelper;
+import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(EffectRenderingInventoryScreen.class)
 public class AbstractInventoryScreenMixin {

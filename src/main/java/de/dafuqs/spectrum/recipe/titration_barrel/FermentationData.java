@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.recipe.titration_barrel;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
-import java.util.*;
+import java.util.List;
 
 public record FermentationData(
 		float fermentationSpeedMod,

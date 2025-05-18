@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.items.tools.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.items.tools.WorkstaffItem;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class WorkstaffScreenHandler extends QuickNavigationGridScreenHandler {
 	

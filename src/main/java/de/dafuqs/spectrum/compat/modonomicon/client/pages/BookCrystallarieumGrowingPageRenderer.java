@@ -1,23 +1,25 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.klikli_dev.modonomicon.book.*;
-import com.klikli_dev.modonomicon.client.gui.book.entry.*;
-import com.klikli_dev.modonomicon.data.*;
-import com.klikli_dev.modonomicon.fluid.*;
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import de.dafuqs.spectrum.recipe.crystallarieum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
+import com.klikli_dev.modonomicon.book.BookTextHolder;
+import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
+import com.klikli_dev.modonomicon.data.BookDataManager;
+import com.klikli_dev.modonomicon.fluid.FabricFluidHolder;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookGatedRecipePage;
+import de.dafuqs.spectrum.recipe.crystallarieum.CrystallarieumCatalyst;
+import de.dafuqs.spectrum.recipe.crystallarieum.CrystallarieumRecipe;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.Iterator;
 
 public class BookCrystallarieumGrowingPageRenderer extends BookGatedRecipePageRenderer<CrystallarieumRecipe, BookGatedRecipePage<CrystallarieumRecipe>> {
 

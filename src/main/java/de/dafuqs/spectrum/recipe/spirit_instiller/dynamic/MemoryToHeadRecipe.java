@@ -1,24 +1,37 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.memory.*;
-import de.dafuqs.spectrum.blocks.mob_head.*;
-import de.dafuqs.spectrum.blocks.spirit_instiller.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.recipe.spirit_instiller.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.parameters.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.blocks.memory.MemoryBlockEntity;
+import de.dafuqs.spectrum.blocks.memory.MemoryItem;
+import de.dafuqs.spectrum.blocks.mob_head.SpectrumSkullBlock;
+import de.dafuqs.spectrum.blocks.spirit_instiller.SpiritInstillerBlockEntity;
+import de.dafuqs.spectrum.recipe.InstanceRecipeInput;
+import de.dafuqs.spectrum.recipe.spirit_instiller.SpiritInstillerRecipe;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
+import de.dafuqs.spectrum.registries.SpectrumItemTags;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 	

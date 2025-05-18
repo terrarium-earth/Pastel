@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.inventories;
 
-import net.fabricmc.fabric.api.transfer.v1.item.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public enum AutoCraftingMode {
 	OneXOne(1, 1),

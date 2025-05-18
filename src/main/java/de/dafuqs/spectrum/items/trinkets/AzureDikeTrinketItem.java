@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import de.dafuqs.spectrum.api.item.*;
-import dev.emi.trinkets.api.*;
-import net.fabricmc.api.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.api.item.AzureDikeItem;
+import dev.emi.trinkets.api.SlotReference;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
-import java.util.*;
+import java.util.List;
 
 public abstract class AzureDikeTrinketItem extends SpectrumTrinketItem implements AzureDikeItem {
 	

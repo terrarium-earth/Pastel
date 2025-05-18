@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.blocks.pedestal;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.RecipeInput;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class PedestalRecipeInput implements RecipeInput {
 	

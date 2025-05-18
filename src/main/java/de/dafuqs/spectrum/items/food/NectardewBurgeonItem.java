@@ -1,16 +1,18 @@
 package de.dafuqs.spectrum.items.food;
 
-import de.dafuqs.spectrum.api.render.*;
-import de.dafuqs.spectrum.items.conditional.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
+import de.dafuqs.spectrum.items.conditional.CloakedItem;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public class NectardewBurgeonItem extends CloakedItem implements SlotBackgroundEffectProvider {
 

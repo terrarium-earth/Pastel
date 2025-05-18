@@ -1,17 +1,21 @@
 package de.dafuqs.spectrum.api.recipe;
 
-import com.google.gson.*;
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import io.netty.buffer.*;
-import net.minecraft.commands.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.server.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.phys.*;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.commands.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Effects that are played when crafting with the fusion shrine

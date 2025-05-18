@@ -1,19 +1,24 @@
 package de.dafuqs.spectrum.data_loaders;
 
-import com.google.gson.*;
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.*;
-import net.fabricmc.fabric.api.resource.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.packs.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.util.profiling.*;
-import net.minecraft.world.entity.player.*;
-import org.jetbrains.annotations.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ParticleSpawnerParticlesDataLoader extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
 	

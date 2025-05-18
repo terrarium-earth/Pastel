@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.compat.emi;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import dev.emi.emi.api.recipe.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.TextWidget.*;
-import dev.emi.emi.api.widget.*;
-import net.minecraft.client.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import dev.emi.emi.api.recipe.EmiRecipe;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget.Alignment;
+import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public abstract class SpectrumEmiRecipe implements EmiRecipe {
 	public static final Component HIDDEN_LINE_1 = Component.translatable("container.spectrum.rei.pedestal_crafting.recipe_not_unlocked_line_1");

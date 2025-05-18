@@ -1,24 +1,26 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.RenderHelper;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.screens.*;
-import net.minecraft.client.gui.screens.inventory.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
-import org.joml.*;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.List;
+import java.util.Stack;
 
 public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
 	

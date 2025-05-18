@@ -1,21 +1,23 @@
 package de.dafuqs.spectrum.loot.functions;
 
-import com.google.common.collect.*;
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.loot.*;
-import de.dafuqs.spectrum.progression.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.storage.loot.*;
-import net.minecraft.world.level.storage.loot.LootContext.*;
-import net.minecraft.world.level.storage.loot.functions.*;
-import net.minecraft.world.level.storage.loot.parameters.*;
-import net.minecraft.world.level.storage.loot.predicates.*;
+import com.google.common.collect.ImmutableSet;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.loot.SpectrumLootFunctionTypes;
+import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootContext.EntityTarget;
+import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 public class GrantAdvancementLootFunction extends LootItemConditionalFunction {
 	

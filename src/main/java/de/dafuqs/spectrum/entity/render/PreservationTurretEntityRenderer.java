@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.entity.render;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.entity.models.*;
-import de.dafuqs.spectrum.registries.client.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.resources.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.entity.PreservationTurretEntity;
+import de.dafuqs.spectrum.entity.models.PreservationTurretEntityModel;
+import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
 public class PreservationTurretEntityRenderer extends MobRenderer<PreservationTurretEntity, PreservationTurretEntityModel<PreservationTurretEntity>> {

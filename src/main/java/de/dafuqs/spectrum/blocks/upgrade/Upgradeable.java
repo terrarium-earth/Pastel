@@ -1,15 +1,23 @@
 package de.dafuqs.spectrum.blocks.upgrade;
 
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.progression.*;
-import net.minecraft.core.*;
-import net.minecraft.nbt.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.block.PlayerOwned;
+import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public interface Upgradeable {
 

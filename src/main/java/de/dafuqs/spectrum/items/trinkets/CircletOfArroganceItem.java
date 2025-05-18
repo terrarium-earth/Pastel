@@ -1,19 +1,20 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.status_effects.*;
-import dev.emi.trinkets.api.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import de.dafuqs.spectrum.status_effects.DivinityStatusEffect;
+import dev.emi.trinkets.api.SlotReference;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.List;
 
 public class CircletOfArroganceItem extends SpectrumTrinketItem {
 

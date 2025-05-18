@@ -1,8 +1,13 @@
 package de.dafuqs.spectrum.blocks.mob_head.client.models;
 
-import de.dafuqs.spectrum.blocks.mob_head.client.*;
-import net.minecraft.client.model.geom.*;
-import net.minecraft.client.model.geom.builders.*;
+import de.dafuqs.spectrum.blocks.mob_head.client.SpectrumSkullModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class PigHeadModel extends SpectrumSkullModel {
 	

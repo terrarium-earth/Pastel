@@ -1,9 +1,11 @@
 package de.dafuqs.spectrum.api.interaction;
 
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemProviderRegistry {
 	

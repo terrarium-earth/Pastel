@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.klikli_dev.modonomicon.book.conditions.*;
-import com.llamalad7.mixinextras.sugar.*;
-import net.minecraft.resources.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import com.klikli_dev.modonomicon.book.conditions.BookCategoryHasVisibleEntriesCondition;
+import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.resources.ResourceLocation;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(BookCategoryHasVisibleEntriesCondition.class)
 public class FixModonomiconMixin {

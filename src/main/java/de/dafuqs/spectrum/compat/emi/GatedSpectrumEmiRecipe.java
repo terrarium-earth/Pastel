@@ -1,14 +1,15 @@
 package de.dafuqs.spectrum.compat.emi;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import dev.emi.emi.*;
-import dev.emi.emi.api.recipe.*;
-import dev.emi.emi.api.stack.*;
-import dev.emi.emi.api.widget.*;
-import net.minecraft.network.chat.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.recipe.GatedRecipe;
+import dev.emi.emi.EmiPort;
+import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget;
+import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public abstract class GatedSpectrumEmiRecipe<T extends GatedRecipe<?>> extends SpectrumEmiRecipe {
 	

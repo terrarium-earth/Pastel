@@ -1,20 +1,23 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.blocks.enchanter.*;
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.compat.REI.widgets.*;
-import de.dafuqs.spectrum.registries.*;
-import me.shedaniel.math.*;
-import me.shedaniel.rei.api.client.gui.widgets.*;
-import me.shedaniel.rei.api.common.category.*;
-import me.shedaniel.rei.api.common.entry.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.network.chat.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.blocks.enchanter.EnchanterBlockEntity;
+import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
+import de.dafuqs.spectrum.compat.REI.widgets.IndexedEntryWidget;
+import de.dafuqs.spectrum.registries.SpectrumAdvancements;
+import me.shedaniel.math.Point;
+import me.shedaniel.math.Rectangle;
+import me.shedaniel.rei.api.client.gui.widgets.Widget;
+import me.shedaniel.rei.api.client.gui.widgets.Widgets;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpgradeDisplay> {

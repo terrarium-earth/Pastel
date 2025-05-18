@@ -1,11 +1,41 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.worldgen.features.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.level.levelgen.feature.*;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.worldgen.features.AirCheckDiskFeature;
+import de.dafuqs.spectrum.worldgen.features.AshDunesFeature;
+import de.dafuqs.spectrum.worldgen.features.AshDunesFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.BlockStateFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.ColumnsFeature;
+import de.dafuqs.spectrum.worldgen.features.ColumnsFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.CrystalFormationFeature;
+import de.dafuqs.spectrum.worldgen.features.CrystalFormationFeatureFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.ExposedFossilFeature;
+import de.dafuqs.spectrum.worldgen.features.GiantGilledFungusFeature;
+import de.dafuqs.spectrum.worldgen.features.GilledFungusFeature;
+import de.dafuqs.spectrum.worldgen.features.GilledFungusFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.JadeiteLotusFeature;
+import de.dafuqs.spectrum.worldgen.features.JadeiteLotusFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.NephriteBlossomFeature;
+import de.dafuqs.spectrum.worldgen.features.NephriteBlossomFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.PillarFeature;
+import de.dafuqs.spectrum.worldgen.features.RandomBlockProximityPatchFeature;
+import de.dafuqs.spectrum.worldgen.features.RandomBlockProximityPatchFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.RandomBudsFeature;
+import de.dafuqs.spectrum.worldgen.features.RandomBudsFeaturesConfig;
+import de.dafuqs.spectrum.worldgen.features.SolidBlockCheckGeodeFeature;
+import de.dafuqs.spectrum.worldgen.features.TriStateVineFeature;
+import de.dafuqs.spectrum.worldgen.features.TriStateVineFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.WallPatchFeature;
+import de.dafuqs.spectrum.worldgen.features.WallPatchFeatureConfig;
+import de.dafuqs.spectrum.worldgen.features.WeightedRandomFeature;
+import de.dafuqs.spectrum.worldgen.features.WeightedRandomFeatureConfig;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FossilFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 
 public class SpectrumFeatures {
 

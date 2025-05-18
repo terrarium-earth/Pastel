@@ -1,15 +1,22 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import de.dafuqs.spectrum.components.CustomPotionDataComponent;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.LingeringPotionItem;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.TippedArrowItem;
+import net.minecraft.world.item.TooltipFlag;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.*;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 @Mixin({PotionItem.class, LingeringPotionItem.class, TippedArrowItem.class})

@@ -1,21 +1,23 @@
 package de.dafuqs.spectrum.blocks.shooting_star;
 
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.stats.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.components.ShootingStarComponent;
+import de.dafuqs.spectrum.entity.entity.ShootingStarEntity;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 public class ShootingStarItem extends BlockItem implements ShootingStar {
 	

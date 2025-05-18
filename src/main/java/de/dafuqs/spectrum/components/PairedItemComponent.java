@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.components;
 
-import com.mojang.serialization.*;
-import io.netty.buffer.*;
-import net.minecraft.network.codec.*;
+import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public record PairedItemComponent(long signature) {
 	

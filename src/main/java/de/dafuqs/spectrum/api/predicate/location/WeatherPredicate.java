@@ -1,14 +1,14 @@
 package de.dafuqs.spectrum.api.predicate.location;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.helpers.*;
-import io.netty.buffer.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.level.Level;
 
-import java.util.function.*;
+import java.util.function.Function;
 
 public enum WeatherPredicate implements StringRepresentable {
 	CLEAR_SKY(world -> !world.isRaining()),

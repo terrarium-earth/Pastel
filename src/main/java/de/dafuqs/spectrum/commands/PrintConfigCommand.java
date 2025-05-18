@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.commands;
 
-import com.mojang.brigadier.tree.*;
-import de.dafuqs.spectrum.*;
-import net.minecraft.commands.*;
-import net.minecraft.network.chat.*;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.network.chat.Component;
 
 
 public class PrintConfigCommand {

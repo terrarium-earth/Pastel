@@ -1,8 +1,10 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.conditional.colored_tree.*;
-import net.fabricmc.fabric.api.registry.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredLeavesBlock;
+import de.dafuqs.spectrum.blocks.conditional.colored_tree.ColoredSaplingBlock;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 
 public class SpectrumCompostableBlocks {
 	

@@ -1,15 +1,15 @@
 package de.dafuqs.spectrum.registries.client;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.deeper_down.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.deeper_down.DimensionRenderEffects;
+import de.dafuqs.spectrum.registries.SpectrumDimensions;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.PostChain;
+import net.minecraft.resources.ResourceLocation;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.Optional;
 
 public class SpectrumShaders {
 	

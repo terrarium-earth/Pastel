@@ -1,21 +1,24 @@
 package de.dafuqs.spectrum.compat.modonomicon.unlock_conditions;
 
-import com.google.gson.*;
-import com.klikli_dev.modonomicon.book.conditions.*;
-import com.klikli_dev.modonomicon.book.conditions.context.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.enchantment.*;
+import com.google.gson.JsonObject;
+import com.klikli_dev.modonomicon.book.conditions.BookCondition;
+import com.klikli_dev.modonomicon.book.conditions.context.BookConditionContext;
+import com.klikli_dev.modonomicon.book.conditions.context.BookConditionEntryContext;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconCompat;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.Enchantment;
 
-import java.util.*;
+import java.util.List;
 
 public class EnchantmentRegisteredCondition extends BookCondition {
     

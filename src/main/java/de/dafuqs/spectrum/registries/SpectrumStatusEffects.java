@@ -1,18 +1,33 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.additionalentityattributes.*;
-import de.dafuqs.spectrum.api.energy.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import de.dafuqs.spectrum.status_effects.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
+import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
+import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
+import de.dafuqs.spectrum.mixin.accessors.StatusEffectInstanceAccessor;
+import de.dafuqs.spectrum.status_effects.AscensionStatusEffect;
+import de.dafuqs.spectrum.status_effects.DeadlyPoisonStatusEffect;
+import de.dafuqs.spectrum.status_effects.DivinityStatusEffect;
+import de.dafuqs.spectrum.status_effects.EffectProlongingStatusEffect;
+import de.dafuqs.spectrum.status_effects.FrenzyStatusEffect;
+import de.dafuqs.spectrum.status_effects.GravityStatusEffect;
+import de.dafuqs.spectrum.status_effects.ImmunityStatusEffect;
+import de.dafuqs.spectrum.status_effects.LifeDrainStatusEffect;
+import de.dafuqs.spectrum.status_effects.NoopStatusEffect;
+import de.dafuqs.spectrum.status_effects.NourishingStatusEffect;
+import de.dafuqs.spectrum.status_effects.ScarredStatusEffect;
+import de.dafuqs.spectrum.status_effects.SleepStatusEffect;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
-import static de.dafuqs.spectrum.SpectrumCommon.*;
+import static de.dafuqs.spectrum.SpectrumCommon.locate;
 
 public class SpectrumStatusEffects {
 

@@ -1,8 +1,28 @@
 package de.dafuqs.spectrum.compat.REI;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.REI.plugins.*;
-import me.shedaniel.rei.api.common.category.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.REI.plugins.AnvilCrushingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.CinderhearthDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.CrystallarieumDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.DragonrotConvertingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.EnchanterEnchantingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.EnchantmentUpgradeDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.FreezingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.FusionShrineDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.GooConvertingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.HeatingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.InkConvertingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.LiquidCrystalConvertingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.MidnightSolutionConvertingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.NaturesStaffConversionsDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.PedestalCraftingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.PotionWorkshopBrewingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.PotionWorkshopCraftingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.PotionWorkshopReactingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.PrimordialFireBurningDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.SpiritInstillingDisplay;
+import de.dafuqs.spectrum.compat.REI.plugins.TitrationBarrelDisplay;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 
 public class SpectrumPlugins {
 	

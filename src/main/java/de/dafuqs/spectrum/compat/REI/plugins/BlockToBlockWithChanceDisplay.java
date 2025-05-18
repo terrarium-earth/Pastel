@@ -1,15 +1,17 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import me.shedaniel.rei.api.common.display.basic.*;
-import me.shedaniel.rei.api.common.entry.*;
-import me.shedaniel.rei.api.common.util.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.level.block.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.compat.REI.GatedRecipeDisplay;
+import de.dafuqs.spectrum.mixin.accessors.FluidBlockAccessor;
+import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.entry.EntryStack;
+import me.shedaniel.rei.api.common.util.EntryStacks;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.List;
 
 public abstract class BlockToBlockWithChanceDisplay extends BasicDisplay implements GatedRecipeDisplay {
 	

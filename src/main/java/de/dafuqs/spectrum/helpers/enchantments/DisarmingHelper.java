@@ -1,13 +1,19 @@
 package de.dafuqs.spectrum.helpers.enchantments;
 
-import de.dafuqs.spectrum.mixin.accessors.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.state.*;
+import de.dafuqs.spectrum.mixin.accessors.MobEntityAccessor;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class DisarmingHelper {
 	

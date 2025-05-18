@@ -1,13 +1,15 @@
 package de.dafuqs.spectrum.compat.emi.widgets;
 
-import dev.emi.emi.api.widget.*;
-import dev.emi.emi.runtime.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.screens.inventory.tooltip.*;
-import net.minecraft.resources.*;
+import dev.emi.emi.api.widget.ButtonWidget;
+import dev.emi.emi.api.widget.WidgetTooltipHolder;
+import dev.emi.emi.runtime.EmiDrawContext;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.BooleanSupplier;
 
 public class SaneButtonWidget extends ButtonWidget implements WidgetTooltipHolder<SaneButtonWidget> {
 	

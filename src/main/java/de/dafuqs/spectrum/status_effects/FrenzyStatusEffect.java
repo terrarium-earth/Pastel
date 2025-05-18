@@ -1,11 +1,15 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.cca.LastKillComponent;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import org.jetbrains.annotations.NotNull;
 
 public class FrenzyStatusEffect extends MobEffect {
 	

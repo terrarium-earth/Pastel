@@ -1,13 +1,17 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.blocks.jade_vines.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.tags.*;
-import net.minecraft.util.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.levelgen.feature.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.blocks.jade_vines.JadeiteLotusFlowerBlock;
+import de.dafuqs.spectrum.blocks.jade_vines.JadeiteLotusStemBlock;
+import de.dafuqs.spectrum.registries.SpectrumBlockTags;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
 public class JadeiteLotusFeature extends Feature<JadeiteLotusFeatureConfig> {
 

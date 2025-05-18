@@ -1,24 +1,31 @@
 package de.dafuqs.spectrum.inventories.widgets;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.energy.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.components.*;
-import net.minecraft.client.gui.narration.*;
-import net.minecraft.client.gui.screens.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.util.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.blocks.energy.ColorPickerBlockEntity;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.narration.NarratedElementType;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
+import net.minecraft.util.Tuple;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
-import static de.dafuqs.spectrum.helpers.RenderHelper.*;
+import static de.dafuqs.spectrum.helpers.RenderHelper.fillQuad;
 
 @Environment(EnvType.CLIENT)
 public class ColorSelectionWidget extends AbstractWidget {

@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.items.food;
 
-import de.dafuqs.spectrum.items.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.items.ItemWithTooltip;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class SedativesItem extends ItemWithTooltip {
 	

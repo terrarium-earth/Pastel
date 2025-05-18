@@ -1,18 +1,21 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.sugar.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.commands.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.server.commands.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.sugar.Local;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.server.commands.EffectCommands;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.Collection;
 
 @Mixin(EffectCommands.class)
 public class EffectCommandMixin {

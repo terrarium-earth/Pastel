@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.blocks.upgrade;
 
-import net.minecraft.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.block.Block;
 
-import java.util.*;
+import java.util.List;
 
 public class UpgradeBlockItem extends BlockItem {
 	

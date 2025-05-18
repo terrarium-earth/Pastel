@@ -1,28 +1,34 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.fractal.api.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.api.item_group.*;
-import de.dafuqs.spectrum.blocks.memory.*;
-import de.dafuqs.spectrum.blocks.mob_head.*;
-import de.dafuqs.spectrum.compat.*;
-import de.dafuqs.spectrum.compat.ae2.*;
-import de.dafuqs.spectrum.compat.create.*;
-import de.dafuqs.spectrum.compat.gobber.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.recipe.titration_barrel.*;
-import net.fabricmc.fabric.api.itemgroup.v1.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.fractal.api.ItemSubGroup;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
+import de.dafuqs.spectrum.api.item.Preenchanted;
+import de.dafuqs.spectrum.api.item_group.ItemGroupIDs;
+import de.dafuqs.spectrum.blocks.memory.MemoryItem;
+import de.dafuqs.spectrum.blocks.mob_head.SpectrumSkullBlock;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import de.dafuqs.spectrum.compat.ae2.AE2Compat;
+import de.dafuqs.spectrum.compat.create.CreateCompat;
+import de.dafuqs.spectrum.compat.gobber.GobberCompat;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.recipe.titration_barrel.ITitrationBarrelRecipe;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
-import java.util.*;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class SpectrumItemGroups {

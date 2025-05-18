@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.level.biome.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.biome.Biome;
 
 @SuppressWarnings("unused")
 public class SpectrumBiomeTags {

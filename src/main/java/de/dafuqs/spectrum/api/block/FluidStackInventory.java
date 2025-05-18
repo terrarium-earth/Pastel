@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.api.block;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.*;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.*;
-import net.minecraft.core.*;
-import net.minecraft.world.item.*;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.ItemStack;
 
 public interface FluidStackInventory extends ImplementedInventory {
 	

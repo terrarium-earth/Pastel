@@ -1,18 +1,21 @@
 package de.dafuqs.spectrum.entity.entity;
 
-import de.dafuqs.spectrum.entity.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.registries.*;
-import de.dafuqs.spectrum.spells.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.valueproviders.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import de.dafuqs.spectrum.spells.MoonstoneStrike;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import org.jetbrains.annotations.Nullable;
 
 public class BidentMirrorImageEntity extends BidentBaseEntity {
     public BidentMirrorImageEntity(Level world) {

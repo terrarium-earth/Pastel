@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.recipe;
 
-import net.fabricmc.fabric.api.transfer.v1.storage.*;
-import net.minecraft.world.item.*;
+import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.List;
 
 public class StorageRecipeInput<T extends Storage<?>> extends SimpleRecipeInput {
 	

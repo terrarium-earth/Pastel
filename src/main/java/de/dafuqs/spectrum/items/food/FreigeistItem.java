@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.items.food;
 
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
-import java.util.*;
+import java.util.List;
 
 public class FreigeistItem extends DrinkItem {
 	

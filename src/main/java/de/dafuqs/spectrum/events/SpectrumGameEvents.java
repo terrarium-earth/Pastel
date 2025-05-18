@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.events;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.level.gameevent.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 public class SpectrumGameEvents {
 	

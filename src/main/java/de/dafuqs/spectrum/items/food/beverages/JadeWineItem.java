@@ -1,15 +1,16 @@
 package de.dafuqs.spectrum.items.food.beverages;
 
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.*;
+import de.dafuqs.spectrum.api.item.FermentedItem;
+import de.dafuqs.spectrum.components.JadeWineComponent;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionContents;
 
-import java.util.*;
+import java.util.List;
 
 public class JadeWineItem extends BeverageItem {
 	

@@ -1,18 +1,24 @@
 package de.dafuqs.spectrum.api.energy.color;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import io.netty.buffer.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
-import org.joml.*;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import de.dafuqs.spectrum.helpers.CodecHelper;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.DyeColor;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class InkColor {
 	

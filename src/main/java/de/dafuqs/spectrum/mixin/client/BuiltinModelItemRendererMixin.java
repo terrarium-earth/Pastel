@@ -1,14 +1,20 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.blocks.mob_head.*;
-import de.dafuqs.spectrum.blocks.mob_head.client.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.world.item.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import de.dafuqs.spectrum.blocks.mob_head.SpectrumSkullBlock;
+import de.dafuqs.spectrum.blocks.mob_head.SpectrumSkullType;
+import de.dafuqs.spectrum.blocks.mob_head.client.SpectrumSkullBlockEntityRenderer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.item.ItemStack;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
 @Mixin(BlockEntityWithoutLevelRenderer.class)

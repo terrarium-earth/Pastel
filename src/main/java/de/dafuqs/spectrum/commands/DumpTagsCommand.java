@@ -1,13 +1,16 @@
 package de.dafuqs.spectrum.commands;
 
-import com.mojang.brigadier.tree.*;
-import net.fabricmc.loader.api.*;
-import net.minecraft.commands.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class DumpTagsCommand {

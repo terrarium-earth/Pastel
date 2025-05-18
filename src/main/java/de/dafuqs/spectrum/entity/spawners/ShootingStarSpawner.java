@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.entity.spawners;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.shooting_star.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.shooting_star.ShootingStar;
+import de.dafuqs.spectrum.entity.entity.ShootingStarEntity;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.CustomSpawner;
+import org.jetbrains.annotations.NotNull;
 
 public class ShootingStarSpawner implements CustomSpawner {
 	

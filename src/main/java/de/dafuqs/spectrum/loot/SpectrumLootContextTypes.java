@@ -1,10 +1,12 @@
 package de.dafuqs.spectrum.loot;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.storage.loot.parameters.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
-import java.util.function.*;
+import java.util.function.Consumer;
 
 public class SpectrumLootContextTypes {
 	

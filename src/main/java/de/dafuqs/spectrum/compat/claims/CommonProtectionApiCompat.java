@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.compat.claims;
 
-import eu.pb4.common.protection.api.*;
-import net.minecraft.core.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
+import eu.pb4.common.protection.api.CommonProtection;
+import eu.pb4.common.protection.api.ProtectionProvider;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 public class CommonProtectionApiCompat {
 	

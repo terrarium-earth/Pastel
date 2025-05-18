@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import net.fabricmc.fabric.api.biome.v1.*;
-import net.fabricmc.fabric.api.tag.convention.v2.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.dimension.*;
-import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.placement.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class SpectrumPlacedFeatures {
 

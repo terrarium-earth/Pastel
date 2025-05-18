@@ -1,18 +1,24 @@
 package de.dafuqs.spectrum.entity.entity;
 
-import de.dafuqs.spectrum.blocks.*;
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.entity.*;
-import de.dafuqs.spectrum.particle.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.network.syncher.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.blocks.PrimordialFireBlock;
+import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class KindlingCoughEntity extends Projectile {
 	

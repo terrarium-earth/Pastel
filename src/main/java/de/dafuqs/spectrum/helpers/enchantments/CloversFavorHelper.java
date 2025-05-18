@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.helpers.enchantments;
 
-import de.dafuqs.additionalentityattributes.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.Nullable;
 
 public class CloversFavorHelper {
 	

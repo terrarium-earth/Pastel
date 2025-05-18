@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.blocks.present.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.blocks.present.PresentBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Doing a lil trolling

@@ -1,18 +1,21 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.*;
-import com.mojang.datafixers.util.*;
-import de.dafuqs.spectrum.injectors.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.level.saveddata.maps.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.datafixers.util.Function5;
+import de.dafuqs.spectrum.injectors.MapDecorationInjector;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import net.minecraft.world.level.saveddata.maps.MapDecorationType;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Optional;
+import java.util.function.Function;
 
 @Mixin(MapDecoration.class)
 public class MapDecorationMixin implements MapDecorationInjector {

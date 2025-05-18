@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.compat.modonomicon.unlock_conditions;
 
-import com.google.gson.*;
-import com.klikli_dev.modonomicon.book.conditions.*;
-import com.klikli_dev.modonomicon.book.conditions.context.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.player.*;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
+import com.klikli_dev.modonomicon.book.conditions.BookCondition;
+import com.klikli_dev.modonomicon.book.conditions.context.BookConditionContext;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconCompat;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.player.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotCondition extends BookCondition {
 	

@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.recipe;
 
-import com.mojang.serialization.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.item.crafting.*;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
-import java.util.function.*;
+import java.util.function.Supplier;
 
 /**
  * A copy of the old SpecialRecipeSerializer, which simply ignores any meaningful recipe serialization.

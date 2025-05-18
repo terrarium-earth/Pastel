@@ -1,10 +1,15 @@
 package de.dafuqs.spectrum.entity.models;
 
-import de.dafuqs.spectrum.entity.entity.*;
-import net.minecraft.client.model.*;
-import net.minecraft.client.model.geom.*;
-import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.util.*;
+import de.dafuqs.spectrum.entity.entity.EraserEntity;
+import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.util.Mth;
 
 public class EraserEntityModel extends HierarchicalModel<EraserEntity> {
 	

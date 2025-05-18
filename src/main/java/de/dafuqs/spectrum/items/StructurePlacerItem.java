@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.items;
 
-import com.klikli_dev.modonomicon.api.multiblock.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.block.*;
+import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
+import de.dafuqs.spectrum.api.item.CreativeOnlyItem;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.registries.SpectrumMultiblocks;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.Rotation;
 
-import java.util.*;
+import java.util.List;
 
 public class StructurePlacerItem extends Item implements CreativeOnlyItem {
 	

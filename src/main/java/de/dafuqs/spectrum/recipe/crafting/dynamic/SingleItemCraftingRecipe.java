@@ -1,9 +1,11 @@
 package de.dafuqs.spectrum.recipe.crafting.dynamic;
 
-import net.minecraft.core.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.level.Level;
 
 public abstract class SingleItemCraftingRecipe extends CustomRecipe {
 	

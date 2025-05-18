@@ -1,9 +1,10 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.item.alchemy.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.item.alchemy.Potion;
 
 public class SpectrumPotions {
 	

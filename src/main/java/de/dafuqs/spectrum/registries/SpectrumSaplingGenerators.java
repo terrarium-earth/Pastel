@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.block.grower.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.grower.TreeGrower;
 
-import java.util.*;
+import java.util.Optional;
 
 @SuppressWarnings("unused")
 public class SpectrumSaplingGenerators {

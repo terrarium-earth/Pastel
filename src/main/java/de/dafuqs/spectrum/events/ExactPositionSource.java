@@ -1,15 +1,16 @@
 package de.dafuqs.spectrum.events;
 
-import com.mojang.serialization.*;
-import com.mojang.serialization.codecs.*;
-import de.dafuqs.spectrum.helpers.*;
-import io.netty.buffer.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.gameevent.*;
-import net.minecraft.world.phys.*;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.helpers.PacketCodecHelper;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.gameevent.PositionSource;
+import net.minecraft.world.level.gameevent.PositionSourceType;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.Optional;
 
 public class ExactPositionSource implements PositionSource {
 	

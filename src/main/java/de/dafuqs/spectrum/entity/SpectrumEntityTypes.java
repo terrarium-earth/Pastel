@@ -1,13 +1,43 @@
 package de.dafuqs.spectrum.entity;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import net.fabricmc.fabric.api.object.builder.v1.entity.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.projectile.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.entity.BedrockFishingBobberEntity;
+import de.dafuqs.spectrum.entity.entity.BidentEntity;
+import de.dafuqs.spectrum.entity.entity.BidentMirrorImageEntity;
+import de.dafuqs.spectrum.entity.entity.BlockFlooderProjectile;
+import de.dafuqs.spectrum.entity.entity.DraconicTwinswordEntity;
+import de.dafuqs.spectrum.entity.entity.DragonTalonEntity;
+import de.dafuqs.spectrum.entity.entity.EggLayingWoolyPigEntity;
+import de.dafuqs.spectrum.entity.entity.EraserEntity;
+import de.dafuqs.spectrum.entity.entity.FireproofItemEntity;
+import de.dafuqs.spectrum.entity.entity.FloatBlockEntity;
+import de.dafuqs.spectrum.entity.entity.GlassArrowEntity;
+import de.dafuqs.spectrum.entity.entity.InkProjectileEntity;
+import de.dafuqs.spectrum.entity.entity.ItemProjectileEntity;
+import de.dafuqs.spectrum.entity.entity.KindlingCoughEntity;
+import de.dafuqs.spectrum.entity.entity.KindlingEntity;
+import de.dafuqs.spectrum.entity.entity.LagoonFishingBobberEntity;
+import de.dafuqs.spectrum.entity.entity.LightMineEntity;
+import de.dafuqs.spectrum.entity.entity.LightShardEntity;
+import de.dafuqs.spectrum.entity.entity.LightSpearEntity;
+import de.dafuqs.spectrum.entity.entity.LivingMarkerEntity;
+import de.dafuqs.spectrum.entity.entity.LizardEntity;
+import de.dafuqs.spectrum.entity.entity.MiningProjectileEntity;
+import de.dafuqs.spectrum.entity.entity.MoltenFishingBobberEntity;
+import de.dafuqs.spectrum.entity.entity.PhantomFrameEntity;
+import de.dafuqs.spectrum.entity.entity.PhantomGlowFrameEntity;
+import de.dafuqs.spectrum.entity.entity.PreservationTurretEntity;
+import de.dafuqs.spectrum.entity.entity.SeatEntity;
+import de.dafuqs.spectrum.entity.entity.ShootingStarEntity;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 
 public class SpectrumEntityTypes {
 	

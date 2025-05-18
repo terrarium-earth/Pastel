@@ -1,28 +1,36 @@
 package de.dafuqs.spectrum.blocks.present;
 
-import com.mojang.authlib.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.items.bundles.*;
-import de.dafuqs.spectrum.items.tooltip.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.inventory.tooltip.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.*;
+import com.mojang.authlib.GameProfile;
+import de.dafuqs.spectrum.components.ExtendedBundleComponent;
+import de.dafuqs.spectrum.components.WrappedPresentComponent;
+import de.dafuqs.spectrum.items.bundles.PlaceableBundleBlockItem;
+import de.dafuqs.spectrum.items.tooltip.PresentTooltipData;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.TransientCraftingContainer;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.item.component.ResolvableProfile;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 public class PresentBlockItem extends PlaceableBundleBlockItem {
 	

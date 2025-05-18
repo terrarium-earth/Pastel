@@ -1,21 +1,30 @@
 package de.dafuqs.spectrum.compat.travelersbackpack;
 
-import com.tiviacz.travelersbackpack.api.fluids.*;
-import com.tiviacz.travelersbackpack.fluids.*;
-import com.tiviacz.travelersbackpack.inventory.*;
-import de.dafuqs.spectrum.compat.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.material.*;
+import com.tiviacz.travelersbackpack.api.fluids.EffectFluid;
+import com.tiviacz.travelersbackpack.fluids.EffectFluidRegistry;
+import com.tiviacz.travelersbackpack.inventory.FluidVariantWrapper;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
+import de.dafuqs.spectrum.registries.SpectrumFluids;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class TravelersBackpackCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	

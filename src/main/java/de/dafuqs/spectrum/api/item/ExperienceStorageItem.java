@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 
 public interface ExperienceStorageItem {
 	

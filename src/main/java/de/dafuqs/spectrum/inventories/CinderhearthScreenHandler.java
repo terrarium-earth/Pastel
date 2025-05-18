@@ -1,15 +1,20 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.blocks.cinderhearth.*;
-import de.dafuqs.spectrum.inventories.slots.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.blocks.cinderhearth.CinderhearthBlockEntity;
+import de.dafuqs.spectrum.inventories.slots.ExperienceStorageItemSlot;
+import de.dafuqs.spectrum.inventories.slots.InkInputSlot;
+import de.dafuqs.spectrum.networking.s2c_payloads.UpdateBlockEntityInkPayload;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class CinderhearthScreenHandler extends AbstractContainerMenu {
 	

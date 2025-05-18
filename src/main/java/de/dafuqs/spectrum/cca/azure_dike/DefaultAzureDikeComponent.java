@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.cca.azure_dike;
 
-import de.dafuqs.spectrum.progression.*;
-import net.minecraft.nbt.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import org.jetbrains.annotations.*;
-import org.ladysnake.cca.api.v3.component.sync.*;
+import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
+import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 
 public class DefaultAzureDikeComponent implements AzureDikeComponent, AutoSyncedComponent {
 	

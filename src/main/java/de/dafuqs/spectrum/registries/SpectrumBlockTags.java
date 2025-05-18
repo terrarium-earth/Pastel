@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.data.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.level.block.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.data.DatagenProxy;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 @SuppressWarnings("unused")
 public class SpectrumBlockTags {

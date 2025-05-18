@@ -1,22 +1,26 @@
 package de.dafuqs.spectrum.compat.modonomicon.pages;
 
-import com.google.gson.*;
-import com.klikli_dev.modonomicon.book.*;
-import com.klikli_dev.modonomicon.book.conditions.*;
-import com.klikli_dev.modonomicon.book.page.*;
-import com.klikli_dev.modonomicon.util.*;
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.compat.modonomicon.unlock_conditions.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
+import com.google.gson.JsonObject;
+import com.klikli_dev.modonomicon.book.BookTextHolder;
+import com.klikli_dev.modonomicon.book.conditions.BookAndCondition;
+import com.klikli_dev.modonomicon.book.conditions.BookCondition;
+import com.klikli_dev.modonomicon.book.conditions.BookNoneCondition;
+import com.klikli_dev.modonomicon.book.page.BookRecipePage;
+import com.klikli_dev.modonomicon.util.BookGsonHelper;
+import de.dafuqs.spectrum.api.block.GatedGuidebookPage;
+import de.dafuqs.spectrum.api.recipe.GatedRecipe;
+import de.dafuqs.spectrum.compat.modonomicon.unlock_conditions.RecipesLoadedAndUnlockedCondition;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookGatedRecipePage<T extends GatedRecipe<?>> extends BookRecipePage<T> implements GatedGuidebookPage {
 	

@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.blocks.spirit_sallow;
 
-import net.minecraft.world.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class OminousSaplingBlockItem extends BlockItem {
 	

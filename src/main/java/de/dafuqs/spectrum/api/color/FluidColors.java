@@ -1,9 +1,12 @@
 package de.dafuqs.spectrum.api.color;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import net.minecraft.world.level.material.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Optional;
 
 public class FluidColors extends ColorRegistry<Fluid> {
 	

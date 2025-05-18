@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.entity.render;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.entity.entity.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.entity.entity.SpectrumFishingBobberEntity;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
 
 public class MoltenFishingBobberEntityRenderer extends SpectrumFishingBobberEntityRenderer {
 	

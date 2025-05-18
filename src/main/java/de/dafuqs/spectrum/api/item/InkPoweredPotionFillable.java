@@ -1,12 +1,15 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.api.energy.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.item.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.energy.InkCost;
+import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public interface InkPoweredPotionFillable {
 	

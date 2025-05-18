@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.items.conditional;
 
-import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.api.item.GemstoneColor;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 
 public class GemstonePowderItem extends CloakedItem {
 	

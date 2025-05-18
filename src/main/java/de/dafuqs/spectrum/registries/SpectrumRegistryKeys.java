@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.registries;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.api.pastel.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.entity.variants.*;
-import de.dafuqs.spectrum.items.tools.*;
-import de.dafuqs.spectrum.recipe.*;
-import net.minecraft.core.*;
-import net.minecraft.resources.*;
+import com.mojang.serialization.MapCodec;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.interaction.ResonanceProcessor;
+import de.dafuqs.spectrum.api.item.GemstoneColor;
+import de.dafuqs.spectrum.api.item.StampDataCategory;
+import de.dafuqs.spectrum.api.pastel.PastelUpgradeSignature;
+import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
+import de.dafuqs.spectrum.entity.variants.KindlingVariant;
+import de.dafuqs.spectrum.entity.variants.LizardFrillVariant;
+import de.dafuqs.spectrum.entity.variants.LizardHornVariant;
+import de.dafuqs.spectrum.items.tools.GlassArrowVariant;
+import de.dafuqs.spectrum.recipe.RecipeScaling;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 
 public class SpectrumRegistryKeys {
 	

@@ -1,17 +1,19 @@
 package de.dafuqs.spectrum.items.bundles;
 
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.mixin.accessors.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.component.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.level.*;
-import org.apache.commons.lang3.math.*;
+import de.dafuqs.spectrum.components.ExtendedBundleComponent;
+import de.dafuqs.spectrum.mixin.accessors.BundleContentsComponentAccessor;
+import de.dafuqs.spectrum.mixin.accessors.BundleContentsComponentBuilderAccessor;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.BundleItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.BundleContents;
+import net.minecraft.world.level.Level;
+import org.apache.commons.lang3.math.Fraction;
 
-import java.util.*;
+import java.util.List;
 
 public class ExtendedBundleItem extends BundleItem {
 	

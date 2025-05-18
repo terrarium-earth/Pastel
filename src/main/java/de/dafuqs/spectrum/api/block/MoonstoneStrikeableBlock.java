@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.api.block;
 
-import net.minecraft.core.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.*;
-import org.jetbrains.annotations.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public interface MoonstoneStrikeableBlock {
     

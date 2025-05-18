@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.compat.ears;
 
-import com.unascribed.ears.api.*;
-import com.unascribed.ears.api.registry.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
+import com.unascribed.ears.api.EarsAnchorPart;
+import com.unascribed.ears.api.EarsStateType;
+import com.unascribed.ears.api.registry.EarsInhibitorRegistry;
+import com.unascribed.ears.api.registry.EarsStateOverriderRegistry;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 
 public class EarsCompat {
     public static void register() {

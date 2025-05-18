@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.damage_type;
 
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.Optional;
 
 public interface StackTracking {
 	

@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.items.tooltip;
 
-import de.dafuqs.spectrum.api.gui.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
-import org.joml.*;
+import de.dafuqs.spectrum.api.gui.SpectrumTooltipComponent;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemStack;
+import org.joml.Matrix4f;
 
 @Environment(EnvType.CLIENT)
 public class CraftingTabletTooltipComponent implements SpectrumTooltipComponent {

@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.items.trinkets;
 
-import net.fabricmc.api.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
-import java.util.*;
+import java.util.List;
 
 public class AzureDikeBeltItem extends AzureDikeTrinketItem {
 	

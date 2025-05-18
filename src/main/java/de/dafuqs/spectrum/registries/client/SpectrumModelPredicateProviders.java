@@ -1,22 +1,35 @@
 package de.dafuqs.spectrum.registries.client;
 
-import de.dafuqs.spectrum.api.energy.storage.*;
-import de.dafuqs.spectrum.api.entity.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.blocks.bottomless_bundle.*;
-import de.dafuqs.spectrum.components.*;
-import de.dafuqs.spectrum.items.magic_items.*;
-import de.dafuqs.spectrum.items.tools.*;
-import de.dafuqs.spectrum.items.trinkets.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.renderer.item.*;
-import net.minecraft.core.component.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
+import de.dafuqs.spectrum.api.energy.storage.SingleInkStorage;
+import de.dafuqs.spectrum.api.entity.PlayerEntityAccessor;
+import de.dafuqs.spectrum.api.item.ActivatableItem;
+import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
+import de.dafuqs.spectrum.api.item.SlotReservingItem;
+import de.dafuqs.spectrum.api.item.Stampable;
+import de.dafuqs.spectrum.blocks.bottomless_bundle.BottomlessBundleItem;
+import de.dafuqs.spectrum.components.WrappedPresentComponent;
+import de.dafuqs.spectrum.items.magic_items.EnderSpliceItem;
+import de.dafuqs.spectrum.items.magic_items.PipeBombItem;
+import de.dafuqs.spectrum.items.magic_items.StructureCompassItem;
+import de.dafuqs.spectrum.items.tools.MalachiteCrossbowItem;
+import de.dafuqs.spectrum.items.tools.SpectrumFishingRodItem;
+import de.dafuqs.spectrum.items.trinkets.AshenCircletItem;
+import de.dafuqs.spectrum.registries.SpectrumBlocks;
+import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ChargedProjectiles;
+import net.minecraft.world.item.component.CustomData;
 
 // Vanilla models see: ModelPredicateProviderRegistry
 public class SpectrumModelPredicateProviders {

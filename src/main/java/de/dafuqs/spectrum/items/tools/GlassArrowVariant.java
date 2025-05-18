@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.world.item.ArrowItem;
 
 public class GlassArrowVariant {
 	

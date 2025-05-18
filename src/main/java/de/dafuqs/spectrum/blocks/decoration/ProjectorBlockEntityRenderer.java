@@ -1,14 +1,16 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
-import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.blockentity.*;
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.phys.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import de.dafuqs.spectrum.helpers.RenderHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 public class ProjectorBlockEntityRenderer implements BlockEntityRenderer<ProjectorBlockEntity> {
 

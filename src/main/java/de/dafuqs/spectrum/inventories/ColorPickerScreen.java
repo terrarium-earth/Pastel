@@ -1,21 +1,23 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.energy.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.inventories.widgets.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.screens.inventory.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.player.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.blocks.energy.ColorPickerBlockEntity;
+import de.dafuqs.spectrum.helpers.RenderHelper;
+import de.dafuqs.spectrum.inventories.widgets.ColorSelectionWidget;
+import de.dafuqs.spectrum.inventories.widgets.InkGaugeWidget;
+import de.dafuqs.spectrum.inventories.widgets.StackedInkMeterWidget;
+import de.dafuqs.spectrum.networking.c2s_payloads.InkColorSelectedC2SPayload;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 public class ColorPickerScreen extends AbstractContainerScreen<ColorPickerScreenHandler> implements Consumer<Optional<Holder<InkColor>>> {
 	

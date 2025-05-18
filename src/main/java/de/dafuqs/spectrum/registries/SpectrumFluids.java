@@ -1,20 +1,28 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.color.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.fluid.*;
-import de.dafuqs.spectrum.helpers.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.*;
-import net.fabricmc.fabric.api.client.render.fluid.v1.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.level.material.*;
-import org.joml.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.color.ItemColors;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.blocks.fluid.DragonrotFluid;
+import de.dafuqs.spectrum.blocks.fluid.GooFluid;
+import de.dafuqs.spectrum.blocks.fluid.LiquidCrystalFluid;
+import de.dafuqs.spectrum.blocks.fluid.MidnightSolutionFluid;
+import de.dafuqs.spectrum.blocks.fluid.SpectrumFluid;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
+import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.material.Fluid;
+import org.joml.Vector3f;
 
 
 public class SpectrumFluids {

@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.inventories.slots;
 
-import de.dafuqs.spectrum.recipe.*;
-import net.minecraft.world.*;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.recipe.InkConvertingRecipe;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class ColorPickerInputSlot extends Slot {
 	

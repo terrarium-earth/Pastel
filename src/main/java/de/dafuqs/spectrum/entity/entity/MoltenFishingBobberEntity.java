@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.entity.entity;
 
-import de.dafuqs.spectrum.blocks.idols.*;
-import de.dafuqs.spectrum.entity.*;
-import net.minecraft.core.*;
-import net.minecraft.server.level.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.level.*;
+import de.dafuqs.spectrum.blocks.idols.FirestarterIdolBlock;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 public class MoltenFishingBobberEntity extends SpectrumFishingBobberEntity {
 

@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.recipe;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import it.unimi.dsi.fastutil.objects.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import it.unimi.dsi.fastutil.objects.ObjectArraySet;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeInput;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public abstract class GatedStackSpectrumRecipe<C extends RecipeInput> extends GatedSpectrumRecipe<C> {
 	

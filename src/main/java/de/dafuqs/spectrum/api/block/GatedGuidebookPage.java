@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import net.fabricmc.loader.api.*;
-import net.minecraft.resources.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.GatedRecipe;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
 
 public interface GatedGuidebookPage {
 	

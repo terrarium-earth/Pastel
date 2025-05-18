@@ -1,9 +1,12 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.inventory.*;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.inventory.ClickType;
 
 public class BagOfHoldingScreenHandler extends ChestMenu {
 	

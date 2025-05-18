@@ -1,21 +1,23 @@
 package de.dafuqs.spectrum.compat;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.compat.ae2.*;
-import de.dafuqs.spectrum.compat.alloy_forgery.*;
-import de.dafuqs.spectrum.compat.botania.*;
-import de.dafuqs.spectrum.compat.create.*;
-import de.dafuqs.spectrum.compat.exclusions_lib.*;
-import de.dafuqs.spectrum.compat.gobber.*;
-import de.dafuqs.spectrum.compat.malum.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import de.dafuqs.spectrum.compat.neepmeat.*;
-import de.dafuqs.spectrum.compat.travelersbackpack.*;
-import net.fabricmc.api.*;
-import net.fabricmc.loader.api.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.compat.ae2.AE2Compat;
+import de.dafuqs.spectrum.compat.alloy_forgery.AlloyForgeryCompat;
+import de.dafuqs.spectrum.compat.botania.BotaniaCompat;
+import de.dafuqs.spectrum.compat.create.CreateCompat;
+import de.dafuqs.spectrum.compat.exclusions_lib.ExclusionsLibCompat;
+import de.dafuqs.spectrum.compat.gobber.GobberCompat;
+import de.dafuqs.spectrum.compat.malum.MalumCompat;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconCompat;
+import de.dafuqs.spectrum.compat.neepmeat.NEEPMeatCompat;
+import de.dafuqs.spectrum.compat.travelersbackpack.TravelersBackpackCompat;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class SpectrumIntegrationPacks {
 	

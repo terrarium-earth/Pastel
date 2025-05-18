@@ -1,12 +1,15 @@
 package de.dafuqs.spectrum.blocks.structure;
 
-import com.mojang.serialization.*;
-import net.minecraft.core.*;
-import net.minecraft.world.item.context.*;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.*;
-import net.minecraft.world.level.block.state.*;
-import org.jetbrains.annotations.*;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import org.jetbrains.annotations.Nullable;
 
 public class DeepLightBlock extends HorizontalDirectionalBlock implements EntityBlock {
 

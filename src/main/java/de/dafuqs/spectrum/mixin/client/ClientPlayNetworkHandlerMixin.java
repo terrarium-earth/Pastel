@@ -1,12 +1,13 @@
 package de.dafuqs.spectrum.mixin.client;
 
-import com.llamalad7.mixinextras.sugar.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.world.effect.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
-import org.spongepowered.asm.mixin.injection.callback.*;
+import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.world.effect.MobEffectInstance;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPacketListener.class)
 public class ClientPlayNetworkHandlerMixin {

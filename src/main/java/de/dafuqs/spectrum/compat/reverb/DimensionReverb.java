@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.compat.reverb;
 
-import de.dafuqs.reverb.*;
-import de.dafuqs.reverb.sound.*;
-import de.dafuqs.reverb.sound.reverb.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
+import de.dafuqs.reverb.Reverb;
+import de.dafuqs.reverb.sound.SoundEffects;
+import de.dafuqs.reverb.sound.reverb.StaticReverbEffect;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.registries.SpectrumDimensions;
+import net.minecraft.core.Registry;
 
-import java.util.*;
+import java.util.Optional;
 
 public class DimensionReverb {
 

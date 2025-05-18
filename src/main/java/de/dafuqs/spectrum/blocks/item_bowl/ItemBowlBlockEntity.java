@@ -1,28 +1,34 @@
 package de.dafuqs.spectrum.blocks.item_bowl;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.color.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.blocks.*;
-import de.dafuqs.spectrum.events.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.nbt.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.color.ColorRegistry;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.blocks.InWorldInteractionBlockEntity;
+import de.dafuqs.spectrum.events.ExactPositionSource;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.networking.s2c_payloads.ColorTransmissionPayload;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
+import de.dafuqs.spectrum.particle.effect.ColoredSparkleRisingParticleEffect;
+import de.dafuqs.spectrum.particle.effect.ColoredTransmission;
+import de.dafuqs.spectrum.particle.effect.ColoredTransmissionParticleEffect;
+import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Optional;
 
 public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity {
 	

@@ -1,13 +1,14 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.recipe.anvil_crushing.*;
-import me.shedaniel.rei.api.common.category.*;
-import me.shedaniel.rei.api.common.display.basic.*;
-import me.shedaniel.rei.api.common.util.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.spectrum.compat.REI.GatedSpectrumDisplay;
+import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
+import de.dafuqs.spectrum.recipe.anvil_crushing.AnvilCrushingRecipe;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
-import java.util.*;
+import java.util.Collections;
 
 public class AnvilCrushingDisplay extends GatedSpectrumDisplay {
 	public final float experience;

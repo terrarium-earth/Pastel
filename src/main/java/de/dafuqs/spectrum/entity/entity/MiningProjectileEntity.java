@@ -1,20 +1,25 @@
 package de.dafuqs.spectrum.entity.entity;
 
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.entity.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.particle.effect.*;
-import de.dafuqs.spectrum.spells.*;
-import net.minecraft.network.syncher.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.api.energy.color.InkColor;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import de.dafuqs.spectrum.helpers.AoEHelper;
+import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
+import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
+import de.dafuqs.spectrum.spells.MoonstoneStrike;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 
-import java.util.function.*;
+import java.util.function.Predicate;
 
 public class MiningProjectileEntity extends MagicProjectileEntity {
 	

@@ -1,15 +1,16 @@
 package de.dafuqs.spectrum.compat.modonomicon.page_types;
 
-import com.google.gson.*;
-import com.klikli_dev.modonomicon.book.entries.*;
-import com.klikli_dev.modonomicon.client.gui.book.*;
-import de.dafuqs.spectrum.compat.modonomicon.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.screens.*;
-import net.minecraft.core.*;
-import net.minecraft.network.*;
-import net.minecraft.resources.*;
-import net.minecraft.util.*;
+import com.google.gson.JsonObject;
+import com.klikli_dev.modonomicon.book.entries.BookEntry;
+import com.klikli_dev.modonomicon.client.gui.book.BookAddress;
+import de.dafuqs.spectrum.compat.modonomicon.ModonomiconCompat;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ConfirmLinkScreen;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 
 /**
  * A node that is a link to another existing entry

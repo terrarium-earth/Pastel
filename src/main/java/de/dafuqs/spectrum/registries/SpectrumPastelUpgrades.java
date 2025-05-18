@@ -1,12 +1,14 @@
 package de.dafuqs.spectrum.registries;
 
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.pastel.*;
-import net.minecraft.core.*;
-import net.minecraft.world.*;
-import net.minecraft.world.item.*;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.pastel.PastelUpgradeSignature;
+import net.minecraft.core.Registry;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SpectrumPastelUpgrades {
 

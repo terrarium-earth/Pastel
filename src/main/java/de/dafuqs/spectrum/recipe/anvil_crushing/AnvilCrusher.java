@@ -1,19 +1,22 @@
 package de.dafuqs.spectrum.recipe.anvil_crushing;
 
-import de.dafuqs.spectrum.api.block.*;
-import de.dafuqs.spectrum.helpers.*;
-import de.dafuqs.spectrum.networking.s2c_payloads.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.server.level.*;
-import net.minecraft.sounds.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
+import de.dafuqs.spectrum.api.block.MultiblockCrafter;
+import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
+import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.Optional;
 
 public class AnvilCrusher {
 

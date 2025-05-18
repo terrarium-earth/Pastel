@@ -1,16 +1,20 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.fabricmc.fabric.api.transfer.v1.item.*;
-import net.minecraft.server.level.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.item.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.Containers;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.MobBucketItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 public class InWorldInteractionHelper {
 	

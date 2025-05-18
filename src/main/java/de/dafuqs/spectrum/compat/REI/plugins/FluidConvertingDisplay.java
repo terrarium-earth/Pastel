@@ -1,13 +1,13 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
-import de.dafuqs.revelationary.api.advancements.*;
-import de.dafuqs.spectrum.compat.REI.*;
-import de.dafuqs.spectrum.recipe.fluid_converting.*;
-import me.shedaniel.rei.api.common.display.basic.*;
-import me.shedaniel.rei.api.common.entry.*;
-import net.minecraft.client.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.crafting.*;
+import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
+import de.dafuqs.spectrum.compat.REI.GatedSpectrumDisplay;
+import de.dafuqs.spectrum.recipe.fluid_converting.FluidConvertingRecipe;
+import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 
 public abstract class FluidConvertingDisplay extends GatedSpectrumDisplay {
 	

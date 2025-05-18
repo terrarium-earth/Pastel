@@ -1,19 +1,22 @@
 package de.dafuqs.spectrum.particle.client;
 
-import com.mojang.blaze3d.vertex.*;
-import de.dafuqs.spectrum.helpers.*;
-import net.fabricmc.api.*;
-import net.minecraft.client.*;
-import net.minecraft.client.multiplayer.*;
-import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.core.*;
-import net.minecraft.core.particles.*;
-import net.minecraft.util.*;
-import net.minecraft.world.phys.*;
-import org.joml.*;
-
-import java.lang.Math;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Camera;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 public class RainRippleParticle extends TextureSheetParticle {
 

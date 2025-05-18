@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.mixin;
 
-import com.llamalad7.mixinextras.injector.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.*;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.*;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Fox;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(Fox.class)
 public class FoxEntityMixin {

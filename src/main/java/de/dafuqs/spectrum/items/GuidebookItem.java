@@ -1,23 +1,30 @@
 package de.dafuqs.spectrum.items;
 
-import com.klikli_dev.modonomicon.client.gui.*;
-import com.klikli_dev.modonomicon.client.gui.book.*;
-import de.dafuqs.revelationary.advancement_criteria.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.server.*;
-import net.minecraft.server.level.*;
-import net.minecraft.stats.*;
-import net.minecraft.world.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.entity.*;
+import com.klikli_dev.modonomicon.client.gui.BookGuiManager;
+import com.klikli_dev.modonomicon.client.gui.book.BookAddress;
+import de.dafuqs.revelationary.advancement_criteria.AdvancementGottenCriterion;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.item.LoomPatternProvider;
+import de.dafuqs.spectrum.registries.SpectrumBannerPatterns;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.PlayerAdvancements;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BannerPattern;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class GuidebookItem extends Item implements LoomPatternProvider {
 	

@@ -1,16 +1,18 @@
 package de.dafuqs.spectrum.render;
 
-import com.mojang.blaze3d.platform.*;
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.cca.azure_dike.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.rendering.v1.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
+import com.mojang.blaze3d.platform.Window;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.cca.azure_dike.AzureDikeComponent;
+import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
 public class HudRenderers {

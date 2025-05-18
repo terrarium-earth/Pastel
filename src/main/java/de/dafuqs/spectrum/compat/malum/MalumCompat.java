@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.compat.malum;
 
-import com.sammy.malum.registry.common.item.*;
-import de.dafuqs.spectrum.api.color.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.compat.*;
-import net.fabricmc.api.*;
+import com.sammy.malum.registry.common.item.ItemRegistry;
+import de.dafuqs.spectrum.api.color.ItemColors;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
 public class MalumCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	

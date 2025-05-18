@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.spectrum.api.item.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.*;
+import de.dafuqs.spectrum.api.item.Preenchanted;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShearsItem;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
-import java.util.*;
+import java.util.Map;
 
 // Waiting for https://github.com/FabricMC/fabric/pull/1804
 // Who's still waiting this with me in 2025??

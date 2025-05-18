@@ -1,15 +1,15 @@
 package de.dafuqs.spectrum.blocks.mob_head;
 
-import com.mojang.serialization.*;
-import de.dafuqs.spectrum.entity.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.resources.*;
-import net.minecraft.sounds.*;
-import net.minecraft.util.*;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.level.block.*;
+import com.mojang.serialization.Codec;
+import de.dafuqs.spectrum.entity.SpectrumEntityTypes;
+import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.SkullBlock;
 
-import java.util.*;
+import java.util.Locale;
 
 public enum SpectrumSkullType implements SkullBlock.Type {
 	

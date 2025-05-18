@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.worldgen.features;
 
-import com.mojang.serialization.*;
-import net.minecraft.core.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
-import net.minecraft.world.level.levelgen.feature.*;
-import net.minecraft.world.level.levelgen.feature.configurations.*;
+import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.GeodeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
 
 public class SolidBlockCheckGeodeFeature extends GeodeFeature {
 

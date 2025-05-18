@@ -1,17 +1,20 @@
 package de.dafuqs.spectrum.items.tools;
 
-import de.dafuqs.arrowhead.api.*;
-import de.dafuqs.spectrum.api.item.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.component.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.*;
-import net.minecraft.world.item.enchantment.*;
+import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
+import de.dafuqs.spectrum.api.item.Preenchanted;
+import de.dafuqs.spectrum.registries.SpectrumItemTags;
+import de.dafuqs.spectrum.registries.SpectrumToolMaterial;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ChargedProjectiles;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class MalachiteCrossbowItem extends CrossbowItem implements Preenchanted, ArrowheadCrossbow {
 	

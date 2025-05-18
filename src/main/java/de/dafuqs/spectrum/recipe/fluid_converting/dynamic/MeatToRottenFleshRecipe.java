@@ -1,15 +1,17 @@
 package de.dafuqs.spectrum.recipe.fluid_converting.dynamic;
 
-import com.neep.neepmeat.init.*;
-import de.dafuqs.spectrum.compat.*;
-import de.dafuqs.spectrum.recipe.fluid_converting.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
+import com.neep.neepmeat.init.NMItems;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import de.dafuqs.spectrum.recipe.fluid_converting.DragonrotConvertingRecipe;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 
-import java.util.*;
+import java.util.Optional;
 
 public class MeatToRottenFleshRecipe extends DragonrotConvertingRecipe {
 	

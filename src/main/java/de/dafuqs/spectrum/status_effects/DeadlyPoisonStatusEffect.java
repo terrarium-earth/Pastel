@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.world.effect.*;
-import net.minecraft.world.entity.*;
+import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
 
 public class DeadlyPoisonStatusEffect extends MobEffect {
 	

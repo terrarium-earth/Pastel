@@ -1,20 +1,26 @@
 package de.dafuqs.spectrum.compat.botania;
 
-import de.dafuqs.fractal.api.*;
-import de.dafuqs.spectrum.api.color.*;
-import de.dafuqs.spectrum.api.energy.color.*;
-import de.dafuqs.spectrum.api.interaction.*;
-import de.dafuqs.spectrum.api.item_group.*;
-import de.dafuqs.spectrum.compat.*;
-import de.dafuqs.spectrum.registries.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.event.lifecycle.v1.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.*;
-import vazkii.botania.common.item.*;
+import de.dafuqs.fractal.api.ItemSubGroupEvents;
+import de.dafuqs.spectrum.api.color.ItemColors;
+import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.interaction.ItemProvider;
+import de.dafuqs.spectrum.api.interaction.ItemProviderRegistry;
+import de.dafuqs.spectrum.api.item_group.ItemGroupIDs;
+import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
+import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import vazkii.botania.common.item.BlackHoleTalismanItem;
+import vazkii.botania.common.item.BotaniaItems;
 
-import static de.dafuqs.spectrum.registries.SpectrumItems.*;
+import static de.dafuqs.spectrum.registries.SpectrumItems.item;
+import static de.dafuqs.spectrum.registries.SpectrumItems.simple;
 
 @SuppressWarnings("unused")
 public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {

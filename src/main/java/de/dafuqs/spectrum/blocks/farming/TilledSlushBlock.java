@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.blocks.farming;
 
-import net.minecraft.core.*;
-import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.state.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class TilledSlushBlock extends ExtraTickFarmlandBlock {
 	

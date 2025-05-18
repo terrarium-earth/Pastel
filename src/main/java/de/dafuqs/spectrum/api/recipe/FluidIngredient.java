@@ -1,21 +1,26 @@
 package de.dafuqs.spectrum.api.recipe;
 
-import com.mojang.datafixers.util.*;
-import com.mojang.serialization.*;
-import net.fabricmc.fabric.api.transfer.v1.fluid.*;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.*;
-import net.minecraft.network.*;
-import net.minecraft.network.codec.*;
-import net.minecraft.resources.*;
-import net.minecraft.tags.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.material.*;
-import org.jetbrains.annotations.*;
+import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 //TODO Refactor this to use registryEntryList or something, or at least an Either
 public class FluidIngredient {

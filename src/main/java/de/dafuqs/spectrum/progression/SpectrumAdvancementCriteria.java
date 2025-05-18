@@ -1,7 +1,43 @@
 package de.dafuqs.spectrum.progression;
 
-import de.dafuqs.spectrum.progression.advancement.*;
-import net.minecraft.advancements.*;
+import de.dafuqs.spectrum.progression.advancement.AzureDikeChargeCriterion;
+import de.dafuqs.spectrum.progression.advancement.BlockBrokenCriterion;
+import de.dafuqs.spectrum.progression.advancement.BloodOrchidPluckingCriterion;
+import de.dafuqs.spectrum.progression.advancement.CinderhearthSmeltingCriterion;
+import de.dafuqs.spectrum.progression.advancement.CompletedMultiblockCriterion;
+import de.dafuqs.spectrum.progression.advancement.ConfirmationButtonPressedCriterion;
+import de.dafuqs.spectrum.progression.advancement.CrystalApothecaryCollectingCriterion;
+import de.dafuqs.spectrum.progression.advancement.CrystallarieumGrownCriterion;
+import de.dafuqs.spectrum.progression.advancement.DivinityTickCriterion;
+import de.dafuqs.spectrum.progression.advancement.EnchanterCraftingCriterion;
+import de.dafuqs.spectrum.progression.advancement.EnchanterEnchantingCriterion;
+import de.dafuqs.spectrum.progression.advancement.EnchantmentUpgradedCriterion;
+import de.dafuqs.spectrum.progression.advancement.FluidDippingCriterion;
+import de.dafuqs.spectrum.progression.advancement.FusionShrineCraftingCriterion;
+import de.dafuqs.spectrum.progression.advancement.HummingstoneHymnCriterion;
+import de.dafuqs.spectrum.progression.advancement.InertiaUsedCriterion;
+import de.dafuqs.spectrum.progression.advancement.InkContainerInteractionCriterion;
+import de.dafuqs.spectrum.progression.advancement.InkProjectileKillingCriterion;
+import de.dafuqs.spectrum.progression.advancement.JeopardantKillCriterion;
+import de.dafuqs.spectrum.progression.advancement.LootFunctionTriggerCriterion;
+import de.dafuqs.spectrum.progression.advancement.MemoryManifestingCriterion;
+import de.dafuqs.spectrum.progression.advancement.NaturesStaffConversionCriterion;
+import de.dafuqs.spectrum.progression.advancement.PairedFoodEatenCriterion;
+import de.dafuqs.spectrum.progression.advancement.PastelNetworkCreationCriterion;
+import de.dafuqs.spectrum.progression.advancement.PastelNodeUpgradeCriterion;
+import de.dafuqs.spectrum.progression.advancement.PedestalCraftingCriterion;
+import de.dafuqs.spectrum.progression.advancement.PedestalRecipeCalculatedCriterion;
+import de.dafuqs.spectrum.progression.advancement.PotionWorkshopBrewingCriterion;
+import de.dafuqs.spectrum.progression.advancement.PotionWorkshopCraftingCriterion;
+import de.dafuqs.spectrum.progression.advancement.PreservationCheckCriterion;
+import de.dafuqs.spectrum.progression.advancement.SlimeSizingCriterion;
+import de.dafuqs.spectrum.progression.advancement.SpectrumFishingRodHookedCriterion;
+import de.dafuqs.spectrum.progression.advancement.SpiritInstillerCraftingCriterion;
+import de.dafuqs.spectrum.progression.advancement.TakeOffBeltJumpCriterion;
+import de.dafuqs.spectrum.progression.advancement.TitrationBarrelTappingCriterion;
+import de.dafuqs.spectrum.progression.advancement.TrinketChangeCriterion;
+import de.dafuqs.spectrum.progression.advancement.UpgradePlaceCriterion;
+import net.minecraft.advancements.CriteriaTriggers;
 
 public class SpectrumAdvancementCriteria {
 

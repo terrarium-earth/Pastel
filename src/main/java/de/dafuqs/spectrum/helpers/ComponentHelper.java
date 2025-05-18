@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.minecraft.core.component.*;
-import net.minecraft.util.*;
-import net.minecraft.world.item.*;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.util.Unit;
+import net.minecraft.world.item.ItemStack;
 
 public class ComponentHelper {
 	

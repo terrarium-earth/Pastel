@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.compat.emi;
 
-import de.dafuqs.spectrum.api.recipe.*;
-import dev.emi.emi.api.stack.*;
-import org.jetbrains.annotations.*;
+import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Objects;
 
 public class FluidIngredientEmi {
     // ALWAYS pass FluidIngredient.EMPTY INSTEAD OF null

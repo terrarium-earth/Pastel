@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
-import com.klikli_dev.modonomicon.client.render.page.*;
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.compat.modonomicon.pages.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.core.registries.*;
+import com.klikli_dev.modonomicon.client.render.page.BookTextPageRenderer;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.compat.modonomicon.pages.BookStatusEffectPage;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public class BookStatusEffectPageRenderer extends BookTextPageRenderer {
 

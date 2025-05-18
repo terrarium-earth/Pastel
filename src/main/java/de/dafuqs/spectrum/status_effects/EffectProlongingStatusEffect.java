@@ -1,8 +1,9 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.world.effect.*;
+import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
+import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 
 public class EffectProlongingStatusEffect extends MobEffect {
 	

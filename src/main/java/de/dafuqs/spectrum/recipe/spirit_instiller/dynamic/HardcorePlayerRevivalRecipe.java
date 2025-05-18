@@ -1,24 +1,29 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic;
 
-import com.mojang.authlib.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.api.recipe.*;
-import de.dafuqs.spectrum.blocks.spirit_instiller.*;
-import de.dafuqs.spectrum.cca.*;
-import de.dafuqs.spectrum.recipe.*;
-import de.dafuqs.spectrum.recipe.spirit_instiller.*;
-import de.dafuqs.spectrum.registries.*;
-import net.minecraft.core.*;
-import net.minecraft.core.component.*;
-import net.minecraft.server.level.*;
-import net.minecraft.server.players.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.block.*;
-import org.jetbrains.annotations.*;
+import com.mojang.authlib.GameProfile;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.blocks.spirit_instiller.SpiritInstillerBlockEntity;
+import de.dafuqs.spectrum.cca.HardcoreDeathComponent;
+import de.dafuqs.spectrum.recipe.InstanceRecipeInput;
+import de.dafuqs.spectrum.recipe.spirit_instiller.SpiritInstillerRecipe;
+import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Rotation;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Optional;
 
 public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	

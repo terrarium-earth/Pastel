@@ -1,29 +1,36 @@
 package de.dafuqs.spectrum.inventories;
 
-import com.mojang.blaze3d.systems.*;
-import de.dafuqs.spectrum.*;
-import de.dafuqs.spectrum.blocks.particle_spawner.*;
-import de.dafuqs.spectrum.data_loaders.*;
-import de.dafuqs.spectrum.networking.c2s_payloads.*;
-import net.fabricmc.api.*;
-import net.fabricmc.fabric.api.client.networking.v1.*;
-import net.fabricmc.fabric.mixin.client.particle.*;
-import net.minecraft.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.gui.components.*;
-import net.minecraft.client.gui.components.events.*;
-import net.minecraft.client.gui.screens.inventory.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.core.*;
-import net.minecraft.network.chat.*;
-import net.minecraft.resources.*;
-import net.minecraft.world.entity.player.*;
-import net.minecraft.world.phys.*;
-import org.jetbrains.annotations.*;
-import org.lwjgl.glfw.*;
+import com.mojang.blaze3d.systems.RenderSystem;
+import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerBlockEntity;
+import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerConfiguration;
+import de.dafuqs.spectrum.data_loaders.ParticleSpawnerParticlesDataLoader;
+import de.dafuqs.spectrum.networking.c2s_payloads.ParticleSpawnerConfigurationC2SPayload;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.mixin.client.particle.ParticleManagerAccessor;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.texture.SpriteContents;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.Vec3i;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+import org.lwjgl.glfw.GLFW;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 @Environment(EnvType.CLIENT)
 public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawnerScreenHandler> {
