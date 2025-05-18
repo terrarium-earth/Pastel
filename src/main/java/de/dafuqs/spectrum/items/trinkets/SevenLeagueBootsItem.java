@@ -4,7 +4,6 @@ import com.google.common.collect.Multimap;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import top.theillusivec4.curios.api.SlotContext;
-import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,8 +46,8 @@ public class SevenLeagueBootsItem extends SpectrumTrinketItem {
 	}
 	
 	@Override
-	public boolean canBeEnchantedWith(ItemStack stack, Holder<Enchantment> enchantment, EnchantingContext context) {
-		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.is(Enchantments.POWER);
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER);
 	}
 	
 }

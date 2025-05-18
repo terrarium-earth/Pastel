@@ -12,7 +12,6 @@ import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -119,8 +118,8 @@ public class TakeOffBeltItem extends SpectrumTrinketItem {
 	}
 	
 	@Override
-	public boolean canBeEnchantedWith(ItemStack stack, Holder<Enchantment> enchantment, EnchantingContext context) {
-		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.is(Enchantments.POWER) || enchantment.is(Enchantments.FEATHER_FALLING);
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER) || enchantment.is(Enchantments.FEATHER_FALLING);
 	}
 	
 }

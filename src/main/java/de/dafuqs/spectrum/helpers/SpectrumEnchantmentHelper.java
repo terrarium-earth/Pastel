@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.helpers;
 
 import de.dafuqs.spectrum.registries.SpectrumItemTags;
-import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -49,7 +48,7 @@ public class SpectrumEnchantmentHelper {
 	 * @return the enchanted stack and a boolean if the enchanting was successful
 	 */
 	public static Tuple<Boolean, ItemStack> addOrUpgradeEnchantment(ItemStack stack, Holder<Enchantment> enchantment, int level, boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts) {
-		boolean isAcceptable = stack.canBeEnchantedWith(enchantment, EnchantingContext.ACCEPTABLE) || forceEvenIfNotApplicable;
+		boolean isAcceptable = stack.supportsEnchantment(enchantment) || forceEvenIfNotApplicable;
 		boolean isConflicting = !allowEnchantmentConflicts && !EnchantmentHelper.isEnchantmentCompatible(stack.getEnchantments().keySet(), enchantment);
 		boolean isEnchantedBook = stack.is(Items.ENCHANTED_BOOK) || SpectrumEnchantmentHelper.isEnchantableBook(stack);
 		

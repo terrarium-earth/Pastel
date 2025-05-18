@@ -13,7 +13,6 @@ import de.dafuqs.spectrum.registries.SpectrumEnchantments;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -257,8 +256,8 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	}
 	
 	@Override
-	public boolean canBeEnchantedWith(ItemStack stack, Holder<Enchantment> enchantment, EnchantingContext context) {
-		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.is(Enchantments.FORTUNE) || enchantment.is(Enchantments.SILK_TOUCH) || enchantment.is(SpectrumEnchantments.RESONANCE);
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.FORTUNE) || enchantment.is(Enchantments.SILK_TOUCH) || enchantment.is(SpectrumEnchantments.RESONANCE);
 	}
 	
 }

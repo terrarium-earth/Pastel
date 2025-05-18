@@ -4,7 +4,6 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.helpers.LoreHelper;
 import de.dafuqs.spectrum.items.PigmentItem;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -191,7 +190,7 @@ public class BedrockAnvilScreenHandler extends ItemCombinerMenu {
 						int newEnchantmentLevel = entry.getIntValue();
 						newEnchantmentLevel = t == newEnchantmentLevel ? newEnchantmentLevel + 1 : Math.max(newEnchantmentLevel, t);
 						Enchantment enchantment = registryEntry.value();
-						boolean itemStackIsAcceptableForStack = inputStack.canBeEnchantedWith(registryEntry, EnchantingContext.ACCEPTABLE);
+						boolean itemStackIsAcceptableForStack = inputStack.supportsEnchantment(registryEntry);
 						if (this.player.getAbilities().instabuild || inputStack.is(Items.ENCHANTED_BOOK)) {
 							itemStackIsAcceptableForStack = true;
 						}

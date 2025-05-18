@@ -13,7 +13,6 @@ import de.dafuqs.spectrum.sound.EnderSpliceChargingSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -245,8 +244,8 @@ public class EnderSpliceItem extends Item {
 	}
 	
 	@Override
-	public boolean canBeEnchantedWith(ItemStack stack, Holder<Enchantment> enchantment, EnchantingContext context) {
-		return super.canBeEnchantedWith(stack, enchantment, context) || enchantment.is(SpectrumEnchantments.RESONANCE) || enchantment.is(SpectrumEnchantments.INDESTRUCTIBLE) || enchantment.is(Enchantments.UNBREAKING);
+	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(SpectrumEnchantments.RESONANCE) || enchantment.is(SpectrumEnchantments.INDESTRUCTIBLE) || enchantment.is(Enchantments.UNBREAKING);
 	}
 	
 }
