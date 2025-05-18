@@ -29,7 +29,7 @@ public class TitrationBarrelEmiRecipeGated extends GatedSpectrumEmiRecipe<ITitra
 		if (!recipe.getFluidInput().isEmpty()) {
 			inputs.add(FluidIngredientEmi.into(recipe.getFluidInput()));
 		}
-		inputs.addAll(recipe.getIngredientStacks().stream().map(s -> EmiIngredient.of(s.getMatchingStacks().stream().map(EmiStack::of).toList())).toList());
+		inputs.addAll(recipe.getIngredientStacks().stream().map(s -> EmiIngredient.of(s.getItems().map(EmiStack::of).toList())).toList());
 		
 		displayedStacks = buildFermentationOutputVariations(recipe);
 	}

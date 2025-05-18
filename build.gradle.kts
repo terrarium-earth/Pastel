@@ -17,7 +17,7 @@ repositories {
 
     maven(url = "https://api.modrinth.com/maven") // Additional Entity Attributes, Jade
 
-    maven(url = "https://maven.terraformersmc.com/") // Modmenu, EMI
+    maven(url = "https://maven.terraformersmc.com/") // EMI
 
     // Curios
     maven(url = "https://maven.theillusivec4.top/") {
@@ -30,6 +30,8 @@ repositories {
             includeGroup("com.klikli_dev")
         }
     }
+
+    maven(url = "https://repo.unascribed.com") // Ears API
 
     maven(url = "https://maven2.bai.lol") // wthit
 }
@@ -77,6 +79,16 @@ cloche {
                 modCompileOnly(module(group = "mcp.mobius.waila", name = "wthit-api", version = "neo-12.4.1"))
 
                 modCompileOnly("dev.emi:emi-neoforge:1.1.19+1.21.1")
+
+                modCompileOnly("maven.modrinth:colorful-hearts:10.3.8") { isTransitive = false }
+                modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge") { isTransitive = false }
+                modCompileOnly("com.unascribed:ears-api:1.4.6")
+                modCompileOnly("maven.modrinth:create:1.21.1-6.0.4") { isTransitive = false }
+                modCompileOnly("maven.modrinth:lodestonelib:1.7.0") { isTransitive = false }
+                modCompileOnly("maven.modrinth:malum:1.20.1-1.6.5") { isTransitive = false }
+                modCompileOnly("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
+                modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
+                modCompileOnly("maven.modrinth:vanity:xWfEA0yC")
             }
 
             dependencies {

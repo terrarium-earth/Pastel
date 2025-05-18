@@ -16,7 +16,7 @@ public class PotionWorkshopEmiRecipeGated extends GatedSpectrumEmiRecipe<PotionW
 	public PotionWorkshopEmiRecipeGated(EmiRecipeCategory category, PotionWorkshopRecipe recipe) {
 		super(category, recipe, 112, 66);
 		
-		this.inputs = recipe.getIngredientStacks().stream().map(s -> EmiIngredient.of(s.getMatchingStacks().stream().map(EmiStack::of).toList())).toList();
+		this.inputs = recipe.getIngredientStacks().stream().map(s -> EmiIngredient.of(s.getItems().map(EmiStack::of).toList())).toList();
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.compat.vanityslots;
 
-import gay.nyako.vanityslots.VanitySlots;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -11,7 +10,7 @@ public class VanitySlotsCompat {
 	
 	public static ItemStack getEquippedStack(LivingEntity entity, EquipmentSlot slot) {
 		if (VanitySlotsCompat.IS_VANITY_SLOTS_PRESENT) {
-			return VanitySlots.getEquippedStack(entity, slot);
+			return gay.nyako.vanityslots.CommonClass.getEquippedStack(entity, slot);
 		} else {
 			return entity.getItemBySlot(slot);
 		}
