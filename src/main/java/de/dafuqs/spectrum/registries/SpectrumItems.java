@@ -150,7 +150,7 @@ import de.dafuqs.spectrum.registries.client.SpectrumModels;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -796,7 +796,7 @@ public class SpectrumItems {
 		ITEM_REGISTRAR.flush();
 		
 		FluidStorage.combinedItemApiProvider(SpectrumItems.MERMAIDS_GEM).register(context ->
-				new RemainderlessItemFluidStorage(context, FluidVariant.of(Fluids.WATER), FluidConstants.BUCKET));
+				new RemainderlessItemFluidStorage(context, new FluidStack(Fluids.WATER), FluidConstants.BUCKET));
 	}
 	
 	public static class IS {

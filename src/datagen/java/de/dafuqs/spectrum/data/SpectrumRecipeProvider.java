@@ -13,7 +13,7 @@ import de.dafuqs.spectrum.registries.SpectrumFluids;
 import de.dafuqs.spectrum.registries.SpectrumResourceConditions;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -382,7 +382,7 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 				stages.stream().map(s -> s.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP)).toList(),
 				secondsPerStage, inkColor, 1 << (inkCostTier - 1), growsWithoutCatalyst,
 				catalysts,
-				FluidVariant.of(medium == null ? SpectrumFluids.LIQUID_CRYSTAL : medium),
+				new FluidStack(medium == null ? SpectrumFluids.LIQUID_CRYSTAL : medium),
 				additionalResults));
 	}
 	

@@ -22,7 +22,7 @@ import de.dafuqs.spectrum.registries.SpectrumEventListeners;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -64,14 +64,14 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	
 	private boolean inventoryChanged = true;
 	
-	public final SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+	public final SingleVariantStorage<FluidStack> fluidStorage = new SingleVariantStorage<>() {
 		@Override
-		protected FluidVariant getBlankVariant() {
-			return FluidVariant.blank();
+		protected FluidStack getBlankVariant() {
+			return FluidStack.blank();
 		}
 		
 		@Override
-		protected long getCapacity(FluidVariant variant) {
+		protected long getCapacity(FluidStack variant) {
 			return FluidConstants.BUCKET;
 		}
 		
@@ -223,7 +223,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		
 		scatterContents(world, blockPos.above(), fusionShrineBlockEntity); // drop remaining items
 		
-		fusionShrineBlockEntity.fluidStorage.variant = FluidVariant.blank();
+		fusionShrineBlockEntity.fluidStorage.variant = FluidStack.blank();
 		fusionShrineBlockEntity.fluidStorage.amount = 0;
 		world.setBlock(blockPos, world.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, 0), 3);
 	}
@@ -241,7 +241,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	@Override
 	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.loadAdditional(nbt, registryLookup);
-		this.fluidStorage.variant = FluidVariant.CODEC.decode(NbtOps.INSTANCE, nbt.getCompound("FluidVariant")).result().map(Pair::getFirst).orElse(FluidVariant.blank());
+		this.fluidStorage.variant = FluidStack.CODEC.decode(NbtOps.INSTANCE, nbt.getCompound("FluidStack")).result().map(Pair::getFirst).orElse(FluidStack.blank());
 		this.fluidStorage.amount = nbt.getLong("FluidAmount");
 		
 		this.craftingTime = nbt.getShort("CraftingTime");
@@ -261,7 +261,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	@Override
 	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.saveAdditional(nbt, registryLookup);
-		FluidVariant.CODEC.encodeStart(NbtOps.INSTANCE, this.fluidStorage.variant).result().ifPresent(v -> nbt.put("FluidVariant", v));
+		FluidStack.CODEC.encodeStart(NbtOps.INSTANCE, this.fluidStorage.variant).result().ifPresent(v -> nbt.put("FluidStack", v));
 		nbt.putLong("FluidAmount", this.fluidStorage.amount);
 		nbt.putShort("CraftingTime", (short) this.craftingTime);
 		nbt.putShort("CraftingTimeTotal", (short) this.craftingTimeTotal);
@@ -288,15 +288,15 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		}
 	}
 	
-	public @NotNull FluidVariant getFluidVariant() {
+	public @NotNull FluidStack getFluidVariant() {
 		if (this.fluidStorage.amount > 0) {
 			return this.fluidStorage.variant;
 		} else {
-			return FluidVariant.blank();
+			return FluidStack.blank();
 		}
 	}
 	
-	public @NotNull SingleVariantStorage<FluidVariant> getFluidStorage() {
+	public @NotNull SingleVariantStorage<FluidStack> getFluidStorage() {
 		return this.fluidStorage;
 	}
 	
@@ -306,7 +306,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		level.setBlock(blockPos, level.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight), Block.UPDATE_ALL);
 	}
 	
-	public StorageRecipeInput<SingleVariantStorage<FluidVariant>> getRecipeInput() {
+	public StorageRecipeInput<SingleVariantStorage<FluidStack>> getRecipeInput() {
 		return new StorageRecipeInput<>(items, fluidStorage);
 	}
 	

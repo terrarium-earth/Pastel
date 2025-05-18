@@ -15,7 +15,7 @@ import de.dafuqs.spectrum.registries.SpectrumMultiblocks;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
@@ -180,20 +180,20 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 			// Specially handle fluid items
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if (entity instanceof ItemEntity itemEntity && blockEntity instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
-				SingleVariantStorage<FluidVariant> storage = fusionShrineBlockEntity.fluidStorage;
+				SingleVariantStorage<FluidStack> storage = fusionShrineBlockEntity.fluidStorage;
 				ItemStack itemStack = itemEntity.getItem();
 				
 				// We're not considering stacked fluid storages for the time being
 				if (itemStack.getCount() == 1) {
 					SingleSlotStorage<ItemVariant> slot = new DroppedItemStorage(itemStack);
 					SingleSlotContainerItemContext ctx = new SingleSlotContainerItemContext(slot);
-					Storage<FluidVariant> fluidStorage = FluidStorage.ITEM.find(itemStack, ctx);
+					Storage<FluidStack> fluidStorage = FluidStorage.ITEM.find(itemStack, ctx);
 					
 					if (fluidStorage != null) {
 						boolean anyInserted = false;
-						for (StorageView<FluidVariant> view : fluidStorage) {
+						for (StorageView<FluidStack> view : fluidStorage) {
 							try (Transaction transaction = Transaction.openOuter()) {
-								FluidVariant variant = view.getResource();
+								FluidStack variant = view.getResource();
 								long inserted = variant.isBlank() ? 0 : storage.insert(variant, view.getAmount(), transaction);
 								long extracted = fluidStorage.extract(variant, inserted, transaction);
 								if (inserted == extracted && inserted != 0) {

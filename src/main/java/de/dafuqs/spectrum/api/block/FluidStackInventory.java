@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.api.block;
 
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public interface FluidStackInventory extends ImplementedInventory {
 	
@@ -13,12 +13,12 @@ public interface FluidStackInventory extends ImplementedInventory {
 	 */
 	NonNullList<ItemStack> getItems();
 	
-	SingleVariantStorage<FluidVariant> getFluidStorage();
+	SingleVariantStorage<FluidStack> getFluidStorage();
 	
 	/**
 	 * Creates an inventory from the item list.
 	 */
-	static FluidStackInventory of(NonNullList<ItemStack> items, SingleVariantStorage<FluidVariant> fluid) {
+	static FluidStackInventory of(NonNullList<ItemStack> items, SingleVariantStorage<FluidStack> fluid) {
 		return new FluidStackInventory() {
 			@Override
 			public NonNullList<ItemStack> getItems() {
@@ -26,7 +26,7 @@ public interface FluidStackInventory extends ImplementedInventory {
 			}
 			
 			@Override
-			public SingleVariantStorage<FluidVariant> getFluidStorage() {
+			public SingleVariantStorage<FluidStack> getFluidStorage() {
 				return fluid;
 			}
 		};

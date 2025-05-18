@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.compat.REI;
 
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;

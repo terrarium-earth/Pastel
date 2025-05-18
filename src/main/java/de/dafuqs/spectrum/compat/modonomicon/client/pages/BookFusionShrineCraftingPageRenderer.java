@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
 import de.dafuqs.spectrum.compat.modonomicon.pages.BookGatedRecipePage;

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.compat.emi.FluidIngredientEmi;
 import de.dafuqs.spectrum.compat.emi.GatedSpectrumEmiRecipe;
 import de.dafuqs.spectrum.compat.emi.SpectrumEmiRecipeCategories;

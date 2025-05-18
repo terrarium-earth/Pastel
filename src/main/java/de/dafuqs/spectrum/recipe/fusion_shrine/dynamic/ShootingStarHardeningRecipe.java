@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.recipe.fusion_shrine.dynamic;
 
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.blocks.fusion_shrine.FusionShrineBlockEntity;

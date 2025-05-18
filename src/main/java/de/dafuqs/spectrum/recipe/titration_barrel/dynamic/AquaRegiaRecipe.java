@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.recipe.StorageRecipeInput;
@@ -10,7 +10,7 @@ import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -106,7 +106,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 	}
 	
 	@Override
-	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, Level world) {
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidStack>> recipeInput, Level world) {
 		boolean bulbsFound = false;
 		
 		for (int i = 0; i < recipeInput.size(); i++) {

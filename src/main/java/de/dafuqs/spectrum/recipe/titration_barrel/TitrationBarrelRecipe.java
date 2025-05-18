@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.api.item.FermentedItem;
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.components.BeverageComponent;
 import de.dafuqs.spectrum.components.InfusedBeverageComponent;
@@ -17,7 +17,7 @@ import de.dafuqs.spectrum.recipe.StorageRecipeInput;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -44,7 +44,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecipeInput<SingleVariantStorage<FluidVariant>>> implements ITitrationBarrelRecipe {
+public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecipeInput<SingleVariantStorage<FluidStack>>> implements ITitrationBarrelRecipe {
 	
 	public static final List<Integer> FERMENTATION_DURATION_DISPLAY_TIME_MULTIPLIERS = new ArrayList<>() {{
 		add(1);
@@ -84,8 +84,8 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 	}
 	
 	@Override
-	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, Level world) {
-		SingleVariantStorage<FluidVariant> fluidStorage = recipeInput.getFluidStorage();
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidStack>> recipeInput, Level world) {
+		SingleVariantStorage<FluidStack> fluidStorage = recipeInput.getFluidStorage();
 		if (!this.fluid.test(fluidStorage.variant)) {
 			return false;
 		}
@@ -119,7 +119,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 	
 	@Override
 	@Deprecated
-	public ItemStack assemble(StorageRecipeInput<SingleVariantStorage<FluidVariant>> inventory, HolderLookup.Provider drm) {
+	public ItemStack assemble(StorageRecipeInput<SingleVariantStorage<FluidStack>> inventory, HolderLookup.Provider drm) {
 		return getDefaultTap(1).copy();
 	}
 	
@@ -284,7 +284,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 				ByteBufCodecs.BOOL, c -> c.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
 				IngredientStack.PACKET_CODEC.apply(ByteBufCodecs.list()), c -> c.inputStacks,
-				FluidIngredient.PACKET_CODEC, c -> c.fluid,
+				FluidIngredient.STREAM_CODEC, c -> c.fluid,
 				ItemStack.STREAM_CODEC, c -> c.outputItemStack,
 				ByteBufCodecs.registry(Registries.ITEM), recipe -> recipe.tappingItem,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.minFermentationTimeHours,

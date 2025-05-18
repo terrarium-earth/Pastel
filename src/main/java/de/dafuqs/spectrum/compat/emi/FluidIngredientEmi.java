@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.compat.emi;
 
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import org.jetbrains.annotations.NotNull;

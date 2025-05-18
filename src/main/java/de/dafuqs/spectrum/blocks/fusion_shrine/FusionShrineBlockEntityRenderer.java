@@ -6,7 +6,7 @@ import de.dafuqs.spectrum.render.FluidRendering;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -30,7 +30,7 @@ public class FusionShrineBlockEntityRenderer<T extends FusionShrineBlockEntity> 
 	@Override
 	public void render(FusionShrineBlockEntity fusionShrineBlockEntity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, int overlay) {
 		// the fluid in the shrine
-		FluidVariant fluidVariant = fusionShrineBlockEntity.getFluidVariant();
+		FluidStack fluidVariant = fusionShrineBlockEntity.getFluidVariant();
 		if (!fluidVariant.isBlank()) {
 			poseStack.pushPose();
 			TextureAtlasSprite sprite = FluidVariantRendering.getSprite(fluidVariant);

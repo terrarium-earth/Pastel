@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.compat.REI.FluidIngredientREI;
 import de.dafuqs.spectrum.compat.REI.GatedSpectrumDisplay;
 import de.dafuqs.spectrum.compat.REI.REIHelper;

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.recipe.titration_barrel.FermentationData;
 import de.dafuqs.spectrum.recipe.titration_barrel.TitrationBarrelRecipe;

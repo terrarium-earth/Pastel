@@ -12,7 +12,7 @@ import de.dafuqs.spectrum.recipe.titration_barrel.ITitrationBarrelRecipe;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -48,14 +48,14 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	protected static final int INVENTORY_SIZE = 5;
 	public static final int MAX_ITEM_COUNT = 64;
 	protected NonNullList<ItemStack> items;
-	protected SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+	protected SingleVariantStorage<FluidStack> fluidStorage = new SingleVariantStorage<>() {
 		@Override
-		protected FluidVariant getBlankVariant() {
-			return FluidVariant.blank();
+		protected FluidStack getBlankVariant() {
+			return FluidStack.blank();
 		}
 		
 		@Override
-		protected long getCapacity(FluidVariant variant) {
+		protected long getCapacity(FluidStack variant) {
 			return FluidConstants.BUCKET;
 		}
 		
@@ -72,7 +72,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	}
 	
 	@Override
-	public SingleVariantStorage<FluidVariant> getFluidStorage() {
+	public SingleVariantStorage<FluidStack> getFluidStorage() {
 		return this.fluidStorage;
 	}
 	
@@ -92,7 +92,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.saveAdditional(nbt, registryLookup);
 		ContainerHelper.saveAllItems(nbt, items, registryLookup);
-		CodecHelper.writeNbt(nbt, "FluidVariant", FluidVariant.CODEC, this.fluidStorage.variant);
+		CodecHelper.writeNbt(nbt, "FluidStack", FluidStack.CODEC, this.fluidStorage.variant);
 		nbt.putLong("FluidAmount", this.fluidStorage.amount);
 		nbt.putLong("SealTime", this.sealTime);
 		nbt.putLong("TapTime", this.tapTime);
@@ -105,7 +105,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 		
 		this.items = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 		ContainerHelper.loadAllItems(nbt, items, registryLookup);
-		this.fluidStorage.variant = CodecHelper.fromNbt(FluidVariant.CODEC, nbt.get("FluidVariant"), FluidVariant.blank());
+		this.fluidStorage.variant = CodecHelper.fromNbt(FluidStack.CODEC, nbt.get("FluidStack"), FluidStack.blank());
 		this.fluidStorage.amount = nbt.getLong("FluidAmount");
 		this.sealTime = nbt.contains("SealTime", Tag.TAG_LONG) ? nbt.getLong("SealTime") : -1;
 		this.tapTime = nbt.contains("TapTime", Tag.TAG_LONG) ? nbt.getLong("TapTime") : -1;
@@ -125,7 +125,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	public void reset(Level world, BlockPos blockPos, BlockState state) {
 		this.sealTime = -1;
 		this.tapTime = -1;
-		this.fluidStorage.variant = FluidVariant.blank();
+		this.fluidStorage.variant = FluidStack.blank();
 		this.fluidStorage.amount = 0;
 		this.extractedBottles = 0;
 		this.getItems().clear();
@@ -252,7 +252,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 		return world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.TITRATION_BARREL, getRecipeInput(), world);
 	}
 	
-	public StorageRecipeInput<SingleVariantStorage<FluidVariant>> getRecipeInput() {
+	public StorageRecipeInput<SingleVariantStorage<FluidStack>> getRecipeInput() {
 		return new StorageRecipeInput<>(items, fluidStorage);
 	}
 	
@@ -265,11 +265,11 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 		}
 	}
 	
-	public @NotNull FluidVariant getFluidVariant() {
+	public @NotNull FluidStack getFluidVariant() {
 		if (this.fluidStorage.amount > 0) {
 			return this.fluidStorage.variant;
 		} else {
-			return FluidVariant.blank();
+			return FluidStack.blank();
 		}
 	}
 	

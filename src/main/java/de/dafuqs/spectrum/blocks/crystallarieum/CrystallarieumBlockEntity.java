@@ -23,7 +23,7 @@ import de.dafuqs.spectrum.render.animation.FlowData;
 import de.dafuqs.spectrum.render.animation.FlowHandlers;
 import de.dafuqs.spectrum.render.animation.FlowStates;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -66,14 +66,14 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	@Nullable
 	protected RecipeHolder<CrystallarieumRecipe> currentRecipe;
 	protected CrystallarieumCatalyst currentCatalyst = CrystallarieumCatalyst.EMPTY;
-	protected SingleVariantStorage<FluidVariant> fluidStorage = new SingleVariantStorage<>() {
+	protected SingleVariantStorage<FluidStack> fluidStorage = new SingleVariantStorage<>() {
 		@Override
-		protected FluidVariant getBlankVariant() {
-			return FluidVariant.blank();
+		protected FluidStack getBlankVariant() {
+			return FluidStack.blank();
 		}
 		
 		@Override
-		protected long getCapacity(FluidVariant variant) {
+		protected long getCapacity(FluidStack variant) {
 			return FluidConstants.BUCKET;
 		}
 		
@@ -252,7 +252,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 			this.tickLooper = TickLooper.readNbt(nbt.getCompound("Looper"));
 		}
 		
-		this.fluidStorage.variant = CodecHelper.fromNbt(FluidVariant.CODEC, nbt.get("FluidVariant"), FluidVariant.blank());
+		this.fluidStorage.variant = CodecHelper.fromNbt(FluidStack.CODEC, nbt.get("FluidStack"), FluidStack.blank());
 		this.fluidStorage.amount = nbt.getLong("FluidAmount");
 		
 		this.canWork = nbt.getBoolean("CanWork");
@@ -272,7 +272,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		CodecHelper.writeNbt(nbt, "InkStorage", InkStorageComponent.CODEC, new InkStorageComponent(this.inkStorage));
 		nbt.put("Looper", this.tickLooper.toNbt());
 		
-		CodecHelper.writeNbt(nbt, "FluidVariant", FluidVariant.CODEC, this.fluidStorage.variant);
+		CodecHelper.writeNbt(nbt, "FluidStack", FluidStack.CODEC, this.fluidStorage.variant);
 		nbt.putLong("FluidAmount", this.fluidStorage.amount);
 		
 		nbt.putBoolean("CanWork", this.canWork);
@@ -350,7 +350,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		}
 	}
 	
-	public SingleVariantStorage<FluidVariant> getFluidStorage() {
+	public SingleVariantStorage<FluidStack> getFluidStorage() {
 		return fluidStorage;
 	}
 	

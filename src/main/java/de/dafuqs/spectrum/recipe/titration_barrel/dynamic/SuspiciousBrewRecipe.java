@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.components.BeverageComponent;
 import de.dafuqs.spectrum.helpers.Support;
@@ -12,7 +12,7 @@ import de.dafuqs.spectrum.recipe.titration_barrel.TitrationBarrelRecipe;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -114,7 +114,7 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 	}
 	
 	@Override
-	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, Level world) {
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidStack>> recipeInput, Level world) {
 		boolean flowerFound = false;
 		for (int i = 0; i < recipeInput.size(); i++) {
 			ItemStack stack = recipeInput.getItem(i);

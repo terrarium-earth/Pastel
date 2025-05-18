@@ -7,7 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.block.MultiblockCrafter;
 import de.dafuqs.spectrum.api.predicate.location.WorldConditionsPredicate;
-import de.dafuqs.spectrum.api.recipe.FluidIngredient;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.blocks.fusion_shrine.FusionShrineBlockEntity;
@@ -21,7 +21,7 @@ import de.dafuqs.spectrum.recipe.StorageRecipeInput;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -44,7 +44,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeInput<SingleVariantStorage<FluidVariant>>> {
+public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeInput<SingleVariantStorage<FluidStack>>> {
 	
 	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("build_fusion_shrine");
 	
@@ -116,8 +116,8 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 	 * The required fluid has to be tested manually by the crafting block.
 	 */
 	@Override
-	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidVariant>> recipeInput, Level world) {
-		SingleVariantStorage<FluidVariant> fluidStorage = recipeInput.getFluidStorage();
+	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidStack>> recipeInput, Level world) {
+		SingleVariantStorage<FluidStack> fluidStorage = recipeInput.getFluidStorage();
 		if (!this.fluid.test(fluidStorage.variant)) {
 			return false;
 		}
@@ -130,7 +130,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 	}
 	
 	@Override
-	public ItemStack assemble(StorageRecipeInput<SingleVariantStorage<FluidVariant>> inv, HolderLookup.Provider drm) {
+	public ItemStack assemble(StorageRecipeInput<SingleVariantStorage<FluidStack>> inv, HolderLookup.Provider drm) {
 		return output.copy();
 	}
 	
@@ -360,7 +360,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				IngredientStack.PACKET_CODEC.apply(ByteBufCodecs.list(7)), recipe -> recipe.craftingInputs,
-				FluidIngredient.PACKET_CODEC, recipe -> recipe.fluid,
+				FluidIngredient.STREAM_CODEC, recipe -> recipe.fluid,
 				ItemStack.OPTIONAL_STREAM_CODEC, recipe -> recipe.output,
 				ByteBufCodecs.FLOAT, recipe -> recipe.experience,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.craftingTime,

@@ -1,22 +1,22 @@
 package de.dafuqs.spectrum.blocks.fluid;
 
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.StoragePreconditions;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.ExtractionOnlyStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.world.item.Item;
 
-public class RemainderlessItemFluidStorage implements ExtractionOnlyStorage<FluidVariant>, SingleSlotStorage<FluidVariant> {
+public class RemainderlessItemFluidStorage implements ExtractionOnlyStorage<FluidStack>, SingleSlotStorage<FluidStack> {
 
     private final ContainerItemContext context;
     private final Item fullItem;
-    private final FluidVariant containedFluid;
+    private final FluidStack containedFluid;
     private final long containedAmount;
 
 
-    public RemainderlessItemFluidStorage(ContainerItemContext context, FluidVariant containedFluid, long containedAmount) {
+    public RemainderlessItemFluidStorage(ContainerItemContext context, FluidStack containedFluid, long containedAmount) {
         StoragePreconditions.notBlankNotNegative(containedFluid, containedAmount);
 
         this.context = context;
@@ -26,7 +26,7 @@ public class RemainderlessItemFluidStorage implements ExtractionOnlyStorage<Flui
     }
 
     @Override
-    public long extract(FluidVariant resource, long maxAmount, TransactionContext transaction) {
+    public long extract(FluidStack resource, long maxAmount, TransactionContext transaction) {
         // If the context's item is not fullItem anymore, can't extract!
         if (!context.getItemVariant().isOf(fullItem)) return 0;
 
@@ -49,11 +49,11 @@ public class RemainderlessItemFluidStorage implements ExtractionOnlyStorage<Flui
     }
 
     @Override
-    public FluidVariant getResource() {
+    public FluidStack getResource() {
         if (context.getItemVariant().isOf(fullItem)) {
             return containedFluid;
         } else {
-            return FluidVariant.blank();
+            return FluidStack.blank();
         }
     }
 
