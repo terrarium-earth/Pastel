@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.api.energy.storage.FixedSingleInkStorage;
 import de.dafuqs.spectrum.api.item.AzureDikeItem;
 import dev.emi.trinkets.api.SlotReference;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,7 +21,7 @@ public class AzureDikeAmuletItem extends InkDrainTrinketItem implements AzureDik
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		tooltip.add(Component.translatable("item.spectrum.azure_dike_provider.tooltip", maxAzureDike(stack)));
 		super.appendHoverText(stack, context, tooltip, type);

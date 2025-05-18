@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.api.energy.InkStorage;
 import de.dafuqs.spectrum.api.energy.InkStorageBlockEntity;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
@@ -36,7 +36,7 @@ public record UpdateBlockEntityInkPayload(BlockPos pos, Map<InkColor, Long> stor
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(UpdateBlockEntityInkPayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		BlockEntity blockEntity = client.level.getBlockEntity(payload.pos);

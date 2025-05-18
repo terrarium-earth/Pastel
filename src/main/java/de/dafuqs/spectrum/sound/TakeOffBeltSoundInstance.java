@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.sound;
 import de.dafuqs.spectrum.items.trinkets.TakeOffBeltItem;
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -15,7 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 	
 	private final long lastParticleTick;
@@ -34,7 +34,7 @@ public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements T
 		this.z = player.getZ();
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void startSoundInstance() {
 		TakeOffBeltSoundInstance soundInstance = new TakeOffBeltSoundInstance();
 		if (!Minecraft.getInstance().getSoundManager().isActive(soundInstance)) {

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.particle.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -32,7 +32,7 @@ public class LightTrailParticle extends SimpleAnimatedParticle {
         quadSize = Mth.lerp(fadeProgress, 0.2F, 0.1F);
     }
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<SimpleParticleType> {
 		private final SpriteSet spriteProvider;
 		

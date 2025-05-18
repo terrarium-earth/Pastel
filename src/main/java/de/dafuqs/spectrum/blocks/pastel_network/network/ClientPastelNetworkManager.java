@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import de.dafuqs.spectrum.blocks.pastel_network.PastelRenderHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLevel, ClientPastelNetwork>, Clearable {
 	
 	protected static final int MAX_RENDER_DISTANCE_SQUARED = 48 * 48;

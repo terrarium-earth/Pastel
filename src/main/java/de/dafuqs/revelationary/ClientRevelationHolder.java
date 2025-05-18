@@ -3,8 +3,8 @@ package de.dafuqs.revelationary;
 import de.dafuqs.revelationary.api.revelations.RevealingCallback;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import de.dafuqs.revelationary.api.revelations.WorldRendererAccessor;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ClientRevelationHolder {
 	
 	public static List<RevealingCallback> callbacks = new ArrayList<>();

@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.api.energy.InkStorage;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
@@ -130,7 +130,7 @@ public class IndividualCappedInkStorage implements InkStorage {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addTooltip(List<Component> tooltip) {
 		tooltip.add(Component.translatable("item.spectrum.ink_storage.stores_ink_per_type", getShortenedNumberString(maxEnergyPerColor)));
 		

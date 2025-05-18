@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.sound;
 
 import de.dafuqs.spectrum.entity.entity.MagicProjectileEntity;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.Objects;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class MagicProjectileSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
     private final ResourceKey<Level> worldKey;
@@ -42,7 +42,7 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
         this.volume = 1.0F;
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
 	public static void startSoundInstance(MagicProjectileEntity projectile) {
 		Minecraft client = Minecraft.getInstance();
 		MagicProjectileSoundInstance newInstance = new MagicProjectileSoundInstance(client.level.dimension(), projectile);

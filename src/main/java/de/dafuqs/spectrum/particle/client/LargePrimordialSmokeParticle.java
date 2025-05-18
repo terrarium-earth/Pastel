@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.particle.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -10,7 +10,7 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.SimpleParticleType;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class LargePrimordialSmokeParticle extends TextureSheetParticle {
 
     LargePrimordialSmokeParticle(ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, boolean signal) {
@@ -51,7 +51,7 @@ public class LargePrimordialSmokeParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public static class SignalSmokeFactory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 
@@ -67,7 +67,7 @@ public class LargePrimordialSmokeParticle extends TextureSheetParticle {
         }
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public static class CosySmokeFactory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 

@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.particle.effect.ColoredFallingSporeBlossomParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.DripParticle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -13,14 +13,14 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ColoredBlockLeakParticle extends DripParticle {
 	
 	public ColoredBlockLeakParticle(ClientLevel world, double x, double y, double z, Fluid fluid) {
 		super(world, x, y, z, fluid);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<ColoredFallingSporeBlossomParticleEffect> {
 		
 		private final SpriteSet spriteProvider;

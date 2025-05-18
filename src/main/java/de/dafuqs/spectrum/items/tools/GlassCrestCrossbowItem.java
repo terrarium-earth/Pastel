@@ -10,8 +10,8 @@ import de.dafuqs.spectrum.helpers.Support;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.OverchargingSoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -58,7 +58,7 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements Ext
         return super.use(world, user, hand);
     }
     
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void startSoundInstance(Player user) {
         Minecraft.getInstance().getSoundManager().play(new OverchargingSoundInstance(user));
     }
@@ -113,7 +113,7 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements Ext
     }
     
     @Override
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
         super.appendHoverText(stack, context, tooltip, type);
         float overcharge = getOvercharge(stack);

@@ -12,8 +12,8 @@ import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
 import de.dafuqs.spectrum.registries.SpectrumBannerPatterns;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -57,7 +57,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		tooltip.add(Component.translatable("item.spectrum.pigment_palette.tooltip.target").withStyle(ChatFormatting.GRAY));

@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
 import de.dafuqs.spectrum.sound.OnPrimordialFireSoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
@@ -45,12 +45,12 @@ public class OnPrimordialFireComponent implements AutoSyncedComponent, ServerTic
 	// Per-level damage reduction added by fire prot. Caps at 50%
 	public static final float FIRE_PROT_DAMAGE_RESISTANCE = 0.05F;
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private static Optional<OnPrimordialFireSoundInstance> soundInstance;
 	
 	/* prevent the static initializer from attempting to write to the client-only field in common code */
 	static {
-		if (EnvType.CLIENT == FabricLoader.getInstance().getEnvironmentType()) soundInstance = Optional.empty();
+		if (Dist.CLIENT == FabricLoader.getInstance().getEnvironmentType()) soundInstance = Optional.empty();
 	}
 
 	public static final ComponentKey<OnPrimordialFireComponent> ON_PRIMORDIAL_FIRE_COMPONENT = ComponentRegistry.getOrCreate(SpectrumCommon.locate("on_primordial_fire"), OnPrimordialFireComponent.class);
@@ -196,7 +196,7 @@ public class OnPrimordialFireComponent implements AutoSyncedComponent, ServerTic
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void clientTick() {
 		if (this.primordialFireTicks > 0) {
 			if (provider.equals(Minecraft.getInstance().player) && primordialFireTicks > 2 && soundInstance.isEmpty()) {

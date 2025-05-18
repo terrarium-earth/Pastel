@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.deeper_down;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class DeeperDownDimensionEffects extends DimensionSpecialEffects {
 	
 	public DeeperDownDimensionEffects() {

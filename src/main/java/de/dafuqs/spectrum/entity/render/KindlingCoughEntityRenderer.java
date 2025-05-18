@@ -7,8 +7,8 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.entity.entity.KindlingCoughEntity;
 import de.dafuqs.spectrum.entity.models.KindlingCoughEntityModel;
 import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class KindlingCoughEntityRenderer extends EntityRenderer<KindlingCoughEntity> {
 	
 	private static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/kindling/cough.png");

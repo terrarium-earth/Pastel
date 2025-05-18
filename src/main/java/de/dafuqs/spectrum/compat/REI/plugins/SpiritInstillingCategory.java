@@ -12,14 +12,14 @@ import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpiritInstillingCategory extends GatedDisplayCategory<SpiritInstillingDisplay> {
 	
 	private static final EntryIngredient SPIRIT_INSTILLER = EntryIngredients.of(SpectrumBlocks.SPIRIT_INSTILLER);

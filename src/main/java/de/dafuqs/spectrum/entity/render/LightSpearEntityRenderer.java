@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import de.dafuqs.spectrum.entity.entity.LightShardBaseEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class LightSpearEntityRenderer extends EntityRenderer<LightShardBaseEntity> {
     
     public LightSpearEntityRenderer(EntityRendererProvider.Context ctx) {

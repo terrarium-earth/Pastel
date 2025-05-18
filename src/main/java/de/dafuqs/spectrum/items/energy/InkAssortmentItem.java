@@ -8,8 +8,8 @@ import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
 import de.dafuqs.spectrum.helpers.Support;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -51,7 +51,7 @@ public class InkAssortmentItem extends Item implements InkStorageItem<Individual
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		getEnergyStorage(stack).addTooltip(tooltip);

@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.helpers.PacketCodecHelper;
 import de.dafuqs.spectrum.helpers.ParticleHelper;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.particle.VectorPattern;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -55,7 +55,7 @@ public record PlayParticleWithPatternAndVelocityPayload(Vec3 pos, ParticleOption
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayParticleWithPatternAndVelocityPayload payload, ClientPlayNetworking.Context context) {
 		ParticleHelper.playParticleWithPatternAndVelocityClient(context.client().level, payload.pos, payload.effect, payload.pattern, payload.velocity);
 	}

@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
 import de.dafuqs.spectrum.deeper_down.DimensionRenderEffects;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -30,7 +30,7 @@ public record SyncMentalPresencePayload(double value) implements CustomPacketPay
 		ServerPlayNetworking.send(player, new SyncMentalPresencePayload(value));
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(SyncMentalPresencePayload payload, ClientPlayNetworking.Context context) {
 		LocalPlayer player = context.player();
 		MiscPlayerDataComponent.get(player).setLastSyncedSleepPotency(payload.value);

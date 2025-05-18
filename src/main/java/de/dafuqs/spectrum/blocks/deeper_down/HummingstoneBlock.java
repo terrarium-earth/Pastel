@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -57,7 +57,7 @@ public class HummingstoneBlock extends BaseEntityBlock {
 		return RenderShape.MODEL;
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(state, world, pos, random);

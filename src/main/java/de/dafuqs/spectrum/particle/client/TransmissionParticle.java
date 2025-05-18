@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.particle.effect.TransmissionParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class TransmissionParticle extends TextureSheetParticle {
 	
 	private final PositionSource positionSource;
@@ -56,7 +56,7 @@ public class TransmissionParticle extends TextureSheetParticle {
 		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<TransmissionParticleEffect> {
 		private final SpriteSet spriteProvider;
 		

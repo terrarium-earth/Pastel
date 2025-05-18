@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.mixin.client;
 
 import de.dafuqs.spectrum.components.CustomPotionDataComponent;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin({PotionItem.class, LingeringPotionItem.class, TippedArrowItem.class})
 public abstract class PotionItemClientMixin {
 	

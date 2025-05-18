@@ -8,8 +8,8 @@ import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumFluids;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -97,7 +97,7 @@ public class TravelersBackpackCompat extends SpectrumIntegrationPacks.ModIntegra
 		});
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void registerClient() {
 	

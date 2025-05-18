@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.blocks.decoration;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -69,7 +69,7 @@ public class AlternatePlayerOnlyGlassBlock extends TransparentBlock {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
 		if (stateFrom.is(this) || stateFrom.getBlock() == alternateBlock) {
 			return true;

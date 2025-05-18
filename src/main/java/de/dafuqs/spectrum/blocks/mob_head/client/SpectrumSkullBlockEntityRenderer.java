@@ -71,8 +71,8 @@ import de.dafuqs.spectrum.entity.render.EggLayingWoolyPigEntityRenderer;
 import de.dafuqs.spectrum.entity.render.PreservationTurretEntityRenderer;
 import de.dafuqs.spectrum.entity.variants.KindlingVariant;
 import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -91,7 +91,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpectrumSkullBlockEntityRenderer implements BlockEntityRenderer<SpectrumSkullBlockEntity> {
 	
 	private static Map<SkullBlock.Type, List<Tuple<SpectrumSkullModel, ResourceLocation>>> MODELS = new HashMap<>();

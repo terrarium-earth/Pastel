@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.particle.client;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.mixin.client.accessors.ParticleManagerAccessor;
 import de.dafuqs.spectrum.particle.effect.DynamicParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -16,7 +16,7 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.core.registries.BuiltInRegistries;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class DynamicParticle extends TextureSheetParticle {
 	
 	protected boolean glowInTheDark = false;

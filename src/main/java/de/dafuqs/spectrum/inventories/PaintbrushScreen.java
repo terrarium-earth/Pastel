@@ -5,8 +5,8 @@ import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.networking.c2s_payloads.InkColorSelectedC2SPayload;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreenHandler> {
 	
 	public static final QuickNavigationGridScreen.Grid MAGENTA_GRID = new QuickNavigationGridScreen.Grid(

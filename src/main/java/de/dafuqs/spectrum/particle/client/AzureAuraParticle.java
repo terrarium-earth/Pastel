@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.particle.client;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -16,7 +16,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class AzureAuraParticle extends RisingParticle {
 	
 	private final float alphaMult;

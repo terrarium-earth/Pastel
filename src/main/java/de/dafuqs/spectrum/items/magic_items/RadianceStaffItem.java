@@ -11,8 +11,8 @@ import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -92,7 +92,7 @@ public class RadianceStaffItem extends Item implements InkPowered {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		if (InkPowered.canUseClient()) {
 			tooltip.add(Component.translatable("item.spectrum.radiance_staff.tooltip.ink", INK_COST.color().getColoredInkName()));

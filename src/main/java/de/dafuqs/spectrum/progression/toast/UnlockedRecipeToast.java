@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.helpers.RenderHelper;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class UnlockedRecipeToast implements Toast {
 	
 	private final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/gui/toasts.png");

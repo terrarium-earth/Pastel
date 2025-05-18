@@ -9,8 +9,8 @@ import de.dafuqs.spectrum.api.item.CreativeOnlyItem;
 import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
 import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -66,7 +66,7 @@ public class CreativeInkAssortmentItem extends Item implements InkStorageItem<Cr
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		CreativeOnlyItem.appendTooltip(tooltip);

@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpectrumChestBlockEntityRenderer<T extends BlockEntity & LidBlockEntity> implements BlockEntityRenderer<T> {
 	
 	protected final ModelPart singleChestLid;

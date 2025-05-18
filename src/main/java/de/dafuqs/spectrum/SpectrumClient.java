@@ -25,8 +25,8 @@ import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.render.SkyLerper;
 import de.dafuqs.spectrum.render.capes.WorthinessChecker;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -40,7 +40,7 @@ import java.util.Set;
 import static de.dafuqs.spectrum.SpectrumCommon.CONFIG;
 import static de.dafuqs.spectrum.SpectrumCommon.logInfo;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpectrumClient implements ClientModInitializer, RevealingCallback, ClientAdvancementPacketCallback {
 
 	public static final SkyLerper skyLerper = new SkyLerper();

@@ -1,15 +1,15 @@
 package de.dafuqs.spectrum.mixin.compat.sodium.present;
 
 import net.caffeinemc.mods.sodium.client.model.color.ColorProviderRegistry;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 
 // Since the color distortion bug isn't yet fixed,
 // nor is there an API for adding render overrides,
 // this mixin is needed.
 // TODO: still needed?
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin(value = ColorProviderRegistry.class, remap = false)
 public abstract class ColorProviderRegistryMixin {
 	/*@Shadow

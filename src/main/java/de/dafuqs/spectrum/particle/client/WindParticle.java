@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.blocks.spirit_sallow.WindStrength;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -13,7 +13,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class WindParticle extends TextureSheetParticle {
 	
 	private static final WindStrength wind = new WindStrength();

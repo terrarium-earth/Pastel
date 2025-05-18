@@ -4,8 +4,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.api.item.GemstoneColor;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -35,7 +35,7 @@ public class GemstoneGlassBlock extends TransparentBlock {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
 		if (stateFrom.is(this)) {
 			return true;

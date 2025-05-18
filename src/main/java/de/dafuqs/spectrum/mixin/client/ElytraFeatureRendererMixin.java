@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import de.dafuqs.spectrum.render.RenderingContext;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin(ElytraLayer.class)
 public abstract class ElytraFeatureRendererMixin {
 	

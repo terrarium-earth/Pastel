@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumFluids;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.DripParticle;
 import net.minecraft.client.particle.Particle;
@@ -11,7 +11,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpectrumBlockLeakParticles {
 
 	public static class LandingGooFactory implements ParticleProvider<SimpleParticleType> {

@@ -32,8 +32,8 @@ import de.dafuqs.spectrum.networking.s2c_payloads.SyncArtisansAtlasPayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.SyncMentalPresencePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.TypedTransmissionPayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.UpdateBlockEntityInkPayload;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -77,7 +77,7 @@ public class SpectrumS2CPackets {
 		register(PastelNetworkRemovedPayload.ID, PastelNetworkRemovedPayload.CODEC);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void registerS2CReceivers() {
 		register(PlayParticleWithRandomOffsetAndVelocityPayload.ID, PlayParticleWithRandomOffsetAndVelocityPayload::execute);
 		register(PlayParticleWithExactVelocityPayload.ID, PlayParticleWithExactVelocityPayload::execute);

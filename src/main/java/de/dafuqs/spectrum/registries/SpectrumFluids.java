@@ -11,8 +11,8 @@ import de.dafuqs.spectrum.blocks.fluid.MidnightSolutionFluid;
 import de.dafuqs.spectrum.blocks.fluid.SpectrumFluid;
 import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
@@ -76,7 +76,7 @@ public class SpectrumFluids {
 		ItemColors.FLUID_COLORS.registerColorMapping(flowingFluid, color);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void registerClient() {
 		setupFluidRendering(LIQUID_CRYSTAL, FLOWING_LIQUID_CRYSTAL, "liquid_crystal", LIQUID_CRYSTAL_TINT);
 		setupFluidRendering(GOO, FLOWING_GOO, "goo", GOO_TINT);
@@ -84,7 +84,7 @@ public class SpectrumFluids {
 		setupFluidRendering(DRAGONROT, FLOWING_DRAGONROT, "dragonrot", DRAGONROT_TINT);
 	}
 
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private static void setupFluidRendering(final Fluid stillFluid, final Fluid flowingFluid, final String name, int tint) {
 		var handler = new SimpleFluidRenderHandler(
 				SpectrumCommon.locate("block/" + name + "_still"),

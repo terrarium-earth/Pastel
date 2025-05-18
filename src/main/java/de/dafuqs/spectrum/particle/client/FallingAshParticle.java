@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.particle.client;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.deeper_down.HowlingSpireEffects;
 import de.dafuqs.spectrum.registries.SpectrumBiomes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -267,7 +267,7 @@ public class FallingAshParticle extends TextureSheetParticle {
 		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<SimpleParticleType> {
 		private final SpriteSet spriteProvider;
 		

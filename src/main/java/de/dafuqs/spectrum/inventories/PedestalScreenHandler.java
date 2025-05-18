@@ -8,8 +8,8 @@ import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import io.netty.buffer.ByteBuf;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Inventory;
@@ -166,7 +166,7 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 		return blockEntity.stillValid(player);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public int getCraftingProgress() {
 		int craftingTime = getCraftingTime();
 		int craftingTimeTotal = getCraftingTimeTotal();
@@ -178,7 +178,7 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public RecipeBookType getRecipeBookType() {
 		return this.category;
 	}

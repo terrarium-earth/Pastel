@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.blocks.chests.FabricationChestBlockEntity;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -44,7 +44,7 @@ public record FabricationChestStatusUpdatePayload(BlockPos pos, boolean isFull, 
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(FabricationChestStatusUpdatePayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		var pos = payload.pos;

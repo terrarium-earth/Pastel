@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.PipeBombChargingSoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
@@ -54,7 +54,7 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 		return ItemUtils.startUsingInstantly(world, user, hand);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void startSoundInstance(Player user) {
 		Minecraft.getInstance().getSoundManager().play(new PipeBombChargingSoundInstance(user));
 	}

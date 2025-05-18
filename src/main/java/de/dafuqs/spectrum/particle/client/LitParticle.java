@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.particle.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class LitParticle extends RisingParticle {
 	
 	protected LitParticle(ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {

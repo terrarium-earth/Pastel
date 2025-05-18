@@ -5,8 +5,8 @@ import com.mojang.math.Axis;
 import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
@@ -137,7 +137,7 @@ public class RaindropParticle extends TextureSheetParticle {
 		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<SimpleParticleType> {
 		private final SpriteSet spriteProvider;
 		

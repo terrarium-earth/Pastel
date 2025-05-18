@@ -29,8 +29,8 @@ import de.dafuqs.spectrum.particle.client.TransmissionParticle;
 import de.dafuqs.spectrum.particle.client.VoidFogParticle;
 import de.dafuqs.spectrum.particle.client.WindParticle;
 import de.dafuqs.spectrum.particle.client.ZigZagParticle;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -45,7 +45,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.material.Fluids;
 
 // See ParticleManager for vanilla
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpectrumParticleFactories {
 	
 	public static void register() {

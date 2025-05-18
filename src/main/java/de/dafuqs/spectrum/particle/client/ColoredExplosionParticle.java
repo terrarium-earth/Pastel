@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.particle.effect.ColoredExplosionParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.HugeExplosionParticle;
 import net.minecraft.client.particle.Particle;
@@ -12,7 +12,7 @@ import net.minecraft.client.particle.SpriteSet;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ColoredExplosionParticle extends HugeExplosionParticle {
 	
 	protected ColoredExplosionParticle(ClientLevel world, double x, double y, double z, double d, SpriteSet spriteProvider, float red, float green, float blue) {
@@ -28,7 +28,7 @@ public class ColoredExplosionParticle extends HugeExplosionParticle {
 		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<ColoredExplosionParticleEffect> {
 		
 		private final SpriteSet spriteProvider;

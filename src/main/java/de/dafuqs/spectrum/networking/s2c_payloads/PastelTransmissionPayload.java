@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.blocks.pastel_network.network.PastelTransmission;
 import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetwork;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.particle.effect.PastelTransmissionParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -36,7 +36,7 @@ public record PastelTransmissionPayload(int networkColor, int travelTime, Pastel
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PastelTransmissionPayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		

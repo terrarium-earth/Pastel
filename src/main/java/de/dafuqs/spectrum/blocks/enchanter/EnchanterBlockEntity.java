@@ -28,8 +28,8 @@ import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.CraftingBlockSoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -717,7 +717,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	protected void stopCraftingMusic() {
 		CraftingBlockSoundInstance.stopPlayingOnPos(this.worldPosition);
 	}

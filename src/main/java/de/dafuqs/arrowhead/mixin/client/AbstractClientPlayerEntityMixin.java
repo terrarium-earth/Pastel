@@ -2,15 +2,15 @@ package de.dafuqs.arrowhead.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import de.dafuqs.arrowhead.api.ArrowheadBow;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin(AbstractClientPlayer.class)
 public abstract class AbstractClientPlayerEntityMixin {
 

@@ -5,8 +5,8 @@ import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.particle.client.FallingAshParticle;
 import de.dafuqs.spectrum.registries.SpectrumBiomes;
 import de.dafuqs.spectrum.sound.BiomeAttenuatingSoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -17,7 +17,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.biome.Biome;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class HowlingSpireEffects {
 	
 	public static int spireTicks, lastSpireTicks;

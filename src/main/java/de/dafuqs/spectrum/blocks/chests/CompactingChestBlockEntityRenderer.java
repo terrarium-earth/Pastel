@@ -5,8 +5,8 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class CompactingChestBlockEntityRenderer implements BlockEntityRenderer<CompactingChestBlockEntity> {
 
 	private static final Material SPRITE_IDENTIFIER = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/compacting_chest"));

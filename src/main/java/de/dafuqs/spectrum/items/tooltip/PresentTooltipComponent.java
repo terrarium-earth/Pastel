@@ -1,15 +1,15 @@
 package de.dafuqs.spectrum.items.tooltip;
 
 import de.dafuqs.spectrum.api.gui.SpectrumTooltipComponent;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class PresentTooltipComponent implements SpectrumTooltipComponent {
 	
 	private final List<ItemStack> itemStacks;

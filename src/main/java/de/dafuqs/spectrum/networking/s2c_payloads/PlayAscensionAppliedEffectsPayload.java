@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.DivinitySoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
@@ -25,7 +25,7 @@ public record PlayAscensionAppliedEffectsPayload() implements CustomPacketPayloa
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayAscensionAppliedEffectsPayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		client.level.playSound(null, client.player.blockPosition(), SpectrumSoundEvents.FADING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);

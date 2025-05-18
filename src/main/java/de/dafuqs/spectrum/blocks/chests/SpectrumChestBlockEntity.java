@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.blocks.chests;
 import de.dafuqs.spectrum.inventories.BlackHoleChestScreenHandler;
 import de.dafuqs.spectrum.inventories.CompactingChestScreenHandler;
 import de.dafuqs.spectrum.inventories.FabricationChestScreenHandler;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.api.EnvironmentInterface;
 import net.fabricmc.api.EnvironmentInterfaces;
 import net.minecraft.core.BlockPos;
@@ -33,7 +33,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 @EnvironmentInterfaces({@EnvironmentInterface(
-		value = EnvType.CLIENT,
+		value = Dist.CLIENT,
 		itf = LidBlockEntity.class
 )})
 public abstract class SpectrumChestBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
@@ -95,7 +95,7 @@ public abstract class SpectrumChestBlockEntity extends RandomizableContainerBloc
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public float getOpenNess(float tickDelta) {
 		return this.lidAnimator.getOpenness(tickDelta);
 	}

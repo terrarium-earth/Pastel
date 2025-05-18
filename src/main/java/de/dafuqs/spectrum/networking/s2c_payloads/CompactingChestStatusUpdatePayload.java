@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.blocks.chests.CompactingChestBlockEntity;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -32,7 +32,7 @@ public record CompactingChestStatusUpdatePayload(BlockPos pos, boolean hasToCraf
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(CompactingChestStatusUpdatePayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		var entity = client.level.getBlockEntity(payload.pos, SpectrumBlockEntities.COMPACTING_CHEST);

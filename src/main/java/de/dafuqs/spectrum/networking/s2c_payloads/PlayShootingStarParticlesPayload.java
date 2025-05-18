@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.blocks.shooting_star.ShootingStar;
 import de.dafuqs.spectrum.entity.entity.ShootingStarEntity;
 import de.dafuqs.spectrum.helpers.PacketCodecHelper;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -34,7 +34,7 @@ public record PlayShootingStarParticlesPayload(Vec3 shootingStarPos, ShootingSta
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayShootingStarParticlesPayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		

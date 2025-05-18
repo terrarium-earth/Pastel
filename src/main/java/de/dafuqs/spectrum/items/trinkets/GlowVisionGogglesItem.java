@@ -8,8 +8,8 @@ import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import dev.emi.trinkets.api.SlotReference;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -79,7 +79,7 @@ public class GlowVisionGogglesItem extends SpectrumTrinketItem implements InkPow
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		if (InkPowered.canUseClient()) {

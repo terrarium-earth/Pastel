@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.items.tooltip;
 
 import de.dafuqs.spectrum.api.gui.SpectrumTooltipComponent;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -10,7 +10,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix4f;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class CraftingTabletTooltipComponent implements SpectrumTooltipComponent {
 	
 	private final ItemStack itemStack;

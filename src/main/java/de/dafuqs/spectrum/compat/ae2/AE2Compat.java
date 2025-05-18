@@ -9,8 +9,8 @@ import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumItems.IS;
 import de.dafuqs.spectrum.registries.client.SpectrumModels;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -61,7 +61,7 @@ public class AE2Compat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void registerClient() {
 		SpectrumBlocks.CLIENT_REGISTRAR.flush();
 	}

@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.blocks.jade_vines;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class JadeVineRootsBlockEntityRenderer implements BlockEntityRenderer<JadeVineRootsBlockEntity> {
 	
 	@SuppressWarnings("unused")

@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.particle.render;
 import com.google.common.collect.EvictingQueue;
 import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.objects.Object2ReferenceOpenHashMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Camera;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleRenderType;
@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import java.util.Map;
 import java.util.Queue;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class EarlyRenderingParticleContainer {
     
     private static final int MAX_PARTICLES = 16384;

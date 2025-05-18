@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.progression.toast;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.helpers.RenderHelper;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,7 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Iterator;
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class MessageToast implements Toast {
 	
 	private final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/gui/toasts.png");

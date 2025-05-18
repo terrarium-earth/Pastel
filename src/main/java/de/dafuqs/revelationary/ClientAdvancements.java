@@ -2,8 +2,8 @@ package de.dafuqs.revelationary;
 
 import de.dafuqs.revelationary.api.advancements.ClientAdvancementPacketCallback;
 import de.dafuqs.revelationary.mixin.client.AccessorClientAdvancementManager;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementNode;
 import net.minecraft.advancements.AdvancementProgress;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ClientAdvancements {
 	protected static boolean receivedFirstAdvancementPacket = false;
 	public static List<ClientAdvancementPacketCallback> callbacks = new ArrayList<>();

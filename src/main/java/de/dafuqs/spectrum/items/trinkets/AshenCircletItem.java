@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import dev.emi.trinkets.api.SlotReference;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -69,7 +69,7 @@ public class AshenCircletItem extends SpectrumTrinketItem {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		tooltip.add(Component.translatable("item.spectrum.ashen_circlet.tooltip").withStyle(ChatFormatting.GRAY));

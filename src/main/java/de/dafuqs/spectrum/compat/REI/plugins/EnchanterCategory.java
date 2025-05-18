@@ -6,13 +6,13 @@ import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public abstract class EnchanterCategory<T extends EnchanterDisplay> extends GatedDisplayCategory<T> {
 	
 	public final static ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/enchanter.png");

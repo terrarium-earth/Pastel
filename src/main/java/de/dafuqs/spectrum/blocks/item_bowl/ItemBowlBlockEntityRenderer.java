@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.blocks.item_bowl;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ItemBowlBlockEntityRenderer implements BlockEntityRenderer<ItemBowlBlockEntity> {
 	
 	final double radiant = Math.toRadians(360.0F);

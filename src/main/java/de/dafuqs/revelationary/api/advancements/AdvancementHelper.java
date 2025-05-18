@@ -2,8 +2,8 @@ package de.dafuqs.revelationary.api.advancements;
 
 import de.dafuqs.revelationary.ClientAdvancements;
 import de.dafuqs.revelationary.Revelationary;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -52,7 +52,7 @@ public class AdvancementHelper {
 	 * @param advancementIdentifier the identifier of the advancement to check
 	 * @return if the client player has the advancement
 	 */
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static boolean hasAdvancementClient(ResourceLocation advancementIdentifier) {
 		return ClientAdvancements.hasDone(advancementIdentifier);
 	}

@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.api.block.InkColorSelectedPacketReceiver;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Holder;
@@ -30,7 +30,7 @@ public record InkColorSelectedS2CPayload(Optional<Holder<InkColor>> inkColor) im
 		ServerPlayNetworking.send(player, new InkColorSelectedS2CPayload(inkColor));
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(InkColorSelectedS2CPayload payload, ClientPlayNetworking.Context context) {
 		AbstractContainerMenu screenHandler = context.player().containerMenu;
 		if (screenHandler instanceof InkColorSelectedPacketReceiver inkColorSelectedPacketReceiver) {

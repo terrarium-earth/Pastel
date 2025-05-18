@@ -88,15 +88,15 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.transfer.info.stack.SlotAccessor;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
 import java.util.stream.Stream;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class REIClientIntegration implements REIClientPlugin {
 	
 	@Override

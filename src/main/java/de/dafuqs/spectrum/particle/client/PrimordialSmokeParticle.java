@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.particle.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.BaseAshSmokeParticle;
 import net.minecraft.client.particle.Particle;
@@ -17,7 +17,7 @@ public class PrimordialSmokeParticle extends BaseAshSmokeParticle {
         bCol = 1;
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public static class Factory implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteProvider;
 

@@ -5,8 +5,8 @@ import com.mojang.math.Axis;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipe;
 import de.dafuqs.spectrum.registries.client.SpectrumRenderLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -24,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.Nullable;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class PedestalBlockEntityRenderer<C extends PedestalBlockEntity> implements BlockEntityRenderer<C> {
 	
 	private final ResourceLocation GROUND_MARK = SpectrumCommon.locate("textures/misc/circle.png");

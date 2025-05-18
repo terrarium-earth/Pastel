@@ -6,11 +6,11 @@ import de.dafuqs.spectrum.items.tooltip.CraftingTabletTooltipComponent;
 import de.dafuqs.spectrum.items.tooltip.CraftingTabletTooltipData;
 import de.dafuqs.spectrum.items.tooltip.PresentTooltipComponent;
 import de.dafuqs.spectrum.items.tooltip.PresentTooltipData;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpectrumTooltipComponents {
 	
 	public static void registerTooltipComponents() {

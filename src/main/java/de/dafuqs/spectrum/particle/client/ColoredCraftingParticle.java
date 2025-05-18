@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
@@ -13,7 +13,7 @@ import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ColoredCraftingParticle extends TextureSheetParticle {
 	
 	protected ColoredCraftingParticle(ClientLevel clientWorld, double x, double y, double z, double velocityX, double velocityY, double velocityZ, float red, float green, float blue) {
@@ -48,7 +48,7 @@ public class ColoredCraftingParticle extends TextureSheetParticle {
 		return j | k << 16;
 	}
 
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<ColoredCraftingParticleEffect> {
 
 		private final SpriteSet spriteProvider;

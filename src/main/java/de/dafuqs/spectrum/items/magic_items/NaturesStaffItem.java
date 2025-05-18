@@ -15,8 +15,8 @@ import de.dafuqs.spectrum.registries.SpectrumBlockTags;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.NaturesStaffUseSoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -67,7 +67,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		
@@ -101,7 +101,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 		return super.use(world, user, hand);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void startSoundInstance(Player user) {
 		Minecraft.getInstance().getSoundManager().play(new NaturesStaffUseSoundInstance(user));
 	}

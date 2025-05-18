@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.blocks.decay;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.compat.claims.GenericClaimModsCompat;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -100,7 +100,7 @@ public abstract class DecayBlock extends Block {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (state.getValue(CONVERSION).equals(Conversion.SPECIAL)) {
 			world.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), pos.getX() + random.nextFloat(), pos.getY() + 1, pos.getZ() + random.nextFloat(), 0.0D, 0.0D, 0.0D);

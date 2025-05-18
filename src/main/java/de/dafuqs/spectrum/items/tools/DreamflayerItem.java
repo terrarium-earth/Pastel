@@ -10,8 +10,8 @@ import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -163,7 +163,7 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 		return List.of(USED_COLOR);
 	}
 
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void addInkPoweredTooltip(List<Component> tooltip) {
 		InkPowered.super.addInkPoweredTooltip(tooltip);

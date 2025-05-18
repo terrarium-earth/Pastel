@@ -4,13 +4,13 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.entity.entity.EggLayingWoolyPigEntity;
 import de.dafuqs.spectrum.entity.models.EggLayingWoolyPigEntityModel;
 import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class EggLayingWoolyPigEntityRenderer extends MobRenderer<EggLayingWoolyPigEntity, EggLayingWoolyPigEntityModel> {
 	
 	public static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig.png");

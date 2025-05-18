@@ -13,8 +13,8 @@ import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumEnchantmentTags;
 import de.dafuqs.spectrum.registries.SpectrumEnchantments;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
@@ -333,7 +333,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Renderer implements DynamicItemRenderer {
 		public Renderer() {
 		}

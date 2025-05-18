@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.blocks.energy.ColorPickerBlockEntity;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -27,7 +27,7 @@ import java.util.function.Consumer;
 
 import static de.dafuqs.spectrum.helpers.RenderHelper.fillQuad;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ColorSelectionWidget extends AbstractWidget {
 	
 	protected final ColorPickerBlockEntity colorPicker;

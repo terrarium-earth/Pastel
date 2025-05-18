@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.item.Preenchanted;
 import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
 import de.dafuqs.spectrum.render.armor.BedrockArmorModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.RenderType;
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Map;
 
 public class BedrockArmorItem extends ArmorItem implements Preenchanted {
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     private HumanoidModel<LivingEntity> model;
 
     public BedrockArmorItem(Holder<ArmorMaterial> material, ArmorItem.Type type, Properties settings) {
@@ -40,14 +40,14 @@ public class BedrockArmorItem extends ArmorItem implements Preenchanted {
         return false;
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     protected HumanoidModel<LivingEntity> provideArmorModelForSlot(EquipmentSlot slot) {
         var models = Minecraft.getInstance().getEntityModels();
         var root = models.bakeLayer(SpectrumModelLayers.MAIN_BEDROCK_LAYER);
         return new BedrockArmorModel(root, slot);
     }
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public HumanoidModel<LivingEntity> getArmorModel() {
         if (model == null) {
             model = provideArmorModelForSlot(getEquipmentSlot());

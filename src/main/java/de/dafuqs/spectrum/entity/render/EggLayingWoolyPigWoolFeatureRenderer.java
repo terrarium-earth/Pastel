@@ -7,8 +7,8 @@ import de.dafuqs.spectrum.entity.models.EggLayingWoolyPigEntityModel;
 import de.dafuqs.spectrum.entity.models.EggLayingWoolyPigHatEntityModel;
 import de.dafuqs.spectrum.entity.models.EggLayingWoolyPigWoolEntityModel;
 import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class EggLayingWoolyPigWoolFeatureRenderer extends RenderLayer<EggLayingWoolyPigEntity, EggLayingWoolyPigEntityModel> {
 	
 	private final EggLayingWoolyPigHatEntityModel hat;

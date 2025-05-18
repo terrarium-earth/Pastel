@@ -7,14 +7,14 @@ import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public abstract class GatedDisplayCategory<T extends GatedRecipeDisplay> implements DisplayCategory<T> {
 	
 	public static final Component HIDDEN_LINE_1 = Component.translatable("container.spectrum.rei.pedestal_crafting.recipe_not_unlocked_line_1");

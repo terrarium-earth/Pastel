@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -45,7 +45,7 @@ public record PastelNodeStatusUpdatePayload(boolean longSpin, Map<BlockPos, Inte
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PastelNodeStatusUpdatePayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		for (Map.Entry<BlockPos, Integer> e : payload.spinTimes.entrySet()) {

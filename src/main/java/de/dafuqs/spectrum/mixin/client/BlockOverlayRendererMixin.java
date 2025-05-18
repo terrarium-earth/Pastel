@@ -9,8 +9,8 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import de.dafuqs.spectrum.registries.SpectrumFluidTags;
 import de.dafuqs.spectrum.registries.SpectrumFluids;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LightTexture;
@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin(ScreenEffectRenderer.class)
 public abstract class BlockOverlayRendererMixin {
 

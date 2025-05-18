@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.blocks.mob_head.client.SpectrumSkullModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
@@ -18,7 +18,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class LizardHeadModel extends SpectrumSkullModel {
 	
 	public static final ResourceLocation HEAD_TEXTURE = SpectrumCommon.locate("textures/entity/lizard/lizard_head.png");

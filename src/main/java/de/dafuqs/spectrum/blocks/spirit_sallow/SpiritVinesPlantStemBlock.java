@@ -4,8 +4,8 @@ import com.mojang.serialization.MapCodec;
 import de.dafuqs.spectrum.api.item.GemstoneColor;
 import de.dafuqs.spectrum.recipe.pedestal.BuiltinGemstoneColor;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -82,7 +82,7 @@ public class SpiritVinesPlantStemBlock extends GrowingPlantHeadBlock implements 
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
 		return new ItemStack(SpiritVine.getYieldItem(state));
 	}

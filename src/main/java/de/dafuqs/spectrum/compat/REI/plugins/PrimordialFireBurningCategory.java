@@ -11,15 +11,15 @@ import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class PrimordialFireBurningCategory extends GatedDisplayCategory<PrimordialFireBurningDisplay> {
 	
 	private final static ResourceLocation FIRE_TEXTURE = SpectrumCommon.locate("textures/block/primordial_fire_0.png");

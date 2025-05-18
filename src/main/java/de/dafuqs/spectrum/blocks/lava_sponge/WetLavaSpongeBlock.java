@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.blocks.lava_sponge;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -60,7 +60,7 @@ public class WetLavaSpongeBlock extends WetSpongeBlock {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		Direction direction = Direction.getRandom(random);
 		if (direction != Direction.UP) {

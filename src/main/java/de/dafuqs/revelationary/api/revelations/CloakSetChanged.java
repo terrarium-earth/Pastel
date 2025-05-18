@@ -1,7 +1,7 @@
 package de.dafuqs.revelationary.api.revelations;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.client.Minecraft;
@@ -9,7 +9,7 @@ import net.minecraft.world.item.Item;
 
 import java.util.Set;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @FunctionalInterface
 public interface CloakSetChanged {
     Event<CloakSetChanged> EVENT = EventFactory.createArrayBacked(CloakSetChanged.class,

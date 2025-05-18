@@ -16,8 +16,8 @@ import de.dafuqs.spectrum.registries.SpectrumAdvancements;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -61,12 +61,12 @@ public class PaintbrushItem extends Item implements SignApplicator {
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		
-		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
+		if (FabricLoader.getInstance().getEnvironmentType() == Dist.CLIENT) {
 			appendClientTooltips(stack, tooltip);
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private static void appendClientTooltips(ItemStack stack, List<Component> tooltip) {
 		boolean unlockedColoring = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_COLORING);
 		boolean unlockedSlinging = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING);

@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.blocks.pedestal.PedestalBlockEntity;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -30,7 +30,7 @@ public record PlayPedestalStartCraftingParticlePayload(BlockPos pedestalPos) imp
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayPedestalStartCraftingParticlePayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		PedestalBlockEntity.spawnCraftingStartParticles(client.level, payload.pedestalPos);

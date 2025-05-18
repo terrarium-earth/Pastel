@@ -15,8 +15,8 @@ import de.dafuqs.spectrum.particle.effect.ColoredSparkleRisingParticleEffect;
 import de.dafuqs.spectrum.registries.SpectrumAdvancements;
 import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -49,7 +49,7 @@ public class StaffOfRemembranceItem extends Item implements InkPowered, Prioriti
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.api.render;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class DynamicRenderModel extends ForwardingBakedModel implements UnbakedModel {
     private static class WrappingOverridesList extends ItemOverrides {
         private final ItemOverrides wrapped;

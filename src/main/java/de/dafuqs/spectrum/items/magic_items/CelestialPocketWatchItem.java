@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.networking.s2c_payloads.StartSkyLerpingPayload;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -98,7 +98,7 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		

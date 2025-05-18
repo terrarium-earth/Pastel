@@ -9,8 +9,8 @@ import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,7 +34,7 @@ public interface InkPowered {
 	 */
 	ResourceLocation REQUIRED_ADVANCEMENT = SpectrumCommon.locate("milestones/unlock_ink_use");
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
     static boolean canUseClient() {
 		Minecraft client = Minecraft.getInstance();
 		return canUse(client.player);
@@ -54,7 +54,7 @@ public interface InkPowered {
 	 * The colors that the object requires for working.
 	 * These are added as the player facing tooltip
 	 **/
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	default void addInkPoweredTooltip(List<Component> tooltip) {
 		if (canUseClient()) {
 			if (getUsedColors().size() > 1) {

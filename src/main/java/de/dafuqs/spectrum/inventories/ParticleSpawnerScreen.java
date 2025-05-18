@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerBlockEntity;
 import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerConfiguration;
 import de.dafuqs.spectrum.data_loaders.ParticleSpawnerParticlesDataLoader;
 import de.dafuqs.spectrum.networking.c2s_payloads.ParticleSpawnerConfigurationC2SPayload;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.mixin.client.particle.ParticleManagerAccessor;
 import net.minecraft.ChatFormatting;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawnerScreenHandler> {
 	
 	protected static final ResourceLocation GUI_TEXTURE = SpectrumCommon.locate("textures/gui/container/particle_spawner.png");

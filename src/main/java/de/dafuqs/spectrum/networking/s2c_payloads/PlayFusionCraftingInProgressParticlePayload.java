@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.blocks.fusion_shrine.FusionShrineBlockEntity;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -31,7 +31,7 @@ public record PlayFusionCraftingInProgressParticlePayload(BlockPos pos) implemen
 	}
 	
 	@SuppressWarnings("resource")
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayFusionCraftingInProgressParticlePayload payload, ClientPlayNetworking.Context context) {
 		Minecraft client = context.client();
 		BlockEntity blockEntity = client.level.getBlockEntity(payload.pos);

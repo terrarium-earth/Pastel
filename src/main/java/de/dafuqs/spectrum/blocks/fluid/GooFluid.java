@@ -8,8 +8,8 @@ import de.dafuqs.spectrum.registries.SpectrumFluids;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.sounds.SoundSource;
@@ -56,7 +56,7 @@ public abstract class GooFluid extends SpectrumFluid {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void animateTick(Level world, BlockPos pos, FluidState state, RandomSource random) {
 		BlockPos topPos = pos.above();
 		BlockState topState = world.getBlockState(topPos);

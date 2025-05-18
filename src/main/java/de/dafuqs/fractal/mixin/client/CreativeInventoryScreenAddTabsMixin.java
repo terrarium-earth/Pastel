@@ -4,8 +4,8 @@ import de.dafuqs.fractal.api.ItemSubGroup;
 import de.dafuqs.fractal.api.ItemSubGroupStyle;
 import de.dafuqs.fractal.interfaces.ItemGroupParent;
 import de.dafuqs.fractal.interfaces.SubTabLocation;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen.ItemPickerMenu;
@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin(CreativeModeInventoryScreen.class)
 public abstract class CreativeInventoryScreenAddTabsMixin extends EffectRenderingInventoryScreen<ItemPickerMenu> implements SubTabLocation, CreativeInventoryScreenAccessor {
 	

@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.mixin.client;
 
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HalfTransparentBlock;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin(HalfTransparentBlock.class)
 public abstract class TranslucentBlockMixin {
 

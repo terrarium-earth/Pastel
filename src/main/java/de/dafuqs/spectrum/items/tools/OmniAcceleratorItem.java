@@ -10,8 +10,8 @@ import de.dafuqs.spectrum.api.render.DynamicItemRenderer;
 import de.dafuqs.spectrum.api.render.ExtendedItemBarProvider;
 import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -126,7 +126,7 @@ public class OmniAcceleratorItem extends BundleItem implements InkPowered, Exten
 		addInkPoweredTooltip(tooltip);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Renderer implements DynamicItemRenderer {
 		public Renderer() {
 		}

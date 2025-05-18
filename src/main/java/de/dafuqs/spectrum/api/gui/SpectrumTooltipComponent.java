@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.gui;
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -52,7 +52,7 @@ public interface SpectrumTooltipComponent extends ClientTooltipComponent {
 		context.blit(TEXTURE, x, y, sprite.u, sprite.v, sprite.width, sprite.height, 128, 128);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	enum Sprite {
 		SLOT(0, 0, 18, 20),
 		DOTTED_SLOT(18, 0, 18 + 18, 20),

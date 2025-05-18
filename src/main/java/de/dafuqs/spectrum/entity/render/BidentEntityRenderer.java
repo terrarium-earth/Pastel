@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import de.dafuqs.spectrum.entity.entity.BidentBaseEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -17,7 +17,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
 	
 	private final ItemRenderer itemRenderer;

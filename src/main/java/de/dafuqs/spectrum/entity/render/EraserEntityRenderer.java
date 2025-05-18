@@ -4,13 +4,13 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.entity.entity.EraserEntity;
 import de.dafuqs.spectrum.entity.models.EraserEntityModel;
 import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class EraserEntityRenderer extends MobRenderer<EraserEntity, EraserEntityModel> {
 	
 	public static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/eraser/eraser_base.png");

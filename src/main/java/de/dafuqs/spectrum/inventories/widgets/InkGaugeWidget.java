@@ -5,8 +5,8 @@ import de.dafuqs.spectrum.api.energy.InkStorageBlockEntity;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.helpers.RenderHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableEntry {
 	
 	public final int x;

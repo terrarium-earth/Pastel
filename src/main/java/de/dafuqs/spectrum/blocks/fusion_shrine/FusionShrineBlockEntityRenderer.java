@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.blocks.fusion_shrine;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import de.dafuqs.spectrum.render.FluidRendering;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.minecraft.client.Minecraft;
@@ -20,7 +20,7 @@ import org.joml.Math;
 import java.util.ArrayList;
 import java.util.List;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class FusionShrineBlockEntityRenderer<T extends FusionShrineBlockEntity> implements BlockEntityRenderer<T> {
 	
 	@SuppressWarnings("unused")

@@ -29,8 +29,8 @@ import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.sound.BiomeAttenuatingSoundInstance;
 import de.dafuqs.spectrum.sound.BlockAuraSoundInstance;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientWorldEvents;
@@ -74,7 +74,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpectrumClientEventListeners {
 	
 	// TODO: Move to API package

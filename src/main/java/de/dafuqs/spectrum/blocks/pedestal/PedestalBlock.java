@@ -13,8 +13,8 @@ import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumMultiblocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -94,7 +94,7 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 	 *
 	 * @param newPedestalRecipeTier The tier the pedestal has been upgraded to
 	 */
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void spawnUpgradeParticleEffectsForTier(BlockPos blockPos, @NotNull PedestalRecipeTier newPedestalRecipeTier) {
 		Minecraft client = Minecraft.getInstance();
 		Level world = client.level;
@@ -269,7 +269,7 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void animateTick(@NotNull BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (state.getValue(BlockStateProperties.POWERED)) {
 			Vector3f color = new Vector3f(0.5F, 0.5F, 0.5F);

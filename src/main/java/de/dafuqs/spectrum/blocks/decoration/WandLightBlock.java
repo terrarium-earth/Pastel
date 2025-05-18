@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.items.magic_items.RadianceStaffItem;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
@@ -60,7 +60,7 @@ public class WandLightBlock extends LightBlock {
 		return false;
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private boolean holdsRadianceStaffClient() {
 		return holdsRadianceStaff(Minecraft.getInstance().player);
 	}

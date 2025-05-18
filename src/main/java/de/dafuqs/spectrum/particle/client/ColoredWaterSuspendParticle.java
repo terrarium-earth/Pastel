@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.particle.client;
 
 import de.dafuqs.spectrum.particle.effect.ColoredSporeBlossomAirParticleEffect;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
@@ -14,14 +14,14 @@ import org.joml.Vector3f;
 
 import java.util.Optional;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class ColoredWaterSuspendParticle extends SuspendedParticle {
 	
 	public ColoredWaterSuspendParticle(ClientLevel world, SpriteSet spriteProvider, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
 		super(world, spriteProvider, x, y, z, velocityX, velocityY, velocityZ);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static class Factory implements ParticleProvider<ColoredSporeBlossomAirParticleEffect> {
 		
 		private final SpriteSet spriteProvider;

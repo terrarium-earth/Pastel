@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.blocks.mob_head.client.models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import de.dafuqs.spectrum.blocks.mob_head.client.SpectrumSkullModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.DyeColor;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class TropicalFishHeadModel extends SpectrumSkullModel {
 	
 	private static final ResourceLocation PATTERN_TEXTURE = ResourceLocation.parse("textures/entity/fish/tropical_a_pattern_1.png");

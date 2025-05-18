@@ -7,8 +7,8 @@ import de.dafuqs.spectrum.networking.c2s_payloads.WorkstaffToggleSelectedPayload
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHandler> {
 
 	private static final Grid RANGE_GRID = new Grid(

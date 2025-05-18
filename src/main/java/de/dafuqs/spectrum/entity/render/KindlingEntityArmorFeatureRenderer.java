@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.entity.entity.KindlingEntity;
 import de.dafuqs.spectrum.entity.models.KindlingEntityModel;
 import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.DyedItemColor;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class KindlingEntityArmorFeatureRenderer extends RenderLayer<KindlingEntity, KindlingEntityModel> {
 	
 	public static final ResourceLocation TEXTURE_DIAMOND = SpectrumCommon.locate("textures/entity/kindling/armor/diamond.png");

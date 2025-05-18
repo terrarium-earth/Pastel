@@ -5,8 +5,8 @@ import de.dafuqs.spectrum.helpers.Support;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumBlockTags;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class BlockAuraSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 	
 	public static final List<BlockAuraSoundInstance> INSTANCES = new ArrayList<>();

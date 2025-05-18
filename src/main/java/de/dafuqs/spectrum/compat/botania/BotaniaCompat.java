@@ -8,8 +8,8 @@ import de.dafuqs.spectrum.api.interaction.ItemProviderRegistry;
 import de.dafuqs.spectrum.api.item_group.ItemGroupIDs;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -73,7 +73,7 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		});
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void registerClient() {
 	

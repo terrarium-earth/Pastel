@@ -6,8 +6,8 @@ import com.mojang.math.Axis;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.render.FluidRendering;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes;
@@ -32,7 +32,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEntity> implements BlockEntityRenderer<T> {
 	
 	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/crystallarieum"));

@@ -7,8 +7,8 @@ import de.dafuqs.spectrum.helpers.ParticleHelper;
 import de.dafuqs.spectrum.mixin.accessors.ExperienceDroppingBlockAccessor;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleAroundBlockSidesPayload;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -66,7 +66,7 @@ public class ShimmerstoneOreBlock extends CloakedOreBlock {
 		super.fallOn(world, state, pos, entity, fallDistance);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(state, world, pos, random);

@@ -5,11 +5,11 @@ import de.dafuqs.spectrum.registries.SpectrumItems;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class GooConvertingCategory extends FluidConvertingCategory<GooConvertingDisplay> {
 	
 	@Override

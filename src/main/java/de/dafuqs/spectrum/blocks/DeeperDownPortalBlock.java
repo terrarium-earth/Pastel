@@ -11,8 +11,8 @@ import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumDimensions;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -292,7 +292,7 @@ public class DeeperDownPortalBlock extends Block {
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (!state.getValue(DeeperDownPortalBlock.FACING_UP) || random.nextInt(8) == 0) {
 			spawnVoidFogParticle(world, pos, random);

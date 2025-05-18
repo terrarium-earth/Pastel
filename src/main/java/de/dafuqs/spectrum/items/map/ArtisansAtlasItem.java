@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.items.map;
 
 import com.mojang.datafixers.util.Pair;
 import de.dafuqs.spectrum.registries.SpectrumStructureTags;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -362,7 +362,7 @@ public class ArtisansAtlasItem extends MapItem {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		

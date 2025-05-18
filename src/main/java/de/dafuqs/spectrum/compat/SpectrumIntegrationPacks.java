@@ -11,8 +11,8 @@ import de.dafuqs.spectrum.compat.malum.MalumCompat;
 import de.dafuqs.spectrum.compat.modonomicon.ModonomiconCompat;
 import de.dafuqs.spectrum.compat.neepmeat.NEEPMeatCompat;
 import de.dafuqs.spectrum.compat.travelersbackpack.TravelersBackpackCompat;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.util.HashMap;
@@ -76,7 +76,7 @@ public class SpectrumIntegrationPacks {
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void registerClient() {
 		for (ModIntegrationPack container : INTEGRATION_PACKS.values()) {
 			container.registerClient();

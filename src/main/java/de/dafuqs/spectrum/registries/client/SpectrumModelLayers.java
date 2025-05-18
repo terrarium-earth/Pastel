@@ -68,15 +68,15 @@ import de.dafuqs.spectrum.entity.models.KindlingEntityModel;
 import de.dafuqs.spectrum.entity.models.LizardEntityModel;
 import de.dafuqs.spectrum.entity.models.PreservationTurretEntityModel;
 import de.dafuqs.spectrum.render.armor.BedrockArmorModel;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class SpectrumModelLayers {
 	
 	/**

@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.items.map.ArtisansAtlasState;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -24,7 +24,7 @@ public record SyncArtisansAtlasPayload(Optional<ResourceLocation> targetId, Clie
 			SyncArtisansAtlasPayload::new
 	);
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(SyncArtisansAtlasPayload payload, ClientPlayNetworking.Context context) {
 		var client = context.client();
 		if (client.level == null) return;

@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.api.block.PedestalVariant;
 import de.dafuqs.spectrum.blocks.pedestal.PedestalBlock;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -33,7 +33,7 @@ public record PlayPedestalUpgradedParticlePayload(BlockPos pedestalPos, Pedestal
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayPedestalUpgradedParticlePayload payload, ClientPlayNetworking.Context context) {
 		PedestalBlock.spawnUpgradeParticleEffectsForTier(payload.pedestalPos, payload.newTier);
 	}

@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.blocks.decoration;
 
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -24,7 +24,7 @@ public class RadiantGlassBlock extends TransparentBlock {
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
 		if (stateFrom.is(this) || stateFrom.is(SpectrumBlocks.RADIANT_SEMI_PERMEABLE_GLASS)) {
 			return true;

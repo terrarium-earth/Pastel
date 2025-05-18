@@ -10,8 +10,8 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.TextWidget.Alignment;
 import dev.emi.emi.api.widget.WidgetHolder;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +42,7 @@ public class TitrationBarrelEmiRecipeGated extends GatedSpectrumEmiRecipe<ITitra
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void addUnlockedWidgets(WidgetHolder widgets) {
 		// input slots
 		int startX = Math.max(10, 40 - inputs.size() * 10);

@@ -10,8 +10,8 @@ import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class UnlockToastManager {
 	// Advancement Identifier + Recipe Variant => Recipe
 	public static final Map<ResourceLocation, Map<RecipeType<?>, Set<GatedRecipe<?>>>> gatedRecipes = new HashMap<>();

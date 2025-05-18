@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.sound;
 
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
@@ -14,7 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class EnderSpliceChargingSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 	
 	private final Player player;

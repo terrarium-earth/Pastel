@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.sound;
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class CraftingBlockSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 	
 	private static List<CraftingBlockSoundInstance> playingSoundInstances = new ArrayList<>();
@@ -50,7 +50,7 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
 		updateVolume();
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
     public static void startSoundInstance(SoundEvent soundEvent, BlockPos sourceBlockPos, Block sourceBlock, int maxDurationTicks) {
 		Minecraft client = Minecraft.getInstance();
 		stopPlayingOnPos(sourceBlockPos);

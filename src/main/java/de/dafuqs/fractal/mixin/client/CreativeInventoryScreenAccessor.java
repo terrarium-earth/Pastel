@@ -1,13 +1,13 @@
 package de.dafuqs.fractal.mixin.client;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.world.item.CreativeModeTab;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin(CreativeModeInventoryScreen.class)
 public interface CreativeInventoryScreenAccessor {
 	

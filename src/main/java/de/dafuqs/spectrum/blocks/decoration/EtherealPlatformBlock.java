@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.blocks.decoration;
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,7 +45,7 @@ public class EtherealPlatformBlock extends TransparentBlock {
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
 		return state.getValue(AGE) == 0 || !(direction == Direction.UP);
 	}
@@ -129,7 +129,7 @@ public class EtherealPlatformBlock extends TransparentBlock {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		int age = state.getValue((AGE));
 		if ((world.isClientSide && Minecraft.getInstance().player.getMainHandItem().is(SpectrumBlocks.ETHEREAL_PLATFORM.asItem()))) {

@@ -1,8 +1,8 @@
 package de.dafuqs.revelationary.api.advancements;
 
 import de.dafuqs.revelationary.ClientAdvancements;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Set;
@@ -13,7 +13,7 @@ import java.util.Set;
  * simple full featured lists of advancements that were gotten and removed
  */
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public interface ClientAdvancementPacketCallback {
 	/**
 	 * Gets called every time advancements get synched from server- to client side

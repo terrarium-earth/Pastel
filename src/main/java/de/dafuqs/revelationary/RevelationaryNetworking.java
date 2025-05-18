@@ -3,8 +3,8 @@ package de.dafuqs.revelationary;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -29,7 +29,7 @@ public class RevelationaryNetworking {
 		PayloadTypeRegistry.playS2C().register(RevelationSync.ID, RevelationSync.CODEC);
 	}
 
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void registerPacketReceivers() {
 		ClientPlayNetworking.registerGlobalReceiver(RevelationaryNetworking.RevelationSync.ID, (payload, context) -> {
 			try {

@@ -5,8 +5,8 @@ import de.dafuqs.spectrum.helpers.LoreHelper;
 import de.dafuqs.spectrum.items.PigmentItem;
 import de.dafuqs.spectrum.networking.c2s_payloads.AddLoreBedrockAnvilPayload;
 import de.dafuqs.spectrum.networking.c2s_payloads.RenameItemInBedrockAnvilPayload;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -25,7 +25,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.lwjgl.glfw.GLFW;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHandler> {
 	
 	private static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/gui/container/bedrock_anvil.png");

@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.api.energy.InkStorageBlockEntity;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.storage.IndividualCappedInkStorage;
 import de.dafuqs.spectrum.helpers.RenderHelper;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class InkMeterWidget implements Renderable, GuiEventListener, NarratableEntry {
 	
 	public static final int WIDTH_PER_COLOR = 4;

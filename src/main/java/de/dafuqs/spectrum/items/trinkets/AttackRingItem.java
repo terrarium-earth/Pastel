@@ -5,8 +5,8 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import de.dafuqs.spectrum.SpectrumCommon;
 import dev.emi.trinkets.api.SlotReference;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -50,7 +50,7 @@ public class AttackRingItem extends SpectrumTrinketItem {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		Minecraft client = Minecraft.getInstance();

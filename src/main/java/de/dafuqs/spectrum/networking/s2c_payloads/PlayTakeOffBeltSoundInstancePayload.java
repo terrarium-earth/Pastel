@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.sound.TakeOffBeltSoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
@@ -21,7 +21,7 @@ public record PlayTakeOffBeltSoundInstancePayload() implements CustomPacketPaylo
 		ServerPlayNetworking.send(playerEntity, new PlayTakeOffBeltSoundInstancePayload());
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayTakeOffBeltSoundInstancePayload payload, ClientPlayNetworking.Context context) {
 		TakeOffBeltSoundInstance.startSoundInstance();
 	}

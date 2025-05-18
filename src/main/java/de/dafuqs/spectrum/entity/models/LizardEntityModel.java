@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.entity.models;
 
 import com.google.common.collect.ImmutableList;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -14,7 +14,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class LizardEntityModel<T extends LivingEntity> extends AgeableListModel<T> {
 	
 	private final ModelPart body;

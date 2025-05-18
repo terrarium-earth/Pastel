@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.api.recipe;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import de.dafuqs.spectrum.progression.UnlockToastManager;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
@@ -40,12 +40,12 @@ public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	}
 	
 	default void registerInToastManager(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {
-		if (FabricLoader.getInstance().getEnvironmentType() != EnvType.SERVER) {
+		if (FabricLoader.getInstance().getEnvironmentType() != Dist.SERVER) {
 			registerInToastManagerClient(recipeType, gatedRecipe);
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	private void registerInToastManagerClient(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {
 		UnlockToastManager.registerGatedRecipe(recipeType, gatedRecipe);
 	}

@@ -6,14 +6,14 @@ import de.dafuqs.spectrum.entity.entity.LizardEntity;
 import de.dafuqs.spectrum.entity.models.LizardEntityModel;
 import de.dafuqs.spectrum.entity.variants.LizardHornVariant;
 import de.dafuqs.spectrum.registries.client.SpectrumRenderLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class LizardHornsFeatureRenderer<T extends LizardEntity> extends RenderLayer<T, LizardEntityModel<T>> {
     
     public LizardHornsFeatureRenderer(RenderLayerParent<T, LizardEntityModel<T>> context) {

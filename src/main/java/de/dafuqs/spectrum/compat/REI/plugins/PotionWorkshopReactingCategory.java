@@ -6,12 +6,12 @@ import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class PotionWorkshopReactingCategory extends GatedItemInformationPageCategory {
 	
 	public static final EntryStack<ItemStack> POTION_WORKSHOP_ENTRY = EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP);

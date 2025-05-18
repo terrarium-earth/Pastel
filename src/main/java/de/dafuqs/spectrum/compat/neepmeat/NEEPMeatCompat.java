@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.compat.neepmeat;
 
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.entity.LivingEntity;
 
 public class NEEPMeatCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
@@ -10,7 +10,7 @@ public class NEEPMeatCompat extends SpectrumIntegrationPacks.ModIntegrationPack 
 
 	}
 
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public void registerClient() {
 

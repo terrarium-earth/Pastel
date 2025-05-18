@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.entity.models;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import de.dafuqs.spectrum.entity.entity.EggLayingWoolyPigEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
@@ -16,7 +16,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class EggLayingWoolyPigEntityModel extends EntityModel<EggLayingWoolyPigEntity> {
 	
 	protected final ModelPart torso;

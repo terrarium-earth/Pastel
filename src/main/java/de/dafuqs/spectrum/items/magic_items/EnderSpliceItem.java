@@ -10,8 +10,8 @@ import de.dafuqs.spectrum.registries.SpectrumEnchantmentTags;
 import de.dafuqs.spectrum.registries.SpectrumEnchantments;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.EnderSpliceChargingSoundInstance;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -125,7 +125,7 @@ public class EnderSpliceItem extends Item {
 		}
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
     public void interactWithEntityClient() {
 		// If aiming at an entity: trigger entity interaction
 		Minecraft client = Minecraft.getInstance();
@@ -177,7 +177,7 @@ public class EnderSpliceItem extends Item {
 		return ItemUtils.startUsingInstantly(world, user, hand);
 	}
 	
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void startSoundInstance(Player user) {
 		Minecraft.getInstance().getSoundManager().play(new EnderSpliceChargingSoundInstance(user));
 	}
@@ -193,7 +193,7 @@ public class EnderSpliceItem extends Item {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		// If Dimension & Pos stored => Teleport to that position
 		var teleportTargetPos = getTeleportTargetPos(stack);

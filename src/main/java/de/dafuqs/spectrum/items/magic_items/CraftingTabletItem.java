@@ -8,8 +8,8 @@ import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipe;
 import de.dafuqs.spectrum.registries.SpectrumBannerPatterns;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
@@ -118,7 +118,7 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		var recipe = getStoredRecipe(Minecraft.getInstance().level, stack);
@@ -137,7 +137,7 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
 		Minecraft client = Minecraft.getInstance();
 		var storedRecipe = CraftingTabletItem.getStoredRecipe(client.level, stack);

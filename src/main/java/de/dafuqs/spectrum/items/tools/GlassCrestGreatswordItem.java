@@ -11,8 +11,8 @@ import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.GreatswordChargingSoundInstance;
 import de.dafuqs.spectrum.spells.MoonstoneStrike;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -122,7 +122,7 @@ public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDam
 		}
 	}
 
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void startSoundInstance(Player user) {
 		Minecraft.getInstance().getSoundManager().play(new GreatswordChargingSoundInstance(user, this.GROUND_SLAM_CHARGE_TICKS));
 	}

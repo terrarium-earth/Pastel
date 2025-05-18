@@ -2,12 +2,12 @@ package de.dafuqs.spectrum.compat.REI;
 
 import de.dafuqs.spectrum.inventories.QuickNavigationGridScreen;
 import me.shedaniel.rei.api.client.registry.screen.OverlayDecider;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.InteractionResult;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class REIOverlayDecider implements OverlayDecider {
 	
 	public static final OverlayDecider INSTANCE = new REIOverlayDecider();

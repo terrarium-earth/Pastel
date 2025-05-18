@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import de.dafuqs.arrowhead.api.ArrowheadBow;
 import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 @Mixin(ItemInHandRenderer.class)
 public abstract class HeldItemRendererMixin {
 	

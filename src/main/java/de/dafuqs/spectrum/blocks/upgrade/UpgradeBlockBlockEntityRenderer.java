@@ -3,8 +3,8 @@ package de.dafuqs.spectrum.blocks.upgrade;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import de.dafuqs.spectrum.SpectrumCommon;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class UpgradeBlockBlockEntityRenderer<PedestalUpgradeBlockEntity extends BlockEntity> implements BlockEntityRenderer<PedestalUpgradeBlockEntity> {
 	
 	private final ModelPart root;

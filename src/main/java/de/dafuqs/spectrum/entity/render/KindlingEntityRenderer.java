@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.entity.entity.KindlingEntity;
 import de.dafuqs.spectrum.entity.models.KindlingEntityModel;
 import de.dafuqs.spectrum.entity.variants.KindlingVariant;
 import de.dafuqs.spectrum.registries.client.SpectrumModelLayers;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.entity.layers.SaddleLayer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class KindlingEntityRenderer extends MobRenderer<KindlingEntity, KindlingEntityModel> {
 	
 	public static final ResourceLocation SADDLE_TEXTURE = SpectrumCommon.locate("textures/entity/kindling/saddle.png");

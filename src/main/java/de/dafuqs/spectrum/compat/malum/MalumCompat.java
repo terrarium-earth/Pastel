@@ -4,8 +4,8 @@ import com.sammy.malum.registry.common.item.ItemRegistry;
 import de.dafuqs.spectrum.api.color.ItemColors;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class MalumCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
@@ -30,7 +30,7 @@ public class MalumCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		
 	}
 
-    @Environment(EnvType.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void registerClient() {
     

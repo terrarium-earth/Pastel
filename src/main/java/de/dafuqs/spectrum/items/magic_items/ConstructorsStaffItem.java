@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.compat.claims.GenericClaimModsCompat;
 import de.dafuqs.spectrum.helpers.BuildingHelper;
 import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -70,7 +70,7 @@ public class ConstructorsStaffItem extends BuildingStaffItem {
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		tooltip.add(Component.translatable("item.spectrum.constructors_staff.tooltip.range", getRange(Minecraft.getInstance().player)).withStyle(ChatFormatting.GRAY));

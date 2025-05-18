@@ -10,8 +10,8 @@ import de.dafuqs.spectrum.particle.VectorPattern;
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import dev.emi.trinkets.api.SlotReference;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.item.v1.EnchantingContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -56,7 +56,7 @@ public class TakeOffBeltItem extends SpectrumTrinketItem {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		tooltip.add(Component.translatable("item.spectrum.take_off_belt.tooltip").withStyle(ChatFormatting.GRAY));

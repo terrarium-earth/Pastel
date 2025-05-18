@@ -11,8 +11,8 @@ import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumItems.IS;
 import de.dafuqs.spectrum.registries.client.SpectrumModels;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -85,7 +85,7 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	}
 	
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void registerClient() {
 		SpectrumBlocks.CLIENT_REGISTRAR.flush();
 	}

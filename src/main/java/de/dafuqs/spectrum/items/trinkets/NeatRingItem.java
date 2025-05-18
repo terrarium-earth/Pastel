@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.items.trinkets;
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -17,7 +17,7 @@ public class NeatRingItem extends SpectrumTrinketItem {
 	}
 
 	@Override
-	@Environment(EnvType.CLIENT)
+	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		tooltip.add(Component.translatable("item.spectrum.neat_ring.tooltip"));
