@@ -5,7 +5,7 @@ import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -55,10 +55,12 @@ public class AshenCircletItem extends SpectrumTrinketItem {
 			setCooldown(ashenCircletStack, livingEntity.level());
 		}
 	}
-	
+
 	@Override
-	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		super.tick(stack, slot, entity);
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
+		super.curioTick(slotContext, stack);
+		LivingEntity entity = slotContext.entity();
+
 		if (entity.isOnFire()) {
 			entity.setRemainingFireTicks(0);
 		}
@@ -88,10 +90,10 @@ public class AshenCircletItem extends SpectrumTrinketItem {
 	
 	public static ResourceLocation LAVA_SPEED_ATTRIBUTE_ID = SpectrumCommon.locate("ashen_circlet_lava_speed");
 	public static ResourceLocation LAVA_VISIBILITY_ATTRIBUTE_ID = SpectrumCommon.locate("ashen_circlet_lava_visibility");
-	
+
 	@Override
-	public Multimap<Holder<Attribute>, AttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, ResourceLocation slotIdentifier) {
-		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
+	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
 		
 		modifiers.put(AdditionalEntityAttributes.LAVA_SPEED, new AttributeModifier(LAVA_SPEED_ATTRIBUTE_ID, LAVA_MOVEMENT_SPEED_MOD, AttributeModifier.Operation.ADD_VALUE));
 		modifiers.put(AdditionalEntityAttributes.LAVA_VISIBILITY, new AttributeModifier(LAVA_VISIBILITY_ATTRIBUTE_ID, LAVA_VIEW_DISTANCE_MOD, AttributeModifier.Operation.ADD_VALUE));

@@ -24,7 +24,7 @@ import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAn
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import de.dafuqs.spectrum.progression.UnlockToastManager;
 import de.dafuqs.spectrum.registries.client.SpectrumColorProviders;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;
@@ -348,8 +348,8 @@ public class SpectrumEventListeners {
 			}
 			Optional<TrinketComponent> optionalTrinketComponent = TrinketsApi.getTrinketComponent(entity);
 			if (optionalTrinketComponent.isPresent()) {
-				List<Tuple<SlotReference, ItemStack>> totems = optionalTrinketComponent.get().getEquipped(SpectrumItems.TOTEM_PENDANT);
-				for (Tuple<SlotReference, ItemStack> pair : totems) {
+				List<Tuple<SlotContext, ItemStack>> totems = optionalTrinketComponent.get().getEquipped(SpectrumItems.TOTEM_PENDANT);
+				for (Tuple<SlotContext, ItemStack> pair : totems) {
 					ItemStack totemStack = pair.getB();
 					
 					if (totemStack.getCount() > 0) {

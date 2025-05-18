@@ -4,7 +4,7 @@ import com.google.common.collect.Multimap;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.storage.FixedSingleInkStorage;
 import de.dafuqs.spectrum.api.item.GravitableItem;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,10 +18,10 @@ public abstract class GravityRingItem extends InkDrainTrinketItem implements Gra
 	public GravityRingItem(Properties settings, ResourceLocation unlockIdentifier, InkColor inkColor) {
 		super(settings, unlockIdentifier, inkColor);
 	}
-	
+
 	@Override
-	public Multimap<Holder<Attribute>, AttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, ResourceLocation slotIdentifier) {
-		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
+	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
 		
 		FixedSingleInkStorage inkStorage = getEnergyStorage(stack);
 		long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
@@ -36,11 +36,11 @@ public abstract class GravityRingItem extends InkDrainTrinketItem implements Gra
 	protected abstract ResourceLocation getAttributeID();
 	
 	protected abstract boolean negativeGravity();
-	
+
 	@Override
-	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		super.tick(stack, slot, entity);
-		applyGravity(stack, entity.level(), entity);
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
+		super.curioTick(slotContext, stack);
+		applyGravity(stack, slotContext.entity().level(), slotContext.entity());
 	}
 	
 	public double getBonus(long storedInk) {

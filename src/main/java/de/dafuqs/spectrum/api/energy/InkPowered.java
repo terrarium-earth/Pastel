@@ -6,7 +6,7 @@ import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.helpers.Support;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.neoforged.api.distmarker.Dist;
@@ -162,8 +162,8 @@ public interface InkPowered {
 		// trinket slots
 		Optional<TrinketComponent> optionalTrinketComponent = TrinketsApi.getTrinketComponent(player);
 		if (optionalTrinketComponent.isPresent()) {
-			List<Tuple<SlotReference, ItemStack>> trinketInkStorages = optionalTrinketComponent.get().getEquipped(itemStack -> itemStack.getItem() instanceof InkStorageItem<?>);
-			for (Tuple<SlotReference, ItemStack> trinketEnergyStorageStack : trinketInkStorages) {
+			List<Tuple<SlotContext, ItemStack>> trinketInkStorages = optionalTrinketComponent.get().getEquipped(itemStack -> itemStack.getItem() instanceof InkStorageItem<?>);
+			for (Tuple<SlotContext, ItemStack> trinketEnergyStorageStack : trinketInkStorages) {
 				amount -= tryDrainEnergy(trinketEnergyStorageStack.getB(), color, amount, player);
 				if (amount <= 0) {
 					return true;
@@ -200,8 +200,8 @@ public interface InkPowered {
 		// trinket slots
 		Optional<TrinketComponent> optionalTrinketComponent = TrinketsApi.getTrinketComponent(player);
 		if (optionalTrinketComponent.isPresent()) {
-			List<Tuple<SlotReference, ItemStack>> trinketInkStorages = optionalTrinketComponent.get().getEquipped(itemStack -> itemStack.getItem() instanceof InkStorageItem<?>);
-			for (Tuple<SlotReference, ItemStack> trinketEnergyStorageStack : trinketInkStorages) {
+			List<Tuple<SlotContext, ItemStack>> trinketInkStorages = optionalTrinketComponent.get().getEquipped(itemStack -> itemStack.getItem() instanceof InkStorageItem<?>);
+			for (Tuple<SlotContext, ItemStack> trinketEnergyStorageStack : trinketInkStorages) {
 				available += tryGetEnergy(trinketEnergyStorageStack.getB(), color);
 			}
 		}
@@ -244,8 +244,8 @@ public interface InkPowered {
 		// trinket slot
 		Optional<TrinketComponent> optionalTrinketComponent = TrinketsApi.getTrinketComponent(player);
 		if (optionalTrinketComponent.isPresent()) {
-			List<Tuple<SlotReference, ItemStack>> trinketInkStorages = optionalTrinketComponent.get().getEquipped(itemStack -> itemStack.getItem() instanceof InkStorageItem<?>);
-			for (Tuple<SlotReference, ItemStack> trinketEnergyStorageStack : trinketInkStorages) {
+			List<Tuple<SlotContext, ItemStack>> trinketInkStorages = optionalTrinketComponent.get().getEquipped(itemStack -> itemStack.getItem() instanceof InkStorageItem<?>);
+			for (Tuple<SlotContext, ItemStack> trinketEnergyStorageStack : trinketInkStorages) {
 				amount -= tryGetEnergy(trinketEnergyStorageStack.getB(), color);
 				if (amount <= 0) {
 					return true;

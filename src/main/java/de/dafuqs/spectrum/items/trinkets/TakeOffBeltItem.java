@@ -9,7 +9,7 @@ import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.particle.VectorPattern;
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.item.v1.EnchantingContext;
@@ -63,9 +63,10 @@ public class TakeOffBeltItem extends SpectrumTrinketItem {
 	}
 	
 	@Override
-	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
+		LivingEntity entity = slotContext.entity();
 		Level world = entity.level();
-		super.tick(stack, slot, entity);
+		super.curioTick(slotContext, stack);
 		
 		if (!world.isClientSide) {
 			if (entity.isShiftKeyDown() && entity.onGround()) {

@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.items.trinkets.TakeOffBeltItem;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
@@ -32,7 +32,7 @@ public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBelt
 		this.trigger(player, (conditions) -> {
 			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
 			if (component.isPresent()) {
-				List<Tuple<SlotReference, ItemStack>> equipped = component.get().getEquipped(SpectrumItems.TAKE_OFF_BELT);
+				List<Tuple<SlotContext, ItemStack>> equipped = component.get().getEquipped(SpectrumItems.TAKE_OFF_BELT);
 				if (!equipped.isEmpty()) {
 					ItemStack firstBelt = equipped.getFirst().getB();
 					if (firstBelt != null) {

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.items.trinkets;
 
 import de.dafuqs.spectrum.api.item.AzureDikeItem;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
@@ -17,25 +17,19 @@ public abstract class AzureDikeTrinketItem extends SpectrumTrinketItem implement
 	public AzureDikeTrinketItem(Properties settings, ResourceLocation unlockIdentifier) {
 		super(settings, unlockIdentifier);
 	}
-	
+
 	@Override
-	public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		super.onEquip(stack, slot, entity);
-		recalculate(entity);
+	public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+		super.onEquip(slotContext, prevStack, stack);
+		recalculate(slotContext.entity());
 	}
-	
+
 	@Override
-	public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		super.onUnequip(stack, slot, entity);
-		recalculate(entity);
+	public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+		super.onUnequip(slotContext, newStack, stack);
+		recalculate(slotContext.entity());
 	}
-	
-	@Override
-	public void onBreak(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		super.onBreak(stack, slot, entity);
-		recalculate(entity);
-	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {

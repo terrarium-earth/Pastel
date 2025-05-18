@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.api.item;
 import de.dafuqs.spectrum.cca.azure_dike.AzureDikeComponent;
 import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
 import de.dafuqs.spectrum.cca.azure_dike.DefaultAzureDikeComponent;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.util.Tuple;
@@ -40,7 +40,7 @@ public interface AzureDikeItem {
 				float rechargeSpeedModifier = 1F;
 				float rechargeDelayAfterDamageModifier = 1F;
 				float maxAzureDikeMultiplier = 1F;
-				for (Tuple<SlotReference, ItemStack> pair : trinketComponent.get().getAllEquipped()) {
+				for (Tuple<SlotContext, ItemStack> pair : trinketComponent.get().getAllEquipped()) {
 					ItemStack stack = pair.getB();
 					if (pair.getB().getItem() instanceof AzureDikeItem azureDikeItem) {
 						maxAzureDike += azureDikeItem.maxAzureDike(stack);

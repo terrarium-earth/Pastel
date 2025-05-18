@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.items.trinkets;
 import de.dafuqs.spectrum.api.energy.InkPowered;
 import de.dafuqs.spectrum.api.energy.InkPoweredStatusEffectInstance;
 import de.dafuqs.spectrum.api.item.InkPoweredPotionFillable;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -51,20 +51,22 @@ public class PotionPendantItem extends SpectrumTrinketItem implements InkPowered
 	public int maxEffectAmplifier() {
 		return maxAmplifier;
 	}
-	
+
 	@Override
-    public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		Level world = entity.level();
-		super.onEquip(stack, slot, entity);
-		if (!world.isClientSide && entity instanceof Player player) {
+    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+		Level world = slotContext.entity().level();
+		super.onEquip(slotContext, prevStack, stack);
+		if (!world.isClientSide && slotContext.entity() instanceof Player player) {
 			grantEffects(stack, player);
 		}
 	}
-	
+
 	@Override
-    public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+		LivingEntity entity = slotContext.entity();
+
 		Level world = entity.level();
-		super.tick(stack, slot, entity);
+		super.curioTick(slotContext, stack);
 		if (!world.isClientSide && entity.level().getGameTime() % TRIGGER_EVERY_X_TICKS == 0 && entity instanceof Player player) {
 			grantEffects(stack, player);
 		}

@@ -6,7 +6,7 @@ import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAn
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -42,8 +42,9 @@ public class RadiancePinItem extends SpectrumTrinketItem {
 	}
 	
 	@Override
-	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		super.tick(stack, slot, entity);
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
+		super.curioTick(slotContext, stack);
+		LivingEntity entity = slotContext.entity();
 		Level world = entity.level();
 		if (!world.isClientSide && world.getGameTime() % CHECK_EVERY_X_TICKS == 0) {
 			if (entity instanceof Player playerEntity && playerEntity.isSpectator()) {

@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import de.dafuqs.spectrum.SpectrumCommon;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -38,10 +38,12 @@ public class AttackRingItem extends SpectrumTrinketItem {
 			return Math.max(0, 1 + Math.log10(mod));
 		}
 	}
-	
+
 	@Override
-	public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		super.onUnequip(stack, slot, entity);
+	public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+		super.onUnequip(slotContext, newStack, stack);
+		LivingEntity entity = slotContext.entity();
+
 		if (entity.getAttributes().hasModifier(Attributes.ATTACK_DAMAGE, AttackRingItem.ATTACK_RING_DAMAGE_ID)) {
 			Multimap<Holder<Attribute>, AttributeModifier> map = Multimaps.newMultimap(Maps.newLinkedHashMap(), ArrayList::new);
 			map.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(AttackRingItem.ATTACK_RING_DAMAGE_ID, AttackRingItem.getAttackModifierForEntity(entity), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));

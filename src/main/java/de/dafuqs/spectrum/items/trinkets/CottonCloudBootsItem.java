@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.items.trinkets;
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -19,10 +19,12 @@ public class CottonCloudBootsItem extends SpectrumTrinketItem {
 	public CottonCloudBootsItem(Properties settings) {
 		super(settings, SpectrumCommon.locate("unlocks/trinkets/cotton_cloud_boots"));
 	}
-	
+
 	@Override
-	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		super.tick(stack, slot, entity);
+	public void curioTick(SlotContext slotContext, ItemStack stack) {
+		super.curioTick(slotContext, stack);
+		LivingEntity entity = slotContext.entity();
+
 		Level world = entity.level();
 		if (entity.isSprinting() && !entity.onGround() && !entity.isShiftKeyDown()) {
 			Vec3 velocity = entity.getDeltaMovement();

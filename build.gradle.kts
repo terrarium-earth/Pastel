@@ -29,6 +29,20 @@ cloche {
         neoforge {
             loaderVersion = "21.1.172"
 
+            dependencies {
+                val curios = module(group = "top.theillusivec4.curios", name = "curios-neoforge", version = "9.5.1+1.21.1")
+
+                compileOnly(curios.copy()) {
+                    artifact {
+                        classifier = "api"
+                    }
+                }
+
+                runtimeOnly(curios)
+
+
+            }
+
             data()
             test()
 
@@ -47,14 +61,3 @@ cloche {
     }
 }
 
-dependencies {
-    val curios = create(group = "top.theillusivec4.curios", name = "curios-neoforge", version = "9.5.1+1.21.1")
-
-    compileOnly(curios.copy()) {
-        artifact {
-            classifier = "api"
-        }
-    }
-
-    runtimeOnly(curios)
-}

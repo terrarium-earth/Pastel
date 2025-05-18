@@ -8,8 +8,6 @@ import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
-import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.Nullable;
+import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
@@ -47,12 +46,12 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 	}
 
 	@Override
-	public Multimap<Holder<Attribute>, AttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, ResourceLocation slotIdentifier) {
-		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getModifiers(stack, slot, entity, slotIdentifier);
+	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
 		modifiers.put(SpectrumEntityAttributes.MENTAL_PRESENCE, new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, -1F, AttributeModifier.Operation.ADD_VALUE));
 		return modifiers;
 	}
-	
+
 	public static boolean testEffectFor(LivingEntity entity, Holder<MobEffect> effect) {
 		if (effect.value().isBeneficial())
 			return false;
@@ -60,13 +59,7 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 		if (effect.is(SpectrumStatusEffectTags.BYPASSES_NECTAR_GLOVES))
 			return false;
 
-		var trinkets = TrinketsApi.getTrinketComponent(entity);
-
-		if (trinkets.isEmpty())
-			return false;
-
-		var component = trinkets.get();
-		return component.isEquipped(SpectrumItems.AETHER_GRACED_NECTAR_GLOVES) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == SpectrumStatusEffects.FRENZY);
+		return hasEquipped(entity, SpectrumItems.AETHER_GRACED_NECTAR_GLOVES) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == SpectrumStatusEffects.FRENZY);
 	}
 
 	public static boolean tryBlockEffect(LivingEntity entity, int cost) {

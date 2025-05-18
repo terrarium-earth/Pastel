@@ -8,7 +8,7 @@ import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.server.level.ServerLevel;
@@ -55,7 +55,7 @@ public abstract class ProjectileEntityMixin {
 					} else {
 						Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
 						if (component.isPresent()) {
-							List<Tuple<SlotReference, ItemStack>> equipped = component.get().getEquipped(SpectrumItems.PUFF_CIRCLET);
+							List<Tuple<SlotContext, ItemStack>> equipped = component.get().getEquipped(SpectrumItems.PUFF_CIRCLET);
 							if (!equipped.isEmpty()) {
 								var charges = AzureDikeProvider.getAzureDikeCharges(livingEntity);
 								if (charges > 0) {

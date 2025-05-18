@@ -4,7 +4,7 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
 import de.dafuqs.spectrum.status_effects.DivinityStatusEffect;
-import dev.emi.trinkets.api.SlotReference;
+import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,8 +26,10 @@ public class CircletOfArroganceItem extends SpectrumTrinketItem {
     }
 
     @Override
-    public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        super.onEquip(stack, slot, entity);
+    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+        super.onEquip(slotContext, prevStack, stack);
+        LivingEntity entity = slotContext.entity();
+
         giveEffect(entity);
         if (entity instanceof ServerPlayer serverPlayerEntity) {
 			PlayDivinityAppliedEffectsPayload.playDivinityAppliedEffects(serverPlayerEntity);
@@ -35,11 +37,12 @@ public class CircletOfArroganceItem extends SpectrumTrinketItem {
     }
 
     @Override
-    public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        super.tick(stack, slot, entity);
-        Level world = entity.level();
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        super.curioTick(slotContext, stack);
+
+        Level world = slotContext.entity().level();
         if (!world.isClientSide && world.getGameTime() % TRIGGER_EVERY_X_TICKS == 0) {
-            giveEffect(entity);
+            giveEffect(slotContext.entity());
         }
     }
 
