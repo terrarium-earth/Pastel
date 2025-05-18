@@ -3,7 +3,7 @@ package de.dafuqs.revelationary.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.dafuqs.revelationary.Revelationary;
-import net.fabricmc.loader.api.FabricLoader;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class RevelationaryConfig {
-	private static final File CONFIG_FILE_PATH = new File(FabricLoader.getInstance().getConfigDir().toFile(), "Revelationary.json");
+	private static final File CONFIG_FILE_PATH = new File(FMLPaths.CONFIGDIR.get().toFile(), "Revelationary.json");
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 	private static Config CONFIG = null;
 

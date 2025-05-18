@@ -70,15 +70,12 @@ import de.dafuqs.spectrum.registries.SpectrumTreeDecoratorTypes;
 import de.dafuqs.spectrum.registries.SpectrumWaxableBlocks;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -87,6 +84,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -149,7 +147,7 @@ public class SpectrumCommon {
 		logInfo("Finished loading config file.");
 	}
 
-	public SpectrumCommon() {
+	public SpectrumCommon(IEventBus modEventBus) {
 		logInfo("Starting Common Startup");
 		
 		// Register internals
@@ -157,7 +155,7 @@ public class SpectrumCommon {
 		InkColors.register();
 		InkColorMixes.register();
 		SpectrumEntityAttributes.register();
-		SpectrumLoadConditions.register();
+		SpectrumLoadConditions.register(modEventBus);
 		
 		logInfo("Registering Component Types...");
 		SpectrumDataComponentTypes.register();
@@ -312,7 +310,7 @@ public class SpectrumCommon {
 		
 		// Builtin Resource Packs
 		logInfo("Registering Builtin Resource Packs...");
-		Optional<ModContainer> modContainer = FabricLoader.getInstance().getModContainer(SpectrumCommon.MOD_ID);
+
 		if (modContainer.isPresent()) {
 			ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_style_amethyst"), modContainer.get(), Component.nullToEmpty("Spectrum Style Amethyst"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_generation_1"), modContainer.get(), Component.nullToEmpty("Generation 1 Spectrum textures"), ResourcePackActivationType.NORMAL);

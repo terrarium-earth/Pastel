@@ -9,7 +9,6 @@ import de.dafuqs.spectrum.sound.OnPrimordialFireSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -26,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.fml.util.thread.EffectiveSide;
 import org.jetbrains.annotations.NotNull;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
@@ -50,7 +50,7 @@ public class OnPrimordialFireComponent implements AutoSyncedComponent, ServerTic
 	
 	/* prevent the static initializer from attempting to write to the client-only field in common code */
 	static {
-		if (Dist.CLIENT == FabricLoader.getInstance().getEnvironmentType()) soundInstance = Optional.empty();
+		if (EffectiveSide.get().isClient()) soundInstance = Optional.empty();
 	}
 
 	public static final ComponentKey<OnPrimordialFireComponent> ON_PRIMORDIAL_FIRE_COMPONENT = ComponentRegistry.getOrCreate(SpectrumCommon.locate("on_primordial_fire"), OnPrimordialFireComponent.class);

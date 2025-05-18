@@ -1,12 +1,12 @@
 package de.dafuqs.spectrum.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -24,7 +24,7 @@ public class DumpTagsCommand {
 	}
 	
 	private static int execute(CommandSourceStack source) {
-		File baseDir = FabricLoader.getInstance().getGameDir().resolve("tag_dump").toFile();
+		File baseDir = FMLPaths.GAMEDIR.get().resolve("tag_dump").toFile();
 		baseDir.mkdirs();
 		
 		source.registryAccess().registries().forEach(registry -> {

@@ -1,11 +1,11 @@
 package de.dafuqs.spectrum.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,7 +23,7 @@ public class DumpRegistriesCommand {
 	}
 	
 	private static int execute(CommandSourceStack source) {
-		File directory = FabricLoader.getInstance().getGameDir().resolve("registry_dump").toFile();
+		File directory = FMLPaths.GAMEDIR.get().resolve("registry_dump").toFile();
 		
 		source.registryAccess().registries().forEach(registry -> {
 			File file = new File(directory, registry.key().location().toString().replace(":", "/") + ".txt");

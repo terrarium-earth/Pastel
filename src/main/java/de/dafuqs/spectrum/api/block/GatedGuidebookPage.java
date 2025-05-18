@@ -2,8 +2,8 @@ package de.dafuqs.spectrum.api.block;
 
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.recipe.GatedRecipe;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.loading.FMLLoader;
 
 import java.util.Map;
 import java.util.Optional;
@@ -23,7 +23,7 @@ public interface GatedGuidebookPage {
 	);
 	
 	static void runSanityCheck(ResourceLocation entryId, int pageNr, String pageAdvancement, GatedRecipe<?>... recipes) {
-		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
+		if (!FMLLoader.isProduction()) {
 			if (pageAdvancement != null && !pageAdvancement.isEmpty()) {
 				for (GatedRecipe<?> recipe : recipes) {
 					if (recipe == null) {
