@@ -27,13 +27,13 @@ import de.dafuqs.spectrum.render.capes.WorthinessChecker;
 import net.fabricmc.api.ClientModInitializer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.ModList;
 
 import java.util.Set;
 
@@ -94,7 +94,7 @@ public class SpectrumClient implements ClientModInitializer, RevealingCallback, 
 			SpectrumTooltips.register();
 		}
 		
-		if (FabricLoader.getInstance().isModLoaded("ears")) {
+		if (ModList.get().isLoaded("ears")) {
 			logInfo("Registering Ears Compat...");
 			EarsCompat.register();
 		}

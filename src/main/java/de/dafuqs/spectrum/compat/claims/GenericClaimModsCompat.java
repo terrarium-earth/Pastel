@@ -1,14 +1,14 @@
 package de.dafuqs.spectrum.compat.claims;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import net.neoforged.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 
 public class GenericClaimModsCompat {
 	
-	public static final boolean IS_COMMON_PROTECTION_API_PRESENT = FabricLoader.getInstance().isModLoaded("common-protection-api");
+	public static final boolean IS_COMMON_PROTECTION_API_PRESENT = ModList.get().isLoaded("common-protection-api");
 	
 	/**
 	 * Call this for all kinds of world modifications

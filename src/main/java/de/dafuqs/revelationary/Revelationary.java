@@ -4,8 +4,8 @@ import de.dafuqs.revelationary.api.advancements.AdvancementCriteria;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.packs.PackType;
+import net.neoforged.fml.ModList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +41,7 @@ public class Revelationary {
             RevelationRegistry.addRevelationAwares();
             RevelationRegistry.deepTrim();
         });
-        if (FabricLoader.getInstance().isModLoaded("sodium")) {
+        if (ModList.get().isLoaded("sodium")) {
             logWarning("Sodium detected. Chunk rebuilding will be done in cursed mode.");
         }
 

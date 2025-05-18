@@ -10,7 +10,15 @@ import top.theillusivec4.curios.api.CuriosCapability;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
+import static de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem.hasEquipped;
+
 public class TrinketCapabilityEventHandler {
+    private static void handleTrinketChange(SlotContext slotContext) {
+        if (slotContext.entity() instanceof ServerPlayer serverPlayerEntity) {
+            SpectrumAdvancementCriteria.TRINKET_CHANGE.trigger(serverPlayerEntity);
+        }
+    }
+
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerItem(CuriosCapability.ITEM, (stack, context) -> new ICurio() {
             @Override
@@ -35,16 +43,12 @@ public class TrinketCapabilityEventHandler {
 
             @Override
             public void onEquip(SlotContext slotContext, ItemStack prevStack) {
-                if (slotContext.entity() instanceof ServerPlayer serverPlayerEntity) {
-                    SpectrumAdvancementCriteria.TRINKET_CHANGE.trigger(serverPlayerEntity);
-                }
+                handleTrinketChange(slotContext);
             }
 
             @Override
             public void onUnequip(SlotContext slotContext, ItemStack newStack) {
-                if (slotContext.entity() instanceof ServerPlayer serverPlayerEntity) {
-                    SpectrumAdvancementCriteria.TRINKET_CHANGE.trigger(serverPlayerEntity);
-                }
+                handleTrinketChange(slotContext);
             }
         });
     }

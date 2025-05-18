@@ -2,16 +2,15 @@ package de.dafuqs.spectrum.items.trinkets;
 
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.SlotResult;
 
-import java.util.List;
 import java.util.Optional;
 
 public abstract class SpectrumTrinketItem extends Item {
@@ -23,27 +22,16 @@ public abstract class SpectrumTrinketItem extends Item {
 		this.unlockIdentifier = unlockIdentifier;
 	}
 	
-	public static boolean hasEquipped(Object entity, Item item) {
-		if (entity instanceof LivingEntity livingEntity) {
-			return hasEquipped(livingEntity, item);
-		}
-		return false;
+	public static boolean hasEquipped(SlotContext slotContext, Item item) {
+		return hasEquipped(slotContext.entity(), item);
 	}
 	
 	public static boolean hasEquipped(LivingEntity entity, Item item) {
-		Optional<TrinketComponent> trinketComponent = TrinketsApi.getTrinketComponent(entity);
-		return trinketComponent.map(component -> component.isEquipped(item)).orElse(false);
+		return getFirstEquipped(entity, item).isPresent();
 	}
 	
 	public static Optional<ItemStack> getFirstEquipped(LivingEntity entity, Item item) {
-		Optional<TrinketComponent> trinketComponent = TrinketsApi.getTrinketComponent(entity);
-		if (trinketComponent.isPresent()) {
-			List<Tuple<SlotReference, ItemStack>> stacks = trinketComponent.get().getEquipped(item);
-			if (!stacks.isEmpty()) {
-				return Optional.of(stacks.getFirst().getB());
-			}
-		}
-		return Optional.empty();
+		return CuriosApi.getCuriosInventory(entity).flatMap(inventory -> inventory.findFirstCurio(item)).map(SlotResult::stack);
 	}
 	
 	public ResourceLocation getUnlockIdentifier() {

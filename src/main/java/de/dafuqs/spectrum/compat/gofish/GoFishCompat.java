@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.compat.gofish;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -9,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.neoforged.fml.ModList;
 
 public class GoFishCompat {
 	
@@ -29,7 +29,7 @@ public class GoFishCompat {
 	}
 	
 	public static boolean isLoaded() {
-		return FabricLoader.getInstance().isModLoaded(MOD_ID);
+		return ModList.get().isLoaded(MOD_ID);
 	}
 	
 	public static boolean hasDeepfry(ItemStack itemStack) {

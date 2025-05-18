@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.mixin.compat;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.neoforged.fml.ModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -23,8 +23,8 @@ public final class Plugin implements IMixinConfigPlugin {
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
 		String COMPAT_PACKAGE_ROOT = Plugin.class.getPackageName(); // Shorthand getting the plugin package to ensure not making trouble with other mixins
 		String COMPAT_PRESENT_KEY = "present";
-		FabricLoader LOADER = FabricLoader.getInstance();
-		
+		ModList modList = ModList.get();
+
 		if (!mixinClassName.startsWith(COMPAT_PACKAGE_ROOT)) {
 			return true; // We do not meddle with the others' work
 		}
@@ -37,13 +37,13 @@ public final class Plugin implements IMixinConfigPlugin {
 
 		if (isPresentMixin) {
 			// Sodium compat breaks with embeddium
-			if (compatModId.equals("sodium") && LOADER.isModLoaded("embeddium"))
+			if (compatModId.equals("sodium") && modList.isLoaded("embeddium"))
 				return false;
 
 			// We only load the mixin if the mod we want to be present is found
-			return LOADER.isModLoaded(compatModId);
+			return modList.isLoaded(compatModId);
 		}
-		return !LOADER.isModLoaded(compatModId);
+		return !modList.isLoaded(compatModId);
 	}
 	
 	@Override

@@ -13,7 +13,7 @@ import de.dafuqs.spectrum.compat.neepmeat.NEEPMeatCompat;
 import de.dafuqs.spectrum.compat.travelersbackpack.TravelersBackpackCompat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.loader.api.FabricLoader;
+import net.neoforged.fml.ModList;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class SpectrumIntegrationPacks {
 	}
 	
 	protected static void registerIntegrationPack(String modId, Supplier<ModIntegrationPack> container) {
-		if (!SpectrumCommon.CONFIG.IntegrationPacksToSkipLoading.contains(modId) && FabricLoader.getInstance().isModLoaded(modId)) {
+		if (!SpectrumCommon.CONFIG.IntegrationPacksToSkipLoading.contains(modId) && ModList.get().isLoaded(modId)) {
 			INTEGRATION_PACKS.put(modId, container.get());
 		}
 	}
@@ -53,11 +53,11 @@ public class SpectrumIntegrationPacks {
 	public static void register() {
 		registerIntegrationPack(MODONOMICON_ID, () -> new ModonomiconCompat());
 		
-		if (!FabricLoader.getInstance().isModLoaded(EXCLUSIONS_LIB_ID)) {
+		if (!ModList.get().isLoaded(EXCLUSIONS_LIB_ID)) {
 			ExclusionsLibCompat.registerNotPresent();
 		}
 		
-		if (!FabricLoader.getInstance().isModLoaded(CONNECTOR_ID)) {
+		if (!ModList.get().isLoaded(CONNECTOR_ID)) {
 			// Connector on neoforge causes a lot of issues since most code bases
 			// of neoforge mods differ quite a lot from their fabric counterparts
 			registerIntegrationPack(AE2_ID, () -> new AE2Compat());
