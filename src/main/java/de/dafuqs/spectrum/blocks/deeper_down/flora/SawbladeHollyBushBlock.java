@@ -7,7 +7,7 @@ import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumLootTables;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -119,7 +119,7 @@ public class SawbladeHollyBushBlock extends BushBlock implements BonemealableBlo
     public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         int age = state.getValue(AGE);
         
-        if (canBeSheared(age) && handStack.is(ConventionalItemTags.SHEAR_TOOLS)) {
+        if (canBeSheared(age) && handStack.is(Tags.Items.TOOLS_SHEAR)) {
             if (!world.isClientSide) {
 				for (ItemStack stack : JadeVinePlantBlock.getHarvestedStacks(state, (ServerLevel) world, pos, world.getBlockEntity(pos), player, player.getMainHandItem(), SpectrumLootTables.SAWBLADE_HOLLY_SHEARING)) {
                     popResource(world, pos, stack);

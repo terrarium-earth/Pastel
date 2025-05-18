@@ -36,14 +36,14 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 			@Override
 			public <T> DataResult<Pair<MobEffectInstance, T>> apply(DynamicOps<T> ops, T input, DataResult<Pair<MobEffectInstance, T>> result) {
 				return result.map(pair -> {
-					ops.get(input, "incurable").flatMap(ops::getBooleanValue).ifSuccess(v -> pair.getFirst().spectrum$setIncurable(v));
+					ops.get(input, "incurable").flatMap(ops::getBooleanValue).ifSuccess(v -> ((StatusEffectInstanceInjector) pair.getFirst()).spectrum$setIncurable(v));
 					return pair;
 				});
 			}
 			
 			@Override
 			public <T> DataResult<T> coApply(DynamicOps<T> ops, MobEffectInstance inst, DataResult<T> result) {
-				return result.map(output -> ops.set(output, "incurable", ops.createBoolean(inst.spectrum$isIncurable())));
+				return result.map(output -> ops.set(output, "incurable", ops.createBoolean(((StatusEffectInstanceInjector) inst).spectrum$isIncurable())));
 			}
 		});
 	}
@@ -56,7 +56,7 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 			MobEffectInstance existingInstance = (MobEffectInstance) (Object) this;
 			
 			int newAmplifier = 1 + existingInstance.getAmplifier() + newEffect.getAmplifier();
-			existingInstance.spectrum$setAmplifier(newAmplifier);
+			((StatusEffectInstanceInjector) existingInstance).spectrum$setAmplifier(newAmplifier);
 			
 			cir.setReturnValue(true);
 		}
@@ -65,8 +65,8 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 	
 	@Inject(method = "update", at = @At("RETURN"))
 	private void readIncurable(MobEffectInstance that, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 0) LocalBooleanRef changed) {
-		if (incurable != that.spectrum$isIncurable()) {
-			spectrum$setIncurable(that.spectrum$isIncurable());
+		if (incurable != ((StatusEffectInstanceInjector) that).spectrum$isIncurable()) {
+			spectrum$setIncurable(((StatusEffectInstanceInjector) that).spectrum$isIncurable());
 			changed.set(true);
 		}
 	}

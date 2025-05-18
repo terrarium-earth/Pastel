@@ -13,7 +13,7 @@ import de.dafuqs.spectrum.items.magic_items.KnowledgeGemItem;
 import de.dafuqs.spectrum.items.magic_items.PipeBombItem;
 import de.dafuqs.spectrum.items.magic_items.ampoules.GlassAmpouleItem;
 import de.dafuqs.spectrum.items.tools.OmniAcceleratorItem;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -115,7 +115,7 @@ public class SpectrumItemProjectileBehaviors {
 				}
 				return stack;
 			}
-		}, ConventionalItemTags.MUSIC_DISCS);
+		}, Tags.Items.MUSIC_DISCS);
 		
 		ItemProjectileBehavior.register(new ItemProjectileBehavior.Default() {
 			@Override

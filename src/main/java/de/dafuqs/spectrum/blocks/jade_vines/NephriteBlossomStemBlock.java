@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.blocks.jade_vines;
 
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -49,7 +49,7 @@ public class NephriteBlossomStemBlock extends BushBlock {
 	
 	@Override
 	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (handStack.is(ConventionalItemTags.SHEAR_TOOLS) && state.getValue(STEM_PART) == StemComponent.BASE) {
+		if (handStack.is(Tags.Items.TOOLS_SHEAR) && state.getValue(STEM_PART) == StemComponent.BASE) {
 			BlockState newState = state.setValue(STEM_PART, StemComponent.STEM);
 			world.setBlockAndUpdate(pos, newState);
 			player.playNotifySound(SoundEvents.MOOSHROOM_SHEAR, SoundSource.BLOCKS, 1, 0.9F + player.getRandom().nextFloat() * 0.2F);

@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.helpers;
 
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.injectors.StatusEffectInstanceInjector;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
 import net.minecraft.resources.ResourceLocation;
@@ -61,6 +62,6 @@ public class StatusEffectHelper {
 		if (type == SpectrumStatusEffects.ETERNAL_SLUMBER || type == SpectrumStatusEffects.FATAL_SLUMBER)
 			return false;
 		
-		return instance.spectrum$isIncurable();
+		return ((StatusEffectInstanceInjector) instance).spectrum$isIncurable();
 	}
 }

@@ -5,7 +5,7 @@ import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumLootTables;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -56,6 +56,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
@@ -100,7 +101,7 @@ public class EggLayingWoolyPigEntity extends Animal implements Shearable {
 			ItemStack itemStack2 = ItemUtils.createFilledResult(handStack, player, Items.MILK_BUCKET.getDefaultInstance());
 			player.setItemInHand(hand, itemStack2);
 			return InteractionResult.sidedSuccess(world.isClientSide());
-		} else if (handStack.is(ConventionalItemTags.SHEAR_TOOLS)) {
+		} else if (handStack.is(Tags.Items.TOOLS_SHEAR)) {
 			if (!world.isClientSide() && this.readyForShearing()) {
 				this.shear(SoundSource.PLAYERS);
 				this.gameEvent(GameEvent.SHEAR, player);

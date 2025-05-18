@@ -14,7 +14,7 @@ import de.dafuqs.spectrum.registries.SpectrumItemTags;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -507,7 +507,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 		
 		// clipping using shears
 		ItemStack handStack = player.getMainHandItem();
-		if (this.readyForShearing() && handStack.is(ConventionalItemTags.SHEAR_TOOLS)) {
+		if (this.readyForShearing() && handStack.is(Tags.Items.TOOLS_SHEAR)) {
 			
 			if (!this.level().isClientSide()) {
 				setTarget(player);

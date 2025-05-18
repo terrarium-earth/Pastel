@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.blocks.deeper_down.flora;
 
 import de.dafuqs.spectrum.helpers.BlockReference;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -54,7 +54,7 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
         var reference = BlockReference.of(state, pos);
         var creative = player.getAbilities().instabuild;
         
-        if (handStack.is(ConventionalItemTags.SHEAR_TOOLS)) {
+        if (handStack.is(Tags.Items.TOOLS_SHEAR)) {
             if (reference.getProperty(LIFE_STAGE) != LifeStage.GROWING)
                 return ItemInteractionResult.FAIL;
 

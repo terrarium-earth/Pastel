@@ -9,11 +9,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -25,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class ParticleSpawnerBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {
+public class ParticleSpawnerBlockEntity extends BlockEntity implements MenuProvider {
 	
 	protected ParticleSpawnerConfiguration configuration;
 	protected boolean initialized = false;
@@ -121,9 +123,9 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements ExtendedS
 	public ParticleSpawnerConfiguration getConfiguration() {
 		return configuration;
 	}
-	
+
 	@Override
-	public BlockPos getScreenOpeningData(ServerPlayer serverPlayerEntity) {
-		return this.worldPosition;
+	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+		buffer.writeBlockPos(worldPosition);
 	}
 }

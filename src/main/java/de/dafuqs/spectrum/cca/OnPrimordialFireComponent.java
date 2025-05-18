@@ -8,7 +8,7 @@ import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
 import de.dafuqs.spectrum.sound.OnPrimordialFireSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -158,7 +158,7 @@ public class OnPrimordialFireComponent implements AutoSyncedComponent, ServerTic
 
 		//Bosses have great and exceptional souls that can resist a lot more.
 		//95% less damage to them before reductions and caps
-		if (entity.getType().is(ConventionalEntityTypeTags.BOSSES))
+		if (entity.getType().is(Tags.EntityTypes.BOSSES))
 			baseDamage /= 20F;
 
         return baseDamage * getDamagePenalties(entity) * getDamageBonuses(entity);

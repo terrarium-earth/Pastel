@@ -1,5 +1,6 @@
 package de.dafuqs.fractal.api;
 
+import de.dafuqs.fractal.interfaces.ItemGroupParent;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -32,10 +33,12 @@ public class ItemSubGroup extends CreativeModeTab {
 		this.identifier = identifier;
 		this.parent = parent;
 
-        this.indexInParent = parent.fractal$getChildren().size();
-		parent.fractal$getChildren().add(this);
-		if (parent.fractal$getSelectedChild() == null) {
-			parent.fractal$setSelectedChild(this);
+		ItemGroupParent groupParent = (ItemGroupParent) parent;
+
+        this.indexInParent = groupParent.fractal$getChildren().size();
+		groupParent.fractal$getChildren().add(this);
+		if (groupParent.fractal$getSelectedChild() == null) {
+			groupParent.fractal$setSelectedChild(this);
 		}
 	}
 	

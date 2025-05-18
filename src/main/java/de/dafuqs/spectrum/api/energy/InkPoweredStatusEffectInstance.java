@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.components.InkPoweredComponent;
 import de.dafuqs.spectrum.helpers.Support;
+import de.dafuqs.spectrum.injectors.StatusEffectInstanceInjector;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -57,7 +58,7 @@ public class InkPoweredStatusEffectInstance {
 		this.customColor = customColor;
 		this.unidentifiable = unidentifiable;
 		this.incurable = incurable;
-		if (incurable) statusEffectInstance.spectrum$setIncurable(true);
+		if (incurable) ((StatusEffectInstanceInjector) statusEffectInstance).spectrum$setIncurable(true);
 	}
 	
 	public MobEffectInstance getStatusEffectInstance() {

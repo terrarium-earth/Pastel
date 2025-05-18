@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.fractal.api.ItemSubGroup;
+import de.dafuqs.fractal.interfaces.ItemGroupParent;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
@@ -37,7 +38,7 @@ public class SpectrumItemGroups {
 			.icon(() -> new ItemStack(SpectrumBlocks.PEDESTAL_ALL_BASIC))
 			.displayItems((displayContext, entries) -> {
 				entries.accept(SpectrumBlocks.PEDESTAL_ALL_BASIC, CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
-				for (ItemSubGroup subGroup : SpectrumItemGroups.MAIN.fractal$getChildren()) {
+				for (ItemSubGroup subGroup : ((ItemGroupParent) SpectrumItemGroups.MAIN).fractal$getChildren()) {
 					entries.acceptAll(subGroup.getSearchTabDisplayItems(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
 				}
 			})

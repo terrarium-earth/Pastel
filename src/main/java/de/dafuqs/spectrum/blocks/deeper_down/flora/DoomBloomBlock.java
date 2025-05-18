@@ -6,7 +6,7 @@ import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.registries.SpectrumBlockTags;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -174,7 +174,7 @@ public class DoomBloomBlock extends FlowerBlock implements BonemealableBlock {
 	@Override
 	public void playerDestroy(Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
 		super.playerDestroy(world, player, pos, state, blockEntity, stack);
-		if (SpectrumEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.SILK_TOUCH, stack) == 0 && !stack.is(ConventionalItemTags.SHEAR_TOOLS)) {
+		if (SpectrumEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.SILK_TOUCH, stack) == 0 && !stack.is(Tags.Items.TOOLS_SHEAR)) {
 			explode(world, pos, state);
 		}
 	}

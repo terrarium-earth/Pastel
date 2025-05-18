@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import de.dafuqs.spectrum.helpers.StatusEffectHelper;
+import de.dafuqs.spectrum.injectors.StatusEffectInstanceInjector;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
@@ -97,7 +98,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 		var cost = 1200 + 600 * amplifier;
 		
 		if (immunity != null && immunity.getDuration() >= cost) {
-			immunity.spectrum$setDuration(Math.max(5, immunity.getDuration() - cost));
+			((StatusEffectInstanceInjector) immunity).spectrum$setDuration(Math.max(5, immunity.getDuration() - cost));
 			if (!instance.level().isClientSide()) {
 				((ServerLevel) instance.level()).getChunkSource().broadcastAndSend(instance, new ClientboundUpdateMobEffectPacket(instance.getId(), immunity, false));
 			}

@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.items.tools;
 
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
+import de.dafuqs.spectrum.injectors.StatusEffectInstanceInjector;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
@@ -94,7 +95,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 					.stream()
 					.filter(instance -> instance.getEffect().value().isBeneficial())
 					.filter(instance -> !instance.isInfiniteDuration())
-					.filter(instance -> !instance.spectrum$isIncurable())
+					.filter(instance -> !((StatusEffectInstanceInjector) instance).spectrum$isIncurable())
 					.findFirst();
 
 			if (stolenEffect.isEmpty() || !target.removeEffect(stolenEffect.get().getEffect()))

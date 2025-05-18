@@ -6,7 +6,6 @@ import de.dafuqs.spectrum.api.predicate.block.BrokenBlockPredicate;
 import de.dafuqs.spectrum.data.DatagenProxy;
 import de.dafuqs.spectrum.data_loaders.resonance_processors.DropSelfResonanceProcessor;
 import de.dafuqs.spectrum.data_loaders.resonance_processors.ModifyDropsResonanceProcessor;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -14,6 +13,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -24,7 +24,7 @@ public class SpectrumResonanceProcessors {
 	private static final DeferredRegistrar.Contextual<DatagenProxy.BootstrapContext<ResonanceProcessor>> REGISTRAR = new DeferredRegistrar.Contextual<>(DatagenProxy.IS_DATAGEN);
 	
 	public static final ResourceKey<ResonanceProcessor> PURE_RESONANCES_FROM_ORE = register("pure_resonances_from_ore", ctx -> ModifyDropsResonanceProcessor
-			.builder(BrokenBlockPredicate.Builder.create().registryEntryList(ctx.blocks().getOrThrow(ConventionalBlockTags.ORES)).build())
+			.builder(BrokenBlockPredicate.Builder.create().registryEntryList(ctx.blocks().getOrThrow(Tags.Blocks.ORES)).build())
 			.addModifiedDrop(Ingredient.of(Items.COAL), SpectrumItems.PURE_COAL)
 			.addModifiedDrop(Ingredient.of(Items.RAW_COPPER), SpectrumItems.PURE_COPPER)
 			.addModifiedDrop(Ingredient.of(Items.DIAMOND), SpectrumItems.PURE_DIAMOND)
@@ -46,14 +46,14 @@ public class SpectrumResonanceProcessors {
 	public static final ResourceKey<ResonanceProcessor> BRUSHABLE_BLOCKS = registerDropSelf("brushable_blocks", SpectrumBlockTags.C_BRUSHABLE_BLOCKS, builder -> builder
 			.copyNbt("LootTable", "LootTableSeed", "item"));
 	
-	public static final ResourceKey<ResonanceProcessor> BUDDING_BLOCKS = registerDropSelf("budding_blocks", ConventionalBlockTags.BUDDING_BLOCKS, builder -> builder);
+	public static final ResourceKey<ResonanceProcessor> BUDDING_BLOCKS = registerDropSelf("budding_blocks", Tags.Blocks.BUDDING_BLOCKS, builder -> builder);
 	
-	public static final ResourceKey<ResonanceProcessor> BUDS = registerDropSelf("buds", ConventionalBlockTags.BUDS, builder -> builder);
+	public static final ResourceKey<ResonanceProcessor> BUDS = registerDropSelf("buds", Tags.Blocks.BUDS, builder -> builder);
 	
 	public static final ResourceKey<ResonanceProcessor> CAKE = registerDropSelf("cake", Blocks.CAKE, builder -> builder
 			.copyState("bites"));
 	
-	public static final ResourceKey<ResonanceProcessor> CLUSTERS = registerDropSelf("clusters", ConventionalBlockTags.CLUSTERS, builder -> builder);
+	public static final ResourceKey<ResonanceProcessor> CLUSTERS = registerDropSelf("clusters", Tags.Blocks.CLUSTERS, builder -> builder);
 	
 	public static final ResourceKey<ResonanceProcessor> COMPOSTER = registerDropSelf("composter", Blocks.COMPOSTER, builder -> builder
 			.copyState("level"));

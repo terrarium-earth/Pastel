@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
+import net.neoforged.neoforge.common.Tags;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.HolderSet;
 import net.minecraft.world.item.Item;
@@ -33,7 +33,7 @@ public abstract class ItemPredicateMixin {
 		var entries = items.get();
 		
 		if (entries.stream().anyMatch(e -> e.value().equals(Items.SHEARS))) {
-			return stack.is(ConventionalItemTags.SHEAR_TOOLS);
+			return stack.is(Tags.Items.TOOLS_SHEAR);
 		}
 		
 		return false;

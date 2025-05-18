@@ -3,12 +3,12 @@ package de.dafuqs.spectrum.registries;
 import de.dafuqs.spectrum.SpectrumCommon;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.neoforged.neoforge.common.Tags;
 
 public class SpectrumPlacedFeatures {
 
@@ -18,14 +18,14 @@ public class SpectrumPlacedFeatures {
 	
 	public static void addBiomeModifications() {
 		// Geodes
-		BiomeModifications.addFeature(BiomeSelectors.tag(ConventionalBiomeTags.IS_OVERWORLD), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("citrine_geode")));
-		BiomeModifications.addFeature(BiomeSelectors.tag(ConventionalBiomeTags.IS_OVERWORLD), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("topaz_geode")));
+		BiomeModifications.addFeature(BiomeSelectors.tag(Tags.Biomes.IS_OVERWORLD), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("citrine_geode")));
+		BiomeModifications.addFeature(BiomeSelectors.tag(Tags.Biomes.IS_OVERWORLD), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("topaz_geode")));
 		
 		// Ores
-		BiomeModifications.addFeature(BiomeSelectors.tag(ConventionalBiomeTags.IS_OVERWORLD), GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("shimmerstone_ore")));
-		BiomeModifications.addFeature(BiomeSelectors.tag(ConventionalBiomeTags.IS_OVERWORLD), GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("azurite_ore")));
-		BiomeModifications.addFeature(BiomeSelectors.tag(ConventionalBiomeTags.IS_NETHER), GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("stratine_ore")));
-		BiomeModifications.addFeature(BiomeSelectors.tag(ConventionalBiomeTags.IS_END), GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("paltaeria_ore")));
+		BiomeModifications.addFeature(BiomeSelectors.tag(Tags.Biomes.IS_OVERWORLD), GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("shimmerstone_ore")));
+		BiomeModifications.addFeature(BiomeSelectors.tag(Tags.Biomes.IS_OVERWORLD), GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("azurite_ore")));
+		BiomeModifications.addFeature(BiomeSelectors.tag(Tags.Biomes.IS_NETHER), GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("stratine_ore")));
+		BiomeModifications.addFeature(BiomeSelectors.tag(Tags.Biomes.IS_END), GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("paltaeria_ore")));
 		
 		BiomeModifications.addFeature(BiomeSelectors.tag(SpectrumBiomeTags.COLORED_TREES_GENERATING_IN), GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("colored_tree_patch")));
 		
@@ -41,13 +41,13 @@ public class SpectrumPlacedFeatures {
 				if (!context.canGenerateIn(LevelStem.OVERWORLD))
 					return false;
 				
-				if (context.hasTag(ConventionalBiomeTags.IS_AQUATIC))
+				if (context.hasTag(Tags.Biomes.IS_AQUATIC))
 					return false;
 
 				//Either the biome is hot, lush, and wet, or it is a straight-up swamp.
-				return ((context.hasTag(ConventionalBiomeTags.IS_HOT) && context.hasTag(ConventionalBiomeTags.IS_VEGETATION_DENSE_OVERWORLD))
-						|| context.hasTag(ConventionalBiomeTags.IS_SWAMP))
-						&& context.hasTag(ConventionalBiomeTags.IS_WET_OVERWORLD);
+				return ((context.hasTag(Tags.Biomes.IS_HOT) && context.hasTag(Tags.Biomes.IS_VEGETATION_DENSE_OVERWORLD))
+						|| context.hasTag(Tags.Biomes.IS_SWAMP))
+						&& context.hasTag(Tags.Biomes.IS_WET_OVERWORLD);
 
 			}, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("quitoxic_reeds")));
 		}
