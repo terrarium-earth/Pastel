@@ -5,6 +5,7 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class FluidIngredientEmi {
@@ -15,15 +16,8 @@ public class FluidIngredientEmi {
         Objects.requireNonNull(ingredient);
         // Return empty stack if ingredient is empty.
         // Semi-redundant: the sole caller of this *checks if input is empty*.
-        if (ingredient == FluidIngredient.EMPTY) return EmiStack.EMPTY;
-        if (ingredient.fluid().isPresent())
-            return EmiStack.of(ingredient.fluid().get());
-        // NOTE: imitating the behavior of EmiStack.of(fluid)
-        // by changing the amount to 0, instead of the 1 for tags.
-        if (ingredient.tag().isPresent())
-            return EmiIngredient.of(ingredient.tag().get(), 0);
+        if (ingredient.isEmpty()) return EmiStack.EMPTY;
 
-        // UNREACHABLE under normal circumstances!
-        throw new AssertionError("Invalid FluidIngredient object");
+        return EmiIngredient.of(Arrays.stream(ingredient.getStacks()).map(stack -> EmiStack.of(stack.getFluid(), stack.getAmount())).toList());
     }
 }

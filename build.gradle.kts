@@ -13,10 +13,11 @@ repositories {
         mavenNeoforged()
     }
 
-    // Cloth config, REI
-    maven(url = "https://maven.shedaniel.me/")
+    maven(url = "https://maven.shedaniel.me/") // Cloth config, REI
 
     maven(url = "https://api.modrinth.com/maven") // Additional Entity Attributes, Jade
+
+    maven(url = "https://maven.terraformersmc.com/") // Modmenu, EMI
 
     // Curios
     maven(url = "https://maven.theillusivec4.top/") {
@@ -74,6 +75,8 @@ cloche {
                 modImplementation(additionalEntityAttributes)
 
                 modCompileOnly(module(group = "mcp.mobius.waila", name = "wthit-api", version = "neo-12.4.1"))
+
+                modCompileOnly("dev.emi:emi-neoforge:1.1.19+1.21.1")
             }
 
             dependencies {

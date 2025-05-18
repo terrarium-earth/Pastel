@@ -48,7 +48,7 @@ public class BookFusionShrineCraftingPageRenderer extends BookGatedRecipePageRen
             ModonomiconHelper.renderIngredientStack(drawContext, parentScreen, recipeX + startX + i * 16, recipeY + 3, mouseX, mouseY, ingredients.get(i));
         }
         
-        if (recipe.getFluid() != FluidIngredient.EMPTY) {
+        if (!recipe.getFluid().isEmpty()) {
             @NotNull Ingredient fluidIngredient = recipe.getFluid().into();
             parentScreen.renderItemStack(drawContext, recipeX + 14, recipeY + 31, mouseX, mouseY, recipe.getToastSymbol()); // the shrine
             parentScreen.renderIngredient(drawContext, recipeX + 30, recipeY + 31, mouseX, mouseY, fluidIngredient); // the fluid

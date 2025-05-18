@@ -89,7 +89,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 		if (!this.fluid.test(fluidStorage.variant)) {
 			return false;
 		}
-		if (this.fluid != FluidIngredient.EMPTY) {
+		if (!this.fluid.isEmpty()) {
 			if (fluidStorage.getAmount() != fluidStorage.getCapacity()) {
 				return false;
 			}

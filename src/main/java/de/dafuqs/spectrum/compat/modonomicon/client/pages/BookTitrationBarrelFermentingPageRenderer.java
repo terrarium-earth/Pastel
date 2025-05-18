@@ -54,7 +54,7 @@ public class BookTitrationBarrelFermentingPageRenderer extends BookGatedRecipePa
         renderTitle(drawContext, recipeY, second);
 
         FluidIngredient fluid = recipe.getFluidInput();
-        boolean usesFluid = fluid != FluidIngredient.EMPTY;
+        boolean usesFluid = !fluid.isEmpty();
         IngredientStack bucketStack = IngredientStack.EMPTY;
         if (usesFluid) {
             bucketStack = IngredientStack.of(recipe.getFluidInput().into());

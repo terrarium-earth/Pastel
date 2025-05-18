@@ -26,7 +26,7 @@ public class TitrationBarrelEmiRecipeGated extends GatedSpectrumEmiRecipe<ITitra
 	public TitrationBarrelEmiRecipeGated(ITitrationBarrelRecipe recipe) {
 		super(SpectrumEmiRecipeCategories.TITRATION_BARREL, recipe, 136, 50);
 		inputs = new ArrayList<>();
-		if (recipe.getFluidInput() != FluidIngredient.EMPTY) {
+		if (!recipe.getFluidInput().isEmpty()) {
 			inputs.add(FluidIngredientEmi.into(recipe.getFluidInput()));
 		}
 		inputs.addAll(recipe.getIngredientStacks().stream().map(s -> EmiIngredient.of(s.getMatchingStacks().stream().map(EmiStack::of).toList())).toList());

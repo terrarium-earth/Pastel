@@ -1,10 +1,10 @@
 package de.dafuqs.spectrum.compat.REI;
 
+import dev.architectury.fluid.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -19,22 +19,16 @@ public class FluidIngredientREI {
         Objects.requireNonNull(ingredient);
         // Return empty stack if ingredient is empty.
         // Semi-redundant: the sole caller of this *checks if input is empty*.
-        if (ingredient == FluidIngredient.EMPTY)
+        if (ingredient.isEmpty())
             return EntryIngredients.of(EMPTY);
 
-        if (ingredient.fluid().isPresent())
-            return EntryIngredients.of(ingredient.fluid().get());
-        // NOTE: Using EMIs fluid filter for parity.
-        if (ingredient.tag().isPresent())
-            return EntryIngredients.ofTag(ingredient.tag().get(),
-                    (entry) -> {
-                        Fluid fluid = entry.value();
-                        if (!fluid.defaultFluidState().isSource())
-                            return EntryStacks.of(EMPTY);
-                        return EntryStacks.of(fluid);
-                    });
+        var stacks = ingredient.getStacks();
+        EntryIngredient.Builder builder = EntryIngredient.builder(stacks.length);
 
-        // UNREACHABLE under normal circumstances!
-        throw new AssertionError("Invalid FluidIngredient object");
+        for (var stack : stacks) {
+            builder.add(EntryStacks.of(FluidStack.create(stack.getFluid(), stack.getAmount())));
+        }
+
+        return builder.build();
     }
 }

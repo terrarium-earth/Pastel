@@ -47,7 +47,7 @@ public class TitrationBarrelDisplay extends GatedSpectrumDisplay {
 	
 	public static List<EntryIngredient> buildInputs(ITitrationBarrelRecipe recipe) {
 		List<EntryIngredient> inputs = REIHelper.toEntryIngredients(recipe.getIngredientStacks());
-		if (recipe.getFluidInput() != FluidIngredient.EMPTY) {
+		if (!recipe.getFluidInput().isEmpty()) {
 			inputs.add(FluidIngredientREI.into(recipe.getFluidInput()));
 		}
 		return inputs;
