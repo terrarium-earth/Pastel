@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "de.dafuqs.reverb.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [ ],
+  "client": [
+    "MinecraftClientMixin",
+    "SoundSystemMixin",
+    "SourceAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,11 +1,12 @@
 package de.dafuqs.revelationary;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementCriteria;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.server.packs.PackType;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,19 +29,25 @@ public class Revelationary {
         LOGGER.error("[Revelationary] ", t);
     }
 
+    private static void onRegisterCommands(RegisterCommandsEvent event) {
+        Commands.register(event.getDispatcher(), event.getBuildContext(), event.getCommandSelection());
+    }
+
+    private static void onServerStarted(ServerStartedEvent event) {
+        RevelationRegistry.addRevelationAwares();
+        RevelationRegistry.deepTrim();
+    }
+
     public static void onInitialize() {
         logInfo("Starting Common Startup");
 
         RevelationaryNetworking.register();
 
         AdvancementCriteria.register();
-        CommandRegistrationCallback.EVENT.register(Commands::register);
+        NeoForge.EVENT_BUS.addListener(Revelationary::onRegisterCommands);
         ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(RevelationDataLoader.INSTANCE);
 
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            RevelationRegistry.addRevelationAwares();
-            RevelationRegistry.deepTrim();
-        });
+        NeoForge.EVENT_BUS.addListener(Revelationary::onServerStarted);
         if (ModList.get().isLoaded("sodium")) {
             logWarning("Sodium detected. Chunk rebuilding will be done in cursed mode.");
         }

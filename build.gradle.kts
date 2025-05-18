@@ -55,6 +55,7 @@ cloche {
             mixins.from(
                 "src/main/mixins/arrowhead.mixins.json",
                 "src/main/mixins/fractal.mixins.json",
+                "src/main/mixins/reverb.mixins.json",
                 "src/main/mixins/revelationary.mixins.json",
             )
 
