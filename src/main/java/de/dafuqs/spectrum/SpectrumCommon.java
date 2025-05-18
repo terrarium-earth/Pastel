@@ -3,6 +3,7 @@ package de.dafuqs.spectrum;
 import de.dafuqs.spectrum.api.color.ColorRegistry;
 import de.dafuqs.spectrum.api.energy.color.InkColorMixes;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
+import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.blocks.pastel_network.Pastel;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.compat.reverb.DimensionReverb;
@@ -156,6 +157,7 @@ public class SpectrumCommon {
 		InkColorMixes.register();
 		SpectrumEntityAttributes.register();
 		SpectrumLoadConditions.register(modEventBus);
+		IngredientStack.register(modEventBus);
 		
 		logInfo("Registering Component Types...");
 		SpectrumDataComponentTypes.register();
