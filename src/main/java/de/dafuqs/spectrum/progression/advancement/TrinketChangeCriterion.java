@@ -4,9 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
-import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -14,8 +11,10 @@ import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +26,17 @@ public class TrinketChangeCriterion extends SimpleCriterionTrigger<TrinketChange
 	
 	public void trigger(ServerPlayer player) {
 		this.trigger(player, (conditions) -> {
-			Optional<TrinketComponent> trinketComponent = TrinketsApi.getTrinketComponent(player);
-			if (trinketComponent.isPresent()) {
+			Optional<ICuriosItemHandler> curiosInventory = CuriosApi.getCuriosInventory(player);
+			if (curiosInventory.isPresent()) {
 				List<ItemStack> equippedStacks = new ArrayList<>();
 				int spectrumStacks = 0;
-				for (Tuple<SlotReference, ItemStack> t : trinketComponent.get().getAllEquipped()) {
-					equippedStacks.add(t.getB());
-					if (t.getB().getItem() instanceof SpectrumTrinketItem) {
+				IItemHandlerModifiable equippedCurios = curiosInventory.get().getEquippedCurios();
+
+				for (int i = 0; i < equippedCurios.getSlots(); i++) {
+					ItemStack itemStack = equippedCurios.getStackInSlot(i);
+
+					equippedStacks.add(itemStack);
+					if (itemStack.getItem() instanceof SpectrumTrinketItem) {
 						spectrumStacks++;
 					}
 				}

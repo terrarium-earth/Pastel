@@ -87,6 +87,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
+import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,7 +96,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class SpectrumCommon implements ModInitializer {
+@Mod(SpectrumCommon.MOD_ID)
+public class SpectrumCommon {
 	
 	public static final String MOD_ID = "spectrum";
 	
@@ -146,9 +148,8 @@ public class SpectrumCommon implements ModInitializer {
 		CONFIG = AutoConfig.getConfigHolder(SpectrumConfig.class).getConfig();
 		logInfo("Finished loading config file.");
 	}
-	
-	@Override
-	public void onInitialize() {
+
+	public SpectrumCommon() {
 		logInfo("Starting Common Startup");
 		
 		// Register internals
@@ -317,7 +318,7 @@ public class SpectrumCommon implements ModInitializer {
 			ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_generation_1"), modContainer.get(), Component.nullToEmpty("Generation 1 Spectrum textures"), ResourcePackActivationType.NORMAL);
 			ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_programmer_art"), modContainer.get(), Component.nullToEmpty("Spectrum's Programmer Art"), ResourcePackActivationType.NORMAL);
 		}
-		
+
 		logInfo("Common startup completed!");
 	}
 	
