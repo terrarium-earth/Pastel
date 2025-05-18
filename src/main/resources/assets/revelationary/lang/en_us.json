@@ -1,0 +1,10 @@
+{
+  "commands.revelationary.advancement.revoke": "Revoked %d advancements from %s in %s:%s",
+  "commands.revelationary.advancement.grant": "Granted %d advancements to %s in %s:%s",
+  "commands.revelationary.advancement.sync": "Synced %d advancements from %s to %s in %s:%s",
+
+  "text.autoconfig.Revelationary.title": "Revelationary",
+  "text.autoconfig.Revelationary.option.UseTargetBlockOrItemNameInsteadOfScatter": "Use target block/item name instead of scattering it",
+  "text.autoconfig.Revelationary.option.NameForCloakedBlocks": "Name for cloaked Blocks",
+  "text.autoconfig.Revelationary.option.NameForCloakedItems": "Name for cloaked Items"
+}

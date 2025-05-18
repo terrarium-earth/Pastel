@@ -1,0 +1,9 @@
+{
+  "itemGroup.mymod.main": "MyMod",
+  "itemGroup.mymod.functional": "Functional",
+  "itemGroup.mymod.equipment": "Equipment",
+  "itemGroup.mymod.cuisine": "Cuisine",
+  "itemGroup.mymod.resources": "Resources",
+  "itemGroup.mymod.resources2": "Resources 2",
+  "itemGroup.mymod.resources3": "Resources 3"
+}

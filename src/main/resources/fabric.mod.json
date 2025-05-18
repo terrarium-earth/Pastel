@@ -30,10 +30,12 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "de.dafuqs.spectrum.SpectrumCommon"
+      "de.dafuqs.spectrum.SpectrumCommon",
+      "de.dafuqs.revelationary.Revelationary"
     ],
     "client": [
-      "de.dafuqs.spectrum.SpectrumClient"
+      "de.dafuqs.spectrum.SpectrumClient",
+      "de.dafuqs.revelationary.RevelationaryClient"
     ],
     "preLaunch": [],
     "modmenu": [
@@ -43,18 +45,27 @@
       "de.dafuqs.spectrum.compat.REI.REICommonIntegration"
     ],
     "rei_client": [
-      "de.dafuqs.spectrum.compat.REI.REIClientIntegration"
+      "de.dafuqs.spectrum.compat.REI.REIClientIntegration",
+      "de.dafuqs.revelationary.compat.rei.RevelationaryREIPlugin",
+      "de.dafuqs.fractal.compat.FractalREIPlugin"
     ],
     "emi": [
-      "de.dafuqs.spectrum.compat.emi.SpectrumEmiPlugin"
+      "de.dafuqs.spectrum.compat.emi.SpectrumEmiPlugin",
+      "de.dafuqs.fractal.compat.FractalEMIPlugin"
     ],
     "cardinal-components": [
       "de.dafuqs.spectrum.cca.SpectrumComponentInitializers"
+    ],
+    "jade": [
+      "de.dafuqs.revelationary.compat.jade.RevelationaryJadePlugin"
     ]
   },
   "accessWidener": "spectrum.accesswidener",
   "mixins": [
-    "spectrum.mixins.json"
+    "spectrum.mixins.json",
+    "revelationary.mixins.json",
+    "arrowhead.mixins.json",
+    "fractal.mixins.json"
   ],
   "custom": {
     "loom:injected_interfaces": {
@@ -69,6 +80,12 @@
       ],
       "net/minecraft/class_4174\u0024class_4175": [
         "de/dafuqs/spectrum/injectors/FoodComponentBuilderInjector"
+      ],
+      "net/minecraft/class_1761": [
+        "de/dafuqs/fractal/interfaces/ItemGroupParent"
+      ],
+      "net/minecraft/class_481": [
+        "de/dafuqs/fractal/interfaces/SubTabLocation"
       ]
     },
     "cardinal-components": [
