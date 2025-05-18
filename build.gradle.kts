@@ -13,15 +13,24 @@ repositories {
         mavenNeoforged()
     }
 
+    // Cloth config, REI
+    maven(url = "https://maven.shedaniel.me/")
+
+    maven(url = "https://api.modrinth.com/maven") // Additional Entity Attributes, Jade
+
+    // Curios
     maven(url = "https://maven.theillusivec4.top/") {
         name = "Illusive Soulworks maven"
     }
 
+    // modonomicon
     maven(url = "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/") {
         content {
             includeGroup("com.klikli_dev")
         }
     }
+
+    maven(url = "https://maven2.bai.lol") // wthit
 }
 
 cloche {
@@ -46,6 +55,27 @@ cloche {
                 "src/main/mixins/revelationary.mixins.json",
             )
 
+            val additionalEntityAttributes = module(group = "maven.modrinth", name = "additionalentityattributes", version = "2.0.0+1.21.1-neoforge")
+
+            include(additionalEntityAttributes)
+
+            dependencies {
+                compileOnly(module(group = "maven.modrinth", name = "jade", version = "15.10.0+neoforge"))
+
+                modApi(module(group = "me.shedaniel.cloth", name = "cloth-config-neoforge", version = "15.0.140"))
+
+                modImplementation(module(group = "com.klikli_dev", name = "modonomicon-1.21.1-neoforge", version = "1.114.1")) {
+                    exclude(group = "com.klikli_dev")
+                    exclude(group = "mezz.jei")
+                }
+
+                modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
+
+                modImplementation(additionalEntityAttributes)
+
+                modCompileOnly(module(group = "mcp.mobius.waila", name = "wthit-api", version = "neo-12.4.1"))
+            }
+
             dependencies {
                 val curios = module(group = "top.theillusivec4.curios", name = "curios-neoforge", version = "9.5.1+1.21.1")
 
@@ -56,11 +86,6 @@ cloche {
                 }
 
                 runtimeOnly(curios)
-
-                modImplementation(module(group = "com.klikli_dev", name = "modonomicon-1.21.1-neoforge", version = "1.114.1")) {
-                    exclude(group = "com.klikli_dev")
-                    exclude(group = "mezz.jei")
-                }
             }
 
             data()
