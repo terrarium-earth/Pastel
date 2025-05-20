@@ -355,11 +355,11 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 				ComponentSerialization.CODEC.optionalFieldOf("description", Component.empty()).forGetter(recipe -> recipe.description)
 		).apply(i, FusionShrineRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, FusionShrineRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		public static final StreamCodec<RegistryFriendlyByteBuf, FusionShrineRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-				IngredientStack.PACKET_CODEC.apply(ByteBufCodecs.list(7)), recipe -> recipe.craftingInputs,
+				IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list(7)), recipe -> recipe.craftingInputs,
 				FluidIngredient.STREAM_CODEC, recipe -> recipe.fluid,
 				ItemStack.OPTIONAL_STREAM_CODEC, recipe -> recipe.output,
 				ByteBufCodecs.FLOAT, recipe -> recipe.experience,
@@ -367,10 +367,10 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 				ByteBufCodecs.BOOL, recipe -> recipe.yieldUpgradesDisabled,
 				ByteBufCodecs.BOOL, recipe -> recipe.playCraftingFinishedEffects,
 				ByteBufCodecs.BOOL, recipe -> recipe.copyComponents,
-				WorldConditionsPredicate.PACKET_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.worldConditionsPredicates,
-				FusionShrineRecipeWorldEffect.PACKET_CODEC, recipe -> recipe.startWorldEffect,
-				FusionShrineRecipeWorldEffect.PACKET_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.duringWorldEffects,
-				FusionShrineRecipeWorldEffect.PACKET_CODEC, recipe -> recipe.finishWorldEffect,
+				WorldConditionsPredicate.STREAM_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.worldConditionsPredicates,
+				FusionShrineRecipeWorldEffect.STREAM_CODEC, recipe -> recipe.startWorldEffect,
+				FusionShrineRecipeWorldEffect.STREAM_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.duringWorldEffects,
+				FusionShrineRecipeWorldEffect.STREAM_CODEC, recipe -> recipe.finishWorldEffect,
 				ComponentSerialization.TRUSTED_CONTEXT_FREE_STREAM_CODEC, recipe -> recipe.description,
 				FusionShrineRecipe::new
 		);
@@ -382,7 +382,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, FusionShrineRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 		
 	}

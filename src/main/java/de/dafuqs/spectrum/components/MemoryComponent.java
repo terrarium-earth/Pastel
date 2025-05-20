@@ -19,7 +19,7 @@ public record MemoryComponent(int ticksToManifest, boolean spawnAsAdult, boolean
 			Codec.BOOL.optionalFieldOf("unrecognizable", false).forGetter(MemoryComponent::unrecognizable)
 	).apply(i, MemoryComponent::new));
 	
-	public static final StreamCodec<ByteBuf, MemoryComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, MemoryComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VAR_INT, MemoryComponent::ticksToManifest,
 			ByteBufCodecs.BOOL, MemoryComponent::spawnAsAdult,
 			ByteBufCodecs.BOOL, MemoryComponent::brokenPromise,

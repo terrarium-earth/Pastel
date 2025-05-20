@@ -15,7 +15,7 @@ public record ShootingStarComponent(int remainingHits, boolean hardened) {
 			Codec.BOOL.fieldOf("hardened").forGetter(c -> c.hardened)
 	).apply(i, ShootingStarComponent::new));
 	
-	public static final StreamCodec<ByteBuf, ShootingStarComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, ShootingStarComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.INT, c -> c.remainingHits,
 			ByteBufCodecs.BOOL, c -> c.hardened,
 			ShootingStarComponent::new

@@ -5,11 +5,13 @@ import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.particle.effect.DynamicParticleEffect;
+import net.minecraft.client.multiplayer.*;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -37,16 +39,14 @@ public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1,
 	
 	public static void playMemoryManifestingParticles(ServerLevel serverWorld, @NotNull BlockPos pos, EntityType<?> entityType, int amount) {
 		Tuple<Integer, Integer> eggColors = MemoryBlockEntity.getEggColorsForEntity(entityType);
-		for (ServerPlayer player : PlayerLookup.tracking(serverWorld, pos)) {
-			ServerPlayNetworking.send(player, new PlayMemoryManifestingParticlesPayload(pos, eggColors.getA(), eggColors.getB(), amount));
-		}
+		PacketDistributor.sendToPlayersTrackingChunk(serverWorld, new ChunkPos(pos), new PlayMemoryManifestingParticlesPayload(pos, eggColors.getA(), eggColors.getB(), amount));
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayMemoryManifestingParticlesPayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		RandomSource random = client.level.random;
+	public static void execute(PlayMemoryManifestingParticlesPayload payload, IPayloadContext context) {
+		ClientLevel level = (ClientLevel) context.player().level();
+		RandomSource random = level.random;
 		
 		Vector3f colorVec1 = SpectrumColorHelper.colorIntToVec(payload.eggColor1);
 		Vector3f colorVec2 = SpectrumColorHelper.colorIntToVec(payload.eggColor1);
@@ -56,14 +56,14 @@ public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1,
 			int randomLifetime = 30 + random.nextInt(20);
 			
 			// color1
-			client.level.addParticle(
+			level.addParticle(
 					new DynamicParticleEffect(ColoredCraftingParticleEffect.WHITE.getType(), 0.5F, colorVec1, 1.0F, randomLifetime, false, true),
 					pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ(),
 					0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3
 			);
 			
 			// color2
-			client.level.addParticle(
+			level.addParticle(
 					new DynamicParticleEffect(ColoredCraftingParticleEffect.WHITE.getType(), 0.5F, colorVec2, 1.0F, randomLifetime, false, true),
 					pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
 					0.15 - random.nextFloat() * 0.3, random.nextFloat() * 0.15 + 0.1, 0.15 - random.nextFloat() * 0.3

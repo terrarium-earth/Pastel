@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.networking.c2s_payloads;
 import de.dafuqs.spectrum.inventories.WorkstaffScreenHandler;
 import de.dafuqs.spectrum.items.tools.WorkstaffItem;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -24,9 +24,9 @@ public record WorkstaffToggleSelectedPayload(int index) implements CustomPacketP
 		return ID;
 	}
 	
-	public static ServerPlayNetworking.PlayPayloadHandler<WorkstaffToggleSelectedPayload> getPayloadHandler() {
+	public static IPayloadHandler<WorkstaffToggleSelectedPayload> getPayloadHandler() {
 		return (payload, context) -> {
-			ServerPlayer player = context.player();
+			ServerPlayer player = (ServerPlayer) context.player();
 			AbstractContainerMenu screenHandler = player.containerMenu;
 			if (screenHandler instanceof WorkstaffScreenHandler workstaffScreenHandler) {
 				WorkstaffItem.GUIToggle toggle = WorkstaffItem.GUIToggle.values()[payload.index];

@@ -8,7 +8,7 @@ import de.dafuqs.spectrum.inventories.widgets.ColorSelectionWidget;
 import de.dafuqs.spectrum.inventories.widgets.InkGaugeWidget;
 import de.dafuqs.spectrum.inventories.widgets.StackedInkMeterWidget;
 import de.dafuqs.spectrum.networking.c2s_payloads.InkColorSelectedC2SPayload;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.Holder;

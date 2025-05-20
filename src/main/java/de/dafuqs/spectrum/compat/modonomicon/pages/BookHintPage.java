@@ -51,7 +51,7 @@ public class BookHintPage extends BookTextPage {
         var anchor = buffer.readUtf();
         var condition = BookCondition.fromNetwork(buffer);
         var completionAdvancement = buffer.readResourceLocation();
-		var cost = IngredientStack.PACKET_CODEC.decode(buffer);
+		var cost = IngredientStack.STREAM_CODEC.decode(buffer);
         return new BookHintPage(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, completionAdvancement, cost);
     }
 
@@ -72,7 +72,7 @@ public class BookHintPage extends BookTextPage {
     public void toNetwork(RegistryFriendlyByteBuf buffer) {
         super.toNetwork(buffer);
         buffer.writeResourceLocation(completionAdvancement);
-		IngredientStack.PACKET_CODEC.encode(buffer, cost);
+		IngredientStack.STREAM_CODEC.encode(buffer, cost);
     }
 
 }

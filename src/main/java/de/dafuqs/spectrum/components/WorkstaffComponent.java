@@ -16,7 +16,7 @@ public record WorkstaffComponent(boolean canTill, boolean canShoot, int fortuneL
 			Codec.INT.fieldOf("fortune_level").forGetter(c -> c.fortuneLevel)
 	).apply(i, WorkstaffComponent::new));
 	
-	public static final StreamCodec<ByteBuf, WorkstaffComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, WorkstaffComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.BOOL,
 			c -> c.canTill,
 			ByteBufCodecs.BOOL,

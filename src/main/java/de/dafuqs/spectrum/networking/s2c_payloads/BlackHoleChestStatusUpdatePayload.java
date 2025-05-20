@@ -4,18 +4,19 @@ import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
 import de.dafuqs.spectrum.blocks.chests.BlackHoleChestBlockEntity;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.server.level.*;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Optional;
 
@@ -41,25 +42,21 @@ public record BlackHoleChestStatusUpdatePayload(BlockPos pos, boolean isFull, bo
 			storedXP = ExperienceStorageItem.getStoredExperience(xpStack);
 			maxStoredXP = experienceStorageItem.getMaxStoredExperience(chest.getLevel().registryAccess(), xpStack);
 		}
-		
-		for (ServerPlayer player : PlayerLookup.tracking(chest)) {
-			ServerPlayNetworking.send(player, new BlackHoleChestStatusUpdatePayload(chest.getBlockPos(), chest.isFullServer(), chest.canStoreExperience(), storedXP, maxStoredXP));
-		}
+
+		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) chest.getLevel(), new ChunkPos(chest.getBlockPos()), new BlackHoleChestStatusUpdatePayload(chest.getBlockPos(), chest.isFullServer(), chest.canStoreExperience(), storedXP, maxStoredXP));
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(BlackHoleChestStatusUpdatePayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		if (client.level != null) {
-			Optional<BlackHoleChestBlockEntity> entity = client.level.getBlockEntity(payload.pos, SpectrumBlockEntities.BLACK_HOLE_CHEST);
-			entity.ifPresent(chest -> {
-				chest.setFull(payload.isFull);
-				chest.setHasXPStorage(payload.canStoreExperience);
-				chest.setXPData(payload.storedExperience, payload.maxStoredExperience);
-			});
-		}
-	}
+	public static void execute(BlackHoleChestStatusUpdatePayload payload, IPayloadContext context) {
+		var level = context.player().level();
+        Optional<BlackHoleChestBlockEntity> entity = level.getBlockEntity(payload.pos, SpectrumBlockEntities.BLACK_HOLE_CHEST);
+        entity.ifPresent(chest -> {
+            chest.setFull(payload.isFull);
+            chest.setHasXPStorage(payload.canStoreExperience);
+            chest.setXPData(payload.storedExperience, payload.maxStoredExperience);
+        });
+    }
 	
 	@Override
 	public Type<? extends CustomPacketPayload> type() {

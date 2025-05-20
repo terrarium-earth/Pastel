@@ -32,7 +32,7 @@ public class TypedTransmission extends SimpleTransmission {
 			StringRepresentable.fromEnum(Variant::values).fieldOf("variant").forGetter(c -> c.variant)
 	).apply(i, TypedTransmission::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, TypedTransmission> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, TypedTransmission> STREAM_CODEC = StreamCodec.composite(
 			PacketCodecHelper.VEC3D, c -> c.origin,
 			PositionSource.STREAM_CODEC, c -> c.destination,
 			ByteBufCodecs.INT, c -> c.arrivalInTicks,

@@ -27,7 +27,7 @@ public class InkColor {
 			InkColor::getID
 	);
 
-	public static final StreamCodec<ByteBuf, InkColor> PACKET_CODEC = ResourceLocation.STREAM_CODEC.map(
+	public static final StreamCodec<ByteBuf, InkColor> STREAM_CODEC = ResourceLocation.STREAM_CODEC.map(
 			id -> ofId(id).orElseThrow(),
 			InkColor::getID
 	);

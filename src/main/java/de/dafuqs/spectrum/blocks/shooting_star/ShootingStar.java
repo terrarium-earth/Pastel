@@ -27,7 +27,7 @@ public interface ShootingStar {
 		GEMSTONE("gemstone", SpectrumLootTables.GEMSTONE_SHOOTING_STAR);
 		
 		public static Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
-		public static final StreamCodec<ByteBuf, Variant> PACKET_CODEC = PacketCodecHelper.enumOf(Variant::values);
+		public static final StreamCodec<ByteBuf, Variant> STREAM_CODEC = PacketCodecHelper.enumOf(Variant::values);
 		
 		private final String name;
 		private final ResourceKey<LootTable> lootTable;

@@ -26,7 +26,7 @@ public record PairedFoodComponent(Item item, boolean consumeAndApplyRequiredStac
 			FoodProperties.DIRECT_CODEC.optionalFieldOf("bonus_food_component", new FoodProperties.Builder().build()).forGetter(PairedFoodComponent::bonusFoodComponent)
 	).apply(instance, PairedFoodComponent::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, PairedFoodComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, PairedFoodComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.registry(Registries.ITEM), PairedFoodComponent::item,
 			ByteBufCodecs.BOOL, PairedFoodComponent::consumeAndApplyRequiredStack,
 			FoodProperties.DIRECT_STREAM_CODEC, PairedFoodComponent::bonusFoodComponent,

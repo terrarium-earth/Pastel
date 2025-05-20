@@ -29,10 +29,10 @@ public record FermentationStatusEffectEntry(
 			StatusEffectPotencyEntry.CODEC.listOf().optionalFieldOf("potency", List.of(new StatusEffectPotencyEntry(0, 0, 0))).forGetter(FermentationStatusEffectEntry::potencyEntries)
 	).apply(i, FermentationStatusEffectEntry::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, FermentationStatusEffectEntry> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, FermentationStatusEffectEntry> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.registry(Registries.MOB_EFFECT), FermentationStatusEffectEntry::statusEffect,
 			ByteBufCodecs.VAR_INT, FermentationStatusEffectEntry::baseDuration,
-			StatusEffectPotencyEntry.PACKET_CODEC.apply(ByteBufCodecs.list()), FermentationStatusEffectEntry::potencyEntries,
+			StatusEffectPotencyEntry.STREAM_CODEC.apply(ByteBufCodecs.list()), FermentationStatusEffectEntry::potencyEntries,
 			FermentationStatusEffectEntry::new
 	);
 	
@@ -44,7 +44,7 @@ public record FermentationStatusEffectEntry(
 				Codec.INT.optionalFieldOf("potency", 0).forGetter(StatusEffectPotencyEntry::potency)
 		).apply(i, StatusEffectPotencyEntry::new));
 		
-		public static final StreamCodec<ByteBuf, StatusEffectPotencyEntry> PACKET_CODEC = StreamCodec.composite(
+		public static final StreamCodec<ByteBuf, StatusEffectPotencyEntry> STREAM_CODEC = StreamCodec.composite(
 				ByteBufCodecs.FLOAT, StatusEffectPotencyEntry::minAlcPercent,
 				ByteBufCodecs.FLOAT, StatusEffectPotencyEntry::minThickness,
 				ByteBufCodecs.VAR_INT, StatusEffectPotencyEntry::potency,

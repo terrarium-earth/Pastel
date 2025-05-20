@@ -51,7 +51,7 @@ public record PotionMod(
 			PotionFlags.CODEC.forGetter(PotionMod::flags)
 	).apply(i, PotionMod::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, PotionMod> PACKET_CODEC = PacketCodecHelper.tuple(
+	public static final StreamCodec<RegistryFriendlyByteBuf, PotionMod> STREAM_CODEC = PacketCodecHelper.tuple(
 			ByteBufCodecs.VAR_INT, PotionMod::flatDurationBonusTicks,
 			ByteBufCodecs.FLOAT, PotionMod::flatPotencyBonus,
 			ByteBufCodecs.FLOAT, PotionMod::durationMultiplier,
@@ -67,7 +67,7 @@ public record PotionMod(
 			ByteBufCodecs.FLOAT, PotionMod::lastEffectPotencyMultiplier,
 			ByteBufCodecs.FLOAT, PotionMod::yield,
 			ByteBufCodecs.VAR_INT, PotionMod::additionalDrinkDurationTicks,
-			PotionFlags.PACKET_CODEC, PotionMod::flags,
+			PotionFlags.STREAM_CODEC, PotionMod::flags,
 			PotionMod::new
 	);
 	
@@ -89,7 +89,7 @@ public record PotionMod(
 		).apply(i, Tuple::new));
 		
 		private static final StreamCodec<RegistryFriendlyByteBuf, Tuple<PotionRecipeEffect, Float>> ENTRY_PACKET_CODEC = PacketCodecHelper.pair(
-				PotionRecipeEffect.PACKET_CODEC,
+				PotionRecipeEffect.STREAM_CODEC,
 				ByteBufCodecs.FLOAT
 		);
 		
@@ -106,7 +106,7 @@ public record PotionMod(
 				ENTRY_CODEC.listOf().optionalFieldOf("additional_effects", List.of()).forGetter(PotionFlags::additionalEffects)
 		).apply(i, PotionFlags::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, PotionFlags> PACKET_CODEC = PacketCodecHelper.tuple(
+		public static final StreamCodec<RegistryFriendlyByteBuf, PotionFlags> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.BOOL, PotionFlags::makeSplashing,
 				ByteBufCodecs.BOOL, PotionFlags::makeLingering,
 				ByteBufCodecs.BOOL, PotionFlags::noParticles,

@@ -4,8 +4,8 @@ import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.sound.TakeOffBeltSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -18,11 +18,11 @@ public record PlayTakeOffBeltSoundInstancePayload() implements CustomPacketPaylo
 	}, buf -> new PlayTakeOffBeltSoundInstancePayload());
 	
 	public static void sendPlayTakeOffBeltSoundInstance(ServerPlayer playerEntity) {
-		ServerPlayNetworking.send(playerEntity, new PlayTakeOffBeltSoundInstancePayload());
+		PacketDistributor.sendToPlayer(playerEntity, new PlayTakeOffBeltSoundInstancePayload());
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayTakeOffBeltSoundInstancePayload payload, ClientPlayNetworking.Context context) {
+	public static void execute(PlayTakeOffBeltSoundInstancePayload payload, IPayloadContext context) {
 		TakeOffBeltSoundInstance.startSoundInstance();
 	}
 	

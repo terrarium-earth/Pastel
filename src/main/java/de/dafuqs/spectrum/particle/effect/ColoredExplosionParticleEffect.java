@@ -35,7 +35,7 @@ public class ColoredExplosionParticleEffect implements ParticleOptions {
 	public static final MapCodec<ColoredExplosionParticleEffect> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
 			ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((effect) -> effect.color)
 	).apply(instance, ColoredExplosionParticleEffect::new));
-	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredExplosionParticleEffect> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredExplosionParticleEffect> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VECTOR3F, (effect) -> effect.color,
 			ColoredExplosionParticleEffect::new
 	);

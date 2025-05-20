@@ -3,11 +3,14 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.helpers.PacketCodecHelper;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.spells.MoonstoneStrike;
+import net.minecraft.network.protocol.*;
+import net.minecraft.network.protocol.common.*;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -34,20 +37,18 @@ public record MoonstoneBlastPayload(double x, double y, double z, float power, f
 	);
 	
 	public static void sendMoonstoneBlast(ServerLevel serverWorld, MoonstoneStrike moonstoneStrike) {
-		for (ServerPlayer player : PlayerLookup.tracking(serverWorld, BlockPos.containing(moonstoneStrike.getX(), moonstoneStrike.getY(), moonstoneStrike.getZ()))) {
-			Vec3 playerVelocity = moonstoneStrike.getAffectedPlayers().getOrDefault(player, Vec3.ZERO);
-			ServerPlayNetworking.send(player, new MoonstoneBlastPayload(moonstoneStrike.getX(), moonstoneStrike.getY(), moonstoneStrike.getZ(), moonstoneStrike.getPower(), moonstoneStrike.getKnockbackMod(), playerVelocity));
+		for (ServerPlayer player : serverWorld.getChunkSource().chunkMap.getPlayers(new ChunkPos(BlockPos.containing(moonstoneStrike.getX(), moonstoneStrike.getY(), moonstoneStrike.getZ())), false)) {
+			PacketDistributor.sendToPlayer(player,
+					new MoonstoneBlastPayload(moonstoneStrike.getX(), moonstoneStrike.getY(), moonstoneStrike.getZ(), moonstoneStrike.getPower(), moonstoneStrike.getKnockbackMod(), moonstoneStrike.getAffectedPlayers().getOrDefault(player, Vec3.ZERO)));
 		}
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(MoonstoneBlastPayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		ClientLevel world = client.level;
+	public static void execute(MoonstoneBlastPayload payload, IPayloadContext context) {
 		Player player = context.player();
 		Vec3 playerVelocity = payload.playerVelocity();
-		MoonstoneStrike.create(world, null, null, payload.x, payload.y, payload.z, payload.power, payload.knockbackMod);
+		MoonstoneStrike.create(player.level(), null, null, payload.x, payload.y, payload.z, payload.power, payload.knockbackMod);
 		player.setDeltaMovement(player.getDeltaMovement().add(playerVelocity.x, playerVelocity.y, playerVelocity.z));
 	}
 	

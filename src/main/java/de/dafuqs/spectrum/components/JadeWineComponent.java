@@ -22,7 +22,7 @@ public record JadeWineComponent(float bloominess, boolean sweetened) implements 
 			Codec.BOOL.optionalFieldOf("sweetened", false).forGetter(JadeWineComponent::sweetened)
 	).apply(i, JadeWineComponent::new));
 	
-	public static final StreamCodec<ByteBuf, JadeWineComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, JadeWineComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.FLOAT, JadeWineComponent::bloominess,
 			ByteBufCodecs.BOOL, JadeWineComponent::sweetened,
 			JadeWineComponent::new

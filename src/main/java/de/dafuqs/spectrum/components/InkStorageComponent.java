@@ -20,10 +20,10 @@ public record InkStorageComponent(long maxEnergyTotal, long maxPerColor, Map<Ink
 			ExtraCodecs.strictUnboundedMap(InkColor.CODEC, Codec.LONG).fieldOf("stored_energy").forGetter(c -> c.storedEnergy)
 	).apply(instance, InkStorageComponent::new));
 	
-	public static final StreamCodec<ByteBuf, InkStorageComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, InkStorageComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VAR_LONG, c -> c.maxEnergyTotal,
 			ByteBufCodecs.VAR_LONG, c -> c.maxPerColor,
-			ByteBufCodecs.map(HashMap::new, InkColor.PACKET_CODEC, ByteBufCodecs.VAR_LONG), c -> c.storedEnergy,
+			ByteBufCodecs.map(HashMap::new, InkColor.STREAM_CODEC, ByteBufCodecs.VAR_LONG), c -> c.storedEnergy,
 			InkStorageComponent::new
 	);
 	

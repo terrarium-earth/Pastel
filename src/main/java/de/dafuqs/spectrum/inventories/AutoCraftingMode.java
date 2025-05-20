@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.inventories;
 
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
 
@@ -36,7 +36,7 @@ public enum AutoCraftingMode {
 		return AutoCraftingMode.values()[(this.ordinal() + 1) % values().length];
 	}
 	
-	public CraftingInput.Positioned createRecipeInput(ItemVariant variant) {
+	public CraftingInput.Positioned createRecipeInput(ItemStack variant) {
 		ItemStack stack = variant.toStack();
 		List<ItemStack> inputs = new ArrayList<>(getSize());
 		for (int i = 0; i < getSize(); i++) {

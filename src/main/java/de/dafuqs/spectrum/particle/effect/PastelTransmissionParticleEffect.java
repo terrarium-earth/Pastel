@@ -25,7 +25,7 @@ public record PastelTransmissionParticleEffect(List<BlockPos> nodePositions, Ite
 			Codec.INT.fieldOf("color").forGetter((particleEffect) -> particleEffect.color)
 	).apply(i, PastelTransmissionParticleEffect::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmissionParticleEffect> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmissionParticleEffect> STREAM_CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), c -> c.nodePositions,
 			ItemStack.STREAM_CODEC, c -> c.stack,
 			ByteBufCodecs.VAR_INT, c -> c.travelTime,

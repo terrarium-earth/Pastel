@@ -3,11 +3,13 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.blocks.present.PresentBlock;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
+import net.minecraft.client.multiplayer.*;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -29,16 +31,14 @@ public record PlayPresentOpeningParticlesPayload(BlockPos presentPos, Map<Intege
 	);
 	
 	public static void playPresentOpeningParticles(ServerLevel serverWorld, BlockPos presentPos, Map<Integer, Integer> colors) {
-		for (ServerPlayer player : PlayerLookup.tracking(serverWorld, presentPos)) {
-			ServerPlayNetworking.send(player, new PlayPresentOpeningParticlesPayload(presentPos, colors));
-		}
+		PacketDistributor.sendToPlayersTrackingChunk(serverWorld, new ChunkPos(presentPos), new PlayPresentOpeningParticlesPayload(presentPos, colors));
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayPresentOpeningParticlesPayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		PresentBlock.spawnParticles(client.level, payload.presentPos, payload.colors);
+	public static void execute(PlayPresentOpeningParticlesPayload payload, IPayloadContext context) {
+		var level = context.player().level();
+		PresentBlock.spawnParticles(level, payload.presentPos, payload.colors);
 	}
 	
 	@Override

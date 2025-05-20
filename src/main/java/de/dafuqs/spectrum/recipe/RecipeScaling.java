@@ -23,7 +23,7 @@ public abstract class RecipeScaling {
 			Codec.INT.listOf(0, 255).optionalFieldOf("indexes", Collections.emptyList()).forGetter(d -> d.indexes)
 	).apply(i, ScalingData::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, ScalingData> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, ScalingData> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.registry(SpectrumRegistryKeys.RECIPE_SCALING), d -> d.type,
 			ByteBufCodecs.VAR_INT, d -> d.start,
 			ByteBufCodecs.VAR_INT, d -> d.scalingValue,

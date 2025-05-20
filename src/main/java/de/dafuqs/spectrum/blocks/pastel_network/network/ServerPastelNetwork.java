@@ -129,11 +129,11 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 		if (!this.graph.vertexSet().contains(blockPos)) {
 			return null; // the network might have been disconnected while the transfer was underway
 		}
-		if (!this.getWorld().hasChunkAt(blockPos)) {
+		if (!this.getLevel().hasChunkAt(blockPos)) {
 			return null; // hmmmm
 		}
 		
-		BlockEntity blockEntity = this.getWorld().getBlockEntity(blockPos);
+		BlockEntity blockEntity = this.getLevel().getBlockEntity(blockPos);
 		if (blockEntity instanceof PastelNodeBlockEntity pastelNodeBlockEntity) {
 			return pastelNodeBlockEntity;
 		}
@@ -282,7 +282,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 				for (DefaultEdge edge : this.graph.edgesOf(disconnectedNode)) {
 					edges.put(this.graph.getEdgeSource(edge), this.graph.getEdgeTarget(edge));
 				}
-				var couldBeANode = getWorld().getBlockEntity(disconnectedNode, SpectrumBlockEntities.PASTEL_NODE);
+				var couldBeANode = getLevel().getBlockEntity(disconnectedNode, SpectrumBlockEntities.PASTEL_NODE);
 				if (couldBeANode.isPresent()) {
 					PastelNodeBlockEntity pastelNode = couldBeANode.get();
 					newNetwork.addNode(pastelNode);

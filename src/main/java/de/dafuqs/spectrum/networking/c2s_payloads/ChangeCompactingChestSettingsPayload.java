@@ -5,7 +5,7 @@ import de.dafuqs.spectrum.helpers.PacketCodecHelper;
 import de.dafuqs.spectrum.inventories.AutoCraftingMode;
 import de.dafuqs.spectrum.inventories.CompactingChestScreenHandler;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -20,7 +20,7 @@ public record ChangeCompactingChestSettingsPayload(AutoCraftingMode mode) implem
 			ChangeCompactingChestSettingsPayload::new
 	);
 	
-	public static ServerPlayNetworking.PlayPayloadHandler<ChangeCompactingChestSettingsPayload> getPayloadHandler() {
+	public static IPayloadHandler<ChangeCompactingChestSettingsPayload> getPayloadHandler() {
 		return (payload, context) -> {
 			// receive the client packet...
 			if (context.player().containerMenu instanceof CompactingChestScreenHandler compactingChestScreenHandler) {

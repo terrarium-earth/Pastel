@@ -3,11 +3,13 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.helpers.PacketCodecHelper;
 import de.dafuqs.spectrum.helpers.ParticleHelper;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.minecraft.network.protocol.*;
+import net.minecraft.network.protocol.common.*;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -34,17 +36,20 @@ public record PlayParticleAroundBlockSidesPayload(BlockPos pos, int quantity, Ve
 			PlayParticleAroundBlockSidesPayload::new
 	);
 	
-	public static void playParticleAroundBlockSides(ServerLevel world, int quantity, BlockPos pos, Vec3 velocity, ParticleOptions particleEffect, Predicate<ServerPlayer> sendCheck, Direction... sides) {
-		for (ServerPlayer player : PlayerLookup.tracking(world, pos)) {
-			if (!sendCheck.test(player))
+	public static void playParticleAroundBlockSides(ServerLevel level, int quantity, BlockPos pos, Vec3 velocity, ParticleOptions particleEffect, Predicate<ServerPlayer> sendCheck, Direction... sides) {
+		Packet<?> packet = new ClientboundCustomPayloadPacket(new PlayParticleAroundBlockSidesPayload(pos, quantity, velocity, particleEffect, sides));
+		
+		for (ServerPlayer player : level.getChunkSource().chunkMap.getPlayers(new ChunkPos(pos), false)) {
+			if (sendCheck.test(player))
 				continue;
-			ServerPlayNetworking.send(player, new PlayParticleAroundBlockSidesPayload(pos, quantity, velocity, particleEffect, sides));
+			
+			player.connection.send(packet);
 		}
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayParticleAroundBlockSidesPayload payload, ClientPlayNetworking.Context context) {
-		ParticleHelper.playParticleAroundBlockSides(context.client().level, payload.particle, payload.pos, payload.sides, payload.quantity, payload.velocity);
+	public static void execute(PlayParticleAroundBlockSidesPayload payload, IPayloadContext context) {
+		ParticleHelper.playParticleAroundBlockSides(context.player().level(), payload.particle, payload.pos, payload.sides, payload.quantity, payload.velocity);
 	}
 	
 	@Override

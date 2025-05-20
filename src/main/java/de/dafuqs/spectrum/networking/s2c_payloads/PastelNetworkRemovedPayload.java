@@ -5,9 +5,9 @@ import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetwork;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -25,14 +25,14 @@ public record PastelNetworkRemovedPayload(UUID networkUUID) implements CustomPac
 	);
 	
 	public static void send(ServerPastelNetwork network) {
-		for (ServerPlayer player : PlayerLookup.world(network.getWorld())) {
-			ServerPlayNetworking.send(player, new PastelNetworkRemovedPayload(network.getUUID()));
-		}
+		PacketDistributor.sendToPlayersInDimension(network.getLevel(), new PastelNetworkRemovedPayload(network.getUUID()));
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PastelNetworkRemovedPayload payload, ClientPlayNetworking.Context context) {
-		context.client().execute(() -> Pastel.getClientInstance().removeNetwork(payload.networkUUID));
+	public static void execute(PastelNetworkRemovedPayload payload, IPayloadContext context) {
+		context.enqueueWork(() -> {
+			Pastel.getClientInstance().removeNetwork(payload.networkUUID);
+		});
 	}
 	
 	@Override

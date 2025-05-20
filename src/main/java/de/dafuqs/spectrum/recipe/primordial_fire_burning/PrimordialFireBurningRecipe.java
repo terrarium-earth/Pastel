@@ -164,7 +164,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 				ItemStack.STRICT_CODEC.fieldOf("result").forGetter(recipe -> recipe.output)
 		).apply(i, PrimordialFireBurningRecipe::new));
 		
-		private static final StreamCodec<RegistryFriendlyByteBuf, PrimordialFireBurningRecipe> PACKET_CODEC = StreamCodec.composite(
+		private static final StreamCodec<RegistryFriendlyByteBuf, PrimordialFireBurningRecipe> STREAM_CODEC = StreamCodec.composite(
 				ByteBufCodecs.STRING_UTF8, c -> c.group,
 				ByteBufCodecs.BOOL, c -> c.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
@@ -180,7 +180,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, PrimordialFireBurningRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 		
 	}

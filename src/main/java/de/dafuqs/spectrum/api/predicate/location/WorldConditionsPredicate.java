@@ -63,11 +63,11 @@ public record WorldConditionsPredicate(
 			Codec.BOOL.optionalFieldOf("can_see_sky").forGetter(p -> p.location.canSeeSky())
 	).apply(instance, WorldConditionsPredicate::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, WorldConditionsPredicate> PACKET_CODEC = PacketCodecHelper.tuple(
-			ByteBufCodecs.optional(MoonPhasePredicate.PACKET_CODEC), p -> p.moonPhase,
-			ByteBufCodecs.optional(TimeOfDayPredicate.PACKET_CODEC), p -> p.timeOfDay,
-			ByteBufCodecs.optional(WeatherPredicate.PACKET_CODEC), p -> p.weather,
-			ByteBufCodecs.optional(CommandPredicate.PACKET_CODEC), p -> p.command,
+	public static final StreamCodec<RegistryFriendlyByteBuf, WorldConditionsPredicate> STREAM_CODEC = PacketCodecHelper.tuple(
+			ByteBufCodecs.optional(MoonPhasePredicate.STREAM_CODEC), p -> p.moonPhase,
+			ByteBufCodecs.optional(TimeOfDayPredicate.STREAM_CODEC), p -> p.timeOfDay,
+			ByteBufCodecs.optional(WeatherPredicate.STREAM_CODEC), p -> p.weather,
+			ByteBufCodecs.optional(CommandPredicate.STREAM_CODEC), p -> p.command,
 			ByteBufCodecs.optional(ByteBufCodecs.holderSet(Registries.BIOME)), p -> p.location.biomes(),
 			ByteBufCodecs.optional(ByteBufCodecs.holderSet(Registries.STRUCTURE)), p -> p.location.structures(),
 			ByteBufCodecs.optional(ResourceKey.streamCodec(Registries.DIMENSION)), p -> p.location.dimension(),

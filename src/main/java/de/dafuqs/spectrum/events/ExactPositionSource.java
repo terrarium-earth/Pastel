@@ -18,7 +18,7 @@ public class ExactPositionSource implements PositionSource {
 			Vec3.CODEC.fieldOf("pos").forGetter((blockPositionSource) -> blockPositionSource.pos)
 	).apply(instance, ExactPositionSource::new));
 	
-	public static final StreamCodec<ByteBuf, ExactPositionSource> PACKET_CODEC = StreamCodec.composite(PacketCodecHelper.VEC3D, (source) -> source.pos, ExactPositionSource::new);
+	public static final StreamCodec<ByteBuf, ExactPositionSource> STREAM_CODEC = StreamCodec.composite(PacketCodecHelper.VEC3D, (source) -> source.pos, ExactPositionSource::new);
 	
 	final Vec3 pos;
 	
@@ -45,7 +45,7 @@ public class ExactPositionSource implements PositionSource {
 		}
 		
 		public StreamCodec<ByteBuf, ExactPositionSource> streamCodec() {
-			return ExactPositionSource.PACKET_CODEC;
+			return ExactPositionSource.STREAM_CODEC;
 		}
 	}
 	

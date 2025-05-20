@@ -1,11 +1,12 @@
 package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -29,16 +30,14 @@ public record PlayPedestalCraftingFinishedParticlePayload(BlockPos pedestalPos, 
 	);
 	
 	public static void sendPlayPedestalCraftingFinishedParticle(ServerLevel world, BlockPos pedestalPos, ItemStack craftedStack) {
-		for (ServerPlayer player : PlayerLookup.tracking(world, pedestalPos)) {
-			ServerPlayNetworking.send(player, new PlayPedestalCraftingFinishedParticlePayload(pedestalPos, craftedStack));
-		}
+		PacketDistributor.sendToPlayersTrackingChunk(world, new ChunkPos(pedestalPos), new PlayPedestalCraftingFinishedParticlePayload(pedestalPos, craftedStack));
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayPedestalCraftingFinishedParticlePayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		ClientLevel world = client.level;
+	public static void execute(PlayPedestalCraftingFinishedParticlePayload payload, IPayloadContext context) {
+		var level = context.player().level();
+		
 		RandomSource random = world.random;
 		
 		for (int i = 0; i < 10; i++) {

@@ -25,7 +25,7 @@ public class RawShapedPedestalRecipe {
 			RawShapedPedestalRecipe::fromData,
 			(recipe) -> recipe.data.map(DataResult::success).orElseGet(() -> DataResult.error(() -> "Cannot encode unpacked recipe")));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, RawShapedPedestalRecipe> PACKET_CODEC = StreamCodec.ofMember(RawShapedPedestalRecipe::writeToBuf, RawShapedPedestalRecipe::readFromBuf);
+	public static final StreamCodec<RegistryFriendlyByteBuf, RawShapedPedestalRecipe> STREAM_CODEC = StreamCodec.ofMember(RawShapedPedestalRecipe::writeToBuf, RawShapedPedestalRecipe::readFromBuf);
 	
 	private final int width;
 	private final int height;
@@ -176,7 +176,7 @@ public class RawShapedPedestalRecipe {
 		buf.writeVarInt(this.height);
 		
 		for (IngredientStack ingredient : this.ingredients) {
-			IngredientStack.PACKET_CODEC.encode(buf, ingredient);
+			IngredientStack.STREAM_CODEC.encode(buf, ingredient);
 		}
 		
 	}
@@ -185,7 +185,7 @@ public class RawShapedPedestalRecipe {
 		int i = buf.readVarInt();
 		int j = buf.readVarInt();
 		NonNullList<IngredientStack> defaultedList = NonNullList.withSize(i * j, IngredientStack.EMPTY);
-		defaultedList.replaceAll((ingredient) -> IngredientStack.PACKET_CODEC.decode(buf));
+		defaultedList.replaceAll((ingredient) -> IngredientStack.STREAM_CODEC.decode(buf));
 		return new RawShapedPedestalRecipe(i, j, defaultedList, Optional.empty());
 	}
 	

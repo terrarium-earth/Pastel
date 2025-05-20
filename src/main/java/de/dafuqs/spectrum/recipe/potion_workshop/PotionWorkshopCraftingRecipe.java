@@ -151,16 +151,16 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 				ItemStack.CODEC.fieldOf("result").forGetter(c -> c.output)
 		).apply(i, PotionWorkshopCraftingRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, PotionWorkshopCraftingRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		public static final StreamCodec<RegistryFriendlyByteBuf, PotionWorkshopCraftingRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, c -> c.group,
 				ByteBufCodecs.BOOL, c -> c.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
 				ByteBufCodecs.VAR_INT, c -> c.craftingTime,
 				ByteBufCodecs.VAR_INT, c -> c.color,
-				IngredientStack.PACKET_CODEC, c -> c.ingredient1,
-				IngredientStack.PACKET_CODEC, c -> c.ingredient2,
-				IngredientStack.PACKET_CODEC, c -> c.ingredient3,
-				IngredientStack.PACKET_CODEC, c -> c.baseIngredient,
+				IngredientStack.STREAM_CODEC, c -> c.ingredient1,
+				IngredientStack.STREAM_CODEC, c -> c.ingredient2,
+				IngredientStack.STREAM_CODEC, c -> c.ingredient3,
+				IngredientStack.STREAM_CODEC, c -> c.baseIngredient,
 				ByteBufCodecs.BOOL, c -> c.consumeBaseIngredient,
 				ByteBufCodecs.VAR_INT, c -> c.requiredExperience,
 				ItemStack.STREAM_CODEC, c -> c.output,
@@ -174,7 +174,7 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, PotionWorkshopCraftingRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 	}
 	

@@ -209,13 +209,13 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 				Codec.BOOL.optionalFieldOf("disable_yield_and_efficiency_upgrades", false).forGetter(recipe -> recipe.noBenefitsFromYieldAndEfficiencyUpgrades)
 		).apply(i, SpiritInstillerRecipe::new));
 		
-		private static final StreamCodec<RegistryFriendlyByteBuf, SpiritInstillerRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		private static final StreamCodec<RegistryFriendlyByteBuf, SpiritInstillerRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, c -> c.group,
 				ByteBufCodecs.BOOL, c -> c.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
-				IngredientStack.PACKET_CODEC, c -> c.centerIngredient,
-				IngredientStack.PACKET_CODEC, c -> c.bowlIngredient1,
-				IngredientStack.PACKET_CODEC, c -> c.bowlIngredient2,
+				IngredientStack.STREAM_CODEC, c -> c.centerIngredient,
+				IngredientStack.STREAM_CODEC, c -> c.bowlIngredient1,
+				IngredientStack.STREAM_CODEC, c -> c.bowlIngredient2,
 				ItemStack.STREAM_CODEC, c -> c.output,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.craftingTime,
 				ByteBufCodecs.FLOAT, recipe -> recipe.experience,
@@ -230,7 +230,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, SpiritInstillerRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 	}
 	

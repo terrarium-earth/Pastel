@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.inventories;
 import de.dafuqs.spectrum.blocks.chests.CompactingChestBlockEntity;
 import de.dafuqs.spectrum.networking.c2s_payloads.ChangeCompactingChestSettingsPayload;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;

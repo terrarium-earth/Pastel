@@ -35,7 +35,7 @@ public class ColoredSparkleRisingParticleEffect implements ParticleOptions {
 	public static final MapCodec<ColoredSparkleRisingParticleEffect> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
 			ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((effect) -> effect.color)
 	).apply(instance, ColoredSparkleRisingParticleEffect::new));
-	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredSparkleRisingParticleEffect> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredSparkleRisingParticleEffect> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VECTOR3F, (effect) -> effect.color,
 			ColoredSparkleRisingParticleEffect::new
 	);

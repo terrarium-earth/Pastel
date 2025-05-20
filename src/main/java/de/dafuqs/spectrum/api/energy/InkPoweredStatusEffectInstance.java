@@ -34,9 +34,9 @@ public class InkPoweredStatusEffectInstance {
 			Codec.BOOL.optionalFieldOf("incurable", false).forGetter(c -> c.incurable)
 	).apply(i, InkPoweredStatusEffectInstance::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, InkPoweredStatusEffectInstance> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, InkPoweredStatusEffectInstance> STREAM_CODEC = StreamCodec.composite(
 			MobEffectInstance.STREAM_CODEC, c -> c.statusEffectInstance,
-			InkCost.PACKET_CODEC, c -> c.cost,
+			InkCost.STREAM_CODEC, c -> c.cost,
 			ByteBufCodecs.VAR_INT, c -> c.customColor,
 			ByteBufCodecs.BOOL, c -> c.unidentifiable,
 			ByteBufCodecs.BOOL, c -> c.incurable,

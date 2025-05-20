@@ -211,17 +211,17 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleRecipeInput>
 				ItemStack.CODEC.listOf().optionalFieldOf("additional_recipe_manager_results", ImmutableList.of()).forGetter(recipe -> recipe.additionalResults)
 		).apply(i, CrystallarieumRecipe::new));
 		
-		private static final StreamCodec<RegistryFriendlyByteBuf, CrystallarieumRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		private static final StreamCodec<RegistryFriendlyByteBuf, CrystallarieumRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.ingredient,
 				PacketCodecHelper.BLOCK_STATE.apply(ByteBufCodecs.list()), recipe -> recipe.growthStages,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.secondsPerGrowthStage,
-				InkColor.PACKET_CODEC, recipe -> recipe.inkColor,
+				InkColor.STREAM_CODEC, recipe -> recipe.inkColor,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.inkPerSecond,
 				ByteBufCodecs.BOOL, recipe -> recipe.growsWithoutCatalyst,
-				CrystallarieumCatalyst.PACKET_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.catalysts,
+				CrystallarieumCatalyst.STREAM_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.catalysts,
 				FluidStack.STREAM_CODEC, recipe -> recipe.medium,
 				ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list()), recipe -> recipe.additionalResults,
 				CrystallarieumRecipe::new
@@ -234,7 +234,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleRecipeInput>
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, CrystallarieumRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 	}
 	

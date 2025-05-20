@@ -19,7 +19,7 @@ public record ExtendedBundleComponent(Fraction maxOccupancy, int maxStacks, bool
 			Codec.BOOL.fieldOf("ignore_stacks").forGetter(c -> c.ignoreStacks)
 	).apply(i, ExtendedBundleComponent::new));
 	
-	public static final StreamCodec<ByteBuf, ExtendedBundleComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, ExtendedBundleComponent> STREAM_CODEC = StreamCodec.composite(
 			PacketCodecHelper.FRACTION, c -> c.maxOccupancy,
 			ByteBufCodecs.VAR_INT, c -> c.maxStacks,
 			ByteBufCodecs.BOOL, c -> c.ignoreStacks,

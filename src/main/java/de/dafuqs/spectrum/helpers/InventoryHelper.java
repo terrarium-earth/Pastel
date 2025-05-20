@@ -4,7 +4,7 @@ import de.dafuqs.spectrum.api.interaction.ItemProvider;
 import de.dafuqs.spectrum.api.interaction.ItemProviderRegistry;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -96,10 +96,10 @@ public class InventoryHelper {
 		return true;
 	}
 	
-	public static boolean isItemCountInInventory(List<ItemStack> inventory, ItemVariant itemVariant, int maxSearchAmount) {
+	public static boolean isItemCountInInventory(List<ItemStack> inventory, ItemStack ItemStack, int maxSearchAmount) {
 		int count = 0;
 		for (ItemStack inventoryStack : inventory) {
-			if (itemVariant.matches(inventoryStack)) {
+			if (ItemStack.matches(inventoryStack)) {
 				count += inventoryStack.getCount();
 				if (count >= maxSearchAmount) {
 					return true;
@@ -474,7 +474,7 @@ public class InventoryHelper {
 			if (stack.isEmpty())
 				continue;
 
-			if (StorageUtil.simulateInsert(storage, ItemVariant.of(stack), stack.getMaxStackSize(), null) != stack.getCount())
+			if (StorageUtil.simulateInsert(storage, ItemStack.of(stack), stack.getMaxStackSize(), null) != stack.getCount())
 				return false;
 		}
 

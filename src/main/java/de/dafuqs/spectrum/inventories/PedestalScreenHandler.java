@@ -30,10 +30,10 @@ import net.minecraft.world.level.Level;
 public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<RecipeInput>> {
 	
 	public record ScreenOpeningData(BlockPos pos, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
-		public static final StreamCodec<ByteBuf, ScreenOpeningData> PACKET_CODEC = StreamCodec.composite(
+		public static final StreamCodec<ByteBuf, ScreenOpeningData> STREAM_CODEC = StreamCodec.composite(
 				BlockPos.STREAM_CODEC, ScreenOpeningData::pos,
-				PedestalRecipeTier.PACKET_CODEC, ScreenOpeningData::pedestalRecipeTier,
-				PedestalRecipeTier.PACKET_CODEC, ScreenOpeningData::maxRecipeTier,
+				PedestalRecipeTier.STREAM_CODEC, ScreenOpeningData::pedestalRecipeTier,
+				PedestalRecipeTier.STREAM_CODEC, ScreenOpeningData::maxRecipeTier,
 				PedestalScreenHandler.ScreenOpeningData::new
 		);
 	}

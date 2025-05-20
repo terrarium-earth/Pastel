@@ -29,7 +29,7 @@ public record DynamicParticleEffect(ParticleType<?> particleType, float gravity,
 			Codec.BOOL.optionalFieldOf("always_show", false).forGetter(c -> c.alwaysShow)
 	).apply(i, DynamicParticleEffect::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, DynamicParticleEffect> PACKET_CODEC = PacketCodecHelper.tuple(
+	public static final StreamCodec<RegistryFriendlyByteBuf, DynamicParticleEffect> STREAM_CODEC = PacketCodecHelper.tuple(
 			ByteBufCodecs.registry(Registries.PARTICLE_TYPE), c -> c.particleType,
 			ByteBufCodecs.FLOAT, c -> c.gravity,
 			ByteBufCodecs.VECTOR3F, c -> c.color,

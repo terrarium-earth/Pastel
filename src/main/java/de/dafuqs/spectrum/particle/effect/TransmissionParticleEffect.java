@@ -24,7 +24,7 @@ public class TransmissionParticleEffect implements ParticleOptions {
 			Codec.INT.fieldOf("arrival_in_ticks").forGetter(c -> c.arrivalInTicks)
 	).apply(i, TransmissionParticleEffect::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, TransmissionParticleEffect> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, TransmissionParticleEffect> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.registry(Registries.PARTICLE_TYPE), c -> c.particleType,
 			PositionSource.STREAM_CODEC, c -> c.destination,
 			ByteBufCodecs.VAR_INT, c -> c.arrivalInTicks,

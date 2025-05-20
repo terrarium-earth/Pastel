@@ -4,7 +4,7 @@ import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeType;
 import de.dafuqs.spectrum.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.PastelTransmissionPayload;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
@@ -95,20 +95,20 @@ public class PastelTransmissionLogic {
 				continue;
 			}
 			
-			Storage<ItemVariant> sourceStorage = sourceNode.getConnectedStorage();
+			Storage<ItemStack> sourceStorage = sourceNode.getConnectedStorage();
 			if (sourceStorage != null && sourceStorage.supportsExtraction()) {
 				tryTransferToType(sourceNode, sourceStorage, destinationType, transferMode);
 			}
 		}
 	}
 	
-	private void tryTransferToType(PastelNodeBlockEntity sourceNode, Storage<ItemVariant> sourceStorage, PastelNodeType type, TransferMode transferMode) {
+	private void tryTransferToType(PastelNodeBlockEntity sourceNode, Storage<ItemStack> sourceStorage, PastelNodeType type, TransferMode transferMode) {
 		for (PastelNodeBlockEntity destinationNode : this.network.getLoadedNodes(type, PastelNetwork.NodePriority.GENERIC)) {
 			if (!destinationNode.canTransfer()) {
 				continue;
 			}
 			
-			Storage<ItemVariant> destinationStorage = destinationNode.getConnectedStorage();
+			Storage<ItemStack> destinationStorage = destinationNode.getConnectedStorage();
 			if (destinationStorage != null && destinationStorage.supportsInsertion()) {
 				boolean success = transferBetween(sourceNode, sourceStorage, destinationNode, destinationStorage, transferMode);
 				if (success && transferMode != TransferMode.PULL) {
@@ -118,16 +118,16 @@ public class PastelTransmissionLogic {
 		}
 	}
 	
-	private boolean transferBetween(PastelNodeBlockEntity sourceNode, Storage<ItemVariant> sourceStorage, PastelNodeBlockEntity destinationNode, Storage<ItemVariant> destinationStorage, TransferMode transferMode) {
-		Predicate<ItemVariant> filter = sourceNode.getTransferFilterTo(destinationNode);
+	private boolean transferBetween(PastelNodeBlockEntity sourceNode, Storage<ItemStack> sourceStorage, PastelNodeBlockEntity destinationNode, Storage<ItemStack> destinationStorage, TransferMode transferMode) {
+		Predicate<ItemStack> filter = sourceNode.getTransferFilterTo(destinationNode);
 		
 		try (Transaction transaction = Transaction.openOuter()) {
-			for (StorageView<ItemVariant> view : sourceStorage) {
+			for (StorageView<ItemStack> view : sourceStorage) {
 				if (view.isResourceBlank()) {
 					continue;
 				}
 				
-				ItemVariant storedResource = view.getResource(); // Current resource
+				ItemStack storedResource = view.getResource(); // Current resource
 				if (storedResource.isBlank() || !filter.test(storedResource)) {
 					continue;
 				}
@@ -180,7 +180,7 @@ public class PastelTransmissionLogic {
 		return false;
 	}
 	
-	public Optional<PastelTransmission> createTransmissionOnValidPath(PastelNodeBlockEntity source, PastelNodeBlockEntity destination, ItemVariant variant, long amount, int vertexTime) {
+	public Optional<PastelTransmission> createTransmissionOnValidPath(PastelNodeBlockEntity source, PastelNodeBlockEntity destination, ItemStack variant, long amount, int vertexTime) {
 		GraphPath<BlockPos, DefaultEdge> graphPath = getPath(this.network.getGraph(), source, destination);
 		if (graphPath != null) {
 			PastelNodeStatusUpdatePayload.sendPastelNodeStatusUpdate(List.of(source), true);

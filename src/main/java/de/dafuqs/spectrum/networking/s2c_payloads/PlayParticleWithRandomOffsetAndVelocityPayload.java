@@ -2,12 +2,11 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.helpers.PacketCodecHelper;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.Minecraft;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -20,6 +19,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.jetbrains.annotations.NotNull;
 
 public record PlayParticleWithRandomOffsetAndVelocityPayload(Vec3 pos, ParticleOptions effect, int amount, Vec3 randomOffset, Vec3 randomVelocity) implements CustomPacketPayload {
@@ -42,16 +42,13 @@ public record PlayParticleWithRandomOffsetAndVelocityPayload(Vec3 pos, ParticleO
 	 * @param particleEffect The particle effect to play
 	 */
 	public static void playParticleWithRandomOffsetAndVelocity(ServerLevel world, Vec3 position, @NotNull ParticleOptions particleEffect, int amount, Vec3 randomOffset, Vec3 randomVelocity) {
-		for (ServerPlayer player : PlayerLookup.tracking(world, BlockPos.containing(position))) {
-			ServerPlayNetworking.send(player, new PlayParticleWithRandomOffsetAndVelocityPayload(position, particleEffect, amount, randomOffset, randomVelocity));
-		}
+		PacketDistributor.sendToPlayersTrackingChunk(world, new ChunkPos(BlockPos.containing(position)), new PlayParticleWithRandomOffsetAndVelocityPayload(position, particleEffect, amount, randomOffset, randomVelocity));
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayParticleWithRandomOffsetAndVelocityPayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		ClientLevel world = client.level;
+	public static void execute(PlayParticleWithRandomOffsetAndVelocityPayload payload, IPayloadContext context) {
+		var level = context.player().level();
 		RandomSource random = world.getRandom();
 		
 		Vec3 pos = payload.pos;

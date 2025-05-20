@@ -17,7 +17,7 @@ public class ColoredTransmissionParticleEffect extends TransmissionParticleEffec
 			Codec.INT.fieldOf("color").forGetter((effect) -> effect.color)
 	).apply(i, ColoredTransmissionParticleEffect::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredTransmissionParticleEffect> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredTransmissionParticleEffect> STREAM_CODEC = StreamCodec.composite(
 			PositionSource.STREAM_CODEC, c -> c.destination,
 			ByteBufCodecs.VAR_INT, c -> c.arrivalInTicks,
 			ByteBufCodecs.INT, c -> c.color,

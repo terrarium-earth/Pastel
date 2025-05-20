@@ -19,7 +19,7 @@ public record InertiaComponent(Block lastMined, long count) {
 			Codec.LONG.fieldOf("count").forGetter(InertiaComponent::count)
 	).apply(i, InertiaComponent::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, InertiaComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, InertiaComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.registry(Registries.BLOCK),
 			InertiaComponent::lastMined,
 			ByteBufCodecs.VAR_LONG,

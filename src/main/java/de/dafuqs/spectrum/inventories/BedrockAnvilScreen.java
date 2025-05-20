@@ -7,7 +7,7 @@ import de.dafuqs.spectrum.networking.c2s_payloads.AddLoreBedrockAnvilPayload;
 import de.dafuqs.spectrum.networking.c2s_payloads.RenameItemInBedrockAnvilPayload;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;

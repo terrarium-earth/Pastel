@@ -18,7 +18,7 @@ public class ColoredTransmission extends SimpleTransmission {
 			Codec.INT.fieldOf("color").forGetter(c -> c.color)
 	).apply(instance, ColoredTransmission::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredTransmission> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredTransmission> STREAM_CODEC = StreamCodec.composite(
 			PacketCodecHelper.VEC3D, c -> c.origin,
 			PositionSource.STREAM_CODEC, c -> c.destination,
 			ByteBufCodecs.INT, c -> c.arrivalInTicks,

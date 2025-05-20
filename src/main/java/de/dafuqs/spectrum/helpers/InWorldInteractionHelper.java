@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.helpers;
 
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
@@ -102,7 +102,7 @@ public class InWorldInteractionHelper {
 		stack.shrink(amount);
 	}
 	
-	public static void scatter(Level world, double x, double y, double z, ItemVariant variant, long amount) {
+	public static void scatter(Level world, double x, double y, double z, ItemStack variant, long amount) {
 		int maxStackSize = variant.getItem().getDefaultMaxStackSize();
 
 		while (amount > 0) {

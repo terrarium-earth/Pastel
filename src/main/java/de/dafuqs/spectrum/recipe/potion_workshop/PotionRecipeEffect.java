@@ -53,7 +53,7 @@ public record PotionRecipeEffect(
 			Codec.INT.fieldOf("ink_cost").forGetter(PotionRecipeEffect::inkCost)
 	).apply(i, PotionRecipeEffect::new));
 	
-	public static StreamCodec<RegistryFriendlyByteBuf, PotionRecipeEffect> PACKET_CODEC = PacketCodecHelper.tuple(
+	public static StreamCodec<RegistryFriendlyByteBuf, PotionRecipeEffect> STREAM_CODEC = PacketCodecHelper.tuple(
 			ByteBufCodecs.BOOL, PotionRecipeEffect::applicableToPotions,
 			ByteBufCodecs.BOOL, PotionRecipeEffect::applicableToTippedArrows,
 			ByteBufCodecs.BOOL, PotionRecipeEffect::applicableToPotionFillabes,
@@ -63,7 +63,7 @@ public record PotionRecipeEffect(
 			ByteBufCodecs.VAR_INT, PotionRecipeEffect::potencyHardCap,
 			ByteBufCodecs.FLOAT, PotionRecipeEffect::potencyModifier,
 			ByteBufCodecs.holderRegistry(Registries.MOB_EFFECT), PotionRecipeEffect::statusEffect,
-			InkColor.PACKET_CODEC, PotionRecipeEffect::inkColor,
+			InkColor.STREAM_CODEC, PotionRecipeEffect::inkColor,
 			ByteBufCodecs.VAR_INT, PotionRecipeEffect::inkCost,
 			PotionRecipeEffect::new
 	);
@@ -73,11 +73,11 @@ public record PotionRecipeEffect(
 	}
 	
 	public void write(RegistryFriendlyByteBuf buf) {
-		PACKET_CODEC.encode(buf, this);
+		STREAM_CODEC.encode(buf, this);
 	}
 	
 	public static PotionRecipeEffect read(RegistryFriendlyByteBuf buf) {
-		return PACKET_CODEC.decode(buf);
+		return STREAM_CODEC.decode(buf);
 	}
 	
 	public @Nullable InkPoweredStatusEffectInstance getStatusEffectInstance(@NotNull PotionMod potionMod, RandomSource random) {

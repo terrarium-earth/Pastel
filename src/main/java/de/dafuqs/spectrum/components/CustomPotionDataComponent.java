@@ -21,7 +21,7 @@ public record CustomPotionDataComponent(boolean unidentifiable, int additionalDr
 			Codec.INT.fieldOf("additional_drink_duration").forGetter(c -> c.additionalDrinkDuration)
 	).apply(i, CustomPotionDataComponent::new));
 	
-	public static final StreamCodec<ByteBuf, CustomPotionDataComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, CustomPotionDataComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.BOOL, c -> c.unidentifiable,
 			ByteBufCodecs.INT, c -> c.additionalDrinkDuration,
 			CustomPotionDataComponent::new

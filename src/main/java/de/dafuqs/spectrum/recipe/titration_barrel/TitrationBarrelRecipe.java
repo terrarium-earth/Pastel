@@ -279,16 +279,16 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 				FermentationData.CODEC.optionalFieldOf("fermentation", FermentationData.DEFAULT).forGetter(recipe -> recipe.fermentationData)
 		).apply(i, TitrationBarrelRecipe::new));
 		
-		private static final StreamCodec<RegistryFriendlyByteBuf, TitrationBarrelRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		private static final StreamCodec<RegistryFriendlyByteBuf, TitrationBarrelRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, c -> c.group,
 				ByteBufCodecs.BOOL, c -> c.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
-				IngredientStack.PACKET_CODEC.apply(ByteBufCodecs.list()), c -> c.inputStacks,
+				IngredientStack.STREAM_CODEC.apply(ByteBufCodecs.list()), c -> c.inputStacks,
 				FluidIngredient.STREAM_CODEC, c -> c.fluid,
 				ItemStack.STREAM_CODEC, c -> c.outputItemStack,
 				ByteBufCodecs.registry(Registries.ITEM), recipe -> recipe.tappingItem,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.minFermentationTimeHours,
-				FermentationData.PACKET_CODEC, recipe -> recipe.fermentationData,
+				FermentationData.STREAM_CODEC, recipe -> recipe.fermentationData,
 				TitrationBarrelRecipe::new
 		);
 		
@@ -299,7 +299,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, TitrationBarrelRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 		
 	}

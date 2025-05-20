@@ -35,7 +35,7 @@ public class ColoredCraftingParticleEffect implements ParticleOptions {
 	public static final MapCodec<ColoredCraftingParticleEffect> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
 			ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((effect) -> effect.color)
 	).apply(instance, ColoredCraftingParticleEffect::new));
-	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredCraftingParticleEffect> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredCraftingParticleEffect> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VECTOR3F, (effect) -> effect.color,
 			ColoredCraftingParticleEffect::new
 	);

@@ -6,8 +6,8 @@ import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -27,11 +27,11 @@ public record InkColorSelectedS2CPayload(Optional<Holder<InkColor>> inkColor) im
 	);
 	
 	public static void sendInkColorSelected(Optional<Holder<InkColor>> inkColor, ServerPlayer player) {
-		ServerPlayNetworking.send(player, new InkColorSelectedS2CPayload(inkColor));
+		PacketDistributor.sendToPlayer(player, new InkColorSelectedS2CPayload(inkColor));
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(InkColorSelectedS2CPayload payload, ClientPlayNetworking.Context context) {
+	public static void execute(InkColorSelectedS2CPayload payload, IPayloadContext context) {
 		AbstractContainerMenu screenHandler = context.player().containerMenu;
 		if (screenHandler instanceof InkColorSelectedPacketReceiver inkColorSelectedPacketReceiver) {
 			inkColorSelectedPacketReceiver.onInkColorSelectedPacket(payload.inkColor());

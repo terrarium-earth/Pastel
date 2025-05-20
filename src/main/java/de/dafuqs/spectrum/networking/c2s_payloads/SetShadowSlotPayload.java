@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.networking.c2s_payloads;
 import de.dafuqs.spectrum.api.block.FilterConfigurable;
 import de.dafuqs.spectrum.inventories.slots.ShadowSlot;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -29,9 +29,9 @@ public record SetShadowSlotPayload(int screenHandlerSyncId, int slotId,
 		return ID;
 	}
 	
-	public static ServerPlayNetworking.PlayPayloadHandler<SetShadowSlotPayload> getPayloadHandler() {
+	public static IPayloadHandler<SetShadowSlotPayload> getPayloadHandler() {
 		return (payload, context) -> {
-			ServerPlayer player = context.player();
+			ServerPlayer player = (ServerPlayer) context.player();
 			AbstractContainerMenu screenHandler = player.containerMenu;
 			
 			if (screenHandler == null || screenHandler.containerId != payload.screenHandlerSyncId) {

@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.blocks.bottomless_bundle;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumEnchantmentTags;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.core.BlockPos;
@@ -28,30 +28,30 @@ public class BottomlessBundleBlockEntity extends BlockEntity {
 	private boolean isVoiding;
 	protected int powerLevel;
 
-    public final SingleVariantStorage<ItemVariant> storage = new SingleVariantStorage<>() {
+    public final SingleVariantStorage<ItemStack> storage = new SingleVariantStorage<>() {
 		
 		@Override
-		protected boolean canInsert(ItemVariant variant) {
+		protected boolean canInsert(ItemStack variant) {
 			return variant.getItem().canFitInsideContainerItems()
 					&& (this.variant.isBlank() || this.variant.isOf(variant.getItem())
 					&& ItemStack.isSameItemSameComponents(this.variant.toStack(), variant.toStack()));
 		}
 
 		@Override
-		public long insert(ItemVariant insertedVariant, long maxAmount, TransactionContext transaction) {
+		public long insert(ItemStack insertedVariant, long maxAmount, TransactionContext transaction) {
 			long inserted = super.insert(insertedVariant, maxAmount, transaction);
 			return isVoiding ? maxAmount : inserted;
 		}
 		
 		@Override
-		protected ItemVariant getBlankVariant() {
+		protected ItemStack getBlankVariant() {
 			// lock to the item the player set it to when placing it down
 			// variant will only ever be null upon initialization, where it'll be set to the bundle
-			return this.variant == null ? ItemVariant.blank() : this.variant;
+			return this.variant == null ? ItemStack.blank() : this.variant;
 		}
 
 		@Override
-		protected long getCapacity(ItemVariant variant) {
+		protected long getCapacity(ItemStack variant) {
 			return BottomlessBundleItem.getMaxStoredAmount(powerLevel);
 		}
 

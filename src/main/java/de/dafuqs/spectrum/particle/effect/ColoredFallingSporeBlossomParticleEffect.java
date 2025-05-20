@@ -35,7 +35,7 @@ public class ColoredFallingSporeBlossomParticleEffect implements ParticleOptions
 	public static final MapCodec<ColoredFallingSporeBlossomParticleEffect> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
 			ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((effect) -> effect.color)
 	).apply(instance, ColoredFallingSporeBlossomParticleEffect::new));
-	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredFallingSporeBlossomParticleEffect> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredFallingSporeBlossomParticleEffect> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VECTOR3F, (effect) -> effect.color,
 			ColoredFallingSporeBlossomParticleEffect::new
 	);

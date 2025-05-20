@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.networking.c2s_payloads;
 
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,9 +21,9 @@ public record GuidebookConfirmationButtonPressedPayload(String confirmationStrin
 		return ID;
 	}
 	
-	public static ServerPlayNetworking.PlayPayloadHandler<GuidebookConfirmationButtonPressedPayload> getPayloadHandler() {
+	public static IPayloadHandler<GuidebookConfirmationButtonPressedPayload> getPayloadHandler() {
 		return (payload, context) -> {
-			ServerPlayer player = context.player();
+			ServerPlayer player = (ServerPlayer) context.player();
 			SpectrumAdvancementCriteria.CONFIRMATION_BUTTON_PRESSED.trigger(player, payload.confirmationString);
 			player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
 		};

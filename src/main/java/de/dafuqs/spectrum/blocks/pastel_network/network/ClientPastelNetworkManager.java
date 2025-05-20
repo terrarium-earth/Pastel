@@ -44,7 +44,7 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLe
 		ClientLevel world = context.world();
 		long worldTime = world.getGameTime();
 		for (ClientPastelNetwork network : this.networks) {
-			if (network.getWorld().dimensionType() != world.dimensionType()) continue;
+			if (network.getLevel().dimensionType() != world.dimensionType()) continue;
 			
 			Graph<BlockPos, DefaultEdge> graph = network.getGraph();
 			int color = network.getColor();

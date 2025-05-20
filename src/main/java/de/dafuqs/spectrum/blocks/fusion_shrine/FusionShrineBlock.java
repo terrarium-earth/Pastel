@@ -16,7 +16,7 @@ import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
@@ -185,7 +185,7 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 				
 				// We're not considering stacked fluid storages for the time being
 				if (itemStack.getCount() == 1) {
-					SingleSlotStorage<ItemVariant> slot = new DroppedItemStorage(itemStack);
+					SingleSlotStorage<ItemStack> slot = new DroppedItemStorage(itemStack);
 					SingleSlotContainerItemContext ctx = new SingleSlotContainerItemContext(slot);
 					Storage<FluidStack> fluidStorage = FluidStorage.ITEM.find(itemStack, ctx);
 					

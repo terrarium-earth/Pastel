@@ -28,7 +28,7 @@ public enum PedestalRecipeTier implements StringRepresentable {
 	private final GemstoneColor[] gemstoneColors;
 	
 	public static final Codec<PedestalRecipeTier> CODEC = StringRepresentable.fromEnum(PedestalRecipeTier::values);
-	public static final StreamCodec<ByteBuf, PedestalRecipeTier> PACKET_CODEC = PacketCodecHelper.enumOf(PedestalRecipeTier::values);
+	public static final StreamCodec<ByteBuf, PedestalRecipeTier> STREAM_CODEC = PacketCodecHelper.enumOf(PedestalRecipeTier::values);
 	
 	PedestalRecipeTier(ResourceLocation unlockAdvancementId, GemstoneColor[] gemstoneColors) {
 		this.unlockAdvancementId = unlockAdvancementId;

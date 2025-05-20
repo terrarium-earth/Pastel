@@ -36,7 +36,7 @@ public class ColoredFluidRisingParticleEffect implements ParticleOptions {
 	public static final MapCodec<ColoredFluidRisingParticleEffect> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
 			ExtraCodecs.VECTOR3F.fieldOf("color").forGetter((effect) -> effect.color)
 	).apply(instance, ColoredFluidRisingParticleEffect::new));
-	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredFluidRisingParticleEffect> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, ColoredFluidRisingParticleEffect> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VECTOR3F, (effect) -> effect.color,
 			ColoredFluidRisingParticleEffect::new
 	);

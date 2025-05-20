@@ -22,10 +22,10 @@ public record FermentationData(
 			FermentationStatusEffectEntry.CODEC.listOf().optionalFieldOf("effects", List.of()).forGetter(FermentationData::statusEffectEntries)
 	).apply(i, FermentationData::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, FermentationData> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, FermentationData> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.FLOAT, FermentationData::fermentationSpeedMod,
 			ByteBufCodecs.FLOAT, FermentationData::angelsSharePercentPerMcDay,
-			FermentationStatusEffectEntry.PACKET_CODEC.apply(ByteBufCodecs.list()), FermentationData::statusEffectEntries,
+			FermentationStatusEffectEntry.STREAM_CODEC.apply(ByteBufCodecs.list()), FermentationData::statusEffectEntries,
 			FermentationData::new
 	);
 	

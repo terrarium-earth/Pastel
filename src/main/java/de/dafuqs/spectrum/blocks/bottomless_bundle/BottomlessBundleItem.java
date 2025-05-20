@@ -15,7 +15,7 @@ import de.dafuqs.spectrum.registries.SpectrumEnchantments;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -93,7 +93,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		return itemStack.has(DataComponents.LOCK);
 	}
 	
-	public static ItemVariant getTemplateVariant(ItemStack stack) {
+	public static ItemStack getTemplateVariant(ItemStack stack) {
 		return stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT).variant();
 	}
 	
@@ -143,7 +143,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	
 	@Override
 	public Optional<TooltipComponent> getTooltipImage(ItemStack bundleStack) {
-		ItemVariant variant = getTemplateVariant(bundleStack);
+		ItemStack variant = getTemplateVariant(bundleStack);
 		var storedAmount = getStoredAmount(bundleStack);
 		
 		return Optional.of(new BottomlessBundleTooltipData(variant, storedAmount));
@@ -160,7 +160,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 						Component.translatable("item.spectrum.bottomless_bundle.tooltip.locked").withStyle(ChatFormatting.GRAY));
 			}
 		} else {
-			ItemVariant variant = getTemplateVariant(stack);
+			ItemStack variant = getTemplateVariant(stack);
 			var powerLevel = context.registries()
 					.lookup(Registries.ENCHANTMENT)
 					.flatMap(impl -> impl.get(Enchantments.POWER))
@@ -252,7 +252,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		// We unbundle, tick and then rebundle the stack, in case inventory tick would modify components, count or other properties
 		// The slot isn't technically correct, since it's the slot of the bundle, not that of the bundled stack
 		BottomlessStack.Builder builder = BottomlessStack.Builder.of(world, stack);
-		ItemVariant bundledVariant = builder.getVariant();
+		ItemStack bundledVariant = builder.getVariant();
 		ItemStack bundledStack = builder.getVariant().toStack((int) Math.min(Integer.MAX_VALUE, builder.count));
 		long count = bundledStack.getCount();
 		bundledStack.inventoryTick(world, entity, slot, selected);
@@ -265,7 +265,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	
 	@Override
 	public boolean acceptsItemStack(ItemStack inventoryInsertionAcceptorStack, ItemStack itemStackToAccept) {
-		ItemVariant variant = getTemplateVariant(inventoryInsertionAcceptorStack);
+		ItemStack variant = getTemplateVariant(inventoryInsertionAcceptorStack);
 		return !variant.isBlank() && variant.matches(itemStackToAccept);
 	}
 	
@@ -357,25 +357,25 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		}
 	}
 	
-	public record BottomlessStack(ItemVariant variant, long count, boolean locked) {
+	public record BottomlessStack(ItemStack variant, long count, boolean locked) {
 		
 		public static BottomlessStack DEFAULT = new BottomlessStack(ItemStack.EMPTY, 0, false);
 		
 		public static Codec<BottomlessStack> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-				ItemVariant.CODEC.fieldOf("variant").forGetter(BottomlessStack::variant),
+				ItemStack.CODEC.fieldOf("variant").forGetter(BottomlessStack::variant),
 				Codec.LONG.fieldOf("count").forGetter(BottomlessStack::count),
 				Codec.BOOL.fieldOf("locked").forGetter(BottomlessStack::locked)
 		).apply(instance, BottomlessStack::new));
 		
-		public static StreamCodec<RegistryFriendlyByteBuf, BottomlessStack> PACKET_CODEC = StreamCodec.composite(
-				ItemVariant.PACKET_CODEC, BottomlessStack::variant,
+		public static StreamCodec<RegistryFriendlyByteBuf, BottomlessStack> STREAM_CODEC = StreamCodec.composite(
+				ItemStack.STREAM_CODEC, BottomlessStack::variant,
 				ByteBufCodecs.VAR_LONG, BottomlessStack::count,
 				ByteBufCodecs.BOOL, BottomlessStack::locked,
 				BottomlessStack::new
 		);
 		
 		public BottomlessStack(ItemStack stack, long count, boolean locked) {
-			this(ItemVariant.of(stack), count, locked);
+			this(ItemStack.of(stack), count, locked);
 		}
 		
 		public Iterable<ItemStack> iterateCopy() {
@@ -408,7 +408,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 			private final boolean voiding, locked;
 			private final long max;
 			private long count;
-			private ItemVariant variant;
+			private ItemStack variant;
 			
 			public static Builder of(Level world, ItemStack stack) {
 				var prev = stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT);
@@ -427,16 +427,16 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 			}
 			
 			public Builder clear() {
-				this.variant = ItemVariant.blank();
+				this.variant = ItemStack.blank();
 				this.count = 0;
 				return this;
 			}
 			
 			public int getMaxAllowed(ItemStack stack) {
-				return (int) Math.min(getMaxAllowed(ItemVariant.of(stack), stack.getCount()), Integer.MAX_VALUE);
+				return (int) Math.min(getMaxAllowed(ItemStack.of(stack), stack.getCount()), Integer.MAX_VALUE);
 			}
 			
-			public long getMaxAllowed(ItemVariant variant, long amount) {
+			public long getMaxAllowed(ItemStack variant, long amount) {
 				if (isEmpty()) {
 					return this.max;
 				}
@@ -451,27 +451,27 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 					return 0;
 				
 				if (this.count == 0)
-					this.variant = ItemVariant.of(stack);
+					this.variant = ItemStack.of(stack);
 				
 				this.count += Math.min(this.max - this.count, toAdd);
 				return toAdd;
 			}
 			
 			public void setStack(ItemStack stack) {
-				this.variant = ItemVariant.of(stack);
+				this.variant = ItemStack.of(stack);
 			}
 			
-			public void set(SingleVariantStorage<ItemVariant> storage) {
+			public void set(SingleVariantStorage<ItemStack> storage) {
 				this.variant = storage.variant;
 				this.count = storage.amount;
 			}
 			
 			public void set(ItemStack stack, long count) {
 				if (stack.isEmpty() || count == 0) {
-					this.variant = ItemVariant.blank();
+					this.variant = ItemStack.blank();
 					this.count = 0;
 				} else {
-					this.variant = ItemVariant.of(stack);
+					this.variant = ItemStack.of(stack);
 					this.count = count;
 				}
 			}
@@ -489,7 +489,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 				var removed = this.variant.toStack(toRemove);
 				this.count -= toRemove;
 				if (this.count == 0)
-					this.variant = ItemVariant.blank();
+					this.variant = ItemStack.blank();
 				
 				return removed;
 			}
@@ -502,7 +502,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 				return count;
 			}
 			
-			public ItemVariant getVariant() {
+			public ItemStack getVariant() {
 				return variant;
 			}
 			

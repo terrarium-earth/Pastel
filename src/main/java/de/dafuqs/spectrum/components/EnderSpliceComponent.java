@@ -26,7 +26,7 @@ public record EnderSpliceComponent(Optional<Vec3> pos, Optional<ResourceKey<Leve
 			UUIDUtil.AUTHLIB_CODEC.optionalFieldOf("target_uuid").forGetter(c -> c.targetUUID)
 	).apply(i, EnderSpliceComponent::new));
 	
-	public static final StreamCodec<ByteBuf, EnderSpliceComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, EnderSpliceComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.optional(PacketCodecHelper.VEC3D), EnderSpliceComponent::pos,
 			ByteBufCodecs.optional(ResourceKey.streamCodec(Registries.DIMENSION)), EnderSpliceComponent::dimension,
 			ByteBufCodecs.optional(ByteBufCodecs.STRING_UTF8), EnderSpliceComponent::targetName,

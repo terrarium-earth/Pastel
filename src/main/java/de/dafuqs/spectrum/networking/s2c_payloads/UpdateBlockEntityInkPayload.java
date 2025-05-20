@@ -6,9 +6,8 @@ import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.Minecraft;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -25,21 +24,21 @@ public record UpdateBlockEntityInkPayload(BlockPos pos, Map<InkColor, Long> stor
 	public static final Type<UpdateBlockEntityInkPayload> ID = SpectrumC2SPackets.makeId("update_block_entity_ink");
 	public static final StreamCodec<FriendlyByteBuf, UpdateBlockEntityInkPayload> CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, UpdateBlockEntityInkPayload::pos,
-			ByteBufCodecs.map(HashMap::new, InkColor.PACKET_CODEC, ByteBufCodecs.VAR_LONG), UpdateBlockEntityInkPayload::storage,
+			ByteBufCodecs.map(HashMap::new, InkColor.STREAM_CODEC, ByteBufCodecs.VAR_LONG), UpdateBlockEntityInkPayload::storage,
 			ByteBufCodecs.VAR_LONG, UpdateBlockEntityInkPayload::currentTotal,
 			UpdateBlockEntityInkPayload::new
 	);
 	
 	@SuppressWarnings("deprecation")
 	public static void updateBlockEntityInk(BlockPos pos, InkStorage inkStorage, ServerPlayer player) {
-		ServerPlayNetworking.send(player, new UpdateBlockEntityInkPayload(pos, inkStorage.getEnergy(), inkStorage.getCurrentTotal()));
+		PacketDistributor.sendToPlayer(player, new UpdateBlockEntityInkPayload(pos, inkStorage.getEnergy(), inkStorage.getCurrentTotal()));
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(UpdateBlockEntityInkPayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		BlockEntity blockEntity = client.level.getBlockEntity(payload.pos);
+	public static void execute(UpdateBlockEntityInkPayload payload, IPayloadContext context) {
+		var level = context.player().level();
+		BlockEntity blockEntity = level.getBlockEntity(payload.pos);
 		if (blockEntity instanceof InkStorageBlockEntity<?> inkStorageBlockEntity) {
 			inkStorageBlockEntity.getEnergyStorage().setEnergy(payload.storage, payload.currentTotal);
 		}

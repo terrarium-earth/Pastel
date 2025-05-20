@@ -137,7 +137,7 @@ public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleRecipeInput> 
 				ResourceLocation.CODEC.fieldOf("soundEventIdentifier").forGetter(recipe -> recipe.soundEvent)
 		).apply(instance, AnvilCrushingRecipe::new));
 		
-		private static final StreamCodec<RegistryFriendlyByteBuf, AnvilCrushingRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		private static final StreamCodec<RegistryFriendlyByteBuf, AnvilCrushingRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, c -> c.group,
 				ByteBufCodecs.BOOL, c -> c.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
@@ -158,7 +158,7 @@ public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleRecipeInput> 
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, AnvilCrushingRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 		
 	}

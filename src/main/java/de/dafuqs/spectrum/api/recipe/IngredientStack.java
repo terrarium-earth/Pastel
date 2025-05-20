@@ -42,7 +42,7 @@ public class IngredientStack implements ICustomIngredient {
 			)
 	);
 
-	public static final StreamCodec<RegistryFriendlyByteBuf, IngredientStack> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, IngredientStack> STREAM_CODEC = StreamCodec.composite(
 			Ingredient.CONTENTS_STREAM_CODEC, o -> o.ingredient,
 			DataComponentPredicate.STREAM_CODEC, o -> o.componentPredicate,
 			DataComponentPatch.STREAM_CODEC, o -> o.previewComponents,
@@ -50,7 +50,7 @@ public class IngredientStack implements ICustomIngredient {
 			IngredientStack::new
 	);
 
-	public static final IngredientType<IngredientStack> TYPE = new IngredientType<>(MAP_CODEC, PACKET_CODEC);
+	public static final IngredientType<IngredientStack> TYPE = new IngredientType<>(MAP_CODEC, STREAM_CODEC);
 
 	private final Ingredient ingredient;
 	private final DataComponentPredicate componentPredicate;

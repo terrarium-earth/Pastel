@@ -27,7 +27,7 @@ import de.dafuqs.spectrum.registries.SpectrumStampDataCategories;
 import net.fabricmc.fabric.api.lookup.v1.block.BlockApiCache;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -94,23 +94,23 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	protected int transferTime = PastelTransmissionLogic.DEFAULT_TRANSFER_TICKS_PER_NODE;
 	protected int filterSlotRows = DEFAULT_FILTER_SLOT_ROWS;
 	
-	protected BlockApiCache<Storage<ItemVariant>, Direction> connectedStorageCache = null;
+	protected BlockApiCache<Storage<ItemStack>, Direction> connectedStorageCache = null;
 	protected Direction cachedDirection = null;
 	
-	private final List<ItemVariant> filterItems;
+	private final List<ItemStack> filterItems;
 	float rotationTarget, crystalRotation, lastRotationTarget, heightTarget, crystalHeight, lastHeightTarget, alphaTarget, ringAlpha, lastAlphaTarget;
 	long creationStamp = -1, interpTicks, interpLength = -1, spinTicks;
 	private ConnectionState connectionState;
 	
 	public PastelNodeBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(SpectrumBlockEntities.PASTEL_NODE, blockPos, blockState);
-		this.filterItems = NonNullList.withSize(MAX_FILTER_SLOTS, ItemVariant.blank());
+		this.filterItems = NonNullList.withSize(MAX_FILTER_SLOTS, ItemStack.blank());
 		this.outerRing = Optional.empty();
 		this.innerRing = Optional.empty();
 		this.redstoneRing = Optional.empty();
 	}
 	
-	public @Nullable Storage<ItemVariant> getConnectedStorage() {
+	public @Nullable Storage<ItemStack> getConnectedStorage() {
 		if (connectedStorageCache == null) {
 			BlockState state = this.getBlockState();
 			if (!(state.getBlock() instanceof PastelNodeBlock)) {
@@ -272,7 +272,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		
 		if (filterSlotRows < oldFilterSlotCount) {
 			for (int i = getDrawnSlots(); i < filterItems.size(); i++) {
-				filterItems.set(i, ItemVariant.blank());
+				filterItems.set(i, ItemStack.blank());
 			}
 		}
 	}
@@ -475,16 +475,16 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	}
 	
 	@Override
-	public List<ItemVariant> getItemFilters() {
+	public List<ItemStack> getItemFilters() {
 		return this.filterItems;
 	}
 	
 	@Override
-	public void setFilterItem(int slot, ItemVariant item) {
+	public void setFilterItem(int slot, ItemStack item) {
 		this.filterItems.set(slot, item);
 	}
 	
-	public Predicate<ItemVariant> getTransferFilterTo(PastelNodeBlockEntity other) {
+	public Predicate<ItemStack> getTransferFilterTo(PastelNodeBlockEntity other) {
 		if (this.getNodeType().usesFilters() && !this.hasEmptyFilter()) {
 			if (other.getNodeType().usesFilters() && !other.hasEmptyFilter()) {
 				// unionize both filters
@@ -495,11 +495,11 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		} else if (other.getNodeType().usesFilters() && !other.hasEmptyFilter()) {
 			return other::filter;
 		} else {
-			return itemVariant -> true;
+			return ItemStack -> true;
 		}
 	}
 	
-	private boolean filter(ItemVariant variant) {
+	private boolean filter(ItemStack variant) {
 		return filterItems
 				.stream()
 				.anyMatch(filterItem -> {

@@ -118,12 +118,12 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				Codec.BOOL.optionalFieldOf("disable_yield_upgrades", false).forGetter(recipe -> recipe.noBenefitsFromYieldUpgrades)
 		).apply(i, ShapedPedestalRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, ShapedPedestalRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		public static final StreamCodec<RegistryFriendlyByteBuf, ShapedPedestalRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-				PedestalRecipeTier.PACKET_CODEC, recipe -> recipe.tier,
-				RawShapedPedestalRecipe.PACKET_CODEC, recipe -> recipe.rawShapedRecipe,
+				PedestalRecipeTier.STREAM_CODEC, recipe -> recipe.tier,
+				RawShapedPedestalRecipe.STREAM_CODEC, recipe -> recipe.rawShapedRecipe,
 				ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(SpectrumRegistries.GEMSTONE_COLOR.key()), ByteBufCodecs.VAR_INT), recipe -> recipe.powderInputs,
 				ItemStack.STREAM_CODEC, recipe -> recipe.output,
 				ByteBufCodecs.FLOAT, recipe -> recipe.experience,
@@ -140,7 +140,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, ShapedPedestalRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 	}
 	

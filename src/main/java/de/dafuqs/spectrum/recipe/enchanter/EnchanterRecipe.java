@@ -154,7 +154,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				Codec.BOOL.optionalFieldOf("copy_components", false).forGetter(recipe -> recipe.copyComponents)
 		).apply(i, EnchanterRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, EnchanterRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		public static final StreamCodec<RegistryFriendlyByteBuf, EnchanterRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
@@ -174,7 +174,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, EnchanterRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 		
 	}

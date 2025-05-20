@@ -23,7 +23,7 @@ public record BeverageComponent(long daysAged, int alcoholPercent, float thickne
 			Codec.FLOAT.optionalFieldOf("thickness", 0f).forGetter(BeverageComponent::thickness)
 	).apply(i, BeverageComponent::new));
 	
-	public static final StreamCodec<ByteBuf, BeverageComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, BeverageComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VAR_LONG, BeverageComponent::daysAged,
 			ByteBufCodecs.VAR_INT, BeverageComponent::alcoholPercent,
 			ByteBufCodecs.FLOAT, BeverageComponent::thickness,

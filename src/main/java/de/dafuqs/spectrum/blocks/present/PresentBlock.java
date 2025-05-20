@@ -208,22 +208,23 @@ public class PresentBlock extends BaseEntityBlock {
 		}
 	}
 	
-	public static void spawnParticles(ServerLevel world, BlockPos pos, Map<Integer, Integer> colors) {
-		PlayPresentOpeningParticlesPayload.playPresentOpeningParticles(world, pos, colors);
-	}
-	
-	public static void spawnParticles(ClientLevel world, BlockPos pos, Map<Integer, Integer> colors) {
+	public static void spawnParticles(Level level, BlockPos pos, Map<Integer, Integer> colors) {
+		if (!level.isClientSide()) {
+			PlayPresentOpeningParticlesPayload.playPresentOpeningParticles((ServerLevel) level, pos, colors);
+			return;
+		}
+
 		if (colors.isEmpty()) {
-			int randomColor = DyeColor.byId(world.random.nextInt(DyeColor.values().length)).getTextureDiffuseColor();
-			spawnParticles(world, pos, randomColor, 15);
+			int randomColor = DyeColor.byId(level.random.nextInt(DyeColor.values().length)).getTextureDiffuseColor();
+			spawnParticles(level, pos, randomColor, 15);
 		} else {
 			for (Map.Entry<Integer, Integer> color : colors.entrySet()) {
-				spawnParticles(world, pos, color.getKey(), color.getValue() * 10);
+				spawnParticles(level, pos, color.getKey(), color.getValue() * 10);
 			}
 		}
 	}
 	
-	private static void spawnParticles(ClientLevel world, BlockPos pos, int color, int amount) {
+	private static void spawnParticles(Level world, BlockPos pos, int color, int amount) {
 		double posX = pos.getX() + 0.5;
 		double posY = pos.getY() + 0.25;
 		double posZ = pos.getZ() + 0.5;

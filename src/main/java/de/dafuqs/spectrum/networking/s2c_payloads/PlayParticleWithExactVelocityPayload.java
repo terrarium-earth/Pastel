@@ -2,12 +2,11 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.helpers.PacketCodecHelper;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.Minecraft;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -17,7 +16,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
@@ -51,19 +49,17 @@ public record PlayParticleWithExactVelocityPayload(Vec3 pos, ParticleOptions par
 	 * @param particleEffect The particle effect to play
 	 */
 	public static void playParticleWithExactVelocity(ServerLevel world, @NotNull Vec3 position, @NotNull ParticleOptions particleEffect, int amount, @NotNull Vec3 velocity) {
-		for (ServerPlayer player : PlayerLookup.tracking(world, BlockPos.containing(position))) {
-			ServerPlayNetworking.send(player, new PlayParticleWithExactVelocityPayload(position, particleEffect, amount, velocity));
-		}
+		PacketDistributor.sendToPlayersTrackingChunk(world, new ChunkPos(BlockPos.containing(position)), new PlayParticleWithExactVelocityPayload(position, particleEffect, amount, velocity));
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayParticleWithExactVelocityPayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		ClientLevel world = client.level;
+	public static void execute(PlayParticleWithExactVelocityPayload payload, IPayloadContext context) {
+		var level = context.player().level();
+		
 		
 		for (int i = 0; i < payload.amount; i++) {
-			world.addParticle(payload.particle, payload.pos.x(), payload.pos.y(), payload.pos.z(), payload.velocity.x(), payload.velocity.y(), payload.velocity.z());
+			level.addParticle(payload.particle, payload.pos.x(), payload.pos.y(), payload.pos.z(), payload.velocity.x(), payload.velocity.y(), payload.velocity.z());
 		}
 	}
 	

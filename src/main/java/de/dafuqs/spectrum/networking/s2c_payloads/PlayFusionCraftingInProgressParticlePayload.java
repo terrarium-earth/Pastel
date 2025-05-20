@@ -2,11 +2,12 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.blocks.fusion_shrine.FusionShrineBlockEntity;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -25,16 +26,13 @@ public record PlayFusionCraftingInProgressParticlePayload(BlockPos pos) implemen
 	);
 	
 	public static void sendPlayFusionCraftingInProgressParticles(ServerLevel world, BlockPos pos) {
-		for (ServerPlayer player : PlayerLookup.tracking(world, pos)) {
-			ServerPlayNetworking.send(player, new PlayFusionCraftingInProgressParticlePayload(pos));
-		}
+		PacketDistributor.sendToPlayersTrackingChunk(world, new ChunkPos(pos),new PlayFusionCraftingInProgressParticlePayload(pos));
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayFusionCraftingInProgressParticlePayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		BlockEntity blockEntity = client.level.getBlockEntity(payload.pos);
+	public static void execute(PlayFusionCraftingInProgressParticlePayload payload, IPayloadContext context) {
+		BlockEntity blockEntity = context.player().level().getBlockEntity(payload.pos);
 		if (blockEntity instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
 			fusionShrineBlockEntity.spawnCraftingParticles();
 		}

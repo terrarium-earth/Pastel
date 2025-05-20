@@ -64,7 +64,7 @@ public class EnchantedBookUnsoulingRecipe extends PrimordialFireBurningRecipe {
 				CodecHelper.LOOKUP.forGetter(c -> null)
 		).apply(i, EnchantedBookUnsoulingRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, EnchantedBookUnsoulingRecipe> PACKET_CODEC = StreamCodec.composite(
+		public static final StreamCodec<RegistryFriendlyByteBuf, EnchantedBookUnsoulingRecipe> STREAM_CODEC = StreamCodec.composite(
 				PacketCodecHelper.LOOKUP, c -> null,
 				EnchantedBookUnsoulingRecipe::new
 		);
@@ -76,7 +76,7 @@ public class EnchantedBookUnsoulingRecipe extends PrimordialFireBurningRecipe {
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, EnchantedBookUnsoulingRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 		
 	}

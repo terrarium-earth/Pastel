@@ -5,7 +5,7 @@ import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.networking.s2c_payloads.InkColorSelectedS2CPayload;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -30,9 +30,9 @@ public record InkColorSelectedC2SPayload(Optional<Holder<InkColor>> inkColor) im
 	}
 	
 	@SuppressWarnings("resource")
-	public static ServerPlayNetworking.PlayPayloadHandler<InkColorSelectedC2SPayload> getPayloadHandler() {
+	public static IPayloadHandler<InkColorSelectedC2SPayload> getPayloadHandler() {
 		return (payload, context) -> {
-			ServerPlayer player = context.player();
+			ServerPlayer player = (ServerPlayer) context.player();
 			AbstractContainerMenu screenHandler = player.containerMenu;
 			if (screenHandler instanceof InkColorSelectedPacketReceiver inkColorSelectedPacketReceiver) {
 				
@@ -41,7 +41,7 @@ public record InkColorSelectedC2SPayload(Optional<Holder<InkColor>> inkColor) im
 				// send the newly selected color to all players that have the same gui open
 				// this is minus the player that selected that entry (since they have that info already)
 				inkColorSelectedPacketReceiver.onInkColorSelectedPacket(inkColor);
-				for (ServerPlayer serverPlayer : context.server().getPlayerList().getPlayers()) {
+				for (ServerPlayer serverPlayer : player.level().getServer().getPlayerList().getPlayers()) {
 					if (serverPlayer.containerMenu instanceof InkColorSelectedPacketReceiver receiver && receiver.getBlockEntity() != null && receiver.getBlockEntity() == inkColorSelectedPacketReceiver.getBlockEntity()) {
 						InkColorSelectedS2CPayload.sendInkColorSelected(inkColor, serverPlayer);
 					}

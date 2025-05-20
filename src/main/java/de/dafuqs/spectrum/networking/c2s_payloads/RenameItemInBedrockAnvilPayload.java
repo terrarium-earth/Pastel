@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.networking.c2s_payloads;
 
 import de.dafuqs.spectrum.inventories.BedrockAnvilScreenHandler;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -20,7 +20,7 @@ public record RenameItemInBedrockAnvilPayload(String name) implements CustomPack
 		return ID;
 	}
 	
-	public static ServerPlayNetworking.@NotNull PlayPayloadHandler<RenameItemInBedrockAnvilPayload> getPayloadHandler() {
+	public static IPayloadHandler<RenameItemInBedrockAnvilPayload> getPayloadHandler() {
 		return (payload, context) -> {
 			if (context.player().containerMenu instanceof BedrockAnvilScreenHandler bedrockAnvilScreenHandler) {
 				String string = StringUtil.filterText(payload.name);

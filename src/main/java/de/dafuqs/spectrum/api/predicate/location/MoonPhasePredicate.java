@@ -18,7 +18,7 @@ public enum MoonPhasePredicate implements StringRepresentable {
 	WAXING_GIBBOUS;
 	
 	public static final Codec<MoonPhasePredicate> CODEC = StringRepresentable.fromEnum(MoonPhasePredicate::values);
-	public static final StreamCodec<ByteBuf, MoonPhasePredicate> PACKET_CODEC = PacketCodecHelper.enumOf(MoonPhasePredicate::values);
+	public static final StreamCodec<ByteBuf, MoonPhasePredicate> STREAM_CODEC = PacketCodecHelper.enumOf(MoonPhasePredicate::values);
 	
 	public boolean test(ServerLevel world) {
 		return ordinal() == world.getMoonPhase();

@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.networking.c2s_payloads;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.inventories.BedrockAnvilScreenHandler;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -19,7 +19,7 @@ public record AddLoreBedrockAnvilPayload(String lore) implements CustomPacketPay
 		return ID;
 	}
 	
-	public static ServerPlayNetworking.PlayPayloadHandler<AddLoreBedrockAnvilPayload> getPayloadHandler() {
+	public static IPayloadHandler<AddLoreBedrockAnvilPayload> getPayloadHandler() {
 		return (payload, context) -> {
 			if (context.player().containerMenu instanceof BedrockAnvilScreenHandler bedrockAnvilScreenHandler) {
 				if (!bedrockAnvilScreenHandler.stillValid(context.player())) {

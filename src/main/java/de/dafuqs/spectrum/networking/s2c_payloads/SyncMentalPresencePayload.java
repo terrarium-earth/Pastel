@@ -5,17 +5,14 @@ import de.dafuqs.spectrum.deeper_down.DimensionRenderEffects;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.player.LocalPlayer;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 
-// TODO: Why tf is that a packet and not handled in the synced component instead?
 public record SyncMentalPresencePayload(double value) implements CustomPacketPayload {
 	
 	public static final Type<SyncMentalPresencePayload> ID = SpectrumC2SPackets.makeId("sync_mental_presence");
@@ -25,14 +22,12 @@ public record SyncMentalPresencePayload(double value) implements CustomPacketPay
 	);
 	
 	public static void sendMentalPresenceSync(ServerPlayer player, double value) {
-		FriendlyByteBuf buf = PacketByteBufs.create();
-		buf.writeDouble(value);
-		ServerPlayNetworking.send(player, new SyncMentalPresencePayload(value));
+		PacketDistributor.sendToPlayer(player, new SyncMentalPresencePayload(value));
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(SyncMentalPresencePayload payload, ClientPlayNetworking.Context context) {
-		LocalPlayer player = context.player();
+	public static void execute(SyncMentalPresencePayload payload, IPayloadContext context) {
+		var player = context.player();
 		MiscPlayerDataComponent.get(player).setLastSyncedSleepPotency(payload.value);
 		DimensionRenderEffects.markForEffectUpdate();
 	}

@@ -239,15 +239,15 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				RecipeScaling.CODEC.fieldOf("item_scaling").forGetter(recipe -> recipe.itemScaling)
 		).apply(i, EnchantmentUpgradeRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, EnchantmentUpgradeRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		public static final StreamCodec<RegistryFriendlyByteBuf, EnchantmentUpgradeRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				ByteBufCodecs.either(Enchantment.STREAM_CODEC, ResourceKey.streamCodec(Registries.ENCHANTMENT)), c -> c.either,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.levelCap,
 				Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.bulkItem,
-				RecipeScaling.PACKET_CODEC, recipe -> recipe.XPScaling,
-				RecipeScaling.PACKET_CODEC, recipe -> recipe.itemScaling,
+				RecipeScaling.STREAM_CODEC, recipe -> recipe.XPScaling,
+				RecipeScaling.STREAM_CODEC, recipe -> recipe.itemScaling,
 				EnchantmentUpgradeRecipe::new
 		);
 		
@@ -258,7 +258,7 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, EnchantmentUpgradeRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 	}
 }

@@ -23,7 +23,7 @@ public record InfusedBeverageComponent(String variant, int color) implements Too
 			SpectrumColorHelper.CODEC.optionalFieldOf("color", 0xfff4c6cb).forGetter(InfusedBeverageComponent::color)
 	).apply(i, InfusedBeverageComponent::new));
 	
-	public static final StreamCodec<ByteBuf, InfusedBeverageComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, InfusedBeverageComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.STRING_UTF8, InfusedBeverageComponent::variant,
 			ByteBufCodecs.VAR_INT, InfusedBeverageComponent::color,
 			InfusedBeverageComponent::new

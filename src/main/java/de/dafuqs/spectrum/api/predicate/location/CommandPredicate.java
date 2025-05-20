@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public record CommandPredicate(String command) implements CommandSource {
 	
 	public static final Codec<CommandPredicate> CODEC = Codec.STRING.xmap(CommandPredicate::new, CommandPredicate::command);
-	public static final StreamCodec<ByteBuf, CommandPredicate> PACKET_CODEC = ByteBufCodecs.STRING_UTF8.map(CommandPredicate::new, CommandPredicate::command);
+	public static final StreamCodec<ByteBuf, CommandPredicate> STREAM_CODEC = ByteBufCodecs.STRING_UTF8.map(CommandPredicate::new, CommandPredicate::command);
 	
 	public boolean test(ServerLevel world, BlockPos pos) {
 		AtomicBoolean passed = new AtomicBoolean(false);

@@ -16,7 +16,7 @@ import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -57,7 +57,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	public static final int EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT = 27;
 	private static final int RANGE = 12;
 	private final ItemAndExperienceEventQueue itemAndExperienceEventQueue;
-	private final List<ItemVariant> filterItems;
+	private final List<ItemStack> filterItems;
 	private State state = State.CLOSED_INACTIVE;
 	private boolean isOpen, isFull, hasXPStorage;
 	float storageTarget, storagePos, lastStorageTarget, capTarget, capPos, lastCapTarget, orbTarget, orbPos, lastOrbTarget, yawTarget, orbYaw, lastYawTarget;
@@ -66,7 +66,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	public BlackHoleChestBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(SpectrumBlockEntities.BLACK_HOLE_CHEST, blockPos, blockState);
 		this.itemAndExperienceEventQueue = new ItemAndExperienceEventQueue(new BlockPositionSource(this.worldPosition), RANGE, this);
-		this.filterItems = NonNullList.withSize(ITEM_FILTER_SLOT_COUNT, ItemVariant.blank());
+		this.filterItems = NonNullList.withSize(ITEM_FILTER_SLOT_COUNT, ItemStack.blank());
 	}
 	
 	@SuppressWarnings("unused")
@@ -235,7 +235,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	@Override
 	public void saveAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
 		super.saveAdditional(tag, registryLookup);
-		FilterConfigurable.writeFilterNbt(tag, filterItems);
+		FilterConfigurable.writeFilterNbt(tag, filterItems, registryLookup);
 		tag.putLong("age", age);
 	}
 	
@@ -330,7 +330,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	}
 	
 	@Override
-	public List<ItemVariant> getItemFilters() {
+	public List<ItemStack> getItemFilters() {
 		return this.filterItems;
 	}
 	
@@ -344,7 +344,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		return ITEM_FILTER_SLOT_COUNT;
 	}
 	
-	public void setFilterItem(int slot, ItemVariant item) {
+	public void setFilterItem(int slot, ItemStack item) {
 		this.filterItems.set(slot, item);
 		this.setChanged();
 	}
@@ -356,7 +356,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		
 		boolean allAir = true;
 		for (int i = 0; i < ITEM_FILTER_SLOT_COUNT; i++) {
-			ItemVariant filterItem = this.filterItems.get(i);
+			ItemStack filterItem = this.filterItems.get(i);
 			if (itemStack.is(filterItem.getItem())) {
 				return true;
 			} else if (!filterItem.isBlank()) {

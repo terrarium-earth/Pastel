@@ -3,10 +3,11 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.DivinitySoundInstance;
+import net.minecraft.world.entity.player.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,15 +22,16 @@ public record PlayAscensionAppliedEffectsPayload() implements CustomPacketPayloa
 	}, buf -> new PlayAscensionAppliedEffectsPayload());
 	
 	public static void playAscensionAppliedEffects(ServerPlayer player) {
-		ServerPlayNetworking.send(player, new PlayAscensionAppliedEffectsPayload());
+		PacketDistributor.sendToPlayer(player, new PlayAscensionAppliedEffectsPayload());
 	}
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayAscensionAppliedEffectsPayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		client.level.playSound(null, client.player.blockPosition(), SpectrumSoundEvents.FADING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
-		client.getSoundManager().play(new DivinitySoundInstance());
+	public static void execute(PlayAscensionAppliedEffectsPayload payload, IPayloadContext context) {
+		Player player = context.player();
+		var level = player.level();
+		level.playSound(null, player.blockPosition(), SpectrumSoundEvents.FADING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
+		Minecraft.getInstance().getSoundManager().play(new DivinitySoundInstance());
 	}
 	
 	@Override

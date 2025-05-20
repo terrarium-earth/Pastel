@@ -87,6 +87,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.*;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -256,8 +257,8 @@ public class SpectrumCommon {
 		SpectrumCommands.register();
 		
 		logInfo("Registering Networking Packets...");
-		SpectrumC2SPackets.register();
-		SpectrumS2CPackets.register();
+		NeoForge.EVENT_BUS.register(SpectrumC2SPackets.class);
+		NeoForge.EVENT_BUS.register(SpectrumS2CPackets.class);
 		
 		logInfo("Registering Data Loaders...");
 		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(NaturesStaffConversionDataLoader.INSTANCE);

@@ -4,7 +4,7 @@ import de.dafuqs.spectrum.items.magic_items.EnderSpliceItem;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -22,9 +22,9 @@ public record BindEnderSpliceToPlayerPayload(int entityId) implements CustomPack
 		return ID;
 	}
 	
-	public static ServerPlayNetworking.PlayPayloadHandler<BindEnderSpliceToPlayerPayload> getPayloadHandler() {
+	public static IPayloadHandler<BindEnderSpliceToPlayerPayload> getPayloadHandler() {
 		return (payload, context) -> {
-			ServerPlayer player = context.player();
+			ServerPlayer player = (ServerPlayer) context.player();
 			Entity entity = player.level().getEntity(payload.entityId());
 			if (entity instanceof ServerPlayer targetPlayerEntity
 					&& player.distanceTo(targetPlayerEntity) < 8

@@ -5,9 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import de.dafuqs.spectrum.helpers.InWorldInteractionHelper;
 import de.dafuqs.spectrum.helpers.SchedulerMap;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -23,14 +21,14 @@ public class PastelTransmission implements SchedulerMap.Callback {
 	
 	public static final Codec<PastelTransmission> CODEC = RecordCodecBuilder.create(i -> i.group(
 			BlockPos.CODEC.listOf().fieldOf("node_positions").forGetter(PastelTransmission::getNodePositions),
-			ItemVariant.CODEC.fieldOf("variant").forGetter(PastelTransmission::getVariant),
+			ItemStack.CODEC.fieldOf("variant").forGetter(PastelTransmission::getStack),
 			Codec.LONG.fieldOf("amount").forGetter(PastelTransmission::getAmount),
 			Codec.INT.fieldOf("vertex_time").forGetter(PastelTransmission::getVertexTime)
 	).apply(i, PastelTransmission::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmission> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmission> STREAM_CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), PastelTransmission::getNodePositions,
-			ItemVariant.PACKET_CODEC, PastelTransmission::getVariant,
+			ItemStack.STREAM_CODEC, PastelTransmission::getStack,
 			ByteBufCodecs.VAR_LONG, PastelTransmission::getAmount,
 			ByteBufCodecs.VAR_INT, PastelTransmission::getVertexTime,
 			PastelTransmission::new
@@ -38,13 +36,13 @@ public class PastelTransmission implements SchedulerMap.Callback {
 	
 	private @Nullable ServerPastelNetwork network;
     private final List<BlockPos> nodePositions;
-    private final ItemVariant variant;
+    private final ItemStack stack;
     private final long amount;
     private final int vertexTime;
 	
-	public PastelTransmission(List<BlockPos> nodePositions, ItemVariant variant, long amount, int vertexTime) {
+	public PastelTransmission(List<BlockPos> nodePositions, ItemStack stack, long amount, int vertexTime) {
         this.nodePositions = nodePositions;
-        this.variant = variant;
+        this.stack = stack;
         this.amount = amount;
         this.vertexTime = vertexTime;
     }
@@ -69,8 +67,8 @@ public class PastelTransmission implements SchedulerMap.Callback {
         return vertexTime * (nodePositions.size() - 1);
     }
 
-    public ItemVariant getVariant() {
-        return this.variant;
+    public ItemStack getStack() {
+        return this.stack;
     }
 
     public long getAmount() {
@@ -93,15 +91,15 @@ public class PastelTransmission implements SchedulerMap.Callback {
 		
 		@NotNull BlockPos destinationPos = nodePositions.get(nodePositions.size() - 1);
 		@Nullable PastelNodeBlockEntity destinationNode = this.network.getLoadedNodeAt(destinationPos);
-        Level world = this.network.getWorld();
+        Level world = this.network.getLevel();
 		
 		int inserted = 0;
 		if (destinationNode != null) {
-			Storage<ItemVariant> destinationStorage = destinationNode.getConnectedStorage();
+			Storage<ItemStack> destinationStorage = destinationNode.getConnectedStorage();
 			if (destinationStorage != null) {
 				try (Transaction transaction = Transaction.openOuter()) {
 					if (destinationStorage.supportsInsertion()) {
-						inserted = (int) destinationStorage.insert(variant, amount, transaction);
+						inserted = (int) destinationStorage.insert(stack, amount, transaction);
 						destinationNode.addItemCountUnderway(-inserted);
 						transaction.commit();
 					}
@@ -109,7 +107,7 @@ public class PastelTransmission implements SchedulerMap.Callback {
 			}
 		}
 		if (inserted != amount) {
-			InWorldInteractionHelper.scatter(world, destinationPos.getX() + 0.5, destinationPos.getY() + 0.5, destinationPos.getZ() + 0.5, variant, amount - inserted);
+			InWorldInteractionHelper.scatter(world, destinationPos.getX() + 0.5, destinationPos.getY() + 0.5, destinationPos.getZ() + 0.5, stack, amount - inserted);
 		}
 	}
 

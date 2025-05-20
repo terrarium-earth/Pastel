@@ -161,11 +161,11 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleRecipeInp
 				).listOf().fieldOf("results").forGetter(recipe -> recipe.resultsWithChance)
 		).apply(i, CinderhearthRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, CinderhearthRecipe> PACKET_CODEC = PacketCodecHelper.tuple(
+		public static final StreamCodec<RegistryFriendlyByteBuf, CinderhearthRecipe> STREAM_CODEC = PacketCodecHelper.tuple(
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-				IngredientStack.PACKET_CODEC, recipe -> recipe.ingredient,
+				IngredientStack.STREAM_CODEC, recipe -> recipe.ingredient,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.time,
 				ByteBufCodecs.FLOAT, recipe -> recipe.experience,
 				PacketCodecHelper.pair(ItemStack.STREAM_CODEC, ByteBufCodecs.FLOAT).apply(ByteBufCodecs.list()), recipe -> recipe.resultsWithChance,
@@ -179,7 +179,7 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleRecipeInp
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, CinderhearthRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 	}
 	

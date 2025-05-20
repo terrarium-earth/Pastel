@@ -125,12 +125,12 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 				Codec.LONG.fieldOf("amount").forGetter(recipe -> recipe.amount)
 		).apply(i, InkConvertingRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, InkConvertingRecipe> PACKET_CODEC = StreamCodec.composite(
+		public static final StreamCodec<RegistryFriendlyByteBuf, InkConvertingRecipe> STREAM_CODEC = StreamCodec.composite(
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.inputIngredient,
-				InkColor.PACKET_CODEC, recipe -> recipe.color,
+				InkColor.STREAM_CODEC, recipe -> recipe.color,
 				ByteBufCodecs.VAR_LONG, recipe -> recipe.amount,
 				InkConvertingRecipe::new
 		);
@@ -142,7 +142,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, InkConvertingRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 		
 	}

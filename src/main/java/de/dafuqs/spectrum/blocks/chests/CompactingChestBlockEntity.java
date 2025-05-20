@@ -8,7 +8,7 @@ import de.dafuqs.spectrum.networking.s2c_payloads.CompactingChestStatusUpdatePay
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -42,10 +42,10 @@ import java.util.Optional;
 
 public class CompactingChestBlockEntity extends SpectrumChestBlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {
 	
-	private static final Map<AutoCraftingMode, Map<ItemVariant, Optional<RecipeHolder<CraftingRecipe>>>> cache = new EnumMap<>(AutoCraftingMode.class);
+	private static final Map<AutoCraftingMode, Map<ItemStack, Optional<RecipeHolder<CraftingRecipe>>>> cache = new EnumMap<>(AutoCraftingMode.class);
 	private AutoCraftingMode autoCraftingMode;
 	private RecipeHolder<CraftingRecipe> lastCraftingRecipe; // cache
-	private ItemVariant lastItemVariant; // cache
+	private ItemStack lastItemVariant; // cache
 	private boolean hasToCraft, isOpen;
 	private State state = State.CLOSED;
 	float pistonPos, pistonTarget, lastPistonTarget, driverPos, driverTarget, lastDriverTarget, capPos, capTarget, lastCapTarget;
@@ -313,26 +313,26 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 			Tuple<Integer, List<ItemStack>> stackPair = InventoryHelper.getStackCountInInventory(itemStack, inventory, requiredItemCount);
 			if (stackPair.getA() >= requiredItemCount) {
 				var currentCache = cache.computeIfAbsent(autoCraftingMode, mode -> new HashMap<>());
-				ItemVariant itemVariant = ItemVariant.of(itemStack);
+				ItemStack ItemStack = ItemStack.of(itemStack);
 				
-				var recipe = currentCache.get(itemVariant);
+				var recipe = currentCache.get(ItemStack);
 				if (recipe != null) {
 					if (recipe.isEmpty()) {
 						continue;
 					}
-					this.lastItemVariant = itemVariant;
+					this.lastItemVariant = ItemStack;
 					return recipe;
 				}
 				
-				CraftingInput input = this.autoCraftingMode.createRecipeInput(itemVariant).input();
+				CraftingInput input = this.autoCraftingMode.createRecipeInput(ItemStack).input();
 				var optionalCraftingRecipe = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, level);
 				if (optionalCraftingRecipe.isEmpty() || optionalCraftingRecipe.get().value().assemble(input, level.registryAccess()).isEmpty()) {
 					optionalCraftingRecipe = Optional.empty();
-					currentCache.put(itemVariant, optionalCraftingRecipe);
+					currentCache.put(ItemStack, optionalCraftingRecipe);
 				} else {
-					currentCache.put(itemVariant, optionalCraftingRecipe);
+					currentCache.put(ItemStack, optionalCraftingRecipe);
 					
-					this.lastItemVariant = itemVariant;
+					this.lastItemVariant = ItemStack;
 					return optionalCraftingRecipe;
 				}
 			}
@@ -341,11 +341,11 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 		return Optional.empty();
 	}
 	
-	public boolean tryCraftInInventory(NonNullList<ItemStack> inventory, RecipeHolder<CraftingRecipe> craftingRecipe, ItemVariant itemVariant) {
+	public boolean tryCraftInInventory(NonNullList<ItemStack> inventory, RecipeHolder<CraftingRecipe> craftingRecipe, ItemStack ItemStack) {
 		if (level == null)
 			return false;
 		
-		ItemStack inputStack = itemVariant.toStack(this.autoCraftingMode.getSize());
+		ItemStack inputStack = ItemStack.toStack(this.autoCraftingMode.getSize());
 		List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(inputStack, this);
 		
 		boolean spaceInInventory;

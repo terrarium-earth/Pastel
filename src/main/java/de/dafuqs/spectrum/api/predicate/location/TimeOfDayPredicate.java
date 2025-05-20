@@ -22,7 +22,7 @@ public record TimeOfDayPredicate(TimeHelper.TimeOfDay name, MinMaxBounds.Ints ra
 	
 	public static final Codec<TimeOfDayPredicate> CODEC = Codec.withAlternative(NAMED_CODEC, Codec.withAlternative(RANGED_CODEC, VALUED_CODEC));
 	
-	public static final StreamCodec<ByteBuf, TimeOfDayPredicate> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, TimeOfDayPredicate> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.VAR_INT, range -> range.min().orElse(Integer.MIN_VALUE),
 			ByteBufCodecs.VAR_INT, range -> range.max().orElse(Integer.MAX_VALUE),
 			MinMaxBounds.Ints::between

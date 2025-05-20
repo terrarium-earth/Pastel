@@ -28,7 +28,7 @@ public interface FusionShrineRecipeWorldEffect {
 					? command.command
 					: String.valueOf(SpectrumRegistries.WORLD_EFFECT.getKey(effect)));
 	
-	StreamCodec<ByteBuf, FusionShrineRecipeWorldEffect> PACKET_CODEC = ByteBufCodecs.STRING_UTF8.map(
+	StreamCodec<ByteBuf, FusionShrineRecipeWorldEffect> STREAM_CODEC = ByteBufCodecs.STRING_UTF8.map(
 			FusionShrineRecipeWorldEffect::fromString,
 			effect -> effect instanceof CommandRecipeWorldEffect command
 					? command.command

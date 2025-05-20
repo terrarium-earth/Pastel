@@ -26,7 +26,7 @@ import java.util.Optional;
 public class ColorPickerScreenHandler extends AbstractContainerMenu implements InkColorSelectedPacketReceiver {
 	
 	public record ScreenOpeningData(BlockPos pos, Optional<Holder<InkColor>> inkColor) {
-		public static final StreamCodec<RegistryFriendlyByteBuf, ScreenOpeningData> PACKET_CODEC = StreamCodec.composite(
+		public static final StreamCodec<RegistryFriendlyByteBuf, ScreenOpeningData> STREAM_CODEC = StreamCodec.composite(
 				BlockPos.STREAM_CODEC, ScreenOpeningData::pos,
 				ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(SpectrumRegistryKeys.INK_COLOR)), ScreenOpeningData::inkColor,
 				ScreenOpeningData::new

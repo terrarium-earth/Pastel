@@ -18,7 +18,7 @@ public record CrystallarieumCatalyst(Ingredient ingredient, float growthAccelera
 		Codec.FLOAT.fieldOf("consume_chance_per_second").forGetter(CrystallarieumCatalyst::consumeChancePerSecond)
 	).apply(i, CrystallarieumCatalyst::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, CrystallarieumCatalyst> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, CrystallarieumCatalyst> STREAM_CODEC = StreamCodec.composite(
 		Ingredient.CONTENTS_STREAM_CODEC, CrystallarieumCatalyst::ingredient,
 		ByteBufCodecs.FLOAT, CrystallarieumCatalyst::growthAccelerationMod,
 		ByteBufCodecs.FLOAT, CrystallarieumCatalyst::inkConsumptionMod,

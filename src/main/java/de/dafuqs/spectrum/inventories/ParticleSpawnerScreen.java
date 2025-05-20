@@ -8,7 +8,7 @@ import de.dafuqs.spectrum.data_loaders.ParticleSpawnerParticlesDataLoader;
 import de.dafuqs.spectrum.networking.c2s_payloads.ParticleSpawnerConfigurationC2SPayload;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.fabricmc.fabric.mixin.client.particle.ParticleManagerAccessor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;

@@ -64,6 +64,6 @@ public enum VectorPattern {
 		return v;
 	}
 	
-	public static final StreamCodec<ByteBuf, VectorPattern> PACKET_CODEC = PacketCodecHelper.enumOf(VectorPattern::values);
+	public static final StreamCodec<ByteBuf, VectorPattern> STREAM_CODEC = PacketCodecHelper.enumOf(VectorPattern::values);
 	
 }

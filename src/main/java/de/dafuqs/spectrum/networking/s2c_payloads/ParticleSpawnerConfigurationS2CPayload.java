@@ -5,7 +5,7 @@ import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerConfiguration;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,15 +17,14 @@ public record ParticleSpawnerConfigurationS2CPayload(BlockPos pos, ParticleSpawn
 	public static final Type<ParticleSpawnerConfigurationS2CPayload> ID = SpectrumC2SPackets.makeId("change_particle_spawner_settings_client");
 	public static final StreamCodec<FriendlyByteBuf, ParticleSpawnerConfigurationS2CPayload> CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, ParticleSpawnerConfigurationS2CPayload::pos,
-			ParticleSpawnerConfiguration.PACKET_CODEC, ParticleSpawnerConfigurationS2CPayload::configuration,
+			ParticleSpawnerConfiguration.STREAM_CODEC, ParticleSpawnerConfigurationS2CPayload::configuration,
 			ParticleSpawnerConfigurationS2CPayload::new
 	);
 	
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(ParticleSpawnerConfigurationS2CPayload payload, ClientPlayNetworking.Context context) {
-		Minecraft client = context.client();
-		if (client.level.getBlockEntity(payload.pos()) instanceof ParticleSpawnerBlockEntity particleSpawnerBlockEntity) {
+	public static void execute(ParticleSpawnerConfigurationS2CPayload payload, IPayloadContext context) {
+		if (context.player().level().getBlockEntity(payload.pos()) instanceof ParticleSpawnerBlockEntity particleSpawnerBlockEntity) {
 			particleSpawnerBlockEntity.applySettings(payload.configuration());
 		}
 	}

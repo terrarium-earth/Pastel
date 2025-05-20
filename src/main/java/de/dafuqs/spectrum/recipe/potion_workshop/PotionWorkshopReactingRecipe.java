@@ -134,12 +134,12 @@ public class PotionWorkshopReactingRecipe extends GatedSpectrumRecipe<RecipeInpu
 				CodecHelper.singleOrList(PotionMod.CODEC).fieldOf("modifiers").forGetter(c -> c.modifiers)
 		).apply(i, PotionWorkshopReactingRecipe::new));
 		
-		public static final StreamCodec<RegistryFriendlyByteBuf, PotionWorkshopReactingRecipe> PACKET_CODEC = StreamCodec.composite(
+		public static final StreamCodec<RegistryFriendlyByteBuf, PotionWorkshopReactingRecipe> STREAM_CODEC = StreamCodec.composite(
 				ByteBufCodecs.STRING_UTF8, c -> c.group,
 				ByteBufCodecs.BOOL, c -> c.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), c -> c.requiredAdvancementIdentifier,
 				ByteBufCodecs.registry(Registries.ITEM), c -> c.item,
-				PotionMod.PACKET_CODEC.apply(ByteBufCodecs.list()), c -> c.modifiers,
+				PotionMod.STREAM_CODEC.apply(ByteBufCodecs.list()), c -> c.modifiers,
 				PotionWorkshopReactingRecipe::new
 		);
 		
@@ -150,7 +150,7 @@ public class PotionWorkshopReactingRecipe extends GatedSpectrumRecipe<RecipeInpu
 		
 		@Override
 		public StreamCodec<RegistryFriendlyByteBuf, PotionWorkshopReactingRecipe> streamCodec() {
-			return PACKET_CODEC;
+			return STREAM_CODEC;
 		}
 		
 	}

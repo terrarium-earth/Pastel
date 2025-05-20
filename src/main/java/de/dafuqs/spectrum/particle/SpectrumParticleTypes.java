@@ -13,7 +13,6 @@ import de.dafuqs.spectrum.particle.effect.DynamicParticleEffect;
 import de.dafuqs.spectrum.particle.effect.PastelTransmissionParticleEffect;
 import de.dafuqs.spectrum.particle.effect.TransmissionParticleEffect;
 import de.dafuqs.spectrum.registries.DeferredRegistrar;
-import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -28,13 +27,13 @@ public class SpectrumParticleTypes {
 	
 	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
 	
-	public static final ParticleType<TransmissionParticleEffect> ITEM_TRANSMISSION = register("item_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.PACKET_CODEC);
-	public static final ParticleType<TransmissionParticleEffect> EXPERIENCE_TRANSMISSION = register("experience_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.PACKET_CODEC);
-	public static final ParticleType<TransmissionParticleEffect> WIRELESS_REDSTONE_TRANSMISSION = register("wireless_redstone_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.PACKET_CODEC);
-	public static final ParticleType<ColoredTransmissionParticleEffect> COLORED_TRANSMISSION = register("colored_transmission", false, type -> ColoredTransmissionParticleEffect.CODEC, type -> ColoredTransmissionParticleEffect.PACKET_CODEC);
-	public static final ParticleType<TransmissionParticleEffect> BLOCK_POS_EVENT_TRANSMISSION = register("block_pos_event_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.PACKET_CODEC);
-	public static final ParticleType<PastelTransmissionParticleEffect> PASTEL_TRANSMISSION = register("pastel_transmission", false, type -> PastelTransmissionParticleEffect.CODEC, type -> PastelTransmissionParticleEffect.PACKET_CODEC);
-	public static final ParticleType<TransmissionParticleEffect> HUMMINGSTONE_TRANSMISSION = register("hummingstone_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.PACKET_CODEC);
+	public static final ParticleType<TransmissionParticleEffect> ITEM_TRANSMISSION = register("item_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.STREAM_CODEC);
+	public static final ParticleType<TransmissionParticleEffect> EXPERIENCE_TRANSMISSION = register("experience_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.STREAM_CODEC);
+	public static final ParticleType<TransmissionParticleEffect> WIRELESS_REDSTONE_TRANSMISSION = register("wireless_redstone_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.STREAM_CODEC);
+	public static final ParticleType<ColoredTransmissionParticleEffect> COLORED_TRANSMISSION = register("colored_transmission", false, type -> ColoredTransmissionParticleEffect.CODEC, type -> ColoredTransmissionParticleEffect.STREAM_CODEC);
+	public static final ParticleType<TransmissionParticleEffect> BLOCK_POS_EVENT_TRANSMISSION = register("block_pos_event_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.STREAM_CODEC);
+	public static final ParticleType<PastelTransmissionParticleEffect> PASTEL_TRANSMISSION = register("pastel_transmission", false, type -> PastelTransmissionParticleEffect.CODEC, type -> PastelTransmissionParticleEffect.STREAM_CODEC);
+	public static final ParticleType<TransmissionParticleEffect> HUMMINGSTONE_TRANSMISSION = register("hummingstone_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.STREAM_CODEC);
 	
 	public static final SimpleParticleType SHIMMERSTONE_SPARKLE = register("shimmerstone_sparkle", false);
 	public static final SimpleParticleType SHIMMERSTONE_SPARKLE_SMALL = register("shimmerstone_sparkle_small", false);
@@ -99,12 +98,12 @@ public class SpectrumParticleTypes {
 	public static final SimpleParticleType LANDING_DRAGONROT = register("landing_dragonrot", false);
 	public static final SimpleParticleType DRAGONROT_FISHING = register("dragonrot_fishing", false);
 	
-	public static final ParticleType<ColoredFallingSporeBlossomParticleEffect> COLORED_FALLING_SPORE_BLOSSOM = register("colored_falling_spore_blossom", false, (type) -> ColoredFallingSporeBlossomParticleEffect.CODEC, (type) -> ColoredFallingSporeBlossomParticleEffect.PACKET_CODEC);
-	public static final ParticleType<ColoredSporeBlossomAirParticleEffect> COLORED_SPORE_BLOSSOM_AIR = register("colored_spore_blossom_air", false, (type) -> ColoredSporeBlossomAirParticleEffect.CODEC, (type) -> ColoredSporeBlossomAirParticleEffect.PACKET_CODEC);
-	public static final ParticleType<ColoredCraftingParticleEffect> COLORED_CRAFTING = register("colored_crafting", false, (type) -> ColoredCraftingParticleEffect.CODEC, (type) -> ColoredCraftingParticleEffect.PACKET_CODEC);
-	public static final ParticleType<ColoredFluidRisingParticleEffect> COLORED_FLUID_RISING = register("colored_fluid_rising", false, (type) -> ColoredFluidRisingParticleEffect.CODEC, (type) -> ColoredFluidRisingParticleEffect.PACKET_CODEC);
-	public static final ParticleType<ColoredSparkleRisingParticleEffect> COLORED_SPARKLE_RISING = register("colored_sparkle_rising", false, (type) -> ColoredSparkleRisingParticleEffect.CODEC, (type) -> ColoredSparkleRisingParticleEffect.PACKET_CODEC);
-	public static final ParticleType<ColoredExplosionParticleEffect> COLORED_EXPLOSION = register("colored_explosion", true, (type) -> ColoredExplosionParticleEffect.CODEC, (type) -> ColoredExplosionParticleEffect.PACKET_CODEC);
+	public static final ParticleType<ColoredFallingSporeBlossomParticleEffect> COLORED_FALLING_SPORE_BLOSSOM = register("colored_falling_spore_blossom", false, (type) -> ColoredFallingSporeBlossomParticleEffect.CODEC, (type) -> ColoredFallingSporeBlossomParticleEffect.STREAM_CODEC);
+	public static final ParticleType<ColoredSporeBlossomAirParticleEffect> COLORED_SPORE_BLOSSOM_AIR = register("colored_spore_blossom_air", false, (type) -> ColoredSporeBlossomAirParticleEffect.CODEC, (type) -> ColoredSporeBlossomAirParticleEffect.STREAM_CODEC);
+	public static final ParticleType<ColoredCraftingParticleEffect> COLORED_CRAFTING = register("colored_crafting", false, (type) -> ColoredCraftingParticleEffect.CODEC, (type) -> ColoredCraftingParticleEffect.STREAM_CODEC);
+	public static final ParticleType<ColoredFluidRisingParticleEffect> COLORED_FLUID_RISING = register("colored_fluid_rising", false, (type) -> ColoredFluidRisingParticleEffect.CODEC, (type) -> ColoredFluidRisingParticleEffect.STREAM_CODEC);
+	public static final ParticleType<ColoredSparkleRisingParticleEffect> COLORED_SPARKLE_RISING = register("colored_sparkle_rising", false, (type) -> ColoredSparkleRisingParticleEffect.CODEC, (type) -> ColoredSparkleRisingParticleEffect.STREAM_CODEC);
+	public static final ParticleType<ColoredExplosionParticleEffect> COLORED_EXPLOSION = register("colored_explosion", true, (type) -> ColoredExplosionParticleEffect.CODEC, (type) -> ColoredExplosionParticleEffect.STREAM_CODEC);
 	
 	// Biome particles
 	public static final SimpleParticleType FALLING_ASH = register("falling_ash", true);
@@ -119,8 +118,8 @@ public class SpectrumParticleTypes {
 	
 	public static final SimpleParticleType LIGHT_TRAIL = register("light_trail", true);
 	
-	public static final ParticleType<DynamicParticleEffect> DYNAMIC = register("particle_spawner", false, type -> DynamicParticleEffect.CODEC, type -> DynamicParticleEffect.PACKET_CODEC);
-	public static final ParticleType<DynamicParticleEffect> DYNAMIC_ALWAYS_SHOW = register("particle_spawner_always_show", true, type -> DynamicParticleEffect.CODEC, type -> DynamicParticleEffect.PACKET_CODEC);
+	public static final ParticleType<DynamicParticleEffect> DYNAMIC = register("particle_spawner", false, type -> DynamicParticleEffect.CODEC, type -> DynamicParticleEffect.STREAM_CODEC);
+	public static final ParticleType<DynamicParticleEffect> DYNAMIC_ALWAYS_SHOW = register("particle_spawner_always_show", true, type -> DynamicParticleEffect.CODEC, type -> DynamicParticleEffect.STREAM_CODEC);
 	
 	// Simple particles
 	private static SimpleParticleType register(String name, boolean alwaysShow) {

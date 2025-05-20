@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.blocks.bottomless_bundle;
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.core.BlockPos;
@@ -90,7 +90,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 			if (player.isShiftKeyDown()) {
 				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE).ifPresent((bottomlessBundleBlockEntity) -> {
 					long amount = bottomlessBundleBlockEntity.storage.amount;
-					ItemVariant variant = bottomlessBundleBlockEntity.storage.getResource();
+					ItemStack variant = bottomlessBundleBlockEntity.storage.getResource();
 					long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bottomlessBundleBlockEntity.powerLevel);
 					if (variant.isBlank()) {
 						player.displayClientMessage(Component.translatable("item.spectrum.bottomless_bundle.tooltip.empty"), true);
@@ -100,14 +100,14 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 				});
 			} else {
 				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE).ifPresent((bottomlessBundleBlockEntity) -> {
-					SingleVariantStorage<ItemVariant> storage = bottomlessBundleBlockEntity.storage;
-					ItemVariant storedVariant = storage.variant;
+					SingleVariantStorage<ItemStack> storage = bottomlessBundleBlockEntity.storage;
+					ItemStack storedVariant = storage.variant;
 					
 					try (Transaction transaction = Transaction.openOuter()) {
 						if (storedVariant.matches(stack) || storedVariant.isBlank()) {
 							// insert
 							if (!stack.isEmpty() && stack.getItem().canFitInsideContainerItems()) {
-								long inserted = storage.insert(ItemVariant.of(stack), stack.getCount(), transaction);
+								long inserted = storage.insert(ItemStack.of(stack), stack.getCount(), transaction);
 								stack.shrink((int) inserted);
 								world.playSound(null, pos, SoundEvents.BUNDLE_INSERT, SoundSource.BLOCKS, 0.8F, 0.8F + world.getRandom().nextFloat() * 0.4F);
 							}

@@ -2,11 +2,12 @@ package de.dafuqs.spectrum.networking.s2c_payloads;
 
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.sound.CraftingBlockSoundInstance;
+import net.minecraft.world.level.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -34,19 +35,15 @@ public record PlayBlockBoundSoundInstancePayload(SoundEvent soundEvent, BlockPos
 	);
 	
 	public static void sendPlayBlockBoundSoundInstance(SoundEvent soundEvent, @NotNull ServerLevel world, BlockPos pos, int maxDurationTicks) {
-		for (ServerPlayer player : PlayerLookup.tracking(world, pos)) {
-			ServerPlayNetworking.send(player, new PlayBlockBoundSoundInstancePayload(soundEvent, pos, world.getBlockState(pos).getBlock().builtInRegistryHolder(), maxDurationTicks));
-		}
+		PacketDistributor.sendToPlayersTrackingChunk(world, new ChunkPos(pos), new PlayBlockBoundSoundInstancePayload(soundEvent, pos, world.getBlockState(pos).getBlock().builtInRegistryHolder(), maxDurationTicks));
 	}
 	
 	public static void sendCancelBlockBoundSoundInstance(@NotNull ServerLevel world, BlockPos pos) {
-		for (ServerPlayer player : PlayerLookup.tracking(world, pos)) {
-			ServerPlayNetworking.send(player, new PlayBlockBoundSoundInstancePayload(SoundEvents.EMPTY, pos, world.getBlockState(pos).getBlock().builtInRegistryHolder(), -1));
-		}
+		PacketDistributor.sendToPlayersTrackingChunk(world, new ChunkPos(pos), new PlayBlockBoundSoundInstancePayload(SoundEvents.EMPTY, pos, world.getBlockState(pos).getBlock().builtInRegistryHolder(), -1));
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayBlockBoundSoundInstancePayload payload, ClientPlayNetworking.Context context) {
+	public static void execute(PlayBlockBoundSoundInstancePayload payload, IPayloadContext context) {
 		if (payload.maxDurationTicks < 0) {
 			CraftingBlockSoundInstance.stopPlayingOnPos(payload.pos);
 		} else {

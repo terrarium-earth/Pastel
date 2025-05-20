@@ -11,7 +11,7 @@ import de.dafuqs.spectrum.compat.modonomicon.pages.BookHintPage;
 import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.networking.c2s_payloads.GuidebookHintBoughtPayload;
 import de.dafuqs.spectrum.sound.HintRevelationSoundInstance;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;

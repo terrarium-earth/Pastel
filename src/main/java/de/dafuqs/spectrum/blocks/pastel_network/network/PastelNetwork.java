@@ -37,7 +37,7 @@ public class PastelNetwork<W extends Level> {
 		return graph.vertexSet().size();
 	}
 	
-	public W getWorld() {
+	public W getLevel() {
         return this.world;
     }
 	

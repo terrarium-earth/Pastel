@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 public record WithMilkComponent() implements TooltipProvider {
 	
 	public static final Codec<WithMilkComponent> CODEC = Codec.unit(WithMilkComponent::new);
-	public static final StreamCodec<ByteBuf, WithMilkComponent> PACKET_CODEC = StreamCodec.unit(new WithMilkComponent());
+	public static final StreamCodec<ByteBuf, WithMilkComponent> STREAM_CODEC = StreamCodec.unit(new WithMilkComponent());
 	
 	@Override
 	public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag type) {

@@ -23,7 +23,7 @@ public record WrappedPresentComponent(boolean wrapped, PresentBlock.WrappingPape
 			Codec.unboundedMap(Codec.INT, ExtraCodecs.POSITIVE_INT).fieldOf("colors").forGetter(WrappedPresentComponent::colors)
 	).apply(instance, WrappedPresentComponent::new));
 	
-	public static final StreamCodec<RegistryFriendlyByteBuf, WrappedPresentComponent> PACKET_CODEC = StreamCodec.composite(
+	public static final StreamCodec<RegistryFriendlyByteBuf, WrappedPresentComponent> STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.BOOL, WrappedPresentComponent::wrapped,
 			PacketCodecHelper.enumOf(PresentBlock.WrappingPaper::values), WrappedPresentComponent::variant,
 			ByteBufCodecs.map(HashMap::new, ByteBufCodecs.VAR_INT, ByteBufCodecs.VAR_INT), WrappedPresentComponent::colors,

@@ -52,7 +52,7 @@ public record ParticleSpawnerConfiguration(
 			Codec.BOOL.fieldOf("collisions").forGetter(ParticleSpawnerConfiguration::collisions)
 	).apply(i, ParticleSpawnerConfiguration::new));
 	
-	public static final StreamCodec<FriendlyByteBuf, ParticleSpawnerConfiguration> PACKET_CODEC = PacketCodecHelper.tuple(
+	public static final StreamCodec<FriendlyByteBuf, ParticleSpawnerConfiguration> STREAM_CODEC = PacketCodecHelper.tuple(
 			PacketCodecHelper.registryValueByName(BuiltInRegistries.PARTICLE_TYPE), c -> c.particleType,
 			PacketCodecHelper.VEC3I, c -> c.cmyColor,
 			ByteBufCodecs.BOOL, c -> c.glowing,

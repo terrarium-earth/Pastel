@@ -6,7 +6,7 @@ import de.dafuqs.spectrum.inventories.slots.ShadowSlot;
 import de.dafuqs.spectrum.inventories.slots.StackFilterSlot;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -119,7 +119,7 @@ public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
 		@Override
 		public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
 			if (blockEntity != null) {
-				blockEntity.setFilterItem(getContainerSlot(), ItemVariant.of(heldStack));
+				blockEntity.setFilterItem(getContainerSlot(), ItemStack.of(heldStack));
 			}
 			return super.onClicked(heldStack, type, player);
 		}

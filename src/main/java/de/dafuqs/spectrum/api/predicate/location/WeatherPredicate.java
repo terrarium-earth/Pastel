@@ -18,7 +18,7 @@ public enum WeatherPredicate implements StringRepresentable {
 	NOT_THUNDER(world -> !world.isThundering());
 	
 	public static final Codec<WeatherPredicate> CODEC = StringRepresentable.fromEnum(WeatherPredicate::values);
-	public static final StreamCodec<ByteBuf, WeatherPredicate> PACKET_CODEC = PacketCodecHelper.enumOf(WeatherPredicate::values);
+	public static final StreamCodec<ByteBuf, WeatherPredicate> STREAM_CODEC = PacketCodecHelper.enumOf(WeatherPredicate::values);
 	
 	private final Function<ServerLevel, Boolean> test;
 	

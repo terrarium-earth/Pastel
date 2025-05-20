@@ -6,7 +6,7 @@ import de.dafuqs.spectrum.inventories.ScreenBackgroundVariant;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.minecraft.core.BlockPos;
@@ -114,7 +114,7 @@ public class EnderDropperBlock extends DispenserBlock {
 					ItemStack itemStack3 = BEHAVIOR.dispense(blockPointer, itemStack);
 					enderDropperBlockEntity.setItem(i, itemStack3);
 				} else {
-					Storage<ItemVariant> target = ItemStorage.SIDED.find(world, pos.relative(direction), direction.getOpposite());
+					Storage<ItemStack> target = ItemStorage.SIDED.find(world, pos.relative(direction), direction.getOpposite());
 					if (target != null) {
 						// getting inv will always work since .chooseNonEmptySlot() and others would fail otherwise
 						//noinspection DataFlowIssue
