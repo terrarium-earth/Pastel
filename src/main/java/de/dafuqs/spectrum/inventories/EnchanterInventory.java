@@ -1,53 +1,54 @@
 package de.dafuqs.spectrum.inventories;
 
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.recipe.SimpleRecipeInput;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.core.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 
-public class EnchanterInventory extends SimpleContainer {
+public class EnchanterInventory extends FriendlyStackHandler {
 	
 	public EnchanterInventory() {
 		super(10);
 	}
 	
 	public EnchanterInventory(ItemStack... items) {
-		super(items);
+		super(NonNullList.of(ItemStack.EMPTY, items));
 	}
 	
 	public RecipeInput createInput() {
-		return new SimpleRecipeInput(this.items);
+		return new SimpleRecipeInput(stacks);
 	}
 	
 	public void rotate() {
-		ItemStack stack2 = getItem(2);
-		ItemStack stack3 = getItem(3);
+		ItemStack stack2 = getStackInSlot(2);
+		ItemStack stack3 = getStackInSlot(3);
 
-		setItem(2, getItem(4));
-		setItem(3, getItem(5));
-		setItem(4, getItem(6));
-		setItem(5, getItem(7));
-		setItem(6, getItem(8));
-		setItem(7, getItem(9));
-		setItem(8, stack2);
-		setItem(9, stack3);
+		setStackInSlot(2, getStackInSlot(4));
+		setStackInSlot(3, getStackInSlot(5));
+		setStackInSlot(4, getStackInSlot(6));
+		setStackInSlot(5, getStackInSlot(7));
+		setStackInSlot(6, getStackInSlot(8));
+		setStackInSlot(7, getStackInSlot(9));
+		setStackInSlot(8, stack2);
+		setStackInSlot(9, stack3);
 	}
 	
 	public void mirror() {
-		ItemStack stack2 = getItem(2);
-		ItemStack stack4 = getItem(4);
-		ItemStack stack6 = getItem(6);
-		ItemStack stack8 = getItem(8);
+		ItemStack stack2 = getStackInSlot(2);
+		ItemStack stack4 = getStackInSlot(4);
+		ItemStack stack6 = getStackInSlot(6);
+		ItemStack stack8 = getStackInSlot(8);
 
-		setItem(2, getItem(3));
-		setItem(4, getItem(5));
-		setItem(6, getItem(7));
-		setItem(8, getItem(9));
+		setStackInSlot(2, getStackInSlot(3));
+		setStackInSlot(4, getStackInSlot(5));
+		setStackInSlot(6, getStackInSlot(7));
+		setStackInSlot(8, getStackInSlot(9));
 
-		setItem(3, stack2);
-		setItem(5, stack4);
-		setItem(7, stack6);
-		setItem(9, stack8);
+		setStackInSlot(3, stack2);
+		setStackInSlot(5, stack4);
+		setStackInSlot(7, stack6);
+		setStackInSlot(9, stack8);
 	}
 	
 }

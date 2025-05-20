@@ -87,8 +87,8 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		} else {
 			if (tickCooldown(chest)) {
 				for (int i = 0; i < 4; i++) {
-					ItemStack outputItemStack = chest.inventory.get(RESULT_SLOTS[i]);
-					ItemStack craftingTabletItemStack = chest.inventory.get(RECIPE_SLOTS[i]);
+					ItemStack outputItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[i]);
+					ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[i]);
 					if (!craftingTabletItemStack.isEmpty() && (outputItemStack.isEmpty() || outputItemStack.getCount() < outputItemStack.getMaxStackSize())) {
 						boolean couldCraft = chest.tryCraft(chest, i);
 						if (couldCraft) {
@@ -143,7 +143,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		var list = new ArrayList<ItemStack>();
 
 		for (int slot : RECIPE_SLOTS) {
-			var tablet = inventory.get(slot);
+			var tablet = inventory.getStackInSlot(slot);
 
 			if (!tablet.is(SpectrumItems.CRAFTING_TABLET))
 				continue;
@@ -173,12 +173,12 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		}
 
 		for (int i = 0; i < 4; i++) {
-			ItemStack tablet = inventory.get(RECIPE_SLOTS[i]);
+			ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
 			if (!tablet.is(SpectrumItems.CRAFTING_TABLET))
 				continue;
 
 			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet).value();
-			if (isRecipeValid(recipe) && isRecipeCraftable(recipe) && canSlotFitCraftingOutput(inventory.get(RESULT_SLOTS[i]), recipe))
+			if (isRecipeValid(recipe) && isRecipeCraftable(recipe) && canSlotFitCraftingOutput(inventory.getStackInSlot(RESULT_SLOTS[i]), recipe))
 				return true;
 		}
 		return false;
@@ -199,18 +199,18 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 	}
 	
 	private boolean tryCraft(FabricationChestBlockEntity chest, int index) {
-		ItemStack craftingTabletItemStack = chest.inventory.get(RECIPE_SLOTS[index]);
+		ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[index]);
 		if (craftingTabletItemStack.is(SpectrumItems.CRAFTING_TABLET)) {
 			var recipe = CraftingTabletItem.getStoredRecipe(level, craftingTabletItemStack);
 			if (recipe != null && isRecipeValid(recipe.value())) {
 				NonNullList<Ingredient> ingredients = recipe.value().getIngredients();
 				ItemStack outputItemStack = recipe.value().getResultItem(level.registryAccess());
-				ItemStack currentItemStack = chest.inventory.get(RESULT_SLOTS[index]);
+				ItemStack currentItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[index]);
 				if (InventoryHelper.canCombineItemStacks(currentItemStack, outputItemStack) && InventoryHelper.hasInInventory(ingredients, chest)) {
 					List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(ingredients, chest);
 					
 					if (currentItemStack.isEmpty()) {
-						chest.inventory.set(RESULT_SLOTS[index], outputItemStack.copy());
+						chest.inventory.setStackInSlot(RESULT_SLOTS[index], outputItemStack.copy());
 					} else {
 						currentItemStack.grow(outputItemStack.getCount());
 					}
@@ -236,9 +236,9 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		if (!InventoryHelper.hasInInventory(ingredients, this))
 			return false;
 
-		var remainders = InventoryHelper.getRemainders(ingredients, this);
+		var remainders = InventoryHelper.getRemainders(ingredients);
 
-		return InventoryHelper.canFitStacks(remainders, this);
+		return InventoryHelper.canFitStacks(this.inventory, remainders);
 	}
 	
 	@Override
@@ -317,7 +317,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		int invalids = 0;
 
 		for (int i = 0; i < 4; i++) {
-			ItemStack tablet = inventory.get(RECIPE_SLOTS[i]);
+			ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
 
 			if (!tablet.is(SpectrumItems.CRAFTING_TABLET))
 				continue;
@@ -329,7 +329,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 				continue;
 			}
 
-			ItemStack outputSlot = inventory.get(RESULT_SLOTS[i]);
+			ItemStack outputSlot = inventory.getStackInSlot(RESULT_SLOTS[i]);
 
 			if (canSlotFitCraftingOutput(outputSlot, recipe.value())) {
 				return false;

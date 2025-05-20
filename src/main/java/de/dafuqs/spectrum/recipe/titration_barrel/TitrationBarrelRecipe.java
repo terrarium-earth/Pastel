@@ -4,14 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.api.item.FermentedItem;
+import de.dafuqs.spectrum.helpers.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.components.BeverageComponent;
 import de.dafuqs.spectrum.components.InfusedBeverageComponent;
-import de.dafuqs.spectrum.helpers.InventoryHelper;
-import de.dafuqs.spectrum.helpers.PacketCodecHelper;
-import de.dafuqs.spectrum.helpers.Support;
-import de.dafuqs.spectrum.helpers.TimeHelper;
 import de.dafuqs.spectrum.recipe.GatedStackSpectrumRecipe;
 import de.dafuqs.spectrum.recipe.StorageRecipeInput;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
@@ -159,7 +156,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<StorageRecip
 	}
 	
 	@Override
-	public ItemStack tap(Container inventory, long secondsFermented, float downfall) {
+	public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
 		int contentCount = InventoryHelper.countItemsInInventory(inventory);
 		float thickness = getThickness(contentCount);
 		return tapWith(thickness, secondsFermented, downfall);

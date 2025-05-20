@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks.chests;
 
-import de.dafuqs.spectrum.helpers.InventoryHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.AutoCraftingMode;
 import de.dafuqs.spectrum.inventories.CompactingChestScreenHandler;
 import de.dafuqs.spectrum.networking.c2s_payloads.ChangeCompactingChestSettingsPayload;
@@ -148,15 +148,15 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 		return state;
 	}
 	
-	private static boolean smartAddToInventory(List<ItemStack> itemStacks, List<ItemStack> inventory, boolean test) {
+	private static boolean smartAddToInventory(List<ItemStack> itemStacks, FriendlyStackHandler inventory, boolean test) {
 		List<ItemStack> additionStacks = new ArrayList<>();
 		for (ItemStack itemStack : itemStacks) {
 			additionStacks.add(itemStack.copy());
 		}
 		
 		boolean tryStackExisting = true;
-		for (int i = 0; i < inventory.size(); i++) {
-			ItemStack currentStack = inventory.get(i);
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			ItemStack currentStack = inventory.getStackInSlot(i);
 			for (ItemStack additionStack : additionStacks) {
 				boolean doneStuff = false;
 				if (additionStack.getCount() > 0) {
@@ -167,7 +167,7 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 						if (!test) {
 							ItemStack newStack = additionStack.copy();
 							newStack.setCount(maxAcceptCount);
-							inventory.set(i, newStack);
+							inventory.setStackInSlot(i, newStack);
 						}
 						additionStack.setCount(additionStack.getCount() - maxAcceptCount);
 						doneStuff = true;
@@ -178,7 +178,7 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 						
 						if (canAcceptCount > 0) {
 							if (!test) {
-								inventory.get(i).grow(Math.min(additionStack.getCount(), canAcceptCount));
+								inventory.getStackInSlot(i).grow(Math.min(additionStack.getCount(), canAcceptCount));
 							}
 							if (canAcceptCount >= additionStack.getCount()) {
 								additionStack.setCount(0);
@@ -205,7 +205,7 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 				}
 			}
 			
-			if (tryStackExisting && !test && i == inventory.size() - 1) {
+			if (tryStackExisting && !test && i == inventory.getSlots() - 1) {
 				tryStackExisting = false;
 				i = -1;
 			}
@@ -254,7 +254,6 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 	
 	private boolean tryCraftOnce() {
 		Optional<RecipeHolder<CraftingRecipe>> optionalCraftingRecipe = Optional.empty();
-		NonNullList<ItemStack> inventory = this.getItems();
 		
 		// try last recipe
 		if (lastCraftingRecipe != null) {
@@ -272,7 +271,7 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 		}
 		
 		if (optionalCraftingRecipe.isPresent() && this.lastItemVariant != null) {
-			if (tryCraftInInventory(inventory, optionalCraftingRecipe.get(), this.lastItemVariant)) {
+			if (tryCraftInInventory(optionalCraftingRecipe.get(), this.lastItemVariant)) {
 				this.lastCraftingRecipe = optionalCraftingRecipe.get();
 				return true;
 			}
@@ -304,7 +303,7 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 		if (level == null)
 			return Optional.empty();
 		
-		for (ItemStack itemStack : inventory) {
+		for (ItemStack itemStack : inventory.getInternalList()) {
 			if (itemStack.isEmpty()) {
 				continue;
 			}
@@ -313,26 +312,24 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 			Tuple<Integer, List<ItemStack>> stackPair = InventoryHelper.getStackCountInInventory(itemStack, inventory, requiredItemCount);
 			if (stackPair.getA() >= requiredItemCount) {
 				var currentCache = cache.computeIfAbsent(autoCraftingMode, mode -> new HashMap<>());
-				ItemStack ItemStack = ItemStack.of(itemStack);
-				
-				var recipe = currentCache.get(ItemStack);
+				var recipe = currentCache.get(itemStack);
 				if (recipe != null) {
 					if (recipe.isEmpty()) {
 						continue;
 					}
-					this.lastItemVariant = ItemStack;
+					this.lastItemVariant = itemStack;
 					return recipe;
 				}
 				
-				CraftingInput input = this.autoCraftingMode.createRecipeInput(ItemStack).input();
+				CraftingInput input = this.autoCraftingMode.createRecipeInput(itemStack).input();
 				var optionalCraftingRecipe = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, input, level);
 				if (optionalCraftingRecipe.isEmpty() || optionalCraftingRecipe.get().value().assemble(input, level.registryAccess()).isEmpty()) {
 					optionalCraftingRecipe = Optional.empty();
-					currentCache.put(ItemStack, optionalCraftingRecipe);
+					currentCache.put(itemStack, optionalCraftingRecipe);
 				} else {
-					currentCache.put(ItemStack, optionalCraftingRecipe);
+					currentCache.put(itemStack, optionalCraftingRecipe);
 					
-					this.lastItemVariant = ItemStack;
+					this.lastItemVariant = itemStack;
 					return optionalCraftingRecipe;
 				}
 			}
@@ -340,13 +337,12 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 		
 		return Optional.empty();
 	}
-	
-	public boolean tryCraftInInventory(NonNullList<ItemStack> inventory, RecipeHolder<CraftingRecipe> craftingRecipe, ItemStack ItemStack) {
+
+	public boolean tryCraftInInventory(RecipeHolder<CraftingRecipe> craftingRecipe, ItemStack itemStack) {
 		if (level == null)
 			return false;
-		
-		ItemStack inputStack = ItemStack.toStack(this.autoCraftingMode.getSize());
-		List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(inputStack, this);
+
+        List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(itemStack, this);
 		
 		boolean spaceInInventory;
 		
@@ -358,12 +354,11 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 		if (spaceInInventory) {
 			// craft
 			smartAddToInventory(additionItemStacks, inventory, false);
-			this.setItems(inventory);
 			
 			// cache
 			return true;
 		} else {
-			smartAddToInventory(List.of(inputStack), inventory, false);
+			smartAddToInventory(List.of(itemStack), inventory, false);
 			return false;
 		}
 	}

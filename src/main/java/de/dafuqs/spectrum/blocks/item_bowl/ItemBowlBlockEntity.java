@@ -22,6 +22,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -78,7 +79,7 @@ public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity {
 		}
 		
 		int decrementAmount = Math.min(amount, storedStack.getCount());
-		ItemStack remainder = storedStack.getRecipeRemainder();
+		ItemStack remainder = storedStack.getCraftingRemainingItem();
 		if (!remainder.isEmpty()) {
 			if (storedStack.getCount() == 1) {
 				setItem(0, remainder);
@@ -139,5 +140,4 @@ public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity {
 			level.playSound(null, this.worldPosition, SpectrumSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, SpectrumCommon.CONFIG.BlockSoundVolume, 0.7F + level.random.nextFloat() * 0.6F);
 		}
 	}
-	
 }

@@ -675,7 +675,7 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 		for (int i = 0; i < 9; i++) {
 			ItemStack itemStack = inventory.getItem(i);
 			if (!itemStack.isEmpty()) {
-				ItemStack remainder = itemStack.getRecipeRemainder();
+				ItemStack remainder = itemStack.getCraftingRemainingItem();
 				if (remainder.isEmpty()) {
 					itemStack.shrink(1);
 				} else {

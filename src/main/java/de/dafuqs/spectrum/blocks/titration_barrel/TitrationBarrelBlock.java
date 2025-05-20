@@ -103,7 +103,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 							// player is able to put items in
 							// or seal it with a piece of colored wood
 							if (handStack.isEmpty()) {
-								int itemCount = InventoryHelper.countItemsInInventory(barrelEntity);
+								int itemCount = InventoryHelper.countItemsInInventory(barrelEntity.inventory);
 								Fluid fluid = barrelEntity.fluidStorage.variant.getFluid();
 								if (fluid == Fluids.EMPTY) {
 									if (itemCount == TitrationBarrelBlockEntity.MAX_ITEM_COUNT) {
@@ -148,7 +148,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 								}
 								
 								int countBefore = handStack.getCount();
-								ItemStack leftoverStack = InventoryHelper.addToInventoryUpToSingleStackWithMaxTotalCount(handStack, barrelEntity, TitrationBarrelBlockEntity.MAX_ITEM_COUNT);
+								ItemStack leftoverStack = InventoryHelper.addToInventoryUpToSingleStackWithMaxTotalCount(handStack, barrelEntity.inventory, TitrationBarrelBlockEntity.MAX_ITEM_COUNT);
 								player.setItemInHand(hand, leftoverStack);
 								if (countBefore != leftoverStack.getCount()) {
 									world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.8F, 0.8F + world.random.nextFloat() * 0.6F);
@@ -213,11 +213,11 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 	}
 	
 	private void tryExtractLastStack(BlockState state, Level world, BlockPos pos, Player player, TitrationBarrelBlockEntity barrelEntity) {
-		Optional<ItemStack> stack = InventoryHelper.extractLastStack(barrelEntity);
+		Optional<ItemStack> stack = InventoryHelper.extractLastStack(barrelEntity.getInventory());
 		if (stack.isPresent()) {
 			player.getInventory().placeItemBackInInventory(stack.get());
 			barrelEntity.setChanged();
-			if (barrelEntity.isEmpty() && barrelEntity.getFluidVariant().isBlank()) {
+			if (barrelEntity.inventory.isEmpty() && barrelEntity.getFluidVariant().isBlank()) {
 				world.setBlockAndUpdate(pos, state.setValue(BARREL_STATE, BarrelState.EMPTY));
 			} else {
 				// They'll get updated if the block state changes anyway
@@ -284,9 +284,9 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 					return 0;
 				}
 				case FILLED -> {
-					int isNotEmpty = blockEntity.isEmpty() ? 0 : 1;
+					int isNotEmpty = blockEntity.inventory.isEmpty() ? 0 : 1;
 					
-					float icurr = InventoryHelper.countItemsInInventory(blockEntity);
+					float icurr = InventoryHelper.countItemsInInventory(blockEntity.inventory);
 					float imax = TitrationBarrelBlockEntity.MAX_ITEM_COUNT;
 					
 					float fcurr = blockEntity.fluidStorage.amount;
@@ -329,7 +329,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 	public static void scatterContents(@NotNull Level world, BlockPos pos) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (blockEntity instanceof TitrationBarrelBlockEntity titrationBarrelBlockEntity) {
-			Containers.dropContents(world, pos, titrationBarrelBlockEntity);
+			Containers.dropContents(world, pos, titrationBarrelBlockEntity.inventory.getInternalList());
 		}
 	}
 	

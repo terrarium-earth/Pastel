@@ -1,9 +1,9 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
-import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.recipe.StorageRecipeInput;
 import de.dafuqs.spectrum.recipe.titration_barrel.FermentationData;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
@@ -44,7 +44,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 	}
 	
 	@Override
-	public ItemStack tap(Container inventory, long secondsFermented, float downfall) {
+	public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
 		int bulbCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumBlocks.JADEITE_LOTUS_BULB.asItem());
 		int petalCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.JADEITE_PETALS);
 		boolean nectar = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.MOONSTRUCK_NECTAR) > 0;

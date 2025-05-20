@@ -4,6 +4,8 @@ import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.helpers.Support;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
+import net.neoforged.neoforge.items.*;
+import net.neoforged.neoforge.items.wrapper.*;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -32,8 +34,8 @@ public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement,
 	public static IPayloadHandler<GuidebookHintBoughtPayload> getPayloadHandler() {
 		return (payload, context) -> {
 			ServerPlayer player = (ServerPlayer) context.player();
-			for (ItemStack remainder : InventoryHelper.removeIngredientStacksFromInventoryWithRemainders(List.of(payload.payment()), player.getInventory())) {
-				InventoryHelper.smartAddToInventory(remainder, player.getInventory(), null);
+			for (ItemStack remainder : InventoryHelper.removeIngredientStacksFromInventoryWithRemainders(List.of(payload.payment()), new PlayerInvWrapper(player.getInventory()))) {
+				ItemHandlerHelper.insertItemStacked(new PlayerInvWrapper(player.getInventory()), remainder, false);
 			}
 			
 			// give the player the hidden "used_tip" advancement and play a sound

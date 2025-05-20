@@ -1,11 +1,10 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.components.BeverageComponent;
-import de.dafuqs.spectrum.helpers.Support;
-import de.dafuqs.spectrum.helpers.TimeHelper;
 import de.dafuqs.spectrum.recipe.StorageRecipeInput;
 import de.dafuqs.spectrum.recipe.titration_barrel.FermentationData;
 import de.dafuqs.spectrum.recipe.titration_barrel.TitrationBarrelRecipe;
@@ -64,11 +63,11 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 	}
 	
 	@Override
-	public ItemStack tap(Container inventory, long secondsFermented, float downfall) {
+	public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
 		List<ItemStack> stacks = new ArrayList<>();
 		int itemCount = 0;
-		for (int i = 0; i < inventory.getContainerSize(); i++) {
-			ItemStack stack = inventory.getItem(i);
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			ItemStack stack = inventory.getStackInSlot(i);
 			if (!stack.isEmpty()) {
 				stacks.add(stack);
 				itemCount += stack.getCount();

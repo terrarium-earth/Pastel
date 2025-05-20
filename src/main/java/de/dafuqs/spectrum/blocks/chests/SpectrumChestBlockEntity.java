@@ -1,12 +1,11 @@
 package de.dafuqs.spectrum.blocks.chests;
 
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.BlackHoleChestScreenHandler;
 import de.dafuqs.spectrum.inventories.CompactingChestScreenHandler;
 import de.dafuqs.spectrum.inventories.FabricationChestScreenHandler;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.api.EnvironmentInterface;
-import net.fabricmc.api.EnvironmentInterfaces;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -32,19 +31,20 @@ import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-@EnvironmentInterfaces({@EnvironmentInterface(
+//TODO: GET THIS LOOT CONTAINER SHIT OUT OF MY CHEST
+@OnlyIn(
 		value = Dist.CLIENT,
-		itf = LidBlockEntity.class
-)})
+		_interface = LidBlockEntity.class
+)
 public abstract class SpectrumChestBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
 	
 	public final ContainerOpenersCounter stateManager;
 	protected final ChestLidController lidAnimator;
-	protected NonNullList<ItemStack> inventory;
+	protected FriendlyStackHandler inventory;
 	
 	protected SpectrumChestBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
 		super(blockEntityType, blockPos, blockState);
-		this.inventory = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+		this.inventory = new FriendlyStackHandler(getContainerSize());
 		this.lidAnimator = new ChestLidController();
 		
 		this.stateManager = new ContainerOpenersCounter() {
@@ -145,12 +145,12 @@ public abstract class SpectrumChestBlockEntity extends RandomizableContainerBloc
 	
 	@Override
 	protected NonNullList<ItemStack> getItems() {
-		return this.inventory;
+		return this.inventory.getInternalList();
 	}
 	
 	@Override
 	protected void setItems(NonNullList<ItemStack> list) {
-		this.inventory = list;
+		inventory.setInternalList(list);
 	}
 	
 	public void onScheduledTick() {
@@ -162,17 +162,14 @@ public abstract class SpectrumChestBlockEntity extends RandomizableContainerBloc
 	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
 		super.loadAdditional(tag, registryLookup);
 		this.tryLoadLootTable(tag);
-		this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-		ContainerHelper.loadAllItems(tag, this.inventory, registryLookup);
+		inventory.deserializeNBT(registryLookup, tag.getCompound("inventory"));
 	}
 	
 	@Override
 	public void saveAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
 		super.saveAdditional(tag, registryLookup);
 		this.trySaveLootTable(tag);
-		if (!this.inventory.isEmpty()) {
-			ContainerHelper.saveAllItems(tag, this.inventory, registryLookup);
-		}
+		tag.put("inventory", inventory.serializeNBT(registryLookup));
 	}
 	
 	@Override

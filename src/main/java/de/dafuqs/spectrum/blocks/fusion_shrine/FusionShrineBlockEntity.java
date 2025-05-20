@@ -307,7 +307,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	}
 	
 	public StorageRecipeInput<SingleVariantStorage<FluidStack>> getRecipeInput() {
-		return new StorageRecipeInput<>(items, fluidStorage);
+		return new StorageRecipeInput<>(inventory, fluidStorage);
 	}
 	
 	// PLAYER OWNED

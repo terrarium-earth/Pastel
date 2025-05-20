@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.api.block.FilterConfigurable;
 import de.dafuqs.spectrum.inventories.slots.ShadowSlot;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -105,7 +105,7 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
 		@Override
 		public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
 			if (!world.isClientSide && filterConfigurable != null) {
-				filterConfigurable.filterItems().set(getContainerSlot(), ItemVariant.of(heldStack));
+				filterConfigurable.filterItems().set(getContainerSlot(), ItemStack.of(heldStack));
 			}
 			return super.onClicked(heldStack, type, player);
 		}

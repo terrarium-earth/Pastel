@@ -299,7 +299,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 					int reducedAmount = recipesCrafted * ingredientStack.getCount();
 					int reducedAmountAfterMod = efficiencyModifier == 1 ? reducedAmount : Support.getIntFromDecimalWithChance(reducedAmount / efficiencyModifier, world.random);
 					
-					ItemStack currentRemainder = currentStack.getRecipeRemainder();
+					ItemStack currentRemainder = currentStack.getCraftingRemainingItem();
 					currentStack.shrink(reducedAmountAfterMod);
 					
 					if (!currentRemainder.isEmpty()) {

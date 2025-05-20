@@ -13,8 +13,7 @@ import de.dafuqs.spectrum.blocks.pastel_network.network.PastelNetwork;
 import de.dafuqs.spectrum.blocks.pastel_network.network.PastelTransmissionLogic;
 import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetwork;
 import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetworkManager;
-import de.dafuqs.spectrum.helpers.BlockReference;
-import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.FilteringScreenHandler;
 import de.dafuqs.spectrum.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
@@ -24,15 +23,10 @@ import de.dafuqs.spectrum.registries.SpectrumPastelUpgrades;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.registries.SpectrumStampDataCategories;
-import net.fabricmc.fabric.api.lookup.v1.block.BlockApiCache;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.world.item.ItemStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -52,7 +46,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -97,14 +90,14 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	protected BlockApiCache<Storage<ItemStack>, Direction> connectedStorageCache = null;
 	protected Direction cachedDirection = null;
 	
-	private final List<ItemStack> filterItems;
+	private final FriendlyStackHandler filterItems;
 	float rotationTarget, crystalRotation, lastRotationTarget, heightTarget, crystalHeight, lastHeightTarget, alphaTarget, ringAlpha, lastAlphaTarget;
 	long creationStamp = -1, interpTicks, interpLength = -1, spinTicks;
 	private ConnectionState connectionState;
 	
 	public PastelNodeBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(SpectrumBlockEntities.PASTEL_NODE, blockPos, blockState);
-		this.filterItems = NonNullList.withSize(MAX_FILTER_SLOTS, ItemStack.blank());
+		this.filterItems = new FriendlyStackHandler(MAX_FILTER_SLOTS);
 		this.outerRing = Optional.empty();
 		this.innerRing = Optional.empty();
 		this.redstoneRing = Optional.empty();
@@ -271,8 +264,8 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		}
 		
 		if (filterSlotRows < oldFilterSlotCount) {
-			for (int i = getDrawnSlots(); i < filterItems.size(); i++) {
-				filterItems.set(i, ItemStack.blank());
+			for (int i = getDrawnSlots(); i < filterItems.getSlots(); i++) {
+				filterItems.removeStackInSlot(i);
 			}
 		}
 	}
@@ -383,7 +376,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		this.redstoneRing = nbt.contains("RedstoneRing") ? Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("RedstoneRing")))) : Optional.empty();
 		
 		if (this.getNodeType().usesFilters()) {
-			FilterConfigurable.readFilterNbt(nbt, this.filterItems);
+			FilterConfigurable.readFilterNbt(nbt, this.filterItems, registryLookup);
 		}
 	}
 	
@@ -402,7 +395,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		nbt.putLong("LastTransferTick", this.lastTransferTick);
 		nbt.putLong("ItemCountUnderway", this.itemCountUnderway);
 		if (this.getNodeType().usesFilters()) {
-			FilterConfigurable.writeFilterNbt(nbt, this.filterItems);
+			FilterConfigurable.writeFilterNbt(nbt, this.filterItems, registryLookup);
 		}
 		outerRing.ifPresent(r -> nbt.putString("OuterRing", SpectrumPastelUpgrades.toString(r)));
 		innerRing.ifPresent(r -> nbt.putString("InnerRing", SpectrumPastelUpgrades.toString(r)));
@@ -475,13 +468,13 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	}
 	
 	@Override
-	public List<ItemStack> getItemFilters() {
+	public FriendlyStackHandler getItemFilters() {
 		return this.filterItems;
 	}
 	
 	@Override
 	public void setFilterItem(int slot, ItemStack item) {
-		this.filterItems.set(slot, item);
+		this.filterItems.setStackInSlot(slot, item);
 	}
 	
 	public Predicate<ItemStack> getTransferFilterTo(PastelNodeBlockEntity other) {
@@ -501,14 +494,14 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	
 	private boolean filter(ItemStack variant) {
 		return filterItems
+				.getInternalList()
 				.stream()
 				.anyMatch(filterItem -> {
-					ItemStack filterStack = filterItem.toStack();
+
+                    if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem.is(SpectrumItemTags.TAG_FILTERING_ITEMS))
+						return filterItem.getItem() == variant.getItem();
 					
-					if (!filterStack.has(DataComponents.CUSTOM_NAME) || !filterStack.is(SpectrumItemTags.TAG_FILTERING_ITEMS))
-						return filterStack.getItem() == variant.getItem();
-					
-					var name = StringUtils.trim(filterStack.getHoverName().getString());
+					var name = StringUtils.trim(filterItem.getHoverName().getString());
 					
 					// This is to allow nbt filtering without item / tag filtering.
 					if (StringUtils.equalsAnyIgnoreCase(name, "*", "any", "all", "everything", "c:*", "c:any", "c:all", "c:everything"))
@@ -667,7 +660,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		return color.isPresent() ? color.get().getTextureDiffuseColor() : SpectrumColorHelper.getRandomColor(getNodeId().hashCode());
 	}
 	
-	enum ConnectionState {
+	public enum ConnectionState {
 		DISCONNECTED,
 		CONNECTED,
 		ACTIVE,

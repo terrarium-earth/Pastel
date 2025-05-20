@@ -1,12 +1,11 @@
 package de.dafuqs.spectrum.recipe.titration_barrel;
 
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.helpers.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.GatedRecipe;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.components.BeverageComponent;
-import de.dafuqs.spectrum.helpers.LoreHelper;
-import de.dafuqs.spectrum.helpers.TimeHelper;
 import de.dafuqs.spectrum.recipe.StorageRecipeInput;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
@@ -17,7 +16,6 @@ import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
@@ -40,7 +38,7 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<StorageRecipeInput<S
 	ResourceLocation UNLOCK_ADVANCEMENT_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/titration_barrel");
 	
 	// Called by the titration barrel when tapped
-	default ItemStack getTitrationResult(Container inventory, long secondsFermented, float downfall) {
+	default ItemStack getTitrationResult(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
 		// Dr. Who would be proud
 		if (secondsFermented < 0) {
 			float ageIngameDays = TimeHelper.minecraftDaysFromSeconds(secondsFermented);
@@ -56,7 +54,7 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<StorageRecipeInput<S
 		return tap(inventory, secondsFermented, downfall);
 	}
 	
-	ItemStack tap(Container inventory, long secondsFermented, float downfall);
+	ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall);
 	
 	Item getTappingItem();
 	

@@ -452,7 +452,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	}
 	
 	public InstanceRecipeInput<SpiritInstillerBlockEntity> getRecipeInput() {
-		return new InstanceRecipeInput<>(items, this);
+		return new InstanceRecipeInput<>(inventory.getInternalList(), this);
 	}
 	
 	// UPGRADEABLE
@@ -496,11 +496,9 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		this.upgrades = null;
 		this.setChanged();
 	}
-	
-	@Override
+
 	public void inventoryChanged() {
 		this.inventoryChanged = true;
-		super.inventoryChanged();
 	}
 	
 	static {

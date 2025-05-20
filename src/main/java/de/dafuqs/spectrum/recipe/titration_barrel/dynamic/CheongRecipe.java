@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
+import de.dafuqs.spectrum.helpers.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.recipe.titration_barrel.FermentationData;
@@ -37,7 +38,7 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 	}
 	
 	@Override
-	public ItemStack tap(Container inventory, long secondsFermented, float downfall) {
+	public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
 		ItemStack result = inventory.hasAnyOf(Collections.singleton(SpectrumItems.MERMAIDS_GEM))
 				? OUTPUT_STACK_MERMAIDS.copy()
 				: OUTPUT_STACK.copy();

@@ -42,7 +42,6 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
 		Containers.dropContentsOnDestroy(state, newState, world, pos);
 		// happens when filling with fluid, ...
 		if (!state.is(newState.getBlock()) && world.getBlockEntity(pos) instanceof InWorldInteractionBlockEntity inWorldInteractionBlockEntity) {
-			inWorldInteractionBlockEntity.inventoryChanged();
 		}
 		super.onRemove(state, world, pos, newState, moved);
 	}
@@ -67,9 +66,6 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
 		if (blockEntity instanceof Container inventory) {
 			Containers.dropContents(world, pos, inventory);
 			world.updateNeighbourForOutputSignal(pos, block);
-			if (inventory instanceof InWorldInteractionBlockEntity inWorldInteractionBlockEntity) {
-				inWorldInteractionBlockEntity.inventoryChanged();
-			}
 		}
 	}
 
@@ -77,10 +73,9 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
 		if (blockEntity instanceof InWorldInteractionBlockEntity inWorldInteractionBlockEntity) {
 			int previousCount = itemStack.getCount();
-			ItemStack remainingStack = InventoryHelper.smartAddToInventory(itemStack, inWorldInteractionBlockEntity, null);
+			ItemStack remainingStack = InventoryHelper.smartAddToInventory(itemStack, inWorldInteractionBlockEntity.inventory, null);
 
 			if (remainingStack.getCount() != previousCount) {
-				inWorldInteractionBlockEntity.inventoryChanged();
 				world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.8F, 0.8F + world.random.nextFloat() * 0.6F);
 			}
 			return remainingStack;
@@ -104,7 +99,7 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
 			ItemStack currentStack = blockEntity.getItem(slot);
 			if (!handStack.isEmpty() && !currentStack.isEmpty()) {
 				if (ItemStack.isSameItemSameComponents(handStack, currentStack)) {
-					InventoryHelper.setOrCombineStack(blockEntity, slot, handStack);
+					InventoryHelper.setOrCombineStack(blockEntity.inventory, slot, handStack);
 				} else {
 					blockEntity.setItem(slot, handStack);
 					player.setItemInHand(hand, currentStack);
@@ -125,7 +120,6 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
 		}
 
 		if (itemsChanged) {
-			blockEntity.inventoryChanged();
 			world.playSound(null, player.blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.8F, 0.8F + world.random.nextFloat() * 0.6F);
 		}
 		return itemsChanged;
@@ -141,7 +135,6 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
 		} else {
 			player.getInventory().placeItemBackInInventory(retrievedStack);
 		}
-		blockEntity.inventoryChanged();
 		world.playSound(null, player.blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.8F, 0.8F + world.random.nextFloat() * 0.6F);
 		return true;
 	}
@@ -157,11 +150,10 @@ public abstract class InWorldInteractionBlock extends BaseEntityBlock {
 
 	public boolean inputHandStack(Level world, Player player, InteractionHand hand, ItemStack handStack, InWorldInteractionBlockEntity blockEntity) {
 		int previousCount = handStack.getCount();
-		ItemStack remainingStack = InventoryHelper.smartAddToInventory(handStack, blockEntity, null);
+		ItemStack remainingStack = InventoryHelper.smartAddToInventory(handStack, blockEntity.inventory, null);
 		if (remainingStack.getCount() != previousCount) {
 			player.setItemInHand(hand, remainingStack);
 			world.playSound(null, player.blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.8F, 0.8F + world.random.nextFloat() * 0.6F);
-			blockEntity.inventoryChanged();
 			return true;
 		}
 		return false;

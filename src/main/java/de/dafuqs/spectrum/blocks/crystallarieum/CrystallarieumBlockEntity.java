@@ -227,8 +227,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 			}
 		}
 	}
-	
-	@Override
+
 	public void inventoryChanged() {
 		if (this.currentRecipe == null || level == null) {
 			this.currentCatalyst = CrystallarieumCatalyst.EMPTY;
@@ -239,7 +238,6 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 			this.canWork = this.currentRecipe.value().getNextState(this.currentRecipe, topState).isPresent()
 					&& (this.currentRecipe.value().growsWithoutCatalyst() || this.currentCatalyst != CrystallarieumCatalyst.EMPTY);
 		}
-		super.inventoryChanged();
 	}
 	
 	@Override

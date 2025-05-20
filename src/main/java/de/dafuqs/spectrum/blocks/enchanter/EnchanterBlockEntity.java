@@ -47,7 +47,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
@@ -71,6 +70,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 // I just want to say. That I hate this class with every bit of my heart ~ Azzyypaaras
+// Still do, still do...
 public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter {
 	
 	public static final String ITEM_TRANS = "container.spectrum.rei.enchantment_upgrade.required_item_count";
@@ -265,11 +265,11 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	 * @return True if the enchanters inventory matches an enchanting setup
 	 */
 	public static boolean isValidCenterEnchantingSetup(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
-		ItemStack centerStack = enchanterBlockEntity.virtualInventory.getItem(0);
+		ItemStack centerStack = enchanterBlockEntity.virtualInventory.getStackInSlot(0);
 		boolean isEnchantableBookInCenter = SpectrumEnchantmentHelper.isEnchantableBook(centerStack);
 		
 		var centerIsEnchantable = (isEnchantableBookInCenter || centerStack.getItem().isEnchantable(centerStack));
-		var hasExpStorage = enchanterBlockEntity.virtualInventory.getItem(1).getItem() instanceof ExperienceStorageItem;
+		var hasExpStorage = enchanterBlockEntity.virtualInventory.getStackInSlot(1).getItem() instanceof ExperienceStorageItem;
 		
 		if (!centerStack.isEmpty() && centerIsEnchantable && hasExpStorage) {
 			// gilded books can copy enchantments from any source item
@@ -278,7 +278,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			
 			var existingEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(centerStack).entrySet();
 			for (int i = 0; i < 8; i++) {
-				ItemStack virtualSlotStack = enchanterBlockEntity.virtualInventory.getItem(2 + i);
+				ItemStack virtualSlotStack = enchanterBlockEntity.virtualInventory.getStackInSlot(2 + i);
 				
 				// empty slots do not count
 				if (!virtualSlotStack.isEmpty()) {
@@ -389,7 +389,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public static ItemEnchantments getHighestEnchantmentsInItemBowls(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
 		return SpectrumEnchantmentHelper.collectHighestEnchantments(
-				enchanterBlockEntity.virtualInventory.items.subList(2, 10));
+				enchanterBlockEntity.virtualInventory.getInternalList().subList(2, 10));
 	}
 	
 	public static int getRequiredExperienceToEnchantCenterItem(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
@@ -638,13 +638,13 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				enchanter.currentRecipe = upgrade;
 				enchanter.currentItemProcessingTime = 0;
 				
-				var level = enchanter.items.get(0).get(DataComponents.STORED_ENCHANTMENTS).getLevel(upgrade.value().getEnchantment());
+				var level = enchanter.inventory.get(0).get(DataComponents.STORED_ENCHANTMENTS).getLevel(upgrade.value().getEnchantment());
 				enchanter.craftingTimeTotal = upgrade.value().getItemScaling().apply(level);
 				
 				//TODO why are we doing this?
 				EnchanterInventory testInventory = new EnchanterInventory();
-				testInventory.setItem(0, enchanter.virtualInventory.getItem(0));
-				testInventory.setItem(1, enchanter.virtualInventory.getItem(1));
+				testInventory.setStackInSlot(0, enchanter.virtualInventory.getStackInSlot(0));
+				testInventory.setStackInSlot(1, enchanter.virtualInventory.getStackInSlot(1));
 				enchanter.virtualInventory = testInventory;
 			}
 			if (enchanter.currentRecipe != previousRecipe) {
@@ -697,7 +697,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		this.virtualInventoryRecipeOrientation = nbt.getInt("virtual_recipe_orientation");
 		this.virtualInventoryRecipeMirrored = nbt.getBoolean("virtual_recipe_mirrored");
 		this.virtualInventory = new EnchanterInventory();
-		ContainerHelper.loadAllItems(nbt, this.virtualInventory.items, registryLookup);
+		virtualInventory.deserializeNBT(registryLookup, nbt.getCompound("inventory"));
 		if (nbt.contains("item_facing", Tag.TAG_STRING)) {
 			this.itemFacing = Direction.valueOf(nbt.getString("item_facing").toUpperCase(Locale.ROOT));
 		}
@@ -732,7 +732,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		nbt.putBoolean("inventory_changed", this.inventoryChanged);
 		nbt.putBoolean("owner_can_apply_conflicting_enchantments", this.canOwnerApplyConflictingEnchantments);
 		nbt.putBoolean("owner_can_overenchant", this.canOwnerOverenchant);
-		ContainerHelper.saveAllItems(nbt, this.virtualInventory.items, registryLookup);
+		nbt.put("inventory", virtualInventory.serializeNBT(registryLookup));
 		if (this.itemFacing != null) {
 			nbt.putString("item_facing", this.itemFacing.toString().toUpperCase(Locale.ROOT));
 		}
@@ -810,8 +810,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				getItemBowlStack(level, worldPosition.offset(-3, 0, -5)),
 				getItemBowlStack(level, worldPosition.offset(3, 0, -5))
 		);
-		
-		virtualInventory.setChanged();
+
 		inventoryChanged = true;
 		currentItemProcessingTime = -1;
 		

@@ -93,7 +93,7 @@ public class InWorldInteractionHelper {
 	
 	public static void decrementAndSpawnRemainder(ItemEntity itemEntity, int amount) {
 		ItemStack stack = itemEntity.getItem();
-		ItemStack remainder = stack.getItem() instanceof MobBucketItem ? Items.BUCKET.getDefaultInstance() : stack.getRecipeRemainder(); // looking at you, Mojang
+		ItemStack remainder = stack.getItem() instanceof MobBucketItem ? Items.BUCKET.getDefaultInstance() : stack.getCraftingRemainingItem(); // looking at you, Mojang
 		if (!remainder.isEmpty()) {
 			remainder.setCount(amount);
 			ItemEntity remainderEntity = new ItemEntity(itemEntity.level(), itemEntity.position().x(), itemEntity.position().y(), itemEntity.position().z(), remainder);
