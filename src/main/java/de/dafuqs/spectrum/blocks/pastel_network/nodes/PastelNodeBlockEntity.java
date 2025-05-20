@@ -23,6 +23,8 @@ import de.dafuqs.spectrum.registries.SpectrumPastelUpgrades;
 import de.dafuqs.spectrum.registries.SpectrumRegistries;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.registries.SpectrumStampDataCategories;
+import net.minecraft.network.*;
+import net.minecraft.world.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,7 +42,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -60,7 +61,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigurable, ExtendedScreenHandlerFactory<FilterConfigurable.ExtendedData>, PastelUpgradeable, Stampable {
+public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigurable, MenuProvider, PastelUpgradeable, Stampable {
 	
 	public static final int MAX_FILTER_SLOTS = 25;
 	public static final int SLOTS_PER_ROW = 5;
@@ -607,12 +608,12 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	public int getDrawnSlots() {
 		return getFilterRows() * SLOTS_PER_ROW;
 	}
-	
+
 	@Override
-	public FilterConfigurable.ExtendedData getScreenOpeningData(ServerPlayer player) {
-		return new FilterConfigurable.ExtendedData(this);
+	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+		ExtendedData.STREAM_CODEC.encode(buffer, new ExtendedData(this));
 	}
-	
+
 	public boolean equals(Object obj) {
 		return obj instanceof PastelNodeBlockEntity blockEntity && this.worldPosition.equals(blockEntity.worldPosition);
 	}

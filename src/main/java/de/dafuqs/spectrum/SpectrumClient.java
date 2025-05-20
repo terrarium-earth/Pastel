@@ -34,6 +34,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.*;
 
 import java.util.Set;
 
@@ -62,7 +63,7 @@ public class SpectrumClient implements ClientModInitializer, RevealingCallback, 
 		SpectrumFluids.registerClient();
 
 		logInfo("Setting up GUIs...");
-		SpectrumScreenHandlerTypes.registerClient();
+		NeoForge.EVENT_BUS.register(SpectrumScreenHandlerTypes.class);
 
 		logInfo("Setting up ItemPredicates...");
 		SpectrumModelPredicateProviders.registerClient();

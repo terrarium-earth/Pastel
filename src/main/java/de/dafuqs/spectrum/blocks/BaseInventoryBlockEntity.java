@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.blocks;
 
+import de.dafuqs.spectrum.helpers.*;
 import net.minecraft.core.*;
 import net.minecraft.core.component.*;
 import net.minecraft.nbt.*;
@@ -7,18 +8,18 @@ import net.minecraft.network.chat.*;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.component.*;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.*;
 
 import javax.annotation.*;
 
-public abstract class BaseContainerlessBlockEntity extends BlockEntity implements MenuProvider, Nameable {
+public abstract class BaseInventoryBlockEntity extends BlockEntity implements Container, MenuProvider, Nameable {
 
     @Nullable
     private Component name;
 
-    public BaseContainerlessBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+    public BaseInventoryBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
     }
 
@@ -80,5 +81,58 @@ public abstract class BaseContainerlessBlockEntity extends BlockEntity implement
     public void removeComponentsFromTag(CompoundTag tag) {
         tag.remove("CustomName");
         tag.remove("Items");
+    }
+
+    @Override
+    public int getContainerSize() {
+        return 0;
+    }
+
+    // Pretty much a duck
+    protected abstract FriendlyStackHandler getHandler();
+
+    protected void notifyInventoryUpdate() {}
+
+    @Override
+    public boolean isEmpty() {
+        return getHandler().isEmpty();
+    }
+
+    @Override
+    public ItemStack getItem(int slot) {
+        return getHandler().getStackInSlot(slot);
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        setChanged();
+        notifyInventoryUpdate();
+        return getHandler().extractItem(slot, amount, false);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        setChanged();
+        notifyInventoryUpdate();
+        return getHandler().removeStackInSlot(slot);
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+        setChanged();
+        notifyInventoryUpdate();
+        getHandler().setStackInSlot(slot, stack);
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return true;
+    }
+
+    @Override
+    public void clearContent() {
+        setChanged();
+        notifyInventoryUpdate();
+        getHandler().clear();
     }
 }

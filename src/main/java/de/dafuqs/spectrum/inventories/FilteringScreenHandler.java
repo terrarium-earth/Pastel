@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.api.block.FilterConfigurable;
 import de.dafuqs.spectrum.inventories.slots.ShadowSlot;
+import net.minecraft.network.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
@@ -23,6 +24,9 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
 	protected final Container filterInventory;
 	protected final int rows, slotsPerRow, drawnSlots;
 
+	public FilteringScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
+		this(syncId, playerInventory, FilterConfigurable.ExtendedData.STREAM_CODEC.decode(buf));
+	}
 	public FilteringScreenHandler(int syncId, Inventory playerInventory, FilterConfigurable.ExtendedData data) {
 		this(SpectrumScreenHandlerTypes.FILTERING, syncId, playerInventory,
 				(handler) -> new Tuple<>(FilterConfigurable.getFilterInventoryFromItemsHandler(syncId, playerInventory, data.filterItems(), handler), new Integer[]{
@@ -105,7 +109,7 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
 		@Override
 		public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
 			if (!world.isClientSide && filterConfigurable != null) {
-				filterConfigurable.filterItems().set(getContainerSlot(), ItemStack.of(heldStack));
+				filterConfigurable.filterItems().set(getContainerSlot(), heldStack.copyWithCount(1));
 			}
 			return super.onClicked(heldStack, type, player);
 		}

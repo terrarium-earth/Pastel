@@ -229,7 +229,7 @@ public class SpectrumCommon {
 		
 		// GUI
 		logInfo("Registering Screen Handler Types...");
-		SpectrumScreenHandlerTypes.register();
+		SpectrumScreenHandlerTypes.registerMenus();
 		
 		logInfo("Registering Default Item Stack Damage Immunities...");
 		SpectrumItemDamageImmunities.registerDefaultItemStackImmunities();

@@ -22,14 +22,13 @@ import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumItemTags;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -37,9 +36,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
@@ -53,10 +50,8 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,7 +60,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class CinderhearthBlockEntity extends BaseContainerlessBlockEntity implements MultiblockCrafter, ExtendedScreenHandlerFactory<BlockPos>, InkStorageBlockEntity<IndividualCappedInkStorage>, StackedContentsCompatible {
+public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements Container, MultiblockCrafter, InkStorageBlockEntity<IndividualCappedInkStorage>, StackedContentsCompatible {
 	
 	public static final int INVENTORY_SIZE = 11;
 	public static final int INPUT_SLOT_ID = 0;
@@ -93,42 +88,7 @@ public class CinderhearthBlockEntity extends BaseContainerlessBlockEntity implem
 	protected CinderHearthStructureType structure = CinderHearthStructureType.NONE;
 	
 	protected final CraftingDelegate propertyDelegate = new CraftingDelegate();
-	
-	@Override
-	public int[] getSlotsForFace(Direction side) {
-		switch (side) {
-			case UP -> {
-				return new int[]{INPUT_SLOT_ID};
-			}
-			case DOWN -> {
-				return OUTPUT_SLOT_IDS;
-			}
-			default -> {
-				return new int[]{INK_PROVIDER_SLOT_ID, EXPERIENCE_STORAGE_ITEM_SLOT_ID};
-			}
-		}
-	}
-	
-	@Override
-	public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dir) {
-		switch (slot) {
-			case INK_PROVIDER_SLOT_ID -> {
-				return stack.getItem() instanceof InkStorageItem<?> inkStorageItem && (inkStorageItem.getDrainability().canDrain(false));
-			}
-			case EXPERIENCE_STORAGE_ITEM_SLOT_ID -> {
-				return stack.getItem() instanceof ExperienceStorageItem;
-			}
-			default -> {
-				return true;
-			}
-		}
-	}
-	
-	@Override
-	public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
-		return slot >= FIRST_OUTPUT_SLOT_ID;
-	}
-	
+
 	public enum CinderHearthStructureType {
 		NONE,
 		WITH_LAVA,
@@ -140,7 +100,12 @@ public class CinderhearthBlockEntity extends BaseContainerlessBlockEntity implem
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 		this.inkStorage = new IndividualCappedInkStorage(INK_STORAGE_SIZE, USED_INK_COLORS);
 	}
-	
+
+	@Override
+	protected FriendlyStackHandler getHandler() {
+		return inventory;
+	}
+
 	@Override
 	public void resetUpgrades() {
 		this.upgrades = null;
@@ -194,10 +159,10 @@ public class CinderhearthBlockEntity extends BaseContainerlessBlockEntity implem
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
 		return new CinderhearthScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
 	}
-	
+
 	@Override
-	public BlockPos getScreenOpeningData(ServerPlayer serverPlayerEntity) {
-		return worldPosition;
+	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+		BlockPos.STREAM_CODEC.encode(buffer, worldPosition);
 	}
 	
 	@Override
@@ -515,25 +480,10 @@ public class CinderhearthBlockEntity extends BaseContainerlessBlockEntity implem
 		}
 	}
 	
-	@Override
-	public boolean stillValid(Player player) {
-		if (level == null || level.getBlockEntity(this.worldPosition) != this) {
-			return false;
-		} else {
-			return player.distanceToSqr((double) this.worldPosition.getX() + 0.5D, (double) this.worldPosition.getY() + 0.5D, (double) this.worldPosition.getZ() + 0.5D) <= 64.0D;
-		}
-	}
-	
 	public void inventoryChanged() {
 		this.inventoryChanged = true;
 		this.canTransferInk = true;
 		this.setChanged();
-	}
-	
-	@Override
-	public void clearContent() {
-		this.inventory.getInternalList().clear();
-		this.inventoryChanged();
 	}
 	
 	@Override

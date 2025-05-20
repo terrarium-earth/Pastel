@@ -6,6 +6,7 @@ import de.dafuqs.spectrum.inventories.slots.InkInputSlot;
 import de.dafuqs.spectrum.networking.s2c_payloads.UpdateBlockEntityInkPayload;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -35,9 +36,9 @@ public class CinderhearthScreenHandler extends AbstractContainerMenu {
 			UpdateBlockEntityInkPayload.updateBlockEntityInk(blockEntity.getBlockPos(), blockEntity.getEnergyStorage(), player);
 		}
 	}
-	
-	public CinderhearthScreenHandler(int syncId, Inventory playerInventory, BlockPos pos) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(pos, SpectrumBlockEntities.CINDERHEARTH).orElseThrow(), new SimpleContainerData(2));
+
+	public CinderhearthScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.CINDERHEARTH).orElseThrow(), new SimpleContainerData(2));
 	}
 	
 	public CinderhearthScreenHandler(int syncId, Inventory playerInventory, CinderhearthBlockEntity blockEntity, ContainerData propertyDelegate) {
@@ -47,9 +48,6 @@ public class CinderhearthScreenHandler extends AbstractContainerMenu {
 		this.world = playerInventory.player.level();
 		this.propertyDelegate = propertyDelegate;
 		this.blockEntity = blockEntity;
-		
-		checkContainerSize(blockEntity, CinderhearthBlockEntity.INVENTORY_SIZE);
-		blockEntity.startOpen(playerInventory.player);
 		
 		this.addSlot(new InkInputSlot(blockEntity, CinderhearthBlockEntity.INK_PROVIDER_SLOT_ID, 146, 13));
 		this.addSlot(new ExperienceStorageItemSlot(blockEntity, CinderhearthBlockEntity.EXPERIENCE_STORAGE_ITEM_SLOT_ID, 38, 52));
@@ -87,13 +85,12 @@ public class CinderhearthScreenHandler extends AbstractContainerMenu {
 	
 	@Override
 	public boolean stillValid(Player player) {
-		return this.blockEntity.stillValid(player);
+		return true;
 	}
-	
+
 	@Override
 	public void removed(Player player) {
 		super.removed(player);
-		this.blockEntity.stopOpen(player);
 	}
 	
 	@Override

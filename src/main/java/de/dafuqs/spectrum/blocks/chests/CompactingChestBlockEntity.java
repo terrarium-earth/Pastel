@@ -7,7 +7,7 @@ import de.dafuqs.spectrum.networking.c2s_payloads.ChangeCompactingChestSettingsP
 import de.dafuqs.spectrum.networking.s2c_payloads.CompactingChestStatusUpdatePayload;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.minecraft.network.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class CompactingChestBlockEntity extends SpectrumChestBlockEntity implements ExtendedScreenHandlerFactory<BlockPos> {
+public class CompactingChestBlockEntity extends SpectrumChestBlockEntity {
 	
 	private static final Map<AutoCraftingMode, Map<ItemStack, Optional<RecipeHolder<CraftingRecipe>>>> cache = new EnumMap<>(AutoCraftingMode.class);
 	private AutoCraftingMode autoCraftingMode;
@@ -342,7 +342,7 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 		if (level == null)
 			return false;
 
-        List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(itemStack, this);
+        List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(itemStack, this.inventory);
 		
 		boolean spaceInInventory;
 		
@@ -382,10 +382,10 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity impleme
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
 		return new CompactingChestScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
 	}
-	
+
 	@Override
-	public BlockPos getScreenOpeningData(ServerPlayer serverPlayerEntity) {
-		return worldPosition;
+	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+		BlockPos.STREAM_CODEC.encode(buffer, worldPosition);
 	}
 	
 	public enum State {

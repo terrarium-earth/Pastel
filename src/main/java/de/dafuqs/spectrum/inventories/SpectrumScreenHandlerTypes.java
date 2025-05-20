@@ -1,8 +1,6 @@
 package de.dafuqs.spectrum.inventories;
 
 import de.dafuqs.spectrum.api.block.FilterConfigurable;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -13,6 +11,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.extensions.*;
+import net.neoforged.neoforge.network.*;
 
 public class SpectrumScreenHandlerTypes {
 	
@@ -49,11 +51,11 @@ public class SpectrumScreenHandlerTypes {
 		return Registry.register(BuiltInRegistries.MENU, id, type);
 	}
 	
-	public static <T extends AbstractContainerMenu, D> MenuType<T> registerExtended(ResourceLocation id, ExtendedScreenHandlerType.ExtendedFactory<T, D> factory, StreamCodec<? super RegistryFriendlyByteBuf, D> packetCodec) {
-		return Registry.register(BuiltInRegistries.MENU, id, new ExtendedScreenHandlerType<>(factory, packetCodec));
+	public static <T extends AbstractContainerMenu, D> MenuType<T> registerExtended(ResourceLocation id, IContainerFactory<T> factory, StreamCodec<? super RegistryFriendlyByteBuf, D> packetCodec) {
+		return Registry.register(BuiltInRegistries.MENU, id, IMenuTypeExtension.create(factory));
 	}
 	
-	public static void register() {
+	public static void registerMenus() {
 		PAINTBRUSH = registerSimple(SpectrumScreenHandlerIDs.PAINTBRUSH, PaintbrushScreenHandler::new);
 		WORKSTAFF = registerSimple(SpectrumScreenHandlerIDs.WORKSTAFF, WorkstaffScreenHandler::new);
 		
@@ -83,33 +85,34 @@ public class SpectrumScreenHandlerTypes {
 		GENERIC_TIER2_3X3 = registerSimple(SpectrumScreenHandlerIDs.GENERIC_TIER2_3X3, Spectrum3x3ContainerScreenHandler::createTier2);
 		GENERIC_TIER3_3X3 = registerSimple(SpectrumScreenHandlerIDs.GENERIC_TIER3_3X3, Spectrum3x3ContainerScreenHandler::createTier3);
 	}
-	
-	public static void registerClient() {
-		MenuScreens.register(SpectrumScreenHandlerTypes.PAINTBRUSH, PaintbrushScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.WORKSTAFF, WorkstaffScreen::new);
+
+	@SubscribeEvent
+	public static void registerScreens(RegisterMenuScreensEvent event) {
+		event.register(SpectrumScreenHandlerTypes.PAINTBRUSH, PaintbrushScreen::new);
+		event.register(SpectrumScreenHandlerTypes.WORKSTAFF, WorkstaffScreen::new);
 		
-		MenuScreens.register(SpectrumScreenHandlerTypes.PEDESTAL, PedestalScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.CRAFTING_TABLET, CraftingTabletScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.FABRICATION_CHEST, FabricationChestScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.BEDROCK_ANVIL, BedrockAnvilScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.PARTICLE_SPAWNER, ParticleSpawnerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.COMPACTING_CHEST, CompactingChestScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.BLACK_HOLE_CHEST, BlackHoleChestScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.POTION_WORKSHOP, PotionWorkshopScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.COLOR_PICKER, ColorPickerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.CINDERHEARTH, CinderhearthScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.FILTERING, FilteringScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.BAG_OF_HOLDING, ContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.PEDESTAL, PedestalScreen::new);
+		event.register(SpectrumScreenHandlerTypes.CRAFTING_TABLET, CraftingTabletScreen::new);
+		event.register(SpectrumScreenHandlerTypes.FABRICATION_CHEST, FabricationChestScreen::new);
+		event.register(SpectrumScreenHandlerTypes.BEDROCK_ANVIL, BedrockAnvilScreen::new);
+		event.register(SpectrumScreenHandlerTypes.PARTICLE_SPAWNER, ParticleSpawnerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.COMPACTING_CHEST, CompactingChestScreen::new);
+		event.register(SpectrumScreenHandlerTypes.BLACK_HOLE_CHEST, BlackHoleChestScreen::new);
+		event.register(SpectrumScreenHandlerTypes.POTION_WORKSHOP, PotionWorkshopScreen::new);
+		event.register(SpectrumScreenHandlerTypes.COLOR_PICKER, ColorPickerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.CINDERHEARTH, CinderhearthScreen::new);
+		event.register(SpectrumScreenHandlerTypes.FILTERING, FilteringScreen::new);
+		event.register(SpectrumScreenHandlerTypes.BAG_OF_HOLDING, ContainerScreen::new);
 		
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER1_9X3, SpectrumGenericContainerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER2_9X3, SpectrumGenericContainerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER3_9X3, SpectrumGenericContainerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER1_9X6, SpectrumGenericContainerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER2_9X6, SpectrumGenericContainerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER3_9X6, SpectrumGenericContainerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER1_3X3, Spectrum3x3ContainerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER2_3X3, Spectrum3x3ContainerScreen::new);
-		MenuScreens.register(SpectrumScreenHandlerTypes.GENERIC_TIER3_3X3, Spectrum3x3ContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER1_9X3, SpectrumGenericContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER2_9X3, SpectrumGenericContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER3_9X3, SpectrumGenericContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER1_9X6, SpectrumGenericContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER2_9X6, SpectrumGenericContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER3_9X6, SpectrumGenericContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER1_3X3, Spectrum3x3ContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER2_3X3, Spectrum3x3ContainerScreen::new);
+		event.register(SpectrumScreenHandlerTypes.GENERIC_TIER3_3X3, Spectrum3x3ContainerScreen::new);
 	}
 	
 }

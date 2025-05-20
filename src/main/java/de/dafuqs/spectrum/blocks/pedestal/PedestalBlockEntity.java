@@ -6,11 +6,10 @@ import de.dafuqs.spectrum.api.block.MultiblockCrafter;
 import de.dafuqs.spectrum.api.block.PedestalVariant;
 import de.dafuqs.spectrum.api.block.PlayerOwned;
 import de.dafuqs.spectrum.api.item.GemstoneColor;
-import de.dafuqs.spectrum.blocks.CraftingDelegate;
+import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
-import de.dafuqs.spectrum.helpers.InventoryHelper;
-import de.dafuqs.spectrum.helpers.Support;
-import de.dafuqs.spectrum.inventories.PedestalScreenHandler;
+import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.items.magic_items.CraftingTabletItem;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayBlockBoundSoundInstancePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayPedestalCraftingFinishedParticlePayload;
@@ -27,7 +26,6 @@ import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumMultiblocks;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -35,6 +33,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -66,12 +65,13 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.*;
+import net.neoforged.neoforge.items.wrapper.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -80,7 +80,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-public class PedestalBlockEntity extends BaseContainerBlockEntity implements MultiblockCrafter, StackedContentsCompatible, WorldlyContainer, ExtendedScreenHandlerFactory<PedestalScreenHandler.ScreenOpeningData> {
+public class PedestalBlockEntity extends BaseInventoryBlockEntity implements MultiblockCrafter, StackedContentsCompatible, WorldlyContainer {
 	
 	public static final int INVENTORY_SIZE = 16; // 9 crafting, 5 gems, 1 craftingTablet, 1 output
 	public static final int CRAFTING_TABLET_SLOT_ID = 14;
@@ -93,7 +93,7 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 	
 	protected UUID ownerUUID;
 	protected PedestalVariant pedestalVariant;
-	protected NonNullList<ItemStack> inventory;
+	protected FriendlyStackHandler inventory;
 	protected boolean shouldCraft;
 	protected float storedXP;
 	protected PedestalRecipeTier cachedMaxPedestalTier;
@@ -113,12 +113,17 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 			this.pedestalVariant = BuiltinPedestalVariant.BASIC_AMETHYST;
 		}
 		
-		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
+		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 	}
 	
 	public void updateInClientWorld() {
 		if (level instanceof ServerLevel serverWorld)
 			serverWorld.getChunkSource().blockChanged(worldPosition);
+	}
+
+	@Override
+	protected FriendlyStackHandler getHandler() {
+		return inventory;
 	}
 	
 	@SuppressWarnings("unused")
@@ -242,7 +247,7 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 		}
 		
 		// try to output the currently stored output stack
-		ItemStack outputItemStack = pedestalBlockEntity.inventory.get(OUTPUT_SLOT_ID);
+		ItemStack outputItemStack = pedestalBlockEntity.inventory.getStackInSlot(OUTPUT_SLOT_ID);
 		if (outputItemStack != ItemStack.EMPTY) {
 			if (world.getBlockState(blockPos.above()).getCollisionShape(world, blockPos.above()).isEmpty()) {
 				spawnOutputAsItemEntity((ServerLevel) world, blockPos, pedestalBlockEntity, outputItemStack);
@@ -282,7 +287,7 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 	public static void spawnOutputAsItemEntity(ServerLevel world, BlockPos blockPos, @NotNull PedestalBlockEntity pedestalBlockEntity, ItemStack outputItemStack) {
 		// spawn crafting output
 		MultiblockCrafter.spawnItemStackAsEntitySplitViaMaxCount(world, pedestalBlockEntity.worldPosition, outputItemStack, outputItemStack.getCount(), new Vec3(0, 0.1, 0));
-		pedestalBlockEntity.inventory.set(OUTPUT_SLOT_ID, ItemStack.EMPTY);
+		pedestalBlockEntity.inventory.setStackInSlot(OUTPUT_SLOT_ID, ItemStack.EMPTY);
 		
 		// spawn XP
 		MultiblockCrafter.spawnExperience(world, pedestalBlockEntity.worldPosition, pedestalBlockEntity.storedXP, world.random);
@@ -293,12 +298,12 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 	}
 	
 	public static boolean tryPutIntoInventory(PedestalBlockEntity pedestalBlockEntity, Container targetInventory, ItemStack outputItemStack) {
-		ItemStack remainingStack = InventoryHelper.smartAddToInventory(outputItemStack, targetInventory, Direction.DOWN);
+		ItemStack remainingStack = InventoryHelper.smartAddToInventory(outputItemStack, new InvWrapper(targetInventory), Direction.DOWN);
 		if (remainingStack.isEmpty()) {
-			pedestalBlockEntity.inventory.set(OUTPUT_SLOT_ID, ItemStack.EMPTY);
+			pedestalBlockEntity.inventory.setStackInSlot(OUTPUT_SLOT_ID, ItemStack.EMPTY);
 			return true;
 		} else {
-			pedestalBlockEntity.inventory.set(OUTPUT_SLOT_ID, remainingStack);
+			pedestalBlockEntity.inventory.setStackInSlot(OUTPUT_SLOT_ID, remainingStack);
 			return false;
 		}
 	}
@@ -475,78 +480,14 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 	public Component getDefaultName() {
 		return Component.translatable("block.spectrum.pedestal");
 	}
-	
-	@Override
-	protected NonNullList<ItemStack> getItems() {
-		return inventory;
-	}
-	
-	@Override
-	protected void setItems(NonNullList<ItemStack> inventory) {
-		this.inventory = inventory;
-	}
-	
 	@Override
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
 		return new PedestalScreenHandler(syncId, playerInventory, this, this.propertyDelegate, this.getPedestalTier(), this.getHighestAvailableRecipeTier());
 	}
-	
+
 	@Override
-	public PedestalScreenHandler.ScreenOpeningData getScreenOpeningData(ServerPlayer serverPlayerEntity) {
-		return new PedestalScreenHandler.ScreenOpeningData(this.getBlockPos(), this.getPedestalTier(), this.getHighestAvailableRecipeTier());
-	}
-	
-	@Override
-	public int getContainerSize() {
-		return this.inventory.size();
-	}
-	
-	@Override
-	public boolean isEmpty() {
-		Iterator<ItemStack> var1 = this.inventory.iterator();
-		
-		ItemStack itemStack;
-		do {
-			if (!var1.hasNext()) {
-				return true;
-			}
-			
-			itemStack = var1.next();
-		} while (itemStack.isEmpty());
-		
-		return false;
-	}
-	
-	@Override
-	public ItemStack getItem(int slot) {
-		return this.inventory.get(slot);
-	}
-	
-	@Override
-	public ItemStack removeItem(int slot, int amount) {
-		ItemStack removedStack = ContainerHelper.removeItem(this.inventory, slot, amount);
-		this.inventoryChanged = true;
-		this.setChanged();
-		return removedStack;
-	}
-	
-	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
-		ItemStack removedStack = ContainerHelper.takeItem(this.inventory, slot);
-		this.inventoryChanged = true;
-		this.setChanged();
-		return removedStack;
-	}
-	
-	@Override
-	public void setItem(int slot, @NotNull ItemStack stack) {
-		this.inventory.set(slot, stack);
-		if (stack.getCount() > this.getMaxStackSize()) {
-			stack.setCount(this.getMaxStackSize());
-		}
-		
-		this.inventoryChanged = true;
-		this.setChanged();
+	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+		PedestalScreenHandler.ScreenOpeningData.STREAM_CODEC.encode(buffer, new PedestalScreenHandler.ScreenOpeningData(this.getBlockPos(), this.getPedestalTier(), this.getHighestAvailableRecipeTier()));
 	}
 	
 	@Override
@@ -560,7 +501,7 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 	
 	@Override
 	public void fillStackedContents(StackedContents recipeMatcher) {
-		for (ItemStack itemStack : this.inventory) {
+		for (ItemStack itemStack : this.inventory.getInternalList()) {
 			recipeMatcher.accountStack(itemStack);
 		}
 	}
@@ -583,8 +524,7 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.loadAdditional(nbt, registryLookup);
 		
-		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
-		ContainerHelper.loadAllItems(nbt, this.inventory, registryLookup);
+		inventory.load(nbt, registryLookup);
 		
 		if (nbt.contains("StoredXP")) {
 			this.storedXP = nbt.getFloat("StoredXP");
@@ -624,13 +564,7 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 			nbt.putString("CurrentRecipe", this.currentRecipe.id().toString());
 		}
 		
-		PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
-		ContainerHelper.saveAllItems(nbt, this.inventory, registryLookup);
-	}
-	
-	@Override
-	public void clearContent() {
-		this.inventory.clear();
+		inventory.save(nbt, registryLookup);
 	}
 	
 	public boolean isCrafting() {
@@ -679,10 +613,10 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 				if (remainder.isEmpty()) {
 					itemStack.shrink(1);
 				} else {
-					if (this.inventory.get(i).getCount() == 1) {
-						this.inventory.set(i, remainder);
+					if (this.inventory.getStackInSlot(i).getCount() == 1) {
+						this.inventory.setStackInSlot(i, remainder);
 					} else {
-						this.inventory.get(i).shrink(1);
+						this.inventory.getStackInSlot(i).shrink(1);
 						ItemEntity itemEntity = new ItemEntity(level, worldPosition.getX() + 0.5, worldPosition.getY() + 1, worldPosition.getZ() + 0.5, remainder);
 						itemEntity.push(0, 0.05, 0);
 						level.addFreshEntity(itemEntity);
@@ -737,10 +671,10 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 			return true;
 		}
 		
-		if (slot < 9 && inventory.get(CRAFTING_TABLET_SLOT_ID).is(SpectrumItems.CRAFTING_TABLET)) {
-			ItemStack craftingTabletItem = inventory.get(CRAFTING_TABLET_SLOT_ID);
+		if (slot < 9 && inventory.getStackInSlot(CRAFTING_TABLET_SLOT_ID).is(SpectrumItems.CRAFTING_TABLET)) {
+			ItemStack craftingTabletItem = inventory.getStackInSlot(CRAFTING_TABLET_SLOT_ID);
 			
-			if (inventory.get(slot).getCount() > 0) {
+			if (inventory.getStackInSlot(slot).getCount() > 0) {
 				return false;
 			}
 			
@@ -795,11 +729,11 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 	}
 	
 	public PedestalRecipeInput createRecipeInput() {
-		return PedestalRecipeInput.create(this.inventory, getOwnerIfOnline());
+		return PedestalRecipeInput.create(this.inventory.getInternalList(), getOwnerIfOnline());
 	}
 	
 	public CraftingInput.Positioned createPositionedInput() {
-		return CraftingInput.ofPositioned(3, 3, inventory);
+		return CraftingInput.ofPositioned(3, 3, inventory.getInternalList());
 	}
 	
 	public ItemStack getCurrentCraftingRecipeOutput() {
@@ -895,7 +829,12 @@ public class PedestalBlockEntity extends BaseContainerBlockEntity implements Mul
 		this.ownerUUID = playerEntity.getUUID();
 		setChanged();
 	}
-	
+
+	@Override
+	protected void notifyInventoryUpdate() {
+		setInventoryChanged();
+	}
+
 	public void setInventoryChanged() {
 		this.inventoryChanged = true;
 	}

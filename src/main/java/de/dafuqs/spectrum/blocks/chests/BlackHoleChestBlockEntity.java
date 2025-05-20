@@ -15,10 +15,9 @@ import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithExactVelocityP
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.core.*;
+import net.minecraft.network.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -47,7 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implements FilterConfigurable, ExtendedScreenHandlerFactory<FilterConfigurable.ExtendedDataWithPos>, WorldlyContainer, EventQueue.Callback<Object> {
+public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implements FilterConfigurable, WorldlyContainer, EventQueue.Callback<Object> {
 	
 	public static final int INVENTORY_SIZE = 28;
 	public static final int ITEM_FILTER_SLOT_COUNT = 5;
@@ -283,7 +282,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 			ItemEntity itemEntity = itemEntry.itemEntity;
 			if (itemEntity != null && itemEntity.isAlive() && ((ItemEntityAccessor) itemEntity).getPickupDelay() != 32767 && acceptsItemStack(itemEntity.getItem())) {
 				int previousAmount = itemEntity.getItem().getCount();
-				ItemStack remainingStack = InventoryHelper.smartAddToInventory(itemEntity.getItem(), this, Direction.UP);
+				ItemStack remainingStack = InventoryHelper.smartAddToInventory(itemEntity.getItem(), this.inventory, Direction.UP);
 				
 				if (remainingStack.isEmpty()) {
 					sendPlayItemEntityAbsorbedParticle((ServerLevel) world, itemEntity);
@@ -320,10 +319,10 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	public SoundEvent getCloseSound() {
 		return SpectrumSoundEvents.BLACK_HOLE_CHEST_CLOSE;
 	}
-	
+
 	@Override
-	public FilterConfigurable.ExtendedDataWithPos getScreenOpeningData(ServerPlayer player) {
-		return new ExtendedDataWithPos(worldPosition, this);
+	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+		ExtendedDataWithPos.STREAM_CODEC.encode(buffer, new ExtendedDataWithPos(worldPosition, this));
 	}
 	
 	@Override
@@ -340,7 +339,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	public int getDrawnSlots() {
 		return ITEM_FILTER_SLOT_COUNT;
 	}
-	
+
 	public void setFilterItem(int slot, ItemStack item) {
 		this.filterItems.setStackInSlot(slot, item);
 		this.setChanged();
@@ -362,7 +361,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		}
 		return allAir;
 	}
-	
+
 	public boolean hasExperienceStorageItem() {
 		return this.inventory.getStackInSlot(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT).getItem() instanceof ExperienceStorageItem;
 	}

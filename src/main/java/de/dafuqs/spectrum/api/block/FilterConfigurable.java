@@ -65,15 +65,15 @@ public interface FilterConfigurable {
 		return getFilterInventoryFromDataClicker(data, clicker);
 	}
 	
-	static Container getFilterInventoryFromItemsClicker(ItemStackHandler items, ShadowSlotClicker clicker) {
-		Container inventory = new FilterInventory(clicker, items.getSlots());
-		for (int i = 0; i < items.getSlots(); i++) {
-			inventory.setItem(i, items.getStackInSlot(i));
+	static Container getFilterInventoryFromItemsClicker(List<ItemStack> items, ShadowSlotClicker clicker) {
+		Container inventory = new FilterInventory(clicker, items.size());
+		for (int i = 0; i < items.size(); i++) {
+			inventory.setItem(i, items.get(i));
 		}
 		return inventory;
 	}
 	
-	static Container getFilterInventoryFromItemsHandler(int syncId, @NotNull Inventory playerInventory, ItemStackHandler items, @NotNull AbstractContainerMenu thisHandler) {
+	static Container getFilterInventoryFromItemsHandler(int syncId, @NotNull Inventory playerInventory, List<ItemStack> items, @NotNull AbstractContainerMenu thisHandler) {
 		final var clicker = new ShadowSlotClicker.FromHandler(thisHandler, playerInventory.player, syncId);
 		return getFilterInventoryFromItemsClicker(items, clicker);
 	}
@@ -150,8 +150,6 @@ public interface FilterConfigurable {
 		}
 		return false;
 	}
-	
-	HolderGetter.Provider getLookup();
 	
 	record ExtendedData(List<ItemStack> filterItems, int rows, int slotsPerRow, int drawnSlots) {
 		public ExtendedData(FilterConfigurable configurable) {

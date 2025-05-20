@@ -6,6 +6,7 @@ import de.dafuqs.spectrum.inventories.slots.ShadowSlot;
 import de.dafuqs.spectrum.inventories.slots.StackFilterSlot;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumItems;
+import net.minecraft.network.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,7 +25,11 @@ public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
 	
 	protected BlackHoleChestBlockEntity blockEntity;
 	protected Container filterInventory;
-	
+
+	public BlackHoleChestScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
+		this(syncId, playerInventory, FilterConfigurable.ExtendedDataWithPos.STREAM_CODEC.decode(buf));
+	}
+
 	public BlackHoleChestScreenHandler(int syncId, Inventory playerInventory, FilterConfigurable.ExtendedDataWithPos data) {
 		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos(), SpectrumBlockEntities.BLACK_HOLE_CHEST).orElseThrow(), data.data());
 	}
@@ -119,7 +124,7 @@ public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
 		@Override
 		public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
 			if (blockEntity != null) {
-				blockEntity.setFilterItem(getContainerSlot(), ItemStack.of(heldStack));
+				blockEntity.setFilterItem(getContainerSlot(), heldStack.copyWithCount(1));
 			}
 			return super.onClicked(heldStack, type, player);
 		}

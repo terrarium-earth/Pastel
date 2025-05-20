@@ -3,6 +3,8 @@ package de.dafuqs.spectrum.inventories;
 import de.dafuqs.spectrum.blocks.chests.CompactingChestBlockEntity;
 import de.dafuqs.spectrum.networking.c2s_payloads.ChangeCompactingChestSettingsPayload;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
+import net.minecraft.network.*;
+import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
@@ -20,8 +22,8 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 	private final CompactingChestBlockEntity blockEntity;
 	protected final int ROWS = 3;
 	
-	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, BlockPos pos) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(pos, SpectrumBlockEntities.COMPACTING_CHEST).orElseThrow(), new SimpleContainerData(1));
+	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.COMPACTING_CHEST).orElseThrow(), new SimpleContainerData(1));
 	}
 	
 	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, CompactingChestBlockEntity blockEntity, ContainerData propertyDelegate) {
@@ -103,7 +105,7 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 	@Override
 	public void broadcastChanges() {
 		super.broadcastChanges();
-		ClientPlayNetworking.send(new ChangeCompactingChestSettingsPayload(getCraftingMode()));
+		PacketDistributor.sendToServer(new ChangeCompactingChestSettingsPayload(getCraftingMode()));
 	}
 	
 	@Override

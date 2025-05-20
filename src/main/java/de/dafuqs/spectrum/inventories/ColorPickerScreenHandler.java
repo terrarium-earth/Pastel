@@ -48,7 +48,11 @@ public class ColorPickerScreenHandler extends AbstractContainerMenu implements I
 			UpdateBlockEntityInkPayload.updateBlockEntityInk(blockEntity.getBlockPos(), blockEntity.getEnergyStorage(), player);
 		}
 	}
-	
+
+	public ColorPickerScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
+		this(syncId, playerInventory, ScreenOpeningData.STREAM_CODEC.decode(buf));
+	}
+
 	public ColorPickerScreenHandler(int syncId, Inventory playerInventory, ScreenOpeningData data) {
 		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos(), SpectrumBlockEntities.COLOR_PICKER).orElseThrow(), data.inkColor());
 	}

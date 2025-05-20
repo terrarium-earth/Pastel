@@ -8,6 +8,7 @@ import de.dafuqs.spectrum.recipe.pedestal.PedestalRecipeTier;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.network.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -47,8 +48,12 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 	private final PedestalRecipeTier maxPedestalRecipeTier;
 	
 	// clientside
-	public PedestalScreenHandler(int syncId, Inventory playerInventory, ScreenOpeningData screenOpeningData) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(screenOpeningData.pos, SpectrumBlockEntities.PEDESTAL).orElseThrow(), new SimpleContainerData(2), screenOpeningData.pedestalRecipeTier, screenOpeningData.maxRecipeTier);
+	public PedestalScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf extraData) {
+		this(syncId, playerInventory, ScreenOpeningData.STREAM_CODEC.decode(extraData));
+	}
+
+	public PedestalScreenHandler(int syncId, Inventory playerInventory, ScreenOpeningData data) {
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos, SpectrumBlockEntities.PEDESTAL).orElseThrow(), new SimpleContainerData(2), data.pedestalRecipeTier, data.maxRecipeTier);
 	}
 	
 	// serverside
