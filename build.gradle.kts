@@ -60,8 +60,12 @@ cloche {
             )
 
             val additionalEntityAttributes = module(group = "maven.modrinth", name = "additionalentityattributes", version = "2.0.0+1.21.1-neoforge")
+            val jgrapht = module(group = "org.jgrapht", name = "jgrapht-core", version = "1.5.2")
+            val jheaps = module(group = "org.jheaps", name = "jheaps", version = "0.14")
 
             include(additionalEntityAttributes)
+            include(jgrapht)
+            include(jheaps)
 
             dependencies {
                 compileOnly(module(group = "maven.modrinth", name = "jade", version = "15.10.0+neoforge"))
@@ -76,6 +80,8 @@ cloche {
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
                 modImplementation(additionalEntityAttributes)
+                modImplementation(jgrapht)
+                modImplementation(jheaps)
 
                 modCompileOnly(module(group = "mcp.mobius.waila", name = "wthit-api", version = "neo-12.4.1"))
 
@@ -90,6 +96,8 @@ cloche {
                 modCompileOnly("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
                 modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
                 modCompileOnly("maven.modrinth:vanity:xWfEA0yC")
+
+
             }
 
             dependencies {
