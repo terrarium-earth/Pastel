@@ -5,8 +5,8 @@ import com.mojang.math.Axis;
 import de.dafuqs.spectrum.render.FluidRendering;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.client.extensions.common.*;
+import net.neoforged.neoforge.client.textures.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -28,29 +28,30 @@ public class FusionShrineBlockEntityRenderer<T extends FusionShrineBlockEntity> 
 	}
 	
 	@Override
-	public void render(FusionShrineBlockEntity fusionShrineBlockEntity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, int overlay) {
+	public void render(FusionShrineBlockEntity shrine, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, int overlay) {
 		// the fluid in the shrine
-		FluidStack fluidVariant = fusionShrineBlockEntity.getFluidVariant();
-		if (!fluidVariant.isBlank()) {
+		var fluid = shrine.getTank().getFluid();
+		if (!fluid.isEmpty()) {
 			poseStack.pushPose();
-			TextureAtlasSprite sprite = FluidVariantRendering.getSprite(fluidVariant);
-			int[] colors = FluidRendering.unpackColorOf(fluidVariant, fusionShrineBlockEntity);
+			var renderData = IClientFluidTypeExtensions.of(fluid.getFluid());
+			TextureAtlasSprite sprite = FluidSpriteCache.getSprite(renderData.getStillTexture(fluid));
+			int[] colors = FluidRendering.unpackColor(renderData.getTintColor(fluid.getFluid().defaultFluidState(), shrine.getLevel(), shrine.getBlockPos()));
 			FluidRendering.renderFluid(vertexConsumerProvider.getBuffer(RenderType.translucent()), poseStack.last().pose(), sprite, light, overlay, 2, 14, 0.9F, 2, 14, colors);
 			poseStack.popPose();
 		}
 		
-		if (!fusionShrineBlockEntity.isEmpty()) {
+		if (!shrine.isEmpty()) {
 			// the floating item stacks
 			List<ItemStack> inventoryStacks = new ArrayList<>();
 			
-			for (int i = 0; i < fusionShrineBlockEntity.getContainerSize(); i++) {
-				ItemStack stack = fusionShrineBlockEntity.getItem(i);
+			for (int i = 0; i < shrine.getContainerSize(); i++) {
+				ItemStack stack = shrine.getItem(i);
 				if (!stack.isEmpty()) {
 					inventoryStacks.add(stack);
 				}
 			}
 			
-			float time = fusionShrineBlockEntity.getLevel().getGameTime() % 500000 + tickDelta;
+			float time = shrine.getLevel().getGameTime() % 500000 + tickDelta;
 			double radiant = Math.toRadians(360.0F / inventoryStacks.size());
 			float distance = 1.2F;
 			
@@ -61,7 +62,7 @@ public class FusionShrineBlockEntityRenderer<T extends FusionShrineBlockEntity> 
 				poseStack.translate(distance * Math.sin(currentRadiant) + 0.5, 1.5 + height, distance * Math.cos(currentRadiant) + 0.5); // position offset
 				poseStack.mulPose(Axis.YP.rotationDegrees((time) * 2)); // item stack rotation
 				
-				Minecraft.getInstance().getItemRenderer().renderStatic(inventoryStacks.get(i), ItemDisplayContext.GROUND, light, overlay, poseStack, vertexConsumerProvider, fusionShrineBlockEntity.getLevel(), 0);
+				Minecraft.getInstance().getItemRenderer().renderStatic(inventoryStacks.get(i), ItemDisplayContext.GROUND, light, overlay, poseStack, vertexConsumerProvider, shrine.getLevel(), 0);
 				poseStack.popPose();
 			}
 		}

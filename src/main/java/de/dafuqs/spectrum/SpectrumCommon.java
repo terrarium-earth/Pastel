@@ -138,6 +138,7 @@ public class SpectrumCommon {
 		SpectrumItemGroups.register();
 		logInfo("Registering Block Entities...");
 		SpectrumBlockEntities.register();
+		NeoForge.EVENT_BUS.addListener(SpectrumBlockEntities::registerAdditionalTypes);
 		logInfo("Registering Capabilities...");
 		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerBlocks);
 		

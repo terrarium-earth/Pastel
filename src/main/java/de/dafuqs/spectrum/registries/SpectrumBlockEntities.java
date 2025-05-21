@@ -75,6 +75,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.neoforge.event.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -193,8 +194,10 @@ public class SpectrumBlockEntities {
 		Block[] skullBlocksArray = new Block[skullBlocksList.size()];
 		skullBlocksArray = skullBlocksList.toArray(skullBlocksArray);
 		SKULL = register("skull", SpectrumSkullBlockEntity::new, skullBlocksArray);
-		
-		BlockEntityType.BARREL.addSupportedBlock(SpectrumBlocks.WEEPING_GALA_BARREL);
+	}
+
+	public static void registerAdditionalTypes(BlockEntityTypeAddBlocksEvent event) {
+		event.modify(BlockEntityType.BARREL, SpectrumBlocks.WEEPING_GALA_BARREL);
 	}
 	
 	public static void registerClient() {

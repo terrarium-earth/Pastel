@@ -8,9 +8,6 @@ import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.render.FluidRendering;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.transfer.v1.client.fluid.FluidVariantRendering;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariantAttributes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -31,6 +28,8 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LightLayer;
+import net.neoforged.neoforge.client.extensions.common.*;
+import net.neoforged.neoforge.client.textures.*;
 
 @OnlyIn(Dist.CLIENT)
 public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEntity> implements BlockEntityRenderer<T> {
@@ -64,23 +63,23 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
 		
 		renderHalo(crystal, tickDelta, matrices, vertexConsumers, light, overlay, vertices);
 		
-		var fluid = crystal.tank.variant;
-		if (!fluid.isBlank()) {
+		var fluid = crystal.tank.getFluid();
+		if (!fluid.isEmpty()) {
 		
 			matrices.pushPose();
-			TextureAtlasSprite sprite = FluidVariantRendering.getSprite(fluid);
-			assert sprite != null;
-			
-			var pos = crystal.getBlockPos().above();
-			var luminance = FluidVariantAttributes.getLuminance(fluid);
+			var renderData = IClientFluidTypeExtensions.of(fluid.getFluid());
+			TextureAtlasSprite sprite = FluidSpriteCache.getSprite(renderData.getStillTexture(fluid));
+
+            var pos = crystal.getBlockPos().above();
+			var luminance = fluid.getFluidType().getLightLevel(fluid);
 			var skylight = crystal.getLevel().getBrightness(LightLayer.BLOCK, pos);
 			var glow = LightTexture.pack(Math.max(luminance, skylight), crystal.getLevel().getBrightness(LightLayer.SKY, pos));
 			
-			var full = crystal.tank.amount == FluidConstants.BUCKET;
+			var full = crystal.tank.getFluidAmount() == 1000;
 			var y = full ? 0.975F : 0.94F;
 			var rim = full ? 1 : 2;
-			
-			int[] colors = FluidRendering.unpackColorOf(fluid, crystal);
+
+			int[] colors = FluidRendering.unpackColor(renderData.getTintColor(fluid.getFluid().defaultFluidState(), crystal.getLevel(), crystal.getBlockPos()));
 			FluidRendering.renderFluid(vertexConsumers.getBuffer(RenderType.translucent()), matrices.last().pose(), sprite, glow, overlay, rim, 16 - rim, y, rim, 16 - rim, colors);
 			
 			matrices.popPose();
