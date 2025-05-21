@@ -12,6 +12,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -93,17 +94,13 @@ public class PastelTransmission implements SchedulerMap.Callback {
 		@Nullable PastelNodeBlockEntity destinationNode = this.network.getLoadedNodeAt(destinationPos);
         Level world = this.network.getLevel();
 		
-		int inserted = 0;
+		long inserted = 0;
 		if (destinationNode != null) {
-			Storage<ItemStack> destinationStorage = destinationNode.getConnectedStorage();
-			if (destinationStorage != null) {
-				try (Transaction transaction = Transaction.openOuter()) {
-					if (destinationStorage.supportsInsertion()) {
-						inserted = (int) destinationStorage.insert(stack, amount, transaction);
-						destinationNode.addItemCountUnderway(-inserted);
-						transaction.commit();
-					}
-				}
+			var destinationHandler = destinationNode.getConnectedHandler();
+			if (destinationHandler != null) {
+                inserted = amount;
+                inserted -= ItemHandlerHelper.insertItemStacked(destinationHandler, stack.copyWithCount((int) amount), false).getCount();
+                destinationNode.addItemCountUnderway(-amount);
 			}
 		}
 		if (inserted != amount) {

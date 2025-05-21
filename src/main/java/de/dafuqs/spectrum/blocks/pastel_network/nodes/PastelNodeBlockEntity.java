@@ -51,6 +51,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.neoforged.neoforge.capabilities.*;
+import net.neoforged.neoforge.items.*;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -88,8 +90,8 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	protected int transferTime = PastelTransmissionLogic.DEFAULT_TRANSFER_TICKS_PER_NODE;
 	protected int filterSlotRows = DEFAULT_FILTER_SLOT_ROWS;
 	
-	protected BlockApiCache<Storage<ItemStack>, Direction> connectedStorageCache = null;
-	protected Direction cachedDirection = null;
+	protected Optional<BlockCapabilityCache<IItemHandler, Direction>> cache = Optional.empty();
+	protected Direction cacheDirection = null;
 	
 	private final FriendlyStackHandler filterItems;
 	float rotationTarget, crystalRotation, lastRotationTarget, heightTarget, crystalHeight, lastHeightTarget, alphaTarget, ringAlpha, lastAlphaTarget;
@@ -104,16 +106,18 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		this.redstoneRing = Optional.empty();
 	}
 	
-	public @Nullable Storage<ItemStack> getConnectedStorage() {
-		if (connectedStorageCache == null) {
-			BlockState state = this.getBlockState();
-			if (!(state.getBlock() instanceof PastelNodeBlock)) {
-				return null;
-			}
-			cachedDirection = state.getValue(PastelNodeBlock.FACING);
-			connectedStorageCache = BlockApiCache.create(ItemStorage.SIDED, (ServerLevel) level, this.getBlockPos().relative(cachedDirection.getOpposite()));
+	public @Nullable IItemHandler getConnectedHandler() {
+		if (cache.isEmpty()) {
+			cacheDirection = getBlockState().getValue(PastelNodeBlock.FACING);
+			cache = Optional.of(BlockCapabilityCache.create(
+					Capabilities.ItemHandler.BLOCK,
+					(ServerLevel) level,
+					getBlockPos().relative(cacheDirection),
+					cacheDirection.getOpposite(),
+					() -> !this.isRemoved(),
+					() -> cache = Optional.empty()));
 		}
-		return connectedStorageCache.find(cachedDirection);
+		return cache.get().getCapability();
 	}
 	
 	public static void tick(@NotNull Level world, BlockPos pos, BlockState state, PastelNodeBlockEntity node) {

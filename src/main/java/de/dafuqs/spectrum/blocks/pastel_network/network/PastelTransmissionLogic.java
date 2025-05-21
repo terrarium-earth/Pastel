@@ -2,14 +2,12 @@ package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import de.dafuqs.spectrum.blocks.pastel_network.nodes.PastelNodeType;
+import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.PastelTransmissionPayload;
 import net.minecraft.world.item.ItemStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.core.BlockPos;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
@@ -23,7 +21,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-@SuppressWarnings("UnstableApiUsage")
 public class PastelTransmissionLogic {
 	
 	private enum TransferMode {
@@ -95,22 +92,22 @@ public class PastelTransmissionLogic {
 				continue;
 			}
 			
-			Storage<ItemStack> sourceStorage = sourceNode.getConnectedStorage();
-			if (sourceStorage != null && sourceStorage.supportsExtraction()) {
-				tryTransferToType(sourceNode, sourceStorage, destinationType, transferMode);
+			var sourceHandler = sourceNode.getConnectedHandler();
+			if (sourceHandler != null) {
+				tryTransferToType(sourceNode, sourceHandler, destinationType, transferMode);
 			}
 		}
 	}
 	
-	private void tryTransferToType(PastelNodeBlockEntity sourceNode, Storage<ItemStack> sourceStorage, PastelNodeType type, TransferMode transferMode) {
-		for (PastelNodeBlockEntity destinationNode : this.network.getLoadedNodes(type, PastelNetwork.NodePriority.GENERIC)) {
-			if (!destinationNode.canTransfer()) {
+	private void tryTransferToType(PastelNodeBlockEntity sourceNode, IItemHandler sourceHandler, PastelNodeType type, TransferMode transferMode) {
+		for (PastelNodeBlockEntity targetNode : this.network.getLoadedNodes(type, PastelNetwork.NodePriority.GENERIC)) {
+			if (!targetNode.canTransfer()) {
 				continue;
 			}
 			
-			Storage<ItemStack> destinationStorage = destinationNode.getConnectedStorage();
-			if (destinationStorage != null && destinationStorage.supportsInsertion()) {
-				boolean success = transferBetween(sourceNode, sourceStorage, destinationNode, destinationStorage, transferMode);
+			var targetHandler = targetNode.getConnectedHandler();
+			if (targetHandler != null) {
+				boolean success = transferBetween(sourceNode, sourceHandler, targetNode, targetHandler, transferMode);
 				if (success && transferMode != TransferMode.PULL) {
 					return;
 				}
@@ -118,64 +115,68 @@ public class PastelTransmissionLogic {
 		}
 	}
 	
-	private boolean transferBetween(PastelNodeBlockEntity sourceNode, Storage<ItemStack> sourceStorage, PastelNodeBlockEntity destinationNode, Storage<ItemStack> destinationStorage, TransferMode transferMode) {
-		Predicate<ItemStack> filter = sourceNode.getTransferFilterTo(destinationNode);
-		
-		try (Transaction transaction = Transaction.openOuter()) {
-			for (StorageView<ItemStack> view : sourceStorage) {
-				if (view.isResourceBlank()) {
-					continue;
-				}
-				
-				ItemStack storedResource = view.getResource(); // Current resource
-				if (storedResource.isBlank() || !filter.test(storedResource)) {
-					continue;
-				}
-				
-				long storedAmount = view.getAmount();
-				if (storedAmount <= 0) {
-					continue;
-				}
+	private boolean transferBetween(PastelNodeBlockEntity sourceNode, IItemHandler sourceStorage, PastelNodeBlockEntity destinationNode, IItemHandler destinationStorage, TransferMode transferMode) {
+		long totalAvailableStorage = -destinationNode.getItemCountUnderway();
+		for (int d = 0; d < destinationStorage.getSlots(); d++) {
+			var stack = destinationStorage.getStackInSlot(d);
 
-				// Transfer details are always decided by the sender
-				long transferrableAmount = sourceNode.getMaxTransferredAmount();
-				int vertexTime = sourceNode.getTransferTime();
-
-				long itemCountUnderway = destinationNode.getItemCountUnderway();
-				transferrableAmount = (int) StorageUtil.simulateInsert(destinationStorage, storedResource, transferrableAmount + itemCountUnderway, transaction);
-				transferrableAmount = transferrableAmount - itemCountUnderway; // prevention to not overfill the container (send more transfers when the existing ones would fill it already)
-				
-				if (transferrableAmount <= 0) {
-					continue;
-				}
-				
-				transferrableAmount = sourceStorage.extract(storedResource, transferrableAmount, transaction);
-				if (transferrableAmount <= 0) {
-					continue;
-				}
-				
-				Optional<PastelTransmission> optionalTransmission = createTransmissionOnValidPath(sourceNode, destinationNode, storedResource, transferrableAmount, vertexTime);
-				if (optionalTransmission.isPresent()) {
-					PastelTransmission transmission = optionalTransmission.get();
-					int travelTime = transmission.getTransmissionDuration();
-					this.network.addTransmission(transmission, travelTime);
-					PastelTransmissionPayload.sendPastelTransmissionParticle(this.network, travelTime, transmission);
-					
-					if (transferMode == TransferMode.PULL) {
-						destinationNode.markTransferred();
-					} else if (transferMode == TransferMode.PUSH) {
-						sourceNode.markTransferred();
-					} else {
-						destinationNode.markTransferred();
-						sourceNode.markTransferred();
-					}
-					
-					destinationNode.addItemCountUnderway(transferrableAmount);
-					transaction.commit();
-					return true;
-				}
+			if (stack.isEmpty()) {
+				totalAvailableStorage += destinationStorage.getSlotLimit(d);
 			}
-			transaction.abort();
+			else {
+				totalAvailableStorage += stack.getMaxStackSize();
+			}
+		}
+
+		if (totalAvailableStorage <= 0) // Fail if there isn't enough space
+			return false;
+
+		Predicate<ItemStack> filter = sourceNode.getTransferFilterTo(destinationNode);
+		var proposals = new HashMap<ItemEntry, Long>();
+		for (int s = 0; s < sourceStorage.getSlots(); s++) {
+			var stack = sourceStorage.getStackInSlot(s);
+
+			if (stack.isEmpty()) // We don't consider empty stacks..... duh
+				continue;
+
+			if (!filter.test(stack))
+				continue;
+
+			var entry = new ItemEntry(stack);
+			proposals.put(entry, proposals.getOrDefault(entry, 0L) + entry.stack.getCount());
+		}
+
+		for (ItemEntry proposal : proposals.keySet()) {
+			var proposedAmount = Math.min(Math.min(proposals.get(proposal), sourceNode.getMaxTransferredAmount()), totalAvailableStorage);
+
+			if (proposedAmount == 0)
+				continue;
+
+			var proposedStack = proposal.stack.copyWithCount((int) proposedAmount);
+			var simulatedAmount = proposedAmount - ItemHandlerHelper.insertItemStacked(destinationStorage, proposedStack, true).getCount();
+			simulatedAmount = Math.min(simulatedAmount, InventoryHelper.getStackCountInInventory(sourceStorage, proposedStack));
+
+			if (simulatedAmount == 0) //If this is 0 then we failed to move anything in simulation
+				continue;
+
+			var trans = createTransmissionOnValidPath(sourceNode, destinationNode, proposedStack, simulatedAmount, sourceNode.getTransferTime());
+			if (trans.isPresent()) {
+				InventoryHelper.extractFromInventory(sourceStorage, proposedStack, (int) simulatedAmount); // We only extract if a transmission was created
+				network.addTransmission(trans.get(), trans.get().getTransmissionDuration());
+				PastelTransmissionPayload.sendPastelTransmissionParticle(this.network, trans.get().getTransmissionDuration(), trans.get());
+
+				if (transferMode == TransferMode.PULL) {
+					destinationNode.markTransferred();
+				} else if (transferMode == TransferMode.PUSH) {
+					sourceNode.markTransferred();
+				} else {
+					destinationNode.markTransferred();
+					sourceNode.markTransferred();
+				}
+
+				destinationNode.addItemCountUnderway(simulatedAmount);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -188,5 +189,21 @@ public class PastelTransmissionLogic {
 		}
 		return Optional.empty();
 	}
-	
+
+	// This sucks
+	private record ItemEntry(ItemStack stack) {
+
+		@Override
+			public boolean equals(Object obj) {
+				if (!(obj instanceof ItemEntry(ItemStack entry)))
+					return false;
+
+				return ItemStack.isSameItemSameComponents(this.stack, entry);
+			}
+
+			@Override
+			public int hashCode() {
+				return ItemStack.hashItemAndComponents(stack);
+			}
+		}
 }

@@ -32,11 +32,22 @@ import java.util.Optional;
 // Is this wise?
 public class InventoryHelper {
 
-	public static int getItemCountInInventory(IItemHandlerModifiable inventory, Item item) {
+	public static int getItemCountInInventory(IItemHandler inventory, Item item) {
 		int count = 0;
 		for (int i = 0; i < inventory.getSlots(); i++) {
 			ItemStack stack = inventory.getStackInSlot(i);
 			if (stack.is(item)) {
+				count += stack.getCount();
+			}
+		}
+		return count;
+	}
+
+	public static int getStackCountInInventory(IItemHandler inventory, ItemStack reference) {
+		int count = 0;
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			ItemStack stack = inventory.getStackInSlot(i);
+			if (ItemStack.isSameItemSameComponents(stack, reference)) {
 				count += stack.getCount();
 			}
 		}
@@ -585,4 +596,19 @@ public class InventoryHelper {
 		return contentCount;
 	}
 
+	public static ItemStack extractFromInventory(IItemHandler inventory, ItemStack reference, int amount) {
+		int extracted = 0;
+		for (int i = 0; i < inventory.getSlots(); i++) {
+			if (ItemStack.isSameItemSameComponents(reference, inventory.getStackInSlot(i)))
+				extracted += inventory.extractItem(i, amount - extracted, false).getCount();
+
+			if (extracted == amount)
+				break;
+		}
+
+		if (extracted == 0)
+			return ItemStack.EMPTY;
+
+		return reference.copyWithCount(extracted);
+	}
 }

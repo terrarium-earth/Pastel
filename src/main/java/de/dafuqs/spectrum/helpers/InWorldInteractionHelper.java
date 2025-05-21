@@ -102,12 +102,12 @@ public class InWorldInteractionHelper {
 		stack.shrink(amount);
 	}
 	
-	public static void scatter(Level world, double x, double y, double z, ItemStack variant, long amount) {
-		int maxStackSize = variant.getItem().getDefaultMaxStackSize();
+	public static void scatter(Level world, double x, double y, double z, ItemStack item, long amount) {
+		int maxStackSize = item.getMaxStackSize();
 
 		while (amount > 0) {
 			int stackSize = (int) Math.min(maxStackSize, amount);
-			ItemStack stack = variant.toStack(stackSize);
+			ItemStack stack = item.copyWithCount(stackSize);
 			Containers.dropItemStack(world, x, y, z, stack);
 			amount -= stackSize;
 		}
