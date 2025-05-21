@@ -34,6 +34,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.*;
 
 import java.util.Set;
@@ -73,8 +74,8 @@ public class SpectrumClient implements ClientModInitializer, RevealingCallback, 
 		logInfo("Setting up Entity Renderers...");
 		SpectrumEntityRenderers.registerClient();
 
-		logInfo("Registering Server to Client Package Receivers...");
-		SpectrumS2CPackets.registerS2CReceivers();
+		//logInfo("Registering Server to Client Package Receivers...");
+		//SpectrumS2CPackets.registerS2CReceivers();
 		
 		logInfo("Registering Particle Factories...");
 		SpectrumParticleFactories.register();
@@ -83,7 +84,7 @@ public class SpectrumClient implements ClientModInitializer, RevealingCallback, 
 		HudRenderers.register();
 
 		logInfo("Registering Item Tooltips...");
-		SpectrumTooltipComponents.registerTooltipComponents();
+		NeoForge.EVENT_BUS.addListener(SpectrumTooltipComponents::registerTooltipComponents);
 
 		logInfo("Registering Dimension Effects...");
 		SpectrumDimensions.registerClient();

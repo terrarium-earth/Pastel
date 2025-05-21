@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.items.map;
 
 import com.mojang.datafixers.util.Pair;
 import de.dafuqs.spectrum.helpers.CodecHelper;
+import de.dafuqs.spectrum.injectors.*;
 import de.dafuqs.spectrum.mixin.accessors.MapStateAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -195,8 +196,8 @@ public class ArtisansAtlasState extends MapItemSavedData {
 		}
 		
 		MapDecoration icon = new MapDecoration(type, pixelX, pixelZ, rotationByte, Optional.ofNullable(text));
-		icon.spectrum$setScale(scaleByte);
-		
+		((MapDecorationInjector) (Object) (icon)).spectrum$setScale(scaleByte);
+
 		MapDecoration previousIcon = accessor.getDecorations().put(key, icon);
 		if (!icon.equals(previousIcon)) {
 			if (previousIcon != null && previousIcon.type().value().trackCount())

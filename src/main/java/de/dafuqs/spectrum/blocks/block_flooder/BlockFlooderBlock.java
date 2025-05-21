@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.wrapper.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -191,7 +192,7 @@ public class BlockFlooderBlock extends BaseEntityBlock {
 					world.setBlock(pos, targetState, 3);
 					Player owner = PlayerOwned.getPlayerEntityIfOnline(blockFlooderBlockEntity.getOwnerUUID());
 					if (!owner.isCreative()) {
-						List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(new ItemStack(targetState.getBlock().asItem()), owner.getInventory());
+						List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(new ItemStack(targetState.getBlock().asItem()), new PlayerInvWrapper(owner.getInventory()));
 						for (ItemStack remainder : remainders) {
 							owner.getInventory().placeItemBackInInventory(remainder);
 						}
