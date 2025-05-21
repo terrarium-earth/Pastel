@@ -27,6 +27,7 @@ public class SpectrumCapabilityHandlers {
         standardBlockBE(BLACK_HOLE_CHEST, event);
         standardBlockBE(FABRICATION_CHEST, event);
         standardBlockBE(COMPACTING_CHEST, event);
+        standardBlockBE(HEARTBOUND_CHEST, event);
         standardBlockBE(AMPHORA, event);
 
         // FLUIDS

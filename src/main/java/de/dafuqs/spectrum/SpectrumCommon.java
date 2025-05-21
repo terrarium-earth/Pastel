@@ -39,6 +39,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -207,18 +208,13 @@ public class SpectrumCommon {
 		SpectrumCommands.register();
 		
 		logInfo("Registering Networking Packets...");
-		NeoForge.EVENT_BUS.register(SpectrumC2SPackets.class);
-		NeoForge.EVENT_BUS.register(SpectrumS2CPackets.class);
+		NeoForge.EVENT_BUS.addListener(SpectrumC2SPackets::register);
+		NeoForge.EVENT_BUS.addListener(SpectrumS2CPackets::register);
 		
 		logInfo("Registering Data Loaders...");
-		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(NaturesStaffConversionDataLoader.INSTANCE);
-		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(EntityFishingDataLoader.INSTANCE);
-		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(CrystalApothecarySimulationsDataLoader.INSTANCE);
+		NeoForge.EVENT_BUS.addListener(SpectrumCommon::registerReloadListeners);
 
-
-		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
-			Pastel.clearServerInstance();
-		});
+		NeoForge.EVENT_BUS.addListener(Pastel::clearServerInstance);
 		
 		logInfo("Adding to Fabric's Registries...");
 		SpectrumFlammableBlocks.register();
@@ -246,28 +242,27 @@ public class SpectrumCommon {
 		SpectrumPathNodeTypes.register();
 		logInfo("Registering Tree Decorator Types...");
 		SpectrumTreeDecoratorTypes.register();
-		
-		//noinspection
-		ItemStorage.SIDED.registerForBlockEntity((be, d) -> Storage.empty(), SpectrumBlockEntities.HEARTBOUND_CHEST);
+
+
 		//noinspection
 		ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.storage, SpectrumBlockEntities.BOTTOMLESS_BUNDLE);
-		//noinspection
-		FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.fluidStorage, SpectrumBlockEntities.FUSION_SHRINE);
-		//noinspection
-		FluidStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.getFluidStorage(), SpectrumBlockEntities.TITRATION_BARREL);
 		
 		// Builtin Resource Packs
 		logInfo("Registering Builtin Resource Packs...");
 
 		if (modContainer.isPresent()) {
 			ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_style_amethyst"), modContainer.get(), Component.nullToEmpty("Spectrum Style Amethyst"), ResourcePackActivationType.NORMAL);
-			ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_generation_1"), modContainer.get(), Component.nullToEmpty("Generation 1 Spectrum textures"), ResourcePackActivationType.NORMAL);
-			ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_programmer_art"), modContainer.get(), Component.nullToEmpty("Spectrum's Programmer Art"), ResourcePackActivationType.NORMAL);
 		}
 
 		logInfo("Common startup completed!");
 	}
-	
+
+	private static void registerReloadListeners(AddReloadListenerEvent event) {
+		event.addListener(NaturesStaffConversionDataLoader.INSTANCE);
+		event.addListener(EntityFishingDataLoader.INSTANCE);
+		event.addListener(CrystalApothecarySimulationsDataLoader.INSTANCE);
+	}
+
 	/**
 	 * When initializing a block entity, world can still be null
 	 * Therefore we use the RecipeManager reference from MinecraftServer

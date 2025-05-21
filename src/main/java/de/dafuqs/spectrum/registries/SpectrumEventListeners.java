@@ -24,6 +24,7 @@ import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAn
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import de.dafuqs.spectrum.progression.UnlockToastManager;
 import de.dafuqs.spectrum.registries.client.SpectrumColorProviders;
+import net.neoforged.neoforge.server.*;
 import top.theillusivec4.curios.api.SlotContext;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;

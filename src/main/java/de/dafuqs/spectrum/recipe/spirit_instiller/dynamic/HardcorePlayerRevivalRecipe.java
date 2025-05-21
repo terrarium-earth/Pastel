@@ -21,6 +21,7 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
+import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;

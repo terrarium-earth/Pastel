@@ -6,7 +6,6 @@ import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.compat.ears.EarsCompat;
 import de.dafuqs.spectrum.entity.SpectrumEntityRenderers;
 import de.dafuqs.spectrum.inventories.SpectrumScreenHandlerTypes;
-import de.dafuqs.spectrum.networking.SpectrumS2CPackets;
 import de.dafuqs.spectrum.particle.SpectrumParticleFactories;
 import de.dafuqs.spectrum.progression.UnlockToastManager;
 import de.dafuqs.spectrum.progression.toast.RevelationToast;
@@ -24,7 +23,6 @@ import de.dafuqs.spectrum.registries.client.SpectrumTooltipComponents;
 import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.render.SkyLerper;
 import de.dafuqs.spectrum.render.capes.WorthinessChecker;
-import net.fabricmc.api.ClientModInitializer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -34,6 +32,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.*;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.*;
 
@@ -43,12 +42,12 @@ import static de.dafuqs.spectrum.SpectrumCommon.CONFIG;
 import static de.dafuqs.spectrum.SpectrumCommon.logInfo;
 
 @OnlyIn(Dist.CLIENT)
-public class SpectrumClient implements ClientModInitializer, RevealingCallback, ClientAdvancementPacketCallback {
+@Mod(value = SpectrumCommon.MOD_ID, dist = Dist.CLIENT)
+public class SpectrumClient implements RevealingCallback, ClientAdvancementPacketCallback {
 
 	public static final SkyLerper skyLerper = new SkyLerper();
 
-	@Override
-	public void onInitializeClient() {
+	public SpectrumClient() {
 		logInfo("Starting Client Startup");
 
 		logInfo("Registering Model Layers...");
@@ -76,7 +75,7 @@ public class SpectrumClient implements ClientModInitializer, RevealingCallback, 
 
 		//logInfo("Registering Server to Client Package Receivers...");
 		//SpectrumS2CPackets.registerS2CReceivers();
-		
+
 		logInfo("Registering Particle Factories...");
 		SpectrumParticleFactories.register();
 
@@ -95,7 +94,7 @@ public class SpectrumClient implements ClientModInitializer, RevealingCallback, 
 		if (CONFIG.AddItemTooltips) {
 			SpectrumTooltips.register();
 		}
-		
+
 		if (ModList.get().isLoaded("ears")) {
 			logInfo("Registering Ears Compat...");
 			EarsCompat.register();

@@ -22,7 +22,6 @@ public class SpectrumC2SPackets {
 		return new CustomPacketPayload.Type<>(SpectrumCommon.locate(id));
 	}
 
-	@SubscribeEvent
 	public static void register(RegisterPayloadHandlersEvent event) {
 		PayloadRegistrar registrar = event.registrar("1");
 		

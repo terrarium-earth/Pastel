@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetworkManag
 import de.dafuqs.spectrum.particle.render.EarlyRenderingParticleContainer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.server.*;
 import net.neoforged.neoforge.server.*;
 
 public class Pastel {
@@ -44,7 +45,7 @@ public class Pastel {
         EarlyRenderingParticleContainer.clear();
     }
 
-    public static void clearServerInstance() {
+    public static void clearServerInstance(ServerStoppedEvent event) {
         serverManager = null;
     }
 

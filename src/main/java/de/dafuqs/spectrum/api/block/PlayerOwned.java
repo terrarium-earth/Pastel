@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.SpectrumCommon;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;

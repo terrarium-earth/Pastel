@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.blocks.chests;
 
 import de.dafuqs.spectrum.api.block.PlayerOwnedWithName;
+import de.dafuqs.spectrum.capabilities.*;
 import de.dafuqs.spectrum.inventories.GenericSpectrumContainerScreenHandler;
 import de.dafuqs.spectrum.inventories.ScreenBackgroundVariant;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
@@ -18,11 +19,12 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class HeartboundChestBlockEntity extends SpectrumChestBlockEntity implements WorldlyContainer, PlayerOwnedWithName {
+public class HeartboundChestBlockEntity extends SpectrumChestBlockEntity implements WorldlyContainer, PlayerOwnedWithName, SidedCapabilityProvider {
 	
 	private UUID ownerUUID;
 	private String ownerName;
@@ -185,5 +187,10 @@ public class HeartboundChestBlockEntity extends SpectrumChestBlockEntity impleme
 		} else {
 			return this.ownerUUID.equals(uuid);
 		}
+	}
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return null;
 	}
 }

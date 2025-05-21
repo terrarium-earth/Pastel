@@ -2,7 +2,6 @@ package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.fractal.api.ItemSubGroup;
 import de.dafuqs.fractal.interfaces.ItemGroupParent;
-import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
@@ -16,7 +15,6 @@ import de.dafuqs.spectrum.compat.create.CreateCompat;
 import de.dafuqs.spectrum.compat.gobber.GobberCompat;
 import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.recipe.titration_barrel.ITitrationBarrelRecipe;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,12 +26,14 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.server.*;
 
 import java.util.Map;
 
 @SuppressWarnings("unused")
 public class SpectrumItemGroups {
-	
+
+
 	public static final CreativeModeTab MAIN = FabricItemGroup.builder()
 			.icon(() -> new ItemStack(SpectrumBlocks.PEDESTAL_ALL_BASIC))
 			.displayItems((displayContext, entries) -> {
