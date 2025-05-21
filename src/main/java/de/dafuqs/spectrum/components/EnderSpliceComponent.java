@@ -23,7 +23,7 @@ public record EnderSpliceComponent(Optional<Vec3> pos, Optional<ResourceKey<Leve
 			Vec3.CODEC.optionalFieldOf("pos").forGetter(c -> c.pos),
 			ResourceKey.codec(Registries.DIMENSION).optionalFieldOf("dimension").forGetter(c -> c.dimension),
 			Codec.STRING.optionalFieldOf("target_name").forGetter(c -> c.targetName),
-			UUIDUtil.AUTHLIB_CODEC.optionalFieldOf("target_uuid").forGetter(c -> c.targetUUID)
+			UUIDUtil.STRING_CODEC.optionalFieldOf("target_uuid").forGetter(c -> c.targetUUID)
 	).apply(i, EnderSpliceComponent::new));
 	
 	public static final StreamCodec<ByteBuf, EnderSpliceComponent> STREAM_CODEC = StreamCodec.composite(

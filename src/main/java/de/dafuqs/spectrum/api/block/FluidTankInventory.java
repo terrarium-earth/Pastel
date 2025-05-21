@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.helpers.*;
-import net.neoforged.neoforge.fluids.FluidStack;
+import de.dafuqs.spectrum.capabilities.item.*;
 import net.neoforged.neoforge.fluids.capability.templates.*;
 
 public interface FluidTankInventory {

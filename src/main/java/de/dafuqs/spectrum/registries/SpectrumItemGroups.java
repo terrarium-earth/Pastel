@@ -425,9 +425,9 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumItems.FREIGEIST);
 				
 				// adding all beverages from recipes
-				if (SpectrumCommon.minecraftServer != null) {
-					for (RecipeHolder<ITitrationBarrelRecipe> recipe : SpectrumCommon.minecraftServer.getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.TITRATION_BARREL)) {
-						ItemStack output = recipe.value().getResultItem(SpectrumCommon.minecraftServer.registryAccess()).copy();
+				if (ServerLifecycleHooks.getCurrentServer() != null) {
+					for (RecipeHolder<ITitrationBarrelRecipe> recipe : ServerLifecycleHooks.getCurrentServer().getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.TITRATION_BARREL)) {
+						ItemStack output = recipe.value().getResultItem(ServerLifecycleHooks.getCurrentServer().registryAccess()).copy();
 						if (output.getItem().components().has(SpectrumDataComponentTypes.INFUSED_BEVERAGE)) {
 							output.setCount(1);
 							entries.accept(output);

@@ -42,11 +42,11 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	public ItemStack assemble(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, HolderLookup.Provider drm) {
 		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
 		GameProfile gameProfile = getSkullOwner(recipeInput.getItem(SpiritInstillerRecipe.CENTER_INGREDIENT));
-		if (gameProfile != null && SpectrumCommon.minecraftServer != null) {
-			ServerPlayer revivedPlayer = SpectrumCommon.minecraftServer.getPlayerList().getPlayerByName(gameProfile.getName());
+		if (gameProfile != null && ServerLifecycleHooks.getCurrentServer() != null) {
+			ServerPlayer revivedPlayer = ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayerByName(gameProfile.getName());
 			if (revivedPlayer != null) {
 				HardcoreDeathComponent.removeHardcoreDeath(gameProfile);
-				revivedPlayer.setGameMode(SpectrumCommon.minecraftServer.getDefaultGameType());
+				revivedPlayer.setGameMode(ServerLifecycleHooks.getCurrentServer().getDefaultGameType());
 				
 				Rotation blockRotation = spiritInstillerBlockEntity.getMultiblockRotation();
 				float yaw = 0.0F;
@@ -69,11 +69,11 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 		ItemStack instillerStack = inventory.getItem(0);
 		if (instillerStack.is(Blocks.PLAYER_HEAD.asItem())) {
 			GameProfile gameProfile = getSkullOwner(instillerStack);
-			if (gameProfile == null || SpectrumCommon.minecraftServer == null) {
+			if (gameProfile == null || ServerLifecycleHooks.getCurrentServer() == null) {
 				return false;
 			}
 			
-			PlayerList playerManager = SpectrumCommon.minecraftServer.getPlayerList();
+			PlayerList playerManager = ServerLifecycleHooks.getCurrentServer().getPlayerList();
 			ServerPlayer playerToRevive = gameProfile.getId() == null ? playerManager.getPlayerByName(gameProfile.getName()) : playerManager.getPlayer(gameProfile.getId());
 			return playerToRevive != null && HardcoreDeathComponent.hasHardcoreDeath(gameProfile);
 		}

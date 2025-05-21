@@ -8,6 +8,8 @@ import de.dafuqs.spectrum.api.block.PlayerOwned;
 import de.dafuqs.spectrum.api.item.GemstoneColor;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.*;
 import de.dafuqs.spectrum.items.magic_items.CraftingTabletItem;
@@ -29,7 +31,6 @@ import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -44,7 +45,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -66,30 +66,29 @@ import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.items.*;
 import net.neoforged.neoforge.items.wrapper.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-public class PedestalBlockEntity extends BaseInventoryBlockEntity implements MultiblockCrafter, StackedContentsCompatible, WorldlyContainer {
+public class PedestalBlockEntity extends BaseInventoryBlockEntity implements MultiblockCrafter, SidedCapabilityProvider, StackedContentsCompatible, WorldlyContainer {
 	
 	public static final int INVENTORY_SIZE = 16; // 9 crafting, 5 gems, 1 craftingTablet, 1 output
 	public static final int CRAFTING_TABLET_SLOT_ID = 14;
 	public static final int OUTPUT_SLOT_ID = 15;
 	
-	private static final int[] ACCESSIBLE_SLOTS_UP = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-	private static final int[] ACCESSIBLE_SLOTS_BASIC = {9, 10, 11};
-	private static final int[] ACCESSIBLE_SLOTS_ADVANCED = {9, 10, 11, 12};
-	private static final int[] ACCESSIBLE_SLOTS_COMPLEX = {9, 10, 11, 12, 13};
+	private static final int[] ACCESSIBLE_SLOTS_UP = {0, 9};
+	private static final int[] ACCESSIBLE_SLOTS_BASIC = {9, 3};
+	private static final int[] ACCESSIBLE_SLOTS_ADVANCED = {9, 4};
+	private static final int[] ACCESSIBLE_SLOTS_COMPLEX = {9, 5};
 	
 	protected UUID ownerUUID;
 	protected PedestalVariant pedestalVariant;
@@ -252,18 +251,15 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 			if (world.getBlockState(blockPos.above()).getCollisionShape(world, blockPos.above()).isEmpty()) {
 				spawnOutputAsItemEntity((ServerLevel) world, blockPos, pedestalBlockEntity, outputItemStack);
 			} else {
-				boolean couldOutput = false;
-				BlockEntity belowBlockEntity = world.getBlockEntity(blockPos.below());
-				if (belowBlockEntity instanceof Container belowInventory) {
-					couldOutput = tryPutIntoInventory(pedestalBlockEntity, belowInventory, outputItemStack);
+				int remaining = 0;
+				remaining += ItemHandlerHelper.insertItemStacked(world.getCapability(Capabilities.ItemHandler.BLOCK, blockPos.below(), Direction.UP), outputItemStack, false).getCount();
+
+				if (remaining > 0) {
+					remaining = 0;
+					remaining += ItemHandlerHelper.insertItemStacked(world.getCapability(Capabilities.ItemHandler.BLOCK, blockPos.below(), Direction.DOWN), outputItemStack, false).getCount();
 				}
-				if (!couldOutput) {
-					BlockEntity aboveBlockEntity = world.getBlockEntity(blockPos.above());
-					if (aboveBlockEntity instanceof Container aboveInventory && !(aboveBlockEntity instanceof HopperBlockEntity)) {
-						couldOutput = tryPutIntoInventory(pedestalBlockEntity, aboveInventory, outputItemStack);
-					}
-				}
-				if (couldOutput) {
+
+				if (remaining == 0) {
 					shouldMarkDirty = true;
 				} else {
 					// play sound when the entity can not put its output anywhere
@@ -647,7 +643,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	@Override
 	public int[] getSlotsForFace(Direction side) {
 		if (side == Direction.DOWN) {
-			return new int[]{OUTPUT_SLOT_ID};
+			return new int[]{OUTPUT_SLOT_ID, 1};
 		} else if (side == Direction.UP) {
 			return ACCESSIBLE_SLOTS_UP;
 		} else {
@@ -838,5 +834,15 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	public void setInventoryChanged() {
 		this.inventoryChanged = true;
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		var slots = getSlotsForFace(dir);
+		var view = new StackHandlerView(inventory, slots[0], slots[1]);
+
+		if (dir == Direction.DOWN)
+			return view.disableInsertion();
+		else
+			return view.disableExtraction();
+	}
 }

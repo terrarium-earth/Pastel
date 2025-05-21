@@ -13,6 +13,7 @@ import de.dafuqs.spectrum.blocks.pastel_network.network.PastelNetwork;
 import de.dafuqs.spectrum.blocks.pastel_network.network.PastelTransmissionLogic;
 import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetwork;
 import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetworkManager;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.FilteringScreenHandler;
 import de.dafuqs.spectrum.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;

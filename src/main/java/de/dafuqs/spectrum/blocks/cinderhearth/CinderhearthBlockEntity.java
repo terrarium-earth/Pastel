@@ -12,6 +12,8 @@ import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
 import de.dafuqs.spectrum.api.recipe.GatedRecipe;
 import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.components.InkStorageComponent;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.CinderhearthScreenHandler;
@@ -36,7 +38,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
@@ -52,6 +53,7 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -60,7 +62,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements Container, MultiblockCrafter, InkStorageBlockEntity<IndividualCappedInkStorage>, StackedContentsCompatible {
+public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements MultiblockCrafter, SidedCapabilityProvider, InkStorageBlockEntity<IndividualCappedInkStorage>, StackedContentsCompatible {
 	
 	public static final int INVENTORY_SIZE = 11;
 	public static final int INPUT_SLOT_ID = 0;
@@ -518,5 +520,12 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 	public void fillStackedContents(StackedContents finder) {
 		this.inventory.getInternalList().forEach(finder::accountStack);
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		if(dir == Direction.DOWN) {
+			return new StackHandlerView(inventory, FIRST_OUTPUT_SLOT_ID, OUTPUT_SLOT_IDS.length).disableInsertion();
+		}
+		return new StackHandlerView(inventory, INPUT_SLOT_ID).disableExtraction();
+	}
 }

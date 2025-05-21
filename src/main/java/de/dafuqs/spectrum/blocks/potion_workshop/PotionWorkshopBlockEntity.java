@@ -6,6 +6,8 @@ import de.dafuqs.spectrum.api.block.PlayerOwned;
 import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
 import de.dafuqs.spectrum.api.item.InkPoweredPotionFillable;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.inventories.PotionWorkshopScreenHandler;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
@@ -15,13 +17,9 @@ import de.dafuqs.spectrum.recipe.potion_workshop.PotionWorkshopBrewingRecipe;
 import de.dafuqs.spectrum.recipe.potion_workshop.PotionWorkshopCraftingRecipe;
 import de.dafuqs.spectrum.recipe.potion_workshop.PotionWorkshopReactingRecipe;
 import de.dafuqs.spectrum.recipe.potion_workshop.PotionWorkshopRecipe;
-import de.dafuqs.spectrum.registries.SpectrumAdvancements;
-import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
-import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -45,10 +43,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,7 +56,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
-public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvider, StackedContentsCompatible, PlayerOwned {
+public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvider, StackedContentsCompatible, PlayerOwned, SidedCapabilityProvider {
 	
 	// 0: mermaids gem
 	// 1: base ingredient
@@ -92,6 +91,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 	public PotionWorkshopBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.POTION_WORKSHOP, pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
+		inventory.addListener(i -> invalidateCapabilities());
 		
 		this.propertyDelegate = new ContainerData() {
 			@Override
@@ -504,5 +504,16 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 	@Override
 	public AbstractContainerMenu createMenu(int syncId, Inventory inv, Player player) {
 		return new PotionWorkshopScreenHandler(syncId, inv, this, this.propertyDelegate);
+	}
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		if (dir == Direction.UP) {
+			return new StackHandlerView(inventory, 0, ACCESSIBLE_SLOTS_UP.length)
+					.disableExtraction()
+					.addFilter(MERMAIDS_GEM_INPUT_SLOT_ID, Ingredient.of(SpectrumItems.MERMAIDS_GEM));
+		}
+
+		return new StackHandlerView(inventory, ACCESSIBLE_SLOTS_DOWN[0], ACCESSIBLE_SLOTS_DOWN.length);
 	}
 }

@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.inventories;
 
-import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.recipe.SimpleRecipeInput;
 import net.minecraft.core.*;
 import net.minecraft.world.item.ItemStack;

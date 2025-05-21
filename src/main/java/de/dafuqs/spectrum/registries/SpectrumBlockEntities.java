@@ -132,7 +132,7 @@ public class SpectrumBlockEntities {
 	public static BlockEntityType<PlayerTrackerBlockEntity> PLAYER_TRACKING;
 	
 	private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType.BlockEntitySupplier<T> factory, Block... blocks) {
-		return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, SpectrumCommon.locate(id), BlockEntityType.Builder.of(factory, blocks).build());
+		return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, SpectrumCommon.locate(id), BlockEntityType.Builder.of(factory, blocks).build(null));
 	}
 	
 	public static void register() {

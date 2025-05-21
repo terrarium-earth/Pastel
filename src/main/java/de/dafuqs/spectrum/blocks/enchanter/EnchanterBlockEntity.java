@@ -8,6 +8,8 @@ import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
 import de.dafuqs.spectrum.blocks.InWorldInteractionBlockEntity;
 import de.dafuqs.spectrum.blocks.item_bowl.ItemBowlBlockEntity;
 import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.helpers.ExperienceHelper;
 import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.helpers.Support;
@@ -60,6 +62,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,7 +74,7 @@ import java.util.UUID;
 
 // I just want to say. That I hate this class with every bit of my heart ~ Azzyypaaras
 // Still do, still do...
-public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter {
+public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter, SidedCapabilityProvider {
 	
 	public static final String ITEM_TRANS = "container.spectrum.rei.enchantment_upgrade.required_item_count";
 	public static final String LEVEL_TRANS = "container.spectrum.rei.enchantment_upgrade.level";
@@ -116,6 +119,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public EnchanterBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.ENCHANTER, pos, state, INVENTORY_SIZE);
+		virtualInventory.addListener(i -> inventoryChanged());
 		this.virtualInventory = new EnchanterInventory();
 		this.currentItemProcessingTime = -1;
 	}
@@ -638,7 +642,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				enchanter.currentRecipe = upgrade;
 				enchanter.currentItemProcessingTime = 0;
 				
-				var level = enchanter.inventory.get(0).get(DataComponents.STORED_ENCHANTMENTS).getLevel(upgrade.value().getEnchantment());
+				var level = enchanter.inventory.getStackInSlot(0).get(DataComponents.STORED_ENCHANTMENTS).getLevel(upgrade.value().getEnchantment());
 				enchanter.craftingTimeTotal = upgrade.value().getItemScaling().apply(level);
 				
 				//TODO why are we doing this?
@@ -794,8 +798,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		}
 		return false;
 	}
-	
-	@Override
+
 	public void inventoryChanged() {
 		if (level == null) return;
 		virtualInventory = new EnchanterInventory(
@@ -813,8 +816,6 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 
 		inventoryChanged = true;
 		currentItemProcessingTime = -1;
-		
-		super.inventoryChanged();
 	}
 	
 	public ItemStack getItemBowlStack(Level world, BlockPos blockPos) {
@@ -864,5 +865,9 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	public UpgradeHolder getUpgradeHolder() {
 		return this.upgrades;
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return new StackHandlerView(inventory, 0);
+	}
 }

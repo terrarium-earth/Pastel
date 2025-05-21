@@ -412,9 +412,9 @@ public class SpectrumEventListeners {
 				CompactingChestBlockEntity.clearCache();
 				SpectrumCommon.CACHED_ITEM_TAG_MAP.clear();
 				
-				if (SpectrumCommon.minecraftServer != null) {
-					//injectEnchantmentUpgradeRecipes(SpectrumCommon.minecraftServer);
-					FirestarterIdolBlock.addBlockSmeltingRecipes(SpectrumCommon.minecraftServer);
+				if (ServerLifecycleHooks.getCurrentServer() != null) {
+					//injectEnchantmentUpgradeRecipes(ServerLifecycleHooks.getCurrentServer());
+					FirestarterIdolBlock.addBlockSmeltingRecipes(ServerLifecycleHooks.getCurrentServer());
 				}
 			}
 			

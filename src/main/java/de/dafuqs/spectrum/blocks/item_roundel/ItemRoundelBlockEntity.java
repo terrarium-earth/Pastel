@@ -1,14 +1,15 @@
 package de.dafuqs.spectrum.blocks.item_roundel;
 
 import de.dafuqs.spectrum.blocks.InWorldInteractionBlockEntity;
+import de.dafuqs.spectrum.capabilities.*;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.*;
 
-public class ItemRoundelBlockEntity extends InWorldInteractionBlockEntity {
+public class ItemRoundelBlockEntity extends InWorldInteractionBlockEntity implements SidedCapabilityProvider {
 	
 	protected static final int INVENTORY_SIZE = 6;
 	
@@ -28,5 +29,10 @@ public class ItemRoundelBlockEntity extends InWorldInteractionBlockEntity {
 	public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
 		this.unpackLootTable(null);
 		return super.getUpdateTag(registryLookup);
+	}
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return inventory;
 	}
 }

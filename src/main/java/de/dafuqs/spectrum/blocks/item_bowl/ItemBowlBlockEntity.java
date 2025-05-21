@@ -5,6 +5,7 @@ import de.dafuqs.spectrum.api.color.ColorRegistry;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.blocks.InWorldInteractionBlockEntity;
+import de.dafuqs.spectrum.capabilities.*;
 import de.dafuqs.spectrum.events.ExactPositionSource;
 import de.dafuqs.spectrum.helpers.Support;
 import de.dafuqs.spectrum.networking.s2c_payloads.ColorTransmissionPayload;
@@ -15,8 +16,7 @@ import de.dafuqs.spectrum.particle.effect.ColoredTransmissionParticleEffect;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.*;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -27,11 +27,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity {
+public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity implements SidedCapabilityProvider {
 	
 	protected static final int INVENTORY_SIZE = 1;
 	
@@ -139,5 +140,10 @@ public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity {
 			
 			level.playSound(null, this.worldPosition, SpectrumSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, SpectrumCommon.CONFIG.BlockSoundVolume, 0.7F + level.random.nextFloat() * 0.6F);
 		}
+	}
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return inventory;
 	}
 }

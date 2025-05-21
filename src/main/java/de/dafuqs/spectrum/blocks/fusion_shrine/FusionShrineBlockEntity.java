@@ -7,6 +7,8 @@ import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
 import de.dafuqs.spectrum.blocks.InWorldInteractionBlockEntity;
 import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayBlockBoundSoundInstancePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayFusionCraftingFinishedParticlePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayFusionCraftingInProgressParticlePayload;
@@ -20,12 +22,10 @@ import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumEventListeners;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
+import net.minecraft.core.*;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,7 +42,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.fluids.capability.*;
 import net.neoforged.neoforge.fluids.capability.templates.*;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,7 +52,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity implements PlayerOwned, Upgradeable {
+public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity implements PlayerOwned, Upgradeable, SidedCapabilityProvider {
 	
 	protected static final int INVENTORY_SIZE = 7;
 	
@@ -66,6 +68,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	
 	public FusionShrineBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.FUSION_SHRINE, pos, state, INVENTORY_SIZE);
+		inventory.addListener(i -> inventoryChanged = true);
 	}
 	
 	@SuppressWarnings("unused")
@@ -305,5 +308,18 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		this.upgrades = Upgradeable.calculateUpgradeMods4(level, worldPosition, 2, 0, this.ownerUUID);
 		this.setChanged();
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		if (dir.getAxis().isHorizontal()) {
+			return new StackHandlerView(inventory).disableInsertion();
+		}
+
+		return null;
+	}
+
+	@Override
+	public IFluidHandler exposeFluidHandlers(Direction dir) {
+		return tank;
+	}
 }

@@ -22,6 +22,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.capabilities.*;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -55,10 +57,10 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
 		if (!enderHopperBlockEntity.needsCooldown()) {
 			enderHopperBlockEntity.setCooldown(0);
 			
-			Container sourceInventory = getInputInventory(world, enderHopperBlockEntity);
-			if (sourceInventory != null) {
+			var sourceInventory = world.getCapability(Capabilities.ItemHandler.BLOCK, pos, Direction.DOWN);
+			if (sourceInventory instanceof IItemHandlerModifiable modifiable) { // This sucks 2: suck harder
 				// if there is a chest on top of the hopper: use that as source
-				insertIntoEnderChest(enderHopperBlockEntity, sourceInventory);
+				insertIntoEnderChest(enderHopperBlockEntity, modifiable);
 			} else {
 				// otherwise, search for item stacks
 				List<ItemEntity> entities = getInputItemEntities(world, enderHopperBlockEntity);
@@ -75,17 +77,17 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
 		return enderHopperBlockEntity.getInputAreaShape().toAabbs().stream().flatMap((box) -> world.getEntitiesOfClass(ItemEntity.class, box.move(enderHopperBlockEntity.getHopperX() - 0.5D, enderHopperBlockEntity.getHopperY() - 0.5D, enderHopperBlockEntity.getHopperZ() - 0.5D), EntitySelector.ENTITY_STILL_ALIVE).stream()).collect(Collectors.toList());
 	}
 	
-	private static void insertIntoEnderChest(EnderHopperBlockEntity enderHopperBlockEntity, Container sourceInventory) {
+	private static void insertIntoEnderChest(EnderHopperBlockEntity enderHopperBlockEntity, IItemHandlerModifiable sourceInventory) {
 		UUID ownerUUID = enderHopperBlockEntity.getOwnerUUID();
 		if (ownerUUID != null) {
 			Player playerEntity = enderHopperBlockEntity.getOwnerIfOnline();
 			if (playerEntity != null) {
-				for (int i = 0; i < sourceInventory.getContainerSize(); i++) {
-					ItemStack sourceItemStack = sourceInventory.getItem(i).copy();
-					if (!sourceItemStack.isEmpty() && InventoryHelper.canExtract(sourceInventory, sourceItemStack, i, Direction.DOWN)) {
+				for (int i = 0; i < sourceInventory.getSlots(); i++) {
+					ItemStack sourceItemStack = sourceInventory.getStackInSlot(i).copy();
+					if (!sourceItemStack.isEmpty() && !sourceInventory.extractItem(i, 99, true).isEmpty()) {
 						ItemStack remainderStack = addToEnderInventory(sourceItemStack, playerEntity, false);
-						
-						sourceInventory.setItem(i, remainderStack);
+
+						sourceInventory.setStackInSlot(i, remainderStack);
 						if (!remainderStack.isEmpty()) {
 							enderHopperBlockEntity.setCooldown(40);
 						}
@@ -158,11 +160,6 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
 			}
 		}
 		return additionStack;
-	}
-	
-	@Nullable
-	private static Container getInputInventory(Level world, EnderHopperBlockEntity enderHopperBlockEntity) {
-		return InventoryHelper.getInventoryAt(world, enderHopperBlockEntity.getHopperX(), enderHopperBlockEntity.getHopperY() + 1.0D, enderHopperBlockEntity.getHopperZ());
 	}
 	
 	protected Component getContainerName() {

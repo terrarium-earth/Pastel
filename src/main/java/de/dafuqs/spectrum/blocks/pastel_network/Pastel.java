@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.blocks.pastel_network.network.ServerPastelNetworkManag
 import de.dafuqs.spectrum.particle.render.EarlyRenderingParticleContainer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.server.*;
 
 public class Pastel {
 
@@ -23,8 +24,8 @@ public class Pastel {
     }
 
     public static ServerPastelNetworkManager getServerInstance() {
-        if (serverManager == null && SpectrumCommon.minecraftServer != null) {
-            serverManager = ServerPastelNetworkManager.get(SpectrumCommon.minecraftServer.overworld());
+        if (serverManager == null && ServerLifecycleHooks.getCurrentServer() != null) {
+            serverManager = ServerPastelNetworkManager.get(ServerLifecycleHooks.getCurrentServer().overworld());
         }
         return serverManager;
     }

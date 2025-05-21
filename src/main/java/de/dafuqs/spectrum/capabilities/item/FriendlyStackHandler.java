@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.helpers;
+package de.dafuqs.spectrum.capabilities.item;
 
 import net.minecraft.core.*;
 import net.minecraft.nbt.*;
@@ -9,6 +9,8 @@ import java.util.*;
 import java.util.function.*;
 
 public class FriendlyStackHandler extends ItemStackHandler {
+
+    private List<Consumer<Integer>> listeners;
 
     public FriendlyStackHandler(int size) {
         super(size);
@@ -31,6 +33,7 @@ public class FriendlyStackHandler extends ItemStackHandler {
         return stacks;
     }
 
+    //TODO: blow this up with hammers
     public void setInternalList(NonNullList<ItemStack> newStacks) {
         if (newStacks.size() != stacks.size())
             throw new RuntimeException("Attempted to replace stack handler list with one of an unequal size!");
@@ -63,8 +66,24 @@ public class FriendlyStackHandler extends ItemStackHandler {
         }
     }
 
+    public void addListener(Consumer<Integer> listener) {
+        if (listeners == null)
+            listeners = new ArrayList<>();
+        listeners.add(listener);
+    }
+
+    @Override
+    protected void onContentsChanged(int slot) {
+        listeners.forEach(l -> l.accept(slot));
+    }
+
     public boolean hasAnyOf(Set<Item> set) {
         return this.hasAnyMatching(item -> !item.isEmpty() && set.contains(item.getItem()));
+    }
+
+    @Override
+    protected void validateSlotIndex(int slot) {
+        super.validateSlotIndex(slot);
     }
 
     public boolean hasAnyMatching(Predicate<ItemStack> predicate) {

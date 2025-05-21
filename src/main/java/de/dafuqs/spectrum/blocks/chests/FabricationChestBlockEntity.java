@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.blocks.chests;
 
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.inventories.FabricationChestScreenHandler;
 import de.dafuqs.spectrum.items.magic_items.CraftingTabletItem;
@@ -22,6 +23,7 @@ import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -29,11 +31,11 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implements WorldlyContainer {
-	
-	public static final int INVENTORY_SIZE = 27 + 4 + 4; // 27 items, 4 crafting tablets, 4 result slots
+
 	public static final int[] CHEST_SLOTS = IntStream.rangeClosed(0, 26).toArray();
 	public static final int[] RECIPE_SLOTS = IntStream.rangeClosed(27, 30).toArray();
 	public static final int[] RESULT_SLOTS = IntStream.rangeClosed(31, 34).toArray();
+	public static final int INVENTORY_SIZE = CHEST_SLOTS.length + RECIPE_SLOTS.length + RESULT_SLOTS.length;
 	private List<ItemStack> cachedOutputs = new ArrayList<>(4);
 	private int coolDownTicks = 0;
 	private boolean isOpen, isFull, hasValidRecipes;
@@ -206,8 +208,8 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 				NonNullList<Ingredient> ingredients = recipe.value().getIngredients();
 				ItemStack outputItemStack = recipe.value().getResultItem(level.registryAccess());
 				ItemStack currentItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[index]);
-				if (InventoryHelper.canCombineItemStacks(currentItemStack, outputItemStack) && InventoryHelper.hasInInventory(ingredients, chest)) {
-					List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(ingredients, chest);
+				if (InventoryHelper.canCombineItemStacks(currentItemStack, outputItemStack) && InventoryHelper.hasInInventory(ingredients, chest.inventory)) {
+					List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(ingredients, chest.inventory);
 					
 					if (currentItemStack.isEmpty()) {
 						chest.inventory.setStackInSlot(RESULT_SLOTS[index], outputItemStack.copy());
@@ -216,7 +218,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 					}
 					
 					for (ItemStack remainder : remainders) {
-						InventoryHelper.smartAddToInventory(remainder, chest, null);
+						InventoryHelper.smartAddToInventory(remainder, chest.inventory, null);
 					}
 					return true;
 				}
@@ -233,7 +235,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 	private boolean isRecipeCraftable(Recipe<?> recipe) {
 		var ingredients = recipe.getIngredients();
 
-		if (!InventoryHelper.hasInInventory(ingredients, this))
+		if (!InventoryHelper.hasInInventory(ingredients, this.inventory))
 			return false;
 
 		var remainders = InventoryHelper.getRemainders(ingredients);
@@ -370,6 +372,15 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		if (!stack.isEmpty())
 			updateFullState(false);
 		return stack;
+	}
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		if (dir.getAxis().isVertical()) {
+			return new StackHandlerView(inventory, RESULT_SLOTS[0], RESULT_SLOTS.length);
+		}
+
+		return new StackHandlerView(inventory, 0, CHEST_SLOTS.length);
 	}
 
 	public void updateState(boolean full, boolean hasValidRecipes, List<ItemStack> cachedOutputs) {

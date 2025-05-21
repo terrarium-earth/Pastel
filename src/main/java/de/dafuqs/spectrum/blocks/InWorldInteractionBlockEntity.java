@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks;
 
-import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.*;
 public abstract class InWorldInteractionBlockEntity extends BlockEntity implements RandomizableContainer {
 	
 	private final int inventorySize;
-	protected FriendlyStackHandler inventory;
+	protected final FriendlyStackHandler inventory;
 	@Nullable protected ResourceKey<LootTable> lootTable;
 	protected long lootTableSeed;
 	
@@ -55,7 +55,7 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
 	@Override
 	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.loadAdditional(nbt, registryLookup);
-		this.inventory = new FriendlyStackHandler(inventorySize);
+		this.inventory.getInternalList().clear();
 		if (!this.tryLoadLootTable(nbt)) {
 			inventory.deserializeNBT(registryLookup, nbt.getCompound("inventory"));
 		}

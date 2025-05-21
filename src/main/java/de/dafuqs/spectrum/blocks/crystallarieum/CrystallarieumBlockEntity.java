@@ -7,6 +7,8 @@ import de.dafuqs.spectrum.api.energy.InkStorageBlockEntity;
 import de.dafuqs.spectrum.api.energy.InkStorageItem;
 import de.dafuqs.spectrum.api.energy.storage.IndividualCappedInkStorage;
 import de.dafuqs.spectrum.blocks.InWorldInteractionBlockEntity;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.components.InkStorageComponent;
 import de.dafuqs.spectrum.helpers.CodecHelper;
 import de.dafuqs.spectrum.helpers.InventoryHelper;
@@ -22,9 +24,8 @@ import de.dafuqs.spectrum.render.animation.FlowAnimator;
 import de.dafuqs.spectrum.render.animation.FlowData;
 import de.dafuqs.spectrum.render.animation.FlowHandlers;
 import de.dafuqs.spectrum.render.animation.FlowStates;
+import net.minecraft.core.*;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -39,14 +40,16 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.fluids.capability.*;
 import net.neoforged.neoforge.fluids.capability.templates.*;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity implements PlayerOwned, InkStorageBlockEntity<IndividualCappedInkStorage> {
+public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity implements PlayerOwned, InkStorageBlockEntity<IndividualCappedInkStorage>, SidedCapabilityProvider {
 	
 	private final static FlowAnimator.Factory<CrystallarieumBlockEntity> FACTORY;
 	
@@ -81,6 +84,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	
 	public CrystallarieumBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.CRYSTALLARIEUM, pos, state, INVENTORY_SIZE);
+		inventory.addListener(i -> inventoryChanged());
 		this.inkStorage = new IndividualCappedInkStorage(INK_STORAGE_SIZE);
 		this.canWork = true;
 	}
@@ -386,7 +390,23 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		}
 		return false;
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		if (dir.getAxis().isHorizontal())
+			return new StackHandlerView(inventory, 0).disableExtraction();
+
+		if (dir.getAxis().isVertical())
+			return new StackHandlerView(inventory, 1);
+
+		return null;
+	}
+
+	@Override
+	public IFluidHandler exposeFluidHandlers(Direction dir) {
+		return tank;
+	}
+
 	static {
 		var builder = new FlowAnimator.Builder<>(CrystallarieumBlockEntity.class);
 		

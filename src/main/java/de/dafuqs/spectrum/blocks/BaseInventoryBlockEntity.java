@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.blocks;
 
-import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import net.minecraft.core.*;
 import net.minecraft.core.component.*;
 import net.minecraft.nbt.*;

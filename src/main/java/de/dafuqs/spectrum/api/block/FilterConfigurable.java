@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.api.block;
 
-import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.inventories.slots.ShadowSlot;
 import de.dafuqs.spectrum.networking.c2s_payloads.SetShadowSlotPayload;
 import net.minecraft.core.*;

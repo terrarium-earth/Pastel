@@ -1,14 +1,13 @@
 package de.dafuqs.spectrum.blocks.chests;
 
-import de.dafuqs.spectrum.helpers.*;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.inventories.BlackHoleChestScreenHandler;
 import de.dafuqs.spectrum.inventories.CompactingChestScreenHandler;
 import de.dafuqs.spectrum.inventories.FabricationChestScreenHandler;
+import net.minecraft.core.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +15,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
@@ -30,13 +28,14 @@ import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.*;
 
 //TODO: GET THIS LOOT CONTAINER SHIT OUT OF MY CHEST
 @OnlyIn(
 		value = Dist.CLIENT,
 		_interface = LidBlockEntity.class
 )
-public abstract class SpectrumChestBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
+public abstract class SpectrumChestBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity, SidedCapabilityProvider {
 	
 	public final ContainerOpenersCounter stateManager;
 	protected final ChestLidController lidAnimator;
@@ -185,5 +184,9 @@ public abstract class SpectrumChestBlockEntity extends RandomizableContainerBloc
 	public SoundEvent getCloseSound() {
 		return SoundEvents.CHEST_CLOSE;
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return inventory;
+	}
 }

@@ -47,7 +47,7 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
 	private static final Set<UUID> alreadyReprocessedPlayers = new HashSet<>();
 	
 	public static void reprocessAdvancementUnlocks(ServerPlayer serverPlayerEntity) {
-		if (serverPlayerEntity.getServer() == null || SpectrumCommon.minecraftServer == null) {
+		if (serverPlayerEntity.getServer() == null || ServerLifecycleHooks.getCurrentServer() == null) {
 			return;
 		}
 		
@@ -65,7 +65,7 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
 				for (var criterionEntry : advancement.value().criteria().entrySet()) {
 					var conditions = criterionEntry.getValue().triggerInstance();
 					if (conditions instanceof AdvancementGottenCriterion.Conditions hasAdvancementConditions) {
-						var advancementCriterionAdvancement = SpectrumCommon.minecraftServer.getAdvancements().get(hasAdvancementConditions.getAdvancementIdentifier());
+						var advancementCriterionAdvancement = ServerLifecycleHooks.getCurrentServer().getAdvancements().get(hasAdvancementConditions.getAdvancementIdentifier());
 						if (advancementCriterionAdvancement != null) {
 							var hasAdvancementCriterionAdvancement = tracker.getOrStartProgress(advancementCriterionAdvancement);
 							if (hasAdvancementCriterionAdvancement.isDone()) {

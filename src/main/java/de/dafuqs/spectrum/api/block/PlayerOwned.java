@@ -10,8 +10,8 @@ import java.util.UUID;
 public interface PlayerOwned {
 	
 	static Player getPlayerEntityIfOnline(UUID ownerUUID) {
-		if (ownerUUID != null && SpectrumCommon.minecraftServer != null) {
-			return SpectrumCommon.minecraftServer.getPlayerList().getPlayer(ownerUUID);
+		if (ownerUUID != null && ServerLifecycleHooks.getCurrentServer() != null) {
+			return ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(ownerUUID);
 		}
 		return null;
 	}
@@ -31,8 +31,8 @@ public interface PlayerOwned {
 	@Nullable
 	default Player getOwnerIfOnline() {
 		UUID ownerUUID = this.getOwnerUUID();
-		if (ownerUUID != null && SpectrumCommon.minecraftServer != null) {
-			return SpectrumCommon.minecraftServer.getPlayerList().getPlayer(ownerUUID);
+		if (ownerUUID != null && ServerLifecycleHooks.getCurrentServer() != null) {
+			return ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(ownerUUID);
 		}
 		return null;
 	}

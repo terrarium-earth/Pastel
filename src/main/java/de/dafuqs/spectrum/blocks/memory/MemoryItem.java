@@ -23,6 +23,7 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -199,9 +200,9 @@ public class MemoryItem extends BlockItem {
 		// adding all memories that have spirit instiller recipes
 		Set<MemoryComponent> encountered = new HashSet<>();
 		//TODO does this work on dedicated servers?
-		if (SpectrumCommon.minecraftServer != null) {
+		if (ServerLifecycleHooks.getCurrentServer() != null) {
 			Item memoryItem = SpectrumBlocks.MEMORY.asItem();
-			for (var recipe : SpectrumCommon.minecraftServer.getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.SPIRIT_INSTILLING)) {
+			for (var recipe : ServerLifecycleHooks.getCurrentServer().getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.SPIRIT_INSTILLING)) {
 				ItemStack output = recipe.value().getResultItem(lookup);
 				var memory = output.get(SpectrumDataComponentTypes.MEMORY);
 				if (output.is(memoryItem) && memory != null && !encountered.contains(memory)) {

@@ -524,10 +524,6 @@ public class InventoryHelper {
 		return remainders;
 	}
 	
-	public static boolean canExtract(IItemHandlerModifiable inv, ItemStack stack, int slot, Direction facing) {
-		return !(inv instanceof WorldlyContainer) || ((WorldlyContainer) inv).canTakeItemThroughFace(slot, stack, facing);
-	}
-	
 	public static boolean canCombineItemStacks(ItemStack currentItemStack, ItemStack additionalItemStack) {
 		return currentItemStack.isEmpty() || additionalItemStack.isEmpty() || (ItemStack.isSameItemSameComponents(currentItemStack, additionalItemStack)
 				&& (currentItemStack.getCount() + additionalItemStack.getCount() <= currentItemStack.getMaxStackSize()));

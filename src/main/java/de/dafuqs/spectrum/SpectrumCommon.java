@@ -24,59 +24,10 @@ import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.networking.SpectrumS2CPackets;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
-import de.dafuqs.spectrum.registries.DeferredRegistrar;
-import de.dafuqs.spectrum.registries.SpectrumArmorMaterials;
-import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import de.dafuqs.spectrum.registries.SpectrumBlockSoundGroups;
-import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import de.dafuqs.spectrum.registries.SpectrumCommands;
-import de.dafuqs.spectrum.registries.SpectrumCompostableBlocks;
-import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
-import de.dafuqs.spectrum.registries.SpectrumDimensions;
-import de.dafuqs.spectrum.registries.SpectrumDispenserBehaviors;
-import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
-import de.dafuqs.spectrum.registries.SpectrumEntityColorProcessors;
-import de.dafuqs.spectrum.registries.SpectrumEventListeners;
-import de.dafuqs.spectrum.registries.SpectrumFeatures;
-import de.dafuqs.spectrum.registries.SpectrumFlammableBlocks;
-import de.dafuqs.spectrum.registries.SpectrumFluids;
-import de.dafuqs.spectrum.registries.SpectrumFusionShrineWorldEffects;
-import de.dafuqs.spectrum.registries.SpectrumItemDamageImmunities;
-import de.dafuqs.spectrum.registries.SpectrumItemGroups;
-import de.dafuqs.spectrum.registries.SpectrumItemProjectileBehaviors;
-import de.dafuqs.spectrum.registries.SpectrumItemProviders;
-import de.dafuqs.spectrum.registries.SpectrumItemSubPredicateTypes;
-import de.dafuqs.spectrum.registries.SpectrumItems;
-import de.dafuqs.spectrum.registries.SpectrumLoadConditions;
-import de.dafuqs.spectrum.registries.SpectrumOmniAcceleratorProjectiles;
-import de.dafuqs.spectrum.registries.SpectrumPastelUpgrades;
-import de.dafuqs.spectrum.registries.SpectrumPathNodeTypes;
-import de.dafuqs.spectrum.registries.SpectrumPlacedFeatures;
-import de.dafuqs.spectrum.registries.SpectrumPotions;
-import de.dafuqs.spectrum.registries.SpectrumPresentUnpackBehaviors;
-import de.dafuqs.spectrum.registries.SpectrumRecipeScalings;
-import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
-import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
-import de.dafuqs.spectrum.registries.SpectrumRegistries;
-import de.dafuqs.spectrum.registries.SpectrumResonanceProcessorTypes;
-import de.dafuqs.spectrum.registries.SpectrumResourceConditions;
-import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import de.dafuqs.spectrum.registries.SpectrumStampDataCategories;
-import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
-import de.dafuqs.spectrum.registries.SpectrumStrippableBlocks;
-import de.dafuqs.spectrum.registries.SpectrumStructurePoolElementTypes;
-import de.dafuqs.spectrum.registries.SpectrumStructureTypes;
-import de.dafuqs.spectrum.registries.SpectrumTillableBlocks;
-import de.dafuqs.spectrum.registries.SpectrumTreeDecoratorTypes;
-import de.dafuqs.spectrum.registries.SpectrumWaxableBlocks;
+import de.dafuqs.spectrum.registries.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.minecraft.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -88,6 +39,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -133,10 +85,6 @@ public class SpectrumCommon {
 		String namespace = i > 0 ? id.substring(0, i) : SpectrumCommon.MOD_ID;
 		return ResourceLocation.fromNamespaceAndPath(namespace, path);
 	}
-	
-	// Will be null when playing on a dedicated server!
-	@Nullable
-	public static MinecraftServer minecraftServer;
 	
 	// Miscellaneous registrars
 	public static final DeferredRegistrar FUEL_REGISTRAR = new DeferredRegistrar();
@@ -189,6 +137,8 @@ public class SpectrumCommon {
 		SpectrumItemGroups.register();
 		logInfo("Registering Block Entities...");
 		SpectrumBlockEntities.register();
+		logInfo("Registering Capabilities...");
+		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerBlocks);
 		
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");
@@ -264,15 +214,10 @@ public class SpectrumCommon {
 		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(NaturesStaffConversionDataLoader.INSTANCE);
 		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(EntityFishingDataLoader.INSTANCE);
 		ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(CrystalApothecarySimulationsDataLoader.INSTANCE);
-		
-		ServerLifecycleEvents.SERVER_STARTING.register(server -> {
-			SpectrumCommon.logInfo("Fetching server instance...");
-			minecraftServer = server;
-		});
-		
+
+
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			Pastel.clearServerInstance();
-			minecraftServer = null;
 		});
 		
 		logInfo("Adding to Fabric's Registries...");
@@ -327,10 +272,10 @@ public class SpectrumCommon {
 	 * When initializing a block entity, world can still be null
 	 * Therefore we use the RecipeManager reference from MinecraftServer
 	 * This in turn does not work on clients connected to dedicated servers, though
-	 * since SpectrumCommon.minecraftServer is null
+	 * since ServerLifecycleHooks.getCurrentServer() is null
 	 */
 	public static Optional<RecipeManager> getRecipeManager(@Nullable Level world) {
-		return world == null ? minecraftServer == null ? Optional.empty() : Optional.of(minecraftServer.getRecipeManager()) : Optional.of(world.getRecipeManager());
+		return Optional.ofNullable(world).map(Level::getRecipeManager).or(() -> Optional.ofNullable(ServerLifecycleHooks.getCurrentServer()).map(MinecraftServer::getRecipeManager));
 	}
 	
 }

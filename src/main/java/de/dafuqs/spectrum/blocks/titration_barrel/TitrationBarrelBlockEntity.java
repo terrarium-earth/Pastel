@@ -1,6 +1,9 @@
 package de.dafuqs.spectrum.blocks.titration_barrel;
 
 import de.dafuqs.spectrum.api.block.FluidTankInventory;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.fluid.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.mixin.accessors.BiomeAccessor;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
@@ -8,9 +11,8 @@ import de.dafuqs.spectrum.recipe.FluidRecipeInput;
 import de.dafuqs.spectrum.recipe.titration_barrel.ITitrationBarrelRecipe;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
+import net.minecraft.core.*;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -26,9 +28,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.capability.*;
 import net.neoforged.neoforge.fluids.capability.templates.*;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
@@ -36,7 +38,8 @@ import java.util.Optional;
 
 import static de.dafuqs.spectrum.blocks.titration_barrel.TitrationBarrelBlock.BARREL_STATE;
 
-public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTankInventory {
+// NOTE: ALWAYS DENIES IO. NON-AUTOMATABLE
+public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTankInventory, SidedCapabilityProvider {
 	
 	protected static final int INVENTORY_SIZE = 5;
 	public static final int MAX_ITEM_COUNT = 64;
@@ -250,5 +253,14 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 		
 		return false;
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return new StackHandlerView(inventory).disableExtraction().disableInsertion();
+	}
+
+	@Override
+	public IFluidHandler exposeFluidHandlers(Direction dir) {
+		return new FluidHandlerView(tank).disableExtraction().disableInsertion();
+	}
 }

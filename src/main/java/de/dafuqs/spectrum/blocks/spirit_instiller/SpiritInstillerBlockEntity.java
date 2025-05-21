@@ -8,6 +8,8 @@ import de.dafuqs.spectrum.blocks.InWorldInteractionBlockEntity;
 import de.dafuqs.spectrum.blocks.decoration.GemstoneChimeBlock;
 import de.dafuqs.spectrum.blocks.item_bowl.ItemBowlBlockEntity;
 import de.dafuqs.spectrum.blocks.upgrade.Upgradeable;
+import de.dafuqs.spectrum.capabilities.*;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.helpers.Support;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayBlockBoundSoundInstancePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
@@ -23,9 +25,7 @@ import de.dafuqs.spectrum.render.animation.FlowHandlers;
 import de.dafuqs.spectrum.render.animation.FlowStates;
 import de.dafuqs.spectrum.render.animation.Interpolation;
 import de.dafuqs.spectrum.render.animation.KeyFrame;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Vec3i;
+import net.minecraft.core.*;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -42,6 +42,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
-public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter {
+public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter, SidedCapabilityProvider {
 	
 	private static final FlowAnimator.Factory<SpiritInstillerBlockEntity> FACTORY;
 	private static final KeyFrame<Float> platformPos = (tickDelta, time) -> (float) (Math.sin((time + tickDelta + 15) / 23) + 6F) * 2F;
@@ -83,6 +84,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	
 	public SpiritInstillerBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.SPIRIT_INSTILLER, pos, state, INVENTORY_SIZE);
+		inventory.addListener(i -> inventoryChanged());
 	}
 	
 	public static void clientTick(Level world, BlockPos blockPos, BlockState blockState, @NotNull SpiritInstillerBlockEntity instiller) {
@@ -500,7 +502,12 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	public void inventoryChanged() {
 		this.inventoryChanged = true;
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return new StackHandlerView(inventory, 0, 1);
+	}
+
 	static {
 		var builder = new FlowAnimator.Builder<>(SpiritInstillerBlockEntity.class);
 		builder.stateInfo(FlowStates.MB_INVALID, 11);

@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.blocks.chests;
 
 import de.dafuqs.spectrum.api.block.FilterConfigurable;
 import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
+import de.dafuqs.spectrum.capabilities.item.*;
 import de.dafuqs.spectrum.events.SpectrumGameEvents;
 import de.dafuqs.spectrum.events.listeners.EventQueue;
 import de.dafuqs.spectrum.events.listeners.ExperienceOrbEventQueue;
@@ -21,7 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -39,6 +39,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -410,5 +411,9 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		CLOSED_INACTIVE,
 		FULL
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return new StackHandlerView(inventory, 0, EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT);
+	}
 }

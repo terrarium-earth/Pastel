@@ -1,12 +1,10 @@
 package de.dafuqs.spectrum.blocks.amphora;
 
+import de.dafuqs.spectrum.capabilities.*;
 import de.dafuqs.spectrum.inventories.GenericSpectrumContainerScreenHandler;
 import de.dafuqs.spectrum.inventories.ScreenBackgroundVariant;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Vec3i;
+import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -24,8 +22,9 @@ import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.*;
 
-public class AmphoraBlockEntity extends RandomizableContainerBlockEntity {
+public class AmphoraBlockEntity extends RandomizableContainerBlockEntity implements SidedCapabilityProvider {
 	
 	private NonNullList<ItemStack> inventory;
 	private final ContainerOpenersCounter stateManager;
@@ -140,5 +139,9 @@ public class AmphoraBlockEntity extends RandomizableContainerBlockEntity {
 		double f = (double)this.worldPosition.getZ() + 0.5 + (double)vec3i.getZ() / 2.0;
 		this.level.playSound(null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 0.9F);
 	}
-	
+
+	@Override
+	public IItemHandler exposeItemHandlers(Direction dir) {
+		return new ItemStackHandler(inventory);
+	}
 }
