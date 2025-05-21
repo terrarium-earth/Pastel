@@ -7,9 +7,6 @@ import de.dafuqs.spectrum.registries.SpectrumItemTags;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -39,6 +36,8 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.capabilities.*;
+import net.neoforged.neoforge.fluids.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -104,7 +103,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 							// or seal it with a piece of colored wood
 							if (handStack.isEmpty()) {
 								int itemCount = InventoryHelper.countItemsInInventory(barrelEntity.inventory);
-								Fluid fluid = barrelEntity.fluidStorage.variant.getFluid();
+								Fluid fluid = barrelEntity.tank.getFluid().getFluid();
 								if (fluid == Fluids.EMPTY) {
 									if (itemCount == TitrationBarrelBlockEntity.MAX_ITEM_COUNT) {
 										player.displayClientMessage(Component.translatable("block.spectrum.titration_barrel.content_count_without_fluid_full", itemCount), true);
@@ -131,20 +130,19 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 									}
 									return ItemInteractionResult.CONSUME;
 								}
-								
-								if (ContainerItemContext.forPlayerInteraction(player, hand).find(FluidStorage.ITEM) != null) {
-									if (FluidStorageUtil.interactWithFluidStorage(barrelEntity.fluidStorage, player, hand)) {
-										if (barrelEntity.getFluidVariant().isBlank()) {
-											if (state.getValue(BARREL_STATE) == TitrationBarrelBlock.BarrelState.FILLED && barrelEntity.isEmpty()) {
-												world.setBlockAndUpdate(pos, state.setValue(BARREL_STATE, TitrationBarrelBlock.BarrelState.EMPTY));
-											}
-										} else {
-											if (state.getValue(BARREL_STATE) == TitrationBarrelBlock.BarrelState.EMPTY) {
-												world.setBlockAndUpdate(pos, state.setValue(BARREL_STATE, TitrationBarrelBlock.BarrelState.FILLED));
-											}
+
+
+								if (FluidUtil.interactWithFluidHandler(player, hand, barrelEntity.tank)) {
+									if (!barrelEntity.tank.isEmpty()) {
+										if (state.getValue(BARREL_STATE) == TitrationBarrelBlock.BarrelState.FILLED && barrelEntity.tank.isEmpty()) {
+											world.setBlockAndUpdate(pos, state.setValue(BARREL_STATE, TitrationBarrelBlock.BarrelState.EMPTY));
 										}
-										return ItemInteractionResult.CONSUME;
+									} else {
+										if (state.getValue(BARREL_STATE) == TitrationBarrelBlock.BarrelState.EMPTY) {
+											world.setBlockAndUpdate(pos, state.setValue(BARREL_STATE, TitrationBarrelBlock.BarrelState.FILLED));
+										}
 									}
+									return ItemInteractionResult.CONSUME;
 								}
 								
 								int countBefore = handStack.getCount();
@@ -217,7 +215,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 		if (stack.isPresent()) {
 			player.getInventory().placeItemBackInInventory(stack.get());
 			barrelEntity.setChanged();
-			if (barrelEntity.inventory.isEmpty() && barrelEntity.getFluidVariant().isBlank()) {
+			if (barrelEntity.inventory.isEmpty() && barrelEntity.tank.isEmpty()) {
 				world.setBlockAndUpdate(pos, state.setValue(BARREL_STATE, BarrelState.EMPTY));
 			} else {
 				// They'll get updated if the block state changes anyway
@@ -289,8 +287,8 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 					float icurr = InventoryHelper.countItemsInInventory(blockEntity.inventory);
 					float imax = TitrationBarrelBlockEntity.MAX_ITEM_COUNT;
 					
-					float fcurr = blockEntity.fluidStorage.amount;
-					float fmax = blockEntity.fluidStorage.getCapacity();
+					float fcurr = blockEntity.tank.getFluidAmount();
+					float fmax = blockEntity.tank.getCapacity();
 					
 					return Mth.floor(((icurr / imax) + (fcurr / fmax)) / 2.0f * 14.0f) + isNotEmpty;
 				}

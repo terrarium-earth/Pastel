@@ -40,7 +40,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleRecipeInput>
 	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/crystallarieum");
 	
 	protected final static Map<BlockState, RecipeHolder<CrystallarieumRecipe>> STATE_CACHE = new HashMap<>();
-	protected static final FluidStack LIQUID_CRYSTAL = new FluidStack(SpectrumFluids.LIQUID_CRYSTAL);
+	protected static final FluidStack LIQUID_CRYSTAL = new FluidStack(SpectrumFluids.LIQUID_CRYSTAL, 1000);
 	
 	protected final Ingredient ingredient;
 	protected final List<BlockState> growthStages;

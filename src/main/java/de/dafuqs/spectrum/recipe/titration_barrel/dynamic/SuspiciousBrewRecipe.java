@@ -2,23 +2,21 @@ package de.dafuqs.spectrum.recipe.titration_barrel.dynamic;
 
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.helpers.*;
+import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.components.BeverageComponent;
-import de.dafuqs.spectrum.recipe.StorageRecipeInput;
+import de.dafuqs.spectrum.recipe.FluidRecipeInput;
 import de.dafuqs.spectrum.recipe.titration_barrel.FermentationData;
 import de.dafuqs.spectrum.recipe.titration_barrel.TitrationBarrelRecipe;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Container;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.BlockItem;
@@ -113,7 +111,7 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 	}
 	
 	@Override
-	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidStack>> recipeInput, Level world) {
+	public boolean matches(FluidRecipeInput<FluidTank> recipeInput, Level world) {
 		boolean flowerFound = false;
 		for (int i = 0; i < recipeInput.size(); i++) {
 			ItemStack stack = recipeInput.getItem(i);

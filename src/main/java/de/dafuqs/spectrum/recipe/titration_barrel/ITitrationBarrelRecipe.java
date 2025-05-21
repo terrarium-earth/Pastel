@@ -2,17 +2,16 @@ package de.dafuqs.spectrum.recipe.titration_barrel;
 
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.helpers.*;
+import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.GatedRecipe;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.components.BeverageComponent;
-import de.dafuqs.spectrum.recipe.StorageRecipeInput;
+import de.dafuqs.spectrum.recipe.FluidRecipeInput;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +32,7 @@ import java.util.Optional;
  * Making it a non-ticking block entity and also "fermenting" when the game is not running
  * This also means TitrationBarrelRecipes have to calculate their time using real life seconds, instead of game ticks
  */
-public interface ITitrationBarrelRecipe extends GatedRecipe<StorageRecipeInput<SingleVariantStorage<FluidStack>>> {
+public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<FluidTank>> {
 	
 	ResourceLocation UNLOCK_ADVANCEMENT_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/titration_barrel");
 	

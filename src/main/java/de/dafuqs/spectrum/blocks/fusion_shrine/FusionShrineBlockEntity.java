@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.blocks.fusion_shrine;
 
-import com.mojang.datafixers.util.Pair;
 import de.dafuqs.spectrum.api.block.MultiblockCrafter;
 import de.dafuqs.spectrum.api.block.PlayerOwned;
 import de.dafuqs.spectrum.api.color.ColorRegistry;
@@ -15,15 +14,13 @@ import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithExactVelocityP
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.particle.effect.ColoredFluidRisingParticleEffect;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
-import de.dafuqs.spectrum.recipe.StorageRecipeInput;
+import de.dafuqs.spectrum.recipe.FluidRecipeInput;
 import de.dafuqs.spectrum.recipe.fusion_shrine.FusionShrineRecipe;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumEventListeners;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
@@ -45,6 +42,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.fluids.capability.templates.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -62,27 +60,9 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	private int craftingTime;
 	private int craftingTimeTotal;
 	
-	private boolean inventoryChanged = true;
+	boolean inventoryChanged = true;
 	
-	public final SingleVariantStorage<FluidStack> fluidStorage = new SingleVariantStorage<>() {
-		@Override
-		protected FluidStack getBlankVariant() {
-			return FluidStack.blank();
-		}
-		
-		@Override
-		protected long getCapacity(FluidStack variant) {
-			return FluidConstants.BUCKET;
-		}
-		
-		@Override
-		protected void onFinalCommit() {
-			super.onFinalCommit();
-			setLightForFluid(worldPosition, this.variant.getFluid());
-			inventoryChanged();
-			setChanged();
-		}
-	};
+	public final FluidTank tank = new FluidTank(1000);
 	
 	public FusionShrineBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.FUSION_SHRINE, pos, state, INVENTORY_SIZE);
@@ -113,7 +93,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		BlockPos blockPos = getBlockPos();
 		var recipe = this.currentRecipe;
 		if (recipe != null && level != null) {
-			Fluid fluid = this.getFluidVariant().getFluid();
+			Fluid fluid = tank.getFluid().getFluid();
 			Optional<InkColor> optionalFluidColor = ColorRegistry.FLUID_COLORS.getMapping(fluid);
 			if (optionalFluidColor.isPresent()) {
 				ParticleOptions particleEffect = ColoredFluidRisingParticleEffect.of(optionalFluidColor.get().getColorInt());
@@ -130,7 +110,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		world.playSound(null, this.getBlockPos(), SpectrumSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
 		world.playSound(null, this.getBlockPos(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F);
 		FusionShrineBlock.scatterContents(world, this.getBlockPos());
-		this.inventoryChanged();
+		inventoryChanged = true;
 	}
 	
 	@SuppressWarnings("unused")
@@ -196,7 +176,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		// craft when enough ticks have passed
 		if (fusionShrineBlockEntity.craftingTime == fusionShrineBlockEntity.craftingTimeTotal) {
 			craft(world, blockPos, fusionShrineBlockEntity, recipe);
-			fusionShrineBlockEntity.inventoryChanged();
+			fusionShrineBlockEntity.inventoryChanged = true;
 		} else {
 			PlayFusionCraftingInProgressParticlePayload.sendPlayFusionCraftingInProgressParticles((ServerLevel) world, blockPos);
 		}
@@ -223,8 +203,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		
 		scatterContents(world, blockPos.above(), fusionShrineBlockEntity); // drop remaining items
 		
-		fusionShrineBlockEntity.fluidStorage.variant = FluidStack.blank();
-		fusionShrineBlockEntity.fluidStorage.amount = 0;
+		fusionShrineBlockEntity.tank.setFluid(FluidStack.EMPTY);
 		world.setBlock(blockPos, world.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, 0), 3);
 	}
 	
@@ -234,15 +213,14 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	}
 	
 	public static void scatterContents(Level world, BlockPos pos, FusionShrineBlockEntity blockEntity) {
-		Containers.dropContents(world, pos, blockEntity.getItems());
+		Containers.dropContents(world, pos, blockEntity.inventory.getInternalList());
 		world.updateNeighbourForOutputSignal(pos, world.getBlockState(pos).getBlock());
 	}
 	
 	@Override
 	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.loadAdditional(nbt, registryLookup);
-		this.fluidStorage.variant = FluidStack.CODEC.decode(NbtOps.INSTANCE, nbt.getCompound("FluidStack")).result().map(Pair::getFirst).orElse(FluidStack.blank());
-		this.fluidStorage.amount = nbt.getLong("FluidAmount");
+		tank.readFromNBT(registryLookup, nbt);
 		
 		this.craftingTime = nbt.getShort("CraftingTime");
 		this.craftingTimeTotal = nbt.getShort("CraftingTimeTotal");
@@ -261,8 +239,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	@Override
 	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.saveAdditional(nbt, registryLookup);
-		FluidStack.CODEC.encodeStart(NbtOps.INSTANCE, this.fluidStorage.variant).result().ifPresent(v -> nbt.put("FluidStack", v));
-		nbt.putLong("FluidAmount", this.fluidStorage.amount);
+		tank.writeToNBT(registryLookup, nbt);
 		nbt.putShort("CraftingTime", (short) this.craftingTime);
 		nbt.putShort("CraftingTimeTotal", (short) this.craftingTimeTotal);
 		if (this.upgrades != null) {
@@ -288,16 +265,8 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		}
 	}
 	
-	public @NotNull FluidStack getFluidVariant() {
-		if (this.fluidStorage.amount > 0) {
-			return this.fluidStorage.variant;
-		} else {
-			return FluidStack.blank();
-		}
-	}
-	
-	public @NotNull SingleVariantStorage<FluidStack> getFluidStorage() {
-		return this.fluidStorage;
+	public @NotNull FluidTank getTank() {
+		return this.tank;
 	}
 	
 	private void setLightForFluid(BlockPos blockPos, Fluid fluid) {
@@ -306,8 +275,8 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		level.setBlock(blockPos, level.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight), Block.UPDATE_ALL);
 	}
 	
-	public StorageRecipeInput<SingleVariantStorage<FluidStack>> getRecipeInput() {
-		return new StorageRecipeInput<>(inventory, fluidStorage);
+	public FluidRecipeInput<FluidTank> getRecipeInput() {
+		return new FluidRecipeInput<>(inventory.getInternalList(), tank);
 	}
 	
 	// PLAYER OWNED
@@ -335,13 +304,6 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	public void calculateUpgrades() {
 		this.upgrades = Upgradeable.calculateUpgradeMods4(level, worldPosition, 2, 0, this.ownerUUID);
 		this.setChanged();
-	}
-	
-	@Override
-	public void inventoryChanged() {
-		super.inventoryChanged();
-		this.inventoryChanged = true;
-		this.craftingTime = 0;
 	}
 	
 }

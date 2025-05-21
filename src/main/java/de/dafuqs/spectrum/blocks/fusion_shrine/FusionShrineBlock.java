@@ -5,7 +5,6 @@ import com.mojang.serialization.MapCodec;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.blocks.InWorldInteractionBlock;
 import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
-import de.dafuqs.spectrum.inventories.storage.DroppedItemStorage;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import de.dafuqs.spectrum.particle.effect.ColoredSparkleRisingParticleEffect;
@@ -13,18 +12,9 @@ import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumMultiblocks;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.*;
 import net.minecraft.world.item.ItemStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleSlotStorage;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
-import net.fabricmc.fabric.impl.transfer.context.SingleSlotContainerItemContext;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,7 +25,6 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -53,6 +42,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("UnstableApiUsage")
@@ -145,23 +135,23 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 	@Override
 	public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
 		if (world.getBlockEntity(pos) instanceof FusionShrineBlockEntity blockEntity) {
-			NonNullList<ItemStack> inventory = blockEntity.getItems();
+			var inventory = blockEntity.getInventory();
 			
 			int i = 0;
 			float f = 0.0f;
-			for (int j = 0; j < inventory.size(); ++j) {
+			for (int j = 0; j < inventory.getSlots(); ++j) {
 				ItemStack itemStack = blockEntity.getItem(j);
 				if (itemStack.isEmpty()) continue;
 				f += (float) itemStack.getCount() / (float) Math.min(blockEntity.getMaxStackSize(), itemStack.getMaxStackSize());
 				++i;
 			}
 			
-			if (blockEntity.fluidStorage.amount > 0) {
-				f += (float) blockEntity.fluidStorage.amount / (float) blockEntity.fluidStorage.getCapacity();
+			if (blockEntity.tank.getFluidAmount() > 0) {
+				f += (float) blockEntity.tank.getFluidAmount() / (float) blockEntity.tank.getCapacity();
 				++i;
 			}
 			
-			return Mth.floor(f / ((float) inventory.size() + 1) * 14.0f) + (i > 0 ? 1 : 0);
+			return Mth.floor(f / ((float) inventory.getSlots() + 1) * 14.0f) + (i > 0 ? 1 : 0);
 		}
 		
 		return 0;
@@ -179,44 +169,15 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 		if (!world.isClientSide) {
 			// Specially handle fluid items
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (entity instanceof ItemEntity itemEntity && blockEntity instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
-				SingleVariantStorage<FluidStack> storage = fusionShrineBlockEntity.fluidStorage;
-				ItemStack itemStack = itemEntity.getItem();
-				
-				// We're not considering stacked fluid storages for the time being
-				if (itemStack.getCount() == 1) {
-					SingleSlotStorage<ItemStack> slot = new DroppedItemStorage(itemStack);
-					SingleSlotContainerItemContext ctx = new SingleSlotContainerItemContext(slot);
-					Storage<FluidStack> fluidStorage = FluidStorage.ITEM.find(itemStack, ctx);
-					
-					if (fluidStorage != null) {
-						boolean anyInserted = false;
-						for (StorageView<FluidStack> view : fluidStorage) {
-							try (Transaction transaction = Transaction.openOuter()) {
-								FluidStack variant = view.getResource();
-								long inserted = variant.isBlank() ? 0 : storage.insert(variant, view.getAmount(), transaction);
-								long extracted = fluidStorage.extract(variant, inserted, transaction);
-								if (inserted == extracted && inserted != 0) {
-									anyInserted = true;
-									transaction.commit();
-								}
-							}
-						}
-						
-						if (!anyInserted && !storage.getResource().isBlank()) {
-							try (Transaction transaction = Transaction.openOuter()) {
-								long inserted = fluidStorage.insert(storage.getResource(), storage.getAmount(), transaction);
-								long extracted = storage.extract(storage.getResource(), inserted, transaction);
-								if (inserted == extracted && inserted != 0) {
-									transaction.commit();
-								}
-							}
-						}
-						
-						itemEntity.setItem(slot.getResource().toStack(itemStack.getCount()));
-						fusionShrineBlockEntity.inventoryChanged();
-						return;
-					}
+			if (entity instanceof ItemEntity itemEntity && blockEntity instanceof FusionShrineBlockEntity shrine) {
+				var itemStack = itemEntity.getItem();
+				var fluidHandler = FluidUtil.getFluidHandler(itemStack);
+
+				if (fluidHandler.isPresent()) {
+					FluidUtil.tryFluidTransfer(shrine.tank, fluidHandler.get(), 1000, true);
+				}
+				else {
+					itemEntity.setItem(ItemHandlerHelper.insertItemStacked(shrine.getInventory(), itemStack, false));
 				}
 			}
 			
@@ -237,19 +198,19 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 			
 			// if the structure is valid the player can put / retrieve items and fluids into the shrine
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof FusionShrineBlockEntity fusionShrineBlockEntity && verifyStructure(world, pos, (ServerPlayer) player)) {
-				fusionShrineBlockEntity.setOwner(player);
+			if (blockEntity instanceof FusionShrineBlockEntity shrine && verifyStructure(world, pos, (ServerPlayer) player)) {
+				shrine.setOwner(player);
 				
-				if (FluidStorageUtil.interactWithFluidStorage(fusionShrineBlockEntity.fluidStorage, player, hand)) {
-					fusionShrineBlockEntity.inventoryChanged();
+				if (FluidUtil.interactWithFluidHandler(player, hand, shrine.getTank())) {
+					shrine.inventoryChanged = true;
 					return ItemInteractionResult.CONSUME;
 				}
-				if ((player.isShiftKeyDown() || handStack.isEmpty()) && retrieveLastStack(world, pos, player, hand, handStack, fusionShrineBlockEntity)) {
-					fusionShrineBlockEntity.inventoryChanged();
+				if ((player.isShiftKeyDown() || handStack.isEmpty()) && retrieveLastStack(world, pos, player, hand, handStack, shrine)) {
+					shrine.inventoryChanged = true;
 					return ItemInteractionResult.CONSUME;
 				}
-				if (!handStack.isEmpty() && inputHandStack(world, player, hand, handStack, fusionShrineBlockEntity)) {
-					fusionShrineBlockEntity.inventoryChanged();
+				if (!handStack.isEmpty() && inputHandStack(world, player, hand, handStack, shrine)) {
+					shrine.inventoryChanged = true;
 					return ItemInteractionResult.CONSUME;
 				}
 			}

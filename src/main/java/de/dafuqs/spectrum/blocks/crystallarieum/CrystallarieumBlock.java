@@ -8,9 +8,6 @@ import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
 import de.dafuqs.spectrum.blocks.InWorldInteractionBlock;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
-import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorageUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -29,6 +26,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.fluids.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -88,31 +86,31 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
 		if (!world.isClientSide) {
 			// if the structure is valid the player can put / retrieve blocks into the shrine
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof CrystallarieumBlockEntity crystallarieumBlockEntity) {
+			if (blockEntity instanceof CrystallarieumBlockEntity crystal) {
 				
 				if (player.isShiftKeyDown() || stack.isEmpty()) {
 					// sneaking or empty hand: remove items
-					if (retrieveStack(world, pos, player, hand, stack, crystallarieumBlockEntity, 1) || retrieveStack(world, pos, player, hand, stack, crystallarieumBlockEntity, 0)) {
-						crystallarieumBlockEntity.inventoryChanged();
-						crystallarieumBlockEntity.setOwner(player);
+					if (retrieveStack(world, pos, player, hand, stack, crystal, 1) || retrieveStack(world, pos, player, hand, stack, crystal, 0)) {
+						crystal.inventoryChanged();
+						crystal.setOwner(player);
 					}
 					return ItemInteractionResult.CONSUME;
 				} else {
-					if (ContainerItemContext.forPlayerInteraction(player, hand).find(FluidStorage.ITEM) != null) {
-						FluidStorageUtil.interactWithFluidStorage(crystallarieumBlockEntity.fluidStorage, player, hand);
+					if (FluidUtil.interactWithFluidHandler(player, hand, crystal.tank)){
+						return ItemInteractionResult.CONSUME;
 					}
 					
 					// hand is full and inventory is empty: add
 					// hand is full and inventory already contains item: exchange them
 					else if (stack.getItem() instanceof InkStorageItem<?> inkStorageItem) {
-						if (inkStorageItem.getDrainability().canDrain(false) && exchangeStack(world, pos, player, hand, stack, crystallarieumBlockEntity, CrystallarieumBlockEntity.INK_STORAGE_STACK_SLOT_ID)) {
-							crystallarieumBlockEntity.inventoryChanged();
-							crystallarieumBlockEntity.setOwner(player);
+						if (inkStorageItem.getDrainability().canDrain(false) && exchangeStack(world, pos, player, hand, stack, crystal, CrystallarieumBlockEntity.INK_STORAGE_STACK_SLOT_ID)) {
+							crystal.inventoryChanged();
+							crystal.setOwner(player);
 						}
 					} else {
-						if (exchangeStack(world, pos, player, hand, stack, crystallarieumBlockEntity, CrystallarieumBlockEntity.CATALYST_SLOT_ID)) {
-							crystallarieumBlockEntity.inventoryChanged();
-							crystallarieumBlockEntity.setOwner(player);
+						if (exchangeStack(world, pos, player, hand, stack, crystal, CrystallarieumBlockEntity.CATALYST_SLOT_ID)) {
+							crystal.inventoryChanged();
+							crystal.setOwner(player);
 						}
 					}
 				}

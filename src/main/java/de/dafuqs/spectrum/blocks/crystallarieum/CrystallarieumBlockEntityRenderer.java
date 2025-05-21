@@ -64,7 +64,7 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
 		
 		renderHalo(crystal, tickDelta, matrices, vertexConsumers, light, overlay, vertices);
 		
-		var fluid = crystal.fluidStorage.variant;
+		var fluid = crystal.tank.variant;
 		if (!fluid.isBlank()) {
 		
 			matrices.pushPose();
@@ -76,7 +76,7 @@ public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEnti
 			var skylight = crystal.getLevel().getBrightness(LightLayer.BLOCK, pos);
 			var glow = LightTexture.pack(Math.max(luminance, skylight), crystal.getLevel().getBrightness(LightLayer.SKY, pos));
 			
-			var full = crystal.fluidStorage.amount == FluidConstants.BUCKET;
+			var full = crystal.tank.amount == FluidConstants.BUCKET;
 			var y = full ? 0.975F : 0.94F;
 			var rim = full ? 1 : 2;
 			

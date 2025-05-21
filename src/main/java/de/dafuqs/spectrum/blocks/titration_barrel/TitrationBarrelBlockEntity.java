@@ -1,26 +1,22 @@
 package de.dafuqs.spectrum.blocks.titration_barrel;
 
-import de.dafuqs.spectrum.api.block.FluidStackInventory;
+import de.dafuqs.spectrum.api.block.FluidTankInventory;
 import de.dafuqs.spectrum.helpers.*;
 import de.dafuqs.spectrum.mixin.accessors.BiomeAccessor;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
-import de.dafuqs.spectrum.recipe.StorageRecipeInput;
+import de.dafuqs.spectrum.recipe.FluidRecipeInput;
 import de.dafuqs.spectrum.recipe.titration_barrel.ITitrationBarrelRecipe;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,8 +28,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.items.*;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.fluids.capability.templates.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
@@ -41,28 +36,12 @@ import java.util.Optional;
 
 import static de.dafuqs.spectrum.blocks.titration_barrel.TitrationBarrelBlock.BARREL_STATE;
 
-public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStackInventory {
+public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTankInventory {
 	
 	protected static final int INVENTORY_SIZE = 5;
 	public static final int MAX_ITEM_COUNT = 64;
 	protected FriendlyStackHandler inventory;
-	protected SingleVariantStorage<FluidStack> fluidStorage = new SingleVariantStorage<>() {
-		@Override
-		protected FluidStack getBlankVariant() {
-			return FluidStack.blank();
-		}
-		
-		@Override
-		protected long getCapacity(FluidStack variant) {
-			return FluidConstants.BUCKET;
-		}
-		
-		@Override
-		protected void onFinalCommit() {
-			super.onFinalCommit();
-			inventoryChanged();
-		}
-	};
+	protected FluidTank tank = new FluidTank(1000);
 	
 	@Override
 	public FriendlyStackHandler getInventory() {
@@ -70,8 +49,8 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	}
 	
 	@Override
-	public SingleVariantStorage<FluidStack> getFluidStorage() {
-		return this.fluidStorage;
+	public FluidTank getTank() {
+		return this.tank;
 	}
 	
 	// Times in milliseconds using the Date class
@@ -90,8 +69,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.saveAdditional(nbt, registryLookup);
 		inventory.save(nbt, registryLookup);
-		CodecHelper.writeNbt(nbt, "FluidStack", FluidStack.CODEC, this.fluidStorage.variant);
-		nbt.putLong("FluidAmount", this.fluidStorage.amount);
+		tank.writeToNBT(registryLookup, nbt);
 		nbt.putLong("SealTime", this.sealTime);
 		nbt.putLong("TapTime", this.tapTime);
 		nbt.putInt("ExtractedBottles", this.extractedBottles);
@@ -101,8 +79,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.loadAdditional(nbt, registryLookup);
 		inventory.load(nbt, registryLookup);
-		this.fluidStorage.variant = CodecHelper.fromNbt(FluidStack.CODEC, nbt.get("FluidStack"), FluidStack.blank());
-		this.fluidStorage.amount = nbt.getLong("FluidAmount");
+		tank.readFromNBT(registryLookup, nbt);
 		this.sealTime = nbt.contains("SealTime", Tag.TAG_LONG) ? nbt.getLong("SealTime") : -1;
 		this.tapTime = nbt.contains("TapTime", Tag.TAG_LONG) ? nbt.getLong("TapTime") : -1;
 		this.extractedBottles = nbt.contains("ExtractedBottles", Tag.TAG_ANY_NUMERIC) ? nbt.getInt("ExtractedBottles") : 0;
@@ -121,8 +98,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	public void reset(Level world, BlockPos blockPos, BlockState state) {
 		this.sealTime = -1;
 		this.tapTime = -1;
-		this.fluidStorage.variant = FluidStack.blank();
-		this.fluidStorage.amount = 0;
+		tank.setFluid(FluidStack.EMPTY);
 		this.extractedBottles = 0;
 		this.getInventory().getInternalList().clear();
 		
@@ -158,7 +134,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 	}
 	
 	private boolean isEmpty(float temperature, int extractedBottles, ITitrationBarrelRecipe recipe) {
-		if (level == null || !recipe.getFluidInput().test(getFluidVariant())) {
+		if (level == null || !recipe.getFluidInput().test(getTank().getFluid())) {
 			return true;
 		}
 		return extractedBottles >= recipe.getOutputCountAfterAngelsShare(this.level, temperature, getSealSeconds());
@@ -181,7 +157,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 		
 		Optional<RecipeHolder<ITitrationBarrelRecipe>> optionalRecipe = getRecipeForInventory(world);
 		if (optionalRecipe.isEmpty()) {
-			if (getInventory().isEmpty() && getFluidVariant().isBlank()) {
+			if (getInventory().isEmpty() && tank.isEmpty()) {
 				message = Component.translatable("block.spectrum.titration_barrel.empty_when_tapping");
 			} else {
 				message = Component.translatable("block.spectrum.titration_barrel.invalid_recipe_when_tapping");
@@ -193,7 +169,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 			long secondsFermented = (this.tapTime - this.sealTime) / 1000;
 			var output = recipe.getOutputCountAfterAngelsShare(world, biome.getBaseTemperature(), secondsFermented);
 			
-			if (recipe.getFluidInput().test(this.getFluidVariant())) {
+			if (recipe.getFluidInput().test(tank.getFluid())) {
 				if (recipe.canPlayerCraft(player)) {
 					boolean canTap = true;
 					Item tappingItem = recipe.getTappingItem();
@@ -218,7 +194,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 					message = Component.translatable("block.spectrum.titration_barrel.recipe_not_unlocked");
 				}
 			} else {
-				if (getFluidVariant().isBlank()) {
+				if (tank.isEmpty()) {
 					message = Component.translatable("block.spectrum.titration_barrel.missing_liquid_when_tapping");
 				} else {
 					message = Component.translatable("block.spectrum.titration_barrel.invalid_recipe_when_tapping");
@@ -246,8 +222,8 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 		return world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.TITRATION_BARREL, getRecipeInput(), world);
 	}
 	
-	public StorageRecipeInput<SingleVariantStorage<FluidStack>> getRecipeInput() {
-		return new StorageRecipeInput<>(inventory, fluidStorage);
+	public FluidRecipeInput<FluidTank> getRecipeInput() {
+		return new FluidRecipeInput<>(inventory.getInternalList(), tank);
 	}
 	
 	public void giveRecipeRemainders(Player player) {
@@ -259,18 +235,9 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 		}
 	}
 	
-	public @NotNull FluidStack getFluidVariant() {
-		if (this.fluidStorage.amount > 0) {
-			return this.fluidStorage.variant;
-		} else {
-			return FluidStack.blank();
-		}
-	}
-	
 	public boolean canBeSealed(Player player) {
 		int itemCount = InventoryHelper.countItemsInInventory(getInventory());
-		Fluid fluid = fluidStorage.variant.getFluid();
-		if (itemCount == 0 && fluid == Fluids.EMPTY) {
+		if (itemCount == 0 && tank.isEmpty()) {
 			return true; // tap empty barrel advancement
 		}
 		
@@ -278,7 +245,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidStac
 			Optional<RecipeHolder<ITitrationBarrelRecipe>> optionalRecipe = getRecipeForInventory(level);
 			return optionalRecipe.isPresent()
 					&& optionalRecipe.get().value().canPlayerCraft(player)
-					&& optionalRecipe.get().value().getFluidInput().test(this.getFluidVariant().getFluid());
+					&& optionalRecipe.get().value().getFluidInput().test(tank.getFluid());
 		}
 		
 		return false;

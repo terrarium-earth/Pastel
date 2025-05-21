@@ -7,6 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.block.MultiblockCrafter;
 import de.dafuqs.spectrum.api.predicate.location.WorldConditionsPredicate;
+import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
@@ -17,12 +18,10 @@ import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.helpers.PacketCodecHelper;
 import de.dafuqs.spectrum.helpers.Support;
 import de.dafuqs.spectrum.recipe.GatedStackSpectrumRecipe;
-import de.dafuqs.spectrum.recipe.StorageRecipeInput;
+import de.dafuqs.spectrum.recipe.FluidRecipeInput;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -44,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeInput<SingleVariantStorage<FluidStack>>> {
+public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FluidRecipeInput<FluidTank>> {
 	
 	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("build_fusion_shrine");
 	
@@ -116,13 +115,13 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 	 * The required fluid has to be tested manually by the crafting block.
 	 */
 	@Override
-	public boolean matches(StorageRecipeInput<SingleVariantStorage<FluidStack>> recipeInput, Level world) {
-		SingleVariantStorage<FluidStack> fluidStorage = recipeInput.getFluidStorage();
-		if (!this.fluid.test(fluidStorage.variant)) {
+	public boolean matches(FluidRecipeInput<FluidTank> recipeInput, Level world) {
+		FluidTank fluidStorage = recipeInput.getTank();
+		if (!this.fluid.test(fluidStorage.getFluid())) {
 			return false;
 		}
 		if (!this.fluid.isEmpty()) {
-			if (fluidStorage.getAmount() != fluidStorage.getCapacity()) {
+			if (fluidStorage.getFluidAmount() != fluidStorage.getCapacity()) {
 				return false;
 			}
 		}
@@ -130,7 +129,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 	}
 	
 	@Override
-	public ItemStack assemble(StorageRecipeInput<SingleVariantStorage<FluidStack>> inv, HolderLookup.Provider drm) {
+	public ItemStack assemble(FluidRecipeInput<FluidTank> inv, HolderLookup.Provider drm) {
 		return output.copy();
 	}
 	
@@ -243,7 +242,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 		var memory = ItemStack.EMPTY;
 		
 		int maxAmount = 1;
-		ItemStack output = assemble(new StorageRecipeInput<>(fusionShrineBlockEntity.getItems(), fusionShrineBlockEntity.fluidStorage), world.registryAccess());
+		ItemStack output = assemble(new FluidRecipeInput<>(fusionShrineBlockEntity.getInventory().getInternalList(), fusionShrineBlockEntity.tank), world.registryAccess());
 		if (!output.isEmpty()) {
 			maxAmount = output.getMaxStackSize();
 			for (IngredientStack ingredientStack : getIngredientStacks()) {
@@ -305,7 +304,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 					if (!currentRemainder.isEmpty()) {
 						currentRemainder = currentRemainder.copy();
 						currentRemainder.setCount(reducedAmountAfterMod);
-						InventoryHelper.smartAddToInventory(currentRemainder, fusionShrineBlockEntity, null);
+						InventoryHelper.smartAddToInventory(currentRemainder, fusionShrineBlockEntity.getInventory(), null);
 					}
 					
 					break;
@@ -341,7 +340,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<StorageRecipeIn
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				ResourceLocation.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				IngredientStack.CODEC.listOf(0, 7).fieldOf("ingredients").forGetter(recipe -> recipe.craftingInputs),
-				FluidIngredient.CODEC.optionalFieldOf("fluid", FluidIngredient.EMPTY).forGetter(recipe -> recipe.fluid),
+				FluidIngredient.CODEC.optionalFieldOf("fluid", FluidIngredient.empty()).forGetter(recipe -> recipe.fluid),
 				ItemStack.CODEC.optionalFieldOf("result", ItemStack.EMPTY).forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(recipe -> recipe.craftingTime),
