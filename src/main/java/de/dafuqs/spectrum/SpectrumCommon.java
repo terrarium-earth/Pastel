@@ -242,10 +242,6 @@ public class SpectrumCommon {
 		SpectrumPathNodeTypes.register();
 		logInfo("Registering Tree Decorator Types...");
 		SpectrumTreeDecoratorTypes.register();
-
-
-		//noinspection
-		ItemStorage.SIDED.registerForBlockEntity((blockEntity, direction) -> blockEntity.storage, SpectrumBlockEntities.BOTTOMLESS_BUNDLE);
 		
 		// Builtin Resource Packs
 		logInfo("Registering Builtin Resource Packs...");

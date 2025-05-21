@@ -16,7 +16,6 @@ import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.item.ItemStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -49,7 +48,6 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.DirectionalPlaceContext;
@@ -66,6 +64,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation Detail <p> While it may appear otherwise, the count a bottomless bundle can store may never exceed {@link Integer#MAX_VALUE}
+ */
 public class BottomlessBundleItem extends BlockItem implements InventoryInsertionAcceptor {
 	
 	private static final long MAX_STORED_AMOUNT_BASE = 20000;
@@ -252,12 +253,12 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		// We unbundle, tick and then rebundle the stack, in case inventory tick would modify components, count or other properties
 		// The slot isn't technically correct, since it's the slot of the bundle, not that of the bundled stack
 		BottomlessStack.Builder builder = BottomlessStack.Builder.of(world, stack);
-		ItemStack bundledVariant = builder.getVariant();
-		ItemStack bundledStack = builder.getVariant().toStack((int) Math.min(Integer.MAX_VALUE, builder.count));
-		long count = bundledStack.getCount();
-		bundledStack.inventoryTick(world, entity, slot, selected);
-		if (!bundledVariant.matches(bundledStack) || bundledStack.getCount() != count) {
-			builder.set(bundledStack, Math.min(builder.getMaxAllowed(bundledStack), builder.count + bundledStack.getCount() - count));
+		ItemStack bundled = builder.getReference();
+		ItemStack ticked = builder.getReference().copyWithCount((int) Math.min(Integer.MAX_VALUE, builder.count));
+		long preTickCount = ticked.getCount();
+		ticked.inventoryTick(world, entity, slot, selected);
+		if (!ItemStack.isSameItemSameComponents(bundled, ticked) || ticked.getCount() != preTickCount) {
+			builder.set(ticked, Math.min(builder.getMaxAllowed(ticked), builder.count + ticked.getCount() - preTickCount));
 			builder.buildAndSet(stack);
 		}
 	}
@@ -265,8 +266,8 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	
 	@Override
 	public boolean acceptsItemStack(ItemStack inventoryInsertionAcceptorStack, ItemStack itemStackToAccept) {
-		ItemStack variant = getTemplateVariant(inventoryInsertionAcceptorStack);
-		return !variant.isBlank() && variant.matches(itemStackToAccept);
+		ItemStack reference = getTemplateVariant(inventoryInsertionAcceptorStack);
+		return !reference.isEmpty() && ItemStack.isSameItemSameComponents(inventoryInsertionAcceptorStack, reference);
 	}
 	
 	@Override
@@ -345,7 +346,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 			if (mode != ItemDisplayContext.GUI
 					|| getStoredAmount(stack) <= 0)
 				return;
-			ItemStack bundledStack = BottomlessBundleItem.getTemplateVariant(stack).toStack();
+			ItemStack bundledStack = BottomlessBundleItem.getTemplateVariant(stack);
 			Minecraft client = Minecraft.getInstance();
 			BakedModel bundledModel = renderer.getModel(bundledStack, client.level, client.player, 0);
 			
@@ -373,10 +374,6 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 				ByteBufCodecs.BOOL, BottomlessStack::locked,
 				BottomlessStack::new
 		);
-		
-		public BottomlessStack(ItemStack stack, long count, boolean locked) {
-			this(ItemStack.of(stack), count, locked);
-		}
 		
 		public Iterable<ItemStack> iterateCopy() {
 			return new Iterable<>() {
@@ -408,7 +405,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 			private final boolean voiding, locked;
 			private final long max;
 			private long count;
-			private ItemStack variant;
+			private ItemStack reference;
 			
 			public static Builder of(Level world, ItemStack stack) {
 				var prev = stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT);
@@ -419,7 +416,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 			}
 			
 			public Builder(BottomlessStack prev, long max, boolean voiding, boolean locked) {
-				this.variant = prev.variant();
+				this.reference = prev.variant();
 				this.max = max;
 				this.count = prev.count();
 				this.voiding = voiding;
@@ -427,20 +424,20 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 			}
 			
 			public Builder clear() {
-				this.variant = ItemStack.blank();
+				this.reference = ItemStack.EMPTY;
 				this.count = 0;
 				return this;
 			}
 			
 			public int getMaxAllowed(ItemStack stack) {
-				return (int) Math.min(getMaxAllowed(ItemStack.of(stack), stack.getCount()), Integer.MAX_VALUE);
+				return (int) Math.min(getMaxAllowed(stack, stack.getCount()), Integer.MAX_VALUE);
 			}
 			
 			public long getMaxAllowed(ItemStack variant, long amount) {
 				if (isEmpty()) {
 					return this.max;
 				}
-				if (variant.isBlank() || amount <= 0 || !variant.getItem().canFitInsideContainerItems())
+				if (variant.isEmpty() || amount <= 0 || !variant.getItem().canFitInsideContainerItems())
 					return 0;
 				return voiding ? Long.MAX_VALUE : this.max - this.count;
 			}
@@ -451,27 +448,22 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 					return 0;
 				
 				if (this.count == 0)
-					this.variant = ItemStack.of(stack);
+					this.reference = stack.copyWithCount(1);
 				
 				this.count += Math.min(this.max - this.count, toAdd);
 				return toAdd;
 			}
 			
 			public void setStack(ItemStack stack) {
-				this.variant = ItemStack.of(stack);
-			}
-			
-			public void set(SingleVariantStorage<ItemStack> storage) {
-				this.variant = storage.variant;
-				this.count = storage.amount;
+				this.reference = stack.copyWithCount(1);
 			}
 			
 			public void set(ItemStack stack, long count) {
 				if (stack.isEmpty() || count == 0) {
-					this.variant = ItemStack.blank();
+					this.reference = ItemStack.EMPTY;
 					this.count = 0;
 				} else {
-					this.variant = ItemStack.of(stack);
+					this.reference = stack.copyWithCount(1);
 					this.count = count;
 				}
 			}
@@ -486,35 +478,35 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 					return ItemStack.EMPTY;
 				
 				var toRemove = Math.min((int) this.count, amount);
-				var removed = this.variant.toStack(toRemove);
+				var removed = this.reference.copyWithCount(toRemove);
 				this.count -= toRemove;
 				if (this.count == 0)
-					this.variant = ItemStack.blank();
+					this.reference = ItemStack.EMPTY;
 				
 				return removed;
 			}
 			
 			public ItemStack removeFirstStack() {
-				return remove(variant.getItem().getDefaultMaxStackSize());
+				return remove(reference.getItem().getDefaultMaxStackSize());
 			}
 			
 			public long getCount() {
 				return count;
 			}
 			
-			public ItemStack getVariant() {
-				return variant;
+			public ItemStack getReference() {
+				return reference;
 			}
 			
 			public boolean isEmpty() {
-				return count == 0 || variant.isBlank();
+				return count == 0 || reference.isEmpty();
 			}
 			
 			public void buildAndSet(ItemStack bottomlessBundleStack) {
 				if (this.isEmpty()) {
 					bottomlessBundleStack.remove(SpectrumDataComponentTypes.BOTTOMLESS_STACK);
 				} else {
-					bottomlessBundleStack.set(SpectrumDataComponentTypes.BOTTOMLESS_STACK, new BottomlessStack(variant, count, locked));
+					bottomlessBundleStack.set(SpectrumDataComponentTypes.BOTTOMLESS_STACK, new BottomlessStack(reference, count, locked));
 				}
 			}
 		}

@@ -22,6 +22,7 @@ public class SpectrumCapabilityHandlers {
         standardBlockBE(TITRATION_BARREL, event);
         standardBlockBE(POTION_WORKSHOP, event);
         standardBlockBE(BLOCK_PLACER, event);
+        standardBlockBE(BOTTOMLESS_BUNDLE, event);
 
         // - chests
         standardBlockBE(BLACK_HOLE_CHEST, event);
