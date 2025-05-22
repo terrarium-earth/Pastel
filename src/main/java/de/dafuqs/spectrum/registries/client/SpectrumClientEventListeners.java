@@ -21,6 +21,7 @@ import de.dafuqs.spectrum.items.magic_items.ExchangeStaffItem;
 import de.dafuqs.spectrum.items.tools.OmniAcceleratorItem;
 import de.dafuqs.spectrum.mixin.accessors.WorldRendererAccessor;
 import de.dafuqs.spectrum.particle.render.ExtendedParticleManager;
+import de.dafuqs.spectrum.progression.*;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumDimensions;
 import de.dafuqs.spectrum.registries.SpectrumItemTags;
@@ -29,6 +30,8 @@ import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.sound.BiomeAttenuatingSoundInstance;
 import de.dafuqs.spectrum.sound.BlockAuraSoundInstance;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
+import net.minecraft.resources.*;
+import net.minecraft.server.packs.resources.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
@@ -88,6 +91,20 @@ public class SpectrumClientEventListeners {
 	//
 	public static void register() {
 		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(ParticleSpawnerParticlesDataLoader.INSTANCE);
+
+		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
+			private final ResourceLocation id = SpectrumCommon.locate("cache_clearer_client");
+
+			@Override
+			public void onResourceManagerReload(ResourceManager manager) {
+				UnlockToastManager.clear();
+			}
+
+			@Override
+			public ResourceLocation getFabricId() {
+				return id;
+			}
+		});
 		
 		registerCustomItemRenderer("bottomless_bundle", SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), BottomlessBundleItem.Renderer::new);
 		registerCustomItemRenderer("omni_accelerator", SpectrumItems.OMNI_ACCELERATOR, OmniAcceleratorItem.Renderer::new);
