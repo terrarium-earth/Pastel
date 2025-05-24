@@ -8,25 +8,22 @@ import de.dafuqs.spectrum.commands.PrintConfigCommand;
 import de.dafuqs.spectrum.commands.ResetShadersCommand;
 import de.dafuqs.spectrum.commands.SanityCommand;
 import de.dafuqs.spectrum.commands.ShootingStarCommand;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 public class SpectrumCommands {
-	
-	public static void register() {
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-			LiteralCommandNode<CommandSourceStack> spectrumNode = Commands.literal("spectrum").build();
-			ShootingStarCommand.register(spectrumNode);
-			SanityCommand.register(spectrumNode);
-			PrintConfigCommand.register(spectrumNode);
-			PrimordialFireCommand.register(spectrumNode);
-			DumpRegistriesCommand.register(spectrumNode);
-			DumpTagsCommand.register(spectrumNode);
-			ResetShadersCommand.register(spectrumNode);
-			
 
-			dispatcher.getRoot().addChild(spectrumNode);
-		});
+	public static void register(RegisterCommandsEvent event) {
+        LiteralCommandNode<CommandSourceStack> spectrumNode = Commands.literal("spectrum").build();
+        ShootingStarCommand.register(spectrumNode);
+        SanityCommand.register(spectrumNode);
+        PrintConfigCommand.register(spectrumNode);
+        PrimordialFireCommand.register(spectrumNode);
+        DumpRegistriesCommand.register(spectrumNode);
+        DumpTagsCommand.register(spectrumNode);
+        ResetShadersCommand.register(spectrumNode);
+
+        event.getDispatcher().getRoot().addChild(spectrumNode);
 	}
 }

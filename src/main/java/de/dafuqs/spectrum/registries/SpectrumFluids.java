@@ -10,26 +10,25 @@ import de.dafuqs.spectrum.blocks.fluid.LiquidCrystalFluid;
 import de.dafuqs.spectrum.blocks.fluid.MidnightSolutionFluid;
 import de.dafuqs.spectrum.blocks.fluid.SpectrumFluid;
 import de.dafuqs.spectrum.helpers.SpectrumColorHelper;
-import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
-import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
-import net.fabricmc.fabric.api.client.render.fluid.v1.SimpleFluidRenderHandler;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.fluids.FluidType;
 import org.joml.Vector3f;
+
+import java.util.List;
 
 
 public class SpectrumFluids {
-	
-	// RenderHandler storage for compatibility purposes
-	public static final Object2ObjectArrayMap<FluidRenderHandler, Fluid[]> HANDLER_MAP = new Object2ObjectArrayMap<>(4);
-	
+
 	// LIQUID CRYSTAL
 	public static final SpectrumFluid LIQUID_CRYSTAL = new LiquidCrystalFluid.Still();
 	public static final SpectrumFluid FLOWING_LIQUID_CRYSTAL = new LiquidCrystalFluid.Flowing();
@@ -77,25 +76,45 @@ public class SpectrumFluids {
 	}
 	
 	@OnlyIn(Dist.CLIENT)
-	public static void registerClient() {
-		setupFluidRendering(LIQUID_CRYSTAL, FLOWING_LIQUID_CRYSTAL, "liquid_crystal", LIQUID_CRYSTAL_TINT);
-		setupFluidRendering(GOO, FLOWING_GOO, "goo", GOO_TINT);
-		setupFluidRendering(MIDNIGHT_SOLUTION, FLOWING_MIDNIGHT_SOLUTION, "midnight_solution", MIDNIGHT_SOLUTION_TINT);
-		setupFluidRendering(DRAGONROT, FLOWING_DRAGONROT, "dragonrot", DRAGONROT_TINT);
+	public static void clientSetup(FMLClientSetupEvent event) {
+		var fluids = List.of(
+			LIQUID_CRYSTAL, FLOWING_LIQUID_CRYSTAL,
+			GOO, FLOWING_GOO,
+			MIDNIGHT_SOLUTION, FLOWING_MIDNIGHT_SOLUTION,
+			DRAGONROT, FLOWING_DRAGONROT
+		);
+
+		for (var fluid : fluids) {
+			ItemBlockRenderTypes.setRenderLayer(fluid, RenderType.translucent());
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	private static void setupFluidRendering(final Fluid stillFluid, final Fluid flowingFluid, final String name, int tint) {
-		var handler = new SimpleFluidRenderHandler(
-				SpectrumCommon.locate("block/" + name + "_still"),
-				SpectrumCommon.locate("block/" + name + "_flow"),
-				tint
-		);
-		
-		HANDLER_MAP.put(handler, new Fluid[]{stillFluid, flowingFluid});
-		FluidRenderHandlerRegistry.INSTANCE.register(stillFluid, flowingFluid, handler);
+	public static void registerClient(RegisterClientExtensionsEvent event) {
+		setupFluidRendering(event, LIQUID_CRYSTAL.getFluidType(), "liquid_crystal", LIQUID_CRYSTAL_TINT);
+		setupFluidRendering(event, GOO.getFluidType(), "goo", GOO_TINT);
+		setupFluidRendering(event, MIDNIGHT_SOLUTION.getFluidType(), "midnight_solution", MIDNIGHT_SOLUTION_TINT);
+		setupFluidRendering(event, DRAGONROT.getFluidType(), "dragonrot", DRAGONROT_TINT);
+	}
 
-		BlockRenderLayerMap.INSTANCE.putFluids(RenderType.translucent(), stillFluid, flowingFluid);
+	@OnlyIn(Dist.CLIENT)
+	private static void setupFluidRendering(RegisterClientExtensionsEvent event, final FluidType fluidType, final String name, int tint) {
+		event.registerFluidType(new IClientFluidTypeExtensions() {
+			@Override
+			public ResourceLocation getStillTexture() {
+				return SpectrumCommon.locate("block/" + name + "_still");
+			}
+
+			@Override
+			public ResourceLocation getFlowingTexture() {
+				return SpectrumCommon.locate("block/" + name + "_flow");
+			}
+
+			@Override
+			public int getTintColor() {
+				return tint;
+			}
+		}, fluidType);
 	}
 	
 }
