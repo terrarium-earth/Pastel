@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.registries;
 import de.dafuqs.spectrum.capabilities.*;
 import net.minecraft.world.level.block.entity.*;
 import net.neoforged.neoforge.capabilities.*;
+import net.neoforged.neoforge.fluids.capability.templates.*;
 
 import static de.dafuqs.spectrum.registries.SpectrumBlockEntities.*;
 
@@ -36,6 +37,13 @@ public class SpectrumCapabilityHandlers {
         standardFluidBE(FUSION_SHRINE, event);
         standardFluidBE(CRYSTALLARIEUM, event);
         standardFluidBE(TITRATION_BARREL, event);
+    }
+
+    public static void registerItems(RegisterCapabilitiesEvent event) {
+        event.registerItem(
+                Capabilities.FluidHandler.ITEM,
+                (stack, v) -> new FluidHandlerItemStackSimple.Consumable(() -> SpectrumDataComponentTypes.MERMAIDS_GEM, stack, 1000),
+                SpectrumItems.MERMAIDS_GEM);
     }
 
     private static void standardBlockBE(BlockEntityType<? extends SidedCapabilityProvider> type, RegisterCapabilitiesEvent event) {

@@ -6,7 +6,6 @@ import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.api.item.CreativeOnlyItem;
 import de.dafuqs.spectrum.blocks.conditional.MermaidsGemItem;
-import de.dafuqs.spectrum.blocks.fluid.RemainderlessItemFluidStorage;
 import de.dafuqs.spectrum.blocks.gravity.CloakedFloatItem;
 import de.dafuqs.spectrum.blocks.jade_vines.GerminatedJadeVineBulbItem;
 import de.dafuqs.spectrum.components.InfusedBeverageComponent;
@@ -147,10 +146,6 @@ import de.dafuqs.spectrum.items.trinkets.WhispyCircletItem;
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.recipe.pedestal.BuiltinGemstoneColor;
 import de.dafuqs.spectrum.registries.client.SpectrumModels;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -794,9 +789,6 @@ public class SpectrumItems {
 	
 	public static void register() {
 		ITEM_REGISTRAR.flush();
-		
-		FluidStorage.combinedItemApiProvider(SpectrumItems.MERMAIDS_GEM).register(context ->
-				new RemainderlessItemFluidStorage(context, new FluidStack(Fluids.WATER), FluidConstants.BUCKET));
 	}
 	
 	public static class IS {
