@@ -8,7 +8,6 @@ import de.dafuqs.spectrum.api.energy.InkPowered;
 import de.dafuqs.spectrum.api.interaction.ItemProvider;
 import de.dafuqs.spectrum.api.interaction.ItemProviderRegistry;
 import de.dafuqs.spectrum.api.render.DynamicItemRenderer;
-import de.dafuqs.spectrum.api.render.DynamicRenderModel;
 import de.dafuqs.spectrum.blocks.bottomless_bundle.BottomlessBundleItem;
 import de.dafuqs.spectrum.blocks.pastel_network.Pastel;
 import de.dafuqs.spectrum.data_loaders.ParticleSpawnerParticlesDataLoader;
@@ -30,7 +29,6 @@ import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.sound.BiomeAttenuatingSoundInstance;
 import de.dafuqs.spectrum.sound.BlockAuraSoundInstance;
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.server.packs.resources.*;
 import net.minecraft.util.profiling.*;
 import net.neoforged.api.distmarker.Dist;
@@ -41,7 +39,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -77,12 +74,9 @@ import java.util.function.Supplier;
 @OnlyIn(Dist.CLIENT)
 public class SpectrumClientEventListeners {
 	
-	// TODO: Move to API package
-	public static final ObjectOpenHashSet<ModelResourceLocation> CUSTOM_ITEM_MODELS = new ObjectOpenHashSet<>();
 	private static boolean postProcessWasOn = SpectrumCommon.CONFIG.PostProcess;
 	
-	private static void registerCustomItemRenderer(String id, Item item, Supplier<DynamicItemRenderer> renderer) {
-		CUSTOM_ITEM_MODELS.add(new ModelResourceLocation(SpectrumCommon.locate(id), "inventory"));
+	private static void registerCustomItemRenderer(Item item, Supplier<DynamicItemRenderer> renderer) {
 		DynamicItemRenderer.RENDERERS.put(item, renderer.get());
 	}
 	//
@@ -98,19 +92,8 @@ public class SpectrumClientEventListeners {
 		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onDimensionChange);
 		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::afterClientTick);
 
-		registerCustomItemRenderer("bottomless_bundle", SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), BottomlessBundleItem.Renderer::new);
-		registerCustomItemRenderer("omni_accelerator", SpectrumItems.OMNI_ACCELERATOR, OmniAcceleratorItem.Renderer::new);
-
-		
-		ModelLoadingPlugin.register((ctx) -> {
-			ctx.modifyModelAfterBake().register((orig, c) -> {
-				ModelResourceLocation id = c.topLevelId();
-				if (id instanceof ModelResourceLocation mid && CUSTOM_ITEM_MODELS.contains(mid)) {
-					return new DynamicRenderModel(orig);
-				}
-				return orig;
-			});
-		});
+		registerCustomItemRenderer(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), BottomlessBundleItem.Renderer::new);
+		registerCustomItemRenderer(SpectrumItems.OMNI_ACCELERATOR, OmniAcceleratorItem.Renderer::new);
 
 	}
 

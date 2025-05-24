@@ -7,7 +7,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import de.dafuqs.spectrum.api.render.DynamicItemRenderer;
-import de.dafuqs.spectrum.api.render.DynamicRenderModel;
 import de.dafuqs.spectrum.registries.SpectrumItemTags;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -58,17 +57,13 @@ public abstract class ItemRendererMixin {
 		SpectrumModelPredicateProviders.currentItemRenderMode = renderMode;
 	}*/
 	
-	@Inject(at = @At("HEAD"), method = "render", cancellable = true)
+	@Inject(at = @At("TAIL"), method = "render", cancellable = true)
 	private void spectrum$dynRender(ItemStack stack, ItemDisplayContext renderMode, boolean leftHanded, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
-		// if model is a dynamic one, check the renderers
-		if (model instanceof DynamicRenderModel dm) {
-			DynamicItemRenderer renderer = DynamicItemRenderer.RENDERERS.get(stack.getItem());
-			// shouldn't happen normally but check anyway
-			if (renderer != null) {
-				// unwrap the model here so that the custom renderer doesn't have to do it
-				renderer.render((ItemRenderer) (Object) this, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, dm.getWrappedModel());
-				ci.cancel();
-			}
+		DynamicItemRenderer renderer = DynamicItemRenderer.RENDERERS.get(stack.getItem());
+		// if model is a dynamic one, render with that
+		if (renderer != null) {
+			// unwrap the model here so that the custom renderer doesn't have to do it
+			renderer.render((ItemRenderer) (Object) this, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, dm.getWrappedModel());
 		}
 	}
 
