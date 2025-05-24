@@ -123,7 +123,7 @@ public class SpectrumParticleTypes {
 	
 	// Simple particles
 	private static SimpleParticleType register(String name, boolean alwaysShow) {
-		return REGISTRAR.defer(FabricParticleTypes.simple(alwaysShow), type -> Registry.register(BuiltInRegistries.PARTICLE_TYPE, SpectrumCommon.locate(name), type));
+		return REGISTRAR.defer(new SimpleParticleType(alwaysShow), type -> Registry.register(BuiltInRegistries.PARTICLE_TYPE, SpectrumCommon.locate(name), type));
 	}
 	
 	// complex particles
