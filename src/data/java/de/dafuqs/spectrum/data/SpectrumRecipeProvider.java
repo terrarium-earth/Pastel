@@ -13,6 +13,8 @@ import de.dafuqs.spectrum.registries.SpectrumFluids;
 import de.dafuqs.spectrum.registries.SpectrumResourceConditions;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -156,12 +158,12 @@ import static net.minecraft.world.item.enchantment.Enchantments.THORNS;
 import static net.minecraft.world.item.enchantment.Enchantments.UNBREAKING;
 import static net.minecraft.world.item.enchantment.Enchantments.WIND_BURST;
 
-public class SpectrumRecipeProvider extends FabricRecipeProvider {
-	
-	public SpectrumRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-		super(output, registriesFuture);
+public class SpectrumRecipeProvider extends RecipeProvider {
+
+	public SpectrumRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries);
 	}
-	
+
 	@Override
 	public void buildRecipes(RecipeOutput recipeOutput) {
 		generateCrystallarieumRecipes(recipeOutput);
@@ -387,7 +389,7 @@ public class SpectrumRecipeProvider extends FabricRecipeProvider {
 	}
 	
 	private void generateEnchantmentUpgradeRecipe(RecipeOutput ctx, String group, ResourceKey<Enchantment> enchantment, ResourceLocation advancement, Item bulkItem, int levelCap, RecipeScaling.ScalingData xpScaling, RecipeScaling.ScalingData itemScaling) {
-		ctx = withConditions(ctx, new SpectrumResourceConditions.EnchantmentsExistResourceCondition(List.of(enchantment)));
+		ctx = ctx.withConditions(new SpectrumResourceConditions.EnchantmentsExistResourceCondition(List.of(enchantment)));
 		String namespace = enchantment.registry().getNamespace();
 		String base = "enchantment_upgrade/" + namespace + "/" + enchantment.location().getPath().replace("/", ".");
 		generateRecipe(ctx, base, new EnchantmentUpgradeRecipe(group, false, Optional.of(advancement), Either.right(enchantment), levelCap, Ingredient.of(bulkItem), xpScaling, itemScaling));

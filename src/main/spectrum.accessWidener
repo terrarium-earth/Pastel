@@ -40,6 +40,10 @@ accessible	method	net/minecraft/client/particle/DripParticle	<init>	(Lnet/minecr
 accessible	field	net/minecraft/client/particle/Particle	gravity	F
 accessible	method	net/minecraft/client/particle/SuspendedParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/client/particle/SpriteSet;DDDDDD)V
 
+# TODO The following are not needed, and should probably be removed eventually
+accessible method net/minecraft/world/level/block/Blocks litBlockEmission (I)Ljava/util/function/ToIntFunction;
+accessible method net/minecraft/world/level/block/Blocks woodenButton (Lnet/minecraft/world/level/block/state/properties/BlockSetType;)Lnet/minecraft/world/level/block/Block;
+
 # Arrowhead
 accessible class net/minecraft/client/renderer/ItemInHandRenderer$HandRenderSelection
 accessible method net/minecraft/world/item/CrossbowItem getProjectileShotVector (Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/Vec3;F)Lorg/joml/Vector3f;

@@ -3,41 +3,43 @@ package de.dafuqs.spectrum.registries;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditionType;
-import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
-import org.jetbrains.annotations.Nullable;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.List;
 
-import static de.dafuqs.spectrum.SpectrumCommon.locate;
-
 public class SpectrumResourceConditions {
-	
-	public static void register() {
-		ResourceConditions.register(EnchantmentsExistResourceCondition.TYPE);
-		ResourceConditions.register(IntegrationPackActiveResourceCondition.TYPE);
+
+	public static final DeferredRegister<MapCodec<? extends ICondition>> REGISTER = DeferredRegister.create(NeoForgeRegistries.CONDITION_SERIALIZERS, SpectrumCommon.MOD_ID);
+
+	public static void register(IEventBus modEventBus) {
+		REGISTER.register("enchantments_exist", () -> EnchantmentsExistResourceCondition.CODEC);
+		REGISTER.register("integration_pack_active", () -> IntegrationPackActiveResourceCondition.CODEC);
+
+		REGISTER.register(modEventBus);
 	}
 	
-	public record EnchantmentsExistResourceCondition(List<ResourceKey<Enchantment>> enchantments) implements ResourceCondition {
+	public record EnchantmentsExistResourceCondition(List<ResourceKey<Enchantment>> enchantments) implements ICondition {
 		
 		public static MapCodec<EnchantmentsExistResourceCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				ResourceKey.codec(Registries.ENCHANTMENT).listOf().fieldOf("values").forGetter(EnchantmentsExistResourceCondition::enchantments)
 		).apply(instance, EnchantmentsExistResourceCondition::new));
-		public static ResourceConditionType<EnchantmentsExistResourceCondition> TYPE = ResourceConditionType.create(locate("enchantments_exist"), CODEC);
-		
+
 		@Override
-		public ResourceConditionType<?> getType() {
-			return TYPE;
+		public MapCodec<? extends ICondition> codec() {
+			return CODEC;
 		}
-		
+
 		@Override
-		public boolean test(@Nullable HolderLookup.Provider wrapperLookup) {
+		public boolean test(IContext iContext) {
 			if (wrapperLookup == null || wrapperLookup.lookup(Registries.ENCHANTMENT).isEmpty())
 				return false;
 			HolderLookup.RegistryLookup<Enchantment> impl = wrapperLookup.lookup(Registries.ENCHANTMENT).get();
@@ -45,20 +47,19 @@ public class SpectrumResourceConditions {
 		}
 	}
 	
-	public record IntegrationPackActiveResourceCondition(String integrationPack) implements ResourceCondition {
+	public record IntegrationPackActiveResourceCondition(String integrationPack) implements ICondition {
 		
 		public static MapCodec<IntegrationPackActiveResourceCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 				Codec.STRING.fieldOf("integration_pack").forGetter(IntegrationPackActiveResourceCondition::integrationPack)
 		).apply(instance, IntegrationPackActiveResourceCondition::new));
-		public static ResourceConditionType<IntegrationPackActiveResourceCondition> TYPE = ResourceConditionType.create(locate("integration_pack_active"), CODEC);
-		
+
 		@Override
-		public ResourceConditionType<?> getType() {
-			return TYPE;
+		public MapCodec<? extends ICondition> codec() {
+			return CODEC;
 		}
-		
+
 		@Override
-		public boolean test(@Nullable HolderLookup.Provider wrapperLookup) {
+		public boolean test(IContext iContext) {
 			return SpectrumIntegrationPacks.isIntegrationPackActive(integrationPack);
 		}
 	}

@@ -1,21 +1,25 @@
 package de.dafuqs.spectrum.data;
 
+import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.registries.SpectrumEnchantments;
 import de.dafuqs.spectrum.registries.SpectrumItemTags;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class SpectrumItemTagProvider extends FabricTagProvider.ItemTagProvider {
-	
-	public SpectrumItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookupFuture) {
-		super(output, lookupFuture);
+public class SpectrumItemTagsProvider extends ItemTagsProvider {
+
+	public SpectrumItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
+		super(output, lookupProvider, blockTags, SpectrumCommon.MOD_ID, existingFileHelper);
 	}
-	
+
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
 		SpectrumEnchantments.provideItemTags(this::getOrCreateTagBuilder);

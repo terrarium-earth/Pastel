@@ -234,8 +234,7 @@ public class SpectrumCommon {
 		SpectrumStrippableBlocks.register();
 		SpectrumWaxableBlocks.register();
 		SpectrumTillableBlocks.register();
-		SpectrumCompostableBlocks.register();
-		
+
 		logInfo("Registering Game Events...");
 		SpectrumGameEvents.register();
 		SpectrumPositionSources.register();
@@ -246,7 +245,7 @@ public class SpectrumCommon {
 		SpectrumResonanceProcessorTypes.register();
 		
 		logInfo("Registering Resource Conditions...");
-		SpectrumResourceConditions.register();
+		SpectrumResourceConditions.register(modEventBus);
 		logInfo("Registering Structure WeightedPool Element Types...");
 		SpectrumStructurePoolElementTypes.register();
 		logInfo("Registering Event Listeners...");

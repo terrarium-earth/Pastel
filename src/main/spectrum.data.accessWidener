@@ -1,0 +1,9 @@
+accessWidener	v2	named
+
+# Cursed cursed cursed bad erase please
+# (TODO This, along with all the weird datagen stuff in this code base, should be removed.)
+
+accessible field net/minecraft/data/models/BlockModelGenerators modelOutput Ljava/util/function/BiConsumer;
+accessible field net/minecraft/data/models/ItemModelGenerators output Ljava/util/function/BiConsumer;
+accessible method net/minecraft/data/models/model/TexturedModel createDefault (Ljava/util/function/Function;Lnet/minecraft/data/models/model/ModelTemplate;)Lnet/minecraft/data/models/model/TexturedModel$Provider;
+accessible class net/minecraft/data/models/BlockModelGenerators$TintState

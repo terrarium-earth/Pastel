@@ -47,7 +47,10 @@ cloche {
         neoforge {
             loaderVersion = "21.1.172"
 
-            accessWideners.from("src/main/spectrum.accesswidener")
+            accessWideners.from(
+                "src/main/spectrum.accessWidener",
+                "src/main/spectrum.data.accessWidener",
+            )
 
             mixins.from("src/main/mixins/spectrum.mixins.json")
 
