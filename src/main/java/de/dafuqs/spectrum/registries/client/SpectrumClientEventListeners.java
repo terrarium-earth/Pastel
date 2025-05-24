@@ -185,15 +185,20 @@ public class SpectrumClientEventListeners {
 		if (stage == RenderLevelStageEvent.Stage.AFTER_SKY) {
 			HudRenderers.clearItemStackOverlay();
 		}
-		else if (stage == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
-			((ExtendedParticleManager) Minecraft.getInstance().particleEngine)
-					.render(event.getPoseStack(), event.vertexConsumers(), event, event.getPartialTick().getGameTimeDeltaTicks()); //TODO: What. The. Fuck.
-		}
-		else if(stage == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
-			Entity focusedEntity = event.getCamera().getEntity();
+		else {
+			Minecraft minecraft = Minecraft.getInstance();
+			MultiBufferSource.BufferSource bufferSource = minecraft.renderBuffers().bufferSource();
 
-			if (focusedEntity instanceof LivingEntity livingEntity) {
-				Pastel.getClientInstance().renderLines(Minecraft.getInstance().level, event.getPoseStack(), event.vertexConsumers()); //AAAAAA
+			if (stage == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
+				((ExtendedParticleManager) minecraft.particleEngine)
+						.render(event.getPoseStack(), bufferSource, event.getCamera(), event.getPartialTick().getGameTimeDeltaTicks());
+			}
+			else if(stage == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
+				Entity focusedEntity = event.getCamera().getEntity();
+
+				if (focusedEntity instanceof LivingEntity) {
+					Pastel.getClientInstance().renderLines(minecraft.level, event.getPoseStack(), bufferSource, event.getCamera());
+				}
 			}
 		}
 	}

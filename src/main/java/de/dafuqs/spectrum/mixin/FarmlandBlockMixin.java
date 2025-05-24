@@ -1,8 +1,7 @@
 package de.dafuqs.spectrum.mixin;
 
+import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,26 +14,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Optional;
-
 @Mixin(FarmBlock.class)
 public abstract class FarmlandBlockMixin extends Block {
-	public FarmlandBlockMixin(Properties settings) {
-		super(settings);
-	}
-	
-	@Inject(method = {"fallOn"}, at = {@At("HEAD")}, cancellable = true)
-	private void spectrum$onLandedUpon(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo info) {
-		super.fallOn(world, state, pos, entity, fallDistance); // fall damage
-		
-		// if carrying puff circlet: no trampling
-		if (entity instanceof LivingEntity livingEntity) {
-			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
-			if (component.isPresent()) {
-				if (!component.get().getEquipped(SpectrumItems.PUFF_CIRCLET).isEmpty()) {
-					info.cancel();
-				}
-			}
-		}
-	}
+    public FarmlandBlockMixin(Properties settings) {
+        super(settings);
+    }
+
+    @Inject(method = {"fallOn"}, at = {@At("HEAD")}, cancellable = true)
+    private void spectrum$onLandedUpon(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo info) {
+        super.fallOn(world, state, pos, entity, fallDistance); // fall damage
+
+        // if carrying puff circlet: no trampling
+        if (entity instanceof LivingEntity livingEntity) {
+            if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.PUFF_CIRCLET)) {
+                info.cancel();
+            }
+        }
+    }
 }

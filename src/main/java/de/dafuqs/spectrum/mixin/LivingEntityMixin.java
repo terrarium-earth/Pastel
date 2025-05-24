@@ -45,8 +45,6 @@ import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
 import de.dafuqs.spectrum.status_effects.EffectProlongingStatusEffect;
 import de.dafuqs.spectrum.status_effects.SleepStatusEffect;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -75,7 +73,6 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -87,6 +84,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.Optional;
 
@@ -433,8 +431,7 @@ public abstract class LivingEntityMixin {
 		if (original <= 0 || thisEntity.isInvulnerableTo(thisEntity.damageSources().fall()) || AzureDikeProvider.getAzureDikeCharges(thisEntity) <= cost) return original;
 		
 		// check if this entity is protected by puff circlet
-		Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(thisEntity);
-		if (component.isEmpty() || component.get().getEquipped(SpectrumItems.PUFF_CIRCLET).isEmpty()) return original;
+		if (!SpectrumTrinketItem.hasEquipped(thisEntity, SpectrumItems.PUFF_CIRCLET)) return original;
 		
 		// do damage reduction
 		AzureDikeProvider.absorbDamage(thisEntity, cost);

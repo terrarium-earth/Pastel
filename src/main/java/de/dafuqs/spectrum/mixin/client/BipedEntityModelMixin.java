@@ -1,8 +1,7 @@
 package de.dafuqs.spectrum.mixin.client;
 
+import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,8 +11,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Optional;
 
 @Mixin(HumanoidModel.class)
 public class BipedEntityModelMixin {
@@ -33,8 +30,7 @@ public class BipedEntityModelMixin {
 
 	@Inject(method = {"setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V"}, at = @At("TAIL"), cancellable = true)
 	public void poseArms(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
-		Optional<TrinketComponent> trinketComponent = TrinketsApi.getTrinketComponent(livingEntity);
-		if (trinketComponent.isPresent() && trinketComponent.get().isEquipped(SpectrumItems.NEAT_RING)) {
+		if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.NEAT_RING)) {
 			this.rightLeg.xRot = 0;
 			this.rightLeg.yRot = 0;
 			this.leftLeg.xRot = 0;

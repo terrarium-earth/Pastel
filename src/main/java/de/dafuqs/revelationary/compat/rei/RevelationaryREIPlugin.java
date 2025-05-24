@@ -6,6 +6,7 @@ import me.shedaniel.rei.api.client.entry.filtering.base.BasicFilteringRule;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,8 +19,8 @@ public class RevelationaryREIPlugin implements REIClientPlugin {
 
     public RevelationaryREIPlugin() {
         if (!RevelationaryConfig.get().HideCloakedEntriesFromRecipeViewers) return;
-        CloakSetChanged.EVENT.register((added, removed, newStacks) -> {
-            hiddenStacks = newStacks;
+        NeoForge.EVENT_BUS.addListener(CloakSetChanged.class, (event) -> {
+            hiddenStacks = event.getNewCloaks();
             //noinspection UnstableApiUsage
             filteringRule.markDirty();
         });

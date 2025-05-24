@@ -2,23 +2,19 @@ package de.dafuqs.spectrum.mixin;
 
 import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
 import de.dafuqs.spectrum.items.trinkets.PuffCircletItem;
+import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
-import top.theillusivec4.curios.api.SlotContext;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -27,9 +23,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.List;
-import java.util.Optional;
 
 @Mixin(Projectile.class)
 public abstract class ProjectileEntityMixin {
@@ -53,15 +46,11 @@ public abstract class ProjectileEntityMixin {
 					if (reboundInstance != null && entity.level().getRandom().nextFloat() < SpectrumStatusEffects.PROJECTILE_REBOUND_CHANCE_PER_LEVEL * reboundInstance.getAmplifier()) {
 						protect = true;
 					} else {
-						Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(livingEntity);
-						if (component.isPresent()) {
-							List<Tuple<SlotContext, ItemStack>> equipped = component.get().getEquipped(SpectrumItems.PUFF_CIRCLET);
-							if (!equipped.isEmpty()) {
-								var charges = AzureDikeProvider.getAzureDikeCharges(livingEntity);
-								if (charges > 0) {
-									AzureDikeProvider.absorbDamage(livingEntity, PuffCircletItem.PROJECTILE_DEFLECTION_COST);
-									protect = true;
-								}
+						if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.PUFF_CIRCLET)) {
+							var charges = AzureDikeProvider.getAzureDikeCharges(livingEntity);
+							if (charges > 0) {
+								AzureDikeProvider.absorbDamage(livingEntity, PuffCircletItem.PROJECTILE_DEFLECTION_COST);
+								protect = true;
 							}
 						}
 					}
