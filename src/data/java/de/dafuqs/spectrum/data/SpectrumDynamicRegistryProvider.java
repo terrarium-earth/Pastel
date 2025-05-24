@@ -1,28 +1,18 @@
 package de.dafuqs.spectrum.data;
 
+import de.dafuqs.spectrum.registries.SpectrumEnchantments;
+import de.dafuqs.spectrum.registries.SpectrumPlacedFeatures;
 import de.dafuqs.spectrum.registries.SpectrumRegistryKeys;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.core.HolderLookup;
+import de.dafuqs.spectrum.registries.SpectrumResonanceProcessors;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-import java.util.concurrent.CompletableFuture;
-
-public class SpectrumDynamicRegistryProvider extends FabricDynamicRegistryProvider {
-	
-	public SpectrumDynamicRegistryProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-		super(output, registriesFuture);
+public class SpectrumDynamicRegistryProvider {
+	public static RegistrySetBuilder createRegistryBuilders() {
+		return new RegistrySetBuilder()
+				.add(Registries.ENCHANTMENT, registerable -> SpectrumEnchantments.provideEnchantments(new DatagenProxy.BootstrapContext<>(registerable)))
+				.add(SpectrumRegistryKeys.RESONANCE_PROCESSOR, registerable -> SpectrumResonanceProcessors.provideResonanceProcessors(new DatagenProxy.BootstrapContext<>(registerable)))
+				.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, registerable -> SpectrumPlacedFeatures.addBiomeModifications(new DatagenProxy.BootstrapContext<>(registerable)));
 	}
-	
-	@Override
-	protected void configure(HolderLookup.Provider wrapperLookup, Entries entries) {
-		entries.addAll(wrapperLookup.lookupOrThrow(Registries.ENCHANTMENT));
-		entries.addAll(wrapperLookup.lookupOrThrow(SpectrumRegistryKeys.RESONANCE_PROCESSOR));
-	}
-	
-	@Override
-	public String getName() {
-		return "Spectrum Registries";
-	}
-	
 }
