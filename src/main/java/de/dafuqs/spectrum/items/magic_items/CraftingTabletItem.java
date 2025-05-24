@@ -32,6 +32,8 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BannerPattern;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -96,8 +98,8 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
 	
 	public static boolean tryCraftRecipe(Player serverPlayerEntity, Recipe<?> recipe, Level world) {
 		NonNullList<Ingredient> ingredients = recipe.getIngredients();
-		
-		Container playerInventory = serverPlayerEntity.getInventory();
+
+		IItemHandlerModifiable playerInventory = new InvWrapper(serverPlayerEntity.getInventory());
 		boolean hasInInventory = InventoryHelper.hasInInventory(ingredients, playerInventory);
 		if (world.isClientSide) {
 			return hasInInventory;

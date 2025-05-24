@@ -14,7 +14,6 @@ import de.dafuqs.spectrum.registries.SpectrumDamageTypeTags;
 import de.dafuqs.spectrum.registries.SpectrumEnchantments;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumLootTables;
-import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.advancements.critereon.DamageSourcePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.EntitySubPredicates;
@@ -43,6 +42,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition;
 import net.minecraft.world.level.storage.loot.predicates.DamageSourceCondition;
@@ -50,6 +50,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -119,7 +120,7 @@ public class SpectrumLootPoolModifiers {
 		put(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("entities/vindicator")), new TreasureHunterDropDefinition(SpectrumSkullType.VINDICATOR, 0.02F));
 		put(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("entities/wandering_trader")), new TreasureHunterDropDefinition(SpectrumSkullType.WANDERING_TRADER, 0.02F));
 		put(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("entities/witch")), new TreasureHunterDropDefinition(SpectrumSkullType.WITCH, 0.02F));
-		put(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("entities/wither")), new TreasureHunterDropDefinition(SpectrumSkullType.WITHER, 0.15F)); // he has 3 heads, after all!
+		put(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("entities/adder")), new TreasureHunterDropDefinition(SpectrumSkullType.WITHER, 0.15F)); // he has 3 heads, after all!
 		put(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("entities/wolf")), new TreasureHunterDropDefinition(SpectrumSkullType.WOLF, 0.02F));
 		put(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("entities/zoglin")), new TreasureHunterDropDefinition(SpectrumSkullType.ZOGLIN, 0.02F));
 		put(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("entities/zombie_villager")), new TreasureHunterDropDefinition(SpectrumSkullType.ZOMBIE_VILLAGER, 0.02F));
@@ -147,110 +148,133 @@ public class SpectrumLootPoolModifiers {
 		put(ResourceKey.create(Registries.LOOT_TABLE, SpectrumCommon.locate("entities/preservation_turret")), new TreasureHunterDropDefinition(SpectrumSkullType.PRESERVATION_TURRET, 0.1F));
 		put(ResourceKey.create(Registries.LOOT_TABLE, SpectrumCommon.locate("entities/eraser")), new TreasureHunterDropDefinition(SpectrumSkullType.ERASER, 0.1F));
 	}};
-	
-	public static void setup() {
-		LootTableEvents.MODIFY.register((key, builder, lootTableSource, wrapperLookup) -> {
-			// Treasure hunter pools
-			
-			if (treasureHunterLootPools.containsKey(key)) {
-				Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
-				TreasureHunterDropDefinition dropDefinition = treasureHunterLootPools.get(key);
-				builder.pool(getLootPool(enchant, dropDefinition));
-				// Some treasure hunter pools use custom loot conditions
-				// because vanillas are too generic (fox/snow fox both use "fox" loot table)
-			} else if (key.equals(BuiltInLootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY) || key.equals(BuiltInLootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY)
-					|| key.equals(BuiltInLootTables.DESERT_PYRAMID_ARCHAEOLOGY) || key.equals(BuiltInLootTables.DESERT_WELL_ARCHAEOLOGY)) {
-				builder.modifyPools(modifier -> modifier.add(LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(2).setQuality(-1)));
-			} else if (key.equals(BuiltInLootTables.TRAIL_RUINS_ARCHAEOLOGY_RARE)) {
-				builder.modifyPools(modifier -> modifier.add(LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(3).setQuality(-1)));
-			} else if (key.equals(BuiltInLootTables.SNIFFER_DIGGING)) {
-				builder.modifyPools(modifier -> {
-					modifier.add(LootItem.lootTableItem(SpectrumBlocks.WEEPING_GALA_SPRIG).setWeight(1));
-					modifier.add(LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(2));
-				});
-			} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/fox")))) {
-				Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
-				builder.pool(getFoxLootPool(enchant, Fox.Type.RED, new TreasureHunterDropDefinition(SpectrumSkullType.FOX, 0.02F)));
-				builder.pool(getFoxLootPool(enchant, Fox.Type.SNOW, new TreasureHunterDropDefinition(SpectrumSkullType.FOX_ARCTIC, 0.02F)));
-			} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/mooshroom")))) {
-				Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
-				builder.pool(getMooshroomLootPool(enchant, MushroomCow.MushroomType.BROWN, new TreasureHunterDropDefinition(SpectrumSkullType.MOOSHROOM_BROWN, 0.02F)));
-				builder.pool(getMooshroomLootPool(enchant, MushroomCow.MushroomType.RED, new TreasureHunterDropDefinition(SpectrumSkullType.MOOSHROOM_RED, 0.02F)));
-			} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/shulker")))) {
-				Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
-				builder.pool(getShulkerLootPool(enchant, null, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.BLACK, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_BLACK, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_BLUE, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.BROWN, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_BROWN, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.CYAN, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_CYAN, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_GRAY, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.GREEN, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_GREEN, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.LIGHT_BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_LIGHT_BLUE, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.LIGHT_GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_LIGHT_GRAY, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.LIME, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_LIME, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.MAGENTA, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_MAGENTA, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.ORANGE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_ORANGE, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.PINK, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_PINK, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.PURPLE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_PURPLE, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.RED, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_RED, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.WHITE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_WHITE, 0.05F)));
-				builder.pool(getShulkerLootPool(enchant, DyeColor.YELLOW, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_YELLOW, 0.05F)));
-			} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, SpectrumCommon.locate("entities/lizard")))) {
-				Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
-				builder.pool(getLizardLootPool(enchant, InkColors.BLACK, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_BLACK, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_BLUE, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.BROWN, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_BROWN, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.CYAN, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_CYAN, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_GRAY, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.GREEN, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_GREEN, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.LIGHT_BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_LIGHT_BLUE, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.LIGHT_GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_LIGHT_GRAY, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.LIME, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_LIME, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.MAGENTA, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_MAGENTA, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.ORANGE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_ORANGE, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.PINK, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_PINK, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.PURPLE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_PURPLE, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.RED, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_RED, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.WHITE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_WHITE, 0.05F)));
-				builder.pool(getLizardLootPool(enchant, InkColors.YELLOW, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_YELLOW, 0.05F)));
-			} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/axolotl")))) {
-				Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
-				builder.pool(getAxolotlLootPool(enchant, Axolotl.Variant.BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_BLUE, 0.02F)));
-				builder.pool(getAxolotlLootPool(enchant, Axolotl.Variant.CYAN, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_CYAN, 0.02F)));
-				builder.pool(getAxolotlLootPool(enchant, Axolotl.Variant.GOLD, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_GOLD, 0.02F)));
-				builder.pool(getAxolotlLootPool(enchant, Axolotl.Variant.LUCY, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_LEUCISTIC, 0.02F)));
-				builder.pool(getAxolotlLootPool(enchant, Axolotl.Variant.WILD, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_WILD, 0.02F)));
-			} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/parrot")))) {
-				Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
-				builder.pool(getParrotLootPool(enchant, Parrot.Variant.RED_BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_RED, 0.02F)));
-				builder.pool(getParrotLootPool(enchant, Parrot.Variant.BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_BLUE, 0.02F)));
-				builder.pool(getParrotLootPool(enchant, Parrot.Variant.GREEN, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_GREEN, 0.02F)));
-				builder.pool(getParrotLootPool(enchant, Parrot.Variant.YELLOW_BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_CYAN, 0.02F)));
-				builder.pool(getParrotLootPool(enchant, Parrot.Variant.GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_GRAY, 0.02F)));
-			} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/frog")))) {
-				Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
-				builder.pool(getFrogLootPool(enchant, FrogVariant.TEMPERATE, new TreasureHunterDropDefinition(SpectrumSkullType.FROG_TEMPERATE, 0.02F)));
-				builder.pool(getFrogLootPool(enchant, FrogVariant.COLD, new TreasureHunterDropDefinition(SpectrumSkullType.FROG_COLD, 0.02F)));
-				builder.pool(getFrogLootPool(enchant, FrogVariant.WARM, new TreasureHunterDropDefinition(SpectrumSkullType.FROG_WARM, 0.02F)));
-			} else if (GoFishCompat.isLoaded()) {
-				//Go-Fish compat: fishing of crates & go-fish fishies
-				if (key.equals(SpectrumLootTables.LAVA_FISHING)) {
-					builder.modifyPools(modifier -> modifier.with(NestedLootTable.lootTableReference(GoFishCompat.NETHER_FISH_LOOT_TABLE_ID).setWeight(80).setQuality(-1).build()));
-					builder.modifyPools(modifier -> modifier.add(NestedLootTable.lootTableReference(GoFishCompat.NETHER_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build()))));
-				} else if (key.equals(SpectrumLootTables.END_FISHING)) {
-					builder.modifyPools(modifier -> modifier.with(NestedLootTable.lootTableReference(GoFishCompat.END_FISH_LOOT_TABLE_ID).setWeight(90).setQuality(-1).build()));
-					builder.modifyPools(modifier -> modifier.add(NestedLootTable.lootTableReference(GoFishCompat.END_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build()))));
-				} else if (key.equals(SpectrumLootTables.DEEPER_DOWN_FISHING)) {
-					builder.modifyPools(modifier -> modifier.add(NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build()))));
-				} else if (key.equals(SpectrumLootTables.GOO_FISHING)) {
-					builder.modifyPools(modifier -> modifier.add(NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build()))));
-				} else if (key.equals(SpectrumLootTables.LIQUID_CRYSTAL_FISHING)) {
-					builder.modifyPools(modifier -> modifier.add(NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build()))));
-				} else if (key.equals(SpectrumLootTables.MIDNIGHT_SOLUTION_FISHING)) {
-					builder.modifyPools(modifier -> modifier.add(NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build()))));
-				}
+
+	private static void addEntry(LootPool pool, LootPoolEntryContainer.Builder<?> entry) {
+		// TODO
+		pool.entries.add(entry.build());
+	}
+
+	// TODO Migrate to loot modifiers add AddTableLootModifier and custom LootModifiers
+	public static void loadLootTable(LootTableLoadEvent event) {
+		ResourceLocation key = event.getName();
+		LootTable table = event.getTable();
+		HolderLookup.Provider wrapperLookup = null;
+
+		// Treasure hunter pools
+		if (treasureHunterLootPools.containsKey(key)) {
+			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
+			TreasureHunterDropDefinition dropDefinition = treasureHunterLootPools.get(key);
+			table.addPool(getLootPool(enchant, dropDefinition));
+			// Some treasure hunter pools use custom loot conditions
+			// because vanillas are too generic (fox/snow fox both use "fox" loot table)
+		} else if (key.equals(BuiltInLootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY) || key.equals(BuiltInLootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY)
+				|| key.equals(BuiltInLootTables.DESERT_PYRAMID_ARCHAEOLOGY) || key.equals(BuiltInLootTables.DESERT_WELL_ARCHAEOLOGY)) {
+			for (LootPool pool : table.pools) {
+				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(2).setQuality(-1));
 			}
-		});
+		} else if (key.equals(BuiltInLootTables.TRAIL_RUINS_ARCHAEOLOGY_RARE)) {
+			for (LootPool pool : table.pools) {
+				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(3).setQuality(-1));
+			}
+		} else if (key.equals(BuiltInLootTables.SNIFFER_DIGGING)) {
+			for (LootPool pool : table.pools) {
+				addEntry(pool, LootItem.lootTableItem(SpectrumBlocks.WEEPING_GALA_SPRIG).setWeight(1));
+				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(2));
+			}
+		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/fox")))) {
+			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
+			table.addPool(getFoxLootPool(enchant, Fox.Type.RED, new TreasureHunterDropDefinition(SpectrumSkullType.FOX, 0.02F)));
+			table.addPool(getFoxLootPool(enchant, Fox.Type.SNOW, new TreasureHunterDropDefinition(SpectrumSkullType.FOX_ARCTIC, 0.02F)));
+		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/mooshroom")))) {
+			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
+			table.addPool(getMooshroomLootPool(enchant, MushroomCow.MushroomType.BROWN, new TreasureHunterDropDefinition(SpectrumSkullType.MOOSHROOM_BROWN, 0.02F)));
+			table.addPool(getMooshroomLootPool(enchant, MushroomCow.MushroomType.RED, new TreasureHunterDropDefinition(SpectrumSkullType.MOOSHROOM_RED, 0.02F)));
+		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/shulker")))) {
+			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
+			table.addPool(getShulkerLootPool(enchant, null, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.BLACK, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_BLACK, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_BLUE, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.BROWN, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_BROWN, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.CYAN, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_CYAN, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_GRAY, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.GREEN, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_GREEN, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.LIGHT_BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_LIGHT_BLUE, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.LIGHT_GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_LIGHT_GRAY, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.LIME, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_LIME, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.MAGENTA, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_MAGENTA, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.ORANGE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_ORANGE, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.PINK, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_PINK, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.PURPLE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_PURPLE, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.RED, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_RED, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.WHITE, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_WHITE, 0.05F)));
+			table.addPool(getShulkerLootPool(enchant, DyeColor.YELLOW, new TreasureHunterDropDefinition(SpectrumSkullType.SHULKER_YELLOW, 0.05F)));
+		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, SpectrumCommon.locate("entities/lizard")))) {
+			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
+			table.addPool(getLizardLootPool(enchant, InkColors.BLACK, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_BLACK, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_BLUE, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.BROWN, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_BROWN, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.CYAN, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_CYAN, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_GRAY, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.GREEN, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_GREEN, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.LIGHT_BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_LIGHT_BLUE, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.LIGHT_GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_LIGHT_GRAY, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.LIME, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_LIME, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.MAGENTA, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_MAGENTA, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.ORANGE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_ORANGE, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.PINK, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_PINK, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.PURPLE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_PURPLE, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.RED, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_RED, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.WHITE, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_WHITE, 0.05F)));
+			table.addPool(getLizardLootPool(enchant, InkColors.YELLOW, new TreasureHunterDropDefinition(SpectrumSkullType.LIZARD_YELLOW, 0.05F)));
+		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/axolotl")))) {
+			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
+			table.addPool(getAxolotlLootPool(enchant, Axolotl.Variant.BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_BLUE, 0.02F)));
+			table.addPool(getAxolotlLootPool(enchant, Axolotl.Variant.CYAN, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_CYAN, 0.02F)));
+			table.addPool(getAxolotlLootPool(enchant, Axolotl.Variant.GOLD, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_GOLD, 0.02F)));
+			table.addPool(getAxolotlLootPool(enchant, Axolotl.Variant.LUCY, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_LEUCISTIC, 0.02F)));
+			table.addPool(getAxolotlLootPool(enchant, Axolotl.Variant.WILD, new TreasureHunterDropDefinition(SpectrumSkullType.AXOLOTL_WILD, 0.02F)));
+		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/parrot")))) {
+			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
+			table.addPool(getParrotLootPool(enchant, Parrot.Variant.RED_BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_RED, 0.02F)));
+			table.addPool(getParrotLootPool(enchant, Parrot.Variant.BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_BLUE, 0.02F)));
+			table.addPool(getParrotLootPool(enchant, Parrot.Variant.GREEN, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_GREEN, 0.02F)));
+			table.addPool(getParrotLootPool(enchant, Parrot.Variant.YELLOW_BLUE, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_CYAN, 0.02F)));
+			table.addPool(getParrotLootPool(enchant, Parrot.Variant.GRAY, new TreasureHunterDropDefinition(SpectrumSkullType.PARROT_GRAY, 0.02F)));
+		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/frog")))) {
+			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);
+			table.addPool(getFrogLootPool(enchant, FrogVariant.TEMPERATE, new TreasureHunterDropDefinition(SpectrumSkullType.FROG_TEMPERATE, 0.02F)));
+			table.addPool(getFrogLootPool(enchant, FrogVariant.COLD, new TreasureHunterDropDefinition(SpectrumSkullType.FROG_COLD, 0.02F)));
+			table.addPool(getFrogLootPool(enchant, FrogVariant.WARM, new TreasureHunterDropDefinition(SpectrumSkullType.FROG_WARM, 0.02F)));
+		} else if (GoFishCompat.isLoaded()) {
+			//Go-Fish compat: fishing of crates & go-fish fishies
+			if (key.equals(SpectrumLootTables.LAVA_FISHING)) {
+				for (LootPool pool : table.pools) {
+					addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.NETHER_FISH_LOOT_TABLE_ID).setWeight(80).setQuality(-1));
+					addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.NETHER_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)))));
+				}
+			} else if (key.equals(SpectrumLootTables.END_FISHING)) {
+				for (LootPool pool : table.pools) {
+                    addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.END_FISH_LOOT_TABLE_ID).setWeight(90).setQuality(-1));
+                    addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.END_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build())));
+                }
+			} else if (key.equals(SpectrumLootTables.DEEPER_DOWN_FISHING)) {
+                for (LootPool pool : table.pools) {
+				    addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build())));
+				}
+			} else if (key.equals(SpectrumLootTables.GOO_FISHING)) {
+                for (LootPool pool : table.pools) {
+				    addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build())));
+				}
+			} else if (key.equals(SpectrumLootTables.LIQUID_CRYSTAL_FISHING)) {
+                for (LootPool pool : table.pools) {
+				    addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build())));
+				}
+			} else if (key.equals(SpectrumLootTables.MIDNIGHT_SOLUTION_FISHING)) {
+                for (LootPool pool : table.pools) {
+                    addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build())));
+                }
+			}
+		}
 	}
 	
 	private static Holder.Reference<Enchantment> getTreasureHunter(HolderLookup.Provider wrapperLookup) {
@@ -268,59 +292,59 @@ public class SpectrumLootPoolModifiers {
 	private static LootPool getLootPool(Holder.Reference<Enchantment> enchantment, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.setRolls(ConstantValue.exactly(1))
-				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
+                .when(treasureHunter(enchantment, dropDefinition.chancePerLevel))
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
-				.with(LootItem.lootTableItem(dropDefinition.drop).build())
+				.add(LootItem.lootTableItem(dropDefinition.drop))
 				.build();
 	}
 	
 	private static LootPool getFoxLootPool(Holder.Reference<Enchantment> enchantment, Fox.Type foxType, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.setRolls(ConstantValue.exactly(1))
-				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
-				.conditionally(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.FOX.createPredicate(foxType)).build()).build())
+				.when(treasureHunter(enchantment, dropDefinition.chancePerLevel))
+				.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.FOX.createPredicate(foxType)).build()))
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
-				.with(LootItem.lootTableItem(dropDefinition.drop).build())
+				.add(LootItem.lootTableItem(dropDefinition.drop))
 				.build();
 	}
 	
 	private static LootPool getMooshroomLootPool(Holder.Reference<Enchantment> enchantment, MushroomCow.MushroomType mooshroomType, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.setRolls(ConstantValue.exactly(1))
-				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
-				.conditionally(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.MOOSHROOM.createPredicate(mooshroomType)).build()).build())
+				.when(treasureHunter(enchantment, dropDefinition.chancePerLevel))
+				.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.MOOSHROOM.createPredicate(mooshroomType)).build()))
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
-				.with(LootItem.lootTableItem(dropDefinition.drop).build())
+				.add(LootItem.lootTableItem(dropDefinition.drop))
 				.build();
 	}
 	
 	private static LootPool getShulkerLootPool(Holder.Reference<Enchantment> enchantment, @Nullable DyeColor dyeColor, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.setRolls(ConstantValue.exactly(1))
-				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
-				.conditionally(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(new ShulkerPredicate(Optional.ofNullable(dyeColor))).build()).build())
+				.when(treasureHunter(enchantment, dropDefinition.chancePerLevel))
+				.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(new ShulkerPredicate(Optional.ofNullable(dyeColor))).build()))
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
-				.with(LootItem.lootTableItem(dropDefinition.drop).build())
+				.add(LootItem.lootTableItem(dropDefinition.drop))
 				.build();
 	}
 	
 	private static LootPool getLizardLootPool(Holder.Reference<Enchantment> enchantment, InkColor linkColor, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.setRolls(ConstantValue.exactly(1))
-				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
-				.conditionally(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(new LizardPredicate(Optional.of(linkColor), Optional.empty(), Optional.empty())).build()).build())
+				.when(treasureHunter(enchantment, dropDefinition.chancePerLevel))
+				.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(new LizardPredicate(Optional.of(linkColor), Optional.empty(), Optional.empty())).build()))
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
-				.with(LootItem.lootTableItem(dropDefinition.drop).build())
+				.add(LootItem.lootTableItem(dropDefinition.drop))
 				.build();
 	}
 	
 	private static LootPool getAxolotlLootPool(Holder.Reference<Enchantment> enchantment, Axolotl.Variant variant, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.setRolls(ConstantValue.exactly(1))
-				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
-				.conditionally(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.AXOLOTL.createPredicate(variant)).build()).build())
+				.when(treasureHunter(enchantment, dropDefinition.chancePerLevel))
+				.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.AXOLOTL.createPredicate(variant)).build()))
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
-				.with(LootItem.lootTableItem(dropDefinition.drop).build())
+				.add(LootItem.lootTableItem(dropDefinition.drop))
 				.build();
 	}
 	
@@ -329,20 +353,20 @@ public class SpectrumLootPoolModifiers {
 		
 		return new LootPool.Builder()
 				.setRolls(ConstantValue.exactly(1))
-				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
-				.conditionally(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.FROG.createPredicate(HolderSet.direct(entry))).build()).build())
+				.when(treasureHunter(enchantment, dropDefinition.chancePerLevel))
+				.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.FROG.createPredicate(HolderSet.direct(entry))).build()))
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
-				.with(LootItem.lootTableItem(dropDefinition.drop).build())
+				.add(LootItem.lootTableItem(dropDefinition.drop))
 				.build();
 	}
 	
 	private static LootPool getParrotLootPool(Holder.Reference<Enchantment> enchantment, Parrot.Variant variant, TreasureHunterDropDefinition dropDefinition) {
 		return new LootPool.Builder()
 				.setRolls(ConstantValue.exactly(1))
-				.conditionally(treasureHunter(enchantment, dropDefinition.chancePerLevel).build())
-				.conditionally(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.PARROT.createPredicate(variant)).build()).build())
+				.when(treasureHunter(enchantment, dropDefinition.chancePerLevel))
+				.when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().subPredicate(EntitySubPredicates.PARROT.createPredicate(variant)).build()))
 				.apply(GrantAdvancementLootFunction.builder(LootContext.EntityTarget.ATTACKING_PLAYER, List.of(SpectrumCommon.locate("mob_head"), dropDefinition.advancementUnlockId)))
-				.with(LootItem.lootTableItem(dropDefinition.drop).build())
+				.add(LootItem.lootTableItem(dropDefinition.drop))
 				.build();
 	}
 	

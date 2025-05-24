@@ -2,10 +2,22 @@ package de.dafuqs.spectrum.render;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.joml.Matrix4f;
 
+import java.util.Arrays;
+
 public class FluidRendering {
-	
+
+	public static Ingredient fluidBucketIngredient(FluidIngredient ingredient) {
+		FluidStack[] stacks = ingredient.getStacks();
+
+		// TODO Should probably not discard the rest of the stacks
+		return Ingredient.of(Arrays.stream(stacks).map(stack -> stack.getFluid().getBucket().getDefaultInstance()));
+	}
+
 	public static void renderFluid(VertexConsumer builder, Matrix4f pos, TextureAtlasSprite sprite, int light, int overlay, float x1, float x2, float y, float z1, float z2, int[] color) {
 		x1 /= 16;
 		x2 /= 16;

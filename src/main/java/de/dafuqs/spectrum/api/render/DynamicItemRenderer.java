@@ -29,8 +29,7 @@ public interface DynamicItemRenderer {
      * @param vertexConsumers the vertex consumer provider
      * @param light           packed lightmap coordinates
      * @param overlay         the overlay UV passed to {@link com.mojang.blaze3d.vertex.VertexConsumer#setOverlay(int)}
-     * @param model           the original model [use this to render the underlying item model]
      */
-    void render(ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay, BakedModel model);
+    void render(ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay);
     
 }

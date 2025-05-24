@@ -132,7 +132,7 @@ public class OmniAcceleratorItem extends BundleItem implements InkPowered, Exten
 		}
 		
 		@Override
-		public void render(ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay, BakedModel model) {
+		public void render(ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
 			Minecraft client = Minecraft.getInstance();
 			if (mode != ItemDisplayContext.GUI || client.level == null) return;
 

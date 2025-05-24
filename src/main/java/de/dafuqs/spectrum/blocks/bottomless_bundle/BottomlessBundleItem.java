@@ -340,8 +340,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		
 		@Override
 		public void render(ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded,
-						   PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay,
-						   BakedModel model) {
+						   PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
 			if (mode != ItemDisplayContext.GUI
 					|| getStoredAmount(stack) <= 0)
 				return;

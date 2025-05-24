@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.registries.SpectrumRegistries;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -65,7 +66,7 @@ public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreen
 	@SuppressWarnings("DataFlowIssue")
 	protected static void chooseColor(@Nullable InkColor inkColor) {
 		var entry = inkColor == null ? null : SpectrumRegistries.INK_COLOR.wrapAsHolder(inkColor);
-		ClientPlayNetworking.send(new InkColorSelectedC2SPayload(Optional.ofNullable(entry)));
+		PacketDistributor.sendToServer(new InkColorSelectedC2SPayload(Optional.ofNullable(entry)));
 		Minecraft client = Minecraft.getInstance();
 		client.level.playSound(null, client.player.blockPosition(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundSource.NEUTRAL, 0.6F, 1.0F);
 		client.player.closeContainer();

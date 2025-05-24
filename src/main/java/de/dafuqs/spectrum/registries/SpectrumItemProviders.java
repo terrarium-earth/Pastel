@@ -38,7 +38,7 @@ public class SpectrumItemProviders {
 			@Override
 			public int getItemCount(Player player, ItemStack stack, Item requestedItem) {
 				var bottomlessStack = stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessBundleItem.BottomlessStack.DEFAULT);
-				if (!bottomlessStack.variant().isOf(requestedItem))
+				if (!bottomlessStack.variant().is(requestedItem))
 					return 0;
 				return (int) Math.min(Integer.MAX_VALUE, bottomlessStack.count());
 			}

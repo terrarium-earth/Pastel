@@ -37,7 +37,7 @@ public enum AutoCraftingMode {
 	}
 	
 	public CraftingInput.Positioned createRecipeInput(ItemStack variant) {
-		ItemStack stack = variant.toStack();
+		ItemStack stack = variant;
 		List<ItemStack> inputs = new ArrayList<>(getSize());
 		for (int i = 0; i < getSize(); i++) {
 			inputs.add(stack);

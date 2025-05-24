@@ -1,0 +1,4 @@
+accessWidener	v2	named
+
+# TODO These are access wideners that *definitely* should not stay
+accessible field net/minecraft/world/level/storage/loot/LootPool entries Ljava/util/List;

@@ -10,9 +10,6 @@ accessible	class	net/minecraft/resources/RegistryOps$HolderLookupAdapter
 accessible	class	net/minecraft/world/level/biome/Biome$ClimateSettings
 accessible	class	net/minecraft/world/level/LocalMobCapCalculator$MobCounts
 accessible	class	net/minecraft/client/gui/MapRenderer$MapInstance
-accessible	method	net/minecraft/client/particle/DripParticle$DripHangParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
-accessible	method	net/minecraft/client/particle/DripParticle$FallAndLandParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
-accessible	method	net/minecraft/client/particle/DripParticle$DripLandParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;)V
 accessible	method	net/minecraft/client/particle/VibrationSignalParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/gameevent/PositionSource;I)V
 accessible	method	net/minecraft/world/level/block/LiquidBlock	getFluidState	(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/material/FluidState;
 accessible	method	net/minecraft/client/renderer/entity/ItemFrameRenderer	getLightVal	(Lnet/minecraft/world/entity/decoration/ItemFrame;II)I
@@ -35,10 +32,24 @@ accessible	field	net/minecraft/world/level/block/LiquidBlock	fluid	Lnet/minecraf
 accessible	field	net/minecraft/data/models/BlockModelGenerators$BlockFamilyProvider	fullBlock	Lnet/minecraft/resources/ResourceLocation;
 accessible	field	net/minecraft/world/level/storage/loot/parameters/LootContextParamSets	REGISTRY	Lcom/google/common/collect/BiMap;
 mutable	field	net/minecraft/world/level/saveddata/maps/MapItemSavedData	dimension	Lnet/minecraft/resources/ResourceKey;
-accessible	method	net/minecraft/client/particle/DripParticle$FallingParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;I)V
-accessible	method	net/minecraft/client/particle/DripParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;)V
 accessible	field	net/minecraft/client/particle/Particle	gravity	F
 accessible	method	net/minecraft/client/particle/SuspendedParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/client/particle/SpriteSet;DDDDDD)V
+
+accessible method net/minecraft/world/entity/LivingEntity hurtCurrentlyUsedShield (F)V
+
+accessible method net/minecraft/world/entity/LivingEntity hurtArmor (Lnet/minecraft/world/damagesource/DamageSource;F)V
+
+accessible method net/minecraft/data/models/model/TextureSlot create (Ljava/lang/String;)Lnet/minecraft/data/models/model/TextureSlot;
+
+accessible	method	net/minecraft/client/particle/DripParticle$DripHangParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
+accessible	method	net/minecraft/client/particle/DripParticle$FallAndLandParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;Lnet/minecraft/core/particles/ParticleOptions;)V
+accessible	method	net/minecraft/client/particle/DripParticle$DripLandParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;)V
+accessible	method	net/minecraft/client/particle/DripParticle$FallingParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;I)V
+accessible	method	net/minecraft/client/particle/DripParticle	<init>	(Lnet/minecraft/client/multiplayer/ClientLevel;DDDLnet/minecraft/world/level/material/Fluid;)V
+accessible class net/minecraft/client/particle/DripParticle$DripLandParticle
+accessible class net/minecraft/client/particle/DripParticle$FallAndLandParticle
+accessible class net/minecraft/client/particle/DripParticle$DripHangParticle
+accessible class net/minecraft/client/particle/DripParticle$FallingParticle
 
 # TODO The following are not needed, and should probably be removed eventually
 accessible method net/minecraft/world/level/block/Blocks litBlockEmission (I)Ljava/util/function/ToIntFunction;

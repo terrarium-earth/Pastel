@@ -49,7 +49,7 @@ public record PlayParticleWithRandomOffsetAndVelocityPayload(Vec3 pos, ParticleO
 	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayParticleWithRandomOffsetAndVelocityPayload payload, IPayloadContext context) {
 		var level = context.player().level();
-		RandomSource random = world.getRandom();
+		RandomSource random = level.getRandom();
 		
 		Vec3 pos = payload.pos;
 		Vec3 randomOffset = payload.randomOffset;
@@ -62,8 +62,8 @@ public record PlayParticleWithRandomOffsetAndVelocityPayload(Vec3 pos, ParticleO
 			double randomVelocityX = randomVelocity.x - random.nextDouble() * randomVelocity.x * 2;
 			double randomVelocityY = randomVelocity.y - random.nextDouble() * randomVelocity.y * 2;
 			double randomVelocityZ = randomVelocity.z - random.nextDouble() * randomVelocity.z * 2;
-			
-			world.addParticle(payload.effect,
+
+			level.addParticle(payload.effect,
 					pos.x() + randomOffsetX, pos.y() + randomOffsetY, pos.z() + randomOffsetZ,
 					randomVelocityX, randomVelocityY, randomVelocityZ);
 		}

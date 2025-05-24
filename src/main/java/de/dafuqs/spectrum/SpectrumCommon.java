@@ -190,7 +190,7 @@ public class SpectrumCommon {
 		logInfo("Registering Default Item Stack Damage Immunities...");
 		SpectrumItemDamageImmunities.registerDefaultItemStackImmunities();
 		logInfo("Registering Enchantment Drops...");
-		SpectrumLootPoolModifiers.setup();
+		NeoForge.EVENT_BUS.addListener(SpectrumLootPoolModifiers::loadLootTable);
 		logInfo("Registering Variant Specific Predicates...");
 		SpectrumItemSubPredicateTypes.register();
 		SpectrumEntitySubPredicateTypes.register();
@@ -200,7 +200,7 @@ public class SpectrumCommon {
 		
 		logInfo("Registering Entities...");
 		SpectrumTrackedDataHandlerRegistry.register();
-		SpectrumEntityTypes.register();
+		NeoForge.EVENT_BUS.addListener(SpectrumEntityTypes::registerAttributes);
 		
 		logInfo("Registering Omni Accelerator Projectiles & Behaviors...");
 		SpectrumOmniAcceleratorProjectiles.register();
@@ -256,9 +256,7 @@ public class SpectrumCommon {
 		// Builtin Resource Packs
 		logInfo("Registering Builtin Resource Packs...");
 
-		if (modContainer.isPresent()) {
-			ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_style_amethyst"), modContainer.get(), Component.nullToEmpty("Spectrum Style Amethyst"), ResourcePackActivationType.NORMAL);
-		}
+		ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_style_amethyst"), modContainer.get(), Component.nullToEmpty("Spectrum Style Amethyst"), ResourcePackActivationType.NORMAL);
 
 		logInfo("Common startup completed!");
 	}

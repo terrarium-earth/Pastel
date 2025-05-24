@@ -8,7 +8,7 @@ import com.klikli_dev.modonomicon.client.render.page.BookTextPageRenderer;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import de.dafuqs.spectrum.compat.modonomicon.pages.BookConfirmationButtonPage;
 import de.dafuqs.spectrum.networking.c2s_payloads.GuidebookConfirmationButtonPressedPayload;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.minecraft.client.gui.components.Button;
 
 public class BookConfirmationButtonPageRenderer extends BookTextPageRenderer {
@@ -44,7 +44,7 @@ public class BookConfirmationButtonPageRenderer extends BookTextPageRenderer {
 
     protected void confirmationButtonClicked(Button button) {
         if (!(page instanceof BookConfirmationButtonPage confirmationPage)) return;
-        ClientPlayNetworking.send(new GuidebookConfirmationButtonPressedPayload(confirmationPage.getConfirmationString()));
+        PacketDistributor.sendToServer(new GuidebookConfirmationButtonPressedPayload(confirmationPage.getConfirmationString()));
         button.setMessage(confirmationPage.getConfirmedButtonText().getComponent());
         BookGuiManager.get().openEntry(page.getBook().getId(), page.getParentEntry().getId(), page.getPageNumber());
     }

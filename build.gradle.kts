@@ -76,6 +76,7 @@ cloche {
             accessWideners.from(
                 "src/main/spectrum.accessWidener",
                 "src/main/spectrum.data.accessWidener",
+                "src/main/spectrum.todo.accessWidener",
             )
 
             mixins.from("src/main/mixins/spectrum.mixins.json")
@@ -125,8 +126,6 @@ cloche {
                 modCompileOnly("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
                 modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
                 modCompileOnly("maven.modrinth:vanity:xWfEA0yC")
-
-
             }
 
             dependencies {

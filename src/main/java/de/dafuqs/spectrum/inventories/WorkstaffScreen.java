@@ -9,6 +9,7 @@ import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -78,7 +79,7 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 	}
 
 	protected static void select(WorkstaffItem.GUIToggle toggle) {
-		ClientPlayNetworking.send(new WorkstaffToggleSelectedPayload(toggle.ordinal()));
+		PacketDistributor.sendToServer(new WorkstaffToggleSelectedPayload(toggle.ordinal()));
 		Minecraft client = Minecraft.getInstance();
 		client.level.playSound(null, client.player.blockPosition(), SpectrumSoundEvents.PAINTBRUSH_SELECT, SoundSource.NEUTRAL, 0.6F, 1.0F);
 		client.player.closeContainer();

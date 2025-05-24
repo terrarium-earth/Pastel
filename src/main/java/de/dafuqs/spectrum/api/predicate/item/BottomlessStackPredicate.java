@@ -24,7 +24,7 @@ public record BottomlessStackPredicate(ItemPredicate template, LongRange count) 
 	
 	@Override
 	public boolean matches(ItemStack stack, BottomlessBundleItem.BottomlessStack component) {
-		return template.test(component.variant().toStack()) && count.test(component.count());
+		return template.test(component.variant()) && count.test(component.count());
 	}
 	
 }

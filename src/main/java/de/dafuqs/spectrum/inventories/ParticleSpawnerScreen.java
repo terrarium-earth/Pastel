@@ -8,6 +8,7 @@ import de.dafuqs.spectrum.data_loaders.ParticleSpawnerParticlesDataLoader;
 import de.dafuqs.spectrum.networking.c2s_payloads.ParticleSpawnerConfigurationC2SPayload;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.fabricmc.fabric.mixin.client.particle.ParticleManagerAccessor;
 import net.minecraft.ChatFormatting;
@@ -471,7 +472,7 @@ public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawn
 					collisionsEnabled
 			);
 			
-			ClientPlayNetworking.send(new ParticleSpawnerConfigurationC2SPayload(configuration));
+			PacketDistributor.sendToServer(new ParticleSpawnerConfigurationC2SPayload(configuration));
 		} catch (Exception e) {
 			// the text boxes currently are not able to be parsed yet.
 			// wait until everything is set up

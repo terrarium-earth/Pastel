@@ -39,6 +39,7 @@ import net.minecraft.world.level.gameevent.GameEventListener;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -123,7 +124,7 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
 				ItemStack compensatedStack = drop.compensatedStack().copy();
 				compensatedStack.setCount(compensatedItemCount);
 				
-				ItemStack remainingStack = InventoryHelper.smartAddToInventory(compensatedStack, blockEntity, null);
+				ItemStack remainingStack = InventoryHelper.smartAddToInventory(compensatedStack, new InvWrapper(blockEntity), null);
 				if (!remainingStack.isEmpty()) {
 					break; // overflow will be voided
 				}
@@ -242,7 +243,7 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
 							SpectrumAdvancementCriteria.CRYSTAL_APOTHECARY_COLLECTING.trigger(serverPlayerEntity, drop);
 						}
 					}
-					ItemStack remainingStack = InventoryHelper.smartAddToInventory(drop, this, null);
+					ItemStack remainingStack = InventoryHelper.smartAddToInventory(drop, new InvWrapper(this), null);
 					if (remainingStack.isEmpty() || drop.getCount() != remainingStack.getCount()) {
 						anyDropsUsed = true;
 					}

@@ -63,7 +63,7 @@ public abstract class ItemRendererMixin {
 		// if model is a dynamic one, render with that
 		if (renderer != null) {
 			// unwrap the model here so that the custom renderer doesn't have to do it
-			renderer.render((ItemRenderer) (Object) this, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay, dm.getWrappedModel());
+			renderer.render((ItemRenderer) (Object) this, stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay);
 		}
 	}
 

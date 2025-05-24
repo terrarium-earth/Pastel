@@ -34,7 +34,7 @@ import java.util.Map;
 public class SpectrumItemGroups {
 
 
-	public static final CreativeModeTab MAIN = FabricItemGroup.builder()
+	public static final CreativeModeTab MAIN = CreativeModeTab.builder()
 			.icon(() -> new ItemStack(SpectrumBlocks.PEDESTAL_ALL_BASIC))
 			.displayItems((displayContext, entries) -> {
 				entries.accept(SpectrumBlocks.PEDESTAL_ALL_BASIC, CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);

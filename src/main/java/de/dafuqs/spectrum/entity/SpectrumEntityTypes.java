@@ -29,7 +29,6 @@ import de.dafuqs.spectrum.entity.entity.PhantomGlowFrameEntity;
 import de.dafuqs.spectrum.entity.entity.PreservationTurretEntity;
 import de.dafuqs.spectrum.entity.entity.SeatEntity;
 import de.dafuqs.spectrum.entity.entity.ShootingStarEntity;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
@@ -38,6 +37,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 public class SpectrumEntityTypes {
 	
@@ -70,12 +70,12 @@ public class SpectrumEntityTypes {
 	public static final EntityType<DragonTalonEntity> DRAGON_TALON = register("dragon_talon", 4, 10, true, EntityDimensions.scalable(0.5F, 0.5F), true, DragonTalonEntity::new);
 	public static final EntityType<DraconicTwinswordEntity> DRACONIC_TWINSWORD = register("draconic_twinsword", 6, 2, true, EntityDimensions.scalable(0.5F, 0.5F), true, DraconicTwinswordEntity::new);
 	
-	public static void register() {
-		FabricDefaultAttributeRegistry.register(EGG_LAYING_WOOLY_PIG, EggLayingWoolyPigEntity.createEggLayingWoolyPigAttributes());
-		FabricDefaultAttributeRegistry.register(PRESERVATION_TURRET, PreservationTurretEntity.createGuardianTurretAttributes());
-		FabricDefaultAttributeRegistry.register(LIZARD, LizardEntity.createLizardAttributes());
-		FabricDefaultAttributeRegistry.register(KINDLING, KindlingEntity.createKindlingAttributes());
-		FabricDefaultAttributeRegistry.register(ERASER, EraserEntity.createEraserAttributes());
+	public static void registerAttributes(EntityAttributeCreationEvent event) {
+		event.put(EGG_LAYING_WOOLY_PIG, EggLayingWoolyPigEntity.createEggLayingWoolyPigAttributes().build());
+		event.put(PRESERVATION_TURRET, PreservationTurretEntity.createGuardianTurretAttributes().build());
+		event.put(LIZARD, LizardEntity.createLizardAttributes().build());
+		event.put(KINDLING, KindlingEntity.createKindlingAttributes().build());
+		event.put(ERASER, EraserEntity.createEraserAttributes().build());
 	}
 	
 	// TODO: migrate to FabricEntityTypeBuilder, so the "No data fixer registered for xxxx" errors go away
@@ -84,7 +84,7 @@ public class SpectrumEntityTypes {
 		if (fireImmune) {
 			builder.fireImmune();
 		}
-		return Registry.register(BuiltInRegistries.ENTITY_TYPE, SpectrumCommon.locate(name), builder.build());
+		return Registry.register(BuiltInRegistries.ENTITY_TYPE, SpectrumCommon.locate(name), builder.build(null));
 	}
 	
 	private static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> type) {

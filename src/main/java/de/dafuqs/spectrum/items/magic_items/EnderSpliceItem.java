@@ -12,6 +12,7 @@ import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.sound.EnderSpliceChargingSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
@@ -130,7 +131,7 @@ public class EnderSpliceItem extends Item {
 		Minecraft client = Minecraft.getInstance();
 		HitResult hitResult = client.hitResult;
 		if (hitResult != null && hitResult.getType() == HitResult.Type.ENTITY && ((EntityHitResult) hitResult).getEntity() instanceof Player playerEntity) {
-			ClientPlayNetworking.send(new BindEnderSpliceToPlayerPayload(playerEntity.getId()));
+			PacketDistributor.sendToServer(new BindEnderSpliceToPlayerPayload(playerEntity.getId()));
 		}
 	}
 	

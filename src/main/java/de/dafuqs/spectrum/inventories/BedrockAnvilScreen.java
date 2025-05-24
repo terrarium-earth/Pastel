@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.networking.c2s_payloads.AddLoreBedrockAnvilPayload;
 import de.dafuqs.spectrum.networking.c2s_payloads.RenameItemInBedrockAnvilPayload;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -107,7 +108,7 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
 			}
 			
 			if ((this.menu).setNewItemName(string)) {
-				ClientPlayNetworking.send(new RenameItemInBedrockAnvilPayload(name));
+				PacketDistributor.sendToServer(new RenameItemInBedrockAnvilPayload(name));
 			}
 		}
 	}
@@ -121,7 +122,7 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
 			}
 			
 			if (this.menu.setNewItemLore(string)) {
-				ClientPlayNetworking.send(new AddLoreBedrockAnvilPayload(lore));
+				PacketDistributor.sendToServer(new AddLoreBedrockAnvilPayload(lore));
 			}
 		}
 	}

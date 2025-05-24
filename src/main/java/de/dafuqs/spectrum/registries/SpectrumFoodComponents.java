@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.registries;
 
+import de.dafuqs.spectrum.injectors.FoodComponentBuilderInjector;
 import de.dafuqs.spectrum.status_effects.AscensionStatusEffect;
 import de.dafuqs.spectrum.status_effects.DivinityStatusEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -42,14 +43,14 @@ public class SpectrumFoodComponents {
 			.effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 0), 0.1F)
 			.build();
 
-	public static final FoodProperties NIGHTDEW_SPROUT = new FoodProperties.Builder()
-			.nutrition(1).saturationModifier(SAT_POOR).spectrum$setEatSeconds(TIME_FEAST).alwaysEdible()
+	public static final FoodProperties NIGHTDEW_SPROUT = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+			.nutrition(1).saturationModifier(SAT_POOR)).spectrum$setEatSeconds(TIME_FEAST).alwaysEdible()
 			.effect(new MobEffectInstance(SpectrumStatusEffects.CALMING, 200, 0), 0.5F)
 			.effect(new MobEffectInstance(SpectrumStatusEffects.SOMNOLENCE, 200, 0), 0.5F)
 			.build();
 
-	public static final FoodProperties NECTARDEW_BURGEON = new FoodProperties.Builder()
-			.nutrition(1).saturationModifier(SAT_POOR).spectrum$setEatSeconds(TIME_FEAST).alwaysEdible()
+	public static final FoodProperties NECTARDEW_BURGEON = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+			.nutrition(1).saturationModifier(SAT_POOR)).spectrum$setEatSeconds(TIME_FEAST).alwaysEdible()
 			.effect(new MobEffectInstance(SpectrumStatusEffects.ETERNAL_SLUMBER, 6000), 0.95F)
 			.effect(new MobEffectInstance(SpectrumStatusEffects.FATAL_SLUMBER, 100), 0.05F)
 			.build();
@@ -81,8 +82,8 @@ public class SpectrumFoodComponents {
 			.effect(new MobEffectInstance(SpectrumStatusEffects.ANOTHER_ROLL, 1200), 1.0F)
 			.build();
 	
-	public static final FoodProperties TRIPLE_MEAT_POT_PIE = new FoodProperties.Builder()
-			.nutrition(20).saturationModifier(SAT_NORMAL).spectrum$setEatSeconds(TIME_FEAST)
+	public static final FoodProperties TRIPLE_MEAT_POT_PIE = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+			.nutrition(20).saturationModifier(SAT_NORMAL)).spectrum$setEatSeconds(TIME_FEAST)
 			.effect(new MobEffectInstance(MobEffects.REGENERATION, 100), 1.0F)
 			.effect(new MobEffectInstance(SpectrumStatusEffects.NOURISHING, 12000, 1), 1.0F)
 			.build();
@@ -286,9 +287,9 @@ public class SpectrumFoodComponents {
 			.nutrition(1).saturationModifier(SAT_POOR)
 			.effect(new MobEffectInstance(MobEffects.HARM, 0, 0), 0.6F)
 			.build();
-	
-	public static final FoodProperties TRIPLE_MEAT_POT_STEW = new FoodProperties.Builder()
-			.nutrition(20).saturationModifier(SAT_NORMAL).spectrum$setEatSeconds(TIME_FEAST)
+
+	public static final FoodProperties TRIPLE_MEAT_POT_STEW = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+			.nutrition(20).saturationModifier(SAT_NORMAL)).spectrum$setEatSeconds(TIME_FEAST)
 			.effect(new MobEffectInstance(MobEffects.REGENERATION, 100), 1.0F)
 			.effect(new MobEffectInstance(SpectrumStatusEffects.NOURISHING, 12000, 1), 1.0F)
 			.build();
@@ -317,8 +318,8 @@ public class SpectrumFoodComponents {
 			.effect(new MobEffectInstance(SpectrumStatusEffects.NOURISHING, 2400), 1.0F)
 			.build();
 
-	public static final FoodProperties CHAUVE_SOURIS_AU_VIN = new FoodProperties.Builder()
-			.nutrition(20).saturationModifier(SAT_GOOD).spectrum$setEatSeconds(TIME_FEAST)
+	public static final FoodProperties CHAUVE_SOURIS_AU_VIN = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+			.nutrition(20).saturationModifier(SAT_GOOD)).spectrum$setEatSeconds(TIME_FEAST)
 			.effect(new MobEffectInstance(SpectrumStatusEffects.EFFECT_PROLONGING, 6000, 0), 1.0F)
 			.build();
 
@@ -366,8 +367,8 @@ public class SpectrumFoodComponents {
 			.effect(new MobEffectInstance(SpectrumStatusEffects.MAGIC_ANNULATION, 1200, 1), 1.0F)
 			.build();
 
-	public static final FoodProperties HARE_ROAST = new FoodProperties.Builder()
-			.nutrition(12).saturationModifier(SAT_GOOD).spectrum$setEatSeconds(TIME_HEARTY)
+	public static final FoodProperties HARE_ROAST = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+			.nutrition(12).saturationModifier(SAT_GOOD)).spectrum$setEatSeconds(TIME_HEARTY)
 			.effect(new MobEffectInstance(SpectrumStatusEffects.NOURISHING, 1200, 1), 1.0F)
 			.effect(new MobEffectInstance(MobEffects.REGENERATION, 1200), 1)
 			.build();
@@ -407,8 +408,8 @@ public class SpectrumFoodComponents {
 			.nutrition(2).saturationModifier(SAT_LOW)
 			.build();
 
-	public static final FoodProperties PEACHES_FLAMBE = new FoodProperties.Builder()
-			.nutrition(14).saturationModifier(SAT_GOOD).spectrum$setEatSeconds(TIME_HEARTY)
+	public static final FoodProperties PEACHES_FLAMBE = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+			.nutrition(14).saturationModifier(SAT_GOOD)).spectrum$setEatSeconds(TIME_HEARTY)
 			.effect(new MobEffectInstance(SpectrumStatusEffects.TOUGHNESS, 3000, 5), 1.0F)
 			.build();
 
@@ -434,8 +435,8 @@ public class SpectrumFoodComponents {
 			.effect(new MobEffectInstance(MobEffects.HEAL, 1, 1), 1.0F)
 			.build();
 
-	public static final FoodProperties SEDATIVES = new FoodProperties.Builder()
-			.nutrition(2).saturationModifier(SAT_POOR).spectrum$setEatSeconds(TIME_HEARTY)
+	public static final FoodProperties SEDATIVES = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
+			.nutrition(2).saturationModifier(SAT_POOR)).spectrum$setEatSeconds(TIME_HEARTY)
 			.effect(new MobEffectInstance(SpectrumStatusEffects.STIFFNESS, 300, 4), 1.0F)
 			.build();
 

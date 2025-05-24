@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.compat.modonomicon.client.pages;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.render.FluidRendering;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
@@ -49,7 +50,7 @@ public class BookFusionShrineCraftingPageRenderer extends BookGatedRecipePageRen
         }
         
         if (!recipe.getFluid().isEmpty()) {
-            @NotNull Ingredient fluidIngredient = recipe.getFluid().into();
+            @NotNull Ingredient fluidIngredient = FluidRendering.fluidBucketIngredient(recipe.getFluid());
             parentScreen.renderItemStack(drawContext, recipeX + 14, recipeY + 31, mouseX, mouseY, recipe.getToastSymbol()); // the shrine
             parentScreen.renderIngredient(drawContext, recipeX + 30, recipeY + 31, mouseX, mouseY, fluidIngredient); // the fluid
         } else {

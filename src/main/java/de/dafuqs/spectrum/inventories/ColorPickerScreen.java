@@ -8,6 +8,7 @@ import de.dafuqs.spectrum.inventories.widgets.ColorSelectionWidget;
 import de.dafuqs.spectrum.inventories.widgets.InkGaugeWidget;
 import de.dafuqs.spectrum.inventories.widgets.StackedInkMeterWidget;
 import de.dafuqs.spectrum.networking.c2s_payloads.InkColorSelectedC2SPayload;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -98,7 +99,7 @@ public class ColorPickerScreen extends AbstractContainerScreen<ColorPickerScreen
 	public void accept(Optional<Holder<InkColor>> inkColor) {
 		ColorPickerBlockEntity colorPicker = this.menu.getBlockEntity();
 		colorPicker.setSelectedColor(inkColor);
-		ClientPlayNetworking.send(new InkColorSelectedC2SPayload(inkColor));
+		PacketDistributor.sendToServer(new InkColorSelectedC2SPayload(inkColor));
 	}
 	
 }

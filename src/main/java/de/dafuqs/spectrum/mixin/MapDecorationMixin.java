@@ -19,10 +19,10 @@ import java.util.function.Function;
 
 @Mixin(MapDecoration.class)
 public class MapDecorationMixin implements MapDecorationInjector {
-	
+
 	@Unique
 	private byte scale = 0;
-	
+
 	@WrapOperation(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/codec/StreamCodec;composite(Lnet/minecraft/network/codec/StreamCodec;Ljava/util/function/Function;Lnet/minecraft/network/codec/StreamCodec;Ljava/util/function/Function;Lnet/minecraft/network/codec/StreamCodec;Ljava/util/function/Function;Lnet/minecraft/network/codec/StreamCodec;Ljava/util/function/Function;Lnet/minecraft/network/codec/StreamCodec;Ljava/util/function/Function;Lcom/mojang/datafixers/util/Function5;)Lnet/minecraft/network/codec/StreamCodec;"))
 	private static StreamCodec<RegistryFriendlyByteBuf, MapDecoration> wrapCodec(
 			StreamCodec<? super RegistryFriendlyByteBuf, Holder<MapDecorationType>> codec1, Function<MapDecoration, Holder<MapDecorationType>> from1,
@@ -38,26 +38,26 @@ public class MapDecorationMixin implements MapDecorationInjector {
 			@Override
 			public void encode(RegistryFriendlyByteBuf buf, MapDecoration value) {
 				codec.encode(buf, value);
-				buf.writeByte(value.spectrum$getScale());
+				buf.writeByte(((MapDecorationInjector) (Object) value).spectrum$getScale());
 			}
-			
+
 			@Override
 			public MapDecoration decode(RegistryFriendlyByteBuf buf) {
 				MapDecoration decoration = codec.decode(buf);
-				decoration.spectrum$setScale(buf.readByte());
+				((MapDecorationInjector) (Object) decoration).spectrum$setScale(buf.readByte());
 				return decoration;
 			}
 		};
 	}
-	
+
 	@Override
 	public void spectrum$setScale(byte scale) {
 		this.scale = scale;
 	}
-	
+
 	@Override
 	public byte spectrum$getScale() {
 		return this.scale;
 	}
-	
+
 }

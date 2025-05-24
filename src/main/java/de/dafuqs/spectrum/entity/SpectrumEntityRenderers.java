@@ -19,9 +19,9 @@ import de.dafuqs.spectrum.entity.render.PhantomFrameEntityRenderer;
 import de.dafuqs.spectrum.entity.render.PreservationTurretEntityRenderer;
 import de.dafuqs.spectrum.entity.render.SeatEntityRenderer;
 import de.dafuqs.spectrum.entity.render.ShootingStarEntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -62,7 +62,7 @@ public class SpectrumEntityRenderers {
 	}
 	
 	private static <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> factory) {
-		EntityRendererRegistry.register(type, factory);
+		EntityRenderers.register(type, factory);
 	}
 	
 }

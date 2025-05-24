@@ -33,12 +33,11 @@ public record PlayShootingStarParticlesPayload(Vec3 shootingStarPos, ShootingSta
 		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) shootingStarEntity.level(), new ChunkPos(shootingStarEntity.blockPosition()), new PlayShootingStarParticlesPayload(shootingStarEntity.position(), shootingStarEntity.getShootingStarType()));
 	}
 	
-	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayShootingStarParticlesPayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		
-		ShootingStarEntity.playHitParticles(world, payload.shootingStarPos.x, payload.shootingStarPos.y, payload.shootingStarPos.z, payload.variant, 25);
+		ShootingStarEntity.playHitParticles(level, payload.shootingStarPos.x, payload.shootingStarPos.y, payload.shootingStarPos.z, payload.variant, 25);
 	}
 	
 	@Override

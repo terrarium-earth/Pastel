@@ -5,5 +5,14 @@ accessWidener	v2	named
 
 accessible field net/minecraft/data/models/BlockModelGenerators modelOutput Ljava/util/function/BiConsumer;
 accessible field net/minecraft/data/models/ItemModelGenerators output Ljava/util/function/BiConsumer;
+accessible field net/minecraft/data/models/BlockModelGenerators blockStateOutput Ljava/util/function/Consumer;
+
+accessible method net/minecraft/data/models/BlockModelGenerators skipAutoItemBlock (Lnet/minecraft/world/level/block/Block;)V
+
 accessible method net/minecraft/data/models/model/TexturedModel createDefault (Ljava/util/function/Function;Lnet/minecraft/data/models/model/ModelTemplate;)Lnet/minecraft/data/models/model/TexturedModel$Provider;
+
+accessible method net/minecraft/data/models/BlockModelGenerators createRotatedPillarWithHorizontalVariant (Lnet/minecraft/world/level/block/Block;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/data/models/blockstates/BlockStateGenerator;
+accessible method net/minecraft/data/models/BlockModelGenerators family (Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/data/models/BlockModelGenerators$BlockFamilyProvider;
+
+accessible class net/minecraft/data/models/BlockModelGenerators$BlockFamilyProvider
 accessible class net/minecraft/data/models/BlockModelGenerators$TintState

@@ -4,6 +4,7 @@ import de.dafuqs.spectrum.SpectrumClient;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.minecraft.client.*;
+import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
@@ -35,6 +36,7 @@ public record StartSkyLerpingPayload(long startTime, long endTime) implements Cu
 	@OnlyIn(Dist.CLIENT)
 	public static void execute(StartSkyLerpingPayload payload, IPayloadContext context) {
 		var client = Minecraft.getInstance();
+		Level level = context.player().level();
 		DimensionType dimensionType = level.dimensionType();
 		
 		SpectrumClient.skyLerper.trigger(dimensionType, payload.startTime, client.getTimer().getGameTimeDeltaPartialTick(false), payload.endTime);

@@ -5,6 +5,7 @@ import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.data.BookDataManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.render.FluidRendering;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.compat.modonomicon.ModonomiconHelper;
@@ -57,7 +58,7 @@ public class BookTitrationBarrelFermentingPageRenderer extends BookGatedRecipePa
         boolean usesFluid = !fluid.isEmpty();
         IngredientStack bucketStack = IngredientStack.EMPTY;
         if (usesFluid) {
-            bucketStack = IngredientStack.of(recipe.getFluidInput().into());
+            bucketStack = IngredientStack.of(FluidRendering.fluidBucketIngredient(recipe.getFluidInput()));
         }
 
         // the ingredients

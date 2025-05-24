@@ -11,7 +11,6 @@ import de.dafuqs.spectrum.compat.modonomicon.pages.BookHintPage;
 import de.dafuqs.spectrum.helpers.InventoryHelper;
 import de.dafuqs.spectrum.networking.c2s_payloads.GuidebookHintBoughtPayload;
 import de.dafuqs.spectrum.sound.HintRevelationSoundInstance;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -20,6 +19,8 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.sounds.SoundEvents;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -194,11 +195,11 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
             return;
         }
 		
-		if (mc.player.isCreative() || InventoryHelper.hasIngredientStacksInInventory(List.of(page.getCost()), mc.player.getInventory())) {
+		if (mc.player.isCreative() || InventoryHelper.hasIngredientStacksInInventory(List.of(page.getCost()), new InvWrapper(mc.player.getInventory()))) {
             soundInstance = new HintRevelationSoundInstance(mc.player);
             Minecraft.getInstance().getSoundManager().play(soundInstance);
             
-            ClientPlayNetworking.send(new GuidebookHintBoughtPayload(page.getCompletionAdvancement(), page.getCost()));
+            PacketDistributor.sendToServer(new GuidebookHintBoughtPayload(page.getCompletionAdvancement(), page.getCost()));
             revealProgress = 1;
             lastRevealTime = mc.level.getGameTime();
             mc.player.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 1.0F);
