@@ -2,9 +2,9 @@ package de.dafuqs.spectrum.blocks.pastel_network.network;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import de.dafuqs.spectrum.blocks.pastel_network.PastelRenderHelper;
+import net.minecraft.client.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Clearable;
@@ -32,19 +32,19 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLe
 	}
 	
 	@Override
-	public ClientPastelNetwork createNetwork(ClientLevel world, UUID uuid, int color) {
-		ClientPastelNetwork network = new ClientPastelNetwork(world, uuid, color);
+	public ClientPastelNetwork createNetwork(ClientLevel level, UUID uuid, int color) {
+		ClientPastelNetwork network = new ClientPastelNetwork(level, uuid, color);
 		this.networks.add(network);
 		return network;
 	}
 	
-	public void renderLines(WorldRenderContext context, LivingEntity cameraEntity, boolean paintbrushInHand) {
-		BlockPos cameraEntityPos = cameraEntity.blockPosition();
-		
-		ClientLevel world = context.world();
-		long worldTime = world.getGameTime();
+	public void renderLines(ClientLevel level, PoseStack matrices, Camera camera) {
+		final Vec3 pos = camera.getPosition();
+		final BlockPos blockPos = camera.getBlockPosition();
+
+		long worldTime = level.getGameTime();
 		for (ClientPastelNetwork network : this.networks) {
-			if (network.getLevel().dimensionType() != world.dimensionType()) continue;
+			if (network.getLevel().dimensionType() != level.dimensionType()) continue;
 			
 			Graph<BlockPos, DefaultEdge> graph = network.getGraph();
 			int color = network.getColor();
@@ -55,19 +55,17 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLe
 				BlockPos target = graph.getEdgeTarget(edge);
 				
 				// do not render lines that are far away to save a lot of fps
-				if (cameraEntityPos.distSqr(source) > MAX_RENDER_DISTANCE_SQUARED && cameraEntityPos.distSqr(target) > MAX_RENDER_DISTANCE_SQUARED) {
+				if (blockPos.distSqr(source) > MAX_RENDER_DISTANCE_SQUARED && blockPos.distSqr(target) > MAX_RENDER_DISTANCE_SQUARED) {
 					continue;
 				}
-				
-				final PoseStack matrices = context.matrixStack();
-				final Vec3 pos = context.camera().getPosition();
+
 				matrices.pushPose();
 				matrices.translate(-pos.x, -pos.y, -pos.z);
 				var cross = source.cross(target);
-				var interval = (cross.getX() + cross.getY() + cross.getZ() + network.world.getGameTime()) % 1000000F;
+				var interval = (cross.getX() + cross.getY() + cross.getZ() + worldTime) % 1000000F;
 				var alpha = (1.0 - (Math.max(Math.sin((interval / 17F)) * 2.5 - 2, 0)));
 				colors[0] = (float) alpha;
-				PastelRenderHelper.renderLineTo(context.matrixStack(), context.consumers(), colors, source, target);
+				PastelRenderHelper.renderLineTo(matrices, vert, colors, source, target);
 				
 				matrices.popPose();
 			}

@@ -15,13 +15,15 @@ import de.dafuqs.spectrum.progression.ToggleableItemColorProvider;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.renderer.*;
 import net.minecraft.util.FastColor;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.*;
+import net.neoforged.neoforge.client.event.*;
 
 import java.util.List;
 
@@ -34,76 +36,85 @@ public class SpectrumColorProviders {
 	public static ToggleableItemColorProvider amaranthBushelItemColorProvider;
 	public static ToggleableBlockColorProvider amaranthCropBlockColorProvider;
 	public static ToggleableItemColorProvider amaranthCropItemColorProvider;
-	
-	public static void registerClient() {
-		SpectrumCommon.logInfo("Registering Block and Item Color Providers...");
+
+	private static final BlockColor THAT_ONE_VANILLA_LEAF_PROVIDER = (state, level, pos, tintIndex) ->
+			level != null && pos != null ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.getDefaultColor();
+
+	private static final BlockColor THE_OTHER_ONE_AKA_GRASS = (state, level, pos, tintIndex) ->
+			level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : GrassColor.getDefaultColor();
+
+	private static final ItemColor THAT_ONE_VANILLA_ITEM_PROVIDER = (stack, tint) -> {
+		BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
+		return THAT_ONE_VANILLA_LEAF_PROVIDER.getColor(blockstate, null, null, tint);
+	};
+
+	private static final ItemColor YES_THERE_IS_ANOTHER_ITEM_ONE_TOO = (stack, tint) -> {
+		BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
+		return THE_OTHER_ONE_AKA_GRASS.getColor(blockstate, null, null, tint);
+	};
+
+	public static void registerBlocks(RegisterColorHandlersEvent.Block event) {
+		SpectrumCommon.logInfo("Registering Block Color Providers...");
 		
 		// Biome Colors for colored leaves items and blocks
 		// They don't use it, but their decoy oak leaves do
-		registerColoredLeaves();
-		
+		coloredLeavesBlock(event);
 		// Same for Amaranth
-		registerAmaranth();
-		
-		registerClovers(SpectrumBlocks.CLOVER, SpectrumBlocks.FOUR_LEAF_CLOVER);
-		registerMemory(SpectrumBlocks.MEMORY);
-		registerPotionFillables(SpectrumItems.LESSER_POTION_PENDANT, SpectrumItems.GREATER_POTION_PENDANT, SpectrumItems.MALACHITE_GLASS_AMPOULE);
-		registerPickyPotionFillables(SpectrumItems.NIGHTFALLS_BLADE, SpectrumItems.CONCEALING_OILS);
-		registerSingleInkStorages(SpectrumItems.INK_FLASK);
-		registerBrewColors(SpectrumItems.INFUSED_BEVERAGE);
-		
-		registerOptionalInkColor(SpectrumItems.PAINTBRUSH);
-		//registerOptionalInkColor(SpectrumBlocks.CRYSTALLARIEUM.asItem()); // TODO: update item model to use tint layer
+		amaranthBlock(event);
+		event.register(THE_OTHER_ONE_AKA_GRASS, SpectrumBlocks.CLOVER, SpectrumBlocks.FOUR_LEAF_CLOVER);
+		memoryBlock(event, SpectrumBlocks.MEMORY);
+	}
+
+	public static void registerItems(RegisterColorHandlersEvent.Item event) {
+		SpectrumCommon.logInfo("Registering Item Color Providers...");
+
+		coloredLeavesItem(event);
+		amaranthItem(event);
+		event.register(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO, SpectrumBlocks.CLOVER, SpectrumBlocks.FOUR_LEAF_CLOVER);
+
+		memoryItem(event, SpectrumBlocks.MEMORY);
+		registerPotionFillables(event, SpectrumItems.LESSER_POTION_PENDANT, SpectrumItems.GREATER_POTION_PENDANT, SpectrumItems.MALACHITE_GLASS_AMPOULE);
+		registerPickyPotionFillables(event, SpectrumItems.NIGHTFALLS_BLADE, SpectrumItems.CONCEALING_OILS);
+		registerSingleInkStorages(event, SpectrumItems.INK_FLASK);
+		registerBrewColors(event, SpectrumItems.INFUSED_BEVERAGE);
+		registerOptionalInkColor(event, SpectrumItems.PAINTBRUSH);
 	}
 	
-	private static void registerColoredLeaves() {
-		BlockColor leavesBlockColorProvider = ColorProviderRegistry.BLOCK.get(Blocks.OAK_LEAVES);
-		ItemColor leavesItemColorProvider = ColorProviderRegistry.ITEM.get(Blocks.OAK_LEAVES);
-		
-		if (leavesBlockColorProvider != null && leavesItemColorProvider != null) {
-			coloredLeavesBlockColorProvider = new ToggleableBlockColorProvider(leavesBlockColorProvider);
-			coloredLeavesItemColorProvider = new ToggleableItemColorProvider(leavesItemColorProvider);
-			
-			for (InkColor color : InkColors.all()) {
-				Block block = ColoredLeavesBlock.byColor(color);
-				ColorProviderRegistry.BLOCK.register(coloredLeavesBlockColorProvider, block);
-				ColorProviderRegistry.ITEM.register(coloredLeavesItemColorProvider, block);
-			}
+	private static void coloredLeavesBlock(RegisterColorHandlersEvent.Block event) {
+		coloredLeavesBlockColorProvider = new ToggleableBlockColorProvider(THAT_ONE_VANILLA_LEAF_PROVIDER);
+
+		for (InkColor color : InkColors.all()) {
+			Block block = ColoredLeavesBlock.byColor(color);
+			event.register(coloredLeavesBlockColorProvider, block);
+		}
+	}
+
+	private static void coloredLeavesItem(RegisterColorHandlersEvent.Item event) {
+		coloredLeavesItemColorProvider = new ToggleableItemColorProvider(THAT_ONE_VANILLA_ITEM_PROVIDER);
+
+		for (InkColor color : InkColors.all()) {
+			Block block = ColoredLeavesBlock.byColor(color);
+			event.register(coloredLeavesItemColorProvider, block);
 		}
 	}
 	
-	private static void registerAmaranth() {
-		BlockColor fernBlockColorProvider = ColorProviderRegistry.BLOCK.get(Blocks.FERN);
-		ItemColor fernItemColorProvider = ColorProviderRegistry.ITEM.get(Blocks.FERN);
-		if (fernBlockColorProvider != null && fernItemColorProvider != null) {
-			amaranthBushelBlockColorProvider = new ToggleableBlockColorProvider(fernBlockColorProvider);
-			amaranthBushelItemColorProvider = new ToggleableItemColorProvider(fernItemColorProvider);
-			ColorProviderRegistry.BLOCK.register(amaranthBushelBlockColorProvider, SpectrumBlocks.AMARANTH_BUSHEL);
-			ColorProviderRegistry.ITEM.register(amaranthBushelItemColorProvider, SpectrumBlocks.AMARANTH_BUSHEL);
-			ColorProviderRegistry.BLOCK.register(amaranthBushelBlockColorProvider, SpectrumBlocks.POTTED_AMARANTH_BUSHEL);
-		}
-		
-		BlockColor largeFernBlockColorProvider = ColorProviderRegistry.BLOCK.get(Blocks.LARGE_FERN);
-		ItemColor largeFernItemColorProvider = ColorProviderRegistry.ITEM.get(Blocks.LARGE_FERN);
-		if (largeFernBlockColorProvider != null && largeFernItemColorProvider != null) {
-			amaranthCropBlockColorProvider = new ToggleableBlockColorProvider(largeFernBlockColorProvider);
-			amaranthCropItemColorProvider = new ToggleableItemColorProvider(largeFernItemColorProvider);
-			ColorProviderRegistry.BLOCK.register(amaranthCropBlockColorProvider, SpectrumBlocks.AMARANTH);
-			ColorProviderRegistry.ITEM.register(amaranthCropItemColorProvider, SpectrumBlocks.AMARANTH);
-		}
+	private static void amaranthBlock(RegisterColorHandlersEvent.Block event) {
+		amaranthCropBlockColorProvider = new ToggleableBlockColorProvider(THE_OTHER_ONE_AKA_GRASS);
+		amaranthBushelBlockColorProvider = new ToggleableBlockColorProvider(THE_OTHER_ONE_AKA_GRASS);
+		event.register(amaranthCropBlockColorProvider, SpectrumBlocks.AMARANTH);
+		event.register(amaranthBushelBlockColorProvider, SpectrumBlocks.AMARANTH_BUSHEL);
+		event.register(amaranthBushelBlockColorProvider, SpectrumBlocks.POTTED_AMARANTH_BUSHEL);
+	}
+
+	private static void amaranthItem(RegisterColorHandlersEvent.Item event) {
+		amaranthCropItemColorProvider = new ToggleableItemColorProvider(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO);
+		amaranthBushelItemColorProvider = new ToggleableItemColorProvider(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO);
+		event.register(amaranthCropItemColorProvider, SpectrumBlocks.AMARANTH);
+		event.register(amaranthBushelItemColorProvider, SpectrumBlocks.AMARANTH_BUSHEL);
 	}
 	
-	private static void registerClovers(Block... clovers) {
-		BlockColor grassBlockColorProvider = ColorProviderRegistry.BLOCK.get(Blocks.SHORT_GRASS);
-		ItemColor grassItemColorProvider = ColorProviderRegistry.ITEM.get(Blocks.SHORT_GRASS.asItem());
-		
-		if (grassBlockColorProvider != null && grassItemColorProvider != null) {
-			ColorProviderRegistry.BLOCK.register(grassBlockColorProvider, clovers);
-		}
-	}
-	
-	private static void registerSingleInkStorages(Item... items) {
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+	private static void registerSingleInkStorages(RegisterColorHandlersEvent.Item event, Item... items) {
+		event.register((stack, tintIndex) -> {
 			if (tintIndex == 1) {
 				InkFlaskItem i = (InkFlaskItem) stack.getItem();
 				SingleInkStorage storage = i.getEnergyStorage(stack);
@@ -113,8 +124,8 @@ public class SpectrumColorProviders {
 		}, items);
 	}
 	
-	private static void registerPickyPotionFillables(Item... items) {
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+	private static void registerPickyPotionFillables(RegisterColorHandlersEvent.Item event, Item... items) {
+		event.register((stack, tintIndex) -> {
 			if (tintIndex == 1) {
 				List<InkPoweredStatusEffectInstance> effects = InkPoweredStatusEffectInstance.getEffects(stack);
 				if (!effects.isEmpty()) {
@@ -125,8 +136,8 @@ public class SpectrumColorProviders {
 		}, items);
 	}
 	
-	private static void registerPotionFillables(Item... items) {
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+	private static void registerPotionFillables(RegisterColorHandlersEvent.Item event, Item... items) {
+		event.register((stack, tintIndex) -> {
 			if (tintIndex > 0) {
 				List<InkPoweredStatusEffectInstance> effects = InkPoweredStatusEffectInstance.getEffects(stack);
 				if (effects.size() > tintIndex - 1) {
@@ -137,8 +148,8 @@ public class SpectrumColorProviders {
 		}, items);
 	}
 	
-	private static void registerMemory(Block memory) {
-		ColorProviderRegistry.BLOCK.register((state, world, pos, tintIndex) -> {
+	private static void memoryBlock(RegisterColorHandlersEvent.Block event, Block memory) {
+		event.register((state, world, pos, tintIndex) -> {
 			if (world == null) {
 				return 0x0;
 			}
@@ -147,23 +158,26 @@ public class SpectrumColorProviders {
 			}
 			return 0x0;
 		}, memory);
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+	}
+
+	private static void memoryItem(RegisterColorHandlersEvent.Item event, Block memory) {
+		event.register((stack, tintIndex) -> {
 			if (tintIndex == 2)
 				return 0xFFFFFFFF;
-			
+
 			return FastColor.ARGB32.opaque(MemoryItem.getEggColor(stack, tintIndex));
 		}, memory.asItem());
 	}
 	
-	public static void registerBrewColors(Item brew) {
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+	public static void registerBrewColors(RegisterColorHandlersEvent.Item event, Item brew) {
+		event.register((stack, tintIndex) -> {
 			if (tintIndex != 0) return FastColor.ARGB32.opaque(-1);
 			return FastColor.ARGB32.opaque(stack.getOrDefault(SpectrumDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT).color());
 		}, brew);
 	}
 	
-	public static void registerOptionalInkColor(Item item) {
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+	public static void registerOptionalInkColor(RegisterColorHandlersEvent.Item event, Item item) {
+		event.register((stack, tintIndex) -> {
 			if (tintIndex == 1) {
 				var color = stack.get(SpectrumDataComponentTypes.INK_COLOR);
 				return FastColor.ARGB32.opaque(color == null ? -1 : color.getColorInt());

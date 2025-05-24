@@ -31,6 +31,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.bus.api.*;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.*;
 import net.neoforged.neoforge.client.event.*;
@@ -47,7 +48,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 
 	public static final SkyLerper skyLerper = new SkyLerper();
 
-	public SpectrumClient() {
+	public SpectrumClient(IEventBus pastelBus) {
 		logInfo("Starting Client Startup");
 
 		logInfo("Registering Model Layers...");
@@ -88,8 +89,8 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		logInfo("Registering Dimension Effects...");
 		SpectrumDimensions.registerClient();
 
-		logInfo("Registering Event Listeners...");
-		SpectrumClientEventListeners.register();
+		logInfo("Registering Client Event Listeners...");
+		SpectrumClientEventListeners.register(pastelBus);
 
 		if (CONFIG.AddItemTooltips) {
 			SpectrumTooltips.register();

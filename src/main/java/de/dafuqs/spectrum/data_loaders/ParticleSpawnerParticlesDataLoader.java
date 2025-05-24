@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import de.dafuqs.spectrum.SpectrumCommon;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ParticleSpawnerParticlesDataLoader extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
+public class ParticleSpawnerParticlesDataLoader extends SimpleJsonResourceReloadListener {
 	
 	public static final String ID = "particle_spawner_particle";
 	public static final ParticleSpawnerParticlesDataLoader INSTANCE = new ParticleSpawnerParticlesDataLoader();
@@ -63,11 +62,6 @@ public class ParticleSpawnerParticlesDataLoader extends SimpleJsonResourceReload
 			
 			PARTICLES.add(new ParticleSpawnerEntry(particleType, guiTexture, supportsColoring, unlockIdentifier));
 		});
-	}
-	
-	@Override
-	public ResourceLocation getFabricId() {
-		return SpectrumCommon.locate(ID);
 	}
 	
 	public static List<ParticleSpawnerEntry> getAllUnlocked(Player player) {

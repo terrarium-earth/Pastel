@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.registries.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.datafixers.util.*;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.energy.InkPowered;
 import de.dafuqs.spectrum.api.interaction.ItemProvider;
@@ -30,19 +31,10 @@ import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.sound.BiomeAttenuatingSoundInstance;
 import de.dafuqs.spectrum.sound.BlockAuraSoundInstance;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
-import net.minecraft.resources.*;
 import net.minecraft.server.packs.resources.*;
+import net.minecraft.util.profiling.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientWorldEvents;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
-import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -55,7 +47,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -70,11 +61,17 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.event.entity.*;
+import net.neoforged.neoforge.resource.*;
 import org.jetbrains.annotations.NotNull;
 import oshi.util.tuples.Triplet;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.*;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
@@ -89,40 +86,22 @@ public class SpectrumClientEventListeners {
 		DynamicItemRenderer.RENDERERS.put(item, renderer.get());
 	}
 	//
-	public static void register() {
-		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(ParticleSpawnerParticlesDataLoader.INSTANCE);
+	public static void register(IEventBus pastelBus) {
+		pastelBus.addListener(SpectrumClientEventListeners::onReloadClientResources);
+		pastelBus.addListener(SpectrumColorProviders::registerBlocks);
+		pastelBus.addListener(SpectrumColorProviders::registerItems);
 
-		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
-			private final ResourceLocation id = SpectrumCommon.locate("cache_clearer_client");
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onWorldRenderStart);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onRenderBlockOutlines);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onLogout);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onDrawTooltips);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onDimensionChange);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::afterClientTick);
 
-			@Override
-			public void onResourceManagerReload(ResourceManager manager) {
-				UnlockToastManager.clear();
-			}
-
-			@Override
-			public ResourceLocation getFabricId() {
-				return id;
-			}
-		});
-		
 		registerCustomItemRenderer("bottomless_bundle", SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), BottomlessBundleItem.Renderer::new);
 		registerCustomItemRenderer("omni_accelerator", SpectrumItems.OMNI_ACCELERATOR, OmniAcceleratorItem.Renderer::new);
-		
-		WorldRenderEvents.START.register(context -> HudRenderers.clearItemStackOverlay());
-		
-		WorldRenderEvents.AFTER_ENTITIES.register(context -> ((ExtendedParticleManager) Minecraft.getInstance().particleEngine).render(context.matrixStack(), context.consumers(), context.camera(), context.tickCounter().getGameTimeDeltaPartialTick(true)));
-		WorldRenderEvents.AFTER_TRANSLUCENT.register(context -> {
-			Entity focusedEntity = context.camera().getEntity();
-			
-			if (focusedEntity instanceof LivingEntity livingEntity) {
-				boolean paintbrushInHand = livingEntity.getMainHandItem().is(SpectrumItems.PAINTBRUSH) || livingEntity.getOffhandItem().is(SpectrumItems.PAINTBRUSH);
-				Pastel.getClientInstance().renderLines(context, livingEntity, paintbrushInHand);
-			}
-		});
-		WorldRenderEvents.BLOCK_OUTLINE.register(SpectrumClientEventListeners::renderExtendedBlockOutline);
-		BiomeAttenuatingSoundInstance.clear();
 
+		
 		ModelLoadingPlugin.register((ctx) -> {
 			ctx.modifyModelAfterBake().register((orig, c) -> {
 				ModelResourceLocation id = c.topLevelId();
@@ -132,86 +111,133 @@ public class SpectrumClientEventListeners {
 				return orig;
 			});
 		});
-		
-		ClientLifecycleEvents.CLIENT_STARTED.register(minecraftClient -> SpectrumColorProviders.registerClient());
-		ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> Pastel.clearClientInstance());
-		
-		ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, lines) -> {
-			if (stack.has(DataComponents.FOOD)) {
-				if (BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace().equals(SpectrumCommon.MOD_ID)) {
-					TooltipHelper.addFoodComponentEffectTooltip(stack, lines, tooltipContext.tickRate());
-				}
-			}
-			if (stack.is(SpectrumItemTags.COMING_SOON_TOOLTIP)) {
-				lines.add(Component.translatable("spectrum.tooltip.coming_soon").withStyle(ChatFormatting.RED));
-			}
-		});
-		
-		ClientWorldEvents.AFTER_CLIENT_WORLD_CHANGE.register((client, world) -> {
-			if (SpectrumCommon.CONFIG.PostProcess && world.dimension().equals(SpectrumDimensions.DIMENSION_KEY)) {
-				initializeColorGrading(client);
-			}
-			else  {
-				SpectrumShaders.clearDimensionShaders();
-			}
-		});
-		
-		ClientTickEvents.END_CLIENT_TICK.register(client -> {
-			var world = client.level;
-			Entity cameraEntity = client.getCameraEntity();
-			if (world == null || cameraEntity == null) {
-				BiomeAttenuatingSoundInstance.clear();
-				BlockAuraSoundInstance.clear();
-				return;
-			}
-			
-			Holder<Biome> biome = world.getBiome(client.getCameraEntity().blockPosition());
 
-			HowlingSpireEffects.clientTick(world, cameraEntity, biome);
-			DimensionRenderEffects.clientTick(world, cameraEntity, biome);
-			
-			if (SpectrumCommon.CONFIG.PostProcess) {
-				if (!postProcessWasOn) {
-					initializeColorGrading(client);
-					postProcessWasOn = true;
-				}
-				
-				SpectrumShaders.updateDimensionShaders(world);
+	}
+
+	private static void afterClientTick(ClientTickEvent.Post event) {
+
+		var client = Minecraft.getInstance();
+		var level = client.level;
+		Entity cameraEntity = client.getCameraEntity();
+		if (level == null || cameraEntity == null) {
+			BiomeAttenuatingSoundInstance.clear();
+			BlockAuraSoundInstance.clear();
+			return;
+		}
+
+		Holder<Biome> biome = level.getBiome(client.getCameraEntity().blockPosition());
+
+		HowlingSpireEffects.clientTick(level, cameraEntity, biome);
+		DimensionRenderEffects.clientTick(level, cameraEntity, biome);
+
+		if (SpectrumCommon.CONFIG.PostProcess) {
+			if (!postProcessWasOn) {
+				initializeColorGrading(client);
+				postProcessWasOn = true;
 			}
-			else if (postProcessWasOn) {
-				SpectrumShaders.clearDimensionShaders();
-				postProcessWasOn = false;
+
+			SpectrumShaders.updateDimensionShaders(level);
+		}
+		else if (postProcessWasOn) {
+			SpectrumShaders.clearDimensionShaders();
+			postProcessWasOn = false;
+		}
+	}
+
+	private static void onDimensionChange(EntityTravelToDimensionEvent event) {
+		var entity = event.getEntity();
+		var dim = event.getDimension();
+
+		if (entity.equals(Minecraft.getInstance().cameraEntity) && SpectrumCommon.CONFIG.PostProcess && dim.equals(SpectrumDimensions.DIMENSION_KEY)) {
+			initializeColorGrading(Minecraft.getInstance());
+		}
+		else  {
+			SpectrumShaders.clearDimensionShaders();
+		}
+	}
+
+	private static void onDrawTooltips(RenderTooltipEvent.GatherComponents event) {
+		var stack = event.getItemStack();
+		var lines = event.getTooltipElements();
+
+		if (stack.has(DataComponents.FOOD)) {
+			if (BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace().equals(SpectrumCommon.MOD_ID)) {
+				TooltipHelper.addFoodComponentEffectTooltip(stack, lines, Item.TooltipContext.EMPTY.tickRate());
+			}
+		}
+		if (stack.is(SpectrumItemTags.COMING_SOON_TOOLTIP)) {
+			lines.add(Either.left(Component.translatable("spectrum.tooltip.coming_soon").withStyle(ChatFormatting.RED)));
+		}
+	}
+
+	private static void onLogout(ClientPlayerNetworkEvent event) {
+		Pastel.clearClientInstance();
+	}
+
+	private static void onRenderBlockOutlines(RenderHighlightEvent.Block event) {
+		boolean shouldCancel = false;
+		var target = event.getTarget();
+		var camera = event.getCamera();
+
+		Minecraft client = Minecraft.getInstance();
+		if (client.player != null) {
+			for (ItemStack handStack : client.player.getHandSlots()) {
+				Item handItem = handStack.getItem();
+				if (handItem instanceof ConstructorsStaffItem) {
+					shouldCancel = renderPlacementStaffOutline(event.getPoseStack(), camera, camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, event.getMultiBufferSource(), target);
+					break;
+				} else if (handItem instanceof ExchangeStaffItem) {
+					shouldCancel = renderExchangeStaffOutline(event.getPoseStack(), camera, camera.getPosition().x, camera.getPosition().y, camera.getPosition().z, event.getMultiBufferSource(), handStack, target);
+					break;
+				}
+			}
+		}
+
+		event.setCanceled(shouldCancel);
+	}
+
+	private static void onWorldRenderStart(RenderLevelStageEvent event) {
+		var stage = event.getStage();
+
+		if (stage == RenderLevelStageEvent.Stage.AFTER_SKY) {
+			HudRenderers.clearItemStackOverlay();
+		}
+		else if (stage == RenderLevelStageEvent.Stage.AFTER_ENTITIES) {
+			((ExtendedParticleManager) Minecraft.getInstance().particleEngine)
+					.render(event.getPoseStack(), event.vertexConsumers(), event, event.getPartialTick().getGameTimeDeltaTicks()); //TODO: What. The. Fuck.
+		}
+		else if(stage == RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) {
+			Entity focusedEntity = event.getCamera().getEntity();
+
+			if (focusedEntity instanceof LivingEntity livingEntity) {
+				Pastel.getClientInstance().renderLines(Minecraft.getInstance().level, event.getPoseStack(), event.vertexConsumers()); //AAAAAA
+			}
+		}
+	}
+
+	private static void onReloadClientResources(RegisterClientReloadListenersEvent event) {
+		event.registerReloadListener(ParticleSpawnerParticlesDataLoader.INSTANCE);
+
+		event.registerReloadListener(new ContextAwareReloadListener() {
+			@Override
+			public CompletableFuture<Void> reload(PreparationBarrier preparationBarrier, ResourceManager resourceManager, ProfilerFiller preparationsProfiler, ProfilerFiller reloadProfiler, Executor backgroundExecutor, Executor gameExecutor) {
+				return CompletableFuture.runAsync(() -> {
+					UnlockToastManager.clear();;
+					BiomeAttenuatingSoundInstance.clear();
+				});
+			}
+
+			@Override
+			public String getName() {
+				return SpectrumCommon.MOD_ID + ":cache_clearer_client";
 			}
 		});
 	}
-	
+
 	private static void initializeColorGrading(Minecraft client) {
 		if (SpectrumShaders.colorGradingPostProcess.isEmpty()) {
 			SpectrumShaders.colorGradingPostProcess = SpectrumShaders.loadPostProcess(client, SpectrumShaders.COLOR_GRADING_ID);
 		}
-	}
-	
-	private static boolean renderExtendedBlockOutline(WorldRenderContext context, WorldRenderContext.BlockOutlineContext hitResult) {
-		boolean shouldCancel = false;
-		Minecraft client = Minecraft.getInstance();
-		if (client.player != null && context.blockOutlines()) {
-			for (ItemStack handStack : client.player.getHandSlots()) {
-				Item handItem = handStack.getItem();
-				if (handItem instanceof ConstructorsStaffItem) {
-					if (hitResult != null && client.hitResult instanceof BlockHitResult blockHitResult) {
-						shouldCancel = renderPlacementStaffOutline(context.matrixStack(), context.camera(), hitResult.cameraX(), hitResult.cameraY(), hitResult.cameraZ(), context.consumers(), blockHitResult);
-					}
-					break;
-				} else if (handItem instanceof ExchangeStaffItem) {
-					if (hitResult != null) {
-						shouldCancel = renderExchangeStaffOutline(context.matrixStack(), context.camera(), hitResult.cameraX(), hitResult.cameraY(), hitResult.cameraZ(), context.consumers(), handStack, hitResult);
-					}
-					break;
-				}
-			}
-		}
-		
-		return !shouldCancel;
 	}
 	
 	private static boolean renderPlacementStaffOutline(PoseStack matrices, Camera camera, double d, double e, double f, MultiBufferSource consumers, @NotNull BlockHitResult hitResult) {
@@ -267,18 +293,18 @@ public class SpectrumClientEventListeners {
 		return false;
 	}
 	
-	private static boolean renderExchangeStaffOutline(PoseStack matrices, Camera camera, double d, double e, double f, MultiBufferSource consumers, ItemStack exchangeStaffItemStack, WorldRenderContext.BlockOutlineContext hitResult) {
+	private static boolean renderExchangeStaffOutline(PoseStack matrices, Camera camera, double d, double e, double f, MultiBufferSource consumers, ItemStack exchangeStaffItemStack, BlockHitResult hitResult) {
 		Minecraft client = Minecraft.getInstance();
-		ClientLevel world = client.level;
-		BlockPos lookingAtPos = hitResult.blockPos();
-		BlockState lookingAtState = hitResult.blockState();
+		ClientLevel level = client.level;
+		BlockPos lookingAtPos = hitResult.getBlockPos();
+		BlockState lookingAtState = level.getBlockState(lookingAtPos);
 		
 		Player player = client.player;
 		
-		if (player == null || world == null)
+		if (player == null)
 			return false;
 		
-		if (player.getMainHandItem().getItem() instanceof BuildingStaffItem staff && (player.isCreative() || staff.canInteractWith(lookingAtState, world, lookingAtPos, player))) {
+		if (player.getMainHandItem().getItem() instanceof BuildingStaffItem staff && (player.isCreative() || staff.canInteractWith(lookingAtState, level, lookingAtPos, player))) {
 			Block lookingAtBlock = lookingAtState.getBlock();
 			Optional<Block> exchangeBlock = ExchangeStaffItem.getStoredBlock(exchangeStaffItemStack);
 			if (exchangeBlock.isPresent() && exchangeBlock.get() != lookingAtBlock) {
@@ -307,11 +333,11 @@ public class SpectrumClientEventListeners {
 						HudRenderers.setItemStackToRender(new ItemStack(exchangeBlockItem), 1, true);
 					} else {
 						long usableCount = Math.min(itemCountInInventory, inkLimit);
-						List<BlockPos> positions = BuildingHelper.getConnectedBlocks(world, lookingAtPos, usableCount, ExchangeStaffItem.getRange(player));
+						List<BlockPos> positions = BuildingHelper.getConnectedBlocks(level, lookingAtPos, usableCount, ExchangeStaffItem.getRange(player));
 						for (BlockPos newPosition : positions) {
-							if (world.getWorldBorder().isWithinBounds(newPosition)) {
+							if (level.getWorldBorder().isWithinBounds(newPosition)) {
 								BlockPos testPos = lookingAtPos.subtract(newPosition);
-								shape = Shapes.or(shape, lookingAtState.getShape(world, lookingAtPos, CollisionContext.of(camera.getEntity())).move(-testPos.getX(), -testPos.getY(), -testPos.getZ()));
+								shape = Shapes.or(shape, lookingAtState.getShape(level, lookingAtPos, CollisionContext.of(camera.getEntity())).move(-testPos.getX(), -testPos.getY(), -testPos.getZ()));
 							}
 						}
 						
