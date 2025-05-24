@@ -78,7 +78,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		//SpectrumS2CPackets.registerS2CReceivers();
 
 		logInfo("Registering Particle Factories...");
-		SpectrumParticleFactories.register();
+		pastelBus.addListener(SpectrumParticleFactories::register);
 
 		logInfo("Registering Overlays...");
 		HudRenderers.register();
