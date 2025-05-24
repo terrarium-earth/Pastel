@@ -1,12 +1,7 @@
 package de.dafuqs.spectrum.data;
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.registries.SpectrumEnchantments;
-import de.dafuqs.spectrum.registries.SpectrumRegistryKeys;
-import de.dafuqs.spectrum.registries.SpectrumResonanceProcessors;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -29,17 +24,10 @@ public class SpectrumDataGenerator {
 		event.addProvider(blockTagsProvider);
 		event.addProvider(new SpectrumItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
 		event.addProvider(new SpectrumEnchantmentTagsProvider(packOutput, lookupProvider, existingFileHelper));
-		event.addProvider(new SpectrumDynamicRegistryProvider(packOutput, lookupProvider));
 		event.addProvider(new SpectrumModelProvider(packOutput, lookupProvider));
 		event.addProvider(new SpectrumRecipeProvider(packOutput, lookupProvider));
 		event.addProvider(new SpectrumCompostableDataMapProvider(packOutput, lookupProvider));
+
+		event.createDatapackRegistryObjects(SpectrumDynamicRegistryProvider.createRegistryBuilders());
 	}
-	
-	// TODO
-	@Override
-	public void buildRegistry(RegistrySetBuilder registryBuilder) {
-		registryBuilder.add(Registries.ENCHANTMENT, registerable -> SpectrumEnchantments.provideEnchantments(new DatagenProxy.BootstrapContext<>(registerable)));
-		registryBuilder.add(SpectrumRegistryKeys.RESONANCE_PROCESSOR, registerable -> SpectrumResonanceProcessors.provideResonanceProcessors(new DatagenProxy.BootstrapContext<>(registerable)));
-	}
-	
 }
