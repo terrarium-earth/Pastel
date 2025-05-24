@@ -3,13 +3,12 @@ package de.dafuqs.spectrum.api.item;
 import de.dafuqs.spectrum.cca.azure_dike.AzureDikeComponent;
 import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
 import de.dafuqs.spectrum.cca.azure_dike.DefaultAzureDikeComponent;
-import top.theillusivec4.curios.api.SlotContext;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
-import net.minecraft.util.Tuple;
+import top.theillusivec4.curios.api.CuriosApi;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 
 import java.util.Optional;
 
@@ -33,21 +32,20 @@ public interface AzureDikeItem {
 		Level world = livingEntity.level();
 		if (!world.isClientSide) {
 			AzureDikeComponent azureDikeComponent = AzureDikeProvider.AZURE_DIKE_COMPONENT.get(livingEntity);
-			
-			Optional<TrinketComponent> trinketComponent = TrinketsApi.getTrinketComponent(livingEntity);
-			if (trinketComponent.isPresent()) {
+
+			Optional<ICuriosItemHandler> curiosInventory = CuriosApi.getCuriosInventory(livingEntity);
+			if (curiosInventory.isPresent()) {
 				int maxAzureDike = 0;
 				float rechargeSpeedModifier = 1F;
 				float rechargeDelayAfterDamageModifier = 1F;
 				float maxAzureDikeMultiplier = 1F;
-				for (Tuple<SlotContext, ItemStack> pair : trinketComponent.get().getAllEquipped()) {
-					ItemStack stack = pair.getB();
-					if (pair.getB().getItem() instanceof AzureDikeItem azureDikeItem) {
-						maxAzureDike += azureDikeItem.maxAzureDike(stack);
-						rechargeSpeedModifier += azureDikeItem.azureDikeRechargeSpeedModifier(stack) - 1;
-						rechargeDelayAfterDamageModifier += azureDikeItem.rechargeDelayAfterDamageModifier(stack) - 1;
-						maxAzureDikeMultiplier += azureDikeItem.maxAzureDikeMultiplier(stack) - 1;
-					}
+				for (SlotResult slot : curiosInventory.get().findCurios(stack -> stack.getItem() instanceof AzureDikeItem)) {
+					ItemStack stack = slot.stack();
+					AzureDikeItem azureDikeItem = (AzureDikeItem) stack.getItem();
+					maxAzureDike += azureDikeItem.maxAzureDike(stack);
+					rechargeSpeedModifier += azureDikeItem.azureDikeRechargeSpeedModifier(stack) - 1;
+					rechargeDelayAfterDamageModifier += azureDikeItem.rechargeDelayAfterDamageModifier(stack) - 1;
+					maxAzureDikeMultiplier += azureDikeItem.maxAzureDikeMultiplier(stack) - 1;
 				}
 				
 				int ticksPerPointOfRecharge = (int) Math.max(1, DefaultAzureDikeComponent.BASE_RECHARGE_DELAY_TICKS / rechargeSpeedModifier);

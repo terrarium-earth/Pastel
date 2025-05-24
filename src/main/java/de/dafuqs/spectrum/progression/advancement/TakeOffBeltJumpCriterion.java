@@ -3,21 +3,17 @@ package de.dafuqs.spectrum.progression.advancement;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
 import de.dafuqs.spectrum.items.trinkets.TakeOffBeltItem;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import top.theillusivec4.curios.api.SlotContext;
-import dev.emi.trinkets.api.TrinketComponent;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
 import java.util.Optional;
 
 public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBeltJumpCriterion.Conditions> {
@@ -29,22 +25,9 @@ public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBelt
 	}
 	
 	public void trigger(ServerPlayer player) {
-		this.trigger(player, (conditions) -> {
-			Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
-			if (component.isPresent()) {
-				List<Tuple<SlotContext, ItemStack>> equipped = component.get().getEquipped(SpectrumItems.TAKE_OFF_BELT);
-				if (!equipped.isEmpty()) {
-					ItemStack firstBelt = equipped.getFirst().getB();
-					if (firstBelt != null) {
-						int charge = TakeOffBeltItem.getCurrentCharge(player);
-						if (charge > 0) {
-							return conditions.matches(firstBelt, charge);
-						}
-					}
-				}
-			}
-			return false;
-		});
+		this.trigger(player, (conditions) ->
+				SpectrumTrinketItem.getFirstEquipped(player, SpectrumItems.TAKE_OFF_BELT).map((belt) -> TakeOffBeltItem.getCurrentCharge(player) > 0).orElse(false)
+		);
 	}
 	
 	@Override

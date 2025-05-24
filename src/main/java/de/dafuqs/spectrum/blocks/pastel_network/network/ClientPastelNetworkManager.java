@@ -3,6 +3,7 @@ package de.dafuqs.spectrum.blocks.pastel_network.network;
 import com.mojang.blaze3d.vertex.PoseStack;
 import de.dafuqs.spectrum.blocks.pastel_network.PastelRenderHelper;
 import net.minecraft.client.*;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -38,7 +39,7 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLe
 		return network;
 	}
 	
-	public void renderLines(ClientLevel level, PoseStack matrices, Camera camera) {
+	public void renderLines(ClientLevel level, PoseStack matrices, MultiBufferSource bufferSource, Camera camera) {
 		final Vec3 pos = camera.getPosition();
 		final BlockPos blockPos = camera.getBlockPosition();
 
@@ -65,7 +66,7 @@ public class ClientPastelNetworkManager implements PastelNetworkManager<ClientLe
 				var interval = (cross.getX() + cross.getY() + cross.getZ() + worldTime) % 1000000F;
 				var alpha = (1.0 - (Math.max(Math.sin((interval / 17F)) * 2.5 - 2, 0)));
 				colors[0] = (float) alpha;
-				PastelRenderHelper.renderLineTo(matrices, vert, colors, source, target);
+				PastelRenderHelper.renderLineTo(matrices, bufferSource, colors, source, target);
 				
 				matrices.popPose();
 			}

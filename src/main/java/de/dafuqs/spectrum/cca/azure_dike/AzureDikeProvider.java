@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.cca.azure_dike;
 
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
 import de.dafuqs.spectrum.registries.SpectrumItems;
-import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.world.entity.LivingEntity;
 import org.ladysnake.cca.api.v3.component.ComponentKey;
 import org.ladysnake.cca.api.v3.component.ComponentRegistry;
@@ -21,7 +21,7 @@ public class AzureDikeProvider {
 	public static float absorbDamage(LivingEntity provider, float incomingDamage) {
 		var passedDamage = AZURE_DIKE_COMPONENT.get(provider).absorbDamage(incomingDamage);
 
-		if (TrinketsApi.getTrinketComponent(provider).map(p -> p.isEquipped(SpectrumItems.AZURESQUE_DIKE_CORE)).orElse(false))
+		if (SpectrumTrinketItem.hasEquipped(provider, SpectrumItems.AZURESQUE_DIKE_CORE))
 			return passedDamage * 2;
 
 		return passedDamage;

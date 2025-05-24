@@ -32,16 +32,13 @@ import de.dafuqs.spectrum.networking.s2c_payloads.SyncArtisansAtlasPayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.SyncMentalPresencePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.TypedTransmissionPayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.UpdateBlockEntityInkPayload;
-import net.neoforged.bus.api.*;
-import net.neoforged.neoforge.network.event.*;
-import net.neoforged.neoforge.network.registration.*;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public class SpectrumS2CPackets {
 
 	@SubscribeEvent
-	public static void register(RegisterPayloadHandlersEvent event) {
-		PayloadRegistrar registrar = event.registrar("1");
-		
+	public static void register(PayloadRegistrar registrar) {
 		registrar.playToClient(PlayParticleWithRandomOffsetAndVelocityPayload.ID, PlayParticleWithRandomOffsetAndVelocityPayload.CODEC, PlayParticleWithRandomOffsetAndVelocityPayload::execute);
 		registrar.playToClient(PlayParticleWithExactVelocityPayload.ID, PlayParticleWithExactVelocityPayload.CODEC, PlayParticleWithExactVelocityPayload::execute);
 		registrar.playToClient(PlayParticleWithPatternAndVelocityPayload.ID, PlayParticleWithPatternAndVelocityPayload.CODEC, PlayParticleWithPatternAndVelocityPayload::execute);

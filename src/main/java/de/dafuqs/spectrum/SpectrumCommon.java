@@ -1,5 +1,8 @@
 package de.dafuqs.spectrum;
 
+import de.dafuqs.revelationary.Revelationary;
+import de.dafuqs.revelationary.RevelationaryNetworking;
+import de.dafuqs.reverb.Reverb;
 import de.dafuqs.spectrum.api.color.ColorRegistry;
 import de.dafuqs.spectrum.api.energy.color.InkColorMixes;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
@@ -27,11 +30,9 @@ import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import de.dafuqs.spectrum.registries.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.minecraft.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -40,6 +41,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.*;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -99,6 +102,9 @@ public class SpectrumCommon {
 	}
 
 	public SpectrumCommon(IEventBus modEventBus) {
+		Revelationary.onInitialize();
+		Reverb.onInitialize(modEventBus);
+
 		logInfo("Starting Common Startup");
 		
 		// Register internals
@@ -210,7 +216,13 @@ public class SpectrumCommon {
 		
 		logInfo("Registering Networking Packets...");
 		NeoForge.EVENT_BUS.addListener(SpectrumC2SPackets::register);
-		NeoForge.EVENT_BUS.addListener(SpectrumS2CPackets::register);
+
+		NeoForge.EVENT_BUS.addListener(RegisterPayloadHandlersEvent.class, (event) -> {
+			PayloadRegistrar registrar = event.registrar("1");
+
+			RevelationaryNetworking.register(registrar);
+			SpectrumS2CPackets.register(registrar);
+		});
 		
 		logInfo("Registering Data Loaders...");
 		NeoForge.EVENT_BUS.addListener(SpectrumCommon::registerReloadListeners);

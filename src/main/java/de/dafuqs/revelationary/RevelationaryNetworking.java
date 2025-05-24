@@ -3,11 +3,6 @@ package de.dafuqs.revelationary;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -21,17 +16,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 import java.util.Map;
 
 public class RevelationaryNetworking {
-	public static void register() {
-		PayloadTypeRegistry.playS2C().register(RevelationSync.ID, RevelationSync.CODEC);
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public static void registerPacketReceivers() {
-		ClientPlayNetworking.registerGlobalReceiver(RevelationaryNetworking.RevelationSync.ID, (payload, context) -> {
+	public static void register(PayloadRegistrar registrar) {
+		registrar.playToClient(RevelationSync.ID, RevelationSync.CODEC, (payload, context) -> {
 			try {
 				RevelationRegistry.fromPacket(payload);
 			} catch (Exception e) {
@@ -43,7 +35,7 @@ public class RevelationaryNetworking {
 	}
 
 	public static void sendRevelations(ServerPlayer player) {
-		ServerPlayNetworking.send(player, RevelationRegistry.intoPacket());
+		PacketDistributor.sendToPlayer(player, RevelationRegistry.intoPacket());
 	}
 
 	public record RevelationSync(Object2ObjectOpenHashMap<ResourceLocation, ObjectArrayList<BlockState>> advToBlockStates,
