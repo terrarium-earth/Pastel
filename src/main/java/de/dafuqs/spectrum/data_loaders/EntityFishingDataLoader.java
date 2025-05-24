@@ -8,7 +8,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.predicate.location.WorldConditionsPredicate;
 import de.dafuqs.spectrum.helpers.CodecHelper;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class EntityFishingDataLoader extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
+public class EntityFishingDataLoader extends SimpleJsonResourceReloadListener {
 	
 	public static final String ID = "entity_fishing";
 	public static final EntityFishingDataLoader INSTANCE = new EntityFishingDataLoader();
@@ -69,11 +68,6 @@ public class EntityFishingDataLoader extends SimpleJsonResourceReloadListener im
 		prepared.forEach((identifier, jsonElement) ->
 			CodecHelper.fromJson(EntityFishingEntry.CODEC, jsonElement.getAsJsonObject())
 					.ifPresent(ENTITY_FISHING_ENTRIES::add));
-	}
-	
-	@Override
-	public ResourceLocation getFabricId() {
-		return SpectrumCommon.locate(ID);
 	}
 	
 	public static Optional<EntityFishingEntity> tryCatchEntity(ServerLevel world, BlockPos pos, int bigCatchLevel) {
