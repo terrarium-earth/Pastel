@@ -4,11 +4,7 @@ import com.mojang.serialization.MapCodec;
 import de.dafuqs.spectrum.inventories.GenericSpectrumContainerScreenHandler;
 import de.dafuqs.spectrum.inventories.ScreenBackgroundVariant;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
-import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.world.item.ItemStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
-import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
@@ -31,6 +27,8 @@ import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.capabilities.*;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 
 public class EnderDropperBlock extends DispenserBlock {
@@ -96,40 +94,36 @@ public class EnderDropperBlock extends DispenserBlock {
 	}
 	
 	@Override
-	protected void dispenseFrom(ServerLevel world, BlockState state, BlockPos pos) {
-		EnderDropperBlockEntity enderDropperBlockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.ENDER_DROPPER).orElse(null);
-		if (enderDropperBlockEntity == null) {
+	protected void dispenseFrom(ServerLevel level, BlockState state, BlockPos pos) {
+		EnderDropperBlockEntity dropper = level.getBlockEntity(pos, SpectrumBlockEntities.ENDER_DROPPER).orElse(null);
+		if (dropper == null) {
 			return;
 		}
 
-		BlockSource blockPointer = new BlockSource(world, pos, state, enderDropperBlockEntity);
-		int i = enderDropperBlockEntity.getRandomSlot(world.random);
+		BlockSource blockPointer = new BlockSource(level, pos, state, dropper);
+		int i = dropper.getRandomSlot(level.random);
 		if (i < 0) {
-			world.levelEvent(LevelEvent.SOUND_DISPENSER_FAIL, pos, 0); // no items in inv
+			level.levelEvent(LevelEvent.SOUND_DISPENSER_FAIL, pos, 0); // no items in inv
 		} else {
-			ItemStack itemStack = enderDropperBlockEntity.getItem(i);
+			ItemStack itemStack = dropper.getItem(i);
 			if (!itemStack.isEmpty()) {
-				Direction direction = world.getBlockState(pos).getValue(FACING);
-				if (world.getBlockState(pos.relative(direction)).isAir()) {
+				Direction direction = level.getBlockState(pos).getValue(FACING);
+				if (level.getBlockState(pos.relative(direction)).isAir()) {
 					ItemStack itemStack3 = BEHAVIOR.dispense(blockPointer, itemStack);
-					enderDropperBlockEntity.setItem(i, itemStack3);
+					dropper.setItem(i, itemStack3);
 				} else {
-					Storage<ItemStack> target = ItemStorage.SIDED.find(world, pos.relative(direction), direction.getOpposite());
-					if (target != null) {
-						// getting inv will always work since .chooseNonEmptySlot() and others would fail otherwise
-						//noinspection DataFlowIssue
-						Container inv = enderDropperBlockEntity.getOwnerIfOnline().getEnderChestInventory();
-						long moved = StorageUtil.move(
-								InventoryStorage.of(inv, direction).getSlot(i),
-								target,
-								iv -> true,
-								1,
-								null
-						);
+					var handler = level.getCapability(Capabilities.ItemHandler.BLOCK, pos.relative(direction), direction.getOpposite());
+					if (handler != null) {
+
+						assert dropper.getOwnerIfOnline() != null;
+						var moved = ItemHandlerHelper.insertItemStacked(handler, itemStack.copyWithCount(1), false);
 						// return without triggering fail event if successfully moved
-						if (moved == 1) return;
+						if (moved.isEmpty()) {
+							itemStack.shrink(1);
+							return;
+						}
 					}
-					world.levelEvent(LevelEvent.SOUND_DISPENSER_FAIL, pos, 0); // no room to dispense to
+					level.levelEvent(LevelEvent.SOUND_DISPENSER_FAIL, pos, 0); // no room to dispense to
 				}
 			}
 		}

@@ -7,7 +7,6 @@ import com.google.gson.JsonParseException;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.recipe.RecipeUtils;
-import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -22,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NaturesStaffConversionDataLoader extends SimpleJsonResourceReloadListener implements IdentifiableResourceReloadListener {
+public class NaturesStaffConversionDataLoader extends SimpleJsonResourceReloadListener {
 	
 	public static final String ID = "natures_staff_conversion";
 	public static final NaturesStaffConversionDataLoader INSTANCE = new NaturesStaffConversionDataLoader();
@@ -40,14 +39,14 @@ public class NaturesStaffConversionDataLoader extends SimpleJsonResourceReloadLi
 		prepared.forEach((identifier, jsonElement) -> {
 			JsonObject jsonObject = jsonElement.getAsJsonObject();
 			Block input = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(GsonHelper.getAsString(jsonObject, "input_block")));
-			
+
 			BlockState output;
 			try {
 				output = RecipeUtils.blockStateFromString(jsonObject.get("output_state").getAsString());
 			} catch (CommandSyntaxException e) {
 				throw new JsonParseException(e);
 			}
-			
+
 			if (input != Blocks.AIR && !output.isAir()) {
 				CONVERSIONS.put(input, output);
 				if (GsonHelper.isStringValue(jsonObject, "unlock_identifier")) {
@@ -55,11 +54,6 @@ public class NaturesStaffConversionDataLoader extends SimpleJsonResourceReloadLi
 				}
 			}
 		});
-	}
-	
-	@Override
-	public ResourceLocation getFabricId() {
-		return SpectrumCommon.locate(ID);
 	}
 	
 	public static @Nullable BlockState getConvertedBlockState(Block block) {

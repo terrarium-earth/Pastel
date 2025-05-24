@@ -31,6 +31,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.neoforged.neoforge.fluids.*;
 
 import java.util.UUID;
 import java.util.function.UnaryOperator;
@@ -76,6 +77,7 @@ public class SpectrumDataComponentTypes {
 	public static final DataComponentType<WrappedPresentComponent> WRAPPED_PRESENT = register("wrapped_present", builder -> builder.persistent(WrappedPresentComponent.CODEC).networkSynchronized(WrappedPresentComponent.STREAM_CODEC).cacheEncoding());
 	public static final DataComponentType<WithMilkComponent> WITH_MILK = register("with_milk", builder -> builder.persistent(WithMilkComponent.CODEC).networkSynchronized(WithMilkComponent.STREAM_CODEC));
 	public static final DataComponentType<WorkstaffComponent> WORKSTAFF = register("workstaff", builder -> builder.persistent(WorkstaffComponent.CODEC).networkSynchronized(WorkstaffComponent.STREAM_CODEC));
+	public static final DataComponentType<SimpleFluidContent> MERMAIDS_GEM = register("mermaids_gem", builder -> builder.persistent(SimpleFluidContent.CODEC).networkSynchronized(SimpleFluidContent.STREAM_CODEC));
 	
 	public static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
 		return REGISTRAR.defer(builderOperator.apply(DataComponentType.builder()).build(),

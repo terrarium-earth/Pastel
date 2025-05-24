@@ -4,8 +4,6 @@ import com.mojang.serialization.MapCodec;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import net.minecraft.world.item.ItemStack;
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SingleVariantStorage;
-import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -17,7 +15,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -40,6 +37,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -89,35 +87,31 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 		if (!world.isClientSide) {
 			if (player.isShiftKeyDown()) {
 				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE).ifPresent((bottomlessBundleBlockEntity) -> {
-					long amount = bottomlessBundleBlockEntity.storage.amount;
-					ItemStack variant = bottomlessBundleBlockEntity.storage.getResource();
+					long amount = bottomlessBundleBlockEntity.storage.getStackInSlot(0).getCount();
+					ItemStack ref = bottomlessBundleBlockEntity.storage.getStackInSlot(0);
 					long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bottomlessBundleBlockEntity.powerLevel);
-					if (variant.isBlank()) {
+					if (ref.isEmpty()) {
 						player.displayClientMessage(Component.translatable("item.spectrum.bottomless_bundle.tooltip.empty"), true);
 					} else {
-						player.displayClientMessage(Component.translatable("item.spectrum.bottomless_bundle.tooltip.count_of", amount, maxStoredAmount).append(variant.getItem().getDescription()), true);
+						player.displayClientMessage(Component.translatable("item.spectrum.bottomless_bundle.tooltip.count_of", amount, maxStoredAmount).append(ref.getItem().getDescription()), true);
 					}
 				});
 			} else {
 				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE).ifPresent((bottomlessBundleBlockEntity) -> {
-					SingleVariantStorage<ItemStack> storage = bottomlessBundleBlockEntity.storage;
-					ItemStack storedVariant = storage.variant;
-					
-					try (Transaction transaction = Transaction.openOuter()) {
-						if (storedVariant.matches(stack) || storedVariant.isBlank()) {
-							// insert
-							if (!stack.isEmpty() && stack.getItem().canFitInsideContainerItems()) {
-								long inserted = storage.insert(ItemStack.of(stack), stack.getCount(), transaction);
-								stack.shrink((int) inserted);
-								world.playSound(null, pos, SoundEvents.BUNDLE_INSERT, SoundSource.BLOCKS, 0.8F, 0.8F + world.getRandom().nextFloat() * 0.4F);
-							}
-						} else {
-							// extract
-							long extractedAmount = storage.extract(storedVariant, storedVariant.getItem().getDefaultMaxStackSize(), transaction);
-							player.getInventory().placeItemBackInInventory(storedVariant.toStack((int) extractedAmount));
-							world.playSound(null, pos, SoundEvents.BUNDLE_REMOVE_ONE, SoundSource.BLOCKS, 0.8F, 0.8F + world.getRandom().nextFloat() * 0.4F);
+					ItemStackHandler storage = bottomlessBundleBlockEntity.storage;
+					ItemStack ref = storage.getStackInSlot(0);
+
+					if (ItemStack.isSameItemSameComponents(ref, stack) || ref.isEmpty()) {
+						// insert
+						if (!stack.isEmpty() && stack.getItem().canFitInsideContainerItems()) {
+							stack.setCount(storage.insertItem(0, stack, false).getCount());
+							world.playSound(null, pos, SoundEvents.BUNDLE_INSERT, SoundSource.BLOCKS, 0.8F, 0.8F + world.getRandom().nextFloat() * 0.4F);
 						}
-						transaction.commit();
+					} else {
+						// extract
+						var extracted = storage.extractItem(0, ref.getItem().getMaxStackSize(ref), false);
+						player.getInventory().placeItemBackInInventory(extracted);
+						world.playSound(null, pos, SoundEvents.BUNDLE_REMOVE_ONE, SoundSource.BLOCKS, 0.8F, 0.8F + world.getRandom().nextFloat() * 0.4F);
 					}
 					
 					bottomlessBundleBlockEntity.setChanged();
@@ -151,9 +145,9 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 	@Override
     public int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
 		BlockEntity blockEntity = world.getBlockEntity(pos);
-		if (blockEntity instanceof BottomlessBundleBlockEntity bottomlessBundleBlockEntity) {
-			float curr = bottomlessBundleBlockEntity.storage.amount;
-			float max = bottomlessBundleBlockEntity.storage.getCapacity();
+		if (blockEntity instanceof BottomlessBundleBlockEntity bundle) {
+			float curr = bundle.storage.getStackInSlot(0).getCount();
+			float max = BottomlessBundleItem.getMaxStoredAmount(bundle.powerLevel);
 			return Mth.floor(curr / max * 14.0f) + curr > 0 ? 1 : 0;
 		}
 		

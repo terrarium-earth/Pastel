@@ -147,7 +147,8 @@ public class SpectrumCommon {
 		NeoForge.EVENT_BUS.addListener(SpectrumBlockEntities::registerAdditionalTypes);
 		logInfo("Registering Capabilities...");
 		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerBlocks);
-		
+		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerItems);
+
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");
 		SpectrumPastelUpgrades.register();
@@ -229,7 +230,6 @@ public class SpectrumCommon {
 		
 		logInfo("Adding to Fabric's Registries...");
 		SpectrumFlammableBlocks.register();
-		SpectrumStrippableBlocks.register();
 		SpectrumWaxableBlocks.register();
 		SpectrumTillableBlocks.register();
 
