@@ -4,14 +4,7 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.color.ItemColors;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
-import de.dafuqs.spectrum.blocks.BedrockAnvilBlock;
-import de.dafuqs.spectrum.blocks.BismuthBudBlock;
-import de.dafuqs.spectrum.blocks.BlockWithTooltip;
-import de.dafuqs.spectrum.blocks.CrackedEndPortalFrameBlock;
-import de.dafuqs.spectrum.blocks.DeeperDownPortalBlock;
-import de.dafuqs.spectrum.blocks.PrimordialFireBlock;
-import de.dafuqs.spectrum.blocks.PureRedstoneBlock;
-import de.dafuqs.spectrum.blocks.TallCropBlock;
+import de.dafuqs.spectrum.blocks.*;
 import de.dafuqs.spectrum.blocks.amalgam.IncandescentAmalgamBlock;
 import de.dafuqs.spectrum.blocks.amalgam.IncandescentAmalgamItem;
 import de.dafuqs.spectrum.blocks.amphora.AmphoraBlock;
@@ -245,10 +238,6 @@ import de.dafuqs.spectrum.registries.client.SpectrumTextureKeys;
 import de.dafuqs.spectrum.registries.client.SpectrumTextureMaps;
 import de.dafuqs.spectrum.registries.client.SpectrumTexturedModels;
 import de.dafuqs.spectrum.registries.client.SpectrumTextures;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
-import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -1303,8 +1292,8 @@ public class SpectrumBlocks {
 	public static final FlowerPotBlock POTTED_WEEPING_GALA_SPRIG = register(pottedPlant(block("potted_weeping_gala_sprig", new FlowerPotBlock(WEEPING_GALA_SPRIG, pottedPlant())), false));
 	
 	public static final Block WEEPING_GALA_LEAVES = register(singleton(blockWithItem("weeping_gala_leaves", new LeavesBlock(copyWithMapColor(OAK_LEAVES, MapColor.WARPED_WART_BLOCK)), InkColors.LIME), TexturedModel.LEAVES));
-	public static final Block WEEPING_GALA_LOG = register(burnable(log(blockWithItem("weeping_gala_log", new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME)), 600));
 	public static final Block STRIPPED_WEEPING_GALA_LOG = register(burnable(log(blockWithItem("stripped_weeping_gala_log", new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME)), 600));
+	public static final Block WEEPING_GALA_LOG = register(burnable(log(blockWithItem("weeping_gala_log", new SpectrumLogBlock(galaWood(MapColor.COLOR_BROWN), STRIPPED_WEEPING_GALA_LOG), InkColors.LIME)), 600));
 	public static final Block WEEPING_GALA_WOOD = register(burnable(wood(blockWithItem("weeping_gala_wood", new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME), WEEPING_GALA_LOG), 600));
 	public static final Block STRIPPED_WEEPING_GALA_WOOD = register(burnable(wood(blockWithItem("stripped_weeping_gala_wood", new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME), STRIPPED_WEEPING_GALA_LOG), 600));
 	
@@ -1314,8 +1303,8 @@ public class SpectrumBlocks {
 			.select(WeepingGalaFrondsTipBlock.Form.SPRIG, SpectrumModelHelper.createModelVariant(SpectrumTexturedModels.cross(b -> WEEPING_GALA_FRONDS, "_sprig").createWithSuffix(block, "_sprig", ctx.modelOutput)))
 			.select(WeepingGalaFrondsTipBlock.Form.RESIN, SpectrumModelHelper.createModelVariant(SpectrumTexturedModels.cross(b -> WEEPING_GALA_FRONDS, "_sprig_resin").createWithSuffix(block, "_resin", ctx.modelOutput))))));
 	
-	public static final BlockSetType GALA_BLOCK_SET_TYPE = BlockSetTypeBuilder.copyOf(BlockSetType.CHERRY).build(SpectrumCommon.locate("gala"));
-	public static final WoodType GALA_WOOD_TYPE = WoodTypeBuilder.copyOf(WoodType.CHERRY).build(SpectrumCommon.locate("gala"), GALA_BLOCK_SET_TYPE);
+	public static final BlockSetType GALA_BLOCK_SET_TYPE = new BlockSetType("gala");
+	public static final WoodType GALA_WOOD_TYPE = new WoodType("gala", GALA_BLOCK_SET_TYPE);
 	
 	public static final Block WEEPING_GALA_PLANKS = register(burnable(blockWithItem("weeping_gala_planks", new Block(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME), 600));
 	public static final Block WEEPING_GALA_STAIRS = register(burnable(blockWithItem("weeping_gala_stairs", new StairBlock(WEEPING_GALA_PLANKS.defaultBlockState(), galaWood(MapColor.COLOR_BROWN)), InkColors.LIME), 600));
@@ -1798,48 +1787,6 @@ public class SpectrumBlocks {
 	public static final PottedColoredSaplingBlock POTTED_WHITE_SAPLING = registerPottedColoredSapling("potted_white_sapling", WHITE_SAPLING);
 	public static final PottedColoredSaplingBlock POTTED_YELLOW_SAPLING = registerPottedColoredSapling("potted_yellow_sapling", YELLOW_SAPLING);
 	
-	public static ColoredLogBlock registerColoredLog(String name, InkColor color) {
-		return register(log(blockWithItem(name, new ColoredLogBlock(copyWithMapColor(OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor()), color), color)));
-	}
-	
-	public static final ColoredLogBlock BLACK_LOG = registerColoredLog("black_log", InkColors.BLACK);
-	public static final ColoredLogBlock BLUE_LOG = registerColoredLog("blue_log", InkColors.BLUE);
-	public static final ColoredLogBlock BROWN_LOG = registerColoredLog("brown_log", InkColors.BROWN);
-	public static final ColoredLogBlock CYAN_LOG = registerColoredLog("cyan_log", InkColors.CYAN);
-	public static final ColoredLogBlock GRAY_LOG = registerColoredLog("gray_log", InkColors.GRAY);
-	public static final ColoredLogBlock GREEN_LOG = registerColoredLog("green_log", InkColors.GREEN);
-	public static final ColoredLogBlock LIGHT_BLUE_LOG = registerColoredLog("light_blue_log", InkColors.LIGHT_BLUE);
-	public static final ColoredLogBlock LIGHT_GRAY_LOG = registerColoredLog("light_gray_log", InkColors.LIGHT_GRAY);
-	public static final ColoredLogBlock LIME_LOG = registerColoredLog("lime_log", InkColors.LIME);
-	public static final ColoredLogBlock MAGENTA_LOG = registerColoredLog("magenta_log", InkColors.MAGENTA);
-	public static final ColoredLogBlock ORANGE_LOG = registerColoredLog("orange_log", InkColors.ORANGE);
-	public static final ColoredLogBlock PINK_LOG = registerColoredLog("pink_log", InkColors.PINK);
-	public static final ColoredLogBlock PURPLE_LOG = registerColoredLog("purple_log", InkColors.PURPLE);
-	public static final ColoredLogBlock RED_LOG = registerColoredLog("red_log", InkColors.RED);
-	public static final ColoredLogBlock WHITE_LOG = registerColoredLog("white_log", InkColors.WHITE);
-	public static final ColoredLogBlock YELLOW_LOG = registerColoredLog("yellow_log", InkColors.YELLOW);
-	
-	public static ColoredWoodBlock registerColoredWood(String name, ColoredLogBlock logBlock) {
-		return register(wood(blockWithItem(name, new ColoredWoodBlock(copyWithMapColor(OAK_WOOD, logBlock.defaultMapColor()), logBlock.getColor()), logBlock.getColor()), logBlock));
-	}
-	
-	public static final ColoredWoodBlock BLACK_WOOD = registerColoredWood("black_wood", BLACK_LOG);
-	public static final ColoredWoodBlock BLUE_WOOD = registerColoredWood("blue_wood", BLUE_LOG);
-	public static final ColoredWoodBlock BROWN_WOOD = registerColoredWood("brown_wood", BROWN_LOG);
-	public static final ColoredWoodBlock CYAN_WOOD = registerColoredWood("cyan_wood", CYAN_LOG);
-	public static final ColoredWoodBlock GRAY_WOOD = registerColoredWood("gray_wood", GRAY_LOG);
-	public static final ColoredWoodBlock GREEN_WOOD = registerColoredWood("green_wood", GREEN_LOG);
-	public static final ColoredWoodBlock LIGHT_BLUE_WOOD = registerColoredWood("light_blue_wood", LIGHT_BLUE_LOG);
-	public static final ColoredWoodBlock LIGHT_GRAY_WOOD = registerColoredWood("light_gray_wood", LIGHT_GRAY_LOG);
-	public static final ColoredWoodBlock LIME_WOOD = registerColoredWood("lime_wood", LIME_LOG);
-	public static final ColoredWoodBlock MAGENTA_WOOD = registerColoredWood("magenta_wood", MAGENTA_LOG);
-	public static final ColoredWoodBlock ORANGE_WOOD = registerColoredWood("orange_wood", ORANGE_LOG);
-	public static final ColoredWoodBlock PINK_WOOD = registerColoredWood("pink_wood", PINK_LOG);
-	public static final ColoredWoodBlock PURPLE_WOOD = registerColoredWood("purple_wood", PURPLE_LOG);
-	public static final ColoredWoodBlock RED_WOOD = registerColoredWood("red_wood", RED_LOG);
-	public static final ColoredWoodBlock WHITE_WOOD = registerColoredWood("white_wood", WHITE_LOG);
-	public static final ColoredWoodBlock YELLOW_WOOD = registerColoredWood("yellow_wood", YELLOW_LOG);
-	
 	public static ColoredStrippedLogBlock registerColoredStrippedLog(String name, InkColor color) {
 		return register(log(blockWithItem(name, new ColoredStrippedLogBlock(copyWithMapColor(STRIPPED_OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor()), color), color)));
 	}
@@ -1860,10 +1807,52 @@ public class SpectrumBlocks {
 	public static final ColoredStrippedLogBlock STRIPPED_RED_LOG = registerColoredStrippedLog("stripped_red_log", InkColors.RED);
 	public static final ColoredStrippedLogBlock STRIPPED_WHITE_LOG = registerColoredStrippedLog("stripped_white_log", InkColors.WHITE);
 	public static final ColoredStrippedLogBlock STRIPPED_YELLOW_LOG = registerColoredStrippedLog("stripped_yellow_log", InkColors.YELLOW);
-	
+
+	public static ColoredLogBlock registerColoredLog(String name, InkColor color, Block strippedForm) {
+		return register(log(blockWithItem(name, new ColoredLogBlock(copyWithMapColor(OAK_LOG, color.getDyeColor().orElse(DyeColor.LIME).getMapColor()), color, strippedForm), color)));
+	}
+
+	public static final ColoredLogBlock BLACK_LOG = registerColoredLog("black_log", InkColors.BLACK, STRIPPED_BLACK_LOG);
+	public static final ColoredLogBlock BLUE_LOG = registerColoredLog("blue_log", InkColors.BLUE, STRIPPED_BLUE_LOG);
+	public static final ColoredLogBlock BROWN_LOG = registerColoredLog("brown_log", InkColors.BROWN, STRIPPED_BROWN_LOG);
+	public static final ColoredLogBlock CYAN_LOG = registerColoredLog("cyan_log", InkColors.CYAN, STRIPPED_CYAN_LOG);
+	public static final ColoredLogBlock GRAY_LOG = registerColoredLog("gray_log", InkColors.GRAY, STRIPPED_GRAY_LOG);
+	public static final ColoredLogBlock GREEN_LOG = registerColoredLog("green_log", InkColors.GREEN, STRIPPED_GREEN_LOG);
+	public static final ColoredLogBlock LIGHT_BLUE_LOG = registerColoredLog("light_blue_log", InkColors.LIGHT_BLUE, STRIPPED_LIGHT_BLUE_LOG);
+	public static final ColoredLogBlock LIGHT_GRAY_LOG = registerColoredLog("light_gray_log", InkColors.LIGHT_GRAY, STRIPPED_LIGHT_GRAY_LOG);
+	public static final ColoredLogBlock LIME_LOG = registerColoredLog("lime_log", InkColors.LIME, STRIPPED_LIME_LOG);
+	public static final ColoredLogBlock MAGENTA_LOG = registerColoredLog("magenta_log", InkColors.MAGENTA, STRIPPED_MAGENTA_LOG);
+	public static final ColoredLogBlock ORANGE_LOG = registerColoredLog("orange_log", InkColors.ORANGE, STRIPPED_ORANGE_LOG);
+	public static final ColoredLogBlock PINK_LOG = registerColoredLog("pink_log", InkColors.PINK, STRIPPED_PINK_LOG);
+	public static final ColoredLogBlock PURPLE_LOG = registerColoredLog("purple_log", InkColors.PURPLE, STRIPPED_PURPLE_LOG);
+	public static final ColoredLogBlock RED_LOG = registerColoredLog("red_log", InkColors.RED, STRIPPED_RED_LOG);
+	public static final ColoredLogBlock WHITE_LOG = registerColoredLog("white_log", InkColors.WHITE, STRIPPED_WHITE_LOG);
+	public static final ColoredLogBlock YELLOW_LOG = registerColoredLog("yellow_log", InkColors.YELLOW, STRIPPED_YELLOW_LOG);
+
 	public static ColoredStrippedWoodBlock registerColoredStrippedWood(String name, ColoredStrippedLogBlock logBlock) {
 		return register(wood(blockWithItem(name, new ColoredStrippedWoodBlock(copyWithMapColor(STRIPPED_OAK_WOOD, logBlock.defaultMapColor()), logBlock.getColor()), logBlock.getColor()), logBlock));
 	}
+
+	public static ColoredWoodBlock registerColoredWood(String name, ColoredLogBlock logBlock) {
+		return register(wood(blockWithItem(name, new ColoredWoodBlock(copyWithMapColor(OAK_WOOD, logBlock.defaultMapColor()), logBlock.getColor()), logBlock.getColor()), logBlock));
+	}
+
+	public static final ColoredWoodBlock BLACK_WOOD = registerColoredWood("black_wood", BLACK_LOG);
+	public static final ColoredWoodBlock BLUE_WOOD = registerColoredWood("blue_wood", BLUE_LOG);
+	public static final ColoredWoodBlock BROWN_WOOD = registerColoredWood("brown_wood", BROWN_LOG);
+	public static final ColoredWoodBlock CYAN_WOOD = registerColoredWood("cyan_wood", CYAN_LOG);
+	public static final ColoredWoodBlock GRAY_WOOD = registerColoredWood("gray_wood", GRAY_LOG);
+	public static final ColoredWoodBlock GREEN_WOOD = registerColoredWood("green_wood", GREEN_LOG);
+	public static final ColoredWoodBlock LIGHT_BLUE_WOOD = registerColoredWood("light_blue_wood", LIGHT_BLUE_LOG);
+	public static final ColoredWoodBlock LIGHT_GRAY_WOOD = registerColoredWood("light_gray_wood", LIGHT_GRAY_LOG);
+	public static final ColoredWoodBlock LIME_WOOD = registerColoredWood("lime_wood", LIME_LOG);
+	public static final ColoredWoodBlock MAGENTA_WOOD = registerColoredWood("magenta_wood", MAGENTA_LOG);
+	public static final ColoredWoodBlock ORANGE_WOOD = registerColoredWood("orange_wood", ORANGE_LOG);
+	public static final ColoredWoodBlock PINK_WOOD = registerColoredWood("pink_wood", PINK_LOG);
+	public static final ColoredWoodBlock PURPLE_WOOD = registerColoredWood("purple_wood", PURPLE_LOG);
+	public static final ColoredWoodBlock RED_WOOD = registerColoredWood("red_wood", RED_LOG);
+	public static final ColoredWoodBlock WHITE_WOOD = registerColoredWood("white_wood", WHITE_LOG);
+	public static final ColoredWoodBlock YELLOW_WOOD = registerColoredWood("yellow_wood", YELLOW_LOG);
 	
 	public static final ColoredStrippedWoodBlock STRIPPED_BLACK_WOOD = registerColoredStrippedWood("stripped_black_wood", STRIPPED_BLACK_LOG);
 	public static final ColoredStrippedWoodBlock STRIPPED_BLUE_WOOD = registerColoredStrippedWood("stripped_blue_wood", STRIPPED_BLUE_LOG);

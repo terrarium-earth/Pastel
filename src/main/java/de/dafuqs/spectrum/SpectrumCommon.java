@@ -230,7 +230,6 @@ public class SpectrumCommon {
 		
 		logInfo("Adding to Fabric's Registries...");
 		SpectrumFlammableBlocks.register();
-		SpectrumStrippableBlocks.register();
 		SpectrumWaxableBlocks.register();
 		SpectrumTillableBlocks.register();
 
