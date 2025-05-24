@@ -41,6 +41,32 @@ cloche {
 
     metadata {
         modId = "pastel"
+        name = "Pastel"
+
+        description = "Do flowers dream of the moon?"
+
+        license = "lGPL3"
+
+        url = "https://www.curseforge.com/minecraft/mc-mods/pastel"
+        sources = "https://github.com/terrarium-earth/Pastel"
+        issues = "https://github.com/terrarium-earth/Pastel/issues"
+
+        icon = "assets/spectrum/icon.png"
+
+        dependency {
+            modId = "modonomicon"
+        }
+
+        author("Azzyypaaras", "azzy@terrarium.earth")
+
+        contributor("Salad Cat (OST)")
+        contributor("MsRandom", "ashley@terrarium.earth")
+        contributor("Robotgiggle")
+        contributor("pizzacalz0ne")
+        contributor("Lily")
+        contributor("HoneyHive (Illustrations)")
+        contributor("Electro_593")
+        contributor("Noaaaaaaaaan")
     }
 
     singleTarget {
