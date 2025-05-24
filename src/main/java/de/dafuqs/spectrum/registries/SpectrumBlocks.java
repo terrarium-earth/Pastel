@@ -238,7 +238,7 @@ import de.dafuqs.spectrum.registries.client.SpectrumTextureKeys;
 import de.dafuqs.spectrum.registries.client.SpectrumTextureMaps;
 import de.dafuqs.spectrum.registries.client.SpectrumTexturedModels;
 import de.dafuqs.spectrum.registries.client.SpectrumTextures;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
@@ -2503,7 +2503,7 @@ public class SpectrumBlocks {
 		public BlockRegistrar<T> withCutoutRenderLayer() {
 			CLIENT_REGISTRAR.defer(() -> {
 				Objects.requireNonNull(block);
-				BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout());
+				ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutout());
 			});
 			return this;
 		}
@@ -2511,7 +2511,7 @@ public class SpectrumBlocks {
 		public BlockRegistrar<T> withMippedCutoutRenderLayer() {
 			CLIENT_REGISTRAR.defer(() -> {
 				Objects.requireNonNull(block);
-				BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutoutMipped());
+				ItemBlockRenderTypes.setRenderLayer(block, RenderType.cutoutMipped());
 			});
 			return this;
 		}
@@ -2519,7 +2519,7 @@ public class SpectrumBlocks {
 		public BlockRegistrar<T> withTranslucentRenderLayer() {
 			CLIENT_REGISTRAR.defer(() -> {
 				Objects.requireNonNull(block);
-				BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.translucent());
+				ItemBlockRenderTypes.setRenderLayer(block, RenderType.translucent());
 			});
 			return this;
 		}
