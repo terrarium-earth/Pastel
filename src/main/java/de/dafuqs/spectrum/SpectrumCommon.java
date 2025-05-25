@@ -108,7 +108,7 @@ public class SpectrumCommon {
 		logInfo("Starting Common Startup");
 		
 		// Register internals
-		SpectrumRegistries.register();
+		SpectrumRegistries.register(modEventBus);
 		InkColors.register();
 		InkColorMixes.register();
 		SpectrumEntityAttributes.register();
@@ -230,8 +230,6 @@ public class SpectrumCommon {
 		
 		logInfo("Adding to Fabric's Registries...");
 		SpectrumFlammableBlocks.register();
-		SpectrumWaxableBlocks.register();
-		SpectrumTillableBlocks.register();
 
 		logInfo("Registering Game Events...");
 		SpectrumGameEvents.register();
