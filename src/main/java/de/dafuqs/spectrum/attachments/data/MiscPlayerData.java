@@ -1,33 +1,43 @@
-package de.dafuqs.spectrum.cca;
+package de.dafuqs.spectrum.attachments.data;
 
-import de.dafuqs.spectrum.SpectrumCommon;
+import com.mojang.serialization.*;
+import com.mojang.serialization.codecs.*;
 import de.dafuqs.spectrum.api.entity.PlayerEntityAccessor;
 import de.dafuqs.spectrum.api.item.SleepAlteringItem;
 import de.dafuqs.spectrum.networking.s2c_payloads.SyncMentalPresencePayload;
 import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
+import net.minecraft.network.*;
+import net.minecraft.network.codec.*;
+import net.minecraft.network.protocol.common.custom.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.attachment.*;
+import net.neoforged.neoforge.network.handling.*;
 import org.jetbrains.annotations.NotNull;
-import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
-import org.ladysnake.cca.api.v3.component.tick.CommonTickingComponent;
 
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Because not every niche thing can have its own component
  */
-public class MiscPlayerDataComponent implements AutoSyncedComponent, CommonTickingComponent {
-    
-    public static final org.ladysnake.cca.api.v3.component.ComponentKey<MiscPlayerDataComponent> MISC_PLAYER_DATA_COMPONENT = org.ladysnake.cca.api.v3.component.ComponentRegistry.getOrCreate(SpectrumCommon.locate("misc_player_data"), MiscPlayerDataComponent.class);
-    private final Player player;
+@SuppressWarnings("unchecked")
+public class MiscPlayerData {
+
+    public static final Codec<MiscPlayerData> CODEC = RecordCodecBuilder.create(i -> i.group(
+            Codec.INT.fieldOf("ticksBeforeSleep").forGetter(m -> m.ticksBeforeSleep),
+            Codec.INT.fieldOf("sleepingWindow").forGetter(m -> m.sleepingWindow),
+            Codec.INT.fieldOf("sleepInvincibility").forGetter(m -> m.sleepInvincibility),
+            BuiltInRegistries.ITEM.byNameCodec().optionalFieldOf("sleepConsumable").forGetter(m -> (Optional<Item>) (Object) m.sleepConsumable)
+    ).apply(i, MiscPlayerData::ofCodec));
+
+    public static final AttachmentType<MiscPlayerData> ATTACHMENT =
+            AttachmentType.builder((holder) -> new MiscPlayerData((Player) holder)).serialize(CODEC).build();
+
+    private Player player;
 
     // Sleep
     private int ticksBeforeSleep = -1, sleepingWindow = -1, sleepInvincibility;
@@ -38,25 +48,32 @@ public class MiscPlayerDataComponent implements AutoSyncedComponent, CommonTicki
     private boolean isLunging, bHopWindow, perfectCounter;
     private int parryTicks;
 
-    public MiscPlayerDataComponent(Player player) {
+    public MiscPlayerData(@NotNull Player player) {
         this.player = player;
     }
 
+    private MiscPlayerData() {}
 
-    @Override
+    public static MiscPlayerData ofCodec(int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable) {
+        var data = new MiscPlayerData();
+        data.ticksBeforeSleep = ticksBeforeSleep;
+        data.sleepingWindow = sleepingWindow;
+        data.sleepInvincibility = sleepInvincibility;
+
+        data.sleepConsumable = (Optional<SleepAlteringItem>) (Object) sleepConsumable;
+        return data;
+    }
+
     public void tick() {
         tickSleep();
         tickSwordMechanics();
-    }
 
-    @Override
-    public void serverTick() {
-        org.ladysnake.cca.api.v3.component.tick.CommonTickingComponent.super.serverTick();
-
-        var fortitude = player.getAttributeValue(SpectrumEntityAttributes.MENTAL_PRESENCE);
-        if (lastSyncedSleepPotency != fortitude) {
-            lastSyncedSleepPotency = fortitude;
-            SyncMentalPresencePayload.sendMentalPresenceSync((ServerPlayer) player, fortitude);
+        if (!player.level().isClientSide()) {
+            var fortitude = player.getAttributeValue(SpectrumEntityAttributes.MENTAL_PRESENCE);
+            if (lastSyncedSleepPotency != fortitude) {
+                lastSyncedSleepPotency = fortitude;
+                SyncMentalPresencePayload.sendMentalPresenceSync((ServerPlayer) player, fortitude);
+            }
         }
     }
 
@@ -133,8 +150,10 @@ public class MiscPlayerDataComponent implements AutoSyncedComponent, CommonTicki
                 player.startSleeping(player.blockPosition());
                 ((PlayerEntityAccessor) player).setSleepTimer(0);
                 var world = player.level();
-                if (!world.isClientSide())
+                if (!world.isClientSide()) {
                     ((ServerLevel) world).updateSleepingPlayerList();
+                    sync();
+                }
             }
         }
 
@@ -186,45 +205,30 @@ public class MiscPlayerDataComponent implements AutoSyncedComponent, CommonTicki
             sleepConsumable.ifPresent(p -> p.applyPenalties(player));
 
         sleepConsumable = Optional.empty();
+        sync();
     }
 
     public void setSleepTimers(int wait, int window, int invulnTicks) {
         ticksBeforeSleep = wait;
         sleepingWindow = window;
         sleepInvincibility = invulnTicks;
+        sync();
     }
     
     public void setLastSleepItem(@NotNull SleepAlteringItem item) {
         this.sleepConsumable = Optional.of(item);
     }
 
-    @Override
-    public void readFromNbt(CompoundTag tag, HolderLookup.@NotNull Provider wrapperLookup) {
-        ticksBeforeSleep = tag.getInt("ticksBeforeSleep");
-        sleepingWindow = tag.getInt("sleepingWindow");
-        sleepInvincibility = tag.getInt("sleepInvincibility");
-
-        if (tag.contains("sleepConsumable")) {
-            sleepConsumable = Optional.of((SleepAlteringItem) BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(tag.getString("sleepConsumable"))));
-        }
+    public void sync() {
+        AttachmentUtil.syncToTracking(new Payload(player.getUUID(), ticksBeforeSleep, sleepingWindow, sleepInvincibility, (Optional<Item>) (Object) sleepConsumable),player.level(), player.blockPosition());
     }
 
-    @Override
-    public void writeToNbt(CompoundTag tag, HolderLookup.@NotNull Provider wrapperLookup) {
-        tag.putInt("ticksBeforeSleep", ticksBeforeSleep);
-        tag.putInt("sleepingWindow", sleepingWindow);
-        tag.putInt("sleepInvincibility", sleepInvincibility);
+    public static MiscPlayerData get(@NotNull Player player) {
+        var data = player.getData(ATTACHMENT);
+        if (data.player == null)
+            data.player = player;
 
-        sleepConsumable
-                .map(sleepPenalizingItem -> (Item) sleepPenalizingItem)
-                .map(Item::builtInRegistryHolder)
-                .flatMap(Holder.Reference::unwrapKey)
-                .map(ResourceKey::location)
-                .ifPresent(id -> tag.putString("sleepConsumable", id.toString()));
-    }
-
-    public static MiscPlayerDataComponent get(@NotNull Player player) {
-        return MISC_PLAYER_DATA_COMPONENT.get(player);
+        return data;
     }
 
     public void setLastSyncedSleepPotency(double lastSyncedSleepPotency) {
@@ -233,5 +237,37 @@ public class MiscPlayerDataComponent implements AutoSyncedComponent, CommonTicki
 
     public double getLastSyncedSleepPotency() {
         return lastSyncedSleepPotency;
+    }
+
+    public record Payload(UUID id, int ticksBeforeSleep, int sleepingWindow, int sleepInvincibility, Optional<Item> sleepConsumable) implements CustomPacketPayload {
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
+                UUIDUtil.STREAM_CODEC, Payload::id,
+                ByteBufCodecs.INT, Payload::ticksBeforeSleep,
+                ByteBufCodecs.INT, Payload::sleepingWindow,
+                ByteBufCodecs.INT, Payload::sleepInvincibility,
+                ByteBufCodecs.optional(ByteBufCodecs.registry(Registries.ITEM)), Payload::sleepConsumable,
+                Payload::new
+        );
+
+        public static final Type<Payload> TYPE = AttachmentUtil.create("playerMisc");
+
+        public static void execute(Payload payload, IPayloadContext context) {
+            var player = context.player().level().getPlayerByUUID(payload.id);
+
+            if (player == null)
+                return;
+
+            var data = player.getData(ATTACHMENT);
+            data.ticksBeforeSleep = payload.ticksBeforeSleep();
+            data.sleepingWindow = payload.sleepingWindow();
+            data.sleepInvincibility = payload.sleepInvincibility();
+            data.sleepConsumable = (Optional<SleepAlteringItem>) (Object) payload.sleepConsumable;
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
     }
 }

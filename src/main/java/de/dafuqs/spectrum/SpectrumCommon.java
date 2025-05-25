@@ -7,6 +7,7 @@ import de.dafuqs.spectrum.api.color.ColorRegistry;
 import de.dafuqs.spectrum.api.energy.color.InkColorMixes;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
+import de.dafuqs.spectrum.attachments.*;
 import de.dafuqs.spectrum.blocks.pastel_network.Pastel;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.compat.reverb.DimensionReverb;
@@ -148,6 +149,9 @@ public class SpectrumCommon {
 		logInfo("Registering Capabilities...");
 		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerBlocks);
 		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerItems);
+
+		logInfo("Registering Data Attachments...");
+		SpectrumStoredData.register();
 
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");

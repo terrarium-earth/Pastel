@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.mixin;
 
-import de.dafuqs.spectrum.cca.HardcoreDeathComponent;
+import de.dafuqs.spectrum.attachments.HardcoreDeathTracker;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.world.level.GameType;
@@ -22,8 +22,8 @@ public abstract class ServerPlayerInteractionManagerMixin {
 	// forget about their hardcore death
 	@Inject(at = @At("HEAD"), method = "setGameModeForPlayer")
 	public void spectrum$mitigateFallDamageWithPuffCirclet(GameType gameMode, GameType previousGameMode, CallbackInfo ci) {
-		if (gameMode != GameType.SPECTATOR && previousGameMode == GameType.SPECTATOR && HardcoreDeathComponent.hasHardcoreDeath(player.getGameProfile())) {
-			HardcoreDeathComponent.removeHardcoreDeath(player.getGameProfile());
+		if (gameMode != GameType.SPECTATOR && previousGameMode == GameType.SPECTATOR && HardcoreDeathTracker.hasHardcoreDeath(player.getGameProfile())) {
+			HardcoreDeathTracker.removeHardcoreDeath(player.getGameProfile());
 		}
 	}
 	

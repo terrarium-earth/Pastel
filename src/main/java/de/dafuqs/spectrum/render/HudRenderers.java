@@ -3,15 +3,14 @@ package de.dafuqs.spectrum.render;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.cca.azure_dike.AzureDikeComponent;
-import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
+import de.dafuqs.spectrum.attachments.data.azure_dike.DikeShieldData;
+import de.dafuqs.spectrum.attachments.data.azure_dike.AzureDikeProvider;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.resources.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.*;
@@ -48,7 +47,7 @@ public class HudRenderers {
 			var x = gui.guiWidth() / 2 - 91;
 			var y = gui.guiWidth() / 2 + 91;
 			
-			AzureDikeComponent azureDikeComponent = AzureDikeProvider.getAzureDikeComponent(cameraPlayer);
+			DikeShieldData azureDikeComponent = AzureDikeProvider.getAzureDikeComponent(cameraPlayer);
 			int maxCharges = (int) Math.ceil(azureDikeComponent.getMaxProtection());
 			if (maxCharges > 0) {
 				int charges = (int) Math.ceil(azureDikeComponent.getCurrentProtection());
@@ -66,7 +65,7 @@ public class HudRenderers {
 				boolean renderBackRow = filledDikeCanisters > 0;
 				boolean hasArmor = cameraPlayer.getArmorValue() > 0;
 
-				var texture = AzureDikeComponent.AZURE_DIKE_BAR_TEXTURE;
+				var texture = DikeShieldData.AZURE_DIKE_BAR_TEXTURE;
 
 				x += SpectrumCommon.CONFIG.AzureDikeHudOffsetX;
 				y += hasArmor ? SpectrumCommon.CONFIG.AzureDikeHudOffsetYWithArmor : SpectrumCommon.CONFIG.AzureDikeHudOffsetY;

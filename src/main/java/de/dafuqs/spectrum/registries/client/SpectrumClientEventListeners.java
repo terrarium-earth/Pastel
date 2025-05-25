@@ -8,6 +8,7 @@ import de.dafuqs.spectrum.api.energy.InkPowered;
 import de.dafuqs.spectrum.api.interaction.ItemProvider;
 import de.dafuqs.spectrum.api.interaction.ItemProviderRegistry;
 import de.dafuqs.spectrum.api.render.DynamicItemRenderer;
+import de.dafuqs.spectrum.attachments.data.*;
 import de.dafuqs.spectrum.blocks.bottomless_bundle.BottomlessBundleItem;
 import de.dafuqs.spectrum.blocks.pastel_network.Pastel;
 import de.dafuqs.spectrum.data_loaders.ParticleSpawnerParticlesDataLoader;
@@ -62,6 +63,7 @@ import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.*;
+import net.neoforged.neoforge.event.tick.*;
 import net.neoforged.neoforge.resource.*;
 import org.jetbrains.annotations.NotNull;
 import oshi.util.tuples.Triplet;
@@ -91,10 +93,18 @@ public class SpectrumClientEventListeners {
 		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onDrawTooltips);
 		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onDimensionChange);
 		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::afterClientTick);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onEntityTick);
 
 		registerCustomItemRenderer(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), BottomlessBundleItem.Renderer::new);
 		registerCustomItemRenderer(SpectrumItems.OMNI_ACCELERATOR, OmniAcceleratorItem.Renderer::new);
+	}
 
+	private static void onEntityTick(EntityTickEvent event) {
+		var entity = event.getEntity();
+
+		if (entity instanceof LivingEntity living) {
+			PrimordialFireData.clientTick(living);
+		}
 	}
 
 	private static void afterClientTick(ClientTickEvent.Post event) {

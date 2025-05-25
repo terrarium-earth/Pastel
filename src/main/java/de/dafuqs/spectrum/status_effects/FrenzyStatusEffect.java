@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.cca.LastKillComponent;
+import de.dafuqs.spectrum.attachments.data.LastKillData;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
 import net.minecraft.world.effect.MobEffect;
@@ -41,7 +41,7 @@ public class FrenzyStatusEffect extends MobEffect {
 	
 	@Override
 	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-		long lastKillTick = LastKillComponent.getLastKillTick(entity);
+		long lastKillTick = LastKillData.getLastKillTick(entity);
 		long worldTime = entity.level().getGameTime();
 		long lastKillTickDifference = worldTime - lastKillTick;
 		boolean scoredKillInTime = lastKillTick >= 0 && lastKillTickDifference < REQUIRE_KILL_EVERY_X_TICKS;

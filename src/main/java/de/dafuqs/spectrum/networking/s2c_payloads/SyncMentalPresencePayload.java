@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.networking.s2c_payloads;
 
-import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.attachments.data.MiscPlayerData;
 import de.dafuqs.spectrum.deeper_down.DimensionRenderEffects;
 import de.dafuqs.spectrum.networking.SpectrumC2SPackets;
 import net.neoforged.api.distmarker.Dist;
@@ -28,7 +28,7 @@ public record SyncMentalPresencePayload(double value) implements CustomPacketPay
 	@OnlyIn(Dist.CLIENT)
 	public static void execute(SyncMentalPresencePayload payload, IPayloadContext context) {
 		var player = context.player();
-		MiscPlayerDataComponent.get(player).setLastSyncedSleepPotency(payload.value);
+		MiscPlayerData.get(player).setLastSyncedSleepPotency(payload.value);
 		DimensionRenderEffects.markForEffectUpdate();
 	}
 	

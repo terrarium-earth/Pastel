@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.items.tools;
 
 import de.dafuqs.spectrum.api.item.SleepAlteringItem;
 import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
-import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.attachments.data.MiscPlayerData;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
 import net.minecraft.ChatFormatting;
@@ -42,7 +42,7 @@ public class SoothingBouquetItem extends Item implements SleepAlteringItem, Slot
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
         if (user instanceof Player player) {
-            var component = MiscPlayerDataComponent.get(player);
+            var component = MiscPlayerData.get(player);
 
             component.setSleepTimers(50, 20 * 6, 0);
             component.setLastSleepItem(this);

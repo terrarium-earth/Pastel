@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.api.item;
 
-import de.dafuqs.spectrum.cca.azure_dike.AzureDikeComponent;
-import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
-import de.dafuqs.spectrum.cca.azure_dike.DefaultAzureDikeComponent;
+import de.dafuqs.spectrum.attachments.data.azure_dike.DikeShieldData;
+import de.dafuqs.spectrum.attachments.data.azure_dike.AzureDikeProvider;
+import de.dafuqs.spectrum.attachments.data.azure_dike.AzureDikeData;
 import top.theillusivec4.curios.api.CuriosApi;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -31,7 +31,7 @@ public interface AzureDikeItem {
 	default void recalculate(LivingEntity livingEntity) {
 		Level world = livingEntity.level();
 		if (!world.isClientSide) {
-			AzureDikeComponent azureDikeComponent = AzureDikeProvider.AZURE_DIKE_COMPONENT.get(livingEntity);
+			DikeShieldData azureDikeComponent = AzureDikeProvider.getAzureDikeComponent(livingEntity);
 
 			Optional<ICuriosItemHandler> curiosInventory = CuriosApi.getCuriosInventory(livingEntity);
 			if (curiosInventory.isPresent()) {
@@ -48,8 +48,8 @@ public interface AzureDikeItem {
 					maxAzureDikeMultiplier += azureDikeItem.maxAzureDikeMultiplier(stack) - 1;
 				}
 				
-				int ticksPerPointOfRecharge = (int) Math.max(1, DefaultAzureDikeComponent.BASE_RECHARGE_DELAY_TICKS / rechargeSpeedModifier);
-				int rechargeDelayTicksAfterGettingHit = (int) Math.max(1, DefaultAzureDikeComponent.BASE_RECHARGE_DELAY_TICKS_AFTER_DAMAGE / rechargeDelayAfterDamageModifier);
+				int ticksPerPointOfRecharge = (int) Math.max(1, AzureDikeData.BASE_RECHARGE_DELAY_TICKS / rechargeSpeedModifier);
+				int rechargeDelayTicksAfterGettingHit = (int) Math.max(1, AzureDikeData.BASE_RECHARGE_DELAY_TICKS_AFTER_DAMAGE / rechargeDelayAfterDamageModifier);
 				
 				azureDikeComponent.set(Math.round((maxAzureDike * maxAzureDikeMultiplier)), ticksPerPointOfRecharge, rechargeDelayTicksAfterGettingHit, false);
 			}

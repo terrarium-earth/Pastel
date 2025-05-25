@@ -1,5 +1,7 @@
 package de.dafuqs.spectrum.networking;
 
+import de.dafuqs.spectrum.attachments.data.*;
+import de.dafuqs.spectrum.attachments.data.azure_dike.*;
 import de.dafuqs.spectrum.networking.s2c_payloads.BlackHoleChestStatusUpdatePayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.ColorTransmissionPayload;
 import de.dafuqs.spectrum.networking.s2c_payloads.CompactingChestStatusUpdatePayload;
@@ -71,6 +73,13 @@ public class SpectrumS2CPackets {
 		registrar.playToClient(PastelNodeStatusUpdatePayload.ID, PastelNodeStatusUpdatePayload.CODEC, PastelNodeStatusUpdatePayload::execute);
 		registrar.playToClient(PastelNetworkEdgeSyncPayload.ID, PastelNetworkEdgeSyncPayload.CODEC, PastelNetworkEdgeSyncPayload::execute);
 		registrar.playToClient(PastelNetworkRemovedPayload.ID, PastelNetworkRemovedPayload.CODEC, PastelNetworkRemovedPayload::execute);
+
+		// Data attachment stuff
+		registrar.playToClient(PrimordialFireData.Payload.TYPE, PrimordialFireData.Payload.CODEC, PrimordialFireData.Payload::execute);
+		registrar.playToClient(AzureDikeData.Payload.TYPE, AzureDikeData.Payload.CODEC, AzureDikeData.Payload::execute);
+		registrar.playToClient(EverpromiseRibbonData.Payload.TYPE, EverpromiseRibbonData.Payload.CODEC, EverpromiseRibbonData.Payload::execute);
+		registrar.playToClient(LastKillData.Payload.TYPE, LastKillData.Payload.CODEC, LastKillData.Payload::execute);
+		registrar.playToClient(MiscPlayerData.Payload.TYPE, MiscPlayerData.Payload.CODEC, MiscPlayerData.Payload::execute);
 	}
 	
 }

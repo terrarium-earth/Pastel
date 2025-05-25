@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.items.tools;
 
 import de.dafuqs.spectrum.api.item.SleepAlteringItem;
-import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.attachments.data.MiscPlayerData;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -39,7 +39,7 @@ public class NightSaltsItem extends Item implements SleepAlteringItem {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
         if (user instanceof Player player) {
-            var component = MiscPlayerDataComponent.get(player);
+            var component = MiscPlayerData.get(player);
 
             component.setSleepTimers(20 * 10, 20 * 10, 0);
             component.setLastSleepItem(this);

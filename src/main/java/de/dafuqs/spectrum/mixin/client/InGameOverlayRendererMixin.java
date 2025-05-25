@@ -9,7 +9,7 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import de.dafuqs.spectrum.attachments.data.PrimordialFireData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ScreenEffectRenderer;
@@ -29,7 +29,7 @@ public class InGameOverlayRendererMixin {
     @Inject(method = "renderScreenEffect", at = @At(value = "HEAD"))
     private static void spectrum$renderPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
         if (!client.player.isSpectator()) {
-            if (OnPrimordialFireComponent.isOnPrimordialFire(client.player)) {
+            if (PrimordialFireData.isOnPrimordialFire(client.player)) {
                 renderPrimordialFireOverlay(client, matrices);
             }
         }
@@ -37,7 +37,7 @@ public class InGameOverlayRendererMixin {
     
     @Inject(method = "renderFire", at = @At(value = "HEAD"), cancellable = true)
     private static void spectrum$cancelFireOverlayWithPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
-        if (OnPrimordialFireComponent.isOnPrimordialFire(client.player)) {
+        if (PrimordialFireData.isOnPrimordialFire(client.player)) {
             ci.cancel();
         }
     }

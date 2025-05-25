@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
-import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
+import de.dafuqs.spectrum.attachments.data.azure_dike.AzureDikeProvider;
 import de.dafuqs.spectrum.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;

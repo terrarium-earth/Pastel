@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.items.tools;
 
 import de.dafuqs.spectrum.api.item.SplitDamageItem;
-import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.attachments.data.MiscPlayerData;
 import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
@@ -60,7 +60,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 
 			player.push(chargeDir.normalize().scale(getLungeSpeed() * chargeStrength));
 			player.playSound(SpectrumSoundEvents.LUNGE, 2F, 0.8F + player.getRandom().nextFloat() * 0.2F);
-			MiscPlayerDataComponent.get(player).initiateLungeState();
+			MiscPlayerData.get(player).initiateLungeState();
 		}
 	}
 
@@ -85,8 +85,8 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if (attacker instanceof Player player) {
-			if (MiscPlayerDataComponent.get(player).isLunging()) {
-				MiscPlayerDataComponent.get(player).endLunge();
+			if (MiscPlayerData.get(player).isLunging()) {
+				MiscPlayerData.get(player).endLunge();
 				target.playSound(SpectrumSoundEvents.LUNGE_CRIT, 1F, 0.9F + target.getRandom().nextFloat() * 0.2F);
 				applyLungeHitEffects(stack, target, attacker);
 			}
@@ -99,7 +99,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 		var composition = new DamageComposition();
 		var source = composition.getPlayerOrEntity(attacker);
 
-		if (attacker instanceof Player player && MiscPlayerDataComponent.get(player).isLunging()) {
+		if (attacker instanceof Player player && MiscPlayerData.get(player).isLunging()) {
 			source = SpectrumDamageTypes.impaling(player.level(), player);
 		}
 

@@ -2,7 +2,7 @@ package de.dafuqs.spectrum.blocks;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
-import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import de.dafuqs.spectrum.attachments.data.PrimordialFireData;
 import de.dafuqs.spectrum.compat.claims.GenericClaimModsCompat;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
@@ -166,7 +166,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
 		if (entity instanceof LivingEntity livingEntity) {
 			entity.hurt(SpectrumDamageTypes.primordialFire(world, null), DAMAGE);
-			OnPrimordialFireComponent.addPrimordialFireTicks(livingEntity, 5);
+			PrimordialFireData.addPrimordialFireTicks(livingEntity, 5);
 		}
 		if (world.getGameTime() % 20 == 0 && entity instanceof ItemEntity itemEntity) {
 			PrimordialFireBurningRecipe.processItemEntity(world, itemEntity);

@@ -4,11 +4,12 @@ import de.dafuqs.arrowhead.api.CrossbowShootingCallback;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.item.PrioritizedBlockInteraction;
 import de.dafuqs.spectrum.api.item.PrioritizedEntityInteraction;
+import de.dafuqs.spectrum.attachments.*;
+import de.dafuqs.spectrum.attachments.data.*;
+import de.dafuqs.spectrum.attachments.data.azure_dike.*;
 import de.dafuqs.spectrum.blocks.chests.CompactingChestBlockEntity;
 import de.dafuqs.spectrum.blocks.idols.FirestarterIdolBlock;
 import de.dafuqs.spectrum.blocks.pastel_network.Pastel;
-import de.dafuqs.spectrum.cca.HardcoreDeathComponent;
-import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
 import de.dafuqs.spectrum.components.InertiaComponent;
 import de.dafuqs.spectrum.entity.spawners.ShootingStarSpawner;
 import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
@@ -99,6 +100,9 @@ public class SpectrumEventListeners {
 		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::tagReload);
 		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::leftClickBlock);
 		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::registerTillable);
+		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::entityTick);
+		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::playerTick);
+		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::clonePlayer);
 
 		// Doesn't seem to have an actual equivalent?
 		// EnchantmentEvents.ALLOW_ENCHANTING.register((registryEntry, itemStack, enchantingContext) -> {
@@ -149,6 +153,33 @@ public class SpectrumEventListeners {
 				GlassCrestCrossbowItem.unOvercharge(crossbow);
 			}
 		});
+	}
+
+	private static void playerTick(PlayerTickEvent.Post event) {
+		MiscPlayerData.get(event.getEntity()).tick();
+	}
+
+	private static void entityTick(EntityTickEvent.Post event) {
+		var entity = event.getEntity();
+
+		if (entity instanceof LivingEntity living && !living.level().isClientSide()) {
+			PrimordialFireData.serverTick(living);
+			AzureDikeProvider.getAzureDikeComponent(living).serverTick(living);
+		}
+	}
+
+	private static void clonePlayer(PlayerEvent.Clone event) {
+		var original = event.getOriginal();
+		AzureDikeData newDike;
+
+		if (event.isWasDeath()) {
+			newDike = AzureDikeData.CLONER.copy(AzureDikeProvider.getAzureDikeComponent(original), original, original.registryAccess());
+		}
+		else {
+			newDike = AzureDikeProvider.getAzureDikeComponent(original);
+		}
+
+		event.getEntity().setData(AzureDikeData.ATTACHMENT, newDike);
 	}
 
 	private static void registerTillable(BlockEvent.BlockToolModificationEvent event) {
@@ -213,7 +244,7 @@ public class SpectrumEventListeners {
 		var player = event.getEntity();
 		var reason = event.getProblem();
 
-        if (reason != Player.BedSleepingProblem.NOT_POSSIBLE_NOW && MiscPlayerDataComponent.get(player).isSleeping()) {
+        if (reason != Player.BedSleepingProblem.NOT_POSSIBLE_NOW && MiscPlayerData.get(player).isSleeping()) {
 			event.setProblem(null);
 		}
 		else if((reason == Player.BedSleepingProblem.NOT_POSSIBLE_NOW || reason == Player.BedSleepingProblem.NOT_SAFE)
@@ -306,8 +337,8 @@ public class SpectrumEventListeners {
 		}
 
 		if (killedEntity instanceof ServerPlayer player) { //At this point it can only be concluded that this bitch dead as hell
-			if (player.level().getLevelData().isHardcore() || HardcoreDeathComponent.isInHardcore(player)) {
-				HardcoreDeathComponent.addHardcoreDeath(player.serverLevel(), player.getGameProfile());
+			if (player.level().getLevelData().isHardcore() || HardcoreDeathTracker.isInHardcore(player)) {
+				HardcoreDeathTracker.addHardcoreDeath(player.serverLevel(), player.getGameProfile());
 			}
 			evaluateAndDropPlayerHead(player, damageSource);
 		}

@@ -1,7 +1,7 @@
 package de.dafuqs.spectrum.items.magic_items;
 
 import de.dafuqs.spectrum.api.item.PrioritizedEntityInteraction;
-import de.dafuqs.spectrum.cca.EverpromiseRibbonComponent;
+import de.dafuqs.spectrum.attachments.data.EverpromiseRibbonData;
 import de.dafuqs.spectrum.compat.claims.GenericClaimModsCompat;
 import de.dafuqs.spectrum.helpers.EntityHelper;
 import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
@@ -49,7 +49,7 @@ public class EverpromiseRibbonItem extends Item implements PrioritizedEntityInte
 								random.nextGaussian() * 0.02, random.nextGaussian() * 0.02, random.nextGaussian() * 0.02);
 					}
 				} else {
-					EverpromiseRibbonComponent.attachRibbon(entity);
+					EverpromiseRibbonData.attachRibbon(entity);
 					
 					Component newName = stack.getHoverName();
 					if (newName instanceof MutableComponent mutableText) {

@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.commands;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.tree.ArgumentCommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import de.dafuqs.spectrum.attachments.data.PrimordialFireData;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -33,7 +33,7 @@ public class PrimordialFireCommand {
 
 		for (Entity entity : targets) {
 			if(entity instanceof LivingEntity livingEntity) {
-				OnPrimordialFireComponent.setPrimordialFireTicks(livingEntity, ticks);
+				PrimordialFireData.setPrimordialFireTicks(livingEntity, ticks);
 				affectedTargets++;
 			}
 		}

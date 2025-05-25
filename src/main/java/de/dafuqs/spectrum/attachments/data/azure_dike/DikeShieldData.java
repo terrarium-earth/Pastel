@@ -1,11 +1,10 @@
-package de.dafuqs.spectrum.cca.azure_dike;
+package de.dafuqs.spectrum.attachments.data.azure_dike;
 
 import de.dafuqs.spectrum.SpectrumCommon;
 import net.minecraft.resources.ResourceLocation;
-import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
-public interface AzureDikeComponent extends ServerTickingComponent {
-	
+public interface DikeShieldData {
+
 	ResourceLocation AZURE_DIKE_BAR_TEXTURE = SpectrumCommon.locate("textures/gui/azure_dike_overlay.png");
 	
 	float getCurrentProtection();

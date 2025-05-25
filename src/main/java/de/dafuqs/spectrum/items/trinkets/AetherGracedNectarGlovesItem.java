@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.items.trinkets;
 import com.google.common.collect.Multimap;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.render.SlotBackgroundEffectProvider;
-import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
+import de.dafuqs.spectrum.attachments.data.azure_dike.AzureDikeProvider;
 import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;

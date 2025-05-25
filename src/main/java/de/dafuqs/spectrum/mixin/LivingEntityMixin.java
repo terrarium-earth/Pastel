@@ -14,9 +14,9 @@ import de.dafuqs.spectrum.api.item.ArmorWithHitEffect;
 import de.dafuqs.spectrum.api.item.SlotReservingItem;
 import de.dafuqs.spectrum.api.item.SplitDamageItem;
 import de.dafuqs.spectrum.blocks.memory.MemoryItem;
-import de.dafuqs.spectrum.cca.EverpromiseRibbonComponent;
-import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
-import de.dafuqs.spectrum.cca.azure_dike.AzureDikeProvider;
+import de.dafuqs.spectrum.attachments.data.EverpromiseRibbonData;
+import de.dafuqs.spectrum.attachments.data.MiscPlayerData;
+import de.dafuqs.spectrum.attachments.data.azure_dike.AzureDikeProvider;
 import de.dafuqs.spectrum.components.PairedFoodComponent;
 import de.dafuqs.spectrum.helpers.ParticleHelper;
 import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
@@ -84,7 +84,6 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.Optional;
 
@@ -192,9 +191,9 @@ public abstract class LivingEntityMixin {
 		
 		if (entity instanceof Player player) {
 			if (override) {
-				friction += MiscPlayerDataComponent.get(player).getFrictionModifiers();
+				friction += MiscPlayerData.get(player).getFrictionModifiers();
 			} else {
-				f.set(Math.min(f.get() + MiscPlayerDataComponent.get(player).getFrictionModifiers(), 0.99F));
+				f.set(Math.min(f.get() + MiscPlayerData.get(player).getFrictionModifiers(), 0.99F));
 			}
 		}
 		
@@ -288,7 +287,7 @@ public abstract class LivingEntityMixin {
 	@ModifyReturnValue(method = "canDisableShield", at = @At("RETURN"))
 	private boolean spectrum$lungeBreaksShields(boolean original) {
 		if ((LivingEntity) (Object) this instanceof Player player
-				&& MiscPlayerDataComponent.get(player).isLunging()) {
+				&& MiscPlayerData.get(player).isLunging()) {
 			return player.getMainHandItem().getItem() instanceof LightGreatswordItem;
 		}
 		return original;
@@ -311,7 +310,7 @@ public abstract class LivingEntityMixin {
 			return original;
 		
 		if (entity instanceof Player player && parryingSword.canBluffParry(activeStack, entity, useTime)) {
-			var comp = MiscPlayerDataComponent.get(player);
+			var comp = MiscPlayerData.get(player);
 			comp.setParryTicks(15);
 			
 			if (parryingSword.canPerfectParry(activeStack, entity, useTime))
@@ -673,7 +672,7 @@ public abstract class LivingEntityMixin {
 	protected void drop(ServerLevel world, DamageSource damageSource, CallbackInfo ci) {
 		LivingEntity thisEntity = (LivingEntity) (Object) this;
 		
-		if (EverpromiseRibbonComponent.hasRibbon(thisEntity)) {
+		if (EverpromiseRibbonData.hasRibbon(thisEntity)) {
 			ItemStack memoryStack = MemoryItem.getMemoryForEntity(thisEntity);
 			MemoryItem.setTicksToManifest(memoryStack, 20);
 			MemoryItem.setSpawnAsAdult(memoryStack, true);

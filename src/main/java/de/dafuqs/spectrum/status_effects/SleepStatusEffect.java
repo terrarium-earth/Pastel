@@ -1,6 +1,6 @@
 package de.dafuqs.spectrum.status_effects;
 
-import de.dafuqs.spectrum.cca.MiscPlayerDataComponent;
+import de.dafuqs.spectrum.attachments.data.MiscPlayerData;
 import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
 import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
 import de.dafuqs.spectrum.registries.SpectrumStatusEffectTags;
@@ -34,7 +34,7 @@ public class SleepStatusEffect extends MobEffect {
 
         float scaling;
         if (entity instanceof Player player && player.level().isClientSide()) {
-            scaling = (float) MiscPlayerDataComponent.get(player).getLastSyncedSleepPotency();
+            scaling = (float) MiscPlayerData.get(player).getLastSyncedSleepPotency();
         }
         else {
             scaling = (float) entity.getAttributeValue(SpectrumEntityAttributes.MENTAL_PRESENCE);

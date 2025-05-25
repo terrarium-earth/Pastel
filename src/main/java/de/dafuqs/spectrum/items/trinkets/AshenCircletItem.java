@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.items.trinkets;
 import com.google.common.collect.Multimap;
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.cca.OnPrimordialFireComponent;
+import de.dafuqs.spectrum.attachments.data.PrimordialFireData;
 import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
@@ -64,7 +64,7 @@ public class AshenCircletItem extends SpectrumTrinketItem {
 		if (entity.isOnFire()) {
 			entity.setRemainingFireTicks(0);
 		}
-		if (getCooldownTicks(stack, entity.level()) == 0 && OnPrimordialFireComponent.putOut(entity)) {
+		if (getCooldownTicks(stack, entity.level()) == 0 && PrimordialFireData.putOut(entity)) {
 			entity.level().playSound(null, entity.blockPosition(), SoundEvents.SPLASH_POTION_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
 			setCooldown(stack, entity.level());
 		}

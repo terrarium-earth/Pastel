@@ -1,10 +1,9 @@
 package de.dafuqs.spectrum.recipe.spirit_instiller.dynamic;
 
 import com.mojang.authlib.GameProfile;
-import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.recipe.IngredientStack;
 import de.dafuqs.spectrum.blocks.spirit_instiller.SpiritInstillerBlockEntity;
-import de.dafuqs.spectrum.cca.HardcoreDeathComponent;
+import de.dafuqs.spectrum.attachments.HardcoreDeathTracker;
 import de.dafuqs.spectrum.recipe.InstanceRecipeInput;
 import de.dafuqs.spectrum.recipe.spirit_instiller.SpiritInstillerRecipe;
 import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
@@ -46,7 +45,7 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 		if (gameProfile != null && ServerLifecycleHooks.getCurrentServer() != null) {
 			ServerPlayer revivedPlayer = ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayerByName(gameProfile.getName());
 			if (revivedPlayer != null) {
-				HardcoreDeathComponent.removeHardcoreDeath(gameProfile);
+				HardcoreDeathTracker.removeHardcoreDeath(gameProfile);
 				revivedPlayer.setGameMode(ServerLifecycleHooks.getCurrentServer().getDefaultGameType());
 				
 				Rotation blockRotation = spiritInstillerBlockEntity.getMultiblockRotation();
@@ -76,7 +75,7 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 			
 			PlayerList playerManager = ServerLifecycleHooks.getCurrentServer().getPlayerList();
 			ServerPlayer playerToRevive = gameProfile.getId() == null ? playerManager.getPlayerByName(gameProfile.getName()) : playerManager.getPlayer(gameProfile.getId());
-			return playerToRevive != null && HardcoreDeathComponent.hasHardcoreDeath(gameProfile);
+			return playerToRevive != null && HardcoreDeathTracker.hasHardcoreDeath(gameProfile);
 		}
 		return false;
 	}
