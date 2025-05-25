@@ -22,6 +22,7 @@ import de.dafuqs.spectrum.registries.client.SpectrumModelPredicateProviders;
 import de.dafuqs.spectrum.registries.client.SpectrumTooltipComponents;
 import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.render.SkyLerper;
+import de.dafuqs.spectrum.render.armor.*;
 import de.dafuqs.spectrum.render.capes.WorthinessChecker;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -73,6 +74,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		SpectrumBlockEntities.registerClient();
 		logInfo("Setting up Entity Renderers...");
 		SpectrumEntityRenderers.registerClient();
+		NeoForge.EVENT_BUS.addListener(BedrockCapeRenderer::register);
 
 		//logInfo("Registering Server to Client Package Receivers...");
 		//SpectrumS2CPackets.registerS2CReceivers();

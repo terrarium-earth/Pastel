@@ -140,7 +140,12 @@ public class BedrockArmorModel extends HumanoidModel<LivingEntity> {
         super.renderToBuffer(ms, buffer, light, overlay, color);
     }
 
-    public static Tuple<Float, Float> computeFrontClothRotation(Player player, float delta) {
+    public static Tuple<Float, Float> computeFrontClothRotation(LivingEntity entity, float delta) {
+
+        if (!(entity instanceof Player player))
+            return new Tuple<>(0F, 0F); // TODO: ...does this really need to work off of vanilla logic?
+
+
         // Vanilla cape values
         double x = Mth.lerp(delta / 2, player.xCloakO, player.xCloak)
                 - Mth.lerp(delta / 2, player.xo, player.getX());

@@ -55,12 +55,6 @@ public class BedrockArmorItem extends ArmorItem implements Preenchanted {
         return model;
     }
 
-    // this takes the "unused" stack, so addons can mixin into it
-    @SuppressWarnings("unused")
-    public RenderType getRenderLayer(ItemStack stack) {
-        return RenderType.entitySolid(SpectrumModelLayers.BEDROCK_ARMOR_MAIN_ID);
-    }
-
     @NotNull
     @SuppressWarnings("unused")
     public ResourceLocation getArmorTexture(ItemStack stack, EquipmentSlot slot) {
