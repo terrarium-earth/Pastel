@@ -27,6 +27,7 @@ public class SpectrumDataGenerator {
 		event.addProvider(new SpectrumModelProvider(packOutput, lookupProvider));
 		event.addProvider(new SpectrumRecipeProvider(packOutput, lookupProvider));
 		event.addProvider(new SpectrumCompostableDataMapProvider(packOutput, lookupProvider));
+		event.addProvider(new SpectrumWaxableDataMapProvider(packOutput, lookupProvider));
 
 		event.createDatapackRegistryObjects(SpectrumDynamicRegistryProvider.createRegistryBuilders());
 	}
