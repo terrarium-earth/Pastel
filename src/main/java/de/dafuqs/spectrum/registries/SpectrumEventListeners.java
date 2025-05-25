@@ -98,6 +98,7 @@ public class SpectrumEventListeners {
 		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::blockBreak);
 		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::tagReload);
 		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::leftClickBlock);
+		NeoForge.EVENT_BUS.addListener(SpectrumEventListeners::registerTillable);
 
 		// Doesn't seem to have an actual equivalent?
 		// EnchantmentEvents.ALLOW_ENCHANTING.register((registryEntry, itemStack, enchantingContext) -> {
@@ -148,6 +149,23 @@ public class SpectrumEventListeners {
 				GlassCrestCrossbowItem.unOvercharge(crossbow);
 			}
 		});
+	}
+
+	private static void registerTillable(BlockEvent.BlockToolModificationEvent event) {
+		var context = event.getContext();
+		var originalState = event.getState();
+		var tool = context.getItemInHand();
+		var action = event.getItemAbility();
+
+		if (action != ItemAbilities.HOE_TILL || !tool.canPerformAction(action))
+			return;
+
+		if (originalState.is(SpectrumBlocks.SLUSH) || originalState.is(SpectrumBlocks.OVERGROWN_SLUSH)) {
+			event.setFinalState(SpectrumBlocks.TILLED_SLUSH.defaultBlockState());
+		}
+		else if(originalState.is(SpectrumBlocks.SHALE_CLAY)) {
+			event.setFinalState(SpectrumBlocks.TILLED_SHALE_CLAY.defaultBlockState());
+		}
 	}
 
 	private static void onReloadResources(AddReloadListenerEvent event) {
