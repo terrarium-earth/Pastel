@@ -74,13 +74,12 @@ public class MidnightAberrationItem extends CloakedItem {
 		if (stack.has(SpectrumDataComponentTypes.STABLE))
 			tooltip.add(Component.translatable("item.spectrum.midnight_aberration.tooltip.stable"));
 	}
-	
+
 	@Override
-	public boolean allowComponentsUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
-		// do not play the hand update animation when it starts crumbling
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
 		return oldStack.has(SpectrumDataComponentTypes.TIMESTAMP) != newStack.has(SpectrumDataComponentTypes.TIMESTAMP);
 	}
-	
+
 	public ItemStack getStableStack() {
 		ItemStack stack = getDefaultInstance();
 		stack.set(SpectrumDataComponentTypes.STABLE, Unit.INSTANCE);

@@ -42,6 +42,7 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
 	
 	public PreservationRoundelBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.PRESERVATION_ROUNDEL, pos, state, INVENTORY_SIZE);
+		inventory.addListener(i -> inventoryChanged());
 	}
 	
 	@Override
@@ -96,10 +97,8 @@ public class PreservationRoundelBlockEntity extends ItemRoundelBlockEntity imple
 	public boolean onlyOpCanSetNbt() {
 		return true;
 	}
-	
-	@Override
+
 	public void inventoryChanged() {
-		super.inventoryChanged();
 		if (level instanceof ServerLevel && controllerOffset != null && inventoryAndConnectedOnesMatchRequirement()) {
 			BlockEntity blockEntity = level.getBlockEntity(Support.directionalOffset(this.worldPosition, this.controllerOffset, level.getBlockState(this.worldPosition).getValue(PreservationControllerBlock.FACING)));
 			if (blockEntity instanceof PreservationControllerBlockEntity controller) {

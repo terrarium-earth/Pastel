@@ -246,8 +246,6 @@ public class SpectrumCommon {
 		SpectrumStructurePoolElementTypes.register();
 		logInfo("Registering Event Listeners...");
 		SpectrumEventListeners.register();
-		logInfo("Registering Path Node Types...");
-		SpectrumPathNodeTypes.register();
 		logInfo("Registering Tree Decorator Types...");
 		SpectrumTreeDecoratorTypes.register();
 		

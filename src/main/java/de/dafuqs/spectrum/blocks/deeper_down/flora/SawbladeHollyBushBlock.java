@@ -7,6 +7,8 @@ import de.dafuqs.spectrum.registries.SpectrumDamageTypes;
 import de.dafuqs.spectrum.registries.SpectrumEntityTypeTags;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.registries.SpectrumLootTables;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.pathfinder.*;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -15,8 +17,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -34,6 +34,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.*;
 
 public class SawbladeHollyBushBlock extends BushBlock implements BonemealableBlock {
 
@@ -170,5 +171,14 @@ public class SawbladeHollyBushBlock extends BushBlock implements BonemealableBlo
         int newAge = Math.min(MAX_AGE, state.getValue(AGE) + (random.nextBoolean() ? 1 : 2));
         world.setBlock(pos, state.setValue(AGE, newAge), Block.UPDATE_CLIENTS);
     }
-    
+
+    @Override
+    public @Nullable PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
+        return PathType.DAMAGE_OTHER;
+    }
+
+    @Override
+    public @Nullable PathType getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
+        return PathType.DAMAGE_OTHER;
+    }
 }

@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.registries;
 
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
@@ -10,24 +9,27 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkShriekerBlock;
+import net.neoforged.neoforge.event.entity.player.*;
 
 import java.util.List;
 
 public class SpectrumTooltips {
 	
-	public static void register() {
-		ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, lines) -> {
-			DataComponentMap components = stack.getComponents();
-			if (!components.isEmpty()) {
-				if (stack.is(Blocks.SCULK_SHRIEKER.asItem())) {
-					addSculkShriekerTooltips(lines, components);
-				} else if (stack.is(ItemTags.SIGNS)) {
-					//addSignTooltips(lines, components);
-				} else if (stack.is(Items.SPAWNER)) {
-					//addSpawnerTooltips(lines, components);
-				}
+	public static void register(ItemTooltipEvent event) {
+		var context = event.getContext();
+		var lines = event.getToolTip();
+		var stack = event.getItemStack();
+
+		DataComponentMap components = stack.getComponents();
+		if (!components.isEmpty()) {
+			if (stack.is(Blocks.SCULK_SHRIEKER.asItem())) {
+				addSculkShriekerTooltips(lines, components);
+			} else if (stack.is(ItemTags.SIGNS)) {
+				//addSignTooltips(lines, components);
+			} else if (stack.is(Items.SPAWNER)) {
+				//addSpawnerTooltips(lines, components);
 			}
-		});
+		}
 	}
 	
 	private static void addSculkShriekerTooltips(List<Component> lines, DataComponentMap components) {

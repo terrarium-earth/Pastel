@@ -3,13 +3,13 @@ package de.dafuqs.reverb.sound.reverb;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.reverb.Reverb;
-import net.fabricmc.fabric.api.event.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.registries.*;
 
 import java.util.function.Function;
 
@@ -19,7 +19,7 @@ import java.util.function.Function;
 public abstract class ReverbEffect {
 	
 	public static final ResourceKey<Registry<MapCodec<? extends ReverbEffect>>> REVERB_EFFECT_CODEC_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Reverb.MOD_ID, "reverb_effect"));
-	public static final MappedRegistry<MapCodec<? extends ReverbEffect>> REVERB_EFFECT_CODEC = FabricRegistryBuilder.createSimple(REVERB_EFFECT_CODEC_KEY).attribute(RegistryAttribute.SYNCED).buildAndRegister();
+	public static final MappedRegistry<MapCodec<? extends ReverbEffect>> REVERB_EFFECT_CODEC = (MappedRegistry<MapCodec<? extends ReverbEffect>>) new RegistryBuilder<>(REVERB_EFFECT_CODEC_KEY).sync(true).create();
 	public static final Codec<ReverbEffect> CODEC = REVERB_EFFECT_CODEC.byNameCodec().dispatchStable(ReverbEffect::getCodec, Function.identity());
 	
 	public abstract MapCodec<? extends ReverbEffect> getCodec();

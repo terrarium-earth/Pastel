@@ -93,7 +93,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		SpectrumClientEventListeners.register(pastelBus);
 
 		if (CONFIG.AddItemTooltips) {
-			SpectrumTooltips.register();
+			NeoForge.EVENT_BUS.addListener(SpectrumTooltips::register);
 		}
 
 		if (ModList.get().isLoaded("ears")) {

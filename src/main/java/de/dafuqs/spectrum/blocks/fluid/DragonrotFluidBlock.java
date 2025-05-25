@@ -8,11 +8,12 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Tuple;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.pathfinder.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,5 +66,14 @@ public class DragonrotFluidBlock extends SpectrumFluidBlock {
 		}
 		return null;
 	}
-	
+
+	@Override
+	public @Nullable PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
+		return PathType.DAMAGE_OTHER;
+	}
+
+	@Override
+	public @Nullable PathType getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, PathType originalType) {
+		return PathType.DAMAGE_OTHER;
+	}
 }

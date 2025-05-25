@@ -128,12 +128,12 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 			tooltip.add(Component.translatable("item.spectrum.dreamflayer.tooltip.deactivated", USED_COLOR.getColoredInkName()).withStyle(ChatFormatting.GRAY));
 		}
 	}
-	
+
 	@Override
-	public boolean allowComponentsUpdateAnimation(Player player, InteractionHand hand, ItemStack oldStack, ItemStack newStack) {
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
 		return reequipAnimation(oldStack, newStack);
 	}
-	
+
 	private boolean reequipAnimation(ItemStack before, ItemStack after) {
 		return !after.is(this) || ActivatableItem.isActivated(before) != ActivatableItem.isActivated(after);
 	}
