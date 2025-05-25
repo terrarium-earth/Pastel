@@ -30,12 +30,6 @@ public abstract class InGameHudMixin {
 
     @Shadow public abstract void render(GuiGraphics context, DeltaTracker tickerCounter);
 
-    @Inject(method = "renderPlayerHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V"))
-    private void spectrum$renderAzureDikeBar(GuiGraphics context, CallbackInfo ci, @Local Player cameraPlayer, @Local(ordinal = 2) int x, @Local(ordinal = 4) int y, @Local(ordinal = 6) int heartRows, @Local(ordinal = 7) int rowHeight) {
-		minecraft.getProfiler().popPush("spectrum:azure");
-        HudRenderers.renderAzureDike(context, cameraPlayer, x, y - (heartRows - 1) * rowHeight - 10);
-    }
-
     @ModifyExpressionValue(method = "renderCameraOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;useFancyGraphics()Z"))
     private boolean spectrum$disableVignietteInDimension(boolean original) {
 		var player = Minecraft.getInstance().player;
