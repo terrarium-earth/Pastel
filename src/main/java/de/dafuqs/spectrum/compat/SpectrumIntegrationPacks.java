@@ -7,9 +7,7 @@ import de.dafuqs.spectrum.compat.botania.BotaniaCompat;
 import de.dafuqs.spectrum.compat.create.CreateCompat;
 import de.dafuqs.spectrum.compat.exclusions_lib.ExclusionsLibCompat;
 import de.dafuqs.spectrum.compat.gobber.GobberCompat;
-import de.dafuqs.spectrum.compat.malum.MalumCompat;
 import de.dafuqs.spectrum.compat.modonomicon.ModonomiconCompat;
-import de.dafuqs.spectrum.compat.neepmeat.NEEPMeatCompat;
 import de.dafuqs.spectrum.compat.travelersbackpack.TravelersBackpackCompat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -35,8 +33,7 @@ public class SpectrumIntegrationPacks {
 			INTEGRATION_PACKS.put(modId, container.get());
 		}
 	}
-	
-	public static final String CONNECTOR_ID = "connector";
+
 	public static final String AE2_ID = "ae2";
 	public static final String GOBBER_ID = "gobber2";
 	public static final String ALLOY_FORGERY_ID = "alloy_forgery";
@@ -45,8 +42,6 @@ public class SpectrumIntegrationPacks {
 	public static final String MODONOMICON_ID = "modonomicon";
 	public static final String CREATE_ID = "create";
 	public static final String FARMERSDELIGHT_ID = "farmersdelight";
-	public static final String NEEPMEAT_ID = "neepmeat";
-	public static final String MALUM_ID = "malum";
 	public static final String EXCLUSIONS_LIB_ID = "exclusions_lib";
 
 	@SuppressWarnings("Convert2MethodRef")
@@ -56,20 +51,14 @@ public class SpectrumIntegrationPacks {
 		if (!ModList.get().isLoaded(EXCLUSIONS_LIB_ID)) {
 			ExclusionsLibCompat.registerNotPresent();
 		}
-		
-		if (!ModList.get().isLoaded(CONNECTOR_ID)) {
-			// Connector on neoforge causes a lot of issues since most code bases
-			// of neoforge mods differ quite a lot from their fabric counterparts
-			registerIntegrationPack(AE2_ID, () -> new AE2Compat());
-			registerIntegrationPack(GOBBER_ID, () -> new GobberCompat());
-			registerIntegrationPack(ALLOY_FORGERY_ID, () -> new AlloyForgeryCompat());
-			registerIntegrationPack(TRAVELERS_BACKPACK_ID, () -> new TravelersBackpackCompat());
-			registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
-			registerIntegrationPack(NEEPMEAT_ID, () -> new NEEPMeatCompat());
-			//registerIntegrationPack(FARMERSDELIGHT_ID, () -> new FDCompat());
-		registerIntegrationPack(MALUM_ID, () -> new MalumCompat());
-			registerIntegrationPack(CREATE_ID, () -> new CreateCompat());
-		}
+
+		registerIntegrationPack(AE2_ID, () -> new AE2Compat());
+		registerIntegrationPack(GOBBER_ID, () -> new GobberCompat());
+		registerIntegrationPack(ALLOY_FORGERY_ID, () -> new AlloyForgeryCompat());
+		registerIntegrationPack(TRAVELERS_BACKPACK_ID, () -> new TravelersBackpackCompat());
+		registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
+		//registerIntegrationPack(FARMERSDELIGHT_ID, () -> new FDCompat());
+		registerIntegrationPack(CREATE_ID, () -> new CreateCompat());
 		
 		for (ModIntegrationPack container : INTEGRATION_PACKS.values()) {
 			container.register();
