@@ -1,6 +1,5 @@
 package de.dafuqs.spectrum.recipe.fluid_converting.dynamic;
 
-import com.neep.neepmeat.init.NMItems;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.recipe.fluid_converting.DragonrotConvertingRecipe;
 import de.dafuqs.spectrum.registries.SpectrumRecipeSerializers;
@@ -22,7 +21,7 @@ public class MeatToRottenFleshRecipe extends DragonrotConvertingRecipe {
 	private static Ingredient getMeatsIngredient() {
 		return Ingredient.of(BuiltInRegistries.ITEM.getOrCreateTag(ItemTags.MEAT)
 				.stream()
-				.filter(item -> item.value() == Items.ROTTEN_FLESH && !(SpectrumIntegrationPacks.isIntegrationPackActive(SpectrumIntegrationPacks.NEEPMEAT_ID) && item == NMItems.MEAT_SCRAP))
+				.filter(item -> item.value() == Items.ROTTEN_FLESH )
 				.map(ItemStack::new));
 	}
 	
