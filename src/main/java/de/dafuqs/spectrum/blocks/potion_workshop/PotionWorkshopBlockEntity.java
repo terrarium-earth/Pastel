@@ -31,8 +31,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
@@ -56,7 +55,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
-public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvider, StackedContentsCompatible, PlayerOwned, SidedCapabilityProvider {
+public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvider, StackedContentsCompatible, PlayerOwned, SidedCapabilityProvider, ContainerWrapper {
 	
 	// 0: mermaids gem
 	// 1: base ingredient
@@ -91,7 +90,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 	public PotionWorkshopBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.POTION_WORKSHOP, pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
-		inventory.addListener(i -> invalidateCapabilities());
+		inventory.addListener(i -> inventoryChanged = true);
 		
 		this.propertyDelegate = new ContainerData() {
 			@Override
@@ -515,5 +514,10 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		}
 
 		return new StackHandlerView(inventory, ACCESSIBLE_SLOTS_DOWN[0], ACCESSIBLE_SLOTS_DOWN.length);
+	}
+
+	@Override
+	public FriendlyStackHandler getHandlerForScreens() {
+		return inventory;
 	}
 }

@@ -5,12 +5,11 @@ import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerBlockEntity;
 import de.dafuqs.spectrum.blocks.particle_spawner.ParticleSpawnerConfiguration;
 import de.dafuqs.spectrum.data_loaders.ParticleSpawnerParticlesDataLoader;
+import de.dafuqs.spectrum.mixin.client.accessors.*;
 import de.dafuqs.spectrum.networking.c2s_payloads.ParticleSpawnerConfigurationC2SPayload;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.fabricmc.fabric.mixin.client.particle.ParticleManagerAccessor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -88,7 +87,7 @@ public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawn
 	protected void init() {
 		super.init();
 
-		this.spriteAtlasTexture = ((ParticleManagerAccessor) minecraft.particleEngine).getParticleAtlasTexture();
+		this.spriteAtlasTexture = ((ParticleManagerAccessor) minecraft.particleEngine).getTextureAtlas();
 		this.displayedParticleEntries = ParticleSpawnerParticlesDataLoader.getAllUnlocked(minecraft.player);
 		
 		this.selectableWidgets.clear();
