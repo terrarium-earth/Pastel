@@ -80,7 +80,7 @@ public class SpectrumEntityTypes {
 	
 	// TODO: migrate to FabricEntityTypeBuilder, so the "No data fixer registered for xxxx" errors go away
 	public static <X extends Entity> EntityType<X> register(String name, int trackingDistance, int updateIntervalTicks, boolean alwaysUpdateVelocity, EntityDimensions size, boolean fireImmune, EntityType.EntityFactory<X> factory) {
-		EntityType.Builder<X> builder = EntityType.Builder.of(factory, MobCategory.MISC).clientTrackingRange(trackingDistance).updateInterval(updateIntervalTicks).alwaysUpdateVelocity(alwaysUpdateVelocity).sized(size.width(), size.height());
+		EntityType.Builder<X> builder = EntityType.Builder.of(factory, MobCategory.MISC).clientTrackingRange(trackingDistance).updateInterval(updateIntervalTicks).setShouldReceiveVelocityUpdates(alwaysUpdateVelocity).sized(size.width(), size.height());
 		if (fireImmune) {
 			builder.fireImmune();
 		}
