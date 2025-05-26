@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
-	@Inject(at = @At("HEAD"), method = "disconnect")
+
+	@Inject(at = @At("HEAD"), method = "disconnect*")
 	public void revelationary$onLogout(Screen screen, CallbackInfo info) {
 		ClientAdvancements.playerLogout();
 	}
