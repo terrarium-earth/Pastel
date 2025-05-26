@@ -146,6 +146,7 @@ import de.dafuqs.spectrum.items.trinkets.WhispyCircletItem;
 import de.dafuqs.spectrum.particle.effect.ColoredCraftingParticleEffect;
 import de.dafuqs.spectrum.recipe.pedestal.BuiltinGemstoneColor;
 import de.dafuqs.spectrum.registries.client.SpectrumModels;
+import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -217,6 +218,7 @@ import static net.minecraft.world.item.Items.YELLOW_DYE;
 public class SpectrumItems {
 	
 	public static final DeferredRegistrar ITEM_REGISTRAR = new DeferredRegistrar();
+	public static final Object2IntMap<Item> BURN_TIMES = new Object2IntArrayMap<>();
 	
 	// Main items
 	public static final Item GUIDEBOOK = register(simple(item("guidebook", new GuidebookItem(IS.of(1)), InkColors.WHITE)));
@@ -763,7 +765,7 @@ public class SpectrumItems {
 		public ItemRegistrar<T> withBurnTime(int burnTicks) {
 			FUEL_REGISTRAR.defer(() -> {
 				Objects.requireNonNull(item);
-				FuelRegistry.INSTANCE.add(item, burnTicks);
+				BURN_TIMES.put(item.asItem(), burnTicks);
 			});
 			return this;
 		}

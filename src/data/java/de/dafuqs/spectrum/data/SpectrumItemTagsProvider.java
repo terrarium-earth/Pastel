@@ -22,9 +22,9 @@ public class SpectrumItemTagsProvider extends ItemTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
-		SpectrumEnchantments.provideItemTags(this::getOrCreateTagBuilder);
+		SpectrumEnchantments.provideItemTags(this::tag);
 		
-		getOrCreateTagBuilder(SpectrumItemTags.COOKBOOKS).add(
+		tag(SpectrumItemTags.COOKBOOKS).add(
 				SpectrumItems.BREWERS_HANDBOOK,
 				SpectrumItems.IMBRIFER_COOKBOOK,
 				SpectrumItems.IMPERIAL_COOKBOOK,
@@ -32,7 +32,7 @@ public class SpectrumItemTagsProvider extends ItemTagsProvider {
 				SpectrumItems.MELOCHITES_COOKBOOK_VOL_2,
 				SpectrumItems.POISONERS_HANDBOOK);
 		
-		getOrCreateTagBuilder(ItemTags.BOOKSHELF_BOOKS)
+		tag(ItemTags.BOOKSHELF_BOOKS)
 				.addTag(SpectrumItemTags.COOKBOOKS)
 				.add(SpectrumItems.GILDED_BOOK, SpectrumItems.GUIDEBOOK);
 	}

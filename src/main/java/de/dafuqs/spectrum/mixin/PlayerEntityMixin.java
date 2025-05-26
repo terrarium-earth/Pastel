@@ -333,6 +333,16 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 		
 		return value;
 	}
+
+	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;distanceToSqr(Lnet/minecraft/world/entity/Entity;)D", shift = At.Shift.AFTER))
+	protected double spectrum$increaseSweepMaxDistance(double original) {
+		var stack = this.getItemInHand(InteractionHand.MAIN_HAND);
+		if (stack.getItem() == SpectrumItems.DRACONIC_TWINSWORD) {
+			int channeling = SpectrumEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
+			return original * 3 * ((channeling + 1) * 1.5);
+		}
+		return original;
+	}
 	
 	@ModifyReturnValue(method = "getDestroySpeed", at = @At("RETURN"))
 	public float applyInexorableAntiSlowdowns(float original) {

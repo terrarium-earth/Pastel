@@ -84,23 +84,23 @@ public class SpectrumBlockTags {
 	// CONVENTIONAL TAGS ("c" namespace)
 	
 	public static final TagKey<Block> C_LIGHTNING_RODS = conventional("lightning_rods", provider -> provider
-			.add(Blocks.LIGHTNING_ROD)
+			.add(Blocks.LIGHTNING_ROD.builtInRegistryHolder().key())
 			.addOptionalTag(ResourceLocation.parse("friendsandfoes:lightning_rods")));
 	
 	public static final TagKey<Block> C_BRUSHABLE_BLOCKS = conventional("brushable_blocks", provider -> provider
-			.add(Blocks.SUSPICIOUS_SAND)
-			.add(Blocks.SUSPICIOUS_GRAVEL)
+			.add(Blocks.SUSPICIOUS_SAND.builtInRegistryHolder().key())
+			.add(Blocks.SUSPICIOUS_GRAVEL.builtInRegistryHolder().key())
 			.addOptional(ResourceLocation.parse("the_bumblezone:pile_of_pollen_suspicious")));
 	
 	public static final TagKey<Block> C_INFESTED_BLOCKS = conventional("infested_blocks", provider -> provider
-			.add(Blocks.INFESTED_COBBLESTONE)
-			.add(Blocks.INFESTED_CHISELED_STONE_BRICKS)
-			.add(Blocks.INFESTED_CRACKED_STONE_BRICKS)
-			.add(Blocks.INFESTED_DEEPSLATE)
-			.add(Blocks.INFESTED_STONE)
-			.add(Blocks.INFESTED_MOSSY_STONE_BRICKS)
-			.add(Blocks.INFESTED_STONE_BRICKS)
-			.add(SpectrumBlocks.INFESTED_BLACKSLAG));
+			.add(Blocks.INFESTED_COBBLESTONE.builtInRegistryHolder().key())
+			.add(Blocks.INFESTED_CHISELED_STONE_BRICKS.builtInRegistryHolder().key())
+			.add(Blocks.INFESTED_CRACKED_STONE_BRICKS.builtInRegistryHolder().key())
+			.add(Blocks.INFESTED_DEEPSLATE.builtInRegistryHolder().key())
+			.add(Blocks.INFESTED_STONE.builtInRegistryHolder().key())
+			.add(Blocks.INFESTED_MOSSY_STONE_BRICKS.builtInRegistryHolder().key())
+			.add(Blocks.INFESTED_STONE_BRICKS.builtInRegistryHolder().key())
+			.add(SpectrumBlocks.INFESTED_BLACKSLAG.builtInRegistryHolder().key()));
 	
 	private static TagKey<Block> of(String id) {
 		return TagKey.create(Registries.BLOCK, SpectrumCommon.locate(id));

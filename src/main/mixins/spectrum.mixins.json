@@ -82,6 +82,8 @@
     "TridentEntityMixin",
     "WitherEntityMixin",
     "WorldMixin",
+    "EntityApplyFluidsMixinNoSinytra",
+    "PlayerEntityMixin",
     "accessors.BiomeAccessor",
     "accessors.BundleContentsComponentAccessor",
     "accessors.BundleContentsComponentBuilderAccessor",
@@ -102,10 +104,7 @@
     "accessors.RegistryOpsAccessor",
     "accessors.SlimeEntityAccessor",
     "accessors.StatusEffectInstanceAccessor",
-    "accessors.TridentEntityAccessor",
-    "compat.connector.absent.EntityApplyFluidsMixinNoSinytra",
-    "compat.connector.absent.PlayerEntityMixin",
-    "compat.connector.present.PlayerEntityMixin"
+    "accessors.TridentEntityAccessor"
   ],
   "client": [
     "accessors.DimensionEffectsAccessor",
@@ -115,7 +114,6 @@
     "client.BipedEntityModelMixin",
     "client.BlockOverlayRendererMixin",
     "client.BuiltinModelItemRendererMixin",
-    "client.CapeFeatureRendererMixin",
     "client.ClientPlayNetworkHandlerMixin",
     "client.DeathScreenMixin",
     "client.DimensionTypeMixin",
@@ -140,8 +138,7 @@
     "client.TranslucentBlockMixin",
     "client.accessors.ParticleManagerAccessor",
     "client.accessors.RenderLayerAccessor",
-    "compat.colorful_hearts.absent.InGameHudMixin",
-    "compat.colorful_hearts.present.HeartMixin",
+    "InGameHudMixin",
     "compat.sodium.present.ColorProviderRegistryMixin"
   ],
   "injectors": {

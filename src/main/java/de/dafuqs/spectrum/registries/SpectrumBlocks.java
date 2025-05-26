@@ -2567,7 +2567,9 @@ public class SpectrumBlocks {
 		public BlockRegistrar<T> withBurnTime(int burnTicks) {
 			FUEL_REGISTRAR.defer(() -> {
 				// TODO NeoForgeDataMaps.FURNACE_FUELS
-				if (hasItem) FuelRegistry.INSTANCE.add(block, burnTicks);
+				if (hasItem) {
+					SpectrumItems.BURN_TIMES.put(block.asItem(), burnTicks);
+				}
 			});
 			return this;
 		}

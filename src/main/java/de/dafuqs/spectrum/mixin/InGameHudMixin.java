@@ -1,4 +1,4 @@
-package de.dafuqs.spectrum.mixin.compat.colorful_hearts.absent;
+package de.dafuqs.spectrum.mixin;
 
 import de.dafuqs.spectrum.registries.SpectrumStatusEffects;
 import net.minecraft.client.gui.Gui;

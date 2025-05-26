@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.data;
 
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.tags.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -14,15 +14,15 @@ public class DatagenProxy {
 	public static final boolean IS_DATAGEN = System.getProperty("fabric-api.datagen") != null;
 	
 	public interface TagBuilderCallback<T> {
-		FabricTagProvider<T>.FabricTagBuilder build(FabricTagProvider<T>.FabricTagBuilder provider);
+		TagsProvider.TagAppender<T> build(TagsProvider.TagAppender<T> provider);
 	}
 	
 	public interface KeyedTagBuilderCallback<T> {
-		FabricTagProvider<T>.FabricTagBuilder build(ResourceKey<T> key, FabricTagProvider<T>.FabricTagBuilder provider);
+		TagsProvider.TagAppender<T> build(ResourceKey<T> key, TagsProvider.TagAppender<T> provider);
 	}
 	
 	public interface ProvidedTagBuilderBuilder<T> {
-		FabricTagProvider<T>.FabricTagBuilder build(TagKey<T> key);
+		TagsProvider.TagAppender<T> build(TagKey<T> key);
 	}
 	
 	public record BootstrapContext<T>(

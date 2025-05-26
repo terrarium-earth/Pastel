@@ -19,7 +19,7 @@ public class SpectrumEnchantmentTagsProvider extends EnchantmentTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
-		SpectrumEnchantments.provideEnchantmentTags(this::getOrCreateTagBuilder);
+		SpectrumEnchantments.provideEnchantmentTags(this::tag);
 	}
 	
 }

@@ -4,4 +4,4 @@ accessWidener	v2	named
 accessible field net/minecraft/world/level/storage/loot/LootPool entries Ljava/util/List;
 
 # Fractal bullshit
-accessible method net/minecraft/world/item/CreativeModeTab <init> (Lnet/minecraft/world/item/CreativeModeTab$Row;ILnet/minecraft/world/item/CreativeModeTab$Type;Lnet/minecraft/network/chat/Component;Ljava/util/function/Supplier;Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;)V
+accessible method net/minecraft/world/item/CreativeModeTab <init> (Lnet/minecraft/world/item/CreativeModeTab$Row;ILnet/minecraft/world/item/CreativeModeTab$Type;Lnet/minecraft/network/chat/Component;Ljava/util/function/Supplier;Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;Lnet/minecraft/resources/ResourceLocation;ZILnet/minecraft/resources/ResourceLocation;IILjava/util/List;Ljava/util/List;)V

@@ -21,6 +21,6 @@ public class SpectrumWaxableDataMapProvider extends DataMapProvider {
 
     @Override
     public String getName() {
-        return "Waxables:";
+        return "Waxables";
     }
 }

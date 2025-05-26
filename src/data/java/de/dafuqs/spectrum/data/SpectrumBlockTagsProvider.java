@@ -18,7 +18,7 @@ public class SpectrumBlockTagsProvider extends BlockTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
-		SpectrumBlockTags.provideTags(this::getOrCreateTagBuilder);
+		SpectrumBlockTags.provideTags(this::tag);
 	}
 	
 }

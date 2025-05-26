@@ -1,7 +1,6 @@
 package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.spectrum.data.DatagenProxy;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -43,7 +42,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.FISHING_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.FISHING_ENCHANTABLE)
+			.addTag(ItemTags.FISHING_ENCHANTABLE)
 	).register();
 	
 	// Increases drop chance of <1 loot drops
@@ -57,7 +56,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.empty()
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.SWORD_ENCHANTABLE)
+			.addTag(ItemTags.SWORD_ENCHANTABLE)
 			.addOptionalTag(ResourceLocation.parse("malum:scythe"))
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.LOOTING)
@@ -75,7 +74,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
+			.addTag(ItemTags.WEAPON_ENCHANTABLE)
 	).register();
 	
 	// Drops more XP on kill
@@ -89,9 +88,9 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
-			.forceAddTag(SpectrumItemTags.FISHING_RODS)
+			.addTag(ItemTags.WEAPON_ENCHANTABLE)
+			.addTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+			.addTag(SpectrumItemTags.FISHING_RODS)
 			.addOptionalTag(ResourceLocation.parse("malum:scythe"))
 	).register();
 	
@@ -106,7 +105,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
+			.addTag(ItemTags.WEAPON_ENCHANTABLE)
 			.addOptionalTag(ResourceLocation.parse("malum:scythe"))
 	).register();
 	
@@ -121,8 +120,8 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
-			.forceAddTag(SpectrumItemTags.FISHING_RODS)
+			.addTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+			.addTag(SpectrumItemTags.FISHING_RODS)
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.SILK_TOUCH)
 			.addOptional(ResourceLocation.parse("gofish:deepfry"))
@@ -139,7 +138,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
+			.addTag(ItemTags.WEAPON_ENCHANTABLE)
 			.addOptionalTag(ResourceLocation.parse("malum:scythe"))
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.SHARPNESS)
@@ -157,7 +156,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.empty()
 	).withEnchantable(provider -> provider
-					.forceAddTag(ItemTags.DURABILITY_ENCHANTABLE)
+					.addTag(ItemTags.DURABILITY_ENCHANTABLE)
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.INFINITY)
 			.add(Enchantments.UNBREAKING)
@@ -178,7 +177,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.empty()
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+			.addTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.EFFICIENCY)
 	).register();
@@ -194,9 +193,9 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND, EquipmentSlotGroup.OFFHAND, EquipmentSlotGroup.CHEST),
 			Optional.of(ItemTags.CHEST_ARMOR_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
-			.forceAddTag(ItemTags.TRIDENT_ENCHANTABLE)
+			.addTag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
+			.addTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+			.addTag(ItemTags.TRIDENT_ENCHANTABLE)
 	).register();
 	
 	// don't drop items into the world, add to inv instead
@@ -210,11 +209,11 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
-			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
-			.forceAddTag(ItemTags.BOW_ENCHANTABLE)
-			.forceAddTag(ItemTags.CROSSBOW_ENCHANTABLE)
-			.forceAddTag(SpectrumItemTags.FISHING_RODS)
+			.addTag(ItemTags.MINING_ENCHANTABLE)
+			.addTag(ItemTags.WEAPON_ENCHANTABLE)
+			.addTag(ItemTags.BOW_ENCHANTABLE)
+			.addTag(ItemTags.CROSSBOW_ENCHANTABLE)
+			.addTag(SpectrumItemTags.FISHING_RODS)
 			.addOptionalTag(ResourceLocation.parse("malum:scythe"))
 	).register();
 	
@@ -229,7 +228,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.empty()
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+			.addTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withExclusiveSet((key, provider) -> provider
 			.add(of("resonance"))
 	).register();
@@ -245,7 +244,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.empty()
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+			.addTag(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.FORTUNE)
 	).register();
@@ -261,11 +260,11 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
-			.add(SpectrumItems.ENDER_SPLICE)
-			.add(SpectrumItems.EXCHANGING_STAFF)
+			.addTag(ItemTags.MINING_ENCHANTABLE)
+			.add(SpectrumItems.ENDER_SPLICE.builtInRegistryHolder().key())
+			.add(SpectrumItems.EXCHANGING_STAFF.builtInRegistryHolder().key())
 	).withExclusiveSet((key, provider) -> provider
-			.forceAddTag(EnchantmentTags.MINING_EXCLUSIVE)
+			.addTag(EnchantmentTags.MINING_EXCLUSIVE)
 			.add(PEST_CONTROL)
 	).register();
 	
@@ -280,7 +279,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.empty()
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.FISHING_ENCHANTABLE)
+			.addTag(ItemTags.FISHING_ENCHANTABLE)
 	).register();
 	
 	// Increases projectile speed => increased damage + range
@@ -294,8 +293,8 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.empty()
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.CROSSBOW_ENCHANTABLE)
-			.add(SpectrumItems.GLEAMING_PIN)
+			.addTag(ItemTags.CROSSBOW_ENCHANTABLE)
+			.add(SpectrumItems.GLEAMING_PIN.builtInRegistryHolder().key())
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.MULTISHOT)
 	).register();
@@ -311,9 +310,9 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.DURABILITY_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.DURABILITY_ENCHANTABLE)
-			.forceAddTag(ItemTags.MINING_ENCHANTABLE)
-			.forceAddTag(ItemTags.VANISHING_ENCHANTABLE)
+			.addTag(ItemTags.DURABILITY_ENCHANTABLE)
+			.addTag(ItemTags.MINING_ENCHANTABLE)
+			.addTag(ItemTags.VANISHING_ENCHANTABLE)
 			.addOptionalTag(ResourceLocation.parse("trinkets:enchantable/enchantable"))
 	).register();
 	
@@ -330,7 +329,7 @@ public class SpectrumEnchantments {
 	).withEffects((key, ctx, builder) -> builder
 			.withEffect(EnchantmentEffectComponents.ATTRIBUTES, new EnchantmentAttributeEffect(locate("enchantment.tight_grip"), Attributes.ATTACK_SPEED, LevelBasedValue.perLevel(0.0625f), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL))
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.SWORD_ENCHANTABLE)
+			.addTag(ItemTags.SWORD_ENCHANTABLE)
 			.addOptionalTag(ResourceLocation.parse("malum:scythe"))
 	).withExclusiveSet((key, provider) -> provider
 			.addOptional(ResourceLocation.parse("malum:rebound"))
@@ -347,7 +346,7 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.of(ItemTags.SWORD_ENCHANTABLE)
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.WEAPON_ENCHANTABLE)
+			.addTag(ItemTags.WEAPON_ENCHANTABLE)
 			.addOptionalTag(ResourceLocation.parse("malum:scythe"))
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.LOOTING)
@@ -365,8 +364,8 @@ public class SpectrumEnchantments {
 			List.of(EquipmentSlotGroup.MAINHAND),
 			Optional.empty()
 	).withEnchantable(provider -> provider
-			.forceAddTag(ItemTags.MINING_LOOT_ENCHANTABLE)
-			.add(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem())
+			.addTag(ItemTags.MINING_LOOT_ENCHANTABLE)
+			.add(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem().builtInRegistryHolder().key())
 	).register();
 	
 	private static ResourceKey<Enchantment> of(String id) {
@@ -456,8 +455,8 @@ public class SpectrumEnchantments {
 	}
 	
 	public static void provideEnchantmentTags(DatagenProxy.ProvidedTagBuilderBuilder<Enchantment> builder) {
-		FabricTagProvider<Enchantment>.FabricTagBuilder enchantments = builder.build(SpectrumEnchantmentTags.SPECTRUM_ENCHANTMENT);
-		ENCHANTMENT_TAG_REGISTRAR.streamKeys().sorted(Comparator.comparing(ResourceKey::location)).forEach(enchantments::addOptional);
+		var enchantments = builder.build(SpectrumEnchantmentTags.SPECTRUM_ENCHANTMENT);
+		ENCHANTMENT_TAG_REGISTRAR.streamKeys().map(ResourceKey::location).sorted().forEach(enchantments::addOptional);
 		ENCHANTMENT_TAG_REGISTRAR.flush(builder);
 	}
 	

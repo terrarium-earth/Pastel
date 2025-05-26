@@ -1,6 +1,10 @@
 
 plugins {
-    id("earth.terrarium.cloche") version "0.9.13"
+    id("earth.terrarium.cloche") version "0.9.19"
+}
+
+sourceSets.main {
+    resources.srcDir("src/main/generated")
 }
 
 repositories {
