@@ -1,5 +1,5 @@
 {
-  "type": "spectrum:pedestal",
+  "type": "pastel:pedestal",
   "time": 100,
   "tier": "basic",
   "cyan": 0,
@@ -15,12 +15,12 @@
   ],
   "key": {
     "S": {
-      "item": "spectrum:spectral_shard"
+      "item": "pastel:spectral_shard"
     }
   },
   "result": {
-    "item": "spectrum:spectral_shard_storage_block",
+    "item": "pastel:spectral_shard_storage_block",
     "count": 1
   },
-  "required_advancement": "spectrum:endgame/create_spectral_shard"
+  "required_advancement": "pastel:endgame/create_spectral_shard"
 }

@@ -44,10 +44,10 @@ public class BlockFlooderItem extends Item {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.block_flooder.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.block_flooder.tooltip2").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.block_flooder.tooltip3").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.block_flooder.tooltip4").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.block_flooder.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.block_flooder.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.block_flooder.tooltip3").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.block_flooder.tooltip4").withStyle(ChatFormatting.GRAY));
 	}
 	
 }

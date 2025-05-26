@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "pastel:light_gray_pigment"
+    }
+  ],
+  "ink_color": "pastel:light_gray",
+  "amount": 100,
+  "required_advancement": "pastel:hidden/collect_pigment/light_gray"
+}

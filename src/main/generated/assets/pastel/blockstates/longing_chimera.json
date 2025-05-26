@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "pastel:block/longing_chimera",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "pastel:block/longing_chimera"
+    },
+    "facing=south": {
+      "model": "pastel:block/longing_chimera",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "pastel:block/longing_chimera",
+      "y": 270
+    }
+  }
+}

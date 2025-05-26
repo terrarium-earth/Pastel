@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "cooldown=false": {
+      "model": "pastel:block/mob_block_cooldown"
+    },
+    "cooldown=true": {
+      "model": "pastel:block/mob_block"
+    }
+  }
+}

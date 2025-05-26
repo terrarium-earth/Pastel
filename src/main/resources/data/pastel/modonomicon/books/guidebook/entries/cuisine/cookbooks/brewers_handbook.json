@@ -1,0 +1,102 @@
+{
+  "name": "item.pastel.brewers_handbook",
+  "icon": {
+    "item": "pastel:brewers_handbook"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_cookbooks/brewers_handbook"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -3,
+  "y": 3,
+  "pages": [
+    {
+      "type": "pastel:snippet",
+      "title": "book.pastel.guidebook.brewers_handbook.page0.title",
+      "resource_path": "pastel:textures/gui/guidebook/taswell.png",
+      "resource_width": 116,
+      "resource_height": 116,
+      "texture_x": 0,
+      "texture_y": 0,
+      "texture_width": 116,
+      "texture_height": 116,
+      "border": false,
+      "text": "book.pastel.guidebook.brewers_handbook.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.brewers_handbook.page1.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.brewers_handbook.page2.title",
+      "text": "book.pastel.guidebook.brewers_handbook.page2.text"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "recipe_id": "pastel:potion_workshop_crafting/peach_cream",
+      "text": "book.pastel.guidebook.brewers_handbook.page3.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.brewers_handbook.page4.title",
+      "text": "book.pastel.guidebook.brewers_handbook.page4.text"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "recipe_id": "pastel:potion_workshop_crafting/golden_bristle_tea",
+      "text": "book.pastel.guidebook.brewers_handbook.page5.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.brewers_handbook.page6.title",
+      "text": "book.pastel.guidebook.brewers_handbook.page6.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "recipe_id": "pastel:titration_barrel/bristle_mead",
+      "text": "book.pastel.guidebook.brewers_handbook.page7.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "recipe_id": "pastel:titration_barrel/bristle_mead_fluid",
+      "text": "book.pastel.guidebook.brewers_handbook.page7.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.brewers_handbook.page9.title",
+      "text": "book.pastel.guidebook.brewers_handbook.page9.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "recipe_id": "pastel:titration_barrel/morchella",
+      "text": "book.pastel.guidebook.brewers_handbook.page10.text"
+    },
+    {
+      "type": "modonomicon:empty"
+    },
+    {
+      "type": "modonomicon:empty"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.brewers_handbook.page13.title",
+      "text": "book.pastel.guidebook.brewers_handbook.page13.text"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "recipe_id": "pastel:potion_workshop_crafting/sedatives",
+      "text": "book.pastel.guidebook.brewers_handbook.page14.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.brewers_handbook.page15.title",
+      "text": "book.pastel.guidebook.brewers_handbook.page15.text"
+    }
+  ]
+}

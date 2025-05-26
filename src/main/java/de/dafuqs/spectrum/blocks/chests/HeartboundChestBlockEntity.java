@@ -70,9 +70,9 @@ public class HeartboundChestBlockEntity extends SpectrumChestBlockEntity impleme
 	@Override
 	protected Component getDefaultName() {
 		if (hasOwner()) {
-			return Component.translatable("block.spectrum.heartbound_chest.owner", this.ownerName);
+			return Component.translatable("block.pastel.heartbound_chest.owner", this.ownerName);
 		} else {
-			return Component.translatable("block.spectrum.heartbound_chest");
+			return Component.translatable("block.pastel.heartbound_chest");
 		}
 	}
 	
@@ -153,7 +153,7 @@ public class HeartboundChestBlockEntity extends SpectrumChestBlockEntity impleme
 		if (!isOwner && this.getLevel() != null) {
 			this.lastNonOwnerOpenedTick = this.getLevel().getGameTime();
 			updateRedstone(this.worldPosition, this.getLevel().getBlockState(worldPosition));
-			player.displayClientMessage(Component.translatable("block.spectrum.heartbound_chest.owner", this.ownerName), true);
+			player.displayClientMessage(Component.translatable("block.pastel.heartbound_chest.owner", this.ownerName), true);
 		}
 		
 		return isOwner;

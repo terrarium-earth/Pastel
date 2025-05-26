@@ -1,0 +1,44 @@
+{
+  "name": "enchantment.pastel.foundry",
+  "icon": {
+    "item": "minecraft:iron_pickaxe"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/enchantments/foundry"
+  },
+  "flag": "pastel:enchantment_exists_spectrum_foundry",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": -4,
+  "x": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.foundry.page0.text",
+      "title": "enchantment.pastel.foundry"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "minecraft:iron_pickaxe"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:foundry": 1
+        }
+      },
+      "text": "book.pastel.guidebook.foundry.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/foundry"
+    }
+  ]
+}

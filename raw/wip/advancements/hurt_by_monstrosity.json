@@ -1,14 +1,14 @@
 {
-  "parent": "spectrum:lategame/spectrum_lategame",
+  "parent": "pastel:lategame/spectrum_lategame",
   "display": {
     "icon": {
-      "item": "spectrum:bedrock_dust"
+      "item": "pastel:bedrock_dust"
     },
     "title": {
-      "translate": "advancements.spectrum.hurt_by_monstrosity.title"
+      "translate": "advancements.pastel.hurt_by_monstrosity.title"
     },
     "description": {
-      "translate": "advancements.spectrum.hurt_by_monstrosity.description"
+      "translate": "advancements.pastel.hurt_by_monstrosity.description"
     }
   },
   "criteria": {
@@ -26,7 +26,7 @@
     "gotten_previous": {
       "trigger":"revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:lategame/spectrum_lategame"
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
       }
     }
   }

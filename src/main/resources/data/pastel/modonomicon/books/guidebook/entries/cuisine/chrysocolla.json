@@ -1,0 +1,34 @@
+{
+  "name": "item.pastel.chrysocolla",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/tap_chrysocolla"
+  },
+  "icon": {
+    "item": "pastel:chrysocolla"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/jade_wine"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:chrysocolla"
+      },
+      "text": "book.pastel.guidebook.chrysocolla.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.disinfect"
+    }
+  ]
+}

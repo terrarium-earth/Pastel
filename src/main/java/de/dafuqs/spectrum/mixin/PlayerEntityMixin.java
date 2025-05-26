@@ -3,8 +3,6 @@ package de.dafuqs.spectrum.mixin;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -14,7 +12,6 @@ import de.dafuqs.spectrum.api.entity.PlayerEntityAccessor;
 import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
 import de.dafuqs.spectrum.attachments.data.LastKillData;
 import de.dafuqs.spectrum.attachments.data.MiscPlayerData;
-import de.dafuqs.spectrum.components.InertiaComponent;
 import de.dafuqs.spectrum.entity.entity.SpectrumFishingBobberEntity;
 import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.helpers.enchantments.ImprovedCriticalHelper;
@@ -24,7 +21,6 @@ import de.dafuqs.spectrum.items.trinkets.AttackRingItem;
 import de.dafuqs.spectrum.items.trinkets.SpectrumTrinketItem;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypeTags;
-import de.dafuqs.spectrum.registries.SpectrumDataComponentTypes;
 import de.dafuqs.spectrum.registries.SpectrumEnchantments;
 import de.dafuqs.spectrum.registries.SpectrumEntityAttributes;
 import de.dafuqs.spectrum.registries.SpectrumItems;
@@ -92,38 +88,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	@Unique
 	public SpectrumFishingBobberEntity fishingBobber;
 	
-	@WrapOperation(method = "getDestroySpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;getDestroySpeed(Lnet/minecraft/world/level/block/state/BlockState;)F"))
-	private float spectrum$modifygetBlockBreakingSpeed(Inventory inventory, BlockState state, Operation<Float> original) {
-		ItemStack stack = inventory.items.get(inventory.selected);
-		RegistryAccess drm = registryAccess();
-		Tool tool = stack.get(DataComponents.TOOL);
-		float speed = original.call(inventory, state);
-		
-		// RAZING GAMING
-		int razingLevel = SpectrumEnchantmentHelper.getLevel(drm, SpectrumEnchantments.RAZING, stack);
-		if (razingLevel > 0 && tool != null && tool.getMiningSpeed(state) > tool.defaultMiningSpeed()) {
-			float hardness = state.getBlock().defaultDestroyTime();
-			speed = (float) Math.max(1 + hardness, Math.pow(2, 1 + razingLevel / 8F));
-		}
-		
-		// INERTIA GAMING
-		// inertia mining speed calculation logic is capped at 5 levels.
-		// Higher and the formula would do weird stuff
-		int inertiaLevel = SpectrumEnchantmentHelper.getLevel(drm, SpectrumEnchantments.INERTIA, stack);
-		inertiaLevel = Math.min(4, inertiaLevel);
-		if (inertiaLevel > 0) {
-			var inertia = stack.getOrDefault(SpectrumDataComponentTypes.INERTIA, InertiaComponent.DEFAULT);
-			if (state.is(inertia.lastMined())) {
-				var additionalSpeedPercent = 2.0 * Math.log(inertia.count()) / Math.log((6 - inertiaLevel) * (6 - inertiaLevel) + 1);
-				speed *= 0.5F + (float) additionalSpeedPercent;
-			} else {
-				speed /= 4;
-			}
-		}
-		
-		return speed;
-	}
-	
 	@Inject(method = "updateSwimming()V", at = @At("HEAD"), cancellable = true)
 	public void spectrum$updateSwimming(CallbackInfo ci) {
 		if (SpectrumTrinketItem.hasEquipped(this, SpectrumItems.RING_OF_DENSER_STEPS)) {
@@ -172,32 +136,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 		}
 		
 		player.getAttributes().addTransientAttributeModifiers(map);
-	}
-	
-	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getEntitiesOfClass(Ljava/lang/Class;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"))
-	protected List<LivingEntity> spectrum$increaseSweepRadius(List<LivingEntity> original, Entity target) {
-		var stack = this.getItemInHand(InteractionHand.MAIN_HAND);
-		if (stack.getItem() == SpectrumItems.DRACONIC_TWINSWORD) {
-			var channeling = getChanneling(stack) + 1;
-			var size = channeling * 2 + 0.5;
-			var entities = this.level().getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(size, 0.4 * channeling, size));
-			if (!level().isClientSide() && (channeling - 1) > 0) {
-				for (LivingEntity living : entities) {
-					if (living.canBeSeenAsEnemy()) {
-						for (int i = 0; i < 5; i++) {
-							((ServerLevel) level()).sendParticles(ParticleTypes.ENCHANTED_HIT,
-									living.getRandomX(1.25),
-									living.getY() + living.getBbHeight() * random.nextFloat(),
-									living.getRandomZ(1.25),
-									random.nextInt(2), 0, random.nextFloat() / 6F, 0, 0);
-						}
-					}
-				}
-			}
-			
-			return entities;
-		}
-		return original;
 	}
 	
 	@ModifyVariable(method = "attack", at = @At(value = "STORE"), index = 8, require = 1)
@@ -320,50 +258,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 		return experience;
 	}
 	
-	@ModifyVariable(method = "getDestroySpeed",
-			slice = @Slice(from = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;hasEffect(Lnet/minecraft/core/Holder;)Z"),
-					to = @At("TAIL")
-			),
-			at = @At(value = "LOAD"),
-			ordinal = 1
-	)
-	public float applyInexorableEffects(float value) {
-		if (isInexorableActive())
-			return 1F;
-		
-		return value;
-	}
-
-	@ModifyExpressionValue(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;distanceToSqr(Lnet/minecraft/world/entity/Entity;)D", shift = At.Shift.AFTER))
-	protected double spectrum$increaseSweepMaxDistance(double original) {
-		var stack = this.getItemInHand(InteractionHand.MAIN_HAND);
-		if (stack.getItem() == SpectrumItems.DRACONIC_TWINSWORD) {
-			int channeling = SpectrumEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
-			return original * 3 * ((channeling + 1) * 1.5);
-		}
-		return original;
-	}
-	
-	@ModifyReturnValue(method = "getDestroySpeed", at = @At("RETURN"))
-	public float applyInexorableAntiSlowdowns(float original) {
-		if (isInexorableActive()) {
-			var player = (Player) (Object) this;
-			var f = original;
-			
-			boolean hasAquaAffinity = SpectrumEnchantmentHelper.getEquipmentLevel(player.level().registryAccess(), Enchantments.AQUA_AFFINITY, player) > 0;
-			if (player.isEyeInFluid(FluidTags.WATER) && !hasAquaAffinity)
-				f *= 5;
-			
-			if (!player.onGround())
-				f *= 5;
-			
-			return f;
-		}
-		
-		return original;
-		
-	}
-	
 	@Inject(method = "stopSleepInBed", at = @At(value = "HEAD"))
 	public void spectrum$applyWakeUpEffects(boolean skipSleepTimer, boolean updateSleepingPlayers, CallbackInfo ci) {
 		var player = (Player) (Object) this;
@@ -380,11 +274,4 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 		}
 		original.call(instance, entityPose);
 	}
-	
-	@Unique
-	private boolean isInexorableActive() {
-		Player player = (Player) (Object) this;
-		return SpectrumEnchantmentHelper.hasEnchantment(player.level().registryAccess(), SpectrumEnchantments.INEXORABLE, player.getItemInHand(player.getUsedItemHand()));
-	}
-	
 }

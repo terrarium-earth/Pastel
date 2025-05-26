@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:jadeite_petals",
+  "modifiers": {
+    "flat_duration_bonus_ticks_positive_effects": 2400
+  },
+  "required_advancement": "pastel:hidden/collect_jadeite"
+}

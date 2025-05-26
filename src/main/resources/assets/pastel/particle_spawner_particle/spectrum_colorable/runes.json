@@ -1,0 +1,6 @@
+{
+  "particle_type": "pastel:runes",
+  "gui_texture": "pastel:generic_rune_0",
+  "unlock_identifier": "pastel:midgame/get_azure_dike_charge",
+  "supports_coloring": true
+}

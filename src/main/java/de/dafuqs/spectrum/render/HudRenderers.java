@@ -20,8 +20,8 @@ public class HudRenderers {
 
 	public static final ResourceLocation PLAYER_DIKE = SpectrumCommon.locate("player_dike");
 	
-	private static final Component missingInkText = Component.translatable("item.spectrum.constructors_staff.tooltip.missing_ink");
-	private static final Component noneText = Component.translatable("item.spectrum.constructors_staff.tooltip.none_in_inventory");
+	private static final Component missingInkText = Component.translatable("item.pastel.constructors_staff.tooltip.missing_ink");
+	private static final Component noneText = Component.translatable("item.pastel.constructors_staff.tooltip.none_in_inventory");
 	
 	private static ItemStack itemStackToRender;
 	private static int amount;

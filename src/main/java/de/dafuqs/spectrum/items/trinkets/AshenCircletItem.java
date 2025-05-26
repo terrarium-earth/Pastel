@@ -74,16 +74,16 @@ public class AshenCircletItem extends SpectrumTrinketItem {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.ashen_circlet.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.ashen_circlet.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.ashen_circlet.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.ashen_circlet.tooltip2").withStyle(ChatFormatting.GRAY));
 		
 		var world = Minecraft.getInstance().level;
 		if (world != null) {
 			long cooldownTicks = getCooldownTicks(stack, world);
 			if (cooldownTicks == 0) {
-				tooltip.add(Component.translatable("item.spectrum.ashen_circlet.tooltip.cooldown_full"));
+				tooltip.add(Component.translatable("item.pastel.ashen_circlet.tooltip.cooldown_full"));
 			} else {
-				tooltip.add(Component.translatable("item.spectrum.ashen_circlet.tooltip.cooldown_seconds", cooldownTicks / 20));
+				tooltip.add(Component.translatable("item.pastel.ashen_circlet.tooltip.cooldown_seconds", cooldownTicks / 20));
 			}
 		}
 	}

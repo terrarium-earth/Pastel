@@ -80,7 +80,7 @@ public class ShootingStarItem extends BlockItem implements ShootingStar {
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		if (isHardened(stack)) {
-			tooltip.add(Component.translatable("item.spectrum.shooting_star.tooltip.hardened").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.shooting_star.tooltip.hardened").withStyle(ChatFormatting.GRAY));
 		}
 	}
 	

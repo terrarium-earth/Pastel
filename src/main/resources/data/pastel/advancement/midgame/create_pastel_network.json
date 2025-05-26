@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:connection_node"
+    },
+    "title": {
+      "translate": "advancements.pastel.create_pastel_network.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.create_pastel_network.description"
+    }
+  },
+  "parent": "pastel:midgame/collect_azurite",
+  "criteria": {
+    "created_2_node_pastel_network": {
+      "trigger": "pastel:pastel_network_creation",
+      "conditions": {
+        "total_nodes": {
+          "min": 2
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_azurite"
+      }
+    }
+  }
+}

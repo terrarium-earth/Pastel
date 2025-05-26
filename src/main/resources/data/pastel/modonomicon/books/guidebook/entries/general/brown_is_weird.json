@@ -1,0 +1,38 @@
+{
+  "name": "book.pastel.guidebook.brown_is_weird.name",
+  "icon": {
+    "item": "pastel:brown_pigment"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_all_basic_pigments_besides_brown"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/color_mixing_cmy"
+    },
+    {
+      "entry": "pastel:general/pigment"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": -2,
+  "turnin": "pastel:craft_colored_sapling",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.brown_is_weird.name",
+      "text": "book.pastel.guidebook.brown_is_weird.page0.text"
+    },
+    {
+      "type": "pastel:link",
+      "text": "book.pastel.guidebook.brown_is_weird.page1.text",
+      "url": "https://www.youtube.com/watch?v=wh4aWZRtTwU",
+      "link_text": "book.pastel.guidebook.brown_is_weird.page1.link_text"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "item.pastel.glow_vision_goggles",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/glow_vision_goggles"
+  },
+  "icon": {
+    "item": "pastel:glow_vision_goggles"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/trinkets/base_trinkets",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 4,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:glow_vision_goggles"
+      },
+      "text": "book.pastel.guidebook.glow_vision_goggles.page0.text",
+      "title": "item.pastel.glow_vision_goggles"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.glow_vision_goggles.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/glow_vision_goggles"
+    }
+  ]
+}

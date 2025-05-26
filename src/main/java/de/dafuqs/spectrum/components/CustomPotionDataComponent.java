@@ -31,9 +31,9 @@ public record CustomPotionDataComponent(boolean unidentifiable, int additionalDr
 	public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag type) {
 		int additionalDrinkDuration = this.additionalDrinkDuration();
 		if (additionalDrinkDuration > 0) {
-			tooltip.accept(Component.translatable("item.spectrum.potion.slower_to_drink"));
+			tooltip.accept(Component.translatable("item.pastel.potion.slower_to_drink"));
 		} else if (additionalDrinkDuration < 0) {
-			tooltip.accept(Component.translatable("item.spectrum.potion.faster_to_drink"));
+			tooltip.accept(Component.translatable("item.pastel.potion.faster_to_drink"));
 		}
 	}
 	

@@ -1,0 +1,38 @@
+{
+  "name": "book.pastel.guidebook.ruin.name",
+  "icon": {
+    "item": "pastel:bottle_of_ruin"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/bottle_of_ruin"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/midnight_chip"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 17,
+  "y": 0,
+  "turnin": "pastel:midgame/break_decayed_bedrock",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:bottle_of_ruin"
+      },
+      "text": "book.pastel.guidebook.ruin.page0.text",
+      "title": "book.pastel.guidebook.ruin.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/bottle_of_ruin",
+      "text": "book.pastel.guidebook.ruin.page1.text"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "pastel:connection_node",
+    "pastel:provider_node",
+    "pastel:storage_node",
+    "pastel:sender_node",
+    "pastel:gather_node",
+    "pastel:buffer_node"
+  ]
+}

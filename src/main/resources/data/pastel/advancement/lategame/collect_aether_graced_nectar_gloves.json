@@ -1,0 +1,34 @@
+{
+  "parent": "pastel:lategame/find_undergrowth_manor",
+  "display": {
+    "icon": {
+      "id": "pastel:aether_graced_nectar_gloves"
+    },
+    "hidden": true,
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.collect_aether_graced_nectar_gloves.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_aether_graced_nectar_gloves.description"
+    }
+  },
+  "criteria": {
+    "has_aether_graced_nectar_gloves": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:aether_graced_nectar_gloves"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/find_undergrowth_manor"
+      }
+    }
+  }
+}

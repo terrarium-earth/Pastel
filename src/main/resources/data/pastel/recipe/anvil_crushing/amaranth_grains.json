@@ -1,0 +1,18 @@
+{
+  "type": "pastel:anvil_crushing",
+  "ingredient": [
+    {
+      "item": "pastel:amaranth_bushel"
+    }
+  ],
+  "crushedItemsPerPointOfDamage": 2,
+  "experience": 0.25,
+  "result": {
+    "id": "pastel:amaranth_grains",
+    "count": 2
+  },
+  "particleEffectIdentifier": "enchanted_hit",
+  "particleCount": 10,
+  "soundEventIdentifier": "block.moss.break",
+  "required_advancement": "pastel:collect_amaranth_bushel"
+}

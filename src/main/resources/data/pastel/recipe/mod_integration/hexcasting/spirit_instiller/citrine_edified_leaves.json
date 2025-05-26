@@ -1,0 +1,22 @@
+{
+  "type": "pastel:spirit_instiller",
+  "time": 40,
+  "experience": 0.1,
+  "ingredient1": "#minecraft:leaves",
+  "ingredient2": "pastel:citrine_shard",
+  "center_ingredient": {
+    "item": "pastel:vegetal",
+    "count": 1
+  },
+  "result": {
+    "id": "hexcasting:citrine_edified_leaves"
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "hexcasting"
+      ]
+    }
+  ]
+}

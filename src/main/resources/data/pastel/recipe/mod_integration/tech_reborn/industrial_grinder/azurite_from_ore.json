@@ -1,0 +1,26 @@
+{
+  "type": "techreborn:industrial_grinder",
+  "power": 64,
+  "time": 100,
+  "tank": {
+    "fluid": "pastel:liquid_crystal",
+    "amount": 100
+  },
+  "ingredients": [
+    "#pastel:azurite_ores"
+  ],
+  "results": [
+    {
+      "id": "pastel:raw_azurite",
+      "count": 4
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "techreborn"
+      ]
+    }
+  ]
+}

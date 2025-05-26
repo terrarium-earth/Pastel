@@ -1,0 +1,24 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "time": 50,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 1.0,
+  "ingredients": [
+    "pastel:amaranth_grains",
+    "#c:eggs",
+    "minecraft:sweet_berries",
+    "pastel:clotted_cream"
+  ],
+  "result": {
+    "id": "pastel:scone",
+    "count": 2
+  },
+  "required_advancement": "pastel:collect_amaranth_bushel"
+}

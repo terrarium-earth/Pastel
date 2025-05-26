@@ -1,0 +1,88 @@
+{
+  "name": "block.pastel.pedestal",
+  "icon": {
+    "item": "pastel:pedestal_basic_amethyst"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_any_basic_shard"
+  },
+  "parents": [
+    {
+      "entry": "pastel:general/shards",
+      "line_reversed": true
+    },
+    {
+      "entry": "pastel:general/paintbrush",
+      "line_reversed": true
+    },
+    {
+      "entry": "pastel:general/gemstone_powder"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": -4,
+  "y": 1,
+  "turnin": "pastel:craft_using_pedestal",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "block.pastel.pedestal",
+      "text": "book.pastel.guidebook.pedestal.page0.text"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_shards/topaz"
+      },
+      "title1": "block.pastel.pedestal",
+      "recipe_id_1": "pastel:crafting_table/pedestal_basic_topaz",
+      "text": "book.pastel.guidebook.pedestal.topaz_pedestal.text"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_shards/amethyst"
+      },
+      "title1": "block.pastel.pedestal",
+      "recipe_id_1": "pastel:crafting_table/pedestal_basic_amethyst",
+      "text": "book.pastel.guidebook.pedestal.amethyst_pedestal.text"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_shards/citrine"
+      },
+      "title1": "block.pastel.pedestal",
+      "recipe_id_1": "pastel:crafting_table/pedestal_basic_citrine",
+      "text": "book.pastel.guidebook.pedestal.citrine_pedestal.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.pedestal.page2.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:place_pedestal"
+      },
+      "text": "book.pastel.guidebook.pedestal.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/items/crafting_tablet"
+      },
+      "item": {
+        "item": "pastel:crafting_tablet"
+      },
+      "title": "book.pastel.guidebook.pedestal.automation.title",
+      "text": "book.pastel.guidebook.pedestal.automation.text"
+    }
+  ]
+}

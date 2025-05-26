@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.circlet_of_arrogance",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/circlet_of_arrogance"
+  },
+  "icon": {
+    "item": "pastel:circlet_of_arrogance"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/trinkets/base_trinkets",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 9,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.circlet_of_arrogance.page0.text",
+      "title": "item.pastel.circlet_of_arrogance"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.circlet_of_arrogance.page1.text",
+      "title": "container.pastel.rei.fusion_recipe",
+      "recipe_id": "pastel:fusion_shrine/trinkets/circlet_of_arrogance"
+    }
+  ]
+}

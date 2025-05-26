@@ -217,7 +217,7 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity {
 	
 	@Override
 	protected Component getDefaultName() {
-		return Component.translatable("block.spectrum.compacting_chest");
+		return Component.translatable("block.pastel.compacting_chest");
 	}
 	
 	@Override

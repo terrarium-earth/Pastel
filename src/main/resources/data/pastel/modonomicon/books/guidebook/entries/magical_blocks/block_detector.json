@@ -1,0 +1,32 @@
+{
+  "name": "block.pastel.block_detector",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/redstone/block_detector"
+  },
+  "icon": {
+    "item": "pastel:block_detector"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 1,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:block_detector"
+      },
+      "text": "book.pastel.guidebook.block_detector.page0.text",
+      "title": "block.pastel.block_detector"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/block_detector"
+    }
+  ]
+}

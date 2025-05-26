@@ -15,7 +15,7 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 public class SpectrumCommands {
 
 	public static void register(RegisterCommandsEvent event) {
-        LiteralCommandNode<CommandSourceStack> spectrumNode = Commands.literal("spectrum").build();
+        LiteralCommandNode<CommandSourceStack> spectrumNode = Commands.literal("pastel").build();
         ShootingStarCommand.register(spectrumNode);
         SanityCommand.register(spectrumNode);
         PrintConfigCommand.register(spectrumNode);

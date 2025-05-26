@@ -41,7 +41,7 @@ public class LagoonRodItem extends SpectrumFishingRodItem implements Preenchante
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.lagoon_rod.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.lagoon_rod.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 	
 }

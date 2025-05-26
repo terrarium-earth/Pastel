@@ -1,0 +1,29 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1800,
+  "experience": 8.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "tag": "minecraft:planks",
+      "count": 4
+    },
+    {
+      "item": "pastel:raw_azurite",
+      "count": 4
+    },
+    {
+      "tag": "pastel:pigments",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:pigment_palette"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/pigment_palette",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

@@ -1,0 +1,11 @@
+{
+  "type": "pastel:spirit_instiller",
+  "time": 200,
+  "experience": 2.0,
+  "ingredient1": "pastel:moonstruck_nectar",
+  "ingredient2": "pastel:mermaids_gem",
+  "center_ingredient": "minecraft:nautilus_shell",
+  "result": {
+    "id": "minecraft:heart_of_the_sea"
+  }
+}

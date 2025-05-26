@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "pastel:block/chestnut_noxcap_stem_top",
+    "side": "pastel:block/chestnut_noxcap_stem"
+  }
+}

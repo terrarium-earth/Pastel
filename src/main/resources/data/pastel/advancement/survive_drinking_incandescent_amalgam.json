@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:incandescent_amalgam"
+    },
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.survive_drinking_incandescent_amalgam.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.survive_drinking_incandescent_amalgam.description"
+    }
+  },
+  "parent": "pastel:place_incandescent_amalgam",
+  "criteria": {
+    "survived_drinking_incandescent_amalgam": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:tap_titration_barrel"
+      }
+    }
+  }
+}

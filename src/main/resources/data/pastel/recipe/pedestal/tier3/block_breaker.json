@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "time": 200,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 1.0,
+  "pattern": [
+    "CCC",
+    "RSB",
+    "BBB"
+  ],
+  "key": {
+    "R": "minecraft:redstone",
+    "S": "pastel:storm_stone",
+    "B": "pastel:polished_bone_ash",
+    "C": "pastel:pyrite"
+  },
+  "result": {
+    "id": "pastel:block_breaker",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/redstone/block_breaker"
+}

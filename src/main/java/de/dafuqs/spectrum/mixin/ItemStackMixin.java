@@ -103,8 +103,8 @@ public abstract class ItemStackMixin {
 			var subText = new ArrayList<Component>();
 			PotionContents.addPotionTooltip(List.of(oilEffect), subText::add, 1f, context.tickRate());
 			
-			tooltip.add(Component.translatable("info.spectrum.tooltip.adulterated.info").withStyle(s -> s.withColor(ConcealingOilsItem.POISONED_COLOUR)));
-			tooltip.add(Component.translatable("info.spectrum.tooltip.adulterated.effect", subText.getFirst()).withStyle(s -> s.withColor(ConcealingOilsItem.POISONED_COLOUR).withItalic(true)));
+			tooltip.add(Component.translatable("info.pastel.tooltip.adulterated.info").withStyle(s -> s.withColor(ConcealingOilsItem.POISONED_COLOUR)));
+			tooltip.add(Component.translatable("info.pastel.tooltip.adulterated.effect", subText.getFirst()).withStyle(s -> s.withColor(ConcealingOilsItem.POISONED_COLOUR).withItalic(true)));
 		}
 		
 		if (stack.getItem() instanceof TooltipExtensions expanded) {

@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "time": 200,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 2,
+    "pastel:cyan": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 0.5,
+  "pattern": [
+    "SCS",
+    "AMA",
+    "AAA"
+  ],
+  "key": {
+    "A": "pastel:amaranth_grains",
+    "C": "pastel:four_leaf_clover",
+    "M": "#c:milk",
+    "S": "minecraft:sugar"
+  },
+  "result": {
+    "id": "pastel:lucky_roll",
+    "count": 2
+  },
+  "required_advancement": "pastel:unlocks/food/lucky_roll"
+}

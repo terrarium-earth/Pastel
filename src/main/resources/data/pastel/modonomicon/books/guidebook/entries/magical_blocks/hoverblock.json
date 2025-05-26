@@ -1,0 +1,31 @@
+{
+  "name": "block.pastel.hover_block",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_hover_block"
+  },
+  "icon": {
+    "item": "pastel:hover_block"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:hover_block"
+      },
+      "text": "book.pastel.guidebook.hoverblock.page0.text",
+      "title": "block.pastel.hover_block"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.hoverblock.page1.text"
+    }
+  ]
+}

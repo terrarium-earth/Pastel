@@ -215,7 +215,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	
 	@Override
 	protected Component getDefaultName() {
-		return Component.translatable("block.spectrum.black_hole_chest");
+		return Component.translatable("block.pastel.black_hole_chest");
 	}
 	
 	@Override

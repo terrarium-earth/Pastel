@@ -1,0 +1,80 @@
+{
+  "name": "block.pastel.shale_clay",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_shale_clay"
+  },
+  "icon": {
+    "item": "pastel:shale_clay"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/razor_edge"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 7,
+  "y": -7,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.shale_clay.page0.text",
+      "title": "block.pastel.shale_clay"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.all_variants",
+      "items": [
+        "pastel:shale_clay",
+        "pastel:shale_clay_bricks",
+        "pastel:shale_clay_tiles",
+        "pastel:shale_clay_brick_slab",
+        "pastel:shale_clay_brick_stairs",
+        "pastel:polished_shale_clay_slab",
+        "pastel:polished_shale_clay_stairs",
+        "pastel:shale_clay_tile_slab",
+        "pastel:shale_clay_tile_stairs",
+        "pastel:exposed_polished_shale_clay",
+        "pastel:exposed_polished_shale_clay_slab",
+        "pastel:exposed_polished_shale_clay_stairs",
+        "pastel:exposed_shale_clay_brick_slab",
+        "pastel:exposed_shale_clay_brick_stairs",
+        "pastel:exposed_shale_clay_bricks",
+        "pastel:exposed_shale_clay_tile_slab",
+        "pastel:exposed_shale_clay_tile_stairs",
+        "pastel:exposed_shale_clay_tiles",
+        "pastel:weathered_polished_shale_clay",
+        "pastel:weathered_polished_shale_clay_slab",
+        "pastel:weathered_polished_shale_clay_stairs",
+        "pastel:weathered_shale_clay_brick_slab",
+        "pastel:weathered_shale_clay_brick_stairs",
+        "pastel:weathered_shale_clay_bricks",
+        "pastel:weathered_shale_clay_tile_slab",
+        "pastel:weathered_shale_clay_tile_stairs",
+        "pastel:weathered_shale_clay_tiles"
+      ],
+      "text": "book.pastel.guidebook.shale_clay.page1.text"
+    },
+    {
+      "type": "modonomicon:smelting_recipe",
+      "recipe_id_1": "pastel:smelting/shale_clay_to_polished_shale_clay",
+      "text": "book.pastel.guidebook.shale_clay.page2.text"
+    },
+    {
+      "type": "modonomicon:smelting_recipe",
+      "title1": "book.pastel.guidebook.smelting_back",
+      "recipe_id_1": "pastel:smelting/polished_shale_clay_unsmelting",
+      "text": "book.pastel.guidebook.turn_back_to_polished"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:tilled_shale_clay"
+      },
+      "text": "book.pastel.guidebook.shale_clay.page4.text"
+    }
+  ]
+}

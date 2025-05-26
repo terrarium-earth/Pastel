@@ -1,0 +1,130 @@
+{
+  "name": "enchantment.pastel.resonance",
+  "icon": {
+    "item": "pastel:resonant_pickaxe"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/enchantments/resonance_usage"
+  },
+  "flag": "pastel:enchantment_exists_spectrum_resonance",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "y": -4,
+  "x": 4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.resonance.page0.text",
+      "title": "enchantment.pastel.resonance"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "minecraft:iron_pickaxe"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:resonance": 1
+        }
+      },
+      "text": "book.pastel.guidebook.resonance.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/enchantments/resonance_crafting"
+      },
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/resonance"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.resonance.page3.title",
+      "item": {
+        "item": "minecraft:medium_amethyst_bud"
+      },
+      "text": "book.pastel.guidebook.resonance.page3.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.pure_resources.name",
+      "item": {
+        "item": "pastel:pure_iron"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      },
+      "text": "book.pastel.guidebook.resonance.page4.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "",
+      "item": {
+        "item": "pastel:orange_leaves"
+      },
+      "text": "book.pastel.guidebook.resonance.page5.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.harvesting_spawners",
+      "item": {
+        "item": "minecraft:spawner"
+      },
+      "text": "book.pastel.guidebook.resonance.page6.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:reinforced_deepslate"
+      },
+      "text": "book.pastel.guidebook.resonance.page7.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:sculk_shrieker"
+      },
+      "text": "book.pastel.guidebook.resonance.page8.text"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.resonance.page9.title",
+      "items": [
+        "minecraft:suspicious_sand",
+        "minecraft:suspicious_gravel"
+      ],
+      "text": "book.pastel.guidebook.resonance.page9.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:respawn_anchor"
+      },
+      "text": "book.pastel.guidebook.resonance.page10.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.resonance.page11.title",
+      "item": {
+        "item": "minecraft:oak_sign"
+      },
+      "text": "book.pastel.guidebook.resonance.page11.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.resonance.page12.title",
+      "item": {
+        "item": "minecraft:infested_stone_bricks"
+      },
+      "text": "book.pastel.guidebook.resonance.page12.text"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "biome.pastel.dragonrot_swamp",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/visit_dd_biomes/dragonrot_swamp"
+  },
+  "icon": {
+    "item": "pastel:flayed_earth"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/biomes",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 4,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "biome.pastel.dragonrot_swamp",
+      "images": [
+        "pastel:textures/gui/guidebook/dd_dragonrot_swamp.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.dragonrot_swamp.page0.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:snapping_ivy"
+      },
+      "text": "book.pastel.guidebook.dragonrot_swamp.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:flayed_earth"
+      },
+      "text": "book.pastel.guidebook.dragonrot_swamp.page3.text"
+    }
+  ]
+}

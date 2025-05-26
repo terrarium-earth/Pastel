@@ -1,0 +1,26 @@
+{
+  "type": "pastel:spirit_instiller",
+  "time": 200,
+  "experience": 0.5,
+  "ingredient1": "pastel:blaze_head",
+  "ingredient2": {
+    "item": "pastel:incandescent_essence",
+    "count": 4
+  },
+  "center_ingredient": {
+    "item": "create:empty_blaze_burner",
+    "count": 4
+  },
+  "result": {
+    "id": "create:blaze_burner",
+    "count": 4
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

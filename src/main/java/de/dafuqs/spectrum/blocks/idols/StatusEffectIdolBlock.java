@@ -42,7 +42,7 @@ public class StatusEffectIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.potion_effect_idol.tooltip", this.statusEffect.value().getDisplayName()));
+		tooltip.add(Component.translatable("block.pastel.potion_effect_idol.tooltip", this.statusEffect.value().getDisplayName()));
 	}
 	
 	@Override

@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:midgame/craft_bottle_of_failing",
+  "display": {
+    "icon": {
+      "id": "pastel:neolith"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_neolith.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_neolith.description"
+    }
+  },
+  "criteria": {
+    "has_neolith": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:neolith"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/craft_bottle_of_failing"
+      }
+    }
+  }
+}

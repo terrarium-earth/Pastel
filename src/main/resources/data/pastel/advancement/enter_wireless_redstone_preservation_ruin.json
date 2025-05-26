@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:find_preservation_ruins",
+  "display": {
+    "icon": {
+      "id": "minecraft:bedrock"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.enter_wireless_redstone_preservation_ruin.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.enter_wireless_redstone_preservation_ruin.description"
+    }
+  },
+  "criteria": {
+    "wireless_redstone_vibe_check_passed": {
+      "trigger": "pastel:preservation_check",
+      "conditions": {
+        "check_name": "enter_wireless_redstone_puzzle_structure",
+        "check_passed": true
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:find_preservation_ruins"
+      }
+    }
+  }
+}

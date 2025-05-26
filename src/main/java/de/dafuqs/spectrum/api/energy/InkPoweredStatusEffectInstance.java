@@ -82,7 +82,7 @@ public class InkPoweredStatusEffectInstance {
 			List<Tuple<Holder<Attribute>, AttributeModifier>> attributeModifiers = Lists.newArrayList();
 			for (InkPoweredStatusEffectInstance entry : effects) {
 				if (entry.isUnidentifiable()) {
-					tooltip.add(Component.translatable("item.spectrum.potion.tooltip.unidentifiable"));
+					tooltip.add(Component.translatable("item.pastel.potion.tooltip.unidentifiable"));
 					continue;
 				}
 				
@@ -94,7 +94,7 @@ public class InkPoweredStatusEffectInstance {
 				InkCost cost = entry.getInkCost();
 				
 				if (effect == null) {
-					tooltip.add(Component.translatable("item.spectrum.potion.tooltip.invalid"));
+					tooltip.add(Component.translatable("item.pastel.potion.tooltip.invalid"));
 					continue;
 				}
 				MutableComponent mutableText = Component.translatable(effect.getDescriptionId());
@@ -105,9 +105,9 @@ public class InkPoweredStatusEffectInstance {
 					mutableText = Component.translatable("potion.withDuration", mutableText, MobEffectUtil.formatDuration(effect, 1.0F, tickRate));
 				}
 				mutableText.withStyle(effect.getEffect().value().getCategory().getTooltipFormatting());
-				mutableText.append(Component.translatable("spectrum.tooltip.ink_cost", Support.getShortenedNumberString(cost.cost()), cost.color().getColoredInkName()).withStyle(ChatFormatting.GRAY));
+				mutableText.append(Component.translatable("pastel.tooltip.ink_cost", Support.getShortenedNumberString(cost.cost()), cost.color().getColoredInkName()).withStyle(ChatFormatting.GRAY));
 				if (entry.isIncurable()) {
-					mutableText.append(Component.translatable("item.spectrum.potion.tooltip.incurable"));
+					mutableText.append(Component.translatable("item.pastel.potion.tooltip.incurable"));
 				}
 				tooltip.add(mutableText);
 				

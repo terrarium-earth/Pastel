@@ -1,0 +1,14 @@
+{
+  "values": [
+    "pastel:pyrite",
+    "pastel:pyrite_pile",
+    "pastel:pyrite_tiles",
+    "pastel:pyrite_plating",
+    "pastel:pyrite_tubing",
+    "pastel:pyrite_relief",
+    "pastel:pyrite_stack",
+    "pastel:pyrite_paneling",
+    "pastel:pyrite_vent",
+    "pastel:pyrite_chunk"
+  ]
+}

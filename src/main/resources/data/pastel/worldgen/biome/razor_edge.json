@@ -1,0 +1,136 @@
+{
+  "temperature": 0.2,
+  "downfall": 0.2,
+  "creature_spawn_probability": 0,
+  "effects": {
+    "sky_color": 0,
+    "fog_color": 6830110,
+    "water_color": 13880241,
+    "water_fog_color": 7629410,
+    "grass_color": 7241038,
+    "foliage_color": 3819567,
+    "grass_color_modifier": "none",
+    "particle": {
+      "options": {
+        "type": "pastel:quartz_fluff"
+      },
+      "probability": 0.02
+    },
+    "mood_sound": {
+      "sound": "pastel:ambient.dimension_sounds",
+      "tick_delay": 4000,
+      "block_search_extent": 8,
+      "offset": 2
+    },
+    "music": {
+      "sound": "pastel:music.deeper_down.razor_edge",
+      "min_delay": 12000,
+      "max_delay": 24000,
+      "replace_current_music": false
+    }
+  },
+  "spawners": {
+    "ambient": [
+      {
+        "type": "minecraft:bat",
+        "weight": 10,
+        "minCount": 8,
+        "maxCount": 8
+      }
+    ],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [
+      {
+        "type": "minecraft:zombie",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:skeleton",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:creeper",
+        "weight": 100,
+        "minCount": 4,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:stray",
+        "weight": 200,
+        "minCount": 4,
+        "maxCount": 8
+      },
+      {
+        "type": "minecraft:phantom",
+        "weight": 5,
+        "minCount": 1,
+        "maxCount": 2
+      }
+    ],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "pastel:dd_cave"
+    ]
+  },
+  "features": [
+    [],
+    [],
+    [
+      "pastel:dd_downstone_sloped",
+      "pastel:moonstone_geode",
+      "pastel:dd_pyrite_pillar",
+      "pastel:dd_shale_clay_pillar",
+      "pastel:blackslag_pile"
+    ],
+    [],
+    [
+      "pastel:dd_shale_clay_columns",
+      "pastel:dd_pyrite_columns",
+      "pastel:dd_rock_crystal_columns",
+      "pastel:dd_shale_clay_crystal_formations",
+      "pastel:dd_sawblade_delta"
+    ],
+    [],
+    [
+      "pastel:dd_malachite_ore",
+      "pastel:dd_shimmerstone_ore",
+      "pastel:dd_iron_ore",
+      "pastel:dd_gold_ore",
+      "pastel:dd_coal_ore_razor",
+      "pastel:dd_diamond_ore",
+      "pastel:dd_emerald_ore",
+      "pastel:dd_tuff",
+      "pastel:dd_gravel",
+      "pastel:dd_infested",
+      "pastel:dd_granite",
+      "pastel:dd_diorite",
+      "pastel:dd_andesite",
+      "pastel:dd_stone"
+    ],
+    [],
+    [
+      "pastel:dd_water_springs",
+      "pastel:dd_lava_springs"
+    ],
+    [
+      "pastel:pyrite_ripper_wall_patch",
+      "pastel:dd_glow_lichen",
+      "pastel:aloe_patch",
+      "pastel:sawblade_holly_bush_patch",
+      "pastel:bristle_sprouts"
+    ],
+    []
+  ],
+  "has_precipitation": false
+}

@@ -1,0 +1,27 @@
+{
+  "name": "effect.pastel.density",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/status_effects/density"
+  },
+  "icon": "pastel:textures/mob_effect/density.png",
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:brewing/effects/lightweight"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 4,
+  "y": 2,
+  "pages": [
+    {
+      "type": "pastel:status_effect",
+      "title": "effect.pastel.density",
+      "status_effect_id": "pastel:density",
+      "text": "book.pastel.guidebook.density.page0.text"
+    }
+  ]
+}

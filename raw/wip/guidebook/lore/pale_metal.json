@@ -1,9 +1,9 @@
 {
   "name": "Silver and Ivory",
-  "icon": "spectrum:malachite_workstaff",
+  "icon": "pastel:malachite_workstaff",
   "secret": true,
-  "advancement": "spectrum:unlocks/malachite/malachite_tools",
-  "category": "spectrum:lore",
+  "advancement": "pastel:unlocks/malachite/malachite_tools",
+  "category": "pastel:lore",
   "pages": [
     {
       "type": "modonomicon:text",
@@ -18,9 +18,9 @@
       "text": "When you've held it... it is bizarre, as light as Paltaeria but as hefty as Stratine, it shimmers like Moonstone but emits no light, it looks like it should be translucent, but it isn't - and yet further, though it echoes metal in its form, whenever you've tried to smelt or forge it, it flakes away like shale.$(br)You've searched so long for something alike it, even slightly.$(br2)The best you've found is Quartz."
     },
     {
-      "type": "spectrum:snippet",
+      "type": "pastel:snippet",
       "title": "Silver and Ivory",
-      "resource_path": "spectrum:textures/gui/guidebook/pale_metal.png",
+      "resource_path": "pastel:textures/gui/guidebook/pale_metal.png",
       "resource_width": 116,
       "resource_height": 116,
       "texture_x": 0,

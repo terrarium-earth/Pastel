@@ -1,0 +1,63 @@
+{
+  "parent": "pastel:lategame/build_complex_pedestal_structure",
+  "display": {
+    "icon": {
+      "id": "pastel:light_gray_pigment"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_grayscale_pigments.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_grayscale_pigments.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "has_black": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:black_pigment"
+          }
+        ]
+      }
+    },
+    "has_gray": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:gray_pigment"
+          }
+        ]
+      }
+    },
+    "has_light_gray": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:light_gray_pigment"
+          }
+        ]
+      }
+    },
+    "has_white": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:white_pigment"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "compacting",
+  "ingredients": [
+    {
+      "item": "pastel:polished_amethyst_block"
+    }
+  ],
+  "result": {
+    "id": "minecraft:amethyst_shard",
+    "count": 9
+  }
+}

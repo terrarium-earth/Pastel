@@ -17,7 +17,7 @@ public record WithMilkComponent() implements TooltipProvider {
 	
 	@Override
 	public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag type) {
-		tooltip.accept(Component.translatable("item.spectrum.restoration_tea.tooltip_milk"));
+		tooltip.accept(Component.translatable("item.pastel.restoration_tea.tooltip_milk"));
 	}
 	
 }

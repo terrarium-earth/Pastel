@@ -1,0 +1,12 @@
+{
+  "type": "pastel:dragonrot_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "result": {
+    "id": "minecraft:blackstone",
+    "count": 1
+  }
+}

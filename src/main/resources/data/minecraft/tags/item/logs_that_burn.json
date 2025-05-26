@@ -1,10 +1,10 @@
 {
   "values": [
-    "#spectrum:colored_logs",
-    "#spectrum:noxcap_stems",
-    "#spectrum:weeping_gala_logs",
+    "#pastel:colored_logs",
+    "#pastel:noxcap_stems",
+    "#pastel:weeping_gala_logs",
 
-    "spectrum:nephrite_blossom_stem",
-    "spectrum:spirit_sallow_log"
+    "pastel:nephrite_blossom_stem",
+    "pastel:spirit_sallow_log"
   ]
 }

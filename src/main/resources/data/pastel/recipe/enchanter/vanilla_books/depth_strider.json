@@ -1,0 +1,52 @@
+{
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "pastel:mermaids_gem"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "minecraft:water_bucket"
+    },
+    {
+      "item": "pastel:mermaids_gem"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "minecraft:depth_strider": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_water",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:depth_strider"
+      ]
+    }
+  ]
+}

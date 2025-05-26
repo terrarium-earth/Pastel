@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/base_pylon_body",
+  "textures": {
+    "end": "pastel:block/onyx_pylon_end",
+    "side": "pastel:block/onyx_pylon_foot"
+  }
+}

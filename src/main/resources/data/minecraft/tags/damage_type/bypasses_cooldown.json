@@ -1,6 +1,6 @@
 {
   "values": [
-    "spectrum:irradiance",
-    "spectrum:evisceration"
+    "pastel:irradiance",
+    "pastel:evisceration"
   ]
 }

@@ -1,0 +1,37 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1200,
+  "experience": 16.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "copy_components": true,
+  "ingredients": [
+    "pastel:malachite_crossbow",
+    "pastel:moonstone_core",
+    {
+      "item": "pastel:pure_redstone",
+      "count": 8
+    },
+    {
+      "item": "pastel:star_fragment",
+      "count": 4
+    },
+    {
+      "item": "pastel:white_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:glass_crest_crossbow",
+    "components": {
+      "enchantments": {
+        "minecraft:piercing": 5
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/malachite/glass_crest_crossbow",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

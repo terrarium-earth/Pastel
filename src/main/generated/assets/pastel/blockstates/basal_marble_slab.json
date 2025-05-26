@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pastel:block/basal_marble_slab"
+    },
+    "type=double": {
+      "model": "pastel:block/basal_marble"
+    },
+    "type=top": {
+      "model": "pastel:block/basal_marble_slab_top"
+    }
+  }
+}

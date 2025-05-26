@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:lategame/collect_paltaeria",
+  "display": {
+    "icon": {
+      "id": "pastel:paltaeria_floatblock"
+    },
+    "hidden": true,
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.carry_too_many_low_gravity_blocks.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.carry_too_many_low_gravity_blocks.description"
+    }
+  },
+  "criteria": {
+    "gravity": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_paltaeria"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 200
+  }
+}

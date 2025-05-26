@@ -1,0 +1,26 @@
+{
+  "type": "pastel:spirit_instiller",
+  "time": 400,
+  "experience": 8.0,
+  "ingredient1": {
+    "item": "pastel:resonance_shard",
+    "count": 4
+  },
+  "ingredient2": {
+    "item": "pastel:blood_orchid_petal",
+    "count": 16
+  },
+  "center_ingredient": "botania:blacker_lotus",
+  "result": {
+    "id": "pastel:blackest_lotus"
+  },
+  "required_advancement": "pastel:lategame/strike_up_hummingstone_hymn",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "botania"
+      ]
+    }
+  ]
+}

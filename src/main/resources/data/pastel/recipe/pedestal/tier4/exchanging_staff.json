@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "time": 1200,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:magenta": 4,
+    "pastel:yellow": 0,
+    "pastel:white": 4,
+    "pastel:black": 1
+  },
+  "experience": 2.0,
+  "pattern": [
+    " PG",
+    " SP",
+    "S  "
+  ],
+  "key": {
+    "S": "minecraft:stick",
+    "P": "pastel:light_gray_pigment",
+    "G": "pastel:paltaeria_fragments"
+  },
+  "result": {
+    "id": "pastel:exchanging_staff",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/items/exchanging_staff"
+}

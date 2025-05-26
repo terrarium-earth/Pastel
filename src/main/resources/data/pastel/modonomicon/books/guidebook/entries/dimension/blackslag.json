@@ -1,0 +1,76 @@
+{
+  "name": "block.pastel.blackslag",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_blackslag"
+  },
+  "icon": {
+    "item": "pastel:blackslag"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/delving_deeper_down"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -1,
+  "y": 2,
+  "pages": [
+    {
+      "type": "pastel:collection",
+      "title": "block.pastel.blackslag",
+      "items": [
+        "pastel:blackslag",
+        "pastel:blackslag_stairs",
+        "pastel:blackslag_slab",
+        "pastel:blackslag_wall",
+        "pastel:cobbled_blackslag",
+        "pastel:cobbled_blackslag_stairs",
+        "pastel:cobbled_blackslag_slab",
+        "pastel:cobbled_blackslag_wall",
+        "pastel:polished_blackslag",
+        "pastel:polished_blackslag_button",
+        "pastel:polished_blackslag_pressure_plate",
+        "pastel:polished_blackslag_stairs",
+        "pastel:polished_blackslag_slab",
+        "pastel:polished_blackslag_wall",
+        "pastel:blackslag_tiles",
+        "pastel:blackslag_tile_stairs",
+        "pastel:blackslag_tile_slab",
+        "pastel:blackslag_tile_wall",
+        "pastel:blackslag_bricks",
+        "pastel:blackslag_brick_stairs",
+        "pastel:blackslag_brick_slab",
+        "pastel:blackslag_brick_wall",
+        "pastel:polished_blackslag_pillar",
+        "pastel:chiseled_polished_blackslag",
+        "pastel:ancient_chiseled_polished_blackslag",
+        "pastel:cracked_blackslag_bricks",
+        "pastel:cracked_blackslag_tiles"
+      ],
+      "text": "book.pastel.guidebook.blackslag.page0.text"
+    },
+    {
+      "type": "modonomicon:smelting_recipe",
+      "title1": "book.pastel.guidebook.polishing",
+      "recipe_id_1": "pastel:smelting/cobbled_blackslag_to_blackslag",
+      "recipe_id_2": "pastel:smelting/blackslag_to_polished_blackslag",
+      "text": "book.pastel.guidebook.blackslag.page1.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "book.pastel.guidebook.cracking",
+      "recipe_id": "pastel:anvil_crushing/spectrum_pulverising/cracked_blackslag_bricks",
+      "text": "book.pastel.guidebook.blackslag.page2.text"
+    },
+    {
+      "type": "modonomicon:smelting_recipe",
+      "title1": "book.pastel.guidebook.smelting_back",
+      "recipe_id_1": "pastel:smelting/polished_blackslag_unsmelting",
+      "text": "book.pastel.guidebook.turn_back_to_polished"
+    }
+  ]
+}

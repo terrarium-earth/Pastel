@@ -1,0 +1,40 @@
+{
+  "type": "pastel:enchantment_upgrade",
+  "enchantment": "malum:rebound",
+  "levels": [
+    {
+      "experience": 200,
+      "item": "pastel:green_pigment",
+      "item_count": 8
+    },
+    {
+      "experience": 400,
+      "item": "pastel:green_pigment",
+      "item_count": 32
+    },
+    {
+      "experience": 200,
+      "item": "pastel:green_pigment",
+      "item_count": 128
+    },
+    {
+      "experience": 10000,
+      "item": "pastel:green_pigment",
+      "item_count": 512
+    },
+    {
+      "experience": 40000,
+      "item": "pastel:green_pigment",
+      "item_count": 512
+    }
+  ],
+  "required_advancement": "pastel:midgame/build_enchanting_structure",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "malum"
+      ]
+    }
+  ]
+}

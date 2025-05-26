@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "time": 3600,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 0,
+    "pastel:yellow": 16,
+    "pastel:white": 0,
+    "pastel:black": 2
+  },
+  "experience": 4.0,
+  "pattern": [
+    "GMG",
+    "STS",
+    "MCM"
+  ],
+  "key": {
+    "M": "pastel:pure_malachite",
+    "C": "pastel:moonstone_core",
+    "T": "minecraft:tripwire_hook",
+    "S": "minecraft:string",
+    "G": "pastel:pure_gold"
+  },
+  "result": {
+    "id": "pastel:omni_accelerator",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/equipment/omni_accelerator"
+}

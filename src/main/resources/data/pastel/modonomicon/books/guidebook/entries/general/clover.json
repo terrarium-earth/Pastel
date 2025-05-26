@@ -1,0 +1,50 @@
+{
+  "name": "block.pastel.clover",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_clover"
+  },
+  "icon": {
+    "item": "pastel:four_leaf_clover"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": -3,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.clover",
+      "item": {
+        "item": "pastel:clover"
+      },
+      "text": "book.pastel.guidebook.clover.clover.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:four_leaf_clover"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_four_leaf_clover"
+      },
+      "text": "book.pastel.guidebook.clover.four_leaf_clover.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "container.pastel.rei.anvil_crushing.title",
+      "recipe_id": "pastel:anvil_crushing/dye/green_dye_from_clover",
+      "text": "book.pastel.guidebook.clover.clover_crushing.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "container.pastel.rei.anvil_crushing.title",
+      "recipe_id": "pastel:anvil_crushing/dye/green_dye_from_four_leaf_clover",
+      "text": "book.pastel.guidebook.clover.four_leaf_clover_crushing.text"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "pastel:ebony_noxcap_stems"
+    }
+  ],
+  "result": {
+    "id": "pastel:ebony_noxwood_planks",
+    "count": 4
+  }
+}

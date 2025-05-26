@@ -1,0 +1,31 @@
+{
+  "name": "item.pastel.concealing_oils",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_cookbooks/poisoners_handbook"
+  },
+  "icon": {
+    "item": "pastel:concealing_oils"
+  },
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -2,
+  "y": -3,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:concealing_oils"
+      },
+      "text": "book.pastel.guidebook.concealing_oils.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier4/concealing_oils"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "values": [
+    "pastel:malachite_cluster",
+    "pastel:bismuth_cluster",
+    "pastel:azurite_cluster",
+    "pastel:bloodstone_cluster",
+
+    "pastel:coal_cluster",
+    "pastel:copper_cluster",
+    "pastel:diamond_cluster",
+    "pastel:emerald_cluster",
+    "pastel:glowstone_cluster",
+    "pastel:gold_cluster",
+    "pastel:iron_cluster",
+    "pastel:lapis_cluster",
+    "pastel:netherite_scrap_cluster",
+    "pastel:echo_cluster",
+    "pastel:prismarine_cluster",
+    "pastel:quartz_cluster",
+    "pastel:redstone_cluster",
+
+    {
+      "id": "pastel:zinc_cluster",
+      "required": false
+    },
+    {
+      "id": "pastel:certus_quartz_cluster",
+      "required": false
+    },
+    {
+      "id": "pastel:fluix_cluster",
+      "required": false
+    },
+    {
+      "id": "pastel:globette_cluster",
+      "required": false
+    },
+    {
+      "id": "pastel:globette_end_cluster",
+      "required": false
+    },
+    {
+      "id": "pastel:globette_nether_cluster",
+      "required": false
+    }
+  ]
+}

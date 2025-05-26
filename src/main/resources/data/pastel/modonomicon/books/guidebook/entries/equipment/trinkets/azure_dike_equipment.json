@@ -1,0 +1,70 @@
+{
+  "name": "book.pastel.guidebook.azure_dike_equipment.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/any_azure_dike_equipment"
+  },
+  "icon": "pastel:textures/gui/guidebook/icons/azure_dike_heart.png",
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/trinkets/base_trinkets",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 10,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.azure_dike_equipment.page0.text",
+      "title": "book.pastel.guidebook.azure_dike_equipment.name"
+    },
+    {
+      "type": "pastel:snippet",
+      "title": "book.pastel.guidebook.azure_dike_equipment.page1.title",
+      "text": "book.pastel.guidebook.azure_dike_equipment.page1.text",
+      "resource_path": "pastel:textures/gui/guidebook/icons/azure_dike_heart.png",
+      "resource_width": 16,
+      "resource_height": 16,
+      "texture_x": 0,
+      "texture_y": 0,
+      "texture_width": 16,
+      "texture_height": 16,
+      "border": false
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/trinkets/azure_dike_ring"
+      },
+      "text": "book.pastel.guidebook.azure_dike_equipment.page2.text",
+      "title": "item.pastel.azure_dike_ring",
+      "recipe_id": "pastel:fusion_shrine/trinkets/azure_dike_ring"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/trinkets/azure_dike_belt"
+      },
+      "text": "book.pastel.guidebook.azure_dike_equipment.page3.text",
+      "title": "item.pastel.azure_dike_belt",
+      "recipe_id": "pastel:fusion_shrine/trinkets/azure_dike_belt"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/trinkets/shieldgrasp_amulet"
+      },
+      "text": "book.pastel.guidebook.azure_dike_equipment.page4.text",
+      "title": "item.pastel.shieldgrasp_amulet",
+      "recipe_id": "pastel:fusion_shrine/trinkets/shieldgrasp_amulet"
+    }
+  ]
+}

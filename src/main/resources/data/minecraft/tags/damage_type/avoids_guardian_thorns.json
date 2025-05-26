@@ -1,12 +1,12 @@
 {
   "values": [
-    "spectrum:floatblock",
-    "spectrum:decay",
-    "spectrum:midnight_solution",
-    "spectrum:dragonrot",
-    "spectrum:deadly_poison",
-    "spectrum:incandescence",
-    "spectrum:primordial_fire",
-    "spectrum:ink_projectile"
+    "pastel:floatblock",
+    "pastel:decay",
+    "pastel:midnight_solution",
+    "pastel:dragonrot",
+    "pastel:deadly_poison",
+    "pastel:incandescence",
+    "pastel:primordial_fire",
+    "pastel:ink_projectile"
   ]
 }

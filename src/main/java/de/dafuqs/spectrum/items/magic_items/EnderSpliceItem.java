@@ -200,7 +200,7 @@ public class EnderSpliceItem extends Item {
 		if (teleportTargetPos.isPresent()) {
 			String dimensionDisplayString = Support.getReadableDimensionString(teleportTargetPos.get().getA().location().toString());
 			Vec3 pos = teleportTargetPos.get().getB();
-			tooltip.add(Component.translatable("item.spectrum.ender_splice.tooltip.bound_pos", (int) pos.x, (int) pos.y, (int) pos.z, dimensionDisplayString));
+			tooltip.add(Component.translatable("item.pastel.ender_splice.tooltip.bound_pos", (int) pos.x, (int) pos.y, (int) pos.z, dimensionDisplayString));
 			return;
 		} else {
 			// If UUID stored => Teleport to player, if online
@@ -208,15 +208,15 @@ public class EnderSpliceItem extends Item {
 			if (teleportTargetPlayerUUID.isPresent()) {
 				Optional<String> teleportTargetPlayerName = getTeleportTargetPlayerName(stack);
 				if (teleportTargetPlayerName.isPresent()) {
-					tooltip.add(Component.translatable("item.spectrum.ender_splice.tooltip.bound_player", teleportTargetPlayerName.get()));
+					tooltip.add(Component.translatable("item.pastel.ender_splice.tooltip.bound_player", teleportTargetPlayerName.get()));
 				} else {
-					tooltip.add(Component.translatable("item.spectrum.ender_splice.tooltip.bound_player", "???"));
+					tooltip.add(Component.translatable("item.pastel.ender_splice.tooltip.bound_player", "???"));
 				}
 				return;
 			}
 		}
 		
-		tooltip.add(Component.translatable("item.spectrum.ender_splice.tooltip.unbound"));
+		tooltip.add(Component.translatable("item.pastel.ender_splice.tooltip.unbound"));
 	}
 	
 	public Optional<Tuple<ResourceKey<Level>, Vec3>> getTeleportTargetPos(@NotNull ItemStack itemStack) {

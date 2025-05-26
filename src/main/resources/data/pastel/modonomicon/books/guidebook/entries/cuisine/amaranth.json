@@ -1,0 +1,76 @@
+{
+  "name": "block.pastel.amaranth",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/reveal_amaranth"
+  },
+  "icon": {
+    "item": "pastel:amaranth_bushel"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:amaranth_grains"
+      },
+      "title": "block.pastel.amaranth",
+      "text": "book.pastel.guidebook.amaranth.page0.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "item.pastel.amaranth_grains",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_amaranth_bushel"
+      },
+      "recipe_id": "pastel:anvil_crushing/amaranth_grains",
+      "text": "book.pastel.guidebook.amaranth.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_amaranth_bushel"
+      },
+      "title": "item.pastel.honey_pastry",
+      "recipe_id": "pastel:pedestal/tier1/food/honey_pastry",
+      "text": "book.pastel.guidebook.amaranth.page2.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_amaranth_bushel"
+      },
+      "title": "book.pastel.guidebook.amaranth.page3.title",
+      "recipe_id": "pastel:pedestal/tier1/food/scone",
+      "text": "book.pastel.guidebook.amaranth.page3.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_amaranth_bushel"
+      },
+      "recipe_id": "pastel:pedestal/tier1/vanilla/packed_goo",
+      "text": "book.pastel.guidebook.amaranth.packed_goo.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/triple_meat_pot_pie"
+      },
+      "title": "item.pastel.triple_meat_pot_pie",
+      "recipe_id": "pastel:pedestal/tier1/food/triple_meat_pot_pie",
+      "text": "book.pastel.guidebook.amaranth.page4.text"
+    }
+  ]
+}

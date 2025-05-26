@@ -43,14 +43,14 @@ public class SpectrumItemGroups {
 				}
 			})
 			.hideTitle()
-			.title(Component.translatable("itemGroup.spectrum"))
+			.title(Component.translatable("itemGroup.pastel"))
 			.build();
 	
 	public static void register() {
 		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ItemGroupIDs.MAIN_GROUP_ID, MAIN);
 	}
 	
-	public static final ItemSubGroup EQUIPMENT = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_EQUIPMENT, Component.translatable("itemGroup.spectrum.equipment"))
+	public static final ItemSubGroup EQUIPMENT = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_EQUIPMENT, Component.translatable("itemGroup.pastel.equipment"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				HolderLookup.Provider lookup = displayContext.holders();
@@ -202,7 +202,7 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumItems.MYSTERIOUS_COMPASS);
 			}).build();
 	
-	public static final ItemSubGroup FUNCTIONAL = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_FUNCTIONAL, Component.translatable("itemGroup.spectrum.functional"))
+	public static final ItemSubGroup FUNCTIONAL = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_FUNCTIONAL, Component.translatable("itemGroup.pastel.functional"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumBlocks.PEDESTAL_BASIC_TOPAZ);
@@ -331,7 +331,7 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumBlocks.ZOMBIE_IDOL);
 			}).build();
 	
-	public static final ItemSubGroup CUISINE = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_CUISINE, Component.translatable("itemGroup.spectrum.cuisine"))
+	public static final ItemSubGroup CUISINE = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_CUISINE, Component.translatable("itemGroup.pastel.cuisine"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumItems.IMBRIFER_COOKBOOK);
@@ -444,7 +444,7 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumItems.EVERNECTAR);
 			}).build();
 	
-	public static final ItemSubGroup RESOURCES = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_RESOURCES, Component.translatable("itemGroup.spectrum.resources"))
+	public static final ItemSubGroup RESOURCES = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_RESOURCES, Component.translatable("itemGroup.pastel.resources"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumItems.TOPAZ_SHARD);
@@ -642,7 +642,7 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumItems.DRAGONROT_BUCKET);
 			}).build();
 	
-	public static final ItemSubGroup PURE_RESOURCES = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_PURE_RESOURCES, Component.translatable("itemGroup.spectrum.pure_resources"))
+	public static final ItemSubGroup PURE_RESOURCES = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_PURE_RESOURCES, Component.translatable("itemGroup.pastel.pure_resources"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumItems.PURE_COAL);
@@ -758,7 +758,7 @@ public class SpectrumItemGroups {
 				
 			}).build();
 	
-	public static final ItemSubGroup BLOCKS = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_BLOCKS, Component.translatable("itemGroup.spectrum.blocks"))
+	public static final ItemSubGroup BLOCKS = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_BLOCKS, Component.translatable("itemGroup.pastel.blocks"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumBlocks.SMOOTH_BASALT_SLAB);
@@ -1075,7 +1075,7 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumBlocks.JADEITE_LOTUS_FLOWER);
 			}).build();
 	
-	public static final ItemSubGroup DECORATION = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_DECORATION, Component.translatable("itemGroup.spectrum.decoration"))
+	public static final ItemSubGroup DECORATION = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_DECORATION, Component.translatable("itemGroup.pastel.decoration"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumBlocks.POLISHED_TOPAZ_BLOCK);
@@ -1245,7 +1245,7 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumItems.MUSIC_DISC_DIVINITY);
 			}).build();
 	
-	public static final ItemSubGroup COLORED_WOOD = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_COLORED_WOOD, Component.translatable("itemGroup.spectrum.colored_wood"))
+	public static final ItemSubGroup COLORED_WOOD = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_COLORED_WOOD, Component.translatable("itemGroup.pastel.colored_wood"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumBlocks.WHITE_LOG);
@@ -1458,7 +1458,7 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumBlocks.BLACK_SLAB);
 			}).build();
 	
-	public static final ItemSubGroup MOB_HEADS = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_MOB_HEADS, Component.translatable("itemGroup.spectrum.mob_heads"))
+	public static final ItemSubGroup MOB_HEADS = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_MOB_HEADS, Component.translatable("itemGroup.pastel.mob_heads"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				for (Block skullBlock : SpectrumSkullBlock.MOB_HEADS.values()) {
@@ -1466,7 +1466,7 @@ public class SpectrumItemGroups {
 				}
 			}).build();
 	
-	public static final ItemSubGroup CREATURES = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_CREATURES, Component.translatable("itemGroup.spectrum.creatures"))
+	public static final ItemSubGroup CREATURES = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_CREATURES, Component.translatable("itemGroup.pastel.creatures"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG);
@@ -1478,7 +1478,7 @@ public class SpectrumItemGroups {
 				MemoryItem.appendEntries(displayContext.holders(), entries);
 			}).build();
 	
-	public static final ItemSubGroup ENERGY = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_ENERGY, Component.translatable("itemGroup.spectrum.energy"))
+	public static final ItemSubGroup ENERGY = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_ENERGY, Component.translatable("itemGroup.pastel.energy"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumItems.INK_FLASK);
@@ -1493,7 +1493,7 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumItems.ARTISTS_PALETTE.getFullStack());
 			}).build();
 	
-	public static final ItemSubGroup CREATIVE = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_CREATIVE, Component.translatable("itemGroup.spectrum.creative"))
+	public static final ItemSubGroup CREATIVE = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_CREATIVE, Component.translatable("itemGroup.pastel.creative"))
 			.styled(ItemGroupIDs.STYLE)
 			.entries((displayContext, entries) -> {
 				entries.accept(SpectrumItems.PEDESTAL_TIER_1_STRUCTURE_PLACER);

@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "group": "colored_lamps",
+  "time": 40,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 2,
+    "pastel:black": 4
+  },
+  "experience": 0.5,
+  "pattern": [
+    "SPS",
+    "PRP",
+    "SPS"
+  ],
+  "key": {
+    "P": "pastel:gray_pigment",
+    "R": "minecraft:redstone",
+    "S": "pastel:shimmerstone_gem"
+  },
+  "result": {
+    "id": "pastel:gray_lamp",
+    "count": 2
+  },
+  "required_advancement": "pastel:unlocks/colored_lamps/gray_lamp"
+}

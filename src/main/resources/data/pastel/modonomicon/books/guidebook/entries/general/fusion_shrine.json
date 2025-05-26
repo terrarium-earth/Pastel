@@ -1,0 +1,54 @@
+{
+  "name": "block.pastel.fusion_shrine",
+  "icon": {
+    "item": "pastel:fusion_shrine_basalt"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/fusion_shrine"
+  },
+  "turnin": "pastel:build_fusion_shrine",
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/pedestal_upgrade_cmy"
+    },
+    {
+      "entry": "pastel:general/pigment"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 6,
+  "y": 0,
+  "pages": [
+    {
+      "type": "pastel:collection",
+      "title": "block.pastel.fusion_shrine",
+      "items": [
+        "pastel:fusion_shrine_basalt",
+        "pastel:fusion_shrine_calcite"
+      ],
+      "text": "book.pastel.guidebook.fusion_shrine.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/fusion_shrine_basalt",
+      "text": "book.pastel.guidebook.fusion_shrine.page1.text"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_name": "multiblock.pastel.fusion_shrine",
+      "multiblock_id": "pastel:fusion_shrine",
+      "show_visualize_button": true,
+      "text": "book.pastel.guidebook.fusion_shrine.page2.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.block_checklist",
+      "text": "book.pastel.guidebook.fusion_shrine.page3.text"
+    }
+  ]
+}

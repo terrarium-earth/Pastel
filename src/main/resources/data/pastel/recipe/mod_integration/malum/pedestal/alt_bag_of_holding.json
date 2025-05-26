@@ -1,0 +1,34 @@
+{
+  "type": "pastel:pedestal",
+  "time": 240,
+  "tier": "basic",
+  "magenta": 4,
+  "yellow": 0,
+  "cyan": 4,
+  "black": 0,
+  "white": 0,
+  "experience": 2.0,
+  "pattern": [
+    "OOO",
+    "TWT",
+    "OOO"
+  ],
+  "key": {
+    "O": "minecraft:obsidian",
+    "W": "malum:warp_flux",
+    "T": "pastel:radiating_ender"
+  },
+  "result": {
+    "id": "pastel:bag_of_holding",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/items/bag_of_holding",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "malum"
+      ]
+    }
+  ]
+}

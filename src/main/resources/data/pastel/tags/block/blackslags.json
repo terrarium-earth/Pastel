@@ -1,0 +1,32 @@
+{
+  "values": [
+    "pastel:blackslag",
+    "pastel:blackslag_stairs",
+    "pastel:blackslag_slab",
+    "pastel:blackslag_wall",
+    "pastel:cobbled_blackslag",
+    "pastel:cobbled_blackslag_stairs",
+    "pastel:cobbled_blackslag_slab",
+    "pastel:cobbled_blackslag_wall",
+    "pastel:polished_blackslag",
+    "pastel:polished_blackslag_stairs",
+    "pastel:polished_blackslag_slab",
+    "pastel:polished_blackslag_wall",
+    "pastel:blackslag_tiles",
+    "pastel:blackslag_tile_stairs",
+    "pastel:blackslag_tile_slab",
+    "pastel:blackslag_tile_wall",
+    "pastel:cracked_blackslag_tiles",
+    "pastel:blackslag_bricks",
+    "pastel:blackslag_brick_stairs",
+    "pastel:blackslag_brick_slab",
+    "pastel:blackslag_brick_wall",
+    "pastel:cracked_blackslag_bricks",
+    "pastel:polished_blackslag_pillar",
+    "pastel:polished_blackslag_button",
+    "pastel:polished_blackslag_pressure_plate",
+    "pastel:chiseled_polished_blackslag",
+    "pastel:ancient_chiseled_polished_blackslag",
+    "pastel:infested_blackslag"
+  ]
+}

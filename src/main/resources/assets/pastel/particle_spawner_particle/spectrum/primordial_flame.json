@@ -1,0 +1,6 @@
+{
+  "particle_type": "pastel:primordial_flame",
+  "gui_texture": "pastel:primordial_flame",
+  "unlock_identifier": "pastel:hidden/interact_with_doombloom",
+  "supports_coloring": false
+}

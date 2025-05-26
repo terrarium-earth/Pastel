@@ -35,7 +35,7 @@ public class ShootingStarCommand {
 				ShootingStarSpawner.spawnShootingStar((ServerLevel) entity.level(), entity);
 			}
 		}
-		source.sendSuccess(() -> Component.translatable("commands.spectrum.spawn_shooting_star.success", amount), false);
+		source.sendSuccess(() -> Component.translatable("commands.pastel.spawn_shooting_star.success", amount), false);
 		return amount;
 	}
 

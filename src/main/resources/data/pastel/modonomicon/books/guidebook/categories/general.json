@@ -1,0 +1,20 @@
+{
+  "name": "book.pastel.guidebook.category.general.name",
+  "description": "book.pastel.guidebook.category.general.description",
+  "icon": {
+    "item": "pastel:pedestal_basic_amethyst"
+  },
+  "sort_number": 0,
+  "entry_to_open": "pastel:general/intro",
+  "open_entry_to_open_only_once": true,
+  "show_category_button": true,
+  "max_scroll_x": 512,
+  "max_scroll_y": 512,
+  "display_mode": "node",
+  "entry_textures": "pastel:textures/gui/modonomicon/entry_textures.png",
+  "background": "pastel:textures/gui/modonomicon/category_background.png",
+  "background_width": 1024,
+  "background_height": 1024,
+  "background_texture_zoom_multiplier": 1.0,
+  "background_parallax_layers": []
+}

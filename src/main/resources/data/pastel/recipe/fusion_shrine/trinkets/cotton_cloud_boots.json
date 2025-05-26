@@ -1,0 +1,30 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "minecraft:leather_boots",
+    {
+      "item": "pastel:stardust",
+      "count": 16
+    },
+    {
+      "item": "minecraft:phantom_membrane",
+      "count": 4
+    },
+    {
+      "item": "pastel:brown_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:cotton_cloud_boots"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/cotton_cloud_boots",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

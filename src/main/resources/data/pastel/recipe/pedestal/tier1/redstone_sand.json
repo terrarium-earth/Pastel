@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "time": 20,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 1,
+    "pastel:cyan": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 0.05,
+  "pattern": [
+    " R ",
+    "RSR",
+    " R "
+  ],
+  "key": {
+    "R": "minecraft:redstone",
+    "S": "minecraft:sand"
+  },
+  "result": {
+    "id": "pastel:redstone_sand",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/redstone/redstone_sand"
+}

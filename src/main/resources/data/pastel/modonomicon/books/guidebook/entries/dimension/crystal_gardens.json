@@ -1,0 +1,50 @@
+{
+  "name": "biome.pastel.crystal_gardens",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/visit_dd_biomes/crystal_gardens"
+  },
+  "icon": {
+    "item": "pastel:overgrown_blackslag"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/biomes",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 4,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "biome.pastel.crystal_gardens",
+      "images": [
+        "pastel:textures/gui/guidebook/dd_crystal_gardens.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.crystal_gardens.page0.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:overgrown_blackslag"
+      },
+      "text": "book.pastel.guidebook.crystal_gardens.page1.text"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.crystal_gardens.moss_balls.title",
+      "items": [
+        "pastel:moss_ball",
+        "pastel:giant_moss_ball"
+      ],
+      "text": "book.pastel.guidebook.crystal_gardens.moss_balls.text"
+    }
+  ]
+}

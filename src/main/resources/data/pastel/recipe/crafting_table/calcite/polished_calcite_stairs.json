@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W  ",
+    "WW ",
+    "WWW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:polished_calcite"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:polished_calcite_stairs",
+    "count": 6
+  }
+}

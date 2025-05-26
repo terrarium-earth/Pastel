@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:collect_pigment",
+  "display": {
+    "icon": {
+      "id": "pastel:molten_rod"
+    },
+    "title": {
+      "translate": "advancements.pastel.fish_in_lava.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.fish_in_lava.description"
+    }
+  },
+  "criteria": {
+    "fished_in_lava": {
+      "trigger": "pastel:fishing_rod_hooked",
+      "conditions": {
+        "fluid": {
+          "fluids": "#minecraft:lava"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_pigment"
+      }
+    }
+  }
+}

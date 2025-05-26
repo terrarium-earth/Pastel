@@ -188,7 +188,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 	
 	@Override
 	protected Component getDefaultName() {
-		return Component.translatable("block.spectrum.fabrication_chest");
+		return Component.translatable("block.pastel.fabrication_chest");
 	}
 	
 	@Override

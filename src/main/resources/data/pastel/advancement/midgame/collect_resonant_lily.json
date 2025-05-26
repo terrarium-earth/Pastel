@@ -1,0 +1,59 @@
+{
+  "parent": "pastel:midgame/dip_something_into_liquid_crystal",
+  "display": {
+    "icon": {
+      "id": "pastel:resonant_lily"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_resonant_lily.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_resonant_lily.description"
+    },
+    "hidden": true
+  },
+  "criteria": {
+    "has_resonant_lily": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:resonant_lily"
+          }
+        ]
+      }
+    },
+    "revived_resonant_lily": {
+      "trigger": "pastel:natures_staff_conversion",
+      "conditions": {
+        "target_block": "pastel:resonant_lily"
+      }
+    },
+    "dipped_resonant_lily": {
+      "trigger": "pastel:fluid_dipping",
+      "conditions": {
+        "target_stack": {
+          "items": [
+            "pastel:resonant_lily"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/enter_liquid_crystal"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_resonant_lily",
+      "revived_resonant_lily",
+      "dipped_resonant_lily"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

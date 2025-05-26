@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.night_salts",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/night_salts"
+  },
+  "icon": {
+    "item": "pastel:night_salts"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.night_salts.page0.text",
+      "title": "item.pastel.night_salts"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "text": "book.pastel.guidebook.night_salts.page1.text",
+      "title": "book.pastel.guidebook.night_salts.page1.title",
+      "recipe_id": "pastel:titration_barrel/night_salts"
+    }
+  ]
+}

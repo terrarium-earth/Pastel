@@ -1,0 +1,32 @@
+{
+  "criteria": {
+    "unlocked_liquid_crystal": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+      }
+    },
+    "collected_neolith": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_neolith"
+      }
+    },
+    "harvested_moonstruck_nectar.json": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/harvest_moonstruck_nectar"
+      }
+    },
+    "collected_totem_of_undying": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:totem_of_undying"
+          }
+        ]
+      }
+    }
+  }
+}

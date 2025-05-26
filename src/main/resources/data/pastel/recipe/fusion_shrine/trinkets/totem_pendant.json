@@ -1,0 +1,28 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 4.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_pendant",
+    "minecraft:totem_of_undying",
+    "pastel:moonstruck_nectar",
+    {
+      "item": "pastel:neolith",
+      "count": 2
+    },
+    {
+      "item": "pastel:blue_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:totem_pendant"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/totem_pendant",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

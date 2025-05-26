@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:orange_dye"
+    }
+  ],
+  "ink_color": "pastel:orange",
+  "amount": 5,
+  "required_advancement": "pastel:hidden/collect_pigment/orange"
+}

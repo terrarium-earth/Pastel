@@ -1,0 +1,13 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": "pastel:dragonbone_chunk",
+  "results": [
+    {
+      "id": "pastel:bone_ash",
+      "count": 45
+    }
+  ],
+  "experience": 4.0,
+  "time": 6000,
+  "required_advancement": "pastel:break_cracked_dragonbone"
+}

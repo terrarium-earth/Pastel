@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": [
+      {
+        "item": "pastel:onyx_shard"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:polished_onyx_block",
+    "count": 1
+  }
+}

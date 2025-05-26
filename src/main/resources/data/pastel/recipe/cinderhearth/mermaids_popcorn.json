@@ -1,0 +1,16 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "pastel:mermaids_gem",
+    "count": 16
+  },
+  "results": [
+    {
+      "id": "pastel:mermaids_popcorn",
+      "count": 1
+    }
+  ],
+  "experience": 0.1,
+  "time": 200,
+  "required_advancement": "pastel:collect_mermaids_gem"
+}

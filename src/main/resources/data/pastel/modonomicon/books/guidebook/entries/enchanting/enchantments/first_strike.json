@@ -1,0 +1,50 @@
+{
+  "name": "enchantment.pastel.first_strike",
+  "icon": {
+    "item": "minecraft:iron_sword"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/enchantments/first_strike"
+  },
+  "flag": "pastel:enchantment_exists_spectrum_first_strike",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": 4,
+  "x": 4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.first_strike.page0.text",
+      "title": "enchantment.pastel.first_strike"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "minecraft:iron_sword"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:first_strike": 2
+        }
+      },
+      "text": "book.pastel.guidebook.first_strike.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/first_strike"
+    },
+    {
+      "type": "pastel:enchanter_upgrading",
+      "text": "book.pastel.guidebook.upgrading.text",
+      "title": "container.pastel.rei.enchantment_upgrading.title",
+      "recipe_id": "pastel:enchantment_upgrade/pastel/first_strike"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:lategame/collect_dd_resources",
+  "display": {
+    "icon": {
+      "id": "pastel:doombloom_seed"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_doombloom_seed.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_doombloom_seed.description"
+    }
+  },
+  "criteria": {
+    "collected_doombloom_seed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:doombloom_seed"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

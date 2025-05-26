@@ -1,0 +1,115 @@
+{
+  "type": "modonomicon:dense",
+  "pattern": [
+    [
+      "__I_____I__",
+      "___________",
+      "I_________I",
+      "___________",
+      "___________",
+      "_____F_____",
+      "___________",
+      "___________",
+      "I_________I",
+      "___________",
+      "__I_____I__"
+    ],
+    [
+      "__L_____L__",
+      "___________",
+      "L_G_____G_L",
+      "____BBB____",
+      "___BXXXB___",
+      "___BXXXB___",
+      "___BXXXB___",
+      "____BBB____",
+      "L_G_____G_L",
+      "___________",
+      "__L_____L__"
+    ],
+    [
+      "__P_____P__",
+      "____BBB____",
+      "P_P_XXX_P_P",
+      "____XXX____",
+      "_BXXXXXXXB_",
+      "_BXXXXXXXB_",
+      "_BXXXXXXXB_",
+      "____XXX____",
+      "P_P_XXX_P_P",
+      "____BBB____",
+      "__P_____P__"
+    ],
+    [
+      "_XXXXXXXXX_",
+      "XCCCXXXCCCX",
+      "XCXCXXXCXCX",
+      "XCCCXXXCCCX",
+      "XXXXXXXXXXX",
+      "XXXXX0XXXXX",
+      "XXXXXXXXXXX",
+      "XCCCXXXCCCX",
+      "XCXCXXXCXCX",
+      "XCCCXXXCCCX",
+      "_XXXXXXXXX_"
+    ],
+    [
+      "___________",
+      "_XXX___XXX_",
+      "_X_X___X_X_",
+      "_XXX___XXX_",
+      "___________",
+      "___________",
+      "___________",
+      "_XXX___XXX_",
+      "_X_X___X_X_",
+      "_XXX___XXX_",
+      "___________"
+    ]
+  ],
+  "mapping": {
+    "X": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt",
+      "tag": "#pastel:structure/bases"
+    },
+    "P": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt_pillar[axis=y]",
+      "tag": "#pastel:structure/pillars"
+    },
+    "B": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt_slab",
+      "tag": "#pastel:structure/base_slabs"
+    },
+    "L": {
+      "type": "modonomicon:tag",
+      "display": "pastel:amethyst_basalt_light",
+      "tag": "#pastel:structure/lights"
+    },
+    "G": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_amethyst_block",
+      "tag": "#pastel:structure/gemstones"
+    },
+    "F": {
+      "type": "modonomicon:block",
+      "block": "pastel:enchanter"
+    },
+    "C": {
+      "type": "modonomicon:block",
+      "block": "pastel:liquid_crystal"
+    },
+    "I": {
+      "type": "modonomicon:tag",
+      "display": "pastel:item_bowl_basalt",
+      "tag": "#pastel:item_bowls"
+    },
+    "0": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt",
+      "tag": "#pastel:structure/bases"
+    }
+  }
+}

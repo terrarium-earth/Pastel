@@ -1,0 +1,28 @@
+{
+  "parent": "pastel:collect_shimmerstone",
+  "display": {
+    "icon": {
+      "id": "pastel:present"
+    },
+    "title": {
+      "translate": "advancements.pastel.gift_or_open_present.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.gift_or_open_present.description"
+    }
+  },
+  "criteria": {
+    "gifted_or_opened_present": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_shimmerstone"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 500
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "block.pastel.cinderhearth",
+  "icon": {
+    "item": "pastel:cinderhearth"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/cinderhearth"
+  },
+  "category": "pastel:ink",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:ink/color_picker",
+      "line_reversed": true
+    },
+    {
+      "entry": "pastel:ink/pure_resources"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.cinderhearth.page0.text",
+      "title": "block.pastel.cinderhearth"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.cinderhearth.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/cinderhearth"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_id": "pastel:cinderhearth",
+      "show_visualize_button": true,
+      "text": "book.pastel.guidebook.cinderhearth.page2.text",
+      "multiblock_name": "multiblock.pastel.cinderhearth"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.block_checklist",
+      "text": "book.pastel.guidebook.cinderhearth.page3.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.cinderhearth.page4.title",
+      "text": "book.pastel.guidebook.cinderhearth.page4.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.cinderhearth.page5.text"
+    }
+  ]
+}

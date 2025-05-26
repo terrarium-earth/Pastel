@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.weeping_circlet",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/weeping_circlet"
+  },
+  "icon": {
+    "item": "pastel:weeping_circlet"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/trinkets/base_trinkets",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.weeping_circlet.page0.text",
+      "title": "item.pastel.weeping_circlet"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "container.pastel.rei.fusion_recipe",
+      "recipe_id": "pastel:fusion_shrine/trinkets/weeping_circlet",
+      "text": "book.pastel.guidebook.weeping_circlet.page1.text"
+    }
+  ]
+}

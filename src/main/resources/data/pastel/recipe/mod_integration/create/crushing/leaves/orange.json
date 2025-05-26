@@ -1,0 +1,29 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    "pastel:orange_leaves"
+  ],
+  "results": [
+    {
+      "id": "pastel:orange_pigment",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "result": {
+        "id": "pastel:orange_sapling",
+        "count": 1
+      },
+      "chance": 0.02
+    }
+  ],
+  "processingTime": 450,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

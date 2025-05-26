@@ -1,0 +1,18 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "group": "azalea_tea",
+  "base_ingredient": "minecraft:glass_bottle",
+  "use_up_base_ingredient": true,
+  "secret": true,
+  "color": 9997393,
+  "ingredient1": "minecraft:flowering_azalea",
+  "ingredient2": "pastel:nightdew_sprout",
+  "ingredient3": "#c:milk",
+  "result": {
+    "id": "pastel:azalea_tea",
+    "components": {
+      "pastel:with_milk": {}
+    }
+  },
+  "required_advancement": "pastel:unlocks/food/azalea_tea"
+}

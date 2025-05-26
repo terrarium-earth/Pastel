@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:purple_pigment"
+    },
+    {
+      "item": "pastel:purple_pigment"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "pastel:raw_azurite"
+    },
+    {
+      "item": "pastel:purple_pigment"
+    },
+    {
+      "item": "pastel:purple_pigment"
+    },
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "item": "pastel:raw_azurite"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:exuberance": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/exuberance",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:exuberance"
+      ]
+    }
+  ]
+}

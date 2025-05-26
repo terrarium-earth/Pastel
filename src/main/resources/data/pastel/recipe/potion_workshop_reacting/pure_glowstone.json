@@ -1,0 +1,10 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:pure_glowstone",
+  "modifiers": {
+    "flat_potency_bonus": 2.0,
+    "duration_multiplier": 0.5,
+    "flat_yield_bonus": -1.0
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource"
+}

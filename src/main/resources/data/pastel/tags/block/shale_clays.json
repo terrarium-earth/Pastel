@@ -1,0 +1,33 @@
+{
+  "values": [
+    "pastel:shale_clay",
+    "pastel:tilled_shale_clay",
+    "pastel:polished_shale_clay",
+    "pastel:shale_clay_bricks",
+    "pastel:shale_clay_tiles",
+    "pastel:shale_clay_brick_slab",
+    "pastel:shale_clay_brick_stairs",
+    "pastel:polished_shale_clay_slab",
+    "pastel:polished_shale_clay_stairs",
+    "pastel:shale_clay_tile_slab",
+    "pastel:shale_clay_tile_stairs",
+    "pastel:exposed_polished_shale_clay",
+    "pastel:exposed_polished_shale_clay_slab",
+    "pastel:exposed_polished_shale_clay_stairs",
+    "pastel:exposed_shale_clay_brick_slab",
+    "pastel:exposed_shale_clay_brick_stairs",
+    "pastel:exposed_shale_clay_bricks",
+    "pastel:exposed_shale_clay_tile_slab",
+    "pastel:exposed_shale_clay_tile_stairs",
+    "pastel:exposed_shale_clay_tiles",
+    "pastel:weathered_polished_shale_clay",
+    "pastel:weathered_polished_shale_clay_slab",
+    "pastel:weathered_polished_shale_clay_stairs",
+    "pastel:weathered_shale_clay_brick_slab",
+    "pastel:weathered_shale_clay_brick_stairs",
+    "pastel:weathered_shale_clay_bricks",
+    "pastel:weathered_shale_clay_tile_slab",
+    "pastel:weathered_shale_clay_tile_stairs",
+    "pastel:weathered_shale_clay_tiles"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "botania:pixie_dust",
+  "modifiers": {
+    "make_splashing": true,
+    "make_lingering": true,
+    "potency_multiplier": 0.75
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "botania"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:midgame/collect_mob_head_using_treasure_hunter",
+  "display": {
+    "icon": {
+      "id": "pastel:wither_head"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_wither_head_using_treasure_hunter.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_wither_head_using_treasure_hunter.description"
+    }
+  },
+  "criteria": {
+    "dropped_wither_head": {
+      "trigger": "pastel:loot_function_trigger",
+      "conditions": {
+        "tags": [
+          "pastel:wither_head"
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_mob_head_using_treasure_hunter"
+      }
+    }
+  }
+}

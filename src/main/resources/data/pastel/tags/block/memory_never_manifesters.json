@@ -1,0 +1,12 @@
+{
+  "values": [
+    "minecraft:ice",
+    "minecraft:packed_ice",
+    "minecraft:blue_ice",
+    "pastel:frostbite_crystal",
+    {
+      "id": "powah:dry_ice",
+      "required": false
+    }
+  ]
+}

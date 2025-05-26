@@ -1,15 +1,15 @@
 {
-  "parent": "spectrum:endgame/meet_paintlich",
+  "parent": "pastel:endgame/meet_paintlich",
   "display": {
     "icon": {
-      "item": "spectrum:preservation_stone"
+      "item": "pastel:preservation_stone"
     },
     "hidden": true,
     "title": {
-      "translate": "advancements.spectrum.defeat_paintlich.title"
+      "translate": "advancements.pastel.defeat_paintlich.title"
     },
     "description": {
-      "translate": "advancements.spectrum.defeat_paintlich.description"
+      "translate": "advancements.pastel.defeat_paintlich.description"
     }
   },
   "criteria": {
@@ -22,7 +22,7 @@
             "entity": "this",
             "predicate": {
               "location": {
-                "structure": "spectrum:excavation_site"
+                "structure": "pastel:excavation_site"
               }
             }
           }
@@ -32,7 +32,7 @@
     "gotten_previous": {
       "trigger": "revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:endgame/meet_paintlich"
+        "advancement_identifier": "pastel:endgame/meet_paintlich"
       }
     }
   }

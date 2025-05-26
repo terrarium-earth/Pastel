@@ -1,0 +1,34 @@
+{
+  "name": "item.pastel.mermaids_jam",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:tap_mermaids_jam"
+  },
+  "icon": {
+    "item": "pastel:mermaids_jam"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/cheong"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": -3,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:mermaids_jam"
+      },
+      "text": "book.pastel.guidebook.mermaids_jam.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.mermaids_jam.page1.text"
+    }
+  ]
+}

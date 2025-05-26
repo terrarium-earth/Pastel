@@ -1,0 +1,54 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:chiseled_polished_basalt"
+    },
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.build_basic_pedestal_structure.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.build_basic_pedestal_structure.description"
+    }
+  },
+  "parent": "pastel:craft_cmy_pedestal",
+  "criteria": {
+    "built_structure": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:pedestal_simple"
+      }
+    },
+    "built_advanced_structure": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:pedestal_advanced"
+      }
+    },
+    "built_complex_structure": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:pedestal_complex"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_cmy_pedestal"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "requirements": [
+    [
+      "built_structure",
+      "built_advanced_structure",
+      "built_complex_structure"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

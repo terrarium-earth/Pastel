@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:polished_shale_clay"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:polished_shale_clay_slab",
+    "count": 6
+  }
+}

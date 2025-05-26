@@ -1,0 +1,32 @@
+{
+  "name": "book.pastel.guidebook.creatures.name",
+  "icon": {
+    "item": "pastel:lizard_spawn_egg"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/enter_dimension"
+  },
+  "parents": [
+    {
+      "entry": "pastel:dimension/delving_deeper_down"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -3,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.creatures.name",
+      "text": "book.pastel.guidebook.creatures.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.creatures.page1.text"
+    }
+  ]
+}

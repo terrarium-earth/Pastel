@@ -1,0 +1,53 @@
+{
+  "name": "block.pastel.semi_permeable_glass",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/build_advanced_pedestal_structure"
+  },
+  "icon": {
+    "item": "pastel:amethyst_semi_permeable_glass"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.semi_permeable_glass",
+      "item": {
+        "item": "pastel:amethyst_semi_permeable_glass"
+      },
+      "text": "book.pastel.guidebook.semi_permeable_glass.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.semi_permeable_glass.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.semi_permeable_glass.page2.text",
+      "title": "book.pastel.guidebook.semi_permeable_glass.page2.title",
+      "recipe_id": "pastel:pedestal/tier3/semi_permeable_glass/glass"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.semi_permeable_glass.page3.text",
+      "title": "book.pastel.guidebook.semi_permeable_glass.page3.title",
+      "recipe_id": "pastel:pedestal/tier3/semi_permeable_glass/amethyst"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.semi_permeable_glass.page4.title",
+      "recipe_id": "pastel:pedestal/tier3/semi_permeable_glass/tinted"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.semi_permeable_glass.page5.title",
+      "recipe_id": "pastel:pedestal/tier3/semi_permeable_glass/radiant"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:brown_dye"
+    }
+  ],
+  "ink_color": "pastel:brown",
+  "amount": 5,
+  "required_advancement": "pastel:hidden/collect_pigment/brown"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "book.pastel.guidebook.idea",
+  "description": "book.pastel.guidebook.ideas.ruin.name",
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 5,
+  "x": 19,
+  "y": 1,
+  "icon": "pastel:textures/gui/guidebook/icons/idea.png",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/craft_bottle_of_ruin"
+  },
+  "read_by_default": true,
+  "turnin": "pastel:midgame/break_decayed_bedrock",
+  "pages": [
+    {
+      "type": "pastel:hint",
+      "title": "book.pastel.guidebook.ideas.small_clue",
+      "completion_advancement": "pastel:triggers/hints/ruin_page0",
+      "cost": {
+        "item": "pastel:brown_pigment",
+        "count": 8
+      },
+      "text": "book.pastel.guidebook.ideas.ruin.page0.text"
+    },
+    {
+      "type": "pastel:hint",
+      "title": "book.pastel.guidebook.ideas.concise_instructions",
+      "cost": {
+        "item": "pastel:brown_pigment",
+        "count": 24
+      },
+      "text": "book.pastel.guidebook.ideas.ruin.page1.text",
+      "completion_advancement": "pastel:triggers/hints/ruin_page1"
+    }
+  ]
+}

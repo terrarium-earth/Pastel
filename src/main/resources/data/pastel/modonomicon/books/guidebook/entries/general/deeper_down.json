@@ -1,0 +1,23 @@
+{
+  "type": "modonomicon:category_link",
+  "category_to_open": "pastel:dimension",
+  "name": "book.pastel.guidebook.delving_deeper_down.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/enter_dimension"
+  },
+  "icon": {
+    "item": "pastel:black_glowblock"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/ruin"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 19,
+  "y": 0
+}

@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:malachite_ultra_greatsword",
+      "components": {
+        "minecraft:enchantments": {
+          "levels": {
+            "minecraft:sweeping_edge": 4
+          }
+        }
+      }
+    },
+    "title": {
+      "translate": "advancements.pastel.create_malachite_tool.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.create_malachite_tool.description"
+    }
+  },
+  "parent": "pastel:lategame/grow_malachite_in_crystallarieum",
+  "criteria": {
+    "created_malachite_tool": {
+      "trigger": "pastel:crafted_with_fusion_shrine",
+      "items": [
+        {
+          "items": "#pastel:malachite_equipment"
+        }
+      ]
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/grow_malachite_in_crystallarieum"
+      }
+    }
+  }
+}

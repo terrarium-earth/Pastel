@@ -1,0 +1,34 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_circlet",
+    {
+      "item": "pastel:pure_malachite",
+      "count": 8
+    },
+    {
+      "item": "pastel:blood_orchid_petal",
+      "count": 4
+    },
+    {
+      "item": "pastel:moonstone_powder",
+      "count": 8
+    },
+    {
+      "item": "pastel:red_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:circlet_of_arrogance"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/circlet_of_arrogance",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

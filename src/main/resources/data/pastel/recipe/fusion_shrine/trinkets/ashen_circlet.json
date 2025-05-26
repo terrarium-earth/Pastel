@@ -1,0 +1,27 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_circlet",
+    "pastel:stratine_gem",
+    {
+      "item": "pastel:neolith",
+      "count": 4
+    },
+    {
+      "item": "pastel:orange_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:ashen_circlet"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/ashen_circlet",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

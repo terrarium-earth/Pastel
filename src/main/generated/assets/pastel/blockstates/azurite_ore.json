@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "pastel:block/azurite_ore"
+      },
+      {
+        "model": "pastel:block/azurite_ore_mirrored"
+      }
+    ]
+  }
+}

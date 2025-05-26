@@ -1,0 +1,30 @@
+{
+  "name": "book.pastel.guidebook.creature_detector.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/redstone/creature_detector"
+  },
+  "icon": {
+    "item": "pastel:creature_detector"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 7,
+  "y": 4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "block.pastel.creature_detector",
+      "text": "book.pastel.guidebook.creature_detector.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/detectors/creature_detector",
+      "text": "book.pastel.guidebook.creature_detector.page1.text"
+    }
+  ]
+}

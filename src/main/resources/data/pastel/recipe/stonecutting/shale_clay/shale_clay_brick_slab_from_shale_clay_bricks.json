@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    {
+      "item": "pastel:shale_clay_bricks"
+    }
+  ],
+  "result": {
+    "id": "pastel:shale_clay_brick_slab"
+  },
+  "count": 2
+}

@@ -21,7 +21,7 @@ public class TooltipHelper {
 	public static void addFoodComponentEffectTooltip(ItemStack stack, List<Either<FormattedText, TooltipComponent>> tooltip, float updateTickRate) {
 		FoodProperties foodComponent = stack.get(DataComponents.FOOD);
 		if (foodComponent != null) {
-			buildEffectTooltipWithChance(tooltip, foodComponent.effects(), stack.getUseAnimation() == UseAnim.DRINK ? Component.translatable("spectrum.food.whenDrunk") : Component.translatable("spectrum.food.whenEaten"), updateTickRate);
+			buildEffectTooltipWithChance(tooltip, foodComponent.effects(), stack.getUseAnimation() == UseAnim.DRINK ? Component.translatable("pastel.food.whenDrunk") : Component.translatable("pastel.food.whenEaten"), updateTickRate);
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class TooltipHelper {
 				translatableText = Component.translatable("potion.withDuration", translatableText, StringUtil.formatTickDuration(statusEffectInstance.getDuration(), updateTickRate));
 			}
 			if (chance < 1.0F) {
-				translatableText = Component.translatable("spectrum.food.withChance", translatableText, Math.round(chance * 100));
+				translatableText = Component.translatable("pastel.food.withChance", translatableText, Math.round(chance * 100));
 			}
 			
 			tooltip.add(Either.left(translatableText.withStyle(statusEffect.value().getCategory().getTooltipFormatting())));

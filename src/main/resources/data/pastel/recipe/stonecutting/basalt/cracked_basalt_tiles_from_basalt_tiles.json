@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    {
+      "item": "pastel:basalt_tiles"
+    }
+  ],
+  "result": {
+    "id": "pastel:cracked_basalt_tiles"
+  },
+  "count": 1
+}

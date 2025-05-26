@@ -1,28 +1,36 @@
 package de.dafuqs.revelationary.api.advancements;
 
+import de.dafuqs.revelationary.*;
 import de.dafuqs.revelationary.advancement_criteria.AdvancementCountCriterion;
 import de.dafuqs.revelationary.advancement_criteria.AdvancementGottenCriterion;
 import de.dafuqs.revelationary.advancement_criteria.HadRevelationCriterion;
-import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.advancements.*;
+import net.minecraft.core.registries.*;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 public class AdvancementCriteria {
 	/**
 	 * Triggered every time a player gets a new advancement
 	 */
-	public static AdvancementGottenCriterion ADVANCEMENT_GOTTEN;
+	public static final AdvancementGottenCriterion ADVANCEMENT_GOTTEN = new AdvancementGottenCriterion();
 	/**
 	 * Triggered every time a player gets a new advancement
 	 * matches multiple advancements with optional count parameter
 	 */
-	public static AdvancementCountCriterion ADVANCEMENT_COUNT;
+	public static final AdvancementCountCriterion ADVANCEMENT_COUNT = new AdvancementCountCriterion();
 	/**
 	 * Triggers every time a new block is revealed
 	 */
-	public static HadRevelationCriterion HAD_REVELATION;
+	public static final HadRevelationCriterion HAD_REVELATION = new HadRevelationCriterion();
 	
-	public static void register() {
-		ADVANCEMENT_COUNT = CriteriaTriggers.register("revelationary:advancement_count", new AdvancementCountCriterion());
-		HAD_REVELATION = CriteriaTriggers.register("revelationary:had_revelation", new HadRevelationCriterion());
-		ADVANCEMENT_GOTTEN = CriteriaTriggers.register("revelationary:advancement_gotten", new AdvancementGottenCriterion());
+	public static void register(IEventBus bus) {
+		var registry = DeferredRegister.create(Registries.TRIGGER_TYPE, Revelationary.MOD_ID);
+
+		registry.register("advancement_count", () -> ADVANCEMENT_COUNT);
+		registry.register("had_revelation", () -> HAD_REVELATION);
+		registry.register("advancement_gotten", () -> ADVANCEMENT_GOTTEN);
+
+		registry.register(bus);
 	}
 }

@@ -50,7 +50,7 @@ public class SingleBlockPoolElement extends StructurePoolElement {
 	
 	private static CompoundTag createDefaultJigsawNbt() {
 		CompoundTag nbtCompound = new CompoundTag();
-		nbtCompound.putString("name", "spectrum:main");
+		nbtCompound.putString("name", "pastel:main");
 		nbtCompound.putString("final_state", "minecraft:air");
 		nbtCompound.putString("pool", "minecraft:empty");
 		nbtCompound.putString("target", "minecraft:empty");

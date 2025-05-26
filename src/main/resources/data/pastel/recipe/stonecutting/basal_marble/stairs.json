@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    {
+      "item": "pastel:basal_marble"
+    }
+  ],
+  "result": {
+    "id": "pastel:basal_marble_stairs"
+  },
+  "count": 1
+}

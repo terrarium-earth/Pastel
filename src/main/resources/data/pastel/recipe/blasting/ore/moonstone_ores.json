@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "tag": "pastel:moonstone_ores"
+    }
+  ],
+  "result": {
+    "id": "pastel:moonstone_shard"
+  },
+  "experience": 0.25,
+  "cookingtime": 100
+}

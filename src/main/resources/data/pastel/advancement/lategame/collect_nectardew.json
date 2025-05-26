@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:lategame/collect_dd_resources",
+  "display": {
+    "icon": {
+      "id": "pastel:nectardew_burgeon"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_nectardew.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_nectardew.description"
+    },
+    "hidden": true
+  },
+  "criteria": {
+    "has_nectardew_burgeon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:nectardew_burgeon"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

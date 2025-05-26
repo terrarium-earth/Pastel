@@ -1,0 +1,33 @@
+{
+  "name": "item.pastel.nectar_lance",
+  "icon": {
+    "item": "pastel:nectar_lance"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/nectar_lance"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/poisoners_handbook"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -6,
+  "y": -4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "item.pastel.nectar_lance",
+      "text": "book.pastel.guidebook.nectar_lance.page0.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/nectar_lance",
+      "text": "book.pastel.guidebook.nectar_lance.page1.text"
+    }
+  ]
+}

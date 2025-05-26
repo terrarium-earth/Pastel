@@ -1,0 +1,24 @@
+{
+  "type": "pastel:spirit_instiller",
+  "group": "memories",
+  "time": 800,
+  "experience": 4.0,
+  "ingredient1": "pastel:preservation_turret_head",
+  "ingredient2": "pastel:moonstone_shard",
+  "center_ingredient": {
+    "tag": "pastel:memory_bonding_agents",
+    "count": 4
+  },
+  "result": {
+    "id": "pastel:memory",
+    "components": {
+      "entity_data": {
+        "id": "pastel:preservation_turret"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 16
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/blocks/memories"
+}

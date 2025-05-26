@@ -1,0 +1,35 @@
+{
+  "name": "block.pastel.aloe",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_aloe"
+  },
+  "icon": {
+    "item": "pastel:aloe_leaf"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/black_langast"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": -3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "block.pastel.aloe",
+      "text": "book.pastel.guidebook.aloe.page0.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:aloe_leaf"
+      },
+      "text": "book.pastel.guidebook.aloe.page1.text"
+    }
+  ]
+}

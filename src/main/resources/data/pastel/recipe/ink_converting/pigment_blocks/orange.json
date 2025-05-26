@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "pastel:orange_block"
+    }
+  ],
+  "ink_color": "pastel:orange",
+  "amount": 900,
+  "required_advancement": "pastel:hidden/collect_pigment/orange"
+}

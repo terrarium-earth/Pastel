@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "malum:processed_soulstone"
+    },
+    {
+      "item": "pastel:four_leaf_clover"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "malum:processed_soulstone"
+    },
+    {
+      "item": "pastel:four_leaf_clover"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "malum:spirit_plunder": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/clovers_favor",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "malum"
+      ]
+    }
+  ]
+}

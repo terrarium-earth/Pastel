@@ -1,7 +1,7 @@
 {
   "values": [
-    "#spectrum:colored_slabs",
-    "#spectrum:noxwood_slabs",
-    "spectrum:weeping_gala_slab"
+    "#pastel:colored_slabs",
+    "#pastel:noxwood_slabs",
+    "pastel:weeping_gala_slab"
   ]
 }

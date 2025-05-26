@@ -1,0 +1,76 @@
+{
+  "name": "book.pastel.guidebook.memories.name",
+  "icon": {
+    "id": "pastel:memory",
+    "components": {
+      "entity_data": {
+        "id": "minecraft:fox"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 20
+      }
+    }
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/memories"
+  },
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:creating_life/spirit_instiller"
+    },
+    {
+      "entry": "pastel:creating_life/mob_heads"
+    },
+    {
+      "entry": "pastel:creating_life/staff_of_remembrance"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.memories.name",
+      "item": {
+        "item": "pastel:memory",
+        "components": {
+          "entity_data": {
+            "id": "minecraft:fox"
+          },
+          "pastel:memory": {
+            "ticks_to_manifest": 20
+          }
+        }
+      },
+      "text": "book.pastel.guidebook.memories.page0.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "book.pastel.guidebook.spirit_instiller_recipe",
+      "recipe_id": "pastel:spirit_instiller/memories/fox",
+      "text": "book.pastel.guidebook.memories.page1.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.memories.page2.title",
+      "text": "book.pastel.guidebook.memories.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:milestones/unlock_remembering_boss_memories"
+      },
+      "title": "book.pastel.guidebook.memories.page3.title",
+      "item": {
+        "item": "minecraft:dragon_head"
+      },
+      "text": "book.pastel.guidebook.memories.page3.text"
+    }
+  ]
+}

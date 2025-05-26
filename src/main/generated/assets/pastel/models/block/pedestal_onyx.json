@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/pedestal",
+  "textures": {
+    "particle": "pastel:block/pedestal_onyx_breaking",
+    "pedestal": "pastel:block/pedestal_onyx"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "type": "pastel:fusion_shrine",
+  "group": "bedrock_tools",
+  "time": 1200,
+  "experience": 16.0,
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "copy_components": true,
+  "ingredients": [
+    "minecraft:golden_pickaxe",
+    {
+      "item": "pastel:bedrock_dust",
+      "count": 3
+    },
+    {
+      "item": "pastel:black_pigment",
+      "count": 3
+    },
+    {
+      "item": "pastel:onyx_powder",
+      "count": 3
+    },
+    {
+      "item": "pastel:stratine_gem",
+      "count": 1
+    },
+    {
+      "item": "pastel:stratine_fragments",
+      "count": 3
+    }
+  ],
+  "result": {
+    "id": "pastel:bedrock_pickaxe",
+    "components": {
+      "enchantments": {
+        "minecraft:silk_touch": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/equipment/bedrock_tools",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

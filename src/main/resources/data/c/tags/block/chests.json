@@ -1,9 +1,9 @@
 {
   "values": [
-    "spectrum:preservation_chest",
-    "spectrum:heartbound_chest",
-    "spectrum:compacting_chest",
-    "spectrum:fabrication_chest",
-    "spectrum:black_hole_chest"
+    "pastel:preservation_chest",
+    "pastel:heartbound_chest",
+    "pastel:compacting_chest",
+    "pastel:fabrication_chest",
+    "pastel:black_hole_chest"
   ]
 }

@@ -164,9 +164,9 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
 	
 	protected Component getContainerName() {
 		if (hasOwner()) {
-			return Component.translatable("block.spectrum.ender_hopper.owner", this.ownerName);
+			return Component.translatable("block.pastel.ender_hopper.owner", this.ownerName);
 		} else {
-			return Component.translatable("block.spectrum.ender_hopper");
+			return Component.translatable("block.pastel.ender_hopper");
 		}
 	}
 	

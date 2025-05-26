@@ -1,0 +1,17 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": {
+    "item": "the_bumblezone:essence_continuity"
+  },
+  "ink_color": "pastel:white",
+  "amount": 25000,
+  "required_advancement": "pastel:mod_integration/the_bumblezone/white_continuity",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "the_bumblezone"
+      ]
+    }
+  ]
+}

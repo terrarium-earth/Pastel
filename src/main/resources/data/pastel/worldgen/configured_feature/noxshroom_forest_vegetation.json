@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:nether_forest_vegetation",
+  "config": {
+    "state_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "weight": 100,
+          "data": {
+            "Name": "pastel:slate_noxshroom"
+          }
+        },
+        {
+          "weight": 100,
+          "data": {
+            "Name": "pastel:ebony_noxshroom"
+          }
+        },
+        {
+          "weight": 100,
+          "data": {
+            "Name": "pastel:ivory_noxshroom"
+          }
+        },
+        {
+          "weight": 1,
+          "data": {
+            "Name": "pastel:chestnut_noxshroom"
+          }
+        }
+      ]
+    },
+    "spread_width": 14,
+    "spread_height": 5
+  }
+}

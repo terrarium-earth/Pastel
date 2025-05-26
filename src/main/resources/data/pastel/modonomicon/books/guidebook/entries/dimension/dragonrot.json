@@ -1,0 +1,34 @@
+{
+  "name": "block.pastel.dragonrot",
+  "icon": {
+    "item": "pastel:dragonrot_bucket"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/interact_with_dragonrot"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/dragonrot_swamp"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 7,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.dragonrot.page0.text",
+      "title": "block.pastel.dragonrot"
+    },
+    {
+      "type": "pastel:dragonrot_converting",
+      "text": "book.pastel.guidebook.dragonrot.page1.text",
+      "title": "book.pastel.guidebook.item_conversion",
+      "recipe_id": "pastel:dragonrot_converting/blackslag_from_deepslate"
+    }
+  ]
+}

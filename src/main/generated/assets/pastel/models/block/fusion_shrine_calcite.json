@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/base_fusion_shrine",
+  "textures": {
+    "particle": "pastel:block/fusion_shrine_calcite_breaking",
+    "shrine": "pastel:block/fusion_shrine_calcite"
+  }
+}

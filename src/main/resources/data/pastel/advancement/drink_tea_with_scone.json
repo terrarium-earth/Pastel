@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:scone"
+    },
+    "title": {
+      "translate": "advancements.pastel.drink_tea_with_scone.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.drink_tea_with_scone.description"
+    }
+  },
+  "parent": "pastel:collect_amaranth_bushel",
+  "criteria": {
+    "drank_any_tea_with_scone": {
+      "trigger": "pastel:consumed_paired_food",
+      "conditions": {
+        "paired_item": {
+          "item": "pastel:scone"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_amaranth_bushel"
+      }
+    }
+  }
+}

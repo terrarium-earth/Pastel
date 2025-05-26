@@ -1,0 +1,34 @@
+{
+  "parent": "pastel:midgame/collect_stratine",
+  "display": {
+    "icon": {
+      "id": "pastel:potion_workshop"
+    },
+    "title": {
+      "translate": "advancements.pastel.brew_potion_in_potion_workshop.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.brew_potion_in_potion_workshop.description"
+    }
+  },
+  "criteria": {
+    "brewed_potion": {
+      "trigger": "pastel:potion_workshop_brewing",
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:potion",
+            "minecraft:splash_potion",
+            "minecraft:lingering_potion"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_stratine"
+      }
+    }
+  }
+}

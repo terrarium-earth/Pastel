@@ -1,0 +1,26 @@
+{
+  "type": "pastel:titration_barrel",
+  "group": "infused_beverages",
+  "ingredients": [
+    {
+      "tag": "pastel:drinkable_spirits",
+      "count": 1
+    },
+    {
+      "item": "minecraft:blaze_powder",
+      "count": 4
+    },
+    {
+      "item": "pastel:incandescent_amalgam",
+      "count": 1
+    }
+  ],
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "min_fermentation_time_hours": 48,
+  "result": {
+    "id": "pastel:pure_alcohol"
+  },
+  "required_advancement": "pastel:unlocks/items/incandescent_amalgam"
+}

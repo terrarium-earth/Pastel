@@ -8,19 +8,19 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import java.util.ArrayList;
 import java.util.List;
 
-@Config(name = "Spectrum")
+@Config(name = "pastel")
 public class SpectrumConfig implements ConfigData {
 	
 	@Comment("The duration in milliseconds ingame recipe/unlock popups stay on the screen")
 	public long ToastTimeMilliseconds = 7500;
 	
-	@Comment("The reverb decay time for sound effects in Spectrum's dimension")
+	@Comment("The reverb decay time for sound effects in pastel's dimension")
 	public float DimensionReverbDecayTime = 8.0F;
 	
-	@Comment("The reverb density for sound effects in Spectrum's dimension")
+	@Comment("The reverb density for sound effects in pastel's dimension")
 	public float DimensionReverbDensity = 0.5F;
 	
-	@Comment("Graphical options for spectrum's dimension")
+	@Comment("Graphical options for pastel's dimension")
 	public boolean WindSim = true;
 	public boolean ReducedParticles = false;
 	
@@ -42,7 +42,7 @@ public class SpectrumConfig implements ConfigData {
 	@Comment("Add some advanced tooltips to items, like if Sculk Shriekers are able to summon the Warden")
 	public boolean AddItemTooltips = true;
 
-	@Comment("Replaces the ornate models of spectrum's transfer system with something simpler for increased visibility. Great for technical players!")
+	@Comment("Replaces the ornate models of pastel's transfer system with something simpler for increased visibility. Great for technical players!")
 	public boolean MinimalNodes = false;
 
 	@Comment("""
@@ -174,7 +174,7 @@ public class SpectrumConfig implements ConfigData {
 	@Comment("""
 			True will prevent the spread of Decay blocks in claims.
 			Only enable when necessary and communicate to your players that those blocks will not work in their claims.
-			If any player comes to the Spectrum devs claiming that decay does not spread for them, and therefore they could not progress
+			If any player comes to the pastel devs claiming that decay does not spread for them, and therefore they could not progress
 			You will get put on the 'bad pack devs' list and this config setting removed again
 			""")
 	public boolean DecayIsStoppedByClaimMods = false;

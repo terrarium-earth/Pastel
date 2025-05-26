@@ -1,0 +1,41 @@
+{
+  "name": "block.pastel.primordial_fire",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/interact_with_doombloom"
+  },
+  "icon": "pastel:textures/gui/guidebook/icons/primordial_fire.png",
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/doomblooms"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 8,
+  "y": 6,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "block.pastel.primordial_fire",
+      "text": "book.pastel.guidebook.primordial_fire.page0.text"
+    },
+    {
+      "type": "pastel:primordial_fire_burning",
+      "title": "container.pastel.rei.primordial_fire_burning.title",
+      "text": "book.pastel.guidebook.primordial_fire.page1.text",
+      "recipe_id": "pastel:primordial_fire_burning/torch_unsouling"
+    },
+    {
+      "type": "pastel:primordial_fire_burning",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_primordial_torch"
+      },
+      "text": "book.pastel.guidebook.primordial_fire.primordial_torch.text",
+      "recipe_id": "pastel:primordial_fire_burning/primordial_torch"
+    }
+  ]
+}

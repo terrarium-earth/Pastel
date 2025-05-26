@@ -1,0 +1,9 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:shimmerstone_gem",
+  "modifiers": {
+    "duration_multiplier": 1.2,
+    "potency_multiplier": 1.2
+  },
+  "required_advancement": "pastel:collect_shimmerstone"
+}

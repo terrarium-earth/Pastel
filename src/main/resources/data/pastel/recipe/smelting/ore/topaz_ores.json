@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "tag": "pastel:topaz_ores"
+    }
+  ],
+  "result": {
+    "id": "pastel:topaz_shard"
+  },
+  "experience": 0.25,
+  "cookingtime": 200
+}

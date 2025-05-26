@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates_item/polearm_throwing",
+  "textures": {
+    "layer0": "pastel:item/malachite_bident_oversized"
+  }
+}

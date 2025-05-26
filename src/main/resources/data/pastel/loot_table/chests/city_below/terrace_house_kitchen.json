@@ -1,0 +1,123 @@
+{
+  "pools": [
+    {
+      "rolls": {
+        "min": 2,
+        "max": 4
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:clock"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:crafting_tablet",
+          "functions": [
+            {
+              "function": "pastel:set_components_randomly",
+              "options": [
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/food/myceylon_apple_pie"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/food/myceylon_apple_pie"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:bread"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/food/crawfish_cocktail"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/food/hare_roast_malt"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier2/bottomless_bundle"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:crafting_table/mushroom_stew"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:crafting_table/flora/glow_dye_from_humming_bell"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/food/cream_pastry"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:crafting_table/blackslag/blackslag_bricks"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/crafting_tablet"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:lead"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:beetroot_soup"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:beetroot_soup"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:beetroot_soup"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:red_dye_from_beetroot"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:red_dye_from_beetroot"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:red_dye_from_beetroot"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/food/pastiche"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/food/pastiche"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:glistering_melon_slice"
+                },
+                {
+                  "pastel:stored_recipe": "minecraft:glistering_melon_slice"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/tools/lagoon_rod"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/noxwood/chestnut_planks"
+                },
+                {
+                  "pastel:stored_recipe": "pastel:pedestal/tier1/noxwood/chestnut_planks"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:beetroot_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:melon_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:book"
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:set_count",
+          "count": {
+            "min": 2,
+            "max": 7
+          }
+        }
+      ]
+    }
+  ]
+}

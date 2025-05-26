@@ -159,8 +159,8 @@ public class TotalCappedElementalMixingInkStorage extends TotalCappedInkStorage 
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void addTooltip(List<Component> tooltip) {
-		tooltip.add(Component.translatable("item.spectrum.artists_palette.tooltip", getShortenedNumberString(this.maxEnergyTotal)));
-		tooltip.add(Component.translatable("item.spectrum.artists_palette.tooltip.mix_on_demand"));
+		tooltip.add(Component.translatable("item.pastel.artists_palette.tooltip", getShortenedNumberString(this.maxEnergyTotal)));
+		tooltip.add(Component.translatable("item.pastel.artists_palette.tooltip.mix_on_demand"));
 		addInkContentTooltip(tooltip);
 	}
 	

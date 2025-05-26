@@ -1,0 +1,40 @@
+{
+  "name": "book.pastel.guidebook.nectardew_burgeon.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_nectardew"
+  },
+  "icon": {
+    "item": "pastel:nectardew_burgeon"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/nightdew_sprout"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -7,
+  "y": -6,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.nectardew_burgeon.name",
+      "item": {
+        "item": "pastel:nectardew_burgeon"
+      },
+      "text": "book.pastel.guidebook.nectardew_burgeon.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/break_nightdew_vine"
+      },
+      "title": "book.pastel.guidebook.nectardew_burgeon.page1.title",
+      "text": "book.pastel.guidebook.nectardew_burgeon.page1.text"
+    }
+  ]
+}

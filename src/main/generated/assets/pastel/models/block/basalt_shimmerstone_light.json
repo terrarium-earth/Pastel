@@ -1,0 +1,8 @@
+{
+  "parent": "pastel:templates/shimmerstone_light",
+  "textures": {
+    "inner": "pastel:block/shimmerstone_light",
+    "outer": "pastel:block/basalt_flat_light",
+    "particle": "pastel:block/basalt_flat_light"
+  }
+}

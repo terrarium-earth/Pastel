@@ -71,7 +71,7 @@ public class CompactingChestScreen extends AbstractContainerScreen<CompactingChe
 		super.render(drawContext, mouseX, mouseY, delta);
 		
 		if (mouseX > leftPos + 153 && mouseX < leftPos + 153 + 16 && mouseY > topPos + 5 && mouseY < topPos + 5 + 16) {
-			drawContext.renderTooltip(this.font, Component.translatable("block.spectrum.compacting_chest.toggle_crafting_mode"), mouseX, mouseY);
+			drawContext.renderTooltip(this.font, Component.translatable("block.pastel.compacting_chest.toggle_crafting_mode"), mouseX, mouseY);
 		} else {
 			renderTooltip(drawContext, mouseX, mouseY);
 		}

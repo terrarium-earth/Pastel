@@ -1,0 +1,38 @@
+{
+  "name": "book.pastel.guidebook.fading.name",
+  "icon": {
+    "item": "pastel:bottle_of_fading"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/bottle_of_fading"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/pedestal"
+    },
+    {
+      "entry": "pastel:general/shimmerstone"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -2,
+  "y": 2,
+  "turnin": "pastel:collect_vegetal",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.fading.page0.text",
+      "title": "book.pastel.guidebook.fading.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/bottle_of_fading",
+      "text": "book.pastel.guidebook.fading.page1.text"
+    }
+  ]
+}

@@ -128,16 +128,16 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 		if (wrapped) {
 			var gifter = getOwner(stack);
 			if (gifter.isPresent()) {
-				gifter.get().name().ifPresent(name -> tooltip.add((Component.translatable("block.spectrum.present.tooltip.wrapped.giver", name).withStyle(ChatFormatting.GRAY))));
+				gifter.get().name().ifPresent(name -> tooltip.add((Component.translatable("block.pastel.present.tooltip.wrapped.giver", name).withStyle(ChatFormatting.GRAY))));
 				if (type.isAdvanced()) {
 					gifter.get().id().ifPresent(id -> tooltip.add((Component.literal("UUID: " + id).withStyle(ChatFormatting.GRAY))));
 				}
 			} else {
-				tooltip.add((Component.translatable("block.spectrum.present.tooltip.wrapped").withStyle(ChatFormatting.GRAY)));
+				tooltip.add((Component.translatable("block.pastel.present.tooltip.wrapped").withStyle(ChatFormatting.GRAY)));
 			}
 		} else {
-			tooltip.add((Component.translatable("block.spectrum.present.tooltip.description").withStyle(ChatFormatting.GRAY)));
-			tooltip.add((Component.translatable("block.spectrum.present.tooltip.description2").withStyle(ChatFormatting.GRAY)));
+			tooltip.add((Component.translatable("block.pastel.present.tooltip.description").withStyle(ChatFormatting.GRAY)));
+			tooltip.add((Component.translatable("block.pastel.present.tooltip.description2").withStyle(ChatFormatting.GRAY)));
 			tooltip.add((Component.translatable("item.minecraft.bundle.fullness", getBundledStacks(stack).count(), MAX_STORAGE_STACKS)).withStyle(ChatFormatting.GRAY));
 		}
 	}

@@ -1,0 +1,81 @@
+{
+  "name": "item.pastel.exchanging_staff",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/exchanging_staff"
+  },
+  "icon": {
+    "item": "pastel:exchanging_staff"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 11,
+  "y": 8,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.exchanging_staff.page0.text",
+      "title": "item.pastel.exchanging_staff"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.exchanging_staff.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier4/exchanging_staff"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/build_enchanting_structure"
+      },
+      "title": "enchantment.minecraft.fortune",
+      "item": {
+        "item": "pastel:exchanging_staff"
+      },
+      "components": {
+        "enchantments": {
+          "minecraft:fortune": 3
+        }
+      },
+      "text": "book.pastel.guidebook.exchanging_staff.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/build_enchanting_structure"
+      },
+      "title": "enchantment.minecraft.silk_touch",
+      "item": {
+        "item": "pastel:exchanging_staff"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:silk_touch": 1
+        }
+      },
+      "text": "book.pastel.guidebook.exchanging_staff.page3.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/enchantments/resonance_usage"
+      },
+      "title": "enchantment.pastel.resonance",
+      "item": {
+        "item": "pastel:exchanging_staff"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:resonance": 1
+        }
+      },
+      "text": "book.pastel.guidebook.exchanging_staff.page4.text"
+    }
+  ]
+}

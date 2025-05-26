@@ -36,7 +36,7 @@ public class SpectrumTooltips {
 		BlockItemStateProperties stateComponent = components.get(DataComponents.BLOCK_STATE);
 		if (stateComponent != null && !stateComponent.isEmpty()) {
 			if (Boolean.TRUE.equals(stateComponent.get(SculkShriekerBlock.CAN_SUMMON))) {
-				lines.add(Component.translatable("spectrum.tooltip.able_to_summon_warden").withStyle(ChatFormatting.GRAY));
+				lines.add(Component.translatable("pastel.tooltip.able_to_summon_warden").withStyle(ChatFormatting.GRAY));
 			}
 		}
 	}

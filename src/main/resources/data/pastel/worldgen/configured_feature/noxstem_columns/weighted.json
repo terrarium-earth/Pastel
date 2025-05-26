@@ -1,0 +1,35 @@
+{
+  "type": "pastel:weighted_random_feature",
+  "config": {
+    "features": [
+      {
+        "data": {
+          "feature": "pastel:noxstem_columns/slate",
+          "placement": []
+        },
+        "weight": 100
+      },
+      {
+        "data": {
+          "feature": "pastel:noxstem_columns/ebony",
+          "placement": []
+        },
+        "weight": 100
+      },
+      {
+        "data": {
+          "feature": "pastel:noxstem_columns/ivory",
+          "placement": []
+        },
+        "weight": 100
+      },
+      {
+        "data": {
+          "feature": "pastel:noxstem_columns/chestnut",
+          "placement": []
+        },
+        "weight": 1
+      }
+    ]
+  }
+}

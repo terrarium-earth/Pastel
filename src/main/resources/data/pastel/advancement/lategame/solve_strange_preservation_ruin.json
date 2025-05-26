@@ -1,0 +1,29 @@
+{
+  "parent": "pastel:lategame/enter_strange_preservation_ruin",
+  "display": {
+    "icon": {
+      "id": "pastel:deep_light_chiseled_preservation_stone"
+    },
+    "title": {
+      "translate": "advancements.pastel.solve_strange_preservation_ruin.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.solve_strange_preservation_ruin.description"
+    },
+    "hidden": true
+  },
+  "criteria": {
+    "found_poisoners_handbook": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_cookbooks/poisoners_handbook"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/enter_strange_preservation_ruin"
+      }
+    }
+  }
+}

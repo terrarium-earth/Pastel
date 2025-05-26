@@ -23,7 +23,7 @@ public class BedrockAnvilBlock extends AnvilBlock {
 
 	public static final MapCodec<BedrockAnvilBlock> CODEC = simpleCodec(BedrockAnvilBlock::new);
 
-	private static final Component TITLE = Component.translatable("container.spectrum.bedrock_anvil");
+	private static final Component TITLE = Component.translatable("container.pastel.bedrock_anvil");
 
 	public BedrockAnvilBlock(Properties settings) {
 		super(settings);
@@ -50,9 +50,9 @@ public class BedrockAnvilBlock extends AnvilBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("container.spectrum.bedrock_anvil.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("container.spectrum.bedrock_anvil.tooltip2").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("container.spectrum.bedrock_anvil.tooltip3").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("container.pastel.bedrock_anvil.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("container.pastel.bedrock_anvil.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("container.pastel.bedrock_anvil.tooltip3").withStyle(ChatFormatting.GRAY));
 	}
 	
 }

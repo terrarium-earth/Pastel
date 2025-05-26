@@ -1,0 +1,36 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:quick_charge"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:red_pigment"
+  },
+  "enchantment": "minecraft:quick_charge",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      8,
+      32,
+      512,
+      512
+    ]
+  },
+  "level_cap": 5,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_projectile",
+  "xp_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      200,
+      1600,
+      5000,
+      10000
+    ]
+  }
+}

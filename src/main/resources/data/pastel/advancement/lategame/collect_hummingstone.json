@@ -1,0 +1,46 @@
+{
+  "parent": "pastel:lategame/collect_dd_resources",
+  "display": {
+    "icon": {
+      "id": "pastel:hummingstone"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_hummingstone.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_hummingstone.description"
+    }
+  },
+  "criteria": {
+    "has_hummingstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:hummingstones"
+          }
+        ]
+      }
+    },
+    "struck_up_hummingstone_hymn": {
+      "trigger": "pastel:hummingstone_hymn",
+      "conditions": {}
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_hummingstone",
+      "struck_up_hummingstone_hymn"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

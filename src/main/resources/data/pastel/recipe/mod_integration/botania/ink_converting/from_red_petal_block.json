@@ -1,0 +1,17 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": {
+    "item": "botania:red_petal_block"
+  },
+  "ink_color": "pastel:red",
+  "amount": 225,
+  "required_advancement": "pastel:hidden/collect_pigment/red",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "botania"
+      ]
+    }
+  ]
+}

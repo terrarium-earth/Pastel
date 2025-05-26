@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:collect_amaranth",
+  "display": {
+    "icon": {
+      "id": "pastel:amaranth_bushel"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_amaranth_bushel.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_amaranth_bushel.description"
+    }
+  },
+  "criteria": {
+    "has_amaranth_bushel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:amaranth_bushel"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_amaranth"
+      }
+    }
+  }
+}

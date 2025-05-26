@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates_item/polearm_throwing",
+  "textures": {
+    "layer0": "pastel:item/ferocious_glass_crest_bident_oversized"
+  }
+}

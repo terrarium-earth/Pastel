@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    {
+      "item": "pastel:polished_calcite"
+    }
+  ],
+  "result": {
+    "id": "pastel:polished_calcite_pillar"
+  },
+  "count": 1
+}

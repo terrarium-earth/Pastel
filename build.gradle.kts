@@ -1,6 +1,6 @@
 
 plugins {
-    id("earth.terrarium.cloche") version "0.9.19"
+    id("earth.terrarium.cloche") version "0.9.20"
 }
 
 sourceSets.main {
@@ -55,7 +55,7 @@ cloche {
         sources = "https://github.com/terrarium-earth/Pastel"
         issues = "https://github.com/terrarium-earth/Pastel/issues"
 
-        icon = "assets/spectrum/icon.png"
+        icon = "assets/pastel/icon.png"
 
         dependency {
             modId = "modonomicon"
@@ -78,12 +78,12 @@ cloche {
             loaderVersion = "21.1.172"
 
             accessWideners.from(
-                "src/main/spectrum.accessWidener",
-                "src/main/spectrum.data.accessWidener",
-                "src/main/spectrum.todo.accessWidener",
+                "src/main/pastel.accessWidener",
+                "src/main/pastel.data.accessWidener",
+                "src/main/pastel.todo.accessWidener",
             )
 
-            mixins.from("src/main/mixins/spectrum.mixins.json")
+            mixins.from("src/main/mixins/pastel.mixins.json")
 
             // TODO Remove these
             mixins.from(

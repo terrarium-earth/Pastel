@@ -14,9 +14,10 @@ import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.*;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -35,6 +36,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,9 +113,9 @@ public class DraconicTwinswordItem extends SwordItem implements SplittableItem, 
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.spectrum.draconic_twinsword.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.draconic_twinsword.tooltip2").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.draconic_twinsword.tooltip3").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.draconic_twinsword.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.draconic_twinsword.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.draconic_twinsword.tooltip3").withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override
@@ -223,4 +225,27 @@ public class DraconicTwinswordItem extends SwordItem implements SplittableItem, 
 	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
 		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.CHANNELING) || enchantment.is(Enchantments.PIERCING) || enchantment.is(SpectrumEnchantments.INERTIA);
 	}
+
+	// I will become back my money
+	@Override
+	public AABB getSweepHitBox(ItemStack stack, Player player, Entity target) {
+		var box = super.getSweepHitBox(stack, player, target);
+		var channeling = SpectrumEnchantmentHelper.getLevel(player.registryAccess(), Enchantments.CHANNELING, stack) + 1;
+		var size = channeling * 2 + 0.5;
+		box = box.inflate(size, channeling * 0.4, size);
+
+
+		//if (living.canBeSeenAsEnemy()) {
+		//	for (int i = 0; i < 5; i++) {
+		//		((ServerLevel) level()).sendParticles(ParticleTypes.ENCHANTED_HIT,
+		//				living.getRandomX(1.25),
+		//				living.getY() + living.getBbHeight() * random.nextFloat(),
+		//				living.getRandomZ(1.25),
+		//				random.nextInt(2), 0, random.nextFloat() / 6F, 0, 0);
+		//	}
+		//}
+		return box;
+	}
+
+
 }

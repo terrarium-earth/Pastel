@@ -13,7 +13,7 @@ public class CraftingTabletTooltipData implements TooltipComponent {
 	
 	public CraftingTabletTooltipData(Recipe<?> recipe, Level world) {
 		this.itemStack = recipe.getResultItem(world.registryAccess());
-		this.description = Component.translatable("item.spectrum.crafting_tablet.tooltip.recipe", this.itemStack.getCount(), this.itemStack.getHoverName());
+		this.description = Component.translatable("item.pastel.crafting_tablet.tooltip.recipe", this.itemStack.getCount(), this.itemStack.getHoverName());
 	}
 	
 	public ItemStack getItemStack() {

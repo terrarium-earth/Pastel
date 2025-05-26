@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:magenta_dye"
+    }
+  ],
+  "ink_color": "pastel:magenta",
+  "amount": 5,
+  "required_advancement": "pastel:hidden/collect_pigment/magenta"
+}

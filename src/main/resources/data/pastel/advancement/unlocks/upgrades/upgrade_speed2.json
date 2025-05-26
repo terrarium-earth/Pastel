@@ -1,0 +1,20 @@
+{
+  "criteria": {
+    "crafted_previous_upgrade": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:upgrade_speed"
+          ]
+        }
+      }
+    },
+    "collected_storm_stone": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_storm_stone"
+      }
+    }
+  }
+}

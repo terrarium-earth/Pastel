@@ -1,0 +1,32 @@
+{
+  "name": "block.pastel.radiating_ender",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/reveal_radiating_ender"
+  },
+  "icon": {
+    "item": "minecraft:ender_pearl"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -4,
+  "y": -3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.radiating_ender.page0.text",
+      "title": "block.pastel.radiating_ender"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.radiating_ender",
+      "item": {
+        "item": "pastel:radiating_ender"
+      },
+      "text": "book.pastel.guidebook.radiating_ender.page1.text"
+    }
+  ]
+}

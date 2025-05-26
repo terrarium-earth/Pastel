@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "time": 80,
+  "tier": "basic",
+  "magenta": 0,
+  "yellow": 0,
+  "cyan": 0,
+  "black": 0,
+  "white": 0,
+  "experience": 0.2,
+  "ingredients": [
+    "pastel:meatloaf",
+    "sandwichable:ancient_grain_bread",
+    "pastel:clotted_cream"
+  ],
+  "result": {
+    "id": "pastel:meatloaf_sandwich",
+    "count": 6
+  },
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "sandwichable"
+      ]
+    }
+  ]
+}

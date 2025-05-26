@@ -24,7 +24,7 @@ public class EnchanterEnchantingCategory extends EnchanterCategory<EnchanterEnch
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.enchanting.title");
+		return Component.translatable("container.pastel.rei.enchanting.title");
 	}
 	
 	@Override

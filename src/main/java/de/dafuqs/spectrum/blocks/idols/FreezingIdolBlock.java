@@ -85,7 +85,7 @@ public class FreezingIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.freezing_idol.tooltip"));
+		tooltip.add(Component.translatable("block.pastel.freezing_idol.tooltip"));
 	}
 	
 }

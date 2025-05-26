@@ -108,7 +108,7 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements MenuProvi
 	
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("block.spectrum.particle_spawner");
+		return Component.translatable("block.pastel.particle_spawner");
 	}
 	
 	public void applySettings(ParticleSpawnerConfiguration configuration) {

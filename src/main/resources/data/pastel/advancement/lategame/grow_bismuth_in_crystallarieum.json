@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:lategame/collect_bismuth_crystal",
+  "display": {
+    "icon": {
+      "id": "pastel:crystallarieum"
+    },
+    "title": {
+      "translate": "advancements.pastel.grow_bismuth_in_crystallarieum.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.grow_bismuth_in_crystallarieum.description"
+    }
+  },
+  "criteria": {
+    "fully_grown_bismuth": {
+      "trigger": "pastel:crystallarieum_growing",
+      "conditions": {
+        "grown_block": {
+          "blocks": "pastel:bismuth_cluster"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_bismuth_crystal"
+      }
+    }
+  }
+}

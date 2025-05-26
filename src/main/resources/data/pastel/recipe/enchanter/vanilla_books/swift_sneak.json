@@ -1,0 +1,52 @@
+{
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "pastel:neolith"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "minecraft:sculk"
+    },
+    {
+      "item": "pastel:neolith"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "minecraft:swift_sneak": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_swift_sneak",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:swift_sneak"
+      ]
+    }
+  ]
+}

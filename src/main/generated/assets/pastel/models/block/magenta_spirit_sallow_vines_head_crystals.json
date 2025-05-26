@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "pastel:block/magenta_spirit_sallow_vines_head_crystals"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "item.pastel.knotted_sword",
+  "icon": {
+    "item": "pastel:knotted_sword"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/knotted_sword"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "item.pastel.knotted_sword",
+      "text": "book.pastel.guidebook.knotted_sword.page0.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "recipe_id": "pastel:fusion_shrine/knotted_sword",
+      "text": "book.pastel.guidebook.knotted_sword.page1.text"
+    }
+  ]
+}

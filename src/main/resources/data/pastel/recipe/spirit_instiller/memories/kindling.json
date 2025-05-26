@@ -1,0 +1,24 @@
+{
+  "type": "pastel:spirit_instiller",
+  "group": "memories",
+  "time": 800,
+  "experience": 4.0,
+  "ingredient1": "pastel:kindling_head",
+  "ingredient2": "#pastel:kindling_food",
+  "center_ingredient": {
+    "tag": "pastel:memory_bonding_agents",
+    "count": 4
+  },
+  "result": {
+    "id": "pastel:memory",
+    "components": {
+      "entity_data": {
+        "id": "pastel:kindling"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 8
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/blocks/kindling_memory"
+}

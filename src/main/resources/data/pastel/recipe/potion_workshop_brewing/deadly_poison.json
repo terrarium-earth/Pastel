@@ -1,0 +1,15 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "ingredient1": "minecraft:nether_wart",
+  "ingredient2": "pastel:bone_ash",
+  "ingredient3": "minecraft:fermented_spider_eye",
+  "effect": "pastel:deadly_poison",
+  "base_duration_ticks": 600,
+  "potency_modifier": 1.0,
+  "applicable_to_potions": true,
+  "applicable_to_tipped_arrows": true,
+  "applicable_to_potion_fillables": true,
+  "required_advancement": "pastel:unlocks/potions/deadly_poison",
+  "ink_color": "pastel:green",
+  "ink_cost": 4
+}

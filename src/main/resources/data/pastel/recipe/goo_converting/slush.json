@@ -1,0 +1,12 @@
+{
+  "type": "pastel:goo_converting",
+  "required_advancement": "pastel:hidden/collect_ash_and_slush",
+  "ingredient": [
+    {
+      "item": "pastel:ash"
+    }
+  ],
+  "result": {
+    "id": "pastel:slush"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:lategame/collect_dd_resources",
+  "display": {
+    "icon": {
+      "id": "pastel:prickly_bayleaf"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_prickly_bayleaf.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_prickly_bayleaf.description"
+    }
+  },
+  "criteria": {
+    "has_prickly_bayleaf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:prickly_bayleaf"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "group": "noxwood_amphoras",
+  "time": 240,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 1.0,
+  "pattern": [
+    "SAS",
+    "I I",
+    "PSP"
+  ],
+  "key": {
+    "S": "pastel:ebony_noxwood_slab",
+    "P": "pastel:ebony_noxwood_planks",
+    "I": "minecraft:iron_ingot",
+    "A": "minecraft:paper"
+  },
+  "result": {
+    "id": "pastel:ebony_noxwood_amphora",
+    "count": 1
+  },
+  "required_advancement": "pastel:lategame/collect_noxwood"
+}

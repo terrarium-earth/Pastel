@@ -102,10 +102,10 @@ public class EnchantmentCanvasItem extends Item {
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		Optional<Item> boundItem = getItemBoundTo(stack);
 		if (boundItem.isPresent()) {
-			tooltip.add(Component.translatable("item.spectrum.enchantment_canvas.tooltip.bound_to").append(boundItem.get().getDescription()));
+			tooltip.add(Component.translatable("item.pastel.enchantment_canvas.tooltip.bound_to").append(boundItem.get().getDescription()));
 		} else {
-			tooltip.add(Component.translatable("item.spectrum.enchantment_canvas.tooltip.not_bound"));
-			tooltip.add(Component.translatable("item.spectrum.enchantment_canvas.tooltip.not_bound2"));
+			tooltip.add(Component.translatable("item.pastel.enchantment_canvas.tooltip.not_bound"));
+			tooltip.add(Component.translatable("item.pastel.enchantment_canvas.tooltip.not_bound2"));
 		}
 	}
 	

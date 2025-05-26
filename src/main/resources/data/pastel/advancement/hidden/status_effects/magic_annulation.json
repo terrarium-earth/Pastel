@@ -1,0 +1,12 @@
+{
+  "criteria": {
+    "magic_annulation": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "pastel:magic_annulation": {}
+        }
+      }
+    }
+  }
+}

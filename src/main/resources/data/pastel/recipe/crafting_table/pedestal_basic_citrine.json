@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "WTW",
+    "CRC"
+  ],
+  "key": {
+    "S": [
+      {
+        "item": "pastel:citrine_shard"
+      }
+    ],
+    "C": [
+      {
+        "item": "pastel:polished_calcite"
+      }
+    ],
+    "W": [
+      {
+        "item": "pastel:polished_basalt"
+      }
+    ],
+    "R": [
+      {
+        "item": "minecraft:redstone"
+      }
+    ],
+    "T": [
+      {
+        "tag": "minecraft:planks"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:pedestal_basic_citrine",
+    "count": 1
+  }
+}

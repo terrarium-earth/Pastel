@@ -341,7 +341,7 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 	public static ResourceLocation syntheticId(String type, Block block) {
 		ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
 		// Note that all recipe ids here start with "spectrum:/" which is legal, but impossible to represent with real files
-		return ResourceLocation.parse("spectrum:/" + type + "/" + blockId.getNamespace() + "/" + blockId.getPath());
+		return ResourceLocation.parse("pastel:/" + type + "/" + blockId.getNamespace() + "/" + blockId.getPath());
 	}
 	
 	public <C extends RecipeInput, T extends Recipe<C>> void addAll(EmiRegistry registry, RecipeType<T> type, Function<T, EmiRecipe> constructor) {

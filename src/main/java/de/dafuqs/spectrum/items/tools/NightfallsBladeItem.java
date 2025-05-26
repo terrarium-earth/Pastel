@@ -96,7 +96,7 @@ public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionF
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		appendPotionFillableTooltip(stack, tooltip, Component.translatable("item.spectrum.nightfalls_blade.when_struck"), true, context.tickRate());
+		appendPotionFillableTooltip(stack, tooltip, Component.translatable("item.pastel.nightfalls_blade.when_struck"), true, context.tickRate());
 	}
 	
 	@Override

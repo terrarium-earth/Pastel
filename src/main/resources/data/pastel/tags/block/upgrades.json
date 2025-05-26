@@ -1,0 +1,13 @@
+{
+  "values": [
+    "pastel:upgrade_speed",
+    "pastel:upgrade_speed2",
+    "pastel:upgrade_speed3",
+    "pastel:upgrade_efficiency",
+    "pastel:upgrade_efficiency2",
+    "pastel:upgrade_yield",
+    "pastel:upgrade_yield2",
+    "pastel:upgrade_experience",
+    "pastel:upgrade_experience2"
+  ]
+}

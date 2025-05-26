@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/ink_flask_base",
+    "layer1": "pastel:item/ink_flask_tint_full",
+    "layer2": "pastel:item/ink_flask_overlay_full"
+  }
+}

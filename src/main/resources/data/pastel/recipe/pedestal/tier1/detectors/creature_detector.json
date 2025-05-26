@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "time": 80,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 4,
+    "pastel:black": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "BBB",
+    "CQC",
+    "SSS"
+  ],
+  "key": {
+    "B": "minecraft:glass",
+    "C": "pastel:moonstone_shard",
+    "Q": "minecraft:quartz",
+    "S": "#minecraft:wooden_slabs"
+  },
+  "result": {
+    "id": "pastel:creature_detector",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/redstone/creature_detector"
+}

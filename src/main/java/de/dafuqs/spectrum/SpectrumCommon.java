@@ -29,9 +29,9 @@ import de.dafuqs.spectrum.networking.SpectrumS2CPackets;
 import de.dafuqs.spectrum.particle.SpectrumParticleTypes;
 import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import de.dafuqs.spectrum.registries.*;
+import de.dafuqs.spectrum.registries.events.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.TagKey;
@@ -57,22 +57,22 @@ import java.util.Optional;
 @Mod(SpectrumCommon.MOD_ID)
 public class SpectrumCommon {
 	
-	public static final String MOD_ID = "spectrum";
+	public static final String MOD_ID = "pastel";
 	
-	public static final Logger LOGGER = LoggerFactory.getLogger("Spectrum");
+	public static final Logger LOGGER = LoggerFactory.getLogger("pastel");
 	public static final Map<ResourceLocation, TagKey<Item>> CACHED_ITEM_TAG_MAP = new HashMap<>();
 	public static SpectrumConfig CONFIG;
 	
 	public static void logInfo(String message) {
-		LOGGER.info("[Spectrum] {}", message);
+		LOGGER.info("[pastel] {}", message);
 	}
 	
 	public static void logWarning(String message) {
-		LOGGER.warn("[Spectrum] {}", message);
+		LOGGER.warn("[pastel] {}", message);
 	}
 	
 	public static void logError(String message) {
-		LOGGER.error("[Spectrum] {}", message);
+		LOGGER.error("[pastel] {}", message);
 	}
 	
 	public static ResourceLocation locate(String name) {
@@ -103,19 +103,19 @@ public class SpectrumCommon {
 		logInfo("Finished loading config file.");
 	}
 
-	public SpectrumCommon(IEventBus modEventBus, ModContainer container) {
-		Revelationary.onInitialize();
-		Reverb.onInitialize(modEventBus);
+	public SpectrumCommon(IEventBus pastelBus, ModContainer container) {
+		Revelationary.onInitialize(pastelBus);
+		Reverb.onInitialize(pastelBus);
 
 		logInfo("Starting Common Startup");
 		
 		// Register internals
-		SpectrumRegistries.register(modEventBus);
+		SpectrumRegistries.register(pastelBus);
 		InkColors.register();
 		InkColorMixes.register();
 		SpectrumEntityAttributes.register();
-		SpectrumLoadConditions.register(modEventBus);
-		IngredientStack.register(modEventBus);
+		SpectrumLoadConditions.register(pastelBus);
+		IngredientStack.register(pastelBus);
 		
 		logInfo("Registering Component Types...");
 		SpectrumDataComponentTypes.register();
@@ -246,11 +246,13 @@ public class SpectrumCommon {
 		SpectrumResonanceProcessorTypes.register();
 		
 		logInfo("Registering Resource Conditions...");
-		SpectrumResourceConditions.register(modEventBus);
+		SpectrumResourceConditions.register(pastelBus);
 		logInfo("Registering Structure WeightedPool Element Types...");
 		SpectrumStructurePoolElementTypes.register();
 		logInfo("Registering Event Listeners...");
-		SpectrumEventListeners.register();
+		SpectrumMiscEvents.register();
+		SpectrumEntityEvents.register();
+		SpectrumEquipmentEvents.register();
 		logInfo("Registering Tree Decorator Types...");
 		SpectrumTreeDecoratorTypes.register();
 		
@@ -259,7 +261,7 @@ public class SpectrumCommon {
 
 		logInfo("Common startup completed!");
 
-		new SpectrumClient(modEventBus, container);
+		new SpectrumClient(pastelBus, container);
 	}
 
 	private static void registerReloadListeners(AddReloadListenerEvent event) {

@@ -1,0 +1,27 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 200,
+  "experience": 0.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "secret": true,
+  "ingredients": [
+    "pastel:pure_malachite",
+    "pastel:pure_azurite",
+    "pastel:pure_bloodstone"
+  ],
+  "result": {
+    "id": "minecraft:raw_copper"
+  },
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [
+    "nothing"
+  ],
+  "finish_crafting_effect": "nothing",
+  "description": {
+    "type": "translatable",
+    "translate": "pastel.recipe.fusion_shrine.explanation.no_rgb"
+  },
+  "required_advancement": "pastel:hidden/collect_every_pure_cmy_resource"
+}

@@ -1,0 +1,51 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:resonant_lily"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.revive_hornslake_plant.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.revive_hornslake_plant.description"
+    }
+  },
+  "parent": "pastel:lategame/spectrum_lategame",
+  "criteria": {
+    "revived_sag_leaf": {
+      "trigger": "pastel:natures_staff_conversion",
+      "conditions": {
+        "source_block": "pastel:sag_leaf"
+      }
+    },
+    "revived_sag_bubble": {
+      "trigger": "pastel:natures_staff_conversion",
+      "conditions": {
+        "source_block": "pastel:sag_bubble"
+      }
+    },
+    "revived_small_sag_bubble": {
+      "trigger": "pastel:natures_staff_conversion",
+      "conditions": {
+        "source_block": "pastel:small_sag_bubble"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "revived_sag_leaf",
+      "revived_sag_bubble",
+      "revived_small_sag_bubble"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

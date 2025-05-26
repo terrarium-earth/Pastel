@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates_item/medium_bud",
+  "textures": {
+    "layer0": "pastel:block/medium_citrine_bud"
+  }
+}

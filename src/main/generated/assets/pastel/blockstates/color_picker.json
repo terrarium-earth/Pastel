@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "pastel:block/color_picker",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "pastel:block/color_picker",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "pastel:block/color_picker",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "pastel:block/color_picker"
+    }
+  }
+}

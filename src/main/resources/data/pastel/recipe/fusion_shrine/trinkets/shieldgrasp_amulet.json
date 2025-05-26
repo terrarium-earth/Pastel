@@ -1,0 +1,26 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_pendant",
+    {
+      "item": "pastel:raw_azurite",
+      "count": 8
+    },
+    {
+      "item": "pastel:blue_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:shieldgrasp_amulet"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/shieldgrasp_amulet",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

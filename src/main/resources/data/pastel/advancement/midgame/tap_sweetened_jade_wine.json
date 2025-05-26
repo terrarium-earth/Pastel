@@ -1,0 +1,36 @@
+{
+  "parent": "pastel:midgame/drink_jade_wine",
+  "display": {
+    "icon": {
+      "id": "pastel:jade_wine"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.tap_sweetened_jade_wine.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.tap_sweetened_jade_wine.description"
+    }
+  },
+  "criteria": {
+    "tapped_sweetened_jade_wine": {
+      "trigger": "pastel:titration_barrel_tapping",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:jade_wine",
+            "predicates": {
+              "pastel:sweetened": true
+            }
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/plant_jade_vines"
+      }
+    }
+  }
+}

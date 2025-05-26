@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "group": "pigment_compacting",
+  "time": 20,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "ingredients": [
+    "pastel:green_block"
+  ],
+  "result": {
+    "id": "pastel:green_pigment",
+    "count": 9
+  },
+  "required_advancement": "pastel:hidden/collect_pigment/green",
+  "disable_yield_upgrades": true
+}

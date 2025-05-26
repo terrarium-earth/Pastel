@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "collected_shimmerstone": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_shimmerstone"
+      }
+    },
+    "collected_pigment": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_pigment"
+      }
+    },
+    "collected_topaz": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_shards/topaz"
+      }
+    },
+    "collected_citrine": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_shards/citrine"
+      }
+    }
+  }
+}

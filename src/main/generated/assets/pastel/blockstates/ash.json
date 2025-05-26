@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "pastel:block/ash"
+      },
+      {
+        "model": "pastel:block/ash2"
+      },
+      {
+        "model": "pastel:block/ash3"
+      },
+      {
+        "model": "pastel:block/ash4"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "group": "deserts",
+  "base_ingredient": "pastel:peach_jam",
+  "use_up_base_ingredient": true,
+  "color": 16754073,
+  "ingredient1": "pastel:clotted_cream",
+  "ingredient2": "pastel:jade_vine_petals",
+  "ingredient3": "pastel:jadeite_petals",
+  "result": {
+    "id": "pastel:junket"
+  },
+  "required_advancement": "pastel:hidden/collect_cookbooks/imperial_cookbook"
+}

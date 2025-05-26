@@ -1,0 +1,19 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "botania:purple_petal"
+    }
+  ],
+  "ink_color": "pastel:purple",
+  "amount": 25,
+  "required_advancement": "pastel:hidden/collect_pigment/purple",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "botania"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "values": [
+    "pastel:polished_basalt_button",
+    "pastel:polished_basalt_pressure_plate",
+    "pastel:basalt_tiles",
+    "pastel:basalt_tile_stairs",
+    "pastel:basalt_tile_wall",
+    "pastel:basalt_tile_slab",
+    "pastel:cracked_basalt_bricks",
+    "pastel:cracked_basalt_tiles",
+    "pastel:smooth_basalt_slab",
+    "pastel:smooth_basalt_stairs",
+    "pastel:polished_basalt",
+    "pastel:polished_basalt_pillar",
+    "pastel:polished_basalt_crest",
+    "pastel:chiseled_polished_basalt",
+    "pastel:notched_polished_basalt",
+    "pastel:polished_basalt_slab",
+    "pastel:polished_basalt_stairs",
+    "pastel:basalt_bricks",
+    "pastel:basalt_brick_slab",
+    "pastel:basalt_brick_stairs",
+    "pastel:amethyst_chiseled_basalt",
+    "pastel:topaz_chiseled_basalt",
+    "pastel:citrine_chiseled_basalt",
+    "pastel:onyx_chiseled_basalt",
+    "pastel:moonstone_chiseled_basalt"
+  ]
+}

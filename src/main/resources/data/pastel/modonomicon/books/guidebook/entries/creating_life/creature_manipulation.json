@@ -1,0 +1,93 @@
+{
+  "name": "book.pastel.guidebook.creature_manipulation.name",
+  "icon": {
+    "item": "pastel:shulker_red_head"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/head_fusion/basic_recipes"
+  },
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:creating_life/mob_heads"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 6,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.creature_manipulation.name",
+      "text": "book.pastel.guidebook.creature_manipulation.page0.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/glow_squid",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/mule"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/mooshroom_brown",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/mooshroom_red"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/witch",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/skeleton_horse"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/zombie_horse",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/zombie_villager"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/zombified_piglin",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/zoglin"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/stray",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/variant_changing/fox_arctic"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/husk",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/variant_changing/fox_red"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/magma_cube",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/strider"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/piglin",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/wither_skeleton"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/phantom",
+      "recipe_id2": "pastel:spirit_instiller/head_fusion/ghast"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/variant_changing/axolotl_blue",
+      "text": "book.pastel.guidebook.creature_manipulation.axolotls.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/variant_changing/parrot_green",
+      "text": "book.pastel.guidebook.creature_manipulation.parrots.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:spirit_instiller/head_fusion/variant_changing/shulker_pink",
+      "text": "book.pastel.guidebook.creature_manipulation.shulkers.text"
+    }
+  ]
+}

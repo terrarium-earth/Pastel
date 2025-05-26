@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "compacting",
+  "time": 20,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:cyan": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 0.0,
+  "pattern": [
+    "BBB",
+    "BBB",
+    "BBB"
+  ],
+  "key": {
+    "B": "pastel:bedrock_dust"
+  },
+  "result": {
+    "id": "pastel:bedrock_dust_block",
+    "count": 1
+  },
+  "required_advancement": "pastel:midgame/break_decayed_bedrock",
+  "disable_yield_upgrades": true
+}

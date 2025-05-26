@@ -1,0 +1,69 @@
+{
+  "name": "item.pastel.take_off_belt",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/take_off_belt"
+  },
+  "icon": {
+    "item": "pastel:take_off_belt"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/trinkets/base_trinkets",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 11,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.take_off_belt.page0.text",
+      "title": "item.pastel.take_off_belt"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "container.pastel.rei.fusion_recipe",
+      "recipe_id": "pastel:fusion_shrine/trinkets/take_off_belt",
+      "text": "book.pastel.guidebook.take_off_belt.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/enchantments/vanilla_projectile"
+      },
+      "title": "enchantment.minecraft.power",
+      "item": {
+        "item": "pastel:take_off_belt"
+      },
+      "components": {
+        "enchantments": {
+          "minecraft:power": 5
+        }
+      },
+      "text": "book.pastel.guidebook.take_off_belt.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/enchantments/vanilla_quitoxic"
+      },
+      "title": "enchantment.minecraft.feather_falling",
+      "item": {
+        "item": "pastel:take_off_belt"
+      },
+      "components": {
+        "enchantments": {
+          "minecraft:feather_falling": 4
+        }
+      },
+      "text": "book.pastel.guidebook.take_off_belt.page3.text"
+    }
+  ]
+}

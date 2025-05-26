@@ -40,8 +40,8 @@ public class RevelationToast implements Toast {
 	
 	@Override
 	public Toast.Visibility render(GuiGraphics drawContext, ToastComponent manager, long startTime) {
-		Component title = Component.translatable("spectrum.toast.revelation.title");
-		Component text = Component.translatable("spectrum.toast.revelation.text");
+		Component title = Component.translatable("pastel.toast.revelation.title");
+		Component text = Component.translatable("pastel.toast.revelation.text");
 		
 		Minecraft client = manager.getMinecraft();
 		Font textRenderer = client.font;

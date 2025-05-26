@@ -1,0 +1,12 @@
+{
+  "type": "pastel:spirit_instiller",
+  "time": 800,
+  "experience": 4.0,
+  "ingredient1": "#minecraft:saplings",
+  "ingredient2": "pastel:spectral_shard",
+  "center_ingredient": "pastel:vegetal",
+  "result": {
+    "id": "pastel:ominous_sapling"
+  },
+  "required_advancement": "pastel:unlocks/blocks/ominous_sapling"
+}

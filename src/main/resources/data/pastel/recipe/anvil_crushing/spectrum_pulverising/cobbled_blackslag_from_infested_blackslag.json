@@ -1,0 +1,18 @@
+{
+  "type": "pastel:anvil_crushing",
+  "group": "cobbled_blackslag",
+  "ingredient": [
+    {
+      "item": "pastel:infested_blackslag"
+    }
+  ],
+  "crushedItemsPerPointOfDamage": 0.8,
+  "experience": 0,
+  "result": {
+    "id": "pastel:cobbled_blackslag",
+    "count": 1
+  },
+  "particleEffectIdentifier": "cloud",
+  "soundEventIdentifier": "block.deepslate.break",
+  "required_advancement": "pastel:hidden/collect_blackslag"
+}

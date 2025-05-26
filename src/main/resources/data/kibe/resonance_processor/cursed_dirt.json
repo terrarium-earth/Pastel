@@ -1,5 +1,5 @@
 {
-  "type": "spectrum:drop_self",
+  "type": "pastel:drop_self",
   "block": {
     "blocks": [
       "kibe:cursed_dirt"

@@ -1,0 +1,18 @@
+{
+  "type": "pastel:anvil_crushing",
+  "ingredient": [
+    {
+      "item": "pastel:medium_citrine_bud"
+    }
+  ],
+  "crushedItemsPerPointOfDamage": 0.6,
+  "experience": 0.4,
+  "result": {
+    "id": "pastel:citrine_powder",
+    "count": 6
+  },
+  "particleEffectIdentifier": "explosion",
+  "soundEventIdentifier": "pastel:block.medium_citrine_bud.break",
+  "group": "gemstone_crushing",
+  "required_advancement": "pastel:hidden/collect_shards/citrine"
+}

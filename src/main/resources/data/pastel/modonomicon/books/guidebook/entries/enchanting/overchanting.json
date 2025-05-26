@@ -1,0 +1,49 @@
+{
+  "name": "book.pastel.guidebook.overchanting.name",
+  "icon": "pastel:textures/gui/guidebook/icons/overenchanting_star.png",
+  "hide_while_locked": true,
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/unlock_overenchanting_with_enchanter"
+  },
+  "category": "pastel:enchanting",
+  "parents": [
+    {
+      "entry": "pastel:enchanting/enchanter",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": -1,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.overchanting.name",
+      "item": {
+        "item": "minecraft:enchanted_book",
+        "components": {
+          "stored_enchantments": {
+            "minecraft:fortune": 5
+          }
+        }
+      },
+      "text": "book.pastel.guidebook.overchanting.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.overchanting.page1.title",
+      "text": "book.pastel.guidebook.overchanting.page1.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.vanilla_enchantments.name",
+      "text": "book.pastel.guidebook.overchanting.page2.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.overchanting.page3.text"
+    }
+  ]
+}

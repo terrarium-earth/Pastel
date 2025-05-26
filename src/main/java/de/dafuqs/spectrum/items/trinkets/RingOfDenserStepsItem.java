@@ -19,8 +19,8 @@ public class RingOfDenserStepsItem extends GravityRingItem implements Gravitable
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.spectrum.ring_of_denser_steps.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.ring_of_denser_steps.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.ring_of_denser_steps.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.ring_of_denser_steps.tooltip2").withStyle(ChatFormatting.GRAY));
 		super.appendHoverText(stack, context, tooltip, type);
 	}
 	

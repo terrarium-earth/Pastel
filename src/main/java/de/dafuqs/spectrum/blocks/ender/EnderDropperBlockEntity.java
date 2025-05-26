@@ -37,9 +37,9 @@ public class EnderDropperBlockEntity extends DispenserBlockEntity implements Pla
 	@Override
 	protected Component getDefaultName() {
 		if (hasOwner()) {
-			return Component.translatable("block.spectrum.ender_dropper.owner", this.ownerName);
+			return Component.translatable("block.pastel.ender_dropper.owner", this.ownerName);
 		} else {
-			return Component.translatable("block.spectrum.ender_dropper");
+			return Component.translatable("block.pastel.ender_dropper");
 		}
 	}
 	

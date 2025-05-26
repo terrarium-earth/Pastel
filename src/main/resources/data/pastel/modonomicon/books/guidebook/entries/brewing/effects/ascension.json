@@ -1,0 +1,23 @@
+{
+  "name": "effect.pastel.ascension",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/status_effects/ascension"
+  },
+  "icon": "pastel:textures/mob_effect/ascension.png",
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 5,
+  "y": -1,
+  "pages": [
+    {
+      "type": "pastel:status_effect",
+      "title": "effect.pastel.ascension",
+      "status_effect_id": "pastel:ascension",
+      "text": "book.pastel.guidebook.ascension.page0.text"
+    }
+  ]
+}

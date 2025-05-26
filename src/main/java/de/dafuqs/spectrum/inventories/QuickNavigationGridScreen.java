@@ -27,8 +27,8 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
 	public static final int TEXT_COLOR = 0xEEEEEE;
 	public static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(SpectrumCommon.MOD_ID, "textures/gui/quick_navigation.png");
 	
-	protected static final Component CONTROLS_TEXT_1 = Component.translatable("gui.spectrum.quick_navigation.controls1");
-	protected static final Component CONTROLS_TEXT_2 = Component.translatable("gui.spectrum.quick_navigation.controls2");
+	protected static final Component CONTROLS_TEXT_1 = Component.translatable("gui.pastel.quick_navigation.controls1");
+	protected static final Component CONTROLS_TEXT_2 = Component.translatable("gui.pastel.quick_navigation.controls2");
 	
 	private static final List<Tuple<Integer, Integer>> SQUARE_OFFSETS = List.of(
 			new Tuple<>(-20, -80),

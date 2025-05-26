@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates_item/polearm",
+  "textures": {
+    "layer0": "pastel:item/glass_crest_workstaff_oversized"
+  }
+}

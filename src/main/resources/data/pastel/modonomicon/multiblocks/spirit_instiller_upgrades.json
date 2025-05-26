@@ -1,0 +1,115 @@
+{
+  "type": "modonomicon:dense",
+  "pattern": [
+    [
+      "________",
+      "________",
+      "__M_____",
+      "________",
+      "________",
+      "________",
+      "__M_____",
+      "________",
+      "________"
+    ],
+    [
+      "________",
+      "________",
+      "________",
+      "________",
+      "________",
+      "________",
+      "________",
+      "________",
+      "________"
+    ],
+    [
+      "______U_",
+      "K_______",
+      "__I_____",
+      "________",
+      "________",
+      "________",
+      "__I_____",
+      "K_______",
+      "______U_"
+    ],
+    [
+      "______G_",
+      "P_______",
+      "__C_____",
+      "_LLLLL__",
+      "_LSLLL__",
+      "_LLLLL__",
+      "__C_____",
+      "P_______",
+      "______G_"
+    ],
+    [
+      "______P_",
+      "PXXXX___",
+      "XXXXXX__",
+      "XXXXXXXL",
+      "XXXXXX0L",
+      "XXXXXXXL",
+      "XXXXXX__",
+      "PXXXX___",
+      "______P_"
+    ]
+  ],
+  "mapping": {
+    "S": {
+      "type": "modonomicon:block",
+      "block": "pastel:spirit_instiller"
+    },
+    "X": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt",
+      "tag": "#pastel:structure/bases"
+    },
+    "L": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt_slab",
+      "tag": "#pastel:structure/base_slabs"
+    },
+    "P": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt_pillar[axis=y]",
+      "tag": "#pastel:structure/pillars"
+    },
+    "C": {
+      "type": "modonomicon:tag",
+      "display": "pastel:chiseled_polished_basalt",
+      "tag": "#pastel:structure/chiseled"
+    },
+    "G": {
+      "type": "modonomicon:tag",
+      "display": "pastel:onyx_chiseled_basalt",
+      "tag": "#pastel:structure/midgame_runes"
+    },
+    "K": {
+      "type": "modonomicon:tag",
+      "display": "pastel:notched_polished_basalt",
+      "tag": "#pastel:structure/notched"
+    },
+    "I": {
+      "type": "modonomicon:tag",
+      "display": "pastel:item_bowl_basalt",
+      "tag": "#pastel:item_bowls"
+    },
+    "M": {
+      "type": "modonomicon:tag",
+      "display": "pastel:amethyst_chime",
+      "tag": "#pastel:gemstone_chimes"
+    },
+    "U": {
+      "type": "modonomicon:block",
+      "block": "pastel:upgrade_speed"
+    },
+    "0": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt",
+      "tag": "#pastel:structure/bases"
+    }
+  }
+}

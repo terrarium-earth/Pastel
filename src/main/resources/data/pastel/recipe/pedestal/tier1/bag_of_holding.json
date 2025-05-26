@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "time": 240,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 4,
+    "pastel:yellow": 0,
+    "pastel:cyan": 4,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "OOO",
+    "TET",
+    "OOO"
+  ],
+  "key": {
+    "O": "minecraft:obsidian",
+    "E": "minecraft:ender_eye",
+    "T": "pastel:radiating_ender"
+  },
+  "result": {
+    "id": "pastel:bag_of_holding",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/items/bag_of_holding"
+}

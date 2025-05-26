@@ -1,0 +1,36 @@
+{
+  "name": "book.pastel.guidebook.pastel_upgrades.decorative.name",
+  "icon": {
+    "item": "pastel:shimmerstone_gem"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/unlock_pastel_node_upgrading"
+  },
+  "category": "pastel:pastel_network",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 8,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.pastel_upgrades.decorative.name",
+      "text": "book.pastel.guidebook.pastel_upgrades.decorative.page0.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.shimmerstone_gem",
+      "item": {
+        "item": "pastel:shimmerstone_gem"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.decorative.shimmerstone_gem.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_shimmerstone"
+      }
+    }
+  ]
+}

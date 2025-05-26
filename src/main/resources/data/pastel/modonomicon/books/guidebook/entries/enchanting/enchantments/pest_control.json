@@ -1,0 +1,44 @@
+{
+  "name": "enchantment.pastel.pest_control",
+  "icon": {
+    "item": "minecraft:iron_pickaxe"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/enchantments/pest_control"
+  },
+  "flag": "pastel:enchantment_exists_spectrum_pest_control",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": -4,
+  "x": 3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.pest_control.page0.text",
+      "title": "enchantment.pastel.pest_control"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "minecraft:iron_pickaxe"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:pest_control": 1
+        }
+      },
+      "text": "book.pastel.guidebook.pest_control.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/pest_control"
+    }
+  ]
+}

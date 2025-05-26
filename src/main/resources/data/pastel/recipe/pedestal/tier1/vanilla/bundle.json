@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "time": 80,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:cyan": 4,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "S",
+    "L"
+  ],
+  "key": {
+    "S": "minecraft:string",
+    "L": "minecraft:leather"
+  },
+  "result": {
+    "id": "minecraft:bundle",
+    "count": 1
+  },
+  "required_advancement": "pastel:hidden/collect_shards/topaz"
+}

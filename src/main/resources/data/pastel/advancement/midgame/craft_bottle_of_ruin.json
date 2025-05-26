@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:midgame/collect_midnight_chip",
+  "display": {
+    "icon": {
+      "id": "pastel:bottle_of_ruin"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_bottle_of_ruin.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_bottle_of_ruin.description"
+    }
+  },
+  "criteria": {
+    "craft": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "pastel:bottle_of_ruin"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_midnight_chip"
+      }
+    }
+  }
+}

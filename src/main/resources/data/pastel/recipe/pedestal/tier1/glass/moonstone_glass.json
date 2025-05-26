@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "gemstone_glass",
+  "time": 20,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 4,
+    "pastel:black": 0
+  },
+  "experience": 1,
+  "pattern": [
+    "GPG",
+    "PPP",
+    "GPG"
+  ],
+  "key": {
+    "P": "pastel:moonstone_shard",
+    "G": "minecraft:glass"
+  },
+  "result": {
+    "id": "pastel:moonstone_glass",
+    "count": 8
+  },
+  "required_advancement": "pastel:lategame/collect_moonstone"
+}

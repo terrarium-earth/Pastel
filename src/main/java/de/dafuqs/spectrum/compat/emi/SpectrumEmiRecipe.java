@@ -16,8 +16,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class SpectrumEmiRecipe implements EmiRecipe {
-	public static final Component HIDDEN_LINE_1 = Component.translatable("container.spectrum.rei.pedestal_crafting.recipe_not_unlocked_line_1");
-	public static final Component HIDDEN_LINE_2 = Component.translatable("container.spectrum.rei.pedestal_crafting.recipe_not_unlocked_line_2");
+	public static final Component HIDDEN_LINE_1 = Component.translatable("container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_1");
+	public static final Component HIDDEN_LINE_2 = Component.translatable("container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_2");
 	public final EmiRecipeCategory category;
 	public final ResourceLocation recipeTypeUnlockIdentifier, recipeIdentifier;
 	public final int width, height;
@@ -47,18 +47,18 @@ public abstract class SpectrumEmiRecipe implements EmiRecipe {
 	
 	protected static Component getCraftingTimeText(int time) {
 		if (time == 20) {
-			return Component.translatable("container.spectrum.rei.crafting_time_one_second", 1);
+			return Component.translatable("container.pastel.rei.crafting_time_one_second", 1);
 		} else {
-			return Component.translatable("container.spectrum.rei.crafting_time", (time / 20));
+			return Component.translatable("container.pastel.rei.crafting_time", (time / 20));
 		}
 	}
 	
 	protected static Component getCraftingTimeText(int time, float experience) {
 		// special handling for "1 second". Looks nicer
 		if (time == 20) {
-			return Component.translatable("container.spectrum.rei.crafting_time_one_second_and_xp", 1, experience);
+			return Component.translatable("container.pastel.rei.crafting_time_one_second_and_xp", 1, experience);
 		} else {
-			return Component.translatable("container.spectrum.rei.crafting_time_and_xp", (time / 20), experience);
+			return Component.translatable("container.pastel.rei.crafting_time_and_xp", (time / 20), experience);
 		}
 	}
 	

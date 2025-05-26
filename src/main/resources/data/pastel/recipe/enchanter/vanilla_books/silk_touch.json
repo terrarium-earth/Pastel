@@ -1,0 +1,52 @@
+{
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "pastel:raw_azurite"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "pastel:raw_azurite"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "minecraft:silk_touch": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_silk_touch",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:silk_touch"
+      ]
+    }
+  ]
+}

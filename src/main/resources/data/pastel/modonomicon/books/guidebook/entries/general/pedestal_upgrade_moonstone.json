@@ -1,0 +1,47 @@
+{
+  "name": "book.pastel.guidebook.pedestal_upgrade_moonstone.name",
+  "icon": {
+    "item": "pastel:pedestal_moonstone"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_moonstone"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/moonstone_shards"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 9,
+  "turnin": "pastel:hidden/build_any_complex_structure",
+  "pages": [
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.pedestal_upgrade_moonstone.name",
+      "recipe_id": "pastel:pedestal/tier3/pedestal_moonstone",
+      "text": "book.pastel.guidebook.pedestal_upgrade_moonstone.page0.text"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_name": "multiblock.pastel.pedestal_complex",
+      "multiblock_id": "pastel:pedestal_complex_without_moonstone",
+      "show_visualize_button": true,
+      "text": "book.pastel.guidebook.pedestal_upgrade_moonstone.dimensions"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.checklist_complete",
+      "text": "book.pastel.guidebook.pedestal_upgrade_moonstone.page2.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.checklist_upgrade",
+      "text": "book.pastel.guidebook.pedestal_upgrade_moonstone.page3.text"
+    }
+  ]
+}

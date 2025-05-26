@@ -201,7 +201,7 @@ public class Support {
 			case "minecraft:end" -> {
 				return "End";
 			}
-			case "spectrum:deeper_down" -> {
+			case "pastel:deeper_down" -> {
 				return "Deeper Down";
 			}
 			default -> {

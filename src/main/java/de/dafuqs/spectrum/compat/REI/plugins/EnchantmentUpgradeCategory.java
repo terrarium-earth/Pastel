@@ -32,7 +32,7 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.enchantment_upgrading.title");
+		return Component.translatable("container.pastel.rei.enchantment_upgrading.title");
 	}
 	
 	@Override
@@ -42,7 +42,7 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 	
 	@Override
 	public Component getDescriptionText(@NotNull EnchantmentUpgradeDisplay display) {
-		return Component.translatable("container.spectrum.rei.enchantment_upgrade.required_item_count", 0);
+		return Component.translatable("container.pastel.rei.enchantment_upgrade.required_item_count", 0);
 	}
 	
 	@Override

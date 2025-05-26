@@ -1,0 +1,48 @@
+{
+  "name": "item.pastel.myceylon",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_myceylon"
+  },
+  "icon": {
+    "item": "pastel:myceylon"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "item.pastel.myceylon",
+      "text": "book.pastel.guidebook.myceylon.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/myceylon_pastries"
+      },
+      "recipe_id": "pastel:pedestal/tier1/food/myceylon_pumpkin_pie"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/myceylon_pastries"
+      },
+      "recipe_id": "pastel:pedestal/tier1/food/myceylon_apple_pie"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/myceylon_pastries"
+      },
+      "recipe_id": "pastel:pedestal/tier1/food/myceylon_cookie"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "name": "book.pastel.guidebook.potion_workshop_crafting",
+  "icon": {
+    "item": "minecraft:crafting_table"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+  },
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:brewing/potion_workshop",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": -1,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.potion_workshop_crafting.page0.text",
+      "title": "book.pastel.guidebook.potion_workshop_crafting"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "book.pastel.guidebook.potion_workshop_crafting.page1.title",
+      "recipe_id": "pastel:potion_workshop_crafting/water_bucket"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "book.pastel.guidebook.potion_workshop_crafting.page2.title",
+      "recipe_id": "pastel:potion_workshop_crafting/lava_bucket",
+      "text": "book.pastel.guidebook.potion_workshop_crafting.page2.text"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "block.pastel.goo",
+      "recipe_id": "pastel:potion_workshop_crafting/goo_bucket"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "block.pastel.liquid_crystal",
+      "recipe_id": "pastel:potion_workshop_crafting/liquid_crystal_bucket"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "block.pastel.midnight_solution",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/midnight_solution"
+      },
+      "recipe_id": "pastel:potion_workshop_crafting/midnight_solution_bucket"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "block.pastel.dragonrot",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/dragonrot_bucket"
+      },
+      "recipe_id": "pastel:potion_workshop_crafting/dragonrot_bucket"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "book.pastel.guidebook.potion_workshop_crafting.page7.title",
+      "recipe_id": "pastel:potion_workshop_crafting/honey_bottle"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "book.pastel.guidebook.potion_workshop_crafting.page8.title",
+      "recipe_id": "pastel:potion_workshop_crafting/powder_snow_bucket"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "book.pastel.guidebook.potion_workshop_crafting.page9.title",
+      "recipe_id": "pastel:potion_workshop_crafting/experience_bottle",
+      "text": "book.pastel.guidebook.potion_workshop_crafting.page9.text"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "recipe_id": "pastel:potion_workshop_crafting/dragon_breath",
+      "text": "book.pastel.guidebook.potion_workshop_crafting.page10.text"
+    }
+  ]
+}

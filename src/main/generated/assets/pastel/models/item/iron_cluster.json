@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates_item/cluster",
+  "textures": {
+    "layer0": "pastel:block/iron_cluster"
+  }
+}

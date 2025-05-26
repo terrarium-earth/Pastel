@@ -1,0 +1,38 @@
+{
+  "name": "book.pastel.guidebook.item_bowl.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/item_bowl"
+  },
+  "icon": {
+    "item": "pastel:item_bowl_basalt"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/block_variants"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 0,
+  "pages": [
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.item_bowl.name",
+      "items": [
+        "pastel:item_bowl_basalt",
+        "pastel:item_bowl_calcite"
+      ],
+      "text": "book.pastel.guidebook.item_bowl.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/item_bowl_calcite",
+      "text": "book.pastel.guidebook.item_bowl.page1.text"
+    }
+  ]
+}

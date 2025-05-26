@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "conversion=default": {
+      "model": "pastel:block/ruin_default"
+    },
+    "conversion=none": {
+      "model": "pastel:block/ruin_none"
+    },
+    "conversion=special": {
+      "model": "pastel:block/ruin_default"
+    }
+  }
+}

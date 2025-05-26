@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:paintbrush"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_using_pedestal.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_using_pedestal.description"
+    }
+  },
+  "parent": "pastel:place_pedestal",
+  "criteria": {
+    "craft": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {}
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:place_pedestal"
+      }
+    }
+  }
+}

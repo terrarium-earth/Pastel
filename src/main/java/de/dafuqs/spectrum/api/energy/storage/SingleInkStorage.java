@@ -134,7 +134,7 @@ public class SingleInkStorage implements InkStorage {
 	
 	@Override
 	public void addTooltip(List<Component> tooltip) {
-		tooltip.add(Component.translatable("item.spectrum.ink_storage.stores_up_to_ink_per_type", getShortenedNumberString(this.maxEnergy)));
+		tooltip.add(Component.translatable("item.pastel.ink_storage.stores_up_to_ink_per_type", getShortenedNumberString(this.maxEnergy)));
 		if (this.storedEnergy > 0) {
 			InkStorage.addInkStoreBulletTooltip(tooltip, this.storedColor, this.storedEnergy);
 		}

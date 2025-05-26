@@ -1,8 +1,8 @@
 {
   "values": [
-    "#spectrum:colored_saplings",
+    "#pastel:colored_saplings",
 
-    "spectrum:ominous_sapling",
-    "spectrum:weeping_gala_sprig"
+    "pastel:ominous_sapling",
+    "pastel:weeping_gala_sprig"
   ]
 }

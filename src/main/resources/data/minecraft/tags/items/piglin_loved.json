@@ -1,17 +1,17 @@
 {
   "replace": false,
   "values": [
-    "spectrum:axolotl_gold_head",
-    "spectrum:gilded_book",
-    "spectrum:small_gold_bud",
-    "spectrum:large_gold_bud",
-    "spectrum:gold_cluster",
-    "spectrum:pure_gold",
-    "spectrum:pure_gold_block",
-    "spectrum:enchanted_golden_carrot",
-    "spectrum:glistering_melon",
-    "spectrum:glistering_melon_seeds",
-    "spectrum:glistering_shooting_star",
-    "spectrum:golden_bristle_tea"
+    "pastel:axolotl_gold_head",
+    "pastel:gilded_book",
+    "pastel:small_gold_bud",
+    "pastel:large_gold_bud",
+    "pastel:gold_cluster",
+    "pastel:pure_gold",
+    "pastel:pure_gold_block",
+    "pastel:enchanted_golden_carrot",
+    "pastel:glistering_melon",
+    "pastel:glistering_melon_seeds",
+    "pastel:glistering_shooting_star",
+    "pastel:golden_bristle_tea"
   ]
 }

@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.artisans_atlas",
+  "icon": {
+    "item": "pastel:artisans_atlas"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/artisans_atlas"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.artisans_atlas.page0.text",
+      "title": "item.pastel.artisans_atlas"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/artisans_atlas",
+      "text": "book.pastel.guidebook.artisans_atlas.page1.text"
+    }
+  ]
+}

@@ -83,7 +83,7 @@ public class RepriseItem extends BeverageItem {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.reprise.tooltip.teleport", getTeleportRange(stack)).withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.reprise.tooltip.teleport", getTeleportRange(stack)).withStyle(ChatFormatting.GRAY));
 	}
 	
 }

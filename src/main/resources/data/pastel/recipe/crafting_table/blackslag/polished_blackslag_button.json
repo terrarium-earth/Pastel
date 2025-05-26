@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "pastel:polished_blackslag"
+    }
+  ],
+  "result": {
+    "id": "pastel:polished_blackslag_button"
+  }
+}

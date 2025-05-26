@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "up=false": {
+      "model": "pastel:block/deeper_down_portal"
+    },
+    "up=true": {
+      "model": "pastel:block/deeper_down_portal_up"
+    }
+  }
+}

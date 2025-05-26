@@ -1,0 +1,8 @@
+{
+  "parent": "pastel:templates/multilayer_light",
+  "textures": {
+    "inside": "pastel:block/ebony_noxcap_gills",
+    "side": "pastel:block/ebony_noxwood_light",
+    "top": "pastel:block/ebony_noxwood_light_top"
+  }
+}

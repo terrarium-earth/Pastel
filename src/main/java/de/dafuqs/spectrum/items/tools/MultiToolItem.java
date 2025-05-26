@@ -50,9 +50,9 @@ public class MultiToolItem extends DiggerItem {
 		super.appendHoverText(stack, context, tooltip, type);
 		
 		if (canTill(stack)) {
-			tooltip.add(Component.translatable("item.spectrum.workstaff.tooltip.right_click_actions").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.right_click_actions").withStyle(ChatFormatting.GRAY));
 		} else {
-			tooltip.add(Component.translatable("item.spectrum.workstaff.tooltip.right_click_actions_disabled").withStyle(ChatFormatting.DARK_RED));
+			tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.right_click_actions_disabled").withStyle(ChatFormatting.DARK_RED));
 		}
 	}
 	

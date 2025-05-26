@@ -1,0 +1,43 @@
+{
+  "parent": "pastel:craft_using_pedestal",
+  "display": {
+    "icon": {
+      "id": "pastel:wet_lava_sponge"
+    },
+    "title": {
+      "translate": "advancements.pastel.gift_wet_lava_sponge.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.gift_wet_lava_sponge.description"
+    },
+    "hidden": true
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:thrown_item_picked_up_by_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:inverted",
+            "term": {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {}
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "pastel:wet_lava_sponge"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_using_pedestal"
+      }
+    }
+  }
+}

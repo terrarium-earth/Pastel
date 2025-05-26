@@ -496,7 +496,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 	
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("block.spectrum.potion_workshop");
+		return Component.translatable("block.pastel.potion_workshop");
 	}
 	
 	@Nullable

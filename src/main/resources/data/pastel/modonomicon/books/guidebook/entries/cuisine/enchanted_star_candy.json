@@ -1,0 +1,31 @@
+{
+  "name": "item.pastel.enchanted_star_candy",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_enchanted_star_candy"
+  },
+  "icon": {
+    "item": "pastel:enchanted_star_candy"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/star_candy"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 10,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.enchanted_star_candy",
+      "item": {
+        "item": "pastel:enchanted_star_candy"
+      },
+      "text": "book.pastel.guidebook.star_candy.page2.text"
+    }
+  ]
+}

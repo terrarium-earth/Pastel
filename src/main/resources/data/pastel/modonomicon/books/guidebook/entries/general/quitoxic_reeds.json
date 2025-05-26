@@ -1,0 +1,36 @@
+{
+  "name": "block.pastel.quitoxic_reeds",
+  "icon": {
+    "item": "pastel:quitoxic_reeds"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_quitoxic_reeds"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -2,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "block.pastel.quitoxic_reeds",
+      "images": [
+        "pastel:textures/gui/guidebook/quitoxic_reed.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.quitoxic_reeds.page0.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "anchor": "quitoxic_powder",
+      "title": "item.pastel.quitoxic_powder",
+      "recipe_id": "pastel:anvil_crushing/quitoxic_powder",
+      "text": "book.pastel.guidebook.quitoxic_reeds.page1.text"
+    }
+  ]
+}

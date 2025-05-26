@@ -1,0 +1,121 @@
+{
+  "name": "book.pastel.guidebook.block_variants.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_any_basic_shard"
+  },
+  "icon": {
+    "item": "pastel:chiseled_polished_basalt"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 5,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.block_variants.page0.text",
+      "title": "book.pastel.guidebook.block_variants.name"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.block_variants.page1.title",
+      "items": [
+        "pastel:smooth_basalt_slab",
+        "pastel:calcite_slab",
+        "pastel:smooth_basalt_stairs",
+        "pastel:calcite_stairs",
+        "pastel:smooth_basalt_wall",
+        "pastel:calcite_wall"
+      ],
+      "text": "book.pastel.guidebook.block_variants.page1.text"
+    },
+    {
+      "type": "modonomicon:smelting_recipe",
+      "anchor": "polishing",
+      "title1": "book.pastel.guidebook.polishing",
+      "recipe_id_1": "pastel:smelting/smooth_basalt_to_polished_basalt",
+      "recipe_id_2": "pastel:smelting/calcite_to_polished_calcite",
+      "text": "book.pastel.guidebook.block_variants.page2.text"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.block_variants.page3.title",
+      "items": [
+        "pastel:polished_basalt_slab",
+        "pastel:polished_calcite_slab",
+        "pastel:polished_basalt_stairs",
+        "pastel:polished_calcite_stairs",
+        "pastel:polished_basalt_pillar",
+        "pastel:polished_calcite_pillar",
+        "pastel:polished_basalt_crest",
+        "pastel:polished_calcite_crest",
+        "pastel:chiseled_polished_basalt",
+        "pastel:chiseled_polished_calcite",
+        "pastel:notched_polished_basalt",
+        "pastel:notched_polished_calcite",
+        "pastel:polished_basalt_wall",
+        "pastel:polished_calcite_wall",
+        "pastel:basalt_bricks",
+        "pastel:calcite_bricks",
+        "pastel:cracked_basalt_bricks",
+        "pastel:cracked_calcite_bricks",
+        "pastel:basalt_brick_slab",
+        "pastel:calcite_brick_slab",
+        "pastel:basalt_brick_stairs",
+        "pastel:calcite_brick_stairs",
+        "pastel:basalt_brick_wall",
+        "pastel:calcite_brick_wall",
+        "pastel:polished_calcite_button",
+        "pastel:polished_basalt_button",
+        "pastel:polished_calcite_pressure_plate",
+        "pastel:polished_basalt_pressure_plate",
+        "pastel:basalt_tiles",
+        "pastel:calcite_tiles",
+        "pastel:cracked_basalt_tiles",
+        "pastel:cracked_calcite_tiles",
+        "pastel:calcite_tile_stairs",
+        "pastel:basalt_tile_stairs",
+        "pastel:calcite_tile_wall",
+        "pastel:basalt_tile_wall",
+        "pastel:calcite_tile_slab",
+        "pastel:basalt_tile_slab",
+        "pastel:planed_calcite",
+        "pastel:planed_calcite_slab",
+        "pastel:planed_calcite_stairs",
+        "pastel:planed_calcite_wall",
+        "pastel:planed_basalt",
+        "pastel:planed_basalt_slab",
+        "pastel:planed_basalt_stairs",
+        "pastel:planed_basalt_wall"
+      ]
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "recipe_id_1": "pastel:crafting_table/basalt/polished_basalt_pillar",
+      "recipe_id_2": "pastel:crafting_table/calcite/polished_calcite_crest"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "anchor": "chiseled_and_notched",
+      "recipe_id_1": "pastel:crafting_table/basalt/chiseled_polished_basalt",
+      "recipe_id_2": "pastel:crafting_table/calcite/notched_polished_calcite"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "book.pastel.guidebook.cracking",
+      "recipe_id": "pastel:anvil_crushing/spectrum_pulverising/cracked_calcite_bricks",
+      "text": "book.pastel.guidebook.block_variants.page6.text"
+    },
+    {
+      "type": "modonomicon:smelting_recipe",
+      "title1": "book.pastel.guidebook.smelting_back",
+      "recipe_id_1": "pastel:smelting/polished_basalt_unsmelting",
+      "recipe_id_2": "pastel:smelting/polished_calcite_unsmelting",
+      "text": "book.pastel.guidebook.turn_back_to_polished"
+    }
+  ]
+}

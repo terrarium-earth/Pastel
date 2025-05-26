@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:fish_in_lava",
+  "display": {
+    "icon": {
+      "id": "pastel:molten_rod"
+    },
+    "title": {
+      "translate": "advancements.pastel.hook_entity_with_molten_rod.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.hook_entity_with_molten_rod.description"
+    }
+  },
+  "criteria": {
+    "hooked_entity_with_molten_rod": {
+      "trigger": "pastel:fishing_rod_hooked",
+      "conditions": {
+        "rod": {
+          "items": [
+            "pastel:molten_rod"
+          ]
+        },
+        "hooked_entity": {}
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_pigment"
+      }
+    }
+  }
+}

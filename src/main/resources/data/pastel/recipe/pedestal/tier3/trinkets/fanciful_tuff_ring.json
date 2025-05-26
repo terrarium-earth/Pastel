@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "time": 200,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 0.5,
+  "pattern": [
+    " L ",
+    "L L",
+    " L "
+  ],
+  "key": {
+    "L": "minecraft:tuff"
+  },
+  "result": {
+    "id": "pastel:fanciful_tuff_ring",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/trinkets/fanciful_tuff_ring"
+}

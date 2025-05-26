@@ -1,0 +1,20 @@
+{
+  "criteria": {
+    "collected_stratine": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_stratine"
+      }
+    },
+    "has_stratine_gem": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:stratine_gem"
+          }
+        ]
+      }
+    }
+  }
+}

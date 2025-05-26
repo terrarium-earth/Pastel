@@ -1,0 +1,54 @@
+{
+  "parent": "pastel:pastel",
+  "display": {
+    "icon": {
+      "id": "pastel:dragonbone_chunk"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.break_cracked_dragonbone.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.break_cracked_dragonbone.description"
+    }
+  },
+  "criteria": {
+    "broken_cracked_dragonbone": {
+      "trigger": "pastel:block_broken",
+      "conditions": {
+        "block": {
+          "blocks": "pastel:cracked_dragonbone"
+        }
+      }
+    },
+    "has_dragonbone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pastel:dragonbone",
+              "pastel:cracked_dragonbone",
+              "pastel:dragonbone_chunk"
+            ]
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:pastel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "broken_cracked_dragonbone",
+      "has_dragonbone"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

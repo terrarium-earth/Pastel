@@ -1,0 +1,44 @@
+{
+  "name": "enchantment.pastel.sniping",
+  "icon": {
+    "item": "minecraft:crossbow"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/enchantments/sniping"
+  },
+  "flag": "pastel:enchantment_exists_spectrum_sniping",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": 3,
+  "x": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.sniping.page0.text",
+      "title": "enchantment.pastel.sniping"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "minecraft:crossbow"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:sniping": 2
+        }
+      },
+      "text": "book.pastel.guidebook.sniping.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/sniping"
+    }
+  ]
+}

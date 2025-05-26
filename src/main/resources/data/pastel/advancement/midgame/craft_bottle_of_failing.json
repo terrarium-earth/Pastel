@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:midgame/collect_stratine",
+  "display": {
+    "icon": {
+      "id": "pastel:bottle_of_failing"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_bottle_of_failing.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_bottle_of_failing.description"
+    }
+  },
+  "criteria": {
+    "craft": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "pastel:bottle_of_failing"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_stratine"
+      }
+    }
+  }
+}

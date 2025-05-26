@@ -1,0 +1,33 @@
+{
+  "name": "block.pastel.redstone_calculator",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/redstone/redstone_calculator"
+  },
+  "icon": {
+    "item": "pastel:redstone_calculator"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 5,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:redstone_calculator"
+      },
+      "text": "book.pastel.guidebook.redstone_calculator.page0.text",
+      "title": "block.pastel.redstone_calculator"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/redstone_calculator",
+      "text": "book.pastel.guidebook.redstone_calculator.page1.text"
+    }
+  ]
+}

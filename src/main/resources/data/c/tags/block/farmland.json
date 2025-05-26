@@ -1,7 +1,7 @@
 {
   "values": [
-    "spectrum:sacred_soil",
-    "spectrum:tilled_shale_clay",
-    "spectrum:tilled_slush"
+    "pastel:sacred_soil",
+    "pastel:tilled_shale_clay",
+    "pastel:tilled_slush"
   ]
 }

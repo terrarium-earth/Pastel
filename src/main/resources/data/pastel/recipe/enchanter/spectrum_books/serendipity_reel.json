@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 1000,
+  "required_experience": 1000,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:bismuth_crystal"
+    },
+    {
+      "item": "pastel:mermaids_gem"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:bismuth_crystal"
+    },
+    {
+      "item": "pastel:mermaids_gem"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:serendipity_reel": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/serendipity_reel",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:serendipity_reel"
+      ]
+    }
+  ]
+}

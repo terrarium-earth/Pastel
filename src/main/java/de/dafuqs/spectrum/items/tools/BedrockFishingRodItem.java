@@ -46,7 +46,7 @@ public class BedrockFishingRodItem extends SpectrumFishingRodItem implements Pre
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.bedrock_fishing_rod.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.bedrock_fishing_rod.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 	
 }

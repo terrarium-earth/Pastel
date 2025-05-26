@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "pastel:pink_pigment"
+    }
+  ],
+  "ink_color": "pastel:pink",
+  "amount": 100,
+  "required_advancement": "pastel:hidden/collect_pigment/pink"
+}

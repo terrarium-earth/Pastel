@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "time": 40,
+  "tier": "simple",
+  "cyan": 8,
+  "magenta": 2,
+  "yellow": 0,
+  "black": 0,
+  "white": 0,
+  "experience": 2.0,
+  "pattern": [
+    "PCP",
+    "CAC",
+    "PCP"
+  ],
+  "key": {
+    "A": "minecraft:phantom_membrane",
+    "C": "farmersdelight:canvas",
+    "P": "pastel:purple_pigment"
+  },
+  "result": {
+    "id": "pastel:enchantment_canvas"
+  },
+  "required_advancement": "pastel:unlocks/items/enchantment_canvas",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "type": "modonomicon:dense",
+  "pattern": [
+    [
+      "C_________C",
+      "___________",
+      "___________",
+      "___________",
+      "___________",
+      "___________",
+      "___________",
+      "___________",
+      "___________",
+      "___________",
+      "C_________C"
+    ],
+    [
+      "Q_________Q",
+      "___________",
+      "__S_____S__",
+      "___________",
+      "___________",
+      "___________",
+      "___________",
+      "___________",
+      "__S_____S__",
+      "___________",
+      "Q_________Q"
+    ],
+    [
+      "K_________K",
+      "___________",
+      "__Q_____Q__",
+      "___________",
+      "___________",
+      "_____P_____",
+      "___________",
+      "___________",
+      "__Q_____Q__",
+      "___________",
+      "K_________K"
+    ],
+    [
+      "___________",
+      "___XXXXX___",
+      "__XXXXXXX__",
+      "_XXXXXXXXX_",
+      "_XXXXXXXXX_",
+      "_XXXX0XXXX_",
+      "_XXXXXXXXX_",
+      "_XXXXXXXXX_",
+      "__XXXXXXX__",
+      "___XXXXX___",
+      "___________"
+    ]
+  ],
+  "mapping": {
+    "X": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt",
+      "tag": "#pastel:structure/bases"
+    },
+    "Q": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt_pillar[axis=y]",
+      "tag": "#pastel:structure/pillars"
+    },
+    "S": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_amethyst_block",
+      "tag": "#pastel:structure/gemstones"
+    },
+    "C": {
+      "type": "modonomicon:tag",
+      "display": "pastel:chiseled_polished_basalt",
+      "tag": "#pastel:structure/chiseled"
+    },
+    "K": {
+      "type": "modonomicon:tag",
+      "display": "pastel:notched_polished_basalt",
+      "tag": "#pastel:structure/notched"
+    },
+    "P": {
+      "type": "modonomicon:tag",
+      "display": "pastel:pedestal_all_basic",
+      "tag": "#pastel:pedestals"
+    },
+    "0": {
+      "type": "modonomicon:any"
+    }
+  }
+}

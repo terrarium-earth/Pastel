@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "pastel:item/enchantment_canvas"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "bound": 1
+      },
+      "model": "pastel:item/enchantment_canvas_bound"
+    }
+  ]
+}

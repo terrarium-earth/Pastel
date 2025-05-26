@@ -12,7 +12,7 @@
         {
           "type": "minecraft:item",
           "weight": 300,
-          "name": "spectrum:eraser_spawn_egg"
+          "name": "pastel:eraser_spawn_egg"
         },
         {
           "type": "minecraft:item",
@@ -22,12 +22,12 @@
         {
           "type": "minecraft:item",
           "weight": 19,
-          "name": "spectrum:onyx_powder"
+          "name": "pastel:onyx_powder"
         },
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "spectrum:midnight_chip"
+          "name": "pastel:midnight_chip"
         }
       ]
     }

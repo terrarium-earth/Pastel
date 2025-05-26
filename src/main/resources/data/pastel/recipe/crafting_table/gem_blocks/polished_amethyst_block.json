@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": [
+      {
+        "item": "minecraft:amethyst_shard"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:polished_amethyst_block",
+    "count": 1
+  }
+}

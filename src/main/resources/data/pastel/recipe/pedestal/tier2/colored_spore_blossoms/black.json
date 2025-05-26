@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "colored_spore_blossoms",
+  "time": 80,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 6
+  },
+  "experience": 0.5,
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "key": {
+    "P": "pastel:black_pigment",
+    "S": "minecraft:spore_blossom"
+  },
+  "result": {
+    "id": "pastel:black_spore_blossom",
+    "count": 1
+  },
+  "required_advancement": "pastel:hidden/collect_pigment/black"
+}

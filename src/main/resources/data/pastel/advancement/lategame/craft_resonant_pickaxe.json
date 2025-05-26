@@ -1,0 +1,37 @@
+{
+  "parent": "pastel:lategame/collect_paltaeria",
+  "display": {
+    "icon": {
+      "id": "pastel:resonant_pickaxe",
+      "components": {
+        "minecraft:enchantments": {
+          "levels": {
+            "pastel:resonance": 1
+          }
+        }
+      }
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_resonant_pickaxe.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_resonant_pickaxe.description"
+    }
+  },
+  "criteria": {
+    "craft_pedestal": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "pastel:resonant_pickaxe"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
+      }
+    }
+  }
+}

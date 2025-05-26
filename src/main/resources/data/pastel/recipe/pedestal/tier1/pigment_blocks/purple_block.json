@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "pigment_compacting",
+  "time": 20,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 0.0,
+  "pattern": [
+    "GGG",
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": "pastel:purple_pigment"
+  },
+  "result": {
+    "id": "pastel:purple_block",
+    "count": 1
+  },
+  "required_advancement": "pastel:hidden/collect_pigment/purple",
+  "disable_yield_upgrades": true
+}

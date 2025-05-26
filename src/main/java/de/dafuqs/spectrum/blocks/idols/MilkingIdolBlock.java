@@ -126,8 +126,8 @@ public class MilkingIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.milking_idol.tooltip", this.milkingRange));
-		tooltip.add(Component.translatable("block.spectrum.milking_idol.tooltip2"));
+		tooltip.add(Component.translatable("block.pastel.milking_idol.tooltip", this.milkingRange));
+		tooltip.add(Component.translatable("block.pastel.milking_idol.tooltip2"));
 	}
 	
 }

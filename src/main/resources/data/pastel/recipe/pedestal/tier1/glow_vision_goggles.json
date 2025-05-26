@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "time": 200,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 2,
+    "pastel:yellow": 2,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "R R",
+    "GRG"
+  ],
+  "key": {
+    "G": "minecraft:glow_ink_sac",
+    "R": "minecraft:rabbit_hide"
+  },
+  "result": {
+    "id": "pastel:glow_vision_goggles",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/trinkets/glow_vision_goggles"
+}

@@ -1,8 +1,8 @@
 {
   "values": [
-    "#spectrum:stripped_colored_logs",
-    "#spectrum:stripped_noxcap_stems",
+    "#pastel:stripped_colored_logs",
+    "#pastel:stripped_noxcap_stems",
 
-    "spectrum:stripped_weeping_gala_log"
+    "pastel:stripped_weeping_gala_log"
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "name": "book.pastel.guidebook.tuning_stamp.name",
+  "icon": {
+    "item": "pastel:tuning_stamp"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/pastel_network"
+  },
+  "category": "pastel:pastel_network",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 5,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.tuning_stamp.name",
+      "text": "book.pastel.guidebook.tuning_stamp.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/pastel_network/tuning_stamp"
+    }
+  ]
+}

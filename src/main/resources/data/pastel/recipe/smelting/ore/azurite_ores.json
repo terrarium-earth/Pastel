@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "tag": "pastel:azurite_ores"
+    }
+  ],
+  "result": {
+    "id": "pastel:raw_azurite"
+  },
+  "experience": 2,
+  "cookingtime": 200
+}

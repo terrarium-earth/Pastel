@@ -1,14 +1,14 @@
 {
   "values": [
-    "spectrum:stuck_storm_stone",
-    "spectrum:quitoxic_reeds",
-    "spectrum:mermaids_brush",
-    "spectrum:bristle_sprouts",
-    "spectrum:wand_light",
+    "pastel:stuck_storm_stone",
+    "pastel:quitoxic_reeds",
+    "pastel:mermaids_brush",
+    "pastel:bristle_sprouts",
+    "pastel:wand_light",
 
-    "spectrum:liquid_crystal",
-    "spectrum:goo",
-    "spectrum:dragonrot",
-    "spectrum:midnight_solution"
+    "pastel:liquid_crystal",
+    "pastel:goo",
+    "pastel:dragonrot",
+    "pastel:midnight_solution"
   ]
 }

@@ -39,9 +39,9 @@ public class PrimordialFireCommand {
 		}
 
 		if(ticks > 0) {
-			source.sendSuccess(() -> Component.translatable("commands.spectrum.primordial_fire.put_on.success", targets.size()), false);
+			source.sendSuccess(() -> Component.translatable("commands.pastel.primordial_fire.put_on.success", targets.size()), false);
 		} else {
-			source.sendSuccess(() -> Component.translatable("commands.spectrum.primordial_fire.put_out.success", targets.size()), false);
+			source.sendSuccess(() -> Component.translatable("commands.pastel.primordial_fire.put_out.success", targets.size()), false);
 		}
 
 		return affectedTargets;

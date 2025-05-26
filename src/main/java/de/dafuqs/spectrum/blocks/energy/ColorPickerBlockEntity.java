@@ -128,7 +128,7 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity imp
 	
 	@Override
 	protected Component getDefaultName() {
-		return Component.translatable("block.spectrum.color_picker");
+		return Component.translatable("block.pastel.color_picker");
 	}
 	
 	@Override

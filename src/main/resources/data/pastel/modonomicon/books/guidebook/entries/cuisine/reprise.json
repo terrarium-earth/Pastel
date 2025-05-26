@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.reprise",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/reprise"
+  },
+  "icon": {
+    "item": "pastel:reprise"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/titration_barrel",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.reprise.page0.text",
+      "title": "item.pastel.reprise"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "book.pastel.guidebook.titration_recipe",
+      "recipe_id": "pastel:titration_barrel/reprise",
+      "text": "book.pastel.guidebook.reprise.page1.text"
+    }
+  ]
+}

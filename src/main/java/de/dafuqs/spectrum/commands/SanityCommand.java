@@ -277,7 +277,7 @@ public class SanityCommand {
 			}
 		});
 		for (String recipeGroup : recipeGroups) {
-			if (!Language.getInstance().has("recipeGroup.spectrum." + recipeGroup)) {
+			if (!Language.getInstance().has("recipeGroup.pastel." + recipeGroup)) {
 				SpectrumCommon.logWarning("[SANITY: Recipe Group Lang] Recipe group " + recipeGroup + " is not localized.");
 			}
 		}
@@ -470,7 +470,7 @@ public class SanityCommand {
 			Holder<Enchantment> entry = registryManager.registryOrThrow(Registries.ENCHANTMENT).wrapAsHolder(enchantment);
 			ResourceLocation id = entry.unwrapKey().get().location();
 			if (id.getNamespace().equals(modId) && !entry.is(SpectrumEnchantmentTags.SPECTRUM_ENCHANTMENT)) {
-				SpectrumCommon.logWarning("[SANITY: Enchantment Tags] Enchantment '" + id + "' is missing in the spectrum:enchantments tag");
+				SpectrumCommon.logWarning("[SANITY: Enchantment Tags] Enchantment '" + id + "' is missing in the pastel:enchantments tag");
 			}
 		}
 		
@@ -498,7 +498,7 @@ public class SanityCommand {
 				}
 				
 				if (!found) {
-					SpectrumCommon.logWarning("[SANITY: ItemGroups] Item '" + item.getKey().location() + "' is missing from the Spectrum item group.");
+					SpectrumCommon.logWarning("[SANITY: ItemGroups] Item '" + item.getKey().location() + "' is missing from the pastel item group.");
 				}
 			}
 		}
@@ -518,7 +518,7 @@ public class SanityCommand {
 		}
 		
 		if (source.getEntity() instanceof ServerPlayer serverPlayerEntity) {
-			serverPlayerEntity.displayClientMessage(Component.translatable("commands.spectrum.progression_sanity.success"), false);
+			serverPlayerEntity.displayClientMessage(Component.translatable("commands.pastel.progression_sanity.success"), false);
 		}
 		
 		return 0;

@@ -1,6 +1,8 @@
 package de.dafuqs.revelationary;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementCriteria;
+import de.dafuqs.spectrum.*;
+import net.neoforged.bus.api.*;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -10,8 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Revelationary {
-    public static final String MOD_ID = "revelationary";
-    private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+    public static final String MOD_ID = SpectrumCommon.MOD_ID;
+    private static final Logger LOGGER = LoggerFactory.getLogger("Revelationary");
 
     public static void logInfo(String message) {
         LOGGER.info("[Revelationary] {}", message);
@@ -41,10 +43,10 @@ public class Revelationary {
         event.addListener(RevelationDataLoader.INSTANCE);
     }
 
-    public static void onInitialize() {
+    public static void onInitialize(IEventBus modEventBus) {
         logInfo("Starting Common Startup");
 
-        AdvancementCriteria.register();
+        AdvancementCriteria.register(modEventBus);
         NeoForge.EVENT_BUS.addListener(Revelationary::onRegisterCommands);
         NeoForge.EVENT_BUS.addListener(Revelationary::onDataReload);
         NeoForge.EVENT_BUS.addListener(Revelationary::onServerStarted);

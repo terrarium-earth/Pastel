@@ -1,0 +1,40 @@
+{
+  "name": "book.pastel.guidebook.idea",
+  "description": "book.pastel.guidebook.ideas.a_new_resource",
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 5,
+  "x": 15,
+  "y": -1,
+  "icon": "pastel:textures/gui/guidebook/icons/idea.png",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/create_midnight_aberration"
+  },
+  "read_by_default": true,
+  "turnin": "pastel:midgame/collect_midnight_chip",
+  "pages": [
+    {
+      "type": "pastel:hint",
+      "title": "book.pastel.guidebook.ideas.midnight_chip.page0.title",
+      "completion_advancement": "pastel:triggers/hints/midnight_chip_page0",
+      "cost": {
+        "item": "pastel:neolith",
+        "count": 8
+      },
+      "text": "book.pastel.guidebook.ideas.midnight_chip.page0.text"
+    },
+    {
+      "type": "pastel:hint",
+      "title": "book.pastel.guidebook.ideas.concise_instructions",
+      "completion_advancement": "pastel:triggers/hints/midnight_chip_page1",
+      "cost": {
+        "item": "pastel:neolith",
+        "count": 24
+      },
+      "text": "book.pastel.guidebook.ideas.midnight_chip.page1.text"
+    }
+  ]
+}

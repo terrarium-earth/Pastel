@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:collect_all_basic_pigments",
+  "display": {
+    "icon": {
+      "id": "pastel:star_fragment"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_star_fragment.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_star_fragment.description"
+    }
+  },
+  "criteria": {
+    "has_star_fragment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:star_fragment"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_all_basic_pigments"
+      }
+    }
+  }
+}

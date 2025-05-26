@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "item_bowls",
+  "time": 120,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 1
+  },
+  "experience": 1.0,
+  "pattern": [
+    "S S",
+    "XSX",
+    "XXX"
+  ],
+  "key": {
+    "X": "pastel:polished_calcite",
+    "S": "pastel:shimmerstone_gem"
+  },
+  "result": {
+    "id": "pastel:item_bowl_calcite",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/blocks/item_bowl"
+}

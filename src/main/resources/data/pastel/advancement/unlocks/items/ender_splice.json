@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "collected_radiating_ender": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_radiating_ender"
+      }
+    },
+    "collected_neolith": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_neolith"
+      }
+    }
+  }
+}

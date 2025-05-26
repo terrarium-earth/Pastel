@@ -28,7 +28,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "spectrum:radiant_glass"
+          "name": "pastel:radiant_glass"
         },
         {
           "type": "minecraft:item",
@@ -36,11 +36,11 @@
         },
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:chests/sub_tables/stained_glasses"
+          "name": "pastel:chests/sub_tables/stained_glasses"
         },
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:chests/sub_tables/stained_glass_panes"
+          "name": "pastel:chests/sub_tables/stained_glass_panes"
         }
       ],
       "functions": [

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "pastel:item/pipe_bomb_armed"
+  }
+}

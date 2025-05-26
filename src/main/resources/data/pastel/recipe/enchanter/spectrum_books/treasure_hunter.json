@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:storm_stone"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:light_blue_pigment"
+    },
+    {
+      "item": "pastel:storm_stone"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:treasure_hunter": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/treasure_hunter",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:treasure_hunter"
+      ]
+    }
+  ]
+}

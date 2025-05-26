@@ -79,7 +79,7 @@ public class StackedInkMeterWidget implements Renderable, GuiEventListener, Narr
 		long currentTotal = inkStorage.getCurrentTotal();
 		String readableCurrentTotalString = Support.getShortenedNumberString(currentTotal);
 		String percent = Support.getSensiblePercentString(inkStorage.getCurrentTotal(), (inkStorage.getMaxTotal()));
-		drawContext.renderTooltip(client.font,List.of(Component.translatable("spectrum.tooltip.ink_powered.percent_filled", readableCurrentTotalString, percent)),
+		drawContext.renderTooltip(client.font,List.of(Component.translatable("pastel.tooltip.ink_powered.percent_filled", readableCurrentTotalString, percent)),
 			Optional.empty(), x, y);
 	}
 	

@@ -1,0 +1,53 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1200,
+  "experience": 16.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "copy_components": true,
+  "ingredients": [
+    "pastel:malachite_workstaff",
+    "pastel:moonstone_core",
+    {
+      "item": "pastel:pure_diamond",
+      "count": 8
+    },
+    {
+      "item": "minecraft:enchanted_book",
+      "predicates": {
+        "minecraft:stored_enchantments": [
+          {
+            "enchantments": "pastel:resonance",
+            "levels": {
+              "min": 1
+            }
+          }
+        ]
+      },
+      "preview_components": {
+        "minecraft:stored_enchantments": {
+          "levels": {
+            "pastel:resonance": 1
+          }
+        }
+      }
+    },
+    {
+      "item": "pastel:white_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:glass_crest_workstaff",
+    "components": {
+      "enchantments": {
+        "minecraft:fortune": 4
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/malachite/glass_crest_workstaff",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

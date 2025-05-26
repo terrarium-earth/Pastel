@@ -1,0 +1,9 @@
+{
+  "values": [
+    "pastel:blazing_crystal",
+    {
+      "id": "botania:blaze_block",
+      "required": false
+    }
+  ]
+}

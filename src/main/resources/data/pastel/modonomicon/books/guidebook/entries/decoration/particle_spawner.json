@@ -1,0 +1,38 @@
+{
+  "name": "block.pastel.particle_spawner",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/particle_spawner"
+  },
+  "icon": {
+    "item": "pastel:particle_spawner"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/pigment",
+      "line_reversed": true
+    },
+    {
+      "entry": "pastel:decoration/stargazing"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 5,
+  "y": 8,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.particle_spawner.page0.text",
+      "title": "block.pastel.particle_spawner"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/particle_spawner",
+      "text": "book.pastel.guidebook.particle_spawner.page1.text"
+    }
+  ]
+}

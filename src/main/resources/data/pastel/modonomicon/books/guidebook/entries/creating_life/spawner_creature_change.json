@@ -1,0 +1,34 @@
+{
+  "name": "book.pastel.guidebook.spawner_creature_change.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/unlock_spawner_creature_change"
+  },
+  "icon": {
+    "item": "minecraft:spawner"
+  },
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:creating_life/spawner_manipulation"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": -3,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.spawner_creature_change.name",
+      "text": "book.pastel.guidebook.spawner_creature_change.page0.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "book.pastel.guidebook.spawner_creature_change.page1.title",
+      "recipe_id": "pastel:spirit_instiller/spawner/spawner_creature_change",
+      "text": "book.pastel.guidebook.spawner_creature_change.page1.text"
+    }
+  ]
+}

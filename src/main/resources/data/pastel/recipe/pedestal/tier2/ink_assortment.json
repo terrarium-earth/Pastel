@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "time": 600,
+  "tier": "simple",
+  "colors": {
+    "pastel:cyan": 1,
+    "pastel:magenta": 1,
+    "pastel:yellow": 1,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 4.0,
+  "pattern": [
+    "SCS",
+    "PPP",
+    "GGG"
+  ],
+  "key": {
+    "P": "#pastel:pigments",
+    "G": "minecraft:glass",
+    "C": "pastel:four_leaf_clover",
+    "S": "pastel:shimmerstone_gem"
+  },
+  "result": {
+    "id": "pastel:ink_assortment",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/items/ink_assortment"
+}

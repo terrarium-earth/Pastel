@@ -1,0 +1,42 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:bloodboil_syrup"
+    },
+    "title": {
+      "translate": "advancements.pastel.kill_a_mob_with_frenzy3.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.kill_a_mob_with_frenzy3.description"
+    }
+  },
+  "parent": "pastel:midgame/collect_blood_orchid_petal",
+  "criteria": {
+    "killed_entity_with_frenzy3": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "effects": {
+                "pastel:frenzy": {
+                  "amplifier": {
+                    "min": 2
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_blood_orchid_petal"
+      }
+    }
+  }
+}

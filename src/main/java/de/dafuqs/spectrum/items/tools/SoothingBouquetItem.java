@@ -28,7 +28,7 @@ import java.util.List;
 
 public class SoothingBouquetItem extends Item implements SleepAlteringItem, SlotBackgroundEffectProvider {
 
-    private static final MutableComponent TOOLTIP = Component.translatable("item.spectrum.soothing_bouquet.tooltip");
+    private static final MutableComponent TOOLTIP = Component.translatable("item.pastel.soothing_bouquet.tooltip");
 
     public SoothingBouquetItem(Properties settings) {
         super(settings);

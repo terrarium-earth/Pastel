@@ -73,20 +73,20 @@ public class NaturesStaffItem extends Item implements InkPowered {
 		int efficiencyLevel = SpectrumEnchantmentHelper.getLevel(context.registries(), Enchantments.EFFICIENCY, stack);
 		if (efficiencyLevel == 0) {
 			if (InkPowered.canUseClient()) {
-				tooltip.add(Component.translatable("item.spectrum.natures_staff.tooltip_with_ink", INK_COST.color().getColoredInkName()));
+				tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip_with_ink", INK_COST.color().getColoredInkName()));
 			} else {
-				tooltip.add(Component.translatable("item.spectrum.natures_staff.tooltip"));
+				tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip"));
 			}
 		} else {
 			int chancePercent = (int) (getInkCostMod(context.registries(), stack) * 100);
 			if (InkPowered.canUseClient()) {
-				tooltip.add(Component.translatable("item.spectrum.natures_staff.tooltip_with_ink_and_chance", INK_COST.color().getColoredInkName(), chancePercent));
+				tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip_with_ink_and_chance", INK_COST.color().getColoredInkName(), chancePercent));
 			} else {
-				tooltip.add(Component.translatable("item.spectrum.natures_staff.tooltip_with_chance", chancePercent));
+				tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip_with_chance", chancePercent));
 			}
 		}
 		
-		tooltip.add(Component.translatable("item.spectrum.natures_staff.tooltip_lure"));
+		tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip_lure"));
 	}
 	
 	@Override

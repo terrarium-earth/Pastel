@@ -42,8 +42,8 @@ public class CottonCloudBootsItem extends SpectrumTrinketItem {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.cotton_cloud_boots.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.cotton_cloud_boots.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.cotton_cloud_boots.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.cotton_cloud_boots.tooltip2").withStyle(ChatFormatting.GRAY));
 	}
 	
 }

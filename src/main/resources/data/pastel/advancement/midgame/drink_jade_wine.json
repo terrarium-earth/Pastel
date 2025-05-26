@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:midgame/plant_jade_vines",
+  "display": {
+    "icon": {
+      "id": "pastel:jade_wine"
+    },
+    "title": {
+      "translate": "advancements.pastel.drink_jade_wine.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.drink_jade_wine.description"
+    }
+  },
+  "criteria": {
+    "tapped_fermentation_barrel": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:jade_wine"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/plant_jade_vines"
+      }
+    }
+  }
+}

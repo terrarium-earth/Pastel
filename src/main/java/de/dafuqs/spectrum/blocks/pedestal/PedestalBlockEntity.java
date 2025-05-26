@@ -474,7 +474,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	
 	@Override
 	public Component getDefaultName() {
-		return Component.translatable("block.spectrum.pedestal");
+		return Component.translatable("block.pastel.pedestal");
 	}
 	@Override
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {

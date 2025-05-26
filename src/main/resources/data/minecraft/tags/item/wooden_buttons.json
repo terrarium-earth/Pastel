@@ -1,7 +1,7 @@
 {
   "values": [
-    "#spectrum:colored_buttons",
-    "#spectrum:noxwood_buttons",
-    "spectrum:weeping_gala_button"
+    "#pastel:colored_buttons",
+    "#pastel:noxwood_buttons",
+    "pastel:weeping_gala_button"
   ]
 }

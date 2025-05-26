@@ -1,0 +1,36 @@
+{
+  "type": "pastel:pedestal",
+  "group": "phantom_frames",
+  "time": 80,
+  "tier": "basic",
+  "cyan": 0,
+  "magenta": 0,
+  "yellow": 4,
+  "white": 0,
+  "black": 0,
+  "experience": 0.5,
+  "pattern": [
+    "SGS",
+    "CLC",
+    "SSS"
+  ],
+  "key": {
+    "L": "malum:astral_weave",
+    "S": "minecraft:stick",
+    "C": "pastel:shimmerstone_gem",
+    "G": "minecraft:glow_ink_sac"
+  },
+  "result": {
+    "id": "pastel:glow_phantom_frame",
+    "count": 2
+  },
+  "required_advancement": "pastel:unlocks/items/phantom_frames",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "malum"
+      ]
+    }
+  ]
+}

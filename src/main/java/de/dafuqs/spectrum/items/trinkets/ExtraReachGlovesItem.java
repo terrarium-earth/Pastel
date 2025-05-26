@@ -26,7 +26,7 @@ public class ExtraReachGlovesItem extends InkDrainTrinketItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.spectrum.gloves_of_dawns_grasp.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.gloves_of_dawns_grasp.tooltip").withStyle(ChatFormatting.GRAY));
 		super.appendHoverText(stack, context, tooltip, type);
 	}
 	

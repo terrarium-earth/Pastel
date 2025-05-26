@@ -120,12 +120,12 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.dreamflayer.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.dreamflayer.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.dreamflayer.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.dreamflayer.tooltip2").withStyle(ChatFormatting.GRAY));
 		if (ActivatableItem.isActivated(stack)) {
-			tooltip.add(Component.translatable("item.spectrum.dreamflayer.tooltip.activated").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.dreamflayer.tooltip.activated").withStyle(ChatFormatting.GRAY));
 		} else {
-			tooltip.add(Component.translatable("item.spectrum.dreamflayer.tooltip.deactivated", USED_COLOR.getColoredInkName()).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.dreamflayer.tooltip.deactivated", USED_COLOR.getColoredInkName()).withStyle(ChatFormatting.GRAY));
 		}
 	}
 

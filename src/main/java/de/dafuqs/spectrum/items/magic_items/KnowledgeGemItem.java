@@ -127,12 +127,12 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 		int maxExperience = getMaxStoredExperience(lookup, stack);
 		int storedExperience = ExperienceStorageItem.getStoredExperience(stack);
 		if (storedExperience == 0) {
-			tooltip.add(Component.literal("0 ").withStyle(ChatFormatting.DARK_GRAY).append(Component.translatable("item.spectrum.knowledge_gem.tooltip.stored_experience", maxExperience).withStyle(ChatFormatting.GRAY)));
+			tooltip.add(Component.literal("0 ").withStyle(ChatFormatting.DARK_GRAY).append(Component.translatable("item.pastel.knowledge_gem.tooltip.stored_experience", maxExperience).withStyle(ChatFormatting.GRAY)));
 		} else {
-			tooltip.add(Component.literal(storedExperience + " ").withStyle(ChatFormatting.GREEN).append(Component.translatable("item.spectrum.knowledge_gem.tooltip.stored_experience", maxExperience).withStyle(ChatFormatting.GRAY)));
+			tooltip.add(Component.literal(storedExperience + " ").withStyle(ChatFormatting.GREEN).append(Component.translatable("item.pastel.knowledge_gem.tooltip.stored_experience", maxExperience).withStyle(ChatFormatting.GRAY)));
 		}
 		if (shouldDisplayUsageTooltip(stack)) {
-			tooltip.add(Component.translatable("item.spectrum.knowledge_gem.tooltip.use", getTransferableExperiencePerTick(lookup, stack)).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.knowledge_gem.tooltip.use", getTransferableExperiencePerTick(lookup, stack)).withStyle(ChatFormatting.GRAY));
 			addBannerPatternProviderTooltip(tooltip);
 		}
 	}

@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:midgame/enchant_book",
+  "display": {
+    "icon": {
+      "id": "minecraft:experience_bottle"
+    },
+    "title": {
+      "translate": "advancements.pastel.enchant_item_worth_2500_xp.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.enchant_item_worth_2500_xp.description"
+    }
+  },
+  "criteria": {
+    "enchanted_using_2500_experience": {
+      "trigger": "pastel:enchanter_enchanting",
+      "conditions": {
+        "spent_experience": {
+          "min": 2500
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/enchant_book"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:vegetal",
+  "modifiers": {
+    "duration_multiplier": 3.0,
+    "potency_multiplier": 0.75
+  },
+  "required_advancement": "pastel:collect_vegetal"
+}

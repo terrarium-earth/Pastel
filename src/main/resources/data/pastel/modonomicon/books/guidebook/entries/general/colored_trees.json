@@ -1,0 +1,139 @@
+{
+  "name": "book.pastel.guidebook.colored_trees.name",
+  "icon": {
+    "item": "pastel:red_sapling"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_vegetal"
+  },
+  "turnin": "pastel:collect_pigment",
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/color_mixing_cmy",
+      "line_reversed": true
+    },
+    {
+      "entry": "pastel:general/gemstone_powder"
+    },
+    {
+      "entry": "pastel:general/vegetal"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.colored_trees.name",
+      "text": "book.pastel.guidebook.colored_trees.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.colored_trees.crafting_colored_saplings.title",
+      "text": "book.pastel.guidebook.colored_trees.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/black"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/blue"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/brown"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/cyan"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/gray"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/green"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/light_blue"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/light_gray"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/lime"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/magenta"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/orange"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/pink"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/purple"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/red"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/white"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/saplings/yellow"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "book.pastel.guidebook.colored_trees.natural_generation.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:craft_colored_sapling"
+      },
+      "images": [
+        "pastel:textures/gui/guidebook/colored_trees.png"
+      ],
+      "text": "book.pastel.guidebook.colored_trees.natural_generation.text"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_pigment"
+      },
+      "anchor": "colored_wood",
+      "title": "book.pastel.guidebook.colored_trees.colored_wood.title",
+      "recipe_id_1": "pastel:crafting_table/colored_wood/light_blue_planks",
+      "text": "book.pastel.guidebook.colored_trees.colored_wood.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_pigment"
+      },
+      "title": "book.pastel.guidebook.colored_trees.leaf_crushing.title",
+      "recipe_id": "pastel:anvil_crushing/colored_leaves/light_blue",
+      "text": "book.pastel.guidebook.colored_trees.leaf_crushing.text"
+    }
+  ]
+}

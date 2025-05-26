@@ -1,0 +1,43 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "pastel:citrine_ore"
+    }
+  ],
+  "processingTime": 250,
+  "results": [
+    {
+      "count": 3,
+      "item": "pastel:citrine_shard"
+    },
+    {
+      "chance": 0.5,
+      "item": "pastel:citrine_shard"
+    },
+    {
+      "count": 2,
+      "item": "pastel:citrine_powder"
+    },
+    {
+      "chance": 0.6,
+      "item": "pastel:citrine_powder"
+    },
+    {
+      "chance": 0.75,
+      "item": "create:experience_nugget"
+    },
+    {
+      "chance": 0.125,
+      "item": "minecraft:cobblestone"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

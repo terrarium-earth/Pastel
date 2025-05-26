@@ -10,7 +10,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "spectrum:chests/sub_tables/redstone_components"
+          "name": "pastel:chests/sub_tables/redstone_components"
         }
       ]
     },

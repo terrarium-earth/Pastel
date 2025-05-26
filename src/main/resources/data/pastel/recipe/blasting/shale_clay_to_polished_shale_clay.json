@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "pastel:shale_clay"
+    }
+  ],
+  "result": {
+    "id": "pastel:polished_shale_clay"
+  },
+  "experience": 0.1,
+  "cookingtime": 100
+}

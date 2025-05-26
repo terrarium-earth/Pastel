@@ -1,0 +1,30 @@
+{
+  "name": "block.pastel.potion_workshop",
+  "icon": {
+    "item": "pastel:potion_workshop"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+  },
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.potion_workshop.page0.text",
+      "title": "block.pastel.potion_workshop"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/potion_workshop",
+      "text": "book.pastel.guidebook.potion_workshop.page1.text"
+    }
+  ]
+}

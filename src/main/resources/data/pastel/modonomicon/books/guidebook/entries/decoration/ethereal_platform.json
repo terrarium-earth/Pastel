@@ -1,0 +1,44 @@
+{
+  "name": "block.pastel.ethereal_platform",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/ethereal_platform"
+  },
+  "icon": {
+    "item": "pastel:ethereal_platform"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/shimmerstone",
+      "line_reversed": true
+    },
+    {
+      "entry": "pastel:decoration/pigment"
+    },
+    {
+      "entry": "pastel:decoration/stargazing"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 6,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:ethereal_platform"
+      },
+      "title": "block.pastel.ethereal_platform",
+      "text": "book.pastel.guidebook.ethereal_platform.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/ethereal_platform",
+      "text": "book.pastel.guidebook.ethereal_platform.page1.text"
+    }
+  ]
+}

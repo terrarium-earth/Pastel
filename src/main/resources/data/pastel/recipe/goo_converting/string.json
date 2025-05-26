@@ -1,0 +1,12 @@
+{
+  "type": "pastel:goo_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "result": {
+    "id": "minecraft:string",
+    "count": 2
+  }
+}

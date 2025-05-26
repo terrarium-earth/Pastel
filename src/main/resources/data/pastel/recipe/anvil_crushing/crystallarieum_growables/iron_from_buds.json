@@ -1,0 +1,21 @@
+{
+  "type": "pastel:anvil_crushing",
+  "ingredient": [
+    {
+      "item": "pastel:small_iron_bud"
+    },
+    {
+      "item": "pastel:large_iron_bud"
+    }
+  ],
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 2.0,
+  "result": {
+    "id": "minecraft:iron_ingot",
+    "count": 1
+  },
+  "particleEffectIdentifier": "explosion",
+  "soundEventIdentifier": "block.amethyst_cluster.break",
+  "group": "crystallarieum_growable_crushing",
+  "required_advancement": "pastel:unlocks/blocks/crystallarieum"
+}

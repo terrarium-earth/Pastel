@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "pastel:cyan_pigment"
+    }
+  ],
+  "ink_color": "pastel:cyan",
+  "amount": 100,
+  "required_advancement": "pastel:hidden/collect_pigment/cyan"
+}

@@ -1,0 +1,36 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:nectardew_burgeon",
+  "modifiers": {
+    "potency_multiplier": 2.0,
+    "duration_multiplier": 2.0,
+    "flat_yield_bonus": -3.0,
+    "additional_effects": [
+      {
+        "effect": "pastel:somnolence",
+        "base_duration_ticks": 800,
+        "potency_modifier": 0.0,
+        "ink_color": "pastel:purple",
+        "ink_cost": 8,
+        "chance": 0.334
+      },
+      {
+        "effect": "pastel:eternal_slumber",
+        "base_duration_ticks": 1600,
+        "potency_modifier": 0.0,
+        "ink_color": "pastel:purple",
+        "ink_cost": 32,
+        "chance": 0.125
+      },
+      {
+        "effect": "pastel:fatal_slumber",
+        "base_duration_ticks": 100,
+        "potency_modifier": 0.0,
+        "ink_color": "pastel:purple",
+        "ink_cost": 256,
+        "chance": 0.01
+      }
+    ]
+  },
+  "required_advancement": "pastel:lategame/collect_nectardew"
+}

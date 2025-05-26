@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:amethyst_powder",
+  "modifiers": {
+    "flat_duration_bonus_ticks": 1200
+  },
+  "required_advancement": "pastel:hidden/collect_shards/amethyst"
+}

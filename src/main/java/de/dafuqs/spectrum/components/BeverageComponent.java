@@ -36,11 +36,11 @@ public record BeverageComponent(long daysAged, int alcoholPercent, float thickne
 			long ageInDays = daysAged % 365;
 			long ageInYears = Math.floorDiv(daysAged, 365);
 			if (ageInDays == 0)
-				tooltip.accept(Component.translatable("item.spectrum.infused_beverage.tooltip.age_years", ageInYears, alcoholPercent).withStyle(ChatFormatting.GRAY));
+				tooltip.accept(Component.translatable("item.pastel.infused_beverage.tooltip.age_years", ageInYears, alcoholPercent).withStyle(ChatFormatting.GRAY));
 			else
-				tooltip.accept(Component.translatable("item.spectrum.infused_beverage.tooltip.age_composite", ageInYears, ageInDays, alcoholPercent).withStyle(ChatFormatting.GRAY));
+				tooltip.accept(Component.translatable("item.pastel.infused_beverage.tooltip.age_composite", ageInYears, ageInDays, alcoholPercent).withStyle(ChatFormatting.GRAY));
 		} else {
-			tooltip.accept(Component.translatable("item.spectrum.infused_beverage.tooltip.age", daysAged, alcoholPercent).withStyle(ChatFormatting.GRAY));
+			tooltip.accept(Component.translatable("item.pastel.infused_beverage.tooltip.age", daysAged, alcoholPercent).withStyle(ChatFormatting.GRAY));
 		}
 	}
 	

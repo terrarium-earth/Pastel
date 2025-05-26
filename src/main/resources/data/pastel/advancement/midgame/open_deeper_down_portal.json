@@ -1,0 +1,40 @@
+{
+  "parent": "pastel:midgame/break_decayed_bedrock",
+  "display": {
+    "icon": {
+      "id": "minecraft:bedrock"
+    },
+    "title": {
+      "translate": "advancements.pastel.open_deeper_down_portal.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.open_deeper_down_portal.description"
+    }
+  },
+  "criteria": {
+    "opened_deeper_down_portal": {
+      "trigger": "minecraft:impossible"
+    },
+    "entered_dimension": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/enter_dimension"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/break_decayed_bedrock"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "opened_deeper_down_portal",
+      "entered_dimension"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

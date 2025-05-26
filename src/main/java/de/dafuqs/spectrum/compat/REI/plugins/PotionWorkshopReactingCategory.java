@@ -23,7 +23,7 @@ public class PotionWorkshopReactingCategory extends GatedItemInformationPageCate
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.potion_workshop_reacting.title");
+		return Component.translatable("container.pastel.rei.potion_workshop_reacting.title");
 	}
 	
 	@Override

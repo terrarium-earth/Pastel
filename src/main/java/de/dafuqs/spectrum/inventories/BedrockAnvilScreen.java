@@ -49,7 +49,7 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
 		int i = (this.width - this.imageWidth) / 2;
 		int j = (this.height - this.imageHeight) / 2;
 		
-		this.nameField = new EditBox(this.font, i + 62, j + 24, 98, 12, Component.translatable("container.spectrum.bedrock_anvil"));
+		this.nameField = new EditBox(this.font, i + 62, j + 24, 98, 12, Component.translatable("container.pastel.bedrock_anvil"));
 		this.nameField.setTextColor(-1);
 		this.nameField.setTextColorUneditable(-1);
 		this.nameField.setBordered(false);
@@ -59,7 +59,7 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
 		this.addWidget(this.nameField);
 		this.nameField.setEditable((this.menu).getSlot(0).hasItem());
 		
-		this.loreField = new EditBox(this.font, i + 45, j + 76, 116, 12, Component.translatable("container.spectrum.bedrock_anvil.lore"));
+		this.loreField = new EditBox(this.font, i + 45, j + 76, 116, 12, Component.translatable("container.pastel.bedrock_anvil.lore"));
 		this.loreField.setTextColor(-1);
 		this.loreField.setTextColorUneditable(-1);
 		this.loreField.setBordered(false);
@@ -131,7 +131,7 @@ public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHan
 	protected void renderLabels(GuiGraphics context, int mouseX, int mouseY) {
 		super.renderLabels(context, mouseX, mouseY);
 		
-		context.drawString(font, Component.translatable("container.spectrum.bedrock_anvil.lore"), inventoryLabelX, 76, 4210752, false);
+		context.drawString(font, Component.translatable("container.pastel.bedrock_anvil.lore"), inventoryLabelX, 76, 4210752, false);
 		
 		int levelCost = (this.menu).getLevelCost();
 		if (levelCost > 0 || this.menu.getSlot(2).hasItem()) {

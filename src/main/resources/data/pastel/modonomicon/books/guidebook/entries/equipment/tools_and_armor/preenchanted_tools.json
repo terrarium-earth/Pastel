@@ -1,0 +1,82 @@
+{
+  "name": "book.pastel.guidebook.preenchanted_tools.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/any_preenchanted_tool"
+  },
+  "icon": {
+    "item": "pastel:lucky_pickaxe"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 1,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.preenchanted_tools.page0.text",
+      "title": "book.pastel.guidebook.preenchanted_tools.name"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.preenchanted_tools.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/tender_pickaxe"
+      },
+      "text": "book.pastel.guidebook.preenchanted_tools.page2.text",
+      "recipe_id": "pastel:pedestal/tier1/tools/tender_pickaxe"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/lucky_pickaxe"
+      },
+      "text": "book.pastel.guidebook.preenchanted_tools.page3.text",
+      "recipe_id": "pastel:pedestal/tier1/tools/lucky_pickaxe"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/razor_falchion"
+      },
+      "text": "book.pastel.guidebook.preenchanted_tools.page4.text",
+      "recipe_id": "pastel:pedestal/tier1/tools/razor_falchion"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/oblivion_pickaxe"
+      },
+      "text": "book.pastel.guidebook.preenchanted_tools.page5.text",
+      "recipe_id": "pastel:pedestal/tier2/oblivion_pickaxe"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/resonant_pickaxe"
+      },
+      "text": "book.pastel.guidebook.preenchanted_tools.page6.text",
+      "recipe_id": "pastel:pedestal/tier4/resonant_pickaxe"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/equipment/dragonrending_pickaxe"
+      },
+      "text": "book.pastel.guidebook.preenchanted_tools.page7.text",
+      "recipe_id": "pastel:pedestal/tier4/dragonrending_pickaxe"
+    }
+  ]
+}

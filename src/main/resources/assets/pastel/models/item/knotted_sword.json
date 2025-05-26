@@ -1,0 +1,14 @@
+{
+  "parent": "pastel:item/handheld_oversized",
+  "textures": {
+    "layer0": "pastel:item/knotted_sword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "oversized": 1.0
+      },
+      "model": "pastel:item/knotted_sword_oversized"
+    }
+  ]
+}

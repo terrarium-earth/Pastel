@@ -1,8 +1,8 @@
 {
   "values": [
-    "#spectrum:stripped_colored_wood",
-    "#spectrum:stripped_noxcap_hyphae",
+    "#pastel:stripped_colored_wood",
+    "#pastel:stripped_noxcap_hyphae",
 
-    "spectrum:stripped_weeping_gala_wood"
+    "pastel:stripped_weeping_gala_wood"
   ]
 }

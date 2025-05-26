@@ -1,0 +1,34 @@
+{
+  "name": "book.pastel.guidebook.buffer_node.name",
+  "icon": {
+    "item": "pastel:buffer_node"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/pastel_network"
+  },
+  "category": "pastel:pastel_network",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:pastel_network/gather_node"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.buffer_node.page0.text",
+      "title": "book.pastel.guidebook.buffer_node.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.buffer_node.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/pastel_network/buffer_node"
+    }
+  ]
+}

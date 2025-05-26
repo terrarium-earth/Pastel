@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.staff_of_remembrance",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/staff_of_remembrance"
+  },
+  "icon": {
+    "item": "pastel:staff_of_remembrance"
+  },
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 1,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.staff_of_remembrance.page0.text",
+      "title": "item.pastel.staff_of_remembrance"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.staff_of_remembrance.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier4/staff_of_remembrance"
+    }
+  ]
+}

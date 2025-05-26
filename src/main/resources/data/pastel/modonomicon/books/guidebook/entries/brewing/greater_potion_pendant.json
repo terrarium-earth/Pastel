@@ -1,0 +1,34 @@
+{
+  "name": "item.pastel.greater_potion_pendant",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/greater_potion_pendant"
+  },
+  "icon": {
+    "item": "pastel:greater_potion_pendant"
+  },
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:brewing/lesser_potion_pendant"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -3,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.greater_potion_pendant.page0.text",
+      "title": "item.pastel.greater_potion_pendant"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.use_in_potion_workshop_bottle_slot",
+      "title": "container.pastel.rei.fusion_recipe",
+      "recipe_id": "pastel:fusion_shrine/trinkets/greater_potion_pendant"
+    }
+  ]
+}

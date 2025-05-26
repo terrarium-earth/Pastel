@@ -37,7 +37,7 @@ public class ParticleSpawnerBlock extends AbstractParticleSpawnerBlock implement
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.particle_spawner.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("block.pastel.particle_spawner.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override

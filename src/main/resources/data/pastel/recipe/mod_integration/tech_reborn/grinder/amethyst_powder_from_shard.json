@@ -1,0 +1,19 @@
+{
+  "type": "techreborn:grinder",
+  "power": 4,
+  "time": 270,
+  "ingredients": [
+    "minecraft:amethyst_shard"
+  ],
+  "results": [
+    "pastel:amethyst_powder"
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "techreborn"
+      ]
+    }
+  ]
+}

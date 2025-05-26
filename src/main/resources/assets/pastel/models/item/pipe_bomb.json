@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "pastel:item/pipe_bomb"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "armed": 1
+      },
+      "model": "pastel:item/pipe_bomb_armed"
+    }
+  ]
+}

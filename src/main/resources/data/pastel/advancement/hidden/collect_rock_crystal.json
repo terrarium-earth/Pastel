@@ -1,0 +1,14 @@
+{
+  "criteria": {
+    "has_rock_candy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:rock_crystal"
+          }
+        ]
+      }
+    }
+  }
+}

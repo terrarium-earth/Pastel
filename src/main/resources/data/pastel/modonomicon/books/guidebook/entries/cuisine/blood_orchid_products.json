@@ -1,0 +1,65 @@
+{
+  "name": "book.pastel.guidebook.blood_orchid_products.name",
+  "icon": {
+    "item": "pastel:bloodboil_syrup"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/collect_blood_orchid_petal"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.blood_orchid_products.name",
+      "item": {
+        "item": "pastel:bloodboil_syrup"
+      },
+      "text": "book.pastel.guidebook.blood_orchid_products.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.blood_orchid_products.page1.title",
+      "text": "book.pastel.guidebook.blood_orchid_products.page1.text"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "recipe_id": "pastel:potion_workshop_crafting/bloodboil_syrup",
+      "text": "book.pastel.guidebook.blood_orchid_products.page2.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/demon_trifle"
+      },
+      "recipe_id": "pastel:pedestal/tier1/food/demon_trifle",
+      "text": "book.pastel.guidebook.blood_orchid_products.page3.text"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/demon_tea"
+      },
+      "recipe_id": "pastel:potion_workshop_crafting/demon_tea",
+      "text": "book.pastel.guidebook.blood_orchid_products.page4.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/rabbit_poison"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.rabbit_poison",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/rabbit_poison",
+      "text": "book.pastel.guidebook.blood_orchid_products.page5.text"
+    }
+  ]
+}

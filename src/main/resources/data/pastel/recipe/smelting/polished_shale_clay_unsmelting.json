@@ -1,0 +1,46 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "pastel:shale_clay_brick_stairs"
+    },
+    {
+      "item": "pastel:shale_clay_bricks"
+    },
+    {
+      "item": "pastel:shale_clay_tile_stairs"
+    },
+    {
+      "item": "pastel:shale_clay_tiles"
+    },
+    {
+      "item": "pastel:exposed_shale_clay_brick_stairs"
+    },
+    {
+      "item": "pastel:exposed_shale_clay_bricks"
+    },
+    {
+      "item": "pastel:exposed_shale_clay_tile_stairs"
+    },
+    {
+      "item": "pastel:exposed_shale_clay_tiles"
+    },
+    {
+      "item": "pastel:weathered_shale_clay_brick_stairs"
+    },
+    {
+      "item": "pastel:weathered_shale_clay_bricks"
+    },
+    {
+      "item": "pastel:weathered_shale_clay_tile_stairs"
+    },
+    {
+      "item": "pastel:weathered_shale_clay_tiles"
+    }
+  ],
+  "result": {
+    "id": "pastel:polished_shale_clay"
+  },
+  "experience": 0.1,
+  "cookingtime": 200
+}

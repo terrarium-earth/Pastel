@@ -1,0 +1,17 @@
+{
+  "type": "pastel:web_link",
+
+  "name": "book.pastel.guidebook.kofi_dafuqs.name",
+  "description": "book.pastel.guidebook.kofi_dafuqs.description",
+  "icon": "pastel:textures/gui/guidebook/icons/kofi_dafuqs.png",
+  "category": "pastel:about",
+  "hide_while_locked": false,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": -1,
+  "y": 1,
+  "read_by_default": true,
+
+  "url": "https://ko-fi.com/dafuqs"
+}

@@ -1,0 +1,20 @@
+{
+  "criteria": {
+    "crafted_colored_sapling": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_colored_sapling"
+      }
+    },
+    "has_pigment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:purple_pigment"
+          }
+        ]
+      }
+    }
+  }
+}

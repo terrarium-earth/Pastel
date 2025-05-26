@@ -1,12 +1,12 @@
 {
   "values": [
-    "#spectrum:pure_resource_blocks",
-    "#spectrum:gemstone_storage_blocks",
+    "#pastel:pure_resource_blocks",
+    "#pastel:gemstone_storage_blocks",
 
-    "spectrum:shimmerstone_block",
-    "spectrum:bismuth_block",
-    "spectrum:malachite_block",
-    "spectrum:azurite_block",
-    "spectrum:bloodstone_block"
+    "pastel:shimmerstone_block",
+    "pastel:bismuth_block",
+    "pastel:malachite_block",
+    "pastel:azurite_block",
+    "pastel:bloodstone_block"
   ]
 }

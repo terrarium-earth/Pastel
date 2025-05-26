@@ -37,7 +37,7 @@ public class SpawnerRequiredPlayerRangeChangeRecipe extends SpawnerChangeRecipe 
 	
 	@Override
 	public Component getOutputLoreText() {
-		return Component.translatable("recipe.spectrum.spawner.lore.increased_required_player_range");
+		return Component.translatable("recipe.pastel.spawner.lore.increased_required_player_range");
 	}
 	
 	@Override

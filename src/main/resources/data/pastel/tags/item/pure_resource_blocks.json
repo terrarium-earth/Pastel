@@ -1,0 +1,41 @@
+{
+  "values": [
+    "pastel:pure_coal_block",
+    "pastel:pure_iron_block",
+    "pastel:pure_gold_block",
+    "pastel:pure_diamond_block",
+    "pastel:pure_emerald_block",
+    "pastel:pure_redstone_block",
+    "pastel:pure_lapis_block",
+    "pastel:pure_copper_block",
+    "pastel:pure_quartz_block",
+    "pastel:pure_netherite_scrap_block",
+    "pastel:pure_echo_block",
+    "pastel:pure_glowstone_block",
+    "pastel:pure_prismarine_block",
+    {
+      "id": "pastel:pure_certus_quartz_block",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_fluix_block",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_globette_block",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_globette_nether_block",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_globette_end_block",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_zinc_block",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "book.pastel.guidebook.weather_manipulation.name",
+  "icon": {
+    "item": "minecraft:sunflower"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:build_fusion_shrine"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/fusion_shrine"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 7,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.weather_manipulation.name",
+      "text": "book.pastel.guidebook.weather_manipulation.page0.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "book.pastel.guidebook.weather_manipulation.page1.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/weather/clear"
+      },
+      "recipe_id": "pastel:fusion_shrine/weather/clear",
+      "text": "book.pastel.guidebook.weather_manipulation.page1.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "book.pastel.guidebook.weather_manipulation.page2.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/weather/rain"
+      },
+      "recipe_id": "pastel:fusion_shrine/weather/rain",
+      "text": "book.pastel.guidebook.weather_manipulation.page2.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "book.pastel.guidebook.weather_manipulation.page3.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/weather/thunder"
+      },
+      "recipe_id": "pastel:fusion_shrine/weather/thunder",
+      "text": "book.pastel.guidebook.weather_manipulation.page3.text"
+    }
+  ]
+}

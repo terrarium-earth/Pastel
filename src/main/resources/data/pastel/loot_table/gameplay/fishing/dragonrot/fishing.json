@@ -1,0 +1,22 @@
+{
+  "type": "pastel:fishing",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "weight": 10,
+          "quality": -2,
+          "value": "pastel:gameplay/fishing/dragonrot/junk"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 5,
+          "quality": 2,
+          "value": "pastel:gameplay/fishing/dragonrot/treasure"
+        }
+      ]
+    }
+  ]
+}

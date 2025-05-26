@@ -34,7 +34,7 @@ public class PotionPendantItem extends SpectrumTrinketItem implements InkPowered
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		appendPotionFillableTooltip(stack, tooltip, Component.translatable("item.spectrum.potion_pendant.when_worn"), false, context.tickRate());
+		appendPotionFillableTooltip(stack, tooltip, Component.translatable("item.pastel.potion_pendant.when_worn"), false, context.tickRate());
 	}
 	
 	@Override

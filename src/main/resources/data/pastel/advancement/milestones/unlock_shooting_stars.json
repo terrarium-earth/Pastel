@@ -1,0 +1,10 @@
+{
+  "criteria": {
+    "crafted_something_brown": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_all_basic_pigments"
+      }
+    }
+  }
+}

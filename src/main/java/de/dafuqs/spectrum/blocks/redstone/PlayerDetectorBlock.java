@@ -50,7 +50,7 @@ public class PlayerDetectorBlock extends DetectorBlock implements EntityBlock {
 				
 				String ownerName = getOwnerName(world, pos);
 				if (ownerName != null && !ownerName.isBlank()) {
-					player.displayClientMessage(Component.translatable("block.spectrum.player_detector.owner", ownerName), true);
+					player.displayClientMessage(Component.translatable("block.pastel.player_detector.owner", ownerName), true);
 				}
 				return InteractionResult.CONSUME;
 			} else {

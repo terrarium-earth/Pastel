@@ -1,0 +1,39 @@
+{
+  "name": "item.pastel.ring_of_pursuit",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/ring_of_pursuit"
+  },
+  "icon": {
+    "item": "pastel:ring_of_pursuit"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/trinkets/bismuth_trinkets",
+      "line_enabled": false
+    },
+    {
+      "entry": "pastel:equipment/color_picker",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 14,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.ring_of_pursuit.page0.text",
+      "title": "item.pastel.ring_of_pursuit"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "container.pastel.rei.fusion_recipe",
+      "recipe_id": "pastel:fusion_shrine/trinkets/ring_of_pursuit",
+      "text": "book.pastel.guidebook.ring_of_pursuit.page1.text"
+    }
+  ]
+}

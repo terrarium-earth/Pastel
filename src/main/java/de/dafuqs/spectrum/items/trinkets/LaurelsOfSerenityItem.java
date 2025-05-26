@@ -27,7 +27,7 @@ public class LaurelsOfSerenityItem extends InkDrainTrinketItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-        tooltip.add(Component.translatable("item.spectrum.laurels_of_serenity.tooltip").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.pastel.laurels_of_serenity.tooltip").withStyle(ChatFormatting.GRAY));
         super.appendHoverText(stack, context, tooltip, type);
     }
     

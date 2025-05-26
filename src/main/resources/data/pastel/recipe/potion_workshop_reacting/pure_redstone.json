@@ -1,0 +1,10 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:pure_redstone",
+  "modifiers": {
+    "duration_multiplier": 3.0,
+    "potency_multiplier": 0.5,
+    "flat_yield_bonus": -1.0
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource"
+}

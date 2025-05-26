@@ -1,0 +1,9 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:bone_ash",
+  "modifiers": {
+    "last_effect_duration_modifier": 2.0,
+    "last_effect_potency_modifier": 2.0
+  },
+  "required_advancement": "pastel:break_cracked_dragonbone"
+}

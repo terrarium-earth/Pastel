@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:orange_sapling"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_colored_sapling.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_colored_sapling.description"
+    }
+  },
+  "parent": "pastel:collect_vegetal",
+  "criteria": {
+    "craft": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "#pastel:colored_saplings"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_vegetal"
+      }
+    }
+  }
+}

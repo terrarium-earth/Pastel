@@ -1,0 +1,30 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_bismuth_ring",
+    {
+      "item": "pastel:incandescent_essence",
+      "count": 8
+    },
+    {
+      "item": "pastel:pyrite_chunk",
+      "count": 4
+    },
+    {
+      "item": "pastel:magenta_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:ring_of_pursuit"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/ring_of_pursuit",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

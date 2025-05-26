@@ -68,7 +68,7 @@ public class RedstoneCalculatorBlock extends DiodeBlock implements EntityBlock {
 			if (player instanceof ServerPlayer serverPlayerEntity) {
 				// since this triggers both on server and client side: just send the
 				// message once, client side is enough, since it is pretty irrelevant on the server
-				serverPlayerEntity.displayClientMessage(Component.translatable("block.spectrum.redstone_calculator.mode_set").append(Component.translatable(newModeState.getValue(CALCULATION_MODE).localizationString)), true);
+				serverPlayerEntity.displayClientMessage(Component.translatable("block.pastel.redstone_calculator.mode_set").append(Component.translatable(newModeState.getValue(CALCULATION_MODE).localizationString)), true);
 			}
 
 			this.update(world, pos, state);
@@ -160,13 +160,13 @@ public class RedstoneCalculatorBlock extends DiodeBlock implements EntityBlock {
 	}
 	
 	public enum CalculationMode implements StringRepresentable {
-		ADDITION("addition", "block.spectrum.redstone_calculator.mode.addition"),
-		SUBTRACTION("subtraction", "block.spectrum.redstone_calculator.mode.subtraction"),
-		MULTIPLICATION("multiplication", "block.spectrum.redstone_calculator.mode.multiplication"),
-		DIVISION("division", "block.spectrum.redstone_calculator.mode.division"),
-		MODULO("modulo", "block.spectrum.redstone_calculator.mode.modulo"),
-		MIN("min", "block.spectrum.redstone_calculator.mode.min"),
-		MAX("max", "block.spectrum.redstone_calculator.mode.max");
+		ADDITION("addition", "block.pastel.redstone_calculator.mode.addition"),
+		SUBTRACTION("subtraction", "block.pastel.redstone_calculator.mode.subtraction"),
+		MULTIPLICATION("multiplication", "block.pastel.redstone_calculator.mode.multiplication"),
+		DIVISION("division", "block.pastel.redstone_calculator.mode.division"),
+		MODULO("modulo", "block.pastel.redstone_calculator.mode.modulo"),
+		MIN("min", "block.pastel.redstone_calculator.mode.min"),
+		MAX("max", "block.pastel.redstone_calculator.mode.max");
 		
 		public final String localizationString;
 		private final String name;

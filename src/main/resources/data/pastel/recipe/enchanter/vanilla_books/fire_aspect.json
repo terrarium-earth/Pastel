@@ -1,0 +1,52 @@
+{
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "item": "pastel:storm_stone"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "minecraft:fire_charge"
+    },
+    {
+      "item": "pastel:storm_stone"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "minecraft:fire_aspect": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_damage",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:fire_aspect"
+      ]
+    }
+  ]
+}

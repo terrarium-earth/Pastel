@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:yellow_pigment"
+    },
+    {
+      "item": "pastel:yellow_pigment"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "pastel:neolith"
+    },
+    {
+      "item": "pastel:yellow_pigment"
+    },
+    {
+      "item": "pastel:yellow_pigment"
+    },
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "pastel:neolith"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:tight_grip": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/tight_grip",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:tight_grip"
+      ]
+    }
+  ]
+}

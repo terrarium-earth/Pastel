@@ -1,0 +1,30 @@
+{
+  "type": "pastel:enchantment_upgrade",
+  "enchantment": "malum:replenishing",
+  "levels": [
+    {
+      "experience": 400,
+      "item": "pastel:black_pigment",
+      "item_count": 8
+    },
+    {
+      "experience": 1600,
+      "item": "pastel:black_pigment",
+      "item_count": 32
+    },
+    {
+      "experience": 3200,
+      "item": "pastel:black_pigment",
+      "item_count": 128
+    }
+  ],
+  "required_advancement": "pastel:mod_integration/malum/replenishing",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "malum"
+      ]
+    }
+  ]
+}

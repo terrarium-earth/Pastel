@@ -1,0 +1,29 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    "pastel:red_leaves"
+  ],
+  "results": [
+    {
+      "id": "pastel:red_pigment",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "result": {
+        "id": "pastel:red_sapling",
+        "count": 1
+      },
+      "chance": 0.02
+    }
+  ],
+  "processingTime": 450,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

@@ -37,15 +37,15 @@
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:blackslag"
+          "name": "pastel:blackslag"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:blackslag_bricks"
+          "name": "pastel:blackslag_bricks"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:blackslag_tiles"
+          "name": "pastel:blackslag_tiles"
         }
       ],
       "functions": [

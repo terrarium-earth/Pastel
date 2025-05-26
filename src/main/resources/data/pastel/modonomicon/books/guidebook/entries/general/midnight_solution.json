@@ -1,0 +1,51 @@
+{
+  "name": "block.pastel.midnight_solution",
+  "icon": {
+    "item": "pastel:midnight_solution_bucket"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/create_midnight_aberration"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/the_perfect_compound"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 14,
+  "y": 0,
+  "turnin": "pastel:midgame/collect_midnight_chip",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.midnight_solution.page0.text",
+      "title": "block.pastel.midnight_solution"
+    },
+    {
+      "type": "pastel:midnight_solution_converting",
+      "title": "book.pastel.guidebook.item_conversion",
+      "recipe_id": "pastel:midnight_solution_converting/blackstone",
+      "text": "book.pastel.guidebook.midnight_solution.page4.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.midnight_solution.page5.title",
+      "text": "book.pastel.guidebook.midnight_solution.page5.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:black_materia"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/break_black_materia"
+      },
+      "text": "book.pastel.guidebook.midnight_solution.page3.text"
+    }
+  ]
+}

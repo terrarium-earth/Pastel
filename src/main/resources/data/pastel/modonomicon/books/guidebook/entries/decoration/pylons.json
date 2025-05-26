@@ -1,0 +1,48 @@
+{
+  "name": "book.pastel.guidebook.pylons.name",
+  "icon": {
+    "item": "pastel:amethyst_pylon"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/pylons/any_pylon"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/shards"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -1,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.pylons.name",
+      "text": "book.pastel.guidebook.pylons.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/pylons/topaz"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/pylons/amethyst"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/pylons/citrine"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/pylons/onyx"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/pylons/moonstone"
+    }
+  ]
+}

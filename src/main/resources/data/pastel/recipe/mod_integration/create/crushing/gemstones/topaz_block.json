@@ -1,0 +1,25 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    "pastel:topaz_block"
+  ],
+  "results": [
+    {
+      "id": "pastel:topaz_shard",
+      "count": 1
+    },
+    {
+      "id": "pastel:topaz_shard",
+      "chance": 0.5
+    }
+  ],
+  "processingTime": 150,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

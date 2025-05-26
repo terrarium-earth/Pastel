@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "conversion=default": {
+      "model": "pastel:block/forfeiture_default"
+    },
+    "conversion=none": {
+      "model": "pastel:block/forfeiture_none"
+    },
+    "conversion=special": {
+      "model": "pastel:block/forfeiture_default"
+    }
+  }
+}

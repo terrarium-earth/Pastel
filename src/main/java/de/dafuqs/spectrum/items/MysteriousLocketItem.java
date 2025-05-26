@@ -38,11 +38,11 @@ public class MysteriousLocketItem extends Item {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.mysterious_locket.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.mysterious_locket.tooltip").withStyle(ChatFormatting.GRAY));
 		if (stack.has(SpectrumDataComponentTypes.SOCKETED)) {
-			tooltip.add(Component.translatable("item.spectrum.mysterious_locket.tooltip_socketed").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.mysterious_locket.tooltip_socketed").withStyle(ChatFormatting.GRAY));
 		} else {
-			tooltip.add(Component.translatable("item.spectrum.mysterious_locket.tooltip_empty").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.mysterious_locket.tooltip_empty").withStyle(ChatFormatting.GRAY));
 		}
 	}
 	

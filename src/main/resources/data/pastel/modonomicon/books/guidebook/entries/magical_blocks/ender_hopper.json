@@ -1,0 +1,33 @@
+{
+  "name": "block.pastel.ender_hopper",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/ender_blocks"
+  },
+  "icon": {
+    "item": "pastel:ender_hopper"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.ender_hopper",
+      "item": {
+        "item": "pastel:ender_hopper"
+      },
+      "text": "book.pastel.guidebook.ender_hopper.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/ender_hopper",
+      "text": "book.pastel.guidebook.only_works_when_owner_online"
+    }
+  ]
+}

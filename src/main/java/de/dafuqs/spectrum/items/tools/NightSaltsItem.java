@@ -25,7 +25,7 @@ import java.util.List;
 
 public class NightSaltsItem extends Item implements SleepAlteringItem {
 
-    private static final MutableComponent TOOLTIP = Component.translatable("item.spectrum.night_salts.tooltip");
+    private static final MutableComponent TOOLTIP = Component.translatable("item.pastel.night_salts.tooltip");
 
     public NightSaltsItem(Properties settings) {
         super(settings);

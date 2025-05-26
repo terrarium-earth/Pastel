@@ -1,0 +1,38 @@
+{
+  "type": "pastel:enchanter",
+  "time": 600,
+  "required_experience": 50,
+  "ingredients": [
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "pastel:shimmerstone_gem"
+    },
+    {
+      "item": "pastel:shimmerstone_gem"
+    },
+    {
+      "item": "pastel:pure_gold"
+    },
+    {
+      "item": "pastel:pure_gold"
+    },
+    {
+      "item": "pastel:shimmerstone_gem"
+    },
+    {
+      "item": "pastel:shimmerstone_gem"
+    },
+    {
+      "item": "pastel:pure_gold"
+    },
+    {
+      "item": "pastel:pure_gold"
+    }
+  ],
+  "result": {
+    "id": "pastel:enchanted_golden_carrot"
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource"
+}

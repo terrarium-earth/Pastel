@@ -1,0 +1,90 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:lesser_potion_pendant",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "pastel:fill_potion_fillable",
+              "ambient": true,
+              "show_particles": true,
+              "duration": 1200,
+              "status_effect": [
+                "pastel:somnolence"
+              ],
+              "color": 11434988,
+              "amplifier": 0,
+              "ink_color": "pastel:purple",
+              "ink_cost": 8
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:nectardew_burgeon",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:nightdew_sprout",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:nephrite_blossom_bulb",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:torchflower_seeds",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:glistering_melon_seeds",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_nugget",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_nugget",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:bismuth_flake",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:brewer_pottery_sherd",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:snort_pottery_sherd",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:prize_pottery_sherd",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:arms_up_pottery_sherd",
+          "weight": 5
+        }
+      ]
+    }
+  ]
+}

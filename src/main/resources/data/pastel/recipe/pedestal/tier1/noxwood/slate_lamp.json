@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "group": "noxwood_lamps",
+  "time": 80,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 0.1,
+  "pattern": [
+    "SSS",
+    "GXG",
+    "III"
+  ],
+  "key": {
+    "S": "pastel:slate_noxcap_stem",
+    "G": "pastel:slate_noxcap_gills",
+    "I": "minecraft:prismarine_crystals",
+    "X": "pastel:shimmerstone_gem"
+  },
+  "result": {
+    "id": "pastel:slate_noxwood_lamp",
+    "count": 2
+  },
+  "required_advancement": "pastel:lategame/collect_noxwood"
+}

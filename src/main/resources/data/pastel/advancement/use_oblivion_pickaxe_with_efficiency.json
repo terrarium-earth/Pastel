@@ -1,0 +1,44 @@
+{
+  "parent": "pastel:collect_quitoxic_reeds",
+  "display": {
+    "icon": {
+      "id": "pastel:oblivion_pickaxe",
+      "components": {
+        "minecraft:enchantments": {
+          "levels": {
+            "minecraft:efficiency": 1
+          }
+        }
+      }
+    },
+    "title": {
+      "translate": "advancements.pastel.use_oblivion_pickaxe_with_efficiency.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.use_oblivion_pickaxe_with_efficiency.description"
+    }
+  },
+  "criteria": {
+    "used_oblivion_pickaxe_with_efficiency": {
+      "trigger": "minecraft:item_durability_changed",
+      "conditions": {
+        "item": {
+          "items": "pastel:oblivion_pickaxe",
+          "predicates": {
+            "enchantments": [
+              {
+                "enchantments": "minecraft:efficiency"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_quitoxic_reeds"
+      }
+    }
+  }
+}

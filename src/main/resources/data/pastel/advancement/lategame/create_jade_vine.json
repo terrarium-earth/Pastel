@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:germinated_jade_vine_bulb"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.create_jade_vine.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.create_jade_vine.description"
+    }
+  },
+  "parent": "pastel:lategame/spectrum_lategame",
+  "criteria": {
+    "crossbred_jade_vine_bulb": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

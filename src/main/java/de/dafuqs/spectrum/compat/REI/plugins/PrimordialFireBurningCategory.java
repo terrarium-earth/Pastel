@@ -31,7 +31,7 @@ public class PrimordialFireBurningCategory extends GatedDisplayCategory<Primordi
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.primordial_fire_burning.title");
+		return Component.translatable("container.pastel.rei.primordial_fire_burning.title");
 	}
 	
 	@Override

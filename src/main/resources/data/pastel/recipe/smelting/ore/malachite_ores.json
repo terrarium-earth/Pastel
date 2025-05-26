@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "tag": "pastel:malachite_ores"
+    }
+  ],
+  "result": {
+    "id": "pastel:raw_malachite"
+  },
+  "experience": 2,
+  "cookingtime": 200
+}

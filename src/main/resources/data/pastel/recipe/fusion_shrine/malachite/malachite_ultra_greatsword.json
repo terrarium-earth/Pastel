@@ -1,0 +1,40 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1200,
+  "experience": 16.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "copy_components": true,
+  "ingredients": [
+    "minecraft:diamond_sword",
+    {
+      "item": "pastel:pure_malachite",
+      "count": 8
+    },
+    {
+      "item": "pastel:pure_quartz",
+      "count": 8
+    },
+    {
+      "item": "pastel:paltaeria_fragments",
+      "count": 4
+    },
+    {
+      "item": "pastel:moonstone_powder",
+      "count": 8
+    }
+  ],
+  "result": {
+    "id": "pastel:malachite_ultra_greatsword",
+    "components": {
+      "enchantments": {
+        "minecraft:sweeping_edge": 4
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/malachite/malachite_tools",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

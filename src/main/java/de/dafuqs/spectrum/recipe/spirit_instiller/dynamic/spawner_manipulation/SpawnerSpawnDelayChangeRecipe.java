@@ -41,7 +41,7 @@ public class SpawnerSpawnDelayChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public Component getOutputLoreText() {
-		return Component.translatable("recipe.spectrum.spawner.lore.decreased_spawn_delay");
+		return Component.translatable("recipe.pastel.spawner.lore.decreased_spawn_delay");
 	}
 	
 	@Override

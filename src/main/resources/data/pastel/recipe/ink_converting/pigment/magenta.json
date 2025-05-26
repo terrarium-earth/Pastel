@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "pastel:magenta_pigment"
+    }
+  ],
+  "ink_color": "pastel:magenta",
+  "amount": 100,
+  "required_advancement": "pastel:hidden/collect_pigment/magenta"
+}

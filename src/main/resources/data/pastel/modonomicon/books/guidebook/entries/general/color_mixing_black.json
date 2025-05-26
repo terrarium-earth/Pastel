@@ -1,0 +1,39 @@
+{
+  "name": "book.pastel.guidebook.color_mixing_black.name",
+  "icon": "pastel:textures/gui/guidebook/icons/color_mixing_black.png",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/build_advanced_pedestal_structure"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/color_mixing_cmy"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 0,
+  "y": -4,
+  "turnin": "pastel:craft_colored_sapling",
+  "pages": [
+    {
+      "type": "pastel:snippet",
+      "resource_path": "pastel:textures/gui/guidebook/color_mixing_black.png",
+      "resource_width": 129,
+      "resource_height": 50,
+      "texture_x": 0,
+      "texture_y": 0,
+      "texture_width": 129,
+      "texture_height": 50,
+      "border": false,
+      "title": "book.pastel.guidebook.color_mixing_black.name",
+      "text": "book.pastel.guidebook.color_mixing_black.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.color_mixing_black.page1.text"
+    }
+  ]
+}

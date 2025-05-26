@@ -1,0 +1,59 @@
+{
+  "name": "book.pastel.guidebook.stratine.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/collect_stratine"
+  },
+  "icon": {
+    "item": "pastel:stratine_fragments"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.stratine.name",
+      "item": {
+        "item": "pastel:stratine_fragments"
+      },
+      "text": "book.pastel.guidebook.stratine.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "item.pastel.stratine_gem",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_stratine_gem"
+      },
+      "recipe_id": "pastel:pedestal/tier3/stratine_gem",
+      "text": "book.pastel.guidebook.rare_intact_gem"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.stratine_floatblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/carry_too_many_heavy_gravity_blocks"
+      },
+      "item": {
+        "item": "pastel:stratine_floatblock"
+      },
+      "text": "book.pastel.guidebook.stratine.page2.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/carry_too_many_heavy_gravity_blocks"
+      },
+      "text": "book.pastel.guidebook.stratine.page3.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/compacting/stratine_floatblock"
+    }
+  ]
+}

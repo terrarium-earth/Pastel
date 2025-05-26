@@ -83,9 +83,9 @@ public class InkGaugeWidget implements Renderable, GuiEventListener, NarratableE
 			}
 		}
 		if (tooltip.isEmpty()) {
-			tooltip.add(Component.translatable("spectrum.tooltip.ink_powered.empty"));
+			tooltip.add(Component.translatable("pastel.tooltip.ink_powered.empty"));
 		} else {
-			tooltip.add(0, Component.translatable("spectrum.tooltip.ink_powered.stored"));
+			tooltip.add(0, Component.translatable("pastel.tooltip.ink_powered.stored"));
 		}
 		drawContext.renderTooltip(client.font, tooltip, Optional.empty(), x, y);
 	}

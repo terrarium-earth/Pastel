@@ -1,0 +1,29 @@
+{
+  "name": "item.pastel.omni_accelerator",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/omni_accelerator"
+  },
+  "icon": {
+    "item": "pastel:omni_accelerator"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 10,
+  "y": 9,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.omni_accelerator.page0.text",
+      "title": "item.pastel.omni_accelerator"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier3/omni_accelerator",
+      "text": "book.pastel.guidebook.omni_accelerator.page1.text"
+    }
+  ]
+}

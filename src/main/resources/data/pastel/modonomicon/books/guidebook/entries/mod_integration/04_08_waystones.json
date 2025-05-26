@@ -1,0 +1,37 @@
+{
+  "name": "book.pastel.guidebook.mod_integration.waystones.name",
+  "icon": {
+    "item": "waystones:waystone"
+  },
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:mod_loaded",
+        "mod_id": "waystones"
+      },
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_radiating_ender"
+      }
+    ]
+  },
+  "category": "pastel:mod_integration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 8,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.mod_integration.waystones.page0.text",
+      "title": "book.pastel.guidebook.mod_integration.waystones.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:mod_integration/waystones/pedestal/alt_sharestone"
+    }
+  ]
+}

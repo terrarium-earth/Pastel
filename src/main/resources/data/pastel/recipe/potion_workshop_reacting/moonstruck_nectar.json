@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:moonstruck_nectar",
+  "modifiers": {
+    "additional_drink_duration_ticks": -28
+  },
+  "required_advancement": "pastel:midgame/harvest_moonstruck_nectar"
+}

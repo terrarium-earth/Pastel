@@ -1,0 +1,29 @@
+{
+  "parent": "pastel:collect_mermaids_gem",
+  "display": {
+    "icon": {
+      "id": "pastel:lagoon_rod"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.fish_an_entity.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.fish_an_entity.description"
+    }
+  },
+  "criteria": {
+    "fished_an_entity": {
+      "trigger": "pastel:fishing_rod_hooked",
+      "conditions": {
+        "fished_entity": {}
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_mermaids_gem"
+      }
+    }
+  }
+}

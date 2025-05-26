@@ -95,12 +95,12 @@ public class RadianceStaffItem extends Item implements InkPowered {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		if (InkPowered.canUseClient()) {
-			tooltip.add(Component.translatable("item.spectrum.radiance_staff.tooltip.ink", INK_COST.color().getColoredInkName()));
+			tooltip.add(Component.translatable("item.pastel.radiance_staff.tooltip.ink", INK_COST.color().getColoredInkName()));
 		} else {
-			tooltip.add(Component.translatable("item.spectrum.radiance_staff.tooltip"));
+			tooltip.add(Component.translatable("item.pastel.radiance_staff.tooltip"));
 		}
-		tooltip.add(Component.translatable("item.spectrum.radiance_staff.tooltip2"));
-		tooltip.add(Component.translatable("item.spectrum.radiance_staff.tooltip3"));
+		tooltip.add(Component.translatable("item.pastel.radiance_staff.tooltip2"));
+		tooltip.add(Component.translatable("item.pastel.radiance_staff.tooltip3"));
 	}
 	
 	@Override

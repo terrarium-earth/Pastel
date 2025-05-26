@@ -1,0 +1,52 @@
+{
+  "parent": "pastel:midgame/craft_bottle_of_ruin",
+  "display": {
+    "icon": {
+      "id": "pastel:bedrock_dust"
+    },
+    "title": {
+      "translate": "advancements.pastel.break_decayed_bedrock.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.break_decayed_bedrock.description"
+    }
+  },
+  "criteria": {
+    "broken_decayed_bedrock": {
+      "trigger": "pastel:block_broken",
+      "conditions": {
+        "block": {
+          "blocks": "pastel:ruin",
+          "state": {
+            "conversion": "default"
+          }
+        }
+      }
+    },
+    "collected_bedrock_dust": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:bedrock_dust"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/craft_bottle_of_ruin"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "broken_decayed_bedrock",
+      "collected_bedrock_dust"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

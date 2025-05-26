@@ -24,7 +24,7 @@ public class HeatingCategory extends BlockToBlockWithChanceCategory {
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.heating.title");
+		return Component.translatable("container.pastel.rei.heating.title");
 	}
 	
 }

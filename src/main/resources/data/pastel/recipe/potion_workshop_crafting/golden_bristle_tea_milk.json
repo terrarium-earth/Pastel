@@ -1,0 +1,19 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "group": "deserts",
+  "base_ingredient": "minecraft:glass_bottle",
+  "use_up_base_ingredient": true,
+  "secret": true,
+  "color": 15853164,
+  "ingredient1": "pastel:sawblade_holly_berry",
+  "ingredient2": "minecraft:honey_bottle",
+  "ingredient3": "#c:milk",
+  "result": {
+    "id": "pastel:golden_bristle_tea",
+    "components": {
+      "pastel:with_milk": {}
+    },
+    "count": 1
+  },
+  "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook"
+}

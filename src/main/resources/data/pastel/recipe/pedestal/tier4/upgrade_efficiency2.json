@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "time": 6000,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:black": 0,
+    "pastel:white": 32
+  },
+  "experience": 4.0,
+  "pattern": [
+    "S",
+    "U"
+  ],
+  "ingredients": [
+    "pastel:upgrade_efficiency",
+    "pastel:pure_emerald"
+  ],
+  "result": {
+    "id": "pastel:upgrade_efficiency2",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/upgrades/upgrade_efficiency2"
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "pastel:midgame/collect_neolith",
+  "display": {
+    "icon": {
+      "id": "pastel:raw_azurite"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_azurite.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_azurite.description"
+    },
+    "hidden": true
+  },
+  "criteria": {
+    "collected_azurite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pastel:raw_azurite",
+              "pastel:azurite_ore",
+              "pastel:deepslate_azurite_ore",
+              "pastel:blackslag_azurite_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_neolith"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": "pastel:jade_jelly",
+  "results": [
+    {
+      "id": "pastel:jaramel",
+      "count": 4
+    }
+  ],
+  "experience": 0.2,
+  "time": 100,
+  "required_advancement": "pastel:unlocks/food/jaramel"
+}

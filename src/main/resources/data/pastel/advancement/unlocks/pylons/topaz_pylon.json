@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "placed_pedestal": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:place_pedestal"
+      }
+    },
+    "collected_gemstone_shard": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_shards/topaz"
+      }
+    }
+  }
+}

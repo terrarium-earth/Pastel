@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "pastel:stratine_ore"
+    }
+  ],
+  "result": {
+    "id": "pastel:stratine_fragments"
+  },
+  "experience": 0.2,
+  "cookingtime": 200
+}

@@ -1,0 +1,11 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": "minecraft:bucket",
+  "use_up_base_ingredient": true,
+  "color": 4268288,
+  "ingredient1": "minecraft:dirt",
+  "ingredient2": "minecraft:mud",
+  "result": {
+    "id": "pastel:goo_bucket"
+  }
+}

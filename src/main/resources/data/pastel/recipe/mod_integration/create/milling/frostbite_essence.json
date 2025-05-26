@@ -1,0 +1,36 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    "pastel:frostbite_crystal"
+  ],
+  "results": [
+    {
+      "id": "pastel:frostbite_essence",
+      "count": 12,
+      "chance": 1.0
+    },
+    {
+      "result": {
+        "id": "pastel:frostbite_essence",
+        "count": 2
+      },
+      "chance": 0.5
+    },
+    {
+      "result": {
+        "id": "pastel:frostbite_essence",
+        "count": 2
+      },
+      "chance": 0.5
+    }
+  ],
+  "processingTime": 450,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

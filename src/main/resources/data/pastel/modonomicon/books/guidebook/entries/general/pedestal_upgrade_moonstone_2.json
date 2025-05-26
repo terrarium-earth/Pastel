@@ -1,0 +1,63 @@
+{
+  "name": "book.pastel.guidebook.pedestal_upgrade_moonstone_2.name",
+  "icon": {
+    "item": "pastel:pedestal_moonstone"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/build_complex_pedestal_structure_without_moonstone"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/moonstone_shards",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 8,
+  "y": 9,
+  "turnin": "pastel:lategame/build_complex_pedestal_structure",
+  "pages": [
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.pedestal_upgrade_moonstone.name",
+      "items": [
+        "pastel:moonstone_chiseled_basalt",
+        "pastel:moonstone_chiseled_calcite"
+      ],
+      "text": "book.pastel.guidebook.pedestal_upgrade_moonstone_2.page0.text"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_name": "multiblock.pastel.pedestal_complex",
+      "multiblock_id": "pastel:pedestal_complex",
+      "show_visualize_button": true,
+      "text": "book.pastel.guidebook.pedestal_upgrade_moonstone.dimensions"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.checklist_complete",
+      "text": "book.pastel.guidebook.pedestal_upgrade_moonstone_2.page2.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.checklist_upgrade",
+      "text": "book.pastel.guidebook.pedestal_upgrade_moonstone_2.page3.text"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "book.pastel.guidebook.pedestal_customisation.title",
+      "images": [
+        "pastel:textures/gui/guidebook/spectrum_complex_customisation.png"
+      ]
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.pedestal_customisation.text"
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "values": [
-    "spectrum:stratine_ore",
-    "spectrum:paltaeria_ore",
-    "#spectrum:azurite_ores",
-    "#spectrum:basal_marbles"
+    "pastel:stratine_ore",
+    "pastel:paltaeria_ore",
+    "#pastel:azurite_ores",
+    "#pastel:basal_marbles"
   ]
 }

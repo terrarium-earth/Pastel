@@ -154,7 +154,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 	
 	@Override
 	protected Component getDefaultName() {
-		return Component.translatable("block.spectrum.cinderhearth");
+		return Component.translatable("block.pastel.cinderhearth");
 	}
 	
 	@Override

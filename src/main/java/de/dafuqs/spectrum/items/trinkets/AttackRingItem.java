@@ -24,7 +24,7 @@ import java.util.List;
 public class AttackRingItem extends SpectrumTrinketItem {
 	
 	public static final ResourceLocation ATTACK_RING_DAMAGE_ID = SpectrumCommon.locate("jeopardant");
-	public static final String ATTACK_RING_DAMAGE_NAME = "spectrum:jeopardant";
+	public static final String ATTACK_RING_DAMAGE_NAME = "pastel:jeopardant";
 	
 	public AttackRingItem(Properties settings) {
 		super(settings, SpectrumCommon.locate("unlocks/trinkets/jeopardant"));
@@ -58,9 +58,9 @@ public class AttackRingItem extends SpectrumTrinketItem {
 		Minecraft client = Minecraft.getInstance();
 		long mod = Math.round(getAttackModifierForEntity(client.player) * 100);
 		if (mod == 0) {
-			tooltip.add(Component.translatable("item.spectrum.jeopardant.tooltip.damage_zero"));
+			tooltip.add(Component.translatable("item.pastel.jeopardant.tooltip.damage_zero"));
 		} else {
-			tooltip.add(Component.translatable("item.spectrum.jeopardant.tooltip.damage", mod));
+			tooltip.add(Component.translatable("item.pastel.jeopardant.tooltip.damage", mod));
 		}
 	}
 	

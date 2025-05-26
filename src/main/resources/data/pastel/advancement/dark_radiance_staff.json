@@ -1,0 +1,47 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:radiance_staff"
+    },
+    "title": {
+      "translate": "advancements.pastel.dark_radiance_staff.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.dark_radiance_staff.description"
+    }
+  },
+  "parent": "pastel:build_basic_pedestal_structure",
+  "criteria": {
+    "toggled_light": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:radiance_staff"
+          ]
+        },
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "pastel:wand_light"
+                ],
+                "state": {
+                  "level": "1"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:build_basic_pedestal_structure"
+      }
+    }
+  }
+}

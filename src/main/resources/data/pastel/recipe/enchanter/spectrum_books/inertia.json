@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:brown_pigment"
+    },
+    {
+      "item": "pastel:brown_pigment"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "pastel:neolith"
+    },
+    {
+      "item": "pastel:brown_pigment"
+    },
+    {
+      "item": "pastel:brown_pigment"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "pastel:neolith"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:inertia": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/inertia",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:inertia"
+      ]
+    }
+  ]
+}

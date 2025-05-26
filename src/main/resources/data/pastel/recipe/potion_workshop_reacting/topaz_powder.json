@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:topaz_powder",
+  "modifiers": {
+    "no_particles": true
+  },
+  "required_advancement": "pastel:hidden/collect_shards/topaz"
+}

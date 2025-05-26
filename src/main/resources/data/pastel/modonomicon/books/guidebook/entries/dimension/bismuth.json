@@ -1,0 +1,51 @@
+{
+  "name": "book.pastel.guidebook.bismuth.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_bismuth"
+  },
+  "icon": {
+    "item": "pastel:bismuth_flake"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/crystal_gardens"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 1,
+  "turnin": "pastel:lategame/collect_bismuth_crystal",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.bismuth.name",
+      "text": "book.pastel.guidebook.bismuth.page0.text"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/crystallarieum"
+      },
+      "title": "book.pastel.guidebook.bismuth.page1.title",
+      "recipe_id": "pastel:crystallarieum/pastel/bismuth",
+      "text": "book.pastel.guidebook.bismuth.page1.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "container.pastel.rei.anvil_crushing.title",
+      "recipe_id": "pastel:anvil_crushing/bismuth/bismuth_from_cluster",
+      "text": "book.pastel.guidebook.bismuth.cluster_crushing.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "container.pastel.rei.anvil_crushing.title",
+      "recipe_id": "pastel:anvil_crushing/bismuth/bismuth_from_crystal",
+      "text": "book.pastel.guidebook.bismuth.crystal_crushing.text"
+    }
+  ]
+}

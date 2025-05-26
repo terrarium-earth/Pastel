@@ -1,0 +1,66 @@
+{
+  "name": "book.pastel.guidebook.mod_integration.little_ants.name",
+  "icon": {
+    "item": "ants:dirt_ant_nest"
+  },
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:mod_loaded",
+        "mod_id": "ants"
+      },
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:place_pedestal"
+      }
+    ]
+  },
+  "category": "pastel:mod_integration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.mod_integration.little_ants.page0.text",
+      "title": "book.pastel.guidebook.mod_integration.little_ants.name"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:jade_vine_petal_block"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_jade_vine_petals"
+      },
+      "text": "book.pastel.guidebook.mod_integration.little_ants.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:orange_dye"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_pigment"
+      },
+      "text": "book.pastel.guidebook.mod_integration.little_ants.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:orange_pigment"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_pigment"
+      },
+      "text": "book.pastel.guidebook.mod_integration.little_ants.page3.text"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "parent": "pastel:enter_color_mixing_preservation_ruin",
+  "display": {
+    "icon": {
+      "id": "pastel:preservation_chest"
+    },
+    "title": {
+      "translate": "advancements.pastel.solve_color_mixing_preservation_ruin.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.solve_color_mixing_preservation_ruin.description"
+    }
+  },
+  "criteria": {
+    "opened_color_mixing_preservation_chest": {
+      "trigger": "minecraft:player_generates_container_loot",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "feature": "pastel:preservation_ruins"
+              }
+            }
+          }
+        ],
+        "loot_table": "pastel:chests/color_combinations_cmy"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:enter_color_mixing_preservation_ruin"
+      }
+    }
+  }
+}

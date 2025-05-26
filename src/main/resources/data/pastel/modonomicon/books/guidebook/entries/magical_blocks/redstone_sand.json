@@ -1,0 +1,33 @@
+{
+  "name": "block.pastel.redstone_sand",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/redstone/redstone_sand"
+  },
+  "icon": {
+    "item": "pastel:redstone_sand"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:redstone_sand"
+      },
+      "text": "book.pastel.guidebook.redstone_sand.page0.text",
+      "title": "block.pastel.redstone_sand"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/redstone_sand",
+      "text": "book.pastel.guidebook.redstone_sand.page1.text"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "pastel:block/abyssal_vines_fruiting"
+  }
+}

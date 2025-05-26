@@ -1,0 +1,190 @@
+{
+  "type": "modonomicon:dense",
+  "pattern": [
+    [
+      "_____________",
+      "____XtStX____",
+      "_____________",
+      "_____________",
+      "_X__OtttO__X_",
+      "_T__T___T__T_",
+      "_S__T___T__S_",
+      "_T__T___T__T_",
+      "_X__OtttO__X_",
+      "_____________",
+      "_____________",
+      "____XtStX____",
+      "_____________"
+    ],
+    [
+      "_____________",
+      "_Sttr___rttS_",
+      "_T__T___T__T_",
+      "_T__T___T__T_",
+      "_rttX___Xttr_",
+      "_____________",
+      "_____________",
+      "_____________",
+      "_rttX___Xttr_",
+      "_T__T___T__T_",
+      "_T__T___T__T_",
+      "_Sttr___rttS_",
+      "_____________"
+    ],
+    [
+      "_____________",
+      "_Q__Q___Q__Q_",
+      "_____________",
+      "_____________",
+      "_Q_________Q_",
+      "_____________",
+      "_____________",
+      "_____________",
+      "_Q_________Q_",
+      "_____________",
+      "_____________",
+      "_Q__Q___Q__Q_",
+      "_____________"
+    ],
+    [
+      "_____________",
+      "_C__Q___Q__C_",
+      "_____________",
+      "_____________",
+      "_Q_________Q_",
+      "_____________",
+      "_____________",
+      "_____________",
+      "_Q_________Q_",
+      "_____________",
+      "_____________",
+      "_C__Q___Q__C_",
+      "_____________"
+    ],
+    [
+      "_____________",
+      "_Q__L___L__Q_",
+      "_____________",
+      "___S_____S___",
+      "_L_________L_",
+      "_____________",
+      "_____________",
+      "_____________",
+      "_L_________L_",
+      "___S_____S___",
+      "_____________",
+      "_Q__L___L__Q_",
+      "_____________"
+    ],
+    [
+      "_____________",
+      "_K__Q___Q__K_",
+      "_____________",
+      "___Q_____Q___",
+      "_Q_________Q_",
+      "_____________",
+      "______P______",
+      "_____________",
+      "_Q_________Q_",
+      "___Q_____Q___",
+      "_____________",
+      "_K__Q___Q__K_",
+      "_____________"
+    ],
+    [
+      "XXXXXXXXXXXXX",
+      "XXnnXnnnXnnXX",
+      "XmXXXXXXXXXMX",
+      "XmXXXXXXXXXMX",
+      "XXXXXrXrXXXXX",
+      "XmXXrXXXrXXMX",
+      "XmXXXX0XXXXMX",
+      "XmXXrXXXrXXMX",
+      "XXXXXrXrXXXXX",
+      "XmXXXXXXXXXMX",
+      "XmXXXXXXXXXMX",
+      "XXNNXNNNXNNXX",
+      "XXXXXXXXXXXXX"
+    ]
+  ],
+  "mapping": {
+    "X": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt",
+      "tag": "#pastel:structure/bases"
+    },
+    "T": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt_crest[cardinal_facing=true]",
+      "tag": "#pastel:structure/crests"
+    },
+    "t": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt_crest[cardinal_facing=false]",
+      "tag": "#pastel:structure/crests"
+    },
+    "Q": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_basalt_pillar[axis=y]",
+      "tag": "#pastel:structure/pillars"
+    },
+    "L": {
+      "type": "modonomicon:tag",
+      "display": "pastel:amethyst_basalt_light",
+      "tag": "#pastel:structure/lights"
+    },
+    "S": {
+      "type": "modonomicon:tag",
+      "display": "pastel:polished_amethyst_block",
+      "tag": "#pastel:structure/gemstones"
+    },
+    "C": {
+      "type": "modonomicon:tag",
+      "display": "pastel:chiseled_polished_basalt",
+      "tag": "#pastel:structure/chiseled"
+    },
+    "K": {
+      "type": "modonomicon:tag",
+      "display": "pastel:notched_polished_basalt",
+      "tag": "#pastel:structure/notched"
+    },
+    "r": {
+      "type": "modonomicon:tag",
+      "display": "pastel:amethyst_chiseled_basalt",
+      "tag": "#pastel:structure/earlygame_runes"
+    },
+    "O": {
+      "type": "modonomicon:tag",
+      "display": "pastel:onyx_chiseled_basalt",
+      "tag": "#pastel:structure/midgame_runes"
+    },
+    "m": {
+      "type": "modonomicon:tag",
+      "display": "pastel:moonstone_chiseled_basalt[facing=east]",
+      "tag": "#pastel:structure/lategame_runes"
+    },
+    "n": {
+      "type": "modonomicon:tag",
+      "display": "pastel:moonstone_chiseled_basalt[facing=north]",
+      "tag": "#pastel:structure/lategame_runes"
+    },
+    "M": {
+      "type": "modonomicon:tag",
+      "display": "pastel:moonstone_chiseled_basalt[facing=west]",
+      "tag": "#pastel:structure/lategame_runes"
+    },
+    "N": {
+      "type": "modonomicon:tag",
+      "display": "pastel:moonstone_chiseled_basalt[facing=south]",
+      "tag": "#pastel:structure/lategame_runes"
+    },
+    "P": {
+      "type": "modonomicon:tag",
+      "display": "pastel:pedestal_moonstone",
+      "tag": "#pastel:pedestals"
+    },
+    "0": {
+      "type": "modonomicon:any"
+    }
+  }
+}

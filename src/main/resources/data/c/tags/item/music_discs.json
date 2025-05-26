@@ -1,7 +1,7 @@
 {
   "values": [
-    "spectrum:music_disc_discovery",
-    "spectrum:music_disc_credits",
-    "spectrum:music_disc_divinity"
+    "pastel:music_disc_discovery",
+    "pastel:music_disc_credits",
+    "pastel:music_disc_divinity"
   ]
 }

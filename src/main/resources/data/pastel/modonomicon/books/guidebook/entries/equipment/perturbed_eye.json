@@ -1,0 +1,45 @@
+{
+  "name": "book.pastel.guidebook.perturbed_eye.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/perturbed_eye"
+  },
+  "icon": {
+    "item": "minecraft:end_portal_frame"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.perturbed_eye.page0.text",
+      "title": "book.pastel.guidebook.perturbed_eye.name"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "images": [
+        "pastel:textures/gui/guidebook/end_portal.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.perturbed_eye.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.perturbed_eye.page2.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier4/perturbed_eye"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_id": "pastel:perturbed_eye_portal",
+      "text": "book.pastel.guidebook.perturbed_eye.page3.text",
+      "multiblock_name": "multiblock.pastel.perturbed_eye_portal"
+    }
+  ]
+}

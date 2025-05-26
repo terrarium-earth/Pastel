@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:midgame/collect_neolith",
+  "display": {
+    "icon": {
+      "id": "pastel:storm_stone"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_storm_stone.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_storm_stone.description"
+    }
+  },
+  "criteria": {
+    "has_storm_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:storm_stone"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_neolith"
+      }
+    }
+  }
+}

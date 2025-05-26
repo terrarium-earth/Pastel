@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates/redstone_transceiver_receiver_base",
+  "textures": {
+    "light": "minecraft:block/redstone_torch_off"
+  }
+}

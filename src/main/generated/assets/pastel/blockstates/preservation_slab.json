@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pastel:block/preservation_slab"
+    },
+    "type=double": {
+      "model": "pastel:block/preservation_stone"
+    },
+    "type=top": {
+      "model": "pastel:block/preservation_slab_top"
+    }
+  }
+}

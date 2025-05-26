@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "time": 200,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 8,
+    "pastel:cyan": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 1,
+  "pattern": [
+    "VGV",
+    "GMG",
+    "VGV"
+  ],
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "M": "minecraft:melon_seeds",
+    "V": "pastel:vegetal"
+  },
+  "result": {
+    "id": "pastel:glistering_melon_seeds",
+    "count": 1
+  },
+  "required_advancement": "pastel:collect_vegetal"
+}

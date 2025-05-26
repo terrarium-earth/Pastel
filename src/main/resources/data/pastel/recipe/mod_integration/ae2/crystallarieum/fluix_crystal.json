@@ -1,0 +1,73 @@
+{
+  "type": "pastel:crystallarieum_growing",
+  "ingredient": {
+    "item": "ae2:fluix_crystal"
+  },
+  "growth_stage_states": [
+    {
+      "Name": "pastel:small_fluix_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "pastel:large_fluix_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "pastel:fluix_cluster",
+      "Properties": {
+        "facing": "up"
+      }
+    }
+  ],
+  "seconds_per_growth_stage": 60,
+  "ink_color": "pastel:yellow",
+  "ink_cost_tier": 2,
+  "grows_without_catalyst": false,
+  "catalysts": [
+    {
+      "ingredient": [
+        {
+          "item": "pastel:rock_crystal"
+        }
+      ],
+      "growth_acceleration_mod": 12.0,
+      "ink_consumption_mod": 0.5,
+      "consume_chance_per_second": 0.5
+    },
+    {
+      "ingredient": [
+        {
+          "item": "pastel:storm_stone"
+        }
+      ],
+      "growth_acceleration_mod": 4.0,
+      "ink_consumption_mod": 0.125,
+      "consume_chance_per_second": 0.05
+    },
+    {
+      "ingredient": [
+        {
+          "tag": "minecraft:sand"
+        }
+      ],
+      "growth_acceleration_mod": 2.0,
+      "ink_consumption_mod": 1.0,
+      "consume_chance_per_second": 0.2
+    }
+  ],
+  "additional_recipe_manager_results": [
+    {
+      "id": "pastel:pure_fluix"
+    }
+  ],
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:integration_pack_active",
+      "integration_pack": "ae2"
+    }
+  ]
+}

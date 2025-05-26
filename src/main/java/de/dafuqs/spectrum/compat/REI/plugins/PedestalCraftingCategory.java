@@ -37,7 +37,7 @@ public class PedestalCraftingCategory extends GatedDisplayCategory<PedestalCraft
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.pedestal_crafting.title");
+		return Component.translatable("container.pastel.rei.pedestal_crafting.title");
 	}
 	
 	@Override

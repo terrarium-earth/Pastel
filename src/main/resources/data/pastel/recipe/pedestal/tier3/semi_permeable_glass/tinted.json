@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "group": "semi_permeable_glass",
+  "time": 80,
+  "tier": "advanced",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:cyan": 0,
+    "pastel:black": 2,
+    "pastel:white": 0
+  },
+  "experience": 1.0,
+  "pattern": [
+    "GPG",
+    "PSP",
+    "GPG"
+  ],
+  "key": {
+    "S": "pastel:onyx_shard",
+    "P": "pastel:purple_pigment",
+    "G": "minecraft:tinted_glass"
+  },
+  "result": {
+    "id": "pastel:tinted_semi_permeable_glass",
+    "count": 6
+  },
+  "required_advancement": "pastel:midgame/build_advanced_pedestal_structure"
+}

@@ -1,0 +1,37 @@
+{
+  "parent": "pastel:craft_using_pedestal",
+  "display": {
+    "icon": {
+      "id": "pastel:shimmerstone_gem"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_shimmerstone.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_shimmerstone.description"
+    }
+  },
+  "criteria": {
+    "collected_shimmerstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pastel:shimmerstone_gem",
+              "pastel:shimmerstone_ore",
+              "pastel:deepslate_shimmerstone_ore",
+              "pastel:blackslag_shimmerstone_ore"
+            ]
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_using_pedestal"
+      }
+    }
+  }
+}

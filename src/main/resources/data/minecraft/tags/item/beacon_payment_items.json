@@ -1,12 +1,12 @@
 {
   "values": [
-    "#spectrum:pure_resources",
+    "#pastel:pure_resources",
 
     "minecraft:amethyst_shard",
-    "spectrum:topaz_shard",
-    "spectrum:citrine_shard",
-    "spectrum:onyx_shard",
-    "spectrum:moonstone_shard",
-    "spectrum:spectral_shard"
+    "pastel:topaz_shard",
+    "pastel:citrine_shard",
+    "pastel:onyx_shard",
+    "pastel:moonstone_shard",
+    "pastel:spectral_shard"
   ]
 }

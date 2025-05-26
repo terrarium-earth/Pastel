@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WW",
+    "WW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:moonstone_shard"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:moonstone_block",
+    "count": 1
+  }
+}

@@ -31,9 +31,9 @@ public record JadeWineComponent(float bloominess, boolean sweetened) implements 
 	@Override
 	public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag type) {
 		if (sweetened)
-			tooltip.accept(Component.translatable("item.spectrum.jade_wine.tooltip.bloominess_sweetened", bloominess).withStyle(ChatFormatting.GRAY));
+			tooltip.accept(Component.translatable("item.pastel.jade_wine.tooltip.bloominess_sweetened", bloominess).withStyle(ChatFormatting.GRAY));
 		else
-			tooltip.accept(Component.translatable("item.spectrum.jade_wine.tooltip.bloominess", bloominess).withStyle(ChatFormatting.GRAY));
+			tooltip.accept(Component.translatable("item.pastel.jade_wine.tooltip.bloominess", bloominess).withStyle(ChatFormatting.GRAY));
 	}
 	
 }

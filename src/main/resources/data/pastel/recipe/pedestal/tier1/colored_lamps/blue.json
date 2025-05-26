@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "group": "colored_lamps",
+  "time": 40,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 3,
+    "pastel:magenta": 2,
+    "pastel:yellow": 1,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 0.5,
+  "pattern": [
+    "SPS",
+    "PRP",
+    "SPS"
+  ],
+  "key": {
+    "P": "pastel:blue_pigment",
+    "R": "minecraft:redstone",
+    "S": "pastel:shimmerstone_gem"
+  },
+  "result": {
+    "id": "pastel:blue_lamp",
+    "count": 2
+  },
+  "required_advancement": "pastel:unlocks/colored_lamps/blue_lamp"
+}

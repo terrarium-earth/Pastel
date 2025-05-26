@@ -24,7 +24,7 @@ public class FreezingCategory extends BlockToBlockWithChanceCategory {
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.freezing.title");
+		return Component.translatable("container.pastel.rei.freezing.title");
 	}
 	
 }

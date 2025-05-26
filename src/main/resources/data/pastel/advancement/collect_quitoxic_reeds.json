@@ -1,0 +1,36 @@
+{
+  "parent": "pastel:craft_cmy_pedestal",
+  "display": {
+    "icon": {
+      "id": "pastel:quitoxic_reeds"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_quitoxic_reeds.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_quitoxic_reeds.description"
+    }
+  },
+  "criteria": {
+    "collected_quitoxic_reeds": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pastel:quitoxic_reeds",
+              "pastel:quitoxic_powder"
+            ]
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_cmy_pedestal"
+      }
+    }
+  }
+}

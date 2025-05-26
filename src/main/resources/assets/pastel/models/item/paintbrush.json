@@ -1,0 +1,16 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "pastel:item/paintbrush",
+    "layer1": "pastel:item/paintbrush_tint",
+    "layer2": "pastel:item/paintbrush_overlay"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "oversized": 1.0
+      },
+      "model": "pastel:item/paintbrush_oversized"
+    }
+  ]
+}

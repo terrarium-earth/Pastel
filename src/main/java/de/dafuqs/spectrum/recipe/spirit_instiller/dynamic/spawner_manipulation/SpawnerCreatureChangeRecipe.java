@@ -59,7 +59,7 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public Component getOutputLoreText() {
-		return Component.translatable("recipe.spectrum.spawner.lore.changed_creature");
+		return Component.translatable("recipe.pastel.spawner.lore.changed_creature");
 	}
 	
 	@Override

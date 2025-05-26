@@ -1,0 +1,31 @@
+{
+  "name": "block.pastel.nightdew",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/break_nightdew_vine"
+  },
+  "icon": "pastel:textures/block/nightdew.png",
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/crystal_gardens"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 5,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "block.pastel.nightdew",
+      "text": "book.pastel.guidebook.nightdew.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.nightdew.page1.title",
+      "text": "book.pastel.guidebook.nightdew.page1.text"
+    }
+  ]
+}

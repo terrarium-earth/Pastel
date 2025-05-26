@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W  ",
+    "WW ",
+    "WWW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:blackslag_tiles"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:blackslag_tile_stairs",
+    "count": 6
+  }
+}

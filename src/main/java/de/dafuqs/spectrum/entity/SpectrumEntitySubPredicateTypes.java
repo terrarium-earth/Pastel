@@ -18,10 +18,10 @@ public class SpectrumEntitySubPredicateTypes {
 	public static void register() {
 		// EntitySubPredicateTypes are not handled via identifiers, but we'll add our mod id anyway,
 		// in case of collisions with future vanilla updates or other mods
-		Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, "spectrum:egg_laying_wooly_pig", EGG_LAYING_WOOLY_PIG);
-		Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, "spectrum:shulker", SHULKER);
-		Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, "spectrum:kindling", KINDLING);
-		Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, "spectrum:lizard", LIZARD);
+		Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, "pastel:egg_laying_wooly_pig", EGG_LAYING_WOOLY_PIG);
+		Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, "pastel:shulker", SHULKER);
+		Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, "pastel:kindling", KINDLING);
+		Registry.register(BuiltInRegistries.ENTITY_SUB_PREDICATE_TYPE, "pastel:lizard", LIZARD);
 	}
 	
 }

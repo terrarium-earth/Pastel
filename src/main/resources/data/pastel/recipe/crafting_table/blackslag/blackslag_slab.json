@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:blackslag"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:blackslag_slab",
+    "count": 6
+  }
+}

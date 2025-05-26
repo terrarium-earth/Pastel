@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "pastel:block/ivory_noxwood_pressure_plate"
+    },
+    "powered=true": {
+      "model": "pastel:block/ivory_noxwood_pressure_plate_down"
+    }
+  }
+}

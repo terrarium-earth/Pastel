@@ -23,7 +23,7 @@ public class PotionWorkshopBrewingCategory extends PotionWorkshopCategory<Potion
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.potion_workshop_brewing.title");
+		return Component.translatable("container.pastel.rei.potion_workshop_brewing.title");
 	}
 	
 }

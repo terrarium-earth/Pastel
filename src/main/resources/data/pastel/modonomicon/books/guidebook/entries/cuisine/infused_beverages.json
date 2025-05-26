@@ -1,0 +1,285 @@
+{
+  "name": "book.pastel.guidebook.infused_beverages.name",
+  "icon": {
+    "item": "pastel:infused_beverage"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/titration_barrel"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/titration_barrel",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.infused_beverages.name",
+      "text": "book.pastel.guidebook.infused_beverages.page0.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.malt_beer",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/malt_beer",
+      "text": "book.pastel.guidebook.infused_beverages.page3.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.sarsaparilla",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/sarsaparilla",
+      "text": "book.pastel.guidebook.infused_beverages.page4.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.myceylon_apple_juice",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_myceylon"
+      },
+      "recipe_id": "pastel:titration_barrel/infused_beverages/myceylon_apple_juice",
+      "text": "book.pastel.guidebook.infused_beverages.page5.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.camomillesque",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/camomillesque"
+      },
+      "recipe_id": "pastel:titration_barrel/infused_beverages/camomillesque"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.verdigris_wine",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/verdigris_wine"
+      },
+      "recipe_id": "pastel:titration_barrel/infused_beverages/verdigris_wine",
+      "text": "book.pastel.guidebook.infused_beverages.page6.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.beer",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/beer",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.ale",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/ale",
+      "text": "book.pastel.guidebook.infused_beverages.page7.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.porter",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/porter",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.porter",
+      "text": "book.pastel.guidebook.infused_beverages.page8.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.lager",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/lager",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/lager_fluid",
+      "text": "book.pastel.guidebook.infused_beverages.page9.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/gin"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.gin",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/gin",
+      "text": "book.pastel.guidebook.infused_beverages.page10.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.rum",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/rum",
+      "text": "book.pastel.guidebook.infused_beverages.page11.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.mead",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/mead",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/mead_fluid",
+      "text": "book.pastel.guidebook.infused_beverages.page12.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.apple_cider",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/apple_cider",
+      "text": "book.pastel.guidebook.infused_beverages.page13.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.golden_apple_cider",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/golden_apple_cider",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.enchanted_apple_cider",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/enchanted_apple_cider",
+      "text": "book.pastel.guidebook.infused_beverages.page14.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.berry_cider",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/berry_cider",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.glow_berry_cider",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/glow_berry_cider",
+      "text": "book.pastel.guidebook.infused_beverages.page15.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.berry_liquor",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/berry_liquor",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.glow_berry_liquor",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/glow_berry_liquor",
+      "text": "book.pastel.guidebook.infused_beverages.page16.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/mint_beverages"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.mint_cream",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/mint_cream",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.mint_schnapps",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/mint_schnapps",
+      "text": "book.pastel.guidebook.infused_beverages.page17.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.artemisa",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/artemisa",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.advocaat",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/advocaat"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.damassine",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/damassine",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.hare_bane_creme",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/hare_bane_creme"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.vodka",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/vodka",
+      "title2": "book.pastel.guidebook.infused_beverages.poisonous_vodka.title",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/poisonous_vodka",
+      "text": "book.pastel.guidebook.infused_beverages.page20.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.tequila",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/tequila",
+      "text": "book.pastel.guidebook.infused_beverages.page21.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/food/moonshine"
+      },
+      "title": "item.pastel.infused_beverage.tooltip.variant.moonshine",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/moonshine",
+      "text": "book.pastel.guidebook.infused_beverages.page22.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.myceylon_liquor",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/myceylon_liquor",
+      "text": "book.pastel.guidebook.infused_beverages.page23.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.spiked_mullet_wine",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/spiked_mullet_wine",
+      "text": "book.pastel.guidebook.infused_beverages.page24.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.glass_peach_cider",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/glass_peach_cider",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.glass_peach_liquor",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/glass_peach_liquor"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.sawblade_holly_cider",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/sawblade_holly_cider",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.sawblade_holly_liquor",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/sawblade_holly_liquor"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.plum_cider",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/plum_cider",
+      "title2": "item.pastel.infused_beverage.tooltip.variant.plum_liquor",
+      "recipe_id2": "pastel:titration_barrel/infused_beverages/plum_liquor"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "item.pastel.infused_beverage.tooltip.variant.gatorwine",
+      "recipe_id": "pastel:titration_barrel/infused_beverages/gatorwine"
+    }
+  ]
+}

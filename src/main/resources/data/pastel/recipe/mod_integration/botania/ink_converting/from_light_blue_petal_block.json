@@ -1,0 +1,17 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": {
+    "item": "botania:light_blue_petal_block"
+  },
+  "ink_color": "pastel:light_blue",
+  "amount": 225,
+  "required_advancement": "pastel:hidden/collect_pigment/light_blue",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "botania"
+      ]
+    }
+  ]
+}

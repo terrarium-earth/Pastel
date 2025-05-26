@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.azuresque_dike_core",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/azuresque_dike_core"
+  },
+  "icon": {
+    "item": "pastel:azuresque_dike_core"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/trinkets/base_trinkets",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 10,
+  "y": -3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.azuresque_dike_core.page0.text",
+      "title": "item.pastel.azuresque_dike_core"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.azuresque_dike_core.page1.text",
+      "title": "container.pastel.rei.fusion_recipe",
+      "recipe_id": "pastel:fusion_shrine/trinkets/azuresque_dike_core"
+    }
+  ]
+}

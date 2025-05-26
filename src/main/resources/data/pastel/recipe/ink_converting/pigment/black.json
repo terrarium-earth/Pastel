@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "pastel:black_pigment"
+    }
+  ],
+  "ink_color": "pastel:black",
+  "amount": 100,
+  "required_advancement": "pastel:hidden/collect_pigment/black"
+}

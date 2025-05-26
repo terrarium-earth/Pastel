@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:four_leaf_clover"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_four_leaf_clover.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_four_leaf_clover.description"
+    },
+    "hidden": true
+  },
+  "parent": "pastel:collect_pigment",
+  "criteria": {
+    "has_four_leaf_clover": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:four_leaf_clover"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_pigment"
+      }
+    }
+  }
+}

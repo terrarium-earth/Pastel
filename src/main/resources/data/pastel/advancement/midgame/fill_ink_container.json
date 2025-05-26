@@ -1,0 +1,39 @@
+{
+  "parent": "pastel:midgame/place_color_picker",
+  "display": {
+    "icon": {
+      "id": "pastel:ink_flask",
+      "components": {
+        "pastel:ink_storage": {
+          "max_energy_total": 409600,
+          "max_per_color": 409600,
+          "stored_energy": {
+            "pastel:purple": 409600
+          }
+        }
+      }
+    },
+    "title": {
+      "translate": "advancements.pastel.fill_ink_container.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.fill_ink_container.description"
+    }
+  },
+  "criteria": {
+    "filled_ink_container": {
+      "trigger": "pastel:ink_container_interaction",
+      "conditions": {
+        "change_amount": {
+          "min": 1
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/place_color_picker"
+      }
+    }
+  }
+}

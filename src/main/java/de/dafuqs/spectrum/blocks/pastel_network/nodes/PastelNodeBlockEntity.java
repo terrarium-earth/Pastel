@@ -595,7 +595,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("block.spectrum.pastel_node");
+		return Component.translatable("block.pastel.pastel_node");
 	}
 	
 	@Nullable

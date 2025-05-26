@@ -1,0 +1,63 @@
+{
+  "name": "book.pastel.guidebook.paltaeria.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_paltaeria"
+  },
+  "icon": {
+    "item": "pastel:paltaeria_fragments"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/pedestal_upgrade_moonstone_2"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": 11,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.paltaeria.name",
+      "item": {
+        "item": "pastel:paltaeria_fragments"
+      },
+      "text": "book.pastel.guidebook.paltaeria.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "item.pastel.paltaeria_gem",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_paltaeria_gem"
+      },
+      "recipe_id": "pastel:pedestal/tier4/paltaeria_gem",
+      "text": "book.pastel.guidebook.rare_intact_gem"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.paltaeria_floatblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/carry_too_many_low_gravity_blocks"
+      },
+      "item": {
+        "item": "pastel:paltaeria_floatblock"
+      },
+      "text": "book.pastel.guidebook.paltaeria.page2.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/carry_too_many_low_gravity_blocks"
+      },
+      "text": "book.pastel.guidebook.paltaeria.page3.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/compacting/paltaeria_floatblock"
+    }
+  ]
+}

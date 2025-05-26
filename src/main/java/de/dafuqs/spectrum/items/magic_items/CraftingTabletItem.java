@@ -40,7 +40,7 @@ import java.util.Optional;
 
 public class CraftingTabletItem extends Item implements LoomPatternProvider {
 	
-	private static final Component TITLE = Component.translatable("item.spectrum.crafting_tablet");
+	private static final Component TITLE = Component.translatable("item.pastel.crafting_tablet");
 	
 	public CraftingTabletItem(Properties settings) {
 		super(settings);
@@ -125,14 +125,14 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
 		super.appendHoverText(stack, context, tooltip, type);
 		var recipe = getStoredRecipe(Minecraft.getInstance().level, stack);
 		if (recipe == null) {
-			tooltip.add(Component.translatable("item.spectrum.crafting_tablet.tooltip.no_recipe").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.crafting_tablet.tooltip.no_recipe").withStyle(ChatFormatting.GRAY));
 		} else {
 			if (recipe.value() instanceof PedestalRecipe) {
-				tooltip.add(Component.translatable("item.spectrum.crafting_tablet.tooltip.pedestal_recipe").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.crafting_tablet.tooltip.pedestal_recipe").withStyle(ChatFormatting.GRAY));
 			} else {
-				tooltip.add(Component.translatable("item.spectrum.crafting_tablet.tooltip.crafting_recipe").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.crafting_tablet.tooltip.crafting_recipe").withStyle(ChatFormatting.GRAY));
 			}
-			tooltip.add(Component.translatable("item.spectrum.crafting_tablet.tooltip.shift_to_view_gui").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.crafting_tablet.tooltip.shift_to_view_gui").withStyle(ChatFormatting.GRAY));
 		}
 		
 		addBannerPatternProviderTooltip(tooltip);

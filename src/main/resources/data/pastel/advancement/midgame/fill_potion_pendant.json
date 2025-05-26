@@ -1,0 +1,45 @@
+{
+  "parent": "pastel:midgame/brew_potion_in_potion_workshop",
+  "display": {
+    "icon": {
+      "id": "pastel:lesser_potion_pendant",
+      "components": {
+        "minecraft:potion_contents": {
+          "custom_color": 14981690,
+          "custom_effects": [
+            {
+              "id": "minecraft:absorption",
+              "amplifier": 0,
+              "duration": 3600
+            }
+          ]
+        }
+      }
+    },
+    "title": {
+      "translate": "advancements.pastel.fill_potion_pendant.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.fill_potion_pendant.description"
+    }
+  },
+  "criteria": {
+    "filled_potion_pendant": {
+      "trigger": "pastel:potion_workshop_brewing",
+      "conditions": {
+        "item": {
+          "items": "#pastel:potion_pendants"
+        },
+        "effect_count": {
+          "min": 1
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/brew_potion_in_potion_workshop"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "book.pastel.guidebook.serendipity_reel.name",
+  "icon": {
+    "item": "pastel:lagoon_rod"
+  },
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/enchantments/serendipity_reel"
+      },
+      {
+        "type": "pastel:enchantment_registered",
+        "enchantment_id": "pastel:serendipity_reel"
+      }
+    ]
+  },
+  "flag": "pastel:enchantment_exists_spectrum_serendipity_reel",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": 3,
+  "x": 8,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.serendipity_reel.page0.text",
+      "title": "book.pastel.guidebook.serendipity_reel.name"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "pastel:lagoon_rod"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:serendipity_reel": 2
+        }
+      },
+      "text": "book.pastel.guidebook.serendipity_reel.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/serendipity_reel"
+    },
+    {
+      "type": "pastel:enchanter_upgrading",
+      "text": "book.pastel.guidebook.upgrading.text",
+      "title": "container.pastel.rei.enchantment_upgrading.title",
+      "recipe_id": "pastel:enchantment_upgrade/pastel/serendipity_reel"
+    }
+  ]
+}

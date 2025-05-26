@@ -1,0 +1,8 @@
+{
+  "parent": "pastel:templates/shimmerstone_light_mirrored",
+  "textures": {
+    "inner": "pastel:block/shimmerstone_light",
+    "outer": "pastel:block/calcite_flat_light",
+    "particle": "pastel:block/calcite_flat_light"
+  }
+}

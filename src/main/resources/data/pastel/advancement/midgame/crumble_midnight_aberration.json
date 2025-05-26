@@ -1,0 +1,26 @@
+{
+  "parent": "pastel:midgame/create_midnight_aberration",
+  "display": {
+    "icon": {
+      "id": "pastel:midnight_aberration"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.crumble_midnight_aberration.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.crumble_midnight_aberration.description"
+    }
+  },
+  "criteria": {
+    "have_midnight_aberration_crumble": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/create_midnight_aberration"
+      }
+    }
+  }
+}

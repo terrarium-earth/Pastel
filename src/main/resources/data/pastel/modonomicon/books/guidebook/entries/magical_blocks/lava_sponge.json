@@ -1,0 +1,35 @@
+{
+  "name": "block.pastel.lava_sponge",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/lava_sponge"
+  },
+  "icon": {
+    "item": "pastel:lava_sponge"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 7,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "block.pastel.lava_sponge",
+      "text": "book.pastel.guidebook.lava_sponge.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.lava_sponge.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/lava_sponge"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.lava_sponge.page2.title",
+      "text": "book.pastel.guidebook.lava_sponge.page2.text"
+    }
+  ]
+}

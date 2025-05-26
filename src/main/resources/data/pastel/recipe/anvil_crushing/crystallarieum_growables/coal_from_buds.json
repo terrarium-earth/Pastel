@@ -1,0 +1,21 @@
+{
+  "type": "pastel:anvil_crushing",
+  "ingredient": [
+    {
+      "item": "pastel:small_coal_bud"
+    },
+    {
+      "item": "pastel:large_coal_bud"
+    }
+  ],
+  "crushedItemsPerPointOfDamage": 1.0,
+  "experience": 2.0,
+  "result": {
+    "id": "minecraft:coal",
+    "count": 1
+  },
+  "particleEffectIdentifier": "explosion",
+  "soundEventIdentifier": "block.amethyst_cluster.break",
+  "group": "crystallarieum_growable_crushing",
+  "required_advancement": "pastel:unlocks/blocks/crystallarieum"
+}

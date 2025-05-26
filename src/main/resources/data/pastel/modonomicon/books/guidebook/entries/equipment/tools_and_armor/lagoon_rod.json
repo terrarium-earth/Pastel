@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.lagoon_rod",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/lagoon_rod"
+  },
+  "icon": {
+    "item": "pastel:lagoon_rod"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.lagoon_rod.page0.text",
+      "title": "item.pastel.lagoon_rod"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.lagoon_rod.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/tools/lagoon_rod"
+    }
+  ]
+}

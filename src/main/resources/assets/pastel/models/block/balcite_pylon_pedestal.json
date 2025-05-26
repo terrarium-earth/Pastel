@@ -1,0 +1,9 @@
+{
+  "parent": "pastel:templates/base_pylon_pedestal",
+  "textures": {
+    "top": "pastel:block/balcite_pylon_stand_top",
+    "side": "pastel:block/balcite_pylon_stand_side",
+    "anchor": "pastel:block/balcite_pylon_stand_anchor",
+    "bottom": "pastel:block/balcite_pylon_stand_bottom"
+  }
+}

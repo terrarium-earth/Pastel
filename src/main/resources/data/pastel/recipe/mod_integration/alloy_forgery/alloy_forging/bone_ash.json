@@ -1,0 +1,26 @@
+{
+  "type": "alloy_forgery:forging",
+  "inputs": [
+    "pastel:dragonbone_chunk"
+  ],
+  "output": {
+    "id": "pastel:bone_ash",
+    "count": 45
+  },
+  "overrides": {
+    "4+": {
+      "id": "pastel:bone_ash",
+      "count": 64
+    }
+  },
+  "min_forge_tier": 3,
+  "fuel_per_tick": 20,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "alloy_forgery"
+      ]
+    }
+  ]
+}

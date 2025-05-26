@@ -1,0 +1,40 @@
+{
+  "type": "pastel:pedestal",
+  "time": 160,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 1.0,
+  "pattern": [
+    "JBJ",
+    "EME",
+    "AAA"
+  ],
+  "key": {
+    "A": "pastel:crawfish",
+    "J": "minecraft:sweet_berries",
+    "E": "#c:mushrooms",
+    "M": {
+      "item": "pastel:infused_beverage",
+      "recipeViewNbt": "{Variant: \"rum\", Color: 10505507 }",
+      "predicates": {
+        "pastel:infused_beverage": [
+          {
+            "variants": "rum"
+          }
+        ]
+      }
+    },
+    "B": "pastel:prickly_bayleaf"
+  },
+  "result": {
+    "id": "pastel:banyash",
+    "count": 1
+  },
+  "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1"
+}

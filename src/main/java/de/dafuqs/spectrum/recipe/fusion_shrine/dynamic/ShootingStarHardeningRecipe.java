@@ -26,7 +26,7 @@ import java.util.Optional;
 public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
 	
 	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("collect_all_shooting_star_variants");
-	public static final Component DESCRIPTION = Component.translatable("spectrum.recipe.fusion_shrine.explanation.shooting_star_hardening");
+	public static final Component DESCRIPTION = Component.translatable("pastel.recipe.fusion_shrine.explanation.shooting_star_hardening");
 	
 	public ShootingStarHardeningRecipe() {
 		super("", false, Optional.of(UNLOCK_IDENTIFIER), List.of(IngredientStack.ofTag(SpectrumItemTags.SHOOTING_STARS), IngredientStack.ofItems(Items.DIAMOND)), FluidIngredient.of(Fluids.WATER), getHardenedShootingStar(),

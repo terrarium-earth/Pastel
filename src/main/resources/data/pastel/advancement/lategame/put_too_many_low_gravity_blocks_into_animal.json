@@ -1,0 +1,27 @@
+{
+  "parent": "pastel:lategame/collect_paltaeria",
+  "display": {
+    "icon": {
+      "id": "pastel:paltaeria_gem"
+    },
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.put_too_many_low_gravity_blocks_into_animal.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.put_too_many_low_gravity_blocks_into_animal.description"
+    },
+    "hidden": true
+  },
+  "criteria": {
+    "gravity": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_paltaeria"
+      }
+    }
+  }
+}

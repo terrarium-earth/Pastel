@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:midgame/collect_azurite",
+  "display": {
+    "icon": {
+      "id": "pastel:pigment_palette"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.equip_pigment_palette.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.equip_pigment_palette.description"
+    }
+  },
+  "criteria": {
+    "equipped_pigment_palette": {
+      "trigger": "pastel:trinket_change",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:pigment_palette"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_azurite"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:radiating_ender"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_radiating_ender.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_radiating_ender.description"
+    },
+    "hidden": true
+  },
+  "parent": "pastel:pastel",
+  "criteria": {
+    "gotten_radiating_ender": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:radiating_ender"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:pastel"
+      }
+    }
+  }
+}

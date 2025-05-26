@@ -1,0 +1,26 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:density"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:cyan_pigment"
+  },
+  "enchantment": "minecraft:density",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 16
+  },
+  "level_cap": 8,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_trial",
+  "xp_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 400
+  }
+}

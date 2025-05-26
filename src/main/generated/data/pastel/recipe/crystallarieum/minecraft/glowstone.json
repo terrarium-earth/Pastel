@@ -1,0 +1,64 @@
+{
+  "type": "pastel:crystallarieum_growing",
+  "additional_recipe_manager_results": [
+    {
+      "count": 1,
+      "id": "pastel:pure_glowstone"
+    }
+  ],
+  "catalysts": [
+    {
+      "consume_chance_per_second": 0.1,
+      "growth_acceleration_mod": 16.0,
+      "ingredient": {
+        "item": "pastel:shimmerstone_gem"
+      },
+      "ink_consumption_mod": 1.0
+    },
+    {
+      "consume_chance_per_second": 0.02,
+      "growth_acceleration_mod": 4.0,
+      "ingredient": {
+        "item": "pastel:frostbite_essence"
+      },
+      "ink_consumption_mod": 0.25
+    },
+    {
+      "consume_chance_per_second": 0.05,
+      "growth_acceleration_mod": 1.0,
+      "ingredient": {
+        "item": "pastel:moonstone_shard"
+      },
+      "ink_consumption_mod": 0.01
+    }
+  ],
+  "growth_stage_states": [
+    {
+      "Name": "pastel:small_glowstone_bud",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "pastel:large_glowstone_bud",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "pastel:glowstone_cluster",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    }
+  ],
+  "ingredient": {
+    "item": "minecraft:glowstone"
+  },
+  "ink_color": "pastel:yellow",
+  "ink_cost_tier": 2,
+  "seconds_per_growth_stage": 120
+}

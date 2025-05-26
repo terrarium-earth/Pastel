@@ -24,7 +24,7 @@ public class DeepLightBlockEntityRenderer implements BlockEntityRenderer<DeepLig
 	public DeepLightBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
 		dispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
 		for (int i = 0; i < 9; i++) {
-			text.add(Component.translatable("block.spectrum.deep_light_chiseled_preservation_stone.puzzle" + i));
+			text.add(Component.translatable("block.pastel.deep_light_chiseled_preservation_stone.puzzle" + i));
 		}
 
 	}

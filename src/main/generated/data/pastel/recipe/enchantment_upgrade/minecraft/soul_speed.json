@@ -1,0 +1,31 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:soul_speed"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:light_gray_pigment"
+  },
+  "enchantment": "minecraft:soul_speed",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:doubling",
+    "scaling_factor": 2.0,
+    "scaling_value": 8
+  },
+  "level_cap": 3,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_treasure",
+  "xp_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      200,
+      2400,
+      10000
+    ]
+  }
+}

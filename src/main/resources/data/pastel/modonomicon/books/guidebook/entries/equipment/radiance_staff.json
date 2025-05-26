@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.radiance_staff",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/radiance_staff"
+  },
+  "icon": {
+    "item": "pastel:radiance_staff"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 7,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.radiance_staff.page0.text",
+      "title": "item.pastel.radiance_staff"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.radiance_staff.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/radiance_staff"
+    }
+  ]
+}

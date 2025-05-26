@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "pastel:block/onyx_basalt_light",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "pastel:block/onyx_basalt_light"
+    },
+    "axis=z": {
+      "model": "pastel:block/onyx_basalt_light",
+      "x": 90
+    }
+  }
+}

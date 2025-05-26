@@ -1,0 +1,232 @@
+{
+  "name": "book.pastel.guidebook.noxwood.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_noxwood"
+  },
+  "icon": {
+    "item": "pastel:slate_noxshroom"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/noxshroom_forest"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 7,
+  "pages": [
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.noxwood.name",
+      "items": [
+        "pastel:slate_noxshroom",
+        "pastel:ebony_noxshroom",
+        "pastel:ivory_noxshroom",
+        "pastel:chestnut_noxshroom"
+      ],
+      "text": "book.pastel.guidebook.noxwood.page0.text"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "recipe_id_1": "pastel:crafting_table/mushroom_stew",
+      "text": "book.pastel.guidebook.noxwood.page1.text"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.noxwood.page2.title",
+      "items": [
+        "pastel:slate_noxcap_block",
+        "pastel:slate_noxcap_stem",
+        "pastel:stripped_slate_noxcap_stem",
+        "pastel:slate_noxcap_hyphae",
+        "pastel:stripped_slate_noxcap_hyphae",
+        "pastel:slate_noxcap_gills",
+        "pastel:slate_noxwood_planks",
+        "pastel:slate_noxwood_stairs",
+        "pastel:slate_noxwood_slab",
+        "pastel:slate_noxwood_fence",
+        "pastel:slate_noxwood_fence_gate",
+        "pastel:slate_noxwood_door",
+        "pastel:slate_noxwood_trapdoor",
+        "pastel:slate_noxwood_pressure_plate",
+        "pastel:slate_noxwood_button",
+        "pastel:slate_noxwood_pillar",
+        "pastel:slate_noxwood_amphora",
+        "pastel:slate_noxwood_lamp",
+        "pastel:slate_noxwood_light",
+        "pastel:slate_noxwood_lantern",
+        "pastel:ebony_noxcap_block",
+        "pastel:ebony_noxcap_stem",
+        "pastel:stripped_ebony_noxcap_stem",
+        "pastel:ebony_noxcap_hyphae",
+        "pastel:stripped_ebony_noxcap_hyphae",
+        "pastel:ebony_noxcap_gills",
+        "pastel:ebony_noxwood_planks",
+        "pastel:ebony_noxwood_stairs",
+        "pastel:ebony_noxwood_slab",
+        "pastel:ebony_noxwood_fence",
+        "pastel:ebony_noxwood_fence_gate",
+        "pastel:ebony_noxwood_door",
+        "pastel:ebony_noxwood_trapdoor",
+        "pastel:ebony_noxwood_pressure_plate",
+        "pastel:ebony_noxwood_button",
+        "pastel:ebony_noxwood_pillar",
+        "pastel:ebony_noxwood_amphora",
+        "pastel:ebony_noxwood_lamp",
+        "pastel:ebony_noxwood_light",
+        "pastel:ebony_noxwood_lantern"
+      ]
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.noxwood.page3.title",
+      "items": [
+        "pastel:ivory_noxcap_block",
+        "pastel:ivory_noxcap_stem",
+        "pastel:stripped_ivory_noxcap_stem",
+        "pastel:ivory_noxcap_hyphae",
+        "pastel:stripped_ivory_noxcap_hyphae",
+        "pastel:ivory_noxcap_gills",
+        "pastel:ivory_noxwood_planks",
+        "pastel:ivory_noxwood_stairs",
+        "pastel:ivory_noxwood_slab",
+        "pastel:ivory_noxwood_fence",
+        "pastel:ivory_noxwood_fence_gate",
+        "pastel:ivory_noxwood_door",
+        "pastel:ivory_noxwood_trapdoor",
+        "pastel:ivory_noxwood_pressure_plate",
+        "pastel:ivory_noxwood_button",
+        "pastel:ivory_noxwood_pillar",
+        "pastel:ivory_noxwood_amphora",
+        "pastel:ivory_noxwood_lamp",
+        "pastel:ivory_noxwood_light",
+        "pastel:ivory_noxwood_lantern",
+        "pastel:chestnut_noxcap_block",
+        "pastel:chestnut_noxcap_stem",
+        "pastel:stripped_chestnut_noxcap_stem",
+        "pastel:chestnut_noxcap_hyphae",
+        "pastel:stripped_chestnut_noxcap_hyphae",
+        "pastel:chestnut_noxcap_gills",
+        "pastel:chestnut_noxwood_planks",
+        "pastel:chestnut_noxwood_stairs",
+        "pastel:chestnut_noxwood_slab",
+        "pastel:chestnut_noxwood_fence",
+        "pastel:chestnut_noxwood_fence_gate",
+        "pastel:chestnut_noxwood_door",
+        "pastel:chestnut_noxwood_trapdoor",
+        "pastel:chestnut_noxwood_pressure_plate",
+        "pastel:chestnut_noxwood_button",
+        "pastel:chestnut_noxwood_pillar",
+        "pastel:chestnut_noxwood_amphora",
+        "pastel:chestnut_noxwood_lamp",
+        "pastel:chestnut_noxwood_light",
+        "pastel:chestnut_noxwood_lantern"
+      ]
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "title1": "book.pastel.guidebook.noxwood.page4.title",
+      "recipe_id_1": "pastel:crafting_table/noxwood/slate_noxcap_hyphae",
+      "text": "book.pastel.guidebook.noxwood.page4.text"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "recipe_id_1": "pastel:crafting_table/noxwood/stripped_slate_noxcap_hyphae",
+      "recipe_id_2": "pastel:crafting_table/noxwood/stripped_ebony_noxcap_hyphae"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "recipe_id_1": "pastel:crafting_table/noxwood/stripped_ivory_noxcap_hyphae",
+      "recipe_id_2": "pastel:crafting_table/noxwood/stripped_chestnut_noxcap_hyphae"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/slate_light"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ebony_light"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ivory_light"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/chestnut_light"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/slate_lamp",
+      "text": "book.pastel.guidebook.noxwood.page5.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ebony_lamp"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ivory_lamp"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/chestnut_lamp"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.noxwood.page6.title",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/slate_amphora",
+      "text": "book.pastel.guidebook.noxwood.page6.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ebony_amphora"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ivory_amphora"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/chestnut_amphora"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/slate_pillar"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ebony_pillar"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ivory_pillar"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/chestnut_pillar"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.noxwood.page7.title",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/slate_lantern",
+      "text": "book.pastel.guidebook.noxwood.page7.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ebony_lantern"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/ivory_lantern"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/noxwood/chestnut_lantern"
+    }
+  ]
+}

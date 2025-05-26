@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:glistering_melon_slice"
+    },
+    "title": {
+      "translate": "advancements.pastel.use_glistering_melon_seeds.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.use_glistering_melon_seeds.description"
+    }
+  },
+  "parent": "pastel:collect_vegetal",
+  "criteria": {
+    "planted_glistering_melon_seeds": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "pastel:glistering_melon_stem"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_vegetal"
+      }
+    }
+  }
+}

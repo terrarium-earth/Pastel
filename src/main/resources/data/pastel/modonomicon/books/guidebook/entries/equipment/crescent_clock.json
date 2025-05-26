@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.crescent_clock",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/crescent_clock"
+  },
+  "icon": {
+    "item": "pastel:crescent_clock"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 1,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.crescent_clock.page0.text",
+      "title": "item.pastel.crescent_clock"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.crescent_clock.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/crescent_clock"
+    }
+  ]
+}

@@ -38,7 +38,7 @@ public class RadiancePinItem extends SpectrumTrinketItem {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.radiance_pin.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.radiance_pin.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override

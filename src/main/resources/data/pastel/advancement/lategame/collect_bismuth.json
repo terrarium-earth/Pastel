@@ -1,0 +1,39 @@
+{
+  "parent": "pastel:lategame/collect_dd_resources",
+  "display": {
+    "icon": {
+      "id": "pastel:small_bismuth_bud"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_bismuth.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_bismuth.description"
+    }
+  },
+  "criteria": {
+    "collected_small_bismuth_bud": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pastel:bismuth_flake",
+              "pastel:small_bismuth_bud",
+              "pastel:large_bismuth_bud",
+              "pastel:bismuth_cluster",
+              "pastel:bismuth_crystal"
+            ]
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

@@ -104,7 +104,7 @@ public class PotionWorkshopReactingRecipe extends GatedSpectrumRecipe<RecipeInpu
 	@Override
 	public Component getDescription() {
 		ResourceLocation identifier = BuiltInRegistries.ITEM.getKey(this.item);
-		return Component.translatable("spectrum.rei.potion_workshop_reacting." + identifier.getNamespace() + "." + identifier.getPath());
+		return Component.translatable("pastel.rei.potion_workshop_reacting." + identifier.getNamespace() + "." + identifier.getPath());
 	}
 	
 	@Override

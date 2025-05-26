@@ -9,51 +9,51 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "spectrum:ebony_noxshroom"
+          "name": "pastel:ebony_noxshroom"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:slate_noxshroom"
+          "name": "pastel:slate_noxshroom"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:ivory_noxshroom"
+          "name": "pastel:ivory_noxshroom"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:ebony_noxcap_stem"
+          "name": "pastel:ebony_noxcap_stem"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:slate_noxcap_stem"
+          "name": "pastel:slate_noxcap_stem"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:ivory_noxcap_stem"
+          "name": "pastel:ivory_noxcap_stem"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:ebony_noxcap_block"
+          "name": "pastel:ebony_noxcap_block"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:slate_noxcap_block"
+          "name": "pastel:slate_noxcap_block"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:ivory_noxcap_block"
+          "name": "pastel:ivory_noxcap_block"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:stripped_ebony_noxcap_stem"
+          "name": "pastel:stripped_ebony_noxcap_stem"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:stripped_slate_noxcap_stem"
+          "name": "pastel:stripped_slate_noxcap_stem"
         },
         {
           "type": "minecraft:item",
-          "name": "spectrum:stripped_ivory_noxcap_stem"
+          "name": "pastel:stripped_ivory_noxcap_stem"
         }
       ],
       "functions": [
@@ -74,7 +74,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "spectrum:multitool",
+          "name": "pastel:multitool",
           "functions": [
             {
               "function": "minecraft:set_damage",

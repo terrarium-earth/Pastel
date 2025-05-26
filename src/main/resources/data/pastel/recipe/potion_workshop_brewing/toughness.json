@@ -1,0 +1,14 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "ingredient1": "minecraft:nether_wart",
+  "ingredient2": "pastel:glass_peach",
+  "effect": "pastel:toughness",
+  "base_duration_ticks": 1200,
+  "potency_modifier": 0.5,
+  "applicable_to_potions": true,
+  "applicable_to_tipped_arrows": true,
+  "applicable_to_potion_fillables": true,
+  "ink_color": "pastel:pink",
+  "ink_cost": 8,
+  "required_advancement": "pastel:unlocks/potions/toughness"
+}

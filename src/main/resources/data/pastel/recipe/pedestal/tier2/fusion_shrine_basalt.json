@@ -1,0 +1,32 @@
+{
+  "type": "pastel:pedestal",
+  "group": "fusion_shrines",
+  "time": 600,
+  "tier": "simple",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 4,
+    "pastel:yellow": 4,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "BCB",
+    "XAX",
+    "BTB"
+  ],
+  "key": {
+    "T": "pastel:polished_topaz_block",
+    "A": "pastel:polished_amethyst_block",
+    "C": "pastel:polished_citrine_block",
+    "B": "pastel:polished_basalt",
+    "X": "pastel:polished_calcite"
+  },
+  "result": {
+    "id": "pastel:fusion_shrine_basalt",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/blocks/fusion_shrine",
+  "disable_yield_upgrades": true
+}

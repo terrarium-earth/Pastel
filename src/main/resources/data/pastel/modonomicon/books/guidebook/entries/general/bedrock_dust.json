@@ -1,0 +1,48 @@
+{
+  "name": "item.pastel.bedrock_dust",
+  "icon": {
+    "item": "pastel:bedrock_dust"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/break_decayed_bedrock"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/ruin"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 18,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.bedrock_dust",
+      "item": {
+        "item": "pastel:bedrock_dust"
+      },
+      "text": "book.pastel.guidebook.bedrock_dust.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.bedrock_dust.page1.title",
+      "text": "book.pastel.guidebook.bedrock_dust.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.bedrock_dust.page2.title",
+      "recipe_id": "pastel:pedestal/tier1/compacting/bedrock_dust_block",
+      "text": "book.pastel.guidebook.bedrock_dust.page2.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.decompression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/bedrock_dust_block_uncrafting",
+      "text": "book.pastel.guidebook.bedrock_dust.page3.text"
+    }
+  ]
+}

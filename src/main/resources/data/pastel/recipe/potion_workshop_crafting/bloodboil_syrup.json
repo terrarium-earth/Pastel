@@ -1,0 +1,14 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": "minecraft:glass_bottle",
+  "use_up_base_ingredient": true,
+  "color": 9568256,
+  "ingredient1": "pastel:blood_orchid_petal",
+  "ingredient2": "pastel:quitoxic_powder",
+  "ingredient3": "minecraft:sugar",
+  "result": {
+    "id": "pastel:bloodboil_syrup",
+    "count": 1
+  },
+  "required_advancement": "pastel:midgame/collect_blood_orchid_petal"
+}

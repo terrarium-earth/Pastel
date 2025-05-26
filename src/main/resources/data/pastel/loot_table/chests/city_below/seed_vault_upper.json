@@ -1,0 +1,85 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 0,
+        "max": 2
+      },
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:incandescent_amalgam"
+        }
+      ],
+      "functions": [
+        {
+          "function": "pastel:set_components_randomly",
+          "options": [
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 10
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 10
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 10
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 11
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 11
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 12
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 12
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 13
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 14
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 15
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 16
+              }
+            },
+            {
+              "pastel:beverage": {
+                "alcohol_percent": 20
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

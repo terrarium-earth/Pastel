@@ -1,0 +1,38 @@
+{
+  "name": "block.pastel.slush",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_slush"
+  },
+  "icon": {
+    "item": "pastel:slush"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/deep_dripstone_caves"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:slush"
+      },
+      "text": "book.pastel.guidebook.slush.page0.text",
+      "title": "block.pastel.slush"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:tilled_slush"
+      },
+      "text": "book.pastel.guidebook.slush.page1.text"
+    }
+  ]
+}

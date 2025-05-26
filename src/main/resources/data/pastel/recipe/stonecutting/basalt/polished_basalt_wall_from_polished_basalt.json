@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    {
+      "item": "pastel:polished_basalt"
+    }
+  ],
+  "result": {
+    "id": "pastel:polished_basalt_wall"
+  },
+  "count": 1
+}

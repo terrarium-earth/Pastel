@@ -1,0 +1,31 @@
+{
+  "parent": "pastel:midgame/craft_blacklisted_memory_fail",
+  "display": {
+    "icon": {
+      "id": "pastel:memory",
+      "components": {
+        "minecraft:entity_data": {
+          "id": "minecraft:ender_dragon"
+        }
+      }
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.craft_blacklisted_memory_success.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_blacklisted_memory_success.description"
+    }
+  },
+  "criteria": {
+    "succeed_crafting_boss_memory": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/build_spirit_instiller_structure"
+      }
+    }
+  }
+}

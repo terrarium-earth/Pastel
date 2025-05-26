@@ -1,0 +1,18 @@
+{
+  "type": "pastel:anvil_crushing",
+  "ingredient": [
+    {
+      "item": "pastel:onyx_block"
+    }
+  ],
+  "crushedItemsPerPointOfDamage": 0.4,
+  "experience": 0.2,
+  "result": {
+    "id": "pastel:onyx_powder",
+    "count": 1
+  },
+  "particleEffectIdentifier": "explosion",
+  "soundEventIdentifier": "pastel:block.onyx_cluster.break",
+  "group": "gemstone_crushing",
+  "required_advancement": "pastel:create_onyx_shard"
+}

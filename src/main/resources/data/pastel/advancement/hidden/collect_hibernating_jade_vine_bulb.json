@@ -1,0 +1,17 @@
+{
+  "criteria": {
+    "has_hibernating_jade_vine_bulb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pastel:hibernating_jade_vine_bulb",
+              "pastel:germinated_jade_vine_bulb"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -86,7 +86,7 @@ public class EnderDropperBlock extends DispenserBlock {
 					
 					PiglinAi.angerNearbyPiglins(player, true);
 				} else {
-					player.displayClientMessage(Component.translatable("block.spectrum.ender_dropper_with_owner", enderDropperBlockEntity.getOwnerName()), true);
+					player.displayClientMessage(Component.translatable("block.pastel.ender_dropper_with_owner", enderDropperBlockEntity.getOwnerName()), true);
 				}
 			}
 			return InteractionResult.CONSUME;

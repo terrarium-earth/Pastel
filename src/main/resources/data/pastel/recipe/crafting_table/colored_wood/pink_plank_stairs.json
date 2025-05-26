@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "pastel:pink_planks"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:pink_stairs",
+    "count": 4
+  }
+}

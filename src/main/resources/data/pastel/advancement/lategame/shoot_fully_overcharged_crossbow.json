@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:lategame/create_glass_crest_tool",
+  "display": {
+    "icon": {
+      "id": "pastel:glass_crest_crossbow"
+    },
+    "hidden": true,
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.shoot_fully_overcharged_crossbow.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.shoot_fully_overcharged_crossbow.description"
+    }
+  },
+  "criteria": {
+    "shot_fully_overcharged_crossbow": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/create_glass_crest_tool"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 500
+  }
+}

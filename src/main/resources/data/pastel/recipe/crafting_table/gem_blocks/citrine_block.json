@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WW",
+    "WW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:citrine_shard"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:citrine_block",
+    "count": 1
+  }
+}

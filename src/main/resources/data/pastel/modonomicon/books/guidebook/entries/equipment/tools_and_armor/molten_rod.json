@@ -1,0 +1,34 @@
+{
+  "name": "item.pastel.molten_rod",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/molten_rod"
+  },
+  "icon": {
+    "item": "pastel:molten_rod"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/tools_and_armor/lagoon_rod"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.molten_rod.page0.text",
+      "title": "item.pastel.molten_rod"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.molten_rod.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/tools/molten_rod"
+    }
+  ]
+}

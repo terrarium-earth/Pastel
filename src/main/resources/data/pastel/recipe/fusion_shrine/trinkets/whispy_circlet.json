@@ -1,0 +1,30 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_circlet",
+    {
+      "item": "pastel:nightdew_sprout",
+      "count": 2
+    },
+    {
+      "item": "minecraft:phantom_membrane",
+      "count": 4
+    },
+    {
+      "item": "pastel:brown_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:whispy_circlet"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/whispy_circlet",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

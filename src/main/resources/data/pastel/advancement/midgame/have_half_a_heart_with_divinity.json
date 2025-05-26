@@ -1,0 +1,37 @@
+{
+  "parent": "pastel:midgame/apply_divinity",
+  "display": {
+    "icon": {
+      "id": "pastel:divination_heart"
+    },
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.have_half_a_heart_with_divinity.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.have_half_a_heart_with_divinity.description"
+    }
+  },
+  "rewards": {
+    "loot": [
+      "pastel:advancement_reward/adv_have_half_a_heart_with_divinity"
+    ]
+  },
+  "criteria": {
+    "have_half_a_heart_with_divinity_active": {
+      "trigger": "pastel:divinity_tick",
+      "conditions": {
+        "is_alive": true,
+        "health": {
+          "max": 1.00
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/apply_divinity"
+      }
+    }
+  }
+}

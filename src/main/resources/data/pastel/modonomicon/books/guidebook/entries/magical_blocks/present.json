@@ -1,0 +1,53 @@
+{
+  "name": "block.pastel.present",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/present"
+  },
+  "icon": {
+    "item": "pastel:present"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 11,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.present.page0.text",
+      "title": "block.pastel.present"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.present.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/present"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "title1": "book.pastel.guidebook.present.page2.title",
+      "recipe_id_1": "pastel:crafting_table/special/wrap_present",
+      "text": "book.pastel.guidebook.present.page2.text"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.present.page3.title",
+      "items": [
+        "pastel:present{Variant: \"red\", Wrapped: 1b}",
+        "pastel:present{Variant: \"blue\", Wrapped: 1b}",
+        "pastel:present{Variant: \"cyan\", Wrapped: 1b}",
+        "pastel:present{Variant: \"green\", Wrapped: 1b}",
+        "pastel:present{Variant: \"purple\", Wrapped: 1b}",
+        "pastel:present{Variant: \"cake\", Wrapped: 1b}",
+        "pastel:present{Variant: \"striped\", Wrapped: 1b}",
+        "pastel:present{Variant: \"starry\", Wrapped: 1b}",
+        "pastel:present{Variant: \"winter\", Wrapped: 1b}",
+        "pastel:present{Variant: \"pride\", Wrapped: 1b}"
+      ],
+      "text": "book.pastel.guidebook.present.page3.text"
+    }
+  ]
+}

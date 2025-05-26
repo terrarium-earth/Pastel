@@ -1,11 +1,11 @@
 {
   "values": [
-    "spectrum:axolotl_gold_head",
-    "spectrum:small_gold_bud",
-    "spectrum:large_gold_bud",
-    "spectrum:gold_cluster",
-    "spectrum:pure_gold_block",
-    "spectrum:glistering_melon",
-    "spectrum:glistering_shooting_star"
+    "pastel:axolotl_gold_head",
+    "pastel:small_gold_bud",
+    "pastel:large_gold_bud",
+    "pastel:gold_cluster",
+    "pastel:pure_gold_block",
+    "pastel:glistering_melon",
+    "pastel:glistering_shooting_star"
   ]
 }

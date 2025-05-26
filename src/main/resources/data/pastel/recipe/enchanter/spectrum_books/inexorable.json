@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:pure_bloodstone"
+    },
+    {
+      "item": "pastel:pure_copper"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:white_pigment"
+    },
+    {
+      "item": "pastel:pure_bloodstone"
+    },
+    {
+      "item": "pastel:pure_copper"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:inexorable": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/inexorable",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:inexorable"
+      ]
+    }
+  ]
+}

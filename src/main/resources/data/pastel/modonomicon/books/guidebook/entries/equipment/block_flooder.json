@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.block_flooder",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/block_flooder"
+  },
+  "icon": {
+    "item": "pastel:block_flooder"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.block_flooder.page0.text",
+      "title": "item.pastel.block_flooder"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.block_flooder.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/block_flooder"
+    }
+  ]
+}

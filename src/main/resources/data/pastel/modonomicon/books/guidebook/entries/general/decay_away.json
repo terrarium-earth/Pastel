@@ -1,0 +1,40 @@
+{
+  "name": "block.pastel.decay_away",
+  "icon": {
+    "item": "pastel:bottle_of_decay_away"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/bottle_of_decay_away"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/neolith"
+    },
+    {
+      "entry": "pastel:general/azurite"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 12,
+  "y": -1,
+  "pages": [
+    {
+      "title": "block.pastel.decay_away",
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:bottle_of_decay_away"
+      },
+      "text": "book.pastel.guidebook.decay_away.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/bottle_of_decay_away",
+      "text": "book.pastel.guidebook.decay_away.page1.text"
+    }
+  ]
+}

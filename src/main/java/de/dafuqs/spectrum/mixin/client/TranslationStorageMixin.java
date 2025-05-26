@@ -31,18 +31,18 @@ public class TranslationStorageMixin {
         if (calendar.get(Calendar.MONTH) != Calendar.APRIL || calendar.get(Calendar.DAY_OF_MONTH) != 1) return;
 
         Map<String, String> builder = new HashMap<>(translations);
-        builder.put("block.spectrum.crystallarieum", getCrystallarieuaeuieueum());
-        builder.put("item.spectrum.ring_of_pursuit", "Ring of Fursuit");
-        builder.put("item.spectrum.draconic_twinsword", "Draconic Winblade");
-        builder.put("item.spectrum.dragon_talon", "Sellsword Winblades");
-        builder.put("effect.spectrum.fatal_slumber", "Fat Slumber");
-		builder.put("item.spectrum.oblivion_pickaxe", "Oblivious Pickaxe");
-		builder.put("item.spectrum.whispy_circlet", "Whisky Circlet");
-		builder.put("item.spectrum.shimmerstone_gem", "Stimmerstone Gem");
-		builder.put("block.spectrum.shimmerstone_block", "Block of Stimmerstone");
+        builder.put("block.pastel.crystallarieum", getCrystallarieuaeuieueum());
+        builder.put("item.pastel.ring_of_pursuit", "Ring of Fursuit");
+        builder.put("item.pastel.draconic_twinsword", "Draconic Winblade");
+        builder.put("item.pastel.dragon_talon", "Sellsword Winblades");
+        builder.put("effect.pastel.fatal_slumber", "Fat Slumber");
+		builder.put("item.pastel.oblivion_pickaxe", "Oblivious Pickaxe");
+		builder.put("item.pastel.whispy_circlet", "Whisky Circlet");
+		builder.put("item.pastel.shimmerstone_gem", "Stimmerstone Gem");
+		builder.put("block.pastel.shimmerstone_block", "Block of Stimmerstone");
 		
-		builder.put("item.spectrum.mermaids_gem", translations.get("item.spectrum.storm_stone"));
-		builder.put("item.spectrum.storm_stone", translations.get("item.spectrum.mermaids_gem"));
+		builder.put("item.pastel.mermaids_gem", translations.get("item.pastel.storm_stone"));
+		builder.put("item.pastel.storm_stone", translations.get("item.pastel.mermaids_gem"));
 		
         this.storage = builder;
     }

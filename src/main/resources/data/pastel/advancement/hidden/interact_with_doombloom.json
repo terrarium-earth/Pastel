@@ -1,0 +1,44 @@
+{
+  "criteria": {
+    "interacted_with_doombloom": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "pastel:doombloom"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "has_doombloom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:doombloom_seed"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "interacted_with_doombloom",
+      "has_doombloom"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

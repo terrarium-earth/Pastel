@@ -17,11 +17,11 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public abstract class GatedDisplayCategory<T extends GatedRecipeDisplay> implements DisplayCategory<T> {
 	
-	public static final Component HIDDEN_LINE_1 = Component.translatable("container.spectrum.rei.pedestal_crafting.recipe_not_unlocked_line_1");
-	public static final Component HIDDEN_LINE_2 = Component.translatable("container.spectrum.rei.pedestal_crafting.recipe_not_unlocked_line_2");
+	public static final Component HIDDEN_LINE_1 = Component.translatable("container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_1");
+	public static final Component HIDDEN_LINE_2 = Component.translatable("container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_2");
 	
-	public static final Component SECRET = Component.translatable("container.spectrum.rei.pedestal_crafting.secret_recipe");
-	public static final Component SECRET_HINT = Component.translatable("container.spectrum.rei.pedestal_crafting.secret_recipe.hint");
+	public static final Component SECRET = Component.translatable("container.pastel.rei.pedestal_crafting.secret_recipe");
+	public static final Component SECRET_HINT = Component.translatable("container.pastel.rei.pedestal_crafting.secret_recipe.hint");
 	
 	@Override
 	public List<Widget> setupDisplay(@NotNull T display, @NotNull Rectangle bounds) {
@@ -55,9 +55,9 @@ public abstract class GatedDisplayCategory<T extends GatedRecipeDisplay> impleme
 	// Looks nicer
 	protected static Component getCraftingTimeText(int time) {
 		if (time == 20) {
-			return Component.translatable("container.spectrum.rei.crafting_time_one_second", 1);
+			return Component.translatable("container.pastel.rei.crafting_time_one_second", 1);
 		} else {
-			return Component.translatable("container.spectrum.rei.crafting_time", (time / 20));
+			return Component.translatable("container.pastel.rei.crafting_time", (time / 20));
 		}
 	}
 	
@@ -65,9 +65,9 @@ public abstract class GatedDisplayCategory<T extends GatedRecipeDisplay> impleme
 	// Looks nicer
 	protected static Component getCraftingTimeText(int time, float xp) {
 		if (time == 20) {
-			return Component.translatable("container.spectrum.rei.crafting_time_one_second_and_xp", 1, xp);
+			return Component.translatable("container.pastel.rei.crafting_time_one_second_and_xp", 1, xp);
 		} else {
-			return Component.translatable("container.spectrum.rei.crafting_time_and_xp", (time / 20), xp);
+			return Component.translatable("container.pastel.rei.crafting_time_and_xp", (time / 20), xp);
 		}
 	}
 	

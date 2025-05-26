@@ -1,0 +1,6 @@
+{
+  "particle_type": "pastel:mirror_image",
+  "gui_texture": "pastel:mirror_image",
+  "unlock_identifier": "pastel:midgame/enter_liquid_crystal",
+  "supports_coloring": true
+}

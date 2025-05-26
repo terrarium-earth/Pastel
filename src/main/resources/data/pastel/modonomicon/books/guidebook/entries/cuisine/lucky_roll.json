@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.lucky_roll",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/lucky_roll"
+  },
+  "icon": {
+    "item": "pastel:lucky_roll"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/amaranth",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.lucky_roll.page0.text",
+      "title": "item.pastel.lucky_roll"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/food/lucky_roll",
+      "text": "book.pastel.guidebook.lucky_roll.page1.text"
+    }
+  ]
+}

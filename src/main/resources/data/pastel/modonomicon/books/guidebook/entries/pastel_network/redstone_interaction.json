@@ -1,0 +1,33 @@
+{
+  "name": "book.pastel.guidebook.redstone_interaction.name",
+  "icon": {
+    "item": "minecraft:redstone"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/pastel_network"
+  },
+  "category": "pastel:pastel_network",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:pastel_network/pastel_network",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": -1,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.redstone_interaction.page0.text",
+      "title": "book.pastel.guidebook.redstone_interaction.name"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.redstone_interaction.page1.text"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WW",
+    "WW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:exposed_shale_clay_bricks"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:exposed_shale_clay_tiles",
+    "count": 4
+  }
+}

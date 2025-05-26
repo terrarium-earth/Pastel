@@ -1,0 +1,44 @@
+{
+  "name": "tag.pastel.bedrock_armor",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/bedrock_tools"
+  },
+  "icon": {
+    "item": "pastel:bedrock_chestplate"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.bedrock_armor.page0.text",
+      "title": "tag.pastel.bedrock_armor"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.bedrock_armor.page1.text",
+      "recipe_id": "pastel:fusion_shrine/bedrock/helmet"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.bedrock_armor.page2.text",
+      "recipe_id": "pastel:fusion_shrine/bedrock/chestplate"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.bedrock_armor.page3.text",
+      "recipe_id": "pastel:fusion_shrine/bedrock/leggings"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.bedrock_armor.page4.text",
+      "recipe_id": "pastel:fusion_shrine/bedrock/boots"
+    }
+  ]
+}

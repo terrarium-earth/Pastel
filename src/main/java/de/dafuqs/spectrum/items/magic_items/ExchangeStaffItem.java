@@ -182,8 +182,8 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.exchanging_staff.tooltip.range", getRange(Minecraft.getInstance().player)).withStyle(ChatFormatting.GRAY));
-		getStoredBlock(stack).ifPresent(block -> tooltip.add(Component.translatable("item.spectrum.exchanging_staff.tooltip.target", block.getName()).withStyle(ChatFormatting.GRAY)));
+		tooltip.add(Component.translatable("item.pastel.exchanging_staff.tooltip.range", getRange(Minecraft.getInstance().player)).withStyle(ChatFormatting.GRAY));
+		getStoredBlock(stack).ifPresent(block -> tooltip.add(Component.translatable("item.pastel.exchanging_staff.tooltip.target", block.getName()).withStyle(ChatFormatting.GRAY)));
 		addInkPoweredTooltip(tooltip);
 	}
 	

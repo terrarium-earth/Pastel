@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "group": "bone_ash_blocks",
+  "time": 200,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 0.0,
+  "pattern": [
+    "WWW"
+  ],
+  "key": {
+    "W": "pastel:bone_ash_bricks"
+  },
+  "result": {
+    "id": "pastel:bone_ash_brick_slab",
+    "count": 6
+  },
+  "required_advancement": "pastel:break_cracked_dragonbone",
+  "disable_yield_upgrades": true
+}

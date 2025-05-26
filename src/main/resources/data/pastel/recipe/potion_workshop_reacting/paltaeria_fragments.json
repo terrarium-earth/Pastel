@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:paltaeria_fragments",
+  "modifiers": {
+    "additional_random_positive_effect_count": 1.0
+  },
+  "required_advancement": "pastel:lategame/collect_paltaeria"
+}

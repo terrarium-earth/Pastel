@@ -56,10 +56,10 @@ public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreen
 		super(handler, playerInventory, title);
 		gridStack.push(new QuickNavigationGridScreen.Grid(
 				new EmptyGridEntry((screen) -> chooseColor(null)),
-				handler.hasAccessToWhites() ? GridEntry.colored(InkColors.BLACK.getColorVec(), Component.translatable("ink.group.spectrum.blacks"), (screen) -> selectGrid(BLACK_GRID)) : GridEntry.colored(InkColors.BLACK.getColorVec(), Component.translatable("ink.spectrum.black.name"), (screen) -> chooseColor(InkColors.BLACK)),
-				GridEntry.colored(InkColors.MAGENTA.getColorVec(), Component.translatable("ink.group.spectrum.magentas"), (screen) -> selectGrid(MAGENTA_GRID)),
-				GridEntry.colored(InkColors.CYAN.getColorVec(), Component.translatable("ink.group.spectrum.cyans"), (screen) -> selectGrid(CYAN_GRID)),
-				GridEntry.colored(InkColors.YELLOW.getColorVec(), Component.translatable("ink.group.spectrum.yellows"), (screen) -> selectGrid(YELLOW_GRID))
+				handler.hasAccessToWhites() ? GridEntry.colored(InkColors.BLACK.getColorVec(), Component.translatable("ink.group.pastel.blacks"), (screen) -> selectGrid(BLACK_GRID)) : GridEntry.colored(InkColors.BLACK.getColorVec(), Component.translatable("ink.pastel.black.name"), (screen) -> chooseColor(InkColors.BLACK)),
+				GridEntry.colored(InkColors.MAGENTA.getColorVec(), Component.translatable("ink.group.pastel.magentas"), (screen) -> selectGrid(MAGENTA_GRID)),
+				GridEntry.colored(InkColors.CYAN.getColorVec(), Component.translatable("ink.group.pastel.cyans"), (screen) -> selectGrid(CYAN_GRID)),
+				GridEntry.colored(InkColors.YELLOW.getColorVec(), Component.translatable("ink.group.pastel.yellows"), (screen) -> selectGrid(YELLOW_GRID))
 		));
 	}
 	

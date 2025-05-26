@@ -38,7 +38,7 @@ public class ShearingIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.shearing_idol.tooltip"));
+		tooltip.add(Component.translatable("block.pastel.shearing_idol.tooltip"));
 	}
 	
 	@Override

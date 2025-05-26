@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.freigeist",
+  "icon": {
+    "item": "pastel:freigeist"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/freigeist"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/titration_barrel",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.freigeist.page0.text",
+      "title": "item.pastel.freigeist"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "book.pastel.guidebook.titration_recipe",
+      "recipe_id": "pastel:titration_barrel/freigeist",
+      "text": "book.pastel.guidebook.freigeist.page1.text"
+    }
+  ]
+}

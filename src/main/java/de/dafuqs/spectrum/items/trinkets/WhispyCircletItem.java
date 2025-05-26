@@ -109,9 +109,9 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.whispy_circlet.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.whispy_circlet.tooltip2").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.whispy_circlet.tooltip3").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.whispy_circlet.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.whispy_circlet.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.whispy_circlet.tooltip3").withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override

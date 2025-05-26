@@ -1,0 +1,32 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:feather_falling"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:blue_pigment"
+  },
+  "enchantment": "minecraft:feather_falling",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      8,
+      16,
+      32,
+      64,
+      256
+    ]
+  },
+  "level_cap": 6,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_quitoxic",
+  "xp_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 250
+  }
+}

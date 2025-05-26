@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:titration_barrel"
+    },
+    "title": {
+      "translate": "advancements.pastel.tap_titration_barrel.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.tap_titration_barrel.description"
+    }
+  },
+  "parent": "pastel:collect_pigment",
+  "criteria": {
+    "tapped_titration_barrel": {
+      "trigger": "pastel:titration_barrel_tapping",
+      "ingredient_count": {
+        "min": 1
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_pigment"
+      }
+    }
+  }
+}

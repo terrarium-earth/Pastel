@@ -1,0 +1,56 @@
+{
+  "name": "book.pastel.guidebook.malachite_tools.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/malachite/malachite_tools"
+  },
+  "icon": {
+    "item": "pastel:malachite_workstaff"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/malachite"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -1,
+  "y": 7,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.malachite_tools.page0.text",
+      "title": "book.pastel.guidebook.malachite_tools.name"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "anchor": "workstaff",
+      "text": "book.pastel.guidebook.malachite_tools.page1.text",
+      "title": "item.pastel.workstaff",
+      "recipe_id": "pastel:fusion_shrine/malachite/malachite_workstaff"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "anchor": "greatsword",
+      "text": "book.pastel.guidebook.malachite_tools.page2.text",
+      "title": "book.pastel.guidebook.malachite_tools.page2.title",
+      "recipe_id": "pastel:fusion_shrine/malachite/malachite_ultra_greatsword"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "anchor": "bident",
+      "text": "book.pastel.guidebook.malachite_tools.page3.text",
+      "title": "entity.pastel.bident",
+      "recipe_id": "pastel:fusion_shrine/malachite/malachite_bident"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "anchor": "crossbow",
+      "text": "book.pastel.guidebook.malachite_tools.page4.text",
+      "title": "book.pastel.guidebook.crossbow",
+      "recipe_id": "pastel:fusion_shrine/malachite/malachite_crossbow"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    "pastel:onyx_block"
+  ],
+  "results": [
+    {
+      "id": "pastel:onyx_shard",
+      "count": 1
+    },
+    {
+      "id": "pastel:onyx_shard",
+      "chance": 0.5
+    }
+  ],
+  "processingTime": 150,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

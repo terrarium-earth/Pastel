@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "time": 600,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 8,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 2,
+  "pattern": [
+    "CGC",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "S": "minecraft:smooth_basalt",
+    "C": "pastel:citrine_shard",
+    "G": "pastel:shimmerstone_gem"
+  },
+  "result": {
+    "id": "pastel:lucky_pickaxe",
+    "components": {
+      "enchantments": {
+        "minecraft:fortune": 3
+      }
+    },
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/equipment/lucky_pickaxe"
+}

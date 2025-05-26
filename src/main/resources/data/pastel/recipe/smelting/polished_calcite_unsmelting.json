@@ -1,0 +1,58 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "pastel:calcite_brick_stairs"
+    },
+    {
+      "item": "pastel:calcite_brick_wall"
+    },
+    {
+      "item": "pastel:calcite_bricks"
+    },
+    {
+      "item": "pastel:calcite_tile_stairs"
+    },
+    {
+      "item": "pastel:calcite_tile_wall"
+    },
+    {
+      "item": "pastel:calcite_tiles"
+    },
+    {
+      "item": "pastel:chiseled_polished_calcite"
+    },
+    {
+      "item": "pastel:cracked_calcite_tiles"
+    },
+    {
+      "item": "pastel:notched_polished_calcite"
+    },
+    {
+      "item": "pastel:polished_calcite_button"
+    },
+    {
+      "item": "pastel:polished_calcite_crest"
+    },
+    {
+      "item": "pastel:polished_calcite_pillar"
+    },
+    {
+      "item": "pastel:polished_calcite_pressure_plate"
+    },
+    {
+      "item": "pastel:polished_calcite_stairs"
+    },
+    {
+      "item": "pastel:polished_calcite_wall"
+    },
+    {
+      "item": "pastel:planed_calcite"
+    }
+  ],
+  "result": {
+    "id": "pastel:polished_calcite"
+  },
+  "experience": 0.1,
+  "cookingtime": 200
+}

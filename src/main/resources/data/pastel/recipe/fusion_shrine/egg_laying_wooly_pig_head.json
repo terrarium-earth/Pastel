@@ -1,0 +1,33 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1200,
+  "experience": 16.0,
+  "fluid": {
+    "fluid": "pastel:midnight_solution"
+  },
+  "ingredients": [
+    "pastel:cow_head",
+    "pastel:sheep_head",
+    "pastel:pig_head",
+    "pastel:chicken_head",
+    {
+      "item": "pastel:vegetal",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:egg_laying_wooly_pig_head"
+  },
+  "required_advancement": "pastel:unlocks/blocks/egg_laying_wooly_pig_head",
+  "start_crafting_effect": "single_visual_explosion_on_shrine",
+  "during_crafting_effects": [
+    "nothing",
+    "visual_explosions_on_shrine",
+    "nothing"
+  ],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine",
+  "description": {
+    "type": "translatable",
+    "translate": "pastel.recipe.fusion_shrine.explanation.egg_laying_wooly_pig_head"
+  }
+}

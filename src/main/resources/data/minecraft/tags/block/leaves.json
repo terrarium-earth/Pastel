@@ -1,10 +1,10 @@
 {
   "values": [
-    "#spectrum:colored_leaves",
+    "#pastel:colored_leaves",
 
-    "spectrum:jade_vine_petal_block",
-    "spectrum:spirit_sallow_leaves",
-    "spectrum:nephrite_blossom_leaves",
-    "spectrum:weeping_gala_leaves"
+    "pastel:jade_vine_petal_block",
+    "pastel:spirit_sallow_leaves",
+    "pastel:nephrite_blossom_leaves",
+    "pastel:weeping_gala_leaves"
   ]
 }

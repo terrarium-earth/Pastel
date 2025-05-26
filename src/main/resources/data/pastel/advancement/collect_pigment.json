@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:craft_colored_sapling",
+  "display": {
+    "icon": {
+      "id": "pastel:orange_pigment"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_pigment.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_pigment.description"
+    }
+  },
+  "criteria": {
+    "has_any_pigment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:pigments"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_colored_sapling"
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:lategame/craft_moonstone_pedestal",
+  "display": {
+    "icon": {
+      "id": "pastel:chiseled_polished_basalt"
+    },
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.build_complex_pedestal_structure.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.build_complex_pedestal_structure.description"
+    }
+  },
+  "criteria": {
+    "built_structure": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:pedestal_complex"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/craft_moonstone_pedestal"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 500
+  }
+}

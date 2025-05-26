@@ -1,0 +1,27 @@
+{
+  "name": "effect.pastel.divinity",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/status_effects/divinity"
+  },
+  "icon": "pastel:textures/mob_effect/divinity.png",
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:brewing/effects/ascension"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 5,
+  "y": -3,
+  "pages": [
+    {
+      "type": "pastel:status_effect",
+      "title": "effect.pastel.divinity",
+      "status_effect_id": "pastel:divinity",
+      "text": "book.pastel.guidebook.divinity.page0.text"
+    }
+  ]
+}

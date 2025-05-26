@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "time": 200,
+  "tier": "simple",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 8.0,
+  "ingredients": [
+    "pastel:onyx_shard"
+  ],
+  "result": {
+    "id": "pastel:pedestal_onyx",
+    "count": 1
+  },
+  "required_advancement": "pastel:create_onyx_shard",
+  "disable_yield_upgrades": true
+}

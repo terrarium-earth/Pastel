@@ -1,0 +1,35 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:razing"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:gray_pigment"
+  },
+  "enchantment": "pastel:razing",
+  "item_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      32,
+      128,
+      256,
+      512
+    ]
+  },
+  "level_cap": 5,
+  "required_advancement": "pastel:unlocks/enchantments/razing_usage",
+  "xp_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      400,
+      2000,
+      10000,
+      10000
+    ]
+  }
+}

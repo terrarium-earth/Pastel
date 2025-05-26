@@ -1,0 +1,19 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "group": "glistering_jelly_tea",
+  "base_ingredient": "minecraft:glass_bottle",
+  "use_up_base_ingredient": true,
+  "secret": true,
+  "color": 13803816,
+  "ingredient1": "pastel:jade_jelly",
+  "ingredient2": "minecraft:glistering_melon_slice",
+  "ingredient3": "#c:milk",
+  "result": {
+    "id": "pastel:glistering_jelly_tea",
+    "components": {
+      "pastel:with_milk": {}
+    },
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/food/glistering_jelly_tea"
+}

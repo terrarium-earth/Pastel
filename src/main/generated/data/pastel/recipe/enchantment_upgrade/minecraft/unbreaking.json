@@ -1,0 +1,38 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:unbreaking"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:cyan_pigment"
+  },
+  "enchantment": "minecraft:unbreaking",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      8,
+      32,
+      256,
+      512,
+      512
+    ]
+  },
+  "level_cap": 6,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_unbreaking",
+  "xp_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      100,
+      400,
+      2000,
+      4000,
+      10000
+    ]
+  }
+}

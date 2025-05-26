@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "collected_topaz_shard": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_shards/topaz"
+      }
+    },
+    "collected_mermaids_gem": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_mermaids_gem"
+      }
+    }
+  }
+}

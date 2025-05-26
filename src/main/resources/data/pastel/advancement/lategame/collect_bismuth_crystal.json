@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:lategame/collect_bismuth",
+  "display": {
+    "icon": {
+      "id": "pastel:bismuth_crystal"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_bismuth_crystal.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_bismuth_crystal.description"
+    }
+  },
+  "criteria": {
+    "collected_bismuth_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:bismuth_crystal"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_bismuth"
+      }
+    }
+  }
+}

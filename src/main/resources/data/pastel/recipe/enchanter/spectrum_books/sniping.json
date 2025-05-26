@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:green_pigment"
+    },
+    {
+      "item": "pastel:green_pigment"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "pastel:green_pigment"
+    },
+    {
+      "item": "pastel:green_pigment"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:sniping": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/sniping",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:sniping"
+      ]
+    }
+  ]
+}

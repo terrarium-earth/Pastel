@@ -1,0 +1,29 @@
+{
+  "parent": "pastel:item/handheld_oversized",
+  "textures": {
+    "layer0": "pastel:item/dragon_talon"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "oversized": 1.0,
+        "reserved": 0.0
+      },
+      "model": "pastel:item/dragon_talon_oversized"
+    },
+    {
+      "predicate": {
+        "oversized": 1.0,
+        "reserved": 1.0
+      },
+      "model": "pastel:item/dragon_blank"
+    },
+    {
+      "predicate": {
+        "oversized": 0.0,
+        "reserved": 1.0
+      },
+      "model": "pastel:item/dragon_talon_phantom"
+    }
+  ]
+}

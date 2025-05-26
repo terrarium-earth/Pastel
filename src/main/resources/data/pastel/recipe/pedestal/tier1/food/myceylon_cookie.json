@@ -1,0 +1,25 @@
+{
+  "type": "pastel:pedestal",
+  "time": 120,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 1.0,
+  "pattern": [
+    "AYA"
+  ],
+  "key": {
+    "Y": "pastel:myceylon",
+    "A": "pastel:amaranth_grains"
+  },
+  "result": {
+    "id": "pastel:myceylon_cookie",
+    "count": 8
+  },
+  "required_advancement": "pastel:unlocks/food/myceylon_pastries"
+}

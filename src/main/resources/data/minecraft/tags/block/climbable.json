@@ -1,24 +1,24 @@
 {
   "values": [
-    "spectrum:jadeite_lotus_flower",
-    "spectrum:jadeite_lotus_stem",
-    "spectrum:nephrite_blossom_stem",
+    "pastel:jadeite_lotus_flower",
+    "pastel:jadeite_lotus_stem",
+    "pastel:nephrite_blossom_stem",
 
-    "spectrum:abyssal_vines",
-    "spectrum:nightdew",
+    "pastel:abyssal_vines",
+    "pastel:nightdew",
 
-    "spectrum:weeping_gala_fronds",
-    "spectrum:weeping_gala_fronds_plant",
+    "pastel:weeping_gala_fronds",
+    "pastel:weeping_gala_fronds_plant",
 
-    "spectrum:cyan_spirit_sallow_vines_body",
-    "spectrum:cyan_spirit_sallow_vines_body",
-    "spectrum:magenta_spirit_sallow_vines_body",
-    "spectrum:magenta_spirit_sallow_vines_body",
-    "spectrum:yellow_spirit_sallow_vines_body",
-    "spectrum:yellow_spirit_sallow_vines_body",
-    "spectrum:black_spirit_sallow_vines_body",
-    "spectrum:black_spirit_sallow_vines_body",
-    "spectrum:white_spirit_sallow_vines_body",
-    "spectrum:white_spirit_sallow_vines_body"
+    "pastel:cyan_spirit_sallow_vines_body",
+    "pastel:cyan_spirit_sallow_vines_body",
+    "pastel:magenta_spirit_sallow_vines_body",
+    "pastel:magenta_spirit_sallow_vines_body",
+    "pastel:yellow_spirit_sallow_vines_body",
+    "pastel:yellow_spirit_sallow_vines_body",
+    "pastel:black_spirit_sallow_vines_body",
+    "pastel:black_spirit_sallow_vines_body",
+    "pastel:white_spirit_sallow_vines_body",
+    "pastel:white_spirit_sallow_vines_body"
   ]
 }

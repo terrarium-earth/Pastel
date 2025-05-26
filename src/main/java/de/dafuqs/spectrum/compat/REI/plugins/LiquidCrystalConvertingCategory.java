@@ -24,7 +24,7 @@ public class LiquidCrystalConvertingCategory extends FluidConvertingCategory<Liq
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.liquid_crystal_converting.title");
+		return Component.translatable("container.pastel.rei.liquid_crystal_converting.title");
 	}
 	
 }

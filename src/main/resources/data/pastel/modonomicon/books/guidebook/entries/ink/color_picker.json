@@ -1,0 +1,34 @@
+{
+  "name": "block.pastel.color_picker",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/color_picker"
+  },
+  "icon": {
+    "item": "pastel:color_picker"
+  },
+  "category": "pastel:ink",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:ink/ink"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 3,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.color_picker.page0.text",
+      "title": "block.pastel.color_picker"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/color_picker",
+      "text": "book.pastel.guidebook.color_picker.page1.text"
+    }
+  ]
+}

@@ -37,7 +37,7 @@ public class SpectrumSoundEvents {
 	public static final SoundEvent FUSION_SHRINE_CRAFTING = register("fusion_shrine_crafting");
 	public static final SoundEvent FUSION_SHRINE_CRAFTING_FINISHED = register("fusion_shrine_crafting_finished");
 	public static final SoundEvent CRAFTING_ABORTED = register("fusion_shrine_crafting_aborted");
-	public static final SoundEvent BUTTON_CLICK = register("spectrum.ui.button_click");
+	public static final SoundEvent BUTTON_CLICK = register("pastel.ui.button_click");
 	public static final SoundEvent BOTTOMLESS_BUNDLE_ZIP = register("bottomless_bundle_zip");
 	public static final SoundEvent BIDENT_MIRROR_IMAGE_THROWN = register("bident_mirror_image_thrown");
 	public static final SoundEvent BIDENT_HIT_GROUND = register("bident_hit_ground");
@@ -103,10 +103,10 @@ public class SpectrumSoundEvents {
 	public static final SoundEvent SHOOTING_STAR_CRACKER = register("shooting_star_cracker");
 	public static final SoundEvent PRIMORDIAL_FIRE_CRACKLE = register("primordial_fire_crackle");
 	public static final SoundEvent PRIMORDIAL_FIRE_DOT = register("primordial_fire_dot");
-	public static final SoundEvent TEXT_REVEALED = register("spectrum.ui.text_revealed");
+	public static final SoundEvent TEXT_REVEALED = register("pastel.ui.text_revealed");
 	public static final SoundEvent USE_FAIL = register("use_fail");
-	public static final SoundEvent NEW_REVELATION = register("spectrum.ui.new_revelation");
-	public static final SoundEvent NEW_RECIPE = register("spectrum.ui.new_recipe");
+	public static final SoundEvent NEW_REVELATION = register("pastel.ui.new_revelation");
+	public static final SoundEvent NEW_RECIPE = register("pastel.ui.new_recipe");
 	public static final SoundEvent ITEM_ARMOR_EQUIP_GLOW_VISION = register("armor_equip_glow_vision");
 	public static final SoundEvent PLAYER_TELEPORTS = register("player_teleports");
 	public static final SoundEvent ENDER_SPLICE_CHARGES = register("ender_splice_charges");

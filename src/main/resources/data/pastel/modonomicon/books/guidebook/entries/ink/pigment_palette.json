@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.pigment_palette",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/trinkets/pigment_palette"
+  },
+  "icon": {
+    "item": "pastel:pigment_palette"
+  },
+  "category": "pastel:ink",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:ink/color_picker",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.pigment_palette.page0.text",
+      "title": "item.pastel.pigment_palette"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "container.pastel.rei.fusion_recipe",
+      "recipe_id": "pastel:fusion_shrine/trinkets/pigment_palette",
+      "text": "book.pastel.guidebook.pigment_palette.page1.text"
+    }
+  ]
+}

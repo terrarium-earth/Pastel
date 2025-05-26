@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:storm_stone"
+    },
+    {
+      "item": "pastel:stratine_fragments"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:storm_stone"
+    },
+    {
+      "item": "pastel:stratine_fragments"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:disarming": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/disarming",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:disarming"
+      ]
+    }
+  ]
+}

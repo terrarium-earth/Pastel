@@ -1,0 +1,49 @@
+{
+  "type": "pastel:crystallarieum_growing",
+  "additional_recipe_manager_results": [
+    {
+      "count": 1,
+      "id": "pastel:pure_malachite"
+    }
+  ],
+  "catalysts": [
+    {
+      "consume_chance_per_second": 0.04,
+      "growth_acceleration_mod": 1.0,
+      "ingredient": {
+        "item": "pastel:moonstone_powder"
+      },
+      "ink_consumption_mod": 1.0
+    }
+  ],
+  "growth_stage_states": [
+    {
+      "Name": "pastel:small_malachite_bud",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "pastel:large_malachite_bud",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    },
+    {
+      "Name": "pastel:malachite_cluster",
+      "Properties": {
+        "facing": "up",
+        "waterlogged": "false"
+      }
+    }
+  ],
+  "ingredient": {
+    "item": "pastel:raw_malachite"
+  },
+  "ink_color": "pastel:white",
+  "ink_cost_tier": 4,
+  "required_advancement": "pastel:lategame/collect_malachite",
+  "seconds_per_growth_stage": 300
+}

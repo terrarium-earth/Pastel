@@ -1,0 +1,30 @@
+{
+  "type": "pastel:pedestal",
+  "group": "idols",
+  "time": 200,
+  "tier": "advanced",
+  "colors": {
+    "pastel:magenta": 4,
+    "pastel:yellow": 2,
+    "pastel:cyan": 0,
+    "pastel:black": 1,
+    "pastel:white": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "SVS",
+    "VHV",
+    "QVQ"
+  ],
+  "key": {
+    "H": "pastel:witch_head",
+    "V": "pastel:vegetal",
+    "Q": "pastel:quitoxic_powder",
+    "S": "pastel:stardust"
+  },
+  "result": {
+    "id": "pastel:witch_idol",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/blocks/idols"
+}

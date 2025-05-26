@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:midgame/create_midnight_aberration",
+  "display": {
+    "icon": {
+      "id": "pastel:midnight_chip"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_midnight_chip.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_midnight_chip.description"
+    }
+  },
+  "criteria": {
+    "has_midnight_chip": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:midnight_chip"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/create_midnight_aberration"
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "parent": "pastel:break_cracked_dragonbone",
+  "display": {
+    "icon": {
+      "id": "pastel:kindling_head"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.remember_kindling.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.remember_kindling.description"
+    }
+  },
+  "criteria": {
+    "remembered_kindling": {
+      "trigger": "pastel:memory_manifesting",
+      "conditions": {
+        "manifested_entity": {
+          "type": "pastel:kindling"
+        }
+      }
+    },
+    "interacted_with_kindling": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/entity_interact/kindling"
+      }
+    },
+    "unlocked_kindling_memories": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/blocks/kindling_memory"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:break_cracked_dragonbone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "unlocked_kindling_memories"
+    ],
+    [
+      "remembered_kindling",
+      "interacted_with_kindling"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

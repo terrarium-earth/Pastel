@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "group": "weeping_gala_deco",
+  "time": 80,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 0.1,
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": "#pastel:weeping_gala_logs"
+  },
+  "result": {
+    "id": "pastel:weeping_gala_pillar",
+    "count": 2
+  },
+  "required_advancement": "pastel:hidden/collect_weeping_gala"
+}

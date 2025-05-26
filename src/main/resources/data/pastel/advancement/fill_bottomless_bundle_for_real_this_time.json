@@ -1,0 +1,48 @@
+{
+  "parent": "pastel:fill_bottomless_bundle",
+  "display": {
+    "icon": {
+      "id": "pastel:bottomless_bundle"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.fill_bottomless_bundle_for_real_this_time.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.fill_bottomless_bundle_for_real_this_time.description"
+    }
+  },
+  "criteria": {
+    "fill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:bottomless_bundle",
+            "predicates": {
+              "pastel:bottomless_stack": {
+                "count": 2000000000
+              }
+            }
+          }
+        ],
+        "slots": {
+          "occupied": {
+            "min": 0,
+            "max": 50
+          }
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:fill_bottomless_bundle"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 500
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "pastel:block/polished_shale_clay",
+    "side": "pastel:block/polished_shale_clay",
+    "top": "pastel:block/polished_shale_clay"
+  }
+}

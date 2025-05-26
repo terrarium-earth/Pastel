@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "SBS",
+    " S "
+  ],
+  "key": {
+    "S": [
+      {
+        "tag": "pastel:gemstone_shards"
+      }
+    ],
+    "B": [
+      {
+        "item": "minecraft:book"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:guidebook",
+    "count": 1
+  }
+}

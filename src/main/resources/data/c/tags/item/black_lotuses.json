@@ -9,11 +9,11 @@
       "required": false
     },
     {
-      "id": "spectrum:blackest_lotus",
+      "id": "pastel:blackest_lotus",
       "required": false
     },
     {
-      "id": "spectrum:least_black_lotus",
+      "id": "pastel:least_black_lotus",
       "required": false
     }
   ]

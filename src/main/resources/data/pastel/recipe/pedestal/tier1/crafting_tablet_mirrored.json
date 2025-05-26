@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "group": "crafting_tablet",
+  "time": 40,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 1,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 0.1,
+  "pattern": [
+    "CC",
+    "BB"
+  ],
+  "key": {
+    "B": "pastel:polished_basalt",
+    "C": "pastel:polished_calcite"
+  },
+  "result": {
+    "id": "pastel:crafting_tablet",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/items/crafting_tablet"
+}

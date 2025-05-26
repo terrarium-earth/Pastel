@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "time": 160,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 2,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 1.0,
+  "pattern": [
+    "J J",
+    "BEB",
+    "AAA"
+  ],
+  "key": {
+    "A": "pastel:amaranth_grains",
+    "J": "pastel:jaramel",
+    "B": "minecraft:bone_meal",
+    "E": "#c:eggs"
+  },
+  "result": {
+    "id": "pastel:jaramel_trifle",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/food/trifles"
+}

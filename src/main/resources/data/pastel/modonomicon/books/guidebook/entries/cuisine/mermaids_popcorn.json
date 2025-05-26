@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.mermaids_popcorn",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/mermaids_popcorn"
+  },
+  "icon": {
+    "item": "pastel:mermaids_popcorn"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "item.pastel.mermaids_popcorn",
+      "text": "book.pastel.guidebook.mermaids_popcorn.page0.text"
+    },
+    {
+      "type": "pastel:cinderhearth_smelting",
+      "title": "container.pastel.rei.cinderhearth_recipe",
+      "recipe_id": "pastel:cinderhearth/mermaids_popcorn",
+      "text": "book.pastel.guidebook.mermaids_popcorn.page1.text"
+    }
+  ]
+}

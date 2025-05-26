@@ -1,0 +1,23 @@
+{
+  "name": "effect.pastel.magic_annulation",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/status_effects/magic_annulation"
+  },
+  "icon": "pastel:textures/mob_effect/magic_annulation.png",
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 4,
+  "y": -1,
+  "pages": [
+    {
+      "type": "pastel:status_effect",
+      "title": "effect.pastel.magic_annulation",
+      "status_effect_id": "pastel:magic_annulation",
+      "text": "book.pastel.guidebook.magic_annulation.page0.text"
+    }
+  ]
+}

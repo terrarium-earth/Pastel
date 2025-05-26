@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:lategame/spectrum_lategame",
+  "display": {
+    "icon": {
+      "id": "pastel:pure_iron"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_pure_resource.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_pure_resource.description"
+    }
+  },
+  "criteria": {
+    "has_pure_resource": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:pure_resources"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

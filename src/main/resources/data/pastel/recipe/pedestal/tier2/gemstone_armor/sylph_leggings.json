@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "time": 1600,
+  "tier": "simple",
+  "colors": {
+    "pastel:cyan": 4,
+    "pastel:magenta": 4,
+    "pastel:yellow": 4,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "APA",
+    "T T",
+    "C C"
+  ],
+  "key": {
+    "T": "pastel:topaz_shard",
+    "A": "minecraft:amethyst_shard",
+    "C": "pastel:citrine_shard",
+    "P": "minecraft:ghast_tear"
+  },
+  "result": {
+    "id": "pastel:sylph_leggings",
+    "count": 1
+  },
+  "required_advancement": "pastel:hidden/collect_vanilla/ghast_tear"
+}

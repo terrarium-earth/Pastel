@@ -1,0 +1,42 @@
+{
+  "name": "item.pastel.midnight_chip",
+  "icon": {
+    "item": "pastel:midnight_chip"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/create_midnight_aberration"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/midnight_solution"
+    },
+    {
+      "entry": "pastel:general/midnight_aberration"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 15,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:midnight_chip"
+      },
+      "text": "book.pastel.guidebook.midnight_chip.page0.text"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/midnight_solution"
+      },
+      "text": "book.pastel.guidebook.midnight_chip.page1.text",
+      "recipe_id": "pastel:potion_workshop_crafting/midnight_solution_bucket"
+    }
+  ]
+}

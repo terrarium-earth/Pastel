@@ -1,0 +1,9 @@
+{
+  "type": "pastel:gilled_fungus",
+  "config": {
+    "valid_base_block": "pastel:shimmel",
+    "cap_block": "pastel:ebony_noxcap_block",
+    "gills_block": "pastel:ebony_noxcap_gills",
+    "stem_block": "pastel:ebony_noxcap_stem"
+  }
+}

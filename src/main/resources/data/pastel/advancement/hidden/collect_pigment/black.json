@@ -1,0 +1,20 @@
+{
+  "criteria": {
+    "collected_onyx": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:create_onyx_shard"
+      }
+    },
+    "has_pigment": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:black_pigment"
+          }
+        ]
+      }
+    }
+  }
+}

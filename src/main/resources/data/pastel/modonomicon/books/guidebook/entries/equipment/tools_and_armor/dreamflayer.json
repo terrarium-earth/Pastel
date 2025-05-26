@@ -1,0 +1,29 @@
+{
+  "name": "item.pastel.dreamflayer",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/dreamflayer"
+  },
+  "icon": {
+    "item": "pastel:dreamflayer"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.dreamflayer.page0.text",
+      "title": "item.pastel.dreamflayer"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.dreamflayer.page1.text",
+      "recipe_id": "pastel:fusion_shrine/dreamflayer"
+    }
+  ]
+}

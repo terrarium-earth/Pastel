@@ -1,0 +1,39 @@
+{
+  "name": "book.pastel.guidebook.colored_lamps.name",
+  "icon": {
+    "item": "pastel:cyan_lamp"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/colored_lamps/any_colored_lamp"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/pigment",
+      "line_reversed": true
+    },
+    {
+      "entry": "pastel:decoration/shimmerstone"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 5,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.colored_lamps.page0.text",
+      "title": "book.pastel.guidebook.colored_lamps.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "skip_recipe_unlock_check": true,
+      "recipe_id": "pastel:pedestal/tier1/colored_lamps/cyan",
+      "text": "book.pastel.guidebook.colored_lamps.page1.text"
+    }
+  ]
+}

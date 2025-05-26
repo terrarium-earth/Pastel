@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 0,
+        "max": 1
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "pastel:slate_noxshroom"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "pastel:ebony_noxshroom"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "pastel:ivory_noxshroom"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "pastel:chestnut_noxshroom"
+        }
+      ]
+    }
+  ]
+}

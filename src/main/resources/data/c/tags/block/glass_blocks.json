@@ -1,9 +1,9 @@
 {
   "values": [
-    "#spectrum:gemstone_glass",
-    "#spectrum:semi_permeable_glass",
-    "#spectrum:hummingstones",
+    "#pastel:gemstone_glass",
+    "#pastel:semi_permeable_glass",
+    "#pastel:hummingstones",
 
-    "spectrum:radiant_glass"
+    "pastel:radiant_glass"
   ]
 }

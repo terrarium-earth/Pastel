@@ -1,0 +1,27 @@
+{
+  "name": "effect.pastel.stiffness",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/status_effects/stiffness"
+  },
+  "icon": "pastel:textures/mob_effect/stiffness.png",
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:brewing/effects/swiftness"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 7,
+  "y": 3,
+  "pages": [
+    {
+      "type": "pastel:status_effect",
+      "title": "effect.pastel.stiffness",
+      "status_effect_id": "pastel:stiffness",
+      "text": "book.pastel.guidebook.stiffness.page0.text"
+    }
+  ]
+}

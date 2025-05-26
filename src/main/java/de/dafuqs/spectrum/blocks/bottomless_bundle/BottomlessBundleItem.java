@@ -155,10 +155,10 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		boolean locked = isLocked(stack);
 		long storedAmount = getStoredAmount(stack);
 		if (storedAmount == 0) {
-			tooltip.add(Component.translatable("item.spectrum.bottomless_bundle.tooltip.empty").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.empty").withStyle(ChatFormatting.GRAY));
 			if (locked) {
 				tooltip.add(
-						Component.translatable("item.spectrum.bottomless_bundle.tooltip.locked").withStyle(ChatFormatting.GRAY));
+						Component.translatable("item.pastel.bottomless_bundle.tooltip.locked").withStyle(ChatFormatting.GRAY));
 			}
 		} else {
 			ItemStack variant = getTemplateVariant(stack);
@@ -168,17 +168,17 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 					.map(ench -> EnchantmentHelper.getItemEnchantmentLevel(ench, stack))
 					.orElse(0);
 			String totalStacks = Support.getShortenedNumberString(storedAmount / (float) variant.getItem().getDefaultMaxStackSize());
-			tooltip.add(Component.translatable("item.spectrum.bottomless_bundle.tooltip.count", storedAmount,
+			tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.count", storedAmount,
 					getMaxStoredAmount(powerLevel), totalStacks).withStyle(ChatFormatting.GRAY));
 			if (locked) {
-				tooltip.add(Component.translatable("item.spectrum.bottomless_bundle.tooltip.locked").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.locked").withStyle(ChatFormatting.GRAY));
 			} else {
-				tooltip.add(Component.translatable("item.spectrum.bottomless_bundle.tooltip.enter_inventory",
+				tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.enter_inventory",
 						variant.getItem().getDescription().getString()).withStyle(ChatFormatting.GRAY));
 			}
 		}
 		if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.DELETES_OVERFLOW)) {
-			tooltip.add(Component.translatable("item.spectrum.bottomless_bundle.tooltip.voiding"));
+			tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.voiding"));
 		}
 	}
 	

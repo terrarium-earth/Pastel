@@ -1,0 +1,13 @@
+{
+  "type": "pastel:liquid_crystal_converting",
+  "required_advancement": "pastel:pluck_resplendent_feather",
+  "ingredient": [
+    {
+      "tag": "pastel:resplendent_feathers"
+    }
+  ],
+  "result": {
+    "id": "pastel:raw_bloodstone",
+    "count": 1
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:nightdew_sprout"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_nightdew.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_nightdew.description"
+    },
+    "hidden": true
+  },
+  "parent": "pastel:pastel",
+  "criteria": {
+    "has_nightdew_sprout": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:nightdew_sprout"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:pastel"
+      }
+    }
+  }
+}

@@ -31,7 +31,7 @@ public class FusionShrineCategory extends GatedDisplayCategory<FusionShrineDispl
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("block.spectrum.fusion_shrine");
+		return Component.translatable("block.pastel.fusion_shrine");
 	}
 	
 	@Override

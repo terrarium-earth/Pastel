@@ -1,0 +1,57 @@
+{
+  "name": "book.pastel.guidebook.mod_integration.byg.name",
+  "icon": {
+    "item": "byg:budding_ametrine_ore"
+  },
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:mod_loaded",
+        "mod_id": "byg"
+      },
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:place_pedestal"
+      }
+    ]
+  },
+  "category": "pastel:mod_integration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.discovered_geodes",
+      "title": "book.pastel.guidebook.mod_integration.byg.name"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.auto_harvesting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/crystal_apothecary"
+      },
+      "item": {
+        "item": "pastel:crystal_apothecary"
+      },
+      "text": "book.pastel.guidebook.crystal_apothecary_harvesting"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.moving_budding_blocks",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/enchantments/resonance_usage"
+      },
+      "item": {
+        "item": "pastel:resonant_pickaxe"
+      },
+      "text": "book.pastel.guidebook.resonance_harvesting"
+    }
+  ]
+}

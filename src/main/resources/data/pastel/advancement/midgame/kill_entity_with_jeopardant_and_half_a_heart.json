@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:midgame/collect_stratine",
+  "display": {
+    "icon": {
+      "id": "pastel:jeopardant"
+    },
+    "title": {
+      "translate": "advancements.pastel.kill_entity_with_jeopardant_and_half_a_heart.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.kill_entity_with_jeopardant_and_half_a_heart.description"
+    }
+  },
+  "criteria": {
+    "killed_entity_with_jeopardant_and_half_a_heart": {
+      "trigger": "pastel:jeopardant_kill",
+      "conditions": {
+        "health": {
+          "max": 1
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_stratine"
+      }
+    }
+  }
+}

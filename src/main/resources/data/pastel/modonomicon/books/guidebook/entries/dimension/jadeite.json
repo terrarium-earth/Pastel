@@ -1,0 +1,44 @@
+{
+  "name": "book.pastel.guidebook.jadeite.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_jadeite"
+  },
+  "icon": {
+    "item": "pastel:jadeite_lotus_bulb"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/howling_spires",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 7,
+  "y": 9,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.jadeite.name",
+      "item": {
+        "id": "pastel:jadeite_petals"
+      },
+      "text": "book.pastel.guidebook.jadeite.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.jadeite.page1.title",
+      "recipe_id": "pastel:pedestal/tier1/jadeite/jadeite_petal_block",
+      "text": ""
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.jadeite.page2.title",
+      "recipe_id": "pastel:pedestal/tier1/jadeite/jadeite_petal_carpet",
+      "text": ""
+    }
+  ]
+}

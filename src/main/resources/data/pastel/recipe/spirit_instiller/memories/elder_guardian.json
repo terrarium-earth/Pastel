@@ -1,0 +1,24 @@
+{
+  "type": "pastel:spirit_instiller",
+  "group": "boss_memories",
+  "time": 800,
+  "experience": 4.0,
+  "ingredient1": "pastel:elder_guardian_head",
+  "ingredient2": "minecraft:prismarine",
+  "center_ingredient": {
+    "tag": "pastel:memory_bonding_agents",
+    "count": 4
+  },
+  "result": {
+    "id": "pastel:memory",
+    "components": {
+      "entity_data": {
+        "id": "minecraft:elder_guardian"
+      },
+      "pastel:memory": {
+        "ticks_to_manifest": 64
+      }
+    }
+  },
+  "required_advancement": "pastel:milestones/unlock_remembering_boss_memories"
+}

@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:find_preservation_ruins",
+  "display": {
+    "icon": {
+      "id": "pastel:dike_chiseled_preservation_stone"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.enter_dike_gate_preservation_ruin.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.enter_dike_gate_preservation_ruin.description"
+    }
+  },
+  "criteria": {
+    "dike_gate_vibe_check_passed": {
+      "trigger": "pastel:preservation_check",
+      "conditions": {
+        "check_name": "enter_dike_gate_puzzle_structure",
+        "check_passed": true
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:find_preservation_ruins"
+      }
+    }
+  }
+}

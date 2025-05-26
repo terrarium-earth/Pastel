@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pastel:block/pyrite_slab"
+    },
+    "type=double": {
+      "model": "pastel:block/pyrite"
+    },
+    "type=top": {
+      "model": "pastel:block/pyrite_slab_top"
+    }
+  }
+}

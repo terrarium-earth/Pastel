@@ -71,7 +71,7 @@ public class TreasureChestBlockEntity extends SpectrumChestBlockEntity {
 	
 	@Override
 	protected Component getDefaultName() {
-		return Component.translatable("block.spectrum.preservation_chest");
+		return Component.translatable("block.pastel.preservation_chest");
 	}
 	
 	@Override

@@ -19,7 +19,7 @@ import de.dafuqs.spectrum.progression.SpectrumAdvancementCriteria;
 import de.dafuqs.spectrum.recipe.FluidRecipeInput;
 import de.dafuqs.spectrum.recipe.fusion_shrine.FusionShrineRecipe;
 import de.dafuqs.spectrum.registries.SpectrumBlockEntities;
-import de.dafuqs.spectrum.registries.SpectrumEventListeners;
+import de.dafuqs.spectrum.registries.events.SpectrumMiscEvents;
 import de.dafuqs.spectrum.registries.SpectrumRecipeTypes;
 import de.dafuqs.spectrum.registries.SpectrumSoundEvents;
 import net.minecraft.core.*;
@@ -274,7 +274,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	
 	void setLightForFluid(BlockPos blockPos, FluidStack fluid) {
 		if (level == null) return;
-		int fluidLight = SpectrumEventListeners.getFluidLuminance(fluid);
+		int fluidLight = SpectrumMiscEvents.getFluidLuminance(fluid);
 		level.setBlock(blockPos, level.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight), Block.UPDATE_ALL);
 	}
 	

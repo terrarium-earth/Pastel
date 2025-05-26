@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "group": "colored_saplings",
+  "time": 160,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 4,
+    "pastel:black": 2
+  },
+  "experience": 1.0,
+  "pattern": [
+    "DDD",
+    "VSV",
+    "DDD"
+  ],
+  "key": {
+    "S": "#minecraft:saplings",
+    "V": "pastel:vegetal",
+    "D": "minecraft:light_gray_dye"
+  },
+  "result": {
+    "id": "pastel:light_gray_sapling",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/colored_saplings/light_gray_sapling"
+}

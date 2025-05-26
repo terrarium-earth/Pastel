@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:storage_node"
+    },
+    "title": {
+      "translate": "advancements.pastel.upgrade_pastel_node.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.upgrade_pastel_node.description"
+    }
+  },
+  "parent": "pastel:midgame/create_pastel_network",
+  "criteria": {
+    "applied_any_upgrade": {
+      "trigger": "pastel:pastel_node_upgrade",
+      "conditions": {
+        "input": "#pastel:pastel_node_upgrades"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/create_pastel_network"
+      }
+    }
+  }
+}

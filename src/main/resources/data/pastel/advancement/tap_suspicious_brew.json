@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:suspicious_brew"
+    },
+    "title": {
+      "translate": "advancements.pastel.tap_suspicious_brew.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.tap_suspicious_brew.description"
+    }
+  },
+  "parent": "pastel:tap_titration_barrel",
+  "criteria": {
+    "tapped_suspicious_brew": {
+      "trigger": "pastel:titration_barrel_tapping",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:suspicious_brew"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:tap_titration_barrel"
+      }
+    }
+  }
+}

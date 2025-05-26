@@ -1,0 +1,49 @@
+{
+  "name": "book.pastel.guidebook.crystal_flowers.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_all_crystal_flowers"
+  },
+  "icon": {
+    "item": "pastel:sweet_pea"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/crystal_gardens"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 5,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.crystal_flowers.name",
+      "text": "book.pastel.guidebook.crystal_flowers.page0.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:sweet_pea"
+      },
+      "text": "book.pastel.guidebook.crystal_flowers.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:apricotti"
+      },
+      "text": "book.pastel.guidebook.crystal_flowers.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:humming_bell"
+      },
+      "text": "book.pastel.guidebook.crystal_flowers.page3.text"
+    }
+  ]
+}

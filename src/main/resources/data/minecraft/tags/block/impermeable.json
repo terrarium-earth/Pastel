@@ -1,25 +1,25 @@
 {
   "values": [
-    "#spectrum:hummingstones",
+    "#pastel:hummingstones",
 
-    "spectrum:ender_glass",
-    "spectrum:topaz_glass",
-    "spectrum:amethyst_glass",
-    "spectrum:citrine_glass",
-    "spectrum:onyx_glass",
-    "spectrum:moonstone_glass",
-    "spectrum:radiant_glass",
-    "spectrum:semi_permeable_glass",
-    "spectrum:tinted_semi_permeable_glass",
-    "spectrum:radiant_semi_permeable_glass",
-    "spectrum:topaz_semi_permeable_glass",
-    "spectrum:amethyst_semi_permeable_glass",
-    "spectrum:citrine_semi_permeable_glass",
-    "spectrum:onyx_semi_permeable_glass",
-    "spectrum:moonstone_semi_permeable_glass",
+    "pastel:ender_glass",
+    "pastel:topaz_glass",
+    "pastel:amethyst_glass",
+    "pastel:citrine_glass",
+    "pastel:onyx_glass",
+    "pastel:moonstone_glass",
+    "pastel:radiant_glass",
+    "pastel:semi_permeable_glass",
+    "pastel:tinted_semi_permeable_glass",
+    "pastel:radiant_semi_permeable_glass",
+    "pastel:topaz_semi_permeable_glass",
+    "pastel:amethyst_semi_permeable_glass",
+    "pastel:citrine_semi_permeable_glass",
+    "pastel:onyx_semi_permeable_glass",
+    "pastel:moonstone_semi_permeable_glass",
 
-    "spectrum:preservation_glass",
-    "spectrum:tinted_preservation_glass",
-    "spectrum:invisible_wall"
+    "pastel:preservation_glass",
+    "pastel:tinted_preservation_glass",
+    "pastel:invisible_wall"
   ]
 }

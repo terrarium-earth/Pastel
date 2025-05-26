@@ -1,0 +1,27 @@
+{
+  "type": "pastel:pedestal",
+  "time": 240,
+  "tier": "simple",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:cyan": 8,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 2.0,
+  "pattern": [
+    "QRQ",
+    "RQR",
+    "RRR"
+  ],
+  "key": {
+    "Q": "pastel:quitoxic_powder",
+    "R": "minecraft:rabbit_hide"
+  },
+  "result": {
+    "id": "pastel:bottomless_bundle",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/items/bottomless_bundle"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "minecraft:dragon_breath",
+  "modifiers": {
+    "make_lingering": true
+  }
+}

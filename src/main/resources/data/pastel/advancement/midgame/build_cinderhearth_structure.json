@@ -1,0 +1,46 @@
+{
+  "parent": "pastel:midgame/fill_ink_container",
+  "display": {
+    "icon": {
+      "id": "pastel:cinderhearth"
+    },
+    "title": {
+      "translate": "advancements.pastel.build_cinderhearth_structure.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.build_cinderhearth_structure.description"
+    }
+  },
+  "criteria": {
+    "built_cinderhearth_structure": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:cinderhearth"
+      }
+    },
+    "built_cinderhearth_structure_without_lava": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:cinderhearth_without_lava_structure"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/fill_ink_container"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "built_cinderhearth_structure",
+      "built_cinderhearth_structure_without_lava"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

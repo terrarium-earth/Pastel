@@ -1,0 +1,52 @@
+{
+  "parent": "pastel:lategame/craft_resonant_pickaxe",
+  "display": {
+    "icon": {
+      "id": "minecraft:spawner"
+    },
+    "title": {
+      "translate": "advancements.pastel.break_spawner_with_resonance_tool.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.break_spawner_with_resonance_tool.description"
+    }
+  },
+  "criteria": {
+    "broken_spawner_with_resonance": {
+      "trigger": "pastel:block_broken",
+      "conditions": {
+        "player": {
+          "type_specific": {
+            "type": "minecraft:player",
+            "advancements": {
+              "pastel:unlocks/enchantments/resonance_usage": true
+            }
+          },
+          "equipment": {
+            "mainhand": {
+              "predicates": {
+                "minecraft:enchantments": [
+                  {
+                    "enchantments": "pastel:resonance",
+                    "levels": {
+                      "min": 1
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "block": {
+          "blocks": "#pastel:budding_blocks"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/craft_resonant_pickaxe"
+      }
+    }
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "name": "book.pastel.guidebook.mod_integration.extraalchemy.name",
+  "icon": {
+    "item": {
+      "item": "minecraft:potion",
+      "components": {
+        "potion_contents": "minecraft:night_vision"
+      }
+    }
+  },
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:mod_loaded",
+        "mod_id": "extraalchemy"
+      },
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:place_pedestal"
+      }
+    ]
+  },
+  "category": "pastel:mod_integration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.mod_integration.extraalchemy.page0.text",
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.name"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page1.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_combustion"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page2.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_concentration"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page3.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_crumbling"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page4.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_detection"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page5.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_fuse"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page6.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_gravity"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "flag": "mod:pekhui",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page7.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_growing"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page8.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_learning"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page9.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_magnetism"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page10.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_pacifism"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page11.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_photosynthesis"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page12.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_piper"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page13.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_recall"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page14.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_returning"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page15.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_sails"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "flag": "mod:pekhui",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+      },
+      "title": "book.pastel.guidebook.mod_integration.extraalchemy.page16.title",
+      "recipe_id": "pastel:mod_integration/extraalchemy/potion_workshop_brewing/extraalchemy_shrinking"
+    }
+  ]
+}

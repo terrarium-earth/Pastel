@@ -1,0 +1,48 @@
+{
+  "name": "item.pastel.jade_wine",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/jade_wine"
+  },
+  "icon": {
+    "item": "pastel:jade_wine"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/titration_barrel",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.jade_wine.page0.text",
+      "title": "item.pastel.jade_wine"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "book.pastel.guidebook.titration_recipe",
+      "recipe_id": "pastel:titration_barrel/special/jade_wine",
+      "text": "book.pastel.guidebook.jade_wine.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.jade_wine.page2.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/tap_sweetened_jade_wine"
+      },
+      "anchor": "sweetened_jade_wine",
+      "item": {
+        "item": "pastel:moonstruck_nectar"
+      },
+      "text": "book.pastel.guidebook.jade_wine.page2.text"
+    }
+  ]
+}

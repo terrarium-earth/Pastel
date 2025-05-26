@@ -1,0 +1,66 @@
+{
+  "name": "block.pastel.pyrite",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_pyrite"
+  },
+  "icon": {
+    "item": "pastel:pyrite"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/razor_edge"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": -8,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:pyrite"
+      },
+      "text": "book.pastel.guidebook.pyrite.page0.text",
+      "title": "block.pastel.pyrite"
+    },
+    {
+      "type": "modonomicon:crafting_recipe",
+      "title1": "book.pastel.guidebook.pyrite.page1.title",
+      "recipe_id_1": "pastel:crafting_table/pyrite/pyrite_chunks_to_pyrite",
+      "text": "book.pastel.guidebook.pyrite.page1.text"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.all_variants",
+      "items": [
+        "pastel:pyrite_slab",
+        "pastel:pyrite_stairs",
+        "pastel:pyrite_wall",
+        "pastel:pyrite_pile",
+        "pastel:pyrite_tiles",
+        "pastel:pyrite_tiles_slab",
+        "pastel:pyrite_tiles_stairs",
+        "pastel:pyrite_tiles_wall",
+        "pastel:pyrite_plating",
+        "pastel:pyrite_tubing",
+        "pastel:pyrite_relief",
+        "pastel:pyrite_stack",
+        "pastel:pyrite_paneling",
+        "pastel:pyrite_vent"
+      ],
+      "text": "book.pastel.guidebook.pyrite.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.pyrite.page3.title",
+      "item": {
+        "id": "pastel:pyrite_ripper"
+      },
+      "text": "book.pastel.guidebook.pyrite.page3.text"
+    }
+  ]
+}

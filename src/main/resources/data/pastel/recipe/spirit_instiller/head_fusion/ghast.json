@@ -1,0 +1,19 @@
+{
+  "type": "pastel:spirit_instiller",
+  "group": "head_fusion",
+  "time": 800,
+  "experience": 4.0,
+  "ingredient1": "pastel:phantom_head",
+  "ingredient2": {
+    "item": "pastel:nightdew_sprout",
+    "count": 2
+  },
+  "center_ingredient": {
+    "item": "pastel:vegetal",
+    "count": 4
+  },
+  "result": {
+    "id": "pastel:ghast_head"
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/nightdew_recipes"
+}

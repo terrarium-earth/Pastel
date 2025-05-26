@@ -1,0 +1,21 @@
+{
+  "type": "pastel:spirit_instiller",
+  "group": "head_fusion",
+  "time": 800,
+  "experience": 4.0,
+  "ingredient1": {
+    "tag": "pastel:mob_heads/parrot_heads"
+  },
+  "ingredient2": {
+    "item": "pastel:blue_pigment",
+    "count": 1
+  },
+  "center_ingredient": {
+    "item": "pastel:vegetal",
+    "count": 1
+  },
+  "result": {
+    "id": "pastel:parrot_blue_head"
+  },
+  "required_advancement": "pastel:unlocks/head_fusion/basic_recipes"
+}

@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "compacting",
+  "time": 80,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:cyan": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 0.0,
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": "pastel:stratine_fragments"
+  },
+  "result": {
+    "id": "pastel:stratine_floatblock",
+    "count": 1
+  },
+  "required_advancement": "pastel:midgame/carry_too_many_heavy_gravity_blocks",
+  "disable_yield_upgrades": true
+}

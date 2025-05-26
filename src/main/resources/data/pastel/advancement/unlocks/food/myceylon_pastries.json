@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "collected_myceylon": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_myceylon"
+      }
+    },
+    "collected_amaranth": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_amaranth"
+      }
+    }
+  }
+}

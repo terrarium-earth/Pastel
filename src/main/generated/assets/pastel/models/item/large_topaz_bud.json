@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates_item/large_bud",
+  "textures": {
+    "layer0": "pastel:block/large_topaz_bud"
+  }
+}

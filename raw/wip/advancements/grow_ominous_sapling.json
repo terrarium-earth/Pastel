@@ -1,15 +1,15 @@
 {
-  "parent": "spectrum:endgame/plant_ominous_sapling",
+  "parent": "pastel:endgame/plant_ominous_sapling",
   "display": {
     "icon": {
       "item": "minecraft:dead_bush"
     },
     "hidden": true,
     "title": {
-      "translate": "advancements.spectrum.grow_ominous_sapling.title"
+      "translate": "advancements.pastel.grow_ominous_sapling.title"
     },
     "description": {
-      "translate": "advancements.spectrum.grow_ominous_sapling.description"
+      "translate": "advancements.pastel.grow_ominous_sapling.description"
     }
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "gotten_previous": {
       "trigger":"revelationary:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "spectrum:endgame/plant_ominous_sapling"
+        "advancement_identifier": "pastel:endgame/plant_ominous_sapling"
       }
     }
   }

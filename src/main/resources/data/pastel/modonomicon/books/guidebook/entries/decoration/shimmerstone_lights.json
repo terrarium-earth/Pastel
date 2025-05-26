@@ -1,0 +1,56 @@
+{
+  "name": "book.pastel.guidebook.shimmerstone_lights.name",
+  "icon": {
+    "item": "pastel:basalt_shimmerstone_light"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/shimmerstone_lights"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/shimmerstone"
+    },
+    {
+      "entry": "pastel:decoration/block_variants"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 3,
+  "pages": [
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.shimmerstone_lights.name",
+      "items": [
+        "pastel:andesite_shimmerstone_light",
+        "pastel:basalt_shimmerstone_light",
+        "pastel:calcite_shimmerstone_light",
+        "pastel:deepslate_shimmerstone_light",
+        "pastel:diorite_shimmerstone_light",
+        "pastel:granite_shimmerstone_light",
+        "pastel:stone_shimmerstone_light"
+      ],
+      "text": "book.pastel.guidebook.shimmerstone_lights.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/shimmerstone_lights/basalt",
+      "text": "book.pastel.guidebook.shimmerstone_lights.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.shimmerstone_lights.page2.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/blackslag_shimmerstone_light"
+      },
+      "recipe_id": "pastel:pedestal/tier1/shimmerstone_lights/blackslag",
+      "text": "book.pastel.guidebook.shimmerstone_lights.page2.text"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "block.pastel.block_breaker",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/redstone/block_breaker"
+  },
+  "icon": {
+    "item": "pastel:block_breaker"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:block_breaker"
+      },
+      "text": "book.pastel.guidebook.block_breaker.page0.text",
+      "title": "block.pastel.block_breaker"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/block_breaker",
+      "text": "book.pastel.guidebook.block_breaker.page1.text"
+    }
+  ]
+}

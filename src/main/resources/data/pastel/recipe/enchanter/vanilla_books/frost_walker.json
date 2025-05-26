@@ -1,0 +1,52 @@
+{
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "time": 1200,
+  "required_experience": 500,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "minecraft:blue_ice"
+    },
+    {
+      "item": "pastel:paltaeria_fragments"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "pastel:light_gray_pigment"
+    },
+    {
+      "item": "minecraft:blue_ice"
+    },
+    {
+      "item": "pastel:paltaeria_fragments"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "minecraft:frost_walker": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_treasure",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:frost_walker"
+      ]
+    }
+  ]
+}

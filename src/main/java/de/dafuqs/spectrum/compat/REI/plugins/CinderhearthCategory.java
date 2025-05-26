@@ -29,7 +29,7 @@ public class CinderhearthCategory extends GatedDisplayCategory<CinderhearthDispl
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("block.spectrum.cinderhearth");
+		return Component.translatable("block.pastel.cinderhearth");
 	}
 	
 	@Override

@@ -161,9 +161,9 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 		Optional<RecipeHolder<ITitrationBarrelRecipe>> optionalRecipe = getRecipeForInventory(world);
 		if (optionalRecipe.isEmpty()) {
 			if (getInventory().isEmpty() && tank.isEmpty()) {
-				message = Component.translatable("block.spectrum.titration_barrel.empty_when_tapping");
+				message = Component.translatable("block.pastel.titration_barrel.empty_when_tapping");
 			} else {
-				message = Component.translatable("block.spectrum.titration_barrel.invalid_recipe_when_tapping");
+				message = Component.translatable("block.pastel.titration_barrel.invalid_recipe_when_tapping");
 			}
 			shouldReset = true;
 		} else {
@@ -181,7 +181,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 							output = Math.min(output, handStack.getCount());
 							handStack.shrink(output);
 						} else {
-							message = Component.translatable("block.spectrum.titration_barrel.tapping_item_required").append(tappingItem.getDescription());
+							message = Component.translatable("block.pastel.titration_barrel.tapping_item_required").append(tappingItem.getDescription());
 							canTap = false;
 						}
 					}
@@ -194,13 +194,13 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 						shouldReset = isEmpty(biome.getBaseTemperature(), this.extractedBottles, recipe);
 					}
 				} else {
-					message = Component.translatable("block.spectrum.titration_barrel.recipe_not_unlocked");
+					message = Component.translatable("block.pastel.titration_barrel.recipe_not_unlocked");
 				}
 			} else {
 				if (tank.isEmpty()) {
-					message = Component.translatable("block.spectrum.titration_barrel.missing_liquid_when_tapping");
+					message = Component.translatable("block.pastel.titration_barrel.missing_liquid_when_tapping");
 				} else {
-					message = Component.translatable("block.spectrum.titration_barrel.invalid_recipe_when_tapping");
+					message = Component.translatable("block.pastel.titration_barrel.invalid_recipe_when_tapping");
 				}
 				shouldReset = true;
 			}

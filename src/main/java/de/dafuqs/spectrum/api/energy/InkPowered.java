@@ -56,12 +56,12 @@ public interface InkPowered {
 	default void addInkPoweredTooltip(List<Component> tooltip) {
 		if (canUseClient()) {
 			if (getUsedColors().size() > 1) {
-				tooltip.add(Component.translatable("spectrum.tooltip.ink_powered.prefix").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("pastel.tooltip.ink_powered.prefix").withStyle(ChatFormatting.GRAY));
 				for (InkColor color : getUsedColors()) {
 					tooltip.add(color.getColoredInkName().withStyle(ChatFormatting.GRAY));
 				}
 			} else {
-				tooltip.add(Component.translatable("spectrum.tooltip.ink_powered.consume", getUsedColors().get(0).getColoredInkName()).withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("pastel.tooltip.ink_powered.consume", getUsedColors().get(0).getColoredInkName()).withStyle(ChatFormatting.GRAY));
 			}
 		}
 	}

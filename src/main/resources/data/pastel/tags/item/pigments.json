@@ -1,0 +1,20 @@
+{
+  "values": [
+    "pastel:black_pigment",
+    "pastel:blue_pigment",
+    "pastel:brown_pigment",
+    "pastel:cyan_pigment",
+    "pastel:gray_pigment",
+    "pastel:green_pigment",
+    "pastel:light_blue_pigment",
+    "pastel:light_gray_pigment",
+    "pastel:lime_pigment",
+    "pastel:magenta_pigment",
+    "pastel:orange_pigment",
+    "pastel:pink_pigment",
+    "pastel:purple_pigment",
+    "pastel:red_pigment",
+    "pastel:white_pigment",
+    "pastel:yellow_pigment"
+  ]
+}

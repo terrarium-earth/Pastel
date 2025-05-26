@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:templates/redstone_transceiver_channel_base",
+  "textures": {
+    "all": "pastel:block/cyan_block"
+  }
+}

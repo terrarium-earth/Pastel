@@ -51,7 +51,7 @@ public abstract class ProjectileIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.projectile_idol.tooltip", this.entityType.getDescription()));
+		tooltip.add(Component.translatable("block.pastel.projectile_idol.tooltip", this.entityType.getDescription()));
 	}
 	
 	@Override

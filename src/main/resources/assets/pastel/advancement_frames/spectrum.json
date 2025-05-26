@@ -1,0 +1,472 @@
+[
+  {
+    "advancement": "pastel:endgame/finish_progression",
+    "frame": "paginatedadvancements:heart"
+  },
+  {
+    "advancement": "pastel:place_moonstone_in_preservation_ruins",
+    "frame": "paginatedadvancements:heart"
+  },
+  {
+    "advancement": "pastel:midgame/potion_mastery",
+    "frame": "paginatedadvancements:heart"
+  },
+  {
+    "advancement": "pastel:lategame/create_jade_vine",
+    "frame": "paginatedadvancements:heart"
+  },
+  {
+    "advancement": "pastel:tap_mermaids_jam",
+    "frame": "paginatedadvancements:heart"
+  },
+
+  {
+    "advancement": "pastel:pastel",
+    "frame": "pastel:amethyst_shard"
+  },
+  {
+    "advancement": "pastel:midgame/spectrum_midgame",
+    "frame": "pastel:amethyst_shard"
+  },
+  {
+    "advancement": "pastel:lategame/spectrum_lategame",
+    "frame": "pastel:amethyst_shard"
+  },
+  {
+    "advancement": "pastel:endgame/spectrum_endgame",
+    "frame": "pastel:amethyst_shard"
+  },
+  {
+    "advancement": "pastel:craft_onyx_pedestal",
+    "frame": "pastel:amethyst_shard"
+  },
+  {
+    "advancement": "pastel:midgame/enter_dimension",
+    "frame": "pastel:amethyst_shard"
+  },
+  {
+    "advancement": "pastel:lategame/collect_enough_hints",
+    "frame": "pastel:amethyst_shard"
+  },
+
+
+  {
+    "advancement": "pastel:place_pedestal",
+    "frame": "paginatedadvancements:crested"
+  },
+  {
+    "advancement": "pastel:build_basic_pedestal_structure",
+    "frame": "paginatedadvancements:crested"
+  },
+  {
+    "advancement": "pastel:build_fusion_shrine",
+    "frame": "paginatedadvancements:crested"
+  },
+  {
+    "advancement": "pastel:midgame/build_advanced_pedestal_structure",
+    "frame": "paginatedadvancements:crested"
+  },
+  {
+    "advancement": "pastel:midgame/build_cinderhearth_structure",
+    "frame": "paginatedadvancements:crested"
+  },
+  {
+    "advancement": "pastel:midgame/build_enchanting_structure",
+    "frame": "paginatedadvancements:crested"
+  },
+  {
+    "advancement": "pastel:midgame/build_spirit_instiller_structure",
+    "frame": "paginatedadvancements:crested"
+  },
+  {
+    "advancement": "pastel:lategame/build_complex_pedestal_structure",
+    "frame": "paginatedadvancements:crested"
+  },
+
+
+  {
+    "advancement": "pastel:fail_to_take_item_out_of_pedestal",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:midgame/drink_tea_with_milk",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:lategame/equip_neat_ring",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:lategame/put_too_many_low_gravity_blocks_into_animal",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:lategame/trigger_unenchanted_workstaff",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:fail_to_glitch_into_preservation_ruin",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:lategame/no_rgb",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:midgame/brew_no_potion_in_potion_workshop",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:midgame/build_cinderhearth_structure_without_lava",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:lategame/get_killed_while_out_of_deeper_down_bounds",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:lategame/wear_both_gravity_trinkets",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:ascend_kindling",
+    "frame": "pastel:pile_of_poo"
+  },
+  {
+    "advancement": "pastel:midgame/become_enlightened",
+    "frame": "pastel:pile_of_poo"
+  },
+
+  {
+    "advancement": "pastel:lategame/collect_one_cookbook",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_nightdew",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_poisoners_handbook",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_varia_cookbook",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_nectardew",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_amaranth",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_amaranth_bushel",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_four_leaf_clover",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_gemstone_powder",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_mermaids_gem",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_pigment",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_quitoxic_reeds",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_shimmerstone",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_star_fragment",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_vegetal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_amaranth_bushel",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_amaranth_bushel",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:collect_amaranth_bushel",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:craft_bottle_of_fading",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:craft_cmy_pedestal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:craft_colored_sapling",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:craft_using_pedestal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:solve_dike_gate_preservation_ruin",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:solve_color_mixing_preservation_ruin",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:solve_wireless_redstone_preservation_ruin",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:find_preservation_ruins",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:generate_preservation_ruins_loot",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:get_radiating_ender",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:place_pedestal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:tap_titration_barrel",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/break_decayed_bedrock",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/brew_potion_in_potion_workshop",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/brew_powerful_potion_in_potion_workshop",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/brew_potion_with_four_effects_in_potion_workshop",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/brew_lasting_potion_in_potion_workshop",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/carry_too_many_heavy_gravity_blocks",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_azurite",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_blood_orchid_petal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_midnight_chip",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_mob_head_using_treasure_hunter",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_neolith",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_resonant_lily",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_storm_stone",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_stratine",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/craft_bottle_of_failing",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/craft_bottle_of_ruin",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/create_midnight_aberration",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/grow_azurite_in_crystallarieum",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/enter_liquid_crystal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/fill_ink_container",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/get_azure_dike_charge",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/harvest_moonstruck_nectar",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/open_deeper_down_portal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/place_color_picker",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/plant_jade_vines",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/pluck_blood_orchid_petal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/break_budding_block_with_resonance_tool",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/break_spawner_with_resonance_tool",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/carry_too_many_low_gravity_blocks",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_bismuth",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_bismuth_crystal",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_doombloom_seed",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:break_cracked_dragonbone",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_grayscale_pigments",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_hummingstone",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_malachite",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_moonstone_core",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_moonstone",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_myceylon",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_mysterious_locket",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_paltaeria",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_prickly_bayleaf",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_pure_resource",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/craft_resonant_pickaxe",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/grow_malachite_in_crystallarieum",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/strike_up_hummingstone_hymn",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_downstone_fragments",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/revive_hornslake_plant",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+		"advancement": "pastel:pluck_resplendent_feather",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:grow_bloodstone_in_crystallarieum",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:lategame/collect_one_cookbook",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_jade_jelly",
+    "frame": "paginatedadvancements:squircle"
+  },
+  {
+    "advancement": "pastel:midgame/collect_jade_vine_petals",
+    "frame": "paginatedadvancements:squircle"
+  }
+]

@@ -31,7 +31,7 @@ public class InkConvertingCategory extends GatedDisplayCategory<InkConvertingDis
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.ink_converting.title");
+		return Component.translatable("container.pastel.rei.ink_converting.title");
 	}
 	
 	@Override
@@ -43,8 +43,8 @@ public class InkConvertingCategory extends GatedDisplayCategory<InkConvertingDis
 		widgets.add(Widgets.createArrow(new Point(startPoint.x - 8 + 30, startPoint.y + 2)));
 		
 		// output amount & required time
-		Component colorText = Component.translatable("container.spectrum.rei.ink_converting.color", display.color.getName());
-		Component amountText = Component.translatable("container.spectrum.rei.ink_converting.amount", display.amount);
+		Component colorText = Component.translatable("container.pastel.rei.ink_converting.color", display.color.getName());
+		Component amountText = Component.translatable("container.pastel.rei.ink_converting.amount", display.amount);
 		widgets.add(Widgets.createLabel(new Point(startPoint.x - 8 + 58, startPoint.y + 1), colorText).leftAligned().color(0x3f3f3f).noShadow());
 		widgets.add(Widgets.createLabel(new Point(startPoint.x - 8 + 58, startPoint.y + 14), amountText).leftAligned().color(0x3f3f3f).noShadow());
 	}

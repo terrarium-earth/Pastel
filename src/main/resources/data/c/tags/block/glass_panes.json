@@ -1,7 +1,7 @@
 {
   "values": [
-    "#spectrum:gemstone_glass_panes",
-    "spectrum:hummingstone_glass_pane",
-    "spectrum:radiant_glass_pane"
+    "#pastel:gemstone_glass_panes",
+    "pastel:hummingstone_glass_pane",
+    "pastel:radiant_glass_pane"
   ]
 }

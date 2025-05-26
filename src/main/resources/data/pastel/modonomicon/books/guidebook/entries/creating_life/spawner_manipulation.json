@@ -1,0 +1,58 @@
+{
+  "name": "book.pastel.guidebook.spawner_manipulation.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/unlock_spawner_manipulation"
+  },
+  "icon": {
+    "item": "minecraft:spawner"
+  },
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:creating_life/mob_heads"
+    },
+    {
+      "entry": "pastel:creating_life/spirit_instiller"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": -1,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.harvesting_spawners",
+      "item": {
+        "item": "pastel:resonant_pickaxe"
+      },
+      "text": "book.pastel.guidebook.spawner_manipulation.intro.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "book.pastel.guidebook.spawner_manipulation.spawn_count_change.title",
+      "recipe_id": "pastel:spirit_instiller/spawner/spawner_spawn_count_change",
+      "text": "book.pastel.guidebook.spawner_manipulation.spawn_count_change.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "book.pastel.guidebook.spawner_manipulation.spawn_delay_change.title",
+      "recipe_id": "pastel:spirit_instiller/spawner/spawner_spawn_delay_change",
+      "text": "book.pastel.guidebook.spawner_manipulation.spawn_delay_change.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "book.pastel.guidebook.spawner_manipulation.max_nearby_entities_change.title",
+      "recipe_id": "pastel:spirit_instiller/spawner/spawner_max_nearby_entities_change",
+      "text": "book.pastel.guidebook.spawner_manipulation.max_nearby_entities_change.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "book.pastel.guidebook.spawner_manipulation.required_player_range_change.title",
+      "recipe_id": "pastel:spirit_instiller/spawner/spawner_required_player_range_change",
+      "text": "book.pastel.guidebook.spawner_manipulation.required_player_range_change.text"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "book.pastel.guidebook.idea",
+  "description": "book.pastel.guidebook.ideas.a_new_resource",
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 5,
+  "x": 6,
+  "y": 0,
+  "icon": "pastel:textures/gui/guidebook/icons/idea.png",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/reveal_dragonbone"
+  },
+  "read_by_default": true,
+  "turnin": "pastel:break_cracked_dragonbone",
+  "pages": [
+    {
+      "type": "pastel:hint",
+      "title": "book.pastel.guidebook.ideas.small_clue",
+      "completion_advancement": "pastel:triggers/hints/dragonbone_page0",
+      "cost": {
+        "item": "pastel:doombloom_seed",
+        "count": 4
+      },
+      "text": "book.pastel.guidebook.ideas.dragonbone.page0.text"
+    },
+    {
+      "type": "pastel:hint",
+      "title": "book.pastel.guidebook.ideas.concise_instructions",
+      "cost": {
+        "item": "pastel:doombloom_seed",
+        "count": 12
+      },
+      "text": "book.pastel.guidebook.ideas.dragonbone.page1.text",
+      "completion_advancement": "pastel:triggers/hints/dragonbone_page1"
+    }
+  ]
+}

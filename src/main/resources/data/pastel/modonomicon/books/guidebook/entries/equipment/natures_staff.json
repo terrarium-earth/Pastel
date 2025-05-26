@@ -1,0 +1,47 @@
+{
+  "name": "item.pastel.natures_staff",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/natures_staff"
+  },
+  "icon": {
+    "item": "pastel:natures_staff"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 8,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.natures_staff.page0.text",
+      "title": "item.pastel.natures_staff"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.natures_staff.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/natures_staff"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/build_enchanting_structure"
+      },
+      "title": "enchantment.minecraft.efficiency",
+      "item": {
+        "item": "pastel:natures_staff"
+      },
+      "components": {
+        "enchantments": {
+          "minecraft:efficiency": 5
+        }
+      },
+      "text": "book.pastel.guidebook.natures_staff.page2.text"
+    }
+  ]
+}

@@ -47,7 +47,7 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
 			var stack = SpectrumItems.SUSPICIOUS_BREW.getDefaultInstance();
 			stack.set(SpectrumDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, 0, 0));
 			stack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), statusEffects));
-			LoreHelper.setLore(stack, Component.translatable("lore.spectrum.time_travel_tap"));
+			LoreHelper.setLore(stack, Component.translatable("lore.pastel.time_travel_tap"));
 			return stack;
 		}
 		

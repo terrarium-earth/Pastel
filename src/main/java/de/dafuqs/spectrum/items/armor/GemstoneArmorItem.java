@@ -74,13 +74,13 @@ public class GemstoneArmorItem extends ArmorItem implements ArmorWithHitEffect {
 	public void addTooltip(List<Component> tooltip, @NotNull ArmorItem.Type equipmentSlot) {
 		switch (equipmentSlot) {
 			case HELMET ->
-					tooltip.add(Component.translatable("item.spectrum.fetchling_helmet.tooltip").withStyle(ChatFormatting.GRAY));
+					tooltip.add(Component.translatable("item.pastel.fetchling_helmet.tooltip").withStyle(ChatFormatting.GRAY));
 			case CHESTPLATE ->
-					tooltip.add(Component.translatable("item.spectrum.ferocious_chestplate.tooltip").withStyle(ChatFormatting.GRAY));
+					tooltip.add(Component.translatable("item.pastel.ferocious_chestplate.tooltip").withStyle(ChatFormatting.GRAY));
 			case LEGGINGS ->
-					tooltip.add(Component.translatable("item.spectrum.sylph_leggings.tooltip").withStyle(ChatFormatting.GRAY));
+					tooltip.add(Component.translatable("item.pastel.sylph_leggings.tooltip").withStyle(ChatFormatting.GRAY));
 			case BOOTS ->
-					tooltip.add(Component.translatable("item.spectrum.oread_boots.tooltip").withStyle(ChatFormatting.GRAY));
+					tooltip.add(Component.translatable("item.pastel.oread_boots.tooltip").withStyle(ChatFormatting.GRAY));
 		}
 	}
 	

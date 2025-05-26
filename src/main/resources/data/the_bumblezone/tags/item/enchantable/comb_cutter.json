@@ -1,7 +1,7 @@
 {
   "values": [
-    "spectrum:bedrock_shears",
-    "spectrum:multitool",
-    "#spectrum:workstaffs"
+    "pastel:bedrock_shears",
+    "pastel:multitool",
+    "#pastel:workstaffs"
   ]
 }

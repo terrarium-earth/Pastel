@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence",
+  "pattern": [
+    "W#W",
+    "W#W"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "minecraft:stick"
+      }
+    ],
+    "W": [
+      {
+        "item": "pastel:weeping_gala_planks"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:weeping_gala_fence",
+    "count": 3
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "pastel:item/staff_of_remembrance_use"
+  }
+}

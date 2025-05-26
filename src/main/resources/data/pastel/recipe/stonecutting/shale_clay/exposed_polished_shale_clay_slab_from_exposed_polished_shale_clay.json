@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    {
+      "item": "pastel:exposed_polished_shale_clay"
+    }
+  ],
+  "result": {
+    "id": "pastel:exposed_polished_shale_clay_slab"
+  },
+  "count": 2
+}

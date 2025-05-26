@@ -1,0 +1,45 @@
+{
+  "name": "book.pastel.guidebook.resplendent_deco.name",
+  "icon": {
+    "item": "pastel:resplendent_block"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:pluck_resplendent_feather"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": -3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.resplendent_deco.page0.text",
+      "title": "book.pastel.guidebook.resplendent_deco.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/resplendent/block",
+      "text": "book.pastel.guidebook.resplendent_deco.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/resplendent/bed"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/resplendent/cushion"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/resplendent/carpet_from_feathers"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/resplendent/carpet_from_blocks"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.glistering_jelly_tea",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/glistering_jelly_tea"
+  },
+  "icon": {
+    "item": "pastel:glistering_jelly_tea"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": 4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.glistering_jelly_tea.page0.text",
+      "title": "item.pastel.glistering_jelly_tea"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "book.pastel.guidebook.potion_workshop_crafting",
+      "recipe_id": "pastel:potion_workshop_crafting/glistering_jelly_tea",
+      "text": "book.pastel.guidebook.no_milk_pls"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1200,
+  "experience": 16.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:mysterious_locket"
+    },
+    {
+      "item": "pastel:moonstone_core"
+    },
+    {
+      "item": "pastel:white_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:mysterious_locket",
+    "components": {
+      "pastel:socketed": {}
+    }
+  },
+  "required_advancement": "pastel:unlocks/mysterious_locket_socketing",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

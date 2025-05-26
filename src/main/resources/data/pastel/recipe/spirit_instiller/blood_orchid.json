@@ -1,0 +1,15 @@
+{
+  "type": "pastel:spirit_instiller",
+  "time": 400,
+  "experience": 4.0,
+  "ingredient1": "pastel:resonant_lily",
+  "ingredient2": "pastel:blood_orchid_petal",
+  "center_ingredient": {
+    "item": "pastel:vegetal",
+    "count": 8
+  },
+  "result": {
+    "id": "pastel:blood_orchid"
+  },
+  "required_advancement": "pastel:unlocks/blocks/blood_orchid"
+}

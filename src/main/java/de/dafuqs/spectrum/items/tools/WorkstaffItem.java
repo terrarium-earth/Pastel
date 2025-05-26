@@ -40,16 +40,16 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 	protected static final InkCost BASE_COST_PER_AOE_MINING_RANGE_INCREMENT = new InkCost(InkColors.WHITE, 3); // TODO: make pricier once ink networking is in
 
 	public enum GUIToggle {
-		SELECT_SILK_TOUCH("item.spectrum.workstaff.message.silk_touch"),
-		SELECT_FORTUNE("item.spectrum.workstaff.message.fortune"),
-		SELECT_RESONANCE("item.spectrum.workstaff.message.resonance"),
-		SELECT_1x1("item.spectrum.workstaff.message.1x1"),
-		SELECT_3x3("item.spectrum.workstaff.message.3x3"),
-		SELECT_5x5("item.spectrum.workstaff.message.5x5"),
-		ENABLE_RIGHT_CLICK_ACTIONS("item.spectrum.workstaff.message.enabled_right_click_actions"),
-		DISABLE_RIGHT_CLICK_ACTIONS("item.spectrum.workstaff.message.disabled_right_click_actions"),
-		ENABLE_PROJECTILES("item.spectrum.workstaff.message.enabled_projectiles"),
-		DISABLE_PROJECTILES("item.spectrum.workstaff.message.disabled_projectiles");
+		SELECT_SILK_TOUCH("item.pastel.workstaff.message.silk_touch"),
+		SELECT_FORTUNE("item.pastel.workstaff.message.fortune"),
+		SELECT_RESONANCE("item.pastel.workstaff.message.resonance"),
+		SELECT_1x1("item.pastel.workstaff.message.1x1"),
+		SELECT_3x3("item.pastel.workstaff.message.3x3"),
+		SELECT_5x5("item.pastel.workstaff.message.5x5"),
+		ENABLE_RIGHT_CLICK_ACTIONS("item.pastel.workstaff.message.enabled_right_click_actions"),
+		DISABLE_RIGHT_CLICK_ACTIONS("item.pastel.workstaff.message.disabled_right_click_actions"),
+		ENABLE_PROJECTILES("item.pastel.workstaff.message.enabled_projectiles"),
+		DISABLE_PROJECTILES("item.pastel.workstaff.message.disabled_projectiles");
 
 		private final String triggerText;
 
@@ -84,7 +84,7 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 		int range = getAoERange(stack);
 		if(range > 0) {
 			int displayedRange = 1 + range + range;
-			tooltip.add(Component.translatable("item.spectrum.workstaff.tooltip.mining_range", displayedRange, displayedRange).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.mining_range", displayedRange, displayedRange).withStyle(ChatFormatting.GRAY));
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 	public MenuProvider createScreenHandlerFactory(ItemStack itemStack) {
 		return new SimpleMenuProvider((syncId, inventory, player) ->
 				new WorkstaffScreenHandler(syncId, inventory, itemStack),
-				Component.translatable("item.spectrum.workstaff")
+				Component.translatable("item.pastel.workstaff")
 		);
 	}
 	
@@ -162,7 +162,7 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 
 		int existingLevel = SpectrumEnchantmentHelper.getLevel(registryLookup, enchantment, stack);
 		if (existingLevel > 0) {
-			player.displayClientMessage(Component.translatable("item.spectrum.workstaff.message.already_has_the_enchantment"), true);
+			player.displayClientMessage(Component.translatable("item.pastel.workstaff.message.already_has_the_enchantment"), true);
 			return;
 		}
 		
@@ -188,7 +188,7 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 				stack.set(DataComponents.ENCHANTMENTS, addResult.getB().getEnchantments());
 				player.displayClientMessage(message, true);
 			} else {
-				player.displayClientMessage(Component.translatable("item.spectrum.workstaff.message.would_result_in_conflicting_enchantments"), true);
+				player.displayClientMessage(Component.translatable("item.pastel.workstaff.message.would_result_in_conflicting_enchantments"), true);
 			}
 		}
 	}

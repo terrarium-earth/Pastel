@@ -1,0 +1,29 @@
+{
+  "name": "item.pastel.nightfalls_blade",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/nightfalls_blade"
+  },
+  "icon": {
+    "item": "pastel:nightfalls_blade"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 1,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.nightfalls_blade.page0.text",
+      "title": "item.pastel.nightfalls_blade"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.nightfalls_blade.page1.text",
+      "recipe_id": "pastel:fusion_shrine/nightfalls_blade"
+    }
+  ]
+}

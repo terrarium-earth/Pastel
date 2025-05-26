@@ -1,0 +1,56 @@
+{
+  "parent": "pastel:collect_any_basic_shard",
+  "display": {
+    "icon": {
+      "id": "pastel:amethyst_ore"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.break_gemstone_ore.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.break_gemstone_ore.description"
+    }
+  },
+  "criteria": {
+    "broken_gemstone_ore": {
+      "trigger": "pastel:block_broken",
+      "conditions": {
+        "block": {
+          "blocks": [
+            "pastel:topaz_ore",
+            "pastel:amethyst_ore",
+            "pastel:citrine_ore",
+            "pastel:onyx_ore",
+            "pastel:moonstone_ore",
+            "pastel:deepslate_topaz_ore",
+            "pastel:deepslate_amethyst_ore",
+            "pastel:deepslate_citrine_ore",
+            "pastel:deepslate_onyx_ore",
+            "pastel:deepslate_moonstone_ore"
+          ]
+        },
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "advancements": {
+                  "pastel:collect_any_basic_shard": true
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_any_basic_shard"
+      }
+    }
+  }
+}

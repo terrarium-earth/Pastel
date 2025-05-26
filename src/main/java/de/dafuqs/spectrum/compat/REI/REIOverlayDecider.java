@@ -14,7 +14,7 @@ public class REIOverlayDecider implements OverlayDecider {
 	
 	@Override
 	public <R extends Screen> boolean isHandingScreen(Class<R> screen) {
-		return screen.getPackageName().startsWith("de.dafuqs.spectrum");
+		return screen.getPackageName().startsWith("de.dafuqs.pastel");
 	}
 	
 	@Override

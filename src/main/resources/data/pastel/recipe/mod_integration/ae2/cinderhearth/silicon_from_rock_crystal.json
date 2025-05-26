@@ -1,0 +1,21 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": "pastel:rock_crystal",
+  "results": [
+    {
+      "id": "ae2:silicon",
+      "count": 24
+    }
+  ],
+  "experience": 1,
+  "time": 1200,
+  "required_advancement": "pastel:hidden/collect_rock_crystal",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "ae2"
+      ]
+    }
+  ]
+}

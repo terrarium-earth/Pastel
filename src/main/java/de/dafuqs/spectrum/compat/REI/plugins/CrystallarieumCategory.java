@@ -35,7 +35,7 @@ public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumD
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("block.spectrum.crystallarieum");
+		return Component.translatable("block.pastel.crystallarieum");
 	}
 	
 	@Override
@@ -66,10 +66,10 @@ public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumD
 		}
 		
 		// catalysts
-		widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 42), Component.translatable("container.spectrum.rei.crystallarieum.catalyst")).leftAligned().color(0x3f3f3f).noShadow());
-		widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 58), Component.translatable("container.spectrum.rei.crystallarieum.accelerator")).leftAligned().color(0x3f3f3f).noShadow());
-		widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 68), Component.translatable("container.spectrum.rei.crystallarieum.ink_consumption")).leftAligned().color(0x3f3f3f).noShadow());
-		widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 78), Component.translatable("container.spectrum.rei.crystallarieum.used_up")).leftAligned().color(0x3f3f3f).noShadow());
+		widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 42), Component.translatable("container.pastel.rei.crystallarieum.catalyst")).leftAligned().color(0x3f3f3f).noShadow());
+		widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 58), Component.translatable("container.pastel.rei.crystallarieum.accelerator")).leftAligned().color(0x3f3f3f).noShadow());
+		widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 68), Component.translatable("container.pastel.rei.crystallarieum.ink_consumption")).leftAligned().color(0x3f3f3f).noShadow());
+		widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 78), Component.translatable("container.pastel.rei.crystallarieum.used_up")).leftAligned().color(0x3f3f3f).noShadow());
 		
 		int i = 0;
 		int startX = 46;
@@ -95,9 +95,9 @@ public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumD
 		
 		// description texts
 		if (display.growsWithoutCatalyst) {
-			widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 90), Component.translatable("container.spectrum.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional", display.secondsPerStage)).leftAligned().color(0x3f3f3f).noShadow());
+			widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 90), Component.translatable("container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional", display.secondsPerStage)).leftAligned().color(0x3f3f3f).noShadow());
 		} else {
-			widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 90), Component.translatable("container.spectrum.rei.crystallarieum.crafting_time_per_stage_seconds", display.secondsPerStage)).leftAligned().color(0x3f3f3f).noShadow());
+			widgets.add(Widgets.createLabel(new Point(startPoint.x, startPoint.y + 1 + 90), Component.translatable("container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds", display.secondsPerStage)).leftAligned().color(0x3f3f3f).noShadow());
 		}
 	}
 	

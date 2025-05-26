@@ -1,0 +1,59 @@
+{
+  "name": "enchantment.pastel.big_catch",
+  "icon": {
+    "item": "pastel:lagoon_rod"
+  },
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/enchantments/big_catch"
+      },
+      {
+        "type": "pastel:enchantment_registered",
+        "enchantment_id": "pastel:big_catch"
+      }
+    ]
+  },
+  "flag": "pastel:enchantment_exists_spectrum_big_catch",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": 2,
+  "x": 7,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.big_catch.page0.text",
+      "title": "enchantment.pastel.big_catch"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "pastel:lagoon_rod"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:big_catch": 3
+        }
+      },
+      "text": "book.pastel.guidebook.big_catch.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/big_catch"
+    },
+    {
+      "type": "pastel:enchanter_upgrading",
+      "text": "book.pastel.guidebook.upgrading.text",
+      "title": "container.pastel.rei.enchantment_upgrading.title",
+      "recipe_id": "pastel:enchantment_upgrade/pastel/big_catch"
+    }
+  ]
+}

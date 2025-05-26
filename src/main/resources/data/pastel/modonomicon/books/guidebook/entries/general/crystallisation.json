@@ -1,0 +1,67 @@
+{
+  "name": "book.pastel.guidebook.liquid_crystal_essences.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_any_crystallized_block"
+  },
+  "icon": {
+    "item": "pastel:frostbite_crystal"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/liquid_crystal",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 4,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_blazing_crystal"
+      },
+      "item": {
+        "item": "pastel:blazing_crystal"
+      },
+      "title": "block.pastel.blazing_crystal",
+      "text": "book.pastel.guidebook.liquid_crystal_essences.page0.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "item.pastel.incandescent_essence",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_blazing_crystal"
+      },
+      "recipe_id": "pastel:anvil_crushing/incandescent_essence_from_blazing_crystal",
+      "text": "book.pastel.guidebook.liquid_crystal_essences.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_frostbite_crystal"
+      },
+      "item": {
+        "item": "pastel:frostbite_crystal"
+      },
+      "text": "book.pastel.guidebook.liquid_crystal_essences.page2.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "title": "item.pastel.frostbite_essence",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_frostbite_crystal"
+      },
+      "recipe_id": "pastel:anvil_crushing/frostbite_essence_from_frostbite_crystal",
+      "text": "book.pastel.guidebook.liquid_crystal_essences.page3.text"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "book.pastel.guidebook.glass_arrows.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/malachite/glass_arrows"
+  },
+  "icon": {
+    "item": "pastel:malachite_glass_arrow"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": 2,
+  "pages": [
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.glass_arrows.name",
+      "text": "book.pastel.guidebook.glass_arrows.page0.text",
+      "recipe_id": "pastel:pedestal/tier1/arrows/malachite"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.glass_arrows.page1.text",
+      "recipe_id": "pastel:pedestal/tier1/arrows/topaz"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.glass_arrows.page2.text",
+      "recipe_id": "pastel:pedestal/tier1/arrows/amethyst"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.glass_arrows.page3.text",
+      "recipe_id": "pastel:pedestal/tier1/arrows/citrine"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.glass_arrows.page4.text",
+      "recipe_id": "pastel:pedestal/tier1/arrows/onyx"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.glass_arrows.page5.text",
+      "recipe_id": "pastel:pedestal/tier1/arrows/moonstone"
+    }
+  ]
+}

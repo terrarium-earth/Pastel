@@ -29,8 +29,8 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		if (!InkPoweredPotionFillable.getEffects(stack).isEmpty())
-			tooltip.add(Component.translatable("item.spectrum.concealing_oils.tooltip").withStyle(s -> s.applyFormat(ChatFormatting.GRAY).withItalic(true)));
-		appendPotionFillableTooltip(stack, tooltip, Component.translatable("item.spectrum.concealing_oils.when_poisoned"), true, context.tickRate());
+			tooltip.add(Component.translatable("item.pastel.concealing_oils.tooltip").withStyle(s -> s.applyFormat(ChatFormatting.GRAY).withItalic(true)));
+		appendPotionFillableTooltip(stack, tooltip, Component.translatable("item.pastel.concealing_oils.when_poisoned"), true, context.tickRate());
 	}
 	
 	@Override

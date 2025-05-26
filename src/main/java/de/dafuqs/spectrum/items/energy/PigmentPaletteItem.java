@@ -60,7 +60,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.pigment_palette.tooltip.target").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.pigment_palette.tooltip.target").withStyle(ChatFormatting.GRAY));
 		getEnergyStorage(stack).addTooltip(tooltip);
 		addBannerPatternProviderTooltip(tooltip);
 	}

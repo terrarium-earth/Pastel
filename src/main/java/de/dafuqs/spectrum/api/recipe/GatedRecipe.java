@@ -32,11 +32,11 @@ public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	}
 	
 	default Component getSingleUnlockToastString() {
-		return Component.translatable("spectrum.toast." + getRecipeTypeShortID() + "_recipe_unlocked.title");
+		return Component.translatable("pastel.toast." + getRecipeTypeShortID() + "_recipe_unlocked.title");
 	}
 	
 	default Component getMultipleUnlockToastString() {
-		return Component.translatable("spectrum.toast." + getRecipeTypeShortID() + "_recipes_unlocked.title");
+		return Component.translatable("pastel.toast." + getRecipeTypeShortID() + "_recipes_unlocked.title");
 	}
 	
 	default void registerInToastManager(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {

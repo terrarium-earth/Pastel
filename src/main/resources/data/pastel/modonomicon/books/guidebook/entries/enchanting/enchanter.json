@@ -1,0 +1,42 @@
+{
+  "name": "book.pastel.guidebook.enchanter.name",
+  "icon": {
+    "item": "pastel:enchanter"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/enchanter"
+  },
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.enchanter.page0.text",
+      "title": "book.pastel.guidebook.enchanter.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/enchanter",
+      "text": "book.pastel.guidebook.enchanter.page1.text"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_id": "pastel:enchanter",
+      "show_visualize_button": true,
+      "text": "book.pastel.guidebook.enchanter.page2.text",
+      "multiblock_name": "multiblock.pastel.enchanter"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.block_checklist",
+      "text": "book.pastel.guidebook.enchanter.page3.text"
+    }
+  ]
+}

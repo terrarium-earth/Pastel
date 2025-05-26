@@ -96,7 +96,7 @@ public class AmphoraBlockEntity extends RandomizableContainerBlockEntity impleme
 	
 	@Override
 	protected Component getDefaultName() {
-		return Component.translatable("block.spectrum.amphora");
+		return Component.translatable("block.pastel.amphora");
 	}
 	
 	@Override

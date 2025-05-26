@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "pastel:green_logs"
+    }
+  ],
+  "result": {
+    "id": "pastel:green_planks",
+    "count": 4
+  }
+}

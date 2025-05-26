@@ -1,0 +1,22 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.pastel.steadfast"
+  },
+  "exclusive_set": "#pastel:exclusive_set/steadfast",
+  "max_cost": {
+    "base": 60,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 30,
+    "per_level_above_first": 0
+  },
+  "primary_items": "#minecraft:enchantable/durability",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#pastel:enchantable/steadfast",
+  "weight": 10
+}

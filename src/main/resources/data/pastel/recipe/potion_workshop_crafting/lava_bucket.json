@@ -1,0 +1,12 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": "pastel:wet_lava_sponge",
+  "use_up_base_ingredient": false,
+  "color": 13387304,
+  "ingredient1": "minecraft:bucket",
+  "ingredient2": "minecraft:magma_block",
+  "ingredient3": "pastel:orange_pigment",
+  "result": {
+    "id": "minecraft:lava_bucket"
+  }
+}

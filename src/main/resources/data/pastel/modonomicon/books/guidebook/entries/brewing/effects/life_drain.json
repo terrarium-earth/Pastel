@@ -1,0 +1,23 @@
+{
+  "name": "effect.pastel.life_drain",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/status_effects/life_drain"
+  },
+  "icon": "pastel:textures/mob_effect/life_drain.png",
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 5,
+  "y": 2,
+  "pages": [
+    {
+      "type": "pastel:status_effect",
+      "title": "effect.pastel.life_drain",
+      "status_effect_id": "pastel:life_drain",
+      "text": "book.pastel.guidebook.life_drain.page0.text"
+    }
+  ]
+}

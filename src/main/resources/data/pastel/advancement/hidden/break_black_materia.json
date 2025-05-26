@@ -1,0 +1,18 @@
+{
+  "criteria": {
+    "broken_black_materia": {
+      "trigger": "pastel:block_broken",
+      "conditions": {
+        "block": {
+          "blocks": "pastel:black_materia"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/create_midnight_aberration"
+      }
+    }
+  }
+}

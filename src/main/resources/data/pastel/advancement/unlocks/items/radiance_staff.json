@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "collected_shimmerstone": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_shimmerstone"
+      }
+    },
+    "collected_yellow_pigment": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_pigment/yellow"
+      }
+    }
+  }
+}

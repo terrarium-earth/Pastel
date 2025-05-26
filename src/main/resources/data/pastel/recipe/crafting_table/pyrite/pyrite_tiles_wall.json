@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": [
+      {
+        "item": "pastel:pyrite_tiles"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:pyrite_tiles_wall",
+    "count": 6
+  }
+}

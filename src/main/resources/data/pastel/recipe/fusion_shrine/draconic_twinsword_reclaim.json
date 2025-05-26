@@ -1,0 +1,44 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1200,
+  "experience": 16.0,
+  "fluid": {
+    "fluid": "minecraft:water"
+  },
+  "copy_components": true,
+  "ingredients": [
+    "pastel:dragon_talon",
+    "minecraft:netherite_sword",
+    {
+      "item": "minecraft:gold_ingot",
+      "count": 4
+    },
+    {
+      "item": "minecraft:quartz",
+      "count": 4
+    },
+    {
+      "item": "pastel:moonstruck_nectar",
+      "count": 8
+    },
+    {
+      "item": "pastel:yellow_pigment",
+      "count": 2
+    }
+  ],
+  "result": {
+    "id": "pastel:draconic_twinsword"
+  },
+  "required_advancement": "pastel:unlocks/equipment/draconic_twinsword",
+  "start_crafting_effect": "single_visual_explosion_on_shrine",
+  "during_crafting_effects": [
+    "nothing",
+    "visual_explosions_on_shrine",
+    "nothing"
+  ],
+  "finish_crafting_effect": "legendary_tool_craft",
+  "description": {
+    "type": "translatable",
+    "translate": "pastel.recipe.fusion_shrine.explanation.draconic_twinsword_reclaim"
+  }
+}

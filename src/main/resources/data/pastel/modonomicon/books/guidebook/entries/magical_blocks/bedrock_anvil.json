@@ -1,0 +1,30 @@
+{
+  "name": "block.pastel.bedrock_anvil",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/bedrock_tools"
+  },
+  "icon": {
+    "item": "pastel:bedrock_anvil"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 10,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.bedrock_anvil.page0.text",
+      "title": "block.pastel.bedrock_anvil"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "text": "book.pastel.guidebook.bedrock_anvil.page1.text",
+      "title": "container.pastel.rei.fusion_recipe",
+      "recipe_id": "pastel:fusion_shrine/bedrock/anvil"
+    }
+  ]
+}

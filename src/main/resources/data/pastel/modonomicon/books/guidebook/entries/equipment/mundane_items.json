@@ -1,0 +1,76 @@
+{
+  "name": "book.pastel.guidebook.mundane_items.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:place_pedestal"
+  },
+  "icon": {
+    "item": "minecraft:bundle"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.mundane_items.name",
+      "text": "book.pastel.guidebook.mundane_items.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/vanilla/bundle",
+      "text": "book.pastel.guidebook.mundane_items.bundle.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/vanilla/cobweb",
+      "text": "book.pastel.guidebook.mundane_items.cobweb.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/vanilla/writable_book",
+      "text": "book.pastel.guidebook.mundane_items.writeable_book.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/vanilla/spectral_arrow",
+      "text": "book.pastel.guidebook.mundane_items.spectral_arrow.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.mundane_items.page4.title",
+      "recipe_id": "pastel:pedestal/tier1/vanilla/unstable_tnt",
+      "text": "book.pastel.guidebook.mundane_items.page4.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/vanilla/bell",
+      "text": "book.pastel.guidebook.mundane_items.bell.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/vanilla/name_tag",
+      "text": "book.pastel.guidebook.mundane_items.name_tag.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier4/vanilla/elytra",
+      "text": "book.pastel.guidebook.mundane_items.elytra.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier4/vanilla/trident",
+      "text": "book.pastel.guidebook.mundane_items.trident.text"
+
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier4/vanilla/heavy_core",
+      "text": "book.pastel.guidebook.mundane_items.heavy_core.text"
+    }
+  ]
+}

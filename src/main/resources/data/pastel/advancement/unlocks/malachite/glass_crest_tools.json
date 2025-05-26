@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "unlocked_malachite_tools": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/malachite/malachite_tools"
+      }
+    },
+    "collected_moonstone_core": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_moonstone_core"
+      }
+    },
+    "collected_white_pigment": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_pigment/white"
+      }
+    },
+    "unlocked_ink": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:milestones/unlock_ink_use"
+      }
+    }
+  }
+}

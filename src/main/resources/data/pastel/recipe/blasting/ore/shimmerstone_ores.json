@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "tag": "pastel:shimmerstone_ores"
+    }
+  ],
+  "result": {
+    "id": "pastel:shimmerstone_gem"
+  },
+  "experience": 0.1,
+  "cookingtime": 100
+}

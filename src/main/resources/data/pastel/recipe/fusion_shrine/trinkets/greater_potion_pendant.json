@@ -1,0 +1,30 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_pendant",
+    {
+      "item": "pastel:paltaeria_gem",
+      "count": 3
+    },
+    {
+      "item": "minecraft:glass",
+      "count": 4
+    },
+    {
+      "item": "pastel:pink_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:greater_potion_pendant"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/greater_potion_pendant",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

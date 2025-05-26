@@ -26,7 +26,7 @@ public class ExtraHealthRingItem extends InkDrainTrinketItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.spectrum.heartsingers_reward.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.heartsingers_reward.tooltip").withStyle(ChatFormatting.GRAY));
 		super.appendHoverText(stack, context, tooltip, type);
 	}
 	

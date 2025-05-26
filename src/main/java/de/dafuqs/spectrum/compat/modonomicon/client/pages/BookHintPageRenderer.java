@@ -38,7 +38,7 @@ public class BookHintPageRenderer extends BookPageRenderer<BookHintPage> impleme
         public PaymentButtonWidget(int x, int y, int width, int height, Component message, OnPress onPress, BookHintPageRenderer pageRenderer) {
             super(x, y, width, height, message, onPress, Button.DEFAULT_NARRATION);
             this.pageRenderer = pageRenderer;
-            setMessage(Component.translatable("spectrum.gui.guidebook.reveal_hint_button.text"));
+            setMessage(Component.translatable("pastel.gui.guidebook.reveal_hint_button.text"));
         }
 
         @Override

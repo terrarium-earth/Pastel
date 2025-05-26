@@ -1,0 +1,110 @@
+{
+  "name": "block.pastel.crystallarieum",
+  "icon": {
+    "item": "pastel:crystallarieum"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/crystallarieum"
+  },
+  "category": "pastel:ink",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:ink/color_picker",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.crystallarieum.page0.text",
+      "title": "block.pastel.crystallarieum"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.crystallarieum.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier4/crystallarieum"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.crystallarieum.page2.title",
+      "text": "book.pastel.guidebook.crystallarieum.page2.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.crystallarieum.page3.title",
+      "text": "book.pastel.guidebook.crystallarieum.page3.text"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page4.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/coal"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page5.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/copper"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page6.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/diamond"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page7.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/echo"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page8.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/emerald"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page9.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/glowstone"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page10.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/gold"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page11.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/iron"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page12.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/lapis"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page13.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/netherite_scrap"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page14.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/prismarine_crystal"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page15.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/quartz"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.crystallarieum.page16.title",
+      "recipe_id": "pastel:crystallarieum/minecraft/redstone"
+    }
+  ]
+}

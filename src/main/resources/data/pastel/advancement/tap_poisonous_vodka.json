@@ -1,0 +1,44 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:infused_beverage",
+      "components": {
+        "pastel:infused_beverage": {
+          "variant": "poisonous_vodka",
+          "color": 14938088
+        }
+      }
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.tap_poisonous_vodka.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.tap_poisonous_vodka.description"
+    }
+  },
+  "parent": "pastel:tap_titration_barrel",
+  "criteria": {
+    "tapped_poisonous_vodka": {
+      "trigger": "pastel:titration_barrel_tapping",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:infused_beverage",
+            "predicates": {
+              "pastel:infused_beverage": {
+                "variant": "poisonous_vodka"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:tap_titration_barrel"
+      }
+    }
+  }
+}

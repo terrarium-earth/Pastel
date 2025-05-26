@@ -1,0 +1,78 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:pipe_bomb"
+        }
+      ],
+      "functions": []
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:moonstone_core",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:nectardew_burgeon",
+          "weight": 0,
+          "quality": 1
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:amaranth_grains"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:glistering_melon_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:nephrite_blossom_bulb",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:jadeite_lotus_bulb"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:doombloom_seed"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:nightdew_sprout"
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:set_count",
+          "count": {
+            "min": 3,
+            "max": 7
+          }
+        }
+      ]
+    }
+  ]
+}

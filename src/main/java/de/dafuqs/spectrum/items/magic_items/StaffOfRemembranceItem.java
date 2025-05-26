@@ -53,7 +53,7 @@ public class StaffOfRemembranceItem extends Item implements InkPowered, Prioriti
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		
-		tooltip.add(Component.translatable("item.spectrum.staff_of_remembrance.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.staff_of_remembrance.tooltip").withStyle(ChatFormatting.GRAY));
 		addInkPoweredTooltip(tooltip);
 	}
 	

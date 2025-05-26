@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:item/handheld_oversized",
+  "textures": {
+    "layer0": "pastel:item/dreamflayer_oversized"
+  }
+}

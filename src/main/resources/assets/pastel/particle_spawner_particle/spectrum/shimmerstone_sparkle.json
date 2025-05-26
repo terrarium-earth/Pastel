@@ -1,0 +1,6 @@
+{
+  "particle_type": "pastel:shimmerstone_sparkle",
+  "gui_texture": "pastel:shimmerstone_sparkle",
+  "unlock_identifier": "pastel:collect_shimmerstone",
+  "supports_coloring": false
+}

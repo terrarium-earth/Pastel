@@ -52,14 +52,14 @@ public class UnlockedRecipeToast implements Toast {
 	}
 	
 	public static void showRecipeGroupToast(@NotNull Minecraft client, String groupName, List<ItemStack> itemStacks, Component title) {
-		Component text = Component.translatable("recipeGroup.spectrum." + groupName);
+		Component text = Component.translatable("recipeGroup.pastel." + groupName);
 		client.getToasts().addToast(new UnlockedRecipeToast(title, text, itemStacks));
 	}
 	
 	public static void showLotsOfRecipesToast(@NotNull Minecraft client, List<ItemStack> itemStacks) {
 		client.getToasts().addToast(new UnlockedRecipeToast(
-				Component.translatable("spectrum.toast.lots_of_recipes_unlocked.title"),
-				Component.translatable("spectrum.toast.lots_of_recipes_unlocked.description", itemStacks.size()),
+				Component.translatable("pastel.toast.lots_of_recipes_unlocked.title"),
+				Component.translatable("pastel.toast.lots_of_recipes_unlocked.description", itemStacks.size()),
 				itemStacks));
 	}
 	

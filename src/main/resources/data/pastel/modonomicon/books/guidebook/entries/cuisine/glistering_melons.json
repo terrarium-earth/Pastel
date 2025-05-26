@@ -1,0 +1,32 @@
+{
+  "name": "book.pastel.guidebook.glistering_melons.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_vegetal"
+  },
+  "icon": {
+    "item": "pastel:glistering_melon"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -1,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.glistering_melons.page0.title",
+      "item": {
+        "item": "minecraft:glistering_melon_slice"
+      },
+      "text": "book.pastel.guidebook.glistering_melons.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/glistering_melon_seeds"
+    }
+  ]
+}

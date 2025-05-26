@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "unlocked_liquid_crystal": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+      }
+    },
+    "collected_storm_stone": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_storm_stone"
+      }
+    },
+    "collected_rabbits_foot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": {
+              "items": "minecraft:rabbits_foot"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

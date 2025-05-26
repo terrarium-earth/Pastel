@@ -1,0 +1,41 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:pedestal_moonstone"
+    },
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.collect_enough_hints.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_enough_hints.description"
+    }
+  },
+  "parent": "pastel:lategame/find_forgotten_city",
+  "criteria": {
+    "has_collected_enough_hints": {
+      "trigger": "revelationary:advancement_count",
+      "conditions": {
+        "count": {
+          "min": 5
+        },
+        "advancement_identifiers": [
+          "pastel:break_cracked_dragonbone",
+          "pastel:lategame/visit_all_deeper_down_biomes",
+          "pastel:lategame/revive_hornslake_plant",
+          "pastel:lategame/find_excavation_site",
+          "pastel:lategame/find_forgotten_city",
+          "pastel:lategame/reached_dd_floor",
+          "pastel:lategame/strike_up_hummingstone_hymn",
+          "pastel:lategame/collect_moonstone"
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/find_forgotten_city"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "pastel:chestnut_noxwood_planks"
+    }
+  ],
+  "result": {
+    "id": "pastel:chestnut_noxwood_button"
+  }
+}

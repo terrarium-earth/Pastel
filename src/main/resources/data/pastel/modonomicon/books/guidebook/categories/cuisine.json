@@ -1,0 +1,22 @@
+{
+  "name": "book.pastel.guidebook.category.cuisine.name",
+  "description": "book.pastel.guidebook.category.cuisine.description",
+  "icon": {
+    "item": "pastel:lucky_roll"
+  },
+  "sort_number": 7,
+  "condition": {
+    "type": "modonomicon:category_has_visible_entries",
+    "category_id": "pastel:cuisine"
+  },
+  "show_category_button": true,
+  "max_scroll_x": 512,
+  "max_scroll_y": 512,
+  "display_mode": "node",
+  "entry_textures": "pastel:textures/gui/modonomicon/entry_textures.png",
+  "background": "pastel:textures/gui/modonomicon/category_background.png",
+  "background_width": 1024,
+  "background_height": 1024,
+  "background_texture_zoom_multiplier": 1.0,
+  "background_parallax_layers": []
+}

@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:black_pigment"
+    },
+    {
+      "item": "pastel:black_pigment"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "pastel:black_pigment"
+    },
+    {
+      "item": "pastel:black_pigment"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:improved_critical": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/improved_critical",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:improved_critical"
+      ]
+    }
+  ]
+}

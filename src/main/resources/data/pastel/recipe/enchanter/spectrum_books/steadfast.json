@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:moonstruck_nectar"
+    },
+    {
+      "item": "pastel:shimmerstone_gem"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:moonstruck_nectar"
+    },
+    {
+      "item": "pastel:shimmerstone_gem"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:steadfast": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/steadfast",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:steadfast"
+      ]
+    }
+  ]
+}

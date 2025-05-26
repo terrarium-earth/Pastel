@@ -1,0 +1,21 @@
+{
+  "fuels": [
+    {
+      "item": "pastel:wet_lava_sponge",
+      "return_item": "pastel:lava_sponge",
+      "fuel": 96000
+    },
+    {
+      "item": "pastel:incandescent_essence",
+      "fuel": 1000
+    },
+    {
+      "item": "pastel:pure_coal",
+      "fuel": 2000
+    },
+    {
+      "item": "pastel:pure_coal_block",
+      "fuel": 18000
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "pastel:block/magenta_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "pastel:block/magenta_wood"
+    },
+    "axis=z": {
+      "model": "pastel:block/magenta_wood",
+      "x": 90
+    }
+  }
+}

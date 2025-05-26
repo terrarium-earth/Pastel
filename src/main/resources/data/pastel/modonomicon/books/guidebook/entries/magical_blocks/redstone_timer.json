@@ -1,0 +1,33 @@
+{
+  "name": "block.pastel.redstone_timer",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/redstone/redstone_timer"
+  },
+  "icon": {
+    "item": "pastel:redstone_timer"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:redstone_timer"
+      },
+      "text": "book.pastel.guidebook.redstone_timer.page0.text",
+      "title": "block.pastel.redstone_timer"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/redstone_timer",
+      "text": "book.pastel.guidebook.redstone_timer.page1.text"
+    }
+  ]
+}

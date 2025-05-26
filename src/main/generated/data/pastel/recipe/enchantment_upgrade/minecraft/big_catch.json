@@ -1,0 +1,28 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:big_catch"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:light_blue_pigment"
+  },
+  "enchantment": "pastel:big_catch",
+  "item_scaling": {
+    "type": "pastel:indexed",
+    "indexes": [
+      32,
+      128
+    ]
+  },
+  "level_cap": 3,
+  "required_advancement": "pastel:unlocks/enchantments/big_catch",
+  "xp_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 400
+  }
+}

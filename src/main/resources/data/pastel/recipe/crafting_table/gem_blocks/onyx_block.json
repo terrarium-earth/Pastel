@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WW",
+    "WW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:onyx_shard"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:onyx_block",
+    "count": 1
+  }
+}

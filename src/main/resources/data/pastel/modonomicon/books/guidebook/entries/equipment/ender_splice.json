@@ -1,0 +1,67 @@
+{
+  "name": "item.pastel.ender_splice",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/ender_splice"
+  },
+  "icon": {
+    "item": "pastel:ender_splice"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:ender_splice"
+      },
+      "text": "book.pastel.guidebook.ender_splice.page0.text",
+      "title": "item.pastel.ender_splice"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.ender_splice.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/ender_splice"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/build_enchanting_structure"
+      },
+      "title": "enchantment.minecraft.unbreaking",
+      "item": {
+        "item": "pastel:ender_splice"
+      },
+      "components": {
+        "enchantments": {
+          "minecraft:unbreaking": 3
+        }
+      },
+      "text": "book.pastel.guidebook.ender_splice.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/create_resonance_enchanted_book"
+      },
+      "title": "enchantment.pastel.resonance",
+      "item": {
+        "item": "pastel:ender_splice"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:resonance": 1
+        }
+      },
+      "text": "book.pastel.guidebook.ender_splice.page3.text"
+    }
+  ]
+}

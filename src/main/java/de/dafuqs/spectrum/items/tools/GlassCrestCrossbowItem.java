@@ -87,7 +87,7 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements Ext
                     float overcharge = 1 - (float) remainingUseTicks / OVERCHARGE_DURATION_MAX_TICKS;
                     overcharge(stack, overcharge);
                     if (user instanceof ServerPlayer serverPlayerEntity) {
-                        serverPlayerEntity.displayClientMessage(Component.translatable("item.spectrum.glass_crest_crossbow.message.charge", Support.DF.format(overcharge * 100)), true);
+                        serverPlayerEntity.displayClientMessage(Component.translatable("item.pastel.glass_crest_crossbow.message.charge", Support.DF.format(overcharge * 100)), true);
                     }
                 }
             }
@@ -118,10 +118,10 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements Ext
         super.appendHoverText(stack, context, tooltip, type);
         float overcharge = getOvercharge(stack);
         if (overcharge == 0) {
-            tooltip.add(Component.translatable("item.spectrum.glass_crest_crossbow.tooltip.how_to_overcharge").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("item.pastel.glass_crest_crossbow.tooltip.how_to_overcharge").withStyle(ChatFormatting.GRAY));
 			addInkPoweredTooltip(tooltip);
         } else {
-            tooltip.add(Component.translatable("item.spectrum.glass_crest_crossbow.tooltip.overcharged", Support.DF.format(overcharge * 100)).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("item.pastel.glass_crest_crossbow.tooltip.overcharged", Support.DF.format(overcharge * 100)).withStyle(ChatFormatting.GRAY));
         }
     }
     

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:ash"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:ash_pile",
+    "count": 6
+  }
+}

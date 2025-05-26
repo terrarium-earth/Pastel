@@ -47,9 +47,9 @@ public class FractalBidentItem extends MalachiteBidentItem implements SlotBackgr
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.fractal_glass_crest_bident.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.fractal_glass_crest_bident.tooltip2").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.fractal_glass_crest_bident.tooltip3").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.fractal_glass_crest_bident.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.fractal_glass_crest_bident.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.fractal_glass_crest_bident.tooltip3").withStyle(ChatFormatting.GRAY));
 		addInkPoweredTooltip(tooltip);
 	}
 	

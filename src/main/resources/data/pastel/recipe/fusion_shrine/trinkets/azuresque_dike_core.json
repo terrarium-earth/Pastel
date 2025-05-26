@@ -1,0 +1,31 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 1200,
+  "experience": 20.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:downstone_fragments",
+      "count": 4
+    },
+    "pastel:aether_vestiges",
+    "pastel:moonstone_core",
+    {
+      "item": "pastel:pure_azurite",
+      "count": 16
+    },
+    {
+      "item": "pastel:blue_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:azuresque_dike_core"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/azuresque_dike_core",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

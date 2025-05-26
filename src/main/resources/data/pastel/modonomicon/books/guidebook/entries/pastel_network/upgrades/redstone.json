@@ -1,0 +1,90 @@
+{
+  "name": "book.pastel.guidebook.pastel_upgrades.redstone.name",
+  "icon": {
+    "item": "pastel:pure_redstone"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/unlock_pastel_node_upgrading"
+  },
+  "category": "pastel:pastel_network",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:pastel_network/pastel_network",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 7,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_redstone"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.redstone.pure_redstone.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_coal"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.redstone.pure_coal.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_echo"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.redstone.pure_echo.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_lapis"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.redstone.pure_lapis.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_quartz"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.redstone.pure_quartz.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_glowstone"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.redstone.pure_glowstone.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      }
+    }
+  ]
+}

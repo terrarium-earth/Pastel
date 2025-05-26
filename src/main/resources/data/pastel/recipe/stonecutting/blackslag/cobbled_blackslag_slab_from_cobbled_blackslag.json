@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    {
+      "item": "pastel:cobbled_blackslag"
+    }
+  ],
+  "result": {
+    "id": "pastel:cobbled_blackslag_slab"
+  },
+  "count": 2
+}

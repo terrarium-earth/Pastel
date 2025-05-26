@@ -20,7 +20,7 @@ public class PotionWorkshopCraftingCategory extends PotionWorkshopCategory<Potio
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.potion_workshop_crafting.title");
+		return Component.translatable("container.pastel.rei.potion_workshop_crafting.title");
 	}
 	
 }

@@ -1,0 +1,70 @@
+{
+  "name": "book.pastel.guidebook.kindlings.name",
+  "icon": {
+    "item": "pastel:kindling_head"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/kindling_memory"
+  },
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:creating_life/dragonbone"
+    },
+    {
+      "entry": "pastel:creating_life/memories"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 5,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.kindlings.name",
+      "text": "book.pastel.guidebook.kindlings.page0.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "book.pastel.guidebook.remembering",
+      "recipe_id": "pastel:spirit_instiller/memories/kindling_from_dragonbone",
+      "text": "book.pastel.guidebook.kindlings.page1.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:remember_kindling"
+      },
+      "title": "book.pastel.guidebook.kindlings.page2.title",
+      "text": "book.pastel.guidebook.kindlings.page2.text"
+    },
+    {
+      "type": "pastel:snippet",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:remember_kindling"
+      },
+      "resource_path": "pastel:textures/gui/guidebook/kindlings.png",
+      "resource_width": 100,
+      "resource_height": 150,
+      "texture_x": 0,
+      "texture_y": 0,
+      "texture_width": 100,
+      "texture_height": 150,
+      "border": false
+    },
+    {
+      "type": "modonomicon:text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/unlock_explard_hint"
+      },
+      "title": "book.pastel.guidebook.kindlings.page3.title",
+      "text": "book.pastel.guidebook.kindlings.page3.text"
+    }
+  ]
+}

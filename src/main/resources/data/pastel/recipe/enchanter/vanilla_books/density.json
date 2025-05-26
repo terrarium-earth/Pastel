@@ -1,0 +1,52 @@
+{
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "time": 600,
+  "required_experience": 200,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "minecraft:tuff"
+    },
+    {
+      "item": "pastel:stratine_fragments"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "minecraft:tuff"
+    },
+    {
+      "item": "pastel:stratine_fragments"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "minecraft:density": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_trial",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:density"
+      ]
+    }
+  ]
+}

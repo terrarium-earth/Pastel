@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:natures_staff"
+    },
+    "title": {
+      "translate": "advancements.pastel.revive_dead_bush.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.revive_dead_bush.description"
+    }
+  },
+  "parent": "pastel:collect_all_basic_pigments",
+  "criteria": {
+    "revived_dead_bush": {
+      "trigger": "pastel:natures_staff_conversion",
+      "conditions": {
+        "source_block": "minecraft:dead_bush"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_all_basic_pigments"
+      }
+    }
+  }
+}

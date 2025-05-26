@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "pastel:blackslag"
+    }
+  ],
+  "result": {
+    "id": "pastel:polished_blackslag"
+  },
+  "experience": 0.1,
+  "cookingtime": 100
+}

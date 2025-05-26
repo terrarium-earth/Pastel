@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:prickly_bayleaf",
+  "modifiers": {
+    "flat_potency_bonus_negative_effects": -2.0
+  },
+  "required_advancement": "pastel:lategame/collect_prickly_bayleaf"
+}

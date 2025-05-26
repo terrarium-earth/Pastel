@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "unlocked_raw_bloodstone_ampoule": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/ampoules/raw_bloodstone_ampoule"
+      }
+    },
+    "collected_paltaeria_gem": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_paltaeria_gem"
+      }
+    },
+    "grew_bloodstone_in_crystallarieum": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:grow_bloodstone_in_crystallarieum"
+      }
+    }
+  }
+}

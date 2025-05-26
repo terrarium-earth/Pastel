@@ -1,0 +1,450 @@
+{
+  "name": "book.pastel.guidebook.potion_workshop_reagents.name",
+  "icon": {
+    "item": "minecraft:glowstone_dust"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/potion_workshop"
+  },
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:brewing/potion_workshop",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": -1,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.potion_workshop_reagents.name",
+      "text": "book.pastel.guidebook.potion_workshop_reagents.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.potion_workshop_reagents.page1.title",
+      "text": "book.pastel.guidebook.potion_workshop_reagents.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:redstone"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.redstone.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_redstone"
+      },
+      "anchor": "pure_redstone",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.pure_redstone.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:glowstone_dust"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.glowstone_dust.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_glowstone"
+      },
+      "anchor": "pure_glowstone",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.pure_glowstone.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:lapis_lazuli"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.lapis_lazuli.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_lapis"
+      },
+      "anchor": "pure_lapis",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.pure_lapis.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:gunpowder"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.gunpowder.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:dragon_breath"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_vanilla/dragon_breath"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.dragon_breath.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:echo_shard"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_vanilla/echo_shard"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.echo_shard.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_echo"
+      },
+      "anchor": "pure_echo",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.pure_echo.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:topaz_powder"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.topaz_powder.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:amethyst_powder"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.amethyst_powder.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:citrine_powder"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.citrine_powder.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:onyx_powder"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.onyx_powder.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:moonstone_powder"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_moonstone"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.moonstone_powder.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:shimmerstone_gem"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.shimmerstone_gem.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:quitoxic_powder"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_quitoxic_reeds"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.quitoxic_powder.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:stratine_fragments"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/collect_stratine"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.stratine_fragments.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:paltaeria_fragments"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_paltaeria"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.paltaeria_fragments.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:stardust"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_stardust"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.stardust.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:star_fragment"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_star_fragment"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.star_fragment.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:storm_stone"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/collect_storm_stone"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.storm_stone.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:raw_azurite"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/collect_azurite"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.raw_azurite.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:four_leaf_clover"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_four_leaf_clover"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.four_leaf_clover.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:vegetal"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_vegetal"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.vegetal.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:neolith"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/collect_neolith"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.neolith.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:midnight_chip"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/collect_midnight_chip"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.midnight_chip.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:moonstruck_nectar"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/harvest_moonstruck_nectar"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.moonstruck_nectar.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:bedrock_dust"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/break_decayed_bedrock"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.bedrock_dust.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:bismuth_flake"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_bismuth"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.bismuth_flake.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:raw_malachite"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_malachite"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.raw_malachite.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:raw_bloodstone"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_raw_bloodstone"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.raw_bloodstone.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:prickly_bayleaf"
+      },
+      "anchor": "prickly_bayleaf",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_prickly_bayleaf"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.prickly_bayleaf.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:jadeite_petals"
+      },
+      "anchor": "jadeite_petals",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_jadeite"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.jadeite_petals.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:fissure_plum"
+      },
+      "anchor": "fissure_plum",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_fissure_plum"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.fissure_plum.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:bone_ash"
+      },
+      "anchor": "bone_ash",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:break_cracked_dragonbone"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.bone_ash.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:ash_flakes"
+      },
+      "anchor": "ash_flakes",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_ash"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.ash_flakes.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:bitter_oils"
+      },
+      "anchor": "bitter_oils",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_cookbooks/poisoners_handbook"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.bitter_oils.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:nightdew_sprout"
+      },
+      "anchor": "nightdew_sprout",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_nightdew"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.nightdew_sprout.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:nectardew_burgeon"
+      },
+      "anchor": "nectardew_burgeon",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_nectardew"
+      },
+      "text": "book.pastel.guidebook.potion_workshop_reagents.nectardew_burgeon.text"
+    }
+  ]
+}

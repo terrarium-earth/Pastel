@@ -1,0 +1,32 @@
+{
+  "name": "item.pastel.koi",
+  "icon": {
+    "item": "pastel:koi"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_koi"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 1,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_koi"
+      },
+      "anchor": "koi",
+      "item": {
+        "item": "pastel:koi"
+      },
+      "title": "item.pastel.koi",
+      "text": "book.pastel.guidebook.koi.page0.text"
+    }
+  ]
+}

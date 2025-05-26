@@ -191,7 +191,7 @@ public interface InkStorage extends Clearable {
 	
 	static void addInkStoreBulletTooltip(List<Component> tooltip, InkColor color, long amount) {
 		MutableComponent inkName = color.getColoredInkName();
-		tooltip.add(Component.translatable("spectrum.tooltip.ink_powered.bullet_amount", Component.literal(getShortenedNumberString(amount)).withStyle(ChatFormatting.WHITE), inkName).setStyle(inkName.getStyle()));
+		tooltip.add(Component.translatable("pastel.tooltip.ink_powered.bullet_amount", Component.literal(getShortenedNumberString(amount)).withStyle(ChatFormatting.WHITE), inkName).setStyle(inkName.getStyle()));
 	}
 	
 }

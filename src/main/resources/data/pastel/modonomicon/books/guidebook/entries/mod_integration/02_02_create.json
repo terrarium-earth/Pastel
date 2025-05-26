@@ -1,0 +1,213 @@
+{
+  "name": "book.pastel.guidebook.mod_integration.create.name",
+  "icon": {
+    "item": "create:crushing_wheel"
+  },
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:mod_loaded",
+        "mod_id": "create"
+      },
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:place_pedestal"
+      }
+    ]
+  },
+  "category": "pastel:mod_integration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.mod_integration.create.page0.text",
+      "title": "book.pastel.guidebook.mod_integration.create.name"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.mod_integration.create.pure_zinc.title",
+      "items": [
+        "pastel:small_zinc_bud",
+        "pastel:large_zinc_bud",
+        "pastel:zinc_cluster",
+        "pastel:pure_zinc_block",
+        "pastel:pure_zinc"
+      ],
+      "text": "book.pastel.guidebook.mod_integration.create.pure_zinc.text"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.mod_integration.create.pure_zinc_growing.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/crystallarieum"
+      },
+      "text": "book.pastel.guidebook.mod_integration.create.pure_zinc_growing.text",
+      "recipe_id": "pastel:mod_integration/create/crystallarieum/zinc"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "book.pastel.guidebook.mod_integration.create.pure_brass_fusion.title",
+      "recipe_id": "pastel:mod_integration/create/fusion_shrine/pure_brass_ingot",
+      "text": "book.pastel.guidebook.mod_integration.create.pure_brass_fusion.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "title": "enchantment.create.potato_recovery",
+      "recipe_id": "pastel:mod_integration/create/enchanter/book_potato_recovery"
+    },
+    {
+      "type": "pastel:enchanter_upgrading",
+      "title": "container.pastel.rei.enchantment_upgrading.title",
+      "recipe_id": "pastel:mod_integration/create/enchantment_upgrade/potato_recovery/1_to_2"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "title": "enchantment.create.capacity",
+      "recipe_id": "pastel:mod_integration/create/enchanter/book_capacity"
+    },
+    {
+      "type": "pastel:enchanter_upgrading",
+      "title": "container.pastel.rei.enchantment_upgrading.title",
+      "recipe_id": "pastel:mod_integration/create/enchantment_upgrade/capacity/1_to_2"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "container.pastel.rei.anvil_crushing.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_any_basic_shard"
+      },
+      "item": {
+        "item": "minecraft:amethyst_shard"
+      },
+      "text": "book.pastel.guidebook.mod_integration.create.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.mod_integration.create.page2.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_pigment"
+      },
+      "item": {
+        "item": "pastel:magenta_leaves"
+      },
+      "text": "book.pastel.guidebook.mod_integration.create.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "container.pastel.rei.anvil_crushing.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_pigment"
+      },
+      "item": {
+        "item": "pastel:magenta_log"
+      },
+      "text": "book.pastel.guidebook.mod_integration.create.page3.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.mod_integration.create.page4.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_quitoxic_reeds"
+      },
+      "item": {
+        "item": "pastel:quitoxic_reeds"
+      },
+      "text": "book.pastel.guidebook.mod_integration.create.page4.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.mod_integration.create.page5.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_amaranth_bushel"
+      },
+      "item": {
+        "item": "pastel:amaranth_bushel"
+      },
+      "text": "book.pastel.guidebook.mod_integration.create.page5.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.mod_integration.create.page6.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_frostbite_crystal"
+      },
+      "item": {
+        "item": "pastel:frostbite_crystal"
+      },
+      "text": "book.pastel.guidebook.mod_integration.create.page6.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.mod_integration.create.page7.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_blazing_crystal"
+      },
+      "item": {
+        "item": "pastel:blazing_crystal"
+      },
+      "text": "book.pastel.guidebook.mod_integration.create.page7.text"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "recipe_id": "pastel:mod_integration/create/anvil_crushing/cinder_flour"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "recipe_id": "pastel:mod_integration/create/anvil_crushing/copper_ore_crushing"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "recipe_id": "pastel:mod_integration/create/anvil_crushing/gold_ore_crushing"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "recipe_id": "pastel:mod_integration/create/anvil_crushing/iron_ore_crushing"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "recipe_id": "pastel:mod_integration/create/anvil_crushing/powdered_obsidian"
+    },
+    {
+      "type": "pastel:anvil_crushing",
+      "recipe_id": "pastel:mod_integration/create/anvil_crushing/zinc_ore_crushing"
+    },
+    {
+      "type": "pastel:liquid_crystal_converting",
+      "recipe_id": "pastel:mod_integration/create/liquid_crystal_converting/purify_crushed_copper"
+    },
+    {
+      "type": "pastel:liquid_crystal_converting",
+      "recipe_id": "pastel:mod_integration/create/liquid_crystal_converting/purify_crushed_gold"
+    },
+    {
+      "type": "pastel:liquid_crystal_converting",
+      "recipe_id": "pastel:mod_integration/create/liquid_crystal_converting/purify_crushed_iron"
+    },
+    {
+      "type": "pastel:liquid_crystal_converting",
+      "recipe_id": "pastel:mod_integration/create/liquid_crystal_converting/purify_crushed_zinc"
+    },
+    {
+      "type": "pastel:liquid_crystal_converting",
+      "recipe_id": "pastel:mod_integration/create/liquid_crystal_converting/purify_rose_quartz"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "recipe_id": "pastel:mod_integration/create/spirit_instiller/blaze_burner"
+    }
+  ]
+}

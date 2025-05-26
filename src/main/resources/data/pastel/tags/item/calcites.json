@@ -1,0 +1,29 @@
+{
+  "values": [
+    "pastel:polished_calcite_button",
+    "pastel:polished_calcite_pressure_plate",
+    "pastel:calcite_tiles",
+    "pastel:calcite_tile_stairs",
+    "pastel:calcite_tile_wall",
+    "pastel:calcite_tile_slab",
+    "pastel:cracked_calcite_bricks",
+    "pastel:cracked_calcite_tiles",
+    "pastel:calcite_slab",
+    "pastel:calcite_stairs",
+    "pastel:polished_calcite",
+    "pastel:polished_calcite_pillar",
+    "pastel:polished_calcite_crest",
+    "pastel:chiseled_polished_calcite",
+    "pastel:notched_polished_calcite",
+    "pastel:polished_calcite_slab",
+    "pastel:polished_calcite_stairs",
+    "pastel:calcite_bricks",
+    "pastel:calcite_brick_slab",
+    "pastel:calcite_brick_stairs",
+    "pastel:amethyst_chiseled_calcite",
+    "pastel:topaz_chiseled_calcite",
+    "pastel:citrine_chiseled_calcite",
+    "pastel:onyx_chiseled_calcite",
+    "pastel:moonstone_chiseled_calcite"
+  ]
+}

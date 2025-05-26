@@ -1,0 +1,99 @@
+{
+  "name": "book.pastel.guidebook.pastel_upgrades.transfer.name",
+  "icon": {
+    "item": "pastel:raw_azurite"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/unlock_pastel_node_upgrading"
+  },
+  "category": "pastel:pastel_network",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 7,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.raw_azurite",
+      "item": {
+        "item": "pastel:raw_azurite"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.transfer.raw_azurite.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.pure_azurite",
+      "item": {
+        "item": "pastel:pure_azurite"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.transfer.pure_azurite.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/grow_azurite_in_crystallarieum"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.raw_malachite",
+      "item": {
+        "item": "pastel:raw_malachite"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.transfer.raw_malachite.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_malachite"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.pure_malachite",
+      "item": {
+        "item": "pastel:pure_malachite"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.transfer.pure_malachite.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/malachite/malachite_tools"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.raw_bloodstone",
+      "item": {
+        "item": "pastel:raw_bloodstone"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.transfer.raw_bloodstone.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:pluck_resplendent_feather"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.pure_bloodstone",
+      "item": {
+        "item": "pastel:pure_bloodstone"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.transfer.pure_bloodstone.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/resources/bloodstone"
+      }
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.resonance_shard",
+      "item": {
+        "item": "pastel:resonance_shard"
+      },
+      "text": "book.pastel.guidebook.pastel_upgrades.transfer.resonance_shard.text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/strike_up_hummingstone_hymn"
+      }
+    }
+  ]
+}

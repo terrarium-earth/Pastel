@@ -90,7 +90,7 @@ public class CreativeInkStorage implements InkStorage {
 	
 	@Override
 	public void addTooltip(List<Component> tooltip) {
-		tooltip.add(Component.translatable("item.spectrum.creative_ink_assortment.tooltip"));
+		tooltip.add(Component.translatable("item.pastel.creative_ink_assortment.tooltip"));
 	}
 	
 	@Override

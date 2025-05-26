@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "placed_pedestal": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:place_pedestal"
+      }
+    },
+    "collected_quitoxic_reeds": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_quitoxic_reeds"
+      }
+    }
+  }
+}

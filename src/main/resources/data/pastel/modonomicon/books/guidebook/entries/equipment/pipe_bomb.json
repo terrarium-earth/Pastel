@@ -1,0 +1,29 @@
+{
+  "name": "item.pastel.pipe_bomb",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/pipe_bomb"
+  },
+  "icon": {
+    "item": "pastel:pipe_bomb"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 6,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.pipe_bomb.page0.text",
+      "title": "item.pastel.pipe_bomb"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.pipe_bomb.page1.text",
+      "recipe_id": "pastel:pedestal/tier3/boom/pipe_bomb"
+    }
+  ]
+}

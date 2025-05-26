@@ -35,8 +35,8 @@ public class AzureDikeCoreItem extends AzureDikeTrinketItem {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.spectrum.azuresque_dike_core.tooltip"));
-		tooltip.add(Component.translatable("item.spectrum.azuresque_dike_core.tooltip2"));
-		tooltip.add(Component.translatable("item.spectrum.azuresque_dike_core.tooltip3"));
+		tooltip.add(Component.translatable("item.pastel.azuresque_dike_core.tooltip"));
+		tooltip.add(Component.translatable("item.pastel.azuresque_dike_core.tooltip2"));
+		tooltip.add(Component.translatable("item.pastel.azuresque_dike_core.tooltip3"));
 	}
 }

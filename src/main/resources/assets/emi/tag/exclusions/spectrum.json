@@ -1,10 +1,10 @@
 {
   "exclusions": [
-    "spectrum:coming_soon_tooltip",
-    "spectrum:indestructible_blacklisted",
-    "spectrum:no_cinderhearth_doubling",
-    "spectrum:trinkets",
-    "spectrum:uses_water_pathfinding",
+    "pastel:coming_soon_tooltip",
+    "pastel:indestructible_blacklisted",
+    "pastel:no_cinderhearth_doubling",
+    "pastel:trinkets",
+    "pastel:uses_water_pathfinding",
     "things:hardening_catalyst_blacklist"
   ]
 }

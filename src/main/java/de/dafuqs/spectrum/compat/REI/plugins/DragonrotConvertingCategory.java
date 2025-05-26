@@ -24,7 +24,7 @@ public class DragonrotConvertingCategory extends FluidConvertingCategory<Dragonr
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.dragonrot_converting.title");
+		return Component.translatable("container.pastel.rei.dragonrot_converting.title");
 	}
 	
 }

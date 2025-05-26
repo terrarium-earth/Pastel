@@ -1,0 +1,89 @@
+{
+  "values": [
+    "pastel:small_malachite_bud",
+    "pastel:large_malachite_bud",
+    "pastel:small_bismuth_bud",
+    "pastel:large_bismuth_bud",
+    "pastel:small_azurite_bud",
+    "pastel:large_azurite_bud",
+    "pastel:small_bloodstone_bud",
+    "pastel:large_bloodstone_bud",
+
+    "pastel:small_coal_bud",
+    "pastel:large_coal_bud",
+    "pastel:small_copper_bud",
+    "pastel:large_copper_bud",
+    "pastel:small_diamond_bud",
+    "pastel:large_diamond_bud",
+    "pastel:small_emerald_bud",
+    "pastel:large_emerald_bud",
+    "pastel:small_glowstone_bud",
+    "pastel:large_glowstone_bud",
+    "pastel:small_gold_bud",
+    "pastel:large_gold_bud",
+    "pastel:small_iron_bud",
+    "pastel:large_iron_bud",
+    "pastel:small_lapis_bud",
+    "pastel:large_lapis_bud",
+    "pastel:small_netherite_scrap_bud",
+    "pastel:large_netherite_scrap_bud",
+    "pastel:small_echo_bud",
+    "pastel:large_echo_bud",
+    "pastel:small_prismarine_bud",
+    "pastel:large_prismarine_bud",
+    "pastel:small_quartz_bud",
+    "pastel:large_quartz_bud",
+    "pastel:small_redstone_bud",
+    "pastel:large_redstone_bud",
+
+    {
+      "id": "pastel:small_zinc_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:large_zinc_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:small_certus_quartz_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:large_certus_quartz_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:small_fluix_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:large_fluix_bud",
+      "required": false
+    },
+
+    {
+      "id": "pastel:small_globette_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:large_globette_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:small_globette_end_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:large_globette_end_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:small_globette_nether_bud",
+      "required": false
+    },
+    {
+      "id": "pastel:large_globette_nether_bud",
+      "required": false
+    }
+  ]
+}

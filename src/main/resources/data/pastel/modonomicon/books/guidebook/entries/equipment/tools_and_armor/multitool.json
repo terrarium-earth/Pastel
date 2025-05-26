@@ -1,0 +1,33 @@
+{
+  "name": "item.pastel.multitool",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:build_basic_pedestal_structure"
+  },
+  "icon": {
+    "item": "pastel:multitool"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:multitool"
+      },
+      "text": "book.pastel.guidebook.multitool.page0.text",
+      "title": "item.pastel.multitool"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.multitool.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/multitool"
+    }
+  ]
+}

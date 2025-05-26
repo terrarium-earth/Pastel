@@ -15,7 +15,7 @@ public class AzaleaTeaItem extends DrinkItem {
 	
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.spectrum.azalea_tea.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.azalea_tea.tooltip").withStyle(ChatFormatting.GRAY));
 		super.appendHoverText(stack, context, tooltip, type);
 	}
 	

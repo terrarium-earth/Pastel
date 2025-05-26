@@ -1,0 +1,10 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:star_fragment",
+  "modifiers": {
+    "chance_to_add_last_effect": 0.5,
+    "last_effect_duration_modifier": 0.667,
+    "last_effect_potency_modifier": 2.0
+  },
+  "required_advancement": "pastel:collect_star_fragment"
+}

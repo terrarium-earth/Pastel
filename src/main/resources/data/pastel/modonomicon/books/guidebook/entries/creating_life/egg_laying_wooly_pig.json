@@ -1,0 +1,58 @@
+{
+  "name": "book.pastel.guidebook.egg_laying_wooly_pig.name",
+  "icon": {
+    "item": "pastel:egg_laying_wooly_pig_head"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/egg_laying_wooly_pig_head"
+  },
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:creating_life/creature_manipulation"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 4,
+  "y": 6,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "entity.pastel.egg_laying_wooly_pig",
+      "text": "book.pastel.guidebook.egg_laying_wooly_pig.page0.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "book.pastel.guidebook.egg_laying_wooly_pig.page1.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/egg_laying_wooly_pig_head"
+      },
+      "recipe_id": "pastel:fusion_shrine/egg_laying_wooly_pig_head",
+      "text": "book.pastel.guidebook.egg_laying_wooly_pig.page1.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/remember_egg_laying_wooly_pig"
+      },
+      "title": "book.pastel.guidebook.remembering",
+      "recipe_id": "pastel:spirit_instiller/memories/egg_laying_wooly_pig",
+      "text": "book.pastel.guidebook.egg_laying_wooly_pig.page2.text"
+    },
+    {
+      "type": "modonomicon:entity",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/remember_egg_laying_wooly_pig"
+      },
+      "entity_id": "pastel:egg_laying_wooly_pig",
+      "scale": 0.7,
+      "text": "book.pastel.guidebook.egg_laying_wooly_pig.page3.text"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "values": [
+    "#minecraft:stairs",
+    "#minecraft:walls",
+    "#minecraft:slabs",
+    "#minecraft:fences",
+    "#pastel:calcites",
+    "#pastel:basalts",
+    "#pastel:blackslags",
+    "#pastel:shale_clays",
+    "#pastel:dragonbone_blocks",
+    "minecraft:wet_sponge",
+    {
+      "id": "c:dusts",
+      "required": false
+    },
+    {
+      "id": "c:small_dusts",
+      "required": false
+    }
+  ]
+}

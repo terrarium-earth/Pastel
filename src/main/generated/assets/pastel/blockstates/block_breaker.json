@@ -1,0 +1,57 @@
+{
+  "variants": {
+    "orientation=down_east": {
+      "model": "pastel:block/block_breaker",
+      "x": 90,
+      "y": 90
+    },
+    "orientation=down_north": {
+      "model": "pastel:block/block_breaker",
+      "x": 90
+    },
+    "orientation=down_south": {
+      "model": "pastel:block/block_breaker",
+      "x": 90,
+      "y": 180
+    },
+    "orientation=down_west": {
+      "model": "pastel:block/block_breaker",
+      "x": 90,
+      "y": 270
+    },
+    "orientation=east_up": {
+      "model": "pastel:block/block_breaker",
+      "y": 90
+    },
+    "orientation=north_up": {
+      "model": "pastel:block/block_breaker"
+    },
+    "orientation=south_up": {
+      "model": "pastel:block/block_breaker",
+      "y": 180
+    },
+    "orientation=up_east": {
+      "model": "pastel:block/block_breaker",
+      "x": 270,
+      "y": 270
+    },
+    "orientation=up_north": {
+      "model": "pastel:block/block_breaker",
+      "x": 270,
+      "y": 180
+    },
+    "orientation=up_south": {
+      "model": "pastel:block/block_breaker",
+      "x": 270
+    },
+    "orientation=up_west": {
+      "model": "pastel:block/block_breaker",
+      "x": 270,
+      "y": 90
+    },
+    "orientation=west_up": {
+      "model": "pastel:block/block_breaker",
+      "y": 270
+    }
+  }
+}

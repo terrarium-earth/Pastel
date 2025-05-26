@@ -1,0 +1,32 @@
+{
+  "name": "book.pastel.guidebook.shimmerstone.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_shimmerstone"
+  },
+  "icon": {
+    "item": "pastel:shimmerstone_gem"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -4,
+  "y": 3,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "Shimmerstone",
+      "item": {
+        "item": "pastel:shimmerstone_gem"
+      },
+      "text": "book.pastel.guidebook.shimmerstone.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/compacting/shimmerstone_block",
+      "text": "book.pastel.guidebook.shimmerstone.page1.text"
+    }
+  ]
+}

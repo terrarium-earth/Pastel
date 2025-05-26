@@ -1,0 +1,37 @@
+{
+  "name": "book.pastel.guidebook.glowblocks.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/glowblocks/any_glowblock"
+  },
+  "icon": {
+    "item": "pastel:orange_glowblock"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/pigment"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": 7,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:orange_glowblock"
+      },
+      "title": "book.pastel.guidebook.glowblocks.name",
+      "text": "book.pastel.guidebook.glowblocks.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/glowblocks/orange",
+      "text": "book.pastel.guidebook.glowblocks.page1.text"
+    }
+  ]
+}

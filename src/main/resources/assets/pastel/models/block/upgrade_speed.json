@@ -1,0 +1,9 @@
+{
+  "parent": "pastel:templates/upgrade",
+  "textures": {
+    "inner": "pastel:block/upgrade_speed_inner",
+    "outer": "pastel:block/upgrade_speed_outer",
+    "base": "pastel:block/upgrade_base",
+    "particle": "pastel:block/upgrade_speed_inner"
+  }
+}

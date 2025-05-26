@@ -81,7 +81,7 @@ public class RandomTeleportingIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.random_teleporting_idol.tooltip", horizontalRange));
+		tooltip.add(Component.translatable("block.pastel.random_teleporting_idol.tooltip", horizontalRange));
 	}
 	
 	@Override

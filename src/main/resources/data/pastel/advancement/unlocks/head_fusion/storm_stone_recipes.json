@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "unlocked_head_fusion": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/head_fusion/basic_recipes"
+      }
+    },
+    "collected_storm_stone": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_storm_stone"
+      }
+    }
+  }
+}

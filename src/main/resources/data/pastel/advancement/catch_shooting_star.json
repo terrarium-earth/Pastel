@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:collect_star_fragment",
+  "display": {
+    "icon": {
+      "id": "pastel:glistering_shooting_star"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.catch_shooting_star.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.catch_shooting_star.description"
+    }
+  },
+  "criteria": {
+    "catch": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_all_basic_pigments"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 50
+  }
+}

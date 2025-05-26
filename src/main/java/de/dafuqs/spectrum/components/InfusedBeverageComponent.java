@@ -31,7 +31,7 @@ public record InfusedBeverageComponent(String variant, int color) implements Too
 	
 	@Override
 	public void addToTooltip(Item.TooltipContext context, Consumer<Component> tooltip, TooltipFlag type) {
-		tooltip.accept(Component.translatable("item.spectrum.infused_beverage.tooltip.variant." + variant).withStyle(ChatFormatting.YELLOW));
+		tooltip.accept(Component.translatable("item.pastel.infused_beverage.tooltip.variant." + variant).withStyle(ChatFormatting.YELLOW));
 	}
 	
 }

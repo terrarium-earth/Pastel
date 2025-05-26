@@ -1,6 +1,6 @@
 {
   "values": [
-    "spectrum:set_health",
-    "spectrum:sleep"
+    "pastel:set_health",
+    "pastel:sleep"
   ]
 }

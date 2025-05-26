@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "create:precision_mechanism"
+    },
+    {
+      "item": "minecraft:rabbit_hide"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "create:precision_mechanism"
+    },
+    {
+      "item": "minecraft:rabbit_hide"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "create:capacity": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:midgame/build_enchanting_structure",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

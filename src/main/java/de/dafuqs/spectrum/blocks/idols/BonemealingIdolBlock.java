@@ -32,7 +32,7 @@ public class BonemealingIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.bonemealing_idol.tooltip"));
+		tooltip.add(Component.translatable("block.pastel.bonemealing_idol.tooltip"));
 	}
 	
 	@Override

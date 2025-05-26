@@ -1,0 +1,46 @@
+{
+  "parent": "pastel:collect_quitoxic_reeds",
+  "display": {
+    "icon": {
+      "id": "pastel:bottomless_bundle"
+    },
+    "title": {
+      "translate": "advancements.pastel.fill_bottomless_bundle.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.fill_bottomless_bundle.description"
+    }
+  },
+  "criteria": {
+    "fill": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:bottomless_bundle",
+            "predicates": {
+              "pastel:bottomless_stack": {
+                "count": 20000
+              }
+            }
+          }
+        ],
+        "slots": {
+          "occupied": {
+            "min": 0,
+            "max": 50
+          }
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_quitoxic_reeds"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 500
+  }
+}

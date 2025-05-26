@@ -1,0 +1,36 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 12000,
+  "experience": 8.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_bismuth_ring",
+    {
+      "item": "pastel:pure_gold_block",
+      "count": 64
+    },
+    {
+      "item": "pastel:moonstone_shard",
+      "count": 64
+    },
+    "pastel:resonant_lily"
+  ],
+  "result": {
+    "id": "pastel:neat_ring"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/neat_ring",
+  "start_crafting_effect": "play_glass_breaking_sound",
+  "during_crafting_effects": [
+    "nothing",
+    "lightning_on_shrine",
+    "nothing",
+    "explosions_and_lightning_around_shrine",
+    "explosions_and_lightning_around_shrine",
+    "explosions_and_lightning_around_shrine",
+    "nothing"
+  ],
+  "finish_crafting_effect": "ridiculously_squeaky_fart",
+  "play_crafting_finished_effects": false
+}

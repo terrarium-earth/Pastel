@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "time": 2400,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 8,
+    "pastel:black": 2
+  },
+  "experience": 4.0,
+  "pattern": [
+    " JM",
+    " DJ",
+    "D  "
+  ],
+  "key": {
+    "M": "pastel:moonstone_core",
+    "D": "pastel:dragonbone_chunk",
+    "J": "pastel:jadeite_petals"
+  },
+  "result": {
+    "id": "pastel:staff_of_remembrance",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/items/staff_of_remembrance"
+}

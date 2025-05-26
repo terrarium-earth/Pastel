@@ -1,0 +1,76 @@
+{
+  "name": "book.pastel.guidebook.melochites_cookbook_vol_1.name",
+  "icon": "pastel:melochites_cookbook_vol_1",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -3,
+  "y": -1,
+  "pages": [
+    {
+      "type": "pastel:snippet",
+      "title": "book.pastel.guidebook.melochites_cookbook_vol_1.page0.title",
+      "resource_path": "pastel:textures/gui/guidebook/mehrunes_chellaya_vol_1.png",
+      "resource_width": 116,
+      "resource_height": 116,
+      "texture_x": 0,
+      "texture_y": 0,
+      "texture_width": 116,
+      "texture_height": 116,
+      "border": false,
+      "text": "book.pastel.guidebook.melochites_cookbooks.aunt_melaya"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page1.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.melochites_cookbook_vol_1.page2.title",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page2.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/food/banyash",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page3.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.melochites_cookbook_vol_1.page4.title",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page4.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/food/hare_roast_malt",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page5.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.melochites_cookbook_vol_1.page6.title",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page6.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/food/meatloaf",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page7.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.melochites_cookbook_vol_1.page8.title",
+      "recipe_id": "pastel:pedestal/tier1/food/meatloaf_sandwich",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page8.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "book.pastel.guidebook.melochites_cookbook_vol_1.page9.title",
+      "recipe_id": "pastel:titration_barrel/surstromming",
+      "text": "book.pastel.guidebook.melochites_cookbook_vol_1.page9.text"
+    }
+  ]
+}

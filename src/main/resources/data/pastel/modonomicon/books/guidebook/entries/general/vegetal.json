@@ -1,0 +1,43 @@
+{
+  "name": "item.pastel.vegetal",
+  "icon": {
+    "item": "pastel:vegetal"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_vegetal"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/fading"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.vegetal",
+      "item": {
+        "item": "pastel:vegetal"
+      },
+      "text": "book.pastel.guidebook.vegetal.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "Compression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/vegetal_block",
+      "text": ""
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "Decompression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/vegetal_from_vegetal_block",
+      "text": ""
+    }
+  ]
+}

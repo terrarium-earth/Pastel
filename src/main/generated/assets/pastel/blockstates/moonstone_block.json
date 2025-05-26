@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "pastel:block/moonstone_block"
+      },
+      {
+        "model": "pastel:block/moonstone_block_mirrored"
+      }
+    ]
+  }
+}

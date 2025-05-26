@@ -1,0 +1,46 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:mysterious_compass"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.open_mysterious_compass.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.open_mysterious_compass.description"
+    }
+  },
+  "parent": "pastel:endgame/spectrum_endgame",
+  "criteria": {
+    "socketed_mysterious_locket": {
+      "trigger": "pastel:crafted_with_fusion_shrine",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:mysterious_locket"
+          }
+        ]
+      }
+    },
+    "opened_mysterious_locket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:mysterious_compass"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:endgame/spectrum_endgame"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 250
+  }
+}

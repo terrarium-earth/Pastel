@@ -1,0 +1,173 @@
+{
+  "parent": "pastel:craft_salted_jaramel_trifle_or_tart",
+  "display": {
+    "icon": {
+      "id": "pastel:triple_meat_pot_pie"
+    },
+    "frame": "goal",
+    "title": {
+      "translate": "advancements.pastel.eat_each_pastry.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.eat_each_pastry.description"
+    }
+  },
+  "criteria": {
+    "jaramel_tart": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:jaramel_tart"
+          ]
+        }
+      }
+    },
+    "salted_jaramel_tart": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:salted_jaramel_tart"
+          ]
+        }
+      }
+    },
+    "ashen_tart": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:ashen_tart"
+          ]
+        }
+      }
+    },
+    "weeping_tart": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:weeping_tart"
+          ]
+        }
+      }
+    },
+    "whispy_tart": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:whispy_tart"
+          ]
+        }
+      }
+    },
+    "puff_tart": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:puff_tart"
+          ]
+        }
+      }
+    },
+    "jaramel_trifle": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:jaramel_trifle"
+          ]
+        }
+      }
+    },
+    "salted_jaramel_trifle": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:salted_jaramel_trifle"
+          ]
+        }
+      }
+    },
+    "monster_trifle": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:monster_trifle"
+          ]
+        }
+      }
+    },
+    "demon_trifle": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:demon_trifle"
+          ]
+        }
+      }
+    },
+    "honey_pastry": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:honey_pastry"
+          ]
+        }
+      }
+    },
+    "lucky_roll": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:lucky_roll"
+          ]
+        }
+      }
+    },
+    "scone": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:scone"
+          ]
+        }
+      }
+    },
+    "star_candy": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:star_candy"
+          ]
+        }
+      }
+    },
+    "enchanted_star_candy": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:enchanted_star_candy"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_salted_jaramel_trifle_or_tart"
+      }
+    }
+  }
+}

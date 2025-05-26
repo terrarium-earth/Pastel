@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W  ",
+    "WW ",
+    "WWW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:basalt_tiles"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:basalt_tile_stairs",
+    "count": 6
+  }
+}

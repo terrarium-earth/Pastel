@@ -1,0 +1,243 @@
+{
+  "name": "book.pastel.guidebook.idols.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/idols"
+  },
+  "icon": {
+    "item": "pastel:fox_idol"
+  },
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:creating_life/mob_heads"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.idols.name",
+      "text": "book.pastel.guidebook.idols.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page1.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/axolotl"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page2.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/bat"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page3.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/bee"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page4.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/blaze"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page5.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/cat"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page6.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/chicken"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page7.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/cow"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page8.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/creeper"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page9.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/ender_dragon"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page10.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/enderman"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page11.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/endermite"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page12.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/evoker"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page13.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/fish"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page14.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/fox"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page15.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/ghast"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page16.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/glow_squid"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page17.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/goat"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page18.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/guardian"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page19.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/horse"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page20.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/illusioner"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page21.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/ocelot"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page22.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/parrot"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page23.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/phantom"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page24.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/pig"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page25.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/piglin"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page26.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/polar_bear"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page27.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/pufferfish"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page28.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/rabbit"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page29.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/sheep"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page30.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/shulker"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page31.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/silverfish"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page32.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/skeleton"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page33.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/slime"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page34.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/snow_golem"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page35.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/spider"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page36.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/squid"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page37.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/stray"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page38.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/strider"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page39.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/turtle"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page40.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/witch"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page41.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/wither"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page42.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/wither_skeleton"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.idols.page43.text",
+      "recipe_id": "pastel:pedestal/tier3/idols/zombie"
+    }
+  ]
+}

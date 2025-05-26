@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:tap_titration_barrel",
+  "display": {
+    "icon": {
+      "id": "pastel:mermaids_jam"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.tap_mermaids_jam.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.tap_mermaids_jam.description"
+    }
+  },
+  "criteria": {
+    "tapped_mermaids_jam": {
+      "trigger": "pastel:titration_barrel_tapping",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:mermaids_jam"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:tap_titration_barrel"
+      }
+    }
+  }
+}

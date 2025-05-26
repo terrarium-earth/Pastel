@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:midgame/collect_azurite",
+  "display": {
+    "icon": {
+      "id": "pastel:bottle_of_decay_away"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_bottle_of_decay_away.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_bottle_of_decay_away.description"
+    }
+  },
+  "criteria": {
+    "craft": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "pastel:bottle_of_decay_away"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_azurite"
+      }
+    }
+  }
+}

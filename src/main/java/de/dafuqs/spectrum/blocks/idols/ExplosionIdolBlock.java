@@ -41,7 +41,7 @@ public class ExplosionIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.explosion_idol.tooltip", power));
+		tooltip.add(Component.translatable("block.pastel.explosion_idol.tooltip", power));
 	}
 	
 	@Override

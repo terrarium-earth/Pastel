@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "weight": 100,
-          "name": "spectrum:eraser_spawn_egg"
+          "name": "pastel:eraser_spawn_egg"
         }
       ]
     }

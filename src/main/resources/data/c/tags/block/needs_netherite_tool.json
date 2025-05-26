@@ -1,7 +1,7 @@
 {
   "values": [
-    "#spectrum:malachite_ores",
-    "#spectrum:dragonbone_blocks",
-    "spectrum:rock_crystal"
+    "#pastel:malachite_ores",
+    "#pastel:dragonbone_blocks",
+    "pastel:rock_crystal"
   ]
 }

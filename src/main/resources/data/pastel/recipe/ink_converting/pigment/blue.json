@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "pastel:blue_pigment"
+    }
+  ],
+  "ink_color": "pastel:blue",
+  "amount": 100,
+  "required_advancement": "pastel:hidden/collect_pigment/blue"
+}

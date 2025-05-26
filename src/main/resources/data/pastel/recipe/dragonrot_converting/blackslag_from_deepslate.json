@@ -1,0 +1,12 @@
+{
+  "type": "pastel:dragonrot_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:deepslate"
+    }
+  ],
+  "result": {
+    "id": "pastel:blackslag",
+    "count": 1
+  }
+}

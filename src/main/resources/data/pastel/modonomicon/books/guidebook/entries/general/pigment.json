@@ -1,0 +1,266 @@
+{
+  "name": "book.pastel.guidebook.pigment.name",
+  "description": "book.pastel.guidebook.pigment.description",
+  "icon": {
+    "item": "pastel:magenta_pigment"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_pigment"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/colored_trees"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 2,
+  "x": 4,
+  "y": -1,
+  "turnin": "pastel:collect_all_basic_pigments_besides_brown",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.pigment.page0.text",
+      "title": "book.pastel.guidebook.pigment.name"
+    },
+    {
+      "type": "pastel:checklist",
+      "checklist": {
+        "pastel:hidden/collect_pigment/black": "book.pastel.guidebook.pigment.page1.checklist.entry0",
+        "pastel:hidden/collect_pigment/blue": "book.pastel.guidebook.pigment.page1.checklist.entry1",
+        "pastel:hidden/collect_pigment/brown": "book.pastel.guidebook.pigment.page1.checklist.entry2",
+        "pastel:hidden/collect_pigment/cyan": "book.pastel.guidebook.pigment.page1.checklist.entry3",
+        "pastel:hidden/collect_pigment/gray": "book.pastel.guidebook.pigment.page1.checklist.entry4",
+        "pastel:hidden/collect_pigment/green": "book.pastel.guidebook.pigment.page1.checklist.entry5",
+        "pastel:hidden/collect_pigment/light_blue": "book.pastel.guidebook.pigment.page1.checklist.entry6",
+        "pastel:hidden/collect_pigment/light_gray": "book.pastel.guidebook.pigment.page1.checklist.entry7",
+        "pastel:hidden/collect_pigment/lime": "book.pastel.guidebook.pigment.page1.checklist.entry8",
+        "pastel:hidden/collect_pigment/magenta": "book.pastel.guidebook.pigment.page1.checklist.entry9",
+        "pastel:hidden/collect_pigment/orange": "book.pastel.guidebook.pigment.page1.checklist.entry10",
+        "pastel:hidden/collect_pigment/pink": "book.pastel.guidebook.pigment.page1.checklist.entry11",
+        "pastel:hidden/collect_pigment/purple": "book.pastel.guidebook.pigment.page1.checklist.entry12",
+        "pastel:hidden/collect_pigment/red": "book.pastel.guidebook.pigment.page1.checklist.entry13",
+        "pastel:hidden/collect_pigment/white": "book.pastel.guidebook.pigment.page1.checklist.entry14",
+        "pastel:hidden/collect_pigment/yellow": "book.pastel.guidebook.pigment.page1.checklist.entry15"
+      },
+      "text": "book.pastel.guidebook.pigment.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "black",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/black"
+      },
+      "item": {
+        "item": "pastel:black_pigment"
+      },
+      "title": "item.pastel.black_pigment",
+      "text": "book.pastel.guidebook.pigment.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "blue",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/blue"
+      },
+      "item": {
+        "item": "pastel:blue_pigment"
+      },
+      "title": "item.pastel.blue_pigment",
+      "text": "book.pastel.guidebook.pigment.page3.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "brown",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/brown"
+      },
+      "item": {
+        "item": "pastel:brown_pigment"
+      },
+      "title": "item.pastel.brown_pigment",
+      "text": "book.pastel.guidebook.pigment.page4.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "cyan",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/cyan"
+      },
+      "item": {
+        "item": "pastel:cyan_pigment"
+      },
+      "title": "item.pastel.cyan_pigment",
+      "text": "book.pastel.guidebook.pigment.page5.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "gray",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/gray"
+      },
+      "item": {
+        "item": "pastel:gray_pigment"
+      },
+      "title": "item.pastel.gray_pigment",
+      "text": "book.pastel.guidebook.pigment.page6.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "green",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/green"
+      },
+      "item": {
+        "item": "pastel:green_pigment"
+      },
+      "title": "item.pastel.green_pigment",
+      "text": "book.pastel.guidebook.pigment.page7.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "light_blue",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/light_blue"
+      },
+      "item": {
+        "item": "pastel:light_blue_pigment"
+      },
+      "title": "item.pastel.light_blue_pigment",
+      "text": "book.pastel.guidebook.pigment.page8.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "black",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/light_gray"
+      },
+      "item": {
+        "item": "pastel:light_gray_pigment"
+      },
+      "title": "item.pastel.light_gray_pigment",
+      "text": "book.pastel.guidebook.pigment.page9.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "lime",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/lime"
+      },
+      "item": {
+        "item": "pastel:lime_pigment"
+      },
+      "title": "item.pastel.lime_pigment",
+      "text": "book.pastel.guidebook.pigment.page10.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "magenta",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/magenta"
+      },
+      "item": {
+        "item": "pastel:magenta_pigment"
+      },
+      "title": "item.pastel.magenta_pigment",
+      "text": "book.pastel.guidebook.pigment.page11.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "orange",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/orange"
+      },
+      "item": {
+        "item": "pastel:orange_pigment"
+      },
+      "title": "item.pastel.orange_pigment",
+      "text": "book.pastel.guidebook.pigment.page12.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "pink",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/pink"
+      },
+      "item": {
+        "item": "pastel:pink_pigment"
+      },
+      "title": "item.pastel.pink_pigment",
+      "text": "book.pastel.guidebook.pigment.page13.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "purple",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/purple"
+      },
+      "item": {
+        "item": "pastel:purple_pigment"
+      },
+      "title": "item.pastel.purple_pigment",
+      "text": "book.pastel.guidebook.pigment.page14.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "red",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/red"
+      },
+      "item": {
+        "item": "pastel:red_pigment"
+      },
+      "title": "item.pastel.red_pigment",
+      "text": "book.pastel.guidebook.pigment.page15.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "white",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/white"
+      },
+      "item": {
+        "item": "pastel:white_pigment"
+      },
+      "title": "item.pastel.white_pigment",
+      "text": "book.pastel.guidebook.pigment.page16.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "yellow",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pigment/yellow"
+      },
+      "item": {
+        "item": "pastel:yellow_pigment"
+      },
+      "title": "item.pastel.yellow_pigment",
+      "text": "book.pastel.guidebook.pigment.page17.text"
+    },
+    {
+      "title": "book.pastel.guidebook.pigment.page18.title",
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/pigment_blocks/magenta_block",
+      "text": "book.pastel.guidebook.pigment.page18.text"
+    }
+  ]
+}

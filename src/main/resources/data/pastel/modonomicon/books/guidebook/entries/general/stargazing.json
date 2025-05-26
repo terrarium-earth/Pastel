@@ -1,0 +1,92 @@
+{
+  "name": "book.pastel.guidebook.stargazing.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:milestones/unlock_shooting_stars"
+  },
+  "icon": {
+    "item": "minecraft:spyglass"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/brown_is_weird"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 7,
+  "y": -4,
+  "pages": [
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "book.pastel.guidebook.stargazing.page0.title",
+      "images": [
+        "pastel:textures/gui/guidebook/stargazing.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.stargazing.page0.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_star_fragment"
+      },
+      "title": "book.pastel.guidebook.stargazing.page1.title",
+      "item": {
+        "item": "pastel:glistering_shooting_star"
+      },
+      "text": "book.pastel.guidebook.stargazing.page1.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_all_shooting_star_variants"
+      },
+      "title": "book.pastel.guidebook.stargazing.page2.title",
+      "recipe_id": "pastel:fusion_shrine/shooting_star_hardening",
+      "text": "book.pastel.guidebook.stargazing.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_star_fragment"
+      },
+      "title": "book.pastel.guidebook.stargazing.page3.title",
+      "item": {
+        "item": "pastel:star_fragment"
+      },
+      "text": "book.pastel.guidebook.stargazing.page3.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_star_fragment"
+      },
+      "anchor": "stardust",
+      "title": "item.pastel.stardust",
+      "item": {
+        "item": "pastel:stardust"
+      },
+      "text": "book.pastel.guidebook.stargazing.page4.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.compression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/stardust_block",
+      "text": ""
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.decompression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/stardust_from_stardust_block",
+      "text": ""
+    }
+  ]
+}

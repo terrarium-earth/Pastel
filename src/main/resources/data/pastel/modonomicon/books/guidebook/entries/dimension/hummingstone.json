@@ -1,0 +1,43 @@
+{
+  "name": "block.pastel.hummingstone",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_hummingstone"
+  },
+  "icon": {
+    "item": "pastel:hummingstone"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/crystal_gardens"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:hummingstone"
+      },
+      "text": "book.pastel.guidebook.hummingstone.page0.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:hummingstone_glass"
+      },
+      "text": "book.pastel.guidebook.hummingstone.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/glass/hummingstone_glass_pane",
+      "text": "book.pastel.guidebook.glass_panes.text"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": "pastel:slush",
+  "results": [
+    {
+      "id": "pastel:ash_flakes",
+      "count": 2
+    }
+  ],
+  "experience": 4.0,
+  "time": 20,
+  "required_advancement": "pastel:hidden/collect_ash_and_slush"
+}

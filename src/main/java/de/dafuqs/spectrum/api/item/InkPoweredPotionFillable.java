@@ -77,11 +77,11 @@ public interface InkPoweredPotionFillable {
 		int maxEffectCount = maxEffectCount();
 		if (effects.size() < maxEffectCount) {
 			if (maxEffectCount == 1) {
-				tooltip.add(Component.translatable("item.spectrum.potion_pendant.tooltip_not_full_one"));
+				tooltip.add(Component.translatable("item.pastel.potion_pendant.tooltip_not_full_one"));
 			} else {
-				tooltip.add(Component.translatable("item.spectrum.potion_pendant.tooltip_not_full_count", maxEffectCount));
+				tooltip.add(Component.translatable("item.pastel.potion_pendant.tooltip_not_full_count", maxEffectCount));
 			}
-			tooltip.add(Component.translatable("item.spectrum.potion_pendant.tooltip_max_level").append(Component.translatable("enchantment.level." + (maxEffectAmplifier() + 1))));
+			tooltip.add(Component.translatable("item.pastel.potion_pendant.tooltip_max_level").append(Component.translatable("enchantment.level." + (maxEffectAmplifier() + 1))));
 		}
 	}
 

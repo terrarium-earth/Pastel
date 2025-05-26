@@ -1,0 +1,9 @@
+{
+  "values": [
+    "pastel:light_level_detector",
+    "pastel:weather_detector",
+    "pastel:item_detector",
+    "pastel:player_detector",
+    "pastel:creature_detector"
+  ]
+}

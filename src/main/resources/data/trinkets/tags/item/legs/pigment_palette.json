@@ -1,6 +1,6 @@
 {
   "values": [
-    "spectrum:pigment_palette",
-    "spectrum:artists_palette"
+    "pastel:pigment_palette",
+    "pastel:artists_palette"
   ]
 }

@@ -53,10 +53,10 @@ public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<Crystal
 		}
 		
 		// catalysts
-		widgets.addText(Component.translatable("container.spectrum.rei.crystallarieum.catalyst"), 0, 42, 0x3f3f3f, false);
-		widgets.addText(Component.translatable("container.spectrum.rei.crystallarieum.accelerator"), 0, 58, 0x3f3f3f, false);
-		widgets.addText(Component.translatable("container.spectrum.rei.crystallarieum.ink_consumption"), 0, 68, 0x3f3f3f, false);
-		widgets.addText(Component.translatable("container.spectrum.rei.crystallarieum.used_up"), 0, 78, 0x3f3f3f, false);
+		widgets.addText(Component.translatable("container.pastel.rei.crystallarieum.catalyst"), 0, 42, 0x3f3f3f, false);
+		widgets.addText(Component.translatable("container.pastel.rei.crystallarieum.accelerator"), 0, 58, 0x3f3f3f, false);
+		widgets.addText(Component.translatable("container.pastel.rei.crystallarieum.ink_consumption"), 0, 68, 0x3f3f3f, false);
+		widgets.addText(Component.translatable("container.pastel.rei.crystallarieum.used_up"), 0, 78, 0x3f3f3f, false);
 		
 		List<CrystallarieumCatalyst> catalysts = recipe.getCatalysts();
 		for (int i = 0; i < catalysts.size(); i++) {
@@ -110,9 +110,9 @@ public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<Crystal
 		}
 		
 		if (recipe.growsWithoutCatalyst()) {
-			widgets.addText(Component.translatable("container.spectrum.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional", recipe.getSecondsPerGrowthStage()), 0, 90, 0x3f3f3f, false);
+			widgets.addText(Component.translatable("container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional", recipe.getSecondsPerGrowthStage()), 0, 90, 0x3f3f3f, false);
 		} else {
-			widgets.addText(Component.translatable("container.spectrum.rei.crystallarieum.crafting_time_per_stage_seconds", recipe.getSecondsPerGrowthStage()), 0, 90, 0x3f3f3f, false);
+			widgets.addText(Component.translatable("container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds", recipe.getSecondsPerGrowthStage()), 0, 90, 0x3f3f3f, false);
 		}
 	}
 	

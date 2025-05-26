@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "pastel:block/bottomless_bundle_particle_locked"
+  }
+}

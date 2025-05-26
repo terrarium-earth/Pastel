@@ -73,17 +73,17 @@ public class PaintbrushItem extends Item implements SignApplicator {
 		if (unlockedColoring || unlockedSlinging) {
 			Optional<InkColor> color = getColor(stack);
 			if (color.isEmpty()) {
-				tooltip.add(Component.translatable("item.spectrum.paintbrush.tooltip.select_color"));
+				tooltip.add(Component.translatable("item.pastel.paintbrush.tooltip.select_color"));
 			}
 		}
 		
-		tooltip.add(Component.translatable("item.spectrum.paintbrush.ability.header").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.paintbrush.ability.pedestal_triggering").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.paintbrush.ability.header").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.paintbrush.ability.pedestal_triggering").withStyle(ChatFormatting.GRAY));
 		if (unlockedColoring) {
-			tooltip.add(Component.translatable("item.spectrum.paintbrush.ability.block_coloring").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.paintbrush.ability.block_coloring").withStyle(ChatFormatting.GRAY));
 		}
 		if (unlockedSlinging) {
-			tooltip.add(Component.translatable("item.spectrum.paintbrush.ability.ink_slinging").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.paintbrush.ability.ink_slinging").withStyle(ChatFormatting.GRAY));
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
 	public MenuProvider createScreenHandlerFactory(ItemStack itemStack) {
 		return new SimpleMenuProvider((syncId, inventory, player) ->
 				new PaintbrushScreenHandler(syncId, inventory, itemStack),
-				Component.translatable("item.spectrum.paintbrush")
+				Component.translatable("item.pastel.paintbrush")
 		);
 	}
 	

@@ -1,0 +1,50 @@
+{
+  "name": "enchantment.pastel.tight_grip",
+  "icon": {
+    "item": "minecraft:iron_sword"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/enchantments/tight_grip"
+  },
+  "flag": "pastel:enchantment_exists_spectrum_tight_grip",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": 3,
+  "x": 4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.tight_grip.page0.text",
+      "title": "enchantment.pastel.tight_grip"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "minecraft:iron_sword"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:tight_grip": 2
+        }
+      },
+      "text": "book.pastel.guidebook.tight_grip.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/tight_grip"
+    },
+    {
+      "type": "pastel:enchanter_upgrading",
+      "text": "book.pastel.guidebook.upgrading.text",
+      "title": "container.pastel.rei.enchantment_upgrading.title",
+      "recipe_id": "pastel:enchantment_upgrade/pastel/tight_grip"
+    }
+  ]
+}

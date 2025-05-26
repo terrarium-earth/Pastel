@@ -1,0 +1,6 @@
+{
+  "parent": "pastel:item/handheld_oversized_xl",
+  "textures": {
+    "layer0": "pastel:item/nectar_lance_oversized"
+  }
+}

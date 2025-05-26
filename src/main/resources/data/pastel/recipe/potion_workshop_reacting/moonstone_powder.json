@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:moonstone_powder",
+  "modifiers": {
+    "make_effects_positive": true
+  },
+  "required_advancement": "pastel:lategame/collect_moonstone"
+}

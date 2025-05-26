@@ -1,0 +1,18 @@
+{
+  "type": "pastel:potion_workshop_brewing",
+  "group": "sleep_potions",
+  "ingredient1": "pastel:nectardew_burgeon",
+  "ingredient2": "pastel:evernectar",
+  "ingredient3": "pastel:moonstone_powder",
+  "effect": "pastel:fatal_slumber",
+  "base_duration_ticks": 200,
+  "potency_modifier": 0.1,
+  "applicable_to_potions": false,
+  "applicable_to_tipped_arrows": false,
+  "applicable_to_potion_fillables": true,
+  "required_advancement": "pastel:unlocks/potions/strong_sleep_effects",
+  "ink_color": "pastel:purple",
+  "ink_cost": 640,
+  "potency_hard_cap": 1,
+  "base_yield": 1
+}

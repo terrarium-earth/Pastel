@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:quitoxic_powder",
+  "modifiers": {
+    "flat_potency_bonus_negative_effects": 1.0
+  },
+  "required_advancement": "pastel:collect_quitoxic_reeds"
+}

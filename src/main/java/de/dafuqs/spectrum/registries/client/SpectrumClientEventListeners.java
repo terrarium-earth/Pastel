@@ -108,7 +108,7 @@ public class SpectrumClientEventListeners {
 		event.addPackFinders(
 				SpectrumCommon.locate("spectrum_style_amethyst"),
 				PackType.CLIENT_RESOURCES,
-				Component.literal("Spectrum-Style Amethyst"),
+				Component.literal("pastel-Style Amethyst"),
 				PackSource.BUILT_IN,
 				false,
 				Pack.Position.TOP
@@ -175,7 +175,7 @@ public class SpectrumClientEventListeners {
 			}
 		}
 		if (stack.is(SpectrumItemTags.COMING_SOON_TOOLTIP)) {
-			lines.add(Either.left(Component.translatable("spectrum.tooltip.coming_soon").withStyle(ChatFormatting.RED)));
+			lines.add(Either.left(Component.translatable("pastel.tooltip.coming_soon").withStyle(ChatFormatting.RED)));
 		}
 	}
 

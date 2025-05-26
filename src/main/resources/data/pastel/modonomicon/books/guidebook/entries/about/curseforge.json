@@ -1,0 +1,16 @@
+{
+  "type": "pastel:web_link",
+
+  "name": "book.pastel.guidebook.curseforge.name",
+  "icon": "pastel:textures/gui/guidebook/icons/curseforge.png",
+  "category": "pastel:about",
+  "hide_while_locked": false,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 5,
+  "y": -1,
+  "read_by_default": true,
+
+  "url": "https://www.curseforge.com/minecraft/mc-mods/pastel"
+}

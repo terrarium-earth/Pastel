@@ -44,10 +44,4 @@ public abstract class ServerWorldMixin {
 		}
 		original.call(instance, timeOfDay);
 	}
-
-	@Inject(method = "method_18773", at = @At(value = "HEAD"))
-	private static void spectrum$applyWakeupEffects(ServerPlayer player, CallbackInfo ci) {
-		MiscPlayerData.get(player).resetSleepingState(false);
-		player.removeEffect(SpectrumStatusEffects.SOMNOLENCE);
-	}
 }

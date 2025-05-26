@@ -1,0 +1,2100 @@
+{
+  "item.primordial_lighter.use": {
+    "subtitle": "pastel.subtitles.primordial_lighter.use",
+    "sounds": [
+      "minecraft:fire/ignite"
+    ]
+  },
+  "item.guidebook.pages": {
+    "subtitle": "pastel.subtitles.item.guidebook.pages",
+    "sounds": [
+      "pastel:guidebook_pages"
+    ]
+  },
+  "use_fail": {
+    "subtitle": "pastel.subtitles.use_fail",
+    "sounds": [
+      "pastel:use_fail"
+    ]
+  },
+  "block.redstone_mechanism.trigger": {
+    "subtitle": "pastel.subtitles.block.redstone_mechanism.trigger",
+    "sounds": [
+      "minecraft:random/click"
+    ]
+  },
+  "block.redstone_mechanism.break_block": {
+    "subtitle": "pastel.subtitles.block.redstone_mechanism.break_block",
+    "sounds": [
+      {
+        "name": "minecraft:block/iron_trapdoor/open1",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:block/iron_trapdoor/open2",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:block/iron_trapdoor/open3",
+        "volume": 0.9
+      },
+      {
+        "name": "minecraft:block/iron_trapdoor/open4",
+        "volume": 0.9
+      }
+    ]
+  },
+  "paintbrush_trigger": {
+    "subtitle": "pastel.subtitles.paintbrush_trigger",
+    "sounds": [
+      "pastel:enchanter_ding"
+    ]
+  },
+  "paintbrush_switch": {
+    "sounds": [
+      "pastel:paintbrush_switch"
+    ]
+  },
+  "paintbrush_select": {
+    "sounds": [
+      "pastel:paintbrush_select"
+    ]
+  },
+  "critical_crunch": {
+    "sounds": [
+      "pastel:critical_crunch"
+    ]
+  },
+  "impact_base": {
+    "sounds": [
+      "pastel:impact_base"
+    ]
+  },
+  "impaling_hit": {
+    "sounds": [
+      "pastel:impaling_hit"
+    ]
+  },
+  "legendary_weapon_craft": {
+    "sounds": [
+      "pastel:legendary_weapon_craft"
+    ]
+  },
+  "metal_hit": {
+    "sounds": [
+      "pastel:metal_hit"
+    ]
+  },
+  "metal_tap": {
+    "sounds": [
+      "pastel:metal_tap"
+    ]
+  },
+  "metallic_unsheathe": {
+    "sounds": [
+      "pastel:metallic_unsheathe"
+    ]
+  },
+  "discharge": {
+    "sounds": [
+      "pastel:discharge"
+    ]
+  },
+  "lunge_crit": {
+    "sounds": [
+      "pastel:lunge_crit"
+    ]
+  },
+  "lunge": {
+    "sounds": [
+      "pastel:lunge"
+    ]
+  },
+  "perfect_parry": {
+    "sounds": [
+      "pastel:perfect_parry"
+    ]
+  },
+  "sword_block": {
+    "sounds": [
+      "pastel:sword_block"
+    ]
+  },
+  "paintbrush_paint": {
+    "subtitle": "pastel.subtitles.paintbrush_paint",
+    "sounds": [
+      "pastel:paintbrush_paint1",
+      "pastel:paintbrush_paint2",
+      "pastel:paintbrush_paint3",
+      "pastel:paintbrush_paint4",
+      "pastel:paintbrush_paint5",
+      "pastel:paintbrush_paint6",
+      "pastel:paintbrush_paint7",
+      "pastel:paintbrush_paint8",
+      "pastel:paintbrush_paint9",
+      "pastel:paintbrush_paint10"
+    ]
+  },
+  "ground_slam": {
+    "subtitle": "pastel.subtitles.ground_slam",
+    "sounds": [
+      "pastel:ground_slam1",
+      "pastel:ground_slam2",
+      "pastel:ground_slam3",
+      "pastel:ground_slam4"
+    ]
+  },
+  "color_picker_processing": {
+    "sounds": [
+      "pastel:color_picker_processing"
+    ]
+  },
+  "entity.block_flooder.throw": {
+    "subtitle": "pastel.subtitles.entity.block_flooder.throw",
+    "sounds": [
+      "minecraft:random/bow"
+    ]
+  },
+  "item.omni_accelerator.shoot": {
+    "subtitle": "pastel.subtitles.item.omni_accelerator.shoot",
+    "sounds": [
+      "minecraft:random/bow"
+    ]
+  },
+  "bident_mirror_image_thrown": {
+    "subtitle": "pastel.subtitles.bident_mirror_image_thrown",
+    "sounds": [
+      "pastel:bident_mirror_image_thrown"
+    ]
+  },
+  "bident_hit_ground": {
+    "subtitle": "pastel.subtitles.bident_hit_ground",
+    "sounds": [
+      "pastel:ground_slam1",
+      "pastel:ground_slam2",
+      "pastel:ground_slam3",
+      "pastel:ground_slam4"
+    ]
+  },
+  "moonstone_strike": {
+    "subtitle": "pastel.subtitles.moonstone_strike",
+    "sounds": [
+      "pastel:moonstone_strike"
+    ]
+  },
+  "deep_crystal_ring": {
+    "subtitle": "pastel.subtitles.deep_crystal_ring",
+    "sounds": [
+      "pastel:crystal_ring_deep"
+    ]
+  },
+  "mid_crystal_ring": {
+    "subtitle": "pastel.subtitles.mid_crystal_ring",
+    "sounds": [
+      "pastel:crystal_ring_mid"
+    ]
+  },
+  "light_crystal_ring": {
+    "subtitle": "pastel.subtitles.light_crystal_ring",
+    "sounds": [
+      "pastel:crystal_ring_light"
+    ]
+  },
+  "crystal_strike": {
+    "subtitle": "pastel.subtitles.crystal_strike",
+    "sounds": [
+      "pastel:crystal_strike_a",
+      "pastel:crystal_strike_b"
+    ]
+  },
+  "glass_shimmer": {
+    "subtitle": "pastel.subtitles.glass_shimmer",
+    "sounds": [
+      "pastel:glass_shimmer"
+    ]
+  },
+  "shatter_light": {
+    "subtitle": "pastel.subtitles.shatter_light",
+    "sounds": [
+      "pastel:shatter_light"
+    ]
+  },
+  "shatter_heavy": {
+    "subtitle": "pastel.subtitles.shatter_heavy",
+    "sounds": [
+      "pastel:shatter_heavy"
+    ]
+  },
+  "soft_hum": {
+    "subtitle": "pastel.subtitles.soft_hum",
+    "sounds": [
+      "pastel:soft_hum"
+    ]
+  },
+  "hummingstone_hum": {
+    "subtitle": "pastel.subtitles.hummingstone_hum",
+    "sounds": [
+      "pastel:hummingstone_hum"
+    ]
+  },
+  "incandescent_charge": {
+    "subtitle": "pastel.subtitles.incandescent_charge",
+    "sounds": [
+      "pastel:incandescent_charge"
+    ]
+  },
+  "incandescent_arm": {
+    "subtitle": "pastel.subtitles.incandescent_arm",
+    "sounds": [
+      "pastel:incandescent_arm"
+    ]
+  },
+  "squeaker": {
+    "subtitle": "pastel.subtitles.squeaker",
+    "sounds": [
+      "pastel:squeaker"
+    ]
+  },
+  "ground_slam_charge": {
+    "subtitle": "pastel.subtitles.ground_slam_charge",
+    "sounds": [
+      "pastel:ground_slam_charge"
+    ]
+  },
+  "ink_projectile_hit": {
+    "subtitle": "pastel.subtitles.ink_projectile_hit",
+    "sounds": [
+      "pastel:ink_projectile_hit1",
+      "pastel:ink_projectile_hit2",
+      "pastel:ink_projectile_hit3",
+      "pastel:ink_projectile_hit4",
+      "pastel:ink_projectile_hit5"
+    ]
+  },
+  "ink_projectile_launch": {
+    "sounds": [
+      "pastel:ink_projectile_launch"
+    ]
+  },
+  "enchanter_working": {
+    "subtitle": "pastel.subtitles.enchanter_working",
+    "sounds": [
+      "pastel:enchanter_working"
+    ]
+  },
+  "deeper_down_portal_open": {
+    "subtitle": "pastel.subtitles.deeper_down_portal_open",
+    "sounds": [
+      "pastel:deeper_down_portal_open"
+    ]
+  },
+  "enchanter_finish": {
+    "subtitle": "pastel.subtitles.enchanter_finish",
+    "sounds": [
+      "minecraft:random/levelup"
+    ]
+  },
+  "crafting_ding": {
+    "sounds": [
+      "pastel:enchanter_ding"
+    ]
+  },
+  "bottomless_bundle_zip": {
+    "sounds": [
+      "pastel:bottomless_bundle_zip"
+    ]
+  },
+  "pastel.ui.button_click": {
+    "sounds": [
+      "pastel:button_click"
+    ]
+  },
+  "structure_success": {
+    "subtitle": "pastel.subtitles.structure_success",
+    "sounds": [
+      "pastel:structure_success"
+    ]
+  },
+  "block.memory.advance": {
+    "subtitle": "pastel.subtitles.block.memory.advance",
+    "sounds": [
+      "pastel:block.memory.advance"
+    ]
+  },
+  "midnight_aberration_crumbling": {
+    "subtitle": "pastel.subtitles.midnight_aberration_crumbling",
+    "sounds": [
+      "pastel:midnight_aberration_crumbling"
+    ]
+  },
+  "dreamflayer_activate": {
+    "subtitle": "pastel.subtitles.dreamflayer_activates",
+    "sounds": [
+      "pastel:dreamflayer_activate"
+    ]
+  },
+  "dreamflayer_deactivate": {
+    "subtitle": "pastel.subtitles.dreamflayer_deactivates",
+    "sounds": [
+      "pastel:dreamflayer_deactivate"
+    ]
+  },
+  "celestial_pocket_watch_ticking": {
+    "subtitle": "pastel.subtitles.celestial_pocket_watch_ticking",
+    "sounds": [
+      "pastel:celestial_pocket_watch_ticking"
+    ]
+  },
+  "celestial_pocket_watch_sky_fly_by": {
+    "sounds": [
+      "pastel:celestial_pocket_watch_sky_fly_by"
+    ]
+  },
+  "puff_circlet": {
+    "subtitle": "pastel.subtitles.puff_circlet",
+    "sounds": [
+      "pastel:puff_circlet"
+    ]
+  },
+  "pastel.ui.text_revealed": {
+    "subtitle": "pastel.subtitles.text_revealed",
+    "sounds": [
+      "pastel:text_revealed"
+    ]
+  },
+  "air_launch_belt_charging": {
+    "subtitle": "pastel.subtitles.air_launch_belt_charging",
+    "sounds": [
+      "pastel:air_launch_belt_charging"
+    ]
+  },
+  "overcharging": {
+    "subtitle": "pastel.subtitles.overcharging",
+    "sounds": [
+      "pastel:overcharging"
+    ]
+  },
+  "radiance_pin_trigger": {
+    "subtitle": "pastel.subtitles.radiance_pin_trigger",
+    "sounds": [
+      "pastel:radiance_pin_trigger"
+    ]
+  },
+  "shooting_star_cracker": {
+    "subtitle": "pastel.subtitles.shooting_star_cracker",
+    "sounds": [
+      "pastel:cracker1",
+      "pastel:cracker2",
+      "pastel:cracker3",
+      "pastel:cracker4",
+      "pastel:cracker5",
+      "pastel:cracker6",
+      "pastel:cracker7",
+      "pastel:cracker8"
+    ]
+  },
+  "primordial_fire_crackle": {
+    "subtitle": "pastel.subtitles.primordial_fire_crackle",
+    "sounds": [
+      "pastel:primfire0",
+      "pastel:primfire1",
+      "pastel:primfire2",
+      "pastel:primfire3",
+      "pastel:primfire4"
+    ]
+  },
+  "primordial_fire_dot": {
+    "subtitle": "pastel.subtitles.primordial_fire_dot",
+    "sounds": [
+      "pastel:primfire_dot"
+    ]
+  },
+  "radiance_staff_charging": {
+    "subtitle": "pastel.subtitles.radiance_staff_charging",
+    "sounds": [
+      "pastel:radiance_staff_charging"
+    ]
+  },
+  "radiance_staff_place": {
+    "subtitle": "pastel.subtitles.radiance_staff_place",
+    "sounds": [
+      "pastel:radiance_staff_place"
+    ]
+  },
+  "radiance_staff_break": {
+    "subtitle": "pastel.subtitles.radiance_staff_break",
+    "sounds": [
+      "pastel:radiance_staff_break"
+    ]
+  },
+  "black_hole_chest_open": {
+    "subtitle": "pastel.subtitles.block.black_hole_chest.open",
+    "sounds": [
+      "pastel:block.black_hole_chest.open"
+    ]
+  },
+  "black_hole_chest_close": {
+    "subtitle": "pastel.subtitles.block.black_hole_chest.close",
+    "sounds": [
+      "pastel:block.black_hole_chest.close"
+    ]
+  },
+  "compacting_chest_open": {
+    "subtitle": "pastel.subtitles.block.compacting_chest.open",
+    "sounds": [
+      "minecraft:tile/piston/out"
+    ]
+  },
+  "compacting_chest_close": {
+    "subtitle": "pastel.subtitles.block.compacting_chest.close",
+    "sounds": [
+      "minecraft:tile/piston/in"
+    ]
+  },
+  "fading_placed": {
+    "subtitle": "pastel.subtitles.block.fading.place",
+    "sounds": [
+      "pastel:block.fading.place"
+    ]
+  },
+  "failing_placed": {
+    "subtitle": "pastel.subtitles.block.failing.place",
+    "sounds": [
+      "pastel:block.failing.place"
+    ]
+  },
+  "ruin_placed": {
+    "subtitle": "pastel.subtitles.block.ruin.place",
+    "sounds": [
+      "pastel:block.ruin.place"
+    ]
+  },
+  "forfeiture_placed": {
+    "subtitle": "pastel.subtitles.block.forfeiture.place",
+    "sounds": [
+      "pastel:block.ruin.place"
+    ]
+  },
+
+  "music.discovery": {
+    "sounds": [
+      {
+        "name": "pastel:music/davejf_the_mist",
+        "stream": true
+      }
+    ]
+  },
+  "music.credits": {
+    "sounds": [
+      {
+        "name": "pastel:music/radiarc_irrelevance_fading",
+        "stream": true
+      }
+    ]
+  },
+  "music.divinity": {
+    "sounds": [
+      {
+        "name": "pastel:music/proper_motions_everreflective",
+        "stream": true
+      }
+    ]
+  },
+
+  "music.deeper_down.black_langast": {
+    "sounds": [
+      {
+        "name": "pastel:music/sunsette_darker_than_hell",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_home",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_finality",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_submerged",
+        "stream": true
+      }
+    ]
+  },
+  "music.deeper_down.crystal_gardens": {
+    "sounds": [
+      {
+        "name": "pastel:music/sunsette_darker_than_hell",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_circumstance",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_uncertainty",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_submerged",
+        "stream": true
+      }
+    ]
+  },
+  "music.deeper_down.deep_barrens": {
+    "sounds": [
+      {
+        "name": "pastel:music/sunsette_darker_than_hell",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_despite",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_home",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_amnion",
+        "stream": true
+      }
+    ]
+  },
+  "music.deeper_down.deep_dripstone_caves": {
+    "sounds": [
+      {
+        "name": "pastel:music/radiarc_circumstance",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_uncertainty",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_amnion",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_amble",
+        "stream": true
+      }
+    ]
+  },
+  "music.deeper_down.dragonrot_swamp": {
+    "sounds": [
+      {
+        "name": "pastel:music/sunsette_darker_than_hell",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_home",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_finality",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_amnion",
+        "stream": true
+      }
+    ]
+  },
+  "music.deeper_down.howling_spires": {
+    "sounds": [
+      {
+        "name": "pastel:music/radiarc_finality",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_despite",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_uncertainty",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_submerged",
+        "stream": true
+      }
+    ]
+  },
+  "music.deeper_down.noxshroom_forest": {
+    "sounds": [
+      {
+        "name": "pastel:music/sunsette_darker_than_hell",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_despite",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_amble",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_amnion",
+        "stream": true
+      }
+    ]
+  },
+  "music.deeper_down.razor_edge": {
+    "sounds": [
+      {
+        "name": "pastel:music/sunsette_darker_than_hell",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_despite",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_submerged",
+        "stream": true
+      },
+      {
+        "name": "pastel:music/radiarc_amble",
+        "stream": true
+      }
+    ]
+  },
+
+  "pastel.ui.new_revelation": {
+    "sounds": [
+      "pastel:new_revelation"
+    ]
+  },
+  "pastel.ui.new_recipe": {
+    "sounds": [
+      "pastel:new_recipe"
+    ]
+  },
+  "armor_equip_glow_vision": {
+    "sounds": [
+      "pastel:armor_equip_glow_vision"
+    ]
+  },
+  "player_teleports": {
+    "subtitle": "pastel.subtitles.player_teleports",
+    "sounds": [
+      "minecraft:mob/endermen/portal",
+      "minecraft:mob/endermen/portal2"
+    ]
+  },
+  "ender_splice_charges": {
+    "subtitle": "pastel.subtitles.ender_splice_charges",
+    "sounds": [
+      "pastel:ender_splice_charges"
+    ]
+  },
+  "ender_splice_bound": {
+    "subtitle": "pastel.subtitles.ender_splice_binds",
+    "sounds": [
+      "pastel:ender_splice_bound"
+    ]
+  },
+	"goo_ambient": {
+		"subtitle": "pastel.subtitles.block.goo.ambient",
+    "sounds": [
+			"pastel:goo_ambient",
+			"pastel:goo_ambient2",
+			"pastel:goo_ambient3",
+			"pastel:goo_ambient4",
+			"pastel:goo_ambient5"
+    ]
+  },
+  "liquid_crystal_ambient": {
+    "subtitle": "pastel.subtitles.block.liquid_crystal.ambient",
+    "sounds": [
+      "pastel:liquid_crystal_ambient"
+    ]
+  },
+  "midnight_solution_ambient": {
+    "subtitle": "pastel.subtitles.block.midnight_solution.ambient",
+    "sounds": [
+      "pastel:midnight_solution_ambient",
+      "pastel:midnight_solution_ambient2",
+      "pastel:midnight_solution_ambient3",
+      "pastel:midnight_solution_ambient4",
+      "pastel:midnight_solution_ambient5",
+      "pastel:midnight_solution_ambient6"
+    ]
+  },
+  "ambient.dimension_sounds": {
+    "subtitle": "pastel.subtitles.dimension.ambient",
+    "sounds": [
+      "pastel:dimension_ambient",
+      "pastel:dimension_ambient2",
+      "pastel:dimension_ambient3",
+      "pastel:dimension_ambient4",
+      "pastel:dimension_ambient5",
+      "pastel:dimension_ambient6",
+      "pastel:dimension_ambient7",
+      "pastel:dimension_ambient8",
+      "pastel:dimension_ambient9"
+    ]
+  },
+  "ambient.howling_wind_high": {
+    "subtitle": "pastel.subtitles.howling_wind_high",
+    "sounds": [
+      "pastel:howling_wind_high"
+    ]
+  },
+  "ambient.howling_wind_low": {
+    "subtitle": "pastel.subtitles.howling_wind_low",
+    "sounds": [
+      "pastel:howling_wind_low"
+    ]
+  },
+  "ambient.rain_shower": {
+    "subtitle": "pastel.subtitles.rain_shower",
+    "sounds": [
+      "pastel:shower"
+    ]
+  },
+  "ambient.laments": {
+    "subtitle": "pastel.subtitles.laments",
+    "sounds": [
+      "pastel:laments"
+    ]
+  },
+  "ost.azure": {
+    "subtitle": "pastel.subtitles.azure",
+    "sounds": [
+      "pastel:ost/azure"
+    ]
+  },
+  "pedestal_crafting": {
+    "sounds": [
+      "pastel:pedestal_crafting"
+    ]
+  },
+  "pedestal_upgrade": {
+    "sounds": [
+      "pastel:pedestal_upgrade"
+    ]
+  },
+  "fusion_shrine_crafting": {
+    "subtitle": "pastel.subtitles.fusion_shrine_ambient",
+    "sounds": [
+      "pastel:fusion_shrine_crafting"
+    ]
+  },
+  "fusion_shrine_crafting_finished": {
+    "subtitle": "pastel.subtitles.fusion_shrine_crafting_finished",
+    "sounds": [
+      "pastel:fusion_shrine_crafting_finished"
+    ]
+  },
+  "fusion_shrine_crafting_aborted": {
+    "subtitle": "pastel.subtitles.fusion_shrine_crafting_aborted",
+    "sounds": [
+      "pastel:fusion_shrine_crafting_aborted"
+    ]
+  },
+  "exchanging_staff_select": {
+    "subtitle": "pastel.subtitles.exchanging_staff.select",
+    "sounds": [
+      "pastel:exchanging_staff_select"
+    ]
+  },
+  "pedestal_crafting_finished_generic": {
+    "subtitle": "pastel.subtitles.blocks.pedestal.crafting_finished",
+    "sounds": [
+      "block/deepslate/break1",
+      "block/deepslate/break2",
+      "block/deepslate/break3",
+      "block/deepslate/break4"
+    ]
+  },
+  "pedestal_crafting_finished_amethyst": {
+    "subtitle": "pastel.subtitles.blocks.pedestal.crafting_finished",
+    "sounds": [
+      "block/amethyst/break1",
+      "block/amethyst/break2",
+      "block/amethyst/break3",
+      "block/amethyst/break4"
+    ]
+  },
+  "pedestal_crafting_finished_citrine": {
+    "subtitle": "pastel.subtitles.blocks.pedestal.crafting_finished",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_cluster_break1",
+      "pastel:block/citrine/block_citrine_cluster_break2",
+      "pastel:block/citrine/block_citrine_cluster_break3",
+      "pastel:block/citrine/block_citrine_cluster_break4"
+    ]
+  },
+  "pedestal_crafting_finished_topaz": {
+    "subtitle": "pastel.subtitles.blocks.pedestal.crafting_finished",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_cluster_break1",
+      "pastel:block/topaz/block_topaz_cluster_break2",
+      "pastel:block/topaz/block_topaz_cluster_break3",
+      "pastel:block/topaz/block_topaz_cluster_break4"
+    ]
+  },
+  "pedestal_crafting_finished_onyx": {
+    "subtitle": "pastel.subtitles.blocks.pedestal.crafting_finished",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_cluster_break1",
+      "pastel:block/onyx/block_onyx_cluster_break2",
+      "pastel:block/onyx/block_onyx_cluster_break3",
+      "pastel:block/onyx/block_onyx_cluster_break4"
+    ]
+  },
+  "pedestal_crafting_finished_moonstone": {
+    "subtitle": "pastel.subtitles.blocks.pedestal.crafting_finished",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_cluster_break1",
+      "pastel:block/moonstone/block_moonstone_cluster_break2",
+      "pastel:block/moonstone/block_moonstone_cluster_break3",
+      "pastel:block/moonstone/block_moonstone_cluster_break4"
+    ]
+  },
+  "spirit_instiller_crafting": {
+    "sounds": [
+      "pastel:spirit_instiller_crafting"
+    ]
+  },
+  "spirit_instiller_crafting_finished": {
+    "sounds": [
+      "pastel:spirit_instiller_crafting_finished"
+    ]
+  },
+  "natures_staff_use": {
+    "subtitle": "pastel.subtitles.natures_staff_use",
+    "sounds": [
+      "pastel:natures_staff_use"
+    ]
+  },
+  "unlock": {
+    "subtitle": "pastel.subtitles.unlock",
+    "sounds": [
+      "pastel:unlock"
+    ]
+  },
+  "block.citrine_block.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_break1",
+      "pastel:block/citrine/block_citrine_break2",
+      "pastel:block/citrine/block_citrine_break3",
+      "pastel:block/citrine/block_citrine_break4"
+    ]
+  },
+  "block.citrine_block.chime": {
+    "subtitle": "pastel.subtitles.block.citrine_block.chime",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_shimmer"
+    ]
+  },
+  "block.citrine_block.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.citrine_block.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.citrine_block.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_place1",
+      "pastel:block/citrine/block_citrine_place2",
+      "pastel:block/citrine/block_citrine_place3",
+      "pastel:block/citrine/block_citrine_place4"
+    ]
+  },
+  "block.citrine_block.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.citrine_cluster.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_cluster_break1",
+      "pastel:block/citrine/block_citrine_cluster_break2",
+      "pastel:block/citrine/block_citrine_cluster_break3",
+      "pastel:block/citrine/block_citrine_cluster_break4"
+    ]
+  },
+  "block.citrine_cluster.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.citrine_cluster.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.citrine_cluster.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_cluster_place1",
+      "pastel:block/citrine/block_citrine_cluster_place2",
+      "pastel:block/citrine/block_citrine_cluster_place3",
+      "pastel:block/citrine/block_citrine_cluster_place4"
+    ]
+  },
+  "block.citrine_cluster.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.large_citrine_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.large_citrine_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_cluster_place1",
+      "pastel:block/citrine/block_citrine_cluster_place2",
+      "pastel:block/citrine/block_citrine_cluster_place3",
+      "pastel:block/citrine/block_citrine_cluster_place4"
+    ]
+  },
+  "block.medium_citrine_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.medium_citrine_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_cluster_place1",
+      "pastel:block/citrine/block_citrine_cluster_place2",
+      "pastel:block/citrine/block_citrine_cluster_place3",
+      "pastel:block/citrine/block_citrine_cluster_place4"
+    ]
+  },
+  "block.small_citrine_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step2",
+      "pastel:block/citrine/block_citrine_step3",
+      "pastel:block/citrine/block_citrine_step4",
+      "pastel:block/citrine/block_citrine_step1",
+      "pastel:block/citrine/block_citrine_step6",
+      "pastel:block/citrine/block_citrine_step7",
+      "pastel:block/citrine/block_citrine_step8",
+      "pastel:block/citrine/block_citrine_step9",
+      "pastel:block/citrine/block_citrine_step10",
+      "pastel:block/citrine/block_citrine_step11",
+      "pastel:block/citrine/block_citrine_step12",
+      "pastel:block/citrine/block_citrine_step13",
+      "pastel:block/citrine/block_citrine_step14"
+    ]
+  },
+  "block.small_citrine_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/citrine/block_citrine_cluster_place1",
+      "pastel:block/citrine/block_citrine_cluster_place2",
+      "pastel:block/citrine/block_citrine_cluster_place3",
+      "pastel:block/citrine/block_citrine_cluster_place4"
+    ]
+  },
+  "block.topaz_block.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_break1",
+      "pastel:block/topaz/block_topaz_break2",
+      "pastel:block/topaz/block_topaz_break3",
+      "pastel:block/topaz/block_topaz_break4"
+    ]
+  },
+  "block.topaz_block.chime": {
+    "subtitle": "pastel.subtitles.block.topaz_block.chime",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_shimmer"
+    ]
+  },
+  "block.topaz_block.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.topaz_block.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.topaz_block.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_place1",
+      "pastel:block/topaz/block_topaz_place2",
+      "pastel:block/topaz/block_topaz_place3",
+      "pastel:block/topaz/block_topaz_place4"
+    ]
+  },
+  "block.topaz_block.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.topaz_cluster.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_cluster_break1",
+      "pastel:block/topaz/block_topaz_cluster_break2",
+      "pastel:block/topaz/block_topaz_cluster_break3",
+      "pastel:block/topaz/block_topaz_cluster_break4"
+    ]
+  },
+  "block.topaz_cluster.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.topaz_cluster.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.topaz_cluster.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_cluster_place1",
+      "pastel:block/topaz/block_topaz_cluster_place2",
+      "pastel:block/topaz/block_topaz_cluster_place3",
+      "pastel:block/topaz/block_topaz_cluster_place4"
+    ]
+  },
+  "block.topaz_cluster.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.large_topaz_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.large_topaz_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_cluster_place1",
+      "pastel:block/topaz/block_topaz_cluster_place2",
+      "pastel:block/topaz/block_topaz_cluster_place3",
+      "pastel:block/topaz/block_topaz_cluster_place4"
+    ]
+  },
+  "block.medium_topaz_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.medium_topaz_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_cluster_place1",
+      "pastel:block/topaz/block_topaz_cluster_place2",
+      "pastel:block/topaz/block_topaz_cluster_place3",
+      "pastel:block/topaz/block_topaz_cluster_place4"
+    ]
+  },
+  "block.small_topaz_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step2",
+      "pastel:block/topaz/block_topaz_step3",
+      "pastel:block/topaz/block_topaz_step4",
+      "pastel:block/topaz/block_topaz_step1",
+      "pastel:block/topaz/block_topaz_step6",
+      "pastel:block/topaz/block_topaz_step7",
+      "pastel:block/topaz/block_topaz_step8",
+      "pastel:block/topaz/block_topaz_step9",
+      "pastel:block/topaz/block_topaz_step10",
+      "pastel:block/topaz/block_topaz_step11",
+      "pastel:block/topaz/block_topaz_step12",
+      "pastel:block/topaz/block_topaz_step13",
+      "pastel:block/topaz/block_topaz_step14"
+    ]
+  },
+  "block.small_topaz_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/topaz/block_topaz_cluster_place1",
+      "pastel:block/topaz/block_topaz_cluster_place2",
+      "pastel:block/topaz/block_topaz_cluster_place3",
+      "pastel:block/topaz/block_topaz_cluster_place4"
+    ]
+  },
+  "block.onyx_block.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_break1",
+      "pastel:block/onyx/block_onyx_break2",
+      "pastel:block/onyx/block_onyx_break3",
+      "pastel:block/onyx/block_onyx_break4"
+    ]
+  },
+  "block.onyx_block.chime": {
+    "subtitle": "pastel.subtitles.block.onyx_block.chime",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_shimmer"
+    ]
+  },
+  "block.onyx_block.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.onyx_block.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.onyx_block.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_place1",
+      "pastel:block/onyx/block_onyx_place2",
+      "pastel:block/onyx/block_onyx_place3",
+      "pastel:block/onyx/block_onyx_place4"
+    ]
+  },
+  "block.onyx_block.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.onyx_cluster.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_cluster_break1",
+      "pastel:block/onyx/block_onyx_cluster_break2",
+      "pastel:block/onyx/block_onyx_cluster_break3",
+      "pastel:block/onyx/block_onyx_cluster_break4"
+    ]
+  },
+  "block.onyx_cluster.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.onyx_cluster.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.onyx_cluster.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_cluster_place1",
+      "pastel:block/onyx/block_onyx_cluster_place2",
+      "pastel:block/onyx/block_onyx_cluster_place3",
+      "pastel:block/onyx/block_onyx_cluster_place4"
+    ]
+  },
+  "block.onyx_cluster.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.large_onyx_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.large_onyx_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_cluster_place1",
+      "pastel:block/onyx/block_onyx_cluster_place2",
+      "pastel:block/onyx/block_onyx_cluster_place3",
+      "pastel:block/onyx/block_onyx_cluster_place4"
+    ]
+  },
+  "block.medium_onyx_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.medium_onyx_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_cluster_place1",
+      "pastel:block/onyx/block_onyx_cluster_place2",
+      "pastel:block/onyx/block_onyx_cluster_place3",
+      "pastel:block/onyx/block_onyx_cluster_place4"
+    ]
+  },
+  "block.small_onyx_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step2",
+      "pastel:block/onyx/block_onyx_step3",
+      "pastel:block/onyx/block_onyx_step4",
+      "pastel:block/onyx/block_onyx_step1",
+      "pastel:block/onyx/block_onyx_step6",
+      "pastel:block/onyx/block_onyx_step7",
+      "pastel:block/onyx/block_onyx_step8",
+      "pastel:block/onyx/block_onyx_step9",
+      "pastel:block/onyx/block_onyx_step10",
+      "pastel:block/onyx/block_onyx_step11",
+      "pastel:block/onyx/block_onyx_step12",
+      "pastel:block/onyx/block_onyx_step13",
+      "pastel:block/onyx/block_onyx_step14"
+    ]
+  },
+  "block.small_onyx_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/onyx/block_onyx_cluster_place1",
+      "pastel:block/onyx/block_onyx_cluster_place2",
+      "pastel:block/onyx/block_onyx_cluster_place3",
+      "pastel:block/onyx/block_onyx_cluster_place4"
+    ]
+  },
+  "block.moonstone_block.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_break1",
+      "pastel:block/moonstone/block_moonstone_break2",
+      "pastel:block/moonstone/block_moonstone_break3",
+      "pastel:block/moonstone/block_moonstone_break4"
+    ]
+  },
+  "block.moonstone_block.chime": {
+    "subtitle": "pastel.subtitles.block.moonstone_block.chime",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_shimmer"
+    ]
+  },
+  "block.moonstone_block.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.moonstone_block.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.moonstone_block.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_place1",
+      "pastel:block/moonstone/block_moonstone_place2",
+      "pastel:block/moonstone/block_moonstone_place3",
+      "pastel:block/moonstone/block_moonstone_place4"
+    ]
+  },
+  "block.moonstone_block.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.moonstone_cluster.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_cluster_break1",
+      "pastel:block/moonstone/block_moonstone_cluster_break2",
+      "pastel:block/moonstone/block_moonstone_cluster_break3",
+      "pastel:block/moonstone/block_moonstone_cluster_break4"
+    ]
+  },
+  "block.moonstone_cluster.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.moonstone_cluster.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.moonstone_cluster.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_cluster_place1",
+      "pastel:block/moonstone/block_moonstone_cluster_place2",
+      "pastel:block/moonstone/block_moonstone_cluster_place3",
+      "pastel:block/moonstone/block_moonstone_cluster_place4"
+    ]
+  },
+  "block.moonstone_cluster.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.large_moonstone_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.large_moonstone_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_cluster_place1",
+      "pastel:block/moonstone/block_moonstone_cluster_place2",
+      "pastel:block/moonstone/block_moonstone_cluster_place3",
+      "pastel:block/moonstone/block_moonstone_cluster_place4"
+    ]
+  },
+  "block.medium_moonstone_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.medium_moonstone_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_cluster_place1",
+      "pastel:block/moonstone/block_moonstone_cluster_place2",
+      "pastel:block/moonstone/block_moonstone_cluster_place3",
+      "pastel:block/moonstone/block_moonstone_cluster_place4"
+    ]
+  },
+  "block.small_moonstone_bud.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step2",
+      "pastel:block/moonstone/block_moonstone_step3",
+      "pastel:block/moonstone/block_moonstone_step4",
+      "pastel:block/moonstone/block_moonstone_step1",
+      "pastel:block/moonstone/block_moonstone_step6",
+      "pastel:block/moonstone/block_moonstone_step7",
+      "pastel:block/moonstone/block_moonstone_step8",
+      "pastel:block/moonstone/block_moonstone_step9",
+      "pastel:block/moonstone/block_moonstone_step10",
+      "pastel:block/moonstone/block_moonstone_step11",
+      "pastel:block/moonstone/block_moonstone_step12",
+      "pastel:block/moonstone/block_moonstone_step13",
+      "pastel:block/moonstone/block_moonstone_step14"
+    ]
+  },
+  "block.small_moonstone_bud.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/moonstone/block_moonstone_cluster_place1",
+      "pastel:block/moonstone/block_moonstone_cluster_place2",
+      "pastel:block/moonstone/block_moonstone_cluster_place3",
+      "pastel:block/moonstone/block_moonstone_cluster_place4"
+    ]
+  },
+  "block.spectral_block.break": {
+    "subtitle": "subtitles.block.generic.break",
+    "sounds": [
+      "pastel:block/spectral/block_spectral_break1",
+      "pastel:block/spectral/block_spectral_break2",
+      "pastel:block/spectral/block_spectral_break3",
+      "pastel:block/spectral/block_spectral_break4"
+    ]
+  },
+  "block.spectral_block.chime": {
+    "subtitle": "pastel.subtitles.block.spectral_block.chime",
+    "sounds": [
+      "pastel:block/spectral/block_spectral_shimmer"
+    ]
+  },
+  "block.spectral_block.fall": {
+    "subtitle": "",
+    "sounds": [
+      "pastel:block/spectral/block_spectral_step1",
+      "pastel:block/spectral/block_spectral_step2",
+      "pastel:block/spectral/block_spectral_step3",
+      "pastel:block/spectral/block_spectral_step4",
+      "pastel:block/spectral/block_spectral_step1",
+      "pastel:block/spectral/block_spectral_step6",
+      "pastel:block/spectral/block_spectral_step7",
+      "pastel:block/spectral/block_spectral_step8",
+      "pastel:block/spectral/block_spectral_step9",
+      "pastel:block/spectral/block_spectral_step10",
+      "pastel:block/spectral/block_spectral_step11",
+      "pastel:block/spectral/block_spectral_step12",
+      "pastel:block/spectral/block_spectral_step13",
+      "pastel:block/spectral/block_spectral_step14"
+    ]
+  },
+  "block.spectral_block.hit": {
+    "subtitle": "subtitles.block.generic.hit",
+    "sounds": [
+      "pastel:block/spectral/block_spectral_step1",
+      "pastel:block/spectral/block_spectral_step2",
+      "pastel:block/spectral/block_spectral_step3",
+      "pastel:block/spectral/block_spectral_step4",
+      "pastel:block/spectral/block_spectral_step1",
+      "pastel:block/spectral/block_spectral_step6",
+      "pastel:block/spectral/block_spectral_step7",
+      "pastel:block/spectral/block_spectral_step8",
+      "pastel:block/spectral/block_spectral_step9",
+      "pastel:block/spectral/block_spectral_step10",
+      "pastel:block/spectral/block_spectral_step11",
+      "pastel:block/spectral/block_spectral_step12",
+      "pastel:block/spectral/block_spectral_step13",
+      "pastel:block/spectral/block_spectral_step14"
+    ]
+  },
+  "block.spectral_block.place": {
+    "subtitle": "subtitles.block.generic.place",
+    "sounds": [
+      "pastel:block/spectral/block_spectral_place1",
+      "pastel:block/spectral/block_spectral_place2",
+      "pastel:block/spectral/block_spectral_place3",
+      "pastel:block/spectral/block_spectral_place4"
+    ]
+  },
+  "block.spectral_block.step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "pastel:block/spectral/block_spectral_step1",
+      "pastel:block/spectral/block_spectral_step2",
+      "pastel:block/spectral/block_spectral_step3",
+      "pastel:block/spectral/block_spectral_step4",
+      "pastel:block/spectral/block_spectral_step1",
+      "pastel:block/spectral/block_spectral_step6",
+      "pastel:block/spectral/block_spectral_step7",
+      "pastel:block/spectral/block_spectral_step8",
+      "pastel:block/spectral/block_spectral_step9",
+      "pastel:block/spectral/block_spectral_step10",
+      "pastel:block/spectral/block_spectral_step11",
+      "pastel:block/spectral/block_spectral_step12",
+      "pastel:block/spectral/block_spectral_step13",
+      "pastel:block/spectral/block_spectral_step14"
+    ]
+  },
+
+  "entity.kindling.ambient": {
+    "subtitle": "pastel.subtitles.entity.kindling.ambient",
+    "sounds": [
+      "pastel:entity.kindling.ambient",
+      "pastel:entity.kindling.ambient2",
+      "pastel:entity.kindling.ambient3",
+      "pastel:entity.kindling.ambient4"
+    ]
+  },
+  "entity.kindling.death": {
+    "subtitle": "pastel.subtitles.entity.kindling.death",
+    "sounds": [
+      "pastel:entity.kindling.death"
+    ]
+  },
+  "entity.kindling.hurt": {
+    "subtitle": "pastel.subtitles.entity.kindling.hurt",
+    "sounds": [
+      "pastel:entity.kindling.hurt",
+      "pastel:entity.kindling.hurt2"
+    ]
+  },
+  "entity.kindling.shoot": {
+    "subtitle": "pastel.subtitles.entity.kindling.shoot",
+    "sounds": [
+      "minecraft:fire/ignite"
+    ]
+  },
+  "entity.kindling.angry": {
+    "subtitle": "pastel.subtitles.entity.kindling.angry",
+    "sounds": [
+      "pastel:entity.kindling.angy"
+    ]
+  },
+  "entity.kindling.jump": {
+    "subtitle": "pastel.subtitles.entity.kindling.jump",
+    "sounds": [
+      "pastel:entity.kindling.jump"
+    ]
+  },
+
+  "entity.egg_laying_wooly_pig.ambient": {
+    "subtitle": "pastel.subtitles.entity.egg_laying_wooly_pig.ambient",
+    "sounds": [
+      "minecraft:mob/pig/say1",
+      "minecraft:mob/pig/say2",
+      "minecraft:mob/pig/say3"
+    ]
+  },
+  "entity.egg_laying_wooly_pig.hurt": {
+    "subtitle": "pastel.subtitles.entity.egg_laying_wooly_pig.hurt",
+    "sounds": [
+      "minecraft:mob/pig/say1",
+      "minecraft:mob/pig/say2",
+      "minecraft:mob/pig/say3"
+    ]
+  },
+  "entity.egg_laying_wooly_pig.death": {
+    "subtitle": "pastel.subtitles.entity.egg_laying_wooly_pig.death",
+    "sounds": [
+      "minecraft:mob/pig/death"
+    ]
+  },
+  "entity.egg_laying_wooly_pig.step": {
+    "subtitle": "pastel.subtitles.entity.egg_laying_wooly_pig.step",
+    "sounds": [
+      "minecraft:mob/pig/step1",
+      "minecraft:mob/pig/step2",
+      "minecraft:mob/pig/step3",
+      "minecraft:mob/pig/step4",
+      "minecraft:mob/pig/step5"
+    ]
+  },
+
+  "entity.eraser.ambient": {
+    "subtitle": "pastel.subtitles.entity.eraser.ambient",
+    "sounds": [
+      "minecraft:mob/spider/say1",
+      "minecraft:mob/spider/say2",
+      "minecraft:mob/spider/say3",
+      "minecraft:mob/spider/say4"
+    ]
+  },
+  "entity.eraser.hurt": {
+    "subtitle": "pastel.subtitles.entity.eraser.hurt",
+    "sounds": [
+      "minecraft:mob/spider/say1",
+      "minecraft:mob/spider/say2",
+      "minecraft:mob/spider/say3",
+      "minecraft:mob/spider/say4"
+    ]
+  },
+  "entity.eraser.death": {
+    "subtitle": "pastel.subtitles.entity.eraser.death",
+    "sounds": [
+      "minecraft:mob/spider/death"
+    ]
+  },
+  "entity.eraser.step": {
+    "subtitle": "pastel.subtitles.entity.eraser.step",
+    "sounds": [
+      "minecraft:mob/spider/step1",
+      "minecraft:mob/spider/step2",
+      "minecraft:mob/spider/step3",
+      "minecraft:mob/spider/step4"
+    ]
+  },
+
+  "entity.preservation_turret.ambient": {
+    "subtitle": "pastel.subtitles.entity.preservation_turret.ambient",
+    "sounds": [
+      "pastel:entity.preservation_turret.ambient",
+      "pastel:entity.preservation_turret.ambient2",
+      "pastel:entity.preservation_turret.ambient3",
+      "pastel:entity.preservation_turret.ambient4"
+    ]
+  },
+  "entity.preservation_turret.death": {
+    "subtitle": "pastel.subtitles.entity.preservation_turret.death",
+    "sounds": [
+      "pastel:entity.preservation_turret.death",
+      "pastel:entity.preservation_turret.death2",
+      "pastel:entity.preservation_turret.death3",
+      "pastel:entity.preservation_turret.death4",
+      "pastel:entity.preservation_turret.death5",
+      "pastel:entity.preservation_turret.death6"
+    ]
+  },
+  "entity.preservation_turret.hurt_closed": {
+    "subtitle": "pastel.subtitles.entity.preservation_turret.hurt",
+    "sounds": [
+      "pastel:entity.preservation_turret.hurt_closed"
+    ]
+  },
+  "entity.preservation_turret.hurt": {
+    "subtitle": "pastel.subtitles.entity.preservation_turret.hurt",
+    "sounds": [
+      "pastel:entity.preservation_turret.hurt"
+    ]
+  },
+  "entity.preservation_turret.open": {
+    "subtitle": "pastel.subtitles.entity.preservation_turret.open",
+    "sounds": [
+      "pastel:entity.preservation_turret.open"
+    ]
+  },
+  "entity.preservation_turret.close": {
+    "subtitle": "pastel.subtitles.entity.preservation_turret.close",
+    "sounds": [
+      "pastel:entity.preservation_turret.close"
+    ]
+  },
+  "entity.preservation_turret.shoot": {
+    "subtitle": "pastel.subtitles.entity.preservation_turret.shoot",
+    "sounds": [
+      "pastel:enchanter_ding"
+    ]
+  },
+  "entity.lizard.hurt": {
+    "subtitle": "pastel.subtitles.entity.lizard.hurt",
+    "sounds": [
+      "pastel:entity.lizard.hurt"
+    ]
+  },
+  "entity.lizard.death": {
+    "subtitle": "pastel.subtitles.entity.lizard.death",
+    "sounds": [
+      "pastel:entity.lizard.death"
+    ]
+  },
+  "entity.lizard.ambient": {
+    "subtitle": "pastel.subtitles.entity.lizard.ambient",
+    "sounds": [
+      "pastel:entity.lizard.ambient",
+      "pastel:entity.lizard.ambient2",
+      "pastel:entity.lizard.ambient3"
+    ]
+  }
+}

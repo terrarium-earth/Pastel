@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:lategame/find_forgotten_city",
+  "display": {
+    "icon": {
+      "id": "pastel:moonstone_core"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_moonstone_core.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_moonstone_core.description"
+    }
+  },
+  "criteria": {
+    "has_moonstone_core": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:moonstone_core"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/find_forgotten_city"
+      }
+    }
+  }
+}

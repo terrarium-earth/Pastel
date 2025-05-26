@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:cyan_dye"
+    }
+  ],
+  "ink_color": "pastel:cyan",
+  "amount": 5,
+  "required_advancement": "pastel:hidden/collect_pigment/cyan"
+}

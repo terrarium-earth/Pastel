@@ -24,7 +24,7 @@ public class GooConvertingCategory extends FluidConvertingCategory<GooConverting
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.goo_converting.title");
+		return Component.translatable("container.pastel.rei.goo_converting.title");
 	}
 	
 }

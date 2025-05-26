@@ -1,0 +1,37 @@
+{
+  "name": "block.pastel.item_roundel",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/item_roundel"
+  },
+  "icon": {
+    "item": "pastel:item_roundel"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/block_variants"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "item": {
+        "item": "pastel:item_roundel"
+      },
+      "text": "book.pastel.guidebook.item_roundel.page0.text",
+      "title": "block.pastel.item_roundel"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/item_roundel",
+      "text": "book.pastel.guidebook.item_roundel.page1.text"
+    }
+  ]
+}

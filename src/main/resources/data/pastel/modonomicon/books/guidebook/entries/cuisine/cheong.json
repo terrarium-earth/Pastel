@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.cheong",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/cheong"
+  },
+  "icon": {
+    "item": "pastel:cheong"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/titration_barrel",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 3,
+  "y": -2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "item.pastel.cheong",
+      "text": "book.pastel.guidebook.cheong.page0.text"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "title": "book.pastel.guidebook.titration_recipe",
+      "recipe_id": "pastel:titration_barrel/special/cheong",
+      "text": "book.pastel.guidebook.cheong.page1.text"
+    }
+  ]
+}

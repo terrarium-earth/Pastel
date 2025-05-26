@@ -91,9 +91,9 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 					ItemStack ref = bottomlessBundleBlockEntity.storage.getStackInSlot(0);
 					long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bottomlessBundleBlockEntity.powerLevel);
 					if (ref.isEmpty()) {
-						player.displayClientMessage(Component.translatable("item.spectrum.bottomless_bundle.tooltip.empty"), true);
+						player.displayClientMessage(Component.translatable("item.pastel.bottomless_bundle.tooltip.empty"), true);
 					} else {
-						player.displayClientMessage(Component.translatable("item.spectrum.bottomless_bundle.tooltip.count_of", amount, maxStoredAmount).append(ref.getItem().getDescription()), true);
+						player.displayClientMessage(Component.translatable("item.pastel.bottomless_bundle.tooltip.count_of", amount, maxStoredAmount).append(ref.getItem().getDescription()), true);
 					}
 				});
 			} else {
@@ -192,7 +192,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 	
 	@Override
 	public MutableComponent getName() {
-		return Component.translatable("item.spectrum.bottomless_bundle");
+		return Component.translatable("item.pastel.bottomless_bundle");
 	}
 	
 	@Override

@@ -65,9 +65,9 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
         super.appendHoverText(stack, context, tooltip, type);
     
         if (canShoot(stack)) {
-            tooltip.add(Component.translatable("item.spectrum.workstaff.tooltip.projectile").withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.projectile").withStyle(ChatFormatting.GRAY));
         } else {
-            tooltip.add(Component.translatable("item.spectrum.workstaff.tooltip.projectiles_disabled").withStyle(ChatFormatting.DARK_RED));
+            tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.projectiles_disabled").withStyle(ChatFormatting.DARK_RED));
         }
     }
 	

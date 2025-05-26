@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:raw_azurite",
+  "modifiers": {
+    "negate_decreasing_duration": true
+  },
+  "required_advancement": "pastel:midgame/collect_azurite"
+}

@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:vegetal"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_vegetal.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_vegetal.description"
+    }
+  },
+  "parent": "pastel:craft_bottle_of_fading",
+  "criteria": {
+    "has_vegetal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:vegetal"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_bottle_of_fading"
+      }
+    }
+  }
+}

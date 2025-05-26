@@ -62,8 +62,8 @@ public class MalachiteGlassAmpouleItem extends GlassAmpouleItem implements InkPo
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.malachite_glass_ampoule.tooltip").withStyle(ChatFormatting.GRAY));
-		appendPotionFillableTooltip(stack, tooltip, Component.translatable("item.spectrum.malachite_glass_ampoule.tooltip.when_hit"), false, context.tickRate());
+		tooltip.add(Component.translatable("item.pastel.malachite_glass_ampoule.tooltip").withStyle(ChatFormatting.GRAY));
+		appendPotionFillableTooltip(stack, tooltip, Component.translatable("item.pastel.malachite_glass_ampoule.tooltip.when_hit"), false, context.tickRate());
 	}
 	
 }

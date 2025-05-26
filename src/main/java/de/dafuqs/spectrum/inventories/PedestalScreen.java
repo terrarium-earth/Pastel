@@ -119,7 +119,7 @@ public class PedestalScreen extends AbstractContainerScreen<PedestalScreenHandle
 		super.render(drawContext, mouseX, mouseY, delta);
 		
 		if (mouseOverInformationIcon(mouseX, mouseY)) {
-			drawContext.renderTooltip(this.font, Component.translatable("multiblock.spectrum.pedestal.upgrade_available"), mouseX, mouseY);
+			drawContext.renderTooltip(this.font, Component.translatable("multiblock.pastel.pedestal.upgrade_available"), mouseX, mouseY);
 		} else {
 			renderTooltip(drawContext, mouseX, mouseY);
 		}

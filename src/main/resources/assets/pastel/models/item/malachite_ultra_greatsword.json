@@ -1,0 +1,14 @@
+{
+  "parent": "pastel:item/handheld_oversized",
+  "textures": {
+    "layer0": "pastel:item/malachite_ultra_greatsword"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "oversized": 1.0
+      },
+      "model": "pastel:item/malachite_ultra_greatsword_oversized"
+    }
+  ]
+}

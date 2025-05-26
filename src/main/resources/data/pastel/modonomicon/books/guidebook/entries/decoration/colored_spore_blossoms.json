@@ -1,0 +1,101 @@
+{
+  "name": "book.pastel.guidebook.colored_spore_blossoms.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/colored_spore_blossoms"
+  },
+  "icon": {
+    "item": "pastel:orange_spore_blossom"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/pigment"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 6,
+  "pages": [
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.colored_spore_blossoms.name",
+      "items": [
+        "pastel:cyan_spore_blossom",
+        "pastel:magenta_spore_blossom",
+        "pastel:yellow_spore_blossom"
+      ],
+      "text": "book.pastel.guidebook.colored_spore_blossoms.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.colored_spore_blossoms.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/black"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/blue"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/brown"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/cyan"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/gray"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/green"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/light_blue"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/light_gray"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/lime"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/magenta"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/orange"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/pink"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/purple"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/red"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/white"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier2/colored_spore_blossoms/yellow"
+    }
+  ]
+}

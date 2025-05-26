@@ -1,0 +1,26 @@
+{
+  "type": "pastel:pedestal",
+  "group": "radiant_glass",
+  "time": 80,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:cyan": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 0.1,
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": "pastel:radiant_glass"
+  },
+  "result": {
+    "id": "pastel:radiant_glass_pane",
+    "count": 16
+  },
+  "required_advancement": "pastel:unlocks/blocks/radiant_glass"
+}

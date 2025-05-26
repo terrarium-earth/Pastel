@@ -335,9 +335,9 @@ public class ArtisansAtlasItem extends MapItem {
 				if (pair != null) {
 					ResourceLocation structureId = pair.getFirst();
 					if (SpectrumStructureTags.isIn(serverWorld, structureId, SpectrumStructureTags.UNLOCATABLE)) { // TODO: use c: tag
-						serverPlayerEntity.displayClientMessage(Component.translatable("item.spectrum.artisans_atlas.unlocatable"), true);
+						serverPlayerEntity.displayClientMessage(Component.translatable("item.pastel.artisans_atlas.unlocatable"), true);
 					} else {
-						serverPlayerEntity.displayClientMessage(Component.translatable("item.spectrum.artisans_atlas.set_structure").append(Component.translatable(structureId.toLanguageKey("structure"))), true);
+						serverPlayerEntity.displayClientMessage(Component.translatable("item.pastel.artisans_atlas.set_structure").append(Component.translatable(structureId.toLanguageKey("structure"))), true);
 						createAndSetState(stack, serverWorld, (int) serverPlayerEntity.getX(), (int) serverPlayerEntity.getZ(), pair.getSecond(), pair.getFirst());
 					}
 				}
@@ -372,9 +372,9 @@ public class ArtisansAtlasItem extends MapItem {
 		if (getSavedData(stack, world) instanceof ArtisansAtlasState atlasState) {
 			ResourceLocation structureId = atlasState.getTargetId();
 			if (structureId == null)
-				tooltip.add(Component.translatable("item.spectrum.artisans_atlas.empty"));
+				tooltip.add(Component.translatable("item.pastel.artisans_atlas.empty"));
 			else
-				tooltip.add(Component.translatable("item.spectrum.artisans_atlas.locates_structure").append(Component.translatable(structureId.toLanguageKey("structure"))));
+				tooltip.add(Component.translatable("item.pastel.artisans_atlas.locates_structure").append(Component.translatable(structureId.toLanguageKey("structure"))));
 		}
 		
 	}

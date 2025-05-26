@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 public interface Stampable {
 
-    String STAMPING_DATA_TAG = "spectrum:stamping_data";
+    String STAMPING_DATA_TAG = "pastel:stamping_data";
 
 
     /**

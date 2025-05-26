@@ -1,0 +1,15 @@
+{
+  "values": [
+    "pastel:polished_basalt_slab",
+    "pastel:polished_calcite_slab",
+
+    "pastel:planed_basalt_slab",
+    "pastel:planed_calcite_slab",
+
+    "pastel:basalt_brick_slab",
+    "pastel:calcite_brick_slab",
+
+    "pastel:basalt_tile_slab",
+    "pastel:calcite_tile_slab"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "item.pastel.crawfish",
+  "icon": {
+    "item": "pastel:crawfish"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/collect_crawfish"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_crawfish"
+      },
+      "anchor": "crawfish",
+      "item": {
+        "item": "pastel:crawfish"
+      },
+      "text": "book.pastel.guidebook.crawfish.page0.text",
+      "title": "item.pastel.crawfish"
+    }
+  ]
+}

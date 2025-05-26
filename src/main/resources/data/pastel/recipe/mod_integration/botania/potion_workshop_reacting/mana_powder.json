@@ -1,0 +1,16 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "botania:mana_powder",
+  "modifiers": {
+    "duration_multiplier": 1.25,
+    "chance_to_add_last_effect": 0.15
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "botania"
+      ]
+    }
+  ]
+}

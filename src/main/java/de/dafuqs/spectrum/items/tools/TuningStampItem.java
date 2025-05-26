@@ -158,29 +158,29 @@ public class TuningStampItem extends Item implements TooltipExtensions {
             var data = Stampable.loadStampingData(player.level(), nbtComp.copyTag().getCompound(DATA));
 
             if (data.isEmpty()) {
-                tooltip.add(Component.translatable("item.spectrum.tuning_stamp.tooltip.missing").withStyle(style -> style.withColor(0xff757a)));
+                tooltip.add(Component.translatable("item.pastel.tuning_stamp.tooltip.missing").withStyle(style -> style.withColor(0xff757a)));
                 return;
             }
 
             var stampData = data.get();
             var pos = stampData.reference().pos;
 
-            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.tooltip.linked", stampData.reference().getState().getBlock().getName()).withStyle(style -> style.withColor(0xffc98c)));
-            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.tooltip2", pos.getX(), pos.getY(), pos.getZ()).withStyle(style -> style.withColor(0xf99b89).withItalic(true)));
+            tooltip.add(Component.translatable("item.pastel.tuning_stamp.tooltip.linked", stampData.reference().getState().getBlock().getName()).withStyle(style -> style.withColor(0xffc98c)));
+            tooltip.add(Component.translatable("item.pastel.tuning_stamp.tooltip2", pos.getX(), pos.getY(), pos.getZ()).withStyle(style -> style.withColor(0xf99b89).withItalic(true)));
             return;
         }
 
-        tooltip.add(Component.translatable("item.spectrum.tuning_stamp.tooltip").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.pastel.tuning_stamp.tooltip").withStyle(ChatFormatting.GRAY));
     }
 
     @Override
     public void expandTooltipPostStats(ItemStack stack, @Nullable Player player, List<Component> tooltip, TooltipContext context) {
         if (Screen.hasShiftDown()) {
-            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.controls").withStyle(style -> style.withColor(0x66ff99)));
-            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.controls2").withStyle(style -> style.withColor(0x66ff99)));
-            tooltip.add(Component.translatable("item.spectrum.tuning_stamp.controls3").withStyle(style -> style.withColor(0x66ff99)));
+            tooltip.add(Component.translatable("item.pastel.tuning_stamp.controls").withStyle(style -> style.withColor(0x66ff99)));
+            tooltip.add(Component.translatable("item.pastel.tuning_stamp.controls2").withStyle(style -> style.withColor(0x66ff99)));
+            tooltip.add(Component.translatable("item.pastel.tuning_stamp.controls3").withStyle(style -> style.withColor(0x66ff99)));
         } else {
-            tooltip.add(Component.translatable("spectrum.tooltip.press_shift_for_controls").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
+            tooltip.add(Component.translatable("pastel.tooltip.press_shift_for_controls").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
         }
     }
 }

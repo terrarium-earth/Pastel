@@ -1,0 +1,59 @@
+{
+  "name": "book.pastel.guidebook.mysterious_locket.name",
+  "icon": {
+    "item": "pastel:mysterious_locket"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_mysterious_locket"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/preservation_ruins"
+    },
+    {
+      "entry": "pastel:dimension/moonstone_cores"
+    },
+    {
+      "entry": "pastel:general/pedestal_upgrade_moonstone_2"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 5,
+  "y": 10,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.mysterious_locket.name",
+      "item": {
+        "item": "pastel:mysterious_locket"
+      },
+      "text": "book.pastel.guidebook.mysterious_locket.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.mysterious_locket.page1.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "title": "book.pastel.guidebook.mysterious_locket.page2.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/mysterious_locket_socketing"
+      },
+      "recipe_id": "pastel:fusion_shrine/mysterious_locket_socketing",
+      "text": "book.pastel.guidebook.mysterious_locket.page2.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:endgame/open_mysterious_compass"
+      },
+      "text": "book.pastel.guidebook.mysterious_locket.page3.text"
+    }
+  ]
+}

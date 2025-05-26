@@ -1,0 +1,19 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "botania:pink_petal"
+    }
+  ],
+  "ink_color": "pastel:pink",
+  "amount": 25,
+  "required_advancement": "pastel:hidden/collect_pigment/pink",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "botania"
+      ]
+    }
+  ]
+}

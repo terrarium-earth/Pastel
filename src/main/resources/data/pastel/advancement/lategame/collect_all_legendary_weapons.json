@@ -1,0 +1,90 @@
+{
+  "parent": "pastel:lategame/collect_pure_resource",
+  "display": {
+    "icon": {
+      "id": "pastel:dragon_talon"
+    },
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.collect_all_legendary_weapons.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_all_legendary_weapons.description"
+    }
+  },
+  "criteria": {
+    "unlocked_draconic_twinsword": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/equipment/draconic_twinsword"
+      }
+    },
+    "unlocked_nectar_lance": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/equipment/nectar_lance"
+      }
+    },
+    "unlocked_nightfalls_blade": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/equipment/nightfalls_blade"
+      }
+    },
+    "unlocked_dreamflayer": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/equipment/dreamflayer"
+      }
+    },
+    "collected_draconic_twinsword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:draconic_twinsword"
+          }
+        ]
+      }
+    },
+    "collected_nectar_lance": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:nectar_lance"
+          }
+        ]
+      }
+    },
+    "collected_nightfalls_blade": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:nightfalls_blade"
+          }
+        ]
+      }
+    },
+    "collected_dreamflayer": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:dreamflayer"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_pure_resource"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 1000
+  }
+}

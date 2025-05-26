@@ -1,0 +1,93 @@
+{
+  "name": "book.pastel.guidebook.preservation_ruins.name",
+  "icon": {
+    "item": "pastel:preservation_controller"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:find_preservation_ruins"
+  },
+  "turnin": "pastel:hidden/solve_every_preservation_ruin",
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 7,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.preservation_ruins.name",
+      "item": {
+        "item": "pastel:preservation_controller"
+      },
+      "text": "book.pastel.guidebook.preservation_ruins.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.preservation_ruins.page1.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/solve_any_preservation_ruin"
+      },
+      "text": "book.pastel.guidebook.preservation_ruins.page1.text"
+    },
+    {
+      "type": "pastel:checklist",
+      "title": "book.pastel.guidebook.preservation_ruins.page2.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/solve_any_preservation_ruin"
+      },
+      "checklist": {
+        "pastel:solve_color_mixing_preservation_ruin": "book.pastel.guidebook.preservation_ruins.page2.checklist.entry0",
+        "pastel:solve_dike_gate_preservation_ruin": "book.pastel.guidebook.preservation_ruins.page2.checklist.entry1",
+        "pastel:solve_wireless_redstone_preservation_ruin": "book.pastel.guidebook.preservation_ruins.page2.checklist.entry2"
+      },
+      "text": "book.pastel.guidebook.preservation_ruins.page2.text"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "book.pastel.guidebook.preservation_ruins.page3.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:enter_dike_gate_preservation_ruin"
+      },
+      "images": [
+        "pastel:textures/gui/guidebook/preservation_ruin_dike_gate.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.preservation_ruins.page3.text"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "book.pastel.guidebook.preservation_ruins.page4.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:enter_color_mixing_preservation_ruin"
+      },
+      "images": [
+        "pastel:textures/gui/guidebook/preservation_ruin_color_mixing.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.preservation_ruins.page4.text"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "advancements.pastel.enter_wireless_redstone_preservation_ruin.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:enter_wireless_redstone_preservation_ruin"
+      },
+      "images": [
+        "pastel:textures/gui/guidebook/preservation_ruin_wireless_redstone.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.preservation_ruins.page5.text"
+    }
+  ]
+}

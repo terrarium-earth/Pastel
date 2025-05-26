@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "pastel:cyan_logs"
+    }
+  ],
+  "result": {
+    "id": "pastel:cyan_planks",
+    "count": 4
+  }
+}

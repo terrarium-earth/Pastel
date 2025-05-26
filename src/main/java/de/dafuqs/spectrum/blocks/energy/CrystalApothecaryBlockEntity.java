@@ -146,9 +146,9 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
 	@Override
 	protected Component getDefaultName() {
 		if (hasOwner()) {
-			return Component.translatable("block.spectrum.crystal_apothecary.owner", this.ownerName);
+			return Component.translatable("block.pastel.crystal_apothecary.owner", this.ownerName);
 		} else {
-			return Component.translatable("block.spectrum.crystal_apothecary");
+			return Component.translatable("block.pastel.crystal_apothecary");
 		}
 	}
 	

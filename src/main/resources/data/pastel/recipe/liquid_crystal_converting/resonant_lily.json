@@ -1,0 +1,14 @@
+{
+  "type": "pastel:liquid_crystal_converting",
+  "required_advancement": "pastel:midgame/collect_resonant_lily",
+  "secret": true,
+  "ingredient": [
+    {
+      "tag": "minecraft:flowers"
+    }
+  ],
+  "result": {
+    "id": "pastel:resonant_lily",
+    "count": 1
+  }
+}

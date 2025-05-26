@@ -1,0 +1,34 @@
+{
+  "name": "book.pastel.guidebook.erasers.name",
+  "icon": {
+    "item": "pastel:eraser_head"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/entity_interact/eraser"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/creatures"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -5,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:entity",
+      "title": "book.pastel.guidebook.erasers.page0.name",
+      "entity_id": "pastel:eraser",
+      "scale": 0.5,
+      "text": "book.pastel.guidebook.erasers.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.erasers.page1.text"
+    }
+  ]
+}

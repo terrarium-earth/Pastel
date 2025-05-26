@@ -1,0 +1,30 @@
+{
+  "type": "alloy_forgery:forging",
+  "inputs": [
+    "pastel:paltaeria_ore"
+  ],
+  "output": {
+    "id": "pastel:paltaeria_fragments",
+    "count": 3
+  },
+  "overrides": {
+    "3": {
+      "id": "pastel:paltaeria_fragments",
+      "count": 4
+    },
+    "4+": {
+      "id": "pastel:paltaeria_fragments",
+      "count": 5
+    }
+  },
+  "min_forge_tier": 1,
+  "fuel_per_tick": 5,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "alloy_forgery"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "values": [
-    "#spectrum:colored_fences",
-    "#spectrum:noxwood_fences",
-    "spectrum:weeping_gala_fence"
+    "#pastel:colored_fences",
+    "#pastel:noxwood_fences",
+    "pastel:weeping_gala_fence"
   ]
 }

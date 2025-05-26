@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:storm_stone",
+  "modifiers": {
+    "potent_decreasing_effect": true
+  },
+  "required_advancement": "pastel:midgame/collect_storm_stone"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:neolith",
+  "modifiers": {
+    "unidentifiable": true
+  },
+  "required_advancement": "pastel:midgame/collect_neolith"
+}

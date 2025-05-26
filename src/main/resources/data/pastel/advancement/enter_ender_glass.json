@@ -1,0 +1,28 @@
+{
+  "parent": "pastel:collect_radiating_ender",
+  "display": {
+    "icon": {
+      "id": "pastel:ender_glass"
+    },
+    "title": {
+      "translate": "advancements.pastel.enter_ender_glass.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.enter_ender_glass.description"
+    }
+  },
+  "criteria": {
+    "enter_ender_glass": {
+      "trigger": "minecraft:enter_block",
+      "conditions": {
+        "block": "pastel:ender_glass"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_radiating_ender"
+      }
+    }
+  }
+}

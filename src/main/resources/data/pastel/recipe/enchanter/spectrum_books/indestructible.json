@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 1000,
+  "required_experience": 1000,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:downstone_fragments"
+    },
+    {
+      "item": "pastel:pure_netherite_scrap"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:blue_pigment"
+    },
+    {
+      "item": "pastel:downstone_fragments"
+    },
+    {
+      "item": "pastel:pure_netherite_scrap"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:indestructible": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/indestructible",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:indestructible"
+      ]
+    }
+  ]
+}

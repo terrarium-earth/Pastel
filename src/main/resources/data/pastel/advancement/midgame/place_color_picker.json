@@ -1,0 +1,38 @@
+{
+  "parent": "pastel:midgame/spectrum_midgame",
+  "display": {
+    "icon": {
+      "id": "pastel:color_picker"
+    },
+    "title": {
+      "translate": "advancements.pastel.place_color_picker.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.place_color_picker.description"
+    }
+  },
+  "criteria": {
+    "placed_color_picker": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "pastel:color_picker"
+          }
+        ],
+        "item": {
+          "items": [
+            "pastel:color_picker"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/spectrum_midgame"
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "glowblocks",
+  "time": 200,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 1,
+    "pastel:yellow": 2,
+    "pastel:white": 0,
+    "pastel:black": 3
+  },
+  "experience": 1.0,
+  "pattern": [
+    "PQP",
+    "QPQ",
+    "PQP"
+  ],
+  "key": {
+    "P": "pastel:brown_pigment",
+    "Q": "pastel:quitoxic_powder"
+  },
+  "result": {
+    "id": "pastel:brown_glowblock",
+    "count": 4
+  },
+  "required_advancement": "pastel:unlocks/glowblocks/brown_glowblock"
+}

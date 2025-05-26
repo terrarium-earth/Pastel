@@ -1,0 +1,42 @@
+{
+  "name": "item.pastel.knowledge_gem",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/knowledge_gem"
+  },
+  "icon": {
+    "id": "pastel:knowledge_gem",
+    "components": {
+      "pastel:stored_experience": 500
+    }
+  },
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.knowledge_gem.page0.text",
+      "title": "item.pastel.knowledge_gem"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.knowledge_gem.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/knowledge_gem"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.knowledge_gem.page2.title",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/black_hole_chest"
+      },
+      "text": "book.pastel.guidebook.knowledge_gem.page2.text"
+    }
+  ]
+}

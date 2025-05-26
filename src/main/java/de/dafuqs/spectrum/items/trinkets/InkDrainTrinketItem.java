@@ -47,7 +47,7 @@ public class InkDrainTrinketItem extends SpectrumTrinketItem implements InkStora
 		long storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
 		
 		if (storedInk >= MAX_INK) {
-			tooltip.add(Component.translatable("spectrum.tooltip.ink_drain.tooltip.maxed_out").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("pastel.tooltip.ink_drain.tooltip.maxed_out").withStyle(ChatFormatting.GRAY));
 		} else {
 			long nextStepInk;
 			int pow = 0;
@@ -56,7 +56,7 @@ public class InkDrainTrinketItem extends SpectrumTrinketItem implements InkStora
 				pow++;
 			} while (storedInk >= nextStepInk);
 			
-			tooltip.add(Component.translatable("spectrum.tooltip.ink_drain.tooltip.ink_for_next_step", storedInk, inkStorage.getStoredColor().getColoredInkName(), Support.getShortenedNumberString(nextStepInk - storedInk)).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("pastel.tooltip.ink_drain.tooltip.ink_for_next_step", storedInk, inkStorage.getStoredColor().getColoredInkName(), Support.getShortenedNumberString(nextStepInk - storedInk)).withStyle(ChatFormatting.GRAY));
 		}
 	}
 	

@@ -1,0 +1,58 @@
+{
+  "name": "enchantment.pastel.treasure_hunter",
+  "icon": {
+    "item": "minecraft:iron_axe"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/enchantments/treasure_hunter"
+  },
+  "flag": "pastel:enchantment_exists_spectrum_treasure_hunter",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": 2,
+  "x": 3,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.treasure_hunter.page0.text",
+      "title": "enchantment.pastel.treasure_hunter"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.treasure_hunter.page1.title",
+      "item": {
+        "item": "pastel:cow_head"
+      },
+      "text": "book.pastel.guidebook.treasure_hunter.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "minecraft:iron_axe"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:treasure_hunter": 3
+        }
+      },
+      "text": "book.pastel.guidebook.treasure_hunter.page2.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/treasure_hunter"
+    },
+    {
+      "type": "pastel:enchanter_upgrading",
+      "text": "book.pastel.guidebook.upgrading.text",
+      "title": "container.pastel.rei.enchantment_upgrading.title",
+      "recipe_id": "pastel:enchantment_upgrade/pastel/treasure_hunter"
+    }
+  ]
+}

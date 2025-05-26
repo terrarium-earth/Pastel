@@ -162,38 +162,38 @@ public class MemoryItem extends BlockItem {
 		
 		getEntityType(stack).ifPresentOrElse(entityType -> {
 			if (isUnrecognizable(stack)) {
-				tooltip.add(Component.translatable("item.spectrum.memory.tooltip.unrecognizable_entity_type").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.memory.tooltip.unrecognizable_entity_type").withStyle(ChatFormatting.GRAY));
 			} else {
 				boolean isBrokenPromise = isBrokenPromise(stack);
 				Component customName = getMemoryEntityCustomName(stack, context.registries());
 				if (isBrokenPromise) {
 					if (customName == null) {
-						tooltip.add(Component.translatable("item.spectrum.memory.tooltip.entity_type_broken_promise", entityType.getDescription()));
+						tooltip.add(Component.translatable("item.pastel.memory.tooltip.entity_type_broken_promise", entityType.getDescription()));
 					} else {
-						tooltip.add(Component.translatable("item.spectrum.memory.tooltip.named_broken_promise").append(customName).withStyle(ChatFormatting.WHITE, ChatFormatting.ITALIC));
+						tooltip.add(Component.translatable("item.pastel.memory.tooltip.named_broken_promise").append(customName).withStyle(ChatFormatting.WHITE, ChatFormatting.ITALIC));
 					}
 				} else {
 					if (customName == null) {
-						tooltip.add(Component.translatable("item.spectrum.memory.tooltip.entity_type", entityType.getDescription()));
+						tooltip.add(Component.translatable("item.pastel.memory.tooltip.entity_type", entityType.getDescription()));
 					} else {
-						tooltip.add(Component.translatable("item.spectrum.memory.tooltip.named").append(customName).withStyle(ChatFormatting.WHITE, ChatFormatting.ITALIC));
+						tooltip.add(Component.translatable("item.pastel.memory.tooltip.named").append(customName).withStyle(ChatFormatting.WHITE, ChatFormatting.ITALIC));
 					}
 				}
 			}
 			
 			int ticksToHatch = getTicksToManifest(stack);
 			if (ticksToHatch <= 0) {
-				tooltip.add(Component.translatable("item.spectrum.memory.tooltip.does_not_manifest").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.memory.tooltip.does_not_manifest").withStyle(ChatFormatting.GRAY));
 			} else if (ticksToHatch > 100) {
-				tooltip.add(Component.translatable("item.spectrum.memory.tooltip.extra_long_time_to_manifest").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.memory.tooltip.extra_long_time_to_manifest").withStyle(ChatFormatting.GRAY));
 			} else if (ticksToHatch > 20) {
-				tooltip.add(Component.translatable("item.spectrum.memory.tooltip.long_time_to_manifest").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.memory.tooltip.long_time_to_manifest").withStyle(ChatFormatting.GRAY));
 			} else if (ticksToHatch > 5) {
-				tooltip.add(Component.translatable("item.spectrum.memory.tooltip.medium_time_to_manifest").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.memory.tooltip.medium_time_to_manifest").withStyle(ChatFormatting.GRAY));
 			} else {
-				tooltip.add(Component.translatable("item.spectrum.memory.tooltip.short_time_to_manifest").withStyle(ChatFormatting.GRAY));
+				tooltip.add(Component.translatable("item.pastel.memory.tooltip.short_time_to_manifest").withStyle(ChatFormatting.GRAY));
 			}
-		}, () -> tooltip.add(Component.translatable("item.spectrum.memory.tooltip.unset_entity_type").withStyle(ChatFormatting.GRAY)));
+		}, () -> tooltip.add(Component.translatable("item.pastel.memory.tooltip.unset_entity_type").withStyle(ChatFormatting.GRAY)));
 	}
 	
 	public static void appendEntries(HolderLookup.Provider lookup, Output entries) {

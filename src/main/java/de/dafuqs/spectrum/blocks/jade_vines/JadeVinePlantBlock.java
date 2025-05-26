@@ -146,7 +146,7 @@ public class JadeVinePlantBlock extends Block implements JadeVine, NaturesStaffT
 			}
 			
 			if (!harvested) {
-				player.displayClientMessage(Component.translatable("message.spectrum.needs_item_to_harvest").append(Items.GLASS_BOTTLE.getDescription()), true);
+				player.displayClientMessage(Component.translatable("message.pastel.needs_item_to_harvest").append(Items.GLASS_BOTTLE.getDescription()), true);
 			}
 			
 			return ItemInteractionResult.sidedSuccess(world.isClientSide);

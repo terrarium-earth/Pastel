@@ -1,0 +1,11 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": "minecraft:glass_bottle",
+  "use_up_base_ingredient": true,
+  "color": 9128969,
+  "ingredient1": "#c:milk",
+  "ingredient2": "pastel:fresh_chocolate",
+  "result": {
+    "id": "pastel:hot_chocolate"
+  }
+}

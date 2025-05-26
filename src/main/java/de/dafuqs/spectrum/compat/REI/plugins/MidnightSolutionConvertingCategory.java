@@ -24,7 +24,7 @@ public class MidnightSolutionConvertingCategory extends FluidConvertingCategory<
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.spectrum.rei.midnight_solution_converting.title");
+		return Component.translatable("container.pastel.rei.midnight_solution_converting.title");
 	}
 	
 }

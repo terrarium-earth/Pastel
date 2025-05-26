@@ -1,0 +1,8 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:pure_echo",
+  "modifiers": {
+    "chance_to_add_last_effect": 1.0
+  },
+  "required_advancement": "pastel:lategame/collect_pure_resource"
+}

@@ -1,0 +1,22 @@
+{
+  "type": "pastel:pedestal_shapeless",
+  "time": 200,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 16.0,
+  "ingredients": [
+    "pastel:moonstone_shard"
+  ],
+  "result": {
+    "id": "pastel:pedestal_moonstone",
+    "count": 1
+  },
+  "required_advancement": "pastel:lategame/collect_moonstone",
+  "disable_yield_upgrades": true
+}

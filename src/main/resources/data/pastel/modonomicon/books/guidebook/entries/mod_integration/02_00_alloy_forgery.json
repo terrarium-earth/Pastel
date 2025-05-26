@@ -1,0 +1,194 @@
+{
+  "name": "book.pastel.guidebook.mod_integration.alloy_forgery.name",
+  "icon": "alloy_forgery:bricks_forge_controller",
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:mod_loaded",
+        "mod_id": "alloy_forgery"
+      },
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:place_pedestal"
+      }
+    ]
+  },
+  "category": "pastel:mod_integration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.mod_integration.alloy_forgery.name",
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.intro0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.intro1.text"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "show_visualize_button": true,
+      "multiblock_id": "pastel:alloy_forgery/basalt_alloy_forge",
+      "multiblock_name": "multiblock.pastel.alloy_forgery.basalt_alloy_forge"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.basalt_alloy_forge.text",
+      "title": "book.pastel.guidebook.mod_integration.alloy_forgery.forge_controller",
+      "recipe_id": "pastel:mod_integration/alloy_forgery/pedestal/polished_basalt_alloy_forge"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "show_visualize_button": true,
+      "multiblock_id": "pastel:alloy_forgery/calcite_alloy_forge",
+      "multiblock_name": "multiblock.pastel.alloy_forgery.calcite_alloy_forge"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.calcite_alloy_forge.text",
+      "title": "book.pastel.guidebook.mod_integration.alloy_forgery.forge_controller",
+      "recipe_id": "pastel:mod_integration/alloy_forgery/pedestal/polished_calcite_alloy_forge"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_blackslag"
+      },
+      "show_visualize_button": true,
+      "multiblock_id": "pastel:alloy_forgery/blackslag_alloy_forge",
+      "multiblock_name": "multiblock.pastel.alloy_forgery.blackslag_alloy_forge"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_blackslag"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.blackslag_alloy_forge.text",
+      "title": "book.pastel.guidebook.mod_integration.alloy_forgery.forge_controller",
+      "recipe_id": "pastel:mod_integration/alloy_forgery/pedestal/polished_blackslag_alloy_forge"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_shale_clay"
+      },
+      "show_visualize_button": true,
+      "multiblock_id": "pastel:alloy_forgery/shale_clay_alloy_forge",
+      "multiblock_name": "multiblock.pastel.alloy_forgery.shale_clay_alloy_forge"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_shale_clay"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.shale_clay_alloy_forge.text",
+      "title": "book.pastel.guidebook.mod_integration.alloy_forgery.forge_controller",
+      "recipe_id": "pastel:mod_integration/alloy_forgery/pedestal/polished_shale_clay_alloy_forge"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pyrite"
+      },
+      "show_visualize_button": true,
+      "multiblock_id": "pastel:alloy_forgery/pyrite_alloy_forge",
+      "multiblock_name": "multiblock.pastel.alloy_forgery.pyrite_alloy_forge"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_pyrite"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.pyrite_alloy_forge.text",
+      "title": "book.pastel.guidebook.mod_integration.alloy_forgery.forge_controller",
+      "recipe_id": "pastel:mod_integration/alloy_forgery/pedestal/pyrite_alloy_forge"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:break_cracked_dragonbone"
+      },
+      "show_visualize_button": true,
+      "multiblock_id": "pastel:alloy_forgery/bone_ash_alloy_forge",
+      "multiblock_name": "multiblock.pastel.alloy_forgery.bone_ash_alloy_forge"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:break_cracked_dragonbone"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.bone_ash_alloy_forge.text",
+      "title": "book.pastel.guidebook.mod_integration.alloy_forgery.forge_controller",
+      "recipe_id": "pastel:mod_integration/alloy_forgery/pedestal/polished_bone_ash_alloy_forge"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:pure_iron"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_pure_resource"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.pure_resources.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:midgame/collect_stratine"
+      },
+      "item": {
+        "item": "pastel:stratine_ore"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.stratine_ore.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:paltaeria_ore"
+      },
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:lategame/collect_paltaeria"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.paltaeria_ore.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/lava_sponge"
+      },
+      "item": {
+        "item": "pastel:wet_lava_sponge"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.wet_lava_sponge.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:hidden/collect_blazing_crystal"
+      },
+      "item": {
+        "item": "pastel:incandescent_essence"
+      },
+      "text": "book.pastel.guidebook.mod_integration.alloy_forgery.incandescent_essence.text"
+    }
+  ]
+}

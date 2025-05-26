@@ -1,0 +1,33 @@
+{
+  "name": "block.pastel.redstone_transceiver",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:create_onyx_shard"
+  },
+  "icon": {
+    "item": "pastel:redstone_transceiver"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:redstone_transceiver"
+      },
+      "text": "book.pastel.guidebook.redstone_transceiver.page0.text",
+      "title": "block.pastel.redstone_transceiver"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier2/redstone_transceiver",
+      "text": "book.pastel.guidebook.redstone_transceiver.page1.text"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:lategame/find_forgotten_city",
+  "display": {
+    "icon": {
+      "id": "pastel:brewers_handbook"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_one_cookbook.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_one_cookbook.description"
+    }
+  },
+  "criteria": {
+    "collect_one_cookbook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:cookbooks"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

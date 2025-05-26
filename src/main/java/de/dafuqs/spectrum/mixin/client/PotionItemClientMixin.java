@@ -26,7 +26,7 @@ public abstract class PotionItemClientMixin {
 	private void spectrum$makePotionUnidentifiable(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type, CallbackInfo ci) {
 		CustomPotionDataComponent component = stack.get(SpectrumDataComponentTypes.CUSTOM_POTION_DATA);
 		if (component != null && component.unidentifiable()) {
-			tooltip.add(Component.translatable("item.spectrum.potion.tooltip.unidentifiable"));
+			tooltip.add(Component.translatable("item.pastel.potion.tooltip.unidentifiable"));
 			ci.cancel();
 		}
 	}

@@ -1,0 +1,40 @@
+{
+  "name": "block.pastel.blood_orchid",
+  "icon": {
+    "item": "pastel:blood_orchid"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/blood_orchid"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/blood_orchid_petal"
+    },
+    {
+      "entry": "pastel:general/resonant_lily"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 6,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.blood_orchid",
+      "item": {
+        "item": "pastel:blood_orchid"
+      },
+      "text": "book.pastel.guidebook.blood_orchids.page0.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "block.pastel.blood_orchid",
+      "recipe_id": "pastel:spirit_instiller/blood_orchid",
+      "text": "book.pastel.guidebook.blood_orchids.page1.text"
+    }
+  ]
+}

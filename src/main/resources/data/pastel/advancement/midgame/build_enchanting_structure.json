@@ -1,0 +1,31 @@
+{
+  "parent": "pastel:midgame/enter_liquid_crystal",
+  "display": {
+    "icon": {
+      "id": "pastel:enchanter"
+    },
+    "title": {
+      "translate": "advancements.pastel.build_enchanting_structure.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.build_enchanting_structure.description"
+    }
+  },
+  "criteria": {
+    "built_structure": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:enchanter"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/enter_liquid_crystal"
+      }
+    }
+  },
+  "rewards": {
+    "experience": 50
+  }
+}

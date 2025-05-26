@@ -1,0 +1,49 @@
+{
+  "name": "book.pastel.guidebook.trifles.name",
+  "icon": {
+    "item": "pastel:jaramel_trifle"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/trifles"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/amaranth",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 2,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.trifles.page0.text",
+      "title": "book.pastel.guidebook.trifles.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "item.pastel.jaramel_trifle",
+      "recipe_id": "pastel:pedestal/tier1/food/jaramel_trifle",
+      "text": "book.pastel.guidebook.enemy_tears"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:craft_salted_jaramel_trifle_or_tart"
+      },
+      "recipe_id": "pastel:pedestal/tier1/food/salted_jaramel_trifle",
+      "text": "book.pastel.guidebook.extra_salty"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/food/monster_trifle",
+      "text": "book.pastel.guidebook.trifles.page3.text"
+    }
+  ]
+}

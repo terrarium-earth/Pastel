@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "time": 400,
+  "tier": "advanced",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 4,
+    "pastel:yellow": 0,
+    "pastel:white": 0,
+    "pastel:black": 2
+  },
+  "experience": 2.0,
+  "pattern": [
+    "SLS",
+    "BLB",
+    "BCB"
+  ],
+  "key": {
+    "L": "minecraft:lapis_block",
+    "B": "pastel:polished_basalt",
+    "C": "pastel:polished_calcite",
+    "S": "pastel:stratine_fragments"
+  },
+  "result": {
+    "id": "pastel:enchanter",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/blocks/enchanter"
+}

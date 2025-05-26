@@ -1,0 +1,43 @@
+{
+  "name": "item.pastel.neolith",
+  "icon": {
+    "item": "pastel:neolith"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/collect_neolith"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/failing"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 12,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.neolith",
+      "item": {
+        "item": "pastel:neolith"
+      },
+      "text": "book.pastel.guidebook.neolith.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "Compression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/neolith_block",
+      "text": ""
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "Decompression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/neolith_from_neolith_block",
+      "text": ""
+    }
+  ]
+}

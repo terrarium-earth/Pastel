@@ -1,0 +1,41 @@
+{
+  "name": "book.pastel.guidebook.failing.name",
+  "icon": {
+    "item": "pastel:bottle_of_failing"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/items/bottle_of_failing"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/stratine"
+    },
+    {
+      "entry": "pastel:general/pedestal_upgrade_onyx"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 10,
+  "y": 1,
+  "turnin": "pastel:midgame/collect_neolith",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:bottle_of_failing"
+      },
+      "text": "book.pastel.guidebook.failing.page0.text",
+      "title": "book.pastel.guidebook.failing.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/bottle_of_failing",
+      "text": "book.pastel.guidebook.failing.page1.text"
+    }
+  ]
+}

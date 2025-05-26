@@ -1,0 +1,51 @@
+{
+  "name": "container.pastel.rei.enchanting.title",
+  "icon": {
+    "item": "pastel:enchanter"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/enchanter"
+  },
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:enchanting/enchanter",
+      "line_enabled": false
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": -1,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "container.pastel.rei.enchanting.title",
+      "text": "book.pastel.guidebook.enchanting_items.page0.text"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "images": [
+        "pastel:textures/gui/guidebook/enchanting_items.png"
+      ],
+      "border": true,
+      "text": "book.pastel.guidebook.enchanting_items.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:enchanted_book"
+      },
+      "title": "book.pastel.guidebook.enchanting_items.page2.title",
+      "text": "book.pastel.guidebook.enchanting_items.page2.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.enchanting_items.page3.title",
+      "text": "book.pastel.guidebook.enchanting_items.page3.text"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "type": "pastel:pedestal",
+  "time": 600,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 8,
+    "pastel:white": 4,
+    "pastel:black": 0
+  },
+  "experience": 2,
+  "pattern": [
+    "MPM",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "S": "minecraft:smooth_basalt",
+    "M": "pastel:moonstone_shard",
+    "P": "pastel:resonance_shard"
+  },
+  "result": {
+    "id": "pastel:resonant_pickaxe",
+    "components": {
+      "enchantments": {
+        "pastel:resonance": 1
+      }
+    },
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/equipment/resonant_pickaxe"
+}

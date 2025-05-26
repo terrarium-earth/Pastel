@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:yellow_dye"
+    }
+  ],
+  "ink_color": "pastel:yellow",
+  "amount": 5,
+  "required_advancement": "pastel:hidden/collect_pigment/yellow"
+}

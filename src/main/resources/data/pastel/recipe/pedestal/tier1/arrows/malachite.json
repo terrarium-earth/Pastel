@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "group": "glass_arrows",
+  "time": 200,
+  "tier": "basic",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:cyan": 0,
+    "pastel:black": 0,
+    "pastel:white": 0
+  },
+  "experience": 1.0,
+  "pattern": [
+    "M",
+    "S",
+    "F"
+  ],
+  "key": {
+    "M": "pastel:raw_malachite",
+    "S": "minecraft:stick",
+    "F": "#pastel:resplendent_feathers"
+  },
+  "result": {
+    "id": "pastel:malachite_glass_arrow",
+    "count": 4
+  },
+  "required_advancement": "pastel:unlocks/malachite/glass_arrows"
+}

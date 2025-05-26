@@ -37,7 +37,7 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public Component getOutputLoreText() {
-		return Component.translatable("recipe.spectrum.spawner.lore.increased_max_nearby_entities");
+		return Component.translatable("recipe.pastel.spawner.lore.increased_max_nearby_entities");
 	}
 	
 	

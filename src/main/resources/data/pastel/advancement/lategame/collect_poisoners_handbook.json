@@ -1,0 +1,29 @@
+{
+  "parent": "pastel:lategame/enter_strange_preservation_ruin",
+  "display": {
+    "icon": {
+      "id": "pastel:poisoners_handbook"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_poisoners_handbook.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_poisoners_handbook.description"
+    }
+  },
+  "criteria": {
+    "found_poisoners_handbook": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_cookbooks/poisoners_handbook"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/enter_strange_preservation_ruin"
+      }
+    }
+  }
+}

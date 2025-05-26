@@ -1,0 +1,6 @@
+{
+  "particle_type": "pastel:primordial_cosy_smoke",
+  "gui_texture": "pastel:large_primordial_smoke_0",
+  "unlock_identifier": "pastel:hidden/interact_with_doombloom",
+  "supports_coloring": false
+}

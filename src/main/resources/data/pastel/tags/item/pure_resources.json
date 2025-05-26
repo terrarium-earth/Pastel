@@ -1,0 +1,40 @@
+{
+  "values": [
+    "pastel:pure_coal",
+    "pastel:pure_iron",
+    "pastel:pure_gold",
+    "pastel:pure_diamond",
+    "pastel:pure_emerald",
+    "pastel:pure_redstone",
+    "pastel:pure_lapis",
+    "pastel:pure_copper",
+    "pastel:pure_quartz",
+    "pastel:pure_netherite_scrap",
+    "pastel:pure_glowstone",
+    "pastel:pure_prismarine",
+    {
+      "id": "pastel:pure_certus_quartz",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_fluix",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_globette",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_globette_nether",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_globette_end",
+      "required": false
+    },
+    {
+      "id": "pastel:pure_zinc",
+      "required": false
+    }
+  ]
+}

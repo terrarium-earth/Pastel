@@ -1,0 +1,48 @@
+{
+  "name": "block.pastel.liquid_crystal",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/liquid_crystal"
+  },
+  "icon": {
+    "item": "pastel:liquid_crystal_bucket"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/mermaids_brush"
+    },
+    {
+      "entry": "pastel:general/pedestal_upgrade_onyx"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": 3,
+  "turnin": "pastel:midgame/enter_liquid_crystal",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.liquid_crystal",
+      "item": {
+        "item": "pastel:liquid_crystal_bucket"
+      },
+      "text": "book.pastel.guidebook.liquid_crystal.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier3/liquid_crystal_bucket",
+      "text": "book.pastel.guidebook.liquid_crystal.page1.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "minecraft:clay"
+      },
+      "text": "book.pastel.guidebook.liquid_crystal.page2.text"
+    }
+  ]
+}

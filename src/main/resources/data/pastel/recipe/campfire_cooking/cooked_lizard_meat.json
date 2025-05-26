@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "ingredient": [
+    {
+      "item": "pastel:lizard_meat"
+    }
+  ],
+  "result": {
+    "id": "pastel:cooked_lizard_meat"
+  }
+}

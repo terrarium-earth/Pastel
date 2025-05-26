@@ -1,0 +1,31 @@
+{
+  "parent": "pastel:midgame/build_cinderhearth_structure",
+  "display": {
+    "icon": {
+      "id": "minecraft:diamond"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.smelt_in_cinderhearth_with_yield_upgrades.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.smelt_in_cinderhearth_with_yield_upgrades.description"
+    }
+  },
+  "criteria": {
+    "smelted_in_cinderhearth_with_yield_upgrades": {
+      "trigger": "pastel:cinderhearth_smelting",
+      "conditions": {
+        "yield_multiplier": {
+          "min": 1
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/build_cinderhearth_structure"
+      }
+    }
+  }
+}

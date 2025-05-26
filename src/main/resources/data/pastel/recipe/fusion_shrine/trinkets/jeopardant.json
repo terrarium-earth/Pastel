@@ -1,0 +1,27 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_tuff_ring",
+    "pastel:stratine_gem",
+    {
+      "item": "minecraft:lapis_lazuli",
+      "count": 6
+    },
+    {
+      "item": "pastel:red_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:jeopardant"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/jeopardant",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

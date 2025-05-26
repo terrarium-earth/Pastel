@@ -1,0 +1,59 @@
+{
+  "name": "book.pastel.guidebook.pedestal_upgrade_onyx.name",
+  "icon": {
+    "item": "pastel:pedestal_onyx"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:create_onyx_shard"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/onyx_shards"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 8,
+  "y": 1,
+  "turnin": "pastel:midgame/build_advanced_pedestal_structure",
+  "pages": [
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.pedestal_upgrade_onyx.page0.title",
+      "recipe_id": "pastel:pedestal/tier2/pedestal_onyx",
+      "text": "book.pastel.guidebook.pedestal_upgrade_onyx.page0.text"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_name": "multiblock.pastel.pedestal_advanced",
+      "multiblock_id": "pastel:pedestal_advanced",
+      "show_visualize_button": true,
+      "text": "book.pastel.guidebook.pedestal_upgrade_onyx.page1.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.checklist_complete",
+      "text": "book.pastel.guidebook.pedestal_upgrade_onyx.page2.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.checklist_upgrade",
+      "text": "book.pastel.guidebook.pedestal_upgrade_onyx.page3.text"
+    },
+    {
+      "type": "modonomicon:image",
+      "use_legacy_rendering": true,
+      "title": "book.pastel.guidebook.pedestal_customisation.title",
+      "images": [
+        "pastel:textures/gui/guidebook/spectrum_hall_customisation.png"
+      ]
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.pedestal_customisation.text"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "pastel:polished_basalt"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:polished_basalt_pillar",
+    "count": 2
+  }
+}

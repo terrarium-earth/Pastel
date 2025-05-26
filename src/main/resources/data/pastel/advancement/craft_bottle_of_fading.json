@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:bottle_of_fading"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_bottle_of_fading.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_bottle_of_fading.description"
+    }
+  },
+  "parent": "pastel:collect_shimmerstone",
+  "criteria": {
+    "craft": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "pastel:bottle_of_fading"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_shimmerstone"
+      }
+    }
+  }
+}

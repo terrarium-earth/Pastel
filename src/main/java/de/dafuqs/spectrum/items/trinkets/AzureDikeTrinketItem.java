@@ -34,7 +34,7 @@ public abstract class AzureDikeTrinketItem extends SpectrumTrinketItem implement
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.azure_dike_provider.tooltip", maxAzureDike(stack)));
+		tooltip.add(Component.translatable("item.pastel.azure_dike_provider.tooltip", maxAzureDike(stack)));
 	}
 	
 }

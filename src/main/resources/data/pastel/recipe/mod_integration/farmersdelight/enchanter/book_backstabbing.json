@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:stardust"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:red_pigment"
+    },
+    {
+      "item": "pastel:stardust"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "farmersdelight:backstabbing": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:hidden/collect_stardust",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "farmersdelight"
+      ]
+    }
+  ]
+}

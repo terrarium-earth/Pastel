@@ -1,0 +1,6 @@
+{
+  "particle_type": "minecraft:nautilus",
+  "gui_texture": "minecraft:nautilus",
+  "unlock_identifier": "pastel:hidden/collect_vanilla/nautilus_shell",
+  "supports_coloring": false
+}

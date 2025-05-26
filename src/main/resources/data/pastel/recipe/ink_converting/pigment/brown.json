@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "pastel:brown_pigment"
+    }
+  ],
+  "ink_color": "pastel:brown",
+  "amount": 100,
+  "required_advancement": "pastel:hidden/collect_pigment/brown"
+}

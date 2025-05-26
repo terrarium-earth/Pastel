@@ -1,0 +1,44 @@
+{
+  "name": "book.pastel.guidebook.azurite.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/collect_azurite"
+  },
+  "icon": {
+    "item": "pastel:raw_azurite"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 12,
+  "y": -3,
+  "turnin": "pastel:midgame/grow_azurite_in_crystallarieum",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.azurite.name",
+      "item": {
+        "item": "pastel:raw_azurite"
+      },
+      "text": "book.pastel.guidebook.azurite.page0.text"
+    },
+    {
+      "type": "pastel:snippet",
+      "resource_path": "pastel:textures/gui/guidebook/azurite.png",
+      "resource_width": 100,
+      "resource_height": 150,
+      "texture_x": 0,
+      "texture_y": 0,
+      "texture_width": 100,
+      "texture_height": 150,
+      "border": false
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "title": "book.pastel.guidebook.azurite.growing.title",
+      "recipe_id": "pastel:crystallarieum/pastel/azurite"
+    }
+  ]
+}

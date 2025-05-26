@@ -1,0 +1,70 @@
+{
+  "parent": "pastel:craft_using_pedestal",
+  "display": {
+    "icon": {
+      "id": "pastel:pedestal_all_basic"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_cmy_pedestal.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_cmy_pedestal.description"
+    }
+  },
+  "criteria": {
+    "interact_with_existing_pedestal": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type_specific": {
+                "type": "player",
+                "advancements": {
+                  "pastel:craft_using_pedestal": true
+                }
+              }
+            }
+          },
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "pastel:pedestal_all_basic",
+                  "pastel:pedestal_onyx",
+                  "pastel:pedestal_moonstone"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "craft_pedestal": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "pastel:pedestal_all_basic"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:craft_using_pedestal"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "craft_pedestal",
+      "interact_with_existing_pedestal"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

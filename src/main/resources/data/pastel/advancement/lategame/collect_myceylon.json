@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:lategame/collect_noxwood",
+  "display": {
+    "icon": {
+      "id": "pastel:myceylon"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_myceylon.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_myceylon.description"
+    }
+  },
+  "criteria": {
+    "has_myceylon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:myceylon"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

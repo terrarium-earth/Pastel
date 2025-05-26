@@ -229,23 +229,23 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<FluidRecipeI
 		MutableComponent text;
 		if (fermentationData.equals(FermentationData.DEFAULT)) {
 			if (minFermentationTimeHours == 1) {
-				text = Component.translatable("container.spectrum.rei.titration_barrel.time_hour");
+				text = Component.translatable("container.pastel.rei.titration_barrel.time_hour");
 			} else if (minFermentationTimeHours == 24) {
-				text = Component.translatable("container.spectrum.rei.titration_barrel.time_day");
+				text = Component.translatable("container.pastel.rei.titration_barrel.time_day");
 			} else if (minFermentationTimeHours >= 72) {
-				text = Component.translatable("container.spectrum.rei.titration_barrel.time_days", Support.getWithOneDecimalAfterComma(minFermentationTimeHours / 24F));
+				text = Component.translatable("container.pastel.rei.titration_barrel.time_days", Support.getWithOneDecimalAfterComma(minFermentationTimeHours / 24F));
 			} else {
-				text = Component.translatable("container.spectrum.rei.titration_barrel.time_hours", minFermentationTimeHours);
+				text = Component.translatable("container.pastel.rei.titration_barrel.time_hours", minFermentationTimeHours);
 			}
 		} else {
 			if (minFermentationTimeHours == 1) {
-				text = Component.translatable("container.spectrum.rei.titration_barrel.at_least_time_hour");
+				text = Component.translatable("container.pastel.rei.titration_barrel.at_least_time_hour");
 			} else if (minFermentationTimeHours == 24) {
-				text = Component.translatable("container.spectrum.rei.titration_barrel.at_least_time_day");
+				text = Component.translatable("container.pastel.rei.titration_barrel.at_least_time_day");
 			} else if (minFermentationTimeHours > 72) {
-				text = Component.translatable("container.spectrum.rei.titration_barrel.at_least_time_days", Support.getWithOneDecimalAfterComma(minFermentationTimeHours / 24F));
+				text = Component.translatable("container.pastel.rei.titration_barrel.at_least_time_days", Support.getWithOneDecimalAfterComma(minFermentationTimeHours / 24F));
 			} else {
-				text = Component.translatable("container.spectrum.rei.titration_barrel.at_least_time_hours", minFermentationTimeHours);
+				text = Component.translatable("container.pastel.rei.titration_barrel.at_least_time_hours", minFermentationTimeHours);
 			}
 		}
 		return text;

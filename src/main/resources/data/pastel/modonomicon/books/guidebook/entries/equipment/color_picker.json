@@ -1,0 +1,23 @@
+{
+  "type": "modonomicon:entry_link",
+  "entry_to_open": "pastel:ink/color_picker",
+  "name": "block.pastel.color_picker",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/color_picker"
+  },
+  "icon": {
+    "item": "pastel:color_picker"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:equipment/trinkets/base_trinkets"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 10,
+  "y": 5
+}

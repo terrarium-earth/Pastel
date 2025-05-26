@@ -49,7 +49,7 @@ public class SpectrumRecipeTypes {
 		return Registry.register(BuiltInRegistries.RECIPE_TYPE, SpectrumCommon.locate(id), new RecipeType<T>() {
 			@Override
 			public String toString() {
-				return "spectrum:" + id;
+				return "pastel:" + id;
 			}
 		});
 	}

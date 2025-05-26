@@ -1,0 +1,11 @@
+{
+  "type": "pastel:ink_converting",
+  "ingredient": [
+    {
+      "item": "minecraft:purple_dye"
+    }
+  ],
+  "ink_color": "pastel:purple",
+  "amount": 5,
+  "required_advancement": "pastel:hidden/collect_pigment/purple"
+}

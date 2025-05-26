@@ -48,7 +48,7 @@ public class BlackestLotusItem extends Item implements ManaDissolvable {
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		
-		tooltip.add(Component.translatable("item.spectrum.blackest_lotus.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.blackest_lotus.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 	
 }

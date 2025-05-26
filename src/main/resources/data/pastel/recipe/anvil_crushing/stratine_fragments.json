@@ -1,0 +1,17 @@
+{
+  "type": "pastel:anvil_crushing",
+  "ingredient": [
+    {
+      "item": "pastel:stratine_gem"
+    }
+  ],
+  "crushedItemsPerPointOfDamage": 1,
+  "experience": 0.5,
+  "result": {
+    "id": "pastel:stratine_fragments",
+    "count": 8
+  },
+  "particleEffectIdentifier": "explosion",
+  "soundEventIdentifier": "block.glass.break",
+  "required_advancement": "pastel:hidden/collect_stratine_gem"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "modonomicon:entry_link",
+  "entry_to_open": "pastel:general/pigment",
+  "name": "book.pastel.guidebook.pigment.name",
+  "icon": {
+    "item": "pastel:magenta_pigment"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:collect_pigment"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 7,
+  "y": 6
+}

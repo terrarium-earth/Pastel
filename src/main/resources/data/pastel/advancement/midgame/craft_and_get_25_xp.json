@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:midgame/collect_storm_stone",
+  "display": {
+    "icon": {
+      "id": "pastel:upgrade_experience"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_and_get_25_xp.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_and_get_25_xp.description"
+    }
+  },
+  "criteria": {
+    "craft": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "gained_experience": {
+          "min": 25
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_storm_stone"
+      }
+    }
+  }
+}

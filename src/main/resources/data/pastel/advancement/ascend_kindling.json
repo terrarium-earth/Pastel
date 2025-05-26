@@ -1,0 +1,27 @@
+{
+  "parent": "pastel:remember_kindling",
+  "display": {
+    "icon": {
+      "id": "pastel:raw_bloodstone"
+    },
+    "hidden": true,
+    "frame": "challenge",
+    "title": {
+      "translate": "advancements.pastel.ascend_kindling.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.ascend_kindling.description"
+    }
+  },
+  "criteria": {
+    "he_explarded": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:remember_kindling"
+      }
+    }
+  }
+}

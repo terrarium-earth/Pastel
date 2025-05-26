@@ -1,0 +1,29 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    "pastel:black_leaves"
+  ],
+  "results": [
+    {
+      "id": "pastel:black_pigment",
+      "count": 1,
+      "chance": 1.0
+    },
+    {
+      "result": {
+        "id": "pastel:black_sapling",
+        "count": 1
+      },
+      "chance": 0.02
+    }
+  ],
+  "processingTime": 450,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "create"
+      ]
+    }
+  ]
+}

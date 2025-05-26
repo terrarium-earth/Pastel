@@ -36,7 +36,7 @@ public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public Component getOutputLoreText() {
-		return Component.translatable("recipe.spectrum.spawner.lore.increased_spawn_count");
+		return Component.translatable("recipe.pastel.spawner.lore.increased_spawn_count");
 	}
 	
 	@Override

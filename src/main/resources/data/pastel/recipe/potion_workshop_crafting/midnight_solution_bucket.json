@@ -1,0 +1,13 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": "minecraft:bucket",
+  "use_up_base_ingredient": true,
+  "color": 526373,
+  "ingredient1": "pastel:midnight_chip",
+  "ingredient2": "pastel:quitoxic_powder",
+  "ingredient3": "pastel:black_pigment",
+  "result": {
+    "id": "pastel:midnight_solution_bucket"
+  },
+  "required_advancement": "pastel:unlocks/blocks/midnight_solution"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "book.pastel.guidebook.mod_integration.the_bumblezone.name",
+  "icon": {
+    "item": "minecraft:honeycomb"
+  },
+  "condition": {
+    "type": "modonomicon:and",
+    "children": [
+      {
+        "type": "modonomicon:mod_loaded",
+        "mod_id": "the_bumblezone"
+      },
+      {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:place_pedestal"
+      }
+    ]
+  },
+  "category": "pastel:mod_integration",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 7,
+  "y": 4,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.mod_integration.the_bumblezone.page0.text",
+      "title": "book.pastel.guidebook.mod_integration.the_bumblezone.name"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.mod_integration.the_bumblezone.essence_ink.title",
+      "items": [
+        "the_bumblezone:essence_raging",
+        "the_bumblezone:essence_knowing",
+        "the_bumblezone:essence_calming",
+        "the_bumblezone:essence_life",
+        "the_bumblezone:essence_radiance",
+        "the_bumblezone:essence_continuity"
+      ],
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:mod_integration/the_bumblezone/any_essence"
+      },
+      "text": "book.pastel.guidebook.mod_integration.the_bumblezone.essence_ink.text"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "recipe_id": "pastel:mod_integration/the_bumblezone/potion_workshop_brewing/alt_luck"
+    },
+    {
+      "type": "pastel:potion_workshop_brewing",
+      "recipe_id": "pastel:mod_integration/the_bumblezone/potion_workshop_brewing/long_poison"
+    },
+    {
+      "type": "pastel:titration_barrel_fermenting",
+      "recipe_id": "pastel:mod_integration/the_bumblezone/titration_barrel/crown_jewel",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:triggers/confirmed_drinking_age"
+      }
+    }
+  ]
+}

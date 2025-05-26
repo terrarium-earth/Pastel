@@ -34,8 +34,8 @@ public class MessageToast implements Toast {
 	public MessageToast(ItemStack itemStack, String text) {
 		this.itemStack = itemStack;
 		this.soundEvent = SpectrumSoundEvents.NEW_REVELATION;
-		this.titleText = Component.translatable("spectrum.toast.message." + text + ".title");
-		this.messageText = Component.translatable("spectrum.toast.message." + text + ".text");
+		this.titleText = Component.translatable("pastel.toast.message." + text + ".title");
+		this.messageText = Component.translatable("pastel.toast.message." + text + ".text");
 		this.soundPlayed = false;
 	}
 	

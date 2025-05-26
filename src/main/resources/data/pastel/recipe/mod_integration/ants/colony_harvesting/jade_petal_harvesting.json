@@ -1,0 +1,16 @@
+{
+  "type": "ants:colony_harvesting",
+  "hive_ingredient": "pastel:jade_vine_petal_block",
+  "result": {
+    "item": "minecraft:string",
+    "count": 12
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "ants"
+      ]
+    }
+  ]
+}

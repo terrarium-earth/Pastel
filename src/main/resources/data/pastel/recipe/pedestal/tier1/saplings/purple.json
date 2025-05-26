@@ -1,0 +1,29 @@
+{
+  "type": "pastel:pedestal",
+  "group": "colored_saplings",
+  "time": 160,
+  "tier": "basic",
+  "colors": {
+    "pastel:cyan": 2,
+    "pastel:magenta": 3,
+    "pastel:yellow": 1,
+    "pastel:white": 0,
+    "pastel:black": 0
+  },
+  "experience": 1.0,
+  "pattern": [
+    "DDD",
+    "VSV",
+    "DDD"
+  ],
+  "key": {
+    "S": "#minecraft:saplings",
+    "V": "pastel:vegetal",
+    "D": "minecraft:purple_dye"
+  },
+  "result": {
+    "id": "pastel:purple_sapling",
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/colored_saplings/purple_sapling"
+}

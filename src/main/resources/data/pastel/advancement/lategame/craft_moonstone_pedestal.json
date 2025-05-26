@@ -1,0 +1,51 @@
+{
+  "parent": "pastel:lategame/collect_moonstone",
+  "display": {
+    "icon": {
+      "id": "pastel:pedestal_moonstone"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_moonstone_pedestal.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_moonstone_pedestal.description"
+    }
+  },
+  "criteria": {
+    "interact_with_existing_pedestal": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "player": {},
+        "location": [
+          {
+            "condition": "minecraft:block_state_property",
+            "block": "pastel:pedestal_moonstone"
+          }
+        ]
+      }
+    },
+    "crafted_moonstone_pedestal": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": "pastel:pedestal_moonstone"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_moonstone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "crafted_moonstone_pedestal",
+      "interact_with_existing_pedestal"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ]
+}

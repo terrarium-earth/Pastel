@@ -1,0 +1,48 @@
+{
+  "name": "book.pastel.guidebook.gemstone_glass.name",
+  "icon": {
+    "item": "pastel:topaz_glass"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:place_pedestal"
+  },
+  "category": "pastel:decoration",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:decoration/shards"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -2,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.gemstone_glass.name",
+      "text": "book.pastel.guidebook.gemstone_glass.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/glass/topaz_glass"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/glass/amethyst_glass"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/glass/citrine_glass"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/glass/onyx_glass"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/glass/moonstone_glass"
+    }
+  ]
+}

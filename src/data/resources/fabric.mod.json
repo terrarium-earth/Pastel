@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "spectrum-datagen",
+  "id": "pastel-datagen",
   "version": "${version}",
-  "name": "Spectrum",
+  "name": "pastel",
   "description": "The datagen for a full-feature magic mod about harnessing the powers of color",
   "authors": [
     "DaFuqs - Big Boss (Furry)",
@@ -21,15 +21,15 @@
   ],
   "contact": {
     "homepage": "https://github.com/DaFuqs/",
-    "sources": "https://github.com/DaFuqs/Spectrum",
-    "issues": "https://github.com/DaFuqs/Spectrum/issues"
+    "sources": "https://github.com/DaFuqs/pastel",
+    "issues": "https://github.com/DaFuqs/pastel/issues"
   },
   "license": "lGPL3",
-  "icon": "assets/spectrum/icon.png",
+  "icon": "assets/pastel/icon.png",
   "environment": "*",
   "entrypoints": {
     "fabric-datagen": [
-      "de.dafuqs.spectrum.data.SpectrumDataGenerator"
+      "de.dafuqs.pastel.data.SpectrumDataGenerator"
     ]
   },
   "depends": {

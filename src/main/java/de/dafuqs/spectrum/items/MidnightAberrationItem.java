@@ -72,7 +72,7 @@ public class MidnightAberrationItem extends CloakedItem {
 		super.appendHoverText(stack, context, tooltip, type);
 		
 		if (stack.has(SpectrumDataComponentTypes.STABLE))
-			tooltip.add(Component.translatable("item.spectrum.midnight_aberration.tooltip.stable"));
+			tooltip.add(Component.translatable("item.pastel.midnight_aberration.tooltip.stable"));
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class MidnightAberrationItem extends CloakedItem {
 	
 	@Override
 	public @Nullable Tuple<Item, MutableComponent> getCloakedItemTranslation() {
-		return new Tuple<>(this, Component.translatable("item.spectrum.midnight_aberration.cloaked"));
+		return new Tuple<>(this, Component.translatable("item.pastel.midnight_aberration.cloaked"));
 	}
 	
 }

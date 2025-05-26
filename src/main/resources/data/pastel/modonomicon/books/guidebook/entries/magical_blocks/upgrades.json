@@ -1,0 +1,137 @@
+{
+  "name": "book.pastel.guidebook.upgrades.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:midgame/build_advanced_pedestal_structure"
+  },
+  "icon": {
+    "item": "pastel:upgrade_speed"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 1,
+  "x": 10,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.upgrades.page0.text",
+      "title": "book.pastel.guidebook.upgrades.name"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/upgrades/upgrade_speed"
+      },
+      "text": "book.pastel.guidebook.upgrades.page1.text",
+      "recipe_id": "pastel:pedestal/tier3/upgrade_speed"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "advancement": "pastel:unlocks/upgrades/upgrade_speed2",
+      "text": "book.pastel.guidebook.upgrades.page2.text",
+      "recipe_id": "pastel:pedestal/tier3/upgrade_speed2"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "advancement": "pastel:unlocks/upgrades/upgrade_speed3",
+      "text": "book.pastel.guidebook.upgrades.page3.text",
+      "recipe_id": "pastel:pedestal/tier4/upgrade_speed3"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/upgrades/upgrade_experience"
+      },
+      "text": "book.pastel.guidebook.upgrades.page4.text",
+      "recipe_id": "pastel:pedestal/tier3/upgrade_experience"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "advancement": "pastel:unlocks/upgrades/upgrade_experience2",
+      "text": "book.pastel.guidebook.upgrades.page5.text",
+      "recipe_id": "pastel:pedestal/tier3/upgrade_experience2"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/upgrades/upgrade_efficiency"
+      },
+      "text": "book.pastel.guidebook.upgrades.page6.text",
+      "recipe_id": "pastel:pedestal/tier3/upgrade_efficiency"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "advancement": "pastel:unlocks/upgrades/upgrade_efficiency2",
+      "text": "book.pastel.guidebook.upgrades.page7.text",
+      "recipe_id": "pastel:pedestal/tier4/upgrade_efficiency2"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/upgrades/upgrade_yield"
+      },
+      "text": "book.pastel.guidebook.upgrades.page8.text",
+      "recipe_id": "pastel:pedestal/tier4/upgrade_yield"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "advancement": "pastel:unlocks/upgrades/upgrade_yield2",
+      "text": "book.pastel.guidebook.upgrades.page9.text",
+      "recipe_id": "pastel:pedestal/tier4/upgrade_yield2"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_id": "pastel:pedestal_advanced_upgrades",
+      "show_visualize_button": false,
+      "text": "book.pastel.guidebook.four_upgrade_slots",
+      "multiblock_name": "multiblock.pastel.pedestal_advanced"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "multiblock_id": "pastel:fusion_shrine_upgrades",
+      "show_visualize_button": false,
+      "text": "book.pastel.guidebook.four_upgrade_slots",
+      "multiblock_name": "multiblock.pastel.fusion_shrine"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/enchanter"
+      },
+      "multiblock_id": "pastel:enchanter_upgrades",
+      "show_visualize_button": false,
+      "text": "book.pastel.guidebook.four_upgrade_slots",
+      "multiblock_name": "multiblock.pastel.enchanter"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/cinderhearth"
+      },
+      "multiblock_id": "pastel:cinderhearth_upgrades",
+      "show_visualize_button": false,
+      "text": "book.pastel.guidebook.two_upgrade_slots",
+      "multiblock_name": "multiblock.pastel.cinderhearth"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/spirit_instiller"
+      },
+      "multiblock_id": "pastel:spirit_instiller_upgrades",
+      "show_visualize_button": false,
+      "text": "book.pastel.guidebook.two_upgrade_slots",
+      "multiblock_name": "multiblock.pastel.spirit_instiller"
+    }
+  ]
+}

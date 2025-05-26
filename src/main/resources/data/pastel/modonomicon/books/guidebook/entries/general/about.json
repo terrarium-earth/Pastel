@@ -1,0 +1,14 @@
+{
+  "name": "book.pastel.guidebook.about.name",
+  "description": "book.pastel.guidebook.about.description",
+  "icon": "pastel:textures/gui/guidebook/icons/online.png",
+  "category": "pastel:general",
+  "hide_while_locked": false,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": -12,
+  "y": -4,
+  "category_to_open": "pastel:about",
+  "read_by_default": true
+}

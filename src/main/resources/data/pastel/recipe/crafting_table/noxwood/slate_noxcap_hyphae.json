@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "key": {
+    "#": [
+      {
+        "item": "pastel:slate_noxcap_stem"
+      }
+    ]
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 3,
+    "id": "pastel:slate_noxcap_hyphae"
+  }
+}

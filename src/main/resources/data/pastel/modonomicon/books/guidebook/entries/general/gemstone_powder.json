@@ -1,0 +1,51 @@
+{
+  "name": "book.pastel.guidebook.gemstone_powder.name",
+  "description": "book.pastel.guidebook.gemstone_powder.description",
+  "icon": {
+    "item": "pastel:amethyst_powder"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:place_pedestal"
+  },
+  "category": "pastel:general",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:general/item_crushing"
+    },
+    {
+      "entry": "pastel:general/shards",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -6,
+  "y": -1,
+  "turnin": "pastel:collect_gemstone_powder",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.gemstone_powder.page0.text",
+      "title": "book.pastel.guidebook.gemstone_powder.name"
+    },
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.gemstone_powder.page1.title",
+      "text": "book.pastel.guidebook.gemstone_powder.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.compression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/amethyst_powder_block",
+      "text": ""
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "title": "book.pastel.guidebook.decompression",
+      "recipe_id": "pastel:pedestal/tier1/compacting/amethyst_powder_from_amethyst_powder_block",
+      "text": ""
+    }
+  ]
+}

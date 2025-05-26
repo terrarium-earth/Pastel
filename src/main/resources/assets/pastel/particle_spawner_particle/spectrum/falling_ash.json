@@ -1,0 +1,6 @@
+{
+  "particle_type": "pastel:falling_ash",
+  "gui_texture": "pastel:ash_flake_0",
+  "unlock_identifier": "pastel:hidden/visit_dd_biomes/howling_spires",
+  "supports_coloring": false
+}

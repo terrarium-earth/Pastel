@@ -1,0 +1,87 @@
+{
+  "name": "book.pastel.guidebook.weeping_gala.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/discover_weeping_gala"
+  },
+  "icon": {
+    "item": "pastel:weeping_gala_sprig"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/howling_spires",
+      "line_reversed": true
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 5,
+  "y": 10,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:weeping_gala_sprig"
+      },
+      "text": "book.pastel.guidebook.weeping_gala.page0.text"
+    },
+    {
+      "type": "pastel:collection",
+      "title": "book.pastel.guidebook.all_variants",
+      "items": [
+        "pastel:weeping_gala_log",
+        "pastel:stripped_weeping_gala_log",
+        "pastel:weeping_gala_wood",
+        "pastel:stripped_weeping_gala_wood",
+        "pastel:weeping_gala_planks",
+        "pastel:weeping_gala_stairs",
+        "pastel:weeping_gala_slab",
+        "pastel:weeping_gala_fence",
+        "pastel:weeping_gala_fence_gate",
+        "pastel:weeping_gala_door",
+        "pastel:weeping_gala_trapdoor",
+        "pastel:weeping_gala_pressure_plate",
+        "pastel:weeping_gala_button",
+        "pastel:weeping_gala_pillar",
+        "pastel:weeping_gala_barrel",
+        "pastel:weeping_gala_amphora",
+        "pastel:weeping_gala_lantern",
+        "pastel:weeping_gala_lamp",
+        "pastel:weeping_gala_light"
+      ],
+      "text": "book.pastel.guidebook.weeping_gala.page1.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/weeping_gala/barrel",
+      "text": "book.pastel.guidebook.weeping_gala.barrel.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.weeping_gala.amphora.text",
+      "recipe_id": "pastel:pedestal/tier1/weeping_gala/amphora"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/weeping_gala/lamp",
+      "text": "book.pastel.guidebook.weeping_gala.lamp.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/weeping_gala/lantern",
+      "text": "book.pastel.guidebook.weeping_gala.lantern.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/weeping_gala/light",
+      "text": "book.pastel.guidebook.weeping_gala.light.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "recipe_id": "pastel:pedestal/tier1/weeping_gala/pillar",
+      "text": "book.pastel.guidebook.weeping_gala.pillar.text"
+    }
+  ]
+}

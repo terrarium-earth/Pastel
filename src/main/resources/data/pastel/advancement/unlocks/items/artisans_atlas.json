@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "collected_stardust": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_stardust"
+      }
+    },
+    "collected_four_leaf_clover": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_four_leaf_clover"
+      }
+    }
+  }
+}

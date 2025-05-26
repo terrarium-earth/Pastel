@@ -1,0 +1,39 @@
+{
+  "parent": "pastel:midgame/collect_stratine",
+  "display": {
+    "icon": {
+      "id": "pastel:restoration_tea"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.drink_tea_with_milk.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.drink_tea_with_milk.description"
+    }
+  },
+  "criteria": {
+    "drank_tea_with_milk": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:restoration_tea",
+            "pastel:glistering_jelly_tea",
+            "pastel:demon_tea",
+            "pastel:golden_bristle_tea"
+          ],
+          "components": {
+            "pastel:with_milk": {}
+          }
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_stratine"
+      }
+    }
+  }
+}

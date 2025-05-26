@@ -125,7 +125,7 @@ public class ColorSelectionWidget extends AbstractWidget {
 	
 	@Override
 	protected void updateWidgetNarration(NarrationElementOutput builder) {
-		builder.add(NarratedElementType.TITLE, Component.translatable("spectrum.narration.color_selection", this.colorPicker.getSelectedColor()));
+		builder.add(NarratedElementType.TITLE, Component.translatable("pastel.narration.color_selection", this.colorPicker.getSelectedColor()));
 	}
 	
 	private boolean isUnselection(double mouseX, double mouseY) {
@@ -140,7 +140,7 @@ public class ColorSelectionWidget extends AbstractWidget {
 		Minecraft client = Minecraft.getInstance();
 		boolean overUnselection = mouseX >= (double) selectedDotX && mouseX < (double) (selectedDotX + 4) && mouseY >= (double) selectedDotY && mouseY < (double) (selectedDotY + 4);
 		if (overUnselection) {
-			drawContext.renderTooltip(client.font, List.of(Component.translatable("spectrum.tooltip.ink_powered.unselect_color")), Optional.empty(), getX(), getY());
+			drawContext.renderTooltip(client.font, List.of(Component.translatable("pastel.tooltip.ink_powered.unselect_color")), Optional.empty(), getX(), getY());
 		} else {
 			int xOffset = Mth.floor(mouseX) - this.getX();
 			int yOffset = Mth.floor(mouseY) - this.getY();
@@ -153,7 +153,7 @@ public class ColorSelectionWidget extends AbstractWidget {
 			if (hoveredColor.getB()) {
 				drawContext.renderTooltip(client.font, List.of(hoveredColor.getA().getName()), Optional.empty(), getX(), getY());
 			} else {
-				drawContext.renderTooltip(client.font, List.of(Component.translatable("spectrum.tooltip.ink_powered.unselect_color")), Optional.empty(), getX(), getY());
+				drawContext.renderTooltip(client.font, List.of(Component.translatable("pastel.tooltip.ink_powered.unselect_color")), Optional.empty(), getX(), getY());
 			}
 		}
 	}

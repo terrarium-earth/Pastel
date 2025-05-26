@@ -1,0 +1,19 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "group": "restoration_tea",
+  "base_ingredient": "minecraft:glass_bottle",
+  "use_up_base_ingredient": true,
+  "secret": true,
+  "color": 5807774,
+  "ingredient1": "pastel:jade_vine_petals",
+  "ingredient2": "minecraft:cocoa_beans",
+  "ingredient3": "#c:milk",
+  "result": {
+    "id": "pastel:restoration_tea",
+    "components": {
+      "pastel:with_milk": {}
+    },
+    "count": 1
+  },
+  "required_advancement": "pastel:unlocks/food/restoration_tea"
+}

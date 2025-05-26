@@ -1,0 +1,20 @@
+{
+  "criteria": {
+    "crafted_previous_upgrade": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:upgrade_speed2"
+          ]
+        }
+      }
+    },
+    "collected_pure_resource": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/collect_pure_resource"
+      }
+    }
+  }
+}

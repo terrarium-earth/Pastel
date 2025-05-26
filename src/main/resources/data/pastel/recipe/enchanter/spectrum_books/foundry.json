@@ -1,0 +1,51 @@
+{
+  "type": "pastel:enchanter",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:orange_pigment"
+    },
+    {
+      "item": "pastel:orange_pigment"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "pastel:stratine_gem"
+    },
+    {
+      "item": "pastel:orange_pigment"
+    },
+    {
+      "item": "pastel:orange_pigment"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "pastel:stratine_gem"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "pastel:foundry": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/foundry",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "pastel:foundry"
+      ]
+    }
+  ]
+}

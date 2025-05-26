@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_pressure_plate",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": [
+      {
+        "item": "pastel:gray_planks"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:gray_pressure_plate"
+  }
+}

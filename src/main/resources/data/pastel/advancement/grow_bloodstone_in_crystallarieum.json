@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:pluck_resplendent_feather",
+  "display": {
+    "icon": {
+      "id": "pastel:pure_bloodstone"
+    },
+    "title": {
+      "translate": "advancements.pastel.grow_bloodstone_in_crystallarieum.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.grow_bloodstone_in_crystallarieum.description"
+    }
+  },
+  "criteria": {
+    "fully_grown_bloodstone": {
+      "trigger": "pastel:crystallarieum_growing",
+      "conditions": {
+        "grown_block": {
+          "blocks": [
+            "pastel:bloodstone_cluster"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:pluck_resplendent_feather"
+      }
+    }
+  }
+}

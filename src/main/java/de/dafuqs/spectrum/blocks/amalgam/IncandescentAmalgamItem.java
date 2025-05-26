@@ -47,10 +47,10 @@ public class IncandescentAmalgamItem extends BlockItem implements DamageAwareIte
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.incandescent_amalgam.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("block.spectrum.incandescent_amalgam.tooltip_power", getExplosionPower(stack, false)).withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("block.pastel.incandescent_amalgam.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("block.pastel.incandescent_amalgam.tooltip_power", getExplosionPower(stack, false)).withStyle(ChatFormatting.GRAY));
 		if (FermentedItem.isPreviewStack(stack))
-			tooltip.add(Component.translatable("block.spectrum.incandescent_amalgam.tooltip.preview").withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("block.pastel.incandescent_amalgam.tooltip.preview").withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override

@@ -1,0 +1,62 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "pastel:black_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:blue_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:brown_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:cyan_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:green_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:light_blue_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:lime_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:magenta_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:orange_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:pink_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:purple_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:red_pigment"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "pastel:yellow_pigment"
+        }
+      ]
+    }
+  ]
+}

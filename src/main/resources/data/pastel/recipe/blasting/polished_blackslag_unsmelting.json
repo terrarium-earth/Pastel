@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "pastel:blackslag_brick_stairs"
+    },
+    {
+      "item": "pastel:blackslag_brick_wall"
+    },
+    {
+      "item": "pastel:blackslag_bricks"
+    },
+    {
+      "item": "pastel:blackslag_tile_stairs"
+    },
+    {
+      "item": "pastel:blackslag_tile_wall"
+    },
+    {
+      "item": "pastel:blackslag_tiles"
+    },
+    {
+      "item": "pastel:chiseled_polished_blackslag"
+    },
+    {
+      "item": "pastel:cobbled_blackslag_stairs"
+    },
+    {
+      "item": "pastel:cobbled_blackslag_wall"
+    },
+    {
+      "item": "pastel:cracked_blackslag_tiles"
+    },
+    {
+      "item": "pastel:polished_blackslag_button"
+    },
+    {
+      "item": "pastel:polished_blackslag_pressure_plate"
+    },
+    {
+      "item": "pastel:polished_blackslag_stairs"
+    },
+    {
+      "item": "pastel:polished_blackslag_wall"
+    }
+  ],
+  "result": {
+    "id": "pastel:polished_blackslag"
+  },
+  "experience": 0.1,
+  "cookingtime": 100
+}

@@ -1,0 +1,10 @@
+{
+  "type": "pastel:potion_workshop_reacting",
+  "item": "pastel:raw_malachite",
+  "modifiers": {
+    "duration_multiplier": 2.0,
+    "additional_drink_duration_ticks": 54,
+    "flat_yield_bonus": -1.0
+  },
+  "required_advancement": "pastel:lategame/collect_malachite"
+}

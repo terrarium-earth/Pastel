@@ -1,0 +1,35 @@
+{
+  "name": "block.pastel.budding_onyx",
+  "icon": {
+    "item": "pastel:onyx_cluster"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/budding_onyx"
+  },
+  "turnin": "pastel:midgame/budding_onyx",
+  "category": "pastel:creating_life",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:creating_life/spirit_instiller"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": -2,
+  "y": -1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "block.pastel.budding_onyx",
+      "text": "book.pastel.guidebook.budding_onyx.page0.text"
+    },
+    {
+      "type": "pastel:spirit_instiller_crafting",
+      "title": "book.pastel.guidebook.spirit_instiller_recipe",
+      "recipe_id": "pastel:spirit_instiller/budding_onyx",
+      "text": "book.pastel.guidebook.budding_onyx.page1.text"
+    }
+  ]
+}

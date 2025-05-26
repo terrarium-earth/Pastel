@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WW",
+    "WW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:ash_flakes"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:ash"
+  }
+}

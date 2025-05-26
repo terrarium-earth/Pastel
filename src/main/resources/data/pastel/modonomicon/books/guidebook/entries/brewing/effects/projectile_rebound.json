@@ -1,0 +1,23 @@
+{
+  "name": "effect.pastel.projectile_rebound",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/status_effects/projectile_rebound"
+  },
+  "icon": "pastel:textures/mob_effect/projectile_rebound.png",
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 3,
+  "y": 1,
+  "pages": [
+    {
+      "type": "pastel:status_effect",
+      "title": "effect.pastel.projectile_rebound",
+      "status_effect_id": "pastel:projectile_rebound",
+      "text": "book.pastel.guidebook.projectile_rebound.page0.text"
+    }
+  ]
+}

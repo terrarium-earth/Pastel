@@ -1,0 +1,26 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:blast_protection"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:pink_pigment"
+  },
+  "enchantment": "minecraft:blast_protection",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 8
+  },
+  "level_cap": 8,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_protection",
+  "xp_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 100
+  }
+}

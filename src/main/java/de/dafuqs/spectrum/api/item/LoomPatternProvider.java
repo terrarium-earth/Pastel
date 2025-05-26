@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface LoomPatternProvider {
 	
-	Component PATTERN_AVAILABLE_TOOLTIP_TEXT = Component.translatable("item.spectrum.tooltip.loom_pattern_available").withStyle(ChatFormatting.GRAY);
+	Component PATTERN_AVAILABLE_TOOLTIP_TEXT = Component.translatable("item.pastel.tooltip.loom_pattern_available").withStyle(ChatFormatting.GRAY);
 
 	ResourceKey<BannerPattern> getPattern();
 

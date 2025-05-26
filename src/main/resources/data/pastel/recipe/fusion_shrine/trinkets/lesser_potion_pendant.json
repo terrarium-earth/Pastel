@@ -1,0 +1,27 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    "pastel:fanciful_pendant",
+    "pastel:stratine_gem",
+    {
+      "item": "minecraft:glass",
+      "count": 4
+    },
+    {
+      "item": "pastel:pink_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:lesser_potion_pendant"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/lesser_potion_pendant",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

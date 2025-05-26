@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": [
+      {
+        "item": "pastel:topaz_shard"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:polished_topaz_block",
+    "count": 1
+  }
+}

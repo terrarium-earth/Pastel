@@ -41,8 +41,8 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.aether_graced_nectar_gloves.tooltip"));
-		tooltip.add(Component.translatable("item.spectrum.aether_graced_nectar_gloves.tooltip2"));
+		tooltip.add(Component.translatable("item.pastel.aether_graced_nectar_gloves.tooltip"));
+		tooltip.add(Component.translatable("item.pastel.aether_graced_nectar_gloves.tooltip2"));
 	}
 
 	@Override

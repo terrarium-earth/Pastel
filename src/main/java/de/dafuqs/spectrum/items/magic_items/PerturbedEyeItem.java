@@ -65,7 +65,7 @@ public class PerturbedEyeItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.spectrum.perturbed_eye.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.perturbed_eye.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 
 }

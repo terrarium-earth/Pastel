@@ -114,14 +114,14 @@ public class RedstoneTimerBlock extends DiodeBlock {
 			if (serverPlayerEntity.isShiftKeyDown()) {
 				// toggle inactive time
 				TimingStep newStep = blockState.getValue(INACTIVE_TIME).next();
-				serverPlayerEntity.displayClientMessage(Component.translatable("block.spectrum.redstone_timer.setting.inactive").append(Component.translatable(newStep.localizationString)), true);
+				serverPlayerEntity.displayClientMessage(Component.translatable("block.pastel.redstone_timer.setting.inactive").append(Component.translatable(newStep.localizationString)), true);
 				float pitch = 0.5F + newStep.ordinal() * 0.05F;
 				world.playSound(null, pos, SpectrumSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
 				world.setBlockAndUpdate(pos, world.getBlockState(pos).setValue(INACTIVE_TIME, newStep));
 			} else {
 				// toggle active time
 				TimingStep newStep = blockState.getValue(ACTIVE_TIME).next();
-				serverPlayerEntity.displayClientMessage(Component.translatable("block.spectrum.redstone_timer.setting.active").append(Component.translatable(newStep.localizationString)), true);
+				serverPlayerEntity.displayClientMessage(Component.translatable("block.pastel.redstone_timer.setting.active").append(Component.translatable(newStep.localizationString)), true);
 				float pitch = 0.5F + newStep.ordinal() * 0.05F;
 				world.playSound(null, pos, SpectrumSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, pitch);
 				world.setBlockAndUpdate(pos, world.getBlockState(pos).setValue(ACTIVE_TIME, newStep));
@@ -148,11 +148,11 @@ public class RedstoneTimerBlock extends DiodeBlock {
 	}
 	
 	public enum TimingStep implements StringRepresentable {
-		FOUR_TICKS("four_ticks", 4, "block.spectrum.redstone_timer.setting.four_ticks"),
-		ONE_SECOND("one_second", 20, "block.spectrum.redstone_timer.setting.one_second"),
-		TEN_SECONDS("ten_seconds", 10 * 20, "block.spectrum.redstone_timer.setting.ten_seconds"),
-		ONE_MINUTE("one_minute", 60 * 20, "block.spectrum.redstone_timer.setting.one_minute"),
-		TEN_MINUTES("ten_minutes", 60 * 20 * 10, "block.spectrum.redstone_timer.setting.ten_minutes");
+		FOUR_TICKS("four_ticks", 4, "block.pastel.redstone_timer.setting.four_ticks"),
+		ONE_SECOND("one_second", 20, "block.pastel.redstone_timer.setting.one_second"),
+		TEN_SECONDS("ten_seconds", 10 * 20, "block.pastel.redstone_timer.setting.ten_seconds"),
+		ONE_MINUTE("one_minute", 60 * 20, "block.pastel.redstone_timer.setting.one_minute"),
+		TEN_MINUTES("ten_minutes", 60 * 20 * 10, "block.pastel.redstone_timer.setting.ten_minutes");
 		
 		public final int ticks;
 		public final String localizationString;

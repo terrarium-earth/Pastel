@@ -1,0 +1,30 @@
+{
+  "name": "block.pastel.compacting_chest",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/compacting_chest"
+  },
+  "icon": {
+    "item": "pastel:compacting_chest"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 1,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.compacting_chest.page0.text",
+      "title": "block.pastel.compacting_chest"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.compacting_chest.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/compacting_chest"
+    }
+  ]
+}

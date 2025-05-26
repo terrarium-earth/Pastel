@@ -1,0 +1,47 @@
+{
+  "parent": "pastel:lategame/craft_moonstone_pedestal",
+  "display": {
+    "icon": {
+      "id": "pastel:moonstone_chiseled_calcite"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.build_complex_pedestal_structure_without_moonstone.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.build_complex_pedestal_structure_without_moonstone.description"
+    }
+  },
+  "criteria": {
+    "built_structure": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:pedestal_complex_without_moonstone"
+      }
+    },
+    "built_complete_structure": {
+      "trigger": "pastel:completed_multiblock",
+      "conditions": {
+        "multiblock_identifier": "pastel:pedestal_complex_structure_check"
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/craft_moonstone_pedestal"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "built_structure",
+      "built_complete_structure"
+    ],
+    [
+      "gotten_previous"
+    ]
+  ],
+  "rewards": {
+    "experience": 500
+  }
+}

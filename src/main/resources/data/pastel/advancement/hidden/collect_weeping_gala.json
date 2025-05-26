@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "collected_weeping_gala_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pastel:weeping_gala_sprig",
+              "pastel:weeping_gala_leaves",
+              "pastel:weeping_gala_log",
+              "pastel:stripped_weeping_gala_log"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

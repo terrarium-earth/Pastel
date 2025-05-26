@@ -64,8 +64,8 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
 	
 	public static boolean tryAdvanceTime(ServerLevel world, ServerPlayer user) {
 		switch (canAdvanceTime(world)) {
-			case FAILED_GAME_RULE -> user.displayClientMessage(Component.translatable("item.spectrum.celestial_pocketwatch.tooltip.use_blocked_gamerule"), true);
-			case FAILED_FIXED_TIME -> user.displayClientMessage(Component.translatable("item.spectrum.celestial_pocketwatch.tooltip.use_blocked_fixed_time"), true);
+			case FAILED_GAME_RULE -> user.displayClientMessage(Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_gamerule"), true);
+			case FAILED_FIXED_TIME -> user.displayClientMessage(Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_fixed_time"), true);
 			case SUCCESS -> {
 				if (InkPowered.tryDrainEnergy(user, COST)) {
 					world.playSound(null, user.blockPosition(), SpectrumSoundEvents.CELESTIAL_POCKET_WATCH_TICKING, SoundSource.PLAYERS, 1.0F, 1.0F);
@@ -105,9 +105,9 @@ public class CelestialPocketWatchItem extends Item implements InkPowered {
 		var world = Minecraft.getInstance().level;
 		if (world != null) {
 			switch (canAdvanceTime(world)) {
-				case FAILED_GAME_RULE -> tooltip.add(Component.translatable("item.spectrum.celestial_pocketwatch.tooltip.use_blocked_gamerule").withStyle(ChatFormatting.GRAY));
-				case FAILED_FIXED_TIME -> tooltip.add(Component.translatable("item.spectrum.celestial_pocketwatch.tooltip.use_blocked_fixed_time").withStyle(ChatFormatting.GRAY));
-				case SUCCESS -> tooltip.add(Component.translatable("item.spectrum.celestial_pocketwatch.tooltip.working").withStyle(ChatFormatting.GRAY));
+				case FAILED_GAME_RULE -> tooltip.add(Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_gamerule").withStyle(ChatFormatting.GRAY));
+				case FAILED_FIXED_TIME -> tooltip.add(Component.translatable("item.pastel.celestial_pocketwatch.tooltip.use_blocked_fixed_time").withStyle(ChatFormatting.GRAY));
+				case SUCCESS -> tooltip.add(Component.translatable("item.pastel.celestial_pocketwatch.tooltip.working").withStyle(ChatFormatting.GRAY));
 			}
 		}
 		

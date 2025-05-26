@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": [
+    {
+      "item": "pastel:pyrite"
+    }
+  ],
+  "result": {
+    "id": "pastel:pyrite_slab"
+  },
+  "count": 2
+}

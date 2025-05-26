@@ -1,0 +1,30 @@
+{
+  "type": "pastel:titration_barrel",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket",
+      "count": 1
+    },
+    {
+      "item": "minecraft:sugar",
+      "count": 4
+    }
+  ],
+  "min_fermentation_time_hours": 1,
+  "result": {
+    "id": "pastel:clotted_cream",
+    "count": 4
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:not",
+      "value": {
+        "condition": "pastel:tags_populated",
+        "registry": "minecraft:fluid",
+        "values": [
+          "minecraft:water"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "effect.pastel.toughness",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/status_effects/toughness"
+  },
+  "icon": "pastel:textures/mob_effect/toughness.png",
+  "category": "pastel:brewing",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 4,
+  "x": 5,
+  "y": 0,
+  "pages": [
+    {
+      "type": "pastel:status_effect",
+      "title": "effect.pastel.toughness",
+      "status_effect_id": "pastel:toughness",
+      "text": "book.pastel.guidebook.toughness.page0.text"
+    }
+  ]
+}

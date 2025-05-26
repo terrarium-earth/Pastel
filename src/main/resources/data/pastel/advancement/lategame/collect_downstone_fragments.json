@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:lategame/find_excavation_site",
+  "display": {
+    "icon": {
+      "id": "pastel:downstone_fragments"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_downstone_fragments.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_downstone_fragments.description"
+    }
+  },
+  "criteria": {
+    "collected_downstone_fragments": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:downstone_fragments"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/find_excavation_site"
+      }
+    }
+  }
+}

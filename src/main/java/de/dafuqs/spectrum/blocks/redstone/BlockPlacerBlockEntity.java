@@ -19,7 +19,7 @@ public class BlockPlacerBlockEntity extends DispenserBlockEntity implements Side
 	
 	@Override
 	protected Component getDefaultName() {
-		return Component.translatable("block.spectrum.block_placer");
+		return Component.translatable("block.pastel.block_placer");
 	}
 	
 	@Override

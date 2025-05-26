@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:lategame/collect_dd_resources",
+  "display": {
+    "icon": {
+      "id": "pastel:slate_noxcap_stem"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_noxwood.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_noxwood.description"
+    }
+  },
+  "criteria": {
+    "has_noxwood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#pastel:noxwood"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+      }
+    }
+  }
+}

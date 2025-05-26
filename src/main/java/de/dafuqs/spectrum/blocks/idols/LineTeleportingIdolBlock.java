@@ -58,8 +58,8 @@ public class LineTeleportingIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.line_teleporting_idol.tooltip", range));
-		tooltip.add(Component.translatable("block.spectrum.line_teleporting_idol.tooltip2", range));
+		tooltip.add(Component.translatable("block.pastel.line_teleporting_idol.tooltip", range));
+		tooltip.add(Component.translatable("block.pastel.line_teleporting_idol.tooltip2", range));
 	}
 	
 	@Override

@@ -1,0 +1,52 @@
+{
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "pastel:bedrock_dust"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "pastel:cyan_pigment"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "pastel:bedrock_dust"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "minecraft:unbreaking": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_unbreaking",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:unbreaking"
+      ]
+    }
+  ]
+}

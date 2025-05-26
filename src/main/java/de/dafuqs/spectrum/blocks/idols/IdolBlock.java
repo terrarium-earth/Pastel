@@ -46,7 +46,7 @@ public abstract class IdolBlock extends Block {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.mob_block.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("block.pastel.mob_block.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override

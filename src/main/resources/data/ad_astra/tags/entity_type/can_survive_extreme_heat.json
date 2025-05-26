@@ -1,8 +1,8 @@
 {
   "values": [
-    "spectrum:living_marker",
+    "pastel:living_marker",
 
-    "spectrum:preservation_turret",
-    "spectrum:kindling"
+    "pastel:preservation_turret",
+    "pastel:kindling"
   ]
 }

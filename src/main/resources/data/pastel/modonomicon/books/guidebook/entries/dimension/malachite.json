@@ -1,0 +1,39 @@
+{
+  "name": "book.pastel.guidebook.malachite.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:lategame/collect_malachite"
+  },
+  "icon": {
+    "item": "pastel:raw_malachite"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/blackslag"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 0,
+  "y": 6,
+  "turnin": "pastel:lategame/grow_malachite_in_crystallarieum",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "book.pastel.guidebook.malachite.name",
+      "text": "book.pastel.guidebook.malachite.page0.text"
+    },
+    {
+      "type": "pastel:crystallarieum_growing",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:unlocks/blocks/crystallarieum"
+      },
+      "title": "book.pastel.guidebook.malachite.page1.title",
+      "recipe_id": "pastel:crystallarieum/pastel/malachite",
+      "text": "book.pastel.guidebook.malachite.page1.text"
+    }
+  ]
+}

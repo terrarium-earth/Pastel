@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW"
+  ],
+  "key": {
+    "W": [
+      {
+        "item": "pastel:basal_marble_bricks"
+      }
+    ]
+  },
+  "result": {
+    "id": "pastel:basal_marble_brick_slab",
+    "count": 6
+  }
+}

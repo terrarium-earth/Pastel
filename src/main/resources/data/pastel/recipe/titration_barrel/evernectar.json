@@ -1,0 +1,33 @@
+{
+  "type": "pastel:titration_barrel",
+  "ingredients": [
+    {
+      "item": "pastel:nectardew_burgeon",
+      "count": 4
+    },
+    {
+      "item": "pastel:pure_coal",
+      "count": 8
+    },
+    {
+      "item": "pastel:frostbite_essence",
+      "count": 8
+    },
+    {
+      "item": "pastel:star_fragment",
+      "count": 2
+    },
+    {
+      "item": "pastel:quitoxic_powder",
+      "count": 2
+    }
+  ],
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "min_fermentation_time_hours": 24,
+  "result": {
+    "id": "pastel:evernectar"
+  },
+  "required_advancement": "pastel:hidden/collect_cookbooks/poisoners_handbook"
+}

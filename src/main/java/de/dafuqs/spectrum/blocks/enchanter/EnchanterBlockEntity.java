@@ -76,10 +76,10 @@ import java.util.UUID;
 // Still do, still do...
 public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implements MultiblockCrafter, SidedCapabilityProvider {
 	
-	public static final String ITEM_TRANS = "container.spectrum.rei.enchantment_upgrade.required_item_count";
-	public static final String LEVEL_TRANS = "container.spectrum.rei.enchantment_upgrade.level";
-	public static final String OVERCHANTING_TOOLTIP = "container.spectrum.rei.enchantment_upgrade.tooltip";
-	public static final String CYCLING = "container.spectrum.rei.enchantment_upgrade.button";
+	public static final String ITEM_TRANS = "container.pastel.rei.enchantment_upgrade.required_item_count";
+	public static final String LEVEL_TRANS = "container.pastel.rei.enchantment_upgrade.level";
+	public static final String OVERCHANTING_TOOLTIP = "container.pastel.rei.enchantment_upgrade.tooltip";
+	public static final String CYCLING = "container.pastel.rei.enchantment_upgrade.button";
 	
 	public static final List<Vec3i> ITEM_BOWL_OFFSETS = new ArrayList<>() {{
 		add(new Vec3i(5, 0, -3));

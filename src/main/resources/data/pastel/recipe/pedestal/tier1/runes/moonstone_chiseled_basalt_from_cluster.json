@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "gemstone_chiseled_blocks",
+  "time": 80,
+  "tier": "complex",
+  "colors": {
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:cyan": 0,
+    "pastel:black": 0,
+    "pastel:white": 4
+  },
+  "experience": 1.0,
+  "pattern": [
+    "WWW",
+    "WXW",
+    "WWW"
+  ],
+  "key": {
+    "W": "pastel:polished_basalt",
+    "X": "pastel:moonstone_cluster"
+  },
+  "result": {
+    "id": "pastel:moonstone_chiseled_basalt",
+    "count": 8
+  },
+  "required_advancement": "pastel:lategame/collect_moonstone"
+}

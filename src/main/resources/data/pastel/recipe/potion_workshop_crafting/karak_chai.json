@@ -1,0 +1,17 @@
+{
+  "type": "pastel:potion_workshop_crafting",
+  "base_ingredient": {
+    "item": "minecraft:glass_bottle",
+    "count": 2
+  },
+  "use_up_base_ingredient": true,
+  "color": 16758914,
+  "ingredient1": "pastel:milky_resin",
+  "ingredient2": "pastel:nightdew_sprout",
+  "ingredient3": "minecraft:beetroot_seeds",
+  "result": {
+    "id": "pastel:karak_chai",
+    "count": 2
+  },
+  "required_advancement": "pastel:unlocks/food/karak_chai"
+}

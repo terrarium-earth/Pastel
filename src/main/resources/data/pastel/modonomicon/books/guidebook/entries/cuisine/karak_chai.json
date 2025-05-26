@@ -1,0 +1,30 @@
+{
+  "name": "item.pastel.karak_chai",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/food/karak_chai"
+  },
+  "icon": {
+    "item": "pastel:karak_chai"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 8,
+  "y": 5,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.karak_chai.page0.text",
+      "title": "item.pastel.karak_chai"
+    },
+    {
+      "type": "pastel:potion_workshop_crafting",
+      "title": "book.pastel.guidebook.potion_workshop_crafting",
+      "recipe_id": "pastel:potion_workshop_crafting/karak_chai",
+      "text": "book.pastel.guidebook.karak_chai.page1.text"
+    }
+  ]
+}

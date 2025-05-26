@@ -150,9 +150,9 @@ public class PresentBlock extends BaseEntityBlock {
 						world.scheduleTick(pos, state.getBlock(), TICKS_PER_OPENING_STEP);
 					} else {
 						if (presentBlockEntity.getOwnerName() != null) {
-							player.displayClientMessage(Component.translatable("block.spectrum.present.tooltip.wrapped_placed.giver", presentBlockEntity.getOwnerName()), true);
+							player.displayClientMessage(Component.translatable("block.pastel.present.tooltip.wrapped_placed.giver", presentBlockEntity.getOwnerName()), true);
 						} else {
-							player.displayClientMessage(Component.translatable("block.spectrum.present.tooltip.wrapped_placed"), true);
+							player.displayClientMessage(Component.translatable("block.pastel.present.tooltip.wrapped_placed"), true);
 						}
 						
 					}

@@ -1,0 +1,44 @@
+{
+  "name": "enchantment.pastel.inexorable",
+  "icon": {
+    "item": "minecraft:iron_pickaxe"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/enchantments/inexorable"
+  },
+  "flag": "pastel:enchantment_exists_spectrum_inexorable",
+  "category": "pastel:enchanting",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "y": 0,
+  "x": 6,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.inexorable.page0.text",
+      "title": "enchantment.pastel.inexorable"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "title": "book.pastel.guidebook.enchantment_characteristics",
+      "item": {
+        "item": "minecraft:iron_pickaxe"
+      },
+      "components": {
+        "enchantments": {
+          "pastel:inexorable": 1
+        }
+      },
+      "text": "book.pastel.guidebook.inexorable.page1.text"
+    },
+    {
+      "type": "pastel:enchanter_crafting",
+      "text": "book.pastel.guidebook.crafting",
+      "title": "container.pastel.rei.enchanter_recipe",
+      "recipe_id": "pastel:enchanter/spectrum_books/inexorable"
+    }
+  ]
+}

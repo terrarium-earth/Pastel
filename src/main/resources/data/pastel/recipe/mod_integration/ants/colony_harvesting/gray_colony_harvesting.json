@@ -1,0 +1,18 @@
+{
+  "type": "ants:colony_harvesting",
+  "group": "spectrum_leaves_harvesting",
+  "hive_ingredient": "pastel:gray_leaves",
+  "hand_ingredient": "pastel:vegetal",
+  "result": {
+    "item": "pastel:gray_pigment",
+    "count": 6
+  },
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "ants"
+      ]
+    }
+  ]
+}

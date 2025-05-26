@@ -51,7 +51,7 @@ public class CrystalApothecaryBlock extends BaseEntityBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.crystal_apothecary.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("block.pastel.crystal_apothecary.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override

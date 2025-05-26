@@ -30,7 +30,7 @@ public class AnvilCrushingEmiRecipeGated extends GatedSpectrumEmiRecipe<AnvilCru
 		widgets.addTexture(EmiTexture.EMPTY_ARROW, 50, 16);
 		widgets.addSlot(outputs.getFirst(), 90, 11).large(true).recipeContext(this);
 		
-		widgets.addText(Component.translatable("container.spectrum.rei.anvil_crushing.plus_xp", recipe.getExperience()),
+		widgets.addText(Component.translatable("container.pastel.rei.anvil_crushing.plus_xp", recipe.getExperience()),
 				width, 40, 0x3f3f3f, false).horizontalAlign(Alignment.END);
 		
 		widgets.addText(getForceText(), width / 2, 54, 0x3f3f3f, false).horizontalAlign(Alignment.CENTER);
@@ -38,11 +38,11 @@ public class AnvilCrushingEmiRecipeGated extends GatedSpectrumEmiRecipe<AnvilCru
 
 	public Component getForceText() {
 		if (recipe.getCrushedItemsPerPointOfDamage() >= 1) {
-			return Component.translatable("container.spectrum.rei.anvil_crushing.low_force_required");
+			return Component.translatable("container.pastel.rei.anvil_crushing.low_force_required");
 		} else if (recipe.getCrushedItemsPerPointOfDamage() >= 0.5) {
-			return Component.translatable("container.spectrum.rei.anvil_crushing.medium_force_required");
+			return Component.translatable("container.pastel.rei.anvil_crushing.medium_force_required");
 		} else {
-			return Component.translatable("container.spectrum.rei.anvil_crushing.high_force_required");
+			return Component.translatable("container.pastel.rei.anvil_crushing.high_force_required");
 		}
 	}
 }

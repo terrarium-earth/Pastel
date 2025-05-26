@@ -1,0 +1,30 @@
+{
+  "type": "pastel:fusion_shrine",
+  "time": 600,
+  "experience": 2.0,
+  "fluid": {
+    "fluid": "pastel:liquid_crystal"
+  },
+  "ingredients": [
+    {
+      "item": "pastel:polished_calcite",
+      "count": 4
+    },
+    "pastel:star_fragment",
+    {
+      "item": "pastel:stardust",
+      "count": 16
+    },
+    {
+      "item": "pastel:yellow_pigment",
+      "count": 16
+    }
+  ],
+  "result": {
+    "id": "pastel:gleaming_pin"
+  },
+  "required_advancement": "pastel:unlocks/trinkets/gleaming_pin",
+  "start_crafting_effect": "nothing",
+  "during_crafting_effects": [],
+  "finish_crafting_effect": "single_visual_explosion_on_shrine"
+}

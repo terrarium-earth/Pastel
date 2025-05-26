@@ -1,0 +1,52 @@
+{
+  "type": "pastel:enchanter",
+  "group": "vanilla",
+  "time": 300,
+  "required_experience": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "pastel:bedrock_dust"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "pastel:pink_pigment"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "pastel:bedrock_dust"
+    }
+  ],
+  "result": {
+    "id": "minecraft:enchanted_book",
+    "components": {
+      "stored_enchantments": {
+        "minecraft:fire_protection": 1
+      }
+    }
+  },
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_protection",
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:fire_protection"
+      ]
+    }
+  ]
+}

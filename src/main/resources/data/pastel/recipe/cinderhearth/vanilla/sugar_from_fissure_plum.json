@@ -1,0 +1,16 @@
+{
+  "type": "pastel:cinderhearth",
+  "ingredient": {
+    "item": "pastel:fissure_plum",
+    "count": 2
+  },
+  "results": [
+    {
+      "id": "minecraft:sugar",
+      "count": 3
+    }
+  ],
+  "experience": 1.0,
+  "time": 50,
+  "required_advancement": "pastel:hidden/collect_fissure_plum"
+}

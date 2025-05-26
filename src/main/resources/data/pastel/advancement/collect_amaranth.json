@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:collect_vegetal",
+  "display": {
+    "icon": {
+      "id": "pastel:amaranth_grains"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.collect_amaranth.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_amaranth.description"
+    }
+  },
+  "criteria": {
+    "has_amaranth_grains": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:amaranth_grains"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_vegetal"
+      }
+    }
+  }
+}

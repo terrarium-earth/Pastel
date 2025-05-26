@@ -1,0 +1,35 @@
+{
+  "name": "book.pastel.guidebook.doomblooms.name",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:hidden/interact_with_doombloom"
+  },
+  "icon": {
+    "item": "pastel:doombloom_seed"
+  },
+  "category": "pastel:dimension",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:dimension/dragonrot_swamp"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 6,
+  "y": 6,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.doomblooms.page0.text",
+      "title": "book.pastel.guidebook.doomblooms.name"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "id": "pastel:doombloom_seed"
+      },
+      "text": "book.pastel.guidebook.doomblooms.page1.text"
+    }
+  ]
+}

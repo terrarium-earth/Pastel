@@ -1,0 +1,26 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "pastel:enchantments_exist",
+      "values": [
+        "minecraft:wind_burst"
+      ]
+    }
+  ],
+  "type": "pastel:enchantment_upgrade",
+  "bulk_item": {
+    "item": "pastel:yellow_pigment"
+  },
+  "enchantment": "minecraft:wind_burst",
+  "group": "minecraft",
+  "item_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 16
+  },
+  "level_cap": 5,
+  "required_advancement": "pastel:unlocks/enchantments/vanilla_damage",
+  "xp_scaling": {
+    "type": "pastel:doubling",
+    "scaling_value": 200
+  }
+}

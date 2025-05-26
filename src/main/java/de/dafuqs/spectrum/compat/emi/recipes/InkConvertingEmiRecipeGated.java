@@ -22,8 +22,8 @@ public class InkConvertingEmiRecipeGated extends GatedSpectrumEmiRecipe<InkConve
 		widgets.addTexture(EmiTexture.EMPTY_ARROW, 22, 1);
 
 		// output amount & required time
-		Component colorText = Component.translatable("container.spectrum.rei.ink_converting.color", recipe.getInkColor().getName());
-		Component amountText = Component.translatable("container.spectrum.rei.ink_converting.amount", recipe.getInkAmount());
+		Component colorText = Component.translatable("container.pastel.rei.ink_converting.color", recipe.getInkColor().getName());
+		Component amountText = Component.translatable("container.pastel.rei.ink_converting.amount", recipe.getInkAmount());
 		widgets.addText(colorText, 50, 1, 0x3f3f3f, false);
 		widgets.addText(amountText, 50, 11, 0x3f3f3f, false);
 	}

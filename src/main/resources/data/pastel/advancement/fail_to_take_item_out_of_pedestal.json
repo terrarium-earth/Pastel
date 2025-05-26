@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:paintbrush"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.fail_to_take_item_out_of_pedestal.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.fail_to_take_item_out_of_pedestal.description"
+    }
+  },
+  "parent": "pastel:place_pedestal",
+  "criteria": {
+    "try_take_out_item_from_pedestal": {
+      "trigger": "minecraft:impossible"
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:place_pedestal"
+      }
+    }
+  }
+}

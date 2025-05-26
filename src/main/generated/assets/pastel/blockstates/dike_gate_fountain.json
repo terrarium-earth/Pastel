@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "pastel:block/dike_gate_fountain",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "pastel:block/dike_gate_fountain",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "pastel:block/dike_gate_fountain",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "pastel:block/dike_gate_fountain",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "pastel:block/dike_gate_fountain"
+    },
+    "facing=west": {
+      "model": "pastel:block/dike_gate_fountain",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

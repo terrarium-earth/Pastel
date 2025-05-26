@@ -35,19 +35,19 @@ public class BookCrystallarieumGrowingPageRenderer extends BookGatedRecipePageRe
 		ResourceLocation font = BookDataManager.Client.get().safeFont(this.page.getBook().getFont());
 
         if (catalystText == null) {
-			catalystText = new BookTextHolder(Component.translatable("container.spectrum.modonomicon.crystallarieum.catalyst").withStyle(s -> s.withFont(font)));
+			catalystText = new BookTextHolder(Component.translatable("container.pastel.modonomicon.crystallarieum.catalyst").withStyle(s -> s.withFont(font)));
         }
 
         if (page.getRecipe1() != null) {
             craftingTimeText1 = new BookTextHolder(Component.translatable(page.getRecipe1().value().growsWithoutCatalyst()
-                    ? "container.spectrum.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional"
-					: "container.spectrum.rei.crystallarieum.crafting_time_per_stage_seconds", page.getRecipe1().value().getSecondsPerGrowthStage()).withStyle(s -> s.withFont(font)));
+                    ? "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional"
+					: "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds", page.getRecipe1().value().getSecondsPerGrowthStage()).withStyle(s -> s.withFont(font)));
         }
 
         if (page.getRecipe2() != null) {
             craftingTimeText2 = new BookTextHolder(Component.translatable(page.getRecipe2().value().growsWithoutCatalyst()
-                    ? "container.spectrum.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional"
-					: "container.spectrum.rei.crystallarieum.crafting_time_per_stage_seconds", page.getRecipe2().value().getSecondsPerGrowthStage()).withStyle(s -> s.withFont(font)));
+                    ? "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds_catalyst_optional"
+					: "container.pastel.rei.crystallarieum.crafting_time_per_stage_seconds", page.getRecipe2().value().getSecondsPerGrowthStage()).withStyle(s -> s.withFont(font)));
         }
     }
 	

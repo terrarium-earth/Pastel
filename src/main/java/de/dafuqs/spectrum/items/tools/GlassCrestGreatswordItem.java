@@ -54,8 +54,8 @@ public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDam
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.glass_crest_ultra_greatsword.tooltip", (int) (MAGIC_DAMAGE_SHARE * 100)));
-		tooltip.add(Component.translatable("item.spectrum.glass_crest_ultra_greatsword.tooltip2"));
+		tooltip.add(Component.translatable("item.pastel.glass_crest_ultra_greatsword.tooltip", (int) (MAGIC_DAMAGE_SHARE * 100)));
+		tooltip.add(Component.translatable("item.pastel.glass_crest_ultra_greatsword.tooltip2"));
 		addInkPoweredTooltip(tooltip);
 	}
 	

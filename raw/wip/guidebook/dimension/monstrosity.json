@@ -1,15 +1,15 @@
 {
-  "name": "book.spectrum.guidebook.monstrosity.name",
+  "name": "book.pastel.guidebook.monstrosity.name",
   "icon": "minecraft:air",
   "condition": {
     "type": "modonomicon:advancement",
-    "advancement_id": "spectrum:hidden/entity_interact/killed_by_monstrosity"
+    "advancement_id": "pastel:hidden/entity_interact/killed_by_monstrosity"
   },
-  "category": "spectrum:dimension",
+  "category": "pastel:dimension",
   "hide_while_locked": true,
   "parents": [
     {
-      "entry": "spectrum:dimension/creatures"
+      "entry": "pastel:dimension/creatures"
     }
   ],
   "background_u_index": 0,
@@ -19,8 +19,8 @@
   "pages": [
     {
       "type": "modonomicon:text",
-      "title": "book.spectrum.guidebook.monstrosity.name",
-      "text": "book.spectrum.guidebook.monstrosity.page0.text"
+      "title": "book.pastel.guidebook.monstrosity.name",
+      "text": "book.pastel.guidebook.monstrosity.page0.text"
     }
   ]
 }

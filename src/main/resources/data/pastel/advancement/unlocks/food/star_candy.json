@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "has_amaranth_bushel": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_amaranth_bushel"
+      }
+    },
+    "has_stardust": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:hidden/collect_stardust"
+      }
+    }
+  }
+}

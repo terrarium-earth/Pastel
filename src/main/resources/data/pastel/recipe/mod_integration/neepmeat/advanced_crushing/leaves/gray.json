@@ -1,0 +1,26 @@
+{
+  "type": "neepmeat:advanced_crushing",
+  "input": {
+    "resource": "pastel:gray_leaves",
+    "amount": 1
+  },
+  "output": {
+    "resource": "pastel:gray_pigment",
+    "amount": 1
+  },
+  "extra": {
+    "resource": "pastel:gray_sapling",
+    "amount": 1,
+    "chance": 0.03
+  },
+  "experience": 0.7,
+  "processtime": 45,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "neepmeat"
+      ]
+    }
+  ]
+}

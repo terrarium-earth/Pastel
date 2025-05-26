@@ -42,7 +42,7 @@ public class SlimeSizingIdolBlock extends IdolBlock {
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("block.spectrum.slime_sizing_idol.tooltip"));
+		tooltip.add(Component.translatable("block.pastel.slime_sizing_idol.tooltip"));
 	}
 	
 	@Override

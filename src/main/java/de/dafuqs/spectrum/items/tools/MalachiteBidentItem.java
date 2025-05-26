@@ -181,7 +181,7 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		if (isDisabled(stack))
-			tooltip.add(Component.translatable("item.spectrum.bident.toolTip.disabled").withStyle(ChatFormatting.RED, ChatFormatting.ITALIC));
+			tooltip.add(Component.translatable("item.pastel.bident.toolTip.disabled").withStyle(ChatFormatting.RED, ChatFormatting.ITALIC));
 	}
 	
 	@Override
@@ -232,16 +232,16 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 	@Override
 	public void expandTooltipPostStats(ItemStack stack, @Nullable Player player, List<Component> tooltip, TooltipContext context) {
 		if (Screen.hasShiftDown()) {
-			tooltip.add(Component.translatable("item.spectrum.bident.postToolTip.ap", armorPierce * 100).withStyle(ChatFormatting.DARK_GREEN));
+			tooltip.add(Component.translatable("item.pastel.bident.postToolTip.ap", armorPierce * 100).withStyle(ChatFormatting.DARK_GREEN));
 			
 			if (protPierce > 0) {
-				tooltip.add(Component.translatable("item.spectrum.bident.postToolTip.pp", protPierce * 100).withStyle(ChatFormatting.DARK_GREEN));
+				tooltip.add(Component.translatable("item.pastel.bident.postToolTip.pp", protPierce * 100).withStyle(ChatFormatting.DARK_GREEN));
 			}
 			if (canBeDisabled()) {
-				tooltip.add(Component.translatable("item.spectrum.bident.postToolTip.disable").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
+				tooltip.add(Component.translatable("item.pastel.bident.postToolTip.disable").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
 			}
 		} else {
-			tooltip.add(Component.translatable("spectrum.tooltip.press_shift_for_more").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
+			tooltip.add(Component.translatable("pastel.tooltip.press_shift_for_more").withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC));
 		}
 	}
 	

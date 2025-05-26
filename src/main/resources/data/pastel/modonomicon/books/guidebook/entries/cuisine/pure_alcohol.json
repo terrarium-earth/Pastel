@@ -1,0 +1,35 @@
+{
+  "name": "item.pastel.pure_alcohol",
+  "icon": {
+    "item": "pastel:pure_alcohol"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:tap_pure_alcohol"
+  },
+  "category": "pastel:cuisine",
+  "hide_while_locked": true,
+  "parents": [
+    {
+      "entry": "pastel:cuisine/infused_beverages"
+    }
+  ],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 4,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "item.pastel.pure_alcohol",
+      "item": {
+        "item": "pastel:pure_alcohol"
+      },
+      "text": "book.pastel.guidebook.pure_alcohol.page0.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.disinfect"
+    }
+  ]
+}

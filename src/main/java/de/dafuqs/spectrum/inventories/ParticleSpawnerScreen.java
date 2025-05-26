@@ -153,20 +153,20 @@ public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawn
 		drawContext.drawString(tr, Component.literal("Glow"), 130, 54, TEXT_COLOR, false);
 		
 		int offset = 23;
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.particle_count"), 10, 53 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.particle_count"), 10, 53 + offset, TEXT_COLOR, false);
 		drawContext.drawString(tr, Component.literal("x"), 66, 64 + offset, TEXT_COLOR, false);
 		drawContext.drawString(tr, Component.literal("y"), 99, 64 + offset, TEXT_COLOR, false);
 		drawContext.drawString(tr, Component.literal("z"), 134, 64 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.offset"), 10, 78 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.variance"), 21, 97 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.velocity"), 10, 117 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.variance"), 21, 137 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.scale"), 10, 161 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.variance"), 91, 161 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.duration"), 10, 181 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.variance"), 91, 181 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.gravity"), 10, 201 + offset, TEXT_COLOR, false);
-		drawContext.drawString(tr, Component.translatable("block.spectrum.particle_spawner.collisions"), 90, 201 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.offset"), 10, 78 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.variance"), 21, 97 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.velocity"), 10, 117 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.variance"), 21, 137 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.scale"), 10, 161 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.variance"), 91, 161 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.duration"), 10, 181 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.variance"), 91, 181 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.gravity"), 10, 201 + offset, TEXT_COLOR, false);
+		drawContext.drawString(tr, Component.translatable("block.pastel.particle_spawner.collisions"), 90, 201 + offset, TEXT_COLOR, false);
 	}
 	
 	@Override
@@ -218,7 +218,7 @@ public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawn
 		cyanField = addTextFieldWidget(startX + 16, startY + 51, Component.literal("Cyan"), String.valueOf(configuration.cmyColor().getX()), this::isPositiveDecimalNumber100);
 		magentaField = addTextFieldWidget(startX + 57, startY + 51, Component.literal("Magenta"), String.valueOf(configuration.cmyColor().getY()), this::isPositiveDecimalNumber100);
 		yellowField = addTextFieldWidget(startX + 97, startY + 51, Component.literal("Yellow"), String.valueOf(configuration.cmyColor().getZ()), this::isPositiveDecimalNumber100);
-		glowingButton = Button.builder(Component.translatable("gui.spectrum.button.glowing"), this::glowingButtonPressed)
+		glowingButton = Button.builder(Component.translatable("gui.pastel.button.glowing"), this::glowingButtonPressed)
 				.size(16, 16)
 				.pos(startX + 153, startY + 50)
 				.build();
@@ -245,7 +245,7 @@ public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawn
 		durationVariance = addTextFieldWidget(startX + 139, startY + 178 + offset, Component.literal("Duration Variance"), String.valueOf(configuration.lifetimeVariance()), this::isPositiveWholeNumberUnderThousand);
 		gravity = addTextFieldWidget(startX + 55, startY + 198 + offset, Component.literal("Gravity"), String.valueOf(configuration.gravity()), this::isBetweenZeroAndOne);
 		
-		collisionsButton = Button.builder(Component.translatable("gui.spectrum.button.collisions"), this::collisionButtonPressed)
+		collisionsButton = Button.builder(Component.translatable("gui.pastel.button.collisions"), this::collisionButtonPressed)
 				.pos(startX + 142, startY + 194 + offset)
 				.size(16, 16)
 				.build();
@@ -276,12 +276,12 @@ public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawn
 		selectableWidgets.add(gravity);
 		selectableWidgets.add(collisionsButton);
 		
-		backButton = Button.builder(Component.translatable("gui.spectrum.button.back"), this::navigationButtonPressed)
+		backButton = Button.builder(Component.translatable("gui.pastel.button.back"), this::navigationButtonPressed)
 				.size(12, 14)
 				.pos(startX + 11, startY + 19)
 				.build();
 		addWidget(backButton);
-		forwardButton = Button.builder(Component.translatable("gui.spectrum.button.forward"), this::navigationButtonPressed)
+		forwardButton = Button.builder(Component.translatable("gui.pastel.button.forward"), this::navigationButtonPressed)
 				.size(12, 14)
 				.pos(startX + 147, startY + 19)
 				.build();
@@ -345,7 +345,7 @@ public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawn
 	}
 	
 	private @NotNull Button addParticleButton(int x, int y) {
-		Button button = Button.builder(Component.translatable("gui.spectrum.button.particles"), this::particleButtonPressed)
+		Button button = Button.builder(Component.translatable("gui.pastel.button.particles"), this::particleButtonPressed)
 				.size(20, 20)
 				.pos(x, y)
 				.build();

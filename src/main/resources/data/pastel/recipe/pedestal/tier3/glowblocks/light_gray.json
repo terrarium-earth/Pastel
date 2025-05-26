@@ -1,0 +1,28 @@
+{
+  "type": "pastel:pedestal",
+  "group": "glowblocks",
+  "time": 200,
+  "tier": "complex",
+  "colors": {
+    "pastel:cyan": 0,
+    "pastel:magenta": 0,
+    "pastel:yellow": 0,
+    "pastel:white": 4,
+    "pastel:black": 2
+  },
+  "experience": 1.0,
+  "pattern": [
+    "PQP",
+    "QPQ",
+    "PQP"
+  ],
+  "key": {
+    "P": "pastel:light_gray_pigment",
+    "Q": "pastel:quitoxic_powder"
+  },
+  "result": {
+    "id": "pastel:light_gray_glowblock",
+    "count": 4
+  },
+  "required_advancement": "pastel:unlocks/glowblocks/light_gray_glowblock"
+}

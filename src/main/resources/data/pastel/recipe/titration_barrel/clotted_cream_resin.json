@@ -1,0 +1,19 @@
+{
+  "type": "pastel:titration_barrel",
+  "ingredients": [
+    {
+      "item": "pastel:milky_resin",
+      "count": 1
+    },
+    {
+      "item": "minecraft:sugar",
+      "count": 4
+    }
+  ],
+  "min_fermentation_time_hours": 1,
+  "required_advancement": "pastel:hidden/collect_milky_resin",
+  "result": {
+    "id": "pastel:clotted_cream",
+    "count": 16
+  }
+}

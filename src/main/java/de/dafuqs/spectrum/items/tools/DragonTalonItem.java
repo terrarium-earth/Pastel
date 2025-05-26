@@ -59,9 +59,9 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 	
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		tooltip.add(Component.translatable("item.spectrum.dragon_talon.tooltip").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.dragon_talon.tooltip2").withStyle(ChatFormatting.GRAY));
-		tooltip.add(Component.translatable("item.spectrum.dragon_talon.tooltip3").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.dragon_talon.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.dragon_talon.tooltip2").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.dragon_talon.tooltip3").withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override

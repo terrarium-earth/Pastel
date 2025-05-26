@@ -11,11 +11,9 @@ import de.dafuqs.spectrum.recipe.enchanter.EnchantmentUpgradeRecipe;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
 import de.dafuqs.spectrum.registries.SpectrumFluids;
 import de.dafuqs.spectrum.registries.SpectrumResourceConditions;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.*;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -290,7 +288,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				),
 				List.of(PURE_REDSTONE.getDefaultInstance()));
 		
-		generateCrystallarieumRecipe(ctx, "spectrum/azurite", RAW_AZURITE, null, COLLECT_AZURITE, 300, InkColors.BLUE, 4, false,
+		generateCrystallarieumRecipe(ctx, "pastel/azurite", RAW_AZURITE, null, COLLECT_AZURITE, 300, InkColors.BLUE, 4, false,
 				List.of(SpectrumBlocks.SMALL_AZURITE_BUD, SpectrumBlocks.LARGE_AZURITE_BUD, SpectrumBlocks.AZURITE_CLUSTER),
 				List.of(
 						new CrystallarieumCatalyst(Ingredient.of(Items.RAW_COPPER), 7.5f, 10.0f, 0.05f),
@@ -299,7 +297,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				),
 				List.of(PURE_AZURITE.getDefaultInstance()));
 		
-		generateCrystallarieumRecipe(ctx, "spectrum/bismuth", BISMUTH_FLAKE, null, null, 120, InkColors.CYAN, 4, false,
+		generateCrystallarieumRecipe(ctx, "pastel/bismuth", BISMUTH_FLAKE, null, null, 120, InkColors.CYAN, 4, false,
 				List.of(SpectrumBlocks.SMALL_BISMUTH_BUD, SpectrumBlocks.LARGE_BISMUTH_BUD, SpectrumBlocks.BISMUTH_CLUSTER),
 				List.of(
 						new CrystallarieumCatalyst(Ingredient.of(BISMUTH_FLAKE), 8.0f, 1.0f, 0.2f),
@@ -308,7 +306,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				),
 				List.of(BISMUTH_CRYSTAL.getDefaultInstance()));
 		
-		generateCrystallarieumRecipe(ctx, "spectrum/bloodstone", RAW_BLOODSTONE, null, UNLOCK_BLOODSTONE, 300, InkColors.RED, 4, false,
+		generateCrystallarieumRecipe(ctx, "pastel/bloodstone", RAW_BLOODSTONE, null, UNLOCK_BLOODSTONE, 300, InkColors.RED, 4, false,
 				List.of(SpectrumBlocks.SMALL_BLOODSTONE_BUD, SpectrumBlocks.LARGE_BLOODSTONE_BUD, SpectrumBlocks.BLOODSTONE_CLUSTER),
 				List.of(
 						new CrystallarieumCatalyst(Ingredient.of(Items.RAW_COPPER), 7.5f, 10.0f, 0.05f),
@@ -317,7 +315,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				),
 				List.of(PURE_BLOODSTONE.getDefaultInstance()));
 		
-		generateCrystallarieumRecipe(ctx, "spectrum/malachite", RAW_MALACHITE, null, COLLECT_MALACHITE, 300, InkColors.WHITE, 4, false,
+		generateCrystallarieumRecipe(ctx, "pastel/malachite", RAW_MALACHITE, null, COLLECT_MALACHITE, 300, InkColors.WHITE, 4, false,
 				List.of(SpectrumBlocks.SMALL_MALACHITE_BUD, SpectrumBlocks.LARGE_MALACHITE_BUD, SpectrumBlocks.MALACHITE_CLUSTER),
 				List.of(
 						new CrystallarieumCatalyst(Ingredient.of(MOONSTONE_POWDER), 1.0f, 1.0f, 0.04f)
@@ -384,7 +382,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				stages.stream().map(s -> s.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP)).toList(),
 				secondsPerStage, inkColor, 1 << (inkCostTier - 1), growsWithoutCatalyst,
 				catalysts,
-				new FluidStack(medium == null ? SpectrumFluids.LIQUID_CRYSTAL : medium),
+				new FluidStack(medium == null ? SpectrumFluids.LIQUID_CRYSTAL : medium, FluidType.BUCKET_VOLUME),
 				additionalResults));
 	}
 	

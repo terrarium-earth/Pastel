@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:chrysocolla"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.tap_chrysocolla.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.tap_chrysocolla.description"
+    }
+  },
+  "parent": "pastel:midgame/drink_jade_wine",
+  "criteria": {
+    "tapped_chrysocolla": {
+      "trigger": "pastel:titration_barrel_tapping",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:chrysocolla"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/plant_jade_vines"
+      }
+    }
+  }
+}

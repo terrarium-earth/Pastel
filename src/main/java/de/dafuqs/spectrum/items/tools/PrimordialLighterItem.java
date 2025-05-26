@@ -53,7 +53,7 @@ public class PrimordialLighterItem extends FlintAndSteelItem implements Creative
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.spectrum.primordial_lighter.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.primordial_lighter.tooltip").withStyle(ChatFormatting.GRAY));
 		CreativeOnlyItem.appendTooltip(tooltip);
 	}
 	

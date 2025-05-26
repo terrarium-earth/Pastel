@@ -1,0 +1,33 @@
+{
+  "parent": "pastel:collect_amaranth_bushel",
+  "display": {
+    "icon": {
+      "id": "pastel:salted_jaramel_trifle"
+    },
+    "title": {
+      "translate": "advancements.pastel.craft_salted_jaramel_trifle_or_tart.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.craft_salted_jaramel_trifle_or_tart.description"
+    }
+  },
+  "criteria": {
+    "crafted_salty_pastry": {
+      "trigger": "pastel:crafted_with_pedestal",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:salted_jaramel_trifle",
+            "pastel:salted_jaramel_tart"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_amaranth_bushel"
+      }
+    }
+  }
+}

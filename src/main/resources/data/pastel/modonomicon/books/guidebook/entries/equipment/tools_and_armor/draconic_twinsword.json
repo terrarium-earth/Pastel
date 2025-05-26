@@ -1,0 +1,48 @@
+{
+  "name": "item.pastel.draconic_twinsword",
+  "icon": {
+    "item": "pastel:draconic_twinsword"
+  },
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/equipment/draconic_twinsword"
+  },
+  "category": "pastel:equipment",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 2,
+  "y": 1,
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "title": "item.pastel.draconic_twinsword",
+      "text": "book.pastel.guidebook.draconic_twinsword.page0.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "recipe_id": "pastel:fusion_shrine/draconic_twinsword",
+      "text": "book.pastel.guidebook.draconic_twinsword.page1.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.draconic_twinsword.page2.text"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "item": {
+        "item": "pastel:draconic_twinsword"
+      },
+      "text": "book.pastel.guidebook.draconic_twinsword.page3.text"
+    },
+    {
+      "type": "modonomicon:text",
+      "text": "book.pastel.guidebook.draconic_twinsword.page4.text"
+    },
+    {
+      "type": "pastel:fusion_shrine_crafting",
+      "recipe_id": "pastel:fusion_shrine/draconic_twinsword_reclaim"
+    }
+  ]
+}

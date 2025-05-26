@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "pastel:enchanted_star_candy"
+    },
+    "hidden": true,
+    "title": {
+      "translate": "advancements.pastel.consume_enchanted_star_candy.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.consume_enchanted_star_candy.description"
+    }
+  },
+  "parent": "pastel:collect_amaranth_bushel",
+  "criteria": {
+    "consumed_enchanted_star_candy": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "pastel:enchanted_star_candy"
+          ]
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:collect_amaranth_bushel"
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "values": [
-    "#spectrum:gemstone_blocks",
-    "#spectrum:budding_blocks",
+    "#pastel:gemstone_blocks",
+    "#pastel:budding_blocks",
 
-    "spectrum:ethereal_platform"
+    "pastel:ethereal_platform"
   ]
 }

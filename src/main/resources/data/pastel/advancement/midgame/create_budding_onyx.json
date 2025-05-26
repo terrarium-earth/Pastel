@@ -1,0 +1,32 @@
+{
+  "parent": "pastel:midgame/harvest_moonstruck_nectar",
+  "display": {
+    "icon": {
+      "id": "pastel:budding_onyx"
+    },
+    "title": {
+      "translate": "advancements.pastel.create_budding_onyx.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.create_budding_onyx.description"
+    }
+  },
+  "criteria": {
+    "instilled_budding_onyx": {
+      "trigger": "pastel:crafted_with_spirit_instiller",
+      "conditions": {
+        "items": [
+          {
+            "items": "pastel:budding_onyx"
+          }
+        ]
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/harvest_moonstruck_nectar"
+      }
+    }
+  }
+}

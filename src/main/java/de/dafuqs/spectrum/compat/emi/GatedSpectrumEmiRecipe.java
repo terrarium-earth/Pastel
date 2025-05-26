@@ -13,8 +13,8 @@ import java.util.List;
 
 public abstract class GatedSpectrumEmiRecipe<T extends GatedRecipe<?>> extends SpectrumEmiRecipe {
 	
-	public static final Component SECRET = Component.translatable("container.spectrum.rei.pedestal_crafting.secret_recipe");
-	public static final Component SECRET_HINT = Component.translatable("container.spectrum.rei.pedestal_crafting.secret_recipe.hint");
+	public static final Component SECRET = Component.translatable("container.pastel.rei.pedestal_crafting.secret_recipe");
+	public static final Component SECRET_HINT = Component.translatable("container.pastel.rei.pedestal_crafting.secret_recipe.hint");
 	
 	public final @Nullable Component secretHintText;
 	

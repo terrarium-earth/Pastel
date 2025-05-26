@@ -1,5 +1,5 @@
 {
-  "type": "spectrum:modify_drops",
+  "type": "pastel:modify_drops",
   "block": {
     "blocks": "#c:ores"
   },
@@ -8,25 +8,25 @@
       "input": {
         "item": "spelunkery:rough_diamond"
       },
-      "output": "spectrum:pure_diamond"
+      "output": "pastel:pure_diamond"
     },
     {
       "input": {
         "item": "spelunkery:rough_emerald"
       },
-      "output": "spectrum:pure_emerald"
+      "output": "pastel:pure_emerald"
     },
     {
       "input": {
         "item": "spelunkery:rough_lazurite"
       },
-      "output": "spectrum:pure_lapis"
+      "output": "pastel:pure_lapis"
     },
     {
       "input": {
         "item": "spelunkery:rough_cinnabar"
       },
-      "output": "spectrum:pure_redstone"
+      "output": "pastel:pure_redstone"
     }
   ],
   "fabric:load_conditions": [

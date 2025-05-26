@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/present",
+  "textures": {
+    "particle": "minecraft:block/orange_wool",
+    "texture": "pastel:block/present_pride"
+  }
+}

@@ -137,7 +137,7 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements EntityBlock,
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		tooltip.addAll(this.pastelNodeType.getTooltips());
-		tooltip.add(Component.translatable("block.spectrum.pastel_network_nodes.tooltip.range", PastelNodeBlockEntity.RANGE).withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("block.pastel.pastel_network_nodes.tooltip.range", PastelNodeBlockEntity.RANGE).withStyle(ChatFormatting.GRAY));
 	}
 	
 	@Override

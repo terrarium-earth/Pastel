@@ -1,0 +1,16 @@
+{
+  "criteria": {
+    "unlocked_glass_crest_tools": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/malachite/glass_crest_tools"
+      }
+    },
+    "unlocked_resonance_crafting": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:unlocks/enchantments/resonance_crafting"
+      }
+    }
+  }
+}

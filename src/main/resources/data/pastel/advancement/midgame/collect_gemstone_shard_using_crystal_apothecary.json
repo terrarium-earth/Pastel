@@ -1,0 +1,30 @@
+{
+  "parent": "pastel:midgame/collect_storm_stone",
+  "display": {
+    "icon": {
+      "id": "pastel:crystal_apothecary"
+    },
+    "title": {
+      "translate": "advancements.pastel.collect_gemstone_shard_using_crystal_apothecary.title"
+    },
+    "description": {
+      "translate": "advancements.pastel.collect_gemstone_shard_using_crystal_apothecary.description"
+    }
+  },
+  "criteria": {
+    "collected_using_crystal_apothecary": {
+      "trigger": "pastel:collect_using_crystal_apothecary",
+      "conditions": {
+        "item": {
+          "items": "#pastel:gemstone_shards"
+        }
+      }
+    },
+    "gotten_previous": {
+      "trigger": "revelationary:advancement_gotten",
+      "conditions": {
+        "advancement_identifier": "pastel:midgame/collect_storm_stone"
+      }
+    }
+  }
+}
