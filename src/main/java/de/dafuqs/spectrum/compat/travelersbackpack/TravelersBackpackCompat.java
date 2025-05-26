@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.compat.travelersbackpack;
 
 import com.tiviacz.travelersbackpack.api.fluids.EffectFluid;
 import com.tiviacz.travelersbackpack.fluids.EffectFluidRegistry;
+import de.dafuqs.fractal.api.*;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.registries.SpectrumDamageTypes;

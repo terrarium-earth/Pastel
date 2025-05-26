@@ -74,9 +74,9 @@ import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.event.lifecycle.*;
 import net.neoforged.neoforge.client.ClientHooks;
 
-@OnlyIn(Dist.CLIENT)
 public class SpectrumModelLayers {
 	
 	/**
@@ -224,7 +224,7 @@ public class SpectrumModelLayers {
 	public static final ResourceLocation BEDROCK_ARMOR_MAIN_ID = SpectrumCommon.locate("textures/armor/bedrock_armor_main.png");
 	
 	
-	public static void register() {
+	public static void register(FMLClientSetupEvent event) {
 		ClientHooks.registerLayerDefinition(WOOLY_PIG, EggLayingWoolyPigEntityModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(WOOLY_PIG_HAT, EggLayingWoolyPigHatEntityModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(WOOLY_PIG_WOOL, EggLayingWoolyPigWoolEntityModel::getTexturedModelData);

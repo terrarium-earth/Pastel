@@ -1,11 +1,10 @@
 package de.dafuqs.spectrum.compat.botania;
 
-import de.dafuqs.fractal.api.ItemSubGroupEvents;
+import de.dafuqs.fractal.api.ModifyItemSubGroupEntriesEvent;
 import de.dafuqs.spectrum.api.color.ItemColors;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.api.interaction.ItemProvider;
 import de.dafuqs.spectrum.api.interaction.ItemProviderRegistry;
-import de.dafuqs.spectrum.api.item_group.ItemGroupIDs;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.registries.SpectrumItems;
 import net.neoforged.api.distmarker.Dist;
@@ -69,11 +68,13 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		
 		// registering it late, since Botania might not have been initialized yet
 		NeoForge.EVENT_BUS.addListener(BotaniaCompat::onServerStarted);
-		
-		ItemSubGroupEvents.modifyEntriesEvent(ItemGroupIDs.SUBTAB_EQUIPMENT).register(entries -> {
-			entries.accept(LEAST_BLACK_LOTUS);
-			entries.accept(BLACKEST_LOTUS);
-		});
+		NeoForge.EVENT_BUS.addListener(BotaniaCompat::addEntries);
+	}
+
+	private static void addEntries(ModifyItemSubGroupEntriesEvent event) {
+		var entries = event.getEntries();
+		entries.accept(LEAST_BLACK_LOTUS);
+		entries.accept(BLACKEST_LOTUS);
 	}
 	
 	@OnlyIn(Dist.CLIENT)

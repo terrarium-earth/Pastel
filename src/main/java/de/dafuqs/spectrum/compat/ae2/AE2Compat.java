@@ -1,12 +1,11 @@
 package de.dafuqs.spectrum.compat.ae2;
 
-import de.dafuqs.fractal.api.ItemSubGroupEvents;
+import de.dafuqs.fractal.api.ModifyItemSubGroupEntriesEvent;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
-import de.dafuqs.spectrum.api.item_group.ItemGroupIDs;
+import de.dafuqs.spectrum.api.item_group.*;
 import de.dafuqs.spectrum.blocks.crystallarieum.SpectrumClusterBlock;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
-import de.dafuqs.spectrum.registries.SpectrumBlocks;
-import de.dafuqs.spectrum.registries.SpectrumItems;
+import de.dafuqs.spectrum.registries.*;
 import de.dafuqs.spectrum.registries.SpectrumItems.IS;
 import de.dafuqs.spectrum.registries.client.SpectrumModels;
 import net.neoforged.api.distmarker.Dist;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.neoforge.common.*;
 
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.blockWithItem;
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.cluster;
@@ -39,25 +39,31 @@ public class AE2Compat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
 	public static Item PURE_CERTUS_QUARTZ = SpectrumItems.register(simple(item("pure_certus_quartz", new Item(IS.of()), InkColors.YELLOW)));
 	public static Item PURE_FLUIX = SpectrumItems.register(simple(item("pure_fluix", new Item(IS.of()), InkColors.YELLOW)));
-	
+
 	@Override
 	public void register() {
 		SpectrumItems.ITEM_REGISTRAR.flush();
 		SpectrumBlocks.COMMON_REGISTRAR.flush();
-		
-		ItemSubGroupEvents.modifyEntriesEvent(ItemGroupIDs.SUBTAB_PURE_RESOURCES).register(entries -> {
-			entries.accept(PURE_CERTUS_QUARTZ);
-			entries.accept(SMALL_CERTUS_QUARTZ_BUD);
-			entries.accept(LARGE_CERTUS_QUARTZ_BUD);
-			entries.accept(CERTUS_QUARTZ_CLUSTER);
-			entries.accept(PURE_CERTUS_QUARTZ_BLOCK);
-			
-			entries.accept(PURE_FLUIX);
-			entries.accept(SMALL_FLUIX_BUD);
-			entries.accept(LARGE_FLUIX_BUD);
-			entries.accept(FLUIX_CLUSTER);
-			entries.accept(PURE_FLUIX_BLOCK);
-		});
+
+		NeoForge.EVENT_BUS.addListener(AE2Compat::addEntries);
+	}
+
+	private static void addEntries(ModifyItemSubGroupEntriesEvent event) {
+		if (!event.getId().equals(ItemGroupIDs.SUBTAB_PURE_RESOURCES))
+			return;
+
+		var entries = event.getEntries();
+		entries.accept(PURE_CERTUS_QUARTZ);
+		entries.accept(SMALL_CERTUS_QUARTZ_BUD);
+		entries.accept(LARGE_CERTUS_QUARTZ_BUD);
+		entries.accept(CERTUS_QUARTZ_CLUSTER);
+		entries.accept(PURE_CERTUS_QUARTZ_BLOCK);
+
+		entries.accept(PURE_FLUIX);
+		entries.accept(SMALL_FLUIX_BUD);
+		entries.accept(LARGE_FLUIX_BUD);
+		entries.accept(FLUIX_CLUSTER);
+		entries.accept(PURE_FLUIX_BLOCK);
 	}
 	
 	@Override

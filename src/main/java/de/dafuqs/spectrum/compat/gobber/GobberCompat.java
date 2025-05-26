@@ -1,8 +1,7 @@
 package de.dafuqs.spectrum.compat.gobber;
 
-import de.dafuqs.fractal.api.ItemSubGroupEvents;
+import de.dafuqs.fractal.api.ModifyItemSubGroupEntriesEvent;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
-import de.dafuqs.spectrum.api.item_group.ItemGroupIDs;
 import de.dafuqs.spectrum.blocks.crystallarieum.SpectrumClusterBlock;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
@@ -16,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.neoforge.common.*;
 
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.blockWithItem;
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.cluster;
@@ -47,26 +47,28 @@ public class GobberCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public void register() {
 		SpectrumItems.ITEM_REGISTRAR.flush();
 		SpectrumBlocks.COMMON_REGISTRAR.flush();
-		
-		ItemSubGroupEvents.modifyEntriesEvent(ItemGroupIDs.SUBTAB_PURE_RESOURCES).register(entries -> {
-			entries.accept(PURE_GLOBETTE);
-			entries.accept(SMALL_GLOBETTE_BUD);
-			entries.accept(LARGE_GLOBETTE_BUD);
-			entries.accept(GLOBETTE_CLUSTER);
-			entries.accept(PURE_GLOBETTE_BLOCK);
-			
-			entries.accept(PURE_GLOBETTE_NETHER);
-			entries.accept(SMALL_GLOBETTE_NETHER_BUD);
-			entries.accept(LARGE_GLOBETTE_NETHER_BUD);
-			entries.accept(GLOBETTE_NETHER_CLUSTER);
-			entries.accept(PURE_GLOBETTE_NETHER_BLOCK);
-			
-			entries.accept(PURE_GLOBETTE_END);
-			entries.accept(SMALL_GLOBETTE_END_BUD);
-			entries.accept(LARGE_GLOBETTE_END_BUD);
-			entries.accept(GLOBETTE_END_CLUSTER);
-			entries.accept(PURE_GLOBETTE_END_BLOCK);
-		});
+		NeoForge.EVENT_BUS.addListener(GobberCompat::addEntries);
+	}
+
+	private static void addEntries(ModifyItemSubGroupEntriesEvent event) {
+		var entries = event.getEntries();
+		entries.accept(PURE_GLOBETTE);
+		entries.accept(SMALL_GLOBETTE_BUD);
+		entries.accept(LARGE_GLOBETTE_BUD);
+		entries.accept(GLOBETTE_CLUSTER);
+		entries.accept(PURE_GLOBETTE_BLOCK);
+
+		entries.accept(PURE_GLOBETTE_NETHER);
+		entries.accept(SMALL_GLOBETTE_NETHER_BUD);
+		entries.accept(LARGE_GLOBETTE_NETHER_BUD);
+		entries.accept(GLOBETTE_NETHER_CLUSTER);
+		entries.accept(PURE_GLOBETTE_NETHER_BLOCK);
+
+		entries.accept(PURE_GLOBETTE_END);
+		entries.accept(SMALL_GLOBETTE_END_BUD);
+		entries.accept(LARGE_GLOBETTE_END_BUD);
+		entries.accept(GLOBETTE_END_CLUSTER);
+		entries.accept(PURE_GLOBETTE_END_BLOCK);
 	}
 	
 	@Override

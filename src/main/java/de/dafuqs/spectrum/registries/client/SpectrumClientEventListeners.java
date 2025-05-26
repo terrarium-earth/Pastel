@@ -30,8 +30,12 @@ import de.dafuqs.spectrum.registries.SpectrumItems;
 import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.sound.BiomeAttenuatingSoundInstance;
 import de.dafuqs.spectrum.sound.BlockAuraSoundInstance;
+import net.minecraft.client.model.*;
+import net.minecraft.server.packs.*;
+import net.minecraft.server.packs.repository.*;
 import net.minecraft.server.packs.resources.*;
 import net.minecraft.util.profiling.*;
+import net.minecraft.world.entity.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -45,8 +49,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -61,7 +63,9 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.extensions.common.*;
 import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.*;
 import net.neoforged.neoforge.event.tick.*;
 import net.neoforged.neoforge.resource.*;
@@ -86,6 +90,7 @@ public class SpectrumClientEventListeners {
 		pastelBus.addListener(SpectrumClientEventListeners::onReloadClientResources);
 		pastelBus.addListener(SpectrumColorProviders::registerBlocks);
 		pastelBus.addListener(SpectrumColorProviders::registerItems);
+		pastelBus.addListener(SpectrumClientEventListeners::addResourcePacks);
 
 		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onWorldRenderStart);
 		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onRenderBlockOutlines);
@@ -97,6 +102,17 @@ public class SpectrumClientEventListeners {
 
 		registerCustomItemRenderer(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), BottomlessBundleItem.Renderer::new);
 		registerCustomItemRenderer(SpectrumItems.OMNI_ACCELERATOR, OmniAcceleratorItem.Renderer::new);
+	}
+
+	private static void addResourcePacks(AddPackFindersEvent event) {
+		event.addPackFinders(
+				SpectrumCommon.locate("spectrum_style_amethyst"),
+				PackType.CLIENT_RESOURCES,
+				Component.literal("Spectrum-Style Amethyst"),
+				PackSource.BUILT_IN,
+				false,
+				Pack.Position.TOP
+		);
 	}
 
 	private static void onEntityTick(EntityTickEvent event) {

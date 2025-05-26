@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GenericClaimModsCompat {
 	
-	public static final boolean IS_COMMON_PROTECTION_API_PRESENT = ModList.get().isLoaded("common-protection-api");
+	// TODO: Add Odyssey Claims compat.
 	
 	/**
 	 * Call this for all kinds of world modifications
@@ -22,23 +22,14 @@ public class GenericClaimModsCompat {
 	 * @return if modification is allowed
 	 */
 	public static boolean canBreak(Level world, BlockPos pos, @Nullable Entity cause) {
-		if (IS_COMMON_PROTECTION_API_PRESENT) {
-			return CommonProtectionApiCompat.canBreak(world, pos, cause);
-		}
 		return true;
 	}
 	
 	public static boolean canInteract(Level world, Entity entity, @Nullable Entity cause) {
-		if (IS_COMMON_PROTECTION_API_PRESENT) {
-			return CommonProtectionApiCompat.canInteract(world, entity, cause);
-		}
 		return true;
 	}
 
 	public static boolean canInteract(Level world, BlockPos pos, @Nullable Entity cause) {
-		if (IS_COMMON_PROTECTION_API_PRESENT) {
-			return CommonProtectionApiCompat.canInteract(world, pos, cause);
-		}
 		return true;
 	}
 
@@ -51,16 +42,10 @@ public class GenericClaimModsCompat {
 	 * @return if modification is allowed
 	 */
 	public static boolean canModify(Level world, BlockPos pos, @Nullable Entity cause) {
-		if (IS_COMMON_PROTECTION_API_PRESENT) {
-			return CommonProtectionApiCompat.canModify(world, pos, cause);
-		}
 		return true;
 	}
 
 	public static boolean canPlaceBlock(Level world, BlockPos pos, @Nullable Entity cause) {
-		if (IS_COMMON_PROTECTION_API_PRESENT) {
-			return CommonProtectionApiCompat.canPlaceBlock(world, pos, cause);
-		}
 		return true;
 	}
 	

@@ -39,6 +39,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.*;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.*;
@@ -102,7 +103,7 @@ public class SpectrumCommon {
 		logInfo("Finished loading config file.");
 	}
 
-	public SpectrumCommon(IEventBus modEventBus) {
+	public SpectrumCommon(IEventBus modEventBus, ModContainer container) {
 		Revelationary.onInitialize();
 		Reverb.onInitialize(modEventBus);
 
@@ -256,9 +257,9 @@ public class SpectrumCommon {
 		// Builtin Resource Packs
 		logInfo("Registering Builtin Resource Packs...");
 
-		ResourceManagerHelper.registerBuiltinResourcePack(locate("spectrum_style_amethyst"), modContainer.get(), Component.nullToEmpty("Spectrum Style Amethyst"), ResourcePackActivationType.NORMAL);
-
 		logInfo("Common startup completed!");
+
+		new SpectrumClient(modEventBus, container);
 	}
 
 	private static void registerReloadListeners(AddReloadListenerEvent event) {

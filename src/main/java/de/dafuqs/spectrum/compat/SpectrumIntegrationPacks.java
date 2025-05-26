@@ -1,8 +1,8 @@
 package de.dafuqs.spectrum.compat;
 
+import de.dafuqs.fractal.api.*;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.compat.ae2.AE2Compat;
-import de.dafuqs.spectrum.compat.alloy_forgery.AlloyForgeryCompat;
 import de.dafuqs.spectrum.compat.botania.BotaniaCompat;
 import de.dafuqs.spectrum.compat.create.CreateCompat;
 import de.dafuqs.spectrum.compat.exclusions_lib.ExclusionsLibCompat;
@@ -12,6 +12,7 @@ import de.dafuqs.spectrum.compat.travelersbackpack.TravelersBackpackCompat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,13 +31,15 @@ public class SpectrumIntegrationPacks {
 	
 	protected static void registerIntegrationPack(String modId, Supplier<ModIntegrationPack> container) {
 		if (!SpectrumCommon.CONFIG.IntegrationPacksToSkipLoading.contains(modId) && ModList.get().isLoaded(modId)) {
-			INTEGRATION_PACKS.put(modId, container.get());
+			var pack = container.get();
+
+			INTEGRATION_PACKS.put(modId, pack);
+			pack.register();
 		}
 	}
 
 	public static final String AE2_ID = "ae2";
 	public static final String GOBBER_ID = "gobber2";
-	public static final String ALLOY_FORGERY_ID = "alloy_forgery";
 	public static final String TRAVELERS_BACKPACK_ID = "travelersbackpack";
 	public static final String BOTANIA_ID = "botania";
 	public static final String MODONOMICON_ID = "modonomicon";
@@ -54,15 +57,10 @@ public class SpectrumIntegrationPacks {
 
 		registerIntegrationPack(AE2_ID, () -> new AE2Compat());
 		registerIntegrationPack(GOBBER_ID, () -> new GobberCompat());
-		registerIntegrationPack(ALLOY_FORGERY_ID, () -> new AlloyForgeryCompat());
 		registerIntegrationPack(TRAVELERS_BACKPACK_ID, () -> new TravelersBackpackCompat());
 		registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
 		//registerIntegrationPack(FARMERSDELIGHT_ID, () -> new FDCompat());
 		registerIntegrationPack(CREATE_ID, () -> new CreateCompat());
-		
-		for (ModIntegrationPack container : INTEGRATION_PACKS.values()) {
-			container.register();
-		}
 	}
 	
 	@OnlyIn(Dist.CLIENT)

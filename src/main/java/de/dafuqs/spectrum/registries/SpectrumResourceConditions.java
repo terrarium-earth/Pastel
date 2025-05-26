@@ -13,6 +13,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.server.*;
 
 import java.util.List;
 
@@ -40,9 +41,11 @@ public class SpectrumResourceConditions {
 
 		@Override
 		public boolean test(IContext iContext) {
-			if (wrapperLookup == null || wrapperLookup.lookup(Registries.ENCHANTMENT).isEmpty())
+			var access = ServerLifecycleHooks.getCurrentServer().registryAccess();
+
+			if (access.lookup(Registries.ENCHANTMENT).isEmpty())
 				return false;
-			HolderLookup.RegistryLookup<Enchantment> impl = wrapperLookup.lookup(Registries.ENCHANTMENT).get();
+			HolderLookup.RegistryLookup<Enchantment> impl = access.lookup(Registries.ENCHANTMENT).get();
 			return enchantments.stream().allMatch(key -> impl.get(key).isPresent());
 		}
 	}

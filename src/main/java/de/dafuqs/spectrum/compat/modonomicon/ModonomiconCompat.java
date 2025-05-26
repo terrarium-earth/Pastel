@@ -6,6 +6,7 @@ import com.klikli_dev.modonomicon.data.BookConditionJsonLoader;
 import com.klikli_dev.modonomicon.data.BookPageJsonLoader;
 import com.klikli_dev.modonomicon.data.LoaderRegistry;
 import com.klikli_dev.modonomicon.data.NetworkLoader;
+import de.dafuqs.fractal.api.*;
 import de.dafuqs.spectrum.SpectrumCommon;
 import de.dafuqs.spectrum.api.recipe.GatedRecipe;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;

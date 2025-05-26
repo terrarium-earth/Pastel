@@ -2,6 +2,7 @@ accessWidener	v2	named
 
 # Cursed cursed cursed bad erase please
 # (TODO This, along with all the weird datagen stuff in this code base, should be removed.)
+# Peak ~ Azzyypaaras
 
 accessible field net/minecraft/data/models/BlockModelGenerators modelOutput Ljava/util/function/BiConsumer;
 accessible field net/minecraft/data/models/ItemModelGenerators output Ljava/util/function/BiConsumer;

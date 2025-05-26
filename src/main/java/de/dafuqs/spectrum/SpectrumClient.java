@@ -4,6 +4,7 @@ import de.dafuqs.revelationary.api.advancements.ClientAdvancementPacketCallback;
 import de.dafuqs.revelationary.api.revelations.RevealingCallback;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
 import de.dafuqs.spectrum.compat.ears.EarsCompat;
+import de.dafuqs.spectrum.config.*;
 import de.dafuqs.spectrum.entity.SpectrumEntityRenderers;
 import de.dafuqs.spectrum.inventories.SpectrumScreenHandlerTypes;
 import de.dafuqs.spectrum.particle.SpectrumParticleFactories;
@@ -24,6 +25,7 @@ import de.dafuqs.spectrum.render.HudRenderers;
 import de.dafuqs.spectrum.render.SkyLerper;
 import de.dafuqs.spectrum.render.armor.*;
 import de.dafuqs.spectrum.render.capes.WorthinessChecker;
+import me.shedaniel.autoconfig.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -33,9 +35,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.*;
-import net.neoforged.fml.ModList;
+import net.neoforged.fml.*;
 import net.neoforged.fml.common.*;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.gui.*;
 import net.neoforged.neoforge.common.*;
 
 import java.util.Set;
@@ -43,17 +46,15 @@ import java.util.Set;
 import static de.dafuqs.spectrum.SpectrumCommon.CONFIG;
 import static de.dafuqs.spectrum.SpectrumCommon.logInfo;
 
-@OnlyIn(Dist.CLIENT)
-@Mod(value = SpectrumCommon.MOD_ID, dist = Dist.CLIENT)
 public class SpectrumClient implements RevealingCallback, ClientAdvancementPacketCallback {
 
 	public static final SkyLerper skyLerper = new SkyLerper();
 
-	public SpectrumClient(IEventBus pastelBus) {
+	public SpectrumClient(IEventBus pastelBus, ModContainer container) {
 		logInfo("Starting Client Startup");
 
 		logInfo("Registering Model Layers...");
-		SpectrumModelLayers.register();
+		pastelBus.addListener(SpectrumModelLayers::register);
 
 		logInfo("Setting up Block Rendering...");
 		SpectrumBlocks.registerClient();
@@ -95,6 +96,8 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		logInfo("Registering Client Event Listeners...");
 		SpectrumClientEventListeners.register(pastelBus);
 
+		container.registerExtensionPoint(IConfigScreenFactory.class, (v, parent) -> AutoConfig.getConfigScreen(SpectrumConfig.class, parent).get());
+
 		if (CONFIG.AddItemTooltips) {
 			NeoForge.EVENT_BUS.addListener(SpectrumTooltips::register);
 		}
@@ -105,7 +108,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		}
 
 		logInfo("Registering Armor Renderers...");
-		SpectrumArmorRenderers.register();
+		pastelBus.addListener(SpectrumArmorRenderers::register);
 		WorthinessChecker.init();
 
 		RevealingCallback.register(this);

@@ -1,9 +1,8 @@
 package de.dafuqs.spectrum.compat.create;
 
 import com.simibubi.create.api.event.PipeCollisionEvent;
-import de.dafuqs.fractal.api.ItemSubGroupEvents;
+import de.dafuqs.fractal.api.ModifyItemSubGroupEntriesEvent;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
-import de.dafuqs.spectrum.api.item_group.ItemGroupIDs;
 import de.dafuqs.spectrum.blocks.crystallarieum.SpectrumClusterBlock;
 import de.dafuqs.spectrum.blocks.fluid.SpectrumFluidBlock;
 import de.dafuqs.spectrum.compat.SpectrumIntegrationPacks;
@@ -23,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.neoforge.common.*;
 import org.jetbrains.annotations.NotNull;
 
 import static de.dafuqs.spectrum.registries.SpectrumBlocks.blockWithItem;
@@ -44,29 +44,35 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public void register() {
 		SpectrumItems.ITEM_REGISTRAR.flush();
 		SpectrumBlocks.COMMON_REGISTRAR.flush();
-		
-		ItemSubGroupEvents.modifyEntriesEvent(ItemGroupIDs.SUBTAB_PURE_RESOURCES).register(entries -> {
-			entries.accept(PURE_ZINC);
-			entries.accept(SMALL_ZINC_BUD);
-			entries.accept(LARGE_ZINC_BUD);
-			entries.accept(ZINC_CLUSTER);
-			entries.accept(PURE_ZINC_BLOCK);
-		});
-		
-		PipeCollisionEvent.FLOW.register(event -> {
-			final BlockState result = handleBidirectionalCollision(event.getLevel(), event.getFirstFluid(), event.getSecondFluid());
-			if (result != null) event.setState(result);
-		});
-		
-		PipeCollisionEvent.SPILL.register(event -> {
-			final BlockState result = handleBidirectionalCollision(event.getLevel(), event.getPipeFluid(), event.getWorldFluid());
-			if (result != null) event.setState(result);
-		});
+		NeoForge.EVENT_BUS.addListener(CreateCompat::addEntries);
+		NeoForge.EVENT_BUS.addListener(CreateCompat::onPipeSpillCollision);
+		NeoForge.EVENT_BUS.addListener(CreateCompat::onPipeFlowCollision);
+	}
+
+	private static void addEntries(ModifyItemSubGroupEntriesEvent event) {
+		var entries = event.getEntries();
+		entries.accept(PURE_ZINC);
+		entries.accept(SMALL_ZINC_BUD);
+		entries.accept(LARGE_ZINC_BUD);
+		entries.accept(ZINC_CLUSTER);
+		entries.accept(PURE_ZINC_BLOCK);
+	}
+
+	private static void onPipeFlowCollision(PipeCollisionEvent.Flow event) {
+		var result = handleBidirectionalCollision(event.getLevel(), event.getFirstFluid(), event.getSecondFluid());
+		if (result != null)
+			event.setState(result);
+	}
+
+	private static void onPipeSpillCollision(PipeCollisionEvent.Spill event) {
+		var result = handleBidirectionalCollision(event.getLevel(), event.getPipeFluid(), event.getWorldFluid());
+		if (result != null)
+			event.setState(result);
 	}
 	
 	// NOTE: firstFluid and secondFluid are assumed to be not null without checking,
 	// since the default Create event handlers for pipe collisions would throw a NullPointerException otherwise.
-	private BlockState handleBidirectionalCollision(Level world, @NotNull Fluid firstFluid, @NotNull Fluid secondFluid) {
+	private static BlockState handleBidirectionalCollision(Level world, @NotNull Fluid firstFluid, @NotNull Fluid secondFluid) {
 		final FluidState firstState = firstFluid.defaultFluidState();
 		final FluidState secondState = secondFluid.defaultFluidState();
 		
@@ -78,7 +84,7 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		return spectrumFluidCollision(world, secondState, firstState);
 	}
 	
-	private BlockState spectrumFluidCollision(Level world, FluidState state, FluidState otherState) {
+	private static BlockState spectrumFluidCollision(Level world, FluidState state, FluidState otherState) {
 		if (state.createLegacyBlock().getBlock() instanceof SpectrumFluidBlock spectrumFluid)
 			return spectrumFluid.handleFluidCollision(world, state, otherState);
 		return null;
