@@ -272,7 +272,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		return this.tank;
 	}
 	
-	private void setLightForFluid(BlockPos blockPos, Fluid fluid) {
+	void setLightForFluid(BlockPos blockPos, FluidStack fluid) {
 		if (level == null) return;
 		int fluidLight = SpectrumEventListeners.getFluidLuminance(fluid);
 		level.setBlock(blockPos, level.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight), Block.UPDATE_ALL);

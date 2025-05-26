@@ -32,6 +32,7 @@ import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.level.*;
 import net.neoforged.neoforge.event.server.*;
 import net.neoforged.neoforge.event.tick.*;
+import net.neoforged.neoforge.fluids.*;
 import net.neoforged.neoforge.resource.*;
 import net.neoforged.neoforge.server.*;
 import top.theillusivec4.curios.api.*;
@@ -351,14 +352,6 @@ public class SpectrumEventListeners {
 	private static void serverStart(ServerStartedEvent event) {
 		var server = event.getServer();
 
-		SpectrumCommon.logInfo("Querying fluid luminance...");
-		for (Iterator<Block> it = BuiltInRegistries.BLOCK.stream().iterator(); it.hasNext(); ) {
-			Block block = it.next();
-			if (block instanceof LiquidBlock fluidBlock) {
-				fluidLuminance.put(fluidBlock.fluid, fluidBlock.defaultBlockState().getLightEmission());
-			}
-		}
-
 		SpectrumCommon.logInfo("Injecting dynamic recipes into recipe manager...");
 		FirestarterIdolBlock.addBlockSmeltingRecipes(server);
 	}
@@ -520,8 +513,8 @@ public class SpectrumEventListeners {
 		}
 	}
 
-	public static int getFluidLuminance(Fluid fluid) {
-		return fluidLuminance.getOrDefault(fluid, 0);
+	public static int getFluidLuminance(FluidStack fluid) {
+		return fluid.getFluidType().getLightLevel(fluid);
 	}
 
 }
