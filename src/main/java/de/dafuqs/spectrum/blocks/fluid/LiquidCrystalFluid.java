@@ -33,12 +33,12 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 	
 	@Override
 	public Fluid getSource() {
-		return SpectrumFluids.LIQUID_CRYSTAL;
+		return SpectrumFluids.LIQUID_CRYSTAL.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return SpectrumFluids.FLOWING_LIQUID_CRYSTAL;
+		return SpectrumFluids.FLOWING_LIQUID_CRYSTAL.get();
 	}
 	
 	@Override
@@ -53,7 +53,7 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == SpectrumFluids.LIQUID_CRYSTAL || fluid == SpectrumFluids.FLOWING_LIQUID_CRYSTAL;
+		return fluid == SpectrumFluids.LIQUID_CRYSTAL.get() || fluid == SpectrumFluids.FLOWING_LIQUID_CRYSTAL.get();
 	}
 	
 	@Override

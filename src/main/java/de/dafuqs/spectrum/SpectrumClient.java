@@ -64,6 +64,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 
 		logInfo("Setting up Fluid Rendering...");
 		pastelBus.addListener(SpectrumFluids::registerClient);
+		pastelBus.addListener(SpectrumFluids::clientSetup);
 
 		logInfo("Setting up GUIs...");
 		NeoForge.EVENT_BUS.register(SpectrumScreenHandlerTypes.class);

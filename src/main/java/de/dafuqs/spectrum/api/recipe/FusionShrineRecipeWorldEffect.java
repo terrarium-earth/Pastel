@@ -3,7 +3,7 @@ package de.dafuqs.spectrum.api.recipe;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import de.dafuqs.spectrum.registries.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
@@ -41,7 +41,7 @@ public interface FusionShrineRecipeWorldEffect {
 	});
 	
 	static FusionShrineRecipeWorldEffect register(String id, FusionShrineRecipeWorldEffect effect) {
-		Registry.register(SpectrumRegistries.WORLD_EFFECT, SpectrumCommon.locate(id), effect);
+		SpectrumFusionShrineWorldEffects.REGISTER.register(id, () -> effect);
 		return effect;
 	}
 	

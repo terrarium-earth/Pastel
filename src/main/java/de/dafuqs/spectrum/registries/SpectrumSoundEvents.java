@@ -2,13 +2,17 @@ package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.spectrum.SpectrumCommon;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 @SuppressWarnings("unused")
 public class SpectrumSoundEvents {
-	
+
+	private static final DeferredRegister<SoundEvent> REGISTER = DeferredRegister.create(Registries.SOUND_EVENT, SpectrumCommon.MOD_ID);
+
 	// Music
 	public static final SoundEvent MUSIC_DISCOVERY = register("music.discovery");
 	public static final SoundEvent MUSIC_CREDITS = register("music.credits");
@@ -272,11 +276,13 @@ public class SpectrumSoundEvents {
 	
 	private static SoundEvent register(String id) {
 		ResourceLocation identifier = SpectrumCommon.locate(id);
-		return Registry.register(BuiltInRegistries.SOUND_EVENT, identifier, SoundEvent.createVariableRangeEvent(identifier));
+		var soundEvent = SoundEvent.createVariableRangeEvent(identifier);
+		REGISTER.register(id, () -> soundEvent);
+		return soundEvent;
 	}
 	
-	public static void register() {
-		SpectrumCommon.logInfo("Registering Sound Events...");
+	public static void register(IEventBus bus) {
+		REGISTER.register(bus);
 	}
 	
 }

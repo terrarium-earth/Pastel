@@ -6,11 +6,15 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SpectrumPastelUpgrades {
+
+    private static final DeferredRegister<PastelUpgradeSignature> REGISTER = DeferredRegister.create(SpectrumRegistryKeys.PASTEL_UPGRADE, SpectrumCommon.MOD_ID);
 
     private static final Map<Item, PastelUpgradeSignature> UPGRADES = new HashMap<>();
     private static final String NAMESPACE = SpectrumCommon.MOD_ID;
@@ -37,7 +41,7 @@ public class SpectrumPastelUpgrades {
     public static final PastelUpgradeSignature.Category FILTER = PastelUpgradeSignature.Category.simple();
     public static final PastelUpgradeSignature.Category REDSTONE = PastelUpgradeSignature.Category.redstone();
 
-    public static void register() {
+    public static void register(IEventBus bus) {
         WEAK_STACK = register(PastelUpgradeSignature.builder(SpectrumItems.RAW_BLOODSTONE, STACK, NAMESPACE).named("weak_stack").stackMod(3).stackMult(2).build());
 		STRONG_STACK = register(PastelUpgradeSignature.builder(SpectrumItems.PURE_BLOODSTONE, STACK, NAMESPACE).named("strong_stack").stackMod(15).stackMult(4).build());
 
@@ -66,7 +70,8 @@ public class SpectrumPastelUpgrades {
 
     private static PastelUpgradeSignature register(PastelUpgradeSignature upgrade) {
         UPGRADES.put(upgrade.upgradeItem, upgrade);
-        return Registry.register(SpectrumRegistries.PASTEL_UPGRADE, SpectrumCommon.locate(upgrade.name), upgrade);
+        REGISTER.register(upgrade.name, () -> upgrade);
+        return upgrade;
     }
 
     public static PastelUpgradeSignature of(Item item) {

@@ -224,10 +224,10 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 		//WorldInteractionRecipe
 		EmiStack water = EmiStack.of(Fluids.WATER, FluidUnit.BUCKET);
 		EmiStack lava = EmiStack.of(Fluids.LAVA, FluidUnit.BUCKET);
-		EmiStack dragonrot = EmiStack.of(SpectrumFluids.DRAGONROT, FluidUnit.BUCKET);
-		EmiStack liquidCrystal = EmiStack.of(SpectrumFluids.LIQUID_CRYSTAL, FluidUnit.BUCKET);
-		EmiStack midnightSolution = EmiStack.of(SpectrumFluids.MIDNIGHT_SOLUTION, FluidUnit.BUCKET);
-		EmiStack mud = EmiStack.of(SpectrumFluids.GOO, FluidUnit.BUCKET);
+		EmiStack dragonrot = EmiStack.of(SpectrumFluids.DRAGONROT.get(), FluidUnit.BUCKET);
+		EmiStack liquidCrystal = EmiStack.of(SpectrumFluids.LIQUID_CRYSTAL.get(), FluidUnit.BUCKET);
+		EmiStack midnightSolution = EmiStack.of(SpectrumFluids.MIDNIGHT_SOLUTION.get(), FluidUnit.BUCKET);
+		EmiStack mud = EmiStack.of(SpectrumFluids.GOO.get(), FluidUnit.BUCKET);
 		EmiStack waterCatalyst = water.copy().setRemainder(water);
 		EmiStack lavaCatalyst = lava.copy().setRemainder(lava);
 		EmiStack dragonrotCatalyst = dragonrot.copy().setRemainder(dragonrot);

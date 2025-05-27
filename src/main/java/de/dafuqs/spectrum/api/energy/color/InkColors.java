@@ -1,11 +1,13 @@
 package de.dafuqs.spectrum.api.energy.color;
 
 import de.dafuqs.spectrum.SpectrumCommon;
-import de.dafuqs.spectrum.registries.SpectrumRegistries;
+import de.dafuqs.spectrum.registries.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 import java.util.List;
 
@@ -14,7 +16,9 @@ public class InkColors {
 	public static final ResourceLocation BASE_ADVANCEMENT_ID = SpectrumCommon.locate("midgame/spectrum_midgame");
 	public static final ResourceLocation BLACK_ADVANCEMENT_ID = SpectrumCommon.locate("midgame/spectrum_midgame");
 	public static final ResourceLocation WHITE_ADVANCEMENT_ID = SpectrumCommon.locate("lategame/collect_moonstone");
-	
+
+	private static final DeferredRegister<InkColor> REGISTER = DeferredRegister.create(SpectrumRegistryKeys.INK_COLOR, SpectrumCommon.MOD_ID);
+
 	/**
 	 * A lot of places where color is displayed have black backgrounds, which would make displaying normal black on them... daft.
 	 * <p>
@@ -66,11 +70,12 @@ public class InkColors {
 	);
 	
 	protected static InkColor register(String name, InkColor inkColor) {
-		return Registry.register(SpectrumRegistries.INK_COLOR, SpectrumCommon.locate(name), inkColor);
+		REGISTER.register(name, () -> inkColor);
+		return inkColor;
 	}
 	
-	public static void register() {
-	
+	public static void register(IEventBus bus) {
+		REGISTER.register(bus);
 	}
 	
 	public static Iterable<InkColor> all() {

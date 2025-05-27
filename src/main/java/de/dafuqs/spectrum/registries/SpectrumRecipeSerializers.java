@@ -47,13 +47,15 @@ import de.dafuqs.spectrum.recipe.titration_barrel.dynamic.JadeWineRecipe;
 import de.dafuqs.spectrum.recipe.titration_barrel.dynamic.NecteredViognierRecipe;
 import de.dafuqs.spectrum.recipe.titration_barrel.dynamic.SuspiciousBrewRecipe;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 public class SpectrumRecipeSerializers {
 	
-	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
+	private static final DeferredRegister<RecipeSerializer<?>> REGISTRAR = DeferredRegister.create(Registries.RECIPE_SERIALIZER, SpectrumCommon.MOD_ID);
 	
 	// VANILLA
 	public static final RecipeSerializer<RepairAnythingRecipe> REPAIR_ANYTHING_SERIALIZER = register("repair_anything", new EmptyRecipeSerializer<>(RepairAnythingRecipe::new));
@@ -126,11 +128,12 @@ public class SpectrumRecipeSerializers {
 	
 	
 	static <S extends RecipeSerializer<T>, T extends Recipe<?>> S register(String id, S serializer) {
-		return REGISTRAR.defer(serializer, v -> Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, SpectrumCommon.locate(id), v));
+		REGISTRAR.register(id, () -> serializer);
+		return serializer;
 	}
 	
-	public static void register() {
-		REGISTRAR.flush();
+	public static void register(IEventBus bus) {
+		REGISTRAR.register(bus);
 	}
 	
 }

@@ -64,7 +64,6 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 
 	@Override
 	public void register() {
-		SpectrumItems.ITEM_REGISTRAR.flush();
 		
 		// registering it late, since Botania might not have been initialized yet
 		NeoForge.EVENT_BUS.addListener(BotaniaCompat::onServerStarted);

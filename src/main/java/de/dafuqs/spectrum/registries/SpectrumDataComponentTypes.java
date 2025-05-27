@@ -24,14 +24,16 @@ import net.minecraft.core.GlobalPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.fluids.*;
+import net.neoforged.neoforge.registries.*;
 
 import java.util.UUID;
 import java.util.function.UnaryOperator;
@@ -39,7 +41,7 @@ import java.util.function.UnaryOperator;
 @SuppressWarnings("unused")
 public class SpectrumDataComponentTypes {
 	
-	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
+	private static final DeferredRegister.DataComponents REGISTRAR = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, SpectrumCommon.MOD_ID);
 	
 	// It seems like vanilla caches all components with collections (lists, maps, etc.), so we will too
 	public static final DataComponentType<Unit> ACTIVATED = register("activated", builder -> builder.persistent(Codec.unit(Unit.INSTANCE)).networkSynchronized(StreamCodec.unit(Unit.INSTANCE)));
@@ -80,12 +82,13 @@ public class SpectrumDataComponentTypes {
 	public static final DataComponentType<SimpleFluidContent> MERMAIDS_GEM = register("mermaids_gem", builder -> builder.persistent(SimpleFluidContent.CODEC).networkSynchronized(SimpleFluidContent.STREAM_CODEC));
 	
 	public static <T> DataComponentType<T> register(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
-		return REGISTRAR.defer(builderOperator.apply(DataComponentType.builder()).build(),
-				type -> Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, SpectrumCommon.locate(id), type));
+		var type = builderOperator.apply(DataComponentType.builder()).build();
+		REGISTRAR.register(id, () -> type);
+		return type;
 	}
 	
-	public static void register() {
-		REGISTRAR.flush();
+	public static void register(IEventBus bus) {
+		REGISTRAR.register(bus);
 	}
 	
 }

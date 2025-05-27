@@ -2,6 +2,7 @@ package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.fractal.api.ItemSubGroup;
 import de.dafuqs.fractal.interfaces.ItemGroupParent;
+import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
 import de.dafuqs.spectrum.api.item.ExperienceStorageItem;
@@ -17,7 +18,7 @@ import de.dafuqs.spectrum.helpers.SpectrumEnchantmentHelper;
 import de.dafuqs.spectrum.recipe.titration_barrel.ITitrationBarrelRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +27,8 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 import net.neoforged.neoforge.server.*;
 
 import java.util.Map;
@@ -46,8 +49,12 @@ public class SpectrumItemGroups {
 			.title(Component.translatable("itemGroup.pastel"))
 			.build();
 	
-	public static void register() {
-		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ItemGroupIDs.MAIN_GROUP_ID, MAIN);
+	public static void register(IEventBus bus) {
+		var register = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SpectrumCommon.MOD_ID);
+
+		register.register(ItemGroupIDs.MAIN_GROUP_ID.getPath(), () -> MAIN);
+		register.register(bus);
+
 	}
 	
 	public static final ItemSubGroup EQUIPMENT = new ItemSubGroup.Builder(MAIN, ItemGroupIDs.SUBTAB_EQUIPMENT, Component.translatable("itemGroup.pastel.equipment"))

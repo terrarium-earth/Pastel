@@ -1,5 +1,6 @@
 package de.dafuqs.spectrum.registries;
 
+import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.recipe.FusionShrineRecipeWorldEffect;
 import de.dafuqs.spectrum.blocks.fluid.MidnightSolutionFluidBlock;
 import de.dafuqs.spectrum.helpers.Support;
@@ -16,11 +17,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 import java.util.Optional;
 
 @SuppressWarnings("unused")
 public class SpectrumFusionShrineWorldEffects {
+
+	public static final DeferredRegister<FusionShrineRecipeWorldEffect> REGISTER = DeferredRegister.create(SpectrumRegistryKeys.WORLD_EFFECT, SpectrumCommon.MOD_ID);
 
 	public static FusionShrineRecipeWorldEffect WEATHER_CLEAR = FusionShrineRecipeWorldEffect.register("weather_clear", new FusionShrineRecipeWorldEffect.SingleTimeRecipeWorldEffect() {
 		@Override
@@ -207,8 +212,8 @@ public class SpectrumFusionShrineWorldEffects {
 		}
 	});
 
-	public static void register() {
-
+	public static void register(IEventBus bus) {
+		REGISTER.register(bus);
 	}
 
 }

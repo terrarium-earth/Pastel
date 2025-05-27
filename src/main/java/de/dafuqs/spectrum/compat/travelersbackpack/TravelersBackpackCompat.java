@@ -43,7 +43,7 @@ public class TravelersBackpackCompat extends SpectrumIntegrationPacks.ModIntegra
 	
 	@Override
 	public void register() {
-		EffectFluidRegistry.registerFluidEffect(new SpectrumEffectFluid("pastel:goo", SpectrumFluids.GOO.getSource()) {
+		EffectFluidRegistry.registerFluidEffect(new SpectrumEffectFluid("pastel:goo", SpectrumFluids.GOO.get().getSource()) {
 			@Override
 			public void affectDrinker(FluidStack fluidVariantWrapper, Level world, Entity entity) {
 				if (entity instanceof LivingEntity livingEntity) {
@@ -55,7 +55,7 @@ public class TravelersBackpackCompat extends SpectrumIntegrationPacks.ModIntegra
 			
 		});
 		
-		EffectFluidRegistry.registerFluidEffect(new SpectrumEffectFluid("pastel:liquid_crystal", SpectrumFluids.LIQUID_CRYSTAL.getSource()) {
+		EffectFluidRegistry.registerFluidEffect(new SpectrumEffectFluid("pastel:liquid_crystal", SpectrumFluids.LIQUID_CRYSTAL.get().getSource()) {
 			@Override
 			public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
 				if (entity instanceof Player player) {
@@ -64,7 +64,7 @@ public class TravelersBackpackCompat extends SpectrumIntegrationPacks.ModIntegra
 			}
 		});
 		
-		EffectFluidRegistry.registerFluidEffect(new SpectrumEffectFluid("pastel:midnight_solution", SpectrumFluids.MIDNIGHT_SOLUTION.getSource()) {
+		EffectFluidRegistry.registerFluidEffect(new SpectrumEffectFluid("pastel:midnight_solution", SpectrumFluids.MIDNIGHT_SOLUTION.get().getSource()) {
 			@Override
 			public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
 				if (entity instanceof Player player) {
@@ -87,7 +87,7 @@ public class TravelersBackpackCompat extends SpectrumIntegrationPacks.ModIntegra
 			}
 		});
 		
-		EffectFluidRegistry.registerFluidEffect(new SpectrumEffectFluid("pastel:dragonrot", SpectrumFluids.DRAGONROT.getSource()) {
+		EffectFluidRegistry.registerFluidEffect(new SpectrumEffectFluid("pastel:dragonrot", SpectrumFluids.DRAGONROT.get().getSource()) {
 			@Override
 			public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
 				if (entity instanceof LivingEntity livingEntity) {

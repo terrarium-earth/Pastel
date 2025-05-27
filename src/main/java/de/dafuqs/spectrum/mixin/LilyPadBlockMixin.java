@@ -19,6 +19,6 @@ public class LilyPadBlockMixin {
             return true;
         FluidState fluidState = world.getFluidState(pos);
         FluidState fluidState2 = world.getFluidState(pos.above());
-		return (fluidState.getType() == SpectrumFluids.GOO || fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL) && fluidState2.getType() == Fluids.EMPTY;
+		return (fluidState.getType() == SpectrumFluids.GOO.get() || fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL.get()) && fluidState2.getType() == Fluids.EMPTY;
     }
 }

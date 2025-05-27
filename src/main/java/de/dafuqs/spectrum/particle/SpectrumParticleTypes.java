@@ -12,20 +12,20 @@ import de.dafuqs.spectrum.particle.effect.ColoredTransmissionParticleEffect;
 import de.dafuqs.spectrum.particle.effect.DynamicParticleEffect;
 import de.dafuqs.spectrum.particle.effect.PastelTransmissionParticleEffect;
 import de.dafuqs.spectrum.particle.effect.TransmissionParticleEffect;
-import de.dafuqs.spectrum.registries.DeferredRegistrar;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 import java.util.function.Function;
 
 public class SpectrumParticleTypes {
 	
-	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
+	private static final DeferredRegister<ParticleType<?>> REGISTRAR = DeferredRegister.create(Registries.PARTICLE_TYPE, SpectrumCommon.MOD_ID);
 	
 	public static final ParticleType<TransmissionParticleEffect> ITEM_TRANSMISSION = register("item_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.STREAM_CODEC);
 	public static final ParticleType<TransmissionParticleEffect> EXPERIENCE_TRANSMISSION = register("experience_transmission", false, type -> TransmissionParticleEffect.CODEC, type -> TransmissionParticleEffect.STREAM_CODEC);
@@ -123,7 +123,9 @@ public class SpectrumParticleTypes {
 	
 	// Simple particles
 	private static SimpleParticleType register(String name, boolean alwaysShow) {
-		return REGISTRAR.defer(new SimpleParticleType(alwaysShow), type -> Registry.register(BuiltInRegistries.PARTICLE_TYPE, SpectrumCommon.locate(name), type));
+		var particle = new SimpleParticleType(alwaysShow);
+		REGISTRAR.register(name, () -> particle);
+		return particle;
 	}
 	
 	// complex particles
@@ -133,21 +135,25 @@ public class SpectrumParticleTypes {
 			Function<ParticleType<T>, MapCodec<T>> codecGetter,
 			Function<ParticleType<T>, StreamCodec<? super RegistryFriendlyByteBuf, T>> packetCodecGetter
 	) {
-		return REGISTRAR.defer(new ParticleType<T>(alwaysShow) {
+		var particle = new ParticleType<T>(alwaysShow) {
 			@Override
 			public MapCodec<T> codec() {
 				return codecGetter.apply(this);
 			}
-			
+
 			@Override
 			public StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec() {
 				return packetCodecGetter.apply(this);
 			}
-		}, type -> Registry.register(BuiltInRegistries.PARTICLE_TYPE, SpectrumCommon.locate(name), type));
+		};
+
+		REGISTRAR.register(name, () -> particle);
+
+		return particle;
 	}
 	
-	public static void register() {
-		REGISTRAR.flush();
+	public static void register(IEventBus bus) {
+		REGISTRAR.register(bus);
 	}
 	
 }

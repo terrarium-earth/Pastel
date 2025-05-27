@@ -20,12 +20,16 @@ import de.dafuqs.spectrum.recipe.primordial_fire_burning.PrimordialFireBurningRe
 import de.dafuqs.spectrum.recipe.spirit_instiller.SpiritInstillerRecipe;
 import de.dafuqs.spectrum.recipe.titration_barrel.ITitrationBarrelRecipe;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 public class SpectrumRecipeTypes {
-	
+
+	private static final DeferredRegister<RecipeType<?>> REGISTER = DeferredRegister.create(Registries.RECIPE_TYPE, SpectrumCommon.MOD_ID);
+
 	public static final RecipeType<PedestalRecipe> PEDESTAL = register("pedestal");
 	public static final RecipeType<AnvilCrushingRecipe> ANVIL_CRUSHING = register("anvil_crushing");
 	public static final RecipeType<FusionShrineRecipe> FUSION_SHRINE = register("fusion_shrine");
@@ -46,16 +50,19 @@ public class SpectrumRecipeTypes {
 	public static final RecipeType<PrimordialFireBurningRecipe> PRIMORDIAL_FIRE_BURNING = register("primordial_fire_burning");
 	
 	private static <T extends Recipe<?>> RecipeType<T> register(String id) {
-		return Registry.register(BuiltInRegistries.RECIPE_TYPE, SpectrumCommon.locate(id), new RecipeType<T>() {
+		var type = new RecipeType<T>() {
 			@Override
 			public String toString() {
 				return "pastel:" + id;
 			}
-		});
+		};
+
+		REGISTER.register(id, () -> type);
+		return type;
 	}
 	
-	public static void register() {
-
+	public static void register(IEventBus bus) {
+		REGISTER.register(bus);
 	}
 	
 }

@@ -92,9 +92,6 @@ public class SpectrumCommon {
 		return ResourceLocation.fromNamespaceAndPath(namespace, path);
 	}
 	
-	// Miscellaneous registrars
-	public static final DeferredRegistrar FUEL_REGISTRAR = new DeferredRegistrar();
-	
 	static {
 		//Set up config
 		logInfo("Loading config file...");
@@ -111,60 +108,61 @@ public class SpectrumCommon {
 		
 		// Register internals
 		SpectrumRegistries.register(pastelBus);
-		InkColors.register();
+		InkColors.register(pastelBus);
 		InkColorMixes.register();
-		SpectrumEntityAttributes.register();
+		SpectrumEntityAttributes.register(pastelBus);
 		SpectrumLoadConditions.register(pastelBus);
 		IngredientStack.register(pastelBus);
 		
 		logInfo("Registering Component Types...");
-		SpectrumDataComponentTypes.register();
+		SpectrumDataComponentTypes.register(pastelBus);
 		
 		logInfo("Registering Block / Item Color Registries...");
 		ColorRegistry.registerColorRegistries();
 		
 		// Register ALL the stuff
 		logInfo("Registering Status Effects...");
-		SpectrumStatusEffects.register();
+		SpectrumStatusEffects.register(pastelBus);
 		logInfo("Registering Advancement Criteria...");
-		SpectrumAdvancementCriteria.register();
+		SpectrumAdvancementCriteria.register(pastelBus);
 		logInfo("Registering Particle Types...");
-		SpectrumParticleTypes.register();
+		SpectrumParticleTypes.register(pastelBus);
 		logInfo("Registering Sound Events...");
-		SpectrumSoundEvents.register();
+		SpectrumSoundEvents.register(pastelBus);
 		logInfo("Registering BlockSound Groups...");
 		SpectrumBlockSoundGroups.register();
 		logInfo("Registering Fluids...");
-		SpectrumFluids.register();
+		SpectrumFluids.register(pastelBus);
 		logInfo("Registering Armor Materials...");
-		SpectrumArmorMaterials.register();
+		SpectrumArmorMaterials.register(pastelBus);
 		logInfo("Registering Blocks...");
-		SpectrumBlocks.register();
+		SpectrumBlocks.register(pastelBus);
 		logInfo("Registering Items...");
-		SpectrumPotions.register();
-		SpectrumItems.register();
-		SpectrumItemGroups.register();
+		SpectrumPotions.register(pastelBus);
+		SpectrumItems.register(pastelBus);
+		SpectrumItemGroups.register(pastelBus);
+
 		logInfo("Registering Block Entities...");
-		SpectrumBlockEntities.register();
+		SpectrumBlockEntities.register(pastelBus);
 		NeoForge.EVENT_BUS.addListener(SpectrumBlockEntities::registerAdditionalTypes);
 		logInfo("Registering Capabilities...");
 		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerBlocks);
 		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerItems);
 
 		logInfo("Registering Data Attachments...");
-		SpectrumStoredData.register();
+		SpectrumStoredData.register(pastelBus);
 
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");
-		SpectrumPastelUpgrades.register();
+		SpectrumPastelUpgrades.register(pastelBus);
 		logInfo("Registering Stamp Categories...");
-		SpectrumStampDataCategories.register();
+		SpectrumStampDataCategories.register(pastelBus);
 		
 		// Worldgen
 		logInfo("Registering Features...");
-		SpectrumFeatures.register();
+		SpectrumFeatures.register(pastelBus);
 		logInfo("Registering Structure Types...");
-		SpectrumStructureTypes.register();
+		SpectrumStructureTypes.register(pastelBus);
 		
 		// Dimension
 		logInfo("Registering Dimension...");
@@ -177,35 +175,33 @@ public class SpectrumCommon {
 		// Recipes
 		logInfo("Registering Recipe Types...");
 		SpectrumRecipeScalings.init();
-		SpectrumFusionShrineWorldEffects.register();
-		SpectrumRecipeTypes.register();
-		SpectrumRecipeSerializers.register();
+		SpectrumFusionShrineWorldEffects.register(pastelBus);
+		SpectrumRecipeTypes.register(pastelBus);
+		SpectrumRecipeSerializers.register(pastelBus);
 		
 		// Loot
 		logInfo("Registering Loot Conditions & Functions...");
 		SpectrumLootContextTypes.register();
-		SpectrumLootFunctionTypes.register();
+		SpectrumLootFunctionTypes.register(pastelBus);
 		
 		logInfo("Setting up server side Mod Compat...");
 		SpectrumIntegrationPacks.register();
 		
 		// GUI
 		logInfo("Registering Screen Handler Types...");
-		SpectrumScreenHandlerTypes.registerMenus();
+		SpectrumScreenHandlerTypes.registerMenus(pastelBus);
 		
 		logInfo("Registering Default Item Stack Damage Immunities...");
 		SpectrumItemDamageImmunities.registerDefaultItemStackImmunities();
 		logInfo("Registering Enchantment Drops...");
 		NeoForge.EVENT_BUS.addListener(SpectrumLootPoolModifiers::loadLootTable);
 		logInfo("Registering Variant Specific Predicates...");
-		SpectrumItemSubPredicateTypes.register();
-		SpectrumEntitySubPredicateTypes.register();
-		
-		logInfo("Registering Blocks and Items to Fuel Registry...");
-		FUEL_REGISTRAR.flush();
+		SpectrumItemSubPredicateTypes.register(pastelBus);
+		SpectrumEntitySubPredicateTypes.register(pastelBus);
+
 		
 		logInfo("Registering Entities...");
-		SpectrumTrackedDataHandlerRegistry.register();
+		SpectrumTrackedDataHandlerRegistry.register(pastelBus);
 		NeoForge.EVENT_BUS.addListener(SpectrumEntityTypes::registerAttributes);
 		
 		logInfo("Registering Omni Accelerator Projectiles & Behaviors...");
@@ -237,18 +233,18 @@ public class SpectrumCommon {
 		SpectrumFlammableBlocks.register();
 
 		logInfo("Registering Game Events...");
-		SpectrumGameEvents.register();
+		SpectrumGameEvents.register(pastelBus);
 		SpectrumPositionSources.register();
 		
 		logInfo("Registering Dispenser, Resonance & Present Unwrap Behaviors...");
 		SpectrumDispenserBehaviors.register();
 		SpectrumPresentUnpackBehaviors.register();
-		SpectrumResonanceProcessorTypes.register();
+		SpectrumResonanceProcessorTypes.register(pastelBus);
 		
 		logInfo("Registering Resource Conditions...");
 		SpectrumResourceConditions.register(pastelBus);
 		logInfo("Registering Structure WeightedPool Element Types...");
-		SpectrumStructurePoolElementTypes.register();
+		SpectrumStructurePoolElementTypes.register(pastelBus);
 		logInfo("Registering Event Listeners...");
 		SpectrumMiscEvents.register();
 		SpectrumEntityEvents.register();

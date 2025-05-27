@@ -50,7 +50,7 @@ public class FluidLogging {
 		public FluidState getFluidState() {
 			switch (this) {
 				case LIQUID_CRYSTAL -> {
-					return SpectrumFluids.LIQUID_CRYSTAL.getSource(false);
+					return SpectrumFluids.LIQUID_CRYSTAL.get().getSource(false);
 				}
 				case WATER -> {
 					return Fluids.WATER.getSource(false);
@@ -62,7 +62,7 @@ public class FluidLogging {
 		}
 		
 		public static State getForFluidState(FluidState fluidState) {
-			if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL) {
+			if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL.get()) {
 				return LIQUID_CRYSTAL;
 			} else if (fluidState.is(FluidTags.WATER)) {
 				return WATER;
@@ -90,7 +90,7 @@ public class FluidLogging {
 		
 		public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
 			if (this == State.LIQUID_CRYSTAL) {
-				SpectrumFluids.LIQUID_CRYSTAL.onEntityCollision(state, world, pos, entity);
+				SpectrumFluids.LIQUID_CRYSTAL.get().onEntityCollision(state, world, pos, entity);
 			}
 		}
 	}
@@ -107,7 +107,7 @@ public class FluidLogging {
 		
 		@Override
 		default boolean canPlaceLiquid(@Nullable Player player, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
-			return state.getValue(ANY_INCLUDING_NONE) == State.NOT_LOGGED && (fluid == Fluids.WATER || fluid == SpectrumFluids.LIQUID_CRYSTAL);
+			return state.getValue(ANY_INCLUDING_NONE) == State.NOT_LOGGED && (fluid == Fluids.WATER || fluid == SpectrumFluids.LIQUID_CRYSTAL.get());
 		}
 		
 		@Override
@@ -117,7 +117,7 @@ public class FluidLogging {
 					if (fluidState.getType() == Fluids.WATER) {
 						world.setBlock(pos, state.setValue(ANY_INCLUDING_NONE, State.WATER), Block.UPDATE_ALL);
 						world.scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(world));
-					} else if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL) {
+					} else if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL.get()) {
 						world.setBlock(pos, state.setValue(ANY_INCLUDING_NONE, State.LIQUID_CRYSTAL), Block.UPDATE_ALL);
 						world.scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(world));
 					}

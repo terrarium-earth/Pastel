@@ -9,13 +9,15 @@ import de.dafuqs.spectrum.loot.functions.GrantAdvancementLootFunction;
 import de.dafuqs.spectrum.loot.functions.SetComponentsRandomlyLootFunction;
 import de.dafuqs.spectrum.registries.DeferredRegistrar;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 public class SpectrumLootFunctionTypes {
 	
-	private static final DeferredRegistrar REGISTRAR = new DeferredRegistrar();
+	private static final DeferredRegister<LootItemFunctionType<?>> REGISTRAR = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, SpectrumCommon.MOD_ID);
 	
 	public static final LootItemFunctionType<DyeRandomlyLootFunction> DYE_RANDOMLY = register("dye_randomly", DyeRandomlyLootFunction.CODEC);
 	public static final LootItemFunctionType<FermentRandomlyLootFunction> FERMENT_RANDOMLY = register("ferment_randomly", FermentRandomlyLootFunction.CODEC);
@@ -24,11 +26,13 @@ public class SpectrumLootFunctionTypes {
 	public static final LootItemFunctionType<GrantAdvancementLootFunction> GRANT_ADVANCEMENT = register("grant_advancement", GrantAdvancementLootFunction.CODEC);
 	
 	private static <T extends LootItemFunction> LootItemFunctionType<T> register(String id, MapCodec<T> codec) {
-		return REGISTRAR.defer(new LootItemFunctionType<>(codec), type -> Registry.register(BuiltInRegistries.LOOT_FUNCTION_TYPE, SpectrumCommon.locate(id), type));
+		var tLootItemFunctionType = new LootItemFunctionType<>(codec);
+		REGISTRAR.register(id, () -> tLootItemFunctionType);
+		return tLootItemFunctionType;
 	}
 	
-	public static void register() {
-		REGISTRAR.flush();
+	public static void register(IEventBus bus) {
+		REGISTRAR.register(bus);
 	}
 	
 }

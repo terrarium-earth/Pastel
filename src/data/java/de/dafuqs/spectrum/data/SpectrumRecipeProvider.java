@@ -196,7 +196,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				),
 				List.of(PURE_DIAMOND.getDefaultInstance()));
 		
-		generateCrystallarieumRecipe(ctx, "minecraft/echo", Items.ECHO_SHARD, SpectrumFluids.MIDNIGHT_SOLUTION, null, 960, InkColors.BROWN, 3, false,
+		generateCrystallarieumRecipe(ctx, "minecraft/echo", Items.ECHO_SHARD, SpectrumFluids.MIDNIGHT_SOLUTION.get(), null, 960, InkColors.BROWN, 3, false,
 				List.of(SpectrumBlocks.SMALL_ECHO_BUD, SpectrumBlocks.LARGE_ECHO_BUD, SpectrumBlocks.ECHO_CLUSTER),
 				List.of(
 						new CrystallarieumCatalyst(Ingredient.of(FROSTBITE_ESSENCE), 1.5f, 2.0f, 0.02f),
@@ -382,7 +382,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				stages.stream().map(s -> s.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP)).toList(),
 				secondsPerStage, inkColor, 1 << (inkCostTier - 1), growsWithoutCatalyst,
 				catalysts,
-				new FluidStack(medium == null ? SpectrumFluids.LIQUID_CRYSTAL : medium, FluidType.BUCKET_VOLUME),
+				new FluidStack(medium == null ? SpectrumFluids.LIQUID_CRYSTAL.get() : medium, FluidType.BUCKET_VOLUME),
 				additionalResults));
 	}
 	

@@ -45,8 +45,6 @@ public class GobberCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
 	@Override
 	public void register() {
-		SpectrumItems.ITEM_REGISTRAR.flush();
-		SpectrumBlocks.COMMON_REGISTRAR.flush();
 		NeoForge.EVENT_BUS.addListener(GobberCompat::addEntries);
 	}
 

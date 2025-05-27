@@ -6,6 +6,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+@Deprecated
 public class DeferredRegistrar {
 	
 	private final ArrayList<Runnable> deferred = new ArrayList<>();

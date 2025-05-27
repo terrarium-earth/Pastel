@@ -1,9 +1,8 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "de.dafuqs.pastel.mixin",
+  "package": "de.dafuqs.spectrum.mixin",
   "compatibilityLevel": "JAVA_21",
-  "plugin": "de.dafuqs.pastel.mixin.compat.Plugin",
   "mixins": [
     "AbstractBlockStateMixin",
     "AbstractFireBlockMixin",
@@ -134,8 +133,7 @@
     "client.TranslucentBlockMixin",
     "client.accessors.ParticleManagerAccessor",
     "client.accessors.RenderLayerAccessor",
-    "InGameHudMixin",
-    "compat.sodium.present.ColorProviderRegistryMixin"
+    "InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

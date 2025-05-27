@@ -104,7 +104,7 @@ public class MermaidsBrushBlock extends BushBlock implements BonemealableBlock, 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
 		FluidState fluidState = ctx.getLevel().getFluidState(ctx.getClickedPos());
-		if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL) {
+		if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL.get()) {
 			return super.getStateForPlacement(ctx).setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL);
 		} else if (fluidState.is(FluidTags.WATER)) {
 			return super.getStateForPlacement(ctx).setValue(LOGGED, FluidLogging.State.WATER);
@@ -118,7 +118,7 @@ public class MermaidsBrushBlock extends BushBlock implements BonemealableBlock, 
 			return Blocks.AIR.defaultBlockState();
 		} else {
 			if (state.getValue(LOGGED) == FluidLogging.State.LIQUID_CRYSTAL) {
-				world.scheduleTick(pos, SpectrumFluids.LIQUID_CRYSTAL, SpectrumFluids.LIQUID_CRYSTAL.getTickDelay(world));
+				world.scheduleTick(pos, SpectrumFluids.LIQUID_CRYSTAL.get(), SpectrumFluids.LIQUID_CRYSTAL.get().getTickDelay(world));
 			} else {
 				world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
 			}

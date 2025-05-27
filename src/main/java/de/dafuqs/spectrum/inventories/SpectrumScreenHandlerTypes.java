@@ -1,10 +1,11 @@
 package de.dafuqs.spectrum.inventories;
 
+import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.block.FilterConfigurable;
 import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
@@ -15,9 +16,12 @@ import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.extensions.*;
 import net.neoforged.neoforge.network.*;
+import net.neoforged.neoforge.registries.*;
 
 public class SpectrumScreenHandlerTypes {
-	
+
+	private static final DeferredRegister<MenuType<?>> REGISTER = DeferredRegister.create(Registries.MENU, SpectrumCommon.MOD_ID);
+
 	public static MenuType<PaintbrushScreenHandler> PAINTBRUSH;
 	public static MenuType<WorkstaffScreenHandler> WORKSTAFF;
 	
@@ -48,14 +52,17 @@ public class SpectrumScreenHandlerTypes {
 	
 	public static <T extends AbstractContainerMenu> MenuType<T> registerSimple(ResourceLocation id, MenuType.MenuSupplier<T> factory) {
 		MenuType<T> type = new MenuType<>(factory, FeatureFlags.VANILLA_SET);
-		return Registry.register(BuiltInRegistries.MENU, id, type);
+		REGISTER.register(id.getPath(), () -> type);
+		return type;
 	}
 	
 	public static <T extends AbstractContainerMenu, D> MenuType<T> registerExtended(ResourceLocation id, IContainerFactory<T> factory, StreamCodec<? super RegistryFriendlyByteBuf, D> packetCodec) {
-		return Registry.register(BuiltInRegistries.MENU, id, IMenuTypeExtension.create(factory));
+		var type = IMenuTypeExtension.create(factory);
+		REGISTER.register(id.getPath(), () -> type);
+		return type;
 	}
 	
-	public static void registerMenus() {
+	public static void registerMenus(IEventBus bus) {
 		PAINTBRUSH = registerSimple(SpectrumScreenHandlerIDs.PAINTBRUSH, PaintbrushScreenHandler::new);
 		WORKSTAFF = registerSimple(SpectrumScreenHandlerIDs.WORKSTAFF, WorkstaffScreenHandler::new);
 		
@@ -84,6 +91,7 @@ public class SpectrumScreenHandlerTypes {
 		GENERIC_TIER1_3X3 = registerSimple(SpectrumScreenHandlerIDs.GENERIC_TIER1_3X3, Spectrum3x3ContainerScreenHandler::createTier1);
 		GENERIC_TIER2_3X3 = registerSimple(SpectrumScreenHandlerIDs.GENERIC_TIER2_3X3, Spectrum3x3ContainerScreenHandler::createTier2);
 		GENERIC_TIER3_3X3 = registerSimple(SpectrumScreenHandlerIDs.GENERIC_TIER3_3X3, Spectrum3x3ContainerScreenHandler::createTier3);
+		REGISTER.register(bus);
 	}
 
 	@SubscribeEvent

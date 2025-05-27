@@ -42,9 +42,6 @@ public class AE2Compat extends SpectrumIntegrationPacks.ModIntegrationPack {
 
 	@Override
 	public void register() {
-		SpectrumItems.ITEM_REGISTRAR.flush();
-		SpectrumBlocks.COMMON_REGISTRAR.flush();
-
 		NeoForge.EVENT_BUS.addListener(AE2Compat::addEntries);
 	}
 

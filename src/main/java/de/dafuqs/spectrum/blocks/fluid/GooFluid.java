@@ -32,12 +32,12 @@ public abstract class GooFluid extends SpectrumFluid {
 	
 	@Override
 	public Fluid getSource() {
-		return SpectrumFluids.GOO;
+		return SpectrumFluids.GOO.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return SpectrumFluids.FLOWING_GOO;
+		return SpectrumFluids.FLOWING_GOO.get();
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ public abstract class GooFluid extends SpectrumFluid {
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == SpectrumFluids.GOO || fluid == SpectrumFluids.FLOWING_GOO;
+		return fluid == SpectrumFluids.GOO.get() || fluid == SpectrumFluids.FLOWING_GOO.get();
 	}
 	
 	@Override

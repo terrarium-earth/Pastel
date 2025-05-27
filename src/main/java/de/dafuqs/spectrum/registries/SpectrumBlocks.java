@@ -341,6 +341,8 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -355,7 +357,6 @@ import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import java.util.function.UnaryOperator;
 
-import static de.dafuqs.spectrum.SpectrumCommon.FUEL_REGISTRAR;
 import static de.dafuqs.spectrum.SpectrumCommon.locate;
 import static net.minecraft.world.level.block.Blocks.AMETHYST_BLOCK;
 import static net.minecraft.world.level.block.Blocks.AMETHYST_CLUSTER;
@@ -450,7 +451,7 @@ public class SpectrumBlocks {
 		return settings(mapColor, blockSoundGroup, 5.0F, 8.0F).isRedstoneConductor(SpectrumBlocks::never).isViewBlocking(SpectrumBlocks::never).noOcclusion().requiresCorrectToolForDrops();
 	}
 	
-	public static final DeferredRegistrar COMMON_REGISTRAR = new DeferredRegistrar();
+	public static final DeferredRegister.Blocks COMMON_REGISTRAR = DeferredRegister.createBlocks(SpectrumCommon.MOD_ID);
 	public static final DeferredRegistrar CLIENT_REGISTRAR = new DeferredRegistrar();
 	
 	public static final Block PEDESTAL_BASIC_TOPAZ = register(pedestal(blockWithItem("pedestal_basic_topaz", new PedestalBlock(craftingBlock(MapColor.DIAMOND, SpectrumBlockSoundGroups.TOPAZ_BLOCK), BuiltinPedestalVariant.BASIC_TOPAZ), block -> new PedestalBlockItem(block, IS.of(1), BuiltinPedestalVariant.BASIC_TOPAZ, "item.pastel.pedestal.tooltip.basic_topaz"), InkColors.WHITE)));
@@ -2239,10 +2240,10 @@ public class SpectrumBlocks {
 		return settings(mapColor, SoundType.EMPTY, 100.0F).replaceable().noCollission().pushReaction(PushReaction.DESTROY).noLootTable().liquid();
 	}
 	
-	public static final Block LIQUID_CRYSTAL = register(singleton(block("liquid_crystal", new LiquidCrystalFluidBlock(SpectrumFluids.LIQUID_CRYSTAL, BLAZING_CRYSTAL.defaultBlockState(), fluid(MapColor.CRIMSON_STEM).lightLevel((state) -> LiquidCrystalFluidBlock.LUMINANCE).replaceable())), SpectrumTexturedModels.particle(b -> b, "_still")));
-	public static final Block GOO = register(singleton(block("goo", new GooFluidBlock(SpectrumFluids.GOO, MUD.defaultBlockState(), fluid(MapColor.TERRACOTTA_BROWN).replaceable())), SpectrumTexturedModels.particle(b -> b, "_still")));
-	public static final Block MIDNIGHT_SOLUTION = register(singleton(block("midnight_solution", new MidnightSolutionFluidBlock(SpectrumFluids.MIDNIGHT_SOLUTION, BLACK_MATERIA.defaultBlockState(), fluid(MapColor.WARPED_STEM).replaceable())), SpectrumTexturedModels.particle(b -> b, "_still")));
-	public static final Block DRAGONROT = register(singleton(block("dragonrot", new DragonrotFluidBlock(SpectrumFluids.DRAGONROT, BLACKSTONE.defaultBlockState(), fluid(MapColor.ICE).lightLevel((state) -> 15).replaceable())), SpectrumTexturedModels.particle(b -> b, "_still")));
+	public static final Block LIQUID_CRYSTAL = register(singleton(block("liquid_crystal", new LiquidCrystalFluidBlock(SpectrumFluids.LIQUID_CRYSTAL.get(), BLAZING_CRYSTAL.defaultBlockState(), fluid(MapColor.CRIMSON_STEM).lightLevel((state) -> LiquidCrystalFluidBlock.LUMINANCE).replaceable())), SpectrumTexturedModels.particle(b -> b, "_still")));
+	public static final Block GOO = register(singleton(block("goo", new GooFluidBlock(SpectrumFluids.GOO.get(), MUD.defaultBlockState(), fluid(MapColor.TERRACOTTA_BROWN).replaceable())), SpectrumTexturedModels.particle(b -> b, "_still")));
+	public static final Block MIDNIGHT_SOLUTION = register(singleton(block("midnight_solution", new MidnightSolutionFluidBlock(SpectrumFluids.MIDNIGHT_SOLUTION.get(), BLACK_MATERIA.defaultBlockState(), fluid(MapColor.WARPED_STEM).replaceable())), SpectrumTexturedModels.particle(b -> b, "_still")));
+	public static final Block DRAGONROT = register(singleton(block("dragonrot", new DragonrotFluidBlock(SpectrumFluids.DRAGONROT.get(), BLACKSTONE.defaultBlockState(), fluid(MapColor.ICE).lightLevel((state) -> 15).replaceable())), SpectrumTexturedModels.particle(b -> b, "_still")));
 	
 	static boolean never(BlockState state, BlockGetter world, BlockPos pos, EntityType<?> type) {
 		return false;
@@ -2479,24 +2480,24 @@ public class SpectrumBlocks {
 			if (hasBlock) throw new UnsupportedOperationException("Attempted to register two blocks with id " + id);
 			hasBlock = true;
 			this.block = block;
-			COMMON_REGISTRAR.defer(() -> Registry.register(BuiltInRegistries.BLOCK, id, this.block));
+			COMMON_REGISTRAR.register(id.getPath(), () -> this.block);
 			return this;
 		}
 		
 		public BlockRegistrar<T> withBlock(Supplier<T> blockFactory) {
 			if (hasBlock) throw new UnsupportedOperationException("Attempted to register two blocks with id " + id);
 			hasBlock = true;
-			COMMON_REGISTRAR.defer(() -> Registry.register(BuiltInRegistries.BLOCK, id, (block = blockFactory.get())));
+			COMMON_REGISTRAR.register(id.getPath(), blockFactory);
 			return this;
 		}
 		
 		public BlockRegistrar<T> withItem(Function<T, Item> callback, InkColor color) {
 			if (hasItem) throw new UnsupportedOperationException("Attempted to register two items with id " + id);
 			hasItem = true;
-			COMMON_REGISTRAR.defer(() -> {
-				item = callback.apply(block);
-				Registry.register(BuiltInRegistries.ITEM, id, item);
+
+			SpectrumItems.ITEM_REGISTRAR.register(id.getPath(), () -> {
 				ItemColors.ITEM_COLORS.registerColorMapping(item, color);
+				return callback.apply(block);
 			});
 			return this;
 		}
@@ -2565,12 +2566,9 @@ public class SpectrumBlocks {
 		}
 		
 		public BlockRegistrar<T> withBurnTime(int burnTicks) {
-			FUEL_REGISTRAR.defer(() -> {
-				// TODO NeoForgeDataMaps.FURNACE_FUELS
-				if (hasItem) {
-					SpectrumItems.BURN_TIMES.put(block.asItem(), burnTicks);
-				}
-			});
+			if (hasItem) {
+				SpectrumItems.BURN_TIMES.put(block.asItem(), burnTicks);
+			}
 			return this;
 		}
 		
@@ -2594,7 +2592,7 @@ public class SpectrumBlocks {
 		
 	}
 	
-	public static void register() {
+	public static void register(IEventBus bus) {
 		// All the mob heads
 		for (SpectrumSkullType type : SpectrumSkullType.values()) {
 			BlockRegistrar<SpectrumSkullBlock> registrar = block(type.getSerializedName() + "_head", new SpectrumSkullBlock(type, BlockBehaviour.Properties.ofFullCopy(SKELETON_SKULL).instrument(NoteBlockInstrument.CUSTOM_HEAD))).withBlockItemModel((ctx, block) -> SpectrumModelHelper.registerParentedItemModel(ctx, block, SpectrumModels.SKULL_ITEM)).withBlockModel((ctx, block) -> SpectrumModelHelper.createVariantsSupplier(block, SpectrumModels.MOB_HEAD));
@@ -2602,7 +2600,7 @@ public class SpectrumBlocks {
 			register(registrar.withItem(block -> new SpectrumSkullBlockItem(block, wallHead, IS.of(), type), InkColors.GRAY));
 		}
 		
-		COMMON_REGISTRAR.flush();
+		COMMON_REGISTRAR.register(bus);
 	}
 	
 	public static void registerClient() {

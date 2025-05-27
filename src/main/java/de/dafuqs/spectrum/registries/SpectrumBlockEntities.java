@@ -71,17 +71,21 @@ import de.dafuqs.spectrum.blocks.upgrade.UpgradeBlockBlockEntityRenderer;
 import de.dafuqs.spectrum.blocks.upgrade.UpgradeBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.event.*;
+import net.neoforged.neoforge.registries.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpectrumBlockEntities {
-	
+
+	public static final DeferredRegister<BlockEntityType<?>> REGISTER = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, SpectrumCommon.MOD_ID);
+
 	public static BlockEntityType<OminousSaplingBlockEntity> OMINOUS_SAPLING;
 	public static BlockEntityType<PedestalBlockEntity> PEDESTAL;
 	public static BlockEntityType<FusionShrineBlockEntity> FUSION_SHRINE;
@@ -133,10 +137,12 @@ public class SpectrumBlockEntities {
 	public static BlockEntityType<PlayerTrackerBlockEntity> PLAYER_TRACKING;
 	
 	private static <T extends BlockEntity> BlockEntityType<T> register(String id, BlockEntityType.BlockEntitySupplier<T> factory, Block... blocks) {
-		return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, SpectrumCommon.locate(id), BlockEntityType.Builder.of(factory, blocks).build(null));
+		var type = BlockEntityType.Builder.of(factory, blocks).build(null);
+		REGISTER.register(id, () -> type);
+		return type;
 	}
 	
-	public static void register() {
+	public static void register(IEventBus bus) {
 		OMINOUS_SAPLING = register("ominous_sapling_block_entity", OminousSaplingBlockEntity::new, SpectrumBlocks.OMINOUS_SAPLING);
 		PEDESTAL = register("pedestal_block_entity", PedestalBlockEntity::new, SpectrumBlocks.PEDESTAL_BASIC_AMETHYST, SpectrumBlocks.PEDESTAL_BASIC_TOPAZ, SpectrumBlocks.PEDESTAL_BASIC_CITRINE, SpectrumBlocks.PEDESTAL_ALL_BASIC, SpectrumBlocks.PEDESTAL_ONYX, SpectrumBlocks.PEDESTAL_MOONSTONE);
 		FUSION_SHRINE = register("fusion_shrine_block_entity", FusionShrineBlockEntity::new, SpectrumBlocks.FUSION_SHRINE_BASALT, SpectrumBlocks.FUSION_SHRINE_CALCITE);
@@ -194,6 +200,8 @@ public class SpectrumBlockEntities {
 		Block[] skullBlocksArray = new Block[skullBlocksList.size()];
 		skullBlocksArray = skullBlocksList.toArray(skullBlocksArray);
 		SKULL = register("skull", SpectrumSkullBlockEntity::new, skullBlocksArray);
+
+		REGISTER.register(bus);
 	}
 
 	public static void registerAdditionalTypes(BlockEntityTypeAddBlocksEvent event) {

@@ -54,12 +54,12 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	
 	@Override
 	public Fluid getSource() {
-		return SpectrumFluids.MIDNIGHT_SOLUTION;
+		return SpectrumFluids.MIDNIGHT_SOLUTION.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return SpectrumFluids.FLOWING_MIDNIGHT_SOLUTION;
+		return SpectrumFluids.FLOWING_MIDNIGHT_SOLUTION.get();
 	}
 	
 	@Override
@@ -74,7 +74,7 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == SpectrumFluids.MIDNIGHT_SOLUTION || fluid == SpectrumFluids.FLOWING_MIDNIGHT_SOLUTION;
+		return fluid == SpectrumFluids.MIDNIGHT_SOLUTION.get() || fluid == SpectrumFluids.FLOWING_MIDNIGHT_SOLUTION.get();
 	}
 	
 	@Override

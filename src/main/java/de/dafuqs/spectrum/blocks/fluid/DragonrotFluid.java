@@ -38,12 +38,12 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 
 	@Override
 	public Fluid getSource() {
-		return SpectrumFluids.DRAGONROT;
+		return SpectrumFluids.DRAGONROT.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return SpectrumFluids.FLOWING_DRAGONROT;
+		return SpectrumFluids.FLOWING_DRAGONROT.get();
 	}
 	
 	@Override
@@ -58,7 +58,7 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == SpectrumFluids.DRAGONROT || fluid == SpectrumFluids.FLOWING_DRAGONROT;
+		return fluid == SpectrumFluids.DRAGONROT.get() || fluid == SpectrumFluids.FLOWING_DRAGONROT.get();
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.registries;
 
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
+import de.dafuqs.spectrum.*;
 import de.dafuqs.spectrum.api.color.ItemColors;
 import de.dafuqs.spectrum.api.energy.color.InkColor;
 import de.dafuqs.spectrum.api.energy.color.InkColors;
@@ -179,6 +180,8 @@ import net.minecraft.world.item.component.Unbreakable;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -189,7 +192,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static de.dafuqs.spectrum.SpectrumCommon.CONFIG;
-import static de.dafuqs.spectrum.SpectrumCommon.FUEL_REGISTRAR;
 import static de.dafuqs.spectrum.SpectrumCommon.locate;
 import static net.minecraft.world.item.Items.BLACK_DYE;
 import static net.minecraft.world.item.Items.BLUE_DYE;
@@ -217,7 +219,7 @@ import static net.minecraft.world.item.Items.YELLOW_DYE;
 //TODO: I am not sure how our tools are implemented rn but they REALLY should be migrated to working off of tool components. ~ Azzyy (whom will not be the one doing this)
 public class SpectrumItems {
 	
-	public static final DeferredRegistrar ITEM_REGISTRAR = new DeferredRegistrar();
+	public static final DeferredRegister.Items ITEM_REGISTRAR = DeferredRegister.createItems(SpectrumCommon.MOD_ID);
 	public static final Object2IntMap<Item> BURN_TIMES = new Object2IntArrayMap<>();
 	
 	// Main items
@@ -393,10 +395,10 @@ public class SpectrumItems {
 	public static final Item PURE_MALACHITE = register(simple(item("pure_malachite", new CloakedItem(IS.of(Rarity.UNCOMMON), SpectrumAdvancements.REVEAL_MALACHITE, GREEN_DYE), InkColors.GREEN)));
 	
 	// Fluid Buckets
-	public static final Item LIQUID_CRYSTAL_BUCKET = register(simple(item("liquid_crystal_bucket", new BucketItem(SpectrumFluids.LIQUID_CRYSTAL, IS.of(1).craftRemainder(BUCKET)), InkColors.LIGHT_GRAY)));
-	public static final Item GOO_BUCKET = register(simple(item("goo_bucket", new BucketItem(SpectrumFluids.GOO, IS.of(1).craftRemainder(BUCKET)), InkColors.BROWN)));
-	public static final Item MIDNIGHT_SOLUTION_BUCKET = register(simple(item("midnight_solution_bucket", new BucketItem(SpectrumFluids.MIDNIGHT_SOLUTION, IS.of(1).craftRemainder(BUCKET)), InkColors.GRAY)));
-	public static final Item DRAGONROT_BUCKET = register(simple(item("dragonrot_bucket", new BucketItem(SpectrumFluids.DRAGONROT, IS.of(1).craftRemainder(BUCKET)), InkColors.LIGHT_GRAY)));
+	public static final Item LIQUID_CRYSTAL_BUCKET = register(simple(item("liquid_crystal_bucket", new BucketItem(SpectrumFluids.LIQUID_CRYSTAL.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.LIGHT_GRAY)));
+	public static final Item GOO_BUCKET = register(simple(item("goo_bucket", new BucketItem(SpectrumFluids.GOO.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.BROWN)));
+	public static final Item MIDNIGHT_SOLUTION_BUCKET = register(simple(item("midnight_solution_bucket", new BucketItem(SpectrumFluids.MIDNIGHT_SOLUTION.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.GRAY)));
+	public static final Item DRAGONROT_BUCKET = register(simple(item("dragonrot_bucket", new BucketItem(SpectrumFluids.DRAGONROT.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.LIGHT_GRAY)));
 	
 	// Decay bottles
 	public static final Item BOTTLE_OF_FADING = register(simple(item("bottle_of_fading", new DecayPlacerItem(SpectrumBlocks.FADING, IS.of(16), List.of(Component.translatable("item.pastel.bottle_of_fading.tooltip"))), InkColors.GRAY)));
@@ -745,9 +747,10 @@ public class SpectrumItems {
 			if (hasItem) throw new UnsupportedOperationException("Attempted to register two items with id " + id);
 			hasItem = true;
 			this.item = item;
-			ITEM_REGISTRAR.defer(() -> {
-				Registry.register(BuiltInRegistries.ITEM, id, this.item);
+
+			ITEM_REGISTRAR.register(id.getPath(), () -> {
 				ItemColors.ITEM_COLORS.registerColorMapping(item, color);
+				return this.item;
 			});
 			return this;
 		}
@@ -755,18 +758,15 @@ public class SpectrumItems {
 		public ItemRegistrar<T> withItem(Supplier<T> itemFactory, InkColor color) {
 			if (hasItem) throw new UnsupportedOperationException("Attempted to register two items with id " + id);
 			hasItem = true;
-			ITEM_REGISTRAR.defer(() -> {
-				Registry.register(BuiltInRegistries.ITEM, id, (item = itemFactory.get()));
+			ITEM_REGISTRAR.register(id.getPath(), () -> {
 				ItemColors.ITEM_COLORS.registerColorMapping(item, color);
+				return itemFactory.get();
 			});
 			return this;
 		}
 		
 		public ItemRegistrar<T> withBurnTime(int burnTicks) {
-			FUEL_REGISTRAR.defer(() -> {
-				Objects.requireNonNull(item);
-				BURN_TIMES.put(item.asItem(), burnTicks);
-			});
+			BURN_TIMES.put(item.asItem(), burnTicks);
 			return this;
 		}
 		
@@ -789,8 +789,8 @@ public class SpectrumItems {
 		
 	}
 	
-	public static void register() {
-		ITEM_REGISTRAR.flush();
+	public static void register(IEventBus bus) {
+		ITEM_REGISTRAR.register(bus);
 	}
 	
 	public static class IS {
