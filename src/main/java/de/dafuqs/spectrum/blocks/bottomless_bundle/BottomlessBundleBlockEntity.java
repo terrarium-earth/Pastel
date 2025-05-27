@@ -58,14 +58,14 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 
 	public BottomlessBundleBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.BOTTOMLESS_BUNDLE, pos, state);
-		this.bundle = SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem().getDefaultInstance();
+		this.bundle = SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
 	}
 
 	@Override
 	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.loadAdditional(nbt, registryLookup);
 		this.setBundleUnsynced(ItemStack.parse(registryLookup, nbt.getCompound("Bundle"))
-				.orElse(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem().getDefaultInstance()), registryLookup);
+				.orElse(SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance()), registryLookup);
 		syncStorageWithBundle();
 	}
 
@@ -109,7 +109,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 
 	public ItemStack retrieveBundle() {
 		if (this.bundle.isEmpty()) {
-			return SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem().getDefaultInstance();
+			return SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
 		} else {
 			syncBundleWithStorage();
 			return this.bundle;

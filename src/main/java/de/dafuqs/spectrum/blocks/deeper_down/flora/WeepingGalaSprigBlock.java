@@ -25,7 +25,7 @@ public class WeepingGalaSprigBlock extends SaplingBlock {
 
 	@Override
 	protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-		return floor.is(SpectrumBlockTags.ASH) || floor.is(SpectrumBlocks.ASHEN_BLACKSLAG) || super.mayPlaceOn(floor, world, pos);
+		return floor.is(SpectrumBlockTags.ASH) || floor.is(SpectrumBlocks.ASHEN_BLACKSLAG.get()) || super.mayPlaceOn(floor, world, pos);
 	}
 	
 }

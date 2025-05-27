@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 @OnlyIn(Dist.CLIENT)
 public class PotionWorkshopReactingCategory extends GatedItemInformationPageCategory {
 	
-	public static final EntryStack<ItemStack> POTION_WORKSHOP_ENTRY = EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP);
+	public static final EntryStack<ItemStack> POTION_WORKSHOP_ENTRY = EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP.get());
 	
 	@Override
 	public Renderer getIcon() {

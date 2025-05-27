@@ -44,7 +44,7 @@ public class NephriteBlossomStemBlock extends BushBlock {
 	}
 	
 	public static BlockState getStemVariant(boolean top) {
-		return SpectrumBlocks.NEPHRITE_BLOSSOM_STEM.defaultBlockState().setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM);
+		return SpectrumBlocks.NEPHRITE_BLOSSOM_STEM.get().defaultBlockState().setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM);
 	}
 	
 	@Override

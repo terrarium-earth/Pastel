@@ -34,7 +34,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.AQUA_REGIA, 4);
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-		add(IngredientStack.ofItems(SpectrumBlocks.JADEITE_LOTUS_BULB.asItem()));
+		add(IngredientStack.ofItems(SpectrumBlocks.JADEITE_LOTUS_BULB.get().asItem()));
 		add(IngredientStack.ofItems(SpectrumItems.JADEITE_PETALS, 3));
 	}};
 	
@@ -44,7 +44,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 	
 	@Override
 	public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
-		int bulbCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumBlocks.JADEITE_LOTUS_BULB.asItem());
+		int bulbCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumBlocks.JADEITE_LOTUS_BULB.get().asItem());
 		int petalCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.JADEITE_PETALS);
 		boolean nectar = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.MOONSTRUCK_NECTAR) > 0;
 		
@@ -113,7 +113,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 			if (stack.isEmpty()) {
 				continue;
 			}
-			if (stack.is(SpectrumBlocks.JADEITE_LOTUS_BULB.asItem())) {
+			if (stack.is(SpectrumBlocks.JADEITE_LOTUS_BULB.get().asItem())) {
 				bulbsFound = true;
 			} else if (!stack.is(SpectrumItems.JADEITE_PETALS) && !stack.is(SpectrumItems.MOONSTRUCK_NECTAR)) {
 				return false;

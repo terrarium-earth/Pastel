@@ -25,7 +25,7 @@ public class ShearsDispenserBehaviorMixin {
     @Inject(at = @At("HEAD"), method = "tryShearBeehive", cancellable = true)
     private static void spectrum$shearsShearSawbladeHollyBushes(ServerLevel world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         BlockState blockState = world.getBlockState(pos);
-        if (blockState.is(SpectrumBlocks.SAWBLADE_HOLLY_BUSH)) {
+        if (blockState.is(SpectrumBlocks.SAWBLADE_HOLLY_BUSH.get())) {
             int age = blockState.getValue(SawbladeHollyBushBlock.AGE);
             if (SawbladeHollyBushBlock.canBeSheared(age)) {
                 // we do not have the real shears item used in the dispenser here, but for the default loot table that does not make much of a difference

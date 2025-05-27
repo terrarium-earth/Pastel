@@ -104,7 +104,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleRecipeInput>
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.CRYSTALLARIEUM);
+		return new ItemStack(SpectrumBlocks.CRYSTALLARIEUM.get());
 	}
 	
 	@Override

@@ -178,7 +178,7 @@ public class SpectrumLootPoolModifiers {
 			}
 		} else if (key.equals(BuiltInLootTables.SNIFFER_DIGGING)) {
 			for (LootPool pool : table.pools) {
-				addEntry(pool, LootItem.lootTableItem(SpectrumBlocks.WEEPING_GALA_SPRIG).setWeight(1));
+				addEntry(pool, LootItem.lootTableItem(SpectrumBlocks.WEEPING_GALA_SPRIG.get()).setWeight(1));
 				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(2));
 			}
 		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/fox")))) {

@@ -50,10 +50,10 @@ public class SpectrumPresentUnpackBehaviors {
 			return stack;
 		});
 		
-		PresentBlock.registerBehavior(SpectrumBlocks.INCANDESCENT_AMALGAM, (stack, presentBlockEntity, world, pos, random) -> {
-			IncandescentAmalgamBlock.explode(world, pos, presentBlockEntity.getOwnerIfOnline(), stack);
-			return ItemStack.EMPTY;
-		});
+		PresentBlock.registerBehavior(SpectrumBlocks.INCANDESCENT_AMALGAM.get(), (stack, presentBlockEntity, world, pos, random) -> {
+            IncandescentAmalgamBlock.explode(world, pos, presentBlockEntity.getOwnerIfOnline(), stack);
+            return ItemStack.EMPTY;
+        });
 		
 		PresentBlock.registerBehavior(Items.FIREWORK_ROCKET, (stack, presentBlockEntity, world, pos, random) -> {
 			Vec3 centerPos = Vec3.atLowerCornerOf(pos);
@@ -131,10 +131,10 @@ public class SpectrumPresentUnpackBehaviors {
 			return ItemStack.EMPTY;
 		});
 		
-		PresentBlock.registerBehavior(SpectrumBlocks.MEMORY, (stack, presentBlockEntity, world, pos, random) -> {
-			MemoryBlockEntity.manifest(world, pos, stack, presentBlockEntity.getOpenerUUID());
-			return ItemStack.EMPTY;
-		});
+		PresentBlock.registerBehavior(SpectrumBlocks.MEMORY.get(), (stack, presentBlockEntity, world, pos, random) -> {
+            MemoryBlockEntity.manifest(world, pos, stack, presentBlockEntity.getOpenerUUID());
+            return ItemStack.EMPTY;
+        });
 		
 	}
 	

@@ -311,7 +311,7 @@ public class FloatBlockEntity extends Entity {
 			if (entity instanceof FloatBlockEntity other && isPaltaeriaStratineCollision(other)) {
 				world.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, Level.ExplosionInteraction.NONE);
 				
-				ItemStack collisionStack = SpectrumBlocks.HOVER_BLOCK.asItem().getDefaultInstance();
+				ItemStack collisionStack = SpectrumBlocks.HOVER_BLOCK.get().asItem().getDefaultInstance();
 				ItemEntity itemEntity = new ItemEntity(world, this.getX(), this.getY(), this.getZ(), collisionStack);
 				itemEntity.push(0.1 - world.random.nextFloat() * 0.2, 0.1 - world.random.nextFloat() * 0.2, 0.1 - world.random.nextFloat() * 0.2);
 				world.addFreshEntity(itemEntity);
@@ -331,8 +331,8 @@ public class FloatBlockEntity extends Entity {
 	public boolean isPaltaeriaStratineCollision(FloatBlockEntity other) {
 		Block thisBlock = this.blockState.getBlock();
 		Block otherBlock = other.getBlockState().getBlock();
-		return thisBlock == SpectrumBlocks.PALTAERIA_FLOATBLOCK && otherBlock == SpectrumBlocks.STRATINE_FLOATBLOCK
-				|| thisBlock == SpectrumBlocks.STRATINE_FLOATBLOCK && otherBlock == SpectrumBlocks.PALTAERIA_FLOATBLOCK;
+		return thisBlock == SpectrumBlocks.PALTAERIA_FLOATBLOCK.get() && otherBlock == SpectrumBlocks.STRATINE_FLOATBLOCK.get()
+				|| thisBlock == SpectrumBlocks.STRATINE_FLOATBLOCK.get() && otherBlock == SpectrumBlocks.PALTAERIA_FLOATBLOCK.get();
 	}
 	
 	/**

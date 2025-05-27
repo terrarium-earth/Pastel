@@ -433,7 +433,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 				}
 
 				if (candidate.is(SpectrumBlockTags.BASE_STONE_DEEPER_DOWN)) {
-					world.setBlockAndUpdate(transmutePos, SpectrumBlocks.BLACK_MATERIA.defaultBlockState());
+					world.setBlockAndUpdate(transmutePos, SpectrumBlocks.BLACK_MATERIA.get().defaultBlockState());
 					continue;
 				}
 

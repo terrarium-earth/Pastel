@@ -34,7 +34,7 @@ public abstract class GlassBottleItemMixin {
 	public void onUse(Level world, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir, @Local ItemStack handStack, @Local BlockPos blockPos) {
 		BlockState blockState = world.getBlockState(blockPos);
 		
-		if (blockState.is(SpectrumBlocks.FADING)
+		if (blockState.is(SpectrumBlocks.FADING.get())
 				&& SpectrumCommon.CONFIG.CanBottleUpFading
 				&& AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.UNLOCK_BOTTLE_OF_FADING)) {
 			
@@ -42,7 +42,7 @@ public abstract class GlassBottleItemMixin {
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
 			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, SpectrumItems.BOTTLE_OF_FADING.getDefaultInstance()), world.isClientSide()));
 			
-		} else if (blockState.is(SpectrumBlocks.FAILING)
+		} else if (blockState.is(SpectrumBlocks.FAILING.get())
 				&& SpectrumCommon.CONFIG.CanBottleUpFailing
 				&& AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.UNLOCK_BOTTLE_OF_FAILING)) {
 			
@@ -50,7 +50,7 @@ public abstract class GlassBottleItemMixin {
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
 			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, SpectrumItems.BOTTLE_OF_FAILING.getDefaultInstance()), world.isClientSide()));
 			
-		} else if (blockState.is(SpectrumBlocks.RUIN)
+		} else if (blockState.is(SpectrumBlocks.RUIN.get())
 				&& SpectrumCommon.CONFIG.CanBottleUpRuin
 				&& AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.UNLOCK_BOTTLE_OF_RUIN)) {
 			
@@ -58,7 +58,7 @@ public abstract class GlassBottleItemMixin {
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
 			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, SpectrumItems.BOTTLE_OF_RUIN.getDefaultInstance()), world.isClientSide()));
 			
-		} else if (blockState.is(SpectrumBlocks.FORFEITURE)
+		} else if (blockState.is(SpectrumBlocks.FORFEITURE.get())
 				&& SpectrumCommon.CONFIG.CanBottleUpForfeiture
 				&& AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.UNLOCK_BOTTLE_OF_FORFEITURE)) {
 			

@@ -136,7 +136,7 @@ public class SpectrumCommon {
 		logInfo("Registering Armor Materials...");
 		SpectrumArmorMaterials.register(pastelBus);
 		logInfo("Registering Blocks...");
-		SpectrumBlocks.register(pastelBus);
+		SpectrumBlocks.registerCommon(pastelBus);
 		logInfo("Registering Items...");
 		SpectrumPotions.register(pastelBus);
 		SpectrumItems.register(pastelBus);

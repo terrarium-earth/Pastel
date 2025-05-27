@@ -17,8 +17,8 @@ public class SpectrumBurnTimeDataMapProvider extends DataMapProvider {
     @Override
     protected void gather(HolderLookup.Provider provider) {
         var builder = builder(NeoForgeDataMaps.FURNACE_FUELS);
-        SpectrumItems.BURN_TIMES.forEach( (item, integer) ->
-                builder.add(item.builtInRegistryHolder(), new FurnaceFuel(integer), false)
+        SpectrumItems.BURN_TIMES.forEach( (p) ->
+                builder.add(p.getFirst().asItem().builtInRegistryHolder(), new FurnaceFuel(p.getSecond()), false)
         );
     }
 

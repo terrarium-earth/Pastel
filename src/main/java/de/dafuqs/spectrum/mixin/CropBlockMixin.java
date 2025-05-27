@@ -29,14 +29,14 @@ public abstract class CropBlockMixin {
 	
 	@Inject(method = "growCrops", at = @At("HEAD"), cancellable = true)
 	private void spectrum$cancelGrowthAttempts(Level world, BlockPos pos, BlockState state, CallbackInfo ci) {
-		if (world.getBlockState(pos.below()).is(SpectrumBlocks.TILLED_SHALE_CLAY)) {
+		if (world.getBlockState(pos.below()).is(SpectrumBlocks.TILLED_SHALE_CLAY.get())) {
 			ci.cancel();
 		}
 	}
 	
 	@Inject(method = "growCrops", at = @At("HEAD"), cancellable = true)
 	public void spectrum$hasRandomTicks(Level world, BlockPos pos, BlockState state, CallbackInfo ci) {
-		if (world.getBlockState(pos.below()).is(SpectrumBlocks.TILLED_SHALE_CLAY)) {
+		if (world.getBlockState(pos.below()).is(SpectrumBlocks.TILLED_SHALE_CLAY.get())) {
 			ci.cancel();
 		}
 	}

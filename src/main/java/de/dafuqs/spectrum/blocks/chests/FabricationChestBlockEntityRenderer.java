@@ -75,7 +75,7 @@ public class FabricationChestBlockEntityRenderer implements BlockEntityRenderer<
 	public void render(FabricationChestBlockEntity chest, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
 		Level world = chest.getLevel();
 		boolean bl = world != null;
-		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.FABRICATION_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.FABRICATION_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
 
 		matrices.pushPose();
 		float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING).toYRot() : 0;

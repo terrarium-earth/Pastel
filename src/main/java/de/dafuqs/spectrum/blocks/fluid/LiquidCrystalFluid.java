@@ -48,7 +48,7 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 	
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return SpectrumBlocks.LIQUID_CRYSTAL.defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return SpectrumBlocks.LIQUID_CRYSTAL.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override
@@ -71,7 +71,7 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 		// if liquid crystal collides with a flower of any kind:
 		// drop a resonant lily instead
 		if (state.is(BlockTags.FLOWERS)) {
-			Block.dropResources(SpectrumBlocks.RESONANT_LILY.defaultBlockState(), world, pos, null);
+			Block.dropResources(SpectrumBlocks.RESONANT_LILY.get().defaultBlockState(), world, pos, null);
 		} else {
 			super.beforeDestroyingBlock(world, pos, state);
 		}

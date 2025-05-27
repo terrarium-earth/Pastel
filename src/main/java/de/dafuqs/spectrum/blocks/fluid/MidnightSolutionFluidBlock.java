@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class MidnightSolutionFluidBlock extends SpectrumFluidBlock {
 
-	public static final BlockState SPREAD_BLOCKSTATE = SpectrumBlocks.BLACK_MATERIA.defaultBlockState().setValue(BlackMateriaBlock.AGE, 0);
+	public static final BlockState SPREAD_BLOCKSTATE = SpectrumBlocks.BLACK_MATERIA.get().defaultBlockState().setValue(BlackMateriaBlock.AGE, 0);
 	
 	public MidnightSolutionFluidBlock(SpectrumFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
 		super(fluid, ultrawarmReplacementBlockState, settings);
@@ -49,7 +49,7 @@ public class MidnightSolutionFluidBlock extends SpectrumFluidBlock {
 	public static boolean tryConvertNeighbor(@NotNull Level world, BlockPos fromPos) {
 		FluidState fluidState = world.getFluidState(fromPos);
 		if (!fluidState.isEmpty() && fluidState.is(SpectrumFluidTags.MIDNIGHT_SOLUTION_CONVERTED)) {
-			world.setBlockAndUpdate(fromPos, SpectrumBlocks.MIDNIGHT_SOLUTION.defaultBlockState());
+			world.setBlockAndUpdate(fromPos, SpectrumBlocks.MIDNIGHT_SOLUTION.get().defaultBlockState());
 			fizz(world, fromPos);
 			return true;
 		}

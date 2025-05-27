@@ -16,11 +16,11 @@ import org.jetbrains.annotations.NotNull;
 public abstract class EnchanterCategory<T extends EnchanterDisplay> extends GatedDisplayCategory<T> {
 	
 	public final static ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/enchanter.png");
-	public static final EntryIngredient ENCHANTER = EntryIngredients.of(SpectrumBlocks.ENCHANTER);
+	public static final EntryIngredient ENCHANTER = EntryIngredients.of(SpectrumBlocks.ENCHANTER.get());
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.ENCHANTER);
+		return EntryStacks.of(SpectrumBlocks.ENCHANTER.get());
 	}
 	
 	public abstract int getCraftingTime(@NotNull T display);

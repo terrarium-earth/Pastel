@@ -35,7 +35,7 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 			GridEntry.item(Items.FEATHER, Component.translatable("item.pastel.workstaff.gui.silk_touch"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_SILK_TOUCH)),
 			GridEntry.BACK,
 			GridEntry.item(SpectrumItems.RESONANCE_SHARD, Component.translatable("item.pastel.workstaff.gui.resonance"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_RESONANCE)),
-			GridEntry.item(SpectrumBlocks.FOUR_LEAF_CLOVER.asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE))
+			GridEntry.item(SpectrumBlocks.FOUR_LEAF_CLOVER.get().asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE))
 	);
 
 	public WorkstaffScreen(WorkstaffScreenHandler handler, Inventory playerInventory, Component title) {
@@ -65,7 +65,7 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 			var drm = Minecraft.getInstance().player.registryAccess();
 			GridEntry enchantmentEntry = SpectrumEnchantmentHelper.hasEnchantment(drm, Enchantments.FORTUNE, mainHandStack)
 					? GridEntry.item(Items.FEATHER, Component.translatable("item.pastel.workstaff.gui.silk_touch"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_SILK_TOUCH))
-					: GridEntry.item(SpectrumBlocks.FOUR_LEAF_CLOVER.asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE));
+					: GridEntry.item(SpectrumBlocks.FOUR_LEAF_CLOVER.get().asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE));
 
 			gridStack.push(new Grid(
 					GridEntry.CLOSE,

@@ -365,7 +365,7 @@ public class SpectrumEnchantments {
 			Optional.empty()
 	).withEnchantable(provider -> provider
 			.addTag(ItemTags.MINING_LOOT_ENCHANTABLE)
-			.add(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem().builtInRegistryHolder().key())
+			.add(SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().builtInRegistryHolder().key())
 	).register();
 	
 	private static ResourceKey<Enchantment> of(String id) {

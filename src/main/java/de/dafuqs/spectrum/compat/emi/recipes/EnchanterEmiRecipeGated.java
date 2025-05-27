@@ -37,7 +37,7 @@ public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectru
 		
 		// Knowledge Gem and Enchanter
 		widgets.addSlot(inputs.get(9), 111, 5);
-		widgets.addSlot(EmiStack.of(SpectrumBlocks.ENCHANTER), 111, 51).drawBack(false);
+		widgets.addSlot(EmiStack.of(SpectrumBlocks.ENCHANTER.get()), 111, 51).drawBack(false);
 		
 		// center input slot
 		widgets.addSlot(inputs.get(0), 31, 31);

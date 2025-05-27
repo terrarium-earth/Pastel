@@ -37,16 +37,16 @@ public class UnlockToastManager {
 	
 	public static final Map<ResourceLocation, Tuple<ItemStack, String>> MESSAGE_TOASTS = new HashMap<>() {{
 		put(SpectrumAdvancements.UNLOCK_SHOOTING_STARS, new Tuple<>(Items.SPYGLASS.getDefaultInstance(), "shooting_stars_unlocked"));
-		put(SpectrumAdvancements.OVERENCHANTING, new Tuple<>(SpectrumBlocks.ENCHANTER.asItem().getDefaultInstance(), "overchanting_unlocked"));
-		put(SpectrumAdvancements.APPLY_CONFLICTING_ENCHANTMENTS, new Tuple<>(SpectrumBlocks.ENCHANTER.asItem().getDefaultInstance(), "enchant_conflicting_enchantments_unlocked"));
-		put(SpectrumAdvancements.FOURTH_BREWING_SLOT, new Tuple<>(SpectrumBlocks.POTION_WORKSHOP.asItem().getDefaultInstance(), "fourth_potion_reagent_unlocked"));
-		put(SpectrumAdvancements.MIDGAME, new Tuple<>(SpectrumBlocks.PEDESTAL_ONYX.asItem().getDefaultInstance(), "second_advancement_tree_unlocked"));
-		put(SpectrumAdvancements.LATEGAME, new Tuple<>(SpectrumBlocks.PEDESTAL_MOONSTONE.asItem().getDefaultInstance(), "third_advancement_tree_unlocked"));
-		put(SpectrumAdvancements.ASCEND_KINDLING, new Tuple<>(SpectrumBlocks.PEDESTAL_MOONSTONE.asItem().getDefaultInstance(), "ascend_kindling"));
+		put(SpectrumAdvancements.OVERENCHANTING, new Tuple<>(SpectrumBlocks.ENCHANTER.get().asItem().getDefaultInstance(), "overchanting_unlocked"));
+		put(SpectrumAdvancements.APPLY_CONFLICTING_ENCHANTMENTS, new Tuple<>(SpectrumBlocks.ENCHANTER.get().asItem().getDefaultInstance(), "enchant_conflicting_enchantments_unlocked"));
+		put(SpectrumAdvancements.FOURTH_BREWING_SLOT, new Tuple<>(SpectrumBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance(), "fourth_potion_reagent_unlocked"));
+		put(SpectrumAdvancements.MIDGAME, new Tuple<>(SpectrumBlocks.PEDESTAL_ONYX.get().asItem().getDefaultInstance(), "second_advancement_tree_unlocked"));
+		put(SpectrumAdvancements.LATEGAME, new Tuple<>(SpectrumBlocks.PEDESTAL_MOONSTONE.get().asItem().getDefaultInstance(), "third_advancement_tree_unlocked"));
+		put(SpectrumAdvancements.ASCEND_KINDLING, new Tuple<>(SpectrumBlocks.PEDESTAL_MOONSTONE.get().asItem().getDefaultInstance(), "ascend_kindling"));
 		put(SpectrumAdvancements.VIVISECT_KINDLING, new Tuple<>(SpectrumItems.DIVINATION_HEART.getDefaultInstance(), "vivisect_kindling"));
 		put(SpectrumAdvancements.PAINTBRUSH_COLORING, new Tuple<>(SpectrumItems.PAINTBRUSH.getDefaultInstance(), "block_coloring_unlocked"));
 		put(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING, new Tuple<>(SpectrumItems.PAINTBRUSH.getDefaultInstance(), "ink_slinging_unlocked"));
-		put(SpectrumAdvancements.PASTEL_NODE_COLORING, new Tuple<>(SpectrumBlocks.SENDER_NODE.asItem().getDefaultInstance(), "pastel_node_coloring"));
+		put(SpectrumAdvancements.PASTEL_NODE_COLORING, new Tuple<>(SpectrumBlocks.SENDER_NODE.get().asItem().getDefaultInstance(), "pastel_node_coloring"));
 	}};
 	
 	public static void clear() {

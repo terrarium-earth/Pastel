@@ -123,7 +123,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		if (!isJoinPacket) {
 			for (Block block : blocks) {
 				if (BuiltInRegistries.BLOCK.getKey(block).getNamespace().equals(SpectrumCommon.MOD_ID)) {
-					RevelationToast.showRevelationToast(Minecraft.getInstance(), new ItemStack(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST.asItem()), SpectrumSoundEvents.NEW_REVELATION);
+					RevelationToast.showRevelationToast(Minecraft.getInstance(), new ItemStack(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST.get().asItem()), SpectrumSoundEvents.NEW_REVELATION);
 					break;
 				}
 			}

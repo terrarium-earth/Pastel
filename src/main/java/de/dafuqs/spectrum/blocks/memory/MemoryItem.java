@@ -74,13 +74,13 @@ public class MemoryItem extends BlockItem {
 		tag.remove("PortalCooldown");
 		tag.remove("HurtTime");
 		
-		ItemStack stack = SpectrumBlocks.MEMORY.asItem().getDefaultInstance();
+		ItemStack stack = SpectrumBlocks.MEMORY.get().asItem().getDefaultInstance();
 		stack.set(DataComponents.ENTITY_DATA, CustomData.of(tag));
 		return stack;
 	}
 	
 	public static ItemStack getForEntityType(EntityType<?> entityType, int ticksToManifest) {
-		ItemStack stack = SpectrumBlocks.MEMORY.asItem().getDefaultInstance();
+		ItemStack stack = SpectrumBlocks.MEMORY.get().asItem().getDefaultInstance();
 		
 		stack.set(SpectrumDataComponentTypes.MEMORY, new MemoryComponent.Builder(MemoryComponent.DEFAULT).ticksToManifest(ticksToManifest).build());
 		
@@ -201,7 +201,7 @@ public class MemoryItem extends BlockItem {
 		Set<MemoryComponent> encountered = new HashSet<>();
 		//TODO does this work on dedicated servers?
 		if (ServerLifecycleHooks.getCurrentServer() != null) {
-			Item memoryItem = SpectrumBlocks.MEMORY.asItem();
+			Item memoryItem = SpectrumBlocks.MEMORY.get().asItem();
 			for (var recipe : ServerLifecycleHooks.getCurrentServer().getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.SPIRIT_INSTILLING)) {
 				ItemStack output = recipe.value().getResultItem(lookup);
 				var memory = output.get(SpectrumDataComponentTypes.MEMORY);

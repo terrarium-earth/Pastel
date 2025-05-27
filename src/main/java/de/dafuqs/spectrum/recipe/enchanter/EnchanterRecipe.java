@@ -98,7 +98,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.ENCHANTER);
+		return new ItemStack(SpectrumBlocks.ENCHANTER.get());
 	}
 	
 	@Override

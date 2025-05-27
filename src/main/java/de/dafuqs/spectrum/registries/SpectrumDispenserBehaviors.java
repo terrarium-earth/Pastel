@@ -16,15 +16,15 @@ import net.minecraft.world.level.block.DispenserBlock;
 public class SpectrumDispenserBehaviors {
 	
 	public static void register() {
-		DispenserBlock.registerBehavior(SpectrumBlocks.BOTTOMLESS_BUNDLE, new BottomlessBundleItem.BottomlessBundlePlacementDispenserBehavior());
+		DispenserBlock.registerBehavior(SpectrumBlocks.BOTTOMLESS_BUNDLE.get(), new BottomlessBundleItem.BottomlessBundlePlacementDispenserBehavior());
 		DispenserBlock.registerBehavior(SpectrumItems.BEDROCK_SHEARS, new ShearsDispenseItemBehavior());
 		
 		// Shooting Stars
-		DispenserBlock.registerBehavior(SpectrumBlocks.COLORFUL_SHOOTING_STAR, new ShootingStarDispenserBehavior());
-		DispenserBlock.registerBehavior(SpectrumBlocks.FIERY_SHOOTING_STAR, new ShootingStarDispenserBehavior());
-		DispenserBlock.registerBehavior(SpectrumBlocks.GEMSTONE_SHOOTING_STAR, new ShootingStarDispenserBehavior());
-		DispenserBlock.registerBehavior(SpectrumBlocks.GLISTERING_SHOOTING_STAR, new ShootingStarDispenserBehavior());
-		DispenserBlock.registerBehavior(SpectrumBlocks.PRISTINE_SHOOTING_STAR, new ShootingStarDispenserBehavior());
+		DispenserBlock.registerBehavior(SpectrumBlocks.COLORFUL_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
+		DispenserBlock.registerBehavior(SpectrumBlocks.FIERY_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
+		DispenserBlock.registerBehavior(SpectrumBlocks.GEMSTONE_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
+		DispenserBlock.registerBehavior(SpectrumBlocks.GLISTERING_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
+		DispenserBlock.registerBehavior(SpectrumBlocks.PRISTINE_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
 		
 		// Fluid Buckets
 		DispenseItemBehavior fluidBucketBehavior = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);

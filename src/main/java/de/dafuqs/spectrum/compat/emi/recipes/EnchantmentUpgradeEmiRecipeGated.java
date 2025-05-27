@@ -105,7 +105,7 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 			return EmiStack.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(xp, false));
 		}, 0, 111, 5);
 		widgets.add(gem);
-		widgets.addSlot(EmiStack.of(SpectrumBlocks.ENCHANTER), 111, 51).drawBack(false);
+		widgets.addSlot(EmiStack.of(SpectrumBlocks.ENCHANTER.get()), 111, 51).drawBack(false);
 		
 		var cap = overEnchant ? levelCap : maxNormal;
 		// Indexing buttons

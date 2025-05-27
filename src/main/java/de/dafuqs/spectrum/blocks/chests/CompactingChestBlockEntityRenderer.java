@@ -69,7 +69,7 @@ public class CompactingChestBlockEntityRenderer implements BlockEntityRenderer<C
 	public void render(CompactingChestBlockEntity chest, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumers, int light, int overlay) {
 		Level world = chest.getLevel();
 		boolean bl = world != null;
-		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.COMPACTING_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.COMPACTING_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
 		poseStack.pushPose();
 		float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING).toYRot() : 0;
 		poseStack.translate(0.5D, 1.5D, 0.5D);

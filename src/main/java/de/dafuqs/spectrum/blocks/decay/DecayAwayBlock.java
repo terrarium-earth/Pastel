@@ -73,11 +73,11 @@ public class DecayAwayBlock extends Block {
 	
 	public BlockState getTargetStateForCurable(BlockState blockState) {
 		if (blockState.getBlock() instanceof DecayBlock) {
-			if (blockState.is(SpectrumBlocks.RUIN) || blockState.is(SpectrumBlocks.FORFEITURE)) {
+			if (blockState.is(SpectrumBlocks.RUIN.get()) || blockState.is(SpectrumBlocks.FORFEITURE.get())) {
 				if (blockState.getValue(ForfeitureBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
 					return this.defaultBlockState().setValue(TARGET_CONVERSION, TargetConversion.BEDROCK);
 				}
-			} else if (blockState.is(SpectrumBlocks.FAILING)) {
+			} else if (blockState.is(SpectrumBlocks.FAILING.get())) {
 				if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
 					return this.defaultBlockState().setValue(TARGET_CONVERSION, TargetConversion.OBSIDIAN);
 				} else if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.SPECIAL) {
@@ -121,7 +121,7 @@ public class DecayAwayBlock extends Block {
 				} else if (BuiltinDimensionTypes.END_EFFECTS.equals(identifier)) {
 					return Blocks.END_STONE.defaultBlockState();
 				} else if (SpectrumDimensions.DIMENSION_ID.equals(identifier)) {
-					return SpectrumBlocks.BLACKSLAG.defaultBlockState();
+					return SpectrumBlocks.BLACKSLAG.get().defaultBlockState();
 				}
 				return Blocks.DIRT.defaultBlockState();
 			}

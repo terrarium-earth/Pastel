@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EndermanEntityMixin {
 	
 	@Unique
-	private final BlockState carriedBlockState = SpectrumBlocks.RADIATING_ENDER.defaultBlockState();
+	private final BlockState carriedBlockState = SpectrumBlocks.RADIATING_ENDER.get().defaultBlockState();
 	
 	@Shadow
 	@Nullable
@@ -50,7 +50,7 @@ public abstract class EndermanEntityMixin {
 	
 	@Inject(at = @At("RETURN"), method = "requiresCustomPersistence", cancellable = true)
 	public void cannotDespawn(CallbackInfoReturnable<Boolean> cir) {
-		if (cir.getReturnValue() && this.getCarriedBlock() != null && this.getCarriedBlock().is(SpectrumBlocks.RADIATING_ENDER)) {
+		if (cir.getReturnValue() && this.getCarriedBlock() != null && this.getCarriedBlock().is(SpectrumBlocks.RADIATING_ENDER.get())) {
 			cir.setReturnValue(false);
 		}
 	}

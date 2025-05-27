@@ -22,7 +22,7 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class FusionShrineCategory extends GatedDisplayCategory<FusionShrineDisplay> {
 	
-	private static final EntryIngredient FUSION_SHRINE_BASALT = EntryIngredients.of(SpectrumBlocks.FUSION_SHRINE_BASALT);
+	private static final EntryIngredient FUSION_SHRINE_BASALT = EntryIngredients.of(SpectrumBlocks.FUSION_SHRINE_BASALT.get());
 	
 	@Override
 	public CategoryIdentifier<FusionShrineDisplay> getCategoryIdentifier() {
@@ -36,7 +36,7 @@ public class FusionShrineCategory extends GatedDisplayCategory<FusionShrineDispl
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.FUSION_SHRINE_BASALT);
+		return EntryStacks.of(SpectrumBlocks.FUSION_SHRINE_BASALT.get());
 	}
 	
 	@Override

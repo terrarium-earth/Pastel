@@ -19,7 +19,7 @@ public class HeatingCategory extends BlockToBlockWithChanceCategory {
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.BLAZE_IDOL);
+		return EntryStacks.of(SpectrumBlocks.BLAZE_IDOL.get());
 	}
 	
 	@Override

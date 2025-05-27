@@ -27,64 +27,64 @@ public class SpectrumCompostableBlocks {
 		add.accept(SpectrumItems.VEGETAL, ALWAYS);
 		add.accept(SpectrumItems.BONE_ASH, ALWAYS);
 
-		add.accept(SpectrumBlocks.CLOVER, MEDIUM);
-		add.accept(SpectrumBlocks.FOUR_LEAF_CLOVER, MEDIUM);
+		add.accept(SpectrumBlocks.CLOVER.get(), MEDIUM);
+		add.accept(SpectrumBlocks.FOUR_LEAF_CLOVER.get(), MEDIUM);
 
 		add.accept(SpectrumItems.BLOOD_ORCHID_PETAL, LOW);
-		add.accept(SpectrumBlocks.BLOOD_ORCHID, HIGH);
+		add.accept(SpectrumBlocks.BLOOD_ORCHID.get(), HIGH);
 
 		add.accept(SpectrumItems.HIBERNATING_JADE_VINE_BULB, HIGH);
 		add.accept(SpectrumItems.GERMINATED_JADE_VINE_BULB, HIGH);
 		add.accept(SpectrumItems.JADE_VINE_PETALS, HIGH);
-		add.accept(SpectrumBlocks.JADE_VINE_PETAL_BLOCK, ALWAYS);
-		add.accept(SpectrumBlocks.JADE_VINE_PETAL_CARPET, HIGH);
+		add.accept(SpectrumBlocks.JADE_VINE_PETAL_BLOCK.get(), ALWAYS);
+		add.accept(SpectrumBlocks.JADE_VINE_PETAL_CARPET.get(), HIGH);
 
-		add.accept(SpectrumBlocks.VARIA_SPROUT, MEDIUM);
-		add.accept(SpectrumBlocks.WEEPING_GALA_SPRIG, LOW);
-		add.accept(SpectrumBlocks.WEEPING_GALA_LEAVES, LOW);
-		add.accept(SpectrumBlocks.JADEITE_LOTUS_BULB, HIGH);
-		add.accept(SpectrumBlocks.JADEITE_LOTUS_FLOWER, HIGHER);
+		add.accept(SpectrumBlocks.VARIA_SPROUT.get(), MEDIUM);
+		add.accept(SpectrumBlocks.WEEPING_GALA_SPRIG.get(), LOW);
+		add.accept(SpectrumBlocks.WEEPING_GALA_LEAVES.get(), LOW);
+		add.accept(SpectrumBlocks.JADEITE_LOTUS_BULB.get(), HIGH);
+		add.accept(SpectrumBlocks.JADEITE_LOTUS_FLOWER.get(), HIGHER);
 		add.accept(SpectrumItems.JADEITE_PETALS, HIGH);
-		add.accept(SpectrumBlocks.JADEITE_PETAL_BLOCK, ALWAYS);
-		add.accept(SpectrumBlocks.JADEITE_PETAL_CARPET, HIGH);
+		add.accept(SpectrumBlocks.JADEITE_PETAL_BLOCK.get(), ALWAYS);
+		add.accept(SpectrumBlocks.JADEITE_PETAL_CARPET.get(), HIGH);
 
-		add.accept(SpectrumBlocks.SWEET_PEA, HIGH);
-		add.accept(SpectrumBlocks.APRICOTTI, HIGH);
-		add.accept(SpectrumBlocks.HUMMING_BELL, HIGH);
-		add.accept(SpectrumBlocks.RESONANT_LILY, HIGH);
-		add.accept(SpectrumBlocks.MOSS_BALL, MEDIUM);
-		add.accept(SpectrumBlocks.GIANT_MOSS_BALL, ALWAYS);
+		add.accept(SpectrumBlocks.SWEET_PEA.get(), HIGH);
+		add.accept(SpectrumBlocks.APRICOTTI.get(), HIGH);
+		add.accept(SpectrumBlocks.HUMMING_BELL.get(), HIGH);
+		add.accept(SpectrumBlocks.RESONANT_LILY.get(), HIGH);
+		add.accept(SpectrumBlocks.MOSS_BALL.get(), MEDIUM);
+		add.accept(SpectrumBlocks.GIANT_MOSS_BALL.get(), ALWAYS);
 
 		add.accept(SpectrumItems.NIGHTDEW_SPROUT, HIGH);
 		add.accept(SpectrumItems.NECTARDEW_BURGEON, HIGHER);
-		add.accept(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB, HIGH);
-		add.accept(SpectrumBlocks.NEPHRITE_BLOSSOM_LEAVES, LOW);
+		add.accept(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.get(), HIGH);
+		add.accept(SpectrumBlocks.NEPHRITE_BLOSSOM_LEAVES.get(), LOW);
 		add.accept(SpectrumItems.FISSURE_PLUM, HIGH);
 
 		add.accept(SpectrumItems.ALOE_LEAF, MEDIUM);
-		add.accept(SpectrumBlocks.BRISTLE_SPROUTS, MEDIUM);
+		add.accept(SpectrumBlocks.BRISTLE_SPROUTS.get(), MEDIUM);
 		add.accept(SpectrumItems.SAWBLADE_HOLLY_BERRY, HIGH);
 		
-		add.accept(SpectrumBlocks.SNAPPING_IVY, HIGH);
-		add.accept(SpectrumBlocks.SMALL_RED_DRAGONJAG, LOW);
-		add.accept(SpectrumBlocks.SMALL_YELLOW_DRAGONJAG, LOW);
-		add.accept(SpectrumBlocks.SMALL_PINK_DRAGONJAG, LOW);
-		add.accept(SpectrumBlocks.SMALL_PURPLE_DRAGONJAG, LOW);
-		add.accept(SpectrumBlocks.SMALL_BLACK_DRAGONJAG, LOW);
+		add.accept(SpectrumBlocks.SNAPPING_IVY.get(), HIGH);
+		add.accept(SpectrumBlocks.SMALL_RED_DRAGONJAG.get(), LOW);
+		add.accept(SpectrumBlocks.SMALL_YELLOW_DRAGONJAG.get(), LOW);
+		add.accept(SpectrumBlocks.SMALL_PINK_DRAGONJAG.get(), LOW);
+		add.accept(SpectrumBlocks.SMALL_PURPLE_DRAGONJAG.get(), LOW);
+		add.accept(SpectrumBlocks.SMALL_BLACK_DRAGONJAG.get(), LOW);
 		
-		add.accept(SpectrumBlocks.SLATE_NOXSHROOM, HIGH);
-		add.accept(SpectrumBlocks.EBONY_NOXSHROOM, HIGH);
-		add.accept(SpectrumBlocks.IVORY_NOXSHROOM, HIGH);
-		add.accept(SpectrumBlocks.CHESTNUT_NOXSHROOM, HIGH);
+		add.accept(SpectrumBlocks.SLATE_NOXSHROOM.get(), HIGH);
+		add.accept(SpectrumBlocks.EBONY_NOXSHROOM.get(), HIGH);
+		add.accept(SpectrumBlocks.IVORY_NOXSHROOM.get(), HIGH);
+		add.accept(SpectrumBlocks.CHESTNUT_NOXSHROOM.get(), HIGH);
 		
-		add.accept(SpectrumBlocks.SLATE_NOXCAP_BLOCK, HIGHER);
-		add.accept(SpectrumBlocks.SLATE_NOXCAP_GILLS, HIGHER);
-		add.accept(SpectrumBlocks.EBONY_NOXCAP_BLOCK, HIGHER);
-		add.accept(SpectrumBlocks.EBONY_NOXCAP_GILLS, HIGHER);
-		add.accept(SpectrumBlocks.IVORY_NOXCAP_BLOCK, HIGHER);
-		add.accept(SpectrumBlocks.IVORY_NOXCAP_GILLS, HIGHER);
-		add.accept(SpectrumBlocks.CHESTNUT_NOXCAP_BLOCK, HIGHER);
-		add.accept(SpectrumBlocks.CHESTNUT_NOXCAP_GILLS, HIGHER);
+		add.accept(SpectrumBlocks.SLATE_NOXCAP_BLOCK.get(), HIGHER);
+		add.accept(SpectrumBlocks.SLATE_NOXCAP_GILLS.get(), HIGHER);
+		add.accept(SpectrumBlocks.EBONY_NOXCAP_BLOCK.get(), HIGHER);
+		add.accept(SpectrumBlocks.EBONY_NOXCAP_GILLS.get(), HIGHER);
+		add.accept(SpectrumBlocks.IVORY_NOXCAP_BLOCK.get(), HIGHER);
+		add.accept(SpectrumBlocks.IVORY_NOXCAP_GILLS.get(), HIGHER);
+		add.accept(SpectrumBlocks.CHESTNUT_NOXCAP_BLOCK.get(), HIGHER);
+		add.accept(SpectrumBlocks.CHESTNUT_NOXCAP_GILLS.get(), HIGHER);
 		
 		for (InkColor color : InkColors.all()) {
 			add.accept(ColoredSaplingBlock.byColor(color), LOW);

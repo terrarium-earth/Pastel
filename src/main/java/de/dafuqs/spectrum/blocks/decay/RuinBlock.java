@@ -75,14 +75,14 @@ public class RuinBlock extends DecayBlock {
 		if (state.getValue(RuinBlock.CONVERSION) != Conversion.NONE && newState.isAir()) {
 			if (world.dimension() == Level.NETHER) {
 				if (pos.getY() == world.getMinBuildHeight() + world.dimensionType().logicalHeight() - 1) { // Attempt to match the nether ceiling. Tricky...
-					world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
+					world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
 				} else if (pos.getY() == world.getMinBuildHeight()) {
-					world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
+					world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
 				}
 			} else if (world.dimension() == Level.OVERWORLD && pos.getY() == world.getMinBuildHeight()) {
-				world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
+				world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
 			} else if (world.dimension() == SpectrumDimensions.DIMENSION_KEY && pos.getY() == world.getMaxBuildHeight() - 1) { // highest layer cannot be built on
-				world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
+				world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
 			}
 		}
 	}

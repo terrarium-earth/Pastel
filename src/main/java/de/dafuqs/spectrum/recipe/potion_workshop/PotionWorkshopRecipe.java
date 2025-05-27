@@ -110,7 +110,7 @@ public abstract class PotionWorkshopRecipe extends GatedStackSpectrumRecipe<Reci
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return SpectrumBlocks.POTION_WORKSHOP.asItem().getDefaultInstance();
+		return SpectrumBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance();
 	}
 	
 	public int getCraftingTime() {

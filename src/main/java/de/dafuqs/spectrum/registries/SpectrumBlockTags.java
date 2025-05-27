@@ -100,7 +100,7 @@ public class SpectrumBlockTags {
 			.add(Blocks.INFESTED_STONE.builtInRegistryHolder().key())
 			.add(Blocks.INFESTED_MOSSY_STONE_BRICKS.builtInRegistryHolder().key())
 			.add(Blocks.INFESTED_STONE_BRICKS.builtInRegistryHolder().key())
-			.add(SpectrumBlocks.INFESTED_BLACKSLAG.builtInRegistryHolder().key()));
+			.add(SpectrumBlocks.INFESTED_BLACKSLAG.get().builtInRegistryHolder().key()));
 	
 	private static TagKey<Block> of(String id) {
 		return TagKey.create(Registries.BLOCK, SpectrumCommon.locate(id));

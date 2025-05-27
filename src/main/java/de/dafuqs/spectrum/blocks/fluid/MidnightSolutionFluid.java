@@ -69,7 +69,7 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return SpectrumBlocks.MIDNIGHT_SOLUTION.defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return SpectrumBlocks.MIDNIGHT_SOLUTION.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override

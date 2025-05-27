@@ -13,7 +13,7 @@ public abstract class AnvilBlockMixin {
 	
 	@Inject(at = @At("HEAD"), method = "damage", cancellable = true)
 	private static void makeBedrockAnvilUnbreakable(BlockState fallingState, CallbackInfoReturnable<BlockState> callbackInfoReturnable) {
-		if (fallingState.is(SpectrumBlocks.BEDROCK_ANVIL)) {
+		if (fallingState.is(SpectrumBlocks.BEDROCK_ANVIL.get())) {
 			callbackInfoReturnable.setReturnValue(fallingState);
 		}
 	}

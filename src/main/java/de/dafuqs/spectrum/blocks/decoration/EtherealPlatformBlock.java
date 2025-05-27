@@ -132,7 +132,7 @@ public class EtherealPlatformBlock extends TransparentBlock {
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		int age = state.getValue((AGE));
-		if ((world.isClientSide && Minecraft.getInstance().player.getMainHandItem().is(SpectrumBlocks.ETHEREAL_PLATFORM.asItem()))) {
+		if ((world.isClientSide && Minecraft.getInstance().player.getMainHandItem().is(SpectrumBlocks.ETHEREAL_PLATFORM.get().asItem()))) {
 			age = Math.max(age, 3);
 		}
 		if (age > 0) {

@@ -137,11 +137,11 @@ public class SpectrumMiscEvents {
 		if (action != ItemAbilities.HOE_TILL || !tool.canPerformAction(action))
 			return;
 
-		if (originalState.is(SpectrumBlocks.SLUSH) || originalState.is(SpectrumBlocks.OVERGROWN_SLUSH)) {
-			event.setFinalState(SpectrumBlocks.TILLED_SLUSH.defaultBlockState());
+		if (originalState.is(SpectrumBlocks.SLUSH.get()) || originalState.is(SpectrumBlocks.OVERGROWN_SLUSH.get())) {
+			event.setFinalState(SpectrumBlocks.TILLED_SLUSH.get().defaultBlockState());
 		}
-		else if(originalState.is(SpectrumBlocks.SHALE_CLAY)) {
-			event.setFinalState(SpectrumBlocks.TILLED_SHALE_CLAY.defaultBlockState());
+		else if(originalState.is(SpectrumBlocks.SHALE_CLAY.get())) {
+			event.setFinalState(SpectrumBlocks.TILLED_SHALE_CLAY.get().defaultBlockState());
 		}
 	}
 

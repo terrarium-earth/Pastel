@@ -28,7 +28,7 @@ public class AshPileBlock extends SnowLayerBlock {
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
 		BlockState blockState = world.getBlockState(pos.below());
-		if (blockState.is(SpectrumBlocks.ASH))
+		if (blockState.is(SpectrumBlocks.ASH.get()))
 			return true;
 		return super.canSurvive(state, world, pos);
 	}

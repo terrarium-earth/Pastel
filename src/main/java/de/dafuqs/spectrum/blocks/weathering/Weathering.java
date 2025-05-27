@@ -18,32 +18,32 @@ public interface Weathering extends ChangeOverTimeBlock<Weathering.WeatheringLev
 	
 	Supplier<BiMap<Block, Block>> WEATHERING_LEVEL_INCREASES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
 			
-			.put(SpectrumBlocks.POLISHED_SHALE_CLAY, SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY)
-			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY, SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY)
+			.put(SpectrumBlocks.POLISHED_SHALE_CLAY.get(), SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY.get())
+			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY.get(), SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY.get())
 			
-			.put(SpectrumBlocks.POLISHED_SHALE_CLAY_STAIRS, SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS)
-			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS, SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY_STAIRS)
+			.put(SpectrumBlocks.POLISHED_SHALE_CLAY_STAIRS.get(), SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get())
+			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get(), SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY_STAIRS.get())
 			
-			.put(SpectrumBlocks.POLISHED_SHALE_CLAY_SLAB, SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB)
-			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB, SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY_SLAB)
+			.put(SpectrumBlocks.POLISHED_SHALE_CLAY_SLAB.get(), SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get())
+			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get(), SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY_SLAB.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_BRICKS, SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICKS)
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICKS, SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICKS)
+			.put(SpectrumBlocks.SHALE_CLAY_BRICKS.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICKS.get())
+			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICKS.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICKS.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_BRICK_STAIRS, SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS)
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS, SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICK_STAIRS)
+			.put(SpectrumBlocks.SHALE_CLAY_BRICK_STAIRS.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get())
+			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICK_STAIRS.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_BRICK_SLAB, SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB)
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB, SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICK_SLAB)
+			.put(SpectrumBlocks.SHALE_CLAY_BRICK_SLAB.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get())
+			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICK_SLAB.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_TILES, SpectrumBlocks.EXPOSED_SHALE_CLAY_TILES)
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILES, SpectrumBlocks.WEATHERED_SHALE_CLAY_TILES)
+			.put(SpectrumBlocks.SHALE_CLAY_TILES.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_TILES.get())
+			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILES.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_TILES.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_TILE_STAIRS, SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS)
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS, SpectrumBlocks.WEATHERED_SHALE_CLAY_TILE_STAIRS)
+			.put(SpectrumBlocks.SHALE_CLAY_TILE_STAIRS.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get())
+			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_TILE_STAIRS.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_TILE_SLAB, SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB)
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB, SpectrumBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB)
+			.put(SpectrumBlocks.SHALE_CLAY_TILE_SLAB.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get())
+			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB.get())
 			.build());
 	
 	Supplier<BiMap<Block, Block>> WEATHERING_LEVEL_DECREASES = Suppliers.memoize(() -> WEATHERING_LEVEL_INCREASES.get().inverse());

@@ -62,7 +62,7 @@ public class JadeiteLotusFlowerBlock extends SpectrumFacingBlock {
 		var facing = state.getValue(FACING);
 		var root = pos.relative(facing.getOpposite());
 		var supportBlock = world.getBlockState(root);
-		return (facing.getAxis().isVertical() && supportBlock.is(SpectrumBlocks.JADEITE_LOTUS_STEM)) || supportBlock.isFaceSturdy(world, root, facing, SupportType.CENTER);
+		return (facing.getAxis().isVertical() && supportBlock.is(SpectrumBlocks.JADEITE_LOTUS_STEM.get())) || supportBlock.isFaceSturdy(world, root, facing, SupportType.CENTER);
 	}
 	
 	@Override

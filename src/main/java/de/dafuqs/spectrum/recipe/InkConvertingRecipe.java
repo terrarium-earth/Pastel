@@ -78,7 +78,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.COLOR_PICKER);
+		return new ItemStack(SpectrumBlocks.COLOR_PICKER.get());
 	}
 	
 	@Override

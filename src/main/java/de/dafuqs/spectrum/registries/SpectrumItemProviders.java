@@ -24,7 +24,7 @@ public class SpectrumItemProviders {
 		ItemProviderRegistry.register(Items.BUNDLE, iterableProvider((player, stack) ->
 				stack.getOrDefault(DataComponents.BUNDLE_CONTENTS, BundleContents.EMPTY).items()));
 		
-		ItemProviderRegistry.register(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem(), new ItemProvider() {
+		ItemProviderRegistry.register(SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem(), new ItemProvider() {
 			@Override
 			public int provideItems(Player player, ItemStack stack, Item requestedItem, int amount) {
 				var builder = BottomlessBundleItem.BottomlessStack.Builder.of(player.level(), stack);

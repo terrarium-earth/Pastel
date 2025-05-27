@@ -74,7 +74,7 @@ public class AbyssalVineBlock extends TriStateVineBlock {
         for (int offset = 0; true; offset++) {
             var ref = BlockReference.of(world, pos.offset(0, offset, 0));
 
-            if (ref.isOf(SpectrumBlocks.SHALE_CLAY))
+            if (ref.isOf(SpectrumBlocks.SHALE_CLAY.get()))
                 return;
 
             if (ref.isIn(SpectrumBlockTags.GROWTH_ACCELERATORS)) {

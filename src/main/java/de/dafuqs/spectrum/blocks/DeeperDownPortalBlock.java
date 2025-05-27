@@ -149,8 +149,8 @@ public class DeeperDownPortalBlock extends Block {
 				
 				if (facingUp) {
 					BlockPos portalPos = new BlockPos(pos.getX(), world.getMinBuildHeight(), pos.getZ());
-					if (!world.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL)) {
-						world.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.defaultBlockState().setValue(FACING_UP, false));
+					if (!world.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL.get())) {
+						world.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, false));
 					}
 					
 					if (entity instanceof Player) {
@@ -162,8 +162,8 @@ public class DeeperDownPortalBlock extends Block {
 					teleportToSafePosition(serverWorld, entity, targetPos, 3);
 				} else {
 					BlockPos portalPos = new BlockPos(pos.getX(), world.getMinBuildHeight() + world.dimensionType().logicalHeight() - 1, pos.getZ());
-					if (!world.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL)) {
-						world.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.defaultBlockState().setValue(FACING_UP, true));
+					if (!world.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL.get())) {
+						world.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, true));
 					}
 					
 					if (entity instanceof Player) {
@@ -183,8 +183,8 @@ public class DeeperDownPortalBlock extends Block {
 				ServerLevel targetWorld = serverWorld.getServer().getLevel(SpectrumDimensions.DIMENSION_KEY);
 				if (targetWorld != null) {
 					BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMaxBuildHeight() - 1, pos.getZ());
-					if (!targetWorld.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL)) {
-						targetWorld.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.defaultBlockState().setValue(FACING_UP, true));
+					if (!targetWorld.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL.get())) {
+						targetWorld.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, true));
 					}
 					
 					if (entity instanceof Player) {
@@ -204,8 +204,8 @@ public class DeeperDownPortalBlock extends Block {
 			ServerLevel targetWorld = serverWorld.getServer().getLevel(Level.OVERWORLD);
 			if (targetWorld != null) {
 				BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMinBuildHeight(), pos.getZ());
-				if (!targetWorld.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL)) {
-					targetWorld.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.defaultBlockState().setValue(FACING_UP, false));
+				if (!targetWorld.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL.get())) {
+					targetWorld.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, false));
 				}
 				makeRoomAround(targetWorld, portalPos, 4, 2, true, BlockTags.BASE_STONE_OVERWORLD);
 				

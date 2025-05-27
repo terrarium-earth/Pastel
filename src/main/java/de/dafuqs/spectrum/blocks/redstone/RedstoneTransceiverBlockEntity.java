@@ -99,7 +99,7 @@ public class RedstoneTransceiverBlockEntity extends BlockEntity implements Wirel
 			} else {
 				world.setBlock(worldPosition, world.getBlockState(worldPosition).setValue(RedstoneTransceiverBlock.POWERED, true), Block.UPDATE_CLIENTS);
 			}
-			world.blockUpdated(worldPosition, SpectrumBlocks.REDSTONE_TRANSCEIVER);
+			world.blockUpdated(worldPosition, SpectrumBlocks.REDSTONE_TRANSCEIVER.get());
 		}
 	}
 	

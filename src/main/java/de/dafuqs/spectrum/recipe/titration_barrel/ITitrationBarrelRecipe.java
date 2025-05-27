@@ -93,7 +93,7 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
 	
 	@Override
 	default ItemStack getToastSymbol() {
-		return SpectrumBlocks.TITRATION_BARREL.asItem().getDefaultInstance();
+		return SpectrumBlocks.TITRATION_BARREL.get().asItem().getDefaultInstance();
 	}
 	
 	@Override

@@ -26,7 +26,7 @@ public class InkConvertingCategory extends GatedDisplayCategory<InkConvertingDis
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.COLOR_PICKER);
+		return EntryStacks.of(SpectrumBlocks.COLOR_PICKER.get());
 	}
 	
 	@Override

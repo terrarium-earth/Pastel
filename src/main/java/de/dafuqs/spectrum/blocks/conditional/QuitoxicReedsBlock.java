@@ -87,7 +87,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 		for (int i = 0; i <= BlockStateProperties.MAX_AGE_7; i++) {
 			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.NOT_LOGGED).setValue(AGE, i), Blocks.AIR.defaultBlockState());
 			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.WATER).setValue(AGE, i), Blocks.WATER.defaultBlockState());
-			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL).setValue(AGE, i), SpectrumBlocks.LIQUID_CRYSTAL.defaultBlockState());
+			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL).setValue(AGE, i), SpectrumBlocks.LIQUID_CRYSTAL.get().defaultBlockState());
 		}
 		return map;
 	}
@@ -288,7 +288,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 		}
 		
 		FluidState fluidState = world.getFluidState(pos);
-		return fluidState.getAmount() == 8 && (fluidState.is(FluidTags.WATER) || state.is(SpectrumBlocks.LIQUID_CRYSTAL));
+		return fluidState.getAmount() == 8 && (fluidState.is(FluidTags.WATER) || state.is(SpectrumBlocks.LIQUID_CRYSTAL.get()));
 	}
 	
 	private boolean canGrow(LevelReader world, BlockPos pos) {
@@ -297,7 +297,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 			return true;
 		}
 		FluidState fluidState = world.getFluidState(pos);
-		return fluidState.getAmount() == 8 && (fluidState.is(FluidTags.WATER) || state.is(SpectrumBlocks.LIQUID_CRYSTAL));
+		return fluidState.getAmount() == 8 && (fluidState.is(FluidTags.WATER) || state.is(SpectrumBlocks.LIQUID_CRYSTAL.get()));
 	}
 	
 	@Override

@@ -27,9 +27,9 @@ public class BismuthBudBlock extends SpectrumClusterBlock {
 
 	public final AmethystClusterBlock grownBlock;
 
-	public BismuthBudBlock(Properties settings, GrowthStage growthStage, @Nullable AmethystClusterBlock grownBlock) {
+	public BismuthBudBlock(Properties settings, GrowthStage growthStage, @Nullable Block grownBlock) {
 		super(settings, growthStage);
-		this.grownBlock = grownBlock;
+		this.grownBlock = (AmethystClusterBlock) grownBlock;
 	}
 
 //	@Override

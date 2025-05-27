@@ -146,7 +146,7 @@ public class SpectrumItemProjectileBehaviors {
 				stack.shrink(1);
 				return stack;
 			}
-		}, SpectrumBlocks.INCANDESCENT_AMALGAM.asItem());
+		}, SpectrumBlocks.INCANDESCENT_AMALGAM.get().asItem());
 		
 		ItemProjectileBehavior.register(new ItemProjectileBehavior() {
 			@Override
@@ -205,7 +205,7 @@ public class SpectrumItemProjectileBehaviors {
 				return stack;
 			}
 			
-		}, SpectrumBlocks.MEMORY.asItem());
+		}, SpectrumBlocks.MEMORY.get().asItem());
 		
 		ItemProjectileBehavior.register(new ItemProjectileBehavior.Default() {
 			public ItemStack onEntityHit(ItemProjectileEntity projectile, ItemStack stack, @Nullable Entity owner, EntityHitResult hitResult) {

@@ -38,7 +38,7 @@ public class SpectrumChestBlockEntityRenderer<T extends BlockEntity & LidBlockEn
 	public void render(T entity, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
 		Level world = entity.getLevel();
 		boolean bl = world != null;
-		BlockState blockState = bl ? entity.getBlockState() : SpectrumBlocks.HEARTBOUND_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockState = bl ? entity.getBlockState() : SpectrumBlocks.HEARTBOUND_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
 		
 		Block block = blockState.getBlock();
 		if (block instanceof SpectrumChestBlock spectrumChestBlock) {

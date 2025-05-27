@@ -66,7 +66,7 @@ public class BlockFlooderProjectile extends ThrowableItemProjectile {
 			if (hitResult.getType() == HitResult.Type.BLOCK) {
 				BlockPos landingPos = getCorrectedBlockPos(hitResult.getLocation());
 				if (BlockFlooderBlock.isReplaceableBlock(world, landingPos) && this.getOwner() instanceof Player playerEntityOwner) {
-					world.setBlockAndUpdate(landingPos, SpectrumBlocks.BLOCK_FLOODER.defaultBlockState());
+					world.setBlockAndUpdate(landingPos, SpectrumBlocks.BLOCK_FLOODER.get().defaultBlockState());
 					BlockEntity blockEntity = world.getBlockEntity(landingPos);
 					if (blockEntity instanceof BlockFlooderBlockEntity blockFlooderBlockEntity) {
 						blockFlooderBlockEntity.setOwnerUUID(playerEntityOwner.getUUID());

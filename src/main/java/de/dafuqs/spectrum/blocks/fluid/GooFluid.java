@@ -47,7 +47,7 @@ public abstract class GooFluid extends SpectrumFluid {
 	
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return SpectrumBlocks.GOO.defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return SpectrumBlocks.GOO.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override

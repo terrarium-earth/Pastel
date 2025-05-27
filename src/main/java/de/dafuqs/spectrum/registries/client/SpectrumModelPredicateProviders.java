@@ -82,9 +82,9 @@ public class SpectrumModelPredicateProviders {
 		registerMalachiteCrossbowPredicates(SpectrumItems.MALACHITE_CROSSBOW);
 		registerMalachiteCrossbowPredicates(SpectrumItems.GLASS_CREST_CROSSBOW);
 		
-		registerBottomlessBundlePredicates(SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem());
+		registerBottomlessBundlePredicates(SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem());
 		registerEnchantmentCanvasPredicates(SpectrumItems.ENCHANTMENT_CANVAS);
-		registerPresentPredicates(SpectrumBlocks.PRESENT.asItem());
+		registerPresentPredicates(SpectrumBlocks.PRESENT.get().asItem());
 		registerMysteriousLocketPredicates(SpectrumItems.MYSTERIOUS_LOCKET);
 		registerStructureCompassPredicates(SpectrumItems.MYSTERIOUS_COMPASS);
 		

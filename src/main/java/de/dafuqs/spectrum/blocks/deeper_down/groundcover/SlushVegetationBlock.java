@@ -29,7 +29,7 @@ public class SlushVegetationBlock extends SnowyDirtBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (!canSurvive(state, world, pos)) {
-            world.setBlockAndUpdate(pos, SpectrumBlocks.SLUSH.defaultBlockState());
+            world.setBlockAndUpdate(pos, SpectrumBlocks.SLUSH.get().defaultBlockState());
         }
     }
 

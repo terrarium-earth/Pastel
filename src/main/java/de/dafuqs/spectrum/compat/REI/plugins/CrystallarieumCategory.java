@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.compat.REI.plugins;
 
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.compat.REI.SpectrumPlugins;
 import de.dafuqs.spectrum.recipe.crystallarieum.CrystallarieumCatalyst;
 import de.dafuqs.spectrum.registries.SpectrumBlocks;
@@ -40,7 +41,7 @@ public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumD
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.CRYSTALLARIEUM);
+		return EntryStacks.of(SpectrumBlocks.CRYSTALLARIEUM.get());
 	}
 	
 	@Override
@@ -50,7 +51,7 @@ public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumD
 		widgets.add(Widgets.createSlot(new Point(startPoint.x - 2, startPoint.y + 1 + 8)).markInput().entries(input));
 		
 		// crystallarieum
-		ItemStack crystallarieumStack = SpectrumBlocks.CRYSTALLARIEUM.asStackWithColor(display.inkColor);
+		ItemStack crystallarieumStack = ((CrystallarieumBlock) SpectrumBlocks.CRYSTALLARIEUM.get()).asStackWithColor(display.inkColor);
 		widgets.add(Widgets.createSlot(new Point(startPoint.x + 20, startPoint.y + 3 + 16)).entries(EntryIngredients.of(crystallarieumStack)).disableBackground());
 		
 		// output arrow

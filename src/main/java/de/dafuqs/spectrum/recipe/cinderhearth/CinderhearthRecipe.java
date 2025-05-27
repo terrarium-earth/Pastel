@@ -72,7 +72,7 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleRecipeInp
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.CINDERHEARTH);
+		return new ItemStack(SpectrumBlocks.CINDERHEARTH.get());
 	}
 	
 	@Override

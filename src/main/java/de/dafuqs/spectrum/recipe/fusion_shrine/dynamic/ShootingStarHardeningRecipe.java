@@ -34,7 +34,7 @@ public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
 	}
 	
 	private static ItemStack getHardenedShootingStar() {
-		ItemStack stack = SpectrumBlocks.GLISTERING_SHOOTING_STAR.asItem().getDefaultInstance();
+		ItemStack stack = SpectrumBlocks.GLISTERING_SHOOTING_STAR.get().asItem().getDefaultInstance();
 		ShootingStarItem.setHardened(stack);
 		return stack;
 	}

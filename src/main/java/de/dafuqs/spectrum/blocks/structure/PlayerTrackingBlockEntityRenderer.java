@@ -42,7 +42,7 @@ public class PlayerTrackingBlockEntityRenderer implements BlockEntityRenderer<Pl
 
 		// It would sure be nice if you could have multiple BERs for one block entity type... Anyways nice janky hacks you got there
 		// Dafuqs: oh my god, this is so cursed
-		if (state.is(SpectrumBlocks.MANXI)) {
+		if (state.is(SpectrumBlocks.MANXI.get())) {
 			float f = (state.getValue(ChestBlock.FACING)).toYRot();
 			double yBreath = Math.sin(time / 19) * 0.02;
 			double xBreath = Math.sin(time / 19) * 0.0425;
@@ -66,7 +66,7 @@ public class PlayerTrackingBlockEntityRenderer implements BlockEntityRenderer<Pl
 				Minecraft.getInstance().getItemRenderer().renderStatic(SpectrumItems.POISONERS_HANDBOOK.getDefaultInstance(), ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers, entity.getLevel(), 0);
 			}
 		}
-		else if (state.is(SpectrumBlocks.TREASURE_ITEM_BOWL) && !taker && TreasureItemBowlBlock.canInteract(Minecraft.getInstance().player)) {
+		else if (state.is(SpectrumBlocks.TREASURE_ITEM_BOWL.get()) && !taker && TreasureItemBowlBlock.canInteract(Minecraft.getInstance().player)) {
 			double currentRadiant = radiant + (radiant * (time / 16.0) / 8.0F);
 			double height = Math.sin((time + currentRadiant) / 8.0) / 7.0; // item height
 			matrices.translate(0.5, 0.8 + height, 0.5); // position offset

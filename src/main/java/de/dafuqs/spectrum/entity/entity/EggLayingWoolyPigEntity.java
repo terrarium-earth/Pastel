@@ -68,7 +68,7 @@ import java.util.stream.Collectors;
 
 public class EggLayingWoolyPigEntity extends Animal implements Shearable {
 	
-	private static final Ingredient FOOD = Ingredient.of(SpectrumBlocks.AMARANTH_BUSHEL);
+	private static final Ingredient FOOD = Ingredient.of(SpectrumBlocks.AMARANTH_BUSHEL.get());
 	
 	private static final int MAX_GRASS_TIMER = 40;
 	private static final EntityDataAccessor<Byte> COLOR_AND_SHEARED = SynchedEntityData.defineId(EggLayingWoolyPigEntity.class, EntityDataSerializers.BYTE);

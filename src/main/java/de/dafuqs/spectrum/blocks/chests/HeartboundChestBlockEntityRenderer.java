@@ -62,7 +62,7 @@ public class HeartboundChestBlockEntityRenderer implements BlockEntityRenderer<H
 		var vertexConsumer = SPRITE.buffer(vertexConsumers, RenderType::entitySolid);
 
 		boolean bl = chest.getLevel() != null;
-		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.HEARTBOUND_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.HEARTBOUND_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
 		float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING).toYRot() : 0;
 		matrices.translate(0.5D, 1.5D, 0.5D);
 		matrices.mulPose(Axis.YP.rotationDegrees(-f));

@@ -124,7 +124,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 	
 	@Override
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-		return SpectrumBlocks.BOTTOMLESS_BUNDLE.asItem().getDefaultInstance();
+		return SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
 	}
 	
 	@Override

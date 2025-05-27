@@ -61,8 +61,8 @@ public class SpectrumColorProviders {
 		coloredLeavesBlock(event);
 		// Same for Amaranth
 		amaranthBlock(event);
-		event.register(THE_OTHER_ONE_AKA_GRASS, SpectrumBlocks.CLOVER, SpectrumBlocks.FOUR_LEAF_CLOVER);
-		memoryBlock(event, SpectrumBlocks.MEMORY);
+		event.register(THE_OTHER_ONE_AKA_GRASS, SpectrumBlocks.CLOVER.get(), SpectrumBlocks.FOUR_LEAF_CLOVER.get());
+		memoryBlock(event, SpectrumBlocks.MEMORY.get());
 	}
 
 	public static void registerItems(RegisterColorHandlersEvent.Item event) {
@@ -70,9 +70,9 @@ public class SpectrumColorProviders {
 
 		coloredLeavesItem(event);
 		amaranthItem(event);
-		event.register(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO, SpectrumBlocks.CLOVER, SpectrumBlocks.FOUR_LEAF_CLOVER);
+		event.register(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO, SpectrumBlocks.CLOVER.get(), SpectrumBlocks.FOUR_LEAF_CLOVER.get());
 
-		memoryItem(event, SpectrumBlocks.MEMORY);
+		memoryItem(event, SpectrumBlocks.MEMORY.get());
 		registerPotionFillables(event, SpectrumItems.LESSER_POTION_PENDANT, SpectrumItems.GREATER_POTION_PENDANT, SpectrumItems.MALACHITE_GLASS_AMPOULE);
 		registerPickyPotionFillables(event, SpectrumItems.NIGHTFALLS_BLADE, SpectrumItems.CONCEALING_OILS);
 		registerSingleInkStorages(event, SpectrumItems.INK_FLASK);
@@ -101,16 +101,16 @@ public class SpectrumColorProviders {
 	private static void amaranthBlock(RegisterColorHandlersEvent.Block event) {
 		amaranthCropBlockColorProvider = new ToggleableBlockColorProvider(THE_OTHER_ONE_AKA_GRASS);
 		amaranthBushelBlockColorProvider = new ToggleableBlockColorProvider(THE_OTHER_ONE_AKA_GRASS);
-		event.register(amaranthCropBlockColorProvider, SpectrumBlocks.AMARANTH);
-		event.register(amaranthBushelBlockColorProvider, SpectrumBlocks.AMARANTH_BUSHEL);
-		event.register(amaranthBushelBlockColorProvider, SpectrumBlocks.POTTED_AMARANTH_BUSHEL);
+		event.register(amaranthCropBlockColorProvider, SpectrumBlocks.AMARANTH.get());
+		event.register(amaranthBushelBlockColorProvider, SpectrumBlocks.AMARANTH_BUSHEL.get());
+		event.register(amaranthBushelBlockColorProvider, SpectrumBlocks.POTTED_AMARANTH_BUSHEL.get());
 	}
 
 	private static void amaranthItem(RegisterColorHandlersEvent.Item event) {
 		amaranthCropItemColorProvider = new ToggleableItemColorProvider(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO);
 		amaranthBushelItemColorProvider = new ToggleableItemColorProvider(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO);
-		event.register(amaranthCropItemColorProvider, SpectrumBlocks.AMARANTH);
-		event.register(amaranthBushelItemColorProvider, SpectrumBlocks.AMARANTH_BUSHEL);
+		event.register(amaranthCropItemColorProvider, SpectrumBlocks.AMARANTH.get());
+		event.register(amaranthBushelItemColorProvider, SpectrumBlocks.AMARANTH_BUSHEL.get());
 	}
 	
 	private static void registerSingleInkStorages(RegisterColorHandlersEvent.Item event, Item... items) {

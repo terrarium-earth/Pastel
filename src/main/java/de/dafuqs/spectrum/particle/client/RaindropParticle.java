@@ -72,7 +72,7 @@ public class RaindropParticle extends TextureSheetParticle {
 		if (water) {
 			spawnY = Math.ceil(y) - 0.05F;
 		}
-		else if(state.is(SpectrumBlocks.FLAYED_EARTH)){
+		else if(state.is(SpectrumBlocks.FLAYED_EARTH.get())){
 			spawnY = pos.getY() + 1.01F;
 		}
 

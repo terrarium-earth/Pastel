@@ -71,7 +71,7 @@ public class PotionWorkshopReactingRecipe extends GatedSpectrumRecipe<RecipeInpu
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return SpectrumBlocks.POTION_WORKSHOP.asItem().getDefaultInstance();
+		return SpectrumBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance();
 	}
 	
 	@Override

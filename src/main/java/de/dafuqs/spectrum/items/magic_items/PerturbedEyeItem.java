@@ -31,7 +31,7 @@ public class PerturbedEyeItem extends Item {
 		Level world = context.getLevel();
 		BlockPos blockPos = context.getClickedPos();
 		BlockState blockState = world.getBlockState(blockPos);
-		if (blockState.is(Blocks.END_PORTAL_FRAME) || blockState.is(SpectrumBlocks.CRACKED_END_PORTAL_FRAME)) {
+		if (blockState.is(Blocks.END_PORTAL_FRAME) || blockState.is(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get())) {
 			if (world.isClientSide) {
 				return InteractionResult.SUCCESS;
 			} else {
@@ -40,12 +40,12 @@ public class PerturbedEyeItem extends Item {
 				if (blockState.is(Blocks.END_PORTAL_FRAME)) {
 					Direction direction = blockState.getValue(EndPortalFrameBlock.FACING);
 					facingVertical = direction.equals(Direction.EAST) || direction.equals(Direction.WEST);
-					targetBlockState = SpectrumBlocks.CRACKED_END_PORTAL_FRAME.defaultBlockState()
+					targetBlockState = SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get().defaultBlockState()
 							.setValue(CrackedEndPortalFrameBlock.EYE_TYPE, CrackedEndPortalFrameBlock.EndPortalFrameEye.VANILLA_WITH_PERTURBED_EYE)
 							.setValue(CrackedEndPortalFrameBlock.FACING_VERTICAL, facingVertical);
 				} else {
 					facingVertical = blockState.getValue(CrackedEndPortalFrameBlock.FACING_VERTICAL);
-					targetBlockState = SpectrumBlocks.CRACKED_END_PORTAL_FRAME.defaultBlockState()
+					targetBlockState = SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get().defaultBlockState()
 							.setValue(CrackedEndPortalFrameBlock.EYE_TYPE, CrackedEndPortalFrameBlock.EndPortalFrameEye.WITH_PERTURBED_EYE)
 							.setValue(CrackedEndPortalFrameBlock.FACING_VERTICAL, facingVertical);
 				}

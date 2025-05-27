@@ -74,7 +74,7 @@ public class PrimordialFireBurningRecipe extends GatedSpectrumRecipe<RecipeInput
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.DOOMBLOOM);
+		return new ItemStack(SpectrumBlocks.DOOMBLOOM.get());
 	}
 	
 	@Override

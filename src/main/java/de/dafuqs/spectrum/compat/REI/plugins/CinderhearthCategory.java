@@ -34,7 +34,7 @@ public class CinderhearthCategory extends GatedDisplayCategory<CinderhearthDispl
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.CINDERHEARTH);
+		return EntryStacks.of(SpectrumBlocks.CINDERHEARTH.get());
 	}
 	
 	@Override

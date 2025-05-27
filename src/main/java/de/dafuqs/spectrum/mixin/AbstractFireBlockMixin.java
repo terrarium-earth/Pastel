@@ -21,7 +21,7 @@ public abstract class AbstractFireBlockMixin {
 		BlockState blockstate = world.getBlockState(blockpos);
 		if (blockstate.is(SpectrumBlockTags.PRIMORDIAL_FIRE_BASE_BLOCKS) || PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG) {
 			PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG = false;
-			cir.setReturnValue((SpectrumBlocks.PRIMORDIAL_FIRE).getStateForPosition(world, pos));
+			cir.setReturnValue(((PrimordialFireBlock) SpectrumBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, pos));
 		}
 	}
 

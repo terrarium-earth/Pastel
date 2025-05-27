@@ -145,7 +145,7 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FluidRecipeInpu
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.FUSION_SHRINE_BASALT);
+		return new ItemStack(SpectrumBlocks.FUSION_SHRINE_BASALT.get());
 	}
 	
 	@Override

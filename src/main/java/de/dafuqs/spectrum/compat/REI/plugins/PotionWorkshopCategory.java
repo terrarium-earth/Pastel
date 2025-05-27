@@ -24,7 +24,7 @@ public abstract class PotionWorkshopCategory<T extends PotionWorkshopRecipeDispl
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP);
+		return EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP.get());
 	}
 	
 	

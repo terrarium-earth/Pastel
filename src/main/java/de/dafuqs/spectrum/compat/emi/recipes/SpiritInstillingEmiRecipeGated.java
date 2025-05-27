@@ -32,9 +32,9 @@ public class SpiritInstillingEmiRecipeGated extends GatedSpectrumEmiRecipe<Spiri
 		widgets.addSlot(inputs.get(SpiritInstillerRecipe.CENTER_INGREDIENT), 20, 0);
 		widgets.addSlot(inputs.get(SpiritInstillerRecipe.SECOND_INGREDIENT), 40, 0);
 		
-		widgets.addSlot(EmiStack.of(SpectrumBlocks.ITEM_BOWL_CALCITE), 0, 17).drawBack(false);
-		widgets.addSlot(EmiStack.of(SpectrumBlocks.SPIRIT_INSTILLER), 20, 17).drawBack(false);
-		widgets.addSlot(EmiStack.of(SpectrumBlocks.ITEM_BOWL_CALCITE), 40, 17).drawBack(false);
+		widgets.addSlot(EmiStack.of(SpectrumBlocks.ITEM_BOWL_CALCITE.get()), 0, 17).drawBack(false);
+		widgets.addSlot(EmiStack.of(SpectrumBlocks.SPIRIT_INSTILLER.get()), 20, 17).drawBack(false);
+		widgets.addSlot(EmiStack.of(SpectrumBlocks.ITEM_BOWL_CALCITE.get()), 40, 17).drawBack(false);
 		
 		if (!outputs.isEmpty()) {
 			widgets.addSlot(outputs.getFirst(), 90, 4).large(true).recipeContext(this);

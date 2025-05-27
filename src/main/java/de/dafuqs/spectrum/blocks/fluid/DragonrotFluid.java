@@ -53,7 +53,7 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 	
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return SpectrumBlocks.DRAGONROT.defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return SpectrumBlocks.DRAGONROT.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override

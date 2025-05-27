@@ -120,7 +120,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 			resultStack.setCount(resultCountMod);
 		}
 		
-		if (resultStack.is(SpectrumBlocks.MEMORY.asItem())) {
+		if (resultStack.is(SpectrumBlocks.MEMORY.get().asItem())) {
 			boolean makeUnrecognizable = spiritInstillerBlockEntity.getItem(0).is(SpectrumItemTags.MEMORY_BONDING_AGENTS_CONCEALABLE);
 			if (makeUnrecognizable) {
 				MemoryItem.makeUnrecognizable(resultStack);
@@ -181,7 +181,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.SPIRIT_INSTILLER);
+		return new ItemStack(SpectrumBlocks.SPIRIT_INSTILLER.get());
 	}
 	
 	@Override

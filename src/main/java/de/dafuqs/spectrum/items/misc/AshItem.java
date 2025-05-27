@@ -24,13 +24,13 @@ public class AshItem extends Item {
 		var stack = context.getItemInHand();
 		var reference = BlockReference.of(world, context.getClickedPos());
 		
-		if (!reference.isOf(SpectrumBlocks.BLACKSLAG))
+		if (!reference.isOf(SpectrumBlocks.BLACKSLAG.get()))
 			return InteractionResult.FAIL;
 		
-		world.setBlockAndUpdate(reference.pos, SpectrumBlocks.ASHEN_BLACKSLAG.defaultBlockState());
+		world.setBlockAndUpdate(reference.pos, SpectrumBlocks.ASHEN_BLACKSLAG.get().defaultBlockState());
 		
 		if (!world.isClientSide()) {
-			world.addDestroyBlockEffect(reference.pos, SpectrumBlocks.ASH.defaultBlockState());
+			world.addDestroyBlockEffect(reference.pos, SpectrumBlocks.ASH.get().defaultBlockState());
 			world.playLocalSound(reference.pos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 0.5F, 0.5F + random.nextFloat() * 0.5F, true);
 		}
 		

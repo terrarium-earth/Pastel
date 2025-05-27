@@ -42,7 +42,7 @@ public class PedestalCraftingCategory extends GatedDisplayCategory<PedestalCraft
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST);
+		return EntryStacks.of(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST.get());
 	}
 	
 	@Override

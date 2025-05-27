@@ -1,6 +1,7 @@
 package de.dafuqs.spectrum.compat.emi.recipes;
 
 import de.dafuqs.spectrum.SpectrumCommon;
+import de.dafuqs.spectrum.blocks.crystallarieum.*;
 import de.dafuqs.spectrum.compat.emi.GatedSpectrumEmiRecipe;
 import de.dafuqs.spectrum.compat.emi.SpectrumEmiRecipeCategories;
 import de.dafuqs.spectrum.recipe.crystallarieum.CrystallarieumCatalyst;
@@ -39,7 +40,7 @@ public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<Crystal
 		widgets.addSlot(inputs.getFirst(), 0, 0);
 		widgets.addSlot(EmiStack.of(recipe.getFluidMedium().getFluid()), 0, 18);
 		
-		widgets.addSlot(EmiStack.of(SpectrumBlocks.CRYSTALLARIEUM.asStackWithColor(recipe.getInkColor())), 20, 18).drawBack(false);
+		widgets.addSlot(EmiStack.of(((CrystallarieumBlock) SpectrumBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor())), 20, 18).drawBack(false);
 		
 		widgets.addFillingArrow(40, 9, recipe.getSecondsPerGrowthStage() * 1000);
 		

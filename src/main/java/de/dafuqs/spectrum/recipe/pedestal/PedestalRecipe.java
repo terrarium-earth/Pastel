@@ -121,7 +121,7 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<PedestalRe
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST);
+		return new ItemStack(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST.get());
 	}
 	
 	@Override

@@ -54,15 +54,15 @@ public class DragonrotFluidBlock extends SpectrumFluidBlock {
 
 	public @Nullable BlockState handleFluidCollision(Level world, @NotNull FluidState state, @NotNull FluidState otherState) {
 		if (otherState.is(FluidTags.WATER)) {
-			return SpectrumBlocks.SLUSH.defaultBlockState();
+			return SpectrumBlocks.SLUSH.get().defaultBlockState();
 		} else if (otherState.is(FluidTags.LAVA)) {
 			return Blocks.BLACKSTONE.defaultBlockState();
 		} else if (otherState.is(SpectrumFluidTags.GOO)) {
 			return Blocks.COARSE_DIRT.defaultBlockState();
 		} else if (otherState.is(SpectrumFluidTags.LIQUID_CRYSTAL)) {
-			return SpectrumBlocks.FLAYED_EARTH.defaultBlockState();
+			return SpectrumBlocks.FLAYED_EARTH.get().defaultBlockState();
 		} else if (otherState.is(SpectrumFluidTags.MIDNIGHT_SOLUTION)) {
-			return SpectrumBlocks.HORNSLAKE.defaultBlockState();
+			return SpectrumBlocks.HORNSLAKE.get().defaultBlockState();
 		}
 		return null;
 	}

@@ -32,13 +32,13 @@ public class WrapPresentRecipe extends CustomRecipe {
 	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		NonNullList<Ingredient> list = NonNullList.withSize(1, Ingredient.EMPTY);
-		list.set(0, Ingredient.of(SpectrumBlocks.PRESENT.asItem().getDefaultInstance()));
+		list.set(0, Ingredient.of(SpectrumBlocks.PRESENT.get().asItem().getDefaultInstance()));
 		return list;
 	}
 	
 	@Override
 	public ItemStack getResultItem(HolderLookup.Provider registryLookup) {
-		ItemStack stack = SpectrumBlocks.PRESENT.asItem().getDefaultInstance();
+		ItemStack stack = SpectrumBlocks.PRESENT.get().asItem().getDefaultInstance();
 		PresentBlockItem.wrap(stack, PresentBlock.WrappingPaper.RED, Map.of());
 		return stack;
 	}

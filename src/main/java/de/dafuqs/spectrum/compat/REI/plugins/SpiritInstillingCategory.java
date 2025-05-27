@@ -22,8 +22,8 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class SpiritInstillingCategory extends GatedDisplayCategory<SpiritInstillingDisplay> {
 	
-	private static final EntryIngredient SPIRIT_INSTILLER = EntryIngredients.of(SpectrumBlocks.SPIRIT_INSTILLER);
-	private static final EntryIngredient ITEM_BOWL_CALCITE = EntryIngredients.of(SpectrumBlocks.ITEM_BOWL_CALCITE);
+	private static final EntryIngredient SPIRIT_INSTILLER = EntryIngredients.of(SpectrumBlocks.SPIRIT_INSTILLER.get());
+	private static final EntryIngredient ITEM_BOWL_CALCITE = EntryIngredients.of(SpectrumBlocks.ITEM_BOWL_CALCITE.get());
 	
 	@Override
 	public CategoryIdentifier<SpiritInstillingDisplay> getCategoryIdentifier() {
@@ -32,12 +32,12 @@ public class SpiritInstillingCategory extends GatedDisplayCategory<SpiritInstill
 	
 	@Override
 	public Component getTitle() {
-		return SpectrumBlocks.SPIRIT_INSTILLER.getName();
+		return SpectrumBlocks.SPIRIT_INSTILLER.get().getName();
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.SPIRIT_INSTILLER);
+		return EntryStacks.of(SpectrumBlocks.SPIRIT_INSTILLER.get());
 	}
 	
 	@Override

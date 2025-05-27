@@ -18,8 +18,8 @@ public abstract class TranslucentBlockMixin {
 
 	@Inject(method = "skipRendering", at = @At("HEAD"), cancellable = true)
 	public void spectrum$dontRenderVanillaPlayerOnlyGlass(BlockState state, BlockState stateFrom, Direction direction, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-		if (state.is(Blocks.GLASS) && stateFrom.is(SpectrumBlocks.SEMI_PERMEABLE_GLASS)
-				|| state.is(Blocks.TINTED_GLASS) && stateFrom.is(SpectrumBlocks.TINTED_SEMI_PERMEABLE_GLASS))
+		if (state.is(Blocks.GLASS) && stateFrom.is(SpectrumBlocks.SEMI_PERMEABLE_GLASS.get())
+				|| state.is(Blocks.TINTED_GLASS) && stateFrom.is(SpectrumBlocks.TINTED_SEMI_PERMEABLE_GLASS.get()))
 			callbackInfoReturnable.setReturnValue(true);
 	}
 	

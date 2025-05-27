@@ -49,7 +49,7 @@ public class JadeiteLotusStemBlock extends BushBlock {
 	}
 	
 	public static BlockState getStemVariant(boolean top, boolean inverted) {
-		return SpectrumBlocks.JADEITE_LOTUS_STEM.defaultBlockState().setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM).setValue(INVERTED, inverted);
+		return SpectrumBlocks.JADEITE_LOTUS_STEM.get().defaultBlockState().setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM).setValue(INVERTED, inverted);
 	}
 	
 	@Override

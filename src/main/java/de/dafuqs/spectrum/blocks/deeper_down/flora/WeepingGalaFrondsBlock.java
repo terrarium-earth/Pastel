@@ -28,7 +28,7 @@ public class WeepingGalaFrondsBlock extends BushBlock {
 
     @Override
     public boolean mayPlaceOn(BlockState roof, BlockGetter world, BlockPos pos) {
-        return roof.is(SpectrumBlocks.WEEPING_GALA_LEAVES) || roof.is(SpectrumBlocks.WEEPING_GALA_FRONDS);
+        return roof.is(SpectrumBlocks.WEEPING_GALA_LEAVES.get()) || roof.is(SpectrumBlocks.WEEPING_GALA_FRONDS.get());
     }
 
     @Override

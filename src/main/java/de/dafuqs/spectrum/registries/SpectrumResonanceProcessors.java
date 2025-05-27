@@ -41,7 +41,7 @@ public class SpectrumResonanceProcessors {
 			.addModifiedDrop(Ingredient.of(Items.NETHERITE_SCRAP), SpectrumItems.PURE_NETHERITE_SCRAP)
 			.build());
 	
-	public static final ResourceKey<ResonanceProcessor> BLACK_MATERIA = registerDropSelf("black_materia", SpectrumBlocks.BLACK_MATERIA, builder -> builder);
+	public static final ResourceKey<ResonanceProcessor> BLACK_MATERIA = registerDropSelf("black_materia", SpectrumBlocks.BLACK_MATERIA.get(), builder -> builder);
 	
 	public static final ResourceKey<ResonanceProcessor> BRUSHABLE_BLOCKS = registerDropSelf("brushable_blocks", SpectrumBlockTags.C_BRUSHABLE_BLOCKS, builder -> builder
 			.copyNbt("LootTable", "LootTableSeed", "item"));

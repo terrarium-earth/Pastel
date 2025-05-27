@@ -35,7 +35,7 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.NECTERED_VIOGNIER, 4);
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-		add(IngredientStack.ofItems(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.asItem()));
+		add(IngredientStack.ofItems(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.get().asItem()));
 		add(IngredientStack.ofItems(SpectrumItems.GLASS_PEACH, 4));
 	}};
 	
@@ -45,7 +45,7 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 	
 	@Override
 	public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
-		int bulbCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.asItem());
+		int bulbCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.get().asItem());
 		int petalCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.GLASS_PEACH);
 		boolean nectar = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.MOONSTRUCK_NECTAR) > 0;
 		
@@ -112,7 +112,7 @@ public class NecteredViognierRecipe extends SweetenableTitrationBarrelRecipe {
 			if (stack.isEmpty()) {
 				continue;
 			}
-			if (stack.is(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.asItem())) {
+			if (stack.is(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.get().asItem())) {
 				bulbsFound = true;
 			} else if (!stack.is(SpectrumItems.GLASS_PEACH) && !stack.is(SpectrumItems.MOONSTRUCK_NECTAR)) {
 				return false;

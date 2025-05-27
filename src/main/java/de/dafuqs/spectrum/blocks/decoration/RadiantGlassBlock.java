@@ -26,7 +26,7 @@ public class RadiantGlassBlock extends TransparentBlock {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
-		if (stateFrom.is(this) || stateFrom.is(SpectrumBlocks.RADIANT_SEMI_PERMEABLE_GLASS)) {
+		if (stateFrom.is(this) || stateFrom.is(SpectrumBlocks.RADIANT_SEMI_PERMEABLE_GLASS.get())) {
 			return true;
 		}
 		return super.skipRendering(state, stateFrom, direction);
