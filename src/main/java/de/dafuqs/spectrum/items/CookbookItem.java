@@ -49,7 +49,7 @@ public class CookbookItem extends Item {
 	}
 	
 	private void openGuidebookPage(BookAddress address) {
-		if (SpectrumItems.GUIDEBOOK instanceof GuidebookItem guidebook) {
+		if (SpectrumItems.GUIDEBOOK.get() instanceof GuidebookItem guidebook) {
 			guidebook.openGuidebook(address);
 		}
 	}

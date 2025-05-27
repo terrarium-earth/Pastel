@@ -46,7 +46,7 @@ public class SpectrumItemProviders {
 		
 		// BAG_OF_HOLDING only works server side
 		// the client does not know about the content of the ender chest, unless opened
-		ItemProviderRegistry.register(SpectrumItems.BAG_OF_HOLDING, iterableProvider((player, stack) ->
+		ItemProviderRegistry.register(SpectrumItems.BAG_OF_HOLDING.get(), iterableProvider((player, stack) ->
 				player == null ? List.of() : player.getEnderChestInventory().getItems()));
 		
 	}

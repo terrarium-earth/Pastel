@@ -165,7 +165,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 						// or open it with a shift-click
 						var recipe = barrelEntity.getRecipeForInventory(world);
 						if (recipe.isPresent()) {
-							if (player.isCreative() && player.getMainHandItem().is(SpectrumItems.PAINTBRUSH)) {
+							if (player.isCreative() && player.getMainHandItem().is(SpectrumItems.PAINTBRUSH.get())) {
 								player.displayClientMessage(Component.translatable("block.pastel.titration_barrel.debug_added_day"), true);
 								barrelEntity.addOneDayOfSealTime();
 								world.playSound(null, pos, SpectrumSoundEvents.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);

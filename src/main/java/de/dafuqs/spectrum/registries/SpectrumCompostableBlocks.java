@@ -24,18 +24,18 @@ public class SpectrumCompostableBlocks {
 	}
 
 	private static void register(BiConsumer<ItemLike, Float> add) {
-		add.accept(SpectrumItems.VEGETAL, ALWAYS);
-		add.accept(SpectrumItems.BONE_ASH, ALWAYS);
+		add.accept(SpectrumItems.VEGETAL.get(), ALWAYS);
+		add.accept(SpectrumItems.BONE_ASH.get(), ALWAYS);
 
 		add.accept(SpectrumBlocks.CLOVER.get(), MEDIUM);
 		add.accept(SpectrumBlocks.FOUR_LEAF_CLOVER.get(), MEDIUM);
 
-		add.accept(SpectrumItems.BLOOD_ORCHID_PETAL, LOW);
+		add.accept(SpectrumItems.BLOOD_ORCHID_PETAL.get(), LOW);
 		add.accept(SpectrumBlocks.BLOOD_ORCHID.get(), HIGH);
 
-		add.accept(SpectrumItems.HIBERNATING_JADE_VINE_BULB, HIGH);
-		add.accept(SpectrumItems.GERMINATED_JADE_VINE_BULB, HIGH);
-		add.accept(SpectrumItems.JADE_VINE_PETALS, HIGH);
+		add.accept(SpectrumItems.HIBERNATING_JADE_VINE_BULB.get(), HIGH);
+		add.accept(SpectrumItems.GERMINATED_JADE_VINE_BULB.get(), HIGH);
+		add.accept(SpectrumItems.JADE_VINE_PETALS.get(), HIGH);
 		add.accept(SpectrumBlocks.JADE_VINE_PETAL_BLOCK.get(), ALWAYS);
 		add.accept(SpectrumBlocks.JADE_VINE_PETAL_CARPET.get(), HIGH);
 
@@ -44,7 +44,7 @@ public class SpectrumCompostableBlocks {
 		add.accept(SpectrumBlocks.WEEPING_GALA_LEAVES.get(), LOW);
 		add.accept(SpectrumBlocks.JADEITE_LOTUS_BULB.get(), HIGH);
 		add.accept(SpectrumBlocks.JADEITE_LOTUS_FLOWER.get(), HIGHER);
-		add.accept(SpectrumItems.JADEITE_PETALS, HIGH);
+		add.accept(SpectrumItems.JADEITE_PETALS.get(), HIGH);
 		add.accept(SpectrumBlocks.JADEITE_PETAL_BLOCK.get(), ALWAYS);
 		add.accept(SpectrumBlocks.JADEITE_PETAL_CARPET.get(), HIGH);
 
@@ -55,15 +55,15 @@ public class SpectrumCompostableBlocks {
 		add.accept(SpectrumBlocks.MOSS_BALL.get(), MEDIUM);
 		add.accept(SpectrumBlocks.GIANT_MOSS_BALL.get(), ALWAYS);
 
-		add.accept(SpectrumItems.NIGHTDEW_SPROUT, HIGH);
-		add.accept(SpectrumItems.NECTARDEW_BURGEON, HIGHER);
+		add.accept(SpectrumItems.NIGHTDEW_SPROUT.get(), HIGH);
+		add.accept(SpectrumItems.NECTARDEW_BURGEON.get(), HIGHER);
 		add.accept(SpectrumBlocks.NEPHRITE_BLOSSOM_BULB.get(), HIGH);
 		add.accept(SpectrumBlocks.NEPHRITE_BLOSSOM_LEAVES.get(), LOW);
-		add.accept(SpectrumItems.FISSURE_PLUM, HIGH);
+		add.accept(SpectrumItems.FISSURE_PLUM.get(), HIGH);
 
-		add.accept(SpectrumItems.ALOE_LEAF, MEDIUM);
+		add.accept(SpectrumItems.ALOE_LEAF.get(), MEDIUM);
 		add.accept(SpectrumBlocks.BRISTLE_SPROUTS.get(), MEDIUM);
-		add.accept(SpectrumItems.SAWBLADE_HOLLY_BERRY, HIGH);
+		add.accept(SpectrumItems.SAWBLADE_HOLLY_BERRY.get(), HIGH);
 		
 		add.accept(SpectrumBlocks.SNAPPING_IVY.get(), HIGH);
 		add.accept(SpectrumBlocks.SMALL_RED_DRAGONJAG.get(), LOW);

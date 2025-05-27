@@ -26,7 +26,7 @@ public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBelt
 	
 	public void trigger(ServerPlayer player) {
 		this.trigger(player, (conditions) ->
-				SpectrumTrinketItem.getFirstEquipped(player, SpectrumItems.TAKE_OFF_BELT).map((belt) -> TakeOffBeltItem.getCurrentCharge(player) > 0).orElse(false)
+				SpectrumTrinketItem.getFirstEquipped(player, SpectrumItems.TAKE_OFF_BELT.get()).map((belt) -> TakeOffBeltItem.getCurrentCharge(player) > 0).orElse(false)
 		);
 	}
 	

@@ -19,7 +19,7 @@ public class GooConvertingCategory extends FluidConvertingCategory<GooConverting
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.GOO_BUCKET);
+		return EntryStacks.of(SpectrumItems.GOO_BUCKET.get());
 	}
 	
 	@Override

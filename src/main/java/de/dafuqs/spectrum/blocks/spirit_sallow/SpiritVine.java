@@ -39,19 +39,19 @@ public interface SpiritVine {
 	
 	static Item getYieldItem(BlockState blockState) {
 		if (blockState.is(SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES_PLANT.get())) {
-			return SpectrumItems.TOPAZ_SHARD;
+            return SpectrumItems.TOPAZ_SHARD.get();
 		}
 		if (blockState.is(SpectrumBlocks.MAGENTA_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.MAGENTA_SPIRIT_SALLOW_VINES_PLANT.get())) {
 			return Items.AMETHYST_SHARD;
 		}
 		if (blockState.is(SpectrumBlocks.YELLOW_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.YELLOW_SPIRIT_SALLOW_VINES_PLANT.get())) {
-			return SpectrumItems.CITRINE_SHARD;
+            return SpectrumItems.CITRINE_SHARD.get();
 		}
 		if (blockState.is(SpectrumBlocks.BLACK_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.BLACK_SPIRIT_SALLOW_VINES_PLANT.get())) {
-			return SpectrumItems.ONYX_SHARD;
+            return SpectrumItems.ONYX_SHARD.get();
 		}
 		if (blockState.is(SpectrumBlocks.WHITE_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.WHITE_SPIRIT_SALLOW_VINES_PLANT.get())) {
-			return SpectrumItems.MOONSTONE_SHARD;
+            return SpectrumItems.MOONSTONE_SHARD.get();
 		}
 		return Items.AIR;
 	}

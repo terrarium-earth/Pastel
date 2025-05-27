@@ -136,21 +136,21 @@ public class REIClientIntegration implements REIClientPlugin {
 			registry.addWorkstations(BuiltinPlugin.CRAFTING, pedestals);
 		}
 		
-		registry.addWorkstations(BuiltinPlugin.CRAFTING, EntryStacks.of(SpectrumItems.CRAFTING_TABLET));
+		registry.addWorkstations(BuiltinPlugin.CRAFTING, EntryStacks.of(SpectrumItems.CRAFTING_TABLET.get()));
 		registry.addWorkstations(BuiltinPlugin.CRAFTING, EntryStacks.of(SpectrumBlocks.FABRICATION_CHEST.get()));
 		registry.addWorkstations(BuiltinPlugin.BLASTING, EntryStacks.of(SpectrumBlocks.CINDERHEARTH.get()));
 		
 		registry.addWorkstations(SpectrumPlugins.ANVIL_CRUSHING, EntryStacks.of(Blocks.ANVIL), EntryStacks.of(SpectrumBlocks.BEDROCK_ANVIL.get()), EntryStacks.of(SpectrumBlocks.STRATINE_FLOATBLOCK.get()), EntryStacks.of(SpectrumBlocks.PALTAERIA_FLOATBLOCK.get()));
 		registry.addWorkstations(SpectrumPlugins.FUSION_SHRINE, EntryIngredient.of(EntryStacks.of(SpectrumBlocks.FUSION_SHRINE_BASALT.get()), EntryStacks.of(SpectrumBlocks.FUSION_SHRINE_CALCITE.get())));
-		registry.addWorkstations(SpectrumPlugins.NATURES_STAFF, EntryStacks.of(SpectrumItems.NATURES_STAFF));
+		registry.addWorkstations(SpectrumPlugins.NATURES_STAFF, EntryStacks.of(SpectrumItems.NATURES_STAFF.get()));
 		registry.addWorkstations(SpectrumPlugins.HEATING, EntryStacks.of(SpectrumBlocks.BLAZE_IDOL.get()));
 		registry.addWorkstations(SpectrumPlugins.FREEZING, EntryStacks.of(SpectrumBlocks.POLAR_BEAR_IDOL.get()));
 		registry.addWorkstations(SpectrumPlugins.ENCHANTER_CRAFTING, EntryStacks.of(SpectrumBlocks.ENCHANTER.get()));
 		registry.addWorkstations(SpectrumPlugins.ENCHANTMENT_UPGRADE, EntryStacks.of(SpectrumBlocks.ENCHANTER.get()));
-		registry.addWorkstations(SpectrumPlugins.GOO_CONVERTING, EntryStacks.of(SpectrumItems.GOO_BUCKET));
-		registry.addWorkstations(SpectrumPlugins.LIQUID_CRYSTAL_CONVERTING, EntryStacks.of(SpectrumItems.LIQUID_CRYSTAL_BUCKET));
-		registry.addWorkstations(SpectrumPlugins.MIDNIGHT_SOLUTION_CONVERTING, EntryStacks.of(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET));
-		registry.addWorkstations(SpectrumPlugins.DRAGONROT_CONVERTING, EntryStacks.of(SpectrumItems.DRAGONROT_BUCKET));
+		registry.addWorkstations(SpectrumPlugins.GOO_CONVERTING, EntryStacks.of(SpectrumItems.GOO_BUCKET.get()));
+		registry.addWorkstations(SpectrumPlugins.LIQUID_CRYSTAL_CONVERTING, EntryStacks.of(SpectrumItems.LIQUID_CRYSTAL_BUCKET.get()));
+		registry.addWorkstations(SpectrumPlugins.MIDNIGHT_SOLUTION_CONVERTING, EntryStacks.of(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get()));
+		registry.addWorkstations(SpectrumPlugins.DRAGONROT_CONVERTING, EntryStacks.of(SpectrumItems.DRAGONROT_BUCKET.get()));
 		registry.addWorkstations(SpectrumPlugins.SPIRIT_INSTILLER, EntryStacks.of(SpectrumBlocks.SPIRIT_INSTILLER.get()));
 		registry.addWorkstations(SpectrumPlugins.INK_CONVERTING, EntryStacks.of(SpectrumBlocks.COLOR_PICKER.get()));
 		registry.addWorkstations(SpectrumPlugins.CRYSTALLARIEUM, EntryStacks.of(SpectrumBlocks.CRYSTALLARIEUM.get()));
@@ -159,7 +159,7 @@ public class REIClientIntegration implements REIClientPlugin {
 		registry.addWorkstations(SpectrumPlugins.POTION_WORKSHOP_REACTING, EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP.get()));
 		registry.addWorkstations(SpectrumPlugins.CINDERHEARTH, EntryStacks.of(SpectrumBlocks.CINDERHEARTH.get()));
 		registry.addWorkstations(SpectrumPlugins.TITRATION_BARREL, EntryStacks.of(SpectrumBlocks.TITRATION_BARREL.get()));
-		registry.addWorkstations(SpectrumPlugins.PRIMORDIAL_FIRE_BURNING, EntryStacks.of(SpectrumItems.DOOMBLOOM_SEED), EntryStacks.of(SpectrumItems.PRIMORDIAL_LIGHTER), EntryStacks.of(SpectrumBlocks.INCANDESCENT_AMALGAM.get()), EntryStacks.of(SpectrumItems.PIPE_BOMB));
+		registry.addWorkstations(SpectrumPlugins.PRIMORDIAL_FIRE_BURNING, EntryStacks.of(SpectrumItems.DOOMBLOOM_SEED.get()), EntryStacks.of(SpectrumItems.PRIMORDIAL_LIGHTER.get()), EntryStacks.of(SpectrumBlocks.INCANDESCENT_AMALGAM.get()), EntryStacks.of(SpectrumItems.PIPE_BOMB.get()));
 	}
 	
 	@Override

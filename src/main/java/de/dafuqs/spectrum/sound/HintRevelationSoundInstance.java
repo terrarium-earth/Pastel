@@ -45,7 +45,7 @@ public class HintRevelationSoundInstance extends AbstractSoundInstance implement
 			this.z = player.getZ();
 		}
 		
-		if (player == null || !player.getMainHandItem().is(SpectrumItems.GUIDEBOOK)) {
+		if (player == null || !player.getMainHandItem().is(SpectrumItems.GUIDEBOOK.get())) {
 			this.setDone();
 		}
 	}

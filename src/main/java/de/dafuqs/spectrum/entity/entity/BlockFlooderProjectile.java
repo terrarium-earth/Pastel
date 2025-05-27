@@ -37,7 +37,7 @@ public class BlockFlooderProjectile extends ThrowableItemProjectile {
 
 	@Override
 	protected Item getDefaultItem() {
-		return SpectrumItems.BLOCK_FLOODER;
+        return SpectrumItems.BLOCK_FLOODER.get();
 	}
 
 	private ParticleOptions getParticleParameters() {

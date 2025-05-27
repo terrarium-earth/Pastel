@@ -43,7 +43,7 @@ public class EnderSpliceChargingSoundInstance extends AbstractSoundInstance impl
 	
 	@Override
 	public void tick() {
-		if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 47 || !player.getUseItem().is(SpectrumItems.ENDER_SPLICE)) {
+		if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 47 || !player.getUseItem().is(SpectrumItems.ENDER_SPLICE.get())) {
 			this.setDone();
 		} else {
 			this.x = this.player.getX();

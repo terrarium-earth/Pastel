@@ -175,7 +175,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<FluidRecipeI
 		}
 		
 		if (alcPercent >= 100 && inputStack.getItem() instanceof FermentedItem) {
-			return SpectrumItems.PURE_ALCOHOL.getDefaultInstance();
+			return SpectrumItems.PURE_ALCOHOL.get().getDefaultInstance();
 		}
 		
 		// if it's not a set beverage (custom recipe) mark it as unknown

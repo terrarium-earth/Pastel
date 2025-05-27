@@ -65,7 +65,7 @@ public class JadeVineRootsBlock extends BaseEntityBlock implements JadeVine, Nat
 	
 	@Override
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-		return SpectrumItems.GERMINATED_JADE_VINE_BULB.getDefaultInstance();
+		return SpectrumItems.GERMINATED_JADE_VINE_BULB.get().getDefaultInstance();
 	}
 	
 	@Override

@@ -73,11 +73,11 @@ public class SpectrumColorProviders {
 		event.register(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO, SpectrumBlocks.CLOVER.get(), SpectrumBlocks.FOUR_LEAF_CLOVER.get());
 
 		memoryItem(event, SpectrumBlocks.MEMORY.get());
-		registerPotionFillables(event, SpectrumItems.LESSER_POTION_PENDANT, SpectrumItems.GREATER_POTION_PENDANT, SpectrumItems.MALACHITE_GLASS_AMPOULE);
-		registerPickyPotionFillables(event, SpectrumItems.NIGHTFALLS_BLADE, SpectrumItems.CONCEALING_OILS);
-		registerSingleInkStorages(event, SpectrumItems.INK_FLASK);
-		registerBrewColors(event, SpectrumItems.INFUSED_BEVERAGE);
-		registerOptionalInkColor(event, SpectrumItems.PAINTBRUSH);
+		registerPotionFillables(event, SpectrumItems.LESSER_POTION_PENDANT.get(), SpectrumItems.GREATER_POTION_PENDANT.get(), SpectrumItems.MALACHITE_GLASS_AMPOULE.get());
+		registerPickyPotionFillables(event, SpectrumItems.NIGHTFALLS_BLADE.get(), SpectrumItems.CONCEALING_OILS.get());
+		registerSingleInkStorages(event, SpectrumItems.INK_FLASK.get());
+		registerBrewColors(event, SpectrumItems.INFUSED_BEVERAGE.get());
+		registerOptionalInkColor(event, SpectrumItems.PAINTBRUSH.get());
 	}
 	
 	private static void coloredLeavesBlock(RegisterColorHandlersEvent.Block event) {

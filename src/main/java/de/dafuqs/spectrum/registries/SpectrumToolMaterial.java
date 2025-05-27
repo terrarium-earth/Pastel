@@ -14,14 +14,14 @@ public enum SpectrumToolMaterial implements Tier {
 	LOW_HEALTH(BlockTags.INCORRECT_FOR_IRON_TOOL, 16, 4.0F, 2.0F, 10, Ingredient::of),
 	LOW_HEALTH_MINING_LEVEL_4(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 16, 4.0F, 2.0F, 10, Ingredient::of),
 	VOIDING(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1143, 20.0F, 1.0F, 5, Ingredient::of),
-	BEDROCK(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 0, 15.0F, 5.0F, 3, () -> Ingredient.of(SpectrumItems.BEDROCK_DUST)),
-	DRACONIC(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 10000, 11.5F, 7.0F, 1, () -> Ingredient.of(SpectrumItems.PURE_BLOODSTONE)),
-	MALACHITE(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 1536, 14.0F, 5.0F, 20, () -> Ingredient.of(SpectrumItems.PURE_MALACHITE)),
-	GLASS_CREST(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 1536 * 4, 18.0F, 10.0F, 5, () -> Ingredient.of(SpectrumItems.PURE_MALACHITE)),
-	VERDIGRIS(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1536, 7.0F, 2.5F, 14, () -> Ingredient.of(SpectrumItems.NIGHTDEW_SPROUT)),
-	NECTAR(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, GLASS_CREST.itemDurability, 9.5F, 9.0F, 30, () -> Ingredient.of(SpectrumItems.AETHER_VESTIGES)),
-	DREAMFLAYER(BlockTags.INCORRECT_FOR_IRON_TOOL, 650, 5.0F, 2.0F, 20, () -> Ingredient.of(SpectrumItems.BISMUTH_CRYSTAL)),
-	NIGHTFALL(BlockTags.INCORRECT_FOR_IRON_TOOL, 650, 2.0F, 1.0F, 0, () -> Ingredient.of(SpectrumItems.MIDNIGHT_CHIP));
+	BEDROCK(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 0, 15.0F, 5.0F, 3, () -> Ingredient.of(SpectrumItems.BEDROCK_DUST.get())),
+	DRACONIC(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 10000, 11.5F, 7.0F, 1, () -> Ingredient.of(SpectrumItems.PURE_BLOODSTONE.get())),
+	MALACHITE(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 1536, 14.0F, 5.0F, 20, () -> Ingredient.of(SpectrumItems.PURE_MALACHITE.get())),
+	GLASS_CREST(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 1536 * 4, 18.0F, 10.0F, 5, () -> Ingredient.of(SpectrumItems.PURE_MALACHITE.get())),
+	VERDIGRIS(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1536, 7.0F, 2.5F, 14, () -> Ingredient.of(SpectrumItems.NIGHTDEW_SPROUT.get())),
+	NECTAR(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, GLASS_CREST.itemDurability, 9.5F, 9.0F, 30, () -> Ingredient.of(SpectrumItems.AETHER_VESTIGES.get())),
+	DREAMFLAYER(BlockTags.INCORRECT_FOR_IRON_TOOL, 650, 5.0F, 2.0F, 20, () -> Ingredient.of(SpectrumItems.BISMUTH_CRYSTAL.get())),
+	NIGHTFALL(BlockTags.INCORRECT_FOR_IRON_TOOL, 650, 2.0F, 1.0F, 0, () -> Ingredient.of(SpectrumItems.MIDNIGHT_CHIP.get()));
 	
 	private final TagKey<Block> inverseTag;
 	private final int itemDurability;

@@ -17,7 +17,7 @@ public class SpectrumDispenserBehaviors {
 	
 	public static void register() {
 		DispenserBlock.registerBehavior(SpectrumBlocks.BOTTOMLESS_BUNDLE.get(), new BottomlessBundleItem.BottomlessBundlePlacementDispenserBehavior());
-		DispenserBlock.registerBehavior(SpectrumItems.BEDROCK_SHEARS, new ShearsDispenseItemBehavior());
+		DispenserBlock.registerBehavior(SpectrumItems.BEDROCK_SHEARS.get(), new ShearsDispenseItemBehavior());
 		
 		// Shooting Stars
 		DispenserBlock.registerBehavior(SpectrumBlocks.COLORFUL_SHOOTING_STAR.get(), new ShootingStarDispenserBehavior());
@@ -28,10 +28,10 @@ public class SpectrumDispenserBehaviors {
 		
 		// Fluid Buckets
 		DispenseItemBehavior fluidBucketBehavior = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);
-		DispenserBlock.registerBehavior(SpectrumItems.GOO_BUCKET, fluidBucketBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.LIQUID_CRYSTAL_BUCKET, fluidBucketBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET, fluidBucketBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.DRAGONROT_BUCKET, fluidBucketBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.GOO_BUCKET.get(), fluidBucketBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.LIQUID_CRYSTAL_BUCKET.get(), fluidBucketBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get(), fluidBucketBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.DRAGONROT_BUCKET.get(), fluidBucketBehavior);
 		
 		// Arrows
 		for (GlassArrowVariant variant : SpectrumRegistries.GLASS_ARROW_VARIANT) {
@@ -40,11 +40,11 @@ public class SpectrumDispenserBehaviors {
 		
 		// Spawn Eggs
 		DispenseItemBehavior spawnEggBehavior = DispenserBlock.DISPENSER_REGISTRY.get(Items.SHEEP_SPAWN_EGG);
-		DispenserBlock.registerBehavior(SpectrumItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG, spawnEggBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.KINDLING_SPAWN_EGG, spawnEggBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.LIZARD_SPAWN_EGG, spawnEggBehavior);
-        DispenserBlock.registerBehavior(SpectrumItems.PRESERVATION_TURRET_SPAWN_EGG, spawnEggBehavior);
-        DispenserBlock.registerBehavior(SpectrumItems.ERASER_SPAWN_EGG, spawnEggBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.EGG_LAYING_WOOLY_PIG_SPAWN_EGG.get(), spawnEggBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.KINDLING_SPAWN_EGG.get(), spawnEggBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.LIZARD_SPAWN_EGG.get(), spawnEggBehavior);
+        DispenserBlock.registerBehavior(SpectrumItems.PRESERVATION_TURRET_SPAWN_EGG.get(), spawnEggBehavior);
+        DispenserBlock.registerBehavior(SpectrumItems.ERASER_SPAWN_EGG.get(), spawnEggBehavior);
 		
 		// Equipping Mob Heads
 		DispenseItemBehavior armorEquipBehavior = DispenserBlock.DISPENSER_REGISTRY.get(Items.PLAYER_HEAD);
@@ -55,13 +55,13 @@ public class SpectrumDispenserBehaviors {
 		// Decay
 		DispenseItemBehavior blockPlacementDispenserBehavior = new ShulkerBoxDispenseBehavior();
 		
-		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_FADING, blockPlacementDispenserBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_FAILING, blockPlacementDispenserBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_RUIN, blockPlacementDispenserBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_FORFEITURE, blockPlacementDispenserBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_DECAY_AWAY, blockPlacementDispenserBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_FADING.get(), blockPlacementDispenserBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_FAILING.get(), blockPlacementDispenserBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_RUIN.get(), blockPlacementDispenserBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_FORFEITURE.get(), blockPlacementDispenserBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.BOTTLE_OF_DECAY_AWAY.get(), blockPlacementDispenserBehavior);
 		
-		DispenserBlock.registerBehavior(SpectrumItems.PRIMORDIAL_LIGHTER, PrimordialLighterItem.DISPENSER_BEHAVIOR);
+		DispenserBlock.registerBehavior(SpectrumItems.PRIMORDIAL_LIGHTER.get(), PrimordialLighterItem.DISPENSER_BEHAVIOR);
 		
 		// Glass Ampoules
 		DispenseItemBehavior ampouleBehavior = (pointer, stack) -> {
@@ -70,9 +70,9 @@ public class SpectrumDispenserBehaviors {
 			}
 			return stack;
 		};
-		DispenserBlock.registerBehavior(SpectrumItems.AZURITE_GLASS_AMPOULE, ampouleBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.MALACHITE_GLASS_AMPOULE, ampouleBehavior);
-		DispenserBlock.registerBehavior(SpectrumItems.BLOODSTONE_GLASS_AMPOULE, ampouleBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.AZURITE_GLASS_AMPOULE.get(), ampouleBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.MALACHITE_GLASS_AMPOULE.get(), ampouleBehavior);
+		DispenserBlock.registerBehavior(SpectrumItems.BLOODSTONE_GLASS_AMPOULE.get(), ampouleBehavior);
 	}
 	
 }

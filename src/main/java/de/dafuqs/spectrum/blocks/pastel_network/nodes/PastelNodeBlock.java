@@ -174,9 +174,9 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements EntityBlock,
 				return ItemInteractionResult.sidedSuccess(world.isClientSide());
 			}
 			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		} else if (stack.is(SpectrumItems.TUNING_STAMP)) {
+		} else if (stack.is(SpectrumItems.TUNING_STAMP.get())) {
 			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		} else if (player.isCreative() && stack.is(SpectrumItems.PAINTBRUSH)) {
+		} else if (player.isCreative() && stack.is(SpectrumItems.PAINTBRUSH.get())) {
 			sendDebugMessage(world, pos, player, blockEntity);
 			return ItemInteractionResult.sidedSuccess(world.isClientSide());
 		} else if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_UPGRADING) && stack.is(SpectrumItemTags.PASTEL_NODE_UPGRADES)) {

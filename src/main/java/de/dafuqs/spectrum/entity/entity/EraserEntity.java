@@ -343,7 +343,7 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 	
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(SpectrumItems.BUCKET_OF_ERASER);
+		return new ItemStack(SpectrumItems.BUCKET_OF_ERASER.get());
 	}
 	
 	@Override

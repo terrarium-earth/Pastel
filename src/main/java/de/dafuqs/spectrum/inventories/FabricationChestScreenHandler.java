@@ -50,7 +50,7 @@ public class FabricationChestScreenHandler extends AbstractContainerMenu {
 		// crafting tablet slots
 		for (int j = 0; j < 4; j++) {
 			int slotId = FabricationChestBlockEntity.RECIPE_SLOTS[j];
-			this.addSlot(new StackFilterSlot(inventory, slotId, 26 + j * 36, 18, SpectrumItems.CRAFTING_TABLET));
+			this.addSlot(new StackFilterSlot(inventory, slotId, 26 + j * 36, 18, SpectrumItems.CRAFTING_TABLET.get()));
 		}
 		
 		// crafting result slots
@@ -91,7 +91,7 @@ public class FabricationChestScreenHandler extends AbstractContainerMenu {
 				if (!this.moveItemStackTo(clickedStack, 35, 71, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (index > FabricationChestBlockEntity.INVENTORY_SIZE && clickedStackCopy.is(SpectrumItems.CRAFTING_TABLET)) {
+			} else if (index > FabricationChestBlockEntity.INVENTORY_SIZE && clickedStackCopy.is(SpectrumItems.CRAFTING_TABLET.get())) {
 				if (!this.moveItemStackTo(clickedStack, FabricationChestBlockEntity.RECIPE_SLOTS[0], FabricationChestBlockEntity.RECIPE_SLOTS[FabricationChestBlockEntity.RECIPE_SLOTS.length - 1] + 1, false)) {
 					return ItemStack.EMPTY;
 				}

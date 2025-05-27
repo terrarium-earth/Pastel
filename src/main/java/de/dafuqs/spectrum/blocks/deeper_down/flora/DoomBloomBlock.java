@@ -184,7 +184,7 @@ public class DoomBloomBlock extends FlowerBlock implements BonemealableBlock {
 			world.removeBlock(pos, false);
 			world.explode(null, SpectrumDamageTypes.incandescence(world), new ExplosionDamageCalculator(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3.0F, true, Level.ExplosionInteraction.BLOCK);
 			if (!world.isClientSide) {
-				popResource(world, pos, new ItemStack(SpectrumItems.DOOMBLOOM_SEED, world.random.nextIntBetweenInclusive(3, 7)));
+				popResource(world, pos, new ItemStack(SpectrumItems.DOOMBLOOM_SEED.get(), world.random.nextIntBetweenInclusive(3, 7)));
 			}
 		}
 	}

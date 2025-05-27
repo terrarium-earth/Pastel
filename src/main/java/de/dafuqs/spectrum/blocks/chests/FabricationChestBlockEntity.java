@@ -147,7 +147,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		for (int slot : RECIPE_SLOTS) {
 			var tablet = inventory.getStackInSlot(slot);
 
-			if (!tablet.is(SpectrumItems.CRAFTING_TABLET))
+			if (!tablet.is(SpectrumItems.CRAFTING_TABLET.get()))
 				continue;
 
 			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet).value();
@@ -176,7 +176,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 
 		for (int i = 0; i < 4; i++) {
 			ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
-			if (!tablet.is(SpectrumItems.CRAFTING_TABLET))
+			if (!tablet.is(SpectrumItems.CRAFTING_TABLET.get()))
 				continue;
 
 			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet).value();
@@ -202,7 +202,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 	
 	private boolean tryCraft(FabricationChestBlockEntity chest, int index) {
 		ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[index]);
-		if (craftingTabletItemStack.is(SpectrumItems.CRAFTING_TABLET)) {
+		if (craftingTabletItemStack.is(SpectrumItems.CRAFTING_TABLET.get())) {
 			var recipe = CraftingTabletItem.getStoredRecipe(level, craftingTabletItemStack);
 			if (recipe != null && isRecipeValid(recipe.value())) {
 				NonNullList<Ingredient> ingredients = recipe.value().getIngredients();
@@ -321,7 +321,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		for (int i = 0; i < 4; i++) {
 			ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
 
-			if (!tablet.is(SpectrumItems.CRAFTING_TABLET))
+			if (!tablet.is(SpectrumItems.CRAFTING_TABLET.get()))
 				continue;
 
 			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet);

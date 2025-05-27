@@ -28,7 +28,7 @@ public record BindEnderSpliceToPlayerPayload(int entityId) implements CustomPack
 			Entity entity = player.level().getEntity(payload.entityId());
 			if (entity instanceof ServerPlayer targetPlayerEntity
 					&& player.distanceTo(targetPlayerEntity) < 8
-					&& player.getMainHandItem().is(SpectrumItems.ENDER_SPLICE)) {
+					&& player.getMainHandItem().is(SpectrumItems.ENDER_SPLICE.get())) {
 				
 				EnderSpliceItem.setTeleportTargetPlayer(player.getMainHandItem(), targetPlayerEntity);
 				

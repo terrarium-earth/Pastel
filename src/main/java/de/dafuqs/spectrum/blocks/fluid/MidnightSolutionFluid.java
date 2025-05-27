@@ -64,7 +64,7 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	
 	@Override
 	public Item getBucket() {
-		return SpectrumItems.MIDNIGHT_SOLUTION_BUCKET;
+		return SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get();
 	}
 	
 	@Override
@@ -145,7 +145,7 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 						livingEntity.hurt(SpectrumDamageTypes.midnightSolution(world), damageMult);
 					}
 					if (livingEntity.isDeadOrDying()) {
-						livingEntity.spawnAtLocation(SpectrumItems.MIDNIGHT_CHIP.getDefaultInstance());
+						livingEntity.spawnAtLocation(SpectrumItems.MIDNIGHT_CHIP.get().getDefaultInstance());
 					}
 				}
 			} else if (entity instanceof ItemEntity itemEntity && !itemEntity.hasPickUpDelay()) {
@@ -178,7 +178,7 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 				itemEntity.setItem(result.getA());
 				itemEntity.setDefaultPickUpDelay();
 			}
-		} else if (itemStack.is(SpectrumItems.ENCHANTMENT_CANVAS) && itemStack.has(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS)) {
+		} else if (itemStack.is(SpectrumItems.ENCHANTMENT_CANVAS.get()) && itemStack.has(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS)) {
 			ItemEnchantments canvasEnchantments = itemStack.get(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS);
 			Item boundItem = BuiltInRegistries.ITEM.get(itemStack.get(SpectrumDataComponentTypes.BOUND_ITEM));
 			if (!canvasEnchantments.isEmpty()) {

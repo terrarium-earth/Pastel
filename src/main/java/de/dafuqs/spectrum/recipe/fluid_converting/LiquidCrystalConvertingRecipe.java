@@ -32,7 +32,7 @@ public class LiquidCrystalConvertingRecipe extends FluidConvertingRecipe {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumItems.LIQUID_CRYSTAL_BUCKET);
+		return new ItemStack(SpectrumItems.LIQUID_CRYSTAL_BUCKET.get());
 	}
 	
 	@Override

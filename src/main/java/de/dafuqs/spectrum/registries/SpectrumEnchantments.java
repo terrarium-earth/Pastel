@@ -261,8 +261,8 @@ public class SpectrumEnchantments {
 			Optional.of(ItemTags.MINING_LOOT_ENCHANTABLE)
 	).withEnchantable(provider -> provider
 			.addTag(ItemTags.MINING_ENCHANTABLE)
-			.add(SpectrumItems.ENDER_SPLICE.builtInRegistryHolder().key())
-			.add(SpectrumItems.EXCHANGING_STAFF.builtInRegistryHolder().key())
+			.add(SpectrumItems.ENDER_SPLICE.get().builtInRegistryHolder().key())
+			.add(SpectrumItems.EXCHANGING_STAFF.get().builtInRegistryHolder().key())
 	).withExclusiveSet((key, provider) -> provider
 			.addTag(EnchantmentTags.MINING_EXCLUSIVE)
 			.add(PEST_CONTROL)
@@ -294,7 +294,7 @@ public class SpectrumEnchantments {
 			Optional.empty()
 	).withEnchantable(provider -> provider
 			.addTag(ItemTags.CROSSBOW_ENCHANTABLE)
-			.add(SpectrumItems.GLEAMING_PIN.builtInRegistryHolder().key())
+			.add(SpectrumItems.GLEAMING_PIN.get().builtInRegistryHolder().key())
 	).withExclusiveSet((key, provider) -> provider
 			.add(Enchantments.MULTISHOT)
 	).register();

@@ -32,7 +32,7 @@ public class MidnightSolutionConvertingRecipe extends FluidConvertingRecipe {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET);
+		return new ItemStack(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get());
 	}
 	
 	@Override

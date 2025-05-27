@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.registries.*;
 import vazkii.botania.common.item.BlackHoleTalismanItem;
 import vazkii.botania.common.item.BotaniaItems;
 
@@ -25,8 +26,8 @@ import static de.dafuqs.spectrum.registries.SpectrumItems.simple;
 @SuppressWarnings("unused")
 public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
-	public static Item LEAST_BLACK_LOTUS = SpectrumItems.register(simple(item("least_black_lotus", new LeastBlackLotusItem(new Item.Properties()), InkColors.BLACK)));
-	public static Item BLACKEST_LOTUS = SpectrumItems.register(simple(item("blackest_lotus", new BlackestLotusItem(new Item.Properties()), InkColors.BLACK)));
+	public static DeferredItem<Item> LEAST_BLACK_LOTUS = SpectrumItems.register(simple(item("least_black_lotus", () -> new LeastBlackLotusItem(new Item.Properties()), InkColors.BLACK)));
+	public static DeferredItem<Item> BLACKEST_LOTUS = SpectrumItems.register(simple(item("blackest_lotus", () -> new BlackestLotusItem(new Item.Properties()), InkColors.BLACK)));
 
 	private static void onServerStarted(ServerStartedEvent event) {
 		ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.overgrowthSeed, InkColors.LIME);

@@ -99,7 +99,7 @@ public class SawbladeHollyBushBlock extends BushBlock implements BonemealableBlo
     
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return new ItemStack(SpectrumItems.SAWBLADE_HOLLY_BERRY);
+        return new ItemStack(SpectrumItems.SAWBLADE_HOLLY_BERRY.get());
     }
     
     @Override

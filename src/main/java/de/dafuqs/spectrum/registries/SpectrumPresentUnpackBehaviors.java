@@ -31,14 +31,14 @@ import java.util.Optional;
 public class SpectrumPresentUnpackBehaviors {
 	
 	public static void register() {
-		PresentBlock.registerBehavior(SpectrumItems.PIPE_BOMB, (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(SpectrumItems.PIPE_BOMB.get(), (stack, presentBlockEntity, world, pos, random) -> {
 			stack.set(SpectrumDataComponentTypes.TIMESTAMP, world.getGameTime() - 70);
 			stack.set(DataComponents.PROFILE, presentBlockEntity.getOwner());
 			world.playSound(null, pos, SpectrumSoundEvents.INCANDESCENT_ARM, SoundSource.BLOCKS, 2.0F, 0.9F);
 			return stack;
 		});
 		
-		PresentBlock.registerBehavior(SpectrumItems.STORM_STONE, (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(SpectrumItems.STORM_STONE.get(), (stack, presentBlockEntity, world, pos, random) -> {
 			if (world.canSeeSky(pos)) {
 				LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
 				if (lightningEntity != null) {

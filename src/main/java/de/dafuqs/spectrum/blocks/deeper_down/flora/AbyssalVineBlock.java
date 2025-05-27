@@ -60,7 +60,7 @@ public class AbyssalVineBlock extends TriStateVineBlock {
         reference.setProperty(BERRIES, false);
         reference.update(world);
         world.playSound(null, pos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.8F, 1.2F));
-        player.getInventory().placeItemBackInInventory(SpectrumItems.FISSURE_PLUM.getDefaultInstance());
+        player.getInventory().placeItemBackInInventory(SpectrumItems.FISSURE_PLUM.get().getDefaultInstance());
 
         world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, reference.getState()));
         return InteractionResult.SUCCESS;
@@ -100,7 +100,7 @@ public class AbyssalVineBlock extends TriStateVineBlock {
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return SpectrumItems.FISSURE_PLUM.getDefaultInstance();
+        return SpectrumItems.FISSURE_PLUM.get().getDefaultInstance();
     }
 
     @Override

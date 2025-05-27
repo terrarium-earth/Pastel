@@ -93,7 +93,7 @@ public class DeeperDownPortalBlock extends Block {
 
 	@Override
 	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (handStack.is(SpectrumItems.BEDROCK_DUST)) {
+		if (handStack.is(SpectrumItems.BEDROCK_DUST.get())) {
 			if (world.isClientSide) {
 				return ItemInteractionResult.SUCCESS;
 			} else {

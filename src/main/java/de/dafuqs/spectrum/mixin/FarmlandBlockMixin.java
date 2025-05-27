@@ -26,7 +26,7 @@ public abstract class FarmlandBlockMixin extends Block {
 
         // if carrying puff circlet: no trampling
         if (entity instanceof LivingEntity livingEntity) {
-            if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.PUFF_CIRCLET)) {
+            if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.PUFF_CIRCLET.get())) {
                 info.cancel();
             }
         }

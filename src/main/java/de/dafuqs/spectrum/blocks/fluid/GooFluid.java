@@ -42,7 +42,7 @@ public abstract class GooFluid extends SpectrumFluid {
 	
 	@Override
 	public Item getBucket() {
-		return SpectrumItems.GOO_BUCKET;
+        return SpectrumItems.GOO_BUCKET.get();
 	}
 	
 	@Override

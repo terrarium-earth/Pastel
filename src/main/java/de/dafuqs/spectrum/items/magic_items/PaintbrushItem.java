@@ -288,7 +288,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
 	
 	// TODO: can this be moved to ColorableBlock / as a block color processor?
 	private boolean tryUseOnSign(Level world, SignBlockEntity signBlockEntity, boolean front, Player player, ItemStack stack) {
-		if (stack.is(SpectrumItems.PAINTBRUSH)) {
+		if (stack.is(SpectrumItems.PAINTBRUSH.get())) {
 			Optional<InkColor> color = getColor(stack);
 			if (color.isPresent()) {
 				InkColor inkColor = color.get();

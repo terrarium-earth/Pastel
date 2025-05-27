@@ -16,7 +16,7 @@ public class EarsCompat {
             Player player = (Player) peer;
             if (part.isAnchoredTo(EarsAnchorPart.TORSO) && EarsStateOverriderRegistry.isActive(EarsStateType.WEARING_CHESTPLATE, peer, true).getValue()) {
                 Item equippedItem = player.getItemBySlot(EquipmentSlot.CHEST).getItem();
-                return equippedItem == SpectrumItems.BEDROCK_CHESTPLATE || equippedItem == SpectrumItems.FEROCIOUS_CHESTPLATE;
+                return equippedItem == SpectrumItems.BEDROCK_CHESTPLATE.get() || equippedItem == SpectrumItems.FEROCIOUS_CHESTPLATE.get();
             }
             return false;
         });

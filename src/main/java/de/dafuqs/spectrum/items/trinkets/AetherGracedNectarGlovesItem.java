@@ -59,7 +59,7 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 		if (effect.is(SpectrumStatusEffectTags.BYPASSES_NECTAR_GLOVES))
 			return false;
 
-		return hasEquipped(entity, SpectrumItems.AETHER_GRACED_NECTAR_GLOVES) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == SpectrumStatusEffects.FRENZY);
+		return hasEquipped(entity, SpectrumItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == SpectrumStatusEffects.FRENZY);
 	}
 
 	public static boolean tryBlockEffect(LivingEntity entity, int cost) {

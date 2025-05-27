@@ -39,7 +39,7 @@ public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implemen
 	
 	@Override
 	public void tick() {
-		if (player == null || !player.isUsingItem() || !player.getUseItem().is(SpectrumItems.NATURES_STAFF)) {
+		if (player == null || !player.isUsingItem() || !player.getUseItem().is(SpectrumItems.NATURES_STAFF.get())) {
 			this.setDone();
 		} else {
 			this.x = ((float) this.player.getX());

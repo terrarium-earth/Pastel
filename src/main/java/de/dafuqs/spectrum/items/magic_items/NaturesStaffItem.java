@@ -58,7 +58,7 @@ import java.util.List;
 
 public class NaturesStaffItem extends Item implements InkPowered {
 
-	public static final ItemStack ITEM_COST = new ItemStack(SpectrumItems.VEGETAL, 1);
+	public static final ItemStack ITEM_COST = new ItemStack(SpectrumItems.VEGETAL.get(), 1);
 	public static final InkCost INK_COST = new InkCost(InkColors.LIME, 20);
 	
 	public NaturesStaffItem(Properties settings) {

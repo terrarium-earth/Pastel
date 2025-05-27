@@ -36,7 +36,7 @@ public class PhantomFrameEntity extends ItemFrame {
 
 	@Override
 	protected ItemStack getFrameItemStack() {
-		return new ItemStack(SpectrumItems.PHANTOM_FRAME);
+		return new ItemStack(SpectrumItems.PHANTOM_FRAME.get());
 	}
 
 	@Override

@@ -101,7 +101,7 @@ public class SpectrumClientEventListeners {
 		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onEntityTick);
 
 		registerCustomItemRenderer(SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem(), BottomlessBundleItem.Renderer::new);
-		registerCustomItemRenderer(SpectrumItems.OMNI_ACCELERATOR, OmniAcceleratorItem.Renderer::new);
+		registerCustomItemRenderer(SpectrumItems.OMNI_ACCELERATOR.get(), OmniAcceleratorItem.Renderer::new);
 	}
 
 	private static void addResourcePacks(AddPackFindersEvent event) {

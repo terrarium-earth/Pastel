@@ -70,7 +70,7 @@ public abstract class ItemStackMixin {
 	@Inject(at = @At("HEAD"), method = "is(Lnet/minecraft/world/item/Item;)Z", cancellable = true)
 	private void spectrum$isSpectrumShears(Item item, CallbackInfoReturnable<Boolean> cir) {
 		if (item == Items.SHEARS) {
-			if (is(SpectrumItems.BEDROCK_SHEARS)) {
+			if (is(SpectrumItems.BEDROCK_SHEARS.get())) {
 				cir.setReturnValue(true);
 			}
 		}

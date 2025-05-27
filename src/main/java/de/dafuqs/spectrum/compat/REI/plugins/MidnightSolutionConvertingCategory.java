@@ -19,7 +19,7 @@ public class MidnightSolutionConvertingCategory extends FluidConvertingCategory<
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET);
+		return EntryStacks.of(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get());
 	}
 	
 	@Override

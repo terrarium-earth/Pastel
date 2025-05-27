@@ -27,7 +27,7 @@ public class PhantomGlowFrameEntity extends PhantomFrameEntity {
 	
 	@Override
 	protected ItemStack getFrameItemStack() {
-		return new ItemStack(SpectrumItems.GLOW_PHANTOM_FRAME);
+		return new ItemStack(SpectrumItems.GLOW_PHANTOM_FRAME.get());
 	}
 	
 	@Override

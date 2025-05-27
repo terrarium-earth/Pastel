@@ -148,7 +148,7 @@ public class FluidLogging {
 				if (!state.canSurvive(world, pos)) {
 					world.destroyBlock(pos, true);
 				}
-				return new ItemStack(SpectrumItems.LIQUID_CRYSTAL_BUCKET);
+				return new ItemStack(SpectrumItems.LIQUID_CRYSTAL_BUCKET.get());
 			}
 			
 			return ItemStack.EMPTY;

@@ -149,20 +149,20 @@ public class SpectrumOmniAcceleratorProjectiles {
 		}, Items.TNT);
 		
 		OmniAcceleratorProjectile.register(new OmniAcceleratorProjectile() {
-			@Override
-			public Entity createProjectile(ItemStack stack, LivingEntity shooter, Level world, ItemStack shotFrom) {
-				BlockFlooderProjectile blockFlooderProjectile = new BlockFlooderProjectile(world, shooter);
-				blockFlooderProjectile.setItem(stack);
-				blockFlooderProjectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 2.5F, 1.0F);
-				world.addFreshEntity(blockFlooderProjectile);
-				return blockFlooderProjectile;
-			}
-			
-			@Override
-			public SoundEvent getSoundEffect() {
-				return SpectrumSoundEvents.ENTITY_BLOCK_FLOODER_THROW;
-			}
-		}, SpectrumItems.BLOCK_FLOODER);
+            @Override
+            public Entity createProjectile(ItemStack stack, LivingEntity shooter, Level world, ItemStack shotFrom) {
+                BlockFlooderProjectile blockFlooderProjectile = new BlockFlooderProjectile(world, shooter);
+                blockFlooderProjectile.setItem(stack);
+                blockFlooderProjectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot(), 0.0F, 2.5F, 1.0F);
+                world.addFreshEntity(blockFlooderProjectile);
+                return blockFlooderProjectile;
+            }
+
+            @Override
+            public SoundEvent getSoundEffect() {
+                return SpectrumSoundEvents.ENTITY_BLOCK_FLOODER_THROW;
+            }
+        }, SpectrumItems.BLOCK_FLOODER.get());
 		
 		OmniAcceleratorProjectile.register(new OmniAcceleratorProjectile() {
 			@Override

@@ -510,7 +510,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		if (dir == Direction.UP) {
 			return new StackHandlerView(inventory, 0, ACCESSIBLE_SLOTS_UP.length)
 					.disableExtraction()
-					.addFilter(MERMAIDS_GEM_INPUT_SLOT_ID, Ingredient.of(SpectrumItems.MERMAIDS_GEM));
+					.addFilter(MERMAIDS_GEM_INPUT_SLOT_ID, Ingredient.of(SpectrumItems.MERMAIDS_GEM.get()));
 		}
 
 		return new StackHandlerView(inventory, ACCESSIBLE_SLOTS_DOWN[0], ACCESSIBLE_SLOTS_DOWN.length);

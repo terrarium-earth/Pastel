@@ -50,7 +50,7 @@ public class TreasureItemBowlBlock extends Block implements EntityBlock {
 			return InteractionResult.FAIL;
 
 		world.playLocalSound(pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1F, 1F, true);
-		player.getInventory().placeItemBackInInventory(SpectrumItems.AETHER_GRACED_NECTAR_GLOVES.getDefaultInstance());
+		player.getInventory().placeItemBackInInventory(SpectrumItems.AETHER_GRACED_NECTAR_GLOVES.get().getDefaultInstance());
 		bowl.markTaken(player);
 
 		return InteractionResult.CONSUME;

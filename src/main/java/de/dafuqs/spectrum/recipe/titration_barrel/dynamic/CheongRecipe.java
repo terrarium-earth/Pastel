@@ -23,8 +23,8 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 	
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final int MIN_FERMENTATION_TIME_HOURS = 4;
-	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.CHEONG, 4);
-	public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(SpectrumItems.MERMAIDS_JAM, 4);
+	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.CHEONG.get(), 4);
+	public static final ItemStack OUTPUT_STACK_MERMAIDS = getDefaultStackWithCount(SpectrumItems.MERMAIDS_JAM.get(), 4);
 	
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
 		add(IngredientStack.ofTag(SpectrumItemTags.FRUITS, 8));
@@ -38,7 +38,7 @@ public class CheongRecipe extends TitrationBarrelRecipe {
 	
 	@Override
 	public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
-		ItemStack result = inventory.hasAnyOf(Collections.singleton(SpectrumItems.MERMAIDS_GEM))
+		ItemStack result = inventory.hasAnyOf(Collections.singleton(SpectrumItems.MERMAIDS_GEM.get()))
 				? OUTPUT_STACK_MERMAIDS.copy()
 				: OUTPUT_STACK.copy();
 		result.setCount(1);

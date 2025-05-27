@@ -180,11 +180,11 @@ public abstract class LivingEntityMixin {
 		}
 		
 		if (!entity.onGround()) {
-			var optionalTrinket = SpectrumTrinketItem.getFirstEquipped(entity, SpectrumItems.RING_OF_AERIAL_GRACE);
+			var optionalTrinket = SpectrumTrinketItem.getFirstEquipped(entity, SpectrumItems.RING_OF_AERIAL_GRACE.get());
 			if (optionalTrinket.isPresent()) {
-				var inkStorage = SpectrumItems.RING_OF_AERIAL_GRACE.getEnergyStorage(optionalTrinket.get());
+				var inkStorage = SpectrumItems.RING_OF_AERIAL_GRACE.get().getEnergyStorage(optionalTrinket.get());
 				var storedInk = inkStorage.getEnergy(inkStorage.getStoredColor());
-				friction = (float) Math.max(friction, 0.91 + (((RingOfAerialGraceItem) SpectrumItems.RING_OF_AERIAL_GRACE).getBonus(storedInk) / 150F));
+				friction = (float) Math.max(friction, 0.91 + (((RingOfAerialGraceItem) SpectrumItems.RING_OF_AERIAL_GRACE.get()).getBonus(storedInk) / 150F));
 				override = true;
 			}
 		}
@@ -222,7 +222,7 @@ public abstract class LivingEntityMixin {
 	private boolean spectrum$modifyFluidWalking(boolean original) {
 		var entity = (LivingEntity) (Object) this;
 		
-		if (SpectrumTrinketItem.hasEquipped(entity, SpectrumItems.RING_OF_AERIAL_GRACE))
+		if (SpectrumTrinketItem.hasEquipped(entity, SpectrumItems.RING_OF_AERIAL_GRACE.get()))
 			return !entity.isUnderWater();
 		
 		return original;
@@ -430,7 +430,7 @@ public abstract class LivingEntityMixin {
 		if (original <= 0 || thisEntity.isInvulnerableTo(thisEntity.damageSources().fall()) || AzureDikeProvider.getAzureDikeCharges(thisEntity) <= cost) return original;
 		
 		// check if this entity is protected by puff circlet
-		if (!SpectrumTrinketItem.hasEquipped(thisEntity, SpectrumItems.PUFF_CIRCLET)) return original;
+		if (!SpectrumTrinketItem.hasEquipped(thisEntity, SpectrumItems.PUFF_CIRCLET.get())) return original;
 		
 		// do damage reduction
 		AzureDikeProvider.absorbDamage(thisEntity, cost);

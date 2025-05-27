@@ -123,7 +123,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 		if (!(target instanceof LivingEntity livingEntity))
 			return false;
 
-		if (!player.getMainHandItem().is(SpectrumItems.NECTAR_LANCE))
+		if (!player.getMainHandItem().is(SpectrumItems.NECTAR_LANCE.get()))
 			return false;
 
 		if (livingEntity.isSleeping())

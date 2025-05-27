@@ -43,7 +43,7 @@ public class SpectrumCapabilityHandlers {
         event.registerItem(
                 Capabilities.FluidHandler.ITEM,
                 (stack, v) -> new FluidHandlerItemStackSimple.Consumable(() -> SpectrumDataComponentTypes.MERMAIDS_GEM, stack, 1000),
-                SpectrumItems.MERMAIDS_GEM);
+                SpectrumItems.MERMAIDS_GEM.get());
     }
 
     private static void standardBlockBE(BlockEntityType<? extends SidedCapabilityProvider> type, RegisterCapabilitiesEvent event) {

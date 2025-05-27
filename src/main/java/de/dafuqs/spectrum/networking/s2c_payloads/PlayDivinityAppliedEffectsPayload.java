@@ -36,7 +36,7 @@ public record PlayDivinityAppliedEffectsPayload() implements CustomPacketPayload
 		var level = player.level();
 		var client = Minecraft.getInstance();
 		client.particleEngine.createTrackingEmitter(player, SpectrumParticleTypes.DIVINITY, 30);
-		client.gameRenderer.displayItemActivation(SpectrumItems.DIVINATION_HEART.getDefaultInstance());
+		client.gameRenderer.displayItemActivation(SpectrumItems.DIVINATION_HEART.get().getDefaultInstance());
 		level.playSound(null, player.blockPosition(), SpectrumSoundEvents.FAILING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
 		ParticleHelper.playParticleWithPatternAndVelocityClient(level, player.position(), ColoredCraftingParticleEffect.WHITE, VectorPattern.SIXTEEN, 0.4);
 		ParticleHelper.playParticleWithPatternAndVelocityClient(level, player.position(), ColoredCraftingParticleEffect.RED, VectorPattern.SIXTEEN, 0.4);

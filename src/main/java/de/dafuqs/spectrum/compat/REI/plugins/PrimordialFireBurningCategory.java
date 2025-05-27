@@ -36,7 +36,7 @@ public class PrimordialFireBurningCategory extends GatedDisplayCategory<Primordi
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.DOOMBLOOM_SEED);
+		return EntryStacks.of(SpectrumItems.DOOMBLOOM_SEED.get());
 	}
 	
 	@Override

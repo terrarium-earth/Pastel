@@ -43,9 +43,9 @@ public class UnlockToastManager {
 		put(SpectrumAdvancements.MIDGAME, new Tuple<>(SpectrumBlocks.PEDESTAL_ONYX.get().asItem().getDefaultInstance(), "second_advancement_tree_unlocked"));
 		put(SpectrumAdvancements.LATEGAME, new Tuple<>(SpectrumBlocks.PEDESTAL_MOONSTONE.get().asItem().getDefaultInstance(), "third_advancement_tree_unlocked"));
 		put(SpectrumAdvancements.ASCEND_KINDLING, new Tuple<>(SpectrumBlocks.PEDESTAL_MOONSTONE.get().asItem().getDefaultInstance(), "ascend_kindling"));
-		put(SpectrumAdvancements.VIVISECT_KINDLING, new Tuple<>(SpectrumItems.DIVINATION_HEART.getDefaultInstance(), "vivisect_kindling"));
-		put(SpectrumAdvancements.PAINTBRUSH_COLORING, new Tuple<>(SpectrumItems.PAINTBRUSH.getDefaultInstance(), "block_coloring_unlocked"));
-		put(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING, new Tuple<>(SpectrumItems.PAINTBRUSH.getDefaultInstance(), "ink_slinging_unlocked"));
+		put(SpectrumAdvancements.VIVISECT_KINDLING, new Tuple<>(SpectrumItems.DIVINATION_HEART.get().getDefaultInstance(), "vivisect_kindling"));
+		put(SpectrumAdvancements.PAINTBRUSH_COLORING, new Tuple<>(SpectrumItems.PAINTBRUSH.get().getDefaultInstance(), "block_coloring_unlocked"));
+		put(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING, new Tuple<>(SpectrumItems.PAINTBRUSH.get().getDefaultInstance(), "ink_slinging_unlocked"));
 		put(SpectrumAdvancements.PASTEL_NODE_COLORING, new Tuple<>(SpectrumBlocks.SENDER_NODE.get().asItem().getDefaultInstance(), "pastel_node_coloring"));
 	}};
 	

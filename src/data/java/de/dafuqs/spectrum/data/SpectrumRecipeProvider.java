@@ -13,6 +13,7 @@ import de.dafuqs.spectrum.registries.SpectrumFluids;
 import de.dafuqs.spectrum.registries.SpectrumResourceConditions;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.world.level.*;
 import net.neoforged.neoforge.fluids.*;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -176,8 +178,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(INCANDESCENT_ESSENCE), 16.0f, 2.0f, 0.05f),
 						new CrystallarieumCatalyst(Ingredient.of(VEGETAL), 0.75f, 0.05f, 0.4f)
 				),
-				List.of(PURE_COAL.getDefaultInstance()));
-		
+				List.of(PURE_COAL.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/copper", Items.RAW_COPPER, null, null, 60, InkColors.BROWN, 2, false,
 				List.of(SpectrumBlocks.SMALL_COPPER_BUD.get(), SpectrumBlocks.LARGE_COPPER_BUD.get(), SpectrumBlocks.COPPER_CLUSTER.get()),
 				List.of(
@@ -185,8 +187,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(Items.HONEYCOMB), 8.0f, 2.0f, 0.05f),
 						new CrystallarieumCatalyst(Ingredient.of(NEOLITH), 1.5f, 0.25f, 0.02f)
 				),
-				List.of(PURE_COPPER.getDefaultInstance()));
-		
+				List.of(PURE_COPPER.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/diamond", Items.DIAMOND, null, null, 480, InkColors.CYAN, 3, false,
 				List.of(SpectrumBlocks.SMALL_DIAMOND_BUD.get(), SpectrumBlocks.LARGE_DIAMOND_BUD.get(), SpectrumBlocks.DIAMOND_CLUSTER.get()),
 				List.of(
@@ -194,8 +196,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(Items.COAL_BLOCK), 10.0f, 0.25f, 0.02f),
 						new CrystallarieumCatalyst(Ingredient.of(Items.CHARCOAL), 16.0f, 0.25f, 1.0f)
 				),
-				List.of(PURE_DIAMOND.getDefaultInstance()));
-		
+				List.of(PURE_DIAMOND.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/echo", Items.ECHO_SHARD, SpectrumFluids.MIDNIGHT_SOLUTION.get(), null, 960, InkColors.BROWN, 3, false,
 				List.of(SpectrumBlocks.SMALL_ECHO_BUD.get(), SpectrumBlocks.LARGE_ECHO_BUD.get(), SpectrumBlocks.ECHO_CLUSTER.get()),
 				List.of(
@@ -204,8 +206,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(Items.EXPERIENCE_BOTTLE), 8.0f, 2.0f, 0.02f),
 						new CrystallarieumCatalyst(Ingredient.of(Items.SCULK), 2.0f, 0.125f, 0.02f)
 				),
-				List.of(PURE_ECHO.getDefaultInstance()));
-		
+				List.of(PURE_ECHO.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/emerald", Items.EMERALD, null, null, 60, InkColors.CYAN, 3, false,
 				List.of(SpectrumBlocks.SMALL_EMERALD_BUD.get(), SpectrumBlocks.LARGE_EMERALD_BUD.get(), SpectrumBlocks.EMERALD_CLUSTER.get()),
 				List.of(
@@ -213,8 +215,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(FROSTBITE_ESSENCE), 1.0f, 0.125f, 0.02f),
 						new CrystallarieumCatalyst(Ingredient.of(MIDNIGHT_CHIP), 16.0f, 4.0f, 0.2f)
 				),
-				List.of(PURE_EMERALD.getDefaultInstance()));
-		
+				List.of(PURE_EMERALD.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/glowstone", Items.GLOWSTONE, null, null, 120, InkColors.YELLOW, 2, false,
 				List.of(SpectrumBlocks.SMALL_GLOWSTONE_BUD.get(), SpectrumBlocks.LARGE_GLOWSTONE_BUD.get(), SpectrumBlocks.GLOWSTONE_CLUSTER.get()),
 				List.of(
@@ -222,8 +224,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(FROSTBITE_ESSENCE), 4.0f, 0.25f, 0.02f),
 						new CrystallarieumCatalyst(Ingredient.of(MOONSTONE_SHARD), 1.0f, 0.01f, 0.05f)
 				),
-				List.of(PURE_GLOWSTONE.getDefaultInstance()));
-		
+				List.of(PURE_GLOWSTONE.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/gold", Items.RAW_GOLD, null, null, 60, InkColors.BROWN, 2, false,
 				List.of(SpectrumBlocks.SMALL_GOLD_BUD.get(), SpectrumBlocks.LARGE_GOLD_BUD.get(), SpectrumBlocks.GOLD_CLUSTER.get()),
 				List.of(
@@ -231,8 +233,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(SHIMMERSTONE_GEM), 8.0f, 2.0f, 0.05f),
 						new CrystallarieumCatalyst(Ingredient.of(NEOLITH), 1.5f, 0.25f, 0.02f)
 				),
-				List.of(PURE_GOLD.getDefaultInstance()));
-		
+				List.of(PURE_GOLD.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/iron", Items.RAW_IRON, null, null, 60, InkColors.BROWN, 2, false,
 				List.of(SpectrumBlocks.SMALL_IRON_BUD.get(), SpectrumBlocks.LARGE_IRON_BUD.get(), SpectrumBlocks.IRON_CLUSTER.get()),
 				List.of(
@@ -240,8 +242,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(BEDROCK_DUST), 8.0f, 2.0f, 0.05f),
 						new CrystallarieumCatalyst(Ingredient.of(NEOLITH), 1.5f, 0.25f, 0.02f)
 				),
-				List.of(PURE_IRON.getDefaultInstance()));
-		
+				List.of(PURE_IRON.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/lapis", Items.LAPIS_LAZULI, null, null, 60, InkColors.PURPLE, 2, false,
 				List.of(SpectrumBlocks.SMALL_LAPIS_BUD.get(), SpectrumBlocks.LARGE_LAPIS_BUD.get(), SpectrumBlocks.LAPIS_CLUSTER.get()),
 				List.of(
@@ -249,8 +251,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(RAW_AZURITE), 0.5f, 0.1f, 0.004f),
 						new CrystallarieumCatalyst(Ingredient.of(MIDNIGHT_CHIP), 1.2f, 1.5f, 0.2f)
 				),
-				List.of(PURE_LAPIS.getDefaultInstance()));
-		
+				List.of(PURE_LAPIS.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/netherite_scrap", Items.NETHERITE_SCRAP, Fluids.LAVA, null, 960, InkColors.BROWN, 3, false,
 				List.of(SpectrumBlocks.SMALL_NETHERITE_SCRAP_BUD.get(), SpectrumBlocks.LARGE_NETHERITE_SCRAP_BUD.get(), SpectrumBlocks.NETHERITE_SCRAP_CLUSTER.get()),
 				List.of(
@@ -259,8 +261,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(Items.GOLD_INGOT), 16.0f, 2.5f, 0.02f),
 						new CrystallarieumCatalyst(Ingredient.of(STRATINE_FRAGMENTS), 2.0f, 0.125f, 0.02f)
 				),
-				List.of(PURE_NETHERITE_SCRAP.getDefaultInstance()));
-		
+				List.of(PURE_NETHERITE_SCRAP.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/prismarine_crystal", Items.PRISMARINE_CRYSTALS, Fluids.WATER, null, 60, InkColors.CYAN, 2, false,
 				List.of(SpectrumBlocks.SMALL_PRISMARINE_BUD.get(), SpectrumBlocks.LARGE_PRISMARINE_BUD.get(), SpectrumBlocks.PRISMARINE_CLUSTER.get()),
 				List.of(
@@ -268,8 +270,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(Items.WET_SPONGE), 1.0f, 0.7f, 0.0002f),
 						new CrystallarieumCatalyst(Ingredient.of(MERMAIDS_GEM), 32.0f, 2.0f, 0.1f)
 				),
-				List.of(PURE_PRISMARINE.getDefaultInstance()));
-		
+				List.of(PURE_PRISMARINE.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/quartz", Items.QUARTZ, Fluids.WATER, null, 180, InkColors.CYAN, 2, false,
 				List.of(SpectrumBlocks.SMALL_QUARTZ_BUD.get(), SpectrumBlocks.LARGE_QUARTZ_BUD.get(), SpectrumBlocks.QUARTZ_CLUSTER.get()),
 				List.of(
@@ -277,8 +279,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(MIDNIGHT_CHIP), 1.0f, 0.25f, 0.01f),
 						new CrystallarieumCatalyst(Ingredient.of(SpectrumBlocks.ROCK_CRYSTAL.get()), 12.0f, 0.5f, 0.1f)
 				),
-				List.of(PURE_QUARTZ.getDefaultInstance()));
-		
+				List.of(PURE_QUARTZ.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "minecraft/redstone", Items.REDSTONE, null, null, 60, InkColors.YELLOW, 2, false,
 				List.of(SpectrumBlocks.SMALL_REDSTONE_BUD.get(), SpectrumBlocks.LARGE_REDSTONE_BUD.get(), SpectrumBlocks.REDSTONE_CLUSTER.get()),
 				List.of(
@@ -286,8 +288,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(SHIMMERSTONE_GEM), 1.0f, 0.25f, 0.02f),
 						new CrystallarieumCatalyst(Ingredient.of(STARDUST), 1.5f, 0.5f, 0.005f)
 				),
-				List.of(PURE_REDSTONE.getDefaultInstance()));
-		
+				List.of(PURE_REDSTONE.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "pastel/azurite", RAW_AZURITE, null, COLLECT_AZURITE, 300, InkColors.BLUE, 4, false,
 				List.of(SpectrumBlocks.SMALL_AZURITE_BUD.get(), SpectrumBlocks.LARGE_AZURITE_BUD.get(), SpectrumBlocks.AZURITE_CLUSTER.get()),
 				List.of(
@@ -295,8 +297,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(Items.COPPER_INGOT), 1.0f, 0.5f, 0.15f),
 						new CrystallarieumCatalyst(Ingredient.of(PURE_COPPER), 1.708f, 0.707f, 0.01f)
 				),
-				List.of(PURE_AZURITE.getDefaultInstance()));
-		
+				List.of(PURE_AZURITE.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "pastel/bismuth", BISMUTH_FLAKE, null, null, 120, InkColors.CYAN, 4, false,
 				List.of(SpectrumBlocks.SMALL_BISMUTH_BUD.get(), SpectrumBlocks.LARGE_BISMUTH_BUD.get(), SpectrumBlocks.BISMUTH_CLUSTER.get()),
 				List.of(
@@ -304,8 +306,8 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(STARDUST), 2.0f, 0.25f, 0.02f),
 						new CrystallarieumCatalyst(Ingredient.of(STAR_FRAGMENT), 1.25f, 1.0f, 0.0002f)
 				),
-				List.of(BISMUTH_CRYSTAL.getDefaultInstance()));
-		
+				List.of(BISMUTH_CRYSTAL.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "pastel/bloodstone", RAW_BLOODSTONE, null, UNLOCK_BLOODSTONE, 300, InkColors.RED, 4, false,
 				List.of(SpectrumBlocks.SMALL_BLOODSTONE_BUD.get(), SpectrumBlocks.LARGE_BLOODSTONE_BUD.get(), SpectrumBlocks.BLOODSTONE_CLUSTER.get()),
 				List.of(
@@ -313,14 +315,14 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 						new CrystallarieumCatalyst(Ingredient.of(Items.COPPER_INGOT), 1.0f, 0.5f, 0.15f),
 						new CrystallarieumCatalyst(Ingredient.of(PURE_COPPER), 1.708f, 0.707f, 0.01f)
 				),
-				List.of(PURE_BLOODSTONE.getDefaultInstance()));
-		
+				List.of(PURE_BLOODSTONE.get().getDefaultInstance()));
+
 		generateCrystallarieumRecipe(ctx, "pastel/malachite", RAW_MALACHITE, null, COLLECT_MALACHITE, 300, InkColors.WHITE, 4, false,
 				List.of(SpectrumBlocks.SMALL_MALACHITE_BUD.get(), SpectrumBlocks.LARGE_MALACHITE_BUD.get(), SpectrumBlocks.MALACHITE_CLUSTER.get()),
 				List.of(
 						new CrystallarieumCatalyst(Ingredient.of(MOONSTONE_POWDER), 1.0f, 1.0f, 0.04f)
 				),
-				List.of(PURE_MALACHITE.getDefaultInstance()));
+				List.of(PURE_MALACHITE.get().getDefaultInstance()));
 	}
 	
 	private void generateEnchantmentUpgradeRecipes(RecipeOutput ctx) {
@@ -377,7 +379,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 		
 	}
 	
-	private void generateCrystallarieumRecipe(RecipeOutput ctx, String id, Item base, @Nullable Fluid medium, @Nullable ResourceLocation advancement, int secondsPerStage, InkColor inkColor, int inkCostTier, boolean growsWithoutCatalyst, List<Block> stages, List<CrystallarieumCatalyst> catalysts, List<ItemStack> additionalResults) {
+	private void generateCrystallarieumRecipe(RecipeOutput ctx, String id, ItemLike base, @Nullable Fluid medium, @Nullable ResourceLocation advancement, int secondsPerStage, InkColor inkColor, int inkCostTier, boolean growsWithoutCatalyst, List<Block> stages, List<CrystallarieumCatalyst> catalysts, List<ItemStack> additionalResults) {
 		generateRecipe(ctx, "crystallarieum/" + id, new CrystallarieumRecipe("", false, Optional.ofNullable(advancement), Ingredient.of(base),
 				stages.stream().map(s -> s.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP)).toList(),
 				secondsPerStage, inkColor, 1 << (inkCostTier - 1), growsWithoutCatalyst,
@@ -386,7 +388,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				additionalResults));
 	}
 	
-	private void generateEnchantmentUpgradeRecipe(RecipeOutput ctx, String group, ResourceKey<Enchantment> enchantment, ResourceLocation advancement, Item bulkItem, int levelCap, RecipeScaling.ScalingData xpScaling, RecipeScaling.ScalingData itemScaling) {
+	private void generateEnchantmentUpgradeRecipe(RecipeOutput ctx, String group, ResourceKey<Enchantment> enchantment, ResourceLocation advancement, DeferredItem<Item> bulkItem, int levelCap, RecipeScaling.ScalingData xpScaling, RecipeScaling.ScalingData itemScaling) {
 		ctx = ctx.withConditions(new SpectrumResourceConditions.EnchantmentsExistResourceCondition(List.of(enchantment)));
 		String namespace = enchantment.registry().getNamespace();
 		String base = "enchantment_upgrade/" + namespace + "/" + enchantment.location().getPath().replace("/", ".");

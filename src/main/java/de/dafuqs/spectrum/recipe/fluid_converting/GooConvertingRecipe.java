@@ -32,7 +32,7 @@ public class GooConvertingRecipe extends FluidConvertingRecipe {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumItems.GOO_BUCKET);
+		return new ItemStack(SpectrumItems.GOO_BUCKET.get());
 	}
 	
 	@Override

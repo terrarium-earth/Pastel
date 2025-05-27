@@ -26,12 +26,12 @@ public class NaturesStaffConversionsCategory extends GatedDisplayCategory<Nature
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.NATURES_STAFF);
+		return EntryStacks.of(SpectrumItems.NATURES_STAFF.get());
 	}
 	
 	@Override
 	public Component getTitle() {
-		return SpectrumItems.NATURES_STAFF.getDescription();
+		return SpectrumItems.NATURES_STAFF.get().getDescription();
 	}
 	
 	@Override

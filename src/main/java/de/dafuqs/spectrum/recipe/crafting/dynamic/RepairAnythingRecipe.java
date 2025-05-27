@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 public class RepairAnythingRecipe extends CustomRecipe {
 	
-	private static final Ingredient MOONSTRUCK_NECTAR = Ingredient.of(SpectrumItems.MOONSTRUCK_NECTAR);
+	private static final Ingredient MOONSTRUCK_NECTAR = Ingredient.of(SpectrumItems.MOONSTRUCK_NECTAR.get());
 	
 	public RepairAnythingRecipe() {
 		super(CraftingBookCategory.MISC);

@@ -170,16 +170,16 @@ public class SpectrumLootPoolModifiers {
 		} else if (key.equals(BuiltInLootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY) || key.equals(BuiltInLootTables.OCEAN_RUIN_WARM_ARCHAEOLOGY)
 				|| key.equals(BuiltInLootTables.DESERT_PYRAMID_ARCHAEOLOGY) || key.equals(BuiltInLootTables.DESERT_WELL_ARCHAEOLOGY)) {
 			for (LootPool pool : table.pools) {
-				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(2).setQuality(-1));
+				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT.get()).setWeight(2).setQuality(-1));
 			}
 		} else if (key.equals(BuiltInLootTables.TRAIL_RUINS_ARCHAEOLOGY_RARE)) {
 			for (LootPool pool : table.pools) {
-				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(3).setQuality(-1));
+				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT.get()).setWeight(3).setQuality(-1));
 			}
 		} else if (key.equals(BuiltInLootTables.SNIFFER_DIGGING)) {
 			for (LootPool pool : table.pools) {
 				addEntry(pool, LootItem.lootTableItem(SpectrumBlocks.WEEPING_GALA_SPRIG.get()).setWeight(1));
-				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT).setWeight(2));
+				addEntry(pool, LootItem.lootTableItem(SpectrumItems.NIGHTDEW_SPROUT.get()).setWeight(2));
 			}
 		} else if (key.equals(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.parse("entities/fox")))) {
 			Holder.Reference<Enchantment> enchant = getTreasureHunter(wrapperLookup);

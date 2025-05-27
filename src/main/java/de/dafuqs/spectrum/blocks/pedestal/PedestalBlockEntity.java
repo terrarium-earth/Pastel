@@ -444,11 +444,11 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	
 	public static Item getGemstonePowderItemForSlot(int slot) {
 		return switch (slot) {
-			case 9 -> SpectrumItems.TOPAZ_POWDER;
-			case 10 -> SpectrumItems.AMETHYST_POWDER;
-			case 11 -> SpectrumItems.CITRINE_POWDER;
-			case 12 -> SpectrumItems.ONYX_POWDER;
-			case 13 -> SpectrumItems.MOONSTONE_POWDER;
+			case 9 -> SpectrumItems.TOPAZ_POWDER.get();
+			case 10 -> SpectrumItems.AMETHYST_POWDER.get();
+			case 11 -> SpectrumItems.CITRINE_POWDER.get();
+			case 12 -> SpectrumItems.ONYX_POWDER.get();
+			case 13 -> SpectrumItems.MOONSTONE_POWDER.get();
 			default -> Items.AIR;
 		};
 	}
@@ -633,7 +633,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	public boolean canPlaceItem(int slot, ItemStack stack) {
 		if (slot < 9) {
 			return true;
-		} else if (slot == CRAFTING_TABLET_SLOT_ID && stack.is(SpectrumItems.CRAFTING_TABLET)) {
+		} else if (slot == CRAFTING_TABLET_SLOT_ID && stack.is(SpectrumItems.CRAFTING_TABLET.get())) {
 			return true;
 		} else {
 			return stack.is(getGemstonePowderItemForSlot(slot));
@@ -667,7 +667,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 			return true;
 		}
 		
-		if (slot < 9 && inventory.getStackInSlot(CRAFTING_TABLET_SLOT_ID).is(SpectrumItems.CRAFTING_TABLET)) {
+		if (slot < 9 && inventory.getStackInSlot(CRAFTING_TABLET_SLOT_ID).is(SpectrumItems.CRAFTING_TABLET.get())) {
 			ItemStack craftingTabletItem = inventory.getStackInSlot(CRAFTING_TABLET_SLOT_ID);
 			
 			if (inventory.getStackInSlot(slot).getCount() > 0) {

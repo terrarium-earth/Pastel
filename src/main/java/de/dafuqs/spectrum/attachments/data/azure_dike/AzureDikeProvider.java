@@ -26,7 +26,7 @@ public class AzureDikeProvider {
 				SpectrumAdvancementCriteria.AZURE_DIKE_CHARGE.trigger(player, azureDike.getCurrentProtection(), azureDike.getTicksPerPointOfRecharge(), -(incomingDamage - passedDamage));
 		}
 
-		if (SpectrumTrinketItem.hasEquipped(provider, SpectrumItems.AZURESQUE_DIKE_CORE))
+		if (SpectrumTrinketItem.hasEquipped(provider, SpectrumItems.AZURESQUE_DIKE_CORE.get()))
 			return passedDamage * 2;
 
 		return passedDamage;

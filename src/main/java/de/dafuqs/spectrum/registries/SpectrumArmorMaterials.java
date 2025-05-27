@@ -52,7 +52,7 @@ public class SpectrumArmorMaterials {
 				SoundEvents.ARMOR_EQUIP_NETHERITE,
 				SpectrumCommon.CONFIG.BedrockArmorToughness,
 				SpectrumCommon.CONFIG.BedrockArmorKnockbackResistance,
-				() -> Ingredient.of(SpectrumItems.BEDROCK_DUST));
+				() -> Ingredient.of(SpectrumItems.BEDROCK_DUST.get()));
 
 		REGISTER.register(bus);
 	}

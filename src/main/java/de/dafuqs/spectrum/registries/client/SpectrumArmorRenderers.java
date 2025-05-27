@@ -11,11 +11,11 @@ import net.neoforged.neoforge.client.extensions.common.*;
 public class SpectrumArmorRenderers {
 
 	public static final Item[] BEDROCK_ARMOR = {
-			SpectrumItems.BEDROCK_HELMET,
-			SpectrumItems.BEDROCK_CHESTPLATE,
-			SpectrumItems.BEDROCK_LEGGINGS,
-			SpectrumItems.BEDROCK_BOOTS
-	};
+            SpectrumItems.BEDROCK_HELMET.get(),
+            SpectrumItems.BEDROCK_CHESTPLATE.get(),
+            SpectrumItems.BEDROCK_LEGGINGS.get(),
+            SpectrumItems.BEDROCK_BOOTS.get()
+    };
 
 	public static void register(RegisterClientExtensionsEvent event) {
 		event.registerItem(new IClientItemExtensions() {

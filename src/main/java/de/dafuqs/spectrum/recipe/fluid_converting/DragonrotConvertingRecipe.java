@@ -32,7 +32,7 @@ public class DragonrotConvertingRecipe extends FluidConvertingRecipe {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumItems.DRAGONROT_BUCKET);
+		return new ItemStack(SpectrumItems.DRAGONROT_BUCKET.get());
 	}
 	
 	@Override

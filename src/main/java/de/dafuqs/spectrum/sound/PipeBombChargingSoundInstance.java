@@ -43,7 +43,7 @@ public class PipeBombChargingSoundInstance extends AbstractSoundInstance impleme
 	
 	@Override
 	public void tick() {
-		if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 54 || !player.getUseItem().is(SpectrumItems.PIPE_BOMB)) {
+		if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 54 || !player.getUseItem().is(SpectrumItems.PIPE_BOMB.get())) {
 			this.setDone();
 		} else {
 			this.x = this.player.getX();

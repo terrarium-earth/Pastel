@@ -20,7 +20,7 @@ public class BagOfHoldingScreenHandler extends ChestMenu {
 	
 	@Override
 	public void clicked(int slotIndex, int button, ClickType actionType, Player player) {
-		if (slotIndex > 0 && isValidSlotIndex(slotIndex) && this.slots.get(slotIndex).getItem().is(SpectrumItems.BAG_OF_HOLDING)) {
+		if (slotIndex > 0 && isValidSlotIndex(slotIndex) && this.slots.get(slotIndex).getItem().is(SpectrumItems.BAG_OF_HOLDING.get())) {
 			return;
 		}
 		super.clicked(slotIndex, button, actionType, player);

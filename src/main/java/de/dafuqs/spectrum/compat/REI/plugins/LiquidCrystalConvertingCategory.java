@@ -19,7 +19,7 @@ public class LiquidCrystalConvertingCategory extends FluidConvertingCategory<Liq
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.LIQUID_CRYSTAL_BUCKET);
+		return EntryStacks.of(SpectrumItems.LIQUID_CRYSTAL_BUCKET.get());
 	}
 	
 	@Override

@@ -19,7 +19,7 @@ public class DragonrotConvertingCategory extends FluidConvertingCategory<Dragonr
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.DRAGONROT_BUCKET);
+		return EntryStacks.of(SpectrumItems.DRAGONROT_BUCKET.get());
 	}
 	
 	@Override

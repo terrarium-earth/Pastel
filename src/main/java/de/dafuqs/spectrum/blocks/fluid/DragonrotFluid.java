@@ -48,7 +48,7 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 	
 	@Override
 	public Item getBucket() {
-		return SpectrumItems.DRAGONROT_BUCKET;
+		return SpectrumItems.DRAGONROT_BUCKET.get();
 	}
 	
 	@Override

@@ -68,7 +68,7 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
             world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, reference.getState()));
             return ItemInteractionResult.sidedSuccess(world.isClientSide());
         }
-        else if (handStack.is(SpectrumItems.MOONSTRUCK_NECTAR)) {
+        else if (handStack.is(SpectrumItems.MOONSTRUCK_NECTAR.get())) {
             if (reference.getProperty(LIFE_STAGE) != LifeStage.MATURE)
                 return ItemInteractionResult.FAIL;
 

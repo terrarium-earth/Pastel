@@ -38,8 +38,8 @@ public class AE2Compat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public static DeferredBlock<Block> PURE_CERTUS_QUARTZ_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_certus_quartz_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.3F).sound(SoundType.GLASS)), InkColors.YELLOW)));
 	public static DeferredBlock<Block> PURE_FLUIX_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_fluix_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(0.3F).sound(SoundType.GLASS)), InkColors.YELLOW)));
 	
-	public static Item PURE_CERTUS_QUARTZ = SpectrumItems.register(simple(item("pure_certus_quartz", new Item(IS.of()), InkColors.YELLOW)));
-	public static Item PURE_FLUIX = SpectrumItems.register(simple(item("pure_fluix", new Item(IS.of()), InkColors.YELLOW)));
+	public static DeferredItem<Item> PURE_CERTUS_QUARTZ = SpectrumItems.register(simple(item("pure_certus_quartz", () -> new Item(IS.of()), InkColors.YELLOW)));
+	public static DeferredItem<Item> PURE_FLUIX = SpectrumItems.register(simple(item("pure_fluix", () -> new Item(IS.of()), InkColors.YELLOW)));
 
 	@Override
 	public void register() {

@@ -43,7 +43,7 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 	
 	@Override
 	public Item getBucket() {
-		return SpectrumItems.LIQUID_CRYSTAL_BUCKET;
+        return SpectrumItems.LIQUID_CRYSTAL_BUCKET.get();
 	}
 	
 	@Override

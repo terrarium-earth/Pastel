@@ -46,7 +46,7 @@ public abstract class ProjectileEntityMixin {
 					if (reboundInstance != null && entity.level().getRandom().nextFloat() < SpectrumStatusEffects.PROJECTILE_REBOUND_CHANCE_PER_LEVEL * reboundInstance.getAmplifier()) {
 						protect = true;
 					} else {
-						if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.PUFF_CIRCLET)) {
+						if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.PUFF_CIRCLET.get())) {
 							var charges = AzureDikeProvider.getAzureDikeCharges(livingEntity);
 							if (charges > 0) {
 								AzureDikeProvider.absorbDamage(livingEntity, PuffCircletItem.PROJECTILE_DEFLECTION_COST);

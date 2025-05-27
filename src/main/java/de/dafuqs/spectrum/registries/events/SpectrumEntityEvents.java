@@ -83,14 +83,14 @@ public class SpectrumEntityEvents {
         // If the player is damaged by lava and wears an ashen circlet:
         // prevent damage and grant fire resistance
         if (source.is(DamageTypes.LAVA)) {
-            Optional<ItemStack> ashenCircletStack = SpectrumTrinketItem.getFirstEquipped(entity, SpectrumItems.ASHEN_CIRCLET);
+            Optional<ItemStack> ashenCircletStack = SpectrumTrinketItem.getFirstEquipped(entity, SpectrumItems.ASHEN_CIRCLET.get());
             if (ashenCircletStack.isPresent()) {
                 if (AshenCircletItem.getCooldownTicks(ashenCircletStack.get(), entity.level()) == 0) {
                     AshenCircletItem.grantFireResistance(ashenCircletStack.get(), entity);
                     event.setCanceled(true);
                 }
             }
-        } else if (source.is(DamageTypeTags.IS_FIRE) && SpectrumTrinketItem.hasEquipped(entity, SpectrumItems.ASHEN_CIRCLET)) {
+        } else if (source.is(DamageTypeTags.IS_FIRE) && SpectrumTrinketItem.hasEquipped(entity, SpectrumItems.ASHEN_CIRCLET.get())) {
             event.setCanceled(true);
         }
     }
@@ -117,7 +117,7 @@ public class SpectrumEntityEvents {
 
         if (player instanceof ServerPlayer serverPlayerEntity
                 && serverPlayerEntity.getSleepTimer() == 100
-                && SpectrumTrinketItem.hasEquipped(player, SpectrumItems.WHISPY_CIRCLET)) {
+                && SpectrumTrinketItem.hasEquipped(player, SpectrumItems.WHISPY_CIRCLET.get())) {
 
             player.setHealth(player.getMaxHealth());
             WhispyCircletItem.removeNegativeStatusEffects(player);
@@ -174,7 +174,7 @@ public class SpectrumEntityEvents {
         var curios = CuriosApi.getCuriosInventory(killedEntity);
 
         if (curios.isPresent()) {
-            var totem = curios.get().findFirstCurio(SpectrumItems.TOTEM_PENDANT);
+            var totem = curios.get().findFirstCurio(SpectrumItems.TOTEM_PENDANT.get());
             if (totem.isPresent()) {
                 ItemStack totemStack = totem.get().stack();
 
@@ -206,7 +206,7 @@ public class SpectrumEntityEvents {
             evaluateAndDropPlayerHead(player, damageSource);
         }
 
-        if (killer instanceof ServerPlayer serverPlayerEntity && SpectrumTrinketItem.hasEquipped(serverPlayerEntity, SpectrumItems.JEOPARDANT)) {
+        if (killer instanceof ServerPlayer serverPlayerEntity && SpectrumTrinketItem.hasEquipped(serverPlayerEntity, SpectrumItems.JEOPARDANT.get())) {
             SpectrumAdvancementCriteria.JEOPARDANT_KILL.trigger(serverPlayerEntity, killedEntity);
         }
     }

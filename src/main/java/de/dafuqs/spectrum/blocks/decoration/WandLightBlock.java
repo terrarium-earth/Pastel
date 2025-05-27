@@ -75,7 +75,7 @@ public class WandLightBlock extends LightBlock {
 	
 	@Override
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-		return new ItemStack(SpectrumItems.RADIANCE_STAFF);
+		return new ItemStack(SpectrumItems.RADIANCE_STAFF.get());
 	}
 	
 	@Override

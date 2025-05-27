@@ -59,7 +59,7 @@ public class AmaranthCropBlock extends TallCropBlock implements RevelationAware 
 	
 	@Override
 	protected ItemLike getBaseSeedId() {
-		return SpectrumItems.AMARANTH_GRAINS;
+        return SpectrumItems.AMARANTH_GRAINS.get();
 	}
 	
 	@Override

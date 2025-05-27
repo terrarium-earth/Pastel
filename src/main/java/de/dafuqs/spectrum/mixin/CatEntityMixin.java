@@ -42,7 +42,7 @@ public abstract class CatEntityMixin extends TamableAnimal {
 		
 		boolean howMany = customName.equals("AAA") || customName.equals("AAA ❣");
 		if (player instanceof ServerPlayer serverPlayerEntity) {
-			if (item.equals(SpectrumItems.STRATINE_GEM) && this.hasEffect(MobEffects.LEVITATION) && howMany) {
+			if (item.equals(SpectrumItems.STRATINE_GEM.get()) && this.hasEffect(MobEffects.LEVITATION) && howMany) {
 				Support.grantAdvancementCriterion(serverPlayerEntity, ResourceLocation.fromNamespaceAndPath("pastel", "midgame/become_enlightened"), "confirmed");
 				this.removeEffect(MobEffects.LEVITATION);
 				this.addEffect(new MobEffectInstance(

@@ -67,7 +67,7 @@ public abstract class PotionWorkshopRecipe extends GatedStackSpectrumRecipe<Reci
 	
 	@Override
 	public boolean matches(@NotNull RecipeInput inv, Level world) {
-		if (inv.size() > 4 && inv.getItem(0).is(SpectrumItems.MERMAIDS_GEM) && isValidBaseIngredient(inv.getItem(1))) {
+		if (inv.size() > 4 && inv.getItem(0).is(SpectrumItems.MERMAIDS_GEM.get()) && isValidBaseIngredient(inv.getItem(1))) {
 			
 			if (usesReagents()) {
 				if (!areStacksInReagentSlotsAllReagents(inv)) return false;

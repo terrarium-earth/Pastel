@@ -277,7 +277,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		
 		if (!centerStack.isEmpty() && centerIsEnchantable && hasExpStorage) {
 			// gilded books can copy enchantments from any source item
-			boolean centerStackIsGildedBook = centerStack.is(SpectrumItems.GILDED_BOOK);
+			boolean centerStackIsGildedBook = centerStack.is(SpectrumItems.GILDED_BOOK.get());
 			boolean enchantedBookWithAdditionalEnchantmentsFound = false;
 			
 			var existingEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(centerStack).entrySet();
