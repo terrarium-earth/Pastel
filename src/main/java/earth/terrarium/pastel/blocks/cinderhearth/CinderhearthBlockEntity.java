@@ -98,7 +98,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 	}
 	
 	public CinderhearthBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.CINDERHEARTH, pos, state);
+		super(SpectrumBlockEntities.CINDERHEARTH.get(), pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 		this.inkStorage = new IndividualCappedInkStorage(INK_STORAGE_SIZE, USED_INK_COLORS);
 	}

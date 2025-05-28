@@ -2108,7 +2108,7 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> ENDER_DRAGON_IDOL = register(idol(blockWithItem("ender_dragon_idol", () -> new ProjectileIdolBlock(idol(SpectrumBlockSoundGroups.ENDER_DRAGON_IDOL), ParticleTypes.DRAGON_BREATH, EntityType.DRAGON_FIREBALL, SoundEvents.ENDER_DRAGON_SHOOT, 6.0F, 1.1F) {
 		@Override
 		public Projectile createProjectile(ServerLevel world, BlockPos mobBlockPos, Position position, Direction side) {
-			LivingMarkerEntity markerEntity = new LivingMarkerEntity(SpectrumEntityTypes.LIVING_MARKER, world);
+			LivingMarkerEntity markerEntity = new LivingMarkerEntity(SpectrumEntityTypes.LIVING_MARKER.get(), world);
 			markerEntity.setPosRaw(position.x(), position.y(), position.z());
 
 			Vec3 targetPosition = Vec3.atCenterOf(mobBlockPos.relative(side, 50));
@@ -2133,7 +2133,7 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> GHAST_IDOL = register(idol(blockWithItem("ghast_idol", () -> new ProjectileIdolBlock(idol(SpectrumBlockSoundGroups.GHAST_IDOL), ParticleTypes.SMOKE, EntityType.FIREBALL, SoundEvents.GHAST_SHOOT, 6.0F, 1.1F) {
 		@Override
 		public Projectile createProjectile(ServerLevel world, BlockPos mobBlockPos, Position position, Direction side) {
-			LivingMarkerEntity markerEntity = new LivingMarkerEntity(SpectrumEntityTypes.LIVING_MARKER, world);
+			LivingMarkerEntity markerEntity = new LivingMarkerEntity(SpectrumEntityTypes.LIVING_MARKER.get(), world);
 			markerEntity.setPosRaw(position.x(), position.y(), position.z());
 
 			Vec3 targetPosition = Vec3.atCenterOf(mobBlockPos.relative(side, 50));

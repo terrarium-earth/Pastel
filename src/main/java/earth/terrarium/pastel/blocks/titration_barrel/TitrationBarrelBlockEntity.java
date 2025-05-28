@@ -64,7 +64,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 	protected int extractedBottles = 0;
 	
 	public TitrationBarrelBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.TITRATION_BARREL, pos, state);
+		super(SpectrumBlockEntities.TITRATION_BARREL.get(), pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 	}
 	

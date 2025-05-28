@@ -83,7 +83,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	protected float platform, geode, calcite, innergeode;
 	
 	public SpiritInstillerBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.SPIRIT_INSTILLER, pos, state, INVENTORY_SIZE);
+		super(SpectrumBlockEntities.SPIRIT_INSTILLER.get(), pos, state, INVENTORY_SIZE);
 		inventory.addListener(i -> inventoryChanged());
 	}
 	

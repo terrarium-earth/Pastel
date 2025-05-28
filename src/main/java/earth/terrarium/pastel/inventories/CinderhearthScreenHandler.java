@@ -38,7 +38,7 @@ public class CinderhearthScreenHandler extends AbstractContainerMenu {
 	}
 
 	public CinderhearthScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.CINDERHEARTH).orElseThrow(), new SimpleContainerData(2));
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.CINDERHEARTH.get()).orElseThrow(), new SimpleContainerData(2));
 	}
 	
 	public CinderhearthScreenHandler(int syncId, Inventory playerInventory, CinderhearthBlockEntity blockEntity, ContainerData propertyDelegate) {

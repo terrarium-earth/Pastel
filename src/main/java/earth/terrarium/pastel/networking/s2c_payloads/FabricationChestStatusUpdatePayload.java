@@ -50,7 +50,7 @@ public record FabricationChestStatusUpdatePayload(BlockPos pos, boolean isFull, 
 		var isFull = payload.isFull;
 		var hasValidRecipes = payload.hasValidRecipes;
 		List<ItemStack> outputs = payload.stacks;
-		Optional<FabricationChestBlockEntity> entity = level.getBlockEntity(pos, SpectrumBlockEntities.FABRICATION_CHEST);
+		Optional<FabricationChestBlockEntity> entity = level.getBlockEntity(pos, SpectrumBlockEntities.FABRICATION_CHEST.get());
 		if (entity.isPresent()) {
 			entity.get().updateState(isFull, hasValidRecipes, outputs);
 		}

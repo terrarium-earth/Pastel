@@ -23,16 +23,16 @@ import net.minecraft.world.phys.Vec3;
 
 public class BlockFlooderProjectile extends ThrowableItemProjectile {
 	
-	public BlockFlooderProjectile(EntityType<ThrowableItemProjectile> thrownItemEntityEntityType, Level world) {
-		super(SpectrumEntityTypes.BLOCK_FLOODER_PROJECTILE, world);
+	public BlockFlooderProjectile(EntityType<BlockFlooderProjectile> thrownItemEntityEntityType, Level world) {
+		super(thrownItemEntityEntityType, world);
 	}
 
 	public BlockFlooderProjectile(Level world, LivingEntity owner) {
-		super(SpectrumEntityTypes.BLOCK_FLOODER_PROJECTILE, owner, world);
+		super(SpectrumEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), owner, world);
 	}
 
 	public BlockFlooderProjectile(Level world, double x, double y, double z) {
-		super(SpectrumEntityTypes.BLOCK_FLOODER_PROJECTILE, x, y, z, world);
+		super(SpectrumEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), x, y, z, world);
 	}
 
 	@Override

@@ -95,7 +95,7 @@ public class EnderDropperBlock extends DispenserBlock {
 	
 	@Override
 	protected void dispenseFrom(ServerLevel level, BlockState state, BlockPos pos) {
-		EnderDropperBlockEntity dropper = level.getBlockEntity(pos, SpectrumBlockEntities.ENDER_DROPPER).orElse(null);
+		EnderDropperBlockEntity dropper = level.getBlockEntity(pos, SpectrumBlockEntities.ENDER_DROPPER.get()).orElse(null);
 		if (dropper == null) {
 			return;
 		}

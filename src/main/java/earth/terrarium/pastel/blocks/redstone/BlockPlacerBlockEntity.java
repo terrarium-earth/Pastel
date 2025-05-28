@@ -14,7 +14,7 @@ import net.neoforged.neoforge.items.*;
 public class BlockPlacerBlockEntity extends DispenserBlockEntity implements SidedCapabilityProvider {
 	
 	public BlockPlacerBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.BLOCK_PLACER, pos, state);
+		super(SpectrumBlockEntities.BLOCK_PLACER.get(), pos, state);
 	}
 	
 	@Override

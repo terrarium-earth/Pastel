@@ -23,7 +23,7 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 	protected final int ROWS = 3;
 	
 	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.COMPACTING_CHEST).orElseThrow(), new SimpleContainerData(1));
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.COMPACTING_CHEST.get()).orElseThrow(), new SimpleContainerData(1));
 	}
 	
 	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, CompactingChestBlockEntity blockEntity, ContainerData propertyDelegate) {

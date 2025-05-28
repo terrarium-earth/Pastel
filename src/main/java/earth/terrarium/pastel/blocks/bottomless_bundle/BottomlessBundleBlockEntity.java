@@ -57,7 +57,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 	};
 
 	public BottomlessBundleBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.BOTTOMLESS_BUNDLE, pos, state);
+		super(SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get(), pos, state);
 		this.bundle = SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
 	}
 

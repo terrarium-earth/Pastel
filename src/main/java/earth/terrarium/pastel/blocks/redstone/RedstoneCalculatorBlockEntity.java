@@ -12,7 +12,7 @@ public class RedstoneCalculatorBlockEntity extends BlockEntity {
 	private int outputSignal;
 	
 	public RedstoneCalculatorBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.REDSTONE_CALCULATOR, pos, state);
+		super(SpectrumBlockEntities.REDSTONE_CALCULATOR.get(), pos, state);
 	}
 	
 	@Override

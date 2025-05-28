@@ -48,7 +48,7 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
 	private int tint2 = -1;
 	
 	public MemoryBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.MEMORY, pos, state);
+		super(SpectrumBlockEntities.MEMORY.get(), pos, state);
 	}
 	
 	@Contract("_ -> new")

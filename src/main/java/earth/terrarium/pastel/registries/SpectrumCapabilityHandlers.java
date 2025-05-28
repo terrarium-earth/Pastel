@@ -5,6 +5,8 @@ import net.minecraft.world.level.block.entity.*;
 import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.fluids.capability.templates.*;
 
+import java.util.function.Supplier;
+
 import static earth.terrarium.pastel.registries.SpectrumBlockEntities.*;
 
 public class SpectrumCapabilityHandlers {
@@ -46,18 +48,18 @@ public class SpectrumCapabilityHandlers {
                 SpectrumItems.MERMAIDS_GEM.get());
     }
 
-    private static void standardBlockBE(BlockEntityType<? extends SidedCapabilityProvider> type, RegisterCapabilitiesEvent event) {
+    private static void standardBlockBE(Supplier<? extends BlockEntityType<? extends SidedCapabilityProvider>> type, RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
-                type,
+                type.get(),
                 SidedCapabilityProvider::exposeItemHandlers
         );
     }
 
-    private static void standardFluidBE(BlockEntityType<? extends SidedCapabilityProvider> type, RegisterCapabilitiesEvent event) {
+    private static void standardFluidBE(Supplier<? extends BlockEntityType<? extends SidedCapabilityProvider>> type, RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
-                type,
+                type.get(),
                 SidedCapabilityProvider::exposeFluidHandlers
         );
     }

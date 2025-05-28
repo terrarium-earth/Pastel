@@ -29,7 +29,7 @@ public class ItemProjectileEntity extends ThrowableItemProjectile {
 	}
 
 	public ItemProjectileEntity(Level world, LivingEntity owner) {
-		super(SpectrumEntityTypes.ITEM_PROJECTILE, owner, world);
+		super(SpectrumEntityTypes.ITEM_PROJECTILE.get(), owner, world);
 	}
 
 	@Override

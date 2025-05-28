@@ -50,7 +50,7 @@ public record BlackHoleChestStatusUpdatePayload(BlockPos pos, boolean isFull, bo
 	@OnlyIn(Dist.CLIENT)
 	public static void execute(BlackHoleChestStatusUpdatePayload payload, IPayloadContext context) {
 		var level = context.player().level();
-        Optional<BlackHoleChestBlockEntity> entity = level.getBlockEntity(payload.pos, SpectrumBlockEntities.BLACK_HOLE_CHEST);
+        Optional<BlackHoleChestBlockEntity> entity = level.getBlockEntity(payload.pos, SpectrumBlockEntities.BLACK_HOLE_CHEST.get());
         entity.ifPresent(chest -> {
             chest.setFull(payload.isFull);
             chest.setHasXPStorage(payload.canStoreExperience);

@@ -8,6 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 public class DeepLightBlockEntity extends BlockEntity {
 
 	public DeepLightBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.DEEP_LIGHT, pos, state);
+		super(SpectrumBlockEntities.DEEP_LIGHT.get(), pos, state);
 	}
 }

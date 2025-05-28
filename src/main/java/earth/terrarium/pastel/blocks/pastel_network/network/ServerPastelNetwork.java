@@ -198,7 +198,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 		// if our network now has 1 or less nodes we don't really have a network anymore
 		if (this.graph.vertexSet().size() < 2) {
 			for (BlockPos vertex : vertices) {
-				Optional<PastelNodeBlockEntity> be = world.getBlockEntity(vertex, SpectrumBlockEntities.PASTEL_NODE);
+				Optional<PastelNodeBlockEntity> be = world.getBlockEntity(vertex, SpectrumBlockEntities.PASTEL_NODE.get());
 				be.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.setNetworkUUID(null));
 			}
 			Pastel.getServerInstance().removeNetwork(this.getUUID());
@@ -238,7 +238,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 			// fast fail => remove the network entirely
 			
 			for (BlockPos pos : this.graph.vertexSet()) {
-				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE);
+				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE.get());
 				blockEntity.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.setNetworkUUID(null));
 			}
 			
@@ -253,7 +253,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 			// => remove from network, do not create a new one just for that one
 			boolean isSingleNode = smallerSet.size() == 1;
 			if (isSingleNode) {
-				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(smallerSet.stream().findAny().get(), SpectrumBlockEntities.PASTEL_NODE);
+				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(smallerSet.stream().findAny().get(), SpectrumBlockEntities.PASTEL_NODE.get());
 				if (blockEntity.isPresent()) {
 					blockEntity.get().setNetworkUUID(null);
 					disconnectedBEs.add(blockEntity.get());
@@ -266,7 +266,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 			PastelNodeBlockEntity initialNode = null;
 			Set<PastelNodeBlockEntity> blockEntities = new ObjectArraySet<>();
 			for (BlockPos pos : smallerSet) {
-				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE);
+				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE.get());
 				if (blockEntity.isPresent()) {
 					disconnectedBEs.add(blockEntity.get());
 					blockEntities.add(blockEntity.get());
@@ -283,7 +283,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 				for (DefaultEdge edge : this.graph.edgesOf(disconnectedNode)) {
 					edges.put(this.graph.getEdgeSource(edge), this.graph.getEdgeTarget(edge));
 				}
-				var couldBeANode = getLevel().getBlockEntity(disconnectedNode, SpectrumBlockEntities.PASTEL_NODE);
+				var couldBeANode = getLevel().getBlockEntity(disconnectedNode, SpectrumBlockEntities.PASTEL_NODE.get());
 				if (couldBeANode.isPresent()) {
 					PastelNodeBlockEntity pastelNode = couldBeANode.get();
 					newNetwork.addNode(pastelNode);

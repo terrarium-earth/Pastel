@@ -44,7 +44,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 	long interpTicks, interpLength = 1, age;
 	
 	public FabricationChestBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.FABRICATION_CHEST, blockPos, blockState);
+		super(SpectrumBlockEntities.FABRICATION_CHEST.get(), blockPos, blockState);
 	}
 	
 	@SuppressWarnings("unused")

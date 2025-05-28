@@ -86,7 +86,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!world.isClientSide) {
 			if (player.isShiftKeyDown()) {
-				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE).ifPresent((bottomlessBundleBlockEntity) -> {
+				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bottomlessBundleBlockEntity) -> {
 					long amount = bottomlessBundleBlockEntity.storage.getStackInSlot(0).getCount();
 					ItemStack ref = bottomlessBundleBlockEntity.storage.getStackInSlot(0);
 					long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bottomlessBundleBlockEntity.powerLevel);
@@ -97,7 +97,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 					}
 				});
 			} else {
-				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE).ifPresent((bottomlessBundleBlockEntity) -> {
+				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bottomlessBundleBlockEntity) -> {
 					ItemStackHandler storage = bottomlessBundleBlockEntity.storage;
 					ItemStack ref = storage.getStackInSlot(0);
 

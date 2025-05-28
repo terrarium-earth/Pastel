@@ -141,7 +141,8 @@ public class SpectrumCommon {
 
 		logInfo("Registering Block Entities...");
 		SpectrumBlockEntities.register(pastelBus);
-		NeoForge.EVENT_BUS.addListener(SpectrumBlockEntities::registerAdditionalTypes);
+		pastelBus.addListener(SpectrumBlockEntities::registerAdditionalTypes);
+
 		logInfo("Registering Capabilities...");
 		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerBlocks);
 		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerItems);
@@ -195,7 +196,7 @@ public class SpectrumCommon {
 		
 		logInfo("Registering Entities...");
 		SpectrumTrackedDataHandlerRegistry.register(pastelBus);
-		NeoForge.EVENT_BUS.addListener(SpectrumEntityTypes::registerAttributes);
+		SpectrumEntityTypes.register(pastelBus);
 		
 		logInfo("Registering Omni Accelerator Projectiles & Behaviors...");
 		SpectrumOmniAcceleratorProjectiles.register();

@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class UpgradeBlockEntity extends BlockEntity {
 	
 	public UpgradeBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.UPGRADE_BLOCK, pos, state);
+		super(SpectrumBlockEntities.UPGRADE_BLOCK.get(), pos, state);
 	}
 	
 }

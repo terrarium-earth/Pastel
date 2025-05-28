@@ -42,7 +42,7 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
 	private int transferCooldown;
 	
 	public EnderHopperBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.ENDER_HOPPER, blockPos, blockState);
+		super(SpectrumBlockEntities.ENDER_HOPPER.get(), blockPos, blockState);
 	}
 	
 	public static void onEntityCollided(BlockPos pos, Entity entity, EnderHopperBlockEntity enderHopperBlockEntity) {

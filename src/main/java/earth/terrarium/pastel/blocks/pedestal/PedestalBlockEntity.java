@@ -104,7 +104,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	protected final CraftingDelegate propertyDelegate = new CraftingDelegate();
 	
 	public PedestalBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.PEDESTAL, blockPos, blockState);
+		super(SpectrumBlockEntities.PEDESTAL.get(), blockPos, blockState);
 		
 		if (blockState.getBlock() instanceof PedestalBlock pedestalBlock) {
 			this.pedestalVariant = pedestalBlock.getVariant();

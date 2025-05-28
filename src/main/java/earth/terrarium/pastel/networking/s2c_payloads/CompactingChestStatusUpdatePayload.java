@@ -34,7 +34,7 @@ public record CompactingChestStatusUpdatePayload(BlockPos pos, boolean hasToCraf
 	@OnlyIn(Dist.CLIENT)
 	public static void execute(CompactingChestStatusUpdatePayload payload, IPayloadContext context) {
 		var level = context.player().level();
-		var entity = level.getBlockEntity(payload.pos, SpectrumBlockEntities.COMPACTING_CHEST);
+		var entity = level.getBlockEntity(payload.pos, SpectrumBlockEntities.COMPACTING_CHEST.get());
 		entity.ifPresent(compactingChestBlockEntity -> compactingChestBlockEntity.shouldCraft(payload.hasToCraft));
 	}
 	

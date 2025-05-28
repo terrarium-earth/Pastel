@@ -100,7 +100,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	private ConnectionState connectionState;
 	
 	public PastelNodeBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.PASTEL_NODE, blockPos, blockState);
+		super(SpectrumBlockEntities.PASTEL_NODE.get(), blockPos, blockState);
 		this.filterItems = new FriendlyStackHandler(MAX_FILTER_SLOTS);
 		this.outerRing = Optional.empty();
 		this.innerRing = Optional.empty();

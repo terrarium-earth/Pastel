@@ -37,7 +37,7 @@ public class SeatEntity extends Entity {
     }
 
     public SeatEntity(Level world, double offset) {
-        super(SpectrumEntityTypes.SEAT, world);
+        super(SpectrumEntityTypes.SEAT.get(), world);
         this.offset = offset;
     }
 

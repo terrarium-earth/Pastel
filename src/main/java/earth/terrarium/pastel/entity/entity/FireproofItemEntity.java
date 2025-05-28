@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 
 public class FireproofItemEntity extends ItemEntity {
 	
-	public FireproofItemEntity(EntityType<? extends ItemEntity> entityType, Level world) {
+	public FireproofItemEntity(EntityType<FireproofItemEntity> entityType, Level world) {
 		super(entityType, world);
 	}
 	
@@ -19,14 +19,14 @@ public class FireproofItemEntity extends ItemEntity {
 	}
 	
 	public FireproofItemEntity(Level world, double x, double y, double z, ItemStack stack, double velocityX, double velocityY, double velocityZ) {
-		this(SpectrumEntityTypes.FIREPROOF_ITEM, world);
+		this(SpectrumEntityTypes.FIREPROOF_ITEM.get(), world);
 		this.setPos(x, y, z);
 		this.setDeltaMovement(velocityX, velocityY, velocityZ);
 		this.setItem(stack);
 	}
 	
 	private FireproofItemEntity(ItemEntity entity) {
-		super(SpectrumEntityTypes.FIREPROOF_ITEM, entity.level());
+		super(SpectrumEntityTypes.FIREPROOF_ITEM.get(), entity.level());
 	}
 	
 	@Override

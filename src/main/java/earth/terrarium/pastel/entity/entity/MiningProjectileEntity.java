@@ -31,7 +31,7 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
 	}
 
 	public MiningProjectileEntity(double x, double y, double z, Level world) {
-		this(SpectrumEntityTypes.MINING_PROJECTILE, world);
+		this(SpectrumEntityTypes.MINING_PROJECTILE.get(), world);
 		this.moveTo(x, y, z, this.getYRot(), this.getXRot());
 		this.reapplyPosition();
 	}

@@ -118,7 +118,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	private Direction itemFacing; // for rendering the item on the enchanter only
 	
 	public EnchanterBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.ENCHANTER, pos, state, INVENTORY_SIZE);
+		super(SpectrumBlockEntities.ENCHANTER.get(), pos, state, INVENTORY_SIZE);
 		virtualInventory.addListener(i -> inventoryChanged());
 		this.virtualInventory = new EnchanterInventory();
 		this.currentItemProcessingTime = -1;

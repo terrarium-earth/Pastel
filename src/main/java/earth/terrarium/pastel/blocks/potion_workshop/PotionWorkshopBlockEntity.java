@@ -88,7 +88,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 	protected RecipeHolder<PotionWorkshopBrewingRecipe> lastBrewedRecipe;
 	
 	public PotionWorkshopBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.POTION_WORKSHOP, pos, state);
+		super(SpectrumBlockEntities.POTION_WORKSHOP.get(), pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 		inventory.addListener(i -> inventoryChanged = true);
 		
