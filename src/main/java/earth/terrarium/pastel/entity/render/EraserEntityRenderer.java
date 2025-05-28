@@ -1,0 +1,28 @@
+package earth.terrarium.pastel.entity.render;
+
+import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.entity.entity.EraserEntity;
+import earth.terrarium.pastel.entity.models.EraserEntityModel;
+import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.resources.ResourceLocation;
+
+@OnlyIn(Dist.CLIENT)
+public class EraserEntityRenderer extends MobRenderer<EraserEntity, EraserEntityModel> {
+	
+	public static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/eraser/eraser_base.png");
+	
+	public EraserEntityRenderer(EntityRendererProvider.Context context) {
+		super(context, new EraserEntityModel(context.bakeLayer(SpectrumModelLayers.ERASER)), 0.175F);
+		this.addLayer(new EraserOverlayFeatureRenderer(this));
+	}
+	
+	@Override
+	public ResourceLocation getTextureLocation(EraserEntity entity) {
+		return TEXTURE;
+	}
+	
+}

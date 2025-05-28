@@ -1,0 +1,22 @@
+package earth.terrarium.pastel.api.interaction;
+
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ItemProviderRegistry {
+	
+	private static final Map<Item, ItemProvider> PROVIDERS = new HashMap<>();
+	
+	public static void register(Item item, ItemProvider provider) {
+		PROVIDERS.put(item, provider);
+	}
+	
+	public static @Nullable ItemProvider getProvider(ItemStack stack) {
+		return PROVIDERS.get(stack.getItem());
+	}
+	
+}

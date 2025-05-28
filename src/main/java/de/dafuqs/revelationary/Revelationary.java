@@ -1,7 +1,7 @@
 package de.dafuqs.revelationary;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementCriteria;
-import de.dafuqs.spectrum.*;
+import earth.terrarium.pastel.*;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;

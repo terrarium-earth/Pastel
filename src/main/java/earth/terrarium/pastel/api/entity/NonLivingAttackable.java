@@ -1,0 +1,7 @@
+package earth.terrarium.pastel.api.entity;
+
+import org.jetbrains.annotations.ApiStatus;
+
+@ApiStatus.OverrideOnly
+public interface NonLivingAttackable {
+}

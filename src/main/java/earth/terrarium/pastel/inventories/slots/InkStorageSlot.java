@@ -1,0 +1,19 @@
+package earth.terrarium.pastel.inventories.slots;
+
+import earth.terrarium.pastel.api.energy.InkStorageItem;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+
+public class InkStorageSlot extends Slot {
+	
+	public InkStorageSlot(Container inventory, int index, int x, int y) {
+		super(inventory, index, x, y);
+	}
+	
+	@Override
+	public boolean mayPlace(ItemStack stack) {
+		return super.mayPlace(stack) && stack.getItem() instanceof InkStorageItem;
+	}
+	
+}

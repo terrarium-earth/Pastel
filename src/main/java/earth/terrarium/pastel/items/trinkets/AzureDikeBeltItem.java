@@ -1,0 +1,35 @@
+package earth.terrarium.pastel.items.trinkets;
+
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+
+import java.util.List;
+
+public class AzureDikeBeltItem extends AzureDikeTrinketItem {
+	
+	public AzureDikeBeltItem(Properties settings, ResourceLocation unlockIdentifier) {
+		super(settings, unlockIdentifier);
+	}
+	
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+		super.appendHoverText(stack, context, tooltip, type);
+		tooltip.add(Component.translatable("item.pastel.azure_dike_belt.tooltip"));
+	}
+	
+	@Override
+	public int maxAzureDike(ItemStack stack) {
+		return 8;
+	}
+	
+	@Override
+	public float rechargeDelayAfterDamageModifier(ItemStack stack) {
+		return 2.5F;
+	}
+	
+}

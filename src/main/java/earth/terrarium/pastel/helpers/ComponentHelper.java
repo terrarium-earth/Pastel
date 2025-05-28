@@ -1,0 +1,20 @@
+package earth.terrarium.pastel.helpers;
+
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.util.Unit;
+import net.minecraft.world.item.ItemStack;
+
+public class ComponentHelper {
+	
+	public static <T> void setOrRemove(ItemStack stack, DataComponentType<T> type, T value, boolean set) {
+		if (set)
+			stack.set(type, value);
+		else
+			stack.remove(type);
+	}
+	
+	public static void setOrRemove(ItemStack stack, DataComponentType<Unit> type, boolean set) {
+		setOrRemove(stack, type, Unit.INSTANCE, set);
+	}
+	
+}

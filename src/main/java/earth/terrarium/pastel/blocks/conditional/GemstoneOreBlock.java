@@ -1,0 +1,34 @@
+package earth.terrarium.pastel.blocks.conditional;
+
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import earth.terrarium.pastel.api.item.GemstoneColor;
+import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
+import earth.terrarium.pastel.registries.SpectrumRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.block.state.BlockState;
+
+public class GemstoneOreBlock extends CloakedOreBlock {
+
+	public final MapCodec<GemstoneOreBlock> codec;
+	private final GemstoneColor gemstoneColor;
+	
+	public GemstoneOreBlock(IntProvider experienceDropped, Properties settings, GemstoneColor gemstoneColor, ResourceLocation cloakAdvancementIdentifier, BlockState cloakBlockState) {
+		super(experienceDropped, settings, cloakAdvancementIdentifier, cloakBlockState);
+		this.gemstoneColor = gemstoneColor;
+		this.codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
+				IntProvider.codec(0, 10).fieldOf("experience").forGetter(b -> ((ExperienceDroppingBlockAccessor) b).getXpRange()),
+				propertiesCodec(),
+				SpectrumRegistries.GEMSTONE_COLOR.byNameCodec().fieldOf("color").forGetter(b -> b.gemstoneColor),
+				ResourceLocation.CODEC.fieldOf("advancement").forGetter(CloakedOreBlock::getCloakAdvancementIdentifier),
+				BlockState.CODEC.fieldOf("cloak").forGetter(b -> b.getBlockStateCloaks().get(b.defaultBlockState()))
+		).apply(instance, GemstoneOreBlock::new));
+	}
+
+	@Override
+	public MapCodec<? extends GemstoneOreBlock> codec() {
+		return codec;
+	}
+
+}
