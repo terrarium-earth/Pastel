@@ -49,7 +49,7 @@ public class MalachiteCrossbowItem extends CrossbowItem implements Preenchanted,
 		return 1.5F;
 	}
 
-	@Override
+	// TODO What is this needed for?
 	public float getPullTimeModifier(ItemStack stack) {
 		return 2.0F;
 	}

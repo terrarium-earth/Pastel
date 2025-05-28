@@ -2,7 +2,6 @@ package earth.terrarium.pastel;
 
 import de.dafuqs.revelationary.Revelationary;
 import de.dafuqs.revelationary.RevelationaryNetworking;
-import de.dafuqs.reverb.Reverb;
 import earth.terrarium.pastel.api.color.ColorRegistry;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
@@ -10,7 +9,6 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.attachments.*;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
-import earth.terrarium.pastel.compat.reverb.DimensionReverb;
 import earth.terrarium.pastel.config.SpectrumConfig;
 import earth.terrarium.pastel.data_loaders.CrystalApothecarySimulationsDataLoader;
 import earth.terrarium.pastel.data_loaders.EntityFishingDataLoader;
@@ -102,7 +100,6 @@ public class SpectrumCommon {
 
 	public SpectrumCommon(IEventBus pastelBus, ModContainer container) {
 		Revelationary.onInitialize(pastelBus);
-		Reverb.onInitialize();
 
 		logInfo("Starting Common Startup");
 		
@@ -167,10 +164,6 @@ public class SpectrumCommon {
 		// Dimension
 		logInfo("Registering Dimension...");
 		SpectrumDimensions.register();
-		
-		// Dimension effects
-		logInfo("Registering Dimension Sound Effects...");
-		DimensionReverb.setup();
 		
 		// Recipes
 		logInfo("Registering Recipe Types...");

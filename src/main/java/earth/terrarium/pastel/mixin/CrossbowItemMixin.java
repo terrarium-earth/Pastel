@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
 import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
-import de.dafuqs.arrowhead.api.CrossbowShootingCallback;
 import earth.terrarium.pastel.registries.events.SpectrumMiscEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;

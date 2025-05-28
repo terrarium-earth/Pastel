@@ -16,7 +16,7 @@ public class SpectrumWaxableDataMapProvider extends DataMapProvider {
 
     @Override
     protected void gather(HolderLookup.Provider provider) {
-        builder(NeoForgeDataMaps.WAXABLES).add(SpectrumBlocks.HUMMINGSTONE.builtInRegistryHolder(), new Waxable(SpectrumBlocks.WAXED_HUMMINGSTONE), false);
+        builder(NeoForgeDataMaps.WAXABLES).add(SpectrumBlocks.HUMMINGSTONE, new Waxable(SpectrumBlocks.WAXED_HUMMINGSTONE.get()), false);
     }
 
     @Override

@@ -31,7 +31,7 @@ public class BedrockCrossbowItem extends CrossbowItem implements Preenchanted, A
 		return 1.5F;
 	}
 
-	@Override
+	// TODO What is this needed for?
 	public float getPullTimeModifier(ItemStack stack) {
 		return 3.0F;
 	}

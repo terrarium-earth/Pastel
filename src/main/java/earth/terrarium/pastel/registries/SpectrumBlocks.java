@@ -549,7 +549,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> BLACKSLAG_STAIRS = register(blockWithItem("blackslag_stairs", () -> new StairBlock(SpectrumBlocks.BLACKSLAG.get().defaultBlockState(), blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_SLAB = register(blockWithItem("blackslag_slab", () -> new SlabBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_WALL = register(blockWithItem("blackslag_wall", () -> new WallBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
-	public static final BlockFamily BLACKSLAG_FAMILY = SpectrumModelHelper.registerBlockFamilyExceptBase(new BlockFamily.Builder(SpectrumBlocks.BLACKSLAG.get()).stairs(SpectrumBlocks.BLACKSLAG_STAIRS.get()).slab(SpectrumBlocks.BLACKSLAG_SLAB.get()).wall(SpectrumBlocks.BLACKSLAG_WALL.get()).getFamily(), SpectrumTexturedModels.cubeBottomTopWall(b -> b, "", b -> b, "_top", b -> b, "_top", b -> b, ""));
 
 	public static final DeferredBlock<Block> INFESTED_BLACKSLAG = register(parented(blockWithItem("infested_blackslag", () -> new InfestedBlock(SpectrumBlocks.BLACKSLAG.get(), blackslag(SoundType.DEEPSLATE)), InkColors.BLACK), b -> SpectrumBlocks.BLACKSLAG.get()));
 
@@ -557,21 +556,18 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> COBBLED_BLACKSLAG_STAIRS = register(blockWithItem("cobbled_blackslag_stairs", () -> new StairBlock(SpectrumBlocks.COBBLED_BLACKSLAG.get().defaultBlockState(), blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> COBBLED_BLACKSLAG_SLAB = register(blockWithItem("cobbled_blackslag_slab", () -> new SlabBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> COBBLED_BLACKSLAG_WALL = register(blockWithItem("cobbled_blackslag_wall", () -> new WallBlock(blackslag(SoundType.DEEPSLATE)), InkColors.BLACK));
-	public static final BlockFamily COBBLED_BLACKSLAG_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.COBBLED_BLACKSLAG.get()).stairs(SpectrumBlocks.COBBLED_BLACKSLAG_STAIRS.get()).slab(SpectrumBlocks.COBBLED_BLACKSLAG_SLAB.get()).wall(SpectrumBlocks.COBBLED_BLACKSLAG_WALL.get()).getFamily());
 
 	public static final DeferredBlock<Block> BLACKSLAG_TILES = register(blockWithItem("blackslag_tiles", () -> new Block(blackslag(SoundType.DEEPSLATE_TILES)), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_TILE_STAIRS = register(blockWithItem("blackslag_tile_stairs", () -> new StairBlock(SpectrumBlocks.BLACKSLAG_TILES.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_TILE_SLAB = register(blockWithItem("blackslag_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_TILE_WALL = register(blockWithItem("blackslag_tile_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> CRACKED_BLACKSLAG_TILES = register(blockWithItem("cracked_blackslag_tiles", () -> new Block(Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_TILES.get())), InkColors.BLACK));
-	public static final BlockFamily BLACKSLAG_TILE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BLACKSLAG_TILES.get()).stairs(SpectrumBlocks.BLACKSLAG_TILE_STAIRS.get()).slab(SpectrumBlocks.BLACKSLAG_TILE_SLAB.get()).wall(SpectrumBlocks.BLACKSLAG_TILE_WALL.get()).cracked(SpectrumBlocks.CRACKED_BLACKSLAG_TILES.get()).getFamily());
 
 	public static final DeferredBlock<Block> BLACKSLAG_BRICKS = register(blockWithItem("blackslag_bricks", () -> new Block(blackslag(SoundType.DEEPSLATE_BRICKS)), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_BRICK_STAIRS = register(blockWithItem("blackslag_brick_stairs", () -> new StairBlock(SpectrumBlocks.BLACKSLAG_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_BRICK_SLAB = register(blockWithItem("blackslag_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> BLACKSLAG_BRICK_WALL = register(blockWithItem("blackslag_brick_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK));
 	public static final DeferredBlock<Block> CRACKED_BLACKSLAG_BRICKS = register(blockWithItem("cracked_blackslag_bricks", () -> new Block(Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK));
-	public static final BlockFamily BLACKSLAG_BRICK_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BLACKSLAG_BRICKS.get()).stairs(SpectrumBlocks.BLACKSLAG_BRICK_STAIRS.get()).slab(SpectrumBlocks.BLACKSLAG_BRICK_SLAB.get()).wall(SpectrumBlocks.BLACKSLAG_BRICK_WALL.get()).cracked(SpectrumBlocks.CRACKED_BLACKSLAG_BRICKS.get()).getFamily());
 
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG = register(blockWithItem("polished_blackslag", () -> new Block(blackslag(SoundType.POLISHED_DEEPSLATE)), InkColors.BLACK));
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_STAIRS = register(blockWithItem("polished_blackslag_stairs", () -> new StairBlock(SpectrumBlocks.POLISHED_BLACKSLAG.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.POLISHED_BLACKSLAG.get())), InkColors.BLACK));
@@ -580,7 +576,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_BUTTON = register(blockWithItem("polished_blackslag_button", () -> new ButtonBlock(SpectrumBlockSetTypes.POLISHED_BLACKSLAG, 5, Properties.of().pushReaction(PushReaction.DESTROY).noCollission().strength(0.5F)), InkColors.BLACK));
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_PRESSURE_PLATE = register(blockWithItem("polished_blackslag_pressure_plate", () -> new PressurePlateBlock(SpectrumBlockSetTypes.POLISHED_BLACKSLAG, Properties.of().mapColor(MapColor.COLOR_BLACK).requiresCorrectToolForDrops().noCollission().strength(0.5F)), InkColors.BLACK));
 	public static final DeferredBlock<Block> CHISELED_POLISHED_BLACKSLAG = register(blockWithItem("chiseled_polished_blackslag", () -> new Block(blackslag(SoundType.DEEPSLATE_BRICKS)), InkColors.BLACK));
-	public static final BlockFamily POLISHED_BLACKSLAG_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.POLISHED_BLACKSLAG.get()).stairs(SpectrumBlocks.POLISHED_BLACKSLAG_STAIRS.get()).slab(SpectrumBlocks.POLISHED_BLACKSLAG_SLAB.get()).wall(SpectrumBlocks.POLISHED_BLACKSLAG_WALL.get()).button(SpectrumBlocks.POLISHED_BLACKSLAG_BUTTON.get()).pressurePlate(SpectrumBlocks.POLISHED_BLACKSLAG_PRESSURE_PLATE.get()).chiseled(SpectrumBlocks.CHISELED_POLISHED_BLACKSLAG.get()).getFamily());
 
 	public static final DeferredBlock<Block> POLISHED_BLACKSLAG_PILLAR = register(axisRotated(blockWithItem("polished_blackslag_pillar", () -> new RotatedPillarBlock(Properties.ofFullCopy(SpectrumBlocks.BLACKSLAG_BRICKS.get())), InkColors.BLACK), TexturedModel.createDefault(b -> SpectrumTextureMaps.sideEnd(b, "", SpectrumBlocks.CHISELED_POLISHED_BLACKSLAG.get(), ""), ModelTemplates.CUBE_COLUMN)));
 	public static final DeferredBlock<Block> ANCIENT_CHISELED_POLISHED_BLACKSLAG = register(simple(blockWithItem("ancient_chiseled_polished_blackslag", () -> new Block(blackslag(SoundType.DEEPSLATE_BRICKS)), InkColors.BLACK)));
@@ -591,47 +586,37 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> POLISHED_SHALE_CLAY = register(blockWithItem("polished_shale_clay", () -> new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_SHALE_CLAY_STAIRS = register(blockWithItem("polished_shale_clay_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.UNAFFECTED, SpectrumBlocks.POLISHED_SHALE_CLAY.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_SHALE_CLAY_SLAB = register(blockWithItem("polished_shale_clay_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.UNAFFECTED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily POLISHED_SHALE_CLAY_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.POLISHED_SHALE_CLAY.get()).stairs(SpectrumBlocks.POLISHED_SHALE_CLAY_STAIRS.get()).slab(SpectrumBlocks.POLISHED_SHALE_CLAY_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> EXPOSED_POLISHED_SHALE_CLAY = register(blockWithItem("exposed_polished_shale_clay", () -> new WeatheringBlock(Weathering.WeatheringLevel.EXPOSED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> EXPOSED_POLISHED_SHALE_CLAY_STAIRS = register(blockWithItem("exposed_polished_shale_clay_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.EXPOSED, SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> EXPOSED_POLISHED_SHALE_CLAY_SLAB = register(blockWithItem("exposed_polished_shale_clay_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.EXPOSED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily EXPOSED_POLISHED_SHALE_CLAY_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY.get()).stairs(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get()).slab(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> WEATHERED_POLISHED_SHALE_CLAY = register(blockWithItem("weathered_polished_shale_clay", () -> new WeatheringBlock(Weathering.WeatheringLevel.WEATHERED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> WEATHERED_POLISHED_SHALE_CLAY_STAIRS = register(blockWithItem("weathered_polished_shale_clay_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.WEATHERED, SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> WEATHERED_POLISHED_SHALE_CLAY_SLAB = register(blockWithItem("weathered_polished_shale_clay_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.WEATHERED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily WEATHERED_POLISHED_SHALE_CLAY_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY.get()).stairs(SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY_STAIRS.get()).slab(SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY_SLAB.get()).getFamily());
-
 	public static final DeferredBlock<Block> SHALE_CLAY_BRICKS = register(blockWithItem("shale_clay_bricks", () -> new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> SHALE_CLAY_BRICK_STAIRS = register(blockWithItem("shale_clay_brick_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.UNAFFECTED, SpectrumBlocks.SHALE_CLAY_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> SHALE_CLAY_BRICK_SLAB = register(blockWithItem("shale_clay_brick_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.UNAFFECTED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily SHALE_CLAY_BRICK_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.SHALE_CLAY_BRICKS.get()).stairs(SpectrumBlocks.SHALE_CLAY_BRICK_STAIRS.get()).slab(SpectrumBlocks.SHALE_CLAY_BRICK_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> EXPOSED_SHALE_CLAY_BRICKS = register(blockWithItem("exposed_shale_clay_bricks", () -> new WeatheringBlock(Weathering.WeatheringLevel.EXPOSED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> EXPOSED_SHALE_CLAY_BRICK_STAIRS = register(blockWithItem("exposed_shale_clay_brick_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.EXPOSED, SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> EXPOSED_SHALE_CLAY_BRICK_SLAB = register(blockWithItem("exposed_shale_clay_brick_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.EXPOSED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily EXPOSED_SHALE_CLAY_BRICK_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICKS.get()).stairs(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get()).slab(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> WEATHERED_SHALE_CLAY_BRICKS = register(blockWithItem("weathered_shale_clay_bricks", () -> new WeatheringBlock(Weathering.WeatheringLevel.WEATHERED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> WEATHERED_SHALE_CLAY_BRICK_STAIRS = register(blockWithItem("weathered_shale_clay_brick_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.WEATHERED, SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> WEATHERED_SHALE_CLAY_BRICK_SLAB = register(blockWithItem("weathered_shale_clay_brick_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.WEATHERED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily WEATHERED_SHALE_CLAY_BRICK_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICKS.get()).stairs(SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICK_STAIRS.get()).slab(SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICK_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> SHALE_CLAY_TILES = register(blockWithItem("shale_clay_tiles", () -> new WeatheringBlock(Weathering.WeatheringLevel.UNAFFECTED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> SHALE_CLAY_TILE_STAIRS = register(blockWithItem("shale_clay_tile_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.UNAFFECTED, SpectrumBlocks.SHALE_CLAY_TILES.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> SHALE_CLAY_TILE_SLAB = register(blockWithItem("shale_clay_tile_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.UNAFFECTED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily SHALE_CLAY_TILE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.SHALE_CLAY_TILES.get()).stairs(SpectrumBlocks.SHALE_CLAY_TILE_STAIRS.get()).slab(SpectrumBlocks.SHALE_CLAY_TILE_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> EXPOSED_SHALE_CLAY_TILES = register(blockWithItem("exposed_shale_clay_tiles", () -> new WeatheringBlock(Weathering.WeatheringLevel.EXPOSED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> EXPOSED_SHALE_CLAY_TILE_STAIRS = register(blockWithItem("exposed_shale_clay_tile_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.EXPOSED, SpectrumBlocks.EXPOSED_SHALE_CLAY_TILES.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> EXPOSED_SHALE_CLAY_TILE_SLAB = register(blockWithItem("exposed_shale_clay_tile_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.EXPOSED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily EXPOSED_SHALE_CLAY_TILE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILES.get()).stairs(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get()).slab(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> WEATHERED_SHALE_CLAY_TILES = register(blockWithItem("weathered_shale_clay_tiles", () -> new WeatheringBlock(Weathering.WeatheringLevel.WEATHERED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> WEATHERED_SHALE_CLAY_TILE_STAIRS = register(blockWithItem("weathered_shale_clay_tile_stairs", () -> new WeatheringStairsBlock(Weathering.WeatheringLevel.WEATHERED, SpectrumBlocks.WEATHERED_SHALE_CLAY_TILES.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> WEATHERED_SHALE_CLAY_TILE_SLAB = register(blockWithItem("weathered_shale_clay_tile_slab", () -> new WeatheringSlabBlock(Weathering.WeatheringLevel.WEATHERED, Properties.ofFullCopy(SpectrumBlocks.SHALE_CLAY.get())), InkColors.BROWN));
-	public static final BlockFamily WEATHERED_SHALE_CLAY_TILE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.WEATHERED_SHALE_CLAY_TILES.get()).stairs(SpectrumBlocks.WEATHERED_SHALE_CLAY_TILE_STAIRS.get()).slab(SpectrumBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> ROCK_CRYSTAL = register(simple(blockWithItem("rock_crystal", () -> new Block(settings(MapColor.QUARTZ, SoundType.NETHER_BRICKS, 200F).requiresCorrectToolForDrops()), InkColors.BROWN)));
 
@@ -639,7 +624,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> PYRITE_SLAB = register(blockWithItem("pyrite_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.PYRITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PYRITE_STAIRS = register(blockWithItem("pyrite_stairs", () -> new StairBlock(SpectrumBlocks.PYRITE.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.PYRITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PYRITE_WALL = register(blockWithItem("pyrite_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.PYRITE.get())), InkColors.BROWN));
-	public static final BlockFamily PYRITE_FAMILY = SpectrumModelHelper.registerBlockFamilyExceptBase(new BlockFamily.Builder(SpectrumBlocks.PYRITE.get()).stairs(SpectrumBlocks.PYRITE_STAIRS.get()).slab(SpectrumBlocks.PYRITE_SLAB.get()).wall(SpectrumBlocks.PYRITE_WALL.get()).getFamily(), TexturedModel.createDefault(b -> SpectrumTextureMaps.sideTopBottomWall(b, "_side", b, "_top", b, "_top", b, "_side"), ModelTemplates.CUBE_ALL));
 
 	public static final DeferredBlock<Block> PYRITE_PILE = register(axisRotated(blockWithItem("pyrite_pile", () -> new RotatedPillarBlock(Properties.ofFullCopy(SpectrumBlocks.PYRITE.get())), InkColors.BROWN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> PYRITE_PLATING = register(simple(blockWithItem("pyrite_plating", () -> new Block(Properties.ofFullCopy(SpectrumBlocks.PYRITE.get())), InkColors.BROWN)));
@@ -668,7 +652,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> PYRITE_TILES_SLAB = register(blockWithItem("pyrite_tiles_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.PYRITE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PYRITE_TILES_STAIRS = register(blockWithItem("pyrite_tiles_stairs", () -> new StairBlock(SpectrumBlocks.PYRITE_TILES.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.PYRITE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PYRITE_TILES_WALL = register(blockWithItem("pyrite_tiles_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.PYRITE_TILES.get())), InkColors.BROWN));
-	public static final BlockFamily PYRITE_TILE_FAMILY = SpectrumModelHelper.registerBlockFamilyExceptBase(new BlockFamily.Builder(SpectrumBlocks.PYRITE_TILES.get()).stairs(SpectrumBlocks.PYRITE_TILES_STAIRS.get()).slab(SpectrumBlocks.PYRITE_TILES_SLAB.get()).wall(SpectrumBlocks.PYRITE_TILES_WALL.get()).getFamily(), TexturedModel.createDefault(b -> TextureMapping.cube(SpectrumBlocks.PYRITE_PLATING.get()), ModelTemplates.CUBE_ALL));
 
 	public static final DeferredBlock<Block> DRAGONBONE = register(axisRotated(blockWithItem("dragonbone", () -> new DragonboneBlock(Properties.ofFullCopy(BONE_BLOCK).strength(-1.0F, 22.0F).pushReaction(PushReaction.BLOCK)), InkColors.GREEN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> CRACKED_DRAGONBONE = register(axisRotated(blockWithItem("cracked_dragonbone", () -> new RotatedPillarBlock(Properties.ofFullCopy(BONE_BLOCK).strength(100.0F, 1200.0F).pushReaction(PushReaction.BLOCK)), InkColors.GREEN), TexturedModel.COLUMN));
@@ -677,7 +660,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> POLISHED_BONE_ASH_STAIRS = register(blockWithItem("polished_bone_ash_stairs", () -> new StairBlock(SpectrumBlocks.POLISHED_BONE_ASH.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> POLISHED_BONE_ASH_SLAB = register(blockWithItem("polished_bone_ash_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> POLISHED_BONE_ASH_WALL = register(blockWithItem("polished_bone_ash_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
-	public static final BlockFamily POLISHED_BONE_ASH_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.POLISHED_BONE_ASH.get()).stairs(SpectrumBlocks.POLISHED_BONE_ASH_STAIRS.get()).slab(SpectrumBlocks.POLISHED_BONE_ASH_SLAB.get()).wall(SpectrumBlocks.POLISHED_BONE_ASH_WALL.get()).getFamily());
 
 	public static final DeferredBlock<Block> POLISHED_BONE_ASH_PILLAR = register(axisRotated(blockWithItem("polished_bone_ash_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> BONE_ASH_SHINGLES = register(blockWithItem("bone_ash_shingles", () -> new ShinglesBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BONE_ASH.get()).noOcclusion()), InkColors.CYAN).withBlockModel((ctx, block) -> SpectrumModelHelper.createVariantsSupplier(block, ModelLocationUtils.getModelLocation(block)).with(SpectrumModelHelper.createEastDefaultHorizontalFacingVariantMap())));
@@ -686,13 +668,11 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> BONE_ASH_BRICK_STAIRS = register(blockWithItem("bone_ash_brick_stairs", () -> new StairBlock(SpectrumBlocks.BONE_ASH_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.BONE_ASH_BRICKS.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_BRICK_SLAB = register(blockWithItem("bone_ash_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.BONE_ASH_BRICKS.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_BRICK_WALL = register(blockWithItem("bone_ash_brick_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.BONE_ASH_BRICKS.get())), InkColors.CYAN));
-	public static final BlockFamily BONE_ASH_BRICK_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BONE_ASH_BRICKS.get()).stairs(SpectrumBlocks.BONE_ASH_BRICK_STAIRS.get()).slab(SpectrumBlocks.BONE_ASH_BRICK_SLAB.get()).wall(SpectrumBlocks.BONE_ASH_BRICK_WALL.get()).getFamily());
 
 	public static final DeferredBlock<Block> BONE_ASH_TILES = register(blockWithItem("bone_ash_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BONE_ASH.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_TILE_STAIRS = register(blockWithItem("bone_ash_tile_stairs", () -> new StairBlock(SpectrumBlocks.BONE_ASH_TILES.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.BONE_ASH_TILES.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_TILE_SLAB = register(blockWithItem("bone_ash_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.BONE_ASH_TILES.get())), InkColors.CYAN));
 	public static final DeferredBlock<Block> BONE_ASH_TILE_WALL = register(blockWithItem("bone_ash_tile_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.BONE_ASH_TILES.get())), InkColors.CYAN));
-	public static final BlockFamily BONE_ASH_TILE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BONE_ASH_TILES.get()).stairs(SpectrumBlocks.BONE_ASH_TILE_STAIRS.get()).slab(SpectrumBlocks.BONE_ASH_TILE_SLAB.get()).wall(SpectrumBlocks.BONE_ASH_TILE_WALL.get()).getFamily());
 
 	public static final DeferredBlock<Block> SLUSH = register(simple(blockWithItem("slush", () -> new RotatedPillarBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)), InkColors.BROWN)));
 	public static final DeferredBlock<Block> OVERGROWN_SLUSH = register(snowy(blockWithItem("overgrown_slush", () -> new SlushVegetationBlock(blackslag(SoundType.MUDDY_MANGROVE_ROOTS)), InkColors.BROWN), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_side", b -> b, "_top", b -> SpectrumBlocks.SLUSH.get(), "", b -> b, "_top"), SpectrumTexturedModels.cubeBottomTopParticle(b -> b, "_snow_side", b -> b, "_snow_top", b -> SpectrumBlocks.SLUSH.get(), "", b -> b, "_snow_top")));
@@ -735,7 +715,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> SMOOTH_BASALT_STAIRS = register(blockWithItem("smooth_basalt_stairs", () -> new StairBlock(BASALT.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN));
 	public static final DeferredBlock<Block> SMOOTH_BASALT_SLAB = register(blockWithItem("smooth_basalt_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN));
 	public static final DeferredBlock<Block> SMOOTH_BASALT_WALL = register(blockWithItem("smooth_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(BASALT)), InkColors.BROWN));
-	public static final BlockFamily SMOOTH_BASALT_FAMILY = SpectrumModelHelper.registerBlockFamilyExceptBase(new BlockFamily.Builder(SMOOTH_BASALT).stairs(SpectrumBlocks.SMOOTH_BASALT_STAIRS.get()).slab(SpectrumBlocks.SMOOTH_BASALT_SLAB.get()).wall(SpectrumBlocks.SMOOTH_BASALT_WALL.get()).getFamily(), TexturedModel.CUBE);
 
 	public static final DeferredBlock<Block> POLISHED_BASALT = register(blockWithItem("polished_basalt", () -> new Block(settings(MapColor.COLOR_BLACK, SoundType.BASALT, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_BASALT_STAIRS = register(blockWithItem("polished_basalt_stairs", () -> new StairBlock(SpectrumBlocks.POLISHED_BASALT.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
@@ -744,7 +723,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> POLISHED_BASALT_BUTTON = register(blockWithItem("polished_basalt_button", () -> new ButtonBlock(SpectrumBlockSetTypes.POLISHED_BASALT, 5, Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY)), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_BASALT_PRESSURE_PLATE = register(blockWithItem("polished_basalt_pressure_plate", () -> new PressurePlateBlock(SpectrumBlockSetTypes.POLISHED_BASALT, Properties.of().mapColor(MapColor.COLOR_BLACK).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY)), InkColors.BROWN));
 	public static final DeferredBlock<Block> CHISELED_POLISHED_BASALT = register(blockWithItem("chiseled_polished_basalt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
-	public static final BlockFamily POLISHED_BASALT_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.POLISHED_BASALT.get()).stairs(SpectrumBlocks.POLISHED_BASALT_STAIRS.get()).slab(SpectrumBlocks.POLISHED_BASALT_SLAB.get()).wall(SpectrumBlocks.POLISHED_BASALT_WALL.get()).button(SpectrumBlocks.POLISHED_BASALT_BUTTON.get()).pressurePlate(SpectrumBlocks.POLISHED_BASALT_PRESSURE_PLATE.get()).chiseled(SpectrumBlocks.CHISELED_POLISHED_BASALT.get()).getFamily());
 
 	public static final DeferredBlock<Block> POLISHED_BASALT_PILLAR = register(axisRotated(blockWithItem("polished_basalt_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BASALT.get())), InkColors.BROWN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> POLISHED_BASALT_CREST = register(blockWithItem("polished_basalt_crest", () -> new CardinalFacingBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BASALT.get())), InkColors.BROWN).withBlockModel((ctx, block) -> SpectrumModelHelper.createVariantsSupplier(ctx, block, TexturedModel.COLUMN).with(SpectrumModelHelper.createCardinalFacingVariantMap())));
@@ -755,20 +733,17 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> BASALT_BRICK_SLAB = register(blockWithItem("basalt_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASALT_BRICK_WALL = register(blockWithItem("basalt_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CRACKED_BASALT_BRICKS = register(blockWithItem("cracked_basalt_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_BRICKS.get())), InkColors.BROWN));
-	public static final BlockFamily BASALT_BRICK_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BASALT_BRICKS.get()).stairs(SpectrumBlocks.BASALT_BRICK_STAIRS.get()).slab(SpectrumBlocks.BASALT_BRICK_SLAB.get()).wall(SpectrumBlocks.BASALT_BRICK_WALL.get()).cracked(SpectrumBlocks.CRACKED_BASALT_BRICKS.get()).getFamily());
 
 	public static final DeferredBlock<Block> BASALT_TILES = register(blockWithItem("basalt_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASALT_TILE_STAIRS = register(blockWithItem("basalt_tile_stairs", () -> new StairBlock(SpectrumBlocks.BASALT_TILES.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASALT_TILE_SLAB = register(blockWithItem("basalt_tile_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASALT_TILE_WALL = register(blockWithItem("basalt_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CRACKED_BASALT_TILES = register(blockWithItem("cracked_basalt_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_TILES.get())), InkColors.BROWN));
-	public static final BlockFamily BASALT_TILE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BASALT_TILES.get()).stairs(SpectrumBlocks.BASALT_TILE_STAIRS.get()).slab(SpectrumBlocks.BASALT_TILE_SLAB.get()).wall(SpectrumBlocks.BASALT_TILE_WALL.get()).cracked(SpectrumBlocks.CRACKED_BASALT_TILES.get()).getFamily());
 
 	public static final DeferredBlock<Block> PLANED_BASALT = register(blockWithItem("planed_basalt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_BASALT_STAIRS = register(blockWithItem("planed_basalt_stairs", () -> new StairBlock(SpectrumBlocks.PLANED_BASALT.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.PLANED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_BASALT_SLAB = register(blockWithItem("planed_basalt_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.PLANED_BASALT.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_BASALT_WALL = register(blockWithItem("planed_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.PLANED_BASALT.get())), InkColors.BROWN));
-	public static final BlockFamily PLANED_BASALT_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.PLANED_BASALT.get()).stairs(SpectrumBlocks.PLANED_BASALT_STAIRS.get()).slab(SpectrumBlocks.PLANED_BASALT_SLAB.get()).wall(SpectrumBlocks.PLANED_BASALT_WALL.get()).getFamily());
 
 	public static final DeferredBlock<Block> TOPAZ_CHISELED_BASALT = register(simple(blockWithItem("topaz_chiseled_basalt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_BRICKS.get()).lightLevel(s -> 6)), InkColors.CYAN)));
 	public static final DeferredBlock<Block> AMETHYST_CHISELED_BASALT = register(simple(blockWithItem("amethyst_chiseled_basalt", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.BASALT_BRICKS.get()).lightLevel(s -> 5)), InkColors.MAGENTA)));
@@ -779,7 +754,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> CALCITE_STAIRS = register(blockWithItem("calcite_stairs", () -> new StairBlock(CALCITE.defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_SLAB = register(blockWithItem("calcite_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_WALL = register(blockWithItem("calcite_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(CALCITE)), InkColors.BROWN));
-	public static final BlockFamily CALCITE_FAMILY = SpectrumModelHelper.registerBlockFamilyExceptBase(new BlockFamily.Builder(CALCITE).stairs(SpectrumBlocks.CALCITE_STAIRS.get()).slab(SpectrumBlocks.CALCITE_SLAB.get()).wall(SpectrumBlocks.CALCITE_WALL.get()).getFamily(), TexturedModel.CUBE);
 
 	public static final DeferredBlock<Block> POLISHED_CALCITE = register(blockWithItem("polished_calcite", () -> new Block(settings(MapColor.TERRACOTTA_WHITE, SoundType.CALCITE, 2.0F, 5.0F).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_CALCITE_STAIRS = register(blockWithItem("polished_calcite_stairs", () -> new StairBlock(SpectrumBlocks.POLISHED_CALCITE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
@@ -788,7 +762,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> POLISHED_CALCITE_BUTTON = register(blockWithItem("polished_calcite_button", () -> new ButtonBlock(SpectrumBlockSetTypes.POLISHED_CALCITE, 5, Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY)), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_CALCITE_PRESSURE_PLATE = register(blockWithItem("polished_calcite_pressure_plate", () -> new PressurePlateBlock(SpectrumBlockSetTypes.POLISHED_CALCITE, Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY)), InkColors.BROWN));
 	public static final DeferredBlock<Block> CHISELED_POLISHED_CALCITE = register(blockWithItem("chiseled_polished_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
-	public static final BlockFamily POLISHED_CALCITE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.POLISHED_CALCITE.get()).stairs(SpectrumBlocks.POLISHED_CALCITE_STAIRS.get()).slab(SpectrumBlocks.POLISHED_CALCITE_SLAB.get()).wall(SpectrumBlocks.POLISHED_CALCITE_WALL.get()).button(SpectrumBlocks.POLISHED_CALCITE_BUTTON.get()).pressurePlate(SpectrumBlocks.POLISHED_CALCITE_PRESSURE_PLATE.get()).chiseled(SpectrumBlocks.CHISELED_POLISHED_CALCITE.get()).getFamily());
 
 	public static final DeferredBlock<Block> POLISHED_CALCITE_PILLAR = register(axisRotated(blockWithItem("polished_calcite_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_CALCITE.get())), InkColors.BROWN), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> POLISHED_CALCITE_CREST = register(blockWithItem("polished_calcite_crest", () -> new CardinalFacingBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_CALCITE.get())), InkColors.BROWN).withBlockModel((ctx, block) -> SpectrumModelHelper.createVariantsSupplier(ctx, block, TexturedModel.COLUMN).with(SpectrumModelHelper.createCardinalFacingVariantMap())));
@@ -799,20 +772,17 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> CALCITE_BRICK_SLAB = register(blockWithItem("calcite_brick_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_BRICK_WALL = register(blockWithItem("calcite_brick_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CRACKED_CALCITE_BRICKS = register(blockWithItem("cracked_calcite_bricks", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_BRICKS.get())), InkColors.BROWN));
-	public static final BlockFamily CALCITE_BRICK_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.CALCITE_BRICKS.get()).stairs(SpectrumBlocks.CALCITE_BRICK_STAIRS.get()).slab(SpectrumBlocks.CALCITE_BRICK_SLAB.get()).wall(SpectrumBlocks.CALCITE_BRICK_WALL.get()).cracked(SpectrumBlocks.CRACKED_CALCITE_BRICKS.get()).getFamily());
 
 	public static final DeferredBlock<Block> CALCITE_TILES = register(blockWithItem("calcite_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_TILE_STAIRS = register(blockWithItem("calcite_tile_stairs", () -> new StairBlock(SpectrumBlocks.CALCITE_TILES.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_TILE_SLAB = register(blockWithItem("calcite_tile_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CALCITE_TILE_WALL = register(blockWithItem("calcite_tile_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> CRACKED_CALCITE_TILES = register(blockWithItem("cracked_calcite_tiles", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_TILES.get())), InkColors.BROWN));
-	public static final BlockFamily CALCITE_TILE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.CALCITE_TILES.get()).stairs(SpectrumBlocks.CALCITE_TILE_STAIRS.get()).slab(SpectrumBlocks.CALCITE_TILE_SLAB.get()).wall(SpectrumBlocks.CALCITE_TILE_WALL.get()).cracked(SpectrumBlocks.CRACKED_CALCITE_TILES.get()).getFamily());
 
 	public static final DeferredBlock<Block> PLANED_CALCITE = register(blockWithItem("planed_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.POLISHED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_CALCITE_STAIRS = register(blockWithItem("planed_calcite_stairs", () -> new StairBlock(SpectrumBlocks.PLANED_CALCITE.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.PLANED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_CALCITE_SLAB = register(blockWithItem("planed_calcite_slab", () -> new SlabBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.PLANED_CALCITE.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> PLANED_CALCITE_WALL = register(blockWithItem("planed_calcite_wall", () -> new WallBlock(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.PLANED_CALCITE.get())), InkColors.BROWN));
-	public static final BlockFamily PLANED_CALCITE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.PLANED_CALCITE.get()).stairs(SpectrumBlocks.PLANED_CALCITE_STAIRS.get()).slab(SpectrumBlocks.PLANED_CALCITE_SLAB.get()).wall(SpectrumBlocks.PLANED_CALCITE_WALL.get()).getFamily());
 
 	public static final DeferredBlock<Block> TOPAZ_CHISELED_CALCITE = register(simple(blockWithItem("topaz_chiseled_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_BRICKS.get()).lightLevel(s -> 6)), InkColors.CYAN)));
 	public static final DeferredBlock<Block> AMETHYST_CHISELED_CALCITE = register(simple(blockWithItem("amethyst_chiseled_calcite", () -> new Block(BlockBehaviour.Properties.ofFullCopy(SpectrumBlocks.CALCITE_BRICKS.get()).lightLevel(s -> 5)), InkColors.MAGENTA)));
@@ -982,7 +952,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> BLACK_FENCE_GATE = registerColoredFenceGate("black_fence_gate", SpectrumBlocks.BLACK_PLANKS, InkColors.BLACK);
 	public static final DeferredBlock<Block> BLACK_BUTTON = registerColoredButton("black_button", SpectrumBlocks.BLACK_PLANKS, InkColors.BLACK);
 	public static final DeferredBlock<Block> BLACK_SLAB = registerColoredSlab("black_slab", SpectrumBlocks.BLACK_PLANKS, InkColors.BLACK);
-	public static final BlockFamily BLACK_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BLACK_PLANKS.get()).stairs(SpectrumBlocks.BLACK_STAIRS.get()).pressurePlate(SpectrumBlocks.BLACK_PRESSURE_PLATE.get()).fence(SpectrumBlocks.BLACK_FENCE.get()).fenceGate(SpectrumBlocks.BLACK_FENCE_GATE.get()).button(SpectrumBlocks.BLACK_BUTTON.get()).slab(SpectrumBlocks.BLACK_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> BLUE_PLANKS = registerColoredPlanks("blue_planks", InkColors.BLUE);
 	public static final DeferredBlock<Block> BLUE_STAIRS = registerColoredStairs("blue_stairs", SpectrumBlocks.BLUE_PLANKS, InkColors.BLUE);
@@ -991,7 +960,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> BLUE_FENCE_GATE = registerColoredFenceGate("blue_fence_gate", SpectrumBlocks.BLUE_PLANKS, InkColors.BLUE);
 	public static final DeferredBlock<Block> BLUE_BUTTON = registerColoredButton("blue_button", SpectrumBlocks.BLUE_PLANKS, InkColors.BLUE);
 	public static final DeferredBlock<Block> BLUE_SLAB = registerColoredSlab("blue_slab", SpectrumBlocks.BLUE_PLANKS, InkColors.BLUE);
-	public static final BlockFamily BLUE_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BLUE_PLANKS.get()).stairs(SpectrumBlocks.BLUE_STAIRS.get()).pressurePlate(SpectrumBlocks.BLUE_PRESSURE_PLATE.get()).fence(SpectrumBlocks.BLUE_FENCE.get()).fenceGate(SpectrumBlocks.BLUE_FENCE_GATE.get()).button(SpectrumBlocks.BLUE_BUTTON.get()).slab(SpectrumBlocks.BLUE_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> BROWN_PLANKS = registerColoredPlanks("brown_planks", InkColors.BROWN);
 	public static final DeferredBlock<Block> BROWN_STAIRS = registerColoredStairs("brown_stairs", SpectrumBlocks.BROWN_PLANKS, InkColors.BROWN);
@@ -1000,7 +968,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> BROWN_FENCE_GATE = registerColoredFenceGate("brown_fence_gate", SpectrumBlocks.BROWN_PLANKS, InkColors.BROWN);
 	public static final DeferredBlock<Block> BROWN_BUTTON = registerColoredButton("brown_button", SpectrumBlocks.BROWN_PLANKS, InkColors.BROWN);
 	public static final DeferredBlock<Block> BROWN_SLAB = registerColoredSlab("brown_slab", SpectrumBlocks.BROWN_PLANKS, InkColors.BROWN);
-	public static final BlockFamily BROWN_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BROWN_PLANKS.get()).stairs(SpectrumBlocks.BROWN_STAIRS.get()).pressurePlate(SpectrumBlocks.BROWN_PRESSURE_PLATE.get()).fence(SpectrumBlocks.BROWN_FENCE.get()).fenceGate(SpectrumBlocks.BROWN_FENCE_GATE.get()).button(SpectrumBlocks.BROWN_BUTTON.get()).slab(SpectrumBlocks.BROWN_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> CYAN_PLANKS = registerColoredPlanks("cyan_planks", InkColors.CYAN);
 	public static final DeferredBlock<Block> CYAN_STAIRS = registerColoredStairs("cyan_stairs", SpectrumBlocks.CYAN_PLANKS, InkColors.CYAN);
@@ -1009,7 +976,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> CYAN_FENCE_GATE = registerColoredFenceGate("cyan_fence_gate", SpectrumBlocks.CYAN_PLANKS, InkColors.CYAN);
 	public static final DeferredBlock<Block> CYAN_BUTTON = registerColoredButton("cyan_button", SpectrumBlocks.CYAN_PLANKS, InkColors.CYAN);
 	public static final DeferredBlock<Block> CYAN_SLAB = registerColoredSlab("cyan_slab", SpectrumBlocks.CYAN_PLANKS, InkColors.CYAN);
-	public static final BlockFamily CYAN_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.CYAN_PLANKS.get()).stairs(SpectrumBlocks.CYAN_STAIRS.get()).pressurePlate(SpectrumBlocks.CYAN_PRESSURE_PLATE.get()).fence(SpectrumBlocks.CYAN_FENCE.get()).fenceGate(SpectrumBlocks.CYAN_FENCE_GATE.get()).button(SpectrumBlocks.CYAN_BUTTON.get()).slab(SpectrumBlocks.CYAN_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> GRAY_PLANKS = registerColoredPlanks("gray_planks", InkColors.GRAY);
 	public static final DeferredBlock<Block> GRAY_STAIRS = registerColoredStairs("gray_stairs", SpectrumBlocks.GRAY_PLANKS, InkColors.GRAY);
@@ -1018,7 +984,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> GRAY_FENCE_GATE = registerColoredFenceGate("gray_fence_gate", SpectrumBlocks.GRAY_PLANKS, InkColors.GRAY);
 	public static final DeferredBlock<Block> GRAY_BUTTON = registerColoredButton("gray_button", SpectrumBlocks.GRAY_PLANKS, InkColors.GRAY);
 	public static final DeferredBlock<Block> GRAY_SLAB = registerColoredSlab("gray_slab", SpectrumBlocks.GRAY_PLANKS, InkColors.GRAY);
-	public static final BlockFamily GRAY_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.GRAY_PLANKS.get()).stairs(SpectrumBlocks.GRAY_STAIRS.get()).pressurePlate(SpectrumBlocks.GRAY_PRESSURE_PLATE.get()).fence(SpectrumBlocks.GRAY_FENCE.get()).fenceGate(SpectrumBlocks.GRAY_FENCE_GATE.get()).button(SpectrumBlocks.GRAY_BUTTON.get()).slab(SpectrumBlocks.GRAY_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> GREEN_PLANKS = registerColoredPlanks("green_planks", InkColors.GREEN);
 	public static final DeferredBlock<Block> GREEN_STAIRS = registerColoredStairs("green_stairs", SpectrumBlocks.GREEN_PLANKS, InkColors.GREEN);
@@ -1027,7 +992,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> GREEN_FENCE_GATE = registerColoredFenceGate("green_fence_gate", SpectrumBlocks.GREEN_PLANKS, InkColors.GREEN);
 	public static final DeferredBlock<Block> GREEN_BUTTON = registerColoredButton("green_button", SpectrumBlocks.GREEN_PLANKS, InkColors.GREEN);
 	public static final DeferredBlock<Block> GREEN_SLAB = registerColoredSlab("green_slab", SpectrumBlocks.GREEN_PLANKS, InkColors.GREEN);
-	public static final BlockFamily GREEN_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.GREEN_PLANKS.get()).stairs(SpectrumBlocks.GREEN_STAIRS.get()).pressurePlate(SpectrumBlocks.GREEN_PRESSURE_PLATE.get()).fence(SpectrumBlocks.GREEN_FENCE.get()).fenceGate(SpectrumBlocks.GREEN_FENCE_GATE.get()).button(SpectrumBlocks.GREEN_BUTTON.get()).slab(SpectrumBlocks.GREEN_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> LIGHT_BLUE_PLANKS = registerColoredPlanks("light_blue_planks", InkColors.LIGHT_BLUE);
 	public static final DeferredBlock<Block> LIGHT_BLUE_STAIRS = registerColoredStairs("light_blue_stairs", SpectrumBlocks.LIGHT_BLUE_PLANKS, InkColors.LIGHT_BLUE);
@@ -1036,7 +1000,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> LIGHT_BLUE_FENCE_GATE = registerColoredFenceGate("light_blue_fence_gate", SpectrumBlocks.LIGHT_BLUE_PLANKS, InkColors.LIGHT_BLUE);
 	public static final DeferredBlock<Block> LIGHT_BLUE_BUTTON = registerColoredButton("light_blue_button", SpectrumBlocks.LIGHT_BLUE_PLANKS, InkColors.LIGHT_BLUE);
 	public static final DeferredBlock<Block> LIGHT_BLUE_SLAB = registerColoredSlab("light_blue_slab", SpectrumBlocks.LIGHT_BLUE_PLANKS, InkColors.LIGHT_BLUE);
-	public static final BlockFamily LIGHT_BLUE_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.LIGHT_BLUE_PLANKS.get()).stairs(SpectrumBlocks.LIGHT_BLUE_STAIRS.get()).pressurePlate(SpectrumBlocks.LIGHT_BLUE_PRESSURE_PLATE.get()).fence(SpectrumBlocks.LIGHT_BLUE_FENCE.get()).fenceGate(SpectrumBlocks.LIGHT_BLUE_FENCE_GATE.get()).button(SpectrumBlocks.LIGHT_BLUE_BUTTON.get()).slab(SpectrumBlocks.LIGHT_BLUE_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> LIGHT_GRAY_PLANKS = registerColoredPlanks("light_gray_planks", InkColors.LIGHT_GRAY);
 	public static final DeferredBlock<Block> LIGHT_GRAY_STAIRS = registerColoredStairs("light_gray_stairs", SpectrumBlocks.LIGHT_GRAY_PLANKS, InkColors.LIGHT_GRAY);
@@ -1045,7 +1008,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> LIGHT_GRAY_FENCE_GATE = registerColoredFenceGate("light_gray_fence_gate", SpectrumBlocks.LIGHT_GRAY_PLANKS, InkColors.LIGHT_GRAY);
 	public static final DeferredBlock<Block> LIGHT_GRAY_BUTTON = registerColoredButton("light_gray_button", SpectrumBlocks.LIGHT_GRAY_PLANKS, InkColors.LIGHT_GRAY);
 	public static final DeferredBlock<Block> LIGHT_GRAY_SLAB = registerColoredSlab("light_gray_slab", SpectrumBlocks.LIGHT_GRAY_PLANKS, InkColors.LIGHT_GRAY);
-	public static final BlockFamily LIGHT_GRAY_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.LIGHT_GRAY_PLANKS.get()).stairs(SpectrumBlocks.LIGHT_GRAY_STAIRS.get()).pressurePlate(SpectrumBlocks.LIGHT_GRAY_PRESSURE_PLATE.get()).fence(SpectrumBlocks.LIGHT_GRAY_FENCE.get()).fenceGate(SpectrumBlocks.LIGHT_GRAY_FENCE_GATE.get()).button(SpectrumBlocks.LIGHT_GRAY_BUTTON.get()).slab(SpectrumBlocks.LIGHT_GRAY_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> LIME_PLANKS = registerColoredPlanks("lime_planks", InkColors.LIME);
 	public static final DeferredBlock<Block> LIME_STAIRS = registerColoredStairs("lime_stairs", SpectrumBlocks.LIME_PLANKS, InkColors.LIME);
@@ -1054,7 +1016,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> LIME_FENCE_GATE = registerColoredFenceGate("lime_fence_gate", SpectrumBlocks.LIME_PLANKS, InkColors.LIME);
 	public static final DeferredBlock<Block> LIME_BUTTON = registerColoredButton("lime_button", SpectrumBlocks.LIME_PLANKS, InkColors.LIME);
 	public static final DeferredBlock<Block> LIME_SLAB = registerColoredSlab("lime_slab", SpectrumBlocks.LIME_PLANKS, InkColors.LIME);
-	public static final BlockFamily LIME_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.LIME_PLANKS.get()).stairs(SpectrumBlocks.LIME_STAIRS.get()).pressurePlate(SpectrumBlocks.LIME_PRESSURE_PLATE.get()).fence(SpectrumBlocks.LIME_FENCE.get()).fenceGate(SpectrumBlocks.LIME_FENCE_GATE.get()).button(SpectrumBlocks.LIME_BUTTON.get()).slab(SpectrumBlocks.LIME_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> MAGENTA_PLANKS = registerColoredPlanks("magenta_planks", InkColors.MAGENTA);
 	public static final DeferredBlock<Block> MAGENTA_STAIRS = registerColoredStairs("magenta_stairs", SpectrumBlocks.MAGENTA_PLANKS, InkColors.MAGENTA);
@@ -1063,7 +1024,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> MAGENTA_FENCE_GATE = registerColoredFenceGate("magenta_fence_gate", SpectrumBlocks.MAGENTA_PLANKS, InkColors.MAGENTA);
 	public static final DeferredBlock<Block> MAGENTA_BUTTON = registerColoredButton("magenta_button", SpectrumBlocks.MAGENTA_PLANKS, InkColors.MAGENTA);
 	public static final DeferredBlock<Block> MAGENTA_SLAB = registerColoredSlab("magenta_slab", SpectrumBlocks.MAGENTA_PLANKS, InkColors.MAGENTA);
-	public static final BlockFamily MAGENTA_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.MAGENTA_PLANKS.get()).stairs(SpectrumBlocks.MAGENTA_STAIRS.get()).pressurePlate(SpectrumBlocks.MAGENTA_PRESSURE_PLATE.get()).fence(SpectrumBlocks.MAGENTA_FENCE.get()).fenceGate(SpectrumBlocks.MAGENTA_FENCE_GATE.get()).button(SpectrumBlocks.MAGENTA_BUTTON.get()).slab(SpectrumBlocks.MAGENTA_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> ORANGE_PLANKS = registerColoredPlanks("orange_planks", InkColors.ORANGE);
 	public static final DeferredBlock<Block> ORANGE_STAIRS = registerColoredStairs("orange_stairs", SpectrumBlocks.ORANGE_PLANKS, InkColors.ORANGE);
@@ -1072,7 +1032,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> ORANGE_FENCE_GATE = registerColoredFenceGate("orange_fence_gate", SpectrumBlocks.ORANGE_PLANKS, InkColors.ORANGE);
 	public static final DeferredBlock<Block> ORANGE_BUTTON = registerColoredButton("orange_button", SpectrumBlocks.ORANGE_PLANKS, InkColors.ORANGE);
 	public static final DeferredBlock<Block> ORANGE_SLAB = registerColoredSlab("orange_slab", SpectrumBlocks.ORANGE_PLANKS, InkColors.ORANGE);
-	public static final BlockFamily ORANGE_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.ORANGE_PLANKS.get()).stairs(SpectrumBlocks.ORANGE_STAIRS.get()).pressurePlate(SpectrumBlocks.ORANGE_PRESSURE_PLATE.get()).fence(SpectrumBlocks.ORANGE_FENCE.get()).fenceGate(SpectrumBlocks.ORANGE_FENCE_GATE.get()).button(SpectrumBlocks.ORANGE_BUTTON.get()).slab(SpectrumBlocks.ORANGE_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> PINK_PLANKS = registerColoredPlanks("pink_planks", InkColors.PINK);
 	public static final DeferredBlock<Block> PINK_STAIRS = registerColoredStairs("pink_stairs", SpectrumBlocks.PINK_PLANKS, InkColors.PINK);
@@ -1081,7 +1040,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> PINK_FENCE_GATE = registerColoredFenceGate("pink_fence_gate", SpectrumBlocks.PINK_PLANKS, InkColors.PINK);
 	public static final DeferredBlock<Block> PINK_BUTTON = registerColoredButton("pink_button", SpectrumBlocks.PINK_PLANKS, InkColors.PINK);
 	public static final DeferredBlock<Block> PINK_SLAB = registerColoredSlab("pink_slab", SpectrumBlocks.PINK_PLANKS, InkColors.PINK);
-	public static final BlockFamily PINK_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.PINK_PLANKS.get()).stairs(SpectrumBlocks.PINK_STAIRS.get()).pressurePlate(SpectrumBlocks.PINK_PRESSURE_PLATE.get()).fence(SpectrumBlocks.PINK_FENCE.get()).fenceGate(SpectrumBlocks.PINK_FENCE_GATE.get()).button(SpectrumBlocks.PINK_BUTTON.get()).slab(SpectrumBlocks.PINK_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> PURPLE_PLANKS = registerColoredPlanks("purple_planks", InkColors.PURPLE);
 	public static final DeferredBlock<Block> PURPLE_STAIRS = registerColoredStairs("purple_stairs", SpectrumBlocks.PURPLE_PLANKS, InkColors.PURPLE);
@@ -1090,7 +1048,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> PURPLE_FENCE_GATE = registerColoredFenceGate("purple_fence_gate", SpectrumBlocks.PURPLE_PLANKS, InkColors.PURPLE);
 	public static final DeferredBlock<Block> PURPLE_BUTTON = registerColoredButton("purple_button", SpectrumBlocks.PURPLE_PLANKS, InkColors.PURPLE);
 	public static final DeferredBlock<Block> PURPLE_SLAB = registerColoredSlab("purple_slab", SpectrumBlocks.PURPLE_PLANKS, InkColors.PURPLE);
-	public static final BlockFamily PURPLE_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.PURPLE_PLANKS.get()).stairs(SpectrumBlocks.PURPLE_STAIRS.get()).pressurePlate(SpectrumBlocks.PURPLE_PRESSURE_PLATE.get()).fence(SpectrumBlocks.PURPLE_FENCE.get()).fenceGate(SpectrumBlocks.PURPLE_FENCE_GATE.get()).button(SpectrumBlocks.PURPLE_BUTTON.get()).slab(SpectrumBlocks.PURPLE_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> RED_PLANKS = registerColoredPlanks("red_planks", InkColors.RED);
 	public static final DeferredBlock<Block> RED_STAIRS = registerColoredStairs("red_stairs", SpectrumBlocks.RED_PLANKS, InkColors.RED);
@@ -1099,7 +1056,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> RED_FENCE_GATE = registerColoredFenceGate("red_fence_gate", SpectrumBlocks.RED_PLANKS, InkColors.RED);
 	public static final DeferredBlock<Block> RED_BUTTON = registerColoredButton("red_button", SpectrumBlocks.RED_PLANKS, InkColors.RED);
 	public static final DeferredBlock<Block> RED_SLAB = registerColoredSlab("red_slab", SpectrumBlocks.RED_PLANKS, InkColors.RED);
-	public static final BlockFamily RED_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.RED_PLANKS.get()).stairs(SpectrumBlocks.RED_STAIRS.get()).pressurePlate(SpectrumBlocks.RED_PRESSURE_PLATE.get()).fence(SpectrumBlocks.RED_FENCE.get()).fenceGate(SpectrumBlocks.RED_FENCE_GATE.get()).button(SpectrumBlocks.RED_BUTTON.get()).slab(SpectrumBlocks.RED_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> WHITE_PLANKS = registerColoredPlanks("white_planks", InkColors.WHITE);
 	public static final DeferredBlock<Block> WHITE_STAIRS = registerColoredStairs("white_stairs", SpectrumBlocks.WHITE_PLANKS, InkColors.WHITE);
@@ -1108,7 +1064,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> WHITE_FENCE_GATE = registerColoredFenceGate("white_fence_gate", SpectrumBlocks.WHITE_PLANKS, InkColors.WHITE);
 	public static final DeferredBlock<Block> WHITE_BUTTON = registerColoredButton("white_button", SpectrumBlocks.WHITE_PLANKS, InkColors.WHITE);
 	public static final DeferredBlock<Block> WHITE_SLAB = registerColoredSlab("white_slab", SpectrumBlocks.WHITE_PLANKS, InkColors.WHITE);
-	public static final BlockFamily WHITE_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.WHITE_PLANKS.get()).stairs(SpectrumBlocks.WHITE_STAIRS.get()).pressurePlate(SpectrumBlocks.WHITE_PRESSURE_PLATE.get()).fence(SpectrumBlocks.WHITE_FENCE.get()).fenceGate(SpectrumBlocks.WHITE_FENCE_GATE.get()).button(SpectrumBlocks.WHITE_BUTTON.get()).slab(SpectrumBlocks.WHITE_SLAB.get()).getFamily());
 
 	public static final DeferredBlock<Block> YELLOW_PLANKS = registerColoredPlanks("yellow_planks", InkColors.YELLOW);
 	public static final DeferredBlock<Block> YELLOW_STAIRS = registerColoredStairs("yellow_stairs", SpectrumBlocks.YELLOW_PLANKS, InkColors.YELLOW);
@@ -1117,7 +1072,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> YELLOW_FENCE_GATE = registerColoredFenceGate("yellow_fence_gate", SpectrumBlocks.YELLOW_PLANKS, InkColors.YELLOW);
 	public static final DeferredBlock<Block> YELLOW_BUTTON = registerColoredButton("yellow_button", SpectrumBlocks.YELLOW_PLANKS, InkColors.YELLOW);
 	public static final DeferredBlock<Block> YELLOW_SLAB = registerColoredSlab("yellow_slab", SpectrumBlocks.YELLOW_PLANKS, InkColors.YELLOW);
-	public static final BlockFamily YELLOW_COLORED_PLANKS_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.YELLOW_PLANKS.get()).stairs(SpectrumBlocks.YELLOW_STAIRS.get()).pressurePlate(SpectrumBlocks.YELLOW_PRESSURE_PLATE.get()).fence(SpectrumBlocks.YELLOW_FENCE.get()).fenceGate(SpectrumBlocks.YELLOW_FENCE_GATE.get()).button(SpectrumBlocks.YELLOW_BUTTON.get()).slab(SpectrumBlocks.YELLOW_SLAB.get()).getFamily());
 
 	//DD FLORA
 	public static Properties overgrownBlackslag(MapColor color, SoundType soundGroup) {
@@ -1216,7 +1170,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> SLATE_NOXWOOD_TRAPDOOR = register(cutout(blockWithItem("slate_noxwood_trapdoor", () -> new TrapDoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.COLOR_GRAY)), InkColors.LIME)));
 	public static final DeferredBlock<Block> SLATE_NOXWOOD_BUTTON = register(blockWithItem("slate_noxwood_button", () -> new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, SpectrumBlocks.NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.COLOR_GRAY).pushReaction(PushReaction.DESTROY)), InkColors.LIME));
 	public static final DeferredBlock<Block> SLATE_NOXWOOD_PRESSURE_PLATE = register(blockWithItem("slate_noxwood_pressure_plate", () -> new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.COLOR_GRAY)), InkColors.LIME));
-	public static final BlockFamily SLATE_NOXWOOD_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.SLATE_NOXWOOD_PLANKS.get()).stairs(SpectrumBlocks.SLATE_NOXWOOD_STAIRS.get()).slab(SpectrumBlocks.SLATE_NOXWOOD_SLAB.get()).fence(SpectrumBlocks.SLATE_NOXWOOD_FENCE.get()).fenceGate(SpectrumBlocks.SLATE_NOXWOOD_FENCE_GATE.get()).door(SpectrumBlocks.SLATE_NOXWOOD_DOOR.get()).trapdoor(SpectrumBlocks.SLATE_NOXWOOD_TRAPDOOR.get()).button(SpectrumBlocks.SLATE_NOXWOOD_BUTTON.get()).pressurePlate(SpectrumBlocks.SLATE_NOXWOOD_PRESSURE_PLATE.get()).getFamily());
 
 	public static final DeferredBlock<Block> STRIPPED_EBONY_NOXCAP_STEM = register(axisRotated(blockWithItem("stripped_ebony_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME), TexturedModel.COLUMN_ALT));
 	public static final DeferredBlock<Block> STRIPPED_EBONY_NOXCAP_HYPHAE = register(axisRotated(blockWithItem("stripped_ebony_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME), SpectrumTexturedModels.cubeColumn(b -> SpectrumBlocks.STRIPPED_EBONY_NOXCAP_STEM.get(), "", b -> SpectrumBlocks.STRIPPED_EBONY_NOXCAP_STEM.get(), "")));
@@ -1240,7 +1193,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> EBONY_NOXWOOD_TRAPDOOR = register(cutout(blockWithItem("ebony_noxwood_trapdoor", () -> new TrapDoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME)));
 	public static final DeferredBlock<Block> EBONY_NOXWOOD_BUTTON = register(blockWithItem("ebony_noxwood_button", () -> new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, SpectrumBlocks.NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.TERRACOTTA_BLACK).pushReaction(PushReaction.DESTROY)), InkColors.LIME));
 	public static final DeferredBlock<Block> EBONY_NOXWOOD_PRESSURE_PLATE = register(blockWithItem("ebony_noxwood_pressure_plate", () -> new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.TERRACOTTA_BLACK)), InkColors.LIME));
-	public static final BlockFamily EBONY_NOXWOOD_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.EBONY_NOXWOOD_PLANKS.get()).stairs(SpectrumBlocks.EBONY_NOXWOOD_STAIRS.get()).slab(SpectrumBlocks.EBONY_NOXWOOD_SLAB.get()).fence(SpectrumBlocks.EBONY_NOXWOOD_FENCE.get()).fenceGate(SpectrumBlocks.EBONY_NOXWOOD_FENCE_GATE.get()).door(SpectrumBlocks.EBONY_NOXWOOD_DOOR.get()).trapdoor(SpectrumBlocks.EBONY_NOXWOOD_TRAPDOOR.get()).button(SpectrumBlocks.EBONY_NOXWOOD_BUTTON.get()).pressurePlate(SpectrumBlocks.EBONY_NOXWOOD_PRESSURE_PLATE.get()).getFamily());
 
 	public static final DeferredBlock<Block>  STRIPPED_IVORY_NOXCAP_STEM = register(axisRotated(blockWithItem("stripped_ivory_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME), TexturedModel.COLUMN_ALT));
 	public static final DeferredBlock<Block> STRIPPED_IVORY_NOXCAP_HYPHAE = register(axisRotated(blockWithItem("stripped_ivory_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME), SpectrumTexturedModels.cubeColumn(b -> SpectrumBlocks.STRIPPED_IVORY_NOXCAP_STEM.get(), "", b -> SpectrumBlocks.STRIPPED_IVORY_NOXCAP_STEM.get(), "")));
@@ -1264,7 +1216,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> IVORY_NOXWOOD_TRAPDOOR = register(cutout(blockWithItem("ivory_noxwood_trapdoor", () -> new TrapDoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.QUARTZ)), InkColors.LIME)));
 	public static final DeferredBlock<Block> IVORY_NOXWOOD_BUTTON = register(blockWithItem("ivory_noxwood_button", () -> new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, SpectrumBlocks.NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.QUARTZ).pushReaction(PushReaction.DESTROY)), InkColors.LIME));
 	public static final DeferredBlock<Block> IVORY_NOXWOOD_PRESSURE_PLATE = register(blockWithItem("ivory_noxwood_pressure_plate", () -> new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.QUARTZ)), InkColors.LIME));
-	public static final BlockFamily IVORY_NOXWOOD_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.IVORY_NOXWOOD_PLANKS.get()).stairs(SpectrumBlocks.IVORY_NOXWOOD_STAIRS.get()).slab(SpectrumBlocks.IVORY_NOXWOOD_SLAB.get()).fence(SpectrumBlocks.IVORY_NOXWOOD_FENCE.get()).fenceGate(SpectrumBlocks.IVORY_NOXWOOD_FENCE_GATE.get()).door(SpectrumBlocks.IVORY_NOXWOOD_DOOR.get()).trapdoor(SpectrumBlocks.IVORY_NOXWOOD_TRAPDOOR.get()).button(SpectrumBlocks.IVORY_NOXWOOD_BUTTON.get()).pressurePlate(SpectrumBlocks.IVORY_NOXWOOD_PRESSURE_PLATE.get()).getFamily());
 
 	public static final DeferredBlock<Block>  STRIPPED_CHESTNUT_NOXCAP_STEM = register(axisRotated(blockWithItem("stripped_chestnut_noxcap_stem", () -> new RotatedPillarBlock(noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME), TexturedModel.COLUMN_ALT));
 	public static final DeferredBlock<Block> STRIPPED_CHESTNUT_NOXCAP_HYPHAE = register(axisRotated(blockWithItem("stripped_chestnut_noxcap_hyphae", () -> new RotatedPillarBlock(noxcap(MapColor.QUARTZ)), InkColors.LIME), SpectrumTexturedModels.cubeColumn(b -> SpectrumBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM.get(), "", b -> SpectrumBlocks.STRIPPED_CHESTNUT_NOXCAP_STEM.get(), "")));
@@ -1288,7 +1239,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_TRAPDOOR = register(cutout(blockWithItem("chestnut_noxwood_trapdoor", () -> new TrapDoorBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME)));
 	public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_BUTTON = register(blockWithItem("chestnut_noxwood_button", () -> new ButtonBlock(SpectrumBlockSetTypes.NOXWOOD, SpectrumBlocks.NOXCAP_BUTTON_BLOCK_PRESS_TIME_TICKS, noxcap(MapColor.CRIMSON_NYLIUM).pushReaction(PushReaction.DESTROY)), InkColors.LIME));
 	public static final DeferredBlock<Block> CHESTNUT_NOXWOOD_PRESSURE_PLATE = register(blockWithItem("chestnut_noxwood_pressure_plate", () -> new PressurePlateBlock(SpectrumBlockSetTypes.NOXWOOD, noxcap(MapColor.CRIMSON_NYLIUM)), InkColors.LIME));
-	public static final BlockFamily CHESTNUT_NOXWOOD_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.CHESTNUT_NOXWOOD_PLANKS.get()).stairs(SpectrumBlocks.CHESTNUT_NOXWOOD_STAIRS.get()).slab(SpectrumBlocks.CHESTNUT_NOXWOOD_SLAB.get()).fence(SpectrumBlocks.CHESTNUT_NOXWOOD_FENCE.get()).fenceGate(SpectrumBlocks.CHESTNUT_NOXWOOD_FENCE_GATE.get()).door(SpectrumBlocks.CHESTNUT_NOXWOOD_DOOR.get()).trapdoor(SpectrumBlocks.CHESTNUT_NOXWOOD_TRAPDOOR.get()).button(SpectrumBlocks.CHESTNUT_NOXWOOD_BUTTON.get()).pressurePlate(SpectrumBlocks.CHESTNUT_NOXWOOD_PRESSURE_PLATE.get()).getFamily());
 
 	public static Properties galaWood(MapColor color) {
 		return settings(color, SoundType.CHERRY_WOOD, 30.0F).instrument(NoteBlockInstrument.BASS).ignitedByLava();
@@ -1321,7 +1271,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> WEEPING_GALA_TRAPDOOR = register(burnable(blockWithItem("weeping_gala_trapdoor", () -> new TrapDoorBlock(SpectrumBlocks.GALA_BLOCK_SET_TYPE, galaWood(MapColor.COLOR_BROWN)), InkColors.LIME), 600));
 	public static final DeferredBlock<Block> WEEPING_GALA_BUTTON = register(burnable(blockWithItem("weeping_gala_button", () -> woodenButton(SpectrumBlocks.GALA_BLOCK_SET_TYPE), InkColors.LIME), 200));
 	public static final DeferredBlock<Block> WEEPING_GALA_PRESSURE_PLATE = register(burnable(blockWithItem("weeping_gala_pressure_plate", () -> new PressurePlateBlock(SpectrumBlocks.GALA_BLOCK_SET_TYPE, galaWood(MapColor.COLOR_BROWN)), InkColors.LIME), 600));
-	public static final BlockFamily WEEPING_GALA_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.WEEPING_GALA_PLANKS.get()).stairs(SpectrumBlocks.WEEPING_GALA_STAIRS.get()).slab(SpectrumBlocks.WEEPING_GALA_SLAB.get()).fence(SpectrumBlocks.WEEPING_GALA_FENCE.get()).fenceGate(SpectrumBlocks.WEEPING_GALA_FENCE_GATE.get()).door(SpectrumBlocks.WEEPING_GALA_DOOR.get()).trapdoor(SpectrumBlocks.WEEPING_GALA_TRAPDOOR.get()).button(SpectrumBlocks.WEEPING_GALA_BUTTON.get()).pressurePlate(SpectrumBlocks.WEEPING_GALA_PRESSURE_PLATE.get()).getFamily());
 
 	public static final DeferredBlock<Block> WEEPING_GALA_PILLAR = register(axisRotated(blockWithItem("weeping_gala_pillar", () -> new RotatedPillarBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME), TexturedModel.COLUMN));
 	public static final DeferredBlock<Block> WEEPING_GALA_BARREL = register(barrellike(blockWithItem("weeping_gala_barrel", () -> new BarrelBlock(galaWood(MapColor.COLOR_BROWN)), InkColors.LIME), b -> b, "_bottom"));
@@ -1338,7 +1287,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> BASAL_MARBLE_STAIRS = register(blockWithItem("basal_marble_stairs", () -> new StairBlock(SpectrumBlocks.BASAL_MARBLE.get().defaultBlockState(), basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_SLAB = register(blockWithItem("basal_marble_slab", () -> new SlabBlock(basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_WALL = register(blockWithItem("basal_marble_wall", () -> new WallBlock(basalMarble()), InkColors.BROWN));
-	public static final BlockFamily BASAL_MARBLE_FAMILY = SpectrumModelHelper.registerBlockFamilyExceptBase(new BlockFamily.Builder(SpectrumBlocks.BASAL_MARBLE.get()).stairs(SpectrumBlocks.BASAL_MARBLE_STAIRS.get()).slab(SpectrumBlocks.BASAL_MARBLE_SLAB.get()).wall(SpectrumBlocks.BASAL_MARBLE_WALL.get()).getFamily(), TexturedModel.CUBE);
 
 	public static final DeferredBlock<Block> BASAL_MARBLE_PILLAR = register(axisRotated(blockWithItem("basal_marble_pillar", () -> new RotatedPillarBlock(basalMarble()), InkColors.BROWN), TexturedModel.COLUMN));
 
@@ -1346,19 +1294,16 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> POLISHED_BASAL_MARBLE_STAIRS = register(blockWithItem("polished_basal_marble_stairs", () -> new StairBlock(SpectrumBlocks.POLISHED_BASAL_MARBLE.get().defaultBlockState(), basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_BASAL_MARBLE_SLAB = register(blockWithItem("polished_basal_marble_slab", () -> new SlabBlock(basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> POLISHED_BASAL_MARBLE_WALL = register(blockWithItem("polished_basal_marble_wall", () -> new WallBlock(basalMarble()), InkColors.BROWN));
-	public static final BlockFamily POLISHED_BASAL_MARBLE_FAMILY = SpectrumModelHelper.registerBlockFamilyExceptBase(new BlockFamily.Builder(SpectrumBlocks.POLISHED_BASAL_MARBLE.get()).stairs(SpectrumBlocks.POLISHED_BASAL_MARBLE_STAIRS.get()).slab(SpectrumBlocks.POLISHED_BASAL_MARBLE_SLAB.get()).wall(SpectrumBlocks.POLISHED_BASAL_MARBLE_WALL.get()).getFamily(), TexturedModel.createDefault(b -> SpectrumTextureMaps.sideTopBottomWall(b, "_side", b, "_top", b, "_bottom", b, "_side"), ModelTemplates.CUBE_BOTTOM_TOP));
 
 	public static final DeferredBlock<Block> BASAL_MARBLE_TILES = register(blockWithItem("basal_marble_tiles", () -> new Block(basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_TILE_STAIRS = register(blockWithItem("basal_marble_tile_stairs", () -> new StairBlock(SpectrumBlocks.BASAL_MARBLE_TILES.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.BASAL_MARBLE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_TILE_SLAB = register(blockWithItem("basal_marble_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.BASAL_MARBLE_TILES.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_TILE_WALL = register(blockWithItem("basal_marble_tile_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.BASAL_MARBLE_TILES.get())), InkColors.BROWN));
-	public static final BlockFamily BASAL_MARBLE_TILE_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BASAL_MARBLE_TILES.get()).stairs(SpectrumBlocks.BASAL_MARBLE_TILE_STAIRS.get()).slab(SpectrumBlocks.BASAL_MARBLE_TILE_SLAB.get()).wall(SpectrumBlocks.BASAL_MARBLE_TILE_WALL.get()).getFamily());
 
 	public static final DeferredBlock<Block> BASAL_MARBLE_BRICKS = register(blockWithItem("basal_marble_bricks", () -> new Block(basalMarble()), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_BRICK_STAIRS = register(blockWithItem("basal_marble_brick_stairs", () -> new StairBlock(SpectrumBlocks.BASAL_MARBLE_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(SpectrumBlocks.BASAL_MARBLE_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_BRICK_SLAB = register(blockWithItem("basal_marble_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(SpectrumBlocks.BASAL_MARBLE_BRICKS.get())), InkColors.BROWN));
 	public static final DeferredBlock<Block> BASAL_MARBLE_BRICK_WALL = register(blockWithItem("basal_marble_brick_wall", () -> new WallBlock(Properties.ofFullCopy(SpectrumBlocks.BASAL_MARBLE_BRICKS.get())), InkColors.BROWN));
-	public static final BlockFamily BASAL_MARBLE_BRICK_FAMILY = SpectrumModelHelper.registerBlockFamily(new BlockFamily.Builder(SpectrumBlocks.BASAL_MARBLE_BRICKS.get()).stairs(SpectrumBlocks.BASAL_MARBLE_BRICK_STAIRS.get()).slab(SpectrumBlocks.BASAL_MARBLE_BRICK_SLAB.get()).wall(SpectrumBlocks.BASAL_MARBLE_BRICK_WALL.get()).getFamily());
 
 	public static final DeferredBlock<Block> LONGING_CHIMERA = register(cutout(defaultNorthHorizontalFacing(blockWithItem("longing_chimera", () -> new GrotesqueBlock(basalMarble().noOcclusion(), 12, 15, "block.pastel.longing_chimera.tooltip"), InkColors.BROWN), ModelLocationUtils::getModelLocation)));
 
@@ -2098,7 +2043,6 @@ public class SpectrumBlocks {
 	public static final DeferredBlock<Block> PRESERVATION_STAIRS = register(blockWithItem("preservation_stairs", () -> new StairBlock(SpectrumBlocks.PRESERVATION_STONE.get().defaultBlockState(), preservationBlock()), InkColors.BLUE));
 	public static final DeferredBlock<Block> PRESERVATION_SLAB = register(blockWithItem("preservation_slab", () -> new SlabBlock(preservationBlock()), InkColors.BLUE));
 	public static final DeferredBlock<Block> PRESERVATION_WALL = register(blockWithItem("preservation_wall", () -> new WallBlock(preservationBlock()), InkColors.BLUE));
-	public static final BlockFamily PRESERVATION_STONE_FAMILY = SpectrumModelHelper.registerBlockFamilyExceptBase(new BlockFamily.Builder(SpectrumBlocks.PRESERVATION_STONE.get()).stairs(SpectrumBlocks.PRESERVATION_STAIRS.get()).slab(SpectrumBlocks.PRESERVATION_SLAB.get()).wall(SpectrumBlocks.PRESERVATION_WALL.get()).getFamily(), TexturedModel.CUBE);
 
 	public static final DeferredBlock<Block> POWDER_CHISELED_PRESERVATION_STONE = register(singleton(blockWithItem("powder_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 2)), InkColors.BLUE), SpectrumTexturedModels.cubeColumn(b -> b, "", b -> SpectrumBlocks.PRESERVATION_STONE.get(), "_top_generic")));
 	public static final DeferredBlock<Block> DIKE_CHISELED_PRESERVATION_STONE = register(simple(blockWithItem("dike_chiseled_preservation_stone", () -> new Block(preservationBlock().lightLevel(state -> 6)), InkColors.BLUE)));
