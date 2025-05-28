@@ -16,8 +16,8 @@ public class SpectrumStoredData {
 		REGISTER.register("primfire", () -> PrimordialFireData.ATTACHMENT);
 		REGISTER.register("dike", () -> AzureDikeData.ATTACHMENT);
 		REGISTER.register("ribbon", () -> EverpromiseRibbonData.ATTACHMENT);
-		REGISTER.register("lastKill", () -> LastKillData.ATTACHMENT);
-		REGISTER.register("playerMisc", () -> MiscPlayerData.ATTACHMENT);
+		REGISTER.register("last_kill", () -> LastKillData.ATTACHMENT);
+		REGISTER.register("player_misc", () -> MiscPlayerData.ATTACHMENT);
 		REGISTER.register(bus);
 	}
 	

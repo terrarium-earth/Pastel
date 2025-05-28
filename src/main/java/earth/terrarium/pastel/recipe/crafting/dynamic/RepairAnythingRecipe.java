@@ -8,14 +8,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
 public class RepairAnythingRecipe extends CustomRecipe {
-	
-	private static final Ingredient MOONSTRUCK_NECTAR = Ingredient.of(SpectrumItems.MOONSTRUCK_NECTAR.get());
-	
+
 	public RepairAnythingRecipe() {
 		super(CraftingBookCategory.MISC);
 	}
@@ -28,7 +25,7 @@ public class RepairAnythingRecipe extends CustomRecipe {
 		for (int j = 0; j < input.size(); ++j) {
 			ItemStack itemStack = input.getItem(j);
 			if (!itemStack.isEmpty()) {
-				if (MOONSTRUCK_NECTAR.test(itemStack)) {
+				if (itemStack.getItem() == SpectrumItems.MOONSTRUCK_NECTAR.get()) {
 					if (nectarFound) {
 						return false;
 					}
@@ -50,7 +47,7 @@ public class RepairAnythingRecipe extends CustomRecipe {
 		ItemStack itemStack = ItemStack.EMPTY;
 		for (int j = 0; j < input.size(); ++j) {
 			itemStack = input.getItem(j);
-			if (!itemStack.isEmpty() && !MOONSTRUCK_NECTAR.test(itemStack)) {
+			if (!itemStack.isEmpty() && itemStack.getItem() != SpectrumItems.MOONSTRUCK_NECTAR.get()) {
 				break;
 			}
 		}

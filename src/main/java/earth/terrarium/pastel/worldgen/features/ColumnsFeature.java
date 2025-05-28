@@ -17,13 +17,14 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
+import java.util.function.Supplier;
 
 /**
  * a BasaltColumnsFeature with configurable block state
  */
 public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
 	
-	private static final ImmutableList<Block> CANNOT_REPLACE_BLOCKS = ImmutableList.of(Blocks.BEDROCK, Blocks.CHEST, Blocks.SPAWNER, SpectrumBlocks.DOWNSTONE.get());
+	private static final ImmutableList<Supplier<Block>> CANNOT_REPLACE_BLOCKS = ImmutableList.of(() -> Blocks.BEDROCK, () -> Blocks.CHEST, () -> Blocks.SPAWNER, SpectrumBlocks.DOWNSTONE);
 	private static final int BIG_MAX_OFFSET = 5;
 	private static final int BIG_COUNT = 50;
 	private static final int SMALL_MAX_OFFSET = 8;
@@ -113,7 +114,7 @@ public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
         } else {
             BlockState blockState = world.getBlockState(mutablePos.move(Direction.DOWN));
             mutablePos.move(Direction.UP);
-            return !blockState.isAir() && !blockState.is(SpectrumBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES) && !CANNOT_REPLACE_BLOCKS.contains(blockState.getBlock());
+            return !blockState.isAir() && !blockState.is(SpectrumBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES) && !CANNOT_REPLACE_BLOCKS.stream().anyMatch(block -> blockState.getBlock() == block);
         }
     }
 

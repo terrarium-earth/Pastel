@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.recipe;
 
+import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -13,23 +14,20 @@ import java.util.function.Supplier;
  * <p>Recipes that use this serializer do not transport any data over the network, besides their ID.
  */
 public class EmptyRecipeSerializer<T extends Recipe<?>> implements RecipeSerializer<T> {
-	private final MapCodec<T> codec;
-	private final StreamCodec<RegistryFriendlyByteBuf, T> packetCodec;
-	
+	private final Supplier<T> instance;
+
 	public EmptyRecipeSerializer(Supplier<T> factory) {
-		T instance = factory.get();
-		this.codec = MapCodec.unit(instance);
-		this.packetCodec = StreamCodec.unit(instance);
+		this.instance = Suppliers.memoize(factory::get);
 	}
 	
 	@Override
 	public MapCodec<T> codec() {
-		return codec;
+		return MapCodec.unit(instance);
 	}
 	
 	@Override
 	public StreamCodec<RegistryFriendlyByteBuf, T> streamCodec() {
-		return packetCodec;
+		return StreamCodec.unit(instance.get());
 	}
 	
 }

@@ -144,15 +144,15 @@ public class SpectrumCommon {
 		pastelBus.addListener(SpectrumBlockEntities::registerAdditionalTypes);
 
 		logInfo("Registering Capabilities...");
-		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerBlocks);
-		NeoForge.EVENT_BUS.addListener(SpectrumCapabilityHandlers::registerItems);
+		pastelBus.addListener(SpectrumCapabilityHandlers::registerBlocks);
+		pastelBus.addListener(SpectrumCapabilityHandlers::registerItems);
 
 		logInfo("Registering Data Attachments...");
 		SpectrumStoredData.register(pastelBus);
 
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");
-		SpectrumPastelUpgrades.register(pastelBus);
+		SpectrumPastelUpgrades.register();
 		logInfo("Registering Stamp Categories...");
 		SpectrumStampDataCategories.register(pastelBus);
 		
