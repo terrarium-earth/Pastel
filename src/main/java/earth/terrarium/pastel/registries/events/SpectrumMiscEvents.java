@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.registries.events;
 
-import de.dafuqs.arrowhead.api.CrossbowShootingCallback;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.api.item.PrioritizedBlockInteraction;
 import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
@@ -17,18 +16,12 @@ import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.tools.TuningStampItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.SpectrumDimensions;
+import earth.terrarium.pastel.registries.SpectrumEnchantments;
+import earth.terrarium.pastel.registries.SpectrumItems;
 import earth.terrarium.pastel.registries.client.SpectrumColorProviders;
-import net.minecraft.util.profiling.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.event.*;
-import net.neoforged.neoforge.event.entity.player.*;
-import net.neoforged.neoforge.event.level.*;
-import net.neoforged.neoforge.event.server.*;
-import net.neoforged.neoforge.event.tick.*;
-import net.neoforged.neoforge.fluids.*;
-import net.neoforged.neoforge.resource.*;
-import net.neoforged.neoforge.server.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -37,33 +30,36 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.resource.ContextAwareReloadListener;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
-import java.util.HashMap;
 import java.util.Optional;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public class SpectrumMiscEvents {
-
-	/**
-	 * Caches the luminance states from fluids as int
-	 * for blocks that react to the light level of fluids
-	 * like the fusion shrine lighting up with lava or liquid crystal
-	 */
-	public static final HashMap<Fluid, Integer> fluidLuminance = new HashMap<>();
 
 	public static void register() {
 		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::onReloadResources);
@@ -84,49 +80,53 @@ public class SpectrumMiscEvents {
 		// 	}
 		// 	return TriState.DEFAULT;
 		// });
-
-		// hiii arrowhead!!!! >w<
-		CrossbowShootingCallback.register((level, shooter, crossbow, projectile) -> {
-			int snipingLevel = SpectrumEnchantmentHelper.getLevel(level.registryAccess(), SpectrumEnchantments.SNIPING, crossbow);
-			if (snipingLevel > 0) {
-				projectile.setDeltaMovement(projectile.getDeltaMovement().scale(1.25F * snipingLevel)); // TODO: is this a sensible value?
-			}
-
-			if (crossbow.getItem() instanceof GlassCrestCrossbowItem && GlassCrestCrossbowItem.isOvercharged(crossbow)) {
-				Vec3 particleVelocity = projectile.getDeltaMovement().scale(0.05);
-
-				if (GlassCrestCrossbowItem.getOvercharge(crossbow) > 0.99F) {
-					PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
-							projectile.position(), ParticleTypes.SCRAPE, 5,
-							Vec3.ZERO, particleVelocity);
-					PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
-							projectile.position(), ParticleTypes.WAX_OFF, 5,
-							Vec3.ZERO, particleVelocity);
-					PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
-							projectile.position(), ParticleTypes.WAX_ON, 5,
-							Vec3.ZERO, particleVelocity);
-					PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
-							projectile.position(), ParticleTypes.GLOW, 5,
-							Vec3.ZERO, particleVelocity);
-
-					if (shooter instanceof ServerPlayer serverPlayerEntity) {
-						Support.grantAdvancementCriterion(serverPlayerEntity,
-								SpectrumCommon.locate("lategame/shoot_fully_overcharged_crossbow"),
-								"shot_fully_overcharged_crossbow");
-					}
-					if (projectile instanceof AbstractArrow persistentProjectileEntity) {
-						persistentProjectileEntity.setBaseDamage(persistentProjectileEntity.getBaseDamage() * 1.5);
-					}
-				}
-
-				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
-						projectile.position(), ParticleTypes.FIREWORK, 10,
-						Vec3.ZERO, particleVelocity);
-
-				GlassCrestCrossbowItem.unOvercharge(crossbow);
-			}
-		});
 	}
+
+	public static void onCrossbowShot(LivingEntity shooter, Projectile projectile) {
+		ItemStack crossbow = shooter.getItemInHand(shooter.getUsedItemHand());
+		Level level = shooter.level();
+
+		int snipingLevel = SpectrumEnchantmentHelper.getLevel(level.registryAccess(), SpectrumEnchantments.SNIPING, crossbow);
+		if (snipingLevel > 0) {
+			projectile.setDeltaMovement(projectile.getDeltaMovement().scale(1.25F * snipingLevel)); // TODO: is this a sensible value?
+		}
+
+        if (crossbow.getItem() != SpectrumItems.GLASS_CREST_CROSSBOW.get() || !GlassCrestCrossbowItem.isOvercharged(crossbow)) {
+            return;
+        }
+
+        Vec3 particleVelocity = projectile.getDeltaMovement().scale(0.05);
+
+        if (GlassCrestCrossbowItem.getOvercharge(crossbow) > 0.99F) {
+            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
+                    projectile.position(), ParticleTypes.SCRAPE, 5,
+                    Vec3.ZERO, particleVelocity);
+            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
+                    projectile.position(), ParticleTypes.WAX_OFF, 5,
+                    Vec3.ZERO, particleVelocity);
+            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
+                    projectile.position(), ParticleTypes.WAX_ON, 5,
+                    Vec3.ZERO, particleVelocity);
+            PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
+                    projectile.position(), ParticleTypes.GLOW, 5,
+                    Vec3.ZERO, particleVelocity);
+
+            if (shooter instanceof ServerPlayer serverPlayerEntity) {
+                Support.grantAdvancementCriterion(serverPlayerEntity,
+                        SpectrumCommon.locate("lategame/shoot_fully_overcharged_crossbow"),
+                        "shot_fully_overcharged_crossbow");
+            }
+            if (projectile instanceof AbstractArrow persistentProjectileEntity) {
+                persistentProjectileEntity.setBaseDamage(persistentProjectileEntity.getBaseDamage() * 1.5);
+            }
+        }
+
+        PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) level,
+                projectile.position(), ParticleTypes.FIREWORK, 10,
+                Vec3.ZERO, particleVelocity);
+
+        GlassCrestCrossbowItem.unOvercharge(crossbow);
+    }
 
 	private static void registerTillable(BlockEvent.BlockToolModificationEvent event) {
 		var context = event.getContext();

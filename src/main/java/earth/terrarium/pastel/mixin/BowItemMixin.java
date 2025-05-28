@@ -1,7 +1,6 @@
-package de.dafuqs.arrowhead.mixin;
+package earth.terrarium.pastel.mixin;
 
-import de.dafuqs.arrowhead.api.ArrowheadBow;
-import de.dafuqs.arrowhead.api.BowShootingCallback;
+import earth.terrarium.pastel.registries.SpectrumItems;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.BowItem;
@@ -18,13 +17,8 @@ public class BowItemMixin {
 	public void arrowhead$handleRangedWeapon(LivingEntity shooter, Projectile projectile, int index, float speed, float divergence, float yaw, LivingEntity target, CallbackInfo ci) {
 		ItemStack activeStack = shooter.getUseItem();
 
-		if (activeStack.getItem() instanceof ArrowheadBow arrowheadBow) {
-			projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot() + yaw, 0.0F, speed * arrowheadBow.getProjectileVelocityModifier(activeStack), divergence * arrowheadBow.getDivergenceMod(activeStack));
-		}
-
-		for(BowShootingCallback callback : BowShootingCallback.callbacks) {
-			callback.trigger(shooter.level(), shooter, activeStack, activeStack.getUseDuration(shooter) - shooter.getUseItemRemainingTicks(), projectile);
+		if (activeStack.getItem() == SpectrumItems.BEDROCK_BOW.get()) {
+			projectile.shootFromRotation(shooter, shooter.getXRot(), shooter.getYRot() + yaw, 0.0F, speed * 1.3F, divergence * 0.8F);
 		}
 	}
-	
 }

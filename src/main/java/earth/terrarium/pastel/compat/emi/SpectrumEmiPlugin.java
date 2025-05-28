@@ -1,5 +1,9 @@
 package earth.terrarium.pastel.compat.emi;
 
+import de.dafuqs.fractal.interfaces.ItemGroupParent;
+import de.dafuqs.fractal.interfaces.SubTabLocation;
+import de.dafuqs.fractal.mixin.client.CreativeInventoryScreenAccessor;
+import dev.emi.emi.api.widget.Bounds;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
@@ -49,8 +53,10 @@ import dev.emi.emi.api.stack.ItemEmiStack;
 import dev.emi.emi.config.FluidUnit;
 import dev.emi.emi.runtime.EmiReloadLog;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
@@ -71,8 +77,18 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 		registerRecipes(registry);
 		registerRecipeHandlers(registry);
 		registerDragDropHandlers(registry);
+
+		registry.addExclusionArea(CreativeModeInventoryScreen.class, (screen, out) -> {
+			if (screen != null) {
+				CreativeModeTab selected = CreativeInventoryScreenAccessor.fractal$getSelectedGroup();
+				if (selected instanceof ItemGroupParent parent && screen instanceof SubTabLocation stl && parent.fractal$getChildren() != null && !parent.fractal$getChildren().isEmpty()) {
+					out.accept(new Bounds(stl.fractal$getX(), stl.fractal$getY(), 72, stl.fractal$getH()));
+					out.accept(new Bounds(stl.fractal$getX2(), stl.fractal$getY(), 72, stl.fractal$getH2()));
+				}
+			}
+		});
 	}
-	
+
 	@SuppressWarnings("UnstableApiUsage")
 	public void registerDragDropHandlers(EmiRegistry registry) {
 		// Registering here since this is a trivial solution.

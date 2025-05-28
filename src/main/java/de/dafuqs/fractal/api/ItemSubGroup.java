@@ -109,12 +109,12 @@ public class ItemSubGroup extends CreativeModeTab {
 			this.displayName = displayName;
 		}
 		
-		public de.dafuqs.fractal.api.ItemSubGroup.Builder styled(ItemSubGroupStyle style) {
+		public ItemSubGroup.Builder styled(ItemSubGroupStyle style) {
 			this.style = style;
 			return this;
 		}
 		
-		public de.dafuqs.fractal.api.ItemSubGroup.Builder entries(DisplayItemsGenerator entryCollector) {
+		public ItemSubGroup.Builder entries(DisplayItemsGenerator entryCollector) {
 			this.entryCollector = entryCollector;
 			return this;
 		}

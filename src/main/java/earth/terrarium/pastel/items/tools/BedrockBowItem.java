@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.items.tools;
 
-import de.dafuqs.arrowhead.api.ArrowheadBow;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BowItem;
@@ -10,7 +9,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 
 import java.util.Map;
 
-public class BedrockBowItem extends BowItem implements Preenchanted, ArrowheadBow {
+public class BedrockBowItem extends BowItem implements Preenchanted {
 	
 	public BedrockBowItem(Properties settings) {
 		super(settings);
@@ -26,19 +25,4 @@ public class BedrockBowItem extends BowItem implements Preenchanted, ArrowheadBo
 		return true;
 	}
 
-	@Override
-	public float getZoom(ItemStack stack) {
-		return 30F;
-	}
-
-	@Override
-	public float getProjectileVelocityModifier(ItemStack stack) {
-		return 1.3F;
-	}
-
-	@Override
-	public float getDivergenceMod(ItemStack stack) {
-		return 0.8F;
-	}
-	
 }

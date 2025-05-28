@@ -1,7 +1,8 @@
-package de.dafuqs.arrowhead.mixin;
+package earth.terrarium.pastel.mixin;
 
 import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
 import de.dafuqs.arrowhead.api.CrossbowShootingCallback;
+import earth.terrarium.pastel.registries.events.SpectrumMiscEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.CrossbowItem;
@@ -36,10 +37,7 @@ public class CrossbowItemMixin {
 	
 	@Inject(method = "shootProjectile", at = @At(value = "TAIL"))
 	public void arrowhead$crossbowCallbacks(LivingEntity shooter, Projectile projectile, int index, float speed, float divergence, float yaw, LivingEntity target, CallbackInfo ci) {
-		ItemStack activeStack = shooter.getItemInHand(shooter.getUsedItemHand());
-		for (CrossbowShootingCallback callback : CrossbowShootingCallback.callbacks) {
-			callback.trigger(shooter.level(), shooter, activeStack, projectile);
-		}
+		SpectrumMiscEvents.onCrossbowShot(shooter, projectile);
 	}
 	
 }

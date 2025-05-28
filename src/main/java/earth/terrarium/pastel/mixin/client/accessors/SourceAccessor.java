@@ -1,4 +1,4 @@
-package de.dafuqs.reverb.mixin;
+package earth.terrarium.pastel.mixin.client.accessors;
 
 import com.mojang.blaze3d.audio.Channel;
 import org.spongepowered.asm.mixin.Mixin;

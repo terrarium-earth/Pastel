@@ -1,41 +1,26 @@
-package de.dafuqs.arrowhead.mixin.client;
+package earth.terrarium.pastel.mixin.client;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import de.dafuqs.arrowhead.api.ArrowheadBow;
 import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.client.player.AbstractClientPlayer;
+import earth.terrarium.pastel.registries.SpectrumItems;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @OnlyIn(Dist.CLIENT)
 @Mixin(ItemInHandRenderer.class)
 public abstract class HeldItemRendererMixin {
-	
-	@Shadow protected abstract void applyItemArmTransform(PoseStack matrices, HumanoidArm arm, float equipProgress);
-	
-	@Shadow protected abstract void applyItemArmAttackTransform(PoseStack matrices, HumanoidArm arm, float swingProgress);
-	
-	@Shadow public abstract void renderItem(LivingEntity entity, ItemStack stack, ItemDisplayContext renderMode, boolean leftHanded, PoseStack matrices, MultiBufferSource vertexConsumers, int light);
-	
+
 	@Shadow
 	private static boolean isChargedCrossbow(ItemStack stack) {
 		return false;
@@ -52,7 +37,7 @@ public abstract class HeldItemRendererMixin {
 	private static void arrowhead$getHandRenderType(LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir, ItemStack itemStack, ItemStack itemStack2) {
 		Item item1 = itemStack.getItem();
 		Item item2 = itemStack2.getItem();
-		boolean bl = item1 instanceof ArrowheadBow || item2 instanceof ArrowheadBow;
+		boolean bl = item1 == SpectrumItems.BEDROCK_BOW.get() || item2 == SpectrumItems.BEDROCK_BOW.get();
 		boolean bl2 = item1 instanceof ArrowheadCrossbow || item2 instanceof ArrowheadCrossbow;
 		if (!bl && !bl2) {
 			// vanilla behavior
@@ -69,7 +54,7 @@ public abstract class HeldItemRendererMixin {
 	private static void arrowhead$getUsingItemHandRenderType(LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir, ItemStack activeStack, InteractionHand activeHand) {
 		ItemStack itemStack = player.getUseItem();
 		InteractionHand hand = player.getUsedItemHand();
-		if (itemStack.getItem() instanceof ArrowheadBow || itemStack.getItem() instanceof ArrowheadCrossbow) {
+		if (itemStack.getItem() == SpectrumItems.BEDROCK_BOW.get() || itemStack.getItem() instanceof ArrowheadCrossbow) {
 			cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.onlyForHand(hand));
 		}
 	}

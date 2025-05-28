@@ -102,7 +102,7 @@ public class SpectrumCommon {
 
 	public SpectrumCommon(IEventBus pastelBus, ModContainer container) {
 		Revelationary.onInitialize(pastelBus);
-		Reverb.onInitialize(pastelBus);
+		Reverb.onInitialize();
 
 		logInfo("Starting Common Startup");
 		
