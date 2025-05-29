@@ -71,6 +71,9 @@ cloche {
         contributor("Lily")
         contributor("HoneyHive (Illustrations)")
         contributor("Electro_593")
+        contributor("800020h")
+        contributor("Quarx_")
+        contributor("Athebyne")
         contributor("Noaaaaaaaaan")
     }
 
