@@ -62,6 +62,7 @@ cloche {
         }
 
         author("Azzyypaaras", "azzy@terrarium.earth")
+        author("Dafuqs")
 
         contributor("Salad Cat (OST)")
         contributor("MsRandom", "ashley@terrarium.earth")
