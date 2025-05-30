@@ -30,11 +30,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.component.CustomData;
+import net.neoforged.fml.event.lifecycle.*;
 
 // Vanilla models see: ModelPredicateProviderRegistry
 public class SpectrumModelPredicateProviders {
 	
-	public static void registerClient() {
+	public static void registerClient(FMLClientSetupEvent event) {
 		registerBowPredicates(SpectrumItems.BEDROCK_BOW.get());
 		registerCrossbowPredicates(SpectrumItems.BEDROCK_CROSSBOW.get());
 		registerSpectrumFishingRodItemPredicates(SpectrumItems.LAGOON_ROD.get());

@@ -70,7 +70,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		pastelBus.register(SpectrumScreenHandlerTypes.class);
 
 		logInfo("Setting up ItemPredicates...");
-		SpectrumModelPredicateProviders.registerClient();
+		pastelBus.addListener(SpectrumModelPredicateProviders::registerClient);
 
 		logInfo("Setting up Block Entity Renderers...");
 		SpectrumBlockEntities.registerClient();
