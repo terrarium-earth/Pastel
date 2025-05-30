@@ -231,8 +231,8 @@ public class SpectrumCommon {
 		SpectrumPositionSources.register(pastelBus);
 		
 		logInfo("Registering Dispenser, Resonance & Present Unwrap Behaviors...");
-		SpectrumDispenserBehaviors.register();
-		SpectrumPresentUnpackBehaviors.register();
+		// SpectrumDispenserBehaviors.register(); TODO these two also need to be initialized later
+		// SpectrumPresentUnpackBehaviors.register();
 		SpectrumResonanceProcessorTypes.register(pastelBus);
 		
 		logInfo("Registering Resource Conditions...");
@@ -244,7 +244,7 @@ public class SpectrumCommon {
 		SpectrumEntityEvents.register();
 		SpectrumEquipmentEvents.register();
 		logInfo("Registering Tree Decorator Types...");
-		SpectrumTreeDecoratorTypes.register();
+		SpectrumTreeDecoratorTypes.register(pastelBus);
 		
 		PastelDataMaps.register();
 		

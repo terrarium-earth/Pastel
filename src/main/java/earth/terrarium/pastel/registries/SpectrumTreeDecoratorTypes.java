@@ -2,20 +2,26 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.worldgen.tree_decorators.FrondsDecorator;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
+
+import java.util.function.*;
 
 public class SpectrumTreeDecoratorTypes {
+
+	private static final DeferredRegister<TreeDecoratorType<?>> REGISTER = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, SpectrumCommon.MOD_ID);
+
+	public static final Holder<TreeDecoratorType<?>> FRONDS = register("fronds", () -> new TreeDecoratorType<>(FrondsDecorator.CODEC));
 	
-	public static final TreeDecoratorType<?> FRONDS = register("fronds", new TreeDecoratorType<>(FrondsDecorator.CODEC));
-	
-	public static void register() {
-	
+	public static void register(IEventBus bus) {
+		REGISTER.register(bus);
 	}
-	
-	private static TreeDecoratorType<?> register(String id, TreeDecoratorType<?> treeDecoratorType) {
-		return Registry.register(BuiltInRegistries.TREE_DECORATOR_TYPE, SpectrumCommon.locate(id), treeDecoratorType);
+
+	private static Holder<TreeDecoratorType<?>> register(String id, Supplier<TreeDecoratorType<?>> treeDecoratorType) {
+		return REGISTER.register(id, treeDecoratorType);
 	}
 	
 }
