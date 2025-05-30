@@ -203,15 +203,15 @@ public class SpectrumCommon {
 		SpectrumItemProjectileBehaviors.register();
 		
 		SpectrumEntityColorProcessors.register();
-		SpectrumItemProviders.register();
+		SpectrumItemProviders.register(pastelBus);
 		
 		logInfo("Registering Commands...");
 		NeoForge.EVENT_BUS.addListener(SpectrumCommands::register);
 		
 		logInfo("Registering Networking Packets...");
-		NeoForge.EVENT_BUS.addListener(SpectrumC2SPackets::register);
-
-		NeoForge.EVENT_BUS.addListener(RegisterPayloadHandlersEvent.class, (event) -> {
+		pastelBus.addListener(SpectrumC2SPackets::register);
+		
+		pastelBus.addListener(RegisterPayloadHandlersEvent.class, (event) -> {
 			PayloadRegistrar registrar = event.registrar("1");
 
 			RevelationaryNetworking.register(registrar);

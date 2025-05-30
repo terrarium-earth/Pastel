@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.helpers;
 
 import earth.terrarium.pastel.api.interaction.ItemProvider;
-import earth.terrarium.pastel.api.interaction.ItemProviderRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -65,7 +64,7 @@ public class BuildingHelper {
 				for (int i = 0; i < playerInventory.getContainerSize(); i++) {
 					ItemStack currentStack = playerInventory.getItem(i);
 					
-					ItemProvider itemProvider = ItemProviderRegistry.getProvider(currentStack);
+					ItemProvider itemProvider = currentStack.getCapability(ItemProvider.CAPABILITY);
 					if (itemProvider != null) {
 						similarCount += itemProvider.getItemCount(player, currentStack, similarBlockItem);
 					}

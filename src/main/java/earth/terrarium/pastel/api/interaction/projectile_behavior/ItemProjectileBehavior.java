@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-// Todo: Convert to Capability
+// Todo: Convert to Registry
 public interface ItemProjectileBehavior {
 	Map<ResourceLocation, ItemProjectileBehavior> CUSTOM_BEHAVIORS = new HashMap<>();
 	Codec<ItemProjectileBehavior> CODEC = ResourceLocation.CODEC.xmap(CUSTOM_BEHAVIORS::get, behavior -> {

@@ -7,7 +7,6 @@ import java.util.*;
 
 public class ItemProjectileBehaviorRegistry {
 	public static final Codec<ProjectileBehaviorType<?>> TYPE_CODEC = ResourceLocation.CODEC.comapFlatMap(ItemProjectileBehaviorRegistry::decode, ProjectileBehaviorType::id);
-	
 	public static final Codec<ItemProjectileBehavior> CODEC = TYPE_CODEC.dispatch(ItemProjectileBehavior::type, ProjectileBehaviorType::codec);
 	
 	private static final Map<ResourceLocation, ProjectileBehaviorType<?>> BEHAVIOR_TYPES = new HashMap<>();

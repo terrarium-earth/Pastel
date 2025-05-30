@@ -4,7 +4,6 @@ import de.dafuqs.fractal.api.ModifyItemSubGroupEntriesEvent;
 import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
-import earth.terrarium.pastel.api.interaction.ItemProviderRegistry;
 import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
 import earth.terrarium.pastel.registries.SpectrumItems;
 import net.neoforged.api.distmarker.Dist;
@@ -14,6 +13,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.fml.*;
+import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.registries.*;
@@ -34,8 +35,10 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.blackLotus, InkColors.BLACK);
 		ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.blackerLotus, InkColors.BLACK);
 		ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.terrasteel, InkColors.LIME);
-
-		ItemProviderRegistry.register(BotaniaItems.blackHoleTalisman, new ItemProvider() {
+	}
+	
+	private static void onRegisterCaps(RegisterCapabilitiesEvent event) {
+		event.registerItem(ItemProvider.CAPABILITY, (ignored, ignored2) -> new ItemProvider() {
 			@Override
 			public int getItemCount(Player player, ItemStack stack, Item requestedItem) {
 				if (requestedItem instanceof BlockItem blockItem) {
@@ -46,7 +49,7 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 				}
 				return 0;
 			}
-
+			
 			@Override
 			public int provideItems(Player player, ItemStack stack, Item requestedItem, int amount) {
 				if (requestedItem instanceof BlockItem blockItem) {
@@ -60,7 +63,7 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 				}
 				return 0;
 			}
-		});
+		}, BotaniaItems.blackHoleTalisman);
 	}
 
 	@Override
@@ -69,6 +72,7 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		// registering it late, since Botania might not have been initialized yet
 		NeoForge.EVENT_BUS.addListener(BotaniaCompat::onServerStarted);
 		NeoForge.EVENT_BUS.addListener(BotaniaCompat::addEntries);
+		ModLoadingContext.get().getActiveContainer().getEventBus().addListener(BotaniaCompat::onRegisterCaps);
 	}
 
 	private static void addEntries(ModifyItemSubGroupEntriesEvent event) {

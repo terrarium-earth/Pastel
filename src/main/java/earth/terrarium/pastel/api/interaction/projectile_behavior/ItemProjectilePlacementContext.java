@@ -7,7 +7,7 @@ import net.minecraft.world.item.context.*;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.*;
 
-class ItemProjectilePlacementContext extends BlockPlaceContext {
+public class ItemProjectilePlacementContext extends BlockPlaceContext {
 	ItemProjectileEntity itemProjectileEntity;
 	
 	public ItemProjectilePlacementContext(Level world, ItemProjectileEntity itemProjectileEntity, BlockHitResult blockHitResult) {

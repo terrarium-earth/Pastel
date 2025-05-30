@@ -6,7 +6,6 @@ import com.mojang.datafixers.util.*;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
-import earth.terrarium.pastel.api.interaction.ItemProviderRegistry;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
@@ -333,7 +332,7 @@ public class SpectrumClientEventListeners {
 						itemCountInInventory = playerInventory.countItem(exchangeBlockItem);
 						for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
 							var currentStack = playerInventory.getItem(i);
-							ItemProvider itemProvider = ItemProviderRegistry.getProvider(currentStack);
+							ItemProvider itemProvider = currentStack.getCapability(ItemProvider.CAPABILITY);
 							if (itemProvider != null) {
 								itemCountInInventory += itemProvider.getItemCount(player, currentStack, exchangeBlockItem);
 							}

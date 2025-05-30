@@ -10,15 +10,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.*;
 
+// Todo: Convert to capability
 public class EntityColorProcessorRegistry {
 	
-	private static final Map<EntityType<?>, TriFunction<Entity, Optional<DyeColor>, Player, Boolean>> PROCESSOR = new HashMap<>();
+	private static final Map<Supplier<EntityType<?>>, TriFunction<Entity, Optional<DyeColor>, Player, Boolean>> PROCESSOR = new HashMap<>();
 	
 	@SuppressWarnings("unchecked")
-	public static <E extends Entity> void register(EntityType<E> entityType, EntityColorProcessor<E> processor) {
+	public static <E extends Entity> void register(Supplier<EntityType<E>> entityType, EntityColorProcessor<E> processor) {
 		TriFunction<Entity, Optional<DyeColor>, Player, Boolean> ttt = (entity, dyeColor, player) -> processor.colorEntity((E) entity, dyeColor, player);
-		PROCESSOR.put(entityType, ttt);
+		PROCESSOR.put(entityType::get, ttt);
 	}
 	
 	public static boolean colorEntity(Entity entity, Optional<DyeColor> dyeColor, @Nullable Player player) {

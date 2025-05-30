@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.helpers;
 
 import earth.terrarium.pastel.api.interaction.ItemProvider;
-import earth.terrarium.pastel.api.interaction.ItemProviderRegistry;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
@@ -66,7 +65,7 @@ public class InventoryHelper {
 		for (int i = 0; i < playerInventory.getContainerSize(); i++) {
 			ItemStack currentStack = playerInventory.getItem(i);
 			
-			ItemProvider itemProvider = ItemProviderRegistry.getProvider(currentStack);
+			ItemProvider itemProvider = currentStack.getCapability(ItemProvider.CAPABILITY);
 			if (itemProvider == null) {
 				if (ItemStack.isSameItem(currentStack, stackToRemove)) {
 					matchingStacks.add(currentStack);
@@ -90,7 +89,7 @@ public class InventoryHelper {
 		// decrement the inventory
 		int amountToRemove = stackToRemove.getCount();
 		for (ItemStack matchingStack : matchingStacks) {
-			ItemProvider itemProvider = ItemProviderRegistry.getProvider(matchingStack);
+			ItemProvider itemProvider = matchingStack.getCapability(ItemProvider.CAPABILITY);
 			if (itemProvider != null) {
 				amountToRemove -= itemProvider.provideItems(playerEntity, matchingStack, stackToRemove.getItem(), amountToRemove);
 			} else {
