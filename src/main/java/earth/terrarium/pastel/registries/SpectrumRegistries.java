@@ -19,6 +19,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.registries.*;
+import org.lwjgl.opengl.*;
 
 import java.util.Optional;
 
@@ -40,8 +41,18 @@ public class SpectrumRegistries {
 	
 	public static final Registry<MapCodec<? extends ResonanceProcessor>> RESONANCE_PROCESSOR_TYPE = register(SpectrumRegistryKeys.RESONANCE_PROCESSOR_TYPE, false);
 
-	public static void register(IEventBus bus) {
-		bus.addListener(SpectrumRegistries::registerDyn);
+	public static void register(NewRegistryEvent event) {
+		event.register(WORLD_EFFECT);
+		event.register(GEMSTONE_COLOR);
+		event.register(GLASS_ARROW_VARIANT);
+		event.register(INK_COLOR);
+		event.register(KINDLING_VARIANT);
+		event.register(LIZARD_FRILL_VARIANT);
+		event.register(LIZARD_HORN_VARIANT);
+		event.register(PASTEL_UPGRADE);
+		event.register(RECIPE_SCALING);
+		event.register(STAMP_DATA_CATEGORY);
+		event.register(RESONANCE_PROCESSOR_TYPE);
 	}
 
 	public static void registerDyn(DataPackRegistryEvent.NewRegistry event) {

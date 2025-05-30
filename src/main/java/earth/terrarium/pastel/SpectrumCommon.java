@@ -104,7 +104,8 @@ public class SpectrumCommon {
 		logInfo("Starting Common Startup");
 		
 		// Register internals
-		SpectrumRegistries.register(pastelBus);
+		pastelBus.addListener(SpectrumRegistries::register);
+		pastelBus.addListener(SpectrumRegistries::registerDyn);
 		InkColors.register(pastelBus);
 		InkColorMixes.register();
 		SpectrumEntityAttributes.register(pastelBus);
