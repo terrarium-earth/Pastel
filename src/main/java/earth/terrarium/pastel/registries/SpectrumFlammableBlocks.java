@@ -26,7 +26,7 @@ public class SpectrumFlammableBlocks {
 	public static void register() {
 
 		// ignite odds, burn odds
-		add(SpectrumBlocks.CLOVER, 60, 100);
+		add(SpectrumBlocks.CLOVER.get(), 60, 100);
 
 		for (InkColor color : InkColors.all()) {
 			add(ColoredLogBlock.byColor(color), 5, 5);
