@@ -228,7 +228,7 @@ public class SpectrumCommon {
 
 		logInfo("Registering Game Events...");
 		SpectrumGameEvents.register(pastelBus);
-		SpectrumPositionSources.register();
+		SpectrumPositionSources.register(pastelBus);
 		
 		logInfo("Registering Dispenser, Resonance & Present Unwrap Behaviors...");
 		SpectrumDispenserBehaviors.register();

@@ -1,21 +1,28 @@
 package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.SpectrumCommon;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.*;
 import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.level.gameevent.PositionSourceType;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
+
+import java.util.function.*;
 
 public class SpectrumPositionSources {
+
+	private static final DeferredRegister<PositionSourceType<?>> REGISTER = DeferredRegister.create(Registries.POSITION_SOURCE_TYPE, SpectrumCommon.MOD_ID);
 	
-	public static PositionSourceType<ExactPositionSource> EXACT;
+	public static Holder<PositionSourceType<ExactPositionSource>> EXACT = register("exact", ExactPositionSource.Type::new);
 	
-	static <S extends PositionSourceType<T>, T extends PositionSource> S register(String id, S positionSourceType) {
-		return Registry.register(BuiltInRegistries.POSITION_SOURCE_TYPE, SpectrumCommon.locate(id), positionSourceType);
+	public static void register(IEventBus bus) {
+		REGISTER.register(bus);
 	}
-	
-	public static void register() {
-		EXACT = register("exact", new ExactPositionSource.Type());
+
+	@SuppressWarnings("unchecked")
+    static <S extends PositionSourceType<T>, T extends PositionSource> Holder<S> register(String id, Supplier<S> positionSourceType) {
+		return (Holder<S>) REGISTER.register(id, positionSourceType);
 	}
 	
 }
