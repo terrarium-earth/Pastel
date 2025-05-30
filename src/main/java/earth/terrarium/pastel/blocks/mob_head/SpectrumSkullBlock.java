@@ -6,7 +6,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.helpers.Support;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraft.core.BlockPos;
+import net.minecraft.core.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
@@ -33,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.*;
 
 public class SpectrumSkullBlock extends SkullBlock {
 
@@ -42,7 +43,7 @@ public class SpectrumSkullBlock extends SkullBlock {
 	).apply(i, SpectrumSkullBlock::new));
 	
 	public static final BiMap<SpectrumSkullType, Block> MOB_HEADS = EnumHashBiMap.create(SpectrumSkullType.class);
-	private static final Map<EntityType<?>, SpectrumSkullType> ENTITY_TYPE_TO_SKULL_TYPE = new Object2ObjectOpenHashMap<>();
+	private static final Map<Supplier<EntityType<?>>, SpectrumSkullType> ENTITY_TYPE_TO_SKULL_TYPE = new Object2ObjectOpenHashMap<>();
 	private final SpectrumSkullType skullType;
 	
 	@Nullable
@@ -68,7 +69,7 @@ public class SpectrumSkullBlock extends SkullBlock {
 	public static Optional<EntityType<?>> getEntityTypeOfSkullStack(ItemStack itemStack) {
 		Item item = itemStack.getItem();
 		if (item instanceof SpectrumSkullBlockItem spectrumSkullBlockItem) {
-			return Optional.of(spectrumSkullBlockItem.type.getEntityType());
+			return Optional.of(spectrumSkullBlockItem.type.getEntityType().get());
 		}
 		if (Items.CREEPER_HEAD == item) {
 			return Optional.of(EntityType.CREEPER);
