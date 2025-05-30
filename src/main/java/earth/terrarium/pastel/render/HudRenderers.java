@@ -31,7 +31,7 @@ public class HudRenderers {
 		event.registerAbove(VanillaGuiLayers.PLAYER_HEALTH, PLAYER_DIKE, new AzureDikeLayer());
 	}
 
-	public static void registerInjects(RenderGuiLayerEvent event) {
+	public static void registerInjects(RenderGuiLayerEvent.Post event) {
 		if (event.getName().equals(VanillaGuiLayers.CROSSHAIR))
 			renderSelectedStaffStack(event.getGuiGraphics());
 	}

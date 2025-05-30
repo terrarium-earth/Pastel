@@ -89,7 +89,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		NeoForge.EVENT_BUS.addListener(HudRenderers::registerInjects);
 
 		logInfo("Registering Item Tooltips...");
-		NeoForge.EVENT_BUS.addListener(SpectrumTooltipComponents::registerTooltipComponents);
+		pastelBus.addListener(SpectrumTooltipComponents::registerTooltipComponents);
 
 		logInfo("Registering Dimension Effects...");
 		SpectrumDimensions.registerClient();
