@@ -224,7 +224,7 @@ public class SpectrumCommon {
 		NeoForge.EVENT_BUS.addListener(Pastel::clearServerInstance);
 		
 		logInfo("Adding to Fabric's Registries...");
-		SpectrumFlammableBlocks.register();
+		//SpectrumFlammableBlocks.register(); TODO find an event that makes this not shit your pants
 
 		logInfo("Registering Game Events...");
 		SpectrumGameEvents.register(pastelBus);
