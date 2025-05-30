@@ -27,11 +27,12 @@ import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.neoforged.fml.event.lifecycle.*;
 
 @OnlyIn(Dist.CLIENT)
 public class SpectrumEntityRenderers {
 	
-	public static void registerClient() {
+	public static void registerClient(FMLClientSetupEvent event) {
 		register(SpectrumEntityTypes.FLOAT_BLOCK.get(), FloatBlockEntityRenderer::new);
 		register(SpectrumEntityTypes.SEAT.get(), SeatEntityRenderer::new);
 		register(SpectrumEntityTypes.SHOOTING_STAR.get(), ShootingStarEntityRenderer::new);

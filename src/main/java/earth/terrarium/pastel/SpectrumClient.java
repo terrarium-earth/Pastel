@@ -73,9 +73,9 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		pastelBus.addListener(SpectrumModelPredicateProviders::registerClient);
 
 		logInfo("Setting up Block Entity Renderers...");
-		SpectrumBlockEntities.registerClient();
+		pastelBus.addListener(SpectrumBlockEntities::registerClient);
 		logInfo("Setting up Entity Renderers...");
-		SpectrumEntityRenderers.registerClient();
+		pastelBus.addListener(SpectrumEntityRenderers::registerClient);
 		NeoForge.EVENT_BUS.addListener(BedrockCapeRenderer::register);
 
 		//logInfo("Registering Server to Client Package Receivers...");

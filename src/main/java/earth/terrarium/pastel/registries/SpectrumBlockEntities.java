@@ -76,6 +76,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.*;
+import net.neoforged.fml.event.lifecycle.*;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.registries.*;
 
@@ -219,7 +220,7 @@ public class SpectrumBlockEntities {
 		event.modify(BlockEntityType.BARREL, SpectrumBlocks.WEEPING_GALA_BARREL.get());
 	}
 	
-	public static void registerClient() {
+	public static void registerClient(FMLClientSetupEvent event) {
 		BlockEntityRenderers.register(SpectrumBlockEntities.PEDESTAL.get(), PedestalBlockEntityRenderer::new);
 		BlockEntityRenderers.register(SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get(), BottomlessBundleBlockEntityRenderer::new);
 		BlockEntityRenderers.register(SpectrumBlockEntities.HEARTBOUND_CHEST.get(), HeartboundChestBlockEntityRenderer::new);
