@@ -114,7 +114,7 @@ public class SpectrumClientEventListeners {
 		);
 	}
 
-	private static void onEntityTick(EntityTickEvent event) {
+	private static void onEntityTick(EntityTickEvent.Post event) {
 		var entity = event.getEntity();
 
 		if (entity instanceof LivingEntity living) {
@@ -178,7 +178,7 @@ public class SpectrumClientEventListeners {
 		}
 	}
 
-	private static void onLogout(ClientPlayerNetworkEvent event) {
+	private static void onLogout(ClientPlayerNetworkEvent.LoggingOut event) {
 		Pastel.clearClientInstance();
 	}
 
