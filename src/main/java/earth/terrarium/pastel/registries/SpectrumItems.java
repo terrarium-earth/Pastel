@@ -794,7 +794,7 @@ public class SpectrumItems {
     }
 
     public static PairedFoodComponent teaSconeBonus(FoodProperties foodComponent) {
-        return new PairedFoodComponent(SpectrumItems.SCONE.get(), true, foodComponent);
+        return new PairedFoodComponent(SpectrumItems.SCONE, true, foodComponent);
     }
 
 }
