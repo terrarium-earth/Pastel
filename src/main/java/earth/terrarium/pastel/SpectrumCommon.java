@@ -246,6 +246,8 @@ public class SpectrumCommon {
 		logInfo("Registering Tree Decorator Types...");
 		SpectrumTreeDecoratorTypes.register();
 		
+		PastelDataMaps.register();
+		
 		// Builtin Resource Packs
 		logInfo("Registering Builtin Resource Packs...");
 

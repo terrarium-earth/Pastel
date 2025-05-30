@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.api.interaction.ItemProjectileBehavior;
+import earth.terrarium.pastel.api.interaction.projectile_behavior.ItemProjectileBehavior;
 import earth.terrarium.pastel.entity.SpectrumEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
