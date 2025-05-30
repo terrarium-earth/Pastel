@@ -57,7 +57,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		pastelBus.addListener(SpectrumModelLayers::register);
 
 		logInfo("Setting up Block Rendering...");
-		SpectrumBlocks.registerClient();
+		pastelBus.addListener(SpectrumBlocks::registerClient);
 
 		logInfo("Setting up client side Mod Compat...");
 		SpectrumIntegrationPacks.registerClient();
@@ -67,7 +67,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		pastelBus.addListener(SpectrumFluids::clientSetup);
 
 		logInfo("Setting up GUIs...");
-		NeoForge.EVENT_BUS.register(SpectrumScreenHandlerTypes.class);
+		pastelBus.register(SpectrumScreenHandlerTypes.class);
 
 		logInfo("Setting up ItemPredicates...");
 		SpectrumModelPredicateProviders.registerClient();

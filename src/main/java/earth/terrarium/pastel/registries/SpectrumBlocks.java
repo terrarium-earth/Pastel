@@ -342,6 +342,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.*;
+import net.neoforged.fml.event.lifecycle.*;
 import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -2538,7 +2539,7 @@ public class SpectrumBlocks {
 		SpectrumBlocks.COMMON_REGISTRAR.register(bus);
 	}
 	
-	public static void registerClient() {
+	public static void registerClient(FMLClientSetupEvent event) {
 		SpectrumBlocks.CLIENT_REGISTRAR.flush();
 	}
 	
