@@ -11,6 +11,7 @@ import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;
 import earth.terrarium.pastel.compat.travelersbackpack.TravelersBackpackCompat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.*;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.*;
 
@@ -48,11 +49,11 @@ public class SpectrumIntegrationPacks {
 	public static final String EXCLUSIONS_LIB_ID = "exclusions_lib";
 
 	@SuppressWarnings("Convert2MethodRef")
-	public static void register() {
+	public static void register(IEventBus bus) {
 		registerIntegrationPack(MODONOMICON_ID, () -> new ModonomiconCompat());
 		
 		if (!ModList.get().isLoaded(EXCLUSIONS_LIB_ID)) {
-			ExclusionsLibCompat.registerNotPresent();
+			ExclusionsLibCompat.registerNotPresent(bus);
 		}
 
 		registerIntegrationPack(AE2_ID, () -> new AE2Compat());

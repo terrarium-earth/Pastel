@@ -148,6 +148,7 @@ public class SpectrumOmniAcceleratorProjectiles {
 			}
 		}, Items.TNT);
 		
+		/* TODO: Fix this
 		OmniAcceleratorProjectile.register(new OmniAcceleratorProjectile() {
             @Override
             public Entity createProjectile(ItemStack stack, LivingEntity shooter, Level world, ItemStack shotFrom) {
@@ -162,7 +163,8 @@ public class SpectrumOmniAcceleratorProjectiles {
             public SoundEvent getSoundEffect() {
                 return SpectrumSoundEvents.ENTITY_BLOCK_FLOODER_THROW;
             }
-        }, SpectrumItems.BLOCK_FLOODER.get());
+        }, SpectrumItems.BLOCK_FLOODER);
+		 */
 		
 		OmniAcceleratorProjectile.register(new OmniAcceleratorProjectile() {
 			@Override

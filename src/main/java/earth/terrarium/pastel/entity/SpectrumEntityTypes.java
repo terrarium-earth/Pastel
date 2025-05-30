@@ -86,7 +86,7 @@ public class SpectrumEntityTypes {
 	}
 	
 	public static void register(IEventBus pastelBus) {
-		NeoForge.EVENT_BUS.addListener(SpectrumEntityTypes::registerAttributes);
+		pastelBus.addListener(SpectrumEntityTypes::registerAttributes);
 
 		REGISTER.register(pastelBus);
 	}

@@ -179,7 +179,7 @@ public class SpectrumCommon {
 		SpectrumLootFunctionTypes.register(pastelBus);
 		
 		logInfo("Setting up server side Mod Compat...");
-		SpectrumIntegrationPacks.register();
+		SpectrumIntegrationPacks.register(pastelBus);
 		
 		// GUI
 		logInfo("Registering Screen Handler Types...");

@@ -9,6 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.registries.*;
 
 /**
  * Loaded when Exclusions Lib is *not* present
@@ -33,16 +35,15 @@ public class ExclusionsLibCompat {
 		}
 	}
 	
-	public static BlockPredicateType<AlwaysFalseBlockPredicate> OVERLAPS_STRUCTURE_DUMMY;
+	public static final DeferredRegister<BlockPredicateType<?>> REGISTRY = DeferredRegister.create(BuiltInRegistries.BLOCK_PREDICATE_TYPE, SpectrumIntegrationPacks.EXCLUSIONS_LIB_ID);
 	
-	public static void registerNotPresent() {
-		OVERLAPS_STRUCTURE_DUMMY = registerBlockPredicate(ResourceLocation.fromNamespaceAndPath(SpectrumIntegrationPacks.EXCLUSIONS_LIB_ID, "overlaps_structure"), AlwaysFalseBlockPredicate.CODEC);
+	public static void registerNotPresent(IEventBus bus) {
+		registerBlockPredicate("overlaps_structure", AlwaysFalseBlockPredicate.CODEC);
+		REGISTRY.register(bus);
 	}
 	
-	private static <P extends BlockPredicate> BlockPredicateType<P> registerBlockPredicate(ResourceLocation id, MapCodec<P> codec) {
-		return Registry.register(BuiltInRegistries.BLOCK_PREDICATE_TYPE, id, () -> {
-			return codec;
-		});
+	private static <P extends BlockPredicate> void registerBlockPredicate(String id, MapCodec<P> codec) {
+		REGISTRY.register(id, () -> ((BlockPredicateType<P>) () -> codec));
 	}
 	
 }

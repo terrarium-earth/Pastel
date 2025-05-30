@@ -1,15 +1,17 @@
 package earth.terrarium.pastel.api.interaction;
 
+import com.mojang.serialization.*;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.entity.entity.ItemProjectileEntity;
 import earth.terrarium.pastel.registries.SpectrumItemTags;
 import earth.terrarium.pastel.registries.SpectrumSoundEvents;
 import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.*;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.resources.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -33,36 +35,24 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.capabilities.*;
+import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+// Todo: Convert to Capability
 public interface ItemProjectileBehavior {
-	
-	List<Tuple<ItemPredicate, ItemProjectileBehavior>> BEHAVIORS = new ArrayList<>();
+	Map<ResourceLocation, ItemProjectileBehavior> CUSTOM_BEHAVIORS = new HashMap<>();
+	Codec<ItemProjectileBehavior> CODEC =
 	
 	ItemProjectileBehavior DEFAULT = new Default();
 	
-	static void register(ItemProjectileBehavior behavior, ItemPredicate predicate) {
-		BEHAVIORS.add(new Tuple<>(predicate, behavior));
-	}
-	
-	static void register(ItemProjectileBehavior behavior, Item... items) {
-		BEHAVIORS.add(new Tuple<>(ItemPredicate.Builder.item().of(items).build(), behavior));
-	}
-	
-	static void register(ItemProjectileBehavior behavior, TagKey<Item> tag) {
-		BEHAVIORS.add(new Tuple<>(ItemPredicate.Builder.item().of(tag).build(), behavior));
-	}
-	
 	static ItemProjectileBehavior get(ItemStack stack) {
-		for (Tuple<ItemPredicate, ItemProjectileBehavior> entry : BEHAVIORS) {
-			if (entry.getA().test(stack)) {
-				return entry.getB();
-			}
-		}
-		return DEFAULT;
+		
+		return capability == null ? DEFAULT : capability;
 	}
 	
 	/**

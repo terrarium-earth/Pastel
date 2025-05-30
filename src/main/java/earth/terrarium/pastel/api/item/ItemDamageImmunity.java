@@ -17,16 +17,19 @@ import java.util.Map;
 
 /**
  * Making Items immune to certain forms of damage
+ * TODO: convert to datamap
  */
 public class ItemDamageImmunity {
 
 	private static final Map<Item, List<TagKey<DamageType>>> damageSourceImmunities = new HashMap<>();
 	
 	public static void registerImmunity(ItemLike itemConvertible, TagKey<DamageType> damageTypeTag) {
+		/*
 		Item item = itemConvertible.asItem();
 		List<TagKey<DamageType>> current = damageSourceImmunities.getOrDefault(item, new ArrayList<>());
 		current.add(damageTypeTag);
 		damageSourceImmunities.put(item, current);
+		 */
 	}
 	
 	public static boolean isImmuneTo(ItemStack itemStack, DamageSource damageSource) {

@@ -36,6 +36,7 @@ public interface OmniAcceleratorProjectile {
 	}
 	
 	static void register(OmniAcceleratorProjectile behavior, ItemLike... items) {
+		// TODO: make this deferred holder friendly
 		PROJECTILES.add(new Tuple<>(ItemPredicate.Builder.item().of(items).build(), behavior));
 	}
 	
