@@ -116,8 +116,8 @@ cloche {
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
                 modImplementation(additionalEntityAttributes)
-                modImplementation(jgrapht)
-                modImplementation(jheaps)
+                implementation(jgrapht)
+                implementation(jheaps)
 
                 modCompileOnly(module(group = "mcp.mobius.waila", name = "wthit-api", version = "neo-12.4.1"))
 

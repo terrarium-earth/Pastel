@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.neoforged.neoforge.fluids.FluidType;
 
 public abstract class LiquidCrystalFluid extends SpectrumFluid {
 	
@@ -45,7 +46,12 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 	public Item getBucket() {
         return SpectrumItems.LIQUID_CRYSTAL_BUCKET.get();
 	}
-	
+
+	@Override
+	public FluidType getFluidType() {
+		return SpectrumFluids.LIQUID_CRYSTAL_TYPE.get();
+	}
+
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
 		return SpectrumBlocks.LIQUID_CRYSTAL.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));

@@ -250,7 +250,7 @@ public class MiscPlayerData {
                 Payload::new
         );
 
-        public static final Type<Payload> TYPE = AttachmentUtil.create("playerMisc");
+        public static final Type<Payload> TYPE = AttachmentUtil.create("player_misc");
 
         public static void execute(Payload payload, IPayloadContext context) {
             var player = context.player().level().getPlayerByUUID(payload.id);

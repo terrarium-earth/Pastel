@@ -33,6 +33,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.neoforged.neoforge.fluids.FluidType;
 
 public abstract class DragonrotFluid extends SpectrumFluid {
 
@@ -50,7 +51,12 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 	public Item getBucket() {
 		return SpectrumItems.DRAGONROT_BUCKET.get();
 	}
-	
+
+	@Override
+	public FluidType getFluidType() {
+		return SpectrumFluids.DRAGONROT_TYPE.get();
+	}
+
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
 		return SpectrumBlocks.DRAGONROT.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));

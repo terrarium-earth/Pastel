@@ -32,7 +32,7 @@ public class LastKillData {
 				ByteBufCodecs.VAR_LONG, Payload::killTime,
 				Payload::new);
 
-		public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("lastKill");
+		public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("last_kill");
 
 		@OnlyIn(Dist.CLIENT)
 		public static void execute(Payload payload, IPayloadContext context) {

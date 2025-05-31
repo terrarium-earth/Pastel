@@ -138,6 +138,7 @@
     "client.TranslucentBlockMixin",
     "client.accessors.ParticleManagerAccessor",
     "client.accessors.RenderLayerAccessor",
+    "client.accessors.SourceAccessor",
     "InGameHudMixin"
   ],
   "injectors": {

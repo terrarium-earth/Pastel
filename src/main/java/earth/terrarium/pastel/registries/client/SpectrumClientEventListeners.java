@@ -231,13 +231,11 @@ public class SpectrumClientEventListeners {
 	private static void onReloadClientResources(RegisterClientReloadListenersEvent event) {
 		event.registerReloadListener(ParticleSpawnerParticlesDataLoader.INSTANCE);
 
-		event.registerReloadListener(new ContextAwareReloadListener() {
+		event.registerReloadListener(new ResourceManagerReloadListener() {
 			@Override
-			public CompletableFuture<Void> reload(PreparationBarrier preparationBarrier, ResourceManager resourceManager, ProfilerFiller preparationsProfiler, ProfilerFiller reloadProfiler, Executor backgroundExecutor, Executor gameExecutor) {
-				return CompletableFuture.runAsync(() -> {
-					UnlockToastManager.clear();;
-					BiomeAttenuatingSoundInstance.clear();
-				});
+			public void onResourceManagerReload(ResourceManager resourceManager) {
+				UnlockToastManager.clear();;
+				BiomeAttenuatingSoundInstance.clear();
 			}
 
 			@Override

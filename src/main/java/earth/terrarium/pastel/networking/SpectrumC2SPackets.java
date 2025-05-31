@@ -12,7 +12,6 @@ import earth.terrarium.pastel.networking.c2s_payloads.RenameItemInBedrockAnvilPa
 import earth.terrarium.pastel.networking.c2s_payloads.SetShadowSlotPayload;
 import earth.terrarium.pastel.networking.c2s_payloads.WorkstaffToggleSelectedPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.network.event.*;
 import net.neoforged.neoforge.network.registration.*;
 
@@ -25,7 +24,6 @@ public class SpectrumC2SPackets {
 	public static void register(RegisterPayloadHandlersEvent event) {
 		PayloadRegistrar registrar = event.registrar("1");
 		
-		registrar.playToServer(AddLoreBedrockAnvilPayload.ID, AddLoreBedrockAnvilPayload.CODEC, AddLoreBedrockAnvilPayload.getPayloadHandler());
 		registrar.playToServer(AddLoreBedrockAnvilPayload.ID, AddLoreBedrockAnvilPayload.CODEC, AddLoreBedrockAnvilPayload.getPayloadHandler());
 		registrar.playToServer(BindEnderSpliceToPlayerPayload.ID, BindEnderSpliceToPlayerPayload.CODEC, BindEnderSpliceToPlayerPayload.getPayloadHandler());
 		registrar.playToServer(ChangeCompactingChestSettingsPayload.ID, ChangeCompactingChestSettingsPayload.CODEC, ChangeCompactingChestSettingsPayload.getPayloadHandler());

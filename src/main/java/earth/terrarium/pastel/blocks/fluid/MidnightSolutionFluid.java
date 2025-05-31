@@ -49,6 +49,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.fluids.FluidType;
 
 public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	
@@ -66,7 +67,12 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	public Item getBucket() {
 		return SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get();
 	}
-	
+
+	@Override
+	public FluidType getFluidType() {
+		return SpectrumFluids.MIDNIGHT_SOLUTION_TYPE.get();
+	}
+
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
 		return SpectrumBlocks.MIDNIGHT_SOLUTION.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
