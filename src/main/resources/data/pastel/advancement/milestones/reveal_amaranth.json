@@ -1,13 +1,13 @@
 {
   "criteria": {
     "solved_color_mixing_preservation_ruin": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:solve_color_mixing_preservation_ruin"
       }
     },
     "collected_amaranth": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_amaranth"
       }

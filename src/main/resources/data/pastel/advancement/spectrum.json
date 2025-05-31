@@ -18,19 +18,19 @@
   },
   "criteria": {
     "has_amethyst_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/amethyst"
       }
     },
     "has_citrine_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/citrine"
       }
     },
     "has_topaz_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/topaz"
       }
@@ -66,7 +66,7 @@
       }
     },
     "found_preservation_ruin": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:find_preservation_ruins"
       }

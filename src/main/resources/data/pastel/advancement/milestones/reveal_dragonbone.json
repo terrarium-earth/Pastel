@@ -1,13 +1,13 @@
 {
   "criteria": {
     "build_complex_pedestal_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
       }
     },
     "collected_dragonbone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:break_cracked_dragonbone"
       }

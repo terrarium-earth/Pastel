@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_potion_workshop": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/potion_workshop"
       }
     },
     "collected_jade_jelly": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_jade_jelly"
       }

@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_amalgam": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/items/incandescent_amalgam"
       }
     },
     "collected_banglum_chunk": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "mythicmetals:banglum_chunk"
       }

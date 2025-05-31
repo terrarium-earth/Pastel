@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_azure_dike_belt": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/azure_dike_belt"
       }
     },
     "unlocked_take_off_belt": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/take_off_belt"
       }

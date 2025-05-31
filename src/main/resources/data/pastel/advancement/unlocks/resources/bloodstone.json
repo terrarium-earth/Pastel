@@ -1,13 +1,13 @@
 {
   "criteria": {
     "plucked_resplendent_feather": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:pluck_resplendent_feather"
       }
     },
     "unlocked_crystallarieum": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/crystallarieum"
       }

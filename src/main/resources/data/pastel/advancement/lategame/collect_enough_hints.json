@@ -14,7 +14,7 @@
   "parent": "pastel:lategame/find_forgotten_city",
   "criteria": {
     "has_collected_enough_hints": {
-      "trigger": "revelationary:advancement_count",
+      "trigger": "pastel:advancement_count",
       "conditions": {
         "count": {
           "min": 5
@@ -32,7 +32,7 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/find_forgotten_city"
       }

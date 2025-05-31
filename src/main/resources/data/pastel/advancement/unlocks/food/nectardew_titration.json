@@ -1,19 +1,19 @@
 {
   "criteria": {
     "unlocked_titration_barrel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
       }
     },
     "confirmed_drinking_age": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:triggers/confirmed_drinking_age"
       }
     },
     "gotten_handbook": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_cookbooks/poisoners_handbook"
       }

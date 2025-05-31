@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_bedrock_dust": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/break_decayed_bedrock"
       }
     },
     "collected_stratine_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_stratine_gem"
       }

@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_amaranth_bushel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_amaranth_bushel"
       }
     },
     "unlocked_titration_barrel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
       }

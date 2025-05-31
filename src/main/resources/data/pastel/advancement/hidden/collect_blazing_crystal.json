@@ -1,7 +1,7 @@
 {
   "criteria": {
     "reached_midgame": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/spectrum_midgame"
       }

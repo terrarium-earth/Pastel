@@ -28,7 +28,7 @@
       ]
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/grow_malachite_in_crystallarieum"
       }

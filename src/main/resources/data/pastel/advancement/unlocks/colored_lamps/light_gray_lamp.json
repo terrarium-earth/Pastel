@@ -1,13 +1,13 @@
 {
   "criteria": {
     "has_shimmerstone_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_shimmerstone"
       }
     },
     "has_light_gray_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_pigment/light_gray"
       }

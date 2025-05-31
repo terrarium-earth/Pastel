@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_cinderhearth": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/cinderhearth"
       }
     },
     "collected_mermaids_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_mermaids_gem"
       }

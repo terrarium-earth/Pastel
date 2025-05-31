@@ -1,43 +1,43 @@
 {
   "criteria": {
     "calming": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:mod_integration/the_bumblezone/light_blue_calming"
       }
     },
     "life": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:mod_integration/the_bumblezone/lime_life"
       }
     },
     "knowing": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:mod_integration/the_bumblezone/purple_knowing"
       }
     },
     "raging": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:mod_integration/the_bumblezone/red_raging"
       }
     },
     "continuity": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:mod_integration/the_bumblezone/white_continuity"
       }
     },
     "radiance": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:mod_integration/the_bumblezone/yellow_radiance"
       }
     },
     "unlock_ink": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/place_color_picker"
       }

@@ -1,7 +1,7 @@
 {
   "criteria": {
     "todo": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:__wip"
       }

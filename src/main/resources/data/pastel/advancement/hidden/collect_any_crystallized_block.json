@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_blazing_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_blazing_crystal"
       }
     },
     "collected_frostbite_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_frostbite_crystal"
       }

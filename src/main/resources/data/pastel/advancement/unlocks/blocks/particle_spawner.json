@@ -1,19 +1,19 @@
 {
   "criteria": {
     "collected_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_pigment"
       }
     },
     "collected_star_fragment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_star_fragment"
       }
     },
     "collected_all_basic_pigments": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_all_basic_pigments"
       }

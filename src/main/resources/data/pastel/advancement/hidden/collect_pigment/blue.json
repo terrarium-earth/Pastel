@@ -1,7 +1,7 @@
 {
   "criteria": {
     "crafted_colored_sapling": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:craft_colored_sapling"
       }

@@ -1,25 +1,25 @@
 {
   "criteria": {
     "unlocked_titration_barrel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
       }
     },
     "collected_myceylon": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_myceylon"
       }
     },
     "collected_prickly_bayleaf": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_prickly_bayleaf"
       }
     },
     "confirmed_drinking_age": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:triggers/confirmed_drinking_age"
       }

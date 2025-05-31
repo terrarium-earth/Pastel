@@ -1,7 +1,7 @@
 {
   "criteria": {
     "crafted_potion_in_potion_brewery": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/brew_potion_in_potion_workshop"
       }

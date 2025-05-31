@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_shimmerstone_lights": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/shimmerstone_lights"
       }
     },
     "collected_blackslag": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_blackslag"
       }

@@ -1,7 +1,7 @@
 {
   "criteria": {
     "collected_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_pigment"
       }

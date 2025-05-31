@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_gemstone_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_moonstone"
       }
     },
     "collected_shimmerstone_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_shimmerstone"
       }

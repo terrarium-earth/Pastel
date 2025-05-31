@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_raw_bloodstone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_raw_bloodstone"
       }
     },
     "unlocked_knowledge_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/items/knowledge_gem"
       }

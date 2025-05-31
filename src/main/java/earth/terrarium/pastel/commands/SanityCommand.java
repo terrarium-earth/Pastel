@@ -356,7 +356,7 @@ public class SanityCommand {
 							gottenPreviousAdvancementIdentifier = advancementConditions.getAdvancementIdentifier();
 							break;
 						} else {
-							SpectrumCommon.logWarning("[SANITY: Advancement Gating] Advancement '" + advancementId + "' has a \"gotten_previous\" requirement, but its not of type revelationary:advancement_gotten");
+							SpectrumCommon.logWarning("[SANITY: Advancement Gating] Advancement '" + advancementId + "' has a \"gotten_previous\" requirement, but its not of type pastel:advancement_gotten");
 						}
 					}
 				}

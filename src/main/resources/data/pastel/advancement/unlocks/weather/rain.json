@@ -1,13 +1,13 @@
 {
   "criteria": {
     "built_fusion_shrine": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:build_fusion_shrine"
       }
     },
     "collected_mermaids_gem": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_mermaids_gem"
       }

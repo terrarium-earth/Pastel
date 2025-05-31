@@ -1,13 +1,13 @@
 {
   "criteria": {
     "eternal_slumber": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/status_effects/eternal_slumber"
       }
     },
     "fatal_slumber": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/status_effects/fatal_slumber"
       }

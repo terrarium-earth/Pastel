@@ -1,13 +1,13 @@
 {
   "criteria": {
     "built_enchanting_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/build_enchanting_structure"
       }
     },
     "collected_azurite": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_azurite"
       }

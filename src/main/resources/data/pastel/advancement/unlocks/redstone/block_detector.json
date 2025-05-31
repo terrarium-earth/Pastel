@@ -1,13 +1,13 @@
 {
   "criteria": {
     "placed_pedestal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:place_pedestal"
       }
     },
     "has_storm_stone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_storm_stone"
       }
