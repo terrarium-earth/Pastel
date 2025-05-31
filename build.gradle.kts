@@ -94,7 +94,6 @@ cloche {
 
             // TODO Remove these
             mixins.from(
-                "src/main/mixins/fractal.mixins.json",
                 "src/main/mixins/revelationary.mixins.json",
             )
 

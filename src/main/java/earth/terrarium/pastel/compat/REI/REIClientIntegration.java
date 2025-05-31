@@ -1,8 +1,5 @@
 package earth.terrarium.pastel.compat.REI;
 
-import de.dafuqs.fractal.interfaces.ItemGroupParent;
-import de.dafuqs.fractal.interfaces.SubTabLocation;
-import de.dafuqs.fractal.mixin.client.CreativeInventoryScreenAccessor;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
 import earth.terrarium.pastel.blocks.idols.FreezingIdolBlock;
@@ -248,20 +245,6 @@ public class REIClientIntegration implements REIClientPlugin {
 				new SimpleTransferHandler.IntRange(0, 9), new SimpleTransferHandler.IntRange(21, 57)));
 		registry.register(SimpleTransferHandlerExtension.create(PotionWorkshopScreenHandler.class, SpectrumPlugins.POTION_WORKSHOP_CRAFTING,
 				new SimpleTransferHandler.IntRange(0, 9), new SimpleTransferHandler.IntRange(21, 57)));
-	}
-
-	@Override
-	public void registerExclusionZones(ExclusionZones zones) {
-		zones.register(CreativeModeInventoryScreen.class, (screen) -> {
-			CreativeModeTab selected = CreativeInventoryScreenAccessor.fractal$getSelectedGroup();
-			if (selected instanceof ItemGroupParent parent && screen instanceof SubTabLocation stl && parent.fractal$getChildren() != null && !parent.fractal$getChildren().isEmpty()) {
-				return List.of(
-						new Rectangle(stl.fractal$getX(), stl.fractal$getY(), 72, stl.fractal$getH()),
-						new Rectangle(stl.fractal$getX2(), stl.fractal$getY(), 72, stl.fractal$getH2())
-				);
-			}
-			return List.of();
-		});
 	}
 
 	@SuppressWarnings("UnstableApiUsage")

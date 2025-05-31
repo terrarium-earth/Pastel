@@ -2,7 +2,6 @@ package earth.terrarium.pastel.compat.travelersbackpack;
 
 import com.tiviacz.travelersbackpack.api.fluids.EffectFluid;
 import com.tiviacz.travelersbackpack.fluids.EffectFluidRegistry;
-import de.dafuqs.fractal.api.*;
 import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
 import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
 import earth.terrarium.pastel.registries.SpectrumDamageTypes;

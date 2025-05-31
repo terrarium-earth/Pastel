@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.compat.botania;
 
-import de.dafuqs.fractal.api.ModifyItemSubGroupEntriesEvent;
 import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
@@ -71,14 +70,7 @@ public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 		
 		// registering it late, since Botania might not have been initialized yet
 		NeoForge.EVENT_BUS.addListener(BotaniaCompat::onServerStarted);
-		NeoForge.EVENT_BUS.addListener(BotaniaCompat::addEntries);
 		ModLoadingContext.get().getActiveContainer().getEventBus().addListener(BotaniaCompat::onRegisterCaps);
-	}
-
-	private static void addEntries(ModifyItemSubGroupEntriesEvent event) {
-		var entries = event.getEntries();
-		entries.accept(LEAST_BLACK_LOTUS);
-		entries.accept(BLACKEST_LOTUS);
 	}
 	
 	@OnlyIn(Dist.CLIENT)

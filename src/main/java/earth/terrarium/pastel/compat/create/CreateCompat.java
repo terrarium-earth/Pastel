@@ -1,7 +1,6 @@
 package earth.terrarium.pastel.compat.create;
 
 import com.simibubi.create.api.event.PipeCollisionEvent;
-import de.dafuqs.fractal.api.ModifyItemSubGroupEntriesEvent;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.crystallarieum.SpectrumClusterBlock;
 import earth.terrarium.pastel.blocks.fluid.SpectrumFluidBlock;
@@ -43,18 +42,8 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	
 	@Override
 	public void register() {
-		NeoForge.EVENT_BUS.addListener(CreateCompat::addEntries);
 		NeoForge.EVENT_BUS.addListener(CreateCompat::onPipeSpillCollision);
 		NeoForge.EVENT_BUS.addListener(CreateCompat::onPipeFlowCollision);
-	}
-
-	private static void addEntries(ModifyItemSubGroupEntriesEvent event) {
-		var entries = event.getEntries();
-		entries.accept(PURE_ZINC);
-		entries.accept(SMALL_ZINC_BUD);
-		entries.accept(LARGE_ZINC_BUD);
-		entries.accept(ZINC_CLUSTER);
-		entries.accept(PURE_ZINC_BLOCK);
 	}
 
 	private static void onPipeFlowCollision(PipeCollisionEvent.Flow event) {

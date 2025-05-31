@@ -1,8 +1,5 @@
 package earth.terrarium.pastel.compat.emi;
 
-import de.dafuqs.fractal.interfaces.ItemGroupParent;
-import de.dafuqs.fractal.interfaces.SubTabLocation;
-import de.dafuqs.fractal.mixin.client.CreativeInventoryScreenAccessor;
 import dev.emi.emi.api.widget.Bounds;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
@@ -77,16 +74,6 @@ public class SpectrumEmiPlugin implements EmiPlugin {
 		registerRecipes(registry);
 		registerRecipeHandlers(registry);
 		registerDragDropHandlers(registry);
-
-		registry.addExclusionArea(CreativeModeInventoryScreen.class, (screen, out) -> {
-			if (screen != null) {
-				CreativeModeTab selected = CreativeInventoryScreenAccessor.fractal$getSelectedGroup();
-				if (selected instanceof ItemGroupParent parent && screen instanceof SubTabLocation stl && parent.fractal$getChildren() != null && !parent.fractal$getChildren().isEmpty()) {
-					out.accept(new Bounds(stl.fractal$getX(), stl.fractal$getY(), 72, stl.fractal$getH()));
-					out.accept(new Bounds(stl.fractal$getX2(), stl.fractal$getY(), 72, stl.fractal$getH2()));
-				}
-			}
-		});
 	}
 
 	@SuppressWarnings("UnstableApiUsage")
