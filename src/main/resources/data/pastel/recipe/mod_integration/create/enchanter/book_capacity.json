@@ -42,7 +42,7 @@
   "required_advancement": "pastel:midgame/build_enchanting_structure",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "create"
     }
   ]

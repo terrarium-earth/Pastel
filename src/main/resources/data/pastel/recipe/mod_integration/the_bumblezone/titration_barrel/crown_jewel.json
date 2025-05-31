@@ -125,7 +125,7 @@
   "required_advancement": "pastel:triggers/confirmed_drinking_age",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "the_bumblezone"
     }
   ]

@@ -8,7 +8,7 @@
   "required_advancement": "pastel:hidden/collect_pigment/light_gray",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "botania"
     }
   ]

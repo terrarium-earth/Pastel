@@ -15,7 +15,7 @@
   "ink_cost": 4,
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "the_bumblezone"
     }
   ]

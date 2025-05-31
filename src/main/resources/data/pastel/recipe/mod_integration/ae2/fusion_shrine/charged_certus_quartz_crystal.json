@@ -20,7 +20,7 @@
   "advancement": "pastel:midgame/collect_storm_stone",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "ae2"
     }
   ]

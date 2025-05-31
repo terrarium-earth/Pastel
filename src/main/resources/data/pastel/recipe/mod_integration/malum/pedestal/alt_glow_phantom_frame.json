@@ -27,7 +27,7 @@
   "required_advancement": "pastel:unlocks/items/phantom_frames",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "malum"
     }
   ]

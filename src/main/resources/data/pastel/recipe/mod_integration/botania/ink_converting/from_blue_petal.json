@@ -10,7 +10,7 @@
   "required_advancement": "pastel:hidden/collect_pigment/blue",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "botania"
     }
   ]

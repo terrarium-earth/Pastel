@@ -42,7 +42,7 @@
   "required_advancement": "pastel:unlocks/enchantments/clovers_favor",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "malum"
     }
   ]

@@ -26,7 +26,7 @@
   "required_advancement": "pastel:unlocks/items/ender_splice",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "malum"
     }
   ]

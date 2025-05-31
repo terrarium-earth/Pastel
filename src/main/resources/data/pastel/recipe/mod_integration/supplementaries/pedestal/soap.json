@@ -23,7 +23,7 @@
   "required_advancement": "pastel:hidden/collect_ash",
   "neoforge:conditions": [
     {
-      "condition": "neoforge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "supplementaries"
     }
   ]
