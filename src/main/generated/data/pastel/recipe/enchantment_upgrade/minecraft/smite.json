@@ -1,7 +1,7 @@
 {
   "fabric:load_conditions": [
     {
-      "condition": "pastel:enchantments_exist",
+      "type": "pastel:enchantments_exist",
       "values": [
         "minecraft:smite"
       ]

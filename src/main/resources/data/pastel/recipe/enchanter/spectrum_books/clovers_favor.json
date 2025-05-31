@@ -42,7 +42,7 @@
   "required_advancement": "pastel:unlocks/enchantments/clovers_favor",
   "neoforge:conditions": [
     {
-      "condition": "pastel:enchantments_exist",
+      "type": "pastel:enchantments_exist",
       "values": [
         "pastel:clovers_favor"
       ]

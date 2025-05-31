@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.bus.api.IEventBus;
@@ -41,12 +41,7 @@ public class SpectrumResourceConditions {
 
 		@Override
 		public boolean test(IContext iContext) {
-			var access = ServerLifecycleHooks.getCurrentServer().registryAccess();
-
-			if (access.lookup(Registries.ENCHANTMENT).isEmpty())
-				return false;
-			HolderLookup.RegistryLookup<Enchantment> impl = access.lookup(Registries.ENCHANTMENT).get();
-			return enchantments.stream().allMatch(key -> impl.get(key).isPresent());
+			return true; // TODO fix
 		}
 	}
 	

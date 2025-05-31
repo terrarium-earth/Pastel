@@ -43,7 +43,7 @@
   "required_advancement": "pastel:unlocks/enchantments/vanilla_projectile",
   "neoforge:conditions": [
     {
-      "condition": "pastel:enchantments_exist",
+      "type": "pastel:enchantments_exist",
       "values": [
         "minecraft:flame"
       ]

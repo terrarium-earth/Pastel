@@ -12,7 +12,7 @@
   "cookingtime": 100,
   "neoforge:conditions": [
     {
-      "condition": "pastel:integration_pack_active",
+      "type": "pastel:integration_pack_active",
       "integration_pack": "ae2"
     }
   ]

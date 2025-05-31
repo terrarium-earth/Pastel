@@ -42,7 +42,7 @@
   "required_advancement": "pastel:unlocks/enchantments/exuberance",
   "neoforge:conditions": [
     {
-      "condition": "pastel:enchantments_exist",
+      "type": "pastel:enchantments_exist",
       "values": [
         "pastel:exuberance"
       ]

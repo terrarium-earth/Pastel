@@ -43,7 +43,7 @@
   "required_advancement": "pastel:unlocks/enchantments/vanilla_luck",
   "neoforge:conditions": [
     {
-      "condition": "pastel:enchantments_exist",
+      "type": "pastel:enchantments_exist",
       "values": [
         "minecraft:looting"
       ]

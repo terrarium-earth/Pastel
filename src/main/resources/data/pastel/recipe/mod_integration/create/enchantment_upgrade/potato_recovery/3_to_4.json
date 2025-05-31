@@ -5,7 +5,7 @@
       "modid": "create"
     },
     {
-      "condition": "pastel:enchantments_exist",
+      "type": "pastel:enchantments_exist",
       "values": [
         "create:potato_recovery"
       ]

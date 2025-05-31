@@ -19,7 +19,7 @@
     {
       "type": "neoforge:not",
       "value": {
-        "condition": "pastel:tags_populated",
+        "type": "pastel:tags_populated",
         "registry": "minecraft:fluid",
         "values": [
           "minecraft:water"

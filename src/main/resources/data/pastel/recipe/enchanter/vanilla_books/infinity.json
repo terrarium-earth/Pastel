@@ -43,7 +43,7 @@
   "required_advancement": "pastel:unlocks/enchantments/vanilla_projectile_infinity",
   "neoforge:conditions": [
     {
-      "condition": "pastel:enchantments_exist",
+      "type": "pastel:enchantments_exist",
       "values": [
         "minecraft:infinity"
       ]

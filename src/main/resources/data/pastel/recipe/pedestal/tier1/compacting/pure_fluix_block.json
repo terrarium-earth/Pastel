@@ -27,7 +27,7 @@
   "disable_yield_upgrades": true,
   "neoforge:conditions": [
     {
-      "condition": "pastel:integration_pack_active",
+      "type": "pastel:integration_pack_active",
       "integration_pack": "ae2"
     }
   ]
