@@ -87,7 +87,10 @@ cloche {
                 "src/main/pastel.todo.accessWidener",
             )
 
-            mixins.from("src/main/mixins/pastel.mixins.json")
+            mixins.from(
+                "src/main/mixins/pastel.mixins.json",
+                "src/main/mixins/pastel.client.mixins.json",
+            )
 
             // TODO Remove these
             mixins.from(

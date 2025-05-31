@@ -26,8 +26,6 @@ import earth.terrarium.pastel.render.SkyLerper;
 import earth.terrarium.pastel.render.armor.*;
 import earth.terrarium.pastel.render.capes.WorthinessChecker;
 import me.shedaniel.autoconfig.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -36,8 +34,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.*;
-import net.neoforged.fml.common.*;
-import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.*;
 import net.neoforged.neoforge.common.*;
 
@@ -76,7 +72,6 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		pastelBus.addListener(SpectrumBlockEntities::registerClient);
 		logInfo("Setting up Entity Renderers...");
 		pastelBus.addListener(SpectrumEntityRenderers::registerClient);
-		NeoForge.EVENT_BUS.addListener(BedrockCapeRenderer::register);
 
 		//logInfo("Registering Server to Client Package Receivers...");
 		//SpectrumS2CPackets.registerS2CReceivers();

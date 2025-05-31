@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.mixin.accessors;
+package earth.terrarium.pastel.mixin.client.accessors;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

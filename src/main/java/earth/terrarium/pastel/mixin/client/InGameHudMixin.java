@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.pastel.helpers.StatusEffectHelper;
 import earth.terrarium.pastel.registries.SpectrumDimensions;
+import earth.terrarium.pastel.registries.SpectrumStatusEffects;
 import earth.terrarium.pastel.render.HudRenderers;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.DeltaTracker;
@@ -19,6 +20,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
@@ -66,5 +68,13 @@ public abstract class InGameHudMixin {
     @ModifyArg(method = "renderEffects", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.blitSprite (Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 1))
     private ResourceLocation modifyEffectBackgrounds(ResourceLocation texture, @Local MobEffectInstance effect) {
 		return StatusEffectHelper.getTextureLocation(texture, effect, StatusEffectHelper.RenderType.HUD_DEFAULT);
+    }
+
+    @ModifyVariable(method = "renderHearts", at = @At("STORE"), ordinal = 7)
+    private int spectrum$showDivinityHardcoreHearts(int i, GuiGraphics context, Player player, int x, int y, int lines, int regeneratingHeartIndex, float maxHealth, int lastHealth, int health, int absorption, boolean blinking) {
+        if (player.hasEffect(SpectrumStatusEffects.DIVINITY)) {
+            return 9 * 5;
+        }
+        return i;
     }
 }

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.deeper_down.DeeperDownDimensionEffects;
-import earth.terrarium.pastel.mixin.accessors.DimensionEffectsAccessor;
+import earth.terrarium.pastel.mixin.client.accessors.DimensionEffectsAccessor;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

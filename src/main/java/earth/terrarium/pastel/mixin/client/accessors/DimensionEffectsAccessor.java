@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.mixin.accessors;
+package earth.terrarium.pastel.mixin.client.accessors;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.client.renderer.DimensionSpecialEffects;

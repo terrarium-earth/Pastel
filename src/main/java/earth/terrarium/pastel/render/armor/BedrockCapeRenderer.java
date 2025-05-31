@@ -3,31 +3,31 @@ package earth.terrarium.pastel.render.armor;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.items.armor.BedrockArmorItem;
+import earth.terrarium.pastel.compat.vanityslots.VanitySlotsCompat;
+import earth.terrarium.pastel.registries.SpectrumItems;
 import earth.terrarium.pastel.registries.client.*;
 import earth.terrarium.pastel.render.RenderingContext;
-import net.minecraft.client.*;
 import net.minecraft.client.model.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.event.*;
 
 public class BedrockCapeRenderer {
 
-	//TODO: does this really need an event?
-	public static void register(RenderLivingEvent.Post<LivingEntity, HumanoidModel<LivingEntity>> event) {
-		renderBedrockCapeAndCloth(event.getPoseStack(), event.getMultiBufferSource(), event.getPackedLight(), event.getPartialTick(), event.getEntity());
-	}
-
 	/**
-	 * Renders the bedrock cloth and cape on the player
+	 * Renders the bedrock cloth and cape on the humanoid entity
 	 */
 	public static void renderBedrockCapeAndCloth(PoseStack ms, MultiBufferSource vertices, int light, float h, LivingEntity entity) {
+		// Check for the chestplate, and begin rendering the cape if equipped
+		ItemStack chestStack = VanitySlotsCompat.getEquippedStack(entity, EquipmentSlot.CHEST);
+        if (chestStack.getItem() != SpectrumItems.BEDROCK_CHESTPLATE.get()) {
+			return;
+        }
 
-		// Transform and render front cloth
-        assert entity != null;
+        // Transform and render front cloth
         var capeRotations = BedrockArmorModel.computeFrontClothRotation(entity, h);
 		float capeZOffset = capeRotations.getB();
 
