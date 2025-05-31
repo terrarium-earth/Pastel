@@ -85,7 +85,7 @@ public abstract class BaseInventoryBlockEntity extends BlockEntity implements Co
 
     @Override
     public int getContainerSize() {
-        return 0;
+        return getHandler().getSlots();
     }
 
     // Pretty much a duck

@@ -74,6 +74,9 @@ public class FriendlyStackHandler extends ItemStackHandler {
 
     @Override
     protected void onContentsChanged(int slot) {
+        if (listeners == null)
+            return;
+
         listeners.forEach(l -> l.accept(slot));
     }
 

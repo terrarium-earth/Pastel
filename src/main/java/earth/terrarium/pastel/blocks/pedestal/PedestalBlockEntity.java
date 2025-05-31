@@ -79,7 +79,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.UUID;
 
-public class PedestalBlockEntity extends BaseInventoryBlockEntity implements MultiblockCrafter, SidedCapabilityProvider, StackedContentsCompatible, WorldlyContainer {
+public class PedestalBlockEntity extends BaseInventoryBlockEntity implements MultiblockCrafter, SidedCapabilityProvider, StackedContentsCompatible {
 	
 	public static final int INVENTORY_SIZE = 16; // 9 crafting, 5 gems, 1 craftingTablet, 1 output
 	public static final int CRAFTING_TABLET_SLOT_ID = 14;
@@ -639,8 +639,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 			return stack.is(getGemstonePowderItemForSlot(slot));
 		}
 	}
-	
-	@Override
+
 	public int[] getSlotsForFace(Direction side) {
 		if (side == Direction.DOWN) {
 			return new int[]{OUTPUT_SLOT_ID, 1};
@@ -660,61 +659,6 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 			}
 		}
 	}
-	
-	@Override
-	public boolean canPlaceItemThroughFace(int slot, @NotNull ItemStack stack, @Nullable Direction dir) {
-		if (stack.is(getGemstonePowderItemForSlot(slot))) {
-			return true;
-		}
-		
-		if (slot < 9 && inventory.getStackInSlot(CRAFTING_TABLET_SLOT_ID).is(SpectrumItems.CRAFTING_TABLET.get())) {
-			ItemStack craftingTabletItem = inventory.getStackInSlot(CRAFTING_TABLET_SLOT_ID);
-			
-			if (inventory.getStackInSlot(slot).getCount() > 0) {
-				return false;
-			}
-			
-			var storedRecipeKey = CraftingTabletItem.getStoredRecipe(this.getLevel(), craftingTabletItem);
-			var storedRecipe = storedRecipeKey == null ? null : storedRecipeKey.value();
-			
-			int width = 3;
-			if (storedRecipe instanceof ShapedRecipe shapedRecipe) {
-				width = shapedRecipe.getWidth();
-				if (slot % 3 >= width) {
-					return false;
-				}
-			} else if (storedRecipe instanceof ShapedPedestalRecipe pedestalRecipe) {
-				width = pedestalRecipe.getWidth();
-				if (slot % 3 >= width) {
-					return false;
-				}
-			} else if (!(storedRecipe instanceof ShapelessRecipe) && !(storedRecipe instanceof ShapelessPedestalRecipe)) {
-				return false;
-			}
-			
-			int resultRecipeSlot = getCraftingRecipeSlotDependingOnWidth(slot, width);
-			if (resultRecipeSlot < storedRecipe.getIngredients().size()) {
-				Ingredient ingredient = storedRecipe.getIngredients().get(resultRecipeSlot);
-				return ingredient.test(stack);
-			} else {
-				return false;
-			}
-		} else {
-			return slot < CRAFTING_TABLET_SLOT_ID;
-		}
-	}
-	
-	private int getCraftingRecipeSlotDependingOnWidth(int slot, int recipeWidth) {
-		int line = slot / 3;
-		int posInLine = slot % 3;
-		return line * recipeWidth + posInLine;
-	}
-	
-	@Override
-	public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
-		return slot == OUTPUT_SLOT_ID;
-	}
-	
 	@Override
 	public UUID getOwnerUUID() {
 		return this.ownerUUID;
