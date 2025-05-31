@@ -26,7 +26,6 @@
     "InGameOverlayRendererMixin",
     "ItemRendererMixin",
     "LightmapTextureManagerMixin",
-    "LivingEntityRendererMixin",
     "MapRendererMapTextureMixin",
     "MixinParticleManager",
     "MouseMixin",

@@ -72,6 +72,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		pastelBus.addListener(SpectrumBlockEntities::registerClient);
 		logInfo("Setting up Entity Renderers...");
 		pastelBus.addListener(SpectrumEntityRenderers::registerClient);
+		pastelBus.addListener(BedrockCapeRenderer::registerLayers);
 
 		//logInfo("Registering Server to Client Package Receivers...");
 		//SpectrumS2CPackets.registerS2CReceivers();
