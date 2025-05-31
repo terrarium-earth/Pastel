@@ -137,13 +137,13 @@ cloche {
             dependencies {
                 val curios = module(group = "top.theillusivec4.curios", name = "curios-neoforge", version = "9.5.1+1.21.1")
 
-                compileOnly(curios.copy()) {
+                modCompileOnly(curios.copy()) {
                     artifact {
                         classifier = "api"
                     }
                 }
 
-                runtimeOnly(curios)
+                modRuntimeOnly(curios)
             }
 
             data()
