@@ -111,7 +111,7 @@
   "required_advancement": "pastel:triggers/confirmed_drinking_age",
   "neoforge:conditions": [
     {
-      "condition": "fabric:not",
+      "type": "neoforge:not",
       "value": {
         "condition": "pastel:tags_populated",
         "registry": "minecraft:fluid",

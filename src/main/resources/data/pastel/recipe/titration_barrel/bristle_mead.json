@@ -114,7 +114,7 @@
   "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",
   "neoforge:conditions": [
     {
-      "condition": "fabric:not",
+      "type": "neoforge:not",
       "value": {
         "condition": "pastel:tags_populated",
         "registry": "minecraft:fluid",

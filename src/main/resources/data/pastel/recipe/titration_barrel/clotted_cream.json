@@ -17,7 +17,7 @@
   },
   "neoforge:conditions": [
     {
-      "condition": "fabric:not",
+      "type": "neoforge:not",
       "value": {
         "condition": "pastel:tags_populated",
         "registry": "minecraft:fluid",
