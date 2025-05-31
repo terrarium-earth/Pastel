@@ -15,7 +15,7 @@
     "id": "pastel:clotted_cream",
     "count": 4
   },
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "fabric:not",
       "value": {

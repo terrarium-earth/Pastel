@@ -18,12 +18,10 @@
     "count": 6
   },
   "required_advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "sandwichable"
-      ]
+      "condition": "neoforge:mod_loaded",
+      "modid": "sandwichable"
     }
   ]
 }

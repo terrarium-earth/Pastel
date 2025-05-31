@@ -41,7 +41,7 @@
     }
   },
   "required_advancement": "pastel:unlocks/enchantments/vanilla_swift_sneak",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "pastel:enchantments_exist",
       "values": [

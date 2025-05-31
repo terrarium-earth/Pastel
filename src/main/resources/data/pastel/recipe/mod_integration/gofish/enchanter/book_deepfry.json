@@ -40,12 +40,10 @@
     }
   },
   "required_advancement": "pastel:unlocks/enchantments/vanilla_water",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "go-fish"
-      ]
+      "condition": "neoforge:mod_loaded",
+      "modid": "go-fish"
     }
   ]
 }

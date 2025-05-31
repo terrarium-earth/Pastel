@@ -41,7 +41,7 @@
     }
   },
   "required_advancement": "pastel:unlocks/enchantments/vanilla_water_luck",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "pastel:enchantments_exist",
       "values": [

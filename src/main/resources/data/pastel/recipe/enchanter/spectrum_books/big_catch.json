@@ -40,7 +40,7 @@
     }
   },
   "required_advancement": "pastel:unlocks/enchantments/big_catch",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "pastel:enchantments_exist",
       "values": [

@@ -106,7 +106,7 @@
     "count": 4
   },
   "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "pastel:tags_populated",
       "registry": "minecraft:fluid",

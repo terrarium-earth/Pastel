@@ -21,12 +21,10 @@
     "id": "alloy_forgery:polished_shale_clay_forge_controller"
   },
   "required_advancement": "pastel:hidden/collect_shale_clay",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "alloy_forgery"
-      ]
+      "condition": "neoforge:mod_loaded",
+      "modid": "alloy_forgery"
     }
   ]
 }

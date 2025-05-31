@@ -109,7 +109,7 @@
     }
   },
   "required_advancement": "pastel:triggers/confirmed_drinking_age",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "fabric:not",
       "value": {

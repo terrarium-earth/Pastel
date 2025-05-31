@@ -7,12 +7,10 @@
     "item": "pastel:brown_pigment",
     "count": 6
   },
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "ants"
-      ]
+      "condition": "neoforge:mod_loaded",
+      "modid": "ants"
     }
   ]
 }

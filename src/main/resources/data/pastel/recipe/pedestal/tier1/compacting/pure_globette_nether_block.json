@@ -25,7 +25,7 @@
   },
   "required_advancement": "pastel:lategame/collect_pure_resource",
   "disable_yield_upgrades": true,
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "pastel:integration_pack_active",
       "integration_pack": "gobber2"

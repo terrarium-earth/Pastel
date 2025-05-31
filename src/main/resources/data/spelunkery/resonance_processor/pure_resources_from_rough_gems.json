@@ -29,12 +29,10 @@
       "output": "pastel:pure_redstone"
     }
   ],
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "spelunkery"
-      ]
+      "condition": "neoforge:mod_loaded",
+      "modid": "spelunkery"
     }
   ]
 }

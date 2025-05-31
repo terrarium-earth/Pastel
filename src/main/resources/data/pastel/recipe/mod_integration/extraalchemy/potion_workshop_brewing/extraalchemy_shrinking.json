@@ -11,7 +11,7 @@
   "applicable_to_potion_fillables": true,
   "ink_color": "pastel:gray",
   "ink_cost": 4,
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "fabric:all_mods_loaded",
       "values": [

@@ -64,7 +64,7 @@
       "id": "pastel:pure_fluix"
     }
   ],
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "pastel:integration_pack_active",
       "integration_pack": "ae2"

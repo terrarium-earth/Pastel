@@ -10,7 +10,7 @@
     "id": "create:experience_nugget",
     "count": 2
   },
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "fabric:all_mods_loaded",
       "values": [

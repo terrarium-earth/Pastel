@@ -12,12 +12,10 @@
   "required_advancement": "pastel:midgame/brew_potion_in_potion_workshop",
   "ink_color": "pastel:red",
   "ink_cost": 8,
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
-      "condition": "fabric:all_mods_loaded",
-      "values": [
-        "victus"
-      ]
+      "condition": "neoforge:mod_loaded",
+      "modid": "victus"
     }
   ]
 }

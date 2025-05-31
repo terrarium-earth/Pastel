@@ -112,7 +112,7 @@
     "count": 4
   },
   "required_advancement": "pastel:hidden/collect_cookbooks/brewers_handbook",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "fabric:not",
       "value": {

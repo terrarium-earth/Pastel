@@ -40,7 +40,7 @@
     }
   },
   "required_advancement": "pastel:unlocks/enchantments/voiding_crafting",
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "pastel:enchantments_exist",
       "values": [

@@ -11,7 +11,7 @@
       "output": "pastel:pure_zinc"
     }
   ],
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "condition": "pastel:integration_pack_active",
       "integration_pack": "create"
