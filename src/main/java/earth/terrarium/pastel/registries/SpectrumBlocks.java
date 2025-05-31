@@ -2431,10 +2431,11 @@ public class SpectrumBlocks {
 			if (hasItem) throw new UnsupportedOperationException("Attempted to register two items with id " + id);
 			hasItem = true;
 
-			//SpectrumItems.ITEM_REGISTRAR.register(id.getPath(), () -> {
-			//	ItemColors.ITEM_COLORS.registerColorMapping(item, color);
-			//	return callback.apply((T) holder.get());
-			//});
+			SpectrumItems.ITEM_REGISTRAR.register(id.getPath(), () -> {
+				Item item = callback.apply((T) holder.get());
+				ItemColors.ITEM_COLORS.registerColorMapping(item, color);
+				return item;
+			});
 			return this;
 		}
 
