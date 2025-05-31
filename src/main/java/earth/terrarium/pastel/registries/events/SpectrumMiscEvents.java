@@ -26,7 +26,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.*;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -146,18 +146,16 @@ public class SpectrumMiscEvents {
 	}
 
 	private static void onReloadResources(AddReloadListenerEvent event) {
-		event.addListener(new ContextAwareReloadListener() {
+		event.addListener(new ResourceManagerReloadListener() {
 			@Override
-			public CompletableFuture<Void> reload(PreparationBarrier preparationBarrier, ResourceManager resourceManager, ProfilerFiller preparationsProfiler, ProfilerFiller reloadProfiler, Executor backgroundExecutor, Executor gameExecutor) {
-				return CompletableFuture.runAsync(() -> {
-					CompactingChestBlockEntity.clearCache();
-					SpectrumCommon.CACHED_ITEM_TAG_MAP.clear();
+			public void onResourceManagerReload(ResourceManager resourceManager) {
+				CompactingChestBlockEntity.clearCache();
+				SpectrumCommon.CACHED_ITEM_TAG_MAP.clear();
 
-					if (ServerLifecycleHooks.getCurrentServer() != null) {
-						//injectEnchantmentUpgradeRecipes(ServerLifecycleHooks.getCurrentServer());
-						FirestarterIdolBlock.addBlockSmeltingRecipes(ServerLifecycleHooks.getCurrentServer());
-					}
-				});
+				if (ServerLifecycleHooks.getCurrentServer() != null) {
+					//injectEnchantmentUpgradeRecipes(ServerLifecycleHooks.getCurrentServer());
+					FirestarterIdolBlock.addBlockSmeltingRecipes(ServerLifecycleHooks.getCurrentServer());
+				}
 			}
 
 			@Override
