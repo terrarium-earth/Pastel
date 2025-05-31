@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.compat;
 
-import de.dafuqs.fractal.api.*;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
 import earth.terrarium.pastel.compat.botania.BotaniaCompat;

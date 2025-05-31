@@ -6,7 +6,6 @@ import com.klikli_dev.modonomicon.data.BookConditionJsonLoader;
 import com.klikli_dev.modonomicon.data.BookPageJsonLoader;
 import com.klikli_dev.modonomicon.data.LoaderRegistry;
 import com.klikli_dev.modonomicon.data.NetworkLoader;
-import de.dafuqs.fractal.api.*;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;

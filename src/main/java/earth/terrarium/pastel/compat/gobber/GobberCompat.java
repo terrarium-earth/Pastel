@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.compat.gobber;
 
-import de.dafuqs.fractal.api.ModifyItemSubGroupEntriesEvent;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.crystallarieum.SpectrumClusterBlock;
 import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
@@ -45,30 +44,7 @@ public class GobberCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	public static DeferredItem<Item> PURE_GLOBETTE_END = SpectrumItems.register(simple(item("pure_globette_end", () -> new Item(IS.of()), InkColors.GREEN)));
 	
 	@Override
-	public void register() {
-		NeoForge.EVENT_BUS.addListener(GobberCompat::addEntries);
-	}
-
-	private static void addEntries(ModifyItemSubGroupEntriesEvent event) {
-		var entries = event.getEntries();
-		entries.accept(PURE_GLOBETTE);
-		entries.accept(SMALL_GLOBETTE_BUD);
-		entries.accept(LARGE_GLOBETTE_BUD);
-		entries.accept(GLOBETTE_CLUSTER);
-		entries.accept(PURE_GLOBETTE_BLOCK);
-
-		entries.accept(PURE_GLOBETTE_NETHER);
-		entries.accept(SMALL_GLOBETTE_NETHER_BUD);
-		entries.accept(LARGE_GLOBETTE_NETHER_BUD);
-		entries.accept(GLOBETTE_NETHER_CLUSTER);
-		entries.accept(PURE_GLOBETTE_NETHER_BLOCK);
-
-		entries.accept(PURE_GLOBETTE_END);
-		entries.accept(SMALL_GLOBETTE_END_BUD);
-		entries.accept(LARGE_GLOBETTE_END_BUD);
-		entries.accept(GLOBETTE_END_CLUSTER);
-		entries.accept(PURE_GLOBETTE_END_BLOCK);
-	}
+	public void register() {}
 	
 	@Override
 	@OnlyIn(Dist.CLIENT)

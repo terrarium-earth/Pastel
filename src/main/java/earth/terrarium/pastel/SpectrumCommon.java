@@ -139,6 +139,7 @@ public class SpectrumCommon {
 		SpectrumPotions.register(pastelBus);
 		SpectrumItems.register(pastelBus);
 		SpectrumItemGroups.register(pastelBus);
+		pastelBus.addListener(SpectrumItemGroups::registerSpawnEggs);
 
 		logInfo("Registering Block Entities...");
 		SpectrumBlockEntities.register(pastelBus);
