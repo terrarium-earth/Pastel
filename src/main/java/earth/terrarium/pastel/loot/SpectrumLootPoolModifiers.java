@@ -159,7 +159,7 @@ public class SpectrumLootPoolModifiers {
 	public static void loadLootTable(LootTableLoadEvent event) {
 		ResourceLocation key = event.getName();
 		LootTable table = event.getTable();
-		HolderLookup.Provider wrapperLookup = ServerLifecycleHooks.getCurrentServer().registryAccess();
+		HolderLookup.Provider wrapperLookup = null;
 
 		// Treasure hunter pools
 		if (treasureHunterLootPools.containsKey(key)) {
