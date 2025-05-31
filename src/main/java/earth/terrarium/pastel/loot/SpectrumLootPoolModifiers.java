@@ -51,6 +51,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -158,7 +159,7 @@ public class SpectrumLootPoolModifiers {
 	public static void loadLootTable(LootTableLoadEvent event) {
 		ResourceLocation key = event.getName();
 		LootTable table = event.getTable();
-		HolderLookup.Provider wrapperLookup = null;
+		HolderLookup.Provider wrapperLookup = ServerLifecycleHooks.getCurrentServer().registryAccess();
 
 		// Treasure hunter pools
 		if (treasureHunterLootPools.containsKey(key)) {
