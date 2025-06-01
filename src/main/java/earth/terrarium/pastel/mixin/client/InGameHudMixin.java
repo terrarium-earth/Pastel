@@ -1,11 +1,10 @@
 package earth.terrarium.pastel.mixin.client;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.*;
+import com.llamalad7.mixinextras.injector.wrapoperation.*;
 import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.pastel.helpers.StatusEffectHelper;
-import earth.terrarium.pastel.registries.SpectrumDimensions;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
-import earth.terrarium.pastel.render.HudRenderers;
+import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -17,10 +16,7 @@ import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Gui.class)
@@ -31,6 +27,8 @@ public abstract class InGameHudMixin {
     @Shadow protected abstract Player getCameraPlayer();
 
     @Shadow public abstract void render(GuiGraphics context, DeltaTracker tickerCounter);
+
+    @Shadow protected abstract void renderHeart(GuiGraphics guiGraphics, Gui.HeartType heartType, int x, int y, boolean hardcore, boolean halfHeart, boolean blinking);
 
     @ModifyExpressionValue(method = "renderCameraOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;useFancyGraphics()Z"))
     private boolean spectrum$disableVignietteInDimension(boolean original) {
@@ -70,11 +68,14 @@ public abstract class InGameHudMixin {
 		return StatusEffectHelper.getTextureLocation(texture, effect, StatusEffectHelper.RenderType.HUD_DEFAULT);
     }
 
-    @ModifyVariable(method = "renderHearts", at = @At("STORE"), ordinal = 7)
-    private int spectrum$showDivinityHardcoreHearts(int i, GuiGraphics context, Player player, int x, int y, int lines, int regeneratingHeartIndex, float maxHealth, int lastHealth, int health, int absorption, boolean blinking) {
+
+    @WrapOperation(method = "renderHearts", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderHeart(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V"))
+    private void renderDivinityHearts(Gui instance, GuiGraphics guiGraphics, Gui.HeartType heartType, int x, int y, boolean hardcore, boolean halfHeart, boolean blinking, Operation<Void> original, @Local(argsOnly = true) Player player) {
         if (player.hasEffect(SpectrumStatusEffects.DIVINITY)) {
-            return 9 * 5;
+            renderHeart(guiGraphics, heartType, x, y, true, halfHeart, blinking);
         }
-        return i;
+        else {
+            original.call(instance, guiGraphics, heartType, x, y, hardcore, halfHeart, blinking);
+        }
     }
 }

@@ -1,16 +1,19 @@
 package earth.terrarium.pastel.registries.events;
 
 import earth.terrarium.pastel.api.item.*;
+import earth.terrarium.pastel.attachments.*;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
 import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.helpers.enchantments.*;
 import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.*;
+import earth.terrarium.pastel.progression.*;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.*;
 import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -28,6 +31,32 @@ public class SpectrumPlayerEvents {
         NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::handleSplitMerge);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, SpectrumPlayerEvents::forceCritical);
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, SpectrumPlayerEvents::applyImprovedCritical);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, SpectrumPlayerEvents::postPlayerDeath);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, SpectrumPlayerEvents::removeHardcoreDeath);
+    }
+
+    private static void removeHardcoreDeath(PlayerEvent.PlayerChangeGameModeEvent event) {
+        var curMode = event.getCurrentGameMode();
+        var newMode = event.getNewGameMode();
+        var player = event.getEntity();
+
+        if (newMode != GameType.SPECTATOR && curMode == GameType.SPECTATOR && HardcoreDeathTracker.hasHardcoreDeath(player.getGameProfile())) {
+            HardcoreDeathTracker.removeHardcoreDeath(player.getGameProfile());
+        }
+    }
+
+    private static void postPlayerDeath(LivingDeathEvent event) {
+        if (event.getSource().getEntity() instanceof ServerPlayer player) {
+
+            if (SpectrumTrinketItem.hasEquipped(player, SpectrumItems.JEOPARDANT.get()))
+                SpectrumAdvancementCriteria.JEOPARDANT_KILL.trigger(player, event.getEntity());
+        }
+
+        if (event.getEntity() instanceof ServerPlayer player) {
+            if (player.level().getLevelData().isHardcore() || HardcoreDeathTracker.isInHardcore(player)) {
+                HardcoreDeathTracker.addHardcoreDeath(player.serverLevel(), player.getGameProfile());
+            }
+        }
     }
 
     private static void applyImprovedCritical(CriticalHitEvent event) {

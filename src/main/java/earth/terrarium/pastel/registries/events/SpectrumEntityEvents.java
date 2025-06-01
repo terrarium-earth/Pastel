@@ -160,13 +160,11 @@ public class SpectrumEntityEvents {
 
     private static void entityDeath(LivingDeathEvent event) {
         var killedEntity = event.getEntity();
-        var killer = event.getSource().getEntity();
         var damageSource = event.getSource();
 
         if (damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return;
         }
-
 
         var curios = CuriosApi.getCuriosInventory(killedEntity);
 
@@ -197,14 +195,7 @@ public class SpectrumEntityEvents {
         }
 
         if (killedEntity instanceof ServerPlayer player) { //At this point it can only be concluded that this bitch dead as hell
-            if (player.level().getLevelData().isHardcore() || HardcoreDeathTracker.isInHardcore(player)) {
-                HardcoreDeathTracker.addHardcoreDeath(player.serverLevel(), player.getGameProfile());
-            }
             evaluateAndDropPlayerHead(player, damageSource);
-        }
-
-        if (killer instanceof ServerPlayer serverPlayerEntity && SpectrumTrinketItem.hasEquipped(serverPlayerEntity, SpectrumItems.JEOPARDANT.get())) {
-            SpectrumAdvancementCriteria.JEOPARDANT_KILL.trigger(serverPlayerEntity, killedEntity);
         }
     }
 

@@ -69,7 +69,6 @@
     "RandomChanceWithEnchantedBonusLootConditionMixin",
     "ServerPlayerEntityMixin",
     "ServerPlayerGameModeFabricMixin",
-    "ServerPlayerInteractionManagerMixin",
     "ServerWorldMixin",
     "ShearsDispenserBehaviorMixin",
     "SpawnDensityCapperMixin",
