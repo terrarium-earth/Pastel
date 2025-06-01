@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.registries.events;
 
+import earth.terrarium.pastel.api.item.*;
 import earth.terrarium.pastel.attachments.*;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
@@ -16,12 +17,10 @@ import net.minecraft.world.damagesource.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.*;
-import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.*;
 import top.theillusivec4.curios.api.*;
 
@@ -32,25 +31,10 @@ public class SpectrumEntityEvents {
 
     public static void register() {
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::entityTick);
-        NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::playerTick);
-        NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::clonePlayer);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::allowDamage);
-        NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::canPlayerSleep);
-        NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::playerSleepEnd);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::equipmentChange);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::entityDeath);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::finishUsingItem);
-    }
-
-    private static void playerWakeUp(PlayerWakeUpEvent event) {
-        var player = event.getEntity();
-
-        MiscPlayerData.get(player).resetSleepingState(false);
-        player.removeEffect(SpectrumStatusEffects.SOMNOLENCE);
-    }
-
-    private static void playerTick(PlayerTickEvent.Post event) {
-        MiscPlayerData.get(event.getEntity()).tick();
     }
 
     private static void entityTick(EntityTickEvent.Post event) {
@@ -60,20 +44,6 @@ public class SpectrumEntityEvents {
             PrimordialFireData.serverTick(living);
             AzureDikeProvider.getAzureDikeComponent(living).serverTick(living);
         }
-    }
-
-    private static void clonePlayer(PlayerEvent.Clone event) {
-        var original = event.getOriginal();
-        AzureDikeData newDike;
-
-        if (event.isWasDeath()) {
-            newDike = AzureDikeData.CLONER.copy(AzureDikeProvider.getAzureDikeComponent(original), original, original.registryAccess());
-        }
-        else {
-            newDike = AzureDikeProvider.getAzureDikeComponent(original);
-        }
-
-        event.getEntity().setData(AzureDikeData.ATTACHMENT, newDike);
     }
 
     private static void allowDamage(LivingIncomingDamageEvent event) {
@@ -92,35 +62,6 @@ public class SpectrumEntityEvents {
             }
         } else if (source.is(DamageTypeTags.IS_FIRE) && SpectrumTrinketItem.hasEquipped(entity, SpectrumItems.ASHEN_CIRCLET.get())) {
             event.setCanceled(true);
-        }
-    }
-
-    private static void canPlayerSleep(CanPlayerSleepEvent event) {
-        var player = event.getEntity();
-        var reason = event.getProblem();
-
-        if (reason != Player.BedSleepingProblem.NOT_POSSIBLE_NOW && MiscPlayerData.get(player).isSleeping()) {
-            event.setProblem(null);
-        }
-        else if((reason == Player.BedSleepingProblem.NOT_POSSIBLE_NOW || reason == Player.BedSleepingProblem.NOT_SAFE)
-                && player.hasEffect(SpectrumStatusEffects.SOMNOLENCE)) { // Somnolence lets you sleep whenever and wherever.
-            event.setProblem(null);
-        }
-    }
-
-    private static void playerSleepEnd(PlayerWakeUpEvent event) {
-        var player = event.getEntity();
-
-        // If the player wears a Whispy Cirlcet and sleeps
-        // they get fully healed and all negative status effects removed
-        // When the sleep timer reached 100 the player is fully asleep
-
-        if (player instanceof ServerPlayer serverPlayerEntity
-                && serverPlayerEntity.getSleepTimer() == 100
-                && SpectrumTrinketItem.hasEquipped(player, SpectrumItems.WHISPY_CIRCLET.get())) {
-
-            player.setHealth(player.getMaxHealth());
-            WhispyCircletItem.removeNegativeStatusEffects(player);
         }
     }
 

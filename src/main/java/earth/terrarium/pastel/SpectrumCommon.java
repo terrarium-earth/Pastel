@@ -244,6 +244,7 @@ public class SpectrumCommon {
 		logInfo("Registering Event Listeners...");
 		SpectrumMiscEvents.register();
 		SpectrumEntityEvents.register();
+		SpectrumPlayerEvents.register();
 		SpectrumEquipmentEvents.register();
 		logInfo("Registering Tree Decorator Types...");
 		SpectrumTreeDecoratorTypes.register(pastelBus);

@@ -71,7 +71,6 @@
     "ServerPlayerGameModeFabricMixin",
     "ServerPlayerInteractionManagerMixin",
     "ServerPlayNetworkHandlerMixin",
-    "ServerPlayNetworkHandlerMixin$NetworkEntityValidationMixin",
     "ServerWorldMixin",
     "ShearsDispenserBehaviorMixin",
     "SpawnDensityCapperMixin",

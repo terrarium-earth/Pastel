@@ -41,26 +41,7 @@ public class ServerPlayNetworkHandlerMixin {
 			ci.cancel();
 		}
 	}
-	
-	@Mixin(targets = "net/minecraft/server/network/ServerGamePacketListenerImpl$1")
-	static class NetworkEntityValidationMixin {
-		
-		@Final @Shadow(aliases = "field_28963")
-		private ServerGamePacketListenerImpl this$0;
-		
-		@Final @Shadow
-		Entity val$target;
-		
-		@Inject(method = "onAttack", at = @At(value = "HEAD"), cancellable = true)
-		public void allowNonLivingEntityAttack(CallbackInfo ci) {
-			if (val$target instanceof NonLivingAttackable) {
-				this$0.player.attack(val$target);
-				ci.cancel();
-			}
-		}
-		
-	}
-	
+
 	@Unique
 	private void splitItem(ItemStack stack, SplittableItem splittable) {
 		var split = splittable.getSplitResult(player, stack);
@@ -69,7 +50,7 @@ public class ServerPlayNetworkHandlerMixin {
 		player.stopUsingItem();
 		splittable.playSound(player);
 	}
-	
+
 	@Unique
 	private void mergeItems(ItemStack firstHalf, ItemStack secondHalf, MergeableItem mergeable) {
 		player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);

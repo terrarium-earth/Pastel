@@ -45,9 +45,10 @@ public class CrystalApothecarySimulationsDataLoader extends SimpleJsonResourceRe
 	@Override
 	protected void apply(Map<ResourceLocation, JsonElement> prepared, ResourceManager manager, ProfilerFiller profiler) {
 		COMPENSATIONS.clear();
+		RegistryOps<JsonElement> registryops = makeConditionalOps();
+
 		prepared.forEach((identifier, jsonElement) -> {
 			JsonObject object = jsonElement.getAsJsonObject();
-			RegistryOps<JsonElement> registryops = makeConditionalOps();
 			var entry = SimulatedBlockGrowthEntry.CONDITIONAL_CODEC.parse(registryops, object);
 
 			if (entry.error().isPresent() || entry.result().isEmpty()) {
