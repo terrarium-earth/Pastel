@@ -88,7 +88,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		pastelBus.addListener(SpectrumTooltipComponents::registerTooltipComponents);
 
 		logInfo("Registering Dimension Effects...");
-		SpectrumDimensions.registerClient();
+		pastelBus.addListener(SpectrumDimensions::registerClient);
 
 		logInfo("Registering Client Event Listeners...");
 		SpectrumClientEventListeners.register(pastelBus);

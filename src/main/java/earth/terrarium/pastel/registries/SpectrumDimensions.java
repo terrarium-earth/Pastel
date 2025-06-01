@@ -2,11 +2,11 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.deeper_down.DeeperDownDimensionEffects;
-import earth.terrarium.pastel.mixin.client.accessors.DimensionEffectsAccessor;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;
 
 public class SpectrumDimensions {
 	
@@ -16,8 +16,8 @@ public class SpectrumDimensions {
 	
 	public static void register() {}
 	
-	public static void registerClient() {
-		DimensionEffectsAccessor.getEFFECTS().put(EFFECTS_ID, new DeeperDownDimensionEffects());
+	public static void registerClient(RegisterDimensionSpecialEffectsEvent event) {
+		event.register(EFFECTS_ID, new DeeperDownDimensionEffects());
 	}
 	
 }

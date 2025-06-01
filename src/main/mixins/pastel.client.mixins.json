@@ -4,7 +4,6 @@
   "package": "earth.terrarium.pastel.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "accessors.DimensionEffectsAccessor",
     "accessors.WorldRendererAccessor",
     "AbstractClientPlayerEntityMixin",
     "AbstractInventoryScreenMixin",
