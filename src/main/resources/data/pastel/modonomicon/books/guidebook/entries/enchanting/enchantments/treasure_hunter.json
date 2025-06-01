@@ -7,7 +7,7 @@
     "type": "modonomicon:advancement",
     "advancement_id": "pastel:unlocks/enchantments/treasure_hunter"
   },
-  "flag": "pastel:enchantment_exists_spectrum_treasure_hunter",
+  "flag": "pastel:enchantment_exists_pastel_treasure_hunter",
   "category": "pastel:enchanting",
   "hide_while_locked": true,
   "parents": [],
@@ -46,7 +46,7 @@
       "type": "pastel:enchanter_crafting",
       "text": "book.pastel.guidebook.crafting",
       "title": "container.pastel.rei.enchanter_recipe",
-      "recipe_id": "pastel:enchanter/spectrum_books/treasure_hunter"
+      "recipe_id": "pastel:enchanter/pastel_books/treasure_hunter"
     },
     {
       "type": "pastel:enchanter_upgrading",

@@ -62,7 +62,7 @@ public class TrinketChangeCriterion extends SimpleCriterionTrigger<TrinketChange
 				ContextAwarePredicate.CODEC.optionalFieldOf("player").forGetter(TrinketChangeCriterion.Conditions::player),
 				ItemPredicate.CODEC.listOf().optionalFieldOf("items").forGetter(TrinketChangeCriterion.Conditions::itemPredicates),
 				MinMaxBounds.Ints.CODEC.optionalFieldOf("total_count").forGetter(TrinketChangeCriterion.Conditions::totalCountRange),
-				MinMaxBounds.Ints.CODEC.optionalFieldOf("spectrum_count").forGetter(TrinketChangeCriterion.Conditions::spectrumCountRange)
+				MinMaxBounds.Ints.CODEC.optionalFieldOf("pastel_count").forGetter(TrinketChangeCriterion.Conditions::spectrumCountRange)
 		).apply(instance, TrinketChangeCriterion.Conditions::new));
 		
 		public boolean matches(List<ItemStack> trinketStacks, int totalCount, int spectrumCount) {

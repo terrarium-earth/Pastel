@@ -1,6 +1,6 @@
 {
   "particle_type": "pastel:void_fog",
   "gui_texture": "pastel:void_fog",
-  "unlock_identifier": "pastel:lategame/spectrum_lategame",
+  "unlock_identifier": "pastel:lategame/pastel_lategame",
   "supports_coloring": false
 }

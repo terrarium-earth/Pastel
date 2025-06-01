@@ -7,7 +7,7 @@
     "type": "modonomicon:advancement",
     "advancement_id": "pastel:unlocks/enchantments/improved_critical"
   },
-  "flag": "pastel:enchantment_exists_spectrum_improved_critical",
+  "flag": "pastel:enchantment_exists_pastel_improved_critical",
   "category": "pastel:enchanting",
   "hide_while_locked": true,
   "parents": [],
@@ -38,7 +38,7 @@
       "type": "pastel:enchanter_crafting",
       "text": "book.pastel.guidebook.crafting",
       "title1": "container.pastel.rei.enchanter_recipe",
-      "recipe_id": "pastel:enchanter/spectrum_books/improved_critical"
+      "recipe_id": "pastel:enchanter/pastel_books/improved_critical"
     },
     {
       "type": "pastel:enchanter_upgrading",

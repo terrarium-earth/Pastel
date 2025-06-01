@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.crafting.*;
 import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -384,7 +385,7 @@ public class SpectrumRecipeProvider extends RecipeProvider {
 				stages.stream().map(s -> s.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP)).toList(),
 				secondsPerStage, inkColor, 1 << (inkCostTier - 1), growsWithoutCatalyst,
 				catalysts,
-				new FluidStack(medium == null ? SpectrumFluids.LIQUID_CRYSTAL.get() : medium, FluidType.BUCKET_VOLUME),
+                Optional.of(FluidIngredient.of(new FluidStack(medium == null ? SpectrumFluids.LIQUID_CRYSTAL.get() : medium, FluidType.BUCKET_VOLUME))),
 				additionalResults));
 	}
 	

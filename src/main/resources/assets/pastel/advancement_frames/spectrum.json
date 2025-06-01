@@ -25,15 +25,15 @@
     "frame": "pastel:amethyst_shard"
   },
   {
-    "advancement": "pastel:midgame/spectrum_midgame",
+    "advancement": "pastel:midgame/pastel_midgame",
     "frame": "pastel:amethyst_shard"
   },
   {
-    "advancement": "pastel:lategame/spectrum_lategame",
+    "advancement": "pastel:lategame/pastel_lategame",
     "frame": "pastel:amethyst_shard"
   },
   {
-    "advancement": "pastel:endgame/spectrum_endgame",
+    "advancement": "pastel:endgame/pastel_endgame",
     "frame": "pastel:amethyst_shard"
   },
   {

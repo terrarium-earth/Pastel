@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public interface SpectrumTooltipComponent extends ClientTooltipComponent {
 	
-	ResourceLocation TEXTURE = SpectrumCommon.locate("textures/gui/container/spectrum_tooltips.png");
+	ResourceLocation TEXTURE = SpectrumCommon.locate("textures/gui/container/pastel_tooltips.png");
 	
 	static void drawOutline(GuiGraphics context, int x, int y, int columns, int rows) {
 		draw(context, x, y, Sprite.BORDER_CORNER_TOP);

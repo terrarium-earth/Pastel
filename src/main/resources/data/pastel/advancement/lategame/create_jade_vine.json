@@ -11,7 +11,7 @@
       "translate": "advancements.pastel.create_jade_vine.description"
     }
   },
-  "parent": "pastel:lategame/spectrum_lategame",
+  "parent": "pastel:lategame/pastel_lategame",
   "criteria": {
     "crossbred_jade_vine_bulb": {
       "trigger": "minecraft:impossible"
@@ -19,7 +19,7 @@
     "gotten_previous": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+        "advancement_identifier": "pastel:lategame/pastel_lategame"
       }
     }
   }

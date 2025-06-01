@@ -21,7 +21,7 @@
     "equipped_three_trinkets": {
       "trigger": "pastel:trinket_change",
       "conditions": {
-        "spectrum_count": {
+        "pastel_count": {
           "min": 3
         }
       }

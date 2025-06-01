@@ -63,7 +63,7 @@
     {
       "type": "pastel:anvil_crushing",
       "title": "book.pastel.guidebook.cracking",
-      "recipe_id": "pastel:anvil_crushing/spectrum_pulverising/cracked_blackslag_bricks",
+      "recipe_id": "pastel:anvil_crushing/pastel_pulverising/cracked_blackslag_bricks",
       "text": "book.pastel.guidebook.blackslag.page2.text"
     },
     {

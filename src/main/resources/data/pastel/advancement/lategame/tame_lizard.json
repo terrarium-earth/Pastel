@@ -11,7 +11,7 @@
     },
     "hidden": true
   },
-  "parent": "pastel:lategame/spectrum_lategame",
+  "parent": "pastel:lategame/pastel_lategame",
   "criteria": {
     "tamed_lizard": {
       "trigger": "minecraft:tame_animal",
@@ -30,7 +30,7 @@
     "gotten_previous": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+        "advancement_identifier": "pastel:lategame/pastel_lategame"
       }
     }
   }

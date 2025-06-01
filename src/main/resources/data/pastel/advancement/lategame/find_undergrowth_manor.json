@@ -1,5 +1,5 @@
 {
-  "parent": "pastel:lategame/spectrum_lategame",
+  "parent": "pastel:lategame/pastel_lategame",
   "display": {
     "icon": {
       "id": "pastel:longing_chimera"
@@ -32,7 +32,7 @@
     "gotten_previous": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+        "advancement_identifier": "pastel:lategame/pastel_lategame"
       }
     }
   }

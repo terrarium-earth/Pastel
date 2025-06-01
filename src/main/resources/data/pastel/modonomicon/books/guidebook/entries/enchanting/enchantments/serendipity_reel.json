@@ -16,7 +16,7 @@
       }
     ]
   },
-  "flag": "pastel:enchantment_exists_spectrum_serendipity_reel",
+  "flag": "pastel:enchantment_exists_pastel_serendipity_reel",
   "category": "pastel:enchanting",
   "hide_while_locked": true,
   "parents": [],
@@ -47,7 +47,7 @@
       "type": "pastel:enchanter_crafting",
       "text": "book.pastel.guidebook.crafting",
       "title": "container.pastel.rei.enchanter_recipe",
-      "recipe_id": "pastel:enchanter/spectrum_books/serendipity_reel"
+      "recipe_id": "pastel:enchanter/pastel_books/serendipity_reel"
     },
     {
       "type": "pastel:enchanter_upgrading",

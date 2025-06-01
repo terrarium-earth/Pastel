@@ -41,7 +41,7 @@
   "multiblock.pastel.fusion_shrine": "Fusions-Schrein",
   "multiblock.pastel.enchanter": "Verzauberer",
 
-  "death.attack.spectrum_decay": "%s kam mit der Leere in Berührung",
+  "death.attack.pastel_decay": "%s kam mit der Leere in Berührung",
 
   "commands.pastel.spawn_shooting_star.success": "Erstellte %d Sternschnuppen für jeden Spieler",
   "commands.pastel.progression_sanity.success": "Santiy-Prüfung wurde auf der Serverkonsole ausgegeben",
@@ -90,7 +90,7 @@
   "pastel.subtitles.block.fading.place": "Hochfrequentes Quietschen",
   "pastel.subtitles.block.failing.place": "Hochfrequentes Quietschen",
   "pastel.subtitles.block.ruin.place": "Hochfrequentes Quietschen",
-  "pastel.subtitles.spectrum_theme_plays": "pastel Theme spielt",
+  "pastel.subtitles.pastel_theme_plays": "pastel Theme spielt",
   "pastel.subtitles.boss_theme_plays": "Boss Theme spielt",
   "pastel.subtitles.player_teleports": "Spieler teleportiert",
   "pastel.subtitles.ender_splice_charges": "Ender Splice lädt auf",

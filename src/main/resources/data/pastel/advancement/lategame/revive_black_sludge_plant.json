@@ -11,7 +11,7 @@
       "translate": "advancements.pastel.revive_hornslake_plant.description"
     }
   },
-  "parent": "pastel:lategame/spectrum_lategame",
+  "parent": "pastel:lategame/pastel_lategame",
   "criteria": {
     "revived_sag_leaf": {
       "trigger": "pastel:natures_staff_conversion",
@@ -34,7 +34,7 @@
     "gotten_previous": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+        "advancement_identifier": "pastel:lategame/pastel_lategame"
       }
     }
   },

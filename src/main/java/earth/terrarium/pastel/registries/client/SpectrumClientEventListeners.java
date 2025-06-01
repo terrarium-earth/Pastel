@@ -96,7 +96,7 @@ public class SpectrumClientEventListeners {
 
 	private static void addResourcePacks(AddPackFindersEvent event) {
 		event.addPackFinders(
-				SpectrumCommon.locate("spectrum_style_amethyst"),
+				SpectrumCommon.locate("pastel_style_amethyst"),
 				PackType.CLIENT_RESOURCES,
 				Component.literal("pastel-Style Amethyst"),
 				PackSource.BUILT_IN,

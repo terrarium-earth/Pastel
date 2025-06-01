@@ -24,7 +24,7 @@ public class SpectrumRenderLayers {
 		
 		public static RenderType get(ResourceLocation texture) {
 			RenderType.CompositeState multiPhaseParameters = RenderType.CompositeState.builder().setTextureState(new RenderStateShard.TextureStateShard(texture, false, false)).setTransparencyState(TransparencyStateShard.TRANSLUCENT_TRANSPARENCY).setCullState(NO_CULL).setLightmapState(LIGHTMAP).setOverlayState(NO_OVERLAY).setLayeringState(VIEW_OFFSET_Z_LAYERING).setShaderState(RenderStateShard.RENDERTYPE_ENERGY_SWIRL_SHADER).createCompositeState(true);
-			return RenderLayerAccessor.invokeCreate("spectrum_glow", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, false, multiPhaseParameters);
+			return RenderLayerAccessor.invokeCreate("pastel_glow", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 256, false, false, multiPhaseParameters);
 		}
 	}
 	

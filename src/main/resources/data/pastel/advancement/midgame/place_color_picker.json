@@ -1,5 +1,5 @@
 {
-  "parent": "pastel:midgame/spectrum_midgame",
+  "parent": "pastel:midgame/pastel_midgame",
   "display": {
     "icon": {
       "id": "pastel:color_picker"
@@ -31,7 +31,7 @@
     "gotten_previous": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/spectrum_midgame"
+        "advancement_identifier": "pastel:midgame/pastel_midgame"
       }
     }
   }

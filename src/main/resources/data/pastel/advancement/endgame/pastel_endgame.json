@@ -4,10 +4,10 @@
       "id": "pastel:mysterious_locket"
     },
     "title": {
-      "translate": "advancements.pastel.spectrum_endgame.title"
+      "translate": "advancements.pastel.pastel_endgame.title"
     },
     "description": {
-      "translate": "advancements.pastel.spectrum_endgame.description"
+      "translate": "advancements.pastel.pastel_endgame.description"
     },
     "background": "pastel:textures/gui/advancement_background_endgame.png"
   },

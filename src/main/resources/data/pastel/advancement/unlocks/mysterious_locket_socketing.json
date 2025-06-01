@@ -3,7 +3,7 @@
     "reached_endgame": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "pastel:endgame/spectrum_endgame"
+        "advancement_identifier": "pastel:endgame/pastel_endgame"
       }
     }
   }

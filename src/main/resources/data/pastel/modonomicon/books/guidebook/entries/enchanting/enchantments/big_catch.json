@@ -16,7 +16,7 @@
       }
     ]
   },
-  "flag": "pastel:enchantment_exists_spectrum_big_catch",
+  "flag": "pastel:enchantment_exists_pastel_big_catch",
   "category": "pastel:enchanting",
   "hide_while_locked": true,
   "parents": [],
@@ -47,7 +47,7 @@
       "type": "pastel:enchanter_crafting",
       "text": "book.pastel.guidebook.crafting",
       "title": "container.pastel.rei.enchanter_recipe",
-      "recipe_id": "pastel:enchanter/spectrum_books/big_catch"
+      "recipe_id": "pastel:enchanter/pastel_books/big_catch"
     },
     {
       "type": "pastel:enchanter_upgrading",

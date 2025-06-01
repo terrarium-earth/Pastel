@@ -30,7 +30,7 @@
     {
       "type": "pastel:anvil_crushing",
       "title": "container.pastel.rei.anvil_crushing.title",
-      "recipe_id": "pastel:anvil_crushing/spectrum_pulverising/quartz_from_rock_crystal",
+      "recipe_id": "pastel:anvil_crushing/pastel_pulverising/quartz_from_rock_crystal",
       "text": "book.pastel.guidebook.rock_crystal.page1.text"
     }
   ]

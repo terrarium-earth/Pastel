@@ -22,7 +22,7 @@ import java.util.UUID;
 // Persisted together with the overworld. Resetting the overworld will also reset all networks
 public class ServerPastelNetworkManager extends SavedData implements PastelNetworkManager<ServerLevel, ServerPastelNetwork> {
 	
-	private static final String PERSISTENT_STATE_ID = "spectrum_pastel_network_manager";
+	private static final String PERSISTENT_STATE_ID = "pastel_pastel_network_manager";
 	
 	private final List<ServerPastelNetwork> networks = new ArrayList<>();
 	

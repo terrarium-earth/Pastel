@@ -79,7 +79,7 @@ public abstract class SpectrumFishingRodItem extends FishingRodItem {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.pastel.spectrum_fishing_rods.tooltip").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.translatable("item.pastel.pastel_fishing_rods.tooltip").withStyle(ChatFormatting.GRAY));
 	}
 	
 }

@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "build_spectrum_complex": {
+    "build_pastel_complex": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"

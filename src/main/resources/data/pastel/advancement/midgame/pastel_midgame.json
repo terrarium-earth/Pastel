@@ -4,10 +4,10 @@
       "id": "pastel:pedestal_onyx"
     },
     "title": {
-      "translate": "advancements.pastel.spectrum_midgame.title"
+      "translate": "advancements.pastel.pastel_midgame.title"
     },
     "description": {
-      "translate": "advancements.pastel.spectrum_midgame.description"
+      "translate": "advancements.pastel.pastel_midgame.description"
     },
     "background": "pastel:textures/gui/advancement_background_midgame.png"
   },

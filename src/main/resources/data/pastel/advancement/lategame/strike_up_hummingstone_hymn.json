@@ -19,7 +19,7 @@
     "gotten_previous": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+        "advancement_identifier": "pastel:lategame/pastel_lategame"
       }
     }
   }

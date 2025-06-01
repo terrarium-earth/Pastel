@@ -3,7 +3,7 @@
     "reached_lategame": {
       "trigger": "pastel:advancement_gotten",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/spectrum_lategame"
+        "advancement_identifier": "pastel:lategame/pastel_lategame"
       }
     },
     "has_jadeite_petals": {

@@ -4,10 +4,10 @@
       "id": "pastel:pedestal_moonstone"
     },
     "title": {
-      "translate": "advancements.pastel.spectrum_lategame.title"
+      "translate": "advancements.pastel.pastel_lategame.title"
     },
     "description": {
-      "translate": "advancements.pastel.spectrum_lategame.description"
+      "translate": "advancements.pastel.pastel_lategame.description"
     },
     "background": "pastel:textures/gui/advancement_background_lategame.png"
   },

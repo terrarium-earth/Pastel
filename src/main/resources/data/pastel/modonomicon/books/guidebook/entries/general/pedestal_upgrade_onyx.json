@@ -48,7 +48,7 @@
       "use_legacy_rendering": true,
       "title": "book.pastel.guidebook.pedestal_customisation.title",
       "images": [
-        "pastel:textures/gui/guidebook/spectrum_hall_customisation.png"
+        "pastel:textures/gui/guidebook/pastel_hall_customisation.png"
       ]
     },
     {

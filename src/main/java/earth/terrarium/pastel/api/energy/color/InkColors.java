@@ -13,8 +13,8 @@ import java.util.List;
 
 public class InkColors {
 	
-	public static final ResourceLocation BASE_ADVANCEMENT_ID = SpectrumCommon.locate("midgame/spectrum_midgame");
-	public static final ResourceLocation BLACK_ADVANCEMENT_ID = SpectrumCommon.locate("midgame/spectrum_midgame");
+	public static final ResourceLocation BASE_ADVANCEMENT_ID = SpectrumCommon.locate("midgame/pastel_midgame");
+	public static final ResourceLocation BLACK_ADVANCEMENT_ID = SpectrumCommon.locate("midgame/pastel_midgame");
 	public static final ResourceLocation WHITE_ADVANCEMENT_ID = SpectrumCommon.locate("lategame/collect_moonstone");
 
 	private static final DeferredRegister<InkColor> REGISTER = DeferredRegister.create(SpectrumRegistryKeys.INK_COLOR, SpectrumCommon.MOD_ID);

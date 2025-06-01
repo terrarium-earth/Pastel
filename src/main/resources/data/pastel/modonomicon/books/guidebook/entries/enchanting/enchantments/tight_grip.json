@@ -7,7 +7,7 @@
     "type": "modonomicon:advancement",
     "advancement_id": "pastel:unlocks/enchantments/tight_grip"
   },
-  "flag": "pastel:enchantment_exists_spectrum_tight_grip",
+  "flag": "pastel:enchantment_exists_pastel_tight_grip",
   "category": "pastel:enchanting",
   "hide_while_locked": true,
   "parents": [],
@@ -38,7 +38,7 @@
       "type": "pastel:enchanter_crafting",
       "text": "book.pastel.guidebook.crafting",
       "title": "container.pastel.rei.enchanter_recipe",
-      "recipe_id": "pastel:enchanter/spectrum_books/tight_grip"
+      "recipe_id": "pastel:enchanter/pastel_books/tight_grip"
     },
     {
       "type": "pastel:enchanter_upgrading",

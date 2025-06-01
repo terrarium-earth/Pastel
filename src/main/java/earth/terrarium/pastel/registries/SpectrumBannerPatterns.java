@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 @SuppressWarnings("unused")
 public class SpectrumBannerPatterns {
 	
-	public static ResourceKey<BannerPattern> SPECTRUM_LOGO = of("spectrum_logo");
+	public static ResourceKey<BannerPattern> SPECTRUM_LOGO = of("pastel_logo");
 	public static ResourceKey<BannerPattern> AMETHYST_CLUSTER = of("amethyst_cluster");
 	public static ResourceKey<BannerPattern> AMETHYST_SHARD = of("amethyst_shard");
 	public static ResourceKey<BannerPattern> CRAFTING_TABLET = of("crafting_tablet");

@@ -1,5 +1,5 @@
 {
-  "fabric:load_conditions": [
+  "neoforge:conditions": [
     {
       "type": "pastel:enchantments_exist",
       "values": [
