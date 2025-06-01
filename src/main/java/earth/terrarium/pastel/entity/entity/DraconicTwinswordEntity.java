@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.api.entity.NonLivingAttackable;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.entity.SpectrumEntityTypes;
 import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
@@ -51,7 +50,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DraconicTwinswordEntity extends BidentBaseEntity implements NonLivingAttackable {
+public class DraconicTwinswordEntity extends BidentBaseEntity {
 	
 	private static final EntityDataAccessor<Boolean> HIT = SynchedEntityData.defineId(DraconicTwinswordEntity.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> PROPELLED = SynchedEntityData.defineId(DraconicTwinswordEntity.class, EntityDataSerializers.BOOLEAN);

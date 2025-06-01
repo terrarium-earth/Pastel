@@ -70,7 +70,6 @@
     "ServerPlayerEntityMixin",
     "ServerPlayerGameModeFabricMixin",
     "ServerPlayerInteractionManagerMixin",
-    "ServerPlayNetworkHandlerMixin",
     "ServerWorldMixin",
     "ShearsDispenserBehaviorMixin",
     "SpawnDensityCapperMixin",
