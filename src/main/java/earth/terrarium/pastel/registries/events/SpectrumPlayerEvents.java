@@ -3,12 +3,15 @@ package earth.terrarium.pastel.registries.events;
 import earth.terrarium.pastel.api.item.*;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
+import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.enchantments.*;
 import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.*;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
+import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.*;
@@ -23,7 +26,14 @@ public class SpectrumPlayerEvents {
         NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::playerTick);
         NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::clonePlayer);
         NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::handleSplitMerge);
-        NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::forceCritical);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, SpectrumPlayerEvents::forceCritical);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, SpectrumPlayerEvents::applyImprovedCritical);
+    }
+
+    private static void applyImprovedCritical(CriticalHitEvent event) {
+        var player = event.getEntity();
+        var icl = SpectrumEnchantmentHelper.getLevel(player.level().registryAccess(), SpectrumEnchantments.IMPROVED_CRITICAL, event.getEntity().getMainHandItem());
+        event.setDamageMultiplier(event.getDamageMultiplier() + ImprovedCriticalHelper.getAddtionalCritDamageMultiplier(icl));
     }
 
     private static void forceCritical(CriticalHitEvent event) {
@@ -38,7 +48,10 @@ public class SpectrumPlayerEvents {
             if (misc.consumePerfectCounter())
                 event.setDamageMultiplier(event.getDamageMultiplier() + 0.5F);
 
-            event.setCriticalHit(true);
+            if (!event.isCriticalHit()) {
+                event.setCriticalHit(true);
+                event.setDamageMultiplier(event.getDamageMultiplier() + 0.5F);
+            }
         }
 
     }
