@@ -3,6 +3,7 @@ package earth.terrarium.pastel.registries.events;
 import earth.terrarium.pastel.api.item.*;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
+import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.*;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.server.level.*;
@@ -22,6 +23,24 @@ public class SpectrumPlayerEvents {
         NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::playerTick);
         NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::clonePlayer);
         NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::handleSplitMerge);
+        NeoForge.EVENT_BUS.addListener(SpectrumPlayerEvents::forceCritical);
+    }
+
+    private static void forceCritical(CriticalHitEvent event) {
+        var player = event.getEntity();
+        var target = event.getTarget();
+        var misc = MiscPlayerData.get(player);
+
+        if (NectarLanceItem.sleepCrits(player, target) || misc.isParrying() || misc.isLunging()) {
+            if (misc.isParrying())
+                misc.setParryTicks(0);
+
+            if (misc.consumePerfectCounter())
+                event.setDamageMultiplier(event.getDamageMultiplier() + 0.5F);
+
+            event.setCriticalHit(true);
+        }
+
     }
 
     // This could be a capability but that is also probably overengineering this

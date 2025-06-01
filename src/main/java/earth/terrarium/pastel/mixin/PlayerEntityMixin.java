@@ -138,36 +138,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 		player.getAttributes().addTransientAttributeModifiers(map);
 	}
 	
-	@ModifyVariable(method = "attack", at = @At(value = "STORE"), index = 8, require = 1)
-	private boolean spectrum$binglebongle(boolean value, Entity target) {
-		if (hasForcedCrits(target)) {
-			return true;
-		}
-		
-		return value;
-	}
-	
-	@Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getDeltaMovement()Lnet/minecraft/world/phys/Vec3;"))
-	private void spectrum$perfectCounter(Entity target, CallbackInfo ci, @Local(ordinal = 0) LocalFloatRef damage) {
-		var player = (Player) (Object) this;
-		if (MiscPlayerData.get(player).consumePerfectCounter()) {
-			damage.set(damage.get() * 1.5F);
-		}
-	}
-	
-	@Unique
-	protected boolean hasForcedCrits(Entity target) {
-		var player = (Player) (Object) this;
-		var component = MiscPlayerData.get(player);
-		
-		if (NectarLanceItem.sleepCrits(player, target)) {
-			return true;
-		} else if (component.isParrying()) {
-			component.setParryTicks(0);
-			return true;
-		} else return component.isLunging();
-	}
-	
 	@WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "net/minecraft/world/level/Level.playSound (Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 2))
 	protected void spectrum$switchCritSound(Level instance, Player except, double x, double y, double z, SoundEvent sound, SoundSource category, float volume, float pitch, Operation<Void> original) {
 		var player = (Player) (Object) this;

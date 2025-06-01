@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.registries.events;
 
-import earth.terrarium.pastel.api.item.*;
 import earth.terrarium.pastel.attachments.*;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
 import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.*;
 import earth.terrarium.pastel.progression.*;
 import earth.terrarium.pastel.registries.*;
@@ -17,8 +17,10 @@ import net.minecraft.world.damagesource.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.item.*;
+import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
+import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
@@ -35,6 +37,46 @@ public class SpectrumEntityEvents {
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::equipmentChange);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::entityDeath);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::finishUsingItem);
+        NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::parryingSwordBlock);
+    }
+
+    private static void parryingSwordBlock(LivingShieldBlockEvent event) {
+        var damage = event.getDamageContainer().getOriginalDamage();
+        var shielder = event.getEntity();
+        var weapon = shielder.getUseItem();
+
+        if (!(weapon.getItem() instanceof ParryingSwordItem parryingSword))
+            return;
+
+        if (event.getDamageSource().is(SpectrumDamageTypeTags.BYPASSES_PARRYING)) {
+            event.setBlocked(false);
+            event.setBlockedDamage(0);
+            return;
+        }
+        boolean perfect = false;
+
+        if (!shielder.isBlocking() || !checkShieldFacing(event.getDamageSource(), event.getEntity(), -0.25))
+            return; // Parrying swords have a tighter blocking range than shields
+
+        var useTime = shielder.getTicksUsingItem();
+
+        if (shielder instanceof Player player && parryingSword.canBluffParry(weapon, player, useTime)) {
+            perfect = parryingSword.canPerfectParry(weapon, player, useTime);
+            var misc = MiscPlayerData.get(player);
+            misc.setParryTicks(15);
+
+            if (perfect)
+                misc.markForPerfectCounter();
+        }
+
+        if (parryingSword.canDeflect(event.getDamageSource(), perfect)) {
+            var mult = parryingSword.getBlockingMultiplier(event.getDamageSource(), weapon, shielder, useTime);
+            if (mult > 0)
+                shielder.level().broadcastEntityEvent(shielder, (byte) 29); // without this, the shielding sound does not play on non-perfect parries
+
+            event.setBlocked(true);
+            event.setBlockedDamage(damage - damage * mult);
+        }
     }
 
     private static void entityTick(EntityTickEvent.Post event) {
@@ -176,5 +218,18 @@ public class SpectrumEntityEvents {
                 serverWorld.addFreshEntity(headEntity);
             }
         }
+    }
+
+    private static boolean checkShieldFacing(DamageSource damageSource, LivingEntity entity, double leniency) {
+        Vec3 vec32 = damageSource.getSourcePosition();
+        if (vec32 != null) {
+            Vec3 vec3 = entity.calculateViewVector(0.0F, entity.getYHeadRot());
+            Vec3 vec31 = vec32.vectorTo(entity.position());
+            vec31 = new Vec3(vec31.x, 0.0, vec31.z).normalize();
+            return vec31.dot(vec3) < leniency;
+            // This is largely ripped from LivingEntity. Only real change is leniency.
+            // Remember: 1 = facing the same direction, -1 = facing opposite directions
+        }
+        return false;
     }
 }

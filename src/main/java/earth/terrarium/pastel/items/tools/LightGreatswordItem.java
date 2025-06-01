@@ -53,7 +53,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 			return;
 
 		var maxShieldTime = getMaxShieldingTime(user, stack);
-		if (!player.onGround() && maxShieldTime - remainingUseTicks > 5) {
+		if (!player.onGround() && maxShieldTime - remainingUseTicks > 5 && !MiscPlayerData.get(player).isParrying()) {
 
 			var chargeDir = Vec3.directionFromRotation(player.getXRot(), player.getYRot());
 			float chargeStrength = Math.min((float) (maxShieldTime - remainingUseTicks) / maxShieldTime + 0.2F, 1F);
@@ -106,4 +106,9 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 		composition.add(source, damage);
 		return composition;
 	}
+
+	@Override
+	public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
+        return entity instanceof Player player && MiscPlayerData.get(player).isLunging();
+    }
 }
