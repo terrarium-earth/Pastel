@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.components.InkPoweredComponent;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.injectors.StatusEffectInstanceInjector;
+import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -58,7 +58,7 @@ public class InkPoweredStatusEffectInstance {
 		this.customColor = customColor;
 		this.unidentifiable = unidentifiable;
 		this.incurable = incurable;
-		if (incurable) ((StatusEffectInstanceInjector) statusEffectInstance).spectrum$setIncurable(true);
+		if (incurable) ((MobEffectInstanceInjector) statusEffectInstance).spectrum$setIncurable(true);
 	}
 	
 	public MobEffectInstance getStatusEffectInstance() {

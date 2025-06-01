@@ -24,7 +24,7 @@ import earth.terrarium.pastel.helpers.StatusEffectHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
-import earth.terrarium.pastel.injectors.StatusEffectInstanceInjector;
+import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.items.tools.LightGreatswordItem;
 import earth.terrarium.pastel.items.tools.ParryingSwordItem;
 import earth.terrarium.pastel.items.trinkets.AetherGracedNectarGlovesItem;
@@ -269,7 +269,7 @@ public abstract class LivingEntityMixin {
 				var cost = 600 * (statusEffectInstance.getAmplifier() + 1);
 				
 				if (immunity.getDuration() >= cost) {
-					((StatusEffectInstanceInjector) immunity).spectrum$setDuration(Math.max(5, immunity.getDuration() - cost));
+					((MobEffectInstanceInjector) immunity).spectrum$setDuration(Math.max(5, immunity.getDuration() - cost));
 					if (!instance.level().isClientSide()) {
 						((ServerLevel) instance.level()).getChunkSource().broadcastAndSend(instance, new ClientboundUpdateMobEffectPacket(instance.getId(), immunity, false));
 					}
@@ -545,7 +545,7 @@ public abstract class LivingEntityMixin {
 			}
 		}
 
-		StatusEffectInstanceInjector effectInjector = (StatusEffectInstanceInjector) effect;
+		MobEffectInstanceInjector effectInjector = (MobEffectInstanceInjector) effect;
 		var resistanceModifier = Mth.clamp(SleepStatusEffect.getSleepResistance(effect, entity), 0.1F, 10F);
 		if (effectType == SpectrumStatusEffects.ETERNAL_SLUMBER) {
 			if (SleepStatusEffect.isImmuneish(entity)) {
@@ -663,7 +663,7 @@ public abstract class LivingEntityMixin {
 		if (EffectProlongingStatusEffect.canBeExtended(effect.getEffect())) {
 			MobEffectInstance effectProlongingInstance = this.getEffect(SpectrumStatusEffects.EFFECT_PROLONGING);
 			if (effectProlongingInstance != null) {
-				((StatusEffectInstanceInjector) effect).spectrum$setDuration(EffectProlongingStatusEffect.getExtendedDuration(effect.getDuration(), effectProlongingInstance.getAmplifier()));
+				((MobEffectInstanceInjector) effect).spectrum$setDuration(EffectProlongingStatusEffect.getExtendedDuration(effect.getDuration(), effectProlongingInstance.getAmplifier()));
 			}
 		}
 	}

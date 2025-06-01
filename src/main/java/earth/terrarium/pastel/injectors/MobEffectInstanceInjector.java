@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.injectors;
 
-public interface StatusEffectInstanceInjector {
+public interface MobEffectInstanceInjector {
 	
 	default boolean spectrum$isIncurable() {
 		return false;

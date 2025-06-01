@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import earth.terrarium.pastel.helpers.StatusEffectHelper;
-import earth.terrarium.pastel.injectors.StatusEffectInstanceInjector;
+import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.registries.SpectrumStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
@@ -98,7 +98,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 		var cost = 1200 + 600 * amplifier;
 		
 		if (immunity != null && immunity.getDuration() >= cost) {
-			((StatusEffectInstanceInjector) immunity).spectrum$setDuration(Math.max(5, immunity.getDuration() - cost));
+			((MobEffectInstanceInjector) immunity).spectrum$setDuration(Math.max(5, immunity.getDuration() - cost));
 			if (!instance.level().isClientSide()) {
 				((ServerLevel) instance.level()).getChunkSource().broadcastAndSend(instance, new ClientboundUpdateMobEffectPacket(instance.getId(), immunity, false));
 			}

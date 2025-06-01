@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.fluid;
 
-import earth.terrarium.pastel.injectors.StatusEffectInstanceInjector;
+import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.particle.SpectrumParticleTypes;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
 import earth.terrarium.pastel.registries.SpectrumBlocks;
@@ -138,7 +138,7 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 						livingEntity.addEffect(new MobEffectInstance(SpectrumStatusEffects.LIFE_DRAIN, 600, 0));
 					}
 					else if(existingEffect.getDuration() < 500) {
-						((StatusEffectInstanceInjector) existingEffect).spectrum$setDuration(300);
+						((MobEffectInstanceInjector) existingEffect).spectrum$setDuration(300);
 
 						serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
 					}
@@ -153,7 +153,7 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 						if (existingEffect.getDuration() <= cut) {
 							livingEntity.removeEffect(SpectrumStatusEffects.IMMUNITY);
 						} else {
-							((StatusEffectInstanceInjector) existingEffect).spectrum$setDuration(existingEffect.getDuration() - cut);
+							((MobEffectInstanceInjector) existingEffect).spectrum$setDuration(existingEffect.getDuration() - cut);
 							serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
 						}
 					}

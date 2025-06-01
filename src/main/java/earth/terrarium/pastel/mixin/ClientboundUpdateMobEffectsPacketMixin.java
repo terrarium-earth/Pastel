@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.helpers.StatusEffectHelper;
-import earth.terrarium.pastel.injectors.EntityStatusEffectS2CPacketInjector;
+import earth.terrarium.pastel.injectors.ClientboundUpdateMobEffectPacketInjector;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientboundUpdateMobEffectPacket.class)
-public abstract class EntityStatusEffectsS2CPacketMixin implements EntityStatusEffectS2CPacketInjector {
+public abstract class ClientboundUpdateMobEffectsPacketMixin implements ClientboundUpdateMobEffectPacketInjector {
 	
 	@Unique
 	private boolean incurable;

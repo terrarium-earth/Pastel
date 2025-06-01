@@ -7,7 +7,7 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
-import earth.terrarium.pastel.injectors.StatusEffectInstanceInjector;
+import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
 import earth.terrarium.pastel.registries.SpectrumStatusEffects;
 import net.minecraft.core.Holder;
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MobEffectInstance.class)
-public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceInjector {
+public abstract class MobEffectInstanceMixin implements MobEffectInstanceInjector {
 	
 	@Shadow
 	public int duration;
@@ -36,14 +36,14 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 			@Override
 			public <T> DataResult<Pair<MobEffectInstance, T>> apply(DynamicOps<T> ops, T input, DataResult<Pair<MobEffectInstance, T>> result) {
 				return result.map(pair -> {
-					ops.get(input, "incurable").flatMap(ops::getBooleanValue).ifSuccess(v -> ((StatusEffectInstanceInjector) pair.getFirst()).spectrum$setIncurable(v));
+					ops.get(input, "incurable").flatMap(ops::getBooleanValue).ifSuccess(v -> ((MobEffectInstanceInjector) pair.getFirst()).spectrum$setIncurable(v));
 					return pair;
 				});
 			}
 			
 			@Override
 			public <T> DataResult<T> coApply(DynamicOps<T> ops, MobEffectInstance inst, DataResult<T> result) {
-				return result.map(output -> ops.set(output, "incurable", ops.createBoolean(((StatusEffectInstanceInjector) inst).spectrum$isIncurable())));
+				return result.map(output -> ops.set(output, "incurable", ops.createBoolean(((MobEffectInstanceInjector) inst).spectrum$isIncurable())));
 			}
 		});
 	}
@@ -56,7 +56,7 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 			MobEffectInstance existingInstance = (MobEffectInstance) (Object) this;
 			
 			int newAmplifier = 1 + existingInstance.getAmplifier() + newEffect.getAmplifier();
-			((StatusEffectInstanceInjector) existingInstance).spectrum$setAmplifier(newAmplifier);
+			((MobEffectInstanceInjector) existingInstance).spectrum$setAmplifier(newAmplifier);
 			
 			cir.setReturnValue(true);
 		}
@@ -65,8 +65,8 @@ public abstract class StatusEffectInstanceMixin implements StatusEffectInstanceI
 	
 	@Inject(method = "update", at = @At("RETURN"))
 	private void readIncurable(MobEffectInstance that, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 0) LocalBooleanRef changed) {
-		if (incurable != ((StatusEffectInstanceInjector) that).spectrum$isIncurable()) {
-			spectrum$setIncurable(((StatusEffectInstanceInjector) that).spectrum$isIncurable());
+		if (incurable != ((MobEffectInstanceInjector) that).spectrum$isIncurable()) {
+			spectrum$setIncurable(((MobEffectInstanceInjector) that).spectrum$isIncurable());
 			changed.set(true);
 		}
 	}

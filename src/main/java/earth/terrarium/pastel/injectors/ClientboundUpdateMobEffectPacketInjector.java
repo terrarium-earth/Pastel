@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.injectors;
 
-public interface EntityStatusEffectS2CPacketInjector {
+public interface ClientboundUpdateMobEffectPacketInjector {
 	
 	default boolean spectrum$isIncurable() {
 		return false;

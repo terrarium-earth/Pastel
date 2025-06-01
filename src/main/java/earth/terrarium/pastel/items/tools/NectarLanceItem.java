@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
-import earth.terrarium.pastel.injectors.StatusEffectInstanceInjector;
+import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.registries.SpectrumDamageTypes;
 import earth.terrarium.pastel.registries.SpectrumItems;
 import earth.terrarium.pastel.registries.SpectrumSoundEvents;
@@ -95,7 +95,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 					.stream()
 					.filter(instance -> instance.getEffect().value().isBeneficial())
 					.filter(instance -> !instance.isInfiniteDuration())
-					.filter(instance -> !((StatusEffectInstanceInjector) instance).spectrum$isIncurable())
+					.filter(instance -> !((MobEffectInstanceInjector) instance).spectrum$isIncurable())
 					.findFirst();
 
 			if (stolenEffect.isEmpty() || !target.removeEffect(stolenEffect.get().getEffect()))

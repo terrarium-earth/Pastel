@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.helpers;
 
 import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.injectors.StatusEffectInstanceInjector;
+import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
 import earth.terrarium.pastel.registries.SpectrumStatusEffects;
 import net.minecraft.resources.ResourceLocation;
@@ -62,6 +62,6 @@ public class StatusEffectHelper {
 		if (type == SpectrumStatusEffects.ETERNAL_SLUMBER || type == SpectrumStatusEffects.FATAL_SLUMBER)
 			return false;
 		
-		return ((StatusEffectInstanceInjector) instance).spectrum$isIncurable();
+		return ((MobEffectInstanceInjector) instance).spectrum$isIncurable();
 	}
 }
