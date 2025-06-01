@@ -2,10 +2,10 @@ package earth.terrarium.pastel.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.entity.entity.BidentBaseEntity;
+import earth.terrarium.pastel.entity.entity.*;
+import net.minecraft.client.renderer.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -43,9 +43,7 @@ public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
 	}
 	
 	private void renderAsItemStack(BidentBaseEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, ItemStack itemStack) {
-		// Originally used for over-sized item rendering.
-		//SpectrumModelPredicateProviders.currentItemRenderMode = ModelTransformationMode.NONE;
-		BakedModel bakedModel = this.itemRenderer.getModel(itemStack, entity.level(), null, 817210941);
+		BakedModel bakedModel = this.itemRenderer.getModel(itemStack, entity.level(), null, entity instanceof BidentMirrorImageEntity ? 80085 : 817210941);
 		
 		poseStack.pushPose();
 		poseStack.translate(0, entity.makeBoundingBox().getSize() / 2, 0);
@@ -55,7 +53,7 @@ public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
 
 		poseStack.scale(scale, scale, scale);
 
-		this.itemRenderer.render(itemStack, ItemDisplayContext.NONE, false, poseStack, vertexConsumerProvider, light, OverlayTexture.NO_OVERLAY, bakedModel);
+		this.itemRenderer.render(itemStack, ItemDisplayContext.NONE, false, poseStack, vertexConsumerProvider, entity instanceof BidentMirrorImageEntity ? LightTexture.FULL_BRIGHT : light, OverlayTexture.NO_OVERLAY, bakedModel);
 
 		poseStack.popPose();
 	}

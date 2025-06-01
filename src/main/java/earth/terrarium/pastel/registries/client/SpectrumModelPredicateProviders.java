@@ -11,8 +11,7 @@ import earth.terrarium.pastel.components.WrappedPresentComponent;
 import earth.terrarium.pastel.items.magic_items.EnderSpliceItem;
 import earth.terrarium.pastel.items.magic_items.PipeBombItem;
 import earth.terrarium.pastel.items.magic_items.StructureCompassItem;
-import earth.terrarium.pastel.items.tools.MalachiteCrossbowItem;
-import earth.terrarium.pastel.items.tools.SpectrumFishingRodItem;
+import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.AshenCircletItem;
 import earth.terrarium.pastel.registries.SpectrumBlocks;
 import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
@@ -164,14 +163,10 @@ public class SpectrumModelPredicateProviders {
 	 * 1.0: as projectile
 	 */
 	private static void registerBidentThrowingItemPredicate(Item item) {
-		ItemProperties.register(item, ResourceLocation.parse("bident_throwing"), (stack, world, entity, i) -> {
-			/* I believe this is unused now... nothing noticeable seems to have happened, but I would prefer to be safe than sorry.
-			if (currentItemRenderMode == ModelTransformationMode.NONE) {
-				if (stack.getItem() instanceof FractalBidentItem fractal) {
-					return fractal.isDisabled(stack) ? 0.5F : 1F;
-				}
-				return 1.0F;
-			}*/
+		ItemProperties.register(item, ResourceLocation.parse("bident_throwing"), (stack, world, entity, seed) -> {
+			if (seed == 80085) {
+				return 1F;
+			}
 			return entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 0.5F : 0.0F;
 		});
 	}
@@ -222,7 +217,7 @@ public class SpectrumModelPredicateProviders {
 	
 	private static void registerOversizedItemPredicate(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("oversized"), (stack, world, entity, seed) ->
-				seed == 817210941 ? 1.0F : 0.0F);
+				seed == 817210941 || seed == 80085 ? 1.0F : 0.0F);
 	}
 	
 	private static void registerBowPredicates(Item bowItem) {
