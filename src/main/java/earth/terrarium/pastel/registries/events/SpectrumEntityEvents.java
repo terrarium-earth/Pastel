@@ -21,8 +21,10 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 import net.minecraft.world.phys.*;
+import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.*;
 import top.theillusivec4.curios.api.*;
 
@@ -38,6 +40,18 @@ public class SpectrumEntityEvents {
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::entityDeath);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::finishUsingItem);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::parryingSwordBlock);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, SpectrumEntityEvents::jeopardantBonus); // Process it as late as possible for a small amount of tomfoolery
+    }
+
+    private static void jeopardantBonus(LivingDamageEvent.Pre event) {
+        var entity = event.getSource().getEntity();
+
+        if (!(entity instanceof LivingEntity attacker))
+            return;
+
+        if (SpectrumTrinketItem.hasEquipped(attacker, SpectrumItems.JEOPARDANT.get())) {
+            event.setNewDamage((float) (event.getNewDamage() * (AttackRingItem.getAttackModifierForEntity(attacker) + 1)));
+        }
     }
 
     private static void parryingSwordBlock(LivingShieldBlockEvent event) {
