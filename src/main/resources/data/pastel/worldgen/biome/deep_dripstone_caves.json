@@ -14,7 +14,7 @@
       "options": {
         "type": "pastel:light_rain"
       },
-      "probability": 0.01
+      "probability": 0.02
     },
     "mood_sound": {
       "sound": "pastel:ambient.dimension_sounds",

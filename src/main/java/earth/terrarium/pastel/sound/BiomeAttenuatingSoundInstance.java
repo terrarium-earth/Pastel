@@ -163,7 +163,7 @@ public class BiomeAttenuatingSoundInstance extends AbstractSoundInstance impleme
         }
         else if (biome.is(SpectrumBiomes.DEEP_DRIPSTONE_CAVES)) {
             if (SHOWER == null) {
-                SHOWER = new BiomeAttenuatingSoundInstance(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, SpectrumSoundEvents.SHOWER, 2F, false);
+                SHOWER = new BiomeAttenuatingSoundInstance(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, SpectrumSoundEvents.SHOWER, 0.5F, false);
                 client.getSoundManager().play(SHOWER);
             }
         }
@@ -173,7 +173,7 @@ public class BiomeAttenuatingSoundInstance extends AbstractSoundInstance impleme
                 client.getSoundManager().play(LAMENTS);
             }
             if (SHOWER == null) {
-                SHOWER = new BiomeAttenuatingSoundInstance(SpectrumBiomes.DRAGONROT_SWAMP, SpectrumSoundEvents.SHOWER, 2F, false);
+                SHOWER = new BiomeAttenuatingSoundInstance(SpectrumBiomes.DRAGONROT_SWAMP, SpectrumSoundEvents.SHOWER, 1F, false);
                 client.getSoundManager().play(SHOWER);
             }
         }
