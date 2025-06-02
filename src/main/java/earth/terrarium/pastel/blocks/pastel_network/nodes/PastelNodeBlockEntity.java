@@ -113,8 +113,8 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 			cache = Optional.of(BlockCapabilityCache.create(
 					Capabilities.ItemHandler.BLOCK,
 					(ServerLevel) level,
-					getBlockPos().relative(cacheDirection),
-					cacheDirection.getOpposite(),
+					getBlockPos().relative(cacheDirection.getOpposite()),
+					cacheDirection,
 					() -> !this.isRemoved(),
 					() -> cache = Optional.empty()));
 		}

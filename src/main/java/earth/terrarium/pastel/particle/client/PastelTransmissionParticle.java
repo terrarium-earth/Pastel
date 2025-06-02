@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.particle.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.*;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.helpers.SpectrumColorHelper;
 import earth.terrarium.pastel.particle.render.EarlyRenderingParticle;
@@ -22,6 +23,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.gameevent.BlockPositionSource;
 import net.minecraft.world.phys.Vec3;
+import org.joml.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,9 +84,9 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         this.y = Mth.lerp(nodeProgress, source.y, destination.y);
         this.z = Mth.lerp(nodeProgress, source.z, destination.z);
 		
-		if (SpectrumCommon.CONFIG.PastelNetworkParticles && this.age % 3 == 0) {
-			level.addParticle(particleEffect, x + random.nextDouble() * 0.4 - 0.2, y + random.nextDouble() * 0.4 - 0.2, z + random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2);
-		}
+		//if (SpectrumCommon.CONFIG.PastelNetworkParticles && this.age % 3 == 0) {
+		//	level.addParticle(particleEffect, x + random.nextDouble() * 0.4 - 0.2, y + random.nextDouble() * 0.4 - 0.2, z + random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2);
+		//} TODO make these not bad and reimplement
     }
 
     @Override
@@ -93,13 +95,17 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         final float x = (float) (Mth.lerp(tickDelta, xo, this.x));
         final float y = (float) (Mth.lerp(tickDelta, yo, this.y));
         final float z = (float) (Mth.lerp(tickDelta, zo, this.z));
+        var xOffset = x - cameraPos.x;
+        var zOffset = z - cameraPos.z;
+
+        Quaternionf rot = Axis.YP.rotation((float) Mth.atan2(xOffset, zOffset));
 
         poseStack.pushPose();
 
         poseStack.translate(x - cameraPos.x, y - cameraPos.y, z - cameraPos.z);
         final int light = getLightColor(tickDelta);
-        poseStack.mulPose(camera.rotation());
-        poseStack.scale(0.65F, 0.65F, 0.65F);
+        poseStack.mulPose(rot);
+        //poseStack.scale(0.65F, 0.65F, 0.65F);
         poseStack.translate(0, -0.15, 0);
 		itemRenderer.renderStatic(itemStack, ItemDisplayContext.GROUND, light, OverlayTexture.NO_OVERLAY, poseStack, vertexConsumers, level, 0);
 
