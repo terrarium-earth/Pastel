@@ -17,7 +17,7 @@ import earth.terrarium.pastel.registries.SpectrumFluids;
 import earth.terrarium.pastel.registries.SpectrumSoundEvents;
 import earth.terrarium.pastel.registries.SpectrumTooltips;
 import earth.terrarium.pastel.registries.client.SpectrumArmorRenderers;
-import earth.terrarium.pastel.registries.client.SpectrumClientEventListeners;
+import earth.terrarium.pastel.registries.events.SpectrumClientEvents;
 import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
 import earth.terrarium.pastel.registries.client.SpectrumModelPredicateProviders;
 import earth.terrarium.pastel.registries.client.SpectrumTooltipComponents;
@@ -91,7 +91,7 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		pastelBus.addListener(SpectrumDimensions::registerClient);
 
 		logInfo("Registering Client Event Listeners...");
-		SpectrumClientEventListeners.register(pastelBus);
+		SpectrumClientEvents.register(pastelBus);
 
 		container.registerExtensionPoint(IConfigScreenFactory.class, (v, parent) -> AutoConfig.getConfigScreen(SpectrumConfig.class, parent).get());
 

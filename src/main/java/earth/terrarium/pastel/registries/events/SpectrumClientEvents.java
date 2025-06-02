@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.registries.client;
+package earth.terrarium.pastel.registries.events;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -22,6 +22,7 @@ import earth.terrarium.pastel.particle.render.ExtendedParticleManager;
 import earth.terrarium.pastel.progression.*;
 import earth.terrarium.pastel.registries.SpectrumDimensions;
 import earth.terrarium.pastel.registries.SpectrumItemTags;
+import earth.terrarium.pastel.registries.client.*;
 import earth.terrarium.pastel.render.HudRenderers;
 import earth.terrarium.pastel.sound.BiomeAttenuatingSoundInstance;
 import earth.terrarium.pastel.sound.BlockAuraSoundInstance;
@@ -59,6 +60,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.*;
+import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.*;
 import org.jetbrains.annotations.NotNull;
 import oshi.util.tuples.Triplet;
@@ -68,7 +70,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 @OnlyIn(Dist.CLIENT)
-public class SpectrumClientEventListeners {
+public class SpectrumClientEvents {
 	
 	private static boolean postProcessWasOn = SpectrumCommon.CONFIG.PostProcess;
 	
@@ -77,21 +79,28 @@ public class SpectrumClientEventListeners {
 	}
 	//
 	public static void register(IEventBus pastelBus) {
-		pastelBus.addListener(SpectrumClientEventListeners::onReloadClientResources);
+		pastelBus.addListener(SpectrumClientEvents::onReloadClientResources);
 		pastelBus.addListener(SpectrumColorProviders::registerBlocks);
 		pastelBus.addListener(SpectrumColorProviders::registerItems);
-		pastelBus.addListener(SpectrumClientEventListeners::addResourcePacks);
+		pastelBus.addListener(SpectrumClientEvents::addResourcePacks);
 
-		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onWorldRenderStart);
-		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onRenderBlockOutlines);
-		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onLogout);
-		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onDrawTooltips);
-		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onDimensionChange);
-		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::afterClientTick);
-		NeoForge.EVENT_BUS.addListener(SpectrumClientEventListeners::onEntityTick);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEvents::onWorldRenderStart);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEvents::onRenderBlockOutlines);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEvents::onLogout);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEvents::onLogin);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEvents::onDrawTooltips);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEvents::afterClientTick);
+		NeoForge.EVENT_BUS.addListener(SpectrumClientEvents::onEntityTick);
 
 		// registerCustomItemRenderer(SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem(), BottomlessBundleItem.Renderer::new); TODO unholy
 		// registerCustomItemRenderer(SpectrumItems.OMNI_ACCELERATOR.get(), OmniAcceleratorItem.Renderer::new);
+	}
+
+	private static void onLogin(ClientPlayerNetworkEvent.LoggingIn event) {
+		var player = event.getPlayer();
+		if (player.level().dimension().equals(SpectrumDimensions.DIMENSION_KEY) && SpectrumCommon.CONFIG.PostProcess) {
+			initializeColorGrading(Minecraft.getInstance());
+		}
 	}
 
 	private static void addResourcePacks(AddPackFindersEvent event) {
@@ -129,7 +138,7 @@ public class SpectrumClientEventListeners {
 		HowlingSpireEffects.clientTick(level, cameraEntity, biome);
 		DimensionRenderEffects.clientTick(level, cameraEntity, biome);
 
-		if (SpectrumCommon.CONFIG.PostProcess) {
+		if (SpectrumCommon.CONFIG.PostProcess && level.dimension().equals(SpectrumDimensions.DIMENSION_KEY)) {
 			if (!postProcessWasOn) {
 				initializeColorGrading(client);
 				postProcessWasOn = true;
@@ -140,18 +149,6 @@ public class SpectrumClientEventListeners {
 		else if (postProcessWasOn) {
 			SpectrumShaders.clearDimensionShaders();
 			postProcessWasOn = false;
-		}
-	}
-
-	private static void onDimensionChange(EntityTravelToDimensionEvent event) {
-		var entity = event.getEntity();
-		var dim = event.getDimension();
-
-		if (entity.equals(Minecraft.getInstance().cameraEntity) && SpectrumCommon.CONFIG.PostProcess && dim.equals(SpectrumDimensions.DIMENSION_KEY)) {
-			initializeColorGrading(Minecraft.getInstance());
-		}
-		else  {
-			SpectrumShaders.clearDimensionShaders();
 		}
 	}
 
@@ -171,6 +168,7 @@ public class SpectrumClientEventListeners {
 
 	private static void onLogout(ClientPlayerNetworkEvent.LoggingOut event) {
 		Pastel.clearClientInstance();
+		SpectrumShaders.clearDimensionShaders();
 	}
 
 	private static void onRenderBlockOutlines(RenderHighlightEvent.Block event) {
