@@ -33,7 +33,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 					&& stack.getItem().canFitInsideContainerItems()))
 				return stack;
 
-			var remainder = insertItem(0, stack, simulate);
+			var remainder = super.insertItem(0, stack, simulate);
 
 			if (!simulate)
 				setChanged();
