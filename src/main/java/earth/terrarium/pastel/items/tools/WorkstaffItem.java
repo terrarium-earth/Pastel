@@ -4,8 +4,8 @@ import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.item.AoEBreakingTool;
 import earth.terrarium.pastel.api.item.Preenchanted;
+import earth.terrarium.pastel.capabilities.AreaMiningHandler;
 import earth.terrarium.pastel.components.WorkstaffComponent;
 import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
 import earth.terrarium.pastel.helpers.Support;
@@ -15,6 +15,8 @@ import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
 import earth.terrarium.pastel.registries.SpectrumEnchantments;
 import earth.terrarium.pastel.registries.SpectrumSoundEvents;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -35,7 +37,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.Map;
 
-public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Preenchanted {
+public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, Preenchanted {
 	
 	protected static final InkCost BASE_COST_PER_AOE_MINING_RANGE_INCREMENT = new InkCost(InkColors.WHITE, 3); // TODO: make pricier once ink networking is in
 
@@ -81,7 +83,7 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		int range = getAoERange(stack);
+		int range = stack.getOrDefault(SpectrumDataComponentTypes.AOE, 0);
 		if(range > 0) {
 			int displayedRange = 1 + range + range;
 			tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.mining_range", displayedRange, displayedRange).withStyle(ChatFormatting.GRAY));
@@ -98,17 +100,6 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 				new WorkstaffScreenHandler(syncId, inventory, itemStack),
 				Component.translatable("item.pastel.workstaff")
 		);
-	}
-	
-	@Override
-	public boolean canUseAoE(Player player, ItemStack stack) {
-		int range = getAoERange(stack);
-		if (range <= 0) {
-			return true;
-		}
-		
-		int costForRange = (int) Math.pow(BASE_COST_PER_AOE_MINING_RANGE_INCREMENT.cost(), range);
-		return InkPowered.tryDrainEnergy(player, BASE_COST_PER_AOE_MINING_RANGE_INCREMENT.color(), costForRange);
 	}
 	
 	public static void applyToggle(Player player, ItemStack stack, GUIToggle toggle) {
@@ -196,6 +187,18 @@ public class WorkstaffItem extends MultiToolItem implements AoEBreakingTool, Pre
 	private static void triggerUnenchantedWorkstaffAdvancement(ServerPlayer player) {
 		player.playNotifySound(SpectrumSoundEvents.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
 		Support.grantAdvancementCriterion(player, "lategame/trigger_unenchanted_workstaff", "code_triggered");
+	}
+
+	@Override
+	public Vec3i getMiningArea(Player player, ItemStack stack, BlockPos pos) {
+		Integer range = stack.getOrDefault(SpectrumDataComponentTypes.AOE, 0);
+
+		var inkCost = (int) Math.pow(BASE_COST_PER_AOE_MINING_RANGE_INCREMENT.cost(), range);
+
+		if (range == 0 || !InkPowered.tryDrainEnergy(player, BASE_COST_PER_AOE_MINING_RANGE_INCREMENT.color(), inkCost))
+			return Vec3i.ZERO;
+
+		return new Vec3i(range, range, 0);
 	}
 	
 	@Override

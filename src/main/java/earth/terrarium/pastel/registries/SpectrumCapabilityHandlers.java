@@ -46,6 +46,8 @@ public class SpectrumCapabilityHandlers {
                 Capabilities.FluidHandler.ITEM,
                 (stack, v) -> new FluidHandlerItemStackSimple.Consumable(() -> SpectrumDataComponentTypes.MERMAIDS_GEM, stack, 1000),
                 SpectrumItems.MERMAIDS_GEM.get());
+
+        event.registerItem(PastelCapabilities.Miscellaneous.MINING, (stack, v) -> (AreaMiningHandler) stack.getItem(), SpectrumItems.MALACHITE_WORKSTAFF, SpectrumItems.GLASS_CREST_WORKSTAFF);
     }
 
     private static void standardBlockBE(Supplier<? extends BlockEntityType<? extends SidedCapabilityProvider>> type, RegisterCapabilitiesEvent event) {

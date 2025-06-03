@@ -6,6 +6,7 @@ import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
 import earth.terrarium.pastel.blocks.chests.CompactingChestBlockEntity;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.components.InertiaComponent;
 import earth.terrarium.pastel.entity.spawners.ShootingStarSpawner;
 import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
@@ -22,6 +23,9 @@ import earth.terrarium.pastel.registries.SpectrumDimensions;
 import earth.terrarium.pastel.registries.SpectrumEnchantments;
 import earth.terrarium.pastel.registries.SpectrumItems;
 import earth.terrarium.pastel.registries.client.SpectrumColorProviders;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -30,7 +34,6 @@ import net.minecraft.server.packs.resources.*;
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -42,6 +45,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -52,12 +56,11 @@ import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.resource.ContextAwareReloadListener;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
+import java.util.HashSet;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
+import java.util.Set;
 
 public class SpectrumMiscEvents {
 
@@ -68,7 +71,8 @@ public class SpectrumMiscEvents {
 		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::endServerTick);
 		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::interactEntity);
 		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::blockUse);
-		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::blockBreak);
+		NeoForge.EVENT_BUS.addListener(EventPriority.LOW, SpectrumMiscEvents::handleAoEMining);
+		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::updateInertia);
 		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::tagReload);
 		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::leftClickBlock);
 		NeoForge.EVENT_BUS.addListener(SpectrumMiscEvents::registerTillable);
@@ -247,7 +251,43 @@ public class SpectrumMiscEvents {
 		}
 	}
 
-	private static void blockBreak(BlockEvent.BreakEvent event) {
+	private static final Set<BlockPos> AREA_TARGETS = new HashSet<>();
+	private static void handleAoEMining(BlockEvent.BreakEvent event) {
+		var player = (ServerPlayer) event.getPlayer();
+		var original = event.getPos();
+
+		if (AREA_TARGETS.contains(original))
+			return; // No recursion
+
+		var cap = player.getMainHandItem().getCapability(PastelCapabilities.Miscellaneous.MINING);
+		if (cap == null)
+			return;
+
+		var aoe = cap.getMiningArea(player, player.getMainHandItem(), original);
+		var reach = Math.max(Math.max(aoe.getX(), aoe.getY()), aoe.getZ());
+
+		if (aoe.equals(Vec3i.ZERO))
+			return;
+
+		var start = switch (player.getNearestViewDirection().getAxis()) {
+            case X ->  original.offset(aoe.getZ(), aoe.getY(), aoe.getX());
+            case Y -> original.offset(aoe.getX(), aoe.getZ(), aoe.getY());
+            case Z -> original.offset(aoe.getX(), aoe.getY(), aoe.getZ());
+        };
+		var end = switch (player.getNearestViewDirection().getAxis()) {
+			case X ->  original.offset(0, -aoe.getY(), -aoe.getX());
+			case Y -> original.offset(-aoe.getX(), 0, -aoe.getY());
+			case Z -> original.offset(-aoe.getX(), -aoe.getY(), 0);
+		};
+
+		BlockPos.betweenClosedStream(start, end)
+				.filter(pos -> !pos.equals(original) && player.canInteractWithBlock(pos, 1.0 + reach))
+				.peek(AREA_TARGETS::add)
+				.peek(player.gameMode::destroyBlock)
+				.forEach(AREA_TARGETS::remove);
+	}
+
+	private static void updateInertia(BlockEvent.BreakEvent event) {
 		var player = (ServerPlayer) event.getPlayer();
 		var state = event.getState();
 
