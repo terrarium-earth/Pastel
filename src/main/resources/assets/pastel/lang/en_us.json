@@ -5648,9 +5648,8 @@
   "tag.pastel.yellow_logs": "Yellow Logs",
   "tag.pastel.crossbows": "pastel Crossbows",
 
-  "tag.trinkets.chest.pin": "Pins",
-  "tag.trinkets.head.crown": "Crowns",
-  "tag.trinkets.legs.pigment_palette": "Palettes",
+  "curios.identifier.pin": "Pin",
+  "curios.identifier.pigment_palette": "Palette",
 
   "text.autoconfig.pastel.option.AddItemTooltips": "Add advanced tooltips for Spawners, Signs, Skulk Shriekers and much more",
   "text.autoconfig.pastel.option.AzureDikeHudOffsetX": "X Position of the Azure Dike Overlay on the players screen. Default: On top of Hearts",

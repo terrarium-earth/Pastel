@@ -2934,9 +2934,8 @@
   "block.minecraft.banner.pastel.jade_vine.orange": "橙色玉藤花瓣",
   "block.minecraft.banner.pastel.jade_vine.white": "白色玉藤花瓣",
 
-  "trinkets.slot.chest.pin": "胸针",
-  "trinkets.slot.head.crown": "王冠",
-  "trinkets.slot.legs.pigment_palette": "调色板",
+  "curios.identifier.pin": "胸针",
+  "curios.identifier.pigment_palette": "调色板",
 
   "info.pastel.tooltip.adulterated.info": " [只有你能看到]",
   "info.pastel.tooltip.adulterated.effect": "被 %s 污染",
@@ -3501,10 +3500,6 @@
   "tag.pastel.swimmable_fluid": "额外可游泳液体",
   "tag.pastel.midnight_solution_converted": "转换后的午夜溶液",
   "tag.pastel.resplendent_feathers": "龙翎",
-
-  "tag.trinkets.chest.pin": "胸针",
-  "tag.trinkets.head.crown": "皇冠",
-  "tag.trinkets.legs.pigment_palette": "调色板",
 
   "explosion_archetype.pastel.cosmetic": "无威胁性的爆炸",
   "explosion_archetype.pastel.destroy_blocks": "爆炸会破坏方块",
