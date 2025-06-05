@@ -1,14 +1,13 @@
 package earth.terrarium.pastel.blocks.bottomless_bundle;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.api.item.InventoryInsertionAcceptor;
+import earth.terrarium.pastel.api.item.ItemReference;
+import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.items.tooltip.BottomlessBundleTooltipData;
+import earth.terrarium.pastel.items.tooltip.ItemStorageTooltipData;
 import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
 import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
 import earth.terrarium.pastel.registries.SpectrumEnchantments;
@@ -28,10 +27,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -58,35 +54,34 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Implementation Detail <p> While it may appear otherwise, the count a bottomless bundle can store may never exceed {@link Integer#MAX_VALUE}
  */
-public class BottomlessBundleItem extends BlockItem implements InventoryInsertionAcceptor {
+public class BottomlessBundleItem extends BlockItem implements InventoryInsertionAcceptor, ItemStorage.LimitCallback {
 	
 	private static final long MAX_STORED_AMOUNT_BASE = 20000;
 	
 	public BottomlessBundleItem(Block block, Item.Properties settings) {
-		super(block, settings.component(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT));
+		super(block, settings.component(SpectrumDataComponentTypes.ITEM_STORAGE, ItemStorage.Component.DEFAULT));
 	}
-	
+
 	public static long getMaxStoredAmount(int powerLevel) {
 		return MAX_STORED_AMOUNT_BASE * (int) Math.pow(10, Math.min(5, powerLevel)); // to not exceed int max
 	}
 	
-	private static boolean dropOneBundledStack(ItemStack stack, Player player) {
-		var builder = BottomlessStack.Builder.of(player.level(), stack);
-		var dropped = builder.removeFirstStack();
+	private static boolean dropOneBundledStack(ItemStack bundle, Player player) {
+		var storage = ItemStorage.load(bundle);
+		var dropped = storage.extract(storage.stackSize());
 		if (dropped.isEmpty())
 			return false;
-		
+
 		player.drop(dropped, true);
-		builder.buildAndSet(stack);
+		storage.save(bundle);
 		return true;
 	}
 	
@@ -94,14 +89,12 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		return itemStack.has(DataComponents.LOCK);
 	}
 	
-	public static ItemStack getTemplateVariant(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT).variant();
+	public static ItemReference getStoredReference(ItemStack bundle) {
+		return ItemStorage.load(bundle).getReference();
 	}
 	
-	public static long getStoredAmount(ItemStack voidBundleStack) {
-		return voidBundleStack
-				.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT)
-				.count();
+	public static long getStoredAmount(ItemStack bundle) {
+		return ItemStorage.load(bundle).getCount();
 	}
 	
 	@Override
@@ -143,11 +136,8 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	}
 	
 	@Override
-	public Optional<TooltipComponent> getTooltipImage(ItemStack bundleStack) {
-		ItemStack variant = getTemplateVariant(bundleStack);
-		var storedAmount = getStoredAmount(bundleStack);
-		
-		return Optional.of(new BottomlessBundleTooltipData(variant, storedAmount));
+	public Optional<TooltipComponent> getTooltipImage(ItemStack bundle) {
+		return Optional.of(new ItemStorageTooltipData(ItemStorage.load(bundle)));
 	}
 	
 	@Override
@@ -161,20 +151,20 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 						Component.translatable("item.pastel.bottomless_bundle.tooltip.locked").withStyle(ChatFormatting.GRAY));
 			}
 		} else {
-			ItemStack variant = getTemplateVariant(stack);
+			var variant = getStoredReference(stack);
 			var powerLevel = context.registries()
 					.lookup(Registries.ENCHANTMENT)
 					.flatMap(impl -> impl.get(Enchantments.POWER))
 					.map(ench -> EnchantmentHelper.getItemEnchantmentLevel(ench, stack))
 					.orElse(0);
-			String totalStacks = Support.getShortenedNumberString(storedAmount / (float) variant.getItem().getDefaultMaxStackSize());
+			String totalStacks = Support.getShortenedNumberString(storedAmount / (float) variant.asItem().getDefaultMaxStackSize());
 			tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.count", storedAmount,
 					getMaxStoredAmount(powerLevel), totalStacks).withStyle(ChatFormatting.GRAY));
 			if (locked) {
 				tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.locked").withStyle(ChatFormatting.GRAY));
 			} else {
 				tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.enter_inventory",
-						variant.getItem().getDescription().getString()).withStyle(ChatFormatting.GRAY));
+						variant.asItem().getDescription().getString()).withStyle(ChatFormatting.GRAY));
 			}
 		}
 		if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.DELETES_OVERFLOW)) {
@@ -184,10 +174,10 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	
 	@Override
 	public void onDestroyed(ItemEntity entity) {
-		var bottomlessStack = entity.getItem().get(SpectrumDataComponentTypes.BOTTOMLESS_STACK);
-		if (bottomlessStack != null) {
-			entity.getItem().set(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT);
-			ItemUtils.onContainerDestroyed(entity, bottomlessStack.iterateCopy());
+		var storage = entity.getItem().get(SpectrumDataComponentTypes.ITEM_STORAGE);
+		if (storage != null) {
+			entity.getItem().set(SpectrumDataComponentTypes.ITEM_STORAGE, ItemStorage.Component.DEFAULT);
+			ItemUtils.onContainerDestroyed(entity, () -> new ItemStorage.IterableView(new ItemStorage(storage.reference(), storage.count())));
 		}
 	}
 	
@@ -195,28 +185,33 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	 * When the bundle is clicked onto another stack
 	 */
 	@Override
-	public boolean overrideStackedOnOther(ItemStack bundleStack, Slot slot, ClickAction clickType, Player player) {
-		if (bundleStack.getCount() != 1 || clickType != ClickAction.SECONDARY) {
+	public boolean overrideStackedOnOther(ItemStack bundle, Slot slot, ClickAction clickType, Player player) {
+		if (bundle.getCount() != 1 || clickType != ClickAction.SECONDARY) {
 			return false;
 		}
-		
-		ItemStack slotStack = slot.getItem();
-		var builder = BottomlessStack.Builder.of(player.level(), bundleStack);
+
+		var slotStack = slot.getItem();
+		var storage = ItemStorage.load(bundle);
 		if (slotStack.isEmpty()) {
-			var removed = builder.removeFirstStack();
+			var removed = storage.extract(storage.stackSize());
 			if (!removed.isEmpty()) {
 				this.playRemoveOneSound(player);
 				var remainder = slot.safeInsert(removed);
-				builder.add(remainder);
+				storage.increment(remainder.getCount());
+
 			}
 		} else if (slotStack.getItem().canFitInsideContainerItems()) {
-			var added = builder.add(slot, player);
-			if (added > 0) {
+			var inserted = storage.insert(slotStack);
+			if (inserted > 0) {
 				this.playInsertSound(player);
+				slotStack.shrink(inserted);
+			}
+			else {
+				return false;
 			}
 		}
-		
-		builder.buildAndSet(bundleStack);
+
+		storage.save(bundle);
 		return true;
 	}
 	
@@ -224,62 +219,65 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	 * When a stack is right-clicked onto the bundle
 	 */
 	@Override
-	public boolean overrideOtherStackedOnMe(ItemStack bundleStack, ItemStack otherStack, Slot slot, ClickAction clickType, Player player, SlotAccess cursorStackReference) {
-		if (bundleStack.getCount() != 1 || clickType != ClickAction.SECONDARY || !slot.allowModification(player)) {
+	public boolean overrideOtherStackedOnMe(ItemStack bundle, ItemStack otherStack, Slot slot, ClickAction clickType, Player player, SlotAccess cursorStackReference) {
+		if (bundle.getCount() != 1 || clickType != ClickAction.SECONDARY || !slot.allowModification(player)) {
 			return false;
 		}
 		
-		var builder = BottomlessStack.Builder.of(player.level(), bundleStack);
+		var storage = ItemStorage.load(bundle);
 		if (otherStack.isEmpty()) {
-			var removed = builder.removeFirstStack();
+			var removed = storage.extract(storage.stackSize());
 			if (!removed.isEmpty()) {
 				this.playRemoveOneSound(player);
 				cursorStackReference.set(removed);
 			}
 		} else {
-			var added = builder.add(otherStack);
-			if (added > 0) {
-				otherStack.shrink(added);
+			var inserted = storage.insert(otherStack);
+			if (inserted > 0) {
+				otherStack.shrink(inserted);
 				this.playInsertSound(player);
 			}
+			else {
+				return false;
+			}
 		}
-		
-		builder.buildAndSet(bundleStack);
+
+		storage.save(bundle);
 		return true;
 	}
 	
 	@Override
-	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
+	public void inventoryTick(ItemStack bundle, Level world, Entity entity, int slot, boolean selected) {
 		// We unbundle, tick and then rebundle the stack, in case inventory tick would modify components, count or other properties
 		// The slot isn't technically correct, since it's the slot of the bundle, not that of the bundled stack
-		BottomlessStack.Builder builder = BottomlessStack.Builder.of(world, stack);
-		ItemStack bundled = builder.getReference();
-		ItemStack ticked = builder.getReference().copyWithCount((int) Math.min(Integer.MAX_VALUE, builder.count));
-		long preTickCount = ticked.getCount();
+		var storage = ItemStorage.load(bundle);
+		ItemStack bundled = storage.stack(1);
+		ItemStack ticked = bundled.copyWithCount(Integer.MAX_VALUE);
 		ticked.inventoryTick(world, entity, slot, selected);
-		if (!ItemStack.isSameItemSameComponents(bundled, ticked) || ticked.getCount() != preTickCount) {
-			builder.set(ticked, Math.min(builder.getMaxAllowed(ticked), builder.count + ticked.getCount() - preTickCount));
-			builder.buildAndSet(stack);
+		if (!ItemStack.isSameItemSameComponents(bundled, ticked) || ticked.getCount() != Integer.MAX_VALUE) {
+			storage.setReference(ItemReference.of(ticked));
+			storage.setCount(storage.getCount() - (Integer.MAX_VALUE - ticked.getCount()));
+			storage.save(bundle);
 		}
 	}
 	
 	
 	@Override
-	public boolean acceptsItemStack(ItemStack inventoryInsertionAcceptorStack, ItemStack itemStackToAccept) {
-		ItemStack reference = getTemplateVariant(inventoryInsertionAcceptorStack);
-		return !reference.isEmpty() && ItemStack.isSameItemSameComponents(inventoryInsertionAcceptorStack, reference);
+	public boolean acceptsItemStack(ItemStack bundle, ItemStack itemStackToAccept) {
+		var reference = getStoredReference(bundle);
+		return !reference.isEmpty() && reference.permits(itemStackToAccept);
 	}
 	
 	@Override
-	public int acceptItemStack(ItemStack inventoryInsertionAcceptorStack, ItemStack itemStackToAccept, Player playerEntity) {
-		if (isLocked(inventoryInsertionAcceptorStack)) {
+	public int acceptItemStack(ItemStack bundle, ItemStack itemStackToAccept, Player playerEntity) {
+		if (isLocked(bundle)) {
 			return itemStackToAccept.getCount();
 		}
 		
-		var builder = BottomlessStack.Builder.of(playerEntity.level(), inventoryInsertionAcceptorStack);
-		var added = builder.add(itemStackToAccept);
-		builder.buildAndSet(inventoryInsertionAcceptorStack);
-		return itemStackToAccept.getCount() - added;
+		var storage = ItemStorage.load(bundle);
+		var inserted = storage.insert(itemStackToAccept);
+		storage.save(bundle);
+		return itemStackToAccept.getCount() - inserted;
 	}
 	
 	private void playRemoveOneSound(Entity entity) {
@@ -310,7 +308,16 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	public int getEnchantmentValue() {
 		return 5;
 	}
-	
+
+	@Override
+	public long updateLimit(ItemStack holder) { // Frankly this is just horrible and I should be killed with hammers for it
+		return getMaxStoredAmount(ServerLifecycleHooks.getCurrentServer().registryAccess()
+				.lookup(Registries.ENCHANTMENT)
+				.flatMap(impl -> impl.get(Enchantments.POWER))
+				.map(ench -> EnchantmentHelper.getItemEnchantmentLevel(ench, holder))
+				.orElse(0));
+	}
+
 	public static class BottomlessBundlePlacementDispenserBehavior extends OptionalDispenseItemBehavior {
 		
 		@Override
@@ -337,178 +344,23 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	public static class Renderer implements DynamicItemRenderer {
 		public Renderer() {
 		}
-		
+
 		@Override
 		public void render(ItemRenderer renderer, ItemStack stack, ItemDisplayContext mode, boolean leftHanded,
 						   PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
-			if (mode != ItemDisplayContext.GUI
+			if (mode!=ItemDisplayContext.GUI
 					|| getStoredAmount(stack) <= 0)
 				return;
-			ItemStack bundledStack = BottomlessBundleItem.getTemplateVariant(stack);
+			var bundledStack = ItemStorage.load(stack).stack(1);
 			Minecraft client = Minecraft.getInstance();
 			BakedModel bundledModel = renderer.getModel(bundledStack, client.level, client.player, 0);
-			
+
 			matrices.pushPose();
 			matrices.scale(0.5F, 0.5F, 0.5F);
 			matrices.translate(0.5F, 0.5F, 0.5F);
 			renderer.render(bundledStack, mode, leftHanded, matrices, vertexConsumers, light, overlay, bundledModel);
 			matrices.popPose();
 		}
-	}
-	
-	public record BottomlessStack(ItemStack variant, long count, boolean locked) {
-		
-		public static BottomlessStack DEFAULT = new BottomlessStack(ItemStack.EMPTY, 0, false);
-		
-		public static Codec<BottomlessStack> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-				ItemStack.CODEC.fieldOf("variant").forGetter(BottomlessStack::variant),
-				Codec.LONG.fieldOf("count").forGetter(BottomlessStack::count),
-				Codec.BOOL.fieldOf("locked").forGetter(BottomlessStack::locked)
-		).apply(instance, BottomlessStack::new));
-		
-		public static StreamCodec<RegistryFriendlyByteBuf, BottomlessStack> STREAM_CODEC = StreamCodec.composite(
-				ItemStack.STREAM_CODEC, BottomlessStack::variant,
-				ByteBufCodecs.VAR_LONG, BottomlessStack::count,
-				ByteBufCodecs.BOOL, BottomlessStack::locked,
-				BottomlessStack::new
-		);
-		
-		public Iterable<ItemStack> iterateCopy() {
-			return new Iterable<>() {
-				
-				@Override
-				public @NotNull Iterator<ItemStack> iterator() {
-					return new Iterator<>() {
-						
-						private final Builder builder = new Builder(BottomlessStack.this, Integer.MAX_VALUE, false, false);
-						
-						@Override
-						public boolean hasNext() {
-							return !builder.isEmpty();
-						}
-						
-						@Override
-						public ItemStack next() {
-							return builder.removeFirstStack();
-						}
-						
-					};
-				}
-				
-			};
-		}
-		
-		public static class Builder {
-			
-			private final boolean voiding, locked;
-			private final long max;
-			private long count;
-			private ItemStack reference;
-			
-			public static Builder of(Level world, ItemStack stack) {
-				var prev = stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessStack.DEFAULT);
-				var max = BottomlessBundleItem.getMaxStoredAmount(SpectrumEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.POWER, stack));
-				var voiding = EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.DELETES_OVERFLOW_IN_INVENTORY);
-				var locked = stack.has(DataComponents.LOCK);
-				return new Builder(prev, max, voiding, locked);
-			}
-			
-			public Builder(BottomlessStack prev, long max, boolean voiding, boolean locked) {
-				this.reference = prev.variant();
-				this.max = max;
-				this.count = prev.count();
-				this.voiding = voiding;
-				this.locked = locked;
-			}
-			
-			public Builder clear() {
-				this.reference = ItemStack.EMPTY;
-				this.count = 0;
-				return this;
-			}
-			
-			public int getMaxAllowed(ItemStack stack) {
-				return (int) Math.min(getMaxAllowed(stack, stack.getCount()), Integer.MAX_VALUE);
-			}
-			
-			public long getMaxAllowed(ItemStack variant, long amount) {
-				if (isEmpty()) {
-					return this.max;
-				}
-				if (variant.isEmpty() || amount <= 0 || !variant.getItem().canFitInsideContainerItems())
-					return 0;
-				return voiding ? Long.MAX_VALUE : this.max - this.count;
-			}
-			
-			public int add(ItemStack stack) {
-				int toAdd = Math.min(stack.getCount(), this.getMaxAllowed(stack));
-				if (toAdd == 0)
-					return 0;
-				
-				if (this.count == 0)
-					this.reference = stack.copyWithCount(1);
-				
-				this.count += Math.min(this.max - this.count, toAdd);
-				return toAdd;
-			}
-			
-			public void setStack(ItemStack stack) {
-				this.reference = stack.copyWithCount(1);
-			}
-			
-			public void set(ItemStack stack, long count) {
-				if (stack.isEmpty() || count == 0) {
-					this.reference = ItemStack.EMPTY;
-					this.count = 0;
-				} else {
-					this.reference = stack.copyWithCount(1);
-					this.count = count;
-				}
-			}
-			
-			public long add(Slot slot, Player player) {
-				var maxAllowed = this.getMaxAllowed(slot.getItem());
-				return this.add(slot.safeTake(slot.getItem().getCount(), maxAllowed, player));
-			}
-			
-			public ItemStack remove(int amount) {
-				if (isEmpty())
-					return ItemStack.EMPTY;
-				
-				var toRemove = Math.min((int) this.count, amount);
-				var removed = this.reference.copyWithCount(toRemove);
-				this.count -= toRemove;
-				if (this.count == 0)
-					this.reference = ItemStack.EMPTY;
-				
-				return removed;
-			}
-			
-			public ItemStack removeFirstStack() {
-				return remove(reference.getItem().getDefaultMaxStackSize());
-			}
-			
-			public long getCount() {
-				return count;
-			}
-			
-			public ItemStack getReference() {
-				return reference;
-			}
-			
-			public boolean isEmpty() {
-				return count == 0 || reference.isEmpty();
-			}
-			
-			public void buildAndSet(ItemStack bottomlessBundleStack) {
-				if (this.isEmpty()) {
-					bottomlessBundleStack.remove(SpectrumDataComponentTypes.BOTTOMLESS_STACK);
-				} else {
-					bottomlessBundleStack.set(SpectrumDataComponentTypes.BOTTOMLESS_STACK, new BottomlessStack(reference, count, locked));
-				}
-			}
-		}
-		
 	}
 	
 	@Override

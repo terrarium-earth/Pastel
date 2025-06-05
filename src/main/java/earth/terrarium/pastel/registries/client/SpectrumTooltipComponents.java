@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.registries.client;
 
 import earth.terrarium.pastel.items.tooltip.BottomlessBundleTooltipComponent;
-import earth.terrarium.pastel.items.tooltip.BottomlessBundleTooltipData;
+import earth.terrarium.pastel.items.tooltip.ItemStorageTooltipData;
 import earth.terrarium.pastel.items.tooltip.CraftingTabletTooltipComponent;
 import earth.terrarium.pastel.items.tooltip.CraftingTabletTooltipData;
 import earth.terrarium.pastel.items.tooltip.PresentTooltipComponent;
@@ -15,7 +15,7 @@ public class SpectrumTooltipComponents {
 	
 	public static void registerTooltipComponents(RegisterClientTooltipComponentFactoriesEvent event) {
 		event.register(CraftingTabletTooltipData.class, CraftingTabletTooltipComponent::new);
-		event.register(BottomlessBundleTooltipData.class, BottomlessBundleTooltipComponent::new);
+		event.register(ItemStorageTooltipData.class, BottomlessBundleTooltipComponent::new);
 		event.register(PresentTooltipData.class, PresentTooltipComponent::new);
 	}
 	

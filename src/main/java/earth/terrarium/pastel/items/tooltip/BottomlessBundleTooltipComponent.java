@@ -19,19 +19,18 @@ public class BottomlessBundleTooltipComponent implements SpectrumTooltipComponen
 	private final int displayedSlotCount;
 	private final boolean drawDots;
 	
-	public BottomlessBundleTooltipComponent(BottomlessBundleTooltipData data) {
-		long amount = data.amount();
-		
-		long maxCount = data.variant().getItem().getDefaultMaxStackSize();
+	public BottomlessBundleTooltipComponent(ItemStorageTooltipData data) {
+		var storage = data.storage();
+
+		long amount = storage.getCount();
+		long maxCount = storage.stackSize();
 		double totalStacks = (float) amount / (float) maxCount;
 		this.displayedSlotCount = Math.max(2, Math.min(MAX_DISPLAYED_SLOTS + 1, (int) Math.ceil(totalStacks) + 1));
 		
 		this.itemStacks = NonNullList.withSize(5, ItemStack.EMPTY);
 		for (int i = 0; i < Math.min(5, displayedSlotCount + 1); i++) {
-			ItemStack slotStack = data.variant();
 			var stackAmount = Math.min(Math.min(maxCount, amount - i * maxCount), Integer.MAX_VALUE);
-			slotStack.setCount((int) stackAmount);
-			this.itemStacks.set(i, slotStack);
+			this.itemStacks.set(i, storage.stack((int) stackAmount));
 		}
 		drawDots = totalStacks > MAX_DISPLAYED_SLOTS;
 	}

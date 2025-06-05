@@ -86,10 +86,10 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!world.isClientSide) {
 			if (player.isShiftKeyDown()) {
-				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bottomlessBundleBlockEntity) -> {
-					long amount = bottomlessBundleBlockEntity.storage.getStackInSlot(0).getCount();
-					ItemStack ref = bottomlessBundleBlockEntity.storage.getStackInSlot(0);
-					long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bottomlessBundleBlockEntity.powerLevel);
+				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bundle) -> {
+					long amount = bundle.getStoredAmount();
+					ItemStack ref = bundle.storage.getStackInSlot(0);
+					long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bundle.powerLevel);
 					if (ref.isEmpty()) {
 						player.displayClientMessage(Component.translatable("item.pastel.bottomless_bundle.tooltip.empty"), true);
 					} else {
@@ -98,7 +98,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 				});
 			} else {
 				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bottomlessBundleBlockEntity) -> {
-					ItemStackHandler storage = bottomlessBundleBlockEntity.storage;
+					var storage = bottomlessBundleBlockEntity.storage;
 					ItemStack ref = storage.getStackInSlot(0);
 
 					if (ItemStack.isSameItemSameComponents(ref, stack) || ref.isEmpty()) {

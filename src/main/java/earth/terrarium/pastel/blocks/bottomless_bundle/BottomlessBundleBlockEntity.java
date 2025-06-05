@@ -1,5 +1,7 @@
 package earth.terrarium.pastel.blocks.bottomless_bundle;
 
+import earth.terrarium.pastel.api.item.ItemReference;
+import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.capabilities.*;
 import earth.terrarium.pastel.registries.SpectrumBlockEntities;
 import earth.terrarium.pastel.registries.SpectrumBlocks;
@@ -20,33 +22,61 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 	// Do not modify without syncing storage too!
 	// Contents are synced from/into storage whenever needed [i.e. (de)serialization or setting/fetching bundle item]
 	private ItemStack bundle;
+	private ItemStorage innerStorage;
 
 	// Cached to prevent incessant enchantment calls.
 	// No need to write that back into the bundle stack.
 	private boolean isVoiding;
 	protected int powerLevel;
 
-	public ItemStackHandler storage = new ItemStackHandler(1) {
+	public BottomlessBundleBlockEntity(BlockPos pos, BlockState state) {
+		super(SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get(), pos, state);
+		this.bundle = SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
+		innerStorage = ItemStorage.load(bundle).copy();
+	}
+
+	public IItemHandler storage = new IItemHandler() {
+		@Override
+		public int getSlots() {
+			return 1;
+		}
+
+		@Override
+		public ItemStack getStackInSlot(int i) {
+			return innerStorage.stack((int) Math.min(innerStorage.getCount(), innerStorage.stackSize()));
+		}
+
 		@Override
 		public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-			if (!(stacks.getFirst().isEmpty() || ItemStack.isSameItemSameComponents(stack, stacks.getFirst())
-					&& stack.getItem().canFitInsideContainerItems()))
+			if (slot != 0)
 				return stack;
 
-			var remainder = super.insertItem(0, stack, simulate);
+			var change = innerStorage.insert(stack);
+			var remainder = stack.copyWithCount(stack.getCount() - change);
 
-			if (!simulate)
-				setChanged();
+			if (simulate) {
+				innerStorage.extractPure(change);
+				// Erm technically, the shimulationch here will schfail if the inchertion goes over Integer.MAX_VALUE - SHUT THE FUCK UP
+				return remainder;
+			}
 
+			setChanged();
 			return isVoiding ? ItemStack.EMPTY : remainder;
 		}
 
 		@Override
 		public ItemStack extractItem(int slot, int amount, boolean simulate) {
-			var result = super.extractItem(slot, amount, simulate);
-			if (!simulate)
-				setChanged();
+			if (slot != 0)
+				return ItemStack.EMPTY;
 
+			var result = innerStorage.extract(amount);
+
+			if (simulate) {
+				innerStorage.increment(result.getCount());
+				return result;
+			}
+
+			setChanged();
 			return result;
 		}
 
@@ -54,11 +84,15 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 		public int getSlotLimit(int slot) {
 			return (int) BottomlessBundleItem.getMaxStoredAmount(powerLevel);
 		}
+
+		@Override
+		public boolean isItemValid(int i, ItemStack itemStack) {
+			return false;
+		}
 	};
 
-	public BottomlessBundleBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get(), pos, state);
-		this.bundle = SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
+	public int getStoredAmount() {
+		return (int) innerStorage.getCount();
 	}
 
 	@Override
@@ -71,18 +105,12 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 
 	// Trivial sync methods. Call whenever bundle/storage contents need to be synced with each other [(de)serialization, bundle stack set, bundle block break loot]
 	private void syncBundleWithStorage() {
-		var stack = storage.getStackInSlot(0);
-
         assert this.level != null;
-        var builder = BottomlessBundleItem.BottomlessStack.Builder.of(this.level, this.bundle);
-		builder.set(stack.copyWithCount(1), stack.getCount());
-		builder.buildAndSet(this.bundle);
+		innerStorage.copy().save(bundle);
 	}
 
 	private void syncStorageWithBundle() {
-		var ref = BottomlessBundleItem.getTemplateVariant(bundle);
-		var count = BottomlessBundleItem.getStoredAmount(bundle);
-		storage.setStackInSlot(0, ref.copyWithCount((int) count));
+		innerStorage = ItemStorage.load(bundle).copy();
 	}
 	
 	@Override

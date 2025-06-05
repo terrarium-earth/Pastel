@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.api.interaction.ItemProvider;
+import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.player.Player;
@@ -29,20 +30,19 @@ public class SpectrumItemProviders {
 			event.registerItem(ItemProvider.CAPABILITY, (ignored, ignored2) -> new ItemProvider() {
 				@Override
 				public int provideItems(Player player, ItemStack stack, Item requestedItem, int amount) {
-					var builder = BottomlessBundleItem.BottomlessStack.Builder.of(player.level(), stack);
-					var removed = builder.remove(amount);
-					if (!removed.is(requestedItem))
+					var storage = ItemStorage.load(stack);
+					if (!storage.stack(1).is(requestedItem))
 						return 0;
-					builder.buildAndSet(stack);
-					return removed.getCount();
+
+					return (int) storage.extractPure(amount);
 				}
 				
 				@Override
 				public int getItemCount(Player player, ItemStack stack, Item requestedItem) {
-					var bottomlessStack = stack.getOrDefault(SpectrumDataComponentTypes.BOTTOMLESS_STACK, BottomlessBundleItem.BottomlessStack.DEFAULT);
-					if (!bottomlessStack.variant().is(requestedItem))
+					var storage = ItemStorage.load(stack);
+					if (!storage.getReference().asItem().equals(requestedItem))
 						return 0;
-					return (int) Math.min(Integer.MAX_VALUE, bottomlessStack.count());
+					return (int) Math.min(Integer.MAX_VALUE, storage.getCount());
 				}
 			}, SpectrumBlocks.BOTTOMLESS_BUNDLE);
 			
