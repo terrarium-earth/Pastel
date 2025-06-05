@@ -2414,9 +2414,9 @@
   "block.minecraft.banner.pastel.jade_vine.magenta": "Пурпурная Нефритовая Лоза",
   "block.minecraft.banner.pastel.jade_vine.orange": "Оранжевая Нефритовая Лоза",
   "block.minecraft.banner.pastel.jade_vine.white": "Белая Нефритовая Лоза",
-  "trinkets.slot.chest.pin": "Булавка",
-  "trinkets.slot.head.crown": "Корона",
-  "trinkets.slot.legs.pigment_palette": "Пигментная Палитра",
+
+  "curios.identifier.pin": "Булавка",
+  "curios.identifier.pigment_palette": "Пигментная Палитра",
 
   "item.pastel.creative_only": "Только для Творческого Режима",
 	"item.pastel.fanciful_tuff_ring": "Чудное Кольцо из Туфа",
@@ -2897,10 +2897,6 @@
   "tag.pastel.bedrock_rod_fishable_in": "Bedrock Rod Fishable",
   "tag.pastel.swimmable_fluid": "Additional Swimmable Fluids",
   "tag.pastel.midnight_solution_converted": "Midnight Solution Converted",
-
-  "tag.trinkets.chest.pin": "Pins",
-  "tag.trinkets.head.crown": "Crowns",
-  "tag.trinkets.legs.pigment_palette": "Palettes",
 
   "explosion_archetype.pastel.cosmetic": "Декоративный Взрыв",
   "explosion_archetype.pastel.destroy_blocks": "Взрыв наносит урон по блокам",

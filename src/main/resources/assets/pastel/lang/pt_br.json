@@ -1393,9 +1393,8 @@
   "block.minecraft.banner.pastel.jade_vine.orange": "Vinha de Jade Laranja",
   "block.minecraft.banner.pastel.jade_vine.white": "Vinha de Jade Branca",
 
-  "trinkets.slot.chest.pin": "Broche",
-  "trinkets.slot.head.crown": "Coroa",
-  "trinkets.slot.legs.pigment_palette": "Paleta de Pigmentos",
+  "curios.identifier.pin": "Broche",
+  "curios.identifier.pigment_palette": "Paleta de Pigmentos",
 
 	"item.pastel.fanciful_tuff_ring": "Anel de Pedra Fantástico",
   "item.pastel.fanciful_belt": "Cinto Fantástico",
@@ -5264,9 +5263,6 @@
   "tag.pastel.white_logs": "White Logs",
   "tag.pastel.workstaffs": "Workstaffs",
   "tag.pastel.yellow_logs": "Yellow Logs",
-  "tag.trinkets.chest.pin": "Pins",
-  "tag.trinkets.head.crown": "Crowns",
-  "tag.trinkets.legs.pigment_palette": "Palettes",
   "text.autoconfig.pastel.option.AddItemTooltips": "Add advanced tooltips for Spawners, Signs, Skulk Shriekers and much more",
   "text.autoconfig.pastel.option.AzureDikeHudOffsetX": "X Position of the Azure Dike Overlay on the players screen. Default: On top of Hearts",
   "text.autoconfig.pastel.option.AzureDikeHudOffsetY": "Y Position of the Azure Dike Overlay on the players screen. Default: On top of Hearts",
