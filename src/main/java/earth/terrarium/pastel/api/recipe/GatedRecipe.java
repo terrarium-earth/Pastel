@@ -45,7 +45,6 @@ public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 		}
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	private void registerInToastManagerClient(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {
 		UnlockToastManager.registerGatedRecipe(recipeType, gatedRecipe);
 	}

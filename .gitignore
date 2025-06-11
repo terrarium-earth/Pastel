@@ -27,3 +27,6 @@ backup/
 /deps/
 /remappedSrc/
 /src/main/generated/.cache/
+
+# adrian having a mac moment
+.DS_Store

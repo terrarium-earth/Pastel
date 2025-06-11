@@ -45,12 +45,7 @@ public class PrimordialFireData {
 	public static final float FIRE_PROT_DAMAGE_RESISTANCE = 0.05F;
 	
 	@OnlyIn(Dist.CLIENT)
-	private static Optional<OnPrimordialFireSoundInstance> soundInstance;
-	
-	/* prevent the static initializer from attempting to write to the client-only field in common code */
-	static {
-		if (EffectiveSide.get().isClient()) soundInstance = Optional.empty();
-	}
+	public static Optional<OnPrimordialFireSoundInstance> soundInstance;
 
 	private static void sync(LivingEntity entity) {
 		AttachmentUtil.syncToTracking(new Payload(entity.getId(), entity.getData(ATTACHMENT)), entity.level(), entity.blockPosition());

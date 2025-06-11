@@ -30,7 +30,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-@OnlyIn(Dist.CLIENT)
 public class UnlockToastManager {
 	// Advancement Identifier + Recipe Variant => Recipe
 	public static final Map<ResourceLocation, Map<RecipeType<?>, Set<GatedRecipe<?>>>> gatedRecipes = new HashMap<>();

@@ -39,7 +39,6 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public class SpectrumS2CPackets {
 
-	@SubscribeEvent
 	public static void register(PayloadRegistrar registrar) {
 		registrar.playToClient(PlayParticleWithRandomOffsetAndVelocityPayload.ID, PlayParticleWithRandomOffsetAndVelocityPayload.CODEC, PlayParticleWithRandomOffsetAndVelocityPayload::execute);
 		registrar.playToClient(PlayParticleWithExactVelocityPayload.ID, PlayParticleWithExactVelocityPayload.CODEC, PlayParticleWithExactVelocityPayload::execute);
