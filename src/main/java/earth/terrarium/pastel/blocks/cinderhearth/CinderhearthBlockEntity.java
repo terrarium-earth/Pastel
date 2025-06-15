@@ -101,6 +101,8 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 		super(SpectrumBlockEntities.CINDERHEARTH.get(), pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 		this.inkStorage = new IndividualCappedInkStorage(INK_STORAGE_SIZE, USED_INK_COLORS);
+
+		inventory.addListener(i -> inventoryChanged());
 	}
 
 	@Override
