@@ -156,9 +156,9 @@ public class SpectrumMiscEvents {
 				CompactingChestBlockEntity.clearCache();
 				SpectrumCommon.CACHED_ITEM_TAG_MAP.clear();
 
-				if (ServerLifecycleHooks.getCurrentServer() != null) {
-					//injectEnchantmentUpgradeRecipes(ServerLifecycleHooks.getCurrentServer());
-					FirestarterIdolBlock.addBlockSmeltingRecipes(ServerLifecycleHooks.getCurrentServer());
+				if (SpectrumCommon.getSidedServer() != null) {
+					//injectEnchantmentUpgradeRecipes(SpectrumCommon.getSidedServer());
+					FirestarterIdolBlock.addBlockSmeltingRecipes(SpectrumCommon.getSidedServer());
 				}
 			}
 

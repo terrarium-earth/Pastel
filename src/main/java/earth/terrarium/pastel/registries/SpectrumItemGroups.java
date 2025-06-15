@@ -746,9 +746,9 @@ public class SpectrumItemGroups {
 				entries.accept(SpectrumItems.FREIGEIST.get());
 
 				// adding all beverages from recipes
-				if (ServerLifecycleHooks.getCurrentServer() != null) {
-					for (RecipeHolder<ITitrationBarrelRecipe> recipe : ServerLifecycleHooks.getCurrentServer().getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.TITRATION_BARREL)) {
-						ItemStack output = recipe.value().getResultItem(ServerLifecycleHooks.getCurrentServer().registryAccess()).copy();
+				if (SpectrumCommon.getSidedServer() != null) {
+					for (RecipeHolder<ITitrationBarrelRecipe> recipe : SpectrumCommon.getSidedServer().getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.TITRATION_BARREL)) {
+						ItemStack output = recipe.value().getResultItem(SpectrumCommon.getRegistryAccess()).copy();
 						if (output.getItem().components().has(SpectrumDataComponentTypes.INFUSED_BEVERAGE)) {
 							output.setCount(1);
 							entries.accept(output);

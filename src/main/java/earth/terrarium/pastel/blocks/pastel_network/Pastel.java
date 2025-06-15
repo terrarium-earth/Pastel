@@ -25,8 +25,8 @@ public class Pastel {
     }
 
     public static ServerPastelNetworkManager getServerInstance() {
-        if (serverManager == null && ServerLifecycleHooks.getCurrentServer() != null) {
-            serverManager = ServerPastelNetworkManager.get(ServerLifecycleHooks.getCurrentServer().overworld());
+        if (serverManager == null && SpectrumCommon.getSidedServer() != null) {
+            serverManager = ServerPastelNetworkManager.get(SpectrumCommon.getSidedServer().overworld());
         }
         return serverManager;
     }

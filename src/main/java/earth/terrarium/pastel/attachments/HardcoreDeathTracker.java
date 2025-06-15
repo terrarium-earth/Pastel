@@ -64,7 +64,7 @@ public class HardcoreDeathTracker extends SavedData {
 
 	@NotNull
 	public static HardcoreDeathTracker getInstance() {
-		return ServerLifecycleHooks.getCurrentServer().overworld().getDataStorage().computeIfAbsent(FACTORY, SpectrumCommon.MOD_ID + ":hardcore_tracker");
+		return SpectrumCommon.getSidedServer().overworld().getDataStorage().computeIfAbsent(FACTORY, SpectrumCommon.MOD_ID + ":hardcore_tracker");
 	}
 
 	@Override

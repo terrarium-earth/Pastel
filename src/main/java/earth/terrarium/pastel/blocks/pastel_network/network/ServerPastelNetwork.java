@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 	
 	public static final Codec<ServerPastelNetwork> CODEC = RecordCodecBuilder.create(i -> i.group(
-			Level.RESOURCE_KEY_CODEC.xmap(k -> ServerLifecycleHooks.getCurrentServer().getLevel(k), Level::dimension).fieldOf("world").forGetter(b -> b.world),
+			Level.RESOURCE_KEY_CODEC.xmap(k -> SpectrumCommon.getSidedServer().getLevel(k), Level::dimension).fieldOf("world").forGetter(b -> b.world),
 			UUIDUtil.STRING_CODEC.fieldOf("uuid").forGetter(ServerPastelNetwork::getUUID),
 			Codec.INT.fieldOf("color").forGetter(ServerPastelNetwork::getColor),
 			TickLooper.CODEC.fieldOf("looper").forGetter(b -> b.transferLooper)

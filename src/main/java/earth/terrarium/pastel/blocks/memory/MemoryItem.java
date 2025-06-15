@@ -200,9 +200,9 @@ public class MemoryItem extends BlockItem {
 		// adding all memories that have spirit instiller recipes
 		Set<MemoryComponent> encountered = new HashSet<>();
 		//TODO does this work on dedicated servers?
-		if (ServerLifecycleHooks.getCurrentServer() != null) {
+		if (SpectrumCommon.getSidedServer() != null) {
 			Item memoryItem = SpectrumBlocks.MEMORY.get().asItem();
-			for (var recipe : ServerLifecycleHooks.getCurrentServer().getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.SPIRIT_INSTILLING)) {
+			for (var recipe : SpectrumCommon.getSidedServer().getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.SPIRIT_INSTILLING)) {
 				ItemStack output = recipe.value().getResultItem(lookup);
 				var memory = output.get(SpectrumDataComponentTypes.MEMORY);
 				if (output.is(memoryItem) && memory != null && !encountered.contains(memory)) {

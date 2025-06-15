@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.api.block;
 
+import earth.terrarium.pastel.SpectrumCommon;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.server.*;
@@ -10,8 +11,8 @@ import java.util.UUID;
 public interface PlayerOwned {
 	
 	static Player getPlayerEntityIfOnline(UUID ownerUUID) {
-		if (ownerUUID != null && ServerLifecycleHooks.getCurrentServer() != null) {
-			return ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(ownerUUID);
+		if (ownerUUID != null && SpectrumCommon.getSidedServer() != null) {
+			return SpectrumCommon.getSidedServer().getPlayerList().getPlayer(ownerUUID);
 		}
 		return null;
 	}
@@ -31,8 +32,8 @@ public interface PlayerOwned {
 	@Nullable
 	default Player getOwnerIfOnline() {
 		UUID ownerUUID = this.getOwnerUUID();
-		if (ownerUUID != null && ServerLifecycleHooks.getCurrentServer() != null) {
-			return ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(ownerUUID);
+		if (ownerUUID != null && SpectrumCommon.getSidedServer() != null) {
+			return SpectrumCommon.getSidedServer().getPlayerList().getPlayer(ownerUUID);
 		}
 		return null;
 	}

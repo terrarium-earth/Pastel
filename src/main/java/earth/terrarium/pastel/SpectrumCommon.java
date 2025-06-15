@@ -30,15 +30,19 @@ import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.registries.events.*;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.*;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -269,10 +273,28 @@ public class SpectrumCommon {
 	 * When initializing a block entity, world can still be null
 	 * Therefore we use the RecipeManager reference from MinecraftServer
 	 * This in turn does not work on clients connected to dedicated servers, though
-	 * since ServerLifecycleHooks.getCurrentServer() is null
+	 * since SpectrumCommon.getSidedServer() is null
 	 */
 	public static Optional<RecipeManager> getRecipeManager(@Nullable Level world) {
-		return Optional.ofNullable(world).map(Level::getRecipeManager).or(() -> Optional.ofNullable(ServerLifecycleHooks.getCurrentServer()).map(MinecraftServer::getRecipeManager));
+		return Optional.ofNullable(world).map(Level::getRecipeManager).or(() -> Optional.ofNullable(SpectrumCommon.getSidedServer()).map(MinecraftServer::getRecipeManager));
+	}
+
+	@Nullable
+	public static RegistryAccess getRegistryAccess() {
+		if (getSidedServer() == null)
+			return null;
+
+		return getSidedServer().registryAccess();
+	}
+
+	@Nullable
+	public static MinecraftServer getSidedServer() {
+		if (FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
+			return ServerLifecycleHooks.getCurrentServer();
+		}
+		else {
+			return SpectrumSided.getClientServer();
+		}
 	}
 	
 }

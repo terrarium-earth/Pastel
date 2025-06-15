@@ -147,10 +147,12 @@ public class SpectrumPlayerEvents {
 
         var mergeStack = mergeable.getMergeResult(player, firstHalf, secondHalf);
 
-        if (off) {
-            event.setItemSwappedToOffHand(mergeStack);
-        } else {
+        if (!off) {
             event.setItemSwappedToMainHand(mergeStack);
+            event.setItemSwappedToOffHand(ItemStack.EMPTY);
+        } else {
+            event.setItemSwappedToMainHand(ItemStack.EMPTY);
+            event.setItemSwappedToOffHand(mergeStack);
         }
     }
 

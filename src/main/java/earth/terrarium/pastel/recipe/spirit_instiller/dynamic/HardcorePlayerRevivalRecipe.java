@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic;
 
 import com.mojang.authlib.GameProfile;
+import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.attachments.HardcoreDeathTracker;
@@ -42,11 +43,11 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	public ItemStack assemble(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, HolderLookup.Provider drm) {
 		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
 		GameProfile gameProfile = getSkullOwner(recipeInput.getItem(SpiritInstillerRecipe.CENTER_INGREDIENT));
-		if (gameProfile != null && ServerLifecycleHooks.getCurrentServer() != null) {
-			ServerPlayer revivedPlayer = ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayerByName(gameProfile.getName());
+		if (gameProfile != null && SpectrumCommon.getSidedServer() != null) {
+			ServerPlayer revivedPlayer = SpectrumCommon.getSidedServer().getPlayerList().getPlayerByName(gameProfile.getName());
 			if (revivedPlayer != null) {
 				HardcoreDeathTracker.removeHardcoreDeath(gameProfile);
-				revivedPlayer.setGameMode(ServerLifecycleHooks.getCurrentServer().getDefaultGameType());
+				revivedPlayer.setGameMode(SpectrumCommon.getSidedServer().getDefaultGameType());
 				
 				Rotation blockRotation = spiritInstillerBlockEntity.getMultiblockRotation();
 				float yaw = 0.0F;
@@ -69,11 +70,11 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 		ItemStack instillerStack = inventory.getItem(0);
 		if (instillerStack.is(Blocks.PLAYER_HEAD.asItem())) {
 			GameProfile gameProfile = getSkullOwner(instillerStack);
-			if (gameProfile == null || ServerLifecycleHooks.getCurrentServer() == null) {
+			if (gameProfile == null || SpectrumCommon.getSidedServer() == null) {
 				return false;
 			}
 			
-			PlayerList playerManager = ServerLifecycleHooks.getCurrentServer().getPlayerList();
+			PlayerList playerManager = SpectrumCommon.getSidedServer().getPlayerList();
 			ServerPlayer playerToRevive = gameProfile.getId() == null ? playerManager.getPlayerByName(gameProfile.getName()) : playerManager.getPlayer(gameProfile.getId());
 			return playerToRevive != null && HardcoreDeathTracker.hasHardcoreDeath(gameProfile);
 		}
