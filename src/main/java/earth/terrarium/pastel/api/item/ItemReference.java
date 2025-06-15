@@ -97,6 +97,12 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
         return reference;
     }
 
+    public ItemStack asStack() {
+        var stack = reference.getDefaultInstance();
+        stack.applyComponents(components);
+        return stack;
+    }
+
     public static ItemReference empty() {
         return ItemReference.of(Items.AIR);
     }

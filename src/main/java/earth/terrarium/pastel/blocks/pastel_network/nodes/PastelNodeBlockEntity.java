@@ -3,6 +3,7 @@ package earth.terrarium.pastel.blocks.pastel_network.nodes;
 import com.google.common.base.Predicates;
 import earth.terrarium.pastel.SpectrumCommon;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
+import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.StampDataCategory;
 import earth.terrarium.pastel.api.item.Stampable;
 import earth.terrarium.pastel.api.pastel.PastelUpgradeSignature;
@@ -24,6 +25,7 @@ import earth.terrarium.pastel.registries.SpectrumPastelUpgrades;
 import earth.terrarium.pastel.registries.SpectrumRegistries;
 import earth.terrarium.pastel.registries.SpectrumSoundEvents;
 import earth.terrarium.pastel.registries.SpectrumStampDataCategories;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.*;
 import net.minecraft.world.*;
 import net.minecraft.world.item.ItemStack;
@@ -94,14 +96,14 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	protected Optional<BlockCapabilityCache<IItemHandler, Direction>> cache = Optional.empty();
 	protected Direction cacheDirection = null;
 	
-	private final FriendlyStackHandler filterItems;
+	private final NonNullList<ItemReference> filterItems;
 	float rotationTarget, crystalRotation, lastRotationTarget, heightTarget, crystalHeight, lastHeightTarget, alphaTarget, ringAlpha, lastAlphaTarget;
 	long creationStamp = -1, interpTicks, interpLength = -1, spinTicks;
 	private ConnectionState connectionState;
 	
 	public PastelNodeBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(SpectrumBlockEntities.PASTEL_NODE.get(), blockPos, blockState);
-		this.filterItems = new FriendlyStackHandler(MAX_FILTER_SLOTS);
+		this.filterItems = NonNullList.withSize(MAX_FILTER_SLOTS, ItemReference.empty());
 		this.outerRing = Optional.empty();
 		this.innerRing = Optional.empty();
 		this.redstoneRing = Optional.empty();
@@ -270,8 +272,8 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		}
 		
 		if (filterSlotRows < oldFilterSlotCount) {
-			for (int i = getDrawnSlots(); i < filterItems.getSlots(); i++) {
-				filterItems.removeStackInSlot(i);
+			for (int i = getDrawnSlots(); i < filterItems.size(); i++) {
+				filterItems.remove(i);
 			}
 		}
 	}
@@ -474,13 +476,13 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	}
 	
 	@Override
-	public FriendlyStackHandler getItemFilters() {
+	public NonNullList<ItemReference> getItemFilters() {
 		return this.filterItems;
 	}
 	
 	@Override
 	public void setFilterItem(int slot, ItemStack item) {
-		this.filterItems.setStackInSlot(slot, item);
+		this.filterItems.set(slot, ItemReference.of(item));
 	}
 	
 	public Predicate<ItemStack> getTransferFilterTo(PastelNodeBlockEntity other) {
@@ -491,7 +493,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 			} else {
 				return this::filter;
 			}
-		} else if (other.getNodeType().usesFilters() && !other.hasEmptyFilter()) {
+ 		} else if (other.getNodeType().usesFilters() && !other.hasEmptyFilter()) {
 			return other::filter;
 		} else {
 			return ItemStack -> true;
@@ -500,14 +502,13 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	
 	private boolean filter(ItemStack variant) {
 		return filterItems
-				.getInternalList()
 				.stream()
 				.anyMatch(filterItem -> {
 
-                    if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem.is(SpectrumItemTags.TAG_FILTERING_ITEMS))
-						return filterItem.getItem() == variant.getItem();
+                    if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem.asStack().is(SpectrumItemTags.TAG_FILTERING_ITEMS))
+						return filterItem.permits(variant);
 					
-					var name = StringUtils.trim(filterItem.getHoverName().getString());
+					var name = StringUtils.trim(filterItem.asStack().getHoverName().getString());
 					
 					// This is to allow nbt filtering without item / tag filtering.
 					if (StringUtils.equalsAnyIgnoreCase(name, "*", "any", "all", "everything", "c:*", "c:any", "c:all", "c:everything"))

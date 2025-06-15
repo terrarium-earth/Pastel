@@ -2,6 +2,7 @@ package earth.terrarium.pastel.blocks.chests;
 
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
+import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.events.SpectrumGameEvents;
 import earth.terrarium.pastel.events.listeners.EventQueue;
@@ -54,7 +55,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	public static final int EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT = 27;
 	private static final int RANGE = 12;
 	private final ItemAndExperienceEventQueue itemAndExperienceEventQueue;
-	private final FriendlyStackHandler filterItems;
+	private final NonNullList<ItemReference> filterItems;
 	private State state = State.CLOSED_INACTIVE;
 	private boolean isOpen, isFull, hasXPStorage;
 	float storageTarget, storagePos, lastStorageTarget, capTarget, capPos, lastCapTarget, orbTarget, orbPos, lastOrbTarget, yawTarget, orbYaw, lastYawTarget;
@@ -63,7 +64,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	public BlackHoleChestBlockEntity(BlockPos blockPos, BlockState blockState) {
 		super(SpectrumBlockEntities.BLACK_HOLE_CHEST.get(), blockPos, blockState);
 		this.itemAndExperienceEventQueue = new ItemAndExperienceEventQueue(new BlockPositionSource(this.worldPosition), RANGE, this);
-		this.filterItems = new FriendlyStackHandler(ITEM_FILTER_SLOT_COUNT);
+		this.filterItems = NonNullList.withSize(ITEM_FILTER_SLOT_COUNT, ItemReference.empty());
 	}
 	
 	@SuppressWarnings("unused")
@@ -327,7 +328,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	}
 	
 	@Override
-	public FriendlyStackHandler getItemFilters() {
+	public NonNullList<ItemReference> getItemFilters() {
 		return this.filterItems;
 	}
 	
@@ -342,7 +343,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	}
 
 	public void setFilterItem(int slot, ItemStack item) {
-		this.filterItems.setStackInSlot(slot, item);
+		this.filterItems.set(slot, ItemReference.of(item));
 		this.setChanged();
 	}
 	
@@ -353,8 +354,8 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		
 		boolean allAir = true;
 		for (int i = 0; i < ITEM_FILTER_SLOT_COUNT; i++) {
-			ItemStack filterItem = this.filterItems.getStackInSlot(i);
-			if (itemStack.is(filterItem.getItem())) {
+			var filterItem = this.filterItems.get(i);
+			if (filterItem.permits(itemStack)) {
 				return true;
 			} else if (!filterItem.isEmpty()) {
 				allAir = false;

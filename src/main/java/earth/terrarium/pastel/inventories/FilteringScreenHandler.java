@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.inventories;
 
 import earth.terrarium.pastel.api.block.FilterConfigurable;
+import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.inventories.slots.ShadowSlot;
 import net.minecraft.network.*;
 import net.minecraft.world.item.ItemStack;
@@ -109,7 +110,7 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
 		@Override
 		public boolean onClicked(ItemStack heldStack, ClickAction type, Player player) {
 			if (!world.isClientSide && filterConfigurable != null) {
-				filterConfigurable.filterItems().set(getContainerSlot(), heldStack.copyWithCount(1));
+				filterConfigurable.filterItems().set(getContainerSlot(), ItemReference.of(heldStack));
 			}
 			return super.onClicked(heldStack, type, player);
 		}
