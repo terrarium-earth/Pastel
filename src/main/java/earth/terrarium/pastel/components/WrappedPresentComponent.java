@@ -20,7 +20,7 @@ public record WrappedPresentComponent(boolean wrapped, PresentBlock.WrappingPape
 	public static final Codec<WrappedPresentComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			Codec.BOOL.optionalFieldOf("wrapped", false).forGetter(WrappedPresentComponent::wrapped),
 			StringRepresentable.fromEnum(PresentBlock.WrappingPaper::values).fieldOf("variant").forGetter(WrappedPresentComponent::variant),
-			Codec.unboundedMap(Codec.INT, ExtraCodecs.POSITIVE_INT).fieldOf("colors").forGetter(WrappedPresentComponent::colors)
+			Codec.unboundedMap(Codec.STRING.xmap(Integer::parseInt, Object::toString), ExtraCodecs.POSITIVE_INT).fieldOf("colors").forGetter(WrappedPresentComponent::colors)
 	).apply(instance, WrappedPresentComponent::new));
 	
 	public static final StreamCodec<RegistryFriendlyByteBuf, WrappedPresentComponent> STREAM_CODEC = StreamCodec.composite(
