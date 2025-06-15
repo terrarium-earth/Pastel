@@ -119,8 +119,8 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public EnchanterBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.ENCHANTER.get(), pos, state, INVENTORY_SIZE);
-		virtualInventory.addListener(i -> inventoryChanged());
 		this.virtualInventory = new EnchanterInventory();
+		this.virtualInventory.addListener(i -> inventoryChanged());
 		this.currentItemProcessingTime = -1;
 	}
 	
