@@ -32,7 +32,6 @@ public record TypedTransmissionPayload(TypedTransmission transmission) implement
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(TypedTransmissionPayload payload, IPayloadContext context) {
 		var level = context.player().level();
         TypedTransmission transmission = payload.transmission();

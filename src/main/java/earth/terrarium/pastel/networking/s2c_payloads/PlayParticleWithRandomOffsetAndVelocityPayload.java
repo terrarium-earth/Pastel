@@ -46,7 +46,6 @@ public record PlayParticleWithRandomOffsetAndVelocityPayload(Vec3 pos, ParticleO
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayParticleWithRandomOffsetAndVelocityPayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		RandomSource random = level.getRandom();

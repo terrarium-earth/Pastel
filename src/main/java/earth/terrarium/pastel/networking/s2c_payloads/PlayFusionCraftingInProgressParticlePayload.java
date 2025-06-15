@@ -30,7 +30,6 @@ public record PlayFusionCraftingInProgressParticlePayload(BlockPos pos) implemen
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayFusionCraftingInProgressParticlePayload payload, IPayloadContext context) {
 		BlockEntity blockEntity = context.player().level().getBlockEntity(payload.pos);
 		if (blockEntity instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {

@@ -31,7 +31,6 @@ public record PlayPedestalUpgradedParticlePayload(BlockPos pedestalPos, Pedestal
 		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) world, new ChunkPos(pedestalPos), new PlayPedestalUpgradedParticlePayload(pedestalPos, newPedestalVariant.getRecipeTier()));
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayPedestalUpgradedParticlePayload payload, IPayloadContext context) {
 		PedestalBlock.spawnUpgradeParticleEffectsForTier(payload.pedestalPos, payload.newTier);
 	}

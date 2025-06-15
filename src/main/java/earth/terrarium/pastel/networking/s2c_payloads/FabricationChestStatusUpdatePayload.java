@@ -43,7 +43,6 @@ public record FabricationChestStatusUpdatePayload(BlockPos pos, boolean isFull, 
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(FabricationChestStatusUpdatePayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		var pos = payload.pos;

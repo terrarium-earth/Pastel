@@ -25,15 +25,18 @@ public record PlayAscensionAppliedEffectsPayload() implements CustomPacketPayloa
 		PacketDistributor.sendToPlayer(player, new PlayAscensionAppliedEffectsPayload());
 	}
 	
+	public static void execute(PlayAscensionAppliedEffectsPayload payload, IPayloadContext context) {
+		execute(context.player());
+	}
+
 	@SuppressWarnings("resource")
 	@OnlyIn(Dist.CLIENT)
-	public static void execute(PlayAscensionAppliedEffectsPayload payload, IPayloadContext context) {
-		Player player = context.player();
+	private static void execute(Player player) {
 		var level = player.level();
 		level.playSound(null, player.blockPosition(), SpectrumSoundEvents.FADING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
 		Minecraft.getInstance().getSoundManager().play(new DivinitySoundInstance());
 	}
-	
+
 	@Override
 	public Type<? extends CustomPacketPayload> type() {
 		return ID;

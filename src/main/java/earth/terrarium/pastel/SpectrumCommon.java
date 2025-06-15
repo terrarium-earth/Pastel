@@ -212,7 +212,14 @@ public class SpectrumCommon {
 		
 		logInfo("Registering Networking Packets...");
 		pastelBus.addListener(SpectrumC2SPackets::register);
-		
+
+		pastelBus.addListener(RegisterPayloadHandlersEvent.class, (event) -> {
+			PayloadRegistrar registrar = event.registrar("1");
+
+			RevelationaryNetworking.register(registrar);
+			SpectrumS2CPackets.register(registrar);
+		});
+
 		logInfo("Registering Data Loaders...");
 		NeoForge.EVENT_BUS.addListener(SpectrumCommon::registerReloadListeners);
 
@@ -248,6 +255,8 @@ public class SpectrumCommon {
 		logInfo("Registering Builtin Resource Packs...");
 
 		logInfo("Common startup completed!");
+
+		new SpectrumClient(pastelBus, container);
 	}
 
 	private static void registerReloadListeners(AddReloadListenerEvent event) {

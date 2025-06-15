@@ -1,6 +1,6 @@
 
 plugins {
-    id("earth.terrarium.cloche") version "0.10.0"
+    id("earth.terrarium.cloche") version "0.10.2"
 }
 
 sourceSets.main {
@@ -104,6 +104,8 @@ cloche {
             include(additionalEntityAttributes)
             include(jgrapht)
             include(jheaps)
+
+            include(module(group = "org.apfloat", name = "apfloat", version = "1.10.1"))
 
             dependencies {
                 compileOnly(module(group = "maven.modrinth", name = "jade", version = "15.10.0+neoforge"))

@@ -30,7 +30,6 @@ public record InkColorSelectedS2CPayload(Optional<Holder<InkColor>> inkColor) im
 		PacketDistributor.sendToPlayer(player, new InkColorSelectedS2CPayload(inkColor));
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(InkColorSelectedS2CPayload payload, IPayloadContext context) {
 		AbstractContainerMenu screenHandler = context.player().containerMenu;
 		if (screenHandler instanceof InkColorSelectedPacketReceiver inkColorSelectedPacketReceiver) {

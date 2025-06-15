@@ -43,7 +43,6 @@ public record PastelNodeStatusUpdatePayload(boolean longSpin, Map<BlockPos, Inte
 		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) nodes.getFirst().getLevel(), new ChunkPos(nodes.getFirst().getBlockPos()), new PastelNodeStatusUpdatePayload(longSpin, spinTimes));
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PastelNodeStatusUpdatePayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		for (Map.Entry<BlockPos, Integer> e : payload.spinTimes.entrySet()) {

@@ -34,7 +34,6 @@ public class LastKillData {
 
 		public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("last_kill");
 
-		@OnlyIn(Dist.CLIENT)
 		public static void execute(Payload payload, IPayloadContext context) {
 			var level = context.player().level();
 			Optional.ofNullable(level.getEntity(payload.entityId)).ifPresent(e -> e.setData(ATTACHMENT, payload.killTime));

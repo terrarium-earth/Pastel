@@ -33,7 +33,6 @@ public record PlayShootingStarParticlesPayload(Vec3 shootingStarPos, ShootingSta
 		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) shootingStarEntity.level(), new ChunkPos(shootingStarEntity.blockPosition()), new PlayShootingStarParticlesPayload(shootingStarEntity.position(), shootingStarEntity.getShootingStarType()));
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayShootingStarParticlesPayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		

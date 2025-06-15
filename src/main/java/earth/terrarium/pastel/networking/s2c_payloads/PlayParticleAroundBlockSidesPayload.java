@@ -47,7 +47,6 @@ public record PlayParticleAroundBlockSidesPayload(BlockPos pos, int quantity, Ve
 		}
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayParticleAroundBlockSidesPayload payload, IPayloadContext context) {
 		ParticleHelper.playParticleAroundBlockSides(context.player().level(), payload.particle, payload.pos, payload.sides, payload.quantity, payload.velocity);
 	}

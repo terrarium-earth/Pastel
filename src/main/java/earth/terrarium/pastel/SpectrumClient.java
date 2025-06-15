@@ -1,50 +1,44 @@
 package earth.terrarium.pastel;
 
-import de.dafuqs.revelationary.RevelationaryNetworking;
 import de.dafuqs.revelationary.api.advancements.ClientAdvancementPacketCallback;
 import de.dafuqs.revelationary.api.revelations.RevealingCallback;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
 import earth.terrarium.pastel.compat.ears.EarsCompat;
-import earth.terrarium.pastel.config.*;
+import earth.terrarium.pastel.config.SpectrumConfig;
 import earth.terrarium.pastel.entity.SpectrumEntityRenderers;
 import earth.terrarium.pastel.inventories.SpectrumScreenHandlerTypes;
-import earth.terrarium.pastel.networking.SpectrumS2CPackets;
 import earth.terrarium.pastel.particle.SpectrumParticleFactories;
 import earth.terrarium.pastel.progression.UnlockToastManager;
 import earth.terrarium.pastel.progression.toast.RevelationToast;
 import earth.terrarium.pastel.registries.SpectrumBlockEntities;
 import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDimensions;
 import earth.terrarium.pastel.registries.SpectrumFluids;
 import earth.terrarium.pastel.registries.SpectrumSoundEvents;
 import earth.terrarium.pastel.registries.SpectrumTooltips;
 import earth.terrarium.pastel.registries.client.PastelDimensionsClient;
 import earth.terrarium.pastel.registries.client.SpectrumArmorRenderers;
-import earth.terrarium.pastel.registries.events.SpectrumClientEvents;
 import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
 import earth.terrarium.pastel.registries.client.SpectrumModelPredicateProviders;
 import earth.terrarium.pastel.registries.client.SpectrumTooltipComponents;
+import earth.terrarium.pastel.registries.events.SpectrumClientEvents;
 import earth.terrarium.pastel.render.HudRenderers;
 import earth.terrarium.pastel.render.SkyLerper;
-import earth.terrarium.pastel.render.armor.*;
+import earth.terrarium.pastel.render.armor.BedrockCapeRenderer;
 import earth.terrarium.pastel.render.capes.WorthinessChecker;
-import me.shedaniel.autoconfig.*;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.*;
-import net.neoforged.fml.*;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.util.thread.EffectiveSide;
-import net.neoforged.neoforge.client.gui.*;
-import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.Optional;
 import java.util.Set;
@@ -52,12 +46,15 @@ import java.util.Set;
 import static earth.terrarium.pastel.SpectrumCommon.CONFIG;
 import static earth.terrarium.pastel.SpectrumCommon.logInfo;
 
-@EventBusSubscriber(modid = SpectrumCommon.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT })
 public class SpectrumClient implements RevealingCallback, ClientAdvancementPacketCallback {
 
 	public static final SkyLerper skyLerper = new SkyLerper();
 
 	public SpectrumClient(IEventBus pastelBus, ModContainer container) {
+		if (FMLLoader.getDist().isDedicatedServer()) {
+			return;
+		}
+
 		logInfo("Starting Client Startup");
 
 		logInfo("Registering Model Layers...");
@@ -104,15 +101,6 @@ public class SpectrumClient implements RevealingCallback, ClientAdvancementPacke
 		logInfo("Registering Client Event Listeners...");
 		SpectrumClientEvents.register(pastelBus);
 		
-		pastelBus.addListener(RegisterPayloadHandlersEvent.class, (event) -> {
-			PayloadRegistrar registrar = event.registrar("1");
-			
-			RevelationaryNetworking.register(registrar);
-			SpectrumS2CPackets.register(registrar);
-		});
-		
-		PrimordialFireData.soundInstance = Optional.empty();
-
 		container.registerExtensionPoint(IConfigScreenFactory.class, (v, parent) -> AutoConfig.getConfigScreen(SpectrumConfig.class, parent).get());
 
 		if (CONFIG.AddItemTooltips) {

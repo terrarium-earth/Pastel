@@ -63,7 +63,6 @@ public class SpectrumIntegrationPacks {
 		registerIntegrationPack(CREATE_ID, () -> new CreateCompat());
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void registerClient() {
 		for (ModIntegrationPack container : INTEGRATION_PACKS.values()) {
 			container.registerClient();

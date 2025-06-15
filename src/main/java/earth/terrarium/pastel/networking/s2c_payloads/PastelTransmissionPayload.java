@@ -43,7 +43,6 @@ public record PastelTransmissionPayload(int networkColor, int travelTime, Pastel
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PastelTransmissionPayload payload, IPayloadContext context) {
 		int color = payload.networkColor();
 		int travelTime = payload.travelTime();

@@ -35,7 +35,6 @@ public record UpdateBlockEntityInkPayload(BlockPos pos, Map<InkColor, Long> stor
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(UpdateBlockEntityInkPayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		BlockEntity blockEntity = level.getBlockEntity(payload.pos);

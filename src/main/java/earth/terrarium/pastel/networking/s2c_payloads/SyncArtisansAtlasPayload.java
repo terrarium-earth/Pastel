@@ -25,8 +25,12 @@ public record SyncArtisansAtlasPayload(Optional<ResourceLocation> targetId, Clie
 			SyncArtisansAtlasPayload::new
 	);
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(SyncArtisansAtlasPayload payload, IPayloadContext context) {
+		execute(payload);
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	private static void execute(SyncArtisansAtlasPayload payload) {
 		var client = Minecraft.getInstance();
 		var level = client.level;
 		if (level == null) return;
@@ -46,7 +50,7 @@ public record SyncArtisansAtlasPayload(Optional<ResourceLocation> targetId, Clie
 			artisansAtlasState.setTargetId(payload.targetId.orElse(null));
 		mapRenderer.update(mapIdComponent, mapState);
 	}
-	
+
 	@Override
 	public Type<? extends CustomPacketPayload> type() {
 		return ID;

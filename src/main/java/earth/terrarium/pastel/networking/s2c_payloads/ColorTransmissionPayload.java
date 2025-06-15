@@ -33,7 +33,6 @@ public record ColorTransmissionPayload(BlockPos pos, ColoredTransmission transmi
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(ColorTransmissionPayload payload, IPayloadContext context) {
 		var level = context.player().level();
         ColoredTransmission transmission = payload.transmission;

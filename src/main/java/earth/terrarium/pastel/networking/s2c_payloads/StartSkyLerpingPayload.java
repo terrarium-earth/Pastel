@@ -33,7 +33,6 @@ public record StartSkyLerpingPayload(long startTime, long endTime) implements Cu
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(StartSkyLerpingPayload payload, IPayloadContext context) {
 		var client = Minecraft.getInstance();
 		Level level = context.player().level();

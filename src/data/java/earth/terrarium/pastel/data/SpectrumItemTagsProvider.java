@@ -25,16 +25,20 @@ public class SpectrumItemTagsProvider extends ItemTagsProvider {
 		SpectrumEnchantments.provideItemTags(this::tag);
 		
 		tag(SpectrumItemTags.COOKBOOKS).add(
-				SpectrumItems.BREWERS_HANDBOOK,
-				SpectrumItems.IMBRIFER_COOKBOOK,
-				SpectrumItems.IMPERIAL_COOKBOOK,
-				SpectrumItems.MELOCHITES_COOKBOOK_VOL_1,
-				SpectrumItems.MELOCHITES_COOKBOOK_VOL_2,
-				SpectrumItems.POISONERS_HANDBOOK);
+			SpectrumItems.BREWERS_HANDBOOK.get(),
+			SpectrumItems.IMBRIFER_COOKBOOK.get(),
+			SpectrumItems.IMPERIAL_COOKBOOK.get(),
+			SpectrumItems.MELOCHITES_COOKBOOK_VOL_1.get(),
+			SpectrumItems.MELOCHITES_COOKBOOK_VOL_2.get(),
+			SpectrumItems.POISONERS_HANDBOOK.get()
+		);
 		
 		tag(ItemTags.BOOKSHELF_BOOKS)
 				.addTag(SpectrumItemTags.COOKBOOKS)
-				.add(SpectrumItems.GILDED_BOOK, SpectrumItems.GUIDEBOOK);
+				.add(
+					SpectrumItems.GILDED_BOOK.get(),
+					SpectrumItems.GUIDEBOOK.get()
+				);
 	}
 	
 }

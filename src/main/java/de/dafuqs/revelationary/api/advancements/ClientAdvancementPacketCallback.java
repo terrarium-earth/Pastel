@@ -13,7 +13,6 @@ import java.util.Set;
  * simple full featured lists of advancements that were gotten and removed
  */
 
-@OnlyIn(Dist.CLIENT)
 public interface ClientAdvancementPacketCallback {
 	/**
 	 * Gets called every time advancements get synched from server- to client side

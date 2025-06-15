@@ -21,7 +21,6 @@ public record PlayTakeOffBeltSoundInstancePayload() implements CustomPacketPaylo
 		PacketDistributor.sendToPlayer(playerEntity, new PlayTakeOffBeltSoundInstancePayload());
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayTakeOffBeltSoundInstancePayload payload, IPayloadContext context) {
 		TakeOffBeltSoundInstance.startSoundInstance();
 	}

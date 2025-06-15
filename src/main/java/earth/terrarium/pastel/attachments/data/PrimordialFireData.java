@@ -45,7 +45,7 @@ public class PrimordialFireData {
 	public static final float FIRE_PROT_DAMAGE_RESISTANCE = 0.05F;
 	
 	@OnlyIn(Dist.CLIENT)
-	public static Optional<OnPrimordialFireSoundInstance> soundInstance;
+	public static OnPrimordialFireSoundInstance soundInstance;
 
 	private static void sync(LivingEntity entity) {
 		AttachmentUtil.syncToTracking(new Payload(entity.getId(), entity.getData(ATTACHMENT)), entity.level(), entity.blockPosition());
@@ -165,9 +165,9 @@ public class PrimordialFireData {
 		var primordialFireTicks = entity.getData(ATTACHMENT);
 
 		if (primordialFireTicks > 0) {
-			if (entity.equals(Minecraft.getInstance().player) && primordialFireTicks > 2 && soundInstance.isEmpty()) {
-				soundInstance = Optional.of(new OnPrimordialFireSoundInstance((Player) entity));
-				Minecraft.getInstance().getSoundManager().play(soundInstance.get());
+			if (entity.equals(Minecraft.getInstance().player) && primordialFireTicks > 2 && soundInstance == null) {
+				soundInstance = new OnPrimordialFireSoundInstance((Player) entity);
+				Minecraft.getInstance().getSoundManager().play(soundInstance);
 			}
 
 			double fluidHeight = entity.getFluidHeight(FluidTags.WATER);
@@ -185,8 +185,8 @@ public class PrimordialFireData {
 					entity.playSound(SoundEvents.FIRE_EXTINGUISH, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F);
 				}
 			}
-		} else if (entity.equals(Minecraft.getInstance().player) && soundInstance.isPresent()) {
-			soundInstance = Optional.empty();
+		} else if (entity.equals(Minecraft.getInstance().player) && soundInstance != null) {
+			soundInstance = null;
 		}
 	}
 
@@ -199,7 +199,6 @@ public class PrimordialFireData {
 
 		public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("primfire");
 
-		@OnlyIn(Dist.CLIENT)
 		public static void execute(Payload payload, IPayloadContext context) {
 			var level = context.player().level();
 			Optional.ofNullable(level.getEntity(payload.entityId)).ifPresent(e -> e.setData(ATTACHMENT, payload.burnTicks));

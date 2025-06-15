@@ -40,7 +40,6 @@ public record PlayFusionCraftingFinishedParticlePayload(BlockPos pos, InkColor c
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayFusionCraftingFinishedParticlePayload payload, IPayloadContext context) {
 		BlockPos pos = payload.pos;
 		Vec3 sourcePos = new Vec3(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);

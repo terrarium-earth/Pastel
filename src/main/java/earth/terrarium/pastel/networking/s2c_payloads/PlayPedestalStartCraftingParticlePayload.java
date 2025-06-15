@@ -28,8 +28,6 @@ public record PlayPedestalStartCraftingParticlePayload(BlockPos pedestalPos) imp
 		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) pedestalBlockEntity.getLevel(), new ChunkPos(pedestalBlockEntity.getBlockPos()), new PlayPedestalStartCraftingParticlePayload(pedestalBlockEntity.getBlockPos()));
 	}
 	
-	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayPedestalStartCraftingParticlePayload payload, IPayloadContext context) {
 		PedestalBlockEntity.spawnCraftingStartParticles(context.player().level(), payload.pedestalPos);
 	}

@@ -43,8 +43,6 @@ public record MoonstoneBlastPayload(double x, double y, double z, float power, f
 		}
 	}
 	
-	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(MoonstoneBlastPayload payload, IPayloadContext context) {
 		Player player = context.player();
 		Vec3 playerVelocity = payload.playerVelocity();

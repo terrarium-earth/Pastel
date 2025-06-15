@@ -22,7 +22,6 @@ public record ParticleSpawnerConfigurationS2CPayload(BlockPos pos, ParticleSpawn
 	);
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(ParticleSpawnerConfigurationS2CPayload payload, IPayloadContext context) {
 		if (context.player().level().getBlockEntity(payload.pos()) instanceof ParticleSpawnerBlockEntity particleSpawnerBlockEntity) {
 			particleSpawnerBlockEntity.applySettings(payload.configuration());

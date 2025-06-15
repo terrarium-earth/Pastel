@@ -47,7 +47,6 @@ public record BlackHoleChestStatusUpdatePayload(BlockPos pos, boolean isFull, bo
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(BlackHoleChestStatusUpdatePayload payload, IPayloadContext context) {
 		var level = context.player().level();
         Optional<BlackHoleChestBlockEntity> entity = level.getBlockEntity(payload.pos, SpectrumBlockEntities.BLACK_HOLE_CHEST.get());

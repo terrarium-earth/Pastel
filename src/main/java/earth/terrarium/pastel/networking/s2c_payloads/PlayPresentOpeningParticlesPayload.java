@@ -34,8 +34,6 @@ public record PlayPresentOpeningParticlesPayload(BlockPos presentPos, Map<Intege
 		PacketDistributor.sendToPlayersTrackingChunk(serverWorld, new ChunkPos(presentPos), new PlayPresentOpeningParticlesPayload(presentPos, colors));
 	}
 	
-	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayPresentOpeningParticlesPayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		PresentBlock.spawnParticles(level, payload.presentPos, payload.colors);

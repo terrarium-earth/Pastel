@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.api.recipe;
 
+import com.simibubi.create.foundation.utility.DistExecutor;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.progression.UnlockToastManager;
 import net.neoforged.api.distmarker.Dist;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.util.thread.EffectiveSide;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +42,7 @@ public interface GatedRecipe<C extends RecipeInput> extends Recipe<C> {
 	}
 	
 	default void registerInToastManager(RecipeType<?> recipeType, GatedRecipe<C> gatedRecipe) {
-		if (EffectiveSide.get().isClient()) {
+		if (FMLLoader.getDist().isClient()) {
 			registerInToastManagerClient(recipeType, gatedRecipe);
 		}
 	}

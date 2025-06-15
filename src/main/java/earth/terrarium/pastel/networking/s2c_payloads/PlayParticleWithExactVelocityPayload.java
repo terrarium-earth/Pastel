@@ -53,10 +53,8 @@ public record PlayParticleWithExactVelocityPayload(Vec3 pos, ParticleOptions par
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayParticleWithExactVelocityPayload payload, IPayloadContext context) {
 		var level = context.player().level();
-		
 		
 		for (int i = 0; i < payload.amount; i++) {
 			level.addParticle(payload.particle, payload.pos.x(), payload.pos.y(), payload.pos.z(), payload.velocity.x(), payload.velocity.y(), payload.velocity.z());

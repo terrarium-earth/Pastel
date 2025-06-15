@@ -60,8 +60,6 @@ public record PlayParticleWithPatternAndVelocityPayload(Vec3 pos, ParticleOption
 		return ID;
 	}
 	
-	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayParticleWithPatternAndVelocityPayload payload, IPayloadContext context) {
 		ParticleHelper.playParticleWithPatternAndVelocityClient(context.player().level(), payload.pos, payload.effect, payload.pattern, payload.velocity);
 	}

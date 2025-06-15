@@ -25,7 +25,6 @@ public record SyncMentalPresencePayload(double value) implements CustomPacketPay
 		PacketDistributor.sendToPlayer(player, new SyncMentalPresencePayload(value));
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(SyncMentalPresencePayload payload, IPayloadContext context) {
 		var player = context.player();
 		MiscPlayerData.get(player).setLastSyncedSleepPotency(payload.value);

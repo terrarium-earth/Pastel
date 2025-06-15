@@ -28,7 +28,6 @@ public record PastelNetworkRemovedPayload(UUID networkUUID) implements CustomPac
 		PacketDistributor.sendToPlayersInDimension(network.getLevel(), new PastelNetworkRemovedPayload(network.getUUID()));
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PastelNetworkRemovedPayload payload, IPayloadContext context) {
 		context.enqueueWork(() -> {
 			Pastel.getClientInstance().removeNetwork(payload.networkUUID);

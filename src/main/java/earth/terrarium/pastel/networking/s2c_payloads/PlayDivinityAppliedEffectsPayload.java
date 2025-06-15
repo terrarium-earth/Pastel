@@ -29,10 +29,12 @@ public record PlayDivinityAppliedEffectsPayload() implements CustomPacketPayload
 		PacketDistributor.sendToPlayer(player, new PlayDivinityAppliedEffectsPayload());
 	}
 	
-	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayDivinityAppliedEffectsPayload payload, IPayloadContext context) {
-		Player player = context.player();
+		execute(context.player());
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	private static void execute(Player player) {
 		var level = player.level();
 		var client = Minecraft.getInstance();
 		client.particleEngine.createTrackingEmitter(player, SpectrumParticleTypes.DIVINITY, 30);
@@ -41,7 +43,7 @@ public record PlayDivinityAppliedEffectsPayload() implements CustomPacketPayload
 		ParticleHelper.playParticleWithPatternAndVelocityClient(level, player.position(), ColoredCraftingParticleEffect.WHITE, VectorPattern.SIXTEEN, 0.4);
 		ParticleHelper.playParticleWithPatternAndVelocityClient(level, player.position(), ColoredCraftingParticleEffect.RED, VectorPattern.SIXTEEN, 0.4);
 	}
-	
+
 	@Override
 	public Type<? extends CustomPacketPayload> type() {
 		return ID;

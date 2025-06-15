@@ -43,7 +43,6 @@ public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1,
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayMemoryManifestingParticlesPayload payload, IPayloadContext context) {
 		ClientLevel level = (ClientLevel) context.player().level();
 		RandomSource random = level.random;

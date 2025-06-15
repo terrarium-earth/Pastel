@@ -42,7 +42,6 @@ public record PlayBlockBoundSoundInstancePayload(SoundEvent soundEvent, BlockPos
 		PacketDistributor.sendToPlayersTrackingChunk(world, new ChunkPos(pos), new PlayBlockBoundSoundInstancePayload(SoundEvents.EMPTY, pos, world.getBlockState(pos).getBlock().builtInRegistryHolder(), -1));
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayBlockBoundSoundInstancePayload payload, IPayloadContext context) {
 		if (payload.maxDurationTicks < 0) {
 			CraftingBlockSoundInstance.stopPlayingOnPos(payload.pos);

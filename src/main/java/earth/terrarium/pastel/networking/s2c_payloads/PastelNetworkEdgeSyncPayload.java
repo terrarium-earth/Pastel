@@ -84,7 +84,6 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, int color, Graph<Bl
 		PacketDistributor.sendToPlayersTrackingChunk(network.getLevel(), new ChunkPos(pos), new PastelNetworkEdgeSyncPayload(network.getUUID(), network.getColor(), network.getGraph()));
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PastelNetworkEdgeSyncPayload payload, IPayloadContext context) {
 		context.enqueueWork(() -> {
 			var level = context.player().level();

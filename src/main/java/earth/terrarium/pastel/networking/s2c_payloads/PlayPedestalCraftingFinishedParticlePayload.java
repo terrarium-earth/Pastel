@@ -34,7 +34,6 @@ public record PlayPedestalCraftingFinishedParticlePayload(BlockPos pedestalPos, 
 	}
 	
 	@SuppressWarnings("resource")
-	@OnlyIn(Dist.CLIENT)
 	public static void execute(PlayPedestalCraftingFinishedParticlePayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		
