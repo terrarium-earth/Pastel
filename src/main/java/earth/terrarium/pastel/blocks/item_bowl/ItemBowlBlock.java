@@ -111,17 +111,14 @@ public class ItemBowlBlock extends InWorldInteractionBlock {
 	
 	@Override
 	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (world.isClientSide) {
-			return ItemInteractionResult.SUCCESS;
-		} else {
-			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if (blockEntity instanceof ItemBowlBlockEntity itemBowlBlockEntity) {
-				if (exchangeStack(world, pos, player, hand, handStack, itemBowlBlockEntity)) {
-					updateConnectedMultiBlocks(world, pos);
-				}
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (blockEntity instanceof ItemBowlBlockEntity itemBowlBlockEntity) {
+			if (exchangeStack(world, pos, player, hand, handStack, itemBowlBlockEntity)) {
+				updateConnectedMultiBlocks(world, pos);
 			}
-			return ItemInteractionResult.CONSUME;
 		}
+
+		return ItemInteractionResult.sidedSuccess(world.isClientSide());
 	}
 	
 }
