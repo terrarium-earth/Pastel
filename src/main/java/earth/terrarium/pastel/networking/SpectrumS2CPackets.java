@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.networking;
 
+import earth.terrarium.pastel.attachments.HardcoreDeathTracker;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
 import earth.terrarium.pastel.networking.s2c_payloads.BlackHoleChestStatusUpdatePayload;
@@ -79,6 +80,10 @@ public class SpectrumS2CPackets {
 		registrar.playToClient(EverpromiseRibbonData.Payload.TYPE, EverpromiseRibbonData.Payload.CODEC, EverpromiseRibbonData.Payload::execute);
 		registrar.playToClient(LastKillData.Payload.TYPE, LastKillData.Payload.CODEC, LastKillData.Payload::execute);
 		registrar.playToClient(MiscPlayerData.Payload.TYPE, MiscPlayerData.Payload.CODEC, MiscPlayerData.Payload::execute);
+
+		// SavedData stuff
+		registrar.playToClient(HardcoreDeathTracker.SyncPayload.TYPE, HardcoreDeathTracker.SyncPayload.CODEC, HardcoreDeathTracker.SyncPayload::execute);
+
 	}
 	
 }

@@ -311,6 +311,9 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 
 	@Override
 	public long updateLimit(ItemStack holder) { // Frankly this is just horrible and I should be killed with hammers for it
+		if (SpectrumCommon.getRegistryAccess() == null)
+			return MAX_STORED_AMOUNT_BASE;
+
 		return getMaxStoredAmount(SpectrumCommon.getRegistryAccess()
 				.lookup(Registries.ENCHANTMENT)
 				.flatMap(impl -> impl.get(Enchantments.POWER))

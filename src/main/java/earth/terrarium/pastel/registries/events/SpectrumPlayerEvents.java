@@ -54,7 +54,7 @@ public class SpectrumPlayerEvents {
 
         if (event.getEntity() instanceof ServerPlayer player) {
             if (player.level().getLevelData().isHardcore() || HardcoreDeathTracker.isInHardcore(player)) {
-                HardcoreDeathTracker.addHardcoreDeath(player.serverLevel(), player.getGameProfile());
+                HardcoreDeathTracker.addHardcoreDeath(player.serverLevel(), player);
             }
         }
     }
