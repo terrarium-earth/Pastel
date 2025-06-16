@@ -22,6 +22,9 @@ public class ColoredCraftingParticle extends TextureSheetParticle {
 		this.speedUpWhenYMotionIsBlocked = true;
 		this.quadSize *= 0.75F;
 		this.hasPhysics = false;
+		this.xd = velocityX;
+		this.yd = velocityY;
+		this.zd = velocityZ;
 		
 		this.rCol = red;
 		this.gCol = green;
