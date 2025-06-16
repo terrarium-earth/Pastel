@@ -5650,6 +5650,8 @@
 
   "curios.identifier.pin": "Pin",
   "curios.identifier.pigment_palette": "Palette",
+  "curios.modifiers.feet": "When worn as footwear:",
+
 
   "text.autoconfig.pastel.option.AddItemTooltips": "Add advanced tooltips for Spawners, Signs, Skulk Shriekers and much more",
   "text.autoconfig.pastel.option.AzureDikeHudOffsetX": "X Position of the Azure Dike Overlay on the players screen. Default: On top of Hearts",
@@ -5801,6 +5803,7 @@
   "structure.minecraft.shipwreck": "Shipwreck",
   "structure.minecraft.shipwreck_beached": "Shipwreck",
   "structure.minecraft.stronghold": "Stronghold",
+  "structure.minecraft.trial_chambers": "Trial Chambers",
   "structure.minecraft.desert_pyramid": "Desert Pyramid",
   "structure.minecraft.igloo": "Igloo",
   "structure.minecraft.jungle_pyramid": "Jungle Pyramid",
