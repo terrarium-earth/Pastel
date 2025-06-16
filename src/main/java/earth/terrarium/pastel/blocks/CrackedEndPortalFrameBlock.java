@@ -9,8 +9,11 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -244,11 +247,21 @@ public class CrackedEndPortalFrameBlock extends Block {
 			// 10% chance to break portal
 			float randomFloat = random.nextFloat();
 			if (randomFloat < 0.05) {
-				world.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4, Level.ExplosionInteraction.BLOCK);
+				world.explode(null, null, new ExplosionDamageCalculator() {
+					@Override
+					public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
+						return false;
+					}
+				}, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 4, false, Level.ExplosionInteraction.BLOCK);
 				destroyPortals(world, pos);
 				world.destroyBlock(pos, true);
 			} else if (randomFloat < 0.2) {
-				world.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3, Level.ExplosionInteraction.BLOCK);
+				world.explode(null, null, new ExplosionDamageCalculator() {
+					@Override
+					public boolean shouldDamageEntity(Explosion explosion, Entity entity) {
+						return false;
+					}
+				}, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3, false, Level.ExplosionInteraction.BLOCK);
 			} else {
 				double d = (double) pos.getX() + random.nextDouble();
 				double e = (double) pos.getY() + 0.8D;
