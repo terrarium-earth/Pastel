@@ -5,6 +5,7 @@ import earth.terrarium.pastel.api.pastel.PastelUpgradeSignature;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.*;
 
 import java.util.HashMap;
@@ -39,7 +40,7 @@ public class SpectrumPastelUpgrades {
     public static final PastelUpgradeSignature.Category FILTER = PastelUpgradeSignature.Category.simple();
     public static final PastelUpgradeSignature.Category REDSTONE = PastelUpgradeSignature.Category.redstone();
 
-    public static void register() {
+    public static void register(IEventBus bus) {
         WEAK_STACK = register("weak_stack", () -> PastelUpgradeSignature.builder(SpectrumItems.RAW_BLOODSTONE.get(), STACK, NAMESPACE).named("weak_stack").stackMod(3).stackMult(2).build());
 		STRONG_STACK = register("strong_stack", () -> PastelUpgradeSignature.builder(SpectrumItems.PURE_BLOODSTONE.get(), STACK, NAMESPACE).named("strong_stack").stackMod(15).stackMult(4).build());
 
@@ -64,6 +65,7 @@ public class SpectrumPastelUpgrades {
         LAMP = register("lamp", () -> PastelUpgradeSignature.builder(SpectrumItems.PURE_GLOWSTONE.get(), REDSTONE, NAMESPACE).redstone("lamp").lamp(true).buildRedstone());
         TRIGGER = register("trigger", () -> PastelUpgradeSignature.builder(SpectrumItems.PURE_QUARTZ.get(), REDSTONE, NAMESPACE).redstone("trigger").triggerTransfer(true).buildRedstone());
         SENSOR = register("sensor", () -> PastelUpgradeSignature.builder(SpectrumItems.PURE_ECHO.get(), REDSTONE, NAMESPACE).redstone("sensor").sensor(true).buildRedstone());
+        REGISTER.register(bus);
     }
 
     private static DeferredHolder<PastelUpgradeSignature, PastelUpgradeSignature> register(String name, Supplier<PastelUpgradeSignature> upgrade) {

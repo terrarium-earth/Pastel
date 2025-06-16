@@ -158,7 +158,7 @@ public class SpectrumCommon {
 
 		// Pastel
 		logInfo("Registering Pastel Upgrades...");
-		SpectrumPastelUpgrades.register();
+		SpectrumPastelUpgrades.register(pastelBus);
 		logInfo("Registering Stamp Categories...");
 		SpectrumStampDataCategories.register(pastelBus);
 		
