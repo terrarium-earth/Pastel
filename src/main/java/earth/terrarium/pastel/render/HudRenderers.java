@@ -43,9 +43,12 @@ public class HudRenderers {
 
 		@Override
 		public void render(GuiGraphics gui, DeltaTracker deltaTracker) {
+			if (Minecraft.getInstance().gameMode == null || !Minecraft.getInstance().gameMode.canHurtPlayer())
+				return;
+
 			var cameraPlayer = Minecraft.getInstance().player;
 			var x = gui.guiWidth() / 2 - 91;
-			var y = gui.guiWidth() / 2 + 91;
+			var y = gui.guiWidth() / 2 - 22;
 			
 			DikeShieldData azureDikeComponent = AzureDikeProvider.getAzureDikeComponent(cameraPlayer);
 			int maxCharges = (int) Math.ceil(azureDikeComponent.getMaxProtection());
@@ -53,7 +56,7 @@ public class HudRenderers {
 				int charges = (int) Math.ceil(azureDikeComponent.getCurrentProtection());
 
 				boolean blink = false;
-				if (cameraPlayer.getLastDamageSource() != null && cameraPlayer.level() != null) {
+				if (cameraPlayer.getLastDamageSource()!=null && cameraPlayer.invulnerableTime / 3 > 0) {
 					blink = (cameraPlayer.level().getGameTime() >> 2) % 2 == 0;
 				}
 
