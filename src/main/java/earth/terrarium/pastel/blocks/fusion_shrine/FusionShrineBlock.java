@@ -57,6 +57,7 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 	public FusionShrineBlock(Properties settings) {
 		super(settings);
 		registerDefaultState(getStateDefinition().any().setValue(LIGHT_LEVEL, 0));
+
 	}
 
 	@Override
@@ -204,6 +205,7 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 				if (FluidUtil.interactWithFluidHandler(player, hand, shrine.getTank())) {
 					shrine.inventoryChanged = true;
 					shrine.setLightForFluid(pos, shrine.getTank().getFluid());
+					shrine.updateInClientWorld();
 					return ItemInteractionResult.CONSUME;
 				}
 				if ((player.isShiftKeyDown() || handStack.isEmpty()) && retrieveLastStack(world, pos, player, hand, handStack, shrine)) {

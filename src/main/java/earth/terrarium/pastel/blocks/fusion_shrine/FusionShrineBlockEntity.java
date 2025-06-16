@@ -68,7 +68,10 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	
 	public FusionShrineBlockEntity(BlockPos pos, BlockState state) {
 		super(SpectrumBlockEntities.FUSION_SHRINE.get(), pos, state, INVENTORY_SIZE);
-		inventory.addListener(i -> inventoryChanged = true);
+		inventory.addListener(i -> {
+			inventoryChanged = true;
+			updateInClientWorld();
+		});
 	}
 	
 	@SuppressWarnings("unused")
