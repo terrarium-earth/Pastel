@@ -97,6 +97,7 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
 					return ItemInteractionResult.CONSUME;
 				} else {
 					if (FluidUtil.interactWithFluidHandler(player, hand, crystal.tank)){
+						crystal.updateInClientWorld();
 						return ItemInteractionResult.CONSUME;
 					}
 					

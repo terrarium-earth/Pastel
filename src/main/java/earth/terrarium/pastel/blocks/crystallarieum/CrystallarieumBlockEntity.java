@@ -224,6 +224,8 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 			this.canWork = this.currentRecipe.value().getNextState(this.currentRecipe, topState).isPresent()
 					&& (this.currentRecipe.value().growsWithoutCatalyst() || this.currentCatalyst != CrystallarieumCatalyst.EMPTY);
 		}
+
+		updateInClientWorld();
 	}
 	
 	@Override
