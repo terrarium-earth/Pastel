@@ -26,8 +26,10 @@ public class SevenLeagueBootsItem extends SpectrumTrinketItem {
 	@Override
 	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
 		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
-		
-		int powerLevel = SpectrumEnchantmentHelper.getLevel(slotContext.entity().level().registryAccess(), Enchantments.POWER, stack);
+
+
+
+		int powerLevel = slotContext.entity() != null ? SpectrumEnchantmentHelper.getLevel(slotContext.entity().level().registryAccess(), Enchantments.POWER, stack) : 0;
 		double speedBoost = 0.05 * (powerLevel + 1);
 		modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(MOVEMENT_SPEED_ATTRIBUTE_ID, speedBoost, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 		modifiers.put(Attributes.STEP_HEIGHT, new AttributeModifier(STEP_UP_ATTRIBUTE_ID, 0.75, AttributeModifier.Operation.ADD_VALUE));
