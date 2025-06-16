@@ -71,32 +71,35 @@ public class SpectrumPlacedFeatures {
 		addFeature(context, SpectrumBiomeTags.MERMAIDS_BRUSHES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("mermaids_brushes")));
 		addFeature(context, SpectrumBiomeTags.CLOVER_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("clover_patch")));
 
-		if (SpectrumCommon.CONFIG.QuitoxicSpawnTag) {
-			addFeature(context, SpectrumBiomeTags.QUITOXIC_REEDS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("quitoxic_reeds")));
-		} else {
-			var overworld = tag(context, Tags.Biomes.IS_OVERWORLD);
-			var aquatic = tag(context, Tags.Biomes.IS_AQUATIC);
-			var hot = tag(context, Tags.Biomes.IS_HOT);
-			var vegetationDense = tag(context, Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD);
-			var swamp = tag(context, Tags.Biomes.IS_SWAMP);
-			var wet = tag(context, Tags.Biomes.IS_WET_OVERWORLD);
+		addFeature(context, SpectrumBiomeTags.QUITOXIC_REEDS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("quitoxic_reeds")));
 
-			//Either the biome is hot, lush, and wet, or it is a straight-up swamp.
-			var set = new AndHolderSet<>(
-				overworld,
-				new NotHolderSet<>(context.registerable().registryLookup(Registries.BIOME).orElseThrow(), aquatic),
-				new OrHolderSet<>(
-					new AndHolderSet<>(
-						hot,
-						vegetationDense
-					),
-					swamp
-				),
-				wet
-			);
-
-			addFeature(context, set, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("quitoxic_reeds")));
-		}
+		//TODO: find out why this is fucked
+		//if (SpectrumCommon.CONFIG.QuitoxicSpawnTag) {
+		//	addFeature(context, SpectrumBiomeTags.QUITOXIC_REEDS_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("quitoxic_reeds")));
+		//} else {
+		//	var overworld = tag(context, Tags.Biomes.IS_OVERWORLD);
+		//	var aquatic = tag(context, Tags.Biomes.IS_AQUATIC);
+		//	var hot = tag(context, Tags.Biomes.IS_HOT);
+		//	var vegetationDense = tag(context, Tags.Biomes.IS_DENSE_VEGETATION_OVERWORLD);
+		//	var swamp = tag(context, Tags.Biomes.IS_SWAMP);
+		//	var wet = tag(context, Tags.Biomes.IS_WET_OVERWORLD);
+//
+		//	//Either the biome is hot, lush, and wet, or it is a straight-up swamp.
+		//	var set = new AndHolderSet<>(
+		//		overworld,
+		//		new NotHolderSet<>(context.registerable().registryLookup(Registries.BIOME).orElseThrow(), aquatic),
+		//		new OrHolderSet<>(
+		//			new AndHolderSet<>(
+		//				hot,
+		//				vegetationDense
+		//			),
+		//			swamp
+		//		),
+		//		wet
+		//	);
+//
+		//	addFeature(context, set, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("quitoxic_reeds")));
+		//}
 
 		// Dragonbone in the Overworld
 		addFeature(context, SpectrumBiomeTags.DRAGONBONE_FOSSILS_GENERATING_IN, GenerationStep.Decoration.UNDERGROUND_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, SpectrumCommon.locate("dragon_fossil_overworld_buried")));
