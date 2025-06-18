@@ -5,11 +5,20 @@ import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtAccounter;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.FastBufferedInputStream;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,13 +32,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.LevelResource;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.RoundingMode;
+import java.nio.file.Files;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
@@ -272,5 +285,74 @@ public class Support {
 	public static double logBase(double base, double logNumber) {
 		return Math.log(logNumber) / Math.log(base);
 	}
-	
+
+	private static boolean migrationActioned = false;
+
+	/**
+	 * We have DFU at home
+	 */
+	public static void migrateStructureNBT(MinecraftServer server) {
+		if (false) {
+			var man = server.getStructureManager();
+			var sex = new FileToIdConverter("structure", ".nbt");
+			man.listTemplates().filter(l -> l.getNamespace().equals(SpectrumCommon.MOD_ID))
+					.forEach(l -> {
+						var opt = man.get(l);
+						if (opt.isEmpty())
+							return;
+
+						var res = server.getResourceManager();
+						var loc = sex.idToFile(l);
+						FileOutputStream write = null;
+						try {
+							var stream = new FastBufferedInputStream(res.open(loc));
+							var structTag = NbtIo.readCompressed(stream, NbtAccounter.unlimitedHeap());
+							replaceModId(structTag);
+							var dev = server.getWorldPath(new LevelResource("dev"));
+							var path = dev.resolve(loc.getPath());
+							Files.createDirectories(path.getParent());
+							write = new FileOutputStream(path.toFile());
+							NbtIo.writeCompressed(structTag, write);
+						} catch (Exception logged) {
+							SpectrumCommon.LOGGER.error("piss", logged);
+						}
+						try {
+							if (write!=null) {
+								write.close();
+							}
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+					});
+			migrationActioned = true;
+		}
+	}
+
+	private static void replaceModId(ListTag tag) {
+		for (int i = 0; i < tag.size(); i++) {
+			Tag element = tag.get(i);
+
+			if (element instanceof StringTag) {
+				tag.setTag(i, StringTag.valueOf(element.getAsString().replace("spectrum:", "pastel:")));
+			} else if (element instanceof CompoundTag compound) {
+				replaceModId(compound);
+			} else if (element instanceof ListTag list) {
+				replaceModId(list);
+			}
+		}
+	}
+
+	private static void replaceModId(CompoundTag tag) {
+		for (String key : tag.getAllKeys()) {
+			Tag element = tag.get(key);
+
+			if (element instanceof StringTag) {
+				tag.putString(key, element.getAsString().replace("spectrum:", "pastel:"));
+			} else if (element instanceof CompoundTag compound) {
+				replaceModId(compound);
+			} else if (element instanceof ListTag list) {
+				replaceModId(list);
+			}
+		}
+	}
 }
