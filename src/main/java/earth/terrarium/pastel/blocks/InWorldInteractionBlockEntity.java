@@ -15,6 +15,7 @@ import net.minecraft.world.RandomizableContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.SeededContainerLoot;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -57,7 +58,7 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
 		super.loadAdditional(nbt, registryLookup);
 		this.inventory.getInternalList().clear();
 		if (!this.tryLoadLootTable(nbt)) {
-			inventory.deserializeNBT(registryLookup, nbt.getCompound("inventory"));
+			inventory.load(nbt, registryLookup);
 		}
 	}
 	
@@ -65,7 +66,7 @@ public abstract class InWorldInteractionBlockEntity extends BlockEntity implemen
 	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.saveAdditional(nbt, registryLookup);
 		if (!this.trySaveLootTable(nbt)) {
-			nbt.put("inventory", inventory.serializeNBT(registryLookup));
+			inventory.save(nbt, registryLookup);
 		}
 	}
 

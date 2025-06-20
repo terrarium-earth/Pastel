@@ -53,6 +53,8 @@ public class ItemRoundelBlock extends InWorldInteractionBlock {
 				} else {
 					inputHandStack(world, player, hand, handStack, itemRoundelBlockEntity);
 				}
+				blockEntity.setChanged();
+				itemRoundelBlockEntity.updateInClientWorld();
 			}
 			return ItemInteractionResult.CONSUME;
 		}

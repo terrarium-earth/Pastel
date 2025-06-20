@@ -61,6 +61,8 @@ public class PreservationRoundelBlock extends ItemRoundelBlock {
 						world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.8F, 0.8F + world.random.nextFloat() * 0.6F);
 					}
 				}
+				blockEntity.setChanged();
+				itemRoundelBlockEntity.updateInClientWorld();
 			}
 			return ItemInteractionResult.CONSUME;
 		}
