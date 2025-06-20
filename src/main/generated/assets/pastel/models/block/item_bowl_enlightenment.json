@@ -2,7 +2,7 @@
   "parent": "pastel:templates/base_bowl",
   "textures": {
     "bottom": "pastel:block/item_bowl_preservation_bottom",
-    "inner": "pastel:block/item_bowl_preservation_bottom",
+    "inner": "pastel:block/item_bowl_preservation_inner",
     "side": "pastel:block/item_bowl_enlightenment_side",
     "top": "pastel:block/item_bowl_enlightenment_top"
   }
