@@ -26,6 +26,7 @@
     "EffectCommandMixin",
     "EnderEyeItemMixin",
     "EndermanEntityMixin",
+    "EntityApplyFluidsMixin",
     "EntityMixin",
     "ClientboundUpdateMobEffectsPacketMixin",
     "EntityTypeMixin",
