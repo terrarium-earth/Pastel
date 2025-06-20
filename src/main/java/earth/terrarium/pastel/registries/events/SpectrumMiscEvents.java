@@ -12,6 +12,7 @@ import earth.terrarium.pastel.entity.spawners.ShootingStarSpawner;
 import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.TimeHelper;
+import earth.terrarium.pastel.inventories.AutoCraftingMode;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.tools.TuningStampItem;
@@ -171,7 +172,7 @@ public class SpectrumMiscEvents {
 		event.addListener(new ResourceManagerReloadListener() {
 			@Override
 			public void onResourceManagerReload(ResourceManager resourceManager) {
-				CompactingChestBlockEntity.clearCache();
+				AutoCraftingMode.clearCache();
 				SpectrumCommon.CACHED_ITEM_TAG_MAP.clear();
 
 				if (SpectrumCommon.getSidedServer() != null) {

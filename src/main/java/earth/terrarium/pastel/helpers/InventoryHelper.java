@@ -1,6 +1,8 @@
 package earth.terrarium.pastel.helpers;
 
 import earth.terrarium.pastel.api.interaction.ItemProvider;
+import earth.terrarium.pastel.api.item.ItemReference;
+import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.*;
@@ -25,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,11 +107,11 @@ public class InventoryHelper {
 		return true;
 	}
 	
-	public static boolean isItemCountInInventory(IItemHandlerModifiable inventory, ItemStack reference, int maxSearchAmount) {
+	public static boolean isItemCountInInventory(IItemHandlerModifiable inventory, ItemReference reference, int maxSearchAmount) {
 		int count = 0;
 		for (int i = 0; i < inventory.getSlots(); i++) {
 			var stack = inventory.getStackInSlot(i);
-			if (ItemStack.isSameItemSameComponents(reference, stack)) {
+			if (reference.permits(stack)) {
 				count += stack.getCount();
 				if (count >= maxSearchAmount) {
 					return true;
@@ -248,7 +251,7 @@ public class InventoryHelper {
 		}
 		return false;
 	}
-	
+
 	public static ItemStack offerToInventory(IItemHandlerModifiable inventory, ItemStack itemStack, int rangeStart, int rangeEnd) {
 		for (int i = rangeStart; i < rangeEnd; i++) {
 			ItemStack currentStack = inventory.getStackInSlot(i);
@@ -591,10 +594,10 @@ public class InventoryHelper {
 		return contentCount;
 	}
 
-	public static ItemStack extractFromInventory(IItemHandler inventory, ItemStack reference, int amount) {
+	public static ItemStack extractFromInventory(IItemHandler inventory, ItemReference reference, int amount) {
 		int extracted = 0;
 		for (int i = 0; i < inventory.getSlots(); i++) {
-			if (ItemStack.isSameItemSameComponents(reference, inventory.getStackInSlot(i)))
+			if (reference.permits(inventory.getStackInSlot(i)))
 				extracted += inventory.extractItem(i, amount - extracted, false).getCount();
 
 			if (extracted == amount)
@@ -604,6 +607,22 @@ public class InventoryHelper {
 		if (extracted == 0)
 			return ItemStack.EMPTY;
 
-		return reference.copyWithCount(extracted);
+		return reference.asStack(extracted);
+	}
+
+	public static List<ItemStorage> getAvailableItems(IItemHandler handler) {
+		var available = new HashMap<ItemReference, ItemStorage>();
+
+		for (int i = 0; i < handler.getSlots(); i++) {
+			var stack = handler.getStackInSlot(i);
+			var ref = ItemReference.of(stack);
+
+			if (ref.isEmpty())
+				continue;
+
+			available.computeIfAbsent(ref, ItemStorage::new).increment(stack.getCount());
+		}
+
+		return new ArrayList<>(available.values());
 	}
 }

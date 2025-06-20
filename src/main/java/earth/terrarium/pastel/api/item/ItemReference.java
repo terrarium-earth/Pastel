@@ -16,11 +16,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 
+import java.util.Objects;
+
 
 /**
  * Once Neoforge gets something equivalent we are nuking this shit
  */
 public final class ItemReference implements ItemLike, DataComponentHolder {
+
+    private static final ItemReference EMPTY = ItemReference.of(Items.AIR);
 
     public static final Codec<ItemReference> CODEC = RecordCodecBuilder.create(i -> i.group(
             BuiltInRegistries.ITEM.byNameCodec().fieldOf("reference").forGetter(ref -> ref.reference),
@@ -93,6 +97,11 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(reference, components);
+    }
+
+    @Override
     public Item asItem() {
         return reference;
     }
@@ -103,8 +112,12 @@ public final class ItemReference implements ItemLike, DataComponentHolder {
         return stack;
     }
 
+    public ItemStack asStack(int count) {
+        return asStack().copyWithCount(count);
+    }
+
     public static ItemReference empty() {
-        return ItemReference.of(Items.AIR);
+        return EMPTY;
     }
 
     public boolean isEmpty() {

@@ -1,17 +1,23 @@
 package earth.terrarium.pastel.inventories;
 
-import net.minecraft.world.item.ItemStack;
+import earth.terrarium.pastel.api.item.ItemReference;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public enum AutoCraftingMode {
-	OneXOne(1, 1),
-	TwoXTwo(2, 2),
-	ThreeXThree(3, 3);
-	
+	X1(1, 1),
+	X2(2, 2),
+	X3(3, 3);
+
+	private static final Map<AutoCraftingMode, Map<ResourceLocation, ItemReference>> CACHE = new EnumMap<>(AutoCraftingMode.class);
+
 	private final int width;
 	private final int height;
 	
@@ -44,6 +50,13 @@ public enum AutoCraftingMode {
 		}
 		return CraftingInput.ofPositioned(width, height, inputs);
 	}
-	
+
+	public static Map<ResourceLocation, ItemReference> getCache(AutoCraftingMode mode) {
+		return CACHE.computeIfAbsent(mode, m -> new HashMap<>());
+	}
+
+	public static void clearCache() {
+		CACHE.clear();
+	}
 }
 

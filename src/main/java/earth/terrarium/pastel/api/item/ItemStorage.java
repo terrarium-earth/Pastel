@@ -43,6 +43,10 @@ public class ItemStorage {
         this.count = count;
     }
 
+    public ItemStorage(ItemReference reference) {
+        this(reference, 0);
+    }
+
     public static ItemStorage blank() {
         return new ItemStorage(ItemReference.empty(), 0);
     }

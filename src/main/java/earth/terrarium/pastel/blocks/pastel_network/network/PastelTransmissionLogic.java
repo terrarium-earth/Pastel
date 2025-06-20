@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.blocks.pastel_network.network;
 
+import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
 import earth.terrarium.pastel.helpers.*;
@@ -161,7 +162,7 @@ public class PastelTransmissionLogic {
 
 			var trans = createTransmissionOnValidPath(sourceNode, destinationNode, proposedStack, simulatedAmount, sourceNode.getTransferTime());
 			if (trans.isPresent()) {
-				InventoryHelper.extractFromInventory(sourceStorage, proposedStack, (int) simulatedAmount); // We only extract if a transmission was created
+				InventoryHelper.extractFromInventory(sourceStorage, ItemReference.of(proposedStack), (int) simulatedAmount); // We only extract if a transmission was created
 				network.addTransmission(trans.get(), trans.get().getTransmissionDuration());
 				PastelTransmissionPayload.sendPastelTransmissionParticle(this.network, trans.get().getTransmissionDuration(), trans.get());
 
