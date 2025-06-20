@@ -10,6 +10,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class MultiToolItem extends DiggerItem {
 	public InteractionResult useOn(UseOnContext context) {
 		InteractionResult actionResult = InteractionResult.PASS;
 		
-		if (canTill(context.getItemInHand())) {
+		if (itemAbilitiesEnabled(context.getItemInHand())) {
 			actionResult = Items.IRON_SHOVEL.useOn(context);
 			if (!actionResult.consumesAction()) {
 				actionResult = Items.IRON_AXE.useOn(context);
@@ -49,15 +51,19 @@ public class MultiToolItem extends DiggerItem {
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		
-		if (canTill(stack)) {
+		if (itemAbilitiesEnabled(stack)) {
 			tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.right_click_actions").withStyle(ChatFormatting.GRAY));
 		} else {
 			tooltip.add(Component.translatable("item.pastel.workstaff.tooltip.right_click_actions_disabled").withStyle(ChatFormatting.DARK_RED));
 		}
 	}
 	
-	public boolean canTill(ItemStack stack) {
+	public boolean itemAbilitiesEnabled(ItemStack stack) {
 		return true;
 	}
-	
+
+	@Override
+	public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+		return ItemAbilities.DEFAULT_AXE_ACTIONS.contains(itemAbility) ||  ItemAbilities.DEFAULT_SHOVEL_ACTIONS.contains(itemAbility) ||  ItemAbilities.DEFAULT_HOE_ACTIONS.contains(itemAbility);
+	}
 }
