@@ -1,18 +1,14 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
-import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
@@ -84,7 +80,7 @@ public abstract class EntityMixin {
 		if (!(entity instanceof LivingEntity living))
 			return original;
 		
-		if (!(entity instanceof Player) && (living.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER) || living.hasEffect(PastelStatusEffects.FATAL_SLUMBER)))
+		if (!(entity instanceof Player) && (living.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || living.hasEffect(PastelMobEffects.FATAL_SLUMBER)))
 			return Pose.SLEEPING;
 		
 		return original;

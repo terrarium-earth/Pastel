@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.food;
 
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.items.conditional.CloakedItem;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -35,6 +35,6 @@ public class NectardewBurgeonItem extends CloakedItem implements SlotBackgroundE
 
     @Override
     public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
-        return isVisibleTo(player) ? PastelStatusEffects.ETERNAL_SLUMBER_COLOR : 0x0;
+        return isVisibleTo(player) ? PastelMobEffects.ETERNAL_SLUMBER_COLOR : 0x0;
     }
 }

@@ -1,12 +1,17 @@
 package earth.terrarium.pastel.status_effects;
 
+import earth.terrarium.pastel.helpers.MobEffectHelper;
 import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffects;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.EffectCure;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class ImmunityStatusEffect extends MobEffect {
@@ -17,7 +22,7 @@ public class ImmunityStatusEffect extends MobEffect {
 
 	@Override
 	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-		return duration % 20 == 0;
+		return duration % 5 == 0;
 	}
 
 	@Override
@@ -25,14 +30,14 @@ public class ImmunityStatusEffect extends MobEffect {
 
 	@Override
 	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-		WhispyCircletItem.removeNegativeStatusEffects(entity);
-		return super.applyEffectTick(entity, amplifier);
+		MobEffectHelper.actionImmunity(entity, true);
+		return true;
 	}
 	
 	@Override
 	public void onEffectStarted(LivingEntity entity, int amplifier) {
-		super.onEffectStarted(entity, amplifier);
-		WhispyCircletItem.removeNegativeStatusEffects(entity);
+		MobEffectHelper.actionImmunity(entity, false);
 	}
-	
+
+
 }

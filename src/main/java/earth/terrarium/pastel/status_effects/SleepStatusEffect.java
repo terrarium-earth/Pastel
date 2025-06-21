@@ -4,7 +4,7 @@ import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.registries.PastelMobEffectTags;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -56,7 +56,7 @@ public class SleepStatusEffect extends MobEffect {
     
     // TODO: can the tag check be implemented into the entities base attribute modifier somehow?
     public static boolean isResistedBy(LivingEntity entity) {
-        if (entity.hasEffect(PastelStatusEffects.FRENZY))
+        if (entity.hasEffect(PastelMobEffects.FRENZY))
             return true;
         
         var type = entity.getType();
@@ -95,10 +95,10 @@ public class SleepStatusEffect extends MobEffect {
     public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
         var holder = effectInstance.getEffect();
 
-        if (holder.equals(PastelStatusEffects.SOMNOLENCE) || holder.equals(PastelStatusEffects.CALMING))
-            cures.add(PastelStatusEffects.Cures.SEDATIVES);
+        if (holder.equals(PastelMobEffects.SOMNOLENCE) || holder.equals(PastelMobEffects.CALMING))
+            cures.add(PastelMobEffects.Cures.SEDATIVES);
 
-        cures.add(PastelStatusEffects.Cures.BLOOD_ORCHID);
+        cures.add(PastelMobEffects.Cures.BLOOD_ORCHID);
     }
 
     private static boolean isConstruct(EntityType<?> type) {
@@ -106,14 +106,14 @@ public class SleepStatusEffect extends MobEffect {
 	}
     
     public static @Nullable Holder<MobEffect> getStrongestSleepEffect(LivingEntity entity) {
-        if (entity.hasEffect(PastelStatusEffects.FATAL_SLUMBER)) {
-            return PastelStatusEffects.FATAL_SLUMBER;
+        if (entity.hasEffect(PastelMobEffects.FATAL_SLUMBER)) {
+            return PastelMobEffects.FATAL_SLUMBER;
         }
-        else if (entity.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER)) {
-            return PastelStatusEffects.ETERNAL_SLUMBER;
+        else if (entity.hasEffect(PastelMobEffects.ETERNAL_SLUMBER)) {
+            return PastelMobEffects.ETERNAL_SLUMBER;
         }
-        else if (entity.hasEffect(PastelStatusEffects.SOMNOLENCE)) {
-            return PastelStatusEffects.SOMNOLENCE;
+        else if (entity.hasEffect(PastelMobEffects.SOMNOLENCE)) {
+            return PastelMobEffects.SOMNOLENCE;
         }
         return null;
     }

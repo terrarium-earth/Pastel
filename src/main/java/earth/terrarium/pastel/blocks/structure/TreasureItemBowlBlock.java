@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -57,7 +57,7 @@ public class TreasureItemBowlBlock extends Block implements EntityBlock {
 	}
 
 	public static boolean canInteract(Player player) {
-		return player.hasEffect(PastelStatusEffects.FATAL_SLUMBER);
+		return player.hasEffect(PastelMobEffects.FATAL_SLUMBER);
 	}
 
 	@Nullable

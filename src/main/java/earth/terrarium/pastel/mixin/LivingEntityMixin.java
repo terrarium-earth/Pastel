@@ -17,7 +17,6 @@ import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.components.PairedFoodComponent;
 import earth.terrarium.pastel.helpers.ParticleHelper;
 import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
-import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
@@ -29,13 +28,12 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithPatternAnd
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelDamageTypeTags;
-import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.status_effects.EffectProlongingStatusEffect;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.core.Holder;
@@ -99,7 +97,7 @@ public abstract class LivingEntityMixin {
 	
 	@Shadow
 	public abstract int getArmorValue();
-	
+
 	@Shadow
 	public abstract void remove(Entity.RemovalReason reason);
 	
@@ -283,9 +281,9 @@ public abstract class LivingEntityMixin {
 
 	@ModifyVariable(at = @At("HEAD"), method = "hurt", argsOnly = true)
 	private float modifyDamage(float amount, DamageSource source) {
-		@Nullable MobEffectInstance vulnerability = getEffect(PastelStatusEffects.VULNERABILITY);
+		@Nullable MobEffectInstance vulnerability = getEffect(PastelMobEffects.VULNERABILITY);
 		if (vulnerability != null) {
-			amount *= 1 + (PastelStatusEffects.VULNERABILITY_ADDITIONAL_DAMAGE_PERCENT_PER_LEVEL * vulnerability.getAmplifier());
+			amount *= 1 + (PastelMobEffects.VULNERABILITY_ADDITIONAL_DAMAGE_PERCENT_PER_LEVEL * vulnerability.getAmplifier());
 		}
 		return amount;
 	}
@@ -316,7 +314,7 @@ public abstract class LivingEntityMixin {
 		if (original)
 			return true;
 
-		if (hasEffect(PastelStatusEffects.ETERNAL_SLUMBER) || hasEffect(PastelStatusEffects.FATAL_SLUMBER))
+		if (hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || hasEffect(PastelMobEffects.FATAL_SLUMBER))
 			return !(((LivingEntity) (Object) this) instanceof Player);
 
 		return false;
@@ -384,7 +382,7 @@ public abstract class LivingEntityMixin {
 	@ModifyVariable(method = "setSprinting(Z)V", at = @At("HEAD"), argsOnly = true)
 	private boolean setSprinting(boolean sprinting) {
 		var entity = (LivingEntity) (Object) this;
-		if (sprinting && entity.hasEffect(PastelStatusEffects.SCARRED)) {
+		if (sprinting && entity.hasEffect(PastelMobEffects.SCARRED)) {
 			return false;
 		}
 		return sprinting;
@@ -401,7 +399,7 @@ public abstract class LivingEntityMixin {
 	@Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z", at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;"))
 	private void addStatusEffect(MobEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
 		if (EffectProlongingStatusEffect.canBeExtended(effect.getEffect())) {
-			MobEffectInstance effectProlongingInstance = this.getEffect(PastelStatusEffects.EFFECT_PROLONGING);
+			MobEffectInstance effectProlongingInstance = this.getEffect(PastelMobEffects.EFFECT_PROLONGING);
 			if (effectProlongingInstance != null) {
 				((MobEffectInstanceInjector) effect).setDuration(EffectProlongingStatusEffect.getExtendedDuration(effect.getDuration(), effectProlongingInstance.getAmplifier()));
 			}

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.helpers.StatusEffectHelper;
+import earth.terrarium.pastel.helpers.MobEffectHelper;
 import earth.terrarium.pastel.injectors.ClientboundUpdateMobEffectPacketInjector;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
@@ -19,7 +19,7 @@ public abstract class ClientboundUpdateMobEffectsPacketMixin implements Clientbo
 	
 	@Inject(method = "<init>(ILnet/minecraft/world/effect/MobEffectInstance;Z)V", at = @At("RETURN"))
 	public void initIncurable(int entityId, MobEffectInstance effect, boolean keepFading, CallbackInfo ci) {
-		this.incurable = StatusEffectHelper.resistsRemoval(effect);
+		this.incurable = MobEffectHelper.resistsRemoval(effect);
 	}
 	
 	@Inject(method = "<init>(Lnet/minecraft/network/RegistryFriendlyByteBuf;)V", at = @At("RETURN"))

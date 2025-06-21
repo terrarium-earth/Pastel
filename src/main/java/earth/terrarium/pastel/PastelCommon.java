@@ -127,7 +127,7 @@ public class PastelCommon {
 
 		// Register ALL the stuff
 		logInfo("Registering Status Effects...");
-		PastelStatusEffects.register(pastelBus);
+		PastelMobEffects.register(pastelBus);
 		logInfo("Registering Advancement Criteria...");
 		PastelAdvancementCriteria.register(pastelBus);
 		logInfo("Registering Particle Types...");

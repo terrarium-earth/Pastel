@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -35,7 +35,7 @@ public abstract class ApplyBonusLootFunctionMixin {
 		if (itemStack != null && entity instanceof LivingEntity livingEntity) {
 			int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(this.enchantment, itemStack);
 			if (enchantmentLevel > 0) {
-				MobEffectInstance effect = livingEntity.getEffect(PastelStatusEffects.ANOTHER_ROLL);
+				MobEffectInstance effect = livingEntity.getEffect(PastelMobEffects.ANOTHER_ROLL);
 				if (effect != null) {
 					int rollCount = effect.getAmplifier() + 1;
 					int highestRoll = oldValue;

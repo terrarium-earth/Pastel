@@ -3,7 +3,7 @@ package earth.terrarium.pastel.attachments;
 import com.mojang.authlib.GameProfile;
 import earth.terrarium.pastel.*;
 import earth.terrarium.pastel.attachments.data.AttachmentUtil;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -35,7 +35,7 @@ public class HardcoreDeathTracker extends SavedData {
 	private static HardcoreDeathTracker CLIENT_TRACKER;
 	
 	public static boolean isInHardcore(Player player) {
-		return player.hasEffect(PastelStatusEffects.DIVINITY);
+		return player.hasEffect(PastelMobEffects.DIVINITY);
 	}
 
 	private static void sync(ServerPlayer player) {

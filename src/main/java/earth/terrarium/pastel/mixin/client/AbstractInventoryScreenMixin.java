@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin.client;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import earth.terrarium.pastel.helpers.StatusEffectHelper;
+import earth.terrarium.pastel.helpers.MobEffectHelper;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,12 +23,12 @@ public class AbstractInventoryScreenMixin {
 	
 	@ModifyArg(method = "renderBackgrounds", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.blitSprite (Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 0))
 	private ResourceLocation modifyWideBackground(ResourceLocation texture, @Local MobEffectInstance effect) {
-		return StatusEffectHelper.getTextureLocation(texture, effect, StatusEffectHelper.RenderType.GUI_LARGE);
+		return MobEffectHelper.getTextureLocation(texture, effect, MobEffectHelper.RenderType.GUI_LARGE);
 	}
 	
 	@ModifyArg(method = "renderBackgrounds", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.blitSprite (Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 1))
 	private ResourceLocation modifyBackground(ResourceLocation texture, @Share("effect") LocalRef<MobEffectInstance> effect) {
-		return StatusEffectHelper.getTextureLocation(texture, effect.get(), StatusEffectHelper.RenderType.GUI_SMALL);
+		return MobEffectHelper.getTextureLocation(texture, effect.get(), MobEffectHelper.RenderType.GUI_SMALL);
 	}
 	
 }

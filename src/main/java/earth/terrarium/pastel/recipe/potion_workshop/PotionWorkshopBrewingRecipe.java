@@ -15,7 +15,7 @@ import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelPotions;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -73,8 +73,8 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		put(MobEffects.UNLUCK, MobEffects.LUCK);
 		put(MobEffects.WEAKNESS, MobEffects.DAMAGE_BOOST);
 		put(MobEffects.WITHER, MobEffects.REGENERATION);
-		put(PastelStatusEffects.STIFFNESS, PastelStatusEffects.SWIFTNESS);
-		put(PastelStatusEffects.DENSITY, PastelStatusEffects.LIGHTWEIGHT);
+		put(PastelMobEffects.STIFFNESS, PastelMobEffects.SWIFTNESS);
+		put(PastelMobEffects.DENSITY, PastelMobEffects.LIGHTWEIGHT);
 	}};
 	
 	public static @Nullable PotionWorkshopBrewingRecipe getPositiveRecipe(@NotNull Holder<MobEffect> statusEffect) {

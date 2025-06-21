@@ -13,7 +13,7 @@ import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -341,15 +341,15 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 			this.setClipped(this.getClipTime() - 1);
 			this.setChillTime(this.getChillTime() - 1);
 
-			if (hasEffect(PastelStatusEffects.ETERNAL_SLUMBER)) {
+			if (hasEffect(PastelMobEffects.ETERNAL_SLUMBER)) {
 				ascend(2);
 			}
 
-			if (hasEffect(PastelStatusEffects.FATAL_SLUMBER)) {
+			if (hasEffect(PastelMobEffects.FATAL_SLUMBER)) {
 				ascend(3);
 			}
 
-			if (hasEffect(PastelStatusEffects.SOMNOLENCE) && getEepyTime() == 0) {
+			if (hasEffect(PastelMobEffects.SOMNOLENCE) && getEepyTime() == 0) {
 				setEepyTime(100);
 			}
 

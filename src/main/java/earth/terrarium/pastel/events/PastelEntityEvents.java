@@ -115,7 +115,7 @@ public class PastelEntityEvents {
         }
 
         LastKillData.rememberKillTick(attacker, entity.level().getGameTime());
-        var frenzy = attacker.getEffect(PastelStatusEffects.FRENZY);
+        var frenzy = attacker.getEffect(PastelMobEffects.FRENZY);
         if (frenzy != null) {
             ((FrenzyStatusEffect) frenzy.getEffect()).onKill(attacker, frenzy.getAmplifier());
         }

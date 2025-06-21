@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -20,7 +20,7 @@ public abstract class MobEntityMixin {
     public void slowDownAIticks(CallbackInfo ci) {
         var entity = (Mob) (Object) this;
 
-        if ((entity.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelStatusEffects.FATAL_SLUMBER)) && !SleepStatusEffect.isResistedBy(entity)) {
+        if ((entity.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelMobEffects.FATAL_SLUMBER)) && !SleepStatusEffect.isResistedBy(entity)) {
             target = null;
             ci.cancel();
             return;

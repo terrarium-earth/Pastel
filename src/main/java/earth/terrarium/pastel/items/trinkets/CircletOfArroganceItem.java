@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.trinkets;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.status_effects.DivinityStatusEffect;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
@@ -47,7 +47,7 @@ public class CircletOfArroganceItem extends PastelTrinketItem {
     }
 
     private static void giveEffect(LivingEntity entity) {
-		entity.addEffect(new MobEffectInstance(PastelStatusEffects.DIVINITY, EFFECT_DURATION, DivinityStatusEffect.CIRCLET_AMPLIFIER, true, true));
+		entity.addEffect(new MobEffectInstance(PastelMobEffects.DIVINITY, EFFECT_DURATION, DivinityStatusEffect.CIRCLET_AMPLIFIER, true, true));
     }
 
     @Override

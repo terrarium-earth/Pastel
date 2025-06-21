@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin.client;
 import com.llamalad7.mixinextras.injector.*;
 import com.llamalad7.mixinextras.injector.wrapoperation.*;
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.helpers.StatusEffectHelper;
+import earth.terrarium.pastel.helpers.MobEffectHelper;
 import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.DeltaTracker;
@@ -60,18 +60,18 @@ public abstract class InGameHudMixin {
 
     @ModifyArg(method = "renderEffects", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.blitSprite (Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 0))
     private ResourceLocation modifyAmbientEffectBackgrounds(ResourceLocation texture, @Local MobEffectInstance effect) {
-		return StatusEffectHelper.getTextureLocation(texture, effect, StatusEffectHelper.RenderType.HUD_AMBIENT);
+		return MobEffectHelper.getTextureLocation(texture, effect, MobEffectHelper.RenderType.HUD_AMBIENT);
     }
     
     @ModifyArg(method = "renderEffects", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.blitSprite (Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 1))
     private ResourceLocation modifyEffectBackgrounds(ResourceLocation texture, @Local MobEffectInstance effect) {
-		return StatusEffectHelper.getTextureLocation(texture, effect, StatusEffectHelper.RenderType.HUD_DEFAULT);
+		return MobEffectHelper.getTextureLocation(texture, effect, MobEffectHelper.RenderType.HUD_DEFAULT);
     }
 
 
     @WrapOperation(method = "renderHearts", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderHeart(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V"))
     private void renderDivinityHearts(Gui instance, GuiGraphics guiGraphics, Gui.HeartType heartType, int x, int y, boolean hardcore, boolean halfHeart, boolean blinking, Operation<Void> original, @Local(argsOnly = true) Player player) {
-        if (player.hasEffect(PastelStatusEffects.DIVINITY)) {
+        if (player.hasEffect(PastelMobEffects.DIVINITY)) {
             renderHeart(guiGraphics, heartType, x, y, true, halfHeart, blinking);
         }
         else {

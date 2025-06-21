@@ -8,7 +8,7 @@ import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -42,8 +42,8 @@ public abstract class ProjectileEntityMixin {
 				if (entity instanceof LivingEntity livingEntity) {
 					boolean protect = false;
 					
-					MobEffectInstance reboundInstance = livingEntity.getEffect(PastelStatusEffects.PROJECTILE_REBOUND);
-					if (reboundInstance != null && entity.level().getRandom().nextFloat() < PastelStatusEffects.PROJECTILE_REBOUND_CHANCE_PER_LEVEL * reboundInstance.getAmplifier()) {
+					MobEffectInstance reboundInstance = livingEntity.getEffect(PastelMobEffects.PROJECTILE_REBOUND);
+					if (reboundInstance != null && entity.level().getRandom().nextFloat() < PastelMobEffects.PROJECTILE_REBOUND_CHANCE_PER_LEVEL * reboundInstance.getAmplifier()) {
 						protect = true;
 					} else {
 						if (PastelTrinketItem.hasEquipped(livingEntity, PastelItems.PUFF_CIRCLET.get())) {

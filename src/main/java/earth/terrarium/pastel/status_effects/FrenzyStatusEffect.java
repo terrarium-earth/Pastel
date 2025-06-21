@@ -2,7 +2,7 @@ package earth.terrarium.pastel.status_effects;
 
 import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -26,14 +26,14 @@ public class FrenzyStatusEffect extends MobEffect {
 	// prevent the resetting of frenzy-granted attributes
 	@Override
 	public void onEffectStarted(LivingEntity entity, int amplifier) {
-		if (!PastelStatusEffects.effectsAreGettingStacked && !entity.hasEffect(PastelStatusEffects.FRENZY)) {
+		if (!PastelMobEffects.effectsAreGettingStacked && !entity.hasEffect(PastelMobEffects.FRENZY)) {
 			super.onEffectStarted(entity, amplifier);
 		}
 	}
 	
 	@Override
 	public void removeAttributeModifiers(AttributeMap attributes) {
-		if (!PastelStatusEffects.effectsAreGettingStacked) {
+		if (!PastelMobEffects.effectsAreGettingStacked) {
 			super.removeAttributeModifiers(attributes);
 		}
 	}
@@ -85,7 +85,7 @@ public class FrenzyStatusEffect extends MobEffect {
 
 	@Override
 	public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
-		cures.add(PastelStatusEffects.Cures.SEDATIVES);
+		cures.add(PastelMobEffects.Cures.SEDATIVES);
 	}
 
 	public double adjustModifierAmount(double existingValue, double additionalValue, int amplifier, int increase) {

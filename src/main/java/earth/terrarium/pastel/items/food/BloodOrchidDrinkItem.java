@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.food;
 
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -17,7 +17,7 @@ public class BloodOrchidDrinkItem extends DrinkItem{
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
-        user.removeEffectsCuredBy(PastelStatusEffects.Cures.BLOOD_ORCHID);
+        user.removeEffectsCuredBy(PastelMobEffects.Cures.BLOOD_ORCHID);
         return super.finishUsingItem(stack, world, user);
     }
 }

@@ -10,7 +10,7 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -57,7 +57,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 		
 		int effectDuration = 1200;
 		if (alcPercent >= 80) {
-			effects.add(new MobEffectInstance(PastelStatusEffects.PROJECTILE_REBOUND, effectDuration));
+			effects.add(new MobEffectInstance(PastelMobEffects.PROJECTILE_REBOUND, effectDuration));
 			effectDuration *= 2;
 		}
 		if (alcPercent >= 70) {
@@ -73,11 +73,11 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 			effectDuration *= 2;
 		}
 		if (alcPercent >= 20) {
-			effects.add(new MobEffectInstance(PastelStatusEffects.NOURISHING, effectDuration));
+			effects.add(new MobEffectInstance(PastelMobEffects.NOURISHING, effectDuration));
 			effectDuration *= 2;
 		}
 		if (nectar) {
-			effects.add(new MobEffectInstance(PastelStatusEffects.IMMUNITY, effectDuration));
+			effects.add(new MobEffectInstance(PastelMobEffects.IMMUNITY, effectDuration));
 		}
 		
 		int nectarMod = nectar ? 3 : 1;

@@ -1,11 +1,12 @@
 package earth.terrarium.pastel.events;
 
-import earth.terrarium.pastel.helpers.StatusEffectHelper;
+import earth.terrarium.pastel.helpers.MobEffectHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.items.trinkets.AetherGracedNectarGlovesItem;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +19,6 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static earth.terrarium.pastel.registries.PastelStatusEffects.*;
+import static earth.terrarium.pastel.registries.PastelMobEffects.*;
 
 public class PastelEffectEvents {
 
@@ -71,7 +71,7 @@ public class PastelEffectEvents {
         var entity = event.getEntity();
         var cure = event.getCure();
 
-        if (removed == null || !StatusEffectHelper.resistsRemoval(removed))
+        if (removed == null || !MobEffectHelper.resistsRemoval(removed))
             return;
 
         if (cure.equals(Cures.SEDATIVES)) {
@@ -91,7 +91,7 @@ public class PastelEffectEvents {
             return;
 
         if (removed.getEffect().equals(FATAL_SLUMBER)) {
-            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, 6000));
+            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelMobEffects.ETERNAL_SLUMBER, 6000));
             return;
         }
 
@@ -99,7 +99,7 @@ public class PastelEffectEvents {
             return;
 
         if(removed.getEffect().equals(SOMNOLENCE)) {
-            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, removed.getDuration()));
+            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelMobEffects.ETERNAL_SLUMBER, removed.getDuration()));
         } else if(removed.getEffect().equals(CALMING)) {
             QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(SOMNOLENCE, removed.getDuration()));
         } // Miniscule amount of trolling
@@ -114,15 +114,15 @@ public class PastelEffectEvents {
 
         var immunity = entity.getEffect(IMMUNITY);
 
-        if (immunity == null)
+        if (immunity == null || proposal.getEffect().is(PastelMobEffectTags.BYPASSES_IMMUNITY))
             return;
 
-        if (!StatusEffectHelper.resistsRemoval(proposal)) {
+        if (!MobEffectHelper.resistsRemoval(proposal)) {
             event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
             return;
         }
 
-        if (drainImmunity(immunity, proposal.getAmplifier() + 1))
+        if (MobEffectHelper.drainImmunity(immunity, proposal.getAmplifier() + 1))
             entity.removeEffect(IMMUNITY);
 
         event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
@@ -138,7 +138,7 @@ public class PastelEffectEvents {
 
         var cost = (proposal.getAmplifier() + 1) * AetherGracedNectarGlovesItem.HARMFUL_EFFECT_COST;
 
-        if (StatusEffectHelper.resistsRemoval(proposal))
+        if (MobEffectHelper.resistsRemoval(proposal))
             cost *= 2;
 
         if (AetherGracedNectarGlovesItem.tryBlockEffect(entity, cost))
@@ -183,19 +183,6 @@ public class PastelEffectEvents {
         else {
             modifiable.setDuration(Math.max(200, Math.round(effect.getDuration() * sleepResist * 3)));
         } // Fatal slumber never lasts less than 10 seconds
-    }
-
-    /**
-     * @return Whether immunity should be removed outright
-     */
-    private static boolean drainImmunity(MobEffectInstance immunity, float multiplier) {
-        var cost = Math.round(600 * multiplier);
-        if (immunity.getDuration() <= cost) {
-            return true;
-        }
-
-        ((MobEffectInstanceInjector) immunity).setDuration(Math.max(5, immunity.getDuration() - cost));
-        return false;
     }
 
     private static void updateEffectInClient(LivingEntity entity, MobEffectInstance effect) {

@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
-import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
 import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
@@ -14,15 +13,12 @@ import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelDamageTypeTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
-import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
-import net.minecraft.server.level.ServerLevel;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
@@ -140,7 +136,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	@Inject(at = @At("HEAD"), method = "isHurt", cancellable = true)
 	public void canFoodHeal(CallbackInfoReturnable<Boolean> cir) {
 		Player player = (Player) (Object) this;
-		if (player.hasEffect(PastelStatusEffects.SCARRED)) {
+		if (player.hasEffect(PastelMobEffects.SCARRED)) {
 			cir.setReturnValue(false);
 		}
 	}
@@ -177,7 +173,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	@WrapOperation(method = "updatePlayerPose", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setPose(Lnet/minecraft/world/entity/Pose;)V"))
 	public void forceSwimmingState(Player instance, Pose entityPose, Operation<Void> original) {
 		var component = MiscPlayerData.get(instance);
-		if ((component.shouldLieDown() || instance.hasEffect(PastelStatusEffects.FATAL_SLUMBER)) && canPlayerFitWithinBlocksAndEntitiesWhen(Pose.SWIMMING)) {
+		if ((component.shouldLieDown() || instance.hasEffect(PastelMobEffects.FATAL_SLUMBER)) && canPlayerFitWithinBlocksAndEntitiesWhen(Pose.SWIMMING)) {
 			instance.setPose(Pose.SWIMMING);
 			return;
 		}

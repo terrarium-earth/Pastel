@@ -11,7 +11,7 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -64,7 +64,7 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 			effectDuration *= 1.5;
 		}
 		if (alcPercent >= 35) {
-			effects.add(new MobEffectInstance(PastelStatusEffects.EFFECT_PROLONGING, effectDuration, (int) (alcPercent / 12)));
+			effects.add(new MobEffectInstance(PastelMobEffects.EFFECT_PROLONGING, effectDuration, (int) (alcPercent / 12)));
 			effectDuration *= 2;
 		}
 		if (alcPercent >= 30) {
@@ -76,11 +76,11 @@ public class AquaRegiaRecipe extends SweetenableTitrationBarrelRecipe {
 			effectDuration *= 2;
 		}
 		if (alcPercent >= 10) {
-			effects.add(new MobEffectInstance(PastelStatusEffects.NOURISHING, effectDuration));
+			effects.add(new MobEffectInstance(PastelMobEffects.NOURISHING, effectDuration));
 			effectDuration *= 2;
 		}
 		if (nectar) {
-			effects.add(new MobEffectInstance(PastelStatusEffects.IMMUNITY, effectDuration / 2));
+			effects.add(new MobEffectInstance(PastelMobEffects.IMMUNITY, effectDuration / 2));
 		}
 		
 		int nectarMod = nectar ? 3 : 1;

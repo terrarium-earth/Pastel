@@ -160,7 +160,7 @@ public class PastelPlayerEvents {
         var player = event.getEntity();
 
         MiscPlayerData.get(player).resetSleepingState(false);
-        player.removeEffect(PastelStatusEffects.SOMNOLENCE);
+        player.removeEffect(PastelMobEffects.SOMNOLENCE);
     }
 
     private static void playerTick(PlayerTickEvent.Post event) {
@@ -175,7 +175,7 @@ public class PastelPlayerEvents {
             event.setProblem(null);
         }
         else if((reason == Player.BedSleepingProblem.NOT_POSSIBLE_NOW || reason == Player.BedSleepingProblem.NOT_SAFE)
-                && player.hasEffect(PastelStatusEffects.SOMNOLENCE)) { // Somnolence lets you sleep whenever and wherever.
+                && player.hasEffect(PastelMobEffects.SOMNOLENCE)) { // Somnolence lets you sleep whenever and wherever.
             event.setProblem(null);
         }
     }

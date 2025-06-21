@@ -9,7 +9,7 @@ import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -202,9 +202,9 @@ public class DragonTalonEntity extends BidentBaseEntity {
 		var bonusMod = 1f;
 		
 		if (yoinked instanceof LivingEntity livingYoink) {
-			bonusMod /= Optional.ofNullable(livingYoink.getEffect(PastelStatusEffects.DENSITY))
+			bonusMod /= Optional.ofNullable(livingYoink.getEffect(PastelMobEffects.DENSITY))
 					.map(effect -> effect.getAmplifier() + 2).orElse(1);
-			bonusMod *= Optional.ofNullable(livingYoink.getEffect(PastelStatusEffects.LIGHTWEIGHT))
+			bonusMod *= Optional.ofNullable(livingYoink.getEffect(PastelMobEffects.LIGHTWEIGHT))
 					.map(effect -> (effect.getAmplifier() + 2) / 1.5F).orElse(1F);
 		}
 		

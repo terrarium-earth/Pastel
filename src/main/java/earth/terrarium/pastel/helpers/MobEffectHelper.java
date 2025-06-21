@@ -3,11 +3,16 @@ package earth.terrarium.pastel.helpers;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.registries.PastelMobEffectTags;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
 
-public class StatusEffectHelper {
+import java.util.ArrayList;
+
+public class MobEffectHelper {
 	
 	public enum RenderType {
 		GUI_LARGE,
@@ -42,7 +47,7 @@ public class StatusEffectHelper {
 	public static ResourceLocation getTextureLocation(ResourceLocation original, MobEffectInstance effect, RenderType renderType) {
 		var type = effect.getEffect();
 		
-		if (type == PastelStatusEffects.DIVINITY)
+		if (type == PastelMobEffects.DIVINITY)
 			return DIVINITY.get(renderType);
 		
 		if (resistsRemoval(effect)) {
@@ -62,5 +67,39 @@ public class StatusEffectHelper {
 			return false; // We are merciful
 		
 		return ((MobEffectInstanceInjector) instance).isIncurable();
+	}
+
+	/**
+	 * @return Whether immunity should be removed outright
+	 */
+	public static boolean drainImmunity(MobEffectInstance immunity, float multiplier) {
+		var cost = Math.round(600 * multiplier);
+		if (immunity.getDuration() <= cost) {
+			return true;
+		}
+
+		((MobEffectInstanceInjector) immunity).setDuration(Math.max(5, immunity.getDuration() - cost));
+		return false;
+	}
+
+	/**
+	 * @param ignoreIncurable Whether to attempt removing incurable effects
+	 */
+	public static void actionImmunity(LivingEntity entity, boolean ignoreIncurable) {
+		var removals = new ArrayList<Holder<MobEffect>>();
+		var immunity = entity.getEffect(PastelMobEffects.IMMUNITY);
+
+		assert immunity != null;
+		for (MobEffectInstance proposal : entity.getActiveEffects()) {
+			if (proposal.getEffect().is(PastelMobEffectTags.BYPASSES_IMMUNITY))
+				continue;
+
+			if (ignoreIncurable && resistsRemoval(proposal))
+				continue;
+
+			removals.add(proposal.getEffect());
+		}
+
+		removals.forEach(entity::removeEffect);
 	}
 }

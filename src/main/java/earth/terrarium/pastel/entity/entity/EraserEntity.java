@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.entity;
 import earth.terrarium.pastel.api.entity.PackEntity;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -109,7 +109,7 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 	
 	@Override
 	public boolean canBeAffected(MobEffectInstance effect) {
-		return super.canBeAffected(effect) && effect.getEffect() != PastelStatusEffects.DEADLY_POISON;
+		return super.canBeAffected(effect) && effect.getEffect() != PastelMobEffects.DEADLY_POISON;
 	}
 	
 	@Override
@@ -257,20 +257,20 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 				amplifier = 0;
 			}
 			case 4, 5, 6 -> {
-				statusEffect = PastelStatusEffects.STIFFNESS;
+				statusEffect = PastelMobEffects.STIFFNESS;
 				amplifier = random.nextInt(2);
 			}
 			case 7, 8, 9 -> {
-				statusEffect = PastelStatusEffects.FRENZY;
+				statusEffect = PastelMobEffects.FRENZY;
 				amplifier = random.nextInt(2);
 			}
-			case 10, 11, 12 -> statusEffect = PastelStatusEffects.SCARRED;
+			case 10, 11, 12 -> statusEffect = PastelMobEffects.SCARRED;
 			case 13, 14, 15 -> {
-				statusEffect = PastelStatusEffects.VULNERABILITY;
+				statusEffect = PastelMobEffects.VULNERABILITY;
 				amplifier = random.nextInt(2);
 			}
 			default -> {
-				statusEffect = PastelStatusEffects.DEADLY_POISON;
+				statusEffect = PastelMobEffects.DEADLY_POISON;
 				amplifier = random.nextInt(2);
 			}
 		}
@@ -375,7 +375,7 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 				}
 				case 3 -> this.effect = MobEffects.INVISIBILITY;
 				default -> {
-					this.effect = PastelStatusEffects.MAGIC_ANNULATION;
+					this.effect = PastelMobEffects.MAGIC_ANNULATION;
 					this.amplifier = 5;
 				}
 			}

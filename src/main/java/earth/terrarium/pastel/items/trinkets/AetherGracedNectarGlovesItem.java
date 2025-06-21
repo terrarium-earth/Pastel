@@ -7,7 +7,7 @@ import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffectTags;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -59,7 +59,7 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 		if (effect.is(PastelMobEffectTags.BYPASSES_NECTAR_GLOVES))
 			return false;
 
-		return hasEquipped(entity, PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == PastelStatusEffects.FRENZY);
+		return hasEquipped(entity, PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == PastelMobEffects.FRENZY);
 	}
 
 	public static boolean tryBlockEffect(LivingEntity entity, int cost) {
@@ -76,6 +76,6 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 
 	@Override
 	public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
-		return PastelStatusEffects.ETERNAL_SLUMBER_COLOR;
+		return PastelMobEffects.ETERNAL_SLUMBER_COLOR;
 	}
 }

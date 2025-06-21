@@ -32,7 +32,7 @@ import net.neoforged.neoforge.registries.*;
 
 import static earth.terrarium.pastel.PastelCommon.locate;
 
-public class PastelStatusEffects {
+public class PastelMobEffects {
 
 	public static final int ETERNAL_SLUMBER_COLOR = 0xc35fee;
 	public static boolean effectsAreGettingStacked = false;

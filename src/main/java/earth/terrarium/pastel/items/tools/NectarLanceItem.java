@@ -7,7 +7,7 @@ import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelMobEffectTags;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
@@ -69,9 +69,9 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 				applyDoTProc(magicDamage, base + 5F,0.8F, target, effect, false, true);
 			}
 		}
-		else if (target.hasEffect(PastelStatusEffects.DEADLY_POISON)) {
-			var effect = target.getEffect(PastelStatusEffects.DEADLY_POISON);
-			if (target.removeEffect(PastelStatusEffects.DEADLY_POISON)) {
+		else if (target.hasEffect(PastelMobEffects.DEADLY_POISON)) {
+			var effect = target.getEffect(PastelMobEffects.DEADLY_POISON);
+			if (target.removeEffect(PastelMobEffects.DEADLY_POISON)) {
 				assert effect != null;
 				applyDoTProc(magicDamage, base + 10F,1.0F, target, effect, true, true);
 			}

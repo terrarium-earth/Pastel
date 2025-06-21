@@ -10,7 +10,7 @@ import earth.terrarium.pastel.registries.PastelFluidTags;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -133,9 +133,9 @@ public abstract class DragonrotFluid extends PastelFluid {
 					livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage / 2F);
 				}
 				if (!livingEntity.isDeadOrDying()) {
-					MobEffectInstance existingEffect = livingEntity.getEffect(PastelStatusEffects.LIFE_DRAIN);
+					MobEffectInstance existingEffect = livingEntity.getEffect(PastelMobEffects.LIFE_DRAIN);
 					if (existingEffect == null) {
-						livingEntity.addEffect(new MobEffectInstance(PastelStatusEffects.LIFE_DRAIN, 600, 0));
+						livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.LIFE_DRAIN, 600, 0));
 					}
 					else if(existingEffect.getDuration() < 500) {
 						((MobEffectInstanceInjector) existingEffect).setDuration(300);
@@ -143,15 +143,15 @@ public abstract class DragonrotFluid extends PastelFluid {
 						serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
 					}
 
-					existingEffect = livingEntity.getEffect(PastelStatusEffects.DEADLY_POISON);
+					existingEffect = livingEntity.getEffect(PastelMobEffects.DEADLY_POISON);
 					if (existingEffect == null || existingEffect.getDuration() < 80) {
-						livingEntity.addEffect(new MobEffectInstance(PastelStatusEffects.DEADLY_POISON, 160, 0));
+						livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.DEADLY_POISON, 160, 0));
 					}
 
-					existingEffect = livingEntity.getEffect(PastelStatusEffects.IMMUNITY);
+					existingEffect = livingEntity.getEffect(PastelMobEffects.IMMUNITY);
 					if (existingEffect != null) {
 						if (existingEffect.getDuration() <= cut) {
-							livingEntity.removeEffect(PastelStatusEffects.IMMUNITY);
+							livingEntity.removeEffect(PastelMobEffects.IMMUNITY);
 						} else {
 							((MobEffectInstanceInjector) existingEffect).setDuration(existingEffect.getDuration() - cut);
 							serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
@@ -161,9 +161,9 @@ public abstract class DragonrotFluid extends PastelFluid {
 					if (!dragon)
 						return;
 
-					existingEffect = livingEntity.getEffect(PastelStatusEffects.DENSITY);
+					existingEffect = livingEntity.getEffect(PastelMobEffects.DENSITY);
 					if (existingEffect == null || existingEffect.getDuration() < 120) {
-						livingEntity.addEffect(new MobEffectInstance(PastelStatusEffects.DENSITY, 2000, 1));
+						livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.DENSITY, 2000, 1));
 					}
 				}
 			}

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.deeper_down;
 
 import com.google.common.collect.ImmutableMap;
 import earth.terrarium.pastel.registries.PastelBiomes;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -67,7 +67,7 @@ public class DimensionRenderEffects {
 			shouldUpdate = false;
 			updateTargets();
 			
-			if (sleepEffect == PastelStatusEffects.FATAL_SLUMBER) {
+			if (sleepEffect == PastelMobEffects.FATAL_SLUMBER) {
 				sleepAfflicted = true;
 				
 				blendTarget = 1F;
@@ -78,7 +78,7 @@ public class DimensionRenderEffects {
 				nearTarget = -10F;
 				farTarget = 0.25F;
 				forceFogEffects = true;
-			} else if (sleepEffect == PastelStatusEffects.ETERNAL_SLUMBER) {
+			} else if (sleepEffect == PastelMobEffects.ETERNAL_SLUMBER) {
 				sleepAfflicted = true;
 				
 				blendTarget = targets;
@@ -89,7 +89,7 @@ public class DimensionRenderEffects {
 				nearTarget = -2F;
 				farTarget = 0.9F;
 				forceFogEffects = true;
-			} else if (sleepEffect == PastelStatusEffects.SOMNOLENCE) {
+			} else if (sleepEffect == PastelMobEffects.SOMNOLENCE) {
 				sleepAfflicted = true;
 				
 				blendTarget = targets;

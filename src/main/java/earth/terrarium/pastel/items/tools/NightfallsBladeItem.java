@@ -10,7 +10,7 @@ import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.helpers.ColorHelper;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -61,7 +61,7 @@ public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionF
 	
 	@Override
 	public long adjustFinalCostFor(@NotNull InkPoweredStatusEffectInstance instance) {
-		var mod = PastelStatusEffects.isStrongSleepEffect(instance) ? 1 : 0;
+		var mod = PastelMobEffects.isStrongSleepEffect(instance) ? 1 : 0;
 		return Math.round(Math.pow(instance.getInkCost().cost(), 1.75 + instance.getStatusEffectInstance().getAmplifier() + mod));
 	}
 	

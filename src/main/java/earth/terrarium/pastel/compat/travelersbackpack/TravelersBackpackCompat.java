@@ -6,7 +6,7 @@ import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelFluids;
-import earth.terrarium.pastel.registries.PastelStatusEffects;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -90,7 +90,7 @@ public class TravelersBackpackCompat extends PastelIntegrationPacks.ModIntegrati
 			@Override
 			public void affectDrinker(FluidStack fluidStack, Level world, Entity entity) {
 				if (entity instanceof LivingEntity livingEntity) {
-					livingEntity.addEffect(new MobEffectInstance(PastelStatusEffects.LIFE_DRAIN, 600, 3));
+					livingEntity.addEffect(new MobEffectInstance(PastelMobEffects.LIFE_DRAIN, 600, 3));
 					livingEntity.hurt(PastelDamageTypes.dragonrot(world), 1000); // 💀
 				}
 			}
