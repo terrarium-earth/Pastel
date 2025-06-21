@@ -93,7 +93,9 @@ public class SleepStatusEffect extends MobEffect {
 
     @Override
     public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
-        if (effectInstance.getEffect().equals(PastelStatusEffects.SOMNOLENCE))
+        var holder = effectInstance.getEffect();
+
+        if (holder.equals(PastelStatusEffects.SOMNOLENCE) || holder.equals(PastelStatusEffects.CALMING))
             cures.add(PastelStatusEffects.Cures.SEDATIVES);
 
         cures.add(PastelStatusEffects.Cures.BLOOD_ORCHID);

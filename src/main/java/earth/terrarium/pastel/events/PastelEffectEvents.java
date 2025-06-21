@@ -91,9 +91,16 @@ public class PastelEffectEvents {
 
         if (removed.getEffect().equals(FATAL_SLUMBER)) {
             QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, 6000));
+            return;
         }
-        else if(removed.getEffect().equals(SOMNOLENCE) && Cures.SEDATIVES.equals(event.getCure())) {
+
+        if (!Cures.SEDATIVES.equals(event.getCure()))
+            return;
+
+        if(removed.getEffect().equals(SOMNOLENCE)) {
             QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, removed.getDuration()));
+        } else if(removed.getEffect().equals(CALMING)) {
+            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(SOMNOLENCE, removed.getDuration()));
         } // Miniscule amount of trolling
     }
 
