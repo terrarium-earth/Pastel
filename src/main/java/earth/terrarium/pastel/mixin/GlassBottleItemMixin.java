@@ -2,10 +2,10 @@ package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -34,37 +34,37 @@ public abstract class GlassBottleItemMixin {
 	public void onUse(Level world, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir, @Local ItemStack handStack, @Local BlockPos blockPos) {
 		BlockState blockState = world.getBlockState(blockPos);
 		
-		if (blockState.is(SpectrumBlocks.FADING.get())
-				&& SpectrumCommon.CONFIG.CanBottleUpFading
-				&& AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.UNLOCK_BOTTLE_OF_FADING)) {
+		if (blockState.is(PastelBlocks.FADING.get())
+				&& PastelCommon.CONFIG.CanBottleUpFading
+				&& AdvancementHelper.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FADING)) {
 			
 			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
-			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, SpectrumItems.BOTTLE_OF_FADING.get().getDefaultInstance()), world.isClientSide()));
+			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, PastelItems.BOTTLE_OF_FADING.get().getDefaultInstance()), world.isClientSide()));
 			
-		} else if (blockState.is(SpectrumBlocks.FAILING.get())
-				&& SpectrumCommon.CONFIG.CanBottleUpFailing
-				&& AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.UNLOCK_BOTTLE_OF_FAILING)) {
-			
-			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
-			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
-			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, SpectrumItems.BOTTLE_OF_FAILING.get().getDefaultInstance()), world.isClientSide()));
-			
-		} else if (blockState.is(SpectrumBlocks.RUIN.get())
-				&& SpectrumCommon.CONFIG.CanBottleUpRuin
-				&& AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.UNLOCK_BOTTLE_OF_RUIN)) {
+		} else if (blockState.is(PastelBlocks.FAILING.get())
+				&& PastelCommon.CONFIG.CanBottleUpFailing
+				&& AdvancementHelper.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FAILING)) {
 			
 			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
-			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, SpectrumItems.BOTTLE_OF_RUIN.get().getDefaultInstance()), world.isClientSide()));
+			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, PastelItems.BOTTLE_OF_FAILING.get().getDefaultInstance()), world.isClientSide()));
 			
-		} else if (blockState.is(SpectrumBlocks.FORFEITURE.get())
-				&& SpectrumCommon.CONFIG.CanBottleUpForfeiture
-				&& AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.UNLOCK_BOTTLE_OF_FORFEITURE)) {
+		} else if (blockState.is(PastelBlocks.RUIN.get())
+				&& PastelCommon.CONFIG.CanBottleUpRuin
+				&& AdvancementHelper.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_RUIN)) {
 			
 			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
 			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
-			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, SpectrumItems.BOTTLE_OF_FORFEITURE.get().getDefaultInstance()), world.isClientSide()));
+			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, PastelItems.BOTTLE_OF_RUIN.get().getDefaultInstance()), world.isClientSide()));
+			
+		} else if (blockState.is(PastelBlocks.FORFEITURE.get())
+				&& PastelCommon.CONFIG.CanBottleUpForfeiture
+				&& AdvancementHelper.hasAdvancement(user, PastelAdvancements.UNLOCK_BOTTLE_OF_FORFEITURE)) {
+			
+			world.setBlockAndUpdate(blockPos, Blocks.AIR.defaultBlockState());
+			world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
+			cir.setReturnValue(InteractionResultHolder.sidedSuccess(this.turnBottleIntoItem(handStack, user, PastelItems.BOTTLE_OF_FORFEITURE.get().getDefaultInstance()), world.isClientSide()));
 		}
 	}
 	

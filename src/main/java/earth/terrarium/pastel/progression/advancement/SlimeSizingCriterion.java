@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class SlimeSizingCriterion extends SimpleCriterionTrigger<SlimeSizingCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("slime_sizing");
+	public static final ResourceLocation ID = PastelCommon.locate("slime_sizing");
 	
 	public void trigger(ServerPlayer player, int size) {
 		this.trigger(player, (conditions) -> conditions.matches(size));

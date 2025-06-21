@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelEnchantments;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +22,7 @@ public abstract class FirstStrikeEnchantmentMixin {
 		if (source.getEntity() instanceof LivingEntity livingAttacker) {
 			if (amount != 0F && target.getHealth() == target.getMaxHealth()) {
 				ItemStack mainHandStack = livingAttacker.getMainHandItem();
-				int level = SpectrumEnchantmentHelper.getLevel(livingAttacker.level().registryAccess(), SpectrumEnchantments.FIRST_STRIKE, mainHandStack);
+				int level = PastelEnchantmentHelper.getLevel(livingAttacker.level().registryAccess(), PastelEnchantments.FIRST_STRIKE, mainHandStack);
 				if (level > 0) {
 					float additionalDamage = getAdditionalFirstStrikeEnchantmentDamage(level);
 					amount += additionalDamage;
@@ -34,7 +34,7 @@ public abstract class FirstStrikeEnchantmentMixin {
 	
 	@Unique
 	private float getAdditionalFirstStrikeEnchantmentDamage(int level) {
-		return SpectrumCommon.CONFIG.FirstStrikeDamagePerLevel * level;
+		return PastelCommon.CONFIG.FirstStrikeDamagePerLevel * level;
 	}
 	
 }

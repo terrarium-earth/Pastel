@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.commands;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import earth.terrarium.pastel.registries.client.SpectrumShaders;
+import earth.terrarium.pastel.registries.client.PastelShaders;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.neoforged.fml.util.thread.EffectiveSide;
@@ -18,6 +18,6 @@ public class ResetShadersCommand {
 	}
 	
 	private static void execute() {
-		SpectrumShaders.clearDimensionShaders();
+		PastelShaders.clearDimensionShaders();
 	}
 }

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class AzureDikeChargeCriterion extends SimpleCriterionTrigger<AzureDikeChargeCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("azure_dike_charge_change");
+	public static final ResourceLocation ID = PastelCommon.locate("azure_dike_charge_change");
 	
 	public void trigger(ServerPlayer player, float charges, int rechargeRate, float change) {
 		this.trigger(player, (conditions) -> conditions.matches(charges, rechargeRate, change));

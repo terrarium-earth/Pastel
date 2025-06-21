@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.deeper_down;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.deeper_down.flora.WeepingGalaFrondsBlock;
 import earth.terrarium.pastel.helpers.BlockReference;
-import earth.terrarium.pastel.registries.SpectrumLootTables;
+import earth.terrarium.pastel.registries.PastelLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -58,7 +58,7 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
 				reference.setProperty(FORM, Form.RESIN);
 				reference.update(world);
 			} else {
-				for (ItemStack rareStack : getResinStacks(state, world, pos, ItemStack.EMPTY, SpectrumLootTables.WEEPING_GALA_SPRIG_RESIN)) {
+				for (ItemStack rareStack : getResinStacks(state, world, pos, ItemStack.EMPTY, PastelLootTables.WEEPING_GALA_SPRIG_RESIN)) {
 					popResource(world, pos, rareStack);
 				}
 				world.playSound(null, pos, SoundEvents.BEEHIVE_DRIP, SoundSource.BLOCKS, 1, 0.9F + random.nextFloat() * 0.2F);
@@ -73,7 +73,7 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
 		var reference = BlockReference.of(state, pos);
 		if (reference.getProperty(FORM) == Form.RESIN) {
 			if (!world.isClientSide()) {
-				for (ItemStack rareStack : getResinStacks(state, (ServerLevel) world, pos, player.getMainHandItem(), SpectrumLootTables.WEEPING_GALA_SPRIG_RESIN)) {
+				for (ItemStack rareStack : getResinStacks(state, (ServerLevel) world, pos, player.getMainHandItem(), PastelLootTables.WEEPING_GALA_SPRIG_RESIN)) {
 					popResource(world, pos, rareStack);
 				}
 			}

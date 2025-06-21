@@ -3,9 +3,9 @@ package earth.terrarium.pastel.items;
 import com.klikli_dev.modonomicon.client.gui.BookGuiManager;
 import com.klikli_dev.modonomicon.client.gui.book.BookAddress;
 import de.dafuqs.revelationary.advancement_criteria.AdvancementGottenCriterion;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -20,7 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BannerPattern;
-import net.neoforged.neoforge.server.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,11 +28,11 @@ import java.util.UUID;
 
 public class GuidebookItem extends Item implements LoomPatternProvider {
 	
-	public static final ResourceLocation GUIDEBOOK_ID = SpectrumCommon.locate("guidebook");
+	public static final ResourceLocation GUIDEBOOK_ID = PastelCommon.locate("guidebook");
 	public static final BookAddress GUIDEBOOK_ADDRESS = BookAddress.defaultFor(GUIDEBOOK_ID);
 	
-	public static final ResourceLocation CUISINE_CATEGORY_ID = SpectrumCommon.locate("cuisine");
-	public static final ResourceLocation DIMENSION_CATEGORY_ID = SpectrumCommon.locate("dimension");
+	public static final ResourceLocation CUISINE_CATEGORY_ID = PastelCommon.locate("cuisine");
+	public static final ResourceLocation DIMENSION_CATEGORY_ID = PastelCommon.locate("dimension");
 	
 	
 	public static BookAddress addressOf(ResourceLocation category, ResourceLocation entryId) {
@@ -48,7 +47,7 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
 	private static final Set<UUID> alreadyReprocessedPlayers = new HashSet<>();
 	
 	public static void reprocessAdvancementUnlocks(ServerPlayer serverPlayerEntity) {
-		if (serverPlayerEntity.getServer() == null || SpectrumCommon.getSidedServer() == null) {
+		if (serverPlayerEntity.getServer() == null || PastelCommon.getSidedServer() == null) {
 			return;
 		}
 		
@@ -66,7 +65,7 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
 				for (var criterionEntry : advancement.value().criteria().entrySet()) {
 					var conditions = criterionEntry.getValue().triggerInstance();
 					if (conditions instanceof AdvancementGottenCriterion.Conditions hasAdvancementConditions) {
-						var advancementCriterionAdvancement = SpectrumCommon.getSidedServer().getAdvancements().get(hasAdvancementConditions.getAdvancementIdentifier());
+						var advancementCriterionAdvancement = PastelCommon.getSidedServer().getAdvancements().get(hasAdvancementConditions.getAdvancementIdentifier());
 						if (advancementCriterionAdvancement != null) {
 							var hasAdvancementCriterionAdvancement = tracker.getOrStartProgress(advancementCriterionAdvancement);
 							if (hasAdvancementCriterionAdvancement.isDone()) {
@@ -105,7 +104,7 @@ public class GuidebookItem extends Item implements LoomPatternProvider {
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.GUIDEBOOK;
+		return PastelBannerPatterns.GUIDEBOOK;
 	}
 
 	@Override

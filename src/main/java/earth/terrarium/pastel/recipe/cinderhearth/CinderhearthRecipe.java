@@ -3,15 +3,15 @@ package earth.terrarium.pastel.recipe.cinderhearth;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.helpers.CodecHelper;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.recipe.GatedStackSpectrumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -29,9 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleRecipeInput> {
+public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput> {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/cinderhearth");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/cinderhearth");
 	
 	protected final IngredientStack ingredient;
 	protected final int time;
@@ -72,17 +72,17 @@ public class CinderhearthRecipe extends GatedStackSpectrumRecipe<SingleRecipeInp
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.CINDERHEARTH.get());
+		return new ItemStack(PastelBlocks.CINDERHEARTH.get());
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.CINDERHEARTH_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.CINDERHEARTH_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.CINDERHEARTH;
+		return PastelRecipeTypes.CINDERHEARTH;
 	}
 	
 	@Override

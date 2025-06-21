@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.pastel_network.nodes;
 
 import com.google.common.base.Predicates;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.StampDataCategory;
@@ -14,17 +14,16 @@ import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
 import earth.terrarium.pastel.blocks.pastel_network.network.PastelTransmissionLogic;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetworkManager;
-import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.inventories.FilteringScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumPastelUpgrades;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumStampDataCategories;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelPastelUpgrades;
+import earth.terrarium.pastel.registries.PastelRegistries;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelStampDataCategories;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.*;
 import net.minecraft.world.*;
@@ -102,7 +101,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	private ConnectionState connectionState;
 	
 	public PastelNodeBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.PASTEL_NODE.get(), blockPos, blockState);
+		super(PastelBlockEntities.PASTEL_NODE.get(), blockPos, blockState);
 		this.filterItems = NonNullList.withSize(MAX_FILTER_SLOTS, ItemReference.empty());
 		this.outerRing = Optional.empty();
 		this.innerRing = Optional.empty();
@@ -195,7 +194,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	
 	// outer goes first, then inner, then redstone
 	public boolean tryInteractRings(ItemStack item, PastelNodeType type) {
-		var upgrade = SpectrumPastelUpgrades.of(item);
+		var upgrade = PastelPastelUpgrades.of(item);
 		
 		if (upgrade.category.isRedstone()) {
 			if (redstoneRing.isEmpty()) {
@@ -233,7 +232,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		}
 		
 		if (!stack.isEmpty()) {
-			level.playLocalSound(worldPosition, SpectrumSoundEvents.SHATTER_LIGHT, SoundSource.BLOCKS, 0.25F, 0.9F + level.getRandom().nextFloat() * 0.2F, true);
+			level.playLocalSound(worldPosition, PastelSoundEvents.SHATTER_LIGHT, SoundSource.BLOCKS, 0.25F, 0.9F + level.getRandom().nextFloat() * 0.2F, true);
 			setChanged();
 		}
 		return stack;
@@ -273,7 +272,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		
 		if (filterSlotRows < oldFilterSlotCount) {
 			for (int i = getDrawnSlots(); i < filterItems.size(); i++) {
-				filterItems.remove(i);
+				filterItems.set(i, ItemReference.empty());
 			}
 		}
 	}
@@ -379,9 +378,9 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		this.creationStamp = nbt.contains("creationStamp") ? nbt.getLong("creationStamp") : 0;
 		this.lastTransferTick = nbt.contains("LastTransferTick", Tag.TAG_LONG) ? nbt.getLong("LastTransferTick") : 0;
 		this.itemCountUnderway = nbt.contains("ItemCountUnderway", Tag.TAG_LONG) ? nbt.getLong("ItemCountUnderway") : 0;
-		this.outerRing = nbt.contains("OuterRing") ? Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("OuterRing")))) : Optional.empty();
-		this.innerRing = nbt.contains("InnerRing") ? Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("InnerRing")))) : Optional.empty();
-		this.redstoneRing = nbt.contains("RedstoneRing") ? Optional.ofNullable(SpectrumRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("RedstoneRing")))) : Optional.empty();
+		this.outerRing = nbt.contains("OuterRing") ? Optional.ofNullable(PastelRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("OuterRing")))) : Optional.empty();
+		this.innerRing = nbt.contains("InnerRing") ? Optional.ofNullable(PastelRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("InnerRing")))) : Optional.empty();
+		this.redstoneRing = nbt.contains("RedstoneRing") ? Optional.ofNullable(PastelRegistries.PASTEL_UPGRADE.get(ResourceLocation.tryParse(nbt.getString("RedstoneRing")))) : Optional.empty();
 		
 		if (this.getNodeType().usesFilters()) {
 			FilterConfigurable.readFilterNbt(nbt, this.filterItems, registryLookup);
@@ -405,9 +404,9 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		if (this.getNodeType().usesFilters()) {
 			FilterConfigurable.writeFilterNbt(nbt, this.filterItems, registryLookup);
 		}
-		outerRing.ifPresent(r -> nbt.putString("OuterRing", SpectrumPastelUpgrades.toString(r)));
-		innerRing.ifPresent(r -> nbt.putString("InnerRing", SpectrumPastelUpgrades.toString(r)));
-		redstoneRing.ifPresent(r -> nbt.putString("RedstoneRing", SpectrumPastelUpgrades.toString(r)));
+		outerRing.ifPresent(r -> nbt.putString("OuterRing", PastelPastelUpgrades.toString(r)));
+		innerRing.ifPresent(r -> nbt.putString("InnerRing", PastelPastelUpgrades.toString(r)));
+		redstoneRing.ifPresent(r -> nbt.putString("RedstoneRing", PastelPastelUpgrades.toString(r)));
 	}
 	
 	@Nullable
@@ -505,7 +504,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 				.stream()
 				.anyMatch(filterItem -> {
 
-                    if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem.asStack().is(SpectrumItemTags.TAG_FILTERING_ITEMS))
+                    if (!filterItem.has(DataComponents.CUSTOM_NAME) || !filterItem.asStack().is(PastelItemTags.TAG_FILTERING_ITEMS))
 						return filterItem.permits(variant);
 					
 					var name = StringUtils.trim(filterItem.asStack().getHoverName().getString());
@@ -518,7 +517,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 					if (id == null)
 						return false;
 					
-					var tag = SpectrumCommon.CACHED_ITEM_TAG_MAP.computeIfAbsent(id, tagId -> BuiltInRegistries.ITEM.getTagNames()
+					var tag = PastelCommon.CACHED_ITEM_TAG_MAP.computeIfAbsent(id, tagId -> BuiltInRegistries.ITEM.getTagNames()
 							.filter(t -> t.location().equals(tagId))
 							.findFirst()
 							.orElse(null));
@@ -553,7 +552,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		
 		thisNetwork.ifPresent(n -> {
 			user.filter(u -> u instanceof ServerPlayer).ifPresent(p -> {
-				SpectrumAdvancementCriteria.PASTEL_NETWORK_CREATING.trigger((ServerPlayer) p, (ServerPastelNetwork) n);
+				PastelAdvancementCriteria.PASTEL_NETWORK_CREATING.trigger((ServerPlayer) p, (ServerPastelNetwork) n);
 			});
 		});
 		
@@ -567,7 +566,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	
 	@Override
 	public StampDataCategory getStampCategory() {
-		return SpectrumStampDataCategories.PASTEL;
+		return PastelStampDataCategories.PASTEL;
 	}
 	
 	@Override
@@ -664,7 +663,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 	
 	public int getPastelNetworkColor() {
 		Optional<DyeColor> color = getColor();
-		return color.isPresent() ? color.get().getTextureDiffuseColor() : SpectrumColorHelper.getRandomColor(getNodeId().hashCode());
+		return color.isPresent() ? color.get().getTextureDiffuseColor() : ColorHelper.getRandomColor(getNodeId().hashCode());
 	}
 	
 	public enum ConnectionState {

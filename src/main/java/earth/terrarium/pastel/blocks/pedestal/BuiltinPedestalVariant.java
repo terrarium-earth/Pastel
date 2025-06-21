@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.pedestal;
 
 import earth.terrarium.pastel.api.block.PedestalVariant;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.world.level.block.Block;
 
 public enum BuiltinPedestalVariant implements PedestalVariant {
@@ -28,22 +28,22 @@ public enum BuiltinPedestalVariant implements PedestalVariant {
 	public Block getPedestalBlock() {
 		switch (this) {
 			case BASIC_TOPAZ -> {
-                return SpectrumBlocks.PEDESTAL_BASIC_TOPAZ.get();
+                return PastelBlocks.PEDESTAL_BASIC_TOPAZ.get();
 			}
 			case BASIC_AMETHYST -> {
-                return SpectrumBlocks.PEDESTAL_BASIC_AMETHYST.get();
+                return PastelBlocks.PEDESTAL_BASIC_AMETHYST.get();
 			}
 			case BASIC_CITRINE -> {
-                return SpectrumBlocks.PEDESTAL_BASIC_CITRINE.get();
+                return PastelBlocks.PEDESTAL_BASIC_CITRINE.get();
 			}
 			case CMY -> {
-                return SpectrumBlocks.PEDESTAL_ALL_BASIC.get();
+                return PastelBlocks.PEDESTAL_ALL_BASIC.get();
 			}
 			case ONYX -> {
-                return SpectrumBlocks.PEDESTAL_ONYX.get();
+                return PastelBlocks.PEDESTAL_ONYX.get();
 			}
 			default -> {
-                return SpectrumBlocks.PEDESTAL_MOONSTONE.get();
+                return PastelBlocks.PEDESTAL_MOONSTONE.get();
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.tooltip;
 
-import earth.terrarium.pastel.api.gui.SpectrumTooltipComponent;
+import earth.terrarium.pastel.api.gui.PastelTooltipComponent;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.Font;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class PresentTooltipComponent implements SpectrumTooltipComponent {
+public class PresentTooltipComponent implements PastelTooltipComponent {
 	
 	private final List<ItemStack> itemStacks;
 	
@@ -33,9 +33,9 @@ public class PresentTooltipComponent implements SpectrumTooltipComponent {
 		int n = x + 1;
 		int o = y + 1;
 		for (int i = 0; i < this.itemStacks.size(); i++) {
-			SpectrumTooltipComponent.drawSlot(context, n + i * 18, o, i, this.itemStacks.get(i), textRenderer);
+			PastelTooltipComponent.drawSlot(context, n + i * 18, o, i, this.itemStacks.get(i), textRenderer);
 		}
-		SpectrumTooltipComponent.drawOutline(context, x, y, this.itemStacks.size(), 1);
+		PastelTooltipComponent.drawOutline(context, x, y, this.itemStacks.size(), 1);
 	}
 	
 }

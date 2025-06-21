@@ -4,12 +4,12 @@ import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -143,7 +143,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 		BlockState state = world.getBlockState(pos);
 
 		if (PrimordialFireBlock.canBePlacedAt(world, pos, direction)) {
-			if (world.setBlockAndUpdate(pos, ((PrimordialFireBlock) SpectrumBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, pos))) {
+			if (world.setBlockAndUpdate(pos, ((PrimordialFireBlock) PastelBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, pos))) {
 				world.gameEvent(null, GameEvent.BLOCK_PLACE, pos);
 				return true;
 			}
@@ -165,7 +165,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 	@Override
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
 		if (entity instanceof LivingEntity livingEntity) {
-			entity.hurt(SpectrumDamageTypes.primordialFire(world, null), DAMAGE);
+			entity.hurt(PastelDamageTypes.primordialFire(world, null), DAMAGE);
 			PrimordialFireData.addPrimordialFireTicks(livingEntity, 5);
 		}
 		if (world.getGameTime() % 20 == 0 && entity instanceof ItemEntity itemEntity) {
@@ -189,7 +189,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 			}
 
 			BlockState blockState = world.getBlockState(pos.below());
-			boolean isAboveInfiniburnBlock = blockState.is(world.dimensionType().infiniburn()) || blockState.is(SpectrumBlockTags.PRIMORDIAL_FIRE_BASE_BLOCKS);
+			boolean isAboveInfiniburnBlock = blockState.is(world.dimensionType().infiniburn()) || blockState.is(PastelBlockTags.PRIMORDIAL_FIRE_BASE_BLOCKS);
 			if (!isAboveInfiniburnBlock && random.nextFloat() < 0.01F) {
 				world.removeBlock(pos, false);
 			} else {
@@ -303,7 +303,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		if (random.nextInt(24) == 0) {
-			world.playLocalSound((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, SpectrumSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.175F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+			world.playLocalSound((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, PastelSoundEvents.PRIMORDIAL_FIRE_CRACKLE, SoundSource.BLOCKS, 0.175F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
 		}
 
 		BlockPos blockPos = pos.below();
@@ -314,7 +314,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 		double f;
 
 		if (blockState.isFaceSturdy(world, blockPos, Direction.UP)) {
-			var particle = this.canBurn(blockState) ? SpectrumParticleTypes.PRIMORDIAL_SIGNAL_SMOKE : SpectrumParticleTypes.PRIMORDIAL_COSY_SMOKE;
+			var particle = this.canBurn(blockState) ? PastelParticleTypes.PRIMORDIAL_SIGNAL_SMOKE : PastelParticleTypes.PRIMORDIAL_COSY_SMOKE;
 			for (i = 0; i < 2; ++i) {
 				d = (double) pos.getX() + 0.5 + random.nextDouble() / 4.0 * (double) (random.nextBoolean() ? 1 : -1);
 				e = (double) pos.getY() + 0.15;
@@ -329,7 +329,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 					d = (double) pos.getX() + random.nextDouble() * 0.10000000149011612;
 					e = (double) pos.getY() + random.nextDouble();
 					f = (double) pos.getZ() + random.nextDouble();
-					world.addParticle(SpectrumParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
+					world.addParticle(PastelParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
 				}
 			}
 
@@ -338,7 +338,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 					d = (double) (pos.getX() + 1) - random.nextDouble() * 0.10000000149011612;
 					e = (double) pos.getY() + random.nextDouble();
 					f = (double) pos.getZ() + random.nextDouble();
-					world.addParticle(SpectrumParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
+					world.addParticle(PastelParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
 				}
 			}
 
@@ -347,7 +347,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 					d = (double) pos.getX() + random.nextDouble();
 					e = (double) pos.getY() + random.nextDouble();
 					f = (double) pos.getZ() + random.nextDouble() * 0.10000000149011612;
-					world.addParticle(SpectrumParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
+					world.addParticle(PastelParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
 				}
 			}
 
@@ -356,7 +356,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 					d = (double) pos.getX() + random.nextDouble();
 					e = (double) pos.getY() + random.nextDouble();
 					f = (double) (pos.getZ() + 1) - random.nextDouble() * 0.10000000149011612;
-					world.addParticle(SpectrumParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
+					world.addParticle(PastelParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
 				}
 			}
 
@@ -365,7 +365,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 					d = (double) pos.getX() + random.nextDouble();
 					e = (double) (pos.getY() + 1) - random.nextDouble() * 0.10000000149011612;
 					f = (double) pos.getZ() + random.nextDouble();
-					world.addParticle(SpectrumParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
+					world.addParticle(PastelParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
 				}
 			}
 		} else {
@@ -373,7 +373,7 @@ public class PrimordialFireBlock extends BaseFireBlock {
 				d = (double) pos.getX() + random.nextDouble();
 				e = (double) pos.getY() + random.nextDouble() * 0.5 + 0.5;
 				f = (double) pos.getZ() + random.nextDouble();
-				world.addParticle(SpectrumParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
+				world.addParticle(PastelParticleTypes.PRIMORDIAL_SMOKE, d, e, f, 0.0, 0.0, 0.0);
 			}
 		}
 

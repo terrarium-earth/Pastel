@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.RenderHelper;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphics;
@@ -25,7 +25,7 @@ import java.util.Stack;
 public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
 	
 	public static final int TEXT_COLOR = 0xEEEEEE;
-	public static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(SpectrumCommon.MOD_ID, "textures/gui/quick_navigation.png");
+	public static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(PastelCommon.MOD_ID, "textures/gui/quick_navigation.png");
 	
 	protected static final Component CONTROLS_TEXT_1 = Component.translatable("gui.pastel.quick_navigation.controls1");
 	protected static final Component CONTROLS_TEXT_2 = Component.translatable("gui.pastel.quick_navigation.controls2");
@@ -283,7 +283,7 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
 	}
 	
 	private void back() {
-		minecraft.level.playSound(null, minecraft.player.blockPosition(), SpectrumSoundEvents.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F, 1.0F);
+		minecraft.level.playSound(null, minecraft.player.blockPosition(), PastelSoundEvents.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F, 1.0F);
 		if(gridStack.size() == 1) {
 			minecraft.player.closeContainer();
 		} else {
@@ -292,7 +292,7 @@ public class QuickNavigationGridScreen<T extends AbstractContainerMenu> extends 
 	}
 	
 	protected void selectGrid(Grid grid) {
-		minecraft.level.playSound(null, minecraft.player.blockPosition(), SpectrumSoundEvents.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F, 1.0F);
+		minecraft.level.playSound(null, minecraft.player.blockPosition(), PastelSoundEvents.PAINTBRUSH_SWITCH, SoundSource.NEUTRAL, 0.5F, 1.0F);
 		gridStack.push(grid);
 	}
 	

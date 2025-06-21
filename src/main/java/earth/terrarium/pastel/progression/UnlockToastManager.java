@@ -5,13 +5,11 @@ import earth.terrarium.pastel.progression.toast.MessageToast;
 import earth.terrarium.pastel.progression.toast.UnlockedRecipeToast;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
@@ -35,17 +33,17 @@ public class UnlockToastManager {
 	public static final Map<ResourceLocation, Map<RecipeType<?>, Set<GatedRecipe<?>>>> gatedRecipes = new HashMap<>();
 	
 	public static final Map<ResourceLocation, Tuple<ItemStack, String>> MESSAGE_TOASTS = new HashMap<>() {{
-		put(SpectrumAdvancements.UNLOCK_SHOOTING_STARS, new Tuple<>(Items.SPYGLASS.getDefaultInstance(), "shooting_stars_unlocked"));
-		put(SpectrumAdvancements.OVERENCHANTING, new Tuple<>(SpectrumBlocks.ENCHANTER.get().asItem().getDefaultInstance(), "overchanting_unlocked"));
-		put(SpectrumAdvancements.APPLY_CONFLICTING_ENCHANTMENTS, new Tuple<>(SpectrumBlocks.ENCHANTER.get().asItem().getDefaultInstance(), "enchant_conflicting_enchantments_unlocked"));
-		put(SpectrumAdvancements.FOURTH_BREWING_SLOT, new Tuple<>(SpectrumBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance(), "fourth_potion_reagent_unlocked"));
-		put(SpectrumAdvancements.MIDGAME, new Tuple<>(SpectrumBlocks.PEDESTAL_ONYX.get().asItem().getDefaultInstance(), "second_advancement_tree_unlocked"));
-		put(SpectrumAdvancements.LATEGAME, new Tuple<>(SpectrumBlocks.PEDESTAL_MOONSTONE.get().asItem().getDefaultInstance(), "third_advancement_tree_unlocked"));
-		put(SpectrumAdvancements.ASCEND_KINDLING, new Tuple<>(SpectrumBlocks.PEDESTAL_MOONSTONE.get().asItem().getDefaultInstance(), "ascend_kindling"));
-		put(SpectrumAdvancements.VIVISECT_KINDLING, new Tuple<>(SpectrumItems.DIVINATION_HEART.get().getDefaultInstance(), "vivisect_kindling"));
-		put(SpectrumAdvancements.PAINTBRUSH_COLORING, new Tuple<>(SpectrumItems.PAINTBRUSH.get().getDefaultInstance(), "block_coloring_unlocked"));
-		put(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING, new Tuple<>(SpectrumItems.PAINTBRUSH.get().getDefaultInstance(), "ink_slinging_unlocked"));
-		put(SpectrumAdvancements.PASTEL_NODE_COLORING, new Tuple<>(SpectrumBlocks.SENDER_NODE.get().asItem().getDefaultInstance(), "pastel_node_coloring"));
+		put(PastelAdvancements.UNLOCK_SHOOTING_STARS, new Tuple<>(Items.SPYGLASS.getDefaultInstance(), "shooting_stars_unlocked"));
+		put(PastelAdvancements.OVERENCHANTING, new Tuple<>(PastelBlocks.ENCHANTER.get().asItem().getDefaultInstance(), "overchanting_unlocked"));
+		put(PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS, new Tuple<>(PastelBlocks.ENCHANTER.get().asItem().getDefaultInstance(), "enchant_conflicting_enchantments_unlocked"));
+		put(PastelAdvancements.FOURTH_BREWING_SLOT, new Tuple<>(PastelBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance(), "fourth_potion_reagent_unlocked"));
+		put(PastelAdvancements.MIDGAME, new Tuple<>(PastelBlocks.PEDESTAL_ONYX.get().asItem().getDefaultInstance(), "second_advancement_tree_unlocked"));
+		put(PastelAdvancements.LATEGAME, new Tuple<>(PastelBlocks.PEDESTAL_MOONSTONE.get().asItem().getDefaultInstance(), "third_advancement_tree_unlocked"));
+		put(PastelAdvancements.ASCEND_KINDLING, new Tuple<>(PastelBlocks.PEDESTAL_MOONSTONE.get().asItem().getDefaultInstance(), "ascend_kindling"));
+		put(PastelAdvancements.VIVISECT_KINDLING, new Tuple<>(PastelItems.DIVINATION_HEART.get().getDefaultInstance(), "vivisect_kindling"));
+		put(PastelAdvancements.PAINTBRUSH_COLORING, new Tuple<>(PastelItems.PAINTBRUSH.get().getDefaultInstance(), "block_coloring_unlocked"));
+		put(PastelAdvancements.PAINTBRUSH_INK_SLINGING, new Tuple<>(PastelItems.PAINTBRUSH.get().getDefaultInstance(), "ink_slinging_unlocked"));
+		put(PastelAdvancements.PASTEL_NODE_COLORING, new Tuple<>(PastelBlocks.SENDER_NODE.get().asItem().getDefaultInstance(), "pastel_node_coloring"));
 	}};
 	
 	public static void clear() {
@@ -115,15 +113,15 @@ public class UnlockToastManager {
 			Optional<PedestalRecipeTier> newlyUnlockedRecipeTier = PedestalRecipeTier.hasJustUnlockedANewRecipeTier(doneAdvancement);
 			if (newlyUnlockedRecipeTier.isPresent()) {
 				List<GatedRecipe<?>> unlockedPedestalRecipes;
-				if (unlockedRecipesByType.containsKey(SpectrumRecipeTypes.PEDESTAL)) {
-					unlockedPedestalRecipes = unlockedRecipesByType.get(SpectrumRecipeTypes.PEDESTAL);
+				if (unlockedRecipesByType.containsKey(PastelRecipeTypes.PEDESTAL)) {
+					unlockedPedestalRecipes = unlockedRecipesByType.get(PastelRecipeTypes.PEDESTAL);
 				} else {
 					unlockedPedestalRecipes = new ArrayList<>();
 				}
 				List<GatedRecipe<?>> pedestalRecipes = new ArrayList<>();
 				for (Map<RecipeType<?>, Set<GatedRecipe<?>>> recipesByType : gatedRecipes.values()) {
-					if (recipesByType.containsKey(SpectrumRecipeTypes.PEDESTAL)) {
-						pedestalRecipes.addAll(recipesByType.get(SpectrumRecipeTypes.PEDESTAL));
+					if (recipesByType.containsKey(PastelRecipeTypes.PEDESTAL)) {
+						pedestalRecipes.addAll(recipesByType.get(PastelRecipeTypes.PEDESTAL));
 					}
 				}
 				
@@ -177,7 +175,7 @@ public class UnlockToastManager {
 			if (!recipe.getResultItem(registryManager).isEmpty()) { // weather recipes
 				// FIXME - Better place to log this?
 				//if (recipe.getGroup() == null) {
-					//SpectrumCommon.logWarning("Found a recipe with null group: " + recipe.getId().toString() + " Please report this. If you are DaFuqs and you are reading this: you messed up big time.");
+					//PastelCommon.logWarning("Found a recipe with null group: " + recipe.getId().toString() + " Please report this. If you are DaFuqs and you are reading this: you messed up big time.");
 				//}
 				
 				if (recipe.getGroup().isEmpty()) {

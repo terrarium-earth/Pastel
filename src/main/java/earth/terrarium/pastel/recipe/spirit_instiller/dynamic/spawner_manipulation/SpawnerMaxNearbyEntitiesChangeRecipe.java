@@ -2,8 +2,8 @@ package earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulat
 
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -16,7 +16,7 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
 	protected static final int MAX_MAX_ENTITIES = 40;
 	
 	public SpawnerMaxNearbyEntitiesChangeRecipe() {
-		super(IngredientStack.ofItems(SpectrumItems.MERMAIDS_GEM.get(), 4));
+		super(IngredientStack.ofItems(PastelItems.MERMAIDS_GEM.get(), 4));
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class SpawnerMaxNearbyEntitiesChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SPIRIT_INSTILLER_SPAWNER_MAX_NEARBY_ENTITIES_CHANGE;
+		return PastelRecipeSerializers.SPIRIT_INSTILLER_SPAWNER_MAX_NEARBY_ENTITIES_CHANGE;
 	}
 	
 	@Override

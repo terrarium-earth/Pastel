@@ -4,7 +4,7 @@ import earth.terrarium.pastel.blocks.cinderhearth.CinderhearthBlockEntity;
 import earth.terrarium.pastel.inventories.slots.ExperienceStorageItemSlot;
 import earth.terrarium.pastel.inventories.slots.InkInputSlot;
 import earth.terrarium.pastel.networking.s2c_payloads.UpdateBlockEntityInkPayload;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.*;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,11 +38,11 @@ public class CinderhearthScreenHandler extends AbstractContainerMenu {
 	}
 
 	public CinderhearthScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.CINDERHEARTH.get()).orElseThrow(), new SimpleContainerData(2));
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), PastelBlockEntities.CINDERHEARTH.get()).orElseThrow(), new SimpleContainerData(2));
 	}
 	
 	public CinderhearthScreenHandler(int syncId, Inventory playerInventory, CinderhearthBlockEntity blockEntity, ContainerData propertyDelegate) {
-		super(SpectrumScreenHandlerTypes.CINDERHEARTH, syncId);
+		super(PastelScreenHandlerTypes.CINDERHEARTH, syncId);
 		
 		this.player = playerInventory.player instanceof ServerPlayer serverPlayerEntity ? serverPlayerEntity : null;
 		this.world = playerInventory.player.level();

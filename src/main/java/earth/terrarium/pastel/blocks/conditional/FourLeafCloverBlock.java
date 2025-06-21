@@ -3,8 +3,8 @@ package earth.terrarium.pastel.blocks.conditional;
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.blocks.decoration.CloverBlock;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
@@ -29,19 +29,19 @@ public class FourLeafCloverBlock extends CloverBlock implements RevelationAware 
 	
 	@Override
 	public ResourceLocation getCloakAdvancementIdentifier() {
-		return SpectrumAdvancements.REVEAL_FOUR_LEAF_CLOVER;
+		return PastelAdvancements.REVEAL_FOUR_LEAF_CLOVER;
 	}
 	
 	@Override
 	public Map<BlockState, BlockState> getBlockStateCloaks() {
 		Map<BlockState, BlockState> map = new Hashtable<>();
-		map.put(this.defaultBlockState(), SpectrumBlocks.CLOVER.get().defaultBlockState());
+		map.put(this.defaultBlockState(), PastelBlocks.CLOVER.get().defaultBlockState());
 		return map;
 	}
 	
 	@Override
 	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), SpectrumBlocks.CLOVER.get().asItem());
+		return new Tuple<>(this.asItem(), PastelBlocks.CLOVER.get().asItem());
 	}
 	
 }

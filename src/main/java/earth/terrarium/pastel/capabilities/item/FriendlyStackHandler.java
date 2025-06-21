@@ -73,7 +73,7 @@ public class FriendlyStackHandler extends ItemStackHandler {
     }
 
     @Override
-    protected void onContentsChanged(int slot) {
+    public void onContentsChanged(int slot) {
         if (listeners == null)
             return;
 

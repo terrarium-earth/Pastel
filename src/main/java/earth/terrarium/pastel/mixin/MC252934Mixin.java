@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class MC252934Mixin {
 	
 	@Redirect(method = "readAdditionalSaveData", at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;error(Ljava/lang/String;Ljava/lang/Object;)V", remap = false))
-	private void spectrum$fixMC252934(Logger thisLogger, String format, Object arg) {
+	private void fixMC252934(Logger thisLogger, String format, Object arg) {
 	}
 	
 }

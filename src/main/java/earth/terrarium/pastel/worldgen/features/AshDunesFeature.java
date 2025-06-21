@@ -2,7 +2,7 @@ package earth.terrarium.pastel.worldgen.features;
 
 import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.blocks.deeper_down.groundcover.AshPileBlock;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -60,7 +60,7 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
 			var placementPos = iterator.next().mutable();
 			var originalY = placementPos.getY();
 			
-			if (!world.getBlockState(placementPos).is(SpectrumBlocks.ASH_PILE.get()) && !canPlaceAt(world, placementPos) && !adjustPlacementHeight(world, placementPos, placementArea / 3))
+			if (!world.getBlockState(placementPos).is(PastelBlocks.ASH_PILE.get()) && !canPlaceAt(world, placementPos) && !adjustPlacementHeight(world, placementPos, placementArea / 3))
 				continue;
 			
 			var height = Math.round(getStrengthAt(placementPos, origin, emitters, originalY, placementArea, decay, config.emitterCutoutModifier()));
@@ -99,7 +99,7 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
 	
 	private void placeAsh(WorldGenLevel world, BlockPos.MutableBlockPos pos, int height) {
 		var state = world.getBlockState(pos);
-		if (state.is(SpectrumBlocks.ASH_PILE.get())) {
+		if (state.is(PastelBlocks.ASH_PILE.get())) {
 			var layers = state.getValue(LAYERS);
 			var layerDif = 8 - layers;
 			
@@ -136,9 +136,9 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
 	
 	private void placeAshBlock(WorldGenLevel world, BlockPos.MutableBlockPos pos, int height) {
 		if (height == 8) {
-			setBlock(world, pos, SpectrumBlocks.ASH.get().defaultBlockState());
+			setBlock(world, pos, PastelBlocks.ASH.get().defaultBlockState());
 		} else {
-			setBlock(world, pos, SpectrumBlocks.ASH_PILE.get().defaultBlockState().setValue(LAYERS, height));
+			setBlock(world, pos, PastelBlocks.ASH_PILE.get().defaultBlockState().setValue(LAYERS, height));
 		}
 	}
 	
@@ -173,14 +173,14 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
 		
 		for (int shifts = 1; shifts < maxShifts + 1; shifts++) {
 			var upPos = pos.offset(0, shifts, 0);
-			if (canPlaceAt(world, upPos) || world.getBlockState(pos).is(SpectrumBlocks.ASH_PILE.get())) {
+			if (canPlaceAt(world, upPos) || world.getBlockState(pos).is(PastelBlocks.ASH_PILE.get())) {
 				pos.move(0, shifts, 0);
 				foundValidSpace = true;
 				break;
 			}
 			
 			var downPos = pos.offset(0, -shifts, 0);
-			if (canPlaceAt(world, downPos) || world.getBlockState(pos).is(SpectrumBlocks.ASH_PILE.get())) {
+			if (canPlaceAt(world, downPos) || world.getBlockState(pos).is(PastelBlocks.ASH_PILE.get())) {
 				pos.move(0, -shifts, 0);
 				foundValidSpace = true;
 				break;
@@ -191,7 +191,7 @@ public class AshDunesFeature extends Feature<AshDunesFeatureConfig> {
 	}
 	
 	private static boolean canPlaceAt(WorldGenLevel world, BlockPos pos) {
-		return (world.isEmptyBlock(pos) || world.getBlockState(pos).is(SpectrumBlocks.VARIA_SPROUT.get())) && SpectrumBlocks.ASH_PILE.get().defaultBlockState().canSurvive(world, pos);
+		return (world.isEmptyBlock(pos) || world.getBlockState(pos).is(PastelBlocks.VARIA_SPROUT.get())) && PastelBlocks.ASH_PILE.get().defaultBlockState().canSurvive(world, pos);
 	}
 	
 	private record Emitter(BlockPos.MutableBlockPos pos, float strength, boolean cutout) {

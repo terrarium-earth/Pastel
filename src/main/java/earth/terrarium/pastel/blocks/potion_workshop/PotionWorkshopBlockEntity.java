@@ -10,7 +10,7 @@ import earth.terrarium.pastel.capabilities.*;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.inventories.PotionWorkshopScreenHandler;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.SimpleRecipeInput;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionMod;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopBrewingRecipe;
@@ -88,7 +88,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 	protected RecipeHolder<PotionWorkshopBrewingRecipe> lastBrewedRecipe;
 	
 	public PotionWorkshopBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.POTION_WORKSHOP.get(), pos, state);
+		super(PastelBlockEntities.POTION_WORKSHOP.get(), pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 		inventory.addListener(i -> inventoryChanged = true);
 		
@@ -180,35 +180,45 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		return false;
 	}
 	
-	public static @Nullable RecipeHolder<? extends PotionWorkshopRecipe> calculateRecipe(Level world, @NotNull PotionWorkshopBlockEntity potionWorkshopBlockEntity) {
-		if (!potionWorkshopBlockEntity.inventoryChanged) {
-			return potionWorkshopBlockEntity.currentRecipe;
+	public static @Nullable RecipeHolder<? extends PotionWorkshopRecipe> calculateRecipe(Level world, @NotNull PotionWorkshopBlockEntity workshop) {
+		if (!workshop.inventoryChanged) {
+			if (workshop.currentRecipe != null) {
+				var slot = workshop.inventory.getStackInSlot(BASE_INPUT_SLOT_ID);
+				if (workshop.currentRecipe.value() instanceof PotionWorkshopCraftingRecipe craftingRecipe && !craftingRecipe.getBaseIngredient().test(slot)
+				|| workshop.currentRecipe.value() instanceof PotionWorkshopBrewingRecipe && slot.isEmpty()) {
+					workshop.currentRecipe = null;
+					workshop.brewTime = 0;
+					workshop.setChanged();
+				}
+			}
+
+			return workshop.currentRecipe;
 		}
 		
 		RecipeHolder<? extends PotionWorkshopRecipe> newRecipe = null;
-		var current = potionWorkshopBlockEntity.currentRecipe == null ? null : potionWorkshopBlockEntity.currentRecipe.value();
-		if (current instanceof PotionWorkshopBrewingRecipe potionWorkshopBrewingRecipe && current.matches(potionWorkshopBlockEntity.getRecipeInput(), world)) {
+		var current = workshop.currentRecipe == null ? null : workshop.currentRecipe.value();
+		if (current instanceof PotionWorkshopBrewingRecipe potionWorkshopBrewingRecipe && current.matches(workshop.getRecipeInput(), world)) {
 			// we check for reagents here instead of the recipe itself because of performance
-			if (isBrewingRecipeApplicable(potionWorkshopBrewingRecipe, potionWorkshopBlockEntity.inventory.getStackInSlot(BASE_INPUT_SLOT_ID), potionWorkshopBlockEntity)) {
-				return potionWorkshopBlockEntity.currentRecipe;
+			if (isBrewingRecipeApplicable(potionWorkshopBrewingRecipe, workshop.inventory.getStackInSlot(BASE_INPUT_SLOT_ID), workshop)) {
+				return workshop.currentRecipe;
 			}
-		} else if (current instanceof PotionWorkshopCraftingRecipe && current.matches(potionWorkshopBlockEntity.getRecipeInput(), world)) {
-			newRecipe = potionWorkshopBlockEntity.currentRecipe;
+		} else if (current instanceof PotionWorkshopCraftingRecipe && current.matches(workshop.getRecipeInput(), world)) {
+			newRecipe = workshop.currentRecipe;
 		} else {
 			// current recipe does not match last recipe
 			// => search valid recipe
-			var newPotionWorkshopBrewingRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.POTION_WORKSHOP_BREWING, potionWorkshopBlockEntity.getRecipeInput(), world).orElse(null);
+			var newPotionWorkshopBrewingRecipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.POTION_WORKSHOP_BREWING, workshop.getRecipeInput(), world).orElse(null);
 			if (newPotionWorkshopBrewingRecipe != null) {
-				if (newPotionWorkshopBrewingRecipe.value().canPlayerCraft(potionWorkshopBlockEntity.getOwnerIfOnline())) {
+				if (newPotionWorkshopBrewingRecipe.value().canPlayerCraft(workshop.getOwnerIfOnline())) {
 					// we check for reagents here instead of the recipe itself for performance reasons
-					if (isBrewingRecipeApplicable(newPotionWorkshopBrewingRecipe.value(), potionWorkshopBlockEntity.inventory.getStackInSlot(BASE_INPUT_SLOT_ID), potionWorkshopBlockEntity)) {
+					if (isBrewingRecipeApplicable(newPotionWorkshopBrewingRecipe.value(), workshop.inventory.getStackInSlot(BASE_INPUT_SLOT_ID), workshop)) {
 						return newPotionWorkshopBrewingRecipe;
 					}
 				}
 			} else {
-				var newPotionWorkshopCraftingRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.POTION_WORKSHOP_CRAFTING, potionWorkshopBlockEntity.getRecipeInput(), world).orElse(null);
+				var newPotionWorkshopCraftingRecipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.POTION_WORKSHOP_CRAFTING, workshop.getRecipeInput(), world).orElse(null);
 				if (newPotionWorkshopCraftingRecipe != null) {
-					if (newPotionWorkshopCraftingRecipe.value().canPlayerCraft(potionWorkshopBlockEntity.getOwnerIfOnline())) {
+					if (newPotionWorkshopCraftingRecipe.value().canPlayerCraft(workshop.getOwnerIfOnline())) {
 						newRecipe = newPotionWorkshopCraftingRecipe;
 					}
 				}
@@ -237,7 +247,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		PotionMod potionMod = getPotionModFromReagents(potionWorkshopBlockEntity);
 		return hasUniqueReagents(potionWorkshopBlockEntity)
 				&& recipe.recipeData.isApplicableTo(baseIngredient, potionMod)
-				&& !(potionMod.flags().incurable() && recipe.recipeData.statusEffect().is(SpectrumStatusEffectTags.CANNOT_BE_INCURABLE));
+				&& !(potionMod.flags().incurable() && recipe.recipeData.statusEffect().is(PastelStatusEffectTags.CANNOT_BE_INCURABLE));
 	}
 	
 	private static void craftRecipe(PotionWorkshopBlockEntity potionWorkshopBlockEntity, RecipeHolder<PotionWorkshopCraftingRecipe> recipe) {
@@ -276,11 +286,11 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		// trigger advancements for all brewed potions
 		ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 		if (brewedAmount <= 0) {
-			SpectrumAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, ItemStack.EMPTY, 0);
+			PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, ItemStack.EMPTY, 0);
 		} else {
 			for (ItemStack potion : results) {
 				if (serverPlayerEntity != null) {
-					SpectrumAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potion, brewedAmount);
+					PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potion, brewedAmount);
 					potion.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).potion().ifPresent(
 							p -> CriteriaTriggers.BREWED_POTION.trigger(serverPlayerEntity, p));
 				}
@@ -317,7 +327,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 		InventoryHelper.addToInventory(potionWorkshopBlockEntity.inventory, tippedArrows, FIRST_INVENTORY_SLOT, FIRST_INVENTORY_SLOT + INVENTORY_SLOT_COUNT);
 		if (serverPlayerEntity != null) {
-			SpectrumAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, tippedArrows, tippedArrows.getCount());
+			PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, tippedArrows, tippedArrows.getCount());
 		}
 		
 		potionWorkshopBlockEntity.lastBrewedRecipe = brewingRecipe;
@@ -337,7 +347,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 			if (maxBrewedPotionsAmount < 1) {
 				ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 				if (serverPlayerEntity != null) {
-					SpectrumAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potionFillableStack, 0);
+					PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potionFillableStack, 0);
 				}
 				return;
 			}
@@ -349,7 +359,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 			// trigger advancements for all brewed potions
 			ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 			if (serverPlayerEntity != null) {
-				SpectrumAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potionFillableStack, 1);
+				PastelAdvancementCriteria.POTION_WORKSHOP_BREWING.trigger(serverPlayerEntity, potionFillableStack, 1);
 			}
 			
 			potionWorkshopBlockEntity.lastBrewedRecipe = brewingRecipe;
@@ -482,7 +492,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		if (playerEntity == null) {
 			return false;
 		} else {
-			return AdvancementHelper.hasAdvancement(playerEntity, SpectrumAdvancements.FOURTH_BREWING_SLOT);
+			return AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.FOURTH_BREWING_SLOT);
 		}
 	}
 	
@@ -510,7 +520,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		if (dir == Direction.UP) {
 			return new StackHandlerView(inventory, 0, ACCESSIBLE_SLOTS_UP.length)
 					.disableExtraction()
-					.addFilter(MERMAIDS_GEM_INPUT_SLOT_ID, Ingredient.of(SpectrumItems.MERMAIDS_GEM.get()));
+					.addFilter(MERMAIDS_GEM_INPUT_SLOT_ID, Ingredient.of(PastelItems.MERMAIDS_GEM.get()));
 		}
 
 		return new StackHandlerView(inventory, ACCESSIBLE_SLOTS_DOWN[0], ACCESSIBLE_SLOTS_DOWN.length);

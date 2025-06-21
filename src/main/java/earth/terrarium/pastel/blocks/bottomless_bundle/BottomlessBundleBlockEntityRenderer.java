@@ -2,8 +2,8 @@ package earth.terrarium.pastel.blocks.bottomless_bundle;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BottomlessBundleBlockEntityRenderer implements BlockEntityRenderer<BottomlessBundleBlockEntity> {
 	
-	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/bottomless_bundle"));
+	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/bottomless_bundle"));
 	private final ModelPart root, locked, unlocked;
 	
 	
@@ -37,7 +37,7 @@ public class BottomlessBundleBlockEntityRenderer implements BlockEntityRenderer<
 		matrices.pushPose();
 		
 		boolean bl = bundle.getLevel() != null;
-		BlockState blockState = bl ? bundle.getBlockState() : SpectrumBlocks.BOTTOMLESS_BUNDLE.get().defaultBlockState();
+		BlockState blockState = bl ? bundle.getBlockState() : PastelBlocks.BOTTOMLESS_BUNDLE.get().defaultBlockState();
 		var yaw = 22.5F;
 		yaw *= blockState.getValue(SkullBlock.ROTATION);
 		matrices.translate(0.5D, 1.5D, 0.5D);

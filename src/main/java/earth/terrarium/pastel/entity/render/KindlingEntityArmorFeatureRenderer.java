@@ -2,10 +2,10 @@ package earth.terrarium.pastel.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.KindlingEntity;
 import earth.terrarium.pastel.entity.models.KindlingEntityModel;
-import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
+import earth.terrarium.pastel.registries.client.PastelModelLayers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -25,16 +25,16 @@ import net.minecraft.world.item.component.DyedItemColor;
 @OnlyIn(Dist.CLIENT)
 public class KindlingEntityArmorFeatureRenderer extends RenderLayer<KindlingEntity, KindlingEntityModel> {
 	
-	public static final ResourceLocation TEXTURE_DIAMOND = SpectrumCommon.locate("textures/entity/kindling/armor/diamond.png");
-	public static final ResourceLocation TEXTURE_GOLD = SpectrumCommon.locate("textures/entity/kindling/armor/gold.png");
-	public static final ResourceLocation TEXTURE_IRON = SpectrumCommon.locate("textures/entity/kindling/armor/iron.png");
-	public static final ResourceLocation TEXTURE_LEATHER = SpectrumCommon.locate("textures/entity/kindling/armor/leather.png");
+	public static final ResourceLocation TEXTURE_DIAMOND = PastelCommon.locate("textures/entity/kindling/armor/diamond.png");
+	public static final ResourceLocation TEXTURE_GOLD = PastelCommon.locate("textures/entity/kindling/armor/gold.png");
+	public static final ResourceLocation TEXTURE_IRON = PastelCommon.locate("textures/entity/kindling/armor/iron.png");
+	public static final ResourceLocation TEXTURE_LEATHER = PastelCommon.locate("textures/entity/kindling/armor/leather.png");
 	
 	private final KindlingEntityModel model;
 	
 	public KindlingEntityArmorFeatureRenderer(RenderLayerParent<KindlingEntity, KindlingEntityModel> context, EntityModelSet loader) {
 		super(context);
-		this.model = new KindlingEntityModel(loader.bakeLayer(SpectrumModelLayers.KINDLING_ARMOR));
+		this.model = new KindlingEntityModel(loader.bakeLayer(PastelModelLayers.KINDLING_ARMOR));
 	}
 	
 	@Override

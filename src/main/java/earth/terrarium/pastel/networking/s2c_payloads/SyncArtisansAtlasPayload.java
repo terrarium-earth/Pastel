@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.items.map.ArtisansAtlasState;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.client.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public record SyncArtisansAtlasPayload(Optional<ResourceLocation> targetId, ClientboundMapItemDataPacket packet) implements CustomPacketPayload {
 	
-	public static final Type<SyncArtisansAtlasPayload> ID = SpectrumC2SPackets.makeId("sync_artisans_atlas");
+	public static final Type<SyncArtisansAtlasPayload> ID = PastelC2SPackets.makeId("sync_artisans_atlas");
 	public static final StreamCodec<RegistryFriendlyByteBuf, SyncArtisansAtlasPayload> CODEC = StreamCodec.composite(
 			ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), SyncArtisansAtlasPayload::targetId,
 			ClientboundMapItemDataPacket.STREAM_CODEC, SyncArtisansAtlasPayload::packet,

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.events.listeners;
 
-import earth.terrarium.pastel.events.SpectrumGameEvents;
+import earth.terrarium.pastel.events.PastelGameEvents;
 import earth.terrarium.pastel.networking.s2c_payloads.TypedTransmissionPayload;
 import earth.terrarium.pastel.particle.effect.TypedTransmission;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +18,7 @@ public class WirelessRedstoneSignalEventQueue extends EventQueue<WirelessRedston
 	
 	@Override
 	public void acceptEvent(Level world, GameEvent.ListenerInfo event, Vec3 sourcePos) {
-		if (world instanceof ServerLevel && event.gameEvent() == SpectrumGameEvents.WIRELESS_REDSTONE_SIGNAL) {
+		if (world instanceof ServerLevel && event.gameEvent() == PastelGameEvents.WIRELESS_REDSTONE_SIGNAL) {
 			Vec3 pos = event.source();
 			var eventEntry = new WirelessRedstoneSignalEventQueue.EventEntry(event, Mth.floor(pos.distanceTo(sourcePos)));
 			int delay = eventEntry.distance * 2;

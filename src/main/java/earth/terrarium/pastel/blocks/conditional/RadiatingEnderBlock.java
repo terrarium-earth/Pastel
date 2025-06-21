@@ -2,8 +2,8 @@ package earth.terrarium.pastel.blocks.conditional;
 
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.Entity;
@@ -35,7 +35,7 @@ public class RadiatingEnderBlock extends Block implements RevelationAware {
 	
 	@Override
 	public ResourceLocation getCloakAdvancementIdentifier() {
-		return SpectrumAdvancements.REVEAL_RADIATING_ENDER;
+		return PastelAdvancements.REVEAL_RADIATING_ENDER;
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ public class RadiatingEnderBlock extends Block implements RevelationAware {
 	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		Entity entity = builder.getOptionalParameter(LootContextParams.THIS_ENTITY);
 		if (entity instanceof EnderMan) {
-			return List.of(SpectrumBlocks.RADIATING_ENDER.get().asItem().getDefaultInstance());
+			return List.of(PastelBlocks.RADIATING_ENDER.get().asItem().getDefaultInstance());
 		}
 		return super.getDrops(state, builder);
 	}

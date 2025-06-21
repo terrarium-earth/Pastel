@@ -5,10 +5,10 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.recipe.DescriptiveGatedRecipe;
 import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.recipe.GatedSpectrumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-public class PotionWorkshopReactingRecipe extends GatedSpectrumRecipe<RecipeInput> implements DescriptiveGatedRecipe<RecipeInput> {
+public class PotionWorkshopReactingRecipe extends GatedPastelRecipe<RecipeInput> implements DescriptiveGatedRecipe<RecipeInput> {
 	
 	protected static final HashMap<Item, List<PotionMod>> reagents = new HashMap<>();
 	
@@ -71,17 +71,17 @@ public class PotionWorkshopReactingRecipe extends GatedSpectrumRecipe<RecipeInpu
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return SpectrumBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance();
+		return PastelBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance();
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.POTION_WORKSHOP_REACTING_SERIALIZER;
+		return PastelRecipeSerializers.POTION_WORKSHOP_REACTING_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.POTION_WORKSHOP_REACTING;
+		return PastelRecipeTypes.POTION_WORKSHOP_REACTING;
 	}
 	
 	@Override

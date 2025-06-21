@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.entity.variants;
 
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -25,13 +25,13 @@ public enum LizardHornVariant implements StringRepresentable {
 	
 	LizardHornVariant(String name, String texture) {
 		this.name = name;
-		this.id = SpectrumCommon.locate(name);
-		this.texture = SpectrumCommon.locate(texture);
-		Registry.register(SpectrumRegistries.LIZARD_HORN_VARIANT, id, this);
+		this.id = PastelCommon.locate(name);
+		this.texture = PastelCommon.locate(texture);
+		Registry.register(PastelRegistries.LIZARD_HORN_VARIANT, id, this);
 	}
 	
 	public TagKey<LizardHornVariant> getReference() {
-		return TagKey.create(SpectrumRegistries.LIZARD_HORN_VARIANT.key(), id);
+		return TagKey.create(PastelRegistries.LIZARD_HORN_VARIANT.key(), id);
 	}
 	
 	public ResourceLocation getTextureLocation() {

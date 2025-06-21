@@ -2,8 +2,8 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.item.CreativeOnlyItem;
 import earth.terrarium.pastel.blocks.PrimordialFireBlock;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -65,8 +65,8 @@ public class PrimordialLighterItem extends FlintAndSteelItem implements Creative
 		BlockPos blockOnSide = pos.relative(context.getClickedFace());
 		
 		if (PrimordialFireBlock.canBePlacedAt(world, blockOnSide, context.getHorizontalDirection())) {
-			world.playSound(player, blockOnSide, SpectrumSoundEvents.ITEM_PRIMORDIAL_LIGHTER_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
-			BlockState primordialFireState = ((PrimordialFireBlock) SpectrumBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, blockOnSide);
+			world.playSound(player, blockOnSide, PastelSoundEvents.ITEM_PRIMORDIAL_LIGHTER_USE, SoundSource.BLOCKS, 1.0F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+			BlockState primordialFireState = ((PrimordialFireBlock) PastelBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, blockOnSide);
 			world.setBlock(blockOnSide, primordialFireState, 11);
 			world.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
 			

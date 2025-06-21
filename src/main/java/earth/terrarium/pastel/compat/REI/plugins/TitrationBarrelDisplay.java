@@ -1,11 +1,10 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.compat.REI.FluidIngredientREI;
-import earth.terrarium.pastel.compat.REI.GatedSpectrumDisplay;
+import earth.terrarium.pastel.compat.REI.PastelDisplay;
 import earth.terrarium.pastel.compat.REI.REIHelper;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
@@ -20,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class TitrationBarrelDisplay extends GatedSpectrumDisplay {
+public class TitrationBarrelDisplay extends PastelDisplay {
 	
 	protected final EntryIngredient tappingIngredient;
 	protected final int minFermentationTimeHours;
@@ -55,7 +54,7 @@ public class TitrationBarrelDisplay extends GatedSpectrumDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.TITRATION_BARREL;
+		return PastelPlugins.TITRATION_BARREL;
 	}
 	
 	@Override

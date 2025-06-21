@@ -2,13 +2,13 @@ package earth.terrarium.pastel.blocks.pastel_network.nodes;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.pastel.PastelUpgradeSignature;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
 import earth.terrarium.pastel.helpers.RenderHelper;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -31,19 +31,19 @@ public class PastelNodeBlockEntityRenderer implements BlockEntityRenderer<Pastel
 
 	private static final long REAL_DAY_LENGTH = 86400 * 20;
 
-	private static final Crystal CONNECTION = new Crystal(SpectrumItems.CONNECTION_NODE_CRYSTAL.get().getDefaultInstance(), 0.25, false);
-	private static final Crystal PROVIDER = new Crystal(SpectrumItems.PROVIDER_NODE_CRYSTAL.get().getDefaultInstance(), 0.1, true);
-	private static final Crystal SENDER = new Crystal(SpectrumItems.SENDER_NODE_CRYSTAL.get().getDefaultInstance(), 0.1, true);
-	private static final Crystal STORAGE = new Crystal(SpectrumItems.STORAGE_NODE_CRYSTAL.get().getDefaultInstance(), 0.15, true);
-	private static final Crystal BUFFER = new Crystal(SpectrumItems.BUFFER_NODE_CRYSTAL.get().getDefaultInstance(), 0.1, true);
-	private static final Crystal GATHER = new Crystal(SpectrumItems.GATHER_NODE_CRYSTAL.get().getDefaultInstance(), 0.1, false);
+	private static final Crystal CONNECTION = new Crystal(PastelItems.CONNECTION_NODE_CRYSTAL.get().getDefaultInstance(), 0.25, false);
+	private static final Crystal PROVIDER = new Crystal(PastelItems.PROVIDER_NODE_CRYSTAL.get().getDefaultInstance(), 0.1, true);
+	private static final Crystal SENDER = new Crystal(PastelItems.SENDER_NODE_CRYSTAL.get().getDefaultInstance(), 0.1, true);
+	private static final Crystal STORAGE = new Crystal(PastelItems.STORAGE_NODE_CRYSTAL.get().getDefaultInstance(), 0.15, true);
+	private static final Crystal BUFFER = new Crystal(PastelItems.BUFFER_NODE_CRYSTAL.get().getDefaultInstance(), 0.1, true);
+	private static final Crystal GATHER = new Crystal(PastelItems.GATHER_NODE_CRYSTAL.get().getDefaultInstance(), 0.1, false);
 
-	private static final ResourceLocation BASE = SpectrumCommon.locate("textures/block/pastel_node_base.png");
+	private static final ResourceLocation BASE = PastelCommon.locate("textures/block/pastel_node_base.png");
 
-	private static final ResourceLocation INNER_RING = SpectrumCommon.locate("textures/block/pastel_node_inner_ring_blank.png");
+	private static final ResourceLocation INNER_RING = PastelCommon.locate("textures/block/pastel_node_inner_ring_blank.png");
 
-	private static final ResourceLocation OUTER_RING = SpectrumCommon.locate("textures/block/pastel_node_outer_ring_blank.png");
-	private static final ResourceLocation REDSTONE_RING = SpectrumCommon.locate("textures/block/pastel_node_redstone_ring_blank.png");
+	private static final ResourceLocation OUTER_RING = PastelCommon.locate("textures/block/pastel_node_outer_ring_blank.png");
+	private static final ResourceLocation REDSTONE_RING = PastelCommon.locate("textures/block/pastel_node_redstone_ring_blank.png");
 
 	private final ModelPart base;
 
@@ -83,7 +83,7 @@ public class PastelNodeBlockEntityRenderer implements BlockEntityRenderer<Pastel
 			case GATHER -> GATHER;
 		};
 
-		var minimal = SpectrumCommon.CONFIG.MinimalNodes;
+		var minimal = PastelCommon.CONFIG.MinimalNodes;
 		var heightMod = minimal ? 0.7F : 0.5F;
 
 		switch (node.getState()) {
@@ -147,8 +147,8 @@ public class PastelNodeBlockEntityRenderer implements BlockEntityRenderer<Pastel
 			matrices.mulPose(Axis.YP.rotation(node.crystalRotation));
 		}
 		
-		var color = SpectrumColorHelper.colorIntToVec(node.networkUUID.flatMap(id -> Pastel.getClientInstance().getNetwork(id)).map(PastelNetwork::getColor).orElse(0xFFFFFF));
-		color = SpectrumColorHelper.colorIntToVec(SpectrumColorHelper.interpolate(color, SpectrumColorHelper.WASH, 0.2125F));
+		var color = ColorHelper.colorIntToVec(node.networkUUID.flatMap(id -> Pastel.getClientInstance().getNetwork(id)).map(PastelNetwork::getColor).orElse(0xFFFFFF));
+		color = ColorHelper.colorIntToVec(ColorHelper.interpolate(color, ColorHelper.WASH, 0.2125F));
 
 		var ringHeight = node.crystalHeight - 0.3F;
 		var innerRing = vertexConsumers.getBuffer(RenderType.entityTranslucent(node.getInnerRing().map(PastelUpgradeSignature::innerRing).orElse(INNER_RING)));

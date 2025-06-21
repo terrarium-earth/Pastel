@@ -4,11 +4,11 @@ import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.helpers.CodecHelper;
 import earth.terrarium.pastel.helpers.EntityHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayMemoryManifestingParticlesPayload;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -48,7 +48,7 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
 	private int tint2 = -1;
 	
 	public MemoryBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.MEMORY.get(), pos, state);
+		super(PastelBlockEntities.MEMORY.get(), pos, state);
 	}
 	
 	@Contract("_ -> new")
@@ -62,11 +62,11 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
 	
 	public static int getManifestAdvanceSteps(@NotNull Level world, @NotNull BlockPos blockPos) {
 		BlockState belowBlockState = world.getBlockState(blockPos.below());
-		if (belowBlockState.is(SpectrumBlockTags.MEMORY_NEVER_MANIFESTERS)) {
+		if (belowBlockState.is(PastelBlockTags.MEMORY_NEVER_MANIFESTERS)) {
 			return 0;
-		} else if (belowBlockState.is(SpectrumBlockTags.MEMORY_VERY_FAST_MANIFESTERS)) {
+		} else if (belowBlockState.is(PastelBlockTags.MEMORY_VERY_FAST_MANIFESTERS)) {
 			return 8;
-		} else if (belowBlockState.is(SpectrumBlockTags.MEMORY_FAST_MANIFESTERS)) {
+		} else if (belowBlockState.is(PastelBlockTags.MEMORY_FAST_MANIFESTERS)) {
 			return 3;
 		} else {
 			return 1;
@@ -120,7 +120,7 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
 					if (entityTypeOptional.isPresent()) {
 						MemoryItem.setTicksToManifest(this.memoryItemStack, newTicksToManifest);
 						PlayMemoryManifestingParticlesPayload.playMemoryManifestingParticles(world, blockPos, entityTypeOptional.get(), 3);
-						world.playSound(null, this.worldPosition, SpectrumSoundEvents.BLOCK_MEMORY_ADVANCE, SoundSource.BLOCKS, 0.7F, 0.9F + world.random.nextFloat() * 0.2F);
+						world.playSound(null, this.worldPosition, PastelSoundEvents.BLOCK_MEMORY_ADVANCE, SoundSource.BLOCKS, 0.7F, 0.9F + world.random.nextFloat() * 0.2F);
 						this.setChanged();
 					}
 				}
@@ -158,7 +158,7 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
 			
 			Player owner = PlayerOwned.getPlayerEntityIfOnline(ownerUUID);
 			if (owner instanceof ServerPlayer serverPlayerEntity) {
-				SpectrumAdvancementCriteria.MEMORY_MANIFESTING.trigger(serverPlayerEntity, hatchedEntity);
+				PastelAdvancementCriteria.MEMORY_MANIFESTING.trigger(serverPlayerEntity, hatchedEntity);
 			}
 			
 			return true;
@@ -194,7 +194,7 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
 	}
 	
 	public static Optional<Entity> hatchEntity(ServerLevel world, BlockPos blockPos, ItemStack memoryItemStack) {
-		return Optional.ofNullable(memoryItemStack.get(SpectrumDataComponentTypes.MEMORY))
+		return Optional.ofNullable(memoryItemStack.get(PastelDataComponentTypes.MEMORY))
 				.flatMap(memory -> MemoryItem.getEntityType(memoryItemStack)
 						.map(entityType -> {
 							// alignPosition: center the mob in the center of the blockPos

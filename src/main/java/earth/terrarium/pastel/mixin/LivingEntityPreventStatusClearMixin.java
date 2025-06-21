@@ -7,7 +7,7 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import earth.terrarium.pastel.helpers.StatusEffectHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -38,24 +38,24 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	public abstract Map<MobEffect, MobEffectInstance> getActiveEffectsMap();
 	
 	@Inject(method = "removeAllEffects", at = @At("HEAD"))
-	private void spectrum$detectFatalSlumber(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
-		hasFatalSlumber.set(getActiveEffectsMap().containsKey(SpectrumStatusEffects.FATAL_SLUMBER.value()));
+	private void detectFatalSlumber(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
+		hasFatalSlumber.set(getActiveEffectsMap().containsKey(PastelStatusEffects.FATAL_SLUMBER.value()));
 	}
 	
 	@Inject(method = "removeAllEffects", at = @At("TAIL"))
-	private void spectrum$applyEternalSlumberIfFatalSlumberRemoved(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
+	private void applyEternalSlumberIfFatalSlumberRemoved(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
 		if (hasFatalSlumber.get()) {
-			addEffect(new MobEffectInstance(SpectrumStatusEffects.ETERNAL_SLUMBER, 6000));
+			addEffect(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, 6000));
 		}
 	}
 
 	@WrapWithCondition(method = "removeAllEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onEffectRemoved(Lnet/minecraft/world/effect/MobEffectInstance;)V"))
-	private boolean spectrum$preventStatusClear(LivingEntity instance, MobEffectInstance effect, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
+	private boolean preventStatusClear(LivingEntity instance, MobEffectInstance effect, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
 		if (StatusEffectHelper.isIncurable(effect)) {
 			if (affectedByImmunity(instance, effect.getAmplifier()))
 				return true;
 			
-			SpectrumStatusEffects.cutDuration(instance, effect);
+			PastelStatusEffects.cutDuration(instance, effect);
 			
 			blockRemoval.set(true);
 			return false;
@@ -64,7 +64,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	}
 	
 	@WrapWithCondition(method = "removeAllEffects", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;remove()V"))
-	private boolean spectrum$preventStatusClear2(Iterator instance, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
+	private boolean preventStatusClear2(Iterator instance, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
 		if (blockRemoval.get()) {
 			blockRemoval.set(false);
 			return false;
@@ -73,7 +73,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	}
 	
 	@WrapOperation(method = "removeEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;removeEffectNoUpdate(Lnet/minecraft/core/Holder;)Lnet/minecraft/world/effect/MobEffectInstance;"))
-	private MobEffectInstance spectrum$preventStatusRemoval(LivingEntity instance, Holder<MobEffect> effectRegistryEntry, Operation<MobEffectInstance> original) {
+	private MobEffectInstance preventStatusRemoval(LivingEntity instance, Holder<MobEffect> effectRegistryEntry, Operation<MobEffectInstance> original) {
 		var effect = instance.getEffect(effectRegistryEntry);
 		boolean cancel;
 		
@@ -94,11 +94,11 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	
 	@Unique
 	private static boolean affectedByImmunity(LivingEntity instance, int amplifier) {
-		var immunity = instance.getEffect(SpectrumStatusEffects.IMMUNITY);
+		var immunity = instance.getEffect(PastelStatusEffects.IMMUNITY);
 		var cost = 1200 + 600 * amplifier;
 		
 		if (immunity != null && immunity.getDuration() >= cost) {
-			((MobEffectInstanceInjector) immunity).spectrum$setDuration(Math.max(5, immunity.getDuration() - cost));
+			((MobEffectInstanceInjector) immunity).setDuration(Math.max(5, immunity.getDuration() - cost));
 			if (!instance.level().isClientSide()) {
 				((ServerLevel) instance.level()).getChunkSource().broadcastAndSend(instance, new ClientboundUpdateMobEffectPacket(instance.getId(), immunity, false));
 			}

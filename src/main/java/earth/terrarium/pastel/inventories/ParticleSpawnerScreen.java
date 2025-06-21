@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.inventories;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerBlockEntity;
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerConfiguration;
 import earth.terrarium.pastel.data_loaders.ParticleSpawnerParticlesDataLoader;
@@ -35,7 +35,7 @@ import java.util.function.Predicate;
 @OnlyIn(Dist.CLIENT)
 public class ParticleSpawnerScreen extends AbstractContainerScreen<ParticleSpawnerScreenHandler> {
 	
-	protected static final ResourceLocation GUI_TEXTURE = SpectrumCommon.locate("textures/gui/container/particle_spawner.png");
+	protected static final ResourceLocation GUI_TEXTURE = PastelCommon.locate("textures/gui/container/particle_spawner.png");
 	protected static final int PARTICLES_PER_PAGE = 6;
 	protected static final int TEXT_COLOR = 2236962;
 	

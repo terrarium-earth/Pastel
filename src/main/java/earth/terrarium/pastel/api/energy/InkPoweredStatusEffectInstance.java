@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.components.InkPoweredComponent;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -58,7 +58,7 @@ public class InkPoweredStatusEffectInstance {
 		this.customColor = customColor;
 		this.unidentifiable = unidentifiable;
 		this.incurable = incurable;
-		if (incurable) ((MobEffectInstanceInjector) statusEffectInstance).spectrum$setIncurable(true);
+		if (incurable) ((MobEffectInstanceInjector) statusEffectInstance).setIncurable(true);
 	}
 	
 	public MobEffectInstance getStatusEffectInstance() {
@@ -70,11 +70,11 @@ public class InkPoweredStatusEffectInstance {
 	}
 	
 	public static List<InkPoweredStatusEffectInstance> getEffects(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.INK_POWERED, InkPoweredComponent.DEFAULT).effects();
+		return stack.getOrDefault(PastelDataComponentTypes.INK_POWERED, InkPoweredComponent.DEFAULT).effects();
 	}
 	
 	public static void setEffects(ItemStack stack, List<InkPoweredStatusEffectInstance> effects) {
-		stack.set(SpectrumDataComponentTypes.INK_POWERED, new InkPoweredComponent(effects));
+		stack.set(PastelDataComponentTypes.INK_POWERED, new InkPoweredComponent(effects));
 	}
 	
 	public static void buildTooltip(List<Component> tooltip, List<InkPoweredStatusEffectInstance> effects, MutableComponent attributeModifierText, boolean showDuration, float tickRate) {

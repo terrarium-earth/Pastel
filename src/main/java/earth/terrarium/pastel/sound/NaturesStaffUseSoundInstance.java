@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
@@ -17,7 +17,7 @@ public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implemen
 	private boolean done;
 	
 	public NaturesStaffUseSoundInstance(Player player) {
-		super(SpectrumSoundEvents.NATURES_STAFF_USE, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
+		super(PastelSoundEvents.NATURES_STAFF_USE, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
 		this.looping = true;
 		this.delay = 0;
 		this.volume = 0.25F;
@@ -39,7 +39,7 @@ public class NaturesStaffUseSoundInstance extends AbstractSoundInstance implemen
 	
 	@Override
 	public void tick() {
-		if (player == null || !player.isUsingItem() || !player.getUseItem().is(SpectrumItems.NATURES_STAFF.get())) {
+		if (player == null || !player.isUsingItem() || !player.getUseItem().is(PastelItems.NATURES_STAFF.get())) {
 			this.setDone();
 		} else {
 			this.x = ((float) this.player.getX());

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.loot.functions;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.loot.SpectrumLootFunctionTypes;
+import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -29,7 +29,7 @@ public class SetComponentsRandomlyLootFunction extends LootItemConditionalFuncti
 	
 	@Override
 	public LootItemFunctionType<? extends LootItemConditionalFunction> getType() {
-		return SpectrumLootFunctionTypes.SET_COMPONENTS_RANDOMLY;
+		return PastelLootFunctionTypes.SET_COMPONENTS_RANDOMLY;
 	}
 	
 	@Override

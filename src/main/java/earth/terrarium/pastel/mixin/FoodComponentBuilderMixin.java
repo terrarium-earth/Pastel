@@ -12,7 +12,7 @@ public abstract class FoodComponentBuilderMixin implements FoodComponentBuilderI
 	private float eatSeconds;
 	
 	@Override
-	public FoodProperties.Builder spectrum$setEatSeconds(float eatSeconds) {
+	public FoodProperties.Builder setEatSeconds(float eatSeconds) {
 		this.eatSeconds = eatSeconds;
 		return (FoodProperties.Builder) (Object) this;
 	}

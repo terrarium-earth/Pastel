@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.jade_vines;
 
 import earth.terrarium.pastel.helpers.TimeHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredFallingSporeBlossomParticleEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -24,7 +24,7 @@ public interface JadeVine {
 	VoxelShape TIP_SHAPE = Block.box(2.0D, 2.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 	
 	static void spawnBloomParticlesClient(Level world, BlockPos blockPos) {
-		spawnParticlesClient(world, blockPos, SpectrumParticleTypes.JADE_VINES_BLOOM);
+		spawnParticlesClient(world, blockPos, PastelParticleTypes.JADE_VINES_BLOOM);
 		
 		RandomSource random = world.random;
 		double x = blockPos.getX() + 0.2 + (random.nextFloat() * 0.6);
@@ -34,7 +34,7 @@ public interface JadeVine {
 	}
 	
 	static void spawnParticlesClient(Level world, BlockPos blockPos) {
-		spawnParticlesClient(world, blockPos, SpectrumParticleTypes.JADE_VINES);
+		spawnParticlesClient(world, blockPos, PastelParticleTypes.JADE_VINES);
 	}
 	
 	private static void spawnParticlesClient(Level world, BlockPos blockPos, ParticleOptions particleType) {
@@ -51,7 +51,7 @@ public interface JadeVine {
 	}
 	
 	static void spawnParticlesServer(ServerLevel world, BlockPos blockPos, int amount) {
-		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, Vec3.atCenterOf(blockPos), SpectrumParticleTypes.JADE_VINES, amount, new Vec3(0.6, 0.6, 0.6), new Vec3(0.12, 0.12, 0.12));
+		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, Vec3.atCenterOf(blockPos), PastelParticleTypes.JADE_VINES, amount, new Vec3(0.6, 0.6, 0.6), new Vec3(0.12, 0.12, 0.12));
 	}
 	
 	static boolean isExposedToSunlight(@NotNull Level world, @NotNull BlockPos blockPos) {

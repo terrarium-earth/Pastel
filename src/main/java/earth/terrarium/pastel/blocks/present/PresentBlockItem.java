@@ -5,7 +5,7 @@ import earth.terrarium.pastel.components.ExtendedBundleComponent;
 import earth.terrarium.pastel.components.WrappedPresentComponent;
 import earth.terrarium.pastel.items.bundles.PlaceableBundleBlockItem;
 import earth.terrarium.pastel.items.tooltip.PresentTooltipData;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponents;
@@ -63,11 +63,11 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 	}
 	
 	public static WrappedPresentComponent getWrapData(ItemStack itemStack) {
-		return itemStack.getOrDefault(SpectrumDataComponentTypes.WRAPPED_PRESENT, WrappedPresentComponent.DEFAULT);
+		return itemStack.getOrDefault(PastelDataComponentTypes.WRAPPED_PRESENT, WrappedPresentComponent.DEFAULT);
 	}
 	
 	public static void wrap(ItemStack itemStack, PresentBlock.WrappingPaper wrappingPaper, Map<Integer, Integer> colors) {
-		itemStack.set(SpectrumDataComponentTypes.WRAPPED_PRESENT, new WrappedPresentComponent(true, wrappingPaper, colors));
+		itemStack.set(PastelDataComponentTypes.WRAPPED_PRESENT, new WrappedPresentComponent(true, wrappingPaper, colors));
 	}
 	
 	@Override

@@ -2,8 +2,8 @@ package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.SpreadableFloraBlock;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -25,7 +25,7 @@ public class AshFloraBlock extends SpreadableFloraBlock {
 
 	@Override
 	protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-		return (floor.is(SpectrumBlockTags.ASH) || floor.is(SpectrumBlocks.ASHEN_BLACKSLAG.get()) || super.mayPlaceOn(floor, world, pos))
+		return (floor.is(PastelBlockTags.ASH) || floor.is(PastelBlocks.ASHEN_BLACKSLAG.get()) || super.mayPlaceOn(floor, world, pos))
 				&& floor.isFaceSturdy(world, pos, Direction.UP);
 	}
 }

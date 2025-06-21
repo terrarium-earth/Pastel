@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import earth.terrarium.pastel.blocks.farming.SpectrumFarmlandBlock;
+import earth.terrarium.pastel.blocks.farming.PastelFarmlandBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.AttachedStemBlock;
@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class PlantOnCustomFarmlandMixin {
 	
 	@ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
-	public boolean spectrum$canPlantOnTopOfCustomFarmland(boolean original, @NotNull BlockState floor, BlockGetter world, BlockPos pos) {
-		return original || floor.getBlock() instanceof SpectrumFarmlandBlock;
+	public boolean canPlantOnTopOfCustomFarmland(boolean original, @NotNull BlockState floor, BlockGetter world, BlockPos pos) {
+		return original || floor.getBlock() instanceof PastelFarmlandBlock;
 	}
 	
 }

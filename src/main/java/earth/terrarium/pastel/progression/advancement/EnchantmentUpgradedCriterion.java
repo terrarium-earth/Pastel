@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class EnchantmentUpgradedCriterion extends SimpleCriterionTrigger<EnchantmentUpgradedCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("enchantment_upgraded");
+	public static final ResourceLocation ID = PastelCommon.locate("enchantment_upgraded");
 	
 	public void trigger(ServerPlayer player, ItemEnchantments enchantmentsComponent, int spentExperience) {
 		this.trigger(player, (conditions) -> conditions.matches(enchantmentsComponent, spentExperience));

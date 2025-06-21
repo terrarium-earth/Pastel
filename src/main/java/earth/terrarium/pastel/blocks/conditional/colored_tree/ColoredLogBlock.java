@@ -1,7 +1,5 @@
 package earth.terrarium.pastel.blocks.conditional.colored_tree;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.blocks.*;
@@ -17,7 +15,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class ColoredLogBlock extends SpectrumLogBlock implements RevelationAware, ColoredTree {
+public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, ColoredTree {
 	
 	private static final Map<InkColor, ColoredLogBlock> LOGS = new Object2ObjectArrayMap<>();
 	protected final InkColor color;

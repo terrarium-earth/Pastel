@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,12 +22,12 @@ public abstract class BrainMixin<E extends LivingEntity> {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     public void slowDownBrainTicks(ServerLevel world, E entity, CallbackInfo ci) {
-        if (entity.hasEffect(SpectrumStatusEffects.ETERNAL_SLUMBER) || entity.hasEffect(SpectrumStatusEffects.FATAL_SLUMBER)) {
+        if (entity.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelStatusEffects.FATAL_SLUMBER)) {
             ci.cancel();
             return;
         }
 
-        var effect = entity.getEffect(SpectrumStatusEffects.SOMNOLENCE);
+        var effect = entity.getEffect(PastelStatusEffects.SOMNOLENCE);
         if (effect == null)
             return;
         

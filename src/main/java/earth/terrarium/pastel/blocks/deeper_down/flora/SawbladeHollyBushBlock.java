@@ -2,11 +2,11 @@ package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.jade_vines.JadeVinePlantBlock;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumLootTables;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelLootTables;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.pathfinder.*;
 import net.neoforged.neoforge.common.Tags;
@@ -85,13 +85,13 @@ public class SawbladeHollyBushBlock extends BushBlock implements BonemealableBlo
 			return;
 		}
 		
-		if (entity instanceof LivingEntity && !entity.getType().is(SpectrumEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
+		if (entity instanceof LivingEntity && !entity.getType().is(PastelEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
 			entity.makeStuckInBlock(state, new Vec3(0.8, 0.75, 0.8));
 			if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
 				double difX = Math.abs(entity.getX() - entity.xOld);
 				double difZ = Math.abs(entity.getZ() - entity.zOld);
 				if (difX >= 0.003 || difZ >= 0.003) {
-                    entity.hurt(SpectrumDamageTypes.bristeSprouts(world), DAMAGE);
+                    entity.hurt(PastelDamageTypes.bristeSprouts(world), DAMAGE);
 				}
 			}
 		}
@@ -99,12 +99,12 @@ public class SawbladeHollyBushBlock extends BushBlock implements BonemealableBlo
     
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return new ItemStack(SpectrumItems.SAWBLADE_HOLLY_BERRY.get());
+        return new ItemStack(PastelItems.SAWBLADE_HOLLY_BERRY.get());
     }
     
     @Override
     protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-        return floor.is(SpectrumBlockTags.SAWBLADE_HOLLY_PLANTABLE);
+        return floor.is(PastelBlockTags.SAWBLADE_HOLLY_PLANTABLE);
     }
     
     @Override
@@ -122,7 +122,7 @@ public class SawbladeHollyBushBlock extends BushBlock implements BonemealableBlo
         
         if (canBeSheared(age) && handStack.is(Tags.Items.TOOLS_SHEAR)) {
             if (!world.isClientSide) {
-				for (ItemStack stack : JadeVinePlantBlock.getHarvestedStacks(state, (ServerLevel) world, pos, world.getBlockEntity(pos), player, player.getMainHandItem(), SpectrumLootTables.SAWBLADE_HOLLY_SHEARING)) {
+				for (ItemStack stack : JadeVinePlantBlock.getHarvestedStacks(state, (ServerLevel) world, pos, world.getBlockEntity(pos), player, player.getMainHandItem(), PastelLootTables.SAWBLADE_HOLLY_SHEARING)) {
                     popResource(world, pos, stack);
                 }
                 handStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
@@ -136,7 +136,7 @@ public class SawbladeHollyBushBlock extends BushBlock implements BonemealableBlo
             return ItemInteractionResult.sidedSuccess(world.isClientSide);
         } else if (age == MAX_AGE) {
             if (!world.isClientSide) {
-				for (ItemStack stack : JadeVinePlantBlock.getHarvestedStacks(state, (ServerLevel) world, pos, world.getBlockEntity(pos), player, player.getMainHandItem(), SpectrumLootTables.SAWBLADE_HOLLY_HARVESTING)) {
+				for (ItemStack stack : JadeVinePlantBlock.getHarvestedStacks(state, (ServerLevel) world, pos, world.getBlockEntity(pos), player, player.getMainHandItem(), PastelLootTables.SAWBLADE_HOLLY_HARVESTING)) {
                     popResource(world, pos, stack);
                 }
             }

@@ -3,10 +3,10 @@ package earth.terrarium.pastel.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.KindlingCoughEntity;
 import earth.terrarium.pastel.entity.models.KindlingCoughEntityModel;
-import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
+import earth.terrarium.pastel.registries.client.PastelModelLayers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -19,12 +19,12 @@ import net.minecraft.util.Mth;
 @OnlyIn(Dist.CLIENT)
 public class KindlingCoughEntityRenderer extends EntityRenderer<KindlingCoughEntity> {
 	
-	private static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/kindling/cough.png");
+	private static final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/kindling/cough.png");
 	private final KindlingCoughEntityModel model;
 	
 	public KindlingCoughEntityRenderer(EntityRendererProvider.Context context) {
 		super(context);
-		this.model = new KindlingCoughEntityModel(context.bakeLayer(SpectrumModelLayers.KINDLING_COUGH));
+		this.model = new KindlingCoughEntityModel(context.bakeLayer(PastelModelLayers.KINDLING_COUGH));
 	}
 	
 	public void render(KindlingCoughEntity kindlingCoughEntity, float f, float g, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int i) {

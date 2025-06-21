@@ -7,9 +7,9 @@ import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -57,12 +57,12 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.POTION_WORKSHOP_CRAFTING_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.POTION_WORKSHOP_CRAFTING_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.POTION_WORKSHOP_CRAFTING;
+		return PastelRecipeTypes.POTION_WORKSHOP_CRAFTING;
 	}
 	
 	@Override
@@ -88,7 +88,7 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 	@Override
 	public List<IngredientStack> getIngredientStacks() {
 		NonNullList<IngredientStack> defaultedList = NonNullList.create();
-		defaultedList.add(IngredientStack.ofItems(SpectrumItems.MERMAIDS_GEM.get()));
+		defaultedList.add(IngredientStack.ofItems(PastelItems.MERMAIDS_GEM.get()));
 		defaultedList.add(this.baseIngredient);
 		addIngredientStacks(defaultedList);
 		return defaultedList;

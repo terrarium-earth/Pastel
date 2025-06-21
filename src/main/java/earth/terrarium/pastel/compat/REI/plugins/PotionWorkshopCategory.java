@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -20,11 +20,11 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public abstract class PotionWorkshopCategory<T extends PotionWorkshopRecipeDisplay> extends GatedDisplayCategory<T> {
 	
-	public final static ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/potion_workshop_3_slots.png");
+	public final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/container/potion_workshop_3_slots.png");
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP.get());
+		return EntryStacks.of(PastelBlocks.POTION_WORKSHOP.get());
 	}
 	
 	

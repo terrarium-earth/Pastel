@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.bottomless_bundle;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -37,7 +37,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.items.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -86,7 +85,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (!world.isClientSide) {
 			if (player.isShiftKeyDown()) {
-				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bundle) -> {
+				world.getBlockEntity(pos, PastelBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bundle) -> {
 					long amount = bundle.getStoredAmount();
 					ItemStack ref = bundle.storage.getStackInSlot(0);
 					long maxStoredAmount = BottomlessBundleItem.getMaxStoredAmount(bundle.powerLevel);
@@ -97,7 +96,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 					}
 				});
 			} else {
-				world.getBlockEntity(pos, SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bottomlessBundleBlockEntity) -> {
+				world.getBlockEntity(pos, PastelBlockEntities.BOTTOMLESS_BUNDLE.get()).ifPresent((bottomlessBundleBlockEntity) -> {
 					var storage = bottomlessBundleBlockEntity.storage;
 					ItemStack ref = storage.getStackInSlot(0);
 
@@ -124,7 +123,7 @@ public class BottomlessBundleBlock extends BaseEntityBlock {
 	
 	@Override
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-		return SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
+		return PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
 	}
 	
 	@Override

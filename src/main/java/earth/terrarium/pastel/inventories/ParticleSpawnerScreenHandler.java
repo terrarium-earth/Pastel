@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.inventories;
 
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerBlockEntity;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.*;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,11 +15,11 @@ public class ParticleSpawnerScreenHandler extends AbstractContainerMenu {
 	protected ParticleSpawnerBlockEntity blockEntity;
 
 	public ParticleSpawnerScreenHandler(int syncId, Inventory inventory, RegistryFriendlyByteBuf buf) {
-		this(syncId, inventory, inventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.PARTICLE_SPAWNER.get()).orElseThrow());
+		this(syncId, inventory, inventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), PastelBlockEntities.PARTICLE_SPAWNER.get()).orElseThrow());
 	}
 	
 	public ParticleSpawnerScreenHandler(int syncId, Inventory playerInventory, ParticleSpawnerBlockEntity blockEntity) {
-		super(SpectrumScreenHandlerTypes.PARTICLE_SPAWNER, syncId);
+		super(PastelScreenHandlerTypes.PARTICLE_SPAWNER, syncId);
 		
 		this.player = playerInventory.player;
 		this.blockEntity = blockEntity;

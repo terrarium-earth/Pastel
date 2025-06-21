@@ -2,7 +2,7 @@ package earth.terrarium.pastel.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.entity.PhantomFrameEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
@@ -43,7 +43,7 @@ public class PhantomFrameEntityRenderer<T extends PhantomFrameEntity> extends It
 
 	@Override
 	protected int getBlockLightLevel(T entity, BlockPos blockPos) {
-		return entity.getType() == SpectrumEntityTypes.GLOW_PHANTOM_FRAME.get() ? Math.max(5, super.getBlockLightLevel(entity, blockPos)) : super.getBlockLightLevel(entity, blockPos);
+		return entity.getType() == PastelEntityTypes.GLOW_PHANTOM_FRAME.get() ? Math.max(5, super.getBlockLightLevel(entity, blockPos)) : super.getBlockLightLevel(entity, blockPos);
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class PhantomFrameEntityRenderer<T extends PhantomFrameEntity> extends It
 	}
 	
 	private ModelResourceLocation getModelId(T entity, ItemStack stack) {
-		boolean bl = entity.getType() == SpectrumEntityTypes.GLOW_PHANTOM_FRAME.get();
+		boolean bl = entity.getType() == PastelEntityTypes.GLOW_PHANTOM_FRAME.get();
 		if (stack.is(Items.FILLED_MAP)) {
 			return bl ? MAP_GLOW_FRAME_MODEL_IDENTIFIER : MAP_FRAME_MODEL_IDENTIFIER;
 		} else {

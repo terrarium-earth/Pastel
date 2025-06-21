@@ -2,7 +2,7 @@ package earth.terrarium.pastel.render.capes;
 
 import net.minecraft.resources.ResourceLocation;
 
-import static earth.terrarium.pastel.SpectrumCommon.locate;
+import static earth.terrarium.pastel.PastelCommon.locate;
 
 public enum CapeType {
     IMMORTAL(locate("textures/capes/immortal.png"), true),

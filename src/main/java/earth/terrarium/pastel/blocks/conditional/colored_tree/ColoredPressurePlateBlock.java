@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.conditional.colored_tree;
 
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.registries.SpectrumBlockSetTypes;
+import earth.terrarium.pastel.registries.PastelBlockSetTypes;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.world.level.block.PressurePlateBlock;
 
@@ -13,7 +13,7 @@ public class ColoredPressurePlateBlock extends PressurePlateBlock {
 	protected final InkColor color;
 	
 	public ColoredPressurePlateBlock(Properties settings, InkColor color) {
-		super(SpectrumBlockSetTypes.COLORED_WOOD, settings);
+		super(PastelBlockSetTypes.COLORED_WOOD, settings);
 		this.color = color;
 		BLOCKS.put(color, this);
 	}

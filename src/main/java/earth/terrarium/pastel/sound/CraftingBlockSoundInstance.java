@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.sound;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -85,7 +85,7 @@ public class CraftingBlockSoundInstance extends AbstractSoundInstance implements
 	
 	private void updateVolume() {
 		Minecraft client = Minecraft.getInstance();
-		this.volume = Math.max(0, 0.75F * (SpectrumCommon.CONFIG.BlockSoundVolume - sourceBlockPos.distManhattan(client.player.blockPosition()) / 64F));
+		this.volume = Math.max(0, 0.75F * (PastelCommon.CONFIG.BlockSoundVolume - sourceBlockPos.distManhattan(client.player.blockPosition()) / 64F));
 	}
 	
 	@Override

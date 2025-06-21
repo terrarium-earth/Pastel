@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +27,7 @@ public abstract class ApplyBonusLootFunctionMixin {
 			method = "run",
 			at = @At("STORE"),
 			ordinal = 1)
-	public int spectrum$rerollBonusLoot(int oldValue, ItemStack stack, LootContext context) {
+	public int rerollBonusLoot(int oldValue, ItemStack stack, LootContext context) {
 		// if the player has the ANOTHER_DRAW effect the bonus loot of
 		// this function gets rerolled potency+1 times and the best one taken
 		ItemStack itemStack = context.getParamOrNull(LootContextParams.TOOL);
@@ -35,7 +35,7 @@ public abstract class ApplyBonusLootFunctionMixin {
 		if (itemStack != null && entity instanceof LivingEntity livingEntity) {
 			int enchantmentLevel = EnchantmentHelper.getItemEnchantmentLevel(this.enchantment, itemStack);
 			if (enchantmentLevel > 0) {
-				MobEffectInstance effect = livingEntity.getEffect(SpectrumStatusEffects.ANOTHER_ROLL);
+				MobEffectInstance effect = livingEntity.getEffect(PastelStatusEffects.ANOTHER_ROLL);
 				if (effect != null) {
 					int rollCount = effect.getAmplifier() + 1;
 					int highestRoll = oldValue;

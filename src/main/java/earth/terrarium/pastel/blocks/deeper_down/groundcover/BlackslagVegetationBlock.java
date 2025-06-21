@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.deeper_down.groundcover;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -29,7 +29,7 @@ public class BlackslagVegetationBlock extends SnowyDirtBlock {
 	@Override
 	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		if (!canSurvive(state, world, pos)) {
-			world.setBlockAndUpdate(pos, SpectrumBlocks.BLACKSLAG.get().defaultBlockState());
+			world.setBlockAndUpdate(pos, PastelBlocks.BLACKSLAG.get().defaultBlockState());
 		}
 	}
 	

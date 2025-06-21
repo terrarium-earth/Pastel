@@ -3,7 +3,7 @@ package earth.terrarium.pastel.progression.advancement;
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class CompletedMultiblockCriterion extends SimpleCriterionTrigger<CompletedMultiblockCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("completed_multiblock");
+	public static final ResourceLocation ID = PastelCommon.locate("completed_multiblock");
 	
 	public void trigger(ServerPlayer player, Multiblock iMultiblock) {
 		this.trigger(player, (conditions) -> conditions.matches(iMultiblock));

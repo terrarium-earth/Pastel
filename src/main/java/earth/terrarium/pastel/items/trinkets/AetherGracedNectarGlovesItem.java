@@ -1,13 +1,13 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import com.google.common.collect.Multimap;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
-import earth.terrarium.pastel.registries.SpectrumEntityAttributes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelEntityAttributes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -27,7 +27,7 @@ import java.util.List;
 public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implements SlotBackgroundEffectProvider {
 
 	public static final int HARMFUL_EFFECT_COST = 7;
-	public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = SpectrumCommon.locate("nectar_gloves_sleep");
+	public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon.locate("nectar_gloves_sleep");
 	
 	public AetherGracedNectarGlovesItem(Properties settings, ResourceLocation unlockIdentifier) {
 		super(settings, unlockIdentifier);
@@ -48,7 +48,7 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 	@Override
 	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
 		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
-		modifiers.put(SpectrumEntityAttributes.MENTAL_PRESENCE, new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, -1F, AttributeModifier.Operation.ADD_VALUE));
+		modifiers.put(PastelEntityAttributes.MENTAL_PRESENCE, new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, -1F, AttributeModifier.Operation.ADD_VALUE));
 		return modifiers;
 	}
 
@@ -56,10 +56,10 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 		if (effect.value().isBeneficial())
 			return false;
 		
-		if (effect.is(SpectrumStatusEffectTags.BYPASSES_NECTAR_GLOVES))
+		if (effect.is(PastelStatusEffectTags.BYPASSES_NECTAR_GLOVES))
 			return false;
 
-		return hasEquipped(entity, SpectrumItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == SpectrumStatusEffects.FRENZY);
+		return hasEquipped(entity, PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == PastelStatusEffects.FRENZY);
 	}
 
 	public static boolean tryBlockEffect(LivingEntity entity, int cost) {
@@ -76,6 +76,6 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 
 	@Override
 	public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
-		return SpectrumStatusEffects.ETERNAL_SLUMBER_COLOR;
+		return PastelStatusEffects.ETERNAL_SLUMBER_COLOR;
 	}
 }

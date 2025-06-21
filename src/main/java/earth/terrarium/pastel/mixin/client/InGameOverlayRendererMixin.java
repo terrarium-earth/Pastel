@@ -8,7 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class InGameOverlayRendererMixin {
     
     @Inject(method = "renderScreenEffect", at = @At(value = "HEAD"))
-    private static void spectrum$renderPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
+    private static void renderPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
         if (!client.player.isSpectator()) {
             if (PrimordialFireData.isOnPrimordialFire(client.player)) {
                 renderPrimordialFireOverlay(client, matrices);
@@ -36,7 +36,7 @@ public class InGameOverlayRendererMixin {
     }
     
     @Inject(method = "renderFire", at = @At(value = "HEAD"), cancellable = true)
-    private static void spectrum$cancelFireOverlayWithPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
+    private static void cancelFireOverlayWithPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
         if (PrimordialFireData.isOnPrimordialFire(client.player)) {
             ci.cancel();
         }
@@ -49,7 +49,7 @@ public class InGameOverlayRendererMixin {
         RenderSystem.depthFunc(519);
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
-        TextureAtlasSprite sprite = client.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(SpectrumCommon.locate("block/primordial_fire_1"));
+        TextureAtlasSprite sprite = client.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(PastelCommon.locate("block/primordial_fire_1"));
         RenderSystem.setShaderTexture(0, sprite.atlasLocation());
         float f = sprite.getU0();
         float g = sprite.getU1();

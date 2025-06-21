@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.recipe.pedestal;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.PedestalVariant;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
@@ -10,11 +10,11 @@ import earth.terrarium.pastel.blocks.pedestal.PedestalBlockItem;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.recipe.GatedStackSpectrumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -32,9 +32,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<PedestalRecipeInput> {
+public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalRecipeInput> {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("place_pedestal");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("place_pedestal");
 	
 	public static final int[] CRAFTING_GRID_SLOTS = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
 	
@@ -89,11 +89,11 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<PedestalRe
 		int onyxPowderAmount = this.powderInputs.getOrDefault(BuiltinGemstoneColor.BLACK, 0);
 		int moonstonePowderAmount = this.powderInputs.getOrDefault(BuiltinGemstoneColor.WHITE, 0);
 		
-		return ((topazPowderAmount == 0 || isStackAtLeast(inv.getItem(9), SpectrumItems.TOPAZ_POWDER.get(), topazPowderAmount))
-				&& (amethystPowderAmount == 0 || isStackAtLeast(inv.getItem(10), SpectrumItems.AMETHYST_POWDER.get(), amethystPowderAmount))
-				&& (citrinePowderAmount == 0 || isStackAtLeast(inv.getItem(11), SpectrumItems.CITRINE_POWDER.get(), citrinePowderAmount))
-				&& (onyxPowderAmount == 0 || isStackAtLeast(inv.getItem(12), SpectrumItems.ONYX_POWDER.get(), onyxPowderAmount))
-				&& (moonstonePowderAmount == 0 || isStackAtLeast(inv.getItem(13), SpectrumItems.MOONSTONE_POWDER.get(), moonstonePowderAmount)));
+		return ((topazPowderAmount == 0 || isStackAtLeast(inv.getItem(9), PastelItems.TOPAZ_POWDER.get(), topazPowderAmount))
+				&& (amethystPowderAmount == 0 || isStackAtLeast(inv.getItem(10), PastelItems.AMETHYST_POWDER.get(), amethystPowderAmount))
+				&& (citrinePowderAmount == 0 || isStackAtLeast(inv.getItem(11), PastelItems.CITRINE_POWDER.get(), citrinePowderAmount))
+				&& (onyxPowderAmount == 0 || isStackAtLeast(inv.getItem(12), PastelItems.ONYX_POWDER.get(), onyxPowderAmount))
+				&& (moonstonePowderAmount == 0 || isStackAtLeast(inv.getItem(13), PastelItems.MOONSTONE_POWDER.get(), moonstonePowderAmount)));
 	}
 	
 	private boolean isStackAtLeast(ItemStack sourceItemStack, Item item, int amount) {
@@ -121,12 +121,12 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<PedestalRe
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST.get());
+		return new ItemStack(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get());
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.PEDESTAL;
+		return PastelRecipeTypes.PEDESTAL;
 	}
 	
 	public int getGemstonePowderAmount(GemstoneColor gemstoneColor) {
@@ -155,23 +155,23 @@ public abstract class PedestalRecipe extends GatedStackSpectrumRecipe<PedestalRe
 		List<SoundEvent> choices = new ArrayList<>();
 		
 		for (int i = 0; i < this.powderInputs.getOrDefault(BuiltinGemstoneColor.MAGENTA, 0); i++) {
-			choices.add(SpectrumSoundEvents.PEDESTAL_CRAFTING_FINISHED_AMETHYST);
+			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_AMETHYST);
 		}
 		for (int i = 0; i < this.powderInputs.getOrDefault(BuiltinGemstoneColor.YELLOW, 0); i++) {
-			choices.add(SpectrumSoundEvents.PEDESTAL_CRAFTING_FINISHED_CITRINE);
+			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_CITRINE);
 		}
 		for (int i = 0; i < this.powderInputs.getOrDefault(BuiltinGemstoneColor.CYAN, 0); i++) {
-			choices.add(SpectrumSoundEvents.PEDESTAL_CRAFTING_FINISHED_TOPAZ);
+			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_TOPAZ);
 		}
 		for (int i = 0; i < this.powderInputs.getOrDefault(BuiltinGemstoneColor.BLACK, 0); i++) {
-			choices.add(SpectrumSoundEvents.PEDESTAL_CRAFTING_FINISHED_ONYX);
+			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_ONYX);
 		}
 		for (int i = 0; i < this.powderInputs.getOrDefault(BuiltinGemstoneColor.WHITE, 0); i++) {
-			choices.add(SpectrumSoundEvents.PEDESTAL_CRAFTING_FINISHED_MOONSTONE);
+			choices.add(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_MOONSTONE);
 		}
 		
 		if (choices.isEmpty()) {
-			return SpectrumSoundEvents.PEDESTAL_CRAFTING_FINISHED_GENERIC;
+			return PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_GENERIC;
 		} else {
 			return choices.get(random.nextInt(choices.size()));
 		}

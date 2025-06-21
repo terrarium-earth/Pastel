@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.redstone;
 
 import earth.terrarium.pastel.capabilities.*;
-import earth.terrarium.pastel.inventories.Spectrum3x3ContainerScreenHandler;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.inventories.Pastel3x3ContainerScreenHandler;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,7 +14,7 @@ import net.neoforged.neoforge.items.*;
 public class BlockPlacerBlockEntity extends DispenserBlockEntity implements SidedCapabilityProvider {
 	
 	public BlockPlacerBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.BLOCK_PLACER.get(), pos, state);
+		super(PastelBlockEntities.BLOCK_PLACER.get(), pos, state);
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class BlockPlacerBlockEntity extends DispenserBlockEntity implements Side
 	
 	@Override
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-		return Spectrum3x3ContainerScreenHandler.createTier1(syncId, playerInventory, this);
+		return Pastel3x3ContainerScreenHandler.createTier1(syncId, playerInventory, this);
 	}
 
 	@Override

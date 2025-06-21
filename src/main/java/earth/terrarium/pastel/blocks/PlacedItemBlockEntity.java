@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +24,7 @@ public class PlacedItemBlockEntity extends BlockEntity implements PlayerOwned {
 	}
 	
 	public PlacedItemBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.PLACED_ITEM.get(), pos, state);
+		super(PastelBlockEntities.PLACED_ITEM.get(), pos, state);
 	}
 	
 	@Override

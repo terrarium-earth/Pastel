@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.Slot;
 
 public class FilteringScreen extends AbstractContainerScreen<FilteringScreenHandler> {
 
-    public static final ResourceLocation BACKGROUND = SpectrumCommon.locate("textures/gui/container/filter.png");
+    public static final ResourceLocation BACKGROUND = PastelCommon.locate("textures/gui/container/filter.png");
     public static final int STRIP_OFFSET = 144;
     public static final int STRIP_HEIGHT = 16;
     public static final int PLAYER_OFFSET = 55;

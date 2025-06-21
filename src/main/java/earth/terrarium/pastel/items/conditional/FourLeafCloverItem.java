@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.conditional;
 
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +21,7 @@ public class FourLeafCloverItem extends CloakedBlockItem implements LoomPatternP
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.FOUR_LEAF_CLOVER;
+		return PastelBannerPatterns.FOUR_LEAF_CLOVER;
 	}
 
 	@Override

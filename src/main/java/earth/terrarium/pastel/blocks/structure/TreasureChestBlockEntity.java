@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.blocks.chests.SpectrumChestBlockEntity;
+import earth.terrarium.pastel.blocks.chests.PastelChestBlockEntity;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.inventories.GenericSpectrumContainerScreenHandler;
+import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -34,14 +34,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class TreasureChestBlockEntity extends SpectrumChestBlockEntity {
+public class TreasureChestBlockEntity extends PastelChestBlockEntity {
 	
 	private final List<UUID> playersThatOpenedAlready = new ArrayList<>();
 	private ResourceLocation requiredAdvancementIdentifierToOpen;
 	private Vec3i controllerOffset;
 	
 	public TreasureChestBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.PRESERVATION_CHEST.get(), pos, state);
+		super(PastelBlockEntities.PRESERVATION_CHEST.get(), pos, state);
 	}
 	
 	@Override
@@ -76,7 +76,7 @@ public class TreasureChestBlockEntity extends SpectrumChestBlockEntity {
 	
 	@Override
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-		return GenericSpectrumContainerScreenHandler.createGeneric9x3(syncId, playerInventory, this, ScreenBackgroundVariant.LATEGAME);
+		return GenericPastelContainerScreenHandler.createGeneric9x3(syncId, playerInventory, this, ScreenBackgroundVariant.LATEGAME);
 	}
 	
 	@Override

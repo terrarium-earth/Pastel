@@ -2,18 +2,18 @@ package earth.terrarium.pastel.entity.entity;
 
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.entity.SpectrumTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
 import earth.terrarium.pastel.entity.variants.KindlingVariant;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.mixin.accessors.ProjectileAttackGoalAccessor;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelRegistries;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -98,8 +98,8 @@ import java.util.UUID;
 
 public class KindlingEntity extends AbstractHorse implements RangedAttackMob, NeutralMob, Shearable {
 	
-	protected static final EntityDataAccessor<KindlingVariant> VARIANT = SynchedEntityData.defineId(KindlingEntity.class, SpectrumTrackedDataHandlerRegistry.KINDLING_VARIANT);
-	protected static final Ingredient FOOD = Ingredient.of(SpectrumItemTags.KINDLING_FOOD);
+	protected static final EntityDataAccessor<KindlingVariant> VARIANT = SynchedEntityData.defineId(KindlingEntity.class, PastelTrackedDataHandlerRegistry.KINDLING_VARIANT);
+	protected static final Ingredient FOOD = Ingredient.of(PastelItemTags.KINDLING_FOOD);
 	
 	private static final UniformInt ANGER_TIME_RANGE = TimeUtil.rangeOfSeconds(30, 59);
 	private static final EntityDataAccessor<Integer> ANGER = SynchedEntityData.defineId(KindlingEntity.class, EntityDataSerializers.INT);
@@ -211,7 +211,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 	public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
 		this.addPersistentAngerSaveData(nbt);
-		Optional.ofNullable(SpectrumRegistries.KINDLING_VARIANT.getKey(this.getKindlingVariant())).ifPresent(id -> nbt.putString("variant", id.toString()));
+		Optional.ofNullable(PastelRegistries.KINDLING_VARIANT.getKey(this.getKindlingVariant())).ifPresent(id -> nbt.putString("variant", id.toString()));
 		nbt.putInt("chillTime", getChillTime());
 		nbt.putInt("eepyTime", getEepyTime());
 		nbt.putBoolean("playing", isPlaying());
@@ -222,7 +222,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 		super.readAdditionalSaveData(nbt);
 		this.readPersistentAngerSaveData(this.level(), nbt);
 		
-		KindlingVariant variant = SpectrumRegistries.KINDLING_VARIANT.get(ResourceLocation.tryParse(nbt.getString("variant")));
+		KindlingVariant variant = PastelRegistries.KINDLING_VARIANT.get(ResourceLocation.tryParse(nbt.getString("variant")));
 		this.setKindlingVariant(variant == null ? KindlingVariant.DEFAULT : variant);
 
 		setChillTime(nbt.getInt("chillTime"));
@@ -240,7 +240,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 	@Nullable
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-		KindlingEntity baby = SpectrumEntityTypes.KINDLING.get().create(world);
+		KindlingEntity baby = PastelEntityTypes.KINDLING.get().create(world);
 		if (baby != null) {
 			baby.setKindlingVariant(this.random.nextBoolean() ? this.getKindlingVariant() : ((KindlingEntity) entity).getKindlingVariant());
 		}
@@ -268,27 +268,27 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SpectrumSoundEvents.ENTITY_KINDLING_AMBIENT;
+		return PastelSoundEvents.ENTITY_KINDLING_AMBIENT;
 	}
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SpectrumSoundEvents.ENTITY_KINDLING_HURT;
+		return PastelSoundEvents.ENTITY_KINDLING_HURT;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SpectrumSoundEvents.ENTITY_KINDLING_DEATH;
+		return PastelSoundEvents.ENTITY_KINDLING_DEATH;
 	}
 	
 	@Override
 	protected SoundEvent getAngrySound() {
-		return SpectrumSoundEvents.ENTITY_KINDLING_ANGRY;
+		return PastelSoundEvents.ENTITY_KINDLING_ANGRY;
 	}
 	
 	@Override
 	protected void playJumpSound() {
-		this.playSound(SpectrumSoundEvents.ENTITY_KINDLING_JUMP, 0.4F, 1.0F);
+		this.playSound(PastelSoundEvents.ENTITY_KINDLING_JUMP, 0.4F, 1.0F);
 	}
 	
 	@Override
@@ -341,15 +341,15 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 			this.setClipped(this.getClipTime() - 1);
 			this.setChillTime(this.getChillTime() - 1);
 
-			if (hasEffect(SpectrumStatusEffects.ETERNAL_SLUMBER)) {
+			if (hasEffect(PastelStatusEffects.ETERNAL_SLUMBER)) {
 				ascend(2);
 			}
 
-			if (hasEffect(SpectrumStatusEffects.FATAL_SLUMBER)) {
+			if (hasEffect(PastelStatusEffects.FATAL_SLUMBER)) {
 				ascend(3);
 			}
 
-			if (hasEffect(SpectrumStatusEffects.SOMNOLENCE) && getEepyTime() == 0) {
+			if (hasEffect(PastelStatusEffects.SOMNOLENCE) && getEepyTime() == 0) {
 				setEepyTime(100);
 			}
 
@@ -377,9 +377,9 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 		var world = level();
 
 		world.addParticle(ParticleTypes.EXPLOSION_EMITTER, getX(), getY(), getZ(), 1.0, 0.0, 0.0);
-		world.explode(this, SpectrumDamageTypes.incandescence(world), null, getX(), getY(), getZ(), 10F * blastMod, true, Level.ExplosionInteraction.MOB);
+		world.explode(this, PastelDamageTypes.incandescence(world), null, getX(), getY(), getZ(), 10F * blastMod, true, Level.ExplosionInteraction.MOB);
 		playSound(SoundEvents.DRAGON_FIREBALL_EXPLODE, 2F, 0.5F);
-		playSound(SpectrumSoundEvents.DEEP_CRYSTAL_RING, 2F, 0.334F);
+		playSound(PastelSoundEvents.DEEP_CRYSTAL_RING, 2F, 0.334F);
 		playSound(SoundEvents.ENDER_DRAGON_AMBIENT, 1F, 2F);
 
 		((ServerLevel) world).getPlayers(p -> p.distanceTo(this) < 64).forEach( p -> {
@@ -432,8 +432,8 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 					continue;
 				}
 
-				if (candidate.is(SpectrumBlockTags.BASE_STONE_DEEPER_DOWN)) {
-					world.setBlockAndUpdate(transmutePos, SpectrumBlocks.BLACK_MATERIA.get().defaultBlockState());
+				if (candidate.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN)) {
+					world.setBlockAndUpdate(transmutePos, PastelBlocks.BLACK_MATERIA.get().defaultBlockState());
 					continue;
 				}
 
@@ -630,7 +630,7 @@ public class KindlingEntity extends AbstractHorse implements RangedAttackMob, Ne
 		kindlingCoughEntity.shoot(d, e + g, f, 1.5F, 10.0F);
 		
 		if (!this.isSilent()) {
-			this.playSound(SpectrumSoundEvents.ENTITY_KINDLING_SHOOT, 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
+			this.playSound(PastelSoundEvents.ENTITY_KINDLING_SHOOT, 1.0F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.2F);
 		}
 		
 		this.level().addFreshEntity(kindlingCoughEntity);

@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.fluid;
 
 import earth.terrarium.pastel.blocks.decay.BlackMateriaBlock;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluidTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -22,11 +22,11 @@ import net.minecraft.world.level.pathfinder.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MidnightSolutionFluidBlock extends SpectrumFluidBlock {
+public class MidnightSolutionFluidBlock extends PastelFluidBlock {
 
-	public static final BlockState SPREAD_BLOCKSTATE = SpectrumBlocks.BLACK_MATERIA.get().defaultBlockState().setValue(BlackMateriaBlock.AGE, 0);
+	public static final BlockState SPREAD_BLOCKSTATE = PastelBlocks.BLACK_MATERIA.get().defaultBlockState().setValue(BlackMateriaBlock.AGE, 0);
 	
-	public MidnightSolutionFluidBlock(SpectrumFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
+	public MidnightSolutionFluidBlock(PastelFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
 		super(fluid, ultrawarmReplacementBlockState, settings);
 	}
 
@@ -38,18 +38,18 @@ public class MidnightSolutionFluidBlock extends SpectrumFluidBlock {
 
 	@Override
 	public SimpleParticleType getSplashParticle() {
-		return SpectrumParticleTypes.MIDNIGHT_SOLUTION_SPLASH;
+		return PastelParticleTypes.MIDNIGHT_SOLUTION_SPLASH;
 	}
 
 	@Override
 	public Tuple<SimpleParticleType, SimpleParticleType> getFishingParticles() {
-		return new Tuple<>(SpectrumParticleTypes.MIDNIGHT_SOLUTION_SPLASH, SpectrumParticleTypes.MIDNIGHT_SOLUTION_FISHING);
+		return new Tuple<>(PastelParticleTypes.MIDNIGHT_SOLUTION_SPLASH, PastelParticleTypes.MIDNIGHT_SOLUTION_FISHING);
 	}
 
 	public static boolean tryConvertNeighbor(@NotNull Level world, BlockPos fromPos) {
 		FluidState fluidState = world.getFluidState(fromPos);
-		if (!fluidState.isEmpty() && fluidState.is(SpectrumFluidTags.MIDNIGHT_SOLUTION_CONVERTED)) {
-			world.setBlockAndUpdate(fromPos, SpectrumBlocks.MIDNIGHT_SOLUTION.get().defaultBlockState());
+		if (!fluidState.isEmpty() && fluidState.is(PastelFluidTags.MIDNIGHT_SOLUTION_CONVERTED)) {
+			world.setBlockAndUpdate(fromPos, PastelBlocks.MIDNIGHT_SOLUTION.get().defaultBlockState());
 			fizz(world, fromPos);
 			return true;
 		}
@@ -64,7 +64,7 @@ public class MidnightSolutionFluidBlock extends SpectrumFluidBlock {
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(state, world, pos, random);
 		if (!world.getBlockState(pos.above()).isRedstoneConductor(world, pos.above()) && random.nextFloat() < 0.03F) {
-			world.addParticle(SpectrumParticleTypes.VOID_FOG, pos.getX() + random.nextDouble(), pos.getY() + 1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
+			world.addParticle(PastelParticleTypes.VOID_FOG, pos.getX() + random.nextDouble(), pos.getY() + 1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
 		}
 	}
 
@@ -104,7 +104,7 @@ public class MidnightSolutionFluidBlock extends SpectrumFluidBlock {
 					world.setBlockAndUpdate(pos, SPREAD_BLOCKSTATE);
 					fireExtinguishEvent(world, pos);
 				} else {
-					if (!neighborFluidState.is(this.fluid) && !neighborFluidState.is(SpectrumFluidTags.MIDNIGHT_SOLUTION_CONVERTED) && !world.getBlockState(neighborPos).is(this)) {
+					if (!neighborFluidState.is(this.fluid) && !neighborFluidState.is(PastelFluidTags.MIDNIGHT_SOLUTION_CONVERTED) && !world.getBlockState(neighborPos).is(this)) {
 						world.setBlockAndUpdate(pos, SPREAD_BLOCKSTATE);
 						fireExtinguishEvent(world, neighborPos);
 					}

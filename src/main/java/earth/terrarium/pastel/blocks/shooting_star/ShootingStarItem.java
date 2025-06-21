@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.shooting_star;
 
 import earth.terrarium.pastel.components.ShootingStarComponent;
 import earth.terrarium.pastel.entity.entity.ShootingStarEntity;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
@@ -34,7 +34,7 @@ public class ShootingStarItem extends BlockItem implements ShootingStar {
 	
 	public static @NotNull ItemStack getWithRemainingHits(@NotNull ItemStack stack, int remainingHits, boolean hardened) {
 		ShootingStarComponent component = new ShootingStarComponent(remainingHits, hardened);
-		stack.set(SpectrumDataComponentTypes.SHOOTING_STAR, component);
+		stack.set(PastelDataComponentTypes.SHOOTING_STAR, component);
 		return stack;
 	}
 	
@@ -89,22 +89,22 @@ public class ShootingStarItem extends BlockItem implements ShootingStar {
 	}
 	
 	public static boolean isHardened(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT).hardened();
+		return stack.getOrDefault(PastelDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT).hardened();
 	}
 	
 	public static int getRemainingHits(@NotNull ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT).remainingHits();
+		return stack.getOrDefault(PastelDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT).remainingHits();
 	}
 	
 	public static void setHardened(ItemStack stack) {
-		ShootingStarComponent component = stack.getOrDefault(SpectrumDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT);
+		ShootingStarComponent component = stack.getOrDefault(PastelDataComponentTypes.SHOOTING_STAR, ShootingStarComponent.DEFAULT);
 		if (component == null) {
 			component = new ShootingStarComponent(ShootingStarComponent.DEFAULT.remainingHits(), true);
 		} else {
 			component = new ShootingStarComponent(component.remainingHits(), true);
 		}
 		
-		stack.set(SpectrumDataComponentTypes.SHOOTING_STAR, component);
+		stack.set(PastelDataComponentTypes.SHOOTING_STAR, component);
 	}
 
 }

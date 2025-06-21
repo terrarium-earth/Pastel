@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import earth.terrarium.pastel.items.food.DrinkItem;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -59,7 +59,7 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
 	private boolean tryApplyOil(ItemStack oilsStack, ItemStack foodStack, Player user) {
 		if (foodStack.getItem() instanceof DrinkItem)
 			return false;
-		if (foodStack.has(SpectrumDataComponentTypes.CONCEALED_EFFECT))
+		if (foodStack.has(PastelDataComponentTypes.CONCEALED_EFFECT))
 			return false;
 		
 		var effect = InkPoweredPotionFillable.getEffects(oilsStack).getFirst();
@@ -76,7 +76,7 @@ public class ConcealingOilsItem extends DrinkItem implements InkPoweredPotionFil
 			return false;
 		
 		foodStack.set(DataComponents.PROFILE, new ResolvableProfile(user.getGameProfile()));
-		foodStack.set(SpectrumDataComponentTypes.CONCEALED_EFFECT, effect.getStatusEffectInstance());
+		foodStack.set(PastelDataComponentTypes.CONCEALED_EFFECT, effect.getStatusEffectInstance());
 		return true;
 	}
 	

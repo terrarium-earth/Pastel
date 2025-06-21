@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.particle.client;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Camera;
@@ -29,7 +29,7 @@ public class RainRippleParticle extends TextureSheetParticle {
 		quadSize = 0.2F + random.nextFloat() * 0.1F;
 		alphaMult = 0.75F + random.nextFloat() * 0.25F;
 		alpha = alphaMult;
-		var waterColor = SpectrumColorHelper.colorIntToVec(BiomeColors.getAverageWaterColor(level, BlockPos.containing(x, y, z)));
+		var waterColor = ColorHelper.colorIntToVec(BiomeColors.getAverageWaterColor(level, BlockPos.containing(x, y, z)));
 		rCol = waterColor.x;
 		gCol = waterColor.y;
 		bCol = waterColor.z;

@@ -1,13 +1,13 @@
 package earth.terrarium.pastel.blocks.decay;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.DeeperDownPortalBlock;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDimensions;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
@@ -23,7 +23,7 @@ public class RuinBlock extends DecayBlock {
 	public static final MapCodec<RuinBlock> CODEC = simpleCodec(RuinBlock::new);
 	
 	public RuinBlock(Properties settings) {
-		super(settings, SpectrumCommon.CONFIG.RuinDecayTickRate, SpectrumCommon.CONFIG.RuinCanDestroyBlockEntities, 3, 5F);
+		super(settings, PastelCommon.CONFIG.RuinDecayTickRate, PastelCommon.CONFIG.RuinCanDestroyBlockEntities, 3, 5F);
 		registerDefaultState(getStateDefinition().any().setValue(CONVERSION, Conversion.NONE));
 	}
 
@@ -37,7 +37,7 @@ public class RuinBlock extends DecayBlock {
 		super.setPlacedBy(world, pos, state, placer, itemStack);
 		
 		if (!world.isClientSide) {
-			world.playSound(null, pos, SpectrumSoundEvents.RUIN_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
+			world.playSound(null, pos, PastelSoundEvents.RUIN_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
 		} else {
 			RandomSource random = world.getRandom();
 			world.addParticle(ParticleTypes.EXPLOSION, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ((-1.0F + random.nextFloat() * 2.0F) / 12.0F), 0.05, ((-1.0F + random.nextFloat() * 2.0F) / 12.0F));
@@ -51,13 +51,13 @@ public class RuinBlock extends DecayBlock {
 	
 	@Override
 	protected @Nullable BlockState getSpreadState(BlockState stateToSpreadFrom, BlockState stateToSpreadTo, Level world, BlockPos stateToSpreadToPos) {
-		if (stateToSpreadTo.getCollisionShape(world, stateToSpreadToPos).isEmpty() || stateToSpreadTo.is(SpectrumBlockTags.RUIN_SAFE)) {
+		if (stateToSpreadTo.getCollisionShape(world, stateToSpreadToPos).isEmpty() || stateToSpreadTo.is(PastelBlockTags.RUIN_SAFE)) {
 			return null;
 		}
 		
-		if (stateToSpreadTo.is(SpectrumBlockTags.RUIN_SPECIAL_CONVERSIONS)) {
+		if (stateToSpreadTo.is(PastelBlockTags.RUIN_SPECIAL_CONVERSIONS)) {
 			return this.defaultBlockState().setValue(CONVERSION, Conversion.SPECIAL);
-		} else if (stateToSpreadTo.is(SpectrumBlockTags.RUIN_CONVERSIONS)) {
+		} else if (stateToSpreadTo.is(PastelBlockTags.RUIN_CONVERSIONS)) {
 			// Protect the end portal to not lock players in the dim
 			if (world.dimension().equals(Level.END) && Math.abs(stateToSpreadToPos.getX()) < 8 && Math.abs(stateToSpreadToPos.getZ()) < 8) {
 				return null;
@@ -75,14 +75,14 @@ public class RuinBlock extends DecayBlock {
 		if (state.getValue(RuinBlock.CONVERSION) != Conversion.NONE && newState.isAir()) {
 			if (world.dimension() == Level.NETHER) {
 				if (pos.getY() == world.getMinBuildHeight() + world.dimensionType().logicalHeight() - 1) { // Attempt to match the nether ceiling. Tricky...
-					world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
+					world.setBlock(pos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
 				} else if (pos.getY() == world.getMinBuildHeight()) {
-					world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
+					world.setBlock(pos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
 				}
 			} else if (world.dimension() == Level.OVERWORLD && pos.getY() == world.getMinBuildHeight()) {
-				world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
-			} else if (world.dimension() == SpectrumDimensions.DIMENSION_KEY && pos.getY() == world.getMaxBuildHeight() - 1) { // highest layer cannot be built on
-				world.setBlock(pos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
+				world.setBlock(pos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
+			} else if (world.dimension() == PastelDimensions.DIMENSION_KEY && pos.getY() == world.getMaxBuildHeight() - 1) { // highest layer cannot be built on
+				world.setBlock(pos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
 			}
 		}
 	}

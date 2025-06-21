@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import earth.terrarium.pastel.api.interaction.ResonanceProcessor;
 import earth.terrarium.pastel.helpers.enchantments.ExuberanceHelper;
 import earth.terrarium.pastel.helpers.enchantments.FoundryHelper;
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -35,32 +35,32 @@ import java.util.List;
 public abstract class BlockMixin {
 	
 	@Unique
-	@Nullable Player spectrum$breakingPlayer;
+	@Nullable Player breakingPlayer;
 	
 	@ModifyReturnValue(method = "getDrops(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;", at = @At("RETURN"))
-	private static List<ItemStack> spectrum$getDroppedStacks(List<ItemStack> original, BlockState state, ServerLevel world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack) {
+	private static List<ItemStack> getDroppedStacks(List<ItemStack> original, BlockState state, ServerLevel world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack) {
 		List<ItemStack> droppedStacks = original;
 		
 		// Voiding curse: no drops
-		if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.NO_BLOCK_DROPS)) {
+		if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.NO_BLOCK_DROPS)) {
 			world.sendParticles(ParticleTypes.SMOKE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 10, 0.5, 0.5, 0.5, 0.05);
 			droppedStacks.clear();
 			return droppedStacks;
 		}
 		
 		// Resonance: drop self or modify drops for some items
-		if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.RESONANT_BLOCK_DROPS)) {
+		if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.RESONANT_BLOCK_DROPS)) {
 			ResonanceProcessor.applyResonance(world.registryAccess(), state, blockEntity, droppedStacks);
 		}
 		
 		if (!droppedStacks.isEmpty()) {
 			// Foundry enchant: try smelting recipe for each stack
-			if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.SMELTS_MORE_LOOT)) {
+			if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.SMELTS_MORE_LOOT)) {
 				droppedStacks = FoundryHelper.applyFoundry(world, droppedStacks);
 			}
 			
 			// Inventory insertion enchant: add it to the player's inventory if there is room
-			if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.INVENTORY_INSERTION_EFFECT)) {
+			if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.INVENTORY_INSERTION_EFFECT)) {
 				List<ItemStack> leftoverReturnStacks = new ArrayList<>();
 				
 				if (entity instanceof Player playerEntity) {
@@ -93,16 +93,16 @@ public abstract class BlockMixin {
 	}
 	
 	@ModifyArg(method = "popExperience", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ExperienceOrb;award(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/phys/Vec3;I)V"), index = 2)
-	private int spectrum$applyExuberance(int originalXP) {
-		if (spectrum$breakingPlayer == null) {
+	private int applyExuberance(int originalXP) {
+		if (breakingPlayer == null) {
 			return originalXP;
 		}
-		return (int) (originalXP * ExuberanceHelper.getExuberanceMod(spectrum$breakingPlayer));
+		return (int) (originalXP * ExuberanceHelper.getExuberanceMod(breakingPlayer));
 	}
 	
 	@Inject(method = "playerDestroy", at = @At("HEAD"))
-	public void spectrum$afterBreak(Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo callbackInfo) {
-		spectrum$breakingPlayer = player;
+	public void afterBreak(Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack, CallbackInfo callbackInfo) {
+		breakingPlayer = player;
 	}
 	
 }

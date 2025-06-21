@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.predicates;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.entity.SpectrumEntitySubPredicateTypes;
+import earth.terrarium.pastel.entity.PastelEntitySubPredicateTypes;
 import earth.terrarium.pastel.entity.entity.LizardEntity;
 import earth.terrarium.pastel.entity.variants.LizardFrillVariant;
 import earth.terrarium.pastel.entity.variants.LizardHornVariant;
@@ -36,7 +36,7 @@ public record LizardPredicate(Optional<InkColor> color, Optional<LizardFrillVari
 
 	@Override
 	public MapCodec<LizardPredicate> codec() {
-		return SpectrumEntitySubPredicateTypes.LIZARD;
+		return PastelEntitySubPredicateTypes.LIZARD;
 	}
 	
 }

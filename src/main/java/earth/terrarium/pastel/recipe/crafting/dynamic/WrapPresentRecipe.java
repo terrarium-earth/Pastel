@@ -3,8 +3,8 @@ package earth.terrarium.pastel.recipe.crafting.dynamic;
 import earth.terrarium.pastel.blocks.present.PresentBlock;
 import earth.terrarium.pastel.blocks.present.PresentBlockItem;
 import earth.terrarium.pastel.items.PigmentItem;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.tags.ItemTags;
@@ -32,13 +32,13 @@ public class WrapPresentRecipe extends CustomRecipe {
 	@Override
 	public NonNullList<Ingredient> getIngredients() {
 		NonNullList<Ingredient> list = NonNullList.withSize(1, Ingredient.EMPTY);
-		list.set(0, Ingredient.of(SpectrumBlocks.PRESENT.get().asItem().getDefaultInstance()));
+		list.set(0, Ingredient.of(PastelBlocks.PRESENT.get().asItem().getDefaultInstance()));
 		return list;
 	}
 	
 	@Override
 	public ItemStack getResultItem(HolderLookup.Provider registryLookup) {
-		ItemStack stack = SpectrumBlocks.PRESENT.get().asItem().getDefaultInstance();
+		ItemStack stack = PastelBlocks.PRESENT.get().asItem().getDefaultInstance();
 		PresentBlockItem.wrap(stack, PresentBlock.WrappingPaper.RED, Map.of());
 		return stack;
 	}
@@ -130,7 +130,7 @@ public class WrapPresentRecipe extends CustomRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.WRAP_PRESENT_SERIALIZER;
+		return PastelRecipeSerializers.WRAP_PRESENT_SERIALIZER;
 	}
 	
 }

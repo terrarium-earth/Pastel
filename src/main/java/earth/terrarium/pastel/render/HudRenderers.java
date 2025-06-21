@@ -2,7 +2,7 @@ package earth.terrarium.pastel.render;
 
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.azure_dike.DikeShieldData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import net.minecraft.client.*;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.client.gui.*;
 @OnlyIn(Dist.CLIENT)
 public class HudRenderers {
 
-	public static final ResourceLocation PLAYER_DIKE = SpectrumCommon.locate("player_dike");
+	public static final ResourceLocation PLAYER_DIKE = PastelCommon.locate("player_dike");
 	
 	private static final Component missingInkText = Component.translatable("item.pastel.constructors_staff.tooltip.missing_ink");
 	private static final Component noneText = Component.translatable("item.pastel.constructors_staff.tooltip.none_in_inventory");
@@ -36,8 +36,8 @@ public class HudRenderers {
 			renderSelectedStaffStack(event.getGuiGraphics());
 	}
 	
-	private static final int SPECTRUM$_DIKE_HEARTS_PER_ROW = 10;
-	private static final int SPECTRUM$_DIKE_PER_ROW = 20;
+	private static final int DIKE_HEARTS_PER_ROW = 10;
+	private static final int DIKE_PER_ROW = 20;
 
 	private static class AzureDikeLayer implements LayeredDraw.Layer {
 
@@ -60,18 +60,18 @@ public class HudRenderers {
 					blink = (cameraPlayer.level().getGameTime() >> 2) % 2 == 0;
 				}
 
-				int totalDikeCanisters = (maxCharges - 1) / SPECTRUM$_DIKE_PER_ROW;
-				int filledDikeCanisters = (charges - 1) / SPECTRUM$_DIKE_PER_ROW;
-				int displayedDike = (charges - 1) % SPECTRUM$_DIKE_PER_ROW + 1;
-				int dikeHeartOutlinesThisRow = totalDikeCanisters > filledDikeCanisters ? SPECTRUM$_DIKE_HEARTS_PER_ROW : (((maxCharges - 1) % SPECTRUM$_DIKE_PER_ROW / 2) + 1);
+				int totalDikeCanisters = (maxCharges - 1) / DIKE_PER_ROW;
+				int filledDikeCanisters = (charges - 1) / DIKE_PER_ROW;
+				int displayedDike = (charges - 1) % DIKE_PER_ROW + 1;
+				int dikeHeartOutlinesThisRow = totalDikeCanisters > filledDikeCanisters ? DIKE_HEARTS_PER_ROW : (((maxCharges - 1) % DIKE_PER_ROW / 2) + 1);
 
 				boolean renderBackRow = filledDikeCanisters > 0;
 				boolean hasArmor = cameraPlayer.getArmorValue() > 0;
 
 				var texture = DikeShieldData.AZURE_DIKE_BAR_TEXTURE;
 
-				x += SpectrumCommon.CONFIG.AzureDikeHudOffsetX;
-				y += hasArmor ? SpectrumCommon.CONFIG.AzureDikeHudOffsetYWithArmor : SpectrumCommon.CONFIG.AzureDikeHudOffsetY;
+				x += PastelCommon.CONFIG.AzureDikeHudOffsetX;
+				y += hasArmor ? PastelCommon.CONFIG.AzureDikeHudOffsetYWithArmor : PastelCommon.CONFIG.AzureDikeHudOffsetY;
 
 				RenderSystem.enableBlend();
 

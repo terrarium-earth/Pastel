@@ -9,7 +9,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.MapLike;
 import com.mojang.serialization.RecordBuilder;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.mixin.accessors.CachedRegistryInfoGetterAccessor;
 import earth.terrarium.pastel.mixin.accessors.RegistryOpsAccessor;
 import net.minecraft.core.HolderLookup;
@@ -41,7 +41,7 @@ public class CodecHelper {
 			frac -> new com.mojang.datafixers.util.Pair<>(frac.getNumerator(), frac.getDenominator())
 	);
 	
-	public static Codec<ResourceLocation> SPECTRUM_DEFAULTED_IDENTIFIER = Codec.STRING.xmap(SpectrumCommon::ofSpectrumDefaulted, ResourceLocation::toString);
+	public static Codec<ResourceLocation> SPECTRUM_DEFAULTED_IDENTIFIER = Codec.STRING.xmap(PastelCommon::ofPastel, ResourceLocation::toString);
 	
 	public static MapCodec<HolderLookup.Provider> LOOKUP = new MapCodec<>() {
 		@Override

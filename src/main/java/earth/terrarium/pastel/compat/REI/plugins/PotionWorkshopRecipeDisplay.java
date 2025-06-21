@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.GatedSpectrumDisplay;
+import earth.terrarium.pastel.compat.REI.PastelDisplay;
 import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
@@ -9,7 +9,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.Collections;
 
-public abstract class PotionWorkshopRecipeDisplay extends GatedSpectrumDisplay {
+public abstract class PotionWorkshopRecipeDisplay extends PastelDisplay {
 	
 	protected final int craftingTime;
 	

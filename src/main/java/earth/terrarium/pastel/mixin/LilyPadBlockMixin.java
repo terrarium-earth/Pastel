@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import earth.terrarium.pastel.registries.SpectrumFluids;
+import earth.terrarium.pastel.registries.PastelFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.WaterlilyBlock;
@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(WaterlilyBlock.class)
 public class LilyPadBlockMixin {
     @ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
-    public boolean spectrum$extendLilyPlaceables(boolean original, BlockState floor, BlockGetter world, BlockPos pos) {
+    public boolean extendLilyPlaceables(boolean original, BlockState floor, BlockGetter world, BlockPos pos) {
         if (original)
             return true;
         FluidState fluidState = world.getFluidState(pos);
         FluidState fluidState2 = world.getFluidState(pos.above());
-		return (fluidState.getType() == SpectrumFluids.GOO.get() || fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL.get()) && fluidState2.getType() == Fluids.EMPTY;
+		return (fluidState.getType() == PastelFluids.GOO.get() || fluidState.getType() == PastelFluids.LIQUID_CRYSTAL.get()) && fluidState2.getType() == Fluids.EMPTY;
     }
 }

@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.status_effects;
 
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
-import earth.terrarium.pastel.registries.SpectrumEntityAttributes;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
-import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelEntityAttributes;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
+import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -29,7 +29,7 @@ public class SleepStatusEffect extends MobEffect {
 
         var type = entity.getType();
         
-        if (sleepEffect == null || type.is(SpectrumEntityTypeTags.SOULLESS))
+        if (sleepEffect == null || type.is(PastelEntityTypeTags.SOULLESS))
             return Float.MAX_VALUE;
 
         float scaling;
@@ -37,12 +37,12 @@ public class SleepStatusEffect extends MobEffect {
             scaling = (float) MiscPlayerData.get(player).getLastSyncedSleepPotency();
         }
         else {
-            scaling = (float) entity.getAttributeValue(SpectrumEntityAttributes.MENTAL_PRESENCE);
+            scaling = (float) entity.getAttributeValue(PastelEntityAttributes.MENTAL_PRESENCE);
         }
 
-        if (type.is(SpectrumEntityTypeTags.SLEEP_WEAK)) {
+        if (type.is(PastelEntityTypeTags.SLEEP_WEAK)) {
             scaling /= 3F;
-        } else if (type.is(SpectrumEntityTypeTags.SLEEP_RESISTANT)) {
+        } else if (type.is(PastelEntityTypeTags.SLEEP_RESISTANT)) {
             scaling *= 2.0F;
         } else if (isImmuneish(entity)) {
             scaling *= 10F;
@@ -53,21 +53,21 @@ public class SleepStatusEffect extends MobEffect {
     
     // TODO: can the tag check be implemented into the entities base attribute modifier somehow?
     public static boolean isImmuneish(LivingEntity entity) {
-        if (entity.hasEffect(SpectrumStatusEffects.FRENZY))
+        if (entity.hasEffect(PastelStatusEffects.FRENZY))
             return true;
         
         var type = entity.getType();
-        if (type.is(SpectrumEntityTypeTags.SLEEP_WEAK))
+        if (type.is(PastelEntityTypeTags.SLEEP_WEAK))
             return false;
         
-        return type.is(SpectrumEntityTypeTags.SLEEP_IMMUNEISH) || isConstruct(type);
+        return type.is(PastelEntityTypeTags.SLEEP_IMMUNEISH) || isConstruct(type);
     }
 	
 	/**
      * @return -1 = false
      */
     public static float getGeneralSleepResistanceIfEntityHasSoporificEffect(LivingEntity entity) {
-        if (!isConstruct(entity.getType()) && SpectrumStatusEffectTags.hasEffectWithTag(entity, SpectrumStatusEffectTags.SOPORIFIC)) {
+        if (!isConstruct(entity.getType()) && PastelStatusEffectTags.hasEffectWithTag(entity, PastelStatusEffectTags.SOPORIFIC)) {
             return getSleepResistance(entity.getEffect(getStrongestSleepEffect(entity)), entity);
         }
         return -1F;
@@ -89,18 +89,18 @@ public class SleepStatusEffect extends MobEffect {
     }
 	
 	private static boolean isConstruct(EntityType<?> type) {
-		return type.is(SpectrumEntityTypeTags.SOULLESS);
+		return type.is(PastelEntityTypeTags.SOULLESS);
 	}
     
     public static @Nullable Holder<MobEffect> getStrongestSleepEffect(LivingEntity entity) {
-        if (entity.hasEffect(SpectrumStatusEffects.FATAL_SLUMBER)) {
-            return SpectrumStatusEffects.FATAL_SLUMBER;
+        if (entity.hasEffect(PastelStatusEffects.FATAL_SLUMBER)) {
+            return PastelStatusEffects.FATAL_SLUMBER;
         }
-        else if (entity.hasEffect(SpectrumStatusEffects.ETERNAL_SLUMBER)) {
-            return SpectrumStatusEffects.ETERNAL_SLUMBER;
+        else if (entity.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER)) {
+            return PastelStatusEffects.ETERNAL_SLUMBER;
         }
-        else if (entity.hasEffect(SpectrumStatusEffects.SOMNOLENCE)) {
-            return SpectrumStatusEffects.SOMNOLENCE;
+        else if (entity.hasEffect(PastelStatusEffects.SOMNOLENCE)) {
+            return PastelStatusEffects.SOMNOLENCE;
         }
         return null;
     }

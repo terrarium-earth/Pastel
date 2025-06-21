@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.predicates;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.entity.SpectrumEntitySubPredicateTypes;
+import earth.terrarium.pastel.entity.PastelEntitySubPredicateTypes;
 import earth.terrarium.pastel.entity.entity.EggLayingWoolyPigEntity;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.server.level.ServerLevel;
@@ -35,7 +35,7 @@ public record EggLayingWoolyPigPredicate(Optional<DyeColor> color, Optional<Bool
 
 	@Override
 	public MapCodec<EggLayingWoolyPigPredicate> codec() {
-		return SpectrumEntitySubPredicateTypes.EGG_LAYING_WOOLY_PIG;
+		return PastelEntitySubPredicateTypes.EGG_LAYING_WOOLY_PIG;
 	}
 
 }

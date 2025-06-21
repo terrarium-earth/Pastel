@@ -1,16 +1,16 @@
 package earth.terrarium.pastel.recipe.fusion_shrine.dynamic;
 
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItemTags;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.FusionShrineRecipeWorldEffect;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.fusion_shrine.FusionShrineBlockEntity;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStarItem;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -25,23 +25,23 @@ import java.util.Optional;
 
 public class ShootingStarHardeningRecipe extends FusionShrineRecipe {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("collect_all_shooting_star_variants");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("collect_all_shooting_star_variants");
 	public static final Component DESCRIPTION = Component.translatable("pastel.recipe.fusion_shrine.explanation.shooting_star_hardening");
 	
 	public ShootingStarHardeningRecipe() {
-		super("", false, Optional.of(UNLOCK_IDENTIFIER), List.of(IngredientStack.ofTag(SpectrumItemTags.SHOOTING_STARS), IngredientStack.ofItems(Items.DIAMOND)), FluidIngredient.of(Fluids.WATER), getHardenedShootingStar(),
+		super("", false, Optional.of(UNLOCK_IDENTIFIER), List.of(IngredientStack.ofTag(PastelItemTags.SHOOTING_STARS), IngredientStack.ofItems(Items.DIAMOND)), FluidIngredient.of(Fluids.WATER), getHardenedShootingStar(),
 				5, 100, true, true, true, new ArrayList<>(), FusionShrineRecipeWorldEffect.NOTHING, new ArrayList<>(), FusionShrineRecipeWorldEffect.NOTHING, DESCRIPTION);
 	}
 	
 	private static ItemStack getHardenedShootingStar() {
-		ItemStack stack = SpectrumBlocks.GLISTERING_SHOOTING_STAR.get().asItem().getDefaultInstance();
+		ItemStack stack = PastelBlocks.GLISTERING_SHOOTING_STAR.get().asItem().getDefaultInstance();
 		ShootingStarItem.setHardened(stack);
 		return stack;
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SHOOTING_STAR_HARDENING;
+		return PastelRecipeSerializers.SHOOTING_STAR_HARDENING;
 	}
 	
 	@Override

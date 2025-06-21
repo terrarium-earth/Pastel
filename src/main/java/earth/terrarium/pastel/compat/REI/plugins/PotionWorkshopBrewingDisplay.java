@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopBrewingRecipe;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
@@ -25,7 +25,7 @@ public class PotionWorkshopBrewingDisplay extends PotionWorkshopRecipeDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.POTION_WORKSHOP_BREWING;
+		return PastelPlugins.POTION_WORKSHOP_BREWING;
 	}
 	
 	@Override

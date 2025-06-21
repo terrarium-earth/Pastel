@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class HummingstoneHymnCriterion extends SimpleCriterionTrigger<HummingstoneHymnCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("hummingstone_hymn");
+	public static final ResourceLocation ID = PastelCommon.locate("hummingstone_hymn");
 	
 	public void trigger(ServerPlayer player, ServerLevel world, BlockPos pos) {
 		this.trigger(player, (conditions) -> conditions.matches(world, pos));

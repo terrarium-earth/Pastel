@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.progression.toast;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.RenderHelper;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -30,11 +30,11 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class UnlockedRecipeToast implements Toast {
 	
-	private final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/gui/toasts.png");
+	private final ResourceLocation TEXTURE = PastelCommon.locate("textures/gui/toasts.png");
 	private final Component title;
 	private final Component text;
 	private final List<ItemStack> itemStacks;
-	private final SoundEvent soundEvent = SpectrumSoundEvents.NEW_RECIPE;
+	private final SoundEvent soundEvent = PastelSoundEvents.NEW_RECIPE;
 	private boolean soundPlayed;
 	
 	public UnlockedRecipeToast(Component title, Component text, List<ItemStack> itemStacks) {
@@ -94,7 +94,7 @@ public class UnlockedRecipeToast implements Toast {
 		drawContext.drawString(textRenderer, title, 30, 7, RenderHelper.GREEN_COLOR, false);
 		drawContext.drawString(textRenderer, text, 30, 18, 0, false);
 		
-		long toastTimeMilliseconds = SpectrumCommon.CONFIG.ToastTimeMilliseconds;
+		long toastTimeMilliseconds = PastelCommon.CONFIG.ToastTimeMilliseconds;
 		if (!this.soundPlayed && startTime > 0L) {
 			this.soundPlayed = true;
 			if (this.soundEvent != null) {

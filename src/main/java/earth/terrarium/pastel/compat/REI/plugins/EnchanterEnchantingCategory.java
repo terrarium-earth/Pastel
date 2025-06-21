@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
@@ -19,7 +19,7 @@ public class EnchanterEnchantingCategory extends EnchanterCategory<EnchanterEnch
 	
 	@Override
 	public CategoryIdentifier<EnchanterEnchantingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.ENCHANTER_CRAFTING;
+		return PastelPlugins.ENCHANTER_CRAFTING;
 	}
 	
 	@Override

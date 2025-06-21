@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.conditional.resonant_lily;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class ResonantLilyBlock extends FlowerBlock implements RevelationAware {
 	
-	public static final ResourceLocation ADVANCEMENT_IDENTIFIER = SpectrumCommon.locate("midgame/collect_resonant_lily");
+	public static final ResourceLocation ADVANCEMENT_IDENTIFIER = PastelCommon.locate("midgame/collect_resonant_lily");
 
 	public static final MapCodec<ResonantLilyBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			EFFECTS_FIELD.forGetter(FlowerBlock::getSuspiciousEffects),

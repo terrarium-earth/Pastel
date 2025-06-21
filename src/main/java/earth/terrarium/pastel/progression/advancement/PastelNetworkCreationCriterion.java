@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class PastelNetworkCreationCriterion extends SimpleCriterionTrigger<PastelNetworkCreationCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("pastel_network_creation");
+	public static final ResourceLocation ID = PastelCommon.locate("pastel_network_creation");
 	
 	public void trigger(ServerPlayer player, ServerPastelNetwork network) {
 		this.trigger(player, (conditions) -> conditions.matches(network.getLoadedNodes(PastelNodeType.CONNECTION).size(), network.getLoadedNodes(PastelNodeType.PROVIDER).size(),

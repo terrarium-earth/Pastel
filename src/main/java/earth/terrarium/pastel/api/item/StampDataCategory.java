@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.api.item;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.resources.ResourceLocation;
 
 public class StampDataCategory {
 
-    public static final StampDataCategory UNIQUE = new StampDataCategory(SpectrumCommon.locate("unique"), true);
+    public static final StampDataCategory UNIQUE = new StampDataCategory(PastelCommon.locate("unique"), true);
     private final ResourceLocation id;
     private final boolean unique;
 

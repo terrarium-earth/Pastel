@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.spirit_sallow;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -34,7 +34,7 @@ public class SpiritSallowLeavesBlock extends LeavesBlock {
 			double velocityY = 0.005 + random.nextFloat() * 0.01;
 			double velocityZ = 0.02 - random.nextFloat() * 0.04;
 			
-			world.addParticle(SpectrumParticleTypes.SPIRIT_SALLOW, startX, startY, startZ, velocityX, velocityY, velocityZ);
+			world.addParticle(PastelParticleTypes.SPIRIT_SALLOW, startX, startY, startZ, velocityX, velocityY, velocityZ);
 		}
 		
 	}

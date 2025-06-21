@@ -1,17 +1,17 @@
 package earth.terrarium.pastel.items.energy;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkStorageItem;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.storage.IndividualCappedInkStorage;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.items.trinkets.SpectrumTrinketItem;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -28,12 +28,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorageItem<IndividualCappedInkStorage>, LoomPatternProvider, ExtendedItemBarProvider {
+public class PigmentPaletteItem extends PastelTrinketItem implements InkStorageItem<IndividualCappedInkStorage>, LoomPatternProvider, ExtendedItemBarProvider {
 	
 	private final long maxEnergyPerColor;
 	
 	public PigmentPaletteItem(Properties settings, long maxEnergyPerColor) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/pigment_palette"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/pigment_palette"));
 		this.maxEnergyPerColor = maxEnergyPerColor;
 	}
 	
@@ -44,7 +44,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 	
 	@Override
 	public IndividualCappedInkStorage getEnergyStorage(ItemStack itemStack) {
-		var storage = itemStack.get(SpectrumDataComponentTypes.INK_STORAGE);
+		var storage = itemStack.get(PastelDataComponentTypes.INK_STORAGE);
 		if (storage != null)
 			return new IndividualCappedInkStorage(storage.maxPerColor(), storage.storedEnergy());
 		return new IndividualCappedInkStorage(this.maxEnergyPerColor);
@@ -67,7 +67,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.PALETTE;
+		return PastelBannerPatterns.PALETTE;
 	}
 	
 	@Override
@@ -85,7 +85,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 		
 		var time = player.level().getGameTime() % 864000;
 		
-		for (InkColor inkColor : SpectrumRegistries.INK_COLOR) {
+		for (InkColor inkColor : PastelRegistries.INK_COLOR) {
 			if (storage.getEnergy(inkColor) > 0)
 				colors.add(inkColor);
 		}
@@ -101,7 +101,7 @@ public class PigmentPaletteItem extends SpectrumTrinketItem implements InkStorag
 		var nextColor = colors.get((int) ((time % (30L * colors.size()) / 30 + 1) % colors.size()));
 		
 		var blendFactor = (((float) time + delta) % 30) / 30F;
-		var blendedColor = SpectrumColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
+		var blendedColor = ColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
 		
 		return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
 	}

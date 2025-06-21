@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import com.google.common.collect.Multimap;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.FixedSingleInkStorage;
 import top.theillusivec4.curios.api.SlotContext;
@@ -9,7 +9,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -21,7 +20,7 @@ import java.util.List;
 public class ExtraReachGlovesItem extends InkDrainTrinketItem {
 	
 	public ExtraReachGlovesItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/gloves_of_dawns_grasp"), InkColors.LIGHT_BLUE);
+		super(settings, PastelCommon.locate("unlocks/trinkets/gloves_of_dawns_grasp"), InkColors.LIGHT_BLUE);
 	}
 
 	@Override
@@ -30,8 +29,8 @@ public class ExtraReachGlovesItem extends InkDrainTrinketItem {
 		super.appendHoverText(stack, context, tooltip, type);
 	}
 	
-	public static ResourceLocation BLOCK_INTERACTION_ATTRIBUTE_ID = SpectrumCommon.locate("gloves_of_dawns_grasp_block_interaction");
-	public static ResourceLocation ENTITY_INTERACTION_ATTRIBUTE_ID = SpectrumCommon.locate("gloves_of_dawns_grasp_entity_interaction");
+	public static ResourceLocation BLOCK_INTERACTION_ATTRIBUTE_ID = PastelCommon.locate("gloves_of_dawns_grasp_block_interaction");
+	public static ResourceLocation ENTITY_INTERACTION_ATTRIBUTE_ID = PastelCommon.locate("gloves_of_dawns_grasp_entity_interaction");
 
 	@Override
 	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {

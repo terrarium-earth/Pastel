@@ -9,16 +9,16 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface TridentEntityAccessor {
 	
 	@Accessor("ID_LOYALTY")
-	static EntityDataAccessor<Byte> spectrum$getLoyalty() {
+	static EntityDataAccessor<Byte> getLoyalty() {
 		return null;
 	}
 	
 	@Accessor("ID_FOIL")
-	static EntityDataAccessor<Boolean> spectrum$getEnchanted() {
+	static EntityDataAccessor<Boolean> getEnchanted() {
 		return null;
 	}
 	
 	@Accessor("dealtDamage")
-	void spectrum$setDealtDamage(boolean dealtDamage);
+	void setDealtDamage(boolean dealtDamage);
 	
 }

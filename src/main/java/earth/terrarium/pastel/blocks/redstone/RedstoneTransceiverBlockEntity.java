@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.blocks.redstone;
 
-import earth.terrarium.pastel.events.SpectrumGameEvents;
+import earth.terrarium.pastel.events.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.WirelessRedstoneSignalEventQueue;
 import earth.terrarium.pastel.helpers.EventHelper;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +28,7 @@ public class RedstoneTransceiverBlockEntity extends BlockEntity implements Wirel
 	private int currentSignal;
 	
 	public RedstoneTransceiverBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.REDSTONE_TRANSCEIVER.get(), blockPos, blockState);
+		super(PastelBlockEntities.REDSTONE_TRANSCEIVER.get(), blockPos, blockState);
 		this.listener = new WirelessRedstoneSignalEventQueue(new BlockPositionSource(this.worldPosition), RANGE, this);
 	}
 	
@@ -43,7 +43,7 @@ public class RedstoneTransceiverBlockEntity extends BlockEntity implements Wirel
 		if (isSender(world, pos)) {
 			if (blockEntity.currentSignal != blockEntity.cachedSignal) {
 				blockEntity.currentSignal = blockEntity.cachedSignal;
-				blockEntity.getLevel().gameEvent(SpectrumGameEvents.WIRELESS_REDSTONE_SIGNAL, blockEntity.getBlockPos(), new GameEvent.Context(null, state));
+				blockEntity.getLevel().gameEvent(PastelGameEvents.WIRELESS_REDSTONE_SIGNAL, blockEntity.getBlockPos(), new GameEvent.Context(null, state));
 			}
 		} else {
 			blockEntity.listener.tick(world);
@@ -82,7 +82,7 @@ public class RedstoneTransceiverBlockEntity extends BlockEntity implements Wirel
 	@Override
 	public boolean canAcceptEvent(Level world, GameEventListener listener, GameEvent.ListenerInfo message, Vec3 sourcePos) {
 		return !this.isRemoved()
-				&& message.gameEvent() == SpectrumGameEvents.WIRELESS_REDSTONE_SIGNAL
+				&& message.gameEvent() == PastelGameEvents.WIRELESS_REDSTONE_SIGNAL
 				&& !isSender(this.getLevel(), this.worldPosition)
 				&& EventHelper.getRedstoneEventDyeColor(message) == getChannel(this.getLevel(), this.worldPosition);
 	}
@@ -99,7 +99,7 @@ public class RedstoneTransceiverBlockEntity extends BlockEntity implements Wirel
 			} else {
 				world.setBlock(worldPosition, world.getBlockState(worldPosition).setValue(RedstoneTransceiverBlock.POWERED, true), Block.UPDATE_CLIENTS);
 			}
-			world.blockUpdated(worldPosition, SpectrumBlocks.REDSTONE_TRANSCEIVER.get());
+			world.blockUpdated(worldPosition, PastelBlocks.REDSTONE_TRANSCEIVER.get());
 		}
 	}
 	

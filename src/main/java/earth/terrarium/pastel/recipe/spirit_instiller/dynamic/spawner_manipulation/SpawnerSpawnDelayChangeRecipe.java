@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -21,7 +21,7 @@ public class SpawnerSpawnDelayChangeRecipe extends SpawnerChangeRecipe {
 	protected static final float EXPONENT = 0.98F;
 	
 	public SpawnerSpawnDelayChangeRecipe() {
-		super(IngredientStack.ofItems(SpectrumItems.MIDNIGHT_CHIP.get(), 4));
+		super(IngredientStack.ofItems(PastelItems.MIDNIGHT_CHIP.get(), 4));
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class SpawnerSpawnDelayChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SPIRIT_INSTILLER_SPAWNER_SPAWN_DELAY_CHANGE;
+		return PastelRecipeSerializers.SPIRIT_INSTILLER_SPAWNER_SPAWN_DELAY_CHANGE;
 	}
 	
 	@Override

@@ -3,8 +3,8 @@ package earth.terrarium.pastel.compat.botania;
 import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.ItemProvider;
-import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.compat.PastelIntegrationPacks;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.entity.player.Player;
@@ -20,14 +20,14 @@ import net.neoforged.neoforge.registries.*;
 import vazkii.botania.common.item.BlackHoleTalismanItem;
 import vazkii.botania.common.item.BotaniaItems;
 
-import static earth.terrarium.pastel.registries.SpectrumItems.item;
-import static earth.terrarium.pastel.registries.SpectrumItems.simple;
+import static earth.terrarium.pastel.registries.PastelItems.item;
+import static earth.terrarium.pastel.registries.PastelItems.simple;
 
 @SuppressWarnings("unused")
-public class BotaniaCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
+public class BotaniaCompat extends PastelIntegrationPacks.ModIntegrationPack {
 	
-	public static DeferredItem<Item> LEAST_BLACK_LOTUS = SpectrumItems.register(simple(item("least_black_lotus", () -> new LeastBlackLotusItem(new Item.Properties()), InkColors.BLACK)));
-	public static DeferredItem<Item> BLACKEST_LOTUS = SpectrumItems.register(simple(item("blackest_lotus", () -> new BlackestLotusItem(new Item.Properties()), InkColors.BLACK)));
+	public static DeferredItem<Item> LEAST_BLACK_LOTUS = PastelItems.register(simple(item("least_black_lotus", () -> new LeastBlackLotusItem(new Item.Properties()), InkColors.BLACK)));
+	public static DeferredItem<Item> BLACKEST_LOTUS = PastelItems.register(simple(item("blackest_lotus", () -> new BlackestLotusItem(new Item.Properties()), InkColors.BLACK)));
 
 	private static void onServerStarted(ServerStartedEvent event) {
 		ItemColors.ITEM_COLORS.registerColorMapping(BotaniaItems.overgrowthSeed, InkColors.LIME);

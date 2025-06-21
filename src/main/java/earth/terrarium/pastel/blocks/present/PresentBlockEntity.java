@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.present;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +26,7 @@ public class PresentBlockEntity extends BlockEntity implements PlayerOwnedWithNa
 	protected int openingTicks = 0;
 
 	public PresentBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.PRESENT.get(), pos, state);
+		super(PastelBlockEntities.PRESENT.get(), pos, state);
 	}
 	
 	public void triggerAdvancement() {

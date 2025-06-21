@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.decoration;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumConfiguredFeatures;
+import earth.terrarium.pastel.registries.PastelConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -50,7 +50,7 @@ public class CloverBlock extends BushBlock implements BonemealableBlock {
 	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		world.registryAccess()
 				.registryOrThrow(Registries.CONFIGURED_FEATURE)
-				.get(SpectrumConfiguredFeatures.CLOVER_PATCH)
+				.get(PastelConfiguredFeatures.CLOVER_PATCH)
 				.place(world, world.getChunkSource().getGenerator(), random, pos);
 	}
 

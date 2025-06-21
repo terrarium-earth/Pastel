@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.cinderhearth.CinderhearthBlockEntity;
 import earth.terrarium.pastel.helpers.RenderHelper;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class CinderhearthScreen extends AbstractContainerScreen<CinderhearthScreenHandler> {
 	
-	protected final ResourceLocation BACKGROUND = SpectrumCommon.locate("textures/gui/container/cinderhearth.png");
+	protected final ResourceLocation BACKGROUND = PastelCommon.locate("textures/gui/container/cinderhearth.png");
 	
 	protected InkMeterWidget inkMeterWidget;
 	

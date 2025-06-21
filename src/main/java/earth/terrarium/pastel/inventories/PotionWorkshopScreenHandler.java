@@ -5,8 +5,8 @@ import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
 import earth.terrarium.pastel.inventories.slots.DisabledSlot;
 import earth.terrarium.pastel.inventories.slots.ReagentSlot;
 import earth.terrarium.pastel.inventories.slots.StackFilterSlot;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -26,11 +26,11 @@ public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
 	private final ContainerData propertyDelegate;
 	
 	public PotionWorkshopScreenHandler(int syncId, Inventory playerInventory) {
-		this(SpectrumScreenHandlerTypes.POTION_WORKSHOP, syncId, playerInventory);
+		this(PastelScreenHandlerTypes.POTION_WORKSHOP, syncId, playerInventory);
 	}
 	
 	public PotionWorkshopScreenHandler(int syncId, Inventory playerInventory, PotionWorkshopBlockEntity potionWorkshopBlockEntity, ContainerData propertyDelegate) {
-		this(SpectrumScreenHandlerTypes.POTION_WORKSHOP, syncId, playerInventory, potionWorkshopBlockEntity, propertyDelegate);
+		this(PastelScreenHandlerTypes.POTION_WORKSHOP, syncId, playerInventory, potionWorkshopBlockEntity, propertyDelegate);
 	}
 	
 	public PotionWorkshopScreenHandler(MenuType<?> type, int i, Inventory playerInventory) {
@@ -50,7 +50,7 @@ public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
 		inventory.startOpen(playerInventory.player);
 		
 		// mermaids gem slot
-		this.addSlot(new StackFilterSlot(inventory, 0, 26, 85, SpectrumItems.MERMAIDS_GEM.get()));
+		this.addSlot(new StackFilterSlot(inventory, 0, 26, 85, PastelItems.MERMAIDS_GEM.get()));
 		
 		// base ingredient inventory
 		this.addSlot(new Slot(inventory, 1, 134, 41));
@@ -61,7 +61,7 @@ public class PotionWorkshopScreenHandler extends AbstractContainerMenu {
 		this.addSlot(new Slot(inventory, 4, 41, 42));
 		
 		// reagent slots
-		if (AdvancementHelper.hasAdvancement(playerInventory.player, SpectrumAdvancements.FOURTH_BREWING_SLOT)) {
+		if (AdvancementHelper.hasAdvancement(playerInventory.player, PastelAdvancements.FOURTH_BREWING_SLOT)) {
 			this.addSlot(new ReagentSlot(inventory, 5, 51, 19));
 			this.addSlot(new ReagentSlot(inventory, 6, 74, 19));
 			this.addSlot(new ReagentSlot(inventory, 7, 97, 19));

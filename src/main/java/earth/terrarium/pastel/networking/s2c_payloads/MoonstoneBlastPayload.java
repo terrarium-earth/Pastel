@@ -1,18 +1,12 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
-import net.minecraft.network.protocol.*;
-import net.minecraft.network.protocol.common.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -25,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
 
 public record MoonstoneBlastPayload(double x, double y, double z, float power, float knockbackMod, Vec3 playerVelocity) implements CustomPacketPayload {
 	
-	public static final Type<MoonstoneBlastPayload> ID = SpectrumC2SPackets.makeId("moonstone_blast");
+	public static final Type<MoonstoneBlastPayload> ID = PastelC2SPackets.makeId("moonstone_blast");
 	public static final StreamCodec<FriendlyByteBuf, MoonstoneBlastPayload> CODEC = StreamCodec.composite(
 			ByteBufCodecs.DOUBLE, MoonstoneBlastPayload::x,
 			ByteBufCodecs.DOUBLE, MoonstoneBlastPayload::y,

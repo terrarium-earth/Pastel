@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelItems;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
@@ -14,12 +14,12 @@ public class DragonrotConvertingCategory extends FluidConvertingCategory<Dragonr
 	
 	@Override
 	public CategoryIdentifier<? extends FluidConvertingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.DRAGONROT_CONVERTING;
+		return PastelPlugins.DRAGONROT_CONVERTING;
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.DRAGONROT_BUCKET.get());
+		return EntryStacks.of(PastelItems.DRAGONROT_BUCKET.get());
 	}
 	
 	@Override

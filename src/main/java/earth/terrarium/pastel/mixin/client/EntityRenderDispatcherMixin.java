@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -33,7 +33,7 @@ public abstract class EntityRenderDispatcherMixin {
 	}
 	
 	@Inject(method = "renderFlame", at = @At(value = "HEAD"), cancellable = true)
-	public void spectrum$render(PoseStack matrices, MultiBufferSource vertexConsumers, Entity entity, Quaternionf rotation, CallbackInfo ci) {
+	public void render(PoseStack matrices, MultiBufferSource vertexConsumers, Entity entity, Quaternionf rotation, CallbackInfo ci) {
 		if (entity instanceof LivingEntity livingEntity && PrimordialFireData.isOnPrimordialFire(livingEntity)) {
 			ci.cancel();
 		}
@@ -41,16 +41,16 @@ public abstract class EntityRenderDispatcherMixin {
 	
 	
 	@Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/EntityRenderer;render(Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", shift = At.Shift.AFTER))
-	public <E extends Entity> void spectrum$render(E entity, double x, double y, double z, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, CallbackInfo ci) {
+	public <E extends Entity> void render(E entity, double x, double y, double z, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, CallbackInfo ci) {
 		if (entity instanceof LivingEntity livingEntity && PrimordialFireData.isOnPrimordialFire(livingEntity)) {
-			spectrum$renderPrimordialFire(matrices, vertexConsumers, entity);
+			renderPrimordialFire(matrices, vertexConsumers, entity);
 		}
 	}
 	
 	@Unique
-	private void spectrum$renderPrimordialFire(PoseStack matrices, MultiBufferSource vertexConsumers, Entity entity) {
-		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(SpectrumCommon.locate("block/primordial_fire_0"));
-		TextureAtlasSprite sprite2 = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(SpectrumCommon.locate("block/primordial_fire_1"));
+	private void renderPrimordialFire(PoseStack matrices, MultiBufferSource vertexConsumers, Entity entity) {
+		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(PastelCommon.locate("block/primordial_fire_0"));
+		TextureAtlasSprite sprite2 = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(PastelCommon.locate("block/primordial_fire_1"));
 		matrices.pushPose();
 		float f = entity.getBbWidth() * 1.4F;
 		matrices.scale(f, f, f);

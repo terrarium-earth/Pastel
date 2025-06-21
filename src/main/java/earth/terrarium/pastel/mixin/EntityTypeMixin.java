@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import net.minecraft.world.entity.EntityType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +13,7 @@ public abstract class EntityTypeMixin {
 	@Inject(at = @At("TAIL"), method = "trackDeltas", cancellable = true)
 	public void alwaysUpdateVelocity(CallbackInfoReturnable<Boolean> cir) {
 		Object thisObject = this;
-		if (thisObject == SpectrumEntityTypes.PHANTOM_FRAME.get() || thisObject == SpectrumEntityTypes.GLOW_PHANTOM_FRAME.get() || thisObject == SpectrumEntityTypes.KINDLING_COUGH.get()) {
+		if (thisObject == PastelEntityTypes.PHANTOM_FRAME.get() || thisObject == PastelEntityTypes.GLOW_PHANTOM_FRAME.get() || thisObject == PastelEntityTypes.KINDLING_COUGH.get()) {
 			cir.setReturnValue(false);
 		}
 	}

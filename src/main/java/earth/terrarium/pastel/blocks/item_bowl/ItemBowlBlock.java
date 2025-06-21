@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.Containers;
@@ -71,7 +71,7 @@ public class ItemBowlBlock extends InWorldInteractionBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? createTickerHelper(type, SpectrumBlockEntities.ITEM_BOWL.get(), ItemBowlBlockEntity::clientTick) : null;
+		return world.isClientSide ? createTickerHelper(type, PastelBlockEntities.ITEM_BOWL.get(), ItemBowlBlockEntity::clientTick) : null;
 	}
 	
 	@Override

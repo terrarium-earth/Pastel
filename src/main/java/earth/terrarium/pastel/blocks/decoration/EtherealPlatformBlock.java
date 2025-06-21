@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.decoration;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -132,7 +132,7 @@ public class EtherealPlatformBlock extends TransparentBlock {
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		int age = state.getValue((AGE));
-		if ((world.isClientSide && Minecraft.getInstance().player.getMainHandItem().is(SpectrumBlocks.ETHEREAL_PLATFORM.get().asItem()))) {
+		if ((world.isClientSide && Minecraft.getInstance().player.getMainHandItem().is(PastelBlocks.ETHEREAL_PLATFORM.get().asItem()))) {
 			age = Math.max(age, 3);
 		}
 		if (age > 0) {
@@ -140,7 +140,7 @@ public class EtherealPlatformBlock extends TransparentBlock {
 				double d = pos.getX() + random.nextFloat();
 				double e = pos.getY() + 1.01;
 				double f = pos.getZ() + random.nextFloat();
-				world.addParticle(SpectrumParticleTypes.LIQUID_CRYSTAL_SPARKLE, d, e, f, 0.0D, 0.03D, 0.0D);
+				world.addParticle(PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, d, e, f, 0.0D, 0.03D, 0.0D);
 			}
 		}
 	}

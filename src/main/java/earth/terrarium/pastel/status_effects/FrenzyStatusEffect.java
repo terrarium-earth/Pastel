@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.status_effects;
 
 import earth.terrarium.pastel.attachments.data.LastKillData;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,14 +22,14 @@ public class FrenzyStatusEffect extends MobEffect {
 	// prevent the resetting of frenzy-granted attributes
 	@Override
 	public void onEffectStarted(LivingEntity entity, int amplifier) {
-		if (!SpectrumStatusEffects.effectsAreGettingStacked && !entity.hasEffect(SpectrumStatusEffects.FRENZY)) {
+		if (!PastelStatusEffects.effectsAreGettingStacked && !entity.hasEffect(PastelStatusEffects.FRENZY)) {
 			super.onEffectStarted(entity, amplifier);
 		}
 	}
 	
 	@Override
 	public void removeAttributeModifiers(AttributeMap attributes) {
-		if (!SpectrumStatusEffects.effectsAreGettingStacked) {
+		if (!PastelStatusEffects.effectsAreGettingStacked) {
 			super.removeAttributeModifiers(attributes);
 		}
 	}
@@ -52,7 +52,7 @@ public class FrenzyStatusEffect extends MobEffect {
 		
 		var potency = (SleepStatusEffect.getSleepScaling(entity) * (amplifier + 1) / 3) / 20;
 		if (potency > 0 && entity.getHealth() > potency) {
-			entity.hurt(SpectrumDamageTypes.sleep(entity.level(), null), potency);
+			entity.hurt(PastelDamageTypes.sleep(entity.level(), null), potency);
 		}
 
 		return true;

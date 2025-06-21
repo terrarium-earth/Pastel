@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -35,13 +35,13 @@ public abstract class BidentBaseEntity extends ThrownTrident {
 	public void setPickupItemStack(ItemStack stack) {
 		setTrackedStack(stack.copy());
 		super.setPickupItemStack(stack);
-		this.entityData.set(TridentEntityAccessor.spectrum$getLoyalty(), (byte) SpectrumEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack));
-		this.entityData.set(TridentEntityAccessor.spectrum$getEnchanted(), stack.hasFoil());
+		this.entityData.set(TridentEntityAccessor.getLoyalty(), (byte) PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack));
+		this.entityData.set(TridentEntityAccessor.getEnchanted(), stack.hasFoil());
 	}
 	
 	@Override
 	protected SoundEvent getDefaultHitGroundSoundEvent() {
-		return SpectrumSoundEvents.BIDENT_HIT_GROUND;
+		return PastelSoundEvents.BIDENT_HIT_GROUND;
 	}
 	
 	public ItemStack getTrackedStack() {

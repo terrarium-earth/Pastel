@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.blocks.chests.SpectrumChestBlock;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.blocks.chests.PastelChestBlock;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class TreasureChestBlock extends SpectrumChestBlock {
+public class TreasureChestBlock extends PastelChestBlock {
 
 	public static final MapCodec<TreasureChestBlock> CODEC = simpleCodec(TreasureChestBlock::new);
 
@@ -52,12 +52,12 @@ public class TreasureChestBlock extends SpectrumChestBlock {
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? createTickerHelper(type, SpectrumBlockEntities.PRESERVATION_CHEST.get(), TreasureChestBlockEntity::clientTick) : null;
+		return world.isClientSide ? createTickerHelper(type, PastelBlockEntities.PRESERVATION_CHEST.get(), TreasureChestBlockEntity::clientTick) : null;
 	}
 	
 	@Override
 	public Material getTextureLocation() {
-		return new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/preservation_chest"));
+		return new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/preservation_chest"));
 	}
 	
 }

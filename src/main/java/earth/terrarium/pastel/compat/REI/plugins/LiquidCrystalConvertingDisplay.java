@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.fluid_converting.LiquidCrystalConvertingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +14,7 @@ public class LiquidCrystalConvertingDisplay extends FluidConvertingDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.LIQUID_CRYSTAL_CONVERTING;
+		return PastelPlugins.LIQUID_CRYSTAL_CONVERTING;
 	}
 	
 	@Override

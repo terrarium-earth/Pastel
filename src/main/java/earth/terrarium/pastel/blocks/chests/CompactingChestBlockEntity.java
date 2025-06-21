@@ -6,8 +6,8 @@ import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.inventories.AutoCraftingMode;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.CompactingChestStatusUpdatePayload;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.render.animation.FlowAnimator;
 import earth.terrarium.pastel.render.animation.FlowData;
 import earth.terrarium.pastel.render.animation.FlowHandlers;
@@ -40,7 +40,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Optional;
 
-public class CompactingChestBlockEntity extends SpectrumChestBlockEntity {
+public class CompactingChestBlockEntity extends PastelChestBlockEntity {
 
 	private static final FlowAnimator.Factory<CompactingChestBlockEntity> FACTORY;
 
@@ -74,7 +74,7 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity {
 	};
 	
 	public CompactingChestBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.COMPACTING_CHEST.get(), blockPos, blockState);
+		super(PastelBlockEntities.COMPACTING_CHEST.get(), blockPos, blockState);
 		inventory.addListener(i -> setChanged());
 	}
 	
@@ -219,12 +219,12 @@ public class CompactingChestBlockEntity extends SpectrumChestBlockEntity {
 	
 	@Override
 	public SoundEvent getOpenSound() {
-		return SpectrumSoundEvents.COMPACTING_CHEST_OPEN;
+		return PastelSoundEvents.COMPACTING_CHEST_OPEN;
 	}
 	
 	@Override
 	public SoundEvent getCloseSound() {
-		return SpectrumSoundEvents.COMPACTING_CHEST_CLOSE;
+		return PastelSoundEvents.COMPACTING_CHEST_CLOSE;
 	}
 	
 	public void applySettings(AutoCraftingMode mode) {

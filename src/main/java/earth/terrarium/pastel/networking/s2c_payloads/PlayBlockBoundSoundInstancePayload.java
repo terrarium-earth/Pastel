@@ -1,10 +1,8 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.sound.CraftingBlockSoundInstance;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -16,7 +14,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Block;
@@ -25,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 // MaxDurationTicks of <1 means "stop playing"
 public record PlayBlockBoundSoundInstancePayload(SoundEvent soundEvent, BlockPos pos, Holder<Block> block, int maxDurationTicks) implements CustomPacketPayload {
 	
-	public static final Type<PlayBlockBoundSoundInstancePayload> ID = SpectrumC2SPackets.makeId("play_block_bound_sound_instance");
+	public static final Type<PlayBlockBoundSoundInstancePayload> ID = PastelC2SPackets.makeId("play_block_bound_sound_instance");
 	public static final StreamCodec<RegistryFriendlyByteBuf, PlayBlockBoundSoundInstancePayload> CODEC = StreamCodec.composite(
 			SoundEvent.DIRECT_STREAM_CODEC, PlayBlockBoundSoundInstancePayload::soundEvent,
 			BlockPos.STREAM_CODEC, PlayBlockBoundSoundInstancePayload::pos,

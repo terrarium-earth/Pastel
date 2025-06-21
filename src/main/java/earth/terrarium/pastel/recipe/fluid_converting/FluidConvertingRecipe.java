@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Function5;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.recipe.GatedSpectrumRecipe;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public abstract class FluidConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
+public abstract class FluidConvertingRecipe extends GatedPastelRecipe<RecipeInput> {
 	
 	protected final Ingredient input;
 	protected final ItemStack output;

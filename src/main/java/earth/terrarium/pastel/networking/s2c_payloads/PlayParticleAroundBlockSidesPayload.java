@@ -2,12 +2,10 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.ParticleHelper;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.network.protocol.*;
 import net.minecraft.network.protocol.common.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import net.minecraft.core.BlockPos;
@@ -26,7 +24,7 @@ import java.util.function.Predicate;
 
 public record PlayParticleAroundBlockSidesPayload(BlockPos pos, int quantity, Vec3 velocity, ParticleOptions particle, Direction[] sides) implements CustomPacketPayload {
 	
-	public static final Type<PlayParticleAroundBlockSidesPayload> ID = SpectrumC2SPackets.makeId("play_particle_around_block_sides");
+	public static final Type<PlayParticleAroundBlockSidesPayload> ID = PastelC2SPackets.makeId("play_particle_around_block_sides");
 	public static final StreamCodec<RegistryFriendlyByteBuf, PlayParticleAroundBlockSidesPayload> CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, PlayParticleAroundBlockSidesPayload::pos,
 			ByteBufCodecs.VAR_INT, PlayParticleAroundBlockSidesPayload::quantity,

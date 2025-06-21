@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -12,7 +12,7 @@ import dev.emi.emi.api.widget.WidgetHolder;
 public class CinderhearthEmiRecipeGated extends GatedSpectrumEmiRecipe<CinderhearthRecipe> {
 	
 	public CinderhearthEmiRecipeGated(CinderhearthRecipe recipe) {
-		super(SpectrumEmiRecipeCategories.CINDERHEARTH, recipe, 136, 48);
+		super(PastelEmiRecipeCategories.CINDERHEARTH, recipe, 136, 48);
 		this.inputs = recipe.getIngredientStacks().stream().map(s -> EmiIngredient.of(s.getItems().map(EmiStack::of).toList())).toList();
 		this.outputs = recipe.getResultsWithChance().stream().map(p -> EmiStack.of(p.getA()).setChance(p.getB())).toList();
 	}

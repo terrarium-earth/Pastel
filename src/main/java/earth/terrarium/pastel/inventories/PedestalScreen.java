@@ -2,11 +2,11 @@ package earth.terrarium.pastel.inventories;
 
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.helpers.RenderHelper;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -19,10 +19,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class PedestalScreen extends AbstractContainerScreen<PedestalScreenHandler> {
 	
-	public static final ResourceLocation BACKGROUND1 = SpectrumCommon.locate("textures/gui/container/pedestal1.png");
-	public static final ResourceLocation BACKGROUND2 = SpectrumCommon.locate("textures/gui/container/pedestal2.png");
-	public static final ResourceLocation BACKGROUND3 = SpectrumCommon.locate("textures/gui/container/pedestal3.png");
-	public static final ResourceLocation BACKGROUND4 = SpectrumCommon.locate("textures/gui/container/pedestal4.png");
+	public static final ResourceLocation BACKGROUND1 = PastelCommon.locate("textures/gui/container/pedestal1.png");
+	public static final ResourceLocation BACKGROUND2 = PastelCommon.locate("textures/gui/container/pedestal2.png");
+	public static final ResourceLocation BACKGROUND3 = PastelCommon.locate("textures/gui/container/pedestal3.png");
+	public static final ResourceLocation BACKGROUND4 = PastelCommon.locate("textures/gui/container/pedestal4.png");
 	private final boolean structureUpdateAvailable;
 	private final ResourceLocation backgroundTexture;
 	private final PedestalRecipeTier maxPedestalRecipeTierForVariant;
@@ -101,7 +101,7 @@ public class PedestalScreen extends AbstractContainerScreen<PedestalScreenHandle
 		Minecraft client = Minecraft.getInstance();
 		if (mouseOverInformationIcon((int) mouseX, (int) mouseY)) {
 			Multiblock currentMultiBlock = MultiblockPreviewRenderer.getMultiblock();
-			Multiblock multiblockToDisplay = SpectrumMultiblocks.get(maxPedestalRecipeTierForVariant.getStructureID(client.player));
+			Multiblock multiblockToDisplay = PastelMultiblocks.get(maxPedestalRecipeTierForVariant.getStructureID(client.player));
 			if (currentMultiBlock == multiblockToDisplay) {
 				ModonomiconHelper.clearRenderedMultiblock(currentMultiBlock);
 			} else {

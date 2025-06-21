@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.recipe.titration_barrel;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
 import net.neoforged.neoforge.fluids.capability.templates.*;
@@ -9,10 +9,10 @@ import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +35,7 @@ import java.util.Optional;
  */
 public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<FluidTank>> {
 	
-	ResourceLocation UNLOCK_ADVANCEMENT_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/titration_barrel");
+	ResourceLocation UNLOCK_ADVANCEMENT_IDENTIFIER = PastelCommon.locate("unlocks/blocks/titration_barrel");
 	
 	// Called by the titration barrel when tapped
 	default ItemStack getTitrationResult(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
@@ -44,8 +44,8 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
 			float ageIngameDays = TimeHelper.minecraftDaysFromSeconds(secondsFermented);
 			List<MobEffectInstance> statusEffects = List.of(new MobEffectInstance(MobEffects.INVISIBILITY, 3600, 0));
 			
-			var stack = SpectrumItems.SUSPICIOUS_BREW.get().getDefaultInstance();
-			stack.set(SpectrumDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, 0, 0));
+			var stack = PastelItems.SUSPICIOUS_BREW.get().getDefaultInstance();
+			stack.set(PastelDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, 0, 0));
 			stack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), statusEffects));
 			LoreHelper.setLore(stack, Component.translatable("lore.pastel.time_travel_tap"));
 			return stack;
@@ -93,12 +93,12 @@ public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<Flu
 	
 	@Override
 	default ItemStack getToastSymbol() {
-		return SpectrumBlocks.TITRATION_BARREL.get().asItem().getDefaultInstance();
+		return PastelBlocks.TITRATION_BARREL.get().asItem().getDefaultInstance();
 	}
 	
 	@Override
 	default RecipeType<?> getType() {
-		return SpectrumRecipeTypes.TITRATION_BARREL;
+		return PastelRecipeTypes.TITRATION_BARREL;
 	}
 	
 	List<IngredientStack> getIngredientStacks();

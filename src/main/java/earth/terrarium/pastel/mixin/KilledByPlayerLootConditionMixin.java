@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.registries.SpectrumDamageTypeTags;
+import earth.terrarium.pastel.registries.PastelDamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class KilledByPlayerLootConditionMixin {
 	
 	@Inject(method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z", at = @At(value = "RETURN"), cancellable = true)
-	private void spectrum$testDropPlayerLoot(LootContext lootContext, CallbackInfoReturnable<Boolean> cir) {
+	private void testDropPlayerLoot(LootContext lootContext, CallbackInfoReturnable<Boolean> cir) {
 		if (!cir.getReturnValue()) {
 			DamageSource damageSource = lootContext.getParamOrNull(LootContextParams.DAMAGE_SOURCE);
-			if (damageSource != null && damageSource.is(SpectrumDamageTypeTags.DROPS_LOOT_LIKE_PLAYERS)) {
+			if (damageSource != null && damageSource.is(PastelDamageTypeTags.DROPS_LOOT_LIKE_PLAYERS)) {
 				cir.setReturnValue(true);
 			}
 		}

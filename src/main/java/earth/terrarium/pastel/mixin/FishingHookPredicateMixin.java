@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.entity.entity.SpectrumFishingBobberEntity;
+import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
 import net.minecraft.advancements.critereon.FishingHookPredicate;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -22,8 +22,8 @@ public abstract class FishingHookPredicateMixin {
 	private Optional<Boolean> inOpenWater;
 	
 	@Inject(method = "matches", at = @At(value = "HEAD"), cancellable = true)
-	public void spectrum$test(Entity entity, ServerLevel world, Vec3 pos, CallbackInfoReturnable<Boolean> cir) {
-		if (entity instanceof SpectrumFishingBobberEntity spectrumFishingBobberEntity) {
+	public void test(Entity entity, ServerLevel world, Vec3 pos, CallbackInfoReturnable<Boolean> cir) {
+		if (entity instanceof PastelFishingBobberEntity spectrumFishingBobberEntity) {
 			if (this.inOpenWater.isEmpty()) {
 				cir.setReturnValue(true);
 			}

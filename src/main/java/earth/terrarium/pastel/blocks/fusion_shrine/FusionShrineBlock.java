@@ -2,16 +2,16 @@ package earth.terrarium.pastel.blocks.fusion_shrine;
 
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.neoforge.fluids.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
@@ -50,7 +50,7 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 
 	public static final MapCodec<FusionShrineBlock> CODEC = simpleCodec(FusionShrineBlock::new);
 
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("collect_all_basic_pigments_besides_brown");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("collect_all_basic_pigments_besides_brown");
 	public static final IntegerProperty LIGHT_LEVEL = IntegerProperty.create("light_level", 0, 15);
 	protected static final VoxelShape SHAPE;
 
@@ -68,14 +68,14 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 	public static void clearCurrentlyRenderedMultiBlock(Level world) {
 		if (world.isClientSide) {
 			if (world.isClientSide()) {
-				ModonomiconHelper.clearRenderedMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.FUSION_SHRINE));
+				ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.FUSION_SHRINE));
 			}
 		}
 	}
 	
 	public static boolean verifySkyAccess(ServerLevel world, BlockPos shrinePos) {
 		if (world.getBlockState(shrinePos.above()).isRedstoneConductor(world, shrinePos.above())) {
-			world.playSound(null, shrinePos, SpectrumSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+			world.playSound(null, shrinePos, PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
 			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, shrinePos.above().getCenter(), ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(0.1, 0.1, 0.1));
 			return false;
 		}
@@ -99,21 +99,21 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 		
 		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, new Vec3(shrinePos.getX() + 0.5, shrinePos.getY() + 1, shrinePos.getZ() + 0.5), ColoredSparkleRisingParticleEffect.RED, 1, new Vec3(0, 0.5, 0));
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, new Vec3(shrinePos.getX() + 0.5, topY - 0.5, shrinePos.getZ() + 0.5), ColoredSparkleRisingParticleEffect.RED, 8, Vec3.ZERO, new Vec3(0.1, 0.1, 0.1));
-		world.playSound(null, shrinePos, SpectrumSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
+		world.playSound(null, shrinePos, PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 1.0F, 1.0F);
 		return false;
 	}
 	
 	public static boolean verifyStructure(Level world, BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity) {
-		Multiblock multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.FUSION_SHRINE);
+		Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.FUSION_SHRINE);
 		boolean valid = multiblock.validate(world, blockPos.below(), Rotation.NONE);
 		
 		if (valid) {
 			if (serverPlayerEntity != null) {
-				SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
+				PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
 			}
 		} else {
 			if (world.isClientSide) {
-				ModonomiconHelper.renderMultiblock(multiblock, SpectrumMultiblocks.FUSION_SHRINE_TEXT, blockPos.below(2), Rotation.NONE);
+				ModonomiconHelper.renderMultiblock(multiblock, PastelMultiblocks.FUSION_SHRINE_TEXT, blockPos.below(2), Rotation.NONE);
 			} else if (world.getBlockEntity(blockPos) instanceof FusionShrineBlockEntity fusionShrineBlockEntity) {
 				fusionShrineBlockEntity.scatterContents(world);
 			}
@@ -230,7 +230,7 @@ public class FusionShrineBlock extends InWorldInteractionBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, SpectrumBlockEntities.FUSION_SHRINE.get(), world.isClientSide ? FusionShrineBlockEntity::clientTick : FusionShrineBlockEntity::serverTick);
+		return createTickerHelper(type, PastelBlockEntities.FUSION_SHRINE.get(), world.isClientSide ? FusionShrineBlockEntity::clientTick : FusionShrineBlockEntity::serverTick);
 	}
 	
 	static {

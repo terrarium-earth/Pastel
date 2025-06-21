@@ -5,12 +5,12 @@ import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.data.BookDataManager;
 import com.klikli_dev.modonomicon.fluid.*;
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.crystallarieum.*;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -24,7 +24,7 @@ import java.util.Iterator;
 
 public class BookCrystallarieumGrowingPageRenderer extends BookGatedRecipePageRenderer<CrystallarieumRecipe, BookGatedRecipePage<CrystallarieumRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/modonomicon/crystallarieum.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/modonomicon/crystallarieum.png");
 
     private static BookTextHolder catalystText;
     private BookTextHolder craftingTimeText1 = null;
@@ -88,7 +88,7 @@ public class BookCrystallarieumGrowingPageRenderer extends BookGatedRecipePageRe
         }
 
         // crystallarieum
-        parentScreen.renderItemStack(drawContext, recipeX + startX + offsetPerReagent, recipeY + 8, mouseX, mouseY, ((CrystallarieumBlock) SpectrumBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor()));
+        parentScreen.renderItemStack(drawContext, recipeX + startX + offsetPerReagent, recipeY + 8, mouseX, mouseY, ((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor()));
 
         // catalyst text
         renderBookTextHolder(drawContext, catalystText, 0, 42, BookEntryScreen.PAGE_WIDTH);

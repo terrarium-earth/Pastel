@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -28,7 +28,7 @@ public class WeepingGalaFrondsBlock extends BushBlock {
 
     @Override
     public boolean mayPlaceOn(BlockState roof, BlockGetter world, BlockPos pos) {
-        return roof.is(SpectrumBlocks.WEEPING_GALA_LEAVES.get()) || roof.is(SpectrumBlocks.WEEPING_GALA_FRONDS.get());
+        return roof.is(PastelBlocks.WEEPING_GALA_LEAVES.get()) || roof.is(PastelBlocks.WEEPING_GALA_FRONDS.get());
     }
 
     @Override

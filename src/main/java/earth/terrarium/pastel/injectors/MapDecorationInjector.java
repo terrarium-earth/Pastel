@@ -2,10 +2,10 @@ package earth.terrarium.pastel.injectors;
 
 public interface MapDecorationInjector {
 	
-	default void spectrum$setScale(byte scale) {
+	default void setScale(byte scale) {
 	}
 	
-	default byte spectrum$getScale() {
+	default byte getScale() {
 		return 0;
 	}
 	

@@ -3,8 +3,8 @@ package earth.terrarium.pastel.particle.effect;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -43,7 +43,7 @@ public class ColoredSparkleRisingParticleEffect implements ParticleOptions {
 	private final Vector3f color;
 	
 	public ColoredSparkleRisingParticleEffect(int color) {
-		this.color = SpectrumColorHelper.colorIntToVec(color);
+		this.color = ColorHelper.colorIntToVec(color);
 	}
 	
 	public ColoredSparkleRisingParticleEffect(Vector3f color) {
@@ -51,7 +51,7 @@ public class ColoredSparkleRisingParticleEffect implements ParticleOptions {
 	}
 	
 	public ParticleType<ColoredSparkleRisingParticleEffect> getType() {
-		return SpectrumParticleTypes.COLORED_SPARKLE_RISING;
+		return PastelParticleTypes.COLORED_SPARKLE_RISING;
 	}
 	
 	public Vector3f getColor() {

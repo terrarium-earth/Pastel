@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ExtraTickFarmlandBlock extends SpectrumFarmlandBlock {
+public class ExtraTickFarmlandBlock extends PastelFarmlandBlock {
 	
 	public ExtraTickFarmlandBlock(Properties settings, BlockState bareState) {
 		super(settings.randomTicks(), bareState);

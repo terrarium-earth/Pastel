@@ -1,13 +1,13 @@
 package earth.terrarium.pastel.blocks.fluid;
 
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
-import earth.terrarium.pastel.registries.SpectrumFluids;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluidTags;
+import earth.terrarium.pastel.registries.PastelFluids;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -29,36 +29,36 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.FluidType;
 
-public abstract class GooFluid extends SpectrumFluid {
+public abstract class GooFluid extends PastelFluid {
 	
 	@Override
 	public Fluid getSource() {
-		return SpectrumFluids.GOO.get();
+		return PastelFluids.GOO.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return SpectrumFluids.FLOWING_GOO.get();
+		return PastelFluids.FLOWING_GOO.get();
 	}
 	
 	@Override
 	public Item getBucket() {
-        return SpectrumItems.GOO_BUCKET.get();
+        return PastelItems.GOO_BUCKET.get();
 	}
 
 	@Override
 	public FluidType getFluidType() {
-		return SpectrumFluids.GOO_TYPE.get();
+		return PastelFluids.GOO_TYPE.get();
 	}
 
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return SpectrumBlocks.GOO.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return PastelBlocks.GOO.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == SpectrumFluids.GOO.get() || fluid == SpectrumFluids.FLOWING_GOO.get();
+		return fluid == PastelFluids.GOO.get() || fluid == PastelFluids.FLOWING_GOO.get();
 	}
 	
 	@Override
@@ -67,7 +67,7 @@ public abstract class GooFluid extends SpectrumFluid {
 		BlockPos topPos = pos.above();
 		BlockState topState = world.getBlockState(topPos);
 		if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(1000) == 0) {
-			world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SpectrumSoundEvents.GOO_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+			world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), PastelSoundEvents.GOO_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
 		}
 	}
 	
@@ -88,17 +88,17 @@ public abstract class GooFluid extends SpectrumFluid {
 	
 	@Override
 	public ParticleOptions getDripParticle() {
-		return SpectrumParticleTypes.DRIPPING_GOO;
+		return PastelParticleTypes.DRIPPING_GOO;
 	}
 	
 	@Override
 	public ParticleOptions getSplashParticle() {
-		return SpectrumParticleTypes.GOO_SPLASH;
+		return PastelParticleTypes.GOO_SPLASH;
 	}
 	
 	@Override
 	public RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType() {
-		return SpectrumRecipeTypes.GOO_CONVERTING;
+		return PastelRecipeTypes.GOO_CONVERTING;
 	}
 	
 	/**
@@ -112,7 +112,7 @@ public abstract class GooFluid extends SpectrumFluid {
 		if (!world.isClientSide && entity instanceof LivingEntity livingEntity) {
 			// the entity is hurt at air == -20 and then reset to air = 0
 			// this way the entity loses its breath way faster, but gets damaged just as slow afterwards
-			if (livingEntity.isEyeInFluid(SpectrumFluidTags.GOO) && world.getGameTime() % 2 == 0 && livingEntity.getAirSupply() > 0) {
+			if (livingEntity.isEyeInFluid(PastelFluidTags.GOO) && world.getGameTime() % 2 == 0 && livingEntity.getAirSupply() > 0) {
 				livingEntity.setAirSupply(livingEntity.getAirSupply() - 1);
 			}
 			

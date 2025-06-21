@@ -6,11 +6,11 @@ import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.helpers.BuildingHelper;
 import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -164,11 +164,11 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	}
 	
 	public void storeBlockAsTarget(@NotNull ItemStack exchangeStaffItemStack, Block block) {
-		exchangeStaffItemStack.set(SpectrumDataComponentTypes.STORED_BLOCK, BuiltInRegistries.BLOCK.getKey(block));
+		exchangeStaffItemStack.set(PastelDataComponentTypes.STORED_BLOCK, BuiltInRegistries.BLOCK.getKey(block));
 	}
 	
 	public static Optional<Block> getStoredBlock(@NotNull ItemStack exchangeStaffItemStack) {
-		ResourceLocation blockId = exchangeStaffItemStack.get(SpectrumDataComponentTypes.STORED_BLOCK);
+		ResourceLocation blockId = exchangeStaffItemStack.get(PastelDataComponentTypes.STORED_BLOCK);
 		if (blockId != null) {
 			Block targetBlock = BuiltInRegistries.BLOCK.get(blockId);
 			if (targetBlock != Blocks.AIR) {
@@ -218,8 +218,8 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 						context.getClickLocation().y() + side.getStepY() * 0.1,
 						context.getClickLocation().z() + side.getStepZ() * 0.1);
 				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(serverWorld, sourcePos,
-						SpectrumParticleTypes.SHIMMERSTONE_SPARKLE_SMALL, 15, Vec3.ZERO, new Vec3(0.25, 0.25, 0.25));
-				world.playSound(null, player.blockPosition(), SpectrumSoundEvents.EXCHANGING_STAFF_SELECT,
+						PastelParticleTypes.SHIMMERSTONE_SPARKLE_SMALL, 15, Vec3.ZERO, new Vec3(0.25, 0.25, 0.25));
+				world.playSound(null, player.blockPosition(), PastelSoundEvents.EXCHANGING_STAFF_SELECT,
 						SoundSource.PLAYERS, 1.0F, 1.0F);
 			}
 			return InteractionResult.sidedSuccess(world.isClientSide);
@@ -257,7 +257,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 	
 	@Override
 	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.FORTUNE) || enchantment.is(Enchantments.SILK_TOUCH) || enchantment.is(SpectrumEnchantments.RESONANCE);
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.FORTUNE) || enchantment.is(Enchantments.SILK_TOUCH) || enchantment.is(PastelEnchantments.RESONANCE);
 	}
 	
 }

@@ -6,10 +6,10 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.components.WorkstaffComponent;
 import earth.terrarium.pastel.entity.entity.MiningProjectileEntity;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -36,7 +36,7 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
     }
     
     public static boolean canShoot(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT).canShoot();
+		return stack.getOrDefault(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT).canShoot();
     }
     
     @Override
@@ -47,7 +47,7 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
             if (canShoot(stack) && InkPowered.tryDrainEnergy(user, PROJECTILE_COST)) {
                 user.getCooldowns().addCooldown(this, COOLDOWN_DURATION_TICKS);
                 if (!world.isClientSide) {
-                    user.playNotifySound(SpectrumSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.5F, 0.75F + user.getRandom().nextFloat());
+                    user.playNotifySound(PastelSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.5F, 0.75F + user.getRandom().nextFloat());
                     MiningProjectileEntity.shoot(world, user, user.getItemInHand(hand));
                 }
                 stack.hurtAndBreak(2, user, EquipmentSlot.MAINHAND);
@@ -81,9 +81,9 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
 	public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
 		if (player != null) {
 			var lookup = player.level().registryAccess();
-			var resonance = SpectrumEnchantmentHelper.hasEnchantment(lookup, SpectrumEnchantments.RESONANCE, stack);
-			var silkTouch = SpectrumEnchantmentHelper.hasEnchantment(lookup, Enchantments.SILK_TOUCH, stack);
-			var fortune = SpectrumEnchantmentHelper.hasEnchantment(lookup, Enchantments.FORTUNE, stack);
+			var resonance = PastelEnchantmentHelper.hasEnchantment(lookup, PastelEnchantments.RESONANCE, stack);
+			var silkTouch = PastelEnchantmentHelper.hasEnchantment(lookup, Enchantments.SILK_TOUCH, stack);
+			var fortune = PastelEnchantmentHelper.hasEnchantment(lookup, Enchantments.FORTUNE, stack);
 			
 			if (resonance)
 				return InkColors.WHITE_COLOR;

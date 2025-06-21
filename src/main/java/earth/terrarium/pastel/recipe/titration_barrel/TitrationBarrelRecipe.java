@@ -6,16 +6,16 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.item.FermentedItem;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
-import earth.terrarium.pastel.recipe.GatedStackSpectrumRecipe;
+import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -40,7 +40,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<FluidRecipeInput<FluidTank>> implements ITitrationBarrelRecipe {
+public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInput<FluidTank>> implements ITitrationBarrelRecipe {
 	
 	public static final List<Integer> FERMENTATION_DURATION_DISPLAY_TIME_MULTIPLIERS = new ArrayList<>() {{
 		add(1);
@@ -175,12 +175,12 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<FluidRecipeI
 		}
 		
 		if (alcPercent >= 100 && inputStack.getItem() instanceof FermentedItem) {
-			return SpectrumItems.PURE_ALCOHOL.get().getDefaultInstance();
+			return PastelItems.PURE_ALCOHOL.get().getDefaultInstance();
 		}
 		
 		// if it's not a set beverage (custom recipe) mark it as unknown
 		if (!(inputStack.getItem() instanceof FermentedItem))
-			inputStack.set(SpectrumDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT);
+			inputStack.set(PastelDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT);
 		
 		var potionContents = inputStack.get(DataComponents.POTION_CONTENTS);
 		if (potionContents != null) {
@@ -202,7 +202,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<FluidRecipeI
 			inputStack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), effects));
 		}
 		
-		inputStack.set(SpectrumDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, (int) alcPercent, thickness));
+		inputStack.set(PastelDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, (int) alcPercent, thickness));
 		return inputStack;
 	}
 	
@@ -220,7 +220,7 @@ public class TitrationBarrelRecipe extends GatedStackSpectrumRecipe<FluidRecipeI
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.TITRATION_BARREL;
+		return PastelRecipeSerializers.TITRATION_BARREL;
 	}
 	
 	// sadly we cannot use text.append() here, since the guidebook does not support it

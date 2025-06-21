@@ -14,7 +14,7 @@ import org.jetbrains.annotations.*;
 public record MusicDiscProjectileBehavior() implements DamagingProjectileBehavior {
 	public static final MusicDiscProjectileBehavior INSTANCE = new MusicDiscProjectileBehavior();
 	public static final ProjectileBehaviorType<MusicDiscProjectileBehavior> TYPE = new ProjectileBehaviorType<>(
-			SpectrumCommon.ofSpectrumDefaulted("music_disc"),
+			PastelCommon.ofPastel("music_disc"),
 			MapCodec.unit(INSTANCE)
 	);
 	

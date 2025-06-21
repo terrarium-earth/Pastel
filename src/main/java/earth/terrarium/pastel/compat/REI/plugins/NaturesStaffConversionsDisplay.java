@@ -2,8 +2,8 @@ package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.compat.REI.GatedRecipeDisplay;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -26,14 +26,14 @@ public class NaturesStaffConversionsDisplay extends BasicDisplay implements Gate
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.NATURES_STAFF;
+		return PastelPlugins.NATURES_STAFF;
 	}
 	
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
 		return AdvancementHelper.hasAdvancement(client.player, this.requiredAdvancementIdentifier)
-				&& AdvancementHelper.hasAdvancement(client.player, SpectrumAdvancements.UNLOCK_NATURES_STAFF);
+				&& AdvancementHelper.hasAdvancement(client.player, PastelAdvancements.UNLOCK_NATURES_STAFF);
 	}
 	
 	@Override

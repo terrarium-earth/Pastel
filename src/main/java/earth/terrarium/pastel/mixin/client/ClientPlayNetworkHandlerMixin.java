@@ -15,8 +15,8 @@ public class ClientPlayNetworkHandlerMixin {
 
 	@Inject(method = "handleUpdateMobEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;forceAddEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)V"))
 	public void readAndApplyIncurableFlag(ClientboundUpdateMobEffectPacket packet, CallbackInfo ci, @Local MobEffectInstance effect) {
-		if (((ClientboundUpdateMobEffectPacketInjector) packet).spectrum$isIncurable())
-			((MobEffectInstanceInjector) effect).spectrum$setIncurable(true);
+		if (((ClientboundUpdateMobEffectPacketInjector) packet).isIncurable())
+			((MobEffectInstanceInjector) effect).setIncurable(true);
 	}
 	
 }

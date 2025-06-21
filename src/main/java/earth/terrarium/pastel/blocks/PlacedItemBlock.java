@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks;
 
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -50,7 +50,7 @@ public abstract class PlacedItemBlock extends BaseEntityBlock {
 
 	@Override
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-		Optional<PlacedItemBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PLACED_ITEM.get());
+		Optional<PlacedItemBlockEntity> blockEntity = world.getBlockEntity(pos, PastelBlockEntities.PLACED_ITEM.get());
 		if (blockEntity.isPresent()) {
 			return blockEntity.get().getStack().copy();
 		}

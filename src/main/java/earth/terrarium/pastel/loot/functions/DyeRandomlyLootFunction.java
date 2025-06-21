@@ -3,8 +3,8 @@ package earth.terrarium.pastel.loot.functions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.loot.SpectrumLootFunctionTypes;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
@@ -20,7 +20,7 @@ import java.util.List;
 public class DyeRandomlyLootFunction extends LootItemConditionalFunction {
 	
 	public static final MapCodec<DyeRandomlyLootFunction> CODEC = RecordCodecBuilder.mapCodec((instance) -> commonFields(instance).and(instance.group(
-			SpectrumColorHelper.CODEC.listOf().fieldOf("colors").forGetter((function) -> function.colors),
+			ColorHelper.CODEC.listOf().fieldOf("colors").forGetter((function) -> function.colors),
 			Codec.BOOL.optionalFieldOf("show_in_tooltip", false).forGetter((function) -> function.showInTooltip))
 	).apply(instance, DyeRandomlyLootFunction::new));
 	
@@ -35,7 +35,7 @@ public class DyeRandomlyLootFunction extends LootItemConditionalFunction {
 	
 	@Override
 	public LootItemFunctionType<DyeRandomlyLootFunction> getType() {
-		return SpectrumLootFunctionTypes.DYE_RANDOMLY;
+		return PastelLootFunctionTypes.DYE_RANDOMLY;
 	}
 	
 	@Override
@@ -43,7 +43,7 @@ public class DyeRandomlyLootFunction extends LootItemConditionalFunction {
 		stack.get(DataComponents.DYED_COLOR);
 		if (stack.is(ItemTags.DYEABLE)) {
 			RandomSource random = context.getRandom();
-			int color = this.colors.isEmpty() ? SpectrumColorHelper.getRandomColor(random.nextInt()) : this.colors.get(random.nextInt(this.colors.size()));
+			int color = this.colors.isEmpty() ? ColorHelper.getRandomColor(random.nextInt()) : this.colors.get(random.nextInt(this.colors.size()));
 			
 			DyedItemColor component = new DyedItemColor(color, showInTooltip);
 			stack.set(DataComponents.DYED_COLOR, component);

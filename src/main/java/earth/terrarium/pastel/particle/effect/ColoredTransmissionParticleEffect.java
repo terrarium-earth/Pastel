@@ -3,7 +3,7 @@ package earth.terrarium.pastel.particle.effect;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -27,7 +27,7 @@ public class ColoredTransmissionParticleEffect extends TransmissionParticleEffec
 	public final int color;
 	
 	public ColoredTransmissionParticleEffect(PositionSource positionSource, Integer arrivalInTicks, int color) {
-		super(SpectrumParticleTypes.COLORED_TRANSMISSION, positionSource, arrivalInTicks);
+		super(PastelParticleTypes.COLORED_TRANSMISSION, positionSource, arrivalInTicks);
 		this.color = color;
 	}
 	

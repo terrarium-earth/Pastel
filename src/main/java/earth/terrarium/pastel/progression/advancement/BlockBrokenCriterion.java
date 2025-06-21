@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.predicate.block.BrokenBlockPredicate;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class BlockBrokenCriterion extends SimpleCriterionTrigger<BlockBrokenCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("block_broken");
+	public static final ResourceLocation ID = PastelCommon.locate("block_broken");
 	
 	public void trigger(ServerPlayer player, BlockState minedBlock) {
 		this.trigger(player, (conditions) -> conditions.matches(minedBlock));

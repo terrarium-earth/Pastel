@@ -6,8 +6,8 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -54,7 +54,7 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, SpectrumBlockEntities.CRYSTALLARIEUM.get(), world.isClientSide ? CrystallarieumBlockEntity::clientTick : CrystallarieumBlockEntity::serverTick);
+		return createTickerHelper(type, PastelBlockEntities.CRYSTALLARIEUM.get(), world.isClientSide ? CrystallarieumBlockEntity::clientTick : CrystallarieumBlockEntity::serverTick);
 	}
 	
 	@Override
@@ -123,27 +123,27 @@ public class CrystallarieumBlock extends InWorldInteractionBlock implements Slot
 	
 	public ItemStack asStackWithColor(InkColor color) {
 		ItemStack stack = asItem().getDefaultInstance();
-		stack.set(SpectrumDataComponentTypes.INK_COLOR, color);
+		stack.set(PastelDataComponentTypes.INK_COLOR, color);
 		return stack;
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		var color = stack.get(SpectrumDataComponentTypes.INK_COLOR);
+		var color = stack.get(PastelDataComponentTypes.INK_COLOR);
 		if (color != null)
 			tooltip.add(color.getColoredInkName());
 	}
 	
 	@Override
 	public SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
-		var color = stack.get(SpectrumDataComponentTypes.INK_COLOR);
+		var color = stack.get(PastelDataComponentTypes.INK_COLOR);
 		return color != null ? SlotEffect.BORDER_FADE : SlotEffect.NONE;
 	}
 	
 	@Override
 	public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
-		var color = stack.getOrDefault(SpectrumDataComponentTypes.INK_COLOR, InkColors.WHITE);
+		var color = stack.getOrDefault(PastelDataComponentTypes.INK_COLOR, InkColors.WHITE);
 		return color.getColorInt();
 	}
 }

@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
@@ -19,10 +19,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public enum PedestalRecipeTier implements StringRepresentable {
-	BASIC(SpectrumAdvancements.PLACED_PEDESTAL, new GemstoneColor[]{BuiltinGemstoneColor.CYAN, BuiltinGemstoneColor.MAGENTA, BuiltinGemstoneColor.YELLOW}),
-	SIMPLE(SpectrumAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE, new GemstoneColor[]{BuiltinGemstoneColor.CYAN, BuiltinGemstoneColor.MAGENTA, BuiltinGemstoneColor.YELLOW}),
-	ADVANCED(SpectrumAdvancements.BUILD_ADVANCED_PEDESTAL_STRUCTURE, new GemstoneColor[]{BuiltinGemstoneColor.CYAN, BuiltinGemstoneColor.MAGENTA, BuiltinGemstoneColor.YELLOW, BuiltinGemstoneColor.BLACK}),
-	COMPLEX(SpectrumAdvancements.BUILD_COMPLEX_PEDESTAL_STRUCTURE, BuiltinGemstoneColor.values());
+	BASIC(PastelAdvancements.PLACED_PEDESTAL, new GemstoneColor[]{BuiltinGemstoneColor.CYAN, BuiltinGemstoneColor.MAGENTA, BuiltinGemstoneColor.YELLOW}),
+	SIMPLE(PastelAdvancements.BUILD_BASIC_PEDESTAL_STRUCTURE, new GemstoneColor[]{BuiltinGemstoneColor.CYAN, BuiltinGemstoneColor.MAGENTA, BuiltinGemstoneColor.YELLOW}),
+	ADVANCED(PastelAdvancements.BUILD_ADVANCED_PEDESTAL_STRUCTURE, new GemstoneColor[]{BuiltinGemstoneColor.CYAN, BuiltinGemstoneColor.MAGENTA, BuiltinGemstoneColor.YELLOW, BuiltinGemstoneColor.BLACK}),
+	COMPLEX(PastelAdvancements.BUILD_COMPLEX_PEDESTAL_STRUCTURE, BuiltinGemstoneColor.values());
 	
 	private final ResourceLocation unlockAdvancementId;
 	private final GemstoneColor[] gemstoneColors;
@@ -81,17 +81,17 @@ public enum PedestalRecipeTier implements StringRepresentable {
 	public @Nullable ResourceLocation getStructureID(Player player) {
 		switch (this) {
 			case COMPLEX -> {
-				if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE)) {
-					return SpectrumMultiblocks.PEDESTAL_COMPLEX;
+				if (AdvancementHelper.hasAdvancement(player, PastelAdvancements.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE)) {
+					return PastelMultiblocks.PEDESTAL_COMPLEX;
 				} else {
-					return SpectrumMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE;
+					return PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE;
 				}
 			}
 			case ADVANCED -> {
-				return SpectrumMultiblocks.PEDESTAL_ADVANCED;
+				return PastelMultiblocks.PEDESTAL_ADVANCED;
 			}
 			case SIMPLE -> {
-				return SpectrumMultiblocks.PEDESTAL_SIMPLE;
+				return PastelMultiblocks.PEDESTAL_SIMPLE;
 			}
 			default -> {
 				return null;
@@ -102,13 +102,13 @@ public enum PedestalRecipeTier implements StringRepresentable {
 	public @Nullable Component getStructureText() {
 		switch (this) {
 			case COMPLEX -> {
-				return SpectrumMultiblocks.PEDESTAL_COMPLEX_TEXT;
+				return PastelMultiblocks.PEDESTAL_COMPLEX_TEXT;
 			}
 			case ADVANCED -> {
-				return SpectrumMultiblocks.PEDESTAL_ADVANCED_TEXT;
+				return PastelMultiblocks.PEDESTAL_ADVANCED_TEXT;
 			}
 			case SIMPLE -> {
-				return SpectrumMultiblocks.PEDESTAL_SIMPLE_TEXT;
+				return PastelMultiblocks.PEDESTAL_SIMPLE_TEXT;
 			}
 			default -> {
 				return null;

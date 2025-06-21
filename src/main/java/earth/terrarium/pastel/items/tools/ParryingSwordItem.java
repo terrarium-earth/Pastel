@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.tools;
 
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
-import earth.terrarium.pastel.registries.SpectrumEntityAttributes;
+import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -33,8 +33,8 @@ public abstract class ParryingSwordItem extends SwordItem implements ExtendedIte
 		super(material, settings.attributes(ItemAttributeModifiers.builder()
 				.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, material.getAttackDamageBonus() + attackDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(AdditionalEntityAttributes.CRITICAL_BONUS_DAMAGE, new AttributeModifier(SpectrumEntityAttributes.CRIT_MODIFIER_ID, crit, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(SpectrumEntityAttributes.REACH_MODIFIER_ID, reach, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(AdditionalEntityAttributes.CRITICAL_BONUS_DAMAGE, new AttributeModifier(PastelEntityAttributes.CRIT_MODIFIER_ID, crit, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(PastelEntityAttributes.REACH_MODIFIER_ID, reach, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.build()));
 	}
 	

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class BlackHoleChestScreen extends AbstractContainerScreen<BlackHoleChestScreenHandler> {
 
-	public static final ResourceLocation BACKGROUND = SpectrumCommon.locate("textures/gui/container/black_hole_chest.png");
+	public static final ResourceLocation BACKGROUND = PastelCommon.locate("textures/gui/container/black_hole_chest.png");
 
 	public BlackHoleChestScreen(BlackHoleChestScreenHandler handler, Inventory playerInventory, Component title) {
 		super(handler, playerInventory, title);

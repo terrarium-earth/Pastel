@@ -3,7 +3,7 @@ package earth.terrarium.pastel.api.predicate.item;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.advancements.critereon.SingleComponentItemPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ public record InfusedBeveragePredicate(Optional<String> variant) implements Sing
 	
 	@Override
 	public DataComponentType<InfusedBeverageComponent> componentType() {
-		return SpectrumDataComponentTypes.INFUSED_BEVERAGE;
+		return PastelDataComponentTypes.INFUSED_BEVERAGE;
 	}
 	
 	@Override

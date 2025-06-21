@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class DivinityTickCriterion extends SimpleCriterionTrigger<DivinityTickCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("divinity_tick");
+	public static final ResourceLocation ID = PastelCommon.locate("divinity_tick");
 	
 	public void trigger(ServerPlayer player) {
 		this.trigger(player, (conditions) -> conditions.matches(player.isAlive(), player.getHealth()));

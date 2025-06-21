@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryStack;
@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 @OnlyIn(Dist.CLIENT)
 public class PotionWorkshopReactingCategory extends GatedItemInformationPageCategory {
 	
-	public static final EntryStack<ItemStack> POTION_WORKSHOP_ENTRY = EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP.get());
+	public static final EntryStack<ItemStack> POTION_WORKSHOP_ENTRY = EntryStacks.of(PastelBlocks.POTION_WORKSHOP.get());
 	
 	@Override
 	public Renderer getIcon() {
@@ -28,7 +28,7 @@ public class PotionWorkshopReactingCategory extends GatedItemInformationPageCate
 	
 	@Override
 	public CategoryIdentifier<PotionWorkshopReactingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.POTION_WORKSHOP_REACTING;
+		return PastelPlugins.POTION_WORKSHOP_REACTING;
 	}
 	
 	@Override

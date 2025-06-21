@@ -2,9 +2,9 @@ package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.blocks.PrimordialFireBlock;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
@@ -30,7 +30,7 @@ public class KindlingCoughEntity extends Projectile {
 	}
 	
 	public KindlingCoughEntity(Level world, LivingEntity owner) {
-		this(SpectrumEntityTypes.KINDLING_COUGH.get(), world);
+		this(PastelEntityTypes.KINDLING_COUGH.get(), world);
 		this.setOwner(owner);
 		this.setPos(owner.getX() - (owner.getBbWidth() + 1.0F) * 0.5 * Mth.sin(owner.yBodyRot * 0.017453292F), owner.getEyeY() - 0.1, owner.getZ() + (owner.getBbWidth() + 1.0F) * 0.5 * (double) Mth.cos(owner.yBodyRot * 0.017453292F));
 	}
@@ -71,7 +71,7 @@ public class KindlingCoughEntity extends Projectile {
 		}
 		
 		if (this.getOwner() instanceof LivingEntity owner) {
-			hitEntity.hurt(SpectrumDamageTypes.kindlingCough(this.level(), owner), DAMAGE);
+			hitEntity.hurt(PastelDamageTypes.kindlingCough(this.level(), owner), DAMAGE);
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class KindlingCoughEntity extends Projectile {
 		
 		for (int i = 0; i < 7; ++i) {
 			double g = 0.4 + 0.1 * (double) i;
-			this.level().addParticle(SpectrumParticleTypes.PRIMORDIAL_FLAME, this.getX(), this.getY(), this.getZ(), velX * g, velY, velZ * g);
+			this.level().addParticle(PastelParticleTypes.PRIMORDIAL_FLAME, this.getX(), this.getY(), this.getZ(), velX * g, velY, velZ * g);
 		}
 		
 		this.setDeltaMovement(velX, velY, velZ);

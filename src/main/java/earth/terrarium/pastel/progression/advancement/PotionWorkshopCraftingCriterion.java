@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class PotionWorkshopCraftingCriterion extends SimpleCriterionTrigger<PotionWorkshopCraftingCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("crafted_with_potion_workshop");
+	public static final ResourceLocation ID = PastelCommon.locate("crafted_with_potion_workshop");
 	
 	public void trigger(ServerPlayer player, ItemStack itemStack) {
 		this.trigger(player, (conditions) -> conditions.matches(itemStack));

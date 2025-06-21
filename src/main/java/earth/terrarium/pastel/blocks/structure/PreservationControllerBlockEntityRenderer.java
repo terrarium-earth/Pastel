@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PreservationControllerBlockEntityRenderer implements BlockEntityRenderer<PreservationControllerBlockEntity> {
 
-	private static final ResourceLocation AETHER_CORE = SpectrumCommon.locate("textures/block/preservation_controller_aether.png");
+	private static final ResourceLocation AETHER_CORE = PastelCommon.locate("textures/block/preservation_controller_aether.png");
 	protected static EntityRenderDispatcher dispatcher;
 
 	public PreservationControllerBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {

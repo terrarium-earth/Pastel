@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -139,7 +139,7 @@ public class IngredientStack implements ICustomIngredient {
 	}
 
 	public static void register(IEventBus modEventBus) {
-		DeferredRegister<IngredientType<?>> register = DeferredRegister.create(NeoForgeRegistries.INGREDIENT_TYPES, SpectrumCommon.MOD_ID);
+		DeferredRegister<IngredientType<?>> register = DeferredRegister.create(NeoForgeRegistries.INGREDIENT_TYPES, PastelCommon.MOD_ID);
 
 		register.register("ingredient_stack", () -> TYPE);
 

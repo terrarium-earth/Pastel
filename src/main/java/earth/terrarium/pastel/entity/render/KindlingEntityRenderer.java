@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.KindlingEntity;
 import earth.terrarium.pastel.entity.models.KindlingEntityModel;
 import earth.terrarium.pastel.entity.variants.KindlingVariant;
-import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
+import earth.terrarium.pastel.registries.client.PastelModelLayers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,11 +18,11 @@ import org.jetbrains.annotations.NotNull;
 @OnlyIn(Dist.CLIENT)
 public class KindlingEntityRenderer extends MobRenderer<KindlingEntity, KindlingEntityModel> {
 	
-	public static final ResourceLocation SADDLE_TEXTURE = SpectrumCommon.locate("textures/entity/kindling/saddle.png");
+	public static final ResourceLocation SADDLE_TEXTURE = PastelCommon.locate("textures/entity/kindling/saddle.png");
 	
 	public KindlingEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, new KindlingEntityModel(context.bakeLayer(SpectrumModelLayers.KINDLING)), 0.7F);
-		this.addLayer(new SaddleLayer<>(this, new KindlingEntityModel(context.bakeLayer(SpectrumModelLayers.KINDLING_SADDLE)), SADDLE_TEXTURE));
+		super(context, new KindlingEntityModel(context.bakeLayer(PastelModelLayers.KINDLING)), 0.7F);
+		this.addLayer(new SaddleLayer<>(this, new KindlingEntityModel(context.bakeLayer(PastelModelLayers.KINDLING_SADDLE)), SADDLE_TEXTURE));
 		this.addLayer(new KindlingEntityArmorFeatureRenderer(this, context.getModelSet()));
 	}
 	

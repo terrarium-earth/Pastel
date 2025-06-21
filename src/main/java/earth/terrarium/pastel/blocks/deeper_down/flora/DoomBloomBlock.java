@@ -2,10 +2,10 @@ package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -82,7 +82,7 @@ public class DoomBloomBlock extends FlowerBlock implements BonemealableBlock {
 	
 	@Override
 	protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-		return floor.is(SpectrumBlockTags.DOOMBLOOM_PLANTABLE);
+		return floor.is(PastelBlockTags.DOOMBLOOM_PLANTABLE);
 	}
 	
 	@Override
@@ -174,7 +174,7 @@ public class DoomBloomBlock extends FlowerBlock implements BonemealableBlock {
 	@Override
 	public void playerDestroy(Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
 		super.playerDestroy(world, player, pos, state, blockEntity, stack);
-		if (SpectrumEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.SILK_TOUCH, stack) == 0 && !stack.is(Tags.Items.TOOLS_SHEAR)) {
+		if (PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.SILK_TOUCH, stack) == 0 && !stack.is(Tags.Items.TOOLS_SHEAR)) {
 			explode(world, pos, state);
 		}
 	}
@@ -182,9 +182,9 @@ public class DoomBloomBlock extends FlowerBlock implements BonemealableBlock {
 	protected static void explode(Level world, BlockPos pos, BlockState state) {
 		if (state.getValue(AGE) == AGE_MAX) {
 			world.removeBlock(pos, false);
-			world.explode(null, SpectrumDamageTypes.incandescence(world), new ExplosionDamageCalculator(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3.0F, true, Level.ExplosionInteraction.BLOCK);
+			world.explode(null, PastelDamageTypes.incandescence(world), new ExplosionDamageCalculator(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3.0F, true, Level.ExplosionInteraction.BLOCK);
 			if (!world.isClientSide) {
-				popResource(world, pos, new ItemStack(SpectrumItems.DOOMBLOOM_SEED.get(), world.random.nextIntBetweenInclusive(3, 7)));
+				popResource(world, pos, new ItemStack(PastelItems.DOOMBLOOM_SEED.get(), world.random.nextIntBetweenInclusive(3, 7)));
 			}
 		}
 	}

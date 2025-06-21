@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.spirit_sallow;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -71,7 +71,7 @@ public class OminousSaplingBlock extends BushBlock implements EntityBlock {
 	
 	@Override
 	public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new OminousSaplingBlockEntity(SpectrumBlockEntities.OMINOUS_SAPLING.get(), pos, state);
+		return new OminousSaplingBlockEntity(PastelBlockEntities.OMINOUS_SAPLING.get(), pos, state);
 	}
 	
 	@Override

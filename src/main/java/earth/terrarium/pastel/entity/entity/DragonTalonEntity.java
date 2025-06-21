@@ -1,15 +1,15 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.item.SlotReservingItem;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.items.tools.DragonTalonItem;
 import earth.terrarium.pastel.mixin.accessors.PersistentProjectileEntityAccessor;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -46,7 +46,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 	private static final EntityDataAccessor<Boolean> HIT = SynchedEntityData.defineId(DragonTalonEntity.class, EntityDataSerializers.BOOLEAN);
 	
 	public DragonTalonEntity(Level world) {
-		this(SpectrumEntityTypes.DRAGON_TALON.get(), world);
+		this(PastelEntityTypes.DRAGON_TALON.get(), world);
 	}
 	
 	public DragonTalonEntity(EntityType<? extends ThrownTrident> entityType, Level world) {
@@ -64,7 +64,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 				case Y -> setDeltaMovement(getDeltaMovement().multiply(1, -1, 1));
 				case Z -> setDeltaMovement(getDeltaMovement().multiply(1, 1, -1));
 			}
-			playSound(SpectrumSoundEvents.METAL_HIT, 1, 1.5F);
+			playSound(PastelSoundEvents.METAL_HIT, 1, 1.5F);
 			return;
 		}
 		
@@ -86,7 +86,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 		Entity owner = this.getOwner();
 		
 		float damage = 2.0F;
-		DamageSource damageSource = SpectrumDamageTypes.impaling(level(), this, owner);
+		DamageSource damageSource = PastelDamageTypes.impaling(level(), this, owner);
 		if (level() instanceof ServerLevel serverWorld) {
 			damage *= EnchantmentHelper.modifyDamage(serverWorld, stack, attacked, damageSource, getDamage(stack));
 		}
@@ -100,12 +100,12 @@ public class DragonTalonEntity extends BidentBaseEntity {
 			}
 		}
 		
-		((TridentEntityAccessor) this).spectrum$setDealtDamage(true);
+		((TridentEntityAccessor) this).setDealtDamage(true);
 		recall();
 		this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
 		float g = 1.0F;
 		
-		this.playSound(SpectrumSoundEvents.IMPALING_HIT, g, 1.0F);
+		this.playSound(PastelSoundEvents.IMPALING_HIT, g, 1.0F);
 	}
 	
 	private float getDamage(ItemStack stack) {
@@ -136,7 +136,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 		var difMod = 4F;
 		var airborne = !owner.onGround();
 		var sneaking = owner.isShiftKeyDown();
-		var inertia = SpectrumEnchantmentHelper.getLevel(owner.level().registryAccess(), SpectrumEnchantments.INERTIA, getTrackedStack());
+		var inertia = PastelEnchantmentHelper.getLevel(owner.level().registryAccess(), PastelEnchantments.INERTIA, getTrackedStack());
 		
 		if (sneaking)
 			difMod *= 3;
@@ -171,7 +171,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 			yoink(owner, position(), 0.125, 0.165);
 		}
 		
-		if (SpectrumEnchantmentHelper.hasEnchantment(level().registryAccess(), Enchantments.CHANNELING, getTrackedStack()) && owner != null) {
+		if (PastelEnchantmentHelper.hasEnchantment(level().registryAccess(), Enchantments.CHANNELING, getTrackedStack()) && owner != null) {
 			if (level() instanceof ServerLevel world) {
 				for (int i = 0; i < 10; i++) {
 					world.sendParticles(ParticleTypes.GLOW,
@@ -181,13 +181,13 @@ public class DragonTalonEntity extends BidentBaseEntity {
 							1 + random.nextInt(2), 0, random.nextFloat() + 0.25F, 0, 0);
 				}
 				
-				world.playSeededSound(null, position().x, position().y, position().z, SpectrumSoundEvents.ELECTRIC_DISCHARGE, SoundSource.AMBIENT, 1F, 0.6F + random.nextFloat() * 0.2F, 0);
+				world.playSeededSound(null, position().x, position().y, position().z, PastelSoundEvents.ELECTRIC_DISCHARGE, SoundSource.AMBIENT, 1F, 0.6F + random.nextFloat() * 0.2F, 0);
 			}
 			remove(RemovalReason.DISCARDED);
 			return;
 		}
 		
-		getEntityData().set(TridentEntityAccessor.spectrum$getLoyalty(), (byte) 4);
+		getEntityData().set(TridentEntityAccessor.getLoyalty(), (byte) 4);
 		setNoPhysics(true);
 	}
 	
@@ -202,9 +202,9 @@ public class DragonTalonEntity extends BidentBaseEntity {
 		var bonusMod = 1f;
 		
 		if (yoinked instanceof LivingEntity livingYoink) {
-			bonusMod /= Optional.ofNullable(livingYoink.getEffect(SpectrumStatusEffects.DENSITY))
+			bonusMod /= Optional.ofNullable(livingYoink.getEffect(PastelStatusEffects.DENSITY))
 					.map(effect -> effect.getAmplifier() + 2).orElse(1);
-			bonusMod *= Optional.ofNullable(livingYoink.getEffect(SpectrumStatusEffects.LIGHTWEIGHT))
+			bonusMod *= Optional.ofNullable(livingYoink.getEffect(PastelStatusEffects.LIGHTWEIGHT))
 					.map(effect -> (effect.getAmplifier() + 2) / 1.5F).orElse(1F);
 		}
 		

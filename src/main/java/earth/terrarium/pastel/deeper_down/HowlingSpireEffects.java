@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.deeper_down;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.client.FallingAshParticle;
-import earth.terrarium.pastel.registries.SpectrumBiomes;
+import earth.terrarium.pastel.registries.PastelBiomes;
 import earth.terrarium.pastel.sound.BiomeAttenuatingSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -38,7 +38,7 @@ public class HowlingSpireEffects {
 		lastSpireTicks = spireTicks;
 		BiomeAttenuatingSoundInstance.update(biome);
 
-		boolean inHowlingSpires = biome.is(SpectrumBiomes.HOWLING_SPIRES);
+		boolean inHowlingSpires = biome.is(PastelBiomes.HOWLING_SPIRES);
 		if (inHowlingSpires) {
 			if (spireTicks < 60) {
 				spireTicks++;
@@ -67,7 +67,7 @@ public class HowlingSpireEffects {
 		}
 		
 		if (inHowlingSpires) {
-			var maxAsh = ashSpawns / (SpectrumCommon.CONFIG.ReducedParticles ? 2 : 1);
+			var maxAsh = ashSpawns / (PastelCommon.CONFIG.ReducedParticles ? 2 : 1);
 			spawnHowlingSpiresAsh(cameraEntity, maxAsh, random, world, biome);
 		}
 		
@@ -109,7 +109,7 @@ public class HowlingSpireEffects {
 			var pos = new BlockPos((int) x, (int) y, (int) z);
 			
 			if (clientWorld.getBlockState(pos).isAir()) {
-				clientWorld.addParticle(SpectrumParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
+				clientWorld.addParticle(PastelParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
 			}
 		}
 
@@ -122,7 +122,7 @@ public class HowlingSpireEffects {
 			var pos = new BlockPos((int) x, (int) y, (int) z);
 
 			if (clientWorld.getBlockState(pos).isAir()) {
-				clientWorld.addParticle(SpectrumParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
+				clientWorld.addParticle(PastelParticleTypes.FALLING_ASH, x, y, z, 0, 0, 0);
 			}
 		}
 	}

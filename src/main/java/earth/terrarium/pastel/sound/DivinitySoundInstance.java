@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.sound;
 
 
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import earth.terrarium.pastel.status_effects.AscensionStatusEffect;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -21,7 +21,7 @@ public class DivinitySoundInstance extends AbstractSoundInstance implements Tick
 	private boolean done;
 	
 	public DivinitySoundInstance() {
-		super(SpectrumSoundEvents.MUSIC_DIVINITY, SoundSource.RECORDS, SoundInstance.createUnseededRandom());
+		super(PastelSoundEvents.MUSIC_DIVINITY, SoundSource.RECORDS, SoundInstance.createUnseededRandom());
 		this.looping = true;
 		this.delay = 0;
 		this.volume = 0.8F;
@@ -49,7 +49,7 @@ public class DivinitySoundInstance extends AbstractSoundInstance implements Tick
 			this.volume = 0.5F + ((float) time / AscensionStatusEffect.MUSIC_INTRO_TICKS) * 0.2F;
 		}
 		Player player = client.player;
-		if (instances > 1 || player == null || !(player.hasEffect(SpectrumStatusEffects.ASCENSION) || player.hasEffect(SpectrumStatusEffects.DIVINITY))) {
+		if (instances > 1 || player == null || !(player.hasEffect(PastelStatusEffects.ASCENSION) || player.hasEffect(PastelStatusEffects.DIVINITY))) {
 			this.setDone();
 		} else {
 			this.x = ((float) player.getX());

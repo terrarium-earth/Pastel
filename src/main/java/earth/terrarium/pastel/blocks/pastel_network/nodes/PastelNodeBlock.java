@@ -3,16 +3,16 @@ package earth.terrarium.pastel.blocks.pastel_network.nodes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.ColorableBlock;
-import earth.terrarium.pastel.blocks.decoration.SpectrumFacingBlock;
+import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetwork;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -57,7 +57,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class PastelNodeBlock extends SpectrumFacingBlock implements EntityBlock, ColorableBlock {
+public class PastelNodeBlock extends PastelFacingBlock implements EntityBlock, ColorableBlock {
 
 	public static final MapCodec<PastelNodeBlock> CODEC = RecordCodecBuilder.mapCodec(i -> i.group(
 			propertiesCodec(),
@@ -91,7 +91,7 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements EntityBlock,
 
 	@Override
 	public RenderShape getRenderShape(BlockState state) {
-		return SpectrumCommon.CONFIG.MinimalNodes ? RenderShape.ENTITYBLOCK_ANIMATED : RenderShape.MODEL;
+		return PastelCommon.CONFIG.MinimalNodes ? RenderShape.ENTITYBLOCK_ANIMATED : RenderShape.MODEL;
 	}
 	
 	@Override
@@ -159,7 +159,7 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements EntityBlock,
 		}
 		
 		if (player.isShiftKeyDown() && stack.isEmpty()) {
-			if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_UPGRADING)) {
+			if (AdvancementHelper.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_UPGRADING)) {
 				if (!world.isClientSide) {
 					var removed = blockEntity.tryRemoveUpgrade();
 					if (!removed.isEmpty()) {
@@ -174,14 +174,14 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements EntityBlock,
 				return ItemInteractionResult.sidedSuccess(world.isClientSide());
 			}
 			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		} else if (stack.is(SpectrumItems.TUNING_STAMP.get())) {
+		} else if (stack.is(PastelItems.TUNING_STAMP.get())) {
 			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		} else if (player.isCreative() && stack.is(SpectrumItems.PAINTBRUSH.get())) {
+		} else if (player.isCreative() && stack.is(PastelItems.PAINTBRUSH.get())) {
 			sendDebugMessage(world, pos, player, blockEntity);
 			return ItemInteractionResult.sidedSuccess(world.isClientSide());
-		} else if (AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_UPGRADING) && stack.is(SpectrumItemTags.PASTEL_NODE_UPGRADES)) {
+		} else if (AdvancementHelper.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_UPGRADING) && stack.is(PastelItemTags.PASTEL_NODE_UPGRADES)) {
 			if (!world.isClientSide() && blockEntity.tryInteractRings(stack, pastelNodeType)) {
-				SpectrumAdvancementCriteria.PASTEL_NODE_UPGRADING.trigger((ServerPlayer) player, stack);
+				PastelAdvancementCriteria.PASTEL_NODE_UPGRADING.trigger((ServerPlayer) player, stack);
 				if (!player.getAbilities().instabuild)
 					stack.shrink(1);
 				blockEntity.updateUpgrades();
@@ -189,7 +189,7 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements EntityBlock,
 				blockEntity.updateInClientWorld();
 			}
 			
-			world.playLocalSound(pos, SpectrumSoundEvents.MEDIUM_CRYSTAL_RING, SoundSource.BLOCKS, 0.25F, 0.9F + world.getRandom().nextFloat() * 0.2F, true);
+			world.playLocalSound(pos, PastelSoundEvents.MEDIUM_CRYSTAL_RING, SoundSource.BLOCKS, 0.25F, 0.9F + world.getRandom().nextFloat() * 0.2F, true);
 			return ItemInteractionResult.sidedSuccess(world.isClientSide());
 		} else if (this.pastelNodeType.usesFilters()) {
 			if (!world.isClientSide) {
@@ -254,7 +254,7 @@ public class PastelNodeBlock extends SpectrumFacingBlock implements EntityBlock,
 		if (!(user instanceof Player player)) {
 			return false;
 		}
-		if (!AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PASTEL_NODE_COLORING)) {
+		if (!AdvancementHelper.hasAdvancement(player, PastelAdvancements.PASTEL_NODE_COLORING)) {
 			return false;
 		}
 		@Nullable PastelNodeBlockEntity blockEntity = getBlockEntity(world, pos);

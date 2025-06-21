@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.energy;
 
 import earth.terrarium.pastel.components.InkStorageComponent;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -41,7 +41,7 @@ public interface InkStorageItem<PStorage extends InkStorage> {
 	PStorage getEnergyStorage(ItemStack itemStack);
 	
 	default void setEnergyStorage(ItemStack itemStack, InkStorage storage) {
-		itemStack.set(SpectrumDataComponentTypes.INK_STORAGE, new InkStorageComponent(storage));
+		itemStack.set(PastelDataComponentTypes.INK_STORAGE, new InkStorageComponent(storage));
 	}
 	
 	ItemStack getDefaultInstance();

@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -22,22 +22,22 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class SpiritInstillingCategory extends GatedDisplayCategory<SpiritInstillingDisplay> {
 	
-	private static final EntryIngredient SPIRIT_INSTILLER = EntryIngredients.of(SpectrumBlocks.SPIRIT_INSTILLER.get());
-	private static final EntryIngredient ITEM_BOWL_CALCITE = EntryIngredients.of(SpectrumBlocks.ITEM_BOWL_CALCITE.get());
+	private static final EntryIngredient SPIRIT_INSTILLER = EntryIngredients.of(PastelBlocks.SPIRIT_INSTILLER.get());
+	private static final EntryIngredient ITEM_BOWL_CALCITE = EntryIngredients.of(PastelBlocks.ITEM_BOWL_CALCITE.get());
 	
 	@Override
 	public CategoryIdentifier<SpiritInstillingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.SPIRIT_INSTILLER;
+		return PastelPlugins.SPIRIT_INSTILLER;
 	}
 	
 	@Override
 	public Component getTitle() {
-		return SpectrumBlocks.SPIRIT_INSTILLER.get().getName();
+		return PastelBlocks.SPIRIT_INSTILLER.get().getName();
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.SPIRIT_INSTILLER.get());
+		return EntryStacks.of(PastelBlocks.SPIRIT_INSTILLER.get());
 	}
 	
 	@Override

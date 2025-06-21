@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.crystallarieum.*;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
@@ -18,10 +18,10 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<CrystallarieumRecipe> {
-	private final static ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/modonomicon/crystallarieum.png");
+	private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/modonomicon/crystallarieum.png");
 	
 	public CrystallarieumEmiRecipeGated(CrystallarieumRecipe recipe) {
-		super(SpectrumEmiRecipeCategories.CRYSTALLARIEUM, recipe, 124, 100);
+		super(PastelEmiRecipeCategories.CRYSTALLARIEUM, recipe, 124, 100);
 		inputs = List.of(
 				EmiIngredient.of(recipe.getIngredientStack()),
 				EmiStack.of(recipe.getGrowthStages().getFirst().getBlock())
@@ -40,7 +40,7 @@ public class CrystallarieumEmiRecipeGated extends GatedSpectrumEmiRecipe<Crystal
 		widgets.addSlot(inputs.getFirst(), 0, 0);
 		widgets.addSlot(EmiStack.of(recipe.getFluidMedium().getFluid()), 0, 18);
 		
-		widgets.addSlot(EmiStack.of(((CrystallarieumBlock) SpectrumBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor())), 20, 18).drawBack(false);
+		widgets.addSlot(EmiStack.of(((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get()).asStackWithColor(recipe.getInkColor())), 20, 18).drawBack(false);
 		
 		widgets.addFillingArrow(40, 9, recipe.getSecondsPerGrowthStage() * 1000);
 		

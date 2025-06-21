@@ -2,7 +2,7 @@ package earth.terrarium.pastel.api.energy.storage;
 
 import earth.terrarium.pastel.api.energy.InkStorage;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -22,7 +22,7 @@ public class IndividualCappedInkStorage implements InkStorage {
 	
 	// support all ink colors
 	public IndividualCappedInkStorage(long maxEnergyPerColor) {
-		this(maxEnergyPerColor, SpectrumRegistries.INK_COLOR);
+		this(maxEnergyPerColor, PastelRegistries.INK_COLOR);
 	}
 	
 	// support selected ink colors
@@ -135,7 +135,7 @@ public class IndividualCappedInkStorage implements InkStorage {
 		tooltip.add(Component.translatable("item.pastel.ink_storage.stores_ink_per_type", getShortenedNumberString(maxEnergyPerColor)));
 		
 		// we are iterating them this way to preserve the ordering
-		for (InkColor color : SpectrumRegistries.INK_COLOR) {
+		for (InkColor color : PastelRegistries.INK_COLOR) {
 			long amount = this.storedEnergy.getOrDefault(color, 0L);
 			if (amount > 0) {
 				InkStorage.addInkStoreBulletTooltip(tooltip, color, amount);

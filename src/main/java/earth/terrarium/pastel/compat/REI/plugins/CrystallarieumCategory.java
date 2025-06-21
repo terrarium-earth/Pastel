@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.crystallarieum.*;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -27,11 +27,11 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumDisplay> {
 	
-	public final static ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/modonomicon/crystallarieum.png");
+	public final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/modonomicon/crystallarieum.png");
 	
 	@Override
 	public CategoryIdentifier<CrystallarieumDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.CRYSTALLARIEUM;
+		return PastelPlugins.CRYSTALLARIEUM;
 	}
 	
 	@Override
@@ -41,7 +41,7 @@ public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumD
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.CRYSTALLARIEUM.get());
+		return EntryStacks.of(PastelBlocks.CRYSTALLARIEUM.get());
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public class CrystallarieumCategory extends GatedDisplayCategory<CrystallarieumD
 		widgets.add(Widgets.createSlot(new Point(startPoint.x - 2, startPoint.y + 1 + 8)).markInput().entries(input));
 		
 		// crystallarieum
-		ItemStack crystallarieumStack = ((CrystallarieumBlock) SpectrumBlocks.CRYSTALLARIEUM.get()).asStackWithColor(display.inkColor);
+		ItemStack crystallarieumStack = ((CrystallarieumBlock) PastelBlocks.CRYSTALLARIEUM.get()).asStackWithColor(display.inkColor);
 		widgets.add(Widgets.createSlot(new Point(startPoint.x + 20, startPoint.y + 3 + 16)).entries(EntryIngredients.of(crystallarieumStack)).disableBackground());
 		
 		// output arrow

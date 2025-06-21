@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.deeper_down.groundcover;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -37,7 +37,7 @@ public class BlackslagBlock extends RotatedPillarBlock implements BonemealableBl
 		
 		for (BlockPos currPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
 			BlockState currState = world.getBlockState(currPos);
-			if (currState.is(SpectrumBlockTags.SPREADS_TO_BLACKSLAG)) {
+			if (currState.is(PastelBlockTags.SPREADS_TO_BLACKSLAG)) {
 				return true;
 			}
 		}
@@ -57,7 +57,7 @@ public class BlackslagBlock extends RotatedPillarBlock implements BonemealableBl
 		// search for all valid neighboring blocks and choose a weighted random one
 		for (BlockPos blockPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
 			BlockState blockState = world.getBlockState(blockPos);
-			if (blockState.is(SpectrumBlockTags.SPREADS_TO_BLACKSLAG)) {
+			if (blockState.is(PastelBlockTags.SPREADS_TO_BLACKSLAG)) {
 				nextStates.add(blockState);
 			}
 		}

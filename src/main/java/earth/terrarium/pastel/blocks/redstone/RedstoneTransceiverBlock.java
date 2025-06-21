@@ -3,8 +3,8 @@ package earth.terrarium.pastel.blocks.redstone;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.block.ColorableBlock;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -82,9 +82,9 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
 		world.setBlock(blockPos, newState, Block.UPDATE_CLIENTS);
 		
 		if (newState.getValue(SENDER)) {
-			world.playSound(null, blockPos, SpectrumSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 0.9F);
+			world.playSound(null, blockPos, PastelSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 0.9F);
 		} else {
-			world.playSound(null, blockPos, SpectrumSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 1.1F);
+			world.playSound(null, blockPos, PastelSoundEvents.REDSTONE_MECHANISM_TRIGGER, SoundSource.BLOCKS, 0.3F, 1.1F);
 		}
 		checkTickOnNeighbor(world, blockPos, newState);
 	}
@@ -143,7 +143,7 @@ public class RedstoneTransceiverBlock extends DiodeBlock implements EntityBlock,
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? null : Support.checkType(type, SpectrumBlockEntities.REDSTONE_TRANSCEIVER.get(), RedstoneTransceiverBlockEntity::serverTick);
+		return world.isClientSide ? null : Support.checkType(type, PastelBlockEntities.REDSTONE_TRANSCEIVER.get(), RedstoneTransceiverBlockEntity::serverTick);
 	}
 
 	@Override

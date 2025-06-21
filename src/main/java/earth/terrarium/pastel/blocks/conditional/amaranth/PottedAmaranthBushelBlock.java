@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.conditional.amaranth;
 
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
@@ -29,7 +29,7 @@ public class PottedAmaranthBushelBlock extends FlowerPotBlock implements Revelat
 	
 	@Override
 	public ResourceLocation getCloakAdvancementIdentifier() {
-		return SpectrumAdvancements.REVEAL_AMARANTH;
+		return PastelAdvancements.REVEAL_AMARANTH;
 	}
 	
 	@Override

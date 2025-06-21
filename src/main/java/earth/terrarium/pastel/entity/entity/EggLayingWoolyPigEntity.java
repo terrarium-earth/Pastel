@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumLootTables;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelLootTables;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -56,7 +56,6 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
@@ -68,12 +67,12 @@ import java.util.stream.Collectors;
 
 public class EggLayingWoolyPigEntity extends Animal implements Shearable {
 	
-	private static final Ingredient FOOD = Ingredient.of(SpectrumBlocks.AMARANTH_BUSHEL.get());
+	private static final Ingredient FOOD = Ingredient.of(PastelBlocks.AMARANTH_BUSHEL.get());
 	
 	private static final int MAX_GRASS_TIMER = 40;
 	private static final EntityDataAccessor<Byte> COLOR_AND_SHEARED = SynchedEntityData.defineId(EggLayingWoolyPigEntity.class, EntityDataSerializers.BYTE);
 	private static final EntityDataAccessor<Boolean> HATLESS = SynchedEntityData.defineId(EggLayingWoolyPigEntity.class, EntityDataSerializers.BOOLEAN);
-	private static final Map<DyeColor, Integer> COLORS = new EnumMap<>(SpectrumColorHelper.VANILLA_DYE_COLORS.stream().collect(Collectors.toMap(Function.identity(), EggLayingWoolyPigEntity::getDyedColor)));
+	private static final Map<DyeColor, Integer> COLORS = new EnumMap<>(ColorHelper.VANILLA_DYE_COLORS.stream().collect(Collectors.toMap(Function.identity(), EggLayingWoolyPigEntity::getDyedColor)));
 	
 	private int eatGrassTimer;
 	private EatBlockGoal eatGrassGoal;
@@ -181,7 +180,7 @@ public class EggLayingWoolyPigEntity extends Animal implements Shearable {
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
 		EggLayingWoolyPigEntity other = (EggLayingWoolyPigEntity) entity;
-		EggLayingWoolyPigEntity child = SpectrumEntityTypes.EGG_LAYING_WOOLY_PIG.get().create(world);
+		EggLayingWoolyPigEntity child = PastelEntityTypes.EGG_LAYING_WOOLY_PIG.get().create(world);
 		if (child != null) {
 			child.setColor(this.getChildColor(this, other));
 			if (world.random.nextInt(50) == 0) {
@@ -213,22 +212,22 @@ public class EggLayingWoolyPigEntity extends Animal implements Shearable {
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SpectrumSoundEvents.ENTITY_EGG_LAYING_WOOLY_PIG_AMBIENT;
+		return PastelSoundEvents.ENTITY_EGG_LAYING_WOOLY_PIG_AMBIENT;
 	}
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SpectrumSoundEvents.ENTITY_EGG_LAYING_WOOLY_HURT;
+		return PastelSoundEvents.ENTITY_EGG_LAYING_WOOLY_HURT;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SpectrumSoundEvents.ENTITY_EGG_LAYING_WOOLY_DEATH;
+		return PastelSoundEvents.ENTITY_EGG_LAYING_WOOLY_DEATH;
 	}
 	
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState state) {
-		this.playSound(SpectrumSoundEvents.ENTITY_EGG_LAYING_WOOLY_STEP, 0.15F, 1.0F);
+		this.playSound(PastelSoundEvents.ENTITY_EGG_LAYING_WOOLY_STEP, 0.15F, 1.0F);
 	}
 	
 	@Override
@@ -277,7 +276,7 @@ public class EggLayingWoolyPigEntity extends Animal implements Shearable {
 				.withParameter(LootContextParams.THIS_ENTITY, this)
 				.withParameter(LootContextParams.ORIGIN, this.position());
 		
-		LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(SpectrumLootTables.EGG_LAYING_WOOLY_PIG_SHEARING);
+		LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(PastelLootTables.EGG_LAYING_WOOLY_PIG_SHEARING);
 		return lootTable.getRandomItems(builder.create(LootContextParamSets.GIFT));
 	}
 	

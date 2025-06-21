@@ -1,9 +1,7 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.sound.TakeOffBeltSoundInstance;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.network.FriendlyByteBuf;
@@ -13,7 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 
 public record PlayTakeOffBeltSoundInstancePayload() implements CustomPacketPayload {
 	
-	public static final Type<PlayTakeOffBeltSoundInstancePayload> ID = SpectrumC2SPackets.makeId("play_take_off_belt_sound_instance");
+	public static final Type<PlayTakeOffBeltSoundInstancePayload> ID = PastelC2SPackets.makeId("play_take_off_belt_sound_instance");
 	public static final StreamCodec<FriendlyByteBuf, PlayTakeOffBeltSoundInstancePayload> CODEC = StreamCodec.of((buf, value) -> {
 	}, buf -> new PlayTakeOffBeltSoundInstancePayload());
 	

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.crystallarieum;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.render.FluidRendering;
 import net.neoforged.api.distmarker.Dist;
@@ -34,7 +34,7 @@ import net.neoforged.neoforge.client.textures.*;
 @OnlyIn(Dist.CLIENT)
 public class CrystallarieumBlockEntityRenderer<T extends CrystallarieumBlockEntity> implements BlockEntityRenderer<T> {
 	
-	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/crystallarieum"));
+	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/crystallarieum"));
 	
 	private final ModelPart active;
 	private final ModelPart inactive;

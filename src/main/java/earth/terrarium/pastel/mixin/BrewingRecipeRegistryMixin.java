@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.registries.SpectrumPotions;
+import earth.terrarium.pastel.registries.PastelPotions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionBrewing;
@@ -14,9 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BrewingRecipeRegistryMixin {
 	
 	@Inject(method = "isIngredient", at = @At("HEAD"), cancellable = true)
-	private void spectrum$disallowPigmentPotionBrewing(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+	private void disallowPigmentPotionBrewing(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		PotionContents potionContentsComponent = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
-		if (potionContentsComponent.potion().isPresent() && potionContentsComponent.potion().get().equals(SpectrumPotions.PIGMENT_POTION)) {
+		if (potionContentsComponent.potion().isPresent() && potionContentsComponent.potion().get().equals(PastelPotions.PIGMENT_POTION)) {
 			cir.setReturnValue(false);
 		}
 	}

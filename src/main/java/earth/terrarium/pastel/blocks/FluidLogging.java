@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks;
 
 import earth.terrarium.pastel.blocks.fluid.LiquidCrystalFluidBlock;
-import earth.terrarium.pastel.registries.SpectrumFluids;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelFluids;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.FluidTags;
@@ -50,7 +50,7 @@ public class FluidLogging {
 		public FluidState getFluidState() {
 			switch (this) {
 				case LIQUID_CRYSTAL -> {
-					return SpectrumFluids.LIQUID_CRYSTAL.get().getSource(false);
+					return PastelFluids.LIQUID_CRYSTAL.get().getSource(false);
 				}
 				case WATER -> {
 					return Fluids.WATER.getSource(false);
@@ -62,7 +62,7 @@ public class FluidLogging {
 		}
 		
 		public static State getForFluidState(FluidState fluidState) {
-			if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL.get()) {
+			if (fluidState.getType() == PastelFluids.LIQUID_CRYSTAL.get()) {
 				return LIQUID_CRYSTAL;
 			} else if (fluidState.is(FluidTags.WATER)) {
 				return WATER;
@@ -90,7 +90,7 @@ public class FluidLogging {
 		
 		public void onEntityCollision(BlockState state, Level world, BlockPos pos, Entity entity) {
 			if (this == State.LIQUID_CRYSTAL) {
-				SpectrumFluids.LIQUID_CRYSTAL.get().onEntityCollision(state, world, pos, entity);
+				PastelFluids.LIQUID_CRYSTAL.get().onEntityCollision(state, world, pos, entity);
 			}
 		}
 	}
@@ -99,15 +99,15 @@ public class FluidLogging {
 	public static final EnumProperty<State> ANY_EXCLUDING_NONE = EnumProperty.create("fluid_logged", State.class, State.WATER, State.LIQUID_CRYSTAL);
 	public static final EnumProperty<State> NONE_AND_CRYSTAL = EnumProperty.create("fluid_logged", State.class, State.NOT_LOGGED, State.LIQUID_CRYSTAL);
 	
-	public interface SpectrumFluidLoggable extends SpectrumFluidDrainable, SpectrumFluidFillable {
+	public interface PastelFluidLoggable extends PastelFluidDrainable, PastelFluidFillable {
 	
 	}
 	
-	public interface SpectrumFluidFillable extends LiquidBlockContainer {
+	public interface PastelFluidFillable extends LiquidBlockContainer {
 		
 		@Override
 		default boolean canPlaceLiquid(@Nullable Player player, BlockGetter world, BlockPos pos, BlockState state, Fluid fluid) {
-			return state.getValue(ANY_INCLUDING_NONE) == State.NOT_LOGGED && (fluid == Fluids.WATER || fluid == SpectrumFluids.LIQUID_CRYSTAL.get());
+			return state.getValue(ANY_INCLUDING_NONE) == State.NOT_LOGGED && (fluid == Fluids.WATER || fluid == PastelFluids.LIQUID_CRYSTAL.get());
 		}
 		
 		@Override
@@ -117,7 +117,7 @@ public class FluidLogging {
 					if (fluidState.getType() == Fluids.WATER) {
 						world.setBlock(pos, state.setValue(ANY_INCLUDING_NONE, State.WATER), Block.UPDATE_ALL);
 						world.scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(world));
-					} else if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL.get()) {
+					} else if (fluidState.getType() == PastelFluids.LIQUID_CRYSTAL.get()) {
 						world.setBlock(pos, state.setValue(ANY_INCLUDING_NONE, State.LIQUID_CRYSTAL), Block.UPDATE_ALL);
 						world.scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(world));
 					}
@@ -131,7 +131,7 @@ public class FluidLogging {
 		
 	}
 	
-	public interface SpectrumFluidDrainable extends BucketPickup {
+	public interface PastelFluidDrainable extends BucketPickup {
 		
 		@Override
 		default ItemStack pickupBlock(@Nullable Player player, LevelAccessor world, BlockPos pos, BlockState state) {
@@ -148,7 +148,7 @@ public class FluidLogging {
 				if (!state.canSurvive(world, pos)) {
 					world.destroyBlock(pos, true);
 				}
-				return new ItemStack(SpectrumItems.LIQUID_CRYSTAL_BUCKET.get());
+				return new ItemStack(PastelItems.LIQUID_CRYSTAL_BUCKET.get());
 			}
 			
 			return ItemStack.EMPTY;

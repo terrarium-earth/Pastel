@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumLootTables;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -40,12 +40,12 @@ public class NightdewBlock extends TriStateVineBlock {
 
     @Override
     public boolean mayPlaceOn(BlockState roof, BlockGetter world, BlockPos pos) {
-        return super.mayPlaceOn(roof, world, pos) && roof.is(SpectrumBlockTags.NIGHTDEW_SOILS);
+        return super.mayPlaceOn(roof, world, pos) && roof.is(PastelBlockTags.NIGHTDEW_SOILS);
     }
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return SpectrumItems.NIGHTDEW_SPROUT.get().getDefaultInstance();
+        return PastelItems.NIGHTDEW_SPROUT.get().getDefaultInstance();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class NightdewBlock extends TriStateVineBlock {
         var dropChance = Mth.clampedLerp(BASE_BURGEON_CHANCE, MAX_BURGEON_CHANCE, sleepingEntities);
 
         if (random.nextFloat() < 1 / dropChance)
-			for (ItemStack rareStack : getRareStacks(state, world, pos, tool, SpectrumLootTables.NIGHTDEW_VINE_RARE_DROP)) {
+			for (ItemStack rareStack : getRareStacks(state, world, pos, tool, PastelLootTables.NIGHTDEW_VINE_RARE_DROP)) {
                 popResource(world, pos, rareStack);
             }
     }

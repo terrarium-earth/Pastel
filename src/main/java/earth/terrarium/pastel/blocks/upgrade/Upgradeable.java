@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.upgrade;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -171,7 +171,7 @@ public interface Upgradeable {
 		if (advancementPlayerUUID != null && !world.isClientSide) {
 			ServerPlayer player = (ServerPlayer) PlayerOwned.getPlayerEntityIfOnline(advancementPlayerUUID);
 			if (player != null) {
-				SpectrumAdvancementCriteria.UPGRADE_PLACING.trigger(player, (ServerLevel) world, blockPos, upgradeCount, upgradeMods);
+				PastelAdvancementCriteria.UPGRADE_PLACING.trigger(player, (ServerLevel) world, blockPos, upgradeCount, upgradeMods);
 			}
 		}
 

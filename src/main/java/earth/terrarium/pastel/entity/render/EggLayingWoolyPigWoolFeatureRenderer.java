@@ -6,7 +6,7 @@ import earth.terrarium.pastel.entity.entity.EggLayingWoolyPigEntity;
 import earth.terrarium.pastel.entity.models.EggLayingWoolyPigEntityModel;
 import earth.terrarium.pastel.entity.models.EggLayingWoolyPigHatEntityModel;
 import earth.terrarium.pastel.entity.models.EggLayingWoolyPigWoolEntityModel;
-import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
+import earth.terrarium.pastel.registries.client.PastelModelLayers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -25,8 +25,8 @@ public class EggLayingWoolyPigWoolFeatureRenderer extends RenderLayer<EggLayingW
 	
 	public EggLayingWoolyPigWoolFeatureRenderer(EggLayingWoolyPigEntityRenderer context, EntityModelSet loader) {
 		super(context);
-		this.hat = new EggLayingWoolyPigHatEntityModel(loader.bakeLayer(SpectrumModelLayers.WOOLY_PIG_HAT));
-		this.wool = new EggLayingWoolyPigWoolEntityModel(loader.bakeLayer(SpectrumModelLayers.WOOLY_PIG_WOOL));
+		this.hat = new EggLayingWoolyPigHatEntityModel(loader.bakeLayer(PastelModelLayers.WOOLY_PIG_HAT));
+		this.wool = new EggLayingWoolyPigWoolEntityModel(loader.bakeLayer(PastelModelLayers.WOOLY_PIG_WOOL));
 	}
 	
 	@Override

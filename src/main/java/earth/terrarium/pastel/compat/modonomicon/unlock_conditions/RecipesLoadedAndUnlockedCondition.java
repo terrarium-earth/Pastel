@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.klikli_dev.modonomicon.book.conditions.BookCondition;
 import com.klikli_dev.modonomicon.book.conditions.context.BookConditionContext;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;
 import net.minecraft.core.HolderLookup;
@@ -24,7 +24,7 @@ import java.util.Optional;
 
 public class RecipesLoadedAndUnlockedCondition extends BookCondition {
     
-    protected static final String TOOLTIP = "book.condition.tooltip." + SpectrumCommon.MOD_ID + ".recipes_loaded_and_unlocked";
+    protected static final String TOOLTIP = "book.condition.tooltip." + PastelCommon.MOD_ID + ".recipes_loaded_and_unlocked";
     
     protected List<ResourceLocation> recipeIDs;
     

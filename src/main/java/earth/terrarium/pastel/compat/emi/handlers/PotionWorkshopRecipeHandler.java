@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.emi.handlers;
 
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.inventories.PotionWorkshopScreenHandler;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
@@ -27,6 +27,6 @@ public class PotionWorkshopRecipeHandler implements StandardRecipeHandler<Potion
     @Override
     public boolean supportsRecipe(EmiRecipe recipe) {
         EmiRecipeCategory category = recipe.getCategory();
-        return (category == SpectrumEmiRecipeCategories.POTION_WORKSHOP_BREWING || category == SpectrumEmiRecipeCategories.POTION_WORKSHOP_CRAFTING) && recipe.supportsRecipeTree();
+        return (category == PastelEmiRecipeCategories.POTION_WORKSHOP_BREWING || category == PastelEmiRecipeCategories.POTION_WORKSHOP_CRAFTING) && recipe.supportsRecipeTree();
     }
 }

@@ -3,11 +3,11 @@ package earth.terrarium.pastel.items.tools;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
@@ -69,9 +69,9 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 				applyDoTProc(magicDamage, base + 5F,0.8F, target, effect, false, true);
 			}
 		}
-		else if (target.hasEffect(SpectrumStatusEffects.DEADLY_POISON)) {
-			var effect = target.getEffect(SpectrumStatusEffects.DEADLY_POISON);
-			if (target.removeEffect(SpectrumStatusEffects.DEADLY_POISON)) {
+		else if (target.hasEffect(PastelStatusEffects.DEADLY_POISON)) {
+			var effect = target.getEffect(PastelStatusEffects.DEADLY_POISON);
+			if (target.removeEffect(PastelStatusEffects.DEADLY_POISON)) {
 				assert effect != null;
 				applyDoTProc(magicDamage, base + 10F,1.0F, target, effect, true, true);
 			}
@@ -83,11 +83,11 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 				applyDoTProc(magicDamage, base + 5F,0.1F, target, effect, true, false);
 			}
 		}
-		else if (SpectrumStatusEffectTags.hasEffectWithTag(target, SpectrumStatusEffectTags.SOPORIFIC)) {
+		else if (PastelStatusEffectTags.hasEffectWithTag(target, PastelStatusEffectTags.SOPORIFIC)) {
 			var scaling = SleepStatusEffect.getSleepScaling(target);
 			if (scaling > 0) {
-				target.hurt(SpectrumDamageTypes.sleep(target.level(),target), scaling);
-				target.playSound(SpectrumSoundEvents.DEEP_CRYSTAL_RING, 0.5F, 0.8F + target.getRandom().nextFloat() * 0.4F);
+				target.hurt(PastelDamageTypes.sleep(target.level(),target), scaling);
+				target.playSound(PastelSoundEvents.DEEP_CRYSTAL_RING, 0.5F, 0.8F + target.getRandom().nextFloat() * 0.4F);
 			}
 		}
 		else {
@@ -95,7 +95,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 					.stream()
 					.filter(instance -> instance.getEffect().value().isBeneficial())
 					.filter(instance -> !instance.isInfiniteDuration())
-					.filter(instance -> !((MobEffectInstanceInjector) instance).spectrum$isIncurable())
+					.filter(instance -> !((MobEffectInstanceInjector) instance).isIncurable())
 					.findFirst();
 
 			if (stolenEffect.isEmpty() || !target.removeEffect(stolenEffect.get().getEffect()))
@@ -115,7 +115,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 			if (amp > 0)
 				target.addEffect(new MobEffectInstance(effect.getEffect(), duration, amp - 1, effect.isAmbient(), effect.isVisible(), effect.showIcon()));
 
-			target.playSound(SpectrumSoundEvents.SOFT_HUM, 0.275F, 0.8F + target.getRandom().nextFloat() * 0.4F);
+			target.playSound(PastelSoundEvents.SOFT_HUM, 0.275F, 0.8F + target.getRandom().nextFloat() * 0.4F);
 		}
 	}
 
@@ -123,7 +123,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 		if (!(target instanceof LivingEntity livingEntity))
 			return false;
 
-		if (!player.getMainHandItem().is(SpectrumItems.NECTAR_LANCE.get()))
+		if (!player.getMainHandItem().is(PastelItems.NECTAR_LANCE.get()))
 			return false;
 
 		if (livingEntity.isSleeping())
@@ -150,7 +150,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 		}
 
 		target.hurt(type, damage);
-		target.playSound(SpectrumSoundEvents.DEEP_CRYSTAL_RING, 1.25F, 0.9F + target.getRandom().nextFloat() * 0.2F);
+		target.playSound(PastelSoundEvents.DEEP_CRYSTAL_RING, 1.25F, 0.9F + target.getRandom().nextFloat() * 0.2F);
 	}
 
 

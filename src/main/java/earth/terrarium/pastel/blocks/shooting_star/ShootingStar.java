@@ -2,9 +2,9 @@ package earth.terrarium.pastel.blocks.shooting_star;
 
 import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumLootTables;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelLootTables;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -20,11 +20,11 @@ import org.joml.Vector3f;
 public interface ShootingStar {
 	
 	enum Variant implements StringRepresentable {
-		GLISTERING("glistering", SpectrumLootTables.GLISTERING_SHOOTING_STAR),
-		FIERY("fiery", SpectrumLootTables.FIERY_SHOOTING_STAR),
-		COLORFUL("colorful", SpectrumLootTables.COLORFUL_SHOOTING_STAR),
-		PRISTINE("pristine", SpectrumLootTables.PRISTINE_SHOOTING_STAR),
-		GEMSTONE("gemstone", SpectrumLootTables.GEMSTONE_SHOOTING_STAR);
+		GLISTERING("glistering", PastelLootTables.GLISTERING_SHOOTING_STAR),
+		FIERY("fiery", PastelLootTables.FIERY_SHOOTING_STAR),
+		COLORFUL("colorful", PastelLootTables.COLORFUL_SHOOTING_STAR),
+		PRISTINE("pristine", PastelLootTables.PRISTINE_SHOOTING_STAR),
+		GEMSTONE("gemstone", PastelLootTables.GEMSTONE_SHOOTING_STAR);
 		
 		public static Codec<Variant> CODEC = StringRepresentable.fromEnum(Variant::values);
 		public static final StreamCodec<ByteBuf, Variant> STREAM_CODEC = PacketCodecHelper.enumOf(Variant::values);
@@ -89,19 +89,19 @@ public interface ShootingStar {
 		public Block getBlock() {
 			switch (this) {
 				case PRISTINE -> {
-                    return SpectrumBlocks.PRISTINE_SHOOTING_STAR.get();
+                    return PastelBlocks.PRISTINE_SHOOTING_STAR.get();
 				}
 				case GEMSTONE -> {
-                    return SpectrumBlocks.GEMSTONE_SHOOTING_STAR.get();
+                    return PastelBlocks.GEMSTONE_SHOOTING_STAR.get();
 				}
 				case FIERY -> {
-                    return SpectrumBlocks.FIERY_SHOOTING_STAR.get();
+                    return PastelBlocks.FIERY_SHOOTING_STAR.get();
 				}
 				case COLORFUL -> {
-                    return SpectrumBlocks.COLORFUL_SHOOTING_STAR.get();
+                    return PastelBlocks.COLORFUL_SHOOTING_STAR.get();
 				}
 				default -> {
-                    return SpectrumBlocks.GLISTERING_SHOOTING_STAR.get();
+                    return PastelBlocks.GLISTERING_SHOOTING_STAR.get();
 				}
 			}
 		}
@@ -111,48 +111,48 @@ public interface ShootingStar {
 				case GLISTERING -> {
 					int r = random.nextInt(5);
 					if (r == 0) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.YELLOW);
+						return ColorHelper.getRGBVec(DyeColor.YELLOW);
 					} else if (r == 1) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.WHITE);
+						return ColorHelper.getRGBVec(DyeColor.WHITE);
 					} else if (r == 2) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.ORANGE);
+						return ColorHelper.getRGBVec(DyeColor.ORANGE);
 					} else if (r == 3) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.LIME);
+						return ColorHelper.getRGBVec(DyeColor.LIME);
 					} else {
-						return SpectrumColorHelper.getRGBVec(DyeColor.BLUE);
+						return ColorHelper.getRGBVec(DyeColor.BLUE);
 					}
 				}
 				case COLORFUL -> {
-					return SpectrumColorHelper.getRGBVec(SpectrumColorHelper.VANILLA_DYE_COLORS.get(random.nextInt(SpectrumColorHelper.VANILLA_DYE_COLORS.size())));
+					return ColorHelper.getRGBVec(ColorHelper.VANILLA_DYE_COLORS.get(random.nextInt(ColorHelper.VANILLA_DYE_COLORS.size())));
 				}
 				case FIERY -> {
 					int r = random.nextInt(2);
 					if (r == 0) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.ORANGE);
+						return ColorHelper.getRGBVec(DyeColor.ORANGE);
 					} else {
-						return SpectrumColorHelper.getRGBVec(DyeColor.RED);
+						return ColorHelper.getRGBVec(DyeColor.RED);
 					}
 				}
 				case PRISTINE -> {
 					int r = random.nextInt(3);
 					if (r == 0) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.BLUE);
+						return ColorHelper.getRGBVec(DyeColor.BLUE);
 					} else if (r == 1) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.LIGHT_BLUE);
+						return ColorHelper.getRGBVec(DyeColor.LIGHT_BLUE);
 					} else {
-						return SpectrumColorHelper.getRGBVec(DyeColor.CYAN);
+						return ColorHelper.getRGBVec(DyeColor.CYAN);
 					}
 				}
 				default -> {
 					int r = random.nextInt(4);
 					if (r == 0) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.CYAN);
+						return ColorHelper.getRGBVec(DyeColor.CYAN);
 					} else if (r == 1) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.MAGENTA);
+						return ColorHelper.getRGBVec(DyeColor.MAGENTA);
 					} else if (r == 2) {
-						return SpectrumColorHelper.getRGBVec(DyeColor.WHITE);
+						return ColorHelper.getRGBVec(DyeColor.WHITE);
 					} else {
-						return SpectrumColorHelper.getRGBVec(DyeColor.YELLOW);
+						return ColorHelper.getRGBVec(DyeColor.YELLOW);
 					}
 				}
 			}

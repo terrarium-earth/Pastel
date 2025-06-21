@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class BidentMirrorImageEntity extends BidentBaseEntity {
     public BidentMirrorImageEntity(Level world) {
-        this(SpectrumEntityTypes.BIDENT_MIRROR_IMAGE.get(), world);
+        this(PastelEntityTypes.BIDENT_MIRROR_IMAGE.get(), world);
     }
     
     public BidentMirrorImageEntity(EntityType<? extends ThrownTrident> entityType, Level world) {
@@ -31,7 +31,7 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
     public void tick() {
         super.tick();
         if (this.level().isClientSide()) {
-            this.level().addParticle(SpectrumParticleTypes.MIRROR_IMAGE, this.getRandomX(0.5), this.getRandomY(), this.getRandomZ(0.5), 0, 0, 0);
+            this.level().addParticle(PastelParticleTypes.MIRROR_IMAGE, this.getRandomX(0.5), this.getRandomY(), this.getRandomZ(0.5), 0, 0, 0);
         }
     }
     
@@ -39,8 +39,8 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
     protected void onHitEntity(EntityHitResult entityHitResult) {
         super.onHitEntity(entityHitResult);
         Level world = this.level();
-        world.playSound(null, entityHitResult.getEntity().blockPosition(), SpectrumSoundEvents.MEDIUM_CRYSTAL_RING, SoundSource.PLAYERS, 1.334F, 0.9F + random.nextFloat() * 0.334F);
-        world.playSound(null, entityHitResult.getEntity().blockPosition(), SpectrumSoundEvents.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F, 1.0F  + random.nextFloat() * 0.2F);
+        world.playSound(null, entityHitResult.getEntity().blockPosition(), PastelSoundEvents.MEDIUM_CRYSTAL_RING, SoundSource.PLAYERS, 1.334F, 0.9F + random.nextFloat() * 0.334F);
+        world.playSound(null, entityHitResult.getEntity().blockPosition(), PastelSoundEvents.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F, 1.0F  + random.nextFloat() * 0.2F);
         MoonstoneStrike.create(world, this, null, this.getX(), this.getY(), this.getZ(), 1);
         if (!world.isClientSide) {
             processHit(entityHitResult.getEntity(), 1F);
@@ -52,7 +52,7 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
         Level world = this.level();
-        world.playSound(null, blockHitResult.getBlockPos(), SpectrumSoundEvents.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F, 1.0F);
+        world.playSound(null, blockHitResult.getBlockPos(), PastelSoundEvents.SHATTER_HEAVY, SoundSource.PLAYERS, 0.75F, 1.0F);
         MoonstoneStrike.create(world, this, null, this.getX(), this.getY(), this.getZ(), 1);
         if (!world.isClientSide) {
             processHit(null, 0.667F);
@@ -63,8 +63,8 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
     private void processHit(@Nullable Entity target, float effectMult) {
 		var drm = level().registryAccess();
 		var stack = getTrackedStack();
-        var power = SpectrumEnchantmentHelper.getLevel(drm, Enchantments.POWER, stack) * 0.3F + 1;
-        var efficiency = SpectrumEnchantmentHelper.getLevel(drm, Enchantments.EFFICIENCY, stack);
+        var power = PastelEnchantmentHelper.getLevel(drm, Enchantments.POWER, stack) * 0.3F + 1;
+        var efficiency = PastelEnchantmentHelper.getLevel(drm, Enchantments.EFFICIENCY, stack);
         var world = this.level();
         var user = getOwner() instanceof LivingEntity livingOwner ? livingOwner : null;
 		

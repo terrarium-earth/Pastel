@@ -33,7 +33,7 @@ public interface DamagingProjectileBehavior extends ItemProjectileBehavior {
 				if (target != owner && target instanceof Player && owner instanceof ServerPlayer serverPlayerOwner && !projectile.isSilent()) {
 					serverPlayerOwner.connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.ARROW_HIT_PLAYER, 0.0F));
 				}
-				projectile.playSound(SpectrumSoundEvents.BLOCK_CITRINE_CLUSTER_HIT, 1.0F, 1.2F / (projectile.level().getRandom().nextFloat() * 0.2F + 0.9F));
+				projectile.playSound(PastelSoundEvents.BLOCK_CITRINE_CLUSTER_HIT, 1.0F, 1.2F / (projectile.level().getRandom().nextFloat() * 0.2F + 0.9F));
 			}
 		}
 		

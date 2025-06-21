@@ -7,8 +7,8 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.OverchargingSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -72,7 +72,7 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements Ext
     public void onUseTick(Level world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (isCharged(stack) && remainingUseTicks <= 0) {
             if (remainingUseTicks % 4 == 0) {
-                world.playSound(null, user, SpectrumSoundEvents.BLOCK_MOONSTONE_CLUSTER_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+                world.playSound(null, user, PastelSoundEvents.BLOCK_MOONSTONE_CLUSTER_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
         } else {
             super.onUseTick(world, user, stack, remainingUseTicks);
@@ -101,15 +101,15 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements Ext
     }
     
     public static float getOvercharge(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.OVERCHARGED, 0f);
+		return stack.getOrDefault(PastelDataComponentTypes.OVERCHARGED, 0f);
     }
     
     public static void overcharge(ItemStack stack, float percent) {
-		stack.set(SpectrumDataComponentTypes.OVERCHARGED, percent);
+		stack.set(PastelDataComponentTypes.OVERCHARGED, percent);
     }
     
     public static void unOvercharge(ItemStack stack) {
-		stack.remove(SpectrumDataComponentTypes.OVERCHARGED);
+		stack.remove(PastelDataComponentTypes.OVERCHARGED);
     }
     
     @Override

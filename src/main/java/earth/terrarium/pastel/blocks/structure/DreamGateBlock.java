@@ -3,9 +3,9 @@ package earth.terrarium.pastel.blocks.structure;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -67,10 +67,10 @@ public class DreamGateBlock extends DikeGateBlock {
 
 			var sleep = SleepStatusEffect.getGeneralSleepResistanceIfEntityHasSoporificEffect(livingEntity);
 			if ( sleep == -1 && serverWorld.getGameTime() % 5 == 0) {
-				entity.hurt(SpectrumDamageTypes.sleep(serverWorld, null), 2);
-				PlayParticleWithExactVelocityPayload.playParticles(serverWorld, pos, SpectrumParticleTypes.AZURE_DIKE_RUNES, 10);
+				entity.hurt(PastelDamageTypes.sleep(serverWorld, null), 2);
+				PlayParticleWithExactVelocityPayload.playParticles(serverWorld, pos, PastelParticleTypes.AZURE_DIKE_RUNES, 10);
 				if (entity instanceof ServerPlayer serverPlayerEntity && (!decreasedSounds || ((ServerLevel) world).getGameTime() % 10 == 0)) {
-					serverPlayerEntity.playNotifySound(SpectrumSoundEvents.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
+					serverPlayerEntity.playNotifySound(PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
 				}
 			}
 		}

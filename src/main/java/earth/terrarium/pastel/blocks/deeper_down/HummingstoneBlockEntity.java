@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
-import earth.terrarium.pastel.events.SpectrumGameEvents;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.events.PastelGameEvents;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,7 +18,7 @@ public class HummingstoneBlockEntity extends BlockEntity implements Hummingstone
     protected final HummingstoneEventQueue listener;
     
     public HummingstoneBlockEntity(BlockPos pos, BlockState state) {
-        super(SpectrumBlockEntities.HUMMINGSTONE.get(), pos, state);
+        super(PastelBlockEntities.HUMMINGSTONE.get(), pos, state);
         this.listener = new HummingstoneEventQueue(new BlockPositionSource(this.worldPosition), RANGE, this);
     }
     
@@ -29,16 +29,16 @@ public class HummingstoneBlockEntity extends BlockEntity implements Hummingstone
 
     @Override
     public boolean canAcceptEvent(Level world, GameEventListener listener, GameEvent.ListenerInfo message, Vec3 sourcePos) {
-        return !this.isRemoved() && (message.gameEvent() == SpectrumGameEvents.HUMMINGSTONE_HYMN || message.gameEvent() == SpectrumGameEvents.HUMMINGSTONE_HUMMING);
+        return !this.isRemoved() && (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HYMN || message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING);
     }
     
     @Override
     public void triggerEvent(Level world, GameEventListener listener, HummingstoneEventQueue.EventEntry entry) {
         GameEvent.ListenerInfo message = entry.message();
 
-        if (message.gameEvent() == SpectrumGameEvents.HUMMINGSTONE_HUMMING) {
+        if (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING) {
             HummingstoneBlock.startHumming(world, this.worldPosition, world.getBlockState(this.worldPosition), message.context().sourceEntity(), true);
-        } else if (message.gameEvent() == SpectrumGameEvents.HUMMINGSTONE_HYMN) {
+        } else if (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HYMN) {
             HummingstoneBlock.onHymn(world, this.worldPosition, message.context().sourceEntity());
         }
     }

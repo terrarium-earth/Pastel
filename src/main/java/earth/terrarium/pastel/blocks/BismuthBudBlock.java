@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks;
 
-import earth.terrarium.pastel.blocks.crystallarieum.SpectrumClusterBlock;
+import earth.terrarium.pastel.blocks.crystallarieum.PastelClusterBlock;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import net.minecraft.core.BlockPos;
@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class BismuthBudBlock extends SpectrumClusterBlock {
+public class BismuthBudBlock extends PastelClusterBlock {
 	
 	public static final int GROWTH_CHECK_RADIUS = 3;
 	public static final int GROWTH_CHECK_TRIES = 5;

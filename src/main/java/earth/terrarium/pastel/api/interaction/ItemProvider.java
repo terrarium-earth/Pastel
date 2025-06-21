@@ -7,7 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.*;
 
 public interface ItemProvider {
-	ItemCapability<ItemProvider, Void> CAPABILITY = ItemCapability.createVoid(SpectrumCommon.ofSpectrumDefaulted("item_provider"), ItemProvider.class);
+	ItemCapability<ItemProvider, Void> CAPABILITY = ItemCapability.createVoid(PastelCommon.ofPastel("item_provider"), ItemProvider.class);
 	
 	int getItemCount(Player player, ItemStack stack, Item requestedItem);
 	

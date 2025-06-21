@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.tools;
 
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -18,7 +18,7 @@ import java.util.List;
 public class MultiToolItem extends DiggerItem {
 	
 	public MultiToolItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
-		super(material, SpectrumBlockTags.MULTITOOL_MINEABLE, settings.attributes(DiggerItem.createAttributes(material, attackDamage, attackSpeed)));
+		super(material, PastelBlockTags.MULTITOOL_MINEABLE, settings.attributes(DiggerItem.createAttributes(material, attackDamage, attackSpeed)));
 	}
 	
 	/**

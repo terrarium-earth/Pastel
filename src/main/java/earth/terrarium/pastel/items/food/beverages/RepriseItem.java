@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.food.beverages;
 
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -38,7 +38,7 @@ public class RepriseItem extends BeverageItem {
 	}
 
 	public static long getTeleportRange(ItemStack itemStack) {
-		var alcPercent = itemStack.getOrDefault(SpectrumDataComponentTypes.BEVERAGE, BeverageComponent.DEFAULT).alcoholPercent();
+		var alcPercent = itemStack.getOrDefault(PastelDataComponentTypes.BEVERAGE, BeverageComponent.DEFAULT).alcoholPercent();
 		return (long) Math.ceil(Math.pow(2, alcPercent));
 	}
 

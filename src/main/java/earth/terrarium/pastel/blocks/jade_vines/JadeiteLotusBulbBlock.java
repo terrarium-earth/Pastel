@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumConfiguredFeatures;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -56,12 +56,12 @@ public class JadeiteLotusBulbBlock extends BushBlock implements BonemealableBloc
 
     @Override
     protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-        return super.mayPlaceOn(floor, world, pos) || floor.is(SpectrumBlockTags.BASE_STONE_DEEPER_DOWN);
+        return super.mayPlaceOn(floor, world, pos) || floor.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN);
     }
 
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-		world.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).get(SpectrumConfiguredFeatures.JADEITE_LOTUS).place(world, world.getChunkSource().getGenerator(), random, pos);
+		world.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).get(PastelConfiguredFeatures.JADEITE_LOTUS).place(world, world.getChunkSource().getGenerator(), random, pos);
     }
 	
 }

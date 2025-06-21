@@ -3,8 +3,8 @@ package earth.terrarium.pastel.blocks.chests;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class FabricationChestBlockEntityRenderer implements BlockEntityRenderer<FabricationChestBlockEntity> {
 	
-	private static final Material spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/fabrication_chest"));
+	private static final Material spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/fabrication_chest"));
 	private final ModelPart rootNode;
 	private final ModelPart root;
 	private final ModelPart rim;
@@ -75,7 +75,7 @@ public class FabricationChestBlockEntityRenderer implements BlockEntityRenderer<
 	public void render(FabricationChestBlockEntity chest, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light, int overlay) {
 		Level world = chest.getLevel();
 		boolean bl = world != null;
-		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.FABRICATION_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockState = bl ? chest.getBlockState() : PastelBlocks.FABRICATION_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
 
 		matrices.pushPose();
 		float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING).toYRot() : 0;

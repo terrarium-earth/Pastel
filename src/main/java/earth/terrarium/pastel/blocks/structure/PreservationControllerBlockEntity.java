@@ -4,12 +4,12 @@ import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -52,7 +52,7 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 	private boolean spawnParticles;
 	
 	public PreservationControllerBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.PRESERVATION_CONTROLLER.get(), pos, state);
+		super(PastelBlockEntities.PRESERVATION_CONTROLLER.get(), pos, state);
 	}
 	
 	public static void serverTick(@NotNull Level world, BlockPos blockPos, BlockState blockState, PreservationControllerBlockEntity blockEntity) {
@@ -73,7 +73,7 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 	
 	private static void calculateLocationData(Level world, BlockPos blockPos, @NotNull BlockState blockState, @NotNull PreservationControllerBlockEntity blockEntity) {
 		BlockState state = world.getBlockState(blockPos);
-		if(!state.is(SpectrumBlocks.PRESERVATION_CONTROLLER.get())) {
+		if(!state.is(PastelBlocks.PRESERVATION_CONTROLLER.get())) {
 			return;
 		}
 		
@@ -187,7 +187,7 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 	public void openExit() {
 		boolean didSomething = false;
 		BlockState state = level.getBlockState(worldPosition);
-		if (!state.is(SpectrumBlocks.PRESERVATION_CONTROLLER.get())) {
+		if (!state.is(PastelBlocks.PRESERVATION_CONTROLLER.get())) {
 			return;
 		}
 		
@@ -197,8 +197,8 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 				for (int y = -3; y < 0; y++) {
 					BlockPos offsetPos = worldPosition.offset(x, y, 0);
 					BlockState offsetState = level.getBlockState(offsetPos);
-					if (offsetState.is(SpectrumBlockTags.UNBREAKABLE_STRUCTURE_BLOCKS)) {
-						level.setBlockAndUpdate(offsetPos, SpectrumBlocks.POLISHED_CALCITE.get().defaultBlockState());
+					if (offsetState.is(PastelBlockTags.UNBREAKABLE_STRUCTURE_BLOCKS)) {
+						level.setBlockAndUpdate(offsetPos, PastelBlocks.POLISHED_CALCITE.get().defaultBlockState());
 						level.globalLevelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, offsetPos, Block.getId(offsetState));
 						didSomething = true;
 					}
@@ -209,8 +209,8 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 				for (int y = -3; y < 0; y++) {
 					BlockPos offsetPos = worldPosition.offset(0, y, z);
 					BlockState offsetState = level.getBlockState(offsetPos);
-					if (offsetState.is(SpectrumBlockTags.UNBREAKABLE_STRUCTURE_BLOCKS)) {
-						level.setBlockAndUpdate(offsetPos, SpectrumBlocks.POLISHED_CALCITE.get().defaultBlockState());
+					if (offsetState.is(PastelBlockTags.UNBREAKABLE_STRUCTURE_BLOCKS)) {
+						level.setBlockAndUpdate(offsetPos, PastelBlocks.POLISHED_CALCITE.get().defaultBlockState());
 						level.globalLevelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, offsetPos, Block.getId(offsetState));
 						didSomething = true;
 					}
@@ -219,16 +219,16 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 		}
 		
 		if (didSomething) {
-			level.playSound(null, worldPosition, SpectrumSoundEvents.STRUCTURE_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
+			level.playSound(null, worldPosition, PastelSoundEvents.STRUCTURE_SUCCESS, SoundSource.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 	
 	public void yeetPlayer(@NotNull Player player) {
 		if (this.destinationPos != null) {
-			player.hurt(SpectrumDamageTypes.dike(player.level()), 1.0F);
+			player.hurt(PastelDamageTypes.dike(player.level()), 1.0F);
 			Vec3 vec = Vec3.atCenterOf(destinationPos);
 			player.teleportTo(vec.x(), vec.y(), vec.z());
-			level.playSound(null, destinationPos, SpectrumSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
+			level.playSound(null, destinationPos, PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
 		}
 	}
 	
@@ -238,10 +238,10 @@ public class PreservationControllerBlockEntity extends BlockEntity {
 			for (Player playerEntity : players) {
 				if (!playerEntity.isCreative() && !playerEntity.isSpectator()) {
 					if (this.requiredAdvancement != null && AdvancementHelper.hasAdvancement(playerEntity, requiredAdvancement)) {
-						SpectrumAdvancementCriteria.PRESERVATION_CHECK.trigger((ServerPlayer) playerEntity, checkName, true);
+						PastelAdvancementCriteria.PRESERVATION_CHECK.trigger((ServerPlayer) playerEntity, checkName, true);
 					} else {
 						// yeet
-						SpectrumAdvancementCriteria.PRESERVATION_CHECK.trigger((ServerPlayer) playerEntity, checkName, false);
+						PastelAdvancementCriteria.PRESERVATION_CHECK.trigger((ServerPlayer) playerEntity, checkName, false);
 						yeetPlayer(playerEntity);
 					}
 				}

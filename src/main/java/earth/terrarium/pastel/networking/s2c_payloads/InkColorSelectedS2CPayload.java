@@ -2,10 +2,8 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.api.block.InkColorSelectedPacketReceiver;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.core.Holder;
@@ -20,9 +18,9 @@ import java.util.Optional;
 
 public record InkColorSelectedS2CPayload(Optional<Holder<InkColor>> inkColor) implements CustomPacketPayload {
 	
-	public static final Type<InkColorSelectedS2CPayload> ID = SpectrumC2SPackets.makeId("ink_color_selected");
+	public static final Type<InkColorSelectedS2CPayload> ID = PastelC2SPackets.makeId("ink_color_selected");
 	public static final StreamCodec<RegistryFriendlyByteBuf, InkColorSelectedS2CPayload> CODEC = StreamCodec.composite(
-			ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(SpectrumRegistries.INK_COLOR.key())), InkColorSelectedS2CPayload::inkColor,
+			ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(PastelRegistries.INK_COLOR.key())), InkColorSelectedS2CPayload::inkColor,
 			InkColorSelectedS2CPayload::new
 	);
 	

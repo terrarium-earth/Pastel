@@ -2,13 +2,13 @@ package earth.terrarium.pastel.compat.create;
 
 import com.simibubi.create.api.event.PipeCollisionEvent;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.blocks.crystallarieum.SpectrumClusterBlock;
-import earth.terrarium.pastel.blocks.fluid.SpectrumFluidBlock;
-import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumItems.IS;
-import earth.terrarium.pastel.registries.client.SpectrumModels;
+import earth.terrarium.pastel.blocks.crystallarieum.PastelClusterBlock;
+import earth.terrarium.pastel.blocks.fluid.PastelFluidBlock;
+import earth.terrarium.pastel.compat.PastelIntegrationPacks;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelItems.IS;
+import earth.terrarium.pastel.registries.client.PastelModels;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.data.models.model.ModelTemplates;
@@ -25,20 +25,20 @@ import net.neoforged.neoforge.common.*;
 import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.NotNull;
 
-import static earth.terrarium.pastel.registries.SpectrumBlocks.blockWithItem;
-import static earth.terrarium.pastel.registries.SpectrumBlocks.cluster;
-import static earth.terrarium.pastel.registries.SpectrumBlocks.simple;
-import static earth.terrarium.pastel.registries.SpectrumItems.item;
-import static earth.terrarium.pastel.registries.SpectrumItems.simple;
+import static earth.terrarium.pastel.registries.PastelBlocks.blockWithItem;
+import static earth.terrarium.pastel.registries.PastelBlocks.cluster;
+import static earth.terrarium.pastel.registries.PastelBlocks.simple;
+import static earth.terrarium.pastel.registries.PastelItems.item;
+import static earth.terrarium.pastel.registries.PastelItems.simple;
 
-public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
+public class CreateCompat extends PastelIntegrationPacks.ModIntegrationPack {
 	
-	public static DeferredBlock<Block> SMALL_ZINC_BUD = SpectrumBlocks.register(cluster(blockWithItem("small_zinc_bud", () -> new SpectrumClusterBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).destroyTime(1.0f).mapColor(Blocks.LIGHT_GRAY_CONCRETE.defaultMapColor()).requiresCorrectToolForDrops().noOcclusion(), SpectrumClusterBlock.GrowthStage.SMALL), InkColors.BROWN), ModelTemplates.CROSS));
-	public static DeferredBlock<Block> LARGE_ZINC_BUD = SpectrumBlocks.register(cluster(blockWithItem("large_zinc_bud", () -> new SpectrumClusterBlock(BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()), SpectrumClusterBlock.GrowthStage.LARGE), InkColors.BROWN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
-	public static DeferredBlock<Block> ZINC_CLUSTER = SpectrumBlocks.register(cluster(blockWithItem("zinc_cluster", () -> new SpectrumClusterBlock(BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()), SpectrumClusterBlock.GrowthStage.CLUSTER), InkColors.BROWN), SpectrumModels.CRYSTALLARIEUM_FARMABLE));
-	public static DeferredBlock<Block> PURE_ZINC_BLOCK = SpectrumBlocks.register(simple(blockWithItem("pure_zinc_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)), InkColors.BROWN)));
+	public static DeferredBlock<Block> SMALL_ZINC_BUD = PastelBlocks.register(cluster(blockWithItem("small_zinc_bud", () -> new PastelClusterBlock(BlockBehaviour.Properties.of().pushReaction(PushReaction.DESTROY).destroyTime(1.0f).mapColor(Blocks.LIGHT_GRAY_CONCRETE.defaultMapColor()).requiresCorrectToolForDrops().noOcclusion(), PastelClusterBlock.GrowthStage.SMALL), InkColors.BROWN), ModelTemplates.CROSS));
+	public static DeferredBlock<Block> LARGE_ZINC_BUD = PastelBlocks.register(cluster(blockWithItem("large_zinc_bud", () -> new PastelClusterBlock(BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()), PastelClusterBlock.GrowthStage.LARGE), InkColors.BROWN), PastelModels.CRYSTALLARIEUM_FARMABLE));
+	public static DeferredBlock<Block> ZINC_CLUSTER = PastelBlocks.register(cluster(blockWithItem("zinc_cluster", () -> new PastelClusterBlock(BlockBehaviour.Properties.ofFullCopy(SMALL_ZINC_BUD.get()), PastelClusterBlock.GrowthStage.CLUSTER), InkColors.BROWN), PastelModels.CRYSTALLARIEUM_FARMABLE));
+	public static DeferredBlock<Block> PURE_ZINC_BLOCK = PastelBlocks.register(simple(blockWithItem("pure_zinc_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK)), InkColors.BROWN)));
 	
-	public static DeferredItem<Item> PURE_ZINC = SpectrumItems.register(simple(item("pure_zinc", () -> new Item(IS.of()), InkColors.BROWN)));
+	public static DeferredItem<Item> PURE_ZINC = PastelItems.register(simple(item("pure_zinc", () -> new Item(IS.of()), InkColors.BROWN)));
 	
 	@Override
 	public void register() {
@@ -73,15 +73,13 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 	}
 	
 	private static BlockState spectrumFluidCollision(Level world, FluidState state, FluidState otherState) {
-		if (state.createLegacyBlock().getBlock() instanceof SpectrumFluidBlock spectrumFluid)
+		if (state.createLegacyBlock().getBlock() instanceof PastelFluidBlock spectrumFluid)
 			return spectrumFluid.handleFluidCollision(world, state, otherState);
 		return null;
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void registerClient() {
-		SpectrumBlocks.CLIENT_REGISTRAR.flush();
-	}
+	public void registerClient() {}
 	
 }

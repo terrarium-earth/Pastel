@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
 import earth.terrarium.pastel.api.item.Preenchanted;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +28,7 @@ public class PreenchantedMultiToolItem extends MultiToolItem implements Preencha
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.MULTITOOL;
+		return PastelBannerPatterns.MULTITOOL;
 	}
 
 	@Override

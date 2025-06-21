@@ -21,6 +21,6 @@ public final class AttachmentUtil {
     }
 
     public static <L extends CustomPacketPayload> CustomPacketPayload.Type<L> create(String name) {
-        return new CustomPacketPayload.Type<>(SpectrumCommon.locate(name));
+        return new CustomPacketPayload.Type<>(PastelCommon.locate(name));
     }
 }

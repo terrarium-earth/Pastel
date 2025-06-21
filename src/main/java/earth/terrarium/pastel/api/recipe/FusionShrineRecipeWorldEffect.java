@@ -2,13 +2,12 @@ package earth.terrarium.pastel.api.recipe;
 
 import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.registries.*;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -26,13 +25,13 @@ public interface FusionShrineRecipeWorldEffect {
 			FusionShrineRecipeWorldEffect::fromString,
 			effect -> effect instanceof CommandRecipeWorldEffect command
 					? command.command
-					: String.valueOf(SpectrumRegistries.WORLD_EFFECT.getKey(effect)));
+					: String.valueOf(PastelRegistries.WORLD_EFFECT.getKey(effect)));
 	
 	StreamCodec<ByteBuf, FusionShrineRecipeWorldEffect> STREAM_CODEC = ByteBufCodecs.STRING_UTF8.map(
 			FusionShrineRecipeWorldEffect::fromString,
 			effect -> effect instanceof CommandRecipeWorldEffect command
 					? command.command
-					: String.valueOf(SpectrumRegistries.WORLD_EFFECT.getKey(effect)));
+					: String.valueOf(PastelRegistries.WORLD_EFFECT.getKey(effect)));
 	
 	FusionShrineRecipeWorldEffect NOTHING = register("nothing", new FusionShrineRecipeWorldEffect.SingleTimeRecipeWorldEffect() {
 		@Override
@@ -41,7 +40,7 @@ public interface FusionShrineRecipeWorldEffect {
 	});
 	
 	static FusionShrineRecipeWorldEffect register(String id, FusionShrineRecipeWorldEffect effect) {
-		SpectrumFusionShrineWorldEffects.REGISTER.register(id, () -> effect);
+		PastelFusionShrineWorldEffects.REGISTER.register(id, () -> effect);
 		return effect;
 	}
 	
@@ -53,9 +52,9 @@ public interface FusionShrineRecipeWorldEffect {
 			return new CommandRecipeWorldEffect(string);
 		}
 		
-		FusionShrineRecipeWorldEffect effect = SpectrumRegistries.WORLD_EFFECT.get(SpectrumCommon.ofSpectrumDefaulted(string));
+		FusionShrineRecipeWorldEffect effect = PastelRegistries.WORLD_EFFECT.get(PastelCommon.ofPastel(string));
 		if (effect == null) {
-			SpectrumCommon.logError("Unknown fusion shrine world effect '" + string + "'. Will be ignored.");
+			PastelCommon.logError("Unknown fusion shrine world effect '" + string + "'. Will be ignored.");
 			return NOTHING;
 		}
 		return effect;

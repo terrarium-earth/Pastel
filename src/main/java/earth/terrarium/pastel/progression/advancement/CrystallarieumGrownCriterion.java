@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.BlockPredicate;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class CrystallarieumGrownCriterion extends SimpleCriterionTrigger<CrystallarieumGrownCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("crystallarieum_growing");
+	public static final ResourceLocation ID = PastelCommon.locate("crystallarieum_growing");
 	
 	public void trigger(ServerPlayer player, ServerLevel world, BlockPos pos, ItemStack catalystStack) {
 		this.trigger(player, (conditions) -> conditions.matches(world, pos, catalystStack));

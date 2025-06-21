@@ -2,15 +2,15 @@ package earth.terrarium.pastel.blocks;
 
 import com.google.common.collect.AbstractIterator;
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDimensions;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -52,7 +52,7 @@ public class DeeperDownPortalBlock extends Block {
 
 	public static final MapCodec<DeeperDownPortalBlock> CODEC = simpleCodec(DeeperDownPortalBlock::new);
 
-	private final static ResourceLocation CREATE_PORTAL_ADVANCEMENT_IDENTIFIER = SpectrumCommon.locate("midgame/open_deeper_down_portal");
+	private final static ResourceLocation CREATE_PORTAL_ADVANCEMENT_IDENTIFIER = PastelCommon.locate("midgame/open_deeper_down_portal");
 	private final static String CREATE_PORTAL_ADVANCEMENT_CRITERION = "opened_deeper_down_portal";
 
 	public static final BooleanProperty FACING_UP = BlockStateProperties.UP;
@@ -80,9 +80,9 @@ public class DeeperDownPortalBlock extends Block {
 		super.onPlace(state, world, pos, oldState, notify);
 
 		if (!world.isClientSide) { // that should be a given, but in modded you never know
-			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world, Vec3.atCenterOf(pos), SpectrumParticleTypes.VOID_FOG, 30, new Vec3(0.5, 0.0, 0.5), Vec3.ZERO);
+			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world, Vec3.atCenterOf(pos), PastelParticleTypes.VOID_FOG, 30, new Vec3(0.5, 0.0, 0.5), Vec3.ZERO);
 			if (!hasNeighboringPortals(world, pos)) {
-				world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SpectrumSoundEvents.DEEPER_DOWN_PORTAL_OPEN, SoundSource.BLOCKS, 0.75F, 0.75F);
+				world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSoundEvents.DEEPER_DOWN_PORTAL_OPEN, SoundSource.BLOCKS, 0.75F, 0.75F);
 
 				for (Player nearbyPlayer : world.getEntities(EntityType.PLAYER, AABB.ofSize(Vec3.atCenterOf(pos), 16D, 16D, 16D), LivingEntity::isAlive)) {
 					Support.grantAdvancementCriterion((ServerPlayer) nearbyPlayer, CREATE_PORTAL_ADVANCEMENT_IDENTIFIER, CREATE_PORTAL_ADVANCEMENT_CRITERION);
@@ -93,7 +93,7 @@ public class DeeperDownPortalBlock extends Block {
 
 	@Override
 	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (handStack.is(SpectrumItems.BEDROCK_DUST.get())) {
+		if (handStack.is(PastelItems.BEDROCK_DUST.get())) {
 			if (world.isClientSide) {
 				return ItemInteractionResult.SUCCESS;
 			} else {
@@ -149,8 +149,8 @@ public class DeeperDownPortalBlock extends Block {
 				
 				if (facingUp) {
 					BlockPos portalPos = new BlockPos(pos.getX(), world.getMinBuildHeight(), pos.getZ());
-					if (!world.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL.get())) {
-						world.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, false));
+					if (!world.getBlockState(portalPos).is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
+						world.setBlockAndUpdate(portalPos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, false));
 					}
 					
 					if (entity instanceof Player) {
@@ -162,8 +162,8 @@ public class DeeperDownPortalBlock extends Block {
 					teleportToSafePosition(serverWorld, entity, targetPos, 3);
 				} else {
 					BlockPos portalPos = new BlockPos(pos.getX(), world.getMinBuildHeight() + world.dimensionType().logicalHeight() - 1, pos.getZ());
-					if (!world.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL.get())) {
-						world.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, true));
+					if (!world.getBlockState(portalPos).is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
+						world.setBlockAndUpdate(portalPos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, true));
 					}
 					
 					if (entity instanceof Player) {
@@ -180,15 +180,15 @@ public class DeeperDownPortalBlock extends Block {
 			
 			if (currentWorldKey == Level.OVERWORLD) {
 				// => teleport to DD
-				ServerLevel targetWorld = serverWorld.getServer().getLevel(SpectrumDimensions.DIMENSION_KEY);
+				ServerLevel targetWorld = serverWorld.getServer().getLevel(PastelDimensions.DIMENSION_KEY);
 				if (targetWorld != null) {
 					BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMaxBuildHeight() - 1, pos.getZ());
-					if (!targetWorld.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL.get())) {
-						targetWorld.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, true));
+					if (!targetWorld.getBlockState(portalPos).is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
+						targetWorld.setBlockAndUpdate(portalPos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, true));
 					}
 					
 					if (entity instanceof Player) {
-						makeRoomAround(targetWorld, portalPos, 4, 2, false, SpectrumBlockTags.BASE_STONE_DEEPER_DOWN);
+						makeRoomAround(targetWorld, portalPos, 4, 2, false, PastelBlockTags.BASE_STONE_DEEPER_DOWN);
 					}
 					
 					BlockPos targetPos = portalPos.below(3);
@@ -204,8 +204,8 @@ public class DeeperDownPortalBlock extends Block {
 			ServerLevel targetWorld = serverWorld.getServer().getLevel(Level.OVERWORLD);
 			if (targetWorld != null) {
 				BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMinBuildHeight(), pos.getZ());
-				if (!targetWorld.getBlockState(portalPos).is(SpectrumBlocks.DEEPER_DOWN_PORTAL.get())) {
-					targetWorld.setBlockAndUpdate(portalPos, SpectrumBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, false));
+				if (!targetWorld.getBlockState(portalPos).is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
+					targetWorld.setBlockAndUpdate(portalPos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(FACING_UP, false));
 				}
 				makeRoomAround(targetWorld, portalPos, 4, 2, true, BlockTags.BASE_STONE_OVERWORLD);
 				
@@ -303,7 +303,7 @@ public class DeeperDownPortalBlock extends Block {
 		double d = (double) pos.getX() + random.nextDouble();
 		double e = (double) pos.getY() + 0.3D;
 		double f = (double) pos.getZ() + random.nextDouble();
-		world.addParticle(SpectrumParticleTypes.VOID_FOG, d, e, f, 0.0D, 0.1D, 0.0D);
+		world.addParticle(PastelParticleTypes.VOID_FOG, d, e, f, 0.0D, 0.1D, 0.0D);
 	}
 
 }

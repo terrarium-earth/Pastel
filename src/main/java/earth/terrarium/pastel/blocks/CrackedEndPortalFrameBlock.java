@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks;
 
 import com.google.common.base.Predicates;
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -71,9 +71,9 @@ public class CrackedEndPortalFrameBlock extends Block {
 			// fixed directions we can estimate the
 			// portal position based on some simple checks instead
 			BlockPos portalTopLeft = result.getFrontTopLeft().offset(-3, 0, -3);
-			if (world.getBlockState(portalTopLeft.offset(7, 0, 0)).getBlock().equals(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get())) {
+			if (world.getBlockState(portalTopLeft.offset(7, 0, 0)).getBlock().equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())) {
 				portalTopLeft = portalTopLeft.offset(4, 0, 0);
-			} else if (world.getBlockState(portalTopLeft.offset(0, 0, 7)).getBlock().equals(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get())) {
+			} else if (world.getBlockState(portalTopLeft.offset(0, 0, 7)).getBlock().equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())) {
 				portalTopLeft = portalTopLeft.offset(0, 0, 4);
 			}
 			
@@ -96,9 +96,9 @@ public class CrackedEndPortalFrameBlock extends Block {
 			BlockPos portalTopLeft = result.getFrontTopLeft().offset(-3, 0, -3);
 			Block b1 = world.getBlockState(portalTopLeft.offset(7, 0, 0)).getBlock();
 			Block b2 = world.getBlockState(portalTopLeft.offset(0, 0, 7)).getBlock();
-			if (b1.equals(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get()) || b1.equals(Blocks.END_PORTAL_FRAME)) {
+			if (b1.equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()) || b1.equals(Blocks.END_PORTAL_FRAME)) {
 				portalTopLeft = portalTopLeft.offset(4, 0, 0);
-			} else if (b2.equals(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get()) || b2.equals(Blocks.END_PORTAL_FRAME)) {
+			} else if (b2.equals(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()) || b2.equals(Blocks.END_PORTAL_FRAME)) {
 				portalTopLeft = portalTopLeft.offset(0, 0, 4);
 			}
 			
@@ -121,28 +121,28 @@ public class CrackedEndPortalFrameBlock extends Block {
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
 									.where(EndPortalFrameBlock.HAS_EYE, Predicates.equalTo(true))
 									.where(EndPortalFrameBlock.FACING, Predicates.equalTo(Direction.SOUTH))
-									.or(BlockStatePredicate.forBlock(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get())
+									.or(BlockStatePredicate.forBlock(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
 											.where(EYE_TYPE, Predicates.equalTo(EndPortalFrameEye.WITH_EYE_OF_ENDER))
 											.where(FACING_VERTICAL, Predicates.equalTo(false)))))
 					.where('>', BlockInWorld.hasState(
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
 									.where(EndPortalFrameBlock.HAS_EYE, Predicates.equalTo(true))
 									.where(EndPortalFrameBlock.FACING, Predicates.equalTo(Direction.WEST))
-									.or(BlockStatePredicate.forBlock(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get())
+									.or(BlockStatePredicate.forBlock(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
 											.where(EYE_TYPE, Predicates.equalTo(EndPortalFrameEye.WITH_EYE_OF_ENDER))
 											.where(FACING_VERTICAL, Predicates.equalTo(true)))))
 					.where('v', BlockInWorld.hasState(
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
 									.where(EndPortalFrameBlock.HAS_EYE, Predicates.equalTo(true))
 									.where(EndPortalFrameBlock.FACING, Predicates.equalTo(Direction.NORTH))
-									.or(BlockStatePredicate.forBlock(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get())
+									.or(BlockStatePredicate.forBlock(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
 											.where(EYE_TYPE, Predicates.equalTo(EndPortalFrameEye.WITH_EYE_OF_ENDER))
 											.where(FACING_VERTICAL, Predicates.equalTo(false)))))
 					.where('<', BlockInWorld.hasState(
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
 									.where(EndPortalFrameBlock.HAS_EYE, Predicates.equalTo(true))
 									.where(EndPortalFrameBlock.FACING, Predicates.equalTo(Direction.EAST))
-									.or(BlockStatePredicate.forBlock(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get())
+									.or(BlockStatePredicate.forBlock(PastelBlocks.CRACKED_END_PORTAL_FRAME.get())
 											.where(EYE_TYPE, Predicates.equalTo(EndPortalFrameEye.WITH_EYE_OF_ENDER))
 											.where(FACING_VERTICAL, Predicates.equalTo(true)))))
 					.build();
@@ -157,16 +157,16 @@ public class CrackedEndPortalFrameBlock extends Block {
 					.where('?', BlockInWorld.hasState(BlockStatePredicate.ANY))
 					.where('^', BlockInWorld.hasState(
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-									.or(BlockStatePredicate.forBlock(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get()))))
+									.or(BlockStatePredicate.forBlock(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()))))
 					.where('>', BlockInWorld.hasState(
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-									.or(BlockStatePredicate.forBlock(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get()))))
+									.or(BlockStatePredicate.forBlock(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()))))
 					.where('v', BlockInWorld.hasState(
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-									.or(BlockStatePredicate.forBlock(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get()))))
+									.or(BlockStatePredicate.forBlock(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()))))
 					.where('<', BlockInWorld.hasState(
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL_FRAME)
-									.or(BlockStatePredicate.forBlock(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get()))))
+									.or(BlockStatePredicate.forBlock(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()))))
 					.where('p', BlockInWorld.hasState(
 							BlockStatePredicate.forBlock(Blocks.END_PORTAL)))
 					.build();

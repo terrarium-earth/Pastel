@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.recipe.fluid_converting;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class DragonrotConvertingRecipe extends FluidConvertingRecipe {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("hidden/interact_with_dragonrot");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("hidden/interact_with_dragonrot");
 	private static final Set<Item> outputItems = new HashSet<>();
 	
 	public DragonrotConvertingRecipe(String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier, @NotNull Ingredient inputIngredient, ItemStack outputItemStack) {
@@ -32,17 +32,17 @@ public class DragonrotConvertingRecipe extends FluidConvertingRecipe {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumItems.DRAGONROT_BUCKET.get());
+		return new ItemStack(PastelItems.DRAGONROT_BUCKET.get());
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.DRAGONROT_CONVERTING_SERIALIZER;
+		return PastelRecipeSerializers.DRAGONROT_CONVERTING_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.DRAGONROT_CONVERTING;
+		return PastelRecipeTypes.DRAGONROT_CONVERTING;
 	}
 	
 	@Override

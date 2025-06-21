@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.tools;
 
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelEnchantments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Map;
 
-public class OblivionPickaxeItem extends SpectrumPickaxeItem {
+public class OblivionPickaxeItem extends PastelPickaxeItem {
 	
 	public OblivionPickaxeItem(Tier material, Properties settings) {
 		super(material, settings);
@@ -27,7 +27,7 @@ public class OblivionPickaxeItem extends SpectrumPickaxeItem {
 		
 		// Break the tool if it is used without the voiding enchantment
 		// Otherwise this would be a VERY cheap early game diamond tier tool
-		if (!world.isClientSide && !EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.NO_BLOCK_DROPS)) {
+		if (!world.isClientSide && !EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.NO_BLOCK_DROPS)) {
 			stack.hurtAndBreak(5000, miner, EquipmentSlot.MAINHAND);
 		}
 		
@@ -36,7 +36,7 @@ public class OblivionPickaxeItem extends SpectrumPickaxeItem {
 	
 	@Override
 	public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-		return Map.of(SpectrumEnchantments.VOIDING, 1);
+		return Map.of(PastelEnchantments.VOIDING, 1);
 	}
 	
 	@Override

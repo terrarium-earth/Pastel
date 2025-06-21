@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.decoration;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -26,7 +26,7 @@ public class RadiantGlassBlock extends TransparentBlock {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public boolean skipRendering(BlockState state, BlockState stateFrom, Direction direction) {
-		if (stateFrom.is(this) || stateFrom.is(SpectrumBlocks.RADIANT_SEMI_PERMEABLE_GLASS.get())) {
+		if (stateFrom.is(this) || stateFrom.is(PastelBlocks.RADIANT_SEMI_PERMEABLE_GLASS.get())) {
 			return true;
 		}
 		return super.skipRendering(state, stateFrom, direction);

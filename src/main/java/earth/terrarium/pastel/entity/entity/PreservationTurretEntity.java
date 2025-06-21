@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.ai.FixedBodyControl;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelStatusEffectTags;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -67,8 +67,8 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 	protected static final int DETECTION_RANGE = 16;
 	protected static final float DAMAGE = 4.0F;
 	
-	private static final ResourceLocation COVERED_ARMOR_BONUS_ID = SpectrumCommon.locate("covered_armor");
-	private static final ResourceLocation COVERED_TOUGHNESS_BONUS_ID = SpectrumCommon.locate("covered_toughness");
+	private static final ResourceLocation COVERED_ARMOR_BONUS_ID = PastelCommon.locate("covered_armor");
+	private static final ResourceLocation COVERED_TOUGHNESS_BONUS_ID = PastelCommon.locate("covered_toughness");
 	protected static final AttributeModifier COVERED_ARMOR_BONUS = new AttributeModifier(COVERED_ARMOR_BONUS_ID, 20.0, AttributeModifier.Operation.ADD_VALUE);
 	protected static final AttributeModifier COVERED_TOUGHNESS_BONUS = new AttributeModifier(COVERED_TOUGHNESS_BONUS_ID, 6.0, AttributeModifier.Operation.ADD_VALUE);
 	
@@ -104,7 +104,7 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 	
 	@Override
 	public boolean canBeAffected(MobEffectInstance effect) {
-		if (effect.getEffect().is(SpectrumStatusEffectTags.SOPORIFIC))
+		if (effect.getEffect().is(PastelStatusEffectTags.SOPORIFIC))
 			return false;
 		
 		return super.canBeAffected(effect);
@@ -122,17 +122,17 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_AMBIENT;
+		return PastelSoundEvents.ENTITY_PRESERVATION_TURRET_AMBIENT;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_DEATH;
+		return PastelSoundEvents.ENTITY_PRESERVATION_TURRET_DEATH;
 	}
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return this.isClosed() ? SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_HURT_CLOSED : SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_HURT;
+		return this.isClosed() ? PastelSoundEvents.ENTITY_PRESERVATION_TURRET_HURT_CLOSED : PastelSoundEvents.ENTITY_PRESERVATION_TURRET_HURT;
 	}
 	
 	@Override
@@ -376,10 +376,10 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 			if (peekAmount == 0) {
 				this.getAttribute(Attributes.ARMOR).addPermanentModifier(COVERED_ARMOR_BONUS);
 				this.getAttribute(Attributes.ARMOR_TOUGHNESS).addPermanentModifier(COVERED_TOUGHNESS_BONUS);
-				this.playSound(SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_CLOSE, 1.0F, 1.0F);
+				this.playSound(PastelSoundEvents.ENTITY_PRESERVATION_TURRET_CLOSE, 1.0F, 1.0F);
 				this.gameEvent(GameEvent.CONTAINER_CLOSE);
 			} else {
-				this.playSound(SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_OPEN, 1.0F, 1.0F);
+				this.playSound(PastelSoundEvents.ENTITY_PRESERVATION_TURRET_OPEN, 1.0F, 1.0F);
 				this.gameEvent(GameEvent.CONTAINER_OPEN);
 			}
 		}
@@ -441,7 +441,7 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 				&& EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)
 				&& !this.isAlliedTo(entity)
 				&& livingEntity.getType() != EntityType.ARMOR_STAND
-				&& livingEntity.getType() != SpectrumEntityTypes.PRESERVATION_TURRET.get()
+				&& livingEntity.getType() != PastelEntityTypes.PRESERVATION_TURRET.get()
 				&& !livingEntity.isInvulnerable()
 				&& !livingEntity.isDeadOrDying()
 				&& this.level().getWorldBorder().isWithinBounds(livingEntity.getBoundingBox());
@@ -529,8 +529,8 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 				}
 
 				target.hurt(level().damageSources().mobAttack(PreservationTurretEntity.this), DAMAGE);
-				PreservationTurretEntity.this.playSound(SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_SHOOT, 2.0F, 1.0F + 0.2F * (PreservationTurretEntity.this.random.nextFloat() - PreservationTurretEntity.this.random.nextFloat()));
-				target.playSound(SpectrumSoundEvents.ENTITY_PRESERVATION_TURRET_SHOOT, 1.0F, 0.5F + 0.2F * (PreservationTurretEntity.this.random.nextFloat() - PreservationTurretEntity.this.random.nextFloat()));
+				PreservationTurretEntity.this.playSound(PastelSoundEvents.ENTITY_PRESERVATION_TURRET_SHOOT, 2.0F, 1.0F + 0.2F * (PreservationTurretEntity.this.random.nextFloat() - PreservationTurretEntity.this.random.nextFloat()));
+				target.playSound(PastelSoundEvents.ENTITY_PRESERVATION_TURRET_SHOOT, 1.0F, 0.5F + 0.2F * (PreservationTurretEntity.this.random.nextFloat() - PreservationTurretEntity.this.random.nextFloat()));
 
 				super.tick();
 			}

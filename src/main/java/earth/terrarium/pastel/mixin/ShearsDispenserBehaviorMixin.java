@@ -2,8 +2,8 @@ package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.blocks.deeper_down.flora.SawbladeHollyBushBlock;
 import earth.terrarium.pastel.blocks.jade_vines.JadeVinePlantBlock;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumLootTables;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.ShearsDispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
@@ -23,13 +23,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ShearsDispenserBehaviorMixin {
 
     @Inject(at = @At("HEAD"), method = "tryShearBeehive", cancellable = true)
-    private static void spectrum$shearsShearSawbladeHollyBushes(ServerLevel world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+    private static void shearsShearSawbladeHollyBushes(ServerLevel world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         BlockState blockState = world.getBlockState(pos);
-        if (blockState.is(SpectrumBlocks.SAWBLADE_HOLLY_BUSH.get())) {
+        if (blockState.is(PastelBlocks.SAWBLADE_HOLLY_BUSH.get())) {
             int age = blockState.getValue(SawbladeHollyBushBlock.AGE);
             if (SawbladeHollyBushBlock.canBeSheared(age)) {
                 // we do not have the real shears item used in the dispenser here, but for the default loot table that does not make much of a difference
-                for (ItemStack stack : JadeVinePlantBlock.getHarvestedStacks(blockState, world, pos, world.getBlockEntity(pos), null, Items.SHEARS.getDefaultInstance(), SpectrumLootTables.SAWBLADE_HOLLY_SHEARING)) {
+                for (ItemStack stack : JadeVinePlantBlock.getHarvestedStacks(blockState, world, pos, world.getBlockEntity(pos), null, Items.SHEARS.getDefaultInstance(), PastelLootTables.SAWBLADE_HOLLY_SHEARING)) {
                     SawbladeHollyBushBlock.popResource(world, pos, stack);
                 }
     

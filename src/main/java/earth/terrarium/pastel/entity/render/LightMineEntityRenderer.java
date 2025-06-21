@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import earth.terrarium.pastel.entity.entity.LightMineEntity;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.LightTexture;
@@ -40,7 +40,7 @@ public class LightMineEntityRenderer extends EntityRenderer<LightMineEntity> {
 		var matrix = matrices.last();
 		var positions = matrix.pose();
 		
-		Vector3f color = SpectrumColorHelper.colorIntToVec(mine.getColor());
+		Vector3f color = ColorHelper.colorIntToVec(mine.getColor());
 		consumer.addVertex(positions, 0, 0, 0).setColor(color.x(), color.y(), color.z(), alpha).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(matrix, 0, 1, 0);
 		consumer.addVertex(positions, 1, 0, 0).setColor(color.x(), color.y(), color.z(), alpha).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(matrix, 0, 1, 0);
 		consumer.addVertex(positions, 1, 1, 0).setColor(color.x(), color.y(), color.z(), alpha).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(LightTexture.FULL_BRIGHT).setNormal(matrix, 0, 1, 0);

@@ -7,11 +7,11 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.recipe.GatedSpectrumRecipe;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.recipe.RecipeScaling;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -34,7 +34,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
+public class EnchantmentUpgradeRecipe extends GatedPastelRecipe<RecipeInput> {
 	
 	protected final Either<Holder<Enchantment>, ResourceKey<Enchantment>> either;
 	protected final int levelCap;
@@ -156,17 +156,17 @@ public class EnchantmentUpgradeRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.ENCHANTER.get());
+		return new ItemStack(PastelBlocks.ENCHANTER.get());
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.ENCHANTMENT_UPGRADE_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.ENCHANTMENT_UPGRADE_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.ENCHANTMENT_UPGRADE;
+		return PastelRecipeTypes.ENCHANTMENT_UPGRADE;
 	}
 	
 	@Override

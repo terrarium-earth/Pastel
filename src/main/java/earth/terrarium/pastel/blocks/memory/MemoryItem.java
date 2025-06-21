@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.blocks.memory;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.components.MemoryComponent;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -23,7 +23,6 @@ import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +50,7 @@ public class MemoryItem extends BlockItem {
 	}
 	
 	public static MemoryComponent getMemory(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.MEMORY, MemoryComponent.DEFAULT);
+		return stack.getOrDefault(PastelDataComponentTypes.MEMORY, MemoryComponent.DEFAULT);
 	}
 	
 	public static ItemStack getMemoryForEntity(LivingEntity entity) {
@@ -74,15 +73,15 @@ public class MemoryItem extends BlockItem {
 		tag.remove("PortalCooldown");
 		tag.remove("HurtTime");
 		
-		ItemStack stack = SpectrumBlocks.MEMORY.get().asItem().getDefaultInstance();
+		ItemStack stack = PastelBlocks.MEMORY.get().asItem().getDefaultInstance();
 		stack.set(DataComponents.ENTITY_DATA, CustomData.of(tag));
 		return stack;
 	}
 	
 	public static ItemStack getForEntityType(EntityType<?> entityType, int ticksToManifest) {
-		ItemStack stack = SpectrumBlocks.MEMORY.get().asItem().getDefaultInstance();
+		ItemStack stack = PastelBlocks.MEMORY.get().asItem().getDefaultInstance();
 		
-		stack.set(SpectrumDataComponentTypes.MEMORY, new MemoryComponent.Builder(MemoryComponent.DEFAULT).ticksToManifest(ticksToManifest).build());
+		stack.set(PastelDataComponentTypes.MEMORY, new MemoryComponent.Builder(MemoryComponent.DEFAULT).ticksToManifest(ticksToManifest).build());
 		
 		CompoundTag entityCompound = new CompoundTag();
 		entityCompound.putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(entityType).toString());
@@ -112,15 +111,15 @@ public class MemoryItem extends BlockItem {
 	}
 	
 	public static void setTicksToManifest(@NotNull ItemStack itemStack, int newTicksToManifest) {
-		itemStack.update(SpectrumDataComponentTypes.MEMORY, MemoryComponent.DEFAULT, comp -> new MemoryComponent.Builder(comp).ticksToManifest(newTicksToManifest).build());
+		itemStack.update(PastelDataComponentTypes.MEMORY, MemoryComponent.DEFAULT, comp -> new MemoryComponent.Builder(comp).ticksToManifest(newTicksToManifest).build());
 	}
 	
 	public static void setSpawnAsAdult(@NotNull ItemStack itemStack, boolean spawnAsAdult) {
-		itemStack.update(SpectrumDataComponentTypes.MEMORY, MemoryComponent.DEFAULT, comp -> new MemoryComponent.Builder(comp).spawnAsAdult(spawnAsAdult).build());
+		itemStack.update(PastelDataComponentTypes.MEMORY, MemoryComponent.DEFAULT, comp -> new MemoryComponent.Builder(comp).spawnAsAdult(spawnAsAdult).build());
 	}
 	
 	public static void markAsBrokenPromise(ItemStack itemStack, boolean isBrokenPromise) {
-		itemStack.update(SpectrumDataComponentTypes.MEMORY, MemoryComponent.DEFAULT, comp -> new MemoryComponent.Builder(comp).brokenPromise(isBrokenPromise).build());
+		itemStack.update(PastelDataComponentTypes.MEMORY, MemoryComponent.DEFAULT, comp -> new MemoryComponent.Builder(comp).brokenPromise(isBrokenPromise).build());
 	}
 	
 	public static boolean isBrokenPromise(ItemStack stack) {
@@ -132,11 +131,11 @@ public class MemoryItem extends BlockItem {
 	}
 	
 	public static void makeUnrecognizable(@NotNull ItemStack itemStack) {
-		itemStack.update(SpectrumDataComponentTypes.MEMORY, MemoryComponent.DEFAULT, comp -> new MemoryComponent.Builder(comp).unrecognizable().build());
+		itemStack.update(PastelDataComponentTypes.MEMORY, MemoryComponent.DEFAULT, comp -> new MemoryComponent.Builder(comp).unrecognizable().build());
 	}
 	
 	public static int getEggColor(ItemStack stack, int tintIndex) {
-		if (stack.has(SpectrumDataComponentTypes.MEMORY) && !isUnrecognizable(stack)) {
+		if (stack.has(PastelDataComponentTypes.MEMORY) && !isUnrecognizable(stack)) {
 			var entityType = getEntityType(stack);
 			if (entityType.isPresent()) {
 				EntityType<?> type = entityType.get();
@@ -200,11 +199,11 @@ public class MemoryItem extends BlockItem {
 		// adding all memories that have spirit instiller recipes
 		Set<MemoryComponent> encountered = new HashSet<>();
 		//TODO does this work on dedicated servers?
-		if (SpectrumCommon.getSidedServer() != null) {
-			Item memoryItem = SpectrumBlocks.MEMORY.get().asItem();
-			for (var recipe : SpectrumCommon.getSidedServer().getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.SPIRIT_INSTILLING)) {
+		if (PastelCommon.getSidedServer() != null) {
+			Item memoryItem = PastelBlocks.MEMORY.get().asItem();
+			for (var recipe : PastelCommon.getSidedServer().getRecipeManager().getAllRecipesFor(PastelRecipeTypes.SPIRIT_INSTILLING)) {
 				ItemStack output = recipe.value().getResultItem(lookup);
-				var memory = output.get(SpectrumDataComponentTypes.MEMORY);
+				var memory = output.get(PastelDataComponentTypes.MEMORY);
 				if (output.is(memoryItem) && memory != null && !encountered.contains(memory)) {
 					entries.accept(output);
 					encountered.add(memory);

@@ -3,8 +3,8 @@ package earth.terrarium.pastel.blocks.amalgam;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.PlacedItemBlock;
 import earth.terrarium.pastel.blocks.PlacedItemBlockEntity;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -146,7 +146,7 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
 	public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
 		if (!state.getValue(WATERLOGGED)
 				&& !player.isCreative()
-				&& !EnchantmentHelper.hasTag(player.getItemInHand(player.getUsedItemHand()), SpectrumEnchantmentTags.PREVENTS_INCANDESCENT_EXPLOSION)) {
+				&& !EnchantmentHelper.hasTag(player.getItemInHand(player.getUsedItemHand()), PastelEnchantmentTags.PREVENTS_INCANDESCENT_EXPLOSION)) {
 
 			explode(world, pos);
 		}
@@ -171,7 +171,7 @@ public class IncandescentAmalgamBlock extends PlacedItemBlock implements SimpleW
 		if (stack.getItem() instanceof IncandescentAmalgamItem item) {
 			power = item.getExplosionPower(stack, false);
 		}
-		world.explode(owner, SpectrumDamageTypes.incandescence(world, owner), new ExplosionDamageCalculator(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power, true, Level.ExplosionInteraction.BLOCK);
+		world.explode(owner, PastelDamageTypes.incandescence(world, owner), new ExplosionDamageCalculator(), pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, power, true, Level.ExplosionInteraction.BLOCK);
 	}
 	
 	@Override

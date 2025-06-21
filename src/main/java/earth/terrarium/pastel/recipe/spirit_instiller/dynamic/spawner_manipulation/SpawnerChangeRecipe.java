@@ -5,8 +5,8 @@ import earth.terrarium.pastel.blocks.item_bowl.ItemBowlBlockEntity;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -30,8 +30,8 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 	}
 	
 	public SpawnerChangeRecipe(IngredientStack ingredient) {
-		super("spawner_manipulation", false, Optional.of(SpectrumAdvancements.SPAWNER_MANIPULATION),
-				IngredientStack.ofItems(Items.SPAWNER), ingredient, IngredientStack.ofItems(SpectrumItems.VEGETAL.get(), 4),
+		super("spawner_manipulation", false, Optional.of(PastelAdvancements.SPAWNER_MANIPULATION),
+				IngredientStack.ofItems(Items.SPAWNER), ingredient, IngredientStack.ofItems(PastelItems.VEGETAL.get(), 4),
 				Items.SPAWNER.getDefaultInstance(), 200, 0, true);
 	}
 	

@@ -1,12 +1,10 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.SpectrumClient;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.PastelClient;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.client.*;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.network.FriendlyByteBuf;
@@ -20,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 public record StartSkyLerpingPayload(long startTime, long endTime) implements CustomPacketPayload {
 	
-	public static final Type<StartSkyLerpingPayload> ID = SpectrumC2SPackets.makeId("start_sky_lerping");
+	public static final Type<StartSkyLerpingPayload> ID = PastelC2SPackets.makeId("start_sky_lerping");
 	public static final StreamCodec<FriendlyByteBuf, StartSkyLerpingPayload> CODEC = StreamCodec.composite(
 			ByteBufCodecs.VAR_LONG, StartSkyLerpingPayload::startTime,
 			ByteBufCodecs.VAR_LONG, StartSkyLerpingPayload::endTime,
@@ -38,9 +36,9 @@ public record StartSkyLerpingPayload(long startTime, long endTime) implements Cu
 		Level level = context.player().level();
 		DimensionType dimensionType = level.dimensionType();
 		
-		SpectrumClient.skyLerper.trigger(dimensionType, payload.startTime, client.getTimer().getGameTimeDeltaPartialTick(false), payload.endTime);
+		PastelClient.skyLerper.trigger(dimensionType, payload.startTime, client.getTimer().getGameTimeDeltaPartialTick(false), payload.endTime);
 		if (level.canSeeSky(client.player.blockPosition())) {
-			level.playSound(null, client.player.blockPosition(), SpectrumSoundEvents.CELESTIAL_POCKET_WATCH_FLY_BY, SoundSource.NEUTRAL, 0.15F, 1.0F);
+			level.playSound(null, client.player.blockPosition(), PastelSoundEvents.CELESTIAL_POCKET_WATCH_FLY_BY, SoundSource.NEUTRAL, 0.15F, 1.0F);
 		}
 	}
 	

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.block;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.helpers.Support;
 import net.minecraft.core.BlockPos;
@@ -27,7 +27,7 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
 		if (nbt.contains("CurrentRecipe")) {
 			String recipeString = nbt.getString("CurrentRecipe");
 			if (!recipeString.isEmpty()) {
-				var recipe = SpectrumCommon.getRecipeManager(world).flatMap(m -> m.byKey(ResourceLocation.parse(recipeString)));
+				var recipe = PastelCommon.getRecipeManager(world).flatMap(m -> m.byKey(ResourceLocation.parse(recipeString)));
 				
 				if (recipe.isPresent() && recipeClass.isInstance(recipe.get())) {
 					return (T) recipe.get().value();
@@ -41,7 +41,7 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
 		if (nbt.contains("CurrentRecipe")) {
 			String recipeString = nbt.getString("CurrentRecipe");
 			if (!recipeString.isEmpty()) {
-				return SpectrumCommon.getRecipeManager(world).flatMap(m -> m.byKey(ResourceLocation.parse(recipeString))).orElse(null);
+				return PastelCommon.getRecipeManager(world).flatMap(m -> m.byKey(ResourceLocation.parse(recipeString))).orElse(null);
 			}
 		}
 		return null;

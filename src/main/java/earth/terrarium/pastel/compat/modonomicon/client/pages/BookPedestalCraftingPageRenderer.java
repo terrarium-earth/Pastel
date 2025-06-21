@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.modonomicon.client.pages;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
@@ -21,10 +21,10 @@ import java.util.List;
 
 public class BookPedestalCraftingPageRenderer extends BookGatedRecipePageRenderer<PedestalRecipe, BookGatedRecipePage<PedestalRecipe>> {
 	
-	private static final ResourceLocation BACKGROUND_TEXTURE1 = SpectrumCommon.locate("textures/gui/modonomicon/pedestal_crafting1.png");
-	private static final ResourceLocation BACKGROUND_TEXTURE2 = SpectrumCommon.locate("textures/gui/modonomicon/pedestal_crafting2.png");
-	private static final ResourceLocation BACKGROUND_TEXTURE3 = SpectrumCommon.locate("textures/gui/modonomicon/pedestal_crafting3.png");
-	private static final ResourceLocation BACKGROUND_TEXTURE4 = SpectrumCommon.locate("textures/gui/modonomicon/pedestal_crafting4.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE1 = PastelCommon.locate("textures/gui/modonomicon/pedestal_crafting1.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE2 = PastelCommon.locate("textures/gui/modonomicon/pedestal_crafting2.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE3 = PastelCommon.locate("textures/gui/modonomicon/pedestal_crafting3.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE4 = PastelCommon.locate("textures/gui/modonomicon/pedestal_crafting4.png");
 	
 	public BookPedestalCraftingPageRenderer(BookGatedRecipePage<PedestalRecipe> page) {
 		super(page);

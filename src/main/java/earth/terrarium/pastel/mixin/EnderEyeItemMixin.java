@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.blocks.CrackedEndPortalFrameBlock;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.EnderEyeItem;
@@ -26,11 +26,11 @@ public abstract class EnderEyeItemMixin {
 		BlockPos blockPos = context.getClickedPos();
 		BlockState blockState = world.getBlockState(blockPos);
 		boolean eyeAdded = false;
-		if (blockState.is(SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get()) && blockState.getValue(CrackedEndPortalFrameBlock.EYE_TYPE).equals(CrackedEndPortalFrameBlock.EndPortalFrameEye.NONE)) {
+		if (blockState.is(PastelBlocks.CRACKED_END_PORTAL_FRAME.get()) && blockState.getValue(CrackedEndPortalFrameBlock.EYE_TYPE).equals(CrackedEndPortalFrameBlock.EndPortalFrameEye.NONE)) {
 			BlockState targetBlockState = blockState.setValue(CrackedEndPortalFrameBlock.EYE_TYPE, CrackedEndPortalFrameBlock.EndPortalFrameEye.WITH_EYE_OF_ENDER);
 			Block.pushEntitiesUp(blockState, targetBlockState, world, blockPos);
 			world.setBlock(blockPos, targetBlockState, 2);
-			world.updateNeighbourForOutputSignal(blockPos, SpectrumBlocks.CRACKED_END_PORTAL_FRAME.get());
+			world.updateNeighbourForOutputSignal(blockPos, PastelBlocks.CRACKED_END_PORTAL_FRAME.get());
 			eyeAdded = true;
 		} else if (blockState.is(Blocks.END_PORTAL_FRAME) && blockState.getValue(EndPortalFrameBlock.HAS_EYE).equals(false)) {
 			BlockState targetBlockState = blockState.setValue(EndPortalFrameBlock.HAS_EYE, true);

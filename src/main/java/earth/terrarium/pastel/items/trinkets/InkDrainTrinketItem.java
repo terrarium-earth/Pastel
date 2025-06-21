@@ -8,7 +8,7 @@ import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.components.InkStorageComponent;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class InkDrainTrinketItem extends SpectrumTrinketItem implements InkStorageItem<FixedSingleInkStorage>, ExtendedItemBarProvider, SlotBackgroundEffectProvider {
+public class InkDrainTrinketItem extends PastelTrinketItem implements InkStorageItem<FixedSingleInkStorage>, ExtendedItemBarProvider, SlotBackgroundEffectProvider {
 	
 	/**
 	 * TODO: set to the original value again, once ink networking is in. Currently the original max value cannot be achieved.
@@ -82,7 +82,7 @@ public class InkDrainTrinketItem extends SpectrumTrinketItem implements InkStora
 	
 	@Override
 	public FixedSingleInkStorage getEnergyStorage(ItemStack itemStack) {
-		var storage = itemStack.get(SpectrumDataComponentTypes.INK_STORAGE);
+		var storage = itemStack.get(PastelDataComponentTypes.INK_STORAGE);
 		if (storage != null)
 			for (var entry : storage.storedEnergy().entrySet())
 				return new FixedSingleInkStorage(storage.maxEnergyTotal(), entry.getKey(), entry.getValue());
@@ -91,7 +91,7 @@ public class InkDrainTrinketItem extends SpectrumTrinketItem implements InkStora
 	
 	@Override
 	public void setEnergyStorage(ItemStack itemStack, InkStorage storage) {
-		itemStack.set(SpectrumDataComponentTypes.INK_STORAGE, new InkStorageComponent(storage));
+		itemStack.set(PastelDataComponentTypes.INK_STORAGE, new InkStorageComponent(storage));
 		itemStack.set(DataComponents.RARITY, storage.isFull() ? Rarity.EPIC : super.getDefaultInstance().get(DataComponents.RARITY));
 	}
 	

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.tools;
 
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.item.ArrowItem;
@@ -15,7 +15,7 @@ public class GlassArrowVariant {
 	public static final GlassArrowVariant MOONSTONE = register("moonstone");
 	
 	private static GlassArrowVariant register(String id) {
-		return Registry.register(SpectrumRegistries.GLASS_ARROW_VARIANT, id, new GlassArrowVariant());
+		return Registry.register(PastelRegistries.GLASS_ARROW_VARIANT, id, new GlassArrowVariant());
 	}
 	
 	protected ArrowItem arrow;

@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.registries.client.SpectrumColorProviders;
+import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -64,17 +64,17 @@ public class ColoredLeavesBlock extends LeavesBlock implements RevelationAware, 
 	
 	@Override
 	public void onUncloak() {
-		if (SpectrumColorProviders.coloredLeavesBlockColorProvider != null && SpectrumColorProviders.coloredLeavesItemColorProvider != null) {
-			SpectrumColorProviders.coloredLeavesBlockColorProvider.setShouldApply(false);
-			SpectrumColorProviders.coloredLeavesItemColorProvider.setShouldApply(false);
+		if (PastelColorProviders.coloredLeavesBlockColorProvider != null && PastelColorProviders.coloredLeavesItemColorProvider != null) {
+			PastelColorProviders.coloredLeavesBlockColorProvider.setShouldApply(false);
+			PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(false);
 		}
 	}
 	
 	@Override
 	public void onCloak() {
-		if (SpectrumColorProviders.coloredLeavesBlockColorProvider != null && SpectrumColorProviders.coloredLeavesItemColorProvider != null) {
-			SpectrumColorProviders.coloredLeavesBlockColorProvider.setShouldApply(true);
-			SpectrumColorProviders.coloredLeavesItemColorProvider.setShouldApply(true);
+		if (PastelColorProviders.coloredLeavesBlockColorProvider != null && PastelColorProviders.coloredLeavesItemColorProvider != null) {
+			PastelColorProviders.coloredLeavesBlockColorProvider.setShouldApply(true);
+			PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(true);
 		}
 	}
 	

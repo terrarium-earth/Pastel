@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.emi.handlers;
 
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.inventories.CinderhearthScreenHandler;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
@@ -28,6 +28,6 @@ public class CinderhearthRecipeHandler implements StandardRecipeHandler<Cinderhe
     @Override
     public boolean supportsRecipe(EmiRecipe recipe) {
         EmiRecipeCategory category = recipe.getCategory();
-        return (category == SpectrumEmiRecipeCategories.CINDERHEARTH || category == VanillaEmiRecipeCategories.BLASTING) && recipe.supportsRecipeTree();
+        return (category == PastelEmiRecipeCategories.CINDERHEARTH || category == VanillaEmiRecipeCategories.BLASTING) && recipe.supportsRecipeTree();
     }
 }

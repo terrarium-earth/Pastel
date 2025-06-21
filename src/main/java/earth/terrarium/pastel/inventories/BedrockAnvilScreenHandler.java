@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.LoreHelper;
 import earth.terrarium.pastel.items.PigmentItem;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -50,7 +50,7 @@ public class BedrockAnvilScreenHandler extends ItemCombinerMenu {
 	}
 	
 	public BedrockAnvilScreenHandler(int syncId, Inventory inventory, ContainerLevelAccess context) {
-		super(SpectrumScreenHandlerTypes.BEDROCK_ANVIL, syncId, inventory, context);
+		super(PastelScreenHandlerTypes.BEDROCK_ANVIL, syncId, inventory, context);
 		this.levelCost = DataSlot.standalone();
 		this.addDataSlot(this.levelCost);
 	}
@@ -206,7 +206,7 @@ public class BedrockAnvilScreenHandler extends ItemCombinerMenu {
 							foundUnacceptable = true;
 						} else {
 							foundAcceptable = true;
-							boolean capToMaxLevel = (inputStack.is(Items.ENCHANTED_BOOK) && !inputStack.has(DataComponents.STORED_ENCHANTMENTS)) || !SpectrumCommon.CONFIG.BedrockAnvilCanExceedMaxVanillaEnchantmentLevel; // We added this line
+							boolean capToMaxLevel = (inputStack.is(Items.ENCHANTED_BOOK) && !inputStack.has(DataComponents.STORED_ENCHANTMENTS)) || !PastelCommon.CONFIG.BedrockAnvilCanExceedMaxVanillaEnchantmentLevel; // We added this line
 							if (capToMaxLevel && newEnchantmentLevel > enchantment.getMaxLevel()) { // We added 'capToMaxLevel &&'
 								newEnchantmentLevel = enchantment.getMaxLevel();
 							}

@@ -31,28 +31,28 @@ public abstract class InGameHudMixin {
     @Shadow protected abstract void renderHeart(GuiGraphics guiGraphics, Gui.HeartType heartType, int x, int y, boolean hardcore, boolean halfHeart, boolean blinking);
 
     @ModifyExpressionValue(method = "renderCameraOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;useFancyGraphics()Z"))
-    private boolean spectrum$disableVignietteInDimension(boolean original) {
+    private boolean disableVignietteInDimension(boolean original) {
 		var player = Minecraft.getInstance().player;
-		var isInDim = player != null && SpectrumDimensions.DIMENSION_KEY.equals(player.level().dimension());
+		var isInDim = player != null && PastelDimensions.DIMENSION_KEY.equals(player.level().dimension());
         return !isInDim && original;
     }
 
     @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
-    private void spectrum$disableCrosshairSomnolence(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    private void disableCrosshairSomnolence(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
 		var potency = SleepStatusEffect.getSleepScaling(getCameraPlayer());
         if (potency > 0.25F)
 			ci.cancel();
     }
 
     @Inject(method = "renderItemHotbar", at = @At("HEAD"), cancellable = true)
-    private void spectrum$disableHotbarSomnolence(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    private void disableHotbarSomnolence(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
 		var potency = SleepStatusEffect.getSleepScaling(getCameraPlayer());
         if (potency > 0.4F)
 			ci.cancel();
     }
 
     @Inject(method = "renderPlayerHealth", at = @At("HEAD"), cancellable = true)
-    private void spectrum$disableStatusSomnolence(GuiGraphics context, CallbackInfo ci) {
+    private void disableStatusSomnolence(GuiGraphics context, CallbackInfo ci) {
 		var potency = SleepStatusEffect.getSleepScaling(getCameraPlayer());
 		if (potency > 0.4F)
 			ci.cancel();
@@ -71,7 +71,7 @@ public abstract class InGameHudMixin {
 
     @WrapOperation(method = "renderHearts", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderHeart(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V"))
     private void renderDivinityHearts(Gui instance, GuiGraphics guiGraphics, Gui.HeartType heartType, int x, int y, boolean hardcore, boolean halfHeart, boolean blinking, Operation<Void> original, @Local(argsOnly = true) Player player) {
-        if (player.hasEffect(SpectrumStatusEffects.DIVINITY)) {
+        if (player.hasEffect(PastelStatusEffects.DIVINITY)) {
             renderHeart(guiGraphics, heartType, x, y, true, halfHeart, blinking);
         }
         else {

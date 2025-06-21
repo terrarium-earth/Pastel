@@ -3,9 +3,9 @@ package earth.terrarium.pastel.blocks.conditional.amaranth;
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.blocks.TallCropBlock;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.client.SpectrumColorProviders;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -59,12 +59,12 @@ public class AmaranthCropBlock extends TallCropBlock implements RevelationAware 
 	
 	@Override
 	protected ItemLike getBaseSeedId() {
-        return SpectrumItems.AMARANTH_GRAINS.get();
+        return PastelItems.AMARANTH_GRAINS.get();
 	}
 	
 	@Override
 	public ResourceLocation getCloakAdvancementIdentifier() {
-		return SpectrumAdvancements.REVEAL_AMARANTH;
+		return PastelAdvancements.REVEAL_AMARANTH;
 	}
 	
 	@Override
@@ -92,17 +92,17 @@ public class AmaranthCropBlock extends TallCropBlock implements RevelationAware 
 	
 	@Override
 	public void onUncloak() {
-		if (SpectrumColorProviders.amaranthCropBlockColorProvider != null && SpectrumColorProviders.amaranthCropItemColorProvider != null) {
-			SpectrumColorProviders.amaranthCropBlockColorProvider.setShouldApply(false);
-			SpectrumColorProviders.amaranthCropItemColorProvider.setShouldApply(false);
+		if (PastelColorProviders.amaranthCropBlockColorProvider != null && PastelColorProviders.amaranthCropItemColorProvider != null) {
+			PastelColorProviders.amaranthCropBlockColorProvider.setShouldApply(false);
+			PastelColorProviders.amaranthCropItemColorProvider.setShouldApply(false);
 		}
 	}
 	
 	@Override
 	public void onCloak() {
-		if (SpectrumColorProviders.amaranthCropBlockColorProvider != null && SpectrumColorProviders.amaranthCropItemColorProvider != null) {
-			SpectrumColorProviders.amaranthCropBlockColorProvider.setShouldApply(true);
-			SpectrumColorProviders.amaranthCropItemColorProvider.setShouldApply(true);
+		if (PastelColorProviders.amaranthCropBlockColorProvider != null && PastelColorProviders.amaranthCropItemColorProvider != null) {
+			PastelColorProviders.amaranthCropBlockColorProvider.setShouldApply(true);
+			PastelColorProviders.amaranthCropItemColorProvider.setShouldApply(true);
 		}
 	}
 	

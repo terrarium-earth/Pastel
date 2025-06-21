@@ -1,8 +1,7 @@
 package earth.terrarium.pastel.recipe.fluid_converting.dynamic;
 
-import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +26,7 @@ public class MeatToRottenFleshRecipe extends DragonrotConvertingRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.DRAGONROT_MEAT_TO_ROTTEN_FLESH;
+		return PastelRecipeSerializers.DRAGONROT_MEAT_TO_ROTTEN_FLESH;
 	}
 	
 }

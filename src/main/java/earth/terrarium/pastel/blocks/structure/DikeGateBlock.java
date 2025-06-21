@@ -3,9 +3,9 @@ package earth.terrarium.pastel.blocks.structure;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -100,7 +100,7 @@ public class DikeGateBlock extends TransparentBlock {
 				double d = direction.getStepX() == 0 ? random.nextDouble() : 0.5 + direction.getStepX() * 0.6;
 				double e = direction.getStepY() == 0 ? random.nextDouble() : 0.5 + direction.getStepY() * 0.6;
 				double f = direction.getStepZ() == 0 ? random.nextDouble() : 0.5 + direction.getStepZ() * 0.6;
-				world.addParticle(SpectrumParticleTypes.AZURE_DIKE_RUNES, pos.getX() + d, pos.getY() + e, pos.getZ() + f, 0.0, 0.025, 0.0);
+				world.addParticle(PastelParticleTypes.AZURE_DIKE_RUNES, pos.getX() + d, pos.getY() + e, pos.getZ() + f, 0.0, 0.025, 0.0);
 			}
 		}
 	}
@@ -109,10 +109,10 @@ public class DikeGateBlock extends TransparentBlock {
 		if (world instanceof ServerLevel serverWorld && entity instanceof LivingEntity livingEntity) {
 			int charges = (int) Math.ceil(AzureDikeProvider.getAzureDikeCharges(livingEntity));
 			if (charges == 0) {
-				entity.hurt(SpectrumDamageTypes.dike(serverWorld), 1);
-				PlayParticleWithExactVelocityPayload.playParticles(serverWorld, pos, SpectrumParticleTypes.AZURE_DIKE_RUNES, 10);
+				entity.hurt(PastelDamageTypes.dike(serverWorld), 1);
+				PlayParticleWithExactVelocityPayload.playParticles(serverWorld, pos, PastelParticleTypes.AZURE_DIKE_RUNES, 10);
 				if (entity instanceof ServerPlayer serverPlayerEntity && (!decreasedSounds || ((ServerLevel) world).getGameTime() % 10 == 0)) {
-					serverPlayerEntity.playNotifySound(SpectrumSoundEvents.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
+					serverPlayerEntity.playNotifySound(PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 0.75F, 1.0F);
 				}
 			}
 		}

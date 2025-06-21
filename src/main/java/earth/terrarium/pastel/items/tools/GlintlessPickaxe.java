@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 
-public class GlintlessPickaxe extends SpectrumPickaxeItem {
+public class GlintlessPickaxe extends PastelPickaxeItem {
 
     public GlintlessPickaxe(Tier material, Properties settings) {
         super(material, settings);

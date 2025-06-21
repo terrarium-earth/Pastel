@@ -3,8 +3,8 @@ package earth.terrarium.pastel.blocks.conditional.amaranth;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.client.SpectrumColorProviders;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
@@ -43,7 +43,7 @@ public class AmaranthBushelBlock extends FlowerBlock implements RevelationAware 
 	
 	@Override
 	public ResourceLocation getCloakAdvancementIdentifier() {
-		return SpectrumAdvancements.REVEAL_AMARANTH;
+		return PastelAdvancements.REVEAL_AMARANTH;
 	}
 	
 	@Override
@@ -60,17 +60,17 @@ public class AmaranthBushelBlock extends FlowerBlock implements RevelationAware 
 	
 	@Override
 	public void onUncloak() {
-		if (SpectrumColorProviders.amaranthBushelBlockColorProvider != null && SpectrumColorProviders.amaranthBushelItemColorProvider != null) {
-			SpectrumColorProviders.amaranthBushelBlockColorProvider.setShouldApply(false);
-			SpectrumColorProviders.amaranthBushelItemColorProvider.setShouldApply(false);
+		if (PastelColorProviders.amaranthBushelBlockColorProvider != null && PastelColorProviders.amaranthBushelItemColorProvider != null) {
+			PastelColorProviders.amaranthBushelBlockColorProvider.setShouldApply(false);
+			PastelColorProviders.amaranthBushelItemColorProvider.setShouldApply(false);
 		}
 	}
 	
 	@Override
 	public void onCloak() {
-		if (SpectrumColorProviders.amaranthBushelBlockColorProvider != null && SpectrumColorProviders.amaranthBushelItemColorProvider != null) {
-			SpectrumColorProviders.amaranthBushelBlockColorProvider.setShouldApply(true);
-			SpectrumColorProviders.amaranthBushelItemColorProvider.setShouldApply(true);
+		if (PastelColorProviders.amaranthBushelBlockColorProvider != null && PastelColorProviders.amaranthBushelItemColorProvider != null) {
+			PastelColorProviders.amaranthBushelBlockColorProvider.setShouldApply(true);
+			PastelColorProviders.amaranthBushelItemColorProvider.setShouldApply(true);
 		}
 	}
 

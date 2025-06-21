@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.items.tools;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.MoltenFishingBobberEntity;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
+import earth.terrarium.pastel.registries.PastelFluidTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -14,9 +14,9 @@ import net.minecraft.world.level.material.FluidState;
 
 import java.util.List;
 
-public class MoltenRodItem extends SpectrumFishingRodItem {
+public class MoltenRodItem extends PastelFishingRodItem {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/equipment/molten_rod");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/equipment/molten_rod");
 	
 	public MoltenRodItem(Properties settings) {
 		super(settings);
@@ -24,7 +24,7 @@ public class MoltenRodItem extends SpectrumFishingRodItem {
 	
 	@Override
 	public boolean canFishIn(FluidState fluidState) {
-		return fluidState.is(SpectrumFluidTags.MOLTEN_ROD_FISHABLE_IN);
+		return fluidState.is(PastelFluidTags.MOLTEN_ROD_FISHABLE_IN);
 	}
 	
 	@Override

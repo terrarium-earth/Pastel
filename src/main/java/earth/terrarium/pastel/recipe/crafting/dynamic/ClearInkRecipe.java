@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.recipe.crafting.dynamic;
 
 import earth.terrarium.pastel.api.energy.InkStorageItem;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
@@ -25,7 +25,7 @@ public class ClearInkRecipe extends SingleItemCraftingRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.CLEAR_INK_SERIALIZER;
+		return PastelRecipeSerializers.CLEAR_INK_SERIALIZER;
 	}
 	
 }

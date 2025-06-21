@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.compat.emi.widgets.AnimatedTexturedWidget;
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
 import dev.emi.emi.api.render.EmiTexture;
@@ -12,10 +12,10 @@ import net.minecraft.resources.ResourceLocation;
 
 public class PrimordialFireBurningEmiRecipeGated extends GatedSpectrumEmiRecipe<PrimordialFireBurningRecipe> {
 	
-	private final static ResourceLocation FIRE_TEXTURE = SpectrumCommon.locate("textures/block/primordial_fire_0.png");
+	private final static ResourceLocation FIRE_TEXTURE = PastelCommon.locate("textures/block/primordial_fire_0.png");
 	
 	public PrimordialFireBurningEmiRecipeGated(PrimordialFireBurningRecipe recipe) {
-		super(SpectrumEmiRecipeCategories.PRIMORDIAL_FIRE_BURNING, recipe, 80, 35);
+		super(PastelEmiRecipeCategories.PRIMORDIAL_FIRE_BURNING, recipe, 80, 35);
 		this.inputs = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
 	}
 	

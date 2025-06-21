@@ -15,11 +15,11 @@ import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.TickLooper;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import earth.terrarium.pastel.render.animation.FlowAnimator;
 import earth.terrarium.pastel.render.animation.FlowData;
 import earth.terrarium.pastel.render.animation.FlowHandlers;
@@ -83,7 +83,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 	protected FlowData<Float> _alpha = FlowData.NULL(), _speed = FlowData.NULL(), _bounce = FlowData.NULL();
 	
 	public CrystallarieumBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.CRYSTALLARIEUM.get(), pos, state, INVENTORY_SIZE);
+		super(PastelBlockEntities.CRYSTALLARIEUM.get(), pos, state, INVENTORY_SIZE);
 		inventory.addListener(i -> inventoryChanged());
 		this.inkStorage = new IndividualCappedInkStorage(INK_STORAGE_SIZE);
 		this.canWork = true;
@@ -194,7 +194,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 				world.setBlockAndUpdate(topPos, nextState.get());
 				ServerPlayer owner = (ServerPlayer) crystal.getOwnerIfOnline();
 				if (owner != null) {
-					SpectrumAdvancementCriteria.CRYSTALLARIEUM_GROWING.trigger(owner, (ServerLevel) world, topPos, crystal.getItem(CATALYST_SLOT_ID));
+					PastelAdvancementCriteria.CRYSTALLARIEUM_GROWING.trigger(owner, (ServerLevel) world, topPos, crystal.getItem(CATALYST_SLOT_ID));
 				}
 			} else {
 				crystal.canWork = false;
@@ -295,7 +295,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 				changed = true;
 			}
 		} else if (level.getBlockState(worldPosition.above()).isAir()) {
-			var recipe = level.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.CRYSTALLARIEUM, new SingleRecipeInput(itemStack), level);
+			var recipe = level.getRecipeManager().getRecipeFor(PastelRecipeTypes.CRYSTALLARIEUM, new SingleRecipeInput(itemStack), level);
 			if (recipe.isPresent()) {
 				if (!creative) {
 					itemStack.shrink(1);

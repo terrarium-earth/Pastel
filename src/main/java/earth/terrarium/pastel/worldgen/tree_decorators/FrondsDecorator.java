@@ -3,7 +3,7 @@ package earth.terrarium.pastel.worldgen.tree_decorators;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.registries.SpectrumTreeDecoratorTypes;
+import earth.terrarium.pastel.registries.PastelTreeDecoratorTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -50,7 +50,7 @@ public class FrondsDecorator extends TreeDecorator {
 	
 	@Override
 	protected TreeDecoratorType<?> type() {
-		return SpectrumTreeDecoratorTypes.FRONDS.value();
+		return PastelTreeDecoratorTypes.FRONDS.value();
 	}
 	
 	@Override

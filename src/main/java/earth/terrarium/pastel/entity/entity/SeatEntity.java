@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -37,7 +37,7 @@ public class SeatEntity extends Entity {
     }
 
     public SeatEntity(Level world, double offset) {
-        super(SpectrumEntityTypes.SEAT.get(), world);
+        super(PastelEntityTypes.SEAT.get(), world);
         this.offset = offset;
     }
 

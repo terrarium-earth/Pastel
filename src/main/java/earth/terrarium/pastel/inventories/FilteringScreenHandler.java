@@ -13,7 +13,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.function.Function;
@@ -29,7 +28,7 @@ public class FilteringScreenHandler extends AbstractContainerMenu {
 		this(syncId, playerInventory, FilterConfigurable.ExtendedData.STREAM_CODEC.decode(buf));
 	}
 	public FilteringScreenHandler(int syncId, Inventory playerInventory, FilterConfigurable.ExtendedData data) {
-		this(SpectrumScreenHandlerTypes.FILTERING, syncId, playerInventory,
+		this(PastelScreenHandlerTypes.FILTERING, syncId, playerInventory,
 				(handler) -> new Tuple<>(FilterConfigurable.getFilterInventoryFromItemsHandler(syncId, playerInventory, data.filterItems(), handler), new Integer[]{
 						data.rows(),
 						data.slotsPerRow(),

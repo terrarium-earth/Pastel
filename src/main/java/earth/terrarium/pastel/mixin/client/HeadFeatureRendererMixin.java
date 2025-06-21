@@ -2,9 +2,9 @@ package earth.terrarium.pastel.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.pastel.blocks.mob_head.SpectrumSkullBlock;
-import earth.terrarium.pastel.blocks.mob_head.SpectrumSkullType;
-import earth.terrarium.pastel.blocks.mob_head.client.SpectrumSkullBlockEntityRenderer;
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
+import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullBlockEntityRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.EntityModel;
@@ -25,8 +25,8 @@ public abstract class HeadFeatureRendererMixin<T extends LivingEntity, M extends
 	
 	@Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFFFFF)V",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/layers/CustomHeadLayer;translateToHead(Lcom/mojang/blaze3d/vertex/PoseStack;Z)V", shift = At.Shift.AFTER), cancellable = true)
-	private void spectrum$renderSkull(PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, T livingEntity, float animationProgress, float h, float j, float k, float l, float m, CallbackInfo ci, @Local Item item, @Local boolean bl) {
-		if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof SpectrumSkullBlock spectrumSkullBlock) {
+	private void renderSkull(PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, T livingEntity, float animationProgress, float h, float j, float k, float l, float m, CallbackInfo ci, @Local Item item, @Local boolean bl) {
+		if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof PastelSkullBlock pastelSkullBlock) {
 			m = 1.1875F;
 			poseStack.scale(m, -m, -m);
 			if (bl) {
@@ -35,8 +35,8 @@ public abstract class HeadFeatureRendererMixin<T extends LivingEntity, M extends
 			
 			poseStack.translate(-0.5D, 0.0D, -0.5D);
 			
-			SpectrumSkullType skullType = spectrumSkullBlock.getType();
-			SpectrumSkullBlockEntityRenderer.renderModels(0.0F, poseStack, vertexConsumerProvider, light, skullType, null, 180.0F);
+			PastelSkullType skullType = pastelSkullBlock.getType();
+			PastelSkullBlockEntityRenderer.renderModels(0.0F, poseStack, vertexConsumerProvider, light, skullType, null, 180.0F);
 			poseStack.popPose();
 			ci.cancel();
 		}

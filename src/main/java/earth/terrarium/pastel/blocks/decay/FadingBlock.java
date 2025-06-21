@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.blocks.decay;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
@@ -20,7 +20,7 @@ public class FadingBlock extends DecayBlock {
 	public static final MapCodec<FadingBlock> CODEC = simpleCodec(FadingBlock::new);
 
 	public FadingBlock(Properties settings) {
-		super(settings, SpectrumCommon.CONFIG.FadingDecayTickRate, SpectrumCommon.CONFIG.FadingCanDestroyBlockEntities, 1, 1F);
+		super(settings, PastelCommon.CONFIG.FadingDecayTickRate, PastelCommon.CONFIG.FadingCanDestroyBlockEntities, 1, 1F);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class FadingBlock extends DecayBlock {
 		super.setPlacedBy(world, pos, state, placer, itemStack);
 		
 		if (!world.isClientSide) {
-			world.playSound(null, pos, SpectrumSoundEvents.FADING_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
+			world.playSound(null, pos, PastelSoundEvents.FADING_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
 		} else {
 			RandomSource random = world.getRandom();
 			world.addParticle(ParticleTypes.POOF, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ((-1.0F + random.nextFloat() * 2.0F) / 12.0F), 0.05, ((-1.0F + random.nextFloat() * 2.0F) / 12.0F));
@@ -46,9 +46,9 @@ public class FadingBlock extends DecayBlock {
 	
 	@Override
 	protected @Nullable BlockState getSpreadState(BlockState stateToSpreadFrom, BlockState stateToSpreadTo, Level world, BlockPos stateToSpreadToPos) {
-		if (stateToSpreadTo.is(SpectrumBlockTags.FADING_SPECIAL_CONVERSIONS)) {
+		if (stateToSpreadTo.is(PastelBlockTags.FADING_SPECIAL_CONVERSIONS)) {
 			return stateToSpreadFrom.setValue(CONVERSION, Conversion.SPECIAL);
-		} else if (stateToSpreadTo.is(SpectrumBlockTags.FADING_CONVERSIONS)) {
+		} else if (stateToSpreadTo.is(PastelBlockTags.FADING_CONVERSIONS)) {
 			return stateToSpreadFrom.setValue(CONVERSION, Conversion.DEFAULT);
 		}
 		return null;

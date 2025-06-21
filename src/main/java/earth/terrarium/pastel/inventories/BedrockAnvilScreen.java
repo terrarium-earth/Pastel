@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.LoreHelper;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.networking.c2s_payloads.AddLoreBedrockAnvilPayload;
@@ -8,7 +8,6 @@ import earth.terrarium.pastel.networking.c2s_payloads.RenameItemInBedrockAnvilPa
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
@@ -29,7 +28,7 @@ import org.lwjgl.glfw.GLFW;
 @OnlyIn(Dist.CLIENT)
 public class BedrockAnvilScreen extends ItemCombinerScreen<BedrockAnvilScreenHandler> {
 	
-	private static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/gui/container/bedrock_anvil.png");
+	private static final ResourceLocation TEXTURE = PastelCommon.locate("textures/gui/container/bedrock_anvil.png");
 	private final Player player;
 	private EditBox nameField;
 	private EditBox loreField;

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.items.magic_items.CelestialPocketWatchItem;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +24,7 @@ public abstract class ItemFrameEntityMixin {
 	@Inject(method = "interact",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/decoration/ItemFrame;setRotation(I)V"))
 	public void interact(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-		if (getItem().is(SpectrumItems.CELESTIAL_POCKETWATCH.get()) && (((ItemFrame) (Object) this).level() instanceof ServerLevel serverWorld)) {
+		if (getItem().is(PastelItems.CELESTIAL_POCKETWATCH.get()) && (((ItemFrame) (Object) this).level() instanceof ServerLevel serverWorld)) {
 			CelestialPocketWatchItem.tryAdvanceTime(serverWorld, (ServerPlayer) player);
 		}
 	}

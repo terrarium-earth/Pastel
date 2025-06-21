@@ -5,12 +5,12 @@ import earth.terrarium.pastel.api.item.MergeableItem;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.entity.entity.DragonTalonEntity;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumEntityAttributes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelEntityAttributes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -53,7 +53,7 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 		this.modifiers = ItemAttributeModifiers.builder()
 				.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, damage + toolMaterial.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(SpectrumEntityAttributes.REACH_MODIFIER_ID, extraReach, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(PastelEntityAttributes.REACH_MODIFIER_ID, extraReach, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.build();
 	}
 	
@@ -90,10 +90,10 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 	@Override
 	public ItemStack getMergeResult(ServerPlayer player, ItemStack firstHalf, ItemStack secondHalf) {
 		var durability = Math.max(firstHalf.getDamageValue(), secondHalf.getDamageValue());
-		var result = new ItemStack(SpectrumItems.DRACONIC_TWINSWORD.get());
+		var result = new ItemStack(PastelItems.DRACONIC_TWINSWORD.get());
 		result.applyComponents(firstHalf.getComponents());
 		
-		result.remove(SpectrumDataComponentTypes.PAIRED_ITEM);
+		result.remove(PastelDataComponentTypes.PAIRED_ITEM);
 		result.remove(DataComponents.ATTRIBUTE_MODIFIERS);
 		SlotReservingItem.free(result);
 		
@@ -146,7 +146,7 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 
 	@Override
 	public void playSound(ServerPlayer player) {
-		player.playNotifySound(SpectrumSoundEvents.METALLIC_UNSHEATHE, SoundSource.PLAYERS, 0.5F, 0.8F + player.getRandom().nextFloat() * 0.4F);
+		player.playNotifySound(PastelSoundEvents.METALLIC_UNSHEATHE, SoundSource.PLAYERS, 0.5F, 0.8F + player.getRandom().nextFloat() * 0.4F);
 	}
 	
 	public static ItemStack findThrownStack(Player player, UUID id) {
@@ -174,7 +174,7 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 	@Override
 	public DamageComposition getDamageComposition(LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
 		var composition = new DamageComposition();
-		composition.add(SpectrumDamageTypes.evisceration(attacker.level(), attacker), damage);
+		composition.add(PastelDamageTypes.evisceration(attacker.level(), attacker), damage);
 		return composition;
 	}
 	
@@ -204,6 +204,6 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 	
 	@Override
 	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.CHANNELING) || enchantment.is(Enchantments.PIERCING) || enchantment.is(SpectrumEnchantments.INERTIA);
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.CHANNELING) || enchantment.is(Enchantments.PIERCING) || enchantment.is(PastelEnchantments.INERTIA);
 	}
 }

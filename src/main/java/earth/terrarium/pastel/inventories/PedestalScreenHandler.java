@@ -5,8 +5,8 @@ import earth.terrarium.pastel.inventories.slots.DisabledSlot;
 import earth.terrarium.pastel.inventories.slots.PedestalPreviewSlot;
 import earth.terrarium.pastel.inventories.slots.StackFilterSlot;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.*;
 import net.neoforged.api.distmarker.Dist;
@@ -53,12 +53,12 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 	}
 
 	public PedestalScreenHandler(int syncId, Inventory playerInventory, ScreenOpeningData data) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos, SpectrumBlockEntities.PEDESTAL.get()).orElseThrow(), new SimpleContainerData(2), data.pedestalRecipeTier, data.maxRecipeTier);
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos, PastelBlockEntities.PEDESTAL.get()).orElseThrow(), new SimpleContainerData(2), data.pedestalRecipeTier, data.maxRecipeTier);
 	}
 	
 	// serverside
 	public PedestalScreenHandler(int syncId, Inventory playerInventory, PedestalBlockEntity blockEntity, ContainerData propertyDelegate, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
-		this(SpectrumScreenHandlerTypes.PEDESTAL, RecipeBookType.CRAFTING, syncId, playerInventory, blockEntity, propertyDelegate, pedestalRecipeTier, maxRecipeTier);
+		this(PastelScreenHandlerTypes.PEDESTAL, RecipeBookType.CRAFTING, syncId, playerInventory, blockEntity, propertyDelegate, pedestalRecipeTier, maxRecipeTier);
 	}
 	
 	protected PedestalScreenHandler(MenuType<?> type, RecipeBookType recipeBookCategory, int i, Inventory playerInventory, PedestalBlockEntity blockEntity, ContainerData propertyDelegate, PedestalRecipeTier pedestalRecipeTier, PedestalRecipeTier maxRecipeTier) {
@@ -85,30 +85,30 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 		// gemstone powder slots
 		switch (getPedestalRecipeTier()) {
 			case BASIC, SIMPLE -> {
-				this.addSlot(new StackFilterSlot(blockEntity, 9, 44 + 18, 77, SpectrumItems.TOPAZ_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 10, 44 + 2 * 18, 77, SpectrumItems.AMETHYST_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 11, 44 + 3 * 18, 77, SpectrumItems.CITRINE_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 9, 44 + 18, 77, PastelItems.TOPAZ_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 10, 44 + 2 * 18, 77, PastelItems.AMETHYST_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 11, 44 + 3 * 18, 77, PastelItems.CITRINE_POWDER.get()));
 				this.addSlot(new DisabledSlot(blockEntity, 12, -2000, 77));
 				this.addSlot(new DisabledSlot(blockEntity, 13, -2000, 77));
 			}
 			case ADVANCED -> {
-				this.addSlot(new StackFilterSlot(blockEntity, 9, 35 + 18, 77, SpectrumItems.TOPAZ_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 10, 35 + 2 * 18, 77, SpectrumItems.AMETHYST_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 11, 35 + 3 * 18, 77, SpectrumItems.CITRINE_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 12, 35 + 4 * 18, 77, SpectrumItems.ONYX_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 9, 35 + 18, 77, PastelItems.TOPAZ_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 10, 35 + 2 * 18, 77, PastelItems.AMETHYST_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 11, 35 + 3 * 18, 77, PastelItems.CITRINE_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 12, 35 + 4 * 18, 77, PastelItems.ONYX_POWDER.get()));
 				this.addSlot(new DisabledSlot(blockEntity, 13, -2000, 77));
 			}
 			case COMPLEX -> {
-				this.addSlot(new StackFilterSlot(blockEntity, 9, 44, 77, SpectrumItems.TOPAZ_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 10, 44 + 18, 77, SpectrumItems.AMETHYST_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 11, 44 + 2 * 18, 77, SpectrumItems.CITRINE_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 12, 44 + 3 * 18, 77, SpectrumItems.ONYX_POWDER.get()));
-				this.addSlot(new StackFilterSlot(blockEntity, 13, 44 + 4 * 18, 77, SpectrumItems.MOONSTONE_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 9, 44, 77, PastelItems.TOPAZ_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 10, 44 + 18, 77, PastelItems.AMETHYST_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 11, 44 + 2 * 18, 77, PastelItems.CITRINE_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 12, 44 + 3 * 18, 77, PastelItems.ONYX_POWDER.get()));
+				this.addSlot(new StackFilterSlot(blockEntity, 13, 44 + 4 * 18, 77, PastelItems.MOONSTONE_POWDER.get()));
 			}
 		}
 		
 		// crafting tablet slot
-		this.addSlot(new StackFilterSlot(blockEntity, PedestalBlockEntity.CRAFTING_TABLET_SLOT_ID, 93, 19, SpectrumItems.CRAFTING_TABLET.get()));
+		this.addSlot(new StackFilterSlot(blockEntity, PedestalBlockEntity.CRAFTING_TABLET_SLOT_ID, 93, 19, PastelItems.CRAFTING_TABLET.get()));
 		
 		// preview slot
 		this.addSlot(new PedestalPreviewSlot(blockEntity, 15, 127, 37));
@@ -215,27 +215,27 @@ public class PedestalScreenHandler extends RecipeBookMenu<RecipeInput, Recipe<Re
 				if (!this.moveItemStackTo(clickedStack, 16, 51, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (clickedStackCopy.is(SpectrumItems.TOPAZ_POWDER.get())) {
+			} else if (clickedStackCopy.is(PastelItems.TOPAZ_POWDER.get())) {
 				if (!this.moveItemStackTo(clickedStack, 9, 10, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (clickedStackCopy.is(SpectrumItems.AMETHYST_POWDER.get())) {
+			} else if (clickedStackCopy.is(PastelItems.AMETHYST_POWDER.get())) {
 				if (!this.moveItemStackTo(clickedStack, 10, 11, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (clickedStackCopy.is(SpectrumItems.CITRINE_POWDER.get())) {
+			} else if (clickedStackCopy.is(PastelItems.CITRINE_POWDER.get())) {
 				if (!this.moveItemStackTo(clickedStack, 11, 12, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (clickedStackCopy.is(SpectrumItems.ONYX_POWDER.get())) {
+			} else if (clickedStackCopy.is(PastelItems.ONYX_POWDER.get())) {
 				if (!this.moveItemStackTo(clickedStack, 12, 13, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (clickedStackCopy.is(SpectrumItems.MOONSTONE_POWDER.get())) {
+			} else if (clickedStackCopy.is(PastelItems.MOONSTONE_POWDER.get())) {
 				if (!this.moveItemStackTo(clickedStack, 13, 14, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (clickedStackCopy.is(SpectrumItems.CRAFTING_TABLET.get())) {
+			} else if (clickedStackCopy.is(PastelItems.CRAFTING_TABLET.get())) {
 				if (!this.moveItemStackTo(clickedStack, PedestalBlockEntity.CRAFTING_TABLET_SLOT_ID, PedestalBlockEntity.CRAFTING_TABLET_SLOT_ID + 1, false)) {
 					return ItemStack.EMPTY;
 				}

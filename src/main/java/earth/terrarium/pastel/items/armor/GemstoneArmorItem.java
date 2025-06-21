@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.armor;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ArmorWithHitEffect;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -46,24 +46,24 @@ public class GemstoneArmorItem extends ArmorItem implements ArmorWithHitEffect {
 		switch (type) {
 			case HELMET -> {
 				if (source.getEntity() instanceof LivingEntity) {
-					MobEffectInstance statusEffectInstance = new MobEffectInstance(MobEffects.WEAKNESS, 5 * 20, SpectrumCommon.CONFIG.GemstoneArmorWeaknessAmplifier);
+					MobEffectInstance statusEffectInstance = new MobEffectInstance(MobEffects.WEAKNESS, 5 * 20, PastelCommon.CONFIG.GemstoneArmorWeaknessAmplifier);
 					((LivingEntity) source.getEntity()).addEffect(statusEffectInstance);
-					statusEffectInstance = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5 * 20, SpectrumCommon.CONFIG.GemstoneArmorSlownessAmplifier);
+					statusEffectInstance = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5 * 20, PastelCommon.CONFIG.GemstoneArmorSlownessAmplifier);
 					((LivingEntity) source.getEntity()).addEffect(statusEffectInstance);
 				}
 			}
 			case CHESTPLATE -> {
-				MobEffectInstance statusEffectInstance = new MobEffectInstance(MobEffects.ABSORPTION, 5 * 20, SpectrumCommon.CONFIG.GemstoneArmorAbsorptionAmplifier);
+				MobEffectInstance statusEffectInstance = new MobEffectInstance(MobEffects.ABSORPTION, 5 * 20, PastelCommon.CONFIG.GemstoneArmorAbsorptionAmplifier);
 				targetEntity.addEffect(statusEffectInstance);
-				statusEffectInstance = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5 * 20, SpectrumCommon.CONFIG.GemstoneArmorResistanceAmplifier);
+				statusEffectInstance = new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 5 * 20, PastelCommon.CONFIG.GemstoneArmorResistanceAmplifier);
 				targetEntity.addEffect(statusEffectInstance);
 			}
 			case LEGGINGS -> {
-				MobEffectInstance statusEffectInstance = new MobEffectInstance(MobEffects.REGENERATION, 5 * 20, SpectrumCommon.CONFIG.GemstoneArmorRegenerationAmplifier);
+				MobEffectInstance statusEffectInstance = new MobEffectInstance(MobEffects.REGENERATION, 5 * 20, PastelCommon.CONFIG.GemstoneArmorRegenerationAmplifier);
 				targetEntity.addEffect(statusEffectInstance);
 			}
 			case BOOTS -> {
-				MobEffectInstance statusEffectInstance = new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5 * 20, SpectrumCommon.CONFIG.GemstoneArmorSpeedAmplifier);
+				MobEffectInstance statusEffectInstance = new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 5 * 20, PastelCommon.CONFIG.GemstoneArmorSpeedAmplifier);
 				targetEntity.addEffect(statusEffectInstance);
 				statusEffectInstance = new MobEffectInstance(MobEffects.INVISIBILITY, 5 * 20, 0);
 				targetEntity.addEffect(statusEffectInstance);

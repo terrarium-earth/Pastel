@@ -38,25 +38,25 @@ public class MapDecorationMixin implements MapDecorationInjector {
 			@Override
 			public void encode(RegistryFriendlyByteBuf buf, MapDecoration value) {
 				codec.encode(buf, value);
-				buf.writeByte(((MapDecorationInjector) (Object) value).spectrum$getScale());
+				buf.writeByte(((MapDecorationInjector) (Object) value).getScale());
 			}
 
 			@Override
 			public MapDecoration decode(RegistryFriendlyByteBuf buf) {
 				MapDecoration decoration = codec.decode(buf);
-				((MapDecorationInjector) (Object) decoration).spectrum$setScale(buf.readByte());
+				((MapDecorationInjector) (Object) decoration).setScale(buf.readByte());
 				return decoration;
 			}
 		};
 	}
 
 	@Override
-	public void spectrum$setScale(byte scale) {
+	public void setScale(byte scale) {
 		this.scale = scale;
 	}
 
 	@Override
-	public byte spectrum$getScale() {
+	public byte getScale() {
 		return this.scale;
 	}
 

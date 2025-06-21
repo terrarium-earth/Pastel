@@ -2,9 +2,9 @@ package earth.terrarium.pastel.items.trinkets;
 
 import com.google.common.collect.Multimap;
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class AshenCircletItem extends SpectrumTrinketItem {
+public class AshenCircletItem extends PastelTrinketItem {
 	
 	public static final int FIRE_RESISTANCE_EFFECT_DURATION = 600;
 	public static final long COOLDOWN_TICKS = 3000;
@@ -36,16 +36,16 @@ public class AshenCircletItem extends SpectrumTrinketItem {
 	public static final double LAVA_VIEW_DISTANCE_MOD = 24.0;
 	
 	public AshenCircletItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/ashen_circlet"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/ashen_circlet"));
 	}
 	
 	public static long getCooldownTicks(@NotNull ItemStack ashenCircletStack, @NotNull Level world) {
-		var last = ashenCircletStack.getOrDefault(SpectrumDataComponentTypes.LAST_COOLDOWN_START, 0L);
+		var last = ashenCircletStack.getOrDefault(PastelDataComponentTypes.LAST_COOLDOWN_START, 0L);
 		return Math.max(0, last + COOLDOWN_TICKS - world.getGameTime());
 	}
 	
 	private static void setCooldown(@NotNull ItemStack ashenCircletStack, @NotNull Level world) {
-		ashenCircletStack.set(SpectrumDataComponentTypes.LAST_COOLDOWN_START, world.getGameTime());
+		ashenCircletStack.set(PastelDataComponentTypes.LAST_COOLDOWN_START, world.getGameTime());
 	}
 	
 	public static void grantFireResistance(@NotNull ItemStack ashenCircletStack, @NotNull LivingEntity livingEntity) {
@@ -88,8 +88,8 @@ public class AshenCircletItem extends SpectrumTrinketItem {
 		}
 	}
 	
-	public static ResourceLocation LAVA_SPEED_ATTRIBUTE_ID = SpectrumCommon.locate("ashen_circlet_lava_speed");
-	public static ResourceLocation LAVA_VISIBILITY_ATTRIBUTE_ID = SpectrumCommon.locate("ashen_circlet_lava_visibility");
+	public static ResourceLocation LAVA_SPEED_ATTRIBUTE_ID = PastelCommon.locate("ashen_circlet_lava_speed");
+	public static ResourceLocation LAVA_VISIBILITY_ATTRIBUTE_ID = PastelCommon.locate("ashen_circlet_lava_visibility");
 
 	@Override
 	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {

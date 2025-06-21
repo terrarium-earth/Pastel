@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.helpers;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -176,7 +176,7 @@ public class Support {
 				return origin.offset(-forwardUpRight.getX(), forwardUpRight.getY(), -forwardUpRight.getZ());
 			}
 			default -> {
-				SpectrumCommon.logWarning("Called directionalOffset with facing" + horizontalFacing + " this is not supported.");
+				PastelCommon.logWarning("Called directionalOffset with facing" + horizontalFacing + " this is not supported.");
 				return origin;
 			}
 		}
@@ -191,7 +191,7 @@ public class Support {
 		
 		AdvancementHolder advancement = sal.get(advancementIdentifier);
 		if (advancement == null) {
-			SpectrumCommon.logError("Trying to grant a criterion \"" + criterion + "\" for an advancement that does not exist: " + advancementIdentifier);
+			PastelCommon.logError("Trying to grant a criterion \"" + criterion + "\" for an advancement that does not exist: " + advancementIdentifier);
 		} else {
 			if (!tracker.getOrStartProgress(advancement).isDone()) {
 				tracker.award(advancement, criterion);
@@ -200,7 +200,7 @@ public class Support {
 	}
 	
 	public static void grantAdvancementCriterion(@NotNull ServerPlayer serverPlayerEntity, String advancementString, String criterion) {
-		grantAdvancementCriterion(serverPlayerEntity, SpectrumCommon.locate(advancementString), criterion);
+		grantAdvancementCriterion(serverPlayerEntity, PastelCommon.locate(advancementString), criterion);
 	}
 	
 	public static @NotNull String getReadableDimensionString(@NotNull String dimensionKeyString) {
@@ -295,7 +295,7 @@ public class Support {
 		if (false) {
 			var man = server.getStructureManager();
 			var sex = new FileToIdConverter("structure", ".nbt");
-			man.listTemplates().filter(l -> l.getNamespace().equals(SpectrumCommon.MOD_ID))
+			man.listTemplates().filter(l -> l.getNamespace().equals(PastelCommon.MOD_ID))
 					.forEach(l -> {
 						var opt = man.get(l);
 						if (opt.isEmpty())
@@ -314,7 +314,7 @@ public class Support {
 							write = new FileOutputStream(path.toFile());
 							NbtIo.writeCompressed(structTag, write);
 						} catch (Exception logged) {
-							SpectrumCommon.LOGGER.error("piss", logged);
+							PastelCommon.LOGGER.error("piss", logged);
 						}
 						try {
 							if (write!=null) {

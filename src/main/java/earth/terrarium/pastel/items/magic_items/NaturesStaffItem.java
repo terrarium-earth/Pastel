@@ -8,12 +8,12 @@ import earth.terrarium.pastel.api.interaction.NaturesStaffTriggered;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.data_loaders.NaturesStaffConversionDataLoader;
 import earth.terrarium.pastel.helpers.InventoryHelper;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.NaturesStaffUseSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -58,7 +58,7 @@ import java.util.List;
 
 public class NaturesStaffItem extends Item implements InkPowered {
 
-	public static final ItemStack ITEM_COST = new ItemStack(SpectrumItems.VEGETAL.get(), 1);
+	public static final ItemStack ITEM_COST = new ItemStack(PastelItems.VEGETAL.get(), 1);
 	public static final InkCost INK_COST = new InkCost(InkColors.LIME, 20);
 	
 	public NaturesStaffItem(Properties settings) {
@@ -70,7 +70,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		
-		int efficiencyLevel = SpectrumEnchantmentHelper.getLevel(context.registries(), Enchantments.EFFICIENCY, stack);
+		int efficiencyLevel = PastelEnchantmentHelper.getLevel(context.registries(), Enchantments.EFFICIENCY, stack);
 		if (efficiencyLevel == 0) {
 			if (InkPowered.canUseClient()) {
 				tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip_with_ink", INK_COST.color().getColoredInkName()));
@@ -138,7 +138,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 	}
 	
 	public float getInkCostMod(HolderLookup.Provider lookup, ItemStack itemStack) {
-		return 3.0F / (3.0F + SpectrumEnchantmentHelper.getLevel(lookup, Enchantments.EFFICIENCY, itemStack));
+		return 3.0F / (3.0F + PastelEnchantmentHelper.getLevel(lookup, Enchantments.EFFICIENCY, itemStack));
 	}
 	
 	@Override
@@ -197,7 +197,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
 						payForUse(player, stack);
 						success = true;
-					} else if (sourceState.is(SpectrumBlockTags.NATURES_STAFF_STACKABLE)) {
+					} else if (sourceState.is(PastelBlockTags.NATURES_STAFF_STACKABLE)) {
 						// blockstate marked as stackable => stack more on top!
 						int i = 0;
 						BlockState state;
@@ -210,7 +210,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 						if (tryPlaceBlock(sourceState, world, targetPos, Direction.DOWN, Direction.UP)) {
 							success = true;
 						}
-					} else if (sourceState.is(SpectrumBlockTags.NATURES_STAFF_SPREADABLE)) {
+					} else if (sourceState.is(PastelBlockTags.NATURES_STAFF_SPREADABLE)) {
 						RandomSource random = world.getRandom();
 
 						for (int i = 0; i < 5; i++) {
@@ -220,7 +220,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 								break;
 							}
 						}
-					} else if (sourceState.isRandomlyTicking() && sourceState.is(SpectrumBlockTags.NATURES_STAFF_TICKABLE)) {
+					} else if (sourceState.isRandomlyTicking() && sourceState.is(PastelBlockTags.NATURES_STAFF_TICKABLE)) {
 						// random tickable and whitelisted? => tick
 						// without whitelist we would be able to tick budding blocks, ...
 
@@ -241,7 +241,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
 				if (success) {
 					payForUse(player, stack);
-					SpectrumAdvancementCriteria.NATURES_STAFF_USE.trigger(player, sourceState, world.getBlockState(blockPos));
+					PastelAdvancementCriteria.NATURES_STAFF_USE.trigger(player, sourceState, world.getBlockState(blockPos));
 					return InteractionResult.CONSUME;
 				}
 			}
@@ -273,7 +273,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 
 	private static void spawnParticlesAndEffect(Level world, BlockPos blockPos) {
 		BlockState blockState = world.getBlockState(blockPos);
-		if (blockState.is(SpectrumBlockTags.NATURES_STAFF_STACKABLE)) {
+		if (blockState.is(PastelBlockTags.NATURES_STAFF_STACKABLE)) {
 			int i = 0;
 			while (world.getBlockState(blockPos.above(i)).is(blockState.getBlock())) {
 				world.levelEvent(LevelEvent.PARTICLES_AND_SOUND_PLANT_GROWTH, blockPos.above(i), 15);
@@ -295,7 +295,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 			paid = InkPowered.tryDrainEnergy(player, INK_COST, getInkCostMod(player.level().registryAccess(), stack));
 		}
 		if (!paid && player.getInventory().contains(ITEM_COST)) {  // try pay with item
-			int efficiencyLevel = SpectrumEnchantmentHelper.getLevel(player.level().registryAccess(), Enchantments.EFFICIENCY, stack);
+			int efficiencyLevel = PastelEnchantmentHelper.getLevel(player.level().registryAccess(), Enchantments.EFFICIENCY, stack);
 			if (efficiencyLevel == 0) {
 				paid = InventoryHelper.removeFromInventoryWithRemainders(player, ITEM_COST);
 			} else {
@@ -310,7 +310,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 	}
 	
 	private void playDenySound(@NotNull Level world, @NotNull Player playerEntity) {
-		world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SpectrumSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + playerEntity.getRandom().nextFloat() * 0.4F);
+		world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + playerEntity.getRandom().nextFloat() * 0.4F);
 	}
 	
 	@Override

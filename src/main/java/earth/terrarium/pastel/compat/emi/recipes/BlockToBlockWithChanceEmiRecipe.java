@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipe;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-public class BlockToBlockWithChanceEmiRecipe extends SpectrumEmiRecipe {
+public class BlockToBlockWithChanceEmiRecipe extends PastelEmiRecipe {
 	
 	public BlockToBlockWithChanceEmiRecipe(EmiRecipeCategory category, ResourceLocation id, EmiIngredient in, EmiStack out, ResourceLocation unlock) {
 		super(category, unlock, id, 78, 26);

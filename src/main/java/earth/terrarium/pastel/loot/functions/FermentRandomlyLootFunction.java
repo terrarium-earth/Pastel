@@ -4,9 +4,9 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.TimeHelper;
-import earth.terrarium.pastel.loot.SpectrumLootFunctionTypes;
+import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import earth.terrarium.pastel.mixin.accessors.BiomeAccessor;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
@@ -54,7 +54,7 @@ public class FermentRandomlyLootFunction extends LootItemConditionalFunction {
 	
 	@Override
 	public LootItemFunctionType<? extends LootItemConditionalFunction> getType() {
-		return SpectrumLootFunctionTypes.FERMENT_RANDOMLY;
+		return PastelLootFunctionTypes.FERMENT_RANDOMLY;
 	}
 	
 	@Override
@@ -65,7 +65,7 @@ public class FermentRandomlyLootFunction extends LootItemConditionalFunction {
 					if (recipe.isPresent() && recipe.get().value() instanceof TitrationBarrelRecipe titrationBarrelRecipe) {
 						return titrationBarrelRecipe.getFermentationData();
 					} else {
-						SpectrumCommon.logError("A 'pastel:ferment_randomly' loot function has set an invalid 'fermentation_recipe_id': " + id + " It has to match an existing Titration Barrel recipe.");
+						PastelCommon.logError("A 'pastel:ferment_randomly' loot function has set an invalid 'fermentation_recipe_id': " + id + " It has to match an existing Titration Barrel recipe.");
 						return null;
 					}
 				},
@@ -79,7 +79,7 @@ public class FermentRandomlyLootFunction extends LootItemConditionalFunction {
 				float downfall = ((BiomeAccessor) (Object) biome).getClimateSettings().downfall();
 				return TitrationBarrelRecipe.getFermentedStack(fermentationData, this.thickness.getInt(context), TimeHelper.secondsFromMinecraftDays(this.daysFermented.getInt(context)), downfall, stack);
 			} else {
-				SpectrumCommon.logError("A 'pastel:ferment_randomly' loot function does not have access to 'origin'.");
+				PastelCommon.logError("A 'pastel:ferment_randomly' loot function does not have access to 'origin'.");
 			}
 		}
 		return stack;

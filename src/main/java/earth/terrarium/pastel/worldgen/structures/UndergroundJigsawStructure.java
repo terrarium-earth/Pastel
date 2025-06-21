@@ -3,7 +3,7 @@ package earth.terrarium.pastel.worldgen.structures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.registries.SpectrumStructureTypes;
+import earth.terrarium.pastel.registries.PastelStructureTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -111,7 +111,7 @@ public class UndergroundJigsawStructure extends Structure {
 	
 	@Override
 	public StructureType<UndergroundJigsawStructure> type() {
-		return SpectrumStructureTypes.UNDERGROUND_JIGSAW;
+		return PastelStructureTypes.UNDERGROUND_JIGSAW;
 	}
 	
 	private static Optional<Integer> getFloorHeight(RandomSource random, ChunkGenerator chunkGenerator, LevelHeightAccessor world, RandomState noiseConfig, BoundingBox box, IntProvider buryDepth) {

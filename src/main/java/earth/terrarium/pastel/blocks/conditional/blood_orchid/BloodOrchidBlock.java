@@ -3,9 +3,9 @@ package earth.terrarium.pastel.blocks.conditional.blood_orchid;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -43,7 +43,7 @@ public class BloodOrchidBlock extends FlowerBlock implements BonemealableBlock, 
 			propertiesCodec()
 	).apply(instance, BloodOrchidBlock::new));
 
-	public static final ResourceLocation ADVANCEMENT_IDENTIFIER = SpectrumCommon.locate("midgame/collect_blood_orchid_petal");
+	public static final ResourceLocation ADVANCEMENT_IDENTIFIER = PastelCommon.locate("midgame/collect_blood_orchid_petal");
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_5;
 	
 	public BloodOrchidBlock(Holder<MobEffect> stewEffect, float effectLengthInSeconds, Properties settings) {
@@ -87,10 +87,10 @@ public class BloodOrchidBlock extends FlowerBlock implements BonemealableBlock, 
 				return InteractionResult.SUCCESS;
 			} else {
 				world.setBlockAndUpdate(pos, state.setValue(AGE, age - 1));
-				player.getInventory().placeItemBackInInventory(SpectrumItems.BLOOD_ORCHID_PETAL.get().getDefaultInstance());
+				player.getInventory().placeItemBackInInventory(PastelItems.BLOOD_ORCHID_PETAL.get().getDefaultInstance());
 				world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 1.0F, 0.9F + world.random.nextFloat() * 0.2F);
 				if (player instanceof ServerPlayer serverPlayerEntity) {
-					SpectrumAdvancementCriteria.BLOOD_ORCHID_PLUCKING.trigger(serverPlayerEntity);
+					PastelAdvancementCriteria.BLOOD_ORCHID_PLUCKING.trigger(serverPlayerEntity);
 				}
 				return InteractionResult.CONSUME;
 			}

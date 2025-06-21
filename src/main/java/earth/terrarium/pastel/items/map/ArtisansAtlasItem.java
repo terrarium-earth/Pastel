@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.map;
 
 import com.mojang.datafixers.util.Pair;
-import earth.terrarium.pastel.registries.SpectrumStructureTags;
+import earth.terrarium.pastel.registries.PastelStructureTags;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -334,7 +334,7 @@ public class ArtisansAtlasItem extends MapItem {
 				Pair<ResourceLocation, StructureStart> pair = ArtisansAtlasState.locateAnyStructureAtBlock(serverWorld, blockPos);
 				if (pair != null) {
 					ResourceLocation structureId = pair.getFirst();
-					if (SpectrumStructureTags.isIn(serverWorld, structureId, SpectrumStructureTags.UNLOCATABLE)) { // TODO: use c: tag
+					if (PastelStructureTags.isIn(serverWorld, structureId, PastelStructureTags.UNLOCATABLE)) { // TODO: use c: tag
 						serverPlayerEntity.displayClientMessage(Component.translatable("item.pastel.artisans_atlas.unlocatable"), true);
 					} else {
 						serverPlayerEntity.displayClientMessage(Component.translatable("item.pastel.artisans_atlas.set_structure").append(Component.translatable(structureId.toLanguageKey("structure"))), true);

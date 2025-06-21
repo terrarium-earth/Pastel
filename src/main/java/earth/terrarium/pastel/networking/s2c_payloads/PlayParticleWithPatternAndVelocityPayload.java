@@ -2,14 +2,11 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.ParticleHelper;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.particle.VectorPattern;
 import net.minecraft.network.protocol.*;
 import net.minecraft.network.protocol.common.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import net.minecraft.core.BlockPos;
@@ -28,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 public record PlayParticleWithPatternAndVelocityPayload(Vec3 pos, ParticleOptions effect, VectorPattern pattern, double velocity) implements CustomPacketPayload {
 	
-	public static final Type<PlayParticleWithPatternAndVelocityPayload> ID = SpectrumC2SPackets.makeId("play_particle_with_pattern_and_velocity");
+	public static final Type<PlayParticleWithPatternAndVelocityPayload> ID = PastelC2SPackets.makeId("play_particle_with_pattern_and_velocity");
 	public static final StreamCodec<RegistryFriendlyByteBuf, PlayParticleWithPatternAndVelocityPayload> CODEC = StreamCodec.composite(
 			PacketCodecHelper.VEC3D, PlayParticleWithPatternAndVelocityPayload::pos,
 			ParticleTypes.STREAM_CODEC, PlayParticleWithPatternAndVelocityPayload::effect,

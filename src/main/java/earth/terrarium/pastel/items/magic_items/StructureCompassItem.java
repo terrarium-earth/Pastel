@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.items.magic_items;
 
 import com.mojang.datafixers.util.Pair;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumStructureTags;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelStructureTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.Holder;
@@ -46,22 +46,22 @@ public class StructureCompassItem extends CompassItem {
 	}
 
 	public @Nullable Pair<BlockPos, Holder<Structure>> locateStructure(@NotNull ServerLevel world, @NotNull BlockPos pos) {
-		Optional<HolderSet.Named<Structure>> registryEntryList = SpectrumStructureTags.entriesOf(world, locatedStructures);
+		Optional<HolderSet.Named<Structure>> registryEntryList = PastelStructureTags.entriesOf(world, locatedStructures);
 		return registryEntryList.map(registryEntries ->
 				world.getChunkSource().getGenerator().findNearestMapStructure(world, registryEntries, pos, 100, false))
 				.orElse(null);
 	}
 	
 	public static @Nullable GlobalPos getStructurePos(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.TARGETED_STRUCTURE, null);
+		return stack.getOrDefault(PastelDataComponentTypes.TARGETED_STRUCTURE, null);
 	}
 	
 	protected void saveStructurePos(ItemStack stack, @NotNull ResourceKey<Level> worldKey, @NotNull BlockPos pos) {
-		stack.set(SpectrumDataComponentTypes.TARGETED_STRUCTURE, new GlobalPos(worldKey, pos));
+		stack.set(PastelDataComponentTypes.TARGETED_STRUCTURE, new GlobalPos(worldKey, pos));
 	}
 	
 	protected void removeStructurePos(@NotNull ItemStack stack) {
-		stack.remove(SpectrumDataComponentTypes.TARGETED_STRUCTURE);
+		stack.remove(PastelDataComponentTypes.TARGETED_STRUCTURE);
 	}
 	
 }

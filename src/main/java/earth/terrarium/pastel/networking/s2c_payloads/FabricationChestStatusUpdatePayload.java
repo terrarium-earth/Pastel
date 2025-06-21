@@ -1,16 +1,13 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.blocks.chests.FabricationChestBlockEntity;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.server.level.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -24,7 +21,7 @@ import java.util.Optional;
 
 public record FabricationChestStatusUpdatePayload(BlockPos pos, boolean isFull, boolean hasValidRecipes, List<ItemStack> stacks) implements CustomPacketPayload {
 	
-	public static final Type<FabricationChestStatusUpdatePayload> ID = SpectrumC2SPackets.makeId("fabrication_chest_status_update");
+	public static final Type<FabricationChestStatusUpdatePayload> ID = PastelC2SPackets.makeId("fabrication_chest_status_update");
 	public static final StreamCodec<RegistryFriendlyByteBuf, FabricationChestStatusUpdatePayload> CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, FabricationChestStatusUpdatePayload::pos,
 			ByteBufCodecs.BOOL, FabricationChestStatusUpdatePayload::isFull,
@@ -49,7 +46,7 @@ public record FabricationChestStatusUpdatePayload(BlockPos pos, boolean isFull, 
 		var isFull = payload.isFull;
 		var hasValidRecipes = payload.hasValidRecipes;
 		List<ItemStack> outputs = payload.stacks;
-		Optional<FabricationChestBlockEntity> entity = level.getBlockEntity(pos, SpectrumBlockEntities.FABRICATION_CHEST.get());
+		Optional<FabricationChestBlockEntity> entity = level.getBlockEntity(pos, PastelBlockEntities.FABRICATION_CHEST.get());
 		if (entity.isPresent()) {
 			entity.get().updateState(isFull, hasValidRecipes, outputs);
 		}

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.FluidPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class FluidDippingCriterion extends SimpleCriterionTrigger<FluidDippingCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("fluid_dipping");
+	public static final ResourceLocation ID = PastelCommon.locate("fluid_dipping");
 	
 	public void trigger(ServerPlayer player, ServerLevel world, BlockPos pos, ItemStack previousStack, ItemStack targetStack) {
 		this.trigger(player, (conditions) -> conditions.matches(world, pos, previousStack, targetStack));

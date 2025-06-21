@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.spirit_instiller;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.Rotation;
 
 public class SpiritInstillerBlockEntityRenderer implements BlockEntityRenderer<SpiritInstillerBlockEntity> {
 	
-	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/spirit_instiller"));
+	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/spirit_instiller"));
 	protected final double ITEM_STACK_RENDER_HEIGHT = 0.95F;
 	
 	private final ModelPart head;

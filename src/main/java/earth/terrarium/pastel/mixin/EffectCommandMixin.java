@@ -2,7 +2,7 @@ package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -25,11 +25,11 @@ public class EffectCommandMixin {
     private static void clearIncurableEffects(CommandSourceStack source, Collection<? extends Entity> targets, CallbackInfoReturnable<Integer> cir, @Local Entity target) {
         if (target instanceof LivingEntity living) {
             for (MobEffectInstance effect : living.getActiveEffects()) {
-                if (((MobEffectInstanceInjector) effect).spectrum$isIncurable())
-                    ((MobEffectInstanceInjector) effect).spectrum$setIncurable(false);
+                if (((MobEffectInstanceInjector) effect).isIncurable())
+                    ((MobEffectInstanceInjector) effect).setIncurable(false);
             }
 			// manually remove fatal slumber to bypass turning it into eternal slumber
-			living.removeEffect(SpectrumStatusEffects.FATAL_SLUMBER);
+			living.removeEffect(PastelStatusEffects.FATAL_SLUMBER);
         }
     }
 	
@@ -38,8 +38,8 @@ public class EffectCommandMixin {
         if (target instanceof LivingEntity living) {
 			var effect = living.getEffect(living.level().registryAccess().registryOrThrow(Registries.MOB_EFFECT).wrapAsHolder(ref));
             if (effect != null) {
-                if (((MobEffectInstanceInjector) effect).spectrum$isIncurable())
-                    ((MobEffectInstanceInjector) effect).spectrum$setIncurable(false);
+                if (((MobEffectInstanceInjector) effect).isIncurable())
+                    ((MobEffectInstanceInjector) effect).setIncurable(false);
             }
         }
     }

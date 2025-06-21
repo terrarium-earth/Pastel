@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.redstone;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +18,7 @@ public class PlayerDetectorBlockEntity extends BlockEntity implements PlayerOwne
 	private String ownerName;
 	
 	public PlayerDetectorBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.PLAYER_DETECTOR.get(), blockPos, blockState);
+		super(PastelBlockEntities.PLAYER_DETECTOR.get(), blockPos, blockState);
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +19,7 @@ public class DragonrotConvertingDisplay extends FluidConvertingDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.DRAGONROT_CONVERTING;
+		return PastelPlugins.DRAGONROT_CONVERTING;
 	}
 	
 }

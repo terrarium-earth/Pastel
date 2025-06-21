@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -24,12 +24,12 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class AnvilCrushingCategory extends GatedDisplayCategory<AnvilCrushingDisplay> {
 	
-	private final static ResourceLocation WALL_TEXTURE = SpectrumCommon.locate("textures/gui/container/anvil_crushing.png");
+	private final static ResourceLocation WALL_TEXTURE = PastelCommon.locate("textures/gui/container/anvil_crushing.png");
 	private final static EntryIngredient ANVIL = EntryIngredients.of(Items.ANVIL);
 	
 	@Override
 	public CategoryIdentifier<AnvilCrushingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.ANVIL_CRUSHING;
+		return PastelPlugins.ANVIL_CRUSHING;
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.mob_head.client.models;
 
-import earth.terrarium.pastel.blocks.mob_head.client.SpectrumSkullModel;
+import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartNames;
 import net.minecraft.client.model.geom.PartPose;
@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
-public class PigHeadModel extends SpectrumSkullModel {
+public class PigHeadModel extends PastelSkullModel {
 	
 	public PigHeadModel(ModelPart root) {
 		super(root);

@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.decay;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -85,7 +85,7 @@ public abstract class DecayBlock extends Block {
 					.map(e -> EnchantmentHelper.getEnchantmentLevel(e, livingEntity))
 					.orElse(0);
 			if (frostWalker == 0)
-				entity.hurt(SpectrumDamageTypes.decay(world), damageOnTouching);
+				entity.hurt(PastelDamageTypes.decay(world), damageOnTouching);
 		}
 		super.stepOn(world, pos, state, entity);
 	}
@@ -94,8 +94,8 @@ public abstract class DecayBlock extends Block {
 	public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
 		super.setPlacedBy(world, pos, state, placer, itemStack);
 		
-		if (!world.isClientSide && SpectrumCommon.CONFIG.LogPlacingOfDecay && placer != null) {
-			SpectrumCommon.logInfo(state.getBlock().getName().getString() + " was placed in " + world.dimension().location() + " at " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " by " + placer.getName());
+		if (!world.isClientSide && PastelCommon.CONFIG.LogPlacingOfDecay && placer != null) {
+			PastelCommon.logInfo(state.getBlock().getName().getString() + " was placed in " + world.dimension().location() + " at " + pos.getX() + " " + pos.getY() + " " + pos.getZ() + " by " + placer.getName());
 		}
 	}
 	
@@ -108,7 +108,7 @@ public abstract class DecayBlock extends Block {
 	}
 	
 	private boolean canSpreadTo(Level world, BlockPos targetBlockPos, BlockState stateAtTargetPos) {
-		if (SpectrumCommon.CONFIG.DecayIsStoppedByClaimMods && !GenericClaimModsCompat.canModify(world, targetBlockPos, null)) {
+		if (PastelCommon.CONFIG.DecayIsStoppedByClaimMods && !GenericClaimModsCompat.canModify(world, targetBlockPos, null)) {
 			return false;
 		}
 		

@@ -29,6 +29,11 @@ public interface ContainerWrapper extends Container {
     }
 
     @Override
+    default void setChanged() {
+        getHandlerForScreens().onContentsChanged(0);
+    }
+
+    @Override
     default ItemStack removeItemNoUpdate(int slot) {
         return getHandlerForScreens().removeStackInSlot(slot);
     }

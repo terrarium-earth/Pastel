@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.items;
 
 import com.klikli_dev.modonomicon.client.gui.book.BookAddress;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.stats.Stats;
@@ -41,7 +41,7 @@ public class CookbookItem extends Item {
 			try {
 				openGuidebookPage(this.bookAddress);
 			} catch (NullPointerException e) {
-				SpectrumCommon.logError(user.getName().getString() + " used a CookbookItem to open the guidebook page " + this.bookAddress + " but it does not exist");
+				PastelCommon.logError(user.getName().getString() + " used a CookbookItem to open the guidebook page " + this.bookAddress + " but it does not exist");
 			}
 		}
 		
@@ -49,7 +49,7 @@ public class CookbookItem extends Item {
 	}
 	
 	private void openGuidebookPage(BookAddress address) {
-		if (SpectrumItems.GUIDEBOOK.get() instanceof GuidebookItem guidebook) {
+		if (PastelItems.GUIDEBOOK.get() instanceof GuidebookItem guidebook) {
 			guidebook.openGuidebook(address);
 		}
 	}

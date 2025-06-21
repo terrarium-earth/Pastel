@@ -2,9 +2,9 @@ package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.blocks.block_flooder.BlockFlooderBlock;
 import earth.terrarium.pastel.blocks.block_flooder.BlockFlooderBlockEntity;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -28,16 +28,16 @@ public class BlockFlooderProjectile extends ThrowableItemProjectile {
 	}
 
 	public BlockFlooderProjectile(Level world, LivingEntity owner) {
-		super(SpectrumEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), owner, world);
+		super(PastelEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), owner, world);
 	}
 
 	public BlockFlooderProjectile(Level world, double x, double y, double z) {
-		super(SpectrumEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), x, y, z, world);
+		super(PastelEntityTypes.BLOCK_FLOODER_PROJECTILE.get(), x, y, z, world);
 	}
 
 	@Override
 	protected Item getDefaultItem() {
-        return SpectrumItems.BLOCK_FLOODER.get();
+        return PastelItems.BLOCK_FLOODER.get();
 	}
 
 	private ParticleOptions getParticleParameters() {
@@ -66,7 +66,7 @@ public class BlockFlooderProjectile extends ThrowableItemProjectile {
 			if (hitResult.getType() == HitResult.Type.BLOCK) {
 				BlockPos landingPos = getCorrectedBlockPos(hitResult.getLocation());
 				if (BlockFlooderBlock.isReplaceableBlock(world, landingPos) && this.getOwner() instanceof Player playerEntityOwner) {
-					world.setBlockAndUpdate(landingPos, SpectrumBlocks.BLOCK_FLOODER.get().defaultBlockState());
+					world.setBlockAndUpdate(landingPos, PastelBlocks.BLOCK_FLOODER.get().defaultBlockState());
 					BlockEntity blockEntity = world.getBlockEntity(landingPos);
 					if (blockEntity instanceof BlockFlooderBlockEntity blockFlooderBlockEntity) {
 						blockFlooderBlockEntity.setOwnerUUID(playerEntityOwner.getUUID());

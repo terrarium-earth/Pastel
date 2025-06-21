@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.blocks.fluid;
 
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumFluids;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluids;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -30,36 +30,36 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.FluidType;
 
-public abstract class LiquidCrystalFluid extends SpectrumFluid {
+public abstract class LiquidCrystalFluid extends PastelFluid {
 	
 	@Override
 	public Fluid getSource() {
-		return SpectrumFluids.LIQUID_CRYSTAL.get();
+		return PastelFluids.LIQUID_CRYSTAL.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return SpectrumFluids.FLOWING_LIQUID_CRYSTAL.get();
+		return PastelFluids.FLOWING_LIQUID_CRYSTAL.get();
 	}
 	
 	@Override
 	public Item getBucket() {
-        return SpectrumItems.LIQUID_CRYSTAL_BUCKET.get();
+        return PastelItems.LIQUID_CRYSTAL_BUCKET.get();
 	}
 
 	@Override
 	public FluidType getFluidType() {
-		return SpectrumFluids.LIQUID_CRYSTAL_TYPE.get();
+		return PastelFluids.LIQUID_CRYSTAL_TYPE.get();
 	}
 
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return SpectrumBlocks.LIQUID_CRYSTAL.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return PastelBlocks.LIQUID_CRYSTAL.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == SpectrumFluids.LIQUID_CRYSTAL.get() || fluid == SpectrumFluids.FLOWING_LIQUID_CRYSTAL.get();
+		return fluid == PastelFluids.LIQUID_CRYSTAL.get() || fluid == PastelFluids.FLOWING_LIQUID_CRYSTAL.get();
 	}
 	
 	@Override
@@ -68,7 +68,7 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 		BlockPos topPos = pos.above();
 		BlockState topState = world.getBlockState(topPos);
 		if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(1000) == 0) {
-			world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SpectrumSoundEvents.LIQUID_CRYSTAL_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+			world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSoundEvents.LIQUID_CRYSTAL_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
 		}
 	}
 	
@@ -77,7 +77,7 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 		// if liquid crystal collides with a flower of any kind:
 		// drop a resonant lily instead
 		if (state.is(BlockTags.FLOWERS)) {
-			Block.dropResources(SpectrumBlocks.RESONANT_LILY.get().defaultBlockState(), world, pos, null);
+			Block.dropResources(PastelBlocks.RESONANT_LILY.get().defaultBlockState(), world, pos, null);
 		} else {
 			super.beforeDestroyingBlock(world, pos, state);
 		}
@@ -85,12 +85,12 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 	
 	@Override
 	public ParticleOptions getDripParticle() {
-		return SpectrumParticleTypes.DRIPPING_LIQUID_CRYSTAL;
+		return PastelParticleTypes.DRIPPING_LIQUID_CRYSTAL;
 	}
 	
 	@Override
 	public ParticleOptions getSplashParticle() {
-		return SpectrumParticleTypes.LIQUID_CRYSTAL_SPLASH;
+		return PastelParticleTypes.LIQUID_CRYSTAL_SPLASH;
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public abstract class LiquidCrystalFluid extends SpectrumFluid {
 	
 	@Override
 	public RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType() {
-		return SpectrumRecipeTypes.LIQUID_CRYSTAL_CONVERTING;
+		return PastelRecipeTypes.LIQUID_CRYSTAL_CONVERTING;
 	}
 	
 	public static class Flowing extends LiquidCrystalFluid {

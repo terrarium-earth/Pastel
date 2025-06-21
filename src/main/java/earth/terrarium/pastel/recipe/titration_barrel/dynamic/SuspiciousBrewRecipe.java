@@ -1,8 +1,9 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
@@ -10,9 +11,8 @@ import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
@@ -41,8 +41,8 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 	
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final int MIN_FERMENTATION_TIME_HOURS = 4;
-	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.SUSPICIOUS_BREW.get(), 4);
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/food/suspicious_brew");
+	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(PastelItems.SUSPICIOUS_BREW.get(), 4);
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/food/suspicious_brew");
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
 		add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
 		add(IngredientStack.ofTag(ItemTags.SMALL_FLOWERS, 1));
@@ -80,7 +80,7 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 		float ageIngameDays = TimeHelper.minecraftDaysFromSeconds(secondsFermented);
 		double alcPercent = getAlcPercent(this.fermentationData.fermentationSpeedMod(), thickness, downfall, ageIngameDays);
 		if (alcPercent >= 100) {
-			return SpectrumItems.PURE_ALCOHOL.get().getDefaultInstance();
+			return PastelItems.PURE_ALCOHOL.get().getDefaultInstance();
 		} else {
 			// add up all stew effects with their durations from the input stacks
 			var stewEffects = new HashMap<Holder<MobEffect>, Double>();
@@ -105,7 +105,7 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 			
 			ItemStack outputStack = OUTPUT_STACK.copy();
 			outputStack.setCount(1);
-			outputStack.set(SpectrumDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, (int) alcPercent, thickness));
+			outputStack.set(PastelDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, (int) alcPercent, thickness));
 			outputStack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), finalStatusEffects));
 			return outputStack;
 		}
@@ -130,7 +130,7 @@ public class SuspiciousBrewRecipe extends TitrationBarrelRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.TITRATION_BARREL_SUSPICIOUS_BREW;
+		return PastelRecipeSerializers.TITRATION_BARREL_SUSPICIOUS_BREW;
 	}
 	
 }

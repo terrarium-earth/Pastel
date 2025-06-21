@@ -3,7 +3,7 @@ package earth.terrarium.pastel.api.item;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -154,7 +154,7 @@ public class ItemStorage {
     }
 
     public static ItemStorage load(ItemStack holder) {
-        var component = holder.getOrDefault(SpectrumDataComponentTypes.ITEM_STORAGE, Component.DEFAULT);
+        var component = holder.getOrDefault(PastelDataComponentTypes.ITEM_STORAGE, Component.DEFAULT);
         var storage = new ItemStorage(component.reference, component.count);
 
         if (holder.getItem() instanceof LimitCallback callback)
@@ -171,7 +171,7 @@ public class ItemStorage {
         if (blankOnEmpty && isEmpty() && !reference.isEmpty())
             setReference(ItemReference.empty());
 
-        holder.set(SpectrumDataComponentTypes.ITEM_STORAGE, new Component(reference, count));
+        holder.set(PastelDataComponentTypes.ITEM_STORAGE, new Component(reference, count));
     }
 
     @Override

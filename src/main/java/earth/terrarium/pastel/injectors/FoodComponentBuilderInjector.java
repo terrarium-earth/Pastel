@@ -5,7 +5,7 @@ import org.apache.commons.lang3.NotImplementedException;
 
 public interface FoodComponentBuilderInjector {
 	
-	default FoodProperties.Builder spectrum$setEatSeconds(float eatSeconds) {
+	default FoodProperties.Builder setEatSeconds(float eatSeconds) {
 		throw new NotImplementedException();
 	}
 	

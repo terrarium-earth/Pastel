@@ -3,8 +3,8 @@ package earth.terrarium.pastel.particle.effect;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -43,7 +43,7 @@ public class ColoredFallingSporeBlossomParticleEffect implements ParticleOptions
 	private final Vector3f color;
 	
 	public ColoredFallingSporeBlossomParticleEffect(int color) {
-		this.color = SpectrumColorHelper.colorIntToVec(color);
+		this.color = ColorHelper.colorIntToVec(color);
 	}
 	
 	public ColoredFallingSporeBlossomParticleEffect(Vector3f color) {
@@ -51,7 +51,7 @@ public class ColoredFallingSporeBlossomParticleEffect implements ParticleOptions
 	}
 	
 	public ParticleType<ColoredFallingSporeBlossomParticleEffect> getType() {
-		return SpectrumParticleTypes.COLORED_FALLING_SPORE_BLOSSOM;
+		return PastelParticleTypes.COLORED_FALLING_SPORE_BLOSSOM;
 	}
 	
 	public Vector3f getColor() {

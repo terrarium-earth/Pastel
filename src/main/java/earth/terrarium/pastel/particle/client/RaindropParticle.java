@@ -2,9 +2,9 @@ package earth.terrarium.pastel.particle.client;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Camera;
@@ -26,7 +26,7 @@ public class RaindropParticle extends TextureSheetParticle {
 	
 	private static final Vec3 VERTICAL = new Vec3(0, 1, 0);
 	private static final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
-	//private final int simInterval = SpectrumCommon.CONFIG.WindSimInterval, simOffset;
+	//private final int simInterval = PastelCommon.CONFIG.WindSimInterval, simOffset;
 	
 	public RaindropParticle(ClientLevel clientWorld, double d, double e, double f, SpriteSet spriteProvider) {
 		super(clientWorld, d, e, f);
@@ -36,7 +36,7 @@ public class RaindropParticle extends TextureSheetParticle {
 		//this.simOffset = random.nextInt(simInterval);
 		lifetime = 25;
 		pos.set(x, y, z);
-		var waterColor = SpectrumColorHelper.colorIntToVec(BiomeColors.getAverageWaterColor(level, pos));
+		var waterColor = ColorHelper.colorIntToVec(BiomeColors.getAverageWaterColor(level, pos));
 		rCol = waterColor.x;
 		gCol = waterColor.y;
 		bCol = waterColor.z;
@@ -45,7 +45,7 @@ public class RaindropParticle extends TextureSheetParticle {
 	@Override
 	public void tick() {
 		pos.set(x, y, z);
-		var waterColor = SpectrumColorHelper.colorIntToVec(BiomeColors.getAverageWaterColor(level, pos));
+		var waterColor = ColorHelper.colorIntToVec(BiomeColors.getAverageWaterColor(level, pos));
 		rCol = waterColor.x;
 		gCol = waterColor.y;
 		bCol = waterColor.z;
@@ -72,7 +72,7 @@ public class RaindropParticle extends TextureSheetParticle {
 		if (water) {
 			spawnY = Math.ceil(y) - 0.05F;
 		}
-		else if(state.is(SpectrumBlocks.FLAYED_EARTH.get())){
+		else if(state.is(PastelBlocks.FLAYED_EARTH.get())){
 			spawnY = pos.getY() + 1.01F;
 		}
 
@@ -81,9 +81,9 @@ public class RaindropParticle extends TextureSheetParticle {
 			for (int i = 0; i < spawns; i++) {
 				var xVel = random.nextFloat() * 0.8 - 0.4F;
 				var zVel = random.nextFloat() * 0.8 - 0.4F;
-				level.addParticle(SpectrumParticleTypes.RAIN_SPLASH, x, spawnY, z, xVel * velMult, 0, zVel * velMult);
+				level.addParticle(PastelParticleTypes.RAIN_SPLASH, x, spawnY, z, xVel * velMult, 0, zVel * velMult);
 			}
-			level.addParticle(SpectrumParticleTypes.RAIN_RIPPLE, x, spawnY, z, 0, 0, 0);
+			level.addParticle(PastelParticleTypes.RAIN_RIPPLE, x, spawnY, z, 0, 0, 0);
 		}
 	}
 

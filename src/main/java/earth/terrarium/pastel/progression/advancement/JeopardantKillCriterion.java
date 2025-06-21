@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 public class JeopardantKillCriterion extends SimpleCriterionTrigger<JeopardantKillCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("jeopardant_kill");
+	public static final ResourceLocation ID = PastelCommon.locate("jeopardant_kill");
 	
 	public void trigger(ServerPlayer player, Entity killedEntity) {
 		LootContext lootContext = EntityPredicate.createContext(player, killedEntity);

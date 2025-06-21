@@ -2,10 +2,10 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.items.trinkets.SpectrumTrinketItem;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.items.trinkets.TakeOffBeltItem;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBeltJumpCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("take_off_belt_jump");
+	public static final ResourceLocation ID = PastelCommon.locate("take_off_belt_jump");
 	
 	public static TakeOffBeltJumpCriterion.Conditions create(ItemPredicate itemPredicate, MinMaxBounds.Ints chargesRange) {
 		return new TakeOffBeltJumpCriterion.Conditions(Optional.empty(), itemPredicate, chargesRange);
@@ -26,7 +26,7 @@ public class TakeOffBeltJumpCriterion extends SimpleCriterionTrigger<TakeOffBelt
 	
 	public void trigger(ServerPlayer player) {
 		this.trigger(player, (conditions) ->
-				SpectrumTrinketItem.getFirstEquipped(player, SpectrumItems.TAKE_OFF_BELT.get()).map((belt) -> TakeOffBeltItem.getCurrentCharge(player) > 0).orElse(false)
+				PastelTrinketItem.getFirstEquipped(player, PastelItems.TAKE_OFF_BELT.get()).map((belt) -> TakeOffBeltItem.getCurrentCharge(player) > 0).orElse(false)
 		);
 	}
 	

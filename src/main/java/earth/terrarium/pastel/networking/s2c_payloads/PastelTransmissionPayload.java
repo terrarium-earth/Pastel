@@ -2,13 +2,11 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.blocks.pastel_network.network.PastelTransmission;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.particle.effect.PastelTransmissionParticleEffect;
 import net.minecraft.network.protocol.*;
 import net.minecraft.network.protocol.common.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import net.minecraft.core.BlockPos;
@@ -23,7 +21,7 @@ import java.util.*;
 
 public record PastelTransmissionPayload(int networkColor, int travelTime, PastelTransmission transmission) implements CustomPacketPayload {
 	
-	public static final Type<PastelTransmissionPayload> ID = SpectrumC2SPackets.makeId("pastel_transmission");
+	public static final Type<PastelTransmissionPayload> ID = PastelC2SPackets.makeId("pastel_transmission");
 	public static final StreamCodec<RegistryFriendlyByteBuf, PastelTransmissionPayload> CODEC = StreamCodec.composite(
 			ByteBufCodecs.INT, PastelTransmissionPayload::networkColor,
 			ByteBufCodecs.INT, PastelTransmissionPayload::travelTime,

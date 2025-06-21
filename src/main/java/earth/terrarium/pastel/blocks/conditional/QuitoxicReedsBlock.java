@@ -3,10 +3,10 @@ package earth.terrarium.pastel.blocks.conditional;
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.blocks.FluidLogging;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumFluids;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluids;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidLogging.SpectrumFluidLoggable {
+public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidLogging.PastelFluidLoggable {
 
 	public static final MapCodec<QuitoxicReedsBlock> CODEC = simpleCodec(QuitoxicReedsBlock::new);
 
@@ -78,7 +78,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 	
 	@Override
 	public ResourceLocation getCloakAdvancementIdentifier() {
-		return SpectrumAdvancements.REVEAL_QUITOXIC_REEDS;
+		return PastelAdvancements.REVEAL_QUITOXIC_REEDS;
 	}
 	
 	@Override
@@ -87,7 +87,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 		for (int i = 0; i <= BlockStateProperties.MAX_AGE_7; i++) {
 			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.NOT_LOGGED).setValue(AGE, i), Blocks.AIR.defaultBlockState());
 			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.WATER).setValue(AGE, i), Blocks.WATER.defaultBlockState());
-			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL).setValue(AGE, i), SpectrumBlocks.LIQUID_CRYSTAL.get().defaultBlockState());
+			map.put(this.defaultBlockState().setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL).setValue(AGE, i), PastelBlocks.LIQUID_CRYSTAL.get().defaultBlockState());
 		}
 		return map;
 	}
@@ -110,7 +110,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 		FluidState fluidState = ctx.getLevel().getFluidState(ctx.getClickedPos());
 		if (fluidState.is(FluidTags.WATER) && fluidState.getAmount() == 8) {
 			return super.getStateForPlacement(ctx).setValue(LOGGED, FluidLogging.State.WATER);
-		} else if (fluidState.getType() == SpectrumFluids.LIQUID_CRYSTAL.get()) {
+		} else if (fluidState.getType() == PastelFluids.LIQUID_CRYSTAL.get()) {
 			return super.getStateForPlacement(ctx).setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL);
 		} else {
 			return super.getStateForPlacement(ctx).setValue(LOGGED, FluidLogging.State.NOT_LOGGED);
@@ -141,7 +141,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 		if (fluidLog == FluidLogging.State.WATER) {
 			world.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(world));
 		} else if (fluidLog == FluidLogging.State.LIQUID_CRYSTAL) {
-			world.scheduleTick(pos, SpectrumFluids.LIQUID_CRYSTAL.get(), SpectrumFluids.LIQUID_CRYSTAL.get().getTickDelay(world));
+			world.scheduleTick(pos, PastelFluids.LIQUID_CRYSTAL.get(), PastelFluids.LIQUID_CRYSTAL.get().getTickDelay(world));
 		}
 		
 		if (!state.canSurvive(world, pos)) {
@@ -185,7 +185,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 				// consume 1 block close to the reed when growing.
 				// if the quitoxic reeds are growing in liquid crystal: 1/4 chance to consume
 				// search for block it could be planted on. 1 block => 1 quitoxic reed
-				Optional<BlockPos> posToConsumeBlock = searchPlantablePos(world, pos.below(height), SpectrumBlockTags.QUITOXIC_REEDS_PLANTABLE, random);
+				Optional<BlockPos> posToConsumeBlock = searchPlantablePos(world, pos.below(height), PastelBlockTags.QUITOXIC_REEDS_PLANTABLE, random);
 				if (posToConsumeBlock.isEmpty() || world.getBlockState(posToConsumeBlock.get().above()).getBlock() instanceof QuitoxicReedsBlock) {
 					return;
 				}
@@ -235,7 +235,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 		FluidState fluidState = world.getFluidState(blockPos);
 		if (fluidState.is(FluidTags.WATER) && fluidState.getAmount() == 8) {
 			return defaultBlockState().setValue(LOGGED, FluidLogging.State.WATER);
-		} else if (fluidState.getType().equals(SpectrumFluids.LIQUID_CRYSTAL.get())) {
+		} else if (fluidState.getType().equals(PastelFluids.LIQUID_CRYSTAL.get())) {
 			return defaultBlockState().setValue(LOGGED, FluidLogging.State.LIQUID_CRYSTAL);
 		}
 		return defaultBlockState();
@@ -264,14 +264,14 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 	
 	/**
 	 * Can be placed in up to 2 blocks deep water / liquid crystal
-	 * growing on SpectrumBlockTags.QUITOXIC_REEDS_PLANTABLE only
+	 * growing on PastelBlockTags.QUITOXIC_REEDS_PLANTABLE only
 	 */
 	private boolean isValidBlock(LevelReader world, BlockPos pos) {
 		BlockState downState = world.getBlockState(pos.below());
 		if (downState.is(this)) {
 			return true;
 		}
-		if (!downState.is(SpectrumBlockTags.QUITOXIC_REEDS_PLANTABLE)) {
+		if (!downState.is(PastelBlockTags.QUITOXIC_REEDS_PLANTABLE)) {
 			return false;
 		}
 		BlockState upState = world.getBlockState(pos.above());
@@ -288,7 +288,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 		}
 		
 		FluidState fluidState = world.getFluidState(pos);
-		return fluidState.getAmount() == 8 && (fluidState.is(FluidTags.WATER) || state.is(SpectrumBlocks.LIQUID_CRYSTAL.get()));
+		return fluidState.getAmount() == 8 && (fluidState.is(FluidTags.WATER) || state.is(PastelBlocks.LIQUID_CRYSTAL.get()));
 	}
 	
 	private boolean canGrow(LevelReader world, BlockPos pos) {
@@ -297,7 +297,7 @@ public class QuitoxicReedsBlock extends Block implements RevelationAware, FluidL
 			return true;
 		}
 		FluidState fluidState = world.getFluidState(pos);
-		return fluidState.getAmount() == 8 && (fluidState.is(FluidTags.WATER) || state.is(SpectrumBlocks.LIQUID_CRYSTAL.get()));
+		return fluidState.getAmount() == 8 && (fluidState.is(FluidTags.WATER) || state.is(PastelBlocks.LIQUID_CRYSTAL.get()));
 	}
 	
 	@Override

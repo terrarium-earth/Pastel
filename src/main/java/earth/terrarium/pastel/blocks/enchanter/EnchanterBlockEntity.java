@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.enchanter;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
@@ -11,7 +11,7 @@ import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.capabilities.*;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.ExperienceHelper;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.inventories.EnchanterInventory;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
@@ -21,14 +21,14 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffs
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.CraftingBlockSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -118,7 +118,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	private Direction itemFacing; // for rendering the item on the enchanter only
 	
 	public EnchanterBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.ENCHANTER.get(), pos, state, INVENTORY_SIZE);
+		super(PastelBlockEntities.ENCHANTER.get(), pos, state, INVENTORY_SIZE);
 		this.virtualInventory = new EnchanterInventory();
 		this.virtualInventory.addListener(i -> inventoryChanged());
 		this.currentItemProcessingTime = -1;
@@ -146,7 +146,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			world.addParticle(ColoredCraftingParticleEffect.LIME, blockPos.getX() + randomX, blockPos.getY() + 2.5 + randomY, blockPos.getZ() + randomZ, 0.0D, -0.1D, 0.0D);
 			
 			if (world.getGameTime() % 12 == 0) {
-				world.playSound(null, enchanterBlockEntity.worldPosition, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.8F * SpectrumCommon.CONFIG.BlockSoundVolume, 0.8F + world.random.nextFloat() * 0.4F);
+				world.playSound(null, enchanterBlockEntity.worldPosition, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.8F * PastelCommon.CONFIG.BlockSoundVolume, 0.8F + world.random.nextFloat() * 0.4F);
 				enchanterBlockEntity.doItemBowlOrbs(world);
 			}
 		}
@@ -190,7 +190,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				}
 			}
 			if (enchanterBlockEntity.craftingTime == 1) {
-				PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(SpectrumSoundEvents.ENCHANTER_WORKING, (ServerLevel) enchanterBlockEntity.getLevel(), enchanterBlockEntity.worldPosition, Integer.MAX_VALUE);
+				PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.ENCHANTER_WORKING, (ServerLevel) enchanterBlockEntity.getLevel(), enchanterBlockEntity.worldPosition, Integer.MAX_VALUE);
 			}
 			
 			var recipe = enchanterBlockEntity.currentRecipe == null ? null : enchanterBlockEntity.currentRecipe.value();
@@ -270,14 +270,14 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	 */
 	public static boolean isValidCenterEnchantingSetup(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
 		ItemStack centerStack = enchanterBlockEntity.virtualInventory.getStackInSlot(0);
-		boolean isEnchantableBookInCenter = SpectrumEnchantmentHelper.isEnchantableBook(centerStack);
+		boolean isEnchantableBookInCenter = PastelEnchantmentHelper.isEnchantableBook(centerStack);
 		
 		var centerIsEnchantable = (isEnchantableBookInCenter || centerStack.getItem().isEnchantable(centerStack));
 		var hasExpStorage = enchanterBlockEntity.virtualInventory.getStackInSlot(1).getItem() instanceof ExperienceStorageItem;
 		
 		if (!centerStack.isEmpty() && centerIsEnchantable && hasExpStorage) {
 			// gilded books can copy enchantments from any source item
-			boolean centerStackIsGildedBook = centerStack.is(SpectrumItems.GILDED_BOOK.get());
+			boolean centerStackIsGildedBook = centerStack.is(PastelItems.GILDED_BOOK.get());
 			boolean enchantedBookWithAdditionalEnchantmentsFound = false;
 			
 			var existingEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(centerStack).entrySet();
@@ -295,7 +295,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 								if (enchanterBlockEntity.canOwnerApplyConflictingEnchantments) {
 									enchantedBookWithAdditionalEnchantmentsFound = true;
 									break;
-								} else if (SpectrumEnchantmentHelper.canCombineAny(centerStack, virtualSlotStack)) {
+								} else if (PastelEnchantmentHelper.canCombineAny(centerStack, virtualSlotStack)) {
 									enchantedBookWithAdditionalEnchantmentsFound = true;
 									break;
 								}
@@ -317,7 +317,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		if (enchanterBlockEntity.level == null) {
 			return;
 		}
-		enchanterBlockEntity.level.playSound(null, enchanterBlockEntity.worldPosition, SpectrumSoundEvents.ENCHANTER_FINISH, SoundSource.BLOCKS, 1.0F, 1.0F);
+		enchanterBlockEntity.level.playSound(null, enchanterBlockEntity.worldPosition, PastelSoundEvents.ENCHANTER_FINISH, SoundSource.BLOCKS, 1.0F, 1.0F);
 		
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) enchanterBlockEntity.getLevel(),
 				new Vec3(enchanterBlockEntity.worldPosition.getX() + 0.5D, enchanterBlockEntity.worldPosition.getY() + 0.5, enchanterBlockEntity.worldPosition.getZ() + 0.5D),
@@ -350,7 +350,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		
 		if (!playerCanCraft || !structureComplete) {
 			if (!structureComplete) {
-				world.playSound(null, enchanter.getBlockPos(), SpectrumSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
+				world.playSound(null, enchanter.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
 				world.playSound(null, enchanter.getBlockPos(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F);
 				EnchanterBlock.scatterContents(world, blockPos);
 			}
@@ -369,7 +369,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		var highestEnchantments = getHighestEnchantmentsInItemBowls(enchanterBlockEntity);
 		
 		for (var entry : highestEnchantments.entrySet()) {
-			centerStackCopy = SpectrumEnchantmentHelper.addOrUpgradeEnchantment(centerStackCopy, entry.getKey(), entry.getIntValue(), false, enchanterBlockEntity.canOwnerApplyConflictingEnchantments).getB();
+			centerStackCopy = PastelEnchantmentHelper.addOrUpgradeEnchantment(centerStackCopy, entry.getKey(), entry.getIntValue(), false, enchanterBlockEntity.canOwnerApplyConflictingEnchantments).getB();
 		}
 		
 		int spentExperience = enchanterBlockEntity.currentItemProcessingTime / EnchanterBlockEntity.REQUIRED_TICKS_FOR_EACH_EXPERIENCE_POINT;
@@ -387,19 +387,19 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		// enchanter enchanting criterion
 		ServerPlayer serverPlayerEntity = (ServerPlayer) enchanterBlockEntity.getOwnerIfOnline();
 		if (serverPlayerEntity != null) {
-			SpectrumAdvancementCriteria.ENCHANTER_ENCHANTING.trigger(serverPlayerEntity, centerStackCopy, spentExperience);
+			PastelAdvancementCriteria.ENCHANTER_ENCHANTING.trigger(serverPlayerEntity, centerStackCopy, spentExperience);
 		}
 	}
 	
 	public static ItemEnchantments getHighestEnchantmentsInItemBowls(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
-		return SpectrumEnchantmentHelper.collectHighestEnchantments(
+		return PastelEnchantmentHelper.collectHighestEnchantments(
 				enchanterBlockEntity.virtualInventory.getInternalList().subList(2, 10));
 	}
 	
 	public static int getRequiredExperienceToEnchantCenterItem(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
 		boolean valid = false;
 		ItemStack centerStack = enchanterBlockEntity.getItem(0);
-		if (!centerStack.isEmpty() && (centerStack.getItem().isEnchantable(centerStack) || SpectrumEnchantmentHelper.isEnchantableBook(centerStack))) {
+		if (!centerStack.isEmpty() && (centerStack.getItem().isEnchantable(centerStack) || PastelEnchantmentHelper.isEnchantableBook(centerStack))) {
 			ItemStack centerStackCopy = centerStack.copy();
 			var highestEnchantments = getHighestEnchantmentsInItemBowls(enchanterBlockEntity);
 			int requiredExperience = 0;
@@ -408,7 +408,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				int level = entry.getIntValue();
 				int currentRequired = getRequiredExperienceToEnchantWithEnchantment(centerStackCopy, enchantment, level, enchanterBlockEntity.canOwnerApplyConflictingEnchantments);
 				if (currentRequired > 0) {
-					centerStackCopy = SpectrumEnchantmentHelper.addOrUpgradeEnchantment(centerStackCopy, enchantment, level, false, enchanterBlockEntity.canOwnerApplyConflictingEnchantments).getB();
+					centerStackCopy = PastelEnchantmentHelper.addOrUpgradeEnchantment(centerStackCopy, enchantment, level, false, enchanterBlockEntity.canOwnerApplyConflictingEnchantments).getB();
 					requiredExperience += currentRequired;
 					valid = true;
 				} else {
@@ -434,7 +434,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	 * @return The required experience to enchant. -1 if the enchantment is not applicable
 	 */
 	public static int getRequiredExperienceToEnchantWithEnchantment(ItemStack stack, Holder<Enchantment> enchantment, int level, boolean allowEnchantmentConflicts) {
-		if (!stack.supportsEnchantment(enchantment) && !SpectrumEnchantmentHelper.isEnchantableBook(stack)) {
+		if (!stack.supportsEnchantment(enchantment) && !PastelEnchantmentHelper.isEnchantableBook(stack)) {
 			return -1;
 		}
 		
@@ -457,7 +457,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public static Integer getEnchantingPrice(ItemStack stack, Holder<Enchantment> enchantment, int level) {
 		int enchantability = Math.max(1, stack.getItem().getEnchantmentValue()); // items like Elytras have an enchantability of 0, but can get unbreaking
-		if (stack.supportsEnchantment(enchantment) || SpectrumEnchantmentHelper.isEnchantableBook(stack)) {
+		if (stack.supportsEnchantment(enchantment) || PastelEnchantmentHelper.isEnchantableBook(stack)) {
 			return getRequiredExperienceForEnchantment(enchantability, enchantment, level);
 		}
 		return -1;
@@ -531,7 +531,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		// enchanter crafting criterion
 		ServerPlayer serverPlayerEntity = (ServerPlayer) enchanterBlockEntity.getOwnerIfOnline();
 		if (serverPlayerEntity != null) {
-			SpectrumAdvancementCriteria.ENCHANTER_CRAFTING.trigger(serverPlayerEntity, resultStack, enchanterRecipe.getRequiredExperience());
+			PastelAdvancementCriteria.ENCHANTER_CRAFTING.trigger(serverPlayerEntity, resultStack, enchanterRecipe.getRequiredExperience());
 		}
 	}
 	
@@ -576,7 +576,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		drainExperience(xpCost);
 		
 		
-		resultStack = SpectrumEnchantmentHelper.addOrUpgradeEnchantment(resultStack, upgrade.getEnchantment(), targetLevel, false, true).getB();
+		resultStack = PastelEnchantmentHelper.addOrUpgradeEnchantment(resultStack, upgrade.getEnchantment(), targetLevel, false, true).getB();
 		setItem(0, resultStack);
 		
 		// vanilla
@@ -587,7 +587,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		if (serverPlayerEntity != null) {
 			var builder = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
 			builder.upgrade(upgrade.getEnchantment(), targetLevel);
-			SpectrumAdvancementCriteria.ENCHANTER_UPGRADING.trigger(serverPlayerEntity, builder.toImmutable(), xpCost);
+			PastelAdvancementCriteria.ENCHANTER_UPGRADING.trigger(serverPlayerEntity, builder.toImmutable(), xpCost);
 		}
 		
 		// update the item cost if chain upgrading
@@ -634,7 +634,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		
 		var recipeManager = world.getRecipeManager();
 		var upgrade = recipeManager
-				.getRecipeFor(SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, enchanter.virtualInventory.createInput(), world)
+				.getRecipeFor(PastelRecipeTypes.ENCHANTMENT_UPGRADE, enchanter.virtualInventory.createInput(), world)
 				.orElse(null);
 		
 		if (upgrade != null) {
@@ -661,7 +661,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			for (int o = 0; o < 8; o++) {
 				RecipeInput recipeInput = enchanter.virtualInventory.createInput();
 				RecipeHolder<EnchanterRecipe> enchanterRecipe = recipeManager
-						.getRecipeFor(SpectrumRecipeTypes.ENCHANTER, recipeInput, world)
+						.getRecipeFor(PastelRecipeTypes.ENCHANTER, recipeInput, world)
 						.orElse(null);
 				
 				if (enchanterRecipe != null) {
@@ -843,8 +843,8 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	@Override
 	public void setOwner(Player playerEntity) {
 		this.ownerUUID = playerEntity.getUUID();
-		this.canOwnerApplyConflictingEnchantments = AdvancementHelper.hasAdvancement(playerEntity, SpectrumAdvancements.APPLY_CONFLICTING_ENCHANTMENTS);
-		this.canOwnerOverenchant = AdvancementHelper.hasAdvancement(playerEntity, SpectrumAdvancements.OVERENCHANTING);
+		this.canOwnerApplyConflictingEnchantments = AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS);
+		this.canOwnerOverenchant = AdvancementHelper.hasAdvancement(playerEntity, PastelAdvancements.OVERENCHANTING);
 		setChanged();
 	}
 	

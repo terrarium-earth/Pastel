@@ -2,9 +2,9 @@ package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.item.DamageAwareItem;
 import earth.terrarium.pastel.api.item.TickAwareItem;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.PipeBombChargingSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -101,8 +101,8 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 		Entity owner = tryGetOwner(stack, world);
 		
 		if (target != null)
-			target.hurt(SpectrumDamageTypes.incandescence(world, owner instanceof LivingEntity living ? living : null), 200F);
-		world.explode(null, SpectrumDamageTypes.incandescence(world), new ExplosionDamageCalculator(), pos.x(), pos.y(), pos.z(), 7.5F, true, Level.ExplosionInteraction.NONE);
+			target.hurt(PastelDamageTypes.incandescence(world, owner instanceof LivingEntity living ? living : null), 200F);
+		world.explode(null, PastelDamageTypes.incandescence(world), new ExplosionDamageCalculator(), pos.x(), pos.y(), pos.z(), 7.5F, true, Level.ExplosionInteraction.NONE);
 	}
 	
 	public Entity tryGetOwner(ItemStack stack, ServerLevel world) {
@@ -113,15 +113,15 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 	}
 	
 	public static void prime(ItemStack stack, Level world, Vec3 pos, @Nullable Entity user) {
-		world.playSound(null, pos.x(), pos.y(), pos.z(), SpectrumSoundEvents.INCANDESCENT_ARM, SoundSource.PLAYERS, 2F, 0.9F);
-		stack.set(SpectrumDataComponentTypes.TIMESTAMP, world.getGameTime());
+		world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.INCANDESCENT_ARM, SoundSource.PLAYERS, 2F, 0.9F);
+		stack.set(PastelDataComponentTypes.TIMESTAMP, world.getGameTime());
 		if (user instanceof Player player) {
 			stack.set(DataComponents.PROFILE, new ResolvableProfile(player.getGameProfile()));
 		}
 	}
 	
 	public static boolean isPrimed(ItemStack stack) {
-		return stack.get(SpectrumDataComponentTypes.TIMESTAMP) != null;
+		return stack.get(PastelDataComponentTypes.TIMESTAMP) != null;
 	}
 	
 	public static boolean isPrimeTimeElapsed(Level world, ItemStack stack) {
@@ -133,8 +133,8 @@ public class PipeBombItem extends Item implements DamageAwareItem, TickAwareItem
 	}
 	
 	private static Optional<Long> getPrimeTime(ItemStack stack) {
-		if (stack.has(SpectrumDataComponentTypes.TIMESTAMP)) {
-			return Optional.of(stack.get(SpectrumDataComponentTypes.TIMESTAMP));
+		if (stack.has(PastelDataComponentTypes.TIMESTAMP)) {
+			return Optional.of(stack.get(PastelDataComponentTypes.TIMESTAMP));
 		}
 		return Optional.empty();
 	}

@@ -5,9 +5,9 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -66,7 +66,7 @@ public class CinderhearthBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? null : createTickerHelper(type, SpectrumBlockEntities.CINDERHEARTH.get(), CinderhearthBlockEntity::serverTick);
+		return world.isClientSide ? null : createTickerHelper(type, PastelBlockEntities.CINDERHEARTH.get(), CinderhearthBlockEntity::serverTick);
 	}
 	
 	@Override
@@ -192,13 +192,13 @@ public class CinderhearthBlock extends BaseEntityBlock {
 	public static CinderhearthBlockEntity.CinderHearthStructureType verifyStructure(Level world, @NotNull BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity) {
 		Rotation rotation = Support.rotationFromDirection(world.getBlockState(blockPos).getValue(FACING).getOpposite());
 		
-		Multiblock multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH);
+		Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.CINDERHEARTH);
 		CinderhearthBlockEntity.CinderHearthStructureType completedStructure = CinderhearthBlockEntity.CinderHearthStructureType.NONE;
 		
 		if (multiblock.validate(world, blockPos.below(3), rotation)) {
 			completedStructure = CinderhearthBlockEntity.CinderHearthStructureType.WITH_LAVA;
 		} else {
-			multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH_WITHOUT_LAVA);
+			multiblock = PastelMultiblocks.get(PastelMultiblocks.CINDERHEARTH_WITHOUT_LAVA);
 			if (multiblock.validate(world, blockPos.below(3), rotation)) {
 				completedStructure = CinderhearthBlockEntity.CinderHearthStructureType.WITHOUT_LAVA;
 			}
@@ -208,10 +208,10 @@ public class CinderhearthBlock extends BaseEntityBlock {
 		
 		if (world.isClientSide) {
 			if (!structureValid) {
-				ModonomiconHelper.renderMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH), SpectrumMultiblocks.CINDERHEARTH_TEXT, blockPos.below(4), rotation);
+				ModonomiconHelper.renderMultiblock(PastelMultiblocks.get(PastelMultiblocks.CINDERHEARTH), PastelMultiblocks.CINDERHEARTH_TEXT, blockPos.below(4), rotation);
 			}
 		} else if (structureValid && serverPlayerEntity != null) {
-			SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
+			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
 		}
 		
 		return completedStructure;
@@ -220,7 +220,7 @@ public class CinderhearthBlock extends BaseEntityBlock {
 	@Override
 	public void destroy(LevelAccessor world, BlockPos pos, BlockState state) {
 		if (world.isClientSide()) {
-			ModonomiconHelper.clearRenderedMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.CINDERHEARTH));
+			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.CINDERHEARTH));
 		}
 	}
 	

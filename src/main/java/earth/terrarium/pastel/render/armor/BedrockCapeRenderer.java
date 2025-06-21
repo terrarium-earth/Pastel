@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import earth.terrarium.pastel.compat.vanityslots.VanitySlotsCompat;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.client.*;
 import earth.terrarium.pastel.render.RenderingContext;
 import net.minecraft.client.model.*;
@@ -65,7 +65,7 @@ public class BedrockCapeRenderer {
 		public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
 			// Check for the chestplate, and begin rendering the cape if equipped
 			ItemStack chestStack = VanitySlotsCompat.getEquippedStack(livingEntity, EquipmentSlot.CHEST);
-			if (chestStack.getItem() != SpectrumItems.BEDROCK_CHESTPLATE.get()) {
+			if (chestStack.getItem() != PastelItems.BEDROCK_CHESTPLATE.get()) {
 				return;
 			}
 
@@ -73,7 +73,7 @@ public class BedrockCapeRenderer {
 			var capeRotations = BedrockArmorModel.computeFrontClothRotation(livingEntity, partialTick);
 			float capeZOffset = capeRotations.getB();
 
-			VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entitySolid(SpectrumModelLayers.BEDROCK_ARMOR_MAIN_ID));
+			VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entitySolid(PastelModelLayers.BEDROCK_ARMOR_MAIN_ID));
 			poseStack.pushPose();
 			poseStack.translate(0, 0.5, 0);
 			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.clamp(capeRotations.getA(), -25, 0)));

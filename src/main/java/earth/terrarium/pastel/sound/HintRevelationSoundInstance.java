@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
@@ -17,7 +17,7 @@ public class HintRevelationSoundInstance extends AbstractSoundInstance implement
 	private boolean done;
 	
 	public HintRevelationSoundInstance(Player player) {
-		super(SpectrumSoundEvents.TEXT_REVEALED, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
+		super(PastelSoundEvents.TEXT_REVEALED, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
 		this.looping = true;
 		this.delay = 0;
 		this.volume = 1.0F;
@@ -45,7 +45,7 @@ public class HintRevelationSoundInstance extends AbstractSoundInstance implement
 			this.z = player.getZ();
 		}
 		
-		if (player == null || !player.getMainHandItem().is(SpectrumItems.GUIDEBOOK.get())) {
+		if (player == null || !player.getMainHandItem().is(PastelItems.GUIDEBOOK.get())) {
 			this.setDone();
 		}
 	}

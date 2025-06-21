@@ -1,11 +1,9 @@
 package earth.terrarium.pastel.compat.exclusions_lib;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
+import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicateType;
@@ -35,7 +33,7 @@ public class ExclusionsLibCompat {
 		}
 	}
 	
-	public static final DeferredRegister<BlockPredicateType<?>> REGISTRY = DeferredRegister.create(BuiltInRegistries.BLOCK_PREDICATE_TYPE, SpectrumIntegrationPacks.EXCLUSIONS_LIB_ID);
+	public static final DeferredRegister<BlockPredicateType<?>> REGISTRY = DeferredRegister.create(BuiltInRegistries.BLOCK_PREDICATE_TYPE, PastelIntegrationPacks.EXCLUSIONS_LIB_ID);
 	
 	public static void registerNotPresent(IEventBus bus) {
 		registerBlockPredicate("overlaps_structure", AlwaysFalseBlockPredicate.CODEC);

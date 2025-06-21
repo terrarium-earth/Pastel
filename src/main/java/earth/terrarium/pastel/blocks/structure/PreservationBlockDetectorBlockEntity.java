@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
@@ -32,7 +32,7 @@ public class PreservationBlockDetectorBlockEntity extends BlockEntity implements
 	protected List<String> commands = List.of(); // get executed in order. First command that fails ends the chain
 	
 	public PreservationBlockDetectorBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.PRESERVATION_BLOCK_DETECTOR.get(), pos, state);
+		super(PastelBlockEntities.PRESERVATION_BLOCK_DETECTOR.get(), pos, state);
 	}
 	
 	@Override

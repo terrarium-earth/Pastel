@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.item_frame;
 
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.entity.PhantomFrameEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -9,7 +9,7 @@ import net.minecraft.world.entity.decoration.HangingEntity;
 import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.level.Level;
 
-public class PhantomFrameItem extends SpectrumItemFrameItem {
+public class PhantomFrameItem extends PastelItemFrameItem {
 	
 	public PhantomFrameItem(EntityType<? extends HangingEntity> entityType, Properties settings) {
 		super(entityType, settings);
@@ -17,7 +17,7 @@ public class PhantomFrameItem extends SpectrumItemFrameItem {
 	
 	@Override
 	public ItemFrame getItemFrameEntity(Level world, BlockPos blockPos, Direction direction) {
-		return new PhantomFrameEntity(SpectrumEntityTypes.PHANTOM_FRAME.get(), world, blockPos, direction);
+		return new PhantomFrameEntity(PastelEntityTypes.PHANTOM_FRAME.get(), world, blockPos, direction);
 	}
 	
 }

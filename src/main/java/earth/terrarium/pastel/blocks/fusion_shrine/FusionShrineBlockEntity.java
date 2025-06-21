@@ -15,13 +15,13 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayFusionCraftingInProgre
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredFluidRisingParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.events.SpectrumMiscEvents;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.events.PastelMiscEvents;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.*;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.core.particles.ParticleOptions;
@@ -67,7 +67,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	public final FluidTank tank = new FluidTank(1000);
 	
 	public FusionShrineBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.FUSION_SHRINE.get(), pos, state, INVENTORY_SIZE);
+		super(PastelBlockEntities.FUSION_SHRINE.get(), pos, state, INVENTORY_SIZE);
 		inventory.addListener(i -> {
 			inventoryChanged = true;
 			updateInClientWorld();
@@ -113,7 +113,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	
 	public void scatterContents(@NotNull Level world) {
 		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerLevel) world, Vec3.atCenterOf(this.getBlockPos()), ColoredCraftingParticleEffect.RED, 1, new Vec3(0, -0.5, 0));
-		world.playSound(null, this.getBlockPos(), SpectrumSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
+		world.playSound(null, this.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
 		world.playSound(null, this.getBlockPos(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F);
 		FusionShrineBlock.scatterContents(world, this.getBlockPos());
 		inventoryChanged = true;
@@ -170,7 +170,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		++fusionShrineBlockEntity.craftingTime;
 		
 		if (fusionShrineBlockEntity.craftingTime == 1 && fusionShrineBlockEntity.craftingTimeTotal > 1) {
-			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(SpectrumSoundEvents.FUSION_SHRINE_CRAFTING, (ServerLevel) world, fusionShrineBlockEntity.getBlockPos(), fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime);
+			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.FUSION_SHRINE_CRAFTING, (ServerLevel) world, fusionShrineBlockEntity.getBlockPos(), fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime);
 		}
 		
 		// play the current crafting effect
@@ -196,7 +196,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 				return fusionShrineBlockEntity.currentRecipe;
 			}
 		}
-		return world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.FUSION_SHRINE, fusionShrineBlockEntity.getRecipeInput(), world).orElse(null);
+		return world.getRecipeManager().getRecipeFor(PastelRecipeTypes.FUSION_SHRINE, fusionShrineBlockEntity.getRecipeInput(), world).orElse(null);
 	}
 	
 	private static void craft(Level world, BlockPos blockPos, FusionShrineBlockEntity fusionShrineBlockEntity, RecipeHolder<FusionShrineRecipe> recipe) {
@@ -204,7 +204,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 		
 		if (recipe.value().shouldPlayCraftingFinishedEffects()) {
 			PlayFusionCraftingFinishedParticlePayload.sendPlayFusionCraftingFinishedParticles(world, blockPos, recipe.value().assemble(fusionShrineBlockEntity.getRecipeInput(), world.registryAccess()));
-			fusionShrineBlockEntity.playSound(SpectrumSoundEvents.FUSION_SHRINE_CRAFTING_FINISHED, 1.4F);
+			fusionShrineBlockEntity.playSound(PastelSoundEvents.FUSION_SHRINE_CRAFTING_FINISHED, 1.4F);
 		}
 		
 		scatterContents(world, blockPos.above(), fusionShrineBlockEntity); // drop remaining items
@@ -267,7 +267,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	public void grantPlayerFusionCraftingAdvancement(ItemStack stack, int experience) {
 		ServerPlayer serverPlayerEntity = (ServerPlayer) getOwnerIfOnline();
 		if (serverPlayerEntity != null) {
-			SpectrumAdvancementCriteria.FUSION_SHRINE_CRAFTING.trigger(serverPlayerEntity, stack, experience);
+			PastelAdvancementCriteria.FUSION_SHRINE_CRAFTING.trigger(serverPlayerEntity, stack, experience);
 		}
 	}
 	
@@ -277,7 +277,7 @@ public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity imple
 	
 	void setLightForFluid(BlockPos blockPos, FluidStack fluid) {
 		if (level == null) return;
-		int fluidLight = SpectrumMiscEvents.getFluidLuminance(fluid);
+		int fluidLight = PastelMiscEvents.getFluidLuminance(fluid);
 		level.setBlock(blockPos, level.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight), Block.UPDATE_ALL);
 	}
 	

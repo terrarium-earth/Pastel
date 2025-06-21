@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -14,10 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
 public class AnvilCrushingEmiRecipeGated extends GatedSpectrumEmiRecipe<AnvilCrushingRecipe> {
-	private final static ResourceLocation WALL_TEXTURE = SpectrumCommon.locate("textures/gui/container/anvil_crushing.png");
+	private final static ResourceLocation WALL_TEXTURE = PastelCommon.locate("textures/gui/container/anvil_crushing.png");
 	
 	public AnvilCrushingEmiRecipeGated(AnvilCrushingRecipe recipe) {
-		super(SpectrumEmiRecipeCategories.ANVIL_CRUSHING, recipe, 116, 64);
+		super(PastelEmiRecipeCategories.ANVIL_CRUSHING, recipe, 116, 64);
 		this.inputs = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
 	}
 	

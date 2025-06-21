@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.entity;
 
-import earth.terrarium.pastel.registries.SpectrumPointOfInterestTypeTags;
+import earth.terrarium.pastel.registries.PastelPointOfInterestTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -42,7 +42,7 @@ public interface POIMemorized {
 			return false;
 		}
 		Optional<Holder<PoiType>> type = world.getPoiManager().getType(poiPos);
-		return type.map(pointOfInterestTypeRegistryEntry -> pointOfInterestTypeRegistryEntry.is(SpectrumPointOfInterestTypeTags.LIZARD_DENS)).orElse(false);
+		return type.map(pointOfInterestTypeRegistryEntry -> pointOfInterestTypeRegistryEntry.is(PastelPointOfInterestTypeTags.LIZARD_DENS)).orElse(false);
 	}
 	
 	default @Nullable BlockPos findNearestPOI(ServerLevel world, BlockPos pos, int maxDistance) {

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.decoration;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -123,7 +123,7 @@ public class ShimmerstoneLightBlock extends DirectionalBlock {
 			double d = direction.getStepX() == 0 ? 0.3D + random.nextFloat() * 0.4F : direction.getStepX() == 1 ? 0.15 : 0.85;
 			double e = direction.getStepY() == 0 ? 0.3D + random.nextFloat() * 0.4F : direction.getStepY() == 1 ? 0.15 : 0.85;
 			double f = direction.getStepZ() == 0 ? 0.3D + random.nextFloat() * 0.4F : direction.getStepZ() == 1 ? 0.15 : 0.85;
-			world.addParticle(SpectrumParticleTypes.SHIMMERSTONE_SPARKLE_SMALL, (double) pos.getX() + d, (double) pos.getY() + e, (double) pos.getZ() + f, 0.0D, 0.02D, 0.0D);
+			world.addParticle(PastelParticleTypes.SHIMMERSTONE_SPARKLE_SMALL, (double) pos.getX() + d, (double) pos.getY() + e, (double) pos.getZ() + f, 0.0D, 0.02D, 0.0D);
 		}
 	}
 	

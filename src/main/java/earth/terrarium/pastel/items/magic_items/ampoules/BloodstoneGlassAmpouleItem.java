@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.items.magic_items.ampoules;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
 import earth.terrarium.pastel.entity.entity.LightShardBaseEntity;
 import earth.terrarium.pastel.entity.entity.LightSpearEntity;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -26,7 +26,7 @@ import java.util.List;
 public class BloodstoneGlassAmpouleItem extends GlassAmpouleItem implements PrioritizedEntityInteraction {
 	
 	protected static final float EXTRA_REACH = 12.0F;
-	protected static final ResourceLocation REACH_ENTITY_INTERACTION_MODIFIER_ID = SpectrumCommon.locate("bloodstone_glass_ampoule_reach");
+	protected static final ResourceLocation REACH_ENTITY_INTERACTION_MODIFIER_ID = PastelCommon.locate("bloodstone_glass_ampoule_reach");
 	
 	public BloodstoneGlassAmpouleItem(Properties settings) {
 		super(settings);
@@ -40,7 +40,7 @@ public class BloodstoneGlassAmpouleItem extends GlassAmpouleItem implements Prio
 	
 	@Override
 	public boolean trigger(Level world, ItemStack stack, LivingEntity attacker, @Nullable LivingEntity target, Vec3 position) {
-		world.playLocalSound(BlockPos.containing(position), SpectrumSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.35F, 0.9F + world.getRandom().nextFloat() * 0.334F, true);
+		world.playLocalSound(BlockPos.containing(position), PastelSoundEvents.LIGHT_CRYSTAL_RING, SoundSource.PLAYERS, 0.35F, 0.9F + world.getRandom().nextFloat() * 0.334F, true);
 		LightSpearEntity.summonBarrage(world, attacker, target, LightShardBaseEntity.MONSTER_TARGET, position, LightShardBaseEntity.DEFAULT_COUNT_PROVIDER);
 		return true;
 	}

@@ -6,8 +6,8 @@ import earth.terrarium.pastel.api.energy.storage.SingleInkStorage;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
@@ -38,7 +38,7 @@ public class InkFlaskItem extends Item implements InkStorageItem<SingleInkStorag
 	
 	@Override
 	public SingleInkStorage getEnergyStorage(ItemStack itemStack) {
-		var storage = itemStack.get(SpectrumDataComponentTypes.INK_STORAGE);
+		var storage = itemStack.get(PastelDataComponentTypes.INK_STORAGE);
 		if (storage != null)
 			for (var entry : storage.storedEnergy().entrySet())
 				return new SingleInkStorage(storage.maxEnergyTotal(), entry.getKey(), entry.getValue());
@@ -70,7 +70,7 @@ public class InkFlaskItem extends Item implements InkStorageItem<SingleInkStorag
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.INK_FLASK;
+		return PastelBannerPatterns.INK_FLASK;
 	}
 	
 	@Override

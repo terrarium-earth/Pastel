@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GravitableItem;
 import net.minecraft.ChatFormatting;
@@ -14,7 +14,7 @@ import java.util.List;
 public class RingOfDenserStepsItem extends GravityRingItem implements GravitableItem {
 
 	public RingOfDenserStepsItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/ring_of_denser_steps"), InkColors.BROWN);
+		super(settings, PastelCommon.locate("unlocks/trinkets/ring_of_denser_steps"), InkColors.BROWN);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class RingOfDenserStepsItem extends GravityRingItem implements Gravitable
 		super.appendHoverText(stack, context, tooltip, type);
 	}
 	
-	public static ResourceLocation ATTRIBUTE_ID = SpectrumCommon.locate("ring_of_denser_steps_gravity");
+	public static ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("ring_of_denser_steps_gravity");
 	
 	@Override
 	protected ResourceLocation getAttributeID() {

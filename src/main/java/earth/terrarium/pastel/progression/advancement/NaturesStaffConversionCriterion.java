@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class NaturesStaffConversionCriterion extends SimpleCriterionTrigger<NaturesStaffConversionCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("natures_staff_conversion");
+	public static final ResourceLocation ID = PastelCommon.locate("natures_staff_conversion");
 	
 	public void trigger(ServerPlayer player, BlockState sourceBlockState, BlockState targetBlockState) {
 		this.trigger(player, (conditions) -> conditions.matches(sourceBlockState, targetBlockState));

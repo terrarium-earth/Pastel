@@ -10,7 +10,7 @@ public class PastelDataMaps {
 	public static void register() {}
 	
 	public static final DataMapType<Item, ItemProjectileBehavior> PROJECTILE_BEHAVIOR = DataMapType.builder(
-			SpectrumCommon.ofSpectrumDefaulted("projectile_behavior"),
+			PastelCommon.ofPastel("projectile_behavior"),
 			Registries.ITEM,
 			ItemProjectileBehaviorRegistry.CODEC
 	).build();

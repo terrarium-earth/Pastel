@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import earth.terrarium.pastel.helpers.BlockReference;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -68,7 +68,7 @@ public abstract class TriStateVineBlock extends BushBlock implements Bonemealabl
             world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, reference.getState()));
             return ItemInteractionResult.sidedSuccess(world.isClientSide());
         }
-        else if (handStack.is(SpectrumItems.MOONSTRUCK_NECTAR.get())) {
+        else if (handStack.is(PastelItems.MOONSTRUCK_NECTAR.get())) {
             if (reference.getProperty(LIFE_STAGE) != LifeStage.MATURE)
                 return ItemInteractionResult.FAIL;
 

@@ -4,9 +4,9 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.helpers.CodecHelper;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -28,8 +28,8 @@ public class EnchantedBookUnsoulingRecipe extends PrimordialFireBurningRecipe {
 	public EnchantedBookUnsoulingRecipe(HolderLookup.Provider lookup) {
 		super(
 				"", false, Optional.of(UNLOCK_IDENTIFIER),
-				Ingredient.of(SpectrumEnchantmentHelper.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultInstance(), Enchantments.SOUL_SPEED, 1, false, false).getB()),
-				SpectrumEnchantmentHelper.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultInstance(), Enchantments.SWIFT_SNEAK, 1, false, false).getB()
+				Ingredient.of(PastelEnchantmentHelper.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultInstance(), Enchantments.SOUL_SPEED, 1, false, false).getB()),
+				PastelEnchantmentHelper.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultInstance(), Enchantments.SWIFT_SNEAK, 1, false, false).getB()
 		);
 	}
 	
@@ -47,15 +47,15 @@ public class EnchantedBookUnsoulingRecipe extends PrimordialFireBurningRecipe {
 		Holder.Reference<Enchantment> soulSpeed = drm.asGetterLookup().get(Registries.ENCHANTMENT, Enchantments.SOUL_SPEED).orElseThrow();
 		int level = stack.getEnchantments().getLevel(soulSpeed);
 		if (level > 0) {
-			stack = SpectrumEnchantmentHelper.removeEnchantments(drm, stack, Enchantments.SOUL_SPEED).getA();
-			stack = SpectrumEnchantmentHelper.addOrUpgradeEnchantment(drm, stack, Enchantments.SWIFT_SNEAK, level, false, false).getB();
+			stack = PastelEnchantmentHelper.removeEnchantments(drm, stack, Enchantments.SOUL_SPEED).getA();
+			stack = PastelEnchantmentHelper.addOrUpgradeEnchantment(drm, stack, Enchantments.SWIFT_SNEAK, level, false, false).getB();
 		}
 		return stack;
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.ENCHANTED_BOOK_UNSOULING;
+		return PastelRecipeSerializers.ENCHANTED_BOOK_UNSOULING;
 	}
 	
 	public static class Serializer implements RecipeSerializer<EnchantedBookUnsoulingRecipe> {

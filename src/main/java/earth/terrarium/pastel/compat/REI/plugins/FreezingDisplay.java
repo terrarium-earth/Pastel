@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.entry.EntryStack;
@@ -18,13 +18,13 @@ public class FreezingDisplay extends BlockToBlockWithChanceDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.FREEZING;
+		return PastelPlugins.FREEZING;
 	}
 	
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, SpectrumAdvancements.UNLOCK_IDOLS);
+		return AdvancementHelper.hasAdvancement(client.player, PastelAdvancements.UNLOCK_IDOLS);
 	}
 	
 }

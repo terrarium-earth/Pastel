@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.helpers;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 
@@ -19,10 +19,10 @@ public class StatusEffectHelper {
 	public record StatusEffectBackground(ResourceLocation guiLarge, ResourceLocation guiSmall, ResourceLocation hudDefault, ResourceLocation hudAmbient) {
 		
 		public StatusEffectBackground(String name) {
-			this(SpectrumCommon.locate("container/inventory/" + name + "_effect_background_gui_large"),
-					SpectrumCommon.locate("container/inventory/" + name + "_effect_background_gui_small"),
-					SpectrumCommon.locate("hud/" + name + "_effect_background_hud_default"),
-					SpectrumCommon.locate("hud/" + name + "_effect_background_hud_ambient"));
+			this(PastelCommon.locate("container/inventory/" + name + "_effect_background_gui_large"),
+					PastelCommon.locate("container/inventory/" + name + "_effect_background_gui_small"),
+					PastelCommon.locate("hud/" + name + "_effect_background_hud_default"),
+					PastelCommon.locate("hud/" + name + "_effect_background_hud_ambient"));
 		}
 		
 		public ResourceLocation get(RenderType type) {
@@ -42,14 +42,14 @@ public class StatusEffectHelper {
 	public static ResourceLocation getTextureLocation(ResourceLocation original, MobEffectInstance effect, RenderType renderType) {
 		var type = effect.getEffect();
 		
-		if (type == SpectrumStatusEffects.DIVINITY)
+		if (type == PastelStatusEffects.DIVINITY)
 			return DIVINITY.get(renderType);
 		
-		if (isIncurable(effect) && type != SpectrumStatusEffects.ETERNAL_SLUMBER && type != SpectrumStatusEffects.FATAL_SLUMBER) {
+		if (isIncurable(effect) && type != PastelStatusEffects.ETERNAL_SLUMBER && type != PastelStatusEffects.FATAL_SLUMBER) {
 			return INCURABLE.get(renderType);
 		}
 		
-		if (type.is(SpectrumStatusEffectTags.NIGHT_ALCHEMY))
+		if (type.is(PastelStatusEffectTags.NIGHT_ALCHEMY))
 			return NIGHT_ALCHEMY.get(renderType);
 		
 		return original;
@@ -59,9 +59,9 @@ public class StatusEffectHelper {
 	//Also why is that not a tag?
 	public static boolean isIncurable(MobEffectInstance instance) {
 		var type = instance.getEffect();
-		if (type == SpectrumStatusEffects.ETERNAL_SLUMBER || type == SpectrumStatusEffects.FATAL_SLUMBER)
+		if (type == PastelStatusEffects.ETERNAL_SLUMBER || type == PastelStatusEffects.FATAL_SLUMBER)
 			return false;
 		
-		return ((MobEffectInstanceInjector) instance).spectrum$isIncurable();
+		return ((MobEffectInstanceInjector) instance).isIncurable();
 	}
 }

@@ -6,11 +6,11 @@ import earth.terrarium.pastel.capabilities.fluid.*;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.mixin.accessors.BiomeAccessor;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.*;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.nbt.CompoundTag;
@@ -64,7 +64,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 	protected int extractedBottles = 0;
 	
 	public TitrationBarrelBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.TITRATION_BARREL.get(), pos, state);
+		super(PastelBlockEntities.TITRATION_BARREL.get(), pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 	}
 	
@@ -207,7 +207,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 		}
 		
 		if (player != null) {
-			SpectrumAdvancementCriteria.TITRATION_BARREL_TAPPING.trigger((ServerPlayer) player, harvestedStack, daysSealed, inventoryCount);
+			PastelAdvancementCriteria.TITRATION_BARREL_TAPPING.trigger((ServerPlayer) player, harvestedStack, daysSealed, inventoryCount);
 
             player.displayClientMessage(message, true);
         }
@@ -222,7 +222,7 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 	}
 	
 	public Optional<RecipeHolder<ITitrationBarrelRecipe>> getRecipeForInventory(Level world) {
-		return world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.TITRATION_BARREL, getRecipeInput(), world);
+		return world.getRecipeManager().getRecipeFor(PastelRecipeTypes.TITRATION_BARREL, getRecipeInput(), world);
 	}
 	
 	public FluidRecipeInput<FluidTank> getRecipeInput() {

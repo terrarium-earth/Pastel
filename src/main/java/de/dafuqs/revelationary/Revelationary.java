@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Revelationary {
-    public static final String MOD_ID = SpectrumCommon.MOD_ID;
+    public static final String MOD_ID = PastelCommon.MOD_ID;
     private static final Logger LOGGER = LoggerFactory.getLogger("Revelationary");
 
     public static void logInfo(String message) {

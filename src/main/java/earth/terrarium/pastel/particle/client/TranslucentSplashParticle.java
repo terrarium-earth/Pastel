@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.particle.client;
 
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -19,7 +19,7 @@ public class TranslucentSplashParticle extends WaterDropParticle {
 
 	protected TranslucentSplashParticle(ClientLevel clientWorld, double d, double e, double f) {
 		super(clientWorld, d, e, f);
-		var waterColor = SpectrumColorHelper.colorIntToVec(BiomeColors.getAverageWaterColor(level, BlockPos.containing(x, y, z)));
+		var waterColor = ColorHelper.colorIntToVec(BiomeColors.getAverageWaterColor(level, BlockPos.containing(x, y, z)));
 		rCol = waterColor.x;
 		gCol = waterColor.y;
 		bCol = waterColor.z;

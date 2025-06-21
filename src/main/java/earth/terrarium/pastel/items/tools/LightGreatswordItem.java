@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.items.tools;
 
-import earth.terrarium.pastel.api.item.SplitDamageItem;
+import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -18,7 +18,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class LightGreatswordItem extends ParryingSwordItem implements SplitDamageItem {
+public class LightGreatswordItem extends ParryingSwordItem implements SplitDamageHandler {
 
 	private final int barColor;
 
@@ -59,7 +59,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 			float chargeStrength = Math.min((float) (maxShieldTime - remainingUseTicks) / maxShieldTime + 0.2F, 1F);
 
 			player.push(chargeDir.normalize().scale(getLungeSpeed() * chargeStrength));
-			player.playSound(SpectrumSoundEvents.LUNGE, 2F, 0.8F + player.getRandom().nextFloat() * 0.2F);
+			player.playSound(PastelSoundEvents.LUNGE, 2F, 0.8F + player.getRandom().nextFloat() * 0.2F);
 			MiscPlayerData.get(player).initiateLungeState();
 		}
 	}
@@ -78,7 +78,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 			return;
 
 		var effect = target.isInvertedHealAndHarm() ? MobEffects.REGENERATION : MobEffects.POISON;
-		int sharpness = SpectrumEnchantmentHelper.getLevel(target.level().registryAccess(), Enchantments.SHARPNESS, stack);
+		int sharpness = PastelEnchantmentHelper.getLevel(target.level().registryAccess(), Enchantments.SHARPNESS, stack);
 		target.addEffect(new MobEffectInstance(effect, 20 * (5 + sharpness), 1));
 	}
 
@@ -87,7 +87,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 		if (attacker instanceof Player player) {
 			if (MiscPlayerData.get(player).isLunging()) {
 				MiscPlayerData.get(player).endLunge();
-				target.playSound(SpectrumSoundEvents.LUNGE_CRIT, 1F, 0.9F + target.getRandom().nextFloat() * 0.2F);
+				target.playSound(PastelSoundEvents.LUNGE_CRIT, 1F, 0.9F + target.getRandom().nextFloat() * 0.2F);
 				applyLungeHitEffects(stack, target, attacker);
 			}
 		}
@@ -100,7 +100,7 @@ public class LightGreatswordItem extends ParryingSwordItem implements SplitDamag
 		var source = composition.getPlayerOrEntity(attacker);
 
 		if (attacker instanceof Player player && MiscPlayerData.get(player).isLunging()) {
-			source = SpectrumDamageTypes.impaling(player.level(), player);
+			source = PastelDamageTypes.impaling(player.level(), player);
 		}
 
 		composition.add(source, damage);

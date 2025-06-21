@@ -5,11 +5,11 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.ActivatableItem;
-import earth.terrarium.pastel.api.item.SplitDamageItem;
+import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DreamflayerItem extends SwordItem implements InkPowered, ActivatableItem, SplitDamageItem, SlotBackgroundEffectProvider {
+public class DreamflayerItem extends SwordItem implements InkPowered, ActivatableItem, SplitDamageHandler, SlotBackgroundEffectProvider {
 	
 	public static final InkColor USED_COLOR = InkColors.RED;
 	public static final long INK_COST_FOR_ACTIVATION = 200L;
@@ -46,7 +46,7 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 	 * The less armor the attacker with this sword has and the more
 	 * the one that gets attacked, the higher the damage will be
 	 * <p>
-	 * See LivingEntityMixin spectrum$applyDreamflayerDamage
+	 * See LivingEntityMixin applyDreamflayerDamage
 	 */
 	public static final float ARMOR_DIFFERENCE_DAMAGE_MULTIPLIER = 2.5F;
 	
@@ -77,16 +77,16 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 			if (isActivated) {
 				setActivated(stack, false);
 				if (!world.isClientSide) {
-					world.playSound(null, user.getX(), user.getY(), user.getZ(), SpectrumSoundEvents.DREAMFLAYER_DEACTIVATE, SoundSource.PLAYERS, 1.0F, 1F);
+					world.playSound(null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.DREAMFLAYER_DEACTIVATE, SoundSource.PLAYERS, 1.0F, 1F);
 				}
 			} else {
 				if (InkPowered.tryDrainEnergy(user, USED_COLOR, INK_COST_FOR_ACTIVATION)) {
 					setActivated(stack, true);
 					if (!world.isClientSide) {
-						world.playSound(null, user.getX(), user.getY(), user.getZ(), SpectrumSoundEvents.DREAMFLAYER_ACTIVATE, SoundSource.PLAYERS, 1.0F, 1F);
+						world.playSound(null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.DREAMFLAYER_ACTIVATE, SoundSource.PLAYERS, 1.0F, 1F);
 					}
 				} else if (!world.isClientSide) {
-					world.playSound(null, user.getX(), user.getY(), user.getZ(), SpectrumSoundEvents.DREAMFLAYER_DEACTIVATE, SoundSource.PLAYERS, 1.0F, 1F);
+					world.playSound(null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.DREAMFLAYER_DEACTIVATE, SoundSource.PLAYERS, 1.0F, 1F);
 				}
 			}
 			
@@ -111,7 +111,7 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 			if (world.getGameTime() % 20 == 0 && ActivatableItem.isActivated(stack)) {
 				if (entity instanceof ServerPlayer player && !InkPowered.tryDrainEnergy(player, USED_COLOR, INK_COST_PER_SECOND)) {
 					setActivated(stack, false);
-					world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SpectrumSoundEvents.DREAMFLAYER_DEACTIVATE, SoundSource.PLAYERS, 0.8F, 1F);
+					world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), PastelSoundEvents.DREAMFLAYER_DEACTIVATE, SoundSource.PLAYERS, 0.8F, 1F);
 				}
 			}
 		}
@@ -177,7 +177,7 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 		if (ActivatableItem.isActivated(stack)) {
 			composition.addPlayerOrEntity(attacker, newDamage * 0.5F);
 			composition.add(attacker.damageSources().magic(), newDamage * 0.25F);
-			composition.add(SpectrumDamageTypes.setHealth(attacker.level(), attacker), newDamage * 0.25F);
+			composition.add(PastelDamageTypes.setHealth(attacker.level(), attacker), newDamage * 0.25F);
 		} else {
 			composition.addPlayerOrEntity(attacker, newDamage * 0.75F);
 			composition.add(attacker.damageSources().magic(), newDamage * 0.25F);
