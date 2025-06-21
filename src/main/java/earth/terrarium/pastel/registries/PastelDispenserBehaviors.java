@@ -28,7 +28,7 @@ public class PastelDispenserBehaviors {
 		
 		// Fluid Buckets
 		DispenseItemBehavior fluidBucketBehavior = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);
-		DispenserBlock.registerBehavior(PastelItems.GOO_BUCKET.get(), fluidBucketBehavior);
+		DispenserBlock.registerBehavior(PastelItems.HUMUS_BUCKET.get(), fluidBucketBehavior);
 		DispenserBlock.registerBehavior(PastelItems.LIQUID_CRYSTAL_BUCKET.get(), fluidBucketBehavior);
 		DispenserBlock.registerBehavior(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get(), fluidBucketBehavior);
 		DispenserBlock.registerBehavior(PastelItems.DRAGONROT_BUCKET.get(), fluidBucketBehavior);

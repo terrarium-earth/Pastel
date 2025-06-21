@@ -46,7 +46,7 @@ import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
-import earth.terrarium.pastel.recipe.fluid_converting.GooConvertingRecipe;
+import earth.terrarium.pastel.recipe.fluid_converting.HumusConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.LiquidCrystalConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.MidnightSolutionConvertingRecipe;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
@@ -77,7 +77,7 @@ public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack
     public static final ResourceLocation LIQUID_CRYSTAL_CONVERTING_PAGE = PastelCommon.locate("liquid_crystal_converting");
     public static final ResourceLocation MIDNIGHT_SOLUTION_CONVERTING_PAGE = PastelCommon.locate("midnight_solution_converting");
     public static final ResourceLocation DRAGONROT_CONVERTING_PAGE = PastelCommon.locate("dragonrot_converting");
-	public static final ResourceLocation GOO_CONVERTING_PAGE = PastelCommon.locate("goo_converting");
+	public static final ResourceLocation HUMUS_CONVERTING_PAGE = PastelCommon.locate("humus_converting");
     public static final ResourceLocation CRYSTALLARIEUM_GROWING_PAGE = PastelCommon.locate("crystallarieum_growing");
     public static final ResourceLocation CINDERHEARTH_SMELTING_PAGE = PastelCommon.locate("cinderhearth_smelting");
     public static final ResourceLocation TITRATION_BARREL_FERMENTING_PAGE = PastelCommon.locate("titration_barrel_fermenting");
@@ -118,7 +118,7 @@ public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack
         registerGatedRecipePage(LIQUID_CRYSTAL_CONVERTING_PAGE, PastelRecipeTypes.LIQUID_CRYSTAL_CONVERTING, false);
         registerGatedRecipePage(MIDNIGHT_SOLUTION_CONVERTING_PAGE, PastelRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING, false);
         registerGatedRecipePage(DRAGONROT_CONVERTING_PAGE, PastelRecipeTypes.DRAGONROT_CONVERTING, false);
-		registerGatedRecipePage(GOO_CONVERTING_PAGE, PastelRecipeTypes.GOO_CONVERTING, false);
+		registerGatedRecipePage(HUMUS_CONVERTING_PAGE, PastelRecipeTypes.HUMUS_CONVERTING, false);
         registerGatedRecipePage(CRYSTALLARIEUM_GROWING_PAGE, PastelRecipeTypes.CRYSTALLARIEUM, false);
         registerGatedRecipePage(CINDERHEARTH_SMELTING_PAGE, PastelRecipeTypes.CINDERHEARTH, false);
         registerGatedRecipePage(TITRATION_BARREL_FERMENTING_PAGE, PastelRecipeTypes.TITRATION_BARREL, true);
@@ -190,10 +190,10 @@ public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack
             }
         });
 		
-		PageRendererRegistry.registerPageRenderer(GOO_CONVERTING_PAGE, p -> new BookFluidConvertingPageRenderer<>((BookGatedRecipePage<GooConvertingRecipe>) p) {
+		PageRendererRegistry.registerPageRenderer(HUMUS_CONVERTING_PAGE, p -> new BookFluidConvertingPageRenderer<>((BookGatedRecipePage<HumusConvertingRecipe>) p) {
             @Override
             public ResourceLocation getBackgroundTexture() {
-				return PastelCommon.locate("textures/gui/guidebook/goo.png");
+				return PastelCommon.locate("textures/gui/guidebook/humus.png");
             }
         });
     }

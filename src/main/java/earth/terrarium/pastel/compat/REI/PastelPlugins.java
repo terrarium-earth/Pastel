@@ -9,7 +9,7 @@ import earth.terrarium.pastel.compat.REI.plugins.EnchanterEnchantingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.EnchantmentUpgradeDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.FreezingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.FusionShrineDisplay;
-import earth.terrarium.pastel.compat.REI.plugins.GooConvertingDisplay;
+import earth.terrarium.pastel.compat.REI.plugins.HumusConvertingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.HeatingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.InkConvertingDisplay;
 import earth.terrarium.pastel.compat.REI.plugins.LiquidCrystalConvertingDisplay;
@@ -36,7 +36,7 @@ public class PastelPlugins {
 	public static final CategoryIdentifier<PotionWorkshopCraftingDisplay> POTION_WORKSHOP_CRAFTING = CategoryIdentifier.of(PastelCommon.locate("potion_workshop_crafting"));
 	public static final CategoryIdentifier<PotionWorkshopReactingDisplay> POTION_WORKSHOP_REACTING = CategoryIdentifier.of(PastelCommon.locate("potion_workshop_reacting"));
 	public static final CategoryIdentifier<SpiritInstillingDisplay> SPIRIT_INSTILLER = CategoryIdentifier.of(PastelCommon.locate("spirit_instiller"));
-	public static final CategoryIdentifier<GooConvertingDisplay> GOO_CONVERTING = CategoryIdentifier.of(PastelCommon.locate("goo_converting"));
+	public static final CategoryIdentifier<HumusConvertingDisplay> HUMUS_CONVERTING = CategoryIdentifier.of(PastelCommon.locate("humus_converting"));
 	public static final CategoryIdentifier<LiquidCrystalConvertingDisplay> LIQUID_CRYSTAL_CONVERTING = CategoryIdentifier.of(PastelCommon.locate("liquid_crystal_converting"));
 	public static final CategoryIdentifier<MidnightSolutionConvertingDisplay> MIDNIGHT_SOLUTION_CONVERTING = CategoryIdentifier.of(PastelCommon.locate("midnight_solution_converting"));
 	public static final CategoryIdentifier<DragonrotConvertingDisplay> DRAGONROT_CONVERTING = CategoryIdentifier.of(PastelCommon.locate("dragonrot_converting"));

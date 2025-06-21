@@ -21,7 +21,7 @@ public class PastelLootTables {
 	public static final ResourceKey<LootTable> LAVA_FISHING = keyOf("gameplay/fishing/lava/fishing");
 	public static final ResourceKey<LootTable> END_FISHING = keyOf("gameplay/fishing/end/fishing");
 	public static final ResourceKey<LootTable> DEEPER_DOWN_FISHING = keyOf("gameplay/fishing/deeper_down/fishing");
-	public static final ResourceKey<LootTable> GOO_FISHING = keyOf("gameplay/fishing/goo/fishing");
+	public static final ResourceKey<LootTable> HUMUS_FISHING = keyOf("gameplay/fishing/humus/fishing");
 	public static final ResourceKey<LootTable> LIQUID_CRYSTAL_FISHING = keyOf("gameplay/fishing/liquid_crystal/fishing");
 	public static final ResourceKey<LootTable> MIDNIGHT_SOLUTION_FISHING = keyOf("gameplay/fishing/midnight_solution/fishing");
 	

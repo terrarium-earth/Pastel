@@ -393,7 +393,7 @@ public class PastelItems {
 
     // Fluid Buckets
     public static final DeferredItem<Item> LIQUID_CRYSTAL_BUCKET = register(simple(item("liquid_crystal_bucket", () -> new BucketItem(PastelFluids.LIQUID_CRYSTAL.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.LIGHT_GRAY)));
-    public static final DeferredItem<Item> GOO_BUCKET = register(simple(item("goo_bucket", () -> new BucketItem(PastelFluids.GOO.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.BROWN)));
+    public static final DeferredItem<Item> HUMUS_BUCKET = register(simple(item("humus_bucket", () -> new BucketItem(PastelFluids.HUMUS.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.BROWN)));
     public static final DeferredItem<Item> MIDNIGHT_SOLUTION_BUCKET = register(simple(item("midnight_solution_bucket", () -> new BucketItem(PastelFluids.MIDNIGHT_SOLUTION.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.GRAY)));
     public static final DeferredItem<Item> DRAGONROT_BUCKET = register(simple(item("dragonrot_bucket", () -> new BucketItem(PastelFluids.DRAGONROT.get(), IS.of(1).craftRemainder(BUCKET)), InkColors.LIGHT_GRAY)));
 

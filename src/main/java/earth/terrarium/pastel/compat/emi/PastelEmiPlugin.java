@@ -32,7 +32,7 @@ import earth.terrarium.pastel.inventories.FilteringScreen;
 import earth.terrarium.pastel.inventories.PastelScreenHandlerTypes;
 import earth.terrarium.pastel.inventories.slots.ShadowSlot;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
-import earth.terrarium.pastel.recipe.fluid_converting.GooConvertingRecipe;
+import earth.terrarium.pastel.recipe.fluid_converting.HumusConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.LiquidCrystalConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.MidnightSolutionConvertingRecipe;
 import earth.terrarium.pastel.registries.PastelAdvancements;
@@ -105,7 +105,7 @@ public class PastelEmiPlugin implements EmiPlugin {
 		registry.addCategory(PastelEmiRecipeCategories.POTION_WORKSHOP_CRAFTING);
 		registry.addCategory(PastelEmiRecipeCategories.POTION_WORKSHOP_REACTING);
 		registry.addCategory(PastelEmiRecipeCategories.SPIRIT_INSTILLER);
-		registry.addCategory(PastelEmiRecipeCategories.GOO_CONVERTING);
+		registry.addCategory(PastelEmiRecipeCategories.HUMUS_CONVERTING);
 		registry.addCategory(PastelEmiRecipeCategories.LIQUID_CRYSTAL_CONVERTING);
 		registry.addCategory(PastelEmiRecipeCategories.MIDNIGHT_SOLUTION_CONVERTING);
 		registry.addCategory(PastelEmiRecipeCategories.DRAGONROT_CONVERTING);
@@ -145,7 +145,7 @@ public class PastelEmiPlugin implements EmiPlugin {
 		registry.addWorkstation(PastelEmiRecipeCategories.FREEZING, EmiStack.of(PastelBlocks.POLAR_BEAR_IDOL.get()));
 		registry.addWorkstation(PastelEmiRecipeCategories.ENCHANTER, EmiStack.of(PastelBlocks.ENCHANTER.get()));
 		registry.addWorkstation(PastelEmiRecipeCategories.ENCHANTMENT_UPGRADE, EmiStack.of(PastelBlocks.ENCHANTER.get()));
-		registry.addWorkstation(PastelEmiRecipeCategories.GOO_CONVERTING, EmiStack.of(PastelItems.GOO_BUCKET.get()));
+		registry.addWorkstation(PastelEmiRecipeCategories.HUMUS_CONVERTING, EmiStack.of(PastelItems.HUMUS_BUCKET.get()));
 		registry.addWorkstation(PastelEmiRecipeCategories.LIQUID_CRYSTAL_CONVERTING, EmiStack.of(PastelItems.LIQUID_CRYSTAL_BUCKET.get()));
 		registry.addWorkstation(PastelEmiRecipeCategories.MIDNIGHT_SOLUTION_CONVERTING, EmiStack.of(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get()));
 		registry.addWorkstation(PastelEmiRecipeCategories.DRAGONROT_CONVERTING, EmiStack.of(PastelItems.DRAGONROT_BUCKET.get()));
@@ -176,7 +176,7 @@ public class PastelEmiPlugin implements EmiPlugin {
 		addAll(registry, PastelRecipeTypes.POTION_WORKSHOP_CRAFTING, r -> new PotionWorkshopEmiRecipeGated(PastelEmiRecipeCategories.POTION_WORKSHOP_CRAFTING, r));
 		addAll(registry, PastelRecipeTypes.POTION_WORKSHOP_REACTING, PotionWorkshopReactingEmiRecipe::new);
 		addAll(registry, PastelRecipeTypes.SPIRIT_INSTILLING, SpiritInstillingEmiRecipeGated::new);
-		addAll(registry, PastelRecipeTypes.GOO_CONVERTING, r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.GOO_CONVERTING, r));
+		addAll(registry, PastelRecipeTypes.HUMUS_CONVERTING, r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.HUMUS_CONVERTING, r));
 		addAll(registry, PastelRecipeTypes.LIQUID_CRYSTAL_CONVERTING, r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.LIQUID_CRYSTAL_CONVERTING, r));
 		addAll(registry, PastelRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING, r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.MIDNIGHT_SOLUTION_CONVERTING, r));
 		addAll(registry, PastelRecipeTypes.DRAGONROT_CONVERTING, r -> new FluidConvertingEmiRecipeGated(PastelEmiRecipeCategories.DRAGONROT_CONVERTING, r));
@@ -229,7 +229,7 @@ public class PastelEmiPlugin implements EmiPlugin {
 		EmiStack dragonrot = EmiStack.of(PastelFluids.DRAGONROT.get(), FluidUnit.BUCKET);
 		EmiStack liquidCrystal = EmiStack.of(PastelFluids.LIQUID_CRYSTAL.get(), FluidUnit.BUCKET);
 		EmiStack midnightSolution = EmiStack.of(PastelFluids.MIDNIGHT_SOLUTION.get(), FluidUnit.BUCKET);
-		EmiStack mud = EmiStack.of(PastelFluids.GOO.get(), FluidUnit.BUCKET);
+		EmiStack mud = EmiStack.of(PastelFluids.HUMUS.get(), FluidUnit.BUCKET);
 		EmiStack waterCatalyst = water.copy().setRemainder(water);
 		EmiStack lavaCatalyst = lava.copy().setRemainder(lava);
 		EmiStack dragonrotCatalyst = dragonrot.copy().setRemainder(dragonrot);
@@ -256,7 +256,7 @@ public class PastelEmiPlugin implements EmiPlugin {
 				.rightInput(mudCatalyst, false)
 				.output(EmiStack.of(Blocks.COARSE_DIRT))
 				.requiredAdvancement(DragonrotConvertingRecipe.UNLOCK_IDENTIFIER)
-				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
+				.requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 		addRecipeSafe(registry, () -> PastelWorldInteractionRecipe.customBuilder()
 				.id(syntheticId("world/fluid_interaction", PastelBlocks.FLAYED_EARTH.get()))
@@ -308,7 +308,7 @@ public class PastelEmiPlugin implements EmiPlugin {
 				.rightInput(mudCatalyst, false)
 				.output(EmiStack.of(Blocks.CLAY))
 				.requiredAdvancement(LiquidCrystalConvertingRecipe.UNLOCK_IDENTIFIER)
-				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
+				.requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 		addRecipeSafe(registry, () -> PastelWorldInteractionRecipe.customBuilder()
 				.id(syntheticId("world/fluid_interaction", Blocks.TERRACOTTA))
@@ -322,14 +322,14 @@ public class PastelEmiPlugin implements EmiPlugin {
 				.leftInput(mudCatalyst)
 				.rightInput(waterCatalyst, false)
 				.output(EmiStack.of(Blocks.DIRT))
-				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
+				.requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 		addRecipeSafe(registry, () -> PastelWorldInteractionRecipe.customBuilder()
 				.id(syntheticId("world/fluid_interaction", Blocks.MUD))
 				.leftInput(mudCatalyst)
 				.rightInput(lavaCatalyst, false)
 				.output(EmiStack.of(Blocks.MUD))
-				.requiredAdvancement(GooConvertingRecipe.UNLOCK_IDENTIFIER)
+				.requiredAdvancement(HumusConvertingRecipe.UNLOCK_IDENTIFIER)
 				.build());
 	}
 

@@ -71,12 +71,12 @@ public class PastelParticleTypes {
 	public static final SimpleParticleType PRIMORDIAL_FLAME = register("primordial_flame", true);
 	public static final SimpleParticleType PRIMORDIAL_FLAME_SMALL = register("primordial_flame_small", true);
 	
-	public static final SimpleParticleType GOO_SPLASH = register("goo_splash", false);
-	public static final SimpleParticleType DRIPPING_GOO = register("dripping_goo", false);
-	public static final SimpleParticleType FALLING_GOO = register("falling_goo", false);
-	public static final SimpleParticleType LANDING_GOO = register("landing_goo", false);
-	public static final SimpleParticleType GOO_FISHING = register("goo_fishing", false);
-	public static final SimpleParticleType GOO_POP = register("goo_pop", false);
+	public static final SimpleParticleType HUMUS_SPLASH = register("humus_splash", false);
+	public static final SimpleParticleType DRIPPING_HUMUS = register("dripping_humus", false);
+	public static final SimpleParticleType FALLING_HUMUS = register("falling_humus", false);
+	public static final SimpleParticleType LANDING_HUMUS = register("landing_humus", false);
+	public static final SimpleParticleType HUMUS_FISHING = register("humus_fishing", false);
+	public static final SimpleParticleType HUMUS_POP = register("humus_pop", false);
 	
 	public static final SimpleParticleType LIQUID_CRYSTAL_SPLASH = register("liquid_crystal_splash", false);
 	public static final SimpleParticleType DRIPPING_LIQUID_CRYSTAL = register("dripping_liquid_crystal", false);

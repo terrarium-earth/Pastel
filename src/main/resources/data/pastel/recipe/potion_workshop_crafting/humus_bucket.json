@@ -6,6 +6,6 @@
   "ingredient1": "minecraft:dirt",
   "ingredient2": "minecraft:mud",
   "result": {
-    "id": "pastel:goo_bucket"
+    "id": "pastel:humus_bucket"
   }
 }

@@ -42,7 +42,7 @@ public class TravelersBackpackCompat extends PastelIntegrationPacks.ModIntegrati
 
 	@Override
 	public void register() {
-		EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid("pastel:goo", PastelFluids.GOO.get().getSource()) {
+		EffectFluidRegistry.registerFluidEffect(new PastelEffectFluid("pastel:humus", PastelFluids.HUMUS.get().getSource()) {
 			@Override
 			public void affectDrinker(FluidStack fluidVariantWrapper, Level world, Entity entity) {
 				if (entity instanceof LivingEntity livingEntity) {

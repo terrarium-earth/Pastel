@@ -58,7 +58,7 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 		 * we spawn the entity from the memory, process its loot table with a custom damage type that guarantees a head drop,
 		 * search for a head drop in that loot and then discard that entity.
 		 * WHY might you ask?
-		 * Good question!
+		 * Humusd question!
 		 * A single entity type can have multiple head items associated with it (like fox or shulker variants)
 		 * and finding out which exact mob variant is in that memory would be even more cursed
 		 */

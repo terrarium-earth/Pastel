@@ -29,11 +29,11 @@
         }
       }
     },
-    "fished_in_goo": {
+    "fished_in_humus": {
       "trigger": "pastel:fishing_rod_hooked",
       "conditions": {
         "fluid": {
-          "fluids": "#pastel:goo"
+          "fluids": "#pastel:humus"
         }
       }
     },

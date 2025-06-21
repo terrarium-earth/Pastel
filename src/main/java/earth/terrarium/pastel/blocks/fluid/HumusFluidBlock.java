@@ -15,9 +15,9 @@ import net.minecraft.world.level.pathfinder.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class GooFluidBlock extends PastelFluidBlock {
+public class HumusFluidBlock extends PastelFluidBlock {
 	
-	public GooFluidBlock(PastelFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
+	public HumusFluidBlock(PastelFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
 		super(fluid, ultrawarmReplacementBlockState, settings);
 	}
 
@@ -29,19 +29,19 @@ public class GooFluidBlock extends PastelFluidBlock {
 	
 	@Override
 	public SimpleParticleType getSplashParticle() {
-		return PastelParticleTypes.GOO_SPLASH;
+		return PastelParticleTypes.HUMUS_SPLASH;
 	}
 	
 	@Override
 	public Tuple<SimpleParticleType, SimpleParticleType> getFishingParticles() {
-		return new Tuple<>(PastelParticleTypes.GOO_POP, PastelParticleTypes.GOO_FISHING);
+		return new Tuple<>(PastelParticleTypes.HUMUS_POP, PastelParticleTypes.HUMUS_FISHING);
 	}
 
 	@Override
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(state, world, pos, random);
 		if (!world.getBlockState(pos.above()).isRedstoneConductor(world, pos.above()) && random.nextFloat() < 0.03F) {
-			world.addParticle(PastelParticleTypes.GOO_POP, pos.getX() + random.nextDouble(), pos.getY() + 1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
+			world.addParticle(PastelParticleTypes.HUMUS_POP, pos.getX() + random.nextDouble(), pos.getY() + 1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
 		}
 	}
 	

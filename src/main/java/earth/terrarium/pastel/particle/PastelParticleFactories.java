@@ -115,7 +115,7 @@ public class PastelParticleFactories {
 		event.registerSpriteSet(PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, LitParticle.Factory::new);
 		event.registerSpriteSet(PastelParticleTypes.DRAGONROT, BubblePopParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.VOID_FOG, VoidFogParticle.Factory::new);
-		event.registerSpriteSet(PastelParticleTypes.GOO_POP, BubblePopParticle.Provider::new);
+		event.registerSpriteSet(PastelParticleTypes.HUMUS_POP, BubblePopParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.BLUE_BUBBLE_POP, BubblePopParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.GREEN_BUBBLE_POP, BubblePopParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.SPIRIT_SALLOW, WindParticle.Factory::new);
@@ -137,32 +137,32 @@ public class PastelParticleFactories {
 		event.registerSpriteSet(PastelParticleTypes.AZURE_MOTE_SMALL, AzureMoteParticle.Factory::new);
 		
 		// Fluid Splash
-		event.registerSpriteSet(PastelParticleTypes.GOO_SPLASH, SplashParticle.Provider::new);
+		event.registerSpriteSet(PastelParticleTypes.HUMUS_SPLASH, SplashParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.LIQUID_CRYSTAL_SPLASH, SplashParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.MIDNIGHT_SOLUTION_SPLASH, SplashParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.DRAGONROT_SPLASH, SplashParticle.Provider::new);
 		
 		// Fluid Dripping
-		event.registerSpriteSet(PastelParticleTypes.DRIPPING_GOO, PastelBlockLeakParticles.DrippingGooFactory::new);
+		event.registerSpriteSet(PastelParticleTypes.DRIPPING_HUMUS, PastelBlockLeakParticles.DrippingHumusFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.DRIPPING_LIQUID_CRYSTAL, PastelBlockLeakParticles.DrippingLiquidCrystalFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.DRIPPING_MIDNIGHT_SOLUTION, PastelBlockLeakParticles.DrippingMidnightSolutionFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.DRIPPING_DRAGONROT, PastelBlockLeakParticles.DrippingDragonrotFactory::new);
 		
 		// Fluid Falling
-		event.registerSpriteSet(PastelParticleTypes.FALLING_GOO, PastelBlockLeakParticles.FallingGooFactory::new);
+		event.registerSpriteSet(PastelParticleTypes.FALLING_HUMUS, PastelBlockLeakParticles.FallingHumusFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.FALLING_LIQUID_CRYSTAL, PastelBlockLeakParticles.FallingLiquidCrystalFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.FALLING_MIDNIGHT_SOLUTION, PastelBlockLeakParticles.FallingMidnightSolutionFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.FALLING_DRAGONROT, PastelBlockLeakParticles.FallingDragonrotFactory::new);
 		
 		// Fluid Landing
-		event.registerSpriteSet(PastelParticleTypes.LANDING_GOO, PastelBlockLeakParticles.LandingGooFactory::new);
+		event.registerSpriteSet(PastelParticleTypes.LANDING_HUMUS, PastelBlockLeakParticles.LandingHumusFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.LANDING_LIQUID_CRYSTAL, PastelBlockLeakParticles.LandingLiquidCrystalFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.LANDING_MIDNIGHT_SOLUTION, PastelBlockLeakParticles.LandingMidnightSolutionFactory::new);
 		event.registerSpriteSet(PastelParticleTypes.LANDING_DRAGONROT, PastelBlockLeakParticles.LandingDragonrotFactory::new);
 		
 		// Fluid Fishing
 		event.registerSpriteSet(PastelParticleTypes.LAVA_FISHING, WakeParticle.Provider::new);
-		event.registerSpriteSet(PastelParticleTypes.GOO_FISHING, WakeParticle.Provider::new);
+		event.registerSpriteSet(PastelParticleTypes.HUMUS_FISHING, WakeParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.LIQUID_CRYSTAL_FISHING, WakeParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.MIDNIGHT_SOLUTION_FISHING, WakeParticle.Provider::new);
 		event.registerSpriteSet(PastelParticleTypes.DRAGONROT_FISHING, WakeParticle.Provider::new);

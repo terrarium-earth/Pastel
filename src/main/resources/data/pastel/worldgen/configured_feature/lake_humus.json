@@ -4,7 +4,7 @@
     "fluid": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "pastel:goo",
+        "Name": "pastel:humus",
         "Properties": {
           "level": "0"
         }

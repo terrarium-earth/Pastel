@@ -29,36 +29,36 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.FluidType;
 
-public abstract class GooFluid extends PastelFluid {
+public abstract class HumusFluid extends PastelFluid {
 	
 	@Override
 	public Fluid getSource() {
-		return PastelFluids.GOO.get();
+		return PastelFluids.HUMUS.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return PastelFluids.FLOWING_GOO.get();
+		return PastelFluids.FLOWING_HUMUS.get();
 	}
 	
 	@Override
 	public Item getBucket() {
-        return PastelItems.GOO_BUCKET.get();
+        return PastelItems.HUMUS_BUCKET.get();
 	}
 
 	@Override
 	public FluidType getFluidType() {
-		return PastelFluids.GOO_TYPE.get();
+		return PastelFluids.HUMUS_TYPE.get();
 	}
 
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return PastelBlocks.GOO.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return PastelBlocks.HUMUS.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == PastelFluids.GOO.get() || fluid == PastelFluids.FLOWING_GOO.get();
+		return fluid == PastelFluids.HUMUS.get() || fluid == PastelFluids.FLOWING_HUMUS.get();
 	}
 	
 	@Override
@@ -67,7 +67,7 @@ public abstract class GooFluid extends PastelFluid {
 		BlockPos topPos = pos.above();
 		BlockState topState = world.getBlockState(topPos);
 		if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(1000) == 0) {
-			world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), PastelSoundEvents.GOO_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+			world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), PastelSoundEvents.HUMUS_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
 		}
 	}
 	
@@ -88,21 +88,21 @@ public abstract class GooFluid extends PastelFluid {
 	
 	@Override
 	public ParticleOptions getDripParticle() {
-		return PastelParticleTypes.DRIPPING_GOO;
+		return PastelParticleTypes.DRIPPING_HUMUS;
 	}
 	
 	@Override
 	public ParticleOptions getSplashParticle() {
-		return PastelParticleTypes.GOO_SPLASH;
+		return PastelParticleTypes.HUMUS_SPLASH;
 	}
 	
 	@Override
 	public RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType() {
-		return PastelRecipeTypes.GOO_CONVERTING;
+		return PastelRecipeTypes.HUMUS_CONVERTING;
 	}
 	
 	/**
-	 * Entities colliding with goo will get a slowness effect
+	 * Entities colliding with humus will get a slowness effect
 	 * and losing their breath far quicker
 	 */
 	@Override
@@ -112,7 +112,7 @@ public abstract class GooFluid extends PastelFluid {
 		if (!world.isClientSide && entity instanceof LivingEntity livingEntity) {
 			// the entity is hurt at air == -20 and then reset to air = 0
 			// this way the entity loses its breath way faster, but gets damaged just as slow afterwards
-			if (livingEntity.isEyeInFluid(PastelFluidTags.GOO) && world.getGameTime() % 2 == 0 && livingEntity.getAirSupply() > 0) {
+			if (livingEntity.isEyeInFluid(PastelFluidTags.HUMUS) && world.getGameTime() % 2 == 0 && livingEntity.getAirSupply() > 0) {
 				livingEntity.setAirSupply(livingEntity.getAirSupply() - 1);
 			}
 			
@@ -127,7 +127,7 @@ public abstract class GooFluid extends PastelFluid {
 		}
 	}
 	
-	public static class FlowingGoo extends GooFluid {
+	public static class FlowingHumus extends HumusFluid {
 		
 		@Override
 		protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
@@ -147,7 +147,7 @@ public abstract class GooFluid extends PastelFluid {
 		
 	}
 	
-	public static class StillGoo extends GooFluid {
+	public static class StillHumus extends HumusFluid {
 		
 		@Override
 		public int getAmount(FluidState fluidState) {

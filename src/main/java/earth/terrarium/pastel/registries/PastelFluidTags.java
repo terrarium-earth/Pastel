@@ -18,7 +18,7 @@ public class PastelFluidTags {
 	public static final TagKey<Fluid> BEDROCK_ROD_FISHABLE_IN = of("bedrock_rod_fishable_in");
 	
 	public static final TagKey<Fluid> LIQUID_CRYSTAL = of("liquid_crystal");
-	public static final TagKey<Fluid> GOO = of("goo");
+	public static final TagKey<Fluid> HUMUS = of("humus");
 	public static final TagKey<Fluid> MIDNIGHT_SOLUTION = of("midnight_solution");
 	public static final TagKey<Fluid> DRAGONROT = of("dragonrot");
 	

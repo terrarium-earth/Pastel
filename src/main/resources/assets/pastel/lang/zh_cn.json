@@ -188,7 +188,7 @@
   "container.pastel.rei.pedestal_crafting.recipe_not_unlocked_line_2": "这个配方",
   "container.pastel.rei.enchanting.title": "附魔物品",
   "container.pastel.rei.enchantment_upgrading.title": "附魔升级",
-  "container.pastel.rei.goo_converting.title": "泥浆:侵染",
+  "container.pastel.rei.humus_converting.title": "泥浆:侵染",
   "container.pastel.rei.liquid_crystal_converting.title": "液态水晶:侵染",
   "container.pastel.rei.midnight_solution_converting.title": "午夜溶液:侵染",
   "container.pastel.rei.dragonrot_converting.title": "龙腐脓浆:侵染",
@@ -522,7 +522,7 @@
   "pastel.subtitles.celestial_pocket_watch_ticking": "天体怀表:滴答",
   "pastel.subtitles.shooting_star_cracker": "流星:破裂",
   "pastel.subtitles.block.memory.advance": "记忆:再塑",
-  "pastel.subtitles.block.goo.ambient": "泥浆:流动",
+  "pastel.subtitles.block.humus.ambient": "泥浆:流动",
   "pastel.subtitles.block.liquid_crystal.ambient": "液态水晶:鸣响",
   "pastel.subtitles.block.midnight_solution.ambient": "午夜溶液:嘶吼",
   "pastel.subtitles.howling_wind_high": "风声:呼啸",
@@ -1494,9 +1494,9 @@
   "block.pastel.stripped_white_wood": "去皮白色木",
   "block.pastel.stripped_yellow_wood": "去皮黄色木",
 
-  "item.pastel.goo_bucket": "泥浆桶",
-  "block.pastel.goo": "泥浆",
-  "block.pastel.flowing_goo": "泥浆",
+  "item.pastel.humus_bucket": "泥浆桶",
+  "block.pastel.humus": "泥浆",
+  "block.pastel.flowing_humus": "泥浆",
 
   "item.pastel.liquid_crystal_bucket": "液态水晶桶",
   "block.pastel.liquid_crystal": "液态水晶",
@@ -3489,7 +3489,7 @@
 
   "tag.pastel.requires_omni_accelerator_pvp_enabled": "需要启用全能发射器 PvP",
 
-  "tag.pastel.goo": "泥浆",
+  "tag.pastel.humus": "泥浆",
   "tag.pastel.dragonrot": "龙腐脓浆",
   "tag.pastel.liquid_crystal": "液态水晶",
   "tag.pastel.midnight_solution": "午夜溶液",
@@ -3927,7 +3927,7 @@
   "book.pastel.guidebook.crafting_tablet.page1.title": "基座自动化",
   "book.pastel.guidebook.crafting_tablet.page1.text": "可能有一天,我需要频繁反复合成某样材料,肯定想过搞自动化,或许我是某种流水生产线每个物品都搞自动生产的肝帝人皇.\\\n\\\n[七彩基座](entry://general/pedestal)有专门放置合成模板的槽位.使用漏斗或者类似的器件填充基座的时候,物品会按照合成模板中配方的指示均匀地落在对应的槽位上.",
 
-  "book.pastel.guidebook.crawfish.page0.text": "其实准确来说它不应该被称为鱼,因为实际上它属于*甲壳类动物*.\\\n\\\n它们似乎即使在[最泥泞的池塘](entry://magical_blocks/goo)中也能茁壮成长.",
+  "book.pastel.guidebook.crawfish.page0.text": "其实准确来说它不应该被称为鱼,因为实际上它属于*甲壳类动物*.\\\n\\\n它们似乎即使在[最泥泞的池塘](entry://magical_blocks/humus)中也能茁壮成长.",
 
   "book.pastel.guidebook.creating_enchanted_books.name": "制作附魔书",
   "book.pastel.guidebook.creating_enchanted_books.page0.text": "[附魔基座](entry://enchanting/enchanter)可以消耗[颜料](entry://general/pigment),原材料与经验对[#](bb00bb)书[#]()添加附魔. \\\n\\\n虽然经验开销略高于附魔台,但我可以对附魔的附魔进行更为细致入微的选取.",
@@ -4700,7 +4700,7 @@
 
   "book.pastel.guidebook.liquid_crystal.page0.text": "宝石晶的纯净能量以液态形式存在,似乎具有治疗效果.",
   "book.pastel.guidebook.liquid_crystal.page1.text": "使其与其他液体结合会产生具有有趣特性的各种材料。",
-  "book.pastel.guidebook.liquid_crystal.page2.text": "液态水晶与[液态泥浆](entry://magical_blocks/goo)[#]()碰撞,产生了[#](bb00bb)黏土[#]()!肯定还有更多组合等待发现!\\\n\\\n*从未见过如此不平衡的现象.*",
+  "book.pastel.guidebook.liquid_crystal.page2.text": "液态水晶与[液态泥浆](entry://magical_blocks/humus)[#]()碰撞,产生了[#](bb00bb)黏土[#]()!肯定还有更多组合等待发现!\\\n\\\n*从未见过如此不平衡的现象.*",
   "book.pastel.guidebook.liquid_crystal.page3.text": "完整的一格液态水晶在吸收了熔岩的巨大热量之后形成了这个东西.\\\n有点像[#](bb00bb)岩浆块[#](),但要热得多.",
   "book.pastel.guidebook.liquid_crystal.page4.text": "当[#](bb00bb)水[#]()流入液态水晶的源头时,水晶固化了.\\\n只是轻轻触碰,我就感受到了凛冽而刺骨的严寒.我将其命名为霜冻水晶.",
 
@@ -4841,11 +4841,11 @@
 
   "book.pastel.guidebook.moving_budding_blocks": "移动母岩",
 
-  "book.pastel.guidebook.goo.page0.text": "泥浆.泥,浆.本身没什么特别好玩的地方.\\\n有用的是泥浆与其他液体的碰撞,例如[#](bb00bb)水[#]()或者[#](bb00bb)熔岩[#]().与泥浆碰撞会分别产出[#](bb00bb)泥土[#]()或者[#](bb00bb)砂土[#]().",
-  "book.pastel.guidebook.goo.page1.text": "*泥浆浴虽然听上去很舒服但还是不要尝试的比较好哦!*",
-  "book.pastel.guidebook.goo.page2.text": "一些与泥浆接触的物品会被鞣制.\\\n例如,[#](bb00bb)腐肉[#]()会变成一小块[#](bb00bb)皮革[#]().",
-  "book.pastel.guidebook.goo.page3.text": "其他物品则会固化.\\\n为什么小麦会变成线呢?怎么会事呢? 莫非是米线?（笑）",
-  "book.pastel.guidebook.goo.page4.text": "我不小心把一片[四叶草](entry://general/clover)掉进了泥里.\\\n我试图捞起但无济于事,但幸运的是,我发现了一片[翠绿色的贝壳!](item://minecraft:turtle_scute)",
+  "book.pastel.guidebook.humus.page0.text": "泥浆.泥,浆.本身没什么特别好玩的地方.\\\n有用的是泥浆与其他液体的碰撞,例如[#](bb00bb)水[#]()或者[#](bb00bb)熔岩[#]().与泥浆碰撞会分别产出[#](bb00bb)泥土[#]()或者[#](bb00bb)砂土[#]().",
+  "book.pastel.guidebook.humus.page1.text": "*泥浆浴虽然听上去很舒服但还是不要尝试的比较好哦!*",
+  "book.pastel.guidebook.humus.page2.text": "一些与泥浆接触的物品会被鞣制.\\\n例如,[#](bb00bb)腐肉[#]()会变成一小块[#](bb00bb)皮革[#]().",
+  "book.pastel.guidebook.humus.page3.text": "其他物品则会固化.\\\n为什么小麦会变成线呢?怎么会事呢? 莫非是米线?（笑）",
+  "book.pastel.guidebook.humus.page4.text": "我不小心把一片[四叶草](entry://general/clover)掉进了泥里.\\\n我试图捞起但无济于事,但幸运的是,我发现了一片[翠绿色的贝壳!](item://minecraft:turtle_scute)",
 
   "book.pastel.guidebook.multitool.page0.text": "每次出门冒险的时候,我总要带上一大包工具,虽然相比身上大把大把的石头是不值一提.但无论如何,一种结合了镐、斧、锹和锄功能的万能工具对我来说会非常合适.",
   "book.pastel.guidebook.multitool.page1.text": "多功能工具仅仅只是结合多方面的功能,性能上并没有比单项的工具要来得优越,但总比每三秒钟换一个工具要来得好.",

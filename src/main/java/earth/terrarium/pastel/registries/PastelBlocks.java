@@ -118,7 +118,7 @@ import earth.terrarium.pastel.blocks.farming.ExtraTickFarmlandBlock;
 import earth.terrarium.pastel.blocks.farming.TilledShaleClayBlock;
 import earth.terrarium.pastel.blocks.farming.TilledSlushBlock;
 import earth.terrarium.pastel.blocks.fluid.DragonrotFluidBlock;
-import earth.terrarium.pastel.blocks.fluid.GooFluidBlock;
+import earth.terrarium.pastel.blocks.fluid.HumusFluidBlock;
 import earth.terrarium.pastel.blocks.fluid.LiquidCrystalFluidBlock;
 import earth.terrarium.pastel.blocks.fluid.MidnightSolutionFluidBlock;
 import earth.terrarium.pastel.blocks.fusion_shrine.FusionShrineBlock;
@@ -2194,7 +2194,7 @@ public class PastelBlocks {
 	}
 
 	public static final DeferredBlock<Block> LIQUID_CRYSTAL = register(singleton(block("liquid_crystal", () -> new LiquidCrystalFluidBlock(PastelFluids.LIQUID_CRYSTAL.get(), PastelBlocks.BLAZING_CRYSTAL.get().defaultBlockState(), fluid(MapColor.CRIMSON_STEM).lightLevel((state) -> LiquidCrystalFluidBlock.LUMINANCE).replaceable())), PastelTexturedModels.particle(b -> b, "_still")));
-	public static final DeferredBlock<Block> GOO = register(singleton(block("goo", () -> new GooFluidBlock(PastelFluids.GOO.get(), MUD.defaultBlockState(), fluid(MapColor.TERRACOTTA_BROWN).replaceable())), PastelTexturedModels.particle(b -> b, "_still")));
+	public static final DeferredBlock<Block> HUMUS = register(singleton(block("humus", () -> new HumusFluidBlock(PastelFluids.HUMUS.get(), MUD.defaultBlockState(), fluid(MapColor.TERRACOTTA_BROWN).replaceable())), PastelTexturedModels.particle(b -> b, "_still")));
 	public static final DeferredBlock<Block> MIDNIGHT_SOLUTION = register(singleton(block("midnight_solution", () -> new MidnightSolutionFluidBlock(PastelFluids.MIDNIGHT_SOLUTION.get(), PastelBlocks.BLACK_MATERIA.get().defaultBlockState(), fluid(MapColor.WARPED_STEM).replaceable())), PastelTexturedModels.particle(b -> b, "_still")));
 	public static final DeferredBlock<Block> DRAGONROT = register(singleton(block("dragonrot", () -> new DragonrotFluidBlock(PastelFluids.DRAGONROT.get(), BLACKSTONE.defaultBlockState(), fluid(MapColor.ICE).lightLevel((state) -> 15).replaceable())), PastelTexturedModels.particle(b -> b, "_still")));
 

@@ -38,8 +38,8 @@
     },
     {
       "type": "pastel:potion_workshop_crafting",
-      "title": "block.pastel.goo",
-      "recipe_id": "pastel:potion_workshop_crafting/goo_bucket"
+      "title": "block.pastel.humus",
+      "recipe_id": "pastel:potion_workshop_crafting/humus_bucket"
     },
     {
       "type": "pastel:potion_workshop_crafting",

@@ -960,7 +960,7 @@ public class PastelItemGroups {
 				entries.accept(PastelItems.MOONSTONE_CORE.get());
 
 				entries.accept(PastelItems.LIQUID_CRYSTAL_BUCKET.get());
-				entries.accept(PastelItems.GOO_BUCKET.get());
+				entries.accept(PastelItems.HUMUS_BUCKET.get());
 				entries.accept(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get());
 				entries.accept(PastelItems.DRAGONROT_BUCKET.get());
 

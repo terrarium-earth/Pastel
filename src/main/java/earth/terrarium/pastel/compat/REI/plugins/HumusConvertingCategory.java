@@ -10,21 +10,21 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
 
 @OnlyIn(Dist.CLIENT)
-public class GooConvertingCategory extends FluidConvertingCategory<GooConvertingDisplay> {
+public class HumusConvertingCategory extends FluidConvertingCategory<HumusConvertingDisplay> {
 	
 	@Override
-	public CategoryIdentifier<? extends GooConvertingDisplay> getCategoryIdentifier() {
-		return PastelPlugins.GOO_CONVERTING;
+	public CategoryIdentifier<? extends HumusConvertingDisplay> getCategoryIdentifier() {
+		return PastelPlugins.HUMUS_CONVERTING;
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(PastelItems.GOO_BUCKET.get());
+		return EntryStacks.of(PastelItems.HUMUS_BUCKET.get());
 	}
 	
 	@Override
 	public Component getTitle() {
-		return Component.translatable("container.pastel.rei.goo_converting.title");
+		return Component.translatable("container.pastel.rei.humus_converting.title");
 	}
 	
 }

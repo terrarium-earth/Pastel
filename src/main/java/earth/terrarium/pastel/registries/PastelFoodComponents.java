@@ -20,7 +20,7 @@ public class PastelFoodComponents {
 	private static final float SAT_POOR = 0.2F;
 	private static final float SAT_LOW = 0.6F;
 	private static final float SAT_NORMAL = 1.2F;
-	private static final float SAT_GOOD = 1.6F;
+	private static final float SAT_HUMUSD = 1.6F;
 	private static final float SAT_SUPERNATURAL = 2.4F;
 	
 	public static final FoodProperties MOONSTRUCK_NECTAR = new FoodProperties.Builder()
@@ -107,7 +107,7 @@ public class PastelFoodComponents {
 			.build();
 	
 	public static final FoodProperties BODACIOUS_BERRY_BAR = new FoodProperties.Builder()
-			.nutrition(8).saturationModifier(SAT_GOOD)
+			.nutrition(8).saturationModifier(SAT_HUMUSD)
 			.effect(new MobEffectInstance(MobEffects.REGENERATION, 200, 2), 1.0F)
 			.effect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200, 4), 1.0F)
 			.build();
@@ -263,7 +263,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties DEMON_TRIFLE = new FoodProperties.Builder()
-			.nutrition(10).saturationModifier(SAT_GOOD)
+			.nutrition(10).saturationModifier(SAT_HUMUSD)
 			.effect(new MobEffectInstance(PastelStatusEffects.FRENZY, 1200), 2.0F / 3.0F)
 			.build();
 
@@ -319,7 +319,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties CHAUVE_SOURIS_AU_VIN = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(20).saturationModifier(SAT_GOOD)).setEatSeconds(TIME_FEAST)
+			.nutrition(20).saturationModifier(SAT_HUMUSD)).setEatSeconds(TIME_FEAST)
 			.effect(new MobEffectInstance(PastelStatusEffects.EFFECT_PROLONGING, 6000, 0), 1.0F)
 			.build();
 
@@ -337,11 +337,11 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties FADED_KOI = new FoodProperties.Builder()
-			.nutrition(2).saturationModifier(SAT_GOOD)
+			.nutrition(2).saturationModifier(SAT_HUMUSD)
 			.build();
 
 	public static final FoodProperties FISHCAKE = new FoodProperties.Builder()
-			.nutrition(8).saturationModifier(SAT_GOOD)
+			.nutrition(8).saturationModifier(SAT_HUMUSD)
 			.effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1000, 1), 1)
 			.effect(new MobEffectInstance(PastelStatusEffects.SWIFTNESS, 1000, 1), 1.0F)
 			.build();
@@ -351,7 +351,7 @@ public class PastelFoodComponents {
 			.build();
 	
 	public static final FoodProperties COOKED_LIZARD_MEAT = new FoodProperties.Builder()
-			.nutrition(4).saturationModifier(SAT_GOOD)
+			.nutrition(4).saturationModifier(SAT_HUMUSD)
 			.build();
 
 	public static final FoodProperties GOLDEN_BRISTLE_TEA = new FoodProperties.Builder()
@@ -368,13 +368,13 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties HARE_ROAST = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(12).saturationModifier(SAT_GOOD)).setEatSeconds(TIME_HEARTY)
+			.nutrition(12).saturationModifier(SAT_HUMUSD)).setEatSeconds(TIME_HEARTY)
 			.effect(new MobEffectInstance(PastelStatusEffects.NOURISHING, 1200, 1), 1.0F)
 			.effect(new MobEffectInstance(MobEffects.REGENERATION, 1200), 1)
 			.build();
 
 	public static final FoodProperties JUNKET = new FoodProperties.Builder()
-			.nutrition(6).saturationModifier(SAT_GOOD)
+			.nutrition(6).saturationModifier(SAT_HUMUSD)
 			.effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 800, 2), 1)
 			.effect(new MobEffectInstance(PastelStatusEffects.SWIFTNESS, 800, 2), 1.0F)
 			.build();
@@ -384,7 +384,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties MEATLOAF = new FoodProperties.Builder()
-			.nutrition(20).saturationModifier(SAT_GOOD)
+			.nutrition(20).saturationModifier(SAT_HUMUSD)
 			.effect(new MobEffectInstance(PastelStatusEffects.MAGIC_ANNULATION, 6000, 2), 1.0F)
 			.effect(new MobEffectInstance(PastelStatusEffects.TOUGHNESS, 6000, 1), 1.0F)
 			.effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 6000, 0), 1.0F)
@@ -392,7 +392,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties MEATLOAF_SANDWICH = new FoodProperties.Builder()
-			.nutrition(9).saturationModifier(SAT_GOOD)
+			.nutrition(9).saturationModifier(SAT_HUMUSD)
 			.effect(new MobEffectInstance(PastelStatusEffects.MAGIC_ANNULATION, 600, 2), 1.0F)
 			.effect(new MobEffectInstance(PastelStatusEffects.TOUGHNESS, 600, 1), 1.0F)
 			.effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 0), 1.0F)
@@ -409,7 +409,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties PEACHES_FLAMBE = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(14).saturationModifier(SAT_GOOD)).setEatSeconds(TIME_HEARTY)
+			.nutrition(14).saturationModifier(SAT_HUMUSD)).setEatSeconds(TIME_HEARTY)
 			.effect(new MobEffectInstance(PastelStatusEffects.TOUGHNESS, 3000, 5), 1.0F)
 			.build();
 
@@ -476,14 +476,14 @@ public class PastelFoodComponents {
 			.build();
 	
 	public static final FoodProperties PASTICHE = new FoodProperties.Builder()
-			.nutrition(16).saturationModifier(SAT_GOOD)
+			.nutrition(16).saturationModifier(SAT_HUMUSD)
 			.effect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 3300, 1), 1.0F)
 			.effect(new MobEffectInstance(PastelStatusEffects.NOURISHING, 3300, 1), 1.0F)
 			.effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1800, 0), 1.0F)
 			.build();
 	
 	public static final FoodProperties VITTORIAS_ROAST = new FoodProperties.Builder()
-			.nutrition(16).saturationModifier(SAT_GOOD)
+			.nutrition(16).saturationModifier(SAT_HUMUSD)
 			.effect(new MobEffectInstance(PastelStatusEffects.NOURISHING, 3600, 1), 1.0F)
 			.effect(new MobEffectInstance(PastelStatusEffects.TOUGHNESS, 1800, 1), 1.0F)
 			.build();

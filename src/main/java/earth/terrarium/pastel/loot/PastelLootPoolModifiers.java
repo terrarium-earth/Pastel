@@ -261,7 +261,7 @@ public class PastelLootPoolModifiers {
                 for (LootPool pool : table.pools) {
 				    addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build())));
 				}
-			} else if (key.equals(PastelLootTables.GOO_FISHING)) {
+			} else if (key.equals(PastelLootTables.HUMUS_FISHING)) {
                 for (LootPool pool : table.pools) {
 				    addEntry(pool, NestedLootTable.lootTableReference(GoFishCompat.DEFAULT_CRATES_LOOT_TABLE_ID).setWeight(5).setQuality(2).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, new EntityPredicate.Builder().subPredicate(FishingHookPredicate.inOpenWater(true)).build())));
 				}

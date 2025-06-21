@@ -17,7 +17,7 @@ import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
-import earth.terrarium.pastel.recipe.fluid_converting.GooConvertingRecipe;
+import earth.terrarium.pastel.recipe.fluid_converting.HumusConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.LiquidCrystalConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.MidnightSolutionConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.dynamic.MeatToRottenFleshRecipe;
@@ -87,7 +87,7 @@ public class PastelRecipeSerializers {
 	public static final RecipeSerializer<PotionWorkshopReactingRecipe> POTION_WORKSHOP_REACTING_SERIALIZER = register("potion_workshop_reacting", new PotionWorkshopReactingRecipe.Serializer());
 	
 	// Fluid converting
-	public static final FluidConvertingRecipe.Serializer<GooConvertingRecipe> GOO_CONVERTING_SERIALIZER = register("goo_converting", new FluidConvertingRecipe.Serializer<>(GooConvertingRecipe::new));
+	public static final FluidConvertingRecipe.Serializer<HumusConvertingRecipe> HUMUS_CONVERTING_SERIALIZER = register("humus_converting", new FluidConvertingRecipe.Serializer<>(HumusConvertingRecipe::new));
 	public static final FluidConvertingRecipe.Serializer<LiquidCrystalConvertingRecipe> LIQUID_CRYSTAL_CONVERTING_SERIALIZER = register("liquid_crystal_converting", new FluidConvertingRecipe.Serializer<>(LiquidCrystalConvertingRecipe::new));
 	public static final FluidConvertingRecipe.Serializer<MidnightSolutionConvertingRecipe> MIDNIGHT_SOLUTION_CONVERTING_SERIALIZER = register("midnight_solution_converting", new FluidConvertingRecipe.Serializer<>(MidnightSolutionConvertingRecipe::new));
 	public static final FluidConvertingRecipe.Serializer<DragonrotConvertingRecipe> DRAGONROT_CONVERTING_SERIALIZER = register("dragonrot_converting", new FluidConvertingRecipe.Serializer<>(DragonrotConvertingRecipe::new));

@@ -1,0 +1,55 @@
+{
+  "name": "block.pastel.humus",
+  "condition": {
+    "type": "modonomicon:advancement",
+    "advancement_id": "pastel:unlocks/blocks/humus"
+  },
+  "icon": {
+    "item": "pastel:humus_bucket"
+  },
+  "category": "pastel:magical_blocks",
+  "hide_while_locked": true,
+  "parents": [],
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "x": 9,
+  "y": 0,
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "title": "block.pastel.humus",
+      "item": {
+        "item": "pastel:humus_bucket"
+      },
+      "text": "book.pastel.guidebook.humus.page0.text"
+    },
+    {
+      "type": "pastel:pedestal_crafting",
+      "text": "book.pastel.guidebook.humus.page1.text",
+      "title": "container.pastel.rei.pedestal_recipe",
+      "recipe_id": "pastel:pedestal/tier1/humus_bucket"
+    },
+    {
+      "type": "pastel:humus_converting",
+      "title": "book.pastel.guidebook.item_conversion",
+      "recipe_id": "pastel:humus_converting/rabbit_hide",
+      "text": "book.pastel.guidebook.humus.page2.text"
+    },
+    {
+      "type": "pastel:humus_converting",
+      "title": "book.pastel.guidebook.item_conversion",
+      "recipe_id": "pastel:humus_converting/string",
+      "text": "book.pastel.guidebook.humus.page3.text"
+    },
+    {
+      "type": "pastel:humus_converting",
+      "title": "book.pastel.guidebook.item_conversion",
+      "recipe_id": "pastel:humus_converting/turtle_scute",
+      "condition": {
+        "type": "modonomicon:advancement",
+        "advancement_id": "pastel:collect_four_leaf_clover"
+      },
+      "text": "book.pastel.guidebook.humus.page4.text"
+    }
+  ]
+}

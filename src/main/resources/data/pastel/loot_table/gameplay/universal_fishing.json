@@ -24,7 +24,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "pastel:gameplay/fishing/goo/fishing",
+          "value": "pastel:gameplay/fishing/humus/fishing",
           "conditions": [
             {
               "condition": "minecraft:entity_properties",
@@ -32,7 +32,7 @@
               "predicate": {
                 "location": {
                   "fluid": {
-                    "fluids": "#pastel:goo"
+                    "fluids": "#pastel:humus"
                   }
                 }
               }

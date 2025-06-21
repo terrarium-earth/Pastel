@@ -57,7 +57,7 @@ public class DragonrotFluidBlock extends PastelFluidBlock {
 			return PastelBlocks.SLUSH.get().defaultBlockState();
 		} else if (otherState.is(FluidTags.LAVA)) {
 			return Blocks.BLACKSTONE.defaultBlockState();
-		} else if (otherState.is(PastelFluidTags.GOO)) {
+		} else if (otherState.is(PastelFluidTags.HUMUS)) {
 			return Blocks.COARSE_DIRT.defaultBlockState();
 		} else if (otherState.is(PastelFluidTags.LIQUID_CRYSTAL)) {
 			return PastelBlocks.FLAYED_EARTH.get().defaultBlockState();

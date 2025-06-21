@@ -22,7 +22,7 @@ public class PastelEmiRecipeCategories {
 	public static final EmiRecipeCategory POTION_WORKSHOP_CRAFTING = new PastelCategory(PastelCommon.locate("potion_workshop_crafting"), EmiStack.of(PastelBlocks.POTION_WORKSHOP.get()));
 	public static final EmiRecipeCategory POTION_WORKSHOP_REACTING = new PastelCategory(PastelCommon.locate("potion_workshop_reacting"), EmiStack.of(PastelBlocks.POTION_WORKSHOP.get()));
 	public static final EmiRecipeCategory SPIRIT_INSTILLER = new PastelCategory(PastelCommon.locate("spirit_instiller"), EmiStack.of(PastelBlocks.SPIRIT_INSTILLER.get()), PastelBlocks.SPIRIT_INSTILLER.get().getDescriptionId());
-	public static final EmiRecipeCategory GOO_CONVERTING = new PastelCategory(PastelCommon.locate("goo_converting"), EmiStack.of(PastelItems.GOO_BUCKET.get()));
+	public static final EmiRecipeCategory HUMUS_CONVERTING = new PastelCategory(PastelCommon.locate("humus_converting"), EmiStack.of(PastelItems.HUMUS_BUCKET.get()));
 	public static final EmiRecipeCategory LIQUID_CRYSTAL_CONVERTING = new PastelCategory(PastelCommon.locate("liquid_crystal_converting"), EmiStack.of(PastelItems.LIQUID_CRYSTAL_BUCKET.get()));
 	public static final EmiRecipeCategory MIDNIGHT_SOLUTION_CONVERTING = new PastelCategory(PastelCommon.locate("midnight_solution_converting"), EmiStack.of(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get()));
 	public static final EmiRecipeCategory DRAGONROT_CONVERTING = new PastelCategory(PastelCommon.locate("dragonrot_converting"), EmiStack.of(PastelItems.DRAGONROT_BUCKET.get()), "container.pastel.rei.dragonrot_converting.title");

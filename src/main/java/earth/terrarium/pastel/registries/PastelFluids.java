@@ -5,7 +5,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.color.ItemColors;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.blocks.fluid.DragonrotFluid;
-import earth.terrarium.pastel.blocks.fluid.GooFluid;
+import earth.terrarium.pastel.blocks.fluid.HumusFluid;
 import earth.terrarium.pastel.blocks.fluid.LiquidCrystalFluid;
 import earth.terrarium.pastel.blocks.fluid.MidnightSolutionFluid;
 import earth.terrarium.pastel.blocks.fluid.PastelFluid;
@@ -46,13 +46,13 @@ public class PastelFluids {
 	public static final Vector3f LIQUID_CRYSTAL_COLOR_VEC = ColorHelper.colorIntToVec(LIQUID_CRYSTAL_TINT);
 	public static final float LIQUID_CRYSTAL_OVERLAY_ALPHA = 0.6F;
 	
-	// GOO
-	public static final DeferredHolder<FluidType, FluidType> GOO_TYPE = TYPE_REGISTER.register("goo", () -> new FluidType(FluidType.Properties.create()));
-	public static final DeferredHolder<Fluid, PastelFluid> GOO = FLUID_REGISTER.register("goo", GooFluid.StillGoo::new);
-	public static final DeferredHolder<Fluid, PastelFluid> FLOWING_GOO = FLUID_REGISTER.register("flowing_goo", GooFluid.FlowingGoo::new);
-	public static final int GOO_TINT = 0xFF4e2e0a;
-	public static final Vector3f GOO_COLOR_VEC = ColorHelper.colorIntToVec(GOO_TINT);
-	public static final float GOO_OVERLAY_ALPHA = 0.995F;
+	// HUMUS
+	public static final DeferredHolder<FluidType, FluidType> HUMUS_TYPE = TYPE_REGISTER.register("humus", () -> new FluidType(FluidType.Properties.create()));
+	public static final DeferredHolder<Fluid, PastelFluid> HUMUS = FLUID_REGISTER.register("humus", HumusFluid.StillHumus::new);
+	public static final DeferredHolder<Fluid, PastelFluid> FLOWING_HUMUS = FLUID_REGISTER.register("flowing_humus", HumusFluid.FlowingHumus::new);
+	public static final int HUMUS_TINT = 0xFF4e2e0a;
+	public static final Vector3f HUMUS_COLOR_VEC = ColorHelper.colorIntToVec(HUMUS_TINT);
+	public static final float HUMUS_OVERLAY_ALPHA = 0.995F;
 	
 	// MIDNIGHT SOLUTION
 	public static final DeferredHolder<FluidType, FluidType> MIDNIGHT_SOLUTION_TYPE = TYPE_REGISTER.register("midnight_solution", () -> new FluidType(FluidType.Properties.create()));
@@ -73,7 +73,7 @@ public class PastelFluids {
 	public static void register(IEventBus bus) {
 		// TODO: unfuck
 		//registerFluid("liquid_crystal", LIQUID_CRYSTAL.get(), FLOWING_LIQUID_CRYSTAL.get(), InkColors.LIGHT_GRAY);
-		//registerFluid("goo", GOO, FLOWING_GOO, InkColors.BROWN);
+		//registerFluid("humus", HUMUS, FLOWING_HUMUS, InkColors.BROWN);
 		//registerFluid("midnight_solution", MIDNIGHT_SOLUTION, FLOWING_MIDNIGHT_SOLUTION, InkColors.GRAY);
 		//registerFluid("dragonrot", DRAGONROT, FLOWING_DRAGONROT, InkColors.GRAY);
 
@@ -91,7 +91,7 @@ public class PastelFluids {
 	public static void clientSetup(FMLClientSetupEvent event) {
 		var fluids = List.of(
 			LIQUID_CRYSTAL.get(), FLOWING_LIQUID_CRYSTAL.get(),
-			GOO.get(), FLOWING_GOO.get(),
+			HUMUS.get(), FLOWING_HUMUS.get(),
 			MIDNIGHT_SOLUTION.get(), FLOWING_MIDNIGHT_SOLUTION.get(),
 			DRAGONROT.get(), FLOWING_DRAGONROT.get()
 		);
@@ -103,7 +103,7 @@ public class PastelFluids {
 
 	public static void registerClient(RegisterClientExtensionsEvent event) {
 		setupFluidRendering(event, LIQUID_CRYSTAL_TYPE.get(), "liquid_crystal", LIQUID_CRYSTAL_TINT, LIQUID_CRYSTAL_OVERLAY_ALPHA);
-		setupFluidRendering(event, GOO_TYPE.get(), "goo", GOO_TINT, GOO_OVERLAY_ALPHA);
+		setupFluidRendering(event, HUMUS_TYPE.get(), "humus", HUMUS_TINT, HUMUS_OVERLAY_ALPHA);
 		setupFluidRendering(event, MIDNIGHT_SOLUTION_TYPE.get(), "midnight_solution", MIDNIGHT_SOLUTION_TINT, MIDNIGHT_SOLUTION_OVERLAY_ALPHA);
 		setupFluidRendering(event, DRAGONROT_TYPE.get(), "dragonrot", DRAGONROT_TINT, DRAGONROT_OVERLAY_ALPHA);
 	}

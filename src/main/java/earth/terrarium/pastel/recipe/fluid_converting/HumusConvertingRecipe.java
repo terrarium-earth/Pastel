@@ -16,12 +16,12 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class GooConvertingRecipe extends FluidConvertingRecipe {
+public class HumusConvertingRecipe extends FluidConvertingRecipe {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/goo");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/humus");
 	private static final Set<Item> outputItems = new HashSet<>();
 	
-	public GooConvertingRecipe(String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier, @NotNull Ingredient inputIngredient, ItemStack outputItemStack) {
+	public HumusConvertingRecipe(String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier, @NotNull Ingredient inputIngredient, ItemStack outputItemStack) {
 		super(group, secret, requiredAdvancementIdentifier, inputIngredient, outputItemStack);
 		outputItems.add(outputItemStack.getItem());
 	}
@@ -32,17 +32,17 @@ public class GooConvertingRecipe extends FluidConvertingRecipe {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(PastelItems.GOO_BUCKET.get());
+		return new ItemStack(PastelItems.HUMUS_BUCKET.get());
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return PastelRecipeSerializers.GOO_CONVERTING_SERIALIZER;
+		return PastelRecipeSerializers.HUMUS_CONVERTING_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return PastelRecipeTypes.GOO_CONVERTING;
+		return PastelRecipeTypes.HUMUS_CONVERTING;
 	}
 	
 	@Override
@@ -52,7 +52,7 @@ public class GooConvertingRecipe extends FluidConvertingRecipe {
 	
 	@Override
 	public String getRecipeTypeShortID() {
-		return "goo_converting";
+		return "humus_converting";
 	}
 	
 }

@@ -14,49 +14,49 @@ import net.minecraft.core.particles.SimpleParticleType;
 @OnlyIn(Dist.CLIENT)
 public class PastelBlockLeakParticles {
 
-	public static class LandingGooFactory implements ParticleProvider<SimpleParticleType> {
+	public static class LandingHumusFactory implements ParticleProvider<SimpleParticleType> {
 		protected final SpriteSet spriteProvider;
 		
-		public LandingGooFactory(SpriteSet spriteProvider) {
+		public LandingHumusFactory(SpriteSet spriteProvider) {
 			this.spriteProvider = spriteProvider;
 		}
 		
 		@Override
 		public Particle createParticle(SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
-			DripParticle blockLeakParticle = new DripParticle.DripLandParticle(clientWorld, d, e, f, PastelFluids.GOO.get());
-			blockLeakParticle.setColor(PastelFluids.GOO_COLOR_VEC.x(), PastelFluids.GOO_COLOR_VEC.y(), PastelFluids.GOO_COLOR_VEC.z());
+			DripParticle blockLeakParticle = new DripParticle.DripLandParticle(clientWorld, d, e, f, PastelFluids.HUMUS.get());
+			blockLeakParticle.setColor(PastelFluids.HUMUS_COLOR_VEC.x(), PastelFluids.HUMUS_COLOR_VEC.y(), PastelFluids.HUMUS_COLOR_VEC.z());
 			blockLeakParticle.pickSprite(this.spriteProvider);
 			return blockLeakParticle;
 		}
 	}
 	
-	public static class FallingGooFactory implements ParticleProvider<SimpleParticleType> {
+	public static class FallingHumusFactory implements ParticleProvider<SimpleParticleType> {
 		protected final SpriteSet spriteProvider;
 		
-		public FallingGooFactory(SpriteSet spriteProvider) {
+		public FallingHumusFactory(SpriteSet spriteProvider) {
 			this.spriteProvider = spriteProvider;
 		}
 		
 		@Override
 		public Particle createParticle(SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
-			DripParticle blockLeakParticle = new DripParticle.FallAndLandParticle(clientWorld, d, e, f, PastelFluids.GOO.get(), PastelParticleTypes.LANDING_GOO);
-			blockLeakParticle.setColor(PastelFluids.GOO_COLOR_VEC.x(), PastelFluids.GOO_COLOR_VEC.y(), PastelFluids.GOO_COLOR_VEC.z());
+			DripParticle blockLeakParticle = new DripParticle.FallAndLandParticle(clientWorld, d, e, f, PastelFluids.HUMUS.get(), PastelParticleTypes.LANDING_HUMUS);
+			blockLeakParticle.setColor(PastelFluids.HUMUS_COLOR_VEC.x(), PastelFluids.HUMUS_COLOR_VEC.y(), PastelFluids.HUMUS_COLOR_VEC.z());
 			blockLeakParticle.pickSprite(this.spriteProvider);
 			return blockLeakParticle;
 		}
 	}
 	
-	public static class DrippingGooFactory implements ParticleProvider<SimpleParticleType> {
+	public static class DrippingHumusFactory implements ParticleProvider<SimpleParticleType> {
 		protected final SpriteSet spriteProvider;
 		
-		public DrippingGooFactory(SpriteSet spriteProvider) {
+		public DrippingHumusFactory(SpriteSet spriteProvider) {
 			this.spriteProvider = spriteProvider;
 		}
 		
 		@Override
 		public Particle createParticle(SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
-			DripParticle blockLeakParticle = new DripParticle.DripHangParticle(clientWorld, d, e, f, PastelFluids.GOO.get(), PastelParticleTypes.FALLING_GOO);
-			blockLeakParticle.setColor(PastelFluids.GOO_COLOR_VEC.x(), PastelFluids.GOO_COLOR_VEC.y(), PastelFluids.GOO_COLOR_VEC.z());
+			DripParticle blockLeakParticle = new DripParticle.DripHangParticle(clientWorld, d, e, f, PastelFluids.HUMUS.get(), PastelParticleTypes.FALLING_HUMUS);
+			blockLeakParticle.setColor(PastelFluids.HUMUS_COLOR_VEC.x(), PastelFluids.HUMUS_COLOR_VEC.y(), PastelFluids.HUMUS_COLOR_VEC.z());
 			blockLeakParticle.pickSprite(this.spriteProvider);
 			return blockLeakParticle;
 		}

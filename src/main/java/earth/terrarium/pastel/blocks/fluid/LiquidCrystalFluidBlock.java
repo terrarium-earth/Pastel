@@ -60,7 +60,7 @@ public class LiquidCrystalFluidBlock extends PastelFluidBlock {
 		}
 		else if (otherState.is(FluidTags.LAVA)) {
 			return state.isSource() ? PastelBlocks.BLAZING_CRYSTAL.get().defaultBlockState() : Blocks.COBBLED_DEEPSLATE.defaultBlockState();
-		} else if (otherState.is(PastelFluidTags.GOO)) {
+		} else if (otherState.is(PastelFluidTags.HUMUS)) {
 			return Blocks.CLAY.defaultBlockState();
 		}
 		return null;

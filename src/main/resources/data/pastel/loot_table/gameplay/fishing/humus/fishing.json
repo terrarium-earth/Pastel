@@ -6,13 +6,13 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "value": "pastel:gameplay/fishing/goo/junk",
+          "value": "pastel:gameplay/fishing/humus/junk",
           "weight": 10,
           "quality": -2
         },
         {
           "type": "minecraft:loot_table",
-          "value": "pastel:gameplay/fishing/goo/treasure",
+          "value": "pastel:gameplay/fishing/humus/treasure",
           "weight": 5,
           "quality": 2,
           "conditions": [
@@ -29,7 +29,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "pastel:gameplay/fishing/goo/fish",
+          "value": "pastel:gameplay/fishing/humus/fish",
           "weight": 80,
           "quality": -1
         }
