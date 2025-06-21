@@ -125,7 +125,7 @@ cloche {
 
                 modCompileOnly(module(group = "mcp.mobius.waila", name = "wthit-api", version = "neo-12.4.1"))
 
-                modCompileOnly("dev.emi:emi-neoforge:1.1.19+1.21.1")
+				modImplementation("dev.emi:emi-neoforge:1.1.19+1.21.1")
 
                 modCompileOnly("maven.modrinth:colorful-hearts:10.3.8") { isTransitive = false }
                 modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge") { isTransitive = false }

@@ -1,0 +1,31 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "xycraft_machines"
+    }
+  ],
+  "type": "xycraft_machines:extractor",
+  "adjacent": [],
+  "catalyst": {
+    "block": "xycraft_machines:water_block",
+    "predicate_type": "xycraft_core:block_rule"
+  },
+  "output": {
+    "Count": 1,
+    "id": "pastel:citrine_shard"
+  },
+  "target": {
+    "block": "pastel:budding_citrine",
+    "predicate_type": "xycraft_core:block_rule"
+  },
+  "ticks": 300,
+  "valid_directions": [
+    "down",
+    "up",
+    "north",
+    "south",
+    "west",
+    "east"
+  ]
+}

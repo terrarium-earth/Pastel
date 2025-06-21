@@ -1,5 +1,7 @@
 package earth.terrarium.pastel.compat.emi;
 
+import dev.emi.emi.api.EmiEntrypoint;
+import dev.emi.emi.api.widget.Bounds;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
@@ -63,8 +65,8 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@EmiEntrypoint
 public class PastelEmiPlugin implements EmiPlugin {
-
 	@Override
 	public void register(EmiRegistry registry) {
 		registerCategories(registry);
