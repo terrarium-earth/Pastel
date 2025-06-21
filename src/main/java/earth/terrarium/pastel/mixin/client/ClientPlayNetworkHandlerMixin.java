@@ -20,7 +20,7 @@ public class ClientPlayNetworkHandlerMixin {
 			effect.getCures().add(PastelMobEffects.Cures.INCURABLE);
 		}
 		else {
-			effect.getCures().add(PastelMobEffects.Cures.INCURABLE);
+			effect.getCures().remove(PastelMobEffects.Cures.INCURABLE);
 		}
 	}
 	
