@@ -180,35 +180,45 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		return false;
 	}
 	
-	public static @Nullable RecipeHolder<? extends PotionWorkshopRecipe> calculateRecipe(Level world, @NotNull PotionWorkshopBlockEntity potionWorkshopBlockEntity) {
-		if (!potionWorkshopBlockEntity.inventoryChanged) {
-			return potionWorkshopBlockEntity.currentRecipe;
+	public static @Nullable RecipeHolder<? extends PotionWorkshopRecipe> calculateRecipe(Level world, @NotNull PotionWorkshopBlockEntity workshop) {
+		if (!workshop.inventoryChanged) {
+			if (workshop.currentRecipe != null) {
+				var slot = workshop.inventory.getStackInSlot(BASE_INPUT_SLOT_ID);
+				if (workshop.currentRecipe.value() instanceof PotionWorkshopCraftingRecipe craftingRecipe && !craftingRecipe.getBaseIngredient().test(slot)
+				|| workshop.currentRecipe.value() instanceof PotionWorkshopBrewingRecipe && slot.isEmpty()) {
+					workshop.currentRecipe = null;
+					workshop.brewTime = 0;
+					workshop.setChanged();
+				}
+			}
+
+			return workshop.currentRecipe;
 		}
 		
 		RecipeHolder<? extends PotionWorkshopRecipe> newRecipe = null;
-		var current = potionWorkshopBlockEntity.currentRecipe == null ? null : potionWorkshopBlockEntity.currentRecipe.value();
-		if (current instanceof PotionWorkshopBrewingRecipe potionWorkshopBrewingRecipe && current.matches(potionWorkshopBlockEntity.getRecipeInput(), world)) {
+		var current = workshop.currentRecipe == null ? null : workshop.currentRecipe.value();
+		if (current instanceof PotionWorkshopBrewingRecipe potionWorkshopBrewingRecipe && current.matches(workshop.getRecipeInput(), world)) {
 			// we check for reagents here instead of the recipe itself because of performance
-			if (isBrewingRecipeApplicable(potionWorkshopBrewingRecipe, potionWorkshopBlockEntity.inventory.getStackInSlot(BASE_INPUT_SLOT_ID), potionWorkshopBlockEntity)) {
-				return potionWorkshopBlockEntity.currentRecipe;
+			if (isBrewingRecipeApplicable(potionWorkshopBrewingRecipe, workshop.inventory.getStackInSlot(BASE_INPUT_SLOT_ID), workshop)) {
+				return workshop.currentRecipe;
 			}
-		} else if (current instanceof PotionWorkshopCraftingRecipe && current.matches(potionWorkshopBlockEntity.getRecipeInput(), world)) {
-			newRecipe = potionWorkshopBlockEntity.currentRecipe;
+		} else if (current instanceof PotionWorkshopCraftingRecipe && current.matches(workshop.getRecipeInput(), world)) {
+			newRecipe = workshop.currentRecipe;
 		} else {
 			// current recipe does not match last recipe
 			// => search valid recipe
-			var newPotionWorkshopBrewingRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.POTION_WORKSHOP_BREWING, potionWorkshopBlockEntity.getRecipeInput(), world).orElse(null);
+			var newPotionWorkshopBrewingRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.POTION_WORKSHOP_BREWING, workshop.getRecipeInput(), world).orElse(null);
 			if (newPotionWorkshopBrewingRecipe != null) {
-				if (newPotionWorkshopBrewingRecipe.value().canPlayerCraft(potionWorkshopBlockEntity.getOwnerIfOnline())) {
+				if (newPotionWorkshopBrewingRecipe.value().canPlayerCraft(workshop.getOwnerIfOnline())) {
 					// we check for reagents here instead of the recipe itself for performance reasons
-					if (isBrewingRecipeApplicable(newPotionWorkshopBrewingRecipe.value(), potionWorkshopBlockEntity.inventory.getStackInSlot(BASE_INPUT_SLOT_ID), potionWorkshopBlockEntity)) {
+					if (isBrewingRecipeApplicable(newPotionWorkshopBrewingRecipe.value(), workshop.inventory.getStackInSlot(BASE_INPUT_SLOT_ID), workshop)) {
 						return newPotionWorkshopBrewingRecipe;
 					}
 				}
 			} else {
-				var newPotionWorkshopCraftingRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.POTION_WORKSHOP_CRAFTING, potionWorkshopBlockEntity.getRecipeInput(), world).orElse(null);
+				var newPotionWorkshopCraftingRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.POTION_WORKSHOP_CRAFTING, workshop.getRecipeInput(), world).orElse(null);
 				if (newPotionWorkshopCraftingRecipe != null) {
-					if (newPotionWorkshopCraftingRecipe.value().canPlayerCraft(potionWorkshopBlockEntity.getOwnerIfOnline())) {
+					if (newPotionWorkshopCraftingRecipe.value().canPlayerCraft(workshop.getOwnerIfOnline())) {
 						newRecipe = newPotionWorkshopCraftingRecipe;
 					}
 				}
