@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.registries.events;
+package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.PrioritizedBlockInteraction;

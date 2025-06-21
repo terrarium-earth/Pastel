@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.events.PastelGameEvents;
+import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.helpers.TimeHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

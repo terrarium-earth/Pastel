@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.events.PastelGameEvents;
+import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.EventQueue;
 import earth.terrarium.pastel.events.listeners.ExperienceOrbEventQueue;
 import earth.terrarium.pastel.events.listeners.ItemAndExperienceEventQueue;

@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.events;
+package earth.terrarium.pastel.events.game;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

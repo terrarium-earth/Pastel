@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlockEntity;
 import earth.terrarium.pastel.capabilities.*;
-import earth.terrarium.pastel.events.ExactPositionSource;
+import earth.terrarium.pastel.events.game.ExactPositionSource;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.ColorTransmissionPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;

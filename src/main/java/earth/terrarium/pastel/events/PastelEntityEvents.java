@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.registries.events;
+package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;

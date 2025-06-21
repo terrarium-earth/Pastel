@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.events.PastelGameEvents;
+import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelItems;

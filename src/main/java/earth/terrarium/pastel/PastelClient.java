@@ -20,7 +20,7 @@ import earth.terrarium.pastel.registries.client.PastelArmorRenderers;
 import earth.terrarium.pastel.registries.client.PastelModelLayers;
 import earth.terrarium.pastel.registries.client.PastelModelPredicateProviders;
 import earth.terrarium.pastel.registries.client.PastelTooltipComponents;
-import earth.terrarium.pastel.registries.events.PastelClientEvents;
+import earth.terrarium.pastel.events.PastelClientEvents;
 import earth.terrarium.pastel.render.HudRenderers;
 import earth.terrarium.pastel.render.SkyLerper;
 import earth.terrarium.pastel.render.armor.BedrockCapeRenderer;

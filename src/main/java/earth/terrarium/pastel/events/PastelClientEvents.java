@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.registries.events;
+package earth.terrarium.pastel.events;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

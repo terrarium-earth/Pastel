@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.events;
+package earth.terrarium.pastel.events.game;
 
 import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.*;

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
-import earth.terrarium.pastel.events.PastelGameEvents;
+import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.EventQueue;
 import earth.terrarium.pastel.networking.s2c_payloads.TypedTransmissionPayload;
 import earth.terrarium.pastel.particle.effect.TypedTransmission;

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
-import earth.terrarium.pastel.events.PastelGameEvents;
+import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

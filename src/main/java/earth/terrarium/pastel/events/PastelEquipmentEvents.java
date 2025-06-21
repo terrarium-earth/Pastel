@@ -1,4 +1,4 @@
-package earth.terrarium.pastel.registries.events;
+package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.components.*;
 import earth.terrarium.pastel.helpers.*;

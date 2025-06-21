@@ -20,7 +20,7 @@ import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.registries.events.PastelMiscEvents;
+import earth.terrarium.pastel.events.PastelMiscEvents;
 import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.*;
 import net.neoforged.neoforge.fluids.FluidStack;

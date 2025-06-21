@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.redstone;
 
-import earth.terrarium.pastel.events.PastelGameEvents;
+import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.WirelessRedstoneSignalEventQueue;
 import earth.terrarium.pastel.helpers.EventHelper;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
