@@ -125,7 +125,7 @@ public class PastelTransmissionLogic {
 				totalAvailableStorage += destinationStorage.getSlotLimit(d);
 			}
 			else {
-				totalAvailableStorage += stack.getMaxStackSize();
+				totalAvailableStorage += stack.getMaxStackSize() - stack.getCount();
 			}
 		}
 
