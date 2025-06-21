@@ -250,31 +250,6 @@ public abstract class LivingEntityMixin {
 			((LivingEntity) (Object) this).addEffect(oilEffect);
 	}
 
-	@ModifyReturnValue(method = "canBeAffected", at = @At("RETURN"))
-	private boolean canHaveStatusEffect(boolean original, @Local(argsOnly = true) MobEffectInstance statusEffectInstance) {
-		var instance = (LivingEntity) (Object) this;
-
-		if (original && this.hasEffect(PastelStatusEffects.IMMUNITY) && statusEffectInstance.getEffect().value().getCategory() == MobEffectCategory.HARMFUL) {
-			if (StatusEffectHelper.isIncurable(statusEffectInstance)) {
-				var immunity = getEffect(PastelStatusEffects.IMMUNITY);
-				var cost = 600 * (statusEffectInstance.getAmplifier() + 1);
-
-				if (immunity.getDuration() >= cost) {
-					((MobEffectInstanceInjector) immunity).setDuration(Math.max(5, immunity.getDuration() - cost));
-					if (!instance.level().isClientSide()) {
-						((ServerLevel) instance.level()).getChunkSource().broadcastAndSend(instance, new ClientboundUpdateMobEffectPacket(instance.getId(), immunity, false));
-					}
-					return false;
-				} else {
-					return true;
-				}
-			}
-
-			return false;
-		}
-		return original;
-	}
-
 	@ModifyVariable(method = "hurtArmor", at = @At("HEAD"), ordinal = 0, argsOnly = true)
 	private float damageArmor(float amount, DamageSource source) {
 		if (source.is(PastelDamageTypeTags.INCREASED_ARMOR_DAMAGE)) {
