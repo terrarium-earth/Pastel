@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.registries;
 
+import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.capabilities.*;
 import net.minecraft.world.level.block.entity.*;
 import net.neoforged.neoforge.capabilities.*;
@@ -47,7 +48,13 @@ public class SpectrumCapabilityHandlers {
                 (stack, v) -> new FluidHandlerItemStackSimple.Consumable(() -> SpectrumDataComponentTypes.MERMAIDS_GEM, stack, 1000),
                 SpectrumItems.MERMAIDS_GEM.get());
 
-        event.registerItem(PastelCapabilities.Miscellaneous.MINING, (stack, v) -> (AreaMiningHandler) stack.getItem(), SpectrumItems.MALACHITE_WORKSTAFF, SpectrumItems.GLASS_CREST_WORKSTAFF);
+        event.registerItem(PastelCapabilities.Miscellaneous.MINING, (stack, v) -> (AreaMiningHandler) stack.getItem(),
+                SpectrumItems.MALACHITE_WORKSTAFF, SpectrumItems.GLASS_CREST_WORKSTAFF);
+
+        event.registerItem(PastelCapabilities.Miscellaneous.SPLIT_DAMAGE, (stack, v) -> (SplitDamageHandler) stack.getItem(),
+                SpectrumItems.GLASS_CREST_ULTRA_GREATSWORD, SpectrumItems.MALACHITE_BIDENT, SpectrumItems.FRACTAL_GLASS_CREST_BIDENT,
+                SpectrumItems.FEROCIOUS_GLASS_CREST_BIDENT, SpectrumItems.DRAGON_TALON, SpectrumItems.DREAMFLAYER,
+                SpectrumItems.KNOTTED_SWORD, SpectrumItems.NECTAR_LANCE);
     }
 
     private static void standardBlockBE(Supplier<? extends BlockEntityType<? extends SidedCapabilityProvider>> type, RegisterCapabilitiesEvent event) {

@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.item.SplitDamageItem;
+import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
@@ -41,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDamageItem, ExtendedItemBarProvider, SlotBackgroundEffectProvider, InkPowered {
+public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDamageHandler, ExtendedItemBarProvider, SlotBackgroundEffectProvider, InkPowered {
 	
 	private static final InkCost GROUND_SLAM_COST = new InkCost(InkColors.WHITE, 25);
 	public static final float MAGIC_DAMAGE_SHARE = 0.25F;

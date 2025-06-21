@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.item.ActivatableItem;
-import earth.terrarium.pastel.api.item.ArmorPiercingItem;
+import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.item.TooltipExtensions;
 import earth.terrarium.pastel.entity.entity.BidentBaseEntity;
@@ -10,7 +10,6 @@ import earth.terrarium.pastel.entity.entity.BidentMirrorImageEntity;
 import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
 import earth.terrarium.pastel.registries.SpectrumEnchantments;
 import earth.terrarium.pastel.registries.SpectrumSoundEvents;
 import earth.terrarium.pastel.registries.SpectrumToolMaterial;
@@ -51,7 +50,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Map;
 
-public class MalachiteBidentItem extends TridentItem implements Preenchanted, TooltipExtensions, ArmorPiercingItem {
+public class MalachiteBidentItem extends TridentItem implements Preenchanted, TooltipExtensions, ArmorPiercingHandler {
 	
 	private final float armorPierce, protPierce;
 	
@@ -211,11 +210,6 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 	}
 	
 	@Override
-	public float getToughnessMultiplier(LivingEntity target, ItemStack stack) {
-		return 1;
-	}
-	
-	@Override
 	public float getProtReduction(LivingEntity target, ItemStack stack) {
 		return protPierce;
 	}
@@ -224,7 +218,6 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 	public DamageComposition getDamageComposition(LivingEntity attacker, LivingEntity target, ItemStack stack, float damage) {
 		var composition = new DamageComposition();
 		var source = composition.getPlayerOrEntity(attacker);
-		SpectrumDamageTypes.wrapWithStackTracking(source, stack);
 		composition.add(source, damage);
 		return composition;
 	}

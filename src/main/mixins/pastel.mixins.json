@@ -21,7 +21,7 @@
     "CropAndStemBlockMixin",
     "CropBlockMixin",
     "CrossbowItemMixin",
-    "DamageSourceMixin",
+    "CombatRulesMixin",
     "EatBerriesGoalMixin",
     "EffectCommandMixin",
     "EnderEyeItemMixin",

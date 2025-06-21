@@ -1,18 +1,20 @@
 package earth.terrarium.pastel.registries.events;
 
-import earth.terrarium.pastel.attachments.*;
+import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
+import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.*;
-import earth.terrarium.pastel.progression.*;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.advancements.*;
 import net.minecraft.core.component.*;
 import net.minecraft.server.level.*;
 import net.minecraft.stats.*;
 import net.minecraft.tags.*;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.*;
 import net.minecraft.world.effect.*;
 import net.minecraft.world.entity.*;
@@ -23,8 +25,8 @@ import net.minecraft.world.item.component.*;
 import net.minecraft.world.phys.*;
 import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.common.*;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.tick.*;
 import top.theillusivec4.curios.api.*;
 
@@ -40,7 +42,66 @@ public class SpectrumEntityEvents {
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::entityDeath);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::finishUsingItem);
         NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::parryingSwordBlock);
+
+        // I guess this is the damage corner now
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, SpectrumEntityEvents::jeopardantBonus); // Process it as late as possible for a small amount of tomfoolery
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, SpectrumEntityEvents::splitDamage);
+        NeoForge.EVENT_BUS.addListener(SpectrumEntityEvents::splitDamage);
+    }
+
+    private static final Set<LivingEntity> RECURSIVE_TARGETS = new HashSet<>();
+    private static void splitDamage(LivingIncomingDamageEvent event) {
+        var target = event.getEntity();
+
+        if (RECURSIVE_TARGETS.contains(target)) {
+            event.getContainer().setPostAttackInvulnerabilityTicks(0); // We only do I-frames after all the partitions have been processed
+            return;
+        }
+
+        var entity = event.getSource().getEntity();
+
+        if (!(entity instanceof LivingEntity attacker) || event.getAmount() <= Mth.EPSILON)
+            return;
+
+        var weapon = attacker.getMainHandItem();
+
+        if (weapon.isEmpty())
+            return;
+
+        var split = weapon.getCapability(PastelCapabilities.Miscellaneous.SPLIT_DAMAGE);
+
+        if (split == null)
+            return;
+
+        RECURSIVE_TARGETS.add(target);
+
+        var composition = split.getDamageComposition(attacker, target, weapon, event.getAmount());
+        for (SplitDamageHandler.Partition partition : composition.get()) {
+            target.hurt(partition.source(), partition.damage());
+        }
+
+        event.setAmount(0);
+        RECURSIVE_TARGETS.remove(target);
+    }
+
+    private static void handlePiercing(LivingIncomingDamageEvent event) {
+        var container = event.getContainer();
+        var entity = event.getSource().getEntity();
+
+        if (!(entity instanceof LivingEntity attacker))
+            return;
+
+        var weapon = attacker.getMainHandItem();
+
+        if (weapon.isEmpty())
+            return;
+
+        if (weapon.getCapability(PastelCapabilities.Miscellaneous.SPLIT_DAMAGE) instanceof ArmorPiercingHandler ap) {
+            var target = event.getEntity();
+
+            container.addModifier(DamageContainer.Reduction.ENCHANTMENTS, (damageContainer, f) -> f * (1 - ap.getProtReduction(target, weapon)));
+            container.addModifier(DamageContainer.Reduction.ARMOR, (damageContainer, f) -> f * (1 - ap.getDefenseMultiplier(target, weapon)));
+        }
     }
 
     private static void jeopardantBonus(LivingDamageEvent.Pre event) {

@@ -7,12 +7,10 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.api.damage_type.StackTracking;
 import earth.terrarium.pastel.api.entity.TouchingWaterAware;
-import earth.terrarium.pastel.api.item.ArmorPiercingItem;
+import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
 import earth.terrarium.pastel.api.item.ArmorWithHitEffect;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
-import earth.terrarium.pastel.api.item.SplitDamageItem;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
@@ -285,80 +283,10 @@ public abstract class LivingEntityMixin {
 
 	@ModifyVariable(method = "hurtArmor", at = @At("HEAD"), ordinal = 0, argsOnly = true)
 	private float spectrum$damageArmor(float amount, DamageSource source) {
-		if (source.is(SpectrumDamageTypeTags.DOES_NOT_DAMAGE_ARMOR)) {
-			return 0;
-		} else if (source.is(SpectrumDamageTypeTags.INCREASED_ARMOR_DAMAGE)) {
+		if (source.is(SpectrumDamageTypeTags.INCREASED_ARMOR_DAMAGE)) {
 			return amount * 10;
 		}
 		return amount;
-	}
-
-	@ModifyArg(method = "getDamageAfterMagicAbsorb", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/damagesource/CombatRules;getDamageAfterMagicAbsorb(FF)F"), index = 1)
-	private float spectrum$modifyAppliedDamage(float protection, @Local(argsOnly = true) DamageSource source) {
-		var pair = getArmorPiercing(source);
-
-		if (pair.isPresent()) {
-			var ap = pair.get().getA();
-			var stack = pair.get().getB();
-
-			var modProt = Math.max(protection, 20F) / 25F;
-			protection = Math.max(modProt - ap.getProtReduction((LivingEntity) (Object) this, stack), 0) * 20F;
-		}
-
-		return protection;
-	}
-
-	@ModifyVariable(method = "getDamageAfterArmorAbsorb", at = @At("STORE"), ordinal = 0, argsOnly = true)
-	private float spectrum$applyArmorToDamage(float amount, DamageSource source) {
-		float defense = getArmorValue();
-		float toughness = getToughness();
-		var modified = false;
-		var pair = getArmorPiercing(source);
-		var entity = (LivingEntity) (Object) this;
-
-		if (pair.isPresent()) {
-			var ap = pair.get().getA();
-			var stack = pair.get().getB();
-
-			defense *= ap.getDefenseMultiplier(entity, stack);
-			toughness *= ap.getToughnessMultiplier(entity, stack);
-			modified = true;
-		}
-
-		if (source.is(SpectrumDamageTypeTags.CALCULATES_DAMAGE_BASED_ON_TOUGHNESS)) {
-			amount = CombatRules.getDamageAfterAbsorb(entity, amount, source, toughness * 1.334F, Float.MAX_VALUE);
-		} else if (source.is(SpectrumDamageTypeTags.PARTLY_IGNORES_PROTECTION)) {
-			amount = CombatRules.getDamageAfterAbsorb(entity, amount, source, defense / 2, toughness);
-		}
-
-		if (modified) {
-			amount = CombatRules.getDamageAfterAbsorb(entity, amount, source, defense, toughness);
-		}
-
-		return amount;
-	}
-
-	@Unique
-	private Optional<Tuple<ArmorPiercingItem, ItemStack>> getArmorPiercing(DamageSource source) {
-		if (!(source instanceof StackTracking stackTracking))
-			return Optional.empty();
-
-		var stackOptional = stackTracking.spectrum$getTrackedStack();
-
-		if (stackOptional.isEmpty())
-			return Optional.empty();
-
-		var stack = stackOptional.get();
-
-		if (!(stack.getItem() instanceof ArmorPiercingItem ap))
-			return Optional.empty();
-
-		return Optional.of(new Tuple<>(ap, stack));
-	}
-
-	@Unique
-	private float getToughness() {
-		return (float) this.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
 	}
 
 	@ModifyExpressionValue(method = "causeFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;calculateFallDamage(FF)I"))
@@ -528,27 +456,7 @@ public abstract class LivingEntityMixin {
 				target.die(source);
 			}
 			cir.setReturnValue(true);
-			return;
-		}
-
-		// If this entity is hit with a SplitDamageItem, damage() gets called recursively for each type of damage dealt
-		if (!SpectrumDamageTypes.recursiveDamageFlag && amount > 0 && source.getDirectEntity() instanceof LivingEntity livingSource) {
-			ItemStack mainHandStack = livingSource.getMainHandItem();
-			if (mainHandStack.getItem() instanceof SplitDamageItem splitDamageItem) {
-				SpectrumDamageTypes.recursiveDamageFlag = true;
-				SplitDamageItem.DamageComposition composition = splitDamageItem.getDamageComposition(livingSource, target, mainHandStack, amount);
-
-				boolean damaged = false;
-				for (Tuple<DamageSource, Float> entry : composition.get()) {
-					int invincibilityFrameStore = target.hurtTime;
-					damaged |= hurt(entry.getA(), entry.getB());
-					target.hurtTime = invincibilityFrameStore;
-				}
-
-				SpectrumDamageTypes.recursiveDamageFlag = false;
-				cir.setReturnValue(damaged);
-			}
-		}
+        }
 	}
 
 	@Inject(method = "hurt", at = @At(value = "INVOKE", target = "net/minecraft/world/entity/LivingEntity.isDeadOrDying ()Z", ordinal = 1))

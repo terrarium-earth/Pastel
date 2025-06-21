@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.ActivatableItem;
-import earth.terrarium.pastel.api.item.SplitDamageItem;
+import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.SpectrumDamageTypes;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DreamflayerItem extends SwordItem implements InkPowered, ActivatableItem, SplitDamageItem, SlotBackgroundEffectProvider {
+public class DreamflayerItem extends SwordItem implements InkPowered, ActivatableItem, SplitDamageHandler, SlotBackgroundEffectProvider {
 	
 	public static final InkColor USED_COLOR = InkColors.RED;
 	public static final long INK_COST_FOR_ACTIVATION = 200L;

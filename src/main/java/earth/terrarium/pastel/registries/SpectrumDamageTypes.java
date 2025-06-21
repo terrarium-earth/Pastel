@@ -1,6 +1,5 @@
 package earth.terrarium.pastel.registries;
 
-import earth.terrarium.pastel.api.damage_type.StackTracking;
 import earth.terrarium.pastel.entity.entity.InkProjectileEntity;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
 import net.minecraft.core.registries.Registries;
@@ -19,8 +18,6 @@ import static earth.terrarium.pastel.SpectrumCommon.locate;
 // Damage Sources decide how death messages are handled
 // Make a custom damage source if you want a custom message, otherwise return a damage source with the type you want
 public class SpectrumDamageTypes {
-	
-	public static boolean recursiveDamageFlag = false;
 	
 	public static final ResourceKey<DamageType> BRISTLE_SPROUTS = ResourceKey.create(Registries.DAMAGE_TYPE, locate("bristle_sprouts"));
 	public static final ResourceKey<DamageType> DEADLY_POISON = ResourceKey.create(Registries.DAMAGE_TYPE, locate("deadly_poison"));
@@ -142,10 +139,6 @@ public class SpectrumDamageTypes {
 
 	public static DamageSource primordialFire(Level world, @Nullable LivingEntity attacker) {
 		return new PrimordialFireDamageSource(world, attacker);
-	}
-	
-	public static void wrapWithStackTracking(DamageSource source, ItemStack stack) {
-		((StackTracking) source).spectrum$setTrackedStack(stack);
 	}
 	
 	public static class SetHealthDamageSource extends DamageSource {

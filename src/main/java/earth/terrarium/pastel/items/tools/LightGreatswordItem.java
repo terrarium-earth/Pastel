@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.tools;
 
-import earth.terrarium.pastel.api.item.SplitDamageItem;
+import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
 import earth.terrarium.pastel.registries.SpectrumDamageTypes;
@@ -18,7 +18,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class LightGreatswordItem extends ParryingSwordItem implements SplitDamageItem {
+public class LightGreatswordItem extends ParryingSwordItem implements SplitDamageHandler {
 
 	private final int barColor;
 
