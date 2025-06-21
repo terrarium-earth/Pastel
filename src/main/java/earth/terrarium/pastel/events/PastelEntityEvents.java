@@ -156,7 +156,17 @@ public class PastelEntityEvents {
     private static void entityTick(EntityTickEvent.Post event) {
         var entity = event.getEntity();
 
-        if (entity instanceof LivingEntity living && !living.level().isClientSide()) {
+        if (entity instanceof LivingEntity living) {
+            if (living.level().isClientSide())
+                return;
+
+            var queued = PastelEffectEvents.QUEUED_ADDITIONS.get(entity.getUUID());
+
+            if (queued != null) {
+                queued.forEach(living::addEffect);
+                queued.clear();
+            }
+
             PrimordialFireData.serverTick(living);
             AzureDikeProvider.getAzureDikeComponent(living).serverTick(living);
         }

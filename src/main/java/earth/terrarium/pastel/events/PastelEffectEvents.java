@@ -11,6 +11,7 @@ import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +20,12 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import static earth.terrarium.pastel.registries.PastelStatusEffects.*;
 
@@ -39,7 +46,7 @@ public class PastelEffectEvents {
         var level = entity.level();
         var player = entity instanceof Player;
 
-        if (!FATAL_SLUMBER.equals(effect) || level.isClientSide())
+        if (event.getEffectInstance() == null || !effect.getEffect().equals(FATAL_SLUMBER) || level.isClientSide())
             return;
 
         if (entity.isSpectator() || player && ((Player) entity).isCreative())
@@ -75,18 +82,19 @@ public class PastelEffectEvents {
         event.setCanceled(true);
     }
 
+    static final Map<UUID, List<MobEffectInstance>> QUEUED_ADDITIONS = new HashMap<>();
     private static void convertSleepEffects(MobEffectEvent.Remove event) {
         var removed = event.getEffectInstance();
-        var entity = event.getEntity();
+        var id = event.getEntity().getUUID();
 
         if (removed == null)
             return;
 
         if (removed.getEffect().equals(FATAL_SLUMBER)) {
-            entity.addEffect(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, 6000));
+            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, 6000));
         }
         else if(removed.getEffect().equals(SOMNOLENCE) && Cures.SEDATIVES.equals(event.getCure())) {
-            entity.addEffect(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, removed.getDuration()));
+            QUEUED_ADDITIONS.computeIfAbsent(id, i -> new ArrayList<>()).add(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, removed.getDuration()));
         } // Miniscule amount of trolling
     }
 
