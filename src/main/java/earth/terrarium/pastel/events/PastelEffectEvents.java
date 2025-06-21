@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
@@ -24,12 +25,12 @@ import static earth.terrarium.pastel.registries.PastelStatusEffects.*;
 public class PastelEffectEvents {
 
     public static void register(IEventBus pastelBus) {
-        pastelBus.addListener(EventPriority.HIGHEST, PastelEffectEvents::sleepDurationModifications);
-        pastelBus.addListener(EventPriority.HIGHEST, PastelEffectEvents::fatalSlumberKill);
-        pastelBus.addListener(PastelEffectEvents::actionIncurable);
-        pastelBus.addListener(EventPriority.LOW, PastelEffectEvents::applyEffectImmunity);
-        pastelBus.addListener(EventPriority.LOWEST, PastelEffectEvents::convertSleepEffects);
-        pastelBus.addListener(EventPriority.LOWEST, PastelEffectEvents::applyNectarGlovesImmunity);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelEffectEvents::sleepDurationModifications);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelEffectEvents::fatalSlumberKill);
+        NeoForge.EVENT_BUS.addListener(PastelEffectEvents::actionIncurable);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOW, PastelEffectEvents::applyEffectImmunity);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEffectEvents::convertSleepEffects);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEffectEvents::applyNectarGlovesImmunity);
     }
 
     private static void fatalSlumberKill(MobEffectEvent.Expired event) {
