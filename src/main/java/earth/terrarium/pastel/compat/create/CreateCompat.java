@@ -77,11 +77,9 @@ public class CreateCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
 			return spectrumFluid.handleFluidCollision(world, state, otherState);
 		return null;
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void registerClient() {
-		SpectrumBlocks.CLIENT_REGISTRAR.flush();
-	}
+	public void registerClient() {}
 	
 }
