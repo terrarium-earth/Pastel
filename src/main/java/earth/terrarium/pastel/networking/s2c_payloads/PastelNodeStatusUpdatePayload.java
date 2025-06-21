@@ -1,16 +1,13 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
 import net.minecraft.server.level.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -22,7 +19,7 @@ import java.util.Map;
 
 public record PastelNodeStatusUpdatePayload(boolean longSpin, Map<BlockPos, Integer> spinTimes) implements CustomPacketPayload {
 	
-	public static final Type<PastelNodeStatusUpdatePayload> ID = SpectrumC2SPackets.makeId("pastel_node_status_update");
+	public static final Type<PastelNodeStatusUpdatePayload> ID = PastelC2SPackets.makeId("pastel_node_status_update");
 	public static final StreamCodec<FriendlyByteBuf, PastelNodeStatusUpdatePayload> CODEC = StreamCodec.composite(
 			ByteBufCodecs.BOOL, PastelNodeStatusUpdatePayload::longSpin,
 			ByteBufCodecs.map(Object2IntArrayMap::new, BlockPos.STREAM_CODEC, ByteBufCodecs.INT), PastelNodeStatusUpdatePayload::spinTimes,

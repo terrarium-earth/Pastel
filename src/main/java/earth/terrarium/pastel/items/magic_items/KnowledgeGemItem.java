@@ -2,10 +2,10 @@ package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -46,15 +46,15 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	}
 	
 	public static ItemStack getKnowledgeDropStackWithXP(int experience, boolean noStoreTooltip) {
-		ItemStack stack = new ItemStack(SpectrumItems.KNOWLEDGE_GEM.get());
-		stack.set(SpectrumDataComponentTypes.STORED_EXPERIENCE, experience);
-		if (noStoreTooltip) stack.set(SpectrumDataComponentTypes.HIDE_USAGE_TOOLTIP, Unit.INSTANCE);
+		ItemStack stack = new ItemStack(PastelItems.KNOWLEDGE_GEM.get());
+		stack.set(PastelDataComponentTypes.STORED_EXPERIENCE, experience);
+		if (noStoreTooltip) stack.set(PastelDataComponentTypes.HIDE_USAGE_TOOLTIP, Unit.INSTANCE);
 		return stack;
 	}
 	
 	@Override
 	public int getMaxStoredExperience(HolderLookup.Provider lookup, ItemStack itemStack) {
-		int efficiencyLevel = SpectrumEnchantmentHelper.getLevel(lookup, Enchantments.EFFICIENCY, itemStack);
+		int efficiencyLevel = PastelEnchantmentHelper.getLevel(lookup, Enchantments.EFFICIENCY, itemStack);
 		return maxStorageBase * (int) Math.pow(10, Math.min(5, efficiencyLevel)); // to not exceed int max
 	}
 	
@@ -64,7 +64,7 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	}
 	
 	public int getTransferableExperiencePerTick(HolderLookup.Provider lookup, ItemStack itemStack) {
-		int quickChargeLevel = SpectrumEnchantmentHelper.getLevel(lookup, Enchantments.QUICK_CHARGE, itemStack);
+		int quickChargeLevel = PastelEnchantmentHelper.getLevel(lookup, Enchantments.QUICK_CHARGE, itemStack);
 		return (int) (2 * Math.pow(2, Math.min(10, quickChargeLevel)));
 	}
 	
@@ -138,7 +138,7 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	}
 	
 	public boolean shouldDisplayUsageTooltip(ItemStack itemStack) {
-		return itemStack.has(SpectrumDataComponentTypes.HIDE_USAGE_TOOLTIP);
+		return itemStack.has(PastelDataComponentTypes.HIDE_USAGE_TOOLTIP);
 	}
 	
 	public boolean removePlayerExperience(@NotNull Player playerEntity, int experience) {
@@ -167,7 +167,7 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.KNOWLEDGE_GEM;
+		return PastelBannerPatterns.KNOWLEDGE_GEM;
 	}
 	
 	@Override

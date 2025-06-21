@@ -3,8 +3,8 @@ package earth.terrarium.pastel.blocks.chests;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
@@ -31,8 +31,8 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class BlackHoleChestBlockEntityRenderer implements BlockEntityRenderer<BlackHoleChestBlockEntity> {
 	
-	private static final Material defaultSprite = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/black_hole_chest"));
-	private static final Material experienceSprite = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/black_hole_chest_experience"));
+	private static final Material defaultSprite = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/black_hole_chest"));
+	private static final Material experienceSprite = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/black_hole_chest_experience"));
 
 	private final ModelPart root;
 	private final ModelPart shell;
@@ -73,7 +73,7 @@ public class BlackHoleChestBlockEntityRenderer implements BlockEntityRenderer<Bl
 		var sprite = chest.hasXPStorage() ? experienceSprite : defaultSprite;
 
 		boolean bl = chest.getLevel() != null;
-		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.BLACK_HOLE_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockState = bl ? chest.getBlockState() : PastelBlocks.BLACK_HOLE_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
 		float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING).toYRot() : 0;
 		poseStack.translate(0.5D, 1.5D, 0.5D);
 		poseStack.mulPose(Axis.YP.rotationDegrees(-f));

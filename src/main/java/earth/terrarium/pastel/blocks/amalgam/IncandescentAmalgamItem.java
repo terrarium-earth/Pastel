@@ -4,8 +4,8 @@ import earth.terrarium.pastel.api.item.DamageAwareItem;
 import earth.terrarium.pastel.api.item.FermentedItem;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,10 +32,10 @@ public class IncandescentAmalgamItem extends BlockItem implements DamageAwareIte
 	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
 		stack = super.finishUsingItem(stack, world, user);
 		
-		user.hurt(SpectrumDamageTypes.incandescence(world), 500.0F);
+		user.hurt(PastelDamageTypes.incandescence(world), 500.0F);
 		
 		float explosionPower = getExplosionPower(stack, false);
-		world.explode(user, SpectrumDamageTypes.incandescence(world), new EntityBasedExplosionDamageCalculator(user), user.getX(), user.getEyeY(), user.getZ(), explosionPower, true, Level.ExplosionInteraction.BLOCK);
+		world.explode(user, PastelDamageTypes.incandescence(world), new EntityBasedExplosionDamageCalculator(user), user.getX(), user.getEyeY(), user.getZ(), explosionPower, true, Level.ExplosionInteraction.BLOCK);
 		
 		if (user.isAlive() && user instanceof ServerPlayer serverPlayerEntity && !serverPlayerEntity.isCreative()) {
 			Support.grantAdvancementCriterion(serverPlayerEntity, "survive_drinking_incandescent_amalgam", "survived_drinking_incandescent_amalgam");
@@ -61,11 +61,11 @@ public class IncandescentAmalgamItem extends BlockItem implements DamageAwareIte
 		
 		float explosionPower = getExplosionPower(stack, true);
 		var world = itemEntity.level();
-		world.explode(itemEntity, SpectrumDamageTypes.incandescence(world, itemEntity), new EntityBasedExplosionDamageCalculator(itemEntity), itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), explosionPower, true, Level.ExplosionInteraction.BLOCK);
+		world.explode(itemEntity, PastelDamageTypes.incandescence(world, itemEntity), new EntityBasedExplosionDamageCalculator(itemEntity), itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), explosionPower, true, Level.ExplosionInteraction.BLOCK);
 	}
 
 	public float getExplosionPower(ItemStack stack, boolean useCount) {
-		float alcPercent = stack.getOrDefault(SpectrumDataComponentTypes.BEVERAGE, BeverageComponent.DEFAULT).alcoholPercent();
+		float alcPercent = stack.getOrDefault(PastelDataComponentTypes.BEVERAGE, BeverageComponent.DEFAULT).alcoholPercent();
 		return alcPercent <= 0 ? 6 : alcPercent * (useCount ? 0.875F + (stack.getCount() / 8F) : 1);
 	}
 	

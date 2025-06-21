@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.item;
 
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -10,7 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,7 @@ public class ItemDamageImmunity {
 			return false;
 		}
 		
-		if (EnchantmentHelper.hasTag(itemStack, SpectrumEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
+		if (EnchantmentHelper.hasTag(itemStack, PastelEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
 			return true;
 		}
 

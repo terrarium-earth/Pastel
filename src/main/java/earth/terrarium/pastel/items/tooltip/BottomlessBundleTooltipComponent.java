@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.tooltip;
 
-import earth.terrarium.pastel.api.gui.SpectrumTooltipComponent;
+import earth.terrarium.pastel.api.gui.PastelTooltipComponent;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.Font;
@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class BottomlessBundleTooltipComponent implements SpectrumTooltipComponent {
+public class BottomlessBundleTooltipComponent implements PastelTooltipComponent {
 	
 	private static final int MAX_DISPLAYED_SLOTS = 5;
 	private final List<ItemStack> itemStacks;
@@ -54,22 +54,22 @@ public class BottomlessBundleTooltipComponent implements SpectrumTooltipComponen
 			if (i == displayedSlotCount - 1) {
 				if (displayedSlotCount == MAX_DISPLAYED_SLOTS + 1) {
 					if (drawDots) {
-						SpectrumTooltipComponent.drawDottedSlot(context, n + 5 * 18, o);
+						PastelTooltipComponent.drawDottedSlot(context, n + 5 * 18, o);
 					} else {
-						SpectrumTooltipComponent.drawSlot(context, n + i * 18, o, i, ItemStack.EMPTY, textRenderer);
+						PastelTooltipComponent.drawSlot(context, n + i * 18, o, i, ItemStack.EMPTY, textRenderer);
 					}
 				} else {
 					if (itemStacks.size() - 1 < i) {
-						SpectrumTooltipComponent.drawSlot(context, n + i * 18, o, i, ItemStack.EMPTY, textRenderer);
+						PastelTooltipComponent.drawSlot(context, n + i * 18, o, i, ItemStack.EMPTY, textRenderer);
 					} else {
-						SpectrumTooltipComponent.drawSlot(context, n + i * 18, o, i, itemStacks.get(i), textRenderer);
+						PastelTooltipComponent.drawSlot(context, n + i * 18, o, i, itemStacks.get(i), textRenderer);
 					}
 				}
 			} else {
-				SpectrumTooltipComponent.drawSlot(context, n + i * 18, o, i, itemStacks.get(i), textRenderer);
+				PastelTooltipComponent.drawSlot(context, n + i * 18, o, i, itemStacks.get(i), textRenderer);
 			}
 		}
-		SpectrumTooltipComponent.drawOutline(context, x, y, displayedSlotCount, 1);
+		PastelTooltipComponent.drawOutline(context, x, y, displayedSlotCount, 1);
 	}
 	
 }

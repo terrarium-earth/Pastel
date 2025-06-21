@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,7 +49,7 @@ public class JadeiteLotusStemBlock extends BushBlock {
 	}
 	
 	public static BlockState getStemVariant(boolean top, boolean inverted) {
-		return SpectrumBlocks.JADEITE_LOTUS_STEM.get().defaultBlockState().setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM).setValue(INVERTED, inverted);
+		return PastelBlocks.JADEITE_LOTUS_STEM.get().defaultBlockState().setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM).setValue(INVERTED, inverted);
 	}
 	
 	@Override

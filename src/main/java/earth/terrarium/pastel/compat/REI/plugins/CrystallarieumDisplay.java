@@ -2,8 +2,8 @@ package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.compat.REI.GatedSpectrumDisplay;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelDisplay;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumCatalyst;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrystallarieumDisplay extends GatedSpectrumDisplay {
+public class CrystallarieumDisplay extends PastelDisplay {
 	
 	protected final List<EntryIngredient> growthStages;
 	protected final List<CrystallarieumCatalyst> catalysts;
@@ -71,7 +71,7 @@ public class CrystallarieumDisplay extends GatedSpectrumDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.CRYSTALLARIEUM;
+		return PastelPlugins.CRYSTALLARIEUM;
 	}
 	
 	@Override

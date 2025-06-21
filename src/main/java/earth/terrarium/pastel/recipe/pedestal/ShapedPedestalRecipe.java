@@ -4,15 +4,15 @@ package earth.terrarium.pastel.recipe.pedestal;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.blocks.pedestal.PedestalRecipeInput;
 import earth.terrarium.pastel.helpers.CodecHelper;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -72,7 +72,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				IngredientStack ingredientStackAtPos = this.inputs.get(ingredientStackId);
 				ItemStack slotStack = pedestal.getItem(slot);
 				if (!ingredientStackAtPos.test(slotStack)) {
-					SpectrumCommon.logError("Looks like DaFuqs or Electro fucked up Spectrums Pedestal recipe matching. Go open up a report with the recipe that was crafted and an image of the pedestals contents, please! :)");
+					PastelCommon.logError("Looks like DaFuqs or Electro fucked up Spectrums Pedestal recipe matching. Go open up a report with the recipe that was crafted and an image of the pedestals contents, please! :)");
 				}
 				
 				if (!slotStack.isEmpty()) {
@@ -84,7 +84,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SHAPED_PEDESTAL_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.SHAPED_PEDESTAL_RECIPE_SERIALIZER;
 	}
 	
 	@Override
@@ -110,7 +110,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				ResourceLocation.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
 				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
 				RawShapedPedestalRecipe.CODEC.forGetter(recipe -> recipe.rawShapedRecipe),
-				CodecHelper.registryMap(SpectrumRegistries.GEMSTONE_COLOR, Codec.INT).fieldOf("colors").forGetter(recipe -> recipe.powderInputs),
+				CodecHelper.registryMap(PastelRegistries.GEMSTONE_COLOR, Codec.INT).fieldOf("colors").forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
 				Codec.FLOAT.optionalFieldOf("experience", 0f).forGetter(recipe -> recipe.experience),
 				Codec.INT.optionalFieldOf("time", 200).forGetter(recipe -> recipe.craftingTime),
@@ -124,7 +124,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
 				PedestalRecipeTier.STREAM_CODEC, recipe -> recipe.tier,
 				RawShapedPedestalRecipe.STREAM_CODEC, recipe -> recipe.rawShapedRecipe,
-				ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(SpectrumRegistries.GEMSTONE_COLOR.key()), ByteBufCodecs.VAR_INT), recipe -> recipe.powderInputs,
+				ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(PastelRegistries.GEMSTONE_COLOR.key()), ByteBufCodecs.VAR_INT), recipe -> recipe.powderInputs,
 				ItemStack.STREAM_CODEC, recipe -> recipe.output,
 				ByteBufCodecs.FLOAT, recipe -> recipe.experience,
 				ByteBufCodecs.VAR_INT, recipe -> recipe.craftingTime,

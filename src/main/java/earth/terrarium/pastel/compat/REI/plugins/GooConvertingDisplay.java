@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.fluid_converting.GooConvertingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +14,7 @@ public class GooConvertingDisplay extends FluidConvertingDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.GOO_CONVERTING;
+		return PastelPlugins.GOO_CONVERTING;
 	}
 	
 	@Override

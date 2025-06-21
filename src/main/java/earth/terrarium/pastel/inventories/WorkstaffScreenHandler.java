@@ -15,7 +15,7 @@ public class WorkstaffScreenHandler extends QuickNavigationGridScreenHandler {
 	}
 	
 	public WorkstaffScreenHandler(int syncId, Inventory playerInventory, ItemStack workstaffStack) {
-		super(SpectrumScreenHandlerTypes.WORKSTAFF, syncId);
+		super(PastelScreenHandlerTypes.WORKSTAFF, syncId);
 		this.workstaffStack = workstaffStack;
 		this.player = playerInventory.player;
 	}

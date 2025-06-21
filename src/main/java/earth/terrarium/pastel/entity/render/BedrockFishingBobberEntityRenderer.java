@@ -1,14 +1,14 @@
 package earth.terrarium.pastel.entity.render;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.entity.entity.SpectrumFishingBobberEntity;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class BedrockFishingBobberEntityRenderer extends SpectrumFishingBobberEntityRenderer {
+public class BedrockFishingBobberEntityRenderer extends PastelFishingBobberEntityRenderer {
 	
-	protected static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/fishing_hooks/bedrock_fishing_hook.png");
+	protected static final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/fishing_hooks/bedrock_fishing_hook.png");
 	protected static final RenderType LAYER = RenderType.entityCutout(TEXTURE);
 	
 	public BedrockFishingBobberEntityRenderer(EntityRendererProvider.Context context) {
@@ -16,12 +16,12 @@ public class BedrockFishingBobberEntityRenderer extends SpectrumFishingBobberEnt
 	}
 	
 	@Override
-	public ResourceLocation getTextureLocation(SpectrumFishingBobberEntity fishingBobberEntity) {
+	public ResourceLocation getTextureLocation(PastelFishingBobberEntity fishingBobberEntity) {
 		return TEXTURE;
 	}
 	
 	@Override
-	public RenderType getLayer(SpectrumFishingBobberEntity bobber) {
+	public RenderType getLayer(PastelFishingBobberEntity bobber) {
 		return LAYER;
 	}
 	

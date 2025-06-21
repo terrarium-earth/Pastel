@@ -2,8 +2,8 @@ package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.compat.REI.GatedSpectrumDisplay;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelDisplay;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class InkConvertingDisplay extends GatedSpectrumDisplay {
+public class InkConvertingDisplay extends PastelDisplay {
 	
 	protected final InkColor color;
 	protected final long amount;
@@ -26,7 +26,7 @@ public class InkConvertingDisplay extends GatedSpectrumDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.INK_CONVERTING;
+		return PastelPlugins.INK_CONVERTING;
 	}
 	
 	@Override

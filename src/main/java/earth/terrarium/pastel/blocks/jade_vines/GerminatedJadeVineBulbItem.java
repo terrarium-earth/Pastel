@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
 import earth.terrarium.pastel.items.conditional.CloakedItem;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -43,8 +43,8 @@ public class GerminatedJadeVineBulbItem extends CloakedItem {
 			} else {
 				ServerPlayer player = (ServerPlayer) context.getPlayer();
 				
-				world.setBlockAndUpdate(pos, SpectrumBlocks.JADE_VINE_ROOTS.get().defaultBlockState());
-				BlockState bulbState = SpectrumBlocks.JADE_VINE_BULB.get().defaultBlockState();
+				world.setBlockAndUpdate(pos, PastelBlocks.JADE_VINE_ROOTS.get().defaultBlockState());
+				BlockState bulbState = PastelBlocks.JADE_VINE_BULB.get().defaultBlockState();
 				world.setBlockAndUpdate(pos.below(), bulbState);
 				world.playSound(null, pos, SoundEvents.CROP_PLANTED, SoundSource.PLAYERS, 1.0F, 1.0F);
 				

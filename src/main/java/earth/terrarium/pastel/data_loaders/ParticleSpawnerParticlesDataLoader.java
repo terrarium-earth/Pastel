@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -56,7 +56,7 @@ public class ParticleSpawnerParticlesDataLoader extends SimpleJsonResourceReload
 			boolean supportsColoring = GsonHelper.getAsBoolean(jsonObject, "supports_coloring", false);
 			
 			if (particleType == null) {
-				SpectrumCommon.logError("Particle Spawner Particle '" + particleTypeString + "' not found. Will be ignored.");
+				PastelCommon.logError("Particle Spawner Particle '" + particleTypeString + "' not found. Will be ignored.");
 				return;
 			}
 			

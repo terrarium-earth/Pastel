@@ -2,7 +2,7 @@ package earth.terrarium.pastel.recipe.titration_barrel;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -22,7 +22,7 @@ public record FermentationStatusEffectEntry(
 	
 	public static final Codec<FermentationStatusEffectEntry> CODEC = RecordCodecBuilder.create(i -> i.group(
 			BuiltInRegistries.MOB_EFFECT.byNameCodec().orElse(err -> {
-				SpectrumCommon.logError(err + ". Falling back to WEAKNESS");
+				PastelCommon.logError(err + ". Falling back to WEAKNESS");
 				return err;
 			}, MobEffects.WEAKNESS.value()).fieldOf("id").forGetter(FermentationStatusEffectEntry::statusEffect),
 			Codec.INT.optionalFieldOf("base_duration", 1200).forGetter(FermentationStatusEffectEntry::baseDuration),

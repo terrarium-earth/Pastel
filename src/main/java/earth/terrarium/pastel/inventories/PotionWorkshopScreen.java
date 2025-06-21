@@ -2,9 +2,9 @@ package earth.terrarium.pastel.inventories;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.RenderHelper;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -15,8 +15,8 @@ import java.awt.*;
 
 public class PotionWorkshopScreen extends AbstractContainerScreen<PotionWorkshopScreenHandler> {
 	
-	public static final ResourceLocation BACKGROUND_3_SLOTS = SpectrumCommon.locate("textures/gui/container/potion_workshop_3_slots.png");
-	public static final ResourceLocation BACKGROUND_4_SLOTS = SpectrumCommon.locate("textures/gui/container/potion_workshop_4_slots.png");
+	public static final ResourceLocation BACKGROUND_3_SLOTS = PastelCommon.locate("textures/gui/container/potion_workshop_3_slots.png");
+	public static final ResourceLocation BACKGROUND_4_SLOTS = PastelCommon.locate("textures/gui/container/potion_workshop_4_slots.png");
 	private static final int[] BUBBLE_PROGRESS = new int[]{0, 4, 8, 11, 13, 17, 20, 24, 26, 30, 33, 36, 41};
 	
 	private final ResourceLocation background;
@@ -25,7 +25,7 @@ public class PotionWorkshopScreen extends AbstractContainerScreen<PotionWorkshop
 		super(handler, playerInventory, title);
 		this.imageHeight = 202;
 		
-		if (AdvancementHelper.hasAdvancement(playerInventory.player, SpectrumAdvancements.FOURTH_BREWING_SLOT)) {
+		if (AdvancementHelper.hasAdvancement(playerInventory.player, PastelAdvancements.FOURTH_BREWING_SLOT)) {
 			background = BACKGROUND_4_SLOTS;
 		} else {
 			background = BACKGROUND_3_SLOTS;

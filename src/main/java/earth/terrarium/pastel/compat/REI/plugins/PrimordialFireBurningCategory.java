@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.compat.REI.widgets.AnimatedTexturedWidget;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -22,11 +22,11 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class PrimordialFireBurningCategory extends GatedDisplayCategory<PrimordialFireBurningDisplay> {
 	
-	private final static ResourceLocation FIRE_TEXTURE = SpectrumCommon.locate("textures/block/primordial_fire_0.png");
+	private final static ResourceLocation FIRE_TEXTURE = PastelCommon.locate("textures/block/primordial_fire_0.png");
 	
 	@Override
 	public CategoryIdentifier<PrimordialFireBurningDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.PRIMORDIAL_FIRE_BURNING;
+		return PastelPlugins.PRIMORDIAL_FIRE_BURNING;
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class PrimordialFireBurningCategory extends GatedDisplayCategory<Primordi
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.DOOMBLOOM_SEED.get());
+		return EntryStacks.of(PastelItems.DOOMBLOOM_SEED.get());
 	}
 	
 	@Override

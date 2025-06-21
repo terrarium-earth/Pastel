@@ -2,18 +2,17 @@ package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.components.EnderSpliceComponent;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.c2s_payloads.BindEnderSpliceToPlayerPayload;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.EnderSpliceChargingSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
@@ -59,19 +58,19 @@ public class EnderSpliceItem extends Item {
 	}
 	
 	public static void setTeleportTargetPos(@NotNull ItemStack itemStack, Level world, Vec3 pos) {
-		itemStack.set(SpectrumDataComponentTypes.ENDER_SPLICE, new EnderSpliceComponent(pos, world.dimension()));
+		itemStack.set(PastelDataComponentTypes.ENDER_SPLICE, new EnderSpliceComponent(pos, world.dimension()));
 	}
 	
 	public static void setTeleportTargetPlayer(@NotNull ItemStack itemStack, ServerPlayer player) {
-		itemStack.set(SpectrumDataComponentTypes.ENDER_SPLICE, new EnderSpliceComponent(player.getName().getString(), player.getUUID()));
+		itemStack.set(PastelDataComponentTypes.ENDER_SPLICE, new EnderSpliceComponent(player.getName().getString(), player.getUUID()));
 	}
 	
 	public static boolean hasTeleportTarget(ItemStack itemStack) {
-		return itemStack.has(SpectrumDataComponentTypes.ENDER_SPLICE);
+		return itemStack.has(PastelDataComponentTypes.ENDER_SPLICE);
 	}
 	
 	public static void clearTeleportTarget(ItemStack itemStack) {
-		itemStack.remove(SpectrumDataComponentTypes.ENDER_SPLICE);
+		itemStack.remove(PastelDataComponentTypes.ENDER_SPLICE);
 	}
 	
 	@Override
@@ -83,7 +82,7 @@ public class EnderSpliceItem extends Item {
 		} else if (user instanceof ServerPlayer playerEntity) {
 			CriteriaTriggers.CONSUME_ITEM.trigger(playerEntity, itemStack);
 			
-			boolean resonance = EnchantmentHelper.hasTag(itemStack, SpectrumEnchantmentTags.DIMENSIONAL_TELEPORT);
+			boolean resonance = EnchantmentHelper.hasTag(itemStack, PastelEnchantmentTags.DIMENSIONAL_TELEPORT);
 			
 			// If Dimension & Pos stored => Teleport to that position
 			var teleportTargetPos = getTeleportTargetPos(itemStack);
@@ -102,7 +101,7 @@ public class EnderSpliceItem extends Item {
 				} else {
 					// Nothing stored => Store current position
 					setTeleportTargetPos(itemStack, playerEntity.getCommandSenderWorld(), playerEntity.position());
-					world.playSound(null, playerEntity.blockPosition(), SpectrumSoundEvents.ENDER_SPLICE_BOUND, SoundSource.PLAYERS, 1.0F, 1.0F);
+					world.playSound(null, playerEntity.blockPosition(), PastelSoundEvents.ENDER_SPLICE_BOUND, SoundSource.PLAYERS, 1.0F, 1.0F);
 				}
 			}
 			playerEntity.awardStat(Stats.ITEM_USED.get(this));
@@ -112,11 +111,11 @@ public class EnderSpliceItem extends Item {
 	}
 	
 	private static void decrementWithChance(ItemStack itemStack, Level world, ServerPlayer playerEntity) {
-		if (EnchantmentHelper.hasTag(itemStack, SpectrumEnchantmentTags.INDESTRUCTIBLE_EFFECT)) {
+		if (EnchantmentHelper.hasTag(itemStack, PastelEnchantmentTags.INDESTRUCTIBLE_EFFECT)) {
 			return;
 		}
 		if (!playerEntity.getAbilities().instabuild) {
-			int unbreakingLevel = SpectrumEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.UNBREAKING, itemStack);
+			int unbreakingLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.UNBREAKING, itemStack);
 			if (unbreakingLevel == 0) {
 				itemStack.shrink(1);
 			} else {
@@ -147,24 +146,24 @@ public class EnderSpliceItem extends Item {
 		boolean isSameWorld = isSameWorld(user.getCommandSenderWorld(), targetWorld);
 		Vec3 currentPos = playerEntity.position();
 		if ((hasResonance || isSameWorld) && targetWorld instanceof ServerLevel targetServerWorld) {
-			world.playSound(playerEntity, currentPos.x(), currentPos.y(), currentPos.z(), SpectrumSoundEvents.PLAYER_TELEPORTS, SoundSource.PLAYERS, 1.0F, 1.0F);
+			world.playSound(playerEntity, currentPos.x(), currentPos.y(), currentPos.z(), PastelSoundEvents.PLAYER_TELEPORTS, SoundSource.PLAYERS, 1.0F, 1.0F);
 			
 			if (!isSameWorld) {
 				user.changeDimension(new DimensionTransition(targetServerWorld, targetPos.add(0, 0.25, 0), new Vec3(0, 0, 0), user.getYRot(), user.getXRot(), DimensionTransition.DO_NOTHING));
 			} else {
 				user.teleportTo(targetPos.x(), targetPos.y + 0.25, targetPos.z); // +0.25 makes it look way more lively
 			}
-			world.playSound(playerEntity, targetPos.x(), targetPos.y, targetPos.z, SpectrumSoundEvents.PLAYER_TELEPORTS, SoundSource.PLAYERS, 1.0F, 1.0F);
+			world.playSound(playerEntity, targetPos.x(), targetPos.y, targetPos.z, PastelSoundEvents.PLAYER_TELEPORTS, SoundSource.PLAYERS, 1.0F, 1.0F);
 			
 			// make sure the sound plays even when the player currently teleports
 			if (playerEntity instanceof ServerPlayer) {
-				world.playSound(null, playerEntity.blockPosition(), SpectrumSoundEvents.PLAYER_TELEPORTS, SoundSource.PLAYERS, 1.0F, 1.0F);
+				world.playSound(null, playerEntity.blockPosition(), PastelSoundEvents.PLAYER_TELEPORTS, SoundSource.PLAYERS, 1.0F, 1.0F);
 				world.playSound(null, playerEntity.blockPosition(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
 			}
 			return true;
 		} else {
 			user.releaseUsingItem();
-			world.playSound(null, currentPos.x(), currentPos.y(), currentPos.z(), SpectrumSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
+			world.playSound(null, currentPos.x(), currentPos.y(), currentPos.z(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 1.0F);
 			return false;
 		}
 	}
@@ -220,18 +219,18 @@ public class EnderSpliceItem extends Item {
 	}
 	
 	public Optional<Tuple<ResourceKey<Level>, Vec3>> getTeleportTargetPos(@NotNull ItemStack itemStack) {
-		var component = itemStack.getOrDefault(SpectrumDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT);
+		var component = itemStack.getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT);
 		if (component.pos().isPresent() && component.dimension().isPresent())
 			return Optional.of(new Tuple<>(component.dimension().get(), component.pos().get()));
 		return Optional.empty();
 	}
 	
 	public Optional<UUID> getTeleportTargetPlayerUUID(@NotNull ItemStack itemStack) {
-		return itemStack.getOrDefault(SpectrumDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT).targetUUID();
+		return itemStack.getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT).targetUUID();
 	}
 	
 	public Optional<String> getTeleportTargetPlayerName(@NotNull ItemStack itemStack) {
-		return itemStack.getOrDefault(SpectrumDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT).targetName();
+		return itemStack.getOrDefault(PastelDataComponentTypes.ENDER_SPLICE, EnderSpliceComponent.DEFAULT).targetName();
 	}
 	
 	@Override
@@ -246,7 +245,7 @@ public class EnderSpliceItem extends Item {
 	
 	@Override
 	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-		return super.supportsEnchantment(stack, enchantment) || enchantment.is(SpectrumEnchantments.RESONANCE) || enchantment.is(SpectrumEnchantments.INDESTRUCTIBLE) || enchantment.is(Enchantments.UNBREAKING);
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(PastelEnchantments.RESONANCE) || enchantment.is(PastelEnchantments.INDESTRUCTIBLE) || enchantment.is(Enchantments.UNBREAKING);
 	}
 	
 }

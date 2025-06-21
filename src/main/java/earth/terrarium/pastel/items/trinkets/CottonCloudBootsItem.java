@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
@@ -14,10 +14,10 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class CottonCloudBootsItem extends SpectrumTrinketItem {
+public class CottonCloudBootsItem extends PastelTrinketItem {
 	
 	public CottonCloudBootsItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/cotton_cloud_boots"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/cotton_cloud_boots"));
 	}
 
 	@Override

@@ -10,12 +10,12 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.CustomPotionDataComponent;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumPotions;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelPotions;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -73,8 +73,8 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		put(MobEffects.UNLUCK, MobEffects.LUCK);
 		put(MobEffects.WEAKNESS, MobEffects.DAMAGE_BOOST);
 		put(MobEffects.WITHER, MobEffects.REGENERATION);
-		put(SpectrumStatusEffects.STIFFNESS, SpectrumStatusEffects.SWIFTNESS);
-		put(SpectrumStatusEffects.DENSITY, SpectrumStatusEffects.LIGHTWEIGHT);
+		put(PastelStatusEffects.STIFFNESS, PastelStatusEffects.SWIFTNESS);
+		put(PastelStatusEffects.DENSITY, PastelStatusEffects.LIGHTWEIGHT);
 	}};
 	
 	public static @Nullable PotionWorkshopBrewingRecipe getPositiveRecipe(@NotNull Holder<MobEffect> statusEffect) {
@@ -137,12 +137,12 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.POTION_WORKSHOP_BREWING_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.POTION_WORKSHOP_BREWING_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.POTION_WORKSHOP_BREWING;
+		return PastelRecipeTypes.POTION_WORKSHOP_BREWING;
 	}
 	
 	@Override
@@ -158,7 +158,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 	@Override
 	public List<IngredientStack> getIngredientStacks() {
 		NonNullList<IngredientStack> defaultedList = NonNullList.create();
-		defaultedList.add(IngredientStack.ofItems(SpectrumItems.MERMAIDS_GEM.get()));
+		defaultedList.add(IngredientStack.ofItems(PastelItems.MERMAIDS_GEM.get()));
 		defaultedList.add(IngredientStack.ofItems(Items.GLASS_BOTTLE));
 		addIngredientStacks(defaultedList);
 		return defaultedList;
@@ -216,7 +216,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 			// no effects: thick potion
 			targetStack = PotionContents.createItemStack(targetStack.getItem(), Potions.THICK);
 		} else {
-			targetStack = PotionContents.createItemStack(targetStack.getItem(), SpectrumPotions.PIGMENT_POTION);
+			targetStack = PotionContents.createItemStack(targetStack.getItem(), PastelPotions.PIGMENT_POTION);
 			setCustomPotionEffects(targetStack, potionMod, effects);
 		}
 		
@@ -233,7 +233,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		if (effects.isEmpty()) {
 			itemStack = PotionContents.createItemStack(itemStack.getItem(), Potions.THICK);
 		} else {
-			itemStack = PotionContents.createItemStack(itemStack.getItem(), SpectrumPotions.PIGMENT_POTION);
+			itemStack = PotionContents.createItemStack(itemStack.getItem(), PastelPotions.PIGMENT_POTION);
 			setCustomPotionEffects(itemStack, potionMod, effects);
 		}
 		
@@ -254,11 +254,11 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		}
 		OptionalInt potionColor = PotionContents.getColorOptional(instances);
 		
-		PotionContents potionComponent = new PotionContents(Optional.of(SpectrumPotions.PIGMENT_POTION), Optional.of(potionColor.orElse(0)), instances);
+		PotionContents potionComponent = new PotionContents(Optional.of(PastelPotions.PIGMENT_POTION), Optional.of(potionColor.orElse(0)), instances);
 		stack.set(DataComponents.POTION_CONTENTS, potionComponent);
 		
 		if (potionMod.flags().unidentifiable() || potionMod.additionalDrinkDurationTicks() != 0) {
-			stack.set(SpectrumDataComponentTypes.CUSTOM_POTION_DATA, new CustomPotionDataComponent(potionMod.flags().unidentifiable(), potionMod.additionalDrinkDurationTicks()));
+			stack.set(PastelDataComponentTypes.CUSTOM_POTION_DATA, new CustomPotionDataComponent(potionMod.flags().unidentifiable(), potionMod.additionalDrinkDurationTicks()));
 		}
 	}
 	

@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.compat.REI.GatedSpectrumDisplay;
+import earth.terrarium.pastel.compat.REI.PastelDisplay;
 import earth.terrarium.pastel.compat.REI.REIHelper;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class CinderhearthDisplay extends GatedSpectrumDisplay {
+public class CinderhearthDisplay extends PastelDisplay {
 	
 	protected final float experience;
 	protected final int craftingTime;
@@ -30,7 +30,7 @@ public class CinderhearthDisplay extends GatedSpectrumDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.CINDERHEARTH;
+		return PastelPlugins.CINDERHEARTH;
 	}
 	
 	@Override

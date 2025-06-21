@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelFluidTags;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class WeepingCircletItem extends SpectrumTrinketItem {
+public class WeepingCircletItem extends PastelTrinketItem {
 	
 	private final static int TRIGGER_EVERY_X_TICKS = 40;
 	private final static int EFFECT_DURATION = TRIGGER_EVERY_X_TICKS + 10;
@@ -34,7 +34,7 @@ public class WeepingCircletItem extends SpectrumTrinketItem {
 	private final static int AXOLOTL_HEALING = 2;
 	
 	public WeepingCircletItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/weeping_circlet"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/weeping_circlet"));
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class WeepingCircletItem extends SpectrumTrinketItem {
 		Level world = entity.level();
 		if (!world.isClientSide) {
 			long time = entity.level().getGameTime();
-			if (entity.isEyeInFluid(SpectrumFluidTags.ACTIVATES_WEEPING_CIRCLET)) {
+			if (entity.isEyeInFluid(PastelFluidTags.ACTIVATES_WEEPING_CIRCLET)) {
 				if (always || time % TRIGGER_EVERY_X_TICKS == 0) {
 					entity.setAirSupply(entity.getMaxAirSupply());
 					entity.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, EFFECT_DURATION, 1, true, true));
@@ -80,7 +80,7 @@ public class WeepingCircletItem extends SpectrumTrinketItem {
 		for (Axolotl axolotlEntity : nearbyAxolotls) {
 			if (axolotlEntity.getHealth() < axolotlEntity.getMaxHealth() && axolotlEntity.getLoveCause() != null && axolotlEntity.getLoveCause().equals(entity)) {
 				axolotlEntity.heal(AXOLOTL_HEALING);
-				entity.playSound(SpectrumSoundEvents.BLOCK_CITRINE_BLOCK_CHIME, 1.0F, 0.9F + world.random.nextFloat() * 0.2F);
+				entity.playSound(PastelSoundEvents.BLOCK_CITRINE_BLOCK_CHIME, 1.0F, 0.9F + world.random.nextFloat() * 0.2F);
 				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) axolotlEntity.level(), axolotlEntity.position(), ParticleTypes.WAX_OFF, 10, new Vec3(0.5, 0.5, 0.5), new Vec3(0, 0, 0));
 			}
 		}

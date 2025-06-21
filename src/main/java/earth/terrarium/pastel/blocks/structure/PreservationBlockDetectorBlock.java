@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.blocks.decoration.SpectrumFacingBlock;
+import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class PreservationBlockDetectorBlock extends SpectrumFacingBlock implements EntityBlock, GameMasterBlock {
+public class PreservationBlockDetectorBlock extends PastelFacingBlock implements EntityBlock, GameMasterBlock {
 
 	public static final MapCodec<PreservationBlockDetectorBlock> CODEC = simpleCodec(PreservationBlockDetectorBlock::new);
 

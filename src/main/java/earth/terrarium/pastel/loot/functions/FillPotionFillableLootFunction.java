@@ -8,7 +8,7 @@ import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.loot.SpectrumLootFunctionTypes;
+import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
@@ -67,7 +67,7 @@ public class FillPotionFillableLootFunction extends LootItemConditionalFunction 
 	
 	@Override
 	public LootItemFunctionType<? extends LootItemConditionalFunction> getType() {
-		return SpectrumLootFunctionTypes.FILL_POTION_FILLABLE;
+		return PastelLootFunctionTypes.FILL_POTION_FILLABLE;
 	}
 	
 	@Override

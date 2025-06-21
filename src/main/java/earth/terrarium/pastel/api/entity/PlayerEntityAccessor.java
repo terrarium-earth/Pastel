@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.api.entity;
 
-import earth.terrarium.pastel.entity.entity.SpectrumFishingBobberEntity;
+import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
 
 public interface PlayerEntityAccessor {
 	
-	void setSpectrumBobber(SpectrumFishingBobberEntity bobber);
+	void setSpectrumBobber(PastelFishingBobberEntity bobber);
 	
-	SpectrumFishingBobberEntity getSpectrumBobber();
+	PastelFishingBobberEntity getSpectrumBobber();
 
 	void setSleepTimer(int ticks);
 }

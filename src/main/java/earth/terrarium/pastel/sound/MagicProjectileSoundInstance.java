@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.entity.entity.MagicProjectileEntity;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -27,7 +27,7 @@ public class MagicProjectileSoundInstance extends AbstractSoundInstance implemen
     private boolean playedExplosion;
 
     protected MagicProjectileSoundInstance(ResourceKey<Level> worldKey, MagicProjectileEntity projectile) {
-        super(SpectrumSoundEvents.INK_PROJECTILE_LAUNCH, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
+        super(PastelSoundEvents.INK_PROJECTILE_LAUNCH, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
 
         this.worldKey = worldKey;
         this.projectile = projectile;

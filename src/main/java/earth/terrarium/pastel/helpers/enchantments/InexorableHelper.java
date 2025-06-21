@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.helpers.enchantments;
 
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumAttributeTags;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelAttributeTags;
+import earth.terrarium.pastel.registries.PastelEnchantments;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,10 +13,10 @@ public class InexorableHelper {
 	
 	public static void checkAndRemoveSlowdownModifiers(LivingEntity entity) {
 		var armorInexorable = isArmorActive(entity);
-		var toolInexorable = SpectrumEnchantmentHelper.hasEnchantment(entity.level().registryAccess(), SpectrumEnchantments.INEXORABLE, entity.getItemInHand(entity.getUsedItemHand()));
+		var toolInexorable = PastelEnchantmentHelper.hasEnchantment(entity.level().registryAccess(), PastelEnchantments.INEXORABLE, entity.getItemInHand(entity.getUsedItemHand()));
 		
-		var armorAttributes = BuiltInRegistries.ATTRIBUTE.getTag(SpectrumAttributeTags.INEXORABLE_ARMOR_EFFECTIVE);
-		var toolAttributes = BuiltInRegistries.ATTRIBUTE.getTag(SpectrumAttributeTags.INEXORABLE_HANDHELD_EFFECTIVE);
+		var armorAttributes = BuiltInRegistries.ATTRIBUTE.getTag(PastelAttributeTags.INEXORABLE_ARMOR_EFFECTIVE);
+		var toolAttributes = BuiltInRegistries.ATTRIBUTE.getTag(PastelAttributeTags.INEXORABLE_HANDHELD_EFFECTIVE);
 		
 		if (armorInexorable && armorAttributes.isPresent()) {
 			for (Holder<Attribute> attributeRegistryEntry : armorAttributes.get()) {
@@ -54,6 +54,6 @@ public class InexorableHelper {
 	}
 	
 	public static boolean isArmorActive(LivingEntity entity) {
-		return SpectrumEnchantmentHelper.hasEnchantment(entity.level().registryAccess(), SpectrumEnchantments.INEXORABLE, entity.getItemBySlot(EquipmentSlot.CHEST));
+		return PastelEnchantmentHelper.hasEnchantment(entity.level().registryAccess(), PastelEnchantments.INEXORABLE, entity.getItemBySlot(EquipmentSlot.CHEST));
 	}
 }

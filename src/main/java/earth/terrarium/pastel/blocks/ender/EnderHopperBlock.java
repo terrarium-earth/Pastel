@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.ender;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.inventories.GenericSpectrumContainerScreenHandler;
+import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -87,7 +87,7 @@ public class EnderHopperBlock extends BaseEntityBlock {
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? null : createTickerHelper(type, SpectrumBlockEntities.ENDER_HOPPER.get(), EnderHopperBlockEntity::serverTick);
+		return world.isClientSide ? null : createTickerHelper(type, PastelBlockEntities.ENDER_HOPPER.get(), EnderHopperBlockEntity::serverTick);
 	}
 	
 	@Override
@@ -146,7 +146,7 @@ public class EnderHopperBlock extends BaseEntityBlock {
 				if (enderHopperBlockEntity.isOwner(player)) {
 					PlayerEnderChestContainer enderChestInventory = player.getEnderChestInventory();
 					
-					player.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> GenericSpectrumContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory, ScreenBackgroundVariant.EARLYGAME), enderHopperBlockEntity.getContainerName()));
+					player.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> GenericPastelContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory, ScreenBackgroundVariant.EARLYGAME), enderHopperBlockEntity.getContainerName()));
 					player.awardStat(Stats.OPEN_ENDERCHEST);
 					PiglinAi.angerNearbyPiglins(player, true);
 				} else {

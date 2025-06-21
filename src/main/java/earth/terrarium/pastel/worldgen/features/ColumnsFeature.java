@@ -2,8 +2,8 @@ package earth.terrarium.pastel.worldgen.features;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -24,7 +24,7 @@ import java.util.function.Supplier;
  */
 public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
 	
-	private static final ImmutableList<Supplier<Block>> CANNOT_REPLACE_BLOCKS = ImmutableList.of(() -> Blocks.BEDROCK, () -> Blocks.CHEST, () -> Blocks.SPAWNER, SpectrumBlocks.DOWNSTONE);
+	private static final ImmutableList<Supplier<Block>> CANNOT_REPLACE_BLOCKS = ImmutableList.of(() -> Blocks.BEDROCK, () -> Blocks.CHEST, () -> Blocks.SPAWNER, PastelBlocks.DOWNSTONE);
 	private static final int BIG_MAX_OFFSET = 5;
 	private static final int BIG_COUNT = 50;
 	private static final int SMALL_MAX_OFFSET = 8;
@@ -114,7 +114,7 @@ public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
         } else {
             BlockState blockState = world.getBlockState(mutablePos.move(Direction.DOWN));
             mutablePos.move(Direction.UP);
-            return !blockState.isAir() && !blockState.is(SpectrumBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES) && !CANNOT_REPLACE_BLOCKS.stream().anyMatch(block -> blockState.getBlock() == block);
+            return !blockState.isAir() && !blockState.is(PastelBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES) && !CANNOT_REPLACE_BLOCKS.stream().anyMatch(block -> blockState.getBlock() == block);
         }
     }
 
@@ -127,7 +127,7 @@ public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
                 return null;
             }
 
-            if (blockState.isAir() || blockState.is(SpectrumBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES)) {
+            if (blockState.isAir() || blockState.is(PastelBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES)) {
                 return mutablePos;
             }
 
@@ -139,7 +139,7 @@ public class ColumnsFeature extends Feature<ColumnsFeatureConfig> {
 
     private static boolean isReplaceable(LevelAccessor world, int seaLevel, BlockPos pos) {
         BlockState blockState = world.getBlockState(pos);
-        return blockState.isAir() || blockState.is(SpectrumBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES) ||!blockState.getFluidState().isEmpty() && pos.getY() <= seaLevel;
+        return blockState.isAir() || blockState.is(PastelBlockTags.DEEPER_DOWN_FEATURE_REPLACEABLES) ||!blockState.getFluidState().isEmpty() && pos.getY() <= seaLevel;
     }
 
 }

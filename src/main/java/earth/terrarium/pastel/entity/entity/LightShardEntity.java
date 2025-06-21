@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.EntityType;
@@ -26,7 +26,7 @@ public class LightShardEntity extends LightShardBaseEntity {
 	}
 	
 	public LightShardEntity(Level world, LivingEntity owner, float damageMod, float lifeSpanTicks) {
-		super(SpectrumEntityTypes.LIGHT_SHARD.get(), world, owner, 48, damageMod, lifeSpanTicks);
+		super(PastelEntityTypes.LIGHT_SHARD.get(), world, owner, 48, damageMod, lifeSpanTicks);
 		scaleOffset /= 1.5F;
 		spriteId = world.getRandom().nextInt(4);
 	}
@@ -46,9 +46,9 @@ public class LightShardEntity extends LightShardBaseEntity {
 	
 	static {
 		SPRITES = new ResourceLocation[4];
-		SPRITES[0] = SpectrumCommon.locate("textures/entity/projectile/light_shard_0.png");
-		SPRITES[1] = SpectrumCommon.locate("textures/entity/projectile/light_shard_1.png");
-		SPRITES[2] = SpectrumCommon.locate("textures/entity/projectile/light_shard_2.png");
-		SPRITES[3] = SpectrumCommon.locate("textures/entity/projectile/light_shard_3.png");
+		SPRITES[0] = PastelCommon.locate("textures/entity/projectile/light_shard_0.png");
+		SPRITES[1] = PastelCommon.locate("textures/entity/projectile/light_shard_1.png");
+		SPRITES[2] = PastelCommon.locate("textures/entity/projectile/light_shard_2.png");
+		SPRITES[3] = PastelCommon.locate("textures/entity/projectile/light_shard_3.png");
 	}
 }

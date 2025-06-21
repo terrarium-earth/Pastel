@@ -33,7 +33,7 @@ public abstract class InGameHudMixin {
     @ModifyExpressionValue(method = "renderCameraOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;useFancyGraphics()Z"))
     private boolean spectrum$disableVignietteInDimension(boolean original) {
 		var player = Minecraft.getInstance().player;
-		var isInDim = player != null && SpectrumDimensions.DIMENSION_KEY.equals(player.level().dimension());
+		var isInDim = player != null && PastelDimensions.DIMENSION_KEY.equals(player.level().dimension());
         return !isInDim && original;
     }
 
@@ -71,7 +71,7 @@ public abstract class InGameHudMixin {
 
     @WrapOperation(method = "renderHearts", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderHeart(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V"))
     private void renderDivinityHearts(Gui instance, GuiGraphics guiGraphics, Gui.HeartType heartType, int x, int y, boolean hardcore, boolean halfHeart, boolean blinking, Operation<Void> original, @Local(argsOnly = true) Player player) {
-        if (player.hasEffect(SpectrumStatusEffects.DIVINITY)) {
+        if (player.hasEffect(PastelStatusEffects.DIVINITY)) {
             renderHeart(guiGraphics, heartType, x, y, true, halfHeart, blinking);
         }
         else {

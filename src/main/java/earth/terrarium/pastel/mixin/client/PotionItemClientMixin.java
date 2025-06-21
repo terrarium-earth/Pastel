@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin.client;
 
 import earth.terrarium.pastel.components.CustomPotionDataComponent;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
@@ -24,7 +24,7 @@ public abstract class PotionItemClientMixin {
 	
 	@Inject(method = "appendHoverText", at = @At("HEAD"), cancellable = true)
 	private void spectrum$makePotionUnidentifiable(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type, CallbackInfo ci) {
-		CustomPotionDataComponent component = stack.get(SpectrumDataComponentTypes.CUSTOM_POTION_DATA);
+		CustomPotionDataComponent component = stack.get(PastelDataComponentTypes.CUSTOM_POTION_DATA);
 		if (component != null && component.unidentifiable()) {
 			tooltip.add(Component.translatable("item.pastel.potion.tooltip.unidentifiable"));
 			ci.cancel();

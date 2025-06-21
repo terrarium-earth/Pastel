@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.upgrade;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
@@ -62,7 +62,7 @@ public class UpgradeBlockBlockEntityRenderer<PedestalUpgradeBlockEntity extends 
 		
 		switch (upgradeType) {
 			case SPEED -> {
-				spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/pedestal_upgrade_speed"));
+				spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/pedestal_upgrade_speed"));
 				
 				modelPartData.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -4.0F, -2.0F, 4.0F, 8.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
 				modelPartData.addOrReplaceChild("basalt", CubeListBuilder.create().texOffs(20, 2).mirror().addBox(-3.0F, -3.0F, -3.0F, 6.0F, 1.0F, 6.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
@@ -71,7 +71,7 @@ public class UpgradeBlockBlockEntityRenderer<PedestalUpgradeBlockEntity extends 
 				return LayerDefinition.create(modelData, 48, 48);
 			}
 			case YIELD -> {
-				spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/pedestal_upgrade_yield"));
+				spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/pedestal_upgrade_yield"));
 				
 				modelPartData.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -4.0F, -2.0F, 4.0F, 8.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
 				modelPartData.addOrReplaceChild("basalt", CubeListBuilder.create().texOffs(20, 2).mirror().addBox(-3.0F, -3.0F, -3.0F, 6.0F, 1.0F, 6.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
@@ -80,7 +80,7 @@ public class UpgradeBlockBlockEntityRenderer<PedestalUpgradeBlockEntity extends 
 				return LayerDefinition.create(modelData, 48, 48);
 			}
 			case EFFICIENCY -> {
-				spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/pedestal_upgrade_efficiency"));
+				spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/pedestal_upgrade_efficiency"));
 				
 				modelPartData.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -4.0F, -2.0F, 4.0F, 8.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
 				modelPartData.addOrReplaceChild("basalt", CubeListBuilder.create().texOffs(20, 2).mirror().addBox(-3.0F, -3.0F, -3.0F, 6.0F, 1.0F, 6.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
@@ -89,7 +89,7 @@ public class UpgradeBlockBlockEntityRenderer<PedestalUpgradeBlockEntity extends 
 				return LayerDefinition.create(modelData, 48, 48);
 			}
 			default -> {
-				spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/pedestal_upgrade_experience"));
+				spriteIdentifier = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/pedestal_upgrade_experience"));
 				
 				modelPartData.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -4.0F, -2.0F, 4.0F, 8.0F, 4.0F), PartPose.offset(0.0F, 0.0F, 0.0F));
 				modelPartData.addOrReplaceChild("basalt", CubeListBuilder.create().texOffs(20, 2).mirror().addBox(-3.0F, -3.0F, -3.0F, 6.0F, 1.0F, 6.0F), PartPose.offset(0.0F, 0.0F, 0.0F));

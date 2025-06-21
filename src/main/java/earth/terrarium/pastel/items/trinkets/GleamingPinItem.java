@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class GleamingPinItem extends SpectrumTrinketItem {
+public class GleamingPinItem extends PastelTrinketItem {
 	
 	public static final int BASE_RANGE = 12;
 	public static final int RANGE_BONUS_PER_LEVEL_OF_SNIPING = 4;
@@ -31,12 +31,12 @@ public class GleamingPinItem extends SpectrumTrinketItem {
 	public static final long COOLDOWN_TICKS = 160;
 	
 	public GleamingPinItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/gleaming_pin"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/gleaming_pin"));
 	}
 	
 	public static void doGleamingPinEffect(@NotNull Player player, @NotNull ServerLevel world, ItemStack gleamingPinStack) {
-		world.playSound(null, player.getX(), player.getY(), player.getZ(), SpectrumSoundEvents.RADIANCE_PIN_TRIGGER, SoundSource.PLAYERS, 0.4F, 0.9F + world.getRandom().nextFloat() * 0.2F);
-		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, player.position().add(0, 0.75, 0), SpectrumParticleTypes.LIQUID_CRYSTAL_SPARKLE, 100, new Vec3(0, 0.5, 0), new Vec3(2.5, 0.1, 2.5));
+		world.playSound(null, player.getX(), player.getY(), player.getZ(), PastelSoundEvents.RADIANCE_PIN_TRIGGER, SoundSource.PLAYERS, 0.4F, 0.9F + world.getRandom().nextFloat() * 0.2F);
+		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, player.position().add(0, 0.75, 0), PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, 100, new Vec3(0, 0.5, 0), new Vec3(2.5, 0.1, 2.5));
 		
 		world.getEntities(player, player.getBoundingBox().inflate(getEffectRange(world, gleamingPinStack)), EntitySelector.LIVING_ENTITY_STILL_ALIVE).forEach((entity) -> {
 			if (entity instanceof LivingEntity livingEntity) {
@@ -46,7 +46,7 @@ public class GleamingPinItem extends SpectrumTrinketItem {
 	}
 	
 	public static int getEffectRange(ServerLevel world, ItemStack stack) {
-		return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_SNIPING * SpectrumEnchantmentHelper.getLevel(world.registryAccess(), SpectrumEnchantments.SNIPING, stack);
+		return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_SNIPING * PastelEnchantmentHelper.getLevel(world.registryAccess(), PastelEnchantments.SNIPING, stack);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class GleamingPinItem extends SpectrumTrinketItem {
 	
 	@Override
 	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-		return super.supportsEnchantment(stack, enchantment) || enchantment.is(SpectrumEnchantments.SNIPING);
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(PastelEnchantments.SNIPING);
 	}
 	
 }

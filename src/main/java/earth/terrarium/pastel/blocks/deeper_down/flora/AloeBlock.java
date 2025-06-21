@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -60,7 +60,7 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
 	
 	@Override
 	protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-		return floor.is(SpectrumBlockTags.ALOE_PLANTABLE);
+		return floor.is(PastelBlockTags.ALOE_PLANTABLE);
 	}
 	
 	@Override
@@ -81,7 +81,7 @@ public class AloeBlock extends BushBlock implements BonemealableBlock {
                 world.setBlockAndUpdate(pos, state.setValue(AGE, age + 1));
                 world.playSound(null, pos, state.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
-                if (world.getBlockState(pos.below()).is(SpectrumBlockTags.ALOE_CONVERTED)) {
+                if (world.getBlockState(pos.below()).is(PastelBlockTags.ALOE_CONVERTED)) {
                     world.setBlockAndUpdate(pos.below(), Blocks.SAND.defaultBlockState());
                 }
             }

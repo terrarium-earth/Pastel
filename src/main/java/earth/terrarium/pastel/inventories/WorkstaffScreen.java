@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.items.tools.GlassCrestWorkstaffItem;
 import earth.terrarium.pastel.items.tools.WorkstaffItem;
 import earth.terrarium.pastel.networking.c2s_payloads.WorkstaffToggleSelectedPayload;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -33,8 +33,8 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 			GridEntry.EMPTY,
 			GridEntry.item(Items.FEATHER, Component.translatable("item.pastel.workstaff.gui.silk_touch"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_SILK_TOUCH)),
 			GridEntry.BACK,
-			GridEntry.item(SpectrumItems.RESONANCE_SHARD.get(), Component.translatable("item.pastel.workstaff.gui.resonance"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_RESONANCE)),
-			GridEntry.item(SpectrumBlocks.FOUR_LEAF_CLOVER.get().asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE))
+			GridEntry.item(PastelItems.RESONANCE_SHARD.get(), Component.translatable("item.pastel.workstaff.gui.resonance"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_RESONANCE)),
+			GridEntry.item(PastelBlocks.FOUR_LEAF_CLOVER.get().asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE))
 	);
 
 	public WorkstaffScreen(WorkstaffScreenHandler handler, Inventory playerInventory, Component title) {
@@ -45,7 +45,7 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 		if (mainHandStack.getItem() instanceof WorkstaffItem workstaffItem && workstaffItem.itemAbilitiesEnabled(mainHandStack)) {
 			rightClickGridEntry = GridEntry.item(Items.WOODEN_HOE, Component.translatable("item.pastel.workstaff.gui.disable_right_click_actions"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.DISABLE_RIGHT_CLICK_ACTIONS));
 		} else {
-			rightClickGridEntry = GridEntry.item(SpectrumItems.MULTITOOL.get(), Component.translatable("item.pastel.workstaff.gui.enable_right_click_actions"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.ENABLE_RIGHT_CLICK_ACTIONS));
+			rightClickGridEntry = GridEntry.item(PastelItems.MULTITOOL.get(), Component.translatable("item.pastel.workstaff.gui.enable_right_click_actions"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.ENABLE_RIGHT_CLICK_ACTIONS));
 		}
 		
 		if (mainHandStack.getItem() instanceof GlassCrestWorkstaffItem) {
@@ -62,9 +62,9 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 			));
 		} else {
 			var drm = Minecraft.getInstance().player.registryAccess();
-			GridEntry enchantmentEntry = SpectrumEnchantmentHelper.hasEnchantment(drm, Enchantments.FORTUNE, mainHandStack)
+			GridEntry enchantmentEntry = PastelEnchantmentHelper.hasEnchantment(drm, Enchantments.FORTUNE, mainHandStack)
 					? GridEntry.item(Items.FEATHER, Component.translatable("item.pastel.workstaff.gui.silk_touch"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_SILK_TOUCH))
-					: GridEntry.item(SpectrumBlocks.FOUR_LEAF_CLOVER.get().asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE));
+					: GridEntry.item(PastelBlocks.FOUR_LEAF_CLOVER.get().asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE));
 
 			gridStack.push(new Grid(
 					GridEntry.CLOSE,
@@ -80,7 +80,7 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 	protected static void select(WorkstaffItem.GUIToggle toggle) {
 		PacketDistributor.sendToServer(new WorkstaffToggleSelectedPayload(toggle.ordinal()));
 		Minecraft client = Minecraft.getInstance();
-		client.level.playSound(null, client.player.blockPosition(), SpectrumSoundEvents.PAINTBRUSH_SELECT, SoundSource.NEUTRAL, 0.6F, 1.0F);
+		client.level.playSound(null, client.player.blockPosition(), PastelSoundEvents.PAINTBRUSH_SELECT, SoundSource.NEUTRAL, 0.6F, 1.0F);
 		client.player.closeContainer();
 	}
 	

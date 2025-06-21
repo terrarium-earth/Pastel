@@ -6,7 +6,7 @@ import earth.terrarium.pastel.blocks.conditional.CloakedOreBlock;
 import earth.terrarium.pastel.helpers.ParticleHelper;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleAroundBlockSidesPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -45,9 +45,9 @@ public class ShimmerstoneOreBlock extends CloakedOreBlock {
 	public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
 		var random = world.getRandom();
 		if (!world.isClientSide() && !entity.isSteppingCarefully() && random.nextInt(3) == 0) {
-			PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, 1, pos, new Vec3(0, 0.05, 0), SpectrumParticleTypes.SHIMMERSTONE_SPARKLE, this::isVisibleTo, Direction.UP);
+			PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, 1, pos, new Vec3(0, 0.05, 0), PastelParticleTypes.SHIMMERSTONE_SPARKLE, this::isVisibleTo, Direction.UP);
 			if (random.nextInt(3) == 0) {
-				PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, 1, pos, new Vec3(0, 0.025, 0), SpectrumParticleTypes.SHIMMERSTONE_SPARKLE, this::isVisibleTo, Direction.values());
+				PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, 1, pos, new Vec3(0, 0.025, 0), PastelParticleTypes.SHIMMERSTONE_SPARKLE, this::isVisibleTo, Direction.values());
 				
 			}
 		}
@@ -60,7 +60,7 @@ public class ShimmerstoneOreBlock extends CloakedOreBlock {
 			var random = world.getRandom();
 			if (random.nextBoolean()) {
 				var amount = (int) Math.ceil(Mth.clamp(fallDistance / 2, 1, 10));
-				PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, amount, pos, new Vec3(0, 0.05 + amount / 30.0, 0), SpectrumParticleTypes.SHIMMERSTONE_SPARKLE, this::isVisibleTo, Direction.UP);
+				PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, amount, pos, new Vec3(0, 0.05 + amount / 30.0, 0), PastelParticleTypes.SHIMMERSTONE_SPARKLE, this::isVisibleTo, Direction.UP);
 			}
 		}
 		super.fallOn(world, state, pos, entity, fallDistance);
@@ -72,14 +72,14 @@ public class ShimmerstoneOreBlock extends CloakedOreBlock {
 		super.animateTick(state, world, pos, random);
 		
 		if (isVisibleTo(Minecraft.getInstance().player)) {
-			ParticleHelper.playParticleAroundBlockSides(world, SpectrumParticleTypes.SHIMMERSTONE_SPARKLE, pos, Direction.values(), 1, new Vec3(0, 0.025, 0));
+			ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.SHIMMERSTONE_SPARKLE, pos, Direction.values(), 1, new Vec3(0, 0.025, 0));
 		}
 	}
 	
 	@Override
 	public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
 		if (!world.isClientSide()) {
-			PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, 3, pos, new Vec3(0, 0.05, 0), SpectrumParticleTypes.SHIMMERSTONE_SPARKLE, serverPlayer -> isVisibleTo(serverPlayer), Direction.values());
+			PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, 3, pos, new Vec3(0, 0.05, 0), PastelParticleTypes.SHIMMERSTONE_SPARKLE, serverPlayer -> isVisibleTo(serverPlayer), Direction.values());
 		}
 		return super.playerWillDestroy(world, pos, state, player);
 	}
@@ -88,7 +88,7 @@ public class ShimmerstoneOreBlock extends CloakedOreBlock {
 	public void attack(BlockState state, Level world, BlockPos pos, Player player) {
 		super.attack(state, world, pos, player);
 		if (!world.isClientSide()) {
-			PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, 1, pos, new Vec3(0, 0.01, 0), SpectrumParticleTypes.SHIMMERSTONE_SPARKLE, serverPlayer -> isVisibleTo(serverPlayer), Direction.values());
+			PlayParticleAroundBlockSidesPayload.playParticleAroundBlockSides((ServerLevel) world, 1, pos, new Vec3(0, 0.01, 0), PastelParticleTypes.SHIMMERSTONE_SPARKLE, serverPlayer -> isVisibleTo(serverPlayer), Direction.values());
 		}
 	}
 }

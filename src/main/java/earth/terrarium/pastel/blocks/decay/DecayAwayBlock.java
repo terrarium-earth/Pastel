@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.decay;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDimensions;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -56,10 +56,10 @@ public class DecayAwayBlock extends Block {
 		// convert all neighboring decay blocks to this
 		for (BlockPos targetBlockPos : BlockPos.withinManhattan(pos, 1, 1, 1)) {
 			BlockState currentBlockState = world.getBlockState(targetBlockPos);
-			if (currentBlockState.is(SpectrumBlockTags.DECAY_AWAY_CURABLES)) {
+			if (currentBlockState.is(PastelBlockTags.DECAY_AWAY_CURABLES)) {
 				world.setBlockAndUpdate(targetBlockPos, getTargetStateForCurable(currentBlockState));
 				world.scheduleTick(targetBlockPos, state.getBlock(), 8);
-			} else if (currentBlockState.is(SpectrumBlockTags.DECAY_AWAY_REMOVABLES)) {
+			} else if (currentBlockState.is(PastelBlockTags.DECAY_AWAY_REMOVABLES)) {
 				world.setBlockAndUpdate(targetBlockPos, this.defaultBlockState().setValue(TARGET_CONVERSION, TargetConversion.AIR));
 				world.scheduleTick(targetBlockPos, state.getBlock(), 8);
 			}
@@ -73,11 +73,11 @@ public class DecayAwayBlock extends Block {
 	
 	public BlockState getTargetStateForCurable(BlockState blockState) {
 		if (blockState.getBlock() instanceof DecayBlock) {
-			if (blockState.is(SpectrumBlocks.RUIN.get()) || blockState.is(SpectrumBlocks.FORFEITURE.get())) {
+			if (blockState.is(PastelBlocks.RUIN.get()) || blockState.is(PastelBlocks.FORFEITURE.get())) {
 				if (blockState.getValue(ForfeitureBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
 					return this.defaultBlockState().setValue(TARGET_CONVERSION, TargetConversion.BEDROCK);
 				}
-			} else if (blockState.is(SpectrumBlocks.FAILING.get())) {
+			} else if (blockState.is(PastelBlocks.FAILING.get())) {
 				if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.DEFAULT) {
 					return this.defaultBlockState().setValue(TARGET_CONVERSION, TargetConversion.OBSIDIAN);
 				} else if (blockState.getValue(FailingBlock.CONVERSION) == DecayBlock.Conversion.SPECIAL) {
@@ -120,8 +120,8 @@ public class DecayAwayBlock extends Block {
 					return Blocks.NETHERRACK.defaultBlockState();
 				} else if (BuiltinDimensionTypes.END_EFFECTS.equals(identifier)) {
 					return Blocks.END_STONE.defaultBlockState();
-				} else if (SpectrumDimensions.DIMENSION_ID.equals(identifier)) {
-					return SpectrumBlocks.BLACKSLAG.get().defaultBlockState();
+				} else if (PastelDimensions.DIMENSION_ID.equals(identifier)) {
+					return PastelBlocks.BLACKSLAG.get().defaultBlockState();
 				}
 				return Blocks.DIRT.defaultBlockState();
 			}

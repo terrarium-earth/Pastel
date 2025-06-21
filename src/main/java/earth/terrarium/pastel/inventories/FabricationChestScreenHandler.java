@@ -3,7 +3,7 @@ package earth.terrarium.pastel.inventories;
 import earth.terrarium.pastel.blocks.chests.FabricationChestBlockEntity;
 import earth.terrarium.pastel.inventories.slots.ExtractOnlySlot;
 import earth.terrarium.pastel.inventories.slots.StackFilterSlot;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,7 +20,7 @@ public class FabricationChestScreenHandler extends AbstractContainerMenu {
 	private final Container inventory;
 	
 	public FabricationChestScreenHandler(int syncId, Inventory playerInventory) {
-		this(SpectrumScreenHandlerTypes.FABRICATION_CHEST, syncId, playerInventory);
+		this(PastelScreenHandlerTypes.FABRICATION_CHEST, syncId, playerInventory);
 	}
 	
 	protected FabricationChestScreenHandler(MenuType<?> type, int i, Inventory playerInventory) {
@@ -28,7 +28,7 @@ public class FabricationChestScreenHandler extends AbstractContainerMenu {
 	}
 	
 	public FabricationChestScreenHandler(int syncId, Inventory playerInventory, Container inventory) {
-		this(SpectrumScreenHandlerTypes.FABRICATION_CHEST, syncId, playerInventory, inventory);
+		this(PastelScreenHandlerTypes.FABRICATION_CHEST, syncId, playerInventory, inventory);
 	}
 	
 	protected FabricationChestScreenHandler(MenuType<?> type, int syncId, Inventory playerInventory, Container inventory) {
@@ -50,7 +50,7 @@ public class FabricationChestScreenHandler extends AbstractContainerMenu {
 		// crafting tablet slots
 		for (int j = 0; j < 4; j++) {
 			int slotId = FabricationChestBlockEntity.RECIPE_SLOTS[j];
-			this.addSlot(new StackFilterSlot(inventory, slotId, 26 + j * 36, 18, SpectrumItems.CRAFTING_TABLET.get()));
+			this.addSlot(new StackFilterSlot(inventory, slotId, 26 + j * 36, 18, PastelItems.CRAFTING_TABLET.get()));
 		}
 		
 		// crafting result slots
@@ -91,7 +91,7 @@ public class FabricationChestScreenHandler extends AbstractContainerMenu {
 				if (!this.moveItemStackTo(clickedStack, 35, 71, false)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (index > FabricationChestBlockEntity.INVENTORY_SIZE && clickedStackCopy.is(SpectrumItems.CRAFTING_TABLET.get())) {
+			} else if (index > FabricationChestBlockEntity.INVENTORY_SIZE && clickedStackCopy.is(PastelItems.CRAFTING_TABLET.get())) {
 				if (!this.moveItemStackTo(clickedStack, FabricationChestBlockEntity.RECIPE_SLOTS[0], FabricationChestBlockEntity.RECIPE_SLOTS[FabricationChestBlockEntity.RECIPE_SLOTS.length - 1] + 1, false)) {
 					return ItemStack.EMPTY;
 				}

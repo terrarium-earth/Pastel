@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.pedestal;
 
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
@@ -12,11 +12,11 @@ import java.util.List;
 public class PedestalRecipeInput implements RecipeInput {
 	
 	private static final List<ItemStack> FULL_GEMSTONE_POWDER_STACKS = List.of(
-			new ItemStack(SpectrumItems.TOPAZ_POWDER.get(), 64),
-			new ItemStack(SpectrumItems.AMETHYST_POWDER.get(), 64),
-			new ItemStack(SpectrumItems.CITRINE_POWDER.get(), 64),
-			new ItemStack(SpectrumItems.ONYX_POWDER.get(), 64),
-			new ItemStack(SpectrumItems.MOONSTONE_POWDER.get(), 64)
+			new ItemStack(PastelItems.TOPAZ_POWDER.get(), 64),
+			new ItemStack(PastelItems.AMETHYST_POWDER.get(), 64),
+			new ItemStack(PastelItems.CITRINE_POWDER.get(), 64),
+			new ItemStack(PastelItems.ONYX_POWDER.get(), 64),
+			new ItemStack(PastelItems.MOONSTONE_POWDER.get(), 64)
 	);
 	
 	@Nullable

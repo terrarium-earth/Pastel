@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GravitableItem;
 import net.minecraft.ChatFormatting;
@@ -14,7 +14,7 @@ import java.util.List;
 public class RingOfAerialGraceItem extends GravityRingItem implements GravitableItem {
 
 	public RingOfAerialGraceItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/ring_of_aerial_grace"), InkColors.WHITE);
+		super(settings, PastelCommon.locate("unlocks/trinkets/ring_of_aerial_grace"), InkColors.WHITE);
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class RingOfAerialGraceItem extends GravityRingItem implements Gravitable
 		tooltip.add(Component.translatable("item.pastel.ring_of_aerial_grace.tooltip2").withStyle(ChatFormatting.GRAY));
 	}
 	
-	public static ResourceLocation ATTRIBUTE_ID = SpectrumCommon.locate("ring_of_aerial_grace_gravity");
+	public static ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("ring_of_aerial_grace_gravity");
 	
 	@Override
 	protected ResourceLocation getAttributeID() {

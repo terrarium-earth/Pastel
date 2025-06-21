@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.structure;
 
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -19,7 +19,7 @@ public class PlayerTrackerBlockEntity extends BlockEntity {
 	private final List<UUID> playersThatOpenedAlready = new ArrayList<>();
 
 	public PlayerTrackerBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.PLAYER_TRACKING.get(), pos, state);
+		super(PastelBlockEntities.PLAYER_TRACKING.get(), pos, state);
 	}
 
 	public boolean hasTaken(Player player) {

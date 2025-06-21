@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.blocks.decoration.SpectrumFacingBlock;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
+import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.*;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PyriteRipperBlock extends SpectrumFacingBlock {
+public class PyriteRipperBlock extends PastelFacingBlock {
 
 	public static final MapCodec<PyriteRipperBlock> CODEC = simpleCodec(PyriteRipperBlock::new);
 
@@ -104,12 +104,12 @@ public class PyriteRipperBlock extends SpectrumFacingBlock {
 	
 	@Override
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-		if (entity instanceof LivingEntity && !entity.getType().is(SpectrumEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
+		if (entity instanceof LivingEntity && !entity.getType().is(PastelEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
 			if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
 				double difX = Math.abs(entity.getX() - entity.xOld);
 				double difZ = Math.abs(entity.getZ() - entity.zOld);
 				if (difX >= 0.003 || difZ >= 0.003) {
-					entity.hurt(SpectrumDamageTypes.ripping(world), 2.0F);
+					entity.hurt(PastelDamageTypes.ripping(world), 2.0F);
 				}
 			}
 		}

@@ -3,9 +3,8 @@ package earth.terrarium.pastel.api.predicate.item;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.item.ItemStorage;
-import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
 import earth.terrarium.pastel.progression.advancement.LongRange;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.SingleComponentItemPredicate;
 import net.minecraft.core.component.DataComponentType;
@@ -20,7 +19,7 @@ public record BottomlessStackPredicate(ItemPredicate template, LongRange count) 
 	
 	@Override
 	public DataComponentType<ItemStorage.Component> componentType() {
-		return SpectrumDataComponentTypes.ITEM_STORAGE;
+		return PastelDataComponentTypes.ITEM_STORAGE;
 	}
 	
 	@Override

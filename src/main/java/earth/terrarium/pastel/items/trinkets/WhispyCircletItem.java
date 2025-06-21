@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import com.google.common.collect.Multimap;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumEntityAttributes;
-import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelEntityAttributes;
+import earth.terrarium.pastel.registries.PastelStatusEffectTags;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -28,13 +28,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class WhispyCircletItem extends SpectrumTrinketItem {
+public class WhispyCircletItem extends PastelTrinketItem {
 	
 	private final static int TRIGGER_EVERY_X_TICKS = 100;
 	private final static int NEGATIVE_EFFECT_SHORTENING_TICKS = 200;
 	
 	public WhispyCircletItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/whispy_circlet"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/whispy_circlet"));
 	}
 	
 	public static void removeSingleStatusEffect(@NotNull LivingEntity entity, MobEffectCategory category) {
@@ -46,7 +46,7 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 		List<MobEffectInstance> negativeEffects = new ArrayList<>();
 		for (MobEffectInstance statusEffectInstance : currentEffects) {
 			Holder<MobEffect> effect = statusEffectInstance.getEffect();
-			if (effect.value().getCategory() == category && !effect.is(SpectrumStatusEffectTags.SOPORIFIC) && !effect.is(SpectrumStatusEffectTags.BYPASSES_WHISPY_CIRCLET)) {
+			if (effect.value().getCategory() == category && !effect.is(PastelStatusEffectTags.SOPORIFIC) && !effect.is(PastelStatusEffectTags.BYPASSES_WHISPY_CIRCLET)) {
 				negativeEffects.add(statusEffectInstance);
 			}
 		}
@@ -99,7 +99,7 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 	}
 	
 	public static boolean affects(Holder<MobEffect> effect) {
-		return effect.value().getCategory() == MobEffectCategory.HARMFUL && !effect.is(SpectrumStatusEffectTags.BYPASSES_WHISPY_CIRCLET);
+		return effect.value().getCategory() == MobEffectCategory.HARMFUL && !effect.is(PastelStatusEffectTags.BYPASSES_WHISPY_CIRCLET);
 	}
 	
 	public static void preventPhantomSpawns(@NotNull ServerPlayer serverPlayerEntity) {
@@ -131,12 +131,12 @@ public class WhispyCircletItem extends SpectrumTrinketItem {
 		}
 	}
 	
-	public static final ResourceLocation ATTRIBUTE_ID = SpectrumCommon.locate("whispy_circlet_mental_presence");
+	public static final ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("whispy_circlet_mental_presence");
 	
 	@Override
 	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
 		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
-		modifiers.put(SpectrumEntityAttributes.MENTAL_PRESENCE, new AttributeModifier(ATTRIBUTE_ID, 0.3, AttributeModifier.Operation.ADD_VALUE));
+		modifiers.put(PastelEntityAttributes.MENTAL_PRESENCE, new AttributeModifier(ATTRIBUTE_ID, 0.3, AttributeModifier.Operation.ADD_VALUE));
 		return modifiers;
 	}
 

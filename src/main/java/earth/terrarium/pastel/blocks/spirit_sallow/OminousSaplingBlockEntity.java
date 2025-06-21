@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.spirit_sallow;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -17,7 +17,7 @@ public class OminousSaplingBlockEntity extends BlockEntity implements PlayerOwne
 	public UUID ownerUUID;
 	
 	public OminousSaplingBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.OMINOUS_SAPLING.get(), blockPos, blockState);
+		super(PastelBlockEntities.OMINOUS_SAPLING.get(), blockPos, blockState);
 	}
 	
 	public OminousSaplingBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.pastel_network;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,7 +15,7 @@ import org.joml.Matrix4f;
 
 public class PastelRenderHelper {
 
-    public static final ResourceLocation BEAM_TEXTURE_ID = SpectrumCommon.locate("textures/entity/pastel_line.png");
+    public static final ResourceLocation BEAM_TEXTURE_ID = PastelCommon.locate("textures/entity/pastel_line.png");
     public static final float BEAM_WIDTH = 0.05F;
 	
 	public static void renderLineTo(final PoseStack matrices, final MultiBufferSource vertexConsumers, final float[] color, final BlockPos thisPos, final BlockPos pos) {

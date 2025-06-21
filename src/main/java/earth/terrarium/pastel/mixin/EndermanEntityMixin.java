@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.monster.EnderMan;
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EndermanEntityMixin {
 	
 	@Unique
-	private final BlockState carriedBlockState = SpectrumBlocks.RADIATING_ENDER.get().defaultBlockState();
+	private final BlockState carriedBlockState = PastelBlocks.RADIATING_ENDER.get().defaultBlockState();
 	
 	@Shadow
 	@Nullable
@@ -35,9 +35,9 @@ public abstract class EndermanEntityMixin {
 			
 			float chance;
 			if (world.dimension().equals(Level.END)) {
-				chance = SpectrumCommon.CONFIG.EndermanHoldingEnderTreasureInEndChance;
+				chance = PastelCommon.CONFIG.EndermanHoldingEnderTreasureInEndChance;
 			} else {
-				chance = SpectrumCommon.CONFIG.EndermanHoldingEnderTreasureChance;
+				chance = PastelCommon.CONFIG.EndermanHoldingEnderTreasureChance;
 			}
 			
 			if (random.nextFloat() < chance) {
@@ -50,7 +50,7 @@ public abstract class EndermanEntityMixin {
 	
 	@Inject(at = @At("RETURN"), method = "requiresCustomPersistence", cancellable = true)
 	public void cannotDespawn(CallbackInfoReturnable<Boolean> cir) {
-		if (cir.getReturnValue() && this.getCarriedBlock() != null && this.getCarriedBlock().is(SpectrumBlocks.RADIATING_ENDER.get())) {
+		if (cir.getReturnValue() && this.getCarriedBlock() != null && this.getCarriedBlock().is(PastelBlocks.RADIATING_ENDER.get())) {
 			cir.setReturnValue(false);
 		}
 	}

@@ -4,14 +4,14 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.recipe.GatedSpectrumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumFluids;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluids;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -36,9 +36,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleRecipeInput> {
+public class CrystallarieumRecipe extends GatedPastelRecipe<SingleRecipeInput> {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/crystallarieum");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/crystallarieum");
 	
 	protected final static Map<BlockState, RecipeHolder<CrystallarieumRecipe>> STATE_CACHE = new HashMap<>();
 
@@ -71,7 +71,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleRecipeInput>
 	@Nullable
 	public static RecipeHolder<CrystallarieumRecipe> getRecipeForState(Level world, BlockState state) {
 		return STATE_CACHE.computeIfAbsent(state, s -> {
-			var recipes = world.getRecipeManager().getAllRecipesFor(SpectrumRecipeTypes.CRYSTALLARIEUM);
+			var recipes = world.getRecipeManager().getAllRecipesFor(PastelRecipeTypes.CRYSTALLARIEUM);
 			for (var recipe : recipes) {
 				if (recipe.value().growthStages.contains(s))
 					return recipe;
@@ -104,17 +104,17 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleRecipeInput>
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.CRYSTALLARIEUM.get());
+		return new ItemStack(PastelBlocks.CRYSTALLARIEUM.get());
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.CRYSTALLARIEUM_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.CRYSTALLARIEUM_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.CRYSTALLARIEUM;
+		return PastelRecipeTypes.CRYSTALLARIEUM;
 	}
 	
 	@Override
@@ -192,7 +192,7 @@ public class CrystallarieumRecipe extends GatedSpectrumRecipe<SingleRecipeInput>
 	}
 
 	private static FluidStack getLiquidCrystal() {
-		return new FluidStack(SpectrumFluids.LIQUID_CRYSTAL.get(), 1000);
+		return new FluidStack(PastelFluids.LIQUID_CRYSTAL.get(), 1000);
 	};
 
 

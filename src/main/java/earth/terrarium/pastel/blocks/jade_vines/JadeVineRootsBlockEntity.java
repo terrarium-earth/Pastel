@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
 import earth.terrarium.pastel.helpers.TimeHelper;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -27,7 +27,7 @@ public class JadeVineRootsBlockEntity extends BlockEntity {
 	private boolean wasExposedToSunlight = false;
 	
 	public JadeVineRootsBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.JADE_VINE_ROOTS.get(), pos, state);
+		super(PastelBlockEntities.JADE_VINE_ROOTS.get(), pos, state);
 		this.fenceBlockState = Blocks.OAK_FENCE.defaultBlockState();
 	}
 	

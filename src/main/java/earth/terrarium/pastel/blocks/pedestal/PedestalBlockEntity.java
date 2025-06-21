@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.pedestal;
 
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PedestalVariant;
 import earth.terrarium.pastel.api.block.PlayerOwned;
@@ -12,22 +12,19 @@ import earth.terrarium.pastel.capabilities.*;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.inventories.*;
-import earth.terrarium.pastel.items.magic_items.CraftingTabletItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayBlockBoundSoundInstancePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalCraftingFinishedParticlePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalUpgradedParticlePayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
-import earth.terrarium.pastel.recipe.pedestal.ShapedPedestalRecipe;
-import earth.terrarium.pastel.recipe.pedestal.ShapelessPedestalRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -45,7 +42,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -57,12 +53,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -104,7 +97,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	protected final CraftingDelegate propertyDelegate = new CraftingDelegate();
 	
 	public PedestalBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.PEDESTAL.get(), blockPos, blockState);
+		super(PastelBlockEntities.PEDESTAL.get(), blockPos, blockState);
 		
 		if (blockState.getBlock() instanceof PedestalBlock pedestalBlock) {
 			this.pedestalVariant = pedestalBlock.getVariant();
@@ -199,10 +192,10 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 				
 				Player player = pedestalBlockEntity.getOwnerIfOnline();
 				if (player instanceof ServerPlayer serverPlayerEntity) {
-					SpectrumAdvancementCriteria.PEDESTAL_RECIPE_CALCULATED.trigger(serverPlayerEntity, calculatedPedestalRecipe.assemble(pedestalBlockEntity.createRecipeInput(), world.registryAccess()), (int) calculatedPedestalRecipe.getExperience(), pedestalBlockEntity.propertyDelegate.craftingTimeTotal);
+					PastelAdvancementCriteria.PEDESTAL_RECIPE_CALCULATED.trigger(serverPlayerEntity, calculatedPedestalRecipe.assemble(pedestalBlockEntity.createRecipeInput(), world.registryAccess()), (int) calculatedPedestalRecipe.getExperience(), pedestalBlockEntity.propertyDelegate.craftingTimeTotal);
 				}
 			} else {
-				pedestalBlockEntity.propertyDelegate.craftingTimeTotal = (int) Math.ceil(SpectrumCommon.CONFIG.VanillaRecipeCraftingTimeTicks / pedestalBlockEntity.upgrades.getEffectiveValue(UpgradeType.SPEED));
+				pedestalBlockEntity.propertyDelegate.craftingTimeTotal = (int) Math.ceil(PastelCommon.CONFIG.VanillaRecipeCraftingTimeTicks / pedestalBlockEntity.upgrades.getEffectiveValue(UpgradeType.SPEED));
 			}
 			pedestalBlockEntity.setChanged();
 			PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) pedestalBlockEntity.getLevel(), pedestalBlockEntity.getBlockPos());
@@ -242,7 +235,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 		}
 		
 		if (pedestalBlockEntity.propertyDelegate.craftingTime == 1 && pedestalBlockEntity.propertyDelegate.craftingTimeTotal > 1) {
-			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(SpectrumSoundEvents.PEDESTAL_CRAFTING, (ServerLevel) pedestalBlockEntity.getLevel(), pedestalBlockEntity.getBlockPos(), pedestalBlockEntity.propertyDelegate.craftingTimeTotal - pedestalBlockEntity.propertyDelegate.craftingTime);
+			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.PEDESTAL_CRAFTING, (ServerLevel) pedestalBlockEntity.getLevel(), pedestalBlockEntity.getBlockPos(), pedestalBlockEntity.propertyDelegate.craftingTimeTotal - pedestalBlockEntity.propertyDelegate.craftingTime);
 		}
 		
 		// try to output the currently stored output stack
@@ -309,7 +302,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 		if (world != null && craftingRecipe instanceof PedestalRecipe pedestalRecipe) {
 			pedestalBlockEntity.playSound(pedestalRecipe.getSoundEvent(world.random));
 		} else {
-			pedestalBlockEntity.playSound(SpectrumSoundEvents.PEDESTAL_CRAFTING_FINISHED_GENERIC);
+			pedestalBlockEntity.playSound(PastelSoundEvents.PEDESTAL_CRAFTING_FINISHED_GENERIC);
 		}
 	}
 	
@@ -326,7 +319,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 		}
 		
 		// unchanged vanilla recipe?
-		if (SpectrumCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
+		if (PastelCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
 			if (currentRecipe instanceof CraftingRecipe craftingRecipe && craftingRecipe.matches(pedestalBlockEntity.createRecipeInput().getCraftingGridInput(), world)) {
 				return pedestalBlockEntity.currentRecipe;
 			}
@@ -334,9 +327,9 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 		
 		// current recipe does not match last recipe
 		// => search valid recipe
-		var pedestalRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.PEDESTAL, pedestalBlockEntity.createRecipeInput(), world).orElse(null);
+		var pedestalRecipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.PEDESTAL, pedestalBlockEntity.createRecipeInput(), world).orElse(null);
 		if (pedestalRecipe == null) {
-			if (SpectrumCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
+			if (PastelCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
 				return world.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pedestalBlockEntity.createRecipeInput().getCraftingGridInput(), world).orElse(null);
 			}
 			return null;
@@ -418,7 +411,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 		if (newPedestalVariant != null && newPedestalVariant.isBetterThan(getVariant(pedestalBlockEntity))) {
 			// It is an upgrade recipe (output is a pedestal block item)
 			// => Upgrade
-			pedestalBlockEntity.playSound(SpectrumSoundEvents.PEDESTAL_UPGRADE);
+			pedestalBlockEntity.playSound(PastelSoundEvents.PEDESTAL_UPGRADE);
 			PedestalBlock.upgradeToVariant(world, pedestalBlockEntity.getBlockPos(), newPedestalVariant);
 			PlayPedestalUpgradedParticlePayload.spawnPedestalUpgradeParticles(world, pedestalBlockEntity.worldPosition, newPedestalVariant);
 			
@@ -444,11 +437,11 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	
 	public static Item getGemstonePowderItemForSlot(int slot) {
 		return switch (slot) {
-			case 9 -> SpectrumItems.TOPAZ_POWDER.get();
-			case 10 -> SpectrumItems.AMETHYST_POWDER.get();
-			case 11 -> SpectrumItems.CITRINE_POWDER.get();
-			case 12 -> SpectrumItems.ONYX_POWDER.get();
-			case 13 -> SpectrumItems.MOONSTONE_POWDER.get();
+			case 9 -> PastelItems.TOPAZ_POWDER.get();
+			case 10 -> PastelItems.AMETHYST_POWDER.get();
+			case 11 -> PastelItems.CITRINE_POWDER.get();
+			case 12 -> PastelItems.ONYX_POWDER.get();
+			case 13 -> PastelItems.MOONSTONE_POWDER.get();
 			default -> Items.AIR;
 		};
 	}
@@ -625,7 +618,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	private void grantPlayerPedestalCraftingAdvancement(ItemStack output, int experience, int duration) {
 		ServerPlayer serverPlayerEntity = (ServerPlayer) getOwnerIfOnline();
 		if (serverPlayerEntity != null) {
-			SpectrumAdvancementCriteria.PEDESTAL_CRAFTING.trigger(serverPlayerEntity, output, experience, duration);
+			PastelAdvancementCriteria.PEDESTAL_CRAFTING.trigger(serverPlayerEntity, output, experience, duration);
 		}
 	}
 	
@@ -633,7 +626,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	public boolean canPlaceItem(int slot, ItemStack stack) {
 		if (slot < 9) {
 			return true;
-		} else if (slot == CRAFTING_TABLET_SLOT_ID && stack.is(SpectrumItems.CRAFTING_TABLET.get())) {
+		} else if (slot == CRAFTING_TABLET_SLOT_ID && stack.is(PastelItems.CRAFTING_TABLET.get())) {
 			return true;
 		} else {
 			return stack.is(getGemstonePowderItemForSlot(slot));
@@ -717,27 +710,27 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	private PedestalRecipeTier getStructureTier() {
 		Multiblock multiblock;
 		
-		multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.PEDESTAL_COMPLEX);
+		multiblock = PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX);
 		if (multiblock.validate(level, worldPosition.below(), Rotation.NONE)) {
-			SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
+			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
 			return PedestalRecipeTier.COMPLEX;
 		}
 		
-		multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE);
+		multiblock = PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE);
 		if (multiblock.validate(level, worldPosition.below(), Rotation.NONE)) {
-			SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
+			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
 			return PedestalRecipeTier.ADVANCED;
 		}
 		
-		multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.PEDESTAL_ADVANCED);
+		multiblock = PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_ADVANCED);
 		if (multiblock.validate(level, worldPosition.below(), Rotation.NONE)) {
-			SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
+			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
 			return PedestalRecipeTier.ADVANCED;
 		}
 		
-		multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.PEDESTAL_SIMPLE);
+		multiblock = PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_SIMPLE);
 		if (multiblock.validate(level, worldPosition.below(), Rotation.NONE)) {
-			SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
+			PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger((ServerPlayer) this.getOwnerIfOnline(), multiblock);
 			return PedestalRecipeTier.SIMPLE;
 		}
 		

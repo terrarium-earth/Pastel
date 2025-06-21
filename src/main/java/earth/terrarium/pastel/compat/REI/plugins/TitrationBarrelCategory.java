@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -24,17 +24,17 @@ public class TitrationBarrelCategory extends GatedDisplayCategory<TitrationBarre
 	
 	@Override
 	public CategoryIdentifier<TitrationBarrelDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.TITRATION_BARREL;
+		return PastelPlugins.TITRATION_BARREL;
 	}
 	
 	@Override
 	public Component getTitle() {
-		return SpectrumBlocks.TITRATION_BARREL.get().getName();
+		return PastelBlocks.TITRATION_BARREL.get().getName();
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.TITRATION_BARREL.get());
+		return EntryStacks.of(PastelBlocks.TITRATION_BARREL.get());
 	}
 	
 	@Override

@@ -1,14 +1,14 @@
 package earth.terrarium.pastel.recipe.potion_workshop;
 
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
-import earth.terrarium.pastel.recipe.GatedStackSpectrumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class PotionWorkshopRecipe extends GatedStackSpectrumRecipe<RecipeInput> {
+public abstract class PotionWorkshopRecipe extends GatedStackPastelRecipe<RecipeInput> {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/potion_workshop");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/potion_workshop");
 	public static final int[] INGREDIENT_SLOTS = new int[]{2, 3, 4};
 	
 	protected final int craftingTime;
@@ -67,7 +67,7 @@ public abstract class PotionWorkshopRecipe extends GatedStackSpectrumRecipe<Reci
 	
 	@Override
 	public boolean matches(@NotNull RecipeInput inv, Level world) {
-		if (inv.size() > 4 && inv.getItem(0).is(SpectrumItems.MERMAIDS_GEM.get()) && isValidBaseIngredient(inv.getItem(1))) {
+		if (inv.size() > 4 && inv.getItem(0).is(PastelItems.MERMAIDS_GEM.get()) && isValidBaseIngredient(inv.getItem(1))) {
 			
 			if (usesReagents()) {
 				if (!areStacksInReagentSlotsAllReagents(inv)) return false;
@@ -110,7 +110,7 @@ public abstract class PotionWorkshopRecipe extends GatedStackSpectrumRecipe<Reci
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return SpectrumBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance();
+		return PastelBlocks.POTION_WORKSHOP.get().asItem().getDefaultInstance();
 	}
 	
 	public int getCraftingTime() {
@@ -119,12 +119,12 @@ public abstract class PotionWorkshopRecipe extends GatedStackSpectrumRecipe<Reci
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.ANVIL_CRUSHING_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.ANVIL_CRUSHING_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.ANVIL_CRUSHING;
+		return PastelRecipeTypes.ANVIL_CRUSHING;
 	}
 	
 	public abstract boolean usesReagents();

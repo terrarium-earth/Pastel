@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.particle.client;
 
 import earth.terrarium.pastel.helpers.ParticleHelper;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredExplosionParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
@@ -29,7 +29,7 @@ public class MoonstoneStrikeParticle extends NoRenderParticle {
 			level.addParticle(ColoredExplosionParticleEffect.WHITE, this.x, this.y, this.z, 0, 0, 0);
 		}
 		var alt = random.nextBoolean();
-		var particle = alt ? SpectrumParticleTypes.SHOOTING_STAR : ColoredSparkleRisingParticleEffect.WHITE;
+		var particle = alt ? PastelParticleTypes.SHOOTING_STAR : ColoredSparkleRisingParticleEffect.WHITE;
 		var velocity = alt ? 0.5F : 0.375F;
 		var rotation = Math.PI / 20F * age;
 		var nextRotation = Math.PI / 20F * (age + 1);

@@ -5,7 +5,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.items.tools.LightGreatswordItem;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -19,7 +19,7 @@ public class PlayerEntityRendererMixin {
 
     @ModifyExpressionValue(method = "getArmPose", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getUseAnimation()Lnet/minecraft/world/item/UseAnim;"))
     private static UseAnim modifyUseAction(UseAnim original, @Local ItemStack itemStack, @Local(argsOnly = true) AbstractClientPlayer player) {
-        if (itemStack.getItem() == SpectrumItems.NIGHT_SALTS.get()) {
+        if (itemStack.getItem() == PastelItems.NIGHT_SALTS.get()) {
             return UseAnim.TOOT_HORN;
         }
         return original;

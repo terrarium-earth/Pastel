@@ -7,7 +7,6 @@ import earth.terrarium.pastel.entity.entity.*;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.*;
 import net.minecraft.core.component.*;
-import net.minecraft.resources.*;
 import net.minecraft.server.level.*;
 import net.minecraft.sounds.*;
 import net.minecraft.tags.*;
@@ -23,7 +22,7 @@ import net.minecraft.world.phys.*;
 public record DefaultProjectileBehavior() implements ItemProjectileBehavior {
 	public static final DefaultProjectileBehavior INSTANCE = new DefaultProjectileBehavior();
 	public static final ProjectileBehaviorType<DefaultProjectileBehavior> TYPE = new ProjectileBehaviorType<>(
-			SpectrumCommon.ofSpectrumDefaulted("default"),
+			PastelCommon.ofPastel("default"),
 			MapCodec.unit(INSTANCE)
 	);
 	
@@ -50,8 +49,8 @@ public record DefaultProjectileBehavior() implements ItemProjectileBehavior {
 		}
 		
 		if (target instanceof LivingEntity livingTarget) {
-			if (target instanceof Player && !SpectrumCommon.CONFIG.OmniAcceleratorPvP) {
-				if (stack.is(SpectrumItemTags.REQUIRES_OMNI_ACCELERATOR_PVP_ENABLED)) {
+			if (target instanceof Player && !PastelCommon.CONFIG.OmniAcceleratorPvP) {
+				if (stack.is(PastelItemTags.REQUIRES_OMNI_ACCELERATOR_PVP_ENABLED)) {
 					return stack;
 				}
 			}
@@ -88,7 +87,7 @@ public record DefaultProjectileBehavior() implements ItemProjectileBehavior {
 				stack.useOn(new DirectionalPlaceContext(world, placementPos, facing, stack, placementDirection));
 			}
 		} catch (Exception e) {
-			SpectrumCommon.logError("Item Projectile failed to use item " + stack.getItem().getDescription());
+			PastelCommon.logError("Item Projectile failed to use item " + stack.getItem().getDescription());
 			e.printStackTrace();
 		}
 		

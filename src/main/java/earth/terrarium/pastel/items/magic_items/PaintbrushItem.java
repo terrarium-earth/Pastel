@@ -12,10 +12,10 @@ import earth.terrarium.pastel.helpers.BlockVariantHelper;
 import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.inventories.PaintbrushScreenHandler;
 import earth.terrarium.pastel.items.PigmentItem;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -68,8 +68,8 @@ public class PaintbrushItem extends Item implements SignApplicator {
 	
 	@OnlyIn(Dist.CLIENT)
 	private static void appendClientTooltips(ItemStack stack, List<Component> tooltip) {
-		boolean unlockedColoring = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_COLORING);
-		boolean unlockedSlinging = AdvancementHelper.hasAdvancementClient(SpectrumAdvancements.PAINTBRUSH_INK_SLINGING);
+		boolean unlockedColoring = AdvancementHelper.hasAdvancementClient(PastelAdvancements.PAINTBRUSH_COLORING);
+		boolean unlockedSlinging = AdvancementHelper.hasAdvancementClient(PastelAdvancements.PAINTBRUSH_INK_SLINGING);
 		if (unlockedColoring || unlockedSlinging) {
 			Optional<InkColor> color = getColor(stack);
 			if (color.isEmpty()) {
@@ -88,11 +88,11 @@ public class PaintbrushItem extends Item implements SignApplicator {
 	}
 	
 	public static boolean canColor(Player player) {
-		return AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PAINTBRUSH_COLORING);
+		return AdvancementHelper.hasAdvancement(player, PastelAdvancements.PAINTBRUSH_COLORING);
 	}
 	
 	public static boolean canInkSling(Player player) {
-		return AdvancementHelper.hasAdvancement(player, SpectrumAdvancements.PAINTBRUSH_INK_SLINGING);
+		return AdvancementHelper.hasAdvancement(player, PastelAdvancements.PAINTBRUSH_INK_SLINGING);
 	}
 	
 	public MenuProvider createScreenHandlerFactory(ItemStack itemStack) {
@@ -116,11 +116,11 @@ public class PaintbrushItem extends Item implements SignApplicator {
 	}
 	
 	public static void setColor(ItemStack stack, @Nullable InkColor color) {
-		stack.set(SpectrumDataComponentTypes.INK_COLOR, color);
+		stack.set(PastelDataComponentTypes.INK_COLOR, color);
 	}
 	
 	public static Optional<InkColor> getColor(ItemStack stack) {
-		return Optional.ofNullable(stack.get(SpectrumDataComponentTypes.INK_COLOR));
+		return Optional.ofNullable(stack.get(PastelDataComponentTypes.INK_COLOR));
 	}
 	
 	@Override
@@ -145,9 +145,9 @@ public class PaintbrushItem extends Item implements SignApplicator {
 		if (state.getBlock() instanceof ColorableBlock colorableBlock) {
 			if (!colorableBlock.isColor(world, pos, dyeColor)) {
 				if (payBlockColorCost(context.getPlayer(), inkColor.get()) && colorableBlock.color(world, pos, dyeColor, context.getPlayer())) {
-					context.getLevel().playSound(null, context.getClickedPos(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
+					context.getLevel().playSound(null, context.getClickedPos(), PastelSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
 				} else {
-					context.getLevel().playSound(null, context.getClickedPos(), SpectrumSoundEvents.USE_FAIL, SoundSource.BLOCKS, 1.0F, 1.0F);
+					context.getLevel().playSound(null, context.getClickedPos(), PastelSoundEvents.USE_FAIL, SoundSource.BLOCKS, 1.0F, 1.0F);
 				}
 			}
 			return false;
@@ -182,12 +182,12 @@ public class PaintbrushItem extends Item implements SignApplicator {
 		if (payBlockColorCost(context.getPlayer(), inkColor)) {
 			if (!world.isClientSide) {
 				world.setBlockAndUpdate(context.getClickedPos(), newBlockState);
-				world.playSound(null, context.getClickedPos(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
+				world.playSound(null, context.getClickedPos(), PastelSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
 			}
 			return true;
 		} else {
 			if (world.isClientSide) {
-				context.getPlayer().playSound(SpectrumSoundEvents.USE_FAIL, 1.0F, 1.0F);
+				context.getPlayer().playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
 			}
 		}
 		return false;
@@ -242,7 +242,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
 					}
 				} else {
 					if (world.isClientSide) {
-						user.playSound(SpectrumSoundEvents.USE_FAIL, 1.0F, 1.0F);
+						user.playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
 					}
 				}
 				
@@ -282,13 +282,13 @@ public class PaintbrushItem extends Item implements SignApplicator {
 		if (tryUseOnSign(world, signBlockEntity, front, player, player.getItemInHand(InteractionHand.MAIN_HAND))) return true;
 		if (tryUseOnSign(world, signBlockEntity, front, player, player.getItemInHand(InteractionHand.OFF_HAND))) return true;
 		
-		player.playSound(SpectrumSoundEvents.USE_FAIL, 1.0F, 1.0F);
+		player.playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
 		return false;
 	}
 	
 	// TODO: can this be moved to ColorableBlock / as a block color processor?
 	private boolean tryUseOnSign(Level world, SignBlockEntity signBlockEntity, boolean front, Player player, ItemStack stack) {
-		if (stack.is(SpectrumItems.PAINTBRUSH.get())) {
+		if (stack.is(PastelItems.PAINTBRUSH.get())) {
 			Optional<InkColor> color = getColor(stack);
 			if (color.isPresent()) {
 				InkColor inkColor = color.get();
@@ -301,7 +301,7 @@ public class PaintbrushItem extends Item implements SignApplicator {
 						}
 						return signText;
 					}, front)) {
-						world.playSound(null, signBlockEntity.getBlockPos(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
+						world.playSound(null, signBlockEntity.getBlockPos(), PastelSoundEvents.PAINTBRUSH_PAINT, SoundSource.BLOCKS, 1.0F, 1.0F);
 						return true;
 					}
 				}

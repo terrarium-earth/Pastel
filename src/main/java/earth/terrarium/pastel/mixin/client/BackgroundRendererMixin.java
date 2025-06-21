@@ -6,7 +6,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.mojang.blaze3d.shaders.FogShape;
 import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
-import earth.terrarium.pastel.registries.SpectrumDimensions;
+import earth.terrarium.pastel.registries.PastelDimensions;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -29,7 +29,7 @@ public class BackgroundRendererMixin {
 			return;
 		
 		var dim = world.dimension();
-		var inDim = dim == SpectrumDimensions.DIMENSION_KEY;
+		var inDim = dim == PastelDimensions.DIMENSION_KEY;
 		
 		if (inDim || DimensionRenderEffects.forceFogEffects) {
 			fogData.shape = FogShape.SPHERE;

@@ -6,14 +6,14 @@ import earth.terrarium.pastel.api.energy.color.InkColorTags;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.entity.POIMemorized;
 import earth.terrarium.pastel.api.entity.PackEntity;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.entity.SpectrumTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
 import earth.terrarium.pastel.entity.variants.LizardFrillVariant;
 import earth.terrarium.pastel.entity.variants.LizardHornVariant;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumPointOfInterestTypeTags;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelPointOfInterestTypeTags;
+import earth.terrarium.pastel.registries.PastelRegistries;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -62,9 +62,9 @@ import org.jetbrains.annotations.Nullable;
 // funny little creatures always out for trouble
 public class LizardEntity extends TamableAnimal implements PackEntity<LizardEntity>, POIMemorized {
 
-	protected static final EntityDataAccessor<LizardFrillVariant> FRILL_VARIANT = SynchedEntityData.defineId(LizardEntity.class, SpectrumTrackedDataHandlerRegistry.LIZARD_FRILL_VARIANT);
-	protected static final EntityDataAccessor<LizardHornVariant> HORN_VARIANT = SynchedEntityData.defineId(LizardEntity.class, SpectrumTrackedDataHandlerRegistry.LIZARD_HORN_VARIANT);
-	protected static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(LizardEntity.class, SpectrumTrackedDataHandlerRegistry.INK_COLOR);
+	protected static final EntityDataAccessor<LizardFrillVariant> FRILL_VARIANT = SynchedEntityData.defineId(LizardEntity.class, PastelTrackedDataHandlerRegistry.LIZARD_FRILL_VARIANT);
+	protected static final EntityDataAccessor<LizardHornVariant> HORN_VARIANT = SynchedEntityData.defineId(LizardEntity.class, PastelTrackedDataHandlerRegistry.LIZARD_HORN_VARIANT);
+	protected static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(LizardEntity.class, PastelTrackedDataHandlerRegistry.INK_COLOR);
 
 	protected @Nullable LizardEntity leader;
 	protected int groupSize = 1;
@@ -141,9 +141,9 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 	@Override
 	public @Nullable SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData entityData) {
 		RandomSource random = world.getRandom();
-		this.setFrills(SpectrumRegistries.getRandomTagEntry(SpectrumRegistries.LIZARD_FRILL_VARIANT, LizardFrillVariant.SIMPLE.getReference(), random, LizardFrillVariant.SIMPLE));
-		this.setHorns(SpectrumRegistries.getRandomTagEntry(SpectrumRegistries.LIZARD_HORN_VARIANT, LizardHornVariant.HORNY.getReference(), random, LizardHornVariant.HORNY));
-		this.setColor(SpectrumRegistries.getRandomTagEntry(SpectrumRegistries.INK_COLOR, InkColorTags.ELEMENTAL_COLORS, random, InkColors.MAGENTA));
+		this.setFrills(PastelRegistries.getRandomTagEntry(PastelRegistries.LIZARD_FRILL_VARIANT, LizardFrillVariant.SIMPLE.getReference(), random, LizardFrillVariant.SIMPLE));
+		this.setHorns(PastelRegistries.getRandomTagEntry(PastelRegistries.LIZARD_HORN_VARIANT, LizardHornVariant.HORNY.getReference(), random, LizardHornVariant.HORNY));
+		this.setColor(PastelRegistries.getRandomTagEntry(PastelRegistries.INK_COLOR, InkColorTags.ELEMENTAL_COLORS, random, InkColors.MAGENTA));
 		
 		return super.finalizeSpawn(world, difficulty, spawnReason, entityData);
 	}
@@ -152,8 +152,8 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 	public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
 		nbt.putString("color", this.getColor().getID().toString());
-		nbt.putString("frills", SpectrumRegistries.LIZARD_FRILL_VARIANT.getKey(this.getFrills()).toString());
-		nbt.putString("horns", SpectrumRegistries.LIZARD_HORN_VARIANT.getKey(this.getHorns()).toString());
+		nbt.putString("frills", PastelRegistries.LIZARD_FRILL_VARIANT.getKey(this.getFrills()).toString());
+		nbt.putString("horns", PastelRegistries.LIZARD_HORN_VARIANT.getKey(this.getHorns()).toString());
 		writePOIPosToNbt(nbt);
 	}
 	
@@ -161,14 +161,14 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
 		
-		InkColor color = SpectrumRegistries.INK_COLOR.get(ResourceLocation.tryParse(nbt.getString("color")));
-		this.setColor(color == null ? SpectrumRegistries.getRandomTagEntry(SpectrumRegistries.INK_COLOR, InkColorTags.ELEMENTAL_COLORS, this.random, InkColors.CYAN) : color);
+		InkColor color = PastelRegistries.INK_COLOR.get(ResourceLocation.tryParse(nbt.getString("color")));
+		this.setColor(color == null ? PastelRegistries.getRandomTagEntry(PastelRegistries.INK_COLOR, InkColorTags.ELEMENTAL_COLORS, this.random, InkColors.CYAN) : color);
 		
-		LizardFrillVariant frills = SpectrumRegistries.LIZARD_FRILL_VARIANT.get(ResourceLocation.tryParse(nbt.getString("frills")));
-		this.setFrills(frills == null ? SpectrumRegistries.getRandomTagEntry(SpectrumRegistries.LIZARD_FRILL_VARIANT, LizardFrillVariant.SIMPLE.getReference(), this.random, LizardFrillVariant.SIMPLE) : frills);
+		LizardFrillVariant frills = PastelRegistries.LIZARD_FRILL_VARIANT.get(ResourceLocation.tryParse(nbt.getString("frills")));
+		this.setFrills(frills == null ? PastelRegistries.getRandomTagEntry(PastelRegistries.LIZARD_FRILL_VARIANT, LizardFrillVariant.SIMPLE.getReference(), this.random, LizardFrillVariant.SIMPLE) : frills);
 		
-		LizardHornVariant horns = SpectrumRegistries.LIZARD_HORN_VARIANT.get(ResourceLocation.tryParse(nbt.getString("horns")));
-		this.setHorns(horns == null ? SpectrumRegistries.getRandomTagEntry(SpectrumRegistries.LIZARD_HORN_VARIANT, LizardHornVariant.HORNY.getReference(), this.random, LizardHornVariant.HORNY) : horns);
+		LizardHornVariant horns = PastelRegistries.LIZARD_HORN_VARIANT.get(ResourceLocation.tryParse(nbt.getString("horns")));
+		this.setHorns(horns == null ? PastelRegistries.getRandomTagEntry(PastelRegistries.LIZARD_HORN_VARIANT, LizardHornVariant.HORNY.getReference(), this.random, LizardHornVariant.HORNY) : horns);
 		
 		readPOIPosFromNbt(nbt);
 	}
@@ -242,24 +242,24 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SpectrumSoundEvents.ENTITY_LIZARD_AMBIENT;
+		return PastelSoundEvents.ENTITY_LIZARD_AMBIENT;
 	}
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SpectrumSoundEvents.ENTITY_LIZARD_HURT;
+		return PastelSoundEvents.ENTITY_LIZARD_HURT;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SpectrumSoundEvents.ENTITY_LIZARD_DEATH;
+		return PastelSoundEvents.ENTITY_LIZARD_DEATH;
 	}
 
 	// Breeding
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		if (stack.is(SpectrumItems.LIZARD_MEAT.get())) {
+		if (stack.is(PastelItems.LIZARD_MEAT.get())) {
 			return false;
 		}
 		return stack.is(ItemTags.MEAT);
@@ -268,7 +268,7 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 	@Override
 	public @Nullable AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
 		LizardEntity other = (LizardEntity) entity;
-		LizardEntity child = SpectrumEntityTypes.LIZARD.get().create(world);
+		LizardEntity child = PastelEntityTypes.LIZARD.get().create(world);
 		if (child != null) {
 			child.setColor(getChildColor(this, other));
 			child.setFrills(getChildFrills(this, other));
@@ -352,7 +352,7 @@ public class LizardEntity extends TamableAnimal implements PackEntity<LizardEnti
 	// POIMemorized
 	@Override
 	public TagKey<PoiType> getPOITag() {
-		return SpectrumPointOfInterestTypeTags.LIZARD_DENS;
+		return PastelPointOfInterestTypeTags.LIZARD_DENS;
 	}
 
 	@Override

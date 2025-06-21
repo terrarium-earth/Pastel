@@ -7,8 +7,8 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.GreatswordChargingSoundInstance;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
 import net.neoforged.api.distmarker.Dist;
@@ -107,15 +107,15 @@ public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDam
 	}
 	
 	public int getGroundSlamStrength(HolderLookup.Provider lookup, ItemStack stack) {
-		return SpectrumEnchantmentHelper.getLevel(lookup, Enchantments.SWEEPING_EDGE, stack);
+		return PastelEnchantmentHelper.getLevel(lookup, Enchantments.SWEEPING_EDGE, stack);
 	}
 	
 	public void performGroundSlam(Level world, Vec3 pos, LivingEntity attacker, float strength) {
 		world.gameEvent(attacker, GameEvent.HIT_GROUND, BlockPos.containing(pos.x, pos.y, pos.z));
 		MoonstoneStrike.create(world, attacker, null, attacker.getX(), attacker.getY(), attacker.getZ(), strength, 1.75F);
-		world.playSound(null, attacker.blockPosition(), SpectrumSoundEvents.GROUND_SLAM, SoundSource.PLAYERS, 0.7F, 1.0F);
-		world.playSound(null, attacker.blockPosition(), SpectrumSoundEvents.DEEP_CRYSTAL_RING, SoundSource.PLAYERS, 0.7F, 1.0F);
-		world.playSound(null, attacker.blockPosition(), SpectrumSoundEvents.DEEP_CRYSTAL_RING, SoundSource.PLAYERS, 0.4F, 0.334F);
+		world.playSound(null, attacker.blockPosition(), PastelSoundEvents.GROUND_SLAM, SoundSource.PLAYERS, 0.7F, 1.0F);
+		world.playSound(null, attacker.blockPosition(), PastelSoundEvents.DEEP_CRYSTAL_RING, SoundSource.PLAYERS, 0.7F, 1.0F);
+		world.playSound(null, attacker.blockPosition(), PastelSoundEvents.DEEP_CRYSTAL_RING, SoundSource.PLAYERS, 0.4F, 0.334F);
 
 		if (attacker instanceof ServerPlayer serverPlayer) {
 			serverPlayer.awardStat(Stats.ITEM_USED.get(this));

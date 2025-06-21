@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
-import earth.terrarium.pastel.recipe.GatedSpectrumRecipe;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -16,8 +16,8 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.stream.Stream;
 
-public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectrumRecipe<?>> {
-	private final static ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/enchanter.png");
+public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedPastelRecipe<?>> {
+	private final static ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/container/enchanter.png");
 	private final Component description;
 	private final int craftingTime;
 	
@@ -37,7 +37,7 @@ public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectru
 		
 		// Knowledge Gem and Enchanter
 		widgets.addSlot(inputs.get(9), 111, 5);
-		widgets.addSlot(EmiStack.of(SpectrumBlocks.ENCHANTER.get()), 111, 51).drawBack(false);
+		widgets.addSlot(EmiStack.of(PastelBlocks.ENCHANTER.get()), 111, 51).drawBack(false);
 		
 		// center input slot
 		widgets.addSlot(inputs.get(0), 31, 31);

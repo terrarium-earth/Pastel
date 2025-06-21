@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import earth.terrarium.pastel.blocks.farming.SpectrumFarmlandBlock;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.blocks.farming.PastelFarmlandBlock;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -21,7 +21,7 @@ public abstract class CropBlockMixin {
 	@ModifyExpressionValue(method = "getGrowthSpeed", at = @At(value = "INVOKE", ordinal = 0, target = "net/minecraft/world/level/BlockGetter.getBlockState (Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"))
 	private static BlockState spectrum$getAvailableMoisture(BlockState original) {
 		Block originalBlock = original.getBlock();
-		if (originalBlock instanceof SpectrumFarmlandBlock) {
+		if (originalBlock instanceof PastelFarmlandBlock) {
 			return Blocks.FARMLAND.defaultBlockState().setValue(FarmBlock.MOISTURE, original.getValue(FarmBlock.MOISTURE));
 		}
 		return original;
@@ -29,14 +29,14 @@ public abstract class CropBlockMixin {
 	
 	@Inject(method = "growCrops", at = @At("HEAD"), cancellable = true)
 	private void spectrum$cancelGrowthAttempts(Level world, BlockPos pos, BlockState state, CallbackInfo ci) {
-		if (world.getBlockState(pos.below()).is(SpectrumBlocks.TILLED_SHALE_CLAY.get())) {
+		if (world.getBlockState(pos.below()).is(PastelBlocks.TILLED_SHALE_CLAY.get())) {
 			ci.cancel();
 		}
 	}
 	
 	@Inject(method = "growCrops", at = @At("HEAD"), cancellable = true)
 	public void spectrum$hasRandomTicks(Level world, BlockPos pos, BlockState state, CallbackInfo ci) {
-		if (world.getBlockState(pos.below()).is(SpectrumBlocks.TILLED_SHALE_CLAY.get())) {
+		if (world.getBlockState(pos.below()).is(PastelBlocks.TILLED_SHALE_CLAY.get())) {
 			ci.cancel();
 		}
 	}

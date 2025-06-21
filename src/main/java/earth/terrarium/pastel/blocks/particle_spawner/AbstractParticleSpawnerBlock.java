@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.particle_spawner;
 
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -45,7 +45,7 @@ public abstract class AbstractParticleSpawnerBlock extends BaseEntityBlock {
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? createTickerHelper(type, SpectrumBlockEntities.PARTICLE_SPAWNER.get(), ParticleSpawnerBlockEntity::clientTick) : null;
+		return world.isClientSide ? createTickerHelper(type, PastelBlockEntities.PARTICLE_SPAWNER.get(), ParticleSpawnerBlockEntity::clientTick) : null;
 	}
 	
 	@Override

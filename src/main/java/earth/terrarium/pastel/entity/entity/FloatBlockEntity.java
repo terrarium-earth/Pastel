@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.blocks.gravity.FloatBlock;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrusher;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -90,7 +90,7 @@ public class FloatBlockEntity extends Entity {
 	}
 	
 	public FloatBlockEntity(Level world, BlockPos pos, BlockState blockState) {
-		this(SpectrumEntityTypes.FLOAT_BLOCK.get(), world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, blockState);
+		this(PastelEntityTypes.FLOAT_BLOCK.get(), world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, blockState);
 	}
 	
 	/**
@@ -222,7 +222,7 @@ public class FloatBlockEntity extends Entity {
 					if (entity instanceof ItemEntity itemEntity) {
 						AnvilCrusher.crush(itemEntity, damage);
 					} else {
-						entity.hurt(SpectrumDamageTypes.floatblock(entity.level()), damage);
+						entity.hurt(PastelDamageTypes.floatblock(entity.level()), damage);
 					}
 				});
 			}
@@ -311,7 +311,7 @@ public class FloatBlockEntity extends Entity {
 			if (entity instanceof FloatBlockEntity other && isPaltaeriaStratineCollision(other)) {
 				world.explode(this, this.getX(), this.getY(), this.getZ(), 1.0F, Level.ExplosionInteraction.NONE);
 				
-				ItemStack collisionStack = SpectrumBlocks.HOVER_BLOCK.get().asItem().getDefaultInstance();
+				ItemStack collisionStack = PastelBlocks.HOVER_BLOCK.get().asItem().getDefaultInstance();
 				ItemEntity itemEntity = new ItemEntity(world, this.getX(), this.getY(), this.getZ(), collisionStack);
 				itemEntity.push(0.1 - world.random.nextFloat() * 0.2, 0.1 - world.random.nextFloat() * 0.2, 0.1 - world.random.nextFloat() * 0.2);
 				world.addFreshEntity(itemEntity);
@@ -331,8 +331,8 @@ public class FloatBlockEntity extends Entity {
 	public boolean isPaltaeriaStratineCollision(FloatBlockEntity other) {
 		Block thisBlock = this.blockState.getBlock();
 		Block otherBlock = other.getBlockState().getBlock();
-		return thisBlock == SpectrumBlocks.PALTAERIA_FLOATBLOCK.get() && otherBlock == SpectrumBlocks.STRATINE_FLOATBLOCK.get()
-				|| thisBlock == SpectrumBlocks.STRATINE_FLOATBLOCK.get() && otherBlock == SpectrumBlocks.PALTAERIA_FLOATBLOCK.get();
+		return thisBlock == PastelBlocks.PALTAERIA_FLOATBLOCK.get() && otherBlock == PastelBlocks.STRATINE_FLOATBLOCK.get()
+				|| thisBlock == PastelBlocks.STRATINE_FLOATBLOCK.get() && otherBlock == PastelBlocks.PALTAERIA_FLOATBLOCK.get();
 	}
 	
 	/**

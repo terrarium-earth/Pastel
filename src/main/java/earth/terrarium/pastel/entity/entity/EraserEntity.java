@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.entity.PackEntity;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -92,24 +92,24 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 	}
 	
 	protected SoundEvent getAmbientSound() {
-		return SpectrumSoundEvents.ENTITY_ERASER_AMBIENT;
+		return PastelSoundEvents.ENTITY_ERASER_AMBIENT;
 	}
 	
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return SpectrumSoundEvents.ENTITY_ERASER_HURT;
+		return PastelSoundEvents.ENTITY_ERASER_HURT;
 	}
 	
 	protected SoundEvent getDeathSound() {
-		return SpectrumSoundEvents.ENTITY_ERASER_DEATH;
+		return PastelSoundEvents.ENTITY_ERASER_DEATH;
 	}
 	
 	protected void playStepSound(BlockPos pos, BlockState state) {
-		this.playSound(SpectrumSoundEvents.ENTITY_ERASER_STEP, 0.15F, 1.0F);
+		this.playSound(PastelSoundEvents.ENTITY_ERASER_STEP, 0.15F, 1.0F);
 	}
 	
 	@Override
 	public boolean canBeAffected(MobEffectInstance effect) {
-		return super.canBeAffected(effect) && effect.getEffect() != SpectrumStatusEffects.DEADLY_POISON;
+		return super.canBeAffected(effect) && effect.getEffect() != PastelStatusEffects.DEADLY_POISON;
 	}
 	
 	@Override
@@ -257,20 +257,20 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 				amplifier = 0;
 			}
 			case 4, 5, 6 -> {
-				statusEffect = SpectrumStatusEffects.STIFFNESS;
+				statusEffect = PastelStatusEffects.STIFFNESS;
 				amplifier = random.nextInt(2);
 			}
 			case 7, 8, 9 -> {
-				statusEffect = SpectrumStatusEffects.FRENZY;
+				statusEffect = PastelStatusEffects.FRENZY;
 				amplifier = random.nextInt(2);
 			}
-			case 10, 11, 12 -> statusEffect = SpectrumStatusEffects.SCARRED;
+			case 10, 11, 12 -> statusEffect = PastelStatusEffects.SCARRED;
 			case 13, 14, 15 -> {
-				statusEffect = SpectrumStatusEffects.VULNERABILITY;
+				statusEffect = PastelStatusEffects.VULNERABILITY;
 				amplifier = random.nextInt(2);
 			}
 			default -> {
-				statusEffect = SpectrumStatusEffects.DEADLY_POISON;
+				statusEffect = PastelStatusEffects.DEADLY_POISON;
 				amplifier = random.nextInt(2);
 			}
 		}
@@ -343,7 +343,7 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 	
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(SpectrumItems.BUCKET_OF_ERASER.get());
+		return new ItemStack(PastelItems.BUCKET_OF_ERASER.get());
 	}
 	
 	@Override
@@ -375,7 +375,7 @@ public class EraserEntity extends Spider implements PackEntity<EraserEntity>, Bu
 				}
 				case 3 -> this.effect = MobEffects.INVISIBILITY;
 				default -> {
-					this.effect = SpectrumStatusEffects.MAGIC_ANNULATION;
+					this.effect = PastelStatusEffects.MAGIC_ANNULATION;
 					this.amplifier = 5;
 				}
 			}

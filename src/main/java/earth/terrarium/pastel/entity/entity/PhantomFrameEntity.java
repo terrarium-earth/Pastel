@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -36,7 +36,7 @@ public class PhantomFrameEntity extends ItemFrame {
 
 	@Override
 	protected ItemStack getFrameItemStack() {
-		return new ItemStack(SpectrumItems.PHANTOM_FRAME.get());
+		return new ItemStack(PastelItems.PHANTOM_FRAME.get());
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class PhantomFrameEntity extends ItemFrame {
 		super.setItem(value, update);
 		if (update && this.isAlive() && !this.level().isClientSide()) {
 			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) this.level(), position(), ParticleTypes.END_ROD, 10, new Vec3(0, 0, 0), new Vec3(0.1, 0.1, 0.1));
-			this.level().playSound(null, this, SpectrumSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
+			this.level().playSound(null, this, PastelSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
 		}
 	}
 
@@ -53,7 +53,7 @@ public class PhantomFrameEntity extends ItemFrame {
 		boolean success = super.hurt(source, amount);
 		if (success && this.isAlive() && !this.level().isClientSide()) {
 			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) this.level(), position(), ParticleTypes.END_ROD, 10, new Vec3(0, 0, 0), new Vec3(0.1, 0.1, 0.1));
-			this.level().playSound(null, this, SpectrumSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
+			this.level().playSound(null, this, PastelSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, 0.5F, 1.0F);
 		}
 		return success;
 	}

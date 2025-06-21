@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.block;
 
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -32,7 +32,7 @@ public interface ColorableBlock {
     }
 
     default boolean tryColorUsingStackInHand(ItemStack handStack, Level world, BlockPos pos, Player player, InteractionHand hand) {
-		Optional<DyeColor> itemInHandColor = SpectrumColorHelper.getDyeColorOfItemStack(handStack);
+		Optional<DyeColor> itemInHandColor = ColorHelper.getDyeColorOfItemStack(handStack);
         if (itemInHandColor.isPresent()) {
 			if (color(world, pos, itemInHandColor, player)) {
                 if(!player.isCreative()) {

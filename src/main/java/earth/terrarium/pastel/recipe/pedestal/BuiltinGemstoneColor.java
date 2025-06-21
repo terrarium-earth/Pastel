@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.recipe.pedestal;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
@@ -19,7 +19,7 @@ public enum BuiltinGemstoneColor implements GemstoneColor, StringRepresentable {
 	private final int color;
 	
 	BuiltinGemstoneColor(String name, int color) {
-		Registry.register(SpectrumRegistries.GEMSTONE_COLOR, SpectrumCommon.locate(name), this);
+		Registry.register(PastelRegistries.GEMSTONE_COLOR, PastelCommon.locate(name), this);
 		this.color = color;
 	}
 
@@ -32,19 +32,19 @@ public enum BuiltinGemstoneColor implements GemstoneColor, StringRepresentable {
 	public Item getGemstonePowderItem() {
 		switch (this) {
 			case CYAN -> {
-                return SpectrumItems.TOPAZ_POWDER.get();
+                return PastelItems.TOPAZ_POWDER.get();
 			}
 			case MAGENTA -> {
-                return SpectrumItems.AMETHYST_POWDER.get();
+                return PastelItems.AMETHYST_POWDER.get();
 			}
 			case YELLOW -> {
-                return SpectrumItems.CITRINE_POWDER.get();
+                return PastelItems.CITRINE_POWDER.get();
 			}
 			case BLACK -> {
-                return SpectrumItems.ONYX_POWDER.get();
+                return PastelItems.ONYX_POWDER.get();
 			}
 			case WHITE -> {
-                return SpectrumItems.MOONSTONE_POWDER.get();
+                return PastelItems.MOONSTONE_POWDER.get();
 			}
 			default -> throw new RuntimeException("Tried getting powder item for a color which does not have one");
 		}

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.worldgen.structure_pool_elements;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.registries.SpectrumStructurePoolElementTypes;
+import earth.terrarium.pastel.registries.PastelStructurePoolElementTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.FrontAndTop;
@@ -97,7 +97,7 @@ public class SingleBlockPoolElement extends StructurePoolElement {
 	
 	@Override
 	public StructurePoolElementType<?> getType() {
-		return SpectrumStructurePoolElementTypes.SINGLE_BLOCK_ELEMENT;
+		return PastelStructurePoolElementTypes.SINGLE_BLOCK_ELEMENT;
 	}
 	
 	@Override

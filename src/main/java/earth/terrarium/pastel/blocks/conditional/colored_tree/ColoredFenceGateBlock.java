@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.conditional.colored_tree;
 
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.registries.SpectrumWoodTypes;
+import earth.terrarium.pastel.registries.PastelWoodTypes;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.world.level.block.FenceGateBlock;
 
@@ -13,7 +13,7 @@ public class ColoredFenceGateBlock extends FenceGateBlock {
 	protected final InkColor color;
 	
 	public ColoredFenceGateBlock(Properties settings, InkColor color) {
-		super(SpectrumWoodTypes.COLORED_WOOD, settings);
+		super(PastelWoodTypes.COLORED_WOOD, settings);
 		this.color = color;
 		BLOCKS.put(color, this);
 	}

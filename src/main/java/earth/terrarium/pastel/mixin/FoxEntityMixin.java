@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Fox;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,6 +16,6 @@ public class FoxEntityMixin {
             return true;
 
         var entity = (LivingEntity) (Object) this;
-        return entity.hasEffect(SpectrumStatusEffects.ETERNAL_SLUMBER) || entity.hasEffect(SpectrumStatusEffects.FATAL_SLUMBER);
+        return entity.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelStatusEffects.FATAL_SLUMBER);
     }
 }

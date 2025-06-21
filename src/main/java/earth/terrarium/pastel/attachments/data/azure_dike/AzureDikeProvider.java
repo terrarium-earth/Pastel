@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.attachments.data.azure_dike;
 
 import earth.terrarium.pastel.attachments.data.*;
-import earth.terrarium.pastel.items.trinkets.SpectrumTrinketItem;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.progression.*;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.server.level.*;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -23,10 +23,10 @@ public class AzureDikeProvider {
 		if (incomingDamage - passedDamage > 0.0001F) {
 			AttachmentUtil.syncToTracking(new AzureDikeData.Payload(provider.getId(), azureDike), provider.level(), provider.blockPosition());
 			if (provider instanceof ServerPlayer player)
-				SpectrumAdvancementCriteria.AZURE_DIKE_CHARGE.trigger(player, azureDike.getCurrentProtection(), azureDike.getTicksPerPointOfRecharge(), -(incomingDamage - passedDamage));
+				PastelAdvancementCriteria.AZURE_DIKE_CHARGE.trigger(player, azureDike.getCurrentProtection(), azureDike.getTicksPerPointOfRecharge(), -(incomingDamage - passedDamage));
 		}
 
-		if (SpectrumTrinketItem.hasEquipped(provider, SpectrumItems.AZURESQUE_DIKE_CORE.get()))
+		if (PastelTrinketItem.hasEquipped(provider, PastelItems.AZURESQUE_DIKE_CORE.get()))
 			return passedDamage * 2;
 
 		return passedDamage;

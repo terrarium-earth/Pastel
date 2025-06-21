@@ -8,7 +8,7 @@ import net.minecraft.world.entity.projectile.*;
 
 public record FlatDamageProjectileBehavior(boolean destroyItemOnHit, float damage) implements DamagingProjectileBehavior {
 	public static final ProjectileBehaviorType<FlatDamageProjectileBehavior> TYPE = new ProjectileBehaviorType<>(
-			SpectrumCommon.ofSpectrumDefaulted("damage"),
+			PastelCommon.ofPastel("damage"),
 			RecordCodecBuilder.mapCodec(instance -> instance.group(
 					Codec.BOOL.fieldOf("destroy_item_on_hit").forGetter(FlatDamageProjectileBehavior::destroyItemOnHit),
 					Codec.FLOAT.fieldOf("damage").forGetter(FlatDamageProjectileBehavior::damage)

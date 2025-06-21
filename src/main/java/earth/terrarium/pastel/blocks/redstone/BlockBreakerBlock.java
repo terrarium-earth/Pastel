@@ -2,8 +2,8 @@ package earth.terrarium.pastel.blocks.redstone;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -81,7 +81,7 @@ public class BlockBreakerBlock extends RedstoneInteractionBlock implements Entit
 		
 		float hardness = blockState.getDestroySpeed(world, breakingPos);
 		if (hardness < 0 || hardness > 50) {
-			world.playSound(null, breakerPos, SpectrumSoundEvents.REDSTONE_MECHANISM_BREAK_BLOCK, SoundSource.BLOCKS, 0.15f, (2.0f + world.random.nextFloat()));
+			world.playSound(null, breakerPos, PastelSoundEvents.REDSTONE_MECHANISM_BREAK_BLOCK, SoundSource.BLOCKS, 0.15f, (2.0f + world.random.nextFloat()));
 			return;
 		}
 		
@@ -110,7 +110,7 @@ public class BlockBreakerBlock extends RedstoneInteractionBlock implements Entit
 		
 		BlockEntity blockEntity = blockState.hasBlockEntity() ? world.getBlockEntity(pos) : null;
 		if (BREAK_STACK == null) { // we initialize the item here instead of it being final because of load order shenanigans
-			BREAK_STACK = new ItemStack(SpectrumItems.MALACHITE_WORKSTAFF.get());
+			BREAK_STACK = new ItemStack(PastelItems.MALACHITE_WORKSTAFF.get());
 		}
 		Block.dropResources(blockState, world, pos, blockEntity, breaker, BREAK_STACK);
 		

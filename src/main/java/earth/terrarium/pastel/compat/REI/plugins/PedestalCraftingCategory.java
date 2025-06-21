@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import com.google.common.collect.Lists;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.inventories.PedestalScreen;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -27,12 +27,12 @@ public class PedestalCraftingCategory extends GatedDisplayCategory<PedestalCraft
 	
 	@Override
 	public CategoryIdentifier<PedestalCraftingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.PEDESTAL_CRAFTING;
+		return PastelPlugins.PEDESTAL_CRAFTING;
 	}
 	
 	@Override
 	public ResourceLocation getIdentifier() {
-		return SpectrumCommon.locate("pedestal_crafting");
+		return PastelCommon.locate("pedestal_crafting");
 	}
 	
 	@Override
@@ -42,7 +42,7 @@ public class PedestalCraftingCategory extends GatedDisplayCategory<PedestalCraft
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST.get());
+		return EntryStacks.of(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get());
 	}
 	
 	@Override

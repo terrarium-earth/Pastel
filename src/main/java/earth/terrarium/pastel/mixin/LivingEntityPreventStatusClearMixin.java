@@ -7,7 +7,7 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import earth.terrarium.pastel.helpers.StatusEffectHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -39,13 +39,13 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	
 	@Inject(method = "removeAllEffects", at = @At("HEAD"))
 	private void spectrum$detectFatalSlumber(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
-		hasFatalSlumber.set(getActiveEffectsMap().containsKey(SpectrumStatusEffects.FATAL_SLUMBER.value()));
+		hasFatalSlumber.set(getActiveEffectsMap().containsKey(PastelStatusEffects.FATAL_SLUMBER.value()));
 	}
 	
 	@Inject(method = "removeAllEffects", at = @At("TAIL"))
 	private void spectrum$applyEternalSlumberIfFatalSlumberRemoved(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
 		if (hasFatalSlumber.get()) {
-			addEffect(new MobEffectInstance(SpectrumStatusEffects.ETERNAL_SLUMBER, 6000));
+			addEffect(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, 6000));
 		}
 	}
 
@@ -55,7 +55,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 			if (affectedByImmunity(instance, effect.getAmplifier()))
 				return true;
 			
-			SpectrumStatusEffects.cutDuration(instance, effect);
+			PastelStatusEffects.cutDuration(instance, effect);
 			
 			blockRemoval.set(true);
 			return false;
@@ -94,7 +94,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	
 	@Unique
 	private static boolean affectedByImmunity(LivingEntity instance, int amplifier) {
-		var immunity = instance.getEffect(SpectrumStatusEffects.IMMUNITY);
+		var immunity = instance.getEffect(PastelStatusEffects.IMMUNITY);
 		var cost = 1200 + 600 * amplifier;
 		
 		if (immunity != null && immunity.getDuration() >= cost) {

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.magic_items;
 
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -64,7 +64,7 @@ public class EnchantmentCanvasItem extends Item {
 			return false;
 		}
 		
-		var canvasEnchantments = canvasStack.getOrDefault(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS, ItemEnchantments.EMPTY);
+		var canvasEnchantments = canvasStack.getOrDefault(PastelDataComponentTypes.CANVAS_ENCHANTMENTS, ItemEnchantments.EMPTY);
 		var targetEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(targetStack);
 		if (canvasEnchantments.isEmpty() && targetEnchantments.isEmpty()) {
 			return false;
@@ -80,7 +80,7 @@ public class EnchantmentCanvasItem extends Item {
 		if (itemLock.isEmpty() && !targetEnchantments.isEmpty()) {
 			bindTo(canvasStack, targetStack);
 		}
-		canvasStack.set(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS, targetEnchantments);
+		canvasStack.set(PastelDataComponentTypes.CANVAS_ENCHANTMENTS, targetEnchantments);
 		EnchantmentHelper.setEnchantments(targetStack, canvasEnchantments);
 		
 		if (drop && receiver != null) {
@@ -110,11 +110,11 @@ public class EnchantmentCanvasItem extends Item {
 	}
 	
 	private static void bindTo(ItemStack enchantmentExchangerStack, ItemStack targetStack) {
-		enchantmentExchangerStack.set(SpectrumDataComponentTypes.BOUND_ITEM, BuiltInRegistries.ITEM.getKey(targetStack.getItem()));
+		enchantmentExchangerStack.set(PastelDataComponentTypes.BOUND_ITEM, BuiltInRegistries.ITEM.getKey(targetStack.getItem()));
 	}
 	
 	private static Optional<Item> getItemBoundTo(ItemStack enchantmentExchangerStack) {
-		var boundId = enchantmentExchangerStack.get(SpectrumDataComponentTypes.BOUND_ITEM);
+		var boundId = enchantmentExchangerStack.get(PastelDataComponentTypes.BOUND_ITEM);
 		if (boundId == null)
 			return Optional.empty();
 		return Optional.of(BuiltInRegistries.ITEM.get(boundId));

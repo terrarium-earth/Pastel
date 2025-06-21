@@ -2,9 +2,9 @@ package earth.terrarium.pastel.blocks.chests;
 
 import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
 import earth.terrarium.pastel.capabilities.*;
-import earth.terrarium.pastel.inventories.GenericSpectrumContainerScreenHandler;
+import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -24,14 +24,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class HeartboundChestBlockEntity extends SpectrumChestBlockEntity implements WorldlyContainer, PlayerOwnedWithName, SidedCapabilityProvider {
+public class HeartboundChestBlockEntity extends PastelChestBlockEntity implements WorldlyContainer, PlayerOwnedWithName, SidedCapabilityProvider {
 	
 	private UUID ownerUUID;
 	private String ownerName;
 	private long lastNonOwnerOpenedTick;
 	
 	public HeartboundChestBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.HEARTBOUND_CHEST.get(), blockPos, blockState);
+		super(PastelBlockEntities.HEARTBOUND_CHEST.get(), blockPos, blockState);
 		this.lastNonOwnerOpenedTick = -1;
 	}
 	
@@ -78,7 +78,7 @@ public class HeartboundChestBlockEntity extends SpectrumChestBlockEntity impleme
 	
 	@Override
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-		return GenericSpectrumContainerScreenHandler.createGeneric9x6(syncId, playerInventory, this, ScreenBackgroundVariant.EARLYGAME);
+		return GenericPastelContainerScreenHandler.createGeneric9x6(syncId, playerInventory, this, ScreenBackgroundVariant.EARLYGAME);
 	}
 	
 	@Override

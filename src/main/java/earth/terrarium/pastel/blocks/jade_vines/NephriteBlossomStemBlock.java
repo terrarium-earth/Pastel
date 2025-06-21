@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -44,7 +44,7 @@ public class NephriteBlossomStemBlock extends BushBlock {
 	}
 	
 	public static BlockState getStemVariant(boolean top) {
-		return SpectrumBlocks.NEPHRITE_BLOSSOM_STEM.get().defaultBlockState().setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM);
+		return PastelBlocks.NEPHRITE_BLOSSOM_STEM.get().defaultBlockState().setValue(STEM_PART, top ? StemComponent.STEMALT : StemComponent.STEM);
 	}
 	
 	@Override

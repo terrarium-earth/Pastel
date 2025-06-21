@@ -12,9 +12,9 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVeloc
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredExplosionParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -70,9 +70,9 @@ public class StaffOfRemembranceItem extends Item implements InkPowered, Prioriti
 			if (turnEntityToMemory(user, mobEntity)) {
 				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world, entity.position(), ColoredSparkleRisingParticleEffect.LIGHT_GRAY, 10, Vec3.ZERO, new Vec3(0.2, 0.2, 0.2));
 				PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerLevel) world, entity.position(), ColoredExplosionParticleEffect.LIGHT_GRAY, 1, Vec3.ZERO);
-				world.playSound(null, pos.x(), pos.y(), pos.z(), SpectrumSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+				world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 			} else {
-				world.playSound(null, pos.x(), pos.y(), pos.z(), SpectrumSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+				world.playSound(null, pos.x(), pos.y(), pos.z(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
 			}
 		}
 		return InteractionResult.sidedSuccess(world.isClientSide);
@@ -82,12 +82,12 @@ public class StaffOfRemembranceItem extends Item implements InkPowered, Prioriti
 		if (!entity.isAlive() || entity.isRemoved() || entity.isVehicle()) {
 			return false;
 		}
-		if (entity.getType().is(SpectrumEntityTypeTags.STAFF_OF_REMEMBRANCE_BLACKLISTED)) {
+		if (entity.getType().is(PastelEntityTypeTags.STAFF_OF_REMEMBRANCE_BLACKLISTED)) {
 			return false;
 		}
 		
 		MobCategory spawnGroup = entity.getType().getCategory();
-		if (spawnGroup == MobCategory.MONSTER && (user.isCreative() || AdvancementHelper.hasAdvancement(user, SpectrumAdvancements.HOSTILE_MEMORIZING))) {
+		if (spawnGroup == MobCategory.MONSTER && (user.isCreative() || AdvancementHelper.hasAdvancement(user, PastelAdvancements.HOSTILE_MEMORIZING))) {
 			if (!InkPowered.tryDrainEnergy(user, TURN_HOSTILE_TO_MEMORY_COST)) {
 				return false;
 			}

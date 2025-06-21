@@ -2,8 +2,8 @@ package earth.terrarium.pastel.compat.emi.recipes;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.api.recipe.DescriptiveGatedRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipe;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopRecipe;
 import dev.emi.emi.EmiPort;
 import dev.emi.emi.api.recipe.EmiInfoRecipe;
@@ -30,7 +30,7 @@ public class PotionWorkshopReactingEmiRecipe extends EmiInfoRecipe {
 	
 	@Override
 	public EmiRecipeCategory getCategory() {
-		return SpectrumEmiRecipeCategories.POTION_WORKSHOP_REACTING;
+		return PastelEmiRecipeCategories.POTION_WORKSHOP_REACTING;
 	}
 	
 	@Override
@@ -45,8 +45,8 @@ public class PotionWorkshopReactingEmiRecipe extends EmiInfoRecipe {
 	@Override
 	public void addWidgets(WidgetHolder widgets) {
 		if (!isUnlocked()) {
-			widgets.addText(SpectrumEmiRecipe.HIDDEN_LINE_1, getDisplayWidth() / 2, getDisplayHeight() / 2 - 8, 0x3f3f3f, false).horizontalAlign(Alignment.CENTER);
-			widgets.addText(SpectrumEmiRecipe.HIDDEN_LINE_2, getDisplayWidth() / 2, getDisplayHeight() / 2 + 2, 0x3f3f3f, false).horizontalAlign(Alignment.CENTER);
+			widgets.addText(PastelEmiRecipe.HIDDEN_LINE_1, getDisplayWidth() / 2, getDisplayHeight() / 2 - 8, 0x3f3f3f, false).horizontalAlign(Alignment.CENTER);
+			widgets.addText(PastelEmiRecipe.HIDDEN_LINE_2, getDisplayWidth() / 2, getDisplayHeight() / 2 + 2, 0x3f3f3f, false).horizontalAlign(Alignment.CENTER);
 		} else {
 			super.addWidgets(widgets);
 		}

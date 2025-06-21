@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.pedestal;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.PaintbrushTriggered;
 import earth.terrarium.pastel.api.block.PedestalVariant;
 import earth.terrarium.pastel.api.block.RedstonePoweredBlock;
@@ -11,8 +11,8 @@ import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPedestalStartCraftingParticlePayload;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -55,7 +55,7 @@ import java.util.Optional;
 
 public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlock, PaintbrushTriggered {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("place_pedestal");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("place_pedestal");
 	private static final VoxelShape SHAPE;
 	private final PedestalVariant variant;
 	
@@ -81,10 +81,10 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 	
 	public static void clearCurrentlyRenderedMultiBlock(Level world) {
 		if (world.isClientSide) {
-			ModonomiconHelper.clearRenderedMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.PEDESTAL_SIMPLE));
-			ModonomiconHelper.clearRenderedMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.PEDESTAL_ADVANCED));
-			ModonomiconHelper.clearRenderedMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.PEDESTAL_COMPLEX));
-			ModonomiconHelper.clearRenderedMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE));
+			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_SIMPLE));
+			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_ADVANCED));
+			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX));
+			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE));
 		}
 	}
 	
@@ -198,7 +198,7 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 	}
 	
 	protected void openScreen(Level world, BlockPos pos, Player player) {
-		Optional<PedestalBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PEDESTAL.get());
+		Optional<PedestalBlockEntity> blockEntity = world.getBlockEntity(pos, PastelBlockEntities.PEDESTAL.get());
 		if (blockEntity.isPresent()) {
 			PedestalBlockEntity pedestalBlockEntity = blockEntity.get();
 			pedestalBlockEntity.setOwner(player);
@@ -254,7 +254,7 @@ public class PedestalBlock extends BaseEntityBlock implements RedstonePoweredBlo
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, SpectrumBlockEntities.PEDESTAL.get(), world.isClientSide ? PedestalBlockEntity::clientTick : PedestalBlockEntity::serverTick);
+		return createTickerHelper(type, PastelBlockEntities.PEDESTAL.get(), world.isClientSide ? PedestalBlockEntity::clientTick : PedestalBlockEntity::serverTick);
 	}
 	
 	@Override

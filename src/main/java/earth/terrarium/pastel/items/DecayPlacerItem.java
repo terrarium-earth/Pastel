@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items;
 
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -36,7 +36,7 @@ public class DecayPlacerItem extends ItemNameBlockItem {
 				BlockPos blockPos = itemPlacementContext.getClickedPos();
 
 				BlockState placedBlockState = context.getLevel().getBlockState(blockPos);
-				if (placedBlockState.is(SpectrumBlockTags.DECAY)) {
+				if (placedBlockState.is(PastelBlockTags.DECAY)) {
 					context.getLevel().scheduleTick(blockPos, placedBlockState.getBlock(), 40 + world.random.nextInt(200), TickPriority.EXTREMELY_LOW);
 				}
 			}

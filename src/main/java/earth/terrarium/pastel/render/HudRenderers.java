@@ -2,7 +2,7 @@ package earth.terrarium.pastel.render;
 
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.azure_dike.DikeShieldData;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import net.minecraft.client.*;
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.client.gui.*;
 @OnlyIn(Dist.CLIENT)
 public class HudRenderers {
 
-	public static final ResourceLocation PLAYER_DIKE = SpectrumCommon.locate("player_dike");
+	public static final ResourceLocation PLAYER_DIKE = PastelCommon.locate("player_dike");
 	
 	private static final Component missingInkText = Component.translatable("item.pastel.constructors_staff.tooltip.missing_ink");
 	private static final Component noneText = Component.translatable("item.pastel.constructors_staff.tooltip.none_in_inventory");
@@ -70,8 +70,8 @@ public class HudRenderers {
 
 				var texture = DikeShieldData.AZURE_DIKE_BAR_TEXTURE;
 
-				x += SpectrumCommon.CONFIG.AzureDikeHudOffsetX;
-				y += hasArmor ? SpectrumCommon.CONFIG.AzureDikeHudOffsetYWithArmor : SpectrumCommon.CONFIG.AzureDikeHudOffsetY;
+				x += PastelCommon.CONFIG.AzureDikeHudOffsetX;
+				y += hasArmor ? PastelCommon.CONFIG.AzureDikeHudOffsetYWithArmor : PastelCommon.CONFIG.AzureDikeHudOffsetY;
 
 				RenderSystem.enableBlend();
 

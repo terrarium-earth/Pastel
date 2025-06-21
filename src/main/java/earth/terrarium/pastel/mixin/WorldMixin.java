@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBiomes;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -28,14 +28,14 @@ public abstract class WorldMixin {
 	@Inject(method = "destroyBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;getFluidState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;"))
 	public void breakBlock(BlockPos pos, boolean drop, Entity breakingEntity, int maxUpdateDepth, CallbackInfoReturnable<Boolean> cir, @Local BlockState state) {
 		if (breakingEntity instanceof ServerPlayer serverPlayerEntity) {
-			SpectrumAdvancementCriteria.BLOCK_BROKEN.trigger(serverPlayerEntity, state);
+			PastelAdvancementCriteria.BLOCK_BROKEN.trigger(serverPlayerEntity, state);
 		}
 	}
 	
 	@Inject(method = "isRainingAt", at = @At("HEAD"), cancellable = true)
 	public void forcePermanentRain(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
 		var biome = biomeManager.getBiome(pos);
-		if (biome.is(SpectrumBiomes.DEEP_DRIPSTONE_CAVES) || biome.is(SpectrumBiomes.DRAGONROT_SWAMP))
+		if (biome.is(PastelBiomes.DEEP_DRIPSTONE_CAVES) || biome.is(PastelBiomes.DRAGONROT_SWAMP))
 			cir.setReturnValue(true);
 	}
 }

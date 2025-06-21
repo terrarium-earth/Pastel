@@ -1,14 +1,12 @@
 package earth.terrarium.pastel.api.energy;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,7 +28,7 @@ public interface InkPowered {
 	/**
 	 * The advancement the player needs to have in order to use ink powered tools
 	 */
-	ResourceLocation REQUIRED_ADVANCEMENT = SpectrumCommon.locate("milestones/unlock_ink_use");
+	ResourceLocation REQUIRED_ADVANCEMENT = PastelCommon.locate("milestones/unlock_ink_use");
 
 	@OnlyIn(Dist.CLIENT)
     static boolean canUseClient() {
@@ -87,7 +85,7 @@ public interface InkPowered {
 			long drained = inkStorage.drainEnergy(color, amount);
 			if (drained > 0) {
 				if (player instanceof ServerPlayer serverPlayerEntity) {
-					SpectrumAdvancementCriteria.INK_CONTAINER_INTERACTION.trigger(serverPlayerEntity, stack, inkStorage, color, -amount);
+					PastelAdvancementCriteria.INK_CONTAINER_INTERACTION.trigger(serverPlayerEntity, stack, inkStorage, color, -amount);
 				}
 
 				inkStorageItem.setEnergyStorage(stack, inkStorage);

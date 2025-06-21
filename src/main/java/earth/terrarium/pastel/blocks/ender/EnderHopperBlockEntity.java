@@ -1,14 +1,12 @@
 package earth.terrarium.pastel.blocks.ender;
 
 import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
-import earth.terrarium.pastel.helpers.InventoryHelper;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -24,7 +22,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.items.*;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
@@ -42,7 +39,7 @@ public class EnderHopperBlockEntity extends BlockEntity implements PlayerOwnedWi
 	private int transferCooldown;
 	
 	public EnderHopperBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.ENDER_HOPPER.get(), blockPos, blockState);
+		super(PastelBlockEntities.ENDER_HOPPER.get(), blockPos, blockState);
 	}
 	
 	public static void onEntityCollided(BlockPos pos, Entity entity, EnderHopperBlockEntity enderHopperBlockEntity) {

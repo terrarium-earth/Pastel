@@ -1,17 +1,17 @@
 package earth.terrarium.pastel.blocks.bottomless_bundle;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.InventoryInsertionAcceptor;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.items.tooltip.ItemStorageTooltipData;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.item.ItemStack;
@@ -54,7 +54,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.List;
 import java.util.Optional;
@@ -67,7 +66,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	private static final long MAX_STORED_AMOUNT_BASE = 20000;
 	
 	public BottomlessBundleItem(Block block, Item.Properties settings) {
-		super(block, settings.component(SpectrumDataComponentTypes.ITEM_STORAGE, ItemStorage.Component.DEFAULT));
+		super(block, settings.component(PastelDataComponentTypes.ITEM_STORAGE, ItemStorage.Component.DEFAULT));
 	}
 
 	public static long getMaxStoredAmount(int powerLevel) {
@@ -167,16 +166,16 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 						variant.asItem().getDescription().getString()).withStyle(ChatFormatting.GRAY));
 			}
 		}
-		if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.DELETES_OVERFLOW)) {
+		if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.DELETES_OVERFLOW)) {
 			tooltip.add(Component.translatable("item.pastel.bottomless_bundle.tooltip.voiding"));
 		}
 	}
 	
 	@Override
 	public void onDestroyed(ItemEntity entity) {
-		var storage = entity.getItem().get(SpectrumDataComponentTypes.ITEM_STORAGE);
+		var storage = entity.getItem().get(PastelDataComponentTypes.ITEM_STORAGE);
 		if (storage != null) {
-			entity.getItem().set(SpectrumDataComponentTypes.ITEM_STORAGE, ItemStorage.Component.DEFAULT);
+			entity.getItem().set(PastelDataComponentTypes.ITEM_STORAGE, ItemStorage.Component.DEFAULT);
 			ItemUtils.onContainerDestroyed(entity, () -> new ItemStorage.IterableView(new ItemStorage(storage.reference(), storage.count())));
 		}
 	}
@@ -295,7 +294,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	}
 	
 	private void playZipSound(Entity entity, float basePitch) {
-		entity.playSound(SpectrumSoundEvents.BOTTOMLESS_BUNDLE_ZIP, 0.8F,
+		entity.playSound(PastelSoundEvents.BOTTOMLESS_BUNDLE_ZIP, 0.8F,
 				basePitch + entity.level().getRandom().nextFloat() * 0.4F);
 	}
 	
@@ -311,10 +310,10 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 
 	@Override
 	public long updateLimit(ItemStack holder) { // Frankly this is just horrible and I should be killed with hammers for it
-		if (SpectrumCommon.getRegistryAccess() == null)
+		if (PastelCommon.getRegistryAccess() == null)
 			return MAX_STORED_AMOUNT_BASE;
 
-		return getMaxStoredAmount(SpectrumCommon.getRegistryAccess()
+		return getMaxStoredAmount(PastelCommon.getRegistryAccess()
 				.lookup(Registries.ENCHANTMENT)
 				.flatMap(impl -> impl.get(Enchantments.POWER))
 				.map(ench -> EnchantmentHelper.getItemEnchantmentLevel(ench, holder))
@@ -335,7 +334,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 				try {
 					this.setSuccess(bottomlessBundleItem.place(new DirectionalPlaceContext(pointer.level(), blockPos, direction, stack, direction2)).consumesAction());
 				} catch (Exception e) {
-					SpectrumCommon.logError("Error trying to place bottomless bundle at " + blockPos + " : " + e);
+					PastelCommon.logError("Error trying to place bottomless bundle at " + blockPos + " : " + e);
 				}
 			}
 			return stack;
@@ -368,7 +367,7 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 	
 	@Override
 	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER) || enchantment.is(SpectrumEnchantments.VOIDING);
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.POWER) || enchantment.is(PastelEnchantments.VOIDING);
 	}
 	
 }

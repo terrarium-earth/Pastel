@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.decay;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -52,7 +52,7 @@ public class BlackMateriaBlock extends FallingBlock {
 			Direction randomDirection = Direction.getRandom(random);
 			BlockPos neighborPos = pos.relative(randomDirection);
 			BlockState neighborBlockState = world.getBlockState(neighborPos);
-			if (!(neighborBlockState.getBlock() instanceof BlackMateriaBlock) && neighborBlockState.is(SpectrumBlockTags.BLACK_MATERIA_CONVERSIONS)) {
+			if (!(neighborBlockState.getBlock() instanceof BlackMateriaBlock) && neighborBlockState.is(PastelBlockTags.BLACK_MATERIA_CONVERSIONS)) {
 				world.setBlockAndUpdate(neighborPos, targetState);
 				world.playSound(null, neighborPos, SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 1.0F, 0.9F + random.nextFloat() * 0.2F);
 				replacedAny = true;

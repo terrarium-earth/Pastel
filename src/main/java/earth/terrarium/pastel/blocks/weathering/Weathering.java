@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.weathering;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -18,32 +18,32 @@ public interface Weathering extends ChangeOverTimeBlock<Weathering.WeatheringLev
 	
 	Supplier<BiMap<Block, Block>> WEATHERING_LEVEL_INCREASES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
 			
-			.put(SpectrumBlocks.POLISHED_SHALE_CLAY.get(), SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY.get())
-			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY.get(), SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY.get())
+			.put(PastelBlocks.POLISHED_SHALE_CLAY.get(), PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY.get())
+			.put(PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY.get(), PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY.get())
 			
-			.put(SpectrumBlocks.POLISHED_SHALE_CLAY_STAIRS.get(), SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get())
-			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get(), SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY_STAIRS.get())
+			.put(PastelBlocks.POLISHED_SHALE_CLAY_STAIRS.get(), PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get())
+			.put(PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY_STAIRS.get(), PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY_STAIRS.get())
 			
-			.put(SpectrumBlocks.POLISHED_SHALE_CLAY_SLAB.get(), SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get())
-			.put(SpectrumBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get(), SpectrumBlocks.WEATHERED_POLISHED_SHALE_CLAY_SLAB.get())
+			.put(PastelBlocks.POLISHED_SHALE_CLAY_SLAB.get(), PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get())
+			.put(PastelBlocks.EXPOSED_POLISHED_SHALE_CLAY_SLAB.get(), PastelBlocks.WEATHERED_POLISHED_SHALE_CLAY_SLAB.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_BRICKS.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICKS.get())
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICKS.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICKS.get())
+			.put(PastelBlocks.SHALE_CLAY_BRICKS.get(), PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS.get())
+			.put(PastelBlocks.EXPOSED_SHALE_CLAY_BRICKS.get(), PastelBlocks.WEATHERED_SHALE_CLAY_BRICKS.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_BRICK_STAIRS.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get())
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICK_STAIRS.get())
+			.put(PastelBlocks.SHALE_CLAY_BRICK_STAIRS.get(), PastelBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get())
+			.put(PastelBlocks.EXPOSED_SHALE_CLAY_BRICK_STAIRS.get(), PastelBlocks.WEATHERED_SHALE_CLAY_BRICK_STAIRS.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_BRICK_SLAB.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get())
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_BRICK_SLAB.get())
+			.put(PastelBlocks.SHALE_CLAY_BRICK_SLAB.get(), PastelBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get())
+			.put(PastelBlocks.EXPOSED_SHALE_CLAY_BRICK_SLAB.get(), PastelBlocks.WEATHERED_SHALE_CLAY_BRICK_SLAB.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_TILES.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_TILES.get())
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILES.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_TILES.get())
+			.put(PastelBlocks.SHALE_CLAY_TILES.get(), PastelBlocks.EXPOSED_SHALE_CLAY_TILES.get())
+			.put(PastelBlocks.EXPOSED_SHALE_CLAY_TILES.get(), PastelBlocks.WEATHERED_SHALE_CLAY_TILES.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_TILE_STAIRS.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get())
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_TILE_STAIRS.get())
+			.put(PastelBlocks.SHALE_CLAY_TILE_STAIRS.get(), PastelBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get())
+			.put(PastelBlocks.EXPOSED_SHALE_CLAY_TILE_STAIRS.get(), PastelBlocks.WEATHERED_SHALE_CLAY_TILE_STAIRS.get())
 			
-			.put(SpectrumBlocks.SHALE_CLAY_TILE_SLAB.get(), SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get())
-			.put(SpectrumBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get(), SpectrumBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB.get())
+			.put(PastelBlocks.SHALE_CLAY_TILE_SLAB.get(), PastelBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get())
+			.put(PastelBlocks.EXPOSED_SHALE_CLAY_TILE_SLAB.get(), PastelBlocks.WEATHERED_SHALE_CLAY_TILE_SLAB.get())
 			.build());
 	
 	Supplier<BiMap<Block, Block>> WEATHERING_LEVEL_DECREASES = Suppliers.memoize(() -> WEATHERING_LEVEL_INCREASES.get().inverse());

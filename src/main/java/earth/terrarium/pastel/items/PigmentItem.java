@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.items;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
 import earth.terrarium.pastel.items.conditional.CloakedItem;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -21,7 +21,7 @@ public class PigmentItem extends CloakedItem implements LoomPatternProvider {
 	protected final InkColor color;
 	
 	public PigmentItem(Properties settings, InkColor color, Item cloakItem) {
-		super(settings, SpectrumCommon.locate("craft_colored_sapling"), cloakItem);
+		super(settings, PastelCommon.locate("craft_colored_sapling"), cloakItem);
 		this.color = color;
 		PIGMENTS.put(color, this);
 	}
@@ -36,7 +36,7 @@ public class PigmentItem extends CloakedItem implements LoomPatternProvider {
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.PIGMENT;
+		return PastelBannerPatterns.PIGMENT;
 	}
 	
 	@Override

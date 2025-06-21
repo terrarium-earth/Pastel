@@ -18,12 +18,12 @@ import earth.terrarium.pastel.components.InkStorageComponent;
 import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.inventories.CinderhearthScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -98,7 +98,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 	}
 	
 	public CinderhearthBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.CINDERHEARTH.get(), pos, state);
+		super(PastelBlockEntities.CINDERHEARTH.get(), pos, state);
 		this.inventory = new FriendlyStackHandler(INVENTORY_SIZE);
 		this.inkStorage = new IndividualCappedInkStorage(INK_STORAGE_SIZE, USED_INK_COLORS);
 
@@ -343,7 +343,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 		// cached recipe did not match => calculate new
 		ItemStack inputStack = cinderhearthBlockEntity.inventory.getStackInSlot(0);
 		if (!inputStack.isEmpty()) {
-			world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.CINDERHEARTH, input, world).ifPresentOrElse(
+			world.getRecipeManager().getRecipeFor(PastelRecipeTypes.CINDERHEARTH, input, world).ifPresentOrElse(
 					r -> cinderhearthBlockEntity.currentRecipe = r,
 					() -> world.getRecipeManager().getRecipeFor(RecipeType.BLASTING, input, world).ifPresent(
 							r -> cinderhearthBlockEntity.currentRecipe = r));
@@ -358,7 +358,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 		
 		cinderhearthBlockEntity.structure = CinderhearthBlock.verifyStructure(world, blockPos, null);
 		if (cinderhearthBlockEntity.structure == CinderHearthStructureType.NONE) {
-			world.playSound(null, cinderhearthBlockEntity.getBlockPos(), SpectrumSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
+			world.playSound(null, cinderhearthBlockEntity.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
 			return false;
 		}
 		
@@ -371,7 +371,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 	public static void craftBlastingRecipe(Level world, @NotNull CinderhearthBlockEntity cinderhearth, @NotNull BlastingRecipe blastingRecipe) {
 		// calculate outputs
 		ItemStack inputStack = cinderhearth.inventory.getStackInSlot(INPUT_SLOT_ID);
-		float yieldMod = inputStack.is(SpectrumItemTags.NO_CINDERHEARTH_DOUBLING) ? 1.0F : cinderhearth.drainInkForUpgrades(cinderhearth, UpgradeType.YIELD, InkColors.LIGHT_BLUE, cinderhearth.usesEfficiency);
+		float yieldMod = inputStack.is(PastelItemTags.NO_CINDERHEARTH_DOUBLING) ? 1.0F : cinderhearth.drainInkForUpgrades(cinderhearth, UpgradeType.YIELD, InkColors.LIGHT_BLUE, cinderhearth.usesEfficiency);
 		ItemStack output = blastingRecipe.getResultItem(world.registryAccess()).copy();
 		List<ItemStack> outputs = new ArrayList<>();
 		if (yieldMod > 1) {
@@ -394,7 +394,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 	public static void craftCinderhearthRecipe(Level world, @NotNull CinderhearthBlockEntity cinderhearth, @NotNull CinderhearthRecipe cinderhearthRecipe) {
 		// calculate outputs
 		ItemStack inputStack = cinderhearth.inventory.getStackInSlot(INPUT_SLOT_ID);
-		float yieldMod = inputStack.is(SpectrumItemTags.NO_CINDERHEARTH_DOUBLING) ? 1.0F : cinderhearth.drainInkForUpgrades(cinderhearth, UpgradeType.YIELD, InkColors.LIGHT_BLUE, cinderhearth.usesEfficiency);
+		float yieldMod = inputStack.is(PastelItemTags.NO_CINDERHEARTH_DOUBLING) ? 1.0F : cinderhearth.drainInkForUpgrades(cinderhearth, UpgradeType.YIELD, InkColors.LIGHT_BLUE, cinderhearth.usesEfficiency);
 		List<ItemStack> outputs = cinderhearthRecipe.getRolledOutputs(world.random, yieldMod);
 		
 		// craft
@@ -451,7 +451,7 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 	public void grantPlayerCinderhearthSmeltingAdvancement(ItemStack input, List<ItemStack> outputs, int experience) {
 		ServerPlayer serverPlayerEntity = (ServerPlayer) getOwnerIfOnline();
 		if (serverPlayerEntity != null) {
-			SpectrumAdvancementCriteria.CINDERHEARTH_SMELTING.trigger(serverPlayerEntity, input, outputs, experience, this.upgrades);
+			PastelAdvancementCriteria.CINDERHEARTH_SMELTING.trigger(serverPlayerEntity, input, outputs, experience, this.upgrades);
 		}
 	}
 

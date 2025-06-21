@@ -4,7 +4,7 @@ import com.klikli_dev.modonomicon.book.BookTextHolder;
 import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.data.BookDataManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.render.FluidRendering;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class BookTitrationBarrelFermentingPageRenderer extends BookGatedRecipePageRenderer<TitrationBarrelRecipe, BookGatedRecipePage<TitrationBarrelRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/modonomicon/titration_barrel.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/modonomicon/titration_barrel.png");
 
     private final BookTextHolder durationText1;
     private final BookTextHolder durationText2;

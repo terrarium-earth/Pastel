@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -44,9 +44,9 @@ public class NephriteBlossomLeavesBlock extends LeavesBlock implements Bonemeala
     @Override
     public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (state.getValue(AGE) == MAX_AGE) {
-			int fortuneLevel = SpectrumEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.FORTUNE, handStack) / 2;
+			int fortuneLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.FORTUNE, handStack) / 2;
 			int count = 1 + world.getRandom().nextInt(fortuneLevel + 1);
-			player.getInventory().placeItemBackInInventory(new ItemStack(SpectrumItems.GLASS_PEACH.get(), count));
+			player.getInventory().placeItemBackInInventory(new ItemStack(PastelItems.GLASS_PEACH.get(), count));
 	
 			world.setBlockAndUpdate(pos, state.setValue(AGE, 0));
 			player.playNotifySound(SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1, 1 + player.getRandom().nextFloat() * 0.25F);

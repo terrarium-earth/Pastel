@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -21,7 +21,7 @@ public class LightSpearEntity extends LightShardBaseEntity {
     }
 	
 	public LightSpearEntity(Level world, LivingEntity owner, float damage, int lifeSpanTicks) {
-		super(SpectrumEntityTypes.LIGHT_SPEAR.get(), world, owner, 48, damage, lifeSpanTicks);
+		super(PastelEntityTypes.LIGHT_SPEAR.get(), world, owner, 48, damage, lifeSpanTicks);
 	}
 
     @Override
@@ -33,7 +33,7 @@ public class LightSpearEntity extends LightShardBaseEntity {
 
 	@Override
 	public ResourceLocation getTextureLocation() {
-		return SpectrumCommon.locate("textures/entity/projectile/light_spear.png");
+		return PastelCommon.locate("textures/entity/projectile/light_spear.png");
 	}
 	
 	public static void summonBarrage(Level world, @Nullable LivingEntity user, @Nullable LivingEntity target, Predicate<LivingEntity> targetPredicate, Vec3 position, IntProvider count) {

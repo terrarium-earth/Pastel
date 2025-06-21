@@ -1,9 +1,8 @@
 package earth.terrarium.pastel.api.energy.color;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.neoforged.bus.api.*;
@@ -13,11 +12,11 @@ import java.util.List;
 
 public class InkColors {
 	
-	public static final ResourceLocation BASE_ADVANCEMENT_ID = SpectrumCommon.locate("midgame/pastel_midgame");
-	public static final ResourceLocation BLACK_ADVANCEMENT_ID = SpectrumCommon.locate("midgame/pastel_midgame");
-	public static final ResourceLocation WHITE_ADVANCEMENT_ID = SpectrumCommon.locate("lategame/collect_moonstone");
+	public static final ResourceLocation BASE_ADVANCEMENT_ID = PastelCommon.locate("midgame/pastel_midgame");
+	public static final ResourceLocation BLACK_ADVANCEMENT_ID = PastelCommon.locate("midgame/pastel_midgame");
+	public static final ResourceLocation WHITE_ADVANCEMENT_ID = PastelCommon.locate("lategame/collect_moonstone");
 
-	private static final DeferredRegister<InkColor> REGISTER = DeferredRegister.create(SpectrumRegistryKeys.INK_COLOR, SpectrumCommon.MOD_ID);
+	private static final DeferredRegister<InkColor> REGISTER = DeferredRegister.create(PastelRegistryKeys.INK_COLOR, PastelCommon.MOD_ID);
 
 	/**
 	 * A lot of places where color is displayed have black backgrounds, which would make displaying normal black on them... daft.
@@ -79,15 +78,15 @@ public class InkColors {
 	}
 	
 	public static Iterable<InkColor> all() {
-		return SpectrumRegistries.INK_COLOR;
+		return PastelRegistries.INK_COLOR;
 	}
 	
 	public static List<InkColor> elementals() {
-		return SpectrumRegistries.INK_COLOR.getTag(InkColorTags.ELEMENTAL_COLORS).map(entries -> entries.stream().map(Holder::value).toList()).orElseGet(() -> List.of(CYAN, MAGENTA, YELLOW, WHITE, BLACK));
+		return PastelRegistries.INK_COLOR.getTag(InkColorTags.ELEMENTAL_COLORS).map(entries -> entries.stream().map(Holder::value).toList()).orElseGet(() -> List.of(CYAN, MAGENTA, YELLOW, WHITE, BLACK));
 	}
 	
 	public static List<InkColor> compounds() {
-		return SpectrumRegistries.INK_COLOR.getTag(InkColorTags.COMPOUND_COLORS).map(entries -> entries.stream().map(Holder::value).toList()).orElseGet(() -> List.of(LIGHT_BLUE, BLUE, PURPLE, PINK, RED, ORANGE, LIME, GREEN, BROWN, GRAY, LIGHT_GRAY));
+		return PastelRegistries.INK_COLOR.getTag(InkColorTags.COMPOUND_COLORS).map(entries -> entries.stream().map(Holder::value).toList()).orElseGet(() -> List.of(LIGHT_BLUE, BLUE, PURPLE, PINK, RED, ORANGE, LIME, GREEN, BROWN, GRAY, LIGHT_GRAY));
 	}
 	
 }

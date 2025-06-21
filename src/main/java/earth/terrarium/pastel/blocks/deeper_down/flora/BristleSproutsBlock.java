@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumConfiguredFeatures;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
+import earth.terrarium.pastel.registries.PastelConfiguredFeatures;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -48,12 +48,12 @@ public class BristleSproutsBlock extends BushBlock implements BonemealableBlock 
 	
 	@Override
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-		if (entity instanceof LivingEntity && !entity.getType().is(SpectrumEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
+		if (entity instanceof LivingEntity && !entity.getType().is(PastelEntityTypeTags.POKING_DAMAGE_IMMUNE)) {
 			if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
 				double difX = Math.abs(entity.getX() - entity.xOld);
 				double difZ = Math.abs(entity.getZ() - entity.zOld);
 				if (difX >= 0.003 || difZ >= 0.003) {
-					entity.hurt(SpectrumDamageTypes.bristeSprouts(world), DAMAGE);
+					entity.hurt(PastelDamageTypes.bristeSprouts(world), DAMAGE);
 				}
 			}
 		}
@@ -73,7 +73,7 @@ public class BristleSproutsBlock extends BushBlock implements BonemealableBlock 
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		world.registryAccess()
 				.registryOrThrow(Registries.CONFIGURED_FEATURE)
-				.get(SpectrumConfiguredFeatures.BRISTLE_SPROUT_PATCH)
+				.get(PastelConfiguredFeatures.BRISTLE_SPROUT_PATCH)
 				.place(world, world.getChunkSource().getGenerator(), random, pos);
     }
 

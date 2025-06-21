@@ -2,9 +2,9 @@ package earth.terrarium.pastel.attachments.data;
 
 import com.mojang.serialization.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.sound.OnPrimordialFireSoundInstance;
 import net.minecraft.network.*;
 import net.minecraft.network.codec.*;
@@ -26,7 +26,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.util.thread.EffectiveSide;
 import net.neoforged.neoforge.network.handling.*;
 
 import java.util.Optional;
@@ -57,7 +56,7 @@ public class PrimordialFireData {
 	}
 
 	public static void addPrimordialFireTicks(LivingEntity entity, int ticks) {
-		int i = SpectrumEnchantmentHelper.getEquipmentLevel(entity.level().registryAccess(), Enchantments.FIRE_PROTECTION, entity);
+		int i = PastelEnchantmentHelper.getEquipmentLevel(entity.level().registryAccess(), Enchantments.FIRE_PROTECTION, entity);
 		if (i > 0) {
 			ticks -= Mth.floor(ticks * i * 0.15F);
 		}
@@ -86,19 +85,19 @@ public class PrimordialFireData {
 			return;
 
 		//Immune creatures get spared. If we ever add any.
-		if (entity.getType().is(SpectrumEntityTypeTags.PRIMORDIAL_FIRE_IMMUNE)) {
+		if (entity.getType().is(PastelEntityTypeTags.PRIMORDIAL_FIRE_IMMUNE)) {
 			entity.setData(ATTACHMENT, 0L);
 			return;
 		}
 
 		if (!isAffectingConstruct(entity)) {
 			var damageScaling = getDamageHealthScaling(entity);
-			entity.hurt(SpectrumDamageTypes.primordialFire(entity.level()), AzureDikeProvider.absorbDamage(entity, damageScaling * entity.getMaxHealth()));
+			entity.hurt(PastelDamageTypes.primordialFire(entity.level()), AzureDikeProvider.absorbDamage(entity, damageScaling * entity.getMaxHealth()));
 		}
 		//Primordial fire is so strong because it rends the soul. No soul = just slightly spicier fire
 		//Constructs have no soul, thus you get 2 dps and no more
 		else if (entity.tickCount % 10 == 0) {
-			entity.hurt(SpectrumDamageTypes.primordialFire(entity.level()), 1);
+			entity.hurt(PastelDamageTypes.primordialFire(entity.level()), 1);
 		}
 
 
@@ -112,7 +111,7 @@ public class PrimordialFireData {
 	}
 
 	public static boolean isAffectingConstruct(LivingEntity entity) {
-		return entity.getType().is(SpectrumEntityTypeTags.SOULLESS);
+		return entity.getType().is(PastelEntityTypeTags.SOULLESS);
 	}
 
 	/**
@@ -131,7 +130,7 @@ public class PrimordialFireData {
 
 	public static float getDamagePenalties(LivingEntity entity) {
 		//fire prot has a cap of 50% DR, requiring fire protection 10 on an armor piece
-		float fireProt = Math.min(FIRE_PROT_DAMAGE_RESISTANCE * SpectrumEnchantmentHelper.getEquipmentLevel(entity.level().registryAccess(), Enchantments.FIRE_PROTECTION, entity), 0.5F);
+		float fireProt = Math.min(FIRE_PROT_DAMAGE_RESISTANCE * PastelEnchantmentHelper.getEquipmentLevel(entity.level().registryAccess(), Enchantments.FIRE_PROTECTION, entity), 0.5F);
 		int fireResLevel = Optional.ofNullable(entity.getEffect(MobEffects.FIRE_RESISTANCE)).map(MobEffectInstance::getAmplifier).orElse(-1) + 1;
 		float fireRes = 0;
 

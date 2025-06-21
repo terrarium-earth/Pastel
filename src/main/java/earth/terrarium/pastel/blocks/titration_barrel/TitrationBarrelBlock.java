@@ -3,10 +3,10 @@ package earth.terrarium.pastel.blocks.titration_barrel;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -36,7 +36,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.fluids.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -119,7 +118,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 									}
 								}
 							} else {
-								if (handStack.is(SpectrumItemTags.COLORED_PLANKS)) {
+								if (handStack.is(PastelItemTags.COLORED_PLANKS)) {
 									if (barrelEntity.canBeSealed(player)) {
 										if (!player.isCreative()) {
 											handStack.shrink(1);
@@ -165,10 +164,10 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 						// or open it with a shift-click
 						var recipe = barrelEntity.getRecipeForInventory(world);
 						if (recipe.isPresent()) {
-							if (player.isCreative() && player.getMainHandItem().is(SpectrumItems.PAINTBRUSH.get())) {
+							if (player.isCreative() && player.getMainHandItem().is(PastelItems.PAINTBRUSH.get())) {
 								player.displayClientMessage(Component.translatable("block.pastel.titration_barrel.debug_added_day"), true);
 								barrelEntity.addOneDayOfSealTime();
-								world.playSound(null, pos, SpectrumSoundEvents.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);
+								world.playSound(null, pos, PastelSoundEvents.NEW_RECIPE, SoundSource.BLOCKS, 1.0F, 1.0F);
 							}
 							
 							// funky check to allow shenanigans when sealing it when changing the computer's clock to the past
@@ -189,7 +188,7 @@ public class TitrationBarrelBlock extends HorizontalDirectionalBlock implements 
 						// player is able to extract content until it is empty
 						// reverting it to the empty state again
 						if (player.isShiftKeyDown()) {
-							Optional<RecipeHolder<ITitrationBarrelRecipe>> recipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.TITRATION_BARREL, barrelEntity.getRecipeInput(), world);
+							Optional<RecipeHolder<ITitrationBarrelRecipe>> recipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.TITRATION_BARREL, barrelEntity.getRecipeInput(), world);
 							if (recipe.isPresent()) {
 								player.displayClientMessage(Component.translatable("block.pastel.titration_barrel.days_of_sealing_after_opened_with_extractable_amount", recipe.get().value().assemble(barrelEntity.getRecipeInput(), world.registryAccess()).getHoverName().getString(), barrelEntity.getSealMinecraftDays(), barrelEntity.getSealRealDays()), true);
 							} else {

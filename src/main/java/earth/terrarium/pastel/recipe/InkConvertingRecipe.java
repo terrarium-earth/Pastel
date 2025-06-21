@@ -3,11 +3,11 @@ package earth.terrarium.pastel.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -26,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
+public class InkConvertingRecipe extends GatedPastelRecipe<RecipeInput> {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/place_color_picker");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("midgame/place_color_picker");
 	protected static final List<Item> INPUT_ITEMS = new ArrayList<>();
 	
 	protected final Ingredient inputIngredient;
@@ -78,7 +78,7 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.COLOR_PICKER.get());
+		return new ItemStack(PastelBlocks.COLOR_PICKER.get());
 	}
 	
 	@Override
@@ -88,12 +88,12 @@ public class InkConvertingRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.INK_CONVERTING_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.INK_CONVERTING_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.INK_CONVERTING;
+		return PastelRecipeTypes.INK_CONVERTING;
 	}
 	
 	@Override

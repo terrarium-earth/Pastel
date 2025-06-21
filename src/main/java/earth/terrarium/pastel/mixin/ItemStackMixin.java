@@ -6,9 +6,9 @@ import earth.terrarium.pastel.api.gui.SlotWithOnClickAction;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.item.TooltipExtensions;
 import earth.terrarium.pastel.items.ConcealingOilsItem;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -62,7 +62,7 @@ public abstract class ItemStackMixin {
 	public boolean spectrum$applyIndestructibleEnchantment(boolean original) {
 		var stack = (ItemStack) (Object) this;
 		
-		return original && !EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.INDESTRUCTIBLE_EFFECT);
+		return original && !EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.INDESTRUCTIBLE_EFFECT);
 	}
 	
 	// thank you so, so much @williewillus / @Botania for this snippet of code
@@ -70,7 +70,7 @@ public abstract class ItemStackMixin {
 	@Inject(at = @At("HEAD"), method = "is(Lnet/minecraft/world/item/Item;)Z", cancellable = true)
 	private void spectrum$isSpectrumShears(Item item, CallbackInfoReturnable<Boolean> cir) {
 		if (item == Items.SHEARS) {
-			if (is(SpectrumItems.BEDROCK_SHEARS.get())) {
+			if (is(PastelItems.BEDROCK_SHEARS.get())) {
 				cir.setReturnValue(true);
 			}
 		}
@@ -97,7 +97,7 @@ public abstract class ItemStackMixin {
 	@Inject(method = "getTooltipLines", at = @At(value = "INVOKE", target = "net/minecraft/world/item/TooltipFlag.isAdvanced ()Z", shift = At.Shift.BEFORE, ordinal = 1))
 	public void spectrum$expandTooltipPostDamage(Item.TooltipContext context, Player player, TooltipFlag type, CallbackInfoReturnable<List<Component>> cir, @Local List<Component> tooltip) {
 		var stack = (ItemStack) (Object) this;
-		var oilEffect = stack.get(SpectrumDataComponentTypes.CONCEALED_EFFECT);
+		var oilEffect = stack.get(PastelDataComponentTypes.CONCEALED_EFFECT);
 		var profile = stack.get(DataComponents.PROFILE);
 		if (oilEffect != null && profile != null && player.getUUID().equals(profile.id().orElse(null))) {
 			var subText = new ArrayList<Component>();

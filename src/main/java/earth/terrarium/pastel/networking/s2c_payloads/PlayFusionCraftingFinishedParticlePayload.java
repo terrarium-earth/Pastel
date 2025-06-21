@@ -3,23 +3,19 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 import earth.terrarium.pastel.api.color.ColorRegistry;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +23,7 @@ import org.joml.Vector3f;
 
 public record PlayFusionCraftingFinishedParticlePayload(BlockPos pos, InkColor color) implements CustomPacketPayload {
 	
-	public static final Type<PlayFusionCraftingFinishedParticlePayload> ID = SpectrumC2SPackets.makeId("play_fusion_crafting_finished_particle");
+	public static final Type<PlayFusionCraftingFinishedParticlePayload> ID = PastelC2SPackets.makeId("play_fusion_crafting_finished_particle");
 	public static final StreamCodec<FriendlyByteBuf, PlayFusionCraftingFinishedParticlePayload> CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, PlayFusionCraftingFinishedParticlePayload::pos,
 			InkColor.STREAM_CODEC, PlayFusionCraftingFinishedParticlePayload::color,

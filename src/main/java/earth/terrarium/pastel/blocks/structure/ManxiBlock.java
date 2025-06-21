@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -57,7 +57,7 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
 			return InteractionResult.FAIL;
 
 		world.playLocalSound(pos, SoundEvents.CHISELED_BOOKSHELF_PICKUP_ENCHANTED, SoundSource.BLOCKS, 1F, 1F, true);
-		player.getInventory().placeItemBackInInventory(SpectrumItems.POISONERS_HANDBOOK.get().getDefaultInstance());
+		player.getInventory().placeItemBackInInventory(PastelItems.POISONERS_HANDBOOK.get().getDefaultInstance());
 		manxi.markTaken(player);
 
 		return InteractionResult.CONSUME;
@@ -66,9 +66,9 @@ public class ManxiBlock extends HorizontalDirectionalBlock implements EntityBloc
 	@Override
 	public void attack(BlockState state, Level world, BlockPos pos, Player player) {
 		if (!world.isClientSide() && !player.getAbilities().instabuild) {
-			player.displayClientMessage(Component.translatable("block.pastel.manxi.nope").withStyle(s -> s.withColor(SpectrumStatusEffects.ETERNAL_SLUMBER_COLOR)), true);
-			world.playLocalSound(pos, SpectrumSoundEvents.DEEP_CRYSTAL_RING, SoundSource.BLOCKS, 1, 1.5F, true);
-			player.hurt(SpectrumDamageTypes.sleep(world, null), 6);
+			player.displayClientMessage(Component.translatable("block.pastel.manxi.nope").withStyle(s -> s.withColor(PastelStatusEffects.ETERNAL_SLUMBER_COLOR)), true);
+			world.playLocalSound(pos, PastelSoundEvents.DEEP_CRYSTAL_RING, SoundSource.BLOCKS, 1, 1.5F, true);
+			player.hurt(PastelDamageTypes.sleep(world, null), 6);
 			player.knockback(2, player.getX() - (pos.getX() + 0.5), player.getZ() - (pos.getZ() + 0.5));
 		}
 	}

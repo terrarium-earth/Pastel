@@ -7,10 +7,10 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -50,7 +50,7 @@ public class RadianceStaffItem extends Item implements InkPowered {
 	public static final int MIN_LIGHT_LEVEL = 10;
 	
 	public static final InkCost INK_COST = new InkCost(InkColors.YELLOW, 10);
-	public static final ItemStack COST = new ItemStack(SpectrumItems.SHIMMERSTONE_GEM.get(), 1);
+	public static final ItemStack COST = new ItemStack(PastelItems.SHIMMERSTONE_GEM.get(), 1);
 	
 	public RadianceStaffItem(Properties settings) {
 		super(settings);
@@ -64,12 +64,12 @@ public class RadianceStaffItem extends Item implements InkPowered {
 		BlockState targetBlockState = world.getBlockState(targetPos);
 		if (targetBlockState.isAir()) {
 			if (playerEntity.isCreative() || InkPowered.tryDrainEnergy(playerEntity, INK_COST) || InventoryHelper.removeFromInventoryWithRemainders(playerEntity, COST)) {
-				world.setBlock(targetPos, SpectrumBlocks.WAND_LIGHT_BLOCK.get().defaultBlockState(), 3);
+				world.setBlock(targetPos, PastelBlocks.WAND_LIGHT_BLOCK.get().defaultBlockState(), 3);
 				return true;
 			}
 		} else if (targetBlockState.is(Blocks.WATER)) {
 			if (playerEntity.isCreative() || InkPowered.tryDrainEnergy(playerEntity, INK_COST) || InventoryHelper.removeFromInventoryWithRemainders(playerEntity, COST)) {
-				world.setBlock(targetPos, SpectrumBlocks.WAND_LIGHT_BLOCK.get().defaultBlockState().setValue(WATERLOGGED, true), 3);
+				world.setBlock(targetPos, PastelBlocks.WAND_LIGHT_BLOCK.get().defaultBlockState().setValue(WATERLOGGED, true), 3);
 				return true;
 			}
 		}
@@ -83,12 +83,12 @@ public class RadianceStaffItem extends Item implements InkPowered {
         } else {
             pitch = Math.min(1.5F, 0.7F + 0.1F * useTimes);
         }
-		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world, Vec3.atCenterOf(targetPos), SpectrumParticleTypes.SHIMMERSTONE_SPARKLE, 20, Vec3.ZERO, new Vec3(0.3, 0.3, 0.3));
-        world.playSound(null, playerEntity.getX() + 0.5, playerEntity.getY() + 0.5, playerEntity.getZ() + 0.5, SpectrumSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, (float) Math.max(0.25, 1.0F - (float) iteration * 0.1F), pitch);
+		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world, Vec3.atCenterOf(targetPos), PastelParticleTypes.SHIMMERSTONE_SPARKLE, 20, Vec3.ZERO, new Vec3(0.3, 0.3, 0.3));
+        world.playSound(null, playerEntity.getX() + 0.5, playerEntity.getY() + 0.5, playerEntity.getZ() + 0.5, PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, (float) Math.max(0.25, 1.0F - (float) iteration * 0.1F), pitch);
     }
 	
 	public static void playDenySound(Level world, Player playerEntity) {
-		world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SpectrumSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + playerEntity.getRandom().nextFloat() * 0.4F);
+		world.playSound(null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), PastelSoundEvents.USE_FAIL, SoundSource.PLAYERS, 1.0F, 0.8F + playerEntity.getRandom().nextFloat() * 0.4F);
 	}
 	
 	@Override
@@ -111,7 +111,7 @@ public class RadianceStaffItem extends Item implements InkPowered {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
 		if (!world.isClientSide) {
-			world.playSound(null, user.getX(), user.getY(), user.getZ(), SpectrumSoundEvents.RADIANCE_STAFF_CHARGING, SoundSource.PLAYERS, 1.0F, 1.0F);
+			world.playSound(null, user.getX(), user.getY(), user.getZ(), PastelSoundEvents.RADIANCE_STAFF_CHARGING, SoundSource.PLAYERS, 1.0F, 1.0F);
 		}
 		return ItemUtils.startUsingInstantly(world, user, hand);
 	}
@@ -144,7 +144,7 @@ public class RadianceStaffItem extends Item implements InkPowered {
 		BlockPos pos = context.getClickedPos();
 		Direction direction = context.getClickedFace();
 		
-		if (!world.getBlockState(pos).is(SpectrumBlocks.WAND_LIGHT_BLOCK.get())) { // those get destroyed instead
+		if (!world.getBlockState(pos).is(PastelBlocks.WAND_LIGHT_BLOCK.get())) { // those get destroyed instead
 			BlockPos targetPos = pos.relative(direction);
 			if (placeLight(world, targetPos, (ServerPlayer) player)) {
 				RadianceStaffItem.playSoundAndParticles(world, targetPos, (ServerPlayer) player, world.random.nextInt(5), world.random.nextInt(5));

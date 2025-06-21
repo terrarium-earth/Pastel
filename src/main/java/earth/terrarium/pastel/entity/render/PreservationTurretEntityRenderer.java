@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.entity.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.PreservationTurretEntity;
 import earth.terrarium.pastel.entity.models.PreservationTurretEntityModel;
-import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
+import earth.terrarium.pastel.registries.client.PastelModelLayers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -14,10 +14,10 @@ import net.minecraft.resources.ResourceLocation;
 @OnlyIn(Dist.CLIENT)
 public class PreservationTurretEntityRenderer extends MobRenderer<PreservationTurretEntity, PreservationTurretEntityModel<PreservationTurretEntity>> {
 	
-	public static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/preservation_turret/preservation_turret.png");
+	public static final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/preservation_turret/preservation_turret.png");
 	
 	public PreservationTurretEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, new PreservationTurretEntityModel<>(context.bakeLayer(SpectrumModelLayers.PRESERVATION_TURRET)), 0.0F);
+		super(context, new PreservationTurretEntityModel<>(context.bakeLayer(PastelModelLayers.PRESERVATION_TURRET)), 0.0F);
 	}
 	
 	@Override

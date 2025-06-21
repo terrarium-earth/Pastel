@@ -2,9 +2,9 @@ package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.AoEHelper;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -31,7 +31,7 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
 	}
 
 	public MiningProjectileEntity(double x, double y, double z, Level world) {
-		this(SpectrumEntityTypes.MINING_PROJECTILE.get(), world);
+		this(PastelEntityTypes.MINING_PROJECTILE.get(), world);
 		this.moveTo(x, y, z, this.getYRot(), this.getXRot());
 		this.reapplyPosition();
 	}
@@ -87,7 +87,7 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
 					return false;
 				}
 				boolean suitable = this.toolStack.isCorrectToolForDrops(state);
-				int efficiencyLevel = SpectrumEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.EFFICIENCY, this.toolStack);
+				int efficiencyLevel = PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.EFFICIENCY, this.toolStack);
 				return hardness <= 6 + (suitable ? 4 + efficiencyLevel : 0);
 			};
 			AoEHelper.breakBlocksAround(player, this.toolStack, blockHitResult.getBlockPos(), MINING_RANGE, minablePredicate);

@@ -2,9 +2,9 @@ package earth.terrarium.pastel.compat.REI.plugins;
 
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.compat.REI.GatedSpectrumDisplay;
+import earth.terrarium.pastel.compat.REI.PastelDisplay;
 import earth.terrarium.pastel.compat.REI.REIHelper;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.Collections;
 import java.util.List;
 
-public class PedestalCraftingDisplay extends GatedSpectrumDisplay {
+public class PedestalCraftingDisplay extends PastelDisplay {
 	
 	protected final PedestalRecipeTier pedestalRecipeTier;
 	protected final int width;
@@ -65,7 +65,7 @@ public class PedestalCraftingDisplay extends GatedSpectrumDisplay {
 
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.PEDESTAL_CRAFTING;
+		return PastelPlugins.PEDESTAL_CRAFTING;
 	}
 	
 	@Override

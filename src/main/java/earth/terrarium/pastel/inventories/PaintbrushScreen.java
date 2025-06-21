@@ -3,12 +3,11 @@ package earth.terrarium.pastel.inventories;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.networking.c2s_payloads.InkColorSelectedC2SPayload;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelRegistries;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -65,10 +64,10 @@ public class PaintbrushScreen extends QuickNavigationGridScreen<PaintbrushScreen
 	
 	@SuppressWarnings("DataFlowIssue")
 	protected static void chooseColor(@Nullable InkColor inkColor) {
-		var entry = inkColor == null ? null : SpectrumRegistries.INK_COLOR.wrapAsHolder(inkColor);
+		var entry = inkColor == null ? null : PastelRegistries.INK_COLOR.wrapAsHolder(inkColor);
 		PacketDistributor.sendToServer(new InkColorSelectedC2SPayload(Optional.ofNullable(entry)));
 		Minecraft client = Minecraft.getInstance();
-		client.level.playSound(null, client.player.blockPosition(), SpectrumSoundEvents.PAINTBRUSH_PAINT, SoundSource.NEUTRAL, 0.6F, 1.0F);
+		client.level.playSound(null, client.player.blockPosition(), PastelSoundEvents.PAINTBRUSH_PAINT, SoundSource.NEUTRAL, 0.6F, 1.0F);
 		client.player.closeContainer();
 	}
 	

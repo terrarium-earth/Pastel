@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -13,12 +13,12 @@ public class PotionWorkshopBrewingCategory extends PotionWorkshopCategory<Potion
 	
 	@Override
 	public CategoryIdentifier<PotionWorkshopBrewingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.POTION_WORKSHOP_BREWING;
+		return PastelPlugins.POTION_WORKSHOP_BREWING;
 	}
 	
 	@Override
 	public ResourceLocation getIdentifier() {
-		return SpectrumCommon.locate("potion_workshop_brewing");
+		return PastelCommon.locate("potion_workshop_brewing");
 	}
 	
 	@Override

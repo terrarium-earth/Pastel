@@ -2,9 +2,9 @@ package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.helpers.BlockReference;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -60,7 +60,7 @@ public class AbyssalVineBlock extends TriStateVineBlock {
         reference.setProperty(BERRIES, false);
         reference.update(world);
         world.playSound(null, pos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.8F, 1.2F));
-        player.getInventory().placeItemBackInInventory(SpectrumItems.FISSURE_PLUM.get().getDefaultInstance());
+        player.getInventory().placeItemBackInInventory(PastelItems.FISSURE_PLUM.get().getDefaultInstance());
 
         world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, reference.getState()));
         return InteractionResult.SUCCESS;
@@ -74,10 +74,10 @@ public class AbyssalVineBlock extends TriStateVineBlock {
         for (int offset = 0; true; offset++) {
             var ref = BlockReference.of(world, pos.offset(0, offset, 0));
 
-            if (ref.isOf(SpectrumBlocks.SHALE_CLAY.get()))
+            if (ref.isOf(PastelBlocks.SHALE_CLAY.get()))
                 return;
 
-            if (ref.isIn(SpectrumBlockTags.GROWTH_ACCELERATORS)) {
+            if (ref.isIn(PastelBlockTags.GROWTH_ACCELERATORS)) {
                 growthChance = 0.5F;
             }
 
@@ -100,7 +100,7 @@ public class AbyssalVineBlock extends TriStateVineBlock {
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return SpectrumItems.FISSURE_PLUM.get().getDefaultInstance();
+        return PastelItems.FISSURE_PLUM.get().getDefaultInstance();
     }
 
     @Override

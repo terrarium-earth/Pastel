@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.energy;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -107,7 +107,7 @@ public class CrystalApothecaryBlock extends BaseEntityBlock {
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, SpectrumBlockEntities.CRYSTAL_APOTHECARY.get(), CrystalApothecaryBlockEntity::tick);
+		return createTickerHelper(type, PastelBlockEntities.CRYSTAL_APOTHECARY.get(), CrystalApothecaryBlockEntity::tick);
 	}
 	
 	@Override

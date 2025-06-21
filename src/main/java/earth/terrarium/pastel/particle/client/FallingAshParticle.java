@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.particle.client;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.deeper_down.HowlingSpireEffects;
-import earth.terrarium.pastel.registries.SpectrumBiomes;
+import earth.terrarium.pastel.registries.PastelBiomes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -27,7 +27,7 @@ public class FallingAshParticle extends TextureSheetParticle {
 	private static Direction.Axis primaryAxis = Direction.Axis.X;
 	private static Direction.Axis lastAxis = primaryAxis;
 	private final float rotateFactor, lightness;
-	private final int simInterval = SpectrumCommon.CONFIG.WindSimInterval, simOffset;
+	private final int simInterval = PastelCommon.CONFIG.WindSimInterval, simOffset;
 	private int slowTicks, axisTicks = 0;
 	
 	private static final BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(); // to prevent us from having to create lots of BlockPos objects per (render) tick
@@ -67,7 +67,7 @@ public class FallingAshParticle extends TextureSheetParticle {
 		var time = level.getGameTime() % 432000;
 		
 		if ((age + 2 < lifetime)
-				&& level.getBiome(pos).is(SpectrumBiomes.HOWLING_SPIRES)) {
+				&& level.getBiome(pos).is(PastelBiomes.HOWLING_SPIRES)) {
 			age++;
 		}
 		
@@ -123,7 +123,7 @@ public class FallingAshParticle extends TextureSheetParticle {
 	}
 	
 	private boolean verifySimConfig(long time) {
-		return SpectrumCommon.CONFIG.WindSim && (time + simOffset) % simInterval == 0;
+		return PastelCommon.CONFIG.WindSim && (time + simOffset) % simInterval == 0;
 	}
 	
 	private void adjustGravityForLift() {

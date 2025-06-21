@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -32,7 +32,7 @@ public class BlackSludgePlantBlock extends BushBlock {
 
 	@Override
 	protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-		return floor.is(SpectrumBlockTags.HORNSLAKE_BLOCKS) || super.mayPlaceOn(floor, world, pos);
+		return floor.is(PastelBlockTags.HORNSLAKE_BLOCKS) || super.mayPlaceOn(floor, world, pos);
 	}
 
 	@Override

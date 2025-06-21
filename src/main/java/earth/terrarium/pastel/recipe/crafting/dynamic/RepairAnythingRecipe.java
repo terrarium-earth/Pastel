@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.recipe.crafting.dynamic;
 
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
@@ -25,12 +25,12 @@ public class RepairAnythingRecipe extends CustomRecipe {
 		for (int j = 0; j < input.size(); ++j) {
 			ItemStack itemStack = input.getItem(j);
 			if (!itemStack.isEmpty()) {
-				if (itemStack.getItem() == SpectrumItems.MOONSTRUCK_NECTAR.get()) {
+				if (itemStack.getItem() == PastelItems.MOONSTRUCK_NECTAR.get()) {
 					if (nectarFound) {
 						return false;
 					}
 					nectarFound = true;
-				} else if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(SpectrumItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
+				} else if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(PastelItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
 					if (itemFound) {
 						return false;
 					}
@@ -47,12 +47,12 @@ public class RepairAnythingRecipe extends CustomRecipe {
 		ItemStack itemStack = ItemStack.EMPTY;
 		for (int j = 0; j < input.size(); ++j) {
 			itemStack = input.getItem(j);
-			if (!itemStack.isEmpty() && itemStack.getItem() != SpectrumItems.MOONSTRUCK_NECTAR.get()) {
+			if (!itemStack.isEmpty() && itemStack.getItem() != PastelItems.MOONSTRUCK_NECTAR.get()) {
 				break;
 			}
 		}
 		
-		if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(SpectrumItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
+		if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(PastelItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
 			ItemStack returnStack = itemStack.copy();
 			int damage = returnStack.getDamageValue();
 			int maxDamage = returnStack.getMaxDamage();
@@ -72,7 +72,7 @@ public class RepairAnythingRecipe extends CustomRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.REPAIR_ANYTHING_SERIALIZER;
+		return PastelRecipeSerializers.REPAIR_ANYTHING_SERIALIZER;
 	}
 	
 }

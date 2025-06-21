@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.predicates;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.entity.SpectrumEntitySubPredicateTypes;
+import earth.terrarium.pastel.entity.PastelEntitySubPredicateTypes;
 import earth.terrarium.pastel.entity.entity.KindlingEntity;
 import earth.terrarium.pastel.entity.variants.KindlingVariant;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
@@ -35,7 +35,7 @@ public record KindlingPredicate(Optional<Boolean> clipped, Optional<Boolean> ang
 
 	@Override
 	public MapCodec<KindlingPredicate> codec() {
-		return SpectrumEntitySubPredicateTypes.KINDLING;
+		return PastelEntitySubPredicateTypes.KINDLING;
 	}
 
 }

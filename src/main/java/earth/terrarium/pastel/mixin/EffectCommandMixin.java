@@ -2,7 +2,7 @@ package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -29,7 +29,7 @@ public class EffectCommandMixin {
                     ((MobEffectInstanceInjector) effect).spectrum$setIncurable(false);
             }
 			// manually remove fatal slumber to bypass turning it into eternal slumber
-			living.removeEffect(SpectrumStatusEffects.FATAL_SLUMBER);
+			living.removeEffect(PastelStatusEffects.FATAL_SLUMBER);
         }
     }
 	

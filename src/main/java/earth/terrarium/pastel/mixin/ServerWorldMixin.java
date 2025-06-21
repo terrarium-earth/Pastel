@@ -3,13 +3,10 @@ package earth.terrarium.pastel.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.attachments.data.MiscPlayerData;
-import earth.terrarium.pastel.events.SpectrumGameEvents;
+import earth.terrarium.pastel.events.PastelGameEvents;
 import earth.terrarium.pastel.helpers.TimeHelper;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -27,12 +24,12 @@ public abstract class ServerWorldMixin {
 
 	@Inject(at = @At("TAIL"), method = "addFreshEntity")
 	private void spectrum$emitSpawnEntityEvent(Entity entity, final CallbackInfoReturnable<Boolean> info) {
-		entity.gameEvent(SpectrumGameEvents.ENTITY_SPAWNED);
+		entity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
 	}
 
 	@Inject(method = "onBlockStateChange", at = @At("HEAD"))
 	private void spectrum$emitBlockChangedEvent(BlockPos pos, BlockState oldBlock, BlockState newBlock, CallbackInfo ci) {
-		((ServerLevel) (Object) this).gameEvent(SpectrumGameEvents.BLOCK_CHANGED, pos, GameEvent.Context.of(newBlock));
+		((ServerLevel) (Object) this).gameEvent(PastelGameEvents.BLOCK_CHANGED, pos, GameEvent.Context.of(newBlock));
 	}
 
 	@WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;setDayTime(J)V"))

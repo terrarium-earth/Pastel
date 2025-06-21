@@ -5,15 +5,15 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.EntityColorProcessorRegistry;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.entity.SpectrumTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
 import earth.terrarium.pastel.helpers.BlockVariantHelper;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredExplosionParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -53,14 +53,14 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 	private static final int SPELL_POTENCY = 2;
 	private static final float DAMAGE_PER_POTENCY = 0.5F;
 	
-	private static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(InkProjectileEntity.class, SpectrumTrackedDataHandlerRegistry.INK_COLOR);
+	private static final EntityDataAccessor<InkColor> COLOR = SynchedEntityData.defineId(InkProjectileEntity.class, PastelTrackedDataHandlerRegistry.INK_COLOR);
 
 	public InkProjectileEntity(EntityType<InkProjectileEntity> type, Level world) {
 		super(type, world);
 	}
 
 	public InkProjectileEntity(double x, double y, double z, Level world) {
-		this(SpectrumEntityTypes.INK_PROJECTILE.get(), world);
+		this(PastelEntityTypes.INK_PROJECTILE.get(), world);
 		this.moveTo(x, y, z, this.getYRot(), this.getXRot());
 		this.reapplyPosition();
 	}
@@ -96,7 +96,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 	public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
 		
-		ResourceLocation inkColorId = SpectrumRegistries.INK_COLOR.getKey(this.getInkColor());
+		ResourceLocation inkColorId = PastelRegistries.INK_COLOR.getKey(this.getInkColor());
 		if (inkColorId != null) {
 			nbt.putString("ink_color", inkColorId.toString());
 		}
@@ -108,7 +108,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 		
 		if (nbt.contains("ink_color", Tag.TAG_STRING)) {
 			ResourceLocation inkColorId = ResourceLocation.parse(nbt.getString("ink_color"));
-			InkColor inkColor = SpectrumRegistries.INK_COLOR.get(inkColorId);
+			InkColor inkColor = PastelRegistries.INK_COLOR.get(inkColorId);
 			if (inkColor != null) {
 				this.setColor(inkColor);
 			}
@@ -146,9 +146,9 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 		
 		DamageSource damageSource;
 		if (owner == null) {
-			damageSource = SpectrumDamageTypes.inkProjectile(this, this);
+			damageSource = PastelDamageTypes.inkProjectile(this, this);
 		} else {
-			damageSource = SpectrumDamageTypes.inkProjectile(this, owner);
+			damageSource = PastelDamageTypes.inkProjectile(this, owner);
 			if (owner instanceof LivingEntity livingOwner) {
 				livingOwner.setLastHurtMob(target);
 			}
@@ -168,7 +168,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 				}
 				
 				if (owner instanceof ServerPlayer ownerPlayer && !target.isAlive()) {
-					SpectrumAdvancementCriteria.KILLED_BY_INK_PROJECTILE.trigger(ownerPlayer, List.of(target));
+					PastelAdvancementCriteria.KILLED_BY_INK_PROJECTILE.trigger(ownerPlayer, List.of(target));
 				}
 			}
 			
@@ -292,7 +292,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 						//entity.damage(SpectrumDamageSources.inkProjectile(this, attacker), damage);
 						
 						if (entity instanceof LivingEntity livingEntity) {
-							int i = SpectrumEnchantmentHelper.getEquipmentLevel(level().registryAccess(), Enchantments.BLAST_PROTECTION, livingEntity);
+							int i = PastelEnchantmentHelper.getEquipmentLevel(level().registryAccess(), Enchantments.BLAST_PROTECTION, livingEntity);
 							if (i > 0) {
 								velocity *= Mth.clamp(1.0 - (double)i * 0.15, 0.0, 1.0);
 							}

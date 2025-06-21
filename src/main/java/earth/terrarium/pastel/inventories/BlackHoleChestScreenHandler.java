@@ -4,8 +4,8 @@ import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.blocks.chests.BlackHoleChestBlockEntity;
 import earth.terrarium.pastel.inventories.slots.ShadowSlot;
 import earth.terrarium.pastel.inventories.slots.StackFilterSlot;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.network.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.Container;
@@ -14,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
@@ -31,11 +30,11 @@ public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
 	}
 
 	public BlackHoleChestScreenHandler(int syncId, Inventory playerInventory, FilterConfigurable.ExtendedDataWithPos data) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos(), SpectrumBlockEntities.BLACK_HOLE_CHEST.get()).orElseThrow(), data.data());
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos(), PastelBlockEntities.BLACK_HOLE_CHEST.get()).orElseThrow(), data.data());
 	}
 	
 	public BlackHoleChestScreenHandler(int syncId, Inventory playerInventory, BlackHoleChestBlockEntity blockEntity, FilterConfigurable.ExtendedData data) {
-		super(SpectrumScreenHandlerTypes.BLACK_HOLE_CHEST, syncId);
+		super(PastelScreenHandlerTypes.BLACK_HOLE_CHEST, syncId);
 		this.world = playerInventory.player.level();
 		this.filterInventory = FilterConfigurable.getFilterInventoryFromExtendedData(syncId, playerInventory, data, this);
 		this.blockEntity = blockEntity;
@@ -67,7 +66,7 @@ public class BlackHoleChestScreenHandler extends AbstractContainerMenu {
 		}
 		
 		// experience provider slot
-		this.addSlot(new StackFilterSlot(blockEntity, BlackHoleChestBlockEntity.EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT, 152, 18, SpectrumItems.KNOWLEDGE_GEM.get()));
+		this.addSlot(new StackFilterSlot(blockEntity, BlackHoleChestBlockEntity.EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT, 152, 18, PastelItems.KNOWLEDGE_GEM.get()));
 		
 		// filter slots
 		for (k = 0; k < BlackHoleChestBlockEntity.ITEM_FILTER_SLOT_COUNT; ++k) {

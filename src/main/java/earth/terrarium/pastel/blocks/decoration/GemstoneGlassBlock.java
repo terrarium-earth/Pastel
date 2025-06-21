@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.decoration;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -25,7 +25,7 @@ public class GemstoneGlassBlock extends TransparentBlock {
 		this.gemstoneColor = gemstoneColor;
 		this.codec = RecordCodecBuilder.mapCodec(i -> i.group(
 				propertiesCodec(),
-				SpectrumRegistries.GEMSTONE_COLOR.byNameCodec().fieldOf("color").forGetter(b -> b.gemstoneColor)
+				PastelRegistries.GEMSTONE_COLOR.byNameCodec().fieldOf("color").forGetter(b -> b.gemstoneColor)
 		).apply(i, GemstoneGlassBlock::new));
 	}
 

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.block_flooder;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +21,7 @@ public class BlockFlooderBlockEntity extends BlockEntity {
 	private BlockState targetBlockState = Blocks.AIR.defaultBlockState();
 	
 	public BlockFlooderBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.BLOCK_FLOODER.get(), pos, state);
+		super(PastelBlockEntities.BLOCK_FLOODER.get(), pos, state);
 	}
 	
 	public UUID getOwnerUUID() {

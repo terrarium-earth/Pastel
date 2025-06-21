@@ -2,9 +2,9 @@ package earth.terrarium.pastel.compat.emi.recipes;
 
 import earth.terrarium.pastel.compat.emi.FluidIngredientEmi;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.fusion_shrine.FusionShrineRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.TextWidget.Alignment;
@@ -19,7 +19,7 @@ public class FusionShrineEmiRecipeGated extends GatedSpectrumEmiRecipe<FusionShr
 	private final List<FormattedCharSequence> texts;
 	
 	public FusionShrineEmiRecipeGated(FusionShrineRecipe recipe) {
-		super(SpectrumEmiRecipeCategories.FUSION_SHRINE, recipe, 138, 60);
+		super(PastelEmiRecipeCategories.FUSION_SHRINE, recipe, 138, 60);
 		Minecraft client = Minecraft.getInstance();
 		if (recipe.getDescription().isPresent()) {
 			texts = client.font.split(recipe.getDescription().get(), width);
@@ -45,10 +45,10 @@ public class FusionShrineEmiRecipeGated extends GatedSpectrumEmiRecipe<FusionShr
 	public void addUnlockedWidgets(WidgetHolder widgets) {
 		// shrine + fluid
 		if (!inputs.getFirst().isEmpty()) {
-			widgets.addSlot(EmiStack.of(SpectrumBlocks.FUSION_SHRINE_BASALT.get()), 10, 25).drawBack(false);
+			widgets.addSlot(EmiStack.of(PastelBlocks.FUSION_SHRINE_BASALT.get()), 10, 25).drawBack(false);
 			widgets.addSlot(inputs.getFirst(), 30, 25);
 		} else {
-			widgets.addSlot(EmiStack.of(SpectrumBlocks.FUSION_SHRINE_BASALT.get()), 20, 25).drawBack(false);
+			widgets.addSlot(EmiStack.of(PastelBlocks.FUSION_SHRINE_BASALT.get()), 20, 25).drawBack(false);
 		}
 
 		// input slots

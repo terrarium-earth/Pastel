@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class InertiaUsedCriterion extends SimpleCriterionTrigger<InertiaUsedCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("inertia_used");
+	public static final ResourceLocation ID = PastelCommon.locate("inertia_used");
 	
 	public void trigger(ServerPlayer player, BlockState state, long amount) {
 		this.trigger(player, (conditions) -> conditions.matches(state, amount));

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.tools;
 import earth.terrarium.pastel.api.item.Stampable;
 import earth.terrarium.pastel.api.item.TooltipExtensions;
 import earth.terrarium.pastel.helpers.BlockReference;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -67,7 +67,7 @@ public class TuningStampItem extends Item implements TooltipExtensions {
             var target = potentialTarget.get();
 
             if (!source.verifyStampData(target) || !target.canUserStamp(player)) {
-                tryPlaySound(player, SpectrumSoundEvents.SHATTER_LIGHT, 0.75F);
+                tryPlaySound(player, PastelSoundEvents.SHATTER_LIGHT, 0.75F);
                 return InteractionResult.FAIL;
             }
             var interactable = target.source();
@@ -76,7 +76,7 @@ public class TuningStampItem extends Item implements TooltipExtensions {
             source.notifySourceOfChange(target, targetChanged);
 
             if (!targetChanged) {
-                tryPlaySound(player, SpectrumSoundEvents.SHATTER_HEAVY, 0.45F);
+                tryPlaySound(player, PastelSoundEvents.SHATTER_HEAVY, 0.45F);
                 return InteractionResult.FAIL;
             }
 
@@ -88,7 +88,7 @@ public class TuningStampItem extends Item implements TooltipExtensions {
                     tryPlaySound(player, SoundEvents.AMETHYST_BLOCK_CHIME, 0.825F);
                 }
                 else {
-                    tryPlaySound(player, SpectrumSoundEvents.BLOCK_ONYX_BLOCK_CHIME, 0.825F);
+                    tryPlaySound(player, PastelSoundEvents.BLOCK_ONYX_BLOCK_CHIME, 0.825F);
                 }
             });
 
@@ -108,7 +108,7 @@ public class TuningStampItem extends Item implements TooltipExtensions {
 
             if (candidate.isPresent() && candidate.get().canUserStamp(player)) {
                 saveToNbt(stack, candidate.get());
-                tryPlaySound(player, SpectrumSoundEvents.CRYSTAL_STRIKE, 0.75F);
+                tryPlaySound(player, PastelSoundEvents.CRYSTAL_STRIKE, 0.75F);
                 return InteractionResult.sidedSuccess(world.isClientSide());
             }
         }

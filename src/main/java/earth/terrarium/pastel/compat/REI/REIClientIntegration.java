@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.compat.REI;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
 import earth.terrarium.pastel.blocks.idols.FreezingIdolBlock;
 import earth.terrarium.pastel.compat.REI.plugins.AnvilCrushingCategory;
@@ -71,15 +71,14 @@ import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopReactingRecip
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import dev.architectury.event.EventResult;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.client.registry.screen.ExclusionZones;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.TransferHandlerRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandler;
@@ -89,8 +88,6 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.transfer.info.stack.SlotAccessor;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -127,64 +124,64 @@ public class REIClientIntegration implements REIClientPlugin {
 		registry.add(new PrimordialFireBurningCategory());
 
 		EntryIngredient pedestals = EntryIngredient.of(
-				EntryStacks.of(SpectrumBlocks.PEDESTAL_BASIC_TOPAZ.get()),
-				EntryStacks.of(SpectrumBlocks.PEDESTAL_BASIC_AMETHYST.get()),
-				EntryStacks.of(SpectrumBlocks.PEDESTAL_BASIC_CITRINE.get()),
-				EntryStacks.of(SpectrumBlocks.PEDESTAL_ALL_BASIC.get()),
-				EntryStacks.of(SpectrumBlocks.PEDESTAL_ONYX.get()),
-				EntryStacks.of(SpectrumBlocks.PEDESTAL_MOONSTONE.get())
+				EntryStacks.of(PastelBlocks.PEDESTAL_BASIC_TOPAZ.get()),
+				EntryStacks.of(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get()),
+				EntryStacks.of(PastelBlocks.PEDESTAL_BASIC_CITRINE.get()),
+				EntryStacks.of(PastelBlocks.PEDESTAL_ALL_BASIC.get()),
+				EntryStacks.of(PastelBlocks.PEDESTAL_ONYX.get()),
+				EntryStacks.of(PastelBlocks.PEDESTAL_MOONSTONE.get())
 		);
-		registry.addWorkstations(SpectrumPlugins.PEDESTAL_CRAFTING, pedestals);
-		if (SpectrumCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
+		registry.addWorkstations(PastelPlugins.PEDESTAL_CRAFTING, pedestals);
+		if (PastelCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
 			registry.addWorkstations(BuiltinPlugin.CRAFTING, pedestals);
 		}
 		
-		registry.addWorkstations(BuiltinPlugin.CRAFTING, EntryStacks.of(SpectrumItems.CRAFTING_TABLET.get()));
-		registry.addWorkstations(BuiltinPlugin.CRAFTING, EntryStacks.of(SpectrumBlocks.FABRICATION_CHEST.get()));
-		registry.addWorkstations(BuiltinPlugin.BLASTING, EntryStacks.of(SpectrumBlocks.CINDERHEARTH.get()));
+		registry.addWorkstations(BuiltinPlugin.CRAFTING, EntryStacks.of(PastelItems.CRAFTING_TABLET.get()));
+		registry.addWorkstations(BuiltinPlugin.CRAFTING, EntryStacks.of(PastelBlocks.FABRICATION_CHEST.get()));
+		registry.addWorkstations(BuiltinPlugin.BLASTING, EntryStacks.of(PastelBlocks.CINDERHEARTH.get()));
 		
-		registry.addWorkstations(SpectrumPlugins.ANVIL_CRUSHING, EntryStacks.of(Blocks.ANVIL), EntryStacks.of(SpectrumBlocks.BEDROCK_ANVIL.get()), EntryStacks.of(SpectrumBlocks.STRATINE_FLOATBLOCK.get()), EntryStacks.of(SpectrumBlocks.PALTAERIA_FLOATBLOCK.get()));
-		registry.addWorkstations(SpectrumPlugins.FUSION_SHRINE, EntryIngredient.of(EntryStacks.of(SpectrumBlocks.FUSION_SHRINE_BASALT.get()), EntryStacks.of(SpectrumBlocks.FUSION_SHRINE_CALCITE.get())));
-		registry.addWorkstations(SpectrumPlugins.NATURES_STAFF, EntryStacks.of(SpectrumItems.NATURES_STAFF.get()));
-		registry.addWorkstations(SpectrumPlugins.HEATING, EntryStacks.of(SpectrumBlocks.BLAZE_IDOL.get()));
-		registry.addWorkstations(SpectrumPlugins.FREEZING, EntryStacks.of(SpectrumBlocks.POLAR_BEAR_IDOL.get()));
-		registry.addWorkstations(SpectrumPlugins.ENCHANTER_CRAFTING, EntryStacks.of(SpectrumBlocks.ENCHANTER.get()));
-		registry.addWorkstations(SpectrumPlugins.ENCHANTMENT_UPGRADE, EntryStacks.of(SpectrumBlocks.ENCHANTER.get()));
-		registry.addWorkstations(SpectrumPlugins.GOO_CONVERTING, EntryStacks.of(SpectrumItems.GOO_BUCKET.get()));
-		registry.addWorkstations(SpectrumPlugins.LIQUID_CRYSTAL_CONVERTING, EntryStacks.of(SpectrumItems.LIQUID_CRYSTAL_BUCKET.get()));
-		registry.addWorkstations(SpectrumPlugins.MIDNIGHT_SOLUTION_CONVERTING, EntryStacks.of(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get()));
-		registry.addWorkstations(SpectrumPlugins.DRAGONROT_CONVERTING, EntryStacks.of(SpectrumItems.DRAGONROT_BUCKET.get()));
-		registry.addWorkstations(SpectrumPlugins.SPIRIT_INSTILLER, EntryStacks.of(SpectrumBlocks.SPIRIT_INSTILLER.get()));
-		registry.addWorkstations(SpectrumPlugins.INK_CONVERTING, EntryStacks.of(SpectrumBlocks.COLOR_PICKER.get()));
-		registry.addWorkstations(SpectrumPlugins.CRYSTALLARIEUM, EntryStacks.of(SpectrumBlocks.CRYSTALLARIEUM.get()));
-		registry.addWorkstations(SpectrumPlugins.POTION_WORKSHOP_BREWING, EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP.get()));
-		registry.addWorkstations(SpectrumPlugins.POTION_WORKSHOP_CRAFTING, EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP.get()));
-		registry.addWorkstations(SpectrumPlugins.POTION_WORKSHOP_REACTING, EntryStacks.of(SpectrumBlocks.POTION_WORKSHOP.get()));
-		registry.addWorkstations(SpectrumPlugins.CINDERHEARTH, EntryStacks.of(SpectrumBlocks.CINDERHEARTH.get()));
-		registry.addWorkstations(SpectrumPlugins.TITRATION_BARREL, EntryStacks.of(SpectrumBlocks.TITRATION_BARREL.get()));
-		registry.addWorkstations(SpectrumPlugins.PRIMORDIAL_FIRE_BURNING, EntryStacks.of(SpectrumItems.DOOMBLOOM_SEED.get()), EntryStacks.of(SpectrumItems.PRIMORDIAL_LIGHTER.get()), EntryStacks.of(SpectrumBlocks.INCANDESCENT_AMALGAM.get()), EntryStacks.of(SpectrumItems.PIPE_BOMB.get()));
+		registry.addWorkstations(PastelPlugins.ANVIL_CRUSHING, EntryStacks.of(Blocks.ANVIL), EntryStacks.of(PastelBlocks.BEDROCK_ANVIL.get()), EntryStacks.of(PastelBlocks.STRATINE_FLOATBLOCK.get()), EntryStacks.of(PastelBlocks.PALTAERIA_FLOATBLOCK.get()));
+		registry.addWorkstations(PastelPlugins.FUSION_SHRINE, EntryIngredient.of(EntryStacks.of(PastelBlocks.FUSION_SHRINE_BASALT.get()), EntryStacks.of(PastelBlocks.FUSION_SHRINE_CALCITE.get())));
+		registry.addWorkstations(PastelPlugins.NATURES_STAFF, EntryStacks.of(PastelItems.NATURES_STAFF.get()));
+		registry.addWorkstations(PastelPlugins.HEATING, EntryStacks.of(PastelBlocks.BLAZE_IDOL.get()));
+		registry.addWorkstations(PastelPlugins.FREEZING, EntryStacks.of(PastelBlocks.POLAR_BEAR_IDOL.get()));
+		registry.addWorkstations(PastelPlugins.ENCHANTER_CRAFTING, EntryStacks.of(PastelBlocks.ENCHANTER.get()));
+		registry.addWorkstations(PastelPlugins.ENCHANTMENT_UPGRADE, EntryStacks.of(PastelBlocks.ENCHANTER.get()));
+		registry.addWorkstations(PastelPlugins.GOO_CONVERTING, EntryStacks.of(PastelItems.GOO_BUCKET.get()));
+		registry.addWorkstations(PastelPlugins.LIQUID_CRYSTAL_CONVERTING, EntryStacks.of(PastelItems.LIQUID_CRYSTAL_BUCKET.get()));
+		registry.addWorkstations(PastelPlugins.MIDNIGHT_SOLUTION_CONVERTING, EntryStacks.of(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get()));
+		registry.addWorkstations(PastelPlugins.DRAGONROT_CONVERTING, EntryStacks.of(PastelItems.DRAGONROT_BUCKET.get()));
+		registry.addWorkstations(PastelPlugins.SPIRIT_INSTILLER, EntryStacks.of(PastelBlocks.SPIRIT_INSTILLER.get()));
+		registry.addWorkstations(PastelPlugins.INK_CONVERTING, EntryStacks.of(PastelBlocks.COLOR_PICKER.get()));
+		registry.addWorkstations(PastelPlugins.CRYSTALLARIEUM, EntryStacks.of(PastelBlocks.CRYSTALLARIEUM.get()));
+		registry.addWorkstations(PastelPlugins.POTION_WORKSHOP_BREWING, EntryStacks.of(PastelBlocks.POTION_WORKSHOP.get()));
+		registry.addWorkstations(PastelPlugins.POTION_WORKSHOP_CRAFTING, EntryStacks.of(PastelBlocks.POTION_WORKSHOP.get()));
+		registry.addWorkstations(PastelPlugins.POTION_WORKSHOP_REACTING, EntryStacks.of(PastelBlocks.POTION_WORKSHOP.get()));
+		registry.addWorkstations(PastelPlugins.CINDERHEARTH, EntryStacks.of(PastelBlocks.CINDERHEARTH.get()));
+		registry.addWorkstations(PastelPlugins.TITRATION_BARREL, EntryStacks.of(PastelBlocks.TITRATION_BARREL.get()));
+		registry.addWorkstations(PastelPlugins.PRIMORDIAL_FIRE_BURNING, EntryStacks.of(PastelItems.DOOMBLOOM_SEED.get()), EntryStacks.of(PastelItems.PRIMORDIAL_LIGHTER.get()), EntryStacks.of(PastelBlocks.INCANDESCENT_AMALGAM.get()), EntryStacks.of(PastelItems.PIPE_BOMB.get()));
 	}
 	
 	@Override
 	public void registerDisplays(DisplayRegistry registry) {
-		registry.registerRecipeFiller(AnvilCrushingRecipe.class, SpectrumRecipeTypes.ANVIL_CRUSHING, AnvilCrushingDisplay::new);
-		registry.registerRecipeFiller(PedestalRecipe.class, SpectrumRecipeTypes.PEDESTAL, PedestalCraftingDisplay::new);
-		registry.registerRecipeFiller(FusionShrineRecipe.class, SpectrumRecipeTypes.FUSION_SHRINE, FusionShrineDisplay::new);
-		registry.registerRecipeFiller(EnchanterRecipe.class, SpectrumRecipeTypes.ENCHANTER, EnchanterEnchantingDisplay::new);
-		registry.registerRecipeFiller(EnchantmentUpgradeRecipe.class, SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, EnchantmentUpgradeDisplay::new);
-		registry.registerRecipeFiller(PotionWorkshopBrewingRecipe.class, SpectrumRecipeTypes.POTION_WORKSHOP_BREWING, PotionWorkshopBrewingDisplay::new);
-		registry.registerRecipeFiller(PotionWorkshopCraftingRecipe.class, SpectrumRecipeTypes.POTION_WORKSHOP_CRAFTING, PotionWorkshopCraftingDisplay::new);
-		registry.registerRecipeFiller(SpiritInstillerRecipe.class, SpectrumRecipeTypes.SPIRIT_INSTILLING, SpiritInstillingDisplay::new);
-		registry.registerRecipeFiller(GooConvertingRecipe.class, SpectrumRecipeTypes.GOO_CONVERTING, GooConvertingDisplay::new);
-		registry.registerRecipeFiller(LiquidCrystalConvertingRecipe.class, SpectrumRecipeTypes.LIQUID_CRYSTAL_CONVERTING, LiquidCrystalConvertingDisplay::new);
-		registry.registerRecipeFiller(MidnightSolutionConvertingRecipe.class, SpectrumRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING, MidnightSolutionConvertingDisplay::new);
-		registry.registerRecipeFiller(DragonrotConvertingRecipe.class, SpectrumRecipeTypes.DRAGONROT_CONVERTING, DragonrotConvertingDisplay::new);
-		registry.registerRecipeFiller(InkConvertingRecipe.class, SpectrumRecipeTypes.INK_CONVERTING, InkConvertingDisplay::new);
-		registry.registerRecipeFiller(PotionWorkshopReactingRecipe.class, SpectrumRecipeTypes.POTION_WORKSHOP_REACTING, PotionWorkshopReactingDisplay::new);
-		registry.registerRecipeFiller(CrystallarieumRecipe.class, SpectrumRecipeTypes.CRYSTALLARIEUM, CrystallarieumDisplay::new);
-		registry.registerRecipeFiller(CinderhearthRecipe.class, SpectrumRecipeTypes.CINDERHEARTH, CinderhearthDisplay::new);
-		registry.registerRecipeFiller(ITitrationBarrelRecipe.class, SpectrumRecipeTypes.TITRATION_BARREL, TitrationBarrelDisplay::new);
-		registry.registerRecipeFiller(PrimordialFireBurningRecipe.class, SpectrumRecipeTypes.PRIMORDIAL_FIRE_BURNING, PrimordialFireBurningDisplay::new);
+		registry.registerRecipeFiller(AnvilCrushingRecipe.class, PastelRecipeTypes.ANVIL_CRUSHING, AnvilCrushingDisplay::new);
+		registry.registerRecipeFiller(PedestalRecipe.class, PastelRecipeTypes.PEDESTAL, PedestalCraftingDisplay::new);
+		registry.registerRecipeFiller(FusionShrineRecipe.class, PastelRecipeTypes.FUSION_SHRINE, FusionShrineDisplay::new);
+		registry.registerRecipeFiller(EnchanterRecipe.class, PastelRecipeTypes.ENCHANTER, EnchanterEnchantingDisplay::new);
+		registry.registerRecipeFiller(EnchantmentUpgradeRecipe.class, PastelRecipeTypes.ENCHANTMENT_UPGRADE, EnchantmentUpgradeDisplay::new);
+		registry.registerRecipeFiller(PotionWorkshopBrewingRecipe.class, PastelRecipeTypes.POTION_WORKSHOP_BREWING, PotionWorkshopBrewingDisplay::new);
+		registry.registerRecipeFiller(PotionWorkshopCraftingRecipe.class, PastelRecipeTypes.POTION_WORKSHOP_CRAFTING, PotionWorkshopCraftingDisplay::new);
+		registry.registerRecipeFiller(SpiritInstillerRecipe.class, PastelRecipeTypes.SPIRIT_INSTILLING, SpiritInstillingDisplay::new);
+		registry.registerRecipeFiller(GooConvertingRecipe.class, PastelRecipeTypes.GOO_CONVERTING, GooConvertingDisplay::new);
+		registry.registerRecipeFiller(LiquidCrystalConvertingRecipe.class, PastelRecipeTypes.LIQUID_CRYSTAL_CONVERTING, LiquidCrystalConvertingDisplay::new);
+		registry.registerRecipeFiller(MidnightSolutionConvertingRecipe.class, PastelRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING, MidnightSolutionConvertingDisplay::new);
+		registry.registerRecipeFiller(DragonrotConvertingRecipe.class, PastelRecipeTypes.DRAGONROT_CONVERTING, DragonrotConvertingDisplay::new);
+		registry.registerRecipeFiller(InkConvertingRecipe.class, PastelRecipeTypes.INK_CONVERTING, InkConvertingDisplay::new);
+		registry.registerRecipeFiller(PotionWorkshopReactingRecipe.class, PastelRecipeTypes.POTION_WORKSHOP_REACTING, PotionWorkshopReactingDisplay::new);
+		registry.registerRecipeFiller(CrystallarieumRecipe.class, PastelRecipeTypes.CRYSTALLARIEUM, CrystallarieumDisplay::new);
+		registry.registerRecipeFiller(CinderhearthRecipe.class, PastelRecipeTypes.CINDERHEARTH, CinderhearthDisplay::new);
+		registry.registerRecipeFiller(ITitrationBarrelRecipe.class, PastelRecipeTypes.TITRATION_BARREL, TitrationBarrelDisplay::new);
+		registry.registerRecipeFiller(PrimordialFireBurningRecipe.class, PastelRecipeTypes.PRIMORDIAL_FIRE_BURNING, PrimordialFireBurningDisplay::new);
 		
 		NaturesStaffConversionDataLoader.CONVERSIONS.forEach((key, value) -> registry.add(new NaturesStaffConversionsDisplay(EntryStacks.of(key), EntryStacks.of(value.getBlock()), NaturesStaffConversionDataLoader.UNLOCK_IDENTIFIERS.getOrDefault(key, null))));
 		FreezingIdolBlock.FREEZING_STATE_MAP.forEach((key, value) -> registry.add(new FreezingDisplay(BlockToBlockWithChanceDisplay.blockToEntryStack(key.getBlock()), BlockToBlockWithChanceDisplay.blockToEntryStack(value.getA().getBlock()), value.getB())));
@@ -196,7 +193,7 @@ public class REIClientIntegration implements REIClientPlugin {
 			// do not list recipes in REI at all, until they are unlocked
 			// secret recipes are never shown
 			if (display instanceof GatedRecipeDisplay gatedRecipeDisplay) {
-				if (!gatedRecipeDisplay.isUnlocked() && (SpectrumCommon.CONFIG.REIListsRecipesAsNotUnlocked || gatedRecipeDisplay.isSecret())) {
+				if (!gatedRecipeDisplay.isUnlocked() && (PastelCommon.CONFIG.REIListsRecipesAsNotUnlocked || gatedRecipeDisplay.isSecret())) {
 					return EventResult.interruptFalse();
 				}
 			}
@@ -215,12 +212,12 @@ public class REIClientIntegration implements REIClientPlugin {
 		// Since the pedestal can craft both vanilla and pedestal recipes
 		// we split the "arrow" part of the gui into two parts => faster access
 		registry.registerContainerClickArea(new Rectangle(89, 37, 10, 15), PedestalScreen.class, BuiltinPlugin.CRAFTING);
-		registry.registerContainerClickArea(new Rectangle(100, 37, 11, 15), PedestalScreen.class, SpectrumPlugins.PEDESTAL_CRAFTING);
+		registry.registerContainerClickArea(new Rectangle(100, 37, 11, 15), PedestalScreen.class, PastelPlugins.PEDESTAL_CRAFTING);
 		
-		registry.registerContainerClickArea(new Rectangle(28, 41, 10, 42), PotionWorkshopScreen.class, SpectrumPlugins.POTION_WORKSHOP_BREWING);
-		registry.registerContainerClickArea(new Rectangle(28, 41, 10, 42), PotionWorkshopScreen.class, SpectrumPlugins.POTION_WORKSHOP_CRAFTING);
+		registry.registerContainerClickArea(new Rectangle(28, 41, 10, 42), PotionWorkshopScreen.class, PastelPlugins.POTION_WORKSHOP_BREWING);
+		registry.registerContainerClickArea(new Rectangle(28, 41, 10, 42), PotionWorkshopScreen.class, PastelPlugins.POTION_WORKSHOP_CRAFTING);
 		
-		registry.registerContainerClickArea(new Rectangle(35, 33, 22, 15), CinderhearthScreen.class, SpectrumPlugins.CINDERHEARTH);
+		registry.registerContainerClickArea(new Rectangle(35, 33, 22, 15), CinderhearthScreen.class, PastelPlugins.CINDERHEARTH);
 		registry.registerContainerClickArea(new Rectangle(35, 33, 22, 15), CinderhearthScreen.class, BuiltinPlugin.BLASTING);
 		
 		registry.registerDecider(REIOverlayDecider.INSTANCE);
@@ -230,20 +227,20 @@ public class REIClientIntegration implements REIClientPlugin {
 	@Override
 	public void registerTransferHandlers(TransferHandlerRegistry registry) {
 		// REI input magic to prevent moving incorrect amount of gem powder yet still complain about a lack of such
-		registry.register(SimpleTransferHandlerExtension.create(PedestalScreenHandler.class, SpectrumPlugins.PEDESTAL_CRAFTING,
+		registry.register(SimpleTransferHandlerExtension.create(PedestalScreenHandler.class, PastelPlugins.PEDESTAL_CRAFTING,
 				new SimpleTransferHandler.IntRange(0, 9),
 				List.of(new SimpleTransferHandler.IntRange(9, 15), new SimpleTransferHandler.IntRange(16, 52))));
-		if (SpectrumCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
+		if (PastelCommon.CONFIG.canPedestalCraftVanillaRecipes()) {
 			registry.register(SimpleTransferHandlerExtension.create(PedestalScreenHandler.class, BuiltinPlugin.CRAFTING,
 					new SimpleTransferHandler.IntRange(0, 9), new SimpleTransferHandler.IntRange(16, 52)));
 		}
-		registry.register(SimpleTransferHandlerExtension.create(CinderhearthScreenHandler.class, SpectrumPlugins.CINDERHEARTH,
+		registry.register(SimpleTransferHandlerExtension.create(CinderhearthScreenHandler.class, PastelPlugins.CINDERHEARTH,
 				new SimpleTransferHandler.IntRange(2, 3), new SimpleTransferHandler.IntRange(11, 47)));
 		registry.register(SimpleTransferHandlerExtension.create(CinderhearthScreenHandler.class, BuiltinPlugin.BLASTING,
 				new SimpleTransferHandler.IntRange(2, 3), new SimpleTransferHandler.IntRange(11, 47)));
-		registry.register(SimpleTransferHandlerExtension.create(PotionWorkshopScreenHandler.class, SpectrumPlugins.POTION_WORKSHOP_BREWING,
+		registry.register(SimpleTransferHandlerExtension.create(PotionWorkshopScreenHandler.class, PastelPlugins.POTION_WORKSHOP_BREWING,
 				new SimpleTransferHandler.IntRange(0, 9), new SimpleTransferHandler.IntRange(21, 57)));
-		registry.register(SimpleTransferHandlerExtension.create(PotionWorkshopScreenHandler.class, SpectrumPlugins.POTION_WORKSHOP_CRAFTING,
+		registry.register(SimpleTransferHandlerExtension.create(PotionWorkshopScreenHandler.class, PastelPlugins.POTION_WORKSHOP_CRAFTING,
 				new SimpleTransferHandler.IntRange(0, 9), new SimpleTransferHandler.IntRange(21, 57)));
 	}
 

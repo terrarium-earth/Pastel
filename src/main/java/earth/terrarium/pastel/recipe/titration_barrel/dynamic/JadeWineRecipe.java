@@ -1,16 +1,16 @@
 package earth.terrarium.pastel.recipe.titration_barrel.dynamic;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -28,13 +28,13 @@ import java.util.Optional;
 
 public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/food/jade_wine");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/food/jade_wine");
 	public static final int MIN_FERMENTATION_TIME_HOURS = 24;
-	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(SpectrumItems.JADE_WINE.get(), 4);
+	public static final ItemStack OUTPUT_STACK = getDefaultStackWithCount(PastelItems.JADE_WINE.get(), 4);
 	public static final Item TAPPING_ITEM = Items.GLASS_BOTTLE;
 	public static final List<IngredientStack> INGREDIENT_STACKS = new ArrayList<>() {{
-		add(IngredientStack.ofItems(SpectrumItems.GERMINATED_JADE_VINE_BULB.get()));
-		add(IngredientStack.ofItems(SpectrumItems.JADE_VINE_PETALS.get(), 3));
+		add(IngredientStack.ofItems(PastelItems.GERMINATED_JADE_VINE_BULB.get()));
+		add(IngredientStack.ofItems(PastelItems.JADE_VINE_PETALS.get(), 3));
 	}};
 	
 	public JadeWineRecipe() {
@@ -43,9 +43,9 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 	
 	@Override
 	public ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
-		int bulbCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.GERMINATED_JADE_VINE_BULB.get());
-		int petalCount = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.JADE_VINE_PETALS.get());
-		boolean nectar = InventoryHelper.getItemCountInInventory(inventory, SpectrumItems.MOONSTRUCK_NECTAR.get()) > 0;
+		int bulbCount = InventoryHelper.getItemCountInInventory(inventory, PastelItems.GERMINATED_JADE_VINE_BULB.get());
+		int petalCount = InventoryHelper.getItemCountInInventory(inventory, PastelItems.JADE_VINE_PETALS.get());
+		boolean nectar = InventoryHelper.getItemCountInInventory(inventory, PastelItems.MOONSTRUCK_NECTAR.get()) > 0;
 		
 		float thickness = getThickness(bulbCount, petalCount);
 		return tapWith(bulbCount, petalCount, nectar, thickness, secondsFermented, downfall);
@@ -57,7 +57,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 		
 		int effectDuration = 1200;
 		if (alcPercent >= 80) {
-			effects.add(new MobEffectInstance(SpectrumStatusEffects.PROJECTILE_REBOUND, effectDuration));
+			effects.add(new MobEffectInstance(PastelStatusEffects.PROJECTILE_REBOUND, effectDuration));
 			effectDuration *= 2;
 		}
 		if (alcPercent >= 70) {
@@ -73,11 +73,11 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 			effectDuration *= 2;
 		}
 		if (alcPercent >= 20) {
-			effects.add(new MobEffectInstance(SpectrumStatusEffects.NOURISHING, effectDuration));
+			effects.add(new MobEffectInstance(PastelStatusEffects.NOURISHING, effectDuration));
 			effectDuration *= 2;
 		}
 		if (nectar) {
-			effects.add(new MobEffectInstance(SpectrumStatusEffects.IMMUNITY, effectDuration));
+			effects.add(new MobEffectInstance(PastelStatusEffects.IMMUNITY, effectDuration));
 		}
 		
 		int nectarMod = nectar ? 3 : 1;
@@ -110,9 +110,9 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 			if (stack.isEmpty()) {
 				continue;
 			}
-			if (stack.is(SpectrumItems.GERMINATED_JADE_VINE_BULB.get())) {
+			if (stack.is(PastelItems.GERMINATED_JADE_VINE_BULB.get())) {
 				bulbsFound = true;
-			} else if (!stack.is(SpectrumItems.JADE_VINE_PETALS.get()) && !stack.is(SpectrumItems.MOONSTRUCK_NECTAR.get())) {
+			} else if (!stack.is(PastelItems.JADE_VINE_PETALS.get()) && !stack.is(PastelItems.MOONSTRUCK_NECTAR.get())) {
 				return false;
 			}
 		}
@@ -122,7 +122,7 @@ public class JadeWineRecipe extends SweetenableTitrationBarrelRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.TITRATION_BARREL_JADE_WINE;
+		return PastelRecipeSerializers.TITRATION_BARREL_JADE_WINE;
 	}
 	
 }

@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -24,15 +24,15 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class RadiancePinItem extends SpectrumTrinketItem {
+public class RadiancePinItem extends PastelTrinketItem {
 	
 	public static final int CHECK_EVERY_X_TICKS = 20;
 	public static final int MAX_LIGHT_LEVEL = 7;
-	public static final BlockState LIGHT_BLOCK_STATE = SpectrumBlocks.DECAYING_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 15);
-	public static final BlockState LIGHT_BLOCK_STATE_WATER = SpectrumBlocks.DECAYING_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 15).setValue(LightBlock.WATERLOGGED, true);
+	public static final BlockState LIGHT_BLOCK_STATE = PastelBlocks.DECAYING_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 15);
+	public static final BlockState LIGHT_BLOCK_STATE_WATER = PastelBlocks.DECAYING_LIGHT_BLOCK.get().defaultBlockState().setValue(LightBlock.LEVEL, 15).setValue(LightBlock.WATERLOGGED, true);
 	
 	public RadiancePinItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/radiance_pin"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/radiance_pin"));
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class RadiancePinItem extends SpectrumTrinketItem {
 				} else if (currentState.equals(Blocks.WATER.defaultBlockState())) {
 					world.setBlock(pos, LIGHT_BLOCK_STATE_WATER, 3);
 					placed = true;
-				} else if (currentState.is(SpectrumBlocks.DECAYING_LIGHT_BLOCK.get())) {
+				} else if (currentState.is(PastelBlocks.DECAYING_LIGHT_BLOCK.get())) {
 					if (currentState.getValue(LightBlock.WATERLOGGED)) {
 						world.setBlock(pos, LIGHT_BLOCK_STATE_WATER, 3);
 					} else {
@@ -74,7 +74,7 @@ public class RadiancePinItem extends SpectrumTrinketItem {
                 }
                 if (placed) {
 					sendSmallLightCreatedParticle((ServerLevel) world, pos);
-					world.playSound(null, entity.getX() + 0.5, entity.getY() + 0.5, entity.getZ() + 0.5, SpectrumSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 0.08F, 0.9F + world.random.nextFloat() * 0.2F);
+					world.playSound(null, entity.getX() + 0.5, entity.getY() + 0.5, entity.getZ() + 0.5, PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 0.08F, 0.9F + world.random.nextFloat() * 0.2F);
                 }
             }
         }
@@ -82,7 +82,7 @@ public class RadiancePinItem extends SpectrumTrinketItem {
 
     public static void sendSmallLightCreatedParticle(ServerLevel world, BlockPos blockPos) {
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, Vec3.atCenterOf(blockPos),
-                SpectrumParticleTypes.SHIMMERSTONE_SPARKLE,
+                PastelParticleTypes.SHIMMERSTONE_SPARKLE,
                 4,
                 Vec3.ZERO,
                 new Vec3(0.1, 0.1, 0.1));

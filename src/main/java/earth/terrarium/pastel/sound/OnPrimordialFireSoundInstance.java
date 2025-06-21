@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
 import net.minecraft.sounds.SoundSource;
@@ -14,7 +14,7 @@ public class OnPrimordialFireSoundInstance extends AbstractSoundInstance impleme
 	private int fadeInTicks;
 	
 	public OnPrimordialFireSoundInstance(Player player) {
-		super(SpectrumSoundEvents.PRIMORDIAL_FIRE_DOT, SoundSource.PLAYERS, player.getRandom());
+		super(PastelSoundEvents.PRIMORDIAL_FIRE_DOT, SoundSource.PLAYERS, player.getRandom());
 		this.looping = true;
 		this.delay = 0;
 		this.volume = 0.05F;

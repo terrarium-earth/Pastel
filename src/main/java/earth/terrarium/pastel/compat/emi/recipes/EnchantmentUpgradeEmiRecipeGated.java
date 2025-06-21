@@ -2,18 +2,18 @@ package earth.terrarium.pastel.compat.emi.recipes;
 
 import com.google.common.collect.Lists;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.compat.emi.widgets.DynamicStackWidget;
 import earth.terrarium.pastel.compat.emi.widgets.DynamicTextWidget;
 import earth.terrarium.pastel.compat.emi.widgets.SaneButtonWidget;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
-import earth.terrarium.pastel.recipe.GatedSpectrumRecipe;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.recipe.RecipeScaling;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -31,9 +31,9 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedSpectrumRecipe<?>> {
+public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedPastelRecipe<?>> {
 	
-	private static final ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/container/enchanter.png");
+	private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/container/enchanter.png");
 	private static final int NORMAL_COLOR = 0x4d3655;
 	private static final int OVERCHANT_COLOR = 0xdb3564;
 	
@@ -90,7 +90,7 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 	
 	@Override
 	public void addUnlockedWidgets(WidgetHolder widgets) {
-		var overEnchant = AdvancementHelper.hasAdvancement(Minecraft.getInstance().player, SpectrumAdvancements.OVERENCHANTING);
+		var overEnchant = AdvancementHelper.hasAdvancement(Minecraft.getInstance().player, PastelAdvancements.OVERENCHANTING);
 		
 		// Reset the indexer
 		indexer = 1;
@@ -105,7 +105,7 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 			return EmiStack.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(xp, false));
 		}, 0, 111, 5);
 		widgets.add(gem);
-		widgets.addSlot(EmiStack.of(SpectrumBlocks.ENCHANTER.get()), 111, 51).drawBack(false);
+		widgets.addSlot(EmiStack.of(PastelBlocks.ENCHANTER.get()), 111, 51).drawBack(false);
 		
 		var cap = overEnchant ? levelCap : maxNormal;
 		// Indexing buttons

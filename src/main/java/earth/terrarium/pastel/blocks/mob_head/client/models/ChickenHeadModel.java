@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.mob_head.client.models;
 
 
-import earth.terrarium.pastel.blocks.mob_head.client.SpectrumSkullModel;
+import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModel;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,7 +13,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
 @OnlyIn(Dist.CLIENT)
-public class ChickenHeadModel extends SpectrumSkullModel {
+public class ChickenHeadModel extends PastelSkullModel {
 
     public ChickenHeadModel(ModelPart root) {
         super(root);

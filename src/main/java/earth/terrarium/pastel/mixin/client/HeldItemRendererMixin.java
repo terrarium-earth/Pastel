@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin.client;
 
 import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.world.InteractionHand;
@@ -37,7 +37,7 @@ public abstract class HeldItemRendererMixin {
 	private static void arrowhead$getHandRenderType(LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir, ItemStack itemStack, ItemStack itemStack2) {
 		Item item1 = itemStack.getItem();
 		Item item2 = itemStack2.getItem();
-		boolean bl = item1 == SpectrumItems.BEDROCK_BOW.get() || item2 == SpectrumItems.BEDROCK_BOW.get();
+		boolean bl = item1 == PastelItems.BEDROCK_BOW.get() || item2 == PastelItems.BEDROCK_BOW.get();
 		boolean bl2 = item1 instanceof ArrowheadCrossbow || item2 instanceof ArrowheadCrossbow;
 		if (!bl && !bl2) {
 			// vanilla behavior
@@ -54,7 +54,7 @@ public abstract class HeldItemRendererMixin {
 	private static void arrowhead$getUsingItemHandRenderType(LocalPlayer player, CallbackInfoReturnable<ItemInHandRenderer.HandRenderSelection> cir, ItemStack activeStack, InteractionHand activeHand) {
 		ItemStack itemStack = player.getUseItem();
 		InteractionHand hand = player.getUsedItemHand();
-		if (itemStack.getItem() == SpectrumItems.BEDROCK_BOW.get() || itemStack.getItem() instanceof ArrowheadCrossbow) {
+		if (itemStack.getItem() == PastelItems.BEDROCK_BOW.get() || itemStack.getItem() instanceof ArrowheadCrossbow) {
 			cir.setReturnValue(ItemInHandRenderer.HandRenderSelection.onlyForHand(hand));
 		}
 	}

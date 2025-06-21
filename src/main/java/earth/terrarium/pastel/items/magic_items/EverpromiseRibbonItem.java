@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.helpers.EntityHelper;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -35,7 +35,7 @@ public class EverpromiseRibbonItem extends Item implements PrioritizedEntityInte
 		if (!GenericClaimModsCompat.canInteract(world, entity, user)) {
 			return InteractionResult.FAIL;
 		}
-		if (entity.getType().is(SpectrumEntityTypeTags.EVERPROMISE_RIBBON_BLACKLISTED)) {
+		if (entity.getType().is(PastelEntityTypeTags.EVERPROMISE_RIBBON_BLACKLISTED)) {
 			return InteractionResult.FAIL;
 		}
 		

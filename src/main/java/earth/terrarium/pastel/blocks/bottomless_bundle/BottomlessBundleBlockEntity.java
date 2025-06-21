@@ -1,11 +1,10 @@
 package earth.terrarium.pastel.blocks.bottomless_bundle;
 
-import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.api.item.ItemStorage;
 import earth.terrarium.pastel.capabilities.*;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import net.minecraft.core.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.registries.Registries;
@@ -30,8 +29,8 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 	protected int powerLevel;
 
 	public BottomlessBundleBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.BOTTOMLESS_BUNDLE.get(), pos, state);
-		this.bundle = SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
+		super(PastelBlockEntities.BOTTOMLESS_BUNDLE.get(), pos, state);
+		this.bundle = PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
 		innerStorage = ItemStorage.load(bundle).copy();
 	}
 
@@ -99,7 +98,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
 		super.loadAdditional(nbt, registryLookup);
 		this.setBundleUnsynced(ItemStack.parse(registryLookup, nbt.getCompound("Bundle"))
-				.orElse(SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance()), registryLookup);
+				.orElse(PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance()), registryLookup);
 		syncStorageWithBundle();
 	}
 
@@ -124,7 +123,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 		if (itemStack.getItem() instanceof BottomlessBundleItem) {
 			this.bundle = itemStack;
 			// cache once, use many times
-			this.isVoiding = EnchantmentHelper.hasTag(bundle, SpectrumEnchantmentTags.DELETES_OVERFLOW);
+			this.isVoiding = EnchantmentHelper.hasTag(bundle, PastelEnchantmentTags.DELETES_OVERFLOW);
 			this.powerLevel = EnchantmentHelper.getItemEnchantmentLevel(registryLookup.lookup(Registries.ENCHANTMENT).flatMap(impl -> impl.get(Enchantments.POWER)).orElse(null), itemStack);
 			return true;
 		}
@@ -137,7 +136,7 @@ public class BottomlessBundleBlockEntity extends BlockEntity implements SidedCap
 
 	public ItemStack retrieveBundle() {
 		if (this.bundle.isEmpty()) {
-			return SpectrumBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
+			return PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem().getDefaultInstance();
 		} else {
 			syncBundleWithStorage();
 			return this.bundle;

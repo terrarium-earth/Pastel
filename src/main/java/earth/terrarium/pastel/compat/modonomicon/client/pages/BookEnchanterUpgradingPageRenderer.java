@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.compat.modonomicon.client.pages;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class BookEnchanterUpgradingPageRenderer extends BookGatedRecipePageRenderer<EnchantmentUpgradeRecipe, BookGatedRecipePage<EnchantmentUpgradeRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/modonomicon/enchanter_crafting.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/modonomicon/enchanter_crafting.png");
 
     public BookEnchanterUpgradingPageRenderer(BookGatedRecipePage<EnchantmentUpgradeRecipe> page) {
         super(page);
@@ -71,7 +71,7 @@ public class BookEnchanterUpgradingPageRenderer extends BookGatedRecipePageRende
         // Knowledge Gem and Enchanter
         ItemStack knowledgeDropStackWithXP = KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getBaseXPCost(), true);
         parentScreen.renderItemStack(drawContext, recipeX + 81, recipeY + 9, mouseX, mouseY, knowledgeDropStackWithXP);
-        parentScreen.renderItemStack(drawContext, recipeX + 81, recipeY + 46, mouseX, mouseY, SpectrumBlocks.ENCHANTER.get().asItem().getDefaultInstance());
+        parentScreen.renderItemStack(drawContext, recipeX + 81, recipeY + 46, mouseX, mouseY, PastelBlocks.ENCHANTER.get().asItem().getDefaultInstance());
 
         // the output
         parentScreen.renderItemStack(drawContext, recipeX + 81, recipeY + 31, mouseX, mouseY, recipe.getResultItem(world.registryAccess()));

@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.redstone;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.BlockSource;
@@ -58,9 +58,9 @@ public class BlockPlacerBlock extends RedstoneInteractionBlock implements Entity
 	}
 	
 	protected void dispense(ServerLevel world, BlockState state, BlockPos pos) {
-		BlockPlacerBlockEntity blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.BLOCK_PLACER.get()).orElse(null);
+		BlockPlacerBlockEntity blockEntity = world.getBlockEntity(pos, PastelBlockEntities.BLOCK_PLACER.get()).orElse(null);
 		if (blockEntity == null) {
-			SpectrumCommon.LOGGER.warn("Ignoring block place attempt for Block Player without matching block entity at {}", pos);
+			PastelCommon.LOGGER.warn("Ignoring block place attempt for Block Player without matching block entity at {}", pos);
 		} else {
 			BlockSource pointer = new BlockSource(world, pos, state, blockEntity);
 			int slot = blockEntity.getRandomSlot(world.random);
@@ -93,7 +93,7 @@ public class BlockPlacerBlock extends RedstoneInteractionBlock implements Entity
 				world.levelEvent(LevelEvent.PARTICLES_SHOOT_SMOKE, pointer.pos(), pointer.state().getValue(BlockPlacerBlock.ORIENTATION).front().get3DDataValue());
                 world.gameEvent(null, GameEvent.BLOCK_PLACE, placementPos);
 			} catch (Exception e) {
-				SpectrumCommon.logError("Block Placer encountered an error placing a block at " + placementPos + " when placing " + BuiltInRegistries.ITEM.getKey(blockItem));
+				PastelCommon.logError("Block Placer encountered an error placing a block at " + placementPos + " when placing " + BuiltInRegistries.ITEM.getKey(blockItem));
 				e.printStackTrace();
 			}
 		} else {

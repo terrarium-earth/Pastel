@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelItems;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
@@ -14,12 +14,12 @@ public class MidnightSolutionConvertingCategory extends FluidConvertingCategory<
 	
 	@Override
 	public CategoryIdentifier<? extends MidnightSolutionConvertingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.MIDNIGHT_SOLUTION_CONVERTING;
+		return PastelPlugins.MIDNIGHT_SOLUTION_CONVERTING;
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get());
+		return EntryStacks.of(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get());
 	}
 	
 	@Override

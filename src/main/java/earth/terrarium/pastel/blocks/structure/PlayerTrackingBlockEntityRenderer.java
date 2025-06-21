@@ -2,9 +2,9 @@ package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.ChestBlock;
 
 public class PlayerTrackingBlockEntityRenderer implements BlockEntityRenderer<PlayerTrackerBlockEntity> {
 
-	private static final Material TEXTURE = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/manxi"));
+	private static final Material TEXTURE = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/manxi"));
 	final double radiant = Math.toRadians(360.0F);
 
 	protected static EntityRenderDispatcher dispatcher;
@@ -42,7 +42,7 @@ public class PlayerTrackingBlockEntityRenderer implements BlockEntityRenderer<Pl
 
 		// It would sure be nice if you could have multiple BERs for one block entity type... Anyways nice janky hacks you got there
 		// Dafuqs: oh my god, this is so cursed
-		if (state.is(SpectrumBlocks.MANXI.get())) {
+		if (state.is(PastelBlocks.MANXI.get())) {
 			float f = (state.getValue(ChestBlock.FACING)).toYRot();
 			double yBreath = Math.sin(time / 19) * 0.02;
 			double xBreath = Math.sin(time / 19) * 0.0425;
@@ -63,15 +63,15 @@ public class PlayerTrackingBlockEntityRenderer implements BlockEntityRenderer<Pl
 				matrices.translate(-0.2, 1.4 + (yBreath / 6), -0.55);
 				matrices.mulPose(Axis.XP.rotationDegrees(100));
 				matrices.scale(1.15F, 1.15F, 1.15F);
-				Minecraft.getInstance().getItemRenderer().renderStatic(SpectrumItems.POISONERS_HANDBOOK.get().getDefaultInstance(), ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers, entity.getLevel(), 0);
+				Minecraft.getInstance().getItemRenderer().renderStatic(PastelItems.POISONERS_HANDBOOK.get().getDefaultInstance(), ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers, entity.getLevel(), 0);
 			}
 		}
-		else if (state.is(SpectrumBlocks.TREASURE_ITEM_BOWL.get()) && !taker && TreasureItemBowlBlock.canInteract(Minecraft.getInstance().player)) {
+		else if (state.is(PastelBlocks.TREASURE_ITEM_BOWL.get()) && !taker && TreasureItemBowlBlock.canInteract(Minecraft.getInstance().player)) {
 			double currentRadiant = radiant + (radiant * (time / 16.0) / 8.0F);
 			double height = Math.sin((time + currentRadiant) / 8.0) / 7.0; // item height
 			matrices.translate(0.5, 0.8 + height, 0.5); // position offset
 			matrices.mulPose(Axis.YP.rotationDegrees(time * 2)); // item stack rotation
-			Minecraft.getInstance().getItemRenderer().renderStatic(SpectrumItems.AETHER_GRACED_NECTAR_GLOVES.get().getDefaultInstance(), ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers, entity.getLevel(), 0);
+			Minecraft.getInstance().getItemRenderer().renderStatic(PastelItems.AETHER_GRACED_NECTAR_GLOVES.get().getDefaultInstance(), ItemDisplayContext.GROUND, light, overlay, matrices, vertexConsumers, entity.getLevel(), 0);
 		}
 
 		matrices.popPose();

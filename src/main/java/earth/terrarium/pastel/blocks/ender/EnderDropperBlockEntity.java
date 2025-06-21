@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.ender;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -31,7 +31,7 @@ public class EnderDropperBlockEntity extends DispenserBlockEntity implements Pla
 	private String ownerName;
 	
 	public EnderDropperBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.ENDER_DROPPER.get(), blockPos, blockState);
+		super(PastelBlockEntities.ENDER_DROPPER.get(), blockPos, blockState);
 	}
 	
 	@Override

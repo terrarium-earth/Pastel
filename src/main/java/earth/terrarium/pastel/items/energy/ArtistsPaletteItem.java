@@ -1,17 +1,17 @@
 package earth.terrarium.pastel.items.energy;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkStorageItem;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.TotalCappedElementalMixingInkStorage;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.items.trinkets.SpectrumTrinketItem;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -29,12 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ArtistsPaletteItem extends SpectrumTrinketItem implements InkStorageItem<TotalCappedElementalMixingInkStorage>, LoomPatternProvider, ExtendedItemBarProvider {
+public class ArtistsPaletteItem extends PastelTrinketItem implements InkStorageItem<TotalCappedElementalMixingInkStorage>, LoomPatternProvider, ExtendedItemBarProvider {
 	
 	private final long maxEnergyTotal;
 	
 	public ArtistsPaletteItem(Properties settings, long maxEnergyTotal) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/artists_palette"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/artists_palette"));
 		this.maxEnergyTotal = maxEnergyTotal;
 	}
 	
@@ -45,7 +45,7 @@ public class ArtistsPaletteItem extends SpectrumTrinketItem implements InkStorag
 	
 	@Override
 	public TotalCappedElementalMixingInkStorage getEnergyStorage(ItemStack itemStack) {
-		var storage = itemStack.get(SpectrumDataComponentTypes.INK_STORAGE);
+		var storage = itemStack.get(PastelDataComponentTypes.INK_STORAGE);
 		if (storage != null)
 			return new TotalCappedElementalMixingInkStorage(storage.maxEnergyTotal(), storage.storedEnergy());
 		return new TotalCappedElementalMixingInkStorage(this.maxEnergyTotal, Map.of());
@@ -68,7 +68,7 @@ public class ArtistsPaletteItem extends SpectrumTrinketItem implements InkStorag
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.PALETTE;
+		return PastelBannerPatterns.PALETTE;
 	}
 	
 	@Override
@@ -106,7 +106,7 @@ public class ArtistsPaletteItem extends SpectrumTrinketItem implements InkStorag
 		
 		
 		var blendFactor = (((float) time + delta) % 30) / 30F;
-		var blendedColor = SpectrumColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
+		var blendedColor = ColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
 		
 		return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
 	}

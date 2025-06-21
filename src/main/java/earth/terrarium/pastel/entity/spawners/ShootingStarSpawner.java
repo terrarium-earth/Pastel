@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.entity.spawners;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.shooting_star.ShootingStar;
 import earth.terrarium.pastel.entity.entity.ShootingStarEntity;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -28,7 +28,7 @@ public class ShootingStarSpawner implements CustomSpawner {
 		
 		for (Player playerEntity : world.getEntities(EntityType.PLAYER, Entity::isAlive)) {
 			if (!playerEntity.isSpectator()
-					&& AdvancementHelper.hasAdvancement(playerEntity, SpectrumItems.STAR_FRAGMENT.get().getCloakAdvancementIdentifier())
+					&& AdvancementHelper.hasAdvancement(playerEntity, PastelItems.STAR_FRAGMENT.get().getCloakAdvancementIdentifier())
 					&& world.getRandom().nextFloat() < getShootingStarChanceWithMultiplier(playerEntity)) {
 				
 				// 1 % chance for each cycle to spawn a lot of shooting stars for the player
@@ -62,7 +62,7 @@ public class ShootingStarSpawner implements CustomSpawner {
 		if (playerEntity.hasEffect(MobEffects.NIGHT_VISION)) {
 			multiplier++;
 		}
-		return SpectrumCommon.CONFIG.ShootingStarChance * multiplier;
+		return PastelCommon.CONFIG.ShootingStarChance * multiplier;
 	}
 	
 	public static void spawnShootingStar(ServerLevel serverWorld, @NotNull Player playerEntity) {

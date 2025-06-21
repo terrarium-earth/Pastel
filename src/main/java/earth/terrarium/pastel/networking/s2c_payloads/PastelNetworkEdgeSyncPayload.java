@@ -3,11 +3,9 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.blocks.pastel_network.network.ClientPastelNetwork;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetwork;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -72,7 +70,7 @@ public record PastelNetworkEdgeSyncPayload(UUID networkUUID, int color, Graph<Bl
 		}
 	};
 	
-	public static final Type<PastelNetworkEdgeSyncPayload> ID = SpectrumC2SPackets.makeId("pastel_network_edge_sync");
+	public static final Type<PastelNetworkEdgeSyncPayload> ID = PastelC2SPackets.makeId("pastel_network_edge_sync");
 	public static final StreamCodec<RegistryFriendlyByteBuf, PastelNetworkEdgeSyncPayload> CODEC = StreamCodec.composite(
 			UUIDUtil.STREAM_CODEC, PastelNetworkEdgeSyncPayload::networkUUID,
 			ByteBufCodecs.INT, PastelNetworkEdgeSyncPayload::color,

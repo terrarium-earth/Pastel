@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
@@ -18,7 +18,7 @@ public class PhantomGlowFrameEntity extends PhantomFrameEntity {
 	}
 	
 	public PhantomGlowFrameEntity(Level world, BlockPos pos, Direction facing) {
-		this(SpectrumEntityTypes.GLOW_PHANTOM_FRAME.get(), world, pos, facing);
+		this(PastelEntityTypes.GLOW_PHANTOM_FRAME.get(), world, pos, facing);
 	}
 	
 	public PhantomGlowFrameEntity(EntityType<? extends ItemFrame> type, Level world, BlockPos pos, Direction facing) {
@@ -27,7 +27,7 @@ public class PhantomGlowFrameEntity extends PhantomFrameEntity {
 	
 	@Override
 	protected ItemStack getFrameItemStack() {
-		return new ItemStack(SpectrumItems.GLOW_PHANTOM_FRAME.get());
+		return new ItemStack(PastelItems.GLOW_PHANTOM_FRAME.get());
 	}
 	
 	@Override

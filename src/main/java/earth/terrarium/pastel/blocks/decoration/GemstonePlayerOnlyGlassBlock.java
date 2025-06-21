@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.decoration;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +23,7 @@ public class GemstonePlayerOnlyGlassBlock extends GemstoneGlassBlock {
 		super(settings, gemstoneColor);
 		this.codec = RecordCodecBuilder.mapCodec(i -> i.group(
 				propertiesCodec(),
-				SpectrumRegistries.GEMSTONE_COLOR.byNameCodec().fieldOf("color").forGetter(b -> b.gemstoneColor)
+				PastelRegistries.GEMSTONE_COLOR.byNameCodec().fieldOf("color").forGetter(b -> b.gemstoneColor)
 		).apply(i, GemstonePlayerOnlyGlassBlock::new));
 	}
 

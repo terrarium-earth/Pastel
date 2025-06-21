@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.item;
 
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
@@ -15,7 +15,7 @@ public interface ExperienceStorageItem {
 	 * @return The amount of stored experience
 	 */
 	static int getStoredExperience(ItemStack itemStack) {
-		return itemStack.getOrDefault(SpectrumDataComponentTypes.STORED_EXPERIENCE, 0);
+		return itemStack.getOrDefault(PastelDataComponentTypes.STORED_EXPERIENCE, 0);
 	}
 	
 	/**
@@ -49,14 +49,14 @@ public interface ExperienceStorageItem {
 		
 		if (itemStack.getItem() instanceof ExperienceStorageItem experienceStorageItem) {
 			int maxStorage = experienceStorageItem.getMaxStoredExperience(lookup, itemStack);
-			int existing = itemStack.getOrDefault(SpectrumDataComponentTypes.STORED_EXPERIENCE, 0);
+			int existing = itemStack.getOrDefault(PastelDataComponentTypes.STORED_EXPERIENCE, 0);
 			int toAdd = amount + existing;
 			int overflow = Math.max(toAdd - maxStorage, 0);
 			toAdd = Math.min(toAdd, maxStorage);
-			itemStack.set(SpectrumDataComponentTypes.STORED_EXPERIENCE, toAdd);
+			itemStack.set(PastelDataComponentTypes.STORED_EXPERIENCE, toAdd);
 			return overflow;
 		} else {
-			itemStack.update(SpectrumDataComponentTypes.STORED_EXPERIENCE, 0, existing -> existing + amount);
+			itemStack.update(PastelDataComponentTypes.STORED_EXPERIENCE, 0, existing -> existing + amount);
 			return 0;
 		}
 		
@@ -71,11 +71,11 @@ public interface ExperienceStorageItem {
 	 * @return If there was enough experience that could be removed
 	 */
 	static boolean removeStoredExperience(ItemStack itemStack, int amount) {
-		if (itemStack.has(SpectrumDataComponentTypes.STORED_EXPERIENCE)) {
-			var existing = itemStack.getOrDefault(SpectrumDataComponentTypes.STORED_EXPERIENCE, 0);
+		if (itemStack.has(PastelDataComponentTypes.STORED_EXPERIENCE)) {
+			var existing = itemStack.getOrDefault(PastelDataComponentTypes.STORED_EXPERIENCE, 0);
 			var newAmount = existing - amount;
 			if (newAmount >= 0) {
-				itemStack.set(SpectrumDataComponentTypes.STORED_EXPERIENCE, newAmount);
+				itemStack.set(PastelDataComponentTypes.STORED_EXPERIENCE, newAmount);
 				return true;
 			}
 		}

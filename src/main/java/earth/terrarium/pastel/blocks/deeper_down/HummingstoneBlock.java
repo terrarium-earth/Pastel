@@ -1,11 +1,11 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.events.SpectrumGameEvents;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.events.PastelGameEvents;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -83,7 +83,7 @@ public class HummingstoneBlock extends BaseEntityBlock {
 		float r = random.nextFloat();
 		if (r < 0.3F) {
 			float pitch = 0.4F + 0.4F * pos.getX() % 8 + 0.4F * pos.getY() % 8 + 0.4F * pos.getZ() % 8;
-			world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SpectrumSoundEvents.HUMMINGSTONE_HUM, SoundSource.BLOCKS, 0.4F + random.nextFloat() * 0.1F, pitch, false);
+			world.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSoundEvents.HUMMINGSTONE_HUM, SoundSource.BLOCKS, 0.4F + random.nextFloat() * 0.1F, pitch, false);
 		}
 	}
 	
@@ -142,7 +142,7 @@ public class HummingstoneBlock extends BaseEntityBlock {
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? null : createTickerHelper(type, SpectrumBlockEntities.HUMMINGSTONE.get(), HummingstoneBlockEntity::serverTick);
+		return world.isClientSide ? null : createTickerHelper(type, PastelBlockEntities.HUMMINGSTONE.get(), HummingstoneBlockEntity::serverTick);
 	}
 	
 	@Override
@@ -160,12 +160,12 @@ public class HummingstoneBlock extends BaseEntityBlock {
 			return;
 		}
 		
-		world.playSound(null, pos, SpectrumSoundEvents.HUMMINGSTONE_HUM, SoundSource.BLOCKS, 0.75F, 1.0F);
+		world.playSound(null, pos, PastelSoundEvents.HUMMINGSTONE_HUM, SoundSource.BLOCKS, 0.75F, 1.0F);
 		if (!state.getValue(HUMMING)) {
 			world.setBlockAndUpdate(pos, state.setValue(HUMMING, true));
 		}
 		if (!causedByOtherHum || world.random.nextFloat() < CHANCE_TO_ECHO_HUM_EVENT) {
-			world.gameEvent(entity, SpectrumGameEvents.HUMMINGSTONE_HUMMING, pos);
+			world.gameEvent(entity, PastelGameEvents.HUMMINGSTONE_HUMMING, pos);
 		}
 	}
 	
@@ -179,13 +179,13 @@ public class HummingstoneBlock extends BaseEntityBlock {
 			return;
 		}
 		
-		world.gameEvent(entity, SpectrumGameEvents.HUMMINGSTONE_HYMN, pos);
+		world.gameEvent(entity, PastelGameEvents.HUMMINGSTONE_HYMN, pos);
 		world.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.BLOCKS, 1.25F, 0.5F + world.random.nextFloat() * 1.2F);
 		world.destroyBlock(pos, false);
-		popResource(world, pos, SpectrumItems.RESONANCE_SHARD.get().getDefaultInstance());
+		popResource(world, pos, PastelItems.RESONANCE_SHARD.get().getDefaultInstance());
 		
 		if (entity instanceof ServerPlayer serverPlayerEntity) {
-			SpectrumAdvancementCriteria.CREATE_HUMMINGSTONE_HYMN.trigger(serverPlayerEntity, (ServerLevel) world, pos);
+			PastelAdvancementCriteria.CREATE_HUMMINGSTONE_HYMN.trigger(serverPlayerEntity, (ServerLevel) world, pos);
 		}
 	}
 	

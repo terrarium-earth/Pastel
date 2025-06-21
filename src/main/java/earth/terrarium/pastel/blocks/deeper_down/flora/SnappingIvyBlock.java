@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumConfiguredFeatures;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelConfiguredFeatures;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -68,7 +68,7 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
     
     @Override
     protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
-        return floor.is(SpectrumBlockTags.SNAPPING_IVY_PLANTABLE);
+        return floor.is(PastelBlockTags.SNAPPING_IVY_PLANTABLE);
     }
 	
 	@Override
@@ -85,7 +85,7 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		world.registryAccess()
 				.registryOrThrow(Registries.CONFIGURED_FEATURE)
-				.get(SpectrumConfiguredFeatures.SNAPPING_IVY_PATCH)
+				.get(PastelConfiguredFeatures.SNAPPING_IVY_PATCH)
 				.place(world, world.getChunkSource().getGenerator(), random, pos);
     }
     
@@ -121,7 +121,7 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
         if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
             entity.makeStuckInBlock(state, MOVEMENT_SLOWDOWN_VECTOR);
             if (!snapped) {
-				entity.hurt(SpectrumDamageTypes.snappingIvy(world), 5.0F);
+				entity.hurt(PastelDamageTypes.snappingIvy(world), 5.0F);
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 120, 1));
 	
 				snap(state, world, pos, true);

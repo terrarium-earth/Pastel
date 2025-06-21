@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -42,7 +42,7 @@ public abstract class CatEntityMixin extends TamableAnimal {
 		
 		boolean howMany = customName.equals("AAA") || customName.equals("AAA ❣");
 		if (player instanceof ServerPlayer serverPlayerEntity) {
-			if (item.equals(SpectrumItems.STRATINE_GEM.get()) && this.hasEffect(MobEffects.LEVITATION) && howMany) {
+			if (item.equals(PastelItems.STRATINE_GEM.get()) && this.hasEffect(MobEffects.LEVITATION) && howMany) {
 				Support.grantAdvancementCriterion(serverPlayerEntity, ResourceLocation.fromNamespaceAndPath("pastel", "midgame/become_enlightened"), "confirmed");
 				this.removeEffect(MobEffects.LEVITATION);
 				this.addEffect(new MobEffectInstance(

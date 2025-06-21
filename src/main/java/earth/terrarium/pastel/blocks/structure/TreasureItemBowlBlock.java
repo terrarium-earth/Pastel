@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.structure;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -50,14 +50,14 @@ public class TreasureItemBowlBlock extends Block implements EntityBlock {
 			return InteractionResult.FAIL;
 
 		world.playLocalSound(pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1F, 1F, true);
-		player.getInventory().placeItemBackInInventory(SpectrumItems.AETHER_GRACED_NECTAR_GLOVES.get().getDefaultInstance());
+		player.getInventory().placeItemBackInInventory(PastelItems.AETHER_GRACED_NECTAR_GLOVES.get().getDefaultInstance());
 		bowl.markTaken(player);
 
 		return InteractionResult.CONSUME;
 	}
 
 	public static boolean canInteract(Player player) {
-		return player.hasEffect(SpectrumStatusEffects.FATAL_SLUMBER);
+		return player.hasEffect(PastelStatusEffects.FATAL_SLUMBER);
 	}
 
 	@Nullable

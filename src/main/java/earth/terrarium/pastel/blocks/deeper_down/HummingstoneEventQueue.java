@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.deeper_down;
 
-import earth.terrarium.pastel.events.SpectrumGameEvents;
+import earth.terrarium.pastel.events.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.EventQueue;
 import earth.terrarium.pastel.networking.s2c_payloads.TypedTransmissionPayload;
 import earth.terrarium.pastel.particle.effect.TypedTransmission;
@@ -24,10 +24,10 @@ public class HummingstoneEventQueue extends EventQueue<HummingstoneEventQueue.Ev
         int delay = eventEntry.distance * 2;
 		this.schedule(eventEntry, delay);
 	
-		if (message.gameEvent() == SpectrumGameEvents.HUMMINGSTONE_HUMMING) {
+		if (message.gameEvent() == PastelGameEvents.HUMMINGSTONE_HUMMING) {
 			TypedTransmissionPayload.playTransmissionParticle((ServerLevel) world, new TypedTransmission(pos, this.positionSource, delay, TypedTransmission.Variant.HUMMINGSTONE));
 			if (getQueuedEventCount() > 20) {
-				world.gameEvent(message.context().sourceEntity(), SpectrumGameEvents.HUMMINGSTONE_HYMN, pos);
+				world.gameEvent(message.context().sourceEntity(), PastelGameEvents.HUMMINGSTONE_HYMN, pos);
 			}
 		}
 	}

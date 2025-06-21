@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class PotionPendantItem extends SpectrumTrinketItem implements InkPoweredPotionFillable {
+public class PotionPendantItem extends PastelTrinketItem implements InkPoweredPotionFillable {
 	
 	private final static int TRIGGER_EVERY_X_TICKS = 300;
 	private final static int EFFECT_DURATION = TRIGGER_EVERY_X_TICKS + 220; // always keeps the effect active & prevents the 10 seconds of screen flashing when night vision runs out

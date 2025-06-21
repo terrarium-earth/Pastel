@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
@@ -21,7 +21,7 @@ public class EnderSpliceChargingSoundInstance extends AbstractSoundInstance impl
 	private boolean done;
 	
 	public EnderSpliceChargingSoundInstance(Player player) {
-		super(SpectrumSoundEvents.ENDER_SPLICE_CHARGES, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
+		super(PastelSoundEvents.ENDER_SPLICE_CHARGES, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
 		this.looping = true;
 		this.delay = 0;
 		this.volume = 0.6F;
@@ -43,7 +43,7 @@ public class EnderSpliceChargingSoundInstance extends AbstractSoundInstance impl
 	
 	@Override
 	public void tick() {
-		if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 47 || !player.getUseItem().is(SpectrumItems.ENDER_SPLICE.get())) {
+		if (player == null || player.getUseItemRemainingTicks() <= 0 || player.getTicksUsingItem() > 47 || !player.getUseItem().is(PastelItems.ENDER_SPLICE.get())) {
 			this.setDone();
 		} else {
 			this.x = this.player.getX();

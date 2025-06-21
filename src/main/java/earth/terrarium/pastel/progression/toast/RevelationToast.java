@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.progression.toast;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.RenderHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -23,7 +23,7 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class RevelationToast implements Toast {
 	
-	private final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/gui/toasts.png");
+	private final ResourceLocation TEXTURE = PastelCommon.locate("textures/gui/toasts.png");
 	private final ItemStack itemStack;
 	private final SoundEvent soundEvent;
 	private boolean soundPlayed;
@@ -50,7 +50,7 @@ public class RevelationToast implements Toast {
 		List<FormattedCharSequence> wrappedText = textRenderer.split(text, 125);
 		List<FormattedCharSequence> wrappedTitle = textRenderer.split(title, 125);
 		int l;
-		long toastTimeMilliseconds = SpectrumCommon.CONFIG.ToastTimeMilliseconds;
+		long toastTimeMilliseconds = PastelCommon.CONFIG.ToastTimeMilliseconds;
 		if (startTime < toastTimeMilliseconds / 2) {
 			l = Mth.floor(Mth.clamp((float) (toastTimeMilliseconds / 2 - startTime) / 300.0F, 0.0F, 1.0F) * 255.0F) << 24 | 67108864;
 			int halfHeight = this.height() / 2;

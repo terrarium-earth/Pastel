@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class MemoryManifestingCriterion extends SimpleCriterionTrigger<MemoryManifestingCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("memory_manifesting");
+	public static final ResourceLocation ID = PastelCommon.locate("memory_manifesting");
 	
 	public void trigger(ServerPlayer player, Entity manifestedEntity) {
 		LootContext lootContext = EntityPredicate.createContext(player, manifestedEntity);

@@ -3,13 +3,13 @@ package earth.terrarium.pastel.recipe.enchanter;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.recipe.GatedSpectrumRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -26,9 +26,9 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.Optional;
 
-public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
+public class EnchanterRecipe extends GatedPastelRecipe<RecipeInput> {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/build_enchanting_structure");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("midgame/build_enchanting_structure");
 	
 	protected final List<Ingredient> inputs; // first input is the center, all others around clockwise
 	protected final ItemStack output;
@@ -98,7 +98,7 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.ENCHANTER.get());
+		return new ItemStack(PastelBlocks.ENCHANTER.get());
 	}
 	
 	@Override
@@ -108,12 +108,12 @@ public class EnchanterRecipe extends GatedSpectrumRecipe<RecipeInput> {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.ENCHANTER_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.ENCHANTER_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.ENCHANTER;
+		return PastelRecipeTypes.ENCHANTER;
 	}
 	
 	@Override

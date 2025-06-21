@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.compat.REI.GatedSpectrumDisplay;
+import earth.terrarium.pastel.compat.REI.PastelDisplay;
 import earth.terrarium.pastel.compat.REI.REIHelper;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.helpers.LoreHelper;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation.SpawnerChangeRecipe;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 
-public class SpiritInstillingDisplay extends GatedSpectrumDisplay {
+public class SpiritInstillingDisplay extends PastelDisplay {
 	
 	protected final float experience;
 	protected final int craftingTime;
@@ -41,7 +41,7 @@ public class SpiritInstillingDisplay extends GatedSpectrumDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.SPIRIT_INSTILLER;
+		return PastelPlugins.SPIRIT_INSTILLER;
 	}
 	
 	@Override

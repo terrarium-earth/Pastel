@@ -7,12 +7,12 @@ import earth.terrarium.pastel.api.item.TooltipExtensions;
 import earth.terrarium.pastel.entity.entity.BidentBaseEntity;
 import earth.terrarium.pastel.entity.entity.BidentEntity;
 import earth.terrarium.pastel.entity.entity.BidentMirrorImageEntity;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
-import earth.terrarium.pastel.registries.SpectrumToolMaterial;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
+import earth.terrarium.pastel.registries.PastelToolMaterial;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
@@ -97,11 +97,11 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 	
 	@Override
 	public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
-		return SpectrumToolMaterial.MALACHITE.getRepairIngredient().test(ingredient) || super.isValidRepairItem(stack, ingredient);
+		return PastelToolMaterial.MALACHITE.getRepairIngredient().test(ingredient) || super.isValidRepairItem(stack, ingredient);
 	}
 	
 	public int getRiptideLevel(HolderLookup.Provider lookup, ItemStack stack) {
-		return SpectrumEnchantmentHelper.getLevel(lookup, Enchantments.RIPTIDE, stack);
+		return PastelEnchantmentHelper.getLevel(lookup, Enchantments.RIPTIDE, stack);
 	}
 	
 	protected void riptide(Level world, Player playerEntity, ItemStack stack, int riptideLevel) {
@@ -152,9 +152,9 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 		world.addFreshEntity(bidentBaseEntity);
 		var soundEvent = SoundEvents.TRIDENT_THROW.value();
 		if (mirrorImage) {
-			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, bidentBaseEntity.position(), SpectrumParticleTypes.MIRROR_IMAGE, 8, Vec3.ZERO, new Vec3(0.2, 0.2, 0.2));
+			PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world, bidentBaseEntity.position(), PastelParticleTypes.MIRROR_IMAGE, 8, Vec3.ZERO, new Vec3(0.2, 0.2, 0.2));
 			bidentBaseEntity.pickup = AbstractArrow.Pickup.DISALLOWED;
-			soundEvent = SpectrumSoundEvents.BIDENT_MIRROR_IMAGE_THROWN;
+			soundEvent = PastelSoundEvents.BIDENT_MIRROR_IMAGE_THROWN;
 		} else if (playerEntity.getAbilities().instabuild) {
 			bidentBaseEntity.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 		}
@@ -240,7 +240,7 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 	
 	@Override
 	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.SHARPNESS) || enchantment.is(Enchantments.SMITE) || enchantment.is(Enchantments.BANE_OF_ARTHROPODS) || enchantment.is(Enchantments.LOOTING) || enchantment.is(SpectrumEnchantments.CLOVERS_FAVOR);
+		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.SHARPNESS) || enchantment.is(Enchantments.SMITE) || enchantment.is(Enchantments.BANE_OF_ARTHROPODS) || enchantment.is(Enchantments.LOOTING) || enchantment.is(PastelEnchantments.CLOVERS_FAVOR);
 	}
 	
 }

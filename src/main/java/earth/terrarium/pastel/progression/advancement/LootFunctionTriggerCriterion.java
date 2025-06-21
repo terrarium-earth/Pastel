@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class LootFunctionTriggerCriterion extends SimpleCriterionTrigger<LootFunctionTriggerCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("loot_function_trigger");
+	public static final ResourceLocation ID = PastelCommon.locate("loot_function_trigger");
 	
 	public void trigger(ServerPlayer player, ResourceLocation id) {
 		this.trigger(player, (conditions) -> conditions.matches(id));

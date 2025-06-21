@@ -3,7 +3,7 @@ package earth.terrarium.pastel.recipe.anvil_crushing;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -26,7 +26,7 @@ public class AnvilCrusher {
 		
 		SingleRecipeInput inventory = new SingleRecipeInput(thisItemStack);
 		
-		Optional<RecipeHolder<AnvilCrushingRecipe>> optionalAnvilCrushingRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.ANVIL_CRUSHING, inventory, world);
+		Optional<RecipeHolder<AnvilCrushingRecipe>> optionalAnvilCrushingRecipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.ANVIL_CRUSHING, inventory, world);
 		if (optionalAnvilCrushingRecipe.isPresent()) {
 			// Item can be crafted via anvil. Do anvil crafting
 			AnvilCrushingRecipe recipe = optionalAnvilCrushingRecipe.get().value();

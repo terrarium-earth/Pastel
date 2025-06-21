@@ -1,15 +1,8 @@
 package earth.terrarium.pastel.items.armor;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.Preenchanted;
-import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
-import earth.terrarium.pastel.render.armor.BedrockArmorModel;
 import net.minecraft.world.entity.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -29,7 +22,7 @@ public class BedrockArmorItem extends ArmorItem implements Preenchanted {
 
     @Override
     public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
-        return SpectrumCommon.locate("textures/armor/bedrock_armor_main.png");
+        return PastelCommon.locate("textures/armor/bedrock_armor_main.png");
     }
 
     @Override

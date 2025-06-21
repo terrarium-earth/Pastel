@@ -4,7 +4,7 @@ package earth.terrarium.pastel.compat.emi.recipes;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.inventories.PedestalScreen;
 import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
@@ -23,7 +23,7 @@ import java.util.List;
 public class PedestalCraftingEmiRecipeGated extends GatedSpectrumEmiRecipe<PedestalRecipe> {
 	
 	public PedestalCraftingEmiRecipeGated(PedestalRecipe recipe) {
-		super(SpectrumEmiRecipeCategories.PEDESTAL_CRAFTING, recipe, 124, 90);
+		super(PastelEmiRecipeCategories.PEDESTAL_CRAFTING, recipe, 124, 90);
 		this.inputs = getIngredients(recipe);
 	}
 	

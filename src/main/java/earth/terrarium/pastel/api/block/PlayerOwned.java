@@ -1,9 +1,8 @@
 package earth.terrarium.pastel.api.block;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -11,8 +10,8 @@ import java.util.UUID;
 public interface PlayerOwned {
 	
 	static Player getPlayerEntityIfOnline(UUID ownerUUID) {
-		if (ownerUUID != null && SpectrumCommon.getSidedServer() != null) {
-			return SpectrumCommon.getSidedServer().getPlayerList().getPlayer(ownerUUID);
+		if (ownerUUID != null && PastelCommon.getSidedServer() != null) {
+			return PastelCommon.getSidedServer().getPlayerList().getPlayer(ownerUUID);
 		}
 		return null;
 	}
@@ -32,8 +31,8 @@ public interface PlayerOwned {
 	@Nullable
 	default Player getOwnerIfOnline() {
 		UUID ownerUUID = this.getOwnerUUID();
-		if (ownerUUID != null && SpectrumCommon.getSidedServer() != null) {
-			return SpectrumCommon.getSidedServer().getPlayerList().getPlayer(ownerUUID);
+		if (ownerUUID != null && PastelCommon.getSidedServer() != null) {
+			return PastelCommon.getSidedServer().getPlayerList().getPlayer(ownerUUID);
 		}
 		return null;
 	}

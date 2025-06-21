@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
-import earth.terrarium.pastel.blocks.decoration.SpectrumFacingBlock;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.blocks.decoration.PastelFacingBlock;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class JadeiteLotusFlowerBlock extends SpectrumFacingBlock {
+public class JadeiteLotusFlowerBlock extends PastelFacingBlock {
 	
 	protected static final VoxelShape SHAPE_UP = Block.box(0, 0, 0, 16, 8, 16);
 	protected static final VoxelShape SHAPE_DOWN = Block.box(0, 8, 0, 16, 16, 16);
@@ -62,7 +62,7 @@ public class JadeiteLotusFlowerBlock extends SpectrumFacingBlock {
 		var facing = state.getValue(FACING);
 		var root = pos.relative(facing.getOpposite());
 		var supportBlock = world.getBlockState(root);
-		return (facing.getAxis().isVertical() && supportBlock.is(SpectrumBlocks.JADEITE_LOTUS_STEM.get())) || supportBlock.isFaceSturdy(world, root, facing, SupportType.CENTER);
+		return (facing.getAxis().isVertical() && supportBlock.is(PastelBlocks.JADEITE_LOTUS_STEM.get())) || supportBlock.isFaceSturdy(world, root, facing, SupportType.CENTER);
 	}
 	
 	@Override

@@ -3,8 +3,8 @@ package earth.terrarium.pastel.api.energy.color;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -53,9 +53,9 @@ public class InkColor {
 	public InkColor(Optional<DyeColor> dyeColor, int color, int textColor, ResourceLocation requiredAdvancement) {
 		this.dyeColor = dyeColor;
 		this.colorInt = color;
-		this.colorVec = SpectrumColorHelper.colorIntToVec(color);
+		this.colorVec = ColorHelper.colorIntToVec(color);
 		this.textColor = textColor;
-		this.textColorVec = SpectrumColorHelper.colorIntToVec(textColor);
+		this.textColorVec = ColorHelper.colorIntToVec(textColor);
 		this.requiredAdvancement = requiredAdvancement;
 		
 		dyeColor.ifPresent(value -> DYE_TO_COLOR.put(value, this));
@@ -66,11 +66,11 @@ public class InkColor {
 	}
 	
 	public static Optional<InkColor> ofId(ResourceLocation id) {
-		return SpectrumRegistries.INK_COLOR.getOptional(id);
+		return PastelRegistries.INK_COLOR.getOptional(id);
 	}
 	
 	public static Optional<InkColor> ofIdString(String idString) {
-		return SpectrumRegistries.INK_COLOR.getOptional(ResourceLocation.parse(idString));
+		return PastelRegistries.INK_COLOR.getOptional(ResourceLocation.parse(idString));
 	}
 	
 	public Optional<DyeColor> getDyeColor() {
@@ -129,11 +129,11 @@ public class InkColor {
 	}
 	
 	public ResourceLocation getID() {
-		return SpectrumRegistries.INK_COLOR.getKey(this);
+		return PastelRegistries.INK_COLOR.getKey(this);
 	}
 	
 	public boolean isIn(TagKey<InkColor> tag) {
-		return SpectrumRegistries.INK_COLOR.wrapAsHolder(this).is(tag);
+		return PastelRegistries.INK_COLOR.wrapAsHolder(this).is(tag);
 	}
 	
 }

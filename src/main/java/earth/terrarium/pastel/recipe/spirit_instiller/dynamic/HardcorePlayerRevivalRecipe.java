@@ -1,13 +1,13 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic;
 
 import com.mojang.authlib.GameProfile;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.attachments.HardcoreDeathTracker;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -21,7 +21,6 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
-import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -36,18 +35,18 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SPIRIT_INSTILLER_HARDCORE_PLAYER_REVIVAL;
+		return PastelRecipeSerializers.SPIRIT_INSTILLER_HARDCORE_PLAYER_REVIVAL;
 	}
 	
 	@Override
 	public ItemStack assemble(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, HolderLookup.Provider drm) {
 		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
 		GameProfile gameProfile = getSkullOwner(recipeInput.getItem(SpiritInstillerRecipe.CENTER_INGREDIENT));
-		if (gameProfile != null && SpectrumCommon.getSidedServer() != null) {
-			ServerPlayer revivedPlayer = SpectrumCommon.getSidedServer().getPlayerList().getPlayerByName(gameProfile.getName());
+		if (gameProfile != null && PastelCommon.getSidedServer() != null) {
+			ServerPlayer revivedPlayer = PastelCommon.getSidedServer().getPlayerList().getPlayerByName(gameProfile.getName());
 			if (revivedPlayer != null) {
 				HardcoreDeathTracker.removeHardcoreDeath(gameProfile);
-				revivedPlayer.setGameMode(SpectrumCommon.getSidedServer().getDefaultGameType());
+				revivedPlayer.setGameMode(PastelCommon.getSidedServer().getDefaultGameType());
 				
 				Rotation blockRotation = spiritInstillerBlockEntity.getMultiblockRotation();
 				float yaw = 0.0F;
@@ -70,11 +69,11 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 		ItemStack instillerStack = inventory.getItem(0);
 		if (instillerStack.is(Blocks.PLAYER_HEAD.asItem())) {
 			GameProfile gameProfile = getSkullOwner(instillerStack);
-			if (gameProfile == null || SpectrumCommon.getSidedServer() == null) {
+			if (gameProfile == null || PastelCommon.getSidedServer() == null) {
 				return false;
 			}
 			
-			PlayerList playerManager = SpectrumCommon.getSidedServer().getPlayerList();
+			PlayerList playerManager = PastelCommon.getSidedServer().getPlayerList();
 			ServerPlayer playerToRevive = gameProfile.getId() == null ? playerManager.getPlayerByName(gameProfile.getName()) : playerManager.getPlayer(gameProfile.getId());
 			return playerToRevive != null && HardcoreDeathTracker.hasHardcoreDeath(gameProfile);
 		}

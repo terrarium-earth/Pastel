@@ -4,9 +4,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.recipe.GatedSpectrumRecipe;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.recipe.GatedPastelRecipe;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleOptions;
@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
 
-public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleRecipeInput> {
+public class AnvilCrushingRecipe extends GatedPastelRecipe<SingleRecipeInput> {
 	
 	protected final Ingredient ingredient;
 	protected final ItemStack result;
@@ -82,12 +82,12 @@ public class AnvilCrushingRecipe extends GatedSpectrumRecipe<SingleRecipeInput> 
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.ANVIL_CRUSHING_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.ANVIL_CRUSHING_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.ANVIL_CRUSHING;
+		return PastelRecipeTypes.ANVIL_CRUSHING;
 	}
 	
 	@Override

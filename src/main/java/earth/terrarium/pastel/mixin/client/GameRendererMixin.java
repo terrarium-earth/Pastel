@@ -3,8 +3,8 @@ package earth.terrarium.pastel.mixin.client;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
-import earth.terrarium.pastel.registries.SpectrumDimensions;
-import earth.terrarium.pastel.registries.client.SpectrumShaders;
+import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.client.PastelShaders;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,7 +18,7 @@ public abstract class GameRendererMixin {
 
     @ModifyReturnValue(method = "getNightVisionScale", at = @At("RETURN"))
     private static float spectrum$nerfNightVisionInDimension(float original, LivingEntity entity, float tickDelta) {
-		if (SpectrumDimensions.DIMENSION_KEY == entity.level().dimension()) {
+		if (PastelDimensions.DIMENSION_KEY == entity.level().dimension()) {
 			original /= 6F;
 		}
 
@@ -34,16 +34,16 @@ public abstract class GameRendererMixin {
 		RenderSystem.disableBlend();
 		RenderSystem.disableDepthTest();
 		RenderSystem.resetTextureMatrix();
-		SpectrumShaders.colorGradingPostProcess.ifPresent(pps -> pps.process(tickCounter.getGameTimeDeltaTicks()));
+		PastelShaders.colorGradingPostProcess.ifPresent(pps -> pps.process(tickCounter.getGameTimeDeltaTicks()));
 	}
 	
 	@Inject(method = "close", at = @At("TAIL"))
 	private void closeShaders(CallbackInfo ci) {
-		SpectrumShaders.clearDimensionShaders();
+		PastelShaders.clearDimensionShaders();
 	}
 	
 	@Inject(method = "resize", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;resize(II)V"))
 	private void resizeShaders(int width, int height, CallbackInfo ci) {
-		SpectrumShaders.resizeShaders(width, height);
+		PastelShaders.resizeShaders(width, height);
 	}
 }

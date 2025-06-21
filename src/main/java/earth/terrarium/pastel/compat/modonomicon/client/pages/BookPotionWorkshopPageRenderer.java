@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.modonomicon.client.pages;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class BookPotionWorkshopPageRenderer<T extends PotionWorkshopRecipe> extends BookGatedRecipePageRenderer<T, BookGatedRecipePage<T>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/modonomicon/potion_workshop.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/modonomicon/potion_workshop.png");
 
     public BookPotionWorkshopPageRenderer(BookGatedRecipePage<T> page) {
         super(page);

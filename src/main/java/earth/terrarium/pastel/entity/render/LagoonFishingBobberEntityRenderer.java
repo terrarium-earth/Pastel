@@ -1,15 +1,15 @@
 package earth.terrarium.pastel.entity.render;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.entity.entity.SpectrumFishingBobberEntity;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
-public class LagoonFishingBobberEntityRenderer extends SpectrumFishingBobberEntityRenderer {
+public class LagoonFishingBobberEntityRenderer extends PastelFishingBobberEntityRenderer {
 	
-	protected final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/fishing_hooks/lagoon_fishing_hook.png");
-	protected final ResourceLocation TEXTURE_OPEN_WATERS = SpectrumCommon.locate("textures/entity/fishing_hooks/lagoon_fishing_hook_open_waters.png");
+	protected final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/fishing_hooks/lagoon_fishing_hook.png");
+	protected final ResourceLocation TEXTURE_OPEN_WATERS = PastelCommon.locate("textures/entity/fishing_hooks/lagoon_fishing_hook_open_waters.png");
 	protected final RenderType LAYER = RenderType.entityCutout(TEXTURE);
 	protected final RenderType LAYER_OPEN_WATERS = RenderType.entityCutout(TEXTURE_OPEN_WATERS);
 	
@@ -18,7 +18,7 @@ public class LagoonFishingBobberEntityRenderer extends SpectrumFishingBobberEnti
 	}
 	
 	@Override
-	public ResourceLocation getTextureLocation(SpectrumFishingBobberEntity fishingBobberEntity) {
+	public ResourceLocation getTextureLocation(PastelFishingBobberEntity fishingBobberEntity) {
 		if (fishingBobberEntity.isInOpenWater()) {
 			return TEXTURE_OPEN_WATERS;
 		} else {
@@ -27,7 +27,7 @@ public class LagoonFishingBobberEntityRenderer extends SpectrumFishingBobberEnti
 	}
 	
 	@Override
-	public RenderType getLayer(SpectrumFishingBobberEntity bobber) {
+	public RenderType getLayer(PastelFishingBobberEntity bobber) {
 		if (bobber.isOpenOrWaterAround(bobber.blockPosition())) {
 			return LAYER_OPEN_WATERS;
 		} else {

@@ -8,7 +8,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.*;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -52,7 +52,7 @@ public class CrystalApothecarySimulationsDataLoader extends SimpleJsonResourceRe
 			var entry = SimulatedBlockGrowthEntry.CONDITIONAL_CODEC.parse(registryops, object);
 
 			if (entry.error().isPresent() || entry.result().isEmpty()) {
-				SpectrumCommon.logError("Crystal Apothecary Simulation error for " + identifier + ": " + entry.error().get() + ". Ignoring that one.");
+				PastelCommon.logError("Crystal Apothecary Simulation error for " + identifier + ": " + entry.error().get() + ". Ignoring that one.");
 				return;
 			}
 
@@ -61,7 +61,7 @@ public class CrystalApothecarySimulationsDataLoader extends SimpleJsonResourceRe
 
 			DataResult<Block> buddingBlock = BuiltInRegistries.BLOCK.byNameCodec().decode(JsonOps.INSTANCE, object.get("budding_block")).map(Pair::getFirst);
 			if (buddingBlock.error().isPresent() || buddingBlock.result().isEmpty()) {
-				SpectrumCommon.logError("Crystal apothecary simulation error for " + identifier + ": " + buddingBlock.error().get() + ". Ignoring that one.");
+				PastelCommon.logError("Crystal apothecary simulation error for " + identifier + ": " + buddingBlock.error().get() + ". Ignoring that one.");
 				return;
 			}
 			

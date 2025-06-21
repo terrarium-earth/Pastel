@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.blocks.deeper_down.flora.SawbladeHollyBushBlock;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -35,7 +35,7 @@ public abstract class EatBerriesGoalMixin extends MoveToBlockGoal {
 	@Inject(method = "isValidTarget", at = @At("HEAD"), cancellable = true)
 	private void spectrum$isTargetPos(LevelReader world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
 		BlockState blockState = world.getBlockState(pos);
-		if (blockState.is(SpectrumBlocks.SAWBLADE_HOLLY_BUSH.get()) && blockState.getValue(SawbladeHollyBushBlock.AGE) == SawbladeHollyBushBlock.MAX_AGE) {
+		if (blockState.is(PastelBlocks.SAWBLADE_HOLLY_BUSH.get()) && blockState.getValue(SawbladeHollyBushBlock.AGE) == SawbladeHollyBushBlock.MAX_AGE) {
 			cir.setReturnValue(true);
 		}
 	}
@@ -44,7 +44,7 @@ public abstract class EatBerriesGoalMixin extends MoveToBlockGoal {
 	private void spectrum$eatBerries(CallbackInfo ci) {
 		if (foxEntity.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
 			BlockState blockState = foxEntity.level().getBlockState(this.blockPos);
-			if (blockState.is(SpectrumBlocks.SAWBLADE_HOLLY_BUSH.get())) {
+			if (blockState.is(PastelBlocks.SAWBLADE_HOLLY_BUSH.get())) {
 				spectrum$pickSawbladeHollyBerries(blockState);
 				ci.cancel();
 			}
@@ -58,12 +58,12 @@ public abstract class EatBerriesGoalMixin extends MoveToBlockGoal {
 		int berriesPlucked = 1 + world.random.nextInt(2) + (age == SawbladeHollyBushBlock.MAX_AGE ? 1 : 0);
 		ItemStack itemStack = foxEntity.getItemBySlot(EquipmentSlot.MAINHAND);
 		if (itemStack.isEmpty()) {
-			foxEntity.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(SpectrumItems.SAWBLADE_HOLLY_BERRY.get()));
+			foxEntity.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(PastelItems.SAWBLADE_HOLLY_BERRY.get()));
 			--berriesPlucked;
 		}
 		
 		if (berriesPlucked > 0) {
-			Block.popResource(world, this.blockPos, new ItemStack(SpectrumItems.SAWBLADE_HOLLY_BERRY.get(), berriesPlucked));
+			Block.popResource(world, this.blockPos, new ItemStack(PastelItems.SAWBLADE_HOLLY_BERRY.get(), berriesPlucked));
 		}
 		
 		foxEntity.playSound(SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, 1.0F, 1.0F);

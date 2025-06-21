@@ -5,7 +5,7 @@ import earth.terrarium.pastel.networking.s2c_payloads.ColorTransmissionPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredTransmission;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
@@ -136,7 +136,7 @@ public class UpgradeBlock extends BaseEntityBlock {
 
 	private void playConnectedParticles(@NotNull ServerLevel world, @NotNull BlockPos pos, BlockPos currentPos) {
 		int particleColor = getEffectColor();
-		world.playSound(null, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, SpectrumSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, 1.0F, 1.0F);
+		world.playSound(null, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D, PastelSoundEvents.CRAFTING_DING, SoundSource.BLOCKS, 1.0F, 1.0F);
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
 				world, Vec3.atCenterOf(pos),
 				ColoredSparkleRisingParticleEffect.of(particleColor),

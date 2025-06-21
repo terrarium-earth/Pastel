@@ -2,7 +2,7 @@ package earth.terrarium.pastel.entity.predicates;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.entity.SpectrumEntitySubPredicateTypes;
+import earth.terrarium.pastel.entity.PastelEntitySubPredicateTypes;
 import net.minecraft.advancements.critereon.EntitySubPredicate;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -30,7 +30,7 @@ public record ShulkerPredicate(Optional<DyeColor> color) implements EntitySubPre
 
 	@Override
 	public MapCodec<ShulkerPredicate> codec() {
-		return SpectrumEntitySubPredicateTypes.SHULKER;
+		return PastelEntitySubPredicateTypes.SHULKER;
 	}
 
 }

@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class GatedSpectrumEmiRecipe<T extends GatedRecipe<?>> extends SpectrumEmiRecipe {
+public abstract class GatedSpectrumEmiRecipe<T extends GatedRecipe<?>> extends PastelEmiRecipe {
 	
 	public static final Component SECRET = Component.translatable("container.pastel.rei.pedestal_crafting.secret_recipe");
 	public static final Component SECRET_HINT = Component.translatable("container.pastel.rei.pedestal_crafting.secret_recipe.hint");

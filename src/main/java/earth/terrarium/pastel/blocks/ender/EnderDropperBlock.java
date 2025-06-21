@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.ender;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.inventories.GenericSpectrumContainerScreenHandler;
+import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,14 +13,12 @@ import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.LevelEvent;
@@ -82,7 +80,7 @@ public class EnderDropperBlock extends DispenserBlock {
 				if (enderDropperBlockEntity.isOwner(player)) {
 					PlayerEnderChestContainer enderChestInventory = player.getEnderChestInventory();
 					
-					player.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> GenericSpectrumContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory, ScreenBackgroundVariant.EARLYGAME), enderDropperBlockEntity.getDefaultName()));
+					player.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> GenericPastelContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory, ScreenBackgroundVariant.EARLYGAME), enderDropperBlockEntity.getDefaultName()));
 					
 					PiglinAi.angerNearbyPiglins(player, true);
 				} else {
@@ -95,7 +93,7 @@ public class EnderDropperBlock extends DispenserBlock {
 	
 	@Override
 	protected void dispenseFrom(ServerLevel level, BlockState state, BlockPos pos) {
-		EnderDropperBlockEntity dropper = level.getBlockEntity(pos, SpectrumBlockEntities.ENDER_DROPPER.get()).orElse(null);
+		EnderDropperBlockEntity dropper = level.getBlockEntity(pos, PastelBlockEntities.ENDER_DROPPER.get()).orElse(null);
 		if (dropper == null) {
 			return;
 		}

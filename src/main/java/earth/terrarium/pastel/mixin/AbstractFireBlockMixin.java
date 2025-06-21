@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.blocks.PrimordialFireBlock;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseFireBlock;
@@ -19,9 +19,9 @@ public abstract class AbstractFireBlockMixin {
     private static void spectrum$getFireState(BlockGetter world, BlockPos pos, CallbackInfoReturnable<BlockState> cir) {
 		BlockPos blockpos = pos.below();
 		BlockState blockstate = world.getBlockState(blockpos);
-		if (blockstate.is(SpectrumBlockTags.PRIMORDIAL_FIRE_BASE_BLOCKS) || PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG) {
+		if (blockstate.is(PastelBlockTags.PRIMORDIAL_FIRE_BASE_BLOCKS) || PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG) {
 			PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG = false;
-			cir.setReturnValue(((PrimordialFireBlock) SpectrumBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, pos));
+			cir.setReturnValue(((PrimordialFireBlock) PastelBlocks.PRIMORDIAL_FIRE.get()).getStateForPosition(world, pos));
 		}
 	}
 

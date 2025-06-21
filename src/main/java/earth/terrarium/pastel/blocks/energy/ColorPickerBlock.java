@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.energy;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -87,7 +87,7 @@ public class ColorPickerBlock extends HorizontalDirectionalBlock implements Enti
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? null : Support.checkType(type, SpectrumBlockEntities.COLOR_PICKER.get(), ColorPickerBlockEntity::tick);
+		return world.isClientSide ? null : Support.checkType(type, PastelBlockEntities.COLOR_PICKER.get(), ColorPickerBlockEntity::tick);
 	}
 	
 	@Override

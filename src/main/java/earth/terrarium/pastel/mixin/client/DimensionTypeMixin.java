@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin.client;
 
-import earth.terrarium.pastel.SpectrumClient;
+import earth.terrarium.pastel.PastelClient;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -15,8 +15,8 @@ public abstract class DimensionTypeMixin {
 	
 	@ModifyArg(method = "timeOfDay", at = @At(value = "INVOKE", target = "Ljava/util/OptionalLong;orElse(J)J"))
 	private long spectrum$getLerpedSkyAngle(long time) {
-		if (!Minecraft.getInstance().isPaused() && SpectrumClient.skyLerper.isActive((DimensionType) (Object) this)) {
-			return SpectrumClient.skyLerper.tickLerp(time, Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false));
+		if (!Minecraft.getInstance().isPaused() && PastelClient.skyLerper.isActive((DimensionType) (Object) this)) {
+			return PastelClient.skyLerper.tickLerp(time, Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false));
 		} else {
 			return time;
 		}

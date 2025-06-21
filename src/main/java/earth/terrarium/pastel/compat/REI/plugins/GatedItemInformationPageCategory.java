@@ -15,10 +15,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public abstract class GatedItemInformationPageCategory extends GatedDisplayCategory<GatedItemInformationDisplay> {
+public abstract class GatedItemInformationPageCategory extends GatedDisplayCategory<PastelItemInformationDisplay> {
 	
 	@Override
-    public void setupWidgets(Point startPoint, Rectangle bounds, List<Widget> widgets, @NotNull GatedItemInformationDisplay display) {
+    public void setupWidgets(Point startPoint, Rectangle bounds, List<Widget> widgets, @NotNull PastelItemInformationDisplay display) {
 		Minecraft client = Minecraft.getInstance();
 		Item item = display.getItem();
 		widgets.add(Widgets.createSlot(new Point(startPoint.x - 5, startPoint.y + 3)).entries(display.getInputEntries().get(0)).markInput());

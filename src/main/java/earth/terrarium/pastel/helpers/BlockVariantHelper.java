@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.helpers;
 
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +30,7 @@ public class BlockVariantHelper {
 		
 		BlockState blockState = world.getBlockState(blockPos);
 		
-		if (blockState.is(SpectrumBlockTags.INK_EFFECT_BLACKLISTED) || blockState.getDestroySpeed(world, blockPos) == -1) {
+		if (blockState.is(PastelBlockTags.INK_EFFECT_BLACKLISTED) || blockState.getDestroySpeed(world, blockPos) == -1) {
 			return Blocks.AIR.defaultBlockState();
 		}
 		
@@ -102,7 +102,7 @@ public class BlockVariantHelper {
 		}
 		
 		BlockState blockState = world.getBlockState(blockPos);
-		if (blockState.is(SpectrumBlockTags.INK_EFFECT_BLACKLISTED)) {
+		if (blockState.is(PastelBlockTags.INK_EFFECT_BLACKLISTED)) {
 			return Blocks.AIR;
 		}
 		

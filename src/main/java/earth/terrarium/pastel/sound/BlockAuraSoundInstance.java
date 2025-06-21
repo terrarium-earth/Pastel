@@ -2,9 +2,9 @@ package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.helpers.ParticleHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -88,9 +88,9 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 		if (volumeHold > 0.25) {
 			Vec3 pos = new Vec3(this.absX, this.absY, this.absZ);
 			float chance = volumeHold / 2F;
-			ParticleHelper.playTriangulatedParticle(world, SpectrumParticleTypes.AZURE_AURA, Support.getIntFromDecimalWithChance(chance * 3, random), true, new Vec3(24, 8, 24), -4, true, pos, new Vec3(0, 0.04D + random.nextDouble() * 0.06, 0));
-			ParticleHelper.playTriangulatedParticle(world, SpectrumParticleTypes.AZURE_MOTE_SMALL, Support.getIntFromDecimalWithChance(chance, random), false, new Vec3(16, 8, 16), -6, false, pos, Vec3.ZERO);
-			ParticleHelper.playTriangulatedParticle(world, SpectrumParticleTypes.AZURE_MOTE, Support.getIntFromDecimalWithChance(chance, random), true, new Vec3(16, 6, 16), -4, false, pos, Vec3.ZERO);
+			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, Support.getIntFromDecimalWithChance(chance * 3, random), true, new Vec3(24, 8, 24), -4, true, pos, new Vec3(0, 0.04D + random.nextDouble() * 0.06, 0));
+			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_MOTE_SMALL, Support.getIntFromDecimalWithChance(chance, random), false, new Vec3(16, 8, 16), -6, false, pos, Vec3.ZERO);
+			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_MOTE, Support.getIntFromDecimalWithChance(chance, random), true, new Vec3(16, 6, 16), -4, false, pos, Vec3.ZERO);
 		}
 	}
 	
@@ -99,7 +99,7 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 		int y = 0;
 		int z = 0;
 		for (BlockPos source : sources) {
-			if (!world.hasChunkAt(source) || !world.getBlockState(source).is(SpectrumBlockTags.AZURITE_ORES)) { // tag is hardcoded for now. But should we have more blocks like that, we can easily split it
+			if (!world.hasChunkAt(source) || !world.getBlockState(source).is(PastelBlockTags.AZURITE_ORES)) { // tag is hardcoded for now. But should we have more blocks like that, we can easily split it
 				toRemove.add(source);
 			} else {
 				x += source.getX();
@@ -154,7 +154,7 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 			}
 			nearest.sources.add(pos.immutable());
 		} else {
-			BlockAuraSoundInstance newInstance = new BlockAuraSoundInstance(SpectrumSoundEvents.OST_AZURE, world, pos.immutable());
+			BlockAuraSoundInstance newInstance = new BlockAuraSoundInstance(PastelSoundEvents.OST_AZURE, world, pos.immutable());
 			INSTANCES.add(newInstance);
 			Minecraft.getInstance().getSoundManager().play(newInstance);
 		}

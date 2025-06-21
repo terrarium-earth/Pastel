@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.recipe.fluid_converting;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class MidnightSolutionConvertingRecipe extends FluidConvertingRecipe {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/create_midnight_aberration");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("midgame/create_midnight_aberration");
 	private static final Set<Item> outputItems = new HashSet<>();
 	
 	public MidnightSolutionConvertingRecipe(String group, boolean secret, Optional<ResourceLocation> requiredAdvancementIdentifier, @NotNull Ingredient inputIngredient, ItemStack outputItemStack) {
@@ -32,17 +32,17 @@ public class MidnightSolutionConvertingRecipe extends FluidConvertingRecipe {
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get());
+		return new ItemStack(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get());
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.MIDNIGHT_SOLUTION_CONVERTING_SERIALIZER;
+		return PastelRecipeSerializers.MIDNIGHT_SOLUTION_CONVERTING_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING;
+		return PastelRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING;
 	}
 	
 	@Override

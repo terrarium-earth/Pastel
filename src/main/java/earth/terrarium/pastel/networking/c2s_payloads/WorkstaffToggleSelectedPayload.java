@@ -2,7 +2,7 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.inventories.WorkstaffScreenHandler;
 import earth.terrarium.pastel.items.tools.WorkstaffItem;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -13,7 +13,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 
 public record WorkstaffToggleSelectedPayload(int index) implements CustomPacketPayload {
 	
-	public static final Type<WorkstaffToggleSelectedPayload> ID = SpectrumC2SPackets.makeId("workstaff_toggle_selected");
+	public static final Type<WorkstaffToggleSelectedPayload> ID = PastelC2SPackets.makeId("workstaff_toggle_selected");
 	public static final StreamCodec<RegistryFriendlyByteBuf, WorkstaffToggleSelectedPayload> CODEC = StreamCodec.composite(
 			ByteBufCodecs.INT, WorkstaffToggleSelectedPayload::index,
 			WorkstaffToggleSelectedPayload::new

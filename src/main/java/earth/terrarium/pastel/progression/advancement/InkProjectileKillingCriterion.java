@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds.Ints;
@@ -23,7 +23,7 @@ import java.util.Set;
 
 public class InkProjectileKillingCriterion extends SimpleCriterionTrigger<InkProjectileKillingCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("ink_projectile_killing");
+	public static final ResourceLocation ID = PastelCommon.locate("ink_projectile_killing");
 	
 	@Override
 	public Codec<Conditions> codec() {

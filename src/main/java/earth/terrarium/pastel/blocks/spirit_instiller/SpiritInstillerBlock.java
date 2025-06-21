@@ -6,9 +6,9 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -45,12 +45,12 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 	
 	public static void clearCurrentlyRenderedMultiBlock(Level world) {
 		if (world.isClientSide) {
-			ModonomiconHelper.clearRenderedMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.SPIRIT_INSTILLER));
+			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.SPIRIT_INSTILLER));
 		}
 	}
 	
 	public static boolean verifyStructure(Level world, @NotNull BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity, @NotNull SpiritInstillerBlockEntity instiller) {
-		Multiblock multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.SPIRIT_INSTILLER);
+		Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.SPIRIT_INSTILLER);
 		
 		Rotation lastBlockRotation = instiller.getMultiblockRotation();
 		boolean valid = false;
@@ -74,7 +74,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 		
 		if (valid) {
 			if (serverPlayerEntity != null) {
-				SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
+				PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
 			}
 		} else {
 			if (world.isClientSide) {
@@ -83,7 +83,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 					lastBlockRotation = Rotation.values()[(MultiblockPreviewRenderer.getFacingRotation().ordinal() + 1) % Rotation.values().length]; // cycle rotation
 					instiller.setMultiblockRotation(lastBlockRotation);
 				}
-				ModonomiconHelper.renderMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.SPIRIT_INSTILLER), SpectrumMultiblocks.SPIRIT_INSTILLER_TEXT, blockPos.below(2).relative(Support.directionFromRotation(lastBlockRotation), offset), lastBlockRotation);
+				ModonomiconHelper.renderMultiblock(PastelMultiblocks.get(PastelMultiblocks.SPIRIT_INSTILLER), PastelMultiblocks.SPIRIT_INSTILLER_TEXT, blockPos.below(2).relative(Support.directionFromRotation(lastBlockRotation), offset), lastBlockRotation);
 			} else {
 				scatterContents(world, blockPos);
 			}
@@ -101,7 +101,7 @@ public class SpiritInstillerBlock extends InWorldInteractionBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, SpectrumBlockEntities.SPIRIT_INSTILLER.get(), world.isClientSide ? SpiritInstillerBlockEntity::clientTick : SpiritInstillerBlockEntity::serverTick);
+		return createTickerHelper(type, PastelBlockEntities.SPIRIT_INSTILLER.get(), world.isClientSide ? SpiritInstillerBlockEntity::clientTick : SpiritInstillerBlockEntity::serverTick);
 	}
 	
 	@Override

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import net.minecraft.advancements.critereon.BlockPredicate;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public class UpgradePlaceCriterion extends SimpleCriterionTrigger<UpgradePlaceCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("upgrade_place");
+	public static final ResourceLocation ID = PastelCommon.locate("upgrade_place");
 	
 	public void trigger(ServerPlayer player, ServerLevel world, BlockPos pos, int upgradeCount, Map<Upgradeable.UpgradeType, Integer> upgradeModifiers) {
 		this.trigger(player, (conditions) -> conditions.matches(world, pos, upgradeCount, upgradeModifiers));

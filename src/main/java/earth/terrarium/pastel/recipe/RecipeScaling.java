@@ -2,9 +2,9 @@ package earth.terrarium.pastel.recipe;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
-import earth.terrarium.pastel.registries.SpectrumRegistryKeys;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelRegistries;
+import earth.terrarium.pastel.registries.PastelRegistryKeys;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -16,7 +16,7 @@ import java.util.List;
 public abstract class RecipeScaling {
 	
 	public static final Codec<ScalingData> CODEC = RecordCodecBuilder.<ScalingData>create(i -> i.group(
-			SpectrumRegistries.RECIPE_SCALING.byNameCodec().fieldOf("type").forGetter(d -> d.type),
+			PastelRegistries.RECIPE_SCALING.byNameCodec().fieldOf("type").forGetter(d -> d.type),
 			Codec.INT.optionalFieldOf("start", 0).forGetter(d -> d.start),
 			Codec.intRange(0, Integer.MAX_VALUE).optionalFieldOf("scaling_value", 0).forGetter(d -> d.scalingValue),
 			Codec.doubleRange(0.0, Double.MAX_VALUE).optionalFieldOf("scaling_factor", 1.0).forGetter(d -> d.scalingFactor),
@@ -24,7 +24,7 @@ public abstract class RecipeScaling {
 	).apply(i, ScalingData::new));
 	
 	public static final StreamCodec<RegistryFriendlyByteBuf, ScalingData> STREAM_CODEC = StreamCodec.composite(
-			ByteBufCodecs.registry(SpectrumRegistryKeys.RECIPE_SCALING), d -> d.type,
+			ByteBufCodecs.registry(PastelRegistryKeys.RECIPE_SCALING), d -> d.type,
 			ByteBufCodecs.VAR_INT, d -> d.start,
 			ByteBufCodecs.VAR_INT, d -> d.scalingValue,
 			ByteBufCodecs.DOUBLE, d -> d.scalingFactor,
@@ -32,28 +32,28 @@ public abstract class RecipeScaling {
 			ScalingData::new
 	);
 	
-	public static final RecipeScaling LINEAR = new RecipeScaling(SpectrumCommon.locate("linear")) {
+	public static final RecipeScaling LINEAR = new RecipeScaling(PastelCommon.locate("linear")) {
 		@Override
 		int getInputCount(double scaling, ScalingData data) {
 			return data.start + (int) Math.round(data.scalingValue * scaling * data.scalingFactor);
 		}
 	};
 	
-	public static final RecipeScaling DOUBLING = new RecipeScaling(SpectrumCommon.locate("doubling")) {
+	public static final RecipeScaling DOUBLING = new RecipeScaling(PastelCommon.locate("doubling")) {
 		@Override
 		int getInputCount(double scaling, ScalingData data) {
 			return data.start + data.scalingValue << Math.round(((scaling - 1) * data.scalingFactor));
 		}
 	};
 	
-	public static final RecipeScaling EXPONENTIAL = new RecipeScaling(SpectrumCommon.locate("exponential")) {
+	public static final RecipeScaling EXPONENTIAL = new RecipeScaling(PastelCommon.locate("exponential")) {
 		@Override
 		int getInputCount(double scaling, ScalingData data) {
 			return (int) (data.start + Math.round(Math.pow(data.scalingValue, scaling * data.scalingFactor)));
 		}
 	};
 	
-	public static final RecipeScaling INDEXED = new RecipeScaling(SpectrumCommon.locate("indexed")) {
+	public static final RecipeScaling INDEXED = new RecipeScaling(PastelCommon.locate("indexed")) {
 		@Override
 		int getInputCount(double scaling, ScalingData data) {
 			var size = data.indexes.size();

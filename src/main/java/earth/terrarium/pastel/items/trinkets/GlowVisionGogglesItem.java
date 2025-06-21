@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.helpers.InventoryHelper;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
@@ -23,13 +22,13 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class GlowVisionGogglesItem extends SpectrumTrinketItem implements InkPowered {
+public class GlowVisionGogglesItem extends PastelTrinketItem implements InkPowered {
 	
 	public static final InkCost INK_COST = new InkCost(InkColors.LIGHT_BLUE, 20);
 	public static final ItemStack ITEM_COST = new ItemStack(Items.GLOW_INK_SAC, 1);
 	
 	public GlowVisionGogglesItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/glow_vision_goggles"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/glow_vision_goggles"));
 	}
 
 	@Override
@@ -71,9 +70,9 @@ public class GlowVisionGogglesItem extends SpectrumTrinketItem implements InkPow
 				}
 				
 				if (paid) {
-					MobEffectInstance newNightVisionInstance = new MobEffectInstance(MobEffects.NIGHT_VISION, 20 * SpectrumCommon.CONFIG.GlowVisionGogglesDuration, 0, true, true);
+					MobEffectInstance newNightVisionInstance = new MobEffectInstance(MobEffects.NIGHT_VISION, 20 * PastelCommon.CONFIG.GlowVisionGogglesDuration, 0, true, true);
 					serverPlayerEntity.addEffect(newNightVisionInstance);
-					world.playSound(null, serverPlayerEntity, SpectrumSoundEvents.ITEM_ARMOR_EQUIP_GLOW_VISION, SoundSource.PLAYERS, 0.2F, 1.0F);
+					world.playSound(null, serverPlayerEntity, PastelSoundEvents.ITEM_ARMOR_EQUIP_GLOW_VISION, SoundSource.PLAYERS, 0.2F, 1.0F);
 				}
 			}
 		}

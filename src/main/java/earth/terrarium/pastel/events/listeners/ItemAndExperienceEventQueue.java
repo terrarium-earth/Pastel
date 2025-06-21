@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.events.listeners;
 
-import earth.terrarium.pastel.events.SpectrumGameEvents;
+import earth.terrarium.pastel.events.PastelGameEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -39,7 +39,7 @@ public class ItemAndExperienceEventQueue implements GameEventListener {
 	
 	@Override
 	public boolean handleGameEvent(ServerLevel world, Holder<GameEvent> event, GameEvent.Context emitter, Vec3 emitterPos) {
-		if (event != SpectrumGameEvents.ENTITY_SPAWNED) {
+		if (event != PastelGameEvents.ENTITY_SPAWNED) {
 			return false;
 		}
 

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumDimensions;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.ResourceLocation;
@@ -38,11 +38,11 @@ public class ReverbFilter {
             return;
         }
 
-        if (client.level.dimension().location() != SpectrumDimensions.DIMENSION_ID) {
+        if (client.level.dimension().location() != PastelDimensions.DIMENSION_ID) {
             return;
         }
 
-        if (!(SpectrumCommon.CONFIG.DimensionReverbDecayTime > 0) && !(SpectrumCommon.CONFIG.DimensionReverbDensity > 0)) {
+        if (!(PastelCommon.CONFIG.DimensionReverbDecayTime > 0) && !(PastelCommon.CONFIG.DimensionReverbDensity > 0)) {
             return;
         }
 
@@ -67,8 +67,8 @@ public class ReverbFilter {
 
             EXTEfx.alAuxiliaryEffectSlotf(slot, EXTEfx.AL_EFFECTSLOT_GAIN, 0);
             EXTEfx.alEffecti(id, EXTEfx.AL_EFFECT_TYPE, EXTEfx.AL_EFFECT_REVERB);
-            EXTEfx.alEffectf(id, EXTEfx.AL_REVERB_DENSITY, Mth.clamp(SpectrumCommon.CONFIG.DimensionReverbDensity, EXTEfx.AL_REVERB_MIN_DENSITY, EXTEfx.AL_REVERB_MAX_DENSITY));
-            EXTEfx.alEffectf(id, EXTEfx.AL_REVERB_DECAY_TIME, Mth.clamp(SpectrumCommon.CONFIG.DimensionReverbDecayTime, EXTEfx.AL_REVERB_MIN_DECAY_TIME, EXTEfx.AL_REVERB_MAX_DECAY_TIME));
+            EXTEfx.alEffectf(id, EXTEfx.AL_REVERB_DENSITY, Mth.clamp(PastelCommon.CONFIG.DimensionReverbDensity, EXTEfx.AL_REVERB_MIN_DENSITY, EXTEfx.AL_REVERB_MAX_DENSITY));
+            EXTEfx.alEffectf(id, EXTEfx.AL_REVERB_DECAY_TIME, Mth.clamp(PastelCommon.CONFIG.DimensionReverbDecayTime, EXTEfx.AL_REVERB_MIN_DECAY_TIME, EXTEfx.AL_REVERB_MAX_DECAY_TIME));
             EXTEfx.alAuxiliaryEffectSloti(slot, EXTEfx.AL_EFFECTSLOT_EFFECT, id);
             EXTEfx.alAuxiliaryEffectSlotf(slot, EXTEfx.AL_EFFECTSLOT_GAIN, 1);
             AL11.alSource3i(sourceID, EXTEfx.AL_AUXILIARY_SEND_FILTER, slot, 0, 0);

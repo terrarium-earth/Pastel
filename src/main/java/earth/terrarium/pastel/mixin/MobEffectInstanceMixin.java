@@ -8,8 +8,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -51,8 +51,8 @@ public abstract class MobEffectInstanceMixin implements MobEffectInstanceInjecto
 	@Inject(method = "update", at = @At("HEAD"), cancellable = true)
 	private void spectrum$stackableEffects(MobEffectInstance newEffect, CallbackInfoReturnable<Boolean> cir) {
 		Holder<MobEffect> effectType = newEffect.getEffect();
-		if (effectType.is(SpectrumStatusEffectTags.STACKING)) {
-			SpectrumStatusEffects.effectsAreGettingStacked = true;
+		if (effectType.is(PastelStatusEffectTags.STACKING)) {
+			PastelStatusEffects.effectsAreGettingStacked = true;
 			MobEffectInstance existingInstance = (MobEffectInstance) (Object) this;
 			
 			int newAmplifier = 1 + existingInstance.getAmplifier() + newEffect.getAmplifier();
@@ -60,7 +60,7 @@ public abstract class MobEffectInstanceMixin implements MobEffectInstanceInjecto
 			
 			cir.setReturnValue(true);
 		}
-		SpectrumStatusEffects.effectsAreGettingStacked = false;
+		PastelStatusEffects.effectsAreGettingStacked = false;
 	}
 	
 	@Inject(method = "update", at = @At("RETURN"))

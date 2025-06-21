@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class FusionShrineCraftingCriterion extends SimpleCriterionTrigger<FusionShrineCraftingCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("crafted_with_fusion_shrine");
+	public static final ResourceLocation ID = PastelCommon.locate("crafted_with_fusion_shrine");
 	
 	public void trigger(ServerPlayer player, ItemStack itemStack, int experience) {
 		this.trigger(player, (conditions) -> conditions.matches(itemStack, experience));

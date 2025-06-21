@@ -2,8 +2,8 @@ package earth.terrarium.pastel.blocks.conditional;
 
 import com.mojang.serialization.MapCodec;
 import de.dafuqs.revelationary.api.revelations.RevelationAware;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -101,7 +101,7 @@ public class StuckStormStoneBlock extends HorizontalDirectionalBlock implements 
 	
 	@Override
 	public ResourceLocation getCloakAdvancementIdentifier() {
-		return SpectrumAdvancements.REVEAL_STORM_STONES;
+		return PastelAdvancements.REVEAL_STORM_STONES;
 	}
 	
 	@Override
@@ -145,7 +145,7 @@ public class StuckStormStoneBlock extends HorizontalDirectionalBlock implements 
 	
 	@Override
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-		return new ItemStack(SpectrumItems.STORM_STONE.get());
+		return new ItemStack(PastelItems.STORM_STONE.get());
 	}
 	
 }

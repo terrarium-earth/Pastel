@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.interaction.projectile_behavior.ItemProjectileBehavior;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -29,7 +29,7 @@ public class ItemProjectileEntity extends ThrowableItemProjectile {
 	}
 
 	public ItemProjectileEntity(Level world, LivingEntity owner) {
-		super(SpectrumEntityTypes.ITEM_PROJECTILE.get(), owner, world);
+		super(PastelEntityTypes.ITEM_PROJECTILE.get(), owner, world);
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.jade_vines;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.interaction.NaturesStaffTriggered;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -68,7 +68,7 @@ public class JadeVineBulbBlock extends Block implements JadeVine, NaturesStaffTr
 	
 	@Override
 	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-		return SpectrumItems.GERMINATED_JADE_VINE_BULB.get().getDefaultInstance();
+		return PastelItems.GERMINATED_JADE_VINE_BULB.get().getDefaultInstance();
 	}
 	
 	@Override

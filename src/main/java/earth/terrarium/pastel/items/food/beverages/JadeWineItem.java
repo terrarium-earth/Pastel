@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.food.beverages;
 
 import earth.terrarium.pastel.api.item.FermentedItem;
 import earth.terrarium.pastel.components.JadeWineComponent;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -15,7 +15,7 @@ import java.util.List;
 public class JadeWineItem extends BeverageItem {
 	
 	public JadeWineItem(Properties settings) {
-		super(settings.component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).component(SpectrumDataComponentTypes.JADE_WINE, JadeWineComponent.DEFAULT));
+		super(settings.component(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).component(PastelDataComponentTypes.JADE_WINE, JadeWineComponent.DEFAULT));
 	}
 	
 	@Override

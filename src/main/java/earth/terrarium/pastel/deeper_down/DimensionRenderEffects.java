@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.deeper_down;
 
 import com.google.common.collect.ImmutableMap;
-import earth.terrarium.pastel.registries.SpectrumBiomes;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelBiomes;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -67,7 +67,7 @@ public class DimensionRenderEffects {
 			shouldUpdate = false;
 			updateTargets();
 			
-			if (sleepEffect == SpectrumStatusEffects.FATAL_SLUMBER) {
+			if (sleepEffect == PastelStatusEffects.FATAL_SLUMBER) {
 				sleepAfflicted = true;
 				
 				blendTarget = 1F;
@@ -78,7 +78,7 @@ public class DimensionRenderEffects {
 				nearTarget = -10F;
 				farTarget = 0.25F;
 				forceFogEffects = true;
-			} else if (sleepEffect == SpectrumStatusEffects.ETERNAL_SLUMBER) {
+			} else if (sleepEffect == PastelStatusEffects.ETERNAL_SLUMBER) {
 				sleepAfflicted = true;
 				
 				blendTarget = targets;
@@ -89,7 +89,7 @@ public class DimensionRenderEffects {
 				nearTarget = -2F;
 				farTarget = 0.9F;
 				forceFogEffects = true;
-			} else if (sleepEffect == SpectrumStatusEffects.SOMNOLENCE) {
+			} else if (sleepEffect == PastelStatusEffects.SOMNOLENCE) {
 				sleepAfflicted = true;
 				
 				blendTarget = targets;
@@ -228,39 +228,39 @@ public class DimensionRenderEffects {
 	// this should really be a data loader
 	static {
 		var builder = ImmutableMap.<ResourceKey<Biome>, Float>builder();
-		builder.put(SpectrumBiomes.BLACK_LANGAST, 0.7F);
-		builder.put(SpectrumBiomes.DEEP_BARRENS, 0.325F);
-		builder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, 0.1F);
-		builder.put(SpectrumBiomes.NOXSHROOM_FOREST, 0.05F);
+		builder.put(PastelBiomes.BLACK_LANGAST, 0.7F);
+		builder.put(PastelBiomes.DEEP_BARRENS, 0.325F);
+		builder.put(PastelBiomes.DEEP_DRIPSTONE_CAVES, 0.1F);
+		builder.put(PastelBiomes.NOXSHROOM_FOREST, 0.05F);
 		DARKENING_MULTIPLIERS = builder.build();
 		
 		// Fog darkening,
 		var fogBuilder = ImmutableMap.<ResourceKey<Biome>, Float>builder();
-		fogBuilder.put(SpectrumBiomes.NOXSHROOM_FOREST, 0.125F);
-		fogBuilder.put(SpectrumBiomes.RAZOR_EDGE, 0.65F);
-		fogBuilder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, 0.25F);
-		fogBuilder.put(SpectrumBiomes.DEEP_BARRENS, 0.55F);
-		fogBuilder.put(SpectrumBiomes.BLACK_LANGAST, 0.0125F);
+		fogBuilder.put(PastelBiomes.NOXSHROOM_FOREST, 0.125F);
+		fogBuilder.put(PastelBiomes.RAZOR_EDGE, 0.65F);
+		fogBuilder.put(PastelBiomes.DEEP_DRIPSTONE_CAVES, 0.25F);
+		fogBuilder.put(PastelBiomes.DEEP_BARRENS, 0.55F);
+		fogBuilder.put(PastelBiomes.BLACK_LANGAST, 0.0125F);
 		FOG_DARKENING_MULTIPLIERS = fogBuilder.build();
 		
 		// These are percents of view distance (capped to 192 blocks for far)
 		// Format is [near, far]. ...
 		var transMultiplier = ImmutableMap.<ResourceKey<Biome>, float[]>builder();
-		transMultiplier.put(SpectrumBiomes.NOXSHROOM_FOREST, new float[]{-3F, 1.5F});
-		transMultiplier.put(SpectrumBiomes.HOWLING_SPIRES, new float[]{-5.25F, 1.25F});
-		transMultiplier.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new float[]{-4F, 1.5F});
-		transMultiplier.put(SpectrumBiomes.DEEP_BARRENS, new float[]{-5F, 0.5F});
-		transMultiplier.put(SpectrumBiomes.BLACK_LANGAST, new float[]{-8F, 0.5F});
-		transMultiplier.put(SpectrumBiomes.DRAGONROT_SWAMP, new float[]{-4F, 1F});
+		transMultiplier.put(PastelBiomes.NOXSHROOM_FOREST, new float[]{-3F, 1.5F});
+		transMultiplier.put(PastelBiomes.HOWLING_SPIRES, new float[]{-5.25F, 1.25F});
+		transMultiplier.put(PastelBiomes.DEEP_DRIPSTONE_CAVES, new float[]{-4F, 1.5F});
+		transMultiplier.put(PastelBiomes.DEEP_BARRENS, new float[]{-5F, 0.5F});
+		transMultiplier.put(PastelBiomes.BLACK_LANGAST, new float[]{-8F, 0.5F});
+		transMultiplier.put(PastelBiomes.DRAGONROT_SWAMP, new float[]{-4F, 1F});
 		FOG_DISTANCE_MULTIPLIERS = transMultiplier.build();
 		
 		var colorGradingBuilder = ImmutableMap.<ResourceKey<Biome>, ColorGrading>builder();
-		colorGradingBuilder.put(SpectrumBiomes.NOXSHROOM_FOREST, new ColorGrading(1.05F, 0.015F, 80, 0.7F, 0.3125F));
-		colorGradingBuilder.put(SpectrumBiomes.HOWLING_SPIRES, new ColorGrading(1.0F, 0.0F, 60, 0.9F, 0.425F));
-		colorGradingBuilder.put(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, new ColorGrading(1.0F, 0.02F, 60, 0.8F, 0.3F));
-		colorGradingBuilder.put(SpectrumBiomes.DEEP_BARRENS, new ColorGrading(0.5F, 0.0F, 55, 0.7F, 0.2F));
-		colorGradingBuilder.put(SpectrumBiomes.BLACK_LANGAST, new ColorGrading(0.5F, 0.0F, 60, 1.0F, 0.1F));
-		colorGradingBuilder.put(SpectrumBiomes.DRAGONROT_SWAMP, new ColorGrading(0.7F, 0.05F, 105, 0.75F, 0.3F));
+		colorGradingBuilder.put(PastelBiomes.NOXSHROOM_FOREST, new ColorGrading(1.05F, 0.015F, 80, 0.7F, 0.3125F));
+		colorGradingBuilder.put(PastelBiomes.HOWLING_SPIRES, new ColorGrading(1.0F, 0.0F, 60, 0.9F, 0.425F));
+		colorGradingBuilder.put(PastelBiomes.DEEP_DRIPSTONE_CAVES, new ColorGrading(1.0F, 0.02F, 60, 0.8F, 0.3F));
+		colorGradingBuilder.put(PastelBiomes.DEEP_BARRENS, new ColorGrading(0.5F, 0.0F, 55, 0.7F, 0.2F));
+		colorGradingBuilder.put(PastelBiomes.BLACK_LANGAST, new ColorGrading(0.5F, 0.0F, 60, 1.0F, 0.1F));
+		colorGradingBuilder.put(PastelBiomes.DRAGONROT_SWAMP, new ColorGrading(0.7F, 0.05F, 105, 0.75F, 0.3F));
 		COLOR_GRADING_DATA = colorGradingBuilder.build();
 	}
 	

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.chests;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class BlackHoleChestBlock extends SpectrumChestBlock {
+public class BlackHoleChestBlock extends PastelChestBlock {
 
 	public static final MapCodec<BlackHoleChestBlock> CODEC = simpleCodec(BlackHoleChestBlock::new);
 
@@ -42,7 +42,7 @@ public class BlackHoleChestBlock extends SpectrumChestBlock {
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, SpectrumBlockEntities.BLACK_HOLE_CHEST.get(), BlackHoleChestBlockEntity::tick);
+		return createTickerHelper(type, PastelBlockEntities.BLACK_HOLE_CHEST.get(), BlackHoleChestBlockEntity::tick);
 	}
 	
 	@Override

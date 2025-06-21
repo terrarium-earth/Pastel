@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import earth.terrarium.pastel.status_effects.DivinityStatusEffect;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
@@ -16,13 +16,13 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class CircletOfArroganceItem extends SpectrumTrinketItem {
+public class CircletOfArroganceItem extends PastelTrinketItem {
 
     private static final int TRIGGER_EVERY_X_TICKS = 240;
     private static final int EFFECT_DURATION = TRIGGER_EVERY_X_TICKS + 10;
 
     public CircletOfArroganceItem(Properties settings) {
-        super(settings, SpectrumCommon.locate("unlocks/trinkets/circlet_of_arrogance"));
+        super(settings, PastelCommon.locate("unlocks/trinkets/circlet_of_arrogance"));
     }
 
     @Override
@@ -47,7 +47,7 @@ public class CircletOfArroganceItem extends SpectrumTrinketItem {
     }
 
     private static void giveEffect(LivingEntity entity) {
-		entity.addEffect(new MobEffectInstance(SpectrumStatusEffects.DIVINITY, EFFECT_DURATION, DivinityStatusEffect.CIRCLET_AMPLIFIER, true, true));
+		entity.addEffect(new MobEffectInstance(PastelStatusEffects.DIVINITY, EFFECT_DURATION, DivinityStatusEffect.CIRCLET_AMPLIFIER, true, true));
     }
 
     @Override

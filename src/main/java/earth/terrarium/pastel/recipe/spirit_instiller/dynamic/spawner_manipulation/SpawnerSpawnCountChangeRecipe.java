@@ -2,8 +2,8 @@ package earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulat
 
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -15,7 +15,7 @@ public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
 	protected static final int DEFAULT_SPAWN_COUNT = 4;
 	protected static final int MAX_SPAWN_COUNT = 16;
 	public SpawnerSpawnCountChangeRecipe() {
-		super(IngredientStack.ofItems(SpectrumItems.NEOLITH.get(), 4));
+		super(IngredientStack.ofItems(PastelItems.NEOLITH.get(), 4));
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class SpawnerSpawnCountChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SPIRIT_INSTILLER_SPAWNER_SPAWN_COUNT_CHANGE;
+		return PastelRecipeSerializers.SPIRIT_INSTILLER_SPAWNER_SPAWN_COUNT_CHANGE;
 	}
 	
 	@Override

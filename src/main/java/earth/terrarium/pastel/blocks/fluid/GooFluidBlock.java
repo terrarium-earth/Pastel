@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.fluid;
 
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.tags.FluidTags;
@@ -15,9 +15,9 @@ import net.minecraft.world.level.pathfinder.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class GooFluidBlock extends SpectrumFluidBlock {
+public class GooFluidBlock extends PastelFluidBlock {
 	
-	public GooFluidBlock(SpectrumFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
+	public GooFluidBlock(PastelFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
 		super(fluid, ultrawarmReplacementBlockState, settings);
 	}
 
@@ -29,19 +29,19 @@ public class GooFluidBlock extends SpectrumFluidBlock {
 	
 	@Override
 	public SimpleParticleType getSplashParticle() {
-		return SpectrumParticleTypes.GOO_SPLASH;
+		return PastelParticleTypes.GOO_SPLASH;
 	}
 	
 	@Override
 	public Tuple<SimpleParticleType, SimpleParticleType> getFishingParticles() {
-		return new Tuple<>(SpectrumParticleTypes.GOO_POP, SpectrumParticleTypes.GOO_FISHING);
+		return new Tuple<>(PastelParticleTypes.GOO_POP, PastelParticleTypes.GOO_FISHING);
 	}
 
 	@Override
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(state, world, pos, random);
 		if (!world.getBlockState(pos.above()).isRedstoneConductor(world, pos.above()) && random.nextFloat() < 0.03F) {
-			world.addParticle(SpectrumParticleTypes.GOO_POP, pos.getX() + random.nextDouble(), pos.getY() + 1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
+			world.addParticle(PastelParticleTypes.GOO_POP, pos.getX() + random.nextDouble(), pos.getY() + 1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
 		}
 	}
 	

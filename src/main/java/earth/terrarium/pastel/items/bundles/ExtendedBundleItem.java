@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.bundles;
 import earth.terrarium.pastel.components.ExtendedBundleComponent;
 import earth.terrarium.pastel.mixin.accessors.BundleContentsComponentAccessor;
 import earth.terrarium.pastel.mixin.accessors.BundleContentsComponentBuilderAccessor;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -46,15 +46,15 @@ public class ExtendedBundleItem extends BundleItem {
 	}
 	
 	public static Fraction getMaxOccupancy(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.EXTENDED_BUNDLE, ExtendedBundleComponent.DEFAULT).maxOccupancy();
+		return stack.getOrDefault(PastelDataComponentTypes.EXTENDED_BUNDLE, ExtendedBundleComponent.DEFAULT).maxOccupancy();
 	}
 	
 	public static int getMaxStacks(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.EXTENDED_BUNDLE, ExtendedBundleComponent.DEFAULT).maxStacks();
+		return stack.getOrDefault(PastelDataComponentTypes.EXTENDED_BUNDLE, ExtendedBundleComponent.DEFAULT).maxStacks();
 	}
 	
 	public static boolean ignoreStacks(ItemStack stack) {
-		return stack.getOrDefault(SpectrumDataComponentTypes.EXTENDED_BUNDLE, ExtendedBundleComponent.DEFAULT).ignoreStacks();
+		return stack.getOrDefault(PastelDataComponentTypes.EXTENDED_BUNDLE, ExtendedBundleComponent.DEFAULT).ignoreStacks();
 	}
 	
 	public static class ComponentBuilder extends BundleContents.Mutable {

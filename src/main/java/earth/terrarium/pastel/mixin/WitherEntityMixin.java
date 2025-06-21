@@ -2,9 +2,9 @@ package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumStatusEffectTags;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelStatusEffectTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -32,7 +32,7 @@ public abstract class WitherEntityMixin extends LivingEntity {
 	private void spawnEntity(ServerLevel world, DamageSource source, boolean causedByPlayer, CallbackInfo ci, ItemEntity itemEntity) {
 		Entity attackerEntity = source.getEntity();
 		if (attackerEntity instanceof LivingEntity livingAttacker) {
-			int cloversFavorLevel = SpectrumEnchantmentHelper.getLevel(world.registryAccess(), SpectrumEnchantments.CLOVERS_FAVOR, livingAttacker.getMainHandItem());
+			int cloversFavorLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), PastelEnchantments.CLOVERS_FAVOR, livingAttacker.getMainHandItem());
 			if (cloversFavorLevel > 0) {
 				int additionalCount = (int) (cloversFavorLevel / 2.0F + world.random.nextFloat() * cloversFavorLevel);
 				itemEntity.getItem().setCount(itemEntity.getItem().getCount() + additionalCount);
@@ -42,7 +42,7 @@ public abstract class WitherEntityMixin extends LivingEntity {
 
 	@ModifyReturnValue(method = "addEffect", at = @At("TAIL"))
 	private boolean spectrum$allowWitherNaps(boolean original, @Local(argsOnly = true) MobEffectInstance effect, @Local(argsOnly = true) Entity source) {
-		if (effect.getEffect().is(SpectrumStatusEffectTags.SOPORIFIC)) {
+		if (effect.getEffect().is(PastelStatusEffectTags.SOPORIFIC)) {
 			return super.addEffect(effect, source);
 		}
 		return original;

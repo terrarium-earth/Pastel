@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -10,10 +10,10 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class CraftingTabletScreen extends AbstractContainerScreen<CraftingTabletScreenHandler> {
 	
-	public static final ResourceLocation BACKGROUND1 = SpectrumCommon.locate("textures/gui/container/crafting_tablet1.png");
-	public static final ResourceLocation BACKGROUND2 = SpectrumCommon.locate("textures/gui/container/crafting_tablet2.png");
-	public static final ResourceLocation BACKGROUND3 = SpectrumCommon.locate("textures/gui/container/crafting_tablet3.png");
-	public static final ResourceLocation BACKGROUND4 = SpectrumCommon.locate("textures/gui/container/crafting_tablet4.png");
+	public static final ResourceLocation BACKGROUND1 = PastelCommon.locate("textures/gui/container/crafting_tablet1.png");
+	public static final ResourceLocation BACKGROUND2 = PastelCommon.locate("textures/gui/container/crafting_tablet2.png");
+	public static final ResourceLocation BACKGROUND3 = PastelCommon.locate("textures/gui/container/crafting_tablet3.png");
+	public static final ResourceLocation BACKGROUND4 = PastelCommon.locate("textures/gui/container/crafting_tablet4.png");
 	
 	protected ResourceLocation backgroundTexture;
 	

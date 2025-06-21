@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.decoration;
 
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,7 +12,7 @@ public class ProjectorBlockEntity extends BlockEntity {
 	final float heightOffset, bobMultiplier, scaling;
 
 	public ProjectorBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.PROJECTOR.get(), pos, state);
+		super(PastelBlockEntities.PROJECTOR.get(), pos, state);
 		var projectorBlock = (ProjectorBlock) state.getBlock();
 		heightOffset = projectorBlock.heightOffset;
 		bobMultiplier = projectorBlock.bobMultiplier;

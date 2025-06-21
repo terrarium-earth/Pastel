@@ -2,13 +2,13 @@ package earth.terrarium.pastel.blocks.enchanter;
 
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,7 +30,7 @@ public class EnchanterBlock extends InWorldInteractionBlock {
 
 	public static final MapCodec<EnchanterBlock> CODEC = simpleCodec(EnchanterBlock::new);
 
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/build_enchanting_structure");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("midgame/build_enchanting_structure");
 
 	public EnchanterBlock(Properties settings) {
 		super(settings);
@@ -43,21 +43,21 @@ public class EnchanterBlock extends InWorldInteractionBlock {
 	
 	public static void clearCurrentlyRenderedMultiBlock(Level world) {
 		if (world.isClientSide) {
-			ModonomiconHelper.clearRenderedMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.ENCHANTER));
+			ModonomiconHelper.clearRenderedMultiblock(PastelMultiblocks.get(PastelMultiblocks.ENCHANTER));
 		}
 	}
 	
 	public static boolean verifyStructure(Level world, BlockPos blockPos, @Nullable ServerPlayer serverPlayerEntity) {
-		Multiblock multiblock = SpectrumMultiblocks.get(SpectrumMultiblocks.ENCHANTER);
+		Multiblock multiblock = PastelMultiblocks.get(PastelMultiblocks.ENCHANTER);
 		boolean valid = multiblock.validate(world, blockPos.below(3), Rotation.NONE);
 		
 		if (valid) {
 			if (serverPlayerEntity != null) {
-				SpectrumAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
+				PastelAdvancementCriteria.COMPLETED_MULTIBLOCK.trigger(serverPlayerEntity, multiblock);
 			}
 		} else {
 			if (world.isClientSide) {
-				ModonomiconHelper.renderMultiblock(SpectrumMultiblocks.get(SpectrumMultiblocks.ENCHANTER), SpectrumMultiblocks.ENCHANTER_TEXT, blockPos.below(4), Rotation.NONE);
+				ModonomiconHelper.renderMultiblock(PastelMultiblocks.get(PastelMultiblocks.ENCHANTER), PastelMultiblocks.ENCHANTER_TEXT, blockPos.below(4), Rotation.NONE);
 			}
 		}
 		
@@ -73,7 +73,7 @@ public class EnchanterBlock extends InWorldInteractionBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, SpectrumBlockEntities.ENCHANTER.get(), world.isClientSide ? EnchanterBlockEntity::clientTick : EnchanterBlockEntity::serverTick);
+		return createTickerHelper(type, PastelBlockEntities.ENCHANTER.get(), world.isClientSide ? EnchanterBlockEntity::clientTick : EnchanterBlockEntity::serverTick);
 	}
 	
 	@Override

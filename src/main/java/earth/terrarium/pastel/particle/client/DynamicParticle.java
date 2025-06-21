@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.particle.client;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.mixin.client.accessors.ParticleManagerAccessor;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import net.neoforged.api.distmarker.Dist;
@@ -70,7 +70,7 @@ public class DynamicParticle extends TextureSheetParticle {
 			var particleTypeIdentifier = BuiltInRegistries.PARTICLE_TYPE.getKey(parameters.particleType());
 			SpriteSet dynamicProvider = ((ParticleManagerAccessor) client.particleEngine).getSpriteSets().get(particleTypeIdentifier);
 			if (dynamicProvider == null) {
-				SpectrumCommon.logError("Trying to use a non-existent sprite provider for particle spawner particle: " + particleTypeIdentifier);
+				PastelCommon.logError("Trying to use a non-existent sprite provider for particle spawner particle: " + particleTypeIdentifier);
 				particle.pickSprite(spriteProvider);
 			} else {
 				particle.pickSprite(dynamicProvider);

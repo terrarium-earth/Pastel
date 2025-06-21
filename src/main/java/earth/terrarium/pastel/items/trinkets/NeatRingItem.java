@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.network.chat.Component;
@@ -9,11 +9,11 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class NeatRingItem extends SpectrumTrinketItem {
+public class NeatRingItem extends PastelTrinketItem {
 
 
 	public NeatRingItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/neat_ring"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/neat_ring"));
 	}
 
 	@Override

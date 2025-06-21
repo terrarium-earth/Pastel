@@ -4,7 +4,7 @@ import com.klikli_dev.modonomicon.book.BookTextHolder;
 import com.klikli_dev.modonomicon.client.gui.book.entry.BookEntryScreen;
 import com.klikli_dev.modonomicon.data.BookDataManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import net.minecraft.client.Minecraft;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class BookCinderhearthSmeltingPageRenderer extends BookGatedRecipePageRenderer<CinderhearthRecipe, BookGatedRecipePage<CinderhearthRecipe>> {
 
-    private static final ResourceLocation BACKGROUND_TEXTURE = SpectrumCommon.locate("textures/gui/modonomicon/cinderhearth.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/modonomicon/cinderhearth.png");
 
     private List<BookTextHolder> chanceTexts1 = null;
     private List<BookTextHolder> chanceTexts2 = null;

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.GatedSpectrumDisplay;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelDisplay;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 
 import java.util.Collections;
 
-public class AnvilCrushingDisplay extends GatedSpectrumDisplay {
+public class AnvilCrushingDisplay extends PastelDisplay {
 	public final float experience;
 	public final float crushedItemsPerPointOfDamage;
 	
@@ -22,7 +22,7 @@ public class AnvilCrushingDisplay extends GatedSpectrumDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.ANVIL_CRUSHING;
+		return PastelPlugins.ANVIL_CRUSHING;
 	}
 	
 }

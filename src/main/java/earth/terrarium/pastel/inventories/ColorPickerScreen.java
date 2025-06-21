@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.blocks.energy.ColorPickerBlockEntity;
 import earth.terrarium.pastel.helpers.RenderHelper;
@@ -9,7 +9,6 @@ import earth.terrarium.pastel.inventories.widgets.InkGaugeWidget;
 import earth.terrarium.pastel.inventories.widgets.StackedInkMeterWidget;
 import earth.terrarium.pastel.networking.c2s_payloads.InkColorSelectedC2SPayload;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.Holder;
@@ -22,7 +21,7 @@ import java.util.function.Consumer;
 
 public class ColorPickerScreen extends AbstractContainerScreen<ColorPickerScreenHandler> implements Consumer<Optional<Holder<InkColor>>> {
 	
-	protected final ResourceLocation BACKGROUND = SpectrumCommon.locate("textures/gui/container/color_picker.png");
+	protected final ResourceLocation BACKGROUND = PastelCommon.locate("textures/gui/container/color_picker.png");
 	protected ColorSelectionWidget colorSelectionWidget;
 	protected InkGaugeWidget inkGaugeWidget;
 	protected StackedInkMeterWidget inkMeterWidget;

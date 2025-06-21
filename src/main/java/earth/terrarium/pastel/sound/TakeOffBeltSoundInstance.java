@@ -2,7 +2,7 @@ package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.items.trinkets.TakeOffBeltItem;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -22,7 +22,7 @@ public class TakeOffBeltSoundInstance extends AbstractSoundInstance implements T
 	private boolean done;
 	
 	public TakeOffBeltSoundInstance() {
-		super(SpectrumSoundEvents.AIR_LAUNCH_BELT_CHARGING, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
+		super(PastelSoundEvents.AIR_LAUNCH_BELT_CHARGING, SoundSource.PLAYERS, SoundInstance.createUnseededRandom());
 		Minecraft client = Minecraft.getInstance();
 		Player player = client.player;
 		this.looping = false;

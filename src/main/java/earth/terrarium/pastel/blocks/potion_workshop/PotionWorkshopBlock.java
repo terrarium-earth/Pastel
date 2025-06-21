@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.potion_workshop;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Containers;
@@ -32,7 +32,7 @@ public class PotionWorkshopBlock extends HorizontalDirectionalBlock implements E
 
 	public static final MapCodec<PotionWorkshopBlock> CODEC = simpleCodec(PotionWorkshopBlock::new);
 
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/blocks/potion_workshop");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/blocks/potion_workshop");
 
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D);
 
@@ -63,7 +63,7 @@ public class PotionWorkshopBlock extends HorizontalDirectionalBlock implements E
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? null : Support.checkType(type, SpectrumBlockEntities.POTION_WORKSHOP.get(), PotionWorkshopBlockEntity::tick);
+		return world.isClientSide ? null : Support.checkType(type, PastelBlockEntities.POTION_WORKSHOP.get(), PotionWorkshopBlockEntity::tick);
 	}
 	
 	@Override

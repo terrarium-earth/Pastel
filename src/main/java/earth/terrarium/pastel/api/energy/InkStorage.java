@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.api.energy;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -170,7 +170,7 @@ public interface InkStorage extends Clearable {
 		Map<InkColor, Long> energy = new HashMap<>();
 		if (compound != null) {
 			for (String key : compound.getAllKeys()) {
-				InkColor inkColor = SpectrumRegistries.INK_COLOR.get(SpectrumCommon.locate(key));
+				InkColor inkColor = PastelRegistries.INK_COLOR.get(PastelCommon.locate(key));
 				if (inkColor == null) { // TODO: needed? Fallback to a default color?
 					continue;
 				}

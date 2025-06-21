@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.status_effects;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 
 public class LifeDrainStatusEffect extends MobEffect {
 	
-	public static final ResourceLocation ATTRIBUTE_ID = SpectrumCommon.locate("effect.life_drain");
+	public static final ResourceLocation ATTRIBUTE_ID = PastelCommon.locate("effect.life_drain");
 	
 	public LifeDrainStatusEffect(MobEffectCategory category, int color) {
 		super(category, color);
@@ -27,7 +27,7 @@ public class LifeDrainStatusEffect extends MobEffect {
 		
 		AttributeInstance instance = entity.getAttribute(Attributes.MAX_HEALTH);
 		if (instance != null) {
-			var dragon = entity.getType().is(SpectrumEntityTypeTags.DRACONIC);
+			var dragon = entity.getType().is(PastelEntityTypeTags.DRACONIC);
 			AttributeModifier currentMod = instance.getModifier(ATTRIBUTE_ID);
 			if (currentMod != null) {
 				instance.removeModifier(currentMod);

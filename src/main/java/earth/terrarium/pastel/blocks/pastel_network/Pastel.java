@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.pastel_network;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.pastel_network.network.ClientPastelNetworkManager;
 import earth.terrarium.pastel.blocks.pastel_network.network.PastelNetworkManager;
 import earth.terrarium.pastel.blocks.pastel_network.network.ServerPastelNetworkManager;
@@ -8,7 +8,6 @@ import earth.terrarium.pastel.particle.render.EarlyRenderingParticleContainer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.event.server.*;
-import net.neoforged.neoforge.server.*;
 
 public class Pastel {
 
@@ -25,8 +24,8 @@ public class Pastel {
     }
 
     public static ServerPastelNetworkManager getServerInstance() {
-        if (serverManager == null && SpectrumCommon.getSidedServer() != null) {
-            serverManager = ServerPastelNetworkManager.get(SpectrumCommon.getSidedServer().overworld());
+        if (serverManager == null && PastelCommon.getSidedServer() != null) {
+            serverManager = ServerPastelNetworkManager.get(PastelCommon.getSidedServer().overworld());
         }
         return serverManager;
     }

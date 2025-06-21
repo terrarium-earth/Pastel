@@ -3,7 +3,7 @@ package earth.terrarium.pastel.recipe.spirit_instiller;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
@@ -12,13 +12,13 @@ import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity
 import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.recipe.GatedStackSpectrumRecipe;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -37,12 +37,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceRecipeInput<SpiritInstillerBlockEntity>> {
+public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipeInput<SpiritInstillerBlockEntity>> {
 	
 	public static final int CENTER_INGREDIENT = 0;
 	public static final int FIRST_INGREDIENT = 1;
 	public static final int SECOND_INGREDIENT = 2;
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("midgame/build_spirit_instiller_structure");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("midgame/build_spirit_instiller_structure");
 	
 	protected final IngredientStack centerIngredient;
 	protected final IngredientStack bowlIngredient1;
@@ -91,7 +91,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SPIRIT_INSTILLING_SERIALIZER;
+		return PastelRecipeSerializers.SPIRIT_INSTILLING_SERIALIZER;
 	}
 	
 	@Override
@@ -120,8 +120,8 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 			resultStack.setCount(resultCountMod);
 		}
 		
-		if (resultStack.is(SpectrumBlocks.MEMORY.get().asItem())) {
-			boolean makeUnrecognizable = spiritInstillerBlockEntity.getItem(0).is(SpectrumItemTags.MEMORY_BONDING_AGENTS_CONCEALABLE);
+		if (resultStack.is(PastelBlocks.MEMORY.get().asItem())) {
+			boolean makeUnrecognizable = spiritInstillerBlockEntity.getItem(0).is(PastelItemTags.MEMORY_BONDING_AGENTS_CONCEALABLE);
 			if (makeUnrecognizable) {
 				MemoryItem.makeUnrecognizable(resultStack);
 			}
@@ -149,7 +149,7 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 	protected static void grantPlayerSpiritInstillingAdvancementCriterion(UUID playerUUID, ItemStack resultStack, int experience) {
 		ServerPlayer serverPlayerEntity = (ServerPlayer) PlayerOwned.getPlayerEntityIfOnline(playerUUID);
 		if (serverPlayerEntity != null) {
-			SpectrumAdvancementCriteria.SPIRIT_INSTILLER_CRAFTING.trigger(serverPlayerEntity, resultStack, experience);
+			PastelAdvancementCriteria.SPIRIT_INSTILLER_CRAFTING.trigger(serverPlayerEntity, resultStack, experience);
 		}
 	}
 	
@@ -181,12 +181,12 @@ public class SpiritInstillerRecipe extends GatedStackSpectrumRecipe<InstanceReci
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.SPIRIT_INSTILLER.get());
+		return new ItemStack(PastelBlocks.SPIRIT_INSTILLER.get());
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.SPIRIT_INSTILLING;
+		return PastelRecipeTypes.SPIRIT_INSTILLING;
 	}
 	
 	@Override

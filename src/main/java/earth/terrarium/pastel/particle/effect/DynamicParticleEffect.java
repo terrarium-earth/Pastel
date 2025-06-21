@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -42,11 +42,11 @@ public record DynamicParticleEffect(ParticleType<?> particleType, float gravity,
 	);
 	
 	public DynamicParticleEffect(float gravity, Vector3f color, float scale, int lifetimeTicks, boolean collisions, boolean glowing) {
-		this(SpectrumParticleTypes.SHOOTING_STAR, gravity, color, scale, lifetimeTicks, collisions, glowing);
+		this(PastelParticleTypes.SHOOTING_STAR, gravity, color, scale, lifetimeTicks, collisions, glowing);
 	}
 	
 	public DynamicParticleEffect(float gravity, Vector3f color, float scale, int lifetimeTicks, boolean collisions, boolean glowing, boolean alwaysShow) {
-		this(SpectrumParticleTypes.SHOOTING_STAR, gravity, color, scale, lifetimeTicks, collisions, glowing, alwaysShow);
+		this(PastelParticleTypes.SHOOTING_STAR, gravity, color, scale, lifetimeTicks, collisions, glowing, alwaysShow);
 	}
 	
 	public DynamicParticleEffect(ParticleType<?> particleType, float gravity, Vector3f color, float scale, int lifetimeTicks, boolean collisions, boolean glowing) {
@@ -55,7 +55,7 @@ public record DynamicParticleEffect(ParticleType<?> particleType, float gravity,
 	
 	@Override
 	public ParticleType<?> getType() {
-		return alwaysShow ? SpectrumParticleTypes.DYNAMIC_ALWAYS_SHOW : SpectrumParticleTypes.DYNAMIC;
+		return alwaysShow ? PastelParticleTypes.DYNAMIC_ALWAYS_SHOW : PastelParticleTypes.DYNAMIC;
 	}
 	
 	@Override

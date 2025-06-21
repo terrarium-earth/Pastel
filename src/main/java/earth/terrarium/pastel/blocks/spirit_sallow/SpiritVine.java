@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.spirit_sallow;
 
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -38,20 +38,20 @@ public interface SpiritVine {
 	}
 	
 	static Item getYieldItem(BlockState blockState) {
-		if (blockState.is(SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.CYAN_SPIRIT_SALLOW_VINES_PLANT.get())) {
-            return SpectrumItems.TOPAZ_SHARD.get();
+		if (blockState.is(PastelBlocks.CYAN_SPIRIT_SALLOW_VINES.get()) || blockState.is(PastelBlocks.CYAN_SPIRIT_SALLOW_VINES_PLANT.get())) {
+            return PastelItems.TOPAZ_SHARD.get();
 		}
-		if (blockState.is(SpectrumBlocks.MAGENTA_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.MAGENTA_SPIRIT_SALLOW_VINES_PLANT.get())) {
+		if (blockState.is(PastelBlocks.MAGENTA_SPIRIT_SALLOW_VINES.get()) || blockState.is(PastelBlocks.MAGENTA_SPIRIT_SALLOW_VINES_PLANT.get())) {
 			return Items.AMETHYST_SHARD;
 		}
-		if (blockState.is(SpectrumBlocks.YELLOW_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.YELLOW_SPIRIT_SALLOW_VINES_PLANT.get())) {
-            return SpectrumItems.CITRINE_SHARD.get();
+		if (blockState.is(PastelBlocks.YELLOW_SPIRIT_SALLOW_VINES.get()) || blockState.is(PastelBlocks.YELLOW_SPIRIT_SALLOW_VINES_PLANT.get())) {
+            return PastelItems.CITRINE_SHARD.get();
 		}
-		if (blockState.is(SpectrumBlocks.BLACK_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.BLACK_SPIRIT_SALLOW_VINES_PLANT.get())) {
-            return SpectrumItems.ONYX_SHARD.get();
+		if (blockState.is(PastelBlocks.BLACK_SPIRIT_SALLOW_VINES.get()) || blockState.is(PastelBlocks.BLACK_SPIRIT_SALLOW_VINES_PLANT.get())) {
+            return PastelItems.ONYX_SHARD.get();
 		}
-		if (blockState.is(SpectrumBlocks.WHITE_SPIRIT_SALLOW_VINES.get()) || blockState.is(SpectrumBlocks.WHITE_SPIRIT_SALLOW_VINES_PLANT.get())) {
-            return SpectrumItems.MOONSTONE_SHARD.get();
+		if (blockState.is(PastelBlocks.WHITE_SPIRIT_SALLOW_VINES.get()) || blockState.is(PastelBlocks.WHITE_SPIRIT_SALLOW_VINES_PLANT.get())) {
+            return PastelItems.MOONSTONE_SHARD.get();
 		}
 		return Items.AIR;
 	}

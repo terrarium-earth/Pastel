@@ -1,14 +1,14 @@
 package earth.terrarium.pastel.items.trinkets;
 
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayTakeOffBeltSoundInstancePayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import top.theillusivec4.curios.api.SlotContext;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -32,7 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.HashMap;
 import java.util.List;
 
-public class TakeOffBeltItem extends SpectrumTrinketItem {
+public class TakeOffBeltItem extends PastelTrinketItem {
 	
 	public static final int CHARGE_TIME_TICKS = 20;
 	public static final int MAX_CHARGES = 8;
@@ -40,7 +40,7 @@ public class TakeOffBeltItem extends SpectrumTrinketItem {
 	private static final HashMap<LivingEntity, Long> sneakingTimes = new HashMap<>();
 	
 	public TakeOffBeltItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/take_off_belt"));
+		super(settings, PastelCommon.locate("unlocks/trinkets/take_off_belt"));
 	}
 	
 	public static int getJumpBoostAmplifier(int sneakTime, int powerEnchantmentLevel) {
@@ -73,19 +73,19 @@ public class TakeOffBeltItem extends SpectrumTrinketItem {
 					long sneakTicks = world.getGameTime() - sneakingTimes.get(entity);
 					if (sneakTicks % CHARGE_TIME_TICKS == 0) {
 						if (sneakTicks > CHARGE_TIME_TICKS * MAX_CHARGES) {
-							world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SpectrumSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 4.0F, 1.05F);
+							world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), PastelSoundEvents.USE_FAIL, SoundSource.NEUTRAL, 4.0F, 1.05F);
 							PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world, entity.position(), ColoredCraftingParticleEffect.BLACK, 20, new Vec3(0, 0, 0), new Vec3(0.1, 0.05, 0.1));
 							entity.removeEffect(MobEffects.JUMP);
 						} else {
 							int sneakTimeMod = (int) sneakTicks / CHARGE_TIME_TICKS;
 							
-							world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SpectrumSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SoundSource.NEUTRAL, 1.0F, 1.0F);
+							world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), PastelSoundEvents.BLOCK_TOPAZ_BLOCK_HIT, SoundSource.NEUTRAL, 1.0F, 1.0F);
 							for (Vec3 vec : VectorPattern.SIXTEEN.getVectors()) {
-								PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerLevel) world, entity.position(), SpectrumParticleTypes.LIQUID_CRYSTAL_SPARKLE, 1, vec.scale(0.5));
+								PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerLevel) world, entity.position(), PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, 1, vec.scale(0.5));
 							}
 							
-							int powerEnchantmentLevel = SpectrumEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.POWER, stack);
-							int featherFallingEnchantmentLevel = SpectrumEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.FEATHER_FALLING, stack);
+							int powerEnchantmentLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.POWER, stack);
+							int featherFallingEnchantmentLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.FEATHER_FALLING, stack);
 							entity.addEffect(new MobEffectInstance(MobEffects.JUMP, CHARGE_TIME_TICKS, getJumpBoostAmplifier(sneakTimeMod, powerEnchantmentLevel), true, true));
 							if (featherFallingEnchantmentLevel > 0) {
 								entity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, CHARGE_TIME_TICKS + featherFallingEnchantmentLevel * 20, 0, true, true));

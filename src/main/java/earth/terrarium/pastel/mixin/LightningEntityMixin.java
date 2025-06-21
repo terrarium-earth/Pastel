@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.conditional.StuckStormStoneBlock;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LightningBolt;
@@ -30,7 +30,7 @@ public abstract class LightningEntityMixin {
 		
 		// do not spawn storm stones when using other forms of
 		// spawning thunder, like magic, ... in clear weather. Only when it is actually thundering
-		if (world.isThundering() && SpectrumCommon.CONFIG.StormStonesWorlds.contains(world.dimension().location().toString())) {
+		if (world.isThundering() && PastelCommon.CONFIG.StormStonesWorlds.contains(world.dimension().location().toString())) {
 			spawnLightningStone(world, this.getStrikePosition());
 		}
 	}
@@ -40,14 +40,14 @@ public abstract class LightningEntityMixin {
 		BlockState blockState = world.getBlockState(affectedBlockPos);
 		BlockPos aboveGroundBlockPos;
 		
-		if (blockState.is(SpectrumBlockTags.C_LIGHTNING_RODS)) {
+		if (blockState.is(PastelBlockTags.C_LIGHTNING_RODS)) {
 			// if struck a lightning rod: check around the base of the rod instead
 			// always spawn a stone
 			BlockPos blockPos2 = affectedBlockPos.relative((blockState.getValue(LightningRodBlock.FACING)).getOpposite());
 			aboveGroundBlockPos = blockPos2.relative(Direction.from2DDataValue(world.getRandom().nextInt(6))).above();
 		} else {
 			// there is chance involved
-			if (world.random.nextFloat() > SpectrumCommon.CONFIG.StormStonesChance) {
+			if (world.random.nextFloat() > PastelCommon.CONFIG.StormStonesChance) {
 				return;
 			}
 			aboveGroundBlockPos = affectedBlockPos.above();
@@ -55,7 +55,7 @@ public abstract class LightningEntityMixin {
 		
 		if (world.isEmptyBlock(aboveGroundBlockPos)) {
 			Direction randomDirection = Direction.from2DDataValue(world.random.nextInt(4));
-			BlockState placementBlockState = SpectrumBlocks.STUCK_STORM_STONE.get().defaultBlockState().setValue(StuckStormStoneBlock.FACING, randomDirection);
+			BlockState placementBlockState = PastelBlocks.STUCK_STORM_STONE.get().defaultBlockState().setValue(StuckStormStoneBlock.FACING, randomDirection);
 			if (placementBlockState.canSurvive(world, aboveGroundBlockPos)) {
 				world.setBlockAndUpdate(aboveGroundBlockPos, placementBlockState);
 			}

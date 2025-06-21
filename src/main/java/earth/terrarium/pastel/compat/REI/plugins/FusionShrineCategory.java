@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -22,11 +22,11 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class FusionShrineCategory extends GatedDisplayCategory<FusionShrineDisplay> {
 	
-	private static final EntryIngredient FUSION_SHRINE_BASALT = EntryIngredients.of(SpectrumBlocks.FUSION_SHRINE_BASALT.get());
+	private static final EntryIngredient FUSION_SHRINE_BASALT = EntryIngredients.of(PastelBlocks.FUSION_SHRINE_BASALT.get());
 	
 	@Override
 	public CategoryIdentifier<FusionShrineDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.FUSION_SHRINE;
+		return PastelPlugins.FUSION_SHRINE;
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class FusionShrineCategory extends GatedDisplayCategory<FusionShrineDispl
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.FUSION_SHRINE_BASALT.get());
+		return EntryStacks.of(PastelBlocks.FUSION_SHRINE_BASALT.get());
 	}
 	
 	@Override

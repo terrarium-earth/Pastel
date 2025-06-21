@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.fluid;
 
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluidTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.tags.FluidTags;
@@ -17,11 +17,11 @@ import net.minecraft.world.level.pathfinder.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class LiquidCrystalFluidBlock extends SpectrumFluidBlock {
+public class LiquidCrystalFluidBlock extends PastelFluidBlock {
 	
 	public static final int LUMINANCE = 11;
 	
-	public LiquidCrystalFluidBlock(SpectrumFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
+	public LiquidCrystalFluidBlock(PastelFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
 		super(fluid, ultrawarmReplacementBlockState, settings);
 	}
 
@@ -33,12 +33,12 @@ public class LiquidCrystalFluidBlock extends SpectrumFluidBlock {
 	
 	@Override
 	public SimpleParticleType getSplashParticle() {
-		return SpectrumParticleTypes.LIQUID_CRYSTAL_FISHING;
+		return PastelParticleTypes.LIQUID_CRYSTAL_FISHING;
 	}
 	
 	@Override
 	public Tuple<SimpleParticleType, SimpleParticleType> getFishingParticles() {
-		return new Tuple<>(SpectrumParticleTypes.LIQUID_CRYSTAL_SPARKLE, SpectrumParticleTypes.LIQUID_CRYSTAL_FISHING);
+		return new Tuple<>(PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, PastelParticleTypes.LIQUID_CRYSTAL_FISHING);
 	}
 	
 	@Override
@@ -50,17 +50,17 @@ public class LiquidCrystalFluidBlock extends SpectrumFluidBlock {
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(state, world, pos, random);
 		if (random.nextFloat() < 0.10F) {
-			world.addParticle(SpectrumParticleTypes.LIQUID_CRYSTAL_SPARKLE, pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
+			world.addParticle(PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(), pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
 		}
 	}
 
 	public @Nullable BlockState handleFluidCollision(Level world, @NotNull FluidState state, @NotNull FluidState otherState) {
 		if (otherState.is(FluidTags.WATER)) {
-			return state.isSource() ? SpectrumBlocks.FROSTBITE_CRYSTAL.get().defaultBlockState() : Blocks.CALCITE.defaultBlockState();
+			return state.isSource() ? PastelBlocks.FROSTBITE_CRYSTAL.get().defaultBlockState() : Blocks.CALCITE.defaultBlockState();
 		}
 		else if (otherState.is(FluidTags.LAVA)) {
-			return state.isSource() ? SpectrumBlocks.BLAZING_CRYSTAL.get().defaultBlockState() : Blocks.COBBLED_DEEPSLATE.defaultBlockState();
-		} else if (otherState.is(SpectrumFluidTags.GOO)) {
+			return state.isSource() ? PastelBlocks.BLAZING_CRYSTAL.get().defaultBlockState() : Blocks.COBBLED_DEEPSLATE.defaultBlockState();
+		} else if (otherState.is(PastelFluidTags.GOO)) {
 			return Blocks.CLAY.defaultBlockState();
 		}
 		return null;

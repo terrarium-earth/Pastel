@@ -2,7 +2,7 @@ package earth.terrarium.pastel.components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -20,7 +20,7 @@ public record InfusedBeverageComponent(String variant, int color) implements Too
 	
 	public static final Codec<InfusedBeverageComponent> CODEC = RecordCodecBuilder.create(i -> i.group(
 			Codec.STRING.optionalFieldOf("variant", "unknown").forGetter(InfusedBeverageComponent::variant),
-			SpectrumColorHelper.CODEC.optionalFieldOf("color", 0xfff4c6cb).forGetter(InfusedBeverageComponent::color)
+			ColorHelper.CODEC.optionalFieldOf("color", 0xfff4c6cb).forGetter(InfusedBeverageComponent::color)
 	).apply(i, InfusedBeverageComponent::new));
 	
 	public static final StreamCodec<ByteBuf, InfusedBeverageComponent> STREAM_CODEC = StreamCodec.composite(

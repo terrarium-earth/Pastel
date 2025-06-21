@@ -2,20 +2,20 @@ package earth.terrarium.pastel.blocks.fluid;
 
 import earth.terrarium.pastel.blocks.decay.BlackMateriaBlock;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
-import earth.terrarium.pastel.registries.SpectrumBiomes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
-import earth.terrarium.pastel.registries.SpectrumFluids;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBiomes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelFluidTags;
+import earth.terrarium.pastel.registries.PastelFluids;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -51,36 +51,36 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidType;
 
-public abstract class MidnightSolutionFluid extends SpectrumFluid {
+public abstract class MidnightSolutionFluid extends PastelFluid {
 	
 	@Override
 	public Fluid getSource() {
-		return SpectrumFluids.MIDNIGHT_SOLUTION.get();
+		return PastelFluids.MIDNIGHT_SOLUTION.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return SpectrumFluids.FLOWING_MIDNIGHT_SOLUTION.get();
+		return PastelFluids.FLOWING_MIDNIGHT_SOLUTION.get();
 	}
 	
 	@Override
 	public Item getBucket() {
-		return SpectrumItems.MIDNIGHT_SOLUTION_BUCKET.get();
+		return PastelItems.MIDNIGHT_SOLUTION_BUCKET.get();
 	}
 
 	@Override
 	public FluidType getFluidType() {
-		return SpectrumFluids.MIDNIGHT_SOLUTION_TYPE.get();
+		return PastelFluids.MIDNIGHT_SOLUTION_TYPE.get();
 	}
 
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return SpectrumBlocks.MIDNIGHT_SOLUTION.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return PastelBlocks.MIDNIGHT_SOLUTION.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == SpectrumFluids.MIDNIGHT_SOLUTION.get() || fluid == SpectrumFluids.FLOWING_MIDNIGHT_SOLUTION.get();
+		return fluid == PastelFluids.MIDNIGHT_SOLUTION.get() || fluid == PastelFluids.FLOWING_MIDNIGHT_SOLUTION.get();
 	}
 	
 	@Override
@@ -89,7 +89,7 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 		BlockPos topPos = pos.above();
 		BlockState topState = world.getBlockState(topPos);
 		if (topState.isAir() && !topState.isSolidRender(world, topPos) && random.nextInt(2000) == 0) {
-			world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SpectrumSoundEvents.MIDNIGHT_SOLUTION_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
+			world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), PastelSoundEvents.MIDNIGHT_SOLUTION_AMBIENT, SoundSource.BLOCKS, 0.2F + random.nextFloat() * 0.2F, 0.9F + random.nextFloat() * 0.15F, false);
 		}
 	}
 	
@@ -123,12 +123,12 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	
 	@Override
 	public ParticleOptions getDripParticle() {
-		return SpectrumParticleTypes.DRIPPING_MIDNIGHT_SOLUTION;
+		return PastelParticleTypes.DRIPPING_MIDNIGHT_SOLUTION;
 	}
 	
 	@Override
 	public ParticleOptions getSplashParticle() {
-		return SpectrumParticleTypes.MIDNIGHT_SOLUTION_SPLASH;
+		return PastelParticleTypes.MIDNIGHT_SOLUTION_SPLASH;
 	}
 	
 	
@@ -141,17 +141,17 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 				if (!livingEntity.isDeadOrDying() && world.getGameTime() % 20 == 0) {
 					var damageMult = 1F;
 					
-					if (world.getBiome(pos).is(SpectrumBiomes.BLACK_LANGAST))
+					if (world.getBiome(pos).is(PastelBiomes.BLACK_LANGAST))
 						damageMult = 9F;
 					
-					if (livingEntity.isEyeInFluid(SpectrumFluidTags.MIDNIGHT_SOLUTION)) {
+					if (livingEntity.isEyeInFluid(PastelFluidTags.MIDNIGHT_SOLUTION)) {
 						livingEntity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 50, 0));
-						livingEntity.hurt(SpectrumDamageTypes.midnightSolution(world), 2 * damageMult);
+						livingEntity.hurt(PastelDamageTypes.midnightSolution(world), 2 * damageMult);
 					} else {
-						livingEntity.hurt(SpectrumDamageTypes.midnightSolution(world), damageMult);
+						livingEntity.hurt(PastelDamageTypes.midnightSolution(world), damageMult);
 					}
 					if (livingEntity.isDeadOrDying()) {
-						livingEntity.spawnAtLocation(SpectrumItems.MIDNIGHT_CHIP.get().getDefaultInstance());
+						livingEntity.spawnAtLocation(PastelItems.MIDNIGHT_CHIP.get().getDefaultInstance());
 					}
 				}
 			} else if (entity instanceof ItemEntity itemEntity && !itemEntity.hasPickUpDelay()) {
@@ -164,7 +164,7 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 	
 	@Override
 	public RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType() {
-		return SpectrumRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING;
+		return PastelRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING;
 	}
 	
 	private static final int EXPERIENCE_DISENCHANT_RETURN_DIV = 3;
@@ -177,16 +177,16 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 		if (!enchantments.isEmpty()) {
 			int randomEnchantmentIndex = world.random.nextInt(enchantments.size());
 			Object2IntMap.Entry<Holder<Enchantment>> entryToRemove = enchantments.entrySet().stream().toList().get(randomEnchantmentIndex);
-			Tuple<ItemStack, Integer> result = SpectrumEnchantmentHelper.removeEnchantments(itemStack, entryToRemove.getKey());
+			Tuple<ItemStack, Integer> result = PastelEnchantmentHelper.removeEnchantments(itemStack, entryToRemove.getKey());
 			
 			if (result.getB() > 0) {
 				spawnXP(world, itemEntity, EnchanterBlockEntity.getEnchantingPrice(itemStack, entryToRemove.getKey(), entryToRemove.getIntValue()));
 				itemEntity.setItem(result.getA());
 				itemEntity.setDefaultPickUpDelay();
 			}
-		} else if (itemStack.is(SpectrumItems.ENCHANTMENT_CANVAS.get()) && itemStack.has(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS)) {
-			ItemEnchantments canvasEnchantments = itemStack.get(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS);
-			Item boundItem = BuiltInRegistries.ITEM.get(itemStack.get(SpectrumDataComponentTypes.BOUND_ITEM));
+		} else if (itemStack.is(PastelItems.ENCHANTMENT_CANVAS.get()) && itemStack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS)) {
+			ItemEnchantments canvasEnchantments = itemStack.get(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
+			Item boundItem = BuiltInRegistries.ITEM.get(itemStack.get(PastelDataComponentTypes.BOUND_ITEM));
 			if (!canvasEnchantments.isEmpty()) {
 				int randomEnchantmentIndex = world.random.nextInt(enchantments.size());
 				Object2IntMap.Entry<Holder<Enchantment>> entryToRemove = enchantments.entrySet().stream().toList().get(randomEnchantmentIndex);
@@ -198,9 +198,9 @@ public abstract class MidnightSolutionFluid extends SpectrumFluid {
 				
 				ItemEnchantments targetEnchants = builder.toImmutable();
 				if (targetEnchants.isEmpty()) {
-					itemStack.remove(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS);
+					itemStack.remove(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
 				} else {
-					itemStack.set(SpectrumDataComponentTypes.CANVAS_ENCHANTMENTS, targetEnchants);
+					itemStack.set(PastelDataComponentTypes.CANVAS_ENCHANTMENTS, targetEnchants);
 				}
 				itemEntity.setDefaultPickUpDelay();
 			}

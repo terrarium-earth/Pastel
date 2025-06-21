@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.entity.render;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.entity.EggLayingWoolyPigEntity;
 import earth.terrarium.pastel.entity.models.EggLayingWoolyPigEntityModel;
-import earth.terrarium.pastel.registries.client.SpectrumModelLayers;
+import earth.terrarium.pastel.registries.client.PastelModelLayers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -13,11 +13,11 @@ import net.minecraft.resources.ResourceLocation;
 @OnlyIn(Dist.CLIENT)
 public class EggLayingWoolyPigEntityRenderer extends MobRenderer<EggLayingWoolyPigEntity, EggLayingWoolyPigEntityModel> {
 	
-	public static final ResourceLocation TEXTURE = SpectrumCommon.locate("textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig.png");
-	public static final ResourceLocation TEXTURE_BLINKING = SpectrumCommon.locate("textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig_blink.png");
+	public static final ResourceLocation TEXTURE = PastelCommon.locate("textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig.png");
+	public static final ResourceLocation TEXTURE_BLINKING = PastelCommon.locate("textures/entity/egg_laying_wooly_pig/egg_laying_wooly_pig_blink.png");
 	
 	public EggLayingWoolyPigEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, new EggLayingWoolyPigEntityModel(context.bakeLayer(SpectrumModelLayers.WOOLY_PIG)), 0.6F);
+		super(context, new EggLayingWoolyPigEntityModel(context.bakeLayer(PastelModelLayers.WOOLY_PIG)), 0.6F);
 		this.addLayer(new EggLayingWoolyPigWoolFeatureRenderer(this, context.getModelSet()));
 	}
 	

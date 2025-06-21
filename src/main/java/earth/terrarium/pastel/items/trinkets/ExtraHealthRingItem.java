@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import com.google.common.collect.Multimap;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.FixedSingleInkStorage;
 import top.theillusivec4.curios.api.SlotContext;
@@ -9,7 +9,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -21,7 +20,7 @@ import java.util.List;
 public class ExtraHealthRingItem extends InkDrainTrinketItem {
 	
 	public ExtraHealthRingItem(Properties settings) {
-		super(settings, SpectrumCommon.locate("unlocks/trinkets/heartsingers_reward"), InkColors.PINK);
+		super(settings, PastelCommon.locate("unlocks/trinkets/heartsingers_reward"), InkColors.PINK);
 	}
 
 	@Override
@@ -30,7 +29,7 @@ public class ExtraHealthRingItem extends InkDrainTrinketItem {
 		super.appendHoverText(stack, context, tooltip, type);
 	}
 	
-	public static ResourceLocation HEALTH_ATTRIBUTE_ID = SpectrumCommon.locate("heartsingers_reward_health");
+	public static ResourceLocation HEALTH_ATTRIBUTE_ID = PastelCommon.locate("heartsingers_reward_health");
 
 	@Override
 	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {

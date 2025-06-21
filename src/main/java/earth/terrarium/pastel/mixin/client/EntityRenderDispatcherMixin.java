@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -49,8 +49,8 @@ public abstract class EntityRenderDispatcherMixin {
 	
 	@Unique
 	private void spectrum$renderPrimordialFire(PoseStack matrices, MultiBufferSource vertexConsumers, Entity entity) {
-		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(SpectrumCommon.locate("block/primordial_fire_0"));
-		TextureAtlasSprite sprite2 = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(SpectrumCommon.locate("block/primordial_fire_1"));
+		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(PastelCommon.locate("block/primordial_fire_0"));
+		TextureAtlasSprite sprite2 = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(PastelCommon.locate("block/primordial_fire_1"));
 		matrices.pushPose();
 		float f = entity.getBbWidth() * 1.4F;
 		matrices.scale(f, f, f);

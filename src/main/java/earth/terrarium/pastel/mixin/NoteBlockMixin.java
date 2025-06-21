@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.blocks.mob_head.SpectrumSkullBlock;
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -17,8 +17,8 @@ public abstract class NoteBlockMixin {
 	@Inject(method = "getCustomSoundId", at = @At("HEAD"), cancellable = true)
 	protected void spectrum$customNoteBlockSound(Level world, BlockPos pos, CallbackInfoReturnable<ResourceLocation> cir) {
 		BlockState state = world.getBlockState(pos.above());
-		if (state.getBlock() instanceof SpectrumSkullBlock spectrumSkullBlock) {
-			cir.setReturnValue(spectrumSkullBlock.getType().getNoteBlockSound());
+		if (state.getBlock() instanceof PastelSkullBlock pastelSkullBlock) {
+			cir.setReturnValue(pastelSkullBlock.getType().getNoteBlockSound());
 		}
 	}
 	

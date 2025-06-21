@@ -3,8 +3,8 @@ package earth.terrarium.pastel.worldgen.features;
 import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.blocks.jade_vines.JadeiteLotusFlowerBlock;
 import earth.terrarium.pastel.blocks.jade_vines.JadeiteLotusStemBlock;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -29,7 +29,7 @@ public class JadeiteLotusFeature extends Feature<JadeiteLotusFeatureConfig> {
     
         var floorState = world.getBlockState(inverted ? origin.below() : origin.above());
     
-        if (!(floorState.is(BlockTags.DIRT) || floorState.is(SpectrumBlockTags.BASE_STONE_DEEPER_DOWN)))
+        if (!(floorState.is(BlockTags.DIRT) || floorState.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN)))
             return false;
     
         // try out how far we can grow
@@ -70,10 +70,10 @@ public class JadeiteLotusFeature extends Feature<JadeiteLotusFeatureConfig> {
         
         for (int height = 0; height < stemHeight; height++) {
             if (height == 0) {
-                this.setBlock(world, stemPointer, SpectrumBlocks.JADEITE_LOTUS_STEM.get().defaultBlockState().setValue(JadeiteLotusStemBlock.INVERTED, inverted));
+                this.setBlock(world, stemPointer, PastelBlocks.JADEITE_LOTUS_STEM.get().defaultBlockState().setValue(JadeiteLotusStemBlock.INVERTED, inverted));
                 topStem = true;
             } else if (height == stemHeight - 1) {
-				this.setBlock(world, stemPointer, SpectrumBlocks.JADEITE_LOTUS_FLOWER.get().defaultBlockState().setValue(JadeiteLotusFlowerBlock.FACING, inverted ? Direction.UP : Direction.DOWN));
+				this.setBlock(world, stemPointer, PastelBlocks.JADEITE_LOTUS_FLOWER.get().defaultBlockState().setValue(JadeiteLotusFlowerBlock.FACING, inverted ? Direction.UP : Direction.DOWN));
             } else {
                 this.setBlock(world, stemPointer, JadeiteLotusStemBlock.getStemVariant(topStem, inverted));
                 topStem = !topStem;

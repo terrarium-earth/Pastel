@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ImmutableFarmlandBlock extends SpectrumFarmlandBlock {
+public class ImmutableFarmlandBlock extends PastelFarmlandBlock {
 
 	public ImmutableFarmlandBlock(Properties settings, BlockState bareState) {
 		super(settings, bareState);

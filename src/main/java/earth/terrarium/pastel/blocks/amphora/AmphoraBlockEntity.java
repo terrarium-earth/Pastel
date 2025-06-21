@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.blocks.amphora;
 
 import earth.terrarium.pastel.capabilities.*;
-import earth.terrarium.pastel.inventories.GenericSpectrumContainerScreenHandler;
+import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -30,7 +30,7 @@ public class AmphoraBlockEntity extends RandomizableContainerBlockEntity impleme
 	private final ContainerOpenersCounter stateManager;
 	
 	public AmphoraBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.AMPHORA.get(), pos, state);
+		super(PastelBlockEntities.AMPHORA.get(), pos, state);
 		
 		this.inventory = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
 		this.stateManager = new ContainerOpenersCounter() {
@@ -101,7 +101,7 @@ public class AmphoraBlockEntity extends RandomizableContainerBlockEntity impleme
 	
 	@Override
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-		return GenericSpectrumContainerScreenHandler.createGeneric9x6(syncId, playerInventory, this, ScreenBackgroundVariant.EARLYGAME);
+		return GenericPastelContainerScreenHandler.createGeneric9x6(syncId, playerInventory, this, ScreenBackgroundVariant.EARLYGAME);
 	}
 	
 	@Override

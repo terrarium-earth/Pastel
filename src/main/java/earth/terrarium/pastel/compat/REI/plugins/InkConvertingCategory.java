@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -21,12 +21,12 @@ public class InkConvertingCategory extends GatedDisplayCategory<InkConvertingDis
 	
 	@Override
 	public CategoryIdentifier<? extends InkConvertingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.INK_CONVERTING;
+		return PastelPlugins.INK_CONVERTING;
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.COLOR_PICKER.get());
+		return EntryStacks.of(PastelBlocks.COLOR_PICKER.get());
 	}
 	
 	@Override

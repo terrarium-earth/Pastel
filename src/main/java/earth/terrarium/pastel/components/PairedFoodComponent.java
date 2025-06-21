@@ -2,7 +2,7 @@ package earth.terrarium.pastel.components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -61,7 +61,7 @@ public record PairedFoodComponent(Holder<Item> item, boolean consumeAndApplyRequ
 		}
 		
 		if (player instanceof ServerPlayer serverPlayer) {
-			SpectrumAdvancementCriteria.CONDITIONAL_FOOD_EATEN.trigger(serverPlayer, eatenStack, foundRequiredStack);
+			PastelAdvancementCriteria.CONDITIONAL_FOOD_EATEN.trigger(serverPlayer, eatenStack, foundRequiredStack);
 		}
 	}
 	

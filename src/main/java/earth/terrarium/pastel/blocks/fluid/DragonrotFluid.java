@@ -1,16 +1,16 @@
 package earth.terrarium.pastel.blocks.fluid;
 
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
-import earth.terrarium.pastel.registries.SpectrumFluids;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
+import earth.terrarium.pastel.registries.PastelFluidTags;
+import earth.terrarium.pastel.registries.PastelFluids;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.BlockPos;
@@ -35,36 +35,36 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.FluidType;
 
-public abstract class DragonrotFluid extends SpectrumFluid {
+public abstract class DragonrotFluid extends PastelFluid {
 
 	@Override
 	public Fluid getSource() {
-		return SpectrumFluids.DRAGONROT.get();
+		return PastelFluids.DRAGONROT.get();
 	}
 	
 	@Override
 	public Fluid getFlowing() {
-		return SpectrumFluids.FLOWING_DRAGONROT.get();
+		return PastelFluids.FLOWING_DRAGONROT.get();
 	}
 	
 	@Override
 	public Item getBucket() {
-		return SpectrumItems.DRAGONROT_BUCKET.get();
+		return PastelItems.DRAGONROT_BUCKET.get();
 	}
 
 	@Override
 	public FluidType getFluidType() {
-		return SpectrumFluids.DRAGONROT_TYPE.get();
+		return PastelFluids.DRAGONROT_TYPE.get();
 	}
 
 	@Override
 	protected BlockState createLegacyBlock(FluidState fluidState) {
-		return SpectrumBlocks.DRAGONROT.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
+		return PastelBlocks.DRAGONROT.get().defaultBlockState().setValue(BlockStateProperties.LEVEL, getLegacyLevel(fluidState));
 	}
 	
 	@Override
 	public boolean isSame(Fluid fluid) {
-		return fluid == SpectrumFluids.DRAGONROT.get() || fluid == SpectrumFluids.FLOWING_DRAGONROT.get();
+		return fluid == PastelFluids.DRAGONROT.get() || fluid == PastelFluids.FLOWING_DRAGONROT.get();
 	}
 	
 	@Override
@@ -106,12 +106,12 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 	
 	@Override
 	public ParticleOptions getDripParticle() {
-		return SpectrumParticleTypes.DRIPPING_DRAGONROT;
+		return PastelParticleTypes.DRIPPING_DRAGONROT;
 	}
 	
 	@Override
 	public ParticleOptions getSplashParticle() {
-		return SpectrumParticleTypes.DRAGONROT_SPLASH;
+		return PastelParticleTypes.DRAGONROT_SPLASH;
 	}
 	
 	
@@ -122,20 +122,20 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 		if (world instanceof ServerLevel serverWorld && entity instanceof LivingEntity livingEntity) {
 			// just check every 20 ticks for performance
 			if (!livingEntity.isDeadOrDying() && world.getGameTime() % 20 == 0 && !(livingEntity instanceof Enemy)) {
-				var dragon = entity.getType().is(SpectrumEntityTypeTags.DRACONIC);
+				var dragon = entity.getType().is(PastelEntityTypeTags.DRACONIC);
 				var damage = dragon ? 30 : 6;
 				var ticks = dragon ? 20 : 5;
 				var cut = dragon ? 100 : 40;
 
-				if (livingEntity.isEyeInFluid(SpectrumFluidTags.DRAGONROT)) {
-					livingEntity.hurt(SpectrumDamageTypes.dragonrot(world), damage);
+				if (livingEntity.isEyeInFluid(PastelFluidTags.DRAGONROT)) {
+					livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage);
 				} else {
-					livingEntity.hurt(SpectrumDamageTypes.dragonrot(world), damage / 2F);
+					livingEntity.hurt(PastelDamageTypes.dragonrot(world), damage / 2F);
 				}
 				if (!livingEntity.isDeadOrDying()) {
-					MobEffectInstance existingEffect = livingEntity.getEffect(SpectrumStatusEffects.LIFE_DRAIN);
+					MobEffectInstance existingEffect = livingEntity.getEffect(PastelStatusEffects.LIFE_DRAIN);
 					if (existingEffect == null) {
-						livingEntity.addEffect(new MobEffectInstance(SpectrumStatusEffects.LIFE_DRAIN, 600, 0));
+						livingEntity.addEffect(new MobEffectInstance(PastelStatusEffects.LIFE_DRAIN, 600, 0));
 					}
 					else if(existingEffect.getDuration() < 500) {
 						((MobEffectInstanceInjector) existingEffect).spectrum$setDuration(300);
@@ -143,15 +143,15 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 						serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
 					}
 
-					existingEffect = livingEntity.getEffect(SpectrumStatusEffects.DEADLY_POISON);
+					existingEffect = livingEntity.getEffect(PastelStatusEffects.DEADLY_POISON);
 					if (existingEffect == null || existingEffect.getDuration() < 80) {
-						livingEntity.addEffect(new MobEffectInstance(SpectrumStatusEffects.DEADLY_POISON, 160, 0));
+						livingEntity.addEffect(new MobEffectInstance(PastelStatusEffects.DEADLY_POISON, 160, 0));
 					}
 
-					existingEffect = livingEntity.getEffect(SpectrumStatusEffects.IMMUNITY);
+					existingEffect = livingEntity.getEffect(PastelStatusEffects.IMMUNITY);
 					if (existingEffect != null) {
 						if (existingEffect.getDuration() <= cut) {
-							livingEntity.removeEffect(SpectrumStatusEffects.IMMUNITY);
+							livingEntity.removeEffect(PastelStatusEffects.IMMUNITY);
 						} else {
 							((MobEffectInstanceInjector) existingEffect).spectrum$setDuration(existingEffect.getDuration() - cut);
 							serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
@@ -161,9 +161,9 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 					if (!dragon)
 						return;
 
-					existingEffect = livingEntity.getEffect(SpectrumStatusEffects.DENSITY);
+					existingEffect = livingEntity.getEffect(PastelStatusEffects.DENSITY);
 					if (existingEffect == null || existingEffect.getDuration() < 120) {
-						livingEntity.addEffect(new MobEffectInstance(SpectrumStatusEffects.DENSITY, 2000, 1));
+						livingEntity.addEffect(new MobEffectInstance(PastelStatusEffects.DENSITY, 2000, 1));
 					}
 				}
 			}
@@ -172,7 +172,7 @@ public abstract class DragonrotFluid extends SpectrumFluid {
 	
 	@Override
 	public RecipeType<? extends FluidConvertingRecipe> getDippingRecipeType() {
-		return SpectrumRecipeTypes.DRAGONROT_CONVERTING;
+		return PastelRecipeTypes.DRAGONROT_CONVERTING;
 	}
 	
 	public static class Flowing extends DragonrotFluid {

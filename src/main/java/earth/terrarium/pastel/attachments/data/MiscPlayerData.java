@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.*;
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
 import earth.terrarium.pastel.api.item.SleepAlteringItem;
 import earth.terrarium.pastel.networking.s2c_payloads.SyncMentalPresencePayload;
-import earth.terrarium.pastel.registries.SpectrumEntityAttributes;
+import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.*;
 import net.minecraft.network.*;
@@ -69,7 +69,7 @@ public class MiscPlayerData {
         tickSwordMechanics();
 
         if (!player.level().isClientSide()) {
-            var fortitude = player.getAttributeValue(SpectrumEntityAttributes.MENTAL_PRESENCE);
+            var fortitude = player.getAttributeValue(PastelEntityAttributes.MENTAL_PRESENCE);
             if (lastSyncedSleepPotency != fortitude) {
                 lastSyncedSleepPotency = fortitude;
                 SyncMentalPresencePayload.sendMentalPresenceSync((ServerPlayer) player, fortitude);

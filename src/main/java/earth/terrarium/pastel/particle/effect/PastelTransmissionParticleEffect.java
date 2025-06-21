@@ -3,7 +3,7 @@ package earth.terrarium.pastel.particle.effect;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
@@ -35,7 +35,7 @@ public record PastelTransmissionParticleEffect(List<BlockPos> nodePositions, Ite
 	
 	@Override
 	public ParticleType<PastelTransmissionParticleEffect> getType() {
-		return SpectrumParticleTypes.PASTEL_TRANSMISSION;
+		return PastelParticleTypes.PASTEL_TRANSMISSION;
 	}
 	
 	@Override

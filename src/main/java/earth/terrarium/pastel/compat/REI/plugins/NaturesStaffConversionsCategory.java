@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelItems;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -21,17 +21,17 @@ public class NaturesStaffConversionsCategory extends GatedDisplayCategory<Nature
 	
 	@Override
 	public CategoryIdentifier<? extends NaturesStaffConversionsDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.NATURES_STAFF;
+		return PastelPlugins.NATURES_STAFF;
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.NATURES_STAFF.get());
+		return EntryStacks.of(PastelItems.NATURES_STAFF.get());
 	}
 	
 	@Override
 	public Component getTitle() {
-		return SpectrumItems.NATURES_STAFF.get().getDescription();
+		return PastelItems.NATURES_STAFF.get().getDescription();
 	}
 	
 	@Override

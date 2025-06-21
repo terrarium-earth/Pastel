@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items;
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import earth.terrarium.pastel.api.item.CreativeOnlyItem;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.registries.SpectrumMultiblocks;
+import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
@@ -27,7 +27,7 @@ public class StructurePlacerItem extends Item implements CreativeOnlyItem {
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		if (context.getPlayer() != null && context.getPlayer().isCreative()) {
-			Multiblock multiblock = SpectrumMultiblocks.get(multiBlockIdentifier);
+			Multiblock multiblock = PastelMultiblocks.get(multiBlockIdentifier);
 			if (multiblock != null) {
 				Rotation blockRotation = Support.rotationFromDirection(context.getHorizontalDirection());
 				multiblock.place(context.getLevel(), context.getClickedPos().above(), blockRotation);

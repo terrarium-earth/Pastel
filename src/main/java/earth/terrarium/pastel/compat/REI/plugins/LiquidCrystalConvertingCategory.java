@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelItems;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
@@ -14,12 +14,12 @@ public class LiquidCrystalConvertingCategory extends FluidConvertingCategory<Liq
 	
 	@Override
 	public CategoryIdentifier<? extends LiquidCrystalConvertingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.LIQUID_CRYSTAL_CONVERTING;
+		return PastelPlugins.LIQUID_CRYSTAL_CONVERTING;
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumItems.LIQUID_CRYSTAL_BUCKET.get());
+		return EntryStacks.of(PastelItems.LIQUID_CRYSTAL_BUCKET.get());
 	}
 	
 	@Override

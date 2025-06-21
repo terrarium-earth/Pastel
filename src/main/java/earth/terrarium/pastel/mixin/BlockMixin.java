@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import earth.terrarium.pastel.api.interaction.ResonanceProcessor;
 import earth.terrarium.pastel.helpers.enchantments.ExuberanceHelper;
 import earth.terrarium.pastel.helpers.enchantments.FoundryHelper;
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -42,25 +42,25 @@ public abstract class BlockMixin {
 		List<ItemStack> droppedStacks = original;
 		
 		// Voiding curse: no drops
-		if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.NO_BLOCK_DROPS)) {
+		if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.NO_BLOCK_DROPS)) {
 			world.sendParticles(ParticleTypes.SMOKE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 10, 0.5, 0.5, 0.5, 0.05);
 			droppedStacks.clear();
 			return droppedStacks;
 		}
 		
 		// Resonance: drop self or modify drops for some items
-		if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.RESONANT_BLOCK_DROPS)) {
+		if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.RESONANT_BLOCK_DROPS)) {
 			ResonanceProcessor.applyResonance(world.registryAccess(), state, blockEntity, droppedStacks);
 		}
 		
 		if (!droppedStacks.isEmpty()) {
 			// Foundry enchant: try smelting recipe for each stack
-			if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.SMELTS_MORE_LOOT)) {
+			if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.SMELTS_MORE_LOOT)) {
 				droppedStacks = FoundryHelper.applyFoundry(world, droppedStacks);
 			}
 			
 			// Inventory insertion enchant: add it to the player's inventory if there is room
-			if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.INVENTORY_INSERTION_EFFECT)) {
+			if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.INVENTORY_INSERTION_EFFECT)) {
 				List<ItemStack> leftoverReturnStacks = new ArrayList<>();
 				
 				if (entity instanceof Player playerEntity) {

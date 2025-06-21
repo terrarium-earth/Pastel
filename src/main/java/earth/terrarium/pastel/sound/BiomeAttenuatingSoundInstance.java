@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
-import earth.terrarium.pastel.registries.SpectrumBiomes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBiomes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -150,30 +150,30 @@ public class BiomeAttenuatingSoundInstance extends AbstractSoundInstance impleme
             LAMENTS = null;
         }
 
-        if (biome.is(SpectrumBiomes.HOWLING_SPIRES)) {
+        if (biome.is(PastelBiomes.HOWLING_SPIRES)) {
             if (WIND_HIGH == null) {
-                WIND_HIGH = new BiomeAttenuatingSoundInstance(SpectrumBiomes.HOWLING_SPIRES, SpectrumSoundEvents.HOWLING_WIND_HIGH, 0.525F, false);
+                WIND_HIGH = new BiomeAttenuatingSoundInstance(PastelBiomes.HOWLING_SPIRES, PastelSoundEvents.HOWLING_WIND_HIGH, 0.525F, false);
                 client.getSoundManager().play(WIND_HIGH);
             }
 
             if (WIND_LOW == null) {
-                WIND_LOW = new BiomeAttenuatingSoundInstance(SpectrumBiomes.HOWLING_SPIRES, SpectrumSoundEvents.HOWLING_WIND_LOW, 1.8F, true);
+                WIND_LOW = new BiomeAttenuatingSoundInstance(PastelBiomes.HOWLING_SPIRES, PastelSoundEvents.HOWLING_WIND_LOW, 1.8F, true);
                 client.getSoundManager().play(WIND_LOW);
             }
         }
-        else if (biome.is(SpectrumBiomes.DEEP_DRIPSTONE_CAVES)) {
+        else if (biome.is(PastelBiomes.DEEP_DRIPSTONE_CAVES)) {
             if (SHOWER == null) {
-                SHOWER = new BiomeAttenuatingSoundInstance(SpectrumBiomes.DEEP_DRIPSTONE_CAVES, SpectrumSoundEvents.SHOWER, 0.5F, false);
+                SHOWER = new BiomeAttenuatingSoundInstance(PastelBiomes.DEEP_DRIPSTONE_CAVES, PastelSoundEvents.SHOWER, 0.5F, false);
                 client.getSoundManager().play(SHOWER);
             }
         }
-        else if (biome.is(SpectrumBiomes.DRAGONROT_SWAMP)) {
+        else if (biome.is(PastelBiomes.DRAGONROT_SWAMP)) {
             if (LAMENTS == null) {
-                LAMENTS = new BiomeAttenuatingSoundInstance(SpectrumBiomes.DRAGONROT_SWAMP, SpectrumSoundEvents.LAMENTS, 1.25F, true);
+                LAMENTS = new BiomeAttenuatingSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSoundEvents.LAMENTS, 1.25F, true);
                 client.getSoundManager().play(LAMENTS);
             }
             if (SHOWER == null) {
-                SHOWER = new BiomeAttenuatingSoundInstance(SpectrumBiomes.DRAGONROT_SWAMP, SpectrumSoundEvents.SHOWER, 1F, false);
+                SHOWER = new BiomeAttenuatingSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSoundEvents.SHOWER, 1F, false);
                 client.getSoundManager().play(SHOWER);
             }
         }

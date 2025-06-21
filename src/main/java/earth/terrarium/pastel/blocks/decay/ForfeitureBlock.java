@@ -1,10 +1,10 @@
 package earth.terrarium.pastel.blocks.decay;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
@@ -22,7 +22,7 @@ public class ForfeitureBlock extends DecayBlock {
 	// A special version of ruin that spreads indefinitely, even through air.
 	// There are no brakes on the Forfeiture train
 	public ForfeitureBlock(Properties settings) {
-		super(settings, SpectrumCommon.CONFIG.ForfeitureDecayTickRate, SpectrumCommon.CONFIG.ForfeitureCanDestroyBlockEntities, 4, 7.5F);
+		super(settings, PastelCommon.CONFIG.ForfeitureDecayTickRate, PastelCommon.CONFIG.ForfeitureCanDestroyBlockEntities, 4, 7.5F);
 		registerDefaultState(getStateDefinition().any().setValue(CONVERSION, Conversion.NONE));
 	}
 
@@ -36,7 +36,7 @@ public class ForfeitureBlock extends DecayBlock {
 		super.setPlacedBy(world, pos, state, placer, itemStack);
 		
 		if (!world.isClientSide) {
-			world.playSound(null, pos, SpectrumSoundEvents.FORFEITURE_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
+			world.playSound(null, pos, PastelSoundEvents.FORFEITURE_PLACED, SoundSource.BLOCKS, 0.5F, 1.0F);
 		} else {
 			RandomSource random = world.getRandom();
 			world.addParticle(ParticleTypes.EXPLOSION, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ((-1.0F + random.nextFloat() * 2.0F) / 12.0F), 0.05, ((-1.0F + random.nextFloat() * 2.0F) / 12.0F));
@@ -50,13 +50,13 @@ public class ForfeitureBlock extends DecayBlock {
 	
 	@Override
 	protected @Nullable BlockState getSpreadState(BlockState stateToSpreadFrom, BlockState stateToSpreadTo, Level world, BlockPos stateToSpreadToPos) {
-		if (stateToSpreadTo.is(SpectrumBlockTags.FORFEITURE_SAFE)) {
+		if (stateToSpreadTo.is(PastelBlockTags.FORFEITURE_SAFE)) {
 			return null;
 		}
 		
-		if (stateToSpreadTo.is(SpectrumBlockTags.FORFEITURE_SPECIAL_CONVERSIONS)) {
+		if (stateToSpreadTo.is(PastelBlockTags.FORFEITURE_SPECIAL_CONVERSIONS)) {
 			return this.defaultBlockState().setValue(CONVERSION, Conversion.SPECIAL);
-		} else if (stateToSpreadTo.is(SpectrumBlockTags.FORFEITURE_CONVERSIONS)) {
+		} else if (stateToSpreadTo.is(PastelBlockTags.FORFEITURE_CONVERSIONS)) {
 			// Protect the end portal to not lock players in the dim
 			if (world.dimension().equals(Level.END) && Math.abs(stateToSpreadToPos.getX()) < 8 && Math.abs(stateToSpreadToPos.getZ()) < 8) {
 				return null;

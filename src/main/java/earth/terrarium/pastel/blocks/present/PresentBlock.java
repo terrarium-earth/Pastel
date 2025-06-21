@@ -2,12 +2,11 @@ package earth.terrarium.pastel.blocks.present;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.item.PresentUnpackBehavior;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayPresentOpeningParticlesPayload;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -229,7 +228,7 @@ public class PresentBlock extends BaseEntityBlock {
 		double posY = pos.getY() + 0.25;
 		double posZ = pos.getZ() + 0.5;
 		RandomSource random = world.random;
-		Vector3f colorVec = SpectrumColorHelper.colorIntToVec(color);
+		Vector3f colorVec = ColorHelper.colorIntToVec(color);
 		for (int i = 0; i < amount; i++) {
 			double randX = 0.35 - random.nextFloat() * 0.7;
 			double randY = random.nextFloat() * 0.7;

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.chests;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class CompactingChestBlock extends SpectrumChestBlock {
+public class CompactingChestBlock extends PastelChestBlock {
 
 	public static final MapCodec<CompactingChestBlock> CODEC = simpleCodec(CompactingChestBlock::new);
 
@@ -34,7 +34,7 @@ public class CompactingChestBlock extends SpectrumChestBlock {
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return createTickerHelper(type, SpectrumBlockEntities.COMPACTING_CHEST.get(), CompactingChestBlockEntity::tick);
+		return createTickerHelper(type, PastelBlockEntities.COMPACTING_CHEST.get(), CompactingChestBlockEntity::tick);
 	}
 	
 	@Override

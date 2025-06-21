@@ -1,9 +1,8 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.compat.emi.FluidIngredientEmi;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -24,7 +23,7 @@ public class TitrationBarrelEmiRecipeGated extends GatedSpectrumEmiRecipe<ITitra
 	protected final @Nullable List<EmiStack> displayedStacks;
 	
 	public TitrationBarrelEmiRecipeGated(ITitrationBarrelRecipe recipe) {
-		super(SpectrumEmiRecipeCategories.TITRATION_BARREL, recipe, 136, 50);
+		super(PastelEmiRecipeCategories.TITRATION_BARREL, recipe, 136, 50);
 		inputs = new ArrayList<>();
 		if (!recipe.getFluidInput().isEmpty()) {
 			inputs.add(FluidIngredientEmi.into(recipe.getFluidInput()));

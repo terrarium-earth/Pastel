@@ -1,14 +1,14 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.item.SlotReservingItem;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.helpers.enchantments.ImprovedCriticalHelper;
 import earth.terrarium.pastel.items.tools.DraconicTwinswordItem;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -64,7 +64,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 	private float damageMult = 1, velMult = 1;
 	
 	public DraconicTwinswordEntity(Level world) {
-		this(SpectrumEntityTypes.DRACONIC_TWINSWORD.get(), world);
+		this(PastelEntityTypes.DRACONIC_TWINSWORD.get(), world);
 	}
 	
 	public DraconicTwinswordEntity(EntityType<? extends ThrownTrident> entityType, Level world) {
@@ -142,7 +142,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 			setPropelled(true);
 			setRebounding(false);
 			((TridentEntityAccessor) this).spectrum$setDealtDamage(false);
-			playSound(SpectrumSoundEvents.METAL_HIT, 0.8F, 0.8F + random.nextFloat() * 0.4F);
+			playSound(PastelSoundEvents.METAL_HIT, 0.8F, 0.8F + random.nextFloat() * 0.4F);
 		} else {
 			jiggleTicks = 0;
 			jiggleIntensity = 8;
@@ -193,7 +193,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 		
 		var propelled = isPropelled();
 		ItemStack stack = getTrackedStack();
-		var channeling = SpectrumEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
+		var channeling = PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
 		Entity owner = this.getOwner();
 		
 		if (piercedEntities.contains(attacked))
@@ -203,7 +203,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 		damage = adjustDamage(damage, channeling);
 		boolean crit = false;
 		
-		DamageSource damageSource = SpectrumDamageTypes.impaling(level(), this, owner);
+		DamageSource damageSource = PastelDamageTypes.impaling(level(), this, owner);
 		if (level() instanceof ServerLevel serverWorld) {
 			damage *= EnchantmentHelper.modifyDamage(serverWorld, stack, attacked, damageSource, getDamage(stack));
 		}
@@ -229,10 +229,10 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 		}
 		
 		if (crit) {
-			this.playSound(SpectrumSoundEvents.CRITICAL_CRUNCH, 1F, 1.0F);
-			this.playSound(SpectrumSoundEvents.IMPACT_BASE, 1.8F, 0.5F);
+			this.playSound(PastelSoundEvents.CRITICAL_CRUNCH, 1F, 1.0F);
+			this.playSound(PastelSoundEvents.IMPACT_BASE, 1.8F, 0.5F);
 		} else {
-			this.playSound(SpectrumSoundEvents.IMPALING_HIT, 1F, 0.9F + random.nextFloat() * 0.2F);
+			this.playSound(PastelSoundEvents.IMPALING_HIT, 1F, 0.9F + random.nextFloat() * 0.2F);
 		}
 		
 		// We do a lil piercing
@@ -258,7 +258,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 	}
 	
 	private void applyInertiaEffects(ItemStack stack) {
-		var inertia = SpectrumEnchantmentHelper.getLevel(level().registryAccess(), SpectrumEnchantments.INERTIA, stack);
+		var inertia = PastelEnchantmentHelper.getLevel(level().registryAccess(), PastelEnchantments.INERTIA, stack);
 		if (inertia > 0) {
 			damageMult += inertia * 0.1675F;
 			if (velMult < 2) {
@@ -272,9 +272,9 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 		var pos = blockHitResult.getBlockPos();
 		var state = level().getBlockState(pos);
 		var stack = getTrackedStack();
-		var channeling = SpectrumEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
+		var channeling = PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
 		var damage = adjustDamage(getDamage(stack), channeling);
-		var damageSource = SpectrumDamageTypes.impaling(level(), this, getOwner());
+		var damageSource = PastelDamageTypes.impaling(level(), this, getOwner());
 		
 		var slime = state.is(Blocks.SLIME_BLOCK);
 		var bounce = (state.is(Blocks.SLIME_BLOCK) || state.getDestroySpeed(level(), pos) >= 25F) && !state.is(BlockTags.PLANKS) && !state.is(BlockTags.DIRT);
@@ -286,7 +286,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 				case Y -> setDeltaMovement(getDeltaMovement().multiply(boost, -boost, boost));
 				case Z -> setDeltaMovement(getDeltaMovement().multiply(boost, boost, -boost));
 			}
-			playSound(SpectrumSoundEvents.METAL_TAP, 1, 1.5F);
+			playSound(PastelSoundEvents.METAL_TAP, 1, 1.5F);
 			applyChannelingAOE(channeling, damage, null, damageSource);
 			travelingTicks = 0;
 			return;
@@ -295,7 +295,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 		if (!isRebounding() && !isPropelled() && bounce && getOwner() != null) {
 			travelingTicks = 0;
 			rebound(getOwner().position(), 0.105, 0.15);
-			playSound(SpectrumSoundEvents.METAL_TAP, 1, 1.5F);
+			playSound(PastelSoundEvents.METAL_TAP, 1, 1.5F);
 			return;
 		}
 		
@@ -349,7 +349,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 							1 + random.nextInt(2), 0, random.nextFloat() + 0.25F, 0, 0);
 				}
 				
-				world.playSeededSound(null, position().x, position().y, position().z, SpectrumSoundEvents.ELECTRIC_DISCHARGE, SoundSource.PLAYERS, 1F, 0.6F + random.nextFloat() * 0.2F, 0);
+				world.playSeededSound(null, position().x, position().y, position().z, PastelSoundEvents.ELECTRIC_DISCHARGE, SoundSource.PLAYERS, 1F, 0.6F + random.nextFloat() * 0.2F, 0);
 			}
 		}
 	}

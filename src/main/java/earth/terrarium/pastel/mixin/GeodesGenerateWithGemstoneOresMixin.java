@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlockTags;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -53,7 +53,7 @@ public abstract class GeodesGenerateWithGemstoneOresMixin {
 
 						BlockPos pos = context.origin().offset(xOffset, yOffset, zOffset);
 						BlockState state = world.getBlockState(pos);
-						if (state.is(SpectrumBlockTags.BLACKSLAG_ORE_REPLACEABLES)) {
+						if (state.is(PastelBlockTags.BLACKSLAG_ORE_REPLACEABLES)) {
 							world.setBlock(pos, blackslagOreBlockState, 3);
 						} else if (state.is(BlockTags.DEEPSLATE_ORE_REPLACEABLES)) {
 							world.setBlock(pos, deepslateOreBlockState, 3);
@@ -77,15 +77,15 @@ public abstract class GeodesGenerateWithGemstoneOresMixin {
 	private BlockState getGemstoneOreForGeodeBlock(BlockState blockState) {
 		Block block = blockState.getBlock();
 		if (block.equals(Blocks.AMETHYST_BLOCK)) {
-			return SpectrumBlocks.AMETHYST_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.CITRINE_BLOCK.get())) {
-			return SpectrumBlocks.CITRINE_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.TOPAZ_BLOCK.get())) {
-			return SpectrumBlocks.TOPAZ_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.ONYX_BLOCK.get())) {
-			return SpectrumBlocks.ONYX_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.MOONSTONE_BLOCK.get())) {
-			return SpectrumBlocks.MOONSTONE_ORE.get().defaultBlockState();
+			return PastelBlocks.AMETHYST_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.CITRINE_BLOCK.get())) {
+			return PastelBlocks.CITRINE_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.TOPAZ_BLOCK.get())) {
+			return PastelBlocks.TOPAZ_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.ONYX_BLOCK.get())) {
+			return PastelBlocks.ONYX_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.MOONSTONE_BLOCK.get())) {
+			return PastelBlocks.MOONSTONE_ORE.get().defaultBlockState();
 		}
 		return null;
 	}
@@ -101,15 +101,15 @@ public abstract class GeodesGenerateWithGemstoneOresMixin {
 	private BlockState getGemstoneDeepslateOreForGeodeBlock(BlockState blockState) {
 		Block block = blockState.getBlock();
 		if (block.equals(Blocks.AMETHYST_BLOCK)) {
-			return SpectrumBlocks.DEEPSLATE_AMETHYST_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.CITRINE_BLOCK.get())) {
-			return SpectrumBlocks.DEEPSLATE_CITRINE_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.TOPAZ_BLOCK.get())) {
-			return SpectrumBlocks.DEEPSLATE_TOPAZ_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.ONYX_BLOCK.get())) {
-			return SpectrumBlocks.DEEPSLATE_ONYX_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.MOONSTONE_BLOCK.get())) {
-			return SpectrumBlocks.DEEPSLATE_MOONSTONE_ORE.get().defaultBlockState();
+			return PastelBlocks.DEEPSLATE_AMETHYST_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.CITRINE_BLOCK.get())) {
+			return PastelBlocks.DEEPSLATE_CITRINE_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.TOPAZ_BLOCK.get())) {
+			return PastelBlocks.DEEPSLATE_TOPAZ_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.ONYX_BLOCK.get())) {
+			return PastelBlocks.DEEPSLATE_ONYX_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.MOONSTONE_BLOCK.get())) {
+			return PastelBlocks.DEEPSLATE_MOONSTONE_ORE.get().defaultBlockState();
 		}
 		return null;
 	}
@@ -125,15 +125,15 @@ public abstract class GeodesGenerateWithGemstoneOresMixin {
 	private BlockState getGemstoneBlackslagOreForGeodeBlock(BlockState blockState) {
 		Block block = blockState.getBlock();
 		if (block.equals(Blocks.AMETHYST_BLOCK)) {
-			return SpectrumBlocks.BLACKSLAG_AMETHYST_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.CITRINE_BLOCK.get())) {
-			return SpectrumBlocks.BLACKSLAG_CITRINE_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.TOPAZ_BLOCK.get())) {
-			return SpectrumBlocks.BLACKSLAG_TOPAZ_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.ONYX_BLOCK.get())) {
-			return SpectrumBlocks.BLACKSLAG_ONYX_ORE.get().defaultBlockState();
-		} else if (block.equals(SpectrumBlocks.MOONSTONE_BLOCK.get())) {
-			return SpectrumBlocks.BLACKSLAG_MOONSTONE_ORE.get().defaultBlockState();
+			return PastelBlocks.BLACKSLAG_AMETHYST_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.CITRINE_BLOCK.get())) {
+			return PastelBlocks.BLACKSLAG_CITRINE_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.TOPAZ_BLOCK.get())) {
+			return PastelBlocks.BLACKSLAG_TOPAZ_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.ONYX_BLOCK.get())) {
+			return PastelBlocks.BLACKSLAG_ONYX_ORE.get().defaultBlockState();
+		} else if (block.equals(PastelBlocks.MOONSTONE_BLOCK.get())) {
+			return PastelBlocks.BLACKSLAG_MOONSTONE_ORE.get().defaultBlockState();
 		}
 		return null;
 	}

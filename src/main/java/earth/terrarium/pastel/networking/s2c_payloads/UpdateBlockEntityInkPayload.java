@@ -3,9 +3,7 @@ package earth.terrarium.pastel.networking.s2c_payloads;
 import earth.terrarium.pastel.api.energy.InkStorage;
 import earth.terrarium.pastel.api.energy.InkStorageBlockEntity;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.core.BlockPos;
@@ -21,7 +19,7 @@ import java.util.Map;
 
 public record UpdateBlockEntityInkPayload(BlockPos pos, Map<InkColor, Long> storage, long currentTotal) implements CustomPacketPayload {
 	
-	public static final Type<UpdateBlockEntityInkPayload> ID = SpectrumC2SPackets.makeId("update_block_entity_ink");
+	public static final Type<UpdateBlockEntityInkPayload> ID = PastelC2SPackets.makeId("update_block_entity_ink");
 	public static final StreamCodec<FriendlyByteBuf, UpdateBlockEntityInkPayload> CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, UpdateBlockEntityInkPayload::pos,
 			ByteBufCodecs.map(HashMap::new, InkColor.STREAM_CODEC, ByteBufCodecs.VAR_LONG), UpdateBlockEntityInkPayload::storage,

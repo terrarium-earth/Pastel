@@ -1,18 +1,18 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
-import earth.terrarium.pastel.blocks.mob_head.SpectrumSkullBlock;
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.server.level.ServerLevel;
@@ -36,14 +36,14 @@ import java.util.Optional;
 public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 	
 	public MemoryToHeadRecipe() {
-		super("", false, Optional.of(SpectrumCommon.locate("unlocks/memory_to_head")),
-				IngredientStack.ofItems(SpectrumBlocks.MEMORY.get().asItem()), IngredientStack.ofItems(SpectrumItems.VEGETAL.get(), 4), IngredientStack.ofItems(SpectrumItems.QUITOXIC_POWDER.get(), 4),
+		super("", false, Optional.of(PastelCommon.locate("unlocks/memory_to_head")),
+				IngredientStack.ofItems(PastelBlocks.MEMORY.get().asItem()), IngredientStack.ofItems(PastelItems.VEGETAL.get(), 4), IngredientStack.ofItems(PastelItems.QUITOXIC_POWDER.get(), 4),
 				new ItemStack(Blocks.ZOMBIE_HEAD), 200, 1, true);
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SPIRIT_INSTILLER_MEMORY_TO_HEAD;
+		return PastelRecipeSerializers.SPIRIT_INSTILLER_MEMORY_TO_HEAD;
 	}
 	
 	@Override
@@ -70,14 +70,14 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 				LootParams.Builder builder = new LootParams.Builder(world)
 						.withParameter(LootContextParams.THIS_ENTITY, livingEntity)
 						.withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
-						.withParameter(LootContextParams.DAMAGE_SOURCE, SpectrumDamageTypes.mobHeadDrop(world)
+						.withParameter(LootContextParams.DAMAGE_SOURCE, PastelDamageTypes.mobHeadDrop(world)
 						);
 				
 				LootParams lootContextParameterSet = builder.create(LootContextParamSets.ENTITY);
 				List<ItemStack> loot = lootTable.getRandomItems(lootContextParameterSet, livingEntity.getLootTableSeed());
 				
 				for (ItemStack stack : loot) {
-					if (stack.is(SpectrumItemTags.SKULLS)) {
+					if (stack.is(PastelItemTags.SKULLS)) {
 						resultStack = stack;
 						break;
 					}
@@ -102,7 +102,7 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 		}
 		
 		Optional<EntityType<?>> optionalMemoryEntity = MemoryItem.getEntityType(instillerStack);
-		return optionalMemoryEntity.flatMap(SpectrumSkullBlock::getSkullType);
+		return optionalMemoryEntity.flatMap(PastelSkullBlock::getSkullType);
 	}
 	
 }

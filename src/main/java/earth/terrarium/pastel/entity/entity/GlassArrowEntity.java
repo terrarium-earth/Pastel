@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
-import earth.terrarium.pastel.entity.SpectrumTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
+import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
 import earth.terrarium.pastel.items.tools.GlassArrowVariant;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +28,7 @@ import net.minecraft.world.phys.Vec3;
 public class GlassArrowEntity extends AbstractArrow {
 	
 	private static final String VARIANT_STRING = "variant";
-	private static final EntityDataAccessor<GlassArrowVariant> VARIANT = SynchedEntityData.defineId(GlassArrowEntity.class, SpectrumTrackedDataHandlerRegistry.GLASS_ARROW_VARIANT);
+	private static final EntityDataAccessor<GlassArrowVariant> VARIANT = SynchedEntityData.defineId(GlassArrowEntity.class, PastelTrackedDataHandlerRegistry.GLASS_ARROW_VARIANT);
 	
 	public static final float DAMAGE_MODIFIER = 1.25F;
 	
@@ -37,12 +37,12 @@ public class GlassArrowEntity extends AbstractArrow {
 	}
 	
 	public GlassArrowEntity(Level world, LivingEntity owner, ItemStack stack, ItemStack shotFrom) {
-		super(SpectrumEntityTypes.GLASS_ARROW.get(), owner, world, stack, shotFrom);
+		super(PastelEntityTypes.GLASS_ARROW.get(), owner, world, stack, shotFrom);
 		setBaseDamage(getBaseDamage() * DAMAGE_MODIFIER);
 	}
 	
 	public GlassArrowEntity(Level world, double x, double y, double z, ItemStack stack, ItemStack shotFrom) {
-		super(SpectrumEntityTypes.GLASS_ARROW.get(), x, y, z, world, stack, shotFrom);
+		super(PastelEntityTypes.GLASS_ARROW.get(), x, y, z, world, stack, shotFrom);
 		setBaseDamage(getBaseDamage() * DAMAGE_MODIFIER);
 	}
 	
@@ -183,13 +183,13 @@ public class GlassArrowEntity extends AbstractArrow {
 	@Override
 	public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
-		nbt.putString(VARIANT_STRING, SpectrumRegistries.GLASS_ARROW_VARIANT.getKey(this.getVariant()).toString());
+		nbt.putString(VARIANT_STRING, PastelRegistries.GLASS_ARROW_VARIANT.getKey(this.getVariant()).toString());
 	}
 	
 	@Override
 	public void readAdditionalSaveData(CompoundTag nbt) {
 		super.readAdditionalSaveData(nbt);
-		GlassArrowVariant variant = SpectrumRegistries.GLASS_ARROW_VARIANT.get(ResourceLocation.tryParse(nbt.getString(VARIANT_STRING)));
+		GlassArrowVariant variant = PastelRegistries.GLASS_ARROW_VARIANT.get(ResourceLocation.tryParse(nbt.getString(VARIANT_STRING)));
 		if (variant != null) {
 			this.setVariant(variant);
 		}

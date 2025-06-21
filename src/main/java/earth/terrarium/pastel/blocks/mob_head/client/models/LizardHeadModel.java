@@ -2,8 +2,8 @@ package earth.terrarium.pastel.blocks.mob_head.client.models;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.blocks.mob_head.client.SpectrumSkullModel;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModel;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
@@ -19,9 +19,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 
 @OnlyIn(Dist.CLIENT)
-public class LizardHeadModel extends SpectrumSkullModel {
+public class LizardHeadModel extends PastelSkullModel {
 	
-	public static final ResourceLocation HEAD_TEXTURE = SpectrumCommon.locate("textures/entity/lizard/lizard_head.png");
+	public static final ResourceLocation HEAD_TEXTURE = PastelCommon.locate("textures/entity/lizard/lizard_head.png");
 	
 	protected final int color;
 	protected final ModelPart frills;

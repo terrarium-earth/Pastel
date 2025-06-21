@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.recipe.spirit_instiller.dynamic.spawner_manipulation;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.blocks.mob_head.SpectrumSkullBlock;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
-import earth.terrarium.pastel.registries.SpectrumEntityTypeTags;
-import earth.terrarium.pastel.registries.SpectrumItemTags;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
+import earth.terrarium.pastel.registries.PastelAdvancements;
+import earth.terrarium.pastel.registries.PastelEntityTypeTags;
+import earth.terrarium.pastel.registries.PastelItemTags;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -21,23 +21,23 @@ import java.util.Optional;
 public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 	
 	public SpawnerCreatureChangeRecipe() {
-		super(IngredientStack.ofTag(SpectrumItemTags.SKULLS), IngredientStack.ofItems(SpectrumItems.DOWNSTONE_FRAGMENTS.get(), 4), Optional.of(SpectrumAdvancements.SPAWNER_CREATURE_CHANGE));
+		super(IngredientStack.ofTag(PastelItemTags.SKULLS), IngredientStack.ofItems(PastelItems.DOWNSTONE_FRAGMENTS.get(), 4), Optional.of(PastelAdvancements.SPAWNER_CREATURE_CHANGE));
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.SPIRIT_INSTILLER_SPAWNER_CREATURE_CHANGE;
+		return PastelRecipeSerializers.SPIRIT_INSTILLER_SPAWNER_CREATURE_CHANGE;
 	}
 	
 	@Override
 	public boolean canCraftWithBlockEntityTag(CustomData spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
-		Optional<EntityType<?>> entityType = SpectrumSkullBlock.getEntityTypeOfSkullStack(firstBowlStack);
-		entityType = entityType.isEmpty() ? SpectrumSkullBlock.getEntityTypeOfSkullStack(secondBowlStack) : entityType;
+		Optional<EntityType<?>> entityType = PastelSkullBlock.getEntityTypeOfSkullStack(firstBowlStack);
+		entityType = entityType.isEmpty() ? PastelSkullBlock.getEntityTypeOfSkullStack(secondBowlStack) : entityType;
 		
 		if (entityType.isEmpty()) {
 			return false;
 		}
-		if (entityType.get().is(SpectrumEntityTypeTags.SPAWNER_MANIPULATION_BLACKLISTED)) {
+		if (entityType.get().is(PastelEntityTypeTags.SPAWNER_MANIPULATION_BLACKLISTED)) {
 			return false;
 		}
 		if (spawnerBlockEntityNbt == null) {
@@ -64,8 +64,8 @@ public class SpawnerCreatureChangeRecipe extends SpawnerChangeRecipe {
 	
 	@Override
 	public CompoundTag getSpawnerResultNbt(CompoundTag spawnerBlockEntityNbt, ItemStack firstBowlStack, ItemStack secondBowlStack) {
-		Optional<EntityType<?>> entityType = SpectrumSkullBlock.getEntityTypeOfSkullStack(firstBowlStack);
-		entityType = entityType.isEmpty() ? SpectrumSkullBlock.getEntityTypeOfSkullStack(secondBowlStack) : entityType;
+		Optional<EntityType<?>> entityType = PastelSkullBlock.getEntityTypeOfSkullStack(firstBowlStack);
+		entityType = entityType.isEmpty() ? PastelSkullBlock.getEntityTypeOfSkullStack(secondBowlStack) : entityType;
 		
 		if (entityType.isEmpty()) {
 			return spawnerBlockEntityNbt;

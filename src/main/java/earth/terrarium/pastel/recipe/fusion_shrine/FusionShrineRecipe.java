@@ -4,7 +4,7 @@ package earth.terrarium.pastel.recipe.fusion_shrine;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.predicate.location.WorldConditionsPredicate;
 import net.neoforged.neoforge.fluids.capability.templates.*;
@@ -17,11 +17,11 @@ import earth.terrarium.pastel.helpers.CodecHelper;
 import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.recipe.GatedStackSpectrumRecipe;
+import earth.terrarium.pastel.recipe.GatedStackPastelRecipe;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -43,9 +43,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FluidRecipeInput<FluidTank>> {
+public class FusionShrineRecipe extends GatedStackPastelRecipe<FluidRecipeInput<FluidTank>> {
 	
-	public static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("build_fusion_shrine");
+	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("build_fusion_shrine");
 	
 	protected final List<IngredientStack> craftingInputs;
 	protected final FluidIngredient fluid;
@@ -145,17 +145,17 @@ public class FusionShrineRecipe extends GatedStackSpectrumRecipe<FluidRecipeInpu
 	
 	@Override
 	public ItemStack getToastSymbol() {
-		return new ItemStack(SpectrumBlocks.FUSION_SHRINE_BASALT.get());
+		return new ItemStack(PastelBlocks.FUSION_SHRINE_BASALT.get());
 	}
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.FUSION_SHRINE_RECIPE_SERIALIZER;
+		return PastelRecipeSerializers.FUSION_SHRINE_RECIPE_SERIALIZER;
 	}
 	
 	@Override
 	public RecipeType<?> getType() {
-		return SpectrumRecipeTypes.FUSION_SHRINE;
+		return PastelRecipeTypes.FUSION_SHRINE;
 	}
 	
 	@Override

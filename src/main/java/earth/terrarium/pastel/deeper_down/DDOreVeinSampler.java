@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.deeper_down;
 
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Blocks;
@@ -63,11 +63,11 @@ public final class DDOreVeinSampler {
 	
 	protected enum VeinType {
 		IRON(Blocks.IRON_ORE.defaultBlockState(), Blocks.IRON_ORE.defaultBlockState(), Blocks.RAW_IRON_BLOCK.defaultBlockState(), Blocks.STONE.defaultBlockState(), -256, -80),
-		GOLD(Blocks.DEEPSLATE_GOLD_ORE.defaultBlockState(), SpectrumBlocks.BLACKSLAG_GOLD_ORE.get().defaultBlockState(), Blocks.RAW_GOLD_BLOCK.defaultBlockState(), Blocks.DIORITE.defaultBlockState(), -260, -128),
-		DIAMOND(Blocks.DEEPSLATE_DIAMOND_ORE.defaultBlockState(), SpectrumBlocks.BLACKSLAG_DIAMOND_ORE.get().defaultBlockState(), Blocks.COAL_BLOCK.defaultBlockState(), Blocks.TUFF.defaultBlockState(), -316, -192),
-		REDSTONE(Blocks.DEEPSLATE_REDSTONE_ORE.defaultBlockState(), SpectrumBlocks.BLACKSLAG_REDSTONE_ORE.get().defaultBlockState(), Blocks.REDSTONE_BLOCK.defaultBlockState(), Blocks.GRANITE.defaultBlockState(), -220, -80),
-		LAPIS(Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState(), SpectrumBlocks.BLACKSLAG_LAPIS_ORE.get().defaultBlockState(), Blocks.LAPIS_BLOCK.defaultBlockState(), Blocks.ANDESITE.defaultBlockState(), -260, -128),
-		EMERALD(Blocks.DEEPSLATE_EMERALD_ORE.defaultBlockState(), SpectrumBlocks.BLACKSLAG_EMERALD_ORE.get().defaultBlockState(), SpectrumBlocks.BLACKSLAG.get().defaultBlockState(), SpectrumBlocks.BASAL_MARBLE.get().defaultBlockState(), -316, -128);
+		GOLD(Blocks.DEEPSLATE_GOLD_ORE.defaultBlockState(), PastelBlocks.BLACKSLAG_GOLD_ORE.get().defaultBlockState(), Blocks.RAW_GOLD_BLOCK.defaultBlockState(), Blocks.DIORITE.defaultBlockState(), -260, -128),
+		DIAMOND(Blocks.DEEPSLATE_DIAMOND_ORE.defaultBlockState(), PastelBlocks.BLACKSLAG_DIAMOND_ORE.get().defaultBlockState(), Blocks.COAL_BLOCK.defaultBlockState(), Blocks.TUFF.defaultBlockState(), -316, -192),
+		REDSTONE(Blocks.DEEPSLATE_REDSTONE_ORE.defaultBlockState(), PastelBlocks.BLACKSLAG_REDSTONE_ORE.get().defaultBlockState(), Blocks.REDSTONE_BLOCK.defaultBlockState(), Blocks.GRANITE.defaultBlockState(), -220, -80),
+		LAPIS(Blocks.DEEPSLATE_LAPIS_ORE.defaultBlockState(), PastelBlocks.BLACKSLAG_LAPIS_ORE.get().defaultBlockState(), Blocks.LAPIS_BLOCK.defaultBlockState(), Blocks.ANDESITE.defaultBlockState(), -260, -128),
+		EMERALD(Blocks.DEEPSLATE_EMERALD_ORE.defaultBlockState(), PastelBlocks.BLACKSLAG_EMERALD_ORE.get().defaultBlockState(), PastelBlocks.BLACKSLAG.get().defaultBlockState(), PastelBlocks.BASAL_MARBLE.get().defaultBlockState(), -316, -128);
 		
 		final BlockState deepslateOre;
 		final BlockState blackslagOre;

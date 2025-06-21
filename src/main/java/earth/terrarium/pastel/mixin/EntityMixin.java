@@ -4,8 +4,8 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import earth.terrarium.pastel.attachments.data.LastKillData;
 import earth.terrarium.pastel.attachments.data.PrimordialFireData;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
-import earth.terrarium.pastel.registries.SpectrumEnchantments;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelEnchantments;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -37,7 +37,7 @@ public abstract class EntityMixin {
 		if (entity instanceof LivingEntity livingEntity) {
 			LastKillData.rememberKillTick(livingEntity, livingEntity.level().getGameTime());
 			
-			MobEffectInstance frenzy = livingEntity.getEffect(SpectrumStatusEffects.FRENZY);
+			MobEffectInstance frenzy = livingEntity.getEffect(PastelStatusEffects.FRENZY);
 			if (frenzy != null) {
 				((FrenzyStatusEffect) frenzy.getEffect()).onKill(livingEntity, frenzy.getAmplifier());
 			}
@@ -67,7 +67,7 @@ public abstract class EntityMixin {
 			if (thisLivingEntity.isDeadOrDying() && thisLivingEntity.getLastHurtByMob() instanceof Player killer) {
 				var hasInventoryInsertion = thisLivingEntity.level().registryAccess()
 						.lookup(Registries.ENCHANTMENT)
-						.flatMap(impl -> impl.get(SpectrumEnchantments.INVENTORY_INSERTION))
+						.flatMap(impl -> impl.get(PastelEnchantments.INVENTORY_INSERTION))
 						.map(e -> EnchantmentHelper.getEnchantmentLevel(e, killer) > 0)
 						.orElse(false);
 				if (hasInventoryInsertion) {
@@ -97,7 +97,7 @@ public abstract class EntityMixin {
 		if (!(entity instanceof LivingEntity living))
 			return original;
 		
-		if (!(entity instanceof Player) && (living.hasEffect(SpectrumStatusEffects.ETERNAL_SLUMBER) || living.hasEffect(SpectrumStatusEffects.FATAL_SLUMBER)))
+		if (!(entity instanceof Player) && (living.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER) || living.hasEffect(PastelStatusEffects.FATAL_SLUMBER)))
 			return Pose.SLEEPING;
 		
 		return original;

@@ -4,8 +4,8 @@ import earth.terrarium.pastel.helpers.ParticleHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -33,7 +33,7 @@ public class DivinityStatusEffect extends MobEffect {
 		boolean doEffects = 40 >> amplifier == 0;
 		if (entity instanceof Player player) {
 			if (!world.isClientSide) {
-				SpectrumAdvancementCriteria.DIVINITY_TICK.trigger((ServerPlayer) player);
+				PastelAdvancementCriteria.DIVINITY_TICK.trigger((ServerPlayer) player);
 			}
 			if (doEffects) {
 				player.getFoodData().eat(1 + amplifier, 0.25F);
@@ -59,7 +59,7 @@ public class DivinityStatusEffect extends MobEffect {
 		super.onEffectStarted(entity, amplifier);
 		if (entity instanceof Player) {
 			if (entity instanceof ServerPlayer player) {
-				MobEffectInstance instance = entity.getEffect(SpectrumStatusEffects.DIVINITY);
+				MobEffectInstance instance = entity.getEffect(PastelStatusEffects.DIVINITY);
 				if (instance != null && !instance.isAmbient()) {
 					PlayDivinityAppliedEffectsPayload.playDivinityAppliedEffects(player);
 				}

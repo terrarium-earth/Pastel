@@ -3,7 +3,7 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.neoforged.neoforge.items.*;
 import net.neoforged.neoforge.items.wrapper.*;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public record GuidebookHintBoughtPayload(ResourceLocation completionAdvancement, IngredientStack payment) implements CustomPacketPayload {
 	
-	public static final Type<GuidebookHintBoughtPayload> ID = SpectrumC2SPackets.makeId("guidebook_hint_bought");
+	public static final Type<GuidebookHintBoughtPayload> ID = PastelC2SPackets.makeId("guidebook_hint_bought");
 	public static final StreamCodec<RegistryFriendlyByteBuf, GuidebookHintBoughtPayload> CODEC = StreamCodec.composite(
 			ResourceLocation.STREAM_CODEC, GuidebookHintBoughtPayload::completionAdvancement,
 			IngredientStack.STREAM_CODEC, GuidebookHintBoughtPayload::payment,

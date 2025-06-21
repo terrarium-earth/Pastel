@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.pastel_network.network;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
@@ -11,7 +11,7 @@ import earth.terrarium.pastel.helpers.TickLooper;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkEdgeSyncPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkRemovedPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
@@ -20,7 +20,6 @@ import net.minecraft.core.UUIDUtil;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.server.*;
 import org.jetbrains.annotations.Nullable;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
@@ -38,7 +37,7 @@ import java.util.stream.Collectors;
 public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 	
 	public static final Codec<ServerPastelNetwork> CODEC = RecordCodecBuilder.create(i -> i.group(
-			Level.RESOURCE_KEY_CODEC.xmap(k -> SpectrumCommon.getSidedServer().getLevel(k), Level::dimension).fieldOf("world").forGetter(b -> b.world),
+			Level.RESOURCE_KEY_CODEC.xmap(k -> PastelCommon.getSidedServer().getLevel(k), Level::dimension).fieldOf("world").forGetter(b -> b.world),
 			UUIDUtil.STRING_CODEC.fieldOf("uuid").forGetter(ServerPastelNetwork::getUUID),
 			Codec.INT.fieldOf("color").forGetter(ServerPastelNetwork::getColor),
 			TickLooper.CODEC.fieldOf("looper").forGetter(b -> b.transferLooper)
@@ -198,7 +197,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 		// if our network now has 1 or less nodes we don't really have a network anymore
 		if (this.graph.vertexSet().size() < 2) {
 			for (BlockPos vertex : vertices) {
-				Optional<PastelNodeBlockEntity> be = world.getBlockEntity(vertex, SpectrumBlockEntities.PASTEL_NODE.get());
+				Optional<PastelNodeBlockEntity> be = world.getBlockEntity(vertex, PastelBlockEntities.PASTEL_NODE.get());
 				be.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.setNetworkUUID(null));
 			}
 			Pastel.getServerInstance().removeNetwork(this.getUUID());
@@ -238,7 +237,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 			// fast fail => remove the network entirely
 			
 			for (BlockPos pos : this.graph.vertexSet()) {
-				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE.get());
+				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, PastelBlockEntities.PASTEL_NODE.get());
 				blockEntity.ifPresent(pastelNodeBlockEntity -> pastelNodeBlockEntity.setNetworkUUID(null));
 			}
 			
@@ -253,7 +252,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 			// => remove from network, do not create a new one just for that one
 			boolean isSingleNode = smallerSet.size() == 1;
 			if (isSingleNode) {
-				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(smallerSet.stream().findAny().get(), SpectrumBlockEntities.PASTEL_NODE.get());
+				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(smallerSet.stream().findAny().get(), PastelBlockEntities.PASTEL_NODE.get());
 				if (blockEntity.isPresent()) {
 					blockEntity.get().setNetworkUUID(null);
 					disconnectedBEs.add(blockEntity.get());
@@ -266,7 +265,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 			PastelNodeBlockEntity initialNode = null;
 			Set<PastelNodeBlockEntity> blockEntities = new ObjectArraySet<>();
 			for (BlockPos pos : smallerSet) {
-				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, SpectrumBlockEntities.PASTEL_NODE.get());
+				Optional<PastelNodeBlockEntity> blockEntity = world.getBlockEntity(pos, PastelBlockEntities.PASTEL_NODE.get());
 				if (blockEntity.isPresent()) {
 					disconnectedBEs.add(blockEntity.get());
 					blockEntities.add(blockEntity.get());
@@ -283,7 +282,7 @@ public class ServerPastelNetwork extends PastelNetwork<ServerLevel> {
 				for (DefaultEdge edge : this.graph.edgesOf(disconnectedNode)) {
 					edges.put(this.graph.getEdgeSource(edge), this.graph.getEdgeTarget(edge));
 				}
-				var couldBeANode = getLevel().getBlockEntity(disconnectedNode, SpectrumBlockEntities.PASTEL_NODE.get());
+				var couldBeANode = getLevel().getBlockEntity(disconnectedNode, PastelBlockEntities.PASTEL_NODE.get());
 				if (couldBeANode.isPresent()) {
 					PastelNodeBlockEntity pastelNode = couldBeANode.get();
 					newNetwork.addNode(pastelNode);

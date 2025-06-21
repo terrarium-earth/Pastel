@@ -2,16 +2,15 @@ package earth.terrarium.pastel.items.trinkets;
 
 import com.google.common.collect.Multimap;
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.FixedSingleInkStorage;
-import earth.terrarium.pastel.registries.SpectrumEntityAttributes;
+import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +21,7 @@ import java.util.List;
 public class LaurelsOfSerenityItem extends InkDrainTrinketItem {
     
     public LaurelsOfSerenityItem(Properties settings) {
-        super(settings, SpectrumCommon.locate("unlocks/trinkets/laurels_of_serenity"), InkColors.PURPLE);
+        super(settings, PastelCommon.locate("unlocks/trinkets/laurels_of_serenity"), InkColors.PURPLE);
     }
 
     @Override
@@ -31,8 +30,8 @@ public class LaurelsOfSerenityItem extends InkDrainTrinketItem {
         super.appendHoverText(stack, context, tooltip, type);
     }
     
-    public static ResourceLocation DETECTION_RANGE_ATTRIBUTE_ID = SpectrumCommon.locate("laurels_of_serenity_detection_range");
-    public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = SpectrumCommon.locate("laurels_of_serenity_mental_presence");
+    public static ResourceLocation DETECTION_RANGE_ATTRIBUTE_ID = PastelCommon.locate("laurels_of_serenity_detection_range");
+    public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon.locate("laurels_of_serenity_mental_presence");
 
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
@@ -49,7 +48,7 @@ public class LaurelsOfSerenityItem extends InkDrainTrinketItem {
         }
         double sleepResistanceMod = getInducedSleepResistanceMod(storedInk);
         if (sleepResistanceMod != 0) {
-            modifiers.put(SpectrumEntityAttributes.MENTAL_PRESENCE, new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, sleepResistanceMod, AttributeModifier.Operation.ADD_VALUE));
+            modifiers.put(PastelEntityAttributes.MENTAL_PRESENCE, new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, sleepResistanceMod, AttributeModifier.Operation.ADD_VALUE));
         }
         
         return modifiers;

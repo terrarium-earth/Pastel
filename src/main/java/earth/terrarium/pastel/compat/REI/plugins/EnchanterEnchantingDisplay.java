@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
 import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
@@ -37,7 +37,7 @@ public class EnchanterEnchantingDisplay extends EnchanterDisplay {
 	
 	@Override
 	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return SpectrumPlugins.ENCHANTER_CRAFTING;
+		return PastelPlugins.ENCHANTER_CRAFTING;
 	}
 	
 	@Override

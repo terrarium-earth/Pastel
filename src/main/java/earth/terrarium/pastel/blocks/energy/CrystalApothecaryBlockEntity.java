@@ -3,14 +3,14 @@ package earth.terrarium.pastel.blocks.energy;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
 import earth.terrarium.pastel.data_loaders.CrystalApothecarySimulationsDataLoader;
-import earth.terrarium.pastel.events.SpectrumGameEvents;
+import earth.terrarium.pastel.events.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.BlockPosEventQueue;
 import earth.terrarium.pastel.helpers.InventoryHelper;
-import earth.terrarium.pastel.inventories.GenericSpectrumContainerScreenHandler;
+import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -60,7 +60,7 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
 	private String ownerName;
 	
 	public CrystalApothecaryBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.CRYSTAL_APOTHECARY.get(), blockPos, blockState);
+		super(PastelBlockEntities.CRYSTAL_APOTHECARY.get(), blockPos, blockState);
 		this.blockPosEventTransferListener = new BlockPosEventQueue(new BlockPositionSource(this.worldPosition), RANGE, this);
 		this.inventory = NonNullList.withSize(27, ItemStack.EMPTY);
 		this.listenerPaused = false;
@@ -213,12 +213,12 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
 	
 	@Override
 	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-		return GenericSpectrumContainerScreenHandler.createGeneric9x3(syncId, playerInventory, this, ScreenBackgroundVariant.MIDGAME);
+		return GenericPastelContainerScreenHandler.createGeneric9x3(syncId, playerInventory, this, ScreenBackgroundVariant.MIDGAME);
 	}
 	
 	@Override
 	public boolean canAcceptEvent(Level world, GameEventListener listener, GameEvent.ListenerInfo message, Vec3 sourcePos) {
-		return message.gameEvent() == SpectrumGameEvents.BLOCK_CHANGED && !this.listenerPaused && message.context().affectedState().is(SpectrumBlockTags.CRYSTAL_APOTHECARY_HARVESTABLE);
+		return message.gameEvent() == PastelGameEvents.BLOCK_CHANGED && !this.listenerPaused && message.context().affectedState().is(PastelBlockTags.CRYSTAL_APOTHECARY_HARVESTABLE);
 	}
 	
 	@Override
@@ -226,7 +226,7 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
 		if (listener instanceof BlockPosEventQueue && this.getLevel() != null) {
 			BlockPos eventPos = entry.eventSourceBlockPos;
 			BlockState eventState = world.getBlockState(eventPos);
-			if (eventState.is(SpectrumBlockTags.CRYSTAL_APOTHECARY_HARVESTABLE)) {
+			if (eventState.is(PastelBlockTags.CRYSTAL_APOTHECARY_HARVESTABLE)) {
 				// harvest
 				LootParams.Builder builder = new LootParams.Builder((ServerLevel) world)
 					.withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(eventPos))
@@ -240,7 +240,7 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
 					if (hasOwner()) {
 						Player owner = getOwnerIfOnline();
 						if (owner instanceof ServerPlayer serverPlayerEntity) {
-							SpectrumAdvancementCriteria.CRYSTAL_APOTHECARY_COLLECTING.trigger(serverPlayerEntity, drop);
+							PastelAdvancementCriteria.CRYSTAL_APOTHECARY_COLLECTING.trigger(serverPlayerEntity, drop);
 						}
 					}
 					ItemStack remainingStack = InventoryHelper.smartAddToInventory(drop, new InvWrapper(this), null);
@@ -288,9 +288,9 @@ public class CrystalApothecaryBlockEntity extends RandomizableContainerBlockEnti
 					continue;
 				}
 				
-				if (level.getBlockState(currPos).is(SpectrumBlockTags.CRYSTAL_APOTHECARY_HARVESTABLE)) {
+				if (level.getBlockState(currPos).is(PastelBlockTags.CRYSTAL_APOTHECARY_HARVESTABLE)) {
 					this.blockPosEventTransferListener.acceptEvent(serverWorld,
-							new GameEvent.ListenerInfo(SpectrumGameEvents.BLOCK_CHANGED, Vec3.atCenterOf(currPos), GameEvent.Context.of(level.getBlockState(currPos)),
+							new GameEvent.ListenerInfo(PastelGameEvents.BLOCK_CHANGED, Vec3.atCenterOf(currPos), GameEvent.Context.of(level.getBlockState(currPos)),
 									this.blockPosEventTransferListener, Vec3.atCenterOf(this.worldPosition)), Vec3.atCenterOf(this.worldPosition));
 				}
 			}

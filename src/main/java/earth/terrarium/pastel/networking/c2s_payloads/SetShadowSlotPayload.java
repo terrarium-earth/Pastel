@@ -2,7 +2,7 @@ package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.inventories.slots.ShadowSlot;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 public record SetShadowSlotPayload(int screenHandlerSyncId, int slotId,
 								   ItemStack shadowStack) implements CustomPacketPayload {
 	
-	public static final Type<SetShadowSlotPayload> ID = SpectrumC2SPackets.makeId("set_shadow_slot");
+	public static final Type<SetShadowSlotPayload> ID = PastelC2SPackets.makeId("set_shadow_slot");
 	public static final StreamCodec<RegistryFriendlyByteBuf, SetShadowSlotPayload> CODEC = StreamCodec.composite(
 			ByteBufCodecs.INT, SetShadowSlotPayload::screenHandlerSyncId,
 			ByteBufCodecs.INT, SetShadowSlotPayload::slotId,

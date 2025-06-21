@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.energy;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.energy.InkStorage;
 import earth.terrarium.pastel.api.energy.InkStorageBlockEntity;
@@ -13,12 +13,12 @@ import earth.terrarium.pastel.helpers.CodecHelper;
 import earth.terrarium.pastel.inventories.ColorPickerScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.effect.ColoredFluidRisingParticleEffect;
-import earth.terrarium.pastel.progression.SpectrumAdvancementCriteria;
+import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.InkConvertingRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelRegistries;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -68,7 +68,7 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity imp
 	private UUID ownerUUID;
 	
 	public ColorPickerBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.COLOR_PICKER.get(), blockPos, blockState);
+		super(PastelBlockEntities.COLOR_PICKER.get(), blockPos, blockState);
 		
 		this.inventory = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 		this.inkStorage = new TotalCappedInkStorage(STORAGE_AMOUNT, Map.of());
@@ -109,7 +109,7 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity imp
 		CodecHelper.fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage")).ifPresent(storage -> this.inkStorage = new TotalCappedInkStorage(storage.maxEnergyTotal(), storage.storedEnergy()));
 		this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
 		if (nbt.contains("SelectedColor", Tag.TAG_STRING)) {
-			this.selectedColor = Optional.of(SpectrumRegistries.INK_COLOR.wrapAsHolder(InkColor.ofIdString(nbt.getString("SelectedColor")).get()));
+			this.selectedColor = Optional.of(PastelRegistries.INK_COLOR.wrapAsHolder(InkColor.ofIdString(nbt.getString("SelectedColor")).get()));
 		} else {
 			this.selectedColor = Optional.empty();
 		}
@@ -216,8 +216,8 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity imp
 				inventory.get(INPUT_SLOT_ID).shrink(1);
 				this.inkStorage.addEnergy(inkColor, amount);
 				
-				if (SpectrumCommon.CONFIG.BlockSoundVolume > 0) {
-					world.playSound(null, worldPosition, SpectrumSoundEvents.COLOR_PICKER_PROCESSING, SoundSource.BLOCKS, SpectrumCommon.CONFIG.BlockSoundVolume / 3, 1.0F);
+				if (PastelCommon.CONFIG.BlockSoundVolume > 0) {
+					world.playSound(null, worldPosition, PastelSoundEvents.COLOR_PICKER_PROCESSING, SoundSource.BLOCKS, PastelCommon.CONFIG.BlockSoundVolume / 3, 1.0F);
 				}
 				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world,
 						new Vec3(worldPosition.getX() + 0.5, worldPosition.getY() + 0.7, worldPosition.getZ() + 0.5),
@@ -249,7 +249,7 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity imp
 		}
 		
 		// search matching recipe
-		Optional<RecipeHolder<InkConvertingRecipe>> recipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.INK_CONVERTING, new SingleRecipeInput(inventory.get(INPUT_SLOT_ID)), world);
+		Optional<RecipeHolder<InkConvertingRecipe>> recipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.INK_CONVERTING, new SingleRecipeInput(inventory.get(INPUT_SLOT_ID)), world);
 		if (recipe.isPresent()) {
 			this.cachedRecipe = recipe.get().value();
 			return this.cachedRecipe;
@@ -290,7 +290,7 @@ public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity imp
 	private long tryTransferInk(ServerPlayer owner, ItemStack stack, InkStorage itemStorage, InkColor color) {
 		long amount = InkStorage.transferInk(this.inkStorage, itemStorage, color);
 		if (amount > 0 && owner != null) {
-			SpectrumAdvancementCriteria.INK_CONTAINER_INTERACTION.trigger(owner, stack, itemStorage, color, amount);
+			PastelAdvancementCriteria.INK_CONTAINER_INTERACTION.trigger(owner, stack, itemStorage, color, amount);
 		}
 		return amount;
 	}

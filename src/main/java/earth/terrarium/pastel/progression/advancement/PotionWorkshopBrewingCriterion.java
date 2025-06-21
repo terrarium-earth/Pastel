@@ -2,7 +2,7 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -26,7 +26,7 @@ import java.util.Optional;
 
 public class PotionWorkshopBrewingCriterion extends SimpleCriterionTrigger<PotionWorkshopBrewingCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("potion_workshop_brewing");
+	public static final ResourceLocation ID = PastelCommon.locate("potion_workshop_brewing");
 	
 	@SuppressWarnings("deprecation")
 	public void trigger(ServerPlayer player, ItemStack itemStack, int brewedCount) {

@@ -4,7 +4,7 @@ import earth.terrarium.pastel.helpers.ParticleHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayAscensionAppliedEffectsPayload;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -27,7 +27,7 @@ public class AscensionStatusEffect extends MobEffect {
 		if (entity.level().isClientSide) {
 			ParticleHelper.playParticleWithPatternAndVelocityClient(entity.level(), entity.position(), ColoredSparkleRisingParticleEffect.WHITE, VectorPattern.EIGHT, 0.2);
 		} else if (applyDivinity) {
-			entity.addEffect(new MobEffectInstance(SpectrumStatusEffects.DIVINITY, MUSIC_DURATION_TICKS - MUSIC_INTRO_TICKS, DivinityStatusEffect.ASCENSION_AMPLIFIER));
+			entity.addEffect(new MobEffectInstance(PastelStatusEffects.DIVINITY, MUSIC_DURATION_TICKS - MUSIC_INTRO_TICKS, DivinityStatusEffect.ASCENSION_AMPLIFIER));
 			return false;
 		}
 		return super.applyEffectTick(entity, amplifier);

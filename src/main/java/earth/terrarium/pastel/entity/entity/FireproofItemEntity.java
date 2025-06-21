@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -19,14 +19,14 @@ public class FireproofItemEntity extends ItemEntity {
 	}
 	
 	public FireproofItemEntity(Level world, double x, double y, double z, ItemStack stack, double velocityX, double velocityY, double velocityZ) {
-		this(SpectrumEntityTypes.FIREPROOF_ITEM.get(), world);
+		this(PastelEntityTypes.FIREPROOF_ITEM.get(), world);
 		this.setPos(x, y, z);
 		this.setDeltaMovement(velocityX, velocityY, velocityZ);
 		this.setItem(stack);
 	}
 	
 	private FireproofItemEntity(ItemEntity entity) {
-		super(SpectrumEntityTypes.FIREPROOF_ITEM.get(), entity.level());
+		super(PastelEntityTypes.FIREPROOF_ITEM.get(), entity.level());
 	}
 	
 	@Override

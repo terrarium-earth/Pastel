@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.entity.entity.LagoonFishingBobberEntity;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
+import earth.terrarium.pastel.registries.PastelFluidTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.material.FluidState;
 import java.util.List;
 import java.util.Map;
 
-public class LagoonRodItem extends SpectrumFishingRodItem implements Preenchanted {
+public class LagoonRodItem extends PastelFishingRodItem implements Preenchanted {
 	
 	public LagoonRodItem(Properties settings) {
 		super(settings);
@@ -30,7 +30,7 @@ public class LagoonRodItem extends SpectrumFishingRodItem implements Preenchante
 	
 	@Override
 	public boolean canFishIn(FluidState fluidState) {
-		return fluidState.is(SpectrumFluidTags.LAGOON_ROD_FISHABLE_IN);
+		return fluidState.is(PastelFluidTags.LAGOON_ROD_FISHABLE_IN);
 	}
 	
 	@Override

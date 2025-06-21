@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import earth.terrarium.pastel.entity.entity.BidentBaseEntity;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
@@ -33,7 +33,7 @@ public abstract class TridentEntityMixin extends AbstractArrow {
 			var stack = bidentEntity.getTrackedStack();
 			float damage = (float) getDamage(stack);
 			
-			DamageSource damageSource = SpectrumDamageTypes.impaling(level(), bidentEntity, getOwner());
+			DamageSource damageSource = PastelDamageTypes.impaling(level(), bidentEntity, getOwner());
 			if (this.level() instanceof ServerLevel serverWorld) {
 				damage += EnchantmentHelper.modifyDamage(serverWorld, this.getWeaponItem(), instance, damageSource, damage);
 			}

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.items.trinkets.SpectrumTrinketItem;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,7 +26,7 @@ public abstract class FarmlandBlockMixin extends Block {
 
         // if carrying puff circlet: no trampling
         if (entity instanceof LivingEntity livingEntity) {
-            if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.PUFF_CIRCLET.get())) {
+            if (PastelTrinketItem.hasEquipped(livingEntity, PastelItems.PUFF_CIRCLET.get())) {
                 info.cancel();
             }
         }

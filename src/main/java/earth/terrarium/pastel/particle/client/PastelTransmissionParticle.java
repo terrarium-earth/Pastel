@@ -2,8 +2,8 @@ package earth.terrarium.pastel.particle.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.*;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import earth.terrarium.pastel.particle.render.EarlyRenderingParticle;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -42,7 +42,7 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         this.itemRenderer = itemRenderer;
         this.itemStack = stack;
         this.quadSize = 0.25F;
-		this.particleEffect = new DustParticleOptions(SpectrumColorHelper.colorIntToVec(networkColor), 0.8F);
+		this.particleEffect = new DustParticleOptions(ColorHelper.colorIntToVec(networkColor), 0.8F);
 
         this.travelPositions = new ArrayList<>();
         for (BlockPos p : travelPositions) {
@@ -51,7 +51,7 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
 
         // spawning sound & particles
         Vec3 startPos = this.travelPositions.get(0);
-		world.playLocalSound(startPos.x(), startPos.y() + 0.25, startPos.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.15F * SpectrumCommon.CONFIG.BlockSoundVolume + world.random.nextFloat() / 10F, 0.8F + world.random.nextFloat() * 0.3F, true);
+		world.playLocalSound(startPos.x(), startPos.y() + 0.25, startPos.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.15F * PastelCommon.CONFIG.BlockSoundVolume + world.random.nextFloat() / 10F, 0.8F + world.random.nextFloat() * 0.3F, true);
         world.addParticle(ParticleTypes.BUBBLE_POP, startPos.x(), startPos.y() + 0.25, startPos.z(), 0, 0, 0);
     }
 
@@ -64,7 +64,7 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         if (travelPercent >= 1.0F) {
             Vec3 destination = this.travelPositions.get(vertexCount);
             level.playLocalSound(destination.x(), destination.y() + 0.25, destination.z(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
-                    0.1F * SpectrumCommon.CONFIG.BlockSoundVolume + random.nextFloat() / 10F, 0.6F + level.random.nextFloat() * 0.3F, true);
+                    0.1F * PastelCommon.CONFIG.BlockSoundVolume + random.nextFloat() / 10F, 0.6F + level.random.nextFloat() * 0.3F, true);
             level.addParticle(ParticleTypes.BUBBLE_POP, destination.x(), destination.y() + 0.25, destination.z(), 0, 0, 0);
             this.remove();
             return;
@@ -84,7 +84,7 @@ public class PastelTransmissionParticle extends TransmissionParticle implements 
         this.y = Mth.lerp(nodeProgress, source.y, destination.y);
         this.z = Mth.lerp(nodeProgress, source.z, destination.z);
 		
-		//if (SpectrumCommon.CONFIG.PastelNetworkParticles && this.age % 3 == 0) {
+		//if (PastelCommon.CONFIG.PastelNetworkParticles && this.age % 3 == 0) {
 		//	level.addParticle(particleEffect, x + random.nextDouble() * 0.4 - 0.2, y + random.nextDouble() * 0.4 - 0.2, z + random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2, random.nextDouble() * 0.4 - 0.2);
 		//} TODO make these not bad and reimplement
     }

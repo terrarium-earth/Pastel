@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.deeper_down.flora;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.interaction.NaturesStaffTriggered;
-import earth.terrarium.pastel.registries.SpectrumConfiguredFeatures;
+import earth.terrarium.pastel.registries.PastelConfiguredFeatures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
@@ -99,7 +99,7 @@ public class TallDragonjagBlock extends DoublePlantBlock implements Dragonjag, B
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		boolean success = world.registryAccess()
 				.registryOrThrow(Registries.CONFIGURED_FEATURE)
-				.get(SpectrumConfiguredFeatures.DRAGONJAGS.get(variant))
+				.get(PastelConfiguredFeatures.DRAGONJAGS.get(variant))
 				.place(world, world.getChunkSource().getGenerator(), random, pos);
 		
 		if (success) {

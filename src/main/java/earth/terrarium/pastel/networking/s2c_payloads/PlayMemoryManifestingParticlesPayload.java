@@ -1,25 +1,21 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
+import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import net.minecraft.client.multiplayer.*;
 import net.minecraft.world.level.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.EntityType;
@@ -28,7 +24,7 @@ import org.joml.Vector3f;
 
 public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1, int eggColor2, int amount) implements CustomPacketPayload {
 	
-	public static final Type<PlayMemoryManifestingParticlesPayload> ID = SpectrumC2SPackets.makeId("play_memory_manifesting_particles");
+	public static final Type<PlayMemoryManifestingParticlesPayload> ID = PastelC2SPackets.makeId("play_memory_manifesting_particles");
 	public static final StreamCodec<FriendlyByteBuf, PlayMemoryManifestingParticlesPayload> CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, PlayMemoryManifestingParticlesPayload::pos,
 			ByteBufCodecs.INT, PlayMemoryManifestingParticlesPayload::eggColor1,
@@ -47,8 +43,8 @@ public record PlayMemoryManifestingParticlesPayload(BlockPos pos, int eggColor1,
 		ClientLevel level = (ClientLevel) context.player().level();
 		RandomSource random = level.random;
 		
-		Vector3f colorVec1 = SpectrumColorHelper.colorIntToVec(payload.eggColor1);
-		Vector3f colorVec2 = SpectrumColorHelper.colorIntToVec(payload.eggColor1);
+		Vector3f colorVec1 = ColorHelper.colorIntToVec(payload.eggColor1);
+		Vector3f colorVec2 = ColorHelper.colorIntToVec(payload.eggColor1);
 		
 		BlockPos pos = payload.pos;
 		for (int i = 0; i < payload.amount; i++) {

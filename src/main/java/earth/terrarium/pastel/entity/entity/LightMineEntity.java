@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.entity.entity;
 
 import com.google.common.collect.Sets;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.entity.SpectrumEntityTypes;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.CodecHelper;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -41,7 +41,7 @@ public class LightMineEntity extends LightShardBaseEntity {
 	}
 	
 	public LightMineEntity(Level world, LivingEntity owner, float detectionRange, float damage, float lifeSpanTicks) {
-		super(SpectrumEntityTypes.LIGHT_MINE.get(), world, owner, detectionRange, damage, lifeSpanTicks);
+		super(PastelEntityTypes.LIGHT_MINE.get(), world, owner, detectionRange, damage, lifeSpanTicks);
     }
 	
 	public static void summonBarrage(Level world, @Nullable LivingEntity user, @Nullable LivingEntity target, Predicate<LivingEntity> targetPredicate, List<MobEffectInstance> effects, Vec3 position, IntProvider count) {
@@ -102,7 +102,7 @@ public class LightMineEntity extends LightShardBaseEntity {
     
     @Override
     public ResourceLocation getTextureLocation() {
-        return SpectrumCommon.locate("textures/entity/projectile/light_mine.png");
+        return PastelCommon.locate("textures/entity/projectile/light_mine.png");
     }
     
     @Override

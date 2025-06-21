@@ -6,9 +6,9 @@ import com.klikli_dev.modonomicon.data.BookConditionJsonLoader;
 import com.klikli_dev.modonomicon.data.BookPageJsonLoader;
 import com.klikli_dev.modonomicon.data.LoaderRegistry;
 import com.klikli_dev.modonomicon.data.NetworkLoader;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;
-import earth.terrarium.pastel.compat.SpectrumIntegrationPacks;
+import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookAnvilCrushingPageRenderer;
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookChecklistPageRenderer;
 import earth.terrarium.pastel.compat.modonomicon.client.pages.BookCinderhearthSmeltingPageRenderer;
@@ -56,44 +56,44 @@ import earth.terrarium.pastel.recipe.potion_workshop.PotionWorkshopCraftingRecip
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeType;
 
-public class ModonomiconCompat extends SpectrumIntegrationPacks.ModIntegrationPack {
+public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack {
 	
 	// Entry Types
-	public static final ResourceLocation WEB_LINK_ENTRY_TYPE = SpectrumCommon.locate("web_link");
+	public static final ResourceLocation WEB_LINK_ENTRY_TYPE = PastelCommon.locate("web_link");
 	
     // Page Types
-    public static final ResourceLocation ANVIL_CRUSHING_PAGE = SpectrumCommon.locate("anvil_crushing");
-    public static final ResourceLocation PEDESTAL_CRAFTING_PAGE = SpectrumCommon.locate("pedestal_crafting");
-    public static final ResourceLocation FUSION_SHRINE_CRAFTING_PAGE = SpectrumCommon.locate("fusion_shrine_crafting");
-    public static final ResourceLocation ENCHANTER_CRAFTING_PAGE = SpectrumCommon.locate("enchanter_crafting");
-    public static final ResourceLocation ENCHANTER_UPGRADING_PAGE = SpectrumCommon.locate("enchanter_upgrading");
-    public static final ResourceLocation POTION_WORKSHOP_BREWING_PAGE = SpectrumCommon.locate("potion_workshop_brewing");
-    public static final ResourceLocation POTION_WORKSHOP_CRAFTING_PAGE = SpectrumCommon.locate("potion_workshop_crafting");
-    public static final ResourceLocation SPIRIT_INSTILLER_CRAFTING_PAGE = SpectrumCommon.locate("spirit_instiller_crafting");
-    public static final ResourceLocation LIQUID_CRYSTAL_CONVERTING_PAGE = SpectrumCommon.locate("liquid_crystal_converting");
-    public static final ResourceLocation MIDNIGHT_SOLUTION_CONVERTING_PAGE = SpectrumCommon.locate("midnight_solution_converting");
-    public static final ResourceLocation DRAGONROT_CONVERTING_PAGE = SpectrumCommon.locate("dragonrot_converting");
-	public static final ResourceLocation GOO_CONVERTING_PAGE = SpectrumCommon.locate("goo_converting");
-    public static final ResourceLocation CRYSTALLARIEUM_GROWING_PAGE = SpectrumCommon.locate("crystallarieum_growing");
-    public static final ResourceLocation CINDERHEARTH_SMELTING_PAGE = SpectrumCommon.locate("cinderhearth_smelting");
-    public static final ResourceLocation TITRATION_BARREL_FERMENTING_PAGE = SpectrumCommon.locate("titration_barrel_fermenting");
-    public static final ResourceLocation STATUS_EFFECT_PAGE = SpectrumCommon.locate("status_effect");
-    public static final ResourceLocation HINT_PAGE = SpectrumCommon.locate("hint");
-    public static final ResourceLocation CHECKLIST_PAGE = SpectrumCommon.locate("checklist");
-    public static final ResourceLocation CONFIRMATION_BUTTON_PAGE = SpectrumCommon.locate("confirmation_button");
-    public static final ResourceLocation SNIPPET_PAGE = SpectrumCommon.locate("snippet");
-    public static final ResourceLocation LINK_PAGE = SpectrumCommon.locate("link");
-    public static final ResourceLocation COLLECTION_PAGE = SpectrumCommon.locate("collection");
-    public static final ResourceLocation PRIMORDIAL_FIRE_BURNING_PAGE = SpectrumCommon.locate("primordial_fire_burning");
+    public static final ResourceLocation ANVIL_CRUSHING_PAGE = PastelCommon.locate("anvil_crushing");
+    public static final ResourceLocation PEDESTAL_CRAFTING_PAGE = PastelCommon.locate("pedestal_crafting");
+    public static final ResourceLocation FUSION_SHRINE_CRAFTING_PAGE = PastelCommon.locate("fusion_shrine_crafting");
+    public static final ResourceLocation ENCHANTER_CRAFTING_PAGE = PastelCommon.locate("enchanter_crafting");
+    public static final ResourceLocation ENCHANTER_UPGRADING_PAGE = PastelCommon.locate("enchanter_upgrading");
+    public static final ResourceLocation POTION_WORKSHOP_BREWING_PAGE = PastelCommon.locate("potion_workshop_brewing");
+    public static final ResourceLocation POTION_WORKSHOP_CRAFTING_PAGE = PastelCommon.locate("potion_workshop_crafting");
+    public static final ResourceLocation SPIRIT_INSTILLER_CRAFTING_PAGE = PastelCommon.locate("spirit_instiller_crafting");
+    public static final ResourceLocation LIQUID_CRYSTAL_CONVERTING_PAGE = PastelCommon.locate("liquid_crystal_converting");
+    public static final ResourceLocation MIDNIGHT_SOLUTION_CONVERTING_PAGE = PastelCommon.locate("midnight_solution_converting");
+    public static final ResourceLocation DRAGONROT_CONVERTING_PAGE = PastelCommon.locate("dragonrot_converting");
+	public static final ResourceLocation GOO_CONVERTING_PAGE = PastelCommon.locate("goo_converting");
+    public static final ResourceLocation CRYSTALLARIEUM_GROWING_PAGE = PastelCommon.locate("crystallarieum_growing");
+    public static final ResourceLocation CINDERHEARTH_SMELTING_PAGE = PastelCommon.locate("cinderhearth_smelting");
+    public static final ResourceLocation TITRATION_BARREL_FERMENTING_PAGE = PastelCommon.locate("titration_barrel_fermenting");
+    public static final ResourceLocation STATUS_EFFECT_PAGE = PastelCommon.locate("status_effect");
+    public static final ResourceLocation HINT_PAGE = PastelCommon.locate("hint");
+    public static final ResourceLocation CHECKLIST_PAGE = PastelCommon.locate("checklist");
+    public static final ResourceLocation CONFIRMATION_BUTTON_PAGE = PastelCommon.locate("confirmation_button");
+    public static final ResourceLocation SNIPPET_PAGE = PastelCommon.locate("snippet");
+    public static final ResourceLocation LINK_PAGE = PastelCommon.locate("link");
+    public static final ResourceLocation COLLECTION_PAGE = PastelCommon.locate("collection");
+    public static final ResourceLocation PRIMORDIAL_FIRE_BURNING_PAGE = PastelCommon.locate("primordial_fire_burning");
     
     // Unlock Conditions
-    public static final ResourceLocation ENCHANTMENT_REGISTERED = SpectrumCommon.locate("enchantment_registered");
-    public static final ResourceLocation RECIPE_LOADED_AND_UNLOCKED = SpectrumCommon.locate("recipe_loaded_and_unlocked");
-    public static final ResourceLocation NOT = SpectrumCommon.locate("not");
+    public static final ResourceLocation ENCHANTMENT_REGISTERED = PastelCommon.locate("enchantment_registered");
+    public static final ResourceLocation RECIPE_LOADED_AND_UNLOCKED = PastelCommon.locate("recipe_loaded_and_unlocked");
+    public static final ResourceLocation NOT = PastelCommon.locate("not");
 	
 	@Override
     public void register() {
@@ -107,22 +107,22 @@ public class ModonomiconCompat extends SpectrumIntegrationPacks.ModIntegrationPa
 	}
 	
 	private void registerPages() {
-        registerGatedRecipePage(ANVIL_CRUSHING_PAGE, SpectrumRecipeTypes.ANVIL_CRUSHING, false);
-        registerGatedRecipePage(PEDESTAL_CRAFTING_PAGE, SpectrumRecipeTypes.PEDESTAL, false);
-        registerGatedRecipePage(FUSION_SHRINE_CRAFTING_PAGE, SpectrumRecipeTypes.FUSION_SHRINE, false);
-        registerGatedRecipePage(ENCHANTER_CRAFTING_PAGE, SpectrumRecipeTypes.ENCHANTER, false);
-        registerGatedRecipePage(ENCHANTER_UPGRADING_PAGE, SpectrumRecipeTypes.ENCHANTMENT_UPGRADE, false);
-        registerGatedRecipePage(POTION_WORKSHOP_BREWING_PAGE, SpectrumRecipeTypes.POTION_WORKSHOP_BREWING, false);
-        registerGatedRecipePage(POTION_WORKSHOP_CRAFTING_PAGE, SpectrumRecipeTypes.POTION_WORKSHOP_CRAFTING, false);
-        registerGatedRecipePage(SPIRIT_INSTILLER_CRAFTING_PAGE, SpectrumRecipeTypes.SPIRIT_INSTILLING, true);
-        registerGatedRecipePage(LIQUID_CRYSTAL_CONVERTING_PAGE, SpectrumRecipeTypes.LIQUID_CRYSTAL_CONVERTING, false);
-        registerGatedRecipePage(MIDNIGHT_SOLUTION_CONVERTING_PAGE, SpectrumRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING, false);
-        registerGatedRecipePage(DRAGONROT_CONVERTING_PAGE, SpectrumRecipeTypes.DRAGONROT_CONVERTING, false);
-		registerGatedRecipePage(GOO_CONVERTING_PAGE, SpectrumRecipeTypes.GOO_CONVERTING, false);
-        registerGatedRecipePage(CRYSTALLARIEUM_GROWING_PAGE, SpectrumRecipeTypes.CRYSTALLARIEUM, false);
-        registerGatedRecipePage(CINDERHEARTH_SMELTING_PAGE, SpectrumRecipeTypes.CINDERHEARTH, false);
-        registerGatedRecipePage(TITRATION_BARREL_FERMENTING_PAGE, SpectrumRecipeTypes.TITRATION_BARREL, true);
-        registerGatedRecipePage(PRIMORDIAL_FIRE_BURNING_PAGE, SpectrumRecipeTypes.PRIMORDIAL_FIRE_BURNING, false);
+        registerGatedRecipePage(ANVIL_CRUSHING_PAGE, PastelRecipeTypes.ANVIL_CRUSHING, false);
+        registerGatedRecipePage(PEDESTAL_CRAFTING_PAGE, PastelRecipeTypes.PEDESTAL, false);
+        registerGatedRecipePage(FUSION_SHRINE_CRAFTING_PAGE, PastelRecipeTypes.FUSION_SHRINE, false);
+        registerGatedRecipePage(ENCHANTER_CRAFTING_PAGE, PastelRecipeTypes.ENCHANTER, false);
+        registerGatedRecipePage(ENCHANTER_UPGRADING_PAGE, PastelRecipeTypes.ENCHANTMENT_UPGRADE, false);
+        registerGatedRecipePage(POTION_WORKSHOP_BREWING_PAGE, PastelRecipeTypes.POTION_WORKSHOP_BREWING, false);
+        registerGatedRecipePage(POTION_WORKSHOP_CRAFTING_PAGE, PastelRecipeTypes.POTION_WORKSHOP_CRAFTING, false);
+        registerGatedRecipePage(SPIRIT_INSTILLER_CRAFTING_PAGE, PastelRecipeTypes.SPIRIT_INSTILLING, true);
+        registerGatedRecipePage(LIQUID_CRYSTAL_CONVERTING_PAGE, PastelRecipeTypes.LIQUID_CRYSTAL_CONVERTING, false);
+        registerGatedRecipePage(MIDNIGHT_SOLUTION_CONVERTING_PAGE, PastelRecipeTypes.MIDNIGHT_SOLUTION_CONVERTING, false);
+        registerGatedRecipePage(DRAGONROT_CONVERTING_PAGE, PastelRecipeTypes.DRAGONROT_CONVERTING, false);
+		registerGatedRecipePage(GOO_CONVERTING_PAGE, PastelRecipeTypes.GOO_CONVERTING, false);
+        registerGatedRecipePage(CRYSTALLARIEUM_GROWING_PAGE, PastelRecipeTypes.CRYSTALLARIEUM, false);
+        registerGatedRecipePage(CINDERHEARTH_SMELTING_PAGE, PastelRecipeTypes.CINDERHEARTH, false);
+        registerGatedRecipePage(TITRATION_BARREL_FERMENTING_PAGE, PastelRecipeTypes.TITRATION_BARREL, true);
+        registerGatedRecipePage(PRIMORDIAL_FIRE_BURNING_PAGE, PastelRecipeTypes.PRIMORDIAL_FIRE_BURNING, false);
 
         LoaderRegistry.registerPageLoader(STATUS_EFFECT_PAGE, (BookPageJsonLoader<?>) BookStatusEffectPage::fromJson, BookStatusEffectPage::fromNetwork);
         LoaderRegistry.registerPageLoader(HINT_PAGE, (BookPageJsonLoader<?>) BookHintPage::fromJson, BookHintPage::fromNetwork);
@@ -172,28 +172,28 @@ public class ModonomiconCompat extends SpectrumIntegrationPacks.ModIntegrationPa
         PageRendererRegistry.registerPageRenderer(LIQUID_CRYSTAL_CONVERTING_PAGE, p -> new BookFluidConvertingPageRenderer<>((BookGatedRecipePage<LiquidCrystalConvertingRecipe>) p) {
             @Override
             public ResourceLocation getBackgroundTexture() {
-                return SpectrumCommon.locate("textures/gui/guidebook/liquid_crystal.png");
+                return PastelCommon.locate("textures/gui/guidebook/liquid_crystal.png");
             }
         });
 
         PageRendererRegistry.registerPageRenderer(MIDNIGHT_SOLUTION_CONVERTING_PAGE, p -> new BookFluidConvertingPageRenderer<>((BookGatedRecipePage<MidnightSolutionConvertingRecipe>) p) {
             @Override
             public ResourceLocation getBackgroundTexture() {
-                return SpectrumCommon.locate("textures/gui/guidebook/midnight_solution.png");
+                return PastelCommon.locate("textures/gui/guidebook/midnight_solution.png");
             }
         });
 
         PageRendererRegistry.registerPageRenderer(DRAGONROT_CONVERTING_PAGE, p -> new BookFluidConvertingPageRenderer<>((BookGatedRecipePage<DragonrotConvertingRecipe>) p) {
             @Override
             public ResourceLocation getBackgroundTexture() {
-                return SpectrumCommon.locate("textures/gui/guidebook/dragonrot.png");
+                return PastelCommon.locate("textures/gui/guidebook/dragonrot.png");
             }
         });
 		
 		PageRendererRegistry.registerPageRenderer(GOO_CONVERTING_PAGE, p -> new BookFluidConvertingPageRenderer<>((BookGatedRecipePage<GooConvertingRecipe>) p) {
             @Override
             public ResourceLocation getBackgroundTexture() {
-				return SpectrumCommon.locate("textures/gui/guidebook/goo.png");
+				return PastelCommon.locate("textures/gui/guidebook/goo.png");
             }
         });
     }

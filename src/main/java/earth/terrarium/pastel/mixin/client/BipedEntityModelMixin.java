@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin.client;
 
-import earth.terrarium.pastel.items.trinkets.SpectrumTrinketItem;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,7 +30,7 @@ public class BipedEntityModelMixin {
 
 	@Inject(method = {"setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V"}, at = @At("TAIL"), cancellable = true)
 	public void poseArms(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo ci) {
-		if (SpectrumTrinketItem.hasEquipped(livingEntity, SpectrumItems.NEAT_RING.get())) {
+		if (PastelTrinketItem.hasEquipped(livingEntity, PastelItems.NEAT_RING.get())) {
 			this.rightLeg.xRot = 0;
 			this.rightLeg.yRot = 0;
 			this.leftLeg.xRot = 0;

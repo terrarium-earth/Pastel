@@ -3,7 +3,7 @@ package earth.terrarium.pastel.api.energy.storage;
 import earth.terrarium.pastel.api.energy.InkStorage;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -117,7 +117,7 @@ public class TotalCappedInkStorage implements InkStorage {
 	public void fillCompletely() {
 		this.storedEnergy.clear();
 		
-		int inkColorCount = SpectrumRegistries.INK_COLOR.size();
+		int inkColorCount = PastelRegistries.INK_COLOR.size();
 		long energyPerColor = this.maxEnergyTotal / inkColorCount;
 		for (InkColor color : InkColors.all()) {
 			this.storedEnergy.put(color, energyPerColor);
@@ -140,7 +140,7 @@ public class TotalCappedInkStorage implements InkStorage {
 	
 	protected void addInkContentTooltip(List<Component> tooltip) {
 		// we are iterating them this way to preserve the ordering in which they were registered
-		for (InkColor color : SpectrumRegistries.INK_COLOR) {
+		for (InkColor color : PastelRegistries.INK_COLOR) {
 			long amount = this.storedEnergy.getOrDefault(color, 0L);
 			if (amount > 0) {
 				InkStorage.addInkStoreBulletTooltip(tooltip, color, amount);

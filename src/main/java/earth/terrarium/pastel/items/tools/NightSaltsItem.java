@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.item.SleepAlteringItem;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -44,12 +44,12 @@ public class NightSaltsItem extends Item implements SleepAlteringItem {
             component.setSleepTimers(20 * 10, 20 * 10, 0);
             component.setLastSleepItem(this);
 			
-			player.addEffect(new MobEffectInstance(SpectrumStatusEffects.CALMING, 20 * 20, 2)); // TODO: this should probs be moved to a food component, so the effect shows up as tooltip
+			player.addEffect(new MobEffectInstance(PastelStatusEffects.CALMING, 20 * 20, 2)); // TODO: this should probs be moved to a food component, so the effect shows up as tooltip
             if (!player.getAbilities().instabuild)
                 stack.shrink(1);
         }
         else {
-            user.addEffect(new MobEffectInstance(SpectrumStatusEffects.SOMNOLENCE, 20 * 15));
+            user.addEffect(new MobEffectInstance(PastelStatusEffects.SOMNOLENCE, 20 * 15));
             user.startSleeping(user.blockPosition());
             stack.shrink(1);
         }
@@ -81,7 +81,7 @@ public class NightSaltsItem extends Item implements SleepAlteringItem {
 
     @Override
     public void applyPenalties(Player player) {
-        player.addEffect(new MobEffectInstance(SpectrumStatusEffects.VULNERABILITY, 20 * 30));
+        player.addEffect(new MobEffectInstance(PastelStatusEffects.VULNERABILITY, 20 * 30));
         player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 30));
     }
 }

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.registries.SpectrumBlockTags;
+import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.LevelReader;
@@ -16,7 +16,7 @@ public class AnimalEntityMixin {
 	// it does, however, not remove the ambient light requirement for animal spawns
 	@Inject(method = "getWalkTargetValue", at = @At("HEAD"), cancellable = true)
 	public void getPathfindingFavor(BlockPos pos, LevelReader world, CallbackInfoReturnable<Float> cir) {
-		if (world.getBlockState(pos.below()).is(SpectrumBlockTags.ANIMALS_SPAWNABLE_ON_ADDITIONS)) {
+		if (world.getBlockState(pos.below()).is(PastelBlockTags.ANIMALS_SPAWNABLE_ON_ADDITIONS)) {
 			cir.setReturnValue(10.0F);
 		}
 	}

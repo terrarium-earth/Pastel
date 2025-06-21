@@ -2,9 +2,9 @@ package earth.terrarium.pastel.blocks.pedestal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.registries.client.SpectrumRenderLayers;
+import earth.terrarium.pastel.registries.client.PastelRenderLayers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 @OnlyIn(Dist.CLIENT)
 public class PedestalBlockEntityRenderer<C extends PedestalBlockEntity> implements BlockEntityRenderer<C> {
 	
-	private final ResourceLocation GROUND_MARK = SpectrumCommon.locate("textures/misc/circle.png");
+	private final ResourceLocation GROUND_MARK = PastelCommon.locate("textures/misc/circle.png");
 	private final ModelPart circle;
 	
 	private static final int RECIPE_RECALCULATION_TICKS = 4;
@@ -61,7 +61,7 @@ public class PedestalBlockEntityRenderer<C extends PedestalBlockEntity> implemen
 		if (currentRecipe instanceof PedestalRecipe pedestalRecipe) {
 			float time = entity.getLevel().getGameTime() % 50000 + tickDelta;
 			this.circle.yRot = time / 25.0F;
-			this.circle.render(poseStack, vertexConsumerProvider.getBuffer(SpectrumRenderLayers.GlowInTheDarkRenderLayer.get(GROUND_MARK)), light, overlay);
+			this.circle.render(poseStack, vertexConsumerProvider.getBuffer(PastelRenderLayers.GlowInTheDarkRenderLayer.get(GROUND_MARK)), light, overlay);
 			
 			long currentTime = entity.getLevel().getGameTime();
 			if (this.cachedRecipeTime + RECIPE_RECALCULATION_TICKS < currentTime || this.cachedRecipe != pedestalRecipe) {

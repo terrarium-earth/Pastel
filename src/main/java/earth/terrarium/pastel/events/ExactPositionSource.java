@@ -33,7 +33,7 @@ public class ExactPositionSource implements PositionSource {
 	
 	@Override
 	public PositionSourceType<?> getType() {
-		return SpectrumPositionSources.EXACT.value();
+		return PastelPositionSources.EXACT.value();
 	}
 	
 	public static class Type implements PositionSourceType<ExactPositionSource> {

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.item;
 
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
@@ -14,8 +14,8 @@ public interface MergeableItem {
 		if (!parent.getEnchantments().equals(other.getEnchantments()))
 			return false;
 		
-		var comp = parent.get(SpectrumDataComponentTypes.PAIRED_ITEM);
-		var otherComp = other.get(SpectrumDataComponentTypes.PAIRED_ITEM);
+		var comp = parent.get(PastelDataComponentTypes.PAIRED_ITEM);
+		var otherComp = other.get(PastelDataComponentTypes.PAIRED_ITEM);
 		return comp != null && otherComp != null && comp.signature() == otherComp.signature();
 	}
 

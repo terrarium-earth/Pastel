@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.REI.plugins;
 
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
@@ -14,12 +14,12 @@ public class HeatingCategory extends BlockToBlockWithChanceCategory {
 	
 	@Override
 	public CategoryIdentifier<? extends HeatingDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.HEATING;
+		return PastelPlugins.HEATING;
 	}
 	
 	@Override
 	public Renderer getIcon() {
-		return EntryStacks.of(SpectrumBlocks.BLAZE_IDOL.get());
+		return EntryStacks.of(PastelBlocks.BLAZE_IDOL.get());
 	}
 	
 	@Override

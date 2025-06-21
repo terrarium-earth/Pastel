@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.block.FilterConfigurable;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.events.SpectrumGameEvents;
+import earth.terrarium.pastel.events.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.EventQueue;
 import earth.terrarium.pastel.events.listeners.ExperienceOrbEventQueue;
 import earth.terrarium.pastel.events.listeners.ItemAndExperienceEventQueue;
@@ -14,9 +14,9 @@ import earth.terrarium.pastel.inventories.BlackHoleChestScreenHandler;
 import earth.terrarium.pastel.mixin.accessors.ItemEntityAccessor;
 import earth.terrarium.pastel.networking.s2c_payloads.BlackHoleChestStatusUpdatePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.*;
 import net.minecraft.network.*;
 import net.minecraft.world.item.ItemStack;
@@ -48,7 +48,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implements FilterConfigurable, WorldlyContainer, EventQueue.Callback<Object> {
+public class BlackHoleChestBlockEntity extends PastelChestBlockEntity implements FilterConfigurable, WorldlyContainer, EventQueue.Callback<Object> {
 	
 	public static final int INVENTORY_SIZE = 28;
 	public static final int ITEM_FILTER_SLOT_COUNT = 5;
@@ -62,7 +62,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	long interpTicks, interpLength = 1, age, storedXP, maxStoredXP;
 	
 	public BlackHoleChestBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.BLACK_HOLE_CHEST.get(), blockPos, blockState);
+		super(PastelBlockEntities.BLACK_HOLE_CHEST.get(), blockPos, blockState);
 		this.itemAndExperienceEventQueue = new ItemAndExperienceEventQueue(new BlockPositionSource(this.worldPosition), RANGE, this);
 		this.filterItems = NonNullList.withSize(ITEM_FILTER_SLOT_COUNT, ItemReference.empty());
 	}
@@ -100,7 +100,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 			chest.lidAnimator.tickLid();
 		} else {
 			chest.itemAndExperienceEventQueue.tick(world);
-			if (world.getGameTime() % 80 == 0 && !SpectrumChestBlock.isChestBlocked(world, pos)) {
+			if (world.getGameTime() % 80 == 0 && !PastelChestBlock.isChestBlocked(world, pos)) {
 				searchForNearbyEntities(chest);
 			}
 		}
@@ -141,7 +141,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	}
 	
 	public boolean canFunction() {
-		return level != null && !SpectrumChestBlock.isChestBlocked(level, this.worldPosition) && !isFull;
+		return level != null && !PastelChestBlock.isChestBlocked(level, this.worldPosition) && !isFull;
 	}
 	
 	public boolean isFull() {
@@ -189,14 +189,14 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 		List<ItemEntity> itemEntities = world.getEntities(EntityType.ITEM, getBoxWithRadius(blockEntity.worldPosition, RANGE), Entity::isAlive);
 		for (ItemEntity itemEntity : itemEntities) {
 			if (itemEntity.isAlive() && !itemEntity.getItem().isEmpty()) {
-				itemEntity.gameEvent(SpectrumGameEvents.ENTITY_SPAWNED);
+				itemEntity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
 			}
 		}
 		
 		List<ExperienceOrb> experienceOrbEntities = world.getEntities(EntityType.EXPERIENCE_ORB, getBoxWithRadius(blockEntity.worldPosition, RANGE), Entity::isAlive);
 		for (ExperienceOrb experienceOrbEntity : experienceOrbEntities) {
 			if (experienceOrbEntity.isAlive()) {
-				experienceOrbEntity.gameEvent(SpectrumGameEvents.ENTITY_SPAWNED);
+				experienceOrbEntity.gameEvent(PastelGameEvents.ENTITY_SPAWNED);
 			}
 		}
 	}
@@ -255,7 +255,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	
 	@Override
 	public boolean canAcceptEvent(Level world, GameEventListener listener, GameEvent.ListenerInfo event, Vec3 sourcePos) {
-		if (SpectrumChestBlock.isChestBlocked(world, this.worldPosition)) {
+		if (PastelChestBlock.isChestBlocked(world, this.worldPosition)) {
 			return false;
 		}
 		Entity entity = event.context().sourceEntity();
@@ -267,7 +267,7 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	
 	@Override
 	public void triggerEvent(Level world, GameEventListener listener, Object entry) {
-		if (SpectrumChestBlock.isChestBlocked(world, worldPosition)) {
+		if (PastelChestBlock.isChestBlocked(world, worldPosition)) {
 			return;
 		}
 		
@@ -302,24 +302,24 @@ public class BlackHoleChestBlockEntity extends SpectrumChestBlockEntity implemen
 	
 	public static void sendPlayItemEntityAbsorbedParticle(ServerLevel world, @NotNull ItemEntity itemEntity) {
 		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, itemEntity.position(),
-				SpectrumParticleTypes.BLUE_BUBBLE_POP,
+				PastelParticleTypes.BLUE_BUBBLE_POP,
 				1, Vec3.ZERO);
 	}
 	
 	public static void sendPlayExperienceOrbEntityAbsorbedParticle(ServerLevel world, @NotNull ExperienceOrb experienceOrbEntity) {
 		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(world, experienceOrbEntity.position(),
-				SpectrumParticleTypes.GREEN_BUBBLE_POP,
+				PastelParticleTypes.GREEN_BUBBLE_POP,
 				1, Vec3.ZERO);
 	}
 	
 	@Override
 	public SoundEvent getOpenSound() {
-		return SpectrumSoundEvents.BLACK_HOLE_CHEST_OPEN;
+		return PastelSoundEvents.BLACK_HOLE_CHEST_OPEN;
 	}
 	
 	@Override
 	public SoundEvent getCloseSound() {
-		return SpectrumSoundEvents.BLACK_HOLE_CHEST_CLOSE;
+		return PastelSoundEvents.BLACK_HOLE_CHEST_CLOSE;
 	}
 
 	@Override

@@ -8,8 +8,8 @@ import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.TimeHelper;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -41,15 +41,15 @@ public abstract class SweetenableTitrationBarrelRecipe extends TitrationBarrelRe
 		}
 		double alcPercent = getAlcPercentWithBloominess(ageIngameDays, downfall, bloominess, thickness);
 		if (alcPercent >= 100) {
-			return SpectrumItems.CHRYSOCOLLA.get().getDefaultInstance();
+			return PastelItems.CHRYSOCOLLA.get().getDefaultInstance();
 		} else {
 			List<MobEffectInstance> effects = getEffects(nectar, bloominess, alcPercent);
 			
 			ItemStack outputStack = outputItemStack.copy();
 			outputStack.setCount(1);
-			outputStack.set(SpectrumDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, (int) alcPercent, thickness));
+			outputStack.set(PastelDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, (int) alcPercent, thickness));
 			outputStack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), effects));
-			outputStack.set(SpectrumDataComponentTypes.JADE_WINE, new JadeWineComponent((float) bloominess, nectar));
+			outputStack.set(PastelDataComponentTypes.JADE_WINE, new JadeWineComponent((float) bloominess, nectar));
 			return outputStack;
 		}
 	}

@@ -2,8 +2,8 @@ package earth.terrarium.pastel.blocks.chests;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.geom.ModelPart;
@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 @SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class HeartboundChestBlockEntityRenderer implements BlockEntityRenderer<HeartboundChestBlockEntity> {
 
-	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, SpectrumCommon.locate("block/heartbound_chest"));
+	private static final Material SPRITE = new Material(InventoryMenu.BLOCK_ATLAS, PastelCommon.locate("block/heartbound_chest"));
 
 	private final ModelPart root;
 	private final ModelPart bottomLock;
@@ -62,7 +62,7 @@ public class HeartboundChestBlockEntityRenderer implements BlockEntityRenderer<H
 		var vertexConsumer = SPRITE.buffer(vertexConsumers, RenderType::entitySolid);
 
 		boolean bl = chest.getLevel() != null;
-		BlockState blockState = bl ? chest.getBlockState() : SpectrumBlocks.HEARTBOUND_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
+		BlockState blockState = bl ? chest.getBlockState() : PastelBlocks.HEARTBOUND_CHEST.get().defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH);
 		float f = blockState.hasProperty(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING).toYRot() : 0;
 		matrices.translate(0.5D, 1.5D, 0.5D);
 		matrices.mulPose(Axis.YP.rotationDegrees(-f));

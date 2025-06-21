@@ -2,8 +2,8 @@ package earth.terrarium.pastel.progression.advancement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.items.trinkets.SpectrumTrinketItem;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 public class TrinketChangeCriterion extends SimpleCriterionTrigger<TrinketChangeCriterion.Conditions> {
 	
-	public static final ResourceLocation ID = SpectrumCommon.locate("trinket_change");
+	public static final ResourceLocation ID = PastelCommon.locate("trinket_change");
 	
 	public void trigger(ServerPlayer player) {
 		this.trigger(player, (conditions) -> {
@@ -36,7 +36,7 @@ public class TrinketChangeCriterion extends SimpleCriterionTrigger<TrinketChange
 					ItemStack itemStack = equippedCurios.getStackInSlot(i);
 
 					equippedStacks.add(itemStack);
-					if (itemStack.getItem() instanceof SpectrumTrinketItem) {
+					if (itemStack.getItem() instanceof PastelTrinketItem) {
 						spectrumStacks++;
 					}
 				}

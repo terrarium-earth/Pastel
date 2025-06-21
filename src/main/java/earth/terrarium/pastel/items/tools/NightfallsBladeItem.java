@@ -1,16 +1,16 @@
 package earth.terrarium.pastel.items.tools;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
-import earth.terrarium.pastel.helpers.SpectrumColorHelper;
+import earth.terrarium.pastel.helpers.ColorHelper;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumEntityAttributes;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelEntityAttributes;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -34,13 +34,13 @@ import java.util.List;
 
 public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionFillable, SlotBackgroundEffectProvider {
 	
-	private static final ResourceLocation UNLOCK_IDENTIFIER = SpectrumCommon.locate("unlocks/equipment/nightfalls_blade");
+	private static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("unlocks/equipment/nightfalls_blade");
 	
 	public NightfallsBladeItem(Tier material, int attackDamage, float attackSpeed, Properties settings) {
 		super(material, settings.attributes(ItemAttributeModifiers.builder()
 				.add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, attackDamage + material.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-				.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(SpectrumEntityAttributes.REACH_MODIFIER_ID, -1.5F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+				.add(Attributes.ENTITY_INTERACTION_RANGE, new AttributeModifier(PastelEntityAttributes.REACH_MODIFIER_ID, -1.5F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
 				.build()));
 	}
 
@@ -61,7 +61,7 @@ public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionF
 	
 	@Override
 	public long adjustFinalCostFor(@NotNull InkPoweredStatusEffectInstance instance) {
-		var mod = SpectrumStatusEffects.isStrongSleepEffect(instance) ? 1 : 0;
+		var mod = PastelStatusEffects.isStrongSleepEffect(instance) ? 1 : 0;
 		return Math.round(Math.pow(instance.getInkCost().cost(), 1.75 + instance.getStatusEffectInstance().getAmplifier() + mod));
 	}
 	
@@ -74,7 +74,7 @@ public class NightfallsBladeItem extends TieredItem implements InkPoweredPotionF
 					if(InkPowered.tryDrainEnergy(player, instance.getInkCost().color(), instance.getInkCost().cost())) {
 						Level world = attacker.level();
 						if (world.isClientSide) {
-							world.addParticle(new DynamicParticleEffect(ParticleTypes.EFFECT, 0.1F, SpectrumColorHelper.colorIntToVec(instance.getStatusEffectInstance().getEffect().value().getColor()), 0.5F, 120, true, true),
+							world.addParticle(new DynamicParticleEffect(ParticleTypes.EFFECT, 0.1F, ColorHelper.colorIntToVec(instance.getStatusEffectInstance().getEffect().value().getColor()), 0.5F, 120, true, true),
 									target.getRandomX(0.5D), target.getY(0.5D), target.getRandomZ(0.5D),
 									world.random.nextFloat() - 0.5, world.random.nextFloat() - 0.5, world.random.nextFloat() - 0.5
 							);

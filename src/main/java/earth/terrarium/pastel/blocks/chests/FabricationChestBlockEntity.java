@@ -5,8 +5,8 @@ import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.inventories.FabricationChestScreenHandler;
 import earth.terrarium.pastel.items.magic_items.CraftingTabletItem;
 import earth.terrarium.pastel.networking.s2c_payloads.FabricationChestStatusUpdatePayload;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumItems;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implements WorldlyContainer {
+public class FabricationChestBlockEntity extends PastelChestBlockEntity implements WorldlyContainer {
 
 	public static final int[] CHEST_SLOTS = IntStream.rangeClosed(0, 26).toArray();
 	public static final int[] RECIPE_SLOTS = IntStream.rangeClosed(27, 30).toArray();
@@ -44,7 +44,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 	long interpTicks, interpLength = 1, age;
 	
 	public FabricationChestBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(SpectrumBlockEntities.FABRICATION_CHEST.get(), blockPos, blockState);
+		super(PastelBlockEntities.FABRICATION_CHEST.get(), blockPos, blockState);
 	}
 	
 	@SuppressWarnings("unused")
@@ -147,7 +147,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		for (int slot : RECIPE_SLOTS) {
 			var tablet = inventory.getStackInSlot(slot);
 
-			if (!tablet.is(SpectrumItems.CRAFTING_TABLET.get()))
+			if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
 				continue;
 
 			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet).value();
@@ -176,7 +176,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 
 		for (int i = 0; i < 4; i++) {
 			ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
-			if (!tablet.is(SpectrumItems.CRAFTING_TABLET.get()))
+			if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
 				continue;
 
 			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet).value();
@@ -202,7 +202,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 	
 	private boolean tryCraft(FabricationChestBlockEntity chest, int index) {
 		ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[index]);
-		if (craftingTabletItemStack.is(SpectrumItems.CRAFTING_TABLET.get())) {
+		if (craftingTabletItemStack.is(PastelItems.CRAFTING_TABLET.get())) {
 			var recipe = CraftingTabletItem.getStoredRecipe(level, craftingTabletItemStack);
 			if (recipe != null && isRecipeValid(recipe.value())) {
 				NonNullList<Ingredient> ingredients = recipe.value().getIngredients();
@@ -321,7 +321,7 @@ public class FabricationChestBlockEntity extends SpectrumChestBlockEntity implem
 		for (int i = 0; i < 4; i++) {
 			ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
 
-			if (!tablet.is(SpectrumItems.CRAFTING_TABLET.get()))
+			if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
 				continue;
 
 			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet);

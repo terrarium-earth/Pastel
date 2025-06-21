@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.entity.variants;
 
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.SpectrumCommon;
-import earth.terrarium.pastel.registries.SpectrumLootTables;
-import earth.terrarium.pastel.registries.SpectrumRegistries;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.registries.PastelLootTables;
+import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 
 public enum KindlingVariant implements StringRepresentable {
 	
-	DEFAULT("default", "textures/entity/kindling/kindling.png", "textures/entity/kindling/kindling_blink.png", "textures/entity/kindling/kindling_angry.png", "textures/entity/kindling/kindling_clipped.png", "textures/entity/kindling/kindling_blink_clipped.png", "textures/entity/kindling/kindling_angry_clipped.png", SpectrumLootTables.KINDLING_CLIPPING);
+	DEFAULT("default", "textures/entity/kindling/kindling.png", "textures/entity/kindling/kindling_blink.png", "textures/entity/kindling/kindling_angry.png", "textures/entity/kindling/kindling_clipped.png", "textures/entity/kindling/kindling_blink_clipped.png", "textures/entity/kindling/kindling_angry_clipped.png", PastelLootTables.KINDLING_CLIPPING);
 	
 	public static Codec<KindlingVariant> CODEC = StringRepresentable.fromEnum(KindlingVariant::values);
 	
@@ -29,19 +29,19 @@ public enum KindlingVariant implements StringRepresentable {
 	
 	KindlingVariant(String name, String defaultTexture, String blinkingTexture, String angryTexture, String clippedTexture, String blinkingClippedTexture, String angryClippedTexture, ResourceKey<LootTable> clippingLootTable) {
 		this.name = name;
-		this.id = SpectrumCommon.locate(name);
-		this.defaultTexture = SpectrumCommon.locate(defaultTexture);
-		this.blinkingTexture = SpectrumCommon.locate(blinkingTexture);
-		this.angryTexture = SpectrumCommon.locate(angryTexture);
-		this.clippedTexture = SpectrumCommon.locate(clippedTexture);
-		this.blinkingClippedTexture = SpectrumCommon.locate(blinkingClippedTexture);
-		this.angryClippedTexture = SpectrumCommon.locate(angryClippedTexture);
+		this.id = PastelCommon.locate(name);
+		this.defaultTexture = PastelCommon.locate(defaultTexture);
+		this.blinkingTexture = PastelCommon.locate(blinkingTexture);
+		this.angryTexture = PastelCommon.locate(angryTexture);
+		this.clippedTexture = PastelCommon.locate(clippedTexture);
+		this.blinkingClippedTexture = PastelCommon.locate(blinkingClippedTexture);
+		this.angryClippedTexture = PastelCommon.locate(angryClippedTexture);
 		this.clippingLootTable = clippingLootTable;
-		Registry.register(SpectrumRegistries.KINDLING_VARIANT, id, this);
+		Registry.register(PastelRegistries.KINDLING_VARIANT, id, this);
 	}
 	
 	public TagKey<KindlingVariant> getReference() {
-		return TagKey.create(SpectrumRegistries.KINDLING_VARIANT.key(), id);
+		return TagKey.create(PastelRegistries.KINDLING_VARIANT.key(), id);
 	}
 	
 	public ResourceLocation getDefaultTexture() {

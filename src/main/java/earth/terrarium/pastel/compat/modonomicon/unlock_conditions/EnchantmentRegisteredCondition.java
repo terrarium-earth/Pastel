@@ -4,9 +4,9 @@ import com.google.gson.JsonObject;
 import com.klikli_dev.modonomicon.book.conditions.BookCondition;
 import com.klikli_dev.modonomicon.book.conditions.context.BookConditionContext;
 import com.klikli_dev.modonomicon.book.conditions.context.BookConditionEntryContext;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;
-import earth.terrarium.pastel.helpers.SpectrumEnchantmentHelper;
+import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class EnchantmentRegisteredCondition extends BookCondition {
     
-    protected static final String TOOLTIP = "book.condition.tooltip." + SpectrumCommon.MOD_ID + ".enchantment_registered";
+    protected static final String TOOLTIP = "book.condition.tooltip." + PastelCommon.MOD_ID + ".enchantment_registered";
     
     protected ResourceKey<Enchantment> enchantmentKey;
     
@@ -59,7 +59,7 @@ public class EnchantmentRegisteredCondition extends BookCondition {
     
     @Override
     public boolean test(BookConditionContext context, Player player) {
-		return SpectrumEnchantmentHelper.getEntry(player.level().registryAccess(), this.enchantmentKey).isPresent();
+		return PastelEnchantmentHelper.getEntry(player.level().registryAccess(), this.enchantmentKey).isPresent();
     }
     
     @Override

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.lava_sponge;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
+import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -33,7 +33,7 @@ public class LavaSpongeBlock extends SpongeBlock {
 	@Override
 	protected void tryAbsorbWater(Level world, BlockPos pos) {
 		if (this.absorbLava(world, pos)) {
-			world.setBlock(pos, SpectrumBlocks.WET_LAVA_SPONGE.get().defaultBlockState(), 2);
+			world.setBlock(pos, PastelBlocks.WET_LAVA_SPONGE.get().defaultBlockState(), 2);
 			world.playSound(null, pos, SoundEvents.SPONGE_ABSORB, SoundSource.BLOCKS, 1.0F, 1.0F);
 		}
 	}

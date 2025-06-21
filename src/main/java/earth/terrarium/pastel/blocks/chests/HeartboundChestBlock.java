@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.chests;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class HeartboundChestBlock extends SpectrumChestBlock {
+public class HeartboundChestBlock extends PastelChestBlock {
 
 	public static final MapCodec<HeartboundChestBlock> CODEC = simpleCodec(HeartboundChestBlock::new);
 
@@ -39,7 +39,7 @@ public class HeartboundChestBlock extends SpectrumChestBlock {
 	@Override
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
-		return world.isClientSide ? createTickerHelper(type, SpectrumBlockEntities.HEARTBOUND_CHEST.get(), HeartboundChestBlockEntity::clientTick) : null;
+		return world.isClientSide ? createTickerHelper(type, PastelBlockEntities.HEARTBOUND_CHEST.get(), HeartboundChestBlockEntity::clientTick) : null;
 	}
 	
 	@Override

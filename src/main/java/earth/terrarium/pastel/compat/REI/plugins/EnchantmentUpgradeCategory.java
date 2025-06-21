@@ -2,9 +2,9 @@ package earth.terrarium.pastel.compat.REI.plugins;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
-import earth.terrarium.pastel.compat.REI.SpectrumPlugins;
+import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.compat.REI.widgets.IndexedEntryWidget;
-import earth.terrarium.pastel.registries.SpectrumAdvancements;
+import earth.terrarium.pastel.registries.PastelAdvancements;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
@@ -27,7 +27,7 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 	
 	@Override
 	public CategoryIdentifier<EnchantmentUpgradeDisplay> getCategoryIdentifier() {
-		return SpectrumPlugins.ENCHANTMENT_UPGRADE;
+		return PastelPlugins.ENCHANTMENT_UPGRADE;
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public class EnchantmentUpgradeCategory extends EnchanterCategory<EnchantmentUpg
 	
 	@Override
 	public void setupWidgets(Point startPoint, Rectangle bounds, List<Widget> widgets, @NotNull EnchantmentUpgradeDisplay display) {
-		boolean overUnlocked = AdvancementHelper.hasAdvancement(Minecraft.getInstance().player, SpectrumAdvancements.OVERENCHANTING);
+		boolean overUnlocked = AdvancementHelper.hasAdvancement(Minecraft.getInstance().player, PastelAdvancements.OVERENCHANTING);
 		List<EntryIngredient> inputs = display.getInputEntries();
 		
 		// enchanter structure background					            destinationX	 destinationY   sourceX, sourceY, width, height

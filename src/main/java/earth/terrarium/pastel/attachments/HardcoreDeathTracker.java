@@ -3,7 +3,7 @@ package earth.terrarium.pastel.attachments;
 import com.mojang.authlib.GameProfile;
 import earth.terrarium.pastel.*;
 import earth.terrarium.pastel.attachments.data.AttachmentUtil;
-import earth.terrarium.pastel.registries.SpectrumStatusEffects;
+import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -25,7 +25,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class HardcoreDeathTracker extends SavedData {
@@ -36,7 +35,7 @@ public class HardcoreDeathTracker extends SavedData {
 	private static HardcoreDeathTracker CLIENT_TRACKER;
 	
 	public static boolean isInHardcore(Player player) {
-		return player.hasEffect(SpectrumStatusEffects.DIVINITY);
+		return player.hasEffect(PastelStatusEffects.DIVINITY);
 	}
 
 	private static void sync(ServerPlayer player) {
@@ -49,7 +48,7 @@ public class HardcoreDeathTracker extends SavedData {
 	}
 	
 	public static void removeHardcoreDeath(GameProfile profile) {
-		var server = SpectrumCommon.getSidedServer();
+		var server = PastelCommon.getSidedServer();
 		if (server == null)
 			return;
 		removeHardcoreDeath(profile.getId());
@@ -90,7 +89,7 @@ public class HardcoreDeathTracker extends SavedData {
 			return CLIENT_TRACKER;
 		}
 
-		return SpectrumCommon.getSidedServer().overworld().getDataStorage().computeIfAbsent(FACTORY, SpectrumCommon.MOD_ID + ":hardcore_tracker");
+		return PastelCommon.getSidedServer().overworld().getDataStorage().computeIfAbsent(FACTORY, PastelCommon.MOD_ID + ":hardcore_tracker");
 	}
 
 	@Override
@@ -131,8 +130,8 @@ public class HardcoreDeathTracker extends SavedData {
 		public static final CustomPacketPayload.Type<SyncPayload> TYPE = AttachmentUtil.create("hardcore_death_tracker");
 
 		public static void execute(SyncPayload payload, IPayloadContext context) {
-			assert SpectrumCommon.getRegistryAccess() != null; // Surely this cannot be null if we are receiving a packet, right?
-			CLIENT_TRACKER = load(payload.tag, SpectrumCommon.getRegistryAccess());
+			assert PastelCommon.getRegistryAccess() != null; // Surely this cannot be null if we are receiving a packet, right?
+			CLIENT_TRACKER = load(payload.tag, PastelCommon.getRegistryAccess());
 		}
 
 		@Override

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.redstone;
 
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -12,7 +12,7 @@ public class RedstoneCalculatorBlockEntity extends BlockEntity {
 	private int outputSignal;
 	
 	public RedstoneCalculatorBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.REDSTONE_CALCULATOR.get(), pos, state);
+		super(PastelBlockEntities.REDSTONE_CALCULATOR.get(), pos, state);
 	}
 	
 	@Override

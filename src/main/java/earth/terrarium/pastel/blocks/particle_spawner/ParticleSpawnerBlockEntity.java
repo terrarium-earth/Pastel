@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.particle_spawner;
 
 import earth.terrarium.pastel.inventories.ParticleSpawnerScreenHandler;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Vec3i;
@@ -13,7 +13,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -32,14 +31,14 @@ public class ParticleSpawnerBlockEntity extends BlockEntity implements MenuProvi
 	protected boolean initialized = false;
 	
 	public ParticleSpawnerBlockEntity(BlockPos blockPos, BlockState blockState) {
-		this(SpectrumBlockEntities.PARTICLE_SPAWNER.get(), blockPos, blockState);
+		this(PastelBlockEntities.PARTICLE_SPAWNER.get(), blockPos, blockState);
 	}
 	
 	public ParticleSpawnerBlockEntity(BlockEntityType<ParticleSpawnerBlockEntity> blockEntityType, BlockPos blockPos, BlockState blockState) {
 		super(blockEntityType, blockPos, blockState);
 		
 		this.configuration = new ParticleSpawnerConfiguration(
-				SpectrumParticleTypes.SHOOTING_STAR,
+				PastelParticleTypes.SHOOTING_STAR,
 				new Vec3i(80, 40, 0),
 				false,
 				10.0F,

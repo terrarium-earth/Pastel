@@ -2,7 +2,7 @@ package earth.terrarium.pastel.api.predicate.item;
 
 import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.components.JadeWineComponent;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.advancements.critereon.SingleComponentItemPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ public record SweetenedPredicate(boolean sweetened) implements SingleComponentIt
 	
 	@Override
 	public DataComponentType<JadeWineComponent> componentType() {
-		return SpectrumDataComponentTypes.JADE_WINE;
+		return PastelDataComponentTypes.JADE_WINE;
 	}
 	
 	@Override

@@ -5,9 +5,9 @@ import earth.terrarium.pastel.helpers.InventoryHelper;
 import earth.terrarium.pastel.inventories.CraftingTabletScreenHandler;
 import earth.terrarium.pastel.items.tooltip.CraftingTabletTooltipData;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.registries.SpectrumBannerPatterns;
-import earth.terrarium.pastel.registries.SpectrumDataComponentTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBannerPatterns;
+import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -16,7 +16,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
@@ -47,16 +46,16 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
 	}
 	
 	public static void setStoredRecipe(ItemStack craftingTabletItemStack, RecipeHolder<?> recipe) {
-		craftingTabletItemStack.set(SpectrumDataComponentTypes.STORED_RECIPE, recipe.id());
+		craftingTabletItemStack.set(PastelDataComponentTypes.STORED_RECIPE, recipe.id());
 	}
 	
 	public static void clearStoredRecipe(ItemStack craftingTabletItemStack) {
-		craftingTabletItemStack.remove(SpectrumDataComponentTypes.STORED_RECIPE);
+		craftingTabletItemStack.remove(PastelDataComponentTypes.STORED_RECIPE);
 	}
 	
 	public static RecipeHolder<?> getStoredRecipe(Level world, ItemStack itemStack) {
 		if (world != null) {
-			var id = itemStack.get(SpectrumDataComponentTypes.STORED_RECIPE);
+			var id = itemStack.get(PastelDataComponentTypes.STORED_RECIPE);
 			if (id != null)
 				return world.getRecipeManager().byKey(id).orElse(null);
 		}
@@ -86,7 +85,7 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
 						return InteractionResultHolder.consume(user.getItemInHand(hand));
 					}
 				}
-				user.playSound(SpectrumSoundEvents.USE_FAIL, 1.0F, 1.0F);
+				user.playSound(PastelSoundEvents.USE_FAIL, 1.0F, 1.0F);
 				return InteractionResultHolder.fail(user.getItemInHand(hand));
 			}
 		}
@@ -152,7 +151,7 @@ public class CraftingTabletItem extends Item implements LoomPatternProvider {
 	
 	@Override
 	public ResourceKey<BannerPattern> getPattern() {
-		return SpectrumBannerPatterns.CRAFTING_TABLET;
+		return PastelBannerPatterns.CRAFTING_TABLET;
 	}
 	
 }

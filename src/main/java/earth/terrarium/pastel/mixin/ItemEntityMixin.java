@@ -5,8 +5,8 @@ import earth.terrarium.pastel.api.item.GravitableItem;
 import earth.terrarium.pastel.api.item.ItemDamageImmunity;
 import earth.terrarium.pastel.api.item.TickAwareItem;
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumEnchantmentTags;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -36,7 +36,7 @@ public abstract class ItemEntityMixin {
 	@Inject(at = @At("TAIL"), method = "<init>(Lnet/minecraft/world/level/Level;DDDLnet/minecraft/world/item/ItemStack;DDD)V")
 	public void ItemEntity(Level world, double x, double y, double z, ItemStack stack, double velocityX, double velocityY, double velocityZ, CallbackInfo ci) {
 		// item stacks that are enchanted with damage proof should never despawn
-		if (EnchantmentHelper.hasTag(stack, SpectrumEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
+		if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
 			setUnlimitedLifetime();
 		}
 	}
@@ -49,7 +49,7 @@ public abstract class ItemEntityMixin {
 			int worldMinY = thisItemEntity.level().getMinBuildHeight();
 			if (!thisItemEntity.onGround()
 					&& thisItemEntity.position().y() < worldMinY + 2
-					&& EnchantmentHelper.hasTag(thisItemEntity.getItem(), SpectrumEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
+					&& EnchantmentHelper.hasTag(thisItemEntity.getItem(), PastelEnchantmentTags.PREVENTS_ITEM_DAMAGE)) {
 				
 				if (thisItemEntity.position().y() < worldMinY + 1) {
 					thisItemEntity.setPos(thisItemEntity.position().x, worldMinY + 1, thisItemEntity.position().z);
@@ -78,7 +78,7 @@ public abstract class ItemEntityMixin {
 		if (ItemDamageImmunity.isImmuneTo(thisItemEntity.getItem(), source)) {
 			callbackInfoReturnable.setReturnValue(true);
 		}
-		if(source.is(SpectrumDamageTypes.PRIMORDIAL_FIRE)) {
+		if(source.is(PastelDamageTypes.PRIMORDIAL_FIRE)) {
 			Level world = thisItemEntity.level();
 
 			if(PrimordialFireBurningRecipe.processItemEntity(world, thisItemEntity)) {

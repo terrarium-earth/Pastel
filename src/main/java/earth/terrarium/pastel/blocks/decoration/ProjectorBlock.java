@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.decoration;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockGetter;
@@ -33,7 +33,7 @@ public class ProjectorBlock extends Block implements EntityBlock {
 	final ResourceLocation texture;
 
 	public ProjectorBlock(Properties settings, String path, double width, double height, float heightOffset, float bobMultiplier, float scaling) {
-		this(settings, SpectrumCommon.locate("textures/block/" + path + ".png"), width, height, heightOffset, bobMultiplier, scaling);
+		this(settings, PastelCommon.locate("textures/block/" + path + ".png"), width, height, heightOffset, bobMultiplier, scaling);
 	}
 	
 	public ProjectorBlock(Properties settings, ResourceLocation texture, double width, double height, float heightOffset, float bobMultiplier, float scaling) {

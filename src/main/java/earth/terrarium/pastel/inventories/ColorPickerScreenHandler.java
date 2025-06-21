@@ -6,8 +6,8 @@ import earth.terrarium.pastel.blocks.energy.ColorPickerBlockEntity;
 import earth.terrarium.pastel.inventories.slots.ColorPickerInputSlot;
 import earth.terrarium.pastel.inventories.slots.InkStorageSlot;
 import earth.terrarium.pastel.networking.s2c_payloads.UpdateBlockEntityInkPayload;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumRegistryKeys;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelRegistryKeys;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -28,7 +28,7 @@ public class ColorPickerScreenHandler extends AbstractContainerMenu implements I
 	public record ScreenOpeningData(BlockPos pos, Optional<Holder<InkColor>> inkColor) {
 		public static final StreamCodec<RegistryFriendlyByteBuf, ScreenOpeningData> STREAM_CODEC = StreamCodec.composite(
 				BlockPos.STREAM_CODEC, ScreenOpeningData::pos,
-				ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(SpectrumRegistryKeys.INK_COLOR)), ScreenOpeningData::inkColor,
+				ByteBufCodecs.optional(ByteBufCodecs.holderRegistry(PastelRegistryKeys.INK_COLOR)), ScreenOpeningData::inkColor,
 				ScreenOpeningData::new
 		);
 	}
@@ -54,11 +54,11 @@ public class ColorPickerScreenHandler extends AbstractContainerMenu implements I
 	}
 
 	public ColorPickerScreenHandler(int syncId, Inventory playerInventory, ScreenOpeningData data) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos(), SpectrumBlockEntities.COLOR_PICKER.get()).orElseThrow(), data.inkColor());
+		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(data.pos(), PastelBlockEntities.COLOR_PICKER.get()).orElseThrow(), data.inkColor());
 	}
 	
 	public ColorPickerScreenHandler(int syncId, Inventory playerInventory, ColorPickerBlockEntity blockEntity, Optional<Holder<InkColor>> selectedColor) {
-		super(SpectrumScreenHandlerTypes.COLOR_PICKER, syncId);
+		super(PastelScreenHandlerTypes.COLOR_PICKER, syncId);
 		
 		this.player = playerInventory.player instanceof ServerPlayer serverPlayerEntity ? serverPlayerEntity : null;
 		this.world = playerInventory.player.level();

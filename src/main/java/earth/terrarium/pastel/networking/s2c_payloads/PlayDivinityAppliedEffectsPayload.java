@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.helpers.ParticleHelper;
-import earth.terrarium.pastel.networking.SpectrumC2SPackets;
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.networking.PastelC2SPackets;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumItems;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelItems;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.*;
@@ -21,7 +21,7 @@ import net.minecraft.world.entity.player.Player;
 
 public record PlayDivinityAppliedEffectsPayload() implements CustomPacketPayload {
 	
-	public static final Type<PlayDivinityAppliedEffectsPayload> ID = SpectrumC2SPackets.makeId("play_divinity_applied_effects");
+	public static final Type<PlayDivinityAppliedEffectsPayload> ID = PastelC2SPackets.makeId("play_divinity_applied_effects");
 	public static final StreamCodec<FriendlyByteBuf, PlayDivinityAppliedEffectsPayload> CODEC = StreamCodec.of((buf, value) -> {
 	}, buf -> new PlayDivinityAppliedEffectsPayload());
 	
@@ -37,9 +37,9 @@ public record PlayDivinityAppliedEffectsPayload() implements CustomPacketPayload
 	private static void execute(Player player) {
 		var level = player.level();
 		var client = Minecraft.getInstance();
-		client.particleEngine.createTrackingEmitter(player, SpectrumParticleTypes.DIVINITY, 30);
-		client.gameRenderer.displayItemActivation(SpectrumItems.DIVINATION_HEART.get().getDefaultInstance());
-		level.playSound(null, player.blockPosition(), SpectrumSoundEvents.FAILING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
+		client.particleEngine.createTrackingEmitter(player, PastelParticleTypes.DIVINITY, 30);
+		client.gameRenderer.displayItemActivation(PastelItems.DIVINATION_HEART.get().getDefaultInstance());
+		level.playSound(null, player.blockPosition(), PastelSoundEvents.FAILING_PLACED, SoundSource.PLAYERS, 1.0F, 1.0F);
 		ParticleHelper.playParticleWithPatternAndVelocityClient(level, player.position(), ColoredCraftingParticleEffect.WHITE, VectorPattern.SIXTEEN, 0.4);
 		ParticleHelper.playParticleWithPatternAndVelocityClient(level, player.position(), ColoredCraftingParticleEffect.RED, VectorPattern.SIXTEEN, 0.4);
 	}

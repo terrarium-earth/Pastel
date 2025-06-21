@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.spirit_instiller;
 
-import earth.terrarium.pastel.SpectrumCommon;
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.block.MultiblockCrafter;
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
@@ -16,9 +16,9 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffs
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
-import earth.terrarium.pastel.registries.SpectrumRecipeTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
+import earth.terrarium.pastel.registries.PastelRecipeTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.render.animation.FlowAnimator;
 import earth.terrarium.pastel.render.animation.FlowData;
 import earth.terrarium.pastel.render.animation.FlowHandlers;
@@ -65,7 +65,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		add(new Vec3i(-2, 0, 0));
 	}};
 	
-	private static final ResourceLocation JADE_VINE_CROSSBREEDING = SpectrumCommon.locate("spirit_instiller/secret/germinated_jade_vine_crossbreeding"); // TODO: Move to advancements class
+	private static final ResourceLocation JADE_VINE_CROSSBREEDING = PastelCommon.locate("spirit_instiller/secret/germinated_jade_vine_crossbreeding"); // TODO: Move to advancements class
 	
 	private boolean inventoryChanged;
 	private UUID ownerUUID;
@@ -83,7 +83,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	protected float platform, geode, calcite, innergeode;
 	
 	public SpiritInstillerBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.SPIRIT_INSTILLER.get(), pos, state, INVENTORY_SIZE);
+		super(PastelBlockEntities.SPIRIT_INSTILLER.get(), pos, state, INVENTORY_SIZE);
 		inventory.addListener(i -> inventoryChanged());
 	}
 	
@@ -157,7 +157,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 			spiritInstillerBlockEntity.craftingTime++;
 			
 			if (spiritInstillerBlockEntity.craftingTime == 1) {
-				PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(SpectrumSoundEvents.SPIRIT_INSTILLER_CRAFTING, (ServerLevel) world, spiritInstillerBlockEntity.worldPosition, Integer.MAX_VALUE);
+				PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.SPIRIT_INSTILLER_CRAFTING, (ServerLevel) world, spiritInstillerBlockEntity.worldPosition, Integer.MAX_VALUE);
 			} else if (spiritInstillerBlockEntity.craftingTime == spiritInstillerBlockEntity.craftingTimeTotal * 0.01
 					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.25)
 					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.5)
@@ -205,7 +205,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.SECOND_INGREDIENT, ItemStack.EMPTY);
 			}
 			
-			RecipeHolder<SpiritInstillerRecipe> spiritInstillerRecipe = world.getRecipeManager().getRecipeFor(SpectrumRecipeTypes.SPIRIT_INSTILLING, spiritInstillerBlockEntity.getRecipeInput(), world).orElse(null);
+			RecipeHolder<SpiritInstillerRecipe> spiritInstillerRecipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.SPIRIT_INSTILLING, spiritInstillerBlockEntity.getRecipeInput(), world).orElse(null);
 			if (spiritInstillerRecipe != null) {
 				spiritInstillerBlockEntity.currentRecipe = spiritInstillerRecipe;
 				spiritInstillerBlockEntity.craftingTimeTotal = (int) Math.ceil(spiritInstillerRecipe.value().getCraftingTime() / spiritInstillerBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
@@ -250,7 +250,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		boolean canCraft = true;
 		if (!playerCanCraft || !structureComplete) {
 			if (!structureComplete) {
-				world.playSound(null, spiritInstillerBlockEntity.getBlockPos(), SpectrumSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
+				world.playSound(null, spiritInstillerBlockEntity.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
 			}
 			
 			canCraft = false;
@@ -344,7 +344,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 	public static void playCraftingFinishedEffects(@NotNull SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
 		Level world = spiritInstillerBlockEntity.getLevel();
 		if (world == null) return;
-		world.playSound(null, spiritInstillerBlockEntity.worldPosition, SpectrumSoundEvents.SPIRIT_INSTILLER_CRAFTING_FINISHED, SoundSource.BLOCKS, 1.0F, 1.0F);
+		world.playSound(null, spiritInstillerBlockEntity.worldPosition, PastelSoundEvents.SPIRIT_INSTILLER_CRAFTING_FINISHED, SoundSource.BLOCKS, 1.0F, 1.0F);
 		PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity((ServerLevel) world,
 				new Vec3(spiritInstillerBlockEntity.worldPosition.getX() + 0.5D, spiritInstillerBlockEntity.worldPosition.getY() + 0.5, spiritInstillerBlockEntity.worldPosition.getZ() + 0.5D),
 				ColoredCraftingParticleEffect.LIGHT_BLUE, 75, new Vec3(0.5D, 0.5D, 0.5D),

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.compat.emi.recipes;
 
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
-import earth.terrarium.pastel.compat.emi.SpectrumEmiRecipeCategories;
+import earth.terrarium.pastel.compat.emi.PastelEmiRecipeCategories;
 import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -11,7 +11,7 @@ import net.minecraft.network.chat.Component;
 public class InkConvertingEmiRecipeGated extends GatedSpectrumEmiRecipe<InkConvertingRecipe> {
 	
 	public InkConvertingEmiRecipeGated(InkConvertingRecipe recipe) {
-		super(SpectrumEmiRecipeCategories.INK_CONVERTING, recipe, 136, 20);
+		super(PastelEmiRecipeCategories.INK_CONVERTING, recipe, 136, 20);
 		this.inputs = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
 	}
 	

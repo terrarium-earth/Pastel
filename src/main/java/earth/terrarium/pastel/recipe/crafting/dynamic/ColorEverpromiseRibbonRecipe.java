@@ -2,7 +2,7 @@ package earth.terrarium.pastel.recipe.crafting.dynamic;
 
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.items.magic_items.EverpromiseRibbonItem;
-import earth.terrarium.pastel.registries.SpectrumRecipeSerializers;
+import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -93,7 +93,7 @@ public class ColorEverpromiseRibbonRecipe extends CustomRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SpectrumRecipeSerializers.COLOR_EVERPROMISE_RIBBON_SERIALIZER;
+		return PastelRecipeSerializers.COLOR_EVERPROMISE_RIBBON_SERIALIZER;
 	}
 	
 }

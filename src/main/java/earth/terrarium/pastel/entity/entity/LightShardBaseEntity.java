@@ -1,9 +1,9 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
-import earth.terrarium.pastel.registries.SpectrumDamageTypes;
-import earth.terrarium.pastel.registries.SpectrumSoundEvents;
+import earth.terrarium.pastel.registries.PastelDamageTypes;
+import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -90,11 +90,11 @@ public abstract class LightShardBaseEntity extends Projectile {
 		tickCount++;
 		if (this.level().isClientSide() && tickCount > DECELERATION_PHASE_LENGTH - 1 && getDeltaMovement().length() > 0.075) {
 			if (getDeltaMovement().length() > 0.2 || this.level().getGameTime() % 2 == 0)
-				this.level().addParticle(SpectrumParticleTypes.LIGHT_TRAIL, true, xo, yo, zo, 0, 0, 0);
+				this.level().addParticle(PastelParticleTypes.LIGHT_TRAIL, true, xo, yo, zo, 0, 0, 0);
 		}
 		
 		if (tickCount > getMaxAge()) {
-			playSound(SpectrumSoundEvents.SOFT_HUM, random.nextFloat() + 0.25F, 1F + random.nextFloat());
+			playSound(PastelSoundEvents.SOFT_HUM, random.nextFloat() + 0.25F, 1F + random.nextFloat());
 			this.remove(RemovalReason.DISCARDED);
 		}
 		
@@ -218,10 +218,10 @@ public abstract class LightShardBaseEntity extends Projectile {
 	
 	protected void onHitEntity(LivingEntity attacked) {
 		float finalDamage = damage * (random.nextFloat() + 0.5F) * (1 - getVanishingProgress(tickCount));
-		attacked.hurt(SpectrumDamageTypes.irradiance(this.level(), getOwner() instanceof LivingEntity owner ? owner : null), finalDamage);
+		attacked.hurt(PastelDamageTypes.irradiance(this.level(), getOwner() instanceof LivingEntity owner ? owner : null), finalDamage);
 		
-		attacked.playSound(SpectrumSoundEvents.SOFT_HUM, 1.334F, 0.9F + random.nextFloat());
-		attacked.playSound(SpectrumSoundEvents.CRYSTAL_STRIKE, random.nextFloat() * 0.4F + 0.2F, 0.8F + random.nextFloat());
+		attacked.playSound(PastelSoundEvents.SOFT_HUM, 1.334F, 0.9F + random.nextFloat());
+		attacked.playSound(PastelSoundEvents.CRYSTAL_STRIKE, random.nextFloat() * 0.4F + 0.2F, 0.8F + random.nextFloat());
 	}
 	
 	@Override
@@ -241,7 +241,7 @@ public abstract class LightShardBaseEntity extends Projectile {
 							random.nextFloat() * 0.25F - 0.125F
 					);
 				} else {
-					this.level().addAlwaysVisibleParticle(SpectrumParticleTypes.SHOOTING_STAR, true, getX(), getY(), getZ(),
+					this.level().addAlwaysVisibleParticle(PastelParticleTypes.SHOOTING_STAR, true, getX(), getY(), getZ(),
 							random.nextFloat() * 0.5F - 0.25F,
 							random.nextFloat() * 0.5F - 0.25F,
 							random.nextFloat() * 0.5F - 0.25F
@@ -255,7 +255,7 @@ public abstract class LightShardBaseEntity extends Projectile {
 		var random = world.getRandom();
 		var projectiles = count.sample(random);
 		
-		world.playSound(null, BlockPos.containing(pos), SpectrumSoundEvents.GLASS_SHIMMER, SoundSource.AMBIENT, 1F, 0.9F + random.nextFloat() * 0.5F);
+		world.playSound(null, BlockPos.containing(pos), PastelSoundEvents.GLASS_SHIMMER, SoundSource.AMBIENT, 1F, 0.9F + random.nextFloat() * 0.5F);
 		
 		for (int i = 0; i < projectiles; i++) {
 			// spawn the shard
@@ -279,7 +279,7 @@ public abstract class LightShardBaseEntity extends Projectile {
 			
 			// spawn particles
 			for (int j = 0; j < 3; j++) {
-				world.addParticle(SpectrumParticleTypes.SHOOTING_STAR, pos.x, pos.y, pos.z,
+				world.addParticle(PastelParticleTypes.SHOOTING_STAR, pos.x, pos.y, pos.z,
 						random.nextFloat() * 0.8F - 0.4F,
 						velocityY * 2,
 						random.nextFloat() * 0.8F - 0.4F

@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.fluid;
 
-import earth.terrarium.pastel.particle.SpectrumParticleTypes;
-import earth.terrarium.pastel.registries.SpectrumBlocks;
-import earth.terrarium.pastel.registries.SpectrumFluidTags;
+import earth.terrarium.pastel.particle.PastelParticleTypes;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelFluidTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.tags.FluidTags;
@@ -17,9 +17,9 @@ import net.minecraft.world.level.pathfinder.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class DragonrotFluidBlock extends SpectrumFluidBlock {
+public class DragonrotFluidBlock extends PastelFluidBlock {
 	
-	public DragonrotFluidBlock(SpectrumFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
+	public DragonrotFluidBlock(PastelFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
 		super(fluid, ultrawarmReplacementBlockState, settings);
 	}
 
@@ -31,19 +31,19 @@ public class DragonrotFluidBlock extends SpectrumFluidBlock {
 
 	@Override
 	public SimpleParticleType getSplashParticle() {
-		return SpectrumParticleTypes.DRAGONROT;
+		return PastelParticleTypes.DRAGONROT;
 	}
 
 	@Override
 	public Tuple<SimpleParticleType, SimpleParticleType> getFishingParticles() {
-		return new Tuple<>(SpectrumParticleTypes.DRAGONROT, SpectrumParticleTypes.DRAGONROT_FISHING);
+		return new Tuple<>(PastelParticleTypes.DRAGONROT, PastelParticleTypes.DRAGONROT_FISHING);
 	}
 	
 	@Override
 	public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
 		super.animateTick(state, world, pos, random);
 		if (!world.getBlockState(pos.above()).isRedstoneConductor(world, pos.above()) && random.nextFloat() < 0.03F) {
-			world.addParticle(SpectrumParticleTypes.DRAGONROT, pos.getX() + random.nextDouble(), pos.getY() + 1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
+			world.addParticle(PastelParticleTypes.DRAGONROT, pos.getX() + random.nextDouble(), pos.getY() + 1, pos.getZ() + random.nextDouble(), 0, random.nextDouble() * 0.1, 0);
 		}
 	}
 	
@@ -54,15 +54,15 @@ public class DragonrotFluidBlock extends SpectrumFluidBlock {
 
 	public @Nullable BlockState handleFluidCollision(Level world, @NotNull FluidState state, @NotNull FluidState otherState) {
 		if (otherState.is(FluidTags.WATER)) {
-			return SpectrumBlocks.SLUSH.get().defaultBlockState();
+			return PastelBlocks.SLUSH.get().defaultBlockState();
 		} else if (otherState.is(FluidTags.LAVA)) {
 			return Blocks.BLACKSTONE.defaultBlockState();
-		} else if (otherState.is(SpectrumFluidTags.GOO)) {
+		} else if (otherState.is(PastelFluidTags.GOO)) {
 			return Blocks.COARSE_DIRT.defaultBlockState();
-		} else if (otherState.is(SpectrumFluidTags.LIQUID_CRYSTAL)) {
-			return SpectrumBlocks.FLAYED_EARTH.get().defaultBlockState();
-		} else if (otherState.is(SpectrumFluidTags.MIDNIGHT_SOLUTION)) {
-			return SpectrumBlocks.HORNSLAKE.get().defaultBlockState();
+		} else if (otherState.is(PastelFluidTags.LIQUID_CRYSTAL)) {
+			return PastelBlocks.FLAYED_EARTH.get().defaultBlockState();
+		} else if (otherState.is(PastelFluidTags.MIDNIGHT_SOLUTION)) {
+			return PastelBlocks.HORNSLAKE.get().defaultBlockState();
 		}
 		return null;
 	}

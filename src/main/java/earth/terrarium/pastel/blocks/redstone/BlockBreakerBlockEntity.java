@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.redstone;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.registries.SpectrumBlockEntities;
+import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -16,7 +16,7 @@ public class BlockBreakerBlockEntity extends BlockEntity implements PlayerOwned 
 	private UUID ownerUUID;
 	
 	public BlockBreakerBlockEntity(BlockPos pos, BlockState state) {
-		super(SpectrumBlockEntities.BLOCK_BREAKER.get(), pos, state);
+		super(PastelBlockEntities.BLOCK_BREAKER.get(), pos, state);
 	}
 	
 	@Override
