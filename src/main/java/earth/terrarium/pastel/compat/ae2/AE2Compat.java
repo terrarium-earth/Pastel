@@ -50,6 +50,7 @@ public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
 		if (!event.getTabKey().location().equals(PastelItemGroups.RESOURCES_ID))
 			return;
 
+		// TODO: Y'know. Why are we doing this? AE2 has this stuff basically natively
 		event.insertAfter(PastelBlocks.PURE_QUARTZ_BLOCK.toStack(), PURE_CERTUS_QUARTZ.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 		event.insertAfter(PastelBlocks.PURE_QUARTZ_BLOCK.toStack(), SMALL_CERTUS_QUARTZ_BUD.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 		event.insertAfter(PastelBlocks.PURE_QUARTZ_BLOCK.toStack(), LARGE_CERTUS_QUARTZ_BUD.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
