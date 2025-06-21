@@ -66,7 +66,7 @@ public class MobEffectHelper {
 		if (type.is(PastelMobEffectTags.CANNOT_BE_INCURABLE))
 			return false; // We are merciful
 		
-		return ((MobEffectInstanceInjector) instance).isIncurable();
+		return instance.getCures().contains(PastelMobEffects.Cures.INCURABLE);
 	}
 
 	/**

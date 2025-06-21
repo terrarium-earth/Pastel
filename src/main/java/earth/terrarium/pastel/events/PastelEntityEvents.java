@@ -167,11 +167,11 @@ public class PastelEntityEvents {
             if (living.level().isClientSide())
                 return;
 
-            var queued = PastelEffectEvents.QUEUED_ADDITIONS.get(entity.getUUID());
+            var additions = PastelEffectEvents.QUEUED_ADDITIONS.get(entity.getUUID());
 
-            if (queued != null) {
-                queued.forEach(living::addEffect);
-                queued.clear();
+            if (additions != null) {
+                additions.forEach(living::addEffect);
+                additions.clear();
             }
 
             PrimordialFireData.serverTick(living);

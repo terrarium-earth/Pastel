@@ -6,12 +6,12 @@
   "client": [
     "accessors.WorldRendererAccessor",
     "AbstractClientPlayerEntityMixin",
+    "ClientPlayNetworkHandlerMixin",
     "AbstractInventoryScreenMixin",
     "BackgroundRendererMixin",
     "BipedEntityModelMixin",
     "BuiltinModelItemRendererMixin",
     "CapeLayerMixin",
-    "ClientPlayNetworkHandlerMixin",
     "DeathScreenMixin",
     "DimensionTypeMixin",
     "DrawContextMixin",

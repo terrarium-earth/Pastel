@@ -212,5 +212,9 @@ public class PastelMobEffects {
 
 		public static final EffectCure BLOOD_ORCHID = EffectCure.get("blood_orchid");
 
+		/**
+		 * Flag used to tell if an effect is Incurable. Not for normal use!
+		 */
+		public static final EffectCure INCURABLE = EffectCure.get("incurable");
 	}
 }

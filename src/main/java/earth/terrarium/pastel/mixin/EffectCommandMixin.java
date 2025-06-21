@@ -1,7 +1,9 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import earth.terrarium.pastel.helpers.MobEffectHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -24,8 +26,8 @@ public class EffectCommandMixin {
     private static void clearIncurableEffects(CommandSourceStack source, Collection<? extends Entity> targets, CallbackInfoReturnable<Integer> cir, @Local Entity target) {
         if (target instanceof LivingEntity living) {
             for (MobEffectInstance effect : living.getActiveEffects()) {
-                if (((MobEffectInstanceInjector) effect).isIncurable())
-                    ((MobEffectInstanceInjector) effect).setIncurable(false);
+                if (MobEffectHelper.resistsRemoval(effect))
+                    effect.getCures().remove(PastelMobEffects.Cures.INCURABLE);
             }
         }
     }
@@ -35,8 +37,8 @@ public class EffectCommandMixin {
         if (target instanceof LivingEntity living) {
 			var effect = living.getEffect(living.level().registryAccess().registryOrThrow(Registries.MOB_EFFECT).wrapAsHolder(ref));
             if (effect != null) {
-                if (((MobEffectInstanceInjector) effect).isIncurable())
-                    ((MobEffectInstanceInjector) effect).setIncurable(false);
+                if (MobEffectHelper.resistsRemoval(effect))
+                    effect.getCures().remove(PastelMobEffects.Cures.INCURABLE);
             }
         }
     }

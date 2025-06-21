@@ -4,9 +4,11 @@ import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.components.InkPoweredComponent;
+import earth.terrarium.pastel.helpers.MobEffectHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -58,7 +60,8 @@ public class InkPoweredStatusEffectInstance {
 		this.customColor = customColor;
 		this.unidentifiable = unidentifiable;
 		this.incurable = incurable;
-		if (incurable) ((MobEffectInstanceInjector) statusEffectInstance).setIncurable(true);
+		if (incurable)
+			statusEffectInstance.getCures().add(PastelMobEffects.Cures.INCURABLE);
 	}
 	
 	public MobEffectInstance getStatusEffectInstance() {

@@ -2,6 +2,7 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.helpers.MobEffectHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -95,7 +96,7 @@ public class NectarLanceItem extends LightGreatswordItem implements SlotBackgrou
 					.stream()
 					.filter(instance -> instance.getEffect().value().isBeneficial())
 					.filter(instance -> !instance.isInfiniteDuration())
-					.filter(instance -> !((MobEffectInstanceInjector) instance).isIncurable())
+					.filter(instance -> !MobEffectHelper.resistsRemoval(instance))
 					.findFirst();
 
 			if (stolenEffect.isEmpty() || !target.removeEffect(stolenEffect.get().getEffect()))

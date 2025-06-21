@@ -2,6 +2,7 @@ package earth.terrarium.pastel.mixin.client;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.pastel.injectors.*;
+import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,8 +16,12 @@ public class ClientPlayNetworkHandlerMixin {
 
 	@Inject(method = "handleUpdateMobEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;forceAddEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)V"))
 	public void readAndApplyIncurableFlag(ClientboundUpdateMobEffectPacket packet, CallbackInfo ci, @Local MobEffectInstance effect) {
-		if (((ClientboundUpdateMobEffectPacketInjector) packet).isIncurable())
-			((MobEffectInstanceInjector) effect).setIncurable(true);
+		if (((ClientboundUpdateMobEffectPacketInjector) packet).isIncurable()) {
+			effect.getCures().add(PastelMobEffects.Cures.INCURABLE);
+		}
+		else {
+			effect.getCures().add(PastelMobEffects.Cures.INCURABLE);
+		}
 	}
 	
 }
