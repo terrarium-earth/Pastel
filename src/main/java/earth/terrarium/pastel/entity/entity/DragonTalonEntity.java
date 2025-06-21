@@ -100,7 +100,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 			}
 		}
 		
-		((TridentEntityAccessor) this).spectrum$setDealtDamage(true);
+		((TridentEntityAccessor) this).setDealtDamage(true);
 		recall();
 		this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
 		float g = 1.0F;
@@ -187,7 +187,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 			return;
 		}
 		
-		getEntityData().set(TridentEntityAccessor.spectrum$getLoyalty(), (byte) 4);
+		getEntityData().set(TridentEntityAccessor.getLoyalty(), (byte) 4);
 		setNoPhysics(true);
 	}
 	

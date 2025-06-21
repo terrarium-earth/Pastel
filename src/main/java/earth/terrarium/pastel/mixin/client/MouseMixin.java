@@ -14,7 +14,7 @@ public class MouseMixin {
 	
 	@SuppressWarnings("unchecked")
 	@ModifyExpressionValue(method = "turnPlayer", at = @At(value = "INVOKE", target = "net/minecraft/client/OptionInstance.get ()Ljava/lang/Object;", ordinal = 0))
-	public <T> T spectrum$makeMouseSluggish(T original) {
+	public <T> T makeMouseSluggish(T original) {
 		var sensitivity = (double) original;
 		var player = Minecraft.getInstance().player;
 		
@@ -31,7 +31,7 @@ public class MouseMixin {
 	
 	// AHAHAHAH, I FINALLY FIGURED OUT HOW TO DO IT!
 	@ModifyExpressionValue(method = "turnPlayer", at = @At(value = "FIELD", opcode = Opcodes.GETFIELD, target = "Lnet/minecraft/client/Options;smoothCamera:Z"))
-	public boolean spectrum$forceSmoothCamera(boolean original) {
+	public boolean forceSmoothCamera(boolean original) {
 		var player = Minecraft.getInstance().player;
 		
 		if (player == null)

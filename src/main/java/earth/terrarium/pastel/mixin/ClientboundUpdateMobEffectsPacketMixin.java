@@ -33,7 +33,7 @@ public abstract class ClientboundUpdateMobEffectsPacketMixin implements Clientbo
 	}
 	
 	@Override
-	public boolean spectrum$isIncurable() {
+	public boolean isIncurable() {
 		return incurable;
 	}
 }

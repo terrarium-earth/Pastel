@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class DimensionTypeMixin {
 	
 	@ModifyArg(method = "timeOfDay", at = @At(value = "INVOKE", target = "Ljava/util/OptionalLong;orElse(J)J"))
-	private long spectrum$getLerpedSkyAngle(long time) {
+	private long getLerpedSkyAngle(long time) {
 		if (!Minecraft.getInstance().isPaused() && PastelClient.skyLerper.isActive((DimensionType) (Object) this)) {
 			return PastelClient.skyLerper.tickLerp(time, Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false));
 		} else {

@@ -58,7 +58,7 @@ public class InkPoweredStatusEffectInstance {
 		this.customColor = customColor;
 		this.unidentifiable = unidentifiable;
 		this.incurable = incurable;
-		if (incurable) ((MobEffectInstanceInjector) statusEffectInstance).spectrum$setIncurable(true);
+		if (incurable) ((MobEffectInstanceInjector) statusEffectInstance).setIncurable(true);
 	}
 	
 	public MobEffectInstance getStatusEffectInstance() {

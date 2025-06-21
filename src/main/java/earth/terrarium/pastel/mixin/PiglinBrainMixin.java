@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PiglinBrainMixin {
 	
 	@Inject(at = @At("HEAD"), method = "isWearingGold", cancellable = true)
-	private static void spectrum$piglinSafeEquipment(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
+	private static void piglinSafeEquipment(LivingEntity entity, CallbackInfoReturnable<Boolean> cir) {
 		for (ItemStack itemStack : entity.getArmorSlots()) {
 			if (itemStack.is(PastelItemTags.PIGLIN_SAFE_EQUIPMENT)) {
 				cir.setReturnValue(true);

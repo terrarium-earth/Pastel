@@ -35,8 +35,8 @@ public abstract class BidentBaseEntity extends ThrownTrident {
 	public void setPickupItemStack(ItemStack stack) {
 		setTrackedStack(stack.copy());
 		super.setPickupItemStack(stack);
-		this.entityData.set(TridentEntityAccessor.spectrum$getLoyalty(), (byte) PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack));
-		this.entityData.set(TridentEntityAccessor.spectrum$getEnchanted(), stack.hasFoil());
+		this.entityData.set(TridentEntityAccessor.getLoyalty(), (byte) PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack));
+		this.entityData.set(TridentEntityAccessor.getEnchanted(), stack.hasFoil());
 	}
 	
 	@Override

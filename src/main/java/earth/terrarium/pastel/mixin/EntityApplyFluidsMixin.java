@@ -27,24 +27,24 @@ public abstract class EntityApplyFluidsMixin implements TouchingWaterAware {
 	private boolean pastel$isActuallyTouchingWater = false;
 	
 	@Override
-	public boolean spectrum$isActuallyTouchingWater() {
+	public boolean isActuallyTouchingWater() {
 		return this.pastel$isActuallyTouchingWater;
 	}
 	
 	@Override
-	public void spectrum$setActuallyTouchingWater(boolean actuallyTouchingWater) {
+	public void setActuallyTouchingWater(boolean actuallyTouchingWater) {
 		this.pastel$isActuallyTouchingWater = actuallyTouchingWater;
 	}
 	
 	@Inject(method = "isEyeInFluid", at = @At("RETURN"), cancellable = true)
-	public void spectrum$isSubmergedIn(TagKey<Fluid> fluidTag, CallbackInfoReturnable<Boolean> cir) {
+	public void isSubmergedIn(TagKey<Fluid> fluidTag, CallbackInfoReturnable<Boolean> cir) {
 		if (!cir.getReturnValue() && fluidTag == FluidTags.WATER) {
 			cir.setReturnValue(this.fluidOnEyes.contains(PastelFluidTags.SWIMMABLE_FLUID));
 		}
 	}
 	
 	@Inject(method = "isUnderWater", at = @At("RETURN"), cancellable = true)
-	public void spectrum$isSubmergedInWater(CallbackInfoReturnable<Boolean> cir) {
+	public void isSubmergedInWater(CallbackInfoReturnable<Boolean> cir) {
 		if (!cir.getReturnValue() && this.fluidOnEyes.contains(PastelFluidTags.SWIMMABLE_FLUID)) {
 			//this.submergedFluidTag.add(FluidTags.WATER);
 			cir.setReturnValue(true);

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AbstractFireBlockMixin {
 
     @Inject(at = @At("HEAD"), method = "getState", cancellable = true)
-    private static void spectrum$getFireState(BlockGetter world, BlockPos pos, CallbackInfoReturnable<BlockState> cir) {
+    private static void getFireState(BlockGetter world, BlockPos pos, CallbackInfoReturnable<BlockState> cir) {
 		BlockPos blockpos = pos.below();
 		BlockState blockstate = world.getBlockState(blockpos);
 		if (blockstate.is(PastelBlockTags.PRIMORDIAL_FIRE_BASE_BLOCKS) || PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG) {

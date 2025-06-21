@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class PlantOnCustomFarmlandMixin {
 	
 	@ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
-	public boolean spectrum$canPlantOnTopOfCustomFarmland(boolean original, @NotNull BlockState floor, BlockGetter world, BlockPos pos) {
+	public boolean canPlantOnTopOfCustomFarmland(boolean original, @NotNull BlockState floor, BlockGetter world, BlockPos pos) {
 		return original || floor.getBlock() instanceof PastelFarmlandBlock;
 	}
 	

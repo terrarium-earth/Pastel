@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityMixin {
 	
 	@Inject(method = "killedEntity", at = @At("HEAD"))
-	private void spectrum$rememberKillOther(ServerLevel world, LivingEntity other, CallbackInfoReturnable<Boolean> cir) {
+	private void rememberKillOther(ServerLevel world, LivingEntity other, CallbackInfoReturnable<Boolean> cir) {
 		Entity entity = (Entity) (Object) this;
 		if (entity instanceof LivingEntity livingEntity) {
 			LastKillData.rememberKillTick(livingEntity, livingEntity.level().getGameTime());
@@ -45,7 +45,7 @@ public abstract class EntityMixin {
 	}
 	
 	@ModifyVariable(method = "makeStuckInBlock", at = @At(value = "LOAD"), argsOnly = true)
-	private Vec3 spectrum$applyInexorableAntiBlockSlowdown(Vec3 multiplier) {
+	private Vec3 applyInexorableAntiBlockSlowdown(Vec3 multiplier) {
 		var entity = (Entity) (Object) this;
 		if (entity instanceof LivingEntity livingEntity && InexorableHelper.isArmorActive(livingEntity)) {
 			return Vec3.ZERO;
@@ -54,7 +54,7 @@ public abstract class EntityMixin {
 	}
 	
 	@Inject(method = "getBlockSpeedFactor", at = @At("RETURN"), cancellable = true)
-	private void spectrum$applyInexorableAntiSlowdown(CallbackInfoReturnable<Float> cir) {
+	private void applyInexorableAntiSlowdown(CallbackInfoReturnable<Float> cir) {
 		var entity = (Entity) (Object) this;
 		if (entity instanceof LivingEntity livingEntity && InexorableHelper.isArmorActive(livingEntity)) {
 			cir.setReturnValue(Math.max(cir.getReturnValue(), 1F));
@@ -62,7 +62,7 @@ public abstract class EntityMixin {
 	}
 	
 	@Inject(method = "spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"), cancellable = true)
-	public void spectrum$dropStack(ItemStack stack, CallbackInfoReturnable<ItemEntity> cir) {
+	public void dropStack(ItemStack stack, CallbackInfoReturnable<ItemEntity> cir) {
 		if ((Object) this instanceof LivingEntity thisLivingEntity) {
 			if (thisLivingEntity.isDeadOrDying() && thisLivingEntity.getLastHurtByMob() instanceof Player killer) {
 				var hasInventoryInsertion = thisLivingEntity.level().registryAccess()
@@ -91,7 +91,7 @@ public abstract class EntityMixin {
 	}
 	
 	@ModifyReturnValue(method = "getPose", at = @At("RETURN"))
-	public Pose spectrum$forceSleepPose(Pose original) {
+	public Pose forceSleepPose(Pose original) {
 		var entity = (Entity) (Object) this;
 		
 		if (!(entity instanceof LivingEntity living))
@@ -104,7 +104,7 @@ public abstract class EntityMixin {
 	}
 	
 	@ModifyReturnValue(method = "isOnFire", at = @At("RETURN"))
-	public boolean spectrum$considerPrimfireAsFire(boolean original) {
+	public boolean considerPrimfireAsFire(boolean original) {
 		var entity = (Entity) (Object) this;
 		
 		if (entity instanceof LivingEntity living && PrimordialFireData.isOnPrimordialFire(living))

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class AbstractBlockStateMixin {
 	
 	@ModifyVariable(method = "spawnAfterBreak", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-	public boolean spectrum$preventXPDropsWhenUsingResonance(boolean dropExperience, ServerLevel world, BlockPos pos, ItemStack stack) {
+	public boolean preventXPDropsWhenUsingResonance(boolean dropExperience, ServerLevel world, BlockPos pos, ItemStack stack) {
 		if (ResonanceProcessor.preventNextXPDrop && EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.RESONANT_BLOCK_DROPS)) {
 			ResonanceProcessor.preventNextXPDrop = false;
 			return false;

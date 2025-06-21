@@ -50,7 +50,7 @@ public abstract class ItemStackMixin {
 	
 	// Injecting into onStackClicked instead of onClicked because onStackClicked is called first
 	@Inject(at = @At("HEAD"), method = "overrideStackedOnOther", cancellable = true)
-	public void spectrum$onStackClicked(Slot slot, ClickAction clickType, Player player, CallbackInfoReturnable<Boolean> cir) {
+	public void onStackClicked(Slot slot, ClickAction clickType, Player player, CallbackInfoReturnable<Boolean> cir) {
 		if (slot instanceof SlotWithOnClickAction slotWithOnClickAction) {
 			if (slotWithOnClickAction.onClicked((ItemStack) (Object) this, clickType, player)) {
 				cir.setReturnValue(true);
@@ -59,7 +59,7 @@ public abstract class ItemStackMixin {
 	}
 	
 	@ModifyReturnValue(method = "isDamageableItem", at = @At(value = "RETURN"))
-	public boolean spectrum$applyIndestructibleEnchantment(boolean original) {
+	public boolean applyIndestructibleEnchantment(boolean original) {
 		var stack = (ItemStack) (Object) this;
 		
 		return original && !EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.INDESTRUCTIBLE_EFFECT);
@@ -68,7 +68,7 @@ public abstract class ItemStackMixin {
 	// thank you so, so much @williewillus / @Botania for this snippet of code
 	// https://github.com/VazkiiMods/Botania/blob/1.18.x/Fabric/src/main/java/vazkii/botania/fabric/mixin/FabricMixinItemStack.java
 	@Inject(at = @At("HEAD"), method = "is(Lnet/minecraft/world/item/Item;)Z", cancellable = true)
-	private void spectrum$isSpectrumShears(Item item, CallbackInfoReturnable<Boolean> cir) {
+	private void isSpectrumShears(Item item, CallbackInfoReturnable<Boolean> cir) {
 		if (item == Items.SHEARS) {
 			if (is(PastelItems.BEDROCK_SHEARS.get())) {
 				cir.setReturnValue(true);
@@ -79,7 +79,7 @@ public abstract class ItemStackMixin {
 	// The enchantment table does not allow enchanting items that already have enchantments applied
 	// This mixin changes items, that only got their DefaultEnchantments to still be enchantable
 	@Inject(method = "isEnchantable()Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/enchantment/ItemEnchantments;isEmpty()Z"), cancellable = true)
-	public void spectrum$isEnchantable(CallbackInfoReturnable<Boolean> cir) {
+	public void isEnchantable(CallbackInfoReturnable<Boolean> cir) {
 		var stack = (ItemStack) (Object) this;
 		if (this.getItem() instanceof Preenchanted preenchanted && preenchanted.onlyHasPreEnchantments(stack)) {
 			cir.setReturnValue(true);
@@ -87,7 +87,7 @@ public abstract class ItemStackMixin {
 	}
 	
 	@Inject(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;appendHoverText(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/Item$TooltipContext;Ljava/util/List;Lnet/minecraft/world/item/TooltipFlag;)V"))
-	public void spectrum$playerTooltip(Item.TooltipContext context, Player player, TooltipFlag type, CallbackInfoReturnable<List<Component>> cir, @Local List<Component> tooltip) {
+	public void playerTooltip(Item.TooltipContext context, Player player, TooltipFlag type, CallbackInfoReturnable<List<Component>> cir, @Local List<Component> tooltip) {
 		var stack = (ItemStack) (Object) this;
 		if (stack.getItem() instanceof TooltipExtensions expanded) {
 			expanded.appendTooltipWithPlayer(stack, player, tooltip, context);
@@ -95,7 +95,7 @@ public abstract class ItemStackMixin {
 	}
 	
 	@Inject(method = "getTooltipLines", at = @At(value = "INVOKE", target = "net/minecraft/world/item/TooltipFlag.isAdvanced ()Z", shift = At.Shift.BEFORE, ordinal = 1))
-	public void spectrum$expandTooltipPostDamage(Item.TooltipContext context, Player player, TooltipFlag type, CallbackInfoReturnable<List<Component>> cir, @Local List<Component> tooltip) {
+	public void expandTooltipPostDamage(Item.TooltipContext context, Player player, TooltipFlag type, CallbackInfoReturnable<List<Component>> cir, @Local List<Component> tooltip) {
 		var stack = (ItemStack) (Object) this;
 		var oilEffect = stack.get(PastelDataComponentTypes.CONCEALED_EFFECT);
 		var profile = stack.get(DataComponents.PROFILE);

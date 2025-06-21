@@ -36,8 +36,8 @@ public class HudRenderers {
 			renderSelectedStaffStack(event.getGuiGraphics());
 	}
 	
-	private static final int SPECTRUM$_DIKE_HEARTS_PER_ROW = 10;
-	private static final int SPECTRUM$_DIKE_PER_ROW = 20;
+	private static final int DIKE_HEARTS_PER_ROW = 10;
+	private static final int DIKE_PER_ROW = 20;
 
 	private static class AzureDikeLayer implements LayeredDraw.Layer {
 
@@ -60,10 +60,10 @@ public class HudRenderers {
 					blink = (cameraPlayer.level().getGameTime() >> 2) % 2 == 0;
 				}
 
-				int totalDikeCanisters = (maxCharges - 1) / SPECTRUM$_DIKE_PER_ROW;
-				int filledDikeCanisters = (charges - 1) / SPECTRUM$_DIKE_PER_ROW;
-				int displayedDike = (charges - 1) % SPECTRUM$_DIKE_PER_ROW + 1;
-				int dikeHeartOutlinesThisRow = totalDikeCanisters > filledDikeCanisters ? SPECTRUM$_DIKE_HEARTS_PER_ROW : (((maxCharges - 1) % SPECTRUM$_DIKE_PER_ROW / 2) + 1);
+				int totalDikeCanisters = (maxCharges - 1) / DIKE_PER_ROW;
+				int filledDikeCanisters = (charges - 1) / DIKE_PER_ROW;
+				int displayedDike = (charges - 1) % DIKE_PER_ROW + 1;
+				int dikeHeartOutlinesThisRow = totalDikeCanisters > filledDikeCanisters ? DIKE_HEARTS_PER_ROW : (((maxCharges - 1) % DIKE_PER_ROW / 2) + 1);
 
 				boolean renderBackRow = filledDikeCanisters > 0;
 				boolean hasArmor = cameraPlayer.getArmorValue() > 0;

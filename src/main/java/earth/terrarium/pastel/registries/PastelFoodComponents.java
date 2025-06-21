@@ -44,13 +44,13 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties NIGHTDEW_SPROUT = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(1).saturationModifier(SAT_POOR)).spectrum$setEatSeconds(TIME_FEAST).alwaysEdible()
+			.nutrition(1).saturationModifier(SAT_POOR)).setEatSeconds(TIME_FEAST).alwaysEdible()
 			.effect(new MobEffectInstance(PastelStatusEffects.CALMING, 200, 0), 0.5F)
 			.effect(new MobEffectInstance(PastelStatusEffects.SOMNOLENCE, 200, 0), 0.5F)
 			.build();
 
 	public static final FoodProperties NECTARDEW_BURGEON = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(1).saturationModifier(SAT_POOR)).spectrum$setEatSeconds(TIME_FEAST).alwaysEdible()
+			.nutrition(1).saturationModifier(SAT_POOR)).setEatSeconds(TIME_FEAST).alwaysEdible()
 			.effect(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, 6000), 0.95F)
 			.effect(new MobEffectInstance(PastelStatusEffects.FATAL_SLUMBER, 100), 0.05F)
 			.build();
@@ -83,7 +83,7 @@ public class PastelFoodComponents {
 			.build();
 	
 	public static final FoodProperties TRIPLE_MEAT_POT_PIE = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(20).saturationModifier(SAT_NORMAL)).spectrum$setEatSeconds(TIME_FEAST)
+			.nutrition(20).saturationModifier(SAT_NORMAL)).setEatSeconds(TIME_FEAST)
 			.effect(new MobEffectInstance(MobEffects.REGENERATION, 100), 1.0F)
 			.effect(new MobEffectInstance(PastelStatusEffects.NOURISHING, 12000, 1), 1.0F)
 			.build();
@@ -289,7 +289,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties TRIPLE_MEAT_POT_STEW = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(20).saturationModifier(SAT_NORMAL)).spectrum$setEatSeconds(TIME_FEAST)
+			.nutrition(20).saturationModifier(SAT_NORMAL)).setEatSeconds(TIME_FEAST)
 			.effect(new MobEffectInstance(MobEffects.REGENERATION, 100), 1.0F)
 			.effect(new MobEffectInstance(PastelStatusEffects.NOURISHING, 12000, 1), 1.0F)
 			.build();
@@ -319,7 +319,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties CHAUVE_SOURIS_AU_VIN = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(20).saturationModifier(SAT_GOOD)).spectrum$setEatSeconds(TIME_FEAST)
+			.nutrition(20).saturationModifier(SAT_GOOD)).setEatSeconds(TIME_FEAST)
 			.effect(new MobEffectInstance(PastelStatusEffects.EFFECT_PROLONGING, 6000, 0), 1.0F)
 			.build();
 
@@ -368,7 +368,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties HARE_ROAST = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(12).saturationModifier(SAT_GOOD)).spectrum$setEatSeconds(TIME_HEARTY)
+			.nutrition(12).saturationModifier(SAT_GOOD)).setEatSeconds(TIME_HEARTY)
 			.effect(new MobEffectInstance(PastelStatusEffects.NOURISHING, 1200, 1), 1.0F)
 			.effect(new MobEffectInstance(MobEffects.REGENERATION, 1200), 1)
 			.build();
@@ -409,7 +409,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties PEACHES_FLAMBE = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(14).saturationModifier(SAT_GOOD)).spectrum$setEatSeconds(TIME_HEARTY)
+			.nutrition(14).saturationModifier(SAT_GOOD)).setEatSeconds(TIME_HEARTY)
 			.effect(new MobEffectInstance(PastelStatusEffects.TOUGHNESS, 3000, 5), 1.0F)
 			.build();
 
@@ -436,7 +436,7 @@ public class PastelFoodComponents {
 			.build();
 
 	public static final FoodProperties SEDATIVES = ((FoodComponentBuilderInjector) new FoodProperties.Builder()
-			.nutrition(2).saturationModifier(SAT_POOR)).spectrum$setEatSeconds(TIME_HEARTY)
+			.nutrition(2).saturationModifier(SAT_POOR)).setEatSeconds(TIME_HEARTY)
 			.effect(new MobEffectInstance(PastelStatusEffects.STIFFNESS, 300, 4), 1.0F)
 			.build();
 

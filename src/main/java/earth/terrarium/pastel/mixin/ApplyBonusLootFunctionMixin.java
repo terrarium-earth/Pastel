@@ -27,7 +27,7 @@ public abstract class ApplyBonusLootFunctionMixin {
 			method = "run",
 			at = @At("STORE"),
 			ordinal = 1)
-	public int spectrum$rerollBonusLoot(int oldValue, ItemStack stack, LootContext context) {
+	public int rerollBonusLoot(int oldValue, ItemStack stack, LootContext context) {
 		// if the player has the ANOTHER_DRAW effect the bonus loot of
 		// this function gets rerolled potency+1 times and the best one taken
 		ItemStack itemStack = context.getParamOrNull(LootContextParams.TOOL);

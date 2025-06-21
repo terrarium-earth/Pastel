@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(WaterlilyBlock.class)
 public class LilyPadBlockMixin {
     @ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
-    public boolean spectrum$extendLilyPlaceables(boolean original, BlockState floor, BlockGetter world, BlockPos pos) {
+    public boolean extendLilyPlaceables(boolean original, BlockState floor, BlockGetter world, BlockPos pos) {
         if (original)
             return true;
         FluidState fluidState = world.getFluidState(pos);

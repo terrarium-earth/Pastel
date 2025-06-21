@@ -29,7 +29,7 @@ public abstract class DrawContextMixin {
 	public abstract void renderOutline(int x, int y, int width, int height, int color);
 	
 	@Inject(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "net/minecraft/world/item/ItemStack.getCount ()I", ordinal = 0))
-	protected void spectrum$drawSlotBackground(Font textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
+	protected void drawSlotBackground(Font textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
 		SlotBackgroundEffectProvider backgroundEffectProvider = null;
 		
 		if (stack.getItem() instanceof SlotBackgroundEffectProvider prov)
@@ -75,7 +75,7 @@ public abstract class DrawContextMixin {
 	}
 	
 	@Inject(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "FIELD", target = "net/minecraft/client/gui/GuiGraphics.minecraft : Lnet/minecraft/client/Minecraft;", ordinal = 0, shift = At.Shift.BEFORE))
-	protected void spectrum$appendBars(Font textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
+	protected void appendBars(Font textRenderer, ItemStack stack, int x, int y, String countOverride, CallbackInfo ci) {
 		if (!(stack.getItem() instanceof ExtendedItemBarProvider extendedItemBarProvider)) {
 			return;
 		}
@@ -94,7 +94,7 @@ public abstract class DrawContextMixin {
 	}
 	
 	@WrapWithCondition(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.fill (Lnet/minecraft/client/renderer/RenderType;IIIII)V", ordinal = 0))
-	protected boolean spectrum$disableVanillaBackground(GuiGraphics instance, RenderType layer, int x1, int y1, int x2, int y2, int color, @Local(argsOnly = true) ItemStack stack) {
+	protected boolean disableVanillaBackground(GuiGraphics instance, RenderType layer, int x1, int y1, int x2, int y2, int color, @Local(argsOnly = true) ItemStack stack) {
 		if (stack.getItem() instanceof ExtendedItemBarProvider extendedItemBarProvider) {
 			return extendedItemBarProvider.allowVanillaDurabilityBarRendering(Minecraft.getInstance().player, stack);
 		}
@@ -102,7 +102,7 @@ public abstract class DrawContextMixin {
 	}
 	
 	@WrapWithCondition(method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.fill (Lnet/minecraft/client/renderer/RenderType;IIIII)V", ordinal = 1))
-	protected boolean spectrum$disableVanillaBar(GuiGraphics instance, RenderType layer, int x1, int y1, int x2, int y2, int color, @Local(argsOnly = true) ItemStack stack) {
+	protected boolean disableVanillaBar(GuiGraphics instance, RenderType layer, int x1, int y1, int x2, int y2, int color, @Local(argsOnly = true) ItemStack stack) {
 		if (stack.getItem() instanceof ExtendedItemBarProvider extendedItemBarProvider) {
 			return extendedItemBarProvider.allowVanillaDurabilityBarRendering(Minecraft.getInstance().player, stack);
 		}

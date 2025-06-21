@@ -19,7 +19,7 @@ public class ExplosionMixin {
 	private DamageSource damageSource;
 	
 	@Inject(method = "finalizeExplosion", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/BaseFireBlock;getState(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;"))
-	private void spectrum$modifyExplosion(boolean particles, CallbackInfo ci) {
+	private void modifyExplosion(boolean particles, CallbackInfo ci) {
 		if (this.damageSource.is(PastelDamageTypes.INCANDESCENCE)) {
 			PrimordialFireBlock.EXPLOSION_CAUSES_PRIMORDIAL_FIRE_FLAG = true;
 		}

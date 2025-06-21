@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GameRendererMixin {
 
     @ModifyReturnValue(method = "getNightVisionScale", at = @At("RETURN"))
-    private static float spectrum$nerfNightVisionInDimension(float original, LivingEntity entity, float tickDelta) {
+    private static float nerfNightVisionInDimension(float original, LivingEntity entity, float tickDelta) {
 		if (PastelDimensions.DIMENSION_KEY == entity.level().dimension()) {
 			original /= 6F;
 		}

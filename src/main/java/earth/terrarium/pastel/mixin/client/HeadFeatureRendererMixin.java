@@ -25,7 +25,7 @@ public abstract class HeadFeatureRendererMixin<T extends LivingEntity, M extends
 	
 	@Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFFFFF)V",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/layers/CustomHeadLayer;translateToHead(Lcom/mojang/blaze3d/vertex/PoseStack;Z)V", shift = At.Shift.AFTER), cancellable = true)
-	private void spectrum$renderSkull(PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, T livingEntity, float animationProgress, float h, float j, float k, float l, float m, CallbackInfo ci, @Local Item item, @Local boolean bl) {
+	private void renderSkull(PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, T livingEntity, float animationProgress, float h, float j, float k, float l, float m, CallbackInfo ci, @Local Item item, @Local boolean bl) {
 		if (item instanceof BlockItem blockItem && blockItem.getBlock() instanceof PastelSkullBlock pastelSkullBlock) {
 			m = 1.1875F;
 			poseStack.scale(m, -m, -m);

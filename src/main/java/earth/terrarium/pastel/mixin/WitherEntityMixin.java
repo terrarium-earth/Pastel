@@ -41,7 +41,7 @@ public abstract class WitherEntityMixin extends LivingEntity {
 	}
 
 	@ModifyReturnValue(method = "addEffect", at = @At("TAIL"))
-	private boolean spectrum$allowWitherNaps(boolean original, @Local(argsOnly = true) MobEffectInstance effect, @Local(argsOnly = true) Entity source) {
+	private boolean allowWitherNaps(boolean original, @Local(argsOnly = true) MobEffectInstance effect, @Local(argsOnly = true) Entity source) {
 		if (effect.getEffect().is(PastelStatusEffectTags.SOPORIFIC)) {
 			return super.addEffect(effect, source);
 		}

@@ -30,7 +30,7 @@ public abstract class CatEntityMixin extends TamableAnimal {
 	}
 	
 	@Inject(at = @At("HEAD"), method = "mobInteract")
-	private void spectrum$feedKitten(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+	private void feedKitten(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
 		ItemStack itemStack = player.getItemInHand(hand);
 		Item item = itemStack.getItem();
 		

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class DeathScreenMixin {
 	
 	@ModifyVariable(method = "<init>", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-	private static boolean spectrum$isHardcore(boolean isHardcore) {
+	private static boolean isHardcore(boolean isHardcore) {
 		if (!isHardcore && (HardcoreDeathTracker.isInHardcore(Minecraft.getInstance().player) || HardcoreDeathTracker.hasHardcoreDeath(Minecraft.getInstance().player.getGameProfile()))) {
 			return true;
 		}

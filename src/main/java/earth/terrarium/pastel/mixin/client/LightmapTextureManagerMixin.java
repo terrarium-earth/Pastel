@@ -23,7 +23,7 @@ public class LightmapTextureManagerMixin {
 	@Shadow @Final private Minecraft minecraft;
 
 	@ModifyReturnValue(method = "calculateDarknessScale", at = @At("RETURN"))
-	private float spectrum$getDarkness(float original) {
+	private float getDarkness(float original) {
 		var lightMod = PastelCommon.CONFIG.DimensionBrightnessMod * 0.25F;
 
 		if (isInDim()) {
@@ -35,7 +35,7 @@ public class LightmapTextureManagerMixin {
 	}
 	
 	@ModifyExpressionValue(method = "updateLightTexture", at = @At(value = "INVOKE", target = "Ljava/lang/Double;floatValue()F", ordinal = 1))
-	private float spectrum$decreaseGamma(float gamma) {
+	private float decreaseGamma(float gamma) {
 		if (isInDim()) {
 			if (minecraft.getCameraEntity() instanceof LivingEntity living) {
 				gamma -= living.hasEffect(MobEffects.NIGHT_VISION) ? 0.275F : 0F;

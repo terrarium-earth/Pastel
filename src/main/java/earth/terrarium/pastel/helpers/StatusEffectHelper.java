@@ -62,6 +62,6 @@ public class StatusEffectHelper {
 		if (type == PastelStatusEffects.ETERNAL_SLUMBER || type == PastelStatusEffects.FATAL_SLUMBER)
 			return false;
 		
-		return ((MobEffectInstanceInjector) instance).spectrum$isIncurable();
+		return ((MobEffectInstanceInjector) instance).isIncurable();
 	}
 }

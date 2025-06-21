@@ -34,7 +34,7 @@ public abstract class LoomScreenHandlerMixin extends AbstractContainerMenu {
 	}
 	
 	@Inject(method = "getSelectablePatterns(Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;", at = @At("HEAD"), cancellable = true)
-	private void spectrum$getPatternsFor(ItemStack stack, CallbackInfoReturnable<List<Holder<BannerPattern>>> cir) {
+	private void getPatternsFor(ItemStack stack, CallbackInfoReturnable<List<Holder<BannerPattern>>> cir) {
 		if (stack.getItem() instanceof LoomPatternProvider loomPatternProvider) {
 			cir.setReturnValue(LoomPatternProvider.getPatterns(patternGetter, loomPatternProvider));
 		}

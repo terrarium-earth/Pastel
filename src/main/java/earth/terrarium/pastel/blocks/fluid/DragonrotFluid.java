@@ -138,7 +138,7 @@ public abstract class DragonrotFluid extends PastelFluid {
 						livingEntity.addEffect(new MobEffectInstance(PastelStatusEffects.LIFE_DRAIN, 600, 0));
 					}
 					else if(existingEffect.getDuration() < 500) {
-						((MobEffectInstanceInjector) existingEffect).spectrum$setDuration(300);
+						((MobEffectInstanceInjector) existingEffect).setDuration(300);
 
 						serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
 					}
@@ -153,7 +153,7 @@ public abstract class DragonrotFluid extends PastelFluid {
 						if (existingEffect.getDuration() <= cut) {
 							livingEntity.removeEffect(PastelStatusEffects.IMMUNITY);
 						} else {
-							((MobEffectInstanceInjector) existingEffect).spectrum$setDuration(existingEffect.getDuration() - cut);
+							((MobEffectInstanceInjector) existingEffect).setDuration(existingEffect.getDuration() - cut);
 							serverWorld.getChunkSource().broadcastAndSend(livingEntity, new ClientboundUpdateMobEffectPacket(livingEntity.getId(), existingEffect, true));
 						}
 					}

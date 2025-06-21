@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class PotionItemMixin {
 	
 	@ModifyReturnValue(method = "getUseDuration", at = @At("RETURN"))
-	private int spectrum$modifyDrinkTime(int drinkTime, ItemStack stack) {
+	private int modifyDrinkTime(int drinkTime, ItemStack stack) {
 		CustomPotionDataComponent component = stack.get(PastelDataComponentTypes.CUSTOM_POTION_DATA);
 		if (component != null) {
 			int additionalDrinkDuration = component.additionalDrinkDuration();

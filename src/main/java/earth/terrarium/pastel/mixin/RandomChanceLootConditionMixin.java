@@ -17,7 +17,7 @@ public abstract class RandomChanceLootConditionMixin {
 	@Shadow @Final private NumberProvider chance;
 	
 	@ModifyReturnValue(at = @At("RETURN"), method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z")
-	public boolean spectrum$applyRareLootEnchantment(boolean original, LootContext context) {
+	public boolean applyRareLootEnchantment(boolean original, LootContext context) {
 		// if the result was to not drop a drop before reroll
 		// gets more probable with each additional level of Clovers Favor
 		if (!original) {

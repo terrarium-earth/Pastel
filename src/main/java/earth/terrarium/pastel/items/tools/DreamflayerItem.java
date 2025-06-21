@@ -46,7 +46,7 @@ public class DreamflayerItem extends SwordItem implements InkPowered, Activatabl
 	 * The less armor the attacker with this sword has and the more
 	 * the one that gets attacked, the higher the damage will be
 	 * <p>
-	 * See LivingEntityMixin spectrum$applyDreamflayerDamage
+	 * See LivingEntityMixin applyDreamflayerDamage
 	 */
 	public static final float ARMOR_DIFFERENCE_DAMAGE_MULTIPLIER = 2.5F;
 	

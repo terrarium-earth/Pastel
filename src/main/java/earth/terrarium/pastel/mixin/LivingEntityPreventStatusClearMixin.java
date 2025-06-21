@@ -38,19 +38,19 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	public abstract Map<MobEffect, MobEffectInstance> getActiveEffectsMap();
 	
 	@Inject(method = "removeAllEffects", at = @At("HEAD"))
-	private void spectrum$detectFatalSlumber(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
+	private void detectFatalSlumber(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
 		hasFatalSlumber.set(getActiveEffectsMap().containsKey(PastelStatusEffects.FATAL_SLUMBER.value()));
 	}
 	
 	@Inject(method = "removeAllEffects", at = @At("TAIL"))
-	private void spectrum$applyEternalSlumberIfFatalSlumberRemoved(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
+	private void applyEternalSlumberIfFatalSlumberRemoved(CallbackInfoReturnable<Boolean> cir, @Share("hasFatalSlumber") LocalBooleanRef hasFatalSlumber) {
 		if (hasFatalSlumber.get()) {
 			addEffect(new MobEffectInstance(PastelStatusEffects.ETERNAL_SLUMBER, 6000));
 		}
 	}
 
 	@WrapWithCondition(method = "removeAllEffects", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;onEffectRemoved(Lnet/minecraft/world/effect/MobEffectInstance;)V"))
-	private boolean spectrum$preventStatusClear(LivingEntity instance, MobEffectInstance effect, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
+	private boolean preventStatusClear(LivingEntity instance, MobEffectInstance effect, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
 		if (StatusEffectHelper.isIncurable(effect)) {
 			if (affectedByImmunity(instance, effect.getAmplifier()))
 				return true;
@@ -64,7 +64,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	}
 	
 	@WrapWithCondition(method = "removeAllEffects", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;remove()V"))
-	private boolean spectrum$preventStatusClear2(Iterator instance, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
+	private boolean preventStatusClear2(Iterator instance, @Share("blockRemoval") LocalBooleanRef blockRemoval) {
 		if (blockRemoval.get()) {
 			blockRemoval.set(false);
 			return false;
@@ -73,7 +73,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 	}
 	
 	@WrapOperation(method = "removeEffect", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;removeEffectNoUpdate(Lnet/minecraft/core/Holder;)Lnet/minecraft/world/effect/MobEffectInstance;"))
-	private MobEffectInstance spectrum$preventStatusRemoval(LivingEntity instance, Holder<MobEffect> effectRegistryEntry, Operation<MobEffectInstance> original) {
+	private MobEffectInstance preventStatusRemoval(LivingEntity instance, Holder<MobEffect> effectRegistryEntry, Operation<MobEffectInstance> original) {
 		var effect = instance.getEffect(effectRegistryEntry);
 		boolean cancel;
 		
@@ -98,7 +98,7 @@ public abstract class LivingEntityPreventStatusClearMixin {
 		var cost = 1200 + 600 * amplifier;
 		
 		if (immunity != null && immunity.getDuration() >= cost) {
-			((MobEffectInstanceInjector) immunity).spectrum$setDuration(Math.max(5, immunity.getDuration() - cost));
+			((MobEffectInstanceInjector) immunity).setDuration(Math.max(5, immunity.getDuration() - cost));
 			if (!instance.level().isClientSide()) {
 				((ServerLevel) instance.level()).getChunkSource().broadcastAndSend(instance, new ClientboundUpdateMobEffectPacket(instance.getId(), immunity, false));
 			}

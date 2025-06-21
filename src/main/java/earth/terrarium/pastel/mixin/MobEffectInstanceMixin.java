@@ -36,27 +36,27 @@ public abstract class MobEffectInstanceMixin implements MobEffectInstanceInjecto
 			@Override
 			public <T> DataResult<Pair<MobEffectInstance, T>> apply(DynamicOps<T> ops, T input, DataResult<Pair<MobEffectInstance, T>> result) {
 				return result.map(pair -> {
-					ops.get(input, "incurable").flatMap(ops::getBooleanValue).ifSuccess(v -> ((MobEffectInstanceInjector) pair.getFirst()).spectrum$setIncurable(v));
+					ops.get(input, "incurable").flatMap(ops::getBooleanValue).ifSuccess(v -> ((MobEffectInstanceInjector) pair.getFirst()).setIncurable(v));
 					return pair;
 				});
 			}
 			
 			@Override
 			public <T> DataResult<T> coApply(DynamicOps<T> ops, MobEffectInstance inst, DataResult<T> result) {
-				return result.map(output -> ops.set(output, "incurable", ops.createBoolean(((MobEffectInstanceInjector) inst).spectrum$isIncurable())));
+				return result.map(output -> ops.set(output, "incurable", ops.createBoolean(((MobEffectInstanceInjector) inst).isIncurable())));
 			}
 		});
 	}
 	
 	@Inject(method = "update", at = @At("HEAD"), cancellable = true)
-	private void spectrum$stackableEffects(MobEffectInstance newEffect, CallbackInfoReturnable<Boolean> cir) {
+	private void stackableEffects(MobEffectInstance newEffect, CallbackInfoReturnable<Boolean> cir) {
 		Holder<MobEffect> effectType = newEffect.getEffect();
 		if (effectType.is(PastelStatusEffectTags.STACKING)) {
 			PastelStatusEffects.effectsAreGettingStacked = true;
 			MobEffectInstance existingInstance = (MobEffectInstance) (Object) this;
 			
 			int newAmplifier = 1 + existingInstance.getAmplifier() + newEffect.getAmplifier();
-			((MobEffectInstanceInjector) existingInstance).spectrum$setAmplifier(newAmplifier);
+			((MobEffectInstanceInjector) existingInstance).setAmplifier(newAmplifier);
 			
 			cir.setReturnValue(true);
 		}
@@ -65,29 +65,29 @@ public abstract class MobEffectInstanceMixin implements MobEffectInstanceInjecto
 	
 	@Inject(method = "update", at = @At("RETURN"))
 	private void readIncurable(MobEffectInstance that, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 0) LocalBooleanRef changed) {
-		if (incurable != ((MobEffectInstanceInjector) that).spectrum$isIncurable()) {
-			spectrum$setIncurable(((MobEffectInstanceInjector) that).spectrum$isIncurable());
+		if (incurable != ((MobEffectInstanceInjector) that).isIncurable()) {
+			setIncurable(((MobEffectInstanceInjector) that).isIncurable());
 			changed.set(true);
 		}
 	}
 	
 	@Override
-	public boolean spectrum$isIncurable() {
+	public boolean isIncurable() {
 		return incurable;
 	}
 	
 	@Override
-	public void spectrum$setIncurable(boolean incurable) {
+	public void setIncurable(boolean incurable) {
 		this.incurable = incurable;
 	}
 	
 	@Override
-	public void spectrum$setDuration(int newDuration) {
+	public void setDuration(int newDuration) {
 		this.duration = newDuration;
 	}
 	
 	@Override
-	public void spectrum$setAmplifier(int newAmplifier) {
+	public void setAmplifier(int newAmplifier) {
 		this.amplifier = newAmplifier;
 	}
 	

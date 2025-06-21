@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BrewingRecipeRegistryMixin {
 	
 	@Inject(method = "isIngredient", at = @At("HEAD"), cancellable = true)
-	private void spectrum$disallowPigmentPotionBrewing(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+	private void disallowPigmentPotionBrewing(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		PotionContents potionContentsComponent = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
 		if (potionContentsComponent.potion().isPresent() && potionContentsComponent.potion().get().equals(PastelPotions.PIGMENT_POTION)) {
 			cir.setReturnValue(false);

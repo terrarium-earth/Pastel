@@ -25,8 +25,8 @@ public class EffectCommandMixin {
     private static void clearIncurableEffects(CommandSourceStack source, Collection<? extends Entity> targets, CallbackInfoReturnable<Integer> cir, @Local Entity target) {
         if (target instanceof LivingEntity living) {
             for (MobEffectInstance effect : living.getActiveEffects()) {
-                if (((MobEffectInstanceInjector) effect).spectrum$isIncurable())
-                    ((MobEffectInstanceInjector) effect).spectrum$setIncurable(false);
+                if (((MobEffectInstanceInjector) effect).isIncurable())
+                    ((MobEffectInstanceInjector) effect).setIncurable(false);
             }
 			// manually remove fatal slumber to bypass turning it into eternal slumber
 			living.removeEffect(PastelStatusEffects.FATAL_SLUMBER);
@@ -38,8 +38,8 @@ public class EffectCommandMixin {
         if (target instanceof LivingEntity living) {
 			var effect = living.getEffect(living.level().registryAccess().registryOrThrow(Registries.MOB_EFFECT).wrapAsHolder(ref));
             if (effect != null) {
-                if (((MobEffectInstanceInjector) effect).spectrum$isIncurable())
-                    ((MobEffectInstanceInjector) effect).spectrum$setIncurable(false);
+                if (((MobEffectInstanceInjector) effect).isIncurable())
+                    ((MobEffectInstanceInjector) effect).setIncurable(false);
             }
         }
     }

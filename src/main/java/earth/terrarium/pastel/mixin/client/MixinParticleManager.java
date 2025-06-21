@@ -18,21 +18,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinParticleManager implements ExtendedParticleManager {
 
     @Unique
-    private final EarlyRenderingParticleContainer spectrum$earlyRenderingParticleContainer = new EarlyRenderingParticleContainer();
+    private final EarlyRenderingParticleContainer earlyRenderingParticleContainer = new EarlyRenderingParticleContainer();
 	
 	@Inject(method = "tick", at = @At(value = "INVOKE", target = "Ljava/util/Map;computeIfAbsent(Ljava/lang/Object;Ljava/util/function/Function;)Ljava/lang/Object;"))
 	private void earlyRenderingHook(final CallbackInfo ci, @Local final Particle particle) {
-        spectrum$earlyRenderingParticleContainer.add(particle);
+        earlyRenderingParticleContainer.add(particle);
     }
 
     @Inject(method = "tick", at = @At("RETURN"))
     private void removeDeadHook(final CallbackInfo ci) {
-        spectrum$earlyRenderingParticleContainer.removeDead();
+        earlyRenderingParticleContainer.removeDead();
     }
 
     @Override
     public void render(final PoseStack matrices, final MultiBufferSource vertexConsumers, final Camera camera, final float tickDelta) {
-        spectrum$earlyRenderingParticleContainer.render(matrices, vertexConsumers, camera, tickDelta);
+        earlyRenderingParticleContainer.render(matrices, vertexConsumers, camera, tickDelta);
     }
 
 }

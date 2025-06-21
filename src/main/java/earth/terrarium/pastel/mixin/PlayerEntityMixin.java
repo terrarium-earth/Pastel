@@ -62,7 +62,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	public PastelFishingBobberEntity fishingBobber;
 	
 	@Inject(method = "updateSwimming()V", at = @At("HEAD"), cancellable = true)
-	public void spectrum$updateSwimming(CallbackInfo ci) {
+	public void updateSwimming(CallbackInfo ci) {
 		if (PastelTrinketItem.hasEquipped(this, PastelItems.RING_OF_DENSER_STEPS.get())) {
 			this.setSwimming(false);
 			ci.cancel();
@@ -70,7 +70,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	}
 	
 	@Inject(method = "killedEntity", at = @At("HEAD"))
-	private void spectrum$rememberKillOther(ServerLevel world, LivingEntity other, CallbackInfoReturnable<Boolean> cir) {
+	private void rememberKillOther(ServerLevel world, LivingEntity other, CallbackInfoReturnable<Boolean> cir) {
 		Player entity = (Player) (Object) this;
 		LastKillData.rememberKillTick(entity, entity.level().getGameTime());
 		
@@ -81,7 +81,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	}
 	
 	@Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-	private void spectrum$stopSleep(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+	private void stopSleep(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		if (amount > 0) {
 			Player entity = (Player) (Object) this;
 			MiscPlayerData.get(entity).notifyHit();
@@ -89,7 +89,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	}
 	
 	@WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "net/minecraft/world/level/Level.playSound (Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 2))
-	protected void spectrum$switchCritSound(Level instance, Player except, double x, double y, double z, SoundEvent sound, SoundSource category, float volume, float pitch, Operation<Void> original) {
+	protected void switchCritSound(Level instance, Player except, double x, double y, double z, SoundEvent sound, SoundSource category, float volume, float pitch, Operation<Void> original) {
 		var player = (Player) (Object) this;
 		var stack = this.getItemInHand(InteractionHand.MAIN_HAND);
 		var component = MiscPlayerData.get(player);
@@ -101,7 +101,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	}
 	
 	@WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "net/minecraft/world/level/Level.playSound (Lnet/minecraft/world/entity/player/Player;DDDLnet/minecraft/sounds/SoundEvent;Lnet/minecraft/sounds/SoundSource;FF)V", ordinal = 1))
-	protected void spectrum$switchSweepSound(Level instance, Player except, double x, double y, double z, SoundEvent sound, SoundSource category, float volume, float pitch, Operation<Void> original) {
+	protected void switchSweepSound(Level instance, Player except, double x, double y, double z, SoundEvent sound, SoundSource category, float volume, float pitch, Operation<Void> original) {
 		var stack = this.getItemInHand(InteractionHand.MAIN_HAND);
 		if (stack.getItem() == PastelItems.DRACONIC_TWINSWORD.get() && getChanneling(stack) > 0) {
 			this.level().playSound(except, x, y, z, PastelSoundEvents.ELECTRIC_DISCHARGE, category, 0.75F, 0.9F + random.nextFloat() * 0.2F);
@@ -116,7 +116,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	}
 	
 	@Inject(at = @At("TAIL"), method = "jumpFromGround")
-	protected void spectrum$jumpAdvancementCriterion(CallbackInfo ci) {
+	protected void jumpAdvancementCriterion(CallbackInfo ci) {
 		
 		if ((Object) this instanceof ServerPlayer serverPlayerEntity) {
 			PastelAdvancementCriteria.TAKE_OFF_BELT_JUMP.trigger(serverPlayerEntity);
@@ -124,7 +124,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	}
 	
 	@ModifyVariable(method = "hurtArmor", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-	private float spectrum$damageArmor(float amount, DamageSource source) {
+	private float damageArmor(float amount, DamageSource source) {
 		if (source.is(PastelDamageTypeTags.DOES_NOT_DAMAGE_ARMOR)) {
 			return 0;
 		} else if (source.is(PastelDamageTypeTags.INCREASED_ARMOR_DAMAGE)) {
@@ -179,14 +179,14 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	}
 	
 	@Inject(method = "stopSleepInBed", at = @At(value = "HEAD"))
-	public void spectrum$applyWakeUpEffects(boolean skipSleepTimer, boolean updateSleepingPlayers, CallbackInfo ci) {
+	public void applyWakeUpEffects(boolean skipSleepTimer, boolean updateSleepingPlayers, CallbackInfo ci) {
 		var player = (Player) (Object) this;
 		if (!player.level().isClientSide())
 			MiscPlayerData.get(player).resetSleepingState(true);
 	}
 	
 	@WrapOperation(method = "updatePlayerPose", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setPose(Lnet/minecraft/world/entity/Pose;)V"))
-	public void spectrum$forceSwimmingState(Player instance, Pose entityPose, Operation<Void> original) {
+	public void forceSwimmingState(Player instance, Pose entityPose, Operation<Void> original) {
 		var component = MiscPlayerData.get(instance);
 		if ((component.shouldLieDown() || instance.hasEffect(PastelStatusEffects.FATAL_SLUMBER)) && canPlayerFitWithinBlocksAndEntitiesWhen(Pose.SWIMMING)) {
 			instance.setPose(Pose.SWIMMING);

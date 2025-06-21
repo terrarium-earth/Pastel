@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class InGameOverlayRendererMixin {
     
     @Inject(method = "renderScreenEffect", at = @At(value = "HEAD"))
-    private static void spectrum$renderPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
+    private static void renderPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
         if (!client.player.isSpectator()) {
             if (PrimordialFireData.isOnPrimordialFire(client.player)) {
                 renderPrimordialFireOverlay(client, matrices);
@@ -36,7 +36,7 @@ public class InGameOverlayRendererMixin {
     }
     
     @Inject(method = "renderFire", at = @At(value = "HEAD"), cancellable = true)
-    private static void spectrum$cancelFireOverlayWithPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
+    private static void cancelFireOverlayWithPrimordialFire(Minecraft client, PoseStack matrices, CallbackInfo ci) {
         if (PrimordialFireData.isOnPrimordialFire(client.player)) {
             ci.cancel();
         }

@@ -33,7 +33,7 @@ public abstract class EatBerriesGoalMixin extends MoveToBlockGoal {
 	}
 	
 	@Inject(method = "isValidTarget", at = @At("HEAD"), cancellable = true)
-	private void spectrum$isTargetPos(LevelReader world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+	private void isTargetPos(LevelReader world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
 		BlockState blockState = world.getBlockState(pos);
 		if (blockState.is(PastelBlocks.SAWBLADE_HOLLY_BUSH.get()) && blockState.getValue(SawbladeHollyBushBlock.AGE) == SawbladeHollyBushBlock.MAX_AGE) {
 			cir.setReturnValue(true);
@@ -41,18 +41,18 @@ public abstract class EatBerriesGoalMixin extends MoveToBlockGoal {
 	}
 	
 	@Inject(method = "onReachedTarget", at = @At("HEAD"), cancellable = true)
-	private void spectrum$eatBerries(CallbackInfo ci) {
+	private void eatBerries(CallbackInfo ci) {
 		if (foxEntity.level().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
 			BlockState blockState = foxEntity.level().getBlockState(this.blockPos);
 			if (blockState.is(PastelBlocks.SAWBLADE_HOLLY_BUSH.get())) {
-				spectrum$pickSawbladeHollyBerries(blockState);
+				pickSawbladeHollyBerries(blockState);
 				ci.cancel();
 			}
 		}
 	}
 	
 	@Unique
-	private void spectrum$pickSawbladeHollyBerries(BlockState state) {
+	private void pickSawbladeHollyBerries(BlockState state) {
 		Level world = foxEntity.level();
 		int age = state.getValue(SawbladeHollyBushBlock.AGE);
 		int berriesPlucked = 1 + world.random.nextInt(2) + (age == SawbladeHollyBushBlock.MAX_AGE ? 1 : 0);

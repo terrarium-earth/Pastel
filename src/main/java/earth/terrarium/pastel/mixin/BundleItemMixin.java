@@ -14,12 +14,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public class BundleItemMixin {
 	
 	@ModifyVariable(method = "overrideStackedOnOther", at = @At(value = "STORE"))
-	private BundleContents.Mutable spectrum$onStackClicked$replaceBuilder(BundleContents.Mutable builder, ItemStack stack) {
+	private BundleContents.Mutable onStackClicked$replaceBuilder(BundleContents.Mutable builder, ItemStack stack) {
 		return getBuilder(stack);
 	}
 	
 	@ModifyVariable(method = "overrideOtherStackedOnMe", at = @At(value = "STORE"))
-	private BundleContents.Mutable spectrum$onClicked$replaceBuilder(BundleContents.Mutable builder, ItemStack stack) {
+	private BundleContents.Mutable onClicked$replaceBuilder(BundleContents.Mutable builder, ItemStack stack) {
 		return getBuilder(stack);
 	}
 	

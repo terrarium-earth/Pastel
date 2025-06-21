@@ -141,7 +141,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 			yRotO = getYRot();
 			setPropelled(true);
 			setRebounding(false);
-			((TridentEntityAccessor) this).spectrum$setDealtDamage(false);
+			((TridentEntityAccessor) this).setDealtDamage(false);
 			playSound(PastelSoundEvents.METAL_HIT, 0.8F, 0.8F + random.nextFloat() * 0.4F);
 		} else {
 			jiggleTicks = 0;
@@ -243,7 +243,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 			return;
 		}
 		
-		((TridentEntityAccessor) this).spectrum$setDealtDamage(true);
+		((TridentEntityAccessor) this).setDealtDamage(true);
 		
 		applyChannelingAOE(channeling, damage, attacked, damageSource);
 		applyInertiaEffects(stack);
