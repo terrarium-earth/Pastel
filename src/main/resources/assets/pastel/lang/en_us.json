@@ -5011,6 +5011,11 @@
   "item.pastel.workstaff.tooltip.right_click_actions_disabled": "Tilling, Stripping and Flattening disabled",
   "item.pastel.yellow_pigment": "Yellow Pigment",
 
+  "fluid_type.pastel.midnight_solution": "Midnight Solution",
+  "fluid_type.pastel.liquid_crystal": "Liquid Crystal",
+  "fluid_type.pastel.dragonrot": "Dragonrot",
+  "fluid_type.pastel.goo": "Goo",
+
   "itemGroup.pastel.decoration": "Pastel Decoration",
   "itemGroup.pastel.tools": "Pastel Tools",
   "itemGroup.pastel.instruments": "Pastel Instruments",
