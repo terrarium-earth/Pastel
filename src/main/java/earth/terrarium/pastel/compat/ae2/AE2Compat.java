@@ -64,8 +64,6 @@ public class AE2Compat extends PastelIntegrationPacks.ModIntegrationPack {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void registerClient() {
-		PastelBlocks.CLIENT_REGISTRAR.flush();
-	}
+	public void registerClient() {}
 
 }
