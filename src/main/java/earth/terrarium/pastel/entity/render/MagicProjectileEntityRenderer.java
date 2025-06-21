@@ -47,8 +47,7 @@ public class MagicProjectileEntityRenderer extends EntityRenderer<MagicProjectil
 		
 		poseStack.translate(0.0D, 0.10000000149011612D, 0.0D);
 		poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-		poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-		
+
 		vertex(vertexConsumer, entry, matrix4f, -0.5F, -0.25F, s, t, u, h, m, light);
 		vertex(vertexConsumer, entry, matrix4f, 0.5F, -0.25F, s, t, u, k, m, light);
 		vertex(vertexConsumer, entry, matrix4f, 0.5F, 0.75F, s, t, u, k, l, light);
@@ -62,7 +61,7 @@ public class MagicProjectileEntityRenderer extends EntityRenderer<MagicProjectil
 
 	@Override
 	public ResourceLocation getTextureLocation(MagicProjectileEntity entity) {
-		return InventoryMenu.BLOCK_ATLAS;
+		return TEXTURE;
 	}
 	
 }
