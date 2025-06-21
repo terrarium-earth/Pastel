@@ -12,7 +12,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.common.EffectCure;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Set;
 
 public class SleepStatusEffect extends MobEffect {
 
@@ -87,8 +90,16 @@ public class SleepStatusEffect extends MobEffect {
         // Also accounts for a smaller resist meaning stronger sleep
         return 2 * (float) Math.pow(1 - potency, 2);
     }
-	
-	private static boolean isConstruct(EntityType<?> type) {
+
+    @Override
+    public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
+        if (effectInstance.getEffect().equals(PastelStatusEffects.SOMNOLENCE))
+            cures.add(PastelStatusEffects.Cures.SEDATIVES);
+
+        cures.add(PastelStatusEffects.Cures.BLOOD_ORCHID);
+    }
+
+    private static boolean isConstruct(EntityType<?> type) {
 		return type.is(PastelEntityTypeTags.SOULLESS);
 	}
     

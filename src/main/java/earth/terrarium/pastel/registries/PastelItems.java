@@ -40,6 +40,7 @@ import earth.terrarium.pastel.items.energy.InkFlaskItem;
 import earth.terrarium.pastel.items.energy.PigmentPaletteItem;
 import earth.terrarium.pastel.items.food.AliasedTooltipItem;
 import earth.terrarium.pastel.items.food.AzaleaTeaItem;
+import earth.terrarium.pastel.items.food.BloodOrchidDrinkItem;
 import earth.terrarium.pastel.items.food.ClottedCreamItem;
 import earth.terrarium.pastel.items.food.DrinkItem;
 import earth.terrarium.pastel.items.food.EnchantedStarCandyItem;
@@ -435,7 +436,7 @@ public class PastelItems {
     public static final DeferredItem<Item> JADEITE_PETALS = register(simple(item("jadeite_petals", () -> new Item(IS.of(Rarity.UNCOMMON)), InkColors.BROWN)));
     public static final DeferredItem<Item> BLOOD_ORCHID_PETAL = register(simple(item("blood_orchid_petal", () -> new CloakedItem(IS.of(), PastelAdvancements.REVEAL_BLOOD_ORCHID_PETALS, RED_DYE), InkColors.RED)));
 
-    public static final DeferredItem<Item> BLOODBOIL_SYRUP = register(simple(item("bloodboil_syrup", () -> new DrinkItem(IS.of().food(PastelFoodComponents.BLOODBOIL_SYRUP).craftRemainder(GLASS_BOTTLE)), InkColors.RED)));
+    public static final DeferredItem<Item> BLOODBOIL_SYRUP = register(simple(item("bloodboil_syrup", () -> new BloodOrchidDrinkItem(IS.of().food(PastelFoodComponents.BLOODBOIL_SYRUP).craftRemainder(GLASS_BOTTLE)), InkColors.RED)));
     public static final DeferredItem<Item> MILKY_RESIN = register(simple(item("milky_resin", () -> new Item(IS.of(Rarity.UNCOMMON)), InkColors.LIGHT_GRAY)));
 
     // Food & drinks
@@ -453,7 +454,7 @@ public class PastelItems {
     public static final DeferredItem<Item> KARAK_CHAI = register(simple(item("karak_chai", () -> new DrinkItem(IS.of(16).food(PastelFoodComponents.KARAK_CHAI).component(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(PastelFoodComponents.KARAK_CHAI_SCONE_BONUS))), InkColors.PINK)));
     public static final DeferredItem<Item> AZALEA_TEA = register(simple(item("azalea_tea", () -> new AzaleaTeaItem(IS.of(16).food(PastelFoodComponents.AZALEA_TEA).component(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(PastelFoodComponents.AZALEA_TEA_SCONE_BONUS))), InkColors.PURPLE)));
     public static final DeferredItem<Item> BODACIOUS_BERRY_BAR = register(simple(item("bodacious_berry_bar", () -> new Item(IS.of().food(PastelFoodComponents.BODACIOUS_BERRY_BAR)), InkColors.PINK)));
-    public static final DeferredItem<Item> DEMON_TEA = register(simple(item("demon_tea", () -> new DrinkItem(IS.of(16).food(PastelFoodComponents.DEMON_TEA).component(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(PastelFoodComponents.DEMON_TEA_SCONE_BONUS))), InkColors.RED)));
+    public static final DeferredItem<Item> DEMON_TEA = register(simple(item("demon_tea", () -> new BloodOrchidDrinkItem(IS.of(16).food(PastelFoodComponents.DEMON_TEA).component(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(PastelFoodComponents.DEMON_TEA_SCONE_BONUS))), InkColors.RED)));
     public static final DeferredItem<Item> SCONE = register(simple(item("scone", () -> new Item(IS.of().food(PastelFoodComponents.SCONE)), InkColors.PINK)));
 
     public static final DeferredItem<Item> CHEONG = register(layered(item("cheong", () -> new ItemWithTooltip(IS.of().food(PastelFoodComponents.CHEONG), "item.pastel.cheong.tooltip"), InkColors.PINK), "", "_overlay", "_cap"));

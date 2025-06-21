@@ -209,5 +209,8 @@ public class PastelStatusEffects {
 	public static class Cures {
 
 		public static final EffectCure SEDATIVES = EffectCure.get("sedatives");
+
+		public static final EffectCure BLOOD_ORCHID = EffectCure.get("blood_orchid");
+
 	}
 }
