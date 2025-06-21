@@ -2,10 +2,17 @@ package earth.terrarium.pastel.items.food;
 
 import earth.terrarium.pastel.items.ItemWithTooltip;
 import earth.terrarium.pastel.registries.PastelStatusEffects;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.EffectCures;
 
 public class SedativesItem extends ItemWithTooltip {
 	
@@ -14,29 +21,22 @@ public class SedativesItem extends ItemWithTooltip {
 	}
 	
 	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
-		if (!world.isClientSide) { // TODO: do we need this? Frenzy is self-stacking; this also removed all hidden status effects that are not max potency! // Dafuqs: Mildly concerning indeed
-			var frenzy = user.getEffect(PastelStatusEffects.FRENZY);
-			
-			if (frenzy != null) {
-				var level = frenzy.getAmplifier();
-				var duration = frenzy.getDuration();
-				
-				if (world.getRandom().nextInt((int) (frenzy.getAmplifier() + Math.round(duration / 30.0) + 1)) == 0) {
-					user.removeEffect(PastelStatusEffects.FRENZY);
-					if (frenzy.getAmplifier() > 0) {
-						user.addEffect(new MobEffectInstance(PastelStatusEffects.FRENZY, duration, level - 1, frenzy.isAmbient(), frenzy.isVisible(), frenzy.showIcon()));
-					}
-				}
-			}
-			
-			// TODO - Reenable compat when up-to-date
-			//if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.NEEPMEAT_ID)) {
-			//	NEEPMeatCompat.sedateEnlightenment(user);
-			//}
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+		if (user instanceof ServerPlayer serverplayer) {
+			CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, stack);
+			serverplayer.awardStat(Stats.ITEM_USED.get(this));
 		}
-		
-		return super.finishUsingItem(stack, world, user);
+
+		if (!level.isClientSide) {
+			user.removeEffectsCuredBy(PastelStatusEffects.Cures.SEDATIVES);
+		}
+
+		if (user instanceof Player player) {
+			return ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET), false);
+		} else {
+			stack.consume(1, user);
+			return stack;
+		}
 	}
 	
 }

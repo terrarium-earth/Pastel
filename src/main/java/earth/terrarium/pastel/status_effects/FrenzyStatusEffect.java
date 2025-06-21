@@ -5,11 +5,15 @@ import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.neoforged.neoforge.common.EffectCure;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
 
 public class FrenzyStatusEffect extends MobEffect {
 	
@@ -78,7 +82,12 @@ public class FrenzyStatusEffect extends MobEffect {
 			});
 		}
 	}
-	
+
+	@Override
+	public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
+		cures.add(PastelStatusEffects.Cures.SEDATIVES);
+	}
+
 	public double adjustModifierAmount(double existingValue, double additionalValue, int amplifier, int increase) {
 		if (increase > 0) {
 			return existingValue + additionalValue * (amplifier + increase);

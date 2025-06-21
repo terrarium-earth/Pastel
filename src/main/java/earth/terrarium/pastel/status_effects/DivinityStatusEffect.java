@@ -14,6 +14,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.EffectCure;
+
+import java.util.Set;
 
 public class DivinityStatusEffect extends MobEffect {
 	
@@ -53,6 +56,9 @@ public class DivinityStatusEffect extends MobEffect {
 	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
 		return true;
 	}
+
+	@Override
+	public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {}
 
 	@Override
 	public void onEffectStarted(LivingEntity entity, int amplifier) {

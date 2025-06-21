@@ -40,7 +40,6 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::allowDamage);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::equipmentChange);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::entityDeath);
-        NeoForge.EVENT_BUS.addListener(PastelEntityEvents::finishUsingItem);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::parryingSwordBlock);
 
         // I guess this is the damage corner now
@@ -209,14 +208,6 @@ public class PastelEntityEvents {
                     .forEach(instance -> instance.getEffect().value().onEffectStarted(livingEntity, instance.getAmplifier()));
         }
 
-    }
-
-    private static void finishUsingItem(LivingEntityUseItemEvent.Finish event) {
-        var entity = event.getEntity();
-        var item = event.getItem();
-
-        if (item.is(Items.HONEY_BOTTLE))
-            entity.removeEffect(PastelStatusEffects.DEADLY_POISON);
     }
 
     private static void entityDeath(LivingDeathEvent event) {

@@ -27,6 +27,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.common.EffectCure;
 import net.neoforged.neoforge.registries.*;
 
 import static earth.terrarium.pastel.PastelCommon.locate;
@@ -204,5 +205,9 @@ public class PastelStatusEffects {
 			serverWorld.getChunkSource().broadcastAndSend(instance, new ClientboundUpdateMobEffectPacket(instance.getId(), effect, false));
 		}
 	}
-	
+
+	public static class Cures {
+
+		public static final EffectCure SEDATIVES = EffectCure.get("sedatives");
+	}
 }
