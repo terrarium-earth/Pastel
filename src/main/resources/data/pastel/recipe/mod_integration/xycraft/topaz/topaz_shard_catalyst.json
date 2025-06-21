@@ -19,7 +19,7 @@
     "block": "pastel:budding_topaz",
     "predicate_type": "xycraft_core:block_rule"
   },
-  "ticks": 300,
+  "ticks": 1200,
   "valid_directions": [
     "down",
     "up",
