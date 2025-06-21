@@ -20,7 +20,7 @@ public abstract class MobEntityMixin {
     public void slowDownAIticks(CallbackInfo ci) {
         var entity = (Mob) (Object) this;
 
-        if ((entity.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelStatusEffects.FATAL_SLUMBER)) && !SleepStatusEffect.isImmuneish(entity)) {
+        if ((entity.hasEffect(PastelStatusEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelStatusEffects.FATAL_SLUMBER)) && !SleepStatusEffect.isResistedBy(entity)) {
             target = null;
             ci.cancel();
             return;

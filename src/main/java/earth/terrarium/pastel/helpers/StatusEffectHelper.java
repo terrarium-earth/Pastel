@@ -45,7 +45,7 @@ public class StatusEffectHelper {
 		if (type == PastelStatusEffects.DIVINITY)
 			return DIVINITY.get(renderType);
 		
-		if (isIncurable(effect) && type != PastelStatusEffects.ETERNAL_SLUMBER && type != PastelStatusEffects.FATAL_SLUMBER) {
+		if (resistsRemoval(effect) && type != PastelStatusEffects.ETERNAL_SLUMBER && type != PastelStatusEffects.FATAL_SLUMBER) {
 			return INCURABLE.get(renderType);
 		}
 		
@@ -54,10 +54,8 @@ public class StatusEffectHelper {
 		
 		return original;
 	}
-	
-	//TODO this needs a better name. What even is this.
-	//Also why is that not a tag?
-	public static boolean isIncurable(MobEffectInstance instance) {
+
+	public static boolean resistsRemoval(MobEffectInstance instance) {
 		var type = instance.getEffect();
 		if (type == PastelStatusEffects.ETERNAL_SLUMBER || type == PastelStatusEffects.FATAL_SLUMBER)
 			return false;

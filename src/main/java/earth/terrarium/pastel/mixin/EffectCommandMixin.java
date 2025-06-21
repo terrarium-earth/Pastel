@@ -28,8 +28,6 @@ public class EffectCommandMixin {
                 if (((MobEffectInstanceInjector) effect).isIncurable())
                     ((MobEffectInstanceInjector) effect).setIncurable(false);
             }
-			// manually remove fatal slumber to bypass turning it into eternal slumber
-			living.removeEffect(PastelStatusEffects.FATAL_SLUMBER);
         }
     }
 	

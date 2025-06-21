@@ -44,7 +44,7 @@ public class SleepStatusEffect extends MobEffect {
             scaling /= 3F;
         } else if (type.is(PastelEntityTypeTags.SLEEP_RESISTANT)) {
             scaling *= 2.0F;
-        } else if (isImmuneish(entity)) {
+        } else if (isResistedBy(entity)) {
             scaling *= 10F;
         }
         
@@ -52,7 +52,7 @@ public class SleepStatusEffect extends MobEffect {
     }
     
     // TODO: can the tag check be implemented into the entities base attribute modifier somehow?
-    public static boolean isImmuneish(LivingEntity entity) {
+    public static boolean isResistedBy(LivingEntity entity) {
         if (entity.hasEffect(PastelStatusEffects.FRENZY))
             return true;
         

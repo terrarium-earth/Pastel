@@ -17,13 +17,11 @@ import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.components.PairedFoodComponent;
 import earth.terrarium.pastel.helpers.ParticleHelper;
 import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
-import earth.terrarium.pastel.helpers.StatusEffectHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.helpers.enchantments.InexorableHelper;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.items.tools.ParryingSwordItem;
-import earth.terrarium.pastel.items.trinkets.AetherGracedNectarGlovesItem;
 import earth.terrarium.pastel.items.trinkets.PuffCircletItem;
 import earth.terrarium.pastel.items.trinkets.RingOfAerialGraceItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
@@ -35,25 +33,20 @@ import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
-import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelStatusEffects;
 import earth.terrarium.pastel.status_effects.EffectProlongingStatusEffect;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
-import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -315,32 +308,6 @@ public abstract class LivingEntityMixin {
 		instance.actuallyHurt(source, AzureDikeProvider.absorbDamage(instance, amount));
 	}
 
-	@Inject(method = "tickEffects", at = @At(value = "INVOKE", target = "Ljava/util/Iterator;remove()V"))
-	private void fatalSlumberKill(CallbackInfo ci, @Local MobEffectInstance effectInstance) {
-		if (effectInstance.getEffect() == PastelStatusEffects.FATAL_SLUMBER) {
-			var entity = (LivingEntity) (Object) this;
-
-			if (entity.level().isClientSide())
-				return;
-
-			if (entity.isSpectator() || entity instanceof Player player && player.getAbilities().instabuild)
-				return;
-
-			var damage = Float.MAX_VALUE;
-			if (SleepStatusEffect.isImmuneish(entity)) {
-				if (entity instanceof Player)
-					damage = entity.getHealth() * 0.95F;
-				else
-					damage = entity.getMaxHealth() * 0.3F;
-			}
-
-			entity.hurt(PastelDamageTypes.sleep(entity.level(), null), damage);
-			if (entity.isAlive() && entity instanceof ServerPlayer serverPlayerEntity && !serverPlayerEntity.isCreative()) {
-				Support.grantAdvancementCriterion(serverPlayerEntity, "lategame/survive_fatal_slumber", "survived_fatal_slumber");
-			}
-		}
-	}
-
 	/**
 	 * We do not force player sleeping because that would do funny things to the sleep cycle
 	 */
@@ -353,29 +320,6 @@ public abstract class LivingEntityMixin {
 			return !(((LivingEntity) (Object) this) instanceof Player);
 
 		return false;
-	}
-
-	// TODO: WHAT THE FUCK
-	@Inject(method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z", at = @At("HEAD"), cancellable = true)
-	private void modifyOrCancelEffects(MobEffectInstance effect, Entity source, CallbackInfoReturnable<Boolean> cir) {
-		var entity = (LivingEntity) (Object) this;
-		var effectType = effect.getEffect();
-
-		MobEffectInstanceInjector effectInjector = (MobEffectInstanceInjector) effect;
-		var resistanceModifier = Mth.clamp(SleepStatusEffect.getSleepResistance(effect, entity), 0.1F, 10F);
-		if (effectType == PastelStatusEffects.ETERNAL_SLUMBER) {
-			if (SleepStatusEffect.isImmuneish(entity)) {
-				effectInjector.setDuration(Math.round(effect.getDuration() / resistanceModifier));
-			} else if (!entity.getType().is(PastelEntityTypeTags.SLEEP_RESISTANT)) {
-				effectInjector.setDuration(MobEffectInstance.INFINITE_DURATION);
-			}
-		} else if (effectType == PastelStatusEffects.FATAL_SLUMBER) {
-			if (SleepStatusEffect.isImmuneish(entity) && entity.getType().is(Tags.EntityTypes.BOSSES)) {
-				effectInjector.setDuration(20 * 60);
-			} else {
-				effectInjector.setDuration(Math.max(Math.round(effect.getDuration() * resistanceModifier * 3), 20 * 10));
-			}
-		}
 	}
 
 	@Inject(at = @At("RETURN"), method = "hurt")

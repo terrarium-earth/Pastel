@@ -50,7 +50,6 @@
     "LightningEntityMixin",
     "LilyPadBlockMixin",
     "LivingEntityMixin",
-    "LivingEntityPreventStatusClearMixin",
     "LoomContainerPatternSlotMixin",
     "LoomScreenHandlerMixin",
     "MapDecorationMixin",

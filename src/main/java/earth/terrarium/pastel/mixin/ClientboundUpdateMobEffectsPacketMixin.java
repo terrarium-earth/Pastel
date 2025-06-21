@@ -19,7 +19,7 @@ public abstract class ClientboundUpdateMobEffectsPacketMixin implements Clientbo
 	
 	@Inject(method = "<init>(ILnet/minecraft/world/effect/MobEffectInstance;Z)V", at = @At("RETURN"))
 	public void initIncurable(int entityId, MobEffectInstance effect, boolean keepFading, CallbackInfo ci) {
-		this.incurable = StatusEffectHelper.isIncurable(effect);
+		this.incurable = StatusEffectHelper.resistsRemoval(effect);
 	}
 	
 	@Inject(method = "<init>(Lnet/minecraft/network/RegistryFriendlyByteBuf;)V", at = @At("RETURN"))
