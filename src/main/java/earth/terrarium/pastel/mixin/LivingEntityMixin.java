@@ -361,18 +361,6 @@ public abstract class LivingEntityMixin {
 		var entity = (LivingEntity) (Object) this;
 		var effectType = effect.getEffect();
 
-		if ((!entity.hasEffect(PastelStatusEffects.IMMUNITY)) && AetherGracedNectarGlovesItem.testEffectFor(entity, effectType)) {
-			var cost = (effect.getAmplifier() + 1) * AetherGracedNectarGlovesItem.HARMFUL_EFFECT_COST;
-
-			if (StatusEffectHelper.isIncurable(effect))
-				cost *= 3;
-
-			if (AetherGracedNectarGlovesItem.tryBlockEffect(entity, cost)) {
-				cir.setReturnValue(false);
-				return;
-			}
-		}
-
 		MobEffectInstanceInjector effectInjector = (MobEffectInstanceInjector) effect;
 		var resistanceModifier = Mth.clamp(SleepStatusEffect.getSleepResistance(effect, entity), 0.1F, 10F);
 		if (effectType == PastelStatusEffects.ETERNAL_SLUMBER) {

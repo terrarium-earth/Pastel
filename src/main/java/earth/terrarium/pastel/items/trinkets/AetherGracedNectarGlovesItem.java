@@ -26,7 +26,7 @@ import java.util.List;
 
 public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implements SlotBackgroundEffectProvider {
 
-	public static final int HARMFUL_EFFECT_COST = 7;
+	public static final int HARMFUL_EFFECT_COST = 5;
 	public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon.locate("nectar_gloves_sleep");
 	
 	public AetherGracedNectarGlovesItem(Properties settings, ResourceLocation unlockIdentifier) {

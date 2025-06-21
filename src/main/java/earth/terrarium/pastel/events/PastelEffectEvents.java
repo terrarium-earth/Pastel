@@ -17,6 +17,7 @@ public class PastelEffectEvents {
 
     public static void register(IEventBus pastelBus) {
         pastelBus.addListener(EventPriority.LOW, PastelEffectEvents::applyEffectImmunity);
+        pastelBus.addListener(EventPriority.LOWEST, PastelEffectEvents::applyNectarGlovesImmunity);
 
     }
 
@@ -44,7 +45,21 @@ public class PastelEffectEvents {
         updateEffectInClient(entity, immunity);
     }
 
+    private static void applyNectarGlovesImmunity(MobEffectEvent.Applicable event) {
+        var proposal = event.getEffectInstance();
+        var entity = event.getEntity();
 
+        if (!event.getApplicationResult() || !AetherGracedNectarGlovesItem.testEffectFor(entity, proposal.getEffect()))
+            return;
+
+        var cost = (proposal.getAmplifier() + 1) * AetherGracedNectarGlovesItem.HARMFUL_EFFECT_COST;
+
+        if (StatusEffectHelper.isIncurable(proposal))
+            cost *= 2;
+
+        if (AetherGracedNectarGlovesItem.tryBlockEffect(entity, cost))
+            event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
+    }
 
     /**
      * @return Whether immunity should be removed outright
