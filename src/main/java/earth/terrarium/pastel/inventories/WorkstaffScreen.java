@@ -10,7 +10,6 @@ import earth.terrarium.pastel.registries.SpectrumSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -43,7 +42,7 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 
 		GridEntry rightClickGridEntry;
 		ItemStack mainHandStack = playerInventory.player.getMainHandItem();
-		if (mainHandStack.getItem() instanceof WorkstaffItem workstaffItem && workstaffItem.canTill(mainHandStack)) {
+		if (mainHandStack.getItem() instanceof WorkstaffItem workstaffItem && workstaffItem.itemAbilitiesEnabled(mainHandStack)) {
 			rightClickGridEntry = GridEntry.item(Items.WOODEN_HOE, Component.translatable("item.pastel.workstaff.gui.disable_right_click_actions"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.DISABLE_RIGHT_CLICK_ACTIONS));
 		} else {
 			rightClickGridEntry = GridEntry.item(SpectrumItems.MULTITOOL.get(), Component.translatable("item.pastel.workstaff.gui.enable_right_click_actions"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.ENABLE_RIGHT_CLICK_ACTIONS));

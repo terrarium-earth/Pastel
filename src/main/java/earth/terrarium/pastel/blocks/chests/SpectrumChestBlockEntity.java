@@ -6,6 +6,9 @@ import earth.terrarium.pastel.inventories.BlackHoleChestScreenHandler;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
 import earth.terrarium.pastel.inventories.FabricationChestScreenHandler;
 import net.minecraft.core.*;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.core.component.DataComponentMap;
@@ -29,6 +32,7 @@ import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.*;
+import org.jetbrains.annotations.Nullable;
 
 //TODO: GET THIS LOOT CONTAINER SHIT OUT OF MY CHEST
 @OnlyIn(
@@ -146,7 +150,12 @@ public abstract class SpectrumChestBlockEntity extends RandomizableContainerBloc
 	protected NonNullList<ItemStack> getItems() {
 		return this.inventory.getInternalList();
 	}
-	
+
+	@Override
+	public ItemStack getItem(int index) {
+		return inventory.getStackInSlot(index);
+	}
+
 	@Override
 	protected void setItems(NonNullList<ItemStack> list) {
 		inventory.setInternalList(list);
@@ -176,7 +185,12 @@ public abstract class SpectrumChestBlockEntity extends RandomizableContainerBloc
 		super.collectImplicitComponents(componentMapBuilder);
 		componentMapBuilder.set(DataComponents.CONTAINER_LOOT, new SeededContainerLoot(this.lootTable, this.lootTableSeed));
 	}
-	
+
+	@Override
+	public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
+	}
+
 	public SoundEvent getOpenSound() {
 		return SoundEvents.CHEST_OPEN;
 	}

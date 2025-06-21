@@ -17,24 +17,24 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-public record CompactingChestStatusUpdatePayload(BlockPos pos, boolean hasToCraft) implements CustomPacketPayload {
+public record CompactingChestStatusUpdatePayload(BlockPos pos, long timeStamp) implements CustomPacketPayload {
 	
 	public static final Type<CompactingChestStatusUpdatePayload> ID = SpectrumC2SPackets.makeId("compacting_chest_status_update");
 	public static final StreamCodec<FriendlyByteBuf, CompactingChestStatusUpdatePayload> CODEC = StreamCodec.composite(
 			BlockPos.STREAM_CODEC, CompactingChestStatusUpdatePayload::pos,
-			ByteBufCodecs.BOOL, CompactingChestStatusUpdatePayload::hasToCraft,
+			ByteBufCodecs.VAR_LONG, CompactingChestStatusUpdatePayload::timeStamp,
 			CompactingChestStatusUpdatePayload::new
 	);
 	
 	public static void sendCompactingChestStatusUpdate(CompactingChestBlockEntity chest) {
-		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) chest.getLevel(), new ChunkPos(chest.getBlockPos()), new CompactingChestStatusUpdatePayload(chest.getBlockPos(), chest.hasToCraft()));
+		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) chest.getLevel(), new ChunkPos(chest.getBlockPos()), new CompactingChestStatusUpdatePayload(chest.getBlockPos(), chest.craftingTimeStamp));
 	}
 	
 	@SuppressWarnings("resource")
 	public static void execute(CompactingChestStatusUpdatePayload payload, IPayloadContext context) {
 		var level = context.player().level();
 		var entity = level.getBlockEntity(payload.pos, SpectrumBlockEntities.COMPACTING_CHEST.get());
-		entity.ifPresent(compactingChestBlockEntity -> compactingChestBlockEntity.shouldCraft(payload.hasToCraft));
+		entity.ifPresent(compactingChestBlockEntity -> compactingChestBlockEntity.craftingTimeStamp = payload.timeStamp());
 	}
 	
 	@Override

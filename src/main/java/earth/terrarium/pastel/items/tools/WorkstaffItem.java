@@ -33,6 +33,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 import java.util.Map;
@@ -91,7 +93,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 	}
 	
 	@Override
-	public boolean canTill(ItemStack stack) {
+	public boolean itemAbilitiesEnabled(ItemStack stack) {
 		return stack.getOrDefault(SpectrumDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT).canTill();
 	}
 	
@@ -206,4 +208,11 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 		return Map.of(Enchantments.FORTUNE, 4);
 	}
 
+	@Override
+	public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+		if (!stack.getOrDefault(SpectrumDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT).canTill())
+			return false;
+
+		return super.canPerformAction(stack, itemAbility);
+	}
 }

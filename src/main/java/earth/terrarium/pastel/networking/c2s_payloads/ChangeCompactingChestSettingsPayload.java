@@ -27,7 +27,7 @@ public record ChangeCompactingChestSettingsPayload(AutoCraftingMode mode) implem
 				BlockEntity blockEntity = compactingChestScreenHandler.getBlockEntity();
 				if (blockEntity instanceof CompactingChestBlockEntity compactingChestBlockEntity) {
 					// apply the new settings
-					compactingChestBlockEntity.applySettings(payload);
+					compactingChestBlockEntity.applySettings(payload.mode);
 				}
 			}
 		};

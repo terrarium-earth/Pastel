@@ -23,7 +23,7 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 	protected final int ROWS = 3;
 	
 	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
-		this(syncId, playerInventory, playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf), SpectrumBlockEntities.COMPACTING_CHEST.get()).orElseThrow(), new SimpleContainerData(1));
+		this(syncId, playerInventory, (CompactingChestBlockEntity) playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf)), new SimpleContainerData(1));
 	}
 	
 	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, CompactingChestBlockEntity blockEntity, ContainerData propertyDelegate) {
@@ -72,15 +72,9 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 			itemStack = itemStack2.copy();
 			if (index < this.ROWS * 9) {
 				if (!this.moveItemStackTo(itemStack2, this.ROWS * 9, this.slots.size(), true)) {
-					if (blockEntity instanceof CompactingChestBlockEntity compactor) {
-						compactor.inventoryChanged();
-					}
 					return ItemStack.EMPTY;
 				}
 			} else if (!this.moveItemStackTo(itemStack2, 0, this.ROWS * 9, false)) {
-				if (blockEntity instanceof CompactingChestBlockEntity compactor) {
-					compactor.inventoryChanged();
-				}
 				return ItemStack.EMPTY;
 			}
 			
@@ -89,10 +83,6 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 			} else {
 				slot.setChanged();
 			}
-		}
-		
-		if (blockEntity instanceof CompactingChestBlockEntity compactor) {
-			compactor.inventoryChanged();
 		}
 		return itemStack;
 	}
@@ -106,6 +96,7 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 	public void broadcastChanges() {
 		super.broadcastChanges();
 		PacketDistributor.sendToServer(new ChangeCompactingChestSettingsPayload(getCraftingMode()));
+		blockEntity.applySettings(getCraftingMode());
 	}
 	
 	@Override
