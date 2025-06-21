@@ -69,17 +69,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 		}
 	}
 	
-	@Inject(method = "killedEntity", at = @At("HEAD"))
-	private void rememberKillOther(ServerLevel world, LivingEntity other, CallbackInfoReturnable<Boolean> cir) {
-		Player entity = (Player) (Object) this;
-		LastKillData.rememberKillTick(entity, entity.level().getGameTime());
-		
-		MobEffectInstance frenzy = entity.getEffect(PastelStatusEffects.FRENZY);
-		if (frenzy != null) {
-			((FrenzyStatusEffect) frenzy.getEffect()).onKill(entity, frenzy.getAmplifier());
-		}
-	}
-	
 	@Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
 	private void stopSleep(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		if (amount > 0) {

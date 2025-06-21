@@ -9,6 +9,7 @@ import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.*;
 import earth.terrarium.pastel.registries.*;
+import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import net.minecraft.advancements.*;
 import net.minecraft.core.component.*;
 import net.minecraft.server.level.*;
@@ -43,7 +44,7 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::parryingSwordBlock);
 
         // I guess this is the damage corner now
-        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::jeopardantBonus); // Process it as late as possible for a small amount of tomfoolery
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::applyKillBonuses); // Process it as late as possible for a small amount of tomfoolery
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelEntityEvents::splitDamage);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::splitDamage);
     }
@@ -103,7 +104,7 @@ public class PastelEntityEvents {
         }
     }
 
-    private static void jeopardantBonus(LivingDamageEvent.Pre event) {
+    private static void applyKillBonuses(LivingDamageEvent.Pre event) {
         var entity = event.getSource().getEntity();
 
         if (!(entity instanceof LivingEntity attacker))
@@ -111,6 +112,12 @@ public class PastelEntityEvents {
 
         if (PastelTrinketItem.hasEquipped(attacker, PastelItems.JEOPARDANT.get())) {
             event.setNewDamage((float) (event.getNewDamage() * (AttackRingItem.getAttackModifierForEntity(attacker) + 1)));
+        }
+
+        LastKillData.rememberKillTick(attacker, entity.level().getGameTime());
+        var frenzy = attacker.getEffect(PastelStatusEffects.FRENZY);
+        if (frenzy != null) {
+            ((FrenzyStatusEffect) frenzy.getEffect()).onKill(attacker, frenzy.getAmplifier());
         }
     }
 

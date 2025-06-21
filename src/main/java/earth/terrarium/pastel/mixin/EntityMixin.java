@@ -30,20 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-	
-	@Inject(method = "killedEntity", at = @At("HEAD"))
-	private void rememberKillOther(ServerLevel world, LivingEntity other, CallbackInfoReturnable<Boolean> cir) {
-		Entity entity = (Entity) (Object) this;
-		if (entity instanceof LivingEntity livingEntity) {
-			LastKillData.rememberKillTick(livingEntity, livingEntity.level().getGameTime());
-			
-			MobEffectInstance frenzy = livingEntity.getEffect(PastelStatusEffects.FRENZY);
-			if (frenzy != null) {
-				((FrenzyStatusEffect) frenzy.getEffect()).onKill(livingEntity, frenzy.getAmplifier());
-			}
-		}
-	}
-	
+
 	@ModifyVariable(method = "makeStuckInBlock", at = @At(value = "LOAD"), argsOnly = true)
 	private Vec3 applyInexorableAntiBlockSlowdown(Vec3 multiplier) {
 		var entity = (Entity) (Object) this;
