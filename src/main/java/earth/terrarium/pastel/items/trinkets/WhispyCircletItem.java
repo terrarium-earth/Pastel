@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.trinkets;
 import com.google.common.collect.Multimap;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
-import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -46,7 +46,7 @@ public class WhispyCircletItem extends PastelTrinketItem {
 		List<MobEffectInstance> negativeEffects = new ArrayList<>();
 		for (MobEffectInstance statusEffectInstance : currentEffects) {
 			Holder<MobEffect> effect = statusEffectInstance.getEffect();
-			if (effect.value().getCategory() == category && !effect.is(PastelStatusEffectTags.SOPORIFIC) && !effect.is(PastelStatusEffectTags.BYPASSES_WHISPY_CIRCLET)) {
+			if (effect.value().getCategory() == category && !effect.is(PastelMobEffectTags.SOPORIFIC) && !effect.is(PastelMobEffectTags.BYPASSES_WHISPY_CIRCLET)) {
 				negativeEffects.add(statusEffectInstance);
 			}
 		}
@@ -99,7 +99,7 @@ public class WhispyCircletItem extends PastelTrinketItem {
 	}
 	
 	public static boolean affects(Holder<MobEffect> effect) {
-		return effect.value().getCategory() == MobEffectCategory.HARMFUL && !effect.is(PastelStatusEffectTags.BYPASSES_WHISPY_CIRCLET);
+		return effect.value().getCategory() == MobEffectCategory.HARMFUL && !effect.is(PastelMobEffectTags.BYPASSES_WHISPY_CIRCLET);
 	}
 	
 	public static void preventPhantomSpawns(@NotNull ServerPlayer serverPlayerEntity) {

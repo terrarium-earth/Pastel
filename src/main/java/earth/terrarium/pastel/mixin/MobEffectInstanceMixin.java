@@ -8,7 +8,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -51,7 +51,7 @@ public abstract class MobEffectInstanceMixin implements MobEffectInstanceInjecto
 	@Inject(method = "update", at = @At("HEAD"), cancellable = true)
 	private void stackableEffects(MobEffectInstance newEffect, CallbackInfoReturnable<Boolean> cir) {
 		Holder<MobEffect> effectType = newEffect.getEffect();
-		if (effectType.is(PastelStatusEffectTags.STACKING)) {
+		if (effectType.is(PastelMobEffectTags.STACKING)) {
 			PastelStatusEffects.effectsAreGettingStacked = true;
 			MobEffectInstance existingInstance = (MobEffectInstance) (Object) this;
 			

@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelItems;
-import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -56,7 +56,7 @@ public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implement
 		if (effect.value().isBeneficial())
 			return false;
 		
-		if (effect.is(PastelStatusEffectTags.BYPASSES_NECTAR_GLOVES))
+		if (effect.is(PastelMobEffectTags.BYPASSES_NECTAR_GLOVES))
 			return false;
 
 		return hasEquipped(entity, PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == PastelStatusEffects.FRENZY);

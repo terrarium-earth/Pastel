@@ -3,7 +3,7 @@ package earth.terrarium.pastel.status_effects;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
-import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -67,7 +67,7 @@ public class SleepStatusEffect extends MobEffect {
      * @return -1 = false
      */
     public static float getGeneralSleepResistanceIfEntityHasSoporificEffect(LivingEntity entity) {
-        if (!isConstruct(entity.getType()) && PastelStatusEffectTags.hasEffectWithTag(entity, PastelStatusEffectTags.SOPORIFIC)) {
+        if (!isConstruct(entity.getType()) && PastelMobEffectTags.hasEffectWithTag(entity, PastelMobEffectTags.SOPORIFIC)) {
             return getSleepResistance(entity.getEffect(getStrongestSleepEffect(entity)), entity);
         }
         return -1F;

@@ -6,7 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 
-public class PastelStatusEffectTags {
+public class PastelMobEffectTags {
 	
 	public static TagKey<MobEffect> BYPASSES_WHISPY_CIRCLET = of("bypasses_whispy_circlet");
 	public static TagKey<MobEffect> BYPASSES_NECTAR_GLOVES = of("bypasses_nectar_gloves");

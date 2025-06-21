@@ -2,7 +2,7 @@ package earth.terrarium.pastel.helpers;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
-import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import earth.terrarium.pastel.registries.PastelStatusEffects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -49,7 +49,7 @@ public class StatusEffectHelper {
 			return INCURABLE.get(renderType);
 		}
 		
-		if (type.is(PastelStatusEffectTags.NIGHT_ALCHEMY))
+		if (type.is(PastelMobEffectTags.NIGHT_ALCHEMY))
 			return NIGHT_ALCHEMY.get(renderType);
 		
 		return original;
@@ -57,8 +57,9 @@ public class StatusEffectHelper {
 
 	public static boolean resistsRemoval(MobEffectInstance instance) {
 		var type = instance.getEffect();
-		if (type == PastelStatusEffects.ETERNAL_SLUMBER || type == PastelStatusEffects.FATAL_SLUMBER)
-			return false;
+
+		if (type.is(PastelMobEffectTags.CANNOT_BE_INCURABLE))
+			return false; // We are merciful
 		
 		return ((MobEffectInstanceInjector) instance).isIncurable();
 	}

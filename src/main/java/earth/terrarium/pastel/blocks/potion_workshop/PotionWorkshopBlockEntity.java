@@ -247,7 +247,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		PotionMod potionMod = getPotionModFromReagents(potionWorkshopBlockEntity);
 		return hasUniqueReagents(potionWorkshopBlockEntity)
 				&& recipe.recipeData.isApplicableTo(baseIngredient, potionMod)
-				&& !(potionMod.flags().incurable() && recipe.recipeData.statusEffect().is(PastelStatusEffectTags.CANNOT_BE_INCURABLE));
+				&& !(potionMod.flags().incurable() && recipe.recipeData.statusEffect().is(PastelMobEffectTags.CANNOT_BE_INCURABLE));
 	}
 	
 	private static void craftRecipe(PotionWorkshopBlockEntity potionWorkshopBlockEntity, RecipeHolder<PotionWorkshopCraftingRecipe> recipe) {

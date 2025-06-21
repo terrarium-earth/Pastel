@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.status_effects;
 
-import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -14,7 +14,7 @@ public class EffectProlongingStatusEffect extends MobEffect {
 	}
 	
 	public static boolean canBeExtended(Holder<MobEffect> statusEffect) {
-		return !statusEffect.is(PastelStatusEffectTags.NO_DURATION_EXTENSION);
+		return !statusEffect.is(PastelMobEffectTags.NO_DURATION_EXTENSION);
 	}
 	
 	public static int getExtendedDuration(int originalDuration, int prolongingAmplifier) {

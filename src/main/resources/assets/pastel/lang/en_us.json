@@ -2912,7 +2912,7 @@
   "book.pastel.guidebook.infused_beverages.page4.text": "Refreshing, but leaves a bitter taste in my mouth.",
   "book.pastel.guidebook.infused_beverages.page5.text": "Sweet with a cinnamon finish.",
   "book.pastel.guidebook.infused_beverages.page6.text": "Makes me drowsy enough to sleep through the day.",
-  "book.pastel.guidebook.infused_beverages.page7.text": "In addition to Haste it can grant a bit of Saturation, depending on how long it fermented.",
+  "book.pastel.guidebook.infused_beverages.page7.text": "In addition to Haste it can grant a bit of Nourishing, depending on how long it fermented.",
   "book.pastel.guidebook.infused_beverages.page8.text": "Just... don't brew them too long or they will shift and end up tasting awful.",
   "book.pastel.guidebook.infused_beverages.page9.text": "Just... don't brew them too long or they will shift and end up tasting awful.",
   "book.pastel.guidebook.infused_beverages.page10.text": "Made from [Amaranth](entry://cuisine/amaranth), grants [#](449900)Luck[#]() and [#](449900)Haste[#]().",
@@ -4183,6 +4183,8 @@
   "effect.pastel.toughness.desc": "Weakens incoming powerful attacks.",
   "effect.pastel.vulnerability": "Vulnerability",
   "effect.pastel.vulnerability.desc": "Increases damage taken.",
+  "effect.pastel.nourishing": "Nourishing",
+  "effect.pastel.nourishing.desc": "Slowly refills food bar.",
 
   "enchantment.minecraft.feather_falling": "Feather Falling",
   "enchantment.minecraft.fortune": "Fortune",

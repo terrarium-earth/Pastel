@@ -4,7 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.ai.FixedBodyControl;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -104,7 +104,7 @@ public class PreservationTurretEntity extends AbstractGolem implements Enemy, Vi
 	
 	@Override
 	public boolean canBeAffected(MobEffectInstance effect) {
-		if (effect.getEffect().is(PastelStatusEffectTags.SOPORIFIC))
+		if (effect.getEffect().is(PastelMobEffectTags.SOPORIFIC))
 			return false;
 		
 		return super.canBeAffected(effect);

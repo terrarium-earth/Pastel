@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
 import earth.terrarium.pastel.registries.PastelEnchantments;
-import earth.terrarium.pastel.registries.PastelStatusEffectTags;
+import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -42,7 +42,7 @@ public abstract class WitherEntityMixin extends LivingEntity {
 
 	@ModifyReturnValue(method = "addEffect", at = @At("TAIL"))
 	private boolean allowWitherNaps(boolean original, @Local(argsOnly = true) MobEffectInstance effect, @Local(argsOnly = true) Entity source) {
-		if (effect.getEffect().is(PastelStatusEffectTags.SOPORIFIC)) {
+		if (effect.getEffect().is(PastelMobEffectTags.SOPORIFIC)) {
 			return super.addEffect(effect, source);
 		}
 		return original;
