@@ -272,7 +272,7 @@ public class PastelNodeBlockEntity extends BlockEntity implements FilterConfigur
 		
 		if (filterSlotRows < oldFilterSlotCount) {
 			for (int i = getDrawnSlots(); i < filterItems.size(); i++) {
-				filterItems.remove(i);
+				filterItems.set(i, ItemReference.empty());
 			}
 		}
 	}
