@@ -1,6 +1,6 @@
 
 plugins {
-    id("earth.terrarium.cloche") version "0.10.2"
+    id("earth.terrarium.cloche") version "0.10.7"
 }
 
 sourceSets.main {

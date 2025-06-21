@@ -49,6 +49,7 @@ import earth.terrarium.pastel.blocks.mob_head.client.models.SlimeHeadModel;
 import earth.terrarium.pastel.blocks.mob_head.client.models.SnifferHeadModel;
 import earth.terrarium.pastel.blocks.mob_head.client.models.SpiderHeadModel;
 import earth.terrarium.pastel.blocks.mob_head.client.models.SquidHeadModel;
+import earth.terrarium.pastel.blocks.mob_head.client.models.StrayHeadModel;
 import earth.terrarium.pastel.blocks.mob_head.client.models.StriderHeadModel;
 import earth.terrarium.pastel.blocks.mob_head.client.models.TadpoleHeadModel;
 import earth.terrarium.pastel.blocks.mob_head.client.models.TropicalFishHeadModel;
@@ -118,7 +119,6 @@ public class PastelModelLayers {
 	public static final ModelLayerLocation DROWNED_HEAD_OUTER = new ModelLayerLocation(PastelCommon.locate("drowned_head"), "overlay");
 	public static final ModelLayerLocation ELDER_GUARDIAN_HEAD = new ModelLayerLocation(PastelCommon.locate("elder_guardian_head"), "main");
 	public static final ModelLayerLocation ENDERMAN_HEAD = new ModelLayerLocation(PastelCommon.locate("enderman_head"), "main");
-	public static final ModelLayerLocation ENDERMAN_HEAD_OVERLAY = new ModelLayerLocation(PastelCommon.locate("enderman_head"), "overlay");
 	public static final ModelLayerLocation ENDERMITE_HEAD = new ModelLayerLocation(PastelCommon.locate("endermite_head"), "main");
 	public static final ModelLayerLocation EVOKER_HEAD = new ModelLayerLocation(PastelCommon.locate("evoker_head"), "main");
 	public static final ModelLayerLocation FOX_ARCTIC_HEAD = new ModelLayerLocation(PastelCommon.locate("fox_arctic_head"), "main");
@@ -181,7 +181,6 @@ public class PastelModelLayers {
 	public static final ModelLayerLocation SPIDER_HEAD = new ModelLayerLocation(PastelCommon.locate("spider_head"), "main");
 	public static final ModelLayerLocation SQUID_HEAD = new ModelLayerLocation(PastelCommon.locate("squid_head"), "main");
 	public static final ModelLayerLocation STRAY_HEAD = new ModelLayerLocation(PastelCommon.locate("stray_head"), "main");
-	public static final ModelLayerLocation STRAY_HEAD_OVERLAY = new ModelLayerLocation(PastelCommon.locate("stray_head"), "overlay");
 	public static final ModelLayerLocation STRIDER_HEAD = new ModelLayerLocation(PastelCommon.locate("strider_head"), "main");
 	public static final ModelLayerLocation TADPOLE_HEAD = new ModelLayerLocation(PastelCommon.locate("tadpole_head"), "main");
 	public static final ModelLayerLocation TROPICAL_FISH_HEAD = new ModelLayerLocation(PastelCommon.locate("tropical_fish_head"), "main");
@@ -192,9 +191,6 @@ public class PastelModelLayers {
 	public static final ModelLayerLocation VINDICATOR_HEAD = new ModelLayerLocation(PastelCommon.locate("vindicator_head"), "main");
 	public static final ModelLayerLocation WANDERING_TRADER_HEAD = new ModelLayerLocation(PastelCommon.locate("wandering_trader_head"), "main");
 	public static final ModelLayerLocation WARDEN_HEAD = new ModelLayerLocation(PastelCommon.locate("warden_head"), "main");
-	public static final ModelLayerLocation WARDEN_HEAD_BIOLUMINESCENT = new ModelLayerLocation(PastelCommon.locate("piglin_brute_head"), "bioluminescent_layer");
-	public static final ModelLayerLocation WARDEN_HEAD_PULSATING_SPOTS_1 = new ModelLayerLocation(PastelCommon.locate("piglin_brute_head"), "pulsating_spots_1");
-	public static final ModelLayerLocation WARDEN_HEAD_PULSATING_SPOTS_2 = new ModelLayerLocation(PastelCommon.locate("piglin_brute_head"), "pulsating_spots_2");
 	public static final ModelLayerLocation WITCH_HEAD = new ModelLayerLocation(PastelCommon.locate("witch_head"), "main");
 	public static final ModelLayerLocation WITHER_HEAD = new ModelLayerLocation(PastelCommon.locate("wither_head"), "main");
 	public static final ModelLayerLocation WOLF_HEAD = new ModelLayerLocation(PastelCommon.locate("wolf_head"), "main");
@@ -205,7 +201,6 @@ public class PastelModelLayers {
 	public static final ModelLayerLocation ARMADILLO_HEAD = new ModelLayerLocation(PastelCommon.locate("armadillo_head"), "main");
 	public static final ModelLayerLocation BREEZE_HEAD = new ModelLayerLocation(PastelCommon.locate("breeze_head"), "main");
 	public static final ModelLayerLocation BOGGED_HEAD = new ModelLayerLocation(PastelCommon.locate("bogged_head"), "main");
-	public static final ModelLayerLocation BOGGED_HEAD_OVERLAY = new ModelLayerLocation(PastelCommon.locate("bogged_head"), "overlay");
 	public static final ModelLayerLocation PIGLIN_BRUTE_HEAD = new ModelLayerLocation(PastelCommon.locate("piglin_brute_head"), "main");
 	
 	public static final ModelLayerLocation EGG_LAYING_WOOLY_PIG_HEAD = new ModelLayerLocation(PastelCommon.locate("egg_laying_wooly_pig_head"), "main");
@@ -253,10 +248,8 @@ public class PastelModelLayers {
 		ClientHooks.registerLayerDefinition(COW_HEAD, CowHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(DONKEY_HEAD, HorseHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(DROWNED_HEAD, DrownedHeadModel::getTexturedModelData);
-		ClientHooks.registerLayerDefinition(DROWNED_HEAD_OUTER, DrownedHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(ELDER_GUARDIAN_HEAD, GuardianHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(ENDERMAN_HEAD, EndermanHeadModel::getTexturedModelData);
-		ClientHooks.registerLayerDefinition(ENDERMAN_HEAD_OVERLAY, EndermanHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(ENDERMITE_HEAD, EndermiteHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(EVOKER_HEAD, IllagerHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(FOX_HEAD, FoxHeadModel::getTexturedModelData);
@@ -315,8 +308,7 @@ public class PastelModelLayers {
 		ClientHooks.registerLayerDefinition(SNOW_GOLEM_HEAD, ZombieHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(SPIDER_HEAD, SpiderHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(SQUID_HEAD, SquidHeadModel::getTexturedModelData);
-		ClientHooks.registerLayerDefinition(STRAY_HEAD, SkullModel::createMobHeadLayer);
-		ClientHooks.registerLayerDefinition(STRAY_HEAD_OVERLAY, SkullModel::createMobHeadLayer);
+		ClientHooks.registerLayerDefinition(STRAY_HEAD, StrayHeadModel::createMobHeadLayer);
 		ClientHooks.registerLayerDefinition(STRIDER_HEAD, StriderHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(TADPOLE_HEAD, TadpoleHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(TURTLE_HEAD, TurtleHeadModel::getTexturedModelData);
@@ -325,9 +317,6 @@ public class PastelModelLayers {
 		ClientHooks.registerLayerDefinition(VINDICATOR_HEAD, IllagerHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(WANDERING_TRADER_HEAD, VillagerHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(WARDEN_HEAD, WardenHeadModel::getTexturedModelData);
-		ClientHooks.registerLayerDefinition(WARDEN_HEAD_BIOLUMINESCENT, WardenHeadModel::getTexturedModelData);
-		ClientHooks.registerLayerDefinition(WARDEN_HEAD_PULSATING_SPOTS_1, WardenHeadModel::getTexturedModelData);
-		ClientHooks.registerLayerDefinition(WARDEN_HEAD_PULSATING_SPOTS_2, WardenHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(WITCH_HEAD, WitchHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(WITHER_HEAD, ZombieHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(WOLF_HEAD, WolfHeadModel::getTexturedModelData);
@@ -337,7 +326,6 @@ public class PastelModelLayers {
 		ClientHooks.registerLayerDefinition(ARMADILLO_HEAD, ArmadilloHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(BREEZE_HEAD, BreezeHeadModel::getTexturedModelData);
 		ClientHooks.registerLayerDefinition(BOGGED_HEAD, BoggedHeadModel::getTexturedModelData);
-		ClientHooks.registerLayerDefinition(BOGGED_HEAD_OVERLAY, BoggedHeadModel::getTexturedModelDataOverlay);
 		ClientHooks.registerLayerDefinition(PIGLIN_BRUTE_HEAD, PiglinHeadModel::getTexturedModelData);
 
 		ClientHooks.registerLayerDefinition(CAMEL_HEAD, CamelHeadModel::getTexturedModelData);

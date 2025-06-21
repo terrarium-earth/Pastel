@@ -168,7 +168,6 @@ import earth.terrarium.pastel.blocks.lava_sponge.WetLavaSpongeItem;
 import earth.terrarium.pastel.blocks.memory.MemoryBlock;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
-import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlockItem;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullType;
 import earth.terrarium.pastel.blocks.mob_head.PastelWallSkullBlock;
 import earth.terrarium.pastel.blocks.particle_spawner.CreativeParticleSpawnerBlock;
@@ -2534,7 +2533,7 @@ public class PastelBlocks {
 		for (PastelSkullType type : PastelSkullType.values()) {
 			BlockRegistrar<PastelSkullBlock> registrar = block(type.getSerializedName() + "_head", () -> new PastelSkullBlock(type, BlockBehaviour.Properties.ofFullCopy(SKELETON_SKULL).instrument(NoteBlockInstrument.CUSTOM_HEAD))).withBlockItemModel((ctx, block) -> PastelModelHelper.registerParentedItemModel(ctx, block, PastelModels.SKULL_ITEM)).withBlockModel((ctx, block) -> PastelModelHelper.createVariantsSupplier(block, PastelModels.MOB_HEAD));
 			DeferredBlock<Block> wallHead = register(block(type.getSerializedName() + "_wall_head", () -> new PastelWallSkullBlock(type, BlockBehaviour.Properties.ofFullCopy(SKELETON_SKULL).dropsLike(registrar.holder().get()))).withBlockModel((ctx, block) -> PastelModelHelper.createVariantsSupplier(block, PastelModels.MOB_HEAD)));
-			register(registrar.withItem(block -> new PastelSkullBlockItem(block, wallHead.get(), IS.of(), type), InkColors.GRAY));
+			register(registrar.withItem(block -> new StandingAndWallBlockItem(block, wallHead.get(), IS.of(), Direction.DOWN), InkColors.GRAY));
 		}
 
 		PastelBlocks.COMMON_REGISTRAR.register(bus);

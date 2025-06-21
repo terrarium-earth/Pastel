@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.SkullBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.pattern.BlockInWorld;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
@@ -51,6 +53,8 @@ public class PastelSkullBlock extends SkullBlock {
 
 	public PastelSkullBlock(PastelSkullType skullType, Properties settings) {
 		super(skullType, settings);
+
+		// TODO Avoid this pattern, blocks shouldn't register themselves to a list
 		MOB_HEADS.put(skullType, this);
 		ENTITY_TYPE_TO_SKULL_TYPE.put(skullType.getEntityType(), skullType);
 		this.skullType = skullType;
@@ -68,9 +72,14 @@ public class PastelSkullBlock extends SkullBlock {
 
 	public static Optional<EntityType<?>> getEntityTypeOfSkullStack(ItemStack itemStack) {
 		Item item = itemStack.getItem();
-		if (item instanceof PastelSkullBlockItem pastelSkullBlockItem) {
-			return Optional.of(pastelSkullBlockItem.type.getEntityType().get());
+
+		if (item instanceof BlockItem blockItem &&
+				blockItem.getBlock() instanceof SkullBlock skullBlock &&
+				skullBlock.getType() instanceof PastelSkullType type
+		) {
+			return Optional.of(type.getEntityType().get());
 		}
+
 		if (Items.CREEPER_HEAD == item) {
 			return Optional.of(EntityType.CREEPER);
 		} else if (Items.DRAGON_HEAD == item) {
@@ -83,27 +92,6 @@ public class PastelSkullBlock extends SkullBlock {
 			return Optional.of(EntityType.WITHER_SKELETON);
 		} else if (Items.PIGLIN_HEAD == item) {
 			return Optional.of(EntityType.PIGLIN);
-		}
-		return Optional.empty();
-	}
-
-	public static Optional<SkullBlock.Type> getSkullType(ItemStack itemStack) {
-		Item item = itemStack.getItem();
-		if (item instanceof PastelSkullBlockItem pastelSkullBlockItem) {
-			return Optional.of(pastelSkullBlockItem.type);
-		}
-		if (Items.CREEPER_HEAD == item) {
-			return Optional.of(SkullBlock.Types.CREEPER);
-		} else if (Items.DRAGON_HEAD == item) {
-			return Optional.of(SkullBlock.Types.DRAGON);
-		} else if (Items.ZOMBIE_HEAD == item) {
-			return Optional.of(SkullBlock.Types.ZOMBIE);
-		} else if (Items.SKELETON_SKULL == item) {
-			return Optional.of(SkullBlock.Types.SKELETON);
-		} else if (Items.WITHER_SKELETON_SKULL == item) {
-			return Optional.of(SkullBlock.Types.WITHER_SKELETON);
-		} else if (Items.PIGLIN_HEAD == item) {
-			return Optional.of(SkullBlock.Types.PIGLIN);
 		}
 		return Optional.empty();
 	}
@@ -126,14 +114,6 @@ public class PastelSkullBlock extends SkullBlock {
 			return Optional.of(Blocks.PIGLIN_HEAD);
 		}
 		return Optional.empty();
-	}
-
-	public static PastelSkullType getSkullType(Block block) {
-		if (block instanceof PastelWallSkullBlock) {
-			return PastelWallSkullBlock.MOB_WALL_HEADS.inverse().get(block);
-		} else {
-			return MOB_HEADS.inverse().get(block);
-		}
 	}
 
 	public static Optional<SkullBlock.Type> getSkullType(EntityType<?> entityType) {
@@ -173,7 +153,7 @@ public class PastelSkullBlock extends SkullBlock {
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new PastelSkullBlockEntity(pos, state);
+		return new SkullBlockEntity(pos, state);
 	}
 
 	@Override
