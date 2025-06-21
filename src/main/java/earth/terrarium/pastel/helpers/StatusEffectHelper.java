@@ -45,7 +45,7 @@ public class StatusEffectHelper {
 		if (type == PastelStatusEffects.DIVINITY)
 			return DIVINITY.get(renderType);
 		
-		if (resistsRemoval(effect) && type != PastelStatusEffects.ETERNAL_SLUMBER && type != PastelStatusEffects.FATAL_SLUMBER) {
+		if (resistsRemoval(effect)) {
 			return INCURABLE.get(renderType);
 		}
 		
