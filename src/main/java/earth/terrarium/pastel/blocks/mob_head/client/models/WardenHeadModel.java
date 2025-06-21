@@ -18,6 +18,7 @@ public class WardenHeadModel extends PastelSkullModel {
         super(root);
     }
 
+    // TODO Add overlays
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();

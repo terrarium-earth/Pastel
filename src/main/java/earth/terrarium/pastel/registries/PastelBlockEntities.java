@@ -38,9 +38,7 @@ import earth.terrarium.pastel.blocks.jade_vines.JadeVineRootsBlockEntity;
 import earth.terrarium.pastel.blocks.jade_vines.JadeVineRootsBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
-import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlockEntity;
 import earth.terrarium.pastel.blocks.mob_head.PastelWallSkullBlock;
-import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.particle_spawner.ParticleSpawnerBlockEntity;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntityRenderer;
@@ -69,10 +67,12 @@ import earth.terrarium.pastel.blocks.titration_barrel.TitrationBarrelBlockEntity
 import earth.terrarium.pastel.blocks.upgrade.UpgradeBlockBlockEntityRenderer;
 import earth.terrarium.pastel.blocks.upgrade.UpgradeBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
 import net.minecraft.core.registries.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.event.lifecycle.*;
 import net.neoforged.neoforge.event.*;
@@ -98,7 +98,6 @@ public class PastelBlockEntities {
 	public static DeferredHolder<BlockEntityType<?>, BlockEntityType<EnderHopperBlockEntity>> ENDER_HOPPER;
 	public static DeferredHolder<BlockEntityType<?>, BlockEntityType<ParticleSpawnerBlockEntity>> PARTICLE_SPAWNER;
 	public static DeferredHolder<BlockEntityType<?>, BlockEntityType<UpgradeBlockEntity>> UPGRADE_BLOCK;
-	public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PastelSkullBlockEntity>> SKULL;
 	public static DeferredHolder<BlockEntityType<?>, BlockEntityType<BottomlessBundleBlockEntity>> BOTTOMLESS_BUNDLE;
 	public static DeferredHolder<BlockEntityType<?>, BlockEntityType<PotionWorkshopBlockEntity>> POTION_WORKSHOP;
 	public static DeferredHolder<BlockEntityType<?>, BlockEntityType<CrystallarieumBlockEntity>> CRYSTALLARIEUM;
@@ -201,21 +200,18 @@ public class PastelBlockEntities {
 			PastelBlocks.UPGRADE_EXPERIENCE2
 		);
 		UPGRADE_BLOCK = register("upgrade_block", UpgradeBlockEntity::new, upgradeBlocksList.toArray(new Supplier[0]));
-		
-		// All the skulls
-		SKULL = register("skull", PastelSkullBlockEntity::new, () -> {
-			List<Block> skullBlocksList = new ArrayList<>();
-			// TODO Avoid this pattern, blocks shouldn't register themselves to a list
-			skullBlocksList.addAll(PastelSkullBlock.getMobHeads());
-			skullBlocksList.addAll(PastelWallSkullBlock.getMobWallHeads());
-			return skullBlocksList;
-		});
 
 		REGISTER.register(bus);
 	}
 
 	public static void registerAdditionalTypes(BlockEntityTypeAddBlocksEvent event) {
 		event.modify(BlockEntityType.BARREL, PastelBlocks.WEEPING_GALA_BARREL.get());
+
+		List<Block> skullBlocksList = new ArrayList<>(PastelSkullBlock.getMobHeads().size() + PastelWallSkullBlock.getMobWallHeads().size());
+		skullBlocksList.addAll(PastelSkullBlock.getMobHeads());
+		skullBlocksList.addAll(PastelWallSkullBlock.getMobWallHeads());
+
+		event.modify(BlockEntityType.SKULL, skullBlocksList.toArray(new Block[0]));
 	}
 	
 	public static void registerClient(FMLClientSetupEvent event) {
@@ -232,7 +228,6 @@ public class PastelBlockEntities {
 		BlockEntityRenderers.register(PastelBlockEntities.ITEM_BOWL.get(), ItemBowlBlockEntityRenderer::new);
 		BlockEntityRenderers.register(PastelBlockEntities.ITEM_ROUNDEL.get(), ItemRoundelBlockEntityRenderer::new);
 		BlockEntityRenderers.register(PastelBlockEntities.PRESERVATION_ROUNDEL.get(), ItemRoundelBlockEntityRenderer::new);
-		BlockEntityRenderers.register(PastelBlockEntities.SKULL.get(), PastelSkullBlockEntityRenderer::new);
 		BlockEntityRenderers.register(PastelBlockEntities.SPIRIT_INSTILLER.get(), SpiritInstillerBlockEntityRenderer::new);
 		BlockEntityRenderers.register(PastelBlockEntities.JADE_VINE_ROOTS.get(), JadeVineRootsBlockEntityRenderer::new);
 		BlockEntityRenderers.register(PastelBlockEntities.CRYSTALLARIEUM.get(), CrystallarieumBlockEntityRenderer::new);

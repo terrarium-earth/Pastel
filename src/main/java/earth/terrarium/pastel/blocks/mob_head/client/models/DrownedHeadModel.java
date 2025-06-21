@@ -19,6 +19,7 @@ public class DrownedHeadModel extends PastelSkullModel {
 		super(root);
 	}
 
+	// TODO Add overlay
 	public static LayerDefinition getTexturedModelData() {
 		MeshDefinition modelData = new MeshDefinition();
 		PartDefinition modelPartData = modelData.getRoot();

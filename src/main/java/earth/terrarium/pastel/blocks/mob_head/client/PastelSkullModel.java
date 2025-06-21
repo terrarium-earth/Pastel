@@ -2,6 +2,7 @@ package earth.terrarium.pastel.blocks.mob_head.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.geom.PartNames;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.model.SkullModelBase;
@@ -9,7 +10,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 
 @OnlyIn(Dist.CLIENT)
-public abstract class PastelSkullModel extends SkullModelBase {
+public class PastelSkullModel extends SkullModelBase {
 
 	protected static final float ROTATION_VEC = (float) Math.PI / 180.0F;
 
@@ -17,7 +18,7 @@ public abstract class PastelSkullModel extends SkullModelBase {
 
 	public PastelSkullModel(ModelPart root) {
 		super();
-		this.head = root.getChild("head");
+		this.head = root.getChild(PartNames.HEAD);
 	}
 
 	public void render(PoseStack matrices, VertexConsumer vertices, MultiBufferSource vertexConsumerProvider, int light, int overlay, int color) {

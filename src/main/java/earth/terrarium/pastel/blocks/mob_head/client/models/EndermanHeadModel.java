@@ -15,11 +15,11 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 @OnlyIn(Dist.CLIENT)
 public class EndermanHeadModel extends PastelSkullModel {
 	
-	
 	public EndermanHeadModel(ModelPart root) {
 		super(root);
 	}
-	
+
+	// TODO Add overlay
 	public static LayerDefinition getTexturedModelData() {
 		MeshDefinition modelData = new MeshDefinition();
 		PartDefinition modelPartData = modelData.getRoot();

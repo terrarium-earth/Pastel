@@ -2,6 +2,7 @@ package earth.terrarium.pastel;
 
 import de.dafuqs.revelationary.api.advancements.ClientAdvancementPacketCallback;
 import de.dafuqs.revelationary.api.revelations.RevealingCallback;
+import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModels;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ears.EarsCompat;
 import earth.terrarium.pastel.config.PastelConfig;
@@ -80,9 +81,6 @@ public class PastelClient implements RevealingCallback, ClientAdvancementPacketC
 		pastelBus.addListener(PastelEntityRenderers::registerClient);
 		pastelBus.addListener(BedrockCapeRenderer::registerLayers);
 
-		//logInfo("Registering Server to Client Package Receivers...");
-		//PastelS2CPackets.registerS2CReceivers();
-
 		logInfo("Registering Particle Factories...");
 		pastelBus.addListener(PastelParticleFactories::register);
 
@@ -95,6 +93,10 @@ public class PastelClient implements RevealingCallback, ClientAdvancementPacketC
 
 		logInfo("Registering Dimension Effects...");
 		pastelBus.addListener(PastelDimensionsClient::registerClient);
+
+		logInfo("Registering Mob head models...");
+		pastelBus.addListener(PastelSkullModels::registerModels);
+		pastelBus.addListener(PastelSkullModels::registerTextures);
 
 		logInfo("Registering Client Event Listeners...");
 		PastelClientEvents.register(pastelBus);
