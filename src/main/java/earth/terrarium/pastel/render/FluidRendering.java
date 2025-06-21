@@ -1,7 +1,19 @@
 package earth.terrarium.pastel.render;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
@@ -41,5 +53,29 @@ public class FluidRendering {
 		colors[2] = color >> 8 & 0xff; // green
 		colors[3] = color & 0xff; // blue
 		return colors;
+	}
+	
+	public static void renderFluidOverlay(Minecraft minecraft, PoseStack stack, ResourceLocation texture, float alpha) {
+		var player = minecraft.player;
+		if (player == null) return;
+		
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderTexture(0, texture);
+		BlockPos blockPos = BlockPos.containing(player.getX(), player.getEyeY(), player.getZ());
+		float f = LightTexture.getBrightness(player.level().dimensionType(), player.level().getMaxLocalRawBrightness(blockPos));
+		RenderSystem.enableBlend();
+		RenderSystem.setShaderColor(f, f, f, alpha);
+		
+		float m = -player.getYRot() / 64.0F;
+		float n = player.getXRot() / 64.0F;
+		Matrix4f matrix4f = stack.last().pose();
+		BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferBuilder.addVertex(matrix4f, -1.0F, -1.0F, -0.5F).setUv(4.0F + m, 4.0F + n);
+		bufferBuilder.addVertex(matrix4f, 1.0F, -1.0F, -0.5F).setUv(0.0F + m, 4.0F + n);
+		bufferBuilder.addVertex(matrix4f, 1.0F, 1.0F, -0.5F).setUv(0.0F + m, 0.0F + n);
+		bufferBuilder.addVertex(matrix4f, -1.0F, 1.0F, -0.5F).setUv(4.0F + m, 0.0F + n);
+		BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.disableBlend();
 	}
 }
