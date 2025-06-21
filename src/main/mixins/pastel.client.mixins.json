@@ -9,7 +9,6 @@
     "AbstractInventoryScreenMixin",
     "BackgroundRendererMixin",
     "BipedEntityModelMixin",
-    "BlockOverlayRendererMixin",
     "BuiltinModelItemRendererMixin",
     "CapeLayerMixin",
     "ClientPlayNetworkHandlerMixin",
