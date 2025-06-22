@@ -124,7 +124,7 @@ public class PastelAdvancements {
 	public static final ResourceLocation VIVISECT_KINDLING = PastelCommon.locate("mod_integration/neepmeat/vivisect_kindling");
 	
 	public static final ResourceLocation COLLECT_ALL_BASIC_PIGMENTS_BESIDES_BROWN = PastelCommon.locate("collect_all_basic_pigments_besides_brown");
-	public static final ResourceLocation COLLECT_TOPAZ = PastelCommon.locate("hidden/collect_shards/citrine");
+	public static final ResourceLocation COLLECT_TOPAZ = PastelCommon.locate("hidden/collect_shards/topaz");
 	public static final ResourceLocation COLLECT_AMETHYST = PastelCommon.locate("hidden/collect_shards/amethyst");
 	public static final ResourceLocation COLLECT_CITRINE = PastelCommon.locate("hidden/collect_shards/citrine");
 	public static final ResourceLocation CREATE_ONYX = PastelCommon.locate("create_onyx_shard");
