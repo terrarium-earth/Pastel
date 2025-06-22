@@ -65,10 +65,11 @@ public class ReverbFilter {
                 updateSlots();
             }
 
+            var data = WorldAttenuation.getData();
             EXTEfx.alAuxiliaryEffectSlotf(slot, EXTEfx.AL_EFFECTSLOT_GAIN, 0);
             EXTEfx.alEffecti(id, EXTEfx.AL_EFFECT_TYPE, EXTEfx.AL_EFFECT_REVERB);
-            EXTEfx.alEffectf(id, EXTEfx.AL_REVERB_DENSITY, Mth.clamp(PastelCommon.CONFIG.DimensionReverbDensity, EXTEfx.AL_REVERB_MIN_DENSITY, EXTEfx.AL_REVERB_MAX_DENSITY));
-            EXTEfx.alEffectf(id, EXTEfx.AL_REVERB_DECAY_TIME, Mth.clamp(PastelCommon.CONFIG.DimensionReverbDecayTime, EXTEfx.AL_REVERB_MIN_DECAY_TIME, EXTEfx.AL_REVERB_MAX_DECAY_TIME));
+            EXTEfx.alEffectf(id, EXTEfx.AL_REVERB_DENSITY, Mth.clamp(PastelCommon.CONFIG.DimensionReverbDensity * data.pitch(), EXTEfx.AL_REVERB_MIN_DENSITY, EXTEfx.AL_REVERB_MAX_DENSITY));
+            EXTEfx.alEffectf(id, EXTEfx.AL_REVERB_DECAY_TIME, Mth.clamp(PastelCommon.CONFIG.DimensionReverbDecayTime * Math.max(data.volume() * 1.65F, 0.2F), EXTEfx.AL_REVERB_MIN_DECAY_TIME, EXTEfx.AL_REVERB_MAX_DECAY_TIME));
             EXTEfx.alAuxiliaryEffectSloti(slot, EXTEfx.AL_EFFECTSLOT_EFFECT, id);
             EXTEfx.alAuxiliaryEffectSlotf(slot, EXTEfx.AL_EFFECTSLOT_GAIN, 1);
             AL11.alSource3i(sourceID, EXTEfx.AL_AUXILIARY_SEND_FILTER, slot, 0, 0);

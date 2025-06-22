@@ -6,48 +6,37 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.TickableSoundInstance;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 
-public class BiomeAttenuatingSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
+public class BiomeSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
 
-    @Nullable public static BiomeAttenuatingSoundInstance WIND_HIGH = null;
-    @Nullable public static BiomeAttenuatingSoundInstance WIND_LOW = null;
-    @Nullable public static BiomeAttenuatingSoundInstance SHOWER = null;
-    @Nullable public static BiomeAttenuatingSoundInstance LAMENTS = null;
+    @Nullable public static BiomeSoundInstance WIND_HIGH = null;
+    @Nullable public static BiomeSoundInstance WIND_LOW = null;
+    @Nullable public static BiomeSoundInstance SHOWER = null;
+    @Nullable public static BiomeSoundInstance LAMENTS = null;
     private static boolean clear = true;
     private final Minecraft client = Minecraft.getInstance();
     private static final int MAX_DURATION = 80;
     private final ResourceKey<Biome> biome;
     private final float volumeMod;
-    private float coverage, lastCoverage;
     private int biomeTicks = 1, coverageUpdateTicks;
-    private final boolean altPitch;
+    private final boolean deepPitch;
     private boolean finished;
 
-    protected BiomeAttenuatingSoundInstance(ResourceKey<Biome> biome, SoundEvent sound, float volumeMod, boolean altMod) {
+    protected BiomeSoundInstance(ResourceKey<Biome> biome, SoundEvent sound, float volumeMod, boolean altMod) {
         super(sound, SoundSource.AMBIENT, SoundInstance.createUnseededRandom());
         looping = true;
         delay = 0;
         this.biome = biome;
         this.volumeMod = volumeMod;
-        this.altPitch = altMod;
+        this.deepPitch = altMod;
         this.relative = true;
-
-        var camera = client.getCameraEntity();
-
-        if (camera != null) {
-            updateCoverage(camera.level(), camera);
-        }
 
         updateVolumeAndPitch();
     }
@@ -68,7 +57,6 @@ public class BiomeAttenuatingSoundInstance extends AbstractSoundInstance impleme
 
         if (coverageUpdateTicks == 15) {
             coverageUpdateTicks = 0;
-            updateCoverage(world, camera);
         }
 
         if (world.getBiome(camera.blockPosition()).is(biome) && biomeTicks < MAX_DURATION) {
@@ -81,48 +69,25 @@ public class BiomeAttenuatingSoundInstance extends AbstractSoundInstance impleme
         updateVolumeAndPitch();
     }
 
-    private void updateCoverage(Level world, Entity camera) {
-        var pos = BlockPos.containing(camera.getEyePosition());
-        lastCoverage = coverage;
-        coverage = 0;
-
-        for (Direction direction : Direction.values()) {
-            if (direction == Direction.DOWN)
-                continue;
-
-            var up = direction == Direction.UP;
-            var max = up ? 13 : 7;
-
-            for (int i = 1; i < max; i++) {
-                var offPos = pos.relative(direction, i);
-                var state = world.getBlockState(offPos);
-
-                if (up) {
-                    if (state.isFaceSturdy(world, offPos, direction.getOpposite()) || state.isFaceSturdy(world, offPos, direction)) {
-                        coverage += 0.1334F / i;
-                        break;
-                    }
-                    continue;
-                }
-
-                if (state.isFaceSturdy(world, offPos, direction.getOpposite()) || state.isFaceSturdy(world, offPos, direction)) {
-                    coverage += 0.16F / i;
-                    break;
-                }
-            }
-        }
-    }
-
     private void updateVolumeAndPitch() {
-        var coverageMod = Mth.clampedLerp(lastCoverage, coverage, coverageUpdateTicks / 15F) + 0.1F;
-        if (!altPitch)
-            coverageMod *= 1.5F;
+        var data = WorldAttenuation.getData();
+        float volMod = data.volume();
+        float pitchMod = data.pitch();
 
-        coverageMod = Math.max(1 - coverageMod, 0);
+        if (deepPitch) {
+            volMod = volMod * 0.75F + 0.05F;
+            pitchMod = pitchMod * 0.9F + 0.1F;
+        }
+        else {
+            volMod = Math.max(0.02F, volMod);
+            pitchMod = Math.max(0.4F, pitchMod * 1.1F);
+        }
 
-        this.volume = Math.max(0, ((float) biomeTicks) / MAX_DURATION) * volumeMod * coverageMod;
+        volMod = Math.clamp(volMod * 2, 0, 1);
 
-        this.pitch = (altPitch ? 0.9F : 0.65F) * Mth.clamp(coverageMod * 2, 0.5F, 1);
+        this.volume = Math.max(0, ((float) biomeTicks) / MAX_DURATION) * volumeMod * volMod;
+
+        this.pitch = pitchMod;
     }
 
     @Override
@@ -152,28 +117,28 @@ public class BiomeAttenuatingSoundInstance extends AbstractSoundInstance impleme
 
         if (biome.is(PastelBiomes.HOWLING_SPIRES)) {
             if (WIND_HIGH == null) {
-                WIND_HIGH = new BiomeAttenuatingSoundInstance(PastelBiomes.HOWLING_SPIRES, PastelSoundEvents.HOWLING_WIND_HIGH, 0.525F, false);
+                WIND_HIGH = new BiomeSoundInstance(PastelBiomes.HOWLING_SPIRES, PastelSoundEvents.HOWLING_WIND_HIGH, 0.45F, false);
                 client.getSoundManager().play(WIND_HIGH);
             }
 
             if (WIND_LOW == null) {
-                WIND_LOW = new BiomeAttenuatingSoundInstance(PastelBiomes.HOWLING_SPIRES, PastelSoundEvents.HOWLING_WIND_LOW, 1.8F, true);
+                WIND_LOW = new BiomeSoundInstance(PastelBiomes.HOWLING_SPIRES, PastelSoundEvents.HOWLING_WIND_LOW, 1.3F, true);
                 client.getSoundManager().play(WIND_LOW);
             }
         }
         else if (biome.is(PastelBiomes.DEEP_DRIPSTONE_CAVES)) {
             if (SHOWER == null) {
-                SHOWER = new BiomeAttenuatingSoundInstance(PastelBiomes.DEEP_DRIPSTONE_CAVES, PastelSoundEvents.SHOWER, 0.5F, false);
+                SHOWER = new BiomeSoundInstance(PastelBiomes.DEEP_DRIPSTONE_CAVES, PastelSoundEvents.SHOWER, 0.425F, false);
                 client.getSoundManager().play(SHOWER);
             }
         }
         else if (biome.is(PastelBiomes.DRAGONROT_SWAMP)) {
             if (LAMENTS == null) {
-                LAMENTS = new BiomeAttenuatingSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSoundEvents.LAMENTS, 1.25F, true);
+                LAMENTS = new BiomeSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSoundEvents.LAMENTS, 1F, true);
                 client.getSoundManager().play(LAMENTS);
             }
             if (SHOWER == null) {
-                SHOWER = new BiomeAttenuatingSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSoundEvents.SHOWER, 1F, false);
+                SHOWER = new BiomeSoundInstance(PastelBiomes.DRAGONROT_SWAMP, PastelSoundEvents.SHOWER, 1F, false);
                 client.getSoundManager().play(SHOWER);
             }
         }

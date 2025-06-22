@@ -19,12 +19,12 @@ import earth.terrarium.pastel.items.magic_items.ConstructorsStaffItem;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.mixin.client.accessors.WorldRendererAccessor;
 import earth.terrarium.pastel.particle.render.ExtendedParticleManager;
-import earth.terrarium.pastel.progression.*;
 import earth.terrarium.pastel.registries.PastelDimensions;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.client.*;
 import earth.terrarium.pastel.render.HudRenderers;
-import earth.terrarium.pastel.sound.BiomeAttenuatingSoundInstance;
+import earth.terrarium.pastel.sound.WorldAttenuation;
+import earth.terrarium.pastel.sound.BiomeSoundInstance;
 import earth.terrarium.pastel.sound.BlockAuraSoundInstance;
 import net.minecraft.server.packs.*;
 import net.minecraft.server.packs.repository.*;
@@ -121,22 +121,23 @@ public class PastelClientEvents {
 	}
 
 	private static void afterClientTick(ClientTickEvent.Post event) {
-
 		var client = Minecraft.getInstance();
 		var level = client.level;
 		Entity cameraEntity = client.getCameraEntity();
 		if (level == null || cameraEntity == null) {
-			BiomeAttenuatingSoundInstance.clear();
+			BiomeSoundInstance.clear();
 			BlockAuraSoundInstance.clear();
 			return;
 		}
 
+		var inDim = level.dimension().equals(PastelDimensions.DIMENSION_KEY);
 		Holder<Biome> biome = level.getBiome(client.getCameraEntity().blockPosition());
 
 		HowlingSpireEffects.clientTick(level, cameraEntity, biome);
 		DimensionRenderEffects.clientTick(level, cameraEntity, biome);
+		WorldAttenuation.tick(level, cameraEntity, inDim);
 
-		if (PastelCommon.CONFIG.PostProcess && level.dimension().equals(PastelDimensions.DIMENSION_KEY)) {
+		if (PastelCommon.CONFIG.PostProcess && inDim) {
 			if (!postProcessWasOn) {
 				initializeColorGrading(client);
 				postProcessWasOn = true;
@@ -221,7 +222,7 @@ public class PastelClientEvents {
 		event.registerReloadListener(new ResourceManagerReloadListener() {
 			@Override
 			public void onResourceManagerReload(ResourceManager resourceManager) {
-				BiomeAttenuatingSoundInstance.clear();
+				BiomeSoundInstance.clear();
 			}
 
 			@Override

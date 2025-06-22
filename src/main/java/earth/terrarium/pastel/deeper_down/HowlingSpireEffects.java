@@ -4,7 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.client.FallingAshParticle;
 import earth.terrarium.pastel.registries.PastelBiomes;
-import earth.terrarium.pastel.sound.BiomeAttenuatingSoundInstance;
+import earth.terrarium.pastel.sound.BiomeSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -36,7 +36,7 @@ public class HowlingSpireEffects {
 			return;
 
 		lastSpireTicks = spireTicks;
-		BiomeAttenuatingSoundInstance.update(biome);
+		BiomeSoundInstance.update(biome);
 
 		boolean inHowlingSpires = biome.is(PastelBiomes.HOWLING_SPIRES);
 		if (inHowlingSpires) {
