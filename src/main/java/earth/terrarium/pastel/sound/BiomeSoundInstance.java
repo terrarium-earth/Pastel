@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.biome.Biome;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,7 +26,7 @@ public class BiomeSoundInstance extends AbstractSoundInstance implements Tickabl
     private static final int MAX_DURATION = 80;
     private final ResourceKey<Biome> biome;
     private final float volumeMod;
-    private int biomeTicks = 1, coverageUpdateTicks;
+    private int biomeTicks = 1;
     private final boolean deepPitch;
     private boolean finished;
 
@@ -36,7 +37,7 @@ public class BiomeSoundInstance extends AbstractSoundInstance implements Tickabl
         this.biome = biome;
         this.volumeMod = volumeMod;
         this.deepPitch = altMod;
-        this.relative = true;
+        this.relative = false;
 
         updateVolumeAndPitch();
     }
@@ -44,20 +45,12 @@ public class BiomeSoundInstance extends AbstractSoundInstance implements Tickabl
     @Override
     public void tick() {
         var camera = client.getCameraEntity();
-
         if (camera == null) {
             finished = true;
             return;
         }
 
         var world = camera.level();
-
-        if (coverageUpdateTicks < 15)
-            coverageUpdateTicks++;
-
-        if (coverageUpdateTicks == 15) {
-            coverageUpdateTicks = 0;
-        }
 
         if (world.getBiome(camera.blockPosition()).is(biome) && biomeTicks < MAX_DURATION) {
             biomeTicks++;
@@ -67,6 +60,14 @@ public class BiomeSoundInstance extends AbstractSoundInstance implements Tickabl
         }
 
         updateVolumeAndPitch();
+        updatePosition(camera);
+    }
+
+    private void updatePosition(Entity camera) {
+        var data = WorldAttenuation.getData();
+        this.x = camera.getX() + data.x() * 3.5;
+        this.y = camera.getY() + 1 + data.y() * 2;
+        this.z = camera.getZ() + data.z() * 3.5;
     }
 
     private void updateVolumeAndPitch() {
