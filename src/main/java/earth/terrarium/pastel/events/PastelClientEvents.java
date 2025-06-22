@@ -221,7 +221,6 @@ public class PastelClientEvents {
 		event.registerReloadListener(new ResourceManagerReloadListener() {
 			@Override
 			public void onResourceManagerReload(ResourceManager resourceManager) {
-				UnlockToastManager.clear();;
 				BiomeAttenuatingSoundInstance.clear();
 			}
 

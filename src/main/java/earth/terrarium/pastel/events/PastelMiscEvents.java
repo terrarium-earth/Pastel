@@ -1,6 +1,7 @@
 package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.PastelSided;
 import earth.terrarium.pastel.api.item.PrioritizedBlockInteraction;
 import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
@@ -17,6 +18,7 @@ import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.tools.TuningStampItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
+import earth.terrarium.pastel.progression.UnlockToastManager;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelDimensions;
@@ -45,6 +47,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -151,6 +154,9 @@ public class PastelMiscEvents {
 		event.addListener(new ResourceManagerReloadListener() {
 			@Override
 			public void onResourceManagerReload(ResourceManager resourceManager) {
+				if (!FMLEnvironment.dist.isDedicatedServer())
+					PastelSided.clearToastManager();
+
 				AutoCraftingMode.clearCache();
 				PastelCommon.CACHED_ITEM_TAG_MAP.clear();
 
