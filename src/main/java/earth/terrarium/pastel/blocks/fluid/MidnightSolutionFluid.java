@@ -185,13 +185,14 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
 				itemEntity.setDefaultPickUpDelay();
 			}
 		} else if (itemStack.is(PastelItems.ENCHANTMENT_CANVAS.get()) && itemStack.has(PastelDataComponentTypes.CANVAS_ENCHANTMENTS)) {
-			ItemEnchantments canvasEnchantments = itemStack.get(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
+			ItemEnchantments canvas = itemStack.get(PastelDataComponentTypes.CANVAS_ENCHANTMENTS);
 			Item boundItem = BuiltInRegistries.ITEM.get(itemStack.get(PastelDataComponentTypes.BOUND_ITEM));
-			if (!canvasEnchantments.isEmpty()) {
-				int randomEnchantmentIndex = world.random.nextInt(enchantments.size());
-				Object2IntMap.Entry<Holder<Enchantment>> entryToRemove = enchantments.entrySet().stream().toList().get(randomEnchantmentIndex);
+
+			if (!canvas.isEmpty()) {
+				int randomEnchantmentIndex = world.random.nextInt(canvas.size());
+				Object2IntMap.Entry<Holder<Enchantment>> entryToRemove = canvas.entrySet().stream().toList().get(randomEnchantmentIndex);
 				
-				var builder = new ItemEnchantments.Mutable(canvasEnchantments);
+				var builder = new ItemEnchantments.Mutable(canvas);
 				builder.set(entryToRemove.getKey(), 0);
 				
 				spawnXP(world, itemEntity, EnchanterBlockEntity.getEnchantingPrice(boundItem.getDefaultInstance(), entryToRemove.getKey(), entryToRemove.getIntValue()));
