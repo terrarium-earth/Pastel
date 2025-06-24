@@ -153,9 +153,19 @@ public class WorldAttenuation {
         VOLUME,
         PITCH,
         OCCLUSION,
-        X,
-        Y,
-        Z;
+        X(10),
+        Y(10),
+        Z(10);
+
+        private final int size;
+
+        Tracked(int size) {
+            this.size = size;
+        }
+
+        Tracked() {
+            this(20);
+        }
 
         private void remember(float volBlocking, int checked) {
             ATTENUATION_DATA.get(this).add(1 - Math.clamp(volBlocking / checked, 0, 1));
@@ -173,14 +183,15 @@ public class WorldAttenuation {
         private float get() {
             var dataFlow = ATTENUATION_DATA.get(this);
 
-            if (dataFlow.isEmpty())
-                return 1F;
-
             var averageAttenuation = 0F;
             for (Float attenuation : dataFlow) {
+                if (attenuation.isNaN()) {
+                    averageAttenuation += 1F;
+                    continue;
+                }
+
                 averageAttenuation += attenuation;
             }
-
 
             return averageAttenuation / dataFlow.size();
         }
@@ -188,7 +199,7 @@ public class WorldAttenuation {
 
     static {
         for (Tracked tracked : Tracked.values()) {
-            ATTENUATION_DATA.put(tracked, EvictingQueue.create(20));
+            ATTENUATION_DATA.put(tracked, EvictingQueue.create(tracked.size));
         }
     }
 }

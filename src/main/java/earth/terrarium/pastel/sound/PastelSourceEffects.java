@@ -60,29 +60,25 @@ public class PastelSourceEffects {
             return;
         }
 
-        for (int i = 0; i < 2; i++) {
-            AL11.alSourcei(sourceID, EXTEfx.AL_DIRECT_FILTER, 0);
+        AL11.alSourcei(sourceID, EXTEfx.AL_DIRECT_FILTER, 0);
 
-            if (effect== -1 || slot == -1) {
-                updateSlots();
-            }
+        if (effect == -1 || filter == -1 || slot == -1) {
+            updateSlots();
+        }
 
-            EXTEfx.alAuxiliaryEffectSlotf(slot, EXTEfx.AL_EFFECTSLOT_GAIN, 0);
-            var data = WorldAttenuation.getData();
+        EXTEfx.alAuxiliaryEffectSlotf(slot, EXTEfx.AL_EFFECTSLOT_GAIN, 0);
+        var data = WorldAttenuation.getData();
 
-            updateEffects(data);
-            updateFilters(data);
+        updateEffects(data);
+        updateFilters(data);
 
-            EXTEfx.alAuxiliaryEffectSloti(slot, EXTEfx.AL_EFFECTSLOT_EFFECT, effect);
-            EXTEfx.alAuxiliaryEffectSlotf(slot, EXTEfx.AL_EFFECTSLOT_GAIN, 1);
-            AL11.alSourcei(sourceID, EXTEfx.AL_DIRECT_FILTER, filter);
-            AL11.alSource3i(sourceID, EXTEfx.AL_AUXILIARY_SEND_FILTER, slot, 0, 0);
-            int error = AL11.alGetError();
-            if (error == AL11.AL_NO_ERROR) {
-                break;
-            } else {
-                LOGGER.warn("OpenAl Error {}", error);
-            }
+        EXTEfx.alAuxiliaryEffectSloti(slot, EXTEfx.AL_EFFECTSLOT_EFFECT, effect);
+        EXTEfx.alAuxiliaryEffectSlotf(slot, EXTEfx.AL_EFFECTSLOT_GAIN, 1);
+        AL11.alSourcei(sourceID, EXTEfx.AL_DIRECT_FILTER, filter);
+        AL11.alSource3i(sourceID, EXTEfx.AL_AUXILIARY_SEND_FILTER, slot, 0, 0);
+        int error = AL11.alGetError();
+        if (error != AL11.AL_NO_ERROR) {
+            LOGGER.warn("OpenAl Error {}", error);
         }
     }
 
