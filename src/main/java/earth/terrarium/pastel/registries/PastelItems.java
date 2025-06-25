@@ -420,7 +420,7 @@ public class PastelItems {
     public static final DeferredItem<Item> RAW_BLOODSTONE = register(simple(item("raw_bloodstone", () -> new CloakedItem(IS.of(Rarity.UNCOMMON), PastelAdvancements.PLUCK_RESPLENDENT_FEATHER, RED_DYE), InkColors.RED)));
     public static final DeferredItem<Item> PURE_BLOODSTONE = register(simple(item("pure_bloodstone", () -> new CloakedItem(IS.of(Rarity.UNCOMMON), PastelAdvancements.PLUCK_RESPLENDENT_FEATHER, RED_DYE), InkColors.RED)));
     public static final DeferredItem<Item> DOWNSTONE_FRAGMENTS = register(simple(item("downstone_fragments", () -> new CloakedItem(IS.of(16, Rarity.UNCOMMON), PastelAdvancements.FIND_EXCAVATION_SITE, LIGHT_GRAY_DYE), InkColors.LIGHT_GRAY)));
-    public static final DeferredItem<Item> RESONANCE_SHARD = register(simple(item("resonance_shard", () -> new CloakedItem(IS.of(16, Rarity.UNCOMMON), PastelAdvancements.STRIKE_UP_HUMMINGSTONE_HYMN, LIGHT_BLUE_DYE), InkColors.WHITE)));
+    public static final DeferredItem<Item> RESONANCE_SHARD = register(simple(item("resonance_shard", () -> new CloakedItem(IS.of(17, Rarity.UNCOMMON), PastelAdvancements.STRIKE_UP_HUMMINGSTONE_HYMN, LIGHT_BLUE_DYE), InkColors.WHITE)));
     public static final DeferredItem<Item> AETHER_VESTIGES = register(simple(item("aether_vestiges", () -> new AetherVestigesItem(IS.of(1, Rarity.EPIC).fireResistant(), "item.pastel.aether_vestiges.tooltip"), InkColors.WHITE)));
 
     public static final DeferredItem<Item> QUITOXIC_POWDER = register(simple(item("quitoxic_powder", () -> new CloakedItem(IS.of(), PastelAdvancements.REVEAL_QUITOXIC_REEDS, PURPLE_DYE), InkColors.PURPLE)));
