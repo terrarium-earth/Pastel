@@ -2,9 +2,13 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.capabilities.*;
+import net.minecraft.world.Container;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.level.block.entity.*;
 import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.fluids.capability.templates.*;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 
 import java.util.function.Supplier;
 
@@ -27,6 +31,8 @@ public class PastelCapabilityHandlers {
         standardBlockBE(POTION_WORKSHOP, event);
         standardBlockBE(BLOCK_PLACER, event);
         standardBlockBE(BOTTOMLESS_BUNDLE, event);
+		standardBlockBE(ITEM_BOWL, event);
+		containerBlockBE(CRYSTAL_APOTHECARY, event);
 
         // - chests
         standardBlockBE(BLACK_HOLE_CHEST, event);
@@ -56,6 +62,14 @@ public class PastelCapabilityHandlers {
                 PastelItems.FEROCIOUS_GLASS_CREST_BIDENT, PastelItems.DRAGON_TALON, PastelItems.DREAMFLAYER,
                 PastelItems.KNOTTED_SWORD, PastelItems.NECTAR_LANCE);
     }
+	
+	private static void containerBlockBE(Supplier<? extends BlockEntityType<? extends Container>> type, RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(
+				Capabilities.ItemHandler.BLOCK,
+				type.get(),
+				(container, dir) -> new InvWrapper(container)
+		);
+	}
 
     private static void standardBlockBE(Supplier<? extends BlockEntityType<? extends SidedCapabilityProvider>> type, RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(
