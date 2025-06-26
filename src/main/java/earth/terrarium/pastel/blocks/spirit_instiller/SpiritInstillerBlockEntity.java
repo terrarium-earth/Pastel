@@ -119,60 +119,60 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		}
 	}
 	
-	public static void serverTick(Level world, BlockPos blockPos, BlockState blockState, SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
-		if (spiritInstillerBlockEntity.upgrades == null) {
-			spiritInstillerBlockEntity.calculateUpgrades();
+	public static void serverTick(Level world, BlockPos blockPos, BlockState blockState, SpiritInstillerBlockEntity blockEntity) {
+		if (blockEntity.upgrades == null) {
+			blockEntity.calculateUpgrades();
 		}
 		
-		if (spiritInstillerBlockEntity.inventoryChanged) {
-			var previousRecipe = spiritInstillerBlockEntity.currentRecipe;
-			calculateCurrentRecipe(world, spiritInstillerBlockEntity);
+		if (blockEntity.inventoryChanged) {
+			var previousRecipe = blockEntity.currentRecipe;
+			calculateCurrentRecipe(world, blockEntity);
 			
-			if (spiritInstillerBlockEntity.currentRecipe != previousRecipe) {
-				spiritInstillerBlockEntity.craftingTime = 0;
-				if (spiritInstillerBlockEntity.currentRecipe == null) {
-					PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) world, spiritInstillerBlockEntity.worldPosition);
+			if (blockEntity.currentRecipe != previousRecipe) {
+				blockEntity.craftingTime = 0;
+				if (blockEntity.currentRecipe == null) {
+					PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) world, blockEntity.worldPosition);
 				} else {
-					spiritInstillerBlockEntity.craftingTimeTotal = (int) Math.ceil(spiritInstillerBlockEntity.currentRecipe.value().getCraftingTime() / spiritInstillerBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
+					blockEntity.craftingTimeTotal = (int) Math.ceil(blockEntity.currentRecipe.value().getCraftingTime() / blockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
 				}
-				spiritInstillerBlockEntity.updateInClientWorld();
+				blockEntity.updateInClientWorld();
 			}
-			spiritInstillerBlockEntity.inventoryChanged = false;
+			blockEntity.inventoryChanged = false;
 		}
 		
-		if (spiritInstillerBlockEntity.currentRecipe == null) {
+		if (blockEntity.currentRecipe == null) {
 			return;
 		}
 		
-		if (spiritInstillerBlockEntity.craftingTime % 60 == 0) {
-			if (!checkRecipeRequirements(world, blockPos, spiritInstillerBlockEntity)) {
-				spiritInstillerBlockEntity.craftingTime = 0;
-				spiritInstillerBlockEntity.setChanged();
-				PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) world, spiritInstillerBlockEntity.worldPosition);
+		if (blockEntity.craftingTime % 60 == 0) {
+			if (!checkRecipeRequirements(world, blockPos, blockEntity)) {
+				blockEntity.craftingTime = 0;
+				blockEntity.setChanged();
+				PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) world, blockEntity.worldPosition);
 				return;
 			}
 		}
 		
-		if (spiritInstillerBlockEntity.currentRecipe != null) {
-			spiritInstillerBlockEntity.craftingTime++;
+		if (blockEntity.currentRecipe != null) {
+			blockEntity.craftingTime++;
 			
-			if (spiritInstillerBlockEntity.craftingTime == 1) {
-				PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.SPIRIT_INSTILLER_CRAFTING, (ServerLevel) world, spiritInstillerBlockEntity.worldPosition, Integer.MAX_VALUE);
-			} else if (spiritInstillerBlockEntity.craftingTime == spiritInstillerBlockEntity.craftingTimeTotal * 0.01
-					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.25)
-					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.5)
-					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.75)
-					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.83)
-					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.90)
-					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.95)
-					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.98)
-					|| spiritInstillerBlockEntity.craftingTime == Math.floor(spiritInstillerBlockEntity.craftingTimeTotal * 0.99)) {
-				spiritInstillerBlockEntity.doItemBowlOrbs(world);
-			} else if (spiritInstillerBlockEntity.craftingTime == spiritInstillerBlockEntity.craftingTimeTotal) {
-				craftSpiritInstillerRecipe(world, spiritInstillerBlockEntity, spiritInstillerBlockEntity.currentRecipe);
+			if (blockEntity.craftingTime == 1) {
+				PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.SPIRIT_INSTILLER_CRAFTING, (ServerLevel) world, blockEntity.worldPosition, Integer.MAX_VALUE);
+			} else if (blockEntity.craftingTime == blockEntity.craftingTimeTotal * 0.01
+					|| blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.25)
+					|| blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.5)
+					|| blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.75)
+					|| blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.83)
+					|| blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.90)
+					|| blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.95)
+					|| blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.98)
+					|| blockEntity.craftingTime == Math.floor(blockEntity.craftingTimeTotal * 0.99)) {
+				blockEntity.doItemBowlOrbs(world);
+			} else if (blockEntity.craftingTime == blockEntity.craftingTimeTotal) {
+				craftSpiritInstillerRecipe(world, blockEntity, blockEntity.currentRecipe);
 			}
 			
-			spiritInstillerBlockEntity.setChanged();
+			blockEntity.setChanged();
 		}
 	}
 	

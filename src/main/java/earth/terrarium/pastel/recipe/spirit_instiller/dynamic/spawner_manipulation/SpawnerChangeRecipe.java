@@ -18,6 +18,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.Optional;
 
@@ -51,21 +52,15 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 			ItemStack spawnerStack = spiritInstillerBlockEntity.getItem(0);
 			
 			// TODO - Review
-			CustomData spawnerNbt = spawnerStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+			CompoundTag spawnerNbt = spawnerStack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).copyTag();
 			
-			CompoundTag blockEntityTag;
-			if (spawnerNbt.contains("BlockEntityTag")) {
-				blockEntityTag = spawnerNbt.copyTag().getCompound("BlockEntityTag");
-			} else {
-				blockEntityTag = new CompoundTag();
-			}
-			
-			blockEntityTag = getSpawnerResultNbt(blockEntityTag, firstBowlStack, secondBowlStack);
+			spawnerNbt = getSpawnerResultNbt(spawnerNbt, firstBowlStack, secondBowlStack);
 			
 			resultStack = spawnerStack.copy();
 			resultStack.setCount(1);
 			
-			resultStack.set(DataComponents.CUSTOM_DATA, CustomData.of(blockEntityTag));
+			BlockEntity.addEntityType(spawnerNbt, BlockEntityType.MOB_SPAWNER);
+			resultStack.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(spawnerNbt));
 			
 			spawnXPAndGrantAdvancements(resultStack, spiritInstillerBlockEntity, spiritInstillerBlockEntity.getUpgradeHolder(), world, pos);
 		}

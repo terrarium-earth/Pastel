@@ -1,17 +1,25 @@
 package earth.terrarium.pastel.registries;
 
+import com.mojang.serialization.DataResult;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BlockItemStateProperties;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SculkShriekerBlock;
+import net.minecraft.world.level.block.entity.SignText;
 import net.neoforged.neoforge.event.entity.player.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public class PastelTooltips {
 	
@@ -25,9 +33,9 @@ public class PastelTooltips {
 			if (stack.is(Blocks.SCULK_SHRIEKER.asItem())) {
 				addSculkShriekerTooltips(lines, components);
 			} else if (stack.is(ItemTags.SIGNS)) {
-				//addSignTooltips(lines, components);
+				addSignTooltips(lines, components);
 			} else if (stack.is(Items.SPAWNER)) {
-				//addSpawnerTooltips(lines, components);
+				addSpawnerTooltips(lines, components);
 			}
 		}
 	}
@@ -41,42 +49,33 @@ public class PastelTooltips {
 		}
 	}
 	
-	/* TODO
-	
-	private static void addSignTooltips(List<Text> lines, ComponentMap components) {
-		NbtComponent dataComponent = components.get(DataComponentTypes.BLOCK_ENTITY_DATA);
+	private static void addSignTooltips(List<Component> lines, DataComponentMap components) {
+		CustomData dataComponent = components.get(DataComponents.BLOCK_ENTITY_DATA);
 		if (dataComponent == null) {
 			return;
 		}
-		NbtCompound blockEntityTag = dataComponent.getNbt().getCompound("BlockEntityTag");
-		addSignText(lines, SignText.CODEC.parse(NbtOps.INSTANCE, blockEntityTag.getCompound("front_text")));
-		addSignText(lines, SignText.CODEC.parse(NbtOps.INSTANCE, blockEntityTag.getCompound("back_text")));
+		CompoundTag blockEntityTag = dataComponent.getUnsafe().getCompound("BlockEntityTag");
+		addSignText(lines, SignText.DIRECT_CODEC.parse(NbtOps.INSTANCE, blockEntityTag.getCompound("front_text")));
+		addSignText(lines, SignText.DIRECT_CODEC.parse(NbtOps.INSTANCE, blockEntityTag.getCompound("back_text")));
 	}
 	
-	private static void addSignText(List<Text> lines, DataResult<SignText> signText) {
+	private static void addSignText(List<Component> lines, DataResult<SignText> signText) {
 		if (signText.result().isPresent()) {
 			SignText st = signText.result().get();
-			Style style = Style.EMPTY.withColor(st.getColor().getSignColor());
-			for (Text text : st.getMessages(false)) {
-				lines.addAll(text.getWithStyle(style));
+			Style style = Style.EMPTY.withColor(st.getColor().getTextColor());
+			for (Component text : st.getMessages(false)) {
+				lines.addAll(text.toFlatList(style));
 			}
 		}
 	}
 	
-	public static void addSpawnerTooltips(List<Text> lines, ComponentMap components) {
-		if (!nbt.contains("BlockEntityTag", NbtElement.COMPOUND_TYPE)) {
+	public static void addSpawnerTooltips(List<Component> lines, DataComponentMap components) {
+		CustomData dataComponent = components.get(DataComponents.BLOCK_ENTITY_DATA);
+		if (dataComponent == null) {
 			return;
 		}
 		
-		Optional<EntityType<?>> entityType = Optional.empty();
-		NbtCompound blockEntityTag = nbt.getCompound("BlockEntityTag");
-		
-		if (blockEntityTag.contains("SpawnData", NbtElement.COMPOUND_TYPE)
-				&& blockEntityTag.getCompound("SpawnData").contains("entity", NbtElement.COMPOUND_TYPE)
-				&& blockEntityTag.getCompound("SpawnData").getCompound("entity").contains("id", NbtElement.STRING_TYPE)) {
-			String spawningEntityType = blockEntityTag.getCompound("SpawnData").getCompound("entity").getString("id");
-			entityType = EntityType.get(spawningEntityType);
-		}
+		CompoundTag blockEntityTag = dataComponent.copyTag();
 		
 		try {
 			short spawnCount = blockEntityTag.getShort("SpawnCount");
@@ -86,33 +85,26 @@ public class PastelTooltips {
 			short requiredPlayerRange = blockEntityTag.getShort("RequiredPlayerRange");
 			short maxNearbyEntities = blockEntityTag.getShort("MaxNearbyEntities");
 			
-			if (entityType.isPresent()) {
-				lines.add(Text.translatable(entityType.get().getTranslationKey()));
-			} else {
-				lines.add(Text.translatable("item.spectrum.spawner.tooltip.unknown_mob"));
-			}
 			if (spawnCount > 0) {
-				lines.add(Text.translatable("item.spectrum.spawner.tooltip.spawn_count", spawnCount).formatted(Formatting.GRAY));
+				lines.add(Component.translatable("item.pastel.spawner.tooltip.spawn_count", spawnCount).withStyle(ChatFormatting.GRAY));
 			}
 			if (minSpawnDelay > 0) {
-				lines.add(Text.translatable("item.spectrum.spawner.tooltip.min_spawn_delay", minSpawnDelay).formatted(Formatting.GRAY));
+				lines.add(Component.translatable("item.pastel.spawner.tooltip.min_spawn_delay", minSpawnDelay).withStyle(ChatFormatting.GRAY));
 			}
 			if (maxSpawnDelay > 0) {
-				lines.add(Text.translatable("item.spectrum.spawner.tooltip.max_spawn_delay", maxSpawnDelay).formatted(Formatting.GRAY));
+				lines.add(Component.translatable("item.pastel.spawner.tooltip.max_spawn_delay", maxSpawnDelay).withStyle(ChatFormatting.GRAY));
 			}
 			if (spawnRange > 0) {
-				lines.add(Text.translatable("item.spectrum.spawner.tooltip.spawn_range", spawnRange).formatted(Formatting.GRAY));
+				lines.add(Component.translatable("item.pastel.spawner.tooltip.spawn_range", spawnRange).withStyle(ChatFormatting.GRAY));
 			}
 			if (requiredPlayerRange > 0) {
-				lines.add(Text.translatable("item.spectrum.spawner.tooltip.required_player_range", requiredPlayerRange).formatted(Formatting.GRAY));
+				lines.add(Component.translatable("item.pastel.spawner.tooltip.required_player_range", requiredPlayerRange).withStyle(ChatFormatting.GRAY));
 			}
 			if (maxNearbyEntities > 0) {
-				lines.add(Text.translatable("item.spectrum.spawner.tooltip.max_nearby_entities", maxNearbyEntities).formatted(Formatting.GRAY));
+				lines.add(Component.translatable("item.pastel.spawner.tooltip.max_nearby_entities", maxNearbyEntities).withStyle(ChatFormatting.GRAY));
 			}
 		} catch (Exception e) {
-			lines.add(Text.translatable("item.spectrum.spawner.tooltip.unknown_mob"));
+			lines.add(Component.translatable("item.pastel.spawner.tooltip.unknown_mob"));
 		}
-	}*/
-	
-	
+	}
 }
