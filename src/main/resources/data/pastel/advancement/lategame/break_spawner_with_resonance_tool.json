@@ -38,7 +38,7 @@
           }
         },
         "block": {
-          "blocks": "#pastel:budding_blocks"
+          "blocks": "minecraft:spawner"
         }
       }
     },
