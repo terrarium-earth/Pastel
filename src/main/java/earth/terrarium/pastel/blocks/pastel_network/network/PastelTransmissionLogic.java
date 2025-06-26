@@ -135,7 +135,7 @@ public class PastelTransmissionLogic {
 		Predicate<ItemStack> filter = sourceNode.getTransferFilterTo(destinationNode);
 		var proposals = new HashMap<ItemEntry, Long>();
 		for (int s = 0; s < sourceStorage.getSlots(); s++) {
-			var stack = sourceStorage.getStackInSlot(s);
+			var stack = sourceStorage.extractItem(s, DEFAULT_MAX_TRANSFER_AMOUNT, true); // Simulate extraction
 
 			if (stack.isEmpty()) // We don't consider empty stacks..... duh
 				continue;
