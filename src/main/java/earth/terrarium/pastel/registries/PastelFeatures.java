@@ -10,6 +10,7 @@ import earth.terrarium.pastel.worldgen.features.ColumnsFeatureConfig;
 import earth.terrarium.pastel.worldgen.features.CrystalFormationFeature;
 import earth.terrarium.pastel.worldgen.features.CrystalFormationFeatureFeatureConfig;
 import earth.terrarium.pastel.worldgen.features.ExposedFossilFeature;
+import earth.terrarium.pastel.worldgen.features.GiantGilledFungusFeature;
 import earth.terrarium.pastel.worldgen.features.GilledFungusFeature;
 import earth.terrarium.pastel.worldgen.features.GilledFungusFeatureConfig;
 import earth.terrarium.pastel.worldgen.features.JadeiteLotusFeature;
@@ -46,7 +47,7 @@ public class PastelFeatures {
 	public static Feature<RandomBudsFeaturesConfig> RANDOM_BUDS = new RandomBudsFeature(RandomBudsFeaturesConfig.CODEC);
 	public static Feature<OreConfiguration> AIR_CHECK_DISK = new AirCheckDiskFeature(OreConfiguration.CODEC);
 	public static Feature<GilledFungusFeatureConfig> GILLED_FUNGUS = new GilledFungusFeature(GilledFungusFeatureConfig.CODEC);
-	public static Feature<GilledFungusFeatureConfig> GIANT_GILLED_FUNGUS = new GilledFungusFeature(GilledFungusFeatureConfig.CODEC);
+	public static Feature<GilledFungusFeatureConfig> GIANT_GILLED_FUNGUS = new GiantGilledFungusFeature(GilledFungusFeatureConfig.CODEC);
 	public static Feature<NephriteBlossomFeatureConfig> NEPHRITE_BLOSSOM = new NephriteBlossomFeature(NephriteBlossomFeatureConfig.CODEC);
 	public static Feature<JadeiteLotusFeatureConfig> JADEITE_LOTUS = new JadeiteLotusFeature(JadeiteLotusFeatureConfig.CODEC);
 	public static Feature<TriStateVineFeatureConfig> TRISTATE_VINE = new TriStateVineFeature(TriStateVineFeatureConfig.CODEC);
