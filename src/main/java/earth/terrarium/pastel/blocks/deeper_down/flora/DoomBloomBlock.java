@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.deeper_down.flora;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -174,7 +174,7 @@ public class DoomBloomBlock extends FlowerBlock implements BonemealableBlock {
 	@Override
 	public void playerDestroy(Level world, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
 		super.playerDestroy(world, player, pos, state, blockEntity, stack);
-		if (PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.SILK_TOUCH, stack) == 0 && !stack.is(Tags.Items.TOOLS_SHEAR)) {
+		if (Ench.getLevel(world.registryAccess(), Enchantments.SILK_TOUCH, stack) == 0 && !stack.is(Tags.Items.TOOLS_SHEAR)) {
 			explode(world, pos, state);
 		}
 	}

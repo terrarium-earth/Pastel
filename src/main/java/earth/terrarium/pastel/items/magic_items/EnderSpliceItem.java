@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.components.EnderSpliceComponent;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.c2s_payloads.BindEnderSpliceToPlayerPayload;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -115,7 +115,7 @@ public class EnderSpliceItem extends Item {
 			return;
 		}
 		if (!playerEntity.getAbilities().instabuild) {
-			int unbreakingLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.UNBREAKING, itemStack);
+			int unbreakingLevel = Ench.getLevel(world.registryAccess(), Enchantments.UNBREAKING, itemStack);
 			if (unbreakingLevel == 0) {
 				itemStack.shrink(1);
 			} else {

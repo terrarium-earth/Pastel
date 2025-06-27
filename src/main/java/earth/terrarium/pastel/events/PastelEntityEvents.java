@@ -1,15 +1,14 @@
 package earth.terrarium.pastel.events;
 
-import earth.terrarium.pastel.api.item.ArmorPiercingHandler;
-import earth.terrarium.pastel.api.item.SplitDamageHandler;
+import earth.terrarium.pastel.PastelCommon;
+import earth.terrarium.pastel.api.item.ArmorWithHitEffect;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
-import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.*;
 import earth.terrarium.pastel.registries.*;
-import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
 import net.minecraft.advancements.*;
 import net.minecraft.core.component.*;
 import net.minecraft.server.level.*;
@@ -24,9 +23,7 @@ import net.minecraft.world.entity.player.*;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.*;
 import net.minecraft.world.phys.*;
-import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.common.*;
-import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.*;
 import top.theillusivec4.curios.api.*;
@@ -42,84 +39,37 @@ public class PastelEntityEvents {
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::equipmentChange);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::entityDeath);
         NeoForge.EVENT_BUS.addListener(PastelEntityEvents::parryingSwordBlock);
+        NeoForge.EVENT_BUS.addListener(PastelEntityEvents::disarming);
+        NeoForge.EVENT_BUS.addListener(PastelEntityEvents::armorEffects);
 
-        // I guess this is the damage corner now
-        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelEntityEvents::applyKillBonuses); // Process it as late as possible for a small amount of tomfoolery
-        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelEntityEvents::splitDamage);
-        NeoForge.EVENT_BUS.addListener(PastelEntityEvents::splitDamage);
     }
 
-    private static final Set<LivingEntity> RECURSIVE_TARGETS = new HashSet<>();
-    private static void splitDamage(LivingIncomingDamageEvent event) {
+    private static void armorEffects(LivingDamageEvent.Post event) {
+        var attacked = event.getEntity();
+
+        if (attacked.level().isClientSide())
+            return;
+
+        for (ItemStack armor : attacked.getArmorSlots()) {
+            if (armor.getItem() instanceof ArmorWithHitEffect effect)
+                effect.onHit(armor, event.getSource(), attacked, event.getNewDamage());
+        }
+    }
+
+    private static void disarming(LivingDamageEvent.Post event) {
         var target = event.getEntity();
+        var source = event.getSource();
+        var entity = source.getEntity();
 
-        if (RECURSIVE_TARGETS.contains(target)) {
-            event.getContainer().setPostAttackInvulnerabilityTicks(0); // We only do I-frames after all the partitions have been processed
-            return;
-        }
-
-        var entity = event.getSource().getEntity();
-
-        if (!(entity instanceof LivingEntity attacker) || event.getAmount() <= Mth.EPSILON)
+        if (!(entity instanceof LivingEntity attacker) || event.getNewDamage() <= Mth.EPSILON || source.is(DamageTypes.THORNS))
             return;
 
-        var weapon = attacker.getMainHandItem();
-
-        if (weapon.isEmpty())
-            return;
-
-        var split = weapon.getCapability(PastelCapabilities.Miscellaneous.SPLIT_DAMAGE);
-
-        if (split == null)
-            return;
-
-        RECURSIVE_TARGETS.add(target);
-
-        var composition = split.getDamageComposition(attacker, target, weapon, event.getAmount());
-        for (SplitDamageHandler.Partition partition : composition.get()) {
-            target.hurt(partition.source(), partition.damage());
-        }
-
-        event.setAmount(0);
-        RECURSIVE_TARGETS.remove(target);
+        var disarming = Ench.getLevel(attacker.registryAccess(), PastelEnchantments.DISARMING, attacker.getMainHandItem());
+        if (disarming > 0 && target.getRandom().nextFloat() < disarming * PastelCommon.CONFIG.DisarmingChancePerLevelMobs)
+            DisarmingHelper.disarmEntity(target);
     }
 
-    private static void handlePiercing(LivingIncomingDamageEvent event) {
-        var container = event.getContainer();
-        var entity = event.getSource().getEntity();
 
-        if (!(entity instanceof LivingEntity attacker))
-            return;
-
-        var weapon = attacker.getMainHandItem();
-
-        if (weapon.isEmpty())
-            return;
-
-        if (weapon.getCapability(PastelCapabilities.Miscellaneous.SPLIT_DAMAGE) instanceof ArmorPiercingHandler ap) {
-            var target = event.getEntity();
-
-            container.addModifier(DamageContainer.Reduction.ENCHANTMENTS, (damageContainer, f) -> f * (1 - ap.getProtReduction(target, weapon)));
-            container.addModifier(DamageContainer.Reduction.ARMOR, (damageContainer, f) -> f * (1 - ap.getDefenseMultiplier(target, weapon)));
-        }
-    }
-
-    private static void applyKillBonuses(LivingDamageEvent.Pre event) {
-        var entity = event.getSource().getEntity();
-
-        if (!(entity instanceof LivingEntity attacker))
-            return;
-
-        if (PastelTrinketItem.hasEquipped(attacker, PastelItems.JEOPARDANT.get())) {
-            event.setNewDamage((float) (event.getNewDamage() * (AttackRingItem.getAttackModifierForEntity(attacker) + 1)));
-        }
-
-        LastKillData.rememberKillTick(attacker, entity.level().getGameTime());
-        var frenzy = attacker.getEffect(PastelMobEffects.FRENZY);
-        if (frenzy != null) {
-            ((FrenzyStatusEffect) frenzy.getEffect()).onKill(attacker, frenzy.getAmplifier());
-        }
-    }
 
     private static void parryingSwordBlock(LivingShieldBlockEvent event) {
         var damage = event.getDamageContainer().getOriginalDamage();
@@ -204,8 +154,8 @@ public class PastelEntityEvents {
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
 
-        var oldInexorable = PastelEnchantmentHelper.getLevel(livingEntity.level().registryAccess(), PastelEnchantments.INEXORABLE, oldEquipment);
-        var newInexorable = PastelEnchantmentHelper.getLevel(livingEntity.level().registryAccess(), PastelEnchantments.INEXORABLE, newEquipment);
+        var oldInexorable = Ench.getLevel(livingEntity.level().registryAccess(), PastelEnchantments.INEXORABLE, oldEquipment);
+        var newInexorable = Ench.getLevel(livingEntity.level().registryAccess(), PastelEnchantments.INEXORABLE, newEquipment);
 
         var effectType = equipmentSlot == EquipmentSlot.CHEST ? PastelAttributeTags.INEXORABLE_ARMOR_EFFECTIVE : PastelAttributeTags.INEXORABLE_HANDHELD_EFFECTIVE;
 
@@ -276,7 +226,7 @@ public class PastelEntityEvents {
 
             boolean shouldDropHead = source.is(PastelDamageTypeTags.ALWAYS_DROPS_MOB_HEAD);
             if (!shouldDropHead && source.getEntity() instanceof LivingEntity livingAttacker) {
-                int damageSourceTreasureHunt = PastelEnchantmentHelper.getEquipmentLevel(
+                int damageSourceTreasureHunt = Ench.getEquipmentLevel(
                         serverWorld.registryAccess(),
                         PastelEnchantments.TREASURE_HUNTER,
                         livingAttacker);

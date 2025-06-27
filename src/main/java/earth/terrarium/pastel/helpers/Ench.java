@@ -24,7 +24,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PastelEnchantmentHelper {
+public class Ench {
 
 	public static Tuple<Boolean, ItemStack> addOrUpgradeEnchantment(HolderLookup.Provider registryLookup, ItemStack stack, ResourceKey<Enchantment> enchantmentKey, int level, boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts) {
 		return getEntry(registryLookup, enchantmentKey)
@@ -50,7 +50,7 @@ public class PastelEnchantmentHelper {
 	public static Tuple<Boolean, ItemStack> addOrUpgradeEnchantment(ItemStack stack, Holder<Enchantment> enchantment, int level, boolean forceEvenIfNotApplicable, boolean allowEnchantmentConflicts) {
 		boolean isAcceptable = stack.supportsEnchantment(enchantment) || forceEvenIfNotApplicable;
 		boolean isConflicting = !allowEnchantmentConflicts && !EnchantmentHelper.isEnchantmentCompatible(stack.getEnchantments().keySet(), enchantment);
-		boolean isEnchantedBook = stack.is(Items.ENCHANTED_BOOK) || PastelEnchantmentHelper.isEnchantableBook(stack);
+		boolean isEnchantedBook = stack.is(Items.ENCHANTED_BOOK) || Ench.isEnchantableBook(stack);
 
 		// Can this enchant even go on that tool?
 		if (!isAcceptable && !isEnchantedBook) {

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.items.tools.DragonTalonItem;
 import earth.terrarium.pastel.mixin.accessors.PersistentProjectileEntityAccessor;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
@@ -136,7 +136,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 		var difMod = 4F;
 		var airborne = !owner.onGround();
 		var sneaking = owner.isShiftKeyDown();
-		var inertia = PastelEnchantmentHelper.getLevel(owner.level().registryAccess(), PastelEnchantments.INERTIA, getTrackedStack());
+		var inertia = Ench.getLevel(owner.level().registryAccess(), PastelEnchantments.INERTIA, getTrackedStack());
 		
 		if (sneaking)
 			difMod *= 3;
@@ -171,7 +171,7 @@ public class DragonTalonEntity extends BidentBaseEntity {
 			yoink(owner, position(), 0.125, 0.165);
 		}
 		
-		if (PastelEnchantmentHelper.hasEnchantment(level().registryAccess(), Enchantments.CHANNELING, getTrackedStack()) && owner != null) {
+		if (Ench.hasEnchantment(level().registryAccess(), Enchantments.CHANNELING, getTrackedStack()) && owner != null) {
 			if (level() instanceof ServerLevel world) {
 				for (int i = 0; i < 10; i++) {
 					world.sendParticles(ParticleTypes.GLOW,

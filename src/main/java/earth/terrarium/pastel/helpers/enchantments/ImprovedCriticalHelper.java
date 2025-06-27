@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.helpers.enchantments;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ public class ImprovedCriticalHelper {
 	}
 	
 	public static float getAddtionalCritDamageMultiplier(HolderLookup.Provider lookup, ItemStack stack) {
-		return getAddtionalCritDamageMultiplier(PastelEnchantmentHelper.getLevel(lookup, PastelEnchantments.IMPROVED_CRITICAL, stack));
+		return getAddtionalCritDamageMultiplier(Ench.getLevel(lookup, PastelEnchantments.IMPROVED_CRITICAL, stack));
 	}
 	
 }

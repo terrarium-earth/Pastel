@@ -6,7 +6,7 @@ import com.klikli_dev.modonomicon.book.conditions.context.BookConditionContext;
 import com.klikli_dev.modonomicon.book.conditions.context.BookConditionEntryContext;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -59,7 +59,7 @@ public class EnchantmentRegisteredCondition extends BookCondition {
     
     @Override
     public boolean test(BookConditionContext context, Player player) {
-		return PastelEnchantmentHelper.getEntry(player.level().registryAccess(), this.enchantmentKey).isPresent();
+		return Ench.getEntry(player.level().registryAccess(), this.enchantmentKey).isPresent();
     }
     
     @Override

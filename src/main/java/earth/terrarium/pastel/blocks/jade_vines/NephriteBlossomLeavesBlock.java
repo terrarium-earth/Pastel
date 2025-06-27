@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -44,7 +44,7 @@ public class NephriteBlossomLeavesBlock extends LeavesBlock implements Bonemeala
     @Override
     public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (state.getValue(AGE) == MAX_AGE) {
-			int fortuneLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.FORTUNE, handStack) / 2;
+			int fortuneLevel = Ench.getLevel(world.registryAccess(), Enchantments.FORTUNE, handStack) / 2;
 			int count = 1 + world.getRandom().nextInt(fortuneLevel + 1);
 			player.getInventory().placeItemBackInInventory(new ItemStack(PastelItems.GLASS_PEACH.get(), count));
 	

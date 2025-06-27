@@ -2,7 +2,7 @@ package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelMobEffectTags;
 import net.minecraft.server.level.ServerLevel;
@@ -32,7 +32,7 @@ public abstract class WitherEntityMixin extends LivingEntity {
 	private void spawnEntity(ServerLevel world, DamageSource source, boolean causedByPlayer, CallbackInfo ci, ItemEntity itemEntity) {
 		Entity attackerEntity = source.getEntity();
 		if (attackerEntity instanceof LivingEntity livingAttacker) {
-			int cloversFavorLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), PastelEnchantments.CLOVERS_FAVOR, livingAttacker.getMainHandItem());
+			int cloversFavorLevel = Ench.getLevel(world.registryAccess(), PastelEnchantments.CLOVERS_FAVOR, livingAttacker.getMainHandItem());
 			if (cloversFavorLevel > 0) {
 				int additionalCount = (int) (cloversFavorLevel / 2.0F + world.random.nextFloat() * cloversFavorLevel);
 				itemEntity.getItem().setCount(itemEntity.getItem().getCount() + additionalCount);

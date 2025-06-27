@@ -2,7 +2,7 @@ package earth.terrarium.pastel.attachments.data;
 
 import com.mojang.serialization.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.sound.OnPrimordialFireSoundInstance;
@@ -56,7 +56,7 @@ public class PrimordialFireData {
 	}
 
 	public static void addPrimordialFireTicks(LivingEntity entity, int ticks) {
-		int i = PastelEnchantmentHelper.getEquipmentLevel(entity.level().registryAccess(), Enchantments.FIRE_PROTECTION, entity);
+		int i = Ench.getEquipmentLevel(entity.level().registryAccess(), Enchantments.FIRE_PROTECTION, entity);
 		if (i > 0) {
 			ticks -= Mth.floor(ticks * i * 0.15F);
 		}
@@ -130,7 +130,7 @@ public class PrimordialFireData {
 
 	public static float getDamagePenalties(LivingEntity entity) {
 		//fire prot has a cap of 50% DR, requiring fire protection 10 on an armor piece
-		float fireProt = Math.min(FIRE_PROT_DAMAGE_RESISTANCE * PastelEnchantmentHelper.getEquipmentLevel(entity.level().registryAccess(), Enchantments.FIRE_PROTECTION, entity), 0.5F);
+		float fireProt = Math.min(FIRE_PROT_DAMAGE_RESISTANCE * Ench.getEquipmentLevel(entity.level().registryAccess(), Enchantments.FIRE_PROTECTION, entity), 0.5F);
 		int fireResLevel = Optional.ofNullable(entity.getEffect(MobEffects.FIRE_RESISTANCE)).map(MobEffectInstance::getAmplifier).orElse(-1) + 1;
 		float fireRes = 0;
 

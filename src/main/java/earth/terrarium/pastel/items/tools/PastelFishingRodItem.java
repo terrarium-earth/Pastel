@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
 import earth.terrarium.pastel.compat.gofish.GoFishCompat;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantmentTags;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import net.minecraft.ChatFormatting;
@@ -51,10 +51,10 @@ public abstract class PastelFishingRodItem extends FishingRodItem {
 				var drm = world.registryAccess();
 				int luckBonus = EnchantmentHelper.getFishingLuckBonus(serverWorld, itemStack, user);
 				int waitTimeReductionTicks = (int)(EnchantmentHelper.getFishingTimeReduction(serverWorld, itemStack, user) * 20.0F);
-				int exuberanceLevel = PastelEnchantmentHelper.getLevel(drm, PastelEnchantments.EXUBERANCE, itemStack);
-				int bigCatchLevel = PastelEnchantmentHelper.getLevel(drm, PastelEnchantments.BIG_CATCH, itemStack);
-				int serendipityReelLevel = PastelEnchantmentHelper.getLevel(drm, PastelEnchantments.SERENDIPITY_REEL, itemStack);
-				boolean inventoryInsertion = PastelEnchantmentHelper.hasEnchantment(drm, PastelEnchantments.INVENTORY_INSERTION, itemStack);
+				int exuberanceLevel = Ench.getLevel(drm, PastelEnchantments.EXUBERANCE, itemStack);
+				int bigCatchLevel = Ench.getLevel(drm, PastelEnchantments.BIG_CATCH, itemStack);
+				int serendipityReelLevel = Ench.getLevel(drm, PastelEnchantments.SERENDIPITY_REEL, itemStack);
+				boolean inventoryInsertion = Ench.hasEnchantment(drm, PastelEnchantments.INVENTORY_INSERTION, itemStack);
 				boolean shouldSmeltDrops = shouldSmeltDrops(itemStack);
 				spawnBobber(user, world, luckBonus, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel, serendipityReelLevel, inventoryInsertion, shouldSmeltDrops);
 			}

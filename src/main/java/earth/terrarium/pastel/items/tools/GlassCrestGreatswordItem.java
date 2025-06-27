@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.GreatswordChargingSoundInstance;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
@@ -107,7 +107,7 @@ public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDam
 	}
 	
 	public int getGroundSlamStrength(HolderLookup.Provider lookup, ItemStack stack) {
-		return PastelEnchantmentHelper.getLevel(lookup, Enchantments.SWEEPING_EDGE, stack);
+		return Ench.getLevel(lookup, Enchantments.SWEEPING_EDGE, stack);
 	}
 	
 	public void performGroundSlam(Level world, Vec3 pos, LivingEntity attacker, float strength) {

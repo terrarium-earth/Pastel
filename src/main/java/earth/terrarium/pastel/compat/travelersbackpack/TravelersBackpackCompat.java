@@ -3,7 +3,7 @@ package earth.terrarium.pastel.compat.travelersbackpack;
 import com.tiviacz.travelersbackpack.api.fluids.EffectFluid;
 import com.tiviacz.travelersbackpack.fluids.EffectFluidRegistry;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelFluids;
 import earth.terrarium.pastel.registries.PastelMobEffects;
@@ -79,7 +79,7 @@ public class TravelersBackpackCompat extends PastelIntegrationPacks.ModIntegrati
 						if (!enchants.isEmpty()) {
 							var enchantments = enchants.keySet();
 							var enchantment = enchantments.stream().toList().get(new Random().nextInt(enchantments.size()));
-							PastelEnchantmentHelper.removeEnchantments(equip, enchantment);
+							Ench.removeEnchantments(equip, enchantment);
 						}
 					}
 				}

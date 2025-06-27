@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithExactVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayTakeOffBeltSoundInstancePayload;
@@ -84,8 +84,8 @@ public class TakeOffBeltItem extends PastelTrinketItem {
 								PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerLevel) world, entity.position(), PastelParticleTypes.LIQUID_CRYSTAL_SPARKLE, 1, vec.scale(0.5));
 							}
 							
-							int powerEnchantmentLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.POWER, stack);
-							int featherFallingEnchantmentLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.FEATHER_FALLING, stack);
+							int powerEnchantmentLevel = Ench.getLevel(world.registryAccess(), Enchantments.POWER, stack);
+							int featherFallingEnchantmentLevel = Ench.getLevel(world.registryAccess(), Enchantments.FEATHER_FALLING, stack);
 							entity.addEffect(new MobEffectInstance(MobEffects.JUMP, CHARGE_TIME_TICKS, getJumpBoostAmplifier(sneakTimeMod, powerEnchantmentLevel), true, true));
 							if (featherFallingEnchantmentLevel > 0) {
 								entity.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, CHARGE_TIME_TICKS + featherFallingEnchantmentLevel * 20, 0, true, true));

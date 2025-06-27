@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.capabilities.AreaMiningHandler;
 import earth.terrarium.pastel.components.WorkstaffComponent;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.inventories.WorkstaffScreenHandler;
 import earth.terrarium.pastel.registries.PastelAdvancements;
@@ -152,7 +152,7 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 	private static void enchantAndRemoveOthers(Player player, ItemStack stack, Component message, ResourceKey<Enchantment> enchantment) {
 		var registryLookup = player.level().registryAccess();
 
-		int existingLevel = PastelEnchantmentHelper.getLevel(registryLookup, enchantment, stack);
+		int existingLevel = Ench.getLevel(registryLookup, enchantment, stack);
 		if (existingLevel > 0) {
 			player.displayClientMessage(Component.translatable("item.pastel.workstaff.message.already_has_the_enchantment"), true);
 			return;
@@ -163,19 +163,19 @@ public class WorkstaffItem extends MultiToolItem implements AreaMiningHandler, P
 		if (enchantment == Enchantments.FORTUNE) {
 			level = stack.getOrDefault(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT).fortuneLevel();
 		} else {
-			int fortuneLevel = PastelEnchantmentHelper.getLevel(registryLookup, Enchantments.FORTUNE, stack);
+			int fortuneLevel = Ench.getLevel(registryLookup, Enchantments.FORTUNE, stack);
 			stack.update(PastelDataComponentTypes.WORKSTAFF, WorkstaffComponent.DEFAULT, comp ->
 					new WorkstaffComponent(comp.canTill(), comp.canShoot(), Math.max(fortuneLevel, 1)));
 		}
 		
 		ItemStack newStack = stack.copy();
-		var removeResult = PastelEnchantmentHelper.removeEnchantments(registryLookup, newStack, Enchantments.SILK_TOUCH, PastelEnchantments.RESONANCE, Enchantments.FORTUNE);
+		var removeResult = Ench.removeEnchantments(registryLookup, newStack, Enchantments.SILK_TOUCH, PastelEnchantments.RESONANCE, Enchantments.FORTUNE);
 		if (removeResult.getB() == 0) {
 			if (player instanceof ServerPlayer serverPlayerEntity) {
 				triggerUnenchantedWorkstaffAdvancement(serverPlayerEntity);
 			}
 		} else {
-			var addResult = PastelEnchantmentHelper.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, AdvancementHelper.hasAdvancement(player, PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS));
+			var addResult = Ench.addOrUpgradeEnchantment(registryLookup, removeResult.getA(), enchantment, level, false, AdvancementHelper.hasAdvancement(player, PastelAdvancements.APPLY_CONFLICTING_ENCHANTMENTS));
 			if (addResult.getA()) {
 				stack.set(DataComponents.ENCHANTMENTS, addResult.getB().getEnchantments());
 				player.displayClientMessage(message, true);

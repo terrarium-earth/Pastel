@@ -6,11 +6,10 @@ import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.items.tools.LightGreatswordItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
-import earth.terrarium.pastel.registries.PastelDamageTypeTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelMobEffects;
@@ -97,7 +96,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 	
 	@Unique
 	protected int getChanneling(ItemStack stack) {
-		return PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
+		return Ench.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
 	}
 	
 	@Inject(at = @At("TAIL"), method = "jumpFromGround")
@@ -106,16 +105,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 		if ((Object) this instanceof ServerPlayer serverPlayerEntity) {
 			PastelAdvancementCriteria.TAKE_OFF_BELT_JUMP.trigger(serverPlayerEntity);
 		}
-	}
-	
-	@ModifyVariable(method = "hurtArmor", at = @At("HEAD"), ordinal = 0, argsOnly = true)
-	private float damageArmor(float amount, DamageSource source) {
-		if (source.is(PastelDamageTypeTags.DOES_NOT_DAMAGE_ARMOR)) {
-			return 0;
-		} else if (source.is(PastelDamageTypeTags.INCREASED_ARMOR_DAMAGE)) {
-			return amount * 10;
-		}
-		return amount;
 	}
 	
 	@Override

@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.helpers.CodecHelper;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.Holder;
@@ -28,8 +28,8 @@ public class EnchantedBookUnsoulingRecipe extends PrimordialFireBurningRecipe {
 	public EnchantedBookUnsoulingRecipe(HolderLookup.Provider lookup) {
 		super(
 				"", false, Optional.of(UNLOCK_IDENTIFIER),
-				Ingredient.of(PastelEnchantmentHelper.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultInstance(), Enchantments.SOUL_SPEED, 1, false, false).getB()),
-				PastelEnchantmentHelper.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultInstance(), Enchantments.SWIFT_SNEAK, 1, false, false).getB()
+				Ingredient.of(Ench.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultInstance(), Enchantments.SOUL_SPEED, 1, false, false).getB()),
+				Ench.addOrUpgradeEnchantment(lookup, Items.ENCHANTED_BOOK.getDefaultInstance(), Enchantments.SWIFT_SNEAK, 1, false, false).getB()
 		);
 	}
 	
@@ -47,8 +47,8 @@ public class EnchantedBookUnsoulingRecipe extends PrimordialFireBurningRecipe {
 		Holder.Reference<Enchantment> soulSpeed = drm.asGetterLookup().get(Registries.ENCHANTMENT, Enchantments.SOUL_SPEED).orElseThrow();
 		int level = stack.getEnchantments().getLevel(soulSpeed);
 		if (level > 0) {
-			stack = PastelEnchantmentHelper.removeEnchantments(drm, stack, Enchantments.SOUL_SPEED).getA();
-			stack = PastelEnchantmentHelper.addOrUpgradeEnchantment(drm, stack, Enchantments.SWIFT_SNEAK, level, false, false).getB();
+			stack = Ench.removeEnchantments(drm, stack, Enchantments.SOUL_SPEED).getA();
+			stack = Ench.addOrUpgradeEnchantment(drm, stack, Enchantments.SWIFT_SNEAK, level, false, false).getB();
 		}
 		return stack;
 	}

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
@@ -46,7 +46,7 @@ public class GleamingPinItem extends PastelTrinketItem {
 	}
 	
 	public static int getEffectRange(ServerLevel world, ItemStack stack) {
-		return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_SNIPING * PastelEnchantmentHelper.getLevel(world.registryAccess(), PastelEnchantments.SNIPING, stack);
+		return BASE_RANGE + RANGE_BONUS_PER_LEVEL_OF_SNIPING * Ench.getLevel(world.registryAccess(), PastelEnchantments.SNIPING, stack);
 	}
 
 	@Override

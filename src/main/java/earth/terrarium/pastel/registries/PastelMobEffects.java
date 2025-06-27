@@ -206,6 +206,10 @@ public class PastelMobEffects {
 		}
 	}
 
+	public static float vulnerabilityMod(MobEffectInstance effect) {
+		return 1 + PastelMobEffects.VULNERABILITY_ADDITIONAL_DAMAGE_PERCENT_PER_LEVEL * (effect.getAmplifier() + 1);
+	}
+
 	public static class Cures {
 
 		public static final EffectCure SEDATIVES = EffectCure.get("sedatives");

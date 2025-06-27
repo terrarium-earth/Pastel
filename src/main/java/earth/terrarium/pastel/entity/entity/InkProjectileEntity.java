@@ -8,7 +8,7 @@ import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
 import earth.terrarium.pastel.helpers.BlockVariantHelper;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.ColoredExplosionParticleEffect;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
@@ -292,7 +292,7 @@ public class InkProjectileEntity extends MagicProjectileEntity {
 						//entity.damage(SpectrumDamageSources.inkProjectile(this, attacker), damage);
 						
 						if (entity instanceof LivingEntity livingEntity) {
-							int i = PastelEnchantmentHelper.getEquipmentLevel(level().registryAccess(), Enchantments.BLAST_PROTECTION, livingEntity);
+							int i = Ench.getEquipmentLevel(level().registryAccess(), Enchantments.BLAST_PROTECTION, livingEntity);
 							if (i > 0) {
 								velocity *= Mth.clamp(1.0 - (double)i * 0.15, 0.0, 1.0);
 							}

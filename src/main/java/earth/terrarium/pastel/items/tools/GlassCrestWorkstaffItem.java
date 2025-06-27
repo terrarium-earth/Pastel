@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.components.WorkstaffComponent;
 import earth.terrarium.pastel.entity.entity.MiningProjectileEntity;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
@@ -81,9 +81,9 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
 	public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
 		if (player != null) {
 			var lookup = player.level().registryAccess();
-			var resonance = PastelEnchantmentHelper.hasEnchantment(lookup, PastelEnchantments.RESONANCE, stack);
-			var silkTouch = PastelEnchantmentHelper.hasEnchantment(lookup, Enchantments.SILK_TOUCH, stack);
-			var fortune = PastelEnchantmentHelper.hasEnchantment(lookup, Enchantments.FORTUNE, stack);
+			var resonance = Ench.hasEnchantment(lookup, PastelEnchantments.RESONANCE, stack);
+			var silkTouch = Ench.hasEnchantment(lookup, Enchantments.SILK_TOUCH, stack);
+			var fortune = Ench.hasEnchantment(lookup, Enchantments.FORTUNE, stack);
 			
 			if (resonance)
 				return InkColors.WHITE_COLOR;

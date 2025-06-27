@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelBannerPatterns;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -54,7 +54,7 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	
 	@Override
 	public int getMaxStoredExperience(HolderLookup.Provider lookup, ItemStack itemStack) {
-		int efficiencyLevel = PastelEnchantmentHelper.getLevel(lookup, Enchantments.EFFICIENCY, itemStack);
+		int efficiencyLevel = Ench.getLevel(lookup, Enchantments.EFFICIENCY, itemStack);
 		return maxStorageBase * (int) Math.pow(10, Math.min(5, efficiencyLevel)); // to not exceed int max
 	}
 	
@@ -64,7 +64,7 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	}
 	
 	public int getTransferableExperiencePerTick(HolderLookup.Provider lookup, ItemStack itemStack) {
-		int quickChargeLevel = PastelEnchantmentHelper.getLevel(lookup, Enchantments.QUICK_CHARGE, itemStack);
+		int quickChargeLevel = Ench.getLevel(lookup, Enchantments.QUICK_CHARGE, itemStack);
 		return (int) (2 * Math.pow(2, Math.min(10, quickChargeLevel)));
 	}
 	

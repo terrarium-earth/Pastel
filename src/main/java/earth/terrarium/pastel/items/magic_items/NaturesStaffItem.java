@@ -8,7 +8,7 @@ import earth.terrarium.pastel.api.interaction.NaturesStaffTriggered;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
 import earth.terrarium.pastel.data_loaders.NaturesStaffConversionDataLoader;
 import earth.terrarium.pastel.helpers.InventoryHelper;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelBlockTags;
@@ -70,7 +70,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
 		
-		int efficiencyLevel = PastelEnchantmentHelper.getLevel(context.registries(), Enchantments.EFFICIENCY, stack);
+		int efficiencyLevel = Ench.getLevel(context.registries(), Enchantments.EFFICIENCY, stack);
 		if (efficiencyLevel == 0) {
 			if (InkPowered.canUseClient()) {
 				tooltip.add(Component.translatable("item.pastel.natures_staff.tooltip_with_ink", INK_COST.color().getColoredInkName()));
@@ -138,7 +138,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 	}
 	
 	public float getInkCostMod(HolderLookup.Provider lookup, ItemStack itemStack) {
-		return 3.0F / (3.0F + PastelEnchantmentHelper.getLevel(lookup, Enchantments.EFFICIENCY, itemStack));
+		return 3.0F / (3.0F + Ench.getLevel(lookup, Enchantments.EFFICIENCY, itemStack));
 	}
 	
 	@Override
@@ -295,7 +295,7 @@ public class NaturesStaffItem extends Item implements InkPowered {
 			paid = InkPowered.tryDrainEnergy(player, INK_COST, getInkCostMod(player.level().registryAccess(), stack));
 		}
 		if (!paid && player.getInventory().contains(ITEM_COST)) {  // try pay with item
-			int efficiencyLevel = PastelEnchantmentHelper.getLevel(player.level().registryAccess(), Enchantments.EFFICIENCY, stack);
+			int efficiencyLevel = Ench.getLevel(player.level().registryAccess(), Enchantments.EFFICIENCY, stack);
 			if (efficiencyLevel == 0) {
 				paid = InventoryHelper.removeFromInventoryWithRemainders(player, ITEM_COST);
 			} else {

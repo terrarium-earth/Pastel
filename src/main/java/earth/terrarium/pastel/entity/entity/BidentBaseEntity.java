@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.nbt.CompoundTag;
@@ -35,7 +35,7 @@ public abstract class BidentBaseEntity extends ThrownTrident {
 	public void setPickupItemStack(ItemStack stack) {
 		setTrackedStack(stack.copy());
 		super.setPickupItemStack(stack);
-		this.entityData.set(TridentEntityAccessor.getLoyalty(), (byte) PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack));
+		this.entityData.set(TridentEntityAccessor.getLoyalty(), (byte) Ench.getLevel(level().registryAccess(), Enchantments.LOYALTY, stack));
 		this.entityData.set(TridentEntityAccessor.getEnchanted(), stack.hasFoil());
 	}
 	

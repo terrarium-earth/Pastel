@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.fluid;
 
 import earth.terrarium.pastel.blocks.decay.BlackMateriaBlock;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;
@@ -177,7 +177,7 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
 		if (!enchantments.isEmpty()) {
 			int randomEnchantmentIndex = world.random.nextInt(enchantments.size());
 			Object2IntMap.Entry<Holder<Enchantment>> entryToRemove = enchantments.entrySet().stream().toList().get(randomEnchantmentIndex);
-			Tuple<ItemStack, Integer> result = PastelEnchantmentHelper.removeEnchantments(itemStack, entryToRemove.getKey());
+			Tuple<ItemStack, Integer> result = Ench.removeEnchantments(itemStack, entryToRemove.getKey());
 			
 			if (result.getB() > 0) {
 				spawnXP(world, itemEntity, EnchanterBlockEntity.getEnchantingPrice(itemStack, entryToRemove.getKey(), entryToRemove.getIntValue()));

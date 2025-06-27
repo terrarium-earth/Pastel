@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,7 +22,7 @@ public abstract class FirstStrikeEnchantmentMixin {
 		if (source.getEntity() instanceof LivingEntity livingAttacker) {
 			if (amount != 0F && target.getHealth() == target.getMaxHealth()) {
 				ItemStack mainHandStack = livingAttacker.getMainHandItem();
-				int level = PastelEnchantmentHelper.getLevel(livingAttacker.level().registryAccess(), PastelEnchantments.FIRST_STRIKE, mainHandStack);
+				int level = Ench.getLevel(livingAttacker.level().registryAccess(), PastelEnchantments.FIRST_STRIKE, mainHandStack);
 				if (level > 0) {
 					float additionalDamage = getAdditionalFirstStrikeEnchantmentDamage(level);
 					amount += additionalDamage;

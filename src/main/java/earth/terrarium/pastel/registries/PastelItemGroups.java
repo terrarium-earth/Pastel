@@ -9,7 +9,7 @@ import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
 import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.compat.gobber.GobberCompat;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.*;
@@ -291,12 +291,12 @@ public class PastelItemGroups {
 				entries.accept(PastelItems.GLOW_VISION_GOGGLES.get());
 				entries.accept(PastelItems.JEOPARDANT.get());
 				entries.accept(PastelItems.SEVEN_LEAGUE_BOOTS.get());
-				entries.accept(PastelEnchantmentHelper.getEnchantedStack(lookup, PastelItems.SEVEN_LEAGUE_BOOTS.get(), Map.of(Enchantments.POWER, 5)));
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.SEVEN_LEAGUE_BOOTS.get(), Map.of(Enchantments.POWER, 5)));
 				entries.accept(PastelItems.COTTON_CLOUD_BOOTS.get());
 				entries.accept(PastelItems.RADIANCE_PIN.get());
 				entries.accept(PastelItems.TOTEM_PENDANT.get());
 				entries.accept(PastelItems.TAKE_OFF_BELT.get());
-				entries.accept(PastelEnchantmentHelper.getEnchantedStack(lookup, PastelItems.TAKE_OFF_BELT.get(), Map.of(Enchantments.POWER, 5, Enchantments.FEATHER_FALLING, 4)));
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.TAKE_OFF_BELT.get(), Map.of(Enchantments.POWER, 5, Enchantments.FEATHER_FALLING, 4)));
 				entries.accept(PastelItems.AZURE_DIKE_BELT.get());
 				entries.accept(PastelItems.AZURE_DIKE_RING.get());
 				entries.accept(PastelItems.SHIELDGRASP_AMULET.get());
@@ -314,7 +314,7 @@ public class PastelItemGroups {
 				entries.accept(PastelItems.LAURELS_OF_SERENITY.get());
 				entries.accept(PastelItems.LAURELS_OF_SERENITY.get().getFullStack());
 				entries.accept(PastelItems.GLEAMING_PIN.get());
-				entries.accept(PastelEnchantmentHelper.getEnchantedStack(lookup, PastelItems.GLEAMING_PIN.get(), Map.of(PastelEnchantments.SNIPING, 2)));
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.GLEAMING_PIN.get(), Map.of(PastelEnchantments.SNIPING, 2)));
 				entries.accept(PastelItems.LESSER_POTION_PENDANT.get());
 				entries.accept(PastelItems.GREATER_POTION_PENDANT.get());
 				entries.accept(PastelItems.ASHEN_CIRCLET.get());
@@ -331,10 +331,10 @@ public class PastelItemGroups {
 				// OTHER
 				entries.accept(PastelItems.CRAFTING_TABLET.get());
 				entries.accept(PastelBlocks.BOTTOMLESS_BUNDLE.get());
-				entries.accept(PastelEnchantmentHelper.getEnchantedStack(lookup, PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem(), Map.of(Enchantments.POWER, 5, PastelEnchantments.VOIDING, 1)));
+				entries.accept(Ench.getEnchantedStack(lookup, PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem(), Map.of(Enchantments.POWER, 5, PastelEnchantments.VOIDING, 1)));
 
 				entries.accept(PastelItems.KNOWLEDGE_GEM.get());
-				ItemStack enchantedKnowledgeGemStack = PastelEnchantmentHelper.getEnchantedStack(lookup, PastelItems.KNOWLEDGE_GEM.get().asItem(), Map.of(Enchantments.EFFICIENCY, 5, Enchantments.QUICK_CHARGE, 3));
+				ItemStack enchantedKnowledgeGemStack = Ench.getEnchantedStack(lookup, PastelItems.KNOWLEDGE_GEM.get().asItem(), Map.of(Enchantments.EFFICIENCY, 5, Enchantments.QUICK_CHARGE, 3));
 				entries.accept(enchantedKnowledgeGemStack.copy());
 
 				ItemStack knowledgeGemStack = PastelItems.KNOWLEDGE_GEM.get().getDefaultInstance();
@@ -355,16 +355,16 @@ public class PastelItemGroups {
 				entries.accept(PastelItems.BAG_OF_HOLDING.get());
 				entries.accept(PastelItems.RADIANCE_STAFF.get());
 				entries.accept(PastelItems.NATURES_STAFF.get());
-				entries.accept(PastelEnchantmentHelper.getEnchantedStack(lookup, PastelItems.NATURES_STAFF.get(), Map.of(Enchantments.EFFICIENCY, 5)));
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.NATURES_STAFF.get(), Map.of(Enchantments.EFFICIENCY, 5)));
 				entries.accept(PastelItems.STAFF_OF_REMEMBRANCE.get());
 				entries.accept(PastelItems.CONSTRUCTORS_STAFF.get());
 				entries.accept(PastelItems.EXCHANGING_STAFF.get());
-				PastelEnchantmentHelper.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), Enchantments.FORTUNE, 3, false, false).ifPresent(entries::accept);
-				PastelEnchantmentHelper.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), Enchantments.SILK_TOUCH, 1, false, false).ifPresent(entries::accept);
-				PastelEnchantmentHelper.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), PastelEnchantments.RESONANCE, 1, false, false).ifPresent(entries::accept);
+				Ench.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), Enchantments.FORTUNE, 3, false, false).ifPresent(entries::accept);
+				Ench.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), Enchantments.SILK_TOUCH, 1, false, false).ifPresent(entries::accept);
+				Ench.addOrUpgradeEnchantmentOpt(lookup, PastelItems.EXCHANGING_STAFF.get().getDefaultInstance(), PastelEnchantments.RESONANCE, 1, false, false).ifPresent(entries::accept);
 				entries.accept(PastelItems.BLOCK_FLOODER.get());
 				entries.accept(PastelItems.ENDER_SPLICE.get());
-				entries.accept(PastelEnchantmentHelper.getEnchantedStack(lookup, PastelItems.ENDER_SPLICE.get(), Map.of(PastelEnchantments.RESONANCE, 1, PastelEnchantments.INDESTRUCTIBLE, 1)));
+				entries.accept(Ench.getEnchantedStack(lookup, PastelItems.ENDER_SPLICE.get(), Map.of(PastelEnchantments.RESONANCE, 1, PastelEnchantments.INDESTRUCTIBLE, 1)));
 				entries.accept(PastelItems.PERTURBED_EYE.get());
 				entries.accept(PastelItems.PIPE_BOMB.get());
 				entries.accept(PastelItems.CRESCENT_CLOCK.get());

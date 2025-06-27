@@ -9,7 +9,7 @@ import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.components.InertiaComponent;
 import earth.terrarium.pastel.entity.spawners.ShootingStarSpawner;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.TimeHelper;
 import earth.terrarium.pastel.inventories.AutoCraftingMode;
@@ -18,7 +18,6 @@ import earth.terrarium.pastel.items.tools.GlassCrestCrossbowItem;
 import earth.terrarium.pastel.items.tools.TuningStampItem;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
-import earth.terrarium.pastel.progression.UnlockToastManager;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelDimensions;
@@ -91,7 +90,7 @@ public class PastelMiscEvents {
 		ItemStack crossbow = shooter.getItemInHand(shooter.getUsedItemHand());
 		Level level = shooter.level();
 
-		int snipingLevel = PastelEnchantmentHelper.getLevel(level.registryAccess(), PastelEnchantments.SNIPING, crossbow);
+		int snipingLevel = Ench.getLevel(level.registryAccess(), PastelEnchantments.SNIPING, crossbow);
 		if (snipingLevel > 0) {
 			projectile.setDeltaMovement(projectile.getDeltaMovement().scale(1.25F * snipingLevel)); // TODO: is this a sensible value?
 		}
@@ -296,7 +295,7 @@ public class PastelMiscEvents {
 		var state = event.getState();
 
 		ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-		if (PastelEnchantmentHelper.hasEnchantment(player.level().registryAccess(), PastelEnchantments.INERTIA, stack)) {
+		if (Ench.hasEnchantment(player.level().registryAccess(), PastelEnchantments.INERTIA, stack)) {
 			InertiaComponent inertia = stack.getOrDefault(PastelDataComponentTypes.INERTIA, InertiaComponent.DEFAULT);
 			long inertiaAmount = state.is(inertia.lastMined()) ? inertia.count() + 1 : 1;
 			stack.set(PastelDataComponentTypes.INERTIA, new InertiaComponent(state.getBlock(), inertiaAmount));

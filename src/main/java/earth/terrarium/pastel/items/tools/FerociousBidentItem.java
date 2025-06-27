@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
@@ -38,7 +38,7 @@ public class FerociousBidentItem extends MalachiteBidentItem implements SlotBack
 	
 	@Override
 	public int getRiptideLevel(HolderLookup.Provider lookup, ItemStack stack) {
-		return Math.max(PastelEnchantmentHelper.getLevel(lookup, Enchantments.RIPTIDE, stack), BUILTIN_RIPTIDE_LEVEL);
+		return Math.max(Ench.getLevel(lookup, Enchantments.RIPTIDE, stack), BUILTIN_RIPTIDE_LEVEL);
 	}
 
 	@Override

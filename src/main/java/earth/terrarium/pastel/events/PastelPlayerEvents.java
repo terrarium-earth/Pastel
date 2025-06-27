@@ -61,7 +61,7 @@ public class PastelPlayerEvents {
 
     private static void applyImprovedCritical(CriticalHitEvent event) {
         var player = event.getEntity();
-        var icl = PastelEnchantmentHelper.getLevel(player.level().registryAccess(), PastelEnchantments.IMPROVED_CRITICAL, event.getEntity().getMainHandItem());
+        var icl = Ench.getLevel(player.level().registryAccess(), PastelEnchantments.IMPROVED_CRITICAL, event.getEntity().getMainHandItem());
         event.setDamageMultiplier(event.getDamageMultiplier() + ImprovedCriticalHelper.getAddtionalCritDamageMultiplier(icl));
     }
 

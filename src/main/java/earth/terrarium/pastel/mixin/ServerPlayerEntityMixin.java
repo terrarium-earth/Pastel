@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.helpers.enchantments.DisarmingHelper;
 import earth.terrarium.pastel.items.trinkets.GleamingPinItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
@@ -45,7 +45,7 @@ public abstract class ServerPlayerEntityMixin {
 			}
 			
 			if (source.getEntity() instanceof LivingEntity livingSource) {
-				int disarmingLevel = PastelEnchantmentHelper.getLevel(world.registryAccess(), PastelEnchantments.DISARMING, livingSource.getMainHandItem());
+				int disarmingLevel = Ench.getLevel(world.registryAccess(), PastelEnchantments.DISARMING, livingSource.getMainHandItem());
 				if (disarmingLevel > 0 && Math.random() < disarmingLevel * PastelCommon.CONFIG.DisarmingChancePerLevelPlayers) {
 					DisarmingHelper.disarmEntity(thisPlayer);
 				}

@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.item.SplittableItem;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.entity.entity.DraconicTwinswordEntity;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
@@ -87,7 +87,7 @@ public class DraconicTwinswordItem extends SwordItem implements SplittableItem, 
 		
 		twinsword.absMoveTo(user.getX() + f * 1.334, user.getEyeY() - 0.2, user.getZ() + h * 1.334);
 		twinsword.setDeltaMovement(0, strength, 0);
-		twinsword.setMaxPierce(PastelEnchantmentHelper.getLevel(world.registryAccess(), Enchantments.PIERCING, stack));
+		twinsword.setMaxPierce(Ench.getLevel(world.registryAccess(), Enchantments.PIERCING, stack));
 		twinsword.hasImpulse = true;
 		twinsword.hurtMarked = true;
 		twinsword.pickup = AbstractArrow.Pickup.DISALLOWED;
@@ -229,7 +229,7 @@ public class DraconicTwinswordItem extends SwordItem implements SplittableItem, 
 	@Override
 	public AABB getSweepHitBox(ItemStack stack, Player player, Entity target) {
 		var box = super.getSweepHitBox(stack, player, target);
-		var channeling = PastelEnchantmentHelper.getLevel(player.registryAccess(), Enchantments.CHANNELING, stack) + 1;
+		var channeling = Ench.getLevel(player.registryAccess(), Enchantments.CHANNELING, stack) + 1;
 		var size = channeling * 2 + 0.5;
 		box = box.inflate(size, channeling * 0.4, size);
 

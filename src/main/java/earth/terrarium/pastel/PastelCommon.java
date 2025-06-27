@@ -16,6 +16,7 @@ import earth.terrarium.pastel.data_loaders.NaturesStaffConversionDataLoader;
 import earth.terrarium.pastel.entity.PastelEntitySubPredicateTypes;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
+import earth.terrarium.pastel.events.PastelDamageEvents;
 import earth.terrarium.pastel.events.PastelEffectEvents;
 import earth.terrarium.pastel.events.PastelEntityEvents;
 import earth.terrarium.pastel.events.PastelEquipmentEvents;
@@ -251,6 +252,7 @@ public class PastelCommon {
 		logInfo("Registering Event Listeners...");
 		PastelMiscEvents.register();
 		PastelEntityEvents.register();
+		PastelDamageEvents.register();
 		PastelPlayerEvents.register();
 		PastelEquipmentEvents.register();
 		PastelEffectEvents.register(pastelBus);

@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.helpers.AoEHelper;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -87,7 +87,7 @@ public class MiningProjectileEntity extends MagicProjectileEntity {
 					return false;
 				}
 				boolean suitable = this.toolStack.isCorrectToolForDrops(state);
-				int efficiencyLevel = PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.EFFICIENCY, this.toolStack);
+				int efficiencyLevel = Ench.getLevel(level().registryAccess(), Enchantments.EFFICIENCY, this.toolStack);
 				return hardness <= 6 + (suitable ? 4 + efficiencyLevel : 0);
 			};
 			AoEHelper.breakBlocksAround(player, this.toolStack, blockHitResult.getBlockPos(), MINING_RANGE, minablePredicate);

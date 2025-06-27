@@ -2,7 +2,7 @@ package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.helpers.enchantments.ImprovedCriticalHelper;
 import earth.terrarium.pastel.items.tools.DraconicTwinswordItem;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
@@ -193,7 +193,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 		
 		var propelled = isPropelled();
 		ItemStack stack = getTrackedStack();
-		var channeling = PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
+		var channeling = Ench.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
 		Entity owner = this.getOwner();
 		
 		if (piercedEntities.contains(attacked))
@@ -258,7 +258,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 	}
 	
 	private void applyInertiaEffects(ItemStack stack) {
-		var inertia = PastelEnchantmentHelper.getLevel(level().registryAccess(), PastelEnchantments.INERTIA, stack);
+		var inertia = Ench.getLevel(level().registryAccess(), PastelEnchantments.INERTIA, stack);
 		if (inertia > 0) {
 			damageMult += inertia * 0.1675F;
 			if (velMult < 2) {
@@ -272,7 +272,7 @@ public class DraconicTwinswordEntity extends BidentBaseEntity {
 		var pos = blockHitResult.getBlockPos();
 		var state = level().getBlockState(pos);
 		var stack = getTrackedStack();
-		var channeling = PastelEnchantmentHelper.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
+		var channeling = Ench.getLevel(level().registryAccess(), Enchantments.CHANNELING, stack);
 		var damage = adjustDamage(getDamage(stack), channeling);
 		var damageSource = PastelDamageTypes.impaling(level(), this, getOwner());
 		

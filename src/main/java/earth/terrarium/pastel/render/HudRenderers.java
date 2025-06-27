@@ -48,7 +48,7 @@ public class HudRenderers {
 
 			var cameraPlayer = Minecraft.getInstance().player;
 			var x = gui.guiWidth() / 2 - 91;
-			var y = gui.guiWidth() / 2 - 22;
+			var y = gui.guiHeight() - Minecraft.getInstance().gui.leftHeight;
 			
 			DikeShieldData azureDikeComponent = AzureDikeProvider.getAzureDikeComponent(cameraPlayer);
 			int maxCharges = (int) Math.ceil(azureDikeComponent.getMaxProtection());

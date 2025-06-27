@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
@@ -63,8 +63,8 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
     private void processHit(@Nullable Entity target, float effectMult) {
 		var drm = level().registryAccess();
 		var stack = getTrackedStack();
-        var power = PastelEnchantmentHelper.getLevel(drm, Enchantments.POWER, stack) * 0.3F + 1;
-        var efficiency = PastelEnchantmentHelper.getLevel(drm, Enchantments.EFFICIENCY, stack);
+        var power = Ench.getLevel(drm, Enchantments.POWER, stack) * 0.3F + 1;
+        var efficiency = Ench.getLevel(drm, Enchantments.EFFICIENCY, stack);
         var world = this.level();
         var user = getOwner() instanceof LivingEntity livingOwner ? livingOwner : null;
 		

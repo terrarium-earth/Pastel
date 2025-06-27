@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.items.tools.GlassCrestWorkstaffItem;
 import earth.terrarium.pastel.items.tools.WorkstaffItem;
 import earth.terrarium.pastel.networking.c2s_payloads.WorkstaffToggleSelectedPayload;
@@ -62,7 +62,7 @@ public class WorkstaffScreen extends QuickNavigationGridScreen<WorkstaffScreenHa
 			));
 		} else {
 			var drm = Minecraft.getInstance().player.registryAccess();
-			GridEntry enchantmentEntry = PastelEnchantmentHelper.hasEnchantment(drm, Enchantments.FORTUNE, mainHandStack)
+			GridEntry enchantmentEntry = Ench.hasEnchantment(drm, Enchantments.FORTUNE, mainHandStack)
 					? GridEntry.item(Items.FEATHER, Component.translatable("item.pastel.workstaff.gui.silk_touch"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_SILK_TOUCH))
 					: GridEntry.item(PastelBlocks.FOUR_LEAF_CLOVER.get().asItem(), Component.translatable("item.pastel.workstaff.gui.fortune"), (screen) -> WorkstaffScreen.select(WorkstaffItem.GUIToggle.SELECT_FORTUNE));
 

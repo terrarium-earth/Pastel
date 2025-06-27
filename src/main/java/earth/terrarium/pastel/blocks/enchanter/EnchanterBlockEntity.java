@@ -11,7 +11,7 @@ import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.capabilities.*;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.ExperienceHelper;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.inventories.EnchanterInventory;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
@@ -270,7 +270,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	 */
 	public static boolean isValidCenterEnchantingSetup(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
 		ItemStack centerStack = enchanterBlockEntity.virtualInventory.getStackInSlot(0);
-		boolean isEnchantableBookInCenter = PastelEnchantmentHelper.isEnchantableBook(centerStack);
+		boolean isEnchantableBookInCenter = Ench.isEnchantableBook(centerStack);
 		
 		var centerIsEnchantable = (isEnchantableBookInCenter || centerStack.getItem().isEnchantable(centerStack));
 		var hasExpStorage = enchanterBlockEntity.virtualInventory.getStackInSlot(1).getItem() instanceof ExperienceStorageItem;
@@ -295,7 +295,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 								if (enchanterBlockEntity.canOwnerApplyConflictingEnchantments) {
 									enchantedBookWithAdditionalEnchantmentsFound = true;
 									break;
-								} else if (PastelEnchantmentHelper.canCombineAny(centerStack, virtualSlotStack)) {
+								} else if (Ench.canCombineAny(centerStack, virtualSlotStack)) {
 									enchantedBookWithAdditionalEnchantmentsFound = true;
 									break;
 								}
@@ -369,7 +369,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		var highestEnchantments = getHighestEnchantmentsInItemBowls(enchanterBlockEntity);
 		
 		for (var entry : highestEnchantments.entrySet()) {
-			centerStackCopy = PastelEnchantmentHelper.addOrUpgradeEnchantment(centerStackCopy, entry.getKey(), entry.getIntValue(), false, enchanterBlockEntity.canOwnerApplyConflictingEnchantments).getB();
+			centerStackCopy = Ench.addOrUpgradeEnchantment(centerStackCopy, entry.getKey(), entry.getIntValue(), false, enchanterBlockEntity.canOwnerApplyConflictingEnchantments).getB();
 		}
 		
 		int spentExperience = enchanterBlockEntity.currentItemProcessingTime / EnchanterBlockEntity.REQUIRED_TICKS_FOR_EACH_EXPERIENCE_POINT;
@@ -392,14 +392,14 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	}
 	
 	public static ItemEnchantments getHighestEnchantmentsInItemBowls(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
-		return PastelEnchantmentHelper.collectHighestEnchantments(
+		return Ench.collectHighestEnchantments(
 				enchanterBlockEntity.virtualInventory.getInternalList().subList(2, 10));
 	}
 	
 	public static int getRequiredExperienceToEnchantCenterItem(@NotNull EnchanterBlockEntity enchanterBlockEntity) {
 		boolean valid = false;
 		ItemStack centerStack = enchanterBlockEntity.getItem(0);
-		if (!centerStack.isEmpty() && (centerStack.getItem().isEnchantable(centerStack) || PastelEnchantmentHelper.isEnchantableBook(centerStack))) {
+		if (!centerStack.isEmpty() && (centerStack.getItem().isEnchantable(centerStack) || Ench.isEnchantableBook(centerStack))) {
 			ItemStack centerStackCopy = centerStack.copy();
 			var highestEnchantments = getHighestEnchantmentsInItemBowls(enchanterBlockEntity);
 			int requiredExperience = 0;
@@ -408,7 +408,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 				int level = entry.getIntValue();
 				int currentRequired = getRequiredExperienceToEnchantWithEnchantment(centerStackCopy, enchantment, level, enchanterBlockEntity.canOwnerApplyConflictingEnchantments);
 				if (currentRequired > 0) {
-					centerStackCopy = PastelEnchantmentHelper.addOrUpgradeEnchantment(centerStackCopy, enchantment, level, false, enchanterBlockEntity.canOwnerApplyConflictingEnchantments).getB();
+					centerStackCopy = Ench.addOrUpgradeEnchantment(centerStackCopy, enchantment, level, false, enchanterBlockEntity.canOwnerApplyConflictingEnchantments).getB();
 					requiredExperience += currentRequired;
 					valid = true;
 				} else {
@@ -434,7 +434,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	 * @return The required experience to enchant. -1 if the enchantment is not applicable
 	 */
 	public static int getRequiredExperienceToEnchantWithEnchantment(ItemStack stack, Holder<Enchantment> enchantment, int level, boolean allowEnchantmentConflicts) {
-		if (!stack.supportsEnchantment(enchantment) && !PastelEnchantmentHelper.isEnchantableBook(stack)) {
+		if (!stack.supportsEnchantment(enchantment) && !Ench.isEnchantableBook(stack)) {
 			return -1;
 		}
 		
@@ -457,7 +457,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 	
 	public static Integer getEnchantingPrice(ItemStack stack, Holder<Enchantment> enchantment, int level) {
 		int enchantability = Math.max(1, stack.getItem().getEnchantmentValue()); // items like Elytras have an enchantability of 0, but can get unbreaking
-		if (stack.supportsEnchantment(enchantment) || PastelEnchantmentHelper.isEnchantableBook(stack)) {
+		if (stack.supportsEnchantment(enchantment) || Ench.isEnchantableBook(stack)) {
 			return getRequiredExperienceForEnchantment(enchantability, enchantment, level);
 		}
 		return -1;
@@ -576,7 +576,7 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 		drainExperience(xpCost);
 		
 		
-		resultStack = PastelEnchantmentHelper.addOrUpgradeEnchantment(resultStack, upgrade.getEnchantment(), targetLevel, false, true).getB();
+		resultStack = Ench.addOrUpgradeEnchantment(resultStack, upgrade.getEnchantment(), targetLevel, false, true).getB();
 		setItem(0, resultStack);
 		
 		// vanilla

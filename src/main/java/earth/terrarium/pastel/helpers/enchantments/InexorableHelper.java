@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.helpers.enchantments;
 
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelAttributeTags;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import net.minecraft.core.Holder;
@@ -13,7 +13,7 @@ public class InexorableHelper {
 	
 	public static void checkAndRemoveSlowdownModifiers(LivingEntity entity) {
 		var armorInexorable = isArmorActive(entity);
-		var toolInexorable = PastelEnchantmentHelper.hasEnchantment(entity.level().registryAccess(), PastelEnchantments.INEXORABLE, entity.getItemInHand(entity.getUsedItemHand()));
+		var toolInexorable = Ench.hasEnchantment(entity.level().registryAccess(), PastelEnchantments.INEXORABLE, entity.getItemInHand(entity.getUsedItemHand()));
 		
 		var armorAttributes = BuiltInRegistries.ATTRIBUTE.getTag(PastelAttributeTags.INEXORABLE_ARMOR_EFFECTIVE);
 		var toolAttributes = BuiltInRegistries.ATTRIBUTE.getTag(PastelAttributeTags.INEXORABLE_HANDHELD_EFFECTIVE);
@@ -54,6 +54,6 @@ public class InexorableHelper {
 	}
 	
 	public static boolean isArmorActive(LivingEntity entity) {
-		return PastelEnchantmentHelper.hasEnchantment(entity.level().registryAccess(), PastelEnchantments.INEXORABLE, entity.getItemBySlot(EquipmentSlot.CHEST));
+		return Ench.hasEnchantment(entity.level().registryAccess(), PastelEnchantments.INEXORABLE, entity.getItemBySlot(EquipmentSlot.CHEST));
 	}
 }

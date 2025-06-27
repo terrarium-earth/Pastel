@@ -26,7 +26,7 @@ public class PastelEquipmentEvents {
         if (tool == null)
             return;
 
-        var razing = PastelEnchantmentHelper.getLevel(access, PastelEnchantments.RAZING, stack);
+        var razing = Ench.getLevel(access, PastelEnchantments.RAZING, stack);
         if (razing > 0 && tool.isCorrectForDrops(state)) {
             float hardness = state.getBlock().defaultDestroyTime();
             event.setNewSpeed((float) Math.max(1 + hardness, Math.pow(2, 1 + razing / 8F)));
@@ -43,7 +43,7 @@ public class PastelEquipmentEvents {
         if (tool == null)
             return;
 
-        var inertia = PastelEnchantmentHelper.getLevel(access, PastelEnchantments.INERTIA, stack);
+        var inertia = Ench.getLevel(access, PastelEnchantments.INERTIA, stack);
         if (inertia > 0) {
             var component = stack.getOrDefault(PastelDataComponentTypes.INERTIA, InertiaComponent.DEFAULT);
             if (state.is(component.lastMined())) {
@@ -65,7 +65,7 @@ public class PastelEquipmentEvents {
         if (tool == null)
             return;
 
-        if (PastelEnchantmentHelper.hasEnchantment(access, PastelEnchantments.INERTIA, stack) && tool.isCorrectForDrops(state)) {
+        if (Ench.hasEnchantment(access, PastelEnchantments.INERTIA, stack) && tool.isCorrectForDrops(state)) {
             event.setNewSpeed(Math.max(original, tool.getMiningSpeed(state)));
         }
     }

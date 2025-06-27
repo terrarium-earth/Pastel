@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.item.TooltipExtensions;
 import earth.terrarium.pastel.entity.entity.BidentBaseEntity;
 import earth.terrarium.pastel.entity.entity.BidentEntity;
 import earth.terrarium.pastel.entity.entity.BidentMirrorImageEntity;
-import earth.terrarium.pastel.helpers.PastelEnchantmentHelper;
+import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
@@ -101,7 +101,7 @@ public class MalachiteBidentItem extends TridentItem implements Preenchanted, To
 	}
 	
 	public int getRiptideLevel(HolderLookup.Provider lookup, ItemStack stack) {
-		return PastelEnchantmentHelper.getLevel(lookup, Enchantments.RIPTIDE, stack);
+		return Ench.getLevel(lookup, Enchantments.RIPTIDE, stack);
 	}
 	
 	protected void riptide(Level world, Player playerEntity, ItemStack stack, int riptideLevel) {
