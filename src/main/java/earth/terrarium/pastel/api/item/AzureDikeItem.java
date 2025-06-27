@@ -28,12 +28,12 @@ public interface AzureDikeItem {
 		return 1.0F;
 	}
 	
-	default void recalculate(LivingEntity livingEntity) {
-		Level world = livingEntity.level();
+	default void recalculate(LivingEntity user) {
+		Level world = user.level();
 		if (!world.isClientSide) {
-			DikeShieldData azureDikeComponent = AzureDikeProvider.getAzureDikeComponent(livingEntity);
+			DikeShieldData dikeData = AzureDikeProvider.getAzureDikeComponent(user);
 
-			Optional<ICuriosItemHandler> curiosInventory = CuriosApi.getCuriosInventory(livingEntity);
+			Optional<ICuriosItemHandler> curiosInventory = CuriosApi.getCuriosInventory(user);
 			if (curiosInventory.isPresent()) {
 				int maxAzureDike = 0;
 				float rechargeSpeedModifier = 1F;
@@ -51,7 +51,8 @@ public interface AzureDikeItem {
 				int ticksPerPointOfRecharge = (int) Math.max(1, AzureDikeData.BASE_RECHARGE_DELAY_TICKS / rechargeSpeedModifier);
 				int rechargeDelayTicksAfterGettingHit = (int) Math.max(1, AzureDikeData.BASE_RECHARGE_DELAY_TICKS_AFTER_DAMAGE / rechargeDelayAfterDamageModifier);
 				
-				azureDikeComponent.set(Math.round((maxAzureDike * maxAzureDikeMultiplier)), ticksPerPointOfRecharge, rechargeDelayTicksAfterGettingHit, false);
+				dikeData.set(Math.round((maxAzureDike * maxAzureDikeMultiplier)), ticksPerPointOfRecharge, rechargeDelayTicksAfterGettingHit, false);
+				((AzureDikeData) dikeData).sync(user);
 			}
 		}
 	}

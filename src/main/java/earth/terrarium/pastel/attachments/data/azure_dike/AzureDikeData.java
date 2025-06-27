@@ -118,11 +118,15 @@ public class AzureDikeData implements DikeShieldData {
 			currentProt = Math.min(maxProt, currentProt + 1);
 			this.rechargeDelay = this.rechargeTicks;
 
-			AttachmentUtil.syncToTracking(new Payload(provider.getId(), this), provider.level(), provider.blockPosition());
+			sync(provider);
 			if (provider instanceof ServerPlayer serverPlayerEntity) {
 				PastelAdvancementCriteria.AZURE_DIKE_CHARGE.trigger(serverPlayerEntity, this.currentProt, this.rechargeTicks, 1);
 			}
 		}
+	}
+
+	public void sync(LivingEntity provider) {
+		AttachmentUtil.syncToTracking(new Payload(provider.getId(), this), provider.level(), provider.blockPosition());
 	}
 
 	public record Payload(int entityId, float maxProt, float currentProt, int rechargeTicks, int rechargeDelayPostTick, int rechargeDelay) implements CustomPacketPayload {

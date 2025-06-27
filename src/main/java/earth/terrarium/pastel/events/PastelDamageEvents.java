@@ -31,6 +31,7 @@ import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -178,11 +179,15 @@ public class PastelDamageEvents {
 
     private static void handlePuffCirclet(LivingFallEvent event) {
         var entity = event.getEntity();
+
+        if (!CuriosApi.getCuriosInventory(entity).map(i -> i.isEquipped(PastelItems.PUFF_CIRCLET.asItem())).orElse(false))
+            return;
+
         var damage = ((LivingEntityAccessor) entity).callCalculateFallDamage(event.getDistance(), event.getDamageMultiplier());
         var cost = Math.min(damage, PuffCircletItem.FALL_DAMAGE_NEGATING_COST);
         var random = entity.getRandom();
 
-        if (AzureDikeProvider.getAzureDikeCharges(entity) < cost)
+        if (cost <= 0 || AzureDikeProvider.getAzureDikeCharges(entity) < cost)
             return;
 
         AzureDikeProvider.absorbDamage(entity, cost);
