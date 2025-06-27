@@ -1,0 +1,22 @@
+{
+  "type": "xycraft_machines:extractor",
+  "adjacent": [
+    {
+      "predicate_type": "xycraft_core:fluid_type_rule",
+      "fluid_type": "pastel:dragonrot"
+    },
+    {
+      "predicate_type": "xycraft_core:fluid_type_rule",
+      "fluid_type": "minecraft:lava"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "minecraft:blackstone"
+  },
+  "target": {
+    "block": "minecraft:blackstone",
+    "predicate_type": "xycraft_core:block_rule"
+  },
+  "ticks": 30
+}

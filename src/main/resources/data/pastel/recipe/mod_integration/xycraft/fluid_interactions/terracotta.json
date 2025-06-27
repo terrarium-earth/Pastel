@@ -1,0 +1,22 @@
+{
+  "type": "xycraft_machines:extractor",
+  "adjacent": [
+    {
+      "predicate_type": "xycraft_core:fluid_type_rule",
+      "fluid_type": "pastel:midnight_solution"
+    },
+    {
+      "predicate_type": "xycraft_core:fluid_type_rule",
+      "fluid_type": "minecraft:lava"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "minecraft:terracotta"
+  },
+  "target": {
+    "block": "minecraft:terracotta",
+    "predicate_type": "xycraft_core:block_rule"
+  },
+  "ticks": 30
+}

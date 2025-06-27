@@ -1,0 +1,22 @@
+{
+  "type": "xycraft_machines:extractor",
+  "adjacent": [
+    {
+      "predicate_type": "xycraft_core:fluid_tag_rule",
+      "tag": "minecraft:water"
+    },
+    {
+      "predicate_type": "xycraft_core:fluid_type_rule",
+      "fluid_type": "pastel:humus"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "minecraft:dirt"
+  },
+  "target": {
+    "block": "minecraft:dirt",
+    "predicate_type": "xycraft_core:block_rule"
+  },
+  "ticks": 30
+}
