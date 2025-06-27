@@ -95,12 +95,13 @@ public class PastelDamageEvents {
     }
 
     // Holy lesbians
-    private static void handleDike(LivingDamageEvent.Pre event) {
+    private static void handleDike(LivingIncomingDamageEvent event) {
         if (event.getSource().is(PastelDamageTypeTags.BYPASSES_DIKE))
             return;
 
         var target = event.getEntity();
         var container = event.getContainer();
+
 
         container.setNewDamage(AzureDikeProvider.absorbDamage(target, container.getNewDamage()));
     }
