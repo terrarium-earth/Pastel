@@ -209,7 +209,9 @@ public class TitrationBarrelBlockEntity extends BlockEntity implements FluidTank
 		if (player != null) {
 			PastelAdvancementCriteria.TITRATION_BARREL_TAPPING.trigger((ServerPlayer) player, harvestedStack, daysSealed, inventoryCount);
 
-            player.displayClientMessage(message, true);
+
+            if (message != null)
+				player.displayClientMessage(message, true);
         }
 		
 		if (shouldReset) {
