@@ -38,6 +38,8 @@ repositories {
     maven(url = "https://repo.unascribed.com") // Ears API
 
     maven(url = "https://maven2.bai.lol") // wthit
+
+	maven(url = "https://cursemaven.com") // xycraft
 }
 
 cloche {
@@ -120,7 +122,7 @@ cloche {
                 modCompileOnly(module(group = "me.shedaniel", name = "RoughlyEnoughItems-neoforge", version = "16.0.788"))
 
                 modImplementation(additionalEntityAttributes)
-                implementation(jgrapht)
+                compileOnly(jgrapht)
                 implementation(jheaps)
 
                 modCompileOnly(module(group = "mcp.mobius.waila", name = "wthit-api", version = "neo-12.4.1"))
@@ -130,12 +132,19 @@ cloche {
                 modCompileOnly("maven.modrinth:colorful-hearts:10.3.8") { isTransitive = false }
                 modCompileOnly("maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge") { isTransitive = false }
                 modCompileOnly("com.unascribed:ears-api:1.4.6")
-                modCompileOnly("maven.modrinth:create:1.21.1-6.0.4") { isTransitive = false }
-                modCompileOnly("maven.modrinth:lodestonelib:1.7.0") { isTransitive = false }
-                modCompileOnly("maven.modrinth:malum:1.20.1-1.6.5") { isTransitive = false }
-                modCompileOnly("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
                 modCompileOnly("maven.modrinth:botania:1.20.1-448-forge")
-                modCompileOnly("maven.modrinth:vanity:xWfEA0yC")
+				modCompileOnly("maven.modrinth:vanity:xWfEA0yC") // compile only cuz accessories
+
+                modImplementation("maven.modrinth:create:1.21.1-6.0.4") { isTransitive = false }
+                modImplementation("maven.modrinth:lodestonelib:1.7.1") { isTransitive = false }
+                modImplementation("maven.modrinth:malum:1.7.3.1") { isTransitive = false }
+                modImplementation("maven.modrinth:travelersbackpack:1.21.1-10.1.20")
+				modRuntimeOnly("maven.modrinth:ae2:19.2.12") { isTransitive = false }
+				modRuntimeOnly("maven.modrinth:guideme:21.1.13") { isTransitive = false }
+				modRuntimeOnly("curse.maven:xycraft-653786:5601037") { isTransitive = false }
+				modRuntimeOnly("curse.maven:xycraft-machines-653791:5601045") { isTransitive = false }
+				modRuntimeOnly("curse.maven:xycraft-world-653789:5601038") { isTransitive = false }
+				modRuntimeOnly("maven.modrinth:jei:zRGLFYRx") // cuz xycraft >:(
             }
 
             dependencies {

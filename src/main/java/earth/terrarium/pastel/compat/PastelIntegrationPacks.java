@@ -10,6 +10,7 @@ import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;
 import earth.terrarium.pastel.compat.travelersbackpack.TravelersBackpackCompat;
 import net.neoforged.bus.api.*;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,10 +55,12 @@ public class PastelIntegrationPacks {
 
 		registerIntegrationPack(AE2_ID, () -> new AE2Compat());
 		registerIntegrationPack(GOBBER_ID, () -> new GobberCompat());
-		registerIntegrationPack(TRAVELERS_BACKPACK_ID, () -> new TravelersBackpackCompat());
 		registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
 		//registerIntegrationPack(FARMERSDELIGHT_ID, () -> new FDCompat());
 		registerIntegrationPack(CREATE_ID, () -> new CreateCompat());
+		bus.addListener((FMLCommonSetupEvent event) -> {
+			registerIntegrationPack(TRAVELERS_BACKPACK_ID, () -> new TravelersBackpackCompat());
+		});
 	}
 
 	public static void registerClient() {
