@@ -150,11 +150,9 @@ public class PastelLootPoolModifiers {
 		put(PastelCommon.locate("entities/eraser"), new TreasureHunterDropDefinition(PastelSkullType.ERASER, 0.1F));
 	}};
 
-	private static final Map<ResourceKey<LootTable>, LootTable> DELAYED_TABLES = new HashMap<>();
-
 	private static void addEntry(LootPool pool, LootPoolEntryContainer.Builder<?> entry) {
 		// TODO
-		pool.entries.add(entry.build());
+		//pool.entries.add(entry.build());
 	}
 
 	// TODO Migrate to loot modifiers add AddTableLootModifier and custom LootModifiers
