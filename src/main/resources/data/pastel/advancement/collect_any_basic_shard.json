@@ -13,25 +13,25 @@
   "parent": "pastel:pastel",
   "criteria": {
     "has_amethyst_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/amethyst"
       }
     },
     "has_citrine_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/citrine"
       }
     },
     "has_topaz_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/topaz"
       }
     },
     "gotten_previous": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:pastel"
       }

@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_liquid_crystal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "collected_neolith": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_neolith"
       }

@@ -1,7 +1,7 @@
 {
   "criteria": {
     "reached_lategame": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/pastel_lategame"
       }

@@ -1,19 +1,19 @@
 {
   "criteria": {
     "built_enchanting_structure": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/build_enchanting_structure"
       }
     },
     "collected_light_gray_pigment": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_pigment/light_gray"
       }
     },
     "collected_paltaeria": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_paltaeria"
       }

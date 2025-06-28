@@ -1,25 +1,25 @@
 {
   "criteria": {
     "unlocked_jeopardant": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/jeopardant"
       }
     },
     "unlocked_azure_dike_ring": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/azure_dike_ring"
       }
     },
     "unlocked_heartsingers_reward": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/heartsingers_reward"
       }
     },
     "unlocked_ring_of_denser_steps": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/ring_of_denser_steps"
       }

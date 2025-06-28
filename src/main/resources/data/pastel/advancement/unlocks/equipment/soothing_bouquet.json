@@ -1,25 +1,25 @@
 {
   "criteria": {
     "built_complex_pedestal_structure": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
       }
     },
     "collected_nectardew": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_nectardew"
       }
     },
     "collected_pure_resource": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_pure_resource"
       }
     },
     "apply_eternal_slumber": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/status_effects/eternal_slumber"
       }

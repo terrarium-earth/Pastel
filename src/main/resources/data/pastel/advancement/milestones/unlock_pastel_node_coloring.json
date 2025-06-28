@@ -1,13 +1,13 @@
 {
   "criteria": {
     "created_pure_azurite": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/grow_azurite_in_crystallarieum"
       }
     },
     "has_any_advanced_pastel_network_advacnement": {
-      "trigger": "pastel:advancement_count",
+      "trigger": "revelationary:advancement_count",
       "conditions": {
         "count": {
           "min": 1

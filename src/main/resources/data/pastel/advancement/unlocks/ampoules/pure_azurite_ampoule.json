@@ -1,19 +1,19 @@
 {
   "criteria": {
     "unlocked_raw_azurite_ampoule": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/ampoules/raw_azurite_ampoule"
       }
     },
     "collected_paltaeria_gem": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_paltaeria_gem"
       }
     },
     "created_pure_azurite": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/grow_azurite_in_crystallarieum"
       }

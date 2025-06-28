@@ -1,13 +1,13 @@
 {
   "criteria": {
     "has_midnight_chip_advancement": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_midnight_chip"
       }
     },
     "has_azurite_advancement": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_azurite"
       }

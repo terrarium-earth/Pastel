@@ -13,19 +13,19 @@
   },
   "criteria": {
     "built_complex_pedestal_structure": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
       }
     },
     "collected_enough_hints": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_enough_hints"
       }
     },
     "collected_mysterious_locket": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_mysterious_locket"
       }

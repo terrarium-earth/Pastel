@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_enchanter": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/enchanter"
       }
     },
     "unlocked_spirit_instiller": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/spirit_instiller"
       }

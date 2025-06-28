@@ -1,19 +1,19 @@
 {
   "criteria": {
     "collected_gray_pigment": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_pigment/gray"
       }
     },
     "collected_light_gray_pigment": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_pigment/light_gray"
       }
     },
     "collected_dragonbone": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:break_cracked_dragonbone"
       }

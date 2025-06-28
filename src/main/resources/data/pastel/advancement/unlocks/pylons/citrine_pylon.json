@@ -1,13 +1,13 @@
 {
   "criteria": {
     "placed_pedestal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:place_pedestal"
       }
     },
     "collected_gemstone_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/citrine"
       }

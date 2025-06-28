@@ -1,19 +1,19 @@
 {
   "criteria": {
     "collected_jade_vine_petals": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_jade_vine_petals"
       }
     },
     "collected_blood_orchid_petal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_blood_orchid_petal"
       }
     },
     "unlocked_potion_workshop": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/potion_workshop"
       }

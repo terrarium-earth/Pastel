@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_razing_crafting": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/enchantments/razing_crafting"
       }
     },
     "unlocked_dragonrending_pickaxe": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/equipment/dragonrending_pickaxe"
       }

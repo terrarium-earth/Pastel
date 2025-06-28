@@ -1,25 +1,25 @@
 {
   "criteria": {
     "collected_moonstone_core": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_moonstone_core"
       }
     },
     "grown_malachite_in_crystallarieum": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/grow_malachite_in_crystallarieum"
       }
     },
     "unlocked_crystallarieum": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/crystallarieum"
       }
     },
     "unlocked_ink": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:milestones/unlock_ink_use"
       }

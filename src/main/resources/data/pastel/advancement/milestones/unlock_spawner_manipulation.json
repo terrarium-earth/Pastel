@@ -1,7 +1,7 @@
 {
   "criteria": {
     "broken_spawner_with_resonance_tool": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/break_spawner_with_resonance_tool"
       }

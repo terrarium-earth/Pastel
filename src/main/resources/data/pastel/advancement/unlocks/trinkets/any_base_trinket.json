@@ -1,37 +1,37 @@
 {
   "criteria": {
     "unlocked_fanciful_tuff_ring": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/fanciful_tuff_ring"
       }
     },
     "unlocked_fanciful_circlet": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/fanciful_circlet"
       }
     },
     "unlocked_fanciful_belt": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/fanciful_belt"
       }
     },
     "unlocked_fanciful_pendant": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/fanciful_pendant"
       }
     },
     "unlocked_fanciful_gloves": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/fanciful_gloves"
       }
     },
     "unlocked_fanciful_bismuth_ring": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/fanciful_bismuth_ring"
       }

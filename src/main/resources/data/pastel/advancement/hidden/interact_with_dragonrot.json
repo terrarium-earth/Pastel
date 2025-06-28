@@ -17,7 +17,7 @@
       }
     },
     "entered_dragonrot_swamp": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/visit_dd_biomes/dragonrot_swamp"
       }

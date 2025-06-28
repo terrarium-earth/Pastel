@@ -107,8 +107,6 @@ public class PastelCommon {
 	}
 
 	public PastelCommon(IEventBus pastelBus, ModContainer container) {
-		Revelationary.onInitialize(pastelBus);
-
 		logInfo("Starting Common Startup");
 
 		// Register internals

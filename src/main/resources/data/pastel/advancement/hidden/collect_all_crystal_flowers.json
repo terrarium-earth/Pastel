@@ -1,7 +1,7 @@
 {
   "criteria": {
     "found_crystal_gardens": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/visit_dd_biomes/crystal_gardens"
       }

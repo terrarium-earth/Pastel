@@ -1,7 +1,7 @@
 {
   "criteria": {
     "unlocked_shooting_stars": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:milestones/unlock_shooting_stars"
       }

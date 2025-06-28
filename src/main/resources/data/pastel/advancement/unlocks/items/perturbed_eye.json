@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_paltaeria": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_paltaeria"
       }
     },
     "collected_radiating_ender": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_radiating_ender"
       }

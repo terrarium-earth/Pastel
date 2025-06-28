@@ -14,13 +14,13 @@
   },
   "criteria": {
     "found_poisoners_handbook": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_cookbooks/poisoners_handbook"
       }
     },
     "gotten_previous": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/enter_strange_preservation_ruin"
       }

@@ -1,19 +1,19 @@
 {
   "criteria": {
     "solved_color_mixing_preservation_ruin": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:solve_color_mixing_preservation_ruin"
       }
     },
     "solved_dike_gate_preservation_ruin": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:solve_dike_gate_preservation_ruin"
       }
     },
     "solved_wireless_redstone_preservation_ruin": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:solve_wireless_redstone_preservation_ruin"
       }

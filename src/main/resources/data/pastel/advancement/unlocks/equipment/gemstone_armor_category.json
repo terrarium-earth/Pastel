@@ -1,31 +1,31 @@
 {
   "criteria": {
     "built_basic_structure": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:build_basic_pedestal_structure"
       }
     },
     "collected_ender_eye": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_vanilla/ender_eye"
       }
     },
     "collected_nautilus_shell": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_vanilla/nautilus_shell"
       }
     },
     "collected_phantom_membrane": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_vanilla/phantom_membrane"
       }
     },
     "collected_ghast_tear": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_vanilla/ghast_tear"
       }

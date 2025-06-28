@@ -9,7 +9,7 @@
       }
     },
     "collected_pure_resource": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_pure_resource"
       }

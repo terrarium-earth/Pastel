@@ -1,25 +1,25 @@
 {
   "criteria": {
     "has_vegetal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_vegetal"
       }
     },
     "collected_amethyst_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/amethyst"
       }
     },
     "collected_citrine_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/citrine"
       }
     },
     "collected_onyx_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:create_onyx_shard"
       }

@@ -1,7 +1,7 @@
 {
   "criteria": {
     "collected_vegetal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_vegetal"
       }

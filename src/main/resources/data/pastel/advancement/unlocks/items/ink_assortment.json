@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_basic_ink_storage_items": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/items/basic_ink_storage_items"
       }
     },
     "collected_four_leaf_clover": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_four_leaf_clover"
       }

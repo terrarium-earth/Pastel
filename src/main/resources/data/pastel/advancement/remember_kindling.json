@@ -22,19 +22,19 @@
       }
     },
     "interacted_with_kindling": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/entity_interact/kindling"
       }
     },
     "unlocked_kindling_memories": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/kindling_memory"
       }
     },
     "gotten_previous": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:break_cracked_dragonbone"
       }

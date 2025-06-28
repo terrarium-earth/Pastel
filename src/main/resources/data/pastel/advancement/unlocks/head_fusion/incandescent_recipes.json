@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_head_fusion": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/head_fusion/basic_recipes"
       }
     },
     "collected_blazing_crystal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_blazing_crystal"
       }

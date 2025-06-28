@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_spawner_manipulation": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:milestones/unlock_spawner_manipulation"
       }
     },
     "collected_downstone_fragments": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_downstone_fragments"
       }

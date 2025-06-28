@@ -1,7 +1,7 @@
 {
   "criteria": {
     "placed_pedestal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:place_pedestal"
       }
@@ -15,7 +15,7 @@
       }
     },
     "gotten_radiating_ender": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_radiating_ender"
       }

@@ -1,19 +1,19 @@
 {
   "criteria": {
     "harvested_moonstruck_nectar": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/harvest_moonstruck_nectar"
       }
     },
     "collected_jade_vine_petals": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_jade_vine_petals"
       }
     },
     "collected_jade_jelly": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_jade_jelly"
       }

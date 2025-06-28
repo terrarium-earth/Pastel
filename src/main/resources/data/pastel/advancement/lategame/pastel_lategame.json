@@ -13,7 +13,7 @@
   },
   "criteria": {
     "finished_midgame": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/enter_dimension"
       }

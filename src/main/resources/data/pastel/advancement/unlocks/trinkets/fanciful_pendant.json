@@ -1,25 +1,25 @@
 {
   "criteria": {
     "unlocked_totem_pendant": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/totem_pendant"
       }
     },
     "unlocked_lesser_potion_pendant": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/lesser_potion_pendant"
       }
     },
     "unlocked_greater_potion_pendant": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/greater_potion_pendant"
       }
     },
     "unlocked_shieldgrasp_amulet": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/trinkets/shieldgrasp_amulet"
       }

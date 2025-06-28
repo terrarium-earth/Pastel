@@ -1,13 +1,13 @@
 {
   "criteria": {
     "crafted_using_pedestal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:craft_using_pedestal"
       }
     },
     "collected_radiating_ender": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_radiating_ender"
       }

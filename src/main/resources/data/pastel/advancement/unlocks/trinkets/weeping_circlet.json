@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_liquid_crystal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "collected_mermaids_gem": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_mermaids_gem"
       }
@@ -23,7 +23,7 @@
       }
     },
     "built_advanced_pedestal_structure": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/build_advanced_pedestal_structure"
       }

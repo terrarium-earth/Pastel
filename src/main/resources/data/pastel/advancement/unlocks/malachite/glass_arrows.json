@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_malachite": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_malachite"
       }
     },
     "plucked_resplendent_feather": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:pluck_resplendent_feather"
       }

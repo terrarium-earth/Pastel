@@ -1,13 +1,13 @@
 {
   "criteria": {
     "crafted_midnight_aberration": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/create_midnight_aberration"
       }
     },
     "collected_midnight_chip": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/collect_midnight_chip"
       }

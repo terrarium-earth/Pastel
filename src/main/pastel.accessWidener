@@ -58,7 +58,3 @@ accessible method net/minecraft/world/level/block/Blocks woodenButton (Lnet/mine
 # Arrowhead
 accessible class net/minecraft/client/renderer/ItemInHandRenderer$HandRenderSelection
 accessible method net/minecraft/world/item/CrossbowItem getProjectileShotVector (Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/Vec3;F)Lorg/joml/Vector3f;
-
-# Fuck
-accessible class net/minecraft/server/ReloadableServerRegistries$EmptyTagLookupWrapper
-accessible method net/minecraft/server/ReloadableServerRegistries$EmptyTagLookupWrapper <init> (Lnet/minecraft/core/RegistryAccess;)V

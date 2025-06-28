@@ -1,19 +1,19 @@
 {
   "criteria": {
     "unlocked_titration_barrel": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/blocks/titration_barrel"
       }
     },
     "collected_nightdew": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_nightdew"
       }
     },
     "created_onyx": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:create_onyx_shard"
       }

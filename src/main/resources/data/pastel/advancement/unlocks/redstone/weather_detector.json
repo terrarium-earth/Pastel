@@ -1,19 +1,19 @@
 {
   "criteria": {
     "placed_pedestal": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:place_pedestal"
       }
     },
     "has_quartz": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_vanilla/quartz"
       }
     },
     "collected_corresponding_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_shards/citrine"
       }

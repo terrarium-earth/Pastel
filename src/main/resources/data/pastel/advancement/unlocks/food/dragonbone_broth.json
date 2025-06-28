@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_prickly_bayleaf": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_prickly_bayleaf"
       }
     },
     "collected_dragonbone": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:break_cracked_dragonbone"
       }

@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_moonstone_core": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_moonstone_core"
       }
     },
     "whoever_reads_this_is_dum_dum": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:__wip"
       }

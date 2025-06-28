@@ -14,37 +14,37 @@
   },
   "criteria": {
     "collected_brewers_handbook": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_cookbooks/brewers_handbook"
       }
     },
     "collected_imbrifer_cookbook": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_cookbooks/imbrifer_cookbook"
       }
     },
     "collected_imperial_cookbook": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_cookbooks/imperial_cookbook"
       }
     },
     "collected_melochites_cookbook_vol_1": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1"
       }
     },
     "collected_melochites_cookbook_vol_2": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2"
       }
     },
     "gotten_previous": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:lategame/collect_one_cookbook"
       }

@@ -1,13 +1,13 @@
 {
   "criteria": {
     "collected_paltaeria_gem": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_paltaeria_gem"
       }
     },
     "unlocked_ink": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:milestones/unlock_ink_use"
       }

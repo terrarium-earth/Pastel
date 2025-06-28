@@ -1,13 +1,13 @@
 {
   "criteria": {
     "unlocked_voiding_crafting": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/enchantments/voiding_crafting"
       }
     },
     "unlocked_oblivion_pickaxe": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/equipment/oblivion_pickaxe"
       }

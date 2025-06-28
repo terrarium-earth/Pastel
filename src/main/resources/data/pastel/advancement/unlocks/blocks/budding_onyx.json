@@ -1,13 +1,13 @@
 {
   "criteria": {
     "built_spirit_instiller": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/build_spirit_instiller_structure"
       }
     },
     "harvested_moonstruck_nectar": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/harvest_moonstruck_nectar"
       }

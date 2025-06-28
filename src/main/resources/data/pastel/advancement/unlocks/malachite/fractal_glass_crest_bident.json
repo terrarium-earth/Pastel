@@ -1,19 +1,19 @@
 {
   "criteria": {
     "unlocked_glass_crest_tools": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:unlocks/malachite/glass_crest_tools"
       }
     },
     "collected_mermaids_gems": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:collect_mermaids_gem"
       }
     },
     "collected_echo_shard": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_vanilla/echo_shard"
       }

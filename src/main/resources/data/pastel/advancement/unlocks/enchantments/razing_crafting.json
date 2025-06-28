@@ -1,25 +1,25 @@
 {
   "criteria": {
     "built_enchanting_structure": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/build_enchanting_structure"
       }
     },
     "collected_gray_pigment": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_pigment/gray"
       }
     },
     "crafted_bottle_of_ruin": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/craft_bottle_of_ruin"
       }
     },
     "collected_dragonbone_chunk": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:break_cracked_dragonbone"
       }

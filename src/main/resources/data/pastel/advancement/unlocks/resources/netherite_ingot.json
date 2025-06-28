@@ -1,13 +1,13 @@
 {
   "criteria": {
     "created_midnight_abberation": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:midgame/create_midnight_aberration"
       }
     },
     "collected_netherite_scrap": {
-      "trigger": "pastel:advancement_gotten",
+      "trigger": "revelationary:advancement_gotten",
       "conditions": {
         "advancement_identifier": "pastel:hidden/collect_vanilla/netherite_scrap"
       }
