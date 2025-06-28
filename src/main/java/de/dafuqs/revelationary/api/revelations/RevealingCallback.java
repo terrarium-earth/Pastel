@@ -34,14 +34,4 @@ public interface RevealingCallback {
 	static void register(RevealingCallback callback) {
 		ClientRevelationHolder.callbacks.add(callback);
 	}
-	
-	/**
-	 * Unregister this RevealingCallback
-	 * It will not receive trigger events anymore
-	 *
-	 * @param callback the callback to unregister
-	 */
-	static void unregister(RevealingCallback callback) {
-		ClientRevelationHolder.callbacks.remove(callback);
-	}
 }

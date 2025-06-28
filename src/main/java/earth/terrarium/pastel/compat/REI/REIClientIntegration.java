@@ -87,6 +87,7 @@ import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.transfer.info.stack.SlotAccessor;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import me.shedaniel.rei.forge.REIPluginClient;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -96,7 +97,7 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.List;
 import java.util.stream.Stream;
 
-@OnlyIn(Dist.CLIENT)
+@REIPluginClient
 public class REIClientIntegration implements REIClientPlugin {
 	
 	@Override

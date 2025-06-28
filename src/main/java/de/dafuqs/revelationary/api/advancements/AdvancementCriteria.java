@@ -19,16 +19,11 @@ public class AdvancementCriteria {
 	 * matches multiple advancements with optional count parameter
 	 */
 	public static final AdvancementCountCriterion ADVANCEMENT_COUNT = new AdvancementCountCriterion();
-	/**
-	 * Triggers every time a new block is revealed
-	 */
-	public static final HadRevelationCriterion HAD_REVELATION = new HadRevelationCriterion();
-	
+
 	public static void register(IEventBus bus) {
 		var registry = DeferredRegister.create(Registries.TRIGGER_TYPE, Revelationary.MOD_ID);
 
 		registry.register("advancement_count", () -> ADVANCEMENT_COUNT);
-		registry.register("had_revelation", () -> HAD_REVELATION);
 		registry.register("advancement_gotten", () -> ADVANCEMENT_GOTTEN);
 
 		registry.register(bus);

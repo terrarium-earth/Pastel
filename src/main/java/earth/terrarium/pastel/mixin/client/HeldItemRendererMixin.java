@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin.client;
 
-import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
+import earth.terrarium.pastel.items.ArrowheadCrossbow;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;

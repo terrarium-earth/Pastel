@@ -1,4 +1,4 @@
-package de.dafuqs.arrowhead.api;
+package earth.terrarium.pastel.items;
 
 import net.minecraft.world.item.ItemStack;
 

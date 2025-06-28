@@ -5,13 +5,14 @@ import de.dafuqs.revelationary.config.RevelationaryConfig;
 import me.shedaniel.rei.api.client.entry.filtering.base.BasicFilteringRule;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.common.util.EntryStacks;
+import me.shedaniel.rei.forge.REIPluginClient;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
+@REIPluginClient
 public class RevelationaryREIPlugin implements REIClientPlugin {
     @SuppressWarnings("UnstableApiUsage")
     private BasicFilteringRule.MarkDirty filteringRule;

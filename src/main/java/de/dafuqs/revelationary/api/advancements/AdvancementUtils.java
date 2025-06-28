@@ -60,29 +60,6 @@ public class AdvancementUtils {
         return count;
     }
 
-    /**
-     * Reprocesses all AdvancementGottenCriteria and fixes all instances
-     * where the player has an advancement, but a criterion that is set to get triggered
-     * by it is not granted. (like after you changed your mods advancement criteria in an update)
-     * Can only use used on the logical server
-     */
-    public void reprocessUnlocks() {
-        for (var advancement : advancementLoader.getAllAdvancements()) {
-            if (advancement.id().getNamespace().equals(namespace) && !advancementTracker.getOrStartProgress(advancement).isDone()) {
-                for (var criterionEntry : advancement.value().criteria().entrySet()) {
-                    // 1: instanceof checks for null automatically
-                    // 2: AdvancementGottenCriterion.Conditions will always have the appropriate ID, no need to check for that
-                    if (criterionEntry.getValue().triggerInstance() instanceof AdvancementGottenCriterion.Conditions gottenConditions) {
-                        var gottenAdvancement = advancementLoader.get(gottenConditions.getAdvancementIdentifier());
-                        if (gottenAdvancement != null && advancementTracker.getOrStartProgress(gottenAdvancement).isDone()) {
-                            advancementTracker.award(advancement, criterionEntry.getKey());
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     protected int act(BiConsumer<AdvancementHolder, String> action) {
         var count = 0;
 
@@ -98,25 +75,5 @@ public class AdvancementUtils {
         }
 
         return count;
-    }
-
-    @Deprecated
-    public static int revokeAllAdvancements(ServerPlayer player, String namespace , String path) {
-        return forPlayer(player).withNamespace(namespace).withPath(path).revoke();
-    }
-
-    @Deprecated
-    public static int grantAllAdvancements(ServerPlayer player, String namespace , String path) {
-        return forPlayer(player).withNamespace(namespace).withPath(path).grant();
-    }
-
-    @Deprecated
-    public static int syncAdvancements(ServerPlayer sourcePlayer, ServerPlayer targetPlayer, String namespace, String path, Boolean deleteOld) {
-        return forPlayer(sourcePlayer).withNamespace(namespace).withPath(path).syncTo(targetPlayer, deleteOld);
-    }
-
-    @Deprecated
-    public static void reprocessAdvancementUnlocks(ServerPlayer player, String namespace) {
-        forPlayer(player).withNamespace(namespace).reprocessUnlocks();
     }
 }

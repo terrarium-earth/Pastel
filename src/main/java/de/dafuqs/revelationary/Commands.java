@@ -7,7 +7,6 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.CommandNode;
 import de.dafuqs.revelationary.api.advancements.AdvancementUtils;
-import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
@@ -17,7 +16,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class Commands {
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess, net.minecraft.commands.Commands.CommandSelection environment) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         var revelationaryNode = net.minecraft.commands.Commands
                 .literal("revelationary")
                 .requires(source -> source.hasPermission(4))

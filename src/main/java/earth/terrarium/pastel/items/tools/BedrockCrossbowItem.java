@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.tools;
 
-import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
+import earth.terrarium.pastel.items.ArrowheadCrossbow;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CrossbowItem;

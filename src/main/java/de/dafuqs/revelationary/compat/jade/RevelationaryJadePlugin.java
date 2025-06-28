@@ -6,7 +6,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IWailaClientRegistration;
 import snownee.jade.api.IWailaPlugin;
+import snownee.jade.api.WailaPlugin;
 
+@WailaPlugin
 public class RevelationaryJadePlugin implements IWailaPlugin {
     @Override
     public void registerClient(IWailaClientRegistration registration) {

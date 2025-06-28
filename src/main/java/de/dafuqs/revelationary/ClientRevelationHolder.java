@@ -150,11 +150,6 @@ public class ClientRevelationHolder {
 		}
 	}
 
-	public static Set<BlockState> getBlockCloaks() {
-		return activeBlockStateSwaps;
-	}
-
-	
 	// ITEMS
 	public static void cloak(Item item) {
 		activeItemSwaps.add(item);
@@ -163,13 +158,6 @@ public class ClientRevelationHolder {
 		}
 	}
 
-	public static void uncloak(Item item) {
-		activeItemSwaps.remove(item);
-		if (item instanceof RevelationAware revelationAware) {
-			revelationAware.onUncloak();
-		}
-	}
-	
 	public static boolean isCloaked(Item item) {
 		return activeItemSwaps.contains(item);
 	}
@@ -182,10 +170,6 @@ public class ClientRevelationHolder {
 		}
 	}
 
-	public static Set<Item> getItemCloaks() {
-		return activeItemSwaps;
-	}
-	
 	public static void cloakAll() {
 		activeItemSwaps.clear();
 		activeBlockStateSwaps.clear();

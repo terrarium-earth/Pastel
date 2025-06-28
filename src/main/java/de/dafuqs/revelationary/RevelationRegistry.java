@@ -189,7 +189,7 @@ public class RevelationRegistry {
 				cloakedBlockNameTranslations.put(sourceBlock, targetText);
 				
 				Item blockItem = sourceBlock.asItem();
-				if (blockItem != null && blockItem != Items.AIR) {
+				if (blockItem != Items.AIR) {
 					cloakedItemNameTranslations.put(blockItem, targetText);
 				}
 			}
@@ -241,11 +241,7 @@ public class RevelationRegistry {
 	private static void registerBlockTranslation(Block sourceBlock, MutableComponent targetTranslation) {
 		cloakedBlockNameTranslations.put(sourceBlock, targetTranslation);
 	}
-	
-	public static boolean hasCloak(BlockState blockState) {
-		return blockStateCloaks.containsKey(blockState);
-	}
-	
+
 	public static boolean isVisibleTo(BlockState state, Player player) {
 		return AdvancementHelper.hasAdvancement(player, blockStateToAdv.getOrDefault(state, null));
 	}
@@ -262,26 +258,10 @@ public class RevelationRegistry {
 		return blockStates;
 	}
 	
-	public static Map<ResourceLocation, List<BlockState>> getBlockStateEntries() {
+	@SuppressWarnings("unchecked")
+    public static Map<ResourceLocation, List<BlockState>> getBlockStateEntries() {
 		// fighting invariance of java generic types
         return (Map<ResourceLocation, List<BlockState>>) (Map<?, ?>) advToBlockStates;
-	}
-	
-	public static List<BlockState> getBlockStateEntries(ResourceLocation advancement) {
-		return advToBlockStates.getOrDefault(advancement, ObjectArrayList.of());
-	}
-	
-	public static List<Block> getBlockEntries() {
-		List<Block> blocks = new ArrayList<>();
-		for (List<BlockState> states : advToBlockStates.values()) {
-			for (BlockState state : states) {
-				Block block = state.getBlock();
-				if (!blocks.contains(block)) {
-					blocks.add(block);
-				}
-			}
-		}
-		return blocks;
 	}
 	
 	public static List<Block> getBlockEntries(ResourceLocation advancement) {
@@ -369,13 +349,10 @@ public class RevelationRegistry {
 		return ObjectArrayList.of();
 	}
 	
-	public static Map<ResourceLocation, List<Item>> getItemEntries() {
+	@SuppressWarnings("unchecked")
+    public static Map<ResourceLocation, List<Item>> getItemEntries() {
 		// fighting invariance of java generic types
 		return (Map<ResourceLocation, List<Item>>) (Map<?,?>) advToItems;
-	}
-	
-	public static List<Item> getItemEntries(ResourceLocation advancement) {
-		return advToItems.getOrDefault(advancement, ObjectArrayList.of());
 	}
 
 	public static void fromPacket(RevelationaryNetworking.RevelationSync syncPacket) {

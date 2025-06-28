@@ -1,5 +1,6 @@
 {
   "revelationary:plugin": {
-    "initializer": "de.dafuqs.revelationary.compat.wthit.RevelationaryWthitPlugin"
+    "initializer": "de.dafuqs.revelationary.compat.wthit.RevelationaryWthitPlugin",
+    "side": "client"
   }
 }

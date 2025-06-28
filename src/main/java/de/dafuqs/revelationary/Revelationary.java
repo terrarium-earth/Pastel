@@ -31,7 +31,7 @@ public class Revelationary {
     }
 
     private static void onRegisterCommands(RegisterCommandsEvent event) {
-        Commands.register(event.getDispatcher(), event.getBuildContext(), event.getCommandSelection());
+        Commands.register(event.getDispatcher());
     }
 
     private static void onServerStarted(ServerStartedEvent event) {
