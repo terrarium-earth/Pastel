@@ -59,10 +59,6 @@ accessible method net/minecraft/world/level/block/Blocks woodenButton (Lnet/mine
 accessible class net/minecraft/client/renderer/ItemInHandRenderer$HandRenderSelection
 accessible method net/minecraft/world/item/CrossbowItem getProjectileShotVector (Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/phys/Vec3;F)Lorg/joml/Vector3f;
 
-# Fractal
-accessible method net/minecraft/world/item/CreativeModeTab <init> (Lnet/minecraft/world/item/CreativeModeTab$Row;ILnet/minecraft/world/item/CreativeModeTab$Type;Lnet/minecraft/network/chat/Component;Ljava/util/function/Supplier;Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;)V
-accessible class net/minecraft/world/item/CreativeModeTab$ItemDisplayBuilder
-accessible field net/minecraft/world/item/CreativeModeTab$ItemDisplayParameters enabledFeatures Lnet/minecraft/world/flag/FeatureFlagSet;
-accessible field net/minecraft/world/item/CreativeModeTab displayItemsGenerator Lnet/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator;
-accessible field net/minecraft/world/item/CreativeModeTab displayItems Ljava/util/Collection;
-accessible field net/minecraft/world/item/CreativeModeTab displayItemsSearchTab Ljava/util/Set;
+# Fuck
+accessible class net/minecraft/server/ReloadableServerRegistries$EmptyTagLookupWrapper
+accessible method net/minecraft/server/ReloadableServerRegistries$EmptyTagLookupWrapper <init> (Lnet/minecraft/core/RegistryAccess;)V
