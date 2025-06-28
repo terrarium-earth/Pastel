@@ -15,32 +15,25 @@
     "toggled_light": {
       "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "item": {
-          "items": [
-            "pastel:radiance_staff"
-          ]
-        },
         "location": [
           {
             "condition": "minecraft:location_check",
             "predicate": {
               "block": {
-                "blocks": [
-                  "pastel:wand_light"
-                ],
+                "blocks": "pastel:wand_light",
                 "state": {
                   "level": "1"
                 }
               }
             }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "pastel:radiance_staff"
+            }
           }
         ]
-      }
-    },
-    "gotten_previous": {
-      "trigger": "pastel:advancement_gotten",
-      "conditions": {
-        "advancement_identifier": "pastel:build_basic_pedestal_structure"
       }
     }
   }

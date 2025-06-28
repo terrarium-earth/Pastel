@@ -4,6 +4,8 @@ import earth.terrarium.pastel.items.magic_items.RadianceStaffItem;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -87,6 +89,7 @@ public class WandLightBlock extends LightBlock {
 			}
 			world.playSound(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, PastelSoundEvents.RADIANCE_STAFF_PLACE, SoundSource.PLAYERS, 1.0F, (float) (0.75 + 0.05 * newState.getValue(LEVEL)));
 			world.setBlock(pos, newState, Block.UPDATE_CLIENTS);
+			CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, player.getItemInHand(player.getUsedItemHand()));
 			return InteractionResult.SUCCESS;
 		} else {
 			return InteractionResult.CONSUME;
