@@ -21,16 +21,10 @@
     "have_half_a_heart_with_divinity_active": {
       "trigger": "pastel:divinity_tick",
       "conditions": {
-        "is_alive": true,
-        "health": {
+        "isAlive": true,
+        "healthRange": {
           "max": 1.00
         }
-      }
-    },
-    "gotten_previous": {
-      "trigger": "pastel:advancement_gotten",
-      "conditions": {
-        "advancement_identifier": "pastel:midgame/apply_divinity"
       }
     }
   }
