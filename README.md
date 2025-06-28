@@ -16,7 +16,7 @@ The only thing that we ask is that you do not call whatever you are making Starg
 Want to discuss about the mod, its development, or about making content for it? Head to the Terrarium discord - the 
 Pastel channels there are the hub of the mod, and where you will find the devs.
 
-https://discord.terrarium.earth/
+https://discord.gg/terrarium
 
 ## Mod Integration
 - AE2: Lots of additional Recipes; Crystal Apothecary compat
