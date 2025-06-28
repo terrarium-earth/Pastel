@@ -24,9 +24,9 @@ https://discord.terrarium.earth/
 - Create: Additional recipes
 
 ## Support
-| ![Azzy](https://avatars.githubusercontent.com/u/20349662?s=40&v=4) Azzy              |             |
-|--------------------------------------------------------------------------------------|-------------|
-| Creative Lead & Programming                                                          | Design Lead |
+| ![Azzy](https://avatars.githubusercontent.com/u/20349662?s=40&v=4) Azzyypaaras       |
+|--------------------------------------------------------------------------------------|
+| Ms. Pastel & Lady of Salt                                                            |
 | [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/azzyypaaras) |
 
 ![Stuff](/images/readme/pastel_cluster.png)
