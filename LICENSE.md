@@ -1,6 +1,5 @@
-While not officially required via the license, it is good practice asking before using huge chunks of Spectrum's code or
-textures for personal projects, like ports for other mod loaders.
-If you just want to use it for integration, addons and similar projects: go ahead!
+All original visual art and music are All Rights Reserved.
+For the code of the mod refer to the license below.
 
 ## Commons Clause License Condition
 
