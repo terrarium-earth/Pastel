@@ -1037,17 +1037,9 @@ public class PastelItemGroups {
 				entries.accept(PastelBlocks.PURE_ECHO_BLOCK.get());
 
 				if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.AE2_ID)) {
-					entries.accept(AE2Compat.PURE_CERTUS_QUARTZ);
-					entries.accept(AE2Compat.SMALL_CERTUS_QUARTZ_BUD);
-					entries.accept(AE2Compat.LARGE_CERTUS_QUARTZ_BUD);
-					entries.accept(AE2Compat.CERTUS_QUARTZ_CLUSTER);
-					entries.accept(AE2Compat.PURE_CERTUS_QUARTZ_BLOCK);
-
-					entries.accept(AE2Compat.PURE_FLUIX);
 					entries.accept(AE2Compat.SMALL_FLUIX_BUD);
 					entries.accept(AE2Compat.LARGE_FLUIX_BUD);
 					entries.accept(AE2Compat.FLUIX_CLUSTER);
-					entries.accept(AE2Compat.PURE_FLUIX_BLOCK);
 				}
 
 				if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.CREATE_ID)) {

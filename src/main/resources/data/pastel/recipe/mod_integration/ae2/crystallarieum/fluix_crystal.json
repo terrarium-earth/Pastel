@@ -1,7 +1,7 @@
 {
   "type": "pastel:crystallarieum_growing",
   "ingredient": {
-    "item": "ae2:fluix_crystal"
+    "item": "ae2:fluix_dust"
   },
   "growth_stage_states": [
     {
@@ -61,7 +61,7 @@
   ],
   "additional_recipe_manager_results": [
     {
-      "id": "pastel:pure_fluix"
+      "id": "ae2:fluix_crystal"
     }
   ],
   "neoforge:conditions": [

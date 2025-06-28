@@ -45,11 +45,15 @@
       "required": false
     },
     {
-      "id": "pastel:small_certus_quartz_bud",
+      "id": "ae2:small_quartz_bud",
       "required": false
     },
     {
-      "id": "pastel:large_certus_quartz_bud",
+      "id": "ae2:medium_quartz_bud",
+      "required": false
+    },
+    {
+      "id": "ae2:large_quartz_bud",
       "required": false
     },
     {
@@ -60,7 +64,6 @@
       "id": "pastel:large_fluix_bud",
       "required": false
     },
-
     {
       "id": "pastel:small_globette_bud",
       "required": false

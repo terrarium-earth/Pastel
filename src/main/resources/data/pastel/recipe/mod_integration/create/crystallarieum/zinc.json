@@ -62,7 +62,9 @@
     }
   ],
   "additional_recipe_manager_results": [
-    "pastel:pure_zinc"
+    {
+      "id": "pastel:pure_zinc"
+    }
   ],
   "neoforge:conditions": [
     {

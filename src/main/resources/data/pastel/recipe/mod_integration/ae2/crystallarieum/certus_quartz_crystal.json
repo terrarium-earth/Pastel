@@ -1,23 +1,29 @@
 {
   "type": "pastel:crystallarieum_growing",
   "ingredient": {
-    "item": "ae2:certus_quartz_crystal"
+    "item": "ae2:certus_quartz_dust"
   },
   "growth_stage_states": [
     {
-      "Name": "pastel:small_certus_quartz_bud",
+      "Name": "ae2:small_quartz_bud",
       "Properties": {
         "facing": "up"
       }
     },
     {
-      "Name": "pastel:large_certus_quartz_bud",
+      "Name": "ae2:medium_quartz_bud",
       "Properties": {
         "facing": "up"
       }
     },
     {
-      "Name": "pastel:certus_quartz_cluster",
+      "Name": "ae2:large_quartz_bud",
+      "Properties": {
+        "facing": "up"
+      }
+    },
+    {
+      "Name": "ae2:quartz_cluster",
       "Properties": {
         "facing": "up"
       }
@@ -61,7 +67,7 @@
   ],
   "additional_recipe_manager_results": [
     {
-      "id": "pastel:pure_bloodstone"
+      "id": "ae2:certus_quartz_crystal"
     }
   ],
   "neoforge:conditions": [
