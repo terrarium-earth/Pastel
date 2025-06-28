@@ -1,12 +1,14 @@
 package earth.terrarium.pastel.blocks.upgrade;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
+import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
@@ -90,6 +92,10 @@ public interface Upgradeable {
 
 		public float getEffectiveValue(UpgradeType upgradeType) {
 			return 1 + (this.upgrades.get(upgradeType) / (float) upgradeType.getEffectivityDivisor());
+		}
+
+		public int getSpeedDelta(RandomSource random) {
+			return Support.chanceRound(getEffectiveValue(UpgradeType.SPEED), random);
 		}
 
 		public long getEffectiveCost(UpgradeType upgradeType) {

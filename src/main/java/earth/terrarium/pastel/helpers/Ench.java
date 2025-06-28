@@ -1,20 +1,25 @@
 package earth.terrarium.pastel.helpers;
 
 import earth.terrarium.pastel.registries.PastelItemTags;
+import it.unimi.dsi.fastutil.objects.Object2IntArrayMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BookItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -81,6 +86,28 @@ public class Ench {
 		return new Tuple<>(true, stack);
 	}
 
+	public static Object2IntMap<Holder<Enchantment>> getUsableEnchants(ItemStack source, ItemStack target, boolean permissive, boolean allowConflicts) {
+		var enchants = new Object2IntArrayMap<Holder<Enchantment>>();
+
+		for (Object2IntMap.Entry<Holder<Enchantment>> entry : EnchantmentHelper.getEnchantmentsForCrafting(source).entrySet()) {
+			var offering = entry.getKey();
+			var level = entry.getIntValue();
+
+			if (!permissive && !target.supportsEnchantment(offering))
+				continue;
+
+			if (EnchantmentHelper.getEnchantmentsForCrafting(target).getLevel(offering) >= level)
+				continue;
+
+			if (!allowConflicts && !Ench.canCombineInto(target, offering))
+				continue;
+
+			enchants.put(offering, level);
+		}
+
+		return enchants;
+	}
+
 	/**
 	 * Checks if a stack can be used as the source to create an enchanted book
 	 *
@@ -101,12 +128,25 @@ public class Ench {
 		return builder.toImmutable();
 	}
 
-	public static boolean canCombineAny(ItemStack existingStack, ItemStack newStack) {
-		var existingEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(existingStack).keySet();
-		var newEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(newStack).keySet();
-		return existingEnchantments.isEmpty()
-				|| newEnchantments.stream().anyMatch(newEnchantment ->
-				EnchantmentHelper.isEnchantmentCompatible(existingEnchantments, newEnchantment));
+	public static boolean canCombineInto(ItemStack stack, Holder<Enchantment> offering) {
+		var existingEnchantments = EnchantmentHelper.getEnchantmentsForCrafting(stack).keySet();
+		if (existingEnchantments.isEmpty())
+			return true;
+
+		return EnchantmentHelper.isEnchantmentCompatible(existingEnchantments, offering);
+	}
+
+	public static int getEnchantmentCost(Holder<Enchantment> holder, int level, int enchantability) {
+		var enchantment = holder.value();
+		var rarity = enchantment.getAnvilCost(); // Yes, this is actually rarity
+
+		var rarityMult = (float) Math.pow(2, rarity) * 5 + (rarity - 1) * 5;
+		var levelMult = level * enchantment.getMaxLevel() + 1;
+		var treasureMult = holder.is(EnchantmentTags.TREASURE) ? 2 : 1;
+		var curseMult = holder.is(EnchantmentTags.CURSE) ? 2 : 1;
+		var discount = 1 + enchantability / Tiers.GOLD.getEnchantmentValue(); // Gold is the 50% discount mark
+
+		return Math.round(rarityMult * levelMult * treasureMult * curseMult / discount);
 	}
 
 	@SafeVarargs

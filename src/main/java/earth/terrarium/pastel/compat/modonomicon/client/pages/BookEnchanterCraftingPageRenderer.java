@@ -4,7 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookGatedRecipePage;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,11 +15,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 
-public class BookEnchanterCraftingPageRenderer extends BookGatedRecipePageRenderer<EnchanterRecipe, BookGatedRecipePage<EnchanterRecipe>> {
+public class BookEnchanterCraftingPageRenderer extends BookGatedRecipePageRenderer<EnchanterCraftingRecipe, BookGatedRecipePage<EnchanterCraftingRecipe>> {
 
     private static final ResourceLocation BACKGROUND_TEXTURE = PastelCommon.locate("textures/gui/modonomicon/enchanter_crafting.png");
 
-    public BookEnchanterCraftingPageRenderer(BookGatedRecipePage<EnchanterRecipe> page) {
+    public BookEnchanterCraftingPageRenderer(BookGatedRecipePage<EnchanterCraftingRecipe> page) {
         super(page);
     }
 
@@ -29,8 +29,8 @@ public class BookEnchanterCraftingPageRenderer extends BookGatedRecipePageRender
     }
 
     @Override
-    protected void drawRecipe(GuiGraphics drawContext, RecipeHolder<EnchanterRecipe> recipeEntry, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
-        EnchanterRecipe recipe = recipeEntry.value();
+    protected void drawRecipe(GuiGraphics drawContext, RecipeHolder<EnchanterCraftingRecipe> recipeEntry, int recipeX, int recipeY, int mouseX, int mouseY, boolean second) {
+        EnchanterCraftingRecipe recipe = recipeEntry.value();
         Level world = Minecraft.getInstance().level;
         if (world == null) return;
 

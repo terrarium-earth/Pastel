@@ -102,7 +102,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 			ParticleOptions particleEffect = ColoredSparkleRisingParticleEffect.of(crystallarieum.currentRecipe.value().getInkColor().getColorInt());
 			
 			int amount = 1 + crystallarieum.currentRecipe.value().getInkPerSecond();
-			if (Support.getIntFromDecimalWithChance(amount / 80.0, world.random) > 0) {
+			if (Support.chanceRound(amount / 80.0, world.random) > 0) {
 				double randomX = world.getRandom().nextDouble() * 0.8;
 				double randomZ = world.getRandom().nextDouble() * 0.8;
 				world.addAlwaysVisibleParticle(particleEffect, blockPos.getX() + 0.1 + randomX, blockPos.getY() + 1, blockPos.getZ() + 0.1 + randomZ, 0.0D, 0.03D, 0.0D);
@@ -161,7 +161,7 @@ public class CrystallarieumBlockEntity extends InWorldInteractionBlockEntity imp
 		
 		// advance growing
 		float consumedInkFloat = (recipe.value().getInkPerSecond() * crystal.currentCatalyst.growthAccelerationMod() * crystal.currentCatalyst.inkConsumptionMod());
-		int consumedInt = Support.getIntFromDecimalWithChance(consumedInkFloat, world.random);
+		int consumedInt = Support.chanceRound(consumedInkFloat, world.random);
 		if (crystal.inkStorage.drainEnergy(recipe.value().getInkColor(), consumedInt) < consumedInt) {
 			crystal.canWork = false;
 			crystal.setInkDirty();

@@ -115,7 +115,7 @@ public class CinderhearthRecipe extends GatedStackPastelRecipe<SingleRecipeInput
 			if (chance >= 1.0 || random.nextFloat() < chance * yieldMod) {
 				ItemStack currentOutputStack = possibleOutput.getA();
 				if (yieldMod > 1) {
-					int totalCount = Support.getIntFromDecimalWithChance(currentOutputStack.getCount() * yieldMod, random);
+					int totalCount = Support.chanceRound(currentOutputStack.getCount() * yieldMod, random);
 					while (totalCount > 0) { // if the rolled count exceeds the max stack size we need to split them (unstackable items, counts > 64, ...)
 						int count = Math.min(totalCount, currentOutputStack.getMaxStackSize());
 						ItemStack outputStack = currentOutputStack.copy();

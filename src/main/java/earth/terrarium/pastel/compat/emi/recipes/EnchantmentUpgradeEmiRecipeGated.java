@@ -51,7 +51,7 @@ public class EnchantmentUpgradeEmiRecipeGated extends GatedSpectrumEmiRecipe<Gat
 	public EnchantmentUpgradeEmiRecipeGated(EmiRecipeCategory category, EnchantmentUpgradeRecipe recipe) {
 		super(category, recipe, 132, 90);
 		this.itemScaling = recipe.getItemScaling();
-		this.xpScaling = recipe.getXPScaling();
+		this.xpScaling = recipe.getXpScaling();
 		
 		inputs = Lists.newArrayList();
 		

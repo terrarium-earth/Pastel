@@ -3,13 +3,15 @@ package earth.terrarium.pastel.blocks.enchanter;
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
+import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -84,21 +86,21 @@ public class EnchanterBlock extends InWorldInteractionBlock {
 	}
 	
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (world.isClientSide) {
-			verifyStructure(world, pos, null);
+	public ItemInteractionResult useItemOn(ItemStack handStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (level.isClientSide) {
+			verifyStructure(level, pos, null);
 			return ItemInteractionResult.SUCCESS;
 		} else {
-			if (verifyStructure(world, pos, (ServerPlayer) player)) {
+			if (verifyStructure(level, pos, (ServerPlayer) player)) {
 				
 				// if the structure is valid the player can put / retrieve blocks into the shrine
-				BlockEntity blockEntity = world.getBlockEntity(pos);
+				BlockEntity blockEntity = level.getBlockEntity(pos);
 				if (blockEntity instanceof EnchanterBlockEntity enchanterBlockEntity) {
 
 					if (player.isShiftKeyDown() || handStack.isEmpty()) {
 						// sneaking or empty hand: remove items
-						for (int i = 0; i < EnchanterBlockEntity.INVENTORY_SIZE; i++) {
-							if (retrieveStack(world, pos, player, hand, handStack, enchanterBlockEntity, i)) {
+						for (int i = 0; i < EnchanterBlockEntity.XP_STORAGE + 1; i++) {
+							if (retrieveStack(level, pos, player, hand, handStack, enchanterBlockEntity, i)) {
 								enchanterBlockEntity.setItemFacingDirection(player.getDirection());
 								enchanterBlockEntity.setOwner(player);
 								enchanterBlockEntity.inventoryChanged();
@@ -109,8 +111,8 @@ public class EnchanterBlock extends InWorldInteractionBlock {
 					} else {
 						// hand is full and inventory is empty: add
 						// hand is full and inventory already contains item: exchange them
-						int inputInventorySlotIndex = handStack.getItem() instanceof ExperienceStorageItem ? enchanterBlockEntity.getItem(1).isEmpty() ? 1 : 0 : 0;
-						if (exchangeStack(world, pos, player, hand, handStack, enchanterBlockEntity, inputInventorySlotIndex)) {
+						int targetSlot = getTargetSlot(handStack, level.registryAccess());
+						if (exchangeStack(level, pos, player, hand, handStack, enchanterBlockEntity, targetSlot)) {
 							enchanterBlockEntity.setItemFacingDirection(player.getDirection());
 							enchanterBlockEntity.setOwner(player);
 							enchanterBlockEntity.inventoryChanged();
@@ -120,6 +122,17 @@ public class EnchanterBlock extends InWorldInteractionBlock {
 			}
 			return ItemInteractionResult.CONSUME;
 		}
+	}
+
+	private int getTargetSlot(ItemStack hand, HolderLookup.Provider lookup) {
+		if (hand.isEmpty())
+			return EnchanterBlockEntity.CENTER;
+
+		var storage = hand.getCapability(PastelCapabilities.Misc.XP, lookup);
+		if (storage != null)
+			return EnchanterBlockEntity.XP_STORAGE;
+
+		return EnchanterBlockEntity.CENTER;
 	}
 	
 }

@@ -129,7 +129,7 @@ public interface InkPowered {
 	}
 
 	static boolean tryDrainEnergy(@NotNull Player player, @NotNull InkCost inkCost, float costModifier) {
-		return tryDrainEnergy(player, inkCost.color(), Support.getIntFromDecimalWithChance(inkCost.cost() * costModifier, player.getRandom()));
+		return tryDrainEnergy(player, inkCost.color(), Support.chanceRound(inkCost.cost() * costModifier, player.getRandom()));
 	}
 
 	/**

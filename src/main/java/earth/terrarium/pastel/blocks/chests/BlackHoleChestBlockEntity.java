@@ -1,8 +1,9 @@
 package earth.terrarium.pastel.blocks.chests;
 
 import earth.terrarium.pastel.api.block.FilterConfigurable;
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
+import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.api.item.ItemReference;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.EventQueue;
@@ -46,6 +47,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class BlackHoleChestBlockEntity extends PastelChestBlockEntity implements FilterConfigurable, WorldlyContainer, EventQueue.Callback<Object> {
@@ -151,19 +153,15 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity implements
 				return false;
 			}
 		}
-		
-		if (canStoreExperience() && level != null) {
-			var experienceStack = inventory.getStackInSlot(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT);
-			var experienceStorage = (ExperienceStorageItem) experienceStack.getItem();
-			return ExperienceStorageItem.getStoredExperience(experienceStack) >= experienceStorage.getMaxStoredExperience(level.registryAccess(), experienceStack);
-		}
-		
-		return true;
-	}
-	
-	public boolean canStoreExperience() {
-		return inventory.getStackInSlot(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT).getItem() instanceof ExperienceStorageItem;
-	}
+
+		if (level == null)
+			return true;
+
+		var storage = getExperienceStorage();
+        return storage.map(experienceHandler ->
+				experienceHandler.getStoredAmount() == experienceHandler.getCapacity()).orElse(true);
+
+    }
 	
 	public boolean isFullServer() {
 		return isFull;
@@ -262,7 +260,7 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity implements
 		if (entity instanceof ItemEntity) {
 			return true;
 		}
-		return entity instanceof ExperienceOrb && hasExperienceStorageItem();
+		return entity instanceof ExperienceOrb && getExperienceStorage().isPresent();
 	}
 	
 	@Override
@@ -273,8 +271,11 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity implements
 		
 		if (entry instanceof ExperienceOrbEventQueue.EventEntry experienceEntry) {
 			ExperienceOrb experienceOrbEntity = experienceEntry.experienceOrbEntity;
-			if (experienceOrbEntity != null && experienceOrbEntity.isAlive() && hasExperienceStorageItem()) {
-				ExperienceStorageItem.addStoredExperience(world.registryAccess(), this.inventory.getStackInSlot(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT), experienceOrbEntity.getValue()); // overflow experience is void, to not lag the world on large farms
+			var storage = getExperienceStorage();
+
+			if (storage.isPresent() && experienceOrbEntity != null && experienceOrbEntity.isAlive()) {
+				storage.get().insert(experienceOrbEntity.getValue(), false);
+				// overflow experience is void, to not lag the world on large farms
 				
 				sendPlayExperienceOrbEntityAbsorbedParticle((ServerLevel) world, experienceOrbEntity);
 				world.playSound(null, experienceOrbEntity.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
@@ -364,8 +365,10 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity implements
 		return allAir;
 	}
 
-	public boolean hasExperienceStorageItem() {
-		return this.inventory.getStackInSlot(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT).getItem() instanceof ExperienceStorageItem;
+	public Optional<ExperienceHandler> getExperienceStorage() {
+		assert level != null;
+		return Optional.ofNullable(this.inventory.getStackInSlot(EXPERIENCE_STORAGE_PROVIDER_ITEM_SLOT)
+				.getCapability(PastelCapabilities.Misc.XP, level.registryAccess()));
 	}
 	
 	@Override

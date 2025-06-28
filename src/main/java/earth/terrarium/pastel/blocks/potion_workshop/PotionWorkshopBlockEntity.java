@@ -3,7 +3,6 @@ package earth.terrarium.pastel.blocks.potion_workshop;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.*;
@@ -52,6 +51,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
@@ -271,7 +271,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		// process reagents
 		PotionMod potionMod = getPotionModFromReagents(potionWorkshopBlockEntity);
 		
-		int maxBrewedPotionsAmount = Support.getIntFromDecimalWithChance(brewingRecipe.value().getModifiedYield(potionMod), world.random);
+		int maxBrewedPotionsAmount = Support.chanceRound(brewingRecipe.value().getModifiedYield(potionMod), world.random);
 		int brewedAmount = Math.min(potionWorkshopBlockEntity.inventory.getStackInSlot(BASE_INPUT_SLOT_ID).getCount(), maxBrewedPotionsAmount);
 		
 		// calculate outputs
@@ -311,7 +311,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		
 		// the multiplication happening after the decimal chance rounding is not a mistake it is me being evil ~ Azzyy
 		// we are nice to our players this one time ~Dafuqs
-		int maxTippedArrowsAmount = Support.getIntFromDecimalWithChance(brewingRecipe.value().getModifiedYield(potionMod) * PotionWorkshopBrewingRecipe.ARROW_COUNT_MULTIPLIER, world.random);
+		int maxTippedArrowsAmount = Support.chanceRound(brewingRecipe.value().getModifiedYield(potionMod) * PotionWorkshopBrewingRecipe.ARROW_COUNT_MULTIPLIER, world.random);
 		int tippedAmount = Math.min(potionWorkshopBlockEntity.inventory.getStackInSlot(BASE_INPUT_SLOT_ID).getCount(), maxTippedArrowsAmount);
 		
 		// calculate outputs
@@ -343,7 +343,7 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 			decrementIngredientSlots(potionWorkshopBlockEntity);
 			decrementReagentSlots(potionWorkshopBlockEntity);
 			
-			int maxBrewedPotionsAmount = Support.getIntFromDecimalWithChance(brewingRecipe.value().getModifiedYield(potionMod), potionWorkshopBlockEntity.level.random);
+			int maxBrewedPotionsAmount = Support.chanceRound(brewingRecipe.value().getModifiedYield(potionMod), potionWorkshopBlockEntity.level.random);
 			if (maxBrewedPotionsAmount < 1) {
 				ServerPlayer serverPlayerEntity = (ServerPlayer) potionWorkshopBlockEntity.getOwnerIfOnline();
 				if (serverPlayerEntity != null) {
@@ -386,21 +386,26 @@ public class PotionWorkshopBlockEntity extends BlockEntity implements MenuProvid
 		}
 	}
 	
-	public static void decrementIngredientSlots(@NotNull PotionWorkshopBlockEntity potionWorkshopBlockEntity) {
-		potionWorkshopBlockEntity.inventory.getStackInSlot(MERMAIDS_GEM_INPUT_SLOT_ID).shrink(1);
-		if (potionWorkshopBlockEntity.level == null) return;
+	public static void decrementIngredientSlots(@NotNull PotionWorkshopBlockEntity workshop) {
+		workshop.inventory.getStackInSlot(MERMAIDS_GEM_INPUT_SLOT_ID).shrink(1);
+		if (workshop.level == null) return;
 		
-		var recipe = potionWorkshopBlockEntity.currentRecipe;
+		var recipe = workshop.currentRecipe;
 		int requiredExperience = recipe.value().getRequiredExperience();
 		for (IngredientStack ingredientStack : recipe.value().getOtherIngredients()) {
 			for (int slot : INGREDIENT_SLOTS) {
-				ItemStack slotStack = potionWorkshopBlockEntity.inventory.getStackInSlot(slot);
+				ItemStack slotStack = workshop.inventory.getStackInSlot(slot);
 				if (ingredientStack.test(slotStack)) {
 					// if the recipe requires experience: remove XP from the item (like the experience bottle recipe)
-					if (slotStack.getItem() instanceof ExperienceStorageItem && ExperienceStorageItem.removeStoredExperience(slotStack, requiredExperience)) {
+
+					var storage = Optional.ofNullable(slotStack.getCapability(
+							PastelCapabilities.Misc.XP, workshop.level.registryAccess()));
+
+					int fre = requiredExperience;
+					if (storage.map(s -> s.extractOrFail(fre)).orElse(false)) {
 						requiredExperience = 0;
 					} else {
-						decrementUsingRemainder(potionWorkshopBlockEntity, slotStack, 1);
+						decrementUsingRemainder(workshop, slotStack, 1);
 					}
 					
 					break;

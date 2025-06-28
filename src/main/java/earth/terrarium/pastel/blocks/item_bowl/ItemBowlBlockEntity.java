@@ -37,6 +37,7 @@ public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity implement
 	
 	public ItemBowlBlockEntity(BlockPos pos, BlockState state) {
 		super(PastelBlockEntities.ITEM_BOWL.get(), pos, state, INVENTORY_SIZE);
+		inventory.addListener(i -> setChanged());
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class ItemBowlBlockEntity extends InWorldInteractionBlockEntity implement
 		if (!storedStack.isEmpty()) {
 			Optional<InkColor> optionalItemColor = ColorRegistry.ITEM_COLORS.getMapping(storedStack.getItem());
 			if (optionalItemColor.isPresent()) {
-				int particleCount = Support.getIntFromDecimalWithChance(Math.max(0.1, (float) storedStack.getCount() / (storedStack.getMaxStackSize() * 2)), world.random);
+				int particleCount = Support.chanceRound(Math.max(0.1, (float) storedStack.getCount() / (storedStack.getMaxStackSize() * 2)), world.random);
 				spawnRisingParticles(world, blockPos, storedStack, particleCount);
 			}
 		}

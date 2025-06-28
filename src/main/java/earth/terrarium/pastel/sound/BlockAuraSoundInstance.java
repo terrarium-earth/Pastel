@@ -88,9 +88,9 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 		if (volumeHold > 0.25) {
 			Vec3 pos = new Vec3(this.absX, this.absY, this.absZ);
 			float chance = volumeHold / 2F;
-			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, Support.getIntFromDecimalWithChance(chance * 3, random), true, new Vec3(24, 8, 24), -4, true, pos, new Vec3(0, 0.04D + random.nextDouble() * 0.06, 0));
-			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_MOTE_SMALL, Support.getIntFromDecimalWithChance(chance, random), false, new Vec3(16, 8, 16), -6, false, pos, Vec3.ZERO);
-			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_MOTE, Support.getIntFromDecimalWithChance(chance, random), true, new Vec3(16, 6, 16), -4, false, pos, Vec3.ZERO);
+			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, Support.chanceRound(chance * 3, random), true, new Vec3(24, 8, 24), -4, true, pos, new Vec3(0, 0.04D + random.nextDouble() * 0.06, 0));
+			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_MOTE_SMALL, Support.chanceRound(chance, random), false, new Vec3(16, 8, 16), -6, false, pos, Vec3.ZERO);
+			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_MOTE, Support.chanceRound(chance, random), true, new Vec3(16, 6, 16), -4, false, pos, Vec3.ZERO);
 		}
 	}
 	

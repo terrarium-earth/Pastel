@@ -18,7 +18,7 @@ import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
 import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
@@ -425,8 +425,8 @@ public class SanityCommand {
 		// Enchantments without recipe
 		Map<Holder<Enchantment>, InkColor> craftingColors = new HashMap<>();
 		Map<Holder<Enchantment>, InkColor> upgradeColors = new HashMap<>();
-		for (RecipeHolder<EnchanterRecipe> recipeEntry : recipeManager.getAllRecipesFor(PastelRecipeTypes.ENCHANTER)) {
-			EnchanterRecipe recipe = recipeEntry.value();
+		for (RecipeHolder<EnchanterCraftingRecipe> recipeEntry : recipeManager.getAllRecipesFor(PastelRecipeTypes.ENCHANTER)) {
+			EnchanterCraftingRecipe recipe = recipeEntry.value();
 			ItemStack output = recipe.getResultItem(source.registryAccess());
 			if (output.getItem() == Items.ENCHANTED_BOOK) {
 				ItemEnchantments enchantments = EnchantmentHelper.getEnchantmentsForCrafting(output);

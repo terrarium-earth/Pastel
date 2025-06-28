@@ -3,10 +3,11 @@ package earth.terrarium.pastel.registries.client;
 import earth.terrarium.pastel.api.energy.storage.SingleInkStorage;
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
 import earth.terrarium.pastel.api.item.ActivatableItem;
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
+import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.api.item.Stampable;
 import earth.terrarium.pastel.blocks.bottomless_bundle.BottomlessBundleItem;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.components.WrappedPresentComponent;
 import earth.terrarium.pastel.items.magic_items.EnderSpliceItem;
 import earth.terrarium.pastel.items.magic_items.PipeBombItem;
@@ -33,7 +34,7 @@ import net.neoforged.fml.event.lifecycle.*;
 
 // Vanilla models see: ModelPredicateProviderRegistry
 public class PastelModelPredicateProviders {
-	
+
 	public static void registerClient(FMLClientSetupEvent event) {
 		registerBowPredicates(PastelItems.BEDROCK_BOW.get());
 		registerCrossbowPredicates(PastelItems.BEDROCK_CROSSBOW.get());
@@ -55,15 +56,15 @@ public class PastelModelPredicateProviders {
 		registerOversizedItemPredicate(PastelItems.NECTAR_LANCE.get());
 		registerOversizedItemPredicate(PastelItems.BEDROCK_SWORD.get());
 		registerOversizedItemPredicate(PastelItems.BEDROCK_AXE.get());
-		
+
 		registerOversizedItemPredicate(PastelItems.PAINTBRUSH.get());
 		registerStampingItemPredicate(PastelItems.TUNING_STAMP.get());
-		
+
 		registerOversizedItemPredicate(PastelItems.DRACONIC_TWINSWORD.get());
 		registerOversizedItemPredicate(PastelItems.DRAGON_TALON.get());
 		registerSlotReservingItem(PastelItems.DRAGON_TALON.get());
 		registerSlotReservingItem(PastelItems.DRACONIC_TWINSWORD.get());
-		
+
 		registerOversizedItemPredicate(PastelItems.MALACHITE_WORKSTAFF.get());
 		registerOversizedItemPredicate(PastelItems.MALACHITE_ULTRA_GREATSWORD.get());
 		registerOversizedItemPredicate(PastelItems.MALACHITE_CROSSBOW.get());
@@ -74,60 +75,60 @@ public class PastelModelPredicateProviders {
 		registerOversizedItemPredicate(PastelItems.FEROCIOUS_GLASS_CREST_BIDENT.get());
 		registerOversizedItemPredicate(PastelItems.FRACTAL_GLASS_CREST_BIDENT.get());
 		registerOversizedItemPredicate(PastelItems.OMNI_ACCELERATOR.get());
-		
+
 		registerBidentThrowingItemPredicate(PastelItems.MALACHITE_BIDENT.get());
 		registerBidentThrowingItemPredicate(PastelItems.FEROCIOUS_GLASS_CREST_BIDENT.get());
 		registerBidentThrowingItemPredicate(PastelItems.FRACTAL_GLASS_CREST_BIDENT.get());
-		
+
 		registerMalachiteCrossbowPredicates(PastelItems.MALACHITE_CROSSBOW.get());
 		registerMalachiteCrossbowPredicates(PastelItems.GLASS_CREST_CROSSBOW.get());
-		
+
 		registerBottomlessBundlePredicates(PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem());
 		registerEnchantmentCanvasPredicates(PastelItems.ENCHANTMENT_CANVAS.get());
 		registerPresentPredicates(PastelBlocks.PRESENT.get().asItem());
 		registerMysteriousLocketPredicates(PastelItems.MYSTERIOUS_LOCKET.get());
 		registerStructureCompassPredicates(PastelItems.MYSTERIOUS_COMPASS.get());
-		
+
 		registerPipeBombPredicates(PastelItems.PIPE_BOMB.get());
 	}
-	
+
 	private static void registerStampingItemPredicate(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("stamped"), ((stack, world, entity, seed) -> {
 			var nbt = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 			if (nbt.contains(Stampable.STAMPING_DATA_TAG))
 				return 1F;
-			
+
 			return 0F;
 		}));
 	}
-	
+
 	private static void registerNullableInkColorPredicate(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("color"), (stack, clientWorld, entity, i) -> {
 			var color = stack.get(PastelDataComponentTypes.INK_COLOR);
 			return color == null ? -1 : color.getColorInt();
 		});
 	}
-	
+
 	private static void registerMysteriousLocketPredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("socketed"), (stack, world, entity, i) ->
 				stack.has(PastelDataComponentTypes.SOCKETED) ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerStructureCompassPredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("angle"),
 				new CompassItemPropertyFunction((world, stack, entity) -> StructureCompassItem.getStructurePos(stack)));
 	}
-	
+
 	private static void registerMalachiteCrossbowPredicates(Item crossbowItem) {
 		ItemProperties.register(crossbowItem, ResourceLocation.parse("pull"), (stack, world, user, i) ->
 				user == null || CrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration(user) - user.getUseItemRemainingTicks()) / (float) CrossbowItem.getChargeDuration(stack, user));
-		
+
 		ItemProperties.register(crossbowItem, ResourceLocation.parse("pulling"), (stack, world, entity, i) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
-		
+
 		ItemProperties.register(crossbowItem, ResourceLocation.parse("charged"), (stack, world, entity, i) ->
 				entity != null && CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
-		
+
 		ItemProperties.register(crossbowItem, ResourceLocation.parse("projectile"), (stack, world, entity, seed) -> {
 			if (stack == null) {
 				return 0F;
@@ -136,7 +137,7 @@ public class PastelModelPredicateProviders {
 			if (projectile.isEmpty()) {
 				return 0F;
 			}
-			
+
 			// Well, this is awkward
 			if (projectile.is(Items.FIREWORK_ROCKET)) {
 				return 0.1F;
@@ -156,7 +157,7 @@ public class PastelModelPredicateProviders {
 			return 0F;
 		});
 	}
-	
+
 	/**
 	 * 0.0: not throwing
 	 * 0.5: throwing in hand
@@ -170,20 +171,20 @@ public class PastelModelPredicateProviders {
 			return entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 0.5F : 0.0F;
 		});
 	}
-	
+
 	private static void registerPresentPredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("variant"), (stack, world, entity, i) ->
 				stack.getOrDefault(PastelDataComponentTypes.WRAPPED_PRESENT, WrappedPresentComponent.DEFAULT).variant().ordinal() / 10F);
 	}
-	
+
 	private static void registerBottomlessBundlePredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("locked"), (stack, world, entity, i) ->
 				BottomlessBundleItem.isLocked(stack) ? 1.0F : 0.0F);
-		
+
 		ItemProperties.register(item, ResourceLocation.parse("filled"), (stack, world, entity, i) ->
 				BottomlessBundleItem.getStoredAmount(stack) > 0 ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerMoonPhasePredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("phase"), (stack, world, entity, i) -> {
 			Entity holder = entity != null ? entity : stack.getEntityRepresentation();
@@ -193,7 +194,7 @@ public class PastelModelPredicateProviders {
 				if (world == null && holder.level() instanceof ClientLevel clientWorld) {
 					world = clientWorld;
 				}
-				
+
 				if (world == null) {
 					return 0.0F;
 				} else if (!world.dimensionType().natural()) {
@@ -204,49 +205,49 @@ public class PastelModelPredicateProviders {
 			}
 		});
 	}
-	
+
 	private static void registerActivatableItemPredicate(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("activated"), (stack, world, entity, i) ->
 				ActivatableItem.isActivated(stack) ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerSlotReservingItem(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("reserved"), (stack, world, entity, i) ->
 				SlotReservingItem.isReservingSlot(stack) ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerOversizedItemPredicate(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("oversized"), (stack, world, entity, seed) ->
 				seed == 817210941 || seed == 80085 ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerBowPredicates(Item bowItem) {
 		ItemProperties.register(bowItem, ResourceLocation.parse("pull"), (stack, world, entity, i) ->
 				entity == null || entity.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / 20.0F);
-		
+
 		ItemProperties.register(bowItem, ResourceLocation.parse("pulling"), (stack, world, entity, i) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerCrossbowPredicates(Item crossbowItem) {
 		ItemProperties.register(crossbowItem, ResourceLocation.parse("pull"), (stack, world, entity, i) ->
 				entity == null || CrossbowItem.isCharged(stack) ? 0.0F : (float) (stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / (float) CrossbowItem.getChargeDuration(stack, entity));
-		
+
 		ItemProperties.register(crossbowItem, ResourceLocation.parse("pulling"), (stack, world, entity, i) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack && !CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
-		
+
 		ItemProperties.register(crossbowItem, ResourceLocation.parse("charged"), (stack, world, entity, i) ->
 				entity != null && CrossbowItem.isCharged(stack) ? 1.0F : 0.0F);
-		
+
 		ItemProperties.register(crossbowItem, ResourceLocation.parse("firework"), (stack, world, entity, seed) ->
 				stack.getOrDefault(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY).contains(Items.FIREWORK_ROCKET) ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerPipeBombPredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("armed"), (stack, world, entity, seed) ->
 				PipeBombItem.isPrimed(stack) ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerSpectrumFishingRodItemPredicates(Item fishingRodItem) {
 		ItemProperties.register(fishingRodItem, ResourceLocation.parse("cast"), (stack, world, entity, i) -> {
 			if (entity == null)
@@ -256,27 +257,33 @@ public class PastelModelPredicateProviders {
 			return (isInMainHand || isInOffhand) && entity instanceof Player && ((PlayerEntityAccessor) entity).getSpectrumBobber() != null ? 1.0F : 0.0F;
 		});
 	}
-	
+
 	private static void registerEnderSplicePredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("bound"), (stack, world, entity, i) ->
 			EnderSpliceItem.hasTeleportTarget(stack) ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerAshenCircletPredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("cooldown"), (stack, world, entity, i) ->
 				world != null && AshenCircletItem.getCooldownTicks(stack, world) == 0 ? 0.0F : 1.0F);
 	}
-	
+
 	private static void registerAnimatedWandPredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("in_use"), (stack, world, entity, i) ->
 				entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
 	}
-	
+
 	private static void registerKnowledgeDropPredicates(Item item) {
-		ItemProperties.register(item, ResourceLocation.parse("stored_experience_10000"), (stack, world, entity, i) ->
-				ExperienceStorageItem.getStoredExperience(stack) / 10000F);
+		ItemProperties.register(item, ResourceLocation.parse("stored_experience_10000"), (stack, world, entity, i) -> {
+			if (world == null)
+				return 0F;
+
+			var storage = stack.getCapability(PastelCapabilities.Misc.XP, world.registryAccess());
+            assert storage!=null;
+            return storage.getStoredAmount() / 10000F;
+		});
 	}
-	
+
 	private static void registerInkFillStateItemPredicate(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("fill_state"), (stack, world, entity, i) -> {
 			SingleInkStorage storage = PastelItems.INK_FLASK.get().getEnergyStorage(stack);
@@ -284,9 +291,9 @@ public class PastelModelPredicateProviders {
 			float maximum = (float) storage.getMaxTotal();
 			if (current == 0 || maximum == 0)
 				return 0F;
-			
+
 			var fill = current / maximum;
-			
+
 			if (fill < 0.1F)
 				return 0.1F;
 			else if (fill < 0.25F)
@@ -297,11 +304,11 @@ public class PastelModelPredicateProviders {
 				return 0.65F;
 			else if(fill < 0.8F)
 				return 0.8F;
-			
+
 			return 1F;
 		});
 	}
-	
+
 	private static void registerEnchantmentCanvasPredicates(Item item) {
 		ItemProperties.register(item, ResourceLocation.parse("bound"), (stack, world, entity, i) ->
 			stack.has(PastelDataComponentTypes.BOUND_ITEM) ? 1.0F : 0.0F);

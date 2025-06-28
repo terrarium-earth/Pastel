@@ -53,7 +53,7 @@ public interface MultiblockCrafter extends Upgradeable, PlayerOwned {
 	}
 	
 	static void spawnExperience(Level world, BlockPos blockPos, float amount, RandomSource random) {
-		spawnExperience(world, blockPos, Support.getIntFromDecimalWithChance(amount, random));
+		spawnExperience(world, blockPos, Support.chanceRound(amount, random));
 	}
 	
 	static void spawnExperience(Level world, BlockPos blockPos, int amount) {

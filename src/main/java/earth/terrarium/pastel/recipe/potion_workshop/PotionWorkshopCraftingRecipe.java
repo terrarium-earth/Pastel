@@ -3,9 +3,10 @@ package earth.terrarium.pastel.recipe.potion_workshop;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
+import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.potion_workshop.PotionWorkshopBlockEntity;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.PacketCodecHelper;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
@@ -95,24 +96,25 @@ public class PotionWorkshopCraftingRecipe extends PotionWorkshopRecipe {
 	}
 	
 	@Override
-	public boolean matches(@NotNull RecipeInput inv, Level world) {
-		if (enoughExperienceSupplied(inv)) {
-			return super.matches(inv, world);
+	public boolean matches(@NotNull RecipeInput inv, Level level) {
+		if (enoughExperienceSupplied(inv, level.registryAccess())) {
+			return super.matches(inv, level);
 		}
 		return false;
 	}
 	
-	// we just test for a single ExperienceStorageItem here instead
+	// we just test for a single ExperienceHandler here instead
 	// of iterating over every item. The specification mentions that
-	// Only one is supported and just a single ExperienceStorageItem
+	// Only one is supported and just a single ExperienceHandler
 	// should be used per recipe, tough
-	private boolean enoughExperienceSupplied(RecipeInput inv) {
+	private boolean enoughExperienceSupplied(RecipeInput inv, HolderLookup.Provider lookup) {
 		if (this.requiredExperience > 0) {
 			for (int i : new int[]{PotionWorkshopBlockEntity.BASE_INPUT_SLOT_ID, PotionWorkshopBlockEntity.FIRST_INGREDIENT_SLOT,
 					PotionWorkshopBlockEntity.FIRST_INGREDIENT_SLOT + 1, PotionWorkshopBlockEntity.FIRST_INGREDIENT_SLOT + 2}) {
-				
-				if ((inv.getItem(i).getItem() instanceof ExperienceStorageItem)) {
-					return ExperienceStorageItem.getStoredExperience(inv.getItem(i)) >= requiredExperience;
+
+				var storage = inv.getItem(i).getCapability(PastelCapabilities.Misc.XP, lookup);
+				if (storage != null) {
+					return storage.extract(requiredExperience, true) == requiredExperience;
 				}
 			}
 		}

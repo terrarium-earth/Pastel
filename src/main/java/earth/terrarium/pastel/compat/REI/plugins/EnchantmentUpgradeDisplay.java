@@ -4,7 +4,7 @@ import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
 import earth.terrarium.pastel.recipe.RecipeScaling;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -50,7 +50,7 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 		maxNormal = enchantment.value().getMaxLevel();
 		
 		itemScaling = recipe.getItemScaling();
-		xpScaling = recipe.getXPScaling();
+		xpScaling = recipe.getXpScaling();
 		transKey = enchantment.value().description().copy().withStyle(s -> {
 			s.withItalic(true);
 			s.withColor(EnchantmentUpgradeCategory.NORMAL_COLOR);
@@ -79,7 +79,7 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 		var enchOver = new ArrayList<ItemStack>();
 		
 		for (int i = 1; i < levelCap; i++) {
-			ItemStack gem = KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getXPScaling().apply(i), true);
+			ItemStack gem = KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getXpScaling().apply(i), true);
 			
 			if (i < maxNormal) {
 				appendBookStack(enchant, i, enchNormal);
@@ -138,6 +138,6 @@ public class EnchantmentUpgradeDisplay extends EnchanterDisplay {
 	@Override
 	public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, EnchanterRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
+		return AdvancementHelper.hasAdvancement(client.player, EnchanterCraftingRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
 	}
 }

@@ -152,7 +152,7 @@ public class Support {
 		}
 	}
 	
-	public static int getIntFromDecimalWithChance(double d, @NotNull RandomSource random) {
+	public static int chanceRound(double d, @NotNull RandomSource random) {
 		boolean roundUp = (random.nextFloat() < d % 1);
 		if (roundUp) {
 			return ((int) d) + 1;

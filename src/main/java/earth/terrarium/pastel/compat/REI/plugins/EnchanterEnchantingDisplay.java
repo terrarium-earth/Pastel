@@ -3,7 +3,7 @@ package earth.terrarium.pastel.compat.REI.plugins;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -23,13 +23,13 @@ public class EnchanterEnchantingDisplay extends EnchanterDisplay {
 	protected final int craftingTime;
 	
 	// first input is the center, all others around clockwise
-	public EnchanterEnchantingDisplay(@NotNull RecipeHolder<EnchanterRecipe> recipe) {
+	public EnchanterEnchantingDisplay(@NotNull RecipeHolder<EnchanterCraftingRecipe> recipe) {
 		super(recipe, buildIngredients(recipe.value()), Collections.singletonList(EntryIngredients.of(recipe.value().getResultItem(BasicDisplay.registryAccess()))));
 		this.requiredExperience = recipe.value().getRequiredExperience();
-		this.craftingTime = recipe.value().getCraftingTime();
+		this.craftingTime = recipe.value().getCraftingTime(1);
 	}
 	
-	private static List<EntryIngredient> buildIngredients(EnchanterRecipe recipe) {
+	private static List<EntryIngredient> buildIngredients(EnchanterCraftingRecipe recipe) {
 		List<EntryIngredient> inputs = recipe.getIngredients().stream().map(EntryIngredients::ofIngredient).collect(Collectors.toCollection(ArrayList::new));
 		inputs.add(EntryIngredients.of(KnowledgeGemItem.getKnowledgeDropStackWithXP(recipe.getRequiredExperience(), true)));
 		return inputs;
@@ -43,7 +43,7 @@ public class EnchanterEnchantingDisplay extends EnchanterDisplay {
 	@Override
     public boolean isUnlocked() {
 		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, EnchanterRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
+		return AdvancementHelper.hasAdvancement(client.player, EnchanterCraftingRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
 	}
 	
 }

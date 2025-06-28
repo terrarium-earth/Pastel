@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.recipe;
 
+import earth.terrarium.pastel.capabilities.item.FriendlyStackHandler;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 
@@ -10,6 +11,10 @@ public class SimpleRecipeInput implements RecipeInput {
 	
 	public SimpleRecipeInput(List<ItemStack> stacks) {
 		this.stacks = stacks;
+	}
+
+	public SimpleRecipeInput(FriendlyStackHandler handler) {
+		this.stacks = handler.getInternalList();
 	}
 	
 	@Override

@@ -2,13 +2,12 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
 import earth.terrarium.pastel.capabilities.*;
+import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
 import net.minecraft.world.Container;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.level.block.entity.*;
 import net.neoforged.neoforge.capabilities.*;
 import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.items.wrapper.InvWrapper;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 
 import java.util.function.Supplier;
 
@@ -54,13 +53,15 @@ public class PastelCapabilityHandlers {
                 (stack, v) -> new FluidHandlerItemStackSimple.Consumable(() -> PastelDataComponentTypes.MERMAIDS_GEM, stack, 1000),
                 PastelItems.MERMAIDS_GEM.get());
 
-        event.registerItem(PastelCapabilities.Miscellaneous.MINING, (stack, v) -> (AreaMiningHandler) stack.getItem(),
+        event.registerItem(PastelCapabilities.Misc.MINING, (stack, v) -> (AreaMiningHandler) stack.getItem(),
                 PastelItems.MALACHITE_WORKSTAFF, PastelItems.GLASS_CREST_WORKSTAFF);
 
-        event.registerItem(PastelCapabilities.Miscellaneous.SPLIT_DAMAGE, (stack, v) -> (SplitDamageHandler) stack.getItem(),
+        event.registerItem(PastelCapabilities.Misc.SPLIT_DAMAGE, (stack, v) -> (SplitDamageHandler) stack.getItem(),
                 PastelItems.GLASS_CREST_ULTRA_GREATSWORD, PastelItems.MALACHITE_BIDENT, PastelItems.FRACTAL_GLASS_CREST_BIDENT,
                 PastelItems.FEROCIOUS_GLASS_CREST_BIDENT, PastelItems.DRAGON_TALON, PastelItems.DREAMFLAYER,
                 PastelItems.KNOTTED_SWORD, PastelItems.NECTAR_LANCE);
+
+        event.registerItem(PastelCapabilities.Misc.XP, KnowledgeGemItem.Wrapper::new, PastelItems.KNOWLEDGE_GEM);
     }
 	
 	private static void containerBlockBE(Supplier<? extends BlockEntityType<? extends Container>> type, RegisterCapabilitiesEvent event) {

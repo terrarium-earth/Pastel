@@ -129,7 +129,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 				if (amount > 0) {
 					ParticleOptions particleEffect = ColoredCraftingParticleEffect.of(entry.getKey().getColor());
 					
-					float particleAmount = Support.getIntFromDecimalWithChance(amount * 0.125, world.random);
+					float particleAmount = Support.chanceRound(amount * 0.125, world.random);
 					for (int i = 0; i < particleAmount; i++) {
 						float randomX = 2.0F - world.getRandom().nextFloat() * 5;
 						float randomZ = 2.0F - world.getRandom().nextFloat() * 5;
@@ -387,7 +387,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 		if (!recipe.areYieldUpgradesDisabled()) {
 			double yieldModifier = pedestalBlockEntity.upgrades.getEffectiveValue(UpgradeType.YIELD);
 			if (yieldModifier != 1.0) {
-				int modifiedCount = Support.getIntFromDecimalWithChance(outputStack.getCount() * yieldModifier, world.random);
+				int modifiedCount = Support.chanceRound(outputStack.getCount() * yieldModifier, world.random);
 				outputStack.setCount(Math.min(outputStack.getMaxStackSize(), modifiedCount));
 			}
 		}

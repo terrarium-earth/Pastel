@@ -1,7 +1,8 @@
 package earth.terrarium.pastel.items.magic_items;
 
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
+import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.registries.PastelBannerPatterns;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -32,17 +33,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class KnowledgeGemItem extends Item implements ExperienceStorageItem, LoomPatternProvider {
+public class KnowledgeGemItem extends Item implements LoomPatternProvider {
 	
-	private final int maxStorageBase;
+	private static final int DEFAULT_MAX = 10000;
 	
 	// these are copies from the item model file
 	// and specify the sprite used for its texture
-	protected final int[] displayTiers = {1, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000};
+	protected static final int[] TIERS = {1, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000};
 	
-	public KnowledgeGemItem(Properties settings, int maxStorageBase) {
+	public KnowledgeGemItem(Properties settings) {
 		super(settings);
-		this.maxStorageBase = maxStorageBase;
 	}
 	
 	public static ItemStack getKnowledgeDropStackWithXP(int experience, boolean noStoreTooltip) {
@@ -53,17 +53,11 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	}
 	
 	@Override
-	public int getMaxStoredExperience(HolderLookup.Provider lookup, ItemStack itemStack) {
-		int efficiencyLevel = Ench.getLevel(lookup, Enchantments.EFFICIENCY, itemStack);
-		return maxStorageBase * (int) Math.pow(10, Math.min(5, efficiencyLevel)); // to not exceed int max
-	}
-	
-	@Override
 	public UseAnim getUseAnimation(ItemStack stack) {
 		return UseAnim.BOW;
 	}
 	
-	public int getTransferableExperiencePerTick(HolderLookup.Provider lookup, ItemStack itemStack) {
+	public int getTransferRate(HolderLookup.Provider lookup, ItemStack itemStack) {
 		int quickChargeLevel = Ench.getLevel(lookup, Enchantments.QUICK_CHARGE, itemStack);
 		return (int) (2 * Math.pow(2, Math.min(10, quickChargeLevel)));
 	}
@@ -81,40 +75,44 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	@Override
 	public void onUseTick(Level world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
 		super.onUseTick(world, user, stack, remainingUseTicks);
-		if (user instanceof ServerPlayer serverPlayerEntity) {
-			
-			int playerExperience = serverPlayerEntity.totalExperience;
-			int itemExperience = ExperienceStorageItem.getStoredExperience(stack);
-			int transferableExperience = getTransferableExperiencePerTick(world.registryAccess(), stack);
-			
-			if (serverPlayerEntity.isShiftKeyDown()) {
-				int maxStorage = getMaxStoredExperience(world.registryAccess(), stack);
-				int experienceToTransfer = serverPlayerEntity.isCreative() ? Math.min(transferableExperience, maxStorage - itemExperience) : Math.min(Math.min(transferableExperience, playerExperience), maxStorage - itemExperience);
-				
-				// store experience in gem; drain from player
-				if (experienceToTransfer > 0 && itemExperience < maxStorage && removePlayerExperience(serverPlayerEntity, experienceToTransfer)) {
-					ExperienceStorageItem.addStoredExperience(world.registryAccess(), stack, experienceToTransfer);
-					
-					if (remainingUseTicks % 4 == 0) {
-						world.playSound(null, user.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.3F, 0.8F + world.getRandom().nextFloat() * 0.4F);
-					}
-				}
-			} else {
-				// drain experience from gem; give to player
-				if (itemExperience > 0 && playerExperience != Integer.MAX_VALUE) {
-					int experienceToTransfer = Math.min(Math.min(transferableExperience, itemExperience), Integer.MAX_VALUE - playerExperience);
-					
-					if (experienceToTransfer > 0) {
-						if (!serverPlayerEntity.isCreative()) {
-							serverPlayerEntity.giveExperiencePoints(experienceToTransfer);
-						}
-						ExperienceStorageItem.removeStoredExperience(stack, experienceToTransfer);
-						
-						if (remainingUseTicks % 4 == 0) {
-							world.playSound(null, user.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.3F, 0.8F + world.getRandom().nextFloat() * 0.4F);
-						}
-					}
-				}
+		if (!(user instanceof ServerPlayer player))
+			return;
+
+		var storage = stack.getCapability(PastelCapabilities.Misc.XP, world.registryAccess());
+
+		if (storage == null)
+			return;
+
+		int available = player.totalExperience;
+		int rate = getTransferRate(world.registryAccess(), stack);
+
+		if (player.isShiftKeyDown()) {
+			var offer = player.isCreative() ? rate : Math.min(rate, available);
+			var inserted = offer - storage.insert(offer, true);
+
+			if (inserted == 0)
+				return;
+
+			removePlayerExperience(player, inserted);
+			storage.insert(inserted, false);
+
+			if (remainingUseTicks % 4 == 0) {
+				world.playSound(null, user.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.3F, 0.8F + world.getRandom().nextFloat() * 0.4F);
+			}
+		} else {
+			// drain experience from gem; give to player
+			var drain = storage.extract(rate, true);
+			if (drain == 0)
+				return;
+
+			player.giveExperiencePoints(drain);
+			if (player.isCreative())
+				return;
+
+			storage.extract(drain, false);
+
+			if (remainingUseTicks % 4 == 0) {
+				world.playSound(null, user.blockPosition(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.PLAYERS, 0.3F, 0.8F + world.getRandom().nextFloat() * 0.4F);
 			}
 		}
 	}
@@ -122,17 +120,27 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
 		super.appendHoverText(stack, context, tooltip, type);
-		
-		HolderLookup.Provider lookup = context.registries();
-		int maxExperience = getMaxStoredExperience(lookup, stack);
-		int storedExperience = ExperienceStorageItem.getStoredExperience(stack);
+
+		var registries = context.registries();
+		if (registries== null)
+			return;
+
+		var storage = stack.getCapability(PastelCapabilities.Misc.XP, registries);
+		int maxExperience = DEFAULT_MAX;
+		int storedExperience = 0;
+
+		if (storage != null) {
+			maxExperience = storage.getCapacity();
+			storedExperience = storage.getStoredAmount();
+		}
+
 		if (storedExperience == 0) {
 			tooltip.add(Component.literal("0 ").withStyle(ChatFormatting.DARK_GRAY).append(Component.translatable("item.pastel.knowledge_gem.tooltip.stored_experience", maxExperience).withStyle(ChatFormatting.GRAY)));
 		} else {
 			tooltip.add(Component.literal(storedExperience + " ").withStyle(ChatFormatting.GREEN).append(Component.translatable("item.pastel.knowledge_gem.tooltip.stored_experience", maxExperience).withStyle(ChatFormatting.GRAY)));
 		}
 		if (shouldDisplayUsageTooltip(stack)) {
-			tooltip.add(Component.translatable("item.pastel.knowledge_gem.tooltip.use", getTransferableExperiencePerTick(lookup, stack)).withStyle(ChatFormatting.GRAY));
+			tooltip.add(Component.translatable("item.pastel.knowledge_gem.tooltip.use", getTransferRate(registries, stack)).withStyle(ChatFormatting.GRAY));
 			addBannerPatternProviderTooltip(tooltip);
 		}
 	}
@@ -157,12 +165,12 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 	}
 	
 	public int getDisplayTierForExperience(int experience) {
-		for (int i = 0; i < displayTiers.length; i++) {
-			if (experience < displayTiers[i]) {
+		for (int i = 0; i < TIERS.length; i++) {
+			if (experience < TIERS[i]) {
 				return i;
 			}
 		}
-		return displayTiers.length;
+		return TIERS.length;
 	}
 	
 	@Override
@@ -185,4 +193,69 @@ public class KnowledgeGemItem extends Item implements ExperienceStorageItem, Loo
 		return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY) || enchantment.is(Enchantments.QUICK_CHARGE);
 	}
 
+	public static class Wrapper implements ExperienceHandler {
+
+		private final ItemStack holder;
+		private final HolderLookup.Provider lookup;
+
+		public Wrapper(ItemStack holder, HolderLookup.Provider lookup) {
+			if (!(holder.getItem() instanceof KnowledgeGemItem))
+				throw new IllegalArgumentException("Tried to make a knowledge gem wrapper for a non-knowledge gem stack");
+
+			this.holder = holder;
+			this.lookup = lookup;
+		}
+
+		private int get() {
+			return holder.getOrDefault(PastelDataComponentTypes.STORED_EXPERIENCE, 0);
+		}
+
+		private void set(int amount) {
+			holder.set(PastelDataComponentTypes.STORED_EXPERIENCE, amount);
+		}
+
+		@Override
+		public int getStoredAmount() {
+			return get();
+		}
+
+		@Override
+		public int insert(int amount, boolean simulate) {
+			var insertedAmount = getStoredAmount() + amount;
+			var fill = Math.min(insertedAmount, getCapacity());
+			var overflow = insertedAmount - fill;
+
+			if (!simulate)
+				set(fill);
+
+			return overflow;
+		}
+
+		@Override
+		public boolean extractOrFail(int amount) {
+			if (extract(amount, true) == amount) {
+				extract(amount, false);
+				return true;
+			}
+
+			return false;
+		}
+
+		@Override
+		public int extract(int amount, boolean simulate) {
+			var extractAmount = getStoredAmount() - amount;
+			var drain = amount + Math.min(extractAmount, 0);
+
+			if (!simulate)
+				set(getStoredAmount() - drain);
+
+			return drain;
+		}
+
+		@Override
+		public int getCapacity() {
+			int efficiencyLevel = Ench.getLevel(lookup, Enchantments.EFFICIENCY, holder);
+			return DEFAULT_MAX * (int) Math.pow(10, Math.min(5, efficiencyLevel)); // to not exceed int max
+		}
+	}
 }

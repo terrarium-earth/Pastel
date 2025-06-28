@@ -43,7 +43,7 @@ import earth.terrarium.pastel.compat.modonomicon.unlock_conditions.RecipesLoaded
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.HumusConvertingRecipe;
@@ -151,7 +151,7 @@ public class ModonomiconCompat extends PastelIntegrationPacks.ModIntegrationPack
         PageRendererRegistry.registerPageRenderer(ANVIL_CRUSHING_PAGE, p -> new BookAnvilCrushingPageRenderer((BookGatedRecipePage<AnvilCrushingRecipe>) p));
         PageRendererRegistry.registerPageRenderer(PEDESTAL_CRAFTING_PAGE, p -> new BookPedestalCraftingPageRenderer((BookGatedRecipePage<PedestalRecipe>) p));
         PageRendererRegistry.registerPageRenderer(FUSION_SHRINE_CRAFTING_PAGE, p -> new BookFusionShrineCraftingPageRenderer((BookGatedRecipePage<FusionShrineRecipe>) p));
-        PageRendererRegistry.registerPageRenderer(ENCHANTER_CRAFTING_PAGE, p -> new BookEnchanterCraftingPageRenderer((BookGatedRecipePage<EnchanterRecipe>) p));
+        PageRendererRegistry.registerPageRenderer(ENCHANTER_CRAFTING_PAGE, p -> new BookEnchanterCraftingPageRenderer((BookGatedRecipePage<EnchanterCraftingRecipe>) p));
         PageRendererRegistry.registerPageRenderer(ENCHANTER_UPGRADING_PAGE, p -> new BookEnchanterUpgradingPageRenderer((BookGatedRecipePage<EnchantmentUpgradeRecipe>) p));
         PageRendererRegistry.registerPageRenderer(POTION_WORKSHOP_BREWING_PAGE, p -> new BookPotionWorkshopPageRenderer<>((BookGatedRecipePage<PotionWorkshopBrewingRecipe>) p));
         PageRendererRegistry.registerPageRenderer(POTION_WORKSHOP_CRAFTING_PAGE, p -> new BookPotionWorkshopPageRenderer<>((BookGatedRecipePage<PotionWorkshopCraftingRecipe>) p));

@@ -4,7 +4,7 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.emi.GatedSpectrumEmiRecipe;
 import earth.terrarium.pastel.items.magic_items.KnowledgeGemItem;
 import earth.terrarium.pastel.recipe.GatedPastelRecipe;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
@@ -21,9 +21,9 @@ public class EnchanterEmiRecipeGated extends GatedSpectrumEmiRecipe<GatedPastelR
 	private final Component description;
 	private final int craftingTime;
 	
-	public EnchanterEmiRecipeGated(EmiRecipeCategory category, EnchanterRecipe recipe) {
+	public EnchanterEmiRecipeGated(EmiRecipeCategory category, EnchanterCraftingRecipe recipe) {
 		super(category, recipe, 132, 80);
-		this.craftingTime = recipe.getCraftingTime();
+		this.craftingTime = recipe.getCraftingTime(1);
 		this.description = getCraftingTimeText(craftingTime);
 		
 		this.inputs = recipe.getIngredients().stream().map(EmiIngredient::of).toList();

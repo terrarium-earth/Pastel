@@ -13,7 +13,7 @@ import earth.terrarium.pastel.recipe.crafting.dynamic.ColorEverpromiseRibbonReci
 import earth.terrarium.pastel.recipe.crafting.dynamic.RepairAnythingRecipe;
 import earth.terrarium.pastel.recipe.crafting.dynamic.WrapPresentRecipe;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.FluidConvertingRecipe;
@@ -78,7 +78,7 @@ public class PastelRecipeSerializers {
 	public static final RecipeSerializer<ShootingStarHardeningRecipe> SHOOTING_STAR_HARDENING = register("shooting_star_hardening", new EmptyRecipeSerializer<>(ShootingStarHardeningRecipe::new));
 	
 	// Enchanter
-	public static final RecipeSerializer<EnchanterRecipe> ENCHANTER_RECIPE_SERIALIZER = register("enchanter", new EnchanterRecipe.Serializer());
+	public static final RecipeSerializer<EnchanterCraftingRecipe> ENCHANTER_RECIPE_SERIALIZER = register("enchanter", new EnchanterCraftingRecipe.Serializer());
 	public static final RecipeSerializer<EnchantmentUpgradeRecipe> ENCHANTMENT_UPGRADE_RECIPE_SERIALIZER = register("enchantment_upgrade", new EnchantmentUpgradeRecipe.Serializer());
 	
 	// Potion Workshop

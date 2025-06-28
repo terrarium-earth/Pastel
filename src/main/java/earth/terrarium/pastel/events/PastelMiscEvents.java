@@ -262,7 +262,7 @@ public class PastelMiscEvents {
 		if (AREA_TARGETS.contains(original))
 			return; // No recursion
 
-		var cap = player.getMainHandItem().getCapability(PastelCapabilities.Miscellaneous.MINING);
+		var cap = player.getMainHandItem().getCapability(PastelCapabilities.Misc.MINING);
 		if (cap == null)
 			return;
 

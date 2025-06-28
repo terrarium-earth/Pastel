@@ -318,7 +318,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 	
 	private void addRandomEffects(ItemStack baseIngredient, PotionMod potionMod, RandomSource random, List<InkPoweredStatusEffectInstance> effects) {
 		// random positive ones
-		int additionalPositiveEffectCount = Support.getIntFromDecimalWithChance(potionMod.additionalRandomPositiveEffectCount(), random);
+		int additionalPositiveEffectCount = Support.chanceRound(potionMod.additionalRandomPositiveEffectCount(), random);
 		if (additionalPositiveEffectCount > 0) {
 			List<PotionWorkshopBrewingRecipe> randomlySelectedRecipes = pullRandomMatchingRecipes(positiveRecipes, additionalPositiveEffectCount, effects, baseIngredient);
 			for (PotionWorkshopBrewingRecipe recipe : randomlySelectedRecipes) {
@@ -330,7 +330,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 		}
 		
 		// random negative ones
-		int additionalNegativeEffectCount = Support.getIntFromDecimalWithChance(potionMod.additionalRandomNegativeEffectCount(), random);
+		int additionalNegativeEffectCount = Support.chanceRound(potionMod.additionalRandomNegativeEffectCount(), random);
 		if (additionalNegativeEffectCount > 0) {
 			List<PotionWorkshopBrewingRecipe> randomlySelectedRecipes = pullRandomMatchingRecipes(potionMod.flags().makeEffectsPositive() ? positiveRecipes : negativeRecipes, additionalNegativeEffectCount, effects, baseIngredient);
 			for (PotionWorkshopBrewingRecipe recipe : randomlySelectedRecipes) {
@@ -388,7 +388,7 @@ public class PotionWorkshopBrewingRecipe extends PotionWorkshopRecipe {
 			
 			for (Tuple<Float, Float> mods : SPLIT_EFFECT_POTENCY_AND_DURATION) {
 				int newDuration = (int) (instance.getDuration() * mods.getB());
-				int newAmplifier = Support.getIntFromDecimalWithChance(instance.getAmplifier() * mods.getA(), random);
+				int newAmplifier = Support.chanceRound(instance.getAmplifier() * mods.getA(), random);
 				if (newAmplifier >= 0) {
 					splitInstances.add(new InkPoweredStatusEffectInstance(new MobEffectInstance(instance.getEffect(), newDuration, newAmplifier, instance.isAmbient(), instance.isVisible()), poweredInstance.getInkCost(), poweredInstance.getColor(), poweredInstance.isUnidentifiable(), poweredInstance.isIncurable()));
 				}

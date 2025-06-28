@@ -101,7 +101,7 @@ public record PotionRecipeEffect(
 			potency = 0; // effects that only have 1 level, like night vision
 		} else {
 			potency = (((1 + potency) * potionMod.potencyMultiplier()) - 1) * potencyModifier();
-			potency = Support.getIntFromDecimalWithChance(potency, random);
+			potency = Support.chanceRound(potency, random);
 			
 			// if the result of the potency calculation was negative because of a very low recipe base potencyModifier
 			// (not because the player was greedy and got mali because of low multiplicativePotencyModifier)

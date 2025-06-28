@@ -184,7 +184,7 @@ public abstract class PedestalRecipe extends GatedStackPastelRecipe<PedestalReci
 		for (GemstoneColor gemstoneColor : BuiltinGemstoneColor.values()) {
 			double efficiencyModifier = pedestal.getUpgradeHolder().getEffectiveValue(Upgradeable.UpgradeType.EFFICIENCY);
 			int gemstonePowderAmount = this.getGemstonePowderAmount(gemstoneColor);
-			int gemstonePowderAmountAfterMod = Support.getIntFromDecimalWithChance(gemstonePowderAmount / efficiencyModifier, world.random);
+			int gemstonePowderAmountAfterMod = Support.chanceRound(gemstonePowderAmount / efficiencyModifier, world.random);
 			pedestal.getItem(PedestalBlockEntity.getSlotForGemstonePowder(gemstoneColor)).shrink(gemstonePowderAmountAfterMod);
 		}
 	}

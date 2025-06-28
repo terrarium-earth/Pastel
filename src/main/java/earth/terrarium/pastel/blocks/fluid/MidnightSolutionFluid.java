@@ -176,11 +176,11 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
 		ItemEnchantments enchantments = EnchantmentHelper.getEnchantmentsForCrafting(itemStack);
 		if (!enchantments.isEmpty()) {
 			int randomEnchantmentIndex = world.random.nextInt(enchantments.size());
-			Object2IntMap.Entry<Holder<Enchantment>> entryToRemove = enchantments.entrySet().stream().toList().get(randomEnchantmentIndex);
-			Tuple<ItemStack, Integer> result = Ench.removeEnchantments(itemStack, entryToRemove.getKey());
+			Object2IntMap.Entry<Holder<Enchantment>> entry = enchantments.entrySet().stream().toList().get(randomEnchantmentIndex);
+			Tuple<ItemStack, Integer> result = Ench.removeEnchantments(itemStack, entry.getKey());
 			
 			if (result.getB() > 0) {
-				spawnXP(world, itemEntity, EnchanterBlockEntity.getEnchantingPrice(itemStack, entryToRemove.getKey(), entryToRemove.getIntValue()));
+				spawnXP(world, itemEntity, Ench.getEnchantmentCost(entry.getKey(), entry.getIntValue(), itemStack.getEnchantmentValue()));
 				itemEntity.setItem(result.getA());
 				itemEntity.setDefaultPickUpDelay();
 			}
@@ -190,12 +190,12 @@ public abstract class MidnightSolutionFluid extends PastelFluid {
 
 			if (!canvas.isEmpty()) {
 				int randomEnchantmentIndex = world.random.nextInt(canvas.size());
-				Object2IntMap.Entry<Holder<Enchantment>> entryToRemove = canvas.entrySet().stream().toList().get(randomEnchantmentIndex);
+				Object2IntMap.Entry<Holder<Enchantment>> entry = canvas.entrySet().stream().toList().get(randomEnchantmentIndex);
 				
 				var builder = new ItemEnchantments.Mutable(canvas);
-				builder.set(entryToRemove.getKey(), 0);
+				builder.set(entry.getKey(), 0);
 				
-				spawnXP(world, itemEntity, EnchanterBlockEntity.getEnchantingPrice(boundItem.getDefaultInstance(), entryToRemove.getKey(), entryToRemove.getIntValue()));
+				spawnXP(world, itemEntity, Ench.getEnchantmentCost(entry.getKey(), entry.getIntValue(), 1));
 				
 				ItemEnchantments targetEnchants = builder.toImmutable();
 				if (targetEnchants.isEmpty()) {

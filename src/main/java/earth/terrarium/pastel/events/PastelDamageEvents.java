@@ -125,7 +125,7 @@ public class PastelDamageEvents {
         if (weapon.isEmpty())
             return;
 
-        var split = weapon.getCapability(PastelCapabilities.Miscellaneous.SPLIT_DAMAGE);
+        var split = weapon.getCapability(PastelCapabilities.Misc.SPLIT_DAMAGE);
 
         if (split == null)
             return;
@@ -212,7 +212,7 @@ public class PastelDamageEvents {
         if (weapon.isEmpty())
             return;
 
-        if (weapon.getCapability(PastelCapabilities.Miscellaneous.SPLIT_DAMAGE) instanceof ArmorPiercingHandler ap) {
+        if (weapon.getCapability(PastelCapabilities.Misc.SPLIT_DAMAGE) instanceof ArmorPiercingHandler ap) {
             var target = event.getEntity();
 
             container.addModifier(DamageContainer.Reduction.ENCHANTMENTS, (damageContainer, f) -> f * (1 - ap.getProtReduction(target, weapon)));

@@ -5,7 +5,7 @@ import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.HumusConvertingRecipe;
@@ -32,7 +32,7 @@ public class PastelRecipeTypes {
 	public static final RecipeType<PedestalRecipe> PEDESTAL = register("pedestal");
 	public static final RecipeType<AnvilCrushingRecipe> ANVIL_CRUSHING = register("anvil_crushing");
 	public static final RecipeType<FusionShrineRecipe> FUSION_SHRINE = register("fusion_shrine");
-	public static final RecipeType<EnchanterRecipe> ENCHANTER = register("enchanter");
+	public static final RecipeType<EnchanterCraftingRecipe> ENCHANTER = register("enchanter");
 	public static final RecipeType<EnchantmentUpgradeRecipe> ENCHANTMENT_UPGRADE = register("enchantment_upgrade");
 	public static final RecipeType<PotionWorkshopBrewingRecipe> POTION_WORKSHOP_BREWING = register("potion_workshop_brewing");
 	public static final RecipeType<PotionWorkshopCraftingRecipe> POTION_WORKSHOP_CRAFTING = register("potion_workshop_crafting");

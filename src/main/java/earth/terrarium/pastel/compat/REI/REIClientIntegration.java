@@ -57,7 +57,7 @@ import earth.terrarium.pastel.recipe.InkConvertingRecipe;
 import earth.terrarium.pastel.recipe.anvil_crushing.AnvilCrushingRecipe;
 import earth.terrarium.pastel.recipe.cinderhearth.CinderhearthRecipe;
 import earth.terrarium.pastel.recipe.crystallarieum.CrystallarieumRecipe;
-import earth.terrarium.pastel.recipe.enchanter.EnchanterRecipe;
+import earth.terrarium.pastel.recipe.enchanter.EnchanterCraftingRecipe;
 import earth.terrarium.pastel.recipe.enchanter.EnchantmentUpgradeRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.DragonrotConvertingRecipe;
 import earth.terrarium.pastel.recipe.fluid_converting.HumusConvertingRecipe;
@@ -167,7 +167,7 @@ public class REIClientIntegration implements REIClientPlugin {
 		registry.registerRecipeFiller(AnvilCrushingRecipe.class, PastelRecipeTypes.ANVIL_CRUSHING, AnvilCrushingDisplay::new);
 		registry.registerRecipeFiller(PedestalRecipe.class, PastelRecipeTypes.PEDESTAL, PedestalCraftingDisplay::new);
 		registry.registerRecipeFiller(FusionShrineRecipe.class, PastelRecipeTypes.FUSION_SHRINE, FusionShrineDisplay::new);
-		registry.registerRecipeFiller(EnchanterRecipe.class, PastelRecipeTypes.ENCHANTER, EnchanterEnchantingDisplay::new);
+		registry.registerRecipeFiller(EnchanterCraftingRecipe.class, PastelRecipeTypes.ENCHANTER, EnchanterEnchantingDisplay::new);
 		registry.registerRecipeFiller(EnchantmentUpgradeRecipe.class, PastelRecipeTypes.ENCHANTMENT_UPGRADE, EnchantmentUpgradeDisplay::new);
 		registry.registerRecipeFiller(PotionWorkshopBrewingRecipe.class, PastelRecipeTypes.POTION_WORKSHOP_BREWING, PotionWorkshopBrewingDisplay::new);
 		registry.registerRecipeFiller(PotionWorkshopCraftingRecipe.class, PastelRecipeTypes.POTION_WORKSHOP_CRAFTING, PotionWorkshopCraftingDisplay::new);

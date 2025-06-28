@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import earth.terrarium.pastel.api.entity.PlayerEntityAccessor;
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
+import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.entity.entity.PastelFishingBobberEntity;
 import earth.terrarium.pastel.helpers.Ench;
@@ -128,28 +128,6 @@ public abstract class PlayerEntityMixin extends LivingEntity implements PlayerEn
 		if (player.hasEffect(PastelMobEffects.SCARRED)) {
 			cir.setReturnValue(false);
 		}
-	}
-	
-	// If the player holds an ExperienceStorageItem in their hands
-	// experience is tried to get put in there first
-	@ModifyVariable(at = @At("HEAD"), method = "giveExperiencePoints", argsOnly = true)
-	public int addExperience(int experience) {
-		if (experience < 0) { // draining XP, like Botanias Rosa Arcana
-			return experience;
-		}
-		
-		// if the player has a ExperienceStorageItem in hand add the XP to that
-		Player player = (Player) (Object) this;
-		for (ItemStack stack : getHandSlots()) {
-			if (!player.isUsingItem() && stack.getItem() instanceof ExperienceStorageItem) {
-				experience = ExperienceStorageItem.addStoredExperience(level().registryAccess(), stack, experience);
-				player.takeXpDelay = 0;
-				if (experience == 0) {
-					break;
-				}
-			}
-		}
-		return experience;
 	}
 	
 	@Inject(method = "stopSleepInBed", at = @At(value = "HEAD"))

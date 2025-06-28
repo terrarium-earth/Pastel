@@ -603,7 +603,7 @@ public class PastelItems {
     public static final DeferredItem<Item> GLOW_PHANTOM_FRAME = register(simple(item("glow_phantom_frame", () -> new PhantomGlowFrameItem(PastelEntityTypes.GLOW_PHANTOM_FRAME.get(), IS.of()), InkColors.YELLOW)));
 
     // Specialty Magical Tools
-    public static final DeferredItem<KnowledgeGemItem> KNOWLEDGE_GEM = register(item("knowledge_gem", () -> new KnowledgeGemItem(IS.of(1, Rarity.UNCOMMON), 10000), InkColors.PURPLE));
+    public static final DeferredItem<KnowledgeGemItem> KNOWLEDGE_GEM = register(item("knowledge_gem", () -> new KnowledgeGemItem(IS.of(1, Rarity.UNCOMMON)), InkColors.PURPLE));
     public static final DeferredItem<Item> CELESTIAL_POCKETWATCH = register(simple(item("celestial_pocketwatch", () -> new CelestialPocketWatchItem(IS.of(1, Rarity.UNCOMMON)), InkColors.MAGENTA)));
     public static final DeferredItem<Item> ARTISANS_ATLAS = register(simple(item("artisans_atlas", () -> new ArtisansAtlasItem(IS.of(1, Rarity.UNCOMMON)), InkColors.YELLOW)));
     public static final DeferredItem<Item> GILDED_BOOK = register(simple(item("gilded_book", () -> new GildedBookItem(IS.of(Rarity.UNCOMMON)), InkColors.PURPLE)));

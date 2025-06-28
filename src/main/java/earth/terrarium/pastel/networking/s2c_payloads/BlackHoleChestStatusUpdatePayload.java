@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
+import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.blocks.chests.BlackHoleChestBlockEntity;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
@@ -34,13 +34,14 @@ public record BlackHoleChestStatusUpdatePayload(BlockPos pos, boolean isFull, bo
 		
 		long storedXP = 0;
 		long maxStoredXP = 0;
-		
-		if (xpStack.getItem() instanceof ExperienceStorageItem experienceStorageItem && chest.getLevel() != null) {
-			storedXP = ExperienceStorageItem.getStoredExperience(xpStack);
-			maxStoredXP = experienceStorageItem.getMaxStoredExperience(chest.getLevel().registryAccess(), xpStack);
+
+		var storage = chest.getExperienceStorage();
+		if (storage.isPresent()) {
+			storedXP = storage.get().getStoredAmount();
+			maxStoredXP = storage.get().getCapacity();
 		}
 
-		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) chest.getLevel(), new ChunkPos(chest.getBlockPos()), new BlackHoleChestStatusUpdatePayload(chest.getBlockPos(), chest.isFullServer(), chest.canStoreExperience(), storedXP, maxStoredXP));
+		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) chest.getLevel(), new ChunkPos(chest.getBlockPos()), new BlackHoleChestStatusUpdatePayload(chest.getBlockPos(), chest.isFullServer(), chest.getExperienceStorage().isPresent(), storedXP, maxStoredXP));
 	}
 	
 	@SuppressWarnings("resource")

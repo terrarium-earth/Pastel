@@ -2,9 +2,9 @@ package earth.terrarium.pastel.registries;
 
 import earth.terrarium.pastel.*;
 import earth.terrarium.pastel.api.energy.color.*;
-import earth.terrarium.pastel.api.item.ExperienceStorageItem;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.blocks.mob_head.*;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
 import earth.terrarium.pastel.compat.create.CreateCompat;
@@ -338,10 +338,12 @@ public class PastelItemGroups {
 				entries.accept(enchantedKnowledgeGemStack.copy());
 
 				ItemStack knowledgeGemStack = PastelItems.KNOWLEDGE_GEM.get().getDefaultInstance();
-				ExperienceStorageItem.addStoredExperience(lookup, knowledgeGemStack, PastelItems.KNOWLEDGE_GEM.get().getMaxStoredExperience(lookup, knowledgeGemStack));
+				var storage = knowledgeGemStack.getCapability(PastelCapabilities.Misc.XP, lookup);
+				storage.insert(storage.getCapacity(), false);
 				entries.accept(knowledgeGemStack);
 
-				ExperienceStorageItem.addStoredExperience(lookup, enchantedKnowledgeGemStack, PastelItems.KNOWLEDGE_GEM.get().getMaxStoredExperience(lookup, enchantedKnowledgeGemStack));
+				var otherStorage = enchantedKnowledgeGemStack.getCapability(PastelCapabilities.Misc.XP, lookup);
+				otherStorage.insert(otherStorage.getCapacity(), false);
 				entries.accept(enchantedKnowledgeGemStack);
 
 				entries.accept(PastelItems.CELESTIAL_POCKETWATCH.get());
