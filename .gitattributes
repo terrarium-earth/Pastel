@@ -1,5 +1,3 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-
-# Datagen outputs LF, so we respect that
-/src/main/generated/* text eol=lf
+* eol=lf
