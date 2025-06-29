@@ -116,6 +116,9 @@ public class EnchanterBlockEntity extends InWorldInteractionBlockEntity implemen
 			return;
 		}
 
+		if (upgrades == null)
+			calculateUpgrades();
+
 		wasCrafting = true;
 		craftingTime -= upgrades.getSpeedDelta(level.getRandom());
 		if (level.getGameTime() % 12 == 0)
