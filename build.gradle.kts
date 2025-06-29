@@ -60,6 +60,17 @@ cloche {
 
         dependency {
             modId = "modonomicon"
+            required = true
+        }
+
+        dependency {
+            modId = "cloth_config"
+            required = true
+        }
+
+        dependency {
+            modId = "curios"
+            required = true
         }
 
         author("Azzyypaaras", "azzy@terrarium.earth")
