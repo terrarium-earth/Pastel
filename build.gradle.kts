@@ -50,11 +50,11 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
-		version = System.getenv("VERSION") ?: "1.0.1-BETA"
+		version = System.getenv("VERSION") ?: "1.0.2-BETA"
 
         description = "Do flowers dream of the moon?"
 
-        license = "lGPL3"
+        license = "GNU LGPL v3 for code, ARR for assets"
 
         url = "https://www.curseforge.com/minecraft/mc-mods/pastel"
         sources = "https://github.com/terrarium-earth/Pastel"
