@@ -1,5 +1,8 @@
+import groovy.json.StringEscapeUtils
+
 plugins {
     id("earth.terrarium.cloche") version "0.10.14"
+	id("com.teamresourceful.resourcefulgradle") version "0.0.+"
 }
 
 sourceSets.main {
@@ -47,6 +50,7 @@ cloche {
     metadata {
         modId = "pastel"
         name = "Pastel"
+		version = System.getenv("VERSION") ?: "1.0.1-BETA"
 
         description = "Do flowers dream of the moon?"
 
@@ -181,3 +185,16 @@ cloche {
     }
 }
 
+resourcefulGradle {
+	templates {
+		register("embed") {
+
+			source.set(file("templates/embed.json.template"))
+			injectedValues.set(mapOf(
+				"minecraft" to cloche.minecraftVersion,
+				"version" to System.getenv("VERSION"),
+				"changelog" to StringEscapeUtils.escapeJava(System.getenv("CHANGELOG")),
+			))
+		}
+	}
+}
