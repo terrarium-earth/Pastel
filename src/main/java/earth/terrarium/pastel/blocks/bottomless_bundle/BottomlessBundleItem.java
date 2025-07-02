@@ -251,11 +251,12 @@ public class BottomlessBundleItem extends BlockItem implements InventoryInsertio
 		// The slot isn't technically correct, since it's the slot of the bundle, not that of the bundled stack
 		var storage = ItemStorage.load(bundle);
 		ItemStack bundled = storage.stack(1);
-		ItemStack ticked = bundled.copyWithCount(Integer.MAX_VALUE);
+		var original = (int) Math.min(storage.getCount(), Integer.MAX_VALUE);
+		ItemStack ticked = bundled.copyWithCount(original);
 		ticked.inventoryTick(world, entity, slot, selected);
-		if (!ItemStack.isSameItemSameComponents(bundled, ticked) || ticked.getCount() != Integer.MAX_VALUE) {
+		if (!ItemStack.isSameItemSameComponents(bundled, ticked) || ticked.getCount() != original) {
 			storage.setReference(ItemReference.of(ticked));
-			storage.setCount(storage.getCount() - (Integer.MAX_VALUE - ticked.getCount()));
+			storage.setCount(storage.getCount() - (original - ticked.getCount()));
 			storage.save(bundle);
 		}
 	}

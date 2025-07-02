@@ -26,7 +26,9 @@ public interface GravitableItem {
 					return 0;
 				}
 
-				double additionalYVelocity = getGravityMod(stack) * stack.getCount();
+				double additionalYVelocity = getGravityMod(stack) * Math.min(stack.getCount(), 1024);
+				additionalYVelocity = Math.clamp(additionalYVelocity, -50, 50); // Sanity
+
 				entity.push(0, additionalYVelocity, 0);
 				
 				// if falling very slowly => reset fall distance / damage
