@@ -768,7 +768,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 	public UpgradeHolder getUpgradeHolder() {
 		return this.upgrades;
 	}
-	
+
 	@Override
 	public void setOwner(Player playerEntity) {
 		this.ownerUUID = playerEntity.getUUID();
@@ -784,10 +784,25 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 		this.inventoryChanged = true;
 	}
 
+	private void applyFiltersForTier(StackHandlerView view) {
+		view.addFilter(0, stack -> stack.is(PastelItems.TOPAZ_POWDER));
+		view.addFilter(1, stack -> stack.is(PastelItems.AMETHYST_POWDER));
+		view.addFilter(2, stack -> stack.is(PastelItems.CITRINE_POWDER));
+
+		if (pedestalVariant.getRecipeTier().ordinal() >= PedestalRecipeTier.ADVANCED.ordinal())
+			view.addFilter(3, stack -> stack.is(PastelItems.ONYX_POWDER));
+
+		if (pedestalVariant.getRecipeTier() == PedestalRecipeTier.COMPLEX)
+			view.addFilter(4, stack -> stack.is(PastelItems.MOONSTONE_POWDER));
+	}
+
 	@Override
 	public IItemHandler exposeItemHandlers(Direction dir) {
 		var slots = getSlotsForFace(dir);
 		var view = new StackHandlerView(inventory, slots[0], slots[1]);
+
+		if (dir.getAxis().isHorizontal())
+			applyFiltersForTier(view);
 
 		if (dir == Direction.DOWN)
 			return view.disableInsertion();
