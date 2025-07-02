@@ -222,14 +222,23 @@ public class Ench {
 	}
 
 	public static Optional<HolderLookup.RegistryLookup<Enchantment>> getRegistry(HolderLookup.Provider registryLookup) {
+		if (registryLookup == null)
+			return Optional.empty();
+
 		return registryLookup.lookup(Registries.ENCHANTMENT);
 	}
 
 	public static Optional<Holder<Enchantment>> getEntry(HolderLookup.Provider lookup, ResourceKey<Enchantment> key) {
+		if (lookup == null)
+			return Optional.empty();
+
 		return getRegistry(lookup).flatMap(impl -> impl.get(key));
 	}
 
 	public static int getEquipmentLevel(HolderLookup.Provider lookup, ResourceKey<Enchantment> key, LivingEntity entity) {
+		if (lookup == null)
+			return 0;
+
 		return getEntry(lookup, key).map(e -> EnchantmentHelper.getEnchantmentLevel(e, entity)).orElse(0);
 	}
 
