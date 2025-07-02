@@ -5,7 +5,6 @@ import earth.terrarium.pastel.compat.ae2.AE2Compat;
 import earth.terrarium.pastel.compat.botania.BotaniaCompat;
 import earth.terrarium.pastel.compat.create.CreateCompat;
 import earth.terrarium.pastel.compat.exclusions_lib.ExclusionsLibCompat;
-import earth.terrarium.pastel.compat.gobber.GobberCompat;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconCompat;
 import earth.terrarium.pastel.compat.travelersbackpack.TravelersBackpackCompat;
 import net.neoforged.bus.api.*;
@@ -37,7 +36,6 @@ public class PastelIntegrationPacks {
 	}
 
 	public static final String AE2_ID = "ae2";
-	public static final String GOBBER_ID = "gobber2";
 	public static final String TRAVELERS_BACKPACK_ID = "travelersbackpack";
 	public static final String BOTANIA_ID = "botania";
 	public static final String MODONOMICON_ID = "modonomicon";
@@ -54,7 +52,6 @@ public class PastelIntegrationPacks {
 		}
 
 		registerIntegrationPack(AE2_ID, () -> new AE2Compat());
-		registerIntegrationPack(GOBBER_ID, () -> new GobberCompat());
 		registerIntegrationPack(BOTANIA_ID, () -> new BotaniaCompat());
 		//registerIntegrationPack(FARMERSDELIGHT_ID, () -> new FDCompat());
 		registerIntegrationPack(CREATE_ID, () -> new CreateCompat());

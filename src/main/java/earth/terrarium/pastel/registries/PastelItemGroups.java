@@ -8,7 +8,6 @@ import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ae2.AE2Compat;
 import earth.terrarium.pastel.compat.create.CreateCompat;
-import earth.terrarium.pastel.compat.gobber.GobberCompat;
 import earth.terrarium.pastel.helpers.Ench;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import net.minecraft.core.HolderLookup;
@@ -1048,26 +1047,6 @@ public class PastelItemGroups {
 					entries.accept(CreateCompat.LARGE_ZINC_BUD);
 					entries.accept(CreateCompat.ZINC_CLUSTER);
 					entries.accept(CreateCompat.PURE_ZINC_BLOCK);
-				}
-
-				if (PastelIntegrationPacks.isIntegrationPackActive(PastelIntegrationPacks.GOBBER_ID)) {
-					entries.accept(GobberCompat.PURE_GLOBETTE);
-					entries.accept(GobberCompat.SMALL_GLOBETTE_BUD);
-					entries.accept(GobberCompat.LARGE_GLOBETTE_BUD);
-					entries.accept(GobberCompat.GLOBETTE_CLUSTER);
-					entries.accept(GobberCompat.PURE_GLOBETTE_BLOCK);
-
-					entries.accept(GobberCompat.PURE_GLOBETTE_NETHER);
-					entries.accept(GobberCompat.SMALL_GLOBETTE_NETHER_BUD);
-					entries.accept(GobberCompat.LARGE_GLOBETTE_NETHER_BUD);
-					entries.accept(GobberCompat.GLOBETTE_NETHER_CLUSTER);
-					entries.accept(GobberCompat.PURE_GLOBETTE_NETHER_BLOCK);
-
-					entries.accept(GobberCompat.PURE_GLOBETTE_END);
-					entries.accept(GobberCompat.SMALL_GLOBETTE_END_BUD);
-					entries.accept(GobberCompat.LARGE_GLOBETTE_END_BUD);
-					entries.accept(GobberCompat.GLOBETTE_END_CLUSTER);
-					entries.accept(GobberCompat.PURE_GLOBETTE_END_BLOCK);
 				}
 			})
 			.build();
