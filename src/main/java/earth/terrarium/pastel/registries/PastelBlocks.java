@@ -535,7 +535,7 @@ public class PastelBlocks {
 	public static final DeferredBlock<Block> BISMUTH_CLUSTER = register(cluster(blockWithItem("bismuth_cluster", () -> new PastelClusterBlock(gemstone(MapColor.WARPED_STEM, SoundType.CHAIN, 8), PastelClusterBlock.GrowthStage.CLUSTER), IS.of(Rarity.UNCOMMON), InkColors.CYAN), PastelModels.CRYSTALLARIEUM_FARMABLE));
 	public static final DeferredBlock<Block> LARGE_BISMUTH_BUD = register(cluster(blockWithItem("large_bismuth_bud", () -> new BismuthBudBlock(gemstone(MapColor.WARPED_STEM, SoundType.CHAIN, 6).randomTicks(), PastelClusterBlock.GrowthStage.LARGE, PastelBlocks.BISMUTH_CLUSTER.get()), IS.of(Rarity.UNCOMMON), InkColors.CYAN), PastelModels.CRYSTALLARIEUM_FARMABLE));
 	public static final DeferredBlock<Block> SMALL_BISMUTH_BUD = register(cluster(blockWithItem("small_bismuth_bud", () -> new BismuthBudBlock(gemstone(MapColor.WARPED_STEM, SoundType.CHAIN, 4).randomTicks(), PastelClusterBlock.GrowthStage.SMALL, PastelBlocks.LARGE_BISMUTH_BUD.get()), IS.of(Rarity.UNCOMMON), InkColors.CYAN), PastelModels.CRYSTALLARIEUM_FARMABLE));
-	public static final DeferredBlock<Block> BISMUTH_BLOCK = register(simple(blockWithItem("bismuth_block", () -> new Block(gemstoneBlock(MapColor.WARPED_STEM, SoundType.CHAIN)), InkColors.CYAN)));
+	public static final DeferredBlock<Block> BISMUTH_BLOCK = register(simple(blockWithItem("bismuth_block", () -> new Block(gemstoneBlock(MapColor.WARPED_STEM, SoundType.CHAIN)), InkColors.CYAN))); // Once we unfuck the datagen remember to ensure this still has its mirrored form
 
 	// DD BLOCKS
 	private static final float BLACKSLAG_HARDNESS = 5.0F;

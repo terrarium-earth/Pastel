@@ -1,7 +1,12 @@
 {
   "variants": {
-    "": {
-      "model": "pastel:block/bismuth_block"
-    }
+    "": [
+      {
+        "model": "pastel:block/bismuth_block"
+      },
+      {
+        "model": "pastel:block/bismuth_block_mirrored"
+      }
+    ]
   }
 }
