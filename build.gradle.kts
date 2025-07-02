@@ -1,7 +1,7 @@
 import groovy.json.StringEscapeUtils
 
 plugins {
-    id("earth.terrarium.cloche") version "0.10.14"
+    id("earth.terrarium.cloche") version "0.10.18"
 	id("com.teamresourceful.resourcefulgradle") version "0.0.+"
 }
 
