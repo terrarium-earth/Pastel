@@ -633,6 +633,7 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 		}
 	}
 
+	@Override
 	public int[] getSlotsForFace(Direction side) {
 		if (side == Direction.DOWN) {
 			return new int[]{OUTPUT_SLOT_ID, 1};
@@ -652,6 +653,17 @@ public class PedestalBlockEntity extends BaseInventoryBlockEntity implements Mul
 			}
 		}
 	}
+
+	@Override
+	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
+		return false;
+	}
+
+	@Override
+	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+		return false;
+	}
+
 	@Override
 	public UUID getOwnerUUID() {
 		return this.ownerUUID;

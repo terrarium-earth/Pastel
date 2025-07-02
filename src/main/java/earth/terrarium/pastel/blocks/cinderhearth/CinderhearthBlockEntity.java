@@ -90,6 +90,30 @@ public class CinderhearthBlockEntity extends BaseInventoryBlockEntity implements
 	
 	protected final CraftingDelegate propertyDelegate = new CraftingDelegate();
 
+	@Override
+	public int[] getSlotsForFace(Direction side) {
+		if (side != Direction.DOWN)
+			return new int[]{0};
+
+		return OUTPUT_SLOT_IDS;
+	}
+
+	@Override
+	public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction) {
+		if (index == 0)
+			return direction != Direction.DOWN;
+
+		return false;
+	}
+
+	@Override
+	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
+		if (index != 0)
+			return direction == Direction.DOWN;
+
+		return false;
+	}
+
 	public enum CinderHearthStructureType {
 		NONE,
 		WITH_LAVA,

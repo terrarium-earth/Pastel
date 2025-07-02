@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.*;
 
 import javax.annotation.*;
 
-public abstract class BaseInventoryBlockEntity extends BlockEntity implements Container, MenuProvider, Nameable {
+public abstract class BaseInventoryBlockEntity extends BlockEntity implements WorldlyContainer, MenuProvider, Nameable {
 
     @Nullable
     private Component name;
