@@ -1,6 +1,8 @@
 package earth.terrarium.pastel.inventories.slots;
 
+import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.capabilities.ExperienceHandler;
+import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +15,10 @@ public class ExperienceStorageItemSlot extends Slot {
 	
 	@Override
 	public boolean mayPlace(ItemStack stack) {
-		return super.mayPlace(stack) && stack.getItem() instanceof ExperienceHandler;
+		if (!super.mayPlace(stack))
+			return false;
+
+		return stack.getCapability(PastelCapabilities.Misc.XP, PastelCommon.getRegistryAccess()) != null;
 	}
 	
 }
