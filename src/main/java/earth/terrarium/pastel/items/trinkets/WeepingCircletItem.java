@@ -61,7 +61,7 @@ public class WeepingCircletItem extends PastelTrinketItem {
 		Level world = entity.level();
 		if (!world.isClientSide) {
 			long time = entity.level().getGameTime();
-			if (entity.isEyeInFluid(PastelFluidTags.ACTIVATES_WEEPING_CIRCLET)) {
+			if (entity.getEyeInFluidType().canSwim(entity)) {
 				if (always || time % TRIGGER_EVERY_X_TICKS == 0) {
 					entity.setAirSupply(entity.getMaxAirSupply());
 					entity.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, EFFECT_DURATION, 1, true, true));
