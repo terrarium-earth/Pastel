@@ -38,20 +38,13 @@ jobs:
                     path: "./gradle.properties"
                     properties: "minecraftVersion"
 
-            -   name: Publish Release
-                run: ./gradlew publish build
-                env:
-                    VERSION: ${{ github.event.inputs.version }}
-                    MAVEN_USER: ${{ secrets.MAVEN_USERNAME }}
-                    MAVEN_PASS: ${{ secrets.MAVEN_PASSWORD }}
+            -   name: Build Jar
+                run: ./gradlew build
 
             -   name: Upload Release (Curse/Modrinth)
                 id: release
                 uses: Kir-Antipov/mc-publish@v3.3
                 with:
-                    curseforge-id: ${{ vars.CURSE_ID }}
-                    curseforge-token: ${{ secrets.CURSE_TOKEN }}
-
                     modrinth-id: ${{ vars.MODRINTH_ID }}
                     modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
 
