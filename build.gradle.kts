@@ -189,17 +189,19 @@ cloche {
 publishing {
 	publications {
 		create<MavenPublication>("maven") {
-			artifactId = "${cloche.metadata.modId}-${cloche.minecraftVersion}"
+			val modId = cloche.metadata.modId.get()
+			val minecraftVersion = cloche.minecraftVersion.get()
+			artifactId = "$modId-$minecraftVersion"
 			from(components["java"])
 
 			pom {
 				name.set("Pastel")
-				url.set("https://github.com/terrarium-earth/${cloche.metadata.modId}")
+				url.set("https://github.com/terrarium-earth/$modId")
 
 				scm {
-					connection.set("git:https://github.com/terrarium-earth/${cloche.metadata.modId}.git")
-					developerConnection.set("git:https://github.com/terrarium-earth/${cloche.metadata.modId}.git")
-					url.set("https://github.com/terrarium-earth/${cloche.metadata.modId}")
+					connection.set("git:https://github.com/terrarium-earth/$modId.git")
+					developerConnection.set("git:https://github.com/terrarium-earth/$modId.git")
+					url.set("https://github.com/terrarium-earth/$modId")
 				}
 
 				licenses {
