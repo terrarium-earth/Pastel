@@ -81,9 +81,11 @@ public class PastelFishingRodHookedCriterion extends SimpleCriterionTrigger<Past
 			if (hookedEntityContext == null && !hookedEntity.equals(LootContextPredicate.EMPTY) ||
 				!this.hookedEntity.test(hookedEntityContext)) return false;
 			 */
-			if (this.fishedEntity.isPresent() && !this.fishedEntity.get().matches(fishedEntityContext) && fishedEntityContext == null)
+
+			if (fishedEntityContext != null && !fishedEntity.map(e -> e.matches(fishedEntityContext)).orElse(true))
 				return false;
-			if (this.hookedEntity.isPresent() && this.hookedEntity.get().matches(hookedEntityContext) && hookedEntityContext == null)
+
+			if (hookedEntityContext != null && !hookedEntity.map(e -> e.matches(hookedEntityContext)).orElse(true))
 				return false;
 			
 			if (this.caughtItem.isPresent()) {
