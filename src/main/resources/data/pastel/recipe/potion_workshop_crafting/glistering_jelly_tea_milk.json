@@ -7,7 +7,7 @@
   "color": 13803816,
   "ingredient1": "pastel:jade_jelly",
   "ingredient2": "minecraft:glistering_melon_slice",
-  "ingredient3": "#c:milk",
+  "ingredient3": "#c:buckets/milk",
   "result": {
     "id": "pastel:glistering_jelly_tea",
     "components": {

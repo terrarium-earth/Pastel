@@ -2,7 +2,7 @@
   "type": "pastel:anvil_crushing",
   "ingredient": [
     {
-      "tag": "c:copper_ores"
+      "tag": "c:ores/copper"
     }
   ],
   "crushedItemsPerPointOfDamage": 0.75,

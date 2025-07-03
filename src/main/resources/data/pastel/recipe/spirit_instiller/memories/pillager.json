@@ -4,7 +4,7 @@
   "time": 800,
   "experience": 4.0,
   "ingredient1": "pastel:pillager_head",
-  "ingredient2": "#minecraft:emerald",
+  "ingredient2": "#c:gems/emerald",
   "center_ingredient": {
     "tag": "pastel:memory_bonding_agents",
     "count": 4

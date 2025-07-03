@@ -11,7 +11,7 @@
       "count": 1
     },
     {
-      "tag": "c:foods/eggs",
+      "tag": "#c:foods/eggs",
       "count": 2
     }
   ],

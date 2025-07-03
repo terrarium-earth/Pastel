@@ -18,7 +18,7 @@
   "key": {
     "A": "pastel:amaranth_grains",
     "C": "pastel:four_leaf_clover",
-    "M": "#c:milk",
+    "M": "#c:buckets/milk",
     "S": "minecraft:sugar"
   },
   "result": {

@@ -2,7 +2,7 @@
   "values": [
     "#minecraft:coal_ores",
     "#minecraft:diamond_ores",
-    "#minecraft:emerald_ores",
+    "#c:gems/emerald_ores",
     "#minecraft:gold_ores",
     "#minecraft:iron_ores",
     "#minecraft:lapis_ores",

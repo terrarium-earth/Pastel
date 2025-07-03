@@ -2,7 +2,7 @@
   "type": "pastel:anvil_crushing",
   "ingredient": [
     {
-      "tag": "c:gold_ores"
+      "tag": "c:ores/gold"
     }
   ],
   "crushedItemsPerPointOfDamage": 0.75,

@@ -19,7 +19,7 @@
     "A": "pastel:amaranth_grains",
     "J": "pastel:jaramel",
     "E": "#c:eggs",
-    "M": "#c:milk"
+    "M": "#c:buckets/milk"
   },
   "result": {
     "id": "pastel:jaramel_tart",

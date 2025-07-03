@@ -7,7 +7,7 @@
   "color": 9997393,
   "ingredient1": "minecraft:flowering_azalea",
   "ingredient2": "pastel:nightdew_sprout",
-  "ingredient3": "#c:milk",
+  "ingredient3": "#c:buckets/milk",
   "result": {
     "id": "pastel:azalea_tea",
     "components": {
