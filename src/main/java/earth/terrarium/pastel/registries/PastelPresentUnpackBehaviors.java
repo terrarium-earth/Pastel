@@ -7,6 +7,7 @@ import earth.terrarium.pastel.blocks.present.PresentBlock;
 import earth.terrarium.pastel.mixin.accessors.GoatHornItemAccessor;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -31,14 +32,14 @@ import java.util.Optional;
 public class PastelPresentUnpackBehaviors {
 	
 	public static void register() {
-		PresentBlock.registerBehavior(PastelItems.PIPE_BOMB.get(), (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(PastelItems.PIPE_BOMB.getId(), (stack, presentBlockEntity, world, pos, random) -> {
 			stack.set(PastelDataComponentTypes.TIMESTAMP, world.getGameTime() - 70);
 			stack.set(DataComponents.PROFILE, presentBlockEntity.getOwner());
 			world.playSound(null, pos, PastelSoundEvents.INCANDESCENT_ARM, SoundSource.BLOCKS, 2.0F, 0.9F);
 			return stack;
 		});
 		
-		PresentBlock.registerBehavior(PastelItems.STORM_STONE.get(), (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(PastelItems.STORM_STONE.getId(), (stack, presentBlockEntity, world, pos, random) -> {
 			if (world.canSeeSky(pos)) {
 				LightningBolt lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
 				if (lightningEntity != null) {
@@ -50,12 +51,12 @@ public class PastelPresentUnpackBehaviors {
 			return stack;
 		});
 		
-		PresentBlock.registerBehavior(PastelBlocks.INCANDESCENT_AMALGAM.get(), (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(PastelBlocks.INCANDESCENT_AMALGAM.getId(), (stack, presentBlockEntity, world, pos, random) -> {
             IncandescentAmalgamBlock.explode(world, pos, presentBlockEntity.getOwnerIfOnline(), stack);
             return ItemStack.EMPTY;
         });
 		
-		PresentBlock.registerBehavior(Items.FIREWORK_ROCKET, (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(BuiltInRegistries.ITEM.getKey(Items.FIREWORK_ROCKET), (stack, presentBlockEntity, world, pos, random) -> {
 			Vec3 centerPos = Vec3.atLowerCornerOf(pos);
 			for (int i = 0; i < stack.getCount(); i++) {
 				FireworkRocketEntity fireworkRocketEntity = new FireworkRocketEntity(world, presentBlockEntity.getOwnerIfOnline(), centerPos.x + 0.35 + random.nextFloat() * 0.3, centerPos.y + 0.35 + random.nextFloat() * 0.3, centerPos.z + 0.35 + random.nextFloat() * 0.3, stack);
@@ -64,7 +65,7 @@ public class PastelPresentUnpackBehaviors {
 			return ItemStack.EMPTY;
 		});
 		
-		PresentBlock.registerBehavior(Items.GOAT_HORN, (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(BuiltInRegistries.ITEM.getKey(Items.GOAT_HORN), (stack, presentBlockEntity, world, pos, random) -> {
 			Optional<Holder<Instrument>> optional = ((GoatHornItemAccessor) stack.getItem()).invokeGetInstrument(stack);
 			if (optional.isPresent()) {
 				Instrument instrument = optional.get().value();
@@ -74,12 +75,12 @@ public class PastelPresentUnpackBehaviors {
 			return stack;
 		});
 		
-		PresentBlock.registerBehavior(Items.BELL, (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(BuiltInRegistries.ITEM.getKey(Items.BELL), (stack, presentBlockEntity, world, pos, random) -> {
 			world.playSound(null, pos, SoundEvents.BELL_BLOCK, SoundSource.BLOCKS, 2.0F, 1.0F);
 			return stack;
 		});
 		
-		PresentBlock.registerBehavior(Items.TNT, (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(BuiltInRegistries.ITEM.getKey(Items.TNT), (stack, presentBlockEntity, world, pos, random) -> {
 			if (stack.getCount() > 0) {
 				PrimedTnt tntEntity = null;
 				for (int i = 0; i < stack.getCount(); i++) {
@@ -103,10 +104,10 @@ public class PastelPresentUnpackBehaviors {
 			world.levelEvent(LevelEvent.PARTICLES_SPELL_POTION_SPLASH, pos, component.getColor());
 			return ItemStack.EMPTY;
 		};
-		PresentBlock.registerBehavior(Items.SPLASH_POTION, POTION_BEHAVIOR);
-		PresentBlock.registerBehavior(Items.LINGERING_POTION, POTION_BEHAVIOR);
+		PresentBlock.registerBehavior(BuiltInRegistries.ITEM.getKey(Items.SPLASH_POTION), POTION_BEHAVIOR);
+		PresentBlock.registerBehavior(BuiltInRegistries.ITEM.getKey(Items.LINGERING_POTION), POTION_BEHAVIOR);
 		
-		PresentBlock.registerBehavior(Items.EXPERIENCE_BOTTLE, (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(BuiltInRegistries.ITEM.getKey(Items.EXPERIENCE_BOTTLE), (stack, presentBlockEntity, world, pos, random) -> {
 			int totalXP = 0;
 			for (int i = 0; i < stack.getCount(); i++) {
 				totalXP += 3 + random.nextInt(5) + random.nextInt(5);
@@ -117,7 +118,7 @@ public class PastelPresentUnpackBehaviors {
 			return ItemStack.EMPTY;
 		});
 		
-		PresentBlock.registerBehavior(Items.EGG, (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(BuiltInRegistries.ITEM.getKey(Items.EGG), (stack, presentBlockEntity, world, pos, random) -> {
 			int chickenCount = stack.getCount(); // every egg hatches, unlike via EggEntity. New chicken farm just dropped?
 			for (int i = 0; i < chickenCount; i++) {
 				Chicken chickenEntity = EntityType.CHICKEN.create(world);
@@ -131,7 +132,7 @@ public class PastelPresentUnpackBehaviors {
 			return ItemStack.EMPTY;
 		});
 		
-		PresentBlock.registerBehavior(PastelBlocks.MEMORY.get(), (stack, presentBlockEntity, world, pos, random) -> {
+		PresentBlock.registerBehavior(PastelBlocks.MEMORY.getId(), (stack, presentBlockEntity, world, pos, random) -> {
             MemoryBlockEntity.manifest(world, pos, stack, presentBlockEntity.getOpenerUUID());
             return ItemStack.EMPTY;
         });

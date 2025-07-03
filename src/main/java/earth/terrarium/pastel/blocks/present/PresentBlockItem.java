@@ -117,8 +117,12 @@ public class PresentBlockItem extends PlaceableBundleBlockItem {
 		// TODO: Use BundleTooltipComponent and such instead
 		var list = NonNullList.withSize(MAX_STORAGE_STACKS, ItemStack.EMPTY);
 		var stacks = getBundledStacks(stack).toList();
-		for (int i = 0; i < stacks.size(); i++)
+		for (int i = 0; i < stacks.size(); i++) {
+			if (i >= list.size())
+				break;
+
 			list.set(i, stacks.get(i));
+		}
 		return Optional.of(new PresentTooltipData(list));
 	}
 	

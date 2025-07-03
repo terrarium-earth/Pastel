@@ -163,6 +163,7 @@ public class PastelCommon {
 		PastelPastelUpgrades.register(pastelBus);
 		logInfo("Registering Stamp Categories...");
 		PastelStampDataCategories.register(pastelBus);
+		PastelPresentUnpackBehaviors.register();
 
 		// Worldgen
 		logInfo("Registering Features...");

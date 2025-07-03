@@ -9,9 +9,13 @@ import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -56,14 +60,14 @@ public class PresentBlock extends BaseEntityBlock {
 	
 	public static final MapCodec<PresentBlock> CODEC = simpleCodec(PresentBlock::new);
 	
-	protected static Map<Item, PresentUnpackBehavior> BEHAVIORS = new Object2ObjectOpenHashMap<>();
+	protected static Map<ResourceLocation, PresentUnpackBehavior> BEHAVIORS = new Object2ObjectOpenHashMap<>();
 	
 	public @Nullable PresentUnpackBehavior getBehaviorFor(ItemStack stack) {
-		return BEHAVIORS.getOrDefault(stack.getItem(), null);
+		return BEHAVIORS.getOrDefault(BuiltInRegistries.ITEM.getKey(stack.getItem()), null);
 	}
 	
-	public static void registerBehavior(ItemLike provider, PresentUnpackBehavior behavior) {
-		BEHAVIORS.put(provider.asItem(), behavior);
+	public static void registerBehavior(ResourceLocation provider, PresentUnpackBehavior behavior) {
+		BEHAVIORS.put(provider, behavior);
 	}
 	
 	public enum WrappingPaper implements StringRepresentable {
