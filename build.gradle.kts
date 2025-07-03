@@ -1,6 +1,7 @@
 import groovy.json.StringEscapeUtils
 
 plugins {
+	id("maven-publish")
     id("earth.terrarium.cloche") version "0.10.18"
 	id("com.teamresourceful.resourcefulgradle") version "0.0.+"
 }
@@ -188,17 +189,17 @@ cloche {
 publishing {
 	publications {
 		create<MavenPublication>("maven") {
-			artifactId = "$modId-$minecraftVersion"
+			artifactId = "${cloche.metadata.modId}-${cloche.minecraftVersion}"
 			from(components["java"])
 
 			pom {
 				name.set("Pastel")
-				url.set("https://github.com/terrarium-earth/$modId")
+				url.set("https://github.com/terrarium-earth/${cloche.metadata.modId}")
 
 				scm {
-					connection.set("git:https://github.com/terrarium-earth/$modId.git")
-					developerConnection.set("git:https://github.com/terrarium-earth/$modId.git")
-					url.set("https://github.com/terrarium-earth/$modId")
+					connection.set("git:https://github.com/terrarium-earth/${cloche.metadata.modId}.git")
+					developerConnection.set("git:https://github.com/terrarium-earth/${cloche.metadata.modId}.git")
+					url.set("https://github.com/terrarium-earth/${cloche.metadata.modId}")
 				}
 
 				licenses {

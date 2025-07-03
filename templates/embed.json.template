@@ -1,0 +1,50 @@
+{
+    "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "label": "Modrinth",
+                    "style": 5,
+                    "url": "https://modrinth.com/mod/pastel-mod/version/${modrinth_link}"
+                },
+                {
+                    "type": 2,
+                    "label": "CurseForge",
+                    "style": 5,
+                    "url": "https://www.curseforge.com/minecraft/mc-mods/pastel/files/${curseforge_link}"
+                }
+            ]
+
+        }
+    ],
+    "embeds": [
+        {
+            "title": "Pastel",
+            "description": "**Changelog:**\\n${changelog}",
+            "color": 16738816,
+            "fields": [
+                {
+                    "name": "Minecraft Version",
+                    "value": "${minecraft}",
+                    "inline": true
+                },
+                {
+                    "name": "Mod Version",
+                    "value": "${version}",
+                    "inline": true
+                }
+            ],
+            "footer": {
+                "text": "Follow the project on Modrinth at mods.gay/pastel-mod",
+                "icon_url": "https://i.imgur.com/3hVj8nM.png"
+            },
+            "thumbnail": {
+                "url": "https://images.teamresourceful.com/u/6iG5i0.png"
+            }
+        }
+    ],
+    "username": "Terrarium Releases",
+    "avatar_url": "https://cdn.modrinth.com/user/6ZoP9xY8/845ab3625ed09a90b58b4ec6089c92d8e459ca09.png"
+}
