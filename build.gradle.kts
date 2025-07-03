@@ -46,7 +46,7 @@ repositories {
 }
 
 cloche {
-    minecraftVersion = "1.21.1"
+    minecraftVersion = project.properties["minecraftVersion"] as String
 
     metadata {
         modId = "pastel"
