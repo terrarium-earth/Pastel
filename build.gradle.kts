@@ -185,6 +185,42 @@ cloche {
     }
 }
 
+publishing {
+	publications {
+		create<MavenPublication>("maven") {
+			artifactId = "$modId-$minecraftVersion"
+			from(components["java"])
+
+			pom {
+				name.set("Pastel")
+				url.set("https://github.com/terrarium-earth/$modId")
+
+				scm {
+					connection.set("git:https://github.com/terrarium-earth/$modId.git")
+					developerConnection.set("git:https://github.com/terrarium-earth/$modId.git")
+					url.set("https://github.com/terrarium-earth/$modId")
+				}
+
+				licenses {
+					license {
+						name.set("LGPL-3.0")
+					}
+				}
+			}
+		}
+	}
+	repositories {
+		maven {
+			setUrl("https://maven.resourcefulbees.com/repository/terrarium/")
+			credentials {
+				username = System.getenv("MAVEN_USER")
+				password = System.getenv("MAVEN_PASS")
+			}
+		}
+	}
+}
+
+
 resourcefulGradle {
 	templates {
 		register("embed") {
