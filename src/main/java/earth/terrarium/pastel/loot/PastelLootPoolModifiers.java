@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.loot;
 
+import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
@@ -9,6 +10,7 @@ import earth.terrarium.pastel.compat.gofish.GoFishCompat;
 import earth.terrarium.pastel.entity.predicates.LizardPredicate;
 import earth.terrarium.pastel.entity.predicates.ShulkerPredicate;
 import earth.terrarium.pastel.loot.functions.GrantAdvancementLootFunction;
+import earth.terrarium.pastel.loot.modifiers.NightArcheologyModifier;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDamageTypeTags;
 import earth.terrarium.pastel.registries.PastelEnchantments;
@@ -51,13 +53,18 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithEnchantedBonusCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.event.LootTableLoadEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class PastelLootPoolModifiers {
 

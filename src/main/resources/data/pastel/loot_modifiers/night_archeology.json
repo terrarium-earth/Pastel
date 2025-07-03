@@ -1,0 +1,10 @@
+{
+  "type": "pastel:night_archeology",
+  "conditions": [
+  ],
+  "count": {
+    "type": "uniform",
+    "min_inclusive": 1,
+    "max_inclusive": 2
+  }
+}

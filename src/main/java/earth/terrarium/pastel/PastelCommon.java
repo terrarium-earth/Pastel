@@ -27,6 +27,7 @@ import earth.terrarium.pastel.events.game.PastelPositionSources;
 import earth.terrarium.pastel.inventories.PastelScreenHandlerTypes;
 import earth.terrarium.pastel.loot.PastelLootContextTypes;
 import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
+import earth.terrarium.pastel.loot.PastelLootModifiers;
 import earth.terrarium.pastel.loot.PastelLootPoolModifiers;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.networking.PastelS2CPackets;
@@ -185,6 +186,7 @@ public class PastelCommon {
 		logInfo("Registering Loot Conditions & Functions...");
 		PastelLootContextTypes.register();
 		PastelLootFunctionTypes.register(pastelBus);
+		PastelLootModifiers.register(pastelBus);
 
 		logInfo("Setting up server side Mod Compat...");
 		PastelIntegrationPacks.register(pastelBus);
