@@ -17,6 +17,7 @@ import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;
 import earth.terrarium.pastel.events.PastelDamageEvents;
 import earth.terrarium.pastel.events.PastelEffectEvents;
+import earth.terrarium.pastel.events.PastelEnchantmentEvents;
 import earth.terrarium.pastel.events.PastelEntityEvents;
 import earth.terrarium.pastel.events.PastelEquipmentEvents;
 import earth.terrarium.pastel.events.PastelMiscEvents;
@@ -252,6 +253,7 @@ public class PastelCommon {
 		PastelPlayerEvents.register();
 		PastelEquipmentEvents.register();
 		PastelEffectEvents.register(pastelBus);
+		PastelEnchantmentEvents.register();
 		logInfo("Registering Tree Decorator Types...");
 		PastelTreeDecoratorTypes.register(pastelBus);
 

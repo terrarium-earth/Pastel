@@ -57,7 +57,7 @@ public abstract class PastelFishingRodItem extends FishingRodItem {
 				boolean inventoryInsertion = Ench.hasEnchantment(drm, PastelEnchantments.INVENTORY_INSERTION, itemStack);
 				boolean shouldSmeltDrops = shouldSmeltDrops(itemStack);
 				spawnBobber(user, world, luckBonus, waitTimeReductionTicks, exuberanceLevel, bigCatchLevel, serendipityReelLevel, inventoryInsertion, shouldSmeltDrops);
-			}
+			} //TODO: Unhardcode this mess - the fishing rods enchantments shouldn't only work with our fishing rods!
 
 			user.awardStat(Stats.ITEM_USED.get(this));
 			user.gameEvent(GameEvent.ITEM_INTERACT_START);
