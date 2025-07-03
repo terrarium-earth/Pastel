@@ -82,7 +82,7 @@ public class MemoryBlockEntity extends BlockEntity implements PlayerOwned {
 			this.memoryItemStack.setCount(1);
 		}
 		
-		if (livingEntity.level() instanceof ServerLevel serverWorld)
+		if (livingEntity != null && livingEntity.level() instanceof ServerLevel serverWorld)
 			serverWorld.getChunkSource().blockChanged(worldPosition);
 		
 		this.setChanged();
