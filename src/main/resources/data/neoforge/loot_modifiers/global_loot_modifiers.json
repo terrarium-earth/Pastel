@@ -1,6 +1,7 @@
 {
   "replace": false,
   "entries": [
-    "pastel:night_archeology"
+    "pastel:night_archeology",
+    "pastel:night_sniffer"
   ]
 }

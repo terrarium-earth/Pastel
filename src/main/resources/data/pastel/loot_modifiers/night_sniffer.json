@@ -1,0 +1,15 @@
+{
+  "comment": "me when girl-pits ~ XOXO Azzyypaaras",
+  "type": "pastel:night_archeology",
+  "conditions": [
+  ],
+  "targets": [
+    "gameplay/sniffer_digging"
+  ],
+  "count": {
+    "type": "constant",
+    "value": 1
+  },
+  "chance": 0.1,
+  "replace": true
+}
