@@ -482,38 +482,11 @@ public abstract class PastelFishingBobberEntity extends Projectile {
 			int i = 0;
 			if (this.hookedEntity != null) {
 				this.pullHookedEntity(this.hookedEntity);
-//				Criteria.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity) playerEntity, usedItem, null, Collections.emptyList());
+
 				PastelAdvancementCriteria.FISHING_ROD_HOOKED.trigger((ServerPlayer) playerEntity, usedItem, this, null, Collections.emptyList());
 				this.level().broadcastEntityEvent(this, EntityEvent.FISHING_ROD_REEL_IN);
 				i = this.hookedEntity instanceof ItemEntity ? 3 : 5;
 			} else if (this.hookCountdown > 0) {
-//				LootContextParameterSet lootContextParameterSet = new net.minecraft.loot.context.LootContextParameterSet.Builder((ServerWorld) this.getWorld())
-//						.add(LootContextParameters.ORIGIN, this.getPos())
-//						.add(LootContextParameters.TOOL, usedItem)
-//						.add(LootContextParameters.THIS_ENTITY, this)
-//						.luck((float) this.luckBonus + playerEntity.getLuck())
-//						.build(LootContextTypes.FISHING);
-//				LootTable lootTable = this.getWorld().getServer().getReloadableRegistries().getLootTable(LootTables.FISHING_GAMEPLAY);
-//				List<ItemStack> list = lootTable.generateLoot(lootContextParameterSet);
-//				Criteria.FISHING_ROD_HOOKED.trigger((ServerPlayerEntity) playerEntity, usedItem, this, list);
-//
-//				for (ItemStack itemStack : list) {
-//					ItemEntity itemEntity = new ItemEntity(this.getWorld(), this.getX(), this.getY(), this.getZ(), itemStack);
-//					double d = playerEntity.getX() - this.getX();
-//					double e = playerEntity.getY() - this.getY();
-//					double f = playerEntity.getZ() - this.getZ();
-//					double g = 0.1;
-//					itemEntity.setVelocity(d * g, e * g + Math.sqrt(Math.sqrt(d * d + e * e + f * f)) * 0.08, f * g);
-//					this.getWorld().spawnEntity(itemEntity);
-//					playerEntity.getWorld()
-//							.spawnEntity(
-//									new ExperienceOrbEntity(playerEntity.getWorld(), playerEntity.getX(), playerEntity.getY() + 0.5, playerEntity.getZ() + 0.5, this.random.nextInt(6) + 1)
-//							);
-//					if (itemStack.isIn(ItemTags.FISHES)) {
-//						playerEntity.increaseStat(Stats.FISH_CAUGHT, 1);
-//					}
-//				}
-
 				if (!tryCatchEntity(usedItem, playerEntity, (ServerLevel) this.level(), this.blockPosition())) {
 					int lootAmount = random.nextIntBetweenInclusive(1, (int) Math.pow(2, 1 + serendipityReelLevel) - 1);
 					for (int j = 0; j < lootAmount; j++) {
