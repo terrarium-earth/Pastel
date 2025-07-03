@@ -110,16 +110,23 @@ public class TreasureHunterModifier extends LootModifier {
         if (SPECIAL_CASES.containsKey(typeHolder))
             return Optional.of(SPECIAL_CASES.get(typeHolder).get(target).asItem());
 
-        var rawId = typeHolder.key().location().toString();
-        var head = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(rawId + "_head"));
+        for (int i = 0; i < 2; i++) {
+            var rawId = typeHolder.key().location().toString();;
 
-        if (head instanceof AbstractSkullBlock)
-            return Optional.of(head.asItem());
+            if (i == 1) {
+                rawId = "pastel:" + typeHolder.key().location().getPath();
+            }
 
-        head = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(rawId + "_skull"));
+            var head = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(rawId + "_head"));
 
-        if (head instanceof AbstractSkullBlock)
-            return Optional.of(head.asItem());
+            if (head instanceof AbstractSkullBlock)
+                return Optional.of(head.asItem());
+
+            head = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(rawId + "_skull"));
+
+            if (head instanceof AbstractSkullBlock)
+                return Optional.of(head.asItem());
+        }
 
         return Optional.empty();
     }

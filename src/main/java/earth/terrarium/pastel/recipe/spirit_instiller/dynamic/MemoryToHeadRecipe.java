@@ -4,14 +4,11 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
-import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
 import earth.terrarium.pastel.loot.modifiers.TreasureHunterModifier;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelDamageTypes;
-import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.BlockPos;
@@ -19,19 +16,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SkullBlock;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.phys.Vec3;
 
-import java.util.List;
 import java.util.Optional;
 
 public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
@@ -46,23 +37,22 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 	public RecipeSerializer<?> getSerializer() {
 		return PastelRecipeSerializers.SPIRIT_INSTILLER_MEMORY_TO_HEAD;
 	}
-	
+
+	@Override
+	public boolean matches(InstanceRecipeInput input, Level world) {
+		if (bowlMatches(input))
+			return input.getItem(CENTER).is(PastelBlocks.MEMORY.asItem());
+
+		return false;
+	}
+
 	@Override
 	public ItemStack assemble(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, HolderLookup.Provider drm) {
 		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
 		ItemStack resultStack = ItemStack.EMPTY;
 		ServerLevel world = (ServerLevel) spiritInstillerBlockEntity.getLevel();
 		BlockPos pos = spiritInstillerBlockEntity.getBlockPos();
-		
-		/*
-		 * This is moderately cursed
-		 * we spawn the entity from the memory, process its loot table with a custom damage type that guarantees a head drop,
-		 * search for a head drop in that loot and then discard that entity.
-		 * WHY might you ask?
-		 * Humusd question!
-		 * A single entity type can have multiple head items associated with it (like fox or shulker variants)
-		 * and finding out which exact mob variant is in that memory would be even more cursed
-		 */
+
 		Optional<Entity> entity = MemoryBlockEntity.hatchEntity(world, pos, spiritInstillerBlockEntity.getItem(0));
 		if (entity.isPresent()) {
 			var proposed = TreasureHunterModifier.tryGetHead(entity.get());
@@ -78,18 +68,12 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 	}
 	
 	@Override
-	public boolean canCraftWithStacks(RecipeInput inventory) {
+	public boolean canCraftWithStacks(RecipeInput inventory, Level level) {
 		ItemStack instillerStack = inventory.getItem(0);
-		return getSkullTypeForMemory(instillerStack).isPresent();
-	}
-	
-	private static Optional<SkullBlock.Type> getSkullTypeForMemory(ItemStack instillerStack) {
-		if (!(instillerStack.getItem() instanceof MemoryItem)) {
-			return Optional.empty();
-		}
-		
-		Optional<EntityType<?>> optionalMemoryEntity = MemoryItem.getEntityType(instillerStack);
-		return optionalMemoryEntity.flatMap(PastelSkullBlock::getSkullType);
-	}
+
+		var entity = MemoryBlockEntity.hatchEntity((ServerLevel) level, BlockPos.ZERO, instillerStack);
+        return entity.filter(e -> TreasureHunterModifier.tryGetHead(e).isPresent()).isPresent();
+
+    }
 	
 }

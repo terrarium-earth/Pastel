@@ -28,9 +28,9 @@ public class SpiritInstillingEmiRecipeGated extends GatedSpectrumEmiRecipe<Spiri
 	
 	@Override
 	public void addUnlockedWidgets(WidgetHolder widgets) {
-		widgets.addSlot(inputs.get(SpiritInstillerRecipe.FIRST_INGREDIENT), 0, 0);
-		widgets.addSlot(inputs.get(SpiritInstillerRecipe.CENTER_INGREDIENT), 20, 0);
-		widgets.addSlot(inputs.get(SpiritInstillerRecipe.SECOND_INGREDIENT), 40, 0);
+		widgets.addSlot(inputs.get(SpiritInstillerRecipe.FIRST), 0, 0);
+		widgets.addSlot(inputs.get(SpiritInstillerRecipe.CENTER), 20, 0);
+		widgets.addSlot(inputs.get(SpiritInstillerRecipe.SECOND), 40, 0);
 		
 		widgets.addSlot(EmiStack.of(PastelBlocks.ITEM_BOWL_CALCITE.get()), 0, 17).drawBack(false);
 		widgets.addSlot(EmiStack.of(PastelBlocks.SPIRIT_INSTILLER.get()), 20, 17).drawBack(false);

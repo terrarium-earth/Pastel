@@ -47,9 +47,9 @@ public class SpiritInstillingCategory extends GatedDisplayCategory<SpiritInstill
 		// input slots
 		int ingredientSize = inputs.size();
 		int startX = Math.max(0, 10 - ingredientSize * 10);
-		widgets.add(Widgets.createSlot(new Point(startPoint.x + startX, startPoint.y + 1)).markInput().entries(inputs.get(SpiritInstillerRecipe.FIRST_INGREDIENT)));
-		widgets.add(Widgets.createSlot(new Point(startPoint.x + startX + 20, startPoint.y + 1)).markInput().entries(inputs.get(SpiritInstillerRecipe.CENTER_INGREDIENT)));
-		widgets.add(Widgets.createSlot(new Point(startPoint.x + startX + 40, startPoint.y + 1)).markInput().entries(inputs.get(SpiritInstillerRecipe.SECOND_INGREDIENT)));
+		widgets.add(Widgets.createSlot(new Point(startPoint.x + startX, startPoint.y + 1)).markInput().entries(inputs.get(SpiritInstillerRecipe.FIRST)));
+		widgets.add(Widgets.createSlot(new Point(startPoint.x + startX + 20, startPoint.y + 1)).markInput().entries(inputs.get(SpiritInstillerRecipe.CENTER)));
+		widgets.add(Widgets.createSlot(new Point(startPoint.x + startX + 40, startPoint.y + 1)).markInput().entries(inputs.get(SpiritInstillerRecipe.SECOND)));
 		
 		widgets.add(Widgets.createSlot(new Point(startPoint.x, startPoint.y + 1 + 17)).entries(ITEM_BOWL_CALCITE).disableBackground());
 		widgets.add(Widgets.createSlot(new Point(startPoint.x + 20, startPoint.y + 1 + 17)).entries(SPIRIT_INSTILLER).disableBackground());

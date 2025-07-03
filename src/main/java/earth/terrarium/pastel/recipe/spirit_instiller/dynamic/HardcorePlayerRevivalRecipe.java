@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import org.jetbrains.annotations.Nullable;
@@ -41,7 +42,7 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	@Override
 	public ItemStack assemble(InstanceRecipeInput<SpiritInstillerBlockEntity> recipeInput, HolderLookup.Provider drm) {
 		SpiritInstillerBlockEntity spiritInstillerBlockEntity = recipeInput.getInstance();
-		GameProfile gameProfile = getSkullOwner(recipeInput.getItem(SpiritInstillerRecipe.CENTER_INGREDIENT));
+		GameProfile gameProfile = getSkullOwner(recipeInput.getItem(SpiritInstillerRecipe.CENTER));
 		if (gameProfile != null && PastelCommon.getSidedServer() != null) {
 			ServerPlayer revivedPlayer = PastelCommon.getSidedServer().getPlayerList().getPlayerByName(gameProfile.getName());
 			if (revivedPlayer != null) {
@@ -65,7 +66,7 @@ public class HardcorePlayerRevivalRecipe extends SpiritInstillerRecipe {
 	}
 	
 	@Override
-	public boolean canCraftWithStacks(RecipeInput inventory) {
+	public boolean canCraftWithStacks(RecipeInput inventory, Level level) {
 		ItemStack instillerStack = inventory.getItem(0);
 		if (instillerStack.is(Blocks.PLAYER_HEAD.asItem())) {
 			GameProfile gameProfile = getSkullOwner(instillerStack);

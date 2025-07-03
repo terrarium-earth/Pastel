@@ -188,21 +188,21 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		spiritInstillerBlockEntity.craftingTime = 0;
 		spiritInstillerBlockEntity.currentRecipe = null;
 		
-		ItemStack instillerStack = spiritInstillerBlockEntity.getItem(SpiritInstillerRecipe.CENTER_INGREDIENT);
+		ItemStack instillerStack = spiritInstillerBlockEntity.getItem(SpiritInstillerRecipe.CENTER);
 		if (!instillerStack.isEmpty()) {
-			spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.CENTER_INGREDIENT, instillerStack);
+			spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.CENTER, instillerStack);
 			
 			// left item bowl
 			if (world.getBlockEntity(getItemBowlPos(spiritInstillerBlockEntity, false)) instanceof ItemBowlBlockEntity itemBowlBlockEntity) {
-				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.FIRST_INGREDIENT, itemBowlBlockEntity.getItem(0));
+				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.FIRST, itemBowlBlockEntity.getItem(0));
 			} else {
-				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.FIRST_INGREDIENT, ItemStack.EMPTY);
+				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.FIRST, ItemStack.EMPTY);
 			}
 			// right item bowl
 			if (world.getBlockEntity(getItemBowlPos(spiritInstillerBlockEntity, true)) instanceof ItemBowlBlockEntity itemBowlBlockEntity) {
-				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.SECOND_INGREDIENT, itemBowlBlockEntity.getItem(0));
+				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.SECOND, itemBowlBlockEntity.getItem(0));
 			} else {
-				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.SECOND_INGREDIENT, ItemStack.EMPTY);
+				spiritInstillerBlockEntity.setItem(SpiritInstillerRecipe.SECOND, ItemStack.EMPTY);
 			}
 			
 			RecipeHolder<SpiritInstillerRecipe> spiritInstillerRecipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.SPIRIT_INSTILLING, spiritInstillerBlockEntity.getRecipeInput(), world).orElse(null);
@@ -235,32 +235,33 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		}
 	}
 	
-	private static boolean checkRecipeRequirements(Level world, BlockPos blockPos, @NotNull SpiritInstillerBlockEntity spiritInstillerBlockEntity) {
-		Player lastInteractedPlayer = PlayerOwned.getPlayerEntityIfOnline(spiritInstillerBlockEntity.ownerUUID);
+	private static boolean checkRecipeRequirements(Level world, BlockPos blockPos, @NotNull SpiritInstillerBlockEntity instiller) {
+		Player lastInteractedPlayer = PlayerOwned.getPlayerEntityIfOnline(instiller.ownerUUID);
 		if (lastInteractedPlayer == null) {
 			return false;
 		}
 		
 		boolean playerCanCraft = true;
-		if (spiritInstillerBlockEntity.currentRecipe != null) {
-			playerCanCraft = spiritInstillerBlockEntity.currentRecipe.value().canPlayerCraft(lastInteractedPlayer);
+		if (instiller.currentRecipe != null) {
+			playerCanCraft = instiller.currentRecipe.value().canPlayerCraft(lastInteractedPlayer);
 		}
 		
-		boolean structureComplete = SpiritInstillerBlock.verifyStructure(world, blockPos, null, spiritInstillerBlockEntity);
+		boolean structureComplete = SpiritInstillerBlock.verifyStructure(world, blockPos, null, instiller);
 		boolean canCraft = true;
 		if (!playerCanCraft || !structureComplete) {
 			if (!structureComplete) {
-				world.playSound(null, spiritInstillerBlockEntity.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
+				world.playSound(null, instiller.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
 			}
 			
 			canCraft = false;
 		}
 		
 		if (lastInteractedPlayer instanceof ServerPlayer serverPlayerEntity) {
-			testAndUnlockRecipeAdvancements(serverPlayerEntity, spiritInstillerBlockEntity.currentRecipe, canCraft);
+			testAndUnlockRecipeAdvancements(serverPlayerEntity, instiller.currentRecipe, canCraft);
 		}
 		
-		return canCraft & spiritInstillerBlockEntity.currentRecipe.value().canPlayerCraft(lastInteractedPlayer) && spiritInstillerBlockEntity.currentRecipe.value().canCraftWithStacks(spiritInstillerBlockEntity.getRecipeInput());
+		return canCraft & instiller.currentRecipe.value().canPlayerCraft(lastInteractedPlayer)
+				&& instiller.currentRecipe.value().canCraftWithStacks(instiller.getRecipeInput(), instiller.level);
 	}
 	
 	public static void testAndUnlockRecipeAdvancements(ServerPlayer player, RecipeHolder<SpiritInstillerRecipe> spiritInstillerRecipe, boolean canActuallyCraft) {
@@ -311,7 +312,7 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 		BlockEntity rightBowlBlockEntity = world.getBlockEntity(getItemBowlPos(spiritInstillerBlockEntity, true));
 		if (leftBowlBlockEntity instanceof ItemBowlBlockEntity leftBowl && rightBowlBlockEntity instanceof ItemBowlBlockEntity rightBowl) {
 			// center ingredient
-			int decreasedAmountAfterEfficiencyMod = Support.chanceRound(recipe.value().getIngredientStacks().get(SpiritInstillerRecipe.CENTER_INGREDIENT).getCount() * efficiencyModifier, world.random);
+			int decreasedAmountAfterEfficiencyMod = Support.chanceRound(recipe.value().getIngredientStacks().get(SpiritInstillerRecipe.CENTER).getCount() * efficiencyModifier, world.random);
 			if (decreasedAmountAfterEfficiencyMod > 0) {
 				spiritInstillerBlockEntity.getItem(0).shrink(decreasedAmountAfterEfficiencyMod);
 			}
@@ -319,9 +320,9 @@ public class SpiritInstillerBlockEntity extends InWorldInteractionBlockEntity im
 			List<IngredientStack> ingredientStacks = recipe.value().getIngredientStacks();
 			
 			// first side ingredient
-			int amountAfterEfficiencyModFirst = Support.chanceRound(ingredientStacks.get(SpiritInstillerRecipe.FIRST_INGREDIENT).getCount() * efficiencyModifier, world.random);
-			int amountAfterEfficiencyModSecond = Support.chanceRound(ingredientStacks.get(SpiritInstillerRecipe.SECOND_INGREDIENT).getCount() * efficiencyModifier, world.random);
-			boolean leftIsFirstIngredient = ingredientStacks.get(SpiritInstillerRecipe.FIRST_INGREDIENT).test(leftBowl.getItem(0));
+			int amountAfterEfficiencyModFirst = Support.chanceRound(ingredientStacks.get(SpiritInstillerRecipe.FIRST).getCount() * efficiencyModifier, world.random);
+			int amountAfterEfficiencyModSecond = Support.chanceRound(ingredientStacks.get(SpiritInstillerRecipe.SECOND).getCount() * efficiencyModifier, world.random);
+			boolean leftIsFirstIngredient = ingredientStacks.get(SpiritInstillerRecipe.FIRST).test(leftBowl.getItem(0));
 			Vec3 particlePos = new Vec3(spiritInstillerBlockEntity.worldPosition.getX() + 0.5, spiritInstillerBlockEntity.worldPosition.getY() + 1, spiritInstillerBlockEntity.worldPosition.getZ() + 0.5);
 			if (leftIsFirstIngredient) {
 				if (amountAfterEfficiencyModFirst > 0) {

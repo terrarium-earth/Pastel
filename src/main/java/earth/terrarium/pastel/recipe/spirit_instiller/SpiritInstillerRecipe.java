@@ -39,9 +39,9 @@ import java.util.UUID;
 
 public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipeInput<SpiritInstillerBlockEntity>> {
 	
-	public static final int CENTER_INGREDIENT = 0;
-	public static final int FIRST_INGREDIENT = 1;
-	public static final int SECOND_INGREDIENT = 2;
+	public static final int CENTER = 0;
+	public static final int FIRST = 1;
+	public static final int SECOND = 2;
 	public static final ResourceLocation UNLOCK_IDENTIFIER = PastelCommon.locate("midgame/build_spirit_instiller_structure");
 	
 	protected final IngredientStack centerIngredient;
@@ -70,18 +70,21 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 	}
 	
 	@Override
-	public boolean matches(InstanceRecipeInput recipeInput, Level world) {
-		List<IngredientStack> ingredientStacks = getIngredientStacks();
-		if (recipeInput.size() > 2) {
-			if (ingredientStacks.get(CENTER_INGREDIENT).test(recipeInput.getItem(CENTER_INGREDIENT))) {
-				if (ingredientStacks.get(FIRST_INGREDIENT).test(recipeInput.getItem(FIRST_INGREDIENT))) {
-					return ingredientStacks.get(SECOND_INGREDIENT).test(recipeInput.getItem(SECOND_INGREDIENT));
-				} else if (ingredientStacks.get(FIRST_INGREDIENT).test(recipeInput.getItem(SECOND_INGREDIENT))) {
-					return ingredientStacks.get(SECOND_INGREDIENT).test(recipeInput.getItem(FIRST_INGREDIENT));
-				}
-			}
-		}
+	public boolean matches(InstanceRecipeInput input, Level world) {
+		List<IngredientStack> ing = getIngredientStacks();
+
+		if (bowlMatches(input))
+			return ing.getFirst().test(input.getItem(CENTER));
+
 		return false;
+	}
+
+	protected boolean bowlMatches(InstanceRecipeInput<?> input) {
+		var ing = getIngredientStacks();
+		if (ing.get(FIRST).test(input.getItem(FIRST)) && ing.get(SECOND).test(input.getItem(SECOND)))
+			return true;
+
+		return ing.get(FIRST).test(input.getItem(SECOND)) && ing.get(SECOND).test(input.getItem(FIRST));
 	}
 	
 	@Override
@@ -174,7 +177,7 @@ public class SpiritInstillerRecipe extends GatedStackPastelRecipe<InstanceRecipe
 		return "spirit_instiller";
 	}
 	
-	public boolean canCraftWithStacks(RecipeInput inventory) {
+	public boolean canCraftWithStacks(RecipeInput inventory, Level level) {
 		return true;
 	}
 	

@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -68,7 +69,7 @@ public abstract class SpawnerChangeRecipe extends SpiritInstillerRecipe {
 	}
 	
 	@Override
-	public boolean canCraftWithStacks(RecipeInput inventory) {
+	public boolean canCraftWithStacks(RecipeInput inventory, Level level) {
 		CustomData blockEntityComponent = inventory.getItem(0).getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
 		return canCraftWithBlockEntityTag(blockEntityComponent, inventory.getItem(1), inventory.getItem(2));
 	}
