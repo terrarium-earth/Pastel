@@ -1,0 +1,17 @@
+{
+  "type": "pastel:drop_self",
+  "block": {
+    "blocks": [
+      "ae2:damaged_budding_quartz",
+      "ae2:chipped_budding_quartz",
+      "ae2:flawed_budding_quartz",
+      "ae2:flawless_budding_quartz"
+    ]
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ae2"
+    }
+  ]
+}
