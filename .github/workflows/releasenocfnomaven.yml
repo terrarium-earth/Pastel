@@ -1,4 +1,4 @@
-name: Publish Release (no CF, no Maven)
+name: Publish Release
 on:
     workflow_dispatch:
         inputs:
@@ -38,8 +38,12 @@ jobs:
                     path: "./gradle.properties"
                     properties: "minecraftVersion"
 
-            -   name: Build Jar
+            -   name: Build Release
                 run: ./gradlew build
+                env:
+                    VERSION: ${{ github.event.inputs.version }}
+                    MAVEN_USER: ${{ secrets.MAVEN_USERNAME }}
+                    MAVEN_PASS: ${{ secrets.MAVEN_PASSWORD }}
 
             -   name: Upload Release (Curse/Modrinth)
                 id: release
