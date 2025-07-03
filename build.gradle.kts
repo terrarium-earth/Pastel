@@ -190,8 +190,6 @@ publishing {
 	publications {
 		create<MavenPublication>("maven") {
 			val modId = cloche.metadata.modId.get()
-			val minecraftVersion = cloche.minecraftVersion.get()
-			artifactId = "$modId-$minecraftVersion"
 			from(components["java"])
 
 			pom {

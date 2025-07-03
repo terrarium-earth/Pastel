@@ -39,7 +39,7 @@ jobs:
                     properties: "enabledPlatforms minecraftVersion"
 
             -   name: Publish Release
-                run: ./gradlew publish
+                run: ./gradlew publish build
                 env:
                     VERSION: ${{ github.event.inputs.version }}
                     MAVEN_USER: ${{ secrets.MAVEN_USERNAME }}
