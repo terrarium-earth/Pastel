@@ -1,6 +1,5 @@
 package earth.terrarium.pastel;
 
-import de.dafuqs.revelationary.Revelationary;
 import de.dafuqs.revelationary.RevelationaryNetworking;
 import earth.terrarium.pastel.api.color.ColorRegistry;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
@@ -28,7 +27,6 @@ import earth.terrarium.pastel.inventories.PastelScreenHandlerTypes;
 import earth.terrarium.pastel.loot.PastelLootContextTypes;
 import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import earth.terrarium.pastel.loot.PastelLootModifiers;
-import earth.terrarium.pastel.loot.PastelLootPoolModifiers;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.networking.PastelS2CPackets;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
@@ -197,8 +195,6 @@ public class PastelCommon {
 
 		logInfo("Registering Default Item Stack Damage Immunities...");
 		PastelItemDamageImmunities.registerDefaultItemStackImmunities();
-		logInfo("Registering Enchantment Drops...");
-		NeoForge.EVENT_BUS.addListener(PastelLootPoolModifiers::loadLootTable);
 		logInfo("Registering Variant Specific Predicates...");
 		PastelItemSubPredicateTypes.register(pastelBus);
 		PastelEntitySubPredicateTypes.register(pastelBus);

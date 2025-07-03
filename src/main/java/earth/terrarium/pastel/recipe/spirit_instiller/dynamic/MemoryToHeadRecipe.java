@@ -6,6 +6,7 @@ import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.blocks.mob_head.PastelSkullBlock;
 import earth.terrarium.pastel.blocks.spirit_instiller.SpiritInstillerBlockEntity;
+import earth.terrarium.pastel.loot.modifiers.TreasureHunterModifier;
 import earth.terrarium.pastel.recipe.InstanceRecipeInput;
 import earth.terrarium.pastel.recipe.spirit_instiller.SpiritInstillerRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
@@ -62,28 +63,14 @@ public class MemoryToHeadRecipe extends SpiritInstillerRecipe {
 		 * A single entity type can have multiple head items associated with it (like fox or shulker variants)
 		 * and finding out which exact mob variant is in that memory would be even more cursed
 		 */
-		Optional<Entity> optionalEntity = MemoryBlockEntity.hatchEntity(world, pos, spiritInstillerBlockEntity.getItem(0));
-		if (optionalEntity.isPresent()) {
-			if (optionalEntity.get() instanceof LivingEntity livingEntity && world != null) {
-				LootTable lootTable = world.getServer().reloadableRegistries().getLootTable(livingEntity.getLootTable());
-				
-				LootParams.Builder builder = new LootParams.Builder(world)
-						.withParameter(LootContextParams.THIS_ENTITY, livingEntity)
-						.withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
-						.withParameter(LootContextParams.DAMAGE_SOURCE, PastelDamageTypes.mobHeadDrop(world)
-						);
-				
-				LootParams lootContextParameterSet = builder.create(LootContextParamSets.ENTITY);
-				List<ItemStack> loot = lootTable.getRandomItems(lootContextParameterSet, livingEntity.getLootTableSeed());
-				
-				for (ItemStack stack : loot) {
-					if (stack.is(PastelItemTags.SKULLS)) {
-						resultStack = stack;
-						break;
-					}
-				}
-			}
-			optionalEntity.get().discard();
+		Optional<Entity> entity = MemoryBlockEntity.hatchEntity(world, pos, spiritInstillerBlockEntity.getItem(0));
+		if (entity.isPresent()) {
+			var proposed = TreasureHunterModifier.tryGetHead(entity.get());
+
+			if (proposed.isPresent())
+				resultStack = new ItemStack(proposed.get());
+
+			entity.get().discard();
 		}
 		
 		spawnXPAndGrantAdvancements(resultStack, spiritInstillerBlockEntity, spiritInstillerBlockEntity.getUpgradeHolder(), world, pos);

@@ -31,7 +31,6 @@ public class PastelDamageTypes {
 	public static final ResourceKey<DamageType> IRRADIANCE = ResourceKey.create(Registries.DAMAGE_TYPE, locate("irradiance"));
 	public static final ResourceKey<DamageType> KINDLING_COUGH = ResourceKey.create(Registries.DAMAGE_TYPE, locate("kindling_cough"));
 	public static final ResourceKey<DamageType> MIDNIGHT_SOLUTION = ResourceKey.create(Registries.DAMAGE_TYPE, locate("midnight_solution"));
-	public static final ResourceKey<DamageType> MOB_HEAD_DROP = ResourceKey.create(Registries.DAMAGE_TYPE, locate("mob_head_drop"));
 	public static final ResourceKey<DamageType> MOONSTONE_STRIKE = ResourceKey.create(Registries.DAMAGE_TYPE, locate("moonstone_strike"));
 	public static final ResourceKey<DamageType> PRIMORDIAL_FIRE = ResourceKey.create(Registries.DAMAGE_TYPE, locate("primordial_fire"));
 	public static final ResourceKey<DamageType> RIPPING = ResourceKey.create(Registries.DAMAGE_TYPE, locate("ripping"));
@@ -39,10 +38,6 @@ public class PastelDamageTypes {
 	public static final ResourceKey<DamageType> SHOOTING_STAR = ResourceKey.create(Registries.DAMAGE_TYPE, locate("shooting_star"));
 	public static final ResourceKey<DamageType> SLEEP = ResourceKey.create(Registries.DAMAGE_TYPE, locate("sleep"));
 	public static final ResourceKey<DamageType> SNAPPING_IVY = ResourceKey.create(Registries.DAMAGE_TYPE, locate("snapping_ivy"));
-	
-	public static DamageSource mobHeadDrop(Level world) {
-		return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(MOB_HEAD_DROP));
-	}
 
 	public static DamageSource sleep(Level world, @Nullable LivingEntity attacker) {
 		return new DamageSource(world.damageSources().damageTypes.getHolderOrThrow(SLEEP), attacker);

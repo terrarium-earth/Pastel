@@ -1,0 +1,8 @@
+{
+  "type": "pastel:treasure_hunter",
+  "conditions": [
+  ],
+  "chance": 0.02,
+  "special_chance": 0.2,
+  "special": "pastel:loot/treasure_hunter_bonus_chance"
+}

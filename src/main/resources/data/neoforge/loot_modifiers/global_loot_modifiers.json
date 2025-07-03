@@ -2,6 +2,7 @@
   "replace": false,
   "entries": [
     "pastel:night_archeology",
-    "pastel:night_sniffer"
+    "pastel:night_sniffer",
+    "pastel:default_treasure_hunter"
   ]
 }
