@@ -3,6 +3,7 @@ package earth.terrarium.pastel.deeper_down;
 import earth.terrarium.pastel.data_loaders.dimension.ColorGradingLoader;
 import earth.terrarium.pastel.data_loaders.dimension.EnvDataLoader;
 import earth.terrarium.pastel.registries.PastelBiomes;
+import earth.terrarium.pastel.registries.PastelDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Cursor3D;
@@ -11,23 +12,54 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.biome.Biome;
 
+import java.util.function.Supplier;
+
 public class Environmental {
 
-	private static final InterpolationQueue<float[]> GRADING_QUEUE = new InterpolationQueue<>();
-	private static final InterpolationQueue<float[]> ENV_QUEUE = new InterpolationQueue<>();
+	private static final InterpMemory<float[]> GRADING_QUEUE = new InterpMemory<>();
+	private static final InterpMemory<float[]> ENV_QUEUE = new InterpMemory<>();
+	private static final InterpMemory<EnvironmentalOverride> OVERRIDE_QUEUE = new InterpMemory<>();
 
 	private static final Minecraft client = Minecraft.getInstance();
-	private static float delta;
+	private static final Supplier<Float> delta = () -> client.getTimer().getGameTimeDeltaPartialTick(false);
+	private static long envLoop, overLoop;
+	private static long over;
+	private static boolean overActive;
 
 	public static void tick(Entity entity) {
 		var blending = client.options.biomeBlendRadius().get();
-		delta = client.getTimer().getGameTimeDeltaPartialTick(false) + (client.level.getGameTime() % 3) / 3F;
+		var level = client.level;
 
-		if (client.level.getGameTime() % 3 == 0)
+		assert level != null;
+		envLoop = level.getGameTime() % 3;
+		overLoop = level.getGameTime() % 4;
+
+		if (envLoop== 0)
 			updateBiomeData(entity.blockPosition(), blending);
 
+		updateOverrides(entity);
 		if (GRADING_QUEUE.ready())
-			ColorGrading.update(GRADING_QUEUE.last(), GRADING_QUEUE.current(), delta);
+			ColorGrading.update(GRADING_QUEUE.last(), GRADING_QUEUE.current(), (envLoop + delta.get()) / 3F);
+	}
+
+	private static void updateOverrides(Entity entity) {
+		if (overActive && over < 20) {
+			over++;
+		}
+		else if (!overActive && over > 0) {
+			over--;
+		}
+
+		if (overLoop != 0)
+			return;
+
+		var current = EnvironmentalOverride.get(entity);
+		overActive = current != EnvironmentalOverride.INACTIVE;
+
+		if (!overActive && over > 0)
+			return; // delay flushing the queue until the fadeout is done
+
+		OVERRIDE_QUEUE.accept(current);
 	}
 
 	private static void updateBiomeData(BlockPos center, int blendingRadius) {
@@ -91,14 +123,66 @@ public class Environmental {
 
 		var interpolated = new float[4];
 		for (int i = 0; i < interpolated.length; i++) {
-			interpolated[i] = Mth.lerp(delta, ENV_QUEUE.last()[i], ENV_QUEUE.current()[i]);
+			interpolated[i] = Mth.lerp((envLoop + delta.get()) / 3F, ENV_QUEUE.last()[i], ENV_QUEUE.current()[i]);
 		}
+
+		var delta = overDelta();
+		var override = processOverrides().dataOverride().asArray();
+		interpolated[0] += Math.clamp(Mth.lerp(delta, 0, override[0]), -1, 1);
+		interpolated[1] += Mth.lerp(delta, 0, override[1]);
+		interpolated[2] += Mth.lerp(delta, 0, override[2]);
+		interpolated[3] += Mth.lerp(delta, 0, override[3]);
+
+		interpolated[0] = Math.clamp(interpolated[0], -0.1F, 1);
+		interpolated[1] = Math.clamp(interpolated[1], 0, 1);
+		interpolated[2] = Math.max(interpolated[2], -10F);
+		interpolated[3] = Math.max(interpolated[3], 0.125F);
 
 		return EnvironmentalData.fromArray(interpolated);
 	}
+
+	// We got C# at home
+	public static void applyColor(float[] out) {
+		var override = processOverrides();
+		var color = override.color().colorMod();
+		var blend = override.color().blend();
+		var delta = overDelta();
+
+		out[0] = Mth.lerp(delta * blend, out[0], color.x);
+		out[1] = Mth.lerp(delta * blend, out[1], color.y);
+		out[2] = Mth.lerp(delta * blend, out[2], color.z);
+	}
+
+	private static float overDelta() {
+		var mutation = overActive ?
+				over + delta.get() :
+				over - delta.get();
+
+		return Math.clamp(mutation / 20F, 0, 1);
+	}
+
+	private static EnvironmentalOverride processOverrides() {
+		if (!OVERRIDE_QUEUE.ready())
+			return EnvironmentalOverride.INACTIVE;
+
+		var cur = OVERRIDE_QUEUE.current().asArray();
+		var last = OVERRIDE_QUEUE.last().asArray();
+
+		var interpolated = new float[8];
+		for (int i = 0; i < cur.length; i++) {
+			interpolated[i] = Mth.lerp((overLoop + delta.get()) / 4F,
+					last[i], cur[i]);
+		}
+
+		return EnvironmentalOverride.fromArray(interpolated);
+	}
 	
-	public static float getNear(float original) {
-		return getEnvData().fogNear() * original;
+	public static float getNear(float original, boolean gentle) {
+		float fogNear = getEnvData().fogNear();
+		if (gentle)
+			return original * (fogNear / 10);
+
+		return fogNear * original;
 	}
 	
 	public static float getFar(float original) {
@@ -143,4 +227,32 @@ public class Environmental {
 		}
 	}
 
+	public static State isActive() {
+		if (client.level == null)
+			return State.INACTIVE;
+
+		if (client.level.dimension().equals(PastelDimensions.DIMENSION_KEY))
+			return State.ACTIVE;
+
+		if (overActive || over > 0)
+			return State.PARTIAL;
+
+		return State.INACTIVE;
+	}
+
+	public enum State {
+		INACTIVE(false),
+		PARTIAL(true),
+		ACTIVE(true);
+
+		public final boolean overrides;
+
+        State(boolean overrides) {
+            this.overrides = overrides;
+        }
+
+		public boolean force() {
+			return this == ACTIVE;
+		}
+    }
 }

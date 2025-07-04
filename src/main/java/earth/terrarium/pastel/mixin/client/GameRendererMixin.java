@@ -18,7 +18,7 @@ public abstract class GameRendererMixin {
 
     @ModifyReturnValue(method = "getNightVisionScale", at = @At("RETURN"))
     private static float nerfNightVisionInDimension(float original, LivingEntity entity, float tickDelta) {
-		if (PastelDimensions.DIMENSION_KEY == entity.level().dimension()) {
+		if (Environmental.isActive().force()) {
 			original /= 6F;
 		}
 		original *= 1F - Environmental.getEnvData().darkening();

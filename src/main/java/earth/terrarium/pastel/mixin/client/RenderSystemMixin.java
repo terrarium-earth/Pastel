@@ -17,13 +17,18 @@ public class RenderSystemMixin {
 
     @Inject(method = "getShaderFogColor", at = @At("RETURN"), cancellable = true)
     private static void alterFogColor(CallbackInfoReturnable<float[]> cir) {
-        var mult = Environmental.getEnvData().brightMult();
+        if (!Environmental.isActive().overrides)
+            return;
 
-        cir.setReturnValue(new float[]{
+        var mult = Environmental.getEnvData().brightMult();
+        var darkened = new float[]{
                 shaderFogColor[0] * mult,
                 shaderFogColor[1] * mult,
                 shaderFogColor[2] * mult,
-                shaderFogColor[3]});
+                shaderFogColor[3]};
+
+        Environmental.applyColor(darkened);
+        cir.setReturnValue(darkened);
         cir.cancel();
     }
 }

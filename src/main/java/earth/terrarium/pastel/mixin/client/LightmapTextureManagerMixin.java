@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.deeper_down.Environmental;
-import earth.terrarium.pastel.registries.PastelDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.util.Mth;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = LightTexture.class, priority = 9999)
@@ -26,7 +24,7 @@ public class LightmapTextureManagerMixin {
 	private float getDarkness(float original) {
 		var lightMod = PastelCommon.CONFIG.DimensionBrightnessMod * 0.25F;
 
-		if (isInDim()) {
+		if (Environmental.isActive().overrides) {
 			var data = Environmental.getEnvData();
 			return Math.max(data.darkening() - lightMod, original);
 		}
@@ -35,21 +33,18 @@ public class LightmapTextureManagerMixin {
 	
 	@ModifyExpressionValue(method = "updateLightTexture", at = @At(value = "INVOKE", target = "Ljava/lang/Double;floatValue()F", ordinal = 1))
 	private float decreaseGamma(float gamma) {
-		if (isInDim()) {
-			if (minecraft.getCameraEntity() instanceof LivingEntity living) {
-				gamma -= living.hasEffect(MobEffects.NIGHT_VISION) ? 0.275F : 0F;
-			}
+		var state = Environmental.isActive();
+		var mod = state.force() ? PastelCommon.CONFIG.DimensionBrightnessMod : 0.25F;
 
+		if (state.force() && minecraft.getCameraEntity() instanceof LivingEntity living) {
+			gamma -= living.hasEffect(MobEffects.NIGHT_VISION) ? 0.275F : 0F;
+		}
+
+		if (state.overrides) {
 			gamma = Mth.lerp(Environmental.getEnvData().darkening(), gamma,
-					gamma - 25F + PastelCommon.CONFIG.DimensionBrightnessMod);
+					gamma - 25F + mod);
 		}
 
 		return gamma;
-	}
-
-	@Unique
-	private static boolean isInDim() {
-		Minecraft client = Minecraft.getInstance();
-		return PastelDimensions.DIMENSION_KEY.equals(client.player.level().dimension());
 	}
 }

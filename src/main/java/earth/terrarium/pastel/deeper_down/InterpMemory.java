@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.deeper_down;
 
-class InterpolationQueue<T> {
+class InterpMemory<T> {
     private T current, last;
 
     public void accept(T newHead) {
