@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.decay;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelLevels;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -120,7 +120,7 @@ public class DecayAwayBlock extends Block {
 					return Blocks.NETHERRACK.defaultBlockState();
 				} else if (BuiltinDimensionTypes.END_EFFECTS.equals(identifier)) {
 					return Blocks.END_STONE.defaultBlockState();
-				} else if (PastelDimensions.DIMENSION_ID.equals(identifier)) {
+				} else if (PastelLevels.DIMENSION_ID.equals(identifier)) {
 					return PastelBlocks.BLACKSLAG.get().defaultBlockState();
 				}
 				return Blocks.DIRT.defaultBlockState();

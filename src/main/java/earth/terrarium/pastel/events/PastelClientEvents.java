@@ -22,7 +22,7 @@ import earth.terrarium.pastel.items.magic_items.ConstructorsStaffItem;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.mixin.client.accessors.WorldRendererAccessor;
 import earth.terrarium.pastel.particle.render.ExtendedParticleManager;
-import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelLevels;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.client.*;
 import earth.terrarium.pastel.render.HudRenderers;
@@ -148,7 +148,7 @@ public class PastelClientEvents {
 
 	private static void onLogin(ClientPlayerNetworkEvent.LoggingIn event) {
 		var player = event.getPlayer();
-		if (player.level().dimension().equals(PastelDimensions.DIMENSION_KEY) && PastelCommon.CONFIG.PostProcess) {
+		if (player.level().dimension().equals(PastelLevels.DIMENSION_KEY) && PastelCommon.CONFIG.PostProcess) {
 			initializeColorGrading(Minecraft.getInstance());
 		}
 	}
@@ -182,7 +182,7 @@ public class PastelClientEvents {
 			return;
 		}
 
-		var inDim = level.dimension().equals(PastelDimensions.DIMENSION_KEY);
+		var inDim = level.dimension().equals(PastelLevels.DIMENSION_KEY);
 		Holder<Biome> biome = level.getBiome(client.getCameraEntity().blockPosition());
 
 		HowlingSpireEffects.clientTick(level, cameraEntity, biome);

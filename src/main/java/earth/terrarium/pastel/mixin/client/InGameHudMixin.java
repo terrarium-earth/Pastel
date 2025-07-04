@@ -33,7 +33,7 @@ public abstract class InGameHudMixin {
     @ModifyExpressionValue(method = "renderCameraOverlays", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;useFancyGraphics()Z"))
     private boolean disableVignietteInDimension(boolean original) {
 		var player = Minecraft.getInstance().player;
-		var isInDim = player != null && PastelDimensions.DIMENSION_KEY.equals(player.level().dimension());
+		var isInDim = player != null && PastelLevels.DIMENSION_KEY.equals(player.level().dimension());
         return !isInDim && original;
     }
 

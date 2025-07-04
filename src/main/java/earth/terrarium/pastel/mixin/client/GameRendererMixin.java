@@ -3,7 +3,6 @@ package earth.terrarium.pastel.mixin.client;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.mojang.blaze3d.systems.RenderSystem;
 import earth.terrarium.pastel.deeper_down.Environmental;
-import earth.terrarium.pastel.registries.PastelDimensions;
 import earth.terrarium.pastel.registries.client.PastelShaders;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.GameRenderer;

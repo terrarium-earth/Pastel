@@ -2,7 +2,7 @@ package earth.terrarium.pastel.registries.client;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.deeper_down.ColorGrading;
-import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelLevels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.PostChain;
@@ -34,7 +34,7 @@ public class PastelShaders {
 	}
 	
 	public static void updateDimensionShaders(ClientLevel world) {
-		if (!world.dimension().equals(PastelDimensions.DIMENSION_KEY))
+		if (!world.dimension().equals(PastelLevels.DIMENSION_KEY))
 			return;
 		
 		colorGradingPostProcess.ifPresent(pps -> {

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.deeper_down;
 import earth.terrarium.pastel.data_loaders.dimension.ColorGradingLoader;
 import earth.terrarium.pastel.data_loaders.dimension.EnvDataLoader;
 import earth.terrarium.pastel.registries.PastelBiomes;
-import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelLevels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Cursor3D;
@@ -231,7 +231,7 @@ public class Environmental {
 		if (client.level == null)
 			return State.INACTIVE;
 
-		if (client.level.dimension().equals(PastelDimensions.DIMENSION_KEY))
+		if (client.level.dimension().equals(PastelLevels.DIMENSION_KEY))
 			return State.ACTIVE;
 
 		if (overActive || over > 0)

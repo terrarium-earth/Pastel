@@ -75,16 +75,17 @@ public class AzuriteOreBlock extends CloakedOreBlock {
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(state, world, pos, random);
         
-        if (this.isVisibleTo(Minecraft.getInstance().player)) {
-            BlockAuraSoundInstance.addToExistingInstanceOrCreateNewOne(world, pos);
+        if (!this.isVisibleTo(Minecraft.getInstance().player))
+            return;
 
-            if (world.getRandom().nextFloat() >= 0.02)
-                return;
+        BlockAuraSoundInstance.checkOrCreateInstance(world, pos);
 
-            ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, 5, false, new Vec3(2, 0, 2), 0, true, Vec3.atLowerCornerOf(pos), new Vec3(0, 0.07D + random.nextDouble() * 0.06, 0));
-			ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(), random.nextIntBetweenInclusive(1, 3), Vec3.ZERO);
-            world.playSound(null, pos, PastelSoundEvents.SOFT_HUM, SoundSource.BLOCKS, 1F, random.nextFloat() * 0.5F + 1F);
-        }
+        if (world.getRandom().nextFloat() >= 0.02)
+            return;
+
+        ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, 5, false, new Vec3(2, 0, 2), 0, true, Vec3.atLowerCornerOf(pos), new Vec3(0, 0.07D + random.nextDouble() * 0.06, 0));
+        ParticleHelper.playParticleAroundBlockSides(world, PastelParticleTypes.AZURE_MOTE, pos, Direction.values(), random.nextIntBetweenInclusive(1, 3), Vec3.ZERO);
+        world.playSound(null, pos, PastelSoundEvents.SOFT_HUM, SoundSource.BLOCKS, 1F, random.nextFloat() * 0.5F + 1F);
     }
     
 }

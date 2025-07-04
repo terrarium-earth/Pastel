@@ -20,7 +20,7 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffs
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
-import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelLevels;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.client.PastelColorProviders;
@@ -219,7 +219,7 @@ public class PastelMiscEvents {
 		PlayerList playerManager = server.getPlayerList();
 		for (ServerPlayer player : playerManager.getPlayers()) {
 			Level level = player.level();
-			if (!player.isCreative() && !player.isSpectator() && level.dimension() == PastelDimensions.DIMENSION_KEY && player.getY() > level.getMaxBuildHeight()) {
+			if (!player.isCreative() && !player.isSpectator() && level.dimension() == PastelLevels.DIMENSION_KEY && player.getY() > level.getMaxBuildHeight()) {
 				player.hurt(player.damageSources().fellOutOfWorld(), 10.0F);
 				if (player.isDeadOrDying()) {
 					Support.grantAdvancementCriterion(player, "lategame/get_killed_while_out_of_deeper_down_bounds", "get_rekt");

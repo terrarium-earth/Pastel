@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.sound;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelLevels;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.ResourceLocation;
@@ -40,7 +40,7 @@ public class PastelSourceEffects {
             return;
         }
 
-        if (client.level.dimension().location() != PastelDimensions.DIMENSION_ID) {
+        if (client.level.dimension().location() != PastelLevels.DIMENSION_ID) {
             return;
         }
 

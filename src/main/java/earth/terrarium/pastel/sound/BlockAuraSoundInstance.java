@@ -27,7 +27,7 @@ import java.util.Queue;
 
 @OnlyIn(Dist.CLIENT)
 public class BlockAuraSoundInstance extends AbstractSoundInstance implements TickableSoundInstance {
-	
+
 	public static final List<BlockAuraSoundInstance> INSTANCES = new ArrayList<>();
 	private static final int MAX_DISTANCE = 48;
 	private static final int SPACING = 16;
@@ -40,17 +40,17 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 	private int age = 0;
 	private double absX, absY, absZ;
 	private final Queue<BlockPos> sources = new LinkedList<>();
-	private final Level world;
+	private final Level level;
 	private float volumeHold;
 	
-	private BlockAuraSoundInstance(SoundEvent sound, Level world, BlockPos source) {
+	private BlockAuraSoundInstance(SoundEvent sound, Level level, BlockPos source) {
 		super(sound, SoundSource.AMBIENT, SoundInstance.createUnseededRandom());
 		this.volume = MIN_VOLUME;
 		this.volumeHold = MIN_VOLUME;
 		this.looping = true;
 		this.delay = 0;
 		this.relative = true;
-		this.world = world;
+		this.level = level;
 		this.sources.add(source);
 		
 		updatePositionAndCount();
@@ -88,9 +88,9 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 		if (volumeHold > 0.25) {
 			Vec3 pos = new Vec3(this.absX, this.absY, this.absZ);
 			float chance = volumeHold / 2F;
-			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_AURA, Support.chanceRound(chance * 3, random), true, new Vec3(24, 8, 24), -4, true, pos, new Vec3(0, 0.04D + random.nextDouble() * 0.06, 0));
-			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_MOTE_SMALL, Support.chanceRound(chance, random), false, new Vec3(16, 8, 16), -6, false, pos, Vec3.ZERO);
-			ParticleHelper.playTriangulatedParticle(world, PastelParticleTypes.AZURE_MOTE, Support.chanceRound(chance, random), true, new Vec3(16, 6, 16), -4, false, pos, Vec3.ZERO);
+			ParticleHelper.playTriangulatedParticle(level, PastelParticleTypes.AZURE_AURA, Support.chanceRound(chance * 3, random), true, new Vec3(24, 8, 24), -4, true, pos, new Vec3(0, 0.04D + random.nextDouble() * 0.06, 0));
+			ParticleHelper.playTriangulatedParticle(level, PastelParticleTypes.AZURE_MOTE_SMALL, Support.chanceRound(chance, random), false, new Vec3(16, 8, 16), -6, false, pos, Vec3.ZERO);
+			ParticleHelper.playTriangulatedParticle(level, PastelParticleTypes.AZURE_MOTE, Support.chanceRound(chance, random), true, new Vec3(16, 6, 16), -4, false, pos, Vec3.ZERO);
 		}
 	}
 	
@@ -99,7 +99,7 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 		int y = 0;
 		int z = 0;
 		for (BlockPos source : sources) {
-			if (!world.hasChunkAt(source) || !world.getBlockState(source).is(PastelBlockTags.AZURITE_ORES)) { // tag is hardcoded for now. But should we have more blocks like that, we can easily split it
+			if (!level.hasChunkAt(source) || !level.getBlockState(source).is(PastelBlockTags.AZURITE_ORES)) { // tag is hardcoded for now. But should we have more blocks like that, we can easily split it
 				toRemove.add(source);
 			} else {
 				x += source.getX();
@@ -137,7 +137,7 @@ public class BlockAuraSoundInstance extends AbstractSoundInstance implements Tic
 		return done;
 	}
 	
-	public static void addToExistingInstanceOrCreateNewOne(Level world, BlockPos pos) {
+	public static void checkOrCreateInstance(Level world, BlockPos pos) {
 		double nearestDistance = Double.MAX_VALUE;
 		@Nullable BlockAuraSoundInstance nearest = null;
 		for (BlockAuraSoundInstance instance : INSTANCES) {

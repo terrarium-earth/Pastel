@@ -6,7 +6,7 @@ import earth.terrarium.pastel.blocks.DeeperDownPortalBlock;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelLevels;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -81,7 +81,7 @@ public class RuinBlock extends DecayBlock {
 				}
 			} else if (world.dimension() == Level.OVERWORLD && pos.getY() == world.getMinBuildHeight()) {
 				world.setBlock(pos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, false), 3);
-			} else if (world.dimension() == PastelDimensions.DIMENSION_KEY && pos.getY() == world.getMaxBuildHeight() - 1) { // highest layer cannot be built on
+			} else if (world.dimension() == PastelLevels.DIMENSION_KEY && pos.getY() == world.getMaxBuildHeight() - 1) { // highest layer cannot be built on
 				world.setBlock(pos, PastelBlocks.DEEPER_DOWN_PORTAL.get().defaultBlockState().setValue(DeeperDownPortalBlock.FACING_UP, true), 3);
 			}
 		}

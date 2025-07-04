@@ -8,7 +8,7 @@ import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffs
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
-import earth.terrarium.pastel.registries.PastelDimensions;
+import earth.terrarium.pastel.registries.PastelLevels;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
@@ -180,7 +180,7 @@ public class DeeperDownPortalBlock extends Block {
 			
 			if (currentWorldKey == Level.OVERWORLD) {
 				// => teleport to DD
-				ServerLevel targetWorld = serverWorld.getServer().getLevel(PastelDimensions.DIMENSION_KEY);
+				ServerLevel targetWorld = serverWorld.getServer().getLevel(PastelLevels.DIMENSION_KEY);
 				if (targetWorld != null) {
 					BlockPos portalPos = new BlockPos(pos.getX(), targetWorld.getMaxBuildHeight() - 1, pos.getZ());
 					if (!targetWorld.getBlockState(portalPos).is(PastelBlocks.DEEPER_DOWN_PORTAL.get())) {
