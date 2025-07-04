@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.item.Stampable;
 import earth.terrarium.pastel.api.item.TooltipExtensions;
-import earth.terrarium.pastel.helpers.BlockReference;
+import earth.terrarium.pastel.helpers.level.BlockReference;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;

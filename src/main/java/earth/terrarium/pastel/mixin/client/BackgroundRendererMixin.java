@@ -5,22 +5,24 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.mojang.blaze3d.shaders.FogShape;
-import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
+import earth.terrarium.pastel.deeper_down.Environmental;
 import earth.terrarium.pastel.registries.PastelDimensions;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FogRenderer.class)
 public class BackgroundRendererMixin {
-	
+
+	@Shadow private static int previousBiomeFog;
+
 	@Inject(method = "setupFog", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderFogStart(F)V", remap = false, shift = At.Shift.BEFORE))
 	private static void modifyFog(Camera camera, FogRenderer.FogMode fogType, float viewDistance, boolean thickFog, float tickDelta, CallbackInfo ci, @Local FogRenderer.FogData fogData) {
 		var world = Minecraft.getInstance().level;
@@ -31,10 +33,12 @@ public class BackgroundRendererMixin {
 		var dim = world.dimension();
 		var inDim = dim == PastelDimensions.DIMENSION_KEY;
 		
-		if (inDim || DimensionRenderEffects.forceFogEffects) {
+		if (inDim) {
+			var data = Environmental.getEnvData();
+
 			fogData.shape = FogShape.SPHERE;
-			fogData.end = Math.min(Math.min(viewDistance, 192F), DimensionRenderEffects.getFar(fogData.end));
-			fogData.start = DimensionRenderEffects.getNear(fogData.start);
+			fogData.end = Math.min(Math.min(viewDistance, 192F), Environmental.getFar(fogData.end));
+			fogData.start = Environmental.getNear(fogData.start);
 		}
 	}
 
@@ -46,11 +50,9 @@ public class BackgroundRendererMixin {
 
 	@WrapOperation(method = "setupColor", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;clearColor(FFFF)V", remap = false, ordinal = 1))
 	private static void darkenBackground(float red, float green, float blue, float alpha, Operation<Void> original) {
-		var darkening = DimensionRenderEffects.fogDarkness;
-		var blend = DimensionRenderEffects.blend;
-		red = Mth.lerp(blend, red, DimensionRenderEffects.red);
-		green = Mth.lerp(blend, green, DimensionRenderEffects.green);
-		blue = Mth.lerp(blend, blue, DimensionRenderEffects.blue);
+		var envData = Environmental.getEnvData();
+		var darkening = envData.brightMult();
+
 		if (darkening > 0) {
 			red *= darkening;
 			green *= darkening;

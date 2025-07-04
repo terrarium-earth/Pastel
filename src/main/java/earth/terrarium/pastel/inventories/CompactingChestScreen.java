@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.inventories;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.RenderHelper;
+import earth.terrarium.pastel.helpers.render.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

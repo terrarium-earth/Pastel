@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.energy.InkStorage;
 import earth.terrarium.pastel.api.energy.InkStorageBlockEntity;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.helpers.RenderHelper;
+import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.helpers.Support;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.events;
 
-import earth.terrarium.pastel.helpers.MobEffectHelper;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
 import earth.terrarium.pastel.items.trinkets.AetherGracedNectarGlovesItem;

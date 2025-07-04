@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static earth.terrarium.pastel.helpers.InWorldInteractionHelper.findAndDecreaseClosestItemEntityOfItem;
+import static earth.terrarium.pastel.helpers.interaction.InWorldInteractionHelper.findAndDecreaseClosestItemEntityOfItem;
 
 public class MilkingIdolBlock extends IdolBlock {
 	

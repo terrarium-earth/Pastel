@@ -5,7 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.InkStorage;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.helpers.CodecHelper;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;

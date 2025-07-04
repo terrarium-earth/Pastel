@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.idols;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.helpers.InWorldInteractionHelper;
+import earth.terrarium.pastel.helpers.interaction.InWorldInteractionHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.structure;
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.item_roundel.ItemRoundelBlock;
 import earth.terrarium.pastel.blocks.item_roundel.ItemRoundelBlockEntity;
-import earth.terrarium.pastel.helpers.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;

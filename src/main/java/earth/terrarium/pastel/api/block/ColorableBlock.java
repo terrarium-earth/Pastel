@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.block;
 
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;

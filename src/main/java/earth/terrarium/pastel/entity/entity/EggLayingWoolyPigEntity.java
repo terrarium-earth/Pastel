@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelLootTables;
 import earth.terrarium.pastel.registries.PastelSoundEvents;

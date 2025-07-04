@@ -10,10 +10,12 @@ import earth.terrarium.pastel.api.render.DynamicItemRenderer;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.data_loaders.ParticleSpawnerParticlesDataLoader;
-import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
+import earth.terrarium.pastel.data_loaders.dimension.ColorGradingLoader;
+import earth.terrarium.pastel.data_loaders.dimension.EnvDataLoader;
+import earth.terrarium.pastel.deeper_down.Environmental;
 import earth.terrarium.pastel.deeper_down.HowlingSpireEffects;
-import earth.terrarium.pastel.helpers.BuildingHelper;
-import earth.terrarium.pastel.helpers.TooltipHelper;
+import earth.terrarium.pastel.helpers.level.BuildingHelper;
+import earth.terrarium.pastel.helpers.render.TooltipHelper;
 import earth.terrarium.pastel.items.magic_items.BuildingStaffItem;
 import earth.terrarium.pastel.items.magic_items.ConstructorsStaffItem;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
@@ -134,7 +136,7 @@ public class PastelClientEvents {
 		Holder<Biome> biome = level.getBiome(client.getCameraEntity().blockPosition());
 
 		HowlingSpireEffects.clientTick(level, cameraEntity, biome);
-		DimensionRenderEffects.clientTick(level, cameraEntity, biome);
+		Environmental.tick(cameraEntity);
 		WorldAttenuation.tick(level, cameraEntity, inDim);
 
 		if (PastelCommon.CONFIG.PostProcess && inDim) {
@@ -218,6 +220,8 @@ public class PastelClientEvents {
 
 	private static void onReloadClientResources(RegisterClientReloadListenersEvent event) {
 		event.registerReloadListener(ParticleSpawnerParticlesDataLoader.INSTANCE);
+		event.registerReloadListener(ColorGradingLoader.INSTANCE);
+		event.registerReloadListener(EnvDataLoader.INSTANCE);
 
 		event.registerReloadListener(new ResourceManagerReloadListener() {
 			@Override

@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.block.PlayerOwnedWithName;
 import earth.terrarium.pastel.data_loaders.CrystalApothecarySimulationsDataLoader;
 import earth.terrarium.pastel.events.game.PastelGameEvents;
 import earth.terrarium.pastel.events.listeners.BlockPosEventQueue;
-import earth.terrarium.pastel.helpers.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.inventories.GenericPastelContainerScreenHandler;
 import earth.terrarium.pastel.inventories.ScreenBackgroundVariant;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;

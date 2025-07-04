@@ -8,7 +8,7 @@ import com.klikli_dev.modonomicon.client.render.page.PageWithTextRenderer;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.compat.modonomicon.pages.BookHintPage;
-import earth.terrarium.pastel.helpers.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.networking.c2s_payloads.GuidebookHintBoughtPayload;
 import earth.terrarium.pastel.sound.HintRevelationSoundInstance;
 import net.minecraft.client.Minecraft;

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.particle.client;
 
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.multiplayer.ClientLevel;

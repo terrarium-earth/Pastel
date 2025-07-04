@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelMobEffects;

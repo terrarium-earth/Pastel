@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.item;
 
-import earth.terrarium.pastel.helpers.BlockReference;
+import earth.terrarium.pastel.helpers.level.BlockReference;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Tuple;

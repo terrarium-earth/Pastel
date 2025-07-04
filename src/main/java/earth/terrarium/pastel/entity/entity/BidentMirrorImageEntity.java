@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.spells.MoonstoneStrike;

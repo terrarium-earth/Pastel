@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.mixin;
 
-import earth.terrarium.pastel.helpers.MobEffectHelper;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.injectors.ClientboundUpdateMobEffectPacketInjector;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;

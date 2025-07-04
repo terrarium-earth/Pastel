@@ -2,7 +2,7 @@ package earth.terrarium.pastel.entity.entity;
 
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.enchantments.ImprovedCriticalHelper;
 import earth.terrarium.pastel.items.tools.DraconicTwinswordItem;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;

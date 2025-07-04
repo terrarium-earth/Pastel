@@ -5,6 +5,8 @@ import earth.terrarium.pastel.capabilities.*;
 import earth.terrarium.pastel.capabilities.fluid.*;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.mixin.accessors.BiomeAccessor;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.FluidRecipeInput;

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.deeper_down;
 
 import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.blocks.deeper_down.flora.WeepingGalaFrondsBlock;
-import earth.terrarium.pastel.helpers.BlockReference;
+import earth.terrarium.pastel.helpers.level.BlockReference;
 import earth.terrarium.pastel.registries.PastelLootTables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;

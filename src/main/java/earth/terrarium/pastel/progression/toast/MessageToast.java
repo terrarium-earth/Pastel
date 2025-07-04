@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.progression.toast;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.RenderHelper;
+import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;

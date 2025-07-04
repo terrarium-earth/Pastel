@@ -1,0 +1,10 @@
+{
+  "biome": "pastel:deep_barrens",
+  "color_grading": {
+    "saturation": 0.5,
+    "rubedo": 0,
+    "temperature": 55,
+    "threshold": 0.7,
+    "bloom": 0.2
+  }
+}

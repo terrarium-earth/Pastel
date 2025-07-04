@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.api.item;
 
-import earth.terrarium.pastel.helpers.ComponentHelper;
+import earth.terrarium.pastel.helpers.data.ComponentHelper;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import net.minecraft.world.item.ItemStack;
 

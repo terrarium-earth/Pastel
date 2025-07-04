@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.predicate.location;
 
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerLevel;

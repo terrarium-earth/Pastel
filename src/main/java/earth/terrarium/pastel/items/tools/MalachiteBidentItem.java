@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.item.TooltipExtensions;
 import earth.terrarium.pastel.entity.entity.BidentBaseEntity;
 import earth.terrarium.pastel.entity.entity.BidentEntity;
 import earth.terrarium.pastel.entity.entity.BidentMirrorImageEntity;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;

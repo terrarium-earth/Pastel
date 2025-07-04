@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin.client;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import earth.terrarium.pastel.helpers.MobEffectHelper;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;

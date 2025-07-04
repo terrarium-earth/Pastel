@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.deeper_down.flora;
 
-import earth.terrarium.pastel.helpers.BlockReference;
+import earth.terrarium.pastel.helpers.level.BlockReference;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.neoforged.neoforge.common.Tags;
 import net.minecraft.core.BlockPos;

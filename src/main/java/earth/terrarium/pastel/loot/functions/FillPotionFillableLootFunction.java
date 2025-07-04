@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.item.InkPoweredPotionFillable;
-import earth.terrarium.pastel.helpers.CodecHelper;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;

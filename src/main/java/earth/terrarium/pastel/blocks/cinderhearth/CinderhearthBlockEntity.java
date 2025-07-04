@@ -15,6 +15,8 @@ import earth.terrarium.pastel.capabilities.*;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.components.InkStorageComponent;
 import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.inventories.CinderhearthScreenHandler;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;

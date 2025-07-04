@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.api.recipe.DescriptiveGatedRecipe;
-import earth.terrarium.pastel.helpers.CodecHelper;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;

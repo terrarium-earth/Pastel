@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.inventories;
 
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.items.tools.GlassCrestWorkstaffItem;
 import earth.terrarium.pastel.items.tools.WorkstaffItem;
 import earth.terrarium.pastel.networking.c2s_payloads.WorkstaffToggleSelectedPayload;

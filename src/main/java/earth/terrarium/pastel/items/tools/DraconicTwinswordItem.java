@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.item.SplittableItem;
 import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
 import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
 import earth.terrarium.pastel.entity.entity.DraconicTwinswordEntity;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;

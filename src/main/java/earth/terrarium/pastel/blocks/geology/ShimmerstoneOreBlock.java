@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.geology;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.blocks.conditional.CloakedOreBlock;
-import earth.terrarium.pastel.helpers.ParticleHelper;
+import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleAroundBlockSidesPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;

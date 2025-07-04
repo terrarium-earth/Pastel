@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks;
 
-import earth.terrarium.pastel.helpers.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

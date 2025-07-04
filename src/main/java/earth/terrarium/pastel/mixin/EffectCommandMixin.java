@@ -1,8 +1,7 @@
 package earth.terrarium.pastel.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.helpers.MobEffectHelper;
-import earth.terrarium.pastel.injectors.MobEffectInstanceInjector;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.Holder;

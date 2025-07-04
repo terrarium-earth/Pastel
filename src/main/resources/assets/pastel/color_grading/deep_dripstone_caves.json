@@ -1,0 +1,10 @@
+{
+  "biome": "pastel:deep_dripstone_caves",
+  "color_grading": {
+    "saturation": 1,
+    "rubedo": 0.02,
+    "temperature": 60,
+    "threshold": 0.8,
+    "bloom": 0.3
+  }
+}

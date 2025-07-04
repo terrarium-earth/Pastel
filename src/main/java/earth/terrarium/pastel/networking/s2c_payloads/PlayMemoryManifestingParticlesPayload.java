@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;

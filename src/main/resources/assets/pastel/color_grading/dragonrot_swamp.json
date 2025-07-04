@@ -1,0 +1,10 @@
+{
+  "biome": "pastel:dragonrot_swamp",
+  "color_grading": {
+    "saturation": 0.7,
+    "rubedo": 0.05,
+    "temperature": 105,
+    "threshold": 0.75,
+    "bloom": 0.3
+  }
+}

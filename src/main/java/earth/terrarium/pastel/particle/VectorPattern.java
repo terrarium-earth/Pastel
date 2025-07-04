@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.particle;
 
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.phys.Vec3;

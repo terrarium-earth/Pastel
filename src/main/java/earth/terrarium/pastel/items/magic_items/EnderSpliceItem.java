@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
 import earth.terrarium.pastel.components.EnderSpliceComponent;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.c2s_payloads.BindEnderSpliceToPlayerPayload;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;

@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.blocks.memory;
 
 import earth.terrarium.pastel.api.block.PlayerOwned;
-import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.helpers.EntityHelper;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
+import earth.terrarium.pastel.helpers.level.EntityHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayMemoryManifestingParticlesPayload;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelBlockEntities;

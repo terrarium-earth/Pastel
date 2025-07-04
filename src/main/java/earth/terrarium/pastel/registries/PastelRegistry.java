@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.Lifecycle;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.CodecHelper;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;

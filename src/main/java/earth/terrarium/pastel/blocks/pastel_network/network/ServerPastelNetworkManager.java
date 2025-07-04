@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.pastel_network.network;
 
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
-import earth.terrarium.pastel.helpers.CodecHelper;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNetworkRemovedPayload;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

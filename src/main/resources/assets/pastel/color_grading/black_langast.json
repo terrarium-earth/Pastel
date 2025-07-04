@@ -1,0 +1,10 @@
+{
+  "biome": "pastel:black_langast",
+  "color_grading": {
+    "saturation": 0.5,
+    "rubedo": 0,
+    "temperature": 60,
+    "threshold": 1.0,
+    "bloom": 0.1
+  }
+}

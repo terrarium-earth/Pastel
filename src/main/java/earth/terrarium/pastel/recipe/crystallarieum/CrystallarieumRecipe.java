@@ -6,7 +6,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.recipe.GatedPastelRecipe;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelFluids;

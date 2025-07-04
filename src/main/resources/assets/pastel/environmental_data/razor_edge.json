@@ -1,0 +1,9 @@
+{
+  "biome": "pastel:razor_edge",
+  "environment": {
+    "darkening": 0,
+    "bright_mult": 0.65,
+    "near": -2.25,
+    "far": 1.5
+  }
+}

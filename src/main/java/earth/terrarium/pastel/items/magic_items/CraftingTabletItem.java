@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.magic_items;
 
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
-import earth.terrarium.pastel.helpers.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.inventories.CraftingTabletScreenHandler;
 import earth.terrarium.pastel.items.tooltip.CraftingTabletTooltipData;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;

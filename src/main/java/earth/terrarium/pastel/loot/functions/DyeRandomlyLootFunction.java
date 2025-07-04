@@ -3,7 +3,7 @@ package earth.terrarium.pastel.loot.functions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.ItemTags;

@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import static earth.terrarium.pastel.helpers.RenderHelper.fillQuad;
+import static earth.terrarium.pastel.helpers.render.RenderHelper.fillQuad;
 
 @OnlyIn(Dist.CLIENT)
 public class ColorSelectionWidget extends AbstractWidget {

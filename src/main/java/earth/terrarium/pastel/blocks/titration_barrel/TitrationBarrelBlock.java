@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.titration_barrel;
 
 import com.mojang.serialization.MapCodec;
-import earth.terrarium.pastel.helpers.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.recipe.titration_barrel.ITitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;

@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.entity.entity;
 
-import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.mixin.accessors.TridentEntityAccessor;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.nbt.CompoundTag;

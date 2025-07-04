@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.misc;
 
-import earth.terrarium.pastel.helpers.BlockReference;
+import earth.terrarium.pastel.helpers.level.BlockReference;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.sounds.SoundEvents;

@@ -1,17 +1,12 @@
 package earth.terrarium.pastel.status_effects;
 
-import earth.terrarium.pastel.helpers.MobEffectHelper;
-import earth.terrarium.pastel.items.trinkets.WhispyCircletItem;
-import earth.terrarium.pastel.registries.PastelMobEffectTags;
-import earth.terrarium.pastel.registries.PastelMobEffects;
-import net.minecraft.core.Holder;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.neoforge.common.EffectCure;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class ImmunityStatusEffect extends MobEffect {

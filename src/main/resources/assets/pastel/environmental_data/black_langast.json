@@ -1,0 +1,9 @@
+{
+  "biome": "pastel:black_langast",
+  "environment": {
+    "darkening": 0.7,
+    "bright_mult": 0.0125,
+    "near": -8,
+    "far": 0.5
+  }
+}

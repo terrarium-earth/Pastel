@@ -1,0 +1,9 @@
+{
+  "biome": "pastel:deep_barrens",
+  "environment": {
+    "darkening": 0.325,
+    "bright_mult": 0.55,
+    "near": -5,
+    "far": 0.5
+  }
+}

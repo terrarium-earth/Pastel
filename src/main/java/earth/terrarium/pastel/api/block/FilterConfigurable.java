@@ -1,9 +1,6 @@
 package earth.terrarium.pastel.api.block;
 
-import com.mojang.serialization.Codec;
 import earth.terrarium.pastel.api.item.ItemReference;
-import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.helpers.CodecHelper;
 import earth.terrarium.pastel.inventories.slots.ShadowSlot;
 import earth.terrarium.pastel.networking.c2s_payloads.SetShadowSlotPayload;
 import net.minecraft.core.*;
@@ -22,7 +19,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.*;
 import net.neoforged.neoforge.network.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

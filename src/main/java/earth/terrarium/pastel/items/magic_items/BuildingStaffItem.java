@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.PrioritizedBlockInteraction;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.helpers.BuildingHelper;
+import earth.terrarium.pastel.helpers.level.BuildingHelper;
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

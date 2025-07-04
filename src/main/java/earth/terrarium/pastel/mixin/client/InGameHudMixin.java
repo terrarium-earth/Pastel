@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin.client;
 import com.llamalad7.mixinextras.injector.*;
 import com.llamalad7.mixinextras.injector.wrapoperation.*;
 import com.llamalad7.mixinextras.sugar.Local;
-import earth.terrarium.pastel.helpers.MobEffectHelper;
+import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.registries.*;
 import earth.terrarium.pastel.status_effects.SleepStatusEffect;
 import net.minecraft.client.DeltaTracker;

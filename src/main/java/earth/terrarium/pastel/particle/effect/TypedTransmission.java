@@ -2,7 +2,7 @@ package earth.terrarium.pastel.particle.effect;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

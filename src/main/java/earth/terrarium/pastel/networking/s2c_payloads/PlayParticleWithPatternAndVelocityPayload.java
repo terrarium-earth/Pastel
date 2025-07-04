@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.helpers.ParticleHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.particle.VectorPattern;
 import net.minecraft.network.protocol.*;

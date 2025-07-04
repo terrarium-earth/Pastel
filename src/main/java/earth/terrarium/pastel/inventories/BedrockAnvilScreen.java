@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.inventories;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.LoreHelper;
+import earth.terrarium.pastel.helpers.render.LoreHelper;
 import earth.terrarium.pastel.items.PigmentItem;
 import earth.terrarium.pastel.networking.c2s_payloads.AddLoreBedrockAnvilPayload;
 import earth.terrarium.pastel.networking.c2s_payloads.RenameItemInBedrockAnvilPayload;

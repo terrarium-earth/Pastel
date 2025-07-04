@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.api.predicate.location;
 
 import com.mojang.serialization.Codec;
-import earth.terrarium.pastel.helpers.TimeHelper;
+import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.network.codec.ByteBufCodecs;

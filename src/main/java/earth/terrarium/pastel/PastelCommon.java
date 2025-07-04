@@ -12,6 +12,7 @@ import earth.terrarium.pastel.config.PastelConfig;
 import earth.terrarium.pastel.data_loaders.CrystalApothecarySimulationsDataLoader;
 import earth.terrarium.pastel.data_loaders.EntityFishingDataLoader;
 import earth.terrarium.pastel.data_loaders.NaturesStaffConversionDataLoader;
+import earth.terrarium.pastel.data_loaders.dimension.ColorGradingLoader;
 import earth.terrarium.pastel.entity.PastelEntitySubPredicateTypes;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
 import earth.terrarium.pastel.entity.PastelTrackedDataHandlerRegistry;

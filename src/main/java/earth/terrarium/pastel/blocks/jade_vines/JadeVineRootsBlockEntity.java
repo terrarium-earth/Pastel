@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
-import earth.terrarium.pastel.helpers.TimeHelper;
+import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;

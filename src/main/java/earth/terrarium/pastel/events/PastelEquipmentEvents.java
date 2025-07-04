@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.events;
 
 import earth.terrarium.pastel.components.*;
-import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.component.*;
 import net.neoforged.bus.api.*;

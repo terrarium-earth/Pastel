@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.magic_items;
 import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
 import earth.terrarium.pastel.attachments.data.EverpromiseRibbonData;
 import earth.terrarium.pastel.compat.claims.GenericClaimModsCompat;
-import earth.terrarium.pastel.helpers.EntityHelper;
+import earth.terrarium.pastel.helpers.level.EntityHelper;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;

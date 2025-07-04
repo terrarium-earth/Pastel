@@ -2,8 +2,8 @@ package earth.terrarium.pastel.api.energy.color;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.chat.Component;

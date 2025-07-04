@@ -1,8 +1,7 @@
 package earth.terrarium.pastel.blocks.fluid;
 
 import earth.terrarium.pastel.blocks.decay.BlackMateriaBlock;
-import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredSparkleRisingParticleEffect;

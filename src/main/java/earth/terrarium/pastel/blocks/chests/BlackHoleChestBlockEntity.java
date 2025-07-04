@@ -10,7 +10,7 @@ import earth.terrarium.pastel.events.listeners.EventQueue;
 import earth.terrarium.pastel.events.listeners.ExperienceOrbEventQueue;
 import earth.terrarium.pastel.events.listeners.ItemAndExperienceEventQueue;
 import earth.terrarium.pastel.events.listeners.ItemEntityEventQueue;
-import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.inventories.BlackHoleChestScreenHandler;
 import earth.terrarium.pastel.mixin.accessors.ItemEntityAccessor;
 import earth.terrarium.pastel.networking.s2c_payloads.BlackHoleChestStatusUpdatePayload;

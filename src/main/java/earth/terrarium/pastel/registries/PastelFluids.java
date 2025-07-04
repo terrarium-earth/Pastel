@@ -9,7 +9,7 @@ import earth.terrarium.pastel.blocks.fluid.HumusFluid;
 import earth.terrarium.pastel.blocks.fluid.LiquidCrystalFluid;
 import earth.terrarium.pastel.blocks.fluid.MidnightSolutionFluid;
 import earth.terrarium.pastel.blocks.fluid.PastelFluid;
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.render.FluidRendering;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;

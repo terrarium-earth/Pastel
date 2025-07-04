@@ -5,7 +5,7 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.components.JadeWineComponent;
 import earth.terrarium.pastel.helpers.Support;
-import earth.terrarium.pastel.helpers.TimeHelper;
+import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;
 import earth.terrarium.pastel.recipe.titration_barrel.TitrationBarrelRecipe;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;

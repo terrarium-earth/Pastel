@@ -1,0 +1,10 @@
+{
+  "biome": "pastel:noxshroom_forest",
+  "color_grading": {
+    "saturation": 1.05,
+    "rubedo": 0.015,
+    "temperature": 80,
+    "threshold": 0.7,
+    "bloom": 0.3125
+  }
+}

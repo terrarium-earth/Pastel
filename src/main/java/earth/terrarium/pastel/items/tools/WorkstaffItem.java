@@ -7,7 +7,7 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.capabilities.AreaMiningHandler;
 import earth.terrarium.pastel.components.WorkstaffComponent;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.inventories.WorkstaffScreenHandler;
 import earth.terrarium.pastel.registries.PastelAdvancements;

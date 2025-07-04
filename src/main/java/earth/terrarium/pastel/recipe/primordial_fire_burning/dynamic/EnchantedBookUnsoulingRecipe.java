@@ -2,9 +2,9 @@ package earth.terrarium.pastel.recipe.primordial_fire_burning.dynamic;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.CodecHelper;
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.recipe.primordial_fire_burning.PrimordialFireBurningRecipe;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;
 import net.minecraft.core.Holder;

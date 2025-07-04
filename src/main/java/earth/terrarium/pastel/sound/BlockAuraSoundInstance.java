@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.sound;
 
-import earth.terrarium.pastel.helpers.ParticleHelper;
+import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelBlockTags;

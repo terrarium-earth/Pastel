@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.api.recipe.IngredientStack;
-import earth.terrarium.pastel.helpers.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.neoforged.neoforge.items.*;

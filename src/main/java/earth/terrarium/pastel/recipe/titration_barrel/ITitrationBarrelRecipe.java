@@ -2,7 +2,8 @@ package earth.terrarium.pastel.recipe.titration_barrel;
 
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.interaction.TimeHelper;
+import earth.terrarium.pastel.helpers.render.LoreHelper;
 import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import earth.terrarium.pastel.api.recipe.GatedRecipe;

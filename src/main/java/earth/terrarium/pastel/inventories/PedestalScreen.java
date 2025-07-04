@@ -4,7 +4,7 @@ import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
-import earth.terrarium.pastel.helpers.RenderHelper;
+import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.client.Minecraft;

@@ -8,7 +8,7 @@ import earth.terrarium.pastel.blocks.upgrade.Upgradeable;
 import earth.terrarium.pastel.capabilities.ExperienceHandler;
 import earth.terrarium.pastel.blocks.enchanter.EnchanterBlockEntity;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelRecipeSerializers;

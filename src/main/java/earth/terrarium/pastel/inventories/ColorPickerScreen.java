@@ -3,7 +3,7 @@ package earth.terrarium.pastel.inventories;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.blocks.energy.ColorPickerBlockEntity;
-import earth.terrarium.pastel.helpers.RenderHelper;
+import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.inventories.widgets.ColorSelectionWidget;
 import earth.terrarium.pastel.inventories.widgets.InkGaugeWidget;
 import earth.terrarium.pastel.inventories.widgets.StackedInkMeterWidget;

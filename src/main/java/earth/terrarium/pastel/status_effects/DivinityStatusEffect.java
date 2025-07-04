@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.status_effects;
 
-import earth.terrarium.pastel.helpers.ParticleHelper;
+import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayDivinityAppliedEffectsPayload;
 import earth.terrarium.pastel.particle.VectorPattern;
 import earth.terrarium.pastel.particle.effect.ColoredCraftingParticleEffect;

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.inventories;
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.RenderHelper;
+import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

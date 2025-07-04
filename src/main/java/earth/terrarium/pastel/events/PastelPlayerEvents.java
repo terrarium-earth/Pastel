@@ -5,7 +5,6 @@ import earth.terrarium.pastel.attachments.*;
 import earth.terrarium.pastel.attachments.data.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.*;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
-import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.helpers.enchantments.*;
 import earth.terrarium.pastel.items.tools.*;
 import earth.terrarium.pastel.items.trinkets.*;

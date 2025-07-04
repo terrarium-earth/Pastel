@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.inventories;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.RenderHelper;
+import earth.terrarium.pastel.helpers.render.RenderHelper;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;

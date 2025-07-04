@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.inventories;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.LoreHelper;
+import earth.terrarium.pastel.helpers.render.LoreHelper;
 import earth.terrarium.pastel.items.PigmentItem;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;

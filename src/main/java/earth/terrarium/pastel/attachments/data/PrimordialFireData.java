@@ -2,7 +2,7 @@ package earth.terrarium.pastel.attachments.data;
 
 import com.mojang.serialization.*;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelEntityTypeTags;
 import earth.terrarium.pastel.sound.OnPrimordialFireSoundInstance;

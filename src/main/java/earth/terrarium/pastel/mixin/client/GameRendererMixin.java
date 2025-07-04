@@ -2,7 +2,7 @@ package earth.terrarium.pastel.mixin.client;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
+import earth.terrarium.pastel.deeper_down.Environmental;
 import earth.terrarium.pastel.registries.PastelDimensions;
 import earth.terrarium.pastel.registries.client.PastelShaders;
 import net.minecraft.client.DeltaTracker;
@@ -21,10 +21,7 @@ public abstract class GameRendererMixin {
 		if (PastelDimensions.DIMENSION_KEY == entity.level().dimension()) {
 			original /= 6F;
 		}
-
-        if (DimensionRenderEffects.darkenTicks > 0) {
-            original *= 1F - DimensionRenderEffects.getDarknessInterpolation();
-        }
+		original *= 1F - Environmental.getEnvData().darkening();
 
         return original;
     }

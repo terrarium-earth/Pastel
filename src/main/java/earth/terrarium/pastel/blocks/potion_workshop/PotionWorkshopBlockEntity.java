@@ -8,6 +8,8 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.capabilities.*;
 import earth.terrarium.pastel.capabilities.item.*;
 import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
+import earth.terrarium.pastel.helpers.level.ContainerWrapper;
 import earth.terrarium.pastel.inventories.PotionWorkshopScreenHandler;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.recipe.SimpleRecipeInput;

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import earth.terrarium.pastel.spells.MoonstoneStrike;
 import net.minecraft.world.level.*;

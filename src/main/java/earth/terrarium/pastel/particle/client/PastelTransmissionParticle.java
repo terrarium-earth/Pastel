@@ -3,7 +3,7 @@ package earth.terrarium.pastel.particle.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.*;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.ColorHelper;
+import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.particle.render.EarlyRenderingParticle;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;

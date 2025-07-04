@@ -3,7 +3,7 @@ package earth.terrarium.pastel.blocks.pastel_network.network;
 import earth.terrarium.pastel.api.item.ItemReference;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeBlockEntity;
 import earth.terrarium.pastel.blocks.pastel_network.nodes.PastelNodeType;
-import earth.terrarium.pastel.helpers.*;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelNodeStatusUpdatePayload;
 import earth.terrarium.pastel.networking.s2c_payloads.PastelTransmissionPayload;
 import net.minecraft.world.item.ItemStack;

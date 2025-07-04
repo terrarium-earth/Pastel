@@ -1,0 +1,10 @@
+{
+  "biome": "pastel:howling_spires",
+  "color_grading": {
+    "saturation": 1,
+    "rubedo": 0,
+    "temperature": 60,
+    "threshold": 0.9,
+    "bloom": 0.425
+  }
+}

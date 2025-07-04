@@ -3,7 +3,7 @@ package earth.terrarium.pastel.recipe.pedestal;
 import com.mojang.serialization.Codec;
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.api.item.GemstoneColor;
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import io.netty.buffer.ByteBuf;

@@ -3,7 +3,7 @@ package earth.terrarium.pastel.mixin.client;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
+import earth.terrarium.pastel.deeper_down.Environmental;
 import earth.terrarium.pastel.registries.PastelDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
@@ -27,9 +27,8 @@ public class LightmapTextureManagerMixin {
 		var lightMod = PastelCommon.CONFIG.DimensionBrightnessMod * 0.25F;
 
 		if (isInDim()) {
-			var darkening = Mth.lerp(DimensionRenderEffects.getDarknessInterpolation(), 0.11F - lightMod, 0.2125F - lightMod);
-			return Math.max(darkening, original);
-
+			var data = Environmental.getEnvData();
+			return Math.max(data.darkening() - lightMod, original);
 		}
 		return original;
 	}
@@ -41,9 +40,8 @@ public class LightmapTextureManagerMixin {
 				gamma -= living.hasEffect(MobEffects.NIGHT_VISION) ? 0.275F : 0F;
 			}
 
-			if (DimensionRenderEffects.darkenTicks > 0) {
-				gamma = Mth.lerp(DimensionRenderEffects.getDarknessInterpolation(), gamma, gamma - 25F + PastelCommon.CONFIG.DimensionBrightnessMod);
-			}
+			gamma = Mth.lerp(Environmental.getEnvData().darkening(), gamma,
+					gamma - 25F + PastelCommon.CONFIG.DimensionBrightnessMod);
 		}
 
 		return gamma;

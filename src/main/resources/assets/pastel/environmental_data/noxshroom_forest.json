@@ -1,0 +1,9 @@
+{
+  "biome": "pastel:noxshroom_forest",
+  "environment": {
+    "darkening": 0.05,
+    "bright_mult": 0.125,
+    "near": -3,
+    "far": 1.5
+  }
+}

@@ -5,7 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.TimeHelper;
+import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.loot.PastelLootFunctionTypes;
 import earth.terrarium.pastel.mixin.accessors.BiomeAccessor;
 import earth.terrarium.pastel.recipe.titration_barrel.FermentationData;

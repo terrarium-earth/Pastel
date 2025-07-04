@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.registries.client;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
+import earth.terrarium.pastel.deeper_down.ColorGrading;
 import earth.terrarium.pastel.registries.PastelDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -39,7 +39,7 @@ public class PastelShaders {
 		
 		colorGradingPostProcess.ifPresent(pps -> {
 			for (int i = 0; i < 5; i++) {
-				pps.setUniform(COLOR_GRADING_UNIFORMS[i], DimensionRenderEffects.ColorGrading.GRADING_OUT[i]);
+				pps.setUniform(COLOR_GRADING_UNIFORMS[i], ColorGrading.GRADING_OUT[i]);
 			}
 		});
 	}

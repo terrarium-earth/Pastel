@@ -1,0 +1,9 @@
+{
+  "biome": "pastel:crystal_gardens",
+  "environment": {
+    "darkening": 0,
+    "bright_mult": 1,
+    "near": -2.25,
+    "far": 1.5
+  }
+}

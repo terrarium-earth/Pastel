@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.c2s_payloads;
 
 import earth.terrarium.pastel.blocks.chests.CompactingChestBlockEntity;
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.inventories.AutoCraftingMode;
 import earth.terrarium.pastel.inventories.CompactingChestScreenHandler;
 import earth.terrarium.pastel.networking.PastelC2SPackets;

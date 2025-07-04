@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.trinkets;
 
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;

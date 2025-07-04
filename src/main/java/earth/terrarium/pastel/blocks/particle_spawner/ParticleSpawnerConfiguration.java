@@ -2,7 +2,7 @@ package earth.terrarium.pastel.blocks.particle_spawner;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import earth.terrarium.pastel.helpers.PacketCodecHelper;
+import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.particle.effect.DynamicParticleEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;

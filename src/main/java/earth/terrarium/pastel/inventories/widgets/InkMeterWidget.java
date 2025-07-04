@@ -3,7 +3,7 @@ package earth.terrarium.pastel.inventories.widgets;
 import earth.terrarium.pastel.api.energy.InkStorageBlockEntity;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.storage.IndividualCappedInkStorage;
-import earth.terrarium.pastel.helpers.RenderHelper;
+import earth.terrarium.pastel.helpers.render.RenderHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;

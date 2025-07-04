@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.blocks.chests;
 
 import earth.terrarium.pastel.capabilities.item.*;
-import earth.terrarium.pastel.helpers.InventoryHelper;
+import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.inventories.FabricationChestScreenHandler;
 import earth.terrarium.pastel.items.magic_items.CraftingTabletItem;
 import earth.terrarium.pastel.networking.s2c_payloads.FabricationChestStatusUpdatePayload;

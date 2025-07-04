@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.networking.s2c_payloads;
 
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
-import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
+import earth.terrarium.pastel.deeper_down.Environmental;
 import earth.terrarium.pastel.networking.PastelC2SPackets;
 import net.neoforged.neoforge.network.*;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -26,7 +26,6 @@ public record SyncMentalPresencePayload(double value) implements CustomPacketPay
 	public static void execute(SyncMentalPresencePayload payload, IPayloadContext context) {
 		var player = context.player();
 		MiscPlayerData.get(player).setLastSyncedSleepPotency(payload.value);
-		DimensionRenderEffects.markForEffectUpdate();
 	}
 	
 	@Override

@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.blocks.jade_vines;
 
-import earth.terrarium.pastel.helpers.TimeHelper;
+import earth.terrarium.pastel.helpers.interaction.TimeHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.particle.effect.ColoredFallingSporeBlossomParticleEffect;

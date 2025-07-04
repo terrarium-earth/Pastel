@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.mixin.client;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import earth.terrarium.pastel.deeper_down.DimensionRenderEffects;
+import earth.terrarium.pastel.deeper_down.Environmental;
 import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,15 +17,13 @@ public class RenderSystemMixin {
 
     @Inject(method = "getShaderFogColor", at = @At("RETURN"), cancellable = true)
     private static void alterFogColor(CallbackInfoReturnable<float[]> cir) {
-        var darkening = DimensionRenderEffects.fogDarkness;
-        var blend = DimensionRenderEffects.blend;
-        var r = Mth.lerp(blend, shaderFogColor[0], DimensionRenderEffects.red);
-        var g = Mth.lerp(blend, shaderFogColor[1], DimensionRenderEffects.green);
-        var b = Mth.lerp(blend, shaderFogColor[2], DimensionRenderEffects.blue);
-        r = r * darkening;
-        g = g * darkening;
-        b = b * darkening;
-        cir.setReturnValue(new float[]{r, g, b, shaderFogColor[3]});
+        var mult = Environmental.getEnvData().brightMult();
+
+        cir.setReturnValue(new float[]{
+                shaderFogColor[0] * mult,
+                shaderFogColor[1] * mult,
+                shaderFogColor[2] * mult,
+                shaderFogColor[3]});
         cir.cancel();
     }
 }

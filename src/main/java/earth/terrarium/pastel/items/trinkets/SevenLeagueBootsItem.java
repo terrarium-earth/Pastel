@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.trinkets;
 
 import com.google.common.collect.Multimap;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.helpers.Ench;
+import earth.terrarium.pastel.helpers.enchantments.Ench;
 import top.theillusivec4.curios.api.SlotContext;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;

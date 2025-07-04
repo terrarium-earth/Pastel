@@ -3,7 +3,7 @@ package earth.terrarium.pastel.entity.entity;
 import com.google.common.collect.Sets;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.entity.PastelEntityTypes;
-import earth.terrarium.pastel.helpers.CodecHelper;
+import earth.terrarium.pastel.helpers.data.CodecHelper;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;

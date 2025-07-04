@@ -1,0 +1,9 @@
+{
+  "biome": "pastel:deep_dripstone_caves",
+  "environment": {
+    "darkening": 0.1,
+    "bright_mult": 0.25,
+    "near": -4,
+    "far": 1.5
+  }
+}
