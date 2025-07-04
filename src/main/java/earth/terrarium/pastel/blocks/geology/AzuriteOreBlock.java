@@ -7,7 +7,8 @@ import earth.terrarium.pastel.helpers.render.ParticleHelper;
 import earth.terrarium.pastel.mixin.accessors.ExperienceDroppingBlockAccessor;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
-import earth.terrarium.pastel.sound.BlockAuraSoundInstance;
+import earth.terrarium.pastel.sound.AuraData;
+import earth.terrarium.pastel.sound.AuraSoundInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.client.Minecraft;
@@ -78,7 +79,7 @@ public class AzuriteOreBlock extends CloakedOreBlock {
         if (!this.isVisibleTo(Minecraft.getInstance().player))
             return;
 
-        BlockAuraSoundInstance.checkOrCreateInstance(world, pos);
+        AuraSoundInstance.getOrCreateInstance(AuraData.AZURITE, world, pos);
 
         if (world.getRandom().nextFloat() >= 0.02)
             return;

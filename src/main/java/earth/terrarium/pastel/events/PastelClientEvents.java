@@ -28,7 +28,7 @@ import earth.terrarium.pastel.registries.client.*;
 import earth.terrarium.pastel.render.HudRenderers;
 import earth.terrarium.pastel.sound.WorldAttenuation;
 import earth.terrarium.pastel.sound.BiomeSoundInstance;
-import earth.terrarium.pastel.sound.BlockAuraSoundInstance;
+import earth.terrarium.pastel.sound.AuraSoundInstance;
 import net.minecraft.server.packs.*;
 import net.minecraft.server.packs.repository.*;
 import net.minecraft.server.packs.resources.*;
@@ -178,7 +178,7 @@ public class PastelClientEvents {
 		Entity cameraEntity = client.getCameraEntity();
 		if (level == null || cameraEntity == null) {
 			BiomeSoundInstance.clear();
-			BlockAuraSoundInstance.clear();
+			AuraSoundInstance.clear();
 			return;
 		}
 
