@@ -6,6 +6,7 @@ import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModels;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ears.EarsCompat;
 import earth.terrarium.pastel.config.PastelConfig;
+import earth.terrarium.pastel.deeper_down.EnvironmentalOverrides;
 import earth.terrarium.pastel.entity.PastelEntityRenderers;
 import earth.terrarium.pastel.inventories.PastelScreenHandlerTypes;
 import earth.terrarium.pastel.particle.PastelParticleFactories;
@@ -93,6 +94,7 @@ public class PastelClient implements RevealingCallback, ClientAdvancementPacketC
 
 		logInfo("Registering Dimension Effects...");
 		pastelBus.addListener(PastelDimensionsClient::registerClient);
+		EnvironmentalOverrides.init();
 
 		logInfo("Registering Mob head models...");
 		pastelBus.addListener(PastelSkullModels::registerModels);

@@ -1,5 +1,6 @@
 package earth.terrarium.pastel.events;
 
+import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.datafixers.util.*;
@@ -91,9 +92,58 @@ public class PastelClientEvents {
 		NeoForge.EVENT_BUS.addListener(PastelClientEvents::onDrawTooltips);
 		NeoForge.EVENT_BUS.addListener(PastelClientEvents::afterClientTick);
 		NeoForge.EVENT_BUS.addListener(PastelClientEvents::onEntityTick);
+		NeoForge.EVENT_BUS.addListener(EventPriority.HIGH, PastelClientEvents::modifyFog);
+		NeoForge.EVENT_BUS.addListener(EventPriority.LOW, PastelClientEvents::modifyFogColor);
 
 		// registerCustomItemRenderer(PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem(), BottomlessBundleItem.Renderer::new); TODO unholy
 		// registerCustomItemRenderer(PastelItems.OMNI_ACCELERATOR.get(), OmniAcceleratorItem.Renderer::new);
+	}
+
+	private static void modifyFog(ViewportEvent.RenderFog event) {
+		var state = Environmental.isActive();
+		var far = event.getFarPlaneDistance();
+
+		if (state.force())
+			far *= 1.25F;
+
+		var original = far;
+		if (state.overrides) {
+			far = Environmental.getFar(far);
+			event.setNearPlaneDistance(Environmental.getNear(event.getNearPlaneDistance(), !state.force()));
+		}
+
+		if (state.force()) {
+			event.setFogShape(FogShape.SPHERE);
+			far = Math.min(far, original);
+		}
+
+		event.setFarPlaneDistance(far);
+		event.setCanceled(state.overrides);
+	}
+
+	private static void modifyFogColor(ViewportEvent.ComputeFogColor event) {
+		if (!Environmental.isActive().overrides) {
+			return;
+		}
+
+		var red = event.getRed();
+		var green = event.getGreen();
+		var blue = event.getBlue();
+
+		var envData = Environmental.getEnvData();
+		var darkening = envData.brightMult();
+
+		if (darkening < 1) {
+			red *= darkening;
+			green *= darkening;
+			blue *= darkening;
+		}
+
+		var colors = new float[] {red, green, blue};
+		Environmental.applyColor(colors);
+		event.setRed(colors[0]);
+		event.setGreen(colors[1]);
+		event.setBlue(colors[2]);
 	}
 
 	private static void onLogin(ClientPlayerNetworkEvent.LoggingIn event) {
