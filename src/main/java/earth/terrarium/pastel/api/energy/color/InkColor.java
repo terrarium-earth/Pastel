@@ -39,24 +39,26 @@ public class InkColor {
 	protected final Vector3f colorVec;
 	protected final int textColor;
 	protected final Vector3f textColorVec;
-	
+	protected final String name;
+
 	protected final ResourceLocation requiredAdvancement;
 	
-	public InkColor(DyeColor dyeColor, int color, ResourceLocation requiredAdvancement) {
-		this(Optional.of(dyeColor), color, color, requiredAdvancement);
+	public InkColor(DyeColor dyeColor, String name, int color, ResourceLocation requiredAdvancement) {
+		this(Optional.of(dyeColor), name, color, color, requiredAdvancement);
 	}
 	
-	public InkColor(DyeColor dyeColor, int color, int textColor, ResourceLocation requiredAdvancement) {
-		this(Optional.of(dyeColor), color, textColor, requiredAdvancement);
+	public InkColor(DyeColor dyeColor, String name, int color, int textColor, ResourceLocation requiredAdvancement) {
+		this(Optional.of(dyeColor), name, color, textColor, requiredAdvancement);
 	}
 	
-	public InkColor(Optional<DyeColor> dyeColor, int color, int textColor, ResourceLocation requiredAdvancement) {
+	public InkColor(Optional<DyeColor> dyeColor, String name, int color, int textColor, ResourceLocation requiredAdvancement) {
 		this.dyeColor = dyeColor;
 		this.colorInt = color;
 		this.colorVec = ColorHelper.colorIntToVec(color);
 		this.textColor = textColor;
 		this.textColorVec = ColorHelper.colorIntToVec(textColor);
 		this.requiredAdvancement = requiredAdvancement;
+		this.name = name;
 		
 		dyeColor.ifPresent(value -> DYE_TO_COLOR.put(value, this));
 	}
@@ -102,6 +104,10 @@ public class InkColor {
 	
 	public MutableComponent getColoredName() {
 		return getName().setStyle(Style.EMPTY.withColor(textColor));
+	}
+
+	public String getLootName() {
+		return name;
 	}
 	
 	public MutableComponent getColoredInkName() {

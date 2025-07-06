@@ -56,6 +56,11 @@ public class ParticleHelper {
 			world.addParticle(particleEffect, position.x() + d, position.y() + e, position.z() + f, velocity.x(), velocity.y(), velocity.z());
 		}
 	}
+
+	private static final List<Direction> HORIZONTALS = List.of(Direction.EAST, Direction.NORTH, Direction.WEST, Direction.SOUTH);
+	public static void horizontalBlock(Level world, ParticleOptions particleEffect, BlockPos position, int quantity, Vec3 velocity) {
+		playParticleAroundBlockSides(world, particleEffect, position, HORIZONTALS, quantity, velocity);
+	}
 	
 	public static void playParticleAroundBlockSides(Level world, ParticleOptions particleEffect, BlockPos position, Direction[] sides, int quantity, Vec3 velocity) {
 		playParticleAroundBlockSides(world, particleEffect, position, List.of(sides), quantity, velocity);

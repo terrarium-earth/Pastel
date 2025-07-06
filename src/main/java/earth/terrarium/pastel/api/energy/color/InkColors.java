@@ -42,22 +42,22 @@ public class InkColors {
 	public static final int LIGHT_GRAY_COLOR = 0xffadadad;
 	public static final int GRAY_COLOR = 0xff464646;
 
-	public static final InkColor CYAN = register("cyan", new InkColor(DyeColor.CYAN, CYAN_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor LIGHT_BLUE = register("light_blue", new InkColor(DyeColor.LIGHT_BLUE, LIGHT_BLUE_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor BLUE = register("blue", new InkColor(DyeColor.BLUE, BLUE_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor PURPLE = register("purple", new InkColor(DyeColor.PURPLE, PURPLE_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor MAGENTA = register("magenta", new InkColor(DyeColor.MAGENTA, MAGENTA_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor PINK = register("pink", new InkColor(DyeColor.PINK, PINK_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor RED = register("red", new InkColor(DyeColor.RED, RED_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor ORANGE = register("orange", new InkColor(DyeColor.ORANGE, ORANGE_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor YELLOW = register("yellow", new InkColor(DyeColor.YELLOW, YELLOW_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor LIME = register("lime", new InkColor(DyeColor.LIME, LIME_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor GREEN = register("green", new InkColor(DyeColor.GREEN, GREEN_COLOR, BASE_ADVANCEMENT_ID));
-	public static final InkColor BROWN = register("brown", new InkColor(DyeColor.BROWN, BROWN_COLOR, BLACK_ADVANCEMENT_ID));
-	public static final InkColor BLACK = register("black", new InkColor(DyeColor.BLACK, BLACK_COLOR, BLACK_TEXT_COLOR, BLACK_ADVANCEMENT_ID));
-	public static final InkColor GRAY = register("gray", new InkColor(DyeColor.GRAY, GRAY_COLOR, WHITE_ADVANCEMENT_ID));
-	public static final InkColor LIGHT_GRAY = register("light_gray", new InkColor(DyeColor.LIGHT_GRAY, LIGHT_GRAY_COLOR, WHITE_ADVANCEMENT_ID));
-	public static final InkColor WHITE = register("white", new InkColor(DyeColor.WHITE, WHITE_COLOR, WHITE_ADVANCEMENT_ID));
+	public static final InkColor CYAN = register(new InkColor(DyeColor.CYAN, "cyan", CYAN_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor LIGHT_BLUE = register(new InkColor(DyeColor.LIGHT_BLUE, "light_blue", LIGHT_BLUE_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor BLUE = register(new InkColor(DyeColor.BLUE, "blue", BLUE_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor PURPLE = register(new InkColor(DyeColor.PURPLE, "purple", PURPLE_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor MAGENTA = register(new InkColor(DyeColor.MAGENTA, "magenta", MAGENTA_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor PINK = register(new InkColor(DyeColor.PINK, "pink", PINK_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor RED = register(new InkColor(DyeColor.RED, "red", RED_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor ORANGE = register(new InkColor(DyeColor.ORANGE, "orange", ORANGE_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor YELLOW = register(new InkColor(DyeColor.YELLOW, "yellow", YELLOW_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor LIME = register(new InkColor(DyeColor.LIME, "lime", LIME_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor GREEN = register(new InkColor(DyeColor.GREEN, "green", GREEN_COLOR, BASE_ADVANCEMENT_ID));
+	public static final InkColor BROWN = register(new InkColor(DyeColor.BROWN, "brown", BROWN_COLOR, BLACK_ADVANCEMENT_ID));
+	public static final InkColor BLACK = register(new InkColor(DyeColor.BLACK, "black", BLACK_COLOR, BLACK_TEXT_COLOR, BLACK_ADVANCEMENT_ID));
+	public static final InkColor GRAY = register(new InkColor(DyeColor.GRAY, "gray", GRAY_COLOR, WHITE_ADVANCEMENT_ID));
+	public static final InkColor LIGHT_GRAY = register(new InkColor(DyeColor.LIGHT_GRAY, "light_gray", LIGHT_GRAY_COLOR, WHITE_ADVANCEMENT_ID));
+	public static final InkColor WHITE = register(new InkColor(DyeColor.WHITE, "white", WHITE_COLOR, WHITE_ADVANCEMENT_ID));
 	
 	// in case an addon adds new colors
 	// for places where we have to use a fixed size list, like GUIs with limited space
@@ -68,8 +68,8 @@ public class InkColors {
 			InkColors.BLACK, InkColors.GRAY, InkColors.LIGHT_GRAY, InkColors.WHITE
 	);
 	
-	protected static InkColor register(String name, InkColor inkColor) {
-		REGISTER.register(name, () -> inkColor);
+	protected static InkColor register(InkColor inkColor) {
+		REGISTER.register(inkColor.name, () -> inkColor);
 		return inkColor;
 	}
 	

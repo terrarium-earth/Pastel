@@ -54,10 +54,10 @@ public class AbyssalVineBlock extends TriStateVineBlock {
             return superSucc;
         }
 
-        if (!reference.getProperty(BERRIES))
+        if (!reference.get(BERRIES))
             return InteractionResult.FAIL;
 
-        reference.setProperty(BERRIES, false);
+        reference.set(BERRIES, false);
         reference.update(world);
         world.playSound(null, pos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.8F, 1.2F));
         player.getInventory().placeItemBackInInventory(PastelItems.FISSURE_PLUM.get().getDefaultInstance());
@@ -88,7 +88,7 @@ public class AbyssalVineBlock extends TriStateVineBlock {
         if (random.nextFloat() < growthChance)
             return;
 
-        if (!reference.getProperty(BERRIES))
+        if (!reference.get(BERRIES))
             tryGrowBerries(reference, world);
         reference.update(world);
     }
@@ -125,11 +125,11 @@ public class AbyssalVineBlock extends TriStateVineBlock {
         if (berryCount >= 3)
             return;
 
-        reference.setProperty(BERRIES, true);
+        reference.set(BERRIES, true);
     }
 
     private int checkForBerries(BlockReference ref) {
-        if (ref.isOf(this) && ref.getProperty(BERRIES)) {
+        if (ref.isOf(this) && ref.get(BERRIES)) {
             return 1;
         }
         return 0;

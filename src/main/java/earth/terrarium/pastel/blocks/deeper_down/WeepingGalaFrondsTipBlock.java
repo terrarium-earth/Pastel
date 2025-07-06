@@ -52,17 +52,17 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
 	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		if (random.nextFloat() < 0.1F) {
 			var reference = BlockReference.of(state, pos);
-			var form = reference.getProperty(FORM);
+			var form = reference.get(FORM);
 			
 			if (form == Form.SPRIG) {
-				reference.setProperty(FORM, Form.RESIN);
+				reference.set(FORM, Form.RESIN);
 				reference.update(world);
 			} else {
 				for (ItemStack rareStack : getResinStacks(state, world, pos, ItemStack.EMPTY, PastelLootTables.WEEPING_GALA_SPRIG_RESIN)) {
 					popResource(world, pos, rareStack);
 				}
 				world.playSound(null, pos, SoundEvents.BEEHIVE_DRIP, SoundSource.BLOCKS, 1, 0.9F + random.nextFloat() * 0.2F);
-				reference.setProperty(FORM, Form.SPRIG);
+				reference.set(FORM, Form.SPRIG);
 				reference.update(world);
 			}
 		}
@@ -71,14 +71,14 @@ public class WeepingGalaFrondsTipBlock extends WeepingGalaFrondsBlock {
 	@Override
 	public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
 		var reference = BlockReference.of(state, pos);
-		if (reference.getProperty(FORM) == Form.RESIN) {
+		if (reference.get(FORM) == Form.RESIN) {
 			if (!world.isClientSide()) {
 				for (ItemStack rareStack : getResinStacks(state, (ServerLevel) world, pos, player.getMainHandItem(), PastelLootTables.WEEPING_GALA_SPRIG_RESIN)) {
 					popResource(world, pos, rareStack);
 				}
 			}
 			world.playSound(null, pos, SoundEvents.BEEHIVE_SHEAR, SoundSource.BLOCKS, 1, 0.9F + world.getRandom().nextFloat() * 0.2F);
-			reference.setProperty(FORM, Form.SPRIG);
+			reference.set(FORM, Form.SPRIG);
 			reference.update(world);
 			
 			return InteractionResult.sidedSuccess(world.isClientSide());

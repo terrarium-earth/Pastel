@@ -12,7 +12,7 @@ public class PastelItemTags {
 	public static final TagKey<Item> SKULLS = common("skulls");
 	public static final TagKey<Item> FRUITS = common("foods/fruit");
 	
-	// "spectrum" namespace
+	// "pastel" namespace
 	public static final TagKey<Item> COOKBOOKS = of("cookbooks");
 	public static final TagKey<Item> FISHING_RODS = of("fishing_rods");
 	public static final TagKey<Item> COLORED_PLANKS = of("colored_planks");
@@ -26,13 +26,15 @@ public class PastelItemTags {
 	public static final TagKey<Item> SHOOTING_STARS = of("shooting_stars");
 	public static final TagKey<Item> GLASS_ARROWS = of("glass_arrows");
 	public static final TagKey<Item> KINDLING_FOOD = of("kindling_food");
-	public static final TagKey<Item> COLORED_FENCES = of("colored_fences");
-	public static final TagKey<Item> COLORED_FENCE_GATES = of("colored_fence_gates");
 	public static final TagKey<Item> REQUIRES_OMNI_ACCELERATOR_PVP_ENABLED = of("requires_omni_accelerator_pvp_enabled");
 	public static final TagKey<Item> EMISSIVE = of("emissive");
 	public static final TagKey<Item> PASTEL_NODE_UPGRADES = of("pastel_node_upgrades");
 	public static final TagKey<Item> TAG_FILTERING_ITEMS = of("tag_filtering_items");
+
+	public static final TagKey<Item> INK_TAPPING = of("ink_tapping");
 	public static final TagKey<Item> WEEPING_GALA_LOGS = of("weeping_gala_logs");
+	public static final TagKey<Item> COLORED_FENCES = of("colored_fences");
+	public static final TagKey<Item> COLORED_FENCE_GATES = of("colored_fence_gates");
 
 	private static TagKey<Item> of(String id) {
 		return TagKey.create(Registries.ITEM, PastelCommon.locate(id));

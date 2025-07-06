@@ -42,11 +42,11 @@ public final class BlockReference {
         return new BlockReference(state, Optional.ofNullable(world.getBlockEntity(pos)), pos);
     }
 
-    public <V extends Comparable<V>> void setProperty(Property<V> property, V value) {
+    public <V extends Comparable<V>> void set(Property<V> property, V value) {
         state = state.setValue(property, value);
     }
 
-    public <V extends Comparable<V>> V getProperty(Property<V> property) {
+    public <V extends Comparable<V>> V get(Property<V> property) {
         return state.getValue(property);
     }
 

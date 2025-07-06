@@ -20,7 +20,8 @@
       "state": {
         "Name": "pastel:blue_log",
         "Properties": {
-          "axis": "y"
+          "axis": "y",
+          "natural": "true"
         }
       }
     },
