@@ -4,9 +4,12 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 public interface ColoredTree {
-	
+
+	BooleanProperty NATURAL = BooleanProperty.create("natural");
+
 	enum TreePart {
 		SAPLING,
 		LOG,

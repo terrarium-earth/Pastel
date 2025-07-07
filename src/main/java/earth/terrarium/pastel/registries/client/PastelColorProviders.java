@@ -6,6 +6,7 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.SingleInkStorage;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredLeavesBlock;
+import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredTree;
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
@@ -81,7 +82,12 @@ public class PastelColorProviders {
 	}
 	
 	private static void coloredLeavesBlock(RegisterColorHandlersEvent.Block event) {
-		coloredLeavesBlockColorProvider = new ToggleableBlockColorProvider(THAT_ONE_VANILLA_LEAF_PROVIDER);
+		coloredLeavesBlockColorProvider = new ToggleableBlockColorProvider((state, level, pos, tintIndex) -> {
+			if (!state.getValue(ColoredTree.NATURAL))
+				return 0xFFFFFFFF;
+
+			return level != null && pos != null ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.getDefaultColor();
+		});
 
 		for (InkColor color : InkColors.all()) {
 			Block block = ColoredLeavesBlock.byColor(color);

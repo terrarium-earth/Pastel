@@ -9,6 +9,7 @@ import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
 import earth.terrarium.pastel.components.InertiaComponent;
 import earth.terrarium.pastel.entity.spawners.ShootingStarSpawner;
+import earth.terrarium.pastel.helpers.data.WeGotDatagenAtHome;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
@@ -226,6 +227,8 @@ public class PastelMiscEvents {
 				}
 			}
 		}
+
+		WeGotDatagenAtHome.action(event.getServer().getLevel(Level.OVERWORLD));
 	}
 
 	private static void interactEntity(PlayerInteractEvent.EntityInteract event) {

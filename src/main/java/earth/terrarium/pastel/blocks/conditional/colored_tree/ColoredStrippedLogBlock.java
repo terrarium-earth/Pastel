@@ -9,9 +9,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 
 import java.util.Collection;
 import java.util.Hashtable;
@@ -32,6 +34,7 @@ public class ColoredStrippedLogBlock extends RotatedPillarBlock implements Revel
 		this.color = color;
 		LOGS.put(color, this);
 		RevelationAware.register(this);
+		registerDefaultState(defaultBlockState().setValue(NATURAL, false));
 	}
 
 	@Override
@@ -48,11 +51,18 @@ public class ColoredStrippedLogBlock extends RotatedPillarBlock implements Revel
 	public Map<BlockState, BlockState> getBlockStateCloaks() {
 		Map<BlockState, BlockState> map = new Hashtable<>();
 		for (Direction.Axis axis : RotatedPillarBlock.AXIS.getPossibleValues()) {
-			map.put(this.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis), Blocks.STRIPPED_OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis));
+			map.put(this.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis).setValue(NATURAL, true),
+					Blocks.STRIPPED_OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis));
 		}
 		return map;
 	}
-	
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(NATURAL);
+	}
+
 	@Override
 	public Tuple<Item, Item> getItemCloak() {
 		return new Tuple<>(this.asItem(), Blocks.STRIPPED_OAK_LOG.asItem());

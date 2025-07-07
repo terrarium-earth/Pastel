@@ -27,6 +27,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +39,9 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Hashtable;
@@ -47,7 +51,6 @@ import java.util.Map;
 public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, ColoredTree {
 
 	public static final BooleanProperty DRIPPING = BooleanProperty.create("dripping");
-	public static final BooleanProperty NATURAL = BooleanProperty.create("natural");
 
 	private static final Vec3 VELOCITY = new Vec3(0, -0.0334, 0);
 	private static final Map<InkColor, ColoredLogBlock> LOGS = new Object2ObjectArrayMap<>();
@@ -74,7 +77,9 @@ public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, 
 	public Map<BlockState, BlockState> getBlockStateCloaks() {
 		Map<BlockState, BlockState> map = new Hashtable<>();
 		for (Direction.Axis axis : RotatedPillarBlock.AXIS.getPossibleValues()) {
-			map.put(this.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis));
+			var normal = this.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis).setValue(NATURAL, true);
+			map.put(normal, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis));
+			map.put(normal.setValue(DRIPPING, true), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, axis));
 		}
 		return map;
 	}
@@ -222,5 +227,14 @@ public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, 
 	public static Collection<ColoredLogBlock> all() {
 		return LOGS.values();
 	}
-	
+
+	@Override
+	public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
+		var newState = super.getToolModifiedState(state, context, itemAbility, simulate);
+
+		if (newState != null)
+			newState = newState.setValue(NATURAL, state.getValue(NATURAL));
+
+		return newState;
+	}
 }

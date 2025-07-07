@@ -18,22 +18,23 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "pastel:white_log",
         "Properties": {
           "axis": "y",
           "natural": "true"
-        }
+        },
+        "Name": "pastel:white_log"
       }
     },
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "pastel:white_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",
-          "waterlogged": "false"
-        }
+          "waterlogged": "false",
+          "natural": "true"
+        },
+        "Name": "pastel:white_leaves"
       }
     },
     "trunk_placer": {

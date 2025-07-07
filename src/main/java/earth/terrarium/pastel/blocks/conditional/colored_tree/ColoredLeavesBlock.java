@@ -9,9 +9,11 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 
 import java.util.Collection;
 import java.util.Hashtable;
@@ -32,6 +34,7 @@ public class ColoredLeavesBlock extends LeavesBlock implements RevelationAware, 
 		this.color = color;
 		LEAVES.put(color, this);
 		RevelationAware.register(this);
+		registerDefaultState(defaultBlockState().setValue(NATURAL, false));
 	}
 
 	@Override
@@ -48,11 +51,14 @@ public class ColoredLeavesBlock extends LeavesBlock implements RevelationAware, 
 	public Map<BlockState, BlockState> getBlockStateCloaks() {
 		Map<BlockState, BlockState> map = new Hashtable<>();
 		for (int distance = 1; distance < 8; distance++) {
-			map.put(this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, false), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, false));
-			map.put(this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, true), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, true));
+			BlockState leaves = this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance)
+					.setValue(NATURAL, true);
+
+			map.put(leaves.setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, false), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, false));
+			map.put(leaves.setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, true), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, true));
 			
-			map.put(this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, false), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, false));
-			map.put(this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, true), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, true));
+			map.put(leaves.setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, false), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, false));
+			map.put(leaves.setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, true), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, true));
 		}
 		return map;
 	}
@@ -77,7 +83,13 @@ public class ColoredLeavesBlock extends LeavesBlock implements RevelationAware, 
 			PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(true);
 		}
 	}
-	
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(NATURAL);
+	}
+
 	@Override
 	public InkColor getColor() {
 		return this.color;
