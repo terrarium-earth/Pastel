@@ -62,8 +62,6 @@ public class PastelPlacedFeatures {
 		addFeature(context, Tags.Biomes.IS_NETHER, GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("stratine_ore")));
 		addFeature(context, Tags.Biomes.IS_END, GenerationStep.Decoration.UNDERGROUND_ORES, ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("paltaeria_ore")));
 		
-		addFeature(context, PastelBiomeTags.COLORED_TREES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("colored_tree_patch")));
-		
 		// Plants
 		addFeature(context, PastelBiomeTags.MERMAIDS_BRUSHES_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("mermaids_brushes")));
 		addFeature(context, PastelBiomeTags.CLOVER_GENERATING_IN, GenerationStep.Decoration.VEGETAL_DECORATION, ResourceKey.create(Registries.PLACED_FEATURE, PastelCommon.locate("clover_patch")));
