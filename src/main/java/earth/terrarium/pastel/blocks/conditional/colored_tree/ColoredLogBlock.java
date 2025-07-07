@@ -12,6 +12,7 @@ import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -86,6 +87,9 @@ public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, 
 
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		if (!isVisibleTo(player))
+			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
 		if (applyNectar(stack, state, level, pos, player))
 			return ItemInteractionResult.sidedSuccess(level.isClientSide());
 
@@ -194,7 +198,8 @@ public class ColoredLogBlock extends PastelLogBlock implements RevelationAware, 
 
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-		super.animateTick(state, level, pos, random);
+		if (!isVisibleTo(Minecraft.getInstance().player))
+			return;
 
 		if (!isDripping(state))
 			return;
