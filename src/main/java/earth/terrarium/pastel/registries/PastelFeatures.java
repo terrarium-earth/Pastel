@@ -23,6 +23,7 @@ import earth.terrarium.pastel.worldgen.features.RandomBlockProximityPatchFeature
 import earth.terrarium.pastel.worldgen.features.RandomBudsFeature;
 import earth.terrarium.pastel.worldgen.features.RandomBudsFeaturesConfig;
 import earth.terrarium.pastel.worldgen.features.SolidBlockCheckGeodeFeature;
+import earth.terrarium.pastel.worldgen.features.TintedGardenFeature;
 import earth.terrarium.pastel.worldgen.features.TriStateVineFeature;
 import earth.terrarium.pastel.worldgen.features.TriStateVineFeatureConfig;
 import earth.terrarium.pastel.worldgen.features.WallPatchFeature;
@@ -58,6 +59,7 @@ public class PastelFeatures {
 	public static Feature<FossilFeatureConfiguration> EXPOSED_FOSSIL = new ExposedFossilFeature(FossilFeatureConfiguration.CODEC);
 	public static Feature<WallPatchFeatureConfig> WALL_PATCH = new WallPatchFeature(WallPatchFeatureConfig.CODEC);
 	public static Feature<AshDunesFeatureConfig> ASH_DUNES = new AshDunesFeature(AshDunesFeatureConfig.CODEC);
+	public static Feature<TintedGardenFeature.Config> TINTED_GARDEN = new TintedGardenFeature(TintedGardenFeature.CODEC);
 
 	public static void register(IEventBus bus) {
 		registerFeature("weighted_random_feature", WEIGHTED_RANDOM_FEATURE);
@@ -76,6 +78,7 @@ public class PastelFeatures {
 		registerFeature("exposed_fossil", EXPOSED_FOSSIL);
 		registerFeature("wall_patch", WALL_PATCH);
 		registerFeature("ash_dunes", ASH_DUNES);
+		registerFeature("tinted_garden", TINTED_GARDEN);
 		REGISTER.register(bus);
 	}
 	

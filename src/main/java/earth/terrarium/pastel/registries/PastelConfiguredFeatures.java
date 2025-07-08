@@ -21,6 +21,10 @@ public class PastelConfiguredFeatures {
 	public static final ResourceKey<ConfiguredFeature<?,?>> EBONY_NOXFUNGUS = of("noxfungi/ebony");
 	public static final ResourceKey<ConfiguredFeature<?,?>> IVORY_NOXFUNGUS = of("noxfungi/ivory");
 	public static final ResourceKey<ConfiguredFeature<?,?>> CHESTNUT_NOXFUNGUS = of("noxfungi/chestnut");
+
+	public static final ResourceKey<ConfiguredFeature<?,?>> AMETHYST_TINTED_GARDEN = of("tinted_garden/amethyst");
+	public static final ResourceKey<ConfiguredFeature<?,?>> CITRINE_TINTED_GARDEN = of("tinted_garden/citrine");
+	public static final ResourceKey<ConfiguredFeature<?,?>> TOPAZ_TINTED_GARDEN = of("tinted_garden/topaz");
 	
 	public static final Map<Dragonjag.Variant, ResourceKey<ConfiguredFeature<?, ?>>> DRAGONJAGS = new HashMap<>() {{
 		put(Dragonjag.Variant.PINK, of("dragonjags/pink"));

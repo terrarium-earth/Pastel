@@ -2,13 +2,18 @@ package earth.terrarium.pastel.mixin;
 
 import earth.terrarium.pastel.registries.PastelBlockTags;
 import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelConfiguredFeatures;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.GeodeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.GeodeConfiguration;
@@ -18,12 +23,26 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Optional;
+
 @Mixin(GeodeFeature.class)
-public abstract class GeodesGenerateWithGemstoneOresMixin {
+public abstract class GeodeFeatureMixin {
 	
 	@Inject(at = @At("TAIL"), method = "place")
 	public void generate(FeaturePlaceContext<GeodeConfiguration> context, CallbackInfoReturnable<Boolean> cir) {
-		generateGemstoneOres(context);
+		if (!cir.getReturnValueZ())
+			return;
+
+		var gem = context.config().geodeBlockSettings.innerLayerProvider.getState(context.random(), context.origin());
+		generateGemstoneOres(context, gem);
+
+		var level = context.level();
+		var garden = gardenFor(gem, level.registryAccess());
+
+		if (garden.isEmpty())
+			return;
+
+		garden.get().place(level, context.chunkGenerator(), context.random(), context.origin());
 	}
 	
 	/**
@@ -34,8 +53,7 @@ public abstract class GeodesGenerateWithGemstoneOresMixin {
 	 * @param context The GeodeFeatures feature config
 	 */
 	@Unique
-	private void generateGemstoneOres(FeaturePlaceContext<GeodeConfiguration> context) {
-		BlockState gemBlock = context.config().geodeBlockSettings.innerLayerProvider.getState(context.random(), context.origin());
+	private void generateGemstoneOres(FeaturePlaceContext<GeodeConfiguration> context, BlockState gemBlock) {
 		if (gemBlock != null) {
 			BlockState oreBlockState = getGemstoneOreForGeodeBlock(gemBlock);
 			if (oreBlockState != null) { // do not handle other modded geodes
@@ -65,7 +83,24 @@ public abstract class GeodesGenerateWithGemstoneOresMixin {
 			}
 		}
 	}
-	
+
+	@Unique
+	private Optional<ConfiguredFeature<?,?>> gardenFor(BlockState gem, RegistryAccess access) {
+		ResourceKey<ConfiguredFeature<?, ?>> key = null;
+
+		if (gem.is(Blocks.AMETHYST_BLOCK))
+			key = PastelConfiguredFeatures.AMETHYST_TINTED_GARDEN;
+		else if (gem.is(PastelBlocks.CITRINE_BLOCK))
+			key = PastelConfiguredFeatures.CITRINE_TINTED_GARDEN;
+		else if (gem.is(PastelBlocks.TOPAZ_BLOCK))
+			key = PastelConfiguredFeatures.TOPAZ_TINTED_GARDEN;
+
+		if (key == null)
+			return Optional.empty();
+
+		return access.registryOrThrow(Registries.CONFIGURED_FEATURE).getOptional(key);
+	}
+
 	/**
 	 * Returns a matching ore block for a gemstone block
 	 * Aka amethyst_block => amethyst_ore

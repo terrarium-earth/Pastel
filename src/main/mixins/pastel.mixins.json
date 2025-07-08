@@ -38,7 +38,7 @@
     "FixModonomiconMixin",
     "FoodComponentBuilderMixin",
     "FoxEntityMixin",
-    "GeodesGenerateWithGemstoneOresMixin",
+    "GeodeFeatureMixin",
     "GlassBottleItemMixin",
     "InfestedBlockMixin",
     "ItemEntityMixin",

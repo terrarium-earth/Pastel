@@ -1,0 +1,25 @@
+{
+  "type": "pastel:tinted_garden",
+  "config": {
+    "chance": 0.334,
+    "spread": {
+      "type": "clamped_normal",
+      "min_inclusive": 1,
+      "max_inclusive": 18,
+      "mean": 9,
+      "deviation": 5
+    },
+    "tree": "pastel:colored_trees/magenta",
+    "tree_attempts": {
+      "type": "uniform",
+      "min_inclusive": 2,
+      "max_inclusive": 4
+    },
+    "fern": "pastel:colored_trees/magenta",
+    "fern_attempts": 0,
+    "groundcover": [
+      "pastel:colored_trees/magenta"
+    ],
+    "ground_attempts": 0
+  }
+}
