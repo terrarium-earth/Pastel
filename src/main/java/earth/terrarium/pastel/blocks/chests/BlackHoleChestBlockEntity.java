@@ -285,7 +285,8 @@ public class BlackHoleChestBlockEntity extends PastelChestBlockEntity implements
 			ItemEntity itemEntity = itemEntry.itemEntity;
 			if (itemEntity != null && itemEntity.isAlive() && ((ItemEntityAccessor) itemEntity).getPickupDelay() != 32767 && acceptsItemStack(itemEntity.getItem())) {
 				int previousAmount = itemEntity.getItem().getCount();
-				ItemStack remainingStack = InventoryHelper.smartAddToInventory(itemEntity.getItem(), this.inventory, Direction.UP);
+				ItemStack remainingStack = InventoryHelper.smartAddToInventory(itemEntity.getItem(),
+						(IItemHandlerModifiable) exposeItemHandlers(Direction.UP), Direction.UP);
 				
 				if (remainingStack.isEmpty()) {
 					sendPlayItemEntityAbsorbedParticle((ServerLevel) world, itemEntity);
