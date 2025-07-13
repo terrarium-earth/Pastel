@@ -10,6 +10,7 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -68,7 +69,9 @@ public class BidentMirrorImageEntity extends BidentBaseEntity {
         var world = this.level();
         var user = getOwner() instanceof LivingEntity livingOwner ? livingOwner : null;
 		
-		LightShardEntity.summonBarrage(world, user, this.position(), target instanceof LivingEntity livingEntity ? livingEntity : null, livingEntity -> livingEntity != user, UniformInt.of(5, 8 + 2 * efficiency),
+		LightShardEntity.summonBarrage(world, user, this.position(), target instanceof LivingEntity lv ? lv : null
+                , le -> le.getType().getCategory() == MobCategory.MONSTER
+                , UniformInt.of(5, 8 + 2 * efficiency),
 				() -> new LightShardEntity(world, user, effectMult * power, 200 + 40 * efficiency / effectMult));
     }
 

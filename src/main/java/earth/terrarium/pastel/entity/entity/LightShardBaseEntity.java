@@ -116,7 +116,7 @@ public abstract class LightShardBaseEntity extends Projectile {
 		var hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
 		onHit(hitResult);
 		
-		if (this.targetEntity.isEmpty() || !isValidTarget(targetEntity.get())) {
+		if (this.targetEntity.isEmpty() || !isStillValidTarget(targetEntity.get())) {
 			Level world = this.level();
 			if (world.isClientSide)
 				return;
@@ -127,7 +127,7 @@ public abstract class LightShardBaseEntity extends Projectile {
 			findSuitableTargets((ServerLevel) this.level());
 		}
 		
-		if (this.targetEntity.isPresent() && isValidTarget(targetEntity.get())) {
+		if (this.targetEntity.isPresent()) {
 			var entity = targetEntity.get();
 			
 			var transformVector = entity
@@ -168,6 +168,10 @@ public abstract class LightShardBaseEntity extends Projectile {
 				return this.level().clip(new ClipContext(this.position(), entity.position(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this)).getType() == net.minecraft.world.phys.HitResult.Type.MISS;
 			}
 		}
+	}
+
+	protected boolean isStillValidTarget(LivingEntity entity) {
+		return entity.isAlive() && !entity.isInvisible();
 	}
 
 	protected boolean isValidTarget(LivingEntity entity) {
