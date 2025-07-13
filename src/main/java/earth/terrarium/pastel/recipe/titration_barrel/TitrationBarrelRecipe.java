@@ -9,6 +9,7 @@ import earth.terrarium.pastel.helpers.*;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.helpers.interaction.TimeHelper;
+import earth.terrarium.pastel.items.food.beverages.BeverageItem;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.neoforged.neoforge.fluids.capability.templates.*;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
@@ -166,6 +167,10 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
 	
 	private ItemStack tapWith(float thickness, long secondsFermented, float downfall) {
 		ItemStack stack = this.outputItemStack.copy();
+
+		if (!(stack.getItem() instanceof FermentedItem))
+			return stack;
+
 		return getFermentedStack(this.fermentationData, thickness, secondsFermented, downfall, stack);
 	}
 	
@@ -177,13 +182,9 @@ public class TitrationBarrelRecipe extends GatedStackPastelRecipe<FluidRecipeInp
 			alcPercent = Math.max(0, alcPercent);
 		}
 		
-		if (alcPercent >= 100 && inputStack.getItem() instanceof FermentedItem) {
+		if (alcPercent >= 100 && inputStack.getItem() instanceof BeverageItem) {
 			return PastelItems.PURE_ALCOHOL.get().getDefaultInstance();
 		}
-		
-		// if it's not a set beverage (custom recipe) mark it as unknown
-		if (!(inputStack.getItem() instanceof FermentedItem))
-			inputStack.set(PastelDataComponentTypes.INFUSED_BEVERAGE, InfusedBeverageComponent.DEFAULT);
 		
 		var potionContents = inputStack.get(DataComponents.POTION_CONTENTS);
 		if (potionContents != null) {
