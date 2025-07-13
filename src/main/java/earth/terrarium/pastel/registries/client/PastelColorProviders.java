@@ -5,14 +5,18 @@ import earth.terrarium.pastel.api.energy.InkPoweredStatusEffectInstance;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.SingleInkStorage;
+import earth.terrarium.pastel.blocks.conditional.colored_tree.Colored;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredLeavesBlock;
+import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredLogBlock;
+import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredPlankBlock;
+import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredStrippedLogBlock;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredTree;
 import earth.terrarium.pastel.blocks.memory.MemoryBlockEntity;
 import earth.terrarium.pastel.blocks.memory.MemoryItem;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.items.energy.InkFlaskItem;
-import earth.terrarium.pastel.progression.ToggleableBlockColorProvider;
-import earth.terrarium.pastel.progression.ToggleableItemColorProvider;
+import earth.terrarium.pastel.progression.SwapBlockColor;
+import earth.terrarium.pastel.progression.SwapItemColor;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -29,14 +33,39 @@ import net.neoforged.neoforge.client.event.*;
 import java.util.List;
 
 public class PastelColorProviders {
+
+	private static final int NOOP = 0xFFFFFFFF;
+	public static SwapBlockColor coloredLeaves;
+	public static SwapItemColor coloredLeavesItem;
 	
-	public static ToggleableBlockColorProvider coloredLeavesBlockColorProvider;
-	public static ToggleableItemColorProvider coloredLeavesItemColorProvider;
-	
-	public static ToggleableBlockColorProvider amaranthBushelBlockColorProvider;
-	public static ToggleableItemColorProvider amaranthBushelItemColorProvider;
-	public static ToggleableBlockColorProvider amaranthCropBlockColorProvider;
-	public static ToggleableItemColorProvider amaranthCropItemColorProvider;
+	public static SwapBlockColor amaranthBushel;
+	public static SwapItemColor amaranthBushelItem;
+	public static SwapBlockColor amaranthCrop;
+	public static SwapItemColor amaranthCropItem;
+
+	private static final BlockColor BLOCK_COLORED = (state, level, pos, tintIndex) -> {
+		var block = state.getBlock();
+
+		if (tintIndex != 0)
+			return NOOP;
+
+		if (block instanceof Colored colored)
+			return colored.getColor().getColorInt();
+
+		return NOOP;
+	};
+
+	private static final ItemColor ITEM_COLORED = (stack, tintIndex) -> {
+		if (tintIndex != 0 || !(stack.getItem() instanceof BlockItem blockItem))
+			return NOOP;
+
+		var block = blockItem.getBlock();
+
+		if (block instanceof Colored colored)
+			return colored.getColor().getColorInt();
+
+		return NOOP;
+	};
 
 	private static final BlockColor THAT_ONE_VANILLA_LEAF_PROVIDER = (state, level, pos, tintIndex) ->
 			level != null && pos != null ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.getDefaultColor();
@@ -60,6 +89,8 @@ public class PastelColorProviders {
 		// Biome Colors for colored leaves items and blocks
 		// They don't use it, but their decoy oak leaves do
 		coloredLeavesBlock(event);
+		coloredBlocks(event);
+
 		// Same for Amaranth
 		amaranthBlock(event);
 		event.register(THE_OTHER_ONE_AKA_GRASS, PastelBlocks.CLOVER.get(), PastelBlocks.FOUR_LEAF_CLOVER.get());
@@ -70,6 +101,8 @@ public class PastelColorProviders {
 		PastelCommon.logInfo("Registering Item Color Providers...");
 
 		coloredLeavesItem(event);
+		coloredItems(event);
+
 		amaranthItem(event);
 		event.register(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO, PastelBlocks.CLOVER.get(), PastelBlocks.FOUR_LEAF_CLOVER.get());
 
@@ -82,41 +115,41 @@ public class PastelColorProviders {
 	}
 	
 	private static void coloredLeavesBlock(RegisterColorHandlersEvent.Block event) {
-		coloredLeavesBlockColorProvider = new ToggleableBlockColorProvider((state, level, pos, tintIndex) -> {
+		coloredLeaves = new SwapBlockColor((state, level, pos, tintIndex) -> {
 			if (!state.getValue(ColoredTree.NATURAL))
-				return 0xFFFFFFFF;
+				return NOOP;
 
 			return level != null && pos != null ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.getDefaultColor();
-		});
+		}, BLOCK_COLORED);
 
 		for (InkColor color : InkColors.all()) {
 			Block block = ColoredLeavesBlock.byColor(color);
-			event.register(coloredLeavesBlockColorProvider, block);
+			event.register(coloredLeaves, block);
 		}
 	}
 
 	private static void coloredLeavesItem(RegisterColorHandlersEvent.Item event) {
-		coloredLeavesItemColorProvider = new ToggleableItemColorProvider(THAT_ONE_VANILLA_ITEM_PROVIDER);
+		coloredLeavesItem = new SwapItemColor(THAT_ONE_VANILLA_ITEM_PROVIDER, ITEM_COLORED);
 
 		for (InkColor color : InkColors.all()) {
 			Block block = ColoredLeavesBlock.byColor(color);
-			event.register(coloredLeavesItemColorProvider, block);
+			event.register(coloredLeavesItem, block);
 		}
 	}
 	
 	private static void amaranthBlock(RegisterColorHandlersEvent.Block event) {
-		amaranthCropBlockColorProvider = new ToggleableBlockColorProvider(THE_OTHER_ONE_AKA_GRASS);
-		amaranthBushelBlockColorProvider = new ToggleableBlockColorProvider(THE_OTHER_ONE_AKA_GRASS);
-		event.register(amaranthCropBlockColorProvider, PastelBlocks.AMARANTH.get());
-		event.register(amaranthBushelBlockColorProvider, PastelBlocks.AMARANTH_BUSHEL.get());
-		event.register(amaranthBushelBlockColorProvider, PastelBlocks.POTTED_AMARANTH_BUSHEL.get());
+		amaranthCrop = new SwapBlockColor(THE_OTHER_ONE_AKA_GRASS);
+		amaranthBushel = new SwapBlockColor(THE_OTHER_ONE_AKA_GRASS);
+		event.register(amaranthCrop, PastelBlocks.AMARANTH.get());
+		event.register(amaranthBushel, PastelBlocks.AMARANTH_BUSHEL.get());
+		event.register(amaranthBushel, PastelBlocks.POTTED_AMARANTH_BUSHEL.get());
 	}
 
 	private static void amaranthItem(RegisterColorHandlersEvent.Item event) {
-		amaranthCropItemColorProvider = new ToggleableItemColorProvider(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO);
-		amaranthBushelItemColorProvider = new ToggleableItemColorProvider(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO);
-		event.register(amaranthCropItemColorProvider, PastelBlocks.AMARANTH.get());
-		event.register(amaranthBushelItemColorProvider, PastelBlocks.AMARANTH_BUSHEL.get());
+		amaranthCropItem = new SwapItemColor(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO);
+		amaranthBushelItem = new SwapItemColor(YES_THERE_IS_ANOTHER_ITEM_ONE_TOO);
+		event.register(amaranthCropItem, PastelBlocks.AMARANTH.get());
+		event.register(amaranthBushelItem, PastelBlocks.AMARANTH_BUSHEL.get());
 	}
 	
 	private static void registerSingleInkStorages(RegisterColorHandlersEvent.Item event, Item... items) {
@@ -169,7 +202,7 @@ public class PastelColorProviders {
 	private static void memoryItem(RegisterColorHandlersEvent.Item event, Block memory) {
 		event.register((stack, tintIndex) -> {
 			if (tintIndex == 2)
-				return 0xFFFFFFFF;
+				return NOOP;
 
 			return FastColor.ARGB32.opaque(MemoryItem.getEggColor(stack, tintIndex));
 		}, memory.asItem());
@@ -191,15 +224,32 @@ public class PastelColorProviders {
 			return -1;
 		}, item);
 	}
-	
-	public static void resetToggleableProviders() {
-		coloredLeavesBlockColorProvider.setShouldApply(true);
-		coloredLeavesItemColorProvider.setShouldApply(true);
-		
-		amaranthBushelBlockColorProvider.setShouldApply(true);
-		amaranthBushelItemColorProvider.setShouldApply(true);
-		amaranthCropBlockColorProvider.setShouldApply(true);
-		amaranthCropItemColorProvider.setShouldApply(true);
+
+	private static void coloredBlocks(RegisterColorHandlersEvent.Block event) {
+		for (InkColor color : InkColors.all()) {
+			event.register(BLOCK_COLORED,
+					ColoredPlankBlock.byColor(color),
+					ColoredLogBlock.byColor(color),
+					ColoredStrippedLogBlock.byColor(color));
+		}
 	}
-	
+
+	private static void coloredItems(RegisterColorHandlersEvent.Item event) {
+		for (InkColor color : InkColors.all()) {
+			event.register(ITEM_COLORED,
+					ColoredPlankBlock.byColor(color),
+					ColoredLogBlock.byColor(color),
+					ColoredStrippedLogBlock.byColor(color));
+		}
+	}
+
+	public static void resetToggleableProviders() {
+		coloredLeaves.setShouldApply(true);
+		coloredLeavesItem.setShouldApply(true);
+		
+		amaranthBushel.setShouldApply(true);
+		amaranthBushelItem.setShouldApply(true);
+		amaranthCrop.setShouldApply(true);
+		amaranthCropItem.setShouldApply(true);
+	}
 }

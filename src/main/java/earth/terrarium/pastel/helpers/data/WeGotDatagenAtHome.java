@@ -25,10 +25,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Map;
 
-/**
- * Do not let Ash see this she will actually fucking kill me
- */
 public class WeGotDatagenAtHome {
+
+    private static final String[] COLORED_BLOCKS;
+    private static final String DEFAULT_TARGET = "MEOW";
 
     private static boolean actioned;
 
@@ -44,25 +44,40 @@ public class WeGotDatagenAtHome {
         var path = root(level);
         var template = path.resolve("template");
         path = path.resolve("pastel");
-        path = path.resolve("trees");
+        var trees = path.resolve("trees");
 
         var treeTemplate = FileUtil.createPathToResource(template, "colored_tree", ".json");
+        //genTemplate(trees, treeTemplate, DEFAULT_TARGET);
 
+        var colorDir = path.resolve("colored");
+        for (String colored : COLORED_BLOCKS) {
+            var colorTemplate = FileUtil.createPathToResource(template, colored, ".json");
+            genTemplate(colorDir, colorTemplate, null, "", "_" + colored);
+
+            if (colored.contains("log")) {
+                var stripTemplate = FileUtil.createPathToResource(template, "stripped_" + colored, ".json");
+                genTemplate(colorDir, stripTemplate, null, "stripped_", "_" + colored);
+            }
+        }
+    }
+
+    private static void genTemplate(Path output, Path template, String target, String prefix, String affix) {
         try {
-            FileUtil.createDirectoriesSafe(path);
+            FileUtil.createDirectoriesSafe(output);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        InputStreamReader input = tryGetInput(treeTemplate);
+        InputStreamReader input = tryGetInput(template);
         if (input==null)
             return;
 
         var json = GsonHelper.parse(input);
         try {
             for (InkColor color : PastelRegistries.INK_COLOR) {
-                var treeOutput = FileUtil.createPathToResource(path, color.getLootName(), ".json");
-                apply(json.deepCopy(), treeOutput, "MEOW", color.getLootName());
+                var fileName = prefix + color.getLootName() + affix;
+                var fileOutput = FileUtil.createPathToResource(output, fileName, ".json");
+                apply(json.deepCopy(), fileOutput, target, fileName);
             }
 
         } catch (IOException e) {
@@ -70,10 +85,18 @@ public class WeGotDatagenAtHome {
         }
     }
 
-    private static @Nullable InputStreamReader tryGetInput(Path treeTemplate) {
+    private static void genTemplate(Path output, Path template, String target, String prefix) {
+        genTemplate(output, template, target, prefix, "");
+    }
+
+    private static void genTemplate(Path output, Path template, String target) {
+        genTemplate(output, template, target, "");
+    }
+
+    private static @Nullable InputStreamReader tryGetInput(Path template) {
         InputStreamReader input;
         try {
-            input = new InputStreamReader(new FileInputStream(treeTemplate.toFile()));
+            input = new InputStreamReader(new FileInputStream(template.toFile()));
         } catch (FileNotFoundException e) {
             PastelCommon.logError(e.getMessage());
             return null;
@@ -124,5 +147,14 @@ public class WeGotDatagenAtHome {
             root.remove(key);
             root.addProperty(key, value);
         }
+    }
+
+    static {
+        COLORED_BLOCKS = new String[] {
+                "log",
+                "log_horizontal",
+                "planks",
+                "leaves"
+        };
     }
 }

@@ -92,17 +92,17 @@ public class AmaranthCropBlock extends TallCropBlock implements RevelationAware 
 	
 	@Override
 	public void onUncloak() {
-		if (PastelColorProviders.amaranthCropBlockColorProvider != null && PastelColorProviders.amaranthCropItemColorProvider != null) {
-			PastelColorProviders.amaranthCropBlockColorProvider.setShouldApply(false);
-			PastelColorProviders.amaranthCropItemColorProvider.setShouldApply(false);
+		if (PastelColorProviders.amaranthCrop!= null && PastelColorProviders.amaranthCropItem!= null) {
+			PastelColorProviders.amaranthCrop.setShouldApply(false);
+			PastelColorProviders.amaranthCropItem.setShouldApply(false);
 		}
 	}
 	
 	@Override
 	public void onCloak() {
-		if (PastelColorProviders.amaranthCropBlockColorProvider != null && PastelColorProviders.amaranthCropItemColorProvider != null) {
-			PastelColorProviders.amaranthCropBlockColorProvider.setShouldApply(true);
-			PastelColorProviders.amaranthCropItemColorProvider.setShouldApply(true);
+		if (PastelColorProviders.amaranthCrop!= null && PastelColorProviders.amaranthCropItem!= null) {
+			PastelColorProviders.amaranthCrop.setShouldApply(true);
+			PastelColorProviders.amaranthCropItem.setShouldApply(true);
 		}
 	}
 	

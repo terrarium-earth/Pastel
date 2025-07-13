@@ -6,7 +6,7 @@ import earth.terrarium.pastel.registries.PastelAdvancements;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-public interface ColoredTree {
+public interface ColoredTree extends Colored {
 
 	BooleanProperty NATURAL = BooleanProperty.create("natural");
 
@@ -29,7 +29,5 @@ public interface ColoredTree {
 		
 		return treePart == TreePart.SAPLING ? PastelAdvancements.REVEAL_COLORED_SAPLINGS_CMY : PastelAdvancements.REVEAL_COLORED_TREES_CMY;
 	}
-	
-	InkColor getColor();
 	
 }

@@ -6,6 +6,7 @@ import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
@@ -25,12 +26,12 @@ public class ColoredLeavesBlock extends LeavesBlock implements RevelationAware, 
 			propertiesCodec(),
 			InkColor.CODEC.fieldOf("color").forGetter(ColoredLeavesBlock::getColor)
 	).apply(instance, ColoredLeavesBlock::new));
-	
+
 	private static final Map<InkColor, ColoredLeavesBlock> LEAVES = new Object2ObjectArrayMap<>();
 	protected final InkColor color;
 	
 	public ColoredLeavesBlock(Properties settings, InkColor color) {
-		super(settings);
+		super(settings.lightLevel(s -> 9));
 		this.color = color;
 		LEAVES.put(color, this);
 		RevelationAware.register(this);
@@ -70,17 +71,17 @@ public class ColoredLeavesBlock extends LeavesBlock implements RevelationAware, 
 	
 	@Override
 	public void onUncloak() {
-		if (PastelColorProviders.coloredLeavesBlockColorProvider != null && PastelColorProviders.coloredLeavesItemColorProvider != null) {
-			PastelColorProviders.coloredLeavesBlockColorProvider.setShouldApply(false);
-			PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(false);
+		if (PastelColorProviders.coloredLeaves!= null && PastelColorProviders.coloredLeavesItem!= null) {
+			PastelColorProviders.coloredLeaves.setShouldApply(false);
+			PastelColorProviders.coloredLeavesItem.setShouldApply(false);
 		}
 	}
 	
 	@Override
 	public void onCloak() {
-		if (PastelColorProviders.coloredLeavesBlockColorProvider != null && PastelColorProviders.coloredLeavesItemColorProvider != null) {
-			PastelColorProviders.coloredLeavesBlockColorProvider.setShouldApply(true);
-			PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(true);
+		if (PastelColorProviders.coloredLeaves!= null && PastelColorProviders.coloredLeavesItem!= null) {
+			PastelColorProviders.coloredLeaves.setShouldApply(true);
+			PastelColorProviders.coloredLeavesItem.setShouldApply(true);
 		}
 	}
 
