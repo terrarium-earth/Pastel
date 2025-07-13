@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.events;
 
-import earth.terrarium.pastel.components.*;
+import earth.terrarium.pastel.attachments.data.InertiaData;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.*;
 import net.minecraft.core.component.*;
@@ -36,21 +36,27 @@ public class PastelEquipmentEvents {
     private static void processInertiaMod(PlayerEvent.BreakSpeed event) {
         var stack = event.getEntity().getMainHandItem();
         var tool = stack.get(DataComponents.TOOL);
-        var access = event.getEntity().registryAccess();
-        var state = event.getState();
-        var original = event.getOriginalSpeed();
+        var player = event.getEntity();
+        var level = player.level();
 
         if (tool == null)
             return;
 
-        var inertia = Ench.getLevel(access, PastelEnchantments.INERTIA, stack);
-        if (inertia > 0) {
-            var component = stack.getOrDefault(PastelDataComponentTypes.INERTIA, InertiaComponent.DEFAULT);
-            if (state.is(component.lastMined())) {
-                var additionalSpeedPercent = 2.0 * Math.log(component.count()) / Math.log((6 - inertia) * (6 - inertia) + 1);
-                event.setNewSpeed((float) (original / 2 + additionalSpeedPercent));
+        var access = event.getEntity().registryAccess();
+        var state = event.getState();
+
+        var ench = Ench.getLevel(access, PastelEnchantments.INERTIA, stack);
+        if (ench > 0 && tool.isCorrectForDrops(state)) {
+            var speed = event.getNewSpeed();
+            var inertia = player.getData(InertiaData.ATTACHMENT);
+            var strength = inertia.getPotency(level.isClientSide());
+
+            if (strength > 0) {
+                var eff = (strength * strength * ench - 1) / Math.sqrt(1 + Math.pow(strength, 2));
+                event.setNewSpeed(speed * (float) (eff * 3 + 4));
+
             } else {
-                event.setNewSpeed(original / 4);
+                event.setNewSpeed(speed / 4);
             }
         }
     }
@@ -60,13 +66,12 @@ public class PastelEquipmentEvents {
         var access = event.getEntity().registryAccess();
         var state = event.getState();
         var tool = stack.get(DataComponents.TOOL);
-        var original = event.getOriginalSpeed();
 
         if (tool == null)
             return;
 
-        if (Ench.hasEnchantment(access, PastelEnchantments.INERTIA, stack) && tool.isCorrectForDrops(state)) {
-            event.setNewSpeed(Math.max(original, tool.getMiningSpeed(state)));
+        if (Ench.hasEnchantment(access, PastelEnchantments.INEXORABLE, stack) && tool.isCorrectForDrops(state)) {
+            event.setNewSpeed(Math.max(event.getNewSpeed(), tool.getMiningSpeed(state)));
         }
     }
 }

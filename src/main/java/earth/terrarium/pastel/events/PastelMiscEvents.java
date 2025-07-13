@@ -4,10 +4,10 @@ import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.PastelSided;
 import earth.terrarium.pastel.api.item.PrioritizedBlockInteraction;
 import earth.terrarium.pastel.api.item.PrioritizedEntityInteraction;
+import earth.terrarium.pastel.attachments.data.InertiaData;
 import earth.terrarium.pastel.blocks.idols.FirestarterIdolBlock;
 import earth.terrarium.pastel.blocks.pastel_network.Pastel;
 import earth.terrarium.pastel.capabilities.PastelCapabilities;
-import earth.terrarium.pastel.components.InertiaComponent;
 import earth.terrarium.pastel.entity.spawners.ShootingStarSpawner;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.helpers.Support;
@@ -25,6 +25,7 @@ import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.client.PastelColorProviders;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -291,20 +292,19 @@ public class PastelMiscEvents {
 	}
 
 	private static void updateInertia(BlockEvent.BreakEvent event) {
-		var player = (ServerPlayer) event.getPlayer();
+		if (!(event.getPlayer() instanceof ServerPlayer player))
+			return;
+
 		var state = event.getState();
-
 		ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-		if (Ench.hasEnchantment(player.level().registryAccess(), PastelEnchantments.INERTIA, stack)) {
-			InertiaComponent inertia = stack.getOrDefault(PastelDataComponentTypes.INERTIA, InertiaComponent.DEFAULT);
-			long inertiaAmount = state.is(inertia.lastMined()) ? inertia.count() + 1 : 1;
-			stack.set(PastelDataComponentTypes.INERTIA, new InertiaComponent(state.getBlock(), inertiaAmount));
 
-			PastelAdvancementCriteria.INERTIA_USED.trigger(player, state, inertiaAmount);
+		RegistryAccess lookup = player.level().registryAccess();
+		var inertia = Ench.getLevel(lookup, PastelEnchantments.INERTIA, stack);
+		if (inertia > 0) {
+			player.getData(InertiaData.ATTACHMENT).record(state, player.level().getGameTime(), inertia);
 		}
 
 		PastelAdvancementCriteria.BLOCK_BROKEN.trigger(player, state);
-
 	}
 
 	private static void tagReload(TagsUpdatedEvent event) {

@@ -16,7 +16,6 @@ import earth.terrarium.pastel.progression.advancement.EnchantmentUpgradedCriteri
 import earth.terrarium.pastel.progression.advancement.FluidDippingCriterion;
 import earth.terrarium.pastel.progression.advancement.FusionShrineCraftingCriterion;
 import earth.terrarium.pastel.progression.advancement.HummingstoneHymnCriterion;
-import earth.terrarium.pastel.progression.advancement.InertiaUsedCriterion;
 import earth.terrarium.pastel.progression.advancement.InkContainerInteractionCriterion;
 import earth.terrarium.pastel.progression.advancement.InkProjectileKillingCriterion;
 import earth.terrarium.pastel.progression.advancement.JeopardantKillCriterion;
@@ -57,7 +56,6 @@ public class PastelAdvancementCriteria {
 	public static EnchanterCraftingCriterion ENCHANTER_CRAFTING = new EnchanterCraftingCriterion();
 	public static EnchanterEnchantingCriterion ENCHANTER_ENCHANTING = new EnchanterEnchantingCriterion();
 	public static EnchantmentUpgradedCriterion ENCHANTER_UPGRADING = new EnchantmentUpgradedCriterion();
-	public static InertiaUsedCriterion INERTIA_USED = new InertiaUsedCriterion();
 	public static AzureDikeChargeCriterion AZURE_DIKE_CHARGE = new AzureDikeChargeCriterion();
 	public static TrinketChangeCriterion TRINKET_CHANGE = new TrinketChangeCriterion();
 	public static PotionWorkshopBrewingCriterion POTION_WORKSHOP_BREWING = new PotionWorkshopBrewingCriterion();
@@ -96,7 +94,6 @@ public class PastelAdvancementCriteria {
 		REGISTER.register(EnchanterCraftingCriterion.ID.getPath(), () -> ENCHANTER_CRAFTING);
 		REGISTER.register(EnchanterEnchantingCriterion.ID.getPath(), () -> ENCHANTER_ENCHANTING);
 		REGISTER.register(EnchantmentUpgradedCriterion.ID.getPath(), () -> ENCHANTER_UPGRADING);
-		REGISTER.register(InertiaUsedCriterion.ID.getPath(), () -> INERTIA_USED);
 		REGISTER.register(AzureDikeChargeCriterion.ID.getPath(), () -> AZURE_DIKE_CHARGE);
 		REGISTER.register(TrinketChangeCriterion.ID.getPath(), () -> TRINKET_CHANGE);
 		REGISTER.register(PotionWorkshopBrewingCriterion.ID.getPath(), () -> POTION_WORKSHOP_BREWING);

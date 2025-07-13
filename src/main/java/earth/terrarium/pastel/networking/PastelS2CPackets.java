@@ -79,6 +79,7 @@ public class PastelS2CPackets {
 		registrar.playToClient(EverpromiseRibbonData.Payload.TYPE, EverpromiseRibbonData.Payload.CODEC, EverpromiseRibbonData.Payload::execute);
 		registrar.playToClient(LastKillData.Payload.TYPE, LastKillData.Payload.CODEC, LastKillData.Payload::execute);
 		registrar.playToClient(MiscPlayerData.Payload.TYPE, MiscPlayerData.Payload.CODEC, MiscPlayerData.Payload::execute);
+		registrar.playToClient(InertiaData.Payload.TYPE, InertiaData.Payload.CODEC, InertiaData.Payload::execute);
 
 		// SavedData stuff
 		registrar.playToClient(HardcoreDeathTracker.SyncPayload.TYPE, HardcoreDeathTracker.SyncPayload.CODEC, HardcoreDeathTracker.SyncPayload::execute);

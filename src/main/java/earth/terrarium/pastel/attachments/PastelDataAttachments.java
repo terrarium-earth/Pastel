@@ -17,6 +17,7 @@ public class PastelDataAttachments {
 		REGISTER.register("ribbon", () -> EverpromiseRibbonData.ATTACHMENT);
 		REGISTER.register("last_kill", () -> LastKillData.ATTACHMENT);
 		REGISTER.register("player_misc", () -> MiscPlayerData.ATTACHMENT);
+		REGISTER.register("inertia", () -> InertiaData.ATTACHMENT);
 		REGISTER.register(bus);
 	}
 

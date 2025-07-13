@@ -179,7 +179,9 @@ public class PastelPlayerEvents {
     }
 
     private static void playerTick(PlayerTickEvent.Post event) {
-        MiscPlayerData.get(event.getEntity()).tick();
+        Player player = event.getEntity();
+        MiscPlayerData.get(player).tick();
+        InertiaData.tick(player);
     }
 
     private static void canPlayerSleep(CanPlayerSleepEvent event) {

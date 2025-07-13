@@ -8,7 +8,6 @@ import earth.terrarium.pastel.components.BeverageComponent;
 import earth.terrarium.pastel.components.CustomPotionDataComponent;
 import earth.terrarium.pastel.components.EnderSpliceComponent;
 import earth.terrarium.pastel.components.ExtendedBundleComponent;
-import earth.terrarium.pastel.components.InertiaComponent;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.components.InkPoweredComponent;
 import earth.terrarium.pastel.components.InkStorageComponent;
@@ -54,7 +53,6 @@ public class PastelDataComponentTypes {
 	public static final DataComponentType<EnderSpliceComponent> ENDER_SPLICE = register("ender_splice", builder -> builder.persistent(EnderSpliceComponent.CODEC).networkSynchronized(EnderSpliceComponent.STREAM_CODEC));
 	public static final DataComponentType<ExtendedBundleComponent> EXTENDED_BUNDLE = register("extended_bundle", builder -> builder.persistent(ExtendedBundleComponent.CODEC).networkSynchronized(ExtendedBundleComponent.STREAM_CODEC));
 	public static final DataComponentType<Unit> HIDE_USAGE_TOOLTIP = register("hide_usage_tooltip", builder -> builder.persistent(Codec.unit(Unit.INSTANCE)).networkSynchronized(StreamCodec.unit(Unit.INSTANCE)));
-	public static final DataComponentType<InertiaComponent> INERTIA = register("inertia", builder -> builder.persistent(InertiaComponent.CODEC).networkSynchronized(InertiaComponent.STREAM_CODEC));
 	public static final DataComponentType<InfusedBeverageComponent> INFUSED_BEVERAGE = register("infused_beverage", builder -> builder.persistent(InfusedBeverageComponent.CODEC).networkSynchronized(InfusedBeverageComponent.STREAM_CODEC));
 	public static final DataComponentType<InkColor> INK_COLOR = register("ink_color", builder -> builder.persistent(InkColor.CODEC).networkSynchronized(InkColor.STREAM_CODEC));
 	public static final DataComponentType<InkPoweredComponent> INK_POWERED = register("ink_powered", builder -> builder.persistent(InkPoweredComponent.CODEC).networkSynchronized(InkPoweredComponent.STREAM_CODEC).cacheEncoding());
