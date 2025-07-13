@@ -1,0 +1,38 @@
+{
+	"format_version": "1.21.6",
+	"credit": "~ XOXO Azzyypaaras ~",
+	"render_type": "minecraft:translucent",
+	"textures": {
+		"particle": "#texture"
+	},
+	"elements": [
+		{
+			"name": "Center post",
+			"from": [6, 0, 6],
+			"to": [10, 16, 10],
+			"faces": {
+				"north": {"uv": [6, 0, 10, 16], "texture": "#texture", "tintindex": 0},
+				"east": {"uv": [6, 0, 10, 16], "texture": "#texture", "tintindex": 0},
+				"south": {"uv": [6, 0, 10, 16], "texture": "#texture", "tintindex": 0},
+				"west": {"uv": [6, 0, 10, 16], "texture": "#texture", "tintindex": 0},
+				"up": {"uv": [6, 6, 10, 10], "texture": "#texture", "cullface": "up", "tintindex": 0},
+				"down": {"uv": [6, 6, 10, 10], "texture": "#texture", "cullface": "down", "tintindex": 0}
+			}
+		},
+		{
+			"name": "Center post overlay",
+			"from": [5.998, -0.008, 5.998],
+			"to": [10.002, 16.008, 10.002],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-0.008, 0, -0.008]},
+			"faces": {
+				"north": {"uv": [6, 0, 10, 16], "texture": "#overlay"},
+				"east": {"uv": [6, 0, 10, 16], "texture": "#overlay"},
+				"south": {"uv": [6, 0, 10, 16], "texture": "#overlay"},
+				"west": {"uv": [6, 0, 10, 16], "texture": "#overlay"},
+				"up": {"uv": [6, 6, 10, 10], "texture": "#overlay", "cullface": "up"},
+				"down": {"uv": [6, 6, 10, 10], "texture": "#overlay", "cullface": "down"}
+			}
+		}
+	],
+	"display": {}
+}

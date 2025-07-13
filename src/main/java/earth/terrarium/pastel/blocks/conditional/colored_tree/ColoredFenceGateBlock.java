@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.FenceGateBlock;
 
 import java.util.Map;
 
-public class ColoredFenceGateBlock extends FenceGateBlock {
+public class ColoredFenceGateBlock extends FenceGateBlock implements Colored {
 	
 	private static final Map<InkColor, ColoredFenceGateBlock> BLOCKS = new Object2ObjectArrayMap<>();
 	protected final InkColor color;
@@ -23,7 +23,8 @@ public class ColoredFenceGateBlock extends FenceGateBlock {
 //		//TODO: Make the codec
 //		return null;
 //	}
-	
+
+	@Override
 	public InkColor getColor() {
 		return this.color;
 	}

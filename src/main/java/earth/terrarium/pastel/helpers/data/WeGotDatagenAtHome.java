@@ -151,10 +151,13 @@ public class WeGotDatagenAtHome {
 
     static {
         COLORED_BLOCKS = new String[] {
-                "log",
-                "log_horizontal",
-                "planks",
-                "leaves"
+                "fence_post",
+                "fence_side",
+                "fence_gate",
+                "fence_gate_open",
+                "fence_gate_wall",
+                "fence_gate_wall_open",
+                "fence_inventory"
         };
     }
 }

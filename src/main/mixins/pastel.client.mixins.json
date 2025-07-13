@@ -8,6 +8,7 @@
     "AbstractClientPlayerEntityMixin",
     "ClientPlayNetworkHandlerMixin",
     "AbstractInventoryScreenMixin",
+    "VertexConsumerMixin",
     "BipedEntityModelMixin",
     "CapeLayerMixin",
     "DeathScreenMixin",

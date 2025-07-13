@@ -1,0 +1,62 @@
+{
+	"format_version": "1.21.6",
+	"credit": "~ XOXO Azzyypaaras ~",
+	"render_type": "minecraft:translucent",
+	"textures": {
+		"particle": "#texture"
+	},
+	"elements": [
+		{
+			"name": "top bar",
+			"from": [7, 12, 0],
+			"to": [9, 15, 9],
+			"faces": {
+				"north": {"uv": [7, 1, 9, 4], "texture": "#texture", "cullface": "north", "tintindex": 0},
+				"east": {"uv": [0, 1, 9, 4], "texture": "#texture", "tintindex": 0},
+				"west": {"uv": [0, 1, 9, 4], "texture": "#texture", "tintindex": 0},
+				"up": {"uv": [7, 0, 9, 9], "texture": "#texture", "tintindex": 0},
+				"down": {"uv": [7, 0, 9, 9], "texture": "#texture", "tintindex": 0}
+			}
+		},
+		{
+			"name": "top overlay",
+			"from": [6.999, 11.995, -0.008],
+			"to": [9.001, 15.005, 9.001],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-0.008, 0, -0.008]},
+			"faces": {
+				"north": {"uv": [7, 1, 9, 4], "texture": "#overlay", "cullface": "north"},
+				"east": {"uv": [0, 1, 9, 4], "texture": "#overlay"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#overlay"},
+				"west": {"uv": [0, 1, 9, 4], "texture": "#overlay"},
+				"up": {"uv": [7, 0, 9, 9], "texture": "#overlay"},
+				"down": {"uv": [7, 0, 9, 9], "texture": "#overlay"}
+			}
+		},
+		{
+			"name": "lower bar",
+			"from": [7, 6, 0],
+			"to": [9, 9, 9],
+			"faces": {
+				"north": {"uv": [7, 7, 9, 10], "texture": "#texture", "cullface": "north", "tintindex": 0},
+				"east": {"uv": [0, 7, 9, 10], "texture": "#texture", "tintindex": 0},
+				"west": {"uv": [0, 7, 9, 10], "texture": "#texture", "tintindex": 0},
+				"up": {"uv": [7, 0, 9, 9], "texture": "#texture", "tintindex": 0},
+				"down": {"uv": [7, 0, 9, 9], "texture": "#texture", "tintindex": 0}
+			}
+		},
+		{
+			"name": "lower overlay",
+			"from": [6.999, 5.992, -0.008],
+			"to": [9.001, 9.002, 9.001],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-0.008, 0, -0.008]},
+			"faces": {
+				"north": {"uv": [7, 7, 9, 10], "texture": "#overlay", "cullface": "north"},
+				"east": {"uv": [0, 7, 9, 10], "texture": "#overlay"},
+				"south": {"uv": [0, 0, 0, 0], "texture": "#overlay"},
+				"west": {"uv": [0, 7, 9, 10], "texture": "#overlay"},
+				"up": {"uv": [7, 0, 9, 9], "texture": "#overlay"},
+				"down": {"uv": [7, 0, 9, 9], "texture": "#overlay"}
+			}
+		}
+	]
+}

@@ -21,6 +21,7 @@ import earth.terrarium.pastel.items.magic_items.BuildingStaffItem;
 import earth.terrarium.pastel.items.magic_items.ConstructorsStaffItem;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
 import earth.terrarium.pastel.mixin.client.accessors.WorldRendererAccessor;
+import earth.terrarium.pastel.model.OverlayGeometryLoader;
 import earth.terrarium.pastel.particle.render.ExtendedParticleManager;
 import earth.terrarium.pastel.registries.PastelLevels;
 import earth.terrarium.pastel.registries.PastelItemTags;
@@ -84,6 +85,7 @@ public class PastelClientEvents {
 		pastelBus.addListener(PastelColorProviders::registerBlocks);
 		pastelBus.addListener(PastelColorProviders::registerItems);
 		pastelBus.addListener(PastelClientEvents::addResourcePacks);
+		pastelBus.addListener(PastelClientEvents::geometryLoaders);
 
 		NeoForge.EVENT_BUS.addListener(PastelClientEvents::onWorldRenderStart);
 		NeoForge.EVENT_BUS.addListener(PastelClientEvents::onRenderBlockOutlines);
@@ -97,6 +99,10 @@ public class PastelClientEvents {
 
 		// registerCustomItemRenderer(PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem(), BottomlessBundleItem.Renderer::new); TODO unholy
 		// registerCustomItemRenderer(PastelItems.OMNI_ACCELERATOR.get(), OmniAcceleratorItem.Renderer::new);
+	}
+
+	private static void geometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
+		event.register(OverlayGeometryLoader.ID, OverlayGeometryLoader.INSTANCE);
 	}
 
 	private static void modifyFog(ViewportEvent.RenderFog event) {

@@ -1,0 +1,7 @@
+{
+  "parent": "pastel:templates/tint/overlay_fence_gate",
+  "textures": {
+    "texture": "pastel:block/blank/blank_planks",
+    "overlay": "pastel:block/blank/blank_planks_overlay"
+  }
+}

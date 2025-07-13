@@ -6,6 +6,8 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.SingleInkStorage;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.Colored;
+import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredFenceBlock;
+import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredFenceGateBlock;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredLeavesBlock;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredLogBlock;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredPlankBlock;
@@ -230,7 +232,10 @@ public class PastelColorProviders {
 			event.register(BLOCK_COLORED,
 					ColoredPlankBlock.byColor(color),
 					ColoredLogBlock.byColor(color),
-					ColoredStrippedLogBlock.byColor(color));
+					ColoredStrippedLogBlock.byColor(color),
+					ColoredFenceBlock.byColor(color),
+					ColoredFenceGateBlock.byColor(color)
+			);
 		}
 	}
 
@@ -239,7 +244,10 @@ public class PastelColorProviders {
 			event.register(ITEM_COLORED,
 					ColoredPlankBlock.byColor(color),
 					ColoredLogBlock.byColor(color),
-					ColoredStrippedLogBlock.byColor(color));
+					ColoredStrippedLogBlock.byColor(color),
+					ColoredFenceBlock.byColor(color),
+					ColoredFenceGateBlock.byColor(color)
+			);
 		}
 	}
 
