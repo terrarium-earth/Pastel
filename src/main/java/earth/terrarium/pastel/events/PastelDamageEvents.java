@@ -18,6 +18,7 @@ import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.status_effects.FrenzyStatusEffect;
+import it.unimi.dsi.fastutil.objects.Object2LongArrayMap;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -31,10 +32,15 @@ import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import top.theillusivec4.curios.api.CuriosApi;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * The fact that we have enough damage debauchery to justify this is beautiful
@@ -45,6 +51,8 @@ public class PastelDamageEvents {
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::unblockableBypass);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelDamageEvents::handleUnblockable);
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, PastelDamageEvents::splitDamage);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, PastelDamageEvents::rateLimitDamage);
+        NeoForge.EVENT_BUS.addListener(PastelDamageEvents::updateRateLimits);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::modifyArmorDamage);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::handlePiercing);
         NeoForge.EVENT_BUS.addListener(PastelDamageEvents::vulnerability);
@@ -67,6 +75,54 @@ public class PastelDamageEvents {
         var frenzy = attacker.getEffect(PastelMobEffects.FRENZY);
         if (frenzy != null) {
             ((FrenzyStatusEffect) frenzy.getEffect()).onKill(attacker, frenzy.getAmplifier());
+        }
+    }
+
+    private static final int RATE_COOLDOWN = 1;
+    private static final Map<UUID, Object2LongArrayMap<UUID>> RATE_LIMITS = new HashMap<>();
+    private static void rateLimitDamage(LivingIncomingDamageEvent event) {
+        var target = event.getEntity();
+        var source = event.getSource();
+        var attacker = source.getEntity();
+
+        if (attacker == null || !source.is(PastelDamageTypeTags.RATE_LIMITED))
+            return;
+
+        if (event.getContainer().getNewDamage() < Mth.EPSILON)
+            return;
+
+        var memory = RATE_LIMITS.computeIfAbsent(attacker.getUUID(), u -> new Object2LongArrayMap<>());
+
+        if (memory.containsKey(target.getUUID())) {
+            event.setCanceled(true);
+            return;
+        }
+
+        memory.put(target.getUUID(), target.level().getGameTime());
+    }
+
+    private static void updateRateLimits(ServerTickEvent.Pre event) {
+        var time = event.getServer().getLevel(ServerLevel.OVERWORLD).getGameTime();
+
+        var remove = new ArrayList<UUID>();
+
+        for (UUID attacker : RATE_LIMITS.keySet()) {
+            if (RATE_LIMITS.get(attacker).isEmpty())
+                remove.add(attacker);
+        }
+
+        remove.forEach(RATE_LIMITS::remove);
+        remove.clear();
+
+        for (Object2LongArrayMap<UUID> limits : RATE_LIMITS.values()) {
+            for (var attacked : limits.object2LongEntrySet()) {
+
+                if (time - attacked.getLongValue() > RATE_COOLDOWN)
+                    remove.add(attacked.getKey());
+            }
+
+            remove.forEach(limits::removeLong);
+            remove.clear();
         }
     }
 
@@ -137,8 +193,9 @@ public class PastelDamageEvents {
             target.hurt(partition.source(), partition.damage());
         }
 
-        event.setAmount(0);
         RECURSIVE_TARGETS.remove(target);
+        event.setAmount(0);
+        event.setCanceled(true);
     }
 
     private static void vulnerability(LivingDamageEvent.Pre event) {
