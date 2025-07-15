@@ -37,7 +37,6 @@
       "title": "item.pastel.clotted_cream",
       "anchor": "clotted_cream",
       "recipe_id": "pastel:titration_barrel/clotted_cream",
-      "recipe_id2": "pastel:titration_barrel/clotted_cream_fluid",
       "text": "book.pastel.guidebook.titration_barrel.page4.text"
     },
     {

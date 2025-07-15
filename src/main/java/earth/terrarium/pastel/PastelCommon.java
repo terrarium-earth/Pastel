@@ -108,6 +108,7 @@ public class PastelCommon {
 
 	public PastelCommon(IEventBus pastelBus, ModContainer container) {
 		logInfo("Starting Common Startup");
+		NeoForgeMod.enableMilkFluid();
 
 		// Register internals
 		pastelBus.addListener(PastelRegistries::register);
