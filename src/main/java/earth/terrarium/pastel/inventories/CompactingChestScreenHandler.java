@@ -93,7 +93,8 @@ public class CompactingChestScreenHandler extends AbstractContainerMenu {
 	@Override
 	public void broadcastChanges() {
 		super.broadcastChanges();
-		PacketDistributor.sendToServer(new ChangeCompactingChestSettingsPayload(getCraftingMode()));
+		if (blockEntity.getLevel().isClientSide())
+			PacketDistributor.sendToServer(new ChangeCompactingChestSettingsPayload(getCraftingMode()));
 		blockEntity.applySettings(getCraftingMode());
 	}
 	
