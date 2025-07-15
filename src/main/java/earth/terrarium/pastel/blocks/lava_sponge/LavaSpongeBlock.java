@@ -39,7 +39,7 @@ public class LavaSpongeBlock extends SpongeBlock {
 	}
 	
 	private boolean absorbLava(Level world, BlockPos pos) {
-		return BlockPos.breadthFirstTraversal(pos, 6, 65, (currentPos, queuer) -> {
+		return BlockPos.breadthFirstTraversal(pos, 12, 512, (currentPos, queuer) -> {
 			for (Direction direction : Direction.values()) {
 				queuer.accept(currentPos.relative(direction));
 			}
