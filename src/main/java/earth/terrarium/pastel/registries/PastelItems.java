@@ -45,7 +45,6 @@ import earth.terrarium.pastel.items.food.ClottedCreamItem;
 import earth.terrarium.pastel.items.food.DrinkItem;
 import earth.terrarium.pastel.items.food.EnchantedStarCandyItem;
 import earth.terrarium.pastel.items.food.FreigeistItem;
-import earth.terrarium.pastel.items.food.KimchiItem;
 import earth.terrarium.pastel.items.food.MoonstruckNectarItem;
 import earth.terrarium.pastel.items.food.NectardewBurgeonItem;
 import earth.terrarium.pastel.items.food.RestorationTeaItem;
@@ -450,7 +449,6 @@ public class PastelItems {
     public static final DeferredItem<Item> NIGHTDEW_SPROUT = register(simple(item("nightdew_sprout", () -> new AliasedTooltipItem(PastelBlocks.NIGHTDEW.get(), IS.of().food(PastelFoodComponents.NIGHTDEW_SPROUT), "item.pastel.nightdew_sprout.tooltip"), InkColors.PURPLE)));
     public static final DeferredItem<Item> NECTARDEW_BURGEON = register(simple(item("nectardew_burgeon", () -> new NectardewBurgeonItem(IS.of().food(PastelFoodComponents.NECTARDEW_BURGEON), "item.pastel.nectardew_burgeon.tooltip", PastelAdvancements.COLLECT_NECTARDEW, PastelItems.NIGHTDEW_SPROUT.get()), InkColors.PURPLE)));
     public static final DeferredItem<Item> RESTORATION_TEA = register(simple(item("restoration_tea", () -> new RestorationTeaItem(IS.of(16).food(PastelFoodComponents.RESTORATION_TEA).craftRemainder(GLASS_BOTTLE).component(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(PastelFoodComponents.RESTORATION_TEA_SCONE_BONUS))), InkColors.PINK)));
-    public static final DeferredItem<Item> KIMCHI = register(simple(item("kimchi", () -> new KimchiItem(IS.of().food(PastelFoodComponents.KIMCHI)), InkColors.PINK)));
     public static final DeferredItem<Item> CLOTTED_CREAM = register(simple(item("clotted_cream", () -> new ClottedCreamItem(IS.of().food(PastelFoodComponents.CLOTTED_CREAM), new String[]{"item.pastel.clotted_cream.tooltip", "item.pastel.clotted_cream.tooltip2"}), InkColors.PINK)));
     public static final DeferredItem<Item> FRESH_CHOCOLATE = register(simple(item("fresh_chocolate", () -> new Item(IS.of().food(PastelFoodComponents.FRESH_CHOCOLATE)), InkColors.PINK)));
     public static final DeferredItem<Item> HOT_CHOCOLATE = register(simple(item("hot_chocolate", () -> new DrinkItem(IS.of(16).food(PastelFoodComponents.HOT_CHOCOLATE).component(PastelDataComponentTypes.PAIRED_FOOD_COMPONENT, teaSconeBonus(PastelFoodComponents.HOT_CHOCOLATE_SCONE_BONUS))), InkColors.PINK)));

@@ -664,7 +664,6 @@ public class PastelItemGroups {
 
 				// UNGODLY AMOUNT OF FOOD
 				entries.accept(PastelItems.TRIPLE_MEAT_POT_PIE.get());
-				entries.accept(PastelItems.KIMCHI.get());
 				entries.accept(PastelItems.CLOTTED_CREAM.get());
 				entries.accept(PastelItems.FRESH_CHOCOLATE.get());
 				entries.accept(PastelItems.BODACIOUS_BERRY_BAR.get());

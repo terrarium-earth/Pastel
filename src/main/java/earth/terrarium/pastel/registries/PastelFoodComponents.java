@@ -138,10 +138,6 @@ public class PastelFoodComponents {
 			.effect(new MobEffectInstance(PastelMobEffects.FATAL_SLUMBER, 20 * 10), 1.0F)
 			.build();
 	
-	public static final FoodProperties KIMCHI = new FoodProperties.Builder()
-			.nutrition(6).saturationModifier(SAT_LOW)
-			.build();
-	
 	public static final FoodProperties CLOTTED_CREAM = new FoodProperties.Builder()
 			.alwaysEdible()
 			.build();
