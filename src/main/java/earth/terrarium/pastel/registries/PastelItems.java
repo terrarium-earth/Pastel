@@ -183,6 +183,8 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.*;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.Nullable;
 
@@ -426,7 +428,7 @@ public class PastelItems {
 
     public static final DeferredItem<Item> QUITOXIC_POWDER = register(simple(item("quitoxic_powder", () -> new CloakedItem(IS.of(), PastelAdvancements.REVEAL_QUITOXIC_REEDS, PURPLE_DYE), InkColors.PURPLE)));
     public static final DeferredItem<Item> STORM_STONE = register(simple(item("storm_stone", () -> new StormStoneItem(IS.of(), PastelAdvancements.REVEAL_STORM_STONES, YELLOW_DYE), InkColors.LIGHT_BLUE)));
-    public static final DeferredItem<Item> MERMAIDS_GEM = register(simple(item("mermaids_gem", () -> new MermaidsGemItem(PastelBlocks.MERMAIDS_BRUSH.get(), IS.of()), InkColors.YELLOW)));
+    public static final DeferredItem<Item> MERMAIDS_GEM = register(simple(item("mermaids_gem", () -> new MermaidsGemItem(PastelBlocks.MERMAIDS_BRUSH.get(), IS.of().component(PastelDataComponentTypes.MERMAIDS_GEM, SimpleFluidContent.copyOf(new FluidStack(Fluids.WATER, 1000)))), InkColors.YELLOW)));
     public static final DeferredItem<CloakedItem> STAR_FRAGMENT = register(simple(item("star_fragment", () -> new CloakedItem(IS.of(16), PastelAdvancements.UNLOCK_SHOOTING_STARS, PURPLE_DYE), InkColors.PURPLE)));
     public static final DeferredItem<Item> STARDUST = register(simple(item("stardust", () -> new CloakedItemWithLoomPattern(IS.of(), PastelAdvancements.UNLOCK_SHOOTING_STARS, PURPLE_DYE, PastelBannerPatterns.SHIMMER), InkColors.PURPLE)));
     public static final DeferredItem<Item> ASH_FLAKES = register(simple(item("ash_flakes", () -> new AshItem(IS.of()), InkColors.LIGHT_GRAY)));
