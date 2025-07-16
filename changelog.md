@@ -1,5 +1,6 @@
-* Fixed the cinderhearth sometimes erasing its inputs
-* Fixed the black hole chest sucking items into its xp storage slot
-* Fixed mekanism box crash
-* Fixed unneeded components being added to some titration barrel outputs
-* Reworked inertia
+* Fixed Compacting chest weirdness
+* Fixed Mermaids Gems thinking they were empty buckets
+* Fixed Kimchi existing
+* Fixed Clotted cream weirdness
+* "Fixed" Crescent Clock working in the guidebook
+* Resprited the belt trinkets
