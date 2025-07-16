@@ -40,21 +40,6 @@ public abstract class PastelTrinketItem extends Item implements ICurioItem {
 		return this.unlockIdentifier;
 	}
 
-	@Override
-	public boolean canEquip(SlotContext slotContext, ItemStack stack) {
-		if (slotContext.entity() instanceof Player playerEntity) {
-			// does the player have the matching advancement?
-			if (AdvancementHelper.hasAdvancement(playerEntity, getUnlockIdentifier())) {
-				// Can only a single trinket of that type be equipped at once?
-				if (!canEquipMoreThanOne() && hasEquipped(slotContext.entity(), this)) {
-					return false;
-				}
-				return ICurioItem.super.canEquip(slotContext, stack);
-			}
-		}
-		return false;
-	}
-
 	public boolean canEquipMoreThanOne() {
 		return false;
 	}
