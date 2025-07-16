@@ -43,7 +43,11 @@ public class HudRenderers {
 
 		@Override
 		public void render(GuiGraphics gui, DeltaTracker deltaTracker) {
-			if (Minecraft.getInstance().gameMode == null || !Minecraft.getInstance().gameMode.canHurtPlayer())
+			var minecraft = Minecraft.getInstance();
+
+			if (minecraft.options.hideGui ||
+					minecraft.gameMode == null ||
+					!minecraft.gameMode.canHurtPlayer())
 				return;
 
 			var cameraPlayer = Minecraft.getInstance().player;
