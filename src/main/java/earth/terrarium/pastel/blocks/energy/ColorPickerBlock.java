@@ -118,13 +118,13 @@ public class ColorPickerBlock extends HorizontalDirectionalBlock implements Enti
 		if(world.getBlockEntity(pos) instanceof ColorPickerBlockEntity blockEntity) {
 			int i = 0;
 			float f = 0.0f;
-			for (int j = 0; j < blockEntity.inventory.size(); ++j) {
-				ItemStack itemStack = blockEntity.inventory.get(j);
+			for (int j = 0; j < blockEntity.inventory.getSlots(); ++j) {
+				ItemStack itemStack = blockEntity.inventory.getStackInSlot(j);
 				if (itemStack.isEmpty()) continue;
 				f += (float)itemStack.getCount() / (float)itemStack.getMaxStackSize();
 				++i;
 			}
-			return Mth.floor(f / (float) blockEntity.inventory.size() * 14.0f) + (i > 0 ? 1 : 0);
+			return Mth.floor(f / (float) blockEntity.inventory.getSlots() * 14.0f) + (i > 0 ? 1 : 0);
 		}
 		
 		return 0;

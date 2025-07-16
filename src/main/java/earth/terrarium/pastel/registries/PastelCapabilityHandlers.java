@@ -31,6 +31,7 @@ public class PastelCapabilityHandlers {
         standardBlockBE(BLOCK_PLACER, event);
         standardBlockBE(BOTTOMLESS_BUNDLE, event);
 		standardBlockBE(ITEM_BOWL, event);
+        standardBlockBE(COLOR_PICKER, event);
 		containerBlockBE(CRYSTAL_APOTHECARY, event);
 
         // - chests
