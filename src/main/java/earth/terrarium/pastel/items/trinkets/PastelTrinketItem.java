@@ -45,6 +45,14 @@ public abstract class PastelTrinketItem extends Item implements ICurioItem {
 	}
 
 	@Override
+	public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+		if (!ICurioItem.super.canEquip(slotContext, stack))
+			return false;
+
+		return canEquipMoreThanOne() || !hasEquipped(slotContext.entity(), this);
+	}
+
+	@Override
 	public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
 		ICurioItem.super.onEquip(slotContext, prevStack, stack);
 		if (slotContext.entity() instanceof ServerPlayer serverPlayerEntity) {
