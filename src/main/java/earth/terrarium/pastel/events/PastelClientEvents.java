@@ -133,6 +133,7 @@ public class PastelClientEvents {
 
 		slotEffect(PastelBlocks.CRYSTALLARIEUM, e);
 
+		slotEffect(PastelItems.AETHER_GRACED_NECTAR_GLOVES, e);
 		InkDrainTrinketItem.BY_COLOR.values().forEach(i -> slotEffect(i, e));
 	}
 
