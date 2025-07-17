@@ -1,7 +1,9 @@
 {
   "type": "create:crushing",
   "ingredients": [
-    "pastel:white_leaves"
+    {
+      "item": "pastel:white_leaves"
+    }
   ],
   "results": [
     {
@@ -10,14 +12,12 @@
       "chance": 1.0
     },
     {
-      "result": {
-        "id": "pastel:white_sapling",
-        "count": 1
-      },
+      "id": "pastel:white_sapling",
+      "count": 1,
       "chance": 0.02
     }
   ],
-  "processingTime": 450,
+  "processing_time": 450,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

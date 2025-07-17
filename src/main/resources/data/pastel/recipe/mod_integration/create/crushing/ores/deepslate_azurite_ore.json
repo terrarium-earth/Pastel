@@ -5,23 +5,23 @@
       "item": "pastel:deepslate_azurite_ore"
     }
   ],
-  "processingTime": 450,
+  "processing_time": 450,
   "results": [
     {
       "count": 2,
-      "item": "pastel:raw_azurite"
+      "id": "pastel:raw_azurite"
     },
     {
       "chance": 0.25,
-      "item": "pastel:raw_azurite"
+      "id": "pastel:raw_azurite"
     },
     {
       "chance": 0.75,
-      "item": "create:experience_nugget"
+      "id": "create:experience_nugget"
     },
     {
       "chance": 0.125,
-      "item": "minecraft:cobbled_deepslate"
+      "id": "minecraft:cobbled_deepslate"
     }
   ],
   "neoforge:conditions": [

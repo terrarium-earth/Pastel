@@ -5,23 +5,23 @@
       "item": "pastel:paltaeria_ore"
     }
   ],
-  "processingTime": 350,
+  "processing_time": 350,
   "results": [
     {
       "count": 2,
-      "item": "pastel:paltaeria_fragments"
+      "id": "pastel:paltaeria_fragments"
     },
     {
       "chance": 0.5,
-      "item": "pastel:paltaeria_fragments"
+      "id": "pastel:paltaeria_fragments"
     },
     {
       "chance": 0.75,
-      "item": "create:experience_nugget"
+      "id": "create:experience_nugget"
     },
     {
       "chance": 0.125,
-      "item": "minecraft:end_stone"
+      "id": "minecraft:end_stone"
     }
   ],
   "neoforge:conditions": [

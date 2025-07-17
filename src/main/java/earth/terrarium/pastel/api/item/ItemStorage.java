@@ -26,7 +26,7 @@ public class ItemStorage {
             ItemReference.STREAM_CODEC, ItemStorage::getReference,
             ByteBufCodecs.VAR_LONG, ItemStorage::getCount,
             ByteBufCodecs.VAR_LONG, ItemStorage::getLimit,
-            ItemStorage::new
+            ItemStorage::new//
     );
 
     private ItemReference reference;

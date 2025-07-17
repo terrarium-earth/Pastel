@@ -5,31 +5,31 @@
       "item": "pastel:deepslate_topaz_ore"
     }
   ],
-  "processingTime": 350,
+  "processing_time": 350,
   "results": [
     {
       "count": 4,
-      "item": "pastel:topaz_shard"
+      "id": "pastel:topaz_shard"
     },
     {
       "chance": 0.25,
-      "item": "pastel:topaz_shard"
+      "id": "pastel:topaz_shard"
     },
     {
       "count": 4,
-      "item": "pastel:topaz_powder"
+      "id": "pastel:topaz_powder"
     },
     {
       "chance": 0.25,
-      "item": "pastel:topaz_powder"
+      "id": "pastel:topaz_powder"
     },
     {
       "chance": 0.75,
-      "item": "create:experience_nugget"
+      "id": "create:experience_nugget"
     },
     {
       "chance": 0.125,
-      "item": "minecraft:cobbled_deepslate"
+      "id": "minecraft:cobbled_deepslate"
     }
   ],
   "neoforge:conditions": [

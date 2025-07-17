@@ -1,7 +1,9 @@
 {
   "type": "create:milling",
   "ingredients": [
-    "pastel:amaranth_bushel"
+    {
+      "item": "pastel:amaranth_bushel"
+    }
   ],
   "results": [
     {
@@ -17,7 +19,7 @@
       "chance": 0.5
     }
   ],
-  "processingTime": 450,
+  "processing_time": 450,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
