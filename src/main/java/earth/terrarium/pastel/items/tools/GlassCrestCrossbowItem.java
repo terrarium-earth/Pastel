@@ -4,8 +4,8 @@ import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 // right click ability: able to overload an already loaded arrow
-public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements ExtendedItemBarProvider, SlotBackgroundEffectProvider, InkPowered {
+public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements ExtendedItemBar, SlotBackgroundEffect, InkPowered {
     
     private static final InkCost OVERCHARGE_COST = new InkCost(InkColors.WHITE, 1000);
     private static final int OVERCHARGE_DURATION_MAX_TICKS = 20 * 6; // 6 seconds
@@ -140,9 +140,9 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements Ext
     }
 	
 	@Override
-	public SlotBackgroundEffectProvider.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
+	public SlotBackgroundEffect.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
 		var usable = InkPowered.hasAvailableInk(player, OVERCHARGE_COST);
-		return usable ? SlotEffect.BORDER_FADE : SlotBackgroundEffectProvider.SlotEffect.NONE;
+		return usable ? SlotEffect.BORDER_FADE : SlotBackgroundEffect.SlotEffect.NONE;
 	}
 	
 	@Override
@@ -176,6 +176,6 @@ public class GlassCrestCrossbowItem extends MalachiteCrossbowItem implements Ext
 			return PASS;
 		
 		var progress = (int) Math.floor(Mth.clampedLerp(0, 13, usage ? ((float) player.getTicksUsingItem() / OVERCHARGE_DURATION_MAX_TICKS) : getOvercharge(stack)));
-		return new BarSignature(2, 13, 13, progress, 1, 0xFFFFFFFF, 2, ExtendedItemBarProvider.DEFAULT_BACKGROUND_COLOR);
+		return new BarSignature(2, 13, 13, progress, 1, 0xFFFFFFFF, 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
 	}
 }

@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.energy.InkStorageItem;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.storage.CreativeInkStorage;
 import earth.terrarium.pastel.api.item.CreativeOnlyItem;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.registries.PastelRegistries;
 import net.neoforged.api.distmarker.Dist;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreativeInkAssortmentItem extends Item implements InkStorageItem<CreativeInkStorage>, CreativeOnlyItem, SlotBackgroundEffectProvider {
+public class CreativeInkAssortmentItem extends Item implements InkStorageItem<CreativeInkStorage>, CreativeOnlyItem, SlotBackgroundEffect {
 	
 	public CreativeInkAssortmentItem(Properties settings) {
 		super(settings);
@@ -74,7 +74,7 @@ public class CreativeInkAssortmentItem extends Item implements InkStorageItem<Cr
 	}
 	
 	@Override
-	public SlotBackgroundEffectProvider.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
+	public SlotBackgroundEffect.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
 		return SlotEffect.BORDER_FADE;
 	}
 	

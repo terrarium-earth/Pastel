@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.helpers.level.MobEffectHelper;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -23,7 +23,7 @@ import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.Nullable;
 
-public class NectarLanceItem extends LightGreatswordItem implements SlotBackgroundEffectProvider {
+public class NectarLanceItem extends LightGreatswordItem implements SlotBackgroundEffect {
 
 	public NectarLanceItem(Tier material, int attackDamage, float attackSpeed, float crit, float reach, int barColor, Properties settings) {
 		super(material, attackDamage, attackSpeed, crit, reach, barColor, settings);

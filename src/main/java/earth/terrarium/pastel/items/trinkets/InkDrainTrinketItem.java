@@ -4,8 +4,8 @@ import earth.terrarium.pastel.api.energy.InkStorage;
 import earth.terrarium.pastel.api.energy.InkStorageItem;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.storage.FixedSingleInkStorage;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.components.InkStorageComponent;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -15,15 +15,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class InkDrainTrinketItem extends PastelTrinketItem implements InkStorageItem<FixedSingleInkStorage>, ExtendedItemBarProvider, SlotBackgroundEffectProvider {
+public class InkDrainTrinketItem extends PastelTrinketItem implements InkStorageItem<FixedSingleInkStorage>, ExtendedItemBar, SlotBackgroundEffect {
 	
 	/**
 	 * TODO: set to the original value again, once ink networking is in. Currently the original max value cannot be achieved.
@@ -33,10 +36,17 @@ public class InkDrainTrinketItem extends PastelTrinketItem implements InkStorage
 	 */
 	public static final int MAX_INK = 3276800; // 1677721600;
 	public final InkColor inkColor;
+
+	public static final Map<InkColor, Item> BY_COLOR = new HashMap<>();
 	
 	public InkDrainTrinketItem(Properties settings, ResourceLocation unlockIdentifier, InkColor inkColor) {
 		super(settings, unlockIdentifier);
 		this.inkColor = inkColor;
+
+		if (BY_COLOR.containsKey(inkColor))
+			throw new IllegalStateException("Attempted to register multiple ink upgrade-ables to the same color");
+
+		BY_COLOR.put(inkColor, this);
 	}
 
 	@Override
@@ -118,7 +128,7 @@ public class InkDrainTrinketItem extends PastelTrinketItem implements InkStorage
 		if (progress == 0 || progress == 14)
 			return PASS;
 		
-		return new BarSignature(1, 13, 14, progress, 1, inkColor.getTextColorInt(), 2, ExtendedItemBarProvider.DEFAULT_BACKGROUND_COLOR);
+		return new BarSignature(1, 13, 14, progress, 1, inkColor.getTextColorInt(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
 	}
 	
 	@Override

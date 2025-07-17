@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 // gets thrown as copy instead of getting removed from the player's inv
-public class FractalBidentItem extends MalachiteBidentItem implements SlotBackgroundEffectProvider, InkPowered {
+public class FractalBidentItem extends MalachiteBidentItem implements SlotBackgroundEffect, InkPowered {
 	
 	public static final InkCost MIRROR_IMAGE_COST = new InkCost(InkColors.WHITE, 25);
 	
@@ -59,9 +59,9 @@ public class FractalBidentItem extends MalachiteBidentItem implements SlotBackgr
 	}
 	
 	@Override
-	public SlotBackgroundEffectProvider.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
+	public SlotBackgroundEffect.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
 		var usable = InkPowered.hasAvailableInk(player, MIRROR_IMAGE_COST);
-		return usable ? SlotBackgroundEffectProvider.SlotEffect.BORDER_FADE : SlotBackgroundEffectProvider.SlotEffect.NONE;
+		return usable ? SlotBackgroundEffect.SlotEffect.BORDER_FADE : SlotBackgroundEffect.SlotEffect.NONE;
 	}
 	
 	@Override

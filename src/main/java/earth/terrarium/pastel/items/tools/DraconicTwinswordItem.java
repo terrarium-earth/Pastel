@@ -4,8 +4,8 @@ import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.Preenchanted;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
 import earth.terrarium.pastel.api.item.SplittableItem;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.entity.entity.DraconicTwinswordEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelEnchantments;
@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class DraconicTwinswordItem extends SwordItem implements SplittableItem, SlotReservingItem, Preenchanted, ExtendedItemBarProvider, SlotBackgroundEffectProvider {
+public class DraconicTwinswordItem extends SwordItem implements SplittableItem, SlotReservingItem, Preenchanted, ExtendedItemBar, SlotBackgroundEffect {
 
 	public static final float MAX_CHARGE_TIME = 60;
 	private final ItemAttributeModifiers modifiers;
@@ -200,14 +200,14 @@ public class DraconicTwinswordItem extends SwordItem implements SplittableItem, 
 	@Override
 	public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
 		if (player == null || SlotReservingItem.isReservingSlot(stack) || !player.isUsingItem())
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		var activeStack = player.getItemInHand(player.getUsedItemHand());
 		if (activeStack != stack)
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		var progress = Math.round(Mth.clampedLerp(0, 13, ((float) player.getTicksUsingItem() / MAX_CHARGE_TIME)));
-		return new BarSignature(2, 13, 13, progress, 1, InkColors.YELLOW_COLOR, 2, ExtendedItemBarProvider.DEFAULT_BACKGROUND_COLOR);
+		return new BarSignature(2, 13, 13, progress, 1, InkColors.YELLOW_COLOR, 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
 	}
 	
 	@Override

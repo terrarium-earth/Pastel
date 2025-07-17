@@ -20,12 +20,16 @@ import earth.terrarium.pastel.helpers.render.TooltipHelper;
 import earth.terrarium.pastel.items.magic_items.BuildingStaffItem;
 import earth.terrarium.pastel.items.magic_items.ConstructorsStaffItem;
 import earth.terrarium.pastel.items.magic_items.ExchangeStaffItem;
+import earth.terrarium.pastel.items.trinkets.InkDrainTrinketItem;
 import earth.terrarium.pastel.mixin.client.accessors.WorldRendererAccessor;
 import earth.terrarium.pastel.particle.render.ExtendedParticleManager;
+import earth.terrarium.pastel.registries.PastelBlocks;
+import earth.terrarium.pastel.registries.PastelItems;
 import earth.terrarium.pastel.registries.PastelLevels;
 import earth.terrarium.pastel.registries.PastelItemTags;
 import earth.terrarium.pastel.registries.client.*;
 import earth.terrarium.pastel.render.HudRenderers;
+import earth.terrarium.pastel.render.item.SlotEffectDecorator;
 import earth.terrarium.pastel.sound.WorldAttenuation;
 import earth.terrarium.pastel.sound.BiomeSoundInstance;
 import earth.terrarium.pastel.sound.AuraSoundInstance;
@@ -33,6 +37,7 @@ import net.minecraft.server.packs.*;
 import net.minecraft.server.packs.repository.*;
 import net.minecraft.server.packs.resources.*;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.minecraft.ChatFormatting;
@@ -84,6 +89,7 @@ public class PastelClientEvents {
 		pastelBus.addListener(PastelColorProviders::registerBlocks);
 		pastelBus.addListener(PastelColorProviders::registerItems);
 		pastelBus.addListener(PastelClientEvents::addResourcePacks);
+		pastelBus.addListener(PastelClientEvents::registerDecorators);
 
 		NeoForge.EVENT_BUS.addListener(PastelClientEvents::onWorldRenderStart);
 		NeoForge.EVENT_BUS.addListener(PastelClientEvents::onRenderBlockOutlines);
@@ -97,6 +103,41 @@ public class PastelClientEvents {
 
 		// registerCustomItemRenderer(PastelBlocks.BOTTOMLESS_BUNDLE.get().asItem(), BottomlessBundleItem.Renderer::new); TODO unholy
 		// registerCustomItemRenderer(PastelItems.OMNI_ACCELERATOR.get(), OmniAcceleratorItem.Renderer::new);
+	}
+
+	private static void registerDecorators(RegisterItemDecorationsEvent e) {
+		slotEffect(PastelItems.INK_ASSORTMENT, e);
+		slotEffect(PastelItems.CREATIVE_INK_ASSORTMENT, e);
+		slotEffect(PastelItems.INK_FLASK, e);
+		slotEffect(PastelItems.PIGMENT_PALETTE, e);
+		slotEffect(PastelItems.ARTISTS_PALETTE, e);
+
+		slotEffect(PastelItems.KNOTTED_SWORD, e);
+		slotEffect(PastelItems.NECTAR_LANCE, e);
+		slotEffect(PastelItems.DRACONIC_TWINSWORD, e);
+		slotEffect(PastelItems.DRAGON_TALON, e);
+		slotEffect(PastelItems.DREAMFLAYER, e);
+		slotEffect(PastelItems.NIGHTFALLS_BLADE, e);
+
+		slotEffect(PastelItems.NECTARDEW_BURGEON, e);
+		slotEffect(PastelItems.AETHER_VESTIGES, e);
+		slotEffect(PastelItems.SOOTHING_BOUQUET, e);
+		slotEffect(PastelItems.MYSTERIOUS_COMPASS, e);
+		slotEffect(PastelItems.MYSTERIOUS_LOCKET, e);
+
+		slotEffect(PastelItems.FRACTAL_GLASS_CREST_BIDENT, e);
+		slotEffect(PastelItems.FEROCIOUS_GLASS_CREST_BIDENT, e);
+		slotEffect(PastelItems.GLASS_CREST_CROSSBOW, e);
+		slotEffect(PastelItems.GLASS_CREST_ULTRA_GREATSWORD, e);
+		slotEffect(PastelItems.OMNI_ACCELERATOR, e);
+
+		slotEffect(PastelBlocks.CRYSTALLARIEUM, e);
+
+		InkDrainTrinketItem.BY_COLOR.values().forEach(i -> slotEffect(i, e));
+	}
+
+	private static void slotEffect(ItemLike item, RegisterItemDecorationsEvent event) {
+		event.register(item, new SlotEffectDecorator());
 	}
 
 	private static void modifyFog(ViewportEvent.RenderFog event) {

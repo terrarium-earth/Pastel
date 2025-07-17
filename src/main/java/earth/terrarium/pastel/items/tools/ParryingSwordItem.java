@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.tools;
 
 import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
@@ -24,7 +24,7 @@ import net.neoforged.neoforge.common.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class ParryingSwordItem extends SwordItem implements ExtendedItemBarProvider {
+public abstract class ParryingSwordItem extends SwordItem implements ExtendedItemBar {
 
 	public static final int DEFAULT_MAX_BLOCK_TIME = 40;
 	public static final int DEFAULT_PERFECT_PARRY_WINDOW = 5;
@@ -117,15 +117,15 @@ public abstract class ParryingSwordItem extends SwordItem implements ExtendedIte
 	@Override
 	public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
 		if (player == null || !player.isUsingItem())
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 
 		var activeStack = player.getItemInHand(player.getUsedItemHand());
 		if (activeStack != stack)
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 
 
 		var progress = Math.round(Mth.clampedLerp(13, 0, ((float) player.getTicksUsingItem() / getMaxShieldingTime(player, stack))));
-		return new BarSignature(2, 13, 13, progress, 1, getBarColor(), 2, ExtendedItemBarProvider.DEFAULT_BACKGROUND_COLOR);
+		return new BarSignature(2, 13, 13, progress, 1, getBarColor(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
 	}
 
 	@Override

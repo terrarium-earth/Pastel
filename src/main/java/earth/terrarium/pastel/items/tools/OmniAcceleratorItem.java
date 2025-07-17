@@ -7,8 +7,8 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.interaction.OmniAcceleratorProjectile;
 import earth.terrarium.pastel.api.render.DynamicItemRenderer;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -41,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class OmniAcceleratorItem extends BundleItem implements InkPowered, ExtendedItemBarProvider, SlotBackgroundEffectProvider {
+public class OmniAcceleratorItem extends BundleItem implements InkPowered, ExtendedItemBar, SlotBackgroundEffect {
 	
 	protected static final InkCost COST = new InkCost(InkColors.YELLOW, 20);
 	protected static final int CHARGE_TIME = 10;
@@ -177,15 +177,15 @@ public class OmniAcceleratorItem extends BundleItem implements InkPowered, Exten
 	}
 	
 	@Override
-	public ExtendedItemBarProvider.BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
+	public ExtendedItemBar.BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
 		if (player == null || !player.isUsingItem())
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		var activeStack = player.getItemInHand(player.getUsedItemHand());
 		if (activeStack != stack)
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		var progress = Math.round(Mth.clampedLerp(0, 13, ((float) player.getTicksUsingItem() / CHARGE_TIME)));
-		return new ExtendedItemBarProvider.BarSignature(2, 13, 13, progress, 1, 0xFFFFFFFF, 2, ExtendedItemBarProvider.DEFAULT_BACKGROUND_COLOR);
+		return new ExtendedItemBar.BarSignature(2, 13, 13, progress, 1, 0xFFFFFFFF, 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
 	}
 }

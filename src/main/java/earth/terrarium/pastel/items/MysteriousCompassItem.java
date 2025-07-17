@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items;
 
 import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.items.magic_items.StructureCompassItem;
 import earth.terrarium.pastel.registries.PastelAdvancements;
 import earth.terrarium.pastel.registries.PastelStructureTags;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MysteriousCompassItem extends StructureCompassItem implements SlotBackgroundEffectProvider {
+public class MysteriousCompassItem extends StructureCompassItem implements SlotBackgroundEffect {
 
 	public MysteriousCompassItem(Properties settings) {
 		super(settings, PastelStructureTags.MYSTERIOUS_COMPASS_LOCATED);

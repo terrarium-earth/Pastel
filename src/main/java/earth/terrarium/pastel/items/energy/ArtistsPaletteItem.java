@@ -6,7 +6,7 @@ import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.energy.storage.TotalCappedElementalMixingInkStorage;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.items.trinkets.PastelTrinketItem;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ArtistsPaletteItem extends PastelTrinketItem implements InkStorageItem<TotalCappedElementalMixingInkStorage>, LoomPatternProvider, ExtendedItemBarProvider {
+public class ArtistsPaletteItem extends PastelTrinketItem implements InkStorageItem<TotalCappedElementalMixingInkStorage>, LoomPatternProvider, ExtendedItemBar {
 	
 	private final long maxEnergyTotal;
 	
@@ -78,12 +78,12 @@ public class ArtistsPaletteItem extends PastelTrinketItem implements InkStorageI
 	
 	
 	@Override
-	public ExtendedItemBarProvider.BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
+	public ExtendedItemBar.BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
 		var storage = getEnergyStorage(stack);
 		var colors = new ArrayList<InkColor>();
 		
 		if (player == null || storage.isEmpty())
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		var time = player.level().getGameTime() % 864000;
 		
@@ -95,10 +95,10 @@ public class ArtistsPaletteItem extends PastelTrinketItem implements InkStorageI
 		var progress = Support.getSensiblePercent(storage.getCurrentTotal(), storage.getMaxTotal(), 14);
 		if (colors.size() == 1) {
 			var color = colors.getFirst();
-			return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, color.getColorInt() | 0xFF000000, 2, DEFAULT_BACKGROUND_COLOR);
+			return new ExtendedItemBar.BarSignature(1, 13, 14, progress, 1, color.getColorInt() | 0xFF000000, 2, DEFAULT_BACKGROUND_COLOR);
 		}
 
-		if(colors.isEmpty()) return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, 0xFF000000, 2, DEFAULT_BACKGROUND_COLOR);
+		if(colors.isEmpty()) return new ExtendedItemBar.BarSignature(1, 13, 14, progress, 1, 0xFF000000, 2, DEFAULT_BACKGROUND_COLOR);
 
 		var delta = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
 		var curColor = colors.get((int) (time % (30L * colors.size()) / 30));
@@ -108,7 +108,7 @@ public class ArtistsPaletteItem extends PastelTrinketItem implements InkStorageI
 		var blendFactor = (((float) time + delta) % 30) / 30F;
 		var blendedColor = ColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
 		
-		return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
+		return new ExtendedItemBar.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
 	}
 	
 }

@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import earth.terrarium.pastel.api.energy.InkStorageItem;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.blocks.InWorldInteractionBlock;
 import earth.terrarium.pastel.registries.PastelBlockEntities;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class CrystallarieumBlock extends InWorldInteractionBlock implements SlotBackgroundEffectProvider {
+public class CrystallarieumBlock extends InWorldInteractionBlock implements SlotBackgroundEffect {
 
 	public static final MapCodec<CrystallarieumBlock> CODEC = simpleCodec(CrystallarieumBlock::new);
 

@@ -2,7 +2,7 @@ package earth.terrarium.pastel.items.trinkets;
 
 import com.google.common.collect.Multimap;
 import earth.terrarium.pastel.PastelCommon;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.attachments.data.azure_dike.AzureDikeProvider;
 import earth.terrarium.pastel.registries.PastelEntityAttributes;
 import earth.terrarium.pastel.registries.PastelItems;
@@ -24,7 +24,7 @@ import top.theillusivec4.curios.api.SlotContext;
 
 import java.util.List;
 
-public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implements SlotBackgroundEffectProvider {
+public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implements SlotBackgroundEffect {
 
 	public static final int HARMFUL_EFFECT_COST = 5;
 	public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon.locate("nectar_gloves_sleep");

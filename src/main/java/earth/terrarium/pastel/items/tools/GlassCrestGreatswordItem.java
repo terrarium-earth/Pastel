@@ -5,8 +5,8 @@ import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.SplitDamageHandler;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.sound.GreatswordChargingSoundInstance;
@@ -41,7 +41,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDamageHandler, ExtendedItemBarProvider, SlotBackgroundEffectProvider, InkPowered {
+public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDamageHandler, ExtendedItemBar, SlotBackgroundEffect, InkPowered {
 	
 	private static final InkCost GROUND_SLAM_COST = new InkCost(InkColors.WHITE, 25);
 	public static final float MAGIC_DAMAGE_SHARE = 0.25F;
@@ -162,15 +162,15 @@ public class GlassCrestGreatswordItem extends GreatswordItem implements SplitDam
 	@Override
 	public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
 		if (player == null || !player.isUsingItem())
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		var activeStack = player.getItemInHand(player.getUsedItemHand());
 		if (activeStack != stack)
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		
 		var progress = Math.round(Mth.clampedLerp(0, 13, ((float) player.getTicksUsingItem() / GROUND_SLAM_CHARGE_TICKS)));
-		return new BarSignature(2, 13, 13, progress, 1, 0xFFFFFFFF, 2, ExtendedItemBarProvider.DEFAULT_BACKGROUND_COLOR);
+		return new BarSignature(2, 13, 13, progress, 1, 0xFFFFFFFF, 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
 	}
 	
 	@Override

@@ -1,12 +1,12 @@
 package earth.terrarium.pastel.items.misc;
 
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.items.ItemWithTooltip;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public class AetherVestigesItem extends ItemWithTooltip implements SlotBackgroundEffectProvider {
+public class AetherVestigesItem extends ItemWithTooltip implements SlotBackgroundEffect {
 
 	public AetherVestigesItem(Properties settings, String tooltip) {
 		super(settings, tooltip);

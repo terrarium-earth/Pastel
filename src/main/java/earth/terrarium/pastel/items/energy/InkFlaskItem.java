@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.energy.InkStorageItem;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.storage.SingleInkStorage;
 import earth.terrarium.pastel.api.item.LoomPatternProvider;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelBannerPatterns;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class InkFlaskItem extends Item implements InkStorageItem<SingleInkStorage>, LoomPatternProvider, ExtendedItemBarProvider {
+public class InkFlaskItem extends Item implements InkStorageItem<SingleInkStorage>, LoomPatternProvider, ExtendedItemBar {
 	
 	private final long maxEnergy;
 	
@@ -83,10 +83,10 @@ public class InkFlaskItem extends Item implements InkStorageItem<SingleInkStorag
 		var storage = getEnergyStorage(stack);
 		
 		if (storage.isEmpty())
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		var color = storage.getStoredColor();
 		var progress = Support.getSensiblePercent(storage.getCurrentTotal(), storage.getMaxTotal(), 14);
-		return new BarSignature(1, 13, 14, progress, 1, color.getColorInt(), 2, ExtendedItemBarProvider.DEFAULT_BACKGROUND_COLOR);
+		return new BarSignature(1, 13, 14, progress, 1, color.getColorInt(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
 	}
 }

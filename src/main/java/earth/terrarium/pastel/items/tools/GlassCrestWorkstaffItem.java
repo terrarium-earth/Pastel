@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.tools;
 import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.components.WorkstaffComponent;
 import earth.terrarium.pastel.entity.entity.MiningProjectileEntity;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgroundEffectProvider {
+public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgroundEffect {
     
     public static final int COOLDOWN_DURATION_TICKS = 10;
     public static final InkCost PROJECTILE_COST = new InkCost(InkColors.WHITE, 50); // TODO: make pricier once ink networking is in
@@ -72,9 +72,9 @@ public class GlassCrestWorkstaffItem extends WorkstaffItem implements SlotBackgr
     }
 	
 	@Override
-	public SlotBackgroundEffectProvider.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
+	public SlotBackgroundEffect.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
 		var usable = InkPowered.hasAvailableInk(player, PROJECTILE_COST);
-		return usable ? SlotBackgroundEffectProvider.SlotEffect.BORDER_FADE : SlotBackgroundEffectProvider.SlotEffect.NONE;
+		return usable ? SlotBackgroundEffect.SlotEffect.BORDER_FADE : SlotBackgroundEffect.SlotEffect.NONE;
 	}
 	
 	@Override

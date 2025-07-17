@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.energy;
 import earth.terrarium.pastel.api.energy.InkStorageItem;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.storage.IndividualCappedInkStorage;
-import earth.terrarium.pastel.api.render.ExtendedItemBarProvider;
+import earth.terrarium.pastel.api.render.ExtendedItemBar;
 import earth.terrarium.pastel.helpers.data.ColorHelper;
 import earth.terrarium.pastel.helpers.Support;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InkAssortmentItem extends Item implements InkStorageItem<IndividualCappedInkStorage>, ExtendedItemBarProvider {
+public class InkAssortmentItem extends Item implements InkStorageItem<IndividualCappedInkStorage>, ExtendedItemBar {
 	
 	private final long maxEnergy;
 	
@@ -63,12 +63,12 @@ public class InkAssortmentItem extends Item implements InkStorageItem<Individual
 	}
 	
 	@Override
-	public ExtendedItemBarProvider.BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
+	public ExtendedItemBar.BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
 		var storage = getEnergyStorage(stack);
 		var colors = new ArrayList<InkColor>();
 		
 		if (player == null || storage.isEmpty())
-			return ExtendedItemBarProvider.PASS;
+			return ExtendedItemBar.PASS;
 		
 		var time = player.level().getGameTime() % 864000;
 		
@@ -80,7 +80,7 @@ public class InkAssortmentItem extends Item implements InkStorageItem<Individual
 		var progress = Support.getSensiblePercent(storage.getCurrentTotal(), storage.getMaxTotal(), 14);
 		if (colors.size() == 1) {
 			var color = colors.getFirst();
-			return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, ColorHelper.colorVecToRGB(color.getColorVec()) | 0xFF000000, 2, DEFAULT_BACKGROUND_COLOR);
+			return new ExtendedItemBar.BarSignature(1, 13, 14, progress, 1, ColorHelper.colorVecToRGB(color.getColorVec()) | 0xFF000000, 2, DEFAULT_BACKGROUND_COLOR);
 		}
 		
 		var delta = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
@@ -91,6 +91,6 @@ public class InkAssortmentItem extends Item implements InkStorageItem<Individual
 		var blendFactor = (((float) time + delta) % 30) / 30F;
 		var blendedColor = ColorHelper.interpolate(curColor.getTextColorVec(), nextColor.getTextColorVec(), blendFactor);
 		
-		return new ExtendedItemBarProvider.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
+		return new ExtendedItemBar.BarSignature(1, 13, 14, progress, 1, blendedColor, 2, DEFAULT_BACKGROUND_COLOR);
 	}
 }

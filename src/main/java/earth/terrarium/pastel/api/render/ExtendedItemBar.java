@@ -5,7 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface ExtendedItemBarProvider {
+public interface ExtendedItemBar {
 	
 	BarSignature PASS = new BarSignature(0, 0, 0, 0, 0, 0);
 	

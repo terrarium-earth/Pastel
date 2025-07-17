@@ -3,7 +3,7 @@ package earth.terrarium.pastel.items.tools;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.MergeableItem;
 import earth.terrarium.pastel.api.item.SlotReservingItem;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.entity.entity.DragonTalonEntity;
 import earth.terrarium.pastel.registries.PastelDamageTypes;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class DragonTalonItem extends MalachiteBidentItem implements MergeableItem, SlotReservingItem, SlotBackgroundEffectProvider {
+public class DragonTalonItem extends MalachiteBidentItem implements MergeableItem, SlotReservingItem, SlotBackgroundEffect {
 	
 	private final ItemAttributeModifiers modifiers;
 	
@@ -189,8 +189,8 @@ public class DragonTalonItem extends MalachiteBidentItem implements MergeableIte
 	}
 	
 	@Override
-	public SlotBackgroundEffectProvider.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
-		return SlotBackgroundEffectProvider.SlotEffect.BORDER_FADE;
+	public SlotBackgroundEffect.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
+		return SlotBackgroundEffect.SlotEffect.BORDER_FADE;
 	}
 	
 	@Override

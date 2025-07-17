@@ -4,7 +4,7 @@ import earth.terrarium.pastel.api.energy.InkCost;
 import earth.terrarium.pastel.api.energy.InkPowered;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.helpers.enchantments.Ench;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 // riptide w/o weather requirement; damages enemies on touch; iframes?
-public class FerociousBidentItem extends MalachiteBidentItem implements SlotBackgroundEffectProvider, InkPowered {
+public class FerociousBidentItem extends MalachiteBidentItem implements SlotBackgroundEffect, InkPowered {
 	
 	public static final InkCost RIPTIDE_COST = new InkCost(InkColors.WHITE, 10);
 	public static final int BUILTIN_RIPTIDE_LEVEL = 1;
@@ -87,9 +87,9 @@ public class FerociousBidentItem extends MalachiteBidentItem implements SlotBack
 	}
 	
 	@Override
-	public SlotBackgroundEffectProvider.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
+	public SlotBackgroundEffect.SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
 		var usable = InkPowered.hasAvailableInk(player, RIPTIDE_COST);
-		return usable ? SlotBackgroundEffectProvider.SlotEffect.BORDER_FADE : SlotBackgroundEffectProvider.SlotEffect.NONE;
+		return usable ? SlotBackgroundEffect.SlotEffect.BORDER_FADE : SlotBackgroundEffect.SlotEffect.NONE;
 	}
 	
 	@Override

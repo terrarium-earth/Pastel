@@ -1,6 +1,6 @@
 package earth.terrarium.pastel.items.food;
 
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.items.conditional.CloakedItem;
 import earth.terrarium.pastel.registries.PastelMobEffects;
 import net.minecraft.ChatFormatting;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class NectardewBurgeonItem extends CloakedItem implements SlotBackgroundEffectProvider {
+public class NectardewBurgeonItem extends CloakedItem implements SlotBackgroundEffect {
 
     private final Component lore;
 

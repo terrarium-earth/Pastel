@@ -1,7 +1,7 @@
 package earth.terrarium.pastel.items.tools;
 
 import earth.terrarium.pastel.api.item.SleepAlteringItem;
-import earth.terrarium.pastel.api.render.SlotBackgroundEffectProvider;
+import earth.terrarium.pastel.api.render.SlotBackgroundEffect;
 import earth.terrarium.pastel.attachments.data.MiscPlayerData;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
 import earth.terrarium.pastel.registries.PastelMobEffects;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class SoothingBouquetItem extends Item implements SleepAlteringItem, SlotBackgroundEffectProvider {
+public class SoothingBouquetItem extends Item implements SleepAlteringItem, SlotBackgroundEffect {
 
     private static final MutableComponent TOOLTIP = Component.translatable("item.pastel.soothing_bouquet.tooltip");
 
