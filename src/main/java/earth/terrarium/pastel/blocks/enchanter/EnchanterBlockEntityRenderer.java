@@ -9,9 +9,12 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import org.joml.Math;
+import org.joml.Quaternionf;
 
 public class EnchanterBlockEntityRenderer implements BlockEntityRenderer<EnchanterBlockEntity> {
 
@@ -65,15 +68,22 @@ public class EnchanterBlockEntityRenderer implements BlockEntityRenderer<Enchant
 		// The Experience Item rendered in the air
 		ItemStack experienceItemStack = blockEntity.getItem(1);
 		if (!experienceItemStack.isEmpty()) {
-			float timeWithTickDelta = (blockEntity.getLevel().getGameTime() % 50000) + tickDelta;
-			float scale = 0.5F + (float) (Math.sin(timeWithTickDelta / 8.0) / 8.0);
-			
+			float t = (blockEntity.getLevel().getGameTime() % 50000) + tickDelta;
+
+			final Vec3 cameraPos = dispatcher.camera.getPosition();
+			var refPos = blockEntity.getBlockPos().getCenter();
+			var xOffset = refPos.x - cameraPos.x;
+			var zOffset = refPos.z - cameraPos.z;
+
+			Quaternionf rot = Axis.YP.rotation((float) Mth.atan2(xOffset, zOffset));
+
 			poseStack.pushPose();
-			poseStack.translate(0.5D, 2.5D, 0.5D);
-			poseStack.mulPose(dispatcher.camera.rotation());
-			poseStack.mulPose(Axis.YP.rotationDegrees(180.0F));
-			poseStack.scale(scale, scale, scale);
-			
+			poseStack.translate(0.5D, 2.5D + Mth.sin(t / 15F) / 5F, 0.5D);
+			poseStack.mulPose(rot);
+
+			if (cameraPos.closerThan(refPos, 9))
+				poseStack.mulPose(Axis.YP.rotationDegrees(Math.clamp(0F, 360F, (t * 10) % 1800)));
+
 			Minecraft.getInstance().getItemRenderer().renderStatic(
 					experienceItemStack, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT,
 					overlay, poseStack, vertexConsumerProvider, blockEntity.getLevel(), 0);

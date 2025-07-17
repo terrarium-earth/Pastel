@@ -37,10 +37,6 @@ public class KnowledgeGemItem extends Item implements LoomPatternProvider {
 	
 	private static final int DEFAULT_MAX = 10000;
 	
-	// these are copies from the item model file
-	// and specify the sprite used for its texture
-	protected static final int[] TIERS = {1, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000};
-	
 	public KnowledgeGemItem(Properties settings) {
 		super(settings);
 	}
@@ -158,19 +154,6 @@ public class KnowledgeGemItem extends Item implements LoomPatternProvider {
 			playerEntity.giveExperiencePoints(-experience);
 			return true;
 		}
-	}
-	
-	public boolean changedDisplayTier(int currentStoredExperience, int destinationStoredExperience) {
-		return getDisplayTierForExperience(currentStoredExperience) != getDisplayTierForExperience(destinationStoredExperience);
-	}
-	
-	public int getDisplayTierForExperience(int experience) {
-		for (int i = 0; i < TIERS.length; i++) {
-			if (experience < TIERS[i]) {
-				return i;
-			}
-		}
-		return TIERS.length;
 	}
 	
 	@Override

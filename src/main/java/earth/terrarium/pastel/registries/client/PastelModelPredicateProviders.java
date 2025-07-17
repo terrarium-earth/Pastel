@@ -274,13 +274,16 @@ public class PastelModelPredicateProviders {
 	}
 
 	private static void registerKnowledgeDropPredicates(Item item) {
-		ItemProperties.register(item, ResourceLocation.parse("stored_experience_10000"), (stack, world, entity, i) -> {
+		ItemProperties.register(item, ResourceLocation.parse("fill"),
+				(stack, world, entity, i) -> {
+
 			if (world == null)
 				return 0F;
 
 			var storage = stack.getCapability(PastelCapabilities.Misc.XP, world.registryAccess());
             assert storage!=null;
-            return storage.getStoredAmount() / 10000F;
+            return (float) storage.getStoredAmount() / Math.min(storage.getCapacity(), 1000000);
+			// Listen if you have over a million xp it is full. It just is.
 		});
 	}
 
