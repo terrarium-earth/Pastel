@@ -425,7 +425,7 @@ public class PastelItems {
     public static final DeferredItem<Item> AETHER_VESTIGES = register(simple(item("aether_vestiges", () -> new AetherVestigesItem(IS.of(1, Rarity.EPIC).fireResistant(), "item.pastel.aether_vestiges.tooltip"), InkColors.WHITE)));
 
     public static final DeferredItem<Item> QUITOXIC_POWDER = register(simple(item("quitoxic_powder", () -> new CloakedItem(IS.of(), PastelAdvancements.REVEAL_QUITOXIC_REEDS, PURPLE_DYE), InkColors.PURPLE)));
-    public static final DeferredItem<Item> STORM_STONE = register(simple(item("storm_stone", () -> new StormStoneItem(IS.of(), PastelAdvancements.REVEAL_STORM_STONES, YELLOW_DYE), InkColors.LIGHT_BLUE)));
+    public static final DeferredItem<Item> STORM_STONE = register(simple(item("storm_stone", () -> new StormStoneItem(IS.of()), InkColors.LIGHT_BLUE)));
     public static final DeferredItem<Item> MERMAIDS_GEM = register(simple(item("mermaids_gem", () -> new ItemNameBlockItem(PastelBlocks.MERMAIDS_BRUSH.get(), IS.of().component(PastelDataComponentTypes.MERMAIDS_GEM, SimpleFluidContent.copyOf(new FluidStack(Fluids.WATER, 1000)))), InkColors.YELLOW)));
     public static final DeferredItem<CloakedItem> STAR_FRAGMENT = register(simple(item("star_fragment", () -> new CloakedItem(IS.of(16), PastelAdvancements.UNLOCK_SHOOTING_STARS, PURPLE_DYE), InkColors.PURPLE)));
     public static final DeferredItem<Item> STARDUST = register(simple(item("stardust", () -> new CloakedItemWithLoomPattern(IS.of(), PastelAdvancements.UNLOCK_SHOOTING_STARS, PURPLE_DYE, PastelBannerPatterns.SHIMMER), InkColors.PURPLE)));

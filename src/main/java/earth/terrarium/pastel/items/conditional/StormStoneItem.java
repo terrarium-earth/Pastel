@@ -15,10 +15,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.phys.Vec3;
 
-public class StormStoneItem extends CloakedItem implements DamageAwareItem {
+public class StormStoneItem extends Item implements DamageAwareItem {
 	
-	public StormStoneItem(Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
-		super(settings, cloakAdvancementIdentifier, cloakItem);
+	public StormStoneItem(Properties settings) {
+		super(settings);
 	}
 	
 	@Override

@@ -36,7 +36,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class StuckStormStoneBlock extends HorizontalDirectionalBlock implements RevelationAware {
+public class StuckStormStoneBlock extends HorizontalDirectionalBlock {
 
 	public static final MapCodec<StuckStormStoneBlock> CODEC = simpleCodec(StuckStormStoneBlock::new);
 
@@ -44,7 +44,6 @@ public class StuckStormStoneBlock extends HorizontalDirectionalBlock implements 
 	
 	public StuckStormStoneBlock(Properties settings) {
 		super(settings);
-		RevelationAware.register(this);
 	}
 
 	@Override
@@ -100,37 +99,8 @@ public class StuckStormStoneBlock extends HorizontalDirectionalBlock implements 
 	}
 	
 	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return PastelAdvancements.REVEAL_STORM_STONES;
-	}
-	
-	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-		if (context instanceof EntityCollisionContext entityShapeContext) {
-			Entity contextEntity = entityShapeContext.getEntity();
-			if (contextEntity instanceof Player player) {
-				if (this.isVisibleTo(player)) {
-					return SHAPE;
-				} else {
-					return Shapes.empty();
-				}
-			}
-		}
-		return Shapes.block(); // like breaking particles
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		for (Direction direction : Direction.Plane.HORIZONTAL) {
-			map.put(this.defaultBlockState().setValue(FACING, direction), Blocks.AIR.defaultBlockState());
-		}
-		return map;
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return null;
+		return SHAPE;
 	}
 	
 	/**

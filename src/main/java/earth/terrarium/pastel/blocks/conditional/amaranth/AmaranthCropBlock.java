@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class AmaranthCropBlock extends TallCropBlock implements RevelationAware {
+public class AmaranthCropBlock extends TallCropBlock {
 
 	public static final MapCodec<AmaranthCropBlock> CODEC = simpleCodec(AmaranthCropBlock::new);
 	protected static final int LAST_SINGLE_BLOCK_AGE = 2;
@@ -44,7 +44,6 @@ public class AmaranthCropBlock extends TallCropBlock implements RevelationAware 
 	
 	public AmaranthCropBlock(Properties settings) {
 		super(settings, LAST_SINGLE_BLOCK_AGE);
-		RevelationAware.register(this);
 	}
 
 	@Override
@@ -60,50 +59,6 @@ public class AmaranthCropBlock extends TallCropBlock implements RevelationAware 
 	@Override
 	protected ItemLike getBaseSeedId() {
         return PastelItems.AMARANTH_GRAINS.get();
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return PastelAdvancements.REVEAL_AMARANTH;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		BlockState smallFern = Blocks.FERN.defaultBlockState();
-		BlockState largeFernLower = Blocks.LARGE_FERN.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER);
-		BlockState largeFernUpper = Blocks.LARGE_FERN.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER);
-		
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		for (int age = 0; age <= LAST_SINGLE_BLOCK_AGE; age++) {
-			map.put(this.withAgeAndHalf(age, DoubleBlockHalf.LOWER), smallFern);
-			map.put(this.withAgeAndHalf(age, DoubleBlockHalf.UPPER), smallFern);
-		}
-		for (int age = LAST_SINGLE_BLOCK_AGE + 1; age <= MAX_AGE; age++) {
-			map.put(this.withAgeAndHalf(age, DoubleBlockHalf.LOWER), largeFernLower);
-			map.put(this.withAgeAndHalf(age, DoubleBlockHalf.UPPER), largeFernUpper);
-		}
-		return map;
-	}
-	
-	@Override
-	public @Nullable Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.LARGE_FERN.asItem());
-	}
-	
-	@Override
-	public void onUncloak() {
-		if (PastelColorProviders.amaranthCropBlockColorProvider != null && PastelColorProviders.amaranthCropItemColorProvider != null) {
-			PastelColorProviders.amaranthCropBlockColorProvider.setShouldApply(false);
-			PastelColorProviders.amaranthCropItemColorProvider.setShouldApply(false);
-		}
-	}
-	
-	@Override
-	public void onCloak() {
-		if (PastelColorProviders.amaranthCropBlockColorProvider != null && PastelColorProviders.amaranthCropItemColorProvider != null) {
-			PastelColorProviders.amaranthCropBlockColorProvider.setShouldApply(true);
-			PastelColorProviders.amaranthCropItemColorProvider.setShouldApply(true);
-		}
 	}
 	
 	@Override

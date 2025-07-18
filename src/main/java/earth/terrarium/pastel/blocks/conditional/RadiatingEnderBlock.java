@@ -19,33 +19,17 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import java.util.List;
 import java.util.Map;
 
-public class RadiatingEnderBlock extends Block implements RevelationAware {
+public class RadiatingEnderBlock extends Block {
 
 	public static final MapCodec<RadiatingEnderBlock> CODEC = simpleCodec(RadiatingEnderBlock::new);
 
 	public RadiatingEnderBlock(Properties settings) {
 		super(settings);
-		RevelationAware.register(this);
 	}
 
 	@Override
 	public MapCodec<? extends RadiatingEnderBlock> codec() {
 		return CODEC;
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return PastelAdvancements.REVEAL_RADIATING_ENDER;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		return Map.of(this.defaultBlockState(), Blocks.COBBLESTONE.defaultBlockState());
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.COBBLESTONE.asItem());
 	}
 
 	@Override

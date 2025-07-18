@@ -1,29 +1,23 @@
-package earth.terrarium.pastel.blocks.conditional.blood_orchid;
+package earth.terrarium.pastel.blocks.conditional;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
-import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.progression.PastelAdvancementCriteria;
 import earth.terrarium.pastel.registries.PastelItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.SuspiciousStewEffects;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -33,17 +27,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.Hashtable;
-import java.util.Map;
-
-public class BloodOrchidBlock extends FlowerBlock implements BonemealableBlock, RevelationAware {
+public class BloodOrchidBlock extends FlowerBlock implements BonemealableBlock {
 
 	public static final MapCodec<BloodOrchidBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			EFFECTS_FIELD.forGetter(FlowerBlock::getSuspiciousEffects),
 			propertiesCodec()
 	).apply(instance, BloodOrchidBlock::new));
 
-	public static final ResourceLocation ADVANCEMENT_IDENTIFIER = PastelCommon.locate("midgame/collect_blood_orchid_petal");
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_5;
 	
 	public BloodOrchidBlock(Holder<MobEffect> stewEffect, float effectLengthInSeconds, Properties settings) {
@@ -53,7 +43,6 @@ public class BloodOrchidBlock extends FlowerBlock implements BonemealableBlock, 
 	public BloodOrchidBlock(SuspiciousStewEffects stewEffects, BlockBehaviour.Properties settings) {
 		super(stewEffects, settings);
 		this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
-		RevelationAware.register(this);
 	}
 
 	@Override
@@ -96,25 +85,6 @@ public class BloodOrchidBlock extends FlowerBlock implements BonemealableBlock, 
 			}
 		}
 		return InteractionResult.PASS;
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return ADVANCEMENT_IDENTIFIER;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		for (int i = 0; i <= BlockStateProperties.MAX_AGE_5; i++) {
-			map.put(this.defaultBlockState().setValue(AGE, i), Blocks.RED_TULIP.defaultBlockState());
-		}
-		return map;
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return null; // does not exist in item form
 	}
 	
 	@Override

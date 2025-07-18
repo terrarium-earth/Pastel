@@ -1,0 +1,11 @@
+{
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_storm_stones"
+  },
+  "type": {
+    "type": "databank:block",
+    "hidden_as": "minecraft:air",
+    "original": "pastel:stuck_storm_stone"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_storm_stones"
+  },
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "minecraft:yellow_dye",
+    "original": "pastel:storm_stone"
+  }
+}

@@ -26,9 +26,7 @@ import earth.terrarium.pastel.blocks.conditional.RadiatingEnderBlock;
 import earth.terrarium.pastel.blocks.conditional.StuckStormStoneBlock;
 import earth.terrarium.pastel.blocks.conditional.amaranth.AmaranthBushelBlock;
 import earth.terrarium.pastel.blocks.conditional.amaranth.AmaranthCropBlock;
-import earth.terrarium.pastel.blocks.conditional.amaranth.PottedAmaranthBushelBlock;
-import earth.terrarium.pastel.blocks.conditional.blood_orchid.BloodOrchidBlock;
-import earth.terrarium.pastel.blocks.conditional.blood_orchid.PottedBloodOrchidBlock;
+import earth.terrarium.pastel.blocks.conditional.BloodOrchidBlock;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredFenceBlock;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredFenceGateBlock;
 import earth.terrarium.pastel.blocks.conditional.colored_tree.ColoredLeavesBlock;
@@ -1692,13 +1690,13 @@ public class PastelBlocks {
 	}
 
 	public static final DeferredBlock<Block> AMARANTH_BUSHEL = register(cross(blockWithItem("amaranth_bushel", () -> new AmaranthBushelBlock(PastelMobEffects.NOURISHING, 8, settings(MapColor.NONE, SoundType.CROP, 0.0F).noCollission()), InkColors.RED)).withItemModel(PastelModelHelper::registerItemModel));
-	public static final DeferredBlock<Block> POTTED_AMARANTH_BUSHEL = register(pottedPlant(block("potted_amaranth_bushel", () -> new PottedAmaranthBushelBlock(PastelBlocks.AMARANTH_BUSHEL.get(), pottedPlant())), false));
+	public static final DeferredBlock<Block> POTTED_AMARANTH_BUSHEL = register(pottedPlant(block("potted_amaranth_bushel", () -> new FlowerPotBlock(PastelBlocks.AMARANTH_BUSHEL.get(), pottedPlant())), false));
 
 	public static final DeferredBlock<Block> RESONANT_LILY = register(simplePlant(blockWithItem("resonant_lily", () -> new ResonantLilyBlock(MobEffects.REGENERATION, 5, BlockBehaviour.Properties.ofFullCopy(POPPY).mapColor(MapColor.SNOW)), InkColors.GREEN)));
 	public static final DeferredBlock<Block> POTTED_RESONANT_LILY = register(pottedPlant(block("potted_resonant_lily", () -> new PottedResonantLilyBlock(PastelBlocks.RESONANT_LILY.get(), pottedPlant())), false));
 
 	public static final DeferredBlock<Block> BLOOD_ORCHID = register(cutout(blockWithItem("blood_orchid", () -> new BloodOrchidBlock(PastelMobEffects.FRENZY, 10, BlockBehaviour.Properties.ofFullCopy(POPPY).offsetType(BlockBehaviour.OffsetType.NONE).randomTicks()), InkColors.RED)).withBlockItemModel((ctx, block) -> PastelModelHelper.registerBlockTexturedItemModel(ctx, block, "5")).withBlockModel((ctx, block) -> MultiVariantGenerator.multiVariant(block).with(PropertyDispatch.property(BloodOrchidBlock.AGE).generate(stage -> PastelModelHelper.createModelVariant(PastelTexturedModels.cross(b -> b, stage.toString()).createWithSuffix(block, stage.toString(), ctx.modelOutput))))));
-	public static final DeferredBlock<Block> POTTED_BLOOD_ORCHID = register(cutout(singleton(block("potted_blood_orchid", () -> new PottedBloodOrchidBlock(PastelBlocks.BLOOD_ORCHID.get(), pottedPlant())), PastelTexturedModels.flowerPotCross(b -> PastelBlocks.BLOOD_ORCHID.get(), "5", false))));
+	public static final DeferredBlock<Block> POTTED_BLOOD_ORCHID = register(cutout(singleton(block("potted_blood_orchid", () -> new FlowerPotBlock(PastelBlocks.BLOOD_ORCHID.get(), pottedPlant())), PastelTexturedModels.flowerPotCross(b -> PastelBlocks.BLOOD_ORCHID.get(), "5", false))));
 
 	public static DeferredBlock<Block> registerColoredSapling(String name, InkColor color, TreeGrower generator) {
 		return register(simplePlant(blockWithItem(name, () -> new ColoredSaplingBlock(copyWithMapColor(OAK_SAPLING, color.getDyeColor().orElse(DyeColor.LIME).getMapColor()), color, generator), color)));
