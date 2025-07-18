@@ -6,11 +6,11 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(AbstractArrow.class)
 public interface PersistentProjectileEntityAccessor {
-	
-	@Accessor
-	int getLife();
-	
-	@Accessor
-	void setLife(int life);
-	
+
+    @Accessor
+    int getLife();
+
+    @Accessor
+    void setLife(int life);
+
 }

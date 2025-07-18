@@ -10,11 +10,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AnvilBlock.class)
 public abstract class AnvilBlockMixin {
-	
-	@Inject(at = @At("HEAD"), method = "damage", cancellable = true)
-	private static void makeBedrockAnvilUnbreakable(BlockState fallingState, CallbackInfoReturnable<BlockState> callbackInfoReturnable) {
-		if (fallingState.is(PastelBlocks.BEDROCK_ANVIL.get())) {
-			callbackInfoReturnable.setReturnValue(fallingState);
-		}
-	}
+
+    @Inject(at = @At("HEAD"), method = "damage", cancellable = true)
+    private static void makeBedrockAnvilUnbreakable(
+        BlockState fallingState, CallbackInfoReturnable<BlockState> callbackInfoReturnable) {
+        if (fallingState.is(PastelBlocks.BEDROCK_ANVIL.get())) {
+            callbackInfoReturnable.setReturnValue(fallingState);
+        }
+    }
 }

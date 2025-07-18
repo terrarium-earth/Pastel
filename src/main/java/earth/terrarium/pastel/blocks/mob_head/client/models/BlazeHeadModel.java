@@ -21,12 +21,13 @@ public class BlazeHeadModel extends PastelSkullModel {
     public static LayerDefinition getTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-        
+
         modelPartData.addOrReplaceChild(
-                PartNames.HEAD,
-                CubeListBuilder.create()
-                        .texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F),
-                PartPose.ZERO
+            PartNames.HEAD,
+            CubeListBuilder.create()
+                           .texOffs(0, 0)
+                           .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F),
+            PartPose.ZERO
         );
 
         return LayerDefinition.create(modelData, 64, 32);

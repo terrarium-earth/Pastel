@@ -21,7 +21,8 @@ public abstract class FarmlandBlockMixin extends Block {
     }
 
     @Inject(method = {"fallOn"}, at = {@At("HEAD")}, cancellable = true)
-    private void onLandedUpon(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo info) {
+    private void onLandedUpon(
+        Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo info) {
         super.fallOn(world, state, pos, entity, fallDistance); // fall damage
 
         // if carrying puff circlet: no trampling

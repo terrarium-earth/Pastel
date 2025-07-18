@@ -22,56 +22,63 @@ import java.util.Map;
 
 public class AmaranthBushelBlock extends FlowerBlock implements RevelationAware {
 
-	public static final MapCodec<AmaranthBushelBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			EFFECTS_FIELD.forGetter(FlowerBlock::getSuspiciousEffects),
-			propertiesCodec()
-	).apply(instance, AmaranthBushelBlock::new));
+    public static final MapCodec<AmaranthBushelBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                                                                                                                  EFFECTS_FIELD.forGetter(FlowerBlock::getSuspiciousEffects),
+                                                                                                                  propertiesCodec()
+                                                                                                              )
+                                                                                                              .apply(
+                                                                                                                  instance,
+                                                                                                                  AmaranthBushelBlock::new
+                                                                                                              ));
 
-	public AmaranthBushelBlock(Holder<MobEffect> stewEffect, float effectLengthInSeconds, BlockBehaviour.Properties settings) {
-		this(makeEffectList(stewEffect, effectLengthInSeconds), settings);
-	}
+    public AmaranthBushelBlock(
+        Holder<MobEffect> stewEffect, float effectLengthInSeconds, BlockBehaviour.Properties settings) {
+        this(makeEffectList(stewEffect, effectLengthInSeconds), settings);
+    }
 
-	public AmaranthBushelBlock(SuspiciousStewEffects stewEffects, BlockBehaviour.Properties settings) {
-		super(stewEffects, settings);
-		RevelationAware.register(this);
-	}
+    public AmaranthBushelBlock(SuspiciousStewEffects stewEffects, BlockBehaviour.Properties settings) {
+        super(stewEffects, settings);
+        RevelationAware.register(this);
+    }
 
-	@Override
-	public MapCodec<? extends AmaranthBushelBlock> codec() {
-		return CODEC;
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return PastelAdvancements.REVEAL_AMARANTH;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		map.put(this.defaultBlockState(), Blocks.FERN.defaultBlockState());
-		return map;
-	}
-	
-	@Override
-	public @Nullable Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.FERN.asItem());
-	}
-	
-	@Override
-	public void onUncloak() {
-		if (PastelColorProviders.amaranthBushelBlockColorProvider != null && PastelColorProviders.amaranthBushelItemColorProvider != null) {
-			PastelColorProviders.amaranthBushelBlockColorProvider.setShouldApply(false);
-			PastelColorProviders.amaranthBushelItemColorProvider.setShouldApply(false);
-		}
-	}
-	
-	@Override
-	public void onCloak() {
-		if (PastelColorProviders.amaranthBushelBlockColorProvider != null && PastelColorProviders.amaranthBushelItemColorProvider != null) {
-			PastelColorProviders.amaranthBushelBlockColorProvider.setShouldApply(true);
-			PastelColorProviders.amaranthBushelItemColorProvider.setShouldApply(true);
-		}
-	}
+    @Override
+    public MapCodec<? extends AmaranthBushelBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public ResourceLocation getCloakAdvancementIdentifier() {
+        return PastelAdvancements.REVEAL_AMARANTH;
+    }
+
+    @Override
+    public Map<BlockState, BlockState> getBlockStateCloaks() {
+        Map<BlockState, BlockState> map = new Hashtable<>();
+        map.put(this.defaultBlockState(), Blocks.FERN.defaultBlockState());
+        return map;
+    }
+
+    @Override
+    public @Nullable Tuple<Item, Item> getItemCloak() {
+        return new Tuple<>(this.asItem(), Blocks.FERN.asItem());
+    }
+
+    @Override
+    public void onUncloak() {
+        if (PastelColorProviders.amaranthBushelBlockColorProvider != null &&
+            PastelColorProviders.amaranthBushelItemColorProvider != null) {
+            PastelColorProviders.amaranthBushelBlockColorProvider.setShouldApply(false);
+            PastelColorProviders.amaranthBushelItemColorProvider.setShouldApply(false);
+        }
+    }
+
+    @Override
+    public void onCloak() {
+        if (PastelColorProviders.amaranthBushelBlockColorProvider != null &&
+            PastelColorProviders.amaranthBushelItemColorProvider != null) {
+            PastelColorProviders.amaranthBushelBlockColorProvider.setShouldApply(true);
+            PastelColorProviders.amaranthBushelItemColorProvider.setShouldApply(true);
+        }
+    }
 
 }

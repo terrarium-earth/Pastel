@@ -10,29 +10,30 @@ import net.neoforged.neoforge.common.EffectCure;
 import java.util.Set;
 
 public class ImmunityStatusEffect extends MobEffect {
-	
-	public ImmunityStatusEffect(MobEffectCategory statusEffectCategory, int color) {
-		super(statusEffectCategory, color);
-	}
 
-	@Override
-	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-		return duration % 5 == 0;
-	}
+    public ImmunityStatusEffect(MobEffectCategory statusEffectCategory, int color) {
+        super(statusEffectCategory, color);
+    }
 
-	@Override
-	public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {}
+    @Override
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+        return duration % 5 == 0;
+    }
 
-	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-		MobEffectHelper.actionImmunity(entity, true);
-		return true;
-	}
-	
-	@Override
-	public void onEffectStarted(LivingEntity entity, int amplifier) {
-		MobEffectHelper.actionImmunity(entity, false);
-	}
+    @Override
+    public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
+    }
+
+    @Override
+    public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+        MobEffectHelper.actionImmunity(entity, true);
+        return true;
+    }
+
+    @Override
+    public void onEffectStarted(LivingEntity entity, int amplifier) {
+        MobEffectHelper.actionImmunity(entity, false);
+    }
 
 
 }

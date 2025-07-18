@@ -7,9 +7,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ImmutableFarmlandBlock extends PastelFarmlandBlock {
 
-	public ImmutableFarmlandBlock(Properties settings, BlockState bareState) {
-		super(settings, bareState);
-	}
+    public ImmutableFarmlandBlock(Properties settings, BlockState bareState) {
+        super(settings, bareState);
+    }
 
 //	@Override
 //	public MapCodec<? extends ImmutableFarmlandBlock> getCodec() {
@@ -17,13 +17,13 @@ public class ImmutableFarmlandBlock extends PastelFarmlandBlock {
 //		return null;
 //	}
 
-	@Override
-	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-	}
+    @Override
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    }
 
-	@Override
-	public boolean isRandomlyTicking(BlockState state) {
-		return false;
-	}
+    @Override
+    public boolean isRandomlyTicking(BlockState state) {
+        return false;
+    }
 
 }

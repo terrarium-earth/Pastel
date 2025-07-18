@@ -14,20 +14,21 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 import java.util.List;
 
 public class FourLeafCloverItem extends CloakedBlockItem implements LoomPatternProvider {
-	
-	public FourLeafCloverItem(Block block, Item.Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
-		super(block, settings, cloakAdvancementIdentifier, cloakItem);
-	}
-	
-	@Override
-	public ResourceKey<BannerPattern> getPattern() {
-		return PastelBannerPatterns.FOUR_LEAF_CLOVER;
-	}
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		addBannerPatternProviderTooltip(tooltip);
-	}
-	
+    public FourLeafCloverItem(
+        Block block, Item.Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
+        super(block, settings, cloakAdvancementIdentifier, cloakItem);
+    }
+
+    @Override
+    public ResourceKey<BannerPattern> getPattern() {
+        return PastelBannerPatterns.FOUR_LEAF_CLOVER;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        addBannerPatternProviderTooltip(tooltip);
+    }
+
 }

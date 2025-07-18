@@ -35,81 +35,86 @@ import java.util.Optional;
  * This also means TitrationBarrelRecipes have to calculate their time using real life seconds, instead of game ticks
  */
 public interface ITitrationBarrelRecipe extends GatedRecipe<FluidRecipeInput<FluidTank>> {
-	
-	ResourceLocation UNLOCK_ADVANCEMENT_IDENTIFIER = PastelCommon.locate("unlocks/blocks/titration_barrel");
-	
-	// Called by the titration barrel when tapped
-	default ItemStack getTitrationResult(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
-		// Dr. Who would be proud
-		if (secondsFermented < 0) {
-			float ageIngameDays = TimeHelper.minecraftDaysFromSeconds(secondsFermented);
-			List<MobEffectInstance> statusEffects = List.of(new MobEffectInstance(MobEffects.INVISIBILITY, 3600, 0));
-			
-			var stack = PastelItems.SUSPICIOUS_BREW.get().getDefaultInstance();
-			stack.set(PastelDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, 0, 0));
-			stack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), statusEffects));
-			LoreHelper.setLore(stack, Component.translatable("lore.pastel.time_travel_tap"));
-			return stack;
-		}
-		
-		return tap(inventory, secondsFermented, downfall);
-	}
-	
-	ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall);
-	
-	Item getTappingItem();
-	
-	FluidIngredient getFluidInput();
-	
-	float getAngelsSharePerMcDay();
-	
-	// the amount of bottles able to get out of a single barrel
-	default int getOutputCountAfterAngelsShare(Level world, float temperature, long secondsFermented) {
-		int originalOutputCount = getResultItem(world.registryAccess()).getCount();
-		
-		if (getFermentationData() == null) {
-			return originalOutputCount;
-		}
-		
-		// Linearly adjust the output count based on angel's share
-		float angelsShareResultCountMod = getAngelsShareResultCountMod(secondsFermented, temperature);
-		if (angelsShareResultCountMod > 0) {
-			return Math.max(1, (int) Math.ceil((originalOutputCount - angelsShareResultCountMod)));
-		} else {
-			return Math.max(1, (int) Math.floor((originalOutputCount - angelsShareResultCountMod)));
-		}
-	}
-	
-	// the amount of fluid that evaporated while fermenting
-	// the higher the temperature in the biome is, the more evaporates
-	// making colder biomes more desirable
-	default float getAngelsShareResultCountMod(long secondsFermented, float temperature) {
-		return Math.max(0.1F, temperature / 10F) * TimeHelper.minecraftDaysFromSeconds(secondsFermented) * getAngelsSharePerMcDay();
-	}
-	
-	@Override
-	default boolean canCraftInDimensions(int width, int height) {
-		return true;
-	}
-	
-	@Override
-	default ItemStack getToastSymbol() {
-		return PastelBlocks.TITRATION_BARREL.get().asItem().getDefaultInstance();
-	}
-	
-	@Override
-	default RecipeType<?> getType() {
-		return PastelRecipeTypes.TITRATION_BARREL;
-	}
-	
-	List<IngredientStack> getIngredientStacks();
-	
-	int getMinFermentationTimeHours();
-	
-	default boolean isFermentingLongEnoughToTap(long secondsFermented) {
-		return secondsFermented / 60 / 60 >= getMinFermentationTimeHours();
-	}
-	
-	FermentationData getFermentationData();
-	
+
+    ResourceLocation UNLOCK_ADVANCEMENT_IDENTIFIER = PastelCommon.locate("unlocks/blocks/titration_barrel");
+
+    // Called by the titration barrel when tapped
+    default ItemStack getTitrationResult(FriendlyStackHandler inventory, long secondsFermented, float downfall) {
+        // Dr. Who would be proud
+        if (secondsFermented < 0) {
+            float ageIngameDays = TimeHelper.minecraftDaysFromSeconds(secondsFermented);
+            List<MobEffectInstance> statusEffects = List.of(new MobEffectInstance(MobEffects.INVISIBILITY, 3600, 0));
+
+            var stack = PastelItems.SUSPICIOUS_BREW.get()
+                                                   .getDefaultInstance();
+            stack.set(PastelDataComponentTypes.BEVERAGE, new BeverageComponent((long) ageIngameDays, 0, 0));
+            stack.set(
+                DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.empty(), statusEffects));
+            LoreHelper.setLore(stack, Component.translatable("lore.pastel.time_travel_tap"));
+            return stack;
+        }
+
+        return tap(inventory, secondsFermented, downfall);
+    }
+
+    ItemStack tap(FriendlyStackHandler inventory, long secondsFermented, float downfall);
+
+    Item getTappingItem();
+
+    FluidIngredient getFluidInput();
+
+    float getAngelsSharePerMcDay();
+
+    // the amount of bottles able to get out of a single barrel
+    default int getOutputCountAfterAngelsShare(Level world, float temperature, long secondsFermented) {
+        int originalOutputCount = getResultItem(world.registryAccess()).getCount();
+
+        if (getFermentationData() == null) {
+            return originalOutputCount;
+        }
+
+        // Linearly adjust the output count based on angel's share
+        float angelsShareResultCountMod = getAngelsShareResultCountMod(secondsFermented, temperature);
+        if (angelsShareResultCountMod > 0) {
+            return Math.max(1, (int) Math.ceil((originalOutputCount - angelsShareResultCountMod)));
+        } else {
+            return Math.max(1, (int) Math.floor((originalOutputCount - angelsShareResultCountMod)));
+        }
+    }
+
+    // the amount of fluid that evaporated while fermenting
+    // the higher the temperature in the biome is, the more evaporates
+    // making colder biomes more desirable
+    default float getAngelsShareResultCountMod(long secondsFermented, float temperature) {
+        return Math.max(0.1F, temperature / 10F) * TimeHelper.minecraftDaysFromSeconds(secondsFermented) *
+               getAngelsSharePerMcDay();
+    }
+
+    @Override
+    default boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    default ItemStack getToastSymbol() {
+        return PastelBlocks.TITRATION_BARREL.get()
+                                            .asItem()
+                                            .getDefaultInstance();
+    }
+
+    @Override
+    default RecipeType<?> getType() {
+        return PastelRecipeTypes.TITRATION_BARREL;
+    }
+
+    List<IngredientStack> getIngredientStacks();
+
+    int getMinFermentationTimeHours();
+
+    default boolean isFermentingLongEnoughToTap(long secondsFermented) {
+        return secondsFermented / 60 / 60 >= getMinFermentationTimeHours();
+    }
+
+    FermentationData getFermentationData();
+
 }

@@ -35,11 +35,12 @@ public class PastelEnchantmentEvents {
     }
 
     private static void applyExuberance(BlockDropsEvent event) {
-        var access = event.getLevel().registryAccess();
+        var access = event.getLevel()
+                          .registryAccess();
         var tool = event.getTool();
 
         event.setDroppedExperience(
-                Math.round(event.getDroppedExperience() * ExuberanceHelper.getExuberanceMod(access, tool)));
+            Math.round(event.getDroppedExperience() * ExuberanceHelper.getExuberanceMod(access, tool)));
     }
 
     private static void inventoryInsertion(BlockDropsEvent event) {
@@ -67,7 +68,8 @@ public class PastelEnchantmentEvents {
             break; // If the remainder is not empty then the player inv is full.
         }
 
-        removed.forEach(e -> event.getDrops().remove(e));
+        removed.forEach(e -> event.getDrops()
+                                  .remove(e));
     }
 
     private static void applyFoundry(BlockDropsEvent event) {
@@ -76,8 +78,10 @@ public class PastelEnchantmentEvents {
         if (!EnchantmentHelper.hasTag(tool, PastelEnchantmentTags.SMELTS_MORE_LOOT))
             return;
 
-        modifyDrops(event, (e, access, stacks) ->
-                FoundryHelper.applyFoundry(e.getLevel(), stacks));
+        modifyDrops(
+            event, (e, access, stacks) ->
+                FoundryHelper.applyFoundry(e.getLevel(), stacks)
+        );
     }
 
     private static void applyResonance(BlockDropsEvent event) {
@@ -86,11 +90,13 @@ public class PastelEnchantmentEvents {
         if (!EnchantmentHelper.hasTag(tool, PastelEnchantmentTags.RESONANT_BLOCK_DROPS))
             return;
 
-        modifyDrops(event, (e, access, stacks) -> {
-            ResonanceProcessor
+        modifyDrops(
+            event, (e, access, stacks) -> {
+                ResonanceProcessor
                     .applyResonance(access, event.getState(), event.getBlockEntity(), stacks);
-            return stacks;
-        });
+                return stacks;
+            }
+        );
     }
 
     private static void applyVoiding(BlockDropsEvent event) {
@@ -100,9 +106,13 @@ public class PastelEnchantmentEvents {
         if (!EnchantmentHelper.hasTag(tool, PastelEnchantmentTags.NO_BLOCK_DROPS))
             return;
 
-        event.getDrops().clear();
-        event.getLevel().sendParticles(ParticleTypes.SMOKE, pos.getX() + 0.5, pos.getY() + 0.5,
-                pos.getZ() + 0.5, 10, 0.5, 0.5, 0.5, 0.05);
+        event.getDrops()
+             .clear();
+        event.getLevel()
+             .sendParticles(
+                 ParticleTypes.SMOKE, pos.getX() + 0.5, pos.getY() + 0.5,
+                 pos.getZ() + 0.5, 10, 0.5, 0.5, 0.5, 0.05
+             );
     }
 
     private static void modifyDrops(BlockDropsEvent event, DropModifier modifier) {
@@ -121,10 +131,10 @@ public class PastelEnchantmentEvents {
     }
 
     private static ItemEntity createItemEntity(ItemStack stack, BlockPos pos, ServerLevel level) {
-        double d0 = (double) EntityType.ITEM.getHeight() / (double)2.0F;
-        double x = (double) pos.getX() + (double)0.5F + Mth.nextDouble(level.random, -0.25F, 0.25F);
-        double y = (double) pos.getY() + (double)0.5F + Mth.nextDouble(level.random, -0.25F, 0.25F) - d0;
-        double z = (double) pos.getZ() + (double)0.5F + Mth.nextDouble(level.random, -0.25F, 0.25F);
+        double d0 = (double) EntityType.ITEM.getHeight() / (double) 2.0F;
+        double x = (double) pos.getX() + (double) 0.5F + Mth.nextDouble(level.random, -0.25F, 0.25F);
+        double y = (double) pos.getY() + (double) 0.5F + Mth.nextDouble(level.random, -0.25F, 0.25F) - d0;
+        double z = (double) pos.getZ() + (double) 0.5F + Mth.nextDouble(level.random, -0.25F, 0.25F);
         var entity = new ItemEntity(level, x, y, z, stack);
         entity.setDefaultPickUpDelay();
         return entity;

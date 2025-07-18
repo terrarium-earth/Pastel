@@ -27,14 +27,16 @@ public class WorldAttenuation {
             time = level.getGameTime();
 
 
-        return Cache.peek(time).orElse(Cache.swap(Data.create(), time));
+        return Cache.peek(time)
+                    .orElse(Cache.swap(Data.create(), time));
     }
 
     public static void tick(Level level, Entity camera, boolean active) {
         if (!active)
             return;
 
-        var camPos = BlockPos.containing(camera.position()).above();
+        var camPos = BlockPos.containing(camera.position())
+                             .above();
         var center = camPos.above(2);
 
         int checked = 0;
@@ -52,26 +54,28 @@ public class WorldAttenuation {
 
             checked++;
 
-            if (!level.getFluidState(check).isEmpty()) {
+            if (!level.getFluidState(check)
+                      .isEmpty()) {
                 volBlocking += 2F;
                 pitchMods += 1;
                 occlusion += 0.5F;
-                volumetrics.add(check.subtract(center).getCenter().normalize().scale(0.25));
+                volumetrics.add(check.subtract(center)
+                                     .getCenter()
+                                     .normalize()
+                                     .scale(0.25));
                 continue;
             }
 
             var state = level.getBlockState(check);
             var hardness = state.getDestroySpeed(level, check);
 
-            if(!state.canOcclude() || state.is(BlockTags.LEAVES)) {
+            if (!state.canOcclude() || state.is(BlockTags.LEAVES)) {
                 volBlocking += 0.5F;
                 volumetry = 0.5F;
-            }
-            else if(hardness > 20F) {
+            } else if (hardness > 20F) {
                 volBlocking += Math.min(5F, hardness / 10F);
                 pitchMods += hardness / 30F;
-            }
-            else if (!state.isAir()) {
+            } else if (!state.isAir()) {
                 volBlocking += 1F;
                 volumetry = 0;
             }
@@ -80,18 +84,24 @@ public class WorldAttenuation {
                 occlusion += (float) Math.min(hardness / Math.sqrt(check.distSqr(center)) / 2, 5F);
             }
 
-            volumetrics = volumetrics.add(check.subtract(center).getCenter().normalize().scale(volumetry));
+            volumetrics = volumetrics.add(check.subtract(center)
+                                               .getCenter()
+                                               .normalize()
+                                               .scale(volumetry));
         }
 
         volumetrics = volumetrics.scale(1.0 / checked);
 
-        if (!level.getFluidState(camPos).isEmpty()) {
+        if (!level.getFluidState(camPos)
+                  .isEmpty()) {
             pitchMods = checked * 0.75F;
             volBlocking *= 1.2F;
             occlusion = pitchMods;
         }
 
-        if (level.getBiome(camPos).is(PastelBiomes.BLACK_LANGAST) || level.getBiome(camPos).is(PastelBiomes.DEEP_BARRENS))
+        if (level.getBiome(camPos)
+                 .is(PastelBiomes.BLACK_LANGAST) || level.getBiome(camPos)
+                                                         .is(PastelBiomes.DEEP_BARRENS))
             occlusion += checked / 2F;
 
         Tracked.VOLUME.remember(volBlocking, checked);
@@ -108,8 +118,7 @@ public class WorldAttenuation {
 
         if (state.isAir()) {
             vol = 1;
-        }
-        else if(!state.canOcclude() || state.is(BlockTags.LEAVES)) {
+        } else if (!state.canOcclude() || state.is(BlockTags.LEAVES)) {
             vol = 0.5F;
         }
 
@@ -120,12 +129,12 @@ public class WorldAttenuation {
 
         private static Data create() {
             return new Data(
-                    Tracked.VOLUME.get() * 2F,
-                    Tracked.PITCH.get(),
-                    Tracked.OCCLUSION.get()  * 1.334F,
-                    Tracked.X.get(),
-                    Tracked.Y.get(),
-                    Tracked.Z.get()
+                Tracked.VOLUME.get() * 2F,
+                Tracked.PITCH.get(),
+                Tracked.OCCLUSION.get() * 1.334F,
+                Tracked.X.get(),
+                Tracked.Y.get(),
+                Tracked.Z.get()
             );
         }
     }
@@ -168,7 +177,8 @@ public class WorldAttenuation {
         }
 
         private void remember(float volBlocking, int checked) {
-            ATTENUATION_DATA.get(this).add(1 - Math.clamp(volBlocking / checked, 0, 1));
+            ATTENUATION_DATA.get(this)
+                            .add(1 - Math.clamp(volBlocking / checked, 0, 1));
         }
 
         private static void remember(Direction.Axis axis, float val) {
@@ -177,7 +187,8 @@ public class WorldAttenuation {
                 case Y -> Y;
                 case Z -> Z;
             };
-            ATTENUATION_DATA.get(tracked).add(val);
+            ATTENUATION_DATA.get(tracked)
+                            .add(val);
         }
 
         private float get() {

@@ -15,33 +15,37 @@ import java.util.Map;
 
 public class FourLeafCloverBlock extends CloverBlock implements RevelationAware {
 
-	public static final MapCodec<FourLeafCloverBlock> CODEC = simpleCodec(FourLeafCloverBlock::new);
+    public static final MapCodec<FourLeafCloverBlock> CODEC = simpleCodec(FourLeafCloverBlock::new);
 
-	public FourLeafCloverBlock(Properties settings) {
-		super(settings);
-		RevelationAware.register(this);
-	}
+    public FourLeafCloverBlock(Properties settings) {
+        super(settings);
+        RevelationAware.register(this);
+    }
 
-	@Override
-	public MapCodec<? extends FourLeafCloverBlock> codec() {
-		return CODEC;
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return PastelAdvancements.REVEAL_FOUR_LEAF_CLOVER;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		map.put(this.defaultBlockState(), PastelBlocks.CLOVER.get().defaultBlockState());
-		return map;
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), PastelBlocks.CLOVER.get().asItem());
-	}
-	
+    @Override
+    public MapCodec<? extends FourLeafCloverBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public ResourceLocation getCloakAdvancementIdentifier() {
+        return PastelAdvancements.REVEAL_FOUR_LEAF_CLOVER;
+    }
+
+    @Override
+    public Map<BlockState, BlockState> getBlockStateCloaks() {
+        Map<BlockState, BlockState> map = new Hashtable<>();
+        map.put(this.defaultBlockState(), PastelBlocks.CLOVER.get()
+                                                             .defaultBlockState()
+        );
+        return map;
+    }
+
+    @Override
+    public Tuple<Item, Item> getItemCloak() {
+        return new Tuple<>(this.asItem(), PastelBlocks.CLOVER.get()
+                                                             .asItem()
+        );
+    }
+
 }

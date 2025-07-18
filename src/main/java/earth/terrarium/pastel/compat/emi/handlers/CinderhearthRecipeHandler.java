@@ -28,6 +28,8 @@ public class CinderhearthRecipeHandler implements StandardRecipeHandler<Cinderhe
     @Override
     public boolean supportsRecipe(EmiRecipe recipe) {
         EmiRecipeCategory category = recipe.getCategory();
-        return (category == PastelEmiRecipeCategories.CINDERHEARTH || category == VanillaEmiRecipeCategories.BLASTING) && recipe.supportsRecipeTree();
+        return
+            (category == PastelEmiRecipeCategories.CINDERHEARTH || category == VanillaEmiRecipeCategories.BLASTING) &&
+            recipe.supportsRecipeTree();
     }
 }

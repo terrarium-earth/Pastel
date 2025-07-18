@@ -23,19 +23,20 @@ public interface ColorableBlock {
      * @param color the color the block should be colored in
      * @return True if coloring was successful, false if failed (like the block was this color already)
      */
-	boolean color(Level world, BlockPos pos, Optional<DyeColor> color, @Nullable Entity user);
-	
-	Optional<DyeColor> getColor(Level world, BlockPos pos);
-	
-	default boolean isColor(Level world, BlockPos pos, Optional<DyeColor> color) {
-		return getColor(world, pos) == color;
+    boolean color(Level world, BlockPos pos, Optional<DyeColor> color, @Nullable Entity user);
+
+    Optional<DyeColor> getColor(Level world, BlockPos pos);
+
+    default boolean isColor(Level world, BlockPos pos, Optional<DyeColor> color) {
+        return getColor(world, pos) == color;
     }
 
-    default boolean tryColorUsingStackInHand(ItemStack handStack, Level world, BlockPos pos, Player player, InteractionHand hand) {
-		Optional<DyeColor> itemInHandColor = ColorHelper.getDyeColorOfItemStack(handStack);
+    default boolean tryColorUsingStackInHand(
+        ItemStack handStack, Level world, BlockPos pos, Player player, InteractionHand hand) {
+        Optional<DyeColor> itemInHandColor = ColorHelper.getDyeColorOfItemStack(handStack);
         if (itemInHandColor.isPresent()) {
-			if (color(world, pos, itemInHandColor, player)) {
-                if(!player.isCreative()) {
+            if (color(world, pos, itemInHandColor, player)) {
+                if (!player.isCreative()) {
                     handStack.shrink(1);
                 }
                 return true;

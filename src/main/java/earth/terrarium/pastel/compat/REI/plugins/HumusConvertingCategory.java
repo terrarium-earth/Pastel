@@ -11,20 +11,20 @@ import net.minecraft.network.chat.Component;
 
 @OnlyIn(Dist.CLIENT)
 public class HumusConvertingCategory extends FluidConvertingCategory<HumusConvertingDisplay> {
-	
-	@Override
-	public CategoryIdentifier<? extends HumusConvertingDisplay> getCategoryIdentifier() {
-		return PastelPlugins.HUMUS_CONVERTING;
-	}
-	
-	@Override
-	public Renderer getIcon() {
-		return EntryStacks.of(PastelItems.HUMUS_BUCKET.get());
-	}
-	
-	@Override
-	public Component getTitle() {
-		return Component.translatable("container.pastel.rei.humus_converting.title");
-	}
-	
+
+    @Override
+    public CategoryIdentifier<? extends HumusConvertingDisplay> getCategoryIdentifier() {
+        return PastelPlugins.HUMUS_CONVERTING;
+    }
+
+    @Override
+    public Renderer getIcon() {
+        return EntryStacks.of(PastelItems.HUMUS_BUCKET.get());
+    }
+
+    @Override
+    public Component getTitle() {
+        return Component.translatable("container.pastel.rei.humus_converting.title");
+    }
+
 }

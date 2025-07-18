@@ -12,65 +12,70 @@ import org.jetbrains.annotations.NotNull;
 
 public class PastelGenericContainerScreen extends AbstractContainerScreen<GenericPastelContainerScreenHandler> {
 
-	private static final ResourceLocation TIER_1_TEXTURE_6x9 = PastelCommon.locate("textures/gui/container/generic_54_tier_1.png");
-	private static final ResourceLocation TIER_2_TEXTURE_6x9 = PastelCommon.locate("textures/gui/container/generic_54_tier_2.png");
-	private static final ResourceLocation TIER_3_TEXTURE_6x9 = PastelCommon.locate("textures/gui/container/generic_54_tier_3.png");
+    private static final ResourceLocation TIER_1_TEXTURE_6x9 = PastelCommon.locate(
+        "textures/gui/container/generic_54_tier_1.png");
+    private static final ResourceLocation TIER_2_TEXTURE_6x9 = PastelCommon.locate(
+        "textures/gui/container/generic_54_tier_2.png");
+    private static final ResourceLocation TIER_3_TEXTURE_6x9 = PastelCommon.locate(
+        "textures/gui/container/generic_54_tier_3.png");
 
-	private final int rows;
-	private final ResourceLocation backgroundTexture;
+    private final int rows;
+    private final ResourceLocation backgroundTexture;
 
-	public PastelGenericContainerScreen(GenericPastelContainerScreenHandler handler, Inventory inventory, Component title) {
-		super(handler, inventory, title);
-		this.rows = handler.getRowCount();
-		this.backgroundTexture = getBackground(rows, handler.getTier());
+    public PastelGenericContainerScreen(
+        GenericPastelContainerScreenHandler handler, Inventory inventory, Component title) {
+        super(handler, inventory, title);
+        this.rows = handler.getRowCount();
+        this.backgroundTexture = getBackground(rows, handler.getTier());
 
-		this.imageHeight = 114 + this.rows * 18;
-		this.inventoryLabelY = this.imageHeight - 94;
-	}
+        this.imageHeight = 114 + this.rows * 18;
+        this.inventoryLabelY = this.imageHeight - 94;
+    }
 
-	@Override
-	public void render(GuiGraphics drawContext, int mouseX, int mouseY, float delta) {
-		this.renderBackground(drawContext, mouseX, mouseY, delta);
-		super.render(drawContext, mouseX, mouseY, delta);
-		this.renderTooltip(drawContext, mouseX, mouseY);
-	}
+    @Override
+    public void render(GuiGraphics drawContext, int mouseX, int mouseY, float delta) {
+        this.renderBackground(drawContext, mouseX, mouseY, delta);
+        super.render(drawContext, mouseX, mouseY, delta);
+        this.renderTooltip(drawContext, mouseX, mouseY);
+    }
 
-	@Override
-	protected void renderLabels(GuiGraphics drawContext, int mouseX, int mouseY) {
-		// draw "title" and "inventory" texts
-		int titleX = (imageWidth - font.width(title)) / 2; // 8;
-		int titleY = 7;
-		Component title = this.title;
-		int inventoryX = 8;
+    @Override
+    protected void renderLabels(GuiGraphics drawContext, int mouseX, int mouseY) {
+        // draw "title" and "inventory" texts
+        int titleX = (imageWidth - font.width(title)) / 2; // 8;
+        int titleY = 7;
+        Component title = this.title;
+        int inventoryX = 8;
 
-		var tr = this.font;
+        var tr = this.font;
 
-		drawContext.drawString(tr, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
-		drawContext.drawString(tr, this.playerInventoryTitle, inventoryX, inventoryLabelY, RenderHelper.GREEN_COLOR, false);
-	}
+        drawContext.drawString(tr, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
+        drawContext.drawString(
+            tr, this.playerInventoryTitle, inventoryX, inventoryLabelY, RenderHelper.GREEN_COLOR, false);
+    }
 
 
-	@Override
-	protected void renderBg(GuiGraphics drawContext, float delta, int mouseX, int mouseY) {
-		int i = (this.width - this.imageWidth) / 2;
-		int j = (this.height - this.imageHeight) / 2;
-		drawContext.blit(backgroundTexture, i, j, 0, 0, this.imageWidth, this.rows * 18 + 17);
-		drawContext.blit(backgroundTexture, i, j + this.rows * 18 + 17, 0, 126, this.imageWidth, 96);
-	}
+    @Override
+    protected void renderBg(GuiGraphics drawContext, float delta, int mouseX, int mouseY) {
+        int i = (this.width - this.imageWidth) / 2;
+        int j = (this.height - this.imageHeight) / 2;
+        drawContext.blit(backgroundTexture, i, j, 0, 0, this.imageWidth, this.rows * 18 + 17);
+        drawContext.blit(backgroundTexture, i, j + this.rows * 18 + 17, 0, 126, this.imageWidth, 96);
+    }
 
-	@Contract(pure = true)
-	private ResourceLocation getBackground(int rows, @NotNull ScreenBackgroundVariant tier) {
-		switch (tier) {
-			case EARLYGAME -> {
-				return TIER_1_TEXTURE_6x9;
-			}
-			case MIDGAME -> {
-				return TIER_2_TEXTURE_6x9;
-			}
-			default -> {
-				return TIER_3_TEXTURE_6x9;
-			}
-		}
-	}
+    @Contract(pure = true)
+    private ResourceLocation getBackground(int rows, @NotNull ScreenBackgroundVariant tier) {
+        switch (tier) {
+            case EARLYGAME -> {
+                return TIER_1_TEXTURE_6x9;
+            }
+            case MIDGAME -> {
+                return TIER_2_TEXTURE_6x9;
+            }
+            default -> {
+                return TIER_3_TEXTURE_6x9;
+            }
+        }
+    }
 
 }

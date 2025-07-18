@@ -19,48 +19,62 @@ import net.minecraft.world.item.ItemStack;
 
 @OnlyIn(Dist.CLIENT)
 public class BidentEntityRenderer extends EntityRenderer<BidentBaseEntity> {
-	
-	private final ItemRenderer itemRenderer;
-	private final float scale;
-	private final float offset;
-	
-	public BidentEntityRenderer(EntityRendererProvider.Context context) {
-		this(context, 2F, -0.625F);
-	}
-	
-	public BidentEntityRenderer(EntityRendererProvider.Context context, float scale, float offset) {
-		super(context);
-		this.itemRenderer = context.getItemRenderer();
-		this.scale = scale;
-		this.offset = offset;
-	}
-	
-	@Override
-	public void render(BidentBaseEntity bidentBaseEntity, float yaw, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light) {
-		ItemStack itemStack = bidentBaseEntity.getTrackedStack();
-		renderAsItemStack(bidentBaseEntity, tickDelta, poseStack, vertexConsumerProvider, light, itemStack);
-		super.render(bidentBaseEntity, yaw, tickDelta, poseStack, vertexConsumerProvider, light);
-	}
-	
-	private void renderAsItemStack(BidentBaseEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, ItemStack itemStack) {
-		BakedModel bakedModel = this.itemRenderer.getModel(itemStack, entity.level(), null, entity instanceof BidentMirrorImageEntity ? 80085 : 817210941);
-		
-		poseStack.pushPose();
-		poseStack.translate(0, entity.makeBoundingBox().getSize() / 2, 0);
-		poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(tickDelta, entity.yRotO, entity.getYRot()) - 90.0F));
-		poseStack.mulPose(Axis.ZP.rotationDegrees(-135 + Mth.lerp(tickDelta, entity.xRotO, entity.getXRot()) + 90.0F));
-		poseStack.translate(0, offset, 0);
 
-		poseStack.scale(scale, scale, scale);
+    private final ItemRenderer itemRenderer;
+    private final float scale;
+    private final float offset;
 
-		this.itemRenderer.render(itemStack, ItemDisplayContext.NONE, false, poseStack, vertexConsumerProvider, entity instanceof BidentMirrorImageEntity ? LightTexture.FULL_BRIGHT : light, OverlayTexture.NO_OVERLAY, bakedModel);
+    public BidentEntityRenderer(EntityRendererProvider.Context context) {
+        this(context, 2F, -0.625F);
+    }
 
-		poseStack.popPose();
-	}
+    public BidentEntityRenderer(EntityRendererProvider.Context context, float scale, float offset) {
+        super(context);
+        this.itemRenderer = context.getItemRenderer();
+        this.scale = scale;
+        this.offset = offset;
+    }
 
-	@Override
-	public ResourceLocation getTextureLocation(BidentBaseEntity entity) {
-		return InventoryMenu.BLOCK_ATLAS;
-	}
+    @Override
+    public void render(
+        BidentBaseEntity bidentBaseEntity, float yaw, float tickDelta, PoseStack poseStack,
+        MultiBufferSource vertexConsumerProvider, int light
+    ) {
+        ItemStack itemStack = bidentBaseEntity.getTrackedStack();
+        renderAsItemStack(bidentBaseEntity, tickDelta, poseStack, vertexConsumerProvider, light, itemStack);
+        super.render(bidentBaseEntity, yaw, tickDelta, poseStack, vertexConsumerProvider, light);
+    }
+
+    private void renderAsItemStack(
+        BidentBaseEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider,
+        int light, ItemStack itemStack
+    ) {
+        BakedModel bakedModel = this.itemRenderer.getModel(
+            itemStack, entity.level(), null, entity instanceof BidentMirrorImageEntity ? 80085 : 817210941);
+
+        poseStack.pushPose();
+        poseStack.translate(
+            0, entity.makeBoundingBox()
+                     .getSize() / 2, 0
+        );
+        poseStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(tickDelta, entity.yRotO, entity.getYRot()) - 90.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(-135 + Mth.lerp(tickDelta, entity.xRotO, entity.getXRot()) + 90.0F));
+        poseStack.translate(0, offset, 0);
+
+        poseStack.scale(scale, scale, scale);
+
+        this.itemRenderer.render(
+            itemStack, ItemDisplayContext.NONE, false, poseStack, vertexConsumerProvider,
+            entity instanceof BidentMirrorImageEntity ? LightTexture.FULL_BRIGHT : light, OverlayTexture.NO_OVERLAY,
+            bakedModel
+        );
+
+        poseStack.popPose();
+    }
+
+    @Override
+    public ResourceLocation getTextureLocation(BidentBaseEntity entity) {
+        return InventoryMenu.BLOCK_ATLAS;
+    }
 
 }

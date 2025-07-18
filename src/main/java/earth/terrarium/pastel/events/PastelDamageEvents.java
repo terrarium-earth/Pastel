@@ -62,16 +62,21 @@ public class PastelDamageEvents {
     }
 
     private static void applyKillBonuses(LivingDamageEvent.Pre event) {
-        var entity = event.getSource().getEntity();
+        var entity = event.getSource()
+                          .getEntity();
 
         if (!(entity instanceof LivingEntity attacker))
             return;
 
         if (PastelTrinketItem.hasEquipped(attacker, PastelItems.JEOPARDANT.get())) {
-            event.setNewDamage((float) (event.getNewDamage() * (AttackRingItem.getAttackModifierForEntity(attacker) + 1)));
+            event.setNewDamage((float) (event.getNewDamage() * (AttackRingItem.getAttackModifierForEntity(attacker) +
+                                                                1)));
         }
 
-        LastKillData.rememberKillTick(attacker, entity.level().getGameTime());
+        LastKillData.rememberKillTick(
+            attacker, entity.level()
+                            .getGameTime()
+        );
         var frenzy = attacker.getEffect(PastelMobEffects.FRENZY);
         if (frenzy != null) {
             ((FrenzyStatusEffect) frenzy.getEffect()).onKill(attacker, frenzy.getAmplifier());
@@ -80,6 +85,7 @@ public class PastelDamageEvents {
 
     private static final int RATE_COOLDOWN = 1;
     private static final Map<UUID, Object2LongArrayMap<UUID>> RATE_LIMITS = new HashMap<>();
+
     private static void rateLimitDamage(LivingIncomingDamageEvent event) {
         var target = event.getEntity();
         var source = event.getSource();
@@ -88,7 +94,8 @@ public class PastelDamageEvents {
         if (attacker == null || !source.is(PastelDamageTypeTags.RATE_LIMITED))
             return;
 
-        if (event.getContainer().getNewDamage() < Mth.EPSILON)
+        if (event.getContainer()
+                 .getNewDamage() < Mth.EPSILON)
             return;
 
         var memory = RATE_LIMITS.computeIfAbsent(attacker.getUUID(), u -> new Object2LongArrayMap<>());
@@ -98,16 +105,22 @@ public class PastelDamageEvents {
             return;
         }
 
-        memory.put(target.getUUID(), target.level().getGameTime());
+        memory.put(
+            target.getUUID(), target.level()
+                                    .getGameTime()
+        );
     }
 
     private static void updateRateLimits(ServerTickEvent.Pre event) {
-        var time = event.getServer().getLevel(ServerLevel.OVERWORLD).getGameTime();
+        var time = event.getServer()
+                        .getLevel(ServerLevel.OVERWORLD)
+                        .getGameTime();
 
         var remove = new ArrayList<UUID>();
 
         for (UUID attacker : RATE_LIMITS.keySet()) {
-            if (RATE_LIMITS.get(attacker).isEmpty())
+            if (RATE_LIMITS.get(attacker)
+                           .isEmpty())
                 remove.add(attacker);
         }
 
@@ -127,7 +140,8 @@ public class PastelDamageEvents {
     }
 
     private static void unblockableBypass(EntityInvulnerabilityCheckEvent event) {
-        if (event.getSource().is(PastelDamageTypeTags.UNBLOCKABLE)) {
+        if (event.getSource()
+                 .is(PastelDamageTypeTags.UNBLOCKABLE)) {
             event.setInvulnerable(false);
         }
     }
@@ -143,7 +157,8 @@ public class PastelDamageEvents {
 
         target.setHealth(target.getHealth() - container.getOriginalDamage());
         if (target.isDeadOrDying()) {
-            target.getCombatTracker().recordDamage(source, damage);
+            target.getCombatTracker()
+                  .recordDamage(source, damage);
             target.die(source);
         }
 
@@ -152,7 +167,8 @@ public class PastelDamageEvents {
 
     // Holy lesbians
     private static void handleDike(LivingIncomingDamageEvent event) {
-        if (event.getSource().is(PastelDamageTypeTags.BYPASSES_DIKE))
+        if (event.getSource()
+                 .is(PastelDamageTypeTags.BYPASSES_DIKE))
             return;
 
         var target = event.getEntity();
@@ -163,15 +179,19 @@ public class PastelDamageEvents {
     }
 
     private static final Set<LivingEntity> RECURSIVE_TARGETS = new HashSet<>();
+
     private static void splitDamage(LivingIncomingDamageEvent event) {
         var target = event.getEntity();
 
         if (RECURSIVE_TARGETS.contains(target)) {
-            event.getContainer().setPostAttackInvulnerabilityTicks(0); // We only do I-frames after all the partitions have been processed
+            event.getContainer()
+                 .setPostAttackInvulnerabilityTicks(
+                     0); // We only do I-frames after all the partitions have been processed
             return;
         }
 
-        var entity = event.getSource().getEntity();
+        var entity = event.getSource()
+                          .getEntity();
 
         if (!(entity instanceof LivingEntity attacker) || event.getAmount() <= Mth.EPSILON)
             return;
@@ -227,8 +247,7 @@ public class PastelDamageEvents {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 event.setNewDamage(slot, event.getNewDamage(slot) * 10F);
             }
-        }
-        else if(source.is(PastelDamageTypeTags.DOES_NOT_DAMAGE_ARMOR)) {
+        } else if (source.is(PastelDamageTypeTags.DOES_NOT_DAMAGE_ARMOR)) {
             for (EquipmentSlot slot : EquipmentSlot.values()) {
                 event.setNewDamage(slot, 0);
             }
@@ -238,10 +257,13 @@ public class PastelDamageEvents {
     private static void handlePuffCirclet(LivingFallEvent event) {
         var entity = event.getEntity();
 
-        if (!CuriosApi.getCuriosInventory(entity).map(i -> i.isEquipped(PastelItems.PUFF_CIRCLET.asItem())).orElse(false))
+        if (!CuriosApi.getCuriosInventory(entity)
+                      .map(i -> i.isEquipped(PastelItems.PUFF_CIRCLET.asItem()))
+                      .orElse(false))
             return;
 
-        var damage = ((LivingEntityAccessor) entity).callCalculateFallDamage(event.getDistance(), event.getDamageMultiplier());
+        var damage = ((LivingEntityAccessor) entity).callCalculateFallDamage(
+            event.getDistance(), event.getDamageMultiplier());
         var cost = Math.min(damage, PuffCircletItem.FALL_DAMAGE_NEGATING_COST);
         var random = entity.getRandom();
 
@@ -249,17 +271,29 @@ public class PastelDamageEvents {
             return;
 
         AzureDikeProvider.absorbDamage(entity, cost);
-        if (!entity.level().isClientSide()) {
-            PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(null, (ServerLevel) entity.level(), entity.position(), ColoredCraftingParticleEffect.WHITE, VectorPattern.EIGHT, 0.4);
-            PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(null, (ServerLevel) entity.level(), entity.position(), ColoredCraftingParticleEffect.BLUE, VectorPattern.EIGHT_OFFSET, 0.5);
+        if (!entity.level()
+                   .isClientSide()) {
+            PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(
+                null, (ServerLevel) entity.level(), entity.position(), ColoredCraftingParticleEffect.WHITE,
+                VectorPattern.EIGHT, 0.4
+            );
+            PlayParticleWithPatternAndVelocityPayload.playParticleWithPatternAndVelocity(
+                null, (ServerLevel) entity.level(), entity.position(), ColoredCraftingParticleEffect.BLUE,
+                VectorPattern.EIGHT_OFFSET, 0.5
+            );
         }
-        entity.level().playSound(null, entity.blockPosition(), PastelSoundEvents.PUFF_CIRCLET_PFFT, SoundSource.PLAYERS, Support.varFloat(random, 0.2F), Support.varFloatCentered(random, 0.2F));
+        entity.level()
+              .playSound(
+                  null, entity.blockPosition(), PastelSoundEvents.PUFF_CIRCLET_PFFT, SoundSource.PLAYERS,
+                  Support.varFloat(random, 0.2F), Support.varFloatCentered(random, 0.2F)
+              );
         event.setCanceled(true);
     }
 
     private static void handlePiercing(LivingIncomingDamageEvent event) {
         var container = event.getContainer();
-        var entity = event.getSource().getEntity();
+        var entity = event.getSource()
+                          .getEntity();
 
         if (!(entity instanceof LivingEntity attacker))
             return;
@@ -272,8 +306,14 @@ public class PastelDamageEvents {
         if (weapon.getCapability(PastelCapabilities.Misc.SPLIT_DAMAGE) instanceof ArmorPiercingHandler ap) {
             var target = event.getEntity();
 
-            container.addModifier(DamageContainer.Reduction.ENCHANTMENTS, (damageContainer, f) -> f * (1 - ap.getProtReduction(target, weapon)));
-            container.addModifier(DamageContainer.Reduction.ARMOR, (damageContainer, f) -> f * (1 - ap.getDefenseMultiplier(target, weapon)));
+            container.addModifier(
+                DamageContainer.Reduction.ENCHANTMENTS, (damageContainer, f) -> f * (1 - ap.getProtReduction(
+                    target, weapon))
+            );
+            container.addModifier(
+                DamageContainer.Reduction.ARMOR, (damageContainer, f) -> f * (1 - ap.getDefenseMultiplier(
+                    target, weapon))
+            );
         }
     }
 }

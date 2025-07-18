@@ -17,22 +17,28 @@ public class BookStatusEffectPage extends BookTextPage {
 
     private final ResourceLocation statusEffectId;
 
-    public BookStatusEffectPage(BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator, String anchor, BookCondition condition, ResourceLocation statusEffectId) {
+    public BookStatusEffectPage(
+        BookTextHolder title, BookTextHolder text, boolean useMarkdownInTitle, boolean showTitleSeparator,
+        String anchor, BookCondition condition, ResourceLocation statusEffectId
+    ) {
         super(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition);
         this.statusEffectId = statusEffectId;
     }
 
-    public static BookStatusEffectPage fromJson(ResourceLocation entryId, JsonObject json, HolderLookup.Provider provider) {
+    public static BookStatusEffectPage fromJson(
+        ResourceLocation entryId, JsonObject json, HolderLookup.Provider provider) {
         var title = BookGsonHelper.getAsBookTextHolder(json, "title", BookTextHolder.EMPTY, provider);
         var useMarkdownInTitle = GsonHelper.getAsBoolean(json, "use_markdown_title", false);
         var showTitleSeparator = GsonHelper.getAsBoolean(json, "show_title_separator", true);
         var text = BookGsonHelper.getAsBookTextHolder(json, "text", BookTextHolder.EMPTY, provider);
         var anchor = GsonHelper.getAsString(json, "anchor", "");
         var condition = json.has("condition")
-                ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
-                : new BookNoneCondition();
-        var statusEffectId = json.has("status_effect_id") ? ResourceLocation.tryParse(GsonHelper.getAsString(json, "status_effect_id")) : null;
-        return new BookStatusEffectPage(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, statusEffectId);
+                        ? BookCondition.fromJson(entryId, json.getAsJsonObject("condition"), provider)
+                        : new BookNoneCondition();
+        var statusEffectId = json.has("status_effect_id") ? ResourceLocation.tryParse(
+            GsonHelper.getAsString(json, "status_effect_id")) : null;
+        return new BookStatusEffectPage(
+            title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, statusEffectId);
     }
 
     public static BookStatusEffectPage fromNetwork(RegistryFriendlyByteBuf buffer) {
@@ -43,7 +49,8 @@ public class BookStatusEffectPage extends BookTextPage {
         var anchor = buffer.readUtf();
         var condition = BookCondition.fromNetwork(buffer);
         var statusEffectId = buffer.readResourceLocation();
-        return new BookStatusEffectPage(title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, statusEffectId);
+        return new BookStatusEffectPage(
+            title, text, useMarkdownInTitle, showTitleSeparator, anchor, condition, statusEffectId);
     }
 
     @Override

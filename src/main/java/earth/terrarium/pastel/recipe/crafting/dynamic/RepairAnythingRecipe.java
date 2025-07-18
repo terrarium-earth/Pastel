@@ -13,66 +13,68 @@ import net.minecraft.world.level.Level;
 
 public class RepairAnythingRecipe extends CustomRecipe {
 
-	public RepairAnythingRecipe() {
-		super(CraftingBookCategory.MISC);
-	}
-	
-	@Override
-	public boolean matches(CraftingInput input, Level world) {
-		boolean nectarFound = false;
-		boolean itemFound = false;
-		
-		for (int j = 0; j < input.size(); ++j) {
-			ItemStack itemStack = input.getItem(j);
-			if (!itemStack.isEmpty()) {
-				if (itemStack.getItem() == PastelItems.MOONSTRUCK_NECTAR.get()) {
-					if (nectarFound) {
-						return false;
-					}
-					nectarFound = true;
-				} else if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(PastelItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
-					if (itemFound) {
-						return false;
-					}
-					itemFound = true;
-				}
-			}
-		}
-		
-		return nectarFound && itemFound;
-	}
-	
-	@Override
-	public ItemStack assemble(CraftingInput input, HolderLookup.Provider registryLookup) {
-		ItemStack itemStack = ItemStack.EMPTY;
-		for (int j = 0; j < input.size(); ++j) {
-			itemStack = input.getItem(j);
-			if (!itemStack.isEmpty() && itemStack.getItem() != PastelItems.MOONSTRUCK_NECTAR.get()) {
-				break;
-			}
-		}
-		
-		if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(PastelItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
-			ItemStack returnStack = itemStack.copy();
-			int damage = returnStack.getDamageValue();
-			int maxDamage = returnStack.getMaxDamage();
-			
-			int newDamage = Math.max(0, damage - maxDamage / 3);
-			returnStack.setDamageValue(newDamage);
-			return returnStack;
-		} else {
-			return ItemStack.EMPTY;
-		}
-	}
-	
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return width * height >= 2;
-	}
-	
-	@Override
-	public RecipeSerializer<?> getSerializer() {
-		return PastelRecipeSerializers.REPAIR_ANYTHING_SERIALIZER;
-	}
-	
+    public RepairAnythingRecipe() {
+        super(CraftingBookCategory.MISC);
+    }
+
+    @Override
+    public boolean matches(CraftingInput input, Level world) {
+        boolean nectarFound = false;
+        boolean itemFound = false;
+
+        for (int j = 0; j < input.size(); ++j) {
+            ItemStack itemStack = input.getItem(j);
+            if (!itemStack.isEmpty()) {
+                if (itemStack.getItem() == PastelItems.MOONSTRUCK_NECTAR.get()) {
+                    if (nectarFound) {
+                        return false;
+                    }
+                    nectarFound = true;
+                } else if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(
+                    PastelItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
+                    if (itemFound) {
+                        return false;
+                    }
+                    itemFound = true;
+                }
+            }
+        }
+
+        return nectarFound && itemFound;
+    }
+
+    @Override
+    public ItemStack assemble(CraftingInput input, HolderLookup.Provider registryLookup) {
+        ItemStack itemStack = ItemStack.EMPTY;
+        for (int j = 0; j < input.size(); ++j) {
+            itemStack = input.getItem(j);
+            if (!itemStack.isEmpty() && itemStack.getItem() != PastelItems.MOONSTRUCK_NECTAR.get()) {
+                break;
+            }
+        }
+
+        if (itemStack.isDamageableItem() && itemStack.isDamaged() && !itemStack.is(
+            PastelItemTags.INDESTRUCTIBLE_BLACKLISTED)) {
+            ItemStack returnStack = itemStack.copy();
+            int damage = returnStack.getDamageValue();
+            int maxDamage = returnStack.getMaxDamage();
+
+            int newDamage = Math.max(0, damage - maxDamage / 3);
+            returnStack.setDamageValue(newDamage);
+            return returnStack;
+        } else {
+            return ItemStack.EMPTY;
+        }
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return width * height >= 2;
+    }
+
+    @Override
+    public RecipeSerializer<?> getSerializer() {
+        return PastelRecipeSerializers.REPAIR_ANYTHING_SERIALIZER;
+    }
+
 }

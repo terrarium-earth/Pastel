@@ -58,304 +58,338 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity implements PlayerOwned, ContainerWrapper, InkStorageBlockEntity<TotalCappedInkStorage>, SidedCapabilityProvider {
-	
-	public static final int INVENTORY_SIZE = 2; // input & output slots
-	public static final int INPUT_SLOT_ID = 0;
-	public static final int OUTPUT_SLOT_ID = 1;
-	public static final long TICKS_PER_CONVERSION = 6;
-	public static final long STORAGE_AMOUNT = 64 * 64 * 64 * 100;
-	
-	public FriendlyStackHandler inventory = new FriendlyStackHandler(2);
-	protected TotalCappedInkStorage inkStorage;
-	protected boolean paused;
-	protected boolean inkDirty;
-	protected @Nullable InkConvertingRecipe cachedRecipe;
-	protected Optional<Holder<InkColor>> selectedColor = Optional.empty();
-	private UUID ownerUUID;
-	
-	public ColorPickerBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(PastelBlockEntities.COLOR_PICKER.get(), blockPos, blockState);
-		inventory.addListener(i -> {
-			setChanged();
-			if (!level.isClientSide())
-				updateInClientWorld();
-		});
-		this.inkStorage = new TotalCappedInkStorage(STORAGE_AMOUNT, Map.of());
-	}
-	
-	@SuppressWarnings("unused")
-	public static void tick(Level world, BlockPos pos, BlockState state, ColorPickerBlockEntity picker) {
-		if (!world.isClientSide) {
-			picker.inkDirty = false;
-			if (!picker.paused) {
-				boolean convertedPigment = false;
-				boolean shouldPause = true;
-				if (world.getGameTime() % picker.getConversionTicks() == 0) {
-					convertedPigment = picker.tryConvertPigmentToEnergy((ServerLevel) world);
-				} else {
-					shouldPause = false;
-				}
-				boolean filledContainer = picker.tryFillInkContainer(); // that's an OR
-				
-				if (convertedPigment || filledContainer) {
-					picker.updateInClientWorld();
-					picker.setInkDirty();
-					picker.setChanged();
-				} else if (shouldPause) {
-					picker.paused = true;
-				}
-			}
-		}
-	}
+public class ColorPickerBlockEntity extends RandomizableContainerBlockEntity
+    implements PlayerOwned, ContainerWrapper, InkStorageBlockEntity<TotalCappedInkStorage>, SidedCapabilityProvider {
 
-	private int getConversionTicks() {
-		assert level != null;
-		var stack = inventory.getStackInSlot(0);
+    public static final int INVENTORY_SIZE = 2; // input & output slots
+    public static final int INPUT_SLOT_ID = 0;
+    public static final int OUTPUT_SLOT_ID = 1;
+    public static final long TICKS_PER_CONVERSION = 6;
+    public static final long STORAGE_AMOUNT = 64 * 64 * 64 * 100;
 
-		return Math.round(Mth.clampedLerp(TICKS_PER_CONVERSION, 1,
-				(float) stack.getCount() / stack.getMaxStackSize()));
-	}
-	
-	@Override
-	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
-		super.loadAdditional(nbt, registryLookup);
-		inventory.load(nbt.getCompound("Inventory"), registryLookup);
-		CodecHelper.fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage")).ifPresent(storage -> this.inkStorage = new TotalCappedInkStorage(storage.maxEnergyTotal(), storage.storedEnergy()));
-		this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
-		if (nbt.contains("SelectedColor", Tag.TAG_STRING)) {
-			this.selectedColor = Optional.of(PastelRegistries.INK_COLOR.wrapAsHolder(InkColor.ofIdString(nbt.getString("SelectedColor")).get()));
-		} else {
-			this.selectedColor = Optional.empty();
-		}
-	}
-	
-	@Override
-	protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
-		super.saveAdditional(nbt, registryLookup);
-		var inv = new CompoundTag();
-		inventory.save(inv, registryLookup);
-		nbt.put("Inventory", inv);
-		CodecHelper.writeNbt(nbt, "InkStorage", InkStorageComponent.CODEC, new InkStorageComponent(this.inkStorage));
-		PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
-		this.selectedColor.ifPresent(color -> nbt.putString("SelectedColor", color.getRegisteredName()));
-	}
+    public FriendlyStackHandler inventory = new FriendlyStackHandler(2);
+    protected TotalCappedInkStorage inkStorage;
+    protected boolean paused;
+    protected boolean inkDirty;
+    protected @Nullable InkConvertingRecipe cachedRecipe;
+    protected Optional<Holder<InkColor>> selectedColor = Optional.empty();
+    private UUID ownerUUID;
 
-	@Override
-	public FriendlyStackHandler getHandlerForScreens() {
-		return inventory;
-	}
+    public ColorPickerBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(PastelBlockEntities.COLOR_PICKER.get(), blockPos, blockState);
+        inventory.addListener(i -> {
+            setChanged();
+            if (!level.isClientSide())
+                updateInClientWorld();
+        });
+        this.inkStorage = new TotalCappedInkStorage(STORAGE_AMOUNT, Map.of());
+    }
 
-	@Override
-	protected Component getDefaultName() {
-		return Component.translatable("block.pastel.color_picker");
-	}
+    @SuppressWarnings("unused")
+    public static void tick(Level world, BlockPos pos, BlockState state, ColorPickerBlockEntity picker) {
+        if (!world.isClientSide) {
+            picker.inkDirty = false;
+            if (!picker.paused) {
+                boolean convertedPigment = false;
+                boolean shouldPause = true;
+                if (world.getGameTime() % picker.getConversionTicks() == 0) {
+                    convertedPigment = picker.tryConvertPigmentToEnergy((ServerLevel) world);
+                } else {
+                    shouldPause = false;
+                }
+                boolean filledContainer = picker.tryFillInkContainer(); // that's an OR
 
-	@Override
-	protected NonNullList<ItemStack> getItems() {
-		return inventory.getInternalList();
-	}
+                if (convertedPigment || filledContainer) {
+                    picker.updateInClientWorld();
+                    picker.setInkDirty();
+                    picker.setChanged();
+                } else if (shouldPause) {
+                    picker.paused = true;
+                }
+            }
+        }
+    }
 
-	@Override
-	protected void setItems(NonNullList<ItemStack> items) {
-		inventory.setInternalList(items);
-	}
+    private int getConversionTicks() {
+        assert level != null;
+        var stack = inventory.getStackInSlot(0);
 
-	@Override
-	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-		return new ColorPickerScreenHandler(syncId, playerInventory, new ColorPickerScreenHandler.ScreenOpeningData(this.worldPosition, this.selectedColor));
-	}
+        return Math.round(Mth.clampedLerp(
+            TICKS_PER_CONVERSION, 1,
+            (float) stack.getCount() / stack.getMaxStackSize()
+        ));
+    }
 
-	@Override
-	public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
-		ColorPickerScreenHandler.ScreenOpeningData.STREAM_CODEC.encode(buffer, new ColorPickerScreenHandler.ScreenOpeningData(this.worldPosition, this.selectedColor));
-	}
+    @Override
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
+        super.loadAdditional(nbt, registryLookup);
+        inventory.load(nbt.getCompound("Inventory"), registryLookup);
+        CodecHelper.fromNbt(InkStorageComponent.CODEC, nbt.get("InkStorage"))
+                   .ifPresent(storage -> this.inkStorage = new TotalCappedInkStorage(
+                       storage.maxEnergyTotal(),
+                       storage.storedEnergy()
+                   ));
+        this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
+        if (nbt.contains("SelectedColor", Tag.TAG_STRING)) {
+            this.selectedColor = Optional.of(PastelRegistries.INK_COLOR.wrapAsHolder(
+                InkColor.ofIdString(nbt.getString("SelectedColor"))
+                        .get()));
+        } else {
+            this.selectedColor = Optional.empty();
+        }
+    }
 
-	@Override
-	public UUID getOwnerUUID() {
-		return this.ownerUUID;
-	}
-	
-	@Override
-	public void setOwner(Player playerEntity) {
-		this.ownerUUID = playerEntity.getUUID();
-		setChanged();
-	}
-	
-	@Override
-	public TotalCappedInkStorage getEnergyStorage() {
-		return inkStorage;
-	}
-	
-	@Override
-	public void setInkDirty() {
-		this.inkDirty = true;
-	}
-	
-	@Override
-	public boolean getInkDirty() {
-		return inkDirty;
-	}
-	
-	@Override
-	public ItemStack removeItem(int slot, int amount) {
-		ItemStack itemStack = super.removeItem(slot, amount);
-		this.paused = false;
-		updateInClientWorld();
-		return itemStack;
-	}
-	
-	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
-		ItemStack itemStack = super.removeItemNoUpdate(slot);
-		this.paused = false;
-		updateInClientWorld();
-		return itemStack;
-	}
-	
-	@Override
-	public void setItem(int slot, ItemStack stack) {
-		super.setItem(slot, stack);
-		this.paused = false;
-		updateInClientWorld();
-	}
-	
-	@Override
-	public int getContainerSize() {
-		return INVENTORY_SIZE;
-	}
-	
-	protected boolean tryConvertPigmentToEnergy(ServerLevel world) {
-		InkConvertingRecipe recipe = getInkConvertingRecipe(world);
-		if (recipe != null) {
-			InkColor inkColor = recipe.getInkColor();
-			long amount = recipe.getInkAmount();
-			if (amount <= this.inkStorage.getRoom(inkColor)) {
-				inventory.getStackInSlot(INPUT_SLOT_ID).shrink(1);
-				this.inkStorage.addEnergy(inkColor, amount);
-				
-				if (PastelCommon.CONFIG.BlockSoundVolume > 0) {
-					world.playSound(null, worldPosition, PastelSoundEvents.COLOR_PICKER_PROCESSING, SoundSource.BLOCKS, PastelCommon.CONFIG.BlockSoundVolume / 3, 1.0F);
-				}
-				PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(world,
-						new Vec3(worldPosition.getX() + 0.5, worldPosition.getY() + 0.7, worldPosition.getZ() + 0.5),
-						ColoredFluidRisingParticleEffect.of(inkColor.getColorInt()),
-						5,
-						new Vec3(0.22, 0.0, 0.22),
-						new Vec3(0.0, 0.1, 0.0)
-				);
-				
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	protected @Nullable InkConvertingRecipe getInkConvertingRecipe(Level world) {
-		// is the current stack empty?
-		ItemStack inputStack = inventory.getStackInSlot(INPUT_SLOT_ID);
-		if (inputStack.isEmpty()) {
-			this.cachedRecipe = null;
-			return null;
-		}
-		
-		// does the cached recipe match?
-		if (this.cachedRecipe != null) {
-			if (this.cachedRecipe.getIngredients().get(INPUT_SLOT_ID).test(inputStack)) {
-				return this.cachedRecipe;
-			}
-		}
-		
-		// search matching recipe
-		Optional<RecipeHolder<InkConvertingRecipe>> recipe = world.getRecipeManager().getRecipeFor(PastelRecipeTypes.INK_CONVERTING, new SingleRecipeInput(inventory.getStackInSlot(INPUT_SLOT_ID)), world);
-		if (recipe.isPresent()) {
-			this.cachedRecipe = recipe.get().value();
-			return this.cachedRecipe;
-		} else {
-			this.cachedRecipe = null;
-			return null;
-		}
-	}
-	
-	protected boolean tryFillInkContainer() {
-		long transferredAmount = 0;
-		
-		ItemStack stack = inventory.getStackInSlot(OUTPUT_SLOT_ID);
-		if (stack.getItem() instanceof InkStorageItem<?> inkStorageItem) {
-			InkStorage itemStorage = inkStorageItem.getEnergyStorage(stack);
-			
-			ServerPlayer owner = null;
-			if (getOwnerIfOnline() instanceof ServerPlayer serverPlayerEntity) {
-				owner = serverPlayerEntity;
-			}
-			
-			if (this.selectedColor.isEmpty()) {
-				for (InkColor color : InkColors.all()) {
-					transferredAmount += tryTransferInk(owner, stack, itemStorage, color);
-				}
-			} else {
-				transferredAmount = tryTransferInk(owner, stack, itemStorage, this.selectedColor.get().value());
-			}
-			
-			if (transferredAmount > 0) {
-				inkStorageItem.setEnergyStorage(stack, itemStorage);
-			}
-		}
-		
-		return transferredAmount > 0;
-	}
-	
-	private long tryTransferInk(ServerPlayer owner, ItemStack stack, InkStorage itemStorage, InkColor color) {
-		long amount = InkStorage.transferInk(this.inkStorage, itemStorage, color);
-		if (amount > 0 && owner != null) {
-			PastelAdvancementCriteria.INK_CONTAINER_INTERACTION.trigger(owner, stack, itemStorage, color, amount);
-		}
-		return amount;
-	}
-	
-	public void setSelectedColor(Optional<Holder<InkColor>> inkColor) {
-		this.selectedColor = inkColor;
-		this.paused = false;
-		this.setChanged();
-	}
-	
-	public Optional<Holder<InkColor>> getSelectedColor() {
-		return this.selectedColor;
-	}
-	
-	// Called when the chunk is first loaded to initialize this be
-	@Override
-	public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
-		CompoundTag nbtCompound = new CompoundTag();
-		this.saveAdditional(nbtCompound, registryLookup);
-		return nbtCompound;
-	}
-	
-	@Nullable
-	@Override
-	public Packet<ClientGamePacketListener> getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
-	}
-	
-	public void updateInClientWorld() {
-		if (level != null) {
-			level.sendBlockUpdated(worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition), Block.UPDATE_INVISIBLE);
-		}
-	}
-	
-	@Override
-	public boolean canPlaceItem(int slot, ItemStack stack) {
-		if (slot == INPUT_SLOT_ID) {
-			return InkConvertingRecipe.isInput(stack.getItem());
-		}
-		if (slot == OUTPUT_SLOT_ID) {
-			return stack.getItem() instanceof InkStorageItem<?>;
-		}
-		return true;
-	}
+    @Override
+    protected void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
+        super.saveAdditional(nbt, registryLookup);
+        var inv = new CompoundTag();
+        inventory.save(inv, registryLookup);
+        nbt.put("Inventory", inv);
+        CodecHelper.writeNbt(nbt, "InkStorage", InkStorageComponent.CODEC, new InkStorageComponent(this.inkStorage));
+        PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
+        this.selectedColor.ifPresent(color -> nbt.putString("SelectedColor", color.getRegisteredName()));
+    }
 
-	@Override
-	public IItemHandler exposeItemHandlers(Direction dir) {
-		return new StackHandlerView(inventory, 0, 1).disableExtraction();
-	}
+    @Override
+    public FriendlyStackHandler getHandlerForScreens() {
+        return inventory;
+    }
+
+    @Override
+    protected Component getDefaultName() {
+        return Component.translatable("block.pastel.color_picker");
+    }
+
+    @Override
+    protected NonNullList<ItemStack> getItems() {
+        return inventory.getInternalList();
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> items) {
+        inventory.setInternalList(items);
+    }
+
+    @Override
+    protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+        return new ColorPickerScreenHandler(
+            syncId, playerInventory, new ColorPickerScreenHandler.ScreenOpeningData(
+            this.worldPosition,
+                                                                                    this.selectedColor
+        )
+        );
+    }
+
+    @Override
+    public void writeClientSideData(AbstractContainerMenu menu, RegistryFriendlyByteBuf buffer) {
+        ColorPickerScreenHandler.ScreenOpeningData.STREAM_CODEC.encode(
+            buffer, new ColorPickerScreenHandler.ScreenOpeningData(this.worldPosition, this.selectedColor));
+    }
+
+    @Override
+    public UUID getOwnerUUID() {
+        return this.ownerUUID;
+    }
+
+    @Override
+    public void setOwner(Player playerEntity) {
+        this.ownerUUID = playerEntity.getUUID();
+        setChanged();
+    }
+
+    @Override
+    public TotalCappedInkStorage getEnergyStorage() {
+        return inkStorage;
+    }
+
+    @Override
+    public void setInkDirty() {
+        this.inkDirty = true;
+    }
+
+    @Override
+    public boolean getInkDirty() {
+        return inkDirty;
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        ItemStack itemStack = super.removeItem(slot, amount);
+        this.paused = false;
+        updateInClientWorld();
+        return itemStack;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        ItemStack itemStack = super.removeItemNoUpdate(slot);
+        this.paused = false;
+        updateInClientWorld();
+        return itemStack;
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+        super.setItem(slot, stack);
+        this.paused = false;
+        updateInClientWorld();
+    }
+
+    @Override
+    public int getContainerSize() {
+        return INVENTORY_SIZE;
+    }
+
+    protected boolean tryConvertPigmentToEnergy(ServerLevel world) {
+        InkConvertingRecipe recipe = getInkConvertingRecipe(world);
+        if (recipe != null) {
+            InkColor inkColor = recipe.getInkColor();
+            long amount = recipe.getInkAmount();
+            if (amount <= this.inkStorage.getRoom(inkColor)) {
+                inventory.getStackInSlot(INPUT_SLOT_ID)
+                         .shrink(1);
+                this.inkStorage.addEnergy(inkColor, amount);
+
+                if (PastelCommon.CONFIG.BlockSoundVolume > 0) {
+                    world.playSound(
+                        null, worldPosition, PastelSoundEvents.COLOR_PICKER_PROCESSING, SoundSource.BLOCKS,
+                        PastelCommon.CONFIG.BlockSoundVolume / 3, 1.0F
+                    );
+                }
+                PlayParticleWithRandomOffsetAndVelocityPayload.playParticleWithRandomOffsetAndVelocity(
+                    world,
+                    new Vec3(worldPosition.getX() + 0.5, worldPosition.getY() + 0.7, worldPosition.getZ() + 0.5),
+                    ColoredFluidRisingParticleEffect.of(inkColor.getColorInt()),
+                    5,
+                    new Vec3(0.22, 0.0, 0.22),
+                    new Vec3(0.0, 0.1, 0.0)
+                );
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected @Nullable InkConvertingRecipe getInkConvertingRecipe(Level world) {
+        // is the current stack empty?
+        ItemStack inputStack = inventory.getStackInSlot(INPUT_SLOT_ID);
+        if (inputStack.isEmpty()) {
+            this.cachedRecipe = null;
+            return null;
+        }
+
+        // does the cached recipe match?
+        if (this.cachedRecipe != null) {
+            if (this.cachedRecipe.getIngredients()
+                                 .get(INPUT_SLOT_ID)
+                                 .test(inputStack)) {
+                return this.cachedRecipe;
+            }
+        }
+
+        // search matching recipe
+        Optional<RecipeHolder<InkConvertingRecipe>> recipe = world.getRecipeManager()
+                                                                  .getRecipeFor(
+                                                                      PastelRecipeTypes.INK_CONVERTING,
+                                                                      new SingleRecipeInput(inventory.getStackInSlot(
+                                                                          INPUT_SLOT_ID)), world
+                                                                  );
+        if (recipe.isPresent()) {
+            this.cachedRecipe = recipe.get()
+                                      .value();
+            return this.cachedRecipe;
+        } else {
+            this.cachedRecipe = null;
+            return null;
+        }
+    }
+
+    protected boolean tryFillInkContainer() {
+        long transferredAmount = 0;
+
+        ItemStack stack = inventory.getStackInSlot(OUTPUT_SLOT_ID);
+        if (stack.getItem() instanceof InkStorageItem<?> inkStorageItem) {
+            InkStorage itemStorage = inkStorageItem.getEnergyStorage(stack);
+
+            ServerPlayer owner = null;
+            if (getOwnerIfOnline() instanceof ServerPlayer serverPlayerEntity) {
+                owner = serverPlayerEntity;
+            }
+
+            if (this.selectedColor.isEmpty()) {
+                for (InkColor color : InkColors.all()) {
+                    transferredAmount += tryTransferInk(owner, stack, itemStorage, color);
+                }
+            } else {
+                transferredAmount = tryTransferInk(
+                    owner, stack, itemStorage, this.selectedColor.get()
+                                                                 .value()
+                );
+            }
+
+            if (transferredAmount > 0) {
+                inkStorageItem.setEnergyStorage(stack, itemStorage);
+            }
+        }
+
+        return transferredAmount > 0;
+    }
+
+    private long tryTransferInk(ServerPlayer owner, ItemStack stack, InkStorage itemStorage, InkColor color) {
+        long amount = InkStorage.transferInk(this.inkStorage, itemStorage, color);
+        if (amount > 0 && owner != null) {
+            PastelAdvancementCriteria.INK_CONTAINER_INTERACTION.trigger(owner, stack, itemStorage, color, amount);
+        }
+        return amount;
+    }
+
+    public void setSelectedColor(Optional<Holder<InkColor>> inkColor) {
+        this.selectedColor = inkColor;
+        this.paused = false;
+        this.setChanged();
+    }
+
+    public Optional<Holder<InkColor>> getSelectedColor() {
+        return this.selectedColor;
+    }
+
+    // Called when the chunk is first loaded to initialize this be
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
+        CompoundTag nbtCompound = new CompoundTag();
+        this.saveAdditional(nbtCompound, registryLookup);
+        return nbtCompound;
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    public void updateInClientWorld() {
+        if (level != null) {
+            level.sendBlockUpdated(
+                worldPosition, level.getBlockState(worldPosition), level.getBlockState(worldPosition),
+                Block.UPDATE_INVISIBLE
+            );
+        }
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        if (slot == INPUT_SLOT_ID) {
+            return InkConvertingRecipe.isInput(stack.getItem());
+        }
+        if (slot == OUTPUT_SLOT_ID) {
+            return stack.getItem() instanceof InkStorageItem<?>;
+        }
+        return true;
+    }
+
+    @Override
+    public IItemHandler exposeItemHandlers(Direction dir) {
+        return new StackHandlerView(inventory, 0, 1).disableExtraction();
+    }
 }

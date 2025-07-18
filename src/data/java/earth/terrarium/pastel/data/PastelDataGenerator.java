@@ -13,23 +13,28 @@ import java.util.concurrent.CompletableFuture;
 @EventBusSubscriber(modid = PastelCommon.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class PastelDataGenerator {
 
-	@SubscribeEvent
-	public static void onInitializeDataGenerator(GatherDataEvent event) {
-		PackOutput packOutput = event.getGenerator().getPackOutput();
-		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+    @SubscribeEvent
+    public static void onInitializeDataGenerator(GatherDataEvent event) {
+        PackOutput packOutput = event.getGenerator()
+                                     .getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-		PastelBlockTagsProvider blockTagsProvider = new PastelBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
+        PastelBlockTagsProvider blockTagsProvider = new PastelBlockTagsProvider(
+            packOutput, lookupProvider, existingFileHelper);
 
-		event.addProvider(blockTagsProvider);
-		event.addProvider(new PastelItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
-		event.addProvider(new PastelEnchantmentTagsProvider(packOutput, lookupProvider, existingFileHelper));
-		//event.addProvider(new SpectrumModelProvider(packOutput, lookupProvider));
-		event.addProvider(new PastelRecipeProvider(packOutput, lookupProvider));
-		event.addProvider(new PastelCompostableDataMapProvider(packOutput, lookupProvider));
-		event.addProvider(new PastelWaxableDataMapProvider(packOutput, lookupProvider));
-		event.addProvider(new PastelBurnTimeDataMapProvider(packOutput, lookupProvider));
+        event.addProvider(blockTagsProvider);
+        event.addProvider(new PastelItemTagsProvider(
+            packOutput, lookupProvider, blockTagsProvider.contentsGetter(),
+                                                     existingFileHelper
+        ));
+        event.addProvider(new PastelEnchantmentTagsProvider(packOutput, lookupProvider, existingFileHelper));
+        //event.addProvider(new SpectrumModelProvider(packOutput, lookupProvider));
+        event.addProvider(new PastelRecipeProvider(packOutput, lookupProvider));
+        event.addProvider(new PastelCompostableDataMapProvider(packOutput, lookupProvider));
+        event.addProvider(new PastelWaxableDataMapProvider(packOutput, lookupProvider));
+        event.addProvider(new PastelBurnTimeDataMapProvider(packOutput, lookupProvider));
 
-		event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders());
-	}
+        event.createDatapackRegistryObjects(PastelDynamicRegistryProvider.createRegistryBuilders());
+    }
 }

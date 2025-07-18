@@ -8,27 +8,28 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class NourishingStatusEffect extends MobEffect {
-	
-	public NourishingStatusEffect(MobEffectCategory statusEffectCategory, int color) {
-		super(statusEffectCategory, color);
-	}
-	
-	@Override
-	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
-		Level world = entity.level();
-		if (!world.isClientSide && entity instanceof Player playerEntity) {
-			playerEntity.getFoodData().eat(1, 0.25F);
-		}
-		return super.applyEffectTick(entity, amplifier);
-	}
-	
-	@Override
-	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-		int i = 200 >> amplifier;
-		if (i > 0) {
-			return duration % i == 0;
-		}
-		return true;
-	}
-	
+
+    public NourishingStatusEffect(MobEffectCategory statusEffectCategory, int color) {
+        super(statusEffectCategory, color);
+    }
+
+    @Override
+    public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+        Level world = entity.level();
+        if (!world.isClientSide && entity instanceof Player playerEntity) {
+            playerEntity.getFoodData()
+                        .eat(1, 0.25F);
+        }
+        return super.applyEffectTick(entity, amplifier);
+    }
+
+    @Override
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+        int i = 200 >> amplifier;
+        if (i > 0) {
+            return duration % i == 0;
+        }
+        return true;
+    }
+
 }

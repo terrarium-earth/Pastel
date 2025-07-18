@@ -13,13 +13,16 @@ import java.util.concurrent.CompletableFuture;
 public class PastelEnchantmentTagsProvider extends EnchantmentTagsProvider {
 
 
-	public PastelEnchantmentTagsProvider(PackOutput p_341044_, CompletableFuture<HolderLookup.Provider> p_341146_, @Nullable ExistingFileHelper existingFileHelper) {
-		super(p_341044_, p_341146_, PastelCommon.MOD_ID, existingFileHelper);
-	}
+    public PastelEnchantmentTagsProvider(
+        PackOutput p_341044_, CompletableFuture<HolderLookup.Provider> p_341146_,
+        @Nullable ExistingFileHelper existingFileHelper
+    ) {
+        super(p_341044_, p_341146_, PastelCommon.MOD_ID, existingFileHelper);
+    }
 
-	@Override
-	protected void addTags(HolderLookup.Provider wrapperLookup) {
-		PastelEnchantments.provideEnchantmentTags(this::tag);
-	}
-	
+    @Override
+    protected void addTags(HolderLookup.Provider wrapperLookup) {
+        PastelEnchantments.provideEnchantmentTags(this::tag);
+    }
+
 }

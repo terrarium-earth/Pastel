@@ -12,17 +12,18 @@ public class AirCheckDiskFeature extends OreFeature {
     public AirCheckDiskFeature(Codec<OreConfiguration> codec) {
         super(codec);
     }
-	
-	@Override
-	public boolean place(FeaturePlaceContext<OreConfiguration> context) {
-		BlockPos blockPos = context.origin();
-		WorldGenLevel structureWorldAccess = context.level();
-		
-		if (structureWorldAccess.getBlockState(blockPos).isAir()) {
-			return false;
-		}
-		
-		return super.place(context);
-	}
+
+    @Override
+    public boolean place(FeaturePlaceContext<OreConfiguration> context) {
+        BlockPos blockPos = context.origin();
+        WorldGenLevel structureWorldAccess = context.level();
+
+        if (structureWorldAccess.getBlockState(blockPos)
+                                .isAir()) {
+            return false;
+        }
+
+        return super.place(context);
+    }
 
 }

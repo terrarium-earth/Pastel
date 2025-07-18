@@ -28,115 +28,129 @@ import java.util.List;
 import java.util.UUID;
 
 public class HardcoreDeathTracker extends SavedData {
-	
-	private final List<UUID> playersThatDiedInHardcore = new ArrayList<>();
 
-	private static final Factory<HardcoreDeathTracker> FACTORY = new Factory<>(HardcoreDeathTracker::new, HardcoreDeathTracker::load);
-	private static HardcoreDeathTracker CLIENT_TRACKER;
-	
-	public static boolean isInHardcore(Player player) {
-		return player.hasEffect(PastelMobEffects.DIVINITY);
-	}
+    private final List<UUID> playersThatDiedInHardcore = new ArrayList<>();
 
-	private static void sync(ServerPlayer player) {
-		AttachmentUtil.syncToPlayer(new SyncPayload(getInstance().save(new CompoundTag(), player.registryAccess())), player);
-	}
+    private static final Factory<HardcoreDeathTracker> FACTORY = new Factory<>(
+        HardcoreDeathTracker::new, HardcoreDeathTracker::load);
+    private static HardcoreDeathTracker CLIENT_TRACKER;
 
-	public static void addHardcoreDeath(ServerLevel world, ServerPlayer player) {
-		addHardcoreDeath(world, player.getGameProfile().getId());
-		sync(player);
-	}
-	
-	public static void removeHardcoreDeath(GameProfile profile) {
-		var server = PastelCommon.getSidedServer();
-		if (server == null)
-			return;
-		removeHardcoreDeath(profile.getId());
-		sync(server.getPlayerList().getPlayer(profile.getId()));
-	}
-	
-	public static boolean hasHardcoreDeath(GameProfile profile) {
-		return hasHardcoreDeath(profile.getId());
-	}
-	
-	protected static void addHardcoreDeath(ServerLevel world, UUID uuid) {
-		var data = getInstance();
+    public static boolean isInHardcore(Player player) {
+        return player.hasEffect(PastelMobEffects.DIVINITY);
+    }
 
-		if (!data.playersThatDiedInHardcore.contains(uuid)) {
-			data.playersThatDiedInHardcore.add(uuid);
-		}
-		world.getServer().getPlayerList().getPlayer(uuid).setGameMode(GameType.SPECTATOR);
-		data.setDirty();
-	}
-	
-	protected static boolean hasHardcoreDeath(UUID uuid) {
-		return getInstance().playersThatDiedInHardcore.contains(uuid);
-	}
-	
-	protected static void removeHardcoreDeath(UUID uuid) {
-		var data = getInstance();
+    private static void sync(ServerPlayer player) {
+        AttachmentUtil.syncToPlayer(
+            new SyncPayload(getInstance().save(new CompoundTag(), player.registryAccess())), player);
+    }
 
-		data.playersThatDiedInHardcore.remove(uuid);
-		data.setDirty();
-	}
+    public static void addHardcoreDeath(ServerLevel world, ServerPlayer player) {
+        addHardcoreDeath(
+            world, player.getGameProfile()
+                         .getId()
+        );
+        sync(player);
+    }
 
-	@NotNull
-	public static HardcoreDeathTracker getInstance() {
-		if (FMLEnvironment.dist.isClient()) {
-			if (CLIENT_TRACKER == null)
-				CLIENT_TRACKER = new HardcoreDeathTracker();
+    public static void removeHardcoreDeath(GameProfile profile) {
+        var server = PastelCommon.getSidedServer();
+        if (server == null)
+            return;
+        removeHardcoreDeath(profile.getId());
+        sync(server.getPlayerList()
+                   .getPlayer(profile.getId()));
+    }
 
-			return CLIENT_TRACKER;
-		}
+    public static boolean hasHardcoreDeath(GameProfile profile) {
+        return hasHardcoreDeath(profile.getId());
+    }
 
-		return PastelCommon.getSidedServer().overworld().getDataStorage().computeIfAbsent(FACTORY, PastelCommon.MOD_ID + ":hardcore_tracker");
-	}
+    protected static void addHardcoreDeath(ServerLevel world, UUID uuid) {
+        var data = getInstance();
 
-	@Override
-	public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
-		ListTag uuidList = new ListTag();
-		for (UUID playerThatDiedInHardcore : playersThatDiedInHardcore) {
-			uuidList.add(NbtUtils.createUUID(playerThatDiedInHardcore));
-		}
-		tag.put("HardcoreDeaths", uuidList);
+        if (!data.playersThatDiedInHardcore.contains(uuid)) {
+            data.playersThatDiedInHardcore.add(uuid);
+        }
+        world.getServer()
+             .getPlayerList()
+             .getPlayer(uuid)
+             .setGameMode(GameType.SPECTATOR);
+        data.setDirty();
+    }
 
-		if (!FMLEnvironment.dist.isClient())
-			PacketDistributor.sendToAllPlayers(new SyncPayload(tag));
+    protected static boolean hasHardcoreDeath(UUID uuid) {
+        return getInstance().playersThatDiedInHardcore.contains(uuid);
+    }
 
-		return tag;
-	}
+    protected static void removeHardcoreDeath(UUID uuid) {
+        var data = getInstance();
 
-	public static HardcoreDeathTracker load(CompoundTag tag, HolderLookup.@NotNull Provider wrapperLookup) {
-		var data = new HardcoreDeathTracker();
+        data.playersThatDiedInHardcore.remove(uuid);
+        data.setDirty();
+    }
 
-		ListTag uuidList = tag.getList("HardcoreDeaths", Tag.TAG_INT_ARRAY);
-		for (Tag listEntry : uuidList) {
-			data.playersThatDiedInHardcore.add(NbtUtils.loadUUID(listEntry));
-		}
+    @NotNull
+    public static HardcoreDeathTracker getInstance() {
+        if (FMLEnvironment.dist.isClient()) {
+            if (CLIENT_TRACKER == null)
+                CLIENT_TRACKER = new HardcoreDeathTracker();
 
-		if (!FMLEnvironment.dist.isClient())
-			PacketDistributor.sendToAllPlayers(new SyncPayload(tag));
+            return CLIENT_TRACKER;
+        }
 
-		return data;
-	}
+        return PastelCommon.getSidedServer()
+                           .overworld()
+                           .getDataStorage()
+                           .computeIfAbsent(FACTORY, PastelCommon.MOD_ID + ":hardcore_tracker");
+    }
 
-	public record SyncPayload(CompoundTag tag) implements CustomPacketPayload {
+    @Override
+    public CompoundTag save(CompoundTag tag, HolderLookup.Provider registries) {
+        ListTag uuidList = new ListTag();
+        for (UUID playerThatDiedInHardcore : playersThatDiedInHardcore) {
+            uuidList.add(NbtUtils.createUUID(playerThatDiedInHardcore));
+        }
+        tag.put("HardcoreDeaths", uuidList);
 
-		public static final StreamCodec<FriendlyByteBuf, SyncPayload> CODEC = StreamCodec.composite(
-				ByteBufCodecs.COMPOUND_TAG, SyncPayload::tag,
-				SyncPayload::new
-		);
+        if (!FMLEnvironment.dist.isClient())
+            PacketDistributor.sendToAllPlayers(new SyncPayload(tag));
 
-		public static final CustomPacketPayload.Type<SyncPayload> TYPE = AttachmentUtil.create("hardcore_death_tracker");
+        return tag;
+    }
 
-		public static void execute(SyncPayload payload, IPayloadContext context) {
-			assert PastelCommon.getRegistryAccess() != null; // Surely this cannot be null if we are receiving a packet, right?
-			CLIENT_TRACKER = load(payload.tag, PastelCommon.getRegistryAccess());
-		}
+    public static HardcoreDeathTracker load(CompoundTag tag, HolderLookup.@NotNull Provider wrapperLookup) {
+        var data = new HardcoreDeathTracker();
 
-		@Override
-		public Type<? extends CustomPacketPayload> type() {
-			return TYPE;
-		}
-	}
+        ListTag uuidList = tag.getList("HardcoreDeaths", Tag.TAG_INT_ARRAY);
+        for (Tag listEntry : uuidList) {
+            data.playersThatDiedInHardcore.add(NbtUtils.loadUUID(listEntry));
+        }
+
+        if (!FMLEnvironment.dist.isClient())
+            PacketDistributor.sendToAllPlayers(new SyncPayload(tag));
+
+        return data;
+    }
+
+    public record SyncPayload(CompoundTag tag) implements CustomPacketPayload {
+
+        public static final StreamCodec<FriendlyByteBuf, SyncPayload> CODEC = StreamCodec.composite(
+            ByteBufCodecs.COMPOUND_TAG, SyncPayload::tag,
+            SyncPayload::new
+        );
+
+        public static final CustomPacketPayload.Type<SyncPayload> TYPE = AttachmentUtil.create(
+            "hardcore_death_tracker");
+
+        public static void execute(SyncPayload payload, IPayloadContext context) {
+            assert PastelCommon.getRegistryAccess() !=
+                   null; // Surely this cannot be null if we are receiving a packet, right?
+            CLIENT_TRACKER = load(payload.tag, PastelCommon.getRegistryAccess());
+        }
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
 }

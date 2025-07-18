@@ -15,19 +15,25 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 
 @OnlyIn(Dist.CLIENT)
 public class LizardFrillsFeatureRenderer<T extends LizardEntity> extends RenderLayer<T, LizardEntityModel<T>> {
-    
+
     public LizardFrillsFeatureRenderer(RenderLayerParent<T, LizardEntityModel<T>> context) {
         super(context);
     }
-    
+
     @Override
-    public void render(PoseStack matrices, MultiBufferSource vertexConsumers, int light, T lizard, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+    public void render(
+        PoseStack matrices, MultiBufferSource vertexConsumers, int light, T lizard, float limbAngle, float limbDistance,
+        float tickDelta, float animationProgress, float headYaw, float headPitch
+    ) {
         LizardFrillVariant frills = lizard.getFrills();
         if (frills != LizardFrillVariant.NONE) {
-            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(PastelRenderLayers.GlowInTheDarkRenderLayer.get(frills.getTextureLocation()));
-            var color = lizard.getColor().getColorInt();
-            this.getParentModel().renderToBuffer(matrices, vertexConsumer, 15728640, OverlayTexture.NO_OVERLAY, color);
+            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(
+                PastelRenderLayers.GlowInTheDarkRenderLayer.get(frills.getTextureLocation()));
+            var color = lizard.getColor()
+                              .getColorInt();
+            this.getParentModel()
+                .renderToBuffer(matrices, vertexConsumer, 15728640, OverlayTexture.NO_OVERLAY, color);
         }
     }
-    
+
 }

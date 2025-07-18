@@ -12,19 +12,19 @@ import java.util.Map;
 // Waiting for https://github.com/FabricMC/fabric/pull/1804
 // Who's still waiting this with me in 2025??
 public class BedrockShearsItem extends ShearsItem implements Preenchanted {
-	
-	public BedrockShearsItem(Properties settings) {
-		super(settings);
-	}
-	
-	@Override
-	public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-		return Map.of(Enchantments.EFFICIENCY, 6);
-	}
-	
-	@Override
-	public boolean isEnchantable(ItemStack stack) {
-		return true;
-	}
-	
+
+    public BedrockShearsItem(Properties settings) {
+        super(settings);
+    }
+
+    @Override
+    public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
+        return Map.of(Enchantments.EFFICIENCY, 6);
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
 }

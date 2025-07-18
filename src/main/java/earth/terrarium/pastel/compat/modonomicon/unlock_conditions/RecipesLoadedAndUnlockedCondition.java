@@ -23,19 +23,21 @@ import java.util.List;
 import java.util.Optional;
 
 public class RecipesLoadedAndUnlockedCondition extends BookCondition {
-    
-    protected static final String TOOLTIP = "book.condition.tooltip." + PastelCommon.MOD_ID + ".recipes_loaded_and_unlocked";
-    
+
+    protected static final String TOOLTIP = "book.condition.tooltip." + PastelCommon.MOD_ID +
+                                            ".recipes_loaded_and_unlocked";
+
     protected List<ResourceLocation> recipeIDs;
-    
+
     public RecipesLoadedAndUnlockedCondition(Component tooltip, List<ResourceLocation> recipeIDs) {
         super(tooltip);
         this.recipeIDs = recipeIDs;
     }
-    
-    public static RecipesLoadedAndUnlockedCondition fromJson(ResourceLocation conditionParentId, JsonObject json, HolderLookup.Provider provider) {
+
+    public static RecipesLoadedAndUnlockedCondition fromJson(
+        ResourceLocation conditionParentId, JsonObject json, HolderLookup.Provider provider) {
         List<ResourceLocation> recipeIDs = new ArrayList<>();
-        
+
         JsonArray array = GsonHelper.getAsJsonArray(json, "recipe_ids");
         for (JsonElement element : array) {
             recipeIDs.add(ResourceLocation.parse(element.getAsString()));
@@ -43,7 +45,7 @@ public class RecipesLoadedAndUnlockedCondition extends BookCondition {
         Component tooltip = tooltipFromJson(json, provider);
         return new RecipesLoadedAndUnlockedCondition(tooltip, recipeIDs);
     }
-    
+
     public static RecipesLoadedAndUnlockedCondition fromNetwork(RegistryFriendlyByteBuf buffer) {
         Component tooltip = buffer.readBoolean() ? ComponentSerialization.STREAM_CODEC.decode(buffer) : null;
         int recipeCount = buffer.readInt();
@@ -53,12 +55,12 @@ public class RecipesLoadedAndUnlockedCondition extends BookCondition {
         }
         return new RecipesLoadedAndUnlockedCondition(tooltip, recipeIDs);
     }
-    
+
     @Override
     public ResourceLocation getType() {
         return ModonomiconCompat.RECIPE_LOADED_AND_UNLOCKED;
     }
-    
+
     @Override
     public void toNetwork(RegistryFriendlyByteBuf buffer) {
         buffer.writeBoolean(this.tooltip != null);
@@ -70,13 +72,16 @@ public class RecipesLoadedAndUnlockedCondition extends BookCondition {
             buffer.writeResourceLocation(identifier);
         }
     }
-    
+
     @Override
     public boolean test(BookConditionContext context, Player player) {
         for (ResourceLocation recipeID : this.recipeIDs) {
-            Optional<RecipeHolder<?>> optionalRecipe = player.level().getRecipeManager().byKey(recipeID);
+            Optional<RecipeHolder<?>> optionalRecipe = player.level()
+                                                             .getRecipeManager()
+                                                             .byKey(recipeID);
             if (optionalRecipe.isPresent()) {
-                Recipe<?> recipe = optionalRecipe.get().value();
+                Recipe<?> recipe = optionalRecipe.get()
+                                                 .value();
                 if (recipe instanceof GatedRecipe<?> gatedRecipe) {
                     if (gatedRecipe.canPlayerCraft(player)) {
                         return true;
@@ -88,7 +93,7 @@ public class RecipesLoadedAndUnlockedCondition extends BookCondition {
         }
         return false;
     }
-    
+
     @Override
     public List<Component> getTooltip(Player player, BookConditionContext context) {
         if (this.tooltip == null) {

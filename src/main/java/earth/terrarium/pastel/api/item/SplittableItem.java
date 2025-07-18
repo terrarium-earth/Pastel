@@ -7,14 +7,17 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
 public interface SplittableItem {
-	
-	ItemStack getSplitResult(ServerPlayer player, ItemStack parent);
-	
-	boolean canSplit(ServerPlayer player, InteractionHand activeHand, ItemStack stack);
-	
-	default void sign(ServerPlayer player, ItemStack stack) {
-		stack.set(PastelDataComponentTypes.PAIRED_ITEM, new PairedItemComponent(player.level().getGameTime() + player.getUUID().getMostSignificantBits()));
-	}
-	
-	void playSound(ServerPlayer player);
+
+    ItemStack getSplitResult(ServerPlayer player, ItemStack parent);
+
+    boolean canSplit(ServerPlayer player, InteractionHand activeHand, ItemStack stack);
+
+    default void sign(ServerPlayer player, ItemStack stack) {
+        stack.set(PastelDataComponentTypes.PAIRED_ITEM, new PairedItemComponent(player.level()
+                                                                                      .getGameTime() + player.getUUID()
+                                                                                                             .getMostSignificantBits())
+        );
+    }
+
+    void playSound(ServerPlayer player);
 }

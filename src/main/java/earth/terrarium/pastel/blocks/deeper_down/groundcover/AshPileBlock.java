@@ -13,11 +13,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AshPileBlock extends SnowLayerBlock {
 
-	public static final MapCodec<AshPileBlock> CODEC = simpleCodec(AshPileBlock::new);
+    public static final MapCodec<AshPileBlock> CODEC = simpleCodec(AshPileBlock::new);
 
-	public AshPileBlock(Properties settings) {
-		super(settings);
-	}
+    public AshPileBlock(Properties settings) {
+        super(settings);
+    }
 
 //	@Override
 //	public MapCodec<? extends AshPileBlock> getCodec() {
@@ -25,19 +25,19 @@ public class AshPileBlock extends SnowLayerBlock {
 //		return CODEC;
 //	}
 
-	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		BlockState blockState = world.getBlockState(pos.below());
-		if (blockState.is(PastelBlocks.ASH.get()))
-			return true;
-		return super.canSurvive(state, world, pos);
-	}
-	
-	@Override
-	public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-	}
-	
-	@Override
-	public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-	}
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        BlockState blockState = world.getBlockState(pos.below());
+        if (blockState.is(PastelBlocks.ASH.get()))
+            return true;
+        return super.canSurvive(state, world, pos);
+    }
+
+    @Override
+    public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+    }
 }

@@ -19,41 +19,46 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Map;
 
 public class ResonantLilyBlock extends FlowerBlock implements RevelationAware {
-	
-	public static final ResourceLocation ADVANCEMENT_IDENTIFIER = PastelCommon.locate("midgame/collect_resonant_lily");
 
-	public static final MapCodec<ResonantLilyBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			EFFECTS_FIELD.forGetter(FlowerBlock::getSuspiciousEffects),
-			propertiesCodec()
-	).apply(instance, ResonantLilyBlock::new));
+    public static final ResourceLocation ADVANCEMENT_IDENTIFIER = PastelCommon.locate("midgame/collect_resonant_lily");
 
-	public ResonantLilyBlock(Holder<MobEffect> stewEffect, float effectLengthInSeconds, BlockBehaviour.Properties settings) {
-		this(makeEffectList(stewEffect, effectLengthInSeconds), settings);
-	}
+    public static final MapCodec<ResonantLilyBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                                                                                                                EFFECTS_FIELD.forGetter(FlowerBlock::getSuspiciousEffects),
+                                                                                                                propertiesCodec()
+                                                                                                            )
+                                                                                                            .apply(
+                                                                                                                instance,
+                                                                                                                ResonantLilyBlock::new
+                                                                                                            ));
 
-	public ResonantLilyBlock(SuspiciousStewEffects stewEffects, BlockBehaviour.Properties settings) {
-		super(stewEffects, settings);
-		RevelationAware.register(this);
-	}
+    public ResonantLilyBlock(
+        Holder<MobEffect> stewEffect, float effectLengthInSeconds, BlockBehaviour.Properties settings) {
+        this(makeEffectList(stewEffect, effectLengthInSeconds), settings);
+    }
 
-	@Override
-	public MapCodec<? extends ResonantLilyBlock> codec() {
-		return CODEC;
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return ADVANCEMENT_IDENTIFIER;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		return Map.of(this.defaultBlockState(), Blocks.WHITE_TULIP.defaultBlockState());
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Items.WHITE_TULIP);
-	}
-	
+    public ResonantLilyBlock(SuspiciousStewEffects stewEffects, BlockBehaviour.Properties settings) {
+        super(stewEffects, settings);
+        RevelationAware.register(this);
+    }
+
+    @Override
+    public MapCodec<? extends ResonantLilyBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public ResourceLocation getCloakAdvancementIdentifier() {
+        return ADVANCEMENT_IDENTIFIER;
+    }
+
+    @Override
+    public Map<BlockState, BlockState> getBlockStateCloaks() {
+        return Map.of(this.defaultBlockState(), Blocks.WHITE_TULIP.defaultBlockState());
+    }
+
+    @Override
+    public Tuple<Item, Item> getItemCloak() {
+        return new Tuple<>(this.asItem(), Items.WHITE_TULIP);
+    }
+
 }

@@ -13,28 +13,28 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class SedativesItem extends ItemWithTooltip {
-	
-	public SedativesItem(Properties settings, String tooltip) {
-		super(settings, tooltip);
-	}
-	
-	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-		if (user instanceof ServerPlayer serverplayer) {
-			CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, stack);
-			serverplayer.awardStat(Stats.ITEM_USED.get(this));
-		}
 
-		if (!level.isClientSide) {
-			user.removeEffectsCuredBy(PastelMobEffects.Cures.SEDATIVES);
-		}
+    public SedativesItem(Properties settings, String tooltip) {
+        super(settings, tooltip);
+    }
 
-		if (user instanceof Player player) {
-			return ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET), false);
-		} else {
-			stack.consume(1, user);
-			return stack;
-		}
-	}
-	
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
+        if (user instanceof ServerPlayer serverplayer) {
+            CriteriaTriggers.CONSUME_ITEM.trigger(serverplayer, stack);
+            serverplayer.awardStat(Stats.ITEM_USED.get(this));
+        }
+
+        if (!level.isClientSide) {
+            user.removeEffectsCuredBy(PastelMobEffects.Cures.SEDATIVES);
+        }
+
+        if (user instanceof Player player) {
+            return ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET), false);
+        } else {
+            stack.consume(1, user);
+            return stack;
+        }
+    }
+
 }

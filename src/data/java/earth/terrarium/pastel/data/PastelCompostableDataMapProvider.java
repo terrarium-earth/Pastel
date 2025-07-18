@@ -9,7 +9,8 @@ import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import java.util.concurrent.CompletableFuture;
 
 public class PastelCompostableDataMapProvider extends DataMapProvider {
-    public PastelCompostableDataMapProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+    public PastelCompostableDataMapProvider(
+        PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(packOutput, lookupProvider);
     }
 

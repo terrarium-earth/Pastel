@@ -9,10 +9,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public abstract class EnchanterDisplay extends PastelDisplay {
-	
-	// first input is the center, all others around clockwise
-	public EnchanterDisplay(@NotNull RecipeHolder<? extends GatedPastelRecipe<?>> recipe, List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
-		super(recipe, inputs, outputs);
-	}
-	
+
+    // first input is the center, all others around clockwise
+    public EnchanterDisplay(
+        @NotNull RecipeHolder<? extends GatedPastelRecipe<?>> recipe, List<EntryIngredient> inputs,
+        List<EntryIngredient> outputs
+    ) {
+        super(recipe, inputs, outputs);
+    }
+
 }
