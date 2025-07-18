@@ -18,9 +18,11 @@ public class NectardewBurgeonItem extends CloakedItem implements SlotBackgroundE
 
     private final Component lore;
 
-    public NectardewBurgeonItem(Properties settings, String lore, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
+    public NectardewBurgeonItem(
+        Properties settings, String lore, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
         super(settings, cloakAdvancementIdentifier, cloakItem);
-        this.lore = Component.translatable(lore).withStyle(ChatFormatting.GRAY);
+        this.lore = Component.translatable(lore)
+                             .withStyle(ChatFormatting.GRAY);
     }
 
     @Override

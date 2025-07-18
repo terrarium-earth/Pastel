@@ -11,7 +11,8 @@ public class PedestalCraftingDisplaySerializer {
 			int height = tag.getInt("Height");
 			String recipeTier = tag.getString("RecipeTier");
 			Identifier requiredAdvancementIdentifier = Identifier.tryParse(tag.getString("Advancement"));
-			return simple(input, output, width, height, experience, craftingTime, requiredAdvancementIdentifier, recipeTier);
+			return simple(input, output, width, height, experience, craftingTime, requiredAdvancementIdentifier,
+			recipeTier);
 		}, (display, tag) -> {
 			tag.putFloat("Experience", display.experience);
 			tag.putInt("CraftingTime", display.craftingTime);
@@ -23,8 +24,11 @@ public class PedestalCraftingDisplaySerializer {
 		});
 	}
 	
-	static @NotNull PedestalCraftingDisplay simple(List<EntryIngredient> inputs, List<EntryIngredient> outputs, int width, int height, float experience, int craftingTime, Identifier requiredAdvancementIdentifier, String recipeTier, boolean secret) {
-		return new PedestalCraftingDisplay(inputs, outputs, width, height, experience, craftingTime, requiredAdvancementIdentifier, recipeTier, secret);
+	static @NotNull PedestalCraftingDisplay simple(List<EntryIngredient> inputs, List<EntryIngredient> outputs, int
+	width, int height, float experience, int craftingTime, Identifier requiredAdvancementIdentifier, String
+	recipeTier, boolean secret) {
+		return new PedestalCraftingDisplay(inputs, outputs, width, height, experience, craftingTime,
+		requiredAdvancementIdentifier, recipeTier, secret);
 	}*/
-	
+
 }

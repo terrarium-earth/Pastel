@@ -47,7 +47,8 @@ public class PastelEntityEvents {
     private static void armorEffects(LivingDamageEvent.Post event) {
         var attacked = event.getEntity();
 
-        if (attacked.level().isClientSide())
+        if (attacked.level()
+                    .isClientSide())
             return;
 
         for (ItemStack armor : attacked.getArmorSlots()) {
@@ -61,25 +62,29 @@ public class PastelEntityEvents {
         var source = event.getSource();
         var entity = source.getEntity();
 
-        if (!(entity instanceof LivingEntity attacker) || event.getNewDamage() <= Mth.EPSILON || source.is(DamageTypes.THORNS))
+        if (!(entity instanceof LivingEntity attacker) || event.getNewDamage() <= Mth.EPSILON || source.is(
+            DamageTypes.THORNS))
             return;
 
-        var disarming = Ench.getLevel(attacker.registryAccess(), PastelEnchantments.DISARMING, attacker.getMainHandItem());
-        if (disarming > 0 && target.getRandom().nextFloat() < disarming * PastelCommon.CONFIG.DisarmingChancePerLevelMobs)
+        var disarming = Ench.getLevel(
+            attacker.registryAccess(), PastelEnchantments.DISARMING, attacker.getMainHandItem());
+        if (disarming > 0 && target.getRandom()
+                                   .nextFloat() < disarming * PastelCommon.CONFIG.DisarmingChancePerLevelMobs)
             DisarmingHelper.disarmEntity(target);
     }
 
 
-
     private static void parryingSwordBlock(LivingShieldBlockEvent event) {
-        var damage = event.getDamageContainer().getOriginalDamage();
+        var damage = event.getDamageContainer()
+                          .getOriginalDamage();
         var shielder = event.getEntity();
         var weapon = shielder.getUseItem();
 
         if (!(weapon.getItem() instanceof ParryingSwordItem parryingSword))
             return;
 
-        if (event.getDamageSource().is(PastelDamageTypeTags.BYPASSES_PARRYING)) {
+        if (event.getDamageSource()
+                 .is(PastelDamageTypeTags.BYPASSES_PARRYING)) {
             event.setBlocked(false);
             event.setBlockedDamage(0);
             return;
@@ -103,7 +108,11 @@ public class PastelEntityEvents {
         if (parryingSword.canDeflect(event.getDamageSource(), perfect)) {
             var mult = parryingSword.getBlockingMultiplier(event.getDamageSource(), weapon, shielder, useTime);
             if (mult > 0)
-                shielder.level().broadcastEntityEvent(shielder, (byte) 29); // without this, the shielding sound does not play on non-perfect parries
+                shielder.level()
+                        .broadcastEntityEvent(
+                            shielder,
+                            (byte) 29
+                        ); // without this, the shielding sound does not play on non-perfect parries
 
             event.setBlocked(true);
             event.setBlockedDamage(damage - damage * mult);
@@ -114,7 +123,8 @@ public class PastelEntityEvents {
         var entity = event.getEntity();
 
         if (entity instanceof LivingEntity living) {
-            if (living.level().isClientSide())
+            if (living.level()
+                      .isClientSide())
                 return;
 
             var additions = PastelEffectEvents.QUEUED_ADDITIONS.get(entity.getUUID());
@@ -125,7 +135,8 @@ public class PastelEntityEvents {
             }
 
             PrimordialFireData.serverTick(living);
-            AzureDikeProvider.getAzureDikeComponent(living).serverTick(living);
+            AzureDikeProvider.getAzureDikeComponent(living)
+                             .serverTick(living);
         }
     }
 
@@ -136,14 +147,16 @@ public class PastelEntityEvents {
         // If the player is damaged by lava and wears an ashen circlet:
         // prevent damage and grant fire resistance
         if (source.is(DamageTypes.LAVA)) {
-            Optional<ItemStack> ashenCircletStack = PastelTrinketItem.getFirstEquipped(entity, PastelItems.ASHEN_CIRCLET.get());
+            Optional<ItemStack> ashenCircletStack = PastelTrinketItem.getFirstEquipped(
+                entity, PastelItems.ASHEN_CIRCLET.get());
             if (ashenCircletStack.isPresent()) {
                 if (AshenCircletItem.getCooldownTicks(ashenCircletStack.get(), entity.level()) == 0) {
                     AshenCircletItem.grantFireResistance(ashenCircletStack.get(), entity);
                     event.setCanceled(true);
                 }
             }
-        } else if (source.is(DamageTypeTags.IS_FIRE) && PastelTrinketItem.hasEquipped(entity, PastelItems.ASHEN_CIRCLET.get())) {
+        } else if (source.is(DamageTypeTags.IS_FIRE) && PastelTrinketItem.hasEquipped(
+            entity, PastelItems.ASHEN_CIRCLET.get())) {
             event.setCanceled(true);
         }
     }
@@ -154,25 +167,38 @@ public class PastelEntityEvents {
         var newEquipment = event.getTo();
         var equipmentSlot = event.getSlot();
 
-        var oldInexorable = Ench.getLevel(livingEntity.level().registryAccess(), PastelEnchantments.INEXORABLE, oldEquipment);
-        var newInexorable = Ench.getLevel(livingEntity.level().registryAccess(), PastelEnchantments.INEXORABLE, newEquipment);
+        var oldInexorable = Ench.getLevel(
+            livingEntity.level()
+                        .registryAccess(), PastelEnchantments.INEXORABLE, oldEquipment
+        );
+        var newInexorable = Ench.getLevel(
+            livingEntity.level()
+                        .registryAccess(), PastelEnchantments.INEXORABLE, newEquipment
+        );
 
-        var effectType = equipmentSlot == EquipmentSlot.CHEST ? PastelAttributeTags.INEXORABLE_ARMOR_EFFECTIVE : PastelAttributeTags.INEXORABLE_HANDHELD_EFFECTIVE;
+        var effectType = equipmentSlot == EquipmentSlot.CHEST ? PastelAttributeTags.INEXORABLE_ARMOR_EFFECTIVE
+                                                              : PastelAttributeTags.INEXORABLE_HANDHELD_EFFECTIVE;
 
         //TODO make inexorable use enchantment effects or something
         //TODO also move the enchantment cloaking logic from LivingEntityMixin into here
         if (oldInexorable > 0 && newInexorable <= 0) {
             livingEntity.getActiveEffects()
-                    .stream()
-                    .filter(instance -> {
-                        AtomicBoolean result = new AtomicBoolean(false);
-                        instance.getEffect().value().createModifiers(instance.getAmplifier(), (attribute, modifier) -> {
-                            if (attribute.is(effectType))
-                                result.set(true);
-                        });
-                        return result.get();
-                    })
-                    .forEach(instance -> instance.getEffect().value().onEffectStarted(livingEntity, instance.getAmplifier()));
+                        .stream()
+                        .filter(instance -> {
+                            AtomicBoolean result = new AtomicBoolean(false);
+                            instance.getEffect()
+                                    .value()
+                                    .createModifiers(
+                                        instance.getAmplifier(), (attribute, modifier) -> {
+                                            if (attribute.is(effectType))
+                                                result.set(true);
+                                        }
+                                    );
+                            return result.get();
+                        })
+                        .forEach(instance -> instance.getEffect()
+                                                     .value()
+                                                     .onEffectStarted(livingEntity, instance.getAmplifier()));
         }
 
     }
@@ -188,9 +214,11 @@ public class PastelEntityEvents {
         var curios = CuriosApi.getCuriosInventory(killedEntity);
 
         if (curios.isPresent()) {
-            var totem = curios.get().findFirstCurio(PastelItems.TOTEM_PENDANT.get());
+            var totem = curios.get()
+                              .findFirstCurio(PastelItems.TOTEM_PENDANT.get());
             if (totem.isPresent()) {
-                ItemStack totemStack = totem.get().stack();
+                ItemStack totemStack = totem.get()
+                                            .stack();
 
                 if (totemStack.getCount() > 0) {
                     // increase stat
@@ -206,14 +234,16 @@ public class PastelEntityEvents {
                     killedEntity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
                     killedEntity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
                     killedEntity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
-                    killedEntity.level().broadcastEntityEvent(killedEntity, EntityEvent.TALISMAN_ACTIVATE);
+                    killedEntity.level()
+                                .broadcastEntityEvent(killedEntity, EntityEvent.TALISMAN_ACTIVATE);
                     event.setCanceled(true);
                     return;
                 }
             }
         }
 
-        if (killedEntity instanceof ServerPlayer player) { //At this point it can only be concluded that this bitch dead as hell
+        if (killedEntity instanceof ServerPlayer player) { //At this point it can only be concluded that this bitch
+            // dead as hell
             evaluateAndDropPlayerHead(player, damageSource);
         }
     }
@@ -227,18 +257,22 @@ public class PastelEntityEvents {
             boolean shouldDropHead = source.is(PastelDamageTypeTags.ALWAYS_DROPS_MOB_HEAD);
             if (!shouldDropHead && source.getEntity() instanceof LivingEntity livingAttacker) {
                 int damageSourceTreasureHunt = Ench.getEquipmentLevel(
-                        serverWorld.registryAccess(),
-                        PastelEnchantments.TREASURE_HUNTER,
-                        livingAttacker);
+                    serverWorld.registryAccess(),
+                    PastelEnchantments.TREASURE_HUNTER,
+                    livingAttacker
+                );
 
-                shouldDropHead = damageSourceTreasureHunt > 0 && serverWorld.getRandom().nextFloat() < 0.2 * damageSourceTreasureHunt;
+                shouldDropHead = damageSourceTreasureHunt > 0 && serverWorld.getRandom()
+                                                                            .nextFloat() <
+                                                                 0.2 * damageSourceTreasureHunt;
             }
 
             if (shouldDropHead) {
                 ItemStack headItemStack = new ItemStack(Items.PLAYER_HEAD);
                 headItemStack.set(DataComponents.PROFILE, new ResolvableProfile(player.getGameProfile()));
 
-                ItemEntity headEntity = new ItemEntity(serverWorld, player.getX(), player.getY(), player.getZ(), headItemStack);
+                ItemEntity headEntity = new ItemEntity(
+                    serverWorld, player.getX(), player.getY(), player.getZ(), headItemStack);
                 serverWorld.addFreshEntity(headEntity);
             }
         }

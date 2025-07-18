@@ -46,7 +46,8 @@ public class AbyssalVineBlock extends TriStateVineBlock {
     }
 
     @Override
-    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+    public InteractionResult useWithoutItem(
+        BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         var reference = BlockReference.of(state, pos);
         var superSucc = super.useWithoutItem(state, world, pos, player, hit);
 
@@ -59,8 +60,13 @@ public class AbyssalVineBlock extends TriStateVineBlock {
 
         reference.setProperty(BERRIES, false);
         reference.update(world);
-        world.playSound(null, pos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.8F, 1.2F));
-        player.getInventory().placeItemBackInInventory(PastelItems.FISSURE_PLUM.get().getDefaultInstance());
+        world.playSound(
+            null, pos, SoundEvents.CAVE_VINES_PICK_BERRIES, SoundSource.BLOCKS, 1.0F,
+            Mth.randomBetween(world.random, 0.8F, 1.2F)
+        );
+        player.getInventory()
+              .placeItemBackInInventory(PastelItems.FISSURE_PLUM.get()
+                                                                .getDefaultInstance());
 
         world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, reference.getState()));
         return InteractionResult.SUCCESS;
@@ -100,7 +106,8 @@ public class AbyssalVineBlock extends TriStateVineBlock {
 
     @Override
     public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state) {
-        return PastelItems.FISSURE_PLUM.get().getDefaultInstance();
+        return PastelItems.FISSURE_PLUM.get()
+                                       .getDefaultInstance();
     }
 
     @Override
@@ -118,7 +125,8 @@ public class AbyssalVineBlock extends TriStateVineBlock {
             berryCount += checkForBerries(uRef);
             berryCount += checkForBerries(dRef);
 
-            if (i == 1 && (reference.pos.getY() % 5 == 0 && berryCount == 2) || (reference.pos.getY() % 7 == 0 && berryCount == 1))
+            if (i == 1 && (reference.pos.getY() % 5 == 0 && berryCount == 2) ||
+                (reference.pos.getY() % 7 == 0 && berryCount == 1))
                 return;
         }
 

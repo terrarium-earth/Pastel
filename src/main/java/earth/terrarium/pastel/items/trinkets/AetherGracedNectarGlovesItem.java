@@ -26,56 +26,65 @@ import java.util.List;
 
 public class AetherGracedNectarGlovesItem extends AzureDikeTrinketItem implements SlotBackgroundEffect {
 
-	public static final int HARMFUL_EFFECT_COST = 5;
-	public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon.locate("nectar_gloves_sleep");
-	
-	public AetherGracedNectarGlovesItem(Properties settings, ResourceLocation unlockIdentifier) {
-		super(settings, unlockIdentifier);
-	}
+    public static final int HARMFUL_EFFECT_COST = 5;
+    public static ResourceLocation MENTAL_PRESENCE_ATTRIBUTE_ID = PastelCommon.locate("nectar_gloves_sleep");
 
-	@Override
-	public int maxAzureDike(ItemStack stack) {
-		return 10;
-	}
+    public AetherGracedNectarGlovesItem(Properties settings, ResourceLocation unlockIdentifier) {
+        super(settings, unlockIdentifier);
+    }
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.pastel.aether_graced_nectar_gloves.tooltip"));
-		tooltip.add(Component.translatable("item.pastel.aether_graced_nectar_gloves.tooltip2"));
-	}
+    @Override
+    public int maxAzureDike(ItemStack stack) {
+        return 10;
+    }
 
-	@Override
-	public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(SlotContext slotContext, ResourceLocation id, ItemStack stack) {
-		Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
-		modifiers.put(PastelEntityAttributes.MENTAL_PRESENCE, new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, -1F, AttributeModifier.Operation.ADD_VALUE));
-		return modifiers;
-	}
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        tooltip.add(Component.translatable("item.pastel.aether_graced_nectar_gloves.tooltip"));
+        tooltip.add(Component.translatable("item.pastel.aether_graced_nectar_gloves.tooltip2"));
+    }
 
-	public static boolean testEffectFor(LivingEntity entity, Holder<MobEffect> effect) {
-		if (effect.value().isBeneficial())
-			return false;
-		
-		if (effect.is(PastelMobEffectTags.BYPASSES_NECTAR_GLOVES))
-			return false;
+    @Override
+    public Multimap<Holder<Attribute>, AttributeModifier> getAttributeModifiers(
+        SlotContext slotContext, ResourceLocation id, ItemStack stack) {
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = super.getAttributeModifiers(slotContext, id, stack);
+        modifiers.put(
+            PastelEntityAttributes.MENTAL_PRESENCE,
+            new AttributeModifier(MENTAL_PRESENCE_ATTRIBUTE_ID, -1F, AttributeModifier.Operation.ADD_VALUE)
+        );
+        return modifiers;
+    }
 
-		return hasEquipped(entity, PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value().getCategory() == MobEffectCategory.HARMFUL || effect == PastelMobEffects.FRENZY);
-	}
+    public static boolean testEffectFor(LivingEntity entity, Holder<MobEffect> effect) {
+        if (effect.value()
+                  .isBeneficial())
+            return false;
 
-	public static boolean tryBlockEffect(LivingEntity entity, int cost) {
-		if (AzureDikeProvider.getAzureDikeCharges(entity) == 0)
-			return false;
+        if (effect.is(PastelMobEffectTags.BYPASSES_NECTAR_GLOVES))
+            return false;
 
-		return AzureDikeProvider.absorbDamage(entity, cost) == 0;
-	}
+        return hasEquipped(entity, PastelItems.AETHER_GRACED_NECTAR_GLOVES.get()) && (effect.value()
+                                                                                            .getCategory() ==
+                                                                                      MobEffectCategory.HARMFUL ||
+                                                                                      effect ==
+                                                                                      PastelMobEffects.FRENZY);
+    }
 
-	@Override
-	public SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
-		return SlotEffect.BORDER_FADE;
-	}
+    public static boolean tryBlockEffect(LivingEntity entity, int cost) {
+        if (AzureDikeProvider.getAzureDikeCharges(entity) == 0)
+            return false;
 
-	@Override
-	public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
-		return PastelMobEffects.ETERNAL_SLUMBER_COLOR;
-	}
+        return AzureDikeProvider.absorbDamage(entity, cost) == 0;
+    }
+
+    @Override
+    public SlotEffect backgroundType(@Nullable Player player, ItemStack stack) {
+        return SlotEffect.BORDER_FADE;
+    }
+
+    @Override
+    public int getBackgroundColor(@Nullable Player player, ItemStack stack, float tickDelta) {
+        return PastelMobEffects.ETERNAL_SLUMBER_COLOR;
+    }
 }

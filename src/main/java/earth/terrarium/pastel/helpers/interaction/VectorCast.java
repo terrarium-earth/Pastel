@@ -25,7 +25,8 @@ public class VectorCast {
         this.radius = radius;
     }
 
-    public List<CollisionResult<Entity>> castForEntities(ServerLevel world, Predicate<Entity> preCollisionTestFiltering, Entity ... except) {
+    public List<CollisionResult<Entity>> castForEntities(
+        ServerLevel world, Predicate<Entity> preCollisionTestFiltering, Entity... except) {
         var ray = getRelativeToOrigin(end);
         var casterBox = new AABB(start, end).inflate(ray.length() / 2);
 
@@ -34,26 +35,27 @@ public class VectorCast {
         var exceptSet = Arrays.asList(except);
 
         return entities.stream()
-                .filter(entity -> !exceptSet.contains(entity))
-                .map(entity -> processEntity(ray, entity, world))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .toList();
+                       .filter(entity -> !exceptSet.contains(entity))
+                       .map(entity -> processEntity(ray, entity, world))
+                       .filter(Optional::isPresent)
+                       .map(Optional::get)
+                       .toList();
     }
 
-    public List<CollisionResult<BlockPos>> castForBlocks(ServerLevel world, Entity except, BiPredicate<ServerLevel, BlockPos> preCollisionTestFiltering) {
-		var blockStart = BlockPos.containing(start);
-		var blockEnd = BlockPos.containing(end);
-		var ray = getRelativeToOrigin(end);
-	
-		var iterableBlocks = BlockPos.betweenClosed(blockStart, blockEnd);
-		var collisions = new ArrayList<CollisionResult<BlockPos>>();
-	
-		iterableBlocks.forEach(blockPos -> {
-			if (!preCollisionTestFiltering.test(world, blockEnd))
-				return;
-		
-			var collisionResult = processBlock(ray, blockPos, world);
+    public List<CollisionResult<BlockPos>> castForBlocks(
+        ServerLevel world, Entity except, BiPredicate<ServerLevel, BlockPos> preCollisionTestFiltering) {
+        var blockStart = BlockPos.containing(start);
+        var blockEnd = BlockPos.containing(end);
+        var ray = getRelativeToOrigin(end);
+
+        var iterableBlocks = BlockPos.betweenClosed(blockStart, blockEnd);
+        var collisions = new ArrayList<CollisionResult<BlockPos>>();
+
+        iterableBlocks.forEach(blockPos -> {
+            if (!preCollisionTestFiltering.test(world, blockEnd))
+                return;
+
+            var collisionResult = processBlock(ray, blockPos, world);
 
             collisionResult.ifPresent(collisions::add);
         });
@@ -65,8 +67,10 @@ public class VectorCast {
         var hit = false;
         Vec3 closestPointToIntercept;
 
-        collider: {
-            var hitbox = entity.getBoundingBox().inflate(radius);
+        collider:
+        {
+            var hitbox = entity.getBoundingBox()
+                               .inflate(radius);
 
             if (hitbox.contains(end)) {
                 closestPointToIntercept = end;
@@ -87,18 +91,23 @@ public class VectorCast {
 
             var vectorAngle = Math.acos(product / (ray.length() * entityOrigin.length()));
             var entityOffset = Math.abs(Math.cos(vectorAngle) * entityOrigin.length());
-	
-			closestPointToIntercept = new Vec3(
-					entityOffset * Math.sin(orientation.getLongitude()) * Math.cos(orientation.getLatitude()) + start.x,
-					entityOffset * Math.sin(orientation.getLongitude()) * Math.sin(orientation.getLatitude()) + start.y,
-					entityOffset * Math.cos(orientation.getLongitude()) + start.z
-			);
+
+            closestPointToIntercept = new Vec3(
+                entityOffset * Math.sin(orientation.getLongitude()) * Math.cos(orientation.getLatitude()) + start.x,
+                entityOffset * Math.sin(orientation.getLongitude()) * Math.sin(orientation.getLatitude()) + start.y,
+                entityOffset * Math.cos(orientation.getLongitude()) + start.z
+            );
 
             hit = hitbox.contains(closestPointToIntercept);
         }
 
         if (hit) {
-            return Optional.of(new CollisionResult<>(world, entity, entity instanceof LivingEntity ? CollisionResult.CollisionType.LIVING : CollisionResult.CollisionType.NON_LIVING, closestPointToIntercept));
+            return Optional.of(new CollisionResult<>(
+                world, entity, entity instanceof LivingEntity
+                                                                    ? CollisionResult.CollisionType.LIVING
+                                                                    : CollisionResult.CollisionType.NON_LIVING,
+                                                     closestPointToIntercept
+            ));
         }
 
         return Optional.empty();
@@ -108,7 +117,8 @@ public class VectorCast {
         var hit = false;
         Vec3 closestPointToIntercept;
 
-        collider: {
+        collider:
+        {
 
             if (blockContains(pos, end)) {
                 closestPointToIntercept = end;
@@ -129,18 +139,19 @@ public class VectorCast {
 
             var vectorAngle = Math.acos(product / (ray.length() * blockCenter.length()));
             var entityOffset = Math.cos(vectorAngle) * blockCenter.length();
-	
-			closestPointToIntercept = new Vec3(
-					entityOffset * Math.sin(orientation.getLatitude()) * Math.cos(orientation.getLongitude()) + start.x,
-					entityOffset * Math.sin(orientation.getLatitude()) * Math.sin(orientation.getLongitude()) + start.y,
-					entityOffset * Math.cos(orientation.getLatitude()) + start.z
-			);
+
+            closestPointToIntercept = new Vec3(
+                entityOffset * Math.sin(orientation.getLatitude()) * Math.cos(orientation.getLongitude()) + start.x,
+                entityOffset * Math.sin(orientation.getLatitude()) * Math.sin(orientation.getLongitude()) + start.y,
+                entityOffset * Math.cos(orientation.getLatitude()) + start.z
+            );
 
             hit = blockContains(pos, closestPointToIntercept);
         }
 
         if (hit) {
-            return Optional.of(new CollisionResult<>(world, pos, CollisionResult.CollisionType.BLOCK, closestPointToIntercept));
+            return Optional.of(
+                new CollisionResult<>(world, pos, CollisionResult.CollisionType.BLOCK, closestPointToIntercept));
         }
 
         return Optional.empty();
@@ -152,8 +163,8 @@ public class VectorCast {
 
     public boolean blockContains(BlockPos pos, Vec3 point) {
         return pos.getX() - radius <= point.x() && point.x() <= pos.getX() + 1 + radius &&
-                pos.getY() - radius <= point.y() && point.y() <= pos.getY() + 1 + radius &&
-                pos.getZ() - radius <= point.z() && point.z() <= pos.getZ() + 1 + radius;
+               pos.getY() - radius <= point.y() && point.y() <= pos.getY() + 1 + radius &&
+               pos.getZ() - radius <= point.z() && point.z() <= pos.getZ() + 1 + radius;
     }
 
     public Orientation getOrientation() {

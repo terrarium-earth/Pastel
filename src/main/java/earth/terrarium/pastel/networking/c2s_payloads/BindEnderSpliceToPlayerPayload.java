@@ -13,29 +13,33 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 
 public record BindEnderSpliceToPlayerPayload(int entityId) implements CustomPacketPayload {
-	
-	public static final Type<BindEnderSpliceToPlayerPayload> ID = PastelC2SPackets.makeId("bind_ender_splice_to_player");
-	public static final StreamCodec<FriendlyByteBuf, BindEnderSpliceToPlayerPayload> CODEC = StreamCodec.composite(ByteBufCodecs.INT, BindEnderSpliceToPlayerPayload::entityId, BindEnderSpliceToPlayerPayload::new);
-	
-	@Override
-	public Type<? extends CustomPacketPayload> type() {
-		return ID;
-	}
-	
-	public static IPayloadHandler<BindEnderSpliceToPlayerPayload> getPayloadHandler() {
-		return (payload, context) -> {
-			ServerPlayer player = (ServerPlayer) context.player();
-			Entity entity = player.level().getEntity(payload.entityId());
-			if (entity instanceof ServerPlayer targetPlayerEntity
-					&& player.distanceTo(targetPlayerEntity) < 8
-					&& player.getMainHandItem().is(PastelItems.ENDER_SPLICE.get())) {
-				
-				EnderSpliceItem.setTeleportTargetPlayer(player.getMainHandItem(), targetPlayerEntity);
-				
-				player.playSound(PastelSoundEvents.ENDER_SPLICE_BOUND, 1.0F, 1.0F);
-				targetPlayerEntity.playSound(PastelSoundEvents.ENDER_SPLICE_BOUND, 1.0F, 1.0F);
-			}
-		};
-	}
-	
+
+    public static final Type<BindEnderSpliceToPlayerPayload> ID = PastelC2SPackets.makeId(
+        "bind_ender_splice_to_player");
+    public static final StreamCodec<FriendlyByteBuf, BindEnderSpliceToPlayerPayload> CODEC = StreamCodec.composite(
+        ByteBufCodecs.INT, BindEnderSpliceToPlayerPayload::entityId, BindEnderSpliceToPlayerPayload::new);
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
+    }
+
+    public static IPayloadHandler<BindEnderSpliceToPlayerPayload> getPayloadHandler() {
+        return (payload, context) -> {
+            ServerPlayer player = (ServerPlayer) context.player();
+            Entity entity = player.level()
+                                  .getEntity(payload.entityId());
+            if (entity instanceof ServerPlayer targetPlayerEntity
+                && player.distanceTo(targetPlayerEntity) < 8
+                && player.getMainHandItem()
+                         .is(PastelItems.ENDER_SPLICE.get())) {
+
+                EnderSpliceItem.setTeleportTargetPlayer(player.getMainHandItem(), targetPlayerEntity);
+
+                player.playSound(PastelSoundEvents.ENDER_SPLICE_BOUND, 1.0F, 1.0F);
+                targetPlayerEntity.playSound(PastelSoundEvents.ENDER_SPLICE_BOUND, 1.0F, 1.0F);
+            }
+        };
+    }
+
 }

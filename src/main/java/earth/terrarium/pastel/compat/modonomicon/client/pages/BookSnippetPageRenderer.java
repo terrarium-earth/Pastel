@@ -29,21 +29,32 @@ public class BookSnippetPageRenderer extends BookPageRenderer<BookSnippetPage> i
         if (page.getText() instanceof RenderedBookTextHolder renderedText) {
             int y = getTextY();
             for (MutableComponent component : renderedText.getRenderedText()) {
-                var wrapped = MarkdownComponentRenderUtils.wrapComponents(component, BookEntryScreen.PAGE_WIDTH - 10, BookEntryScreen.PAGE_WIDTH - 10, font);
+                var wrapped = MarkdownComponentRenderUtils.wrapComponents(
+                    component, BookEntryScreen.PAGE_WIDTH - 10, BookEntryScreen.PAGE_WIDTH - 10, font);
                 for (FormattedCharSequence orderedText : wrapped) {
-                    drawCenteredStringNoShadow(drawContext, orderedText, page.getBook().getBookTextOffsetWidth() + BookEntryScreen.PAGE_WIDTH / 2, y, 0, 1);
+                    drawCenteredStringNoShadow(
+                        drawContext, orderedText, page.getBook()
+                                                      .getBookTextOffsetWidth() + BookEntryScreen.PAGE_WIDTH / 2, y, 0,
+                        1
+                    );
                     y += font.lineHeight;
                 }
             }
         } else {
-            drawCenteredStringNoShadow(drawContext, page.getText().getComponent().getVisualOrderText(), BookEntryScreen.PAGE_WIDTH / 2, getTextY(), 0, 1);
+            drawCenteredStringNoShadow(
+                drawContext, page.getText()
+                                 .getComponent()
+                                 .getVisualOrderText(), BookEntryScreen.PAGE_WIDTH / 2, getTextY(), 0, 1
+            );
         }
 
         RenderSystem.enableBlend();
-        drawContext.blit(page.getResourcePath(), 58 - page.getTextureWidth() / 2, getImageY(),
-                page.getTextureX(), page.getTextureY(),
-                page.getTextureWidth(), page.getTextureHeight(),
-                page.getResourceWidth(), page.getResourceHeight());
+        drawContext.blit(
+            page.getResourcePath(), 58 - page.getTextureWidth() / 2, getImageY(),
+            page.getTextureX(), page.getTextureY(),
+            page.getTextureWidth(), page.getTextureHeight(),
+            page.getResourceWidth(), page.getResourceHeight()
+        );
 
         var style = this.getClickedComponentStyleAt(mouseX, mouseY);
         if (style != null)
@@ -55,13 +66,17 @@ public class BookSnippetPageRenderer extends BookPageRenderer<BookSnippetPage> i
     public Style getClickedComponentStyleAt(double pMouseX, double pMouseY) {
         if (pMouseX > 0 && pMouseY > 0) {
             if (page.hasTitle()) {
-                var titleStyle = getClickedComponentStyleAtForTitle(page.getTitle(), BookEntryScreen.PAGE_WIDTH / 2, 0, pMouseX, pMouseY);
+                var titleStyle = getClickedComponentStyleAtForTitle(
+                    page.getTitle(), BookEntryScreen.PAGE_WIDTH / 2, 0, pMouseX, pMouseY);
                 if (titleStyle != null) {
                     return titleStyle;
                 }
             }
 
-            var textStyle = getClickedComponentStyleAtForTextHolder(page.getText(), BookEntryScreen.PAGE_WIDTH / 2, getTextY(), BookEntryScreen.PAGE_WIDTH, pMouseX, pMouseY);
+            var textStyle = getClickedComponentStyleAtForTextHolder(
+                page.getText(), BookEntryScreen.PAGE_WIDTH / 2, getTextY(), BookEntryScreen.PAGE_WIDTH, pMouseX,
+                pMouseY
+            );
             if (textStyle != null) {
                 return textStyle;
             }
@@ -71,14 +86,16 @@ public class BookSnippetPageRenderer extends BookPageRenderer<BookSnippetPage> i
 
     @Nullable
     @Override
-    protected Style getClickedComponentStyleAtForTextHolder(BookTextHolder text, int x, int y, int width, int height, double pMouseX, double pMouseY) {
+    protected Style getClickedComponentStyleAtForTextHolder(
+        BookTextHolder text, int x, int y, int width, int height, double pMouseX, double pMouseY) {
         if (text.hasComponent()) {
             for (FormattedCharSequence formattedCharSequence : font.split(text.getComponent(), width)) {
                 if (pMouseY > y && pMouseY < y + font.lineHeight) {
                     x -= font.width(formattedCharSequence) / 2;
                     if (pMouseX < x)
                         return null;
-                    return font.getSplitter().componentStyleAtWidth(formattedCharSequence, (int) pMouseX - x);
+                    return font.getSplitter()
+                               .componentStyleAtWidth(formattedCharSequence, (int) pMouseX - x);
                 }
                 y += font.lineHeight;
             }
@@ -91,7 +108,8 @@ public class BookSnippetPageRenderer extends BookPageRenderer<BookSnippetPage> i
                         x -= font.width(formattedCharSequence) / 2;
                         if (pMouseX < x)
                             return null;
-                        return font.getSplitter().componentStyleAtWidth(formattedCharSequence, (int) pMouseX - x);
+                        return font.getSplitter()
+                                   .componentStyleAtWidth(formattedCharSequence, (int) pMouseX - x);
                     }
                     y += font.lineHeight;
                 }

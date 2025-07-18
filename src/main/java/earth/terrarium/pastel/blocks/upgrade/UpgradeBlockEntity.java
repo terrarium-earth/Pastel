@@ -6,9 +6,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class UpgradeBlockEntity extends BlockEntity {
-	
-	public UpgradeBlockEntity(BlockPos pos, BlockState state) {
-		super(PastelBlockEntities.UPGRADE_BLOCK.get(), pos, state);
-	}
-	
+
+    public UpgradeBlockEntity(BlockPos pos, BlockState state) {
+        super(PastelBlockEntities.UPGRADE_BLOCK.get(), pos, state);
+    }
+
 }

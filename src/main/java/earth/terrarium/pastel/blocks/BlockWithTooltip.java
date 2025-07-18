@@ -10,23 +10,24 @@ import net.minecraft.world.level.block.Block;
 import java.util.List;
 
 public class BlockWithTooltip extends Block {
-	
-	protected final Component tooltipText;
-	
-	public BlockWithTooltip(Properties settings, Component tooltipText) {
-		super(settings);
-		this.tooltipText = tooltipText;
-	}
 
-	@Override
-	public MapCodec<? extends BlockWithTooltip> codec() {
-		//TODO: Make the codec
-		return null;
-	}
+    protected final Component tooltipText;
 
-	@Override
-	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(tooltipText);
-	}
+    public BlockWithTooltip(Properties settings, Component tooltipText) {
+        super(settings);
+        this.tooltipText = tooltipText;
+    }
+
+    @Override
+    public MapCodec<? extends BlockWithTooltip> codec() {
+        //TODO: Make the codec
+        return null;
+    }
+
+    @Override
+    public void appendHoverText(
+        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        tooltip.add(tooltipText);
+    }
 }

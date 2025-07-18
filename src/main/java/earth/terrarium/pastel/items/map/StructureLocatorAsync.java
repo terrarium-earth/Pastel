@@ -18,39 +18,46 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 
 public class StructureLocatorAsync {
-	
-	private final ServerLevel world;
-	private final Optional<HolderSet<Structure>> structures;
-	private final AtomicBoolean pinging;
-	private final long delayMillis;
-	
-	private long nextTime = 0;
-	
-	public StructureLocatorAsync(ServerLevel world, ResourceLocation targetId, long delayMillis) {
-		this.world = world;
-		this.structures = world.registryAccess().registryOrThrow(Registries.STRUCTURE).getHolder(targetId).map(HolderSet::direct);
-		this.pinging = new AtomicBoolean(false);
-		this.delayMillis = delayMillis;
-	}
-	
-	public void ping(BlockPos pos, BiConsumer<LevelAccessor, BlockPos> acceptor) {
-		if (structures.isEmpty() || pinging.get())
-			return;
-		
-		long time = System.currentTimeMillis();
-		if (time < nextTime) return;
-		nextTime = time + delayMillis;
-		
-		CompletableFuture.runAsync(() -> {
-			pinging.set(true);
-			ChunkGenerator generator = world.getChunkSource().getGenerator();
-			Pair<BlockPos, Holder<Structure>> pair = generator.findNearestMapStructure(world, structures.get(), pos, 100, false);
-			// TODO Get the centerpoint of the structure region
-			if (pair != null) {
-				acceptor.accept(world, pair.getFirst());
-			}
-			pinging.set(false);
-		}, Util.backgroundExecutor());
-	}
-	
+
+    private final ServerLevel world;
+    private final Optional<HolderSet<Structure>> structures;
+    private final AtomicBoolean pinging;
+    private final long delayMillis;
+
+    private long nextTime = 0;
+
+    public StructureLocatorAsync(ServerLevel world, ResourceLocation targetId, long delayMillis) {
+        this.world = world;
+        this.structures = world.registryAccess()
+                               .registryOrThrow(Registries.STRUCTURE)
+                               .getHolder(targetId)
+                               .map(HolderSet::direct);
+        this.pinging = new AtomicBoolean(false);
+        this.delayMillis = delayMillis;
+    }
+
+    public void ping(BlockPos pos, BiConsumer<LevelAccessor, BlockPos> acceptor) {
+        if (structures.isEmpty() || pinging.get())
+            return;
+
+        long time = System.currentTimeMillis();
+        if (time < nextTime) return;
+        nextTime = time + delayMillis;
+
+        CompletableFuture.runAsync(
+            () -> {
+                pinging.set(true);
+                ChunkGenerator generator = world.getChunkSource()
+                                                .getGenerator();
+                Pair<BlockPos, Holder<Structure>> pair = generator.findNearestMapStructure(
+                    world, structures.get(), pos, 100, false);
+                // TODO Get the centerpoint of the structure region
+                if (pair != null) {
+                    acceptor.accept(world, pair.getFirst());
+                }
+                pinging.set(false);
+            }, Util.backgroundExecutor()
+        );
+    }
+
 }

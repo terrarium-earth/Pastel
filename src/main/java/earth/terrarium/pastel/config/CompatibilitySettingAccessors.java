@@ -11,7 +11,8 @@ public class CompatibilitySettingAccessors {
     private final Set<String> compatModIds = new HashSet<>();
     private final Map<Class<?>, Map<String, Map<String, Object>>> settings = new HashMap<>();
 
-    private CompatibilitySettingAccessors() {}
+    private CompatibilitySettingAccessors() {
+    }
 
     public <T> void register(String modId, Class<T> type, String key, T value) {
         if (compatModIds.add(modId)) {

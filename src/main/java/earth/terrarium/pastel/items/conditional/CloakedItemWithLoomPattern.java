@@ -12,23 +12,26 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 import java.util.List;
 
 public class CloakedItemWithLoomPattern extends CloakedItem implements LoomPatternProvider {
-	
-	private final ResourceKey<BannerPattern> patternItemTag;
-	
-	public CloakedItemWithLoomPattern(Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem, ResourceKey<BannerPattern> patternItemTag) {
-		super(settings, cloakAdvancementIdentifier, cloakItem);
-		this.patternItemTag = patternItemTag;
-	}
-	
-	@Override
-	public ResourceKey<BannerPattern> getPattern() {
-		return patternItemTag;
-	}
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		addBannerPatternProviderTooltip(tooltip);
-	}
-	
+    private final ResourceKey<BannerPattern> patternItemTag;
+
+    public CloakedItemWithLoomPattern(
+        Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem,
+        ResourceKey<BannerPattern> patternItemTag
+    ) {
+        super(settings, cloakAdvancementIdentifier, cloakItem);
+        this.patternItemTag = patternItemTag;
+    }
+
+    @Override
+    public ResourceKey<BannerPattern> getPattern() {
+        return patternItemTag;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        addBannerPatternProviderTooltip(tooltip);
+    }
+
 }

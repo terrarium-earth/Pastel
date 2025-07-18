@@ -12,13 +12,16 @@ import java.util.concurrent.CompletableFuture;
 
 public class PastelBlockTagsProvider extends BlockTagsProvider {
 
-	public PastelBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, PastelCommon.MOD_ID, existingFileHelper);
-	}
+    public PastelBlockTagsProvider(
+        PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+        @Nullable ExistingFileHelper existingFileHelper
+    ) {
+        super(output, lookupProvider, PastelCommon.MOD_ID, existingFileHelper);
+    }
 
-	@Override
-	protected void addTags(HolderLookup.Provider wrapperLookup) {
-		PastelBlockTags.provideTags(this::tag);
-	}
-	
+    @Override
+    protected void addTags(HolderLookup.Provider wrapperLookup) {
+        PastelBlockTags.provideTags(this::tag);
+    }
+
 }

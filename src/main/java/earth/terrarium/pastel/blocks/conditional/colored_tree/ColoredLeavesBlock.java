@@ -19,76 +19,115 @@ import java.util.Map;
 
 public class ColoredLeavesBlock extends LeavesBlock implements RevelationAware, ColoredTree {
 
-	public static final MapCodec<ColoredLeavesBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-			propertiesCodec(),
-			InkColor.CODEC.fieldOf("color").forGetter(ColoredLeavesBlock::getColor)
-	).apply(instance, ColoredLeavesBlock::new));
-	
-	private static final Map<InkColor, ColoredLeavesBlock> LEAVES = new Object2ObjectArrayMap<>();
-	protected final InkColor color;
-	
-	public ColoredLeavesBlock(Properties settings, InkColor color) {
-		super(settings);
-		this.color = color;
-		LEAVES.put(color, this);
-		RevelationAware.register(this);
-	}
+    public static final MapCodec<ColoredLeavesBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                                                                                                                 propertiesCodec(),
+                                                                                                                 InkColor.CODEC.fieldOf("color")
+                                                                                                                               .forGetter(ColoredLeavesBlock::getColor)
+                                                                                                             )
+                                                                                                             .apply(
+                                                                                                                 instance,
+                                                                                                                 ColoredLeavesBlock::new
+                                                                                                             ));
 
-	@Override
-	public MapCodec<? extends ColoredLeavesBlock> codec() {
-		return CODEC;
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return ColoredTree.getTreeCloakAdvancementIdentifier(TreePart.LEAVES, this.color);
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		Map<BlockState, BlockState> map = new Hashtable<>();
-		for (int distance = 1; distance < 8; distance++) {
-			map.put(this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, false), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, false));
-			map.put(this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, true), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, false).setValue(WATERLOGGED, true));
-			
-			map.put(this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, false), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, false));
-			map.put(this.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, true), Blocks.OAK_LEAVES.defaultBlockState().setValue(LeavesBlock.DISTANCE, distance).setValue(LeavesBlock.PERSISTENT, true).setValue(WATERLOGGED, true));
-		}
-		return map;
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this.asItem(), Blocks.OAK_LEAVES.asItem());
-	}
-	
-	@Override
-	public void onUncloak() {
-		if (PastelColorProviders.coloredLeavesBlockColorProvider != null && PastelColorProviders.coloredLeavesItemColorProvider != null) {
-			PastelColorProviders.coloredLeavesBlockColorProvider.setShouldApply(false);
-			PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(false);
-		}
-	}
-	
-	@Override
-	public void onCloak() {
-		if (PastelColorProviders.coloredLeavesBlockColorProvider != null && PastelColorProviders.coloredLeavesItemColorProvider != null) {
-			PastelColorProviders.coloredLeavesBlockColorProvider.setShouldApply(true);
-			PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(true);
-		}
-	}
-	
-	@Override
-	public InkColor getColor() {
-		return this.color;
-	}
-	
-	public static ColoredLeavesBlock byColor(InkColor color) {
-		return LEAVES.get(color);
-	}
-	
-	public static Collection<ColoredLeavesBlock> all() {
-		return LEAVES.values();
-	}
-	
+    private static final Map<InkColor, ColoredLeavesBlock> LEAVES = new Object2ObjectArrayMap<>();
+    protected final InkColor color;
+
+    public ColoredLeavesBlock(Properties settings, InkColor color) {
+        super(settings);
+        this.color = color;
+        LEAVES.put(color, this);
+        RevelationAware.register(this);
+    }
+
+    @Override
+    public MapCodec<? extends ColoredLeavesBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public ResourceLocation getCloakAdvancementIdentifier() {
+        return ColoredTree.getTreeCloakAdvancementIdentifier(TreePart.LEAVES, this.color);
+    }
+
+    @Override
+    public Map<BlockState, BlockState> getBlockStateCloaks() {
+        Map<BlockState, BlockState> map = new Hashtable<>();
+        for (int distance = 1; distance < 8; distance++) {
+            map.put(
+                this.defaultBlockState()
+                    .setValue(LeavesBlock.DISTANCE, distance)
+                    .setValue(LeavesBlock.PERSISTENT, false)
+                    .setValue(WATERLOGGED, false), Blocks.OAK_LEAVES.defaultBlockState()
+                                                                    .setValue(LeavesBlock.DISTANCE, distance)
+                                                                    .setValue(LeavesBlock.PERSISTENT, false)
+                                                                    .setValue(WATERLOGGED, false)
+            );
+            map.put(
+                this.defaultBlockState()
+                    .setValue(LeavesBlock.DISTANCE, distance)
+                    .setValue(LeavesBlock.PERSISTENT, false)
+                    .setValue(WATERLOGGED, true), Blocks.OAK_LEAVES.defaultBlockState()
+                                                                   .setValue(LeavesBlock.DISTANCE, distance)
+                                                                   .setValue(LeavesBlock.PERSISTENT, false)
+                                                                   .setValue(WATERLOGGED, true)
+            );
+
+            map.put(
+                this.defaultBlockState()
+                    .setValue(LeavesBlock.DISTANCE, distance)
+                    .setValue(LeavesBlock.PERSISTENT, true)
+                    .setValue(WATERLOGGED, false), Blocks.OAK_LEAVES.defaultBlockState()
+                                                                    .setValue(LeavesBlock.DISTANCE, distance)
+                                                                    .setValue(LeavesBlock.PERSISTENT, true)
+                                                                    .setValue(WATERLOGGED, false)
+            );
+            map.put(
+                this.defaultBlockState()
+                    .setValue(LeavesBlock.DISTANCE, distance)
+                    .setValue(LeavesBlock.PERSISTENT, true)
+                    .setValue(WATERLOGGED, true), Blocks.OAK_LEAVES.defaultBlockState()
+                                                                   .setValue(LeavesBlock.DISTANCE, distance)
+                                                                   .setValue(LeavesBlock.PERSISTENT, true)
+                                                                   .setValue(WATERLOGGED, true)
+            );
+        }
+        return map;
+    }
+
+    @Override
+    public Tuple<Item, Item> getItemCloak() {
+        return new Tuple<>(this.asItem(), Blocks.OAK_LEAVES.asItem());
+    }
+
+    @Override
+    public void onUncloak() {
+        if (PastelColorProviders.coloredLeavesBlockColorProvider != null &&
+            PastelColorProviders.coloredLeavesItemColorProvider != null) {
+            PastelColorProviders.coloredLeavesBlockColorProvider.setShouldApply(false);
+            PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(false);
+        }
+    }
+
+    @Override
+    public void onCloak() {
+        if (PastelColorProviders.coloredLeavesBlockColorProvider != null &&
+            PastelColorProviders.coloredLeavesItemColorProvider != null) {
+            PastelColorProviders.coloredLeavesBlockColorProvider.setShouldApply(true);
+            PastelColorProviders.coloredLeavesItemColorProvider.setShouldApply(true);
+        }
+    }
+
+    @Override
+    public InkColor getColor() {
+        return this.color;
+    }
+
+    public static ColoredLeavesBlock byColor(InkColor color) {
+        return LEAVES.get(color);
+    }
+
+    public static Collection<ColoredLeavesBlock> all() {
+        return LEAVES.values();
+    }
+
 }

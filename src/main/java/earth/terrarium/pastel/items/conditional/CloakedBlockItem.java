@@ -12,30 +12,31 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class CloakedBlockItem extends BlockItem implements RevelationAware {
-	
-	final ResourceLocation cloakAdvancementIdentifier;
-	final Item cloakItem;
-	
-	public CloakedBlockItem(Block block, Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
-		super(block, settings);
-		this.cloakAdvancementIdentifier = cloakAdvancementIdentifier;
-		this.cloakItem = cloakItem;
-		RevelationAware.register(this);
-	}
-	
-	@Override
-	public ResourceLocation getCloakAdvancementIdentifier() {
-		return cloakAdvancementIdentifier;
-	}
-	
-	@Override
-	public Map<BlockState, BlockState> getBlockStateCloaks() {
-		return new Hashtable<>();
-	}
-	
-	@Override
-	public Tuple<Item, Item> getItemCloak() {
-		return new Tuple<>(this, cloakItem);
-	}
-	
+
+    final ResourceLocation cloakAdvancementIdentifier;
+    final Item cloakItem;
+
+    public CloakedBlockItem(
+        Block block, Properties settings, ResourceLocation cloakAdvancementIdentifier, Item cloakItem) {
+        super(block, settings);
+        this.cloakAdvancementIdentifier = cloakAdvancementIdentifier;
+        this.cloakItem = cloakItem;
+        RevelationAware.register(this);
+    }
+
+    @Override
+    public ResourceLocation getCloakAdvancementIdentifier() {
+        return cloakAdvancementIdentifier;
+    }
+
+    @Override
+    public Map<BlockState, BlockState> getBlockStateCloaks() {
+        return new Hashtable<>();
+    }
+
+    @Override
+    public Tuple<Item, Item> getItemCloak() {
+        return new Tuple<>(this, cloakItem);
+    }
+
 }

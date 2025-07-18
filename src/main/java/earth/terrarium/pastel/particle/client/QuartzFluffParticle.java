@@ -13,8 +13,14 @@ import net.minecraft.util.Mth;
 
 public class QuartzFluffParticle extends BaseAshSmokeParticle {
 
-    protected QuartzFluffParticle(ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteSet spriteProvider) {
-        super(world, x, y, z, 0.0725F, -0.1F, 0.0725F, velocityX, velocityY, velocityZ, scaleMultiplier, spriteProvider, 1F, 0, 0.08F, false);
+    protected QuartzFluffParticle(
+        ClientLevel world, double x, double y, double z, double velocityX, double velocityY, double velocityZ,
+        float scaleMultiplier, SpriteSet spriteProvider
+    ) {
+        super(
+            world, x, y, z, 0.0725F, -0.1F, 0.0725F, velocityX, velocityY, velocityZ, scaleMultiplier, spriteProvider,
+            1F, 0, 0.08F, false
+        );
         alpha = 0;
         this.lifetime = 15 + world.random.nextInt(16);
         this.quadSize = (0.25F + random.nextFloat() * 0.5F) * 0.25F;
@@ -63,7 +69,10 @@ public class QuartzFluffParticle extends BaseAshSmokeParticle {
             this.spriteProvider = spriteProvider;
         }
 
-        public Particle createParticle(SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
+        public Particle createParticle(
+            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
+            double h, double i
+        ) {
             return new QuartzFluffParticle(clientWorld, d, e, f, 0.0, 0.0, 0.0, 1.0F, this.spriteProvider);
         }
     }

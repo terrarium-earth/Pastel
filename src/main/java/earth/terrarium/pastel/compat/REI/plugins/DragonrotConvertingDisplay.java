@@ -7,19 +7,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 public class DragonrotConvertingDisplay extends FluidConvertingDisplay {
-	
-	public DragonrotConvertingDisplay(RecipeHolder<DragonrotConvertingRecipe> recipe) {
-		super(recipe);
-	}
-	
-	@Override
-	public ResourceLocation getUnlockIdentifier() {
-		return DragonrotConvertingRecipe.UNLOCK_IDENTIFIER;
-	}
-	
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return PastelPlugins.DRAGONROT_CONVERTING;
-	}
-	
+
+    public DragonrotConvertingDisplay(RecipeHolder<DragonrotConvertingRecipe> recipe) {
+        super(recipe);
+    }
+
+    @Override
+    public ResourceLocation getUnlockIdentifier() {
+        return DragonrotConvertingRecipe.UNLOCK_IDENTIFIER;
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return PastelPlugins.DRAGONROT_CONVERTING;
+    }
+
 }

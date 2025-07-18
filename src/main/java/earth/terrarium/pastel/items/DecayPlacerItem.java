@@ -18,39 +18,47 @@ import net.minecraft.world.ticks.TickPriority;
 import java.util.List;
 
 public class DecayPlacerItem extends ItemNameBlockItem {
-	
-	protected final List<Component> tooltips;
-	
-	public DecayPlacerItem(Block block, Properties settings, List<Component> tooltips) {
-		super(block, settings);
-		this.tooltips = tooltips;
-	}
-	
-	@Override
+
+    protected final List<Component> tooltips;
+
+    public DecayPlacerItem(Block block, Properties settings, List<Component> tooltips) {
+        super(block, settings);
+        this.tooltips = tooltips;
+    }
+
+    @Override
     public InteractionResult useOn(UseOnContext context) {
-		Level world = context.getLevel();
-		InteractionResult actionResult = super.useOn(context);
-		if (actionResult.consumesAction()) {
-			BlockPlaceContext itemPlacementContext = this.updatePlacementContext(new BlockPlaceContext(context));
-			if (itemPlacementContext != null) {
-				BlockPos blockPos = itemPlacementContext.getClickedPos();
+        Level world = context.getLevel();
+        InteractionResult actionResult = super.useOn(context);
+        if (actionResult.consumesAction()) {
+            BlockPlaceContext itemPlacementContext = this.updatePlacementContext(new BlockPlaceContext(context));
+            if (itemPlacementContext != null) {
+                BlockPos blockPos = itemPlacementContext.getClickedPos();
 
-				BlockState placedBlockState = context.getLevel().getBlockState(blockPos);
-				if (placedBlockState.is(PastelBlockTags.DECAY)) {
-					context.getLevel().scheduleTick(blockPos, placedBlockState.getBlock(), 40 + world.random.nextInt(200), TickPriority.EXTREMELY_LOW);
-				}
-			}
-		}
-		if (!world.isClientSide && actionResult.consumesAction() && context.getPlayer() != null && !context.getPlayer().isCreative()) {
-			context.getPlayer().getInventory().placeItemBackInInventory(Items.GLASS_BOTTLE.getDefaultInstance());
-		}
-		return actionResult;
-	}
+                BlockState placedBlockState = context.getLevel()
+                                                     .getBlockState(blockPos);
+                if (placedBlockState.is(PastelBlockTags.DECAY)) {
+                    context.getLevel()
+                           .scheduleTick(
+                               blockPos, placedBlockState.getBlock(), 40 + world.random.nextInt(200),
+                               TickPriority.EXTREMELY_LOW
+                           );
+                }
+            }
+        }
+        if (!world.isClientSide && actionResult.consumesAction() && context.getPlayer() != null && !context.getPlayer()
+                                                                                                           .isCreative()) {
+            context.getPlayer()
+                   .getInventory()
+                   .placeItemBackInInventory(Items.GLASS_BOTTLE.getDefaultInstance());
+        }
+        return actionResult;
+    }
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.addAll(tooltips);
-	}
-	
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        tooltip.addAll(tooltips);
+    }
+
 }

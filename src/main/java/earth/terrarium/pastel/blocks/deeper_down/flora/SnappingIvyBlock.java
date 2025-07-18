@@ -48,69 +48,78 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
 
     public SnappingIvyBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.X).setValue(SNAPPED, false));
+        this.registerDefaultState(this.stateDefinition.any()
+                                                      .setValue(AXIS, Direction.Axis.X)
+                                                      .setValue(SNAPPED, false));
     }
 
     @Override
     public MapCodec<? extends SnappingIvyBlock> codec() {
         return CODEC;
     }
-    
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AXIS, SNAPPED);
     }
-    
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
-    
+
     @Override
     protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
         return floor.is(PastelBlockTags.SNAPPING_IVY_PLANTABLE);
     }
-	
-	@Override
-	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
-		return true;
-	}
-    
+
+    @Override
+    public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+        return true;
+    }
+
     @Override
     public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
         return true;
     }
-    
+
     @Override
     public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
-		world.registryAccess()
-				.registryOrThrow(Registries.CONFIGURED_FEATURE)
-				.get(PastelConfiguredFeatures.SNAPPING_IVY_PATCH)
-				.place(world, world.getChunkSource().getGenerator(), random, pos);
+        world.registryAccess()
+             .registryOrThrow(Registries.CONFIGURED_FEATURE)
+             .get(PastelConfiguredFeatures.SNAPPING_IVY_PATCH)
+             .place(
+                 world, world.getChunkSource()
+                             .getGenerator(), random, pos
+             );
     }
-    
+
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(AXIS, state.getValue(AXIS) == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X);
     }
-    
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-		return this.defaultBlockState().setValue(AXIS, ctx.getHorizontalDirection().getAxis());
+        return this.defaultBlockState()
+                   .setValue(
+                       AXIS, ctx.getHorizontalDirection()
+                                .getAxis()
+                   );
     }
-    
+
     @Override
     public boolean isRandomlyTicking(BlockState state) {
         return state.getValue(SNAPPED);
     }
-    
+
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (state.getValue(SNAPPED)) {
             snap(state, world, pos, false);
         }
     }
-    
+
     @Override
     public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
         boolean snapped = state.getValue(SNAPPED);
@@ -118,22 +127,26 @@ public class SnappingIvyBlock extends BushBlock implements BonemealableBlock {
         if (!snapped && entity instanceof ItemEntity) {
             snap(state, world, pos, true);
         }
-        if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX && entity.getType() != EntityType.BEE) {
+        if (entity instanceof LivingEntity livingEntity && entity.getType() != EntityType.FOX &&
+            entity.getType() != EntityType.BEE) {
             entity.makeStuckInBlock(state, MOVEMENT_SLOWDOWN_VECTOR);
             if (!snapped) {
-				entity.hurt(PastelDamageTypes.snappingIvy(world), 5.0F);
+                entity.hurt(PastelDamageTypes.snappingIvy(world), 5.0F);
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 120, 1));
-	
-				snap(state, world, pos, true);
+
+                snap(state, world, pos, true);
             }
         }
     }
-	
-	private static void snap(BlockState state, Level world, BlockPos pos, boolean close) {
+
+    private static void snap(BlockState state, Level world, BlockPos pos, boolean close) {
         BlockState newState = state.setValue(SNAPPED, close);
         world.setBlock(pos, newState, Block.UPDATE_CLIENTS);
         world.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(newState));
-        world.playSound(null, pos, close ? SoundEvents.BIG_DRIPLEAF_TILT_DOWN : SoundEvents.BIG_DRIPLEAF_TILT_UP, SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.8F, 1.2F));
+        world.playSound(
+            null, pos, close ? SoundEvents.BIG_DRIPLEAF_TILT_DOWN : SoundEvents.BIG_DRIPLEAF_TILT_UP,
+            SoundSource.BLOCKS, 1.0F, Mth.randomBetween(world.random, 0.8F, 1.2F)
+        );
     }
-    
+
 }

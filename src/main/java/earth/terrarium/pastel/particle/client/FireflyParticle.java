@@ -20,7 +20,10 @@ public class FireflyParticle extends TextureSheetParticle {
     private int switchTicks = 10, blinkTicks = 11;
     private float r, g, b;
 
-    protected FireflyParticle(ClientLevel clientWorld, double d, double e, double f, double velocityX, double velocityY, double velocityZ, float scaleMultiplier, SpriteSet spriteProvider) {
+    protected FireflyParticle(
+        ClientLevel clientWorld, double d, double e, double f, double velocityX, double velocityY, double velocityZ,
+        float scaleMultiplier, SpriteSet spriteProvider
+    ) {
         super(clientWorld, d, e, f, velocityX, velocityY, velocityZ);
         this.spriteProvider = spriteProvider;
         this.setSpriteFromAge(spriteProvider);
@@ -42,13 +45,11 @@ public class FireflyParticle extends TextureSheetParticle {
             r = Mth.lerpInt(random.nextFloat(), 255, 190);
             g *= 0.9F;
             b *= 0.9F;
-        }
-        else if (edit == 1) {
+        } else if (edit == 1) {
             r *= 0.9F;
             g = Mth.lerpInt(random.nextFloat(), 232, 203);
             b *= 0.9F;
-        }
-        else {
+        } else {
             r *= 0.9F;
             g *= 0.9F;
             b = Mth.lerpInt(random.nextFloat(), 232, 230);
@@ -57,7 +58,7 @@ public class FireflyParticle extends TextureSheetParticle {
         r /= 255F;
         g /= 255F;
         b /= 255F;
-        
+
         this.quadSize = 0.025F + random.nextFloat() * 0.375F;
         quadSize *= scaleMultiplier;
         setColor(r, g, b);
@@ -79,9 +80,9 @@ public class FireflyParticle extends TextureSheetParticle {
             var delta = Math.abs(blinkTicks) / 10F;
 
             setColor(
-                    (Mth.lerp(delta, 0.25F * r, r)),
-                    (Mth.lerp(delta, 0.25F * g, g)),
-                    (Mth.lerp(delta, 0.25F * b, b))
+                (Mth.lerp(delta, 0.25F * r, r)),
+                (Mth.lerp(delta, 0.25F * g, g)),
+                (Mth.lerp(delta, 0.25F * b, b))
             );
 
             blinkTicks++;
@@ -91,15 +92,16 @@ public class FireflyParticle extends TextureSheetParticle {
         if (switchTicks < 10)
             switchTicks++;
 
-        var water = !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).isEmpty();
+        var water = !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z))
+                               .isEmpty();
 
         if (age % 10 == 0 && random.nextBoolean()) {
             switchTicks = 0;
             gravity = random.nextFloat() * 0.075F - 0.0375F;
             lastVelX = xd;
             lastVelZ = zd;
-            xd = random.nextFloat()  * 0.1F - 0.05F;
-            zd = random.nextFloat()  * 0.1F - 0.05F;
+            xd = random.nextFloat() * 0.1F - 0.05F;
+            zd = random.nextFloat() * 0.1F - 0.05F;
         }
 
         if (age % 13 == 0 && random.nextFloat() < 0.334F) {
@@ -117,7 +119,7 @@ public class FireflyParticle extends TextureSheetParticle {
             gravity = random.nextFloat() * 0.1334F;
         }
 
-        this.yd -= 0.04 * (double)this.gravity;
+        this.yd -= 0.04 * (double) this.gravity;
         this.move(curVelX, this.yd + flutter, curVelZ);
         if (this.speedUpWhenYMotionIsBlocked && this.y == this.yo) {
             this.xd *= 1.1;
@@ -168,7 +170,10 @@ public class FireflyParticle extends TextureSheetParticle {
             this.spriteProvider = spriteProvider;
         }
 
-        public Particle createParticle(SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g, double h, double i) {
+        public Particle createParticle(
+            SimpleParticleType defaultParticleType, ClientLevel clientWorld, double d, double e, double f, double g,
+            double h, double i
+        ) {
             return new FireflyParticle(clientWorld, d, e, f, 0.0, 0.0, 0.0, 1.0F, this.spriteProvider);
         }
     }

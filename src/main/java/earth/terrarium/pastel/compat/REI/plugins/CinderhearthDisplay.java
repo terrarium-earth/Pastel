@@ -16,27 +16,35 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class CinderhearthDisplay extends PastelDisplay {
-	
-	protected final float experience;
-	protected final int craftingTime;
-	protected final List<Tuple<ItemStack, Float>> outputsWithChance;
-	
-	public CinderhearthDisplay(@NotNull RecipeHolder<CinderhearthRecipe> recipe) {
-		super(recipe, REIHelper.toEntryIngredients(recipe.value().getIngredientStacks()), List.of(EntryIngredients.ofItemStacks(recipe.value().getPossibleOutputs())));
-		this.outputsWithChance = recipe.value().getResultsWithChance();
-		this.experience = recipe.value().getExperience();
-		this.craftingTime = recipe.value().getCraftingTime();
-	}
-	
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return PastelPlugins.CINDERHEARTH;
-	}
-	
-	@Override
-	public boolean isUnlocked() {
-		Minecraft client = Minecraft.getInstance();
-		return AdvancementHelper.hasAdvancement(client.player, CinderhearthRecipe.UNLOCK_IDENTIFIER) && super.isUnlocked();
-	}
-	
+
+    protected final float experience;
+    protected final int craftingTime;
+    protected final List<Tuple<ItemStack, Float>> outputsWithChance;
+
+    public CinderhearthDisplay(@NotNull RecipeHolder<CinderhearthRecipe> recipe) {
+        super(recipe, REIHelper.toEntryIngredients(recipe.value()
+                                                         .getIngredientStacks()), List.of(EntryIngredients.ofItemStacks(
+            recipe.value()
+                  .getPossibleOutputs()))
+        );
+        this.outputsWithChance = recipe.value()
+                                       .getResultsWithChance();
+        this.experience = recipe.value()
+                                .getExperience();
+        this.craftingTime = recipe.value()
+                                  .getCraftingTime();
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return PastelPlugins.CINDERHEARTH;
+    }
+
+    @Override
+    public boolean isUnlocked() {
+        Minecraft client = Minecraft.getInstance();
+        return AdvancementHelper.hasAdvancement(client.player, CinderhearthRecipe.UNLOCK_IDENTIFIER) &&
+               super.isUnlocked();
+    }
+
 }

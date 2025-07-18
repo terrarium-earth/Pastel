@@ -17,29 +17,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InfestedBlock.class)
 public abstract class InfestedBlockMixin {
-	
-	/*
-	 * Do not spawn silverfish when block is broken with Resonance Tool
-	 */
-	@Inject(at = @At("HEAD"), method = "spawnAfterBreak", cancellable = true)
-	public void onStacksDropped(BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience, CallbackInfo ci) {
-		if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.RESONANT_BLOCK_DROPS)) {
-			ci.cancel();
-		}
-		
-		if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.AUTO_KILLS_SILVERFISH)) {
-			Silverfish silverfishEntity = EntityType.SILVERFISH.create(world);
-			if (silverfishEntity != null) {
-				silverfishEntity.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
-				world.addFreshEntity(silverfishEntity);
-				silverfishEntity.spawnAnim();
-				silverfishEntity.kill();
-				
-				ExperienceOrb experienceOrbEntity = new ExperienceOrb(world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 10);
-				world.addFreshEntity(experienceOrbEntity);
-			}
-			ci.cancel();
-		}
-	}
-	
+
+    /*
+     * Do not spawn silverfish when block is broken with Resonance Tool
+     */
+    @Inject(at = @At("HEAD"), method = "spawnAfterBreak", cancellable = true)
+    public void onStacksDropped(
+        BlockState state, ServerLevel world, BlockPos pos, ItemStack stack, boolean dropExperience, CallbackInfo ci) {
+        if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.RESONANT_BLOCK_DROPS)) {
+            ci.cancel();
+        }
+
+        if (EnchantmentHelper.hasTag(stack, PastelEnchantmentTags.AUTO_KILLS_SILVERFISH)) {
+            Silverfish silverfishEntity = EntityType.SILVERFISH.create(world);
+            if (silverfishEntity != null) {
+                silverfishEntity.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
+                world.addFreshEntity(silverfishEntity);
+                silverfishEntity.spawnAnim();
+                silverfishEntity.kill();
+
+                ExperienceOrb experienceOrbEntity = new ExperienceOrb(
+                    world, pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 10);
+                world.addFreshEntity(experienceOrbEntity);
+            }
+            ci.cancel();
+        }
+    }
+
 }

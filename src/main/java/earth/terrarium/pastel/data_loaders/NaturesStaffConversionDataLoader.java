@@ -21,42 +21,46 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NaturesStaffConversionDataLoader extends SimpleJsonResourceReloadListener {
-	
-	public static final String ID = "natures_staff_conversion";
-	public static final NaturesStaffConversionDataLoader INSTANCE = new NaturesStaffConversionDataLoader();
-	
-	public static final HashMap<Block, BlockState> CONVERSIONS = new HashMap<>();
-	public static final HashMap<Block, ResourceLocation> UNLOCK_IDENTIFIERS = new HashMap<>();
-	
-	private NaturesStaffConversionDataLoader() {
-		super(new Gson(), ID);
-	}
-	
-	@Override
-	protected void apply(Map<ResourceLocation, JsonElement> prepared, ResourceManager manager, ProfilerFiller profiler) {
-		CONVERSIONS.clear();
-		prepared.forEach((identifier, jsonElement) -> {
-			JsonObject jsonObject = jsonElement.getAsJsonObject();
-			Block input = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(GsonHelper.getAsString(jsonObject, "input_block")));
 
-			BlockState output;
-			try {
-				output = RecipeUtils.blockStateFromString(jsonObject.get("output_state").getAsString());
-			} catch (CommandSyntaxException e) {
-				throw new JsonParseException(e);
-			}
+    public static final String ID = "natures_staff_conversion";
+    public static final NaturesStaffConversionDataLoader INSTANCE = new NaturesStaffConversionDataLoader();
 
-			if (input != Blocks.AIR && !output.isAir()) {
-				CONVERSIONS.put(input, output);
-				if (GsonHelper.isStringValue(jsonObject, "unlock_identifier")) {
-					UNLOCK_IDENTIFIERS.put(input, ResourceLocation.tryParse(GsonHelper.getAsString(jsonObject, "unlock_identifier")));
-				}
-			}
-		});
-	}
-	
-	public static @Nullable BlockState getConvertedBlockState(Block block) {
-		return CONVERSIONS.getOrDefault(block, null);
-	}
-	
+    public static final HashMap<Block, BlockState> CONVERSIONS = new HashMap<>();
+    public static final HashMap<Block, ResourceLocation> UNLOCK_IDENTIFIERS = new HashMap<>();
+
+    private NaturesStaffConversionDataLoader() {
+        super(new Gson(), ID);
+    }
+
+    @Override
+    protected void apply(
+        Map<ResourceLocation, JsonElement> prepared, ResourceManager manager, ProfilerFiller profiler) {
+        CONVERSIONS.clear();
+        prepared.forEach((identifier, jsonElement) -> {
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            Block input = BuiltInRegistries.BLOCK.get(
+                ResourceLocation.tryParse(GsonHelper.getAsString(jsonObject, "input_block")));
+
+            BlockState output;
+            try {
+                output = RecipeUtils.blockStateFromString(jsonObject.get("output_state")
+                                                                    .getAsString());
+            } catch (CommandSyntaxException e) {
+                throw new JsonParseException(e);
+            }
+
+            if (input != Blocks.AIR && !output.isAir()) {
+                CONVERSIONS.put(input, output);
+                if (GsonHelper.isStringValue(jsonObject, "unlock_identifier")) {
+                    UNLOCK_IDENTIFIERS.put(
+                        input, ResourceLocation.tryParse(GsonHelper.getAsString(jsonObject, "unlock_identifier")));
+                }
+            }
+        });
+    }
+
+    public static @Nullable BlockState getConvertedBlockState(Block block) {
+        return CONVERSIONS.getOrDefault(block, null);
+    }
+
 }

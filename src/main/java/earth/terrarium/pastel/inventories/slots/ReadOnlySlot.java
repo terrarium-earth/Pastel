@@ -6,19 +6,19 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public class ReadOnlySlot extends Slot {
-	
-	public ReadOnlySlot(Container inventory, int index, int x, int y) {
-		super(inventory, index, x, y);
-	}
-	
-	@Override
-	public boolean mayPlace(ItemStack stack) {
-		return false;
-	}
-	
-	@Override
-	public boolean mayPickup(Player playerEntity) {
-		return false;
-	}
-	
+
+    public ReadOnlySlot(Container inventory, int index, int x, int y) {
+        super(inventory, index, x, y);
+    }
+
+    @Override
+    public boolean mayPlace(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean mayPickup(Player playerEntity) {
+        return false;
+    }
+
 }

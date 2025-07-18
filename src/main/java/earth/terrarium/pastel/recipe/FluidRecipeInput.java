@@ -7,15 +7,15 @@ import net.neoforged.neoforge.fluids.capability.*;
 import java.util.List;
 
 public class FluidRecipeInput<T extends IFluidHandler & IFluidTank> extends SimpleRecipeInput {
-	
-	private final T tank;
-	
-	public FluidRecipeInput(List<ItemStack> items, T tank) {
-		super(items);
-		this.tank = tank;
-	}
-	
-	public T getTank() {
-		return this.tank;
-	}
+
+    private final T tank;
+
+    public FluidRecipeInput(List<ItemStack> items, T tank) {
+        super(items);
+        this.tank = tank;
+    }
+
+    public T getTank() {
+        return this.tank;
+    }
 }

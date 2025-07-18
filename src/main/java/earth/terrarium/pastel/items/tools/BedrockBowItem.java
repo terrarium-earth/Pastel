@@ -10,19 +10,19 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import java.util.Map;
 
 public class BedrockBowItem extends BowItem implements Preenchanted {
-	
-	public BedrockBowItem(Properties settings) {
-		super(settings);
-	}
-	
-	@Override
-	public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
-		return Map.of(Enchantments.POWER, 6);
-	}
-	
-	@Override
-	public boolean isEnchantable(ItemStack stack) {
-		return true;
-	}
+
+    public BedrockBowItem(Properties settings) {
+        super(settings);
+    }
+
+    @Override
+    public Map<ResourceKey<Enchantment>, Integer> getDefaultEnchantments() {
+        return Map.of(Enchantments.POWER, 6);
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
 
 }
