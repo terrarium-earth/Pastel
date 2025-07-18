@@ -1,0 +1,11 @@
+{
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_mermaids_brush"
+  },
+  "type": {
+    "type": "databank:block",
+    "hidden_as": "minecraft:seagrass",
+    "original": "pastel:mermaids_brush"
+  }
+}

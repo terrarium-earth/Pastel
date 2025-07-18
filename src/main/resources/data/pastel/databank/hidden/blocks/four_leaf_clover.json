@@ -1,0 +1,11 @@
+{
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "pastel:milestones/reveal_four_leaf_clover"
+  },
+  "type": {
+    "type": "databank:block",
+    "hidden_as": "pastel:clover",
+    "original": "pastel:four_leaf_clover"
+  }
+}
