@@ -13,23 +13,31 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 
 public record PlayPedestalStartCraftingParticlePayload(BlockPos pedestalPos) implements CustomPacketPayload {
-	
-	public static final Type<PlayPedestalStartCraftingParticlePayload> ID = PastelC2SPackets.makeId("play_pedestal_start_crafting_particle");
-	public static final StreamCodec<FriendlyByteBuf, PlayPedestalStartCraftingParticlePayload> CODEC = StreamCodec.composite(
-			BlockPos.STREAM_CODEC, PlayPedestalStartCraftingParticlePayload::pedestalPos,
-			PlayPedestalStartCraftingParticlePayload::new
-	);
-	
-	public static void spawnPedestalStartCraftingParticles(PedestalBlockEntity pedestalBlockEntity) {
-		PacketDistributor.sendToPlayersTrackingChunk((ServerLevel) pedestalBlockEntity.getLevel(), new ChunkPos(pedestalBlockEntity.getBlockPos()), new PlayPedestalStartCraftingParticlePayload(pedestalBlockEntity.getBlockPos()));
-	}
-	
-	public static void execute(PlayPedestalStartCraftingParticlePayload payload, IPayloadContext context) {
-		PedestalBlockEntity.spawnCraftingStartParticles(context.player().level(), payload.pedestalPos);
-	}
-	
-	@Override
-	public Type<? extends CustomPacketPayload> type() {
-		return ID;
-	}
+
+    public static final Type<PlayPedestalStartCraftingParticlePayload> ID = PastelC2SPackets.makeId(
+        "play_pedestal_start_crafting_particle");
+    public static final StreamCodec<FriendlyByteBuf, PlayPedestalStartCraftingParticlePayload> CODEC
+        = StreamCodec.composite(
+        BlockPos.STREAM_CODEC, PlayPedestalStartCraftingParticlePayload::pedestalPos,
+        PlayPedestalStartCraftingParticlePayload::new
+    );
+
+    public static void spawnPedestalStartCraftingParticles(PedestalBlockEntity pedestalBlockEntity) {
+        PacketDistributor.sendToPlayersTrackingChunk(
+            (ServerLevel) pedestalBlockEntity.getLevel(), new ChunkPos(pedestalBlockEntity.getBlockPos()),
+            new PlayPedestalStartCraftingParticlePayload(pedestalBlockEntity.getBlockPos())
+        );
+    }
+
+    public static void execute(PlayPedestalStartCraftingParticlePayload payload, IPayloadContext context) {
+        //PedestalBlockEntity.spawnCraftingStartParticles(
+        //    context.player()
+        //           .level(), payload.pedestalPos
+        //);
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
+    }
 }

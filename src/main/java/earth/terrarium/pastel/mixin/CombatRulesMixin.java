@@ -13,7 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CombatRulesMixin {
 
     @Inject(method = "getDamageAfterAbsorb", at = @At("HEAD"))
-    private static void modifyArmorAndToughness(LivingEntity entity, float damage, DamageSource source, float armorValue, float armorToughness, CallbackInfoReturnable<Float> cir) {
+    private static void modifyArmorAndToughness(
+        LivingEntity entity, float damage, DamageSource source, float armorValue, float armorToughness,
+        CallbackInfoReturnable<Float> cir
+    ) {
         if (source.is(PastelDamageTypeTags.CALCULATES_DAMAGE_BASED_ON_TOUGHNESS)) {
             armorValue = armorToughness * 1.334F;
             armorToughness = Float.MAX_VALUE;

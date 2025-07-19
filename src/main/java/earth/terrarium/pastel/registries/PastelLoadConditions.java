@@ -18,54 +18,64 @@ import java.util.Collection;
 import java.util.List;
 
 public class PastelLoadConditions {
-	
-	public record PastelTagsPopulatedResourceCondition(ResourceLocation registry, List<ResourceLocation> tags) implements ICondition {
-		public static final MapCodec<PastelTagsPopulatedResourceCondition> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
-			return instance.group(ResourceLocation.CODEC.fieldOf("registry").orElse(
-							Registries.ITEM.location()).forGetter(PastelTagsPopulatedResourceCondition::registry),
-					ResourceLocation.CODEC.listOf().fieldOf("values").forGetter(PastelTagsPopulatedResourceCondition::tags)
-			).apply(instance, PastelTagsPopulatedResourceCondition::new);
-		});
 
-		@Override
-		public boolean test(IContext context) {
-			return tagsPopulated(context, this.registry(), this.tags());
-		}
+    public record PastelTagsPopulatedResourceCondition(ResourceLocation registry, List<ResourceLocation> tags)
+        implements ICondition {
+        public static final MapCodec<PastelTagsPopulatedResourceCondition> CODEC = RecordCodecBuilder.mapCodec(
+            (instance) -> {
+                return instance.group(
+                                   ResourceLocation.CODEC.fieldOf("registry")
+                                                         .orElse(
+                                                             Registries.ITEM.location())
+                                                         .forGetter(PastelTagsPopulatedResourceCondition::registry),
+                                   ResourceLocation.CODEC.listOf()
+                                                         .fieldOf("values")
+                                                         .forGetter(PastelTagsPopulatedResourceCondition::tags)
+                               )
+                               .apply(instance, PastelTagsPopulatedResourceCondition::new);
+            });
 
-		@Override
-		public MapCodec<? extends ICondition> codec() {
-			return PastelTagsPopulatedResourceCondition.CODEC;
-		}
+        @Override
+        public boolean test(IContext context) {
+            return tagsPopulated(context, this.registry(), this.tags());
+        }
 
-		public static boolean tagsPopulated(IContext context, ResourceLocation registryId, List<ResourceLocation> tags) {
-			ResourceKey<Registry<Registry<?>>> registryKey = ResourceKey.createRegistryKey(registryId);
+        @Override
+        public MapCodec<? extends ICondition> codec() {
+            return PastelTagsPopulatedResourceCondition.CODEC;
+        }
 
-			for (ResourceLocation tag : tags) {
-				TagKey<Registry<?>> tagKey = TagKey.create(registryKey, tag);
-				Collection<Holder<Registry<?>>> entries = context.getTag(tagKey);
+        public static boolean tagsPopulated(
+            IContext context, ResourceLocation registryId, List<ResourceLocation> tags) {
+            ResourceKey<Registry<Registry<?>>> registryKey = ResourceKey.createRegistryKey(registryId);
 
-				if (entries.isEmpty()) {
-					return false;
-				}
-			}
-			
-			return true;
-		}
-		
-		public ResourceLocation registry() {
-			return this.registry;
-		}
-		
-		public List<ResourceLocation> tags() {
-			return this.tags;
-		}
-	}
+            for (ResourceLocation tag : tags) {
+                TagKey<Registry<?>> tagKey = TagKey.create(registryKey, tag);
+                Collection<Holder<Registry<?>>> entries = context.getTag(tagKey);
 
-	public static void register(IEventBus modEventBus) {
-		DeferredRegister<MapCodec<? extends ICondition>> register = DeferredRegister.create(NeoForgeRegistries.CONDITION_SERIALIZERS, PastelCommon.MOD_ID);
+                if (entries.isEmpty()) {
+                    return false;
+                }
+            }
 
-		register.register("tags_populated", () -> PastelTagsPopulatedResourceCondition.CODEC);
+            return true;
+        }
 
-		register.register(modEventBus);
-	}
+        public ResourceLocation registry() {
+            return this.registry;
+        }
+
+        public List<ResourceLocation> tags() {
+            return this.tags;
+        }
+    }
+
+    public static void register(IEventBus modEventBus) {
+        DeferredRegister<MapCodec<? extends ICondition>> register = DeferredRegister.create(
+            NeoForgeRegistries.CONDITION_SERIALIZERS, PastelCommon.MOD_ID);
+
+        register.register("tags_populated", () -> PastelTagsPopulatedResourceCondition.CODEC);
+
+        register.register(modEventBus);
+    }
 }

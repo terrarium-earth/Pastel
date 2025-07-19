@@ -36,19 +36,19 @@ public class TranslationStorageMixin {
         builder.put("item.pastel.draconic_twinsword", "Draconic Winblade");
         builder.put("item.pastel.dragon_talon", "Sellsword Winblades");
         builder.put("effect.pastel.fatal_slumber", "Fat Slumber");
-		builder.put("item.pastel.oblivion_pickaxe", "Oblivious Pickaxe");
-		builder.put("item.pastel.whispy_circlet", "Whisky Circlet");
-		builder.put("item.pastel.shimmerstone_gem", "Stimmerstone Gem");
-		builder.put("block.pastel.shimmerstone_block", "Block of Stimmerstone");
-		
-		builder.put("item.pastel.mermaids_gem", translations.get("item.pastel.storm_stone"));
-		builder.put("item.pastel.storm_stone", translations.get("item.pastel.mermaids_gem"));
-		
+        builder.put("item.pastel.oblivion_pickaxe", "Oblivious Pickaxe");
+        builder.put("item.pastel.whispy_circlet", "Whisky Circlet");
+        builder.put("item.pastel.shimmerstone_gem", "Stimmerstone Gem");
+        builder.put("block.pastel.shimmerstone_block", "Block of Stimmerstone");
+
+        builder.put("item.pastel.mermaids_gem", translations.get("item.pastel.storm_stone"));
+        builder.put("item.pastel.storm_stone", translations.get("item.pastel.mermaids_gem"));
+
         this.storage = builder;
     }
-	
-	@Unique
-	private static String getCrystallarieuaeuieueum() {
+
+    @Unique
+    private static String getCrystallarieuaeuieueum() {
         List<String> possibilities = new ArrayList<>() {{
             add("Crystallarieum");
             add("Crystallareium");
@@ -60,7 +60,10 @@ public class TranslationStorageMixin {
             add("Crystallarieium");
             add("Christalerium");
         }};
-        char c = Minecraft.getInstance().getUser().getName().toCharArray()[0];
+        char c = Minecraft.getInstance()
+                          .getUser()
+                          .getName()
+                          .toCharArray()[0];
         return possibilities.get((int) c % possibilities.size());
     }
 

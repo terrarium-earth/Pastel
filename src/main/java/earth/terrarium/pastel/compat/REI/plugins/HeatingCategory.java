@@ -11,20 +11,20 @@ import net.minecraft.network.chat.Component;
 
 @OnlyIn(Dist.CLIENT)
 public class HeatingCategory extends BlockToBlockWithChanceCategory {
-	
-	@Override
-	public CategoryIdentifier<? extends HeatingDisplay> getCategoryIdentifier() {
-		return PastelPlugins.HEATING;
-	}
-	
-	@Override
-	public Renderer getIcon() {
-		return EntryStacks.of(PastelBlocks.BLAZE_IDOL.get());
-	}
-	
-	@Override
-	public Component getTitle() {
-		return Component.translatable("container.pastel.rei.heating.title");
-	}
-	
+
+    @Override
+    public CategoryIdentifier<? extends HeatingDisplay> getCategoryIdentifier() {
+        return PastelPlugins.HEATING;
+    }
+
+    @Override
+    public Renderer getIcon() {
+        return EntryStacks.of(PastelBlocks.BLAZE_IDOL.get());
+    }
+
+    @Override
+    public Component getTitle() {
+        return Component.translatable("container.pastel.rei.heating.title");
+    }
+
 }

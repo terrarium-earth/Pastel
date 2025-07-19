@@ -22,71 +22,74 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class InkFlaskItem extends Item implements InkStorageItem<SingleInkStorage>, LoomPatternProvider, ExtendedItemBar {
-	
-	private final long maxEnergy;
-	
-	public InkFlaskItem(Properties settings, long maxEnergy) {
-		super(settings);
-		this.maxEnergy = maxEnergy;
-	}
-	
-	@Override
-	public Drainability getDrainability() {
-		return Drainability.ALWAYS;
-	}
-	
-	@Override
-	public SingleInkStorage getEnergyStorage(ItemStack itemStack) {
-		var storage = itemStack.get(PastelDataComponentTypes.INK_STORAGE);
-		if (storage != null)
-			for (var entry : storage.storedEnergy().entrySet())
-				return new SingleInkStorage(storage.maxEnergyTotal(), entry.getKey(), entry.getValue());
-		return new SingleInkStorage(this.maxEnergy);
-	}
-	
-	// Omitting this would crash outside the dev env o.O
-	@Override
-	public ItemStack getDefaultInstance() {
-		return super.getDefaultInstance();
-	}
-	
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		getEnergyStorage(stack).addTooltip(tooltip);
-		addBannerPatternProviderTooltip(tooltip);
-	}
-	
-	public ItemStack getFullStack(InkColor color) {
-		ItemStack stack = this.getDefaultInstance();
-		SingleInkStorage storage = getEnergyStorage(stack);
-		storage.fillCompletely();
-		storage.convertColor(color);
-		setEnergyStorage(stack, storage);
-		return stack;
-	}
-	
-	@Override
-	public ResourceKey<BannerPattern> getPattern() {
-		return PastelBannerPatterns.INK_FLASK;
-	}
-	
-	@Override
-	public int barCount(ItemStack stack) {
-		return 1;
-	}
-	
-	@Override
-	public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
-		var storage = getEnergyStorage(stack);
-		
-		if (storage.isEmpty())
-			return ExtendedItemBar.PASS;
-		
-		var color = storage.getStoredColor();
-		var progress = Support.getSensiblePercent(storage.getCurrentTotal(), storage.getMaxTotal(), 14);
-		return new BarSignature(1, 13, 14, progress, 1, color.getColorInt(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
-	}
+public class InkFlaskItem extends Item
+    implements InkStorageItem<SingleInkStorage>, LoomPatternProvider, ExtendedItemBar {
+
+    private final long maxEnergy;
+
+    public InkFlaskItem(Properties settings, long maxEnergy) {
+        super(settings);
+        this.maxEnergy = maxEnergy;
+    }
+
+    @Override
+    public Drainability getDrainability() {
+        return Drainability.ALWAYS;
+    }
+
+    @Override
+    public SingleInkStorage getEnergyStorage(ItemStack itemStack) {
+        var storage = itemStack.get(PastelDataComponentTypes.INK_STORAGE);
+        if (storage != null)
+            for (var entry : storage.storedEnergy()
+                                    .entrySet())
+                return new SingleInkStorage(storage.maxEnergyTotal(), entry.getKey(), entry.getValue());
+        return new SingleInkStorage(this.maxEnergy);
+    }
+
+    // Omitting this would crash outside the dev env o.O
+    @Override
+    public ItemStack getDefaultInstance() {
+        return super.getDefaultInstance();
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        getEnergyStorage(stack).addTooltip(tooltip);
+        addBannerPatternProviderTooltip(tooltip);
+    }
+
+    public ItemStack getFullStack(InkColor color) {
+        ItemStack stack = this.getDefaultInstance();
+        SingleInkStorage storage = getEnergyStorage(stack);
+        storage.fillCompletely();
+        storage.convertColor(color);
+        setEnergyStorage(stack, storage);
+        return stack;
+    }
+
+    @Override
+    public ResourceKey<BannerPattern> getPattern() {
+        return PastelBannerPatterns.INK_FLASK;
+    }
+
+    @Override
+    public int barCount(ItemStack stack) {
+        return 1;
+    }
+
+    @Override
+    public BarSignature getSignature(@Nullable Player player, @NotNull ItemStack stack, int index) {
+        var storage = getEnergyStorage(stack);
+
+        if (storage.isEmpty())
+            return ExtendedItemBar.PASS;
+
+        var color = storage.getStoredColor();
+        var progress = Support.getSensiblePercent(storage.getCurrentTotal(), storage.getMaxTotal(), 14);
+        return new BarSignature(
+            1, 13, 14, progress, 1, color.getColorInt(), 2, ExtendedItemBar.DEFAULT_BACKGROUND_COLOR);
+    }
 }

@@ -17,35 +17,47 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
-public record MoonstoneBlastPayload(double x, double y, double z, float power, float knockbackMod, Vec3 playerVelocity) implements CustomPacketPayload {
-	
-	public static final Type<MoonstoneBlastPayload> ID = PastelC2SPackets.makeId("moonstone_blast");
-	public static final StreamCodec<FriendlyByteBuf, MoonstoneBlastPayload> CODEC = StreamCodec.composite(
-			ByteBufCodecs.DOUBLE, MoonstoneBlastPayload::x,
-			ByteBufCodecs.DOUBLE, MoonstoneBlastPayload::y,
-			ByteBufCodecs.DOUBLE, MoonstoneBlastPayload::z,
-			ByteBufCodecs.FLOAT, MoonstoneBlastPayload::power,
-			ByteBufCodecs.FLOAT, MoonstoneBlastPayload::knockbackMod,
-			PacketCodecHelper.VEC3D, MoonstoneBlastPayload::playerVelocity,
-			MoonstoneBlastPayload::new
-	);
-	
-	public static void sendMoonstoneBlast(ServerLevel serverWorld, MoonstoneStrike moonstoneStrike) {
-		for (ServerPlayer player : serverWorld.getChunkSource().chunkMap.getPlayers(new ChunkPos(BlockPos.containing(moonstoneStrike.getX(), moonstoneStrike.getY(), moonstoneStrike.getZ())), false)) {
-			PacketDistributor.sendToPlayer(player,
-					new MoonstoneBlastPayload(moonstoneStrike.getX(), moonstoneStrike.getY(), moonstoneStrike.getZ(), moonstoneStrike.getPower(), moonstoneStrike.getKnockbackMod(), moonstoneStrike.getAffectedPlayers().getOrDefault(player, Vec3.ZERO)));
-		}
-	}
-	
-	public static void execute(MoonstoneBlastPayload payload, IPayloadContext context) {
-		Player player = context.player();
-		Vec3 playerVelocity = payload.playerVelocity();
-		MoonstoneStrike.create(player.level(), null, null, payload.x, payload.y, payload.z, payload.power, payload.knockbackMod);
-		player.setDeltaMovement(player.getDeltaMovement().add(playerVelocity.x, playerVelocity.y, playerVelocity.z));
-	}
-	
-	@Override
-	public Type<? extends CustomPacketPayload> type() {
-		return ID;
-	}
+public record MoonstoneBlastPayload(double x, double y, double z, float power, float knockbackMod, Vec3 playerVelocity)
+    implements CustomPacketPayload {
+
+    public static final Type<MoonstoneBlastPayload> ID = PastelC2SPackets.makeId("moonstone_blast");
+    public static final StreamCodec<FriendlyByteBuf, MoonstoneBlastPayload> CODEC = StreamCodec.composite(
+        ByteBufCodecs.DOUBLE, MoonstoneBlastPayload::x,
+        ByteBufCodecs.DOUBLE, MoonstoneBlastPayload::y,
+        ByteBufCodecs.DOUBLE, MoonstoneBlastPayload::z,
+        ByteBufCodecs.FLOAT, MoonstoneBlastPayload::power,
+        ByteBufCodecs.FLOAT, MoonstoneBlastPayload::knockbackMod,
+        PacketCodecHelper.VEC3D, MoonstoneBlastPayload::playerVelocity,
+        MoonstoneBlastPayload::new
+    );
+
+    public static void sendMoonstoneBlast(ServerLevel serverWorld, MoonstoneStrike moonstoneStrike) {
+        for (ServerPlayer player : serverWorld.getChunkSource().chunkMap.getPlayers(
+            new ChunkPos(BlockPos.containing(moonstoneStrike.getX(), moonstoneStrike.getY(), moonstoneStrike.getZ())),
+            false
+        )) {
+            PacketDistributor.sendToPlayer(
+                player,
+                new MoonstoneBlastPayload(
+                    moonstoneStrike.getX(), moonstoneStrike.getY(), moonstoneStrike.getZ(), moonstoneStrike.getPower(),
+                    moonstoneStrike.getKnockbackMod(), moonstoneStrike.getAffectedPlayers()
+                                                                      .getOrDefault(player, Vec3.ZERO)
+                )
+            );
+        }
+    }
+
+    public static void execute(MoonstoneBlastPayload payload, IPayloadContext context) {
+        Player player = context.player();
+        Vec3 playerVelocity = payload.playerVelocity();
+        MoonstoneStrike.create(
+            player.level(), null, null, payload.x, payload.y, payload.z, payload.power, payload.knockbackMod);
+        player.setDeltaMovement(player.getDeltaMovement()
+                                      .add(playerVelocity.x, playerVelocity.y, playerVelocity.z));
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
+    }
 }

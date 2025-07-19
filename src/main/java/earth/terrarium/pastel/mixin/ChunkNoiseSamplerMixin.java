@@ -21,14 +21,25 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(NoiseChunk.class)
 public abstract class ChunkNoiseSamplerMixin {
-	
-	@Inject(method = "<init>",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/NoiseGeneratorSettings;oreVeinsEnabled()Z"),
-			locals = LocalCapture.CAPTURE_FAILHARD)
-	public void init(int cellCountXZ, RandomState random, int firstNoiseX, int firstNoiseZ, NoiseSettings noiseSettings, DensityFunctions.BeardifierOrMarker beardifier, NoiseGeneratorSettings noiseGeneratorSettings, Aquifer.FluidPicker fluidPicker, Blender blendifier, CallbackInfo ci, NoiseRouter noiseRouter, NoiseRouter noiseRouter2, ImmutableList.Builder<BlockStateFiller> builder, DensityFunction densityFunction) {
-		if (noiseGeneratorSettings.defaultBlock() == PastelBlocks.BLACKSLAG.get().defaultBlockState()) {
-			builder.add(DDOreVeinSampler.create(noiseRouter.veinToggle(), noiseRouter.veinRidged(), noiseRouter.veinGap(), random.oreRandom()));
-		}
-	}
-	
+
+    @Inject(method = "<init>",
+            at = @At(value = "INVOKE",
+                     target = "Lnet/minecraft/world/level/levelgen/NoiseGeneratorSettings;oreVeinsEnabled()Z"),
+            locals = LocalCapture.CAPTURE_FAILHARD)
+    public void init(
+        int cellCountXZ, RandomState random, int firstNoiseX, int firstNoiseZ, NoiseSettings noiseSettings,
+        DensityFunctions.BeardifierOrMarker beardifier, NoiseGeneratorSettings noiseGeneratorSettings,
+        Aquifer.FluidPicker fluidPicker, Blender blendifier, CallbackInfo ci, NoiseRouter noiseRouter,
+        NoiseRouter noiseRouter2, ImmutableList.Builder<BlockStateFiller> builder, DensityFunction densityFunction
+    ) {
+        if (noiseGeneratorSettings.defaultBlock() == PastelBlocks.BLACKSLAG.get()
+                                                                           .defaultBlockState()) {
+            builder.add(
+                DDOreVeinSampler.create(
+                    noiseRouter.veinToggle(), noiseRouter.veinRidged(), noiseRouter.veinGap(),
+                    random.oreRandom()
+                ));
+        }
+    }
+
 }

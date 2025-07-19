@@ -20,92 +20,107 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class PastelFluidBlock extends LiquidBlock {
 
-	public final BlockState ultrawarmReplacementBlockState;
+    public final BlockState ultrawarmReplacementBlockState;
 
-	public PastelFluidBlock(PastelFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
-		super(fluid, settings);
-		this.ultrawarmReplacementBlockState = ultrawarmReplacementBlockState;
-	}
+    public PastelFluidBlock(PastelFluid fluid, BlockState ultrawarmReplacementBlockState, Properties settings) {
+        super(fluid, settings);
+        this.ultrawarmReplacementBlockState = ultrawarmReplacementBlockState;
+    }
 
-	public abstract SimpleParticleType getSplashParticle();
+    public abstract SimpleParticleType getSplashParticle();
 
-	public abstract Tuple<SimpleParticleType, SimpleParticleType> getFishingParticles();
+    public abstract Tuple<SimpleParticleType, SimpleParticleType> getFishingParticles();
 
-	@Override
-	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-		super.entityInside(state, world, pos, entity);
-		((PastelFluid) fluid).onEntityCollision(state, world, pos, entity);
-	}
+    @Override
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+        super.entityInside(state, world, pos, entity);
+        ((PastelFluid) fluid).onEntityCollision(state, world, pos, entity);
+    }
 
-	@Override
-	public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
-		if (this.shouldSpreadLiquid(world, pos, state)) {
-			world.scheduleTick(pos, state.getFluidState().getType(), this.fluid.getTickDelay(world));
-		}
-	}
+    @Override
+    public void neighborChanged(
+        BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean notify) {
+        if (this.shouldSpreadLiquid(world, pos, state)) {
+            world.scheduleTick(
+                pos, state.getFluidState()
+                          .getType(), this.fluid.getTickDelay(world)
+            );
+        }
+    }
 
-	@Override
-	public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
-		if (world.dimensionType().ultraWarm()) {
-			world.setBlockAndUpdate(pos, ultrawarmReplacementBlockState);
+    @Override
+    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
+        if (world.dimensionType()
+                 .ultraWarm()) {
+            world.setBlockAndUpdate(pos, ultrawarmReplacementBlockState);
 
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-			world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F, 2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F);
+            int x = pos.getX();
+            int y = pos.getY();
+            int z = pos.getZ();
+            world.playSound(
+                null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.5F,
+                2.6F + (world.random.nextFloat() - world.random.nextFloat()) * 0.8F
+            );
 
-			for (int l = 0; l < 8; ++l) {
-				world.addParticle(ParticleTypes.LARGE_SMOKE, (double) x + Math.random(), (double) y + Math.random(), (double) z + Math.random(), 0.0, 0.0, 0.0);
-			}
+            for (int l = 0; l < 8; ++l) {
+                world.addParticle(
+                    ParticleTypes.LARGE_SMOKE, (double) x + Math.random(), (double) y + Math.random(),
+                    (double) z + Math.random(), 0.0, 0.0, 0.0
+                );
+            }
 
-			return;
-		}
+            return;
+        }
 
-		if (this.shouldSpreadLiquid(world, pos, state)) {
-			world.scheduleTick(pos, state.getFluidState().getType(), this.fluid.getTickDelay(world));
-		}
+        if (this.shouldSpreadLiquid(world, pos, state)) {
+            world.scheduleTick(
+                pos, state.getFluidState()
+                          .getType(), this.fluid.getTickDelay(world)
+            );
+        }
 
-		super.onPlace(state, world, pos, oldState, notify);
-	}
+        super.onPlace(state, world, pos, oldState, notify);
+    }
 
-	/**
-	 * @param world The world, because why not?
-	 * @param state FluidState of this fluid.
-	 * @param otherState FluidState of the other fluid.
-	 * @return BlockState to be placed at the collision position. [null means no collision]
-	 * @implNote Triggers the extinguish sound if result is not null.
-	 */
-	public abstract @Nullable BlockState handleFluidCollision(Level world, @NotNull FluidState state, @NotNull FluidState otherState);
+    /**
+     * @param world      The world, because why not?
+     * @param state      FluidState of this fluid.
+     * @param otherState FluidState of the other fluid.
+     * @return BlockState to be placed at the collision position. [null means no collision]
+     * @implNote Triggers the extinguish sound if result is not null.
+     */
+    public abstract @Nullable BlockState handleFluidCollision(
+        Level world, @NotNull FluidState state, @NotNull FluidState otherState);
 
-	public void fireExtinguishEvent(LevelAccessor world, BlockPos pos) {
-		world.levelEvent(LevelEvent.LAVA_FIZZ, pos, 0);
-	}
+    public void fireExtinguishEvent(LevelAccessor world, BlockPos pos) {
+        world.levelEvent(LevelEvent.LAVA_FIZZ, pos, 0);
+    }
 
-	/**
-	 * @param world The world
-	 * @param pos   The position in the world
-	 * @param state BlockState of the block at pos [normally assumed to be this fluid].
-	 * @return Dunno, actually. I just mod things.
-	 * @implNote Provides generic behavior for fluid collision. Extend/override for more advanced behaviors.
-	 */
-	public boolean shouldSpreadLiquid(Level world, BlockPos pos, BlockState state) {
-		// Shouldn't happen but check anyway
-		// If it IS true then do nothing, since no interaction can take place at this position
-		final FluidState fluidState = state.getFluidState();
-		if (fluidState == null || fluidState.isEmpty()) return true;
+    /**
+     * @param world The world
+     * @param pos   The position in the world
+     * @param state BlockState of the block at pos [normally assumed to be this fluid].
+     * @return Dunno, actually. I just mod things.
+     * @implNote Provides generic behavior for fluid collision. Extend/override for more advanced behaviors.
+     */
+    public boolean shouldSpreadLiquid(Level world, BlockPos pos, BlockState state) {
+        // Shouldn't happen but check anyway
+        // If it IS true then do nothing, since no interaction can take place at this position
+        final FluidState fluidState = state.getFluidState();
+        if (fluidState == null || fluidState.isEmpty()) return true;
 
-		for (Direction direction : Direction.values()) {
-			final FluidState otherState = world.getFluidState(pos.relative(direction));
-			if (otherState == null || otherState.isEmpty()) continue;
+        for (Direction direction : Direction.values()) {
+            final FluidState otherState = world.getFluidState(pos.relative(direction));
+            if (otherState == null || otherState.isEmpty()) continue;
 
-			final BlockState setState = handleFluidCollision(world, fluidState, otherState);
-			if (setState != null) {
-				this.fireExtinguishEvent(world, pos);
-				world.setBlockAndUpdate(pos, setState);
-				return false;
-			}
-		}
-		return true;
-	}
+            final BlockState setState = handleFluidCollision(world, fluidState, otherState);
+            if (setState != null) {
+                this.fireExtinguishEvent(world, pos);
+                world.setBlockAndUpdate(pos, setState);
+                return false;
+            }
+        }
+        return true;
+    }
 
 }

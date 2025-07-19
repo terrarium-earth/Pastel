@@ -11,15 +11,15 @@ import java.util.Stack;
 
 @Mixin(LivingEntity.class)
 public interface LivingEntityAccessor {
-	@Accessor
-	DamageSource getLastDamageSource();
-	
-	@Accessor
-	void setLastDamageSource(DamageSource damageSource);
+    @Accessor
+    DamageSource getLastDamageSource();
 
-	@Accessor
-	Stack<DamageContainer> getDamageContainers();
+    @Accessor
+    void setLastDamageSource(DamageSource damageSource);
 
-	@Invoker
-	int callCalculateFallDamage(float fallDistance, float damageMultiplier);
+    @Accessor
+    Stack<DamageContainer> getDamageContainers();
+
+    @Invoker
+    int callCalculateFallDamage(float fallDistance, float damageMultiplier);
 }

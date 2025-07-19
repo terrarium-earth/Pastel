@@ -16,35 +16,43 @@ import net.minecraft.world.level.block.state.BlockState;
 
 @OnlyIn(Dist.CLIENT)
 public class JadeVineRootsBlockEntityRenderer implements BlockEntityRenderer<JadeVineRootsBlockEntity> {
-	
-	@SuppressWarnings("unused")
+
+    @SuppressWarnings("unused")
     public JadeVineRootsBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {
-	}
-	
-	@Override
-    public void render(JadeVineRootsBlockEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider, int light, int overlay) {
-		Level world = entity.getLevel();
-		if (entity.getLevel() != null) {
-			BlockState fenceBlockState = entity.getFenceBlockState();
-			if (fenceBlockState.getRenderShape() == RenderShape.MODEL && fenceBlockState.getRenderShape() != RenderShape.INVISIBLE) {
-				poseStack.pushPose();
-				
-				BlockRenderDispatcher blockRenderManager = Minecraft.getInstance().getBlockRenderer();
-				blockRenderManager.getModelRenderer().tesselateBlock(entity.getLevel(),
-						blockRenderManager.getBlockModel(fenceBlockState),
-						fenceBlockState,
-						entity.getBlockPos(),
-						poseStack,
-						vertexConsumerProvider.getBuffer(ItemBlockRenderTypes.getMovingBlockRenderType(fenceBlockState)),
-						true,
-						world.random,
-						fenceBlockState.getSeed(entity.getBlockPos()),
-						OverlayTexture.NO_OVERLAY
-				);
-				
-				poseStack.popPose();
-			}
-		}
-	}
-	
+    }
+
+    @Override
+    public void render(
+        JadeVineRootsBlockEntity entity, float tickDelta, PoseStack poseStack, MultiBufferSource vertexConsumerProvider,
+        int light, int overlay
+    ) {
+        Level world = entity.getLevel();
+        if (entity.getLevel() != null) {
+            BlockState fenceBlockState = entity.getFenceBlockState();
+            if (fenceBlockState.getRenderShape() == RenderShape.MODEL &&
+                fenceBlockState.getRenderShape() != RenderShape.INVISIBLE) {
+                poseStack.pushPose();
+
+                BlockRenderDispatcher blockRenderManager = Minecraft.getInstance()
+                                                                    .getBlockRenderer();
+                blockRenderManager.getModelRenderer()
+                                  .tesselateBlock(
+                                      entity.getLevel(),
+                                      blockRenderManager.getBlockModel(fenceBlockState),
+                                      fenceBlockState,
+                                      entity.getBlockPos(),
+                                      poseStack,
+                                      vertexConsumerProvider.getBuffer(
+                                          ItemBlockRenderTypes.getMovingBlockRenderType(fenceBlockState)),
+                                      true,
+                                      world.random,
+                                      fenceBlockState.getSeed(entity.getBlockPos()),
+                                      OverlayTexture.NO_OVERLAY
+                                  );
+
+                poseStack.popPose();
+            }
+        }
+    }
+
 }

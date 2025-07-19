@@ -28,7 +28,7 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
         var config = context.config();
 
         var floorState = world.getBlockState(origin.above());
-    
+
         if (!(floorState.is(BlockTags.DIRT) || floorState.is(PastelBlockTags.BASE_STONE_DEEPER_DOWN)))
             return false;
 
@@ -61,33 +61,39 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
 
         if (stemHeight <= config.cutoff())
             return false;
-    
+
         generateStem(world, random, origin, vineBlock, stemHeight, berryChance);
         return true;
     }
-    
+
     private static boolean isReplaceable(LevelAccessor world, BlockPos pos) {
         return world.getBlockState(pos).isAir();
     }
-    
-    private void generateStem(LevelAccessor world, RandomSource random, BlockPos origin, Block vineBlock, int stemHeight, float berryChance) {
+
+    private void generateStem(
+        LevelAccessor world, RandomSource random, BlockPos origin, Block vineBlock, int stemHeight, float berryChance) {
         var stemPointer = origin.mutable();
-        var stemState = vineBlock.defaultBlockState().setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.STALK);
+        var stemState = vineBlock.defaultBlockState().setValue(
+            TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.STALK);
 
         for (int height = 0; height <= stemHeight; height++) {
             if (height == stemHeight) {
                 if (berryChance > 0 && random.nextFloat() <= berryChance) {
-                    this.setBlock(world, stemPointer, stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE).setValue(BlockStateProperties.BERRIES, true));
+                    this.setBlock(
+                        world, stemPointer,
+                        stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE)
+                                 .setValue(BlockStateProperties.BERRIES, true)
+                    );
+                } else {
+                    this.setBlock(
+                        world, stemPointer,
+                        stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE)
+                    );
                 }
-                else {
-                    this.setBlock(world, stemPointer, stemState.setValue(TriStateVineBlock.LIFE_STAGE, TriStateVineBlock.LifeStage.MATURE));
-                }
-            }
-            else {
+            } else {
                 if (berryChance > 0 && random.nextFloat() <= berryChance) {
                     this.setBlock(world, stemPointer, stemState.setValue(BlockStateProperties.BERRIES, true));
-                }
-                else {
+                } else {
                     this.setBlock(world, stemPointer, stemState);
                 }
             }
@@ -95,5 +101,5 @@ public class TriStateVineFeature extends Feature<TriStateVineFeatureConfig> {
             stemPointer.move(Direction.DOWN);
         }
     }
-    
+
 }

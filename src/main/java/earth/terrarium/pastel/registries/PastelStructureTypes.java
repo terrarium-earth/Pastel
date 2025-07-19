@@ -8,12 +8,12 @@ import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.registries.*;
 
 public class PastelStructureTypes {
-	
-	public static StructureType<UndergroundJigsawStructure> UNDERGROUND_JIGSAW = () -> UndergroundJigsawStructure.CODEC;
-	
-	public static void register(IEventBus bus) {
-		var register = DeferredRegister.create(Registries.STRUCTURE_TYPE, PastelCommon.MOD_ID);
-		register.register("underground_jigsaw", () -> UNDERGROUND_JIGSAW);
-		register.register(bus);
-	}
+
+    public static StructureType<UndergroundJigsawStructure> UNDERGROUND_JIGSAW = () -> UndergroundJigsawStructure.CODEC;
+
+    public static void register(IEventBus bus) {
+        var register = DeferredRegister.create(Registries.STRUCTURE_TYPE, PastelCommon.MOD_ID);
+        register.register("underground_jigsaw", () -> UNDERGROUND_JIGSAW);
+        register.register(bus);
+    }
 }

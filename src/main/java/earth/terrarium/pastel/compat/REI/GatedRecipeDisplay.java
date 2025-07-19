@@ -5,12 +5,12 @@ import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
 public interface GatedRecipeDisplay extends Display {
-	
-	boolean isUnlocked();
-	
-	boolean isSecret();
-	
-	@Nullable
-	Component getSecretHintText();
-	
+
+    boolean isUnlocked();
+
+    boolean isSecret();
+
+    @Nullable
+    Component getSecretHintText();
+
 }

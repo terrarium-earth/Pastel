@@ -14,21 +14,28 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(EffectRenderingInventoryScreen.class)
 public class AbstractInventoryScreenMixin {
-	
-	@ModifyVariable(method = "renderBackgrounds", at = @At("STORE"))
-	private MobEffectInstance saveEffect(MobEffectInstance value, @Share("effect") LocalRef<MobEffectInstance> effect) {
-		effect.set(value);
-		return value;
-	}
-	
-	@ModifyArg(method = "renderBackgrounds", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.blitSprite (Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 0))
-	private ResourceLocation modifyWideBackground(ResourceLocation texture, @Local MobEffectInstance effect) {
-		return MobEffectHelper.getTextureLocation(texture, effect, MobEffectHelper.RenderType.GUI_LARGE);
-	}
-	
-	@ModifyArg(method = "renderBackgrounds", at = @At(value = "INVOKE", target = "net/minecraft/client/gui/GuiGraphics.blitSprite (Lnet/minecraft/resources/ResourceLocation;IIII)V", ordinal = 1))
-	private ResourceLocation modifyBackground(ResourceLocation texture, @Share("effect") LocalRef<MobEffectInstance> effect) {
-		return MobEffectHelper.getTextureLocation(texture, effect.get(), MobEffectHelper.RenderType.GUI_SMALL);
-	}
-	
+
+    @ModifyVariable(method = "renderBackgrounds", at = @At("STORE"))
+    private MobEffectInstance saveEffect(MobEffectInstance value, @Share("effect") LocalRef<MobEffectInstance> effect) {
+        effect.set(value);
+        return value;
+    }
+
+    @ModifyArg(method = "renderBackgrounds", at = @At(value = "INVOKE",
+                                                      target = "net/minecraft/client/gui/GuiGraphics.blitSprite " +
+                                                               "(Lnet/minecraft/resources/ResourceLocation;IIII)V",
+                                                      ordinal = 0))
+    private ResourceLocation modifyWideBackground(ResourceLocation texture, @Local MobEffectInstance effect) {
+        return MobEffectHelper.getTextureLocation(texture, effect, MobEffectHelper.RenderType.GUI_LARGE);
+    }
+
+    @ModifyArg(method = "renderBackgrounds", at = @At(value = "INVOKE",
+                                                      target = "net/minecraft/client/gui/GuiGraphics.blitSprite " +
+                                                               "(Lnet/minecraft/resources/ResourceLocation;IIII)V",
+                                                      ordinal = 1))
+    private ResourceLocation modifyBackground(
+        ResourceLocation texture, @Share("effect") LocalRef<MobEffectInstance> effect) {
+        return MobEffectHelper.getTextureLocation(texture, effect.get(), MobEffectHelper.RenderType.GUI_SMALL);
+    }
+
 }

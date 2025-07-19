@@ -17,30 +17,34 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LootItemRandomChanceWithEnchantedBonusCondition.class)
 public abstract class RandomChanceWithEnchantedBonusLootConditionMixin {
-	
-	@Shadow
-	@Final
-	private LevelBasedValue enchantedChance;
-	
-	@Shadow
-	@Final
-	private Holder<Enchantment> enchantment;
-	
-	@ModifyReturnValue(at = @At("RETURN"), method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z")
-	public boolean applyRareLootEnchantment(boolean original, LootContext context) {
-		// if the result was to not drop a drop before reroll
-		// gets more probable with each additional level of Clovers Favor
-		if (!original) {
-			// TODO: can we use localcapture here to avoid recalculating these values?
-			if (context.getParamOrNull(LootContextParams.ATTACKING_ENTITY) instanceof LivingEntity livingEntity) {
-				int level = EnchantmentHelper.getEnchantmentLevel(this.enchantment, livingEntity);
-				if (level > 0) {
-					float enchantedChanceValue = this.enchantedChance.calculate(level);
-					original = context.getRandom().nextFloat() < CloversFavorHelper.rollChance(enchantedChanceValue, context.getParamOrNull(LootContextParams.ATTACKING_ENTITY));
-				}
-			}
-		}
-		return original;
-	}
-	
+
+    @Shadow
+    @Final
+    private LevelBasedValue enchantedChance;
+
+    @Shadow
+    @Final
+    private Holder<Enchantment> enchantment;
+
+    @ModifyReturnValue(at = @At("RETURN"), method = "test(Lnet/minecraft/world/level/storage/loot/LootContext;)Z")
+    public boolean applyRareLootEnchantment(boolean original, LootContext context) {
+        // if the result was to not drop a drop before reroll
+        // gets more probable with each additional level of Clovers Favor
+        if (!original) {
+            // TODO: can we use localcapture here to avoid recalculating these values?
+            if (context.getParamOrNull(LootContextParams.ATTACKING_ENTITY) instanceof LivingEntity livingEntity) {
+                int level = EnchantmentHelper.getEnchantmentLevel(this.enchantment, livingEntity);
+                if (level > 0) {
+                    float enchantedChanceValue = this.enchantedChance.calculate(level);
+                    original = context.getRandom()
+                                      .nextFloat() < CloversFavorHelper.rollChance(enchantedChanceValue,
+                                                                                   context.getParamOrNull(
+                                                                                       LootContextParams.ATTACKING_ENTITY)
+                    );
+                }
+            }
+        }
+        return original;
+    }
+
 }

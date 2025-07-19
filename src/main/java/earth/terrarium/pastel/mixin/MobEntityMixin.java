@@ -14,24 +14,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Mob.class)
 public abstract class MobEntityMixin {
 
-    @Shadow private @Nullable LivingEntity target;
+    @Shadow
+    private @Nullable LivingEntity target;
 
-    @Inject(method = "serverAiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Mob;level()Lnet/minecraft/world/level/Level;", ordinal = 0), cancellable = true)
+    @Inject(method = "serverAiStep", at = @At(value = "INVOKE",
+                                              target = "Lnet/minecraft/world/entity/Mob;level()" +
+                                                       "Lnet/minecraft/world/level/Level;",
+                                              ordinal = 0), cancellable = true)
     public void slowDownAIticks(CallbackInfo ci) {
         var entity = (Mob) (Object) this;
 
-        if ((entity.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelMobEffects.FATAL_SLUMBER)) && !SleepStatusEffect.isResistedBy(entity)) {
+        if ((entity.hasEffect(PastelMobEffects.ETERNAL_SLUMBER) || entity.hasEffect(PastelMobEffects.FATAL_SLUMBER)) &&
+            !SleepStatusEffect.isResistedBy(entity)) {
             target = null;
             ci.cancel();
             return;
         }
-        
+
         var potency = SleepStatusEffect.getSleepScaling(entity);
 
-        if (potency <= 0 || entity.getRandom().nextFloat() > potency * 0.15)
+        if (potency <= 0 || entity.getRandom()
+                                  .nextFloat() > potency * 0.15)
             return;
 
-        if (entity.getRandom().nextFloat() < potency * 0.75)
+        if (entity.getRandom()
+                  .nextFloat() < potency * 0.75)
             target = null;
 
         ci.cancel();

@@ -13,11 +13,15 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(PistonBaseBlock.class)
 public class PistonBlockMixin {
 
-	@WrapOperation(method = "isPushable", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;getDestroySpeed(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)F"))
-	private static float enableUnbreakableMovement(BlockState instance, BlockGetter blockView, BlockPos pos, Operation<Float> original) {
-		if (instance.is(PastelBlockTags.UNBREAKABLE_MOVABLE)) {
-			return 0F;
-		}
-		return original.call(instance, blockView, pos);
-	}
+    @WrapOperation(method = "isPushable", at = @At(value = "INVOKE",
+                                                   target = "Lnet/minecraft/world/level/block/state/BlockState;" +
+                                                            "getDestroySpeed(Lnet/minecraft/world/level/BlockGetter;" +
+                                                            "Lnet/minecraft/core/BlockPos;)F"))
+    private static float enableUnbreakableMovement(
+        BlockState instance, BlockGetter blockView, BlockPos pos, Operation<Float> original) {
+        if (instance.is(PastelBlockTags.UNBREAKABLE_MOVABLE)) {
+            return 0F;
+        }
+        return original.call(instance, blockView, pos);
+    }
 }

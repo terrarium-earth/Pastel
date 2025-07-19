@@ -52,277 +52,354 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity implements PlayerOwned, Upgradeable, SidedCapabilityProvider {
-	
-	protected static final int INVENTORY_SIZE = 7;
-	
-	private UUID ownerUUID;
-	private UpgradeHolder upgrades;
-	private RecipeHolder<FusionShrineRecipe> currentRecipe;
-	private int craftingTime;
-	private int craftingTimeTotal;
-	
-	boolean inventoryChanged = true;
-	
-	public final FluidTank tank = new FluidTank(1000);
-	
-	public FusionShrineBlockEntity(BlockPos pos, BlockState state) {
-		super(PastelBlockEntities.FUSION_SHRINE.get(), pos, state, INVENTORY_SIZE);
-		inventory.addListener(i -> {
-			inventoryChanged = true;
-			updateInClientWorld();
-		});
-	}
-	
-	@SuppressWarnings("unused")
-	public static void clientTick(@NotNull Level world, BlockPos blockPos, BlockState blockState, FusionShrineBlockEntity fusionShrineBlockEntity) {
-		if (!fusionShrineBlockEntity.isEmpty()) {
-			int randomSlot = world.getRandom().nextInt(fusionShrineBlockEntity.getContainerSize());
-			ItemStack randomStack = fusionShrineBlockEntity.getItem(randomSlot);
-			if (!randomStack.isEmpty()) {
-				Optional<InkColor> optionalItemColor = ColorRegistry.ITEM_COLORS.getMapping(randomStack.getItem());
-				if (optionalItemColor.isPresent()) {
-					ParticleOptions particleEffect = ColoredCraftingParticleEffect.of(optionalItemColor.get().getColorInt());
-					
-					int particleAmount = (int) StrictMath.ceil(randomStack.getCount() / 8.0F);
-					for (int i = 0; i < particleAmount; i++) {
-						float randomX = 3.0F - world.getRandom().nextFloat() * 7;
-						float randomZ = 3.0F - world.getRandom().nextFloat() * 7;
-						world.addParticle(particleEffect, blockPos.getX() + randomX, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D, 0.0D, 0.0D);
-					}
-				}
-			}
-		}
-	}
-	
-	public void spawnCraftingParticles() {
-		BlockPos blockPos = getBlockPos();
-		var recipe = this.currentRecipe;
-		if (recipe != null && level != null) {
-			Fluid fluid = tank.getFluid().getFluid();
-			Optional<InkColor> optionalFluidColor = ColorRegistry.FLUID_COLORS.getMapping(fluid);
-			if (optionalFluidColor.isPresent()) {
-				ParticleOptions particleEffect = ColoredFluidRisingParticleEffect.of(optionalFluidColor.get().getColorInt());
-				
-				float randomX = 0.1F + level.getRandom().nextFloat() * 0.8F;
-				float randomZ = 0.1F + level.getRandom().nextFloat() * 0.8F;
-				level.addParticle(particleEffect, blockPos.getX() + randomX, blockPos.getY() + 1, blockPos.getZ() + randomZ, 0.0D, 0.1D, 0.0D);
-			}
-		}
-	}
-	
-	public void scatterContents(@NotNull Level world) {
-		PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity((ServerLevel) world, Vec3.atCenterOf(this.getBlockPos()), ColoredCraftingParticleEffect.RED, 1, new Vec3(0, -0.5, 0));
-		world.playSound(null, this.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F);
-		world.playSound(null, this.getBlockPos(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F);
-		FusionShrineBlock.scatterContents(world, this.getBlockPos());
-		inventoryChanged = true;
-	}
-	
-	@SuppressWarnings("unused")
-	public static void serverTick(@NotNull Level world, BlockPos blockPos, BlockState blockState, FusionShrineBlockEntity fusionShrineBlockEntity) {
-		if (fusionShrineBlockEntity.upgrades == null) {
-			fusionShrineBlockEntity.calculateUpgrades();
-		}
-		
-		if (fusionShrineBlockEntity.inventoryChanged) {
-			var previousRecipe = fusionShrineBlockEntity.currentRecipe;
-			fusionShrineBlockEntity.currentRecipe = calculateRecipe(world, fusionShrineBlockEntity);
-			
-			if (!Objects.equals(fusionShrineBlockEntity.currentRecipe, previousRecipe)) {
-				fusionShrineBlockEntity.craftingTime = 0;
-				if (fusionShrineBlockEntity.currentRecipe == null) {
-					PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance((ServerLevel) world, fusionShrineBlockEntity.worldPosition);
-				} else {
-					fusionShrineBlockEntity.craftingTimeTotal = (int) Math.ceil(fusionShrineBlockEntity.currentRecipe.value().getCraftingTime() / fusionShrineBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
-				}
-				
-				fusionShrineBlockEntity.updateInClientWorld();
-			}
-			
-			fusionShrineBlockEntity.inventoryChanged = false;
-		}
-		
-		var recipe = fusionShrineBlockEntity.currentRecipe;
-		if (recipe == null) {
-			return;
-		}
-		
-		// check the crafting conditions from time to time
-		// good for performance because of the many checks
-		if (fusionShrineBlockEntity.craftingTime % 60 == 0) {
-			Player lastInteractedPlayer = fusionShrineBlockEntity.getOwnerIfOnline();
-			
-			boolean recipeConditionsMet = recipe.value().canPlayerCraft(lastInteractedPlayer) && recipe.value().areConditionMetCurrently((ServerLevel) world, blockPos);
-			boolean structureComplete = FusionShrineBlock.verifyStructure(world, blockPos, null);
-			boolean structureCompleteWithSky = FusionShrineBlock.verifySkyAccess((ServerLevel) world, blockPos) && structureComplete;
-			
-			if (!recipeConditionsMet || !structureCompleteWithSky) {
-				if (!structureCompleteWithSky) {
-					fusionShrineBlockEntity.scatterContents(world);
-				}
-				fusionShrineBlockEntity.craftingTime = 0;
-				return;
-			}
-		}
-		
-		// advance crafting
-		++fusionShrineBlockEntity.craftingTime;
-		
-		if (fusionShrineBlockEntity.craftingTime == 1 && fusionShrineBlockEntity.craftingTimeTotal > 1) {
-			PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(PastelSoundEvents.FUSION_SHRINE_CRAFTING, (ServerLevel) world, fusionShrineBlockEntity.getBlockPos(), fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime);
-		}
-		
-		// play the current crafting effect
-		FusionShrineRecipeWorldEffect effect = recipe.value().getWorldEffectForTick(fusionShrineBlockEntity.craftingTime, fusionShrineBlockEntity.craftingTimeTotal);
-		if (effect != null) {
-			effect.trigger((ServerLevel) world, blockPos);
-		}
-		
-		// craft when enough ticks have passed
-		if (fusionShrineBlockEntity.craftingTime == fusionShrineBlockEntity.craftingTimeTotal) {
-			craft(world, blockPos, fusionShrineBlockEntity, recipe);
-			fusionShrineBlockEntity.inventoryChanged = true;
-		} else {
-			PlayFusionCraftingInProgressParticlePayload.sendPlayFusionCraftingInProgressParticles((ServerLevel) world, blockPos);
-		}
-		fusionShrineBlockEntity.setChanged();
-	}
-	
-	@Nullable
-	private static RecipeHolder<FusionShrineRecipe> calculateRecipe(@NotNull Level world, FusionShrineBlockEntity fusionShrineBlockEntity) {
-		if (fusionShrineBlockEntity.currentRecipe != null) {
-			if (fusionShrineBlockEntity.currentRecipe.value().matches(fusionShrineBlockEntity.getRecipeInput(), world)) {
-				return fusionShrineBlockEntity.currentRecipe;
-			}
-		}
-		return world.getRecipeManager().getRecipeFor(PastelRecipeTypes.FUSION_SHRINE, fusionShrineBlockEntity.getRecipeInput(), world).orElse(null);
-	}
-	
-	private static void craft(Level world, BlockPos blockPos, FusionShrineBlockEntity fusionShrineBlockEntity, RecipeHolder<FusionShrineRecipe> recipe) {
-		recipe.value().craft(world, fusionShrineBlockEntity);
-		
-		if (recipe.value().shouldPlayCraftingFinishedEffects()) {
-			PlayFusionCraftingFinishedParticlePayload.sendPlayFusionCraftingFinishedParticles(world, blockPos, recipe.value().assemble(fusionShrineBlockEntity.getRecipeInput(), world.registryAccess()));
-			fusionShrineBlockEntity.playSound(PastelSoundEvents.FUSION_SHRINE_CRAFTING_FINISHED, 1.4F);
-		}
-		
-		scatterContents(world, blockPos.above(), fusionShrineBlockEntity); // drop remaining items
-		
-		fusionShrineBlockEntity.tank.setFluid(FluidStack.EMPTY);
-		world.setBlock(blockPos, world.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, 0), 3);
-	}
-	
-	@Override
-	public UpgradeHolder getUpgradeHolder() {
-		return upgrades;
-	}
-	
-	public static void scatterContents(Level world, BlockPos pos, FusionShrineBlockEntity blockEntity) {
-		Containers.dropContents(world, pos, blockEntity.inventory.getInternalList());
-		world.updateNeighbourForOutputSignal(pos, world.getBlockState(pos).getBlock());
-	}
-	
-	@Override
-	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
-		super.loadAdditional(nbt, registryLookup);
-		tank.readFromNBT(registryLookup, nbt);
-		
-		this.craftingTime = nbt.getShort("CraftingTime");
-		this.craftingTimeTotal = nbt.getShort("CraftingTimeTotal");
-		this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
-		
-		this.currentRecipe = null;
-		this.currentRecipe = MultiblockCrafter.getRecipeEntryFromNbt(level, nbt, FusionShrineRecipe.class);
-		
-		if (nbt.contains("Upgrades", Tag.TAG_LIST)) {
-			this.upgrades = UpgradeHolder.fromNbt(nbt.getList("Upgrades", Tag.TAG_COMPOUND));
-		} else {
-			this.upgrades = new UpgradeHolder();
-		}
-	}
-	
-	@Override
-	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
-		super.saveAdditional(nbt, registryLookup);
-		tank.writeToNBT(registryLookup, nbt);
-		nbt.putShort("CraftingTime", (short) this.craftingTime);
-		nbt.putShort("CraftingTimeTotal", (short) this.craftingTimeTotal);
-		if (this.upgrades != null) {
-			nbt.put("Upgrades", this.upgrades.toNbt());
-		}
-		PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
-		if (this.currentRecipe != null) {
-			nbt.putString("CurrentRecipe", this.currentRecipe.id().toString());
-		}
-	}
-	
-	public void playSound(SoundEvent soundEvent, float volume) {
-		if (level != null) {
-			RandomSource random = level.random;
-			level.playSound(null, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), soundEvent, SoundSource.BLOCKS, volume, 0.9F + random.nextFloat() * 0.15F);
-		}
-	}
-	
-	public void grantPlayerFusionCraftingAdvancement(ItemStack stack, int experience) {
-		ServerPlayer serverPlayerEntity = (ServerPlayer) getOwnerIfOnline();
-		if (serverPlayerEntity != null) {
-			PastelAdvancementCriteria.FUSION_SHRINE_CRAFTING.trigger(serverPlayerEntity, stack, experience);
-		}
-	}
-	
-	public @NotNull FluidTank getTank() {
-		return this.tank;
-	}
-	
-	void setLightForFluid(BlockPos blockPos, FluidStack fluid) {
-		if (level == null) return;
-		int fluidLight = PastelMiscEvents.getFluidLuminance(fluid);
-		level.setBlock(blockPos, level.getBlockState(blockPos).setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight), Block.UPDATE_ALL);
-	}
-	
-	public FluidRecipeInput<FluidTank> getRecipeInput() {
-		return new FluidRecipeInput<>(inventory.getInternalList(), tank);
-	}
-	
-	// PLAYER OWNED
-	// "owned" is not to be taken literally here. The owner
-	// is always set to the last player interacted with to trigger advancements
-	@Override
-	public UUID getOwnerUUID() {
-		return this.ownerUUID;
-	}
-	
-	@Override
-	public void setOwner(Player playerEntity) {
-		this.ownerUUID = playerEntity.getUUID();
-		setChanged();
-	}
-	
-	// UPGRADEABLE
-	@Override
-	public void resetUpgrades() {
-		this.upgrades = null;
-		this.setChanged();
-	}
-	
-	@Override
-	public void calculateUpgrades() {
-		this.upgrades = Upgradeable.calculateUpgradeMods4(level, worldPosition, 2, 0, this.ownerUUID);
-		this.setChanged();
-	}
+public class FusionShrineBlockEntity extends InWorldInteractionBlockEntity
+    implements PlayerOwned, Upgradeable, SidedCapabilityProvider {
 
-	@Override
-	public IItemHandler exposeItemHandlers(Direction dir) {
-		if (dir.getAxis().isHorizontal()) {
-			return new StackHandlerView(inventory).disableInsertion();
-		}
+    protected static final int INVENTORY_SIZE = 7;
 
-		return null;
-	}
+    private UUID ownerUUID;
+    private UpgradeHolder upgrades;
+    private RecipeHolder<FusionShrineRecipe> currentRecipe;
+    private int craftingTime;
+    private int craftingTimeTotal;
 
-	@Override
-	public IFluidHandler exposeFluidHandlers(Direction dir) {
-		return tank;
-	}
+    boolean inventoryChanged = true;
+
+    public final FluidTank tank = new FluidTank(1000);
+
+    public FusionShrineBlockEntity(BlockPos pos, BlockState state) {
+        super(PastelBlockEntities.FUSION_SHRINE.get(), pos, state, INVENTORY_SIZE);
+        inventory.addListener(i -> {
+            inventoryChanged = true;
+            updateInClientWorld();
+        });
+    }
+
+    @SuppressWarnings("unused")
+    public static void clientTick(
+        @NotNull Level world, BlockPos blockPos, BlockState blockState,
+        FusionShrineBlockEntity fusionShrineBlockEntity
+    ) {
+        if (!fusionShrineBlockEntity.isEmpty()) {
+            int randomSlot = world.getRandom()
+                                  .nextInt(fusionShrineBlockEntity.getContainerSize());
+            ItemStack randomStack = fusionShrineBlockEntity.getItem(randomSlot);
+            if (!randomStack.isEmpty()) {
+                Optional<InkColor> optionalItemColor = ColorRegistry.ITEM_COLORS.getMapping(randomStack.getItem());
+                if (optionalItemColor.isPresent()) {
+                    ParticleOptions particleEffect = ColoredCraftingParticleEffect.of(optionalItemColor.get()
+                                                                                                       .getColorInt());
+
+                    int particleAmount = (int) StrictMath.ceil(randomStack.getCount() / 8.0F);
+                    for (int i = 0; i < particleAmount; i++) {
+                        float randomX = 3.0F - world.getRandom()
+                                                    .nextFloat() * 7;
+                        float randomZ = 3.0F - world.getRandom()
+                                                    .nextFloat() * 7;
+                        world.addParticle(
+                            particleEffect, blockPos.getX() + randomX, blockPos.getY(), blockPos.getZ() + randomZ, 0.0D,
+                            0.0D, 0.0D
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    public void spawnCraftingParticles() {
+        BlockPos blockPos = getBlockPos();
+        var recipe = this.currentRecipe;
+        if (recipe != null && level != null) {
+            Fluid fluid = tank.getFluid()
+                              .getFluid();
+            Optional<InkColor> optionalFluidColor = ColorRegistry.FLUID_COLORS.getMapping(fluid);
+            if (optionalFluidColor.isPresent()) {
+                ParticleOptions particleEffect = ColoredFluidRisingParticleEffect.of(optionalFluidColor.get()
+                                                                                                       .getColorInt());
+
+                float randomX = 0.1F + level.getRandom()
+                                            .nextFloat() * 0.8F;
+                float randomZ = 0.1F + level.getRandom()
+                                            .nextFloat() * 0.8F;
+                level.addParticle(
+                    particleEffect, blockPos.getX() + randomX, blockPos.getY() + 1, blockPos.getZ() + randomZ, 0.0D,
+                    0.1D, 0.0D
+                );
+            }
+        }
+    }
+
+    public void scatterContents(@NotNull Level world) {
+        PlayParticleWithExactVelocityPayload.playParticleWithExactVelocity(
+            (ServerLevel) world, Vec3.atCenterOf(this.getBlockPos()), ColoredCraftingParticleEffect.RED, 1,
+            new Vec3(0, -0.5, 0)
+        );
+        world.playSound(
+            null, this.getBlockPos(), PastelSoundEvents.CRAFTING_ABORTED, SoundSource.BLOCKS,
+            0.9F + world.random.nextFloat() * 0.2F, 0.9F + world.random.nextFloat() * 0.2F
+        );
+        world.playSound(
+            null, this.getBlockPos(), SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS,
+            0.9F + world.random.nextFloat() * 0.2F, 0.5F + world.random.nextFloat() * 0.2F
+        );
+        FusionShrineBlock.scatterContents(world, this.getBlockPos());
+        inventoryChanged = true;
+    }
+
+    @SuppressWarnings("unused")
+    public static void serverTick(
+        @NotNull Level world, BlockPos blockPos, BlockState blockState,
+        FusionShrineBlockEntity fusionShrineBlockEntity
+    ) {
+        if (fusionShrineBlockEntity.upgrades == null) {
+            fusionShrineBlockEntity.calculateUpgrades();
+        }
+
+        if (fusionShrineBlockEntity.inventoryChanged) {
+            var previousRecipe = fusionShrineBlockEntity.currentRecipe;
+            fusionShrineBlockEntity.currentRecipe = calculateRecipe(world, fusionShrineBlockEntity);
+
+            if (!Objects.equals(fusionShrineBlockEntity.currentRecipe, previousRecipe)) {
+                fusionShrineBlockEntity.craftingTime = 0;
+                if (fusionShrineBlockEntity.currentRecipe == null) {
+                    PlayBlockBoundSoundInstancePayload.sendCancelBlockBoundSoundInstance(
+                        (ServerLevel) world, fusionShrineBlockEntity.worldPosition);
+                } else {
+                    fusionShrineBlockEntity.craftingTimeTotal = (int) Math.ceil(
+                        fusionShrineBlockEntity.currentRecipe.value()
+                                                             .getCraftingTime() /
+                        fusionShrineBlockEntity.upgrades.getEffectiveValue(Upgradeable.UpgradeType.SPEED));
+                }
+
+                fusionShrineBlockEntity.updateInClientWorld();
+            }
+
+            fusionShrineBlockEntity.inventoryChanged = false;
+        }
+
+        var recipe = fusionShrineBlockEntity.currentRecipe;
+        if (recipe == null) {
+            return;
+        }
+
+        // check the crafting conditions from time to time
+        // good for performance because of the many checks
+        if (fusionShrineBlockEntity.craftingTime % 60 == 0) {
+            Player lastInteractedPlayer = fusionShrineBlockEntity.getOwnerIfOnline();
+
+            boolean recipeConditionsMet = recipe.value()
+                                                .canPlayerCraft(lastInteractedPlayer) && recipe.value()
+                                                                                               .areConditionMetCurrently(
+                                                                                                   (ServerLevel) world,
+                                                                                                   blockPos
+                                                                                               );
+            boolean structureComplete = FusionShrineBlock.verifyStructure(world, blockPos, null);
+            boolean structureCompleteWithSky = FusionShrineBlock.verifySkyAccess((ServerLevel) world, blockPos) &&
+                                               structureComplete;
+
+            if (!recipeConditionsMet || !structureCompleteWithSky) {
+                if (!structureCompleteWithSky) {
+                    fusionShrineBlockEntity.scatterContents(world);
+                }
+                fusionShrineBlockEntity.craftingTime = 0;
+                return;
+            }
+        }
+
+        // advance crafting
+        ++fusionShrineBlockEntity.craftingTime;
+
+        if (fusionShrineBlockEntity.craftingTime == 1 && fusionShrineBlockEntity.craftingTimeTotal > 1) {
+            PlayBlockBoundSoundInstancePayload.sendPlayBlockBoundSoundInstance(
+                PastelSoundEvents.FUSION_SHRINE_CRAFTING, (ServerLevel) world, fusionShrineBlockEntity.getBlockPos(),
+                fusionShrineBlockEntity.craftingTimeTotal - fusionShrineBlockEntity.craftingTime
+            );
+        }
+
+        // play the current crafting effect
+        FusionShrineRecipeWorldEffect effect = recipe.value()
+                                                     .getWorldEffectForTick(
+                                                         fusionShrineBlockEntity.craftingTime,
+                                                         fusionShrineBlockEntity.craftingTimeTotal
+                                                     );
+        if (effect != null) {
+            effect.trigger((ServerLevel) world, blockPos);
+        }
+
+        // craft when enough ticks have passed
+        if (fusionShrineBlockEntity.craftingTime == fusionShrineBlockEntity.craftingTimeTotal) {
+            craft(world, blockPos, fusionShrineBlockEntity, recipe);
+            fusionShrineBlockEntity.inventoryChanged = true;
+        } else {
+            PlayFusionCraftingInProgressParticlePayload.sendPlayFusionCraftingInProgressParticles(
+                (ServerLevel) world, blockPos);
+        }
+        fusionShrineBlockEntity.setChanged();
+    }
+
+    @Nullable
+    private static RecipeHolder<FusionShrineRecipe> calculateRecipe(
+        @NotNull Level world, FusionShrineBlockEntity fusionShrineBlockEntity) {
+        if (fusionShrineBlockEntity.currentRecipe != null) {
+            if (fusionShrineBlockEntity.currentRecipe.value()
+                                                     .matches(fusionShrineBlockEntity.getRecipeInput(), world)) {
+                return fusionShrineBlockEntity.currentRecipe;
+            }
+        }
+        return world.getRecipeManager()
+                    .getRecipeFor(PastelRecipeTypes.FUSION_SHRINE, fusionShrineBlockEntity.getRecipeInput(), world)
+                    .orElse(null);
+    }
+
+    private static void craft(
+        Level world, BlockPos blockPos, FusionShrineBlockEntity fusionShrineBlockEntity,
+        RecipeHolder<FusionShrineRecipe> recipe
+    ) {
+        recipe.value()
+              .craft(world, fusionShrineBlockEntity);
+
+        if (recipe.value()
+                  .shouldPlayCraftingFinishedEffects()) {
+            PlayFusionCraftingFinishedParticlePayload.sendPlayFusionCraftingFinishedParticles(
+                world, blockPos, recipe.value()
+                                       .assemble(
+                                           fusionShrineBlockEntity.getRecipeInput(), world.registryAccess())
+            );
+            fusionShrineBlockEntity.playSound(PastelSoundEvents.FUSION_SHRINE_CRAFTING_FINISHED, 1.4F);
+        }
+
+        scatterContents(world, blockPos.above(), fusionShrineBlockEntity); // drop remaining items
+
+        fusionShrineBlockEntity.tank.setFluid(FluidStack.EMPTY);
+        world.setBlock(
+            blockPos, world.getBlockState(blockPos)
+                           .setValue(FusionShrineBlock.LIGHT_LEVEL, 0), 3
+        );
+    }
+
+    @Override
+    public UpgradeHolder getUpgradeHolder() {
+        return upgrades;
+    }
+
+    public static void scatterContents(Level world, BlockPos pos, FusionShrineBlockEntity blockEntity) {
+        Containers.dropContents(world, pos, blockEntity.inventory.getInternalList());
+        world.updateNeighbourForOutputSignal(
+            pos, world.getBlockState(pos)
+                      .getBlock()
+        );
+    }
+
+    @Override
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
+        super.loadAdditional(nbt, registryLookup);
+        tank.readFromNBT(registryLookup, nbt);
+
+        this.craftingTime = nbt.getShort("CraftingTime");
+        this.craftingTimeTotal = nbt.getShort("CraftingTimeTotal");
+        this.ownerUUID = PlayerOwned.readOwnerUUID(nbt);
+
+        this.currentRecipe = null;
+        this.currentRecipe = MultiblockCrafter.getRecipeEntryFromNbt(level, nbt, FusionShrineRecipe.class);
+
+        if (nbt.contains("Upgrades", Tag.TAG_LIST)) {
+            this.upgrades = UpgradeHolder.fromNbt(nbt.getList("Upgrades", Tag.TAG_COMPOUND));
+        } else {
+            this.upgrades = new UpgradeHolder();
+        }
+    }
+
+    @Override
+    public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
+        super.saveAdditional(nbt, registryLookup);
+        tank.writeToNBT(registryLookup, nbt);
+        nbt.putShort("CraftingTime", (short) this.craftingTime);
+        nbt.putShort("CraftingTimeTotal", (short) this.craftingTimeTotal);
+        if (this.upgrades != null) {
+            nbt.put("Upgrades", this.upgrades.toNbt());
+        }
+        PlayerOwned.writeOwnerUUID(nbt, this.ownerUUID);
+        if (this.currentRecipe != null) {
+            nbt.putString(
+                "CurrentRecipe", this.currentRecipe.id()
+                                                   .toString()
+            );
+        }
+    }
+
+    public void playSound(SoundEvent soundEvent, float volume) {
+        if (level != null) {
+            RandomSource random = level.random;
+            level.playSound(
+                null, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), soundEvent, SoundSource.BLOCKS,
+                volume, 0.9F + random.nextFloat() * 0.15F
+            );
+        }
+    }
+
+    public void grantPlayerFusionCraftingAdvancement(ItemStack stack, int experience) {
+        ServerPlayer serverPlayerEntity = (ServerPlayer) getOwnerIfOnline();
+        if (serverPlayerEntity != null) {
+            PastelAdvancementCriteria.FUSION_SHRINE_CRAFTING.trigger(serverPlayerEntity, stack, experience);
+        }
+    }
+
+    public @NotNull FluidTank getTank() {
+        return this.tank;
+    }
+
+    void setLightForFluid(BlockPos blockPos, FluidStack fluid) {
+        if (level == null) return;
+        int fluidLight = PastelMiscEvents.getFluidLuminance(fluid);
+        level.setBlock(
+            blockPos, level.getBlockState(blockPos)
+                           .setValue(FusionShrineBlock.LIGHT_LEVEL, fluidLight), Block.UPDATE_ALL
+        );
+    }
+
+    public FluidRecipeInput<FluidTank> getRecipeInput() {
+        return new FluidRecipeInput<>(inventory.getInternalList(), tank);
+    }
+
+    // PLAYER OWNED
+    // "owned" is not to be taken literally here. The owner
+    // is always set to the last player interacted with to trigger advancements
+    @Override
+    public UUID getOwnerUUID() {
+        return this.ownerUUID;
+    }
+
+    @Override
+    public void setOwner(Player playerEntity) {
+        this.ownerUUID = playerEntity.getUUID();
+        setChanged();
+    }
+
+    // UPGRADEABLE
+    @Override
+    public void resetUpgrades() {
+        this.upgrades = null;
+        this.setChanged();
+    }
+
+    @Override
+    public void calculateUpgrades() {
+        this.upgrades = Upgradeable.calculateUpgradeMods4(level, worldPosition, 2, 0, this.ownerUUID);
+        this.setChanged();
+    }
+
+    @Override
+    public IItemHandler exposeItemHandlers(Direction dir) {
+        if (dir.getAxis()
+               .isHorizontal()) {
+            return new StackHandlerView(inventory).disableInsertion();
+        }
+
+        return null;
+    }
+
+    @Override
+    public IFluidHandler exposeFluidHandlers(Direction dir) {
+        return tank;
+    }
 }

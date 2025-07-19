@@ -21,23 +21,32 @@ public interface SplitDamageHandler {
     class DamageComposition {
         private final List<Partition> partitions = new ArrayList<>();
 
-        public DamageComposition() {}
+        public DamageComposition() {
+        }
 
         public void addPlayerOrEntity(LivingEntity entity, float damage) {
             if (entity instanceof Player player) {
-                this.partitions.add(new Partition(player.damageSources().playerAttack(player), damage));
+                this.partitions.add(new Partition(
+                    player.damageSources()
+                          .playerAttack(player), damage
+                ));
             } else {
-				this.partitions.add(new Partition(entity.damageSources().mobAttack(entity), damage));
+                this.partitions.add(new Partition(
+                    entity.damageSources()
+                          .mobAttack(entity), damage
+                ));
             }
         }
-		
-		public DamageSource getPlayerOrEntity(LivingEntity entity) {
-			if (entity instanceof Player player) {
-				return player.damageSources().playerAttack(player);
-			} else {
-				return entity.damageSources().mobAttack(entity);
-			}
-		}
+
+        public DamageSource getPlayerOrEntity(LivingEntity entity) {
+            if (entity instanceof Player player) {
+                return player.damageSources()
+                             .playerAttack(player);
+            } else {
+                return entity.damageSources()
+                             .mobAttack(entity);
+            }
+        }
 
         public void add(DamageSource damageSource, float damage) {
             this.partitions.add(new Partition(damageSource, damage));
@@ -49,5 +58,6 @@ public interface SplitDamageHandler {
 
     }
 
-    record Partition(DamageSource source, float damage) {}
+    record Partition(DamageSource source, float damage) {
+    }
 }

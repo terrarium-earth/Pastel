@@ -11,18 +11,27 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import java.util.Collections;
 
 public class AnvilCrushingDisplay extends PastelDisplay {
-	public final float experience;
-	public final float crushedItemsPerPointOfDamage;
-	
-	public AnvilCrushingDisplay(RecipeHolder<AnvilCrushingRecipe> recipe) {
-		super(recipe, recipe.value().getIngredients().stream().map(EntryIngredients::ofIngredient).toList(), Collections.singletonList(EntryIngredients.of(recipe.value().getResultItem(BasicDisplay.registryAccess()))));
-		this.experience = recipe.value().getExperience();
-		this.crushedItemsPerPointOfDamage = recipe.value().getCrushedItemsPerPointOfDamage();
-	}
-	
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return PastelPlugins.ANVIL_CRUSHING;
-	}
-	
+    public final float experience;
+    public final float crushedItemsPerPointOfDamage;
+
+    public AnvilCrushingDisplay(RecipeHolder<AnvilCrushingRecipe> recipe) {
+        super(recipe, recipe.value()
+                            .getIngredients()
+                            .stream()
+                            .map(EntryIngredients::ofIngredient)
+                            .toList(), Collections.singletonList(EntryIngredients.of(recipe.value()
+                                                                                           .getResultItem(
+                                                                                               BasicDisplay.registryAccess())))
+        );
+        this.experience = recipe.value()
+                                .getExperience();
+        this.crushedItemsPerPointOfDamage = recipe.value()
+                                                  .getCrushedItemsPerPointOfDamage();
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return PastelPlugins.ANVIL_CRUSHING;
+    }
+
 }

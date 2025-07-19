@@ -15,105 +15,116 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 public class CompactingChestScreenHandler extends AbstractContainerMenu {
-	
-	private final ContainerData propertyDelegate;
-	private final CompactingChestBlockEntity blockEntity;
-	protected final int ROWS = 3;
-	
-	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
-		this(syncId, playerInventory, (CompactingChestBlockEntity) playerInventory.player.level().getBlockEntity(BlockPos.STREAM_CODEC.decode(buf)), new SimpleContainerData(1));
-	}
-	
-	public CompactingChestScreenHandler(int syncId, Inventory playerInventory, CompactingChestBlockEntity blockEntity, ContainerData propertyDelegate) {
-		super(PastelScreenHandlerTypes.COMPACTING_CHEST, syncId);
-		
-		this.blockEntity = blockEntity;
-		this.propertyDelegate = propertyDelegate;
-		
-		checkContainerSize(blockEntity, 27);
-		blockEntity.startOpen(playerInventory.player);
-		
-		int i = (ROWS - 4) * 18;
-		
-		int j;
-		int k;
-		for (j = 0; j < ROWS; ++j) {
-			for (k = 0; k < 9; ++k) {
-				this.addSlot(new Slot(blockEntity, k + j * 9, 8 + k * 18, 26 + j * 18));
-			}
-		}
-		
-		for (j = 0; j < 3; ++j) {
-			for (k = 0; k < 9; ++k) {
-				this.addSlot(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 112 + j * 18 + i));
-			}
-		}
-		
-		for (j = 0; j < 9; ++j) {
-			this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 170 + i));
-		}
-		
-		this.addDataSlots(propertyDelegate);
-	}
-	
-	@Override
-	public boolean stillValid(Player player) {
-		return this.blockEntity.stillValid(player);
-	}
-	
-	@Override
-	public ItemStack quickMoveStack(Player player, int index) {
-		ItemStack itemStack = ItemStack.EMPTY;
-		Slot slot = this.slots.get(index);
-		if (slot.hasItem()) {
-			ItemStack itemStack2 = slot.getItem();
-			itemStack = itemStack2.copy();
-			if (index < this.ROWS * 9) {
-				if (!this.moveItemStackTo(itemStack2, this.ROWS * 9, this.slots.size(), true)) {
-					return ItemStack.EMPTY;
-				}
-			} else if (!this.moveItemStackTo(itemStack2, 0, this.ROWS * 9, false)) {
-				return ItemStack.EMPTY;
-			}
-			
-			if (itemStack2.isEmpty()) {
-				slot.setByPlayer(ItemStack.EMPTY);
-			} else {
-				slot.setChanged();
-			}
-		}
-		return itemStack;
-	}
-	
-	public void toggleMode() {
-		this.propertyDelegate.set(0, getCraftingMode().next().ordinal());
-		broadcastChanges();
-	}
-	
-	@Override
-	public void broadcastChanges() {
-		super.broadcastChanges();
-		if (blockEntity.getLevel().isClientSide())
-			PacketDistributor.sendToServer(new ChangeCompactingChestSettingsPayload(getCraftingMode()));
-		blockEntity.applySettings(getCraftingMode());
-	}
-	
-	@Override
-	public void removed(Player player) {
-		super.removed(player);
-		this.blockEntity.stopOpen(player);
-	}
-	
-	public Container getInventory() {
-		return blockEntity;
-	}
-	
-	public CompactingChestBlockEntity getBlockEntity() {
-		return blockEntity;
-	}
-	
-	public AutoCraftingMode getCraftingMode() {
-		return AutoCraftingMode.values()[propertyDelegate.get(0)];
-	}
-	
+
+    private final ContainerData propertyDelegate;
+    private final CompactingChestBlockEntity blockEntity;
+    protected final int ROWS = 3;
+
+    public CompactingChestScreenHandler(int syncId, Inventory playerInventory, RegistryFriendlyByteBuf buf) {
+        this(
+            syncId, playerInventory, (CompactingChestBlockEntity) playerInventory.player.level()
+                                                                                        .getBlockEntity(
+                                                                                            BlockPos.STREAM_CODEC.decode(
+                                                                                                buf)),
+            new SimpleContainerData(1)
+        );
+    }
+
+    public CompactingChestScreenHandler(
+        int syncId, Inventory playerInventory, CompactingChestBlockEntity blockEntity, ContainerData propertyDelegate) {
+        super(PastelScreenHandlerTypes.COMPACTING_CHEST, syncId);
+
+        this.blockEntity = blockEntity;
+        this.propertyDelegate = propertyDelegate;
+
+        checkContainerSize(blockEntity, 27);
+        blockEntity.startOpen(playerInventory.player);
+
+        int i = (ROWS - 4) * 18;
+
+        int j;
+        int k;
+        for (j = 0; j < ROWS; ++j) {
+            for (k = 0; k < 9; ++k) {
+                this.addSlot(new Slot(blockEntity, k + j * 9, 8 + k * 18, 26 + j * 18));
+            }
+        }
+
+        for (j = 0; j < 3; ++j) {
+            for (k = 0; k < 9; ++k) {
+                this.addSlot(new Slot(playerInventory, k + j * 9 + 9, 8 + k * 18, 112 + j * 18 + i));
+            }
+        }
+
+        for (j = 0; j < 9; ++j) {
+            this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 170 + i));
+        }
+
+        this.addDataSlots(propertyDelegate);
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return this.blockEntity.stillValid(player);
+    }
+
+    @Override
+    public ItemStack quickMoveStack(Player player, int index) {
+        ItemStack itemStack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+        if (slot.hasItem()) {
+            ItemStack itemStack2 = slot.getItem();
+            itemStack = itemStack2.copy();
+            if (index < this.ROWS * 9) {
+                if (!this.moveItemStackTo(itemStack2, this.ROWS * 9, this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.moveItemStackTo(itemStack2, 0, this.ROWS * 9, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemStack2.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+        }
+        return itemStack;
+    }
+
+    public void toggleMode() {
+        this.propertyDelegate.set(
+            0, getCraftingMode().next()
+                                .ordinal()
+        );
+        broadcastChanges();
+    }
+
+    @Override
+    public void broadcastChanges() {
+        super.broadcastChanges();
+        if (blockEntity.getLevel()
+                       .isClientSide())
+            PacketDistributor.sendToServer(new ChangeCompactingChestSettingsPayload(getCraftingMode()));
+        blockEntity.applySettings(getCraftingMode());
+    }
+
+    @Override
+    public void removed(Player player) {
+        super.removed(player);
+        this.blockEntity.stopOpen(player);
+    }
+
+    public Container getInventory() {
+        return blockEntity;
+    }
+
+    public CompactingChestBlockEntity getBlockEntity() {
+        return blockEntity;
+    }
+
+    public AutoCraftingMode getCraftingMode() {
+        return AutoCraftingMode.values()[propertyDelegate.get(0)];
+    }
+
 }

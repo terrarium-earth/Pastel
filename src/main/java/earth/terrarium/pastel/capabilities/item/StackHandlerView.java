@@ -11,7 +11,7 @@ import java.util.function.*;
 
 public class StackHandlerView extends FriendlyStackHandler {
 
-    private final FriendlyStackHandler delegator;
+    protected final FriendlyStackHandler delegator;
     private final Int2ObjectMap<Predicate<ItemStack>> filters = new Int2ObjectArrayMap<>();
     private final int offset;
     private final int size;
@@ -53,6 +53,11 @@ public class StackHandlerView extends FriendlyStackHandler {
         return this;
     }
 
+    public StackHandlerView addFilter(int slot) {
+        filters.put(slot, stack -> false);
+        return this;
+    }
+
     @Override
     public void setStackInSlot(int slot, ItemStack stack) {
         delegator.setStackInSlot(slot + offset, stack);
@@ -68,7 +73,8 @@ public class StackHandlerView extends FriendlyStackHandler {
         if (!supportsInsertion)
             return stack;
 
-        if (!filters.getOrDefault(slot, stck -> true).test(stack))
+        if (!filters.getOrDefault(slot, stck -> true)
+                    .test(stack))
             return stack;
 
         return delegator.insertItem(slot + offset, stack, simulate);
@@ -88,11 +94,6 @@ public class StackHandlerView extends FriendlyStackHandler {
     }
 
     @Override
-    public int getSlotLimit(int slot) {
-        return delegator.getSlotLimit(slot);
-    }
-
-    @Override
     public boolean isItemValid(int slot, ItemStack stack) {
         return super.isItemValid(slot, stack);
     }
@@ -106,7 +107,8 @@ public class StackHandlerView extends FriendlyStackHandler {
 
     @Override
     public void setInternalList(NonNullList<ItemStack> newStacks) {
-        throw new UnsupportedOperationException("Attempted to change the internal list of a forwarded ItemStackHandler");
+        throw new UnsupportedOperationException(
+            "Attempted to change the internal list of a forwarded ItemStackHandler");
     }
 
     @Override
@@ -115,8 +117,10 @@ public class StackHandlerView extends FriendlyStackHandler {
     }
 
     @Override
-    public void save(CompoundTag tag, HolderLookup.Provider provider) {}
+    public void save(CompoundTag tag, HolderLookup.Provider provider) {
+    }
 
     @Override
-    public void load(CompoundTag tag, HolderLookup.Provider provider) {}
+    public void load(CompoundTag tag, HolderLookup.Provider provider) {
+    }
 }

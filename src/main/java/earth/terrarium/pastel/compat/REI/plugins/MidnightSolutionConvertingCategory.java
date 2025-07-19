@@ -11,20 +11,20 @@ import net.minecraft.network.chat.Component;
 
 @OnlyIn(Dist.CLIENT)
 public class MidnightSolutionConvertingCategory extends FluidConvertingCategory<MidnightSolutionConvertingDisplay> {
-	
-	@Override
-	public CategoryIdentifier<? extends MidnightSolutionConvertingDisplay> getCategoryIdentifier() {
-		return PastelPlugins.MIDNIGHT_SOLUTION_CONVERTING;
-	}
-	
-	@Override
-	public Renderer getIcon() {
-		return EntryStacks.of(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get());
-	}
-	
-	@Override
-	public Component getTitle() {
-		return Component.translatable("container.pastel.rei.midnight_solution_converting.title");
-	}
-	
+
+    @Override
+    public CategoryIdentifier<? extends MidnightSolutionConvertingDisplay> getCategoryIdentifier() {
+        return PastelPlugins.MIDNIGHT_SOLUTION_CONVERTING;
+    }
+
+    @Override
+    public Renderer getIcon() {
+        return EntryStacks.of(PastelItems.MIDNIGHT_SOLUTION_BUCKET.get());
+    }
+
+    @Override
+    public Component getTitle() {
+        return Component.translatable("container.pastel.rei.midnight_solution_converting.title");
+    }
+
 }

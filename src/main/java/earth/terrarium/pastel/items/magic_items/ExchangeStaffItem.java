@@ -7,7 +7,7 @@ import earth.terrarium.pastel.helpers.level.BuildingHelper;
 import earth.terrarium.pastel.helpers.interaction.InventoryHelper;
 import earth.terrarium.pastel.networking.s2c_payloads.PlayParticleWithRandomOffsetAndVelocityPayload;
 import earth.terrarium.pastel.particle.PastelParticleTypes;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelDataComponentTypes;
 import earth.terrarium.pastel.registries.PastelEnchantments;
 import earth.terrarium.pastel.registries.PastelSoundEvents;
@@ -66,7 +66,7 @@ public class ExchangeStaffItem extends BuildingStaffItem {
 		if (playerEntity == null || playerEntity.isCreative()) {
 			return CREATIVE_RANGE;
 		} else {
-			Optional<PedestalRecipeTier> highestUnlockedRecipeTier = PedestalRecipeTier.getHighestUnlockedRecipeTier(playerEntity);
+			Optional<PedestalTier> highestUnlockedRecipeTier = PedestalTier.getHighestUnlockedRecipeTier(playerEntity);
 			if (highestUnlockedRecipeTier.isPresent()) {
 				switch (highestUnlockedRecipeTier.get()) {
 					case COMPLEX -> {

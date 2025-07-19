@@ -5,32 +5,32 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class PastelClusterBlock extends AmethystClusterBlock {
 
-	public enum GrowthStage {
-		SMALL(3, 4),
-		MEDIUM(4, 3),
-		LARGE(5, 3),
-		CLUSTER(7, 3);
+    public enum GrowthStage {
+        SMALL(3, 4),
+        MEDIUM(4, 3),
+        LARGE(5, 3),
+        CLUSTER(7, 3);
 
-		public final int height;
-		public final int xzOffset;
+        public final int height;
+        public final int xzOffset;
 
-		GrowthStage(int height, int xzOffset) {
-			this.height = height;
-			this.xzOffset = xzOffset;
-		}
+        GrowthStage(int height, int xzOffset) {
+            this.height = height;
+            this.xzOffset = xzOffset;
+        }
 
-	}
+    }
 
-	protected final GrowthStage growthStage;
+    protected final GrowthStage growthStage;
 
-	public PastelClusterBlock(BlockBehaviour.Properties settings, GrowthStage growthStage) {
-		super(growthStage.height, growthStage.xzOffset, settings);
-		this.growthStage = growthStage;
-	}
+    public PastelClusterBlock(BlockBehaviour.Properties settings, GrowthStage growthStage) {
+        super(growthStage.height, growthStage.xzOffset, settings);
+        this.growthStage = growthStage;
+    }
 
-	public GrowthStage getGrowthStage() {
-		return growthStage;
-	}
+    public GrowthStage getGrowthStage() {
+        return growthStage;
+    }
 
 //	@Override
 //	public MapCodec<? extends CloakedOreBlock> getCodec() {

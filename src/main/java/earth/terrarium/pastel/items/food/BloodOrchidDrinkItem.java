@@ -5,7 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class BloodOrchidDrinkItem extends DrinkItem{
+public class BloodOrchidDrinkItem extends DrinkItem {
 
     public BloodOrchidDrinkItem(Properties settings) {
         super(settings);

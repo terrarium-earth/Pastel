@@ -8,15 +8,15 @@ import net.neoforged.bus.api.*;
 import net.neoforged.neoforge.registries.*;
 
 public class PastelPotions {
-	
-	public static Holder<Potion> PIGMENT_POTION;
-	
-	public static void register(IEventBus bus) {
-		var registry = DeferredRegister.create(Registries.POTION, PastelCommon.MOD_ID);
 
-		PIGMENT_POTION = registry.register("pigment_potion", () -> new Potion());
+    public static Holder<Potion> PIGMENT_POTION;
 
-		registry.register(bus);
-	}
-	
+    public static void register(IEventBus bus) {
+        var registry = DeferredRegister.create(Registries.POTION, PastelCommon.MOD_ID);
+
+        PIGMENT_POTION = registry.register("pigment_potion", () -> new Potion());
+
+        registry.register(bus);
+    }
+
 }

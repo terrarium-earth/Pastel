@@ -11,20 +11,20 @@ import net.minecraft.network.chat.Component;
 
 @OnlyIn(Dist.CLIENT)
 public class FreezingCategory extends BlockToBlockWithChanceCategory {
-	
-	@Override
-	public CategoryIdentifier<? extends FreezingDisplay> getCategoryIdentifier() {
-		return PastelPlugins.FREEZING;
-	}
-	
-	@Override
-	public Renderer getIcon() {
-		return EntryStacks.of(PastelBlocks.POLAR_BEAR_IDOL.get());
-	}
-	
-	@Override
-	public Component getTitle() {
-		return Component.translatable("container.pastel.rei.freezing.title");
-	}
-	
+
+    @Override
+    public CategoryIdentifier<? extends FreezingDisplay> getCategoryIdentifier() {
+        return PastelPlugins.FREEZING;
+    }
+
+    @Override
+    public Renderer getIcon() {
+        return EntryStacks.of(PastelBlocks.POLAR_BEAR_IDOL.get());
+    }
+
+    @Override
+    public Component getTitle() {
+        return Component.translatable("container.pastel.rei.freezing.title");
+    }
+
 }

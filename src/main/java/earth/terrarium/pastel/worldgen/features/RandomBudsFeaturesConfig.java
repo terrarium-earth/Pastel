@@ -19,16 +19,40 @@ import java.util.Objects;
 public class RandomBudsFeaturesConfig implements FeatureConfiguration {
 
     public static final Codec<RandomBudsFeaturesConfig> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-			Codec.intRange(1, 64).fieldOf("xz_spread").orElse(10).forGetter((config) -> config.xzSpread),
-			Codec.intRange(1, 64).fieldOf("y_spread").orElse(10).forGetter((config) -> config.ySpread),
-			Codec.intRange(1, 64).fieldOf("tries").orElse(12).forGetter((config) -> config.tries),
-			Codec.BOOL.fieldOf("can_place_on_floor").orElse(false).forGetter((config) -> config.placeOnFloor),
-			Codec.BOOL.fieldOf("can_place_on_ceiling").orElse(false).forGetter((config) -> config.placeOnCeiling),
-			Codec.BOOL.fieldOf("can_place_on_wall").orElse(false).forGetter((config) -> config.placeOnWalls),
-			RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("can_be_placed_on").forGetter((config) -> config.canPlaceOn),
-			ExtraCodecs.nonEmptyList(BuiltInRegistries.BLOCK.byNameCodec().listOf()).fieldOf("blocks").forGetter((config) -> config.blocks)
-	).apply(instance, RandomBudsFeaturesConfig::new));
-    
+                                                                                                                    Codec.intRange(1, 64)
+                                                                                                                         .fieldOf("xz_spread")
+                                                                                                                         .orElse(10)
+                                                                                                                         .forGetter((config) -> config.xzSpread),
+                                                                                                                    Codec.intRange(1, 64)
+                                                                                                                         .fieldOf("y_spread")
+                                                                                                                         .orElse(10)
+                                                                                                                         .forGetter((config) -> config.ySpread),
+                                                                                                                    Codec.intRange(1, 64)
+                                                                                                                         .fieldOf("tries")
+                                                                                                                         .orElse(12)
+                                                                                                                         .forGetter((config) -> config.tries),
+                                                                                                                    Codec.BOOL.fieldOf("can_place_on_floor")
+                                                                                                                              .orElse(false)
+                                                                                                                              .forGetter((config) -> config.placeOnFloor),
+                                                                                                                    Codec.BOOL.fieldOf("can_place_on_ceiling")
+                                                                                                                              .orElse(false)
+                                                                                                                              .forGetter((config) -> config.placeOnCeiling),
+                                                                                                                    Codec.BOOL.fieldOf("can_place_on_wall")
+                                                                                                                              .orElse(false)
+                                                                                                                              .forGetter((config) -> config.placeOnWalls),
+                                                                                                                    RegistryCodecs.homogeneousList(Registries.BLOCK)
+                                                                                                                                  .fieldOf("can_be_placed_on")
+                                                                                                                                  .forGetter((config) -> config.canPlaceOn),
+                                                                                                                    ExtraCodecs.nonEmptyList(BuiltInRegistries.BLOCK.byNameCodec()
+                                                                                                                                                                    .listOf())
+                                                                                                                               .fieldOf("blocks")
+                                                                                                                               .forGetter((config) -> config.blocks)
+                                                                                                                )
+                                                                                                                .apply(
+                                                                                                                    instance,
+                                                                                                                    RandomBudsFeaturesConfig::new
+                                                                                                                ));
+
     public final int xzSpread;
     public final int ySpread;
     public final int tries;
@@ -38,18 +62,21 @@ public class RandomBudsFeaturesConfig implements FeatureConfiguration {
     public final HolderSet<Block> canPlaceOn;
     public final List<Direction> directions;
     public final List<Block> blocks;
-    
-    public RandomBudsFeaturesConfig(Integer xzSpread, Integer ySpread, Integer tries, Boolean placeOnFloor, Boolean placeOnCeiling, Boolean placeOnWalls, HolderSet<Block> canPlaceOn, List<Block> blocks) {
-		this.xzSpread = xzSpread;
-		this.ySpread = ySpread;
-		this.tries = tries;
-		this.placeOnFloor = placeOnFloor;
-		this.placeOnCeiling = placeOnCeiling;
-		this.placeOnWalls = placeOnWalls;
-		this.canPlaceOn = canPlaceOn;
-		this.blocks = blocks;
-		List<Direction> list = Lists.newArrayList();
-		if (placeOnCeiling) {
+
+    public RandomBudsFeaturesConfig(
+        Integer xzSpread, Integer ySpread, Integer tries, Boolean placeOnFloor, Boolean placeOnCeiling,
+        Boolean placeOnWalls, HolderSet<Block> canPlaceOn, List<Block> blocks
+    ) {
+        this.xzSpread = xzSpread;
+        this.ySpread = ySpread;
+        this.tries = tries;
+        this.placeOnFloor = placeOnFloor;
+        this.placeOnCeiling = placeOnCeiling;
+        this.placeOnWalls = placeOnWalls;
+        this.canPlaceOn = canPlaceOn;
+        this.blocks = blocks;
+        List<Direction> list = Lists.newArrayList();
+        if (placeOnCeiling) {
             list.add(Direction.UP);
         }
         if (placeOnFloor) {

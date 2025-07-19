@@ -1,26 +1,26 @@
 package earth.terrarium.pastel.blocks.pedestal;
 
 import earth.terrarium.pastel.api.block.PedestalVariant;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelBlocks;
 import net.minecraft.world.level.block.Block;
 
-public enum BuiltinPedestalVariant implements PedestalVariant {
-	BASIC_TOPAZ(PedestalRecipeTier.BASIC),
-	BASIC_AMETHYST(PedestalRecipeTier.BASIC),
-	BASIC_CITRINE(PedestalRecipeTier.BASIC),
-	CMY(PedestalRecipeTier.SIMPLE),
-	ONYX(PedestalRecipeTier.ADVANCED),
-	MOONSTONE(PedestalRecipeTier.COMPLEX);
+public enum PedestalVariants implements PedestalVariant {
+	BASIC_TOPAZ(PedestalTier.BASIC),
+	BASIC_AMETHYST(PedestalTier.BASIC),
+	BASIC_CITRINE(PedestalTier.BASIC),
+	CMY(PedestalTier.SIMPLE),
+	ONYX(PedestalTier.ADVANCED),
+	MOONSTONE(PedestalTier.COMPLEX);
 	
-	private final PedestalRecipeTier tier;
+	private final PedestalTier tier;
 	
-	BuiltinPedestalVariant(PedestalRecipeTier tier) {
+	PedestalVariants(PedestalTier tier) {
 		this.tier = tier;
 	}
 	
 	@Override
-	public PedestalRecipeTier getRecipeTier() {
+	public PedestalTier getRecipeTier() {
 		return this.tier;
 	}
 	

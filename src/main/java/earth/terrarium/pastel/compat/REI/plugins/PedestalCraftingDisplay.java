@@ -5,9 +5,9 @@ import earth.terrarium.pastel.api.recipe.IngredientStack;
 import earth.terrarium.pastel.compat.REI.PastelDisplay;
 import earth.terrarium.pastel.compat.REI.REIHelper;
 import earth.terrarium.pastel.compat.REI.PastelPlugins;
-import earth.terrarium.pastel.recipe.pedestal.BuiltinGemstoneColor;
+import earth.terrarium.pastel.recipe.pedestal.PastelGemstoneColor;
 import earth.terrarium.pastel.recipe.pedestal.PedestalRecipe;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class PedestalCraftingDisplay extends PastelDisplay {
 	
-	protected final PedestalRecipeTier pedestalRecipeTier;
+	protected final PedestalTier pedestalRecipeTier;
 	protected final int width;
 	protected final int height;
 	protected final float experience;
@@ -54,10 +54,10 @@ public class PedestalCraftingDisplay extends PastelDisplay {
 			list.set(recipe.getGridSlotId(i), REIHelper.ofIngredientStack(recipe.getIngredientStacks().get(i)));
 		}
 		for (int i = 0; i < powderSlotCount; i++) {
-			GemstoneColor color = BuiltinGemstoneColor.values()[i];
+			GemstoneColor color = PastelGemstoneColor.values()[i];
 			int powderAmount = recipe.getPowderInputs().getOrDefault(color, 0);
 			if (powderAmount > 0) {
-				list.set(9 + i, EntryIngredients.of(color.getGemstonePowderItem(), powderAmount));
+				list.set(9 + i, EntryIngredients.of(color.getPowder(), powderAmount));
 			}
 		}
 		return list;
@@ -74,7 +74,7 @@ public class PedestalCraftingDisplay extends PastelDisplay {
 		return this.pedestalRecipeTier.hasUnlocked(client.player) && super.isUnlocked();
 	}
 	
-	public PedestalRecipeTier getTier() {
+	public PedestalTier getTier() {
 		return this.pedestalRecipeTier;
 	}
 	

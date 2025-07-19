@@ -12,36 +12,42 @@ import net.neoforged.neoforge.network.handling.*;
 import java.util.*;
 
 public class LastKillData {
-	
-	public static final AttachmentType<Long> ATTACHMENT =
-			AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build();
-	
-	public static void rememberKillTick(LivingEntity livingEntity, long tick) {
-		livingEntity.setData(ATTACHMENT, tick);
-		AttachmentUtil.syncToTracking(new Payload(livingEntity.getId(), tick), livingEntity.level(), livingEntity.blockPosition());
-	}
-	
-	public static long getLastKillTick(LivingEntity livingEntity) {
-		return livingEntity.getData(ATTACHMENT);
-	}
 
-	public record Payload(int entityId, long killTime) implements CustomPacketPayload {
+    public static final AttachmentType<Long> ATTACHMENT =
+        AttachmentType.builder(() -> 0L)
+                      .serialize(Codec.LONG)
+                      .build();
 
-		public static final StreamCodec<FriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
-				ByteBufCodecs.INT, Payload::entityId,
-				ByteBufCodecs.VAR_LONG, Payload::killTime,
-				Payload::new);
+    public static void rememberKillTick(LivingEntity livingEntity, long tick) {
+        livingEntity.setData(ATTACHMENT, tick);
+        AttachmentUtil.syncToTracking(
+            new Payload(livingEntity.getId(), tick), livingEntity.level(), livingEntity.blockPosition());
+    }
 
-		public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("last_kill");
+    public static long getLastKillTick(LivingEntity livingEntity) {
+        return livingEntity.getData(ATTACHMENT);
+    }
 
-		public static void execute(Payload payload, IPayloadContext context) {
-			var level = context.player().level();
-			Optional.ofNullable(level.getEntity(payload.entityId)).ifPresent(e -> e.setData(ATTACHMENT, payload.killTime));
-		}
+    public record Payload(int entityId, long killTime) implements CustomPacketPayload {
 
-		@Override
-		public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
-			return TYPE;
-		}
-	}
+        public static final StreamCodec<FriendlyByteBuf, Payload> CODEC = StreamCodec.composite(
+            ByteBufCodecs.INT, Payload::entityId,
+            ByteBufCodecs.VAR_LONG, Payload::killTime,
+            Payload::new
+        );
+
+        public static final CustomPacketPayload.Type<Payload> TYPE = AttachmentUtil.create("last_kill");
+
+        public static void execute(Payload payload, IPayloadContext context) {
+            var level = context.player()
+                               .level();
+            Optional.ofNullable(level.getEntity(payload.entityId))
+                    .ifPresent(e -> e.setData(ATTACHMENT, payload.killTime));
+        }
+
+        @Override
+        public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
 }

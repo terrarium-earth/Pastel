@@ -32,372 +32,384 @@ import java.util.stream.IntStream;
 
 public class FabricationChestBlockEntity extends PastelChestBlockEntity implements WorldlyContainer {
 
-	public static final int[] CHEST_SLOTS = IntStream.rangeClosed(0, 26).toArray();
-	public static final int[] RECIPE_SLOTS = IntStream.rangeClosed(27, 30).toArray();
-	public static final int[] RESULT_SLOTS = IntStream.rangeClosed(31, 34).toArray();
-	public static final int INVENTORY_SIZE = CHEST_SLOTS.length + RECIPE_SLOTS.length + RESULT_SLOTS.length;
-	private List<ItemStack> cachedOutputs = new ArrayList<>(4);
-	private int coolDownTicks = 0;
-	private boolean isOpen, isFull, hasValidRecipes;
-	private State state = State.CLOSED;
-	float rimTarget, rimPos, lastRimTarget, tabletTarget, tabletPos, lastTabletTarget,assemblyTarget, assemblyPos, lastAssemblyTarget, ringTarget, ringPos, lastRingTarget, itemTarget, itemPos, lastItemTarget, alphaTarget, alphaValue, lastAlphaTarget, yawModTarget, yawMod, lastYawModTarget, yaw, lastYaw;
-	long interpTicks, interpLength = 1, age;
-	
-	public FabricationChestBlockEntity(BlockPos blockPos, BlockState blockState) {
-		super(PastelBlockEntities.FABRICATION_CHEST.get(), blockPos, blockState);
-	}
-	
-	@SuppressWarnings("unused")
+    public static final int[] CHEST_SLOTS = IntStream.rangeClosed(0, 26)
+                                                     .toArray();
+    public static final int[] RECIPE_SLOTS = IntStream.rangeClosed(27, 30)
+                                                      .toArray();
+    public static final int[] RESULT_SLOTS = IntStream.rangeClosed(31, 34)
+                                                      .toArray();
+    public static final int INVENTORY_SIZE = CHEST_SLOTS.length + RECIPE_SLOTS.length + RESULT_SLOTS.length;
+    private List<ItemStack> cachedOutputs = new ArrayList<>(4);
+    private int coolDownTicks = 0;
+    private boolean isOpen, isFull, hasValidRecipes;
+    private State state = State.CLOSED;
+    float rimTarget, rimPos, lastRimTarget, tabletTarget, tabletPos, lastTabletTarget, assemblyTarget, assemblyPos,
+        lastAssemblyTarget, ringTarget, ringPos, lastRingTarget, itemTarget, itemPos, lastItemTarget, alphaTarget,
+        alphaValue, lastAlphaTarget, yawModTarget, yawMod, lastYawModTarget, yaw, lastYaw;
+    long interpTicks, interpLength = 1, age;
+
+    public FabricationChestBlockEntity(BlockPos blockPos, BlockState blockState) {
+        super(PastelBlockEntities.FABRICATION_CHEST.get(), blockPos, blockState);
+    }
+
+    @SuppressWarnings("unused")
     public static void tick(Level world, BlockPos pos, BlockState state, FabricationChestBlockEntity chest) {
-		chest.age++;
-		// TODO: that should run in `clientTick() instead` (same for other chests)
-		if (world.isClientSide) {
+        chest.age++;
+        // TODO: that should run in `clientTick() instead` (same for other chests)
+        if (world.isClientSide) {
 
-			chest.lastYaw = chest.yaw;
-			chest.yaw += chest.yawMod;
+            chest.lastYaw = chest.yaw;
+            chest.yaw += chest.yawMod;
 
-			if (chest.isOpen) {
-				if (chest.canFunction()) {
-					chest.changeState(State.OPEN_CRAFTING);
-					chest.interpLength = 5;
-				}
-				else {
-					chest.changeState(State.OPEN);
-					chest.interpLength = 7;
-				}
-			}
-			else {
-				if (chest.isFull) {
-					chest.changeState(State.FULL);
-					chest.interpLength = 9;
-				}
-				else if (chest.canFunction()) {
-					chest.changeState(State.CLOSED_CRAFTING);
-					chest.interpLength = 7;
-				}
-				else {
-					chest.changeState(State.CLOSED);
-					chest.interpLength = 13;
-				}
-			}
+            if (chest.isOpen) {
+                if (chest.canFunction()) {
+                    chest.changeState(State.OPEN_CRAFTING);
+                    chest.interpLength = 5;
+                } else {
+                    chest.changeState(State.OPEN);
+                    chest.interpLength = 7;
+                }
+            } else {
+                if (chest.isFull) {
+                    chest.changeState(State.FULL);
+                    chest.interpLength = 9;
+                } else if (chest.canFunction()) {
+                    chest.changeState(State.CLOSED_CRAFTING);
+                    chest.interpLength = 7;
+                } else {
+                    chest.changeState(State.CLOSED);
+                    chest.interpLength = 13;
+                }
+            }
 
-			if (chest.interpTicks < chest.interpLength) {
-				chest.interpTicks++;
-			}
+            if (chest.interpTicks < chest.interpLength) {
+                chest.interpTicks++;
+            }
 
-			chest.lidAnimator.tickLid();
-		} else {
-			if (tickCooldown(chest)) {
-				for (int i = 0; i < 4; i++) {
-					ItemStack outputItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[i]);
-					ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[i]);
-					if (!craftingTabletItemStack.isEmpty() && (outputItemStack.isEmpty() || outputItemStack.getCount() < outputItemStack.getMaxStackSize())) {
-						boolean couldCraft = chest.tryCraft(chest, i);
-						if (couldCraft) {
-							chest.setCooldown(chest, 20);
-							chest.setChanged();
-							chest.updateFullState(false);
-							return;
-						}
-					}
-				}
-			}
-		}
-	}
+            chest.lidAnimator.tickLid();
+        } else {
+            if (tickCooldown(chest)) {
+                for (int i = 0; i < 4; i++) {
+                    ItemStack outputItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[i]);
+                    ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[i]);
+                    if (!craftingTabletItemStack.isEmpty() &&
+                        (outputItemStack.isEmpty() || outputItemStack.getCount() < outputItemStack.getMaxStackSize())) {
+                        boolean couldCraft = chest.tryCraft(chest, i);
+                        if (couldCraft) {
+                            chest.setCooldown(chest, 20);
+                            chest.setChanged();
+                            chest.updateFullState(false);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	public void changeState(State state) {
-		if (this.state != state) {
-			this.state = state;
-			lastRimTarget = rimPos;
-			lastTabletTarget = tabletPos;
-			lastAssemblyTarget = assemblyPos;
-			lastRingTarget = ringPos;
-			lastItemTarget = itemPos;
-			lastAlphaTarget = alphaValue;
-			lastYawModTarget = yawMod;
-			interpTicks = 0;
-		}
-	}
+    public void changeState(State state) {
+        if (this.state != state) {
+            this.state = state;
+            lastRimTarget = rimPos;
+            lastTabletTarget = tabletPos;
+            lastAssemblyTarget = assemblyPos;
+            lastRingTarget = ringPos;
+            lastItemTarget = itemPos;
+            lastAlphaTarget = alphaValue;
+            lastYawModTarget = yawMod;
+            interpTicks = 0;
+        }
+    }
 
-	@Override
-	public boolean triggerEvent(int type, int data) {
-		if (type == 1) {
-			isOpen = data > 0;
-		}
-		return super.triggerEvent(type, data);
-	}
-	
-	private static boolean tickCooldown(FabricationChestBlockEntity fabricationChestBlockEntity) {
-		fabricationChestBlockEntity.coolDownTicks--;
-		if (fabricationChestBlockEntity.coolDownTicks > 0) {
-			return false;
-		} else {
-			fabricationChestBlockEntity.coolDownTicks = 0;
-		}
-		return true;
-	}
-	
-	public List<ItemStack> getRecipeOutputs() {
-		if (level == null || level.isClientSide()) {
-			return cachedOutputs;
-		}
+    @Override
+    public boolean triggerEvent(int type, int data) {
+        if (type == 1) {
+            isOpen = data > 0;
+        }
+        return super.triggerEvent(type, data);
+    }
 
-		var list = new ArrayList<ItemStack>();
+    private static boolean tickCooldown(FabricationChestBlockEntity fabricationChestBlockEntity) {
+        fabricationChestBlockEntity.coolDownTicks--;
+        if (fabricationChestBlockEntity.coolDownTicks > 0) {
+            return false;
+        } else {
+            fabricationChestBlockEntity.coolDownTicks = 0;
+        }
+        return true;
+    }
 
-		for (int slot : RECIPE_SLOTS) {
-			var tablet = inventory.getStackInSlot(slot);
+    public List<ItemStack> getRecipeOutputs() {
+        if (level == null || level.isClientSide()) {
+            return cachedOutputs;
+        }
 
-			if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
-				continue;
+        var list = new ArrayList<ItemStack>();
 
-			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet).value();
+        for (int slot : RECIPE_SLOTS) {
+            var tablet = inventory.getStackInSlot(slot);
+
+            if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
+                continue;
+
+            var recipe = CraftingTabletItem.getStoredRecipe(level, tablet)
+                                           .value();
 
 
-			if (!isRecipeValid(recipe))
-				continue;
+            if (!isRecipeValid(recipe))
+                continue;
 
-			var output = recipe.getResultItem(level.registryAccess());
+            var output = recipe.getResultItem(level.registryAccess());
 
-			if (!output.isEmpty())
-				list.add(output);
-		}
+            if (!output.isEmpty())
+                list.add(output);
+        }
 
-		return list;
-	}
+        return list;
+    }
 
-	public long getRenderTime() {
-		return age % 50000;
-	}
+    public long getRenderTime() {
+        return age % 50000;
+    }
 
-	public boolean hasValidRecipes() {
-		if (level == null || level.isClientSide()) {
-			return hasValidRecipes;
-		}
+    public boolean hasValidRecipes() {
+        if (level == null || level.isClientSide()) {
+            return hasValidRecipes;
+        }
 
-		for (int i = 0; i < 4; i++) {
-			ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
-			if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
-				continue;
+        for (int i = 0; i < 4; i++) {
+            ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
+            if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
+                continue;
 
-			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet).value();
-			if (isRecipeValid(recipe) && isRecipeCraftable(recipe) && canSlotFitCraftingOutput(inventory.getStackInSlot(RESULT_SLOTS[i]), recipe))
-				return true;
-		}
-		return false;
-	}
-	
-	@Override
-	protected Component getDefaultName() {
-		return Component.translatable("block.pastel.fabrication_chest");
-	}
-	
-	@Override
-	protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
-		return new FabricationChestScreenHandler(syncId, playerInventory, this);
-	}
-	
-	private void setCooldown(FabricationChestBlockEntity fabricationChestBlockEntity, int cooldownTicks) {
-		fabricationChestBlockEntity.coolDownTicks = cooldownTicks;
-	}
-	
-	private boolean tryCraft(FabricationChestBlockEntity chest, int index) {
-		ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[index]);
-		if (craftingTabletItemStack.is(PastelItems.CRAFTING_TABLET.get())) {
-			var recipe = CraftingTabletItem.getStoredRecipe(level, craftingTabletItemStack);
-			if (recipe != null && isRecipeValid(recipe.value())) {
-				NonNullList<Ingredient> ingredients = recipe.value().getIngredients();
-				ItemStack outputItemStack = recipe.value().getResultItem(level.registryAccess());
-				ItemStack currentItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[index]);
-				if (InventoryHelper.canCombineItemStacks(currentItemStack, outputItemStack) && InventoryHelper.hasInInventory(ingredients, chest.inventory)) {
-					List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(ingredients, chest.inventory);
-					
-					if (currentItemStack.isEmpty()) {
-						chest.inventory.setStackInSlot(RESULT_SLOTS[index], outputItemStack.copy());
-					} else {
-						currentItemStack.grow(outputItemStack.getCount());
-					}
-					
-					for (ItemStack remainder : remainders) {
-						InventoryHelper.smartAddToInventory(remainder, chest.inventory, null);
-					}
-					return true;
-				}
-				
-			}
-		}
-		return false;
-	}
+            var recipe = CraftingTabletItem.getStoredRecipe(level, tablet)
+                                           .value();
+            if (isRecipeValid(recipe) && isRecipeCraftable(recipe) && canSlotFitCraftingOutput(
+                inventory.getStackInSlot(RESULT_SLOTS[i]), recipe))
+                return true;
+        }
+        return false;
+    }
 
-	private static boolean isRecipeValid(Recipe<?> recipe) {
-		return recipe instanceof ShapelessRecipe || recipe instanceof ShapedRecipe;
-	}
+    @Override
+    protected Component getDefaultName() {
+        return Component.translatable("block.pastel.fabrication_chest");
+    }
 
-	private boolean isRecipeCraftable(Recipe<?> recipe) {
-		var ingredients = recipe.getIngredients();
+    @Override
+    protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
+        return new FabricationChestScreenHandler(syncId, playerInventory, this);
+    }
 
-		if (!InventoryHelper.hasInInventory(ingredients, this.inventory))
-			return false;
+    private void setCooldown(FabricationChestBlockEntity fabricationChestBlockEntity, int cooldownTicks) {
+        fabricationChestBlockEntity.coolDownTicks = cooldownTicks;
+    }
 
-		var remainders = InventoryHelper.getRemainders(ingredients);
+    private boolean tryCraft(FabricationChestBlockEntity chest, int index) {
+        ItemStack craftingTabletItemStack = chest.inventory.getStackInSlot(RECIPE_SLOTS[index]);
+        if (craftingTabletItemStack.is(PastelItems.CRAFTING_TABLET.get())) {
+            var recipe = CraftingTabletItem.getStoredRecipe(level, craftingTabletItemStack);
+            if (recipe != null && isRecipeValid(recipe.value())) {
+                NonNullList<Ingredient> ingredients = recipe.value()
+                                                            .getIngredients();
+                ItemStack outputItemStack = recipe.value()
+                                                  .getResultItem(level.registryAccess());
+                ItemStack currentItemStack = chest.inventory.getStackInSlot(RESULT_SLOTS[index]);
+                if (InventoryHelper.canCombineItemStacks(currentItemStack, outputItemStack) &&
+                    InventoryHelper.hasInInventory(ingredients, chest.inventory)) {
+                    List<ItemStack> remainders = InventoryHelper.removeFromInventoryWithRemainders(
+                        ingredients, chest.inventory);
 
-		return InventoryHelper.canFitStacks(this.inventory, remainders);
-	}
-	
-	@Override
-	public int getContainerSize() {
-		return INVENTORY_SIZE;
-	}
-	
-	@Override
-	public void saveAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
-		super.saveAdditional(tag, registryLookup);
-		tag.putInt("cooldown", coolDownTicks);
-		tag.putLong("age", age);
-		if (level != null && level.isClientSide()) {
-			tag.putFloat("yaw", yaw);
-			tag.putFloat("lastYaw", lastYaw);
-		}
-	}
-	
-	@Override
-	public void loadAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
-		super.loadAdditional(tag, registryLookup);
-		if (tag.contains("cooldown")) {
-			coolDownTicks = tag.getInt("cooldown");
-		}
-		if (tag.contains("age")) {
-			age = tag.getLong("age");
-		}
-		if (tag.contains("yaw")) {
-			yaw = tag.getFloat("yaw");
-		}
-		if (tag.contains("lastYaw")) {
-			lastYaw = tag.getFloat("lastYaw");
-		}
-	}
-	
-	@Override
-	public int[] getSlotsForFace(Direction side) {
-		if (side == Direction.DOWN) {
-			return RESULT_SLOTS;
-		} else {
-			return CHEST_SLOTS;
-		}
-	}
-	
-	@Override
-	public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dir) {
-		return slot <= CHEST_SLOTS[CHEST_SLOTS.length - 1];
-	}
-	
-	@Override
-	public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
-		return true;
-	}
+                    if (currentItemStack.isEmpty()) {
+                        chest.inventory.setStackInSlot(RESULT_SLOTS[index], outputItemStack.copy());
+                    } else {
+                        currentItemStack.grow(outputItemStack.getCount());
+                    }
 
-	public boolean canFunction() {
-		return !isFull && hasValidRecipes();
-	}
-	
-	public void updateFullState(boolean force) {
-		if (level != null && !level.isClientSide()) {
-			var wasFull = isFull;
-			isFull = isFull();
-			var hadValidRecipes = hasValidRecipes;
-			hasValidRecipes = hasValidRecipes();
-			if (force || wasFull != isFull || hadValidRecipes != hasValidRecipes) {
-				FabricationChestStatusUpdatePayload.sendFabricationChestStatusUpdate(this);
-			}
-		}
-	}
-	
-	public boolean isFullServer() {
-		return isFull;
-	}
+                    for (ItemStack remainder : remainders) {
+                        InventoryHelper.smartAddToInventory(remainder, chest.inventory, null);
+                    }
+                    return true;
+                }
 
-	public boolean isFull() {
-		int invalids = 0;
+            }
+        }
+        return false;
+    }
 
-		for (int i = 0; i < 4; i++) {
-			ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
+    private static boolean isRecipeValid(Recipe<?> recipe) {
+        return recipe instanceof ShapelessRecipe || recipe instanceof ShapedRecipe;
+    }
 
-			if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
-				continue;
+    private boolean isRecipeCraftable(Recipe<?> recipe) {
+        var ingredients = recipe.getIngredients();
 
-			var recipe = CraftingTabletItem.getStoredRecipe(level, tablet);
+        if (!InventoryHelper.hasInInventory(ingredients, this.inventory))
+            return false;
 
-			if (recipe == null || !isRecipeValid(recipe.value())) {
-				invalids++;
-				continue;
-			}
+        var remainders = InventoryHelper.getRemainders(ingredients);
 
-			ItemStack outputSlot = inventory.getStackInSlot(RESULT_SLOTS[i]);
+        return InventoryHelper.canFitStacks(this.inventory, remainders);
+    }
 
-			if (canSlotFitCraftingOutput(outputSlot, recipe.value())) {
-				return false;
-			}
-		}
+    @Override
+    public int getContainerSize() {
+        return INVENTORY_SIZE;
+    }
+
+    @Override
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
+        super.saveAdditional(tag, registryLookup);
+        tag.putInt("cooldown", coolDownTicks);
+        tag.putLong("age", age);
+        if (level != null && level.isClientSide()) {
+            tag.putFloat("yaw", yaw);
+            tag.putFloat("lastYaw", lastYaw);
+        }
+    }
+
+    @Override
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registryLookup) {
+        super.loadAdditional(tag, registryLookup);
+        if (tag.contains("cooldown")) {
+            coolDownTicks = tag.getInt("cooldown");
+        }
+        if (tag.contains("age")) {
+            age = tag.getLong("age");
+        }
+        if (tag.contains("yaw")) {
+            yaw = tag.getFloat("yaw");
+        }
+        if (tag.contains("lastYaw")) {
+            lastYaw = tag.getFloat("lastYaw");
+        }
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction side) {
+        if (side == Direction.DOWN) {
+            return RESULT_SLOTS;
+        } else {
+            return CHEST_SLOTS;
+        }
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dir) {
+        return slot <= CHEST_SLOTS[CHEST_SLOTS.length - 1];
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
+        return true;
+    }
+
+    public boolean canFunction() {
+        return !isFull && hasValidRecipes();
+    }
+
+    public void updateFullState(boolean force) {
+        if (level != null && !level.isClientSide()) {
+            var wasFull = isFull;
+            isFull = isFull();
+            var hadValidRecipes = hasValidRecipes;
+            hasValidRecipes = hasValidRecipes();
+            if (force || wasFull != isFull || hadValidRecipes != hasValidRecipes) {
+                FabricationChestStatusUpdatePayload.sendFabricationChestStatusUpdate(this);
+            }
+        }
+    }
+
+    public boolean isFullServer() {
+        return isFull;
+    }
+
+    public boolean isFull() {
+        int invalids = 0;
+
+        for (int i = 0; i < 4; i++) {
+            ItemStack tablet = inventory.getStackInSlot(RECIPE_SLOTS[i]);
+
+            if (!tablet.is(PastelItems.CRAFTING_TABLET.get()))
+                continue;
+
+            var recipe = CraftingTabletItem.getStoredRecipe(level, tablet);
+
+            if (recipe == null || !isRecipeValid(recipe.value())) {
+                invalids++;
+                continue;
+            }
+
+            ItemStack outputSlot = inventory.getStackInSlot(RESULT_SLOTS[i]);
+
+            if (canSlotFitCraftingOutput(outputSlot, recipe.value())) {
+                return false;
+            }
+        }
         return invalids != 4;
     }
 
-	public boolean canSlotFitCraftingOutput(ItemStack slot, Recipe<?> recipe) {
-		if (level == null)
-			return false;
-        return slot.isEmpty() || slot.getCount() + recipe.getResultItem(level.registryAccess()).getCount() < slot.getMaxStackSize();
+    public boolean canSlotFitCraftingOutput(ItemStack slot, Recipe<?> recipe) {
+        if (level == null)
+            return false;
+        return slot.isEmpty() || slot.getCount() + recipe.getResultItem(level.registryAccess())
+                                                         .getCount() < slot.getMaxStackSize();
     }
-	
-	@Override
-	protected void onInvOpenOrClose(Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
-		super.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
-		updateFullState(true);
-	}
-	
-	@Override
-	public void setItem(int slot, ItemStack stack) {
-		super.setItem(slot, stack);
-		updateFullState(false);
-	}
-	
-	@Override
-	public ItemStack removeItem(int slot, int amount) {
-		var stack = super.removeItem(slot, amount);
-		if (!stack.isEmpty())
-			updateFullState(false);
-		return stack;
-	}
-	
-	@Override
-	public ItemStack removeItemNoUpdate(int slot) {
-		var stack = super.removeItemNoUpdate(slot);
-		if (!stack.isEmpty())
-			updateFullState(false);
-		return stack;
-	}
 
-	@Override
-	public IItemHandler exposeItemHandlers(Direction dir) {
-		if (dir.getAxis().isVertical()) {
-			return new StackHandlerView(inventory, RESULT_SLOTS[0], RESULT_SLOTS.length);
-		}
+    @Override
+    protected void onInvOpenOrClose(
+        Level world, BlockPos pos, BlockState state, int oldViewerCount, int newViewerCount) {
+        super.onInvOpenOrClose(world, pos, state, oldViewerCount, newViewerCount);
+        updateFullState(true);
+    }
 
-		return new StackHandlerView(inventory, 0, CHEST_SLOTS.length);
-	}
+    @Override
+    public void setItem(int slot, ItemStack stack) {
+        super.setItem(slot, stack);
+        updateFullState(false);
+    }
 
-	public void updateState(boolean full, boolean hasValidRecipes, List<ItemStack> cachedOutputs) {
-		this.isFull = full;
-		this.hasValidRecipes = hasValidRecipes;
-		this.cachedOutputs = cachedOutputs;
-	}
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        var stack = super.removeItem(slot, amount);
+        if (!stack.isEmpty())
+            updateFullState(false);
+        return stack;
+    }
 
-	public State getState() {
-		return state;
-	}
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        var stack = super.removeItemNoUpdate(slot);
+        if (!stack.isEmpty())
+            updateFullState(false);
+        return stack;
+    }
 
-	public enum State {
-		OPEN,
-		OPEN_CRAFTING,
-		CLOSED_CRAFTING,
-		CLOSED,
-		FULL
-	}
+    @Override
+    public IItemHandler exposeItemHandlers(Direction dir) {
+        if (dir.getAxis()
+               .isVertical()) {
+            return new StackHandlerView(inventory, RESULT_SLOTS[0], RESULT_SLOTS.length);
+        }
+
+        return new StackHandlerView(inventory, 0, CHEST_SLOTS.length);
+    }
+
+    public void updateState(boolean full, boolean hasValidRecipes, List<ItemStack> cachedOutputs) {
+        this.isFull = full;
+        this.hasValidRecipes = hasValidRecipes;
+        this.cachedOutputs = cachedOutputs;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public enum State {
+        OPEN,
+        OPEN_CRAFTING,
+        CLOSED_CRAFTING,
+        CLOSED,
+        FULL
+    }
 }

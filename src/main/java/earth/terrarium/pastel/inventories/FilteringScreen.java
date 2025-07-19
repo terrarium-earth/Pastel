@@ -35,7 +35,8 @@ public class FilteringScreen extends AbstractContainerScreen<FilteringScreenHand
         int intInventoryY = 41 + ((int) Math.round(rows * 1.5) * STRIP_HEIGHT);
 
         drawContext.drawString(this.font, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
-        drawContext.drawString(this.font, this.playerInventoryTitle, inventoryX, intInventoryY, RenderHelper.GREEN_COLOR, false);
+        drawContext.drawString(
+            this.font, this.playerInventoryTitle, inventoryX, intInventoryY, RenderHelper.GREEN_COLOR, false);
     }
 
     @Override
@@ -46,10 +47,14 @@ public class FilteringScreen extends AbstractContainerScreen<FilteringScreenHand
         drawContext.blit(BACKGROUND, x, y, 0, 0, imageWidth, BASE_FILTER_HEIGHT);
         var drawRows = (int) Math.round(rows * 1.5);
         for (int i = 0; i < drawRows; i++) {
-            drawContext.blit(BACKGROUND, x, y + BASE_FILTER_HEIGHT + i * STRIP_HEIGHT, 0, STRIP_OFFSET, imageWidth, STRIP_HEIGHT);
+            drawContext.blit(
+                BACKGROUND, x, y + BASE_FILTER_HEIGHT + i * STRIP_HEIGHT, 0, STRIP_OFFSET, imageWidth, STRIP_HEIGHT);
         }
 
-        drawContext.blit(BACKGROUND, x, y + BASE_FILTER_HEIGHT + drawRows * STRIP_HEIGHT, 0, PLAYER_OFFSET, imageWidth, PLAYER_HEIGHT);
+        drawContext.blit(
+            BACKGROUND, x, y + BASE_FILTER_HEIGHT + drawRows * STRIP_HEIGHT, 0, PLAYER_OFFSET, imageWidth,
+            PLAYER_HEIGHT
+        );
 
         for (int i = 0; i < Math.min(menu.filterInventory.getContainerSize(), menu.drawnSlots); i++) {
             Slot s = menu.getSlot(i);

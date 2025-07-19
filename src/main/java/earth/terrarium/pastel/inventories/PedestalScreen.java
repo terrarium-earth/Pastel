@@ -5,7 +5,7 @@ import com.klikli_dev.modonomicon.client.render.MultiblockPreviewRenderer;
 import earth.terrarium.pastel.PastelCommon;
 import earth.terrarium.pastel.compat.modonomicon.ModonomiconHelper;
 import earth.terrarium.pastel.helpers.render.RenderHelper;
-import earth.terrarium.pastel.recipe.pedestal.PedestalRecipeTier;
+import earth.terrarium.pastel.recipe.pedestal.PedestalTier;
 import earth.terrarium.pastel.registries.PastelMultiblocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,23 +23,16 @@ public class PedestalScreen extends AbstractContainerScreen<PedestalScreenHandle
 	public static final ResourceLocation BACKGROUND2 = PastelCommon.locate("textures/gui/container/pedestal2.png");
 	public static final ResourceLocation BACKGROUND3 = PastelCommon.locate("textures/gui/container/pedestal3.png");
 	public static final ResourceLocation BACKGROUND4 = PastelCommon.locate("textures/gui/container/pedestal4.png");
-	private final boolean structureUpdateAvailable;
 	private final ResourceLocation backgroundTexture;
-	private final PedestalRecipeTier maxPedestalRecipeTierForVariant;
-	final int informationIconX = 95;
-	final int informationIconY = 55;
-	
-	public PedestalScreen(PedestalScreenHandler handler, Inventory playerInventory, Component title) {
+
+    public PedestalScreen(PedestalScreenHandler handler, Inventory playerInventory, Component title) {
 		super(handler, playerInventory, title);
 		this.imageHeight = 194;
-		this.maxPedestalRecipeTierForVariant = this.menu.getPedestalRecipeTier();
-		this.backgroundTexture = getBackgroundTextureForTier(this.maxPedestalRecipeTierForVariant);
-		PedestalRecipeTier maxPedestalRecipeTier = this.menu.getMaxPedestalRecipeTier();
-		this.structureUpdateAvailable = this.maxPedestalRecipeTierForVariant != maxPedestalRecipeTier;
+		this.backgroundTexture = getBackgroundTextureForTier(this.menu.getTier());
 	}
 	
 	@Contract(pure = true)
-	public static ResourceLocation getBackgroundTextureForTier(@NotNull PedestalRecipeTier recipeTier) {
+	public static ResourceLocation getBackgroundTextureForTier(@NotNull PedestalTier recipeTier) {
 		switch (recipeTier) {
 			case COMPLEX -> {
 				return BACKGROUND4;
@@ -68,16 +61,6 @@ public class PedestalScreen extends AbstractContainerScreen<PedestalScreenHandle
 		
 		drawContext.drawString(tr, title, titleX, titleY, RenderHelper.GREEN_COLOR, false);
 		drawContext.drawString(tr, this.playerInventoryTitle, inventoryX, intInventoryY, RenderHelper.GREEN_COLOR, false);
-		
-		// if structure could be improved:
-		// show red blinking information icon
-		if (structureUpdateAvailable) {
-			if (minecraft != null && minecraft.level != null && (minecraft.level.getGameTime() >> 4) % 2 == 0) {
-				drawContext.drawString(tr, "ℹ", informationIconX, informationIconY, 11010048, false);
-			} else {
-				drawContext.drawString(tr, "ℹ", informationIconX, informationIconY, 16252928, false);
-			}
-		}
 	}
 	
 	@Override
@@ -97,36 +80,10 @@ public class PedestalScreen extends AbstractContainerScreen<PedestalScreenHandle
 	}
 	
 	@Override
-	public boolean mouseClicked(double mouseX, double mouseY, int button) {
-		Minecraft client = Minecraft.getInstance();
-		if (mouseOverInformationIcon((int) mouseX, (int) mouseY)) {
-			Multiblock currentMultiBlock = MultiblockPreviewRenderer.getMultiblock();
-			Multiblock multiblockToDisplay = PastelMultiblocks.get(maxPedestalRecipeTierForVariant.getStructureID(client.player));
-			if (currentMultiBlock == multiblockToDisplay) {
-				ModonomiconHelper.clearRenderedMultiblock(currentMultiBlock);
-			} else {
-				ModonomiconHelper.renderMultiblock(multiblockToDisplay, maxPedestalRecipeTierForVariant.getStructureText(), this.menu.getBlockPos().below(2), Rotation.NONE);
-			}
-			return true;
-		} else {
-			return super.mouseClicked(mouseX, mouseY, button);
-		}
-	}
-	
-	@Override
 	public void render(GuiGraphics drawContext, int mouseX, int mouseY, float delta) {
 		renderBackground(drawContext, mouseX, mouseY, delta);
 		super.render(drawContext, mouseX, mouseY, delta);
-		
-		if (mouseOverInformationIcon(mouseX, mouseY)) {
-			drawContext.renderTooltip(this.font, Component.translatable("multiblock.pastel.pedestal.upgrade_available"), mouseX, mouseY);
-		} else {
-			renderTooltip(drawContext, mouseX, mouseY);
-		}
-	}
-	
-	private boolean mouseOverInformationIcon(int mouseX, int mouseY) {
-		return structureUpdateAvailable && mouseX > leftPos + informationIconX - 2 && mouseX < leftPos + informationIconX + 10 && mouseY > topPos + informationIconY - 2 && mouseY < topPos + informationIconY + 10;
+		renderTooltip(drawContext, mouseX, mouseY);
 	}
 	
 }

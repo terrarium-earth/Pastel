@@ -13,24 +13,25 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class StarCandyItem extends Item {
-	
-	public StarCandyItem(Properties settings) {
-		super(settings);
-	}
-	
-	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
-		ItemStack itemStack = super.finishUsingItem(stack, world, user);
-		if (!world.isClientSide) {
-			WhispyCircletItem.removeSingleStatusEffect(user, MobEffectCategory.HARMFUL);
-		}
-		return itemStack;
-	}
 
-	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
-		super.appendHoverText(stack, context, tooltip, type);
-		tooltip.add(Component.translatable("item.pastel.star_candy.tooltip").withStyle(ChatFormatting.GRAY));
-	}
-	
+    public StarCandyItem(Properties settings) {
+        super(settings);
+    }
+
+    @Override
+    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
+        ItemStack itemStack = super.finishUsingItem(stack, world, user);
+        if (!world.isClientSide) {
+            WhispyCircletItem.removeSingleStatusEffect(user, MobEffectCategory.HARMFUL);
+        }
+        return itemStack;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag type) {
+        super.appendHoverText(stack, context, tooltip, type);
+        tooltip.add(Component.translatable("item.pastel.star_candy.tooltip")
+                             .withStyle(ChatFormatting.GRAY));
+    }
+
 }

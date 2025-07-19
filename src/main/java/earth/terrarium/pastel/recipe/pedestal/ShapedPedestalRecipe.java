@@ -19,6 +19,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
@@ -36,7 +37,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 			String group,
 			boolean secret,
 			Optional<ResourceLocation> requiredAdvancementIdentifier,
-			PedestalRecipeTier tier,
+			PedestalTier tier,
 			RawShapedPedestalRecipe rawShapedRecipe,
 			Map<GemstoneColor, Integer> gemstonePowderInputs,
 			ItemStack output,
@@ -58,25 +59,23 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 	}
 	
 	@Override
-	public void consumeIngredients(PedestalBlockEntity pedestal) {
-		super.consumeIngredients(pedestal);
+	public void consumeIngredients(PedestalBlockEntity pedestal, PedestalRecipeInput input) {
+		super.consumeIngredients(pedestal, input);
 		
-		boolean mirrored = rawShapedRecipe.matches(pedestal.createRecipeInput().getCraftingGridInput(), true);
-		CraftingInput.Positioned positioned = pedestal.createPositionedInput();
+		boolean mirrored = rawShapedRecipe.matches(input.getCraftingGridInput(), true);
+		var inv = pedestal.getInventory();
+		var positioned = CraftingInput.ofPositioned(3, 3, inv.getInternalList());
 		
 		for (int x = 0; x < this.width; x++) {
 			for (int y = 0; y < this.height; y++) {
 				int ingredientStackId = (mirrored ? ((this.width - 1) - x) : x) + this.width * y;
 				int slot = (x + positioned.left()) + 3 * (y + positioned.top());
 				
-				IngredientStack ingredientStackAtPos = this.inputs.get(ingredientStackId);
-				ItemStack slotStack = pedestal.getItem(slot);
-				if (!ingredientStackAtPos.test(slotStack)) {
-					PastelCommon.logError("Looks like DaFuqs or Electro fucked up Spectrums Pedestal recipe matching. Go open up a report with the recipe that was crafted and an image of the pedestals contents, please! :)");
-				}
+				var ingredient = this.inputs.get(ingredientStackId);
+				var stack = inv.getStackInSlot(slot);
 				
-				if (!slotStack.isEmpty()) {
-					decrementGridSlot(pedestal, slot, ingredientStackAtPos.getCount(), slotStack);
+				if (!stack.isEmpty()) {
+					decrementGridSlot(pedestal, slot, ingredient.getCount(), stack);
 				}
 			}
 		}
@@ -108,7 +107,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				Codec.STRING.optionalFieldOf("group", "").forGetter(recipe -> recipe.group),
 				Codec.BOOL.optionalFieldOf("secret", false).forGetter(recipe -> recipe.secret),
 				ResourceLocation.CODEC.optionalFieldOf("required_advancement").forGetter(recipe -> recipe.requiredAdvancementIdentifier),
-				PedestalRecipeTier.CODEC.optionalFieldOf("tier", PedestalRecipeTier.BASIC).forGetter(recipe -> recipe.tier),
+				PedestalTier.CODEC.optionalFieldOf("tier", PedestalTier.BASIC).forGetter(recipe -> recipe.tier),
 				RawShapedPedestalRecipe.CODEC.forGetter(recipe -> recipe.rawShapedRecipe),
 				CodecHelper.registryMap(PastelRegistries.GEMSTONE_COLOR, Codec.INT).fieldOf("colors").forGetter(recipe -> recipe.powderInputs),
 				ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
@@ -122,7 +121,7 @@ public class ShapedPedestalRecipe extends PedestalRecipe {
 				ByteBufCodecs.STRING_UTF8, recipe -> recipe.group,
 				ByteBufCodecs.BOOL, recipe -> recipe.secret,
 				ByteBufCodecs.optional(ResourceLocation.STREAM_CODEC), recipe -> recipe.requiredAdvancementIdentifier,
-				PedestalRecipeTier.STREAM_CODEC, recipe -> recipe.tier,
+				PedestalTier.STREAM_CODEC, recipe -> recipe.tier,
 				RawShapedPedestalRecipe.STREAM_CODEC, recipe -> recipe.rawShapedRecipe,
 				ByteBufCodecs.map(HashMap::new, ByteBufCodecs.registry(PastelRegistries.GEMSTONE_COLOR.key()), ByteBufCodecs.VAR_INT), recipe -> recipe.powderInputs,
 				ItemStack.STREAM_CODEC, recipe -> recipe.output,

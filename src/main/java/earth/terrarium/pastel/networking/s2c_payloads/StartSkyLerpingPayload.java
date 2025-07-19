@@ -17,33 +17,41 @@ import net.minecraft.world.level.dimension.DimensionType;
 import org.jetbrains.annotations.NotNull;
 
 public record StartSkyLerpingPayload(long startTime, long endTime) implements CustomPacketPayload {
-	
-	public static final Type<StartSkyLerpingPayload> ID = PastelC2SPackets.makeId("start_sky_lerping");
-	public static final StreamCodec<FriendlyByteBuf, StartSkyLerpingPayload> CODEC = StreamCodec.composite(
-			ByteBufCodecs.VAR_LONG, StartSkyLerpingPayload::startTime,
-			ByteBufCodecs.VAR_LONG, StartSkyLerpingPayload::endTime,
-			StartSkyLerpingPayload::new
-	);
-	
-	public static void startSkyLerping(@NotNull ServerLevel serverWorld, int additionalTime) {
-		long timeOfDay = serverWorld.getDayTime();
-		PacketDistributor.sendToPlayersInDimension(serverWorld, new StartSkyLerpingPayload(timeOfDay, timeOfDay + additionalTime));
-	}
-	
-	@SuppressWarnings("resource")
-	public static void execute(StartSkyLerpingPayload payload, IPayloadContext context) {
-		var client = Minecraft.getInstance();
-		Level level = context.player().level();
-		DimensionType dimensionType = level.dimensionType();
-		
-		PastelClient.skyLerper.trigger(dimensionType, payload.startTime, client.getTimer().getGameTimeDeltaPartialTick(false), payload.endTime);
-		if (level.canSeeSky(client.player.blockPosition())) {
-			level.playSound(null, client.player.blockPosition(), PastelSoundEvents.CELESTIAL_POCKET_WATCH_FLY_BY, SoundSource.NEUTRAL, 0.15F, 1.0F);
-		}
-	}
-	
-	@Override
-	public Type<? extends CustomPacketPayload> type() {
-		return ID;
-	}
+
+    public static final Type<StartSkyLerpingPayload> ID = PastelC2SPackets.makeId("start_sky_lerping");
+    public static final StreamCodec<FriendlyByteBuf, StartSkyLerpingPayload> CODEC = StreamCodec.composite(
+        ByteBufCodecs.VAR_LONG, StartSkyLerpingPayload::startTime,
+        ByteBufCodecs.VAR_LONG, StartSkyLerpingPayload::endTime,
+        StartSkyLerpingPayload::new
+    );
+
+    public static void startSkyLerping(@NotNull ServerLevel serverWorld, int additionalTime) {
+        long timeOfDay = serverWorld.getDayTime();
+        PacketDistributor.sendToPlayersInDimension(
+            serverWorld, new StartSkyLerpingPayload(timeOfDay, timeOfDay + additionalTime));
+    }
+
+    @SuppressWarnings("resource")
+    public static void execute(StartSkyLerpingPayload payload, IPayloadContext context) {
+        var client = Minecraft.getInstance();
+        Level level = context.player()
+                             .level();
+        DimensionType dimensionType = level.dimensionType();
+
+        PastelClient.skyLerper.trigger(
+            dimensionType, payload.startTime, client.getTimer()
+                                                    .getGameTimeDeltaPartialTick(false), payload.endTime
+        );
+        if (level.canSeeSky(client.player.blockPosition())) {
+            level.playSound(
+                null, client.player.blockPosition(), PastelSoundEvents.CELESTIAL_POCKET_WATCH_FLY_BY,
+                SoundSource.NEUTRAL, 0.15F, 1.0F
+            );
+        }
+    }
+
+    @Override
+    public Type<? extends CustomPacketPayload> type() {
+        return ID;
+    }
 }

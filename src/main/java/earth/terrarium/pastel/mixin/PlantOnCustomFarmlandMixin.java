@@ -15,10 +15,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin({CropBlock.class, StemBlock.class, AttachedStemBlock.class, PitcherCropBlock.class})
 public abstract class PlantOnCustomFarmlandMixin {
-	
-	@ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
-	public boolean canPlantOnTopOfCustomFarmland(boolean original, @NotNull BlockState floor, BlockGetter world, BlockPos pos) {
-		return original || floor.getBlock() instanceof PastelFarmlandBlock;
-	}
-	
+
+    @ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
+    public boolean canPlantOnTopOfCustomFarmland(
+        boolean original, @NotNull BlockState floor, BlockGetter world, BlockPos pos) {
+        return original || floor.getBlock() instanceof PastelFarmlandBlock;
+    }
+
 }

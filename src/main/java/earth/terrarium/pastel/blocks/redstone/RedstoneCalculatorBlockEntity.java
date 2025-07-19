@@ -8,31 +8,31 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class RedstoneCalculatorBlockEntity extends BlockEntity {
-	
-	private int outputSignal;
-	
-	public RedstoneCalculatorBlockEntity(BlockPos pos, BlockState state) {
-		super(PastelBlockEntities.REDSTONE_CALCULATOR.get(), pos, state);
-	}
-	
-	@Override
-	public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
-		super.saveAdditional(nbt, registryLookup);
-		nbt.putInt("output_signal", this.outputSignal);
-	}
-	
-	@Override
-	public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
-		super.loadAdditional(nbt, registryLookup);
-		this.outputSignal = nbt.getInt("output_signal");
-	}
-	
-	public int getOutputSignal() {
-		return this.outputSignal;
-	}
-	
-	public void setOutputSignal(int outputSignal) {
-		this.outputSignal = outputSignal;
-	}
-	
+
+    private int outputSignal;
+
+    public RedstoneCalculatorBlockEntity(BlockPos pos, BlockState state) {
+        super(PastelBlockEntities.REDSTONE_CALCULATOR.get(), pos, state);
+    }
+
+    @Override
+    public void saveAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
+        super.saveAdditional(nbt, registryLookup);
+        nbt.putInt("output_signal", this.outputSignal);
+    }
+
+    @Override
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider registryLookup) {
+        super.loadAdditional(nbt, registryLookup);
+        this.outputSignal = nbt.getInt("output_signal");
+    }
+
+    public int getOutputSignal() {
+        return this.outputSignal;
+    }
+
+    public void setOutputSignal(int outputSignal) {
+        this.outputSignal = outputSignal;
+    }
+
 }

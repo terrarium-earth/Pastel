@@ -13,20 +13,34 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 
 @OnlyIn(Dist.CLIENT)
 public class BatHeadModel extends PastelSkullModel {
-	
-	public BatHeadModel(ModelPart root) {
-		super(root);
-	}
-	
-	public static LayerDefinition getTexturedModelData() {
-		MeshDefinition modelData = new MeshDefinition();
-		PartDefinition modelPartData = modelData.getRoot();
-		
-		PartDefinition head = modelPartData.addOrReplaceChild(PartNames.HEAD, CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.ZERO);
-		head.addOrReplaceChild("right_ear", CubeListBuilder.create().texOffs(24, 0).addBox(-4.0F, -9.0F, -2.0F, 3.0F, 4.0F, 1.0F), PartPose.ZERO);
-		head.addOrReplaceChild("left_ear", CubeListBuilder.create().texOffs(24, 0).mirror().addBox(1.0F, -9.0F, -2.0F, 3.0F, 4.0F, 1.0F), PartPose.ZERO);
-		
-		return LayerDefinition.create(modelData, 64, 64);
-	}
-	
+
+    public BatHeadModel(ModelPart root) {
+        super(root);
+    }
+
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
+
+        PartDefinition head = modelPartData.addOrReplaceChild(
+            PartNames.HEAD, CubeListBuilder.create()
+                                           .texOffs(0, 0)
+                                           .addBox(
+                                               -3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F), PartPose.ZERO
+        );
+        head.addOrReplaceChild(
+            "right_ear", CubeListBuilder.create()
+                                        .texOffs(24, 0)
+                                        .addBox(-4.0F, -9.0F, -2.0F, 3.0F, 4.0F, 1.0F), PartPose.ZERO
+        );
+        head.addOrReplaceChild(
+            "left_ear", CubeListBuilder.create()
+                                       .texOffs(24, 0)
+                                       .mirror()
+                                       .addBox(1.0F, -9.0F, -2.0F, 3.0F, 4.0F, 1.0F), PartPose.ZERO
+        );
+
+        return LayerDefinition.create(modelData, 64, 64);
+    }
+
 }

@@ -21,14 +21,15 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 @Mixin({PotionItem.class, LingeringPotionItem.class, TippedArrowItem.class})
 public abstract class PotionItemClientMixin {
-	
-	@Inject(method = "appendHoverText", at = @At("HEAD"), cancellable = true)
-	private void makePotionUnidentifiable(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type, CallbackInfo ci) {
-		CustomPotionDataComponent component = stack.get(PastelDataComponentTypes.CUSTOM_POTION_DATA);
-		if (component != null && component.unidentifiable()) {
-			tooltip.add(Component.translatable("item.pastel.potion.tooltip.unidentifiable"));
-			ci.cancel();
-		}
-	}
-	
+
+    @Inject(method = "appendHoverText", at = @At("HEAD"), cancellable = true)
+    private void makePotionUnidentifiable(
+        ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag type, CallbackInfo ci) {
+        CustomPotionDataComponent component = stack.get(PastelDataComponentTypes.CUSTOM_POTION_DATA);
+        if (component != null && component.unidentifiable()) {
+            tooltip.add(Component.translatable("item.pastel.potion.tooltip.unidentifiable"));
+            ci.cancel();
+        }
+    }
+
 }

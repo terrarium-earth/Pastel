@@ -10,26 +10,28 @@ import net.minecraft.world.level.block.state.StateDefinition;
 
 public class ShinglesBlock extends HorizontalDirectionalBlock {
 
-	public static final MapCodec<ShinglesBlock> CODEC = simpleCodec(ShinglesBlock::new);
+    public static final MapCodec<ShinglesBlock> CODEC = simpleCodec(ShinglesBlock::new);
 
-	public ShinglesBlock(Properties settings) {
-		super(settings);
-		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-	}
+    public ShinglesBlock(Properties settings) {
+        super(settings);
+        this.registerDefaultState(this.stateDefinition.any()
+                                                      .setValue(FACING, Direction.NORTH));
+    }
 
-	@Override
-	public MapCodec<? extends ShinglesBlock> codec() {
-		return CODEC;
-	}
-	
-	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-		return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection());
-	}
-	
-	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING);
-	}
-	
+    @Override
+    public MapCodec<? extends ShinglesBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState()
+                   .setValue(FACING, ctx.getHorizontalDirection());
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+    }
+
 }

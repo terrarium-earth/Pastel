@@ -7,19 +7,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 
 public class MidnightSolutionConvertingDisplay extends FluidConvertingDisplay {
-	
-	public MidnightSolutionConvertingDisplay(RecipeHolder<MidnightSolutionConvertingRecipe> recipe) {
-		super(recipe);
-	}
-	
-	@Override
-	public CategoryIdentifier<?> getCategoryIdentifier() {
-		return PastelPlugins.MIDNIGHT_SOLUTION_CONVERTING;
-	}
-	
-	@Override
-	public ResourceLocation getUnlockIdentifier() {
-		return MidnightSolutionConvertingRecipe.UNLOCK_IDENTIFIER;
-	}
-	
+
+    public MidnightSolutionConvertingDisplay(RecipeHolder<MidnightSolutionConvertingRecipe> recipe) {
+        super(recipe);
+    }
+
+    @Override
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return PastelPlugins.MIDNIGHT_SOLUTION_CONVERTING;
+    }
+
+    @Override
+    public ResourceLocation getUnlockIdentifier() {
+        return MidnightSolutionConvertingRecipe.UNLOCK_IDENTIFIER;
+    }
+
 }

@@ -7,9 +7,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import java.util.Optional;
 
 public interface InkColorSelectedPacketReceiver {
-	
-	void onInkColorSelectedPacket(Optional<Holder<InkColor>> inkColor);
-	
-	BlockEntity getBlockEntity();
-	
+
+    void onInkColorSelectedPacket(Optional<Holder<InkColor>> inkColor);
+
+    BlockEntity getBlockEntity();
+
 }
