@@ -1,7 +1,9 @@
 package earth.terrarium.pastel;
 
-import de.dafuqs.revelationary.api.advancements.ClientAdvancementPacketCallback;
-import de.dafuqs.revelationary.api.revelations.RevealingCallback;
+import com.cmdpro.databank.advancement.ClientAdvancementListener;
+import com.cmdpro.databank.hidden.ClientHiddenListener;
+import com.cmdpro.databank.hidden.Hidden;
+import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import earth.terrarium.pastel.blocks.mob_head.client.PastelSkullModels;
 import earth.terrarium.pastel.compat.PastelIntegrationPacks;
 import earth.terrarium.pastel.compat.ears.EarsCompat;
@@ -41,118 +43,106 @@ import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static earth.terrarium.pastel.PastelCommon.CONFIG;
 import static earth.terrarium.pastel.PastelCommon.logInfo;
 
-public class PastelClient implements RevealingCallback, ClientAdvancementPacketCallback {
+public class PastelClient implements ClientHiddenListener, ClientAdvancementListener {
 
-    public static final SkyLerper skyLerper = new SkyLerper();
+	public static final SkyLerper skyLerper = new SkyLerper();
 
-    public PastelClient(IEventBus pastelBus, ModContainer container) {
-        if (FMLLoader.getDist()
-                     .isDedicatedServer()) {
-            return;
-        }
+	public PastelClient(IEventBus pastelBus, ModContainer container) {
+		if (FMLLoader.getDist().isDedicatedServer()) {
+			return;
+		}
 
-        logInfo("Starting Client Startup");
+		logInfo("Starting Client Startup");
 
-        logInfo("Registering Model Layers...");
-        pastelBus.addListener(PastelModelLayers::register);
+		logInfo("Registering Model Layers...");
+		pastelBus.addListener(PastelModelLayers::register);
 
-        logInfo("Setting up Block Rendering...");
-        pastelBus.addListener(PastelBlocks::registerClient);
+		logInfo("Setting up Block Rendering...");
+		pastelBus.addListener(PastelBlocks::registerClient);
 
-        logInfo("Setting up client side Mod Compat...");
-        PastelIntegrationPacks.registerClient();
+		logInfo("Setting up client side Mod Compat...");
+		PastelIntegrationPacks.registerClient();
 
-        logInfo("Setting up Fluid Rendering...");
-        pastelBus.addListener(PastelFluids::registerClient);
-        pastelBus.addListener(PastelFluids::clientSetup);
+		logInfo("Setting up Fluid Rendering...");
+		pastelBus.addListener(PastelFluids::registerClient);
+		pastelBus.addListener(PastelFluids::clientSetup);
 
-        logInfo("Setting up GUIs...");
-        pastelBus.register(PastelScreenHandlerTypes.class);
+		logInfo("Setting up GUIs...");
+		pastelBus.register(PastelScreenHandlerTypes.class);
 
-        logInfo("Setting up ItemPredicates...");
-        pastelBus.addListener(PastelModelPredicateProviders::registerClient);
+		logInfo("Setting up ItemPredicates...");
+		pastelBus.addListener(PastelModelPredicateProviders::registerClient);
 
-        logInfo("Setting up Block Entity Renderers...");
-        pastelBus.addListener(PastelBlockEntities::registerClient);
-        logInfo("Setting up Entity Renderers...");
-        pastelBus.addListener(PastelEntityRenderers::registerClient);
-        pastelBus.addListener(BedrockCapeRenderer::registerLayers);
+		logInfo("Setting up Block Entity Renderers...");
+		pastelBus.addListener(PastelBlockEntities::registerClient);
+		logInfo("Setting up Entity Renderers...");
+		pastelBus.addListener(PastelEntityRenderers::registerClient);
+		pastelBus.addListener(BedrockCapeRenderer::registerLayers);
 
-        logInfo("Registering Particle Factories...");
-        pastelBus.addListener(PastelParticleFactories::register);
+		logInfo("Registering Particle Factories...");
+		pastelBus.addListener(PastelParticleFactories::register);
 
-        logInfo("Registering Overlays...");
-        pastelBus.addListener(HudRenderers::registerLayers);
-        NeoForge.EVENT_BUS.addListener(HudRenderers::registerInjects);
+		logInfo("Registering Overlays...");
+		pastelBus.addListener(HudRenderers::registerLayers);
+		NeoForge.EVENT_BUS.addListener(HudRenderers::registerInjects);
 
-        logInfo("Registering Item Tooltips...");
-        pastelBus.addListener(PastelTooltipComponents::registerTooltipComponents);
+		logInfo("Registering Item Tooltips...");
+		pastelBus.addListener(PastelTooltipComponents::registerTooltipComponents);
 
-        logInfo("Registering Dimension Effects...");
-        pastelBus.addListener(PastelDimensionsClient::registerClient);
-        EnvironmentalOverrides.init();
+		logInfo("Registering Dimension Effects...");
+		pastelBus.addListener(PastelDimensionsClient::registerClient);
+		EnvironmentalOverrides.init();
 
-        logInfo("Registering Mob head models...");
-        pastelBus.addListener(PastelSkullModels::registerModels);
-        pastelBus.addListener(PastelSkullModels::registerTextures);
+		logInfo("Registering Mob head models...");
+		pastelBus.addListener(PastelSkullModels::registerModels);
+		pastelBus.addListener(PastelSkullModels::registerTextures);
 
-        logInfo("Registering Client Event Listeners...");
-        PastelClientEvents.register(pastelBus);
+		logInfo("Registering Client Event Listeners...");
+		PastelClientEvents.register(pastelBus);
 
-        container.registerExtensionPoint(
-            IConfigScreenFactory.class, (v, parent) -> AutoConfig.getConfigScreen(PastelConfig.class, parent)
-                                                                 .get()
-        );
+		container.registerExtensionPoint(IConfigScreenFactory.class, (v, parent) -> AutoConfig.getConfigScreen(PastelConfig.class, parent).get());
 
-        if (CONFIG.AddItemTooltips) {
-            NeoForge.EVENT_BUS.addListener(PastelTooltips::register);
-        }
+		if (CONFIG.AddItemTooltips) {
+			NeoForge.EVENT_BUS.addListener(PastelTooltips::register);
+		}
 
-        if (ModList.get()
-                   .isLoaded("ears")) {
-            logInfo("Registering Ears Compat...");
-            EarsCompat.register();
-        }
+		if (ModList.get().isLoaded("ears")) {
+			logInfo("Registering Ears Compat...");
+			EarsCompat.register();
+		}
 
-        logInfo("Registering Armor Renderers...");
-        pastelBus.addListener(PastelArmorRenderers::register);
-        WorthinessChecker.init();
+		logInfo("Registering Armor Renderers...");
+		pastelBus.addListener(PastelArmorRenderers::register);
+		WorthinessChecker.init();
 
-        RevealingCallback.register(this);
-        ClientAdvancementPacketCallback.registerCallback(this);
+		ADVANCEMENT_LISTENERS.add(this);
+		HIDDEN_LISTENERS.add(this);
 
-        logInfo("Client startup completed!");
-    }
-
-    @Override
-    public void trigger(Set<ResourceLocation> advancements, Set<Block> blocks, Set<Item> items, boolean isJoinPacket) {
-        if (!isJoinPacket) {
-            for (Block block : blocks) {
-                if (BuiltInRegistries.BLOCK.getKey(block)
-                                           .getNamespace()
-                                           .equals(PastelCommon.MOD_ID)) {
-                    RevelationToast.showRevelationToast(
-                        Minecraft.getInstance(), new ItemStack(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get()
-                                                                                                   .asItem()),
-                        PastelSoundEvents.NEW_REVELATION
-                    );
-                    break;
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onClientAdvancementPacket(
-        Set<ResourceLocation> gottenAdvancements, Set<ResourceLocation> removedAdvancements, boolean isJoinPacket) {
-        if (!isJoinPacket) {
-            UnlockToastManager.processAdvancements(gottenAdvancements);
-        }
-    }
-
+		logInfo("Client startup completed!");
+	}
+	
+	@Override
+	public void onUnhide(List<Hidden> unlocked) {
+		for (Hidden i : unlocked) {
+			if (i.type instanceof BlockHiddenType.BlockHiddenTypeInstance type) {
+				if (BuiltInRegistries.BLOCK.getKey(type.original).getNamespace().equals(PastelCommon.MOD_ID)) {
+					RevelationToast.showRevelationToast(Minecraft.getInstance(), new ItemStack(PastelBlocks.PEDESTAL_BASIC_AMETHYST.get().asItem()), PastelSoundEvents.NEW_REVELATION);
+					break;
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void onUnlock(List<ResourceLocation> unlocked) {
+		UnlockToastManager.processAdvancements(new HashSet<>(unlocked));
+	}
 }

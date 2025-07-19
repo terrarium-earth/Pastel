@@ -1,15 +1,15 @@
 {
   "criteria": {
     "unlocked_glowblocks": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/glowblocks/any_glowblock"
+        "advancement": "pastel:unlocks/glowblocks/any_glowblock"
       }
     },
     "has_brown_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pigment/brown"
+        "advancement": "pastel:hidden/collect_pigment/brown"
       }
     }
   }

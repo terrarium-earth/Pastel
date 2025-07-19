@@ -15,59 +15,38 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Collection;
 import java.util.Map;
 
-public class ColoredWoodBlock extends RotatedPillarBlock implements RevelationAware, ColoredTree {
+public class ColoredWoodBlock extends RotatedPillarBlock implements ColoredTree {
 
-    public static final MapCodec<ColoredWoodBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                                                                                                               propertiesCodec(),
-                                                                                                               InkColor.CODEC.fieldOf("color")
-                                                                                                                             .forGetter(ColoredWoodBlock::getColor)
-                                                                                                           )
-                                                                                                           .apply(
-                                                                                                               instance,
-                                                                                                               ColoredWoodBlock::new
-                                                                                                           ));
+	public static final MapCodec<ColoredWoodBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			propertiesCodec(),
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredWoodBlock::getColor)
+	).apply(instance, ColoredWoodBlock::new));
+	
+	private static final Map<InkColor, ColoredWoodBlock> WOOD = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredWoodBlock(Properties settings, InkColor color) {
+		super(settings);
+		this.color = color;
+		WOOD.put(color, this);
+	}
 
-    private static final Map<InkColor, ColoredWoodBlock> WOOD = new Object2ObjectArrayMap<>();
-    protected final InkColor color;
-
-    public ColoredWoodBlock(Properties settings, InkColor color) {
-        super(settings);
-        this.color = color;
-        WOOD.put(color, this);
-        RevelationAware.register(this);
-    }
-
-    @Override
-    public MapCodec<? extends ColoredWoodBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    public ResourceLocation getCloakAdvancementIdentifier() {
-        return ColoredTree.getTreeCloakAdvancementIdentifier(TreePart.WOOD, this.color);
-    }
-
-    @Override
-    public Map<BlockState, BlockState> getBlockStateCloaks() {
-        return Map.of(this.defaultBlockState(), Blocks.OAK_WOOD.defaultBlockState());
-    }
-
-    @Override
-    public Tuple<Item, Item> getItemCloak() {
-        return new Tuple<>(this.asItem(), Blocks.OAK_WOOD.asItem());
-    }
-
-    @Override
-    public InkColor getColor() {
-        return this.color;
-    }
-
-    public static ColoredWoodBlock byColor(InkColor color) {
-        return WOOD.get(color);
-    }
-
-    public static Collection<ColoredWoodBlock> all() {
-        return WOOD.values();
-    }
-
+	@Override
+	public MapCodec<? extends ColoredWoodBlock> codec() {
+		return CODEC;
+	}
+	
+	@Override
+	public InkColor getColor() {
+		return this.color;
+	}
+	
+	public static ColoredWoodBlock byColor(InkColor color) {
+		return WOOD.get(color);
+	}
+	
+	public static Collection<ColoredWoodBlock> all() {
+		return WOOD.values();
+	}
+	
 }

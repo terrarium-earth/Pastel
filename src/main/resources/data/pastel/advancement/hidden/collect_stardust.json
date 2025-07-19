@@ -1,9 +1,9 @@
 {
   "criteria": {
     "unlocked_shooting_stars": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:milestones/unlock_shooting_stars"
+        "advancement": "pastel:milestones/unlock_shooting_stars"
       }
     },
     "has_stardust": {

@@ -11,9 +11,9 @@
       }
     },
     "collected_storm_stone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_storm_stone"
+        "advancement": "pastel:midgame/collect_storm_stone"
       }
     }
   }

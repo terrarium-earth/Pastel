@@ -1,9 +1,9 @@
 {
   "criteria": {
     "found_crystal_gardens": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/visit_dd_biomes/crystal_gardens"
+        "advancement": "pastel:hidden/visit_dd_biomes/crystal_gardens"
       }
     },
     "has_apricotti": {

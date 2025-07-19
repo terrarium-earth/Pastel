@@ -1,9 +1,9 @@
 {
   "criteria": {
     "collected_onyx": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:create_onyx_shard"
+        "advancement": "pastel:create_onyx_shard"
       }
     },
     "has_pigment": {

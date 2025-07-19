@@ -24,9 +24,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:pastel"
+        "advancement": "pastel:pastel"
       }
     }
   }

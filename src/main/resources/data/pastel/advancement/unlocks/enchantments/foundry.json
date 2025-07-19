@@ -1,15 +1,15 @@
 {
   "criteria": {
     "built_enchanting_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_enchanting_structure"
+        "advancement": "pastel:midgame/build_enchanting_structure"
       }
     },
     "collected_stratine": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_stratine_gem"
+        "advancement": "pastel:hidden/collect_stratine_gem"
       }
     }
   }

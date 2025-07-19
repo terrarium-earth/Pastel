@@ -29,9 +29,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
+        "advancement": "pastel:lategame/build_complex_pedestal_structure"
       }
     }
   }

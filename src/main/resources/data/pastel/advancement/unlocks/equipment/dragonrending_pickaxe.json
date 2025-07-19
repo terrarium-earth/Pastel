@@ -1,21 +1,21 @@
 {
   "criteria": {
     "built_complex_pedestal_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
+        "advancement": "pastel:lategame/build_complex_pedestal_structure"
       }
     },
     "collected_dragonbone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:break_cracked_dragonbone"
+        "advancement": "pastel:break_cracked_dragonbone"
       }
     },
     "plucked_resplendent_feather": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:pluck_resplendent_feather"
+        "advancement": "pastel:pluck_resplendent_feather"
       }
     }
   }

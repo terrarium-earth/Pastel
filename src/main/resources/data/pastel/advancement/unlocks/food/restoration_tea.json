@@ -1,15 +1,15 @@
 {
   "criteria": {
     "unlocked_potion_workshop": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/potion_workshop"
+        "advancement": "pastel:unlocks/blocks/potion_workshop"
       }
     },
     "collected_jade_vine_petals": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_jade_vine_petals"
+        "advancement": "pastel:midgame/collect_jade_vine_petals"
       }
     }
   }

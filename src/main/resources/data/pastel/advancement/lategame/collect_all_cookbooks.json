@@ -14,39 +14,39 @@
   },
   "criteria": {
     "collected_brewers_handbook": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_cookbooks/brewers_handbook"
+        "advancement": "pastel:hidden/collect_cookbooks/brewers_handbook"
       }
     },
     "collected_imbrifer_cookbook": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_cookbooks/imbrifer_cookbook"
+        "advancement": "pastel:hidden/collect_cookbooks/imbrifer_cookbook"
       }
     },
     "collected_imperial_cookbook": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_cookbooks/imperial_cookbook"
+        "advancement": "pastel:hidden/collect_cookbooks/imperial_cookbook"
       }
     },
     "collected_melochites_cookbook_vol_1": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1"
+        "advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_1"
       }
     },
     "collected_melochites_cookbook_vol_2": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2"
+        "advancement": "pastel:hidden/collect_cookbooks/melochites_cookbook_vol_2"
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_one_cookbook"
+        "advancement": "pastel:lategame/collect_one_cookbook"
       }
     }
   },

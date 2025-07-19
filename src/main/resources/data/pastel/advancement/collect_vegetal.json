@@ -23,9 +23,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:craft_bottle_of_fading"
+        "advancement": "pastel:craft_bottle_of_fading"
       }
     }
   }

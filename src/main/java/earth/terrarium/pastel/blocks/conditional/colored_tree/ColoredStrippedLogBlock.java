@@ -17,66 +17,38 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class ColoredStrippedLogBlock extends RotatedPillarBlock implements RevelationAware, ColoredTree {
+public class ColoredStrippedLogBlock extends RotatedPillarBlock implements ColoredTree {
 
-    public static final MapCodec<ColoredStrippedLogBlock> CODEC = RecordCodecBuilder.mapCodec(
-        instance -> instance.group(
-                                propertiesCodec(),
-                                InkColor.CODEC.fieldOf("color")
-                                              .forGetter(ColoredStrippedLogBlock::getColor)
-                            )
-                            .apply(instance, ColoredStrippedLogBlock::new));
+	public static final MapCodec<ColoredStrippedLogBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+			propertiesCodec(),
+			InkColor.CODEC.fieldOf("color").forGetter(ColoredStrippedLogBlock::getColor)
+	).apply(instance, ColoredStrippedLogBlock::new));
+	
+	private static final Map<InkColor, ColoredStrippedLogBlock> LOGS = new Object2ObjectArrayMap<>();
+	protected final InkColor color;
+	
+	public ColoredStrippedLogBlock(Properties settings, InkColor color) {
+		super(settings);
+		this.color = color;
+		LOGS.put(color, this);
+	}
 
-    private static final Map<InkColor, ColoredStrippedLogBlock> LOGS = new Object2ObjectArrayMap<>();
-    protected final InkColor color;
-
-    public ColoredStrippedLogBlock(Properties settings, InkColor color) {
-        super(settings);
-        this.color = color;
-        LOGS.put(color, this);
-        RevelationAware.register(this);
-    }
-
-    @Override
-    public MapCodec<? extends ColoredStrippedLogBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    public ResourceLocation getCloakAdvancementIdentifier() {
-        return ColoredTree.getTreeCloakAdvancementIdentifier(TreePart.STRIPPED_LOG, this.color);
-    }
-
-    @Override
-    public Map<BlockState, BlockState> getBlockStateCloaks() {
-        Map<BlockState, BlockState> map = new Hashtable<>();
-        for (Direction.Axis axis : RotatedPillarBlock.AXIS.getPossibleValues()) {
-            map.put(
-                this.defaultBlockState()
-                    .setValue(RotatedPillarBlock.AXIS, axis), Blocks.STRIPPED_OAK_LOG.defaultBlockState()
-                                                                                     .setValue(
-                                                                                         RotatedPillarBlock.AXIS, axis)
-            );
-        }
-        return map;
-    }
-
-    @Override
-    public Tuple<Item, Item> getItemCloak() {
-        return new Tuple<>(this.asItem(), Blocks.STRIPPED_OAK_LOG.asItem());
-    }
-
-    @Override
-    public InkColor getColor() {
-        return this.color;
-    }
-
-    public static ColoredStrippedLogBlock byColor(InkColor color) {
-        return LOGS.get(color);
-    }
-
-    public static Collection<ColoredStrippedLogBlock> all() {
-        return LOGS.values();
-    }
-
+	@Override
+	public MapCodec<? extends ColoredStrippedLogBlock> codec() {
+		return CODEC;
+	}
+	
+	@Override
+	public InkColor getColor() {
+		return this.color;
+	}
+	
+	public static ColoredStrippedLogBlock byColor(InkColor color) {
+		return LOGS.get(color);
+	}
+	
+	public static Collection<ColoredStrippedLogBlock> all() {
+		return LOGS.values();
+	}
+	
 }

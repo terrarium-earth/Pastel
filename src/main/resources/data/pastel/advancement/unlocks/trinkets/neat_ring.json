@@ -1,33 +1,33 @@
 {
   "criteria": {
     "unlocked_liquid_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/blocks/liquid_crystal"
+        "advancement": "pastel:unlocks/blocks/liquid_crystal"
       }
     },
     "built_complex_pedestal_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
+        "advancement": "pastel:lategame/build_complex_pedestal_structure"
       }
     },
     "collected_resonant_lily": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_resonant_lily"
+        "advancement": "pastel:midgame/collect_resonant_lily"
       }
     },
     "collected_bismuth": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_bismuth"
+        "advancement": "pastel:lategame/collect_bismuth"
       }
     },
     "collected_pure_resource": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_pure_resource"
+        "advancement": "pastel:lategame/collect_pure_resource"
       }
     }
   }

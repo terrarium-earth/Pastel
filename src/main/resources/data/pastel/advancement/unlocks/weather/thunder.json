@@ -1,15 +1,15 @@
 {
   "criteria": {
     "built_fusion_shrine": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:build_fusion_shrine"
+        "advancement": "pastel:build_fusion_shrine"
       }
     },
     "collected_storm_stone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_storm_stone"
+        "advancement": "pastel:midgame/collect_storm_stone"
       }
     }
   }

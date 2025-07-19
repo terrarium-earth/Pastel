@@ -1,15 +1,15 @@
 {
   "criteria": {
     "unlocked_resonance_crafting": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/enchantments/resonance_crafting"
+        "advancement": "pastel:unlocks/enchantments/resonance_crafting"
       }
     },
     "unlocked_resonant_pickaxe": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:unlocks/equipment/resonant_pickaxe"
+        "advancement": "pastel:unlocks/equipment/resonant_pickaxe"
       }
     }
   },

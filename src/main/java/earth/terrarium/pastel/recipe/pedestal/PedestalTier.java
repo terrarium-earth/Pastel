@@ -1,8 +1,8 @@
 package earth.terrarium.pastel.recipe.pedestal;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.klikli_dev.modonomicon.api.multiblock.Multiblock;
 import com.mojang.serialization.Codec;
-import de.dafuqs.revelationary.api.advancements.AdvancementHelper;
 import earth.terrarium.pastel.api.item.GemstoneColor;
 import earth.terrarium.pastel.blocks.pedestal.PedestalBlockEntity;
 import earth.terrarium.pastel.helpers.data.PacketCodecHelper;
@@ -62,20 +62,20 @@ public enum PedestalTier implements StringRepresentable {
 	
 	@Contract(pure = true)
 	public static Optional<PedestalTier> getHighestUnlockedRecipeTier(Player playerEntity) {
-		if (AdvancementHelper.hasAdvancement(playerEntity, COMPLEX.unlockAdvancementId)) {
+		if (DatabankUtils.hasAdvancement(playerEntity, COMPLEX.unlockAdvancementId)) {
 			return Optional.of(PedestalTier.COMPLEX);
-		} else if (AdvancementHelper.hasAdvancement(playerEntity, ADVANCED.unlockAdvancementId)) {
+		} else if (DatabankUtils.hasAdvancement(playerEntity, ADVANCED.unlockAdvancementId)) {
 			return Optional.of(PedestalTier.ADVANCED);
-		} else if (AdvancementHelper.hasAdvancement(playerEntity, SIMPLE.unlockAdvancementId)) {
+		} else if (DatabankUtils.hasAdvancement(playerEntity, SIMPLE.unlockAdvancementId)) {
 			return Optional.of(PedestalTier.SIMPLE);
-		} else if (AdvancementHelper.hasAdvancement(playerEntity, BASIC.unlockAdvancementId)) {
+		} else if (DatabankUtils.hasAdvancement(playerEntity, BASIC.unlockAdvancementId)) {
 			return Optional.of(PedestalTier.BASIC);
 		}
 		return Optional.empty();
 	}
 	
 	public boolean hasUnlocked(Player playerEntity) {
-		return AdvancementHelper.hasAdvancement(playerEntity, unlockAdvancementId);
+		return DatabankUtils.hasAdvancement(playerEntity, unlockAdvancementId);
 	}
 	
 	public static Optional<PedestalTier> hasJustUnlockedANewRecipeTier(@NotNull ResourceLocation advancementIdentifier) {
@@ -96,7 +96,7 @@ public enum PedestalTier implements StringRepresentable {
 	public @Nullable ResourceLocation getStructureID(Player player) {
 		switch (this) {
 			case COMPLEX -> {
-				if (AdvancementHelper.hasAdvancement(player, PastelAdvancements.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE)) {
+				if (DatabankUtils.hasAdvancement(player, PastelAdvancements.BUILD_COMPLEX_PEDESTAL_STRUCTURE_WITHOUT_MOONSTONE)) {
 					return PastelMultiblocks.PEDESTAL_COMPLEX;
 				} else {
 					return PastelMultiblocks.PEDESTAL_COMPLEX_WITHOUT_MOONSTONE;

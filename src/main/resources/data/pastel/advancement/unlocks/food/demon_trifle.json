@@ -1,21 +1,21 @@
 {
   "criteria": {
     "collected_amaranth_bushel": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_amaranth_bushel"
+        "advancement": "pastel:collect_amaranth_bushel"
       }
     },
     "collected_jade_jelly": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_jade_jelly"
+        "advancement": "pastel:midgame/collect_jade_jelly"
       }
     },
     "collected_blood_orchid_petal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/collect_blood_orchid_petal"
+        "advancement": "pastel:midgame/collect_blood_orchid_petal"
       }
     }
   }

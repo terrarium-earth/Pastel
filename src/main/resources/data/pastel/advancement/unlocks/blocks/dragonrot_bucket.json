@@ -1,21 +1,21 @@
 {
   "criteria": {
     "collected_gray_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pigment/gray"
+        "advancement": "pastel:hidden/collect_pigment/gray"
       }
     },
     "collected_light_gray_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pigment/light_gray"
+        "advancement": "pastel:hidden/collect_pigment/light_gray"
       }
     },
     "collected_dragonbone": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:break_cracked_dragonbone"
+        "advancement": "pastel:break_cracked_dragonbone"
       }
     }
   }

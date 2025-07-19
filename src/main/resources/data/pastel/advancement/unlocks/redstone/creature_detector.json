@@ -1,21 +1,21 @@
 {
   "criteria": {
     "built_complex_pedestal_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
+        "advancement": "pastel:lategame/build_complex_pedestal_structure"
       }
     },
     "has_quartz": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/quartz"
+        "advancement": "pastel:hidden/collect_vanilla/quartz"
       }
     },
     "collected_corresponding_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_moonstone"
+        "advancement": "pastel:lategame/collect_moonstone"
       }
     }
   }

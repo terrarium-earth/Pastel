@@ -1,15 +1,15 @@
 {
   "criteria": {
     "built_advanced_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:midgame/build_advanced_pedestal_structure"
+        "advancement": "pastel:midgame/build_advanced_pedestal_structure"
       }
     },
     "has_quitoxic_reeds": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_quitoxic_reeds"
+        "advancement": "pastel:collect_quitoxic_reeds"
       }
     }
   }

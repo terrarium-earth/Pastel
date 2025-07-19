@@ -14,12 +14,12 @@
   "parent": "pastel:lategame/find_forgotten_city",
   "criteria": {
     "has_collected_enough_hints": {
-      "trigger": "revelationary:advancement_count",
+      "trigger": "databank:has_advancements",
       "conditions": {
-        "count": {
+        "range": {
           "min": 5
         },
-        "advancement_identifiers": [
+        "advancements": [
           "pastel:break_cracked_dragonbone",
           "pastel:lategame/visit_all_deeper_down_biomes",
           "pastel:lategame/revive_hornslake_plant",
@@ -32,9 +32,9 @@
       }
     },
     "gotten_previous": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/find_forgotten_city"
+        "advancement": "pastel:lategame/find_forgotten_city"
       }
     }
   }

@@ -13,9 +13,9 @@
   },
   "criteria": {
     "get_pedestal_all_basic": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:craft_onyx_pedestal"
+        "advancement": "pastel:craft_onyx_pedestal"
       }
     }
   }

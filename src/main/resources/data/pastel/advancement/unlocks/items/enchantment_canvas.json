@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_purple_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_pigment/purple"
+        "advancement": "pastel:hidden/collect_pigment/purple"
       }
     },
     "collected_phantom_membrane": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:hidden/collect_vanilla/phantom_membrane"
+        "advancement": "pastel:hidden/collect_vanilla/phantom_membrane"
       }
     }
   }

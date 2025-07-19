@@ -1,6 +1,5 @@
 package earth.terrarium.pastel;
 
-import de.dafuqs.revelationary.RevelationaryNetworking;
 import earth.terrarium.pastel.api.color.ColorRegistry;
 import earth.terrarium.pastel.api.energy.color.InkColorMixes;
 import earth.terrarium.pastel.api.energy.color.InkColors;
@@ -226,7 +225,6 @@ public class PastelCommon {
             RegisterPayloadHandlersEvent.class, (event) -> {
                 PayloadRegistrar registrar = event.registrar("1");
 
-                RevelationaryNetworking.register(registrar);
                 PastelS2CPackets.register(registrar);
             }
         );

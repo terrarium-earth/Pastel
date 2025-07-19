@@ -1,14 +1,11 @@
 package earth.terrarium.pastel.registries;
 
 import com.mojang.datafixers.util.Pair;
-import de.dafuqs.revelationary.api.revelations.RevelationAware;
 import earth.terrarium.pastel.*;
 import earth.terrarium.pastel.api.energy.color.InkColor;
 import earth.terrarium.pastel.api.energy.color.InkColors;
 import earth.terrarium.pastel.api.item.CreativeOnlyItem;
-import earth.terrarium.pastel.blocks.conditional.MermaidsGemItem;
-import earth.terrarium.pastel.blocks.geology.*;
-import earth.terrarium.pastel.blocks.gravity.CloakedFloatItem;
+import earth.terrarium.pastel.blocks.gravity.FloatItem;
 import earth.terrarium.pastel.blocks.jade_vines.GerminatedJadeVineBulbItem;
 import earth.terrarium.pastel.components.InfusedBeverageComponent;
 import earth.terrarium.pastel.components.PairedFoodComponent;
@@ -29,8 +26,7 @@ import earth.terrarium.pastel.items.StructurePlacerItem;
 import earth.terrarium.pastel.items.armor.BedrockArmorItem;
 import earth.terrarium.pastel.items.armor.GemstoneArmorItem;
 import earth.terrarium.pastel.items.bundles.ExtendedBundleItem;
-import earth.terrarium.pastel.items.conditional.CloakedItem;
-import earth.terrarium.pastel.items.conditional.CloakedItemWithLoomPattern;
+import earth.terrarium.pastel.items.ItemWithLoomPattern;
 import earth.terrarium.pastel.items.conditional.GemstonePowderItem;
 import earth.terrarium.pastel.items.conditional.StormStoneItem;
 import earth.terrarium.pastel.items.energy.ArtistsPaletteItem;
@@ -204,7 +200,6 @@ import static net.minecraft.world.item.Items.GLASS_BOTTLE;
 import static net.minecraft.world.item.Items.GOLDEN_CARROT;
 import static net.minecraft.world.item.Items.GRAY_DYE;
 import static net.minecraft.world.item.Items.GREEN_DYE;
-import static net.minecraft.world.item.Items.GUNPOWDER;
 import static net.minecraft.world.item.Items.LIGHT_BLUE_DYE;
 import static net.minecraft.world.item.Items.LIGHT_GRAY_DYE;
 import static net.minecraft.world.item.Items.LIME_DYE;
@@ -264,41 +259,17 @@ public class PastelItems {
     )));
 
     // Gem shards and powders
-    public static final DeferredItem<Item> TOPAZ_SHARD = register(
-        simple(item("topaz_shard", () -> new Item(IS.of()), InkColors.CYAN)));
-    public static final DeferredItem<Item> CITRINE_SHARD = register(
-        simple(item("citrine_shard", () -> new Item(IS.of()), InkColors.YELLOW)));
-    public static final DeferredItem<Item> ONYX_SHARD = register(simple(item(
-        "onyx_shard", () -> new CloakedItem(
-            IS.of(), PastelAdvancements.COLLECT_ALL_BASIC_PIGMENTS_BESIDES_BROWN, BLACK_DYE), InkColors.BLACK
-    )));
-    public static final DeferredItem<Item> MOONSTONE_SHARD = register(simple(item(
-        "moonstone_shard", () -> new CloakedItem(IS.of(), PastelAdvancements.BREAK_DECAYED_BEDROCK, WHITE_DYE),
-        InkColors.WHITE
-    )));
-    public static final DeferredItem<Item> SPECTRAL_SHARD = register(
-        simple(item("spectral_shard", () -> new Item(IS.of(Rarity.RARE)), InkColors.WHITE)));
+    public static final DeferredItem<Item> TOPAZ_SHARD = register(simple(item("topaz_shard", () -> new Item(IS.of()), InkColors.CYAN)));
+    public static final DeferredItem<Item> CITRINE_SHARD = register(simple(item("citrine_shard", () -> new Item(IS.of()), InkColors.YELLOW)));
+    public static final DeferredItem<Item> ONYX_SHARD = register(simple(item("onyx_shard", () -> new Item(IS.of()), InkColors.BLACK)));
+    public static final DeferredItem<Item> MOONSTONE_SHARD = register(simple(item("moonstone_shard", () -> new Item(IS.of()), InkColors.WHITE)));
+    public static final DeferredItem<Item> SPECTRAL_SHARD = register(simple(item("spectral_shard", () -> new Item(IS.of(Rarity.RARE)), InkColors.WHITE)));
 
-    public static final DeferredItem<Item> TOPAZ_POWDER = register(simple(item(
-        "topaz_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.COLLECT_TOPAZ, PastelGemstoneColor.CYAN, CYAN_DYE), InkColors.CYAN
-    )));
-    public static final DeferredItem<Item> AMETHYST_POWDER = register(simple(item(
-        "amethyst_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.COLLECT_AMETHYST, PastelGemstoneColor.MAGENTA, MAGENTA_DYE), InkColors.MAGENTA
-    )));
-    public static final DeferredItem<Item> CITRINE_POWDER = register(simple(item(
-        "citrine_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.COLLECT_CITRINE, PastelGemstoneColor.YELLOW, YELLOW_DYE), InkColors.YELLOW
-    )));
-    public static final DeferredItem<Item> ONYX_POWDER = register(simple(item(
-        "onyx_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.CREATE_ONYX, PastelGemstoneColor.BLACK, BLACK_DYE), InkColors.BLACK
-    )));
-    public static final DeferredItem<Item> MOONSTONE_POWDER = register(simple(item(
-        "moonstone_powder", () -> new GemstonePowderItem(
-            IS.of(), PastelAdvancements.COLLECT_MOONSTONE, PastelGemstoneColor.WHITE, WHITE_DYE), InkColors.WHITE
-    )));
+    public static final DeferredItem<Item> TOPAZ_POWDER = register(simple(item("topaz_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.CYAN), InkColors.CYAN)));
+    public static final DeferredItem<Item> AMETHYST_POWDER = register(simple(item("amethyst_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.MAGENTA), InkColors.MAGENTA)));
+    public static final DeferredItem<Item> CITRINE_POWDER = register(simple(item("citrine_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.YELLOW), InkColors.YELLOW)));
+    public static final DeferredItem<Item> ONYX_POWDER = register(simple(item("onyx_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.BLACK), InkColors.BLACK)));
+    public static final DeferredItem<Item> MOONSTONE_POWDER = register(simple(item("moonstone_powder", () -> new GemstonePowderItem(IS.of(), PastelGemstoneColor.WHITE), InkColors.WHITE)));
 
     // Pigment
     public static final DeferredItem<Item> WHITE_PIGMENT = register(
@@ -740,49 +711,49 @@ public class PastelItems {
     // Decay drops
     public static final DeferredItem<Item> VEGETAL = register(simple(burnable(
         item(
-            "vegetal", () -> new CloakedItemWithLoomPattern(
-                IS.of(), PastelAdvancements.CRAFT_BOTTLE_OF_FADING, GUNPOWDER, PastelBannerPatterns.VEGETAL),
+            "vegetal", () -> new ItemWithLoomPattern(
+                IS.of(), PastelBannerPatterns.VEGETAL),
             InkColors.LIME
         ), 800
     )));
     public static final DeferredItem<Item> NEOLITH = register(simple(item(
-        "neolith", () -> new CloakedItemWithLoomPattern(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.CRAFT_BOTTLE_OF_FAILING, GUNPOWDER,
+        "neolith", () -> new ItemWithLoomPattern(
+            IS.of(Rarity.UNCOMMON),
             PastelBannerPatterns.NEOLITH
         ), InkColors.PINK
     )));
     public static final DeferredItem<Item> BEDROCK_DUST = register(simple(item(
-        "bedrock_dust", () -> new CloakedItemWithLoomPattern(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.BREAK_DECAYED_BEDROCK, GUNPOWDER,
+        "bedrock_dust", () -> new ItemWithLoomPattern(
+            IS.of(Rarity.UNCOMMON),
             PastelBannerPatterns.BEDROCK_DUST
         ), InkColors.BLACK
     )));
 
     public static final DeferredItem<MidnightAberrationItem> MIDNIGHT_ABERRATION = register(simple(item(
         "midnight_aberration", () -> new MidnightAberrationItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.CREATE_MIDNIGHT_ABERRATION, PastelItems.SPECTRAL_SHARD.get()),
+            IS.of(Rarity.UNCOMMON)),
         InkColors.GRAY
     )));
     public static final DeferredItem<Item> MIDNIGHT_CHIP = register(simple(item(
-        "midnight_chip", () -> new CloakedItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.CREATE_MIDNIGHT_ABERRATION, GRAY_DYE), InkColors.GRAY
+        "midnight_chip", () -> new Item(
+            IS.of(Rarity.UNCOMMON)), InkColors.GRAY
     )));
 
     public static final DeferredItem<Item> BISMUTH_FLAKE = register(simple(item(
-        "bismuth_flake", () -> new CloakedItem(IS.of(Rarity.UNCOMMON), PastelAdvancements.ENTER_DIMENSION, CYAN_DYE),
+        "bismuth_flake", () -> new Item(IS.of(Rarity.UNCOMMON)),
         InkColors.CYAN
     )));
     public static final DeferredItem<Item> BISMUTH_CRYSTAL = register(simple(item(
-        "bismuth_crystal", () -> new CloakedItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.ENTER_DIMENSION, CYAN_DYE), InkColors.CYAN
+        "bismuth_crystal", () -> new Item(
+            IS.of(Rarity.UNCOMMON)), InkColors.CYAN
     )));
     public static final DeferredItem<Item> RAW_MALACHITE = register(simple(item(
-        "raw_malachite", () -> new CloakedItem(IS.of(Rarity.UNCOMMON), PastelAdvancements.REVEAL_MALACHITE, GREEN_DYE),
+        "raw_malachite", () -> new Item(IS.of(Rarity.UNCOMMON)),
         InkColors.GREEN
     )));
     public static final DeferredItem<Item> PURE_MALACHITE = register(simple(item(
-        "pure_malachite", () -> new CloakedItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.REVEAL_MALACHITE, GREEN_DYE), InkColors.GREEN
+        "pure_malachite", () -> new Item(
+            IS.of(Rarity.UNCOMMON)), InkColors.GREEN
     )));
 
     // Fluid Buckets
@@ -844,77 +815,72 @@ public class PastelItems {
 
     // Resources
     public static final DeferredItem<Item> SHIMMERSTONE_GEM = register(simple(item(
-        "shimmerstone_gem", () -> new CloakedItemWithLoomPattern(
-            IS.of(), ((RevelationAware) PastelBlocks.SHIMMERSTONE_ORE.get()).getCloakAdvancementIdentifier(),
-            YELLOW_DYE, PastelBannerPatterns.SHIMMERSTONE
+        "shimmerstone_gem", () -> new ItemWithLoomPattern(
+            IS.of(), PastelBannerPatterns.SHIMMERSTONE
         ), InkColors.YELLOW
     )));
     public static final DeferredItem<Item> RAW_AZURITE = register(simple(item(
-        "raw_azurite", () -> new CloakedItemWithLoomPattern(
-            IS.of(), ((AzuriteOreBlock) PastelBlocks.AZURITE_ORE.get()).getCloakAdvancementIdentifier(), BLUE_DYE,
+        "raw_azurite", () -> new ItemWithLoomPattern(
+            IS.of(),
             PastelBannerPatterns.RAW_AZURITE
         ), InkColors.BLUE
     )));
     public static final DeferredItem<Item> PURE_AZURITE = register(simple(item(
-        "pure_azurite", () -> new CloakedItem(
-            IS.of(), ((AzuriteOreBlock) PastelBlocks.AZURITE_ORE.get()).getCloakAdvancementIdentifier(), BLUE_DYE),
+        "pure_azurite", () -> new Item(
+            IS.of()),
         InkColors.BLUE
     )));
-    public static final DeferredItem<CloakedFloatItem> PALTAERIA_FRAGMENTS = register(simple(item(
-        "paltaeria_fragments", () -> new CloakedFloatItem(
-            IS.of(), 0.00125F, ((RevelationAware) PastelBlocks.PALTAERIA_ORE.get()).getCloakAdvancementIdentifier(),
-            CYAN_DYE
+    public static final DeferredItem<FloatItem> PALTAERIA_FRAGMENTS = register(simple(item(
+        "paltaeria_fragments", () -> new FloatItem(
+            IS.of(), 0.00125F
         ), InkColors.LIGHT_BLUE
     )));
-    public static final DeferredItem<CloakedFloatItem> PALTAERIA_GEM = register(simple(item(
-        "paltaeria_gem", () -> new CloakedFloatItem(
-            IS.of(16), 0.01F, ((RevelationAware) PastelBlocks.PALTAERIA_ORE.get()).getCloakAdvancementIdentifier(),
-            CYAN_DYE
+    public static final DeferredItem<FloatItem> PALTAERIA_GEM = register(simple(item(
+        "paltaeria_gem", () -> new FloatItem(
+            IS.of(16), 0.01F
         ), InkColors.LIGHT_BLUE
     )));
-    public static final DeferredItem<CloakedFloatItem> STRATINE_FRAGMENTS = register(simple(item(
-        "stratine_fragments", () -> new CloakedFloatItem(
+    public static final DeferredItem<FloatItem> STRATINE_FRAGMENTS = register(simple(item(
+        "stratine_fragments", () -> new FloatItem(
             IS.of()
-              .fireResistant(), -0.00125F,
-            ((RevelationAware) PastelBlocks.STRATINE_ORE.get()).getCloakAdvancementIdentifier(), RED_DYE
+              .fireResistant(), -0.00125F
         ), InkColors.RED
     )));
-    public static final DeferredItem<CloakedFloatItem> STRATINE_GEM = register(simple(item(
-        "stratine_gem", () -> new CloakedFloatItem(
+    public static final DeferredItem<FloatItem> STRATINE_GEM = register(simple(item(
+        "stratine_gem", () -> new FloatItem(
             IS.of(16)
-              .fireResistant(), -0.01F,
-            ((RevelationAware) PastelBlocks.STRATINE_ORE.get()).getCloakAdvancementIdentifier(), RED_DYE
+              .fireResistant(), -0.01F
         ), InkColors.RED
     )));
     public static final DeferredItem<Item> PYRITE_CHUNK = register(
         simple(item("pyrite_chunk", () -> new Item(IS.of()), InkColors.PURPLE)));
     public static final DeferredItem<Item> DRAGONBONE_CHUNK = register(simple(item(
-        "dragonbone_chunk", () -> new CloakedItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.BREAK_CRACKED_DRAGONBONE, GRAY_DYE), InkColors.GRAY
+        "dragonbone_chunk", () -> new Item(
+            IS.of(Rarity.UNCOMMON)), InkColors.GRAY
     )));
     public static final DeferredItem<Item> BONE_ASH = register(simple(item(
-        "bone_ash", () -> new CloakedItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.BREAK_CRACKED_DRAGONBONE, GRAY_DYE), InkColors.GRAY
+        "bone_ash", () -> new Item(
+            IS.of(Rarity.UNCOMMON)), InkColors.GRAY
     )));
     public static final DeferredItem<Item> RESPLENDENT_FEATHER = register(simple(item(
-        "resplendent_feather", () -> new CloakedItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.PLUCK_RESPLENDENT_FEATHER, RED_DYE), InkColors.YELLOW
+        "resplendent_feather", () -> new Item(
+            IS.of(Rarity.UNCOMMON)), InkColors.YELLOW
     )));
     public static final DeferredItem<Item> RAW_BLOODSTONE = register(simple(item(
-        "raw_bloodstone", () -> new CloakedItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.PLUCK_RESPLENDENT_FEATHER, RED_DYE), InkColors.RED
+        "raw_bloodstone", () -> new Item(
+            IS.of(Rarity.UNCOMMON)), InkColors.RED
     )));
     public static final DeferredItem<Item> PURE_BLOODSTONE = register(simple(item(
-        "pure_bloodstone", () -> new CloakedItem(
-            IS.of(Rarity.UNCOMMON), PastelAdvancements.PLUCK_RESPLENDENT_FEATHER, RED_DYE), InkColors.RED
+        "pure_bloodstone", () -> new Item(
+            IS.of(Rarity.UNCOMMON)), InkColors.RED
     )));
     public static final DeferredItem<Item> DOWNSTONE_FRAGMENTS = register(simple(item(
-        "downstone_fragments", () -> new CloakedItem(
-            IS.of(16, Rarity.UNCOMMON), PastelAdvancements.FIND_EXCAVATION_SITE, LIGHT_GRAY_DYE), InkColors.LIGHT_GRAY
+        "downstone_fragments", () -> new Item(
+            IS.of(16, Rarity.UNCOMMON)), InkColors.LIGHT_GRAY
     )));
     public static final DeferredItem<Item> RESONANCE_SHARD = register(simple(item(
-        "resonance_shard", () -> new CloakedItem(
-            IS.of(16, Rarity.UNCOMMON), PastelAdvancements.STRIKE_UP_HUMMINGSTONE_HYMN, LIGHT_BLUE_DYE), InkColors.WHITE
+        "resonance_shard", () -> new Item(
+            IS.of(16, Rarity.UNCOMMON)), InkColors.WHITE
     )));
     public static final DeferredItem<Item> AETHER_VESTIGES = register(simple(item(
         "aether_vestiges", () -> new AetherVestigesItem(
@@ -924,15 +890,15 @@ public class PastelItems {
     )));
 
     public static final DeferredItem<Item> QUITOXIC_POWDER = register(simple(item(
-        "quitoxic_powder", () -> new CloakedItem(IS.of(), PastelAdvancements.REVEAL_QUITOXIC_REEDS, PURPLE_DYE),
+        "quitoxic_powder", () -> new Item(IS.of()),
         InkColors.PURPLE
     )));
     public static final DeferredItem<Item> STORM_STONE = register(simple(item(
-        "storm_stone", () -> new StormStoneItem(IS.of(), PastelAdvancements.REVEAL_STORM_STONES, YELLOW_DYE),
+        "storm_stone", () -> new StormStoneItem(IS.of()),
         InkColors.LIGHT_BLUE
     )));
     public static final DeferredItem<Item> MERMAIDS_GEM = register(simple(item(
-        "mermaids_gem", () -> new MermaidsGemItem(
+        "mermaids_gem", () -> new ItemNameBlockItem(
             PastelBlocks.MERMAIDS_BRUSH.get(), IS.of()
                                                  .component(
                                                      PastelDataComponentTypes.MERMAIDS_GEM, SimpleFluidContent.copyOf(
@@ -940,13 +906,13 @@ public class PastelItems {
                                                  )
         ), InkColors.YELLOW
     )));
-    public static final DeferredItem<CloakedItem> STAR_FRAGMENT = register(simple(item(
-        "star_fragment", () -> new CloakedItem(IS.of(16), PastelAdvancements.UNLOCK_SHOOTING_STARS, PURPLE_DYE),
+    public static final DeferredItem<Item> STAR_FRAGMENT = register(simple(item(
+        "star_fragment", () -> new Item(IS.of(16)),
         InkColors.PURPLE
     )));
     public static final DeferredItem<Item> STARDUST = register(simple(item(
-        "stardust", () -> new CloakedItemWithLoomPattern(
-            IS.of(), PastelAdvancements.UNLOCK_SHOOTING_STARS, PURPLE_DYE, PastelBannerPatterns.SHIMMER),
+        "stardust", () -> new ItemWithLoomPattern(
+            IS.of(), PastelBannerPatterns.SHIMMER),
         InkColors.PURPLE
     )));
     public static final DeferredItem<Item> ASH_FLAKES = register(
@@ -958,18 +924,18 @@ public class PastelItems {
     )));
     public static final DeferredItem<Item> GERMINATED_JADE_VINE_BULB = register(simple(item(
         "germinated_jade_vine_bulb", () -> new GerminatedJadeVineBulbItem(
-            IS.of(16), PastelAdvancements.COLLECT_HIBERNATING_JADE_VINE_BULB, LIME_DYE), InkColors.LIME
+            IS.of(16)), InkColors.LIME
     )));
     public static final DeferredItem<Item> JADE_VINE_PETALS = register(simple(item(
-        "jade_vine_petals", () -> new CloakedItemWithLoomPattern(
-            IS.of(), PastelAdvancements.BUILD_SPIRIT_INSTILLER_STRUCTURE, LIME_DYE, PastelBannerPatterns.JADE_VINE),
+        "jade_vine_petals", () -> new ItemWithLoomPattern(
+            IS.of(), PastelBannerPatterns.JADE_VINE),
         InkColors.LIME
     ))); // TODO: Funky unlock?
     public static final DeferredItem<Item> JADEITE_PETALS = register(
         simple(item("jadeite_petals", () -> new Item(IS.of(Rarity.UNCOMMON)), InkColors.BROWN)));
     public static final DeferredItem<Item> BLOOD_ORCHID_PETAL = register(simple(item(
-        "blood_orchid_petal", () -> new CloakedItem(
-            IS.of(), PastelAdvancements.REVEAL_BLOOD_ORCHID_PETALS, RED_DYE), InkColors.RED
+        "blood_orchid_petal", () -> new Item(
+            IS.of()), InkColors.RED
     )));
 
     public static final DeferredItem<Item> BLOODBOIL_SYRUP = register(simple(item(
@@ -1015,8 +981,7 @@ public class PastelItems {
     public static final DeferredItem<Item> NECTARDEW_BURGEON = register(simple(item(
         "nectardew_burgeon", () -> new NectardewBurgeonItem(
             IS.of()
-              .food(PastelFoodComponents.NECTARDEW_BURGEON), "item.pastel.nectardew_burgeon.tooltip",
-            PastelAdvancements.COLLECT_NECTARDEW, PastelItems.NIGHTDEW_SPROUT.get()
+              .food(PastelFoodComponents.NECTARDEW_BURGEON), "item.pastel.nectardew_burgeon.tooltip"
         ), InkColors.PURPLE
     )));
     public static final DeferredItem<Item> RESTORATION_TEA = register(simple(item(
@@ -1253,7 +1218,7 @@ public class PastelItems {
     )));
 
     public static final DeferredItem<Item> MYCEYLON = register(simple(item(
-        "myceylon", () -> new CloakedItem(IS.of(), PastelAdvancements.COLLECT_MYCEYLON, ORANGE_DYE), InkColors.PINK)));
+        "myceylon", () -> new Item(IS.of()), InkColors.PINK)));
     public static final DeferredItem<Item> MYCEYLON_APPLE_PIE = register(simple(item(
         "myceylon_apple_pie", () -> new Item(IS.of()
                                                .food(PastelFoodComponents.MYCEYLON_APPLE_PIE)), InkColors.PINK
@@ -1613,19 +1578,19 @@ public class PastelItems {
 
     public static final DeferredItem<Item> INCANDESCENT_ESSENCE = register(simple(burnable(
         item(
-            "incandescent_essence", () -> new CloakedItem(
+            "incandescent_essence", () -> new Item(
                 IS.of()
-                  .fireResistant(), PastelAdvancements.MIDGAME, ORANGE_DYE
+                  .fireResistant()
             ), InkColors.ORANGE
         ), 2400
     )));
     public static final DeferredItem<Item> FROSTBITE_ESSENCE = register(simple(item(
-        "frostbite_essence", () -> new CloakedItem(IS.of(), PastelAdvancements.MIDGAME, LIGHT_BLUE_DYE),
+        "frostbite_essence", () -> new Item(IS.of()),
         InkColors.LIGHT_BLUE
     )));
     public static final DeferredItem<Item> MOONSTONE_CORE = register(simple(item(
-        "moonstone_core", () -> new CloakedItem(
-            IS.of(16, Rarity.RARE), PastelAdvancements.FIND_FORGOTTEN_CITY, WHITE_DYE), InkColors.WHITE
+        "moonstone_core", () -> new Item(
+            IS.of(16, Rarity.RARE)), InkColors.WHITE
     )));
 
     // Music discs

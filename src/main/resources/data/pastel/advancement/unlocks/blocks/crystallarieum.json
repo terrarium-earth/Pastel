@@ -1,27 +1,27 @@
 {
   "criteria": {
     "collected_bismuth_crystal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_bismuth_crystal"
+        "advancement": "pastel:lategame/collect_bismuth_crystal"
       }
     },
     "built_complex_pedestal_structure": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/build_complex_pedestal_structure"
+        "advancement": "pastel:lategame/build_complex_pedestal_structure"
       }
     },
     "collected_pigment": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_pigment"
+        "advancement": "pastel:collect_pigment"
       }
     },
     "unlocked_ink": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:milestones/unlock_ink_use"
+        "advancement": "pastel:milestones/unlock_ink_use"
       }
     }
   }

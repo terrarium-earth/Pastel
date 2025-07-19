@@ -1,15 +1,15 @@
 {
   "criteria": {
     "has_vegetal": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_vegetal"
+        "advancement": "pastel:collect_vegetal"
       }
     },
     "collected_onyx_shard": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:create_onyx_shard"
+        "advancement": "pastel:create_onyx_shard"
       }
     }
   }

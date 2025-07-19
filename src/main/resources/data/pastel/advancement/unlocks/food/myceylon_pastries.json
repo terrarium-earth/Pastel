@@ -1,15 +1,15 @@
 {
   "criteria": {
     "collected_myceylon": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:lategame/collect_myceylon"
+        "advancement": "pastel:lategame/collect_myceylon"
       }
     },
     "collected_amaranth": {
-      "trigger": "revelationary:advancement_gotten",
+      "trigger": "databank:has_advancement",
       "conditions": {
-        "advancement_identifier": "pastel:collect_amaranth"
+        "advancement": "pastel:collect_amaranth"
       }
     }
   }
